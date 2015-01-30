@@ -21,191 +21,197 @@
 #include <boost/make_shared.hpp>
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/boolean.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/io/field_definitions.hpp"
 
 namespace {
 
-const std::string model_name("cpp");
-const std::string facet_name("io");
-const std::string class_header_formatter_name("class_header_formatter");
-const std::string class_implementation_formatter_name(
-    "class_implementation_formatter");
-const std::string enumeration_header_formatter_name(
-    "enumeration_header_formatter");
-const std::string enumeration_implementation_formatter_name(
-    "enumeration_implementation_formatter");
+using namespace dogen::dynamic;
+using namespace dogen::cpp::formatters::io;
 
-dogen::dynamic::field_definition create_enabled() {
-    dogen::dynamic::field_definition r;
+field_definition create_enabled() {
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.io.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_directory() {
-    dogen::dynamic::field_definition r;
+field_definition create_directory() {
+    field_definition r;
     r.name().simple("directory");
-    r.name().qualified("cpp.io.directory");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("io"));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("io"));
     return r;
 }
 
-dogen::dynamic::field_definition create_postfix() {
-    dogen::dynamic::field_definition r;
+field_definition create_postfix() {
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.io.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("io"));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("io"));
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_enabled() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_enabled() {
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.io.class_header_formatter.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_postfix() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_postfix() {
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.io.class_header_formatter.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_file_name() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_file_name() {
+    field_definition r;
     r.name().simple("file_name");
-    r.name().qualified("cpp.io.class_header_formatter.file_name");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::entity);
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::entity);
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_is_system() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_is_system() {
+    field_definition r;
     r.name().simple("is_system");
-    r.name().qualified("cpp.io.class_header_formatter.is_system");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::entity);
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::entity);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_class_implementation_formatter_enabled() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.io.class_implementation_formatter.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::class_implementation_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(
+        traits::class_implementation_formatter_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_class_implementation_formatter_postfix() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.io.class_implementation_formatter.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_implementation_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+    r.name().qualified(traits::class_implementation_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(
+        traits::class_implementation_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_enumeration_header_formatter_enabled() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.io.enumeration_header_formatter.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(enumeration_header_formatter_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::enumeration_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(
+        traits::enumeration_header_formatter_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_enumeration_header_formatter_postfix() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.io.enumeration_header_formatter.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(enumeration_header_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+    r.name().qualified(traits::enumeration_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(
+        traits::enumeration_header_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_enumeration_implementation_formatter_enabled() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.io.enumeration_implementation_formatter.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
+    r.name().qualified(traits::enumeration_implementation_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
     r.ownership_hierarchy().formatter(
-        enumeration_implementation_formatter_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+        traits::enumeration_implementation_formatter_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_enumeration_implementation_formatter_postfix() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.io.enumeration_implementation_formatter.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
+    r.name().qualified(traits::enumeration_implementation_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
     r.ownership_hierarchy().formatter(
-        enumeration_implementation_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+        traits::enumeration_implementation_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
     return r;
 }
 
-std::forward_list<dogen::dynamic::field_definition>
+std::forward_list<field_definition>
 create_all_field_definitions() {
-    using dogen::dynamic::field_definition;
     std::forward_list<field_definition> r;
 
     using fd = dogen::cpp::formatters::io::field_definitions;
@@ -230,7 +236,6 @@ create_all_field_definitions() {
     using eif = fd::enumeration_implementation_formatter;
     r.push_front(eif::postfix());
     r.push_front(eif::enabled());
-
     return r;
 }
 

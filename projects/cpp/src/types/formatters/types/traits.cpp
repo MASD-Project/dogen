@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 
 namespace dogen {
@@ -25,14 +26,42 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string traits::facet_id() {
-    static std::string r("cpp.types");
+std::string traits::facet_name() {
+    static std::string r(formatters::traits::model_name() + ".types");
     return r;
 }
 
-std::string traits::types_formatter_id() {
-    static std::string r("cpp.types.class_header_formatter");
+std::string traits::class_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".class_header_formatter");
     return r;
 }
+
+std::string traits::class_implementation_formatter_name() {
+    static std::string r(traits::facet_name() +
+        ".class_implementation_formatter");
+    return r;
+}
+
+std::string traits::enumeration_header_formatter_name() {
+    static std::string r(traits::facet_name() +
+        ".enumeration_header_formatter");
+    return r;
+}
+
+std::string traits::exception_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".exception_header_formatter");
+    return r;
+}
+
+std::string traits::namespace_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".namespace_header_formatter");
+    return r;
+}
+
+std::string traits::visitor_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".visitor_header_formatter");
+    return r;
+}
+
 
 } } } }

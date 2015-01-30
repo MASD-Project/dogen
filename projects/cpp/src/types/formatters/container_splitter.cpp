@@ -29,7 +29,7 @@ split_by_facet(const container& c) const {
     std::unordered_map<std::string, container> r;
 
     for (auto f : c.class_formatters())
-        r[f->facet_id()].class_formatters().push_front(f);
+        r[f->facet_name()].class_formatters().push_front(f);
 
     return r;
 }

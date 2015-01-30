@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-30 Fri 17:05]
+Clock summary at [2015-01-30 Fri 20:27]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *26:34* |       |      |
+| *Total time*                                                          | *29:09* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 26:34 |      |
+| Active                                                                |         | 29:09 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
 | STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
@@ -42,6 +42,8 @@ Clock summary at [2015-01-30 Fri 17:05]
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
 | COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
 | CANCELLED Create a =settings= namespace in =cpp=                      |         |       | 0:10 |
+| STARTED Add field definition extensions                               |         |       | 2:26 |
+| STARTED Split global settings by formatter and facet                  |         |       | 0:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -439,6 +441,8 @@ Actually, the case for a settings namespace is not yet clear:
   because their names are a bit weak (=global_settings= and so forth),
   the namespace adds redundancy rather than clarity.
 
+This story will be cancelled.
+
 *Previous Understanding*
 
 Create a settings namespace to contain all the settings related
@@ -447,7 +451,46 @@ the c++ model. Nothing else should live there.
 
 Move of all the existing settings to it.
 
-*** Split global settings by formatter and facet                      :story:
+*** STARTED Add field definition extensions                           :story:
+    CLOCK: [2015-01-30 Fri 19:50]--[2015-01-30 Fri 20:27] =>  0:37
+    CLOCK: [2015-01-30 Fri 19:00]--[2015-01-30 Fri 19:50] =>  0:50
+    CLOCK: [2015-01-30 Fri 18:07]--[2015-01-30 Fri 18:41] =>  0:34
+    CLOCK: [2015-01-30 Fri 17:15]--[2015-01-30 Fri 17:40] =>  0:25
+
+*Analysis*
+
+We need a way to obtain the set of facets and formatters "implied" by
+the registered field definitions. We could do this like we did with
+content extensions by adding a set of helper methods that process
+field definitions.
+
+Actually, since we need to build "indexes" it makes more sense to have
+some kind of class with state: =indexer=.
+
+We also need to fix the naming of facets and formatters in field
+definitions: we need to make use of traits.
+
+*Action Items*
+
+- rename =facet_id= and =formatter_id= to =facet_name= and
+  =formatter_name=.
+- use traits when generating field definitions (facet and formatter
+  names).
+- remove generation of default facet settings.
+- pass a list of facet names into facet factory. This is obtained by
+  querying the registered formatters (activity in workflow).
+- create a =dynamic::indexer= that indexes by facet name.
+- pass the indexer into facet factory, or just the results of the
+  indexer.
+- for each facet in the list, get all fields from default values from
+  the indexer; get the corresponding field instance if any; find the
+  matching property in facet settings and set it with either the field
+  instance or the default value.
+
+*** STARTED Split global settings by formatter and facet              :story:
+    CLOCK: [2015-01-30 Fri 17:05]--[2015-01-30 Fri 17:14] =>  0:09
+
+*Analysis*
 
 Update formatter and facet settings to split them by qname, by
 formatter. This includes the work required to split the default
@@ -463,6 +506,12 @@ field definitions.
 Dynamic could provide field definition aggregation services for
 formatter and facet.
 
+*** Consider creating constants for common fields                     :story:
+
+Fields such as =enabled=, =postfix= etc are common to all formatters
+and facets. It may make more sense to define some string constants for
+them, perhaps in =traits=?
+
 *** Add support for local settings                                    :story:
 
 *New Understanding*
@@ -471,6 +520,8 @@ formatter and facet.
   overrides), type settings, additional includes. Presumably all of
   these need to be optional. We need to ensure general settings have a
   scope of any.
+- we need a local settings factory. See the scratch pad for an example
+  using =sml::consumer_interface=.
 
 *Previous Understanding*
 

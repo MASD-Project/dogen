@@ -23,77 +23,75 @@
 #include "dogen/dynamic/types/boolean.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 
 namespace {
-const std::string model_name("cpp");
-const std::string facet_name("odb");
-const std::string class_header_formatter_name("class_header_formatter");
-const std::string class_implementation_formatter_name(
-    "class_implementation_formatter");
-const std::string enumeration_header_formatter_name(
-    "enumeration_header_formatter");
-const std::string enumeration_implementation_formatter_name(
-    "enumeration_implementation_formatter");
 
-dogen::dynamic::field_definition create_enabled() {
-    dogen::dynamic::field_definition r;
+using namespace dogen::dynamic;
+using namespace dogen::cpp::formatters::odb;
+
+field_definition create_enabled() {
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.odb.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_directory() {
-    dogen::dynamic::field_definition r;
+field_definition create_directory() {
+    field_definition r;
     r.name().simple("directory");
-    r.name().qualified("cpp.odb.directory");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("odb"));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("hash"));
     return r;
 }
 
-dogen::dynamic::field_definition create_postfix() {
-    dogen::dynamic::field_definition r;
+field_definition create_postfix() {
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.odb.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("odb"));
+    r.name().qualified(traits::facet_name() + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("hash"));
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_enabled() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_enabled() {
+    field_definition r;
     r.name().simple("enabled");
-    r.name().qualified("cpp.odb.class_header_formatter.enabled");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_class_header_formatter_postfix() {
-    dogen::dynamic::field_definition r;
+field_definition create_class_header_formatter_postfix() {
+    field_definition r;
     r.name().simple("postfix");
-    r.name().qualified("cpp.odb.class_header_formatter.postfix");
-    r.ownership_hierarchy().model(model_name);
-    r.ownership_hierarchy().facet(facet_name);
-    r.ownership_hierarchy().formatter(class_header_formatter_name);
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
+    r.name().qualified(traits::class_header_formatter_name() +
+        "." + r.name().simple());
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
     return r;
 }
 
@@ -101,8 +99,8 @@ dogen::dynamic::field_definition create_odb_pragma() {
     dogen::dynamic::field_definition r;
     r.name().simple("odb_pragma");
     r.name().qualified(r.name().simple());
-    r.ownership_hierarchy().model("cpp");
-    r.ownership_hierarchy().facet("odb");
+    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet(traits::facet_name());
     r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;

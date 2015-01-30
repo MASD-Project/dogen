@@ -35,7 +35,7 @@ const std::string file_settings_for_formatter_not_found(
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
-static logger lg(logger_factory(traits::types_formatter_id()));
+static logger lg(logger_factory(traits::class_header_formatter_name()));
 
 
 // FIXME
@@ -68,23 +68,23 @@ includes includes_builder::build(const sml::model& /*m*/,
 boost::filesystem::path class_header_formatter::
 get_relative_path(const class_info& c) const {
     const auto& fs(c.file_settings_for_formatter());
-    const auto i(fs.find(formatter_id()));
+    const auto i(fs.find(formatter_name()));
     if (i == fs.end()) {
         BOOST_LOG_SEV(lg, error) << file_settings_for_formatter_not_found
-                                 << formatter_id();
+                                 << formatter_name();
         BOOST_THROW_EXCEPTION(formatting_error(
                 file_settings_for_formatter_not_found +
-                formatter_id()));
+                formatter_name()));
     }
     return i->second.relative_path();
 }
 
-std::string class_header_formatter::facet_id() const {
-    return traits::facet_id();
+std::string class_header_formatter::facet_name() const {
+    return traits::facet_name();
 }
 
-std::string class_header_formatter::formatter_id() const {
-    return traits::types_formatter_id();
+std::string class_header_formatter::formatter_name() const {
+    return traits::class_header_formatter_name();
 }
 
 boost::filesystem::path class_header_formatter::

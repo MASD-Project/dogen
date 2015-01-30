@@ -50,9 +50,9 @@ private:
     boost::filesystem::path get_relative_path(const class_info& c) const;
 
 public:
-    std::string facet_id() const override;
+    std::string facet_name() const override;
 
-    std::string formatter_id() const override;
+    std::string formatter_name() const override;
 
     boost::filesystem::path make_file_name(const global_settings& gs,
         const sml::qname& qn) const override;

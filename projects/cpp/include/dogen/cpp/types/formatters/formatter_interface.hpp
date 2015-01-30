@@ -47,14 +47,14 @@ public:
 
 public:
     /**
-     * @brief Unique identifier for the facet.
+     * @brief Name of the facet that the formatter belongs to.
      */
-    virtual std::string facet_id() const = 0;
+    virtual std::string facet_name() const = 0;
 
     /**
-     * @brief Unique identifier for the formatter.
+     * @brief Name of this formatter.
      */
-    virtual std::string formatter_id() const = 0;
+    virtual std::string formatter_name() const = 0;
 
     /**
      * @brief Create the file name for this formatter, given a

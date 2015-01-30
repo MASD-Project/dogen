@@ -119,6 +119,7 @@
 #include "dogen/cpp/types/formatters/test_data/initializer.hpp"
 #include "dogen/cpp/types/formatters/test_data/test_data.hpp"
 #include "dogen/cpp/types/formatters/test_data/traits.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/enricher.hpp"

@@ -43,14 +43,14 @@ void initialise_facet(registrar& rg) {
     default_settings.enabled(true);
     default_settings.directory(default_facet_directory);
     default_settings.postfix(default_facet_postfix);
-    rg.register_default_facet_settings(traits::facet_id(), default_settings);
+    rg.register_default_facet_settings(traits::facet_name(), default_settings);
 }
 
 void initialise_class_header_formatter(registrar& rg) {
     formatter_settings default_settings;
     default_settings.enabled(true);
 
-    const auto id(traits::types_formatter_id());
+    const auto id(traits::class_header_formatter_name());
     rg.register_default_formatter_settings(id, default_settings);
     rg.register_formatter(std::make_shared<class_header_formatter>());
 }

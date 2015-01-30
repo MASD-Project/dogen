@@ -34,15 +34,39 @@ namespace types {
 
 struct traits {
     /**
-     * @brief Unique identifier for facet.
+     * @brief Name of this facet.
      */
-    static std::string facet_id();
+    static std::string facet_name();
 
     /**
-     * @brief Unique identifier for class header formatter.
+     * @brief Name of the class header formatter.
      */
-    static std::string types_formatter_id();
+    static std::string class_header_formatter_name();
 
+    /**
+     * @brief Name of the class implementation formatter.
+     */
+    static std::string class_implementation_formatter_name();
+
+    /**
+     * @brief Name of the enumeration header formatter.
+     */
+    static std::string enumeration_header_formatter_name();
+
+    /**
+     * @brief Name of the exception header formatter.
+     */
+    static std::string exception_header_formatter_name();
+
+    /**
+     * @brief Name of the namespace header formatter.
+     */
+    static std::string namespace_header_formatter_name();
+
+    /**
+     * @brief Name of the visitor header formatter.
+     */
+    static std::string visitor_header_formatter_name();
 };
 
 } } } }

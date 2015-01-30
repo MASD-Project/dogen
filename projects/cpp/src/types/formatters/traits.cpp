@@ -18,47 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
+#include "dogen/cpp/types/formatters/traits.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace serialization {
 
-struct traits {
-    /**
-     * @brief Name of this facet.
-     */
-    static std::string facet_name();
+std::string traits::model_name() {
+    static std::string r("cpp");
+    return r;
+}
 
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
-
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
-
-    /**
-     * @brief Name of the enumeration header formatter.
-     */
-    static std::string enumeration_header_formatter_name();
-
-    /**
-     * @brief Name of the enumeration implementation formatter.
-     */
-    static std::string enumeration_implementation_formatter_name();
-};
-
-} } } }
-
-#endif
+} } }

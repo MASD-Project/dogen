@@ -49,7 +49,7 @@ const std::string multiple_generatable_model_modules(
 const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_formatter_type(
     "Formatter type is not supported: ");
-const std::string duplicate_formatter_id("Formatter id already inserted: ");
+const std::string duplicate_formatter_name("Formatter name already inserted: ");
 const std::string formatter_not_found("Formatter not found: ");
 
 }
@@ -162,12 +162,12 @@ workflow::create_includes_builder_by_formatter_id_activity(
     workflow::includes_builder_by_formatter_id r;
     for (const auto f : c.class_formatters()) {
         auto b(f->make_includes_builder());
-        const auto pair(r.insert(std::make_pair(f->formatter_id(), b)));
+        const auto pair(r.insert(std::make_pair(f->formatter_name(), b)));
         if (!pair.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_id
-                                     << f->formatter_id();
-            BOOST_THROW_EXCEPTION(workflow_error(duplicate_formatter_id +
-                    f->formatter_id()));
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
+                                     << f->formatter_name();
+            BOOST_THROW_EXCEPTION(workflow_error(duplicate_formatter_name +
+                    f->formatter_name()));
         }
     }
 
@@ -196,7 +196,7 @@ workflow::obtain_relative_file_names_for_key_activity(
         case formatters::formatter_types::class_formatter:
             for (const auto fct : facets) {
                 for (const auto fmt : fct.container().class_formatters()) {
-                    const auto& id(fmt->formatter_id());
+                    const auto& id(fmt->formatter_name());
                     const auto& gs(fct.global_settings());
                     const auto& fn(fmt->make_file_name(gs, qn));
                     r[qn].insert(std::make_pair(id, fn));
@@ -284,7 +284,7 @@ void workflow::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Listing all class formatter.";
     for (const auto& f : c.class_formatters())
-        BOOST_LOG_SEV(lg, debug) << "Id: '" << f->formatter_id() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->formatter_name() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
 }
