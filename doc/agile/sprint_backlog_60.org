@@ -17,14 +17,15 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-30 Fri 08:50]
+Clock summary at [2015-01-30 Fri 16:51]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *24:15* |       |      |
+| *Total time*                                                          | *26:24* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 24:15 |      |
-| STARTED Sprint and product backlog grooming                           |         |       | 2:11 |
+| Active                                                                |         | 26:24 |      |
+| STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
+| STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false                   |         |       | 0:05 |
@@ -39,11 +40,11 @@ Clock summary at [2015-01-30 Fri 08:50]
 | COMPLETED Create a container of field definitions in field definition |         |       | 1:15 |
 | COMPLETED Dynamic workflow is recreated for every model               |         |       | 1:27 |
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
-| STARTED Update meta-data section in manual                            |         |       | 0:49 |
-| STARTED Add "model types"                                             |         |       | 0:06 |
+| COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-01-30 Fri 16:35]--[2015-01-30 Fri 16:51] =>  0:16
     CLOCK: [2015-01-30 Fri 08:40]--[2015-01-30 Fri 08:50] =>  0:08
     CLOCK: [2015-01-27 Tue 23:46]--[2015-01-28 Wed 00:01] =>  0:15
     CLOCK: [2015-01-26 Mon 19:36]--[2015-01-26 Mon 19:59] =>  0:23
@@ -54,6 +55,11 @@ Clock summary at [2015-01-30 Fri 08:50]
     CLOCK: [2015-01-20 Tue 22:40]--[2015-01-20 Tue 22:55] =>  0:15
 
 Updates to sprint and product backlog.
+
+*** STARTED Updates to the manual and readme files                    :story:
+    CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
+
+Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Fix windows nightly build                               :story:
     CLOSED: [2015-01-21 Wed 08:43]
@@ -404,74 +410,40 @@ dynamic refactoring.
 - remove merger from dynamic as we don't need it for now.
 - formatter to check for local overrides to global settings.
 
-*** STARTED Update meta-data section in manual                        :story:
-    CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
+*** Create a =settings= namespace in =cpp=                            :story:
 
-Once we are done with all of the meta-data refactoring, we need to
-update the manual.
+Create a settings namespace to contain all the settings related
+machinery. It is basically a translation of dynamic extensions into
+the c++ model. Nothing else should leave there.
 
-*** STARTED Add "model types"                                         :story:
-    CLOCK: [2015-01-28 Wed 22:29]--[2015-01-28 Wed 22:34] =>  0:05
-    CLOCK: [2015-01-28 Wed 22:27]--[2015-01-28 Wed 22:28] =>  0:01
+Move of all the existing settings to it.
 
-At present we have a number of dynamic extensions that exist purely to
-deal with non-dogen models:
+*** Split global settings by formatter and facet                      :story:
 
-- supported: is the facet supported by the external model
-- file_name: what is the external model naming for files for this
-  facet
-- is_system: is the file name a system include file or not?
+Update formatter and facet settings to split them by qname, by
+formatter. This includes the work required to split the default
+settings too. Change global settings to have facet/formatter settings
+by qname, by formatter. We should probably also generate local
+overrides for general settings immediately. This means the formatter
+can go straight to the local settings.
 
-In reality, all of this could be avoided if we had a way of
-distinguishing between models that follow dogen conventions and those
-who do not; a "model type" of sorts such as "external" and "dogen" -
-naming needs more thought. With this we could infer the rest: if no
-file name is supplied then a given formatter/facet is not supported;
-if the model is_system then all types are system and so on.
-
-We should also have a flag in field definitions that verify that a
-parameter is only present if the model is a non-dogen model. For
-example, it makes no sense to supply =cpp.type.family= in a dogen
-model but it may make sense to do so in an external model. However,
-this would mean that if a user manually adds a type to a dogen model
-it cannot be extended. Requires a bit of thinking.
-
-*** Create default facet and formatter settings from dynamic          :story:
-
-At present we are manually generating default settings for both facets
-and formatters. We should do these from dynamic's field definitions.
+For defaults: at present we are manually generating default settings
+for both facets and formatters. We should do these from dynamic's
+field definitions.
 
 Dynamic could provide field definition aggregation services for
 formatter and facet.
 
-*** Add merger to dynamic                                             :story:
-
-We need a class that takes two objects and merges them. For example
-the root module meta-data object and any type. Could be called
-merger. Should have a lhs and a rhs and produce a result.
-
-*Note*: we still need to prove the use case; it may be that we do not
-need merging at all.
-
-*** Add dynamic merging to SML workflow                               :story:
-
-We need an extra activity in the SML workflow that makes use of the
-=dynamic::merger= to produce the final dynamic object.
-
-*Note*: we still need to prove the use case; it may be that we do not
-need merging at all.
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to global settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
 *** Add support for local settings                                    :story:
+
+*New Understanding*
+
+- local settings have: general, file name settings (for the file name
+  overrides), type settings, additional includes. Presumably all of
+  these need to be optional. We need to ensure general settings have a
+  scope of any.
+
+*Previous Understanding*
 
 - create a local settings class that is made up of file settings,
   opaque settings and formatter settings. Entity to have a container
@@ -487,12 +459,69 @@ need merging at all.
 
 *** Create a settings class                                           :story:
 
+*New Understanding*
+
+We need a container for both local and global settings that gets
+passed around. It should really be called =settings= but given that it
+exists in the =settings= namespace, it may sound a bit
+"repetitive". Brainstorm on naming.
+
+*Previous Understanding*
+
 - create a settings class that has a map of formatter id to global
   settings. It could also have a map of c++ entity name (produced with
   name builder to include namespaces), to formatter id to local
   settings. With this we can now move the settings away from entity
   because we no longer require the qname.
 - pass the settings class to the includes builder.
+
+*** Create a class to generate file names                             :story:
+
+Create a "file name generator" (name needs thinking) that will receive
+the settings as input and generate file names per formatter for each
+qname. It will use the postfixes for facet/formatter settings to
+generate the file name. It will take into account file name overrides
+in file name settings. We no longer need help from the formatter - the
+algorithm just uses the settings. Remove all file name related code
+from formatters.
+
+*** Create a class to generate includes                               :story:
+
+Create an "includes generator" (name needs thinking) that will
+receive the file names from the "file name generator" as well as the
+settings and produce includes per qname per formatter. It will
+delegate to each formatter for the includes generation. Formatters
+to take into account the additional includes settings.
+
+Notes:
+
+- consider passing in a container of includes builder rather than
+  querying the registrar directly.
+
+*** Add support for opaque formatter settings                         :story:
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to local settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+
+*** Rename =file_settings= to =file_properties=                       :story:
+
+- rename file settings to file properties because these are not a
+  direct translation from dynamic.
+- create a file properties factory that merges the output of the
+  includes generator and file name generator and spits out file
+  properties per qname, per formatter.
+- use the file properties factory in transformer.
+
+*** Populate the "new" =class_info= properties                        :story:
+
+We need a way of populating the class aspects via the type settings
+and via information obtained in the SML model. We may want to create a
+class to handle this logic or maybe it can be done in transformer.
 
 *** Consider using an abstract factory in formatters                  :story:
 
@@ -540,4 +569,50 @@ many (many) settings classes, general settings may not be the most
 appropriate name. We need to look a bit more deeply into the role of
 this class and see if a better name is not available.
 
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
+
+We should also have a flag in field definitions that verify that a
+parameter is only present if the model is a non-dogen model. For
+example, it makes no sense to supply =cpp.type.family= in a dogen
+model but it may make sense to do so in an external model. However,
+this would mean that if a user manually adds a type to a dogen model
+it cannot be extended. Requires a bit of thinking.
+
 ** Deprecated
+*** CANCELLED Add merger to dynamic                                   :story:
+    CLOSED: [2015-01-30 Fri 16:41]
+
+*Rationale*: we don't seem to need merging support at present.
+
+We need a class that takes two objects and merges them. For example
+the root module meta-data object and any type. Could be called
+merger. Should have a lhs and a rhs and produce a result.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
+
+*** CANCELLED Add dynamic merging to SML workflow                     :story:
+    CLOSED: [2015-01-30 Fri 16:44]
+
+*Rationale*: we don't seem to need merging support at present.
+
+We need an extra activity in the SML workflow that makes use of the
+=dynamic::merger= to produce the final dynamic object.
+
+*Note*: we still need to prove the use case; it may be that we do not
+need merging at all.
