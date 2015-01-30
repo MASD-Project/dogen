@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-30 Fri 16:51]
+Clock summary at [2015-01-30 Fri 17:05]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *26:24* |       |      |
+| *Total time*                                                          | *26:34* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 26:24 |      |
+| Active                                                                |         | 26:34 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
 | STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
@@ -41,6 +41,7 @@ Clock summary at [2015-01-30 Fri 16:51]
 | COMPLETED Dynamic workflow is recreated for every model               |         |       | 1:27 |
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
 | COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
+| CANCELLED Create a =settings= namespace in =cpp=                      |         |       | 0:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -195,6 +196,16 @@ to field definitions.
     CLOSED: [2015-01-27 Tue 23:18]
     CLOCK: [2015-01-22 Thu 19:15]--[2015-01-22 Thu 19:25] =>  0:10
     CLOCK: [2015-01-21 Wed 22:51]--[2015-01-21 Wed 23:07] =>  0:16
+
+*New Understanding*
+
+Actually it may make more sense to remove the namespace altogether. We
+only have the field definitions and the factories, but because they
+are a "bridge" between dynamic and a strong type, its not obvious if
+they should be in the =dynamic= namespace. For now, remove the
+namespace.
+
+*Previous Understanding*
 
 We have created a number of "meta-data extension" namespaces, which is
 where we transform the ptree into a strongly typed object. These
@@ -410,11 +421,29 @@ dynamic refactoring.
 - remove merger from dynamic as we don't need it for now.
 - formatter to check for local overrides to global settings.
 
-*** Create a =settings= namespace in =cpp=                            :story:
+*** CANCELLED Create a =settings= namespace in =cpp=                  :story:
+    CLOSED: [2015-01-30 Fri 17:04]
+    CLOCK: [2015-01-30 Fri 16:54]--[2015-01-30 Fri 17:04] =>  0:10
+
+*New Understanding*
+
+Actually, the case for a settings namespace is not yet clear:
+
+- we just [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_60.org#rename-namespace-meta-data-to-dynamic][moved away from the =meta_data= namespace]] because really it
+  should only contain the meta-data factories but not the settings and
+  even the factories presence is questionable; with this story, we
+  create would the same duality with dynamic: should it be the
+  =dynamic= namespace (=field_definitions=, factories) or =settings=
+  (factories, settings classes).
+- since the classes need to have =settings= on their names anyway,
+  because their names are a bit weak (=global_settings= and so forth),
+  the namespace adds redundancy rather than clarity.
+
+*Previous Understanding*
 
 Create a settings namespace to contain all the settings related
 machinery. It is basically a translation of dynamic extensions into
-the c++ model. Nothing else should leave there.
+the c++ model. Nothing else should live there.
 
 Move of all the existing settings to it.
 
