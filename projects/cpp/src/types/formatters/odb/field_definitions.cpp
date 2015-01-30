@@ -35,9 +35,10 @@ using namespace dogen::cpp::formatters::odb;
 field_definition create_enabled() {
     field_definition r;
     r.name().simple("enabled");
-    r.name().qualified(traits::facet_name() + r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
+    r.name().qualified(traits::facet_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
     r.default_value(boost::make_shared<boolean>(true));
@@ -47,9 +48,10 @@ field_definition create_enabled() {
 field_definition create_directory() {
     field_definition r;
     r.name().simple("directory");
-    r.name().qualified(traits::facet_name() + r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
+    r.name().qualified(traits::facet_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
     r.default_value(boost::make_shared<text>("hash"));
@@ -59,9 +61,10 @@ field_definition create_directory() {
 field_definition create_postfix() {
     field_definition r;
     r.name().simple("postfix");
-    r.name().qualified(traits::facet_name() + r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
+    r.name().qualified(traits::facet_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
     r.default_value(boost::make_shared<text>("hash"));
@@ -73,9 +76,11 @@ field_definition create_class_header_formatter_enabled() {
     r.name().simple("enabled");
     r.name().qualified(traits::class_header_formatter_name() +
         "." + r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
-    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
+    r.ownership_hierarchy().formatter_name(
+        traits::class_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
     r.default_value(boost::make_shared<boolean>(true));
@@ -87,9 +92,11 @@ field_definition create_class_header_formatter_postfix() {
     r.name().simple("postfix");
     r.name().qualified(traits::class_header_formatter_name() +
         "." + r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
-    r.ownership_hierarchy().formatter(traits::class_header_formatter_name());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
+    r.ownership_hierarchy().formatter_name(
+        traits::class_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
     return r;
@@ -99,8 +106,9 @@ dogen::dynamic::field_definition create_odb_pragma() {
     dogen::dynamic::field_definition r;
     r.name().simple("odb_pragma");
     r.name().qualified(r.name().simple());
-    r.ownership_hierarchy().model(dogen::cpp::formatters::traits::model_name());
-    r.ownership_hierarchy().facet(traits::facet_name());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;

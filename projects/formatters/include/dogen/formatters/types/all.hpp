@@ -43,4 +43,5 @@
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/padding_types.hpp"
+#include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/utility.hpp"

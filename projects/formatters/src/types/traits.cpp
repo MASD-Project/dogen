@@ -18,29 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include "dogen/formatters/types/traits.hpp"
 
 namespace dogen {
-namespace dynamic {
+namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::dynamic::ownership_hierarchy\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
-      << "\"formatter_name\": " << "\"" << tidy_up_string(v.formatter_name()) << "\""
-      << " }";
-    return(s);
+std::string traits::model_name() {
+    static std::string r("formatters");
+    return r;
 }
 
 } }

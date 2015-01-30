@@ -38,18 +38,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::dynamic::ownership_hierarchy& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("model", v.model_);
-    ar << make_nvp("facet", v.facet_);
-    ar << make_nvp("formatter", v.formatter_);
+    ar << make_nvp("model_name", v.model_name_);
+    ar << make_nvp("facet_name", v.facet_name_);
+    ar << make_nvp("formatter_name", v.formatter_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::dynamic::ownership_hierarchy& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("model", v.model_);
-    ar >> make_nvp("facet", v.facet_);
-    ar >> make_nvp("formatter", v.formatter_);
+    ar >> make_nvp("model_name", v.model_name_);
+    ar >> make_nvp("facet_name", v.facet_name_);
+    ar >> make_nvp("formatter_name", v.formatter_name_);
 }
 
 } }

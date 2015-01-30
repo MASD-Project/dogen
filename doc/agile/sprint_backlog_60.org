@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-30 Fri 20:27]
+Clock summary at [2015-01-30 Fri 22:08]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *29:09* |       |      |
+| *Total time*                                                          | *30:04* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 29:09 |      |
+| Active                                                                |         | 30:04 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
 | STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
@@ -42,7 +42,7 @@ Clock summary at [2015-01-30 Fri 20:27]
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
 | COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
 | CANCELLED Create a =settings= namespace in =cpp=                      |         |       | 0:10 |
-| STARTED Add field definition extensions                               |         |       | 2:26 |
+| STARTED Add field definition extensions                               |         |       | 3:21 |
 | STARTED Split global settings by formatter and facet                  |         |       | 0:09 |
 #+end:
 
@@ -452,6 +452,7 @@ the c++ model. Nothing else should live there.
 Move of all the existing settings to it.
 
 *** STARTED Add field definition extensions                           :story:
+    CLOCK: [2015-01-30 Fri 21:13]--[2015-01-30 Fri 22:08] =>  0:55
     CLOCK: [2015-01-30 Fri 19:50]--[2015-01-30 Fri 20:27] =>  0:37
     CLOCK: [2015-01-30 Fri 19:00]--[2015-01-30 Fri 19:50] =>  0:50
     CLOCK: [2015-01-30 Fri 18:07]--[2015-01-30 Fri 18:41] =>  0:34

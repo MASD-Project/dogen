@@ -37,9 +37,9 @@ namespace dynamic {
 std::size_t ownership_hierarchy_hasher::hash(const ownership_hierarchy&v) {
     std::size_t seed(0);
 
-    combine(seed, v.model());
-    combine(seed, v.facet());
-    combine(seed, v.formatter());
+    combine(seed, v.model_name());
+    combine(seed, v.facet_name());
+    combine(seed, v.formatter_name());
 
     return seed;
 }

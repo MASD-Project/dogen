@@ -18,29 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <ostream>
-#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
+#ifndef DOGEN_DIA_TO_SML_TYPES_TRAITS_FWD_HPP
+#define DOGEN_DIA_TO_SML_TYPES_TRAITS_FWD_HPP
 
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace dynamic {
+namespace dia_to_sml {
 
-std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::dynamic::ownership_hierarchy\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
-      << "\"formatter_name\": " << "\"" << tidy_up_string(v.formatter_name()) << "\""
-      << " }";
-    return(s);
-}
+class traits;
 
 } }
+
+#endif

@@ -20,17 +20,18 @@
  */
 #include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/dynamic/types/value_types.hpp"
+#include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/field_definitions.hpp"
 
 namespace {
 
-const std::string model_name("formatters");
+using dogen::formatters::traits;
 
 dogen::dynamic::field_definition create_copyright_notices() {
     dogen::dynamic::field_definition r;
     r.name().simple("copyright_notice");
     r.name().qualified(r.name().simple());
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::text_collection);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -40,7 +41,7 @@ dogen::dynamic::field_definition create_licence_name() {
     dogen::dynamic::field_definition r;
     r.name().simple("licence_name");
     r.name().qualified(r.name().simple());
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -50,7 +51,7 @@ dogen::dynamic::field_definition create_modeline_group_name() {
     dogen::dynamic::field_definition r;
     r.name().simple("modeline_group_name");
     r.name().qualified(r.name().simple());
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -60,7 +61,7 @@ dogen::dynamic::field_definition create_generate_preamble() {
     dogen::dynamic::field_definition r;
     r.name().simple("generate_preamble");
     r.name().qualified("code_generation_marker.generate_preamble");
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -70,7 +71,7 @@ dogen::dynamic::field_definition create_add_date_time() {
     dogen::dynamic::field_definition r;
     r.name().simple("add_date_time");
     r.name().qualified("code_generation_marker.add_date_time");
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -80,7 +81,7 @@ dogen::dynamic::field_definition create_add_warning() {
     dogen::dynamic::field_definition r;
     r.name().simple("add_warning");
     r.name().qualified("code_generation_marker.add_warning");
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::boolean);
     r.scope(dogen::dynamic::scope_types::any);
     return r;
@@ -90,7 +91,7 @@ dogen::dynamic::field_definition create_message() {
     dogen::dynamic::field_definition r;
     r.name().simple("message");
     r.name().qualified("code_generation_marker.message");
-    r.ownership_hierarchy().model(model_name);
+    r.ownership_hierarchy().model_name(traits::model_name());
     r.type(dogen::dynamic::value_types::text);
     r.scope(dogen::dynamic::scope_types::any);
     return r;

@@ -37,6 +37,7 @@
 #include "dogen/dia_to_sml/types/processing_error.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
+#include "dogen/dia_to_sml/types/traits.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/validation_error.hpp"
