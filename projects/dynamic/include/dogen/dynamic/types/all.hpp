@@ -27,7 +27,6 @@
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/dynamic/types/field_instance.hpp"
 #include "dogen/dynamic/types/field_instance_factory.hpp"
-#include "dogen/dynamic/types/merger.hpp"
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
