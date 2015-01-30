@@ -26,135 +26,135 @@
 
 namespace {
 
+using namespace dogen::dynamic;
 using namespace dogen::cpp::formatters;
 
-dogen::dynamic::field_definition create_enabled() {
-    dogen::dynamic::field_definition r;
+field_definition create_enabled() {
+    field_definition r;
     r.name().simple("enabled");
     r.name().qualified(traits::model_name() + ".enabled");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_split_project() {
-    dogen::dynamic::field_definition r;
+field_definition create_split_project() {
+    field_definition r;
     r.name().simple("split_project");
     r.name().qualified(traits::model_name() + ".split_project");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_source_directory() {
-    dogen::dynamic::field_definition r;
+field_definition create_source_directory() {
+    field_definition r;
     r.name().simple("source_directory");
     r.name().qualified(traits::model_name() + ".source_directory");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("src"));
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("src"));
     return r;
 }
 
-dogen::dynamic::field_definition create_include_directory() {
-    dogen::dynamic::field_definition r;
+field_definition create_include_directory() {
+    field_definition r;
     r.name().simple("include_directory");
     r.name().qualified(traits::model_name() + ".include_directory");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>("include"));
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("include"));
     return r;
 }
 
-dogen::dynamic::field_definition create_header_file_extension() {
-    dogen::dynamic::field_definition r;
+field_definition create_header_file_extension() {
+    field_definition r;
     r.name().simple("header_file_extension");
     r.name().qualified(traits::model_name() + ".header_file_extension");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>(".hpp"));
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(".hpp"));
     return r;
 }
 
-dogen::dynamic::field_definition create_implementation_file_extension() {
-    dogen::dynamic::field_definition r;
+field_definition create_implementation_file_extension() {
+    field_definition r;
     r.name().simple("implementation_file_extension");
     r.name().qualified(traits::model_name() + ".implementation_file_extension");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::text>(".cpp"));
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(".cpp"));
     return r;
 }
 
-dogen::dynamic::field_definition create_enable_facet_folders() {
-    dogen::dynamic::field_definition r;
+field_definition create_enable_facet_folders() {
+    field_definition r;
     r.name().simple("enable_facet_folders");
     r.name().qualified(traits::model_name() + ".enable_facet_folders");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_enable_unique_file_names() {
-    dogen::dynamic::field_definition r;
+field_definition create_enable_unique_file_names() {
+    field_definition r;
     r.name().simple("enable_unique_file_names");
     r.name().qualified(traits::model_name() + ".enable_unique_file_names");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::root_module);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
-dogen::dynamic::field_definition create_type_family() {
-    dogen::dynamic::field_definition r;
+field_definition create_type_family() {
+    field_definition r;
     r.name().simple("family");
     r.name().qualified(traits::model_name() + ".type.family");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::text);
-    r.scope(dogen::dynamic::scope_types::entity);
+    r.type(value_types::text);
+    r.scope(scope_types::entity);
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_type_requires_manual_default_constructor() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("requires_manual_default_constructor");
     r.name().qualified(traits::model_name() +
         ".type.requires_manual_default_constructor");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::entity);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(false));
+    r.type(value_types::boolean);
+    r.scope(scope_types::entity);
+    r.default_value(boost::make_shared<boolean>(false));
     return r;
 }
 
-dogen::dynamic::field_definition
+field_definition
 create_type_requires_manual_move_constructor() {
-    dogen::dynamic::field_definition r;
+    field_definition r;
     r.name().simple("requires_manual_move_constructor");
     r.name().qualified(traits::model_name() +
         ".type.requires_manual_move_constructor");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::entity);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(false));
+    r.type(value_types::boolean);
+    r.scope(scope_types::entity);
+    r.default_value(boost::make_shared<boolean>(false));
     return r;
 }
 
-std::forward_list<dogen::dynamic::field_definition>
+std::forward_list<field_definition>
 create_all_field_definitions() {
-    using dogen::dynamic::field_definition;
     std::forward_list<field_definition> r;
 
     using fd = dogen::cpp::field_definitions;

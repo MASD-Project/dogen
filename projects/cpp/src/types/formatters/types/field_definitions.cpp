@@ -52,7 +52,7 @@ field_definition create_directory() {
     r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::text>("types"));
+    r.default_value(boost::make_shared<text>("types"));
     return r;
 }
 
@@ -80,7 +80,7 @@ field_definition create_class_header_formatter_enabled() {
         traits::class_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -142,7 +142,7 @@ create_class_implementation_formatter_enabled() {
         traits::class_implementation_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -175,7 +175,7 @@ create_enumeration_header_formatter_enabled() {
         traits::enumeration_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -208,7 +208,7 @@ create_exception_header_formatter_enabled() {
         traits::exception_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -225,7 +225,7 @@ create_exception_header_formatter_postfix() {
         traits::exception_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -242,7 +242,7 @@ create_namespace_header_formatter_enabled() {
         traits::namespace_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -275,7 +275,7 @@ create_visitor_header_formatter_enabled() {
         traits::visitor_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::boolean>(true));
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -292,7 +292,7 @@ create_visitor_header_formatter_postfix() {
         traits::visitor_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<::text>("visitor"));
+    r.default_value(boost::make_shared<text>("visitor"));
     return r;
 }
 
