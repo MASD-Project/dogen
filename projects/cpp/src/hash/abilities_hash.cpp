@@ -41,6 +41,8 @@ std::size_t abilities_hasher::hash(const abilities&v) {
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_original_parent_visitable());
+    combine(seed, v.is_assignable());
+    combine(seed, v.is_swappable());
 
     return seed;
 }

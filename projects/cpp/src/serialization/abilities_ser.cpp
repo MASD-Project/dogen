@@ -41,6 +41,8 @@ void save(Archive& ar,
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar << make_nvp("is_assignable", v.is_assignable_);
+    ar << make_nvp("is_swappable", v.is_swappable_);
 }
 
 template<typename Archive>
@@ -51,6 +53,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
+    ar >> make_nvp("is_assignable", v.is_assignable_);
+    ar >> make_nvp("is_swappable", v.is_swappable_);
 }
 
 } }

@@ -59,6 +59,7 @@ std::size_t inheritance_hasher::hash(const inheritance&v) {
     combine(seed, v.original_parent_name());
     combine(seed, v.original_parent_name_qualified());
     combine(seed, hash_std_list_std_string(v.leaves()));
+    combine(seed, v.is_final());
 
     return seed;
 }

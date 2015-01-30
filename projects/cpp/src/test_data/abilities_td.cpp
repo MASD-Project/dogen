@@ -39,6 +39,8 @@ populate(const unsigned int position, result_type& v) {
     v.is_visitable(create_bool(position + 1));
     v.is_immutable(create_bool(position + 2));
     v.is_original_parent_visitable(create_bool(position + 3));
+    v.is_assignable(create_bool(position + 4));
+    v.is_swappable(create_bool(position + 5));
 }
 
 abilities_generator::result_type

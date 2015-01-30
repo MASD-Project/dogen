@@ -37,7 +37,9 @@ std::ostream& operator<<(std::ostream& s, const abilities& v) {
       << "\"is_comparable\": " << v.is_comparable() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable()
+      << "\"is_original_parent_visitable\": " << v.is_original_parent_visitable() << ", "
+      << "\"is_assignable\": " << v.is_assignable() << ", "
+      << "\"is_swappable\": " << v.is_swappable()
       << " }";
     return(s);
 }

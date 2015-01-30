@@ -45,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
+    ar << make_nvp("is_final", v.is_final_);
 }
 
 template<typename Archive>
@@ -56,6 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);
+    ar >> make_nvp("is_final", v.is_final_);
 }
 
 } }

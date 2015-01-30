@@ -69,6 +69,7 @@ populate(const unsigned int position, result_type& v) {
     v.original_parent_name(create_std_string(position + 2));
     v.original_parent_name_qualified(create_std_string(position + 3));
     v.leaves(create_std_list_std_string(position + 4));
+    v.is_final(create_bool(position + 5));
 }
 
 inheritance_generator::result_type

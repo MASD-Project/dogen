@@ -27,17 +27,23 @@ abilities::abilities()
     : is_comparable_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
-      is_original_parent_visitable_(static_cast<bool>(0)) { }
+      is_original_parent_visitable_(static_cast<bool>(0)),
+      is_assignable_(static_cast<bool>(0)),
+      is_swappable_(static_cast<bool>(0)) { }
 
 abilities::abilities(
     const bool is_comparable,
     const bool is_visitable,
     const bool is_immutable,
-    const bool is_original_parent_visitable)
+    const bool is_original_parent_visitable,
+    const bool is_assignable,
+    const bool is_swappable)
     : is_comparable_(is_comparable),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
-      is_original_parent_visitable_(is_original_parent_visitable) { }
+      is_original_parent_visitable_(is_original_parent_visitable),
+      is_assignable_(is_assignable),
+      is_swappable_(is_swappable) { }
 
 void abilities::swap(abilities& other) noexcept {
     using std::swap;
@@ -45,13 +51,17 @@ void abilities::swap(abilities& other) noexcept {
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
+    swap(is_assignable_, other.is_assignable_);
+    swap(is_swappable_, other.is_swappable_);
 }
 
 bool abilities::operator==(const abilities& rhs) const {
     return is_comparable_ == rhs.is_comparable_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_original_parent_visitable_ == rhs.is_original_parent_visitable_;
+        is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
+        is_assignable_ == rhs.is_assignable_ &&
+        is_swappable_ == rhs.is_swappable_;
 }
 
 abilities& abilities::operator=(abilities other) {
@@ -90,6 +100,22 @@ bool abilities::is_original_parent_visitable() const {
 
 void abilities::is_original_parent_visitable(const bool v) {
     is_original_parent_visitable_ = v;
+}
+
+bool abilities::is_assignable() const {
+    return is_assignable_;
+}
+
+void abilities::is_assignable(const bool v) {
+    is_assignable_ = v;
+}
+
+bool abilities::is_swappable() const {
+    return is_swappable_;
+}
+
+void abilities::is_swappable(const bool v) {
+    is_swappable_ = v;
 }
 
 } }

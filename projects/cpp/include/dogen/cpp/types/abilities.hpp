@@ -48,7 +48,9 @@ public:
         const bool is_comparable,
         const bool is_visitable,
         const bool is_immutable,
-        const bool is_original_parent_visitable);
+        const bool is_original_parent_visitable,
+        const bool is_assignable,
+        const bool is_swappable);
 
 private:
     template<typename Archive>
@@ -90,6 +92,22 @@ public:
     void is_original_parent_visitable(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, the class has the assignment operator.
+     */
+    /**@{*/
+    bool is_assignable() const;
+    void is_assignable(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the class has the swap function.
+     */
+    /**@{*/
+    bool is_swappable() const;
+    void is_swappable(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const abilities& rhs) const;
     bool operator!=(const abilities& rhs) const {
@@ -105,6 +123,8 @@ private:
     bool is_visitable_;
     bool is_immutable_;
     bool is_original_parent_visitable_;
+    bool is_assignable_;
+    bool is_swappable_;
 };
 
 } }

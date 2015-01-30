@@ -76,7 +76,8 @@ std::ostream& operator<<(std::ostream& s, const inheritance& v) {
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"original_parent_name\": " << "\"" << tidy_up_string(v.original_parent_name()) << "\"" << ", "
       << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(v.original_parent_name_qualified()) << "\"" << ", "
-      << "\"leaves\": " << v.leaves()
+      << "\"leaves\": " << v.leaves() << ", "
+      << "\"is_final\": " << v.is_final()
       << " }";
     return(s);
 }

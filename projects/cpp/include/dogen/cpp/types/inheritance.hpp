@@ -52,7 +52,8 @@ public:
         const bool is_parent,
         const std::string& original_parent_name,
         const std::string& original_parent_name_qualified,
-        const std::list<std::string>& leaves);
+        const std::list<std::string>& leaves,
+        const bool is_final);
 
 private:
     template<typename Archive>
@@ -112,6 +113,14 @@ public:
     void leaves(const std::list<std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the class cannot be inherited from.
+     */
+    /**@{*/
+    bool is_final() const;
+    void is_final(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const inheritance& rhs) const;
     bool operator!=(const inheritance& rhs) const {
@@ -128,6 +137,7 @@ private:
     std::string original_parent_name_;
     std::string original_parent_name_qualified_;
     std::list<std::string> leaves_;
+    bool is_final_;
 };
 
 } }

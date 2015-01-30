@@ -24,19 +24,22 @@ namespace dogen {
 namespace cpp {
 
 inheritance::inheritance()
-    : is_parent_(static_cast<bool>(0)) { }
+    : is_parent_(static_cast<bool>(0)),
+      is_final_(static_cast<bool>(0)) { }
 
 inheritance::inheritance(
     const std::list<dogen::cpp::parent_info>& parents,
     const bool is_parent,
     const std::string& original_parent_name,
     const std::string& original_parent_name_qualified,
-    const std::list<std::string>& leaves)
+    const std::list<std::string>& leaves,
+    const bool is_final)
     : parents_(parents),
       is_parent_(is_parent),
       original_parent_name_(original_parent_name),
       original_parent_name_qualified_(original_parent_name_qualified),
-      leaves_(leaves) { }
+      leaves_(leaves),
+      is_final_(is_final) { }
 
 void inheritance::swap(inheritance& other) noexcept {
     using std::swap;
@@ -45,6 +48,7 @@ void inheritance::swap(inheritance& other) noexcept {
     swap(original_parent_name_, other.original_parent_name_);
     swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
     swap(leaves_, other.leaves_);
+    swap(is_final_, other.is_final_);
 }
 
 bool inheritance::operator==(const inheritance& rhs) const {
@@ -52,7 +56,8 @@ bool inheritance::operator==(const inheritance& rhs) const {
         is_parent_ == rhs.is_parent_ &&
         original_parent_name_ == rhs.original_parent_name_ &&
         original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
-        leaves_ == rhs.leaves_;
+        leaves_ == rhs.leaves_ &&
+        is_final_ == rhs.is_final_;
 }
 
 inheritance& inheritance::operator=(inheritance other) {
@@ -131,6 +136,14 @@ void inheritance::leaves(const std::list<std::string>& v) {
 
 void inheritance::leaves(const std::list<std::string>&& v) {
     leaves_ = std::move(v);
+}
+
+bool inheritance::is_final() const {
+    return is_final_;
+}
+
+void inheritance::is_final(const bool v) {
+    is_final_ = v;
 }
 
 } }
