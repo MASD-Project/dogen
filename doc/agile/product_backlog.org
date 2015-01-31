@@ -752,7 +752,8 @@ Food for thought:
   than a facet or formatter grouping, we need a higher level construct
   to aggregate things; "domain generation" is made up of languages,
   languages are made of of facets, facets have formatters. We need a
-  name/classification for "domain generation" in this context.
+  name/classification for "domain generation" in this context. We
+  could call this a suite?
 
 We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
 
