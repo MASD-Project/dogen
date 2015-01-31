@@ -28,7 +28,6 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/cpp/types/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {

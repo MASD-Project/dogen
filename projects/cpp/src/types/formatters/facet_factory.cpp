@@ -26,7 +26,7 @@ namespace formatters {
 
 std::forward_list<facet> facet_factory::build(
     const std::unordered_map<std::string, container>& formatters_by_facet,
-    const std::unordered_map<std::string, global_settings>&
+    const std::unordered_map<std::string, settings::global_settings>&
         global_settings_for_facet) const {
 
     std::unordered_map<std::string, facet> facet_by_id;

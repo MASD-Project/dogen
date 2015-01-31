@@ -43,8 +43,8 @@ namespace dogen {
 namespace cpp {
 
 std::string name_builder::file_name(
-    const global_settings& gs, const bool is_header, const sml::qname& qn,
-    const std::string& additional_postfix) const {
+    const settings::global_settings& gs, const bool is_header,
+    const sml::qname& qn, const std::string& additional_postfix) const {
 
     boost::filesystem::path r;
     if (gs.cpp_settings().split_project()) {
@@ -103,13 +103,13 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     return r;
 }
 
-std::string name_builder::header_file_name(const global_settings& gs,
+std::string name_builder::header_file_name(const settings::global_settings& gs,
     const sml::qname& qn, const std::string& additional_postfix) const {
     return file_name(gs, true/*is_header*/, qn, additional_postfix);
 }
 
 std::string name_builder::implementation_file_name(
-    const global_settings& gs, const sml::qname& qn,
+    const settings::global_settings& gs, const sml::qname& qn,
     const std::string& additional_postfix) const {
     return file_name(gs, false/*is_header*/, qn, additional_postfix);
 }

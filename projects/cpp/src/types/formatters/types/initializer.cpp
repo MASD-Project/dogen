@@ -20,7 +20,7 @@
  */
 #include <memory>
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/cpp/types/facet_settings.hpp"
+#include "dogen/cpp/types/settings/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/field_definitions.hpp"
@@ -39,7 +39,7 @@ namespace formatters {
 namespace types {
 
 void initialise_facet(registrar& rg) {
-    facet_settings default_settings;
+    settings::facet_settings default_settings;
     default_settings.enabled(true);
     default_settings.directory(default_facet_directory);
     default_settings.postfix(default_facet_postfix);
@@ -47,7 +47,7 @@ void initialise_facet(registrar& rg) {
 }
 
 void initialise_class_header_formatter(registrar& rg) {
-    formatter_settings default_settings;
+    settings::formatter_settings default_settings;
     default_settings.enabled(true);
 
     const auto id(traits::class_header_formatter_name());

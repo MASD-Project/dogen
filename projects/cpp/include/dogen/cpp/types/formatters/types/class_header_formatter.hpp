@@ -54,15 +54,15 @@ public:
 
     std::string formatter_name() const override;
 
-    boost::filesystem::path make_file_name(const global_settings& gs,
+    boost::filesystem::path make_file_name(const settings::global_settings& gs,
         const sml::qname& qn) const override;
 
     std::shared_ptr<includes_builder_interface>
     make_includes_builder() const override;
 
 public:
-    dogen::formatters::file
-    format(const global_settings& gs, const class_info& c) const override;
+    dogen::formatters::file format(const settings::global_settings& gs,
+        const class_info& c) const override;
 };
 
 } } } }

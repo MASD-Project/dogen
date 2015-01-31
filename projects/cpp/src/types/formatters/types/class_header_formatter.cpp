@@ -88,7 +88,8 @@ std::string class_header_formatter::formatter_name() const {
 }
 
 boost::filesystem::path class_header_formatter::
-make_file_name(const global_settings& gs, const sml::qname& qn) const {
+make_file_name(const settings::global_settings& gs,
+    const sml::qname& qn) const {
     name_builder b;
     return b.header_file_name(gs, qn);
 }
@@ -99,7 +100,7 @@ class_header_formatter::make_includes_builder() const {
 }
 
 dogen::formatters::file class_header_formatter::
-format(const global_settings& gs, const class_info& c) const {
+format(const settings::global_settings& gs, const class_info& c) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 

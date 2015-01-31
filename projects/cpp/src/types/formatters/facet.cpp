@@ -27,8 +27,10 @@ namespace formatters {
 std::string facet::id() const { return id_; }
 void facet::id(const std::string& v) { id_ = v; }
 
-cpp::global_settings facet::global_settings() const { return global_settings_; }
-void facet::global_settings(const cpp::global_settings& v) {
+cpp::settings::global_settings
+facet::global_settings() const { return global_settings_; }
+
+void facet::global_settings(const cpp::settings::global_settings& v) {
     global_settings_ = v;
 }
 

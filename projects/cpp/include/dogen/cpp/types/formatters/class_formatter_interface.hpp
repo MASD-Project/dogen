@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/cpp/types/global_settings.hpp"
+#include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/class_info.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
      * @brief Generate a c++ representation for the type.
      */
     virtual dogen::formatters::file
-    format(const global_settings& sb, const class_info& c) const = 0;
+    format(const settings::global_settings& sb, const class_info& c) const = 0;
 };
 
 } } }

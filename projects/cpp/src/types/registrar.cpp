@@ -49,7 +49,7 @@ void registrar::validate() const {
 }
 
 void registrar::register_default_facet_settings(const std::string& facet_id,
-    const facet_settings& s) {
+    const settings::facet_settings& s) {
     const auto pair(std::make_pair(facet_id, s));
     const auto result(default_facet_settings_by_facet_id_.insert(pair));
     if (!result.second) {
@@ -59,7 +59,7 @@ void registrar::register_default_facet_settings(const std::string& facet_id,
 }
 
 void registrar::register_default_formatter_settings(
-    const std::string& formatter_id, const formatter_settings& s) {
+    const std::string& formatter_id, const settings::formatter_settings& s) {
     const auto pair(std::make_pair(formatter_id, s));
     const auto result(default_formatter_settings_by_formatter_id_.insert(pair));
     if (!result.second) {
@@ -81,7 +81,7 @@ const formatters::container& registrar::formatter_container() const {
     return formatter_container_;
 }
 
-const std::unordered_map<std::string, facet_settings>&
+const std::unordered_map<std::string, settings::facet_settings>&
 registrar::default_facet_settings_by_facet_id() const {
     return default_facet_settings_by_facet_id_;
 }

@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-30 Fri 22:36]
+Clock summary at [2015-01-31 Sat 16:11]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *30:31* |       |      |
+| *Total time*                                                          | *32:58* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 30:31 |      |
+| Active                                                                |         | 32:58 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
 | STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
@@ -41,7 +41,8 @@ Clock summary at [2015-01-30 Fri 22:36]
 | COMPLETED Dynamic workflow is recreated for every model               |         |       | 1:27 |
 | COMPLETED Remove optionality from =obtain_field_definition=           |         |       | 2:50 |
 | COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
-| CANCELLED Create a =settings= namespace in =cpp=                      |         |       | 0:10 |
+| COMPLETED Deeper analysis of the C++ model                            |         |       | 0:43 |
+| COMPLETED Create a =settings= namespace in =cpp=                      |         |       | 1:54 |
 | STARTED Facet and formatter settings factories to use definitions     |         |       | 3:48 |
 | STARTED Split global settings by formatter and facet                  |         |       | 0:09 |
 #+end:
@@ -423,11 +424,81 @@ dynamic refactoring.
 - remove merger from dynamic as we don't need it for now.
 - formatter to check for local overrides to global settings.
 
-*** CANCELLED Create a =settings= namespace in =cpp=                  :story:
-    CLOSED: [2015-01-30 Fri 17:04]
+*** COMPLETED Consider using formatter container only in formatter's workflow :story:
+    CLOSED: [2015-01-31 Sat 14:26]
+
+At present we are populating the registrar via a formatter
+container. In reality, the registrar should only really know of
+formatters in general.
+
+Final decision on this: since the work done inside of the registrar is
+trivial, it was deemed that populating the container is not outside of
+the remit of the registrar. If the registrar had a list of formatters,
+we would have to then do work traversing that list - perhaps with some
+visitation - to split it into a formatter container. We definitely
+need the formatters split as they are in the container since, for a
+given type, we need to format it with all the compatible
+formatters. So the current setup is acceptable.
+
+*** COMPLETED Deeper analysis of the C++ model                        :story:
+    CLOSED: [2015-01-31 Sat 14:23]
+    CLOCK: [2015-01-31 Sat 13:40]--[2015-01-31 Sat 14:23] =>  0:43
+
+In reality the c++ model is split into four components:
+
+- *formattables*: the types that represent the SML model with a
+  shape ready for presentation - formatting;
+- *settings*: items that control how the presentation will be done;
+- *formatters*: the guys responsible for presenting the formatters,
+  controlled by the knobs in settings;
+- *orchestrators*: the top-level entities that create the entire
+  workflow, by instantiating all of the sub-workflows. This is mainly
+  the top-level workflow and any direct collaborators which do not fit
+  in the above classification.
+
+In this view, we could now have three top-level namespaces containing
+the respective types, each with a cohesive workflow; and then a
+top-level workflow that ties them together. This will make the code
+much easier to understand. We should:
+
+- do /all/ settings processing from within the settings workflow
+  including general settings. This is due to local settings - it just
+  makes life easier. What is saved in doing this once for all
+  programming languages is then spent in increasing the interface of
+  the backend workflow. We can revisit this decision later.
+- move registrar to formatters now that they are only used to keep the
+  formatters.
+- create a base class of =formattable=, a list of which is the output of
+  =formattable::workflow=. Formatters take these and dispatch them
+  accordingly.
+- create helpers in the formatter's namespace - a la
+  =dynamic::indexer= - that return just the names of the facets
+  declared by the formatters and the names of the formatters
+  themselves. These will be required by the settings workflow. This
+  reduces the coupling between these namespaces.
+
+*** COMPLETED Create a =settings= namespace in =cpp=                  :story:
+    CLOSED: [2015-01-31 Sat 16:07]
+    CLOCK: [2015-01-31 Sat 14:23]--[2015-01-31 Sat 16:07] =>  1:44
     CLOCK: [2015-01-30 Fri 16:54]--[2015-01-30 Fri 17:04] =>  0:10
 
 *New Understanding*
+
+As per the deeper analysis, we actually will split the settings into
+its own namespace. Whilst the below points against it are valid, it is
+also valid to say that the processing and generation of settings is a
+well defined task, with its own workflow; to encapsulate it in its own
+namespace will make the code much more maintainable because now one
+knows where to look for any settings related issues.
+
+Note that we will avoid foolish consistency here. We will not create
+settings namespaces for every model where there are uses of
+dynamic. The point of settings is just to isolate the complexity of
+building the top-level settings objects; the usage of dynamic is
+incidental. In cases where the building of top-level settings is
+trivial (i.e. =formatters=), there is no need to create a namespace.
+
+*Previous Understanding*
 
 Actually, the case for a settings namespace is not yet clear:
 
@@ -450,6 +521,11 @@ machinery. It is basically a translation of dynamic extensions into
 the c++ model. Nothing else should live there.
 
 Move of all the existing settings to it.
+
+*** Create a =formattable= namespace in =cpp=                         :story:
+
+As per analysis story below, we need to move all the formattable types
+and their factories into their own namespace.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
     CLOCK: [2015-01-30 Fri 22:22]--[2015-01-30 Fri 22:36] =>  0:14

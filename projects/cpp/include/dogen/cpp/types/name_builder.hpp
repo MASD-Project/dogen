@@ -30,7 +30,7 @@
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/cpp/types/global_settings.hpp"
+#include "dogen/cpp/types/settings/global_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -51,8 +51,8 @@ private:
      * @brief Returns the file name for the given qualified name and settings.
      */
     std::string file_name(
-        const global_settings& gs, const bool is_header, const sml::qname& qn,
-        const std::string& additional_postfix) const;
+        const settings::global_settings& gs, const bool is_header,
+        const sml::qname& qn, const std::string& additional_postfix) const;
 
 public:
     /**
@@ -66,7 +66,7 @@ public:
      * @brief Returns the header file name for the given qualified
      * name and settings.
      */
-    std::string header_file_name(const global_settings& gs,
+    std::string header_file_name(const settings::global_settings& gs,
         const sml::qname& qn,
         const std::string& additional_postfix = std::string()) const;
 
@@ -74,7 +74,7 @@ public:
      * @brief Returns the implementation file name for the given
      * qualified name and settings.
      */
-    std::string implementation_file_name(const global_settings& gs,
+    std::string implementation_file_name(const settings::global_settings& gs,
         const sml::qname& qn,
         const std::string& additional_postfix = std::string()) const;
 

@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/field_definitions.hpp"
+#include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 #include "dogen/cpp/types/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 
-void register_field_definitions() {
-    auto& rg(dogen::dynamic::workflow::registrar());
-    rg.register_field_definitions(field_definitions::all_field_definitions());
-}
-
 void initializer::initialize() {
-    register_field_definitions();
+    settings::initializer::initialize();
     formatters::initializer::initialize(workflow::registrar());
     backend::workflow::register_backend(std::make_shared<workflow>());
 }

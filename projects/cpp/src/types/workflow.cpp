@@ -27,10 +27,10 @@
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/io/global_settings_io.hpp"
+#include "dogen/cpp/io/settings/global_settings_io.hpp"
 #include "dogen/cpp/io/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
-#include "dogen/cpp/types/global_settings_factory.hpp"
+#include "dogen/cpp/types/settings/global_settings_factory.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -125,12 +125,12 @@ sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
     return r;
 }
 
-std::unordered_map<std::string, global_settings> workflow::
+std::unordered_map<std::string, settings::global_settings> workflow::
 global_settings_for_facet_activty(
     const dogen::formatters::general_settings& gs,
     const sml::module& model_module) const {
     BOOST_LOG_SEV(lg, debug) << "Creating global settings by facet.";
-    global_settings_factory f;
+    settings::global_settings_factory f;
     const auto& defaults(registrar().default_facet_settings_by_facet_id());
     const auto r(f.build(defaults, gs, model_module));
     BOOST_LOG_SEV(lg, debug) << "Global settings: " << r;
@@ -148,7 +148,7 @@ formatter_container_for_facet_activty(
 std::forward_list<formatters::facet> workflow::create_facets_activty(
     const std::unordered_map<std::string, formatters::container>&
     formatters_by_facet,
-    const std::unordered_map<std::string, global_settings>&
+    const std::unordered_map<std::string, settings::global_settings>&
     global_settings_for_facet) const {
 
     formatters::facet_factory f;
