@@ -544,6 +544,7 @@ default formatter and facets nonsense, we can move this type into the
 formatters namespace.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
+    CLOCK: [2015-02-01 Sun 16:39]--[2015-02-01 Sun 16:41] =>  0:02
     CLOCK: [2015-02-01 Sun 16:01]--[2015-02-01 Sun 16:34] =>  0:33
     CLOCK: [2015-01-30 Fri 22:22]--[2015-01-30 Fri 22:36] =>  0:14
     CLOCK: [2015-01-30 Fri 22:09]--[2015-01-30 Fri 22:22] =>  0:13
@@ -574,7 +575,9 @@ definitions: we need to make use of traits.
   names).
 - remove generation of default facet settings.
 - pass a list of facet names into facet factory. This is obtained by
-  querying the registered formatters (activity in workflow).
+  querying the registered formatters (activity in workflow). Actually,
+  we don't really need this. We should just throw if a formatter looks
+  for a facet/formatter name in the settings that does not exist.
 - create a =dynamic::indexer= that indexes by facet name.
 - pass the indexer into facet factory, or just the results of the
   indexer.
@@ -601,6 +604,15 @@ field definitions.
 
 Dynamic could provide field definition aggregation services for
 formatter and facet.
+
+*** Create a settings facade for querying                             :story:
+
+Now that we have global and local settings, we should be able to hide
+the overriding behind some kind of facade so that the formatter does
+not need to know if a setting is global or local; it should just query
+by some properties and get the desired settings.
+
+Name: =selector=?
 
 *** Add global formatter settings support                             :story:
 
