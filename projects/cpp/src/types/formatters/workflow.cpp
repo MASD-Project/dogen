@@ -62,7 +62,7 @@ dispatcher::dispatcher(const std::forward_list<facet>& f)
 void dispatcher::visit(const formattables::class_info& c) {
     for (const auto& fct : facets_)
         for (const auto fmt : fct.container().class_formatters())
-            files_.push_front(fmt->format(fct.global_settings(), c));
+            files_.push_front(fmt->format(fct.settings(), c));
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {

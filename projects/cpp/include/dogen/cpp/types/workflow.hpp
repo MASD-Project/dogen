@@ -26,12 +26,13 @@
 #endif
 
 #include <memory>
+#include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
-#include "dogen/cpp/types/settings/global_settings.hpp"
+#include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -111,17 +112,9 @@ private:
 
 private:
     /**
-     * @brief Returns the model's module.
-     *
-     * @pre there must exacly one model module
+     * @brief Create the settings.
      */
-    sml::module obtain_model_module_activity(const sml::model& m) const;
-
-    /**
-     * @brief Create the global settings for all facets.
-     */
-    std::unordered_map<std::string, settings::global_settings>
-    global_settings_for_facet_activty(const sml::module& model_module) const;
+    settings::settings create_settings_activty(const sml::model& m) const;
 
     /**
      * @brief Create the formatter container.
@@ -135,9 +128,7 @@ private:
     std::forward_list<formatters::facet>
     create_facets_activty(
         const std::unordered_map<std::string, formatters::container>&
-        formatters_by_facet,
-        const std::unordered_map<std::string, settings::global_settings>&
-        global_settings_for_facet) const;
+        formatters_by_facet, const settings::settings& settings) const;
 
     /**
      * @brief Creates a map of includes builders by formatter id.
@@ -197,6 +188,7 @@ public:
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;
+    const std::forward_list<boost::filesystem::path> data_files_directories_;
 };
 
 } }

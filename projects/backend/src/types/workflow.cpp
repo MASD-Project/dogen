@@ -44,9 +44,8 @@ namespace backend {
 
 std::shared_ptr<backend::registrar> workflow::registrar_;
 
-workflow::workflow(const config::knitting_settings& ks,
-    const std::forward_list<boost::filesystem::path>& data_files_dirs)
-    : knitting_settings_(ks), data_files_directories_(data_files_dirs) { }
+workflow::workflow(const config::knitting_settings& ks)
+    : knitting_settings_(ks) { }
 
 backend::registrar& workflow::registrar() {
     if (!registrar_)

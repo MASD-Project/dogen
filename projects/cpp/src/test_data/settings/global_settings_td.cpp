@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/cpp/test_data/settings/cpp_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/facet_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
@@ -26,9 +27,9 @@
 
 namespace {
 
-dogen::cpp::settings::facet_settings
-create_dogen_cpp_settings_facet_settings(const unsigned int position) {
-    return dogen::cpp::settings::facet_settings_generator::create(position);
+dogen::formatters::general_settings
+create_dogen_formatters_general_settings(const unsigned int position) {
+    return dogen::formatters::general_settings_generator::create(position);
 }
 
 dogen::cpp::settings::cpp_settings
@@ -36,14 +37,36 @@ create_dogen_cpp_settings_cpp_settings(const unsigned int position) {
     return dogen::cpp::settings::cpp_settings_generator::create(position);
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+dogen::cpp::settings::facet_settings
+create_dogen_cpp_settings_facet_settings(const unsigned int position) {
+    return dogen::cpp::settings::facet_settings_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::cpp::settings::facet_settings> create_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::settings::facet_settings> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_settings_facet_settings(position + i)));
+    }
+    return r;
+}
+
 dogen::cpp::settings::formatter_settings
 create_dogen_cpp_settings_formatter_settings(const unsigned int position) {
     return dogen::cpp::settings::formatter_settings_generator::create(position);
 }
 
-dogen::formatters::general_settings
-create_dogen_formatters_general_settings(const unsigned int position) {
-    return dogen::formatters::general_settings_generator::create(position);
+std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> create_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_settings_formatter_settings(position + i)));
+    }
+    return r;
 }
 
 }
@@ -56,10 +79,10 @@ global_settings_generator::global_settings_generator() : position_(0) { }
 
 void global_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.facet_settings(create_dogen_cpp_settings_facet_settings(position + 0));
+    v.general_settings(create_dogen_formatters_general_settings(position + 0));
     v.cpp_settings(create_dogen_cpp_settings_cpp_settings(position + 1));
-    v.formatter_settings(create_dogen_cpp_settings_formatter_settings(position + 2));
-    v.general_settings(create_dogen_formatters_general_settings(position + 3));
+    v.facet_settings(create_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(position + 2));
+    v.formatter_settings(create_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(position + 3));
 }
 
 global_settings_generator::result_type

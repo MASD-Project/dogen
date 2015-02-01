@@ -18,10 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/settings/global_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/local_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/settings_hash.hpp"
 
 namespace {
 
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_local_settings(i.second));
+    }
+    return seed;
+}
 
 }
 
@@ -29,8 +55,12 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t settings_hasher::hash(const settings&) {
+std::size_t settings_hasher::hash(const settings&v) {
     std::size_t seed(0);
+
+    combine(seed, v.global_settings());
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(v.local_settings()));
+
     return seed;
 }
 

@@ -28,7 +28,7 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/cpp/types/settings/global_settings.hpp"
+#include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 
@@ -46,8 +46,7 @@ public:
      */
     std::forward_list<facet> build(
         const std::unordered_map<std::string, container>& formatters_by_facet,
-        const std::unordered_map<std::string, settings::global_settings>&
-        global_settings_for_facet) const;
+        const settings::settings& s) const;
 };
 
 } } }

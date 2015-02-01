@@ -273,10 +273,7 @@ extract_formatting_settings_activity(const sml::model&) const {
 void workflow::generate_model_activity(
     const sml::model& m, const config::formatting_settings& fs) const {
     try {
-        using namespace dogen::utility::filesystem;
-        const std::forward_list<boost::filesystem::path>
-            dirs({data_files_directory()});
-        backend::workflow w(knitting_settings_, dirs);
+        backend::workflow w(knitting_settings_);
         w.execute(m); // FIXME: throw away results for now
 
         backends::factory f(m, fs);

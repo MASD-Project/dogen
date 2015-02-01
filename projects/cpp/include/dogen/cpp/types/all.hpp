@@ -163,7 +163,6 @@
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
-#include "dogen/cpp/types/settings/global_settings_factory.hpp"
 #include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/settings/local_settings.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"

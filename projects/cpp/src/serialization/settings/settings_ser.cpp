@@ -27,22 +27,30 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/settings/global_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/local_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/settings_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::cpp::settings::settings& /*v*/,
+void save(Archive& ar,
+    const dogen::cpp::settings::settings& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("global_settings", v.global_settings_);
+    ar << make_nvp("local_settings", v.local_settings_);
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::cpp::settings::settings& /*v*/,
+void load(Archive& ar,
+    dogen::cpp::settings::settings& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("global_settings", v.global_settings_);
+    ar >> make_nvp("local_settings", v.local_settings_);
 }
 
 } }

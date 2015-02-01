@@ -59,8 +59,9 @@ std::string name_builder::file_name(
         r /= qn.model_name();
     }
 
-    if (gs.cpp_settings().enable_facet_folders())
-        r /= gs.facet_settings().directory();
+    // FIXME
+    // if (gs.cpp_settings().enable_facet_folders())
+    //     r /= gs.facet_settings().directory();
 
     for(auto n : qn.module_path())
         r /= n;
@@ -68,8 +69,9 @@ std::string name_builder::file_name(
     std::ostringstream stream;
     stream << qn.simple_name() << additional_postfix;
 
-    if (gs.cpp_settings().enable_unique_file_names())
-        stream << gs.facet_settings().postfix();
+    // FIXME
+    // if (gs.cpp_settings().enable_unique_file_names())
+    //     stream << gs.facet_settings().postfix();
 
     if (is_header)
         stream << gs.cpp_settings().header_file_extension();

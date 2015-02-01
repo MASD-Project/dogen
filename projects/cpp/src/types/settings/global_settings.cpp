@@ -25,28 +25,28 @@ namespace cpp {
 namespace settings {
 
 global_settings::global_settings(
-    const dogen::cpp::settings::facet_settings& facet_settings,
+    const dogen::formatters::general_settings& general_settings,
     const dogen::cpp::settings::cpp_settings& cpp_settings,
-    const dogen::cpp::settings::formatter_settings& formatter_settings,
-    const dogen::formatters::general_settings& general_settings)
-    : facet_settings_(facet_settings),
+    const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings,
+    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings)
+    : general_settings_(general_settings),
       cpp_settings_(cpp_settings),
-      formatter_settings_(formatter_settings),
-      general_settings_(general_settings) { }
+      facet_settings_(facet_settings),
+      formatter_settings_(formatter_settings) { }
 
 void global_settings::swap(global_settings& other) noexcept {
     using std::swap;
-    swap(facet_settings_, other.facet_settings_);
-    swap(cpp_settings_, other.cpp_settings_);
-    swap(formatter_settings_, other.formatter_settings_);
     swap(general_settings_, other.general_settings_);
+    swap(cpp_settings_, other.cpp_settings_);
+    swap(facet_settings_, other.facet_settings_);
+    swap(formatter_settings_, other.formatter_settings_);
 }
 
 bool global_settings::operator==(const global_settings& rhs) const {
-    return facet_settings_ == rhs.facet_settings_ &&
+    return general_settings_ == rhs.general_settings_ &&
         cpp_settings_ == rhs.cpp_settings_ &&
-        formatter_settings_ == rhs.formatter_settings_ &&
-        general_settings_ == rhs.general_settings_;
+        facet_settings_ == rhs.facet_settings_ &&
+        formatter_settings_ == rhs.formatter_settings_;
 }
 
 global_settings& global_settings::operator=(global_settings other) {
@@ -55,20 +55,20 @@ global_settings& global_settings::operator=(global_settings other) {
     return *this;
 }
 
-const dogen::cpp::settings::facet_settings& global_settings::facet_settings() const {
-    return facet_settings_;
+const dogen::formatters::general_settings& global_settings::general_settings() const {
+    return general_settings_;
 }
 
-dogen::cpp::settings::facet_settings& global_settings::facet_settings() {
-    return facet_settings_;
+dogen::formatters::general_settings& global_settings::general_settings() {
+    return general_settings_;
 }
 
-void global_settings::facet_settings(const dogen::cpp::settings::facet_settings& v) {
-    facet_settings_ = v;
+void global_settings::general_settings(const dogen::formatters::general_settings& v) {
+    general_settings_ = v;
 }
 
-void global_settings::facet_settings(const dogen::cpp::settings::facet_settings&& v) {
-    facet_settings_ = std::move(v);
+void global_settings::general_settings(const dogen::formatters::general_settings&& v) {
+    general_settings_ = std::move(v);
 }
 
 const dogen::cpp::settings::cpp_settings& global_settings::cpp_settings() const {
@@ -87,36 +87,36 @@ void global_settings::cpp_settings(const dogen::cpp::settings::cpp_settings&& v)
     cpp_settings_ = std::move(v);
 }
 
-const dogen::cpp::settings::formatter_settings& global_settings::formatter_settings() const {
+const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& global_settings::facet_settings() const {
+    return facet_settings_;
+}
+
+std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& global_settings::facet_settings() {
+    return facet_settings_;
+}
+
+void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v) {
+    facet_settings_ = v;
+}
+
+void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>&& v) {
+    facet_settings_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& global_settings::formatter_settings() const {
     return formatter_settings_;
 }
 
-dogen::cpp::settings::formatter_settings& global_settings::formatter_settings() {
+std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& global_settings::formatter_settings() {
     return formatter_settings_;
 }
 
-void global_settings::formatter_settings(const dogen::cpp::settings::formatter_settings& v) {
+void global_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v) {
     formatter_settings_ = v;
 }
 
-void global_settings::formatter_settings(const dogen::cpp::settings::formatter_settings&& v) {
+void global_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v) {
     formatter_settings_ = std::move(v);
-}
-
-const dogen::formatters::general_settings& global_settings::general_settings() const {
-    return general_settings_;
-}
-
-dogen::formatters::general_settings& global_settings::general_settings() {
-    return general_settings_;
-}
-
-void global_settings::general_settings(const dogen::formatters::general_settings& v) {
-    general_settings_ = v;
-}
-
-void global_settings::general_settings(const dogen::formatters::general_settings&& v) {
-    general_settings_ = std::move(v);
 }
 
 } } }

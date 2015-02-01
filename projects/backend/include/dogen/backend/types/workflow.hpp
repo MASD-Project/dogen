@@ -27,7 +27,6 @@
 
 #include <memory>
 #include <forward_list>
-#include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -46,10 +45,8 @@ public:
      * @brief Initialises the workflow.
      *
      * @param ks the knitting settings
-     * @param data_files_directories where to look for reference data.
      */
-    workflow(const config::knitting_settings& ks,
-        const std::forward_list<boost::filesystem::path>& data_files_dirs);
+    explicit workflow(const config::knitting_settings& ks);
 
 private:
     /**
@@ -79,7 +76,6 @@ public:
 private:
     static std::shared_ptr<backend::registrar> registrar_;
     const config::knitting_settings knitting_settings_;
-    const std::forward_list<boost::filesystem::path> data_files_directories_;
 };
 
 } }

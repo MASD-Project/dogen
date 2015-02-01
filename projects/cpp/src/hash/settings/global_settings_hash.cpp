@@ -33,6 +33,24 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -42,10 +60,10 @@ namespace settings {
 std::size_t global_settings_hasher::hash(const global_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.facet_settings());
-    combine(seed, v.cpp_settings());
-    combine(seed, v.formatter_settings());
     combine(seed, v.general_settings());
+    combine(seed, v.cpp_settings());
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(v.facet_settings()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(v.formatter_settings()));
 
     return seed;
 }

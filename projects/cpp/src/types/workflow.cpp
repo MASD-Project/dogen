@@ -27,10 +27,10 @@
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/io/settings/global_settings_io.hpp"
+#include "dogen/cpp/io/settings/settings_io.hpp"
 #include "dogen/cpp/io/formattables/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
-#include "dogen/cpp/types/settings/global_settings_factory.hpp"
+#include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -42,10 +42,6 @@ const std::string id("cpp.workflow");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
-const std::string model_modules_not_found(
-    "Could not find model module for model: ");
-const std::string multiple_generatable_model_modules(
-    "More than one model module is generatable: ");
 const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_formatter_type(
     "Formatter type is not supported: ");
@@ -98,40 +94,13 @@ std::forward_list<dogen::formatters::file> workflow::format_entity(
     return fw.format(e);
 }
 
-sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
-    sml::module r;
-    bool found(false);
-    for (const auto pair : m.modules()) {
-        const auto mod(pair.second);
-        if (mod.generation_type() != sml::generation_types::full_generation ||
-            mod.type() != sml::module_types::model)
-            continue;
-
-        if (found) {
-            const auto n(sml::string_converter::convert(mod.name()));
-            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules << n;
-            BOOST_THROW_EXCEPTION(workflow_error(
-                    multiple_generatable_model_modules + n));
-        }
-        r = pair.second;
-        found = true;
-    }
-
-    if (!found) {
-        const auto n(sml::string_converter::convert(r.name()));
-        BOOST_LOG_SEV(lg, error) << model_modules_not_found << n;
-        BOOST_THROW_EXCEPTION(workflow_error(model_modules_not_found + n));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, settings::global_settings> workflow::
-global_settings_for_facet_activty(const sml::module& model_module) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating global settings by facet.";
-    settings::global_settings_factory f;
-    const auto r(f.build(model_module));
-    BOOST_LOG_SEV(lg, debug) << "Global settings: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finsihed creating global settings by facet.";
+settings::settings
+workflow::create_settings_activty(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating settings.";
+    settings::workflow w;
+    const auto r(w.execute(m));
+    BOOST_LOG_SEV(lg, debug) << "Settings: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating settings.";
     return r;
 }
 
@@ -144,12 +113,10 @@ formatter_container_for_facet_activty(
 
 std::forward_list<formatters::facet> workflow::create_facets_activty(
     const std::unordered_map<std::string, formatters::container>&
-    formatters_by_facet,
-    const std::unordered_map<std::string, settings::global_settings>&
-    global_settings_for_facet) const {
+    formatters_by_facet, const settings::settings& s) const {
 
     formatters::facet_factory f;
-    return f.build(formatters_by_facet, global_settings_for_facet);
+    return f.build(formatters_by_facet, s);
 }
 
 workflow::includes_builder_by_formatter_id
@@ -194,8 +161,8 @@ workflow::obtain_relative_file_names_for_key_activity(
             for (const auto fct : facets) {
                 for (const auto fmt : fct.container().class_formatters()) {
                     const auto& id(fmt->formatter_name());
-                    const auto& gs(fct.global_settings());
-                    const auto& fn(fmt->make_file_name(gs, qn));
+                    const auto& s(fct.settings());
+                    const auto& fn(fmt->make_file_name(s, qn));
                     r[qn].insert(std::make_pair(id, fn));
                 }
             }
@@ -290,12 +257,11 @@ std::forward_list<dogen::formatters::file> workflow::
 generate(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    const auto mod(obtain_model_module_activity(m));
-    const auto glob(global_settings_for_facet_activty(mod));
+    const auto s(create_settings_activty(m));
 
     const auto& c(registrar().formatter_container());
     const auto fc(formatter_container_for_facet_activty(c));
-    const auto facets(create_facets_activty(fc, glob));
+    const auto facets(create_facets_activty(fc, s));
     const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
 
     const auto builders(create_includes_builder_by_formatter_id_activity(c));

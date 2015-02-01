@@ -24,8 +24,59 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bool settings::operator==(const settings& /*rhs*/) const {
-    return true;
+settings::settings(
+    const dogen::cpp::settings::global_settings& global_settings,
+    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings)
+    : global_settings_(global_settings),
+      local_settings_(local_settings) { }
+
+void settings::swap(settings& other) noexcept {
+    using std::swap;
+    swap(global_settings_, other.global_settings_);
+    swap(local_settings_, other.local_settings_);
+}
+
+bool settings::operator==(const settings& rhs) const {
+    return global_settings_ == rhs.global_settings_ &&
+        local_settings_ == rhs.local_settings_;
+}
+
+settings& settings::operator=(settings other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const dogen::cpp::settings::global_settings& settings::global_settings() const {
+    return global_settings_;
+}
+
+dogen::cpp::settings::global_settings& settings::global_settings() {
+    return global_settings_;
+}
+
+void settings::global_settings(const dogen::cpp::settings::global_settings& v) {
+    global_settings_ = v;
+}
+
+void settings::global_settings(const dogen::cpp::settings::global_settings&& v) {
+    global_settings_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& settings::local_settings() const {
+    return local_settings_;
+}
+
+std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& settings::local_settings() {
+    return local_settings_;
+}
+
+void settings::local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v) {
+    local_settings_ = v;
+}
+
+void settings::local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >&& v) {
+    local_settings_ = std::move(v);
 }
 
 } } }

@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/cpp/types/settings/global_settings.hpp"
+#include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 
 namespace dogen {
@@ -47,11 +47,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Global settings for this facet.
+     * @brief Settings for this facet.
      */
     /**@{*/
-    cpp::settings::global_settings global_settings() const;
-    void global_settings(const cpp::settings::global_settings& v);
+    cpp::settings::settings settings() const;
+    void settings(const cpp::settings::settings& v);
     /**@}*/
 
     /**
@@ -62,7 +62,7 @@ public:
 
 private:
     std::string id_;
-    cpp::settings::global_settings global_settings_;
+    cpp::settings::settings settings_;
     formatters::container container_;
 };
 

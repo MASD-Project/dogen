@@ -26,6 +26,8 @@
 #endif
 
 #include <algorithm>
+#include <string>
+#include <unordered_map>
 #include "dogen/cpp/serialization/settings/global_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
 #include "dogen/cpp/types/settings/facet_settings.hpp"
@@ -48,10 +50,10 @@ public:
 
 public:
     global_settings(
-        const dogen::cpp::settings::facet_settings& facet_settings,
+        const dogen::formatters::general_settings& general_settings,
         const dogen::cpp::settings::cpp_settings& cpp_settings,
-        const dogen::cpp::settings::formatter_settings& formatter_settings,
-        const dogen::formatters::general_settings& general_settings);
+        const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings,
+        const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings);
 
 private:
     template<typename Archive>
@@ -61,25 +63,25 @@ private:
     friend void boost::serialization::load(Archive& ar, global_settings& v, unsigned int version);
 
 public:
-    const dogen::cpp::settings::facet_settings& facet_settings() const;
-    dogen::cpp::settings::facet_settings& facet_settings();
-    void facet_settings(const dogen::cpp::settings::facet_settings& v);
-    void facet_settings(const dogen::cpp::settings::facet_settings&& v);
+    const dogen::formatters::general_settings& general_settings() const;
+    dogen::formatters::general_settings& general_settings();
+    void general_settings(const dogen::formatters::general_settings& v);
+    void general_settings(const dogen::formatters::general_settings&& v);
 
     const dogen::cpp::settings::cpp_settings& cpp_settings() const;
     dogen::cpp::settings::cpp_settings& cpp_settings();
     void cpp_settings(const dogen::cpp::settings::cpp_settings& v);
     void cpp_settings(const dogen::cpp::settings::cpp_settings&& v);
 
-    const dogen::cpp::settings::formatter_settings& formatter_settings() const;
-    dogen::cpp::settings::formatter_settings& formatter_settings();
-    void formatter_settings(const dogen::cpp::settings::formatter_settings& v);
-    void formatter_settings(const dogen::cpp::settings::formatter_settings&& v);
+    const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings();
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v);
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>&& v);
 
-    const dogen::formatters::general_settings& general_settings() const;
-    dogen::formatters::general_settings& general_settings();
-    void general_settings(const dogen::formatters::general_settings& v);
-    void general_settings(const dogen::formatters::general_settings&& v);
+    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings();
+    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v);
+    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v);
 
 public:
     bool operator==(const global_settings& rhs) const;
@@ -92,10 +94,10 @@ public:
     global_settings& operator=(global_settings other);
 
 private:
-    dogen::cpp::settings::facet_settings facet_settings_;
-    dogen::cpp::settings::cpp_settings cpp_settings_;
-    dogen::cpp::settings::formatter_settings formatter_settings_;
     dogen::formatters::general_settings general_settings_;
+    dogen::cpp::settings::cpp_settings cpp_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::facet_settings> facet_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> formatter_settings_;
 };
 
 } } }

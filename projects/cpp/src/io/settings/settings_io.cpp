@@ -18,16 +18,66 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/settings/global_settings_io.hpp"
+#include "dogen/cpp/io/settings/local_settings_io.hpp"
 #include "dogen/cpp/io/settings/settings_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const settings&) {
+std::ostream& operator<<(std::ostream& s, const settings& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::settings\"" << " }";
+      << "\"__type__\": " << "\"dogen::cpp::settings::settings\"" << ", "
+      << "\"global_settings\": " << v.global_settings() << ", "
+      << "\"local_settings\": " << v.local_settings()
+      << " }";
     return(s);
 }
 

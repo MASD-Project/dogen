@@ -26,7 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <string>
+#include <unordered_map>
 #include "dogen/cpp/serialization/settings/settings_fwd_ser.hpp"
+#include "dogen/cpp/types/settings/global_settings.hpp"
+#include "dogen/cpp/types/settings/local_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -38,7 +42,11 @@ public:
     settings(const settings&) = default;
     settings(settings&&) = default;
     ~settings() = default;
-    settings& operator=(const settings&) = default;
+
+public:
+    settings(
+        const dogen::cpp::settings::global_settings& global_settings,
+        const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings);
 
 private:
     template<typename Archive>
@@ -48,13 +56,42 @@ private:
     friend void boost::serialization::load(Archive& ar, settings& v, unsigned int version);
 
 public:
+    const dogen::cpp::settings::global_settings& global_settings() const;
+    dogen::cpp::settings::global_settings& global_settings();
+    void global_settings(const dogen::cpp::settings::global_settings& v);
+    void global_settings(const dogen::cpp::settings::global_settings&& v);
+
+    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings();
+    void local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v);
+    void local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >&& v);
+
+public:
     bool operator==(const settings& rhs) const;
     bool operator!=(const settings& rhs) const {
         return !this->operator==(rhs);
     }
 
+public:
+    void swap(settings& other) noexcept;
+    settings& operator=(settings other);
+
+private:
+    dogen::cpp::settings::global_settings global_settings_;
+    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> > local_settings_;
 };
 
 } } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::cpp::settings::settings& lhs,
+    dogen::cpp::settings::settings& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

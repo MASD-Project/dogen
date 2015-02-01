@@ -26,15 +26,13 @@ namespace formatters {
 
 std::forward_list<facet> facet_factory::build(
     const std::unordered_map<std::string, container>& formatters_by_facet,
-    const std::unordered_map<std::string, settings::global_settings>&
-        global_settings_for_facet) const {
+    const settings::settings& s) const {
 
     std::unordered_map<std::string, facet> facet_by_id;
-    for (const auto pair : formatters_by_facet)
+    for (const auto pair : formatters_by_facet) {
         facet_by_id[pair.first].container(pair.second);
-
-    for (auto pair : global_settings_for_facet)
-        facet_by_id[pair.first].global_settings(pair.second);
+        facet_by_id[pair.first].settings(s);
+    }
 
     std::forward_list<facet> r;
     for (const auto& pair : facet_by_id) {
