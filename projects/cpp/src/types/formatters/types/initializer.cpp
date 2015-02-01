@@ -20,38 +20,18 @@
  */
 #include <memory>
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/cpp/types/settings/facet_settings.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
-
-namespace {
-
-const std::string default_facet_directory("types");
-const std::string default_facet_postfix;
-
-}
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void initialise_facet(registrar& rg) {
-    settings::facet_settings default_settings;
-    default_settings.enabled(true);
-    default_settings.directory(default_facet_directory);
-    default_settings.postfix(default_facet_postfix);
-    rg.register_default_facet_settings(traits::facet_name(), default_settings);
-}
-
 void initialise_class_header_formatter(registrar& rg) {
-    settings::formatter_settings default_settings;
-    default_settings.enabled(true);
-
     const auto id(traits::class_header_formatter_name());
-    rg.register_default_formatter_settings(id, default_settings);
     rg.register_formatter(std::make_shared<class_header_formatter>());
 }
 
@@ -61,7 +41,6 @@ void register_field_definitions() {
 }
 
 void initializer::initialize(registrar& rg) {
-    initialise_facet(rg);
     initialise_class_header_formatter(rg);
     register_field_definitions();
 }

@@ -52,17 +52,15 @@ private:
      *
      * @pre facet id is not qualified.
      */
-    facet_settings read_settings(const facet_settings& default_settings,
-        const std::string& facet_id, const dynamic::object& o) const;
+    facet_settings read_settings(const std::string& facet_id,
+        const dynamic::object& o) const;
 
 public:
     /**
      * @brief Builds the facet settings from the dynamic object.
      */
-    std::unordered_map<std::string, facet_settings> build(
-        const std::unordered_map<std::string, facet_settings>&
-        default_facet_settings_by_facet_id,
-        const dynamic::object& o) const;
+    std::unordered_map<std::string, facet_settings>
+    build(const dynamic::object& o) const;
 };
 
 } } }

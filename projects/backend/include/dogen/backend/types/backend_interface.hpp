@@ -30,7 +30,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
 
 namespace dogen {
 namespace backend {
@@ -70,7 +69,6 @@ public:
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
-        const formatters::general_settings& gs,
         const sml::model& m) const = 0;
 };
 

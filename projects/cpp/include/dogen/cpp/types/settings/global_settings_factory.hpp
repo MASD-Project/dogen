@@ -47,19 +47,13 @@ private:
      * @brief Create the facet settings
      */
     std::unordered_map<std::string, facet_settings>
-    create_facet_settings(
-        const std::unordered_map<std::string, facet_settings>&
-        default_facet_settings_by_facet_id,
-        const sml::module& model_module) const;
+    create_facet_settings(const sml::module& model_module) const;
 
     /**
      * @brief Create the formatter settings
      */
     std::unordered_map<std::string, formatter_settings>
-    create_formatter_settings(
-        const std::unordered_map<std::string, formatter_settings>&
-        default_formatter_settings_by_formatter_id,
-        const sml::module& model_module) const;
+    create_formatter_settings(const sml::module& model_module) const;
 
     /**
      * @brief Create the c++ settings
@@ -71,12 +65,7 @@ public:
      * @brief Builds the global settings for all facets.
      */
     std::unordered_map<std::string, global_settings>
-    build(const std::unordered_map<std::string, facet_settings>&
-        default_facet_settings_by_facet_id,
-        /*const std::unordered_map<std::string, formatter_settings>&
-          default_formatter_settings_by_formatter_id, FIXME*/
-        const dogen::formatters::general_settings& gs,
-        const sml::module& model_module) const;
+    build(const sml::module& model_module) const;
 };
 
 } } }

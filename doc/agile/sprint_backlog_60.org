@@ -544,6 +544,7 @@ default formatter and facets nonsense, we can move this type into the
 formatters namespace.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
+    CLOCK: [2015-02-01 Sun 16:01]--[2015-02-01 Sun 16:34] =>  0:33
     CLOCK: [2015-01-30 Fri 22:22]--[2015-01-30 Fri 22:36] =>  0:14
     CLOCK: [2015-01-30 Fri 22:09]--[2015-01-30 Fri 22:22] =>  0:13
     CLOCK: [2015-01-30 Fri 21:13]--[2015-01-30 Fri 22:08] =>  0:55

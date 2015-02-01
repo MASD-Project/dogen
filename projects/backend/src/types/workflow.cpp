@@ -23,7 +23,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/workflow.hpp"
 
@@ -71,39 +70,6 @@ void workflow::validate_backends_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating backend workflow.";
 }
 
-formatters::general_settings
-workflow::create_general_settings_activity(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating general settings.";
-
-    boost::optional<formatters::general_settings> r;
-    using formatters::general_settings_factory;
-    general_settings_factory f(data_files_directories_);
-    f.load_reference_data();
-
-    for (const auto pair : m.modules()) {
-        const auto mod(pair.second);
-        if (mod.generation_type() != sml::generation_types::full_generation ||
-            mod.type() != sml::module_types::model)
-            continue;
-
-        if (r) {
-            const auto n(sml::string_converter::convert(mod.name()));
-            BOOST_LOG_SEV(lg, error) << multiple_generatable_model_modules << n;
-            BOOST_THROW_EXCEPTION(workflow_error(
-                    multiple_generatable_model_modules + n));
-        }
-        r = f.build(mod.extensions());
-    }
-
-    if (!r) {
-        BOOST_LOG_SEV(lg, error) << no_generatable_model_modules;
-        BOOST_THROW_EXCEPTION(workflow_error(no_generatable_model_modules));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished creating general settings.";
-    return *r;
-}
-
 void workflow::register_backend(std::shared_ptr<backend_interface> b) {
     registrar().register_backend(b);
 }
@@ -111,14 +77,13 @@ void workflow::register_backend(std::shared_ptr<backend_interface> b) {
 std::forward_list<formatters::file>
 workflow::execute(const sml::model& m) const {
     validate_backends_activity();
-    const auto gs(create_general_settings_activity(m));
 
     std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
         const auto id(b->id());
         BOOST_LOG_SEV(lg, debug) << "Generating files for backend: '"
                                  << id << "'";
-        auto files(b->generate(gs, m));
+        auto files(b->generate(m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for backend: '" << id
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());

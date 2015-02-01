@@ -48,17 +48,15 @@ private:
      *
      * @pre formatter id is not qualified.
      */
-    formatter_settings read_settings(const formatter_settings& default_settings,
-        const std::string& formatter_id, const dynamic::object& o) const;
+    formatter_settings read_settings(const std::string& formatter_id,
+        const dynamic::object& o) const;
 
 public:
     /**
      * @brief Builds the formatter settings from the meta data.
      */
-    std::unordered_map<std::string, formatter_settings> build(
-        const std::unordered_map<std::string, formatter_settings>&
-        default_formatter_settings_by_formatter_id,
-        const dynamic::object& o) const;
+    std::unordered_map<std::string, formatter_settings>
+    build(const dynamic::object& o) const;
 };
 
 } } }

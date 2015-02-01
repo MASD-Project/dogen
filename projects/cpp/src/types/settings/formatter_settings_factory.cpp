@@ -45,13 +45,11 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-formatter_settings formatter_settings_factory::read_settings(
-    const formatter_settings& default_settings,
-    const std::string& formatter_id,
-    const dynamic::object& o) const {
+formatter_settings formatter_settings_factory::
+read_settings(const std::string& formatter_id, const dynamic::object& o) const {
     using namespace dynamic;
 
-    formatter_settings r(default_settings);
+    formatter_settings r;
     const auto enabled_trait(qualify(formatter_id,
             traits::formatter::enabled()));
     if (has_field(o, enabled_trait))
@@ -66,18 +64,15 @@ formatter_settings formatter_settings_factory::read_settings(
 }
 
 std::unordered_map<std::string, formatter_settings>
-formatter_settings_factory::build(
-    const std::unordered_map<std::string, formatter_settings>&
-    default_formatter_settings_by_formatter_id,
-    const dynamic::object& o) const {
+formatter_settings_factory::build(const dynamic::object& /*o*/) const {
 
     std::unordered_map<std::string, formatter_settings> r;
-    for (const auto& pair : default_formatter_settings_by_formatter_id) {
-        const auto& formatter_id(pair.first);
-        const auto& default_settings(pair.second);
-        const auto s(read_settings(default_settings, formatter_id, o));
-        r.insert(std::make_pair(formatter_id, s));
-    }
+    // for (const auto& pair : default_formatter_settings_by_formatter_id) {
+    //     const auto& formatter_id(pair.first);
+    //     const auto& default_settings(pair.second);
+    //     const auto s(read_settings(default_settings, formatter_id, o));
+    //     r.insert(std::make_pair(formatter_id, s));
+    // }
     return r;
 }
 

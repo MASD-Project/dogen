@@ -121,16 +121,13 @@ private:
      * @brief Create the global settings for all facets.
      */
     std::unordered_map<std::string, settings::global_settings>
-    global_settings_for_facet_activty(
-        const dogen::formatters::general_settings& gs,
-        const sml::module& model_module) const;
+    global_settings_for_facet_activty(const sml::module& model_module) const;
 
     /**
      * @brief Create the formatter container.
      */
     std::unordered_map<std::string, formatters::container>
-    formatter_container_for_facet_activty(
-        const formatters::container& c) const;
+    formatter_container_for_facet_activty(const formatters::container& c) const;
 
     /**
      * @brief Creates all the facets
@@ -195,9 +192,8 @@ public:
 
     void validate() const override;
 
-    std::forward_list<dogen::formatters::file> generate(
-        const dogen::formatters::general_settings& gs,
-        const sml::model& m) const override;
+    std::forward_list<dogen::formatters::file>
+    generate(const sml::model& m) const override;
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;

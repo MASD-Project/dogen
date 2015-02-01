@@ -126,13 +126,10 @@ sml::module workflow::obtain_model_module_activity(const sml::model& m) const {
 }
 
 std::unordered_map<std::string, settings::global_settings> workflow::
-global_settings_for_facet_activty(
-    const dogen::formatters::general_settings& gs,
-    const sml::module& model_module) const {
+global_settings_for_facet_activty(const sml::module& model_module) const {
     BOOST_LOG_SEV(lg, debug) << "Creating global settings by facet.";
     settings::global_settings_factory f;
-    const auto& defaults(registrar().default_facet_settings_by_facet_id());
-    const auto r(f.build(defaults, gs, model_module));
+    const auto r(f.build(model_module));
     BOOST_LOG_SEV(lg, debug) << "Global settings: " << r;
     BOOST_LOG_SEV(lg, debug) << "Finsihed creating global settings by facet.";
     return r;
@@ -289,13 +286,12 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
 }
 
-std::forward_list<dogen::formatters::file> workflow::generate(
-    const dogen::formatters::general_settings& gs,
-    const sml::model& m) const {
+std::forward_list<dogen::formatters::file> workflow::
+generate(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto mod(obtain_model_module_activity(m));
-    const auto glob(global_settings_for_facet_activty(gs, mod));
+    const auto glob(global_settings_for_facet_activty(mod));
 
     const auto& c(registrar().formatter_container());
     const auto fc(formatter_container_for_facet_activty(c));

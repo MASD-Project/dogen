@@ -28,8 +28,6 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/cpp/types/settings/facet_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
@@ -45,40 +43,17 @@ public:
     void validate() const;
 
     /**
-     * @brief Registers default facet settings for a given facet.
-     */
-    void register_default_facet_settings(const std::string& facet_id,
-        const settings::facet_settings& s);
-
-    /**
-     * @brief Registers default formatter settings for a given formatter.
-     */
-    void register_default_formatter_settings(const std::string& formatter_id,
-        const settings::formatter_settings& s);
-
-    /**
      * @brief Registers a class formatter.
      */
-    void register_formatter(
-        std::shared_ptr<class_formatter_interface> f);
+    void register_formatter(std::shared_ptr<class_formatter_interface> f);
 
     /**
      * @brief Returns all available formatters.
      */
     const container& formatter_container() const;
 
-    /**
-     * @brief Returns all default settings for all facets.
-     */
-    const std::unordered_map<std::string, settings::facet_settings>&
-    default_facet_settings_by_facet_id() const;
-
 private:
     container formatter_container_;
-    std::unordered_map<std::string, settings::facet_settings>
-    default_facet_settings_by_facet_id_;
-    std::unordered_map<std::string, settings::formatter_settings>
-    default_formatter_settings_by_formatter_id_;
 };
 
 } } }

@@ -46,10 +46,10 @@ namespace cpp {
 namespace settings {
 
 facet_settings facet_settings_factory::read_settings(
-    const facet_settings& default_settings, const std::string& facet_id,
+    const std::string& facet_id,
     const dynamic::object& o) const {
 
-    facet_settings r(default_settings);
+    facet_settings r;
     using namespace dynamic;
 
     const auto enabled_trait(qualify(facet_id, traits::facet::enabled()));
@@ -67,18 +67,16 @@ facet_settings facet_settings_factory::read_settings(
     return r;
 }
 
-std::unordered_map<std::string, facet_settings> facet_settings_factory::build(
-    const std::unordered_map<std::string, facet_settings>&
-    default_facet_settings_by_facet_id,
-    const dynamic::object& o) const {
+std::unordered_map<std::string, facet_settings>
+facet_settings_factory::build(const dynamic::object& /*o*/) const {
 
     std::unordered_map<std::string, facet_settings> r;
-    for (const auto& pair : default_facet_settings_by_facet_id) {
-        const auto& facet_id(pair.first);
-        const auto& default_settings(pair.second);
-        const auto s(read_settings(default_settings, facet_id, o));
-        r.insert(std::make_pair(facet_id, s));
-    }
+    // for (const auto& pair : default_facet_settings_by_facet_id) {
+    //     const auto& facet_id(pair.first);
+    //     const auto& default_settings(pair.second);
+    //     const auto s(read_settings(default_settings, facet_id, o));
+    //     r.insert(std::make_pair(facet_id, s));
+    // }
     return r;
 }
 
