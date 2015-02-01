@@ -38,7 +38,7 @@ namespace cpp_formatters {
 src_cmakelists::src_cmakelists(std::ostream& stream) : stream_(stream) {
 }
 
-void src_cmakelists::format(const cpp::cmakelists_info& ci) {
+void src_cmakelists::format(const cpp::formattables::cmakelists_info& ci) {
     const std::string mn(ci.model_name().empty() ?
         unnamed_model :
         ci.model_name());

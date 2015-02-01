@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
@@ -66,7 +66,7 @@ create(std::ostream& stream) {
 }
 
 void forward_declarations_header::
-format_serialization_class(const cpp::class_info& ci) {
+format_serialization_class(const cpp::formattables::class_info& ci) {
     {
         std::list<std::string> ns({ boost_ns, serialization_ns });
         namespace_helper nsh(stream_, ns);
@@ -92,7 +92,7 @@ format_serialization_class(const cpp::class_info& ci) {
 }
 
 void forward_declarations_header::
-format_domain_class(const cpp::class_info& ci) {
+format_domain_class(const cpp::formattables::class_info& ci) {
     {
         namespace_helper nsh(stream_, ci.namespaces());
         utility_.blank_line();
@@ -103,15 +103,17 @@ format_domain_class(const cpp::class_info& ci) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void forward_declarations_header::format_class(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     const auto ft(f.descriptor().facet_type());
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     if (ft == config::cpp_facet_types::serialization)
         format_serialization_class(ci);
     else if (ft == config::cpp_facet_types::types)
@@ -124,8 +126,9 @@ void forward_declarations_header::format_class(const cpp::file_info& f) {
 }
 
 void forward_declarations_header::
-format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+format_enumeration(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -143,8 +146,10 @@ format_enumeration(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format_exception(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::exception_info>(f.entity()));
+void forward_declarations_header::format_exception(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::exception_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_exception_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_exception_info));
@@ -161,8 +166,9 @@ void forward_declarations_header::format_exception(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void forward_declarations_header::format(const cpp::file_info& f) {
-    using cpp::aspect_types;
+void forward_declarations_header::format(
+    const cpp::formattables::file_info& f) {
+    using cpp::formattables::aspect_types;
     if (f.descriptor().aspect_type() != aspect_types::forward_decls) {
         using dogen::utility::exception::invalid_enum_value;
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
@@ -179,7 +185,7 @@ void forward_declarations_header::format(const cpp::file_info& f) {
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::user_defined_service ||

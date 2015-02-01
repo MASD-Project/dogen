@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp/types/name_builder.hpp"
+#include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
@@ -39,7 +39,8 @@ static logger lg(logger_factory(traits::class_header_formatter_name()));
 
 
 // FIXME
-const dogen::cpp::includes empty_includes = dogen::cpp::includes();
+const dogen::cpp::formattables::includes empty_includes =
+    dogen::cpp::formattables::includes();
 
 }
 
@@ -48,25 +49,25 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class includes_builder : public includes_builder_interface {
+class includes_builder : public formattables::includes_builder_interface {
 public:
-    includes build(const sml::model& m, const sml::qname qn,
+    formattables::includes build(const sml::model& m, const sml::qname qn,
         const std::unordered_map<sml::qname,
         includes_builder_interface::path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const override;
 };
 
-includes includes_builder::build(const sml::model& /*m*/,
+formattables::includes includes_builder::build(const sml::model& /*m*/,
     const sml::qname /*qn*/,
     const std::unordered_map<sml::qname, includes_builder_interface::
                              path_by_formatter_type>&
     /*relative_file_names_by_formatter_by_qname*/) const {
-    includes r;
+    formattables::includes r;
     return r;
 }
 
 boost::filesystem::path class_header_formatter::
-get_relative_path(const class_info& c) const {
+get_relative_path(const formattables::class_info& c) const {
     const auto& fs(c.file_settings_for_formatter());
     const auto i(fs.find(formatter_name()));
     if (i == fs.end()) {
@@ -90,17 +91,18 @@ std::string class_header_formatter::formatter_name() const {
 boost::filesystem::path class_header_formatter::
 make_file_name(const settings::global_settings& gs,
     const sml::qname& qn) const {
-    name_builder b;
+    formattables::name_builder b;
     return b.header_file_name(gs, qn);
 }
 
-std::shared_ptr<includes_builder_interface>
+std::shared_ptr<formattables::includes_builder_interface>
 class_header_formatter::make_includes_builder() const {
     return std::make_shared<includes_builder>();
 }
 
-dogen::formatters::file class_header_formatter::
-format(const settings::global_settings& gs, const class_info& c) const {
+dogen::formatters::file
+class_header_formatter::format(const settings::global_settings& gs,
+    const formattables::class_info& c) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 

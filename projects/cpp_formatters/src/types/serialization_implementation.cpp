@@ -24,9 +24,9 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
@@ -70,7 +70,8 @@ create(std::ostream& stream, const bool disable_xml_serialization,
             disable_eos_serialization));
 }
 
-void serialization_implementation::save_function(const cpp::class_info& ci) {
+void serialization_implementation::save_function(
+    const cpp::formattables::class_info& ci) {
     const auto parents(ci.parents());
     const auto props(ci.properties());
     const bool has_properties(!props.empty());
@@ -132,7 +133,8 @@ void serialization_implementation::save_function(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void serialization_implementation::load_function(const cpp::class_info& ci) {
+void serialization_implementation::load_function(
+    const cpp::formattables::class_info& ci) {
     const auto parents(ci.parents());
     const auto props(ci.properties());
     const bool has_properties(!props.empty());
@@ -210,7 +212,7 @@ void serialization_implementation::load_function(const cpp::class_info& ci) {
 }
 
 void serialization_implementation::
-template_instantiations(const cpp::class_info& ci) {
+template_instantiations(const cpp::formattables::class_info& ci) {
     stream_ << indenter_ << "template void save("
             << "archive::polymorphic_oarchive& ar, const ";
     qname qname(stream_);
@@ -265,14 +267,17 @@ template_instantiations(const cpp::class_info& ci) {
     }
 }
 
-void serialization_implementation::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void serialization_implementation::format_class(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
+
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     qname qname(stream_);
     if (ci.is_parent() || !ci.parents().empty()) {
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
@@ -306,13 +311,14 @@ void serialization_implementation::format_class(const cpp::file_info& f) {
 }
 
 void serialization_implementation::
-format_enumeration(const cpp::file_info&) {
+format_enumeration(const cpp::formattables::file_info&) {
     BOOST_LOG_SEV(lg, error) << enum_info_not_supported;
     BOOST_THROW_EXCEPTION(
         formatting_error(enum_info_not_supported));
 }
 
-void serialization_implementation::format(const cpp::file_info& f) {
+void serialization_implementation::format(
+    const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
@@ -320,7 +326,7 @@ void serialization_implementation::format(const cpp::file_info& f) {
     includes.format(f);
     utility_.blank_line();
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

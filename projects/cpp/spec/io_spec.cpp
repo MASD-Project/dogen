@@ -41,22 +41,22 @@ BOOST_AUTO_TEST_SUITE(io)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
-    test_io<aspect_types_generator>();
-    test_io<file_types_generator>();
-    test_io<class_info_generator>();
-    test_io<cmakelists_info_generator>();
-    test_io<enum_info_generator>();
-    test_io<enumerator_info_generator>();
-    test_io<exception_info_generator>();
-    test_io<file_info_generator>();
-    test_io<namespace_info_generator>();
-    test_io<nested_type_info_generator>();
-    test_io<odb_options_info_generator>();
-    test_io<parent_info_generator>();
-    test_io<property_info_generator>();
-    test_io<registrar_info_generator>();
-    test_io<visitor_info_generator>();
-    test_io<includes_generator>();
+    test_io<formattables::aspect_types_generator>();
+    test_io<formattables::file_types_generator>();
+    test_io<formattables::class_info_generator>();
+    test_io<formattables::cmakelists_info_generator>();
+    test_io<formattables::enum_info_generator>();
+    test_io<formattables::enumerator_info_generator>();
+    test_io<formattables::exception_info_generator>();
+    test_io<formattables::file_info_generator>();
+    test_io<formattables::namespace_info_generator>();
+    test_io<formattables::nested_type_info_generator>();
+    test_io<formattables::odb_options_info_generator>();
+    test_io<formattables::parent_info_generator>();
+    test_io<formattables::property_info_generator>();
+    test_io<formattables::registrar_info_generator>();
+    test_io<formattables::visitor_info_generator>();
+    test_io<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

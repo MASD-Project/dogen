@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
+#include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp_formatters/types/factory.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -46,7 +46,8 @@ namespace cpp_formatters {
 workflow::workflow(const config::formatting_settings& s) : settings_(s) { }
 
 workflow::result_type
-workflow::format_cmakelists_activity(const cpp::project& p) const {
+workflow::format_cmakelists_activity(
+    const cpp::formattables::project& p) const {
     const auto src_path(p.src_cmakelists().file_path());
     BOOST_LOG_SEV(lg, debug) << "Formatting: " << src_path.string();
 
@@ -75,7 +76,8 @@ workflow::format_cmakelists_activity(const cpp::project& p) const {
 }
 
 workflow::result_entry_type
-workflow::format_odb_options_activity(const cpp::project& p) const {
+workflow::format_odb_options_activity(
+    const cpp::formattables::project& p) const {
     const auto path(p.odb_options().file_path());
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << path.string();
 
@@ -87,7 +89,8 @@ workflow::format_odb_options_activity(const cpp::project& p) const {
 }
 
 workflow::result_type
-workflow::format_file_infos_activity(const cpp::project& p) const {
+workflow::format_file_infos_activity(
+    const cpp::formattables::project& p) const {
     workflow::result_type r;
 
     for (const auto f : p.files()) {
@@ -104,7 +107,7 @@ workflow::format_file_infos_activity(const cpp::project& p) const {
     return r;
 }
 
-workflow::result_type workflow::execute(const cpp::project& p) {
+workflow::result_type workflow::execute(const cpp::formattables::project& p) {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
     workflow::result_type r(format_file_infos_activity(p));

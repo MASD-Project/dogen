@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/config/types/formatting_settings.hpp"
-#include "dogen/cpp/types/content_descriptor.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
 namespace dogen {
@@ -49,16 +49,16 @@ public:
 
 private:
     result_type create_main_formatter(std::ostream& s,
-        const cpp::content_descriptor& cd) const;
+        const cpp::formattables::content_descriptor& cd) const;
 
     result_type create_registrar_formatter(
-        std::ostream& s, const cpp::content_descriptor& cd) const;
+        std::ostream& s, const cpp::formattables::content_descriptor& cd) const;
 
     result_type create_null_formatter(std::ostream& s) const;
 
 public:
     result_type create(std::ostream& s,
-        const cpp::content_descriptor& cd) const;
+        const cpp::formattables::content_descriptor& cd) const;
 
 private:
     const config::formatting_settings settings_;

@@ -20,7 +20,7 @@
  */
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
@@ -44,8 +44,9 @@ create(std::ostream& stream) {
     return file_formatter::shared_ptr(new facet_includer(stream));
 }
 
-void facet_includer::format(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void facet_includer::format(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (o)
         BOOST_THROW_EXCEPTION(formatting_error(unexpected_class_info));
 

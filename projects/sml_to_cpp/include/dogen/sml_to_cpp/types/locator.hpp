@@ -31,9 +31,9 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/cpp/types/content_descriptor.hpp"
-#include "dogen/cpp/types/file_types.hpp"
-#include "dogen/cpp/types/aspect_types.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
+#include "dogen/cpp/types/formattables/file_types.hpp"
+#include "dogen/cpp/types/formattables/aspect_types.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -73,17 +73,17 @@ private:
      * @brief Returns a postfix to append to filenames that implement
      * a certain aspect.
      */
-    std::string aspect_postfix(const cpp::aspect_types at) const;
+    std::string aspect_postfix(const cpp::formattables::aspect_types at) const;
 
     /**
      * @brief Returns the directory for the given file type.
      */
-    path file_type_directory(const cpp::file_types flt) const;
+    path file_type_directory(const cpp::formattables::file_types flt) const;
 
     /**
      * @brief Returns the extension for the given file type.
      */
-    std::string extension(const cpp::file_types flt) const;
+    std::string extension(const cpp::formattables::file_types flt) const;
 
 public:
     /**
@@ -94,7 +94,8 @@ public:
      * are used for include files; they need to take into account
      * existing namespaces the user may have already defined.
      */
-    path relative_logical_path(const cpp::content_descriptor& cd) const;
+    path
+    relative_logical_path(const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns the path to place a file with content described
@@ -104,13 +105,14 @@ public:
      * source or include directories, the physical path matches the
      * location on the hard drive for the artefact in question.
      */
-    path relative_physical_path(const cpp::content_descriptor& cd) const;
+    path relative_physical_path(
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns the absolute path for the descriptor, taking
      * into account source and include directories, etc.
      */
-    path absolute_path(const cpp::content_descriptor& cd) const;
+    path absolute_path(const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns an absolute path into the source directory for

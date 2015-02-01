@@ -82,15 +82,15 @@ void includer::register_header(config::cpp_facet_types ft,
 }
 
 std::string includer::domain_header_dependency(const sml::qname& name,
-    const cpp::aspect_types at) const {
+    const cpp::formattables::aspect_types at) const {
     return header_dependency(name, config::cpp_facet_types::types, at);
 }
 
 std::string includer::header_dependency(
     const sml::qname& name, config::cpp_facet_types facet_type,
-    const cpp::aspect_types at) const {
-    cpp::content_descriptor cd;
-    using cpp::file_types;
+    const cpp::formattables::aspect_types at) const {
+    cpp::formattables::content_descriptor cd;
+    using cpp::formattables::file_types;
     cd.file_type(file_types::header);
     cd.facet_type(facet_type);
     cd.aspect_type(at);
@@ -100,10 +100,11 @@ std::string includer::header_dependency(
 
 void includer::
 append_implementation_dependencies(const relationships& rel,
-    const cpp::content_descriptor& cd, cpp::includes& inc) const {
+    const cpp::formattables::content_descriptor& cd,
+    cpp::formattables::includes& inc) const {
 
     using config::cpp_facet_types;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
 
     /*
      * STL
@@ -200,11 +201,12 @@ append_implementation_dependencies(const relationships& rel,
 }
 
 void includer::append_boost_dependencies(const relationships& rel,
-    const cpp::content_descriptor& cd, cpp::includes& inc) const {
+    const cpp::formattables::content_descriptor& cd,
+    cpp::formattables::includes& inc) const {
 
     const auto sn(cd.name().simple_name());
     using config::cpp_facet_types;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
 
     const bool is_serialization(
         cd.facet_type() == cpp_facet_types::serialization);
@@ -345,12 +347,13 @@ void includer::append_boost_dependencies(const relationships& rel,
     }
 }
 
-void includer::append_std_dependencies(const cpp::content_descriptor& cd,
-    cpp::includes& inc) const {
+void includer::
+append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+    cpp::formattables::includes& inc) const {
 
     const std::string sn(cd.name().simple_name());
     using config::cpp_facet_types;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
 
     /*
      * std::string
@@ -457,13 +460,14 @@ void includer::append_std_dependencies(const cpp::content_descriptor& cd,
 }
 
 void includer::append_relationship_dependencies(const relationships& rel,
-    const cpp::content_descriptor& cd, cpp::includes& inc) const {
+    const cpp::formattables::content_descriptor& cd,
+    cpp::formattables::includes& inc) const {
 
     auto names(rel.names());
     using config::cpp_facet_types;
-    using cpp::file_types;
-    using cpp::aspect_types;
-    using cpp::content_types;
+    using cpp::formattables::file_types;
+    using cpp::formattables::aspect_types;
+    using cpp::formattables::content_types;
 
     const bool is_header(cd.file_type() == file_types::header);
     const bool is_types(cd.facet_type() == cpp_facet_types::types);
@@ -618,12 +622,13 @@ void includer::append_relationship_dependencies(const relationships& rel,
     }
 }
 
-void includer::append_self_dependencies(const cpp::content_descriptor& cd,
-    cpp::includes& inc) const {
+void includer::
+append_self_dependencies(const cpp::formattables::content_descriptor& cd,
+    cpp::formattables::includes& inc) const {
     using config::cpp_facet_types;
-    using cpp::file_types;
-    using cpp::aspect_types;
-    using cpp::content_types;
+    using cpp::formattables::file_types;
+    using cpp::formattables::aspect_types;
+    using cpp::formattables::content_types;
 
     const bool is_header(cd.file_type() == file_types::header);
     const bool is_types(cd.facet_type() == cpp_facet_types::types);
@@ -670,27 +675,27 @@ void includer::append_self_dependencies(const cpp::content_descriptor& cd,
     }
 }
 
-void includer::remove_duplicates(cpp::includes& inc) const {
+void includer::remove_duplicates(cpp::formattables::includes& inc) const {
     inc.system().sort();
     inc.system().unique();
     inc.user().sort();
     inc.user().unique();
 }
 
-cpp::includes includer::
-includes_for_includer_files(const cpp::content_descriptor& cd) const {
-    cpp::includes r;
+cpp::formattables::includes includer::includes_for_includer_files(
+    const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::includes r;
     const auto i(headers_for_facet_.find(cd.facet_type()));
     if (i != headers_for_facet_.end())
         r.user(i->second);
     return r;
 }
 
-cpp::includes includer::
-includes_for_enumeration(const cpp::content_descriptor& cd) const {
-    cpp::includes r;
+cpp::formattables::includes includer::includes_for_enumeration(
+    const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::includes r;
 
-    using cpp::file_types;
+    using cpp::formattables::file_types;
 
     const auto ft(cd.facet_type());
     const auto flt(cd.file_type());
@@ -726,9 +731,9 @@ includes_for_enumeration(const cpp::content_descriptor& cd) const {
     return r;
 }
 
-cpp::includes includer::
-includes_for_exception(const cpp::content_descriptor& cd) const {
-    cpp::includes r;
+cpp::formattables::includes includer::
+includes_for_exception(const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::includes r;
 
     const auto ft(cd.facet_type());
     const auto flt(cd.file_type());
@@ -736,7 +741,7 @@ includes_for_exception(const cpp::content_descriptor& cd) const {
 
     // exception info
     using config::cpp_facet_types;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
     const bool is_header(flt == file_types::header);
     const bool is_types(ft == cpp_facet_types::types);
     if (is_header && is_types)
@@ -750,17 +755,17 @@ includes_for_exception(const cpp::content_descriptor& cd) const {
     return r;
 }
 
-cpp::includes
-includer::includes_for_registrar(const cpp::content_descriptor& cd) const {
-    cpp::includes r;
+cpp::formattables::includes includer::includes_for_registrar(
+    const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::includes r;
 
-    using cpp::file_types;
+    using cpp::formattables::file_types;
     const auto flt(cd.file_type());
     if (flt == file_types::header)
         return r;
 
     using config::cpp_facet_types;
-    using cpp::aspect_types;
+    using cpp::formattables::aspect_types;
     const auto main(aspect_types::main);
     const auto ft(cpp_facet_types::serialization);
     for (const auto& l : model_.leaves())
@@ -797,10 +802,11 @@ includer::includes_for_registrar(const cpp::content_descriptor& cd) const {
     return r;
 }
 
-cpp::includes includer::includes_for_visitor(const cpp::content_descriptor& cd,
+cpp::formattables::includes includer::includes_for_visitor(
+    const cpp::formattables::content_descriptor& cd,
     const relationships& rel) const {
-    cpp::includes r;
-    using cpp::aspect_types;
+    cpp::formattables::includes r;
+    using cpp::formattables::aspect_types;
     const auto ft(cd.facet_type());
     for(const auto n : rel.names()) {
         // we need to override the aspect requested by the content
@@ -813,10 +819,11 @@ cpp::includes includer::includes_for_visitor(const cpp::content_descriptor& cd,
     return r;
 }
 
-cpp::includes includer::includes_for_object(
-    const cpp::content_descriptor& cd, const relationships& rel) const {
-    cpp::includes r;
-    using cpp::aspect_types;
+cpp::formattables::includes includer::includes_for_object(
+    const cpp::formattables::content_descriptor& cd,
+    const relationships& rel) const {
+    cpp::formattables::includes r;
+    using cpp::formattables::aspect_types;
     if (cd.aspect_type() == aspect_types::forward_decls) {
         append_self_dependencies(cd, r);
         return r;

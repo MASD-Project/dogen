@@ -128,11 +128,11 @@ facet_postfix(const config::cpp_facet_types ft) const {
 }
 
 std::string
-locator::aspect_postfix(const cpp::aspect_types at) const {
+locator::aspect_postfix(const cpp::formattables::aspect_types at) const {
     if (settings_.disable_unique_file_names())
         return empty;
 
-    using cpp::aspect_types;
+    using cpp::formattables::aspect_types;
     switch(at) {
     case aspect_types::forward_decls: return forward_decls_postfix; break;
     case aspect_types::main:
@@ -145,8 +145,8 @@ locator::aspect_postfix(const cpp::aspect_types at) const {
 }
 
 boost::filesystem::path
-locator::file_type_directory(const cpp::file_types flt) const {
-    using cpp::file_types;
+locator::file_type_directory(const cpp::formattables::file_types flt) const {
+    using cpp::formattables::file_types;
     switch(flt) {
     case file_types::header: return include_directory_; break;
     case file_types::implementation: return source_directory_; break;
@@ -156,8 +156,8 @@ locator::file_type_directory(const cpp::file_types flt) const {
     }
 }
 
-std::string locator::extension(const cpp::file_types flt) const {
-    using cpp::file_types;
+std::string locator::extension(const cpp::formattables::file_types flt) const {
+    using cpp::formattables::file_types;
     switch(flt) {
     case file_types::header: return settings_.header_extension(); break;
     case file_types::implementation:
@@ -169,7 +169,7 @@ std::string locator::extension(const cpp::file_types flt) const {
 }
 
 boost::filesystem::path locator::relative_logical_path(
-    const cpp::content_descriptor& cd) const {
+    const cpp::formattables::content_descriptor& cd) const {
     boost::filesystem::path r;
 
     if (settings_.split_project()) {
@@ -182,9 +182,9 @@ boost::filesystem::path locator::relative_logical_path(
 }
 
 boost::filesystem::path locator::relative_physical_path(
-    const cpp::content_descriptor& cd) const {
+    const cpp::formattables::content_descriptor& cd) const {
     boost::filesystem::path r;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
     if (settings_.split_project())
         r /= cd.name().model_name();
     else if (cd.file_type() == file_types::header) {
@@ -208,7 +208,7 @@ boost::filesystem::path locator::relative_physical_path(
 }
 
 boost::filesystem::path
-locator::absolute_path(const cpp::content_descriptor& cd) const {
+locator::absolute_path(const cpp::formattables::content_descriptor& cd) const {
 
     auto r(file_type_directory(cd.file_type()));
     r /= relative_physical_path(cd);

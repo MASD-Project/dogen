@@ -27,8 +27,8 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/property_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 
@@ -51,29 +51,29 @@ public:
 
 private:
     void non_object_getters_and_setters(const std::string class_name,
-        const cpp::property_info& pi);
+        const cpp::formattables::property_info& pi);
     void object_getters_and_setters(const std::string class_name,
-        const cpp::property_info& pi);
+        const cpp::formattables::property_info& pi);
 
-    void open_class(const cpp::class_info& ci);
+    void open_class(const cpp::formattables::class_info& ci);
     void close_class();
 
-    void hand_crafted_constructors(const cpp::class_info& ci);
-    void visitor_method(const cpp::class_info& ci);
-    void compiler_generated_constuctors(const cpp::class_info& ci);
-    void default_constructor(const cpp::class_info& ci);
-    void move_constructor(const cpp::class_info& ci);
-    void complete_constructor(const cpp::class_info& ci);
-    void destructor(const cpp::class_info& ci);
-    void friends(const cpp::class_info& ci);
-    void getters_and_setters(const cpp::class_info& ci);
-    void member_variables(const cpp::class_info& ci);
-    void equality(const cpp::class_info& ci);
-    void to_stream(const cpp::class_info& ci);
-    void swap_and_assignment(const cpp::class_info& ci);
+    void hand_crafted_constructors(const cpp::formattables::class_info& ci);
+    void visitor_method(const cpp::formattables::class_info& ci);
+    void compiler_generated_constuctors(const cpp::formattables::class_info& ci);
+    void default_constructor(const cpp::formattables::class_info& ci);
+    void move_constructor(const cpp::formattables::class_info& ci);
+    void complete_constructor(const cpp::formattables::class_info& ci);
+    void destructor(const cpp::formattables::class_info& ci);
+    void friends(const cpp::formattables::class_info& ci);
+    void getters_and_setters(const cpp::formattables::class_info& ci);
+    void member_variables(const cpp::formattables::class_info& ci);
+    void equality(const cpp::formattables::class_info& ci);
+    void to_stream(const cpp::formattables::class_info& ci);
+    void swap_and_assignment(const cpp::formattables::class_info& ci);
 
 public:
-    void format(const cpp::class_info& ci);
+    void format(const cpp::formattables::class_info& ci);
 
 protected:
     std::ostream& stream_;

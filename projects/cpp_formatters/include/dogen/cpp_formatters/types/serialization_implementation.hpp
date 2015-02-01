@@ -27,10 +27,10 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/cpp_formatters/types/indenter.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
 namespace dogen {
@@ -56,16 +56,16 @@ public:
         const bool disable_eos_serialization);
 
 private:
-    void save_function(const cpp::class_info& ci);
-    void load_function(const cpp::class_info& ci);
-    void template_instantiations(const cpp::class_info& ci);
+    void save_function(const cpp::formattables::class_info& ci);
+    void load_function(const cpp::formattables::class_info& ci);
+    void template_instantiations(const cpp::formattables::class_info& ci);
 
 private:
-    void format_class(const cpp::file_info& f);
-    void format_enumeration(const cpp::file_info& f);
+    void format_class(const cpp::formattables::file_info& f);
+    void format_enumeration(const cpp::formattables::file_info& f);
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;
@@ -78,3 +78,4 @@ private:
 } }
 
 #endif
+

@@ -28,11 +28,11 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/cpp/types/nested_type_info.hpp"
-#include "dogen/cpp_formatters/types/indenter.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
 namespace dogen {
@@ -55,18 +55,18 @@ public:
 
 private:
     void sequence_container_helper(
-        const cpp::nested_type_info& nti, unsigned int quantity);
+        const cpp::formattables::nested_type_info& nti, unsigned int quantity);
     void associative_container_helper(
-        const cpp::nested_type_info& nti, unsigned int quantity);
-    void smart_pointer_helper(const cpp::nested_type_info& nti);
-    void optional_helper(const cpp::nested_type_info& nti);
-    void pair_helper(const cpp::nested_type_info& nti);
-    void variant_helper(const cpp::nested_type_info& nti);
-    void filesystem_path_helper(const cpp::nested_type_info& nti);
-    void date_helper(const cpp::nested_type_info& nti);
-    void ptime_helper(const cpp::nested_type_info& nti);
-    void time_duration_helper(const cpp::nested_type_info& nti);
-    void ptree_helper(const cpp::nested_type_info& nti);
+        const cpp::formattables::nested_type_info& nti, unsigned int quantity);
+    void smart_pointer_helper(const cpp::formattables::nested_type_info& nti);
+    void optional_helper(const cpp::formattables::nested_type_info& nti);
+    void pair_helper(const cpp::formattables::nested_type_info& nti);
+    void variant_helper(const cpp::formattables::nested_type_info& nti);
+    void filesystem_path_helper(const cpp::formattables::nested_type_info& nti);
+    void date_helper(const cpp::formattables::nested_type_info& nti);
+    void ptime_helper(const cpp::formattables::nested_type_info& nti);
+    void time_duration_helper(const cpp::formattables::nested_type_info& nti);
+    void ptree_helper(const cpp::formattables::nested_type_info& nti);
 
     void composite_domain_type_helper(const std::string& identifiable_type_name,
         const std::string& type_name, bool as_pointer);
@@ -79,23 +79,23 @@ private:
     void int_like_helper(const std::string& identifiable_type_name,
         const std::string& type_name);
     void recursive_helper_method_creator(const std::string& owner_name,
-        const cpp::nested_type_info& nti,
+        const cpp::formattables::nested_type_info& nti,
         std::unordered_set<std::string>& types_done, bool as_pointer);
-    void create_helper_methods(const cpp::class_info& ci);
+    void create_helper_methods(const cpp::formattables::class_info& ci);
 
 private:
-    void populate_method(const cpp::class_info& ci);
-    void create_method(const cpp::class_info& ci);
-    void create_method_ptr(const cpp::class_info& ci);
-    void function_operator(const cpp::class_info& ci);
-    void default_constructor(const cpp::class_info& ci);
+    void populate_method(const cpp::formattables::class_info& ci);
+    void create_method(const cpp::formattables::class_info& ci);
+    void create_method_ptr(const cpp::formattables::class_info& ci);
+    void function_operator(const cpp::formattables::class_info& ci);
+    void default_constructor(const cpp::formattables::class_info& ci);
 
 private:
-    void format_class(const cpp::file_info& f);
-    void format_enumeration(const cpp::file_info& f);
+    void format_class(const cpp::formattables::file_info& f);
+    void format_enumeration(const cpp::formattables::file_info& f);
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;

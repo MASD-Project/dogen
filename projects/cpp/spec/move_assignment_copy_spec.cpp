@@ -41,22 +41,22 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<aspect_types_generator>();
-    test_move_assignment_copy<file_types_generator>();
-    test_move_assignment_copy<class_info_generator>();
-    test_move_assignment_copy<cmakelists_info_generator>();
-    test_move_assignment_copy<enum_info_generator>();
-    test_move_assignment_copy<enumerator_info_generator>();
-    test_move_assignment_copy<exception_info_generator>();
-    test_move_assignment_copy<file_info_generator>();
-    test_move_assignment_copy<namespace_info_generator>();
-    test_move_assignment_copy<nested_type_info_generator>();
-    test_move_assignment_copy<odb_options_info_generator>();
-    test_move_assignment_copy<parent_info_generator>();
-    test_move_assignment_copy<property_info_generator>();
-    test_move_assignment_copy<registrar_info_generator>();
-    test_move_assignment_copy<visitor_info_generator>();
-    test_move_assignment_copy<includes_generator>();
+    test_move_assignment_copy<formattables::aspect_types_generator>();
+    test_move_assignment_copy<formattables::file_types_generator>();
+    test_move_assignment_copy<formattables::class_info_generator>();
+    test_move_assignment_copy<formattables::cmakelists_info_generator>();
+    test_move_assignment_copy<formattables::enum_info_generator>();
+    test_move_assignment_copy<formattables::enumerator_info_generator>();
+    test_move_assignment_copy<formattables::exception_info_generator>();
+    test_move_assignment_copy<formattables::file_info_generator>();
+    test_move_assignment_copy<formattables::namespace_info_generator>();
+    test_move_assignment_copy<formattables::nested_type_info_generator>();
+    test_move_assignment_copy<formattables::odb_options_info_generator>();
+    test_move_assignment_copy<formattables::parent_info_generator>();
+    test_move_assignment_copy<formattables::property_info_generator>();
+    test_move_assignment_copy<formattables::registrar_info_generator>();
+    test_move_assignment_copy<formattables::visitor_info_generator>();
+    test_move_assignment_copy<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

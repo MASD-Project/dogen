@@ -22,8 +22,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/io/content_types_io.hpp"
-#include "dogen/cpp/types/building_error.hpp"
+#include "dogen/cpp/io/formattables/content_types_io.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/sml_to_cpp/types/file_info_factory.hpp"
 
 using namespace dogen::utility::log;
@@ -58,77 +58,82 @@ to_header_guard_name(const boost::filesystem::path& rp) const {
     return stream.str();
 }
 
-cpp::file_info file_info_factory::
-create(const cpp::content_descriptor& cd) const {
-    cpp::file_info r;
+cpp::formattables::file_info file_info_factory::
+create(const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::file_info r;
     r.descriptor(cd);
     r.file_path(locator_.absolute_path(cd));
 
     const auto rp(locator_.relative_logical_path(cd));
     r.relative_path(rp);
-    if (cd.file_type() == cpp::file_types::header)
+    if (cd.file_type() == cpp::formattables::file_types::header)
         r.header_guard(to_header_guard_name(rp));
 
     return r;
 }
 
-cpp::file_info file_info_factory::
-create(boost::shared_ptr<cpp::enum_info> ei, const cpp::content_descriptor& cd,
-    const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create(boost::shared_ptr<cpp::formattables::enum_info> ei,
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(ei);
     r.includes(inc);
     return r;
 }
 
-cpp::file_info file_info_factory::
-create(boost::shared_ptr<cpp::exception_info> ei,
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create(boost::shared_ptr<cpp::formattables::exception_info> ei,
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(ei);
     r.includes(inc);
     return r;
 }
 
-cpp::file_info file_info_factory::
-create(boost::shared_ptr<cpp::namespace_info> ni,
-    const cpp::content_descriptor& cd) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create(boost::shared_ptr<cpp::formattables::namespace_info> ni,
+    const cpp::formattables::content_descriptor& cd) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(ni);
     return r;
 }
 
-cpp::file_info file_info_factory::
-create(boost::shared_ptr<cpp::class_info> ci, const cpp::content_descriptor& cd,
-    const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create(boost::shared_ptr<cpp::formattables::class_info> ci,
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(ci);
     r.includes(inc);
     return r;
 }
 
-cpp::file_info file_info_factory::create_includer(
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
-    r.descriptor().content_type(cpp::content_types::includer);
+cpp::formattables::file_info file_info_factory::create_includer(
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
+    r.descriptor().content_type(cpp::formattables::content_types::includer);
     r.includes(inc);
     return r;
 }
 
-cpp::file_info file_info_factory::
-create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
-    const cpp::content_descriptor& cd, const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create_registrar(boost::shared_ptr<cpp::formattables::registrar_info> ri,
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(ri);
     r.includes(inc);
     return r;
 }
 
-cpp::file_info file_info_factory::
-create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
-    const cpp::content_descriptor& cd,
-    const cpp::includes& inc) const {
-    cpp::file_info r(create(cd));
+cpp::formattables::file_info file_info_factory::
+create_visitor(boost::shared_ptr<cpp::formattables::visitor_info> vi,
+    const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::includes& inc) const {
+    cpp::formattables::file_info r(create(cd));
     r.entity(vi);
     r.includes(inc);
     return r;

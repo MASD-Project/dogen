@@ -34,16 +34,16 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/cpp/types/content_descriptor_factory.hpp"
-#include "dogen/cpp/types/cmakelists_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/formattables/project.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor_factory.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/sml_to_cpp/types/transformer.hpp"
 #include "dogen/sml_to_cpp/types/extractor.hpp"
 #include "dogen/sml_to_cpp/types/context.hpp"
 #include "dogen/sml_to_cpp/types/file_info_factory.hpp"
-#include "dogen/cpp/types/project.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -100,69 +100,72 @@ private:
     /**
      * @brief Register the file with registrar, if it's a header file.
      */
-    void register_header(const cpp::file_info& fi) const;
+    void register_header(const cpp::formattables::file_info& fi) const;
 
     /**
      * @brief Generate C++ files for classes.
      */
-    std::list<cpp::file_info> generate_file_infos_for_classes_activity() const;
+    std::list<cpp::formattables::file_info>
+        generate_file_infos_for_classes_activity() const;
 
     /**
      * @brief Generate C++ files for classes.
      */
-    std::list<cpp::file_info>
+    std::list<cpp::formattables::file_info>
         generate_file_infos_for_namespaces_activity() const;
 
     /**
      * @brief Generate C++ files for registrars.
      */
-    std::list<cpp::file_info> generate_registrars_activity() const;
+    std::list<cpp::formattables::file_info>
+        generate_registrars_activity() const;
 
     /**
      * @brief Generate C++ files for includers.
      */
-    std::list<cpp::file_info> generate_includers_activity() const;
+    std::list<cpp::formattables::file_info> generate_includers_activity() const;
 
     /**
      * @brief Generate C++ files for visitors.
      */
-    std::list<cpp::file_info> generate_visitors_activity() const;
+    std::list<cpp::formattables::file_info> generate_visitors_activity() const;
 
     /**
      * @brief Generate C++ files for enumerations.
      */
-    std::list<cpp::file_info> generate_enums_activity() const;
+    std::list<cpp::formattables::file_info> generate_enums_activity() const;
 
     /**
      * @brief Generate C++ files for exceptions.
      */
-    std::list<cpp::file_info> generate_exceptions_activity() const;
+    std::list<cpp::formattables::file_info>
+        generate_exceptions_activity() const;
 
     /**
      * @brief Create the cmakelists makefiles.
      */
-    void generate_cmakelists_activity(cpp::project& p) const;
+    void generate_cmakelists_activity(cpp::formattables::project& p) const;
 
     /**
      * @brief Creates the ODB compiler options file.
      */
-    void generate_odb_options_activity(cpp::project& p) const;
+    void generate_odb_options_activity(cpp::formattables::project& p) const;
 
     /**
      * @brief Generate all C++ files.
      */
-    void generate_file_infos_activity(cpp::project& p) const;
+    void generate_file_infos_activity(cpp::formattables::project& p) const;
 
     /**
      * @brief Perform the generation sub-workflow.
      */
-    cpp::project generation_sub_workflow();
+    cpp::formattables::project generation_sub_workflow();
 
 public:
     /**
      * @brief Execute the workflow.
      */
-    cpp::project execute();
+    cpp::formattables::project execute();
 
     /**
      * @brief Returns the directories managed by this workflow.
@@ -179,7 +182,7 @@ private:
     mutable includer includer_;
     const file_info_factory file_info_factory_;
     transformer transformer_;
-    const cpp::content_descriptor_factory descriptor_factory_;
+    const cpp::formattables::content_descriptor_factory descriptor_factory_;
     const extractor extractor_;
 };
 

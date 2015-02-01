@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
@@ -66,7 +66,8 @@ file_formatter::shared_ptr io_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_implementation(stream));
 }
 
-void io_implementation::io_helper_methods(const cpp::class_info& ci) {
+void io_implementation::io_helper_methods(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent() || !ci.parents().empty())
         return;
 
@@ -75,8 +76,11 @@ void io_implementation::io_helper_methods(const cpp::class_info& ci) {
     i.format_helper_methods(ci);
 }
 
-void io_implementation::format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+void io_implementation::format_enumeration(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
+
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -139,14 +143,15 @@ void io_implementation::format_enumeration(const cpp::file_info& f) {
     utility_.blank_line();
 }
 
-void io_implementation::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void io_implementation::format_class(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     io_helper_methods(ci);
 
     namespace_helper ns_helper(stream_, ci.namespaces());
@@ -174,14 +179,14 @@ void io_implementation::format_class(const cpp::file_info& f) {
     utility_.blank_line();
 }
 
-void io_implementation::format(const cpp::file_info& f) {
+void io_implementation::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

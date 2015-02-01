@@ -31,9 +31,9 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/cpp/types/project.hpp"
+#include "dogen/config/types/formatting_settings.hpp"
+#include "dogen/cpp/types/formattables/project.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -61,23 +61,26 @@ private:
     /**
      * @brief Create the cmakelists makefiles.
      */
-    result_type format_cmakelists_activity(const cpp::project& p) const;
+    result_type
+        format_cmakelists_activity(const cpp::formattables::project& p) const;
 
     /**
      * @brief Creates the ODB compiler options file.
      */
-    result_entry_type format_odb_options_activity(const cpp::project& p) const;
+    result_entry_type
+        format_odb_options_activity(const cpp::formattables::project& p) const;
 
     /**
      * @brief Generate all C++ files.
      */
-    result_type format_file_infos_activity(const cpp::project& p) const;
+    result_type
+        format_file_infos_activity(const cpp::formattables::project& p) const;
 
 public:
     /**
      * @brief Execute the workflow.
      */
-    result_type execute(const cpp::project& p);
+    result_type execute(const cpp::formattables::project& p);
 
 private:
     const config::formatting_settings settings_;

@@ -41,22 +41,22 @@ BOOST_AUTO_TEST_SUITE(swap)
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
-    test_swap<aspect_types_generator>();
-    test_swap<file_types_generator>();
-    test_swap<class_info_generator>();
-    test_swap<cmakelists_info_generator>();
-    test_swap<enum_info_generator>();
-    test_swap<enumerator_info_generator>();
-    test_swap<exception_info_generator>();
-    test_swap<file_info_generator>();
-    test_swap<namespace_info_generator>();
-    test_swap<nested_type_info_generator>();
-    test_swap<odb_options_info_generator>();
-    test_swap<parent_info_generator>();
-    test_swap<property_info_generator>();
-    test_swap<registrar_info_generator>();
-    test_swap<visitor_info_generator>();
-    test_swap<includes_generator>();
+    test_swap<formattables::aspect_types_generator>();
+    test_swap<formattables::file_types_generator>();
+    test_swap<formattables::class_info_generator>();
+    test_swap<formattables::cmakelists_info_generator>();
+    test_swap<formattables::enum_info_generator>();
+    test_swap<formattables::enumerator_info_generator>();
+    test_swap<formattables::exception_info_generator>();
+    test_swap<formattables::file_info_generator>();
+    test_swap<formattables::namespace_info_generator>();
+    test_swap<formattables::nested_type_info_generator>();
+    test_swap<formattables::odb_options_info_generator>();
+    test_swap<formattables::parent_info_generator>();
+    test_swap<formattables::property_info_generator>();
+    test_swap<formattables::registrar_info_generator>();
+    test_swap<formattables::visitor_info_generator>();
+    test_swap<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

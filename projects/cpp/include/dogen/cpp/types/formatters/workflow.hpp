@@ -49,7 +49,8 @@ public:
      * @brief Converts the supplied entity into all supported
      * representations.
      */
-    std::forward_list<dogen::formatters::file> format(const entity& e) const;
+    std::forward_list<dogen::formatters::file>
+    format(const formattables::entity& e) const;
 
 private:
     const std::forward_list<facet>& facets_;

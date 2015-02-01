@@ -35,7 +35,7 @@ namespace cpp_formatters {
 
 odb_options::odb_options(std::ostream& stream) : stream_(stream) {}
 
-void odb_options::format(const cpp::odb_options_info& ooi) {
+void odb_options::format(const cpp::formattables::odb_options_info& ooi) {
     const std::string mn(ooi.model_name().empty() ?
         unnamed_model :
         ooi.model_name());

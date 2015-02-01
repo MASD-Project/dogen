@@ -23,9 +23,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/file_types_io.hpp"
-#include "dogen/cpp/io/content_types_io.hpp"
-#include "dogen/cpp/io/aspect_types_io.hpp"
+#include "dogen/cpp/io/formattables/file_types_io.hpp"
+#include "dogen/cpp/io/formattables/aspect_types_io.hpp"
+#include "dogen/cpp/io/formattables/content_types_io.hpp"
 #include "dogen/cpp_formatters/types/production_failure.hpp"
 #include "dogen/cpp_formatters/types/facet_includer.hpp"
 #include "dogen/cpp_formatters/types/types_main_header_file_formatter.hpp"
@@ -73,10 +73,10 @@ factory::factory(const config::formatting_settings& s)
               config::cpp_facet_types::serialization)) { }
 
 factory::result_type factory::create_main_formatter(std::ostream& s,
-    const cpp::content_descriptor& cd) const {
+    const cpp::formattables::content_descriptor& cd) const {
 
     using config::cpp_facet_types;
-    using cpp::file_types;
+    using cpp::formattables::file_types;
     switch (cd.facet_type()) {
     case cpp_facet_types::types:
         if (cd.file_type() == file_types::header)
@@ -130,9 +130,9 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
 }
 
 factory::result_type factory::create_registrar_formatter(
-    std::ostream& s, const cpp::content_descriptor& cd) const {
+    std::ostream& s, const cpp::formattables::content_descriptor& cd) const {
 
-    using cpp::file_types;
+    using cpp::formattables::file_types;
     switch (cd.file_type()) {
     case file_types::header:
         return registrar_header::create(s);
@@ -156,11 +156,11 @@ factory::result_type factory::create_null_formatter(std::ostream& s) const {
     return null_formatter::create(s);
 }
 
-factory::result_type
-factory::create(std::ostream& s, const cpp::content_descriptor& cd) const {
+factory::result_type factory::create(std::ostream& s,
+    const cpp::formattables::content_descriptor& cd) const {
 
-    using cpp::aspect_types;
-    using cpp::content_types;
+    using cpp::formattables::aspect_types;
+    using cpp::formattables::content_types;
     switch (cd.aspect_type()) {
     case aspect_types::main:
         switch(cd.content_type()) {

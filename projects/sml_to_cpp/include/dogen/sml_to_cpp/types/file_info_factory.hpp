@@ -27,15 +27,15 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/content_descriptor.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/types/namespace_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/visitor_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/cpp/types/includes.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
+#include "dogen/cpp/types/formattables/namespace_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/registrar_info.hpp"
+#include "dogen/cpp/types/formattables/visitor_info.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 
 namespace dogen {
@@ -66,50 +66,63 @@ private:
     /**
      * @brief Performs the initial setup of the file info.
      */
-    cpp::file_info create(const cpp::content_descriptor& cd) const;
+    cpp::formattables::file_info
+    create(const cpp::formattables::content_descriptor& cd) const;
 
 public:
     /**
      * @brief Manufacture the file info for the given enum info.
      */
-    cpp::file_info create(boost::shared_ptr<cpp::enum_info> ei,
-        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create(boost::shared_ptr<cpp::formattables::enum_info> ei,
+        const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given exception.
      */
-    cpp::file_info create(boost::shared_ptr<cpp::exception_info> ei,
-        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create(boost::shared_ptr<cpp::formattables::exception_info> ei,
+        const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
     /**
      * @brief Manufacture all the file infos for the given namespace.
      */
-    cpp::file_info create(boost::shared_ptr<cpp::namespace_info> ni,
-        const cpp::content_descriptor& cd) const;
+    cpp::formattables::file_info
+    create(boost::shared_ptr<cpp::formattables::namespace_info> ni,
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Manufacture all the file infos for the given class.
      */
-    cpp::file_info create(boost::shared_ptr<cpp::class_info> ci,
-        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create(boost::shared_ptr<cpp::formattables::class_info> ci,
+        const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
     /**
      * @brief Manufacture file info for includer.
      */
-    cpp::file_info create_includer(const cpp::content_descriptor& cd,
-        const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create_includer(const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
     /**
      * @brief Manufacture file info for registrar.
      */
-    cpp::file_info create_registrar(boost::shared_ptr<cpp::registrar_info> ri,
-        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create_registrar(boost::shared_ptr<cpp::formattables::registrar_info> ri,
+        const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
     /**
      * @brief Manufacture file info for visitor.
      */
-    cpp::file_info create_visitor(boost::shared_ptr<cpp::visitor_info> vi,
-        const cpp::content_descriptor& cd, const cpp::includes& inc) const;
+    cpp::formattables::file_info
+    create_visitor(boost::shared_ptr<cpp::formattables::visitor_info> vi,
+        const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::includes& inc) const;
 
 private:
     const locator& locator_;

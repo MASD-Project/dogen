@@ -27,9 +27,9 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/parent_info.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/parent_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -46,9 +46,9 @@ public:
     explicit qname(std::ostream& stream);
 
 public:
-    void format(const cpp::class_info& ci);
-    void format(const cpp::enum_info& ei);
-    void format(const cpp::parent_info& pi);
+    void format(const cpp::formattables::class_info& ci);
+    void format(const cpp::formattables::enum_info& ei);
+    void format(const cpp::formattables::parent_info& pi);
 
 private:
     std::ostream& stream_;

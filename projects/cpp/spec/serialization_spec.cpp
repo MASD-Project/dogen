@@ -47,22 +47,22 @@ BOOST_AUTO_TEST_SUITE(serialization)
 BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
-    roundtrip_type<aspect_types_generator>();
-    roundtrip_type<file_types_generator>();
-    roundtrip_type<class_info_generator>();
-    roundtrip_type<cmakelists_info_generator>();
-    roundtrip_type<enum_info_generator>();
-    roundtrip_type<enumerator_info_generator>();
-    roundtrip_type<exception_info_generator>();
-    roundtrip_type<file_info_generator>();
-    roundtrip_type<namespace_info_generator>();
-    roundtrip_type<nested_type_info_generator>();
-    roundtrip_type<odb_options_info_generator>();
-    roundtrip_type<parent_info_generator>();
-    roundtrip_type<property_info_generator>();
-    roundtrip_type<registrar_info_generator>();
-    roundtrip_type<visitor_info_generator>();
-    roundtrip_type<includes_generator>();
+    roundtrip_type<formattables::aspect_types_generator>();
+    roundtrip_type<formattables::file_types_generator>();
+    roundtrip_type<formattables::class_info_generator>();
+    roundtrip_type<formattables::cmakelists_info_generator>();
+    roundtrip_type<formattables::enum_info_generator>();
+    roundtrip_type<formattables::enumerator_info_generator>();
+    roundtrip_type<formattables::exception_info_generator>();
+    roundtrip_type<formattables::file_info_generator>();
+    roundtrip_type<formattables::namespace_info_generator>();
+    roundtrip_type<formattables::nested_type_info_generator>();
+    roundtrip_type<formattables::odb_options_info_generator>();
+    roundtrip_type<formattables::parent_info_generator>();
+    roundtrip_type<formattables::property_info_generator>();
+    roundtrip_type<formattables::registrar_info_generator>();
+    roundtrip_type<formattables::visitor_info_generator>();
+    roundtrip_type<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

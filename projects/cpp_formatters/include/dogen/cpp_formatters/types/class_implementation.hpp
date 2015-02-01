@@ -27,10 +27,10 @@ types/#pragma once
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
-#include "dogen/cpp/types/property_info.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -49,23 +49,23 @@ public:
 
 private:
     void non_object_getters_and_setters(const std::string class_name,
-        const cpp::property_info& pi);
+        const cpp::formattables::property_info& pi);
     void object_getters_and_setters(const std::string class_name,
-        const cpp::property_info& pi);
+        const cpp::formattables::property_info& pi);
 
 protected:
-    void default_constructor(const cpp::class_info& ci);
-    void move_constructor(const cpp::class_info& ci);
-    void complete_constructor(const cpp::class_info& ci);
-    void to_stream(const cpp::class_info& ci);
-    void swap(const cpp::class_info& ci);
-    void equals_method(const cpp::class_info& ci);
-    void equals_operator(const cpp::class_info& ci);
-    void assignment_operator(const cpp::class_info& ci);
-    void getters_and_setters(const cpp::class_info& ci);
+    void default_constructor(const cpp::formattables::class_info& ci);
+    void move_constructor(const cpp::formattables::class_info& ci);
+    void complete_constructor(const cpp::formattables::class_info& ci);
+    void to_stream(const cpp::formattables::class_info& ci);
+    void swap(const cpp::formattables::class_info& ci);
+    void equals_method(const cpp::formattables::class_info& ci);
+    void equals_operator(const cpp::formattables::class_info& ci);
+    void assignment_operator(const cpp::formattables::class_info& ci);
+    void getters_and_setters(const cpp::formattables::class_info& ci);
 
 public:
-    virtual void format(const cpp::class_info& ci) = 0;
+    virtual void format(const cpp::formattables::class_info& ci) = 0;
 
 protected:
     std::ostream& stream_;

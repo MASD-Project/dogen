@@ -22,9 +22,9 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
@@ -58,15 +58,16 @@ file_formatter::shared_ptr io_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new io_header(stream));
 }
 
-void io_header::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void io_header::format_class(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const cpp::class_info& ci(*o);
+        const cpp::formattables::class_info& ci(*o);
         namespace_helper helper1(stream_, ci.namespaces());
         utility_.blank_line();
 
@@ -87,8 +88,9 @@ void io_header::format_class(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void io_header::format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+void io_header::format_enumeration(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -106,7 +108,7 @@ void io_header::format_enumeration(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void io_header::format(const cpp::file_info& f) {
+void io_header::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
@@ -117,7 +119,7 @@ void io_header::format(const cpp::file_info& f) {
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

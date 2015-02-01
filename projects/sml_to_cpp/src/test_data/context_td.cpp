@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/class_info_td.hpp"
-#include "dogen/cpp/test_data/enum_info_td.hpp"
-#include "dogen/cpp/test_data/exception_info_td.hpp"
-#include "dogen/cpp/test_data/namespace_info_td.hpp"
-#include "dogen/cpp/test_data/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/visitor_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml_to_cpp/test_data/context_td.hpp"
 #include "dogen/sml_to_cpp/test_data/relationships_td.hpp"
@@ -35,22 +35,22 @@ create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
 }
 
-dogen::cpp::class_info*
-create_dogen_cpp_class_info_ptr(const unsigned int position) {
-    return dogen::cpp::class_info_generator::create_ptr(position);
+dogen::cpp::formattables::class_info*
+create_dogen_cpp_formattables_class_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::class_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::class_info>
-create_boost_shared_ptr_dogen_cpp_class_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::class_info> r(
-        create_dogen_cpp_class_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::class_info>
+create_boost_shared_ptr_dogen_cpp_formattables_class_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::class_info> r(
+        create_dogen_cpp_formattables_class_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::class_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_class_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::class_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_class_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_class_info(position + i)));
     }
     return r;
 }
@@ -68,102 +68,102 @@ std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships> create_s
     return r;
 }
 
-dogen::cpp::exception_info*
-create_dogen_cpp_exception_info_ptr(const unsigned int position) {
-    return dogen::cpp::exception_info_generator::create_ptr(position);
+dogen::cpp::formattables::exception_info*
+create_dogen_cpp_formattables_exception_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::exception_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::exception_info>
-create_boost_shared_ptr_dogen_cpp_exception_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::exception_info> r(
-        create_dogen_cpp_exception_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::exception_info>
+create_boost_shared_ptr_dogen_cpp_formattables_exception_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::exception_info> r(
+        create_dogen_cpp_formattables_exception_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::exception_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_exception_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::exception_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_exception_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_exception_info(position + i)));
     }
     return r;
 }
 
-dogen::cpp::enum_info*
-create_dogen_cpp_enum_info_ptr(const unsigned int position) {
-    return dogen::cpp::enum_info_generator::create_ptr(position);
+dogen::cpp::formattables::enum_info*
+create_dogen_cpp_formattables_enum_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::enum_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::enum_info>
-create_boost_shared_ptr_dogen_cpp_enum_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::enum_info> r(
-        create_dogen_cpp_enum_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::enum_info>
+create_boost_shared_ptr_dogen_cpp_formattables_enum_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::enum_info> r(
+        create_dogen_cpp_formattables_enum_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::enum_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_enum_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::enum_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_enum_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_enum_info(position + i)));
     }
     return r;
 }
 
-dogen::cpp::registrar_info*
-create_dogen_cpp_registrar_info_ptr(const unsigned int position) {
-    return dogen::cpp::registrar_info_generator::create_ptr(position);
+dogen::cpp::formattables::registrar_info*
+create_dogen_cpp_formattables_registrar_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::registrar_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::registrar_info>
-create_boost_shared_ptr_dogen_cpp_registrar_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::registrar_info> r(
-        create_dogen_cpp_registrar_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::registrar_info>
+create_boost_shared_ptr_dogen_cpp_formattables_registrar_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::registrar_info> r(
+        create_dogen_cpp_formattables_registrar_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::registrar_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_registrar_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::registrar_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_registrar_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_registrar_info(position + i)));
     }
     return r;
 }
 
-dogen::cpp::namespace_info*
-create_dogen_cpp_namespace_info_ptr(const unsigned int position) {
-    return dogen::cpp::namespace_info_generator::create_ptr(position);
+dogen::cpp::formattables::namespace_info*
+create_dogen_cpp_formattables_namespace_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::namespace_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::namespace_info>
-create_boost_shared_ptr_dogen_cpp_namespace_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::namespace_info> r(
-        create_dogen_cpp_namespace_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::namespace_info>
+create_boost_shared_ptr_dogen_cpp_formattables_namespace_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::namespace_info> r(
+        create_dogen_cpp_formattables_namespace_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::namespace_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_namespace_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::namespace_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_namespace_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_namespace_info(position + i)));
     }
     return r;
 }
 
-dogen::cpp::visitor_info*
-create_dogen_cpp_visitor_info_ptr(const unsigned int position) {
-    return dogen::cpp::visitor_info_generator::create_ptr(position);
+dogen::cpp::formattables::visitor_info*
+create_dogen_cpp_formattables_visitor_info_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::visitor_info_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::visitor_info>
-create_boost_shared_ptr_dogen_cpp_visitor_info(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::visitor_info> r(
-        create_dogen_cpp_visitor_info_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::visitor_info>
+create_boost_shared_ptr_dogen_cpp_formattables_visitor_info(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::visitor_info> r(
+        create_dogen_cpp_formattables_visitor_info_ptr(position));
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> > r;
+std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::visitor_info> > create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_visitor_info_(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::visitor_info> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_visitor_info(position + i)));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_boost_shared_ptr_dogen_cpp_formattables_visitor_info(position + i)));
     }
     return r;
 }
@@ -177,13 +177,13 @@ context_generator::context_generator() : position_(0) { }
 
 void context_generator::
 populate(const unsigned int position, result_type& v) {
-    v.classes(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_class_info_(position + 0));
+    v.classes(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_class_info_(position + 0));
     v.relationships(create_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(position + 1));
-    v.exceptions(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_exception_info_(position + 2));
-    v.enumerations(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_enum_info_(position + 3));
-    v.registrars(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_registrar_info_(position + 4));
-    v.namespaces(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_namespace_info_(position + 5));
-    v.visitors(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_visitor_info_(position + 6));
+    v.exceptions(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_exception_info_(position + 2));
+    v.enumerations(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_enum_info_(position + 3));
+    v.registrars(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_registrar_info_(position + 4));
+    v.namespaces(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_namespace_info_(position + 5));
+    v.visitors(create_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_visitor_info_(position + 6));
 }
 
 context_generator::result_type

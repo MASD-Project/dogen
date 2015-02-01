@@ -22,10 +22,10 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/io/file_info_io.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
+#include "dogen/cpp/io/formattables/file_info_io.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
@@ -62,7 +62,8 @@ file_formatter::shared_ptr hash_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_header(stream));
 }
 
-void hash_header::operator_bracket_method(const cpp::class_info& ci) {
+void hash_header::operator_bracket_method(
+    const cpp::formattables::class_info& ci) {
     stream_ << indenter_ << "size_t operator()(const ";
 
     qname qname(stream_);
@@ -81,7 +82,7 @@ void hash_header::operator_bracket_method(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void hash_header::hash_helper_class(const cpp::class_info& ci) {
+void hash_header::hash_helper_class(const cpp::formattables::class_info& ci) {
     stream_ << indenter_ << indenter_ << "struct " << ci.name()
             << "_hasher ";
 
@@ -95,7 +96,7 @@ void hash_header::hash_helper_class(const cpp::class_info& ci) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::hash_class(const cpp::class_info& ci) {
+void hash_header::hash_class(const cpp::formattables::class_info& ci) {
     stream_ << indenter_ << "template<>" << std::endl
             << indenter_ << "struct hash<";
 
@@ -112,8 +113,9 @@ void hash_header::hash_class(const cpp::class_info& ci) {
     stream_ << indenter_ << "};" << std::endl;
 }
 
-void hash_header::format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+void hash_header::format_enumeration(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -153,14 +155,15 @@ void hash_header::format_enumeration(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void hash_header::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void hash_header::format_class(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     {
         namespace_helper nsh(stream_, ci.namespaces());
         utility_.blank_line();
@@ -181,7 +184,7 @@ void hash_header::format_class(const cpp::file_info& f) {
     utility_.blank_line();
 }
 
-void hash_header::format(const cpp::file_info& f) {
+void hash_header::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
@@ -192,7 +195,7 @@ void hash_header::format(const cpp::file_info& f) {
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

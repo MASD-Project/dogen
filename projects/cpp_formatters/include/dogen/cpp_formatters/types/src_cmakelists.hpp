@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/cmakelists_info.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -45,7 +45,7 @@ public:
     explicit src_cmakelists(std::ostream& stream);
 
 public:
-    void format(const cpp::cmakelists_info& ci);
+    void format(const cpp::formattables::cmakelists_info& ci);
 
 private:
     std::ostream& stream_;

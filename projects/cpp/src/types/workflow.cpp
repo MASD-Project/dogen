@@ -28,7 +28,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/settings/global_settings_io.hpp"
-#include "dogen/cpp/io/file_settings_io.hpp"
+#include "dogen/cpp/io/formattables/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/settings/global_settings_factory.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
@@ -94,7 +94,7 @@ formatter_type_for_object_type(const sml::object_types ot) const {
 }
 
 std::forward_list<dogen::formatters::file> workflow::format_entity(
-    const formatters::workflow& fw, const entity& e) const {
+    const formatters::workflow& fw, const formattables::entity& e) const {
     return fw.format(e);
 }
 
@@ -238,7 +238,7 @@ obtain_file_settings_activity(
         const auto& qn(pair.first);
         workflow::file_settings_by_formatter_type fs;
         for (const auto other_pair : pair.second) {
-            file_settings psd;
+            formattables::file_settings psd;
             psd.relative_path(other_pair.second);
 
             const auto& formatter_id(other_pair.first);

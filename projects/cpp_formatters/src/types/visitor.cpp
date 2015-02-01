@@ -51,7 +51,7 @@ file_formatter::shared_ptr visitor::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new visitor(stream));
 }
 
-void visitor::format(const cpp::visitor_info& vi) {
+void visitor::format(const cpp::formattables::visitor_info& vi) {
     {
         namespace_helper ns(stream_, vi.namespaces());
         utility_.blank_line();
@@ -107,7 +107,7 @@ void visitor::format(const cpp::visitor_info& vi) {
     utility_.blank_line(2);
 }
 
-void visitor::format(const cpp::file_info& f) {
+void visitor::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
@@ -118,7 +118,9 @@ void visitor::format(const cpp::file_info& f) {
     includes includes(stream_);
     includes.format(f);
 
-    auto o(boost::dynamic_pointer_cast<cpp::visitor_info>(f.entity()));
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::visitor_info>(f.entity()));
+
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_visitor_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_visitor_info));

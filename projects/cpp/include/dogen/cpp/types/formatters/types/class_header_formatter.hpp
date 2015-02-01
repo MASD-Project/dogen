@@ -47,7 +47,8 @@ private:
     /**
      * @brief Gets the relative path for the current formatter.
      */
-    boost::filesystem::path get_relative_path(const class_info& c) const;
+    boost::filesystem::path
+    get_relative_path(const formattables::class_info& c) const;
 
 public:
     std::string facet_name() const override;
@@ -57,12 +58,12 @@ public:
     boost::filesystem::path make_file_name(const settings::global_settings& gs,
         const sml::qname& qn) const override;
 
-    std::shared_ptr<includes_builder_interface>
+    std::shared_ptr<formattables::includes_builder_interface>
     make_includes_builder() const override;
 
 public:
     dogen::formatters::file format(const settings::global_settings& gs,
-        const class_info& c) const override;
+        const formattables::class_info& c) const override;
 };
 
 } } } }

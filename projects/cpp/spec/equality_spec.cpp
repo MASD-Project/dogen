@@ -41,22 +41,22 @@ BOOST_AUTO_TEST_SUITE(equality)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<aspect_types_generator>();
-    test_equality<file_types_generator>();
-    test_equality<class_info_generator>();
-    test_equality<cmakelists_info_generator>();
-    test_equality<enum_info_generator>();
-    test_equality<enumerator_info_generator>();
-    test_equality<exception_info_generator>();
-    test_equality<file_info_generator>();
-    test_equality<namespace_info_generator>();
-    test_equality<nested_type_info_generator>();
-    test_equality<odb_options_info_generator>();
-    test_equality<parent_info_generator>();
-    test_equality<property_info_generator>();
-    test_equality<registrar_info_generator>();
-    test_equality<visitor_info_generator>();
-    test_equality<includes_generator>();
+    test_equality<formattables::aspect_types_generator>();
+    test_equality<formattables::file_types_generator>();
+    test_equality<formattables::class_info_generator>();
+    test_equality<formattables::cmakelists_info_generator>();
+    test_equality<formattables::enum_info_generator>();
+    test_equality<formattables::enumerator_info_generator>();
+    test_equality<formattables::exception_info_generator>();
+    test_equality<formattables::file_info_generator>();
+    test_equality<formattables::namespace_info_generator>();
+    test_equality<formattables::nested_type_info_generator>();
+    test_equality<formattables::odb_options_info_generator>();
+    test_equality<formattables::parent_info_generator>();
+    test_equality<formattables::property_info_generator>();
+    test_equality<formattables::registrar_info_generator>();
+    test_equality<formattables::visitor_info_generator>();
+    test_equality<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

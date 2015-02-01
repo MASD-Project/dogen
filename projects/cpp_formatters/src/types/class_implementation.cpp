@@ -37,7 +37,8 @@ namespace cpp_formatters {
 class_implementation::class_implementation(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void class_implementation::default_constructor(const cpp::class_info& ci) {
+void class_implementation::default_constructor(
+    const cpp::formattables::class_info& ci) {
     if (!ci.requires_manual_default_constructor())
         return;
 
@@ -64,7 +65,8 @@ void class_implementation::default_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::move_constructor(const cpp::class_info& ci) {
+void class_implementation::move_constructor(
+    const cpp::formattables::class_info& ci) {
     if (!ci.requires_manual_move_constructor())
         return;
 
@@ -108,7 +110,8 @@ void class_implementation::move_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::complete_constructor(const cpp::class_info& ci) {
+void class_implementation::complete_constructor(
+    const cpp::formattables::class_info& ci) {
     const auto props(ci.all_properties());
     if (props.empty())
         return;
@@ -173,7 +176,7 @@ void class_implementation::complete_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::to_stream(const cpp::class_info& ci) {
+void class_implementation::to_stream(const cpp::formattables::class_info& ci) {
     if (!ci.is_parent() && ci.parents().empty())
         return;
 
@@ -192,7 +195,7 @@ void class_implementation::to_stream(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::swap(const cpp::class_info& ci) {
+void class_implementation::swap(const cpp::formattables::class_info& ci) {
     if ((ci.all_properties().empty() && !ci.is_parent()) || ci.is_immutable())
         return;
 
@@ -227,7 +230,8 @@ void class_implementation::swap(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_method(const cpp::class_info& ci) {
+void class_implementation::equals_method(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent() || ci.parents().empty())
         return;
 
@@ -249,7 +253,8 @@ void class_implementation::equals_method(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_implementation::equals_operator(const cpp::class_info& ci) {
+void class_implementation::equals_operator(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent()) {
         stream_ << indenter_ << "bool " << ci.name() << "::compare(const "
                 << ci.name() <<  "& ";
@@ -307,7 +312,7 @@ void class_implementation::equals_operator(const cpp::class_info& ci) {
 
 void class_implementation::
 non_object_getters_and_setters(const std::string class_name,
-    const cpp::property_info& ci) {
+    const cpp::formattables::property_info& ci) {
     stream_ << indenter_ << ci.type().complete_name() << " " << class_name
             << "::" << ci.name() << "() const ";
 
@@ -351,7 +356,7 @@ non_object_getters_and_setters(const std::string class_name,
 
 void class_implementation::
 object_getters_and_setters(const std::string class_name,
-    const cpp::property_info& ci) {
+    const cpp::formattables::property_info& ci) {
     // const getter
     stream_ << indenter_ << "const " << ci.type().complete_name()
             << "& " << class_name << "::" << ci.name()
@@ -431,7 +436,8 @@ object_getters_and_setters(const std::string class_name,
     }
 }
 
-void class_implementation::getters_and_setters(const cpp::class_info& ci) {
+void class_implementation::getters_and_setters(
+    const cpp::formattables::class_info& ci) {
     if (ci.properties().empty())
         return;
 
@@ -444,7 +450,7 @@ void class_implementation::getters_and_setters(const cpp::class_info& ci) {
 }
 
 void class_implementation::
-assignment_operator(const cpp::class_info& ci) {
+assignment_operator(const cpp::formattables::class_info& ci) {
     // assignment is only available in leaf classes - MEC++-33
     if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
         return;

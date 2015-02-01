@@ -27,9 +27,9 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/cpp_formatters/types/indenter.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
 namespace dogen {
@@ -50,10 +50,10 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format_namespace(const cpp::file_info& f);
+    void format_namespace(const cpp::formattables::file_info& f);
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;

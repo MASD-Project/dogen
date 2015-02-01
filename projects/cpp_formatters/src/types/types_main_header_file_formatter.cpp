@@ -72,7 +72,7 @@ create(std::ostream& stream, const bool disable_complete_constructor,
 }
 
 void types_main_header_file_formatter::
-equality_operator(const cpp::class_info& ci) {
+equality_operator(const cpp::formattables::class_info& ci) {
     if (!ci.is_parent())
         return;
 
@@ -88,7 +88,7 @@ equality_operator(const cpp::class_info& ci) {
 }
 
 void types_main_header_file_formatter::
-inserter_operator(const cpp::class_info& ci) {
+inserter_operator(const cpp::formattables::class_info& ci) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -98,7 +98,7 @@ inserter_operator(const cpp::class_info& ci) {
 }
 
 void types_main_header_file_formatter::
-swap_method(const cpp::class_info& ci) {
+swap_method(const cpp::formattables::class_info& ci) {
     // swap overload is only available in leaf classes - MEC++-33
     if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
         return;
@@ -127,7 +127,8 @@ swap_method(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void types_main_header_file_formatter::visit(dogen::cpp::class_info& ci) {
+void types_main_header_file_formatter::visit(
+    cpp::formattables::class_info& ci) {
     {
         namespace_helper ns(stream_, ci.namespaces());
         utility_.blank_line();
@@ -152,7 +153,7 @@ void types_main_header_file_formatter::visit(dogen::cpp::class_info& ci) {
         utility_.blank_line(2);
 }
 
-void types_main_header_file_formatter::visit(dogen::cpp::enum_info& ei) {
+void types_main_header_file_formatter::visit(cpp::formattables::enum_info& ei) {
     {
         namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
@@ -163,7 +164,7 @@ void types_main_header_file_formatter::visit(dogen::cpp::enum_info& ei) {
 }
 
 void types_main_header_file_formatter::
-visit(dogen::cpp::exception_info& ei) {
+visit(cpp::formattables::exception_info& ei) {
     {
         namespace_helper ns(stream_, ei.namespaces());
         utility_.blank_line();
@@ -173,7 +174,8 @@ visit(dogen::cpp::exception_info& ei) {
     utility_.blank_line(2);
 }
 
-void types_main_header_file_formatter::format(const cpp::file_info& f) {
+void types_main_header_file_formatter::format(
+    const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 

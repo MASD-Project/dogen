@@ -17,13 +17,13 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-01-31 Sat 16:11]
+Clock summary at [2015-02-01 Sun 01:38]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *32:58* |       |      |
+| *Total time*                                                          | *36:31* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 32:58 |      |
+| Active                                                                |         | 36:31 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
 | STARTED Updates to the manual and readme files                        |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
@@ -43,6 +43,7 @@ Clock summary at [2015-01-31 Sat 16:11]
 | COMPLETED Perform an analysis on the current state of formatters      |         |       | 1:59 |
 | COMPLETED Deeper analysis of the C++ model                            |         |       | 0:43 |
 | COMPLETED Create a =settings= namespace in =cpp=                      |         |       | 1:54 |
+| COMPLETED Create a =formattables= namespace in =cpp=                  |         |       | 3:33 |
 | STARTED Facet and formatter settings factories to use definitions     |         |       | 3:48 |
 | STARTED Split global settings by formatter and facet                  |         |       | 0:09 |
 #+end:
@@ -522,10 +523,14 @@ the c++ model. Nothing else should live there.
 
 Move of all the existing settings to it.
 
-*** Create a =formattable= namespace in =cpp=                         :story:
+*** COMPLETED Create a =formattables= namespace in =cpp=              :story:
+    CLOSED: [2015-02-01 Sun 01:37]
+    CLOCK: [2015-01-31 Sat 22:18]--[2015-02-01 Sun 01:37] =>  3:19
+    CLOCK: [2015-01-31 Sat 16:12]--[2015-01-31 Sat 16:26] =>  0:14
 
 As per analysis story below, we need to move all the formattable types
-and their factories into their own namespace.
+and their factories into their own namespace. Use the plural in
+keeping with =formatters= and =settings=.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
     CLOCK: [2015-01-30 Fri 22:22]--[2015-01-30 Fri 22:36] =>  0:14
@@ -584,6 +589,14 @@ field definitions.
 
 Dynamic could provide field definition aggregation services for
 formatter and facet.
+
+*** Move registrar into formatters namespace                          :story:
+
+We should only use the registrar to register formatters, and to access
+the registered formatters when formatting. As such it makes sense to
+make it an exclusive formatter register.  Once we remove all of the
+default formatter and facets nonsense, we can move this type into the
+formatters namespace.
 
 *** Consider creating constants for common fields                     :story:
 

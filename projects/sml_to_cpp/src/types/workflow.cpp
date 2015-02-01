@@ -21,8 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/io/content_descriptor_io.hpp"
-#include "dogen/cpp/io/class_types_io.hpp"
+#include "dogen/cpp/io/formattables/class_types_io.hpp"
+#include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/qname_io.hpp"
@@ -86,8 +86,8 @@ void workflow::validate_settings() const {
     }
 }
 
-void workflow::register_header(const cpp::file_info& fi) const {
-    const auto header(cpp::file_types::header);
+void workflow::register_header(const cpp::formattables::file_info& fi) const {
+    const auto header(cpp::formattables::file_types::header);
     const auto cd(fi.descriptor());
     if (cd.file_type() == header)
         includer_.register_header(cd.facet_type(), fi.relative_path());
@@ -182,9 +182,9 @@ void workflow::transformation_sub_workflow() {
     BOOST_LOG_SEV(lg, debug) << "context: " << context_;
 }
 
-std::list<cpp::file_info>
+std::list<cpp::formattables::file_info>
 workflow::generate_file_infos_for_classes_activity() const {
-    std::list<cpp::file_info> r;
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.classes()) {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
@@ -196,8 +196,8 @@ workflow::generate_file_infos_for_classes_activity() const {
 
         const auto& rel(i->second);
         const auto& ci(pair.second);
-        using cpp::content_types;
-        using cpp::class_types;
+        using cpp::formattables::content_types;
+        using cpp::formattables::class_types;
 
         content_types ct;
         // FIXME: big hack
@@ -230,7 +230,7 @@ workflow::generate_file_infos_for_classes_activity() const {
             // factory. however, as we still want to create forward
             // declarations, ignore those.
             using sml::generation_types;
-            using cpp::aspect_types;
+            using cpp::formattables::aspect_types;
             if (cd.aspect_type() != aspect_types::forward_decls &&
                 ci->generation_type() == generation_types::partial_generation) {
                 fi.descriptor().aspect_type(aspect_types::null_aspect);
@@ -246,19 +246,20 @@ workflow::generate_file_infos_for_classes_activity() const {
     return r;
 }
 
-std::list<cpp::file_info>
+std::list<cpp::formattables::file_info>
 workflow::generate_file_infos_for_namespaces_activity() const {
-    std::list<cpp::file_info> r;
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.namespaces()) {
         const auto qn(pair.first);
         const auto ni(pair.second);
 
-        const auto ct(cpp::content_types::namespace_doc);
+        const auto ct(cpp::formattables::content_types::namespace_doc);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto fi(file_info_factory_.create(ni, cd));
             r.push_back(fi);
 
-            if (cd.aspect_type() != cpp::aspect_types::forward_decls)
+            if (cd.aspect_type() !=
+                cpp::formattables::aspect_types::forward_decls)
                 register_header(fi);
         }
     }
@@ -267,8 +268,9 @@ workflow::generate_file_infos_for_namespaces_activity() const {
     return r;
 }
 
-std::list<cpp::file_info> workflow::generate_registrars_activity() const {
-    std::list<cpp::file_info> r;
+std::list<cpp::formattables::file_info>
+workflow::generate_registrars_activity() const {
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.registrars()) {
         const auto qn(pair.first);
         const auto ri(pair.second);
@@ -278,20 +280,22 @@ std::list<cpp::file_info> workflow::generate_registrars_activity() const {
             const auto fi(file_info_factory_.create_registrar(ri, cd, inc));
             r.push_back(fi);
 
-            if (cd.aspect_type() != cpp::aspect_types::forward_decls)
+            if (cd.aspect_type() !=
+                cpp::formattables::aspect_types::forward_decls)
                 register_header(fi);
         }
     }
     return r;
 }
 
-std::list<cpp::file_info> workflow::generate_includers_activity() const {
+std::list<cpp::formattables::file_info>
+workflow::generate_includers_activity() const {
     sml::qname qn;
     qn.simple_name(includer_name);
     qn.external_module_path(model_.name().external_module_path());
     qn.model_name(model_.name().model_name());
 
-    std::list<cpp::file_info> r;
+    std::list<cpp::formattables::file_info> r;
     for (const auto& cd : descriptor_factory_.create_includer(qn)) {
         const auto inc(includer_.includes_for_includer_files(cd));
         r.push_back(file_info_factory_.create_includer(cd, inc));
@@ -299,8 +303,9 @@ std::list<cpp::file_info> workflow::generate_includers_activity() const {
     return r;
 }
 
-std::list<cpp::file_info> workflow::generate_visitors_activity() const {
-    std::list<cpp::file_info> r;
+std::list<cpp::formattables::file_info>
+workflow::generate_visitors_activity() const {
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.visitors()) {
         const auto& qn(pair.first);
         const auto i(context_.relationships().find(qn));
@@ -317,45 +322,50 @@ std::list<cpp::file_info> workflow::generate_visitors_activity() const {
             const auto fi(file_info_factory_.create_visitor(vi, cd, inc));
             r.push_back(fi);
 
-            if (cd.aspect_type() != cpp::aspect_types::forward_decls)
+            if (cd.aspect_type() !=
+                cpp::formattables::aspect_types::forward_decls)
                 register_header(fi);
         }
     }
     return r;
 }
 
-std::list<cpp::file_info> workflow::generate_enums_activity() const {
-    std::list<cpp::file_info> r;
+std::list<cpp::formattables::file_info>
+workflow::generate_enums_activity() const {
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.enumerations()) {
         const auto& qn(pair.first);
         const auto& ei(pair.second);
 
-        const auto ct(cpp::content_types::enumeration);
+        const auto ct(cpp::formattables::content_types::enumeration);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto inc(includer_.includes_for_enumeration(cd));
             const auto fi(file_info_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
-            if (cd.aspect_type() != cpp::aspect_types::forward_decls)
+            if (cd.aspect_type() !=
+                cpp::formattables::aspect_types::forward_decls)
                 register_header(fi);
         }
     }
     return r;
 }
 
-std::list<cpp::file_info> workflow::generate_exceptions_activity() const {
-    std::list<cpp::file_info> r;
+std::list<cpp::formattables::file_info>
+workflow::generate_exceptions_activity() const {
+    std::list<cpp::formattables::file_info> r;
     for (const auto& pair : context_.exceptions()) {
         const auto& qn(pair.first);
         const auto& ei(pair.second);
 
-        const auto ct(cpp::content_types::exception);
+        const auto ct(cpp::formattables::content_types::exception);
         for (const auto& cd : descriptor_factory_.create(qn, ct)) {
             const auto inc(includer_.includes_for_exception(cd));
             const auto fi(file_info_factory_.create(ei, cd, inc));
             r.push_back(fi);
 
-            if (cd.aspect_type() != cpp::aspect_types::forward_decls)
+            if (cd.aspect_type() !=
+                cpp::formattables::aspect_types::forward_decls)
                 register_header(fi);
         }
     }
@@ -364,7 +374,8 @@ std::list<cpp::file_info> workflow::generate_exceptions_activity() const {
     return r;
 }
 
-void workflow::generate_file_infos_activity(cpp::project& p) const {
+void workflow::
+generate_file_infos_activity(cpp::formattables::project& p) const {
     const auto a(generate_enums_activity());
     const auto b(generate_exceptions_activity());
     const auto c(generate_file_infos_for_classes_activity());
@@ -382,8 +393,9 @@ void workflow::generate_file_infos_activity(cpp::project& p) const {
     p.files().insert(p.files().end(), g.begin(), g.end());
 }
 
-void workflow::generate_cmakelists_activity(cpp::project& p) const {
-    cpp::cmakelists_info ci;
+void workflow::
+generate_cmakelists_activity(cpp::formattables::project& p) const {
+    cpp::formattables::cmakelists_info ci;
     ci.model_name(model_.name().model_name());
     ci.file_name(cmakelists_file_name);
     ci.file_path(locator_.absolute_path_to_src(ci.file_name()));
@@ -400,10 +412,11 @@ void workflow::generate_cmakelists_activity(cpp::project& p) const {
     }
 }
 
-void workflow::generate_odb_options_activity(cpp::project& p) const {
+void workflow::
+generate_odb_options_activity(cpp::formattables::project& p) const {
     BOOST_LOG_SEV(lg, info) << "Generating ODB options file.";
 
-    cpp::odb_options_info ooi;
+    cpp::formattables::odb_options_info ooi;
     ooi.file_name(odb_options_file_name);
     ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
     ooi.model_name(model_.name().model_name());
@@ -420,8 +433,8 @@ managed_directories() const {
     return locator_.managed_directories();
 }
 
-cpp::project workflow::generation_sub_workflow() {
-    cpp::project r;
+cpp::formattables::project workflow::generation_sub_workflow() {
+    cpp::formattables::project r;
     generate_file_infos_activity(r);
     if (settings_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
@@ -438,7 +451,7 @@ cpp::project workflow::generation_sub_workflow() {
     return r;
 }
 
-cpp::project workflow::execute() {
+cpp::formattables::project workflow::execute() {
     BOOST_LOG_SEV(lg, info) << "SML to C++ workflow started.";
 
     transformation_sub_workflow();

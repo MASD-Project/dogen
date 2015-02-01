@@ -42,22 +42,22 @@ BOOST_AUTO_TEST_SUITE(hashing)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
-    test_hashing<aspect_types_generator>();
-    test_hashing<file_types_generator>();
-    test_hashing<class_info_generator>();
-    test_hashing<cmakelists_info_generator>();
-    test_hashing<enum_info_generator>();
-    test_hashing<enumerator_info_generator>();
-    test_hashing<exception_info_generator>();
-    test_hashing<file_info_generator>();
-    test_hashing<namespace_info_generator>();
-    test_hashing<nested_type_info_generator>();
-    test_hashing<odb_options_info_generator>();
-    test_hashing<parent_info_generator>();
-    test_hashing<property_info_generator>();
-    test_hashing<registrar_info_generator>();
-    test_hashing<visitor_info_generator>();
-    test_hashing<includes_generator>();
+    test_hashing<formattables::aspect_types_generator>();
+    test_hashing<formattables::file_types_generator>();
+    test_hashing<formattables::class_info_generator>();
+    test_hashing<formattables::cmakelists_info_generator>();
+    test_hashing<formattables::enum_info_generator>();
+    test_hashing<formattables::enumerator_info_generator>();
+    test_hashing<formattables::exception_info_generator>();
+    test_hashing<formattables::file_info_generator>();
+    test_hashing<formattables::namespace_info_generator>();
+    test_hashing<formattables::nested_type_info_generator>();
+    test_hashing<formattables::odb_options_info_generator>();
+    test_hashing<formattables::parent_info_generator>();
+    test_hashing<formattables::property_info_generator>();
+    test_hashing<formattables::registrar_info_generator>();
+    test_hashing<formattables::visitor_info_generator>();
+    test_hashing<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

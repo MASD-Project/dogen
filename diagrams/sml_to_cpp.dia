@@ -679,16 +679,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="-7,12"/>
+        <dia:point val="-10,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,11.95;25.12,19.65"/>
+        <dia:rectangle val="-10.05,11.95;27.51,19.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-7,12"/>
+        <dia:point val="-10,12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.07"/>
+        <dia:real val="37.460000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -786,7 +786,7 @@
             <dia:string>#classes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::class_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::class_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -832,7 +832,7 @@
             <dia:string>#exceptions#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::exception_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::exception_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -855,7 +855,7 @@
             <dia:string>#enumerations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::enum_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::enum_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -878,7 +878,7 @@
             <dia:string>#registrars#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::registrar_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::registrar_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -901,7 +901,7 @@
             <dia:string>#namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::namespace_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::namespace_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -924,7 +924,7 @@
             <dia:string>#visitors#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::visitor_info&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,boost::shared_ptr&lt;cpp::formattables::visitor_info&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1391,7 +1391,7 @@
         <dia:point val="48,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.02,19.55;48.75,32.8"/>
+        <dia:rectangle val="27.41,19.55;48.75,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1399,8 +1399,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="48,32"/>
         <dia:point val="48,27"/>
-        <dia:point val="25.07,27"/>
-        <dia:point val="25.07,19.6"/>
+        <dia:point val="27.46,27"/>
+        <dia:point val="27.46,19.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1462,7 +1462,7 @@
         <dia:point val="24,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,19.55;24.75,42.8"/>
+        <dia:rectangle val="-10.05,19.55;24.75,42.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1470,8 +1470,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="24,42"/>
         <dia:point val="24,32"/>
-        <dia:point val="-7,32"/>
-        <dia:point val="-7,19.6"/>
+        <dia:point val="-10,32"/>
+        <dia:point val="-10,19.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

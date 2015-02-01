@@ -28,10 +28,10 @@
 #include <iosfwd>
 #include <string>
 #include <unordered_set>
-#include "dogen/cpp/types/nested_type_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp_formatters/types//indenter.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types//indenter.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -49,23 +49,27 @@ public:
     virtual ~inserter_implementation() noexcept {}
 
 private:
-    bool is_insertable(const cpp::nested_type_info& nti);
+    bool is_insertable(const cpp::formattables::nested_type_info& nti);
 
 private:
     void tidy_up_string_method();
-    void sequence_container_helper(const cpp::nested_type_info& nti);
-    void associative_container_helper(const cpp::nested_type_info& nti);
-    void smart_pointer_helper(const cpp::nested_type_info& nti);
-    void optional_helper(const cpp::nested_type_info& nti);
-    void pair_helper(const cpp::nested_type_info& nti);
-    void variant_helper(const cpp::nested_type_info& nti);
-    void ptree_helper(const cpp::nested_type_info& nti);
-    void recursive_helper_method_creator(const cpp::nested_type_info& nti,
+    void sequence_container_helper(
+        const cpp::formattables::nested_type_info& nti);
+    void associative_container_helper(
+        const cpp::formattables::nested_type_info& nti);
+    void smart_pointer_helper(const cpp::formattables::nested_type_info& nti);
+    void optional_helper(const cpp::formattables::nested_type_info& nti);
+    void pair_helper(const cpp::formattables::nested_type_info& nti);
+    void variant_helper(const cpp::formattables::nested_type_info& nti);
+    void ptree_helper(const cpp::formattables::nested_type_info& nti);
+    void recursive_helper_method_creator(
+        const cpp::formattables::nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
 
 public:
-    void format_helper_methods(const cpp::class_info& ci);
-    void format_inserter_implementation(const cpp::class_info& ci);
+    void format_helper_methods(const cpp::formattables::class_info& ci);
+    void format_inserter_implementation(
+        const cpp::formattables::class_info& ci);
 
 protected:
     const bool is_inside_class_;

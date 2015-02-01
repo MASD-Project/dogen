@@ -60,7 +60,7 @@ void includes::format(std::list<std::string> v, bool is_system) {
     }
 }
 
-void includes::format(const cpp::file_info& f) {
+void includes::format(const cpp::formattables::file_info& f) {
     const auto inc(f.includes());
 
     if (inc.system().empty() && inc.user().empty())

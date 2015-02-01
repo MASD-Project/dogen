@@ -19,19 +19,19 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/class_info_io.hpp"
-#include "dogen/cpp/io/enum_info_io.hpp"
-#include "dogen/cpp/io/exception_info_io.hpp"
-#include "dogen/cpp/io/namespace_info_io.hpp"
-#include "dogen/cpp/io/registrar_info_io.hpp"
-#include "dogen/cpp/io/visitor_info_io.hpp"
+#include "dogen/cpp/io/formattables/class_info_io.hpp"
+#include "dogen/cpp/io/formattables/enum_info_io.hpp"
+#include "dogen/cpp/io/formattables/exception_info_io.hpp"
+#include "dogen/cpp/io/formattables/namespace_info_io.hpp"
+#include "dogen/cpp/io/formattables/registrar_info_io.hpp"
+#include "dogen/cpp/io/formattables/visitor_info_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml_to_cpp/io/context_io.hpp"
 #include "dogen/sml_to_cpp/io/relationships_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::class_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::class_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::class_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::class_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -83,7 +83,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::exception_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::exception_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -99,7 +99,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::exception_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::exception_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -117,7 +117,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::enum_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::enum_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -133,7 +133,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::enum_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::enum_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -151,7 +151,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::registrar_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::registrar_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -167,7 +167,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::registrar_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::registrar_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -185,7 +185,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::namespace_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::namespace_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -201,7 +201,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::namespace_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::namespace_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -219,7 +219,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::visitor_info>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::visitor_info>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -235,7 +235,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::visitor_info> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::visitor_info> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

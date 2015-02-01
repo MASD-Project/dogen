@@ -36,7 +36,7 @@ enum_declaration::
 enum_declaration(std::ostream& stream)
     : stream_(stream), utility_(stream_, indenter_) { }
 
-void enum_declaration::format(const cpp::enum_info& ei) {
+void enum_declaration::format(const cpp::formattables::enum_info& ei) {
     doxygen_comments dc1(stream_, indenter_);
     dc1.format(ei.documentation());
 

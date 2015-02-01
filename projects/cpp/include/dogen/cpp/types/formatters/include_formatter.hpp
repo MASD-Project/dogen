@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/cpp/types/includes.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -43,7 +43,7 @@ public:
     include_formatter(include_formatter&& rhs) = default;
 
 public:
-    void format(std::ostream& s, const includes& i) const;
+    void format(std::ostream& s, const formattables::includes& i) const;
 };
 
 } } }

@@ -28,7 +28,7 @@
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
 #include "dogen/cpp/io/all_io.hpp"
-#include "dogen/cpp/types/building_error.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
@@ -37,9 +37,9 @@
 using dogen::config::cpp_facet_types;
 using dogen::config::test::mock_settings_factory;
 using dogen::config::cpp_facet_types;
-using dogen::cpp::file_types;
-using dogen::cpp::aspect_types;
-using dogen::cpp::content_types;
+using dogen::cpp::formattables::file_types;
+using dogen::cpp::formattables::aspect_types;
+using dogen::cpp::formattables::content_types;
 
 namespace {
 
@@ -53,11 +53,11 @@ const mock_model_factory model_factory(flags);
 const std::string src_dir("__source_directory__");
 const std::string inc_dir("__include_directory__");
 
-std::list<dogen::cpp::content_descriptor>
+std::list<dogen::cpp::formattables::content_descriptor>
 mock_descriptors(const dogen::sml::qname& qn) {
-    std::list<dogen::cpp::content_descriptor> r;
+    std::list<dogen::cpp::formattables::content_descriptor> r;
 
-    dogen::cpp::content_descriptor cd;
+    dogen::cpp::formattables::content_descriptor cd;
     cd.name(qn);
     cd.facet_type(cpp_facet_types::types);
     cd.file_type(file_types::header);
@@ -73,15 +73,15 @@ mock_descriptors(const dogen::sml::qname& qn) {
     return r;
 }
 
-std::list<dogen::cpp::content_descriptor>
+std::list<dogen::cpp::formattables::content_descriptor>
 mock_descriptor_for_includer(const dogen::config::cpp_facet_types ft) {
-    std::list<dogen::cpp::content_descriptor> r;
+    std::list<dogen::cpp::formattables::content_descriptor> r;
 
     dogen::sml::qname qn;
     qn.simple_name(model_factory.type_name());
     qn.model_name(model_factory.model_name());
 
-    dogen::cpp::content_descriptor cd;
+    dogen::cpp::formattables::content_descriptor cd;
     cd.name(qn);
     cd.facet_type(ft);
     cd.file_type(file_types::header);
@@ -92,14 +92,15 @@ mock_descriptor_for_includer(const dogen::config::cpp_facet_types ft) {
     return r;
 }
 
-std::list<dogen::cpp::content_descriptor> mock_descriptor_for_registrar() {
-    std::list<dogen::cpp::content_descriptor> r;
+std::list<dogen::cpp::formattables::content_descriptor>
+mock_descriptor_for_registrar() {
+    std::list<dogen::cpp::formattables::content_descriptor> r;
 
     dogen::sml::qname qn;
     qn.simple_name(model_factory.type_name());
     qn.model_name(model_factory.model_name());
 
-    dogen::cpp::content_descriptor cd;
+    dogen::cpp::formattables::content_descriptor cd;
     cd.name(qn);
     cd.facet_type(cpp_facet_types::serialization);
     cd.file_type(file_types::header);
@@ -129,12 +130,12 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     const auto s(mock_settings_factory::build_cpp_settings(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::file_info_factory f(l);
-    const auto ei(boost::make_shared<dogen::cpp::enum_info>());
+    const auto ei(boost::make_shared<dogen::cpp::formattables::enum_info>());
     const auto en(m.enumerations().begin()->second);
     const auto md(mock_descriptors(en.name()));
-    const auto inc((dogen::cpp::includes()));
+    const auto inc((dogen::cpp::formattables::includes()));
 
-    std::list<dogen::cpp::file_info> infos;
+    std::list<dogen::cpp::formattables::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ei, cd, inc));
 
@@ -170,10 +171,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto& ex(m.objects().begin()->second);
     const auto md(mock_descriptors(ex.name()));
-    const auto ei(boost::make_shared<dogen::cpp::exception_info>());
-    const auto inc((dogen::cpp::includes()));
+    const auto ei(
+        boost::make_shared<dogen::cpp::formattables::exception_info>());
+    const auto inc((dogen::cpp::formattables::includes()));
 
-    std::list<dogen::cpp::file_info> infos;
+    std::list<dogen::cpp::formattables::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ei, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -208,9 +210,10 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto p(m.modules().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const auto ni(boost::make_shared<dogen::cpp::namespace_info>());
+    const auto ni(
+        boost::make_shared<dogen::cpp::formattables::namespace_info>());
 
-    std::list<dogen::cpp::file_info> infos;
+    std::list<dogen::cpp::formattables::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ni, cd));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -221,7 +224,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
         BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
-        using dogen::cpp::file_types;
+        using dogen::cpp::formattables::file_types;
         if (fi.descriptor().file_type() == file_types::header)
             BOOST_CHECK(!fi.header_guard().empty());
         else if (fi.descriptor().file_type() == file_types::implementation)
@@ -245,10 +248,10 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto& p(m.objects().begin()->second);
     const auto md(mock_descriptors(p.name()));
-    const auto ci(boost::make_shared<dogen::cpp::class_info>());
-    const auto inc((dogen::cpp::includes()));
+    const auto ci(boost::make_shared<dogen::cpp::formattables::class_info>());
+    const auto inc((dogen::cpp::formattables::includes()));
 
-    std::list<dogen::cpp::file_info> infos;
+    std::list<dogen::cpp::formattables::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create(ci, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;
@@ -259,7 +262,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
         BOOST_CHECK(fi.entity());
         BOOST_CHECK(!fi.file_path().empty());
 
-        using dogen::cpp::file_types;
+        using dogen::cpp::formattables::file_types;
         if (fi.descriptor().file_type() == file_types::header)
             BOOST_CHECK(!fi.header_guard().empty());
         else if (fi.descriptor().file_type() == file_types::implementation)
@@ -288,7 +291,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
     i.register_header(ft, model_factory.type_name(1));
     const auto md(mock_descriptor_for_includer(ft));
 
-    std::list<dogen::cpp::file_info> includer_infos;
+    std::list<dogen::cpp::formattables::file_info> includer_infos;
     for (const auto& cd : md) {
         const auto il(i.includes_for_includer_files(cd));
         includer_infos.push_back(f.create_includer(cd, il));
@@ -334,9 +337,9 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
 
     const auto ft2(dogen::config::cpp_facet_types::serialization);
     const auto md(mock_descriptor_for_includer(ft2));
-    const auto inc((dogen::cpp::includes()));
+    const auto inc((dogen::cpp::formattables::includes()));
 
-    std::list<dogen::cpp::file_info> includer_infos;
+    std::list<dogen::cpp::formattables::file_info> includer_infos;
     for (const auto& cd : md)
         includer_infos.push_back(f.create_includer(cd, inc));
     BOOST_LOG_SEV(lg, debug) << "includer file infos: " << includer_infos;
@@ -365,10 +368,11 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     dogen::sml_to_cpp::file_info_factory f(l);
 
     const auto md(mock_descriptor_for_registrar());
-    const auto ri(boost::make_shared<dogen::cpp::registrar_info>());
-    const auto inc((dogen::cpp::includes()));
+    const auto ri(
+        boost::make_shared<dogen::cpp::formattables::registrar_info>());
+    const auto inc((dogen::cpp::formattables::includes()));
 
-    std::list<dogen::cpp::file_info> infos;
+    std::list<dogen::cpp::formattables::file_info> infos;
     for (const auto& cd : md)
         infos.push_back(f.create_registrar(ri, cd, inc));
     BOOST_LOG_SEV(lg, debug) << "file infos: " << infos;

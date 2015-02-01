@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/entity_visitor.hpp"
+#include "dogen/cpp/types/formattables/entity_visitor.hpp"
 #include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 
@@ -26,29 +26,30 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class dispatcher : public entity_visitor {
+class dispatcher : public formattables::entity_visitor {
 public:
     dispatcher(const std::forward_list<facet>& f);
     ~dispatcher() noexcept { }
 
 public:
     using entity_visitor::visit;
-    void visit(const dogen::cpp::class_info& c) override;
-    void visit(const dogen::cpp::enum_info& e) override;
-    void visit(const dogen::cpp::exception_info& e) override;
-    void visit(const dogen::cpp::registrar_info& r) override;
-    void visit(const dogen::cpp::namespace_info& n) override;
-    void visit(const dogen::cpp::visitor_info& v) override;
-    void visit(const dogen::cpp::new_class_info& c) override;
-    void visit(const dogen::cpp::concept_info& c) override;
-    void visit(const dogen::cpp::primitive_info& p) override;
+    void visit(const formattables::class_info& c) override;
+    void visit(const formattables::enum_info& e) override;
+    void visit(const formattables::exception_info& e) override;
+    void visit(const formattables::registrar_info& r) override;
+    void visit(const formattables::namespace_info& n) override;
+    void visit(const formattables::visitor_info& v) override;
+    void visit(const formattables::new_class_info& c) override;
+    void visit(const formattables::concept_info& c) override;
+    void visit(const formattables::primitive_info& p) override;
 
 public:
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */
-    std::forward_list<dogen::formatters::file> format(const entity& e);
+    std::forward_list<dogen::formatters::file>
+    format(const formattables::entity& e);
 
 private:
     const std::forward_list<facet>& facets_;
@@ -58,37 +59,38 @@ private:
 dispatcher::dispatcher(const std::forward_list<facet>& f)
     : facets_(f) { }
 
-void dispatcher::visit(const dogen::cpp::class_info& c) {
+void dispatcher::visit(const formattables::class_info& c) {
     for (const auto& fct : facets_)
         for (const auto fmt : fct.container().class_formatters())
             files_.push_front(fmt->format(fct.global_settings(), c));
 }
 
-void dispatcher::visit(const dogen::cpp::enum_info& /*e*/) {
+void dispatcher::visit(const formattables::enum_info& /*e*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::exception_info& /*e*/) {
+void dispatcher::visit(const formattables::exception_info& /*e*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::registrar_info& /*r*/) {
+void dispatcher::visit(const formattables::registrar_info& /*r*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::namespace_info& /*n*/) {
+void dispatcher::visit(const formattables::namespace_info& /*n*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::visitor_info& /*v*/) {
+void dispatcher::visit(const formattables::visitor_info& /*v*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::new_class_info& /*c*/) {
+void dispatcher::visit(const formattables::new_class_info& /*c*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::concept_info& /*c*/) {
+void dispatcher::visit(const formattables::concept_info& /*c*/) {
 }
 
-void dispatcher::visit(const dogen::cpp::primitive_info& /*p*/) {
+void dispatcher::visit(const formattables::primitive_info& /*p*/) {
 }
 
-std::forward_list<dogen::formatters::file> dispatcher::format(const entity& e) {
+std::forward_list<dogen::formatters::file>
+dispatcher::format(const formattables::entity& e) {
     e.accept(*this);
     return files_;
 }
@@ -96,7 +98,7 @@ std::forward_list<dogen::formatters::file> dispatcher::format(const entity& e) {
 workflow::workflow(const std::forward_list<facet>& facets) : facets_(facets) { }
 
 std::forward_list<dogen::formatters::file>
-workflow::format(const entity& e) const {
+workflow::format(const formattables::entity& e) const {
     dispatcher d(facets_);
     return d.format(e);
 }

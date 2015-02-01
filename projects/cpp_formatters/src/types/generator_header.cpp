@@ -22,8 +22,8 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
@@ -58,7 +58,7 @@ file_formatter::shared_ptr generator_header::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new generator_header(stream));
 }
 
-void generator_header::generator_class(const cpp::enum_info& ei) {
+void generator_header::generator_class(const cpp::formattables::enum_info& ei) {
     const std::string class_name(ei.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -99,7 +99,8 @@ void generator_header::generator_class(const cpp::enum_info& ei) {
     stream_ << "};";
 }
 
-void generator_header::generator_class(const cpp::class_info& ci) {
+void generator_header::generator_class(
+    const cpp::formattables::class_info& ci) {
     const std::string class_name(ci.name() + "_generator");
 
     stream_ << indenter_ << "class " << class_name << " ";
@@ -150,8 +151,10 @@ void generator_header::generator_class(const cpp::class_info& ci) {
     stream_ << "};";
 }
 
-void generator_header::format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+void generator_header::format_enumeration(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -169,15 +172,16 @@ void generator_header::format_enumeration(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void generator_header::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void generator_header::format_class(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
     {
-        const cpp::class_info& ci(*o);
+        const cpp::formattables::class_info& ci(*o);
         std::list<std::string> namespaces(ci.namespaces());
         namespace_helper ns_helper(stream_, namespaces);
         utility_.blank_line();
@@ -188,7 +192,7 @@ void generator_header::format_class(const cpp::file_info& f) {
     utility_.blank_line(2);
 }
 
-void generator_header::format(const cpp::file_info& f) {
+void generator_header::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
@@ -199,7 +203,7 @@ void generator_header::format(const cpp::file_info& f) {
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

@@ -32,13 +32,13 @@ key_class_implementation(std::ostream& stream,
     disable_io_(disable_io) { }
 
 void key_class_implementation::
-hand_crafted_constructors(const cpp::class_info& ci) {
+hand_crafted_constructors(const cpp::formattables::class_info& ci) {
     default_constructor(ci);
     if (!disable_complete_constructor_)
         complete_constructor(ci);
 }
 
-void key_class_implementation::format(const cpp::class_info& ci) {
+void key_class_implementation::format(const cpp::formattables::class_info& ci) {
     hand_crafted_constructors(ci);
     if (!disable_io_)
         to_stream(ci);

@@ -40,7 +40,7 @@ include_cmakelists(std::ostream& stream, const bool odb_enabled,
                                     odb_enabled_(odb_enabled),
                                     odb_folder_(odb_folder) {}
 
-void include_cmakelists::format(const cpp::cmakelists_info& ci) {
+void include_cmakelists::format(const cpp::formattables::cmakelists_info& ci) {
     const std::string mn(ci.model_name().empty() ?
         unnamed_model :
         ci.model_name());

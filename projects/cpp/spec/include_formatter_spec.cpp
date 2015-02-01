@@ -33,7 +33,8 @@ namespace {
 const std::string empty;
 const std::string test_module("cpp_formatters");
 const std::string test_suite("include_formatter_spec");
-const dogen::cpp::includes empty_includes = dogen::cpp::includes();
+const dogen::cpp::formattables::includes empty_includes =
+    dogen::cpp::formattables::includes();
 
 const std::string with_includes(R"(#include <win32/system_inc_1>
 #include <unix/system_inc_2>
@@ -52,7 +53,7 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     SETUP_TEST_LOG_SOURCE("non_empty_includes_produces_expected_preprocessor_includes");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    dogen::cpp::includes i;
+    dogen::cpp::formattables::includes i;
     // FIXME: not using windows formatting for now, problems with
     // FIXME: boost path.
     // i.system().push_back("win32\\system_inc_1");

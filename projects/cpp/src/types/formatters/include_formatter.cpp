@@ -37,7 +37,8 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-void include_formatter::format(std::ostream& s, const includes& i) const {
+void include_formatter::
+format(std::ostream& s, const formattables::includes& i) const {
     for (const auto& inc : i.system()) {
         s << include << open_system << inc.generic_string()
           << close_system << std::endl;

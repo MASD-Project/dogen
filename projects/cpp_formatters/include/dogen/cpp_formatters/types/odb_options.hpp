@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/odb_options_info.hpp"
+#include "dogen/cpp/types/formattables/odb_options_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
     explicit odb_options(std::ostream& stream);
 
 public:
-    void format(const cpp::odb_options_info& ooi);
+    void format(const cpp::formattables::odb_options_info& ooi);
 
 private:
     std::ostream& stream_;

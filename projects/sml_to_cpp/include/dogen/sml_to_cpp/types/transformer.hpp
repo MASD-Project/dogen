@@ -38,15 +38,14 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/type_visitor.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/namespace_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/nested_type_info.hpp"
-#include "dogen/cpp/types/registrar_info.hpp"
-#include "dogen/cpp/types/visitor_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/visitor_info.hpp"
+#include "dogen/cpp/types/formattables/registrar_info.hpp"
+#include "dogen/cpp/types/formattables/namespace_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
+#include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/sml_to_cpp/types/context.hpp"
-
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -91,7 +90,7 @@ private:
      * @brief Transforms the SML nested qname into a nested type info.
      */
     void to_nested_type_info(const sml::nested_qname& nqn,
-        cpp::nested_type_info& nti, std::string& complete_name,
+        cpp::formattables::nested_type_info& nti, std::string& complete_name,
         bool& requires_stream_manipulators) const;
 
     /**
@@ -111,28 +110,28 @@ private:
      * @li position 4: if true, the property invalidates the compiler
      * generated default constructor.
      */
-    std::tuple<cpp::property_info, bool, bool, bool, bool>
+    std::tuple<cpp::formattables::property_info, bool, bool, bool, bool>
     to_property_info(const sml::property p, const bool is_immutable,
         const bool is_fluent) const;
 
     /**
      * @brief Transforms an SML property to an enumerator info.
      */
-    cpp::enumerator_info
+    cpp::formattables::enumerator_info
     to_enumerator_info(const sml::enumerator& e) const;
 
     /**
      * @brief Transforms a SML value containing an enumeration into an
      * enumeration info.
      */
-    boost::shared_ptr<cpp::enum_info>
+    boost::shared_ptr<cpp::formattables::enum_info>
     to_enumeration_info(const sml::enumeration& e) const;
 
     /**
      * @brief Transforms a SML value containing an exception into an
      * exception info.
      */
-    boost::shared_ptr<cpp::exception_info>
+    boost::shared_ptr<cpp::formattables::exception_info>
     to_exception_info(const sml::object& o) const;
 
     /**
@@ -140,7 +139,7 @@ private:
      *
      * @param ao object to transform.
      */
-    boost::shared_ptr<cpp::class_info>
+    boost::shared_ptr<cpp::formattables::class_info>
     to_class_info(const sml::object& o) const;
 
     /**
@@ -149,13 +148,15 @@ private:
      *
      * @pre value object must have a visitor type.
      */
-    boost::shared_ptr<cpp::visitor_info> to_visitor(const sml::object& o) const;
+    boost::shared_ptr<cpp::formattables::visitor_info>
+    to_visitor(const sml::object& o) const;
 
 private:
     /**
      * @brief Adds the class info to the context.
      */
-    void add_class(const sml::qname& qn, boost::shared_ptr<cpp::class_info> ci);
+    void add_class(const sml::qname& qn,
+        boost::shared_ptr<cpp::formattables::class_info> ci);
 
 private:
     using type_visitor::visit;

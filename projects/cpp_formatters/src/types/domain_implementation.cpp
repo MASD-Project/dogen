@@ -85,7 +85,7 @@ create(std::ostream& stream, bool disable_complete_constructor,
 }
 
 void domain_implementation::
-smart_pointer_helper(const cpp::nested_type_info& nti) {
+smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -116,7 +116,7 @@ smart_pointer_helper(const cpp::nested_type_info& nti) {
 }
 
 void domain_implementation::
-recursive_helper_method_creator(const cpp::nested_type_info& nti,
+recursive_helper_method_creator(const cpp::formattables::nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
     if (types_done.find(nti.complete_identifiable_name()) != types_done.end())
         return;
@@ -131,7 +131,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
     types_done.insert(nti.complete_identifiable_name());
 }
 
-void domain_implementation::io_helper_methods(const cpp::class_info& ci) {
+void domain_implementation::io_helper_methods(
+    const cpp::formattables::class_info& ci) {
     const bool has_io(ci.is_parent() || !ci.parents().empty() ||
         use_integrated_io_);
 
@@ -144,7 +145,7 @@ void domain_implementation::io_helper_methods(const cpp::class_info& ci) {
 }
 
 void domain_implementation::
-inserter_operator(const cpp::class_info& ci) {
+inserter_operator(const cpp::formattables::class_info& ci) {
     if (!use_integrated_io_ || disable_io_)
         return;
 
@@ -171,12 +172,12 @@ inserter_operator(const cpp::class_info& ci) {
 }
 
 void domain_implementation::
-class_implementation(const cpp::content_descriptor& cd,
-    const cpp::class_info& ci) {
+class_implementation(const cpp::formattables::content_descriptor& cd,
+    const cpp::formattables::class_info& ci) {
 
     using dogen::utility::exception::invalid_enum_value;
-    using cpp::aspect_types;
-    using cpp::content_types;
+    using cpp::formattables::aspect_types;
+    using cpp::formattables::content_types;
     if (cd.aspect_type() == aspect_types::main) {
         const auto ct(cd.content_type());
         if (ct == content_types::versioned_key ||
@@ -198,13 +199,15 @@ class_implementation(const cpp::content_descriptor& cd,
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_aspect_type));
 }
 
-void domain_implementation::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void domain_implementation::format_class(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     io_helper_methods(ci);
 
     std::unordered_set<std::string> types_done;
@@ -218,20 +221,21 @@ void domain_implementation::format_class(const cpp::file_info& f) {
     inserter_operator(ci);
 }
 
-void domain_implementation::format_enumeration(const cpp::file_info&) {
+void domain_implementation::format_enumeration(
+    const cpp::formattables::file_info&) {
     BOOST_LOG_SEV(lg, error) << missing_class_info;
     BOOST_THROW_EXCEPTION(
         formatting_error(enum_info_not_supported));
 }
 
-void domain_implementation::format(const cpp::file_info& f) {
+void domain_implementation::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

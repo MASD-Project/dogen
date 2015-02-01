@@ -122,19 +122,19 @@ includes_for_one_object_model(cpp_facet_types ft,
     std::vector<std::list<boost::filesystem::path> > r;
     r.reserve(4);
 
-    const auto main(dogen::cpp::aspect_types::main);
-    dogen::cpp::content_descriptor cd;
+    const auto main(dogen::cpp::formattables::aspect_types::main);
+    dogen::cpp::formattables::content_descriptor cd;
     cd.name(p.name());
     cd.facet_type(ft);
-    cd.file_type(dogen::cpp::file_types::header);
+    cd.file_type(dogen::cpp::formattables::file_types::header);
     cd.aspect_type(main);
-    cd.content_type(dogen::cpp::content_types::value_object);
+    cd.content_type(dogen::cpp::formattables::content_types::value_object);
     dogen::sml_to_cpp::relationships rel;
     const auto i0(im.includes_for_object(cd, rel));
     r.push_back(i0.system());
     r.push_back(i0.user());
 
-    cd.file_type(dogen::cpp::file_types::implementation);
+    cd.file_type(dogen::cpp::formattables::file_types::implementation);
     const auto i1(im.includes_for_object(cd, rel));
     r.push_back(i1.system());
     r.push_back(i1.user());

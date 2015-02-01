@@ -28,9 +28,9 @@
 #include <iosfwd>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/nested_type_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -53,14 +53,16 @@ public:
     virtual ~domain_implementation() noexcept {}
 
 private:
-    void smart_pointer_helper(const cpp::nested_type_info& nti);
-    void recursive_helper_method_creator(const cpp::nested_type_info& nti,
+    void smart_pointer_helper(
+        const cpp::formattables::nested_type_info& nti);
+    void recursive_helper_method_creator(
+        const cpp::formattables::nested_type_info& nti,
         std::unordered_set<std::string>& types_done);
 
-    void io_helper_methods(const cpp::class_info& ci);
-    void inserter_operator(const cpp::class_info& ci);
-    void class_implementation(const cpp::content_descriptor& cd,
-        const cpp::class_info& ci);
+    void io_helper_methods(const cpp::formattables::class_info& ci);
+    void inserter_operator(const cpp::formattables::class_info& ci);
+    void class_implementation(const cpp::formattables::content_descriptor& cd,
+        const cpp::formattables::class_info& ci);
 
 public:
     static file_formatter::shared_ptr create(std::ostream& stream,
@@ -68,11 +70,11 @@ public:
         bool disable_io);
 
 private:
-    void format_class(const cpp::file_info& f);
-    void format_enumeration(const cpp::file_info& f);
+    void format_class(const cpp::formattables::file_info& f);
+    void format_enumeration(const cpp::formattables::file_info& f);
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;

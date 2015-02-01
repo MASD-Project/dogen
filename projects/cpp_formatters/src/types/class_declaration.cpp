@@ -35,20 +35,21 @@ class_declaration(std::ostream& stream, const bool disable_serialization,
       disable_complete_constructor_(disable_complete_constructor),
       disable_io_(disable_io) { }
 
-void class_declaration::
-hand_crafted_constructors(const cpp::class_info& ci) {
+void class_declaration::hand_crafted_constructors(
+    const cpp::formattables::class_info& ci) {
     default_constructor(ci);
     destructor(ci);
 
-    if (ci.class_type() != cpp::class_types::unversioned_key &&
-        ci.class_type() != cpp::class_types::versioned_key)
+    if (ci.class_type() != cpp::formattables::class_types::unversioned_key &&
+        ci.class_type() != cpp::formattables::class_types::versioned_key)
         move_constructor(ci);
 
     if (!disable_complete_constructor_)
         complete_constructor(ci);
 }
 
-void class_declaration::visitor_method(const cpp::class_info& ci) {
+void class_declaration::
+visitor_method(const cpp::formattables::class_info& ci) {
     if (ci.is_visitable()) {
         utility_.public_access_specifier();
         stream_ << indenter_ << "virtual void accept(const " << ci.name()
@@ -105,7 +106,7 @@ void class_declaration::visitor_method(const cpp::class_info& ci) {
     }
 }
 
-void class_declaration::open_class(const cpp::class_info& ci) {
+void class_declaration::open_class(const cpp::formattables::class_info& ci) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(ci.documentation());
     stream_ << indenter_ << "class " << ci.name();
@@ -139,7 +140,8 @@ void class_declaration::close_class() {
     utility_.blank_line();
 }
 
-void class_declaration::default_constructor(const cpp::class_info& ci) {
+void class_declaration::default_constructor(
+    const cpp::formattables::class_info& ci) {
     if (!ci.requires_manual_default_constructor())
         return;
 
@@ -149,7 +151,8 @@ void class_declaration::default_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::complete_constructor(const cpp::class_info& ci) {
+void class_declaration::complete_constructor(
+    const cpp::formattables::class_info& ci) {
     const auto props(ci.all_properties());
     if (props.empty())
         return;
@@ -187,7 +190,8 @@ void class_declaration::complete_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::move_constructor(const cpp::class_info& ci) {
+void class_declaration::move_constructor(
+    const cpp::formattables::class_info& ci) {
     if (!ci.requires_manual_move_constructor())
         return;
 
@@ -202,7 +206,7 @@ void class_declaration::move_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::destructor(const cpp::class_info& ci) {
+void class_declaration::destructor(const cpp::formattables::class_info& ci) {
     /*
      * according to MEC++, item 33, base classes should always be
      * abstract. this avoids all sorts of tricky problems with
@@ -223,7 +227,7 @@ void class_declaration::destructor(const cpp::class_info& ci) {
 }
 
 void class_declaration::
-compiler_generated_constuctors(const cpp::class_info& ci) {
+compiler_generated_constuctors(const cpp::formattables::class_info& ci) {
     utility_.public_access_specifier();
 
     if (!ci.requires_manual_default_constructor())
@@ -253,7 +257,7 @@ compiler_generated_constuctors(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::friends(const cpp::class_info& ci) {
+void class_declaration::friends(const cpp::formattables::class_info& ci) {
     if (disable_serialization_)
         return;
 
@@ -273,7 +277,7 @@ void class_declaration::friends(const cpp::class_info& ci) {
 
 void class_declaration::
 non_object_getters_and_setters(const std::string class_name,
-    const cpp::property_info& pi) {
+    const cpp::formattables::property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(pi.documentation());
     if (!pi.is_immutable())
@@ -304,7 +308,7 @@ non_object_getters_and_setters(const std::string class_name,
 
 void class_declaration::
 object_getters_and_setters(const std::string class_name,
-    const cpp::property_info& pi) {
+    const cpp::formattables::property_info& pi) {
     doxygen_comments dc(stream_, indenter_);
     dc.format(pi.documentation());
     if (!pi.is_immutable())
@@ -351,7 +355,8 @@ object_getters_and_setters(const std::string class_name,
     utility_.blank_line();
 }
 
-void class_declaration::getters_and_setters(const cpp::class_info& ci) {
+void class_declaration::getters_and_setters(
+    const cpp::formattables::class_info& ci) {
     if (ci.properties().empty())
         return;
 
@@ -366,7 +371,8 @@ void class_declaration::getters_and_setters(const cpp::class_info& ci) {
     }
 }
 
-void class_declaration::member_variables(const cpp::class_info& ci) {
+void class_declaration::member_variables(
+    const cpp::formattables::class_info& ci) {
     if (ci.properties().empty())
         return;
 
@@ -378,7 +384,7 @@ void class_declaration::member_variables(const cpp::class_info& ci) {
     }
 }
 
-void class_declaration::equality(const cpp::class_info& ci) {
+void class_declaration::equality(const cpp::formattables::class_info& ci) {
     // equality is only public in leaf classes - MEC++-33
     if (ci.is_parent()) {
         utility_.protected_access_specifier();
@@ -425,7 +431,7 @@ void class_declaration::equality(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::to_stream(const cpp::class_info& ci) {
+void class_declaration::to_stream(const cpp::formattables::class_info& ci) {
     if (!ci.is_parent() && ci.parents().empty())
         return;
 
@@ -444,7 +450,8 @@ void class_declaration::to_stream(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::swap_and_assignment(const cpp::class_info& ci) {
+void class_declaration::swap_and_assignment(
+    const cpp::formattables::class_info& ci) {
     if ((ci.all_properties().empty() && !ci.is_parent()) || ci.is_immutable())
         return;
 
@@ -466,15 +473,16 @@ void class_declaration::swap_and_assignment(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void class_declaration::format(const cpp::class_info& ci) {
+void class_declaration::format(const cpp::formattables::class_info& ci) {
     open_class(ci);
     {
         positive_indenter_scope s(indenter_);
         compiler_generated_constuctors(ci);
         hand_crafted_constructors(ci);
         friends(ci);
-        if (ci.class_type() != cpp::class_types::unversioned_key &&
-            ci.class_type() != cpp::class_types::versioned_key)
+        if (ci.class_type() !=
+            cpp::formattables::class_types::unversioned_key &&
+            ci.class_type() != cpp::formattables::class_types::versioned_key)
             visitor_method(ci);
 
         if (!disable_io_)

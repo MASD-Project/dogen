@@ -40,16 +40,16 @@ namespace cpp_formatters {
 qname::qname(std::ostream& stream)
     : stream_(stream) { }
 
-void qname::format(const cpp::parent_info& pi) {
-    ::format<cpp::parent_info>(stream_, pi);
+void qname::format(const cpp::formattables::parent_info& pi) {
+    ::format<cpp::formattables::parent_info>(stream_, pi);
 }
 
-void qname::format(const cpp::class_info& ci) {
-    ::format<cpp::class_info>(stream_, ci);
+void qname::format(const cpp::formattables::class_info& ci) {
+    ::format<cpp::formattables::class_info>(stream_, ci);
 }
 
-void qname::format(const cpp::enum_info& ei) {
-    ::format<cpp::enum_info>(stream_, ei);
+void qname::format(const cpp::formattables::enum_info& ei) {
+    ::format<cpp::formattables::enum_info>(stream_, ei);
 }
 
 } }

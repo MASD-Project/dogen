@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
@@ -73,7 +73,7 @@ generator_implementation::create(std::ostream& stream) {
 
 void generator_implementation::
 sequence_container_helper(
-    const cpp::nested_type_info& nti, unsigned int quantity) {
+    const cpp::formattables::nested_type_info& nti, unsigned int quantity) {
     const auto container_identifiable_type_name(
         nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
@@ -115,7 +115,7 @@ sequence_container_helper(
 
 void generator_implementation::
 associative_container_helper(
-    const cpp::nested_type_info& nti, unsigned int quantity) {
+    const cpp::formattables::nested_type_info& nti, unsigned int quantity) {
 
     const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
@@ -167,7 +167,7 @@ associative_container_helper(
 }
 
 void generator_implementation::
-smart_pointer_helper(const cpp::nested_type_info& nti) {
+smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     const auto container_identifiable_type_name(
         nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
@@ -206,7 +206,7 @@ smart_pointer_helper(const cpp::nested_type_info& nti) {
 }
 
 void generator_implementation::
-optional_helper(const cpp::nested_type_info& nti) {
+optional_helper(const cpp::formattables::nested_type_info& nti) {
     const auto container_identifiable_type_name(
         nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
@@ -244,7 +244,7 @@ optional_helper(const cpp::nested_type_info& nti) {
 }
 
 void generator_implementation::
-pair_helper(const cpp::nested_type_info& nti) {
+pair_helper(const cpp::formattables::nested_type_info& nti) {
     const auto container_identifiable_type_name(
         nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
@@ -290,7 +290,7 @@ pair_helper(const cpp::nested_type_info& nti) {
 }
 
 void generator_implementation::
-filesystem_path_helper(const cpp::nested_type_info& nti) {
+filesystem_path_helper(const cpp::formattables::nested_type_info& nti) {
     const auto type_name(nti.identifiable_name());
     const auto identifiable_type_name(nti.complete_identifiable_name());
 
@@ -311,7 +311,8 @@ filesystem_path_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line();
 }
 
-void generator_implementation::date_helper(const cpp::nested_type_info& nti) {
+void generator_implementation::date_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto type_name(nti.identifiable_name());
     const auto identifiable_type_name(nti.complete_identifiable_name());
 
@@ -332,7 +333,8 @@ void generator_implementation::date_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line();
 }
 
-void generator_implementation::ptime_helper(const cpp::nested_type_info& nti) {
+void generator_implementation::ptime_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto type_name(nti.identifiable_name());
     const auto identifiable_type_name(nti.complete_identifiable_name());
 
@@ -360,7 +362,7 @@ void generator_implementation::ptime_helper(const cpp::nested_type_info& nti) {
 }
 
 void generator_implementation::
-time_duration_helper(const cpp::nested_type_info& nti) {
+time_duration_helper(const cpp::formattables::nested_type_info& nti) {
     const auto type_name(nti.identifiable_name());
     const auto identifiable_type_name(nti.complete_identifiable_name());
 
@@ -381,7 +383,8 @@ time_duration_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line();
 }
 
-void generator_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+void generator_implementation::ptree_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto type_name(nti.identifiable_name());
     const auto identifiable_type_name(nti.complete_identifiable_name());
 
@@ -408,7 +411,7 @@ void generator_implementation::ptree_helper(const cpp::nested_type_info& nti) {
 }
 
 void generator_implementation::
-variant_helper(const cpp::nested_type_info& nti) {
+variant_helper(const cpp::formattables::nested_type_info& nti) {
     const auto container_identifiable_type_name(
         nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
@@ -572,7 +575,7 @@ int_like_helper(const std::string& identifiable_type_name,
 
 void generator_implementation::
 recursive_helper_method_creator(const std::string& owner_name,
-    const cpp::nested_type_info& nti,
+    const cpp::formattables::nested_type_info& nti,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
     const unsigned int quantity(4);
 
@@ -640,7 +643,7 @@ recursive_helper_method_creator(const std::string& owner_name,
 }
 
 void generator_implementation::
-create_helper_methods(const cpp::class_info& ci) {
+create_helper_methods(const cpp::formattables::class_info& ci) {
     const auto props(ci.properties());
     if (props.empty())
         return;
@@ -655,7 +658,8 @@ create_helper_methods(const cpp::class_info& ci) {
         recursive_helper_method_creator(owner, p.type(), types_done, as_ptr);
 }
 
-void generator_implementation::populate_method(const cpp::class_info& ci) {
+void generator_implementation::populate_method(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_immutable())
         return;
 
@@ -691,7 +695,8 @@ void generator_implementation::populate_method(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method(const cpp::class_info& ci) {
+void generator_implementation::create_method(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent())
         return;
 
@@ -735,7 +740,8 @@ void generator_implementation::create_method(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void generator_implementation::create_method_ptr(const cpp::class_info& ci) {
+void generator_implementation::create_method_ptr(
+    const cpp::formattables::class_info& ci) {
     auto leaves(ci.leaves());
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type*" << std::endl
@@ -780,7 +786,8 @@ void generator_implementation::create_method_ptr(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void generator_implementation::function_operator(const cpp::class_info& ci) {
+void generator_implementation::function_operator(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent())
         return;
 
@@ -798,7 +805,8 @@ void generator_implementation::function_operator(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void generator_implementation::default_constructor(const cpp::class_info& ci) {
+void generator_implementation::default_constructor(
+    const cpp::formattables::class_info& ci) {
     if (ci.is_parent())
         return;
 
@@ -807,14 +815,16 @@ void generator_implementation::default_constructor(const cpp::class_info& ci) {
     utility_.blank_line();
 }
 
-void generator_implementation::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void generator_implementation::format_class(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     create_helper_methods(ci);
     utility_.blank_line(2);
 
@@ -837,8 +847,10 @@ void generator_implementation::format_class(const cpp::file_info& f) {
     utility_.blank_line();
 }
 
-void generator_implementation::format_enumeration(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::enum_info>(f.entity()));
+void generator_implementation::format_enumeration(
+    const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::enum_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));
@@ -897,14 +909,14 @@ void generator_implementation::format_enumeration(const cpp::file_info& f) {
     }
 }
 
-void generator_implementation::format(const cpp::file_info& f) {
+void generator_implementation::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

@@ -32,7 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
-#include "dogen/cpp/types/includes_builder_interface.hpp"
+#include "dogen/cpp/types/formattables/includes_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -61,14 +61,14 @@ public:
      * qualified name and the current settings.
      */
     virtual boost::filesystem::path
-    make_file_name(const settings::global_settings& gs
-        , const sml::qname& qn) const = 0;
+    make_file_name(const settings::global_settings& gs,
+        const sml::qname& qn) const = 0;
 
     /**
      * @brief Creates an instance of the path spec builder for this
      * formatter.
      */
-    virtual std::shared_ptr<includes_builder_interface>
+    virtual std::shared_ptr<formattables::includes_builder_interface>
     make_includes_builder() const = 0;
 };
 

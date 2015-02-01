@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 
@@ -47,7 +47,7 @@ public:
     exception_declaration(std::ostream& stream);
 
 public:
-    void format(const cpp::exception_info& ei);
+    void format(const cpp::formattables::exception_info& ei);
 
 protected:
     std::ostream& stream_;

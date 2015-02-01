@@ -22,9 +22,9 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/enum_info.hpp"
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
@@ -67,7 +67,8 @@ file_formatter::shared_ptr hash_implementation::create(std::ostream& stream) {
     return file_formatter::shared_ptr(new hash_implementation(stream));
 }
 
-bool hash_implementation::is_hashable(const cpp::nested_type_info& nti) {
+bool hash_implementation::is_hashable(
+    const cpp::formattables::nested_type_info& nti) {
     return
         !nti.is_sequence_container() &&
         !nti.is_associative_container() &&
@@ -82,7 +83,8 @@ bool hash_implementation::is_hashable(const cpp::nested_type_info& nti) {
         !nti.is_ptree();
 }
 
-void hash_implementation::combine_function(const cpp::class_info& ci) {
+void hash_implementation::combine_function(
+    const cpp::formattables::class_info& ci) {
     if (ci.properties().empty() && ci.parents().empty())
         return;
 
@@ -100,7 +102,8 @@ void hash_implementation::combine_function(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void hash_implementation::path_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::path_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const std::string identifiable_type_name(nti.complete_identifiable_name());
     const std::string type_name(nti.complete_name());
 
@@ -121,7 +124,8 @@ void hash_implementation::path_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::pair_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::pair_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -171,7 +175,8 @@ void hash_implementation::pair_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::optional_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::optional_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -218,7 +223,8 @@ void hash_implementation::optional_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::variant_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::variant_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -285,7 +291,7 @@ void hash_implementation::variant_helper(const cpp::nested_type_info& nti) {
 }
 
 void hash_implementation::
-sequence_container_helper(const cpp::nested_type_info& nti) {
+sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Children container has unexpected size: "
@@ -330,7 +336,7 @@ sequence_container_helper(const cpp::nested_type_info& nti) {
 }
 
 void hash_implementation::
-associative_container_helper(const cpp::nested_type_info& nti) {
+associative_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
@@ -387,7 +393,7 @@ associative_container_helper(const cpp::nested_type_info& nti) {
 }
 
 void hash_implementation::
-smart_pointer_helper(const cpp::nested_type_info& nti) {
+smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -422,7 +428,8 @@ smart_pointer_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::date_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::date_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const std::string identifiable_type_name(
         nti.complete_identifiable_name());
     const std::string type_name(nti.complete_name());
@@ -446,7 +453,8 @@ void hash_implementation::date_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::ptime_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::ptime_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const std::string identifiable_type_name(
         nti.complete_identifiable_name());
     const std::string type_name(nti.complete_name());
@@ -476,7 +484,7 @@ void hash_implementation::ptime_helper(const cpp::nested_type_info& nti) {
 }
 
 void hash_implementation::
-time_duration_helper(const cpp::nested_type_info& nti) {
+time_duration_helper(const cpp::formattables::nested_type_info& nti) {
     const std::string identifiable_type_name(
         nti.complete_identifiable_name());
     const std::string type_name(nti.complete_name());
@@ -499,7 +507,8 @@ time_duration_helper(const cpp::nested_type_info& nti) {
     utility_.close_scope();
 }
 
-void hash_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+void hash_implementation::ptree_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const std::string identifiable_type_name(
         nti.complete_identifiable_name());
     const std::string type_name(nti.complete_name());
@@ -534,7 +543,7 @@ void hash_implementation::ptree_helper(const cpp::nested_type_info& nti) {
 }
 
 void hash_implementation::
-recursive_helper_method_creator(const cpp::nested_type_info& nti,
+recursive_helper_method_creator(const cpp::formattables::nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
     BOOST_LOG_SEV(lg, debug) << "Creating helper methods for " << nti.name();
 
@@ -571,7 +580,8 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
     types_done.insert(nti.complete_identifiable_name());
 }
 
-void hash_implementation::create_helper_methods(const cpp::class_info& ci) {
+void hash_implementation::create_helper_methods(
+    const cpp::formattables::class_info& ci) {
     const auto props(ci.properties());
     if (props.empty())
         return;
@@ -581,7 +591,8 @@ void hash_implementation::create_helper_methods(const cpp::class_info& ci) {
         recursive_helper_method_creator(p.type(), types_done);
 }
 
-void hash_implementation::hasher_hash_method(const cpp::class_info& ci) {
+void hash_implementation::hasher_hash_method(
+    const cpp::formattables::class_info& ci) {
     BOOST_LOG_SEV(lg, debug) << "Creating hash method for " << ci.name();
 
     const auto props(ci.properties());
@@ -634,14 +645,15 @@ void hash_implementation::hasher_hash_method(const cpp::class_info& ci) {
     utility_.close_scope();
 }
 
-void hash_implementation::format_class(const cpp::file_info& f) {
-    auto o(boost::dynamic_pointer_cast<cpp::class_info>(f.entity()));
+void hash_implementation::format_class(const cpp::formattables::file_info& f) {
+    auto o(boost::dynamic_pointer_cast<
+            cpp::formattables::class_info>(f.entity()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
     }
 
-    const cpp::class_info& ci(*o);
+    const cpp::formattables::class_info& ci(*o);
     {
         namespace_helper nsh(stream_, std::list<std::string> { });
         utility_.blank_line();
@@ -660,19 +672,20 @@ void hash_implementation::format_class(const cpp::file_info& f) {
     utility_.blank_line();
 }
 
-void hash_implementation::format_enumeration(const cpp::file_info&) {
+void hash_implementation::format_enumeration(
+    const cpp::formattables::file_info&) {
     BOOST_LOG_SEV(lg, error) << enum_info_not_supported;
     BOOST_THROW_EXCEPTION(formatting_error(enum_info_not_supported));
 }
 
-void hash_implementation::format(const cpp::file_info& f) {
+void hash_implementation::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
     includes includes(stream_);
     includes.format(f);
 
-    using cpp::content_types;
+    using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
         f.descriptor().content_type() == content_types::versioned_key ||
         f.descriptor().content_type() == content_types::value_object ||

@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen/cpp/types/enum_info.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 
@@ -47,7 +47,7 @@ public:
     enum_declaration(std::ostream& stream);
 
 public:
-    void format(const cpp::enum_info& ei);
+    void format(const cpp::formattables::enum_info& ei);
 
 protected:
     std::ostream& stream_;

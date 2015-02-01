@@ -31,14 +31,14 @@
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/registrar.hpp"
-#include "dogen/cpp/types/transformer.hpp"
-#include "dogen/cpp/types/file_settings.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
-#include "dogen/cpp/types/includes_builder_interface.hpp"
+#include "dogen/cpp/types/formattables/transformer.hpp"
+#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/includes_builder_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,12 +48,13 @@ namespace cpp {
  */
 class workflow : public backend::backend_interface {
 public:
-    typedef std::unordered_map<std::string, file_settings>
+    typedef std::unordered_map<std::string, formattables::file_settings>
     file_settings_by_formatter_type;
     typedef std::unordered_map<std::string, boost::filesystem::path>
     path_by_formatter_type;
     typedef std::unordered_map<std::string,
-                               std::shared_ptr<includes_builder_interface>
+                               std::shared_ptr<
+                                   formattables::includes_builder_interface>
                                > includes_builder_by_formatter_id;
 
 public:
@@ -83,14 +84,15 @@ private:
      * @brief Transforms the supplied SML elements into C++ entities.
      */
     template<typename AssociativeContainerOfElement>
-    std::forward_list<std::shared_ptr<entity>>
+    std::forward_list<std::shared_ptr<formattables::entity>>
     transform_sml_elements(
         const std::unordered_map<sml::qname,
         file_settings_by_formatter_type>&
         file_settings_by_qname_by_formatter_type, const sml::model& m,
         const AssociativeContainerOfElement& c) const {
-        std::forward_list<std::shared_ptr<entity> > r;
-        transformer t(file_settings_by_qname_by_formatter_type, m);
+        std::forward_list<std::shared_ptr<formattables::entity> > r;
+        formattables::transformer
+            t(file_settings_by_qname_by_formatter_type, m);
         for (const auto& pair : c) {
             const auto ng(sml::generation_types::no_generation);
             if (pair.second.generation_type() == ng)
@@ -105,7 +107,7 @@ private:
      * @brief Formats all files for the entity.
      */
     std::forward_list<dogen::formatters::file> format_entity(
-        const formatters::workflow& fw, const entity& e) const;
+        const formatters::workflow& fw, const formattables::entity& e) const;
 
 private:
     /**

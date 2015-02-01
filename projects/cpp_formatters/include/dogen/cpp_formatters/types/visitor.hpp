@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/cpp/types/visitor_info.hpp"
+#include "dogen/cpp/types/formattables/visitor_info.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -49,10 +49,10 @@ public:
     static file_formatter::shared_ptr create(std::ostream& stream);
 
 private:
-    void format(const cpp::visitor_info& vi);
+    void format(const cpp::formattables::visitor_info& vi);
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;

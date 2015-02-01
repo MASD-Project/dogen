@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/class_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp_formatters/types/class_implementation.hpp"
 
 namespace dogen {
@@ -45,10 +45,10 @@ public:
     virtual ~key_class_implementation() noexcept {}
 
 private:
-    void hand_crafted_constructors(const cpp::class_info& ci);
+    void hand_crafted_constructors(const cpp::formattables::class_info& ci);
 
 public:
-    virtual void format(const cpp::class_info& ci) override;
+    virtual void format(const cpp::formattables::class_info& ci) override;
 
 private:
     const bool disable_complete_constructor_;

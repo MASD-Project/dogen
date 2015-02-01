@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <iosfwd>
-#include "dogen/cpp/types/file_info.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 
@@ -50,7 +50,7 @@ private:
     void format(std::list<std::string> v, bool is_system);
 
 public:
-    void format(const cpp::file_info& f);
+    void format(const cpp::formattables::file_info& f);
 
 private:
     std::ostream& stream_;

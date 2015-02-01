@@ -27,13 +27,13 @@
 
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/class_info.hpp"
-#include "dogen/cpp/types/exception_info.hpp"
-#include "dogen/cpp/types/file_info.hpp"
-#include "dogen/cpp_formatters/types/indenter.hpp"
+#include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
+#include "dogen/cpp/types/formattables/entity_visitor.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
+#include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
-#include "dogen/cpp/types/entity_visitor.hpp"
 
 namespace dogen {
 namespace cpp_formatters {
@@ -42,8 +42,8 @@ namespace cpp_formatters {
  * @brief Formats a source file into the main header file of the types
  * aspect.
  */
-class types_main_header_file_formatter : public file_formatter,
-                                         private cpp::entity_visitor {
+class types_main_header_file_formatter
+    : public file_formatter, private cpp::formattables::entity_visitor {
 public:
     types_main_header_file_formatter() = delete;
     types_main_header_file_formatter(
@@ -67,18 +67,18 @@ public:
         const bool disable_io, const bool disable_serialization);
 
 private:
-    void inserter_operator(const cpp::class_info& ci);
-    void equality_operator(const cpp::class_info& ci);
-    void swap_method(const cpp::class_info& ci);
+    void inserter_operator(const cpp::formattables::class_info& ci);
+    void equality_operator(const cpp::formattables::class_info& ci);
+    void swap_method(const cpp::formattables::class_info& ci);
 
 private:
-    using cpp::entity_visitor::visit;
-    virtual void visit(dogen::cpp::class_info& ci) override;
-    virtual void visit(dogen::cpp::enum_info& ei) override;
-    virtual void visit(dogen::cpp::exception_info& ei) override;
+    using cpp::formattables::entity_visitor::visit;
+    virtual void visit(cpp::formattables::class_info& ci) override;
+    virtual void visit(cpp::formattables::enum_info& ei) override;
+    virtual void visit(cpp::formattables::exception_info& ei) override;
 
 public:
-    virtual void format(const cpp::file_info& f) override;
+    virtual void format(const cpp::formattables::file_info& f) override;
 
 private:
     std::ostream& stream_;

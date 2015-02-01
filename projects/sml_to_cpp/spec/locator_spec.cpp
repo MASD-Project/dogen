@@ -29,7 +29,7 @@
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/io/cpp_settings_io.hpp"
-#include "dogen/cpp/types/content_descriptor.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 #include "dogen/config/test/mock_settings_factory.hpp"
 
@@ -71,15 +71,16 @@ dogen::config::cpp_settings split_project_settings() {
         build_cpp_settings(src_dir, include_dir);
 }
 
-dogen::cpp::content_descriptor
-mock_descriptor(dogen::config::cpp_facet_types ft, dogen::cpp::file_types flt,
+dogen::cpp::formattables::content_descriptor
+mock_descriptor(dogen::config::cpp_facet_types ft,
+    dogen::cpp::formattables::file_types flt,
     std::string simple_name, std::list<std::string> module_path,
     std::list<std::string> external_module_path) {
 
-    dogen::cpp::content_descriptor r;
+    dogen::cpp::formattables::content_descriptor r;
     r.facet_type(ft);
     r.file_type(flt);
-    r.aspect_type(dogen::cpp::aspect_types::main);
+    r.aspect_type(dogen::cpp::formattables::aspect_types::main);
     r.name().model_name(test_model_name);
     r.name().module_path(module_path);
     r.name().simple_name(simple_name);
@@ -88,8 +89,9 @@ mock_descriptor(dogen::config::cpp_facet_types ft, dogen::cpp::file_types flt,
     return r;
 }
 
-dogen::cpp::content_descriptor
-mock_descriptor(dogen::config::cpp_facet_types ft, dogen::cpp::file_types flt) {
+dogen::cpp::formattables::content_descriptor
+mock_descriptor(dogen::config::cpp_facet_types ft,
+    dogen::cpp::formattables::file_types flt) {
     return mock_descriptor(
         ft, flt, type_name, module_path_1, external_module_path_1);
 }
@@ -101,7 +103,7 @@ generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
 
     std::list<std::string> r;
     auto lambda([&](dogen::config::cpp_facet_types ft,
-            dogen::cpp::file_types flt) {
+            dogen::cpp::formattables::file_types flt) {
             const auto cd(mock_descriptor(ft, flt));
             const auto p(lm.relative_logical_path(cd));
             r.push_back(with_path ?
@@ -110,8 +112,8 @@ generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
         });
 
     auto pi([&](dogen::config::cpp_facet_types ft) {
-            lambda(ft, dogen::cpp::file_types::header);
-            lambda(ft, dogen::cpp::file_types::implementation);
+            lambda(ft, dogen::cpp::formattables::file_types::header);
+            lambda(ft, dogen::cpp::formattables::file_types::implementation);
         });
 
     boost::for_each(facets, pi);
@@ -130,7 +132,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 
     locator lm(test_model_name, s);
     auto cd(mock_descriptor(dogen::config::cpp_facet_types::types,
-            dogen::cpp::file_types::header));
+            dogen::cpp::formattables::file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(cd));
@@ -164,7 +166,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     cd = mock_descriptor(dogen::config::cpp_facet_types::io,
-        dogen::cpp::file_types::implementation);
+        dogen::cpp::formattables::file_types::implementation);
     e = "c/d/test/io/a/b/a_type_io.cpp";
     a = lm.relative_logical_path(cd);
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -190,7 +192,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
 
     locator lm(test_model_name, s);
     auto cd(mock_descriptor(dogen::config::cpp_facet_types::types,
-            dogen::cpp::file_types::header));
+            dogen::cpp::formattables::file_types::header));
 
     boost::filesystem::path e("c/d/test/types/a/b/a_type.hpp");
     boost::filesystem::path a(lm.relative_logical_path(cd));
@@ -218,7 +220,7 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
     BOOST_CHECK(asserter::assert_equals(e, a));
 
     cd = mock_descriptor(dogen::config::cpp_facet_types::io,
-        dogen::cpp::file_types::implementation);
+        dogen::cpp::formattables::file_types::implementation);
     e = "io/a/b/a_type_io.cpp";
     a = lm.relative_logical_path(cd);
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -248,7 +250,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
     locator lm(test_model_name, s);
 
     auto lambda([&](dogen::config::cpp_facet_types ft,
-            dogen::cpp::file_types flt) {
+            dogen::cpp::formattables::file_types flt) {
             const auto cd(mock_descriptor(ft, flt));
             boost::filesystem::path e("c/d/test/a/b/a_type");
             boost::filesystem::path a(lm.relative_logical_path(cd));
@@ -262,7 +264,7 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
             BOOST_CHECK(asserter::assert_starts_with(
                     e.generic_string(), a.generic_string()));
 
-            if (flt == dogen::cpp::file_types::header)
+            if (flt == dogen::cpp::formattables::file_types::header)
                 e = "include directory/test/a/b/a_type";
             else
                 e = "source directory/test/a/b/a_type";
@@ -272,8 +274,8 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
         });
 
     auto pi([&](dogen::config::cpp_facet_types ft) {
-            lambda(ft, dogen::cpp::file_types::header);
-            lambda(ft, dogen::cpp::file_types::implementation);
+            lambda(ft, dogen::cpp::formattables::file_types::header);
+            lambda(ft, dogen::cpp::formattables::file_types::implementation);
         });
     boost::for_each(facets, pi);
 }

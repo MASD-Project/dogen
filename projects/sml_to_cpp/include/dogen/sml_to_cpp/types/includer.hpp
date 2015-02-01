@@ -33,15 +33,15 @@
 #include "dogen/config/types/cpp_settings.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/content_types.hpp"
-#include "dogen/cpp/types/aspect_types.hpp"
-#include "dogen/cpp/types/file_types.hpp"
-#include "dogen/cpp/types/content_descriptor.hpp"
-#include "dogen/cpp/types/includes.hpp"
-#include "dogen/sml_to_cpp/types/boost_model_helper.hpp"
-#include "dogen/sml_to_cpp/types/std_model_helper.hpp"
-#include "dogen/sml_to_cpp/types/relationships.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/file_types.hpp"
+#include "dogen/cpp/types/formattables/aspect_types.hpp"
+#include "dogen/cpp/types/formattables/content_types.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
+#include "dogen/sml_to_cpp/types/relationships.hpp"
+#include "dogen/sml_to_cpp/types/std_model_helper.hpp"
+#include "dogen/sml_to_cpp/types/boost_model_helper.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {
@@ -82,14 +82,15 @@ private:
      * domain header.
      */
     std::string domain_header_dependency(const sml::qname& name,
-        const cpp::aspect_types at) const;
+        const cpp::formattables::aspect_types at) const;
 
     /**
      * @brief Returns the include path to the header file, for the
      * given facet.
      */
     std::string header_dependency(const sml::qname& name,
-        config::cpp_facet_types ft, const cpp::aspect_types at) const;
+        config::cpp_facet_types ft,
+        const cpp::formattables::aspect_types at) const;
 
 public:
     /**
@@ -106,7 +107,7 @@ private:
     /**
      * @brief Remove duplicates from includes.
      */
-    void remove_duplicates(cpp::includes& inc) const;
+    void remove_duplicates(cpp::formattables::includes& inc) const;
 
     /**
      * @brief Appends all dependencies related to the formatter
@@ -123,21 +124,24 @@ private:
      * kept in one place.
      */
     void append_implementation_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd, cpp::includes& inc) const;
+        const cpp::formattables::content_descriptor& cd,
+        cpp::formattables::includes& inc) const;
 
     /**
      * @brief Handles all dependencies to types in the boost
      * libraries.
      */
     void append_boost_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd, cpp::includes& inc) const;
+        const cpp::formattables::content_descriptor& cd,
+        cpp::formattables::includes& inc) const;
 
     /**
      * @brief Handles all dependencies to types in the standard
      * library.
      */
-    void append_std_dependencies(const cpp::content_descriptor& cd,
-        cpp::includes& inc) const;
+    void append_std_dependencies(
+        const cpp::formattables::content_descriptor& cd,
+        cpp::formattables::includes& inc) const;
 
     /**
      * @brief Appends to the includes dependencies brought about by
@@ -148,7 +152,8 @@ private:
      * of the type and all types of all properties it may have.
      */
     void append_relationship_dependencies(const relationships& rel,
-        const cpp::content_descriptor& cd, cpp::includes& inc) const;
+        const cpp::formattables::content_descriptor& cd,
+        cpp::formattables::includes& inc) const;
 
     /**
      * @brief Appends to the includes dependencies related to the type
@@ -157,8 +162,9 @@ private:
      * For instance, this is the case of the implementation file
      * including the header file.
      */
-    void append_self_dependencies(const cpp::content_descriptor& cd,
-        cpp::includes& inc) const;
+    void append_self_dependencies(
+        const cpp::formattables::content_descriptor& cd,
+        cpp::formattables::includes& inc) const;
 
 public:
     /**
@@ -173,40 +179,46 @@ public:
      *
      * @param ft Facet for which we are computing the includes.
      */
-    cpp::includes
-    includes_for_includer_files(const cpp::content_descriptor& cd) const;
+    cpp::formattables::includes
+    includes_for_includer_files(
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given object.
      */
-    cpp::includes includes_for_object(const cpp::content_descriptor& cd,
+    cpp::formattables::includes includes_for_object(
+        const cpp::formattables::content_descriptor& cd,
         const relationships& rel) const;
 
     /**
      * @brief Returns all the includes required for the given
      * enumeration.
      */
-    cpp::includes
-    includes_for_enumeration(const cpp::content_descriptor& cd) const;
+    cpp::formattables::includes
+    includes_for_enumeration(
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the given
      * exception.
      */
-    cpp::includes
-    includes_for_exception(const cpp::content_descriptor& cd) const;
+    cpp::formattables::includes
+    includes_for_exception(
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes required for the serialisation
      * registrar.
      */
-    cpp::includes
-    includes_for_registrar(const cpp::content_descriptor& cd) const;
+    cpp::formattables::includes
+    includes_for_registrar(
+        const cpp::formattables::content_descriptor& cd) const;
 
     /**
      * @brief Returns all the includes for a visitor based on qname.
      */
-    cpp::includes includes_for_visitor(const cpp::content_descriptor& cd,
+    cpp::formattables::includes
+    includes_for_visitor(const cpp::formattables::content_descriptor& cd,
         const relationships& rel) const;
 
 private:

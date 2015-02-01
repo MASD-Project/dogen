@@ -79,12 +79,12 @@ inserter_implementation(std::ostream& stream, indenter& indenter,
 }
 
 bool inserter_implementation::
-is_insertable(const cpp::nested_type_info& nti) {
+is_insertable(const cpp::formattables::nested_type_info& nti) {
     return !nti.is_sequence_container() && !nti.is_associative_container();
 }
 
 void inserter_implementation::
-sequence_container_helper(const cpp::nested_type_info& nti) {
+sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
@@ -141,7 +141,7 @@ sequence_container_helper(const cpp::nested_type_info& nti) {
 }
 
 void inserter_implementation::
-associative_container_helper(const cpp::nested_type_info& nti) {
+associative_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1 && children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
@@ -241,7 +241,7 @@ associative_container_helper(const cpp::nested_type_info& nti) {
 }
 
 void inserter_implementation::
-smart_pointer_helper(const cpp::nested_type_info& nti) {
+smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
@@ -317,7 +317,7 @@ smart_pointer_helper(const cpp::nested_type_info& nti) {
 }
 
 void inserter_implementation::
-optional_helper(const cpp::nested_type_info& nti) {
+optional_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 1) {
         BOOST_LOG_SEV(lg, error) << invalid_optional_type;
@@ -387,7 +387,7 @@ optional_helper(const cpp::nested_type_info& nti) {
 }
 
 void inserter_implementation::
-pair_helper(const cpp::nested_type_info& nti) {
+pair_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.size() != 2) {
         BOOST_LOG_SEV(lg, error) << invalid_pair_type;
@@ -460,7 +460,7 @@ pair_helper(const cpp::nested_type_info& nti) {
 }
 
 void inserter_implementation::
-variant_helper(const cpp::nested_type_info& nti) {
+variant_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_variant;
@@ -569,7 +569,8 @@ variant_helper(const cpp::nested_type_info& nti) {
     utility_.blank_line(2);
 }
 
-void inserter_implementation::ptree_helper(const cpp::nested_type_info& nti) {
+void inserter_implementation::ptree_helper(
+    const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());
     if (!children.empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_ptree;
@@ -632,7 +633,7 @@ void inserter_implementation::tidy_up_string_method() {
 }
 
 void inserter_implementation::
-recursive_helper_method_creator(const cpp::nested_type_info& nti,
+recursive_helper_method_creator(const cpp::formattables::nested_type_info& nti,
     std::unordered_set<std::string>& types_done) {
 
     if (types_done.find(nti.complete_identifiable_name()) != types_done.end())
@@ -663,7 +664,7 @@ recursive_helper_method_creator(const cpp::nested_type_info& nti,
 }
 
 void inserter_implementation::
-format_helper_methods(const cpp::class_info& ci) {
+format_helper_methods(const cpp::formattables::class_info& ci) {
     const auto props(ci.properties());
     if (props.empty())
         return;
@@ -674,7 +675,7 @@ format_helper_methods(const cpp::class_info& ci) {
 }
 
 void inserter_implementation::
-format_inserter_implementation(const cpp::class_info& ci) {
+format_inserter_implementation(const cpp::formattables::class_info& ci) {
     if (ci.requires_stream_manipulators()) {
         stream_ << indenter_ << "boost::io::ios_flags_saver ifs(s);"
                 << std::endl
