@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/registrar.hpp"
+#include "dogen/cpp/types/formatters/registrar.hpp"
 
 namespace dogen {
 namespace cpp {

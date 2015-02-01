@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_REGISTRAR_HPP
-#define DOGEN_CPP_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,6 +35,7 @@
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
 class registrar {
 public:
@@ -59,12 +60,12 @@ public:
      * @brief Registers a class formatter.
      */
     void register_formatter(
-        std::shared_ptr<formatters::class_formatter_interface> f);
+        std::shared_ptr<class_formatter_interface> f);
 
     /**
      * @brief Returns all available formatters.
      */
-    const formatters::container& formatter_container() const;
+    const container& formatter_container() const;
 
     /**
      * @brief Returns all default settings for all facets.
@@ -73,13 +74,13 @@ public:
     default_facet_settings_by_facet_id() const;
 
 private:
-    formatters::container formatter_container_;
+    container formatter_container_;
     std::unordered_map<std::string, settings::facet_settings>
     default_facet_settings_by_facet_id_;
     std::unordered_map<std::string, settings::formatter_settings>
     default_formatter_settings_by_formatter_id_;
 };
 
-} }
+} } }
 
 #endif

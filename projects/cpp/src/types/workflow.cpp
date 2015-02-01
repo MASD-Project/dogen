@@ -57,13 +57,13 @@ const std::string formatter_not_found("Formatter not found: ");
 namespace dogen {
 namespace cpp {
 
-std::shared_ptr<registrar> workflow::registrar_;
+std::shared_ptr<formatters::registrar> workflow::registrar_;
 
 workflow::~workflow() noexcept { }
 
-cpp::registrar& workflow::registrar() {
+cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<cpp::registrar>();
+        registrar_ = std::make_shared<cpp::formatters::registrar>();
 
     return *registrar_;
 }

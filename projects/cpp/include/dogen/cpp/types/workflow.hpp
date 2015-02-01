@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/registrar.hpp"
+#include "dogen/cpp/types/formatters/registrar.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
@@ -70,7 +70,7 @@ public:
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static cpp::registrar& registrar();
+    static cpp::formatters::registrar& registrar();
 
 private:
     /**
@@ -200,7 +200,7 @@ public:
         const sml::model& m) const override;
 
 private:
-    static std::shared_ptr<cpp::registrar> registrar_;
+    static std::shared_ptr<cpp::formatters::registrar> registrar_;
 };
 
 } }

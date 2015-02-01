@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/registrar_error.hpp"
-#include "dogen/cpp/types/registrar.hpp"
+#include "dogen/cpp/types/formatters/registrar_error.hpp"
+#include "dogen/cpp/types/formatters/registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.registrar"));
+static logger lg(logger_factory("cpp.formatters.registrar"));
 
 const std::string duplicate_facet_id(
     "Attempt to register settings for the same facet more than once");
@@ -39,6 +39,7 @@ const std::string null_formatter("Formatter supplied is null");
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
 void registrar::validate() const {
     if (formatter_container_.class_formatters().empty()) {
@@ -69,7 +70,7 @@ void registrar::register_default_formatter_settings(
 }
 
 void registrar::register_formatter(
-    std::shared_ptr<formatters::class_formatter_interface> f) {
+    std::shared_ptr<class_formatter_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
@@ -77,7 +78,7 @@ void registrar::register_formatter(
     formatter_container_.class_formatters().push_front(f);
 }
 
-const formatters::container& registrar::formatter_container() const {
+const container& registrar::formatter_container() const {
     return formatter_container_;
 }
 
@@ -86,4 +87,4 @@ registrar::default_facet_settings_by_facet_id() const {
     return default_facet_settings_by_facet_id_;
 }
 
-} }
+} } }
