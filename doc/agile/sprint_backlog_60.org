@@ -17,15 +17,15 @@ base.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-01 Sun 19:10]
+Clock summary at [2015-02-02 Mon 20:19]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                          | *39:48* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
 | Active                                                                |         | 39:48 |      |
-| STARTED Sprint and product backlog grooming                           |         |       | 2:27 |
-| STARTED Updates to the manual and readme files                        |         |       | 0:49 |
+| COMPLETED Sprint and product backlog grooming                         |         |       | 2:27 |
+| COMPLETED Updates to the manual and readme files                      |         |       | 0:49 |
 | COMPLETED Add annotation fields and remove meta-data usage            |         |       | 2:15 |
 | COMPLETED Add field definition to odb formatters                      |         |       | 1:09 |
 | COMPLETED Consider defaulting doxygen docs to false                   |         |       | 0:05 |
@@ -45,11 +45,12 @@ Clock summary at [2015-02-01 Sun 19:10]
 | COMPLETED Create a =settings= namespace in =cpp=                      |         |       | 1:54 |
 | COMPLETED Create a =formattables= namespace in =cpp=                  |         |       | 3:33 |
 | COMPLETED Move registrar into formatters namespace                    |         |       | 0:13 |
-| STARTED Facet and formatter settings factories to use definitions     |         |       | 6:52 |
-| STARTED Split global settings by formatter and facet                  |         |       | 0:09 |
+| POSTPONED Facet and formatter settings factories to use definitions   |         |       | 6:52 |
+| POSTPONED Split global settings by formatter and facet                |         |       | 0:09 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-02-02 Mon 20:19]
     CLOCK: [2015-01-30 Fri 16:35]--[2015-01-30 Fri 16:51] =>  0:16
     CLOCK: [2015-01-30 Fri 08:40]--[2015-01-30 Fri 08:50] =>  0:08
     CLOCK: [2015-01-27 Tue 23:46]--[2015-01-28 Wed 00:01] =>  0:15
@@ -62,7 +63,8 @@ Clock summary at [2015-02-01 Sun 19:10]
 
 Updates to sprint and product backlog.
 
-*** STARTED Updates to the manual and readme files                    :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-02-02 Mon 20:19]
     CLOCK: [2015-01-29 Thu 20:01]--[2015-01-29 Thu 20:50] =>  0:49
 
 Use downtime to update the manual and / or readme file.
@@ -543,7 +545,8 @@ make it an exclusive formatter register.  Once we remove all of the
 default formatter and facets nonsense, we can move this type into the
 formatters namespace.
 
-*** STARTED Facet and formatter settings factories to use definitions :story:
+*** POSTPONED Facet and formatter settings factories to use definitions :story:
+    CLOSED: [2015-02-02 Mon 20:19]
     CLOCK: [2015-02-01 Sun 16:41]--[2015-02-01 Sun 19:10] =>  2:29
     CLOCK: [2015-02-01 Sun 16:39]--[2015-02-01 Sun 16:41] =>  0:02
     CLOCK: [2015-02-01 Sun 16:01]--[2015-02-01 Sun 16:34] =>  0:33
@@ -587,7 +590,8 @@ definitions: we need to make use of traits.
   matching property in facet settings and set it with either the field
   instance or the default value.
 
-*** STARTED Split global settings by formatter and facet              :story:
+*** POSTPONED Split global settings by formatter and facet            :story:
+    CLOSED: [2015-02-02 Mon 20:19]
     CLOCK: [2015-01-30 Fri 17:05]--[2015-01-30 Fri 17:14] =>  0:09
 
 *Analysis*
@@ -605,191 +609,6 @@ field definitions.
 
 Dynamic could provide field definition aggregation services for
 formatter and facet.
-
-*** Create a settings facade for querying                             :story:
-
-Now that we have global and local settings, we should be able to hide
-the overriding behind some kind of facade so that the formatter does
-not need to know if a setting is global or local; it should just query
-by some properties and get the desired settings.
-
-Name: =selector=?
-
-*** Add global formatter settings support                             :story:
-
-A use case that is very well understood is the need to enable/disable
-optional formatters at the global level. For example, one should be
-able to disable all of the forward declarations at the top-level and
-then enable only those that are needed. We should check if formatters
-like serialisation etc already have a requirement on forward
-declarations.
-
-*** Consider creating constants for common fields                     :story:
-
-Fields such as =enabled=, =postfix= etc are common to all formatters
-and facets. It may make more sense to define some string constants for
-them, perhaps in =traits=?
-
-*** Add support for local settings                                    :story:
-
-*New Understanding*
-
-- local settings have: general, file name settings (for the file name
-  overrides), type settings, additional includes. Presumably all of
-  these need to be optional. We need to ensure general settings have a
-  scope of any.
-- we need a local settings factory. See the scratch pad for an example
-  using =sml::consumer_interface=.
-
-*Previous Understanding*
-
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
-
-*** Create a settings class                                           :story:
-
-*New Understanding*
-
-We need a container for both local and global settings that gets
-passed around. It should really be called =settings= but given that it
-exists in the =settings= namespace, it may sound a bit
-"repetitive". Brainstorm on naming.
-
-*Previous Understanding*
-
-- create a settings class that has a map of formatter id to global
-  settings. It could also have a map of c++ entity name (produced with
-  name builder to include namespaces), to formatter id to local
-  settings. With this we can now move the settings away from entity
-  because we no longer require the qname.
-- pass the settings class to the includes builder.
-
-*** Create a class to generate file names                             :story:
-
-Create a "file name generator" (name needs thinking) that will receive
-the settings as input and generate file names per formatter for each
-qname. It will use the postfixes for facet/formatter settings to
-generate the file name. It will take into account file name overrides
-in file name settings. We no longer need help from the formatter - the
-algorithm just uses the settings. Remove all file name related code
-from formatters.
-
-*** Create a class to generate includes                               :story:
-
-Create an "includes generator" (name needs thinking) that will
-receive the file names from the "file name generator" as well as the
-settings and produce includes per qname per formatter. It will
-delegate to each formatter for the includes generation. Formatters
-to take into account the additional includes settings.
-
-Notes:
-
-- consider passing in a container of includes builder rather than
-  querying the registrar directly.
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to local settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
-*** Rename =file_settings= to =file_properties=                       :story:
-
-- rename file settings to file properties because these are not a
-  direct translation from dynamic.
-- create a file properties factory that merges the output of the
-  includes generator and file name generator and spits out file
-  properties per qname, per formatter.
-- use the file properties factory in transformer.
-
-*** Populate the "new" =class_info= properties                        :story:
-
-We need a way of populating the class aspects via the type settings
-and via information obtained in the SML model. We may want to create a
-class to handle this logic or maybe it can be done in transformer.
-
-*** Consider using an abstract factory in formatters                  :story:
-
-At present we have a number of interfaces (or quasi-interfaces) coming
-out of formatter:
-
-- file name generation
-- includes generation
-- opaque settings generation
-- opaque settings validator
-
-Perhaps it makes more sense to aggregate them all into a factory of
-factories. We should look into the abstract factory pattern as it
-seems particularly suitable for this. The factory should remember the
-id of the formatter it comes from.
-
-In terms of names, it is difficult to find a name for such an
-aggregate:
-
-- formatter components, e.g. =formatter_components_factory_interface=
-- formatter properties
-- formatter parts
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via dynamic extensions, so we can start using
-  STL, Boost etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-*** Add "model types"                                                 :story:
-
-At present we have a number of dynamic extensions that exist purely to
-deal with non-dogen models:
-
-- supported: is the facet supported by the external model
-- file_name: what is the external model naming for files for this
-  facet
-- is_system: is the file name a system include file or not?
-
-In reality, all of this could be avoided if we had a way of
-distinguishing between models that follow dogen conventions and those
-who do not; a "model type" of sorts such as "external" and "dogen" -
-naming needs more thought. With this we could infer the rest: if no
-file name is supplied then a given formatter/facet is not supported;
-if the model is_system then all types are system and so on.
-
-We should also have a flag in field definitions that verify that a
-parameter is only present if the model is a non-dogen model. For
-example, it makes no sense to supply =cpp.type.family= in a dogen
-model but it may make sense to do so in an external model. However,
-this would mean that if a user manually adds a type to a dogen model
-it cannot be extended. Requires a bit of thinking.
 
 ** Deprecated
 *** CANCELLED Add merger to dynamic                                   :story:
