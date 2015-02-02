@@ -1,0 +1,17 @@
+#+title: Vision
+#+options: date:nil toc:nil author:nil num:nil
+
+* About
+
+This document defines what we consider to be the [[http://www.scaledagileframework.com/vision/][the vision]] for Dogen;
+what guides us when we think about the product.
+
+* Vision Statement
+
+The vision for Dogen is:
+
+- to create a suite of code generation tools that useful to developers
+  in multiple programming languages, and integrated with IDEs and text
+  editors;
+- to make this suite extensible, such that users can come up with uses
+  for it far different than anything we envisioned.

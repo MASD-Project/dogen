@@ -3,11 +3,8 @@
 
 * About
 
-This document defines what we consider to be the main milestone of
-Dogen; the point at which we can consider it "done". It won't ever be
-finished, of course, but we need to have a clear idea of when we
-consider it to be "good enough" or else we'll be refactoring
-forever. This will be release v1.0.
+This document defines what we consider to be the objective of release
+v1.0; once all these boxes have been ticked, we can ship it.
 
 * What do we need to achieve
 
@@ -15,8 +12,8 @@ The following must be attained in order for it to be done:
 
 - It must be possible to add a new file formatter by just adding a new
   header and implementation file.
-- The meta-data refactoring must be complete, allowing users to supply
-  licences, etc.
+- The dynamic extensions refactoring must be complete, allowing users
+  to supply licences, etc.
 - All models must have doxygen documentation describing their
   purpose. The key types should be documented too.
 - We must run sanity scripts on packages across all platforms to
