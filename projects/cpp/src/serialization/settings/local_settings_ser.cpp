@@ -27,8 +27,11 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/local_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 namespace boost {
@@ -39,6 +42,7 @@ void save(Archive& ar,
     const dogen::cpp::settings::local_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("general_settings", v.general_settings_);
+    ar << make_nvp("formatter_settings", v.formatter_settings_);
 }
 
 template<typename Archive>
@@ -46,6 +50,7 @@ void load(Archive& ar,
     dogen::cpp::settings::local_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("general_settings", v.general_settings_);
+    ar >> make_nvp("formatter_settings", v.formatter_settings_);
 }
 
 } }

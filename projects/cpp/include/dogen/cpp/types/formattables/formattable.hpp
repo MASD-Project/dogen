@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <string>
 #include "dogen/cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
 namespace dogen {
@@ -38,7 +39,9 @@ public:
     formattable(const formattable&) = default;
     formattable(formattable&&) = default;
     ~formattable() = default;
-    formattable& operator=(const formattable&) = default;
+
+public:
+    explicit formattable(const std::string& identity);
 
 private:
     template<typename Archive>
@@ -48,13 +51,36 @@ private:
     friend void boost::serialization::load(Archive& ar, formattable& v, unsigned int version);
 
 public:
+    const std::string& identity() const;
+    std::string& identity();
+    void identity(const std::string& v);
+    void identity(const std::string&& v);
+
+public:
     bool operator==(const formattable& rhs) const;
     bool operator!=(const formattable& rhs) const {
         return !this->operator==(rhs);
     }
 
+public:
+    void swap(formattable& other) noexcept;
+    formattable& operator=(formattable other);
+
+private:
+    std::string identity_;
 };
 
 } } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::cpp::formattables::formattable& lhs,
+    dogen::cpp::formattables::formattable& rhs) {
+    lhs.swap(rhs);
+}
+
+}
 
 #endif

@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 
 
@@ -34,15 +35,17 @@ namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::cpp::formattables::formattable& /*v*/,
+void save(Archive& ar,
+    const dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("identity", v.identity_);
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::cpp::formattables::formattable& /*v*/,
+void load(Archive& ar,
+    dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("identity", v.identity_);
 }
 
 } }

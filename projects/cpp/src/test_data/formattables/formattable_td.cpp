@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 
+namespace {
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -29,12 +38,14 @@ namespace formattables {
 formattable_generator::formattable_generator() : position_(0) { }
 
 void formattable_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+populate(const unsigned int position, result_type& v) {
+    v.identity(create_std_string(position + 0));
 }
 
 formattable_generator::result_type
-formattable_generator::create(const unsigned int/*position*/) {
+formattable_generator::create(const unsigned int position) {
     formattable r;
+    formattable_generator::populate(position, r);
     return r;
 }
 formattable_generator::result_type*

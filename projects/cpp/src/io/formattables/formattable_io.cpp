@@ -18,16 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formattable&) {
+std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << " }";
+      << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << ", "
+      << "\"identity\": " << "\"" << tidy_up_string(v.identity()) << "\""
+      << " }";
     return(s);
 }
 

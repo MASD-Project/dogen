@@ -165,6 +165,7 @@
 #include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/settings/local_settings.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"

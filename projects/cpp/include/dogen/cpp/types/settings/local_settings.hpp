@@ -26,7 +26,10 @@
 #endif
 
 #include <algorithm>
+#include <string>
+#include <unordered_map>
 #include "dogen/cpp/serialization/settings/local_settings_fwd_ser.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 
 namespace dogen {
@@ -41,7 +44,9 @@ public:
     ~local_settings() = default;
 
 public:
-    explicit local_settings(const dogen::formatters::general_settings& general_settings);
+    local_settings(
+        const dogen::formatters::general_settings& general_settings,
+        const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings);
 
 private:
     template<typename Archive>
@@ -56,6 +61,11 @@ public:
     void general_settings(const dogen::formatters::general_settings& v);
     void general_settings(const dogen::formatters::general_settings&& v);
 
+    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings();
+    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v);
+    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v);
+
 public:
     bool operator==(const local_settings& rhs) const;
     bool operator!=(const local_settings& rhs) const {
@@ -68,6 +78,7 @@ public:
 
 private:
     dogen::formatters::general_settings general_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> formatter_settings_;
 };
 
 } } }

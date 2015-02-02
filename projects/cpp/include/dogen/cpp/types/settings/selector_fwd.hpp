@@ -18,44 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/formattable.hpp"
+#ifndef DOGEN_CPP_TYPES_SETTINGS_SELECTOR_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_SELECTOR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
-namespace formattables {
+namespace settings {
 
-formattable::formattable(const std::string& identity)
-    : identity_(identity) { }
-
-void formattable::swap(formattable& other) noexcept {
-    using std::swap;
-    swap(identity_, other.identity_);
-}
-
-bool formattable::operator==(const formattable& rhs) const {
-    return identity_ == rhs.identity_;
-}
-
-formattable& formattable::operator=(formattable other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const std::string& formattable::identity() const {
-    return identity_;
-}
-
-std::string& formattable::identity() {
-    return identity_;
-}
-
-void formattable::identity(const std::string& v) {
-    identity_ = v;
-}
-
-void formattable::identity(const std::string&& v) {
-    identity_ = std::move(v);
-}
+class selector;
 
 } } }
+
+#endif
