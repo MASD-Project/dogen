@@ -2804,6 +2804,9 @@ have that reflected in both doxygen and C++-11 deprecated attributes.
 Note that at present nothing stops the users from adding the marker
 themselves.
 
+Perhaps we should add general support for attributes. This would be
+useful for languages like C# and Java, to control serialisation, etc.
+
 *** Control JSON output via traits                                    :story:
 
 #+begin_quote
