@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/hash/formattables/cmakelists_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/odb_options_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/project_hash.hpp"
@@ -51,20 +50,6 @@ inline std::size_t hash_boost_optional_dogen_cpp_formattables_cmakelists_info(co
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_entity(const boost::shared_ptr<dogen::cpp::formattables::entity>& v){
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_cpp_formattables_entity_(const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_cpp_formattables_entity(i));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -78,7 +63,6 @@ std::size_t project_hasher::hash(const project&v) {
     combine(seed, v.odb_options());
     combine(seed, v.src_cmakelists());
     combine(seed, hash_boost_optional_dogen_cpp_formattables_cmakelists_info(v.include_cmakelists()));
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_cpp_formattables_entity_(v.entities()));
 
     return seed;
 }

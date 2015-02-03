@@ -60,7 +60,7 @@ namespace_documentation::create(std::ostream& stream) {
 void namespace_documentation::format_namespace(
     const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::namespace_info>(f.entity()));
+            cpp::formattables::namespace_info>(f.formattable()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_namespace_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_namespace_info));

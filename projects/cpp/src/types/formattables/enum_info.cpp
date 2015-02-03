@@ -51,13 +51,15 @@ namespace cpp {
 namespace formattables {
 
 enum_info::enum_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter,
     const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
     const std::string& type)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -83,7 +85,7 @@ void enum_info::swap(enum_info& other) noexcept {
     swap(type_, other.type_);
 }
 
-bool enum_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool enum_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const enum_info* const p(dynamic_cast<const enum_info* const>(&other));
     if (!p) return false;
     return *this == *p;

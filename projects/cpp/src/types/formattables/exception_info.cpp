@@ -27,11 +27,13 @@ namespace cpp {
 namespace formattables {
 
 exception_info::exception_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter) { }
@@ -49,7 +51,7 @@ void exception_info::swap(exception_info& other) noexcept {
 
 }
 
-bool exception_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool exception_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const exception_info* const p(dynamic_cast<const exception_info* const>(&other));
     if (!p) return false;
     return *this == *p;

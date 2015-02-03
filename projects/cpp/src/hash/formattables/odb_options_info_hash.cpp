@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/odb_options_info_hash.hpp"
 
 namespace {
@@ -43,6 +44,8 @@ namespace formattables {
 
 std::size_t odb_options_info_hasher::hash(const odb_options_info&v) {
     std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::formattables::formattable&>(v));
 
     combine(seed, v.model_name());
     combine(seed, v.product_name());

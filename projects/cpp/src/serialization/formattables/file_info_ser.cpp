@@ -30,8 +30,8 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
-#include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includes_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
@@ -49,7 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("relative_path", v.relative_path_.generic_string());
-    ar << make_nvp("entity", v.entity_);
+    ar << make_nvp("formattable", v.formattable_);
 }
 
 template<typename Archive>
@@ -66,7 +66,7 @@ void load(Archive& ar,
     std::string relative_path_tmp;
     ar >> make_nvp("relative_path", relative_path_tmp);
     v.relative_path_ = relative_path_tmp;
-    ar >> make_nvp("entity", v.entity_);
+    ar >> make_nvp("formattable", v.formattable_);
 }
 
 } }

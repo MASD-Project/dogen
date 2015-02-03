@@ -18,32 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 odb_options_info::odb_options_info(odb_options_info&& rhs)
-    : model_name_(std::move(rhs.model_name_)),
+    : dogen::cpp::formattables::formattable(
+        std::forward<dogen::cpp::formattables::formattable>(rhs)),
+      model_name_(std::move(rhs.model_name_)),
       product_name_(std::move(rhs.product_name_)),
       file_path_(std::move(rhs.file_path_)),
       file_name_(std::move(rhs.file_name_)),
       odb_folder_(std::move(rhs.odb_folder_)) { }
 
 odb_options_info::odb_options_info(
+    const std::string& identity,
     const std::string& model_name,
     const std::string& product_name,
     const boost::filesystem::path& file_path,
     const std::string& file_name,
     const std::string& odb_folder)
-    : model_name_(model_name),
+    : dogen::cpp::formattables::formattable(identity),
+      model_name_(model_name),
       product_name_(product_name),
       file_path_(file_path),
       file_name_(file_name),
       odb_folder_(odb_folder) { }
 
+void odb_options_info::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::formattables::odb_options_info\"" << ", "
+      << "\"__parent_0__\": ";
+    formattable::to_stream(s);
+    s << ", "
+      << "\"model_name\": " << "\"" << tidy_up_string(model_name_) << "\"" << ", "
+      << "\"product_name\": " << "\"" << tidy_up_string(product_name_) << "\"" << ", "
+      << "\"file_path\": " << "\"" << file_path_.generic_string() << "\"" << ", "
+      << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
+      << "\"odb_folder\": " << "\"" << tidy_up_string(odb_folder_) << "\""
+      << " }";
+}
+
 void odb_options_info::swap(odb_options_info& other) noexcept {
+    formattable::swap(other);
+
     using std::swap;
     swap(model_name_, other.model_name_);
     swap(product_name_, other.product_name_);
@@ -52,8 +83,15 @@ void odb_options_info::swap(odb_options_info& other) noexcept {
     swap(odb_folder_, other.odb_folder_);
 }
 
+bool odb_options_info::equals(const dogen::cpp::formattables::formattable& other) const {
+    const odb_options_info* const p(dynamic_cast<const odb_options_info* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool odb_options_info::operator==(const odb_options_info& rhs) const {
-    return model_name_ == rhs.model_name_ &&
+    return formattable::compare(rhs) &&
+        model_name_ == rhs.model_name_ &&
         product_name_ == rhs.product_name_ &&
         file_path_ == rhs.file_path_ &&
         file_name_ == rhs.file_name_ &&

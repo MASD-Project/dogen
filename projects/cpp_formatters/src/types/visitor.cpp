@@ -119,7 +119,7 @@ void visitor::format(const cpp::formattables::file_info& f) {
     includes.format(f);
 
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::visitor_info>(f.entity()));
+            cpp::formattables::visitor_info>(f.formattable()));
 
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_visitor_info;

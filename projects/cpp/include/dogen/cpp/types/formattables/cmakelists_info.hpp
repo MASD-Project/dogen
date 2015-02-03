@@ -27,8 +27,10 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include <iosfwd>
 #include <string>
 #include "dogen/cpp/serialization/formattables/cmakelists_info_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -37,17 +39,19 @@ namespace formattables {
 /**
  * @brief Represents a CMakeLists.txt top-level makefile.
  */
-class cmakelists_info final {
+class cmakelists_info final : public dogen::cpp::formattables::formattable {
 public:
     cmakelists_info() = default;
     cmakelists_info(const cmakelists_info&) = default;
-    ~cmakelists_info() = default;
+
+    virtual ~cmakelists_info() noexcept { }
 
 public:
     cmakelists_info(cmakelists_info&& rhs);
 
 public:
     cmakelists_info(
+        const std::string& identity,
         const boost::filesystem::path& file_path,
         const std::string& model_name,
         const std::string& product_name,
@@ -59,6 +63,26 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, cmakelists_info& v, unsigned int version);
+
+public:
+    virtual void accept(const formattable_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(formattable_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const formattable_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(formattable_visitor& v) override {
+        v.visit(*this);
+    }
+
+public:
+    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -106,6 +130,9 @@ public:
     bool operator!=(const cmakelists_info& rhs) const {
         return !this->operator==(rhs);
     }
+
+public:
+    bool equals(const dogen::cpp::formattables::formattable& other) const override;
 
 public:
     void swap(cmakelists_info& other) noexcept;

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 
 namespace {
@@ -46,6 +47,7 @@ odb_options_info_generator::odb_options_info_generator() : position_(0) { }
 
 void odb_options_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::formattables::formattable_generator::populate(position, v);
     v.model_name(create_std_string(position + 0));
     v.product_name(create_std_string(position + 1));
     v.file_path(create_boost_filesystem_path(position + 2));

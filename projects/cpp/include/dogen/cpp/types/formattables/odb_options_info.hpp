@@ -27,8 +27,10 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include <iosfwd>
 #include <string>
 #include "dogen/cpp/serialization/formattables/odb_options_info_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -37,17 +39,19 @@ namespace formattables {
 /**
  * @brief Represents a text file with ODB options.
  */
-class odb_options_info final {
+class odb_options_info final : public dogen::cpp::formattables::formattable {
 public:
     odb_options_info() = default;
     odb_options_info(const odb_options_info&) = default;
-    ~odb_options_info() = default;
+
+    virtual ~odb_options_info() noexcept { }
 
 public:
     odb_options_info(odb_options_info&& rhs);
 
 public:
     odb_options_info(
+        const std::string& identity,
         const std::string& model_name,
         const std::string& product_name,
         const boost::filesystem::path& file_path,
@@ -60,6 +64,26 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, odb_options_info& v, unsigned int version);
+
+public:
+    virtual void accept(const formattable_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(formattable_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const formattable_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(formattable_visitor& v) override {
+        v.visit(*this);
+    }
+
+public:
+    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -117,6 +141,9 @@ public:
     bool operator!=(const odb_options_info& rhs) const {
         return !this->operator==(rhs);
     }
+
+public:
+    bool equals(const dogen::cpp::formattables::formattable& other) const override;
 
 public:
     void swap(odb_options_info& other) noexcept;

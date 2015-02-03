@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/includes_hash.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_entity(const boost::shared_ptr<dogen::cpp::formattables::entity>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_formattable(const boost::shared_ptr<dogen::cpp::formattables::formattable>& v){
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -59,7 +59,7 @@ std::size_t file_info_hasher::hash(const file_info&v) {
     combine(seed, v.header_guard());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, hash_boost_shared_ptr_dogen_cpp_formattables_entity(v.entity()));
+    combine(seed, hash_boost_shared_ptr_dogen_cpp_formattables_formattable(v.formattable()));
 
     return seed;
 }

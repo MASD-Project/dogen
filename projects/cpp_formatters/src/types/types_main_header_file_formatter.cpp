@@ -186,12 +186,12 @@ void types_main_header_file_formatter::format(
     includes includes(stream_);
     includes.format(f);
 
-    if (!f.entity()) {
+    if (!f.formattable()) {
         BOOST_LOG_SEV(lg, error) << missing_entity;
         BOOST_THROW_EXCEPTION(formatting_error(missing_entity));
     }
 
-    f.entity()->accept(*this);
+    f.formattable()->accept(*this);
 
     guards.format_end();
 }

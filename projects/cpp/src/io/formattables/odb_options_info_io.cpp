@@ -20,29 +20,15 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s, const odb_options_info& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::formattables::odb_options_info\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\"" << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"file_name\": " << "\"" << tidy_up_string(v.file_name()) << "\"" << ", "
-      << "\"odb_folder\": " << "\"" << tidy_up_string(v.odb_folder()) << "\""
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

@@ -87,9 +87,9 @@ formatter_type_for_object_type(const sml::object_types ot) const {
     };
 }
 
-std::forward_list<dogen::formatters::file> workflow::format_entity(
-    const formatters::workflow& fw, const formattables::entity& e) const {
-    return fw.format(e);
+std::forward_list<dogen::formatters::file> workflow::format(
+    const formatters::workflow& w, const formattables::formattable& f) const {
+    return w.format(f);
 }
 
 settings::settings

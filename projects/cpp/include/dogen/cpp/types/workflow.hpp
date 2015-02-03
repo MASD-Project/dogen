@@ -84,13 +84,13 @@ private:
      * @brief Transforms the supplied SML elements into C++ entities.
      */
     template<typename AssociativeContainerOfElement>
-    std::forward_list<std::shared_ptr<formattables::entity>>
+    std::forward_list<std::shared_ptr<formattables::formattable>>
     transform_sml_elements(
         const std::unordered_map<sml::qname,
         file_settings_by_formatter_type>&
         file_settings_by_qname_by_formatter_type, const sml::model& m,
         const AssociativeContainerOfElement& c) const {
-        std::forward_list<std::shared_ptr<formattables::entity> > r;
+        std::forward_list<std::shared_ptr<formattables::formattable> > r;
         formattables::transformer
             t(file_settings_by_qname_by_formatter_type, m);
         for (const auto& pair : c) {
@@ -106,8 +106,9 @@ private:
     /**
      * @brief Formats all files for the entity.
      */
-    std::forward_list<dogen::formatters::file> format_entity(
-        const formatters::workflow& fw, const formattables::entity& e) const;
+    std::forward_list<dogen::formatters::file>
+    format(const formatters::workflow& w,
+        const formattables::formattable& f) const;
 
 private:
     /**
@@ -151,13 +152,13 @@ private:
                                  file_settings_by_formatter_type>&
         file_settings_by_qname_by_formatter_type,
         const sml::model& m,
-        const formatters::workflow& fw,
+        const formatters::workflow& w,
         const AssociativeContainerOfElement& c) const {
-        const auto entities(transform_sml_elements(
+        const auto formattables(transform_sml_elements(
                 file_settings_by_qname_by_formatter_type, m, c));
         std::forward_list<dogen::formatters::file> r;
-        for (const auto e : entities)
-            r.splice_after(r.before_begin(), format_entity(fw, *e));
+        for (const auto f : formattables)
+            r.splice_after(r.before_begin(), format(w, *f));
         return r;
     }
 

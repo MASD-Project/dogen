@@ -27,11 +27,9 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 #include <list>
 #include "dogen/cpp/serialization/formattables/project_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/cmakelists_info.hpp"
-#include "dogen/cpp/types/formattables/entity_fwd.hpp"
 #include "dogen/cpp/types/formattables/file_info.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
 
@@ -56,8 +54,7 @@ public:
         const std::list<dogen::cpp::formattables::file_info>& files,
         const dogen::cpp::formattables::odb_options_info& odb_options,
         const dogen::cpp::formattables::cmakelists_info& src_cmakelists,
-        const boost::optional<dogen::cpp::formattables::cmakelists_info>& include_cmakelists,
-        const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& entities);
+        const boost::optional<dogen::cpp::formattables::cmakelists_info>& include_cmakelists);
 
 private:
     template<typename Archive>
@@ -107,16 +104,6 @@ public:
     void include_cmakelists(const boost::optional<dogen::cpp::formattables::cmakelists_info>&& v);
     /**@}*/
 
-    /**
-     * @brief All entities in this project.
-     */
-    /**@{*/
-    const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& entities() const;
-    std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& entities();
-    void entities(const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& v);
-    void entities(const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >&& v);
-    /**@}*/
-
 public:
     bool operator==(const project& rhs) const;
     bool operator!=(const project& rhs) const {
@@ -132,7 +119,6 @@ private:
     dogen::cpp::formattables::odb_options_info odb_options_;
     dogen::cpp::formattables::cmakelists_info src_cmakelists_;
     boost::optional<dogen::cpp::formattables::cmakelists_info> include_cmakelists_;
-    std::list<boost::shared_ptr<dogen::cpp::formattables::entity> > entities_;
 };
 
 } } }

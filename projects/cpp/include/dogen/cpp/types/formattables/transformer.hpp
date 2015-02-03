@@ -38,6 +38,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/concept_info.hpp"
@@ -147,27 +148,27 @@ public:
     /**
      * @brief Transform an SML enumeration into a C++ entity.
      */
-    std::shared_ptr<entity> transform(const sml::enumeration& e) const;
+    std::shared_ptr<formattable> transform(const sml::enumeration& e) const;
 
     /**
      * @brief Transform an SML module into a C++ entity.
      */
-    std::shared_ptr<entity> transform(const sml::module& m) const;
+    std::shared_ptr<formattable> transform(const sml::module& m) const;
 
     /**
      * @brief Transform an SML concept into a C++ entity.
      */
-    std::shared_ptr<entity> transform(const sml::concept& c) const;
+    std::shared_ptr<formattable> transform(const sml::concept& c) const;
 
     /**
      * @brief Transform an SML primitive into a C++ entity.
      */
-    std::shared_ptr<entity> transform(const sml::primitive& p) const;
+    std::shared_ptr<formattable> transform(const sml::primitive& p) const;
 
     /**
      * @brief Transform an SML object into a C++ entity.
      */
-    std::shared_ptr<entity> transform(const sml::object& o) const;
+    std::shared_ptr<formattable> transform(const sml::object& o) const;
 
 private:
     const std::unordered_map<sml::qname, file_settings_by_formatter_type>&

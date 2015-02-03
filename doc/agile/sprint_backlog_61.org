@@ -17,16 +17,17 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-03 Tue 20:40]
+Clock summary at [2015-02-03 Tue 21:22]
 
-| Headline                                  | Time   |      |      |
-|-------------------------------------------+--------+------+------|
-| *Total time*                              | *1:30* |      |      |
-|-------------------------------------------+--------+------+------|
-| Active                                    |        | 1:30 |      |
-| COMPLETED Improvements to product backlog |        |      | 1:01 |
-| COMPLETED Tidy-up formatters workflow     |        |      | 0:20 |
-| STARTED Create a formattables workflow    |        |      | 0:09 |
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *2:02* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 2:02 |      |
+| COMPLETED Improvements to product backlog   |        |      | 1:01 |
+| COMPLETED Tidy-up formatters workflow       |        |      | 0:20 |
+| COMPLETED Create a =formattable= base class |        |      | 0:32 |
+| STARTED Create a formattables workflow      |        |      | 0:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -60,6 +61,13 @@ that are needed now. We should:
 
 We need to remove all of the facet code and work directly off of the
 formatter container.
+
+*** COMPLETED Create a =formattable= base class                       :story:
+    CLOSED: [2015-02-03 Tue 21:22]
+    CLOCK: [2015-02-03 Tue 20:40]--[2015-02-03 Tue 21:12] =>  0:32
+
+We need to start using the =formattable= base class instead of
+entity. Make entity non-visitable and deal with the fall out.
 
 *** STARTED Create a formattables workflow                            :story:
     CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09

@@ -29,8 +29,13 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
+
+BOOST_CLASS_TRACKING(
+    dogen::cpp::formattables::cmakelists_info,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -39,6 +44,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::formattables::cmakelists_info& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("formattable", base_object<dogen::cpp::formattables::formattable>(v));
+
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("product_name", v.product_name_);
@@ -49,6 +56,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::formattables::cmakelists_info& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("formattable", base_object<dogen::cpp::formattables::formattable>(v));
+
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;

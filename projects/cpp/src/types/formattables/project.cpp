@@ -18,17 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/project.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::cpp::formattables::entity>& lhs,
-const boost::shared_ptr<dogen::cpp::formattables::entity>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
 
 namespace dogen {
 namespace cpp {
@@ -38,20 +28,17 @@ project::project(project&& rhs)
     : files_(std::move(rhs.files_)),
       odb_options_(std::move(rhs.odb_options_)),
       src_cmakelists_(std::move(rhs.src_cmakelists_)),
-      include_cmakelists_(std::move(rhs.include_cmakelists_)),
-      entities_(std::move(rhs.entities_)) { }
+      include_cmakelists_(std::move(rhs.include_cmakelists_)) { }
 
 project::project(
     const std::list<dogen::cpp::formattables::file_info>& files,
     const dogen::cpp::formattables::odb_options_info& odb_options,
     const dogen::cpp::formattables::cmakelists_info& src_cmakelists,
-    const boost::optional<dogen::cpp::formattables::cmakelists_info>& include_cmakelists,
-    const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& entities)
+    const boost::optional<dogen::cpp::formattables::cmakelists_info>& include_cmakelists)
     : files_(files),
       odb_options_(odb_options),
       src_cmakelists_(src_cmakelists),
-      include_cmakelists_(include_cmakelists),
-      entities_(entities) { }
+      include_cmakelists_(include_cmakelists) { }
 
 void project::swap(project& other) noexcept {
     using std::swap;
@@ -59,15 +46,13 @@ void project::swap(project& other) noexcept {
     swap(odb_options_, other.odb_options_);
     swap(src_cmakelists_, other.src_cmakelists_);
     swap(include_cmakelists_, other.include_cmakelists_);
-    swap(entities_, other.entities_);
 }
 
 bool project::operator==(const project& rhs) const {
     return files_ == rhs.files_ &&
         odb_options_ == rhs.odb_options_ &&
         src_cmakelists_ == rhs.src_cmakelists_ &&
-        include_cmakelists_ == rhs.include_cmakelists_ &&
-        entities_ == rhs.entities_;
+        include_cmakelists_ == rhs.include_cmakelists_;
 }
 
 project& project::operator=(project other) {
@@ -138,22 +123,6 @@ void project::include_cmakelists(const boost::optional<dogen::cpp::formattables:
 
 void project::include_cmakelists(const boost::optional<dogen::cpp::formattables::cmakelists_info>&& v) {
     include_cmakelists_ = std::move(v);
-}
-
-const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& project::entities() const {
-    return entities_;
-}
-
-std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& project::entities() {
-    return entities_;
-}
-
-void project::entities(const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >& v) {
-    entities_ = v;
-}
-
-void project::entities(const std::list<boost::shared_ptr<dogen::cpp::formattables::entity> >&& v) {
-    entities_ = std::move(v);
 }
 
 } } }

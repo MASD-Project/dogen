@@ -21,8 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
-#include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/file_info_io.hpp"
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/includes_io.hpp"
 
 
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::entity>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::formattables::formattable>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -62,7 +62,7 @@ std::ostream& operator<<(std::ostream& s, const file_info& v) {
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"entity\": " << v.entity()
+      << "\"formattable\": " << v.formattable()
       << " }";
     return(s);
 }

@@ -270,7 +270,7 @@ template_instantiations(const cpp::formattables::class_info& ci) {
 void serialization_implementation::format_class(
     const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::class_info>(f.entity()));
+            cpp::formattables::class_info>(f.formattable()));
 
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;

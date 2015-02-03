@@ -818,7 +818,7 @@ void generator_implementation::default_constructor(
 void generator_implementation::format_class(
     const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::class_info>(f.entity()));
+            cpp::formattables::class_info>(f.formattable()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
@@ -850,7 +850,7 @@ void generator_implementation::format_class(
 void generator_implementation::format_enumeration(
     const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::enum_info>(f.entity()));
+            cpp::formattables::enum_info>(f.formattable()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
         BOOST_THROW_EXCEPTION(formatting_error(missing_enum_info));

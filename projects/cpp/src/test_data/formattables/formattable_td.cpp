@@ -19,7 +19,18 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 
 namespace {
 
@@ -35,29 +46,36 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-formattable_generator::formattable_generator() : position_(0) { }
 
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
 }
 
-formattable_generator::result_type
-formattable_generator::create(const unsigned int position) {
-    formattable r;
-    formattable_generator::populate(position, r);
-    return r;
-}
 formattable_generator::result_type*
 formattable_generator::create_ptr(const unsigned int position) {
-    formattable* p = new formattable();
-    formattable_generator::populate(position, *p);
-    return p;
+    if ((position % 10) == 0)
+        return dogen::cpp::formattables::cmakelists_info_generator::create_ptr(position);
+    if ((position % 10) == 1)
+        return dogen::cpp::formattables::enum_info_generator::create_ptr(position);
+    if ((position % 10) == 2)
+        return dogen::cpp::formattables::exception_info_generator::create_ptr(position);
+    if ((position % 10) == 3)
+        return dogen::cpp::formattables::registrar_info_generator::create_ptr(position);
+    if ((position % 10) == 4)
+        return dogen::cpp::formattables::odb_options_info_generator::create_ptr(position);
+    if ((position % 10) == 5)
+        return dogen::cpp::formattables::namespace_info_generator::create_ptr(position);
+    if ((position % 10) == 6)
+        return dogen::cpp::formattables::visitor_info_generator::create_ptr(position);
+    if ((position % 10) == 7)
+        return dogen::cpp::formattables::new_class_info_generator::create_ptr(position);
+    if ((position % 10) == 8)
+        return dogen::cpp::formattables::concept_info_generator::create_ptr(position);
+    if ((position % 10) == 9)
+        return dogen::cpp::formattables::primitive_info_generator::create_ptr(position);
+    return dogen::cpp::formattables::class_info_generator::create_ptr(position);
 }
 
-formattable_generator::result_type
-formattable_generator::operator()() {
-    return create(position_++);
-}
 
 } } }

@@ -31,6 +31,7 @@ namespace cpp {
 namespace formattables {
 
 new_class_info::new_class_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
@@ -39,7 +40,8 @@ new_class_info::new_class_info(
     const dogen::cpp::formattables::inheritance& inheritance,
     const dogen::cpp::formattables::abilities& abilities,
     const dogen::cpp::formattables::class_aspects& aspects)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -71,7 +73,7 @@ void new_class_info::swap(new_class_info& other) noexcept {
     swap(aspects_, other.aspects_);
 }
 
-bool new_class_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool new_class_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const new_class_info* const p(dynamic_cast<const new_class_info* const>(&other));
     if (!p) return false;
     return *this == *p;

@@ -28,8 +28,23 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 
+
+BOOST_CLASS_TRACKING(
+    dogen::cpp::formattables::formattable,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {

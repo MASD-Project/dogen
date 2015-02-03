@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/formattables/cmakelists_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 
 namespace {
 
@@ -43,6 +44,8 @@ namespace formattables {
 
 std::size_t cmakelists_info_hasher::hash(const cmakelists_info&v) {
     std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::formattables::formattable&>(v));
 
     combine(seed, hash_boost_filesystem_path(v.file_path()));
     combine(seed, v.model_name());

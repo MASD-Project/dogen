@@ -50,12 +50,14 @@ namespace cpp {
 namespace formattables {
 
 visitor_info::visitor_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter,
     const std::list<std::string>& types)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -78,7 +80,7 @@ void visitor_info::swap(visitor_info& other) noexcept {
     swap(types_, other.types_);
 }
 
-bool visitor_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool visitor_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const visitor_info* const p(dynamic_cast<const visitor_info* const>(&other));
     if (!p) return false;
     return *this == *p;

@@ -482,26 +482,28 @@ transformer::to_visitor_info(const sml::object& o) const {
     return r;
 }
 
-std::shared_ptr<entity>
+std::shared_ptr<formattable>
 transformer::transform(const sml::enumeration& e) const {
     return to_enum_info(e);
 }
 
-std::shared_ptr<entity> transformer::transform(const sml::module& m) const {
+std::shared_ptr<formattable> transformer::
+transform(const sml::module& m) const {
     return to_namespace_info(m);
 }
 
-std::shared_ptr<entity>
+std::shared_ptr<formattable>
 transformer::transform(const sml::concept& /*c*/) const {
     return std::make_shared<concept_info>();
 }
 
-std::shared_ptr<entity>
+std::shared_ptr<formattable>
 transformer::transform(const sml::primitive& /*p*/) const {
     return std::make_shared<primitive_info>();
 }
 
-std::shared_ptr<entity> transformer::transform(const sml::object& o) const {
+std::shared_ptr<formattable> transformer::
+transform(const sml::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
                              << sml::string_converter::convert(o.name());
 

@@ -62,7 +62,7 @@ create(std::ostream& stream, const bool disable_xml_serialization,
 
 void registrar_implementation::format(const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::registrar_info>(f.entity()));
+            cpp::formattables::registrar_info>(f.formattable()));
     if (!o) {
         BOOST_LOG_SEV(lg, error) << expected_registrar_info;
         BOOST_THROW_EXCEPTION(formatting_error(expected_registrar_info));

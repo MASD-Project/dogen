@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/project_td.hpp"
@@ -56,26 +55,6 @@ create_boost_optional_dogen_cpp_formattables_cmakelists_info(unsigned int positi
     return r;
 }
 
-dogen::cpp::formattables::entity*
-create_dogen_cpp_formattables_entity_ptr(const unsigned int position) {
-    return dogen::cpp::formattables::entity_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::cpp::formattables::entity>
-create_boost_shared_ptr_dogen_cpp_formattables_entity(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::formattables::entity> r(
-        create_dogen_cpp_formattables_entity_ptr(position));
-    return r;
-}
-
-std::list<boost::shared_ptr<dogen::cpp::formattables::entity> > create_std_list_boost_shared_ptr_dogen_cpp_formattables_entity_(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::cpp::formattables::entity> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_boost_shared_ptr_dogen_cpp_formattables_entity(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -90,7 +69,6 @@ populate(const unsigned int position, result_type& v) {
     v.odb_options(create_dogen_cpp_formattables_odb_options_info(position + 1));
     v.src_cmakelists(create_dogen_cpp_formattables_cmakelists_info(position + 2));
     v.include_cmakelists(create_boost_optional_dogen_cpp_formattables_cmakelists_info(position + 3));
-    v.entities(create_std_list_boost_shared_ptr_dogen_cpp_formattables_entity_(position + 4));
 }
 
 project_generator::result_type

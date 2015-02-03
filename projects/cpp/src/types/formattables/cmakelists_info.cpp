@@ -18,29 +18,59 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/cmakelists_info.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 cmakelists_info::cmakelists_info(cmakelists_info&& rhs)
-    : file_path_(std::move(rhs.file_path_)),
+    : dogen::cpp::formattables::formattable(
+        std::forward<dogen::cpp::formattables::formattable>(rhs)),
+      file_path_(std::move(rhs.file_path_)),
       model_name_(std::move(rhs.model_name_)),
       product_name_(std::move(rhs.product_name_)),
       file_name_(std::move(rhs.file_name_)) { }
 
 cmakelists_info::cmakelists_info(
+    const std::string& identity,
     const boost::filesystem::path& file_path,
     const std::string& model_name,
     const std::string& product_name,
     const std::string& file_name)
-    : file_path_(file_path),
+    : dogen::cpp::formattables::formattable(identity),
+      file_path_(file_path),
       model_name_(model_name),
       product_name_(product_name),
       file_name_(file_name) { }
 
+void cmakelists_info::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::formattables::cmakelists_info\"" << ", "
+      << "\"__parent_0__\": ";
+    formattable::to_stream(s);
+    s << ", "
+      << "\"file_path\": " << "\"" << file_path_.generic_string() << "\"" << ", "
+      << "\"model_name\": " << "\"" << tidy_up_string(model_name_) << "\"" << ", "
+      << "\"product_name\": " << "\"" << tidy_up_string(product_name_) << "\"" << ", "
+      << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\""
+      << " }";
+}
+
 void cmakelists_info::swap(cmakelists_info& other) noexcept {
+    formattable::swap(other);
+
     using std::swap;
     swap(file_path_, other.file_path_);
     swap(model_name_, other.model_name_);
@@ -48,8 +78,15 @@ void cmakelists_info::swap(cmakelists_info& other) noexcept {
     swap(file_name_, other.file_name_);
 }
 
+bool cmakelists_info::equals(const dogen::cpp::formattables::formattable& other) const {
+    const cmakelists_info* const p(dynamic_cast<const cmakelists_info* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
 bool cmakelists_info::operator==(const cmakelists_info& rhs) const {
-    return file_path_ == rhs.file_path_ &&
+    return formattable::compare(rhs) &&
+        file_path_ == rhs.file_path_ &&
         model_name_ == rhs.model_name_ &&
         product_name_ == rhs.product_name_ &&
         file_name_ == rhs.file_name_;

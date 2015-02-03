@@ -28,12 +28,14 @@ namespace cpp {
 namespace formattables {
 
 concept_info::concept_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter,
     const dogen::cpp::formattables::state& state)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -56,7 +58,7 @@ void concept_info::swap(concept_info& other) noexcept {
     swap(state_, other.state_);
 }
 
-bool concept_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool concept_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const concept_info* const p(dynamic_cast<const concept_info* const>(&other));
     if (!p) return false;
     return *this == *p;

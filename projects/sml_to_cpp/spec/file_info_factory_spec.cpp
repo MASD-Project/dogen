@@ -144,7 +144,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     std::set<cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(fi.entity());
+        BOOST_CHECK(fi.formattable());
         BOOST_CHECK(!fi.file_path().empty());
 
         if (fi.descriptor().file_type() == file_types::header)
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     std::set<cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(fi.entity());
+        BOOST_CHECK(fi.formattable());
         BOOST_CHECK(!fi.file_path().empty());
 
         if (fi.descriptor().file_type() == file_types::header)
@@ -221,7 +221,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
     std::set<dogen::config::cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(fi.entity());
+        BOOST_CHECK(fi.formattable());
         BOOST_CHECK(!fi.file_path().empty());
 
         using dogen::cpp::formattables::file_types;
@@ -259,7 +259,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
     std::set<dogen::config::cpp_facet_types> found_facets;
     for (const auto& fi : infos) {
         found_facets.insert(fi.descriptor().facet_type());
-        BOOST_CHECK(fi.entity());
+        BOOST_CHECK(fi.formattable());
         BOOST_CHECK(!fi.file_path().empty());
 
         using dogen::cpp::formattables::file_types;
@@ -304,7 +304,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
     BOOST_CHECK(fi.descriptor().facet_type() == ft);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::includer);
-    BOOST_CHECK(!fi.entity());
+    BOOST_CHECK(!fi.formattable());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
 
@@ -350,7 +350,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
     BOOST_CHECK(fi.descriptor().facet_type() == ft2);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::includer);
-    BOOST_CHECK(!fi.entity());
+    BOOST_CHECK(!fi.formattable());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
     BOOST_CHECK(fi.includes().user().empty());
@@ -384,7 +384,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     BOOST_CHECK(fi.descriptor().facet_type() == ft);
     BOOST_CHECK(fi.descriptor().aspect_type() == aspect_types::main);
     BOOST_CHECK(fi.descriptor().content_type() == content_types::registrar);
-    BOOST_CHECK(fi.entity());
+    BOOST_CHECK(fi.formattable());
     BOOST_CHECK(!fi.file_path().empty());
     BOOST_CHECK(fi.descriptor().file_type() == file_types::header);
 }

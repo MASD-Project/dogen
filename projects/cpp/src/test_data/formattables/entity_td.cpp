@@ -25,6 +25,7 @@
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_settings_td.hpp"
+#include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
@@ -69,6 +70,7 @@ namespace formattables {
 
 void entity_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::formattables::formattable_generator::populate(position, v);
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.namespaces(create_std_list_std_string(position + 2));

@@ -31,7 +31,7 @@
 #include <string>
 #include "dogen/cpp/serialization/formattables/file_info_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor.hpp"
-#include "dogen/cpp/types/formattables/entity_fwd.hpp"
+#include "dogen/cpp/types/formattables/formattable_fwd.hpp"
 #include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
@@ -58,7 +58,7 @@ public:
         const std::string& header_guard,
         const boost::filesystem::path& file_path,
         const boost::filesystem::path& relative_path,
-        const boost::shared_ptr<dogen::cpp::formattables::entity>& entity);
+        const boost::shared_ptr<dogen::cpp::formattables::formattable>& formattable);
 
 private:
     template<typename Archive>
@@ -133,13 +133,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Entity contained in this file, if any.
+     * @brief Formattable contained in this file, if any.
      */
     /**@{*/
-    const boost::shared_ptr<dogen::cpp::formattables::entity>& entity() const;
-    boost::shared_ptr<dogen::cpp::formattables::entity>& entity();
-    void entity(const boost::shared_ptr<dogen::cpp::formattables::entity>& v);
-    void entity(const boost::shared_ptr<dogen::cpp::formattables::entity>&& v);
+    const boost::shared_ptr<dogen::cpp::formattables::formattable>& formattable() const;
+    boost::shared_ptr<dogen::cpp::formattables::formattable>& formattable();
+    void formattable(const boost::shared_ptr<dogen::cpp::formattables::formattable>& v);
+    void formattable(const boost::shared_ptr<dogen::cpp::formattables::formattable>&& v);
     /**@}*/
 
 public:
@@ -159,7 +159,7 @@ private:
     std::string header_guard_;
     boost::filesystem::path file_path_;
     boost::filesystem::path relative_path_;
-    boost::shared_ptr<dogen::cpp::formattables::entity> entity_;
+    boost::shared_ptr<dogen::cpp::formattables::formattable> formattable_;
 };
 
 } } }

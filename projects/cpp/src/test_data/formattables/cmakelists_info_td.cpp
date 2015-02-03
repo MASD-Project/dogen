@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 
 namespace {
 
@@ -46,6 +47,7 @@ cmakelists_info_generator::cmakelists_info_generator() : position_(0) { }
 
 void cmakelists_info_generator::
 populate(const unsigned int position, result_type& v) {
+    dogen::cpp::formattables::formattable_generator::populate(position, v);
     v.file_path(create_boost_filesystem_path(position + 0));
     v.model_name(create_std_string(position + 1));
     v.product_name(create_std_string(position + 2));

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/entity_visitor.hpp"
+#include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 
 namespace dogen {
@@ -26,16 +26,16 @@ namespace cpp {
 namespace formatters {
 
 /**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
+ * @brief Responsible for dispatching the formattable to the
+ * appropriate formatters.
  */
-class dispatcher : public formattables::entity_visitor {
+class dispatcher : public formattables::formattable_visitor {
 public:
     dispatcher(const container& c, const settings::settings& s);
     ~dispatcher() noexcept { }
 
 public:
-    using entity_visitor::visit;
+    using formattable_visitor::visit;
     void visit(const formattables::class_info& c) override;
     void visit(const formattables::enum_info& e) override;
     void visit(const formattables::exception_info& e) override;
@@ -52,7 +52,7 @@ public:
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    format(const formattables::entity& e);
+    format(const formattables::formattable& f);
 
 private:
     const container& container_;
@@ -93,8 +93,8 @@ void dispatcher::visit(const formattables::primitive_info& /*p*/) {
 }
 
 std::forward_list<dogen::formatters::file>
-dispatcher::format(const formattables::entity& e) {
-    e.accept(*this);
+dispatcher::format(const formattables::formattable& f) {
+    f.accept(*this);
     return files_;
 }
 
@@ -102,9 +102,9 @@ workflow::workflow(const container& c, const settings::settings& s)
     : container_(c), settings_(s) { }
 
 std::forward_list<dogen::formatters::file>
-workflow::format(const formattables::entity& e) const {
+workflow::format(const formattables::formattable& f) const {
     dispatcher d(container_, settings_);
-    return d.format(e);
+    return d.format(f);
 }
 
 } } }

@@ -64,7 +64,7 @@ file_formatter::shared_ptr odb_header::create(std::ostream& stream) {
 
 void odb_header::format_enumeration(const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::enum_info>(f.entity()));
+            cpp::formattables::enum_info>(f.formattable()));
 
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_enum_info;
@@ -86,7 +86,7 @@ void odb_header::format_enumeration(const cpp::formattables::file_info& f) {
 
 void odb_header::format_class(const cpp::formattables::file_info& f) {
     auto o(boost::dynamic_pointer_cast<
-            cpp::formattables::class_info>(f.entity()));
+            cpp::formattables::class_info>(f.formattable()));
 
     if (!o) {
         BOOST_LOG_SEV(lg, error) << missing_class_info;

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::cpp::formattables::entity>& lhs,
-const boost::shared_ptr<dogen::cpp::formattables::entity>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::cpp::formattables::formattable>& lhs,
+const boost::shared_ptr<dogen::cpp::formattables::formattable>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -41,7 +41,7 @@ file_info::file_info(file_info&& rhs)
       header_guard_(std::move(rhs.header_guard_)),
       file_path_(std::move(rhs.file_path_)),
       relative_path_(std::move(rhs.relative_path_)),
-      entity_(std::move(rhs.entity_)) { }
+      formattable_(std::move(rhs.formattable_)) { }
 
 file_info::file_info(
     const std::string& documentation,
@@ -50,14 +50,14 @@ file_info::file_info(
     const std::string& header_guard,
     const boost::filesystem::path& file_path,
     const boost::filesystem::path& relative_path,
-    const boost::shared_ptr<dogen::cpp::formattables::entity>& entity)
+    const boost::shared_ptr<dogen::cpp::formattables::formattable>& formattable)
     : documentation_(documentation),
       includes_(includes),
       descriptor_(descriptor),
       header_guard_(header_guard),
       file_path_(file_path),
       relative_path_(relative_path),
-      entity_(entity) { }
+      formattable_(formattable) { }
 
 void file_info::swap(file_info& other) noexcept {
     using std::swap;
@@ -67,7 +67,7 @@ void file_info::swap(file_info& other) noexcept {
     swap(header_guard_, other.header_guard_);
     swap(file_path_, other.file_path_);
     swap(relative_path_, other.relative_path_);
-    swap(entity_, other.entity_);
+    swap(formattable_, other.formattable_);
 }
 
 bool file_info::operator==(const file_info& rhs) const {
@@ -77,7 +77,7 @@ bool file_info::operator==(const file_info& rhs) const {
         header_guard_ == rhs.header_guard_ &&
         file_path_ == rhs.file_path_ &&
         relative_path_ == rhs.relative_path_ &&
-        entity_ == rhs.entity_;
+        formattable_ == rhs.formattable_;
 }
 
 file_info& file_info::operator=(file_info other) {
@@ -182,20 +182,20 @@ void file_info::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::cpp::formattables::entity>& file_info::entity() const {
-    return entity_;
+const boost::shared_ptr<dogen::cpp::formattables::formattable>& file_info::formattable() const {
+    return formattable_;
 }
 
-boost::shared_ptr<dogen::cpp::formattables::entity>& file_info::entity() {
-    return entity_;
+boost::shared_ptr<dogen::cpp::formattables::formattable>& file_info::formattable() {
+    return formattable_;
 }
 
-void file_info::entity(const boost::shared_ptr<dogen::cpp::formattables::entity>& v) {
-    entity_ = v;
+void file_info::formattable(const boost::shared_ptr<dogen::cpp::formattables::formattable>& v) {
+    formattable_ = v;
 }
 
-void file_info::entity(const boost::shared_ptr<dogen::cpp::formattables::entity>&& v) {
-    entity_ = std::move(v);
+void file_info::formattable(const boost::shared_ptr<dogen::cpp::formattables::formattable>&& v) {
+    formattable_ = std::move(v);
 }
 
 } } }

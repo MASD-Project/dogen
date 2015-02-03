@@ -50,13 +50,15 @@ namespace cpp {
 namespace formattables {
 
 registrar_info::registrar_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter,
     const std::list<std::string>& leaves,
     const std::list<std::string>& model_dependencies)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -82,7 +84,7 @@ void registrar_info::swap(registrar_info& other) noexcept {
     swap(model_dependencies_, other.model_dependencies_);
 }
 
-bool registrar_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool registrar_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const registrar_info* const p(dynamic_cast<const registrar_info* const>(&other));
     if (!p) return false;
     return *this == *p;

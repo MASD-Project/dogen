@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 
 namespace dogen {
@@ -44,13 +45,12 @@ public:
     workflow(const container& c, const settings::settings& s);
 
 public:
-
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    format(const formattables::entity& e) const;
+    format(const formattables::formattable& f) const;
 
 private:
     const container& container_;

@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/file_settings_io.hpp"
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 
 
@@ -68,11 +69,13 @@ namespace cpp {
 namespace formattables {
 
 entity::entity(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter)
-    : name_(name),
+    : dogen::cpp::formattables::formattable(identity),
+      name_(name),
       documentation_(documentation),
       namespaces_(namespaces),
       file_settings_for_formatter_(file_settings_for_formatter) { }
@@ -80,6 +83,9 @@ entity::entity(
 void entity::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::entity\"" << ", "
+      << "\"__parent_0__\": ";
+    formattable::to_stream(s);
+    s << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
@@ -88,6 +94,8 @@ void entity::to_stream(std::ostream& s) const {
 }
 
 void entity::swap(entity& other) noexcept {
+    formattable::swap(other);
+
     using std::swap;
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
@@ -96,7 +104,8 @@ void entity::swap(entity& other) noexcept {
 }
 
 bool entity::compare(const entity& rhs) const {
-    return name_ == rhs.name_ &&
+    return formattable::compare(rhs) &&
+        name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_ &&
         file_settings_for_formatter_ == rhs.file_settings_for_formatter_;

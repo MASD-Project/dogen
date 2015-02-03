@@ -47,6 +47,7 @@ public:
 
 public:
     exception_info(
+        const std::string& identity,
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
@@ -60,19 +61,19 @@ private:
     friend void boost::serialization::load(Archive& ar, exception_info& v, unsigned int version);
 
 public:
-    virtual void accept(const entity_visitor& v) const override {
+    virtual void accept(const formattable_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(entity_visitor& v) const override {
+    virtual void accept(formattable_visitor& v) const override {
         v.visit(*this);
     }
 
-    virtual void accept(const entity_visitor& v) override {
+    virtual void accept(const formattable_visitor& v) override {
         v.visit(*this);
     }
 
-    virtual void accept(entity_visitor& v) override {
+    virtual void accept(formattable_visitor& v) override {
         v.visit(*this);
     }
 
@@ -86,7 +87,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::cpp::formattables::entity& other) const override;
+    bool equals(const dogen::cpp::formattables::formattable& other) const override;
 
 public:
     void swap(exception_info& other) noexcept;

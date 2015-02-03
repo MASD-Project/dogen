@@ -77,7 +77,7 @@ create(boost::shared_ptr<cpp::formattables::enum_info> ei,
     const cpp::formattables::content_descriptor& cd,
     const cpp::formattables::includes& inc) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(ei);
+    r.formattable(ei);
     r.includes(inc);
     return r;
 }
@@ -87,7 +87,7 @@ create(boost::shared_ptr<cpp::formattables::exception_info> ei,
     const cpp::formattables::content_descriptor& cd,
     const cpp::formattables::includes& inc) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(ei);
+    r.formattable(ei);
     r.includes(inc);
     return r;
 }
@@ -96,7 +96,7 @@ cpp::formattables::file_info file_info_factory::
 create(boost::shared_ptr<cpp::formattables::namespace_info> ni,
     const cpp::formattables::content_descriptor& cd) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(ni);
+    r.formattable(ni);
     return r;
 }
 
@@ -105,7 +105,7 @@ create(boost::shared_ptr<cpp::formattables::class_info> ci,
     const cpp::formattables::content_descriptor& cd,
     const cpp::formattables::includes& inc) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(ci);
+    r.formattable(ci);
     r.includes(inc);
     return r;
 }
@@ -124,7 +124,7 @@ create_registrar(boost::shared_ptr<cpp::formattables::registrar_info> ri,
     const cpp::formattables::content_descriptor& cd,
     const cpp::formattables::includes& inc) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(ri);
+    r.formattable(ri);
     r.includes(inc);
     return r;
 }
@@ -134,7 +134,7 @@ create_visitor(boost::shared_ptr<cpp::formattables::visitor_info> vi,
     const cpp::formattables::content_descriptor& cd,
     const cpp::formattables::includes& inc) const {
     cpp::formattables::file_info r(create(cd));
-    r.entity(vi);
+    r.formattable(vi);
     r.includes(inc);
     return r;
 }

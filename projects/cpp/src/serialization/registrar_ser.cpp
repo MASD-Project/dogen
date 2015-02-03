@@ -28,11 +28,13 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
@@ -47,11 +49,13 @@ void register_types(Archive& ar) {
     config::register_types(ar);
 
     ar.template register_type<dogen::cpp::formattables::class_info>();
+    ar.template register_type<dogen::cpp::formattables::cmakelists_info>();
     ar.template register_type<dogen::cpp::formattables::concept_info>();
     ar.template register_type<dogen::cpp::formattables::enum_info>();
     ar.template register_type<dogen::cpp::formattables::exception_info>();
     ar.template register_type<dogen::cpp::formattables::namespace_info>();
     ar.template register_type<dogen::cpp::formattables::new_class_info>();
+    ar.template register_type<dogen::cpp::formattables::odb_options_info>();
     ar.template register_type<dogen::cpp::formattables::primitive_info>();
     ar.template register_type<dogen::cpp::formattables::registrar_info>();
     ar.template register_type<dogen::cpp::formattables::visitor_info>();

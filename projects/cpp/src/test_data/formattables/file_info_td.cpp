@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
-#include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/includes_td.hpp"
 
 namespace {
@@ -49,15 +49,15 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-dogen::cpp::formattables::entity*
-create_dogen_cpp_formattables_entity_ptr(const unsigned int position) {
-    return dogen::cpp::formattables::entity_generator::create_ptr(position);
+dogen::cpp::formattables::formattable*
+create_dogen_cpp_formattables_formattable_ptr(const unsigned int position) {
+    return dogen::cpp::formattables::formattable_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::cpp::formattables::entity>
-create_boost_shared_ptr_dogen_cpp_formattables_entity(unsigned int position) {
-    boost::shared_ptr<dogen::cpp::formattables::entity> r(
-        create_dogen_cpp_formattables_entity_ptr(position));
+boost::shared_ptr<dogen::cpp::formattables::formattable>
+create_boost_shared_ptr_dogen_cpp_formattables_formattable(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::formattables::formattable> r(
+        create_dogen_cpp_formattables_formattable_ptr(position));
     return r;
 }
 
@@ -77,7 +77,7 @@ populate(const unsigned int position, result_type& v) {
     v.header_guard(create_std_string(position + 3));
     v.file_path(create_boost_filesystem_path(position + 4));
     v.relative_path(create_boost_filesystem_path(position + 5));
-    v.entity(create_boost_shared_ptr_dogen_cpp_formattables_entity(position + 6));
+    v.formattable(create_boost_shared_ptr_dogen_cpp_formattables_formattable(position + 6));
 }
 
 file_info_generator::result_type

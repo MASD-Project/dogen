@@ -18,7 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include <ostream>
 #include "dogen/cpp/types/formattables/formattable.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace cpp {
@@ -27,19 +37,20 @@ namespace formattables {
 formattable::formattable(const std::string& identity)
     : identity_(identity) { }
 
+void formattable::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << ", "
+      << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\""
+      << " }";
+}
+
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(identity_, other.identity_);
 }
 
-bool formattable::operator==(const formattable& rhs) const {
+bool formattable::compare(const formattable& rhs) const {
     return identity_ == rhs.identity_;
-}
-
-formattable& formattable::operator=(formattable other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
 }
 
 const std::string& formattable::identity() const {

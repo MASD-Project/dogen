@@ -25,10 +25,13 @@
 #pragma once
 #endif
 
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
 #include "dogen/cpp/types/formattables/formattable.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formattables::formattable)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::cpp::formattables::formattable)
+
 namespace boost {
 namespace serialization {
 

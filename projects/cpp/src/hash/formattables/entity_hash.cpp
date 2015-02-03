@@ -20,6 +20,7 @@
  */
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_settings_hash.hpp"
+#include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 
 namespace {
 
@@ -55,6 +56,8 @@ namespace formattables {
 
 std::size_t entity_hasher::hash(const entity&v) {
     std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::formattables::formattable&>(v));
 
     combine(seed, v.name());
     combine(seed, v.documentation());

@@ -18,19 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_ENTITY_VISITOR_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_ENTITY_VISITOR_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FORMATTABLE_VISITOR_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_FORMATTABLE_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/cpp/types/formattables/class_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/enum_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/exception_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/namespace_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/new_class_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/odb_options_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/primitive_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/registrar_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/visitor_info_fwd.hpp"
@@ -39,9 +41,9 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class entity_visitor {
+class formattable_visitor {
 public:
-    virtual ~entity_visitor() noexcept = 0;
+    virtual ~formattable_visitor() noexcept = 0;
 
 public:
     /**
@@ -52,6 +54,16 @@ public:
     virtual void visit(const dogen::cpp::formattables::class_info&) { }
     virtual void visit(dogen::cpp::formattables::class_info&) const { }
     virtual void visit(dogen::cpp::formattables::class_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::cmakelists_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) { }
+    virtual void visit(dogen::cpp::formattables::cmakelists_info&) const { }
+    virtual void visit(dogen::cpp::formattables::cmakelists_info&) { }
     /**@}*/
 
     /**
@@ -82,6 +94,16 @@ public:
     virtual void visit(const dogen::cpp::formattables::registrar_info&) { }
     virtual void visit(dogen::cpp::formattables::registrar_info&) const { }
     virtual void visit(dogen::cpp::formattables::registrar_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::odb_options_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::odb_options_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::odb_options_info&) { }
+    virtual void visit(dogen::cpp::formattables::odb_options_info&) const { }
+    virtual void visit(dogen::cpp::formattables::odb_options_info&) { }
     /**@}*/
 
     /**
@@ -135,7 +157,7 @@ public:
     /**@}*/
 };
 
-inline entity_visitor::~entity_visitor() noexcept { }
+inline formattable_visitor::~formattable_visitor() noexcept { }
 
 } } }
 

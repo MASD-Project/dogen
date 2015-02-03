@@ -31,8 +31,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/formattables/entity_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/entity_visitor.hpp"
 #include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -41,7 +41,7 @@ namespace formattables {
 /**
  * @brief Top-level entity in the model.
  */
-class entity {
+class entity : public dogen::cpp::formattables::formattable {
 public:
     entity() = default;
     entity(const entity&) = default;
@@ -51,6 +51,7 @@ public:
 
 public:
     entity(
+        const std::string& identity,
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
@@ -62,12 +63,6 @@ private:
 
     template<typename Archive>
     friend void boost::serialization::load(Archive& ar, entity& v, unsigned int version);
-
-public:
-    virtual void accept(const entity_visitor& v) const = 0;
-    virtual void accept(entity_visitor& v) const = 0;
-    virtual void accept(const entity_visitor& v) = 0;
-    virtual void accept(entity_visitor& v) = 0;
 
 public:
     virtual void to_stream(std::ostream& s) const;
@@ -117,7 +112,7 @@ public:
 protected:
     bool compare(const entity& rhs) const;
 public:
-    virtual bool equals(const entity& other) const = 0;
+    virtual bool equals(const dogen::cpp::formattables::formattable& other) const = 0;
 
 protected:
     void swap(entity& other) noexcept;

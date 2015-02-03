@@ -125,6 +125,7 @@ class_info::class_info()
       enable_integrated_io_(static_cast<bool>(0)) { }
 
 class_info::class_info(
+    const std::string& identity,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
@@ -149,7 +150,8 @@ class_info::class_info(
     const dogen::sml::generation_types& generation_type,
     const bool generate_complete_constructor,
     const bool enable_integrated_io)
-    : dogen::cpp::formattables::entity(name,
+    : dogen::cpp::formattables::entity(identity,
+      name,
       documentation,
       namespaces,
       file_settings_for_formatter),
@@ -235,7 +237,7 @@ void class_info::swap(class_info& other) noexcept {
     swap(enable_integrated_io_, other.enable_integrated_io_);
 }
 
-bool class_info::equals(const dogen::cpp::formattables::entity& other) const {
+bool class_info::equals(const dogen::cpp::formattables::formattable& other) const {
     const class_info* const p(dynamic_cast<const class_info* const>(&other));
     if (!p) return false;
     return *this == *p;

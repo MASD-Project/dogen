@@ -26,19 +26,22 @@
 #endif
 
 #include <algorithm>
+#include <iosfwd>
 #include <string>
 #include "dogen/cpp/serialization/formattables/formattable_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class formattable final {
+class formattable {
 public:
     formattable() = default;
     formattable(const formattable&) = default;
     formattable(formattable&&) = default;
-    ~formattable() = default;
+
+    virtual ~formattable() noexcept = 0;
 
 public:
     explicit formattable(const std::string& identity);
@@ -51,36 +54,40 @@ private:
     friend void boost::serialization::load(Archive& ar, formattable& v, unsigned int version);
 
 public:
+    virtual void accept(const formattable_visitor& v) const = 0;
+    virtual void accept(formattable_visitor& v) const = 0;
+    virtual void accept(const formattable_visitor& v) = 0;
+    virtual void accept(formattable_visitor& v) = 0;
+
+public:
+    virtual void to_stream(std::ostream& s) const;
+
+public:
     const std::string& identity() const;
     std::string& identity();
     void identity(const std::string& v);
     void identity(const std::string&& v);
 
+protected:
+    bool compare(const formattable& rhs) const;
 public:
-    bool operator==(const formattable& rhs) const;
-    bool operator!=(const formattable& rhs) const {
-        return !this->operator==(rhs);
-    }
+    virtual bool equals(const formattable& other) const = 0;
 
-public:
+protected:
     void swap(formattable& other) noexcept;
-    formattable& operator=(formattable other);
 
 private:
     std::string identity_;
 };
 
+inline formattable::~formattable() noexcept { }
+
+inline bool operator==(const formattable& lhs, const formattable& rhs) {
+    return lhs.equals(rhs);
+}
+
 } } }
 
-namespace std {
 
-template<>
-inline void swap(
-    dogen::cpp::formattables::formattable& lhs,
-    dogen::cpp::formattables::formattable& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

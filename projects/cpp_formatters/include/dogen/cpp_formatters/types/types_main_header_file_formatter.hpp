@@ -30,7 +30,7 @@
 #include "dogen/cpp/types/formattables/file_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
-#include "dogen/cpp/types/formattables/entity_visitor.hpp"
+#include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
@@ -43,7 +43,7 @@ namespace cpp_formatters {
  * aspect.
  */
 class types_main_header_file_formatter
-    : public file_formatter, private cpp::formattables::entity_visitor {
+    : public file_formatter, private cpp::formattables::formattable_visitor {
 public:
     types_main_header_file_formatter() = delete;
     types_main_header_file_formatter(
@@ -72,7 +72,7 @@ private:
     void swap_method(const cpp::formattables::class_info& ci);
 
 private:
-    using cpp::formattables::entity_visitor::visit;
+    using cpp::formattables::formattable_visitor::visit;
     virtual void visit(cpp::formattables::class_info& ci) override;
     virtual void visit(cpp::formattables::enum_info& ei) override;
     virtual void visit(cpp::formattables::exception_info& ei) override;
