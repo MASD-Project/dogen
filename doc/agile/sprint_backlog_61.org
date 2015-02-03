@@ -81,6 +81,18 @@ entity. Make entity non-visitable and deal with the fall out.
   properties per qname, per formatter.
 - use the file properties factory in transformer.
 
+*** COMPLETED Create a class to generate file names                   :story:
+    CLOSED: [2015-02-03 Tue 22:29]
+    CLOCK: [2015-02-03 Tue 22:08]--[2015-02-03 Tue 22:28] =>  0:20
+
+Create a "file name generator" (name needs thinking) that will receive
+the settings as input and generate file names per formatter for each
+qname. It will use the postfixes for facet/formatter settings to
+generate the file name. It will take into account file name overrides
+in file name settings. We no longer need help from the formatter - the
+algorithm just uses the settings. Remove all file name related code
+from formatters.
+
 *** STARTED Create a formattables workflow                            :story:
     CLOCK: [2015-02-03 Tue 21:33]--[2015-02-03 Tue 22:06] =>  0:33
     CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09
@@ -206,16 +218,6 @@ exists in the =settings= namespace, it may sound a bit
   settings. With this we can now move the settings away from entity
   because we no longer require the qname.
 - pass the settings class to the includes builder.
-
-*** Create a class to generate file names                             :story:
-
-Create a "file name generator" (name needs thinking) that will receive
-the settings as input and generate file names per formatter for each
-qname. It will use the postfixes for facet/formatter settings to
-generate the file name. It will take into account file name overrides
-in file name settings. We no longer need help from the formatter - the
-algorithm just uses the settings. Remove all file name related code
-from formatters.
 
 *** Create a class to generate includes                               :story:
 

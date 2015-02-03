@@ -74,13 +74,6 @@ public:
 
 private:
     /**
-     * @brief Given an SML object type, returns its corresponding
-     * formatter type.
-     */
-    formatters::formatter_types
-    formatter_type_for_object_type(const sml::object_types ot) const;
-
-    /**
      * @brief Transforms the supplied SML elements into C++ entities.
      */
     template<typename AssociativeContainerOfElement>

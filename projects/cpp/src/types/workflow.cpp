@@ -24,12 +24,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/settings/settings_io.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
-#include "dogen/cpp/io/formatters/formatter_types_io.hpp"
+#include "dogen/cpp/types/formattables/file_name_factory.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -60,31 +59,6 @@ cpp::formatters::registrar& workflow::registrar() {
         registrar_ = std::make_shared<cpp::formatters::registrar>();
 
     return *registrar_;
-}
-
-formatters::formatter_types workflow::
-formatter_type_for_object_type(const sml::object_types ot) const {
-    switch(ot) {
-    case sml::object_types::factory:
-    case sml::object_types::user_defined_service:
-    case sml::object_types::user_defined_value_object:
-    case sml::object_types::entity:
-    case sml::object_types::keyed_entity:
-    case sml::object_types::versioned_key:
-    case sml::object_types::unversioned_key:
-    case sml::object_types::visitor:
-        return formatters::formatter_types::class_formatter;
-        break;
-
-    case sml::object_types::exception:
-        return formatters::formatter_types::exception_formatter;
-        break;
-
-    default:
-        BOOST_LOG_SEV(lg, error) << unsupported_object_type << ot;
-        BOOST_THROW_EXCEPTION(workflow_error(unsupported_object_type +
-                boost::lexical_cast<std::string>(ot)));
-    };
 }
 
 std::forward_list<dogen::formatters::file> workflow::format(
@@ -127,43 +101,8 @@ std::unordered_map<sml::qname, workflow::path_by_formatter_type>
 workflow::obtain_relative_file_names_for_key_activity(
     const settings::settings& s, const formatters::container& c,
     const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining relative file names.";
-
-    std::unordered_map<sml::qname, path_by_formatter_type> r;
-    for (const auto& pair : m.objects()) {
-        const auto qn(pair.first);
-        const auto o(pair.second);
-
-        const auto ng(sml::generation_types::no_generation);
-        if (o.generation_type() == ng)
-            continue;
-
-        const auto ft(formatter_type_for_object_type(o.object_type()));
-        switch(ft) {
-        case formatters::formatter_types::class_formatter:
-            for (const auto f : c.class_formatters()) {
-                const auto& id(f->formatter_name());
-                const auto& fn(f->make_file_name(s, qn));
-                r[qn].insert(std::make_pair(id, fn));
-            }
-            break;
-
-        case formatters::formatter_types::exception_formatter:
-            // FIXME
-            break;
-
-        default: {
-            const auto n(sml::string_converter::convert(o.name()));
-            BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
-                                     << " name: " << n;
-            BOOST_THROW_EXCEPTION(workflow_error(unsupported_formatter_type +
-                    boost::lexical_cast<std::string>(ft)));
-        } };
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Relative file names: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining relative file names.";
-    return r;
+    formattables::file_name_factory f;
+    return f.build(s, c, m);
 }
 
 std::unordered_map<sml::qname,
