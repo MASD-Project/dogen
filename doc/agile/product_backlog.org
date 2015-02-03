@@ -4443,6 +4443,16 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Investigate support for biicode                                   :story:
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
 *** Investigate ModelQ for ideas                                      :story:
 
 We need to mine this project for potential ideas - see how their
