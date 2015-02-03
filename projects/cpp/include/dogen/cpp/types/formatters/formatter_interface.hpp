@@ -32,7 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
-#include "dogen/cpp/types/formattables/includes_builder_interface.hpp"
+#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -64,11 +64,11 @@ public:
     make_file_name(const settings::settings& s, const sml::qname& qn) const = 0;
 
     /**
-     * @brief Creates an instance of the path spec builder for this
+     * @brief Creates an instance of the includes factory for this
      * formatter.
      */
-    virtual std::shared_ptr<formattables::includes_builder_interface>
-    make_includes_builder() const = 0;
+    virtual std::shared_ptr<formattables::includes_factory_interface>
+    make_includes_factory() const = 0;
 };
 
 } } }

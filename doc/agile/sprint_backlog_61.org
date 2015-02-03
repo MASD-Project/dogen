@@ -17,18 +17,18 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-03 Tue 21:33]
+Clock summary at [2015-02-03 Tue 22:07]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *2:13* |      |      |
+| *Total time*                                          | *2:46* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Active                                                |        | 2:13 |      |
+| Active                                                |        | 2:46 |      |
 | COMPLETED Improvements to product backlog             |        |      | 1:01 |
 | COMPLETED Tidy-up formatters workflow                 |        |      | 0:20 |
 | COMPLETED Create a =formattable= base class           |        |      | 0:32 |
 | COMPLETED Rename =file_settings= to =file_properties= |        |      | 0:11 |
-| STARTED Create a formattables workflow                |        |      | 0:09 |
+| STARTED Create a formattables workflow                |        |      | 0:42 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -82,6 +82,7 @@ entity. Make entity non-visitable and deal with the fall out.
 - use the file properties factory in transformer.
 
 *** STARTED Create a formattables workflow                            :story:
+    CLOCK: [2015-02-03 Tue 21:33]--[2015-02-03 Tue 22:06] =>  0:33
     CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09
 
 We need to move across all code in the C++ workflow which is actually

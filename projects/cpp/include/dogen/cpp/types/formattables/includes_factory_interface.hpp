@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_BUILDER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_BUILDER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_INTERFACE_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,16 +39,16 @@ namespace formattables {
 /**
  * @brief Builds the includes for a given type.
  */
-class includes_builder_interface  {
+class includes_factory_interface  {
 public:
     typedef std::unordered_map<std::string, boost::filesystem::path>
     path_by_formatter_type;
 
 public:
-    includes_builder_interface() = default;
-    includes_builder_interface(const includes_builder_interface &) = delete;
-    includes_builder_interface(includes_builder_interface &&) = default;
-    virtual ~includes_builder_interface () noexcept = 0;
+    includes_factory_interface() = default;
+    includes_factory_interface(const includes_factory_interface &) = delete;
+    includes_factory_interface(includes_factory_interface &&) = default;
+    virtual ~includes_factory_interface () noexcept = 0;
 
 public:
     /**

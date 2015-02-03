@@ -58,8 +58,8 @@ public:
     boost::filesystem::path make_file_name(const settings::settings& s,
         const sml::qname& qn) const override;
 
-    std::shared_ptr<formattables::includes_builder_interface>
-    make_includes_builder() const override;
+    std::shared_ptr<formattables::includes_factory_interface>
+    make_includes_factory() const override;
 
 public:
     dogen::formatters::file format(const settings::settings& s,

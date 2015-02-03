@@ -102,13 +102,13 @@ workflow::create_settings_activty(const sml::model& m) const {
     return r;
 }
 
-workflow::includes_builder_by_formatter_id
-workflow::create_includes_builder_by_formatter_id_activity(
+workflow::includes_factory_by_formatter_id
+workflow::create_includes_factory_by_formatter_id_activity(
     const formatters::container& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes builders by id.";
-    workflow::includes_builder_by_formatter_id r;
+    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes factories by id.";
+    workflow::includes_factory_by_formatter_id r;
     for (const auto f : c.class_formatters()) {
-        auto b(f->make_includes_builder());
+        auto b(f->make_includes_factory());
         const auto pair(r.insert(std::make_pair(f->formatter_name(), b)));
         if (!pair.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
@@ -119,7 +119,7 @@ workflow::create_includes_builder_by_formatter_id_activity(
     }
 
     BOOST_LOG_SEV(lg, debug)
-        << "Finished creating a map of includes builders by id.";
+        << "Finished creating a map of includes factories by id.";
     return r;
 }
 
@@ -169,7 +169,7 @@ workflow::obtain_relative_file_names_for_key_activity(
 std::unordered_map<sml::qname,
                    workflow::file_properties_by_formatter_type> workflow::
 obtain_file_properties_activity(
-    const includes_builder_by_formatter_id& includes_builders,
+    const includes_factory_by_formatter_id& includes_factories,
     const sml::model& m,
     const std::unordered_map<sml::qname, path_by_formatter_type>&
     relative_file_names_by_formatter_by_qname) const {
@@ -186,8 +186,8 @@ obtain_file_properties_activity(
             psd.relative_path(other_pair.second);
 
             const auto& formatter_id(other_pair.first);
-            const auto i(includes_builders.find(formatter_id));
-            if (i == includes_builders.end()) {
+            const auto i(includes_factories.find(formatter_id));
+            if (i == includes_factories.end()) {
                 BOOST_LOG_SEV(lg, error) << formatter_not_found << formatter_id;
                 BOOST_THROW_EXCEPTION(workflow_error(formatter_not_found +
                         formatter_id));
@@ -242,8 +242,8 @@ generate(const sml::model& m) const {
     const auto& c(registrar().formatter_container());
     const auto rel(obtain_relative_file_names_for_key_activity(s, c, m));
 
-    const auto builders(create_includes_builder_by_formatter_id_activity(c));
-    const auto det(obtain_file_properties_activity(builders, m, rel));
+    const auto factories(create_includes_factory_by_formatter_id_activity(c));
+    const auto det(obtain_file_properties_activity(factories, m, rel));
 
     const formatters::workflow fw(c, s);
     std::forward_list<dogen::formatters::file> r;

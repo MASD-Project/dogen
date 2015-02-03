@@ -38,7 +38,7 @@
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
-#include "dogen/cpp/types/formattables/includes_builder_interface.hpp"
+#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -54,8 +54,8 @@ public:
     path_by_formatter_type;
     typedef std::unordered_map<std::string,
                                std::shared_ptr<
-                                   formattables::includes_builder_interface>
-                               > includes_builder_by_formatter_id;
+                                   formattables::includes_factory_interface>
+                               > includes_factory_by_formatter_id;
 
 public:
     workflow() = default;
@@ -117,10 +117,10 @@ private:
     settings::settings create_settings_activty(const sml::model& m) const;
 
     /**
-     * @brief Creates a map of includes builders by formatter id.
+     * @brief Creates a map of includes factories by formatter id.
      */
-    includes_builder_by_formatter_id
-    create_includes_builder_by_formatter_id_activity(
+    includes_factory_by_formatter_id
+    create_includes_factory_by_formatter_id_activity(
         const formatters::container& c) const;
 
     /**
@@ -136,7 +136,7 @@ private:
      */
     std::unordered_map<sml::qname, file_properties_by_formatter_type>
     obtain_file_properties_activity(
-        const includes_builder_by_formatter_id& includes_builders,
+        const includes_factory_by_formatter_id& includes_factories,
         const sml::model& m,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const;

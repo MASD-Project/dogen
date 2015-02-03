@@ -49,17 +49,18 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class includes_builder : public formattables::includes_builder_interface {
+class includes_factory : public formattables::includes_factory_interface {
 public:
     formattables::includes build(const sml::model& m, const sml::qname qn,
-        const std::unordered_map<sml::qname,
-        includes_builder_interface::path_by_formatter_type>&
+        const std::unordered_map<
+            sml::qname,
+            includes_factory_interface::path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const override;
 };
 
-formattables::includes includes_builder::build(const sml::model& /*m*/,
+formattables::includes includes_factory::build(const sml::model& /*m*/,
     const sml::qname /*qn*/,
-    const std::unordered_map<sml::qname, includes_builder_interface::
+    const std::unordered_map<sml::qname, includes_factory_interface::
                              path_by_formatter_type>&
     /*relative_file_names_by_formatter_by_qname*/) const {
     formattables::includes r;
@@ -94,9 +95,9 @@ make_file_name(const settings::settings& s, const sml::qname& qn) const {
     return b.header_file_name(s.global_settings(), qn);
 }
 
-std::shared_ptr<formattables::includes_builder_interface>
-class_header_formatter::make_includes_builder() const {
-    return std::make_shared<includes_builder>();
+std::shared_ptr<formattables::includes_factory_interface>
+class_header_formatter::make_includes_factory() const {
+    return std::make_shared<includes_factory>();
 }
 
 dogen::formatters::file
