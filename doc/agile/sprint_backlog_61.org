@@ -17,14 +17,16 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-02 Mon 20:22]
+Clock summary at [2015-02-03 Tue 20:40]
 
 | Headline                                  | Time   |      |      |
 |-------------------------------------------+--------+------+------|
-| *Total time*                              | *1:01* |      |      |
+| *Total time*                              | *1:30* |      |      |
 |-------------------------------------------+--------+------+------|
-| Active                                    |        | 1:01 |      |
+| Active                                    |        | 1:30 |      |
 | COMPLETED Improvements to product backlog |        |      | 1:01 |
+| COMPLETED Tidy-up formatters workflow     |        |      | 0:20 |
+| STARTED Create a formattables workflow    |        |      | 0:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -51,6 +53,19 @@ that are needed now. We should:
   term. All the vision stuff should go into long term. Actually we
   probably should use names that are more reflective: bugs, long term
   features, etc.
+
+*** COMPLETED Tidy-up formatters workflow                             :story:
+    CLOSED: [2015-02-03 Tue 20:40]
+    CLOCK: [2015-02-03 Tue 20:19]--[2015-02-03 Tue 20:39] =>  0:20
+
+We need to remove all of the facet code and work directly off of the
+formatter container.
+
+*** STARTED Create a formattables workflow                            :story:
+    CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09
+
+We need to move across all code in the C++ workflow which is actually
+part of the formattables sub-workflow.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
 

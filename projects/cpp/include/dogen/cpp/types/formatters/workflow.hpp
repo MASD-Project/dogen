@@ -29,22 +29,22 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formatters/facet.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
 /**
- * @brief Responsible for dispatching the entity to the appropriate
- * formatters.
+ * @brief Generates all files for the supplied entity.
  */
 class workflow {
 public:
-    workflow(const std::forward_list<facet>& facets);
+    workflow(const container& c, const settings::settings& s);
 
 public:
+
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
@@ -53,7 +53,8 @@ public:
     format(const formattables::entity& e) const;
 
 private:
-    const std::forward_list<facet>& facets_;
+    const container& container_;
+    const settings::settings& settings_;
 };
 
 } } }

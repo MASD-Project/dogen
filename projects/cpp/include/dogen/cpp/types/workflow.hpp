@@ -33,7 +33,6 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
-#include "dogen/cpp/types/formatters/facet.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
@@ -117,20 +116,6 @@ private:
     settings::settings create_settings_activty(const sml::model& m) const;
 
     /**
-     * @brief Create the formatter container.
-     */
-    std::unordered_map<std::string, formatters::container>
-    formatter_container_for_facet_activty(const formatters::container& c) const;
-
-    /**
-     * @brief Creates all the facets
-     */
-    std::forward_list<formatters::facet>
-    create_facets_activty(
-        const std::unordered_map<std::string, formatters::container>&
-        formatters_by_facet, const settings::settings& settings) const;
-
-    /**
      * @brief Creates a map of includes builders by formatter id.
      */
     includes_builder_by_formatter_id
@@ -141,8 +126,8 @@ private:
      * @brief Gets the relative file name for all path keys.
      */
     std::unordered_map<sml::qname, path_by_formatter_type>
-    obtain_relative_file_names_for_key_activity(
-        const std::forward_list<formatters::facet>& facets,
+    obtain_relative_file_names_for_key_activity(const settings::settings& s,
+        const formatters::container& f,
         const sml::model& m) const;
 
     /**

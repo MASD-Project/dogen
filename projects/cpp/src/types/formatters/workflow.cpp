@@ -19,16 +19,19 @@
  *
  */
 #include "dogen/cpp/types/formattables/entity_visitor.hpp"
-#include "dogen/cpp/types/formatters/facet_factory.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
+/**
+ * @brief Responsible for dispatching the entity to the appropriate
+ * formatters.
+ */
 class dispatcher : public formattables::entity_visitor {
 public:
-    dispatcher(const std::forward_list<facet>& f);
+    dispatcher(const container& c, const settings::settings& s);
     ~dispatcher() noexcept { }
 
 public:
@@ -52,17 +55,17 @@ public:
     format(const formattables::entity& e);
 
 private:
-    const std::forward_list<facet>& facets_;
+    const container& container_;
+    const settings::settings& settings_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const std::forward_list<facet>& f)
-    : facets_(f) { }
+dispatcher::dispatcher(const container& c, const settings::settings& s)
+    : container_(c), settings_(s) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
-    for (const auto& fct : facets_)
-        for (const auto fmt : fct.container().class_formatters())
-            files_.push_front(fmt->format(fct.settings(), c));
+    for (const auto f : container_.class_formatters())
+        files_.push_front(f->format(settings_, c));
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {
@@ -95,11 +98,12 @@ dispatcher::format(const formattables::entity& e) {
     return files_;
 }
 
-workflow::workflow(const std::forward_list<facet>& facets) : facets_(facets) { }
+workflow::workflow(const container& c, const settings::settings& s)
+    : container_(c), settings_(s) { }
 
 std::forward_list<dogen::formatters::file>
 workflow::format(const formattables::entity& e) const {
-    dispatcher d(facets_);
+    dispatcher d(container_, settings_);
     return d.format(e);
 }
 

@@ -31,8 +31,6 @@
 #include "dogen/cpp/io/formattables/file_settings_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
-#include "dogen/cpp/types/formatters/facet_factory.hpp"
-#include "dogen/cpp/types/formatters/container_splitter.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -104,21 +102,6 @@ workflow::create_settings_activty(const sml::model& m) const {
     return r;
 }
 
-std::unordered_map<std::string, formatters::container> workflow::
-formatter_container_for_facet_activty(
-    const formatters::container& c) const {
-    formatters::container_splitter s;
-    return s.split_by_facet(c);
-}
-
-std::forward_list<formatters::facet> workflow::create_facets_activty(
-    const std::unordered_map<std::string, formatters::container>&
-    formatters_by_facet, const settings::settings& s) const {
-
-    formatters::facet_factory f;
-    return f.build(formatters_by_facet, s);
-}
-
 workflow::includes_builder_by_formatter_id
 workflow::create_includes_builder_by_formatter_id_activity(
     const formatters::container& c) const {
@@ -142,7 +125,7 @@ workflow::create_includes_builder_by_formatter_id_activity(
 
 std::unordered_map<sml::qname, workflow::path_by_formatter_type>
 workflow::obtain_relative_file_names_for_key_activity(
-    const std::forward_list<formatters::facet>& facets,
+    const settings::settings& s, const formatters::container& c,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining relative file names.";
 
@@ -158,13 +141,10 @@ workflow::obtain_relative_file_names_for_key_activity(
         const auto ft(formatter_type_for_object_type(o.object_type()));
         switch(ft) {
         case formatters::formatter_types::class_formatter:
-            for (const auto fct : facets) {
-                for (const auto fmt : fct.container().class_formatters()) {
-                    const auto& id(fmt->formatter_name());
-                    const auto& s(fct.settings());
-                    const auto& fn(fmt->make_file_name(s, qn));
-                    r[qn].insert(std::make_pair(id, fn));
-                }
+            for (const auto f : c.class_formatters()) {
+                const auto& id(f->formatter_name());
+                const auto& fn(f->make_file_name(s, qn));
+                r[qn].insert(std::make_pair(id, fn));
             }
             break;
 
@@ -260,14 +240,12 @@ generate(const sml::model& m) const {
     const auto s(create_settings_activty(m));
 
     const auto& c(registrar().formatter_container());
-    const auto fc(formatter_container_for_facet_activty(c));
-    const auto facets(create_facets_activty(fc, s));
-    const auto rel(obtain_relative_file_names_for_key_activity(facets, m));
+    const auto rel(obtain_relative_file_names_for_key_activity(s, c, m));
 
     const auto builders(create_includes_builder_by_formatter_id_activity(c));
     const auto det(obtain_file_settings_activity(builders, m, rel));
 
-    const formatters::workflow fw(facets);
+    const formatters::workflow fw(c, s);
     std::forward_list<dogen::formatters::file> r;
     r.splice_after(r.before_begin(),
         create_files_from_sml_container_activity(det, m, fw, m.modules()));
