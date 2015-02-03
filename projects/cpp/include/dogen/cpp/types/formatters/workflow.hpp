@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <memory>
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
@@ -42,19 +43,14 @@ namespace formatters {
  */
 class workflow {
 public:
-    workflow(const container& c, const settings::settings& s);
-
-public:
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    format(const formattables::formattable& f) const;
-
-private:
-    const container& container_;
-    const settings::settings& settings_;
+    execute(const container& c, const settings::settings& s,
+        const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
+    const;
 };
 
 } } }

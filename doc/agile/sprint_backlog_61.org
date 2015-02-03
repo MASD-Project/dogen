@@ -17,20 +17,20 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-03 Tue 23:00]
+Clock summary at [2015-02-03 Tue 23:44]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *3:36* |      |      |
+| *Total time*                                          | *4:50* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Active                                                |        | 3:36 |      |
+| Active                                                |        | 4:50 |      |
 | COMPLETED Improvements to product backlog             |        |      | 1:01 |
 | COMPLETED Tidy-up formatters workflow                 |        |      | 0:20 |
 | COMPLETED Create a =formattable= base class           |        |      | 0:32 |
 | COMPLETED Rename =file_settings= to =file_properties= |        |      | 0:11 |
 | COMPLETED Create a class to generate file names       |        |      | 0:20 |
 | COMPLETED Create a class to generate file properties  |        |      | 0:30 |
-| STARTED Create a formattables workflow                |        |      | 0:42 |
+| COMPLETED Create a formattables workflow              |        |      | 1:56 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -156,7 +156,9 @@ Notes:
 - consider passing in a container of includes builder (or formatters)
   rather than querying the registrar directly.
 
-*** STARTED Create a formattables workflow                            :story:
+*** COMPLETED Create a formattables workflow                          :story:
+    CLOSED: [2015-02-03 Tue 23:44]
+    CLOCK: [2015-02-03 Tue 22:30]--[2015-02-03 Tue 23:44] =>  1:14
     CLOCK: [2015-02-03 Tue 21:33]--[2015-02-03 Tue 22:06] =>  0:33
     CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09
 

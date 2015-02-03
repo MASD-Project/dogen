@@ -98,13 +98,15 @@ dispatcher::format(const formattables::formattable& f) {
     return files_;
 }
 
-workflow::workflow(const container& c, const settings::settings& s)
-    : container_(c), settings_(s) { }
-
 std::forward_list<dogen::formatters::file>
-workflow::format(const formattables::formattable& f) const {
-    dispatcher d(container_, settings_);
-    return d.format(f);
+workflow::execute(const container& c, const settings::settings& s,
+    const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
+    const {
+    dispatcher d(c, s);
+    std::forward_list<dogen::formatters::file> r;
+    for (const auto sp : f)
+        r.splice_after(r.before_begin(), d.format(*sp));
+    return r;
 }
 
 } } }

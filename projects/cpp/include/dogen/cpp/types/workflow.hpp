@@ -74,78 +74,25 @@ public:
 
 private:
     /**
-     * @brief Transforms the supplied SML elements into C++ entities.
-     */
-    template<typename AssociativeContainerOfElement>
-    std::forward_list<std::shared_ptr<formattables::formattable>>
-    transform_sml_elements(
-        const std::unordered_map<sml::qname,
-        file_properties_by_formatter_type>&
-        file_properties_by_qname_by_formatter_type, const sml::model& m,
-        const AssociativeContainerOfElement& c) const {
-        std::forward_list<std::shared_ptr<formattables::formattable> > r;
-        formattables::transformer
-            t(file_properties_by_qname_by_formatter_type, m);
-        for (const auto& pair : c) {
-            const auto ng(sml::generation_types::no_generation);
-            if (pair.second.generation_type() == ng)
-                continue;
-
-            r.push_front(t.transform(pair.second));
-        }
-        return r;
-    }
-
-    /**
-     * @brief Formats all files for the entity.
-     */
-    std::forward_list<dogen::formatters::file>
-    format(const formatters::workflow& w,
-        const formattables::formattable& f) const;
-
-private:
-    /**
      * @brief Create the settings.
      */
     settings::settings create_settings_activty(const sml::model& m) const;
 
     /**
-     * @brief Gets the relative file name for all path keys.
+     * @brief Create the formattables.
      */
-    std::unordered_map<sml::qname, path_by_formatter_type>
-    obtain_relative_file_names_activity(const settings::settings& s,
-        const formatters::container& c,
-        const sml::model& m) const;
+    std::forward_list<std::shared_ptr<formattables::formattable> >
+    create_formattables_activty(const settings::settings& s,
+        const formatters::container& c, const sml::model& m) const;
 
     /**
-     * @brief Creates all file settings for a model.
+     * @brief Create the files.
      */
-    std::unordered_map<sml::qname, file_properties_by_formatter_type>
-    obtain_file_properties_activity(
-        const formatters::container& c, const sml::model& m,
-        const std::unordered_map<sml::qname, path_by_formatter_type>&
-        relative_file_names_by_formatter_by_qname) const;
-
-    /**
-     * @brief Creates all the files for a given container of SML
-     * elements.
-     */
-    template<typename AssociativeContainerOfElement>
     std::forward_list<dogen::formatters::file>
-    create_files_from_sml_container_activity(
-        const std::unordered_map<sml::qname,
-                                 file_properties_by_formatter_type>&
-        file_properties_by_qname_by_formatter_type,
-        const sml::model& m,
-        const formatters::workflow& w,
-        const AssociativeContainerOfElement& c) const {
-        const auto formattables(transform_sml_elements(
-                file_properties_by_qname_by_formatter_type, m, c));
-        std::forward_list<dogen::formatters::file> r;
-        for (const auto f : formattables)
-            r.splice_after(r.before_begin(), format(w, *f));
-        return r;
-    }
+    format_activty(const settings::settings& s,
+        const formatters::container& c,
+        const std::forward_list<std::shared_ptr<formattables::formattable> >&
+        f) const;
 
 public:
     std::string id() const override;

@@ -18,19 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iterator>
-#include <boost/lexical_cast.hpp>
-#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/io/settings/settings_io.hpp"
-#include "dogen/cpp/io/formattables/file_properties_io.hpp"
-#include "dogen/cpp/types/formattables/file_name_factory.hpp"
-#include "dogen/cpp/types/formattables/file_properties_factory.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/formatters/workflow.hpp"
+#include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
 namespace {
@@ -45,9 +36,9 @@ static logger lg(logger_factory(id));
 namespace dogen {
 namespace cpp {
 
-std::shared_ptr<formatters::registrar> workflow::registrar_;
-
 workflow::~workflow() noexcept { }
+
+std::shared_ptr<formatters::registrar> workflow::registrar_;
 
 cpp::formatters::registrar& workflow::registrar() {
     if (!registrar_)
@@ -56,35 +47,28 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::forward_list<dogen::formatters::file> workflow::format(
-    const formatters::workflow& w, const formattables::formattable& f) const {
-    return w.format(f);
-}
-
 settings::settings
 workflow::create_settings_activty(const sml::model& m) const {
     settings::workflow w;
-    const auto r(w.execute(m));
-    return r;
+    return w.execute(m);
 }
 
-std::unordered_map<sml::qname, workflow::path_by_formatter_type>
-workflow::obtain_relative_file_names_activity(
-    const settings::settings& s, const formatters::container& c,
-    const sml::model& m) const {
-    formattables::file_name_factory f;
-    return f.build(s, c, m);
+std::forward_list<std::shared_ptr<formattables::formattable> >
+workflow::create_formattables_activty(const settings::settings& s,
+    const formatters::container& c, const sml::model& m) const {
+    formattables::workflow w;
+    return w.execute(s, c, m);
 }
 
-std::unordered_map<sml::qname,
-                   workflow::file_properties_by_formatter_type> workflow::
-obtain_file_properties_activity(
-    const formatters::container& c, const sml::model& m,
-    const std::unordered_map<sml::qname, path_by_formatter_type>&
-    relative_file_names_by_formatter_by_qname) const {
-    formattables::file_properties_factory f;
-    return f.build(c, relative_file_names_by_formatter_by_qname, m);
+std::forward_list<dogen::formatters::file>
+workflow::format_activty(const settings::settings& s,
+    const formatters::container& c,
+    const std::forward_list<std::shared_ptr<formattables::formattable> >&
+    f) const {
+    formatters::workflow w;
+    return w.execute(c, s, f);
 }
+
 
 std::string workflow::id() const {
     return ::id;
@@ -113,28 +97,15 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
 }
 
-std::forward_list<dogen::formatters::file> workflow::
-generate(const sml::model& m) const {
+std::forward_list<dogen::formatters::file>
+workflow::generate(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
+    validate();
     const auto s(create_settings_activty(m));
-
     const auto& c(registrar().formatter_container());
-    const auto rel(obtain_relative_file_names_activity(s, c, m));
-    const auto det(obtain_file_properties_activity(c, m, rel));
-
-    const formatters::workflow fw(c, s);
-    std::forward_list<dogen::formatters::file> r;
-    r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(det, m, fw, m.modules()));
-    r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(det, m, fw, m.concepts()));
-    r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(det, m, fw, m.primitives()));
-    r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(det, m, fw, m.enumerations()));
-    r.splice_after(r.before_begin(),
-        create_files_from_sml_container_activity(det, m, fw, m.objects()));
+    const auto f(create_formattables_activty(s, c, m));
+    const auto r(format_activty(s, c, f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;
