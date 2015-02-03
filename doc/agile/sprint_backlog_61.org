@@ -17,17 +17,19 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-03 Tue 22:07]
+Clock summary at [2015-02-03 Tue 23:00]
 
 | Headline                                              | Time   |      |      |
 |-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *2:46* |      |      |
+| *Total time*                                          | *3:36* |      |      |
 |-------------------------------------------------------+--------+------+------|
-| Active                                                |        | 2:46 |      |
+| Active                                                |        | 3:36 |      |
 | COMPLETED Improvements to product backlog             |        |      | 1:01 |
 | COMPLETED Tidy-up formatters workflow                 |        |      | 0:20 |
 | COMPLETED Create a =formattable= base class           |        |      | 0:32 |
 | COMPLETED Rename =file_settings= to =file_properties= |        |      | 0:11 |
+| COMPLETED Create a class to generate file names       |        |      | 0:20 |
+| COMPLETED Create a class to generate file properties  |        |      | 0:30 |
 | STARTED Create a formattables workflow                |        |      | 0:42 |
 #+end:
 
@@ -92,6 +94,67 @@ generate the file name. It will take into account file name overrides
 in file name settings. We no longer need help from the formatter - the
 algorithm just uses the settings. Remove all file name related code
 from formatters.
+
+*** COMPLETED Add support for local settings                          :story:
+    CLOSED: [2015-02-03 Tue 22:30]
+
+*New Understanding*
+
+- local settings have: general, file name settings (for the file name
+  overrides), type settings, additional includes. Presumably all of
+  these need to be optional. We need to ensure general settings have a
+  scope of any.
+- we need a local settings factory. See the scratch pad for an example
+  using =sml::consumer_interface=.
+
+*Previous Understanding*
+
+- create a local settings class that is made up of file settings,
+  opaque settings and formatter settings. Entity to have a container
+  of local settings (map of formatter id to local settings).
+- create a local settings factory that takes on the work from workflow
+  in generating the file settings. It also takes on a container of
+  opaque settings factory by formatter id to generate the opaque
+  settings. Finally, it uses the formatter settings factory for the
+  overrides. These should be optional. If populated, they should take
+  on the global settings as defaults so that we don't have to worry
+  about global settings for formatters any more. This means the local
+  settings factory must have access to the global settings.
+
+*** COMPLETED Create a settings class                                 :story:
+    CLOSED: [2015-02-03 Tue 22:30]
+
+*New Understanding*
+
+We need a container for both local and global settings that gets
+passed around. It should really be called =settings= but given that it
+exists in the =settings= namespace, it may sound a bit
+"repetitive". Brainstorm on naming.
+
+*Previous Understanding*
+
+- create a settings class that has a map of formatter id to global
+  settings. It could also have a map of c++ entity name (produced with
+  name builder to include namespaces), to formatter id to local
+  settings. With this we can now move the settings away from entity
+  because we no longer require the qname.
+- pass the settings class to the includes builder.
+
+*** COMPLETED Create a class to generate file properties              :story:
+    CLOSED: [2015-02-03 Tue 23:00]
+    CLOCK: [2015-02-03 Tue 22:30]--[2015-02-03 Tue 23:00] =>  0:30
+
+Create a "file properties generator" (name needs thinking) that will
+receive the file names from the "file name generator" as well as the
+settings and produce the complete file properties per qname per
+formatter. It will delegate to each formatter for the includes
+generation. Formatters to take into account the additional includes
+settings.
+
+Notes:
+
+- consider passing in a container of includes builder (or formatters)
+  rather than querying the registrar directly.
 
 *** STARTED Create a formattables workflow                            :story:
     CLOCK: [2015-02-03 Tue 21:33]--[2015-02-03 Tue 22:06] =>  0:33
@@ -175,62 +238,6 @@ declarations.
 Fields such as =enabled=, =postfix= etc are common to all formatters
 and facets. It may make more sense to define some string constants for
 them, perhaps in =traits=?
-
-*** Add support for local settings                                    :story:
-
-*New Understanding*
-
-- local settings have: general, file name settings (for the file name
-  overrides), type settings, additional includes. Presumably all of
-  these need to be optional. We need to ensure general settings have a
-  scope of any.
-- we need a local settings factory. See the scratch pad for an example
-  using =sml::consumer_interface=.
-
-*Previous Understanding*
-
-- create a local settings class that is made up of file settings,
-  opaque settings and formatter settings. Entity to have a container
-  of local settings (map of formatter id to local settings).
-- create a local settings factory that takes on the work from workflow
-  in generating the file settings. It also takes on a container of
-  opaque settings factory by formatter id to generate the opaque
-  settings. Finally, it uses the formatter settings factory for the
-  overrides. These should be optional. If populated, they should take
-  on the global settings as defaults so that we don't have to worry
-  about global settings for formatters any more. This means the local
-  settings factory must have access to the global settings.
-
-*** Create a settings class                                           :story:
-
-*New Understanding*
-
-We need a container for both local and global settings that gets
-passed around. It should really be called =settings= but given that it
-exists in the =settings= namespace, it may sound a bit
-"repetitive". Brainstorm on naming.
-
-*Previous Understanding*
-
-- create a settings class that has a map of formatter id to global
-  settings. It could also have a map of c++ entity name (produced with
-  name builder to include namespaces), to formatter id to local
-  settings. With this we can now move the settings away from entity
-  because we no longer require the qname.
-- pass the settings class to the includes builder.
-
-*** Create a class to generate includes                               :story:
-
-Create an "includes generator" (name needs thinking) that will
-receive the file names from the "file name generator" as well as the
-settings and produce includes per qname per formatter. It will
-delegate to each formatter for the includes generation. Formatters
-to take into account the additional includes settings.
-
-Notes:
-
-- consider passing in a container of includes builder rather than
-  querying the registrar directly.
 
 *** Add support for opaque formatter settings                         :story:
 

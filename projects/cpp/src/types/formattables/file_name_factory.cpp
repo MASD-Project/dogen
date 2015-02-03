@@ -32,7 +32,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.formattables.workflow"));
+static logger lg(logger_factory("cpp.formattables.file_name_factory"));
 
 const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_formatter_type(

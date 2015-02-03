@@ -110,18 +110,11 @@ private:
     settings::settings create_settings_activty(const sml::model& m) const;
 
     /**
-     * @brief Creates a map of includes factories by formatter id.
-     */
-    includes_factory_by_formatter_id
-    create_includes_factory_by_formatter_id_activity(
-        const formatters::container& c) const;
-
-    /**
      * @brief Gets the relative file name for all path keys.
      */
     std::unordered_map<sml::qname, path_by_formatter_type>
-    obtain_relative_file_names_for_key_activity(const settings::settings& s,
-        const formatters::container& f,
+    obtain_relative_file_names_activity(const settings::settings& s,
+        const formatters::container& c,
         const sml::model& m) const;
 
     /**
@@ -129,8 +122,7 @@ private:
      */
     std::unordered_map<sml::qname, file_properties_by_formatter_type>
     obtain_file_properties_activity(
-        const includes_factory_by_formatter_id& includes_factories,
-        const sml::model& m,
+        const formatters::container& c, const sml::model& m,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const;
 

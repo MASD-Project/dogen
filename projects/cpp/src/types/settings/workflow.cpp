@@ -23,6 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
+#include "dogen/cpp/io/settings/settings_io.hpp"
 #include "dogen/cpp/types/settings/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/settings/facet_settings_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
@@ -134,9 +135,15 @@ workflow::create_local_settings_activity(const sml::model& /*m*/) const {
 }
 
 settings workflow::execute(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating settings.";
+
     settings r;
     r.global_settings(create_global_settings_activity(m));
     r.local_settings(create_local_settings_activity(m));
+
+    BOOST_LOG_SEV(lg, debug) << "Settings: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating settings.";
+
     return r;
 }
 

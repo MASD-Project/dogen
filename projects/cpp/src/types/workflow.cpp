@@ -29,6 +29,7 @@
 #include "dogen/cpp/io/settings/settings_io.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/types/formattables/file_name_factory.hpp"
+#include "dogen/cpp/types/formattables/file_properties_factory.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -38,12 +39,6 @@ const std::string id("cpp.workflow");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
-
-const std::string unsupported_object_type("Object type is not supported: ");
-const std::string unsupported_formatter_type(
-    "Formatter type is not supported: ");
-const std::string duplicate_formatter_name("Formatter name already inserted: ");
-const std::string formatter_not_found("Formatter not found: ");
 
 }
 
@@ -68,37 +63,13 @@ std::forward_list<dogen::formatters::file> workflow::format(
 
 settings::settings
 workflow::create_settings_activty(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating settings.";
     settings::workflow w;
     const auto r(w.execute(m));
-    BOOST_LOG_SEV(lg, debug) << "Settings: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished creating settings.";
-    return r;
-}
-
-workflow::includes_factory_by_formatter_id
-workflow::create_includes_factory_by_formatter_id_activity(
-    const formatters::container& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes factories by id.";
-    workflow::includes_factory_by_formatter_id r;
-    for (const auto f : c.class_formatters()) {
-        auto b(f->make_includes_factory());
-        const auto pair(r.insert(std::make_pair(f->formatter_name(), b)));
-        if (!pair.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
-                                     << f->formatter_name();
-            BOOST_THROW_EXCEPTION(workflow_error(duplicate_formatter_name +
-                    f->formatter_name()));
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug)
-        << "Finished creating a map of includes factories by id.";
     return r;
 }
 
 std::unordered_map<sml::qname, workflow::path_by_formatter_type>
-workflow::obtain_relative_file_names_for_key_activity(
+workflow::obtain_relative_file_names_activity(
     const settings::settings& s, const formatters::container& c,
     const sml::model& m) const {
     formattables::file_name_factory f;
@@ -108,41 +79,11 @@ workflow::obtain_relative_file_names_for_key_activity(
 std::unordered_map<sml::qname,
                    workflow::file_properties_by_formatter_type> workflow::
 obtain_file_properties_activity(
-    const includes_factory_by_formatter_id& includes_factories,
-    const sml::model& m,
+    const formatters::container& c, const sml::model& m,
     const std::unordered_map<sml::qname, path_by_formatter_type>&
     relative_file_names_by_formatter_by_qname) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining file settings.";
-
-    std::unordered_map<sml::qname,
-                       workflow::file_properties_by_formatter_type> r;
-
-    for (const auto pair : relative_file_names_by_formatter_by_qname) {
-        const auto& qn(pair.first);
-        workflow::file_properties_by_formatter_type fs;
-        for (const auto other_pair : pair.second) {
-            formattables::file_properties psd;
-            psd.relative_path(other_pair.second);
-
-            const auto& formatter_id(other_pair.first);
-            const auto i(includes_factories.find(formatter_id));
-            if (i == includes_factories.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found << formatter_id;
-                BOOST_THROW_EXCEPTION(workflow_error(formatter_not_found +
-                        formatter_id));
-            }
-
-            const auto& b(*(i->second));
-            auto inc(b.build(m, qn, relative_file_names_by_formatter_by_qname));
-            psd.includes(inc);
-            fs[formatter_id] = psd;
-        }
-        r[qn] = fs;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "File settings names: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining file settings.";
-    return r;
+    formattables::file_properties_factory f;
+    return f.build(c, relative_file_names_by_formatter_by_qname, m);
 }
 
 std::string workflow::id() const {
@@ -179,10 +120,8 @@ generate(const sml::model& m) const {
     const auto s(create_settings_activty(m));
 
     const auto& c(registrar().formatter_container());
-    const auto rel(obtain_relative_file_names_for_key_activity(s, c, m));
-
-    const auto factories(create_includes_factory_by_formatter_id_activity(c));
-    const auto det(obtain_file_properties_activity(factories, m, rel));
+    const auto rel(obtain_relative_file_names_activity(s, c, m));
+    const auto det(obtain_file_properties_activity(c, m, rel));
 
     const formatters::workflow fw(c, s);
     std::forward_list<dogen::formatters::file> r;
