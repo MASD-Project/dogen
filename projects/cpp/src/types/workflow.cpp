@@ -28,7 +28,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/io/settings/settings_io.hpp"
-#include "dogen/cpp/io/formattables/file_settings_io.hpp"
+#include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -167,8 +167,8 @@ workflow::obtain_relative_file_names_for_key_activity(
 }
 
 std::unordered_map<sml::qname,
-                   workflow::file_settings_by_formatter_type> workflow::
-obtain_file_settings_activity(
+                   workflow::file_properties_by_formatter_type> workflow::
+obtain_file_properties_activity(
     const includes_builder_by_formatter_id& includes_builders,
     const sml::model& m,
     const std::unordered_map<sml::qname, path_by_formatter_type>&
@@ -176,13 +176,13 @@ obtain_file_settings_activity(
     BOOST_LOG_SEV(lg, debug) << "Obtaining file settings.";
 
     std::unordered_map<sml::qname,
-                       workflow::file_settings_by_formatter_type> r;
+                       workflow::file_properties_by_formatter_type> r;
 
     for (const auto pair : relative_file_names_by_formatter_by_qname) {
         const auto& qn(pair.first);
-        workflow::file_settings_by_formatter_type fs;
+        workflow::file_properties_by_formatter_type fs;
         for (const auto other_pair : pair.second) {
-            formattables::file_settings psd;
+            formattables::file_properties psd;
             psd.relative_path(other_pair.second);
 
             const auto& formatter_id(other_pair.first);
@@ -243,7 +243,7 @@ generate(const sml::model& m) const {
     const auto rel(obtain_relative_file_names_for_key_activity(s, c, m));
 
     const auto builders(create_includes_builder_by_formatter_id_activity(c));
-    const auto det(obtain_file_settings_activity(builders, m, rel));
+    const auto det(obtain_file_properties_activity(builders, m, rel));
 
     const formatters::workflow fw(c, s);
     std::forward_list<dogen::formatters::file> r;

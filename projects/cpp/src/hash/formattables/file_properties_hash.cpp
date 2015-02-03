@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FILE_SETTINGS_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_FILE_SETTINGS_FWD_HPP
+#include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
+#include "dogen/cpp/hash/formattables/includes_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class file_settings;
+std::size_t file_properties_hasher::hash(const file_properties&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_filesystem_path(v.relative_path()));
+    combine(seed, v.includes());
+
+    return seed;
+}
 
 } } }
-
-#endif

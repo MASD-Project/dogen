@@ -31,12 +31,12 @@ namespace_info::namespace_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter)
+    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name)
     : dogen::cpp::formattables::entity(identity,
       name,
       documentation,
       namespaces,
-      file_settings_for_formatter) { }
+      file_properties_by_formatter_name) { }
 
 void namespace_info::to_stream(std::ostream& s) const {
     s << " { "

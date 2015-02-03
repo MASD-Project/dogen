@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FILE_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_FILE_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FILE_PROPERTIES_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_FILE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,33 +27,33 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/serialization/formattables/file_settings_fwd_ser.hpp"
+#include "dogen/cpp/serialization/formattables/file_properties_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class file_settings final {
+class file_properties final {
 public:
-    file_settings() = default;
-    file_settings(const file_settings&) = default;
-    ~file_settings() = default;
+    file_properties() = default;
+    file_properties(const file_properties&) = default;
+    ~file_properties() = default;
 
 public:
-    file_settings(file_settings&& rhs);
+    file_properties(file_properties&& rhs);
 
 public:
-    file_settings(
+    file_properties(
         const boost::filesystem::path& relative_path,
         const dogen::cpp::formattables::includes& includes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const file_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const file_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, file_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, file_properties& v, unsigned int version);
 
 public:
     const boost::filesystem::path& relative_path() const;
@@ -67,14 +67,14 @@ public:
     void includes(const dogen::cpp::formattables::includes&& v);
 
 public:
-    bool operator==(const file_settings& rhs) const;
-    bool operator!=(const file_settings& rhs) const {
+    bool operator==(const file_properties& rhs) const;
+    bool operator!=(const file_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(file_settings& other) noexcept;
-    file_settings& operator=(file_settings other);
+    void swap(file_properties& other) noexcept;
+    file_properties& operator=(file_properties other);
 
 private:
     boost::filesystem::path relative_path_;
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::formattables::file_settings& lhs,
-    dogen::cpp::formattables::file_settings& rhs) {
+    dogen::cpp::formattables::file_properties& lhs,
+    dogen::cpp::formattables::file_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,68 +18,68 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-file_settings::file_settings(file_settings&& rhs)
+file_properties::file_properties(file_properties&& rhs)
     : relative_path_(std::move(rhs.relative_path_)),
       includes_(std::move(rhs.includes_)) { }
 
-file_settings::file_settings(
+file_properties::file_properties(
     const boost::filesystem::path& relative_path,
     const dogen::cpp::formattables::includes& includes)
     : relative_path_(relative_path),
       includes_(includes) { }
 
-void file_settings::swap(file_settings& other) noexcept {
+void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
     swap(relative_path_, other.relative_path_);
     swap(includes_, other.includes_);
 }
 
-bool file_settings::operator==(const file_settings& rhs) const {
+bool file_properties::operator==(const file_properties& rhs) const {
     return relative_path_ == rhs.relative_path_ &&
         includes_ == rhs.includes_;
 }
 
-file_settings& file_settings::operator=(file_settings other) {
+file_properties& file_properties::operator=(file_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& file_settings::relative_path() const {
+const boost::filesystem::path& file_properties::relative_path() const {
     return relative_path_;
 }
 
-boost::filesystem::path& file_settings::relative_path() {
+boost::filesystem::path& file_properties::relative_path() {
     return relative_path_;
 }
 
-void file_settings::relative_path(const boost::filesystem::path& v) {
+void file_properties::relative_path(const boost::filesystem::path& v) {
     relative_path_ = v;
 }
 
-void file_settings::relative_path(const boost::filesystem::path&& v) {
+void file_properties::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const dogen::cpp::formattables::includes& file_settings::includes() const {
+const dogen::cpp::formattables::includes& file_properties::includes() const {
     return includes_;
 }
 
-dogen::cpp::formattables::includes& file_settings::includes() {
+dogen::cpp::formattables::includes& file_properties::includes() {
     return includes_;
 }
 
-void file_settings::includes(const dogen::cpp::formattables::includes& v) {
+void file_properties::includes(const dogen::cpp::formattables::includes& v) {
     includes_ = v;
 }
 
-void file_settings::includes(const dogen::cpp::formattables::includes&& v) {
+void file_properties::includes(const dogen::cpp::formattables::includes&& v) {
     includes_ = std::move(v);
 }
 

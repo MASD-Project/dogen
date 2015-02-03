@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_FORMATTABLES_FILE_SETTINGS_HASH_HPP
-#define DOGEN_CPP_HASH_FORMATTABLES_FILE_SETTINGS_HASH_HPP
+#ifndef DOGEN_CPP_HASH_FORMATTABLES_FILE_PROPERTIES_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTABLES_FILE_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-struct file_settings_hasher {
+struct file_properties_hasher {
 public:
-    static std::size_t hash(const file_settings& v);
+    static std::size_t hash(const file_properties& v);
 };
 
 } } }
@@ -42,10 +42,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::cpp::formattables::file_settings> {
+struct hash<dogen::cpp::formattables::file_properties> {
 public:
-    size_t operator()(const dogen::cpp::formattables::file_settings& v) const {
-        return dogen::cpp::formattables::file_settings_hasher::hash(v);
+    size_t operator()(const dogen::cpp::formattables::file_properties& v) const {
+        return dogen::cpp::formattables::file_properties_hasher::hash(v);
     }
 };
 

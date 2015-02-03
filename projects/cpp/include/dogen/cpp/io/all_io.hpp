@@ -32,7 +32,7 @@
 #include "dogen/cpp/io/formattables/enumerator_info_io.hpp"
 #include "dogen/cpp/io/formattables/exception_info_io.hpp"
 #include "dogen/cpp/io/formattables/file_info_io.hpp"
-#include "dogen/cpp/io/formattables/file_settings_io.hpp"
+#include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/io/formattables/file_types_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/includes_io.hpp"

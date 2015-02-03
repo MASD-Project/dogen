@@ -4857,13 +4857,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         <dia:point val="110,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.95,16.95;144.815,21.45"/>
+        <dia:rectangle val="109.95,16.95;147.895,21.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="110,17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.765000000000001"/>
+        <dia:real val="37.844999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -4981,10 +4981,10 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_settings_for_formatter#</dia:string>
+            <dia:string>#file_properties_by_formatter_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,formattables::file_settings&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,formattables::file_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17871,13 +17871,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="195,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.95,34.95;234.435,45.65"/>
+        <dia:rectangle val="194.95,34.95;235.205,45.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="195,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.385000000000005"/>
+        <dia:real val="40.155000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.6"/>
@@ -17998,7 +17998,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#details_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,formattables::file_settings&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,formattables::file_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19920,7 +19920,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_settings#</dia:string>
+        <dia:string>#file_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -25489,7 +25489,7 @@ the SML model itself.
         <dia:point val="134.415,-6.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.665,-7.15;144.965,17.8"/>
+        <dia:rectangle val="133.665,-7.15;148.045,17.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25497,8 +25497,8 @@ the SML model itself.
       <dia:attribute name="orth_points">
         <dia:point val="134.415,-6.4"/>
         <dia:point val="134.415,-2"/>
-        <dia:point val="144.765,-2"/>
-        <dia:point val="144.765,17"/>
+        <dia:point val="147.845,-2"/>
+        <dia:point val="147.845,17"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -25666,17 +25666,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O183">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.975,21.35;128.232,35.05"/>
+        <dia:rectangle val="75.975,21.35;129.773,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="76.025,29"/>
         <dia:point val="76.025,35"/>
       </dia:attribute>
@@ -25708,17 +25708,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O184">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.595,21.35;128.232,42.05"/>
+        <dia:rectangle val="86.595,21.35;129.773,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="86.645,29"/>
         <dia:point val="86.645,42"/>
       </dia:attribute>
@@ -25750,17 +25750,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O185">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.8162,21.35;128.232,35.05"/>
+        <dia:rectangle val="94.8162,21.35;129.773,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="94.8662,29"/>
         <dia:point val="94.8662,35"/>
       </dia:attribute>
@@ -25792,17 +25792,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O186">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.484,21.35;128.232,35.05"/>
+        <dia:rectangle val="107.484,21.35;129.773,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="107.534,29"/>
         <dia:point val="107.534,35"/>
       </dia:attribute>
@@ -25834,17 +25834,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O187">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.7125,21.35;128.232,35.05"/>
+        <dia:rectangle val="52.7125,21.35;129.773,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="52.7625,29"/>
         <dia:point val="52.7625,35"/>
       </dia:attribute>
@@ -25876,17 +25876,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O188">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.478,21.35;128.232,42.05"/>
+        <dia:rectangle val="117.478,21.35;129.773,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="117.528,29"/>
         <dia:point val="117.528,42"/>
       </dia:attribute>
@@ -25918,17 +25918,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O189">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.532,21.35;129.138,36.05"/>
+        <dia:rectangle val="128.073,21.35;129.773,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="129.088,29"/>
         <dia:point val="129.088,36"/>
       </dia:attribute>
@@ -26032,17 +26032,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O191">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.532,21.35;139.498,42.05"/>
+        <dia:rectangle val="128.073,21.35;139.498,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="139.447,29"/>
         <dia:point val="139.447,42"/>
       </dia:attribute>
@@ -26074,17 +26074,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O192">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.532,21.35;147.446,36.05"/>
+        <dia:rectangle val="128.073,21.35;147.446,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="147.396,29"/>
         <dia:point val="147.396,36"/>
       </dia:attribute>
@@ -26116,17 +26116,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O193">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.532,21.35;155.407,42.05"/>
+        <dia:rectangle val="128.073,21.35;155.407,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="155.357,29"/>
         <dia:point val="155.357,42"/>
       </dia:attribute>
@@ -26230,17 +26230,17 @@ the SML model itself.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.382,21.4"/>
+        <dia:point val="128.923,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.532,21.35;168.808,36.05"/>
+        <dia:rectangle val="128.073,21.35;168.808,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="127.382,21.4"/>
-        <dia:point val="127.382,29"/>
+        <dia:point val="128.923,21.4"/>
+        <dia:point val="128.923,29"/>
         <dia:point val="168.757,29"/>
         <dia:point val="168.757,36"/>
       </dia:attribute>
@@ -26668,17 +26668,17 @@ the SML model itself.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="144.765,21.4"/>
+        <dia:point val="147.845,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.015,20.55;160.957,25.05"/>
+        <dia:rectangle val="147.095,20.55;160.957,25.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="144.765,21.4"/>
-        <dia:point val="144.765,25"/>
+        <dia:point val="147.845,21.4"/>
+        <dia:point val="147.845,25"/>
         <dia:point val="160.757,25"/>
         <dia:point val="160.757,20.6"/>
       </dia:attribute>
@@ -26812,17 +26812,17 @@ the SML model itself.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="234.385,35"/>
+        <dia:point val="235.155,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="233.635,23.55;243.197,35.8"/>
+        <dia:rectangle val="234.405,23.55;243.197,35.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="234.385,35"/>
-        <dia:point val="234.385,28.95"/>
+        <dia:point val="235.155,35"/>
+        <dia:point val="235.155,28.95"/>
         <dia:point val="242.998,28.95"/>
         <dia:point val="242.998,23.6"/>
       </dia:attribute>
@@ -27336,14 +27336,14 @@ formattable type.#</dia:string>
         <dia:point val="214.648,28.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="214.292,28.4497;215.093,35.0528"/>
+        <dia:rectangle val="214.594,28.4468;215.48,35.0763"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="214.648,28.5"/>
-        <dia:point val="214.692,35"/>
+        <dia:point val="215.077,35"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -27358,7 +27358,7 @@ formattable type.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="214.67,32.25"/>
+        <dia:point val="214.862,32.25"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O210" connection="6"/>
@@ -29501,7 +29501,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="100.448,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.5975,6.95;127.432,17.05"/>
+        <dia:rectangle val="99.5975,6.95;128.973,17.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29509,8 +29509,8 @@ registry of all available formatters.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="100.448,7"/>
         <dia:point val="100.448,12.4"/>
-        <dia:point val="127.382,12.4"/>
-        <dia:point val="127.382,17"/>
+        <dia:point val="128.923,12.4"/>
+        <dia:point val="128.923,17"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

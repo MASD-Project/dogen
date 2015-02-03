@@ -85,8 +85,8 @@ const std::string parent_class_info_not_found(
 const std::string too_many_parents(
     "Type has more than one parent but multiple inheritance not supported: ");
 
-const std::string type_has_no_file_settings(
-    "Could not find file settings for type: ");
+const std::string type_has_no_file_properties(
+    "Could not find file properties for type: ");
 
 const std::string no_visitees("Visitor is not visiting any types: ");
 
@@ -175,10 +175,10 @@ namespace cpp {
 namespace formattables {
 
 transformer::transformer(
-    const std::unordered_map<sml::qname, file_settings_by_formatter_type>&
-    file_settings_by_qname_by_formatter_type, const sml::model& m)
-    : file_settings_by_qname_by_formatter_type_(
-        file_settings_by_qname_by_formatter_type), model_(m) { }
+    const std::unordered_map<sml::qname, file_properties_by_formatter_type>&
+    file_properties_by_qname_by_formatter_type, const sml::model& m)
+    : file_properties_by_qname_by_formatter_type_(
+        file_properties_by_qname_by_formatter_type), model_(m) { }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
     const std::string& documentation, entity& e) const {
@@ -191,14 +191,14 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     // FIXME: for now we are only supporting objects, so we need this
     // hack. logging is causing an expected slow down.
-    const auto i(file_settings_by_qname_by_formatter_type_.find(qn));
-    if (i == file_settings_by_qname_by_formatter_type_.end()) {
+    const auto i(file_properties_by_qname_by_formatter_type_.find(qn));
+    if (i == file_properties_by_qname_by_formatter_type_.end()) {
         const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << type_has_no_file_settings << n;
+        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << n;
         // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_settings + n));
+        // type_has_no_file_properties + n));
     } else
-        e.file_settings_for_formatter(i->second);
+        e.file_properties_by_formatter_name(i->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,

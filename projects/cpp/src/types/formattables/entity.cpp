@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/formattables/file_settings_io.hpp"
+#include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 
@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -73,12 +73,12 @@ entity::entity(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& file_settings_for_formatter)
+    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name)
     : dogen::cpp::formattables::formattable(identity),
       name_(name),
       documentation_(documentation),
       namespaces_(namespaces),
-      file_settings_for_formatter_(file_settings_for_formatter) { }
+      file_properties_by_formatter_name_(file_properties_by_formatter_name) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
@@ -89,7 +89,7 @@ void entity::to_stream(std::ostream& s) const {
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
-      << "\"file_settings_for_formatter\": " << file_settings_for_formatter_
+      << "\"file_properties_by_formatter_name\": " << file_properties_by_formatter_name_
       << " }";
 }
 
@@ -100,7 +100,7 @@ void entity::swap(entity& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
-    swap(file_settings_for_formatter_, other.file_settings_for_formatter_);
+    swap(file_properties_by_formatter_name_, other.file_properties_by_formatter_name_);
 }
 
 bool entity::compare(const entity& rhs) const {
@@ -108,7 +108,7 @@ bool entity::compare(const entity& rhs) const {
         name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_ &&
-        file_settings_for_formatter_ == rhs.file_settings_for_formatter_;
+        file_properties_by_formatter_name_ == rhs.file_properties_by_formatter_name_;
 }
 
 const std::string& entity::name() const {
@@ -159,20 +159,20 @@ void entity::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& entity::file_settings_for_formatter() const {
-    return file_settings_for_formatter_;
+const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& entity::file_properties_by_formatter_name() const {
+    return file_properties_by_formatter_name_;
 }
 
-std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& entity::file_settings_for_formatter() {
-    return file_settings_for_formatter_;
+std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& entity::file_properties_by_formatter_name() {
+    return file_properties_by_formatter_name_;
 }
 
-void entity::file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>& v) {
-    file_settings_for_formatter_ = v;
+void entity::file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v) {
+    file_properties_by_formatter_name_ = v;
 }
 
-void entity::file_settings_for_formatter(const std::unordered_map<std::string, dogen::cpp::formattables::file_settings>&& v) {
-    file_settings_for_formatter_ = std::move(v);
+void entity::file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>&& v) {
+    file_properties_by_formatter_name_ = std::move(v);
 }
 
 } } }

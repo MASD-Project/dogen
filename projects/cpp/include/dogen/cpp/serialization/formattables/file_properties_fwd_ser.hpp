@@ -18,21 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/cpp/io/formattables/file_settings_io.hpp"
-#include "dogen/cpp/io/formattables/includes_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_FILE_PROPERTIES_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_FILE_PROPERTIES_FWD_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const file_settings& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::formattables::file_settings\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"includes\": " << v.includes()
-      << " }";
-    return(s);
-}
+#include "dogen/cpp/types/formattables/file_properties_fwd.hpp"
 
-} } }
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::formattables::file_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::formattables::file_properties& v, unsigned int version);
+
+} }
+
+#endif

@@ -18,24 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_FORMATTABLES_FILE_SETTINGS_IO_HPP
-#define DOGEN_CPP_IO_FORMATTABLES_FILE_SETTINGS_IO_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_FILE_PROPERTIES_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_FILE_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formattables::file_properties)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::formattables::file_settings& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::formattables::file_properties& v, unsigned int version);
 
-} } }
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::formattables::file_properties& v, unsigned int version);
+
+} }
 
 #endif

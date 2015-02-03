@@ -32,7 +32,7 @@
 #include "dogen/cpp/hash/formattables/enumerator_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/exception_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/file_settings_hash.hpp"
+#include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/includes_hash.hpp"

@@ -32,7 +32,7 @@
 #include "dogen/cpp/serialization/formattables/enumerator_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/file_settings_ser.hpp"
+#include "dogen/cpp/serialization/formattables/file_properties_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includes_ser.hpp"

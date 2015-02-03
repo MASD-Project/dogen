@@ -32,7 +32,7 @@
 #include "dogen/cpp/test_data/formattables/enumerator_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/file_settings_td.hpp"
+#include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/includes_td.hpp"

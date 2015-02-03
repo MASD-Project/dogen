@@ -47,7 +47,7 @@
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
-#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -58,14 +58,14 @@ namespace formattables {
  */
 class transformer {
 public:
-    typedef std::unordered_map<std::string, file_settings>
-    file_settings_by_formatter_type;
+    typedef std::unordered_map<std::string, file_properties>
+    file_properties_by_formatter_type;
 
 public:
     transformer(
         const std::unordered_map<sml::qname,
-                                 file_settings_by_formatter_type>&
-        file_settings_by_qname_by_formatter_type,
+                                 file_properties_by_formatter_type>&
+        file_properties_by_qname_by_formatter_type,
         const sml::model& m);
 
 private:
@@ -171,8 +171,8 @@ public:
     std::shared_ptr<formattable> transform(const sml::object& o) const;
 
 private:
-    const std::unordered_map<sml::qname, file_settings_by_formatter_type>&
-    file_settings_by_qname_by_formatter_type_;
+    const std::unordered_map<sml::qname, file_properties_by_formatter_type>&
+    file_properties_by_qname_by_formatter_type_;
     const sml::model& model_;
 };
 

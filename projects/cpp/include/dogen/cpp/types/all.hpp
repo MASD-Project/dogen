@@ -35,7 +35,7 @@
 #include "dogen/cpp/types/formattables/enumerator_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp/types/formattables/file_info.hpp"
-#include "dogen/cpp/types/formattables/file_settings.hpp"
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 #include "dogen/cpp/types/formattables/file_types.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"

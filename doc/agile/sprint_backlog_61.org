@@ -17,17 +17,18 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-03 Tue 21:22]
+Clock summary at [2015-02-03 Tue 21:33]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *2:02* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 2:02 |      |
-| COMPLETED Improvements to product backlog   |        |      | 1:01 |
-| COMPLETED Tidy-up formatters workflow       |        |      | 0:20 |
-| COMPLETED Create a =formattable= base class |        |      | 0:32 |
-| STARTED Create a formattables workflow      |        |      | 0:09 |
+| Headline                                              | Time   |      |      |
+|-------------------------------------------------------+--------+------+------|
+| *Total time*                                          | *2:13* |      |      |
+|-------------------------------------------------------+--------+------+------|
+| Active                                                |        | 2:13 |      |
+| COMPLETED Improvements to product backlog             |        |      | 1:01 |
+| COMPLETED Tidy-up formatters workflow                 |        |      | 0:20 |
+| COMPLETED Create a =formattable= base class           |        |      | 0:32 |
+| COMPLETED Rename =file_settings= to =file_properties= |        |      | 0:11 |
+| STARTED Create a formattables workflow                |        |      | 0:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -68,6 +69,17 @@ formatter container.
 
 We need to start using the =formattable= base class instead of
 entity. Make entity non-visitable and deal with the fall out.
+
+*** COMPLETED Rename =file_settings= to =file_properties=             :story:
+    CLOSED: [2015-02-03 Tue 21:33]
+    CLOCK: [2015-02-03 Tue 21:22]--[2015-02-03 Tue 21:33] =>  0:11
+
+- rename file settings to file properties because these are not a
+  direct translation from dynamic.
+- create a file properties factory that merges the output of the
+  includes generator and file name generator and spits out file
+  properties per qname, per formatter.
+- use the file properties factory in transformer.
 
 *** STARTED Create a formattables workflow                            :story:
     CLOCK: [2015-02-03 Tue 20:10]--[2015-02-03 Tue 20:19] =>  0:09
@@ -226,15 +238,6 @@ Notes:
 - when formatting, cast additional formatter settings (if available)
   and throw if cast fails. For formatters without opaque settings,
   throw if any supplied.
-
-*** Rename =file_settings= to =file_properties=                       :story:
-
-- rename file settings to file properties because these are not a
-  direct translation from dynamic.
-- create a file properties factory that merges the output of the
-  includes generator and file name generator and spits out file
-  properties per qname, per formatter.
-- use the file properties factory in transformer.
 
 *** Populate the "new" =class_info= properties                        :story:
 

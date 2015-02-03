@@ -18,37 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/file_settings_hash.hpp"
-#include "dogen/cpp/hash/formattables/includes_hash.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTABLES_FILE_PROPERTIES_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTABLES_FILE_PROPERTIES_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t file_settings_hasher::hash(const file_settings&v) {
-    std::size_t seed(0);
+class file_properties_generator {
+public:
+    file_properties_generator();
 
-    combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, v.includes());
+public:
+    typedef dogen::cpp::formattables::file_properties result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

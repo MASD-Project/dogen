@@ -30,8 +30,8 @@
 
 namespace {
 
-const std::string file_settings_for_formatter_not_found(
-    "File settings for formatter not found. Formatter: ");
+const std::string file_properties_for_formatter_not_found(
+    "File properties for formatter not found. Formatter: ");
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
@@ -68,13 +68,13 @@ formattables::includes includes_builder::build(const sml::model& /*m*/,
 
 boost::filesystem::path class_header_formatter::
 get_relative_path(const formattables::class_info& c) const {
-    const auto& fs(c.file_settings_for_formatter());
+    const auto& fs(c.file_properties_by_formatter_name());
     const auto i(fs.find(formatter_name()));
     if (i == fs.end()) {
-        BOOST_LOG_SEV(lg, error) << file_settings_for_formatter_not_found
+        BOOST_LOG_SEV(lg, error) << file_properties_for_formatter_not_found
                                  << formatter_name();
         BOOST_THROW_EXCEPTION(formatting_error(
-                file_settings_for_formatter_not_found +
+                file_properties_for_formatter_not_found +
                 formatter_name()));
     }
     return i->second.relative_path();
