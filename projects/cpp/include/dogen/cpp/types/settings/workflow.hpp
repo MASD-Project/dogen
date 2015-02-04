@@ -26,9 +26,11 @@
 #endif
 
 #include <string>
-#include <unordered_map>
 #include <forward_list>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/indexer.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
@@ -71,25 +73,29 @@ private:
      * @brief Create the facet settings.
      */
     std::unordered_map<std::string, facet_settings>
-    create_facet_settings(const dynamic::object& o) const;
+    create_facet_settings(const dynamic::indexer& idx,
+        const dynamic::object& o) const;
 
     /**
      * @brief Create the formatter settings.
      */
     std::unordered_map<std::string, formatter_settings>
-    create_formatter_settings(const dynamic::object& o) const;
+    create_formatter_settings(const dynamic::indexer& idx,
+        const dynamic::object& o) const;
 
     /**
      * @brief Creates the local settings for the object.
      */
     std::unordered_map<std::string, local_settings>
-    create_local_settings(const sml::qname& qn, const dynamic::object& o) const;
+    create_local_settings(const dynamic::indexer& idx,
+        const sml::qname& qn, const dynamic::object& o) const;
 
 private:
     /**
      * @brief Creates the global settings.
      */
-    global_settings create_global_settings_activity(const sml::model& m) const;
+    global_settings create_global_settings_activity(const dynamic::indexer& idx,
+        const sml::model& m) const;
 
     /**
      * @brief Creates the local settings for all types.
@@ -98,14 +104,16 @@ private:
         std::string,
         std::unordered_map<std::string, local_settings>
         >
-    create_local_settings_activity(const sml::model& m) const;
+    create_local_settings_activity(const dynamic::indexer& idx,
+        const sml::model& m) const;
 
 public:
     /**
      * @brief Generates the top-level settings from the supplied
      * model.
      */
-    settings execute(const sml::model& m) const;
+    settings execute(const std::forward_list<dynamic::field_definition>& fds,
+        const sml::model& m) const;
 };
 
 } } }

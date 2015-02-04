@@ -95,31 +95,35 @@ create_cpp_settings(const dynamic::object& o) const {
 }
 
 std::unordered_map<std::string, facet_settings> workflow::
-create_facet_settings(const dynamic::object& o) const {
+create_facet_settings(const dynamic::indexer& idx,
+    const dynamic::object& o) const {
     facet_settings_factory f;
-    return f.build(o);
+    return f.build(idx.field_definitions_by_facet_name(), o);
 }
 
 std::unordered_map<std::string, formatter_settings> workflow::
-create_formatter_settings(const dynamic::object& o) const {
+create_formatter_settings(const dynamic::indexer& idx,
+    const dynamic::object& o) const {
     formatter_settings_factory f;
-    return f.build(o);
+    return f.build(idx.field_definitions_by_formatter_name(), o);
 }
 
-global_settings workflow::
-create_global_settings_activity(const sml::model& m) const {
+global_settings workflow::create_global_settings_activity(
+    const dynamic::indexer& idx, const sml::model& m) const {
     const auto mm(obtain_model_module(m));
+    const auto o(mm.extensions());
+
     global_settings r;
-    r.general_settings(create_general_settings(m.extensions()));
-    r.cpp_settings(create_cpp_settings(m.extensions()));
-    r.facet_settings(create_facet_settings(m.extensions()));
-    r.formatter_settings(create_formatter_settings(m.extensions()));
+    r.general_settings(create_general_settings(o));
+    r.cpp_settings(create_cpp_settings(o));
+    r.facet_settings(create_facet_settings(idx, o));
+    r.formatter_settings(create_formatter_settings(idx, o));
     return r;
 }
 
 std::unordered_map<std::string, local_settings> workflow::
-create_local_settings(const sml::qname& /*qn*/,
-    const dynamic::object& /*o*/) const {
+create_local_settings(const dynamic::indexer& /*idx*/,
+    const sml::qname& /*qn*/, const dynamic::object& /*o*/) const {
     std::unordered_map<std::string, local_settings> r;
     return r;
 }
@@ -128,18 +132,24 @@ std::unordered_map<
     std::string,
     std::unordered_map<std::string, local_settings>
     >
-workflow::create_local_settings_activity(const sml::model& /*m*/) const {
+workflow::create_local_settings_activity(const dynamic::indexer& /*idx*/,
+    const sml::model& /*m*/) const {
     std::unordered_map<std::string,
         std::unordered_map<std::string, local_settings> > r;
     return r;
 }
 
-settings workflow::execute(const sml::model& m) const {
+settings workflow::
+execute(const std::forward_list<dynamic::field_definition>& fds,
+    const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings.";
 
+    dynamic::indexer idx;
+    idx.index(fds);
+
     settings r;
-    r.global_settings(create_global_settings_activity(m));
-    r.local_settings(create_local_settings_activity(m));
+    r.global_settings(create_global_settings_activity(idx, m));
+    r.local_settings(create_local_settings_activity(idx, m));
 
     BOOST_LOG_SEV(lg, debug) << "Settings: " << r;
     BOOST_LOG_SEV(lg, debug) << "Finished creating settings.";

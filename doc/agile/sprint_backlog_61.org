@@ -13,21 +13,22 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-04 Wed 21:08]
+Clock summary at [2015-02-04 Wed 22:46]
 
-| Headline                                              | Time   |      |      |
-|-------------------------------------------------------+--------+------+------|
-| *Total time*                                          | *5:08* |      |      |
-|-------------------------------------------------------+--------+------+------|
-| Active                                                |        | 5:08 |      |
-| STARTED Sprint and product backlog grooming           |        |      | 0:18 |
-| COMPLETED Improvements to product backlog             |        |      | 1:01 |
-| COMPLETED Tidy-up formatters workflow                 |        |      | 0:20 |
-| COMPLETED Create a =formattable= base class           |        |      | 0:32 |
-| COMPLETED Rename =file_settings= to =file_properties= |        |      | 0:11 |
-| COMPLETED Create a class to generate file names       |        |      | 0:20 |
-| COMPLETED Create a class to generate file properties  |        |      | 0:30 |
-| COMPLETED Create a formattables workflow              |        |      | 1:56 |
+| Headline                                                          | Time   |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                      | *6:44* |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| Active                                                            |        | 6:44 |      |
+| STARTED Sprint and product backlog grooming                       |        |      | 0:18 |
+| COMPLETED Improvements to product backlog                         |        |      | 1:01 |
+| COMPLETED Tidy-up formatters workflow                             |        |      | 0:20 |
+| COMPLETED Create a =formattable= base class                       |        |      | 0:32 |
+| COMPLETED Rename =file_settings= to =file_properties=             |        |      | 0:11 |
+| COMPLETED Create a class to generate file names                   |        |      | 0:20 |
+| COMPLETED Create a class to generate file properties              |        |      | 0:30 |
+| COMPLETED Create a formattables workflow                          |        |      | 1:56 |
+| STARTED Facet and formatter settings factories to use definitions |        |      | 1:36 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -196,6 +197,7 @@ We need to replace the references to the c++ settings directly with
 formatter settings.
 
 *** STARTED Facet and formatter settings factories to use definitions :story:
+    CLOCK: [2015-02-04 Wed 21:08]--[2015-02-04 Wed 22:44] =>  1:36
 
 *Analysis*
 

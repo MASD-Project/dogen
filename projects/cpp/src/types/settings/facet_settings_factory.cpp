@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/facet_settings_factory.hpp"
 
 namespace {
@@ -28,16 +30,10 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("cpp.settings.facet_settings_factory"));
 
-const std::string dot(".");
-
-/**
- * @brief Given a facet and a trait, returns the fully qualified
- * version of the trait.
- */
-inline std::string
-qualify(const std::string& facet_id, const std::string& trait) {
-    return facet_id + dot + trait;
-}
+const std::string multiple_fields(
+    "Facet has multiple fields with the same name: ");
+const std::string no_default_value(
+    "Field does not have a default value: ");
 
 }
 
@@ -45,38 +41,92 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-facet_settings facet_settings_factory::read_settings(
-    const std::string& facet_id,
+facet_settings facet_settings_factory::create_settings_for_facet(
+    const std::forward_list<dynamic::field_definition>& facet_fields,
     const dynamic::object& o) const {
 
     facet_settings r;
-    using namespace dynamic;
+    bool found_enabled(false), found_directory(false), found_postfix(false);
+    const auto& enabled_trait(traits::facet::enabled());
+    const auto& directory_trait(traits::facet::directory());
+    const auto& postfix_trait(traits::facet::postfix());
 
-    const auto enabled_trait(qualify(facet_id, traits::facet::enabled()));
-    if (has_field(o, enabled_trait))
-        r.enabled(get_boolean_content(o, enabled_trait));
+    for (const auto fd : facet_fields) {
+        using namespace dynamic;
+        if (fd.name().simple() == enabled_trait) {
+            if (found_enabled) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_enabled = true;
 
-    const auto directory_trait(qualify(facet_id, traits::facet::directory()));
-    if (has_field(o, directory_trait))
-        r.directory(get_text_content(o, directory_trait));
+            if (has_field(o, fd))
+                r.enabled(get_boolean_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.enabled(get_boolean_content(*fd.default_value()));
+            }
+        } else if (fd.name().simple() == directory_trait) {
+            if (found_directory) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_directory = true;
 
-    const auto postfix_trait(qualify(facet_id, traits::facet::postfix()));
-    if (has_field(o, postfix_trait))
-        r.postfix(get_text_content(o, postfix_trait));
+            if (has_field(o, fd))
+                r.directory(get_text_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.directory(get_text_content(*fd.default_value()));
+            }
+        } else if (fd.name().simple() == postfix_trait) {
+            if (found_postfix) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_postfix = true;
+
+            if (has_field(o, fd))
+                r.postfix(get_text_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.postfix(get_text_content(*fd.default_value()));
+            }
+        }
+    }
 
     return r;
 }
 
 std::unordered_map<std::string, facet_settings>
-facet_settings_factory::build(const dynamic::object& /*o*/) const {
+facet_settings_factory::build(
+    const std::unordered_map<std::string,
+    std::forward_list<dynamic::field_definition>>&
+    field_definitions_by_facet_name,
+    const dynamic::object& o) const {
 
     std::unordered_map<std::string, facet_settings> r;
-    // for (const auto& pair : default_facet_settings_by_facet_id) {
-    //     const auto& facet_id(pair.first);
-    //     const auto& default_settings(pair.second);
-    //     const auto s(read_settings(default_settings, facet_id, o));
-    //     r.insert(std::make_pair(facet_id, s));
-    // }
+    for (const auto pair : field_definitions_by_facet_name) {
+        const auto& facet_name(pair.first);
+        const auto& facet_fields(pair.second);
+        const auto s(create_settings_for_facet(facet_fields, o));
+        r.insert(std::make_pair(facet_name, s));
+    }
     return r;
 }
 

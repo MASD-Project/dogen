@@ -29,6 +29,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
@@ -76,7 +77,9 @@ private:
     /**
      * @brief Create the settings.
      */
-    settings::settings create_settings_activty(const sml::model& m) const;
+    settings::settings create_settings_activty(
+        const std::forward_list<dynamic::field_definition>& fds,
+        const sml::model& m) const;
 
     /**
      * @brief Create the formattables.

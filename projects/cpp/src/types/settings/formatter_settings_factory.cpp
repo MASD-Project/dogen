@@ -64,7 +64,10 @@ read_settings(const std::string& formatter_id, const dynamic::object& o) const {
 }
 
 std::unordered_map<std::string, formatter_settings>
-formatter_settings_factory::build(const dynamic::object& /*o*/) const {
+formatter_settings_factory::build(const std::unordered_map<std::string,
+    std::forward_list<dynamic::field_definition>
+    >& /*field_definitions_by_formatter_name*/,
+    const dynamic::object& /*o*/) const {
 
     std::unordered_map<std::string, formatter_settings> r;
     // for (const auto& pair : default_formatter_settings_by_formatter_id) {

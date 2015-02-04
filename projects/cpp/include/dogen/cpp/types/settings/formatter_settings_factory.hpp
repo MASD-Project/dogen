@@ -26,8 +26,10 @@
 #endif
 
 #include <string>
+#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 
 namespace dogen {
@@ -44,19 +46,24 @@ public:
 private:
     /**
      * @brief Reads the settings from the meta-data for the supplied
-     * formatter id.
+     * formatter name.
      *
-     * @pre formatter id is not qualified.
+     * @pre formatter name is not qualified.
      */
-    formatter_settings read_settings(const std::string& formatter_id,
+    formatter_settings read_settings(const std::string& formatter_name,
         const dynamic::object& o) const;
 
 public:
     /**
-     * @brief Builds the formatter settings from the meta data.
+     * @brief Builds the formatter settings from the dynamic object.
+     *
+     * @return Formatter settings by formatter name.
      */
     std::unordered_map<std::string, formatter_settings>
-    build(const dynamic::object& o) const;
+    build(const std::unordered_map<std::string,
+        std::forward_list<dynamic::field_definition>
+        >& field_definitions_by_formatter_name,
+        const dynamic::object& o) const;
 };
 
 } } }

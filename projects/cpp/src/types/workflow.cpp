@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
@@ -47,10 +48,11 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-settings::settings
-workflow::create_settings_activty(const sml::model& m) const {
+settings::settings workflow::
+create_settings_activty(const std::forward_list<dynamic::field_definition>& fds,
+    const sml::model& m) const {
     settings::workflow w;
-    return w.execute(m);
+    return w.execute(fds, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -68,7 +70,6 @@ workflow::format_activty(const settings::settings& s,
     formatters::workflow w;
     return w.execute(c, s, f);
 }
-
 
 std::string workflow::id() const {
     return ::id;
@@ -102,7 +103,8 @@ workflow::generate(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     validate();
-    const auto s(create_settings_activty(m));
+    const auto& fds(dynamic::workflow::registrar().field_definitions());
+    const auto s(create_settings_activty(fds, m));
     const auto& c(registrar().formatter_container());
     const auto f(create_formattables_activty(s, c, m));
     const auto r(format_activty(s, c, f));
