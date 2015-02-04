@@ -254,6 +254,17 @@ field definitions.
 Dynamic could provide field definition aggregation services for
 formatter and facet.
 
+*** Implement file name factory without using formatters              :story:
+
+There is no longer a need to go to the formatter to obtain the file
+path. We should remove this and use the settings directly within the
+file name factory.
+
+*** Populate entity's identity during transformation                  :story:
+
+In order to use the settings selector, we need entities to have their
+identity properly populated.
+
 *** C++ workflow should perform a consistency check                   :story:
 
 We should ensure that all facets and formatters available in the
@@ -262,12 +273,6 @@ was originally to be done by some kind of "feature graph" class, but
 since we need to use this data for other purposes, the main workflow
 could take on this responsibility - or we could create some kind of
 "validator" class to which the workflow delegates.
-
-*** Implement file name factory without using formatters              :story:
-
-There is no longer a need to go to the formatter to obtain the file
-path. We should remove this and use the settings directly within the
-file name factory.
 
 *** Create a settings facade for querying                             :story:
 
