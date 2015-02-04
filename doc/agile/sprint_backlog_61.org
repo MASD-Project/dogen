@@ -13,13 +13,13 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-04 Wed 23:02]
+Clock summary at [2015-02-04 Wed 23:08]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *7:02* |      |      |
+| *Total time*                                                        | *7:06* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Active                                                              |        | 7:02 |      |
+| Active                                                              |        | 7:06 |      |
 | STARTED Sprint and product backlog grooming                         |        |      | 0:18 |
 | COMPLETED Improvements to product backlog                           |        |      | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |        |      | 0:20 |
@@ -29,6 +29,7 @@ Clock summary at [2015-02-04 Wed 23:02]
 | COMPLETED Create a class to generate file properties                |        |      | 0:30 |
 | COMPLETED Create a formattables workflow                            |        |      | 1:56 |
 | COMPLETED Facet and formatter settings factories to use definitions |        |      | 1:54 |
+| COMPLETED Split global settings by formatter and facet              |        |      | 0:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -233,7 +234,9 @@ definitions: we need to make use of traits.
   matching property in facet settings and set it with either the field
   instance or the default value.
 
-*** STARTED Split global settings by formatter and facet              :story:
+*** COMPLETED Split global settings by formatter and facet            :story:
+    CLOSED: [2015-02-04 Wed 23:08]
+    CLOCK: [2015-02-04 Wed 23:04]--[2015-02-04 Wed 23:08] =>  0:04
 
 *Analysis*
 

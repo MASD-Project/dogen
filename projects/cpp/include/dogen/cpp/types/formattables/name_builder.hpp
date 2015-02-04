@@ -53,7 +53,7 @@ private:
      */
     std::string file_name(
         const settings::global_settings& gs, const bool is_header,
-        const sml::qname& qn, const std::string& additional_postfix) const;
+        const sml::qname& qn, const std::string& postfix) const;
 
 public:
     /**
@@ -68,16 +68,14 @@ public:
      * name and settings.
      */
     std::string header_file_name(const settings::global_settings& gs,
-        const sml::qname& qn,
-        const std::string& additional_postfix = std::string()) const;
+        const sml::qname& qn, const std::string& postfix = std::string()) const;
 
     /**
      * @brief Returns the implementation file name for the given
      * qualified name and settings.
      */
     std::string implementation_file_name(const settings::global_settings& gs,
-        const sml::qname& qn,
-        const std::string& additional_postfix = std::string()) const;
+        const sml::qname& qn, const std::string& postfix = std::string()) const;
 
     /**
      * @brief Flat representation of the qualified name.

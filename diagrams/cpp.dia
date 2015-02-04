@@ -15081,7 +15081,7 @@ facet of the C++ language.
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#additional_postfix#</dia:string>
+                <dia:string>#postfix#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>

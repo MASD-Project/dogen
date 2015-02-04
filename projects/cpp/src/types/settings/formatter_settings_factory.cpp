@@ -50,7 +50,7 @@ create_settings_for_formatter(
     formatter_settings r;
     bool found_enabled(false), found_postfix(false);
     const auto& enabled_trait(traits::formatter::enabled());
-    const auto& postfix_trait(traits::formatter::additional_postfix());
+    const auto& postfix_trait(traits::formatter::postfix());
 
     for (const auto fd : formatter_fields) {
         using namespace dynamic;

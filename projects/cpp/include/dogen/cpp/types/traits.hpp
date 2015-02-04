@@ -127,7 +127,7 @@ struct traits {
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static std::string additional_postfix();
+        static std::string postfix();
     };
 };
 

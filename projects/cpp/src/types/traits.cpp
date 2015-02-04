@@ -93,8 +93,8 @@ std::string traits::formatter::enabled() {
     return r;
 }
 
-std::string traits::formatter::additional_postfix() {
-    static std::string r("additional_postfix");
+std::string traits::formatter::postfix() {
+    static std::string r("postfix");
     return r;
 }
 
