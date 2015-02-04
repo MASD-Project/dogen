@@ -36,6 +36,9 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
+/**
+ * @brief Constructs settings for all formatters.
+ */
 class formatter_settings_factory {
 public:
     formatter_settings_factory() = default;
@@ -45,12 +48,11 @@ public:
 
 private:
     /**
-     * @brief Reads the settings from the meta-data for the supplied
-     * formatter name.
-     *
-     * @pre formatter name is not qualified.
+     * @brief Creates the settings for the facet implied by the facet
+     * fields.
      */
-    formatter_settings read_settings(const std::string& formatter_name,
+    formatter_settings create_settings_for_formatter(
+        const std::forward_list<dynamic::field_definition>& formatter_fields,
         const dynamic::object& o) const;
 
 public:

@@ -97,6 +97,7 @@ field_definition create_class_header_formatter_postfix() {
         traits::class_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(""));
     return r;
 }
 
@@ -160,6 +161,7 @@ create_class_implementation_formatter_postfix() {
         traits::class_implementation_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(""));
     return r;
 }
 
@@ -176,6 +178,7 @@ create_enumeration_header_formatter_enabled() {
         traits::enumeration_header_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -192,6 +195,7 @@ create_enumeration_header_formatter_postfix() {
         traits::enumeration_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(""));
     return r;
 }
 
@@ -208,6 +212,7 @@ create_enumeration_implementation_formatter_enabled() {
         traits::enumeration_implementation_formatter_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
 
@@ -224,6 +229,7 @@ create_enumeration_implementation_formatter_postfix() {
         traits::enumeration_implementation_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(""));
     return r;
 }
 

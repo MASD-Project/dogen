@@ -59,6 +59,8 @@ private:
 public:
     /**
      * @brief Builds the facet settings from the dynamic object.
+     *
+     * @return Facet settings by facet name.
      */
     std::unordered_map<std::string, facet_settings>
     build(const std::unordered_map<

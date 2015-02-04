@@ -54,7 +54,7 @@ field_definition create_directory() {
     r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>("hash"));
+    r.default_value(boost::make_shared<text>("odb"));
     return r;
 }
 
@@ -67,7 +67,7 @@ field_definition create_postfix() {
     r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>("hash"));
+    r.default_value(boost::make_shared<text>("odb"));
     return r;
 }
 
@@ -99,6 +99,7 @@ field_definition create_class_header_formatter_postfix() {
         traits::class_header_formatter_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>(""));
     return r;
 }
 

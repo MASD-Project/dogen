@@ -13,22 +13,22 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-04 Wed 22:46]
+Clock summary at [2015-02-04 Wed 23:02]
 
-| Headline                                                          | Time   |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *6:44* |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| Active                                                            |        | 6:44 |      |
-| STARTED Sprint and product backlog grooming                       |        |      | 0:18 |
-| COMPLETED Improvements to product backlog                         |        |      | 1:01 |
-| COMPLETED Tidy-up formatters workflow                             |        |      | 0:20 |
-| COMPLETED Create a =formattable= base class                       |        |      | 0:32 |
-| COMPLETED Rename =file_settings= to =file_properties=             |        |      | 0:11 |
-| COMPLETED Create a class to generate file names                   |        |      | 0:20 |
-| COMPLETED Create a class to generate file properties              |        |      | 0:30 |
-| COMPLETED Create a formattables workflow                          |        |      | 1:56 |
-| STARTED Facet and formatter settings factories to use definitions |        |      | 1:36 |
+| Headline                                                            | Time   |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                        | *7:02* |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| Active                                                              |        | 7:02 |      |
+| STARTED Sprint and product backlog grooming                         |        |      | 0:18 |
+| COMPLETED Improvements to product backlog                           |        |      | 1:01 |
+| COMPLETED Tidy-up formatters workflow                               |        |      | 0:20 |
+| COMPLETED Create a =formattable= base class                         |        |      | 0:32 |
+| COMPLETED Rename =file_settings= to =file_properties=               |        |      | 0:11 |
+| COMPLETED Create a class to generate file names                     |        |      | 0:20 |
+| COMPLETED Create a class to generate file properties                |        |      | 0:30 |
+| COMPLETED Create a formattables workflow                            |        |      | 1:56 |
+| COMPLETED Facet and formatter settings factories to use definitions |        |      | 1:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -196,7 +196,9 @@ initialise every dependent model.
 We need to replace the references to the c++ settings directly with
 formatter settings.
 
-*** STARTED Facet and formatter settings factories to use definitions :story:
+*** COMPLETED Facet and formatter settings factories to use definitions :story:
+    CLOSED: [2015-02-04 Wed 23:02]
+    CLOCK: [2015-02-04 Wed 22:44]--[2015-02-04 Wed 23:02] =>  0:18
     CLOCK: [2015-02-04 Wed 21:08]--[2015-02-04 Wed 22:44] =>  1:36
 
 *Analysis*

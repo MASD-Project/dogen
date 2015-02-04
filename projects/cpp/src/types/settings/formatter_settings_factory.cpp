@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 
 namespace {
@@ -28,16 +30,10 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("cpp.settings.formatter_settings_factory"));
 
-const std::string dot(".");
-
-/**
- * @brief Given a formatter and a trait, returns the fully qualified
- * version of the trait.
- */
-inline std::string
-qualify(const std::string& formatter_id, const std::string& trait) {
-    return formatter_id + dot + trait;
-}
+const std::string multiple_fields(
+    "Facet has multiple fields with the same name: ");
+const std::string no_default_value(
+    "Field does not have a default value: ");
 
 }
 
@@ -46,19 +42,56 @@ namespace cpp {
 namespace settings {
 
 formatter_settings formatter_settings_factory::
-read_settings(const std::string& formatter_id, const dynamic::object& o) const {
+create_settings_for_formatter(
+    const std::forward_list<dynamic::field_definition>& formatter_fields,
+    const dynamic::object& o) const {
     using namespace dynamic;
 
     formatter_settings r;
-    const auto enabled_trait(qualify(formatter_id,
-            traits::formatter::enabled()));
-    if (has_field(o, enabled_trait))
-        r.enabled(get_boolean_content(o, enabled_trait));
+    bool found_enabled(false), found_postfix(false);
+    const auto& enabled_trait(traits::formatter::enabled());
+    const auto& postfix_trait(traits::formatter::additional_postfix());
 
-    const std::string postfix_trait(
-        qualify(formatter_id, traits::formatter::additional_postfix()));
-    if (has_field(o, postfix_trait))
-        r.postfix(get_text_content(o, postfix_trait));
+    for (const auto fd : formatter_fields) {
+        using namespace dynamic;
+        if (fd.name().simple() == enabled_trait) {
+            if (found_enabled) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_enabled = true;
+
+            if (has_field(o, fd))
+                r.enabled(get_boolean_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.enabled(get_boolean_content(*fd.default_value()));
+            }
+        } else if (fd.name().simple() == postfix_trait) {
+            if (found_postfix) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_postfix = true;
+
+            if (has_field(o, fd))
+                r.postfix(get_text_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.postfix(get_text_content(*fd.default_value()));
+            }
+        }
+    }
 
     return r;
 }
@@ -66,16 +99,16 @@ read_settings(const std::string& formatter_id, const dynamic::object& o) const {
 std::unordered_map<std::string, formatter_settings>
 formatter_settings_factory::build(const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>
-    >& /*field_definitions_by_formatter_name*/,
-    const dynamic::object& /*o*/) const {
+    >& field_definitions_by_formatter_name,
+    const dynamic::object& o) const {
 
     std::unordered_map<std::string, formatter_settings> r;
-    // for (const auto& pair : default_formatter_settings_by_formatter_id) {
-    //     const auto& formatter_id(pair.first);
-    //     const auto& default_settings(pair.second);
-    //     const auto s(read_settings(default_settings, formatter_id, o));
-    //     r.insert(std::make_pair(formatter_id, s));
-    // }
+    for (const auto pair : field_definitions_by_formatter_name) {
+        const auto& formatter_name(pair.first);
+        const auto& formatter_fields(pair.second);
+        const auto s(create_settings_for_formatter(formatter_fields, o));
+        r.insert(std::make_pair(formatter_name, s));
+    }
     return r;
 }
 
