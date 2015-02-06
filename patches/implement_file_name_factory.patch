@@ -1,14 +1,26 @@
 diff --git a/doc/agile/sprint_backlog_61.org b/doc/agile/sprint_backlog_61.org
-index 76892f9..14d37be 100644
+index 76892f9..5c9b38d 100644
 --- a/doc/agile/sprint_backlog_61.org
 +++ b/doc/agile/sprint_backlog_61.org
-@@ -254,7 +254,8 @@ field definitions.
+@@ -254,7 +254,20 @@ field definitions.
  Dynamic could provide field definition aggregation services for
  formatter and facet.
  
 -*** Implement file name factory without using formatters              :story:
 +*** STARTED Implement file name factory without using formatters      :story:
 +    CLOCK: [2015-02-05 Thu 21:00]--[2015-02-05 Thu 21:56] =>  0:56
++
++*New Understanding*
++
++We should actually keep the formatters doing the file names. The
++problem is that we need to know if we are a header or not, etc. This
++logic could be added to the formatter interface, but it would be
++cumbersome. So pass in the settings selector to the =make_file_name=
++function, extract all of the relevant settings and make a call to name
++builder passing in all relevant flags. Builder does not know of
++settings.
++
++*Previous Understanding*
  
  There is no longer a need to go to the formatter to obtain the file
  path. We should remove this and use the settings directly within the
