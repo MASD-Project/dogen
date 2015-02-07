@@ -50,6 +50,12 @@ struct field_definitions {
     static const dynamic::field_definition& enabled();
 
     /**
+     * @brief If set to false, the type does not support the current
+     * facet.
+     */
+    static const dynamic::field_definition& supported();
+
+    /**
      * @brief Directory in which to place files for this facet.
      */
     static const dynamic::field_definition& directory();

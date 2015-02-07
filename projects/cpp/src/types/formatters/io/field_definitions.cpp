@@ -43,6 +43,19 @@ field_definition create_enabled() {
     return r;
 }
 
+field_definition create_supported() {
+    field_definition r;
+    r.name().simple("supported");
+    r.name().qualified(traits::facet_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<boolean>(true));
+    return r;
+}
+
 field_definition create_directory() {
     field_definition r;
     r.name().simple("directory");
@@ -277,6 +290,11 @@ field_definitions::all_field_definitions() {
 
 const dynamic::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::supported() {
+    static auto r(create_supported());
     return r;
 }
 
