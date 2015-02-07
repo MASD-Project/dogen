@@ -39,6 +39,7 @@ Clock summary at [2015-02-07 Sat 22:29]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-02-07 Sat 22:29]--[2015-02-07 Sat 22:33] =>  0:04
     CLOCK: [2015-02-07 Sat 15:45]--[2015-02-07 Sat 15:52] =>  0:07
     CLOCK: [2015-02-04 Wed 20:50]--[2015-02-04 Wed 21:08] =>  0:18
 
@@ -321,6 +322,13 @@ identity properly populated.
 
 We need to read the dynamic object for each SML entity and use it to
 populate all the various local settings.
+
+One slight complication: for local settings, we must not take into
+account default values. This is because otherwise we would end up
+overriding the "overriden" values globally with defaulted values. We
+need some kind of way of not creating any settings if the default
+values are being used, or of knowing that the default values were used
+and so not create local settings for those.
 
 *** Implement include generation for class header formatter           :story:
 
