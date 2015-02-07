@@ -95,6 +95,13 @@ select_formatter_settings(const std::string& identity,
     return j->second;
 }
 
+const formatter_settings& selector::select_formatter_settings(
+    const sml::qname& qn, const std::string& formatter_name) const {
+    // FIXME: hack for now, need a way of generating identify from
+    // qname.
+    return select_formatter_settings(qn.simple_name(), formatter_name);
+}
+
 const cpp::settings::settings& selector::settings() const {
     return settings_;
 }

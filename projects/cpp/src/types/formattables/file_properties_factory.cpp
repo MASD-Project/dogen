@@ -23,7 +23,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/types/formattables/file_properties_factory.hpp"

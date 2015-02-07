@@ -41,48 +41,6 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::string name_builder::file_name(
-    const settings::global_settings& gs, const bool is_header,
-    const sml::qname& qn, const std::string& postfix) const {
-
-    boost::filesystem::path r;
-    if (gs.cpp_settings().split_project()) {
-        for(auto n : qn.external_module_path())
-            r /= n;
-    }
-
-    if (gs.cpp_settings().split_project())
-        r /= qn.model_name();
-    else if (is_header) {
-        for(auto n : qn.external_module_path())
-            r /= n;
-        r /= qn.model_name();
-    }
-
-    // FIXME
-    // if (gs.cpp_settings().enable_facet_folders())
-    //     r /= gs.facet_settings().directory();
-
-    for(auto n : qn.module_path())
-        r /= n;
-
-    std::ostringstream stream;
-    stream << qn.simple_name() << postfix;
-
-    // FIXME
-    // if (gs.cpp_settings().enable_unique_file_names())
-    //     stream << gs.facet_settings().postfix();
-
-    if (is_header)
-        stream << gs.cpp_settings().header_file_extension();
-    else
-        stream << gs.cpp_settings().implementation_file_extension();
-
-    r /= stream.str();
-
-    return r.generic_string();
-}
-
 std::list<std::string> name_builder::
 namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
@@ -102,17 +60,6 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
         r.push_back(qn.simple_name());
 
     return r;
-}
-
-std::string name_builder::header_file_name(const settings::global_settings& gs,
-    const sml::qname& qn, const std::string& postfix) const {
-    return file_name(gs, true/*is_header*/, qn, postfix);
-}
-
-std::string name_builder::implementation_file_name(
-    const settings::global_settings& gs, const sml::qname& qn,
-    const std::string& postfix) const {
-    return file_name(gs, false/*is_header*/, qn, postfix);
 }
 
 std::string name_builder::

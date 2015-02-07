@@ -51,6 +51,8 @@ private:
     get_relative_path(const formattables::class_info& c) const;
 
 public:
+    file_types file_type() const override;
+
     std::string facet_name() const override;
 
     std::string formatter_name() const override;

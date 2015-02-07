@@ -32,6 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
+#include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
 
 namespace dogen {
@@ -46,6 +47,11 @@ public:
     virtual ~formatter_interface() noexcept = 0;
 
 public:
+    /**
+     * @brief Type of the file this formatter generates.
+     */
+    virtual file_types file_type() const = 0;
+
     /**
      * @brief Name of the facet that the formatter belongs to.
      */

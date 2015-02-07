@@ -25,6 +25,7 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/file_name_factory.hpp"
@@ -34,6 +35,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formattables.file_name_factory"));
 
+const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string duplicate_qname("Duplicate qname: ");
 const std::string unsupported_object_type("Object type is not supported: ");
 const std::string unsupported_formatter_type(
     "Formatter type is not supported: ");
@@ -43,6 +46,35 @@ const std::string unsupported_formatter_type(
 namespace dogen {
 namespace cpp {
 namespace formattables {
+
+/**
+ * @brief Generates all of the file names for the formatters and
+ * qualified name.
+ */
+template<typename FormatterInterfacePtr>
+std::pair<sml::qname,
+          std::unordered_map<std::string, boost::filesystem::path>
+          >
+generate(const settings::selector& s,
+    const std::forward_list<FormatterInterfacePtr>& formatters,
+    const sml::qname& qn) {
+
+    std::unordered_map<std::string, boost::filesystem::path> r;
+
+    for (const auto f : formatters) {
+        const auto fn(f->make_file_name(s, qn));
+        const auto i(r.insert(std::make_pair(f->formatter_name(), fn)));
+
+        if (!i.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
+                                     << f->formatter_name();
+            BOOST_THROW_EXCEPTION(
+                building_error(duplicate_formatter_name + f->formatter_name()));
+        }
+    }
+    return std::make_pair(qn, r);
+};
+
 
 formatters::formatter_types file_name_factory::
 formatter_type_for_object_type(const sml::object_types ot) const {
@@ -73,16 +105,16 @@ std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, boost::filesystem::path>
     >
-file_name_factory::build(const settings::selector& s,
-    const formatters::container& c, const sml::model& m) const {
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path>
-        > r;
+file_name_factory::file_name_for_objects(
+    const settings::selector& s, const formatters::container& c,
+    const std::unordered_map<sml::qname, sml::object>& objects) const {
 
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string, boost::filesystem::path>
+                       > r;
 
-    BOOST_LOG_SEV(lg, debug) << "Obtaining relative file names.";
-    for (const auto& pair : m.objects()) {
+    for (const auto& pair : objects) {
+        bool inserted(false);
         const auto qn(pair.first);
         const auto o(pair.second);
 
@@ -93,28 +125,40 @@ file_name_factory::build(const settings::selector& s,
         const auto ft(formatter_type_for_object_type(o.object_type()));
         switch(ft) {
         case formatters::formatter_types::class_formatter:
-            for (const auto f : c.class_formatters()) {
-                const auto& id(f->formatter_name());
-                const auto& fn(f->make_file_name(s, qn));
-                r[qn].insert(std::make_pair(id, fn));
-            }
+            inserted = r.insert(generate(s, c.class_formatters(), qn)).second;
             break;
-
-        case formatters::formatter_types::exception_formatter:
-            // FIXME
-            break;
-
         default: {
             const auto n(sml::string_converter::convert(o.name()));
             BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
                                      << " name: " << n;
-            BOOST_THROW_EXCEPTION(building_error(unsupported_formatter_type +
-                    boost::lexical_cast<std::string>(ft)));
+            // FIXME
+            inserted = true;
+            // BOOST_THROW_EXCEPTION(building_error(unsupported_formatter_type +
+            //         boost::lexical_cast<std::string>(ft)));
         } };
+
+        if (!inserted) {
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Relative file names: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining relative file names.";
+    return r;
+}
+
+std::unordered_map<
+    sml::qname,
+    std::unordered_map<std::string, boost::filesystem::path>
+    >
+file_name_factory::build(const settings::selector& s,
+    const formatters::container& c, const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Building all file names.";
+
+    const auto r(file_name_for_objects(s, c, m.objects()));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished building file names.";
+    BOOST_LOG_SEV(lg, debug) << "File names: " << r;
     return r;
 }
 

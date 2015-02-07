@@ -33,6 +33,7 @@
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,6 +50,17 @@ private:
      */
     formatters::formatter_types
     formatter_type_for_object_type(const sml::object_types ot) const;
+
+    /**
+     * @brief Builds file names for all objects.
+     */
+    std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, boost::filesystem::path>
+        >
+    file_name_for_objects(const settings::selector& s,
+        const formatters::container& c,
+        const std::unordered_map<sml::qname, sml::object>& objects) const;
 
 public:
     /**

@@ -22,10 +22,11 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/file_name_builder.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
+#include "dogen/cpp/types/formatters/file_name_builder_factory.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -81,6 +82,10 @@ get_relative_path(const formattables::class_info& c) const {
     return i->second.relative_path();
 }
 
+file_types class_header_formatter::file_type() const {
+    return file_types::cpp_header;
+}
+
 std::string class_header_formatter::facet_name() const {
     return traits::facet_name();
 }
@@ -91,8 +96,9 @@ std::string class_header_formatter::formatter_name() const {
 
 boost::filesystem::path class_header_formatter::
 make_file_name(const settings::selector& s, const sml::qname& qn) const {
-    formattables::name_builder b;
-    return b.header_file_name(s.settings().global_settings(), qn);
+    const auto f = file_name_builder_factory();
+    const auto b(f.make(s, *this, qn));
+    return b.build();
 }
 
 std::shared_ptr<formattables::includes_factory_interface>

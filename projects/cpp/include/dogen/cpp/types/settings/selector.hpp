@@ -86,6 +86,17 @@ public:
     select_formatter_settings(const std::string& identity,
         const std::string& formatter_name) const;
 
+    /**
+     * @brief Returns the formatter settings for the supplied
+     * qualified name and formatter name.
+     *
+     * @pre There must exist settings for the supplied qualified name
+     * and formatter name.
+     */
+    const formatter_settings&
+    select_formatter_settings(const sml::qname& qn,
+        const std::string& formatter_name) const;
+
 public:
     /**
      * @brief Returns the underlying settings.
