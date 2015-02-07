@@ -34,6 +34,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
@@ -85,15 +86,14 @@ private:
      * @brief Create the formattables.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    create_formattables_activty(const settings::settings& s,
+    create_formattables_activty(const settings::selector& s,
         const formatters::container& c, const sml::model& m) const;
 
     /**
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_activty(const settings::settings& s,
-        const formatters::container& c,
+    format_activty(const settings::selector& s, const formatters::container& c,
         const std::forward_list<std::shared_ptr<formattables::formattable> >&
         f) const;
 

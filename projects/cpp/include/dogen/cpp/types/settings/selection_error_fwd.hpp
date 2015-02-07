@@ -18,40 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_SELECTION_ERROR_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_SELECTION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
 #include <string>
-#include <memory>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formattables/formattable.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace settings {
 
-/**
- * @brief Generates all files for the supplied entity.
- */
-class workflow {
-public:
-    /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
-     */
-    std::forward_list<dogen::formatters::file>
-    execute(const settings::selector& s, const container& c,
-        const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
-    const;
-};
+class selection_error;
 
 } } }
 

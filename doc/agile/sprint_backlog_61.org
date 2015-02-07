@@ -13,26 +13,30 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-04 Wed 23:08]
+Clock summary at [2015-02-07 Sat 17:21]
 
-| Headline                                                            | Time   |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *7:06* |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| Active                                                              |        | 7:06 |      |
-| STARTED Sprint and product backlog grooming                         |        |      | 0:18 |
-| COMPLETED Improvements to product backlog                           |        |      | 1:01 |
-| COMPLETED Tidy-up formatters workflow                               |        |      | 0:20 |
-| COMPLETED Create a =formattable= base class                         |        |      | 0:32 |
-| COMPLETED Rename =file_settings= to =file_properties=               |        |      | 0:11 |
-| COMPLETED Create a class to generate file names                     |        |      | 0:20 |
-| COMPLETED Create a class to generate file properties                |        |      | 0:30 |
-| COMPLETED Create a formattables workflow                            |        |      | 1:56 |
-| COMPLETED Facet and formatter settings factories to use definitions |        |      | 1:54 |
-| COMPLETED Split global settings by formatter and facet              |        |      | 0:04 |
+| Headline                                                            | Time    |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                        | *10:06* |       |      |
+|---------------------------------------------------------------------+---------+-------+------|
+| Active                                                              |         | 10:06 |      |
+| STARTED Sprint and product backlog grooming                         |         |       | 0:25 |
+| COMPLETED Improvements to product backlog                           |         |       | 1:01 |
+| COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
+| COMPLETED Create a =formattable= base class                         |         |       | 0:32 |
+| COMPLETED Rename =file_settings= to =file_properties=               |         |       | 0:11 |
+| COMPLETED Create a class to generate file names                     |         |       | 0:20 |
+| COMPLETED Create a class to generate file properties                |         |       | 0:30 |
+| COMPLETED Create a formattables workflow                            |         |       | 1:56 |
+| COMPLETED Facet and formatter settings factories to use definitions |         |       | 1:54 |
+| COMPLETED Split global settings by formatter and facet              |         |       | 0:04 |
+| COMPLETED Create a settings facade for querying                     |         |       | 1:25 |
+| STARTED Implement file name factory without using formatters        |         |       | 0:58 |
+| STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-02-07 Sat 15:45]--[2015-02-07 Sat 15:52] =>  0:07
     CLOCK: [2015-02-04 Wed 20:50]--[2015-02-04 Wed 21:08] =>  0:18
 
 Updates to sprint and product backlog.
@@ -254,27 +258,9 @@ field definitions.
 Dynamic could provide field definition aggregation services for
 formatter and facet.
 
-*** Implement file name factory without using formatters              :story:
-
-There is no longer a need to go to the formatter to obtain the file
-path. We should remove this and use the settings directly within the
-file name factory.
-
-*** Populate entity's identity during transformation                  :story:
-
-In order to use the settings selector, we need entities to have their
-identity properly populated.
-
-*** C++ workflow should perform a consistency check                   :story:
-
-We should ensure that all facets and formatters available in the
-registrar have corresponding field definitions and vice-versa. This
-was originally to be done by some kind of "feature graph" class, but
-since we need to use this data for other purposes, the main workflow
-could take on this responsibility - or we could create some kind of
-"validator" class to which the workflow delegates.
-
-*** Create a settings facade for querying                             :story:
+*** COMPLETED Create a settings facade for querying                   :story:
+    CLOSED: [2015-02-07 Sat 17:21]
+    CLOCK: [2015-02-07 Sat 15:55]--[2015-02-07 Sat 17:20] =>  1:25
 
 Now that we have global and local settings, we should be able to hide
 the overriding behind some kind of facade so that the formatter does
@@ -282,6 +268,53 @@ not need to know if a setting is global or local; it should just query
 by some properties and get the desired settings.
 
 Name: =selector=?
+
+*** STARTED Implement file name factory without using formatters      :story:
+    CLOCK: [2015-02-07 Sat 15:53]--[2015-02-07 Sat 15:55] =>  0:02
+    CLOCK: [2015-02-05 Thu 21:00]--[2015-02-05 Thu 21:56] =>  0:56
+
+*New Understanding*
+
+We should actually keep the formatters doing the file names. The
+problem is that we need to know if we are a header or not, etc. This
+logic could be added to the formatter interface, but it would be
+cumbersome. So pass in the settings selector to the =make_file_name=
+function, extract all of the relevant settings and make a call to name
+builder passing in all relevant flags. Builder does not know of
+settings.
+
+*Previous Understanding*
+
+There is no longer a need to go to the formatter to obtain the file
+path. We should remove this and use the settings directly within the
+file name factory.
+
+*** STARTED Create settings expander and switcher                     :story:
+    CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
+
+We need a class responsible for copying over all settings that exist
+both locally and globally. The idea is that, for those settings, the
+selector should be able to just query by formatter name locally and
+get the right values. This could be the expander.
+
+We also need a more intelligent class that determines what formatters
+are enabled and disabled. This is due to:
+
+- lack of support for a given formatter/facet by a type in the graph;
+  it must be propagated to all dependent types. We must be careful
+  with recursion (for example in the composite pattern).
+- a facet has been switched off. This must be propagated to all
+  formatters in that facet.
+- user has switched off a formatter. As with lack of support, this
+  must be propagated through the graph.
+
+This could be done by the switcher. We should first expand the
+settings then switch them.
+
+*** Populate entity's identity during transformation                  :story:
+
+In order to use the settings selector, we need entities to have their
+identity properly populated.
 
 *** Implement include generation for class header formatter           :story:
 
@@ -343,6 +376,18 @@ mappings generated by this mapper and simply appends to the inclusion
 list the file names. it also appends the implementation specific
 headers.
 
+*** Add support for opaque formatter settings                         :story:
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to local settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+- we need multiple opaque settings (more than one formatter will need
+  them).
+
 *** Consider using an abstract factory in formatters                  :story:
 
 At present we have a number of interfaces (or quasi-interfaces) coming
@@ -364,61 +409,6 @@ aggregate:
 - formatter components, e.g. =formatter_components_factory_interface=
 - formatter properties
 - formatter parts
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to local settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-
-*** Consider creating constants for common fields                     :story:
-
-Fields such as =enabled=, =postfix= etc are common to all formatters
-and facets. It may make more sense to define some string constants for
-them, perhaps in =traits=?
-
-*** Populate the "new" =class_info= properties                        :story:
-
-We need a way of populating the class aspects via the type settings
-and via information obtained in the SML model. We may want to create a
-class to handle this logic or maybe it can be done in transformer.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-*** Add "model types"                                                 :story:
-
-At present we have a number of dynamic extensions that exist purely to
-deal with non-dogen models:
-
-- supported: is the facet supported by the external model
-- file_name: what is the external model naming for files for this
-  facet
-- is_system: is the file name a system include file or not?
-
-In reality, all of this could be avoided if we had a way of
-distinguishing between models that follow dogen conventions and those
-who do not; a "model type" of sorts such as "external" and "dogen" -
-naming needs more thought. With this we could infer the rest: if no
-file name is supplied then a given formatter/facet is not supported;
-if the model is_system then all types are system and so on.
-
-We should also have a flag in field definitions that verify that a
-parameter is only present if the model is a non-dogen model. For
-example, it makes no sense to supply =cpp.type.family= in a dogen
-model but it may make sense to do so in an external model. However,
-this would mean that if a user manually adds a type to a dogen model
-it cannot be extended. Requires a bit of thinking.
 
 *** Implement class header formatter                                  :story:
 
@@ -465,12 +455,25 @@ was to add yet another flag: =disable_io= which is disabled when the
 IO facet is not present and passed on to the relevant formatters. This
 needs to be replaced by a more general approach.
 
-*** Copyright holders is scalar when it should be an array            :story:
+*** Consider a more selective hashing generation                       :epic:
 
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
+At present we either generate hashing for all types or none at all. In
+practice, most users only need hashing for a few types. It would be
+great if we could have certain facets like hashing with a "disabled
+for all types except" approach. Users would then enable the types that
+they need.
+
+*** Use boilerplate to generate annotations                           :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to use my own licence and
+copyright attribution so that the generated code matches the general
+project choices.
+#+end_quote
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some dynamic extensions into the
+C++ model.
 
 *** Move all the fundamental configuration options into dynamic extensions  :story:
 
@@ -508,26 +511,6 @@ any longer:
 These should all be removed, with the corresponding command line
 arguments.
 
-*** Consider a more selective hashing generation                       :epic:
-
-At present we either generate hashing for all types or none at all. In
-practice, most users only need hashing for a few types. It would be
-great if we could have certain facets like hashing with a "disabled
-for all types except" approach. Users would then enable the types that
-they need.
-
-*** Use boilerplate to generate annotations                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to use my own licence and
-copyright attribution so that the generated code matches the general
-project choices.
-#+end_quote
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some dynamic extensions into the
-C++ model.
-
 *** Improve formatters code generation marker                         :story:
 
 Things the marker can/should have:
@@ -537,8 +520,70 @@ Things the marker can/should have:
   every time there is a new commit so perhaps we need to have this
   switched off by default.
 
+*** C++ workflow should perform a consistency check                   :story:
+
+We should ensure that all facets and formatters available in the
+registrar have corresponding field definitions and vice-versa. This
+was originally to be done by some kind of "feature graph" class, but
+since we need to use this data for other purposes, the main workflow
+could take on this responsibility - or we could create some kind of
+"validator" class to which the workflow delegates.
+
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
+
+We should also have a flag in field definitions that verify that a
+parameter is only present if the model is a non-dogen model. For
+example, it makes no sense to supply =cpp.type.family= in a dogen
+model but it may make sense to do so in an external model. However,
+this would mean that if a user manually adds a type to a dogen model
+it cannot be extended. Requires a bit of thinking.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** Populate the "new" =class_info= properties                        :story:
+
+We need a way of populating the class aspects via the type settings
+and via information obtained in the SML model. We may want to create a
+class to handle this logic or maybe it can be done in transformer.
+
+*** Consider creating constants for common fields                     :story:
+
+Fields such as =enabled=, =postfix= etc are common to all formatters
+and facets. It may make more sense to define some string constants for
+them, perhaps in =traits=?
+
 ** Deprecated
-*** Towards a more generic use of dynamic extensions                   :epic:
+*** CANCELLED Towards a more generic use of dynamic extensions         :epic:
+    CLOSED: [2015-02-07 Sat 15:52]
 
 *New Understanding*: We have decided to limit the dynamic extensions
 usage to extensibility. Where required parameters will be made visible

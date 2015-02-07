@@ -86,8 +86,7 @@ private:
     /**
      * @brief Creates the local settings for the object.
      */
-    std::unordered_map<std::string, local_settings>
-    create_local_settings(const dynamic::indexer& idx,
+    local_settings create_local_settings(const dynamic::indexer& idx,
         const sml::qname& qn, const dynamic::object& o) const;
 
 private:
@@ -100,10 +99,7 @@ private:
     /**
      * @brief Creates the local settings for all types.
      */
-    std::unordered_map<
-        std::string,
-        std::unordered_map<std::string, local_settings>
-        >
+    std::unordered_map<std::string, local_settings>
     create_local_settings_activity(const dynamic::indexer& idx,
         const sml::model& m) const;
 

@@ -31,7 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
 
 namespace dogen {
@@ -61,7 +61,7 @@ public:
      * qualified name and the current settings.
      */
     virtual boost::filesystem::path
-    make_file_name(const settings::settings& s, const sml::qname& qn) const = 0;
+    make_file_name(const settings::selector& s, const sml::qname& qn) const = 0;
 
     /**
      * @brief Creates an instance of the includes factory for this

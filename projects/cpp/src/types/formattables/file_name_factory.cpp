@@ -73,7 +73,7 @@ std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, boost::filesystem::path>
     >
-file_name_factory::build(const settings::settings& s,
+file_name_factory::build(const settings::selector& s,
     const formatters::container& c, const sml::model& m) const {
     std::unordered_map<
         sml::qname,

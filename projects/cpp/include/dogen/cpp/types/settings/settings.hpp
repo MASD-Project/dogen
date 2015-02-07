@@ -46,7 +46,7 @@ public:
 public:
     settings(
         const dogen::cpp::settings::global_settings& global_settings,
-        const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings);
+        const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings);
 
 private:
     template<typename Archive>
@@ -61,10 +61,10 @@ public:
     void global_settings(const dogen::cpp::settings::global_settings& v);
     void global_settings(const dogen::cpp::settings::global_settings&& v);
 
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings();
-    void local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v);
-    void local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >&& v);
+    const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings();
+    void local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& v);
+    void local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>&& v);
 
 public:
     bool operator==(const settings& rhs) const;
@@ -78,7 +78,7 @@ public:
 
 private:
     dogen::cpp::settings::global_settings global_settings_;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> > local_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::local_settings> local_settings_;
 };
 
 } } }

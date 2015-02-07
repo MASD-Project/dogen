@@ -31,7 +31,7 @@ namespace formatters {
  */
 class dispatcher : public formattables::formattable_visitor {
 public:
-    dispatcher(const container& c, const settings::settings& s);
+    dispatcher(const settings::selector& s, const container& c);
     ~dispatcher() noexcept { }
 
 public:
@@ -55,17 +55,17 @@ public:
     format(const formattables::formattable& f);
 
 private:
+    const settings::selector& selector_;
     const container& container_;
-    const settings::settings& settings_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const container& c, const settings::settings& s)
-    : container_(c), settings_(s) { }
+dispatcher::dispatcher(const settings::selector& s, const container& c)
+    : selector_(s), container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     for (const auto f : container_.class_formatters())
-        files_.push_front(f->format(settings_, c));
+        files_.push_front(f->format(selector_, c));
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {
@@ -99,10 +99,10 @@ dispatcher::format(const formattables::formattable& f) {
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::execute(const container& c, const settings::settings& s,
+workflow::execute(const settings::selector& s, const container& c,
     const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
     const {
-    dispatcher d(c, s);
+    dispatcher d(s, c);
     std::forward_list<dogen::formatters::file> r;
     for (const auto sp : f)
         r.splice_after(r.before_begin(), d.format(*sp));

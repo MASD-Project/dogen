@@ -40,15 +40,6 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_local_se
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_local_settings(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -59,7 +50,7 @@ std::size_t settings_hasher::hash(const settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.global_settings());
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(v.local_settings()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_local_settings(v.local_settings()));
 
     return seed;
 }

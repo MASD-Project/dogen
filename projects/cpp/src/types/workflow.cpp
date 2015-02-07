@@ -56,19 +56,19 @@ create_settings_activty(const std::forward_list<dynamic::field_definition>& fds,
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::create_formattables_activty(const settings::settings& s,
+workflow::create_formattables_activty(const settings::selector& s,
     const formatters::container& c, const sml::model& m) const {
     formattables::workflow w;
     return w.execute(s, c, m);
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::format_activty(const settings::settings& s,
+workflow::format_activty(const settings::selector& s,
     const formatters::container& c,
     const std::forward_list<std::shared_ptr<formattables::formattable> >&
     f) const {
     formatters::workflow w;
-    return w.execute(c, s, f);
+    return w.execute(s, c, f);
 }
 
 std::string workflow::id() const {

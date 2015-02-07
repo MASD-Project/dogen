@@ -26,7 +26,7 @@ namespace settings {
 
 settings::settings(
     const dogen::cpp::settings::global_settings& global_settings,
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& local_settings)
+    const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings)
     : global_settings_(global_settings),
       local_settings_(local_settings) { }
 
@@ -63,19 +63,19 @@ void settings::global_settings(const dogen::cpp::settings::global_settings&& v) 
     global_settings_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& settings::local_settings() const {
+const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& settings::local_settings() const {
     return local_settings_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& settings::local_settings() {
+std::unordered_map<std::string, dogen::cpp::settings::local_settings>& settings::local_settings() {
     return local_settings_;
 }
 
-void settings::local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >& v) {
+void settings::local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& v) {
     local_settings_ = v;
 }
 
-void settings::local_settings(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> >&& v) {
+void settings::local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>&& v) {
     local_settings_ = std::move(v);
 }
 

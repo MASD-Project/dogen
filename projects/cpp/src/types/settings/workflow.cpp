@@ -121,21 +121,16 @@ global_settings workflow::create_global_settings_activity(
     return r;
 }
 
-std::unordered_map<std::string, local_settings> workflow::
-create_local_settings(const dynamic::indexer& /*idx*/,
+local_settings workflow::create_local_settings(const dynamic::indexer& /*idx*/,
     const sml::qname& /*qn*/, const dynamic::object& /*o*/) const {
-    std::unordered_map<std::string, local_settings> r;
+    local_settings r;
     return r;
 }
 
-std::unordered_map<
-    std::string,
-    std::unordered_map<std::string, local_settings>
-    >
+std::unordered_map<std::string, local_settings>
 workflow::create_local_settings_activity(const dynamic::indexer& /*idx*/,
     const sml::model& /*m*/) const {
-    std::unordered_map<std::string,
-        std::unordered_map<std::string, local_settings> > r;
+    std::unordered_map<std::string, local_settings> r;
     return r;
 }
 

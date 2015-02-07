@@ -28,7 +28,7 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
@@ -72,17 +72,17 @@ private:
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, boost::filesystem::path> >
-    obtain_file_names_activity(const settings::settings& s,
+    obtain_file_names_activity(const settings::selector& s,
         const formatters::container& c,
         const sml::model& m) const;
 
     /**
-     * @brief Creates all file settings for a model.
+     * @brief Creates all file properties for a model.
      */
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >
-    obtain_file_properties_activity(
+    obtain_file_properties_activity(const settings::selector& s,
         const formatters::container& c, const sml::model& m,
         const std::unordered_map<sml::qname,
         std::unordered_map<std::string, boost::filesystem::path> >&
@@ -94,7 +94,7 @@ public:
      * @brief Executes the workflow.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    execute(const settings::settings& s, const formatters::container& c,
+    execute(const settings::selector& s, const formatters::container& c,
         const sml::model& m) const;
 };
 

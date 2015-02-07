@@ -30,7 +30,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/object_types.hpp"
-#include "dogen/cpp/types/settings/settings.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 
@@ -58,7 +58,7 @@ public:
         sml::qname,
         std::unordered_map<std::string, boost::filesystem::path>
         >
-    build(const settings::settings& s, const formatters::container& c,
+    build(const settings::selector& s, const formatters::container& c,
         const sml::model& m) const;
 };
 

@@ -39,7 +39,7 @@ namespace formattables {
 std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, boost::filesystem::path> >
-workflow::obtain_file_names_activity(const settings::settings& s,
+workflow::obtain_file_names_activity(const settings::selector& s,
     const formatters::container& c,
     const sml::model& m) const {
     formattables::file_name_factory f;
@@ -50,21 +50,22 @@ std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, formattables::file_properties> >
 workflow::obtain_file_properties_activity(
+    const settings::selector& s,
     const formatters::container& c, const sml::model& m,
     const std::unordered_map<sml::qname,
     std::unordered_map<std::string, boost::filesystem::path> >&
     file_names) const {
     formattables::file_properties_factory f;
-    return f.build(c, file_names, m);
+    return f.build(s, c, file_names, m);
 }
 
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::execute(const settings::settings& s, const formatters::container& c,
+workflow::execute(const settings::selector& s, const formatters::container& c,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
     const auto fn(obtain_file_names_activity(s, c, m));
-    const auto fp(obtain_file_properties_activity(c, m, fn));
+    const auto fp(obtain_file_properties_activity(s, c, m, fn));
 
     std::forward_list<std::shared_ptr<formattables::formattable>> r;
     r.splice_after(r.before_begin(),

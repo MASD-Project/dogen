@@ -49,14 +49,6 @@ std::unordered_map<std::string, dogen::cpp::settings::local_settings> create_std
     return r;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> > create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(unsigned int position) {
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::cpp::settings::local_settings> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_dogen_cpp_settings_local_settings(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -68,7 +60,7 @@ settings_generator::settings_generator() : position_(0) { }
 void settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.global_settings(create_dogen_cpp_settings_global_settings(position + 0));
-    v.local_settings(create_std_unordered_map_std_string_std_unordered_map_std_string_dogen_cpp_settings_local_settings_(position + 1));
+    v.local_settings(create_std_unordered_map_std_string_dogen_cpp_settings_local_settings(position + 1));
 }
 
 settings_generator::result_type
