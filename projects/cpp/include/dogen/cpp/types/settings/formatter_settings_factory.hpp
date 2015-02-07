@@ -62,7 +62,7 @@ public:
      * @return Formatter settings by formatter name.
      */
     std::unordered_map<std::string, formatter_settings>
-    build(const std::unordered_map<std::string,
+    make(const std::unordered_map<std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_formatter_name,
         const dynamic::object& o) const;

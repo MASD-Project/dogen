@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_SUITE(merger)
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
-    auto target(factory.build_single_type_model(0));
+    auto target(factory.make_single_type_model(0));
     target.is_target(true);
     const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     mg.add(target);
 
     for (unsigned int i(1); i < n; ++i) {
-        auto m(factory.build_single_type_model(i));
+        auto m(factory.make_single_type_model(i));
         m.name().external_module_path().push_back(some_path);
         mg.add(m);
     }
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
-    auto m(factory.build_single_type_model());
+    auto m(factory.make_single_type_model());
     m.is_target(true);
     m.name().model_name(invalid_model_name);
 
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
 
-    auto m(factory.build_multi_type_model(0, 2));
+    auto m(factory.make_multi_type_model(0, 2));
     m.is_target(true);
     m.objects().begin()->second.name().simple_name(invalid_simple_name);
 
@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
     SETUP_TEST_LOG("not_adding_a_target_throws");
 
-    const auto m(factory.build_single_type_model());
+    const auto m(factory.make_single_type_model());
     dogen::sml::merger mg;
     mg.add(m);
 
@@ -187,10 +187,10 @@ BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
 
 BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
     SETUP_TEST_LOG("adding_more_than_one_target_throws");
-    auto m0(factory.build_single_type_model(0));
+    auto m0(factory.make_single_type_model(0));
     m0.is_target(true);
 
-    auto m1(factory.build_single_type_model(1));
+    auto m1(factory.make_single_type_model(1));
     m1.is_target(true);
 
     dogen::sml::merger mg;
@@ -202,7 +202,7 @@ BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
 
 BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
     SETUP_TEST_LOG("merging_more_than_once_throws");
-    auto m(factory.build_single_type_model());
+    auto m(factory.make_single_type_model());
     m.is_target(true);
 
     dogen::sml::merger mg;

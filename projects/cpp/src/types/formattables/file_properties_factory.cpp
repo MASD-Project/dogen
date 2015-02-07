@@ -71,7 +71,7 @@ create_includes_factories(const formatters::container& c) const {
 std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, formattables::file_properties> >
-file_properties_factory::build(
+file_properties_factory::make(
     const settings::selector& /*s*/, const formatters::container& c,
     const std::unordered_map<
         sml::qname,
@@ -102,7 +102,7 @@ file_properties_factory::build(
             }
 
             const auto& f(*(i->second));
-            auto inc(f.build(m, qn, file_names));
+            auto inc(f.make(m, qn, file_names));
             fp.includes(inc);
             all_props[formatter_name] = fp;
         }

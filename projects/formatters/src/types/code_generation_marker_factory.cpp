@@ -43,7 +43,7 @@ code_generation_marker_factory(const bool add_date_time,
     : add_date_time_(add_date_time), add_warning_(add_warning),
       message_(message) { }
 
-std::string code_generation_marker_factory::build() const {
+std::string code_generation_marker_factory::make() const {
     std::ostringstream s;
 
     if (message_.empty())

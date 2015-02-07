@@ -103,8 +103,8 @@ BOOST_AUTO_TEST_SUITE(property_indexer)
 BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_property_indexer) {
     SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_property_indexer");
 
-    auto a(factory.build_empty_model());
-    const auto e(factory.build_empty_model());
+    auto a(factory.make_empty_model());
+    const auto e(factory.make_empty_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     dogen::sml::property_indexer i;
@@ -116,8 +116,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_property_indexer) {
 BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_property_indexer) {
     SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_property_indexer");
 
-    auto a(factory.build_single_type_model());
-    const auto e(factory.build_single_type_model());
+    auto a(factory.make_single_type_model());
+    const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     dogen::sml::property_indexer ind;
@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
 BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_results_in_expected_indices");
 
-    auto m(factory.build_single_concept_model());
+    auto m(factory.make_single_concept_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
     dogen::sml::property_indexer ind;
     ind.index(m);
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
 BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
-    auto m(factory.build_first_degree_concepts_model());
+    auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer ind;
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
 
-    auto m(factory.build_second_degree_concepts_model());
+    auto m(factory.make_second_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer ind;
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_diamond_concept_inheritance_results_in_expected_indices");
 
-    auto m(factory.build_diamond_inheritance_concepts_model());
+    auto m(factory.make_diamond_inheritance_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer ind;
@@ -430,7 +430,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
 BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer) {
     SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_property_indexer");
 
-    auto m(factory.build_object_with_parent_that_models_concept());
+    auto m(factory.make_object_with_parent_that_models_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer ind;
@@ -474,7 +474,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
 
-    auto m(factory.build_object_with_parent_that_models_a_refined_concept());
+    auto m(factory.make_object_with_parent_that_models_a_refined_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer ind;
@@ -528,7 +528,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");
 
-    auto m(factory.build_concept_that_refines_missing_concept());
+    auto m(factory.make_concept_that_refines_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer i;
@@ -540,7 +540,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
 BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_concept_throws");
 
-    auto m(factory.build_object_that_models_missing_concept());
+    auto m(factory.make_object_that_models_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer i;
@@ -550,9 +550,9 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
-    SETUP_TEST_LOG_SOURCE("build_object_that_models_concept_with_missing_parent");
+    SETUP_TEST_LOG_SOURCE("model_object_that_models_concept_with_missing_parent");
 
-    auto m(factory.build_object_that_models_concept_with_missing_parent());
+    auto m(factory.make_object_that_models_concept_with_missing_parent());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::property_indexer i;

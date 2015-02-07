@@ -114,7 +114,7 @@ facet_settings facet_settings_factory::create_settings_for_facet(
 }
 
 std::unordered_map<std::string, facet_settings>
-facet_settings_factory::build(
+facet_settings_factory::make(
     const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>>&
     field_definitions_by_facet_name,

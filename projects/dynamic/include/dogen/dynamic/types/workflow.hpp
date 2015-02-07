@@ -89,7 +89,7 @@ private:
     /**
      * @brief Converts the raw data into a set of field instances.
      */
-    std::unordered_map<std::string, field_instance> build_fields_activity(
+    std::unordered_map<std::string, field_instance> create_fields_activity(
         const std::unordered_map<std::string, std::list<std::string> >&
         aggregated_data, const scope_types current_scope) const;
 

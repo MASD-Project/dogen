@@ -63,7 +63,7 @@ public:
      * @return Facet settings by facet name.
      */
     std::unordered_map<std::string, facet_settings>
-    build(const std::unordered_map<
+    make(const std::unordered_map<
         std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_facet_name,

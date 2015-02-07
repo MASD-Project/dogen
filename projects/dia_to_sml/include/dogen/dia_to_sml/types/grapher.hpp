@@ -43,7 +43,7 @@ typedef boost::adjacency_list<
     > graph_type;
 
 /**
- * @brief Builds a DAG of dia objects.
+ * @brief Generates a DAG of dia objects.
  */
 class grapher {
 private:
@@ -70,14 +70,14 @@ private:
     vertex_descriptor_type vertex_for_id(const std::string& id);
 
     /**
-     * @brief Ensures the graph has not yet been built.
+     * @brief Ensures the graph has not yet been generated.
      */
-    void require_not_built() const;
+    void require_not_generated() const;
 
     /**
-     * @brief Ensures the graph has been built.
+     * @brief Ensures the graph has been generated.
      */
-    void require_built() const;
+    void require_generated() const;
 
     /**
      * @brief Handle relationships derived from child node.
@@ -108,7 +108,7 @@ public:
     /**
      * @brief Adds an object to the graph.
      *
-     * @pre The graph must not yet have been built.
+     * @pre The graph must not yet have been generated.
      * @pre The object must be relevant to the graph.
      */
     void add(const processed_object& o);
@@ -116,7 +116,7 @@ public:
     /**
      * @brief Adds a container of objects to the graph.
      *
-     * @pre The graph must not yet have been built.
+     * @pre The graph must not yet have been generated.
      *
      * @note Couldn't find a way to constrain the container to
      * non-associative containers of dia::object. On the plus side, if
@@ -130,49 +130,49 @@ public:
     }
 
     /**
-     * @brief Returns true if the graph has been built, false
+     * @brief Returns true if the graph has been generated, false
      * otherwise.
      */
-    bool is_built() const { return built_; }
+    bool is_generated() const { return generated_; }
 
     /**
      * @brief Generate a DAG of all objects that have been added.
      *
-     * @pre Graph must not yet have been built.
+     * @pre Graph must not yet have been generated.
      */
-    void build();
+    void generate();
 
 public:
     /**
      * @brief Returns the generated graph.
      *
-     * @pre The graph must have already been built.
+     * @pre The graph must have already been generated.
      */
     const graph_type& graph() const;
 
     /**
      * @brief Returns the child to parent relationships.
      *
-     * @pre The graph must have already been built.
+     * @pre The graph must have already been generated.
      */
     const child_id_to_parent_ids_type& child_id_to_parent_ids() const;
 
     /**
      * @brief Returns the child to parent relationships.
      *
-     * @pre The graph must have already been built.
+     * @pre The graph must have already been generated.
      */
     const std::unordered_set<std::string>& parent_ids() const;
 
     /**
      * @brief Returns the list of top-level module names.
      *
-     * @pre The graph must have already been built.
+     * @pre The graph must have already been generated.
      */
     const std::unordered_set<std::string>& top_level_module_names() const;
 
 private:
-    bool built_;
+    bool generated_;
     graph_type graph_;
     id_to_vertex_type id_to_vertex_;
     id_to_vertex_type orphanage_;

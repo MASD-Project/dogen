@@ -85,27 +85,27 @@ workflow::create_general_settings(const dynamic::object& o) const {
     using dogen::formatters::general_settings_factory;
     general_settings_factory f(dirs);
     f.load_reference_data();
-    return f.build(o);
+    return f.make(o);
 }
 
 cpp_settings workflow::
 create_cpp_settings(const dynamic::object& o) const {
     cpp_settings_factory f;
-    return f.build(o);
+    return f.make(o);
 }
 
 std::unordered_map<std::string, facet_settings> workflow::
 create_facet_settings(const dynamic::indexer& idx,
     const dynamic::object& o) const {
     facet_settings_factory f;
-    return f.build(idx.field_definitions_by_facet_name(), o);
+    return f.make(idx.field_definitions_by_facet_name(), o);
 }
 
 std::unordered_map<std::string, formatter_settings> workflow::
 create_formatter_settings(const dynamic::indexer& idx,
     const dynamic::object& o) const {
     formatter_settings_factory f;
-    return f.build(idx.field_definitions_by_formatter_name(), o);
+    return f.make(idx.field_definitions_by_formatter_name(), o);
 }
 
 global_settings workflow::create_global_settings_activity(

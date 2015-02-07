@@ -43,7 +43,7 @@ public:
     code_generation_marker_factory(const bool add_date_time,
         const bool add_warning, const std::string& message);
 
-    std::string build() const;
+    std::string make() const;
 
 private:
     const bool add_date_time_;

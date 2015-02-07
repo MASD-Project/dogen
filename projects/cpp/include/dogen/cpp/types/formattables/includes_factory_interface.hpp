@@ -60,7 +60,7 @@ public:
      * the system knows of, keyed by qualified name and formatter id.
      */
     virtual includes
-    build(const sml::model& m, const sml::qname qn,
+    make(const sml::model& m, const sml::qname qn,
         const std::unordered_map<sml::qname, path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const = 0;
 };

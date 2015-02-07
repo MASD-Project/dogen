@@ -35,8 +35,8 @@ static logger lg(logger_factory("dia_to_sml.grapher"));
 
 const std::string empty;
 const std::string root_id("__root__");
-const std::string graph_already_built("Graph has already been built");
-const std::string graph_not_yet_built("Graph has not yet been built");
+const std::string graph_already_generated("Graph has already been generated");
+const std::string graph_not_yet_generated("Graph has not yet been generated");
 const std::string found_cycle_in_graph("Graph has a cycle: ");
 const std::string irrelevant_object(
     "Attempt to add object not relevant to graph: ");
@@ -86,7 +86,7 @@ private:
 };
 
 grapher::grapher()
-    : built_(false), root_vertex_(boost::add_vertex(graph_)) {
+    : generated_(false), root_vertex_(boost::add_vertex(graph_)) {
     processed_object root;
     root.id(::root_id);
     graph_[root_vertex_] = root;
@@ -112,17 +112,17 @@ grapher::vertex_for_id(const std::string& id) {
     return r;
 }
 
-void grapher::require_not_built() const {
-    if (is_built()) {
-        BOOST_LOG_SEV(lg, error) << graph_already_built;
-        BOOST_THROW_EXCEPTION(graphing_error(graph_already_built));
+void grapher::require_not_generated() const {
+    if (is_generated()) {
+        BOOST_LOG_SEV(lg, error) << graph_already_generated;
+        BOOST_THROW_EXCEPTION(graphing_error(graph_already_generated));
     }
 }
 
-void grapher::require_built() const {
-    if (!is_built()) {
-        BOOST_LOG_SEV(lg, error) << graph_not_yet_built;
-        BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_built));
+void grapher::require_generated() const {
+    if (!is_generated()) {
+        BOOST_LOG_SEV(lg, error) << graph_not_yet_generated;
+        BOOST_THROW_EXCEPTION(graphing_error(graph_not_yet_generated));
     }
 }
 
@@ -203,7 +203,7 @@ void grapher::process_connections(const processed_object& o) {
 }
 
 void grapher::add(const processed_object& o) {
-    require_not_built();
+    require_not_generated();
 
     if (!is_relevant(o)) {
         BOOST_LOG_SEV(lg, error) << irrelevant_object << o.id();
@@ -225,30 +225,30 @@ void grapher::add(const processed_object& o) {
 }
 
 const graph_type& grapher::graph() const {
-    require_built();
+    require_generated();
     return graph_;
 }
 
 const grapher::child_id_to_parent_ids_type& grapher::
 child_id_to_parent_ids() const {
-    require_built();
+    require_generated();
     return child_id_to_parent_ids_;
 }
 
 const std::unordered_set<std::string>& grapher::parent_ids() const {
-    require_built();
+    require_generated();
     return parent_ids_;
 }
 
 const std::unordered_set<std::string>& grapher::
 top_level_module_names() const {
-    require_built();
+    require_generated();
     return top_level_module_names_;
 }
 
-void grapher::build() {
-    BOOST_LOG_SEV(lg, debug) << "Building graph.";
-    require_not_built();
+void grapher::generate() {
+    BOOST_LOG_SEV(lg, debug) << "Generating graph.";
+    require_not_generated();
 
     BOOST_LOG_SEV(lg, debug) << "Processing orphan vertices.";
     for (const auto& pair : orphanage_) {
@@ -259,9 +259,9 @@ void grapher::build() {
     cycle_detector v;
     boost::depth_first_search(graph_, boost::visitor(v));
     BOOST_LOG_SEV(lg, debug) << "Graph has no cycles. Sexp: " << v.sexp();
-    built_ = true;
+    generated_ = true;
 
-    BOOST_LOG_SEV(lg, debug) << "Built graph.";
+    BOOST_LOG_SEV(lg, debug) << "Generated graph.";
 }
 
 } }

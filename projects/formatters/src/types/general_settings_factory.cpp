@@ -119,7 +119,7 @@ general_settings_factory::extract_marker(const dynamic::object& o) const {
     const bool add_warning(get_boolean_content(o, cgm::add_warning()));
     code_generation_marker_factory f(add_date_time, add_warning, message);
 
-    return f.build();
+    return f.make();
 }
 
 std::forward_list<boost::filesystem::path> general_settings_factory::
@@ -171,7 +171,7 @@ void general_settings_factory::load_reference_data() {
 }
 
 general_settings
-general_settings_factory::build(const dynamic::object& o) const {
+general_settings_factory::make(const dynamic::object& o) const {
     const auto modeline(extract_modeline(o));
     const auto licence(extract_licence(o));
     const auto marker(extract_marker(o));

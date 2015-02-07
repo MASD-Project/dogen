@@ -113,7 +113,7 @@ std::string mock_object_factory::to_oject_id(const unsigned int number) {
     return object_prefix + boost::lexical_cast<std::string>(number);
 }
 
-object mock_object_factory::build_uml_note(const unsigned int number) {
+object mock_object_factory::make_uml_note(const unsigned int number) {
     std::ostringstream ss;
     ss << "#DOGEN dia.comment=true" << std::endl << std::endl
        << "this is a comment." << std::endl;
@@ -137,35 +137,35 @@ object mock_object_factory::build_uml_note(const unsigned int number) {
     return r;
 }
 
-object mock_object_factory::build_class(const unsigned int number) {
+object mock_object_factory::make_class(const unsigned int number) {
     object r(create_named_object(uml_class, number));
     create_comment_attribute(r);
     create_stereotype_attribute(r, empty);
     return r;
 }
 
-object mock_object_factory::build_no_name_class(const unsigned int number) {
+object mock_object_factory::make_no_name_class(const unsigned int number) {
     object r(create_object(uml_class, number));
     create_stereotype_attribute(r, empty);
     return r;
 }
 
-object mock_object_factory::build_blank_name_class(const unsigned int number) {
+object mock_object_factory::make_blank_name_class(const unsigned int number) {
     object r(create_object(uml_class, number));
     create_stereotype_attribute(r, empty);
     create_name_attribute(r, empty);
     return r;
 }
 
-object mock_object_factory::build_large_package(const unsigned int number) {
+object mock_object_factory::make_large_package(const unsigned int number) {
     return create_named_object(uml_large_package, number);
 }
 
 std::array<object, 2> mock_object_factory::
-build_class_inside_large_package(unsigned int number)  {
+make_class_inside_large_package(unsigned int number)  {
     std::array<object, 2> r = {{
-            build_large_package(number),
-            build_class(++number),
+            make_large_package(number),
+            make_class(++number),
         }};
 
     const child_node cn(r[0].id());
@@ -174,11 +174,11 @@ build_class_inside_large_package(unsigned int number)  {
 }
 
 std::array<object, 3> mock_object_factory::
-build_class_inside_two_large_packages(unsigned int number)  {
+make_class_inside_two_large_packages(unsigned int number)  {
     std::array<object, 3> r = {{
-            build_large_package(number),
-            build_large_package(++number),
-            build_class(++number),
+            make_large_package(number),
+            make_large_package(++number),
+            make_class(++number),
         }};
 
     const child_node cn(r[0].id());
@@ -190,7 +190,7 @@ build_class_inside_two_large_packages(unsigned int number)  {
     return r;
 }
 
-object mock_object_factory::build_stereotyped_class(
+object mock_object_factory::make_stereotyped_class(
     const std::string& st, const unsigned int number) {
     object r(create_named_object(uml_class, number));
     create_comment_attribute(r);
@@ -199,11 +199,11 @@ object mock_object_factory::build_stereotyped_class(
 }
 
 std::array<object, 3>
-mock_object_factory::build_generalization(unsigned int number) {
+mock_object_factory::make_generalization(unsigned int number) {
     std::array<object, 3> r = {{
             create_object(uml_generalization, number),
-            build_class(++number),
-            build_class(++number),
+            make_class(++number),
+            make_class(++number),
         }};
 
     r[0].connections(
@@ -214,10 +214,10 @@ mock_object_factory::build_generalization(unsigned int number) {
 }
 
 std::array<object, 3>
-mock_object_factory::build_association(unsigned int number) {
+mock_object_factory::make_association(unsigned int number) {
     std::array<object, 3> r = {{
-            build_class(number),
-            build_class(++number),
+            make_class(number),
+            make_class(++number),
             create_object(uml_association, ++number)
         }};
 
@@ -229,11 +229,11 @@ mock_object_factory::build_association(unsigned int number) {
 }
 
 std::array<object, 4> mock_object_factory::
-build_generalization_inside_large_package(unsigned int number)  {
+make_generalization_inside_large_package(unsigned int number)  {
     std::array<object, 4> r = {{
-            build_large_package(number),
-            build_class(++number),
-            build_class(++number),
+            make_large_package(number),
+            make_class(++number),
+            make_class(++number),
             create_object(uml_generalization, ++number)
         }};
 
@@ -250,10 +250,10 @@ build_generalization_inside_large_package(unsigned int number)  {
 }
 
 std::array<object, 4> mock_object_factory::
-build_first_degree_cycle(unsigned int number) {
+make_first_degree_cycle(unsigned int number) {
     std::array<object, 4> r = {{
-            build_class(number),
-            build_class(++number),
+            make_class(number),
+            make_class(++number),
             create_object(uml_generalization, ++number),
             create_object(uml_generalization, ++number)
         }};

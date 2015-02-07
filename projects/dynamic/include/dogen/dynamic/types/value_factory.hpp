@@ -56,18 +56,18 @@ public:
     /**
      * @brief Creates a stand alone text value.
      */
-    boost::shared_ptr<value> create_text(const std::string& v) const;
+    boost::shared_ptr<value> make_text(const std::string& v) const;
 
     /**
      * @brief Creates a collection of text values.
      */
     boost::shared_ptr<value>
-    create_text_collection(const std::list<std::string>& v) const;
+    make_text_collection(const std::list<std::string>& v) const;
 
     /**
      * @brief Creates a stand alone boolean value.
      */
-    boost::shared_ptr<value> create_boolean(const std::string& v) const;
+    boost::shared_ptr<value> make_boolean(const std::string& v) const;
 };
 
 } }

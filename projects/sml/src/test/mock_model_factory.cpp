@@ -28,8 +28,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
-#include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/dynamic/types/value_factory.hpp"
+#include "dogen/sml/test/mock_model_factory.hpp"
 
 namespace {
 
@@ -368,20 +368,20 @@ void add_test_dynamic_extensions(dogen::dynamic::object& o) {
 
     value_factory f;
     o.fields().insert(std::make_pair(licence_name_key,
-            field_instance(f.create_text(licence_name_value))));
+            field_instance(f.make_text(licence_name_value))));
 
     o.fields().insert(std::make_pair(copyright_notices_key,
-            field_instance(f.create_text(copyright_notices_value))));
+            field_instance(f.make_text(copyright_notices_value))));
 
     o.fields().insert(std::make_pair(modeline_group_name_key,
-            field_instance(f.create_text(modeline_group_name_value))));
+            field_instance(f.make_text(modeline_group_name_value))));
 
     o.fields().insert(std::make_pair(code_generation_marker_message_key,
             field_instance(
-                f.create_text(code_generation_marker_message_value))));
+                f.make_text(code_generation_marker_message_value))));
 
     o.fields().insert(std::make_pair(generate_preamble_key,
-            field_instance(f.create_text(generate_preamble_value))));
+            field_instance(f.make_text(generate_preamble_value))));
 }
 
 }
@@ -532,11 +532,11 @@ handle_model_module(const bool add_model_module, sml::model& m) const {
     qname qn;
     qn.model_name(m.name().model_name());
     qn.simple_name(m.name().simple_name());
-    const auto module(build_module(qn, documentation));
+    const auto module(make_module(qn, documentation));
     insert_nameable(m.modules(), module);
 }
 
-object mock_model_factory::build_value_object(const unsigned int i,
+object mock_model_factory::make_value_object(const unsigned int i,
     const qname& model_qname, const unsigned int module_n) const {
 
     object r;
@@ -549,12 +549,12 @@ object mock_model_factory::build_value_object(const unsigned int i,
     return r;
 }
 
-object mock_model_factory::build_value_object(unsigned int i,
+object mock_model_factory::make_value_object(unsigned int i,
     const unsigned int module_n) const {
-    return build_value_object(i, mock_model_qname(i), module_n);
+    return make_value_object(i, mock_model_qname(i), module_n);
 }
 
-concept mock_model_factory::build_concept(const unsigned int i,
+concept mock_model_factory::make_concept(const unsigned int i,
     const qname& model_qname) const {
 
     qname qn;
@@ -572,7 +572,7 @@ concept mock_model_factory::build_concept(const unsigned int i,
     return r;
 }
 
-object mock_model_factory::build_entity(const property& prop, const bool keyed,
+object mock_model_factory::make_entity(const property& prop, const bool keyed,
     const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
 
@@ -592,7 +592,7 @@ object mock_model_factory::build_entity(const property& prop, const bool keyed,
 }
 
 enumeration mock_model_factory::
-build_enumeration(const unsigned int i, const qname& model_qname,
+make_enumeration(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
     qname qn;
     qn.model_name(model_qname.model_name());
@@ -626,7 +626,7 @@ build_enumeration(const unsigned int i, const qname& model_qname,
     return r;
 }
 
-object mock_model_factory::build_exception(const unsigned int i,
+object mock_model_factory::make_exception(const unsigned int i,
     const qname& model_qname, const unsigned int module_n) const {
     qname qn;
     qn.model_name(model_qname.model_name());
@@ -647,7 +647,7 @@ object mock_model_factory::build_exception(const unsigned int i,
     return r;
 }
 
-module mock_model_factory::build_module(const sml::qname& qn,
+module mock_model_factory::make_module(const sml::qname& qn,
     const std::string& documentation) const {
     module r;
     r.name(qn);
@@ -655,7 +655,7 @@ module mock_model_factory::build_module(const sml::qname& qn,
     return r;
 }
 
-module mock_model_factory::build_module(const unsigned int module_n,
+module mock_model_factory::make_module(const unsigned int module_n,
     const std::string& model_name,
     const std::list<std::string>& module_path,
     const std::string& documentation) const {
@@ -664,10 +664,10 @@ module mock_model_factory::build_module(const unsigned int module_n,
     qn.model_name(model_name);
     qn.simple_name(module_name(module_n));
     qn.module_path(module_path);
-    return build_module(qn, documentation);
+    return make_module(qn, documentation);
 }
 
-qname mock_model_factory::build_qname(const unsigned int model_n,
+qname mock_model_factory::make_qname(const unsigned int model_n,
     const unsigned int simple_n) const {
 
     qname r;
@@ -676,7 +676,7 @@ qname mock_model_factory::build_qname(const unsigned int model_n,
     return r;
 }
 
-model mock_model_factory::build_empty_model(const unsigned int n,
+model mock_model_factory::make_empty_model(const unsigned int n,
     const bool add_model_module) const {
     model r;
     populate_simple_model_properties(r, n);
@@ -689,28 +689,28 @@ model mock_model_factory::build_empty_model(const unsigned int n,
 }
 
 model mock_model_factory::
-build_single_type_model(const unsigned int n, const object_types ot,
+make_single_type_model(const unsigned int n, const object_types ot,
     const bool add_model_module) const {
-    return build_multi_type_model(n, 1, ot, 0, add_model_module);
+    return make_multi_type_model(n, 1, ot, 0, add_model_module);
 }
 
 model mock_model_factory::
-build_single_type_model_in_module(const unsigned int n, const object_types ot,
+make_single_type_model_in_module(const unsigned int n, const object_types ot,
     const unsigned int mod_n, const bool add_model_module) const {
-    return build_multi_type_model(n, 1, ot, mod_n, add_model_module);
+    return make_multi_type_model(n, 1, ot, mod_n, add_model_module);
 }
 
 model mock_model_factory::
-build_multi_type_model(const unsigned int n, const unsigned int type_n,
+make_multi_type_model(const unsigned int n, const unsigned int type_n,
     const object_types ot, const unsigned int mod_n,
     const bool add_model_module) const {
 
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
 
     std::list<std::string> model_path;
     const auto mn(r.name().model_name());
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(build_module(i, mn, model_path, documentation));
+        const auto m(make_module(i, mn, model_path, documentation));
         insert_nameable(r.modules(), m);
         model_path.push_back(module_name(i));
     }
@@ -718,19 +718,19 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
     switch (ot) {
     case object_types::value_object:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto o(build_value_object(i, r.name(), mod_n));
+            const auto o(make_value_object(i, r.name(), mod_n));
             insert_object(r, o);
         }
         break;
     case object_types::enumeration:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(build_enumeration(i, r.name(), mod_n));
+            const auto e(make_enumeration(i, r.name(), mod_n));
             insert_nameable(r.enumerations(), e);
         }
         break;
     case object_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(build_exception(i, r.name(), mod_n));
+            const auto e(make_exception(i, r.name(), mod_n));
             insert_object(r, e);
         }
         break;
@@ -743,19 +743,19 @@ build_multi_type_model(const unsigned int n, const unsigned int type_n,
 }
 
 model mock_model_factory::
-build_single_concept_model(const unsigned int n,
+make_single_concept_model(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
 
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c(build_concept(0, r.name()));
+    concept c(make_concept(0, r.name()));
     add_property(c, flags_.properties_indexed());
     insert_nameable(r.concepts(), c);
 
-    auto o(build_value_object(0, r.name()));
+    auto o(make_value_object(0, r.name()));
     add_property(o, flags_.properties_indexed(), 1);
     model_concept(flags_.properties_indexed(), o, c);
     insert_object(r, o);
@@ -764,27 +764,27 @@ build_single_concept_model(const unsigned int n,
 }
 
 model mock_model_factory::
-build_first_degree_concepts_model(const unsigned int n,
+make_first_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    concept c1(build_concept(1, r.name()));
+    concept c1(make_concept(1, r.name()));
     add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
     model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
 
-    auto o1(build_value_object(1, r.name()));
+    auto o1(make_value_object(1, r.name()));
     add_property(o1, flags_.properties_indexed(), 2);
 
     if (flags_.concepts_indexed())
@@ -797,23 +797,23 @@ build_first_degree_concepts_model(const unsigned int n,
 }
 
 model mock_model_factory::
-build_second_degree_concepts_model(const unsigned int n,
+make_second_degree_concepts_model(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    concept c1(build_concept(1, r.name()));
+    concept c1(make_concept(1, r.name()));
     add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    concept c2(build_concept(2, r.name()));
+    concept c2(make_concept(2, r.name()));
     add_property(c2, flags_.properties_indexed(), 2);
 
     if (flags_.concepts_indexed())
@@ -822,18 +822,18 @@ build_second_degree_concepts_model(const unsigned int n,
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
     model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
 
-    auto o1(build_value_object(1, r.name()));
+    auto o1(make_value_object(1, r.name()));
     if (flags_.concepts_indexed())
         model_concept(flags_.properties_indexed(), o1, c0);
 
     model_concept(flags_.properties_indexed(), o1, c1);
     insert_object(r, o1);
 
-    auto o2(build_value_object(2, r.name()));
+    auto o2(make_value_object(2, r.name()));
     add_property(o2, flags_.properties_indexed(), 3);
     if (flags_.concepts_indexed()) {
         model_concept(flags_.properties_indexed(), o2, c0);
@@ -845,56 +845,56 @@ build_second_degree_concepts_model(const unsigned int n,
     return r;
 }
 
-model mock_model_factory::build_multiple_inheritance_concepts_model(
+model mock_model_factory::make_multiple_inheritance_concepts_model(
     const unsigned int n, const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    concept c1(build_concept(1, r.name()));
+    concept c1(make_concept(1, r.name()));
     add_property(c1, flags_.properties_indexed(), 1);
     insert_nameable(r.concepts(), c1);
 
-    concept c2(build_concept(1, r.name()));
+    concept c2(make_concept(1, r.name()));
     add_property(c2, flags_.properties_indexed(), 2);
     c2.refines().push_back(c0.name());
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
     model_concept(flags_.properties_indexed(), o0, c2);
     insert_object(r, o0);
     return r;
 }
 
 model mock_model_factory::
-build_diamond_inheritance_concepts_model(const unsigned int n,
+make_diamond_inheritance_concepts_model(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    concept c1(build_concept(1, r.name()));
+    concept c1(make_concept(1, r.name()));
     add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    concept c2(build_concept(2, r.name()));
+    concept c2(make_concept(2, r.name()));
     add_property(c2, flags_.properties_indexed(), 2);
     c2.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c2);
 
-    concept c3(build_concept(3, r.name()));
+    concept c3(make_concept(3, r.name()));
     add_property(c3, flags_.properties_indexed(), 3);
     if (flags_.concepts_indexed())
         c3.refines().push_back(c0.name());
@@ -903,7 +903,7 @@ build_diamond_inheritance_concepts_model(const unsigned int n,
     c3.refines().push_back(c2.name());
     insert_nameable(r.concepts(), c3);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
     if (flags_.concepts_indexed()) {
         model_concept(flags_.properties_indexed(), o0, c0);
         model_concept(flags_.properties_indexed(), o0, c1);
@@ -914,23 +914,23 @@ build_diamond_inheritance_concepts_model(const unsigned int n,
     return r;
 }
 
-model mock_model_factory::build_object_with_parent_that_models_concept(
+model mock_model_factory::make_object_with_parent_that_models_concept(
     const unsigned int n, const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
     model_concept(flags_.properties_indexed(), o0, c0);
 
     insert_object(r, o0);
 
-    auto o1(build_value_object(1, r.name()));
+    auto o1(make_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), o0, o1);
     o0.is_parent(true);
     insert_object(r, o1);
@@ -939,23 +939,23 @@ model mock_model_factory::build_object_with_parent_that_models_concept(
 }
 
 model mock_model_factory::
-build_object_with_parent_that_models_a_refined_concept(
+make_object_with_parent_that_models_a_refined_concept(
     const unsigned int n, const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    concept c1(build_concept(1, r.name()));
+    concept c1(make_concept(1, r.name()));
     add_property(c1, flags_.properties_indexed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
 
     model_concept(flags_.properties_indexed(), o0, c1);
     if (flags_.concepts_indexed())
@@ -963,7 +963,7 @@ build_object_with_parent_that_models_a_refined_concept(
 
     insert_object(r, o0);
 
-    auto o1(build_value_object(1, r.name()));
+    auto o1(make_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), o0, o1);
     o0.is_parent(true);
     insert_object(r, o1);
@@ -972,47 +972,47 @@ build_object_with_parent_that_models_a_refined_concept(
 }
 
 model mock_model_factory::
-build_concept_that_refines_missing_concept(const unsigned int n,
+make_concept_that_refines_missing_concept(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
-    concept c0(build_concept(0, r.name()));
-    concept c1(build_concept(1, r.name()));
+    model r(make_empty_model(n, add_model_module));
+    concept c0(make_concept(0, r.name()));
+    concept c1(make_concept(1, r.name()));
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
     return r;
 }
 
 model mock_model_factory::
-build_object_that_models_missing_concept(const unsigned int n,
+make_object_that_models_missing_concept(const unsigned int n,
     const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
 
-    auto o0(build_value_object(0, r.name()));
+    auto o0(make_value_object(0, r.name()));
 
     model_concept(flags_.properties_indexed(), o0, c0);
     insert_object(r, o0);
     return r;
 }
 
-model mock_model_factory::build_object_that_models_concept_with_missing_parent(
+model mock_model_factory::make_object_that_models_concept_with_missing_parent(
     const unsigned int n, const bool add_model_module) const {
-    model r(build_empty_model(n, add_model_module));
+    model r(make_empty_model(n, add_model_module));
     primitive ui;
     ui.name().simple_name(unsigned_int);
     r.primitives().insert(std::make_pair(ui.name(), ui));
 
-    concept c0(build_concept(0, r.name()));
+    concept c0(make_concept(0, r.name()));
     add_property(c0, flags_.properties_indexed());
     insert_nameable(r.concepts(), c0);
 
-    auto o0(build_value_object(0, r.name()));
-    auto o1(build_value_object(1, r.name()));
+    auto o0(make_value_object(0, r.name()));
+    auto o1(make_value_object(1, r.name()));
     parent_to_child(flags_.properties_indexed(), o0, o1);
     o0.is_parent(true);
 
@@ -1024,12 +1024,12 @@ model mock_model_factory::build_object_that_models_concept_with_missing_parent(
 
 model mock_model_factory::object_with_both_regular_and_weak_associations(
     const bool add_model_module) const {
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto mn(mock_model_qname(0));
-    auto o1(build_value_object(1, mn));
+    auto o1(make_value_object(1, mn));
     insert_object(r, o1);
 
-    object o0(build_value_object(0, mn));
+    object o0(make_value_object(0, mn));
     property p0(mock_property(0, property_types::value_object, o1.name()));
     o0.local_properties().push_back(p0);
     if (flags_.properties_indexed())
@@ -1057,7 +1057,7 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[wa].push_back(o1.name());
 
-    object o3(build_value_object(3, mn));
+    object o3(make_value_object(3, mn));
     insert_object(r, o3);
 
     property p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
@@ -1093,15 +1093,15 @@ model mock_model_factory::
 object_with_property(const object_types ot, const property_types pt,
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
-    auto o1(build_value_object(1, mn));
+    auto o1(make_value_object(1, mn));
 
     property p(mock_property(0, pt, o1.name()));
 
     object o0;
     if (ot == object_types::value_object)
-        o0 = build_value_object(0, mn);
+        o0 = make_value_object(0, mn);
     else if (ot == object_types::keyed_entity || ot == object_types::entity)
-        o0 = build_entity(p, ot == object_types::keyed_entity, 0, mn);
+        o0 = make_entity(p, ot == object_types::keyed_entity, 0, mn);
     else {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
@@ -1111,7 +1111,7 @@ object_with_property(const object_types ot, const property_types pt,
     if (flags_.properties_indexed())
         o0.all_properties().push_back(p);
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto ra(relationship_types::regular_associations);
     const auto wa(relationship_types::weak_associations);
     if (pt == property_types::value_object ||
@@ -1211,8 +1211,8 @@ object_with_property(const object_types ot, const property_types pt,
 std::array<model, 2>
 mock_model_factory::object_with_property_type_in_different_model(
     const bool add_model_module) const {
-    auto o0(build_value_object(0));
-    auto o1(build_value_object(1));
+    auto o0(make_value_object(0));
+    auto o1(make_value_object(1));
 
     add_property(o0, flags_.properties_indexed(),
         0, property_types::value_object, o1.name());
@@ -1238,8 +1238,8 @@ mock_model_factory::object_with_property_type_in_different_model(
 
 model mock_model_factory::object_with_missing_property_type(
     const bool add_model_module) const {
-    auto o0(build_value_object(0));
-    auto o1(build_value_object(1));
+    auto o0(make_value_object(0));
+    auto o1(make_value_object(1));
 
     add_property(o0, flags_.properties_indexed(), 0,
         property_types::value_object, o1.name());
@@ -1251,7 +1251,7 @@ model mock_model_factory::object_with_missing_property_type(
     qname mn_qn;
     mn_qn.model_name(model_name(0));
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
 
     return r;
@@ -1262,18 +1262,18 @@ object_with_parent_in_the_same_model(const bool has_property,
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     if (has_property) {
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
     if (has_property)
         add_property(o0, flags_.properties_indexed());
 
-    auto o1(build_value_object(1, mn));
+    auto o1(make_value_object(1, mn));
     if (has_property)
         add_property(o1, flags_.properties_indexed(), 1);
 
@@ -1288,11 +1288,11 @@ object_with_parent_in_the_same_model(const bool has_property,
 model mock_model_factory::object_with_missing_parent_in_the_same_model(
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
-    auto o0(build_value_object(0, mn));
-    auto o1(build_value_object(1, mn));
+    auto o0(make_value_object(0, mn));
+    auto o1(make_value_object(1, mn));
     o1.is_parent(true);
     parent_to_child(flags_.properties_indexed(), o1, o0);
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     insert_object(r, o1);
 
     return r;
@@ -1301,16 +1301,16 @@ model mock_model_factory::object_with_missing_parent_in_the_same_model(
 std::array<model, 2> mock_model_factory::
 object_with_parent_in_different_models(
     const bool add_model_module) const {
-    auto o0(build_value_object(0));
-    auto o1(build_value_object(1));
+    auto o0(make_value_object(0));
+    auto o1(make_value_object(1));
     parent_to_child(flags_.properties_indexed(), o1, o0);
 
     o1.is_parent(true);
 
-    model m0(build_empty_model(0, add_model_module));
+    model m0(make_empty_model(0, add_model_module));
     insert_object(m0, o0);
 
-    model m1(build_empty_model(1, add_model_module));
+    model m1(make_empty_model(1, add_model_module));
     insert_object(m1, o1);
     m1.name(mock_model_qname(1));
     m1.origin_type(origin_types::user);
@@ -1321,10 +1321,10 @@ object_with_parent_in_different_models(
 model mock_model_factory::object_with_three_children_in_same_model(
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
-    auto o0(build_value_object(0, mn));
-    auto o1(build_value_object(1, mn));
-    auto o2(build_value_object(2, mn));
-    auto o3(build_value_object(3, mn));
+    auto o0(make_value_object(0, mn));
+    auto o1(make_value_object(1, mn));
+    auto o2(make_value_object(2, mn));
+    auto o3(make_value_object(3, mn));
 
     parent_to_child(flags_.properties_indexed(), o3, o0);
     parent_to_child(flags_.properties_indexed(), o3, o1);
@@ -1332,7 +1332,7 @@ model mock_model_factory::object_with_three_children_in_same_model(
 
     o3.is_parent(true);
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
     insert_object(r, o1);
     insert_object(r, o2);
@@ -1346,28 +1346,28 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     if (has_property) {
         primitive ui;
         ui.name().simple_name(unsigned_int);
         r.primitives().insert(std::make_pair(ui.name(), ui));
     }
 
-    auto o3(build_value_object(3, mn));
+    auto o3(make_value_object(3, mn));
     if (has_property)
         add_property(o3, flags_.properties_indexed(), 3);
 
-    auto o2(build_value_object(2, mn));
+    auto o2(make_value_object(2, mn));
     if (has_property)
         add_property(o2, flags_.properties_indexed(), 2);
     parent_to_child(flags_.properties_indexed(), o3, o2, o3, !add_leaf);
 
-    auto o1(build_value_object(1, mn));
+    auto o1(make_value_object(1, mn));
     if (has_property)
         add_property(o1, flags_.properties_indexed(), 1);
     parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
     if (has_property)
         add_property(o0, flags_.properties_indexed());
 
@@ -1393,10 +1393,10 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
 model mock_model_factory::object_with_third_degree_parent_missing(
     const bool add_model_module) const {
     const auto mn(mock_model_qname(0));
-    auto o0(build_value_object(0, mn));
-    auto o1(build_value_object(1, mn));
-    auto o2(build_value_object(2, mn));
-    auto o3(build_value_object(3, mn));
+    auto o0(make_value_object(0, mn));
+    auto o1(make_value_object(1, mn));
+    auto o2(make_value_object(2, mn));
+    auto o3(make_value_object(3, mn));
 
     parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
     parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
@@ -1411,7 +1411,7 @@ model mock_model_factory::object_with_third_degree_parent_missing(
     o3.is_parent(true);
     add_relationship(o3, o0, relationship_types::leaves);
 
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
     insert_object(r, o1);
     insert_object(r, o2);
@@ -1422,10 +1422,10 @@ model mock_model_factory::object_with_third_degree_parent_missing(
 std::array<model, 4> mock_model_factory::
 object_with_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    auto o0(build_value_object(0));
-    auto o1(build_value_object(1));
-    auto o2(build_value_object(2));
-    auto o3(build_value_object(3));
+    auto o0(make_value_object(0));
+    auto o1(make_value_object(1));
+    auto o2(make_value_object(2));
+    auto o3(make_value_object(3));
 
     parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
     parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
@@ -1440,16 +1440,16 @@ object_with_third_degree_parent_in_different_models(
     o3.is_parent(true);
     add_relationship(o3, o0, relationship_types::leaves);
 
-    model m0(build_empty_model(0, add_model_module));
+    model m0(make_empty_model(0, add_model_module));
     insert_object(m0, o0);
 
-    model m1(build_empty_model(1, add_model_module));
+    model m1(make_empty_model(1, add_model_module));
     insert_object(m1, o1);
 
-    model m2(build_empty_model(2, add_model_module));
+    model m2(make_empty_model(2, add_model_module));
     insert_object(m2, o2);
 
-    model m3(build_empty_model(3, add_model_module));
+    model m3(make_empty_model(3, add_model_module));
     insert_object(m3, o3);
 
     return std::array<model, 4>{{ m0, m1, m2, m3 }};
@@ -1458,10 +1458,10 @@ object_with_third_degree_parent_in_different_models(
 std::array<model, 4> mock_model_factory::
 object_with_missing_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    auto o0(build_value_object(0));
-    auto o1(build_value_object(1));
-    auto o2(build_value_object(2));
-    auto o3(build_value_object(3));
+    auto o0(make_value_object(0));
+    auto o1(make_value_object(1));
+    auto o2(make_value_object(2));
+    auto o3(make_value_object(3));
 
     parent_to_child(flags_.properties_indexed(), o1, o0, o3, !add_leaf);
     parent_to_child(flags_.properties_indexed(), o2, o1, o3, !add_leaf);
@@ -1476,13 +1476,13 @@ object_with_missing_third_degree_parent_in_different_models(
     o3.is_parent(true);
     add_relationship(o3, o0, relationship_types::leaves);
 
-    model m0(build_empty_model(0, add_model_module));
+    model m0(make_empty_model(0, add_model_module));
     insert_object(m0, o0);
 
-    model m1(build_empty_model(1, add_model_module));
+    model m1(make_empty_model(1, add_model_module));
     insert_object(m1, o1);
 
-    model m2(build_empty_model(2, add_model_module));
+    model m2(make_empty_model(2, add_model_module));
     insert_object(m2, o2);
 
     return std::array<model, 4>{{ m0, m1, m2 }};
@@ -1490,17 +1490,17 @@ object_with_missing_third_degree_parent_in_different_models(
 
 model mock_model_factory::object_with_group_of_properties_of_different_types(
     const bool repeat_group, const bool add_model_module) const {
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto mn(r.name());
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
     const auto lambda([&](const property& p) {
             o0.local_properties().push_back(p);
             if (flags_.properties_indexed())
                 o0.all_properties().push_back(p);
         });
 
-    auto o1(build_value_object(1, mn));
+    auto o1(make_value_object(1, mn));
     auto p0(mock_property(0, property_types::value_object, o1.name()));
     lambda(p0);
     insert_object(r, o1);
@@ -1511,7 +1511,7 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     ui.name(p1.type().type());
     insert_nameable(r.primitives(), ui);
 
-    auto o3(build_value_object(3, mn));
+    auto o3(make_value_object(3, mn));
     insert_object(r, o3);
     auto p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
     lambda(p2);
@@ -1525,7 +1525,7 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     o2.object_type(dogen::sml::object_types::smart_pointer);
     insert_object(r, o2);
 
-    auto o4(build_value_object(4, mn));
+    auto o4(make_value_object(4, mn));
     insert_object(r, o4);
     auto p3(mock_property(3, property_types::value_object, o4.name()));
     lambda(p3);
@@ -1549,14 +1549,14 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
 
 model mock_model_factory::object_with_operation_with_single_parameter(
     const bool add_model_module) const {
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto mn(r.name());
 
     primitive ui;
     ui.name().simple_name(unsigned_int);
     insert_nameable(r.primitives(), ui);
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
     parameter p;
     nested_qname nqn(mock_nested_qname(ui.name()));
     p.type(nqn);
@@ -1574,14 +1574,14 @@ model mock_model_factory::object_with_operation_with_single_parameter(
 model mock_model_factory::
 object_with_operation_with_multiple_parameters(
     const bool add_model_module) const {
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto mn(r.name());
 
     primitive ui;
     ui.name().simple_name(unsigned_int);
     insert_nameable(r.primitives(), ui);
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
 
     parameter p0;
     p0.type(mock_nested_qname(ui.name()));
@@ -1617,14 +1617,14 @@ object_with_operation_with_multiple_parameters(
 
 model mock_model_factory::object_with_operation_with_return_type(
     const bool add_model_module) const {
-    model r(build_empty_model(0, add_model_module));
+    model r(make_empty_model(0, add_model_module));
     const auto mn(r.name());
 
     primitive ui;
     ui.name().simple_name(unsigned_int);
     insert_nameable(r.primitives(), ui);
 
-    auto o0(build_value_object(0, mn));
+    auto o0(make_value_object(0, mn));
 
     operation op;
     op.name(operation_name(0));

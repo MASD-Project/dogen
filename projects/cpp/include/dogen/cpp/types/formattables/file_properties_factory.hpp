@@ -59,7 +59,7 @@ public:
     std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, formattables::file_properties> >
-        build(const settings::selector& s, const formatters::container& c,
+        make(const settings::selector& s, const formatters::container& c,
             const std::unordered_map<
                 sml::qname,
                 std::unordered_map<std::string, boost::filesystem::path> >&

@@ -59,23 +59,23 @@ void field_instance_factory::ensure_at_most_one_element(
     }
 }
 
-field_instance field_instance_factory::build(const field_definition& fd,
+field_instance field_instance_factory::make(const field_definition& fd,
     const std::list<std::string>& v) const {
     field_instance r;
 
     switch (fd.type()) {
     case value_types::text:
         ensure_at_most_one_element(v);
-        r.value(value_factory_.create_text(v.front()));
+        r.value(value_factory_.make_text(v.front()));
         break;
 
     case value_types::text_collection:
-        r.value(value_factory_.create_text_collection(v));
+        r.value(value_factory_.make_text_collection(v));
         break;
 
     case value_types::boolean:
         ensure_at_most_one_element(v);
-        r.value(value_factory_.create_boolean(v.front()));
+        r.value(value_factory_.make_boolean(v.front()));
         break;
 
     default:

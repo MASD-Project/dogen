@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_SUITE(profiler)
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotypes_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotypes_transforms_into_expected_profile");
 
-    const auto o(mock_processed_object_factory::build_class());
+    const auto o(mock_processed_object_factory::make_class());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(o));
 
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotypes_transforms_into_expected_prof
 BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_note_transforms_into_expected_profile");
 
-    const auto o(mock_processed_object_factory::build_uml_note());
+    const auto o(mock_processed_object_factory::make_uml_note());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(o));
 
@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_profile");
 
-    const auto o(mock_processed_object_factory::build_large_package());
+    const auto o(mock_processed_object_factory::make_large_package());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(o));
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_generalization_transforms_into_expected_profile");
 
-    const auto a(mock_processed_object_factory::build_generalization());
+    const auto a(mock_processed_object_factory::make_generalization());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(a[0]));
 
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(uml_association_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_association_transforms_into_expected_profile");
 
-    const auto a(mock_processed_object_factory::build_association());
+    const auto a(mock_processed_object_factory::make_association());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(a[2]));
 
@@ -157,7 +157,7 @@ BOOST_AUTO_TEST_CASE(uml_association_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(uml_message_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_message_transforms_into_expected_profile");
 
-    const auto o(mock_processed_object_factory::build_uml_message());
+    const auto o(mock_processed_object_factory::make_uml_message());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(o));
 
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_CASE(uml_message_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(uml_realization_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("uml_realization_transforms_into_expected_profile");
 
-    const auto a(mock_processed_object_factory::build_realization());
+    const auto a(mock_processed_object_factory::make_realization());
     dogen::dia_to_sml::profiler profiler;
     const auto p(profiler.generate(a[0]));
 
@@ -182,7 +182,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     SETUP_TEST_LOG_SOURCE("stereotyped_class_transforms_into_expected_profile");
 
     std::string s("enumeration");
-    auto o(mock_processed_object_factory::build_class(0, s));
+    auto o(mock_processed_object_factory::make_class(0, s));
     dogen::dia_to_sml::profiler profiler;
     auto p(profiler.generate(o));
 
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(p.is_enumeration());
 
     s = "exception, entity";
-    o = mock_processed_object_factory::build_class(0, s);
+    o = mock_processed_object_factory::make_class(0, s);
     p = profiler.generate(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 2:" << p;
@@ -202,7 +202,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(p.is_entity());
 
     s = "entity, aggregate root";
-    o = mock_processed_object_factory::build_class(0, s);
+    o = mock_processed_object_factory::make_class(0, s);
     p = profiler.generate(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 2:" << p;
@@ -212,7 +212,7 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
     BOOST_CHECK(p.is_entity());
 
     s = "nongeneratable, versioned, keyed entity, visitable, immutable, fluent";
-    o = mock_processed_object_factory::build_class(0, s);
+    o = mock_processed_object_factory::make_class(0, s);
     p = profiler.generate(o);
 
     BOOST_LOG_SEV(lg, debug) << "actual 3:" << p;
@@ -229,21 +229,21 @@ BOOST_AUTO_TEST_CASE(stereotyped_class_transforms_into_expected_profile) {
 BOOST_AUTO_TEST_CASE(unknown_stereotypes_are_added_to_list) {
     SETUP_TEST_LOG_SOURCE("unknown_stereotypes_are_added_to_list");
 
-    auto o(mock_processed_object_factory::build_class(0, us_str_1));
+    auto o(mock_processed_object_factory::make_class(0, us_str_1));
     dogen::dia_to_sml::profiler profiler;
     auto p = profiler.generate(o);
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;
     BOOST_REQUIRE(p.unknown_stereotypes().size() == 1);
     BOOST_CHECK(p.unknown_stereotypes().front() == us_1);
 
-    o = mock_processed_object_factory::build_class(0, us_str_2);
+    o = mock_processed_object_factory::make_class(0, us_str_2);
     p = profiler.generate(o);
     BOOST_REQUIRE(p.unknown_stereotypes().size() == 2);
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;
     BOOST_CHECK(p.unknown_stereotypes().front() == us_1);
     BOOST_CHECK(p.unknown_stereotypes().back() == us_2);
 
-    o = mock_processed_object_factory::build_class(0, us_str_3);
+    o = mock_processed_object_factory::make_class(0, us_str_3);
     p = profiler.generate(o);
     BOOST_REQUIRE(p.unknown_stereotypes().size() == 3);
     BOOST_LOG_SEV(lg, debug) << "actual:" << p;

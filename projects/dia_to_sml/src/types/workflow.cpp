@@ -72,7 +72,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     context_.model().modules().insert(std::make_pair(m.name(), m));
 }
 
-graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
+graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {
     grapher g;
     object_processor op;
     for (const auto& l : diagram.layers()) {
@@ -83,7 +83,7 @@ graph_type workflow::build_graph_activity(const dia::diagram& diagram) {
         }
     }
 
-    g.build();
+    g.generate();
     context_.child_id_to_parent_ids(g.child_id_to_parent_ids());
     context_.parent_ids(g.parent_ids());
     context_.top_level_module_names(g.top_level_module_names());
@@ -135,7 +135,7 @@ sml::model workflow::execute(const dia::diagram& diagram,
     bool is_target) {
 
     initialise_context_activity(model_name, external_module_path, is_target);
-    graph_to_context_activity(build_graph_activity(diagram));
+    graph_to_context_activity(generate_graph_activity(diagram));
     post_process_model_activity();
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();

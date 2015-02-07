@@ -83,7 +83,7 @@ const std::vector<cpp_facet_types> facets =
 
 dogen::config::cpp_settings mock_settings() {
     return dogen::config::test::mock_settings_factory::
-        build_cpp_settings(project_dir);
+        make_cpp_settings(project_dir);
 }
 
 std::string object_name() {
@@ -114,7 +114,7 @@ std::vector<std::list<boost::filesystem::path> >
 includes_for_one_object_model(cpp_facet_types ft,
     const includer_factory& factory) {
     using dogen::sml::test::mock_model_factory;
-    const auto m(model_factory.build_single_type_model());
+    const auto m(model_factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& p(m.objects().begin()->second);
 

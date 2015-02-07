@@ -73,8 +73,7 @@ generate(const settings::selector& s,
         }
     }
     return std::make_pair(qn, r);
-};
-
+}
 
 formatters::formatter_types file_name_factory::
 formatter_type_for_object_type(const sml::object_types ot) const {
@@ -151,7 +150,7 @@ std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, boost::filesystem::path>
     >
-file_name_factory::build(const settings::selector& s,
+file_name_factory::make(const settings::selector& s,
     const formatters::container& c, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Building all file names.";
 

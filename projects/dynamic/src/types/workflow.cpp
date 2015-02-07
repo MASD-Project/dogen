@@ -129,7 +129,8 @@ workflow::aggregate_raw_data_activity(
     return r;
 }
 
-std::unordered_map<std::string, field_instance> workflow::build_fields_activity(
+std::unordered_map<std::string, field_instance>
+workflow::create_fields_activity(
     const std::unordered_map<std::string, std::list<std::string> >&
     aggregated_data, const scope_types current_scope) const {
     std::unordered_map<std::string, field_instance> r;
@@ -141,7 +142,7 @@ std::unordered_map<std::string, field_instance> workflow::build_fields_activity(
             continue;
 
         const auto& values(pair.second);
-        r[complete_name] = f.build(*fd, values);
+        r[complete_name] = f.make(*fd, values);
     }
     return r;
 }
@@ -150,7 +151,7 @@ object workflow::execute(const scope_types current_scope,
     const std::list<std::pair<std::string, std::string>>&
     raw_data) const {
     auto aggregated_raw_data(aggregate_raw_data_activity(raw_data));
-    auto fields(build_fields_activity(aggregated_raw_data, current_scope));
+    auto fields(create_fields_activity(aggregated_raw_data, current_scope));
     return object(fields);
 }
 

@@ -78,14 +78,14 @@ file_asserters() {
 dogen::config::knitting_settings
 default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_knitting_settings(
+    return mock_settings_factory::make_knitting_settings(
         tds.target(), tds.actual(), module_path);
 }
 
 dogen::config::knitting_settings debug_dogen_mock_settings() {
     typedef dogen::utility::test_data::debug_dogen tds;
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_knitting_settings(
+    return mock_settings_factory::make_knitting_settings(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
@@ -95,7 +95,7 @@ dogen::config::knitting_settings debug_dogen_mock_settings() {
 dogen::config::knitting_settings empty_tds_mock_settings() {
     typedef dogen::utility::test_data::empty_tds tds;
     using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::build_knitting_settings(
+    return mock_settings_factory::make_knitting_settings(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
@@ -578,7 +578,7 @@ BOOST_IGNORE_AUTO_TEST_CASE_(split_project_model_generates_expected_code) {
     using dogen::utility::test_data::codegen_tds;
     auto lambda([](codegen_tds tds) -> knitting_settings {
             using dogen::config::test::mock_settings_factory;
-            return mock_settings_factory::build_knitting_settings(
+            return mock_settings_factory::make_knitting_settings(
                 tds.target(),
                 tds.actual() / "split_project/source",
                 tds.actual() / "split_project/dir/inc/dogen",

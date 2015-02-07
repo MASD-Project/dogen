@@ -39,7 +39,7 @@ namespace config {
 namespace test {
 
 std::set<cpp_facet_types>
-mock_settings_factory::build_facets(const bool all) {
+mock_settings_factory::make_facets(const bool all) {
     if (all)
         return std::set<cpp_facet_types> {
             cpp_facet_types::types,
@@ -56,7 +56,7 @@ mock_settings_factory::build_facets(const bool all) {
     };
 }
 
-output_settings mock_settings_factory::build_output_settings() {
+output_settings mock_settings_factory::make_output_settings() {
     output_settings r;
     r.output_to_stdout(false);
     r.output_to_file(true);
@@ -66,16 +66,16 @@ output_settings mock_settings_factory::build_output_settings() {
 }
 
 troubleshooting_settings
-mock_settings_factory::build_troubleshooting_settings() {
+mock_settings_factory::make_troubleshooting_settings() {
     troubleshooting_settings r;
     return r;
 }
 
-cpp_settings mock_settings_factory::build_cpp_settings() {
-    return build_cpp_settings(empty, empty);
+cpp_settings mock_settings_factory::make_cpp_settings() {
+    return make_cpp_settings(empty, empty);
 }
 
-cpp_settings mock_settings_factory::build_cpp_settings(
+cpp_settings mock_settings_factory::make_cpp_settings(
     const boost::filesystem::path& src_dir,
     const boost::filesystem::path& include_dir) {
 
@@ -83,7 +83,7 @@ cpp_settings mock_settings_factory::build_cpp_settings(
     r.split_project(true);
     r.source_directory(src_dir);
     r.include_directory(include_dir);
-    r.enabled_facets(build_facets());
+    r.enabled_facets(make_facets());
     r.header_extension(header_extension);
     r.source_extension(source_extension);
     r.domain_facet_folder(domain_facet_folder);
@@ -96,16 +96,16 @@ cpp_settings mock_settings_factory::build_cpp_settings(
     return r;
 }
 
-cpp_settings mock_settings_factory::build_cpp_settings(
+cpp_settings mock_settings_factory::make_cpp_settings(
     const boost::filesystem::path& project_dir) {
 
-    cpp_settings r(build_cpp_settings(empty, empty));
+    cpp_settings r(make_cpp_settings(empty, empty));
     r.split_project(false);
     r.project_directory(project_dir);
     return r;
 }
 
-input_settings mock_settings_factory::build_input_settings(
+input_settings mock_settings_factory::make_input_settings(
     const boost::filesystem::path& target,
     const std::string& module_path) {
     input_settings r;
@@ -114,7 +114,7 @@ input_settings mock_settings_factory::build_input_settings(
     return r;
 }
 
-knitting_settings mock_settings_factory::build_knitting_settings(
+knitting_settings mock_settings_factory::make_knitting_settings(
     const boost::filesystem::path& target,
     const boost::filesystem::path& src_dir,
     const boost::filesystem::path& include_dir,
@@ -122,24 +122,24 @@ knitting_settings mock_settings_factory::build_knitting_settings(
     const bool verbose) {
     knitting_settings r;
     r.verbose(verbose);
-    r.input(build_input_settings(target, module_path));
-    r.cpp(build_cpp_settings(src_dir, include_dir));
-    r.troubleshooting(build_troubleshooting_settings());
-    r.output(build_output_settings());
+    r.input(make_input_settings(target, module_path));
+    r.cpp(make_cpp_settings(src_dir, include_dir));
+    r.troubleshooting(make_troubleshooting_settings());
+    r.output(make_output_settings());
     return r;
 }
 
-knitting_settings mock_settings_factory::build_knitting_settings(
+knitting_settings mock_settings_factory::make_knitting_settings(
     const boost::filesystem::path& target,
     const boost::filesystem::path& project_dir,
     const std::string& module_path,
     const bool verbose) {
     knitting_settings r;
     r.verbose(verbose);
-    r.input(build_input_settings(target, module_path));
-    r.cpp(build_cpp_settings(project_dir));
-    r.troubleshooting(build_troubleshooting_settings());
-    r.output(build_output_settings());
+    r.input(make_input_settings(target, module_path));
+    r.cpp(make_cpp_settings(project_dir));
+    r.troubleshooting(make_troubleshooting_settings());
+    r.output(make_output_settings());
     return r;
 }
 

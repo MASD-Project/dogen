@@ -63,12 +63,12 @@ const std::vector<cpp_facet_types> facets =
 
 dogen::config::cpp_settings non_split_project_settings() {
     return dogen::config::test::mock_settings_factory::
-        build_cpp_settings(project_dir);
+        make_cpp_settings(project_dir);
 }
 
 dogen::config::cpp_settings split_project_settings() {
     return dogen::config::test::mock_settings_factory::
-        build_cpp_settings(src_dir, include_dir);
+        make_cpp_settings(src_dir, include_dir);
 }
 
 dogen::cpp::formattables::content_descriptor

@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_results_in_expected_enum_info) {
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory.build_single_type_model(0, ot));
+    const auto m(factory.make_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_one_module_results_in_expected_
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_one_module_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_multiple_modules_results_in_exp
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_multiple_modules_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 2));
 
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_CASE(transforming_enumeration_in_external_module_results_in_expe
     SETUP_TEST_LOG_SOURCE("transforming_enumeration_in_external_module_results_in_expected_enum_info");
 
     const auto ot(object_types::enumeration);
-    auto m(factory.build_single_type_model_in_module(0, ot));
+    auto m(factory.make_single_type_model_in_module(0, ot));
     BOOST_REQUIRE(m.enumerations().size() == 1);
     auto& enumeration(m.enumerations().begin()->second);
     enumeration.name().external_module_path().push_back(external_module);
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_results_in_expected_exception_info) 
     SETUP_TEST_LOG_SOURCE("transforming_exception_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model(0, ot));
+    const auto m(factory.make_single_type_model(0, ot));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_one_module_results_in_expected_ex
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_one_module_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_multiple_modules_results_in_expec
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_multiple_modules_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 2));
     dogen::sml_to_cpp::context c;
     dogen::sml_to_cpp::transformer t(m, c);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -240,7 +240,7 @@ BOOST_AUTO_TEST_CASE(transforming_exception_in_external_module_results_in_expect
     SETUP_TEST_LOG_SOURCE("transforming_exception_in_external_module_results_in_expected_exception_info");
 
     const auto ot(object_types::exception);
-    auto m(factory.build_single_type_model_in_module(0, ot));
+    auto m(factory.make_single_type_model_in_module(0, ot));
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& exception(m.objects().begin()->second);
     exception.name().external_module_path().push_back(external_module);
@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 1));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 1));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 1);
 
@@ -282,7 +282,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_module_results_in_expected_namespace
     SETUP_TEST_LOG_SOURCE("transforming_module_in_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 2));
+    const auto m(factory.make_single_type_model_in_module(0, ot, 2));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 2);
 
@@ -318,7 +318,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_results_in_expected_namespace_info) {
     SETUP_TEST_LOG_SOURCE("transforming_model_results_in_expected_namespace_info");
 
     const auto ot(object_types::exception);
-    const auto m(factory.build_single_type_model_in_module(0, ot, 0,
+    const auto m(factory.make_single_type_model_in_module(0, ot, 0,
             true/*add_model_module*/));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -345,7 +345,7 @@ BOOST_AUTO_TEST_CASE(transforming_module_in_external_module_results_in_expected_
     SETUP_TEST_LOG_SOURCE("transforming_module_in_external_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::value_object);
-    auto m(factory.build_single_type_model_in_module(0, ot, 1));
+    auto m(factory.make_single_type_model_in_module(0, ot, 1));
     m.name().external_module_path().push_back(external_module);
     BOOST_REQUIRE(m.modules().size() == 1);
     auto module(m.modules().begin()->second);
@@ -377,7 +377,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_module_in_external_module_results_in_exp
     SETUP_TEST_LOG_SOURCE("transforming_model_module_in_external_module_results_in_expected_namespace_info");
 
     const auto ot(object_types::value_object);
-    auto m(factory.build_single_type_model_in_module(0, ot, 0,
+    auto m(factory.make_single_type_model_in_module(0, ot, 0,
             true/*add_model_module*/));
     m.name().external_module_path().push_back(external_module);
     BOOST_REQUIRE(m.modules().size() == 1);
@@ -409,7 +409,7 @@ BOOST_AUTO_TEST_CASE(transforming_model_module_in_external_module_results_in_exp
 BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
     SETUP_TEST_LOG_SOURCE("transforming_object_results_in_expected_class_info");
 
-    const auto m(factory.build_single_type_model_in_module());
+    const auto m(factory.make_single_type_model_in_module());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     dogen::sml_to_cpp::context c;

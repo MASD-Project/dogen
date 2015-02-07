@@ -43,7 +43,7 @@ workflow::obtain_file_names_activity(const settings::selector& s,
     const formatters::container& c,
     const sml::model& m) const {
     formattables::file_name_factory f;
-    return f.build(s, c, m);
+    return f.make(s, c, m);
 }
 
 std::unordered_map<
@@ -56,9 +56,8 @@ workflow::obtain_file_properties_activity(
     std::unordered_map<std::string, boost::filesystem::path> >&
     file_names) const {
     formattables::file_properties_factory f;
-    return f.build(s, c, file_names, m);
+    return f.make(s, c, file_names, m);
 }
-
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::execute(const settings::selector& s, const formatters::container& c,

@@ -49,12 +49,12 @@ const std::string unexpected_project_dir("Project directories cannot be");
 
 dogen::config::knitting_settings target_source_and_include() {
     return dogen::config::test::mock_settings_factory::
-        build_knitting_settings(target, src_dir, include_dir, epp);
+        make_knitting_settings(target, src_dir, include_dir, epp);
 }
 
 dogen::config::knitting_settings target_only() {
     return dogen::config::test::mock_settings_factory::
-        build_knitting_settings(target, empty_dir, empty_dir, empty);
+        make_knitting_settings(target, empty_dir, empty_dir, empty);
 }
 
 dogen::config::knitting_settings split_project(const bool split) {

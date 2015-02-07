@@ -51,8 +51,8 @@ private:
 
 public:
     /**
-     * @brief Builds a field instance given a definition, the original
-     * key and zero or more values.
+     * @brief Creates a field instance given a definition, the
+     * original key and zero or more values.
      *
      * @pre If values has more than one element, the field's value
      * type must be a collection.
@@ -60,7 +60,7 @@ public:
      * @pre Values must be valid according to the type in the field
      * definition.
      */
-    field_instance build(const field_definition& fd,
+    field_instance make(const field_definition& fd,
         const std::list<std::string>& v) const;
 
 private:

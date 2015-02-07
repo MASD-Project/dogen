@@ -118,7 +118,7 @@ public:
      *
      * @pre load reference data must have been called.
      */
-    general_settings build(const dynamic::object& o) const;
+    general_settings make(const dynamic::object& o) const;
 
 private:
     const std::forward_list<boost::filesystem::path>& data_files_directories_;

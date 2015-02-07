@@ -158,7 +158,7 @@ void grapher::add(const qname& target,
     }
 }
 
-void grapher::build() {
+void grapher::generate() {
     BOOST_LOG_SEV(lg, debug) << "Building graph.";
     require_not_built();
 

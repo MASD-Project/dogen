@@ -94,13 +94,13 @@ mock_processed_object_factory::to_object_name(const unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
-build_uml_message(const unsigned int n) {
+make_uml_message(const unsigned int n) {
     processed_object r(create_object(object_types::uml_message, n));
     return r;
 }
 
 processed_object mock_processed_object_factory::
-build_uml_note(const unsigned int n) {
+make_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
 
     r.comment().documentation(note_text);
@@ -109,7 +109,7 @@ build_uml_note(const unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
-build_uml_note_with_marker(const unsigned int n) {
+make_uml_note_with_marker(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
     std::ostringstream s;
     s << "#DOGEN dia.comment=true" << std::endl << std::endl
@@ -123,16 +123,16 @@ build_uml_note_with_marker(const unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
-build_empty_uml_note(const unsigned int n) {
+make_empty_uml_note(const unsigned int n) {
     processed_object r(create_object(object_types::uml_note, n));
     return r;
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::
-build_uml_note_inside_large_package(unsigned int n) {
+make_uml_note_inside_large_package(unsigned int n) {
     std::array<processed_object, 2> r = {{
-            build_large_package(n),
-            build_uml_note(++n),
+            make_large_package(n),
+            make_uml_note(++n),
         }};
 
     r[1].child_node_id(r[0].id());
@@ -140,10 +140,10 @@ build_uml_note_inside_large_package(unsigned int n) {
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::
-build_empty_uml_note_inside_large_package(unsigned int n) {
+make_empty_uml_note_inside_large_package(unsigned int n) {
     std::array<processed_object, 2> r = {{
-            build_large_package(n),
-            build_empty_uml_note(++n)
+            make_large_package(n),
+            make_empty_uml_note(++n)
         }};
 
     r[1].child_node_id(r[0].id());
@@ -151,10 +151,10 @@ build_empty_uml_note_inside_large_package(unsigned int n) {
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::
-build_uml_note_with_marker_inside_large_package(unsigned int n) {
+make_uml_note_with_marker_inside_large_package(unsigned int n) {
     std::array<processed_object, 2> r = {{
-            build_large_package(n),
-            build_uml_note_with_marker(++n)
+            make_large_package(n),
+            make_uml_note_with_marker(++n)
         }};
 
     r[1].child_node_id(r[0].id());
@@ -162,7 +162,7 @@ build_uml_note_with_marker_inside_large_package(unsigned int n) {
 }
 
 processed_object mock_processed_object_factory::
-build_class(const unsigned int n, const std::string& st) {
+make_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(object_types::uml_class, n));
     r.stereotype(st);
     r.comment().documentation(doxygen_comment);
@@ -171,28 +171,28 @@ build_class(const unsigned int n, const std::string& st) {
 }
 
 processed_object mock_processed_object_factory::
-build_class_with_property(const unsigned int n, const std::string& st) {
-    auto r(build_class(n, st));
+make_class_with_property(const unsigned int n, const std::string& st) {
+    auto r(make_class(n, st));
     r.properties().push_back(create_processed_property(n));
     return r;
 }
 
 processed_object mock_processed_object_factory::
-build_empty_named_class(const unsigned int n) {
+make_empty_named_class(const unsigned int n) {
     processed_object r(create_object(object_types::uml_class, n));
     return r;
 }
 
 processed_object mock_processed_object_factory::
-build_large_package(const unsigned int n) {
+make_large_package(const unsigned int n) {
     return create_named_object(object_types::uml_large_package, n);
 }
 
 std::array<processed_object, 2> mock_processed_object_factory::
-build_class_inside_large_package(unsigned int n, const std::string& st) {
+make_class_inside_large_package(unsigned int n, const std::string& st) {
     std::array<processed_object, 2> r = {{
-            build_large_package(n),
-            build_class(++n, st),
+            make_large_package(n),
+            make_class(++n, st),
         }};
 
     r[1].child_node_id(r[0].id());
@@ -200,11 +200,11 @@ build_class_inside_large_package(unsigned int n, const std::string& st) {
 }
 
 std::array<processed_object, 3> mock_processed_object_factory::
-build_class_inside_two_large_packages(unsigned int n, const std::string& st)  {
+make_class_inside_two_large_packages(unsigned int n, const std::string& st)  {
     std::array<processed_object, 3> r = {{
-            build_large_package(n),
-            build_large_package(++n),
-            build_class(++n, st),
+            make_large_package(n),
+            make_large_package(++n),
+            make_class(++n, st),
         }};
 
     r[1].child_node_id(r[0].id());
@@ -214,11 +214,11 @@ build_class_inside_two_large_packages(unsigned int n, const std::string& st)  {
 
 std::array<processed_object, 3>
 mock_processed_object_factory::
-build_realization(unsigned int n, const std::string& st) {
+make_realization(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
             create_object(object_types::uml_realization, n),
-            build_class(++n, st),
-            build_class(++n, st),
+            make_class(++n, st),
+            make_class(++n, st),
         }};
     r[0].connection(std::make_pair(r[1].id(), r[2].id()));
     return r;
@@ -226,11 +226,11 @@ build_realization(unsigned int n, const std::string& st) {
 
 std::array<processed_object, 3>
 mock_processed_object_factory::
-build_generalization(unsigned int n, const std::string& st) {
+make_generalization(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
             create_object(object_types::uml_generalization, n),
-            build_class(++n, st),
-            build_class(++n, st),
+            make_class(++n, st),
+            make_class(++n, st),
         }};
     r[0].connection(std::make_pair(r[1].id(), r[2].id()));
     return r;
@@ -238,10 +238,10 @@ build_generalization(unsigned int n, const std::string& st) {
 
 std::array<processed_object, 3>
 mock_processed_object_factory::
-build_association(unsigned int n, const std::string& st) {
+make_association(unsigned int n, const std::string& st) {
     std::array<processed_object, 3> r = {{
-            build_class(n),
-            build_class(++n, st),
+            make_class(n),
+            make_class(++n, st),
             create_object(object_types::uml_association, ++n)
         }};
 
@@ -250,12 +250,12 @@ build_association(unsigned int n, const std::string& st) {
 }
 
 std::array<processed_object, 4> mock_processed_object_factory::
-build_generalization_inside_large_package(
+make_generalization_inside_large_package(
     unsigned int n, const std::string& st)  {
     std::array<processed_object, 4> r = {{
-            build_large_package(n),
-            build_class(++n, st),
-            build_class(++n, st),
+            make_large_package(n),
+            make_class(++n, st),
+            make_class(++n, st),
             create_object(object_types::uml_generalization, ++n)
         }};
 
@@ -268,10 +268,10 @@ build_generalization_inside_large_package(
 }
 
 std::array<processed_object, 4> mock_processed_object_factory::
-build_first_degree_cycle(unsigned int n) {
+make_first_degree_cycle(unsigned int n) {
     std::array<processed_object, 4> r = {{
-            build_class(n),
-            build_class(++n),
+            make_class(n),
+            make_class(++n),
             create_object(object_types::uml_generalization, ++n),
             create_object(object_types::uml_generalization, ++n)
         }};

@@ -54,14 +54,14 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object build_uml_message(const unsigned int n = 0);
+    static processed_object make_uml_message(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note without a dogen marker.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object build_uml_note(const unsigned int n = 0);
+    static processed_object make_uml_note(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note with a dogen comment marker.
@@ -69,14 +69,14 @@ public:
      * @param n identifier used for object ID generation.
      */
     static processed_object
-    build_uml_note_with_marker(const unsigned int n = 0);
+    make_uml_note_with_marker(const unsigned int n = 0);
 
     /**
      * @brief Generates an empty UML note.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object build_empty_uml_note(const unsigned int n = 0);
+    static processed_object make_empty_uml_note(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note inside a large package.
@@ -84,7 +84,7 @@ public:
      * @param n identifier used for object ID generation.
      */
     static std::array<processed_object, 2>
-    build_uml_note_inside_large_package(unsigned int n = 0);
+    make_uml_note_inside_large_package(unsigned int n = 0);
 
     /**
      * @brief Generates an empty UML note inside a large package.
@@ -92,7 +92,7 @@ public:
      * @param n identifier used for object ID generation.
      */
     static std::array<processed_object, 2>
-    build_empty_uml_note_inside_large_package(unsigned int n = 0);
+    make_empty_uml_note_inside_large_package(unsigned int n = 0);
 
     /**
      * @brief Generates an empty UML note inside a large package.
@@ -100,7 +100,7 @@ public:
      * @param n identifier used for object ID generation.
      */
     static std::array<processed_object, 2>
-    build_uml_note_with_marker_inside_large_package(unsigned int n = 0);
+    make_uml_note_with_marker_inside_large_package(unsigned int n = 0);
 
     /**
      * @brief Generates a new UML class.
@@ -108,7 +108,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static processed_object build_class(const unsigned int n = 0,
+    static processed_object make_class(const unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -117,7 +117,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static processed_object build_class_with_property(const unsigned int n = 0,
+    static processed_object make_class_with_property(const unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -125,14 +125,14 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object build_empty_named_class(const unsigned int n = 0);
+    static processed_object make_empty_named_class(const unsigned int n = 0);
 
     /**
      * @brief Generates a new UML large package.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object build_large_package(const unsigned int n = 0);
+    static processed_object make_large_package(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML class inside a large package, plus the
@@ -142,7 +142,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_class_inside_two_large_packages(unsigned int n = 0,
+    make_class_inside_two_large_packages(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -153,7 +153,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 2>
-    build_class_inside_large_package(unsigned int n = 0,
+    make_class_inside_large_package(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -164,7 +164,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_realization(unsigned int n = 0,
+    make_realization(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -175,7 +175,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_generalization(unsigned int n = 0,
+    make_generalization(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -186,7 +186,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 4>
-    build_generalization_inside_large_package(unsigned int n = 0,
+    make_generalization_inside_large_package(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -197,7 +197,7 @@ public:
      * @param st stereotype to apply to class.
      */
     static std::array<processed_object, 3>
-    build_association(unsigned int n = 0,
+    make_association(unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -206,7 +206,7 @@ public:
      * @param n identifier used for object ID generation.
      */
     static std::array<processed_object, 4>
-    build_first_degree_cycle(unsigned int n = 0);
+    make_first_degree_cycle(unsigned int n = 0);
 };
 
 } } }

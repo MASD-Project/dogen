@@ -273,50 +273,50 @@ public:
     /**
      * @brief Create a value object.
      */
-    object build_value_object(const unsigned int i, const qname& model_qn,
+    object make_value_object(const unsigned int i, const qname& model_qn,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    object build_value_object(unsigned int i,
+    object make_value_object(unsigned int i,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a concept.
      */
-    concept build_concept(const unsigned int i, const qname& model_qname) const;
+    concept make_concept(const unsigned int i, const qname& model_qname) const;
 
     /**
      * @brief Create an entity.
      */
-    object build_entity(const property& prop, const bool keyed,
+    object make_entity(const property& prop, const bool keyed,
         const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an enumeration.
      */
-    enumeration build_enumeration(const unsigned int i,
+    enumeration make_enumeration(const unsigned int i,
         const qname& model_qname,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an exception.
      */
-    object build_exception(const unsigned int i, const qname& model_qname,
+    object make_exception(const unsigned int i, const qname& model_qname,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a module from a qname.
      */
-    module build_module(const sml::qname& qn,
+    module make_module(const sml::qname& qn,
         const std::string& documentation = std::string()) const;
 
     /**
      * @brief Create a module from its components.
      */
-    module build_module(const unsigned int module_n = 0,
+    module make_module(const unsigned int module_n = 0,
         const std::string& model_name = std::string(),
         const std::list<std::string>& module_path = std::list<std::string>(),
         const std::string& documentation = std::string()) const;
@@ -325,20 +325,20 @@ public:
     /**
      * @brief Returns a qname derived from the input parameters
      */
-    qname build_qname(const unsigned int model_n = 0,
+    qname make_qname(const unsigned int model_n = 0,
         const unsigned int simple_n = 0) const;
 
     /**
      * @brief Builds a model with no types, concepts or modules.
      */
-    model build_empty_model(const unsigned int n = 0,
+    model make_empty_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    model build_single_type_model(const unsigned int n = 0,
+    model make_single_type_model(const unsigned int n = 0,
         const object_types ot = object_types::value_object,
         const bool add_model_module = false) const;
 
@@ -346,7 +346,7 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    model build_single_type_model_in_module(const unsigned int n = 0,
+    model make_single_type_model_in_module(const unsigned int n = 0,
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0,
         const bool add_model_module = false) const;
@@ -355,7 +355,7 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    model build_multi_type_model(const unsigned int n,
+    model make_multi_type_model(const unsigned int n,
         const unsigned int type_n,
         const object_types ot = object_types::value_object,
         const unsigned int mod_n = 0,
@@ -366,27 +366,27 @@ public:
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    model build_single_concept_model(const unsigned int n = 0,
+    model make_single_concept_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines another
      * concept, and two types that model each concept.
      */
-    model build_first_degree_concepts_model(const unsigned int n = 0,
+    model make_first_degree_concepts_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    model build_second_degree_concepts_model(const unsigned int n = 0,
+    model make_second_degree_concepts_model(const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with two base concepts and a concept that
      * refines both.
      */
-    model build_multiple_inheritance_concepts_model(
+    model make_multiple_inheritance_concepts_model(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
@@ -394,41 +394,41 @@ public:
      * refine it, and a concept that refines both of these. Finally a
      * type last concept.
      */
-    model build_diamond_inheritance_concepts_model(
+    model make_diamond_inheritance_concepts_model(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept.
      */
-    model build_object_with_parent_that_models_concept(
+    model make_object_with_parent_that_models_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept that refines a concept.
      */
-    model build_object_with_parent_that_models_a_refined_concept(
+    model make_object_with_parent_that_models_a_refined_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    model build_concept_that_refines_missing_concept(
+    model make_concept_that_refines_missing_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    model build_object_that_models_missing_concept(
+    model make_object_that_models_missing_concept(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief object that models concept with missing parent.
      */
-    model build_object_that_models_concept_with_missing_parent(
+    model make_object_that_models_concept_with_missing_parent(
         const unsigned int n = 0, const bool add_model_module = false) const;
 
 public:

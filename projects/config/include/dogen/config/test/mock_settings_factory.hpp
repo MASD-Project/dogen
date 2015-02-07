@@ -50,19 +50,19 @@ public:
      *
      * @return all facets if @e all is true, @e hash and @e types otherwise.
      */
-    static std::set<cpp_facet_types> build_facets(const bool all = true);
+    static std::set<cpp_facet_types> make_facets(const bool all = true);
 
     /**
      * @brief Returns the output settings configured to output to
      * file.
      */
-    static output_settings build_output_settings();
+    static output_settings make_output_settings();
 
     /**
      * @brief Returns the troubleshooting settings with all options
      * switched off.
      */
-    static troubleshooting_settings build_troubleshooting_settings();
+    static troubleshooting_settings make_troubleshooting_settings();
 
     /**
      * @brief Returns the C++ settings with empty source and include
@@ -70,7 +70,7 @@ public:
      *
      * All facets are enabled.
      */
-    static cpp_settings build_cpp_settings();
+    static cpp_settings make_cpp_settings();
 
     /**
      * @brief Returns the C++ settings with source and include
@@ -78,7 +78,7 @@ public:
      *
      * All facets are enabled.
      */
-    static cpp_settings build_cpp_settings(
+    static cpp_settings make_cpp_settings(
         const boost::filesystem::path& src_dir,
         const boost::filesystem::path& include_dir);
 
@@ -88,25 +88,25 @@ public:
      *
      * All facets are enabled.
      */
-    static cpp_settings build_cpp_settings(
+    static cpp_settings make_cpp_settings(
         const boost::filesystem::path& project_dir);
 
     /**
      * @brief Returns the input settings with the target and module
      * path set.
      */
-    static input_settings build_input_settings(
+    static input_settings make_input_settings(
         const boost::filesystem::path& target,
         const std::string& module_path);
 
-    static knitting_settings build_knitting_settings(
+    static knitting_settings make_knitting_settings(
         const boost::filesystem::path& target,
         const boost::filesystem::path& src_dir,
         const boost::filesystem::path& include_dir,
         const std::string& module_path,
         const bool verbose = true);
 
-    static knitting_settings build_knitting_settings(
+    static knitting_settings make_knitting_settings(
         const boost::filesystem::path& target,
         const boost::filesystem::path& project_dir,
         const std::string& module_path,

@@ -59,7 +59,7 @@ private:
     /**
      * @brief Setup the DAG of processed objects.
      */
-    graph_type build_graph_activity(const dia::diagram& diagram);
+    graph_type generate_graph_activity(const dia::diagram& diagram);
 
     /**
      * @brief Perform the transformation sub-workflow on the supplied

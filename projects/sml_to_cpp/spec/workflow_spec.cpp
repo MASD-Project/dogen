@@ -60,7 +60,7 @@ using boost::filesystem::path;
 // bool test_workflow(path t, path e, path a) {
 
 //     using dogen::config::test::mock_settings_factory;
-//     const auto s(mock_settings_factory::build_settings(t, a, module_path));
+//     const auto s(mock_settings_factory::make_settings(t, a, module_path));
 //     using dogen::utility::test::xml_deserialize;
 //     const auto m(xml_deserialize<dogen::sml::model>(t));
 

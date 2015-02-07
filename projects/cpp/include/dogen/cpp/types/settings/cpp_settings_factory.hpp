@@ -52,10 +52,10 @@ private:
 
 public:
     /**
-     * @brief Given a dynamic object, returns the corresponding C++
-     * settings. The missing values are defaulted.
+     * @brief Creates the C++ settings from the dynamic object
+     * properties. The missing values are defaulted.
      */
-    cpp_settings build(const dynamic::object& o) const;
+    cpp_settings make(const dynamic::object& o) const;
 
 private:
     cpp_settings default_settings_;

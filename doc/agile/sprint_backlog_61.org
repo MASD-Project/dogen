@@ -13,13 +13,13 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-07 Sat 20:49]
+Clock summary at [2015-02-07 Sat 22:12]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *12:47* |       |      |
+| *Total time*                                                        | *14:10* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 12:47 |      |
+| Active                                                              |         | 14:10 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:25 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -32,6 +32,8 @@ Clock summary at [2015-02-07 Sat 20:49]
 | COMPLETED Split global settings by formatter and facet              |         |       | 0:04 |
 | COMPLETED Create a settings facade for querying                     |         |       | 1:25 |
 | COMPLETED Implement file name factory                               |         |       | 3:39 |
+| COMPLETED Add field for =supported=                                 |         |       | 0:33 |
+| COMPLETED Rename =build= method on all factories to =make=          |         |       | 0:50 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -294,6 +296,19 @@ There is no longer a need to go to the formatter to obtain the file
 path. We should remove this and use the settings directly within the
 file name factory.
 
+*** COMPLETED Add field for =supported=                               :story:
+    CLOSED: [2015-02-07 Sat 21:23]
+    CLOCK: [2015-02-07 Sat 20:49]--[2015-02-07 Sat 21:22] =>  0:33
+
+We have a patch for this, just needs to be dusted and applied.
+
+*** COMPLETED Rename =build= method on all factories to =make=        :story:
+    CLOSED: [2015-02-07 Sat 22:12]
+    CLOCK: [2015-02-07 Sat 21:22]--[2015-02-07 Sat 22:12] =>  0:50
+
+Since "builder" is a fairly well-known pattern, we should avoid
+confusion. Rename the method.
+
 *** STARTED Create settings expander and switcher                     :story:
     CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
 
@@ -315,11 +330,6 @@ are enabled and disabled. This is due to:
 
 This could be done by the switcher. We should first expand the
 settings then switch them.
-
-*** Rename =build= method on all factories to =make=                  :story:
-
-Since "builder" is a fairly well-known pattern, we should avoid
-confusion. Rename the method.
 
 *** Populate entity's identity during transformation                  :story:
 

@@ -97,7 +97,7 @@ create_settings_for_formatter(
 }
 
 std::unordered_map<std::string, formatter_settings>
-formatter_settings_factory::build(const std::unordered_map<std::string,
+formatter_settings_factory::make(const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>
     >& field_definitions_by_formatter_name,
     const dynamic::object& o) const {

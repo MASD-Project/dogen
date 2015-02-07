@@ -70,7 +70,7 @@ public:
         sml::qname,
         std::unordered_map<std::string, boost::filesystem::path>
         >
-    build(const settings::selector& s, const formatters::container& c,
+    make(const settings::selector& s, const formatters::container& c,
         const sml::model& m) const;
 };
 

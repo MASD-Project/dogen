@@ -66,8 +66,8 @@ BOOST_AUTO_TEST_SUITE(association_indexer)
 BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
     SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_association_indexer");
 
-    auto a(factory.build_empty_model());
-    const auto e(factory.build_empty_model());
+    auto a(factory.make_empty_model());
+    const auto e(factory.make_empty_model());
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
 BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_association_indexer) {
     SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_association_indexer");
 
-    auto a(factory.build_single_type_model());
-    const auto e(factory.build_single_type_model());
+    auto a(factory.make_single_type_model());
+    const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
@@ -119,8 +119,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
 BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_indexer) {
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_association_indexer");
 
-    auto a(factory.build_empty_model());
-    const auto e(factory.build_empty_model());
+    auto a(factory.make_empty_model());
+    const auto e(factory.make_empty_model());
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_index
 BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_more_than_one_property_of_the_same_type_results_in_expected_indices");
 
-    auto m(factory.build_first_degree_concepts_model());
+    auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;

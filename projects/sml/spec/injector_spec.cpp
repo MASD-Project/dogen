@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_SUITE(injector)
 BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
     SETUP_TEST_LOG_SOURCE("single_type_model_results_in_adding_only_global_module");
 
-    auto a(factory.build_single_type_model());
+    auto a(factory.make_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
     BOOST_CHECK(!a.objects().begin()->second.containing_module());
     BOOST_REQUIRE(a.modules().empty());
@@ -286,7 +286,7 @@ BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
 BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
     SETUP_TEST_LOG_SOURCE("versioned_object_has_version_propery_injected");
 
-    auto m(factory.build_single_type_model());
+    auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(m.objects().begin()->second);
     BOOST_REQUIRE(ob.local_properties().empty());
@@ -307,7 +307,7 @@ BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     SETUP_TEST_LOG_SOURCE("visitable_object_with_no_leaves_throws");
 
-    auto m(factory.build_single_type_model());
+    auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& ob(m.objects().begin()->second);
     ob.is_visitable(true);

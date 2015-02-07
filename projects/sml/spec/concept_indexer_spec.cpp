@@ -69,8 +69,8 @@ BOOST_AUTO_TEST_SUITE(concept_indexer)
 BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_indexer) {
     SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_concept_indexer");
 
-    auto a(factory.build_empty_model());
-    const auto e(factory.build_empty_model());
+    auto a(factory.make_empty_model());
+    const auto e(factory.make_empty_model());
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
@@ -83,8 +83,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_indexer) {
 BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_concept_indexer) {
     SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_properties_is_untouched_by_concept_indexer");
 
-    auto a(factory.build_single_type_model());
-    const auto e(factory.build_single_type_model());
+    auto a(factory.make_single_type_model());
+    const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
@@ -123,8 +123,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_is_untouched_by_concept_index
 BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_indexer) {
     SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_concept_indexer");
 
-    auto a(factory.build_single_concept_model());
-    const auto e(factory.build_single_concept_model());
+    auto a(factory.make_single_concept_model());
+    const auto e(factory.make_single_concept_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     const auto mc(relationship_types::modeled_concepts);
     const auto par(relationship_types::parents);
 
-    auto m(factory.build_first_degree_concepts_model());
+    auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
@@ -228,7 +228,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     const auto mc(relationship_types::modeled_concepts);
     const auto par(relationship_types::parents);
 
-    auto m(factory.build_second_degree_concepts_model());
+    auto m(factory.make_second_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
@@ -310,7 +310,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_diamond_concept_inheritance_results_in_expected_indices");
 
-    auto m(factory.build_diamond_inheritance_concepts_model());
+    auto m(factory.make_diamond_inheritance_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -438,8 +438,8 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
 BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_indexer) {
     SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_indexer");
 
-    auto a(factory.build_object_with_parent_that_models_concept());
-    const auto e(factory.build_object_with_parent_that_models_concept());
+    auto a(factory.make_object_with_parent_that_models_concept());
+    const auto e(factory.make_object_with_parent_that_models_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     BOOST_REQUIRE(a.concepts().size() == 1);
@@ -487,7 +487,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
 
-    auto m(factory.build_object_with_parent_that_models_a_refined_concept());
+    auto m(factory.make_object_with_parent_that_models_a_refined_concept());
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     BOOST_REQUIRE(m.concepts().size() == 2);
@@ -576,7 +576,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_concept_that_refines_missing_concept_throws");
 
-    auto m(factory.build_concept_that_refines_missing_concept());
+    auto m(factory.make_concept_that_refines_missing_concept());
     BOOST_REQUIRE(m.objects().empty());
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
@@ -601,7 +601,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
 BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     SETUP_TEST_LOG_SOURCE("model_with_object_that_models_missing_concept_throws");
 
-    auto m(factory.build_object_that_models_missing_concept());
+    auto m(factory.make_object_that_models_missing_concept());
     BOOST_REQUIRE(m.concepts().empty());
     BOOST_REQUIRE(m.objects().size() == 1);
     {
@@ -628,9 +628,9 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
-    SETUP_TEST_LOG_SOURCE("build_object_that_models_concept_with_missing_parent");
+    SETUP_TEST_LOG_SOURCE("model_object_that_models_concept_with_missing_parent");
 
-    auto m(factory.build_object_that_models_concept_with_missing_parent());
+    auto m(factory.make_object_that_models_concept_with_missing_parent());
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
         const auto& qn(m.concepts().begin()->first);

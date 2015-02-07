@@ -82,12 +82,11 @@ bool value_factory::to_bool(const std::string& s) const {
     }
 }
 
-boost::shared_ptr<value> value_factory::create_text(
-    const std::string& v) const {
+boost::shared_ptr<value> value_factory::make_text(const std::string& v) const {
     return boost::make_shared<text>(v);
 }
 
-boost::shared_ptr<value> value_factory::create_text_collection(
+boost::shared_ptr<value> value_factory::make_text_collection(
     const std::list<std::string>& v) const {
     auto r(boost::make_shared<text_collection>());
     for (const auto& i : v)
@@ -97,7 +96,7 @@ boost::shared_ptr<value> value_factory::create_text_collection(
 }
 
 boost::shared_ptr<value>
-value_factory::create_boolean(const std::string& v) const {
+value_factory::make_boolean(const std::string& v) const {
     return boost::make_shared<boolean>(to_bool(v));
 }
 

@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_SUITE(extractor)
 BOOST_AUTO_TEST_CASE(dependency_graph_of_object_with_no_properties_and_no_inheritance_has_no_names_in_relationships) {
     SETUP_TEST_LOG_SOURCE("dependency_graph_of_object_with_no_properties_and_no_inheritance_has_no_names_in_relationships");
 
-    const auto m(factory.build_single_type_model());
+    const auto m(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_CHECK(m.objects().size() == 1);
 

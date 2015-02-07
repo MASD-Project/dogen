@@ -51,7 +51,7 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
 cpp_settings_factory::cpp_settings_factory()
     : default_settings_(create_default_settings()) { }
 
-cpp_settings cpp_settings_factory::build(const dynamic::object& o) const {
+cpp_settings cpp_settings_factory::make(const dynamic::object& o) const {
     cpp_settings r(default_settings_);
 
     using namespace dynamic;

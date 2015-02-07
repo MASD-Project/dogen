@@ -52,14 +52,14 @@ namespace types {
 
 class includes_factory : public formattables::includes_factory_interface {
 public:
-    formattables::includes build(const sml::model& m, const sml::qname qn,
+    formattables::includes make(const sml::model& m, const sml::qname qn,
         const std::unordered_map<
             sml::qname,
             includes_factory_interface::path_by_formatter_type>&
         relative_file_names_by_formatter_by_qname) const override;
 };
 
-formattables::includes includes_factory::build(const sml::model& /*m*/,
+formattables::includes includes_factory::make(const sml::model& /*m*/,
     const sml::qname /*qn*/,
     const std::unordered_map<sml::qname, includes_factory_interface::
                              path_by_formatter_type>&

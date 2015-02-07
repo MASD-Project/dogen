@@ -96,7 +96,7 @@ public:
      *
      * @pre Graph must not yet have been built.
      */
-    void build();
+    void generate();
 
     /**
      * @brief Returns the generated graph.
