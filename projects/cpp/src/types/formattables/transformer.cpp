@@ -185,6 +185,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     e.name(qn.simple_name());
     e.documentation(documentation);
+    e.identity(sml::string_converter::convert(qn));
 
     name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
@@ -193,10 +194,9 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     // hack. logging is causing an expected slow down.
     const auto i(file_properties_by_qname_by_formatter_type_.find(qn));
     if (i == file_properties_by_qname_by_formatter_type_.end()) {
-        const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << n;
+        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << e.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_properties + n));
+        // type_has_no_file_properties + e.identity()));
     } else
         e.file_properties_by_formatter_name(i->second);
 }

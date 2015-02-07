@@ -13,13 +13,13 @@ implementing the types header formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-07 Sat 22:12]
+Clock summary at [2015-02-07 Sat 22:29]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *14:10* |       |      |
+| *Total time*                                                        | *14:17* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 14:10 |      |
+| Active                                                              |         | 14:17 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:25 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -34,6 +34,7 @@ Clock summary at [2015-02-07 Sat 22:12]
 | COMPLETED Implement file name factory                               |         |       | 3:39 |
 | COMPLETED Add field for =supported=                                 |         |       | 0:33 |
 | COMPLETED Rename =build= method on all factories to =make=          |         |       | 0:50 |
+| COMPLETED Populate entity's identity during transformation          |         |       | 0:07 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -309,6 +310,39 @@ We have a patch for this, just needs to be dusted and applied.
 Since "builder" is a fairly well-known pattern, we should avoid
 confusion. Rename the method.
 
+*** COMPLETED Populate entity's identity during transformation        :story:
+    CLOSED: [2015-02-07 Sat 22:29]
+    CLOCK: [2015-02-07 Sat 22:21]--[2015-02-07 Sat 22:28] =>  0:07
+
+In order to use the settings selector, we need entities to have their
+identity properly populated.
+
+*** Populate the local settings                                       :story:
+
+We need to read the dynamic object for each SML entity and use it to
+populate all the various local settings.
+
+*** Implement include generation for class header formatter           :story:
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+Notes:
+
+- rename header file to file name override or something else quite
+  distinct. We need to ensure it is obvious that this property is only
+  used for non-dogen models.
+
 *** STARTED Create settings expander and switcher                     :story:
     CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
 
@@ -330,26 +364,6 @@ are enabled and disabled. This is due to:
 
 This could be done by the switcher. We should first expand the
 settings then switch them.
-
-*** Populate entity's identity during transformation                  :story:
-
-In order to use the settings selector, we need entities to have their
-identity properly populated.
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via dynamic extensions, so we can start using
-  STL, Boost etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
 
 *** Includer generation should be done from dynamic extensions        :story:
 

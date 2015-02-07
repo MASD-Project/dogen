@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/settings/selection_error.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 
@@ -97,9 +98,8 @@ select_formatter_settings(const std::string& identity,
 
 const formatter_settings& selector::select_formatter_settings(
     const sml::qname& qn, const std::string& formatter_name) const {
-    // FIXME: hack for now, need a way of generating identify from
-    // qname.
-    return select_formatter_settings(qn.simple_name(), formatter_name);
+    const auto identity(sml::string_converter::convert(qn));
+    return select_formatter_settings(identity, formatter_name);
 }
 
 const cpp::settings::settings& selector::settings() const {
