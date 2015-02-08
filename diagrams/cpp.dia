@@ -25135,7 +25135,7 @@ the SML model itself.
                 <dia:string>#s#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const settings::settings&amp;#</dia:string>
+                <dia:string>#const settings::selector&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

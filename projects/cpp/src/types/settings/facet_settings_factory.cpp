@@ -108,6 +108,8 @@ facet_settings facet_settings_factory::create_settings_for_facet(
                 r.postfix(get_text_content(*fd.default_value()));
             }
         }
+
+        // FIXME: check for all found_xxx or throw
     }
 
     return r;
