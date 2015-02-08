@@ -1612,6 +1612,15 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider using boost pointer container for formatters             :story:
+
+At present we are using a container of shared pointers to house the
+different formatter types. These are then encased on a "container"
+class. However, in reality we are passing around references to that
+container class; it seems we do not need shared pointers at all. We
+should look into using a [[http://www.boost.org/doc/libs/1_57_0/libs/ptr_container/doc/ptr_container.html#motivation][boost pointer container]]. We do not have dogen
+support for this so we would have to add it first.
+
 *** Remove new lines from all text to be logged                       :story:
 
 We should strive to write to the log one line per "record". This makes
