@@ -13,14 +13,14 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-08 Sun 03:57]
+Clock summary at [2015-02-08 Sun 18:40]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *15:34* |       |      |
+| *Total time*                                                        | *16:40* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 15:34 |      |
-| STARTED Sprint and product backlog grooming                         |         |       | 0:29 |
+| Active                                                              |         | 16:40 |      |
+| STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
 | COMPLETED Create a =formattable= base class                         |         |       | 0:32 |
@@ -35,8 +35,9 @@ Clock summary at [2015-02-08 Sun 03:57]
 | COMPLETED Add field for =supported=                                 |         |       | 0:33 |
 | COMPLETED Rename =build= method on all factories to =make=          |         |       | 0:50 |
 | COMPLETED Populate entity's identity during transformation          |         |       | 0:07 |
+| COMPLETED Analysis on formattable types and formatter integration   |         |       | 1:13 |
+| COMPLETED Split file properties from includes                       |         |       | 0:57 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
-| STARTED Analysis on formattable types and formatter integration     |         |       | 1:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -387,26 +388,35 @@ identity properly populated.
   and for top-level, =xxx_provider_selector=. Sample methods: select
   providers for object, select providers for exception, etc.
 
-*** Split file properties from includes                               :story:
+*** COMPLETED Split file properties from includes                     :story:
+    CLOSED: [2015-02-08 Sun 18:33]
+    CLOCK: [2015-02-08 Sun 17:42]--[2015-02-08 Sun 18:39] =>  0:57
 
 Split file properties from includes. File properties must exist at the
 formattable level because all formattables must have a relative and
 absolute path; only entities require includes. We need two separate
 containers, both by formatter name.
 
-*** Remove includes factory interface                                 :story:
-
-Remove the includes factory interface and add it directly to the
-formatter. includes factory then becomes responsible for generating a
-container of qname to formatter name to includes.
-
-*** Rename file name factory and file properties factory              :story:
+*** COMPLETED Rename file name factory and file properties factory    :story:
+    CLOSED: [2015-02-08 Sun 18:33]
 
 The existing names factory should be renamed file properties factory
 and the file properties factory should be renamed includes
 factory. The includes factory will receive a container of file
 property rather than file name. Presumably the formatters will also
 receive the same container.
+
+*** File name generation is borked                                    :story:
+
+With the latest changes we started generating wonky file names:
+
+: 2015-02-08 18:33:37.215644 [DEBUG] [cpp.types.class_header_formatter] filename: types/..hpp
+
+*** Remove includes factory interface                                 :story:
+
+Remove the includes factory interface and add it directly to the
+formatter. includes factory then becomes responsible for generating a
+container of qname to formatter name to includes.
 
 *** Create provider and provider selector interfaces                  :story:
 
@@ -492,10 +502,10 @@ are enabled and disabled. This is due to:
 This could be done by the switcher. We should first expand the
 settings then switch them.
 
-*** Absolute path support                                             :story:
+*** Add absolute path support to file name builder                    :story:
 
-We need to extend the file properties to have absolute and relative
-paths. The file name builder can be changed to read the relevant
+We have extended the file properties to have absolute and relative
+paths. The file name builder can now be changed to read the relevant
 properties for this. We need to look at the locator code to figure out
 how to create the path.
 

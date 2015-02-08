@@ -58,17 +58,24 @@ namespace formattables {
  */
 class transformer {
 public:
-    typedef std::unordered_map<std::string, file_properties>
-    file_properties_by_formatter_type;
-
-public:
     transformer(
-        const std::unordered_map<sml::qname,
-                                 file_properties_by_formatter_type>&
-        file_properties_by_qname_by_formatter_type,
-        const sml::model& m);
+        std::unordered_map<sml::qname,
+                           std::unordered_map<std::string,
+                                              formattables::includes>
+                           > includes_by_qname_by_formatter_name,
+        std::unordered_map<sml::qname,
+                           std::unordered_map<std::string,
+                                              formattables::file_properties>
+                           > file_properties_by_qname_by_formatter_name,
+            const sml::model& m);
 
 private:
+    /**
+     * @brief Populates all properties at the formattables base class level.
+     */
+    void
+    populate_formattable_properties(const sml::qname& qn, formattable& e) const;
+
     /**
      * @brief Populates all properties at the entity base class level.
      */
@@ -171,8 +178,13 @@ public:
     std::shared_ptr<formattable> transform(const sml::object& o) const;
 
 private:
-    const std::unordered_map<sml::qname, file_properties_by_formatter_type>&
-    file_properties_by_qname_by_formatter_type_;
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string, formattables::includes>
+                       > includes_by_qname_by_formatter_name_;
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string,
+                                          formattables::file_properties>
+                       > file_properties_by_qname_by_formatter_name_;
     const sml::model& model_;
 };
 

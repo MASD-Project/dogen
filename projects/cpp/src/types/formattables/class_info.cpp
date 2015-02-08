@@ -126,10 +126,11 @@ class_info::class_info()
 
 class_info::class_info(
     const std::string& identity,
+    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
+    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
     const std::list<dogen::cpp::formattables::property_info>& properties,
     const std::list<dogen::cpp::formattables::property_info>& all_properties,
     const bool has_primitive_properties,
@@ -151,10 +152,11 @@ class_info::class_info(
     const bool generate_complete_constructor,
     const bool enable_integrated_io)
     : dogen::cpp::formattables::entity(identity,
+      file_properties_by_formatter_name,
       name,
       documentation,
       namespaces,
-      file_properties_by_formatter_name),
+      includes_by_formatter_name),
       properties_(properties),
       all_properties_(all_properties),
       has_primitive_properties_(has_primitive_properties),

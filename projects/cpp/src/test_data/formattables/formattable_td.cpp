@@ -24,6 +24,7 @@
 #include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
@@ -40,6 +41,19 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+dogen::cpp::formattables::file_properties
+create_dogen_cpp_formattables_file_properties(const unsigned int position) {
+    return dogen::cpp::formattables::file_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::cpp::formattables::file_properties> create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::formattables::file_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_file_properties(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -50,6 +64,7 @@ namespace formattables {
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
+    v.file_properties_by_formatter_name(create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(position + 1));
 }
 
 formattable_generator::result_type*

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
-#include "dogen/cpp/io/formattables/includes_io.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -30,7 +29,7 @@ std::ostream& operator<<(std::ostream& s, const file_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::file_properties\"" << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"includes\": " << v.includes()
+      << "\"absolute_path\": " << "\"" << v.absolute_path().generic_string() << "\""
       << " }";
     return(s);
 }

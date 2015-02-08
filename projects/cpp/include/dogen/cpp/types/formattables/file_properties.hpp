@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/serialization/formattables/file_properties_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -46,7 +45,7 @@ public:
 public:
     file_properties(
         const boost::filesystem::path& relative_path,
-        const dogen::cpp::formattables::includes& includes);
+        const boost::filesystem::path& absolute_path);
 
 private:
     template<typename Archive>
@@ -56,15 +55,25 @@ private:
     friend void boost::serialization::load(Archive& ar, file_properties& v, unsigned int version);
 
 public:
+    /**
+     * @brief Relative path to the file.
+     */
+    /**@{*/
     const boost::filesystem::path& relative_path() const;
     boost::filesystem::path& relative_path();
     void relative_path(const boost::filesystem::path& v);
     void relative_path(const boost::filesystem::path&& v);
+    /**@}*/
 
-    const dogen::cpp::formattables::includes& includes() const;
-    dogen::cpp::formattables::includes& includes();
-    void includes(const dogen::cpp::formattables::includes& v);
-    void includes(const dogen::cpp::formattables::includes&& v);
+    /**
+     * @brief Absolute path to the file, indicating the location in the filesystem where it will be written.
+     */
+    /**@{*/
+    const boost::filesystem::path& absolute_path() const;
+    boost::filesystem::path& absolute_path();
+    void absolute_path(const boost::filesystem::path& v);
+    void absolute_path(const boost::filesystem::path&& v);
+    /**@}*/
 
 public:
     bool operator==(const file_properties& rhs) const;
@@ -78,7 +87,7 @@ public:
 
 private:
     boost::filesystem::path relative_path_;
-    dogen::cpp::formattables::includes includes_;
+    boost::filesystem::path absolute_path_;
 };
 
 } } }

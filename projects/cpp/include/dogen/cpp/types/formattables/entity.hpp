@@ -31,8 +31,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/formattables/entity_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,10 +52,11 @@ public:
 public:
     entity(
         const std::string& identity,
+        const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name);
+        const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name);
 
 private:
     template<typename Archive>
@@ -104,10 +105,10 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name() const;
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name();
-    void file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v);
-    void file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>&& v);
+    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name() const;
+    std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name();
+    void includes_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::includes>& v);
+    void includes_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::includes>&& v);
 
 protected:
     bool compare(const entity& rhs) const;
@@ -121,7 +122,7 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties> file_properties_by_formatter_name_;
+    std::unordered_map<std::string, dogen::cpp::formattables::includes> includes_by_formatter_name_;
 };
 
 inline entity::~entity() noexcept { }

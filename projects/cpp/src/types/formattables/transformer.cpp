@@ -87,6 +87,8 @@ const std::string too_many_parents(
 
 const std::string type_has_no_file_properties(
     "Could not find file properties for type: ");
+const std::string type_has_no_includes(
+    "Could not find includes for type: ");
 
 const std::string no_visitees("Visitor is not visiting any types: ");
 
@@ -175,13 +177,37 @@ namespace cpp {
 namespace formattables {
 
 transformer::transformer(
-    const std::unordered_map<sml::qname, file_properties_by_formatter_type>&
-    file_properties_by_qname_by_formatter_type, const sml::model& m)
-    : file_properties_by_qname_by_formatter_type_(
-        file_properties_by_qname_by_formatter_type), model_(m) { }
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string,
+                                          formattables::includes>
+                       > includes_by_qname_by_formatter_name,
+        std::unordered_map<sml::qname,
+                           std::unordered_map<std::string,
+                                              formattables::file_properties>
+                           > file_properties_by_qname_by_formatter_name,
+    const sml::model& m) :
+    includes_by_qname_by_formatter_name_(includes_by_qname_by_formatter_name),
+    file_properties_by_qname_by_formatter_name_(
+        file_properties_by_qname_by_formatter_name),
+    model_(m) { }
+
+void transformer::populate_formattable_properties(
+    const sml::qname& qn, formattable& f) const {
+    // FIXME: for now we are only supporting objects, so we need this
+    // hack. logging is causing an expected slow down.
+    const auto i(file_properties_by_qname_by_formatter_name_.find(qn));
+    if (i == file_properties_by_qname_by_formatter_name_.end()) {
+        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << f.identity();
+        // BOOST_THROW_EXCEPTION(transformation_error(
+        // type_has_no_file_properties + f.identity()));
+    } else
+        f.file_properties_by_formatter_name(i->second);
+}
 
 void transformer::populate_entity_properties(const sml::qname& qn,
     const std::string& documentation, entity& e) const {
+
+    populate_formattable_properties(qn, e);
 
     e.name(qn.simple_name());
     e.documentation(documentation);
@@ -192,13 +218,13 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     // FIXME: for now we are only supporting objects, so we need this
     // hack. logging is causing an expected slow down.
-    const auto i(file_properties_by_qname_by_formatter_type_.find(qn));
-    if (i == file_properties_by_qname_by_formatter_type_.end()) {
-        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << e.identity();
+    const auto i(includes_by_qname_by_formatter_name_.find(qn));
+    if (i == includes_by_qname_by_formatter_name_.end()) {
+        BOOST_LOG_SEV(lg, error) << type_has_no_includes << e.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_properties + e.identity()));
+        // type_has_no_includes + e.identity()));
     } else
-        e.file_properties_by_formatter_name(i->second);
+        e.includes_by_formatter_name(i->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,

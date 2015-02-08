@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
-#include "dogen/cpp/hash/formattables/includes_hash.hpp"
 
 namespace {
 
@@ -46,7 +45,7 @@ std::size_t file_properties_hasher::hash(const file_properties&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, v.includes());
+    combine(seed, hash_boost_filesystem_path(v.absolute_path()));
 
     return seed;
 }

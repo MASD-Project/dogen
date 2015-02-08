@@ -21,8 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/entity_io.hpp"
-#include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include "dogen/cpp/io/formattables/includes_io.hpp"
 
 namespace dogen {
 namespace cpp {

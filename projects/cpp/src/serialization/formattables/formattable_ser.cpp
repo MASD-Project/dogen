@@ -33,6 +33,7 @@
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/file_properties_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
@@ -40,6 +41,7 @@
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 BOOST_CLASS_TRACKING(
@@ -54,6 +56,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar << make_nvp("identity", v.identity_);
+    ar << make_nvp("file_properties_by_formatter_name", v.file_properties_by_formatter_name_);
 }
 
 template<typename Archive>
@@ -61,6 +64,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("identity", v.identity_);
+    ar >> make_nvp("file_properties_by_formatter_name", v.file_properties_by_formatter_name_);
 }
 
 } }

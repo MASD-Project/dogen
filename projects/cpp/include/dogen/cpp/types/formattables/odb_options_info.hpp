@@ -52,6 +52,7 @@ public:
 public:
     odb_options_info(
         const std::string& identity,
+        const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
         const std::string& model_name,
         const std::string& product_name,
         const boost::filesystem::path& file_path,

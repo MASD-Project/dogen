@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/formattables/includes_factory.hpp"
 #include "dogen/cpp/types/formattables/file_properties_factory.hpp"
-#include "dogen/cpp/types/formattables/file_name_factory.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -38,45 +38,45 @@ namespace formattables {
 
 std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, boost::filesystem::path> >
-workflow::obtain_file_names_activity(const settings::selector& s,
+    std::unordered_map<std::string, formattables::file_properties> >
+workflow::create_file_properties_activity(const settings::selector& s,
     const formatters::container& c,
     const sml::model& m) const {
-    formattables::file_name_factory f;
+    formattables::file_properties_factory f;
     return f.make(s, c, m);
 }
 
 std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, formattables::file_properties> >
-workflow::obtain_file_properties_activity(
-    const settings::selector& s,
+    std::unordered_map<std::string, formattables::includes> >
+workflow::create_includes_activity(const settings::selector& s,
     const formatters::container& c, const sml::model& m,
-    const std::unordered_map<sml::qname,
-    std::unordered_map<std::string, boost::filesystem::path> >&
-    file_names) const {
-    formattables::file_properties_factory f;
-    return f.make(s, c, file_names, m);
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, formattables::file_properties> >&
+    file_properties_by_formatter_name) const {
+    formattables::includes_factory f;
+    return f.make(s, c, file_properties_by_formatter_name, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::execute(const settings::selector& s, const formatters::container& c,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
-    const auto fn(obtain_file_names_activity(s, c, m));
-    const auto fp(obtain_file_properties_activity(s, c, m, fn));
+    const auto fp(create_file_properties_activity(s, c, m));
+    const auto inc(create_includes_activity(s, c, m, fp));
 
     std::forward_list<std::shared_ptr<formattables::formattable>> r;
     r.splice_after(r.before_begin(),
-        to_formattables_activity(fp, m, m.modules()));
+        to_formattables_activity(inc, fp, m, m.modules()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(fp, m, m.concepts()));
+        to_formattables_activity(inc, fp, m, m.concepts()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(fp, m, m.primitives()));
+        to_formattables_activity(inc, fp, m, m.primitives()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(fp, m, m.enumerations()));
+        to_formattables_activity(inc, fp, m, m.enumerations()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(fp, m, m.objects()));
+        to_formattables_activity(inc, fp, m, m.objects()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
     return r;

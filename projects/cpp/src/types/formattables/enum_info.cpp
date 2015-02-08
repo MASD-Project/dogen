@@ -52,17 +52,19 @@ namespace formattables {
 
 enum_info::enum_info(
     const std::string& identity,
+    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
+    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
     const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
     const std::string& type)
     : dogen::cpp::formattables::entity(identity,
+      file_properties_by_formatter_name,
       name,
       documentation,
       namespaces,
-      file_properties_by_formatter_name),
+      includes_by_formatter_name),
       enumerators_(enumerators),
       type_(type) { }
 

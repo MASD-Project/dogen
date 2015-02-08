@@ -18,60 +18,52 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FILE_NAME_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_FILE_NAME_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/object_types.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formatters/formatter_types.hpp"
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 /**
- * @brief Generates all relative file names for all types in model.
+ * @brief Creates all includes for all types in a model.
  */
-class file_name_factory {
+class includes_factory {
 private:
     /**
-     * @brief Given an SML object type, returns its corresponding
-     * formatter type.
+     * @brief Creates a map of includes factories by formatter name.
      */
-    formatters::formatter_types
-    formatter_type_for_object_type(const sml::object_types ot) const;
-
-    /**
-     * @brief Builds file names for all objects.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path>
-        >
-    file_name_for_objects(const settings::selector& s,
-        const formatters::container& c,
-        const std::unordered_map<sml::qname, sml::object>& objects) const;
+    std::unordered_map<std::string,
+                       std::shared_ptr<formattables::includes_factory_interface>
+                       >
+    create_includes_factories(const formatters::container& c) const;
 
 public:
     /**
-     * @brief Generate file names.
+     * @brief Create includes for the model.
      */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path>
-        >
-    make(const settings::selector& s, const formatters::container& c,
-        const sml::model& m) const;
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string, includes>
+                       >
+        make(const settings::selector& s, const formatters::container& c,
+            const std::unordered_map<sml::qname,
+            std::unordered_map<std::string, file_properties>
+            >& file_properties_by_formatter_name,
+            const sml::model& m) const;
 };
 
 } } }

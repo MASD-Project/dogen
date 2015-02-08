@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 
 namespace {
@@ -27,6 +28,15 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
 }
 
 }
@@ -39,6 +49,8 @@ std::size_t formattable_hasher::hash(const formattable&v) {
     std::size_t seed(0);
 
     combine(seed, v.identity());
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(v.file_properties_by_formatter_name()));
+
     return seed;
 }
 

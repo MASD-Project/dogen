@@ -91,7 +91,7 @@ void workflow::validate() const {
                                  c.class_formatters().end())
                              << " registered class formatter(s): ";
 
-    BOOST_LOG_SEV(lg, debug) << "Listing all class formatter.";
+    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
     for (const auto& f : c.class_formatters())
         BOOST_LOG_SEV(lg, debug) << "Name: '" << f->formatter_name() << "'";
 

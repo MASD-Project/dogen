@@ -24,8 +24,8 @@
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/cpp/test_data/formattables/includes_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
@@ -48,15 +48,15 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::cpp::formattables::file_properties
-create_dogen_cpp_formattables_file_properties(const unsigned int position) {
-    return dogen::cpp::formattables::file_properties_generator::create(position);
+dogen::cpp::formattables::includes
+create_dogen_cpp_formattables_includes(const unsigned int position) {
+    return dogen::cpp::formattables::includes_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::cpp::formattables::file_properties> create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties> r;
+std::unordered_map<std::string, dogen::cpp::formattables::includes> create_std_unordered_map_std_string_dogen_cpp_formattables_includes(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::formattables::includes> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_file_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_includes(position + i)));
     }
     return r;
 }
@@ -74,7 +74,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.namespaces(create_std_list_std_string(position + 2));
-    v.file_properties_by_formatter_name(create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(position + 3));
+    v.includes_by_formatter_name(create_std_unordered_map_std_string_dogen_cpp_formattables_includes(position + 3));
 }
 
 entity_generator::result_type*

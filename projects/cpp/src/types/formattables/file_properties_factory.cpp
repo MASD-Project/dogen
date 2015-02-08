@@ -23,8 +23,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/cpp/types/formattables/building_error.hpp"
+#include "dogen/sml/io/object_types_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/formattables/name_builder.hpp"
+#include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/file_properties_factory.hpp"
 
 namespace {
@@ -32,8 +36,11 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formattables.file_properties_factory"));
 
-const std::string duplicate_formatter_name("Formatter name already inserted: ");
-const std::string formatter_not_found("Formatter not found: ");
+const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string duplicate_qname("Duplicate qname: ");
+const std::string unsupported_object_type("Object type is not supported: ");
+const std::string unsupported_formatter_type(
+    "Formatter type is not supported: ");
 
 }
 
@@ -41,76 +48,118 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string,
-                   std::shared_ptr<formattables::includes_factory_interface>
-                   > file_properties_factory::
-create_includes_factories(const formatters::container& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes factories by id.";
+/**
+ * @brief Generates all of the file names for the formatters and
+ * qualified name.
+ */
+template<typename FormatterInterfacePtr>
+std::pair<sml::qname,
+          std::unordered_map<std::string, file_properties>
+          >
+generate(const settings::selector& s,
+    const std::forward_list<FormatterInterfacePtr>& formatters,
+    const sml::qname& qn) {
 
-    std::unordered_map<
-        std::string,
-        std::shared_ptr<formattables::includes_factory_interface>
-        > r;
+    std::unordered_map<std::string, file_properties> r;
 
-    for (const auto f : c.class_formatters()) {
-        auto b(f->make_includes_factory());
-        const auto pair(r.insert(std::make_pair(f->formatter_name(), b)));
-        if (!pair.second) {
+    for (const auto f : formatters) {
+        file_properties fp;
+        fp.relative_path(f->make_file_name(s, qn));
+        const auto i(r.insert(std::make_pair(f->formatter_name(), fp)));
+
+        if (!i.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
                                      << f->formatter_name();
-            BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
-                    f->formatter_name()));
+            BOOST_THROW_EXCEPTION(
+                building_error(duplicate_formatter_name + f->formatter_name()));
+        }
+    }
+    return std::make_pair(qn, r);
+}
+
+formatters::formatter_types file_properties_factory::
+formatter_type_for_object_type(const sml::object_types ot) const {
+    switch(ot) {
+    case sml::object_types::factory:
+    case sml::object_types::user_defined_service:
+    case sml::object_types::user_defined_value_object:
+    case sml::object_types::entity:
+    case sml::object_types::keyed_entity:
+    case sml::object_types::versioned_key:
+    case sml::object_types::unversioned_key:
+    case sml::object_types::visitor:
+        return formatters::formatter_types::class_formatter;
+        break;
+
+    case sml::object_types::exception:
+        return formatters::formatter_types::exception_formatter;
+        break;
+
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_object_type << ot;
+        BOOST_THROW_EXCEPTION(building_error(unsupported_object_type +
+                boost::lexical_cast<std::string>(ot)));
+    };
+}
+
+std::unordered_map<
+    sml::qname,
+    std::unordered_map<std::string, file_properties>
+    >
+file_properties_factory::file_properties_for_objects(
+    const settings::selector& s, const formatters::container& c,
+    const std::unordered_map<sml::qname, sml::object>& objects) const {
+
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string, file_properties>
+                       > r;
+
+    for (const auto& pair : objects) {
+        bool inserted(false);
+        const auto qn(pair.first);
+        const auto o(pair.second);
+
+        const auto ng(sml::generation_types::no_generation);
+        if (o.generation_type() == ng)
+            continue;
+
+        const auto ft(formatter_type_for_object_type(o.object_type()));
+        switch(ft) {
+        case formatters::formatter_types::class_formatter:
+            inserted = r.insert(generate(s, c.class_formatters(), qn)).second;
+            break;
+        default: {
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << unsupported_formatter_type << ft
+                                     << " name: " << n;
+            // FIXME
+            inserted = true;
+            // BOOST_THROW_EXCEPTION(building_error(unsupported_formatter_type +
+            //         boost::lexical_cast<std::string>(ft)));
+        } };
+
+        if (!inserted) {
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
         }
     }
 
-    BOOST_LOG_SEV(lg, debug)
-        << "Finished creating a map of includes factories by id.";
     return r;
 }
 
 std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, formattables::file_properties> >
-file_properties_factory::make(
-    const settings::selector& /*s*/, const formatters::container& c,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path> >&
-    file_names,
-    const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining file settings.";
+    std::unordered_map<std::string, file_properties>
+    >
+file_properties_factory::make(const settings::selector& s,
+    const formatters::container& c, const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Building all file names.";
 
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, formattables::file_properties> > r;
+    const auto r(file_properties_for_objects(s, c, m.objects()));
 
-    const auto includes_factories(create_includes_factories(c));
-    for (const auto pair : file_names) {
-        const auto& qn(pair.first);
-        std::unordered_map<std::string, formattables::file_properties> all_props;
-        for (const auto other_pair : pair.second) {
-            formattables::file_properties fp;
-            fp.relative_path(other_pair.second);
-
-            const auto& formatter_name(other_pair.first);
-            const auto i(includes_factories.find(formatter_name));
-            if (i == includes_factories.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found
-                                         << formatter_name;
-                BOOST_THROW_EXCEPTION(building_error(formatter_not_found +
-                        formatter_name));
-            }
-
-            const auto& f(*(i->second));
-            auto inc(f.make(m, qn, file_names));
-            fp.includes(inc);
-            all_props[formatter_name] = fp;
-        }
-        r[qn] = all_props;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "File settings names: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining file settings.";
+    BOOST_LOG_SEV(lg, debug) << "Finished building file names.";
+    BOOST_LOG_SEV(lg, debug) << "File names: " << r;
     return r;
 }
 

@@ -30,8 +30,10 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/includes.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,13 +51,20 @@ private:
     template<typename AssociativeContainerOfElement>
     std::forward_list<std::shared_ptr<formattables::formattable> >
     to_formattables_activity(
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, formattables::file_properties> >&
-        file_properties, const sml::model& m,
+        std::unordered_map<sml::qname,
+                           std::unordered_map<std::string, formattables::includes>
+                           > includes_by_qname_by_formatter_name,
+        std::unordered_map<sml::qname,
+                           std::unordered_map<std::string,
+                                              formattables::file_properties>
+                           > file_properties_by_qname_by_formatter_name,
+        const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<formattables::formattable> > r;
-        formattables::transformer t(file_properties, m);
+        formattables::transformer t(
+            includes_by_qname_by_formatter_name,
+            file_properties_by_qname_by_formatter_name, m);
+
         for (const auto& pair : c) {
             const auto ng(sml::generation_types::no_generation);
             if (pair.second.generation_type() == ng)
@@ -67,26 +76,26 @@ private:
     }
 
     /**
-     * @brief Gets the relative file name for all path keys.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path> >
-    obtain_file_names_activity(const settings::selector& s,
-        const formatters::container& c,
-        const sml::model& m) const;
-
-    /**
-     * @brief Creates all file properties for a model.
+     * @brief Gets the file properties for the model.
      */
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >
-    obtain_file_properties_activity(const settings::selector& s,
+    create_file_properties_activity(const settings::selector& s,
+        const formatters::container& c,
+        const sml::model& m) const;
+
+    /**
+     * @brief Creates the includes for the model.
+     */
+    std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, formattables::includes> >
+    create_includes_activity(const settings::selector& s,
         const formatters::container& c, const sml::model& m,
         const std::unordered_map<sml::qname,
-        std::unordered_map<std::string, boost::filesystem::path> >&
-        file_names) const;
+        std::unordered_map<std::string, formattables::file_properties> >&
+        file_properties_by_formatter_name) const;
 
 
 public:

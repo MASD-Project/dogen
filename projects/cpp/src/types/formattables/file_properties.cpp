@@ -26,23 +26,23 @@ namespace formattables {
 
 file_properties::file_properties(file_properties&& rhs)
     : relative_path_(std::move(rhs.relative_path_)),
-      includes_(std::move(rhs.includes_)) { }
+      absolute_path_(std::move(rhs.absolute_path_)) { }
 
 file_properties::file_properties(
     const boost::filesystem::path& relative_path,
-    const dogen::cpp::formattables::includes& includes)
+    const boost::filesystem::path& absolute_path)
     : relative_path_(relative_path),
-      includes_(includes) { }
+      absolute_path_(absolute_path) { }
 
 void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
     swap(relative_path_, other.relative_path_);
-    swap(includes_, other.includes_);
+    swap(absolute_path_, other.absolute_path_);
 }
 
 bool file_properties::operator==(const file_properties& rhs) const {
     return relative_path_ == rhs.relative_path_ &&
-        includes_ == rhs.includes_;
+        absolute_path_ == rhs.absolute_path_;
 }
 
 file_properties& file_properties::operator=(file_properties other) {
@@ -67,20 +67,20 @@ void file_properties::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
 }
 
-const dogen::cpp::formattables::includes& file_properties::includes() const {
-    return includes_;
+const boost::filesystem::path& file_properties::absolute_path() const {
+    return absolute_path_;
 }
 
-dogen::cpp::formattables::includes& file_properties::includes() {
-    return includes_;
+boost::filesystem::path& file_properties::absolute_path() {
+    return absolute_path_;
 }
 
-void file_properties::includes(const dogen::cpp::formattables::includes& v) {
-    includes_ = v;
+void file_properties::absolute_path(const boost::filesystem::path& v) {
+    absolute_path_ = v;
 }
 
-void file_properties::includes(const dogen::cpp::formattables::includes&& v) {
-    includes_ = std::move(v);
+void file_properties::absolute_path(const boost::filesystem::path&& v) {
+    absolute_path_ = std::move(v);
 }
 
 } } }

@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
+#include "dogen/cpp/hash/formattables/includes_hash.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_includes(const std::unordered_map<std::string, dogen::cpp::formattables::includes>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -62,7 +62,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(v.file_properties_by_formatter_name()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_includes(v.includes_by_formatter_name()));
 
     return seed;
 }

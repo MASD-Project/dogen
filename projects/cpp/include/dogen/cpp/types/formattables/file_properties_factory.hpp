@@ -25,46 +25,54 @@
 #pragma once
 #endif
 
-#include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/object_types.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
-#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates all file properties for all types in a model.
+ * @brief Generates the file properties for all types in model.
  */
 class file_properties_factory {
 private:
     /**
-     * @brief Creates a map of includes factories by formatter name.
+     * @brief Given an SML object type, returns its corresponding
+     * formatter type.
      */
-    std::unordered_map<std::string,
-                       std::shared_ptr<formattables::includes_factory_interface>
-                       >
-    create_includes_factories(const formatters::container& c) const;
+    formatters::formatter_types
+    formatter_type_for_object_type(const sml::object_types ot) const;
+
+    /**
+     * @brief Builds file properties for all objects.
+     */
+    std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, file_properties>
+        >
+    file_properties_for_objects(const settings::selector& s,
+        const formatters::container& c,
+        const std::unordered_map<sml::qname, sml::object>& objects) const;
 
 public:
     /**
-     * @brief Create file properties.
+     * @brief Generate file properties for a model.
      */
     std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, formattables::file_properties> >
-        make(const settings::selector& s, const formatters::container& c,
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string, boost::filesystem::path> >&
-            file_names,
-            const sml::model& m) const;
+        sml::qname,
+        std::unordered_map<std::string, file_properties>
+        >
+    make(const settings::selector& s, const formatters::container& c,
+        const sml::model& m) const;
 };
 
 } } }
