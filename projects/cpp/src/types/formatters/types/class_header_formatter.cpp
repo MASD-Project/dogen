@@ -50,24 +50,6 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-class includes_factory : public formattables::includes_factory_interface {
-public:
-    formattables::includes make(const sml::model& m, const sml::qname qn,
-        const std::unordered_map<
-            sml::qname,
-            includes_factory_interface::path_by_formatter_type>&
-        relative_file_names_by_formatter_by_qname) const override;
-};
-
-formattables::includes includes_factory::make(const sml::model& /*m*/,
-    const sml::qname /*qn*/,
-    const std::unordered_map<sml::qname, includes_factory_interface::
-                             path_by_formatter_type>&
-    /*relative_file_names_by_formatter_by_qname*/) const {
-    formattables::includes r;
-    return r;
-}
-
 boost::filesystem::path class_header_formatter::
 get_relative_path(const formattables::class_info& c) const {
     const auto& fs(c.file_properties_by_formatter_name());
@@ -94,16 +76,25 @@ std::string class_header_formatter::formatter_name() const {
     return traits::class_header_formatter_name();
 }
 
-boost::filesystem::path class_header_formatter::
-make_file_name(const settings::selector& s, const sml::qname& qn) const {
+formattables::file_properties
+class_header_formatter::provide_file_properties(const settings::selector& s,
+    const sml::qname& qn) const {
+    formattables::file_properties r;
     const auto f = file_name_builder_factory();
     const auto b(f.make(s, *this, qn));
-    return b.build();
+    r.relative_path(b.build());
+    return r;
 }
 
-std::shared_ptr<formattables::includes_factory_interface>
-class_header_formatter::make_includes_factory() const {
-    return std::make_shared<includes_factory>();
+formattables::includes class_header_formatter::provide_includes(
+    const settings::selector& /*s*/,
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, formattables::file_properties>
+        >& /*file_properties_by_formatter_name*/,
+    const sml::model& /*m*/) const {
+    formattables::includes r;
+    return r;
 }
 
 dogen::formatters::file

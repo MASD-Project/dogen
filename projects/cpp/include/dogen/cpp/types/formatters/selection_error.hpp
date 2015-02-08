@@ -18,32 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SELECTION_ERROR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SELECTION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/formattables/provider_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class formatter_interface : public formattables::provider_interface {
+/**
+ * @brief An error occurred whilst selecting providers.
+ */
+class selection_error : public virtual std::exception, public virtual boost::exception {
 public:
-    formatter_interface() = default;
-    formatter_interface(const formatter_interface&) = delete;
-    formatter_interface(formatter_interface&&) = default;
-    virtual ~formatter_interface() noexcept = 0;
+    selection_error() = default;
+    ~selection_error() noexcept = default;
 
 public:
-    /**
-     * @brief Type of the file this formatter generates.
-     */
-    virtual file_types file_type() const = 0;
+    selection_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } }

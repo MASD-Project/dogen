@@ -40,7 +40,7 @@
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
-#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
+#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,16 +49,6 @@ namespace cpp {
  * @brief Manages the c++ backend workflow.
  */
 class workflow : public backend::backend_interface {
-public:
-    typedef std::unordered_map<std::string, formattables::file_properties>
-    file_properties_by_formatter_type;
-    typedef std::unordered_map<std::string, boost::filesystem::path>
-    path_by_formatter_type;
-    typedef std::unordered_map<std::string,
-                               std::shared_ptr<
-                                   formattables::includes_factory_interface>
-                               > includes_factory_by_formatter_id;
-
 public:
     workflow() = default;
     workflow(const workflow&) = delete;
@@ -87,7 +77,8 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     create_formattables_activty(const settings::selector& s,
-        const formatters::container& c, const sml::model& m) const;
+        const formattables::provider_selector_interface& ps,
+        const sml::model& m) const;
 
     /**
      * @brief Create the files.

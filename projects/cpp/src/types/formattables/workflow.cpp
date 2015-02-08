@@ -40,31 +40,31 @@ std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, formattables::file_properties> >
 workflow::create_file_properties_activity(const settings::selector& s,
-    const formatters::container& c,
+    const provider_selector_interface& ps,
     const sml::model& m) const {
     formattables::file_properties_factory f;
-    return f.make(s, c, m);
+    return f.make(s, ps, m);
 }
 
 std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, formattables::includes> >
 workflow::create_includes_activity(const settings::selector& s,
-    const formatters::container& c, const sml::model& m,
+    const provider_selector_interface& ps, const sml::model& m,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >&
     file_properties_by_formatter_name) const {
     formattables::includes_factory f;
-    return f.make(s, c, file_properties_by_formatter_name, m);
+    return f.make(s, ps, file_properties_by_formatter_name, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::execute(const settings::selector& s, const formatters::container& c,
-    const sml::model& m) const {
+workflow::execute(const settings::selector& s,
+    const provider_selector_interface& ps, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
-    const auto fp(create_file_properties_activity(s, c, m));
-    const auto inc(create_includes_activity(s, c, m, fp));
+    const auto fp(create_file_properties_activity(s, ps, m));
+    const auto inc(create_includes_activity(s, ps, m, fp));
 
     std::forward_list<std::shared_ptr<formattables::formattable>> r;
     r.splice_after(r.before_begin(),

@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/includes_factory_interface.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PROVIDER_INTERFACE_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_PROVIDER_INTERFACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-includes_factory_interface::~includes_factory_interface() noexcept { }
+class provider_interface;
 
 } } }
+
+#endif

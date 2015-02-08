@@ -18,32 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PROVIDER_SELECTOR_INTERFACE_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_PROVIDER_SELECTOR_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/file_types.hpp"
+#include <memory>
+#include <forward_list>
+#include "dogen/sml/types/object_types.hpp"
 #include "dogen/cpp/types/formattables/provider_interface.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-class formatter_interface : public formattables::provider_interface {
+/**
+ * @brief Query interface for different types of providers.
+ */
+class provider_selector_interface {
 public:
-    formatter_interface() = default;
-    formatter_interface(const formatter_interface&) = delete;
-    formatter_interface(formatter_interface&&) = default;
-    virtual ~formatter_interface() noexcept = 0;
+    provider_selector_interface() = default;
+    provider_selector_interface(const provider_selector_interface&) = delete;
+    provider_selector_interface(provider_selector_interface&&) = default;
+    virtual ~provider_selector_interface() noexcept = 0;
 
 public:
     /**
-     * @brief Type of the file this formatter generates.
+     * @brief Returns all the available providers for the supplied SML
+     * object type.
      */
-    virtual file_types file_type() const = 0;
+    virtual const std::forward_list<std::shared_ptr<provider_interface> >&
+    select_providers_for_object(const sml::object_types ot) const = 0;
 };
 
 } } }

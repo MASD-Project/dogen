@@ -41,38 +41,11 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string,
-                   std::shared_ptr<formattables::includes_factory_interface>
-                   > includes_factory::
-create_includes_factories(const formatters::container& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating a map of includes factories by id.";
-
-    std::unordered_map<
-        std::string,
-        std::shared_ptr<formattables::includes_factory_interface>
-        > r;
-
-    for (const auto f : c.class_formatters()) {
-        auto b(f->make_includes_factory());
-        const auto pair(r.insert(std::make_pair(f->formatter_name(), b)));
-        if (!pair.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
-                                     << f->formatter_name();
-            BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
-                    f->formatter_name()));
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug)
-        << "Finished creating a map of includes factories by id.";
-    return r;
-}
-
 std::unordered_map<sml::qname,
                    std::unordered_map<std::string, includes>
                    >
 includes_factory::make(
-    const settings::selector& /*s*/, const formatters::container& /*c*/,
+    const settings::selector& /*s*/, const provider_selector_interface& /*ps*/,
     const std::unordered_map<sml::qname,
     std::unordered_map<std::string, file_properties>
     >& /*file_properties_by_formatter_name*/,

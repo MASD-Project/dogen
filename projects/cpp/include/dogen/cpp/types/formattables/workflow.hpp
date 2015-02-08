@@ -29,11 +29,11 @@
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/includes.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
+#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,7 +52,8 @@ private:
     std::forward_list<std::shared_ptr<formattables::formattable> >
     to_formattables_activity(
         std::unordered_map<sml::qname,
-                           std::unordered_map<std::string, formattables::includes>
+                           std::unordered_map<std::string,
+                                              formattables::includes>
                            > includes_by_qname_by_formatter_name,
         std::unordered_map<sml::qname,
                            std::unordered_map<std::string,
@@ -82,7 +83,7 @@ private:
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >
     create_file_properties_activity(const settings::selector& s,
-        const formatters::container& c,
+        const provider_selector_interface& ps,
         const sml::model& m) const;
 
     /**
@@ -92,18 +93,17 @@ private:
         sml::qname,
         std::unordered_map<std::string, formattables::includes> >
     create_includes_activity(const settings::selector& s,
-        const formatters::container& c, const sml::model& m,
+        const provider_selector_interface& ps, const sml::model& m,
         const std::unordered_map<sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >&
         file_properties_by_formatter_name) const;
-
 
 public:
     /**
      * @brief Executes the workflow.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    execute(const settings::selector& s, const formatters::container& c,
+    execute(const settings::selector& s, const provider_selector_interface& ps,
         const sml::model& m) const;
 };
 

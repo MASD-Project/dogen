@@ -18,44 +18,48 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PROVIDER_SELECTOR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PROVIDER_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
+#include <memory>
+#include <forward_list>
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
 #include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formattables {
+namespace formatters {
 
 /**
- * @brief Creates all includes for all types in a model.
+ * @brief Implementation of the provider selector that uses a
+ * formatter container to generate all of the providers.
  */
-class includes_factory {
+class provider_selector : public formattables::provider_selector_interface {
 public:
-    /**
-     * @brief Create includes for the model.
-     */
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, includes>
-                       >
-        make(const settings::selector& s,
-            const provider_selector_interface& ps,
-            const std::unordered_map<sml::qname,
-            std::unordered_map<std::string, file_properties>
-            >& file_properties_by_formatter_name,
-            const sml::model& m) const;
+    explicit provider_selector(const formatters::container& c);
+
+private:
+    std::forward_list<
+        std::shared_ptr<formattables::provider_interface>
+    > create_providers_for_regular_objects(const formatters::container& c) const;
+
+public:
+    const std::forward_list<
+        std::shared_ptr<formattables::provider_interface>
+    >&
+    select_providers_for_object(const sml::object_types ot) const override;
+
+private:
+    const std::forward_list<
+        std::shared_ptr<formattables::provider_interface>
+    > regular_objects_;
+    // FIXME
+    const std::forward_list<std::shared_ptr<formattables::provider_interface>
+    > empty;
 };
 
 } } }

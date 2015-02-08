@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-08 Sun 18:40]
+Clock summary at [2015-02-08 Sun 23:47]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *16:40* |       |      |
+| *Total time*                                                        | *18:12* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 16:40 |      |
+| Active                                                              |         | 18:12 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -37,6 +37,7 @@ Clock summary at [2015-02-08 Sun 18:40]
 | COMPLETED Populate entity's identity during transformation          |         |       | 0:07 |
 | COMPLETED Analysis on formattable types and formatter integration   |         |       | 1:13 |
 | COMPLETED Split file properties from includes                       |         |       | 0:57 |
+| COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -406,19 +407,9 @@ factory. The includes factory will receive a container of file
 property rather than file name. Presumably the formatters will also
 receive the same container.
 
-*** File name generation is borked                                    :story:
-
-With the latest changes we started generating wonky file names:
-
-: 2015-02-08 18:33:37.215644 [DEBUG] [cpp.types.class_header_formatter] filename: types/..hpp
-
-*** Remove includes factory interface                                 :story:
-
-Remove the includes factory interface and add it directly to the
-formatter. includes factory then becomes responsible for generating a
-container of qname to formatter name to includes.
-
-*** Create provider and provider selector interfaces                  :story:
+*** COMPLETED Create provider and provider selector interfaces        :story:
+    CLOSED: [2015-02-08 Sun 23:47]
+    CLOCK: [2015-02-08 Sun 22:15]--[2015-02-08 Sun 23:47] =>  1:32
 
 As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to move all properties in formatter interface
 to a provider interface in formattables; and to create a selector
@@ -430,6 +421,19 @@ provider selector and pass it in to the formattables workflow.
 Ensure that the file properties factory return a container by qname
 and the includes factory take that container in to generate the
 includes with the formatters.
+
+*** COMPLETED Remove includes factory interface                       :story:
+    CLOSED: [2015-02-08 Sun 23:47]
+
+Remove the includes factory interface and add it directly to the
+formatter. includes factory then becomes responsible for generating a
+container of qname to formatter name to includes.
+
+*** File name generation is borked                                    :story:
+
+With the latest changes we started generating wonky file names:
+
+: 2015-02-08 18:33:37.215644 [DEBUG] [cpp.types.class_header_formatter] filename: types/..hpp
 
 *** Start using =formatters::file= from legacy formatters             :story:
 

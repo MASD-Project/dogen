@@ -18,34 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTER_INTERFACE_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/formattables/provider_interface.hpp"
+#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-class formatter_interface : public formattables::provider_interface {
-public:
-    formatter_interface() = default;
-    formatter_interface(const formatter_interface&) = delete;
-    formatter_interface(formatter_interface&&) = default;
-    virtual ~formatter_interface() noexcept = 0;
-
-public:
-    /**
-     * @brief Type of the file this formatter generates.
-     */
-    virtual file_types file_type() const = 0;
-};
+provider_selector_interface::~provider_selector_interface() noexcept { }
 
 } } }
-
-#endif

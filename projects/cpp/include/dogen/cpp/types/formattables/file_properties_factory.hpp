@@ -31,10 +31,10 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/object_types.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -46,11 +46,14 @@ namespace formattables {
 class file_properties_factory {
 private:
     /**
-     * @brief Given an SML object type, returns its corresponding
-     * formatter type.
+     * @brief Generates all of the file names for the formatters and
+     * qualified name.
      */
-    formatters::formatter_types
-    formatter_type_for_object_type(const sml::object_types ot) const;
+    std::pair<sml::qname, std::unordered_map<std::string, file_properties> >
+    generate(const settings::selector& s,
+        const std::forward_list<
+            std::shared_ptr<formattables::provider_interface> >& providers,
+        const sml::qname& qn) const;
 
     /**
      * @brief Builds file properties for all objects.
@@ -60,7 +63,7 @@ private:
         std::unordered_map<std::string, file_properties>
         >
     file_properties_for_objects(const settings::selector& s,
-        const formatters::container& c,
+        const provider_selector_interface& ps,
         const std::unordered_map<sml::qname, sml::object>& objects) const;
 
 public:
@@ -71,7 +74,7 @@ public:
         sml::qname,
         std::unordered_map<std::string, file_properties>
         >
-    make(const settings::selector& s, const formatters::container& c,
+    make(const settings::selector& s, const provider_selector_interface& ps,
         const sml::model& m) const;
 };
 

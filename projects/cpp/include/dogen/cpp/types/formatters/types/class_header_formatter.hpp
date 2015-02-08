@@ -51,17 +51,23 @@ private:
     get_relative_path(const formattables::class_info& c) const;
 
 public:
-    file_types file_type() const override;
-
     std::string facet_name() const override;
 
     std::string formatter_name() const override;
 
-    boost::filesystem::path make_file_name(const settings::selector& s,
+    formattables::file_properties
+    provide_file_properties(const settings::selector& s,
         const sml::qname& qn) const override;
 
-    std::shared_ptr<formattables::includes_factory_interface>
-    make_includes_factory() const override;
+    formattables::includes provide_includes(const settings::selector& s,
+        const std::unordered_map<
+            sml::qname,
+            std::unordered_map<std::string, formattables::file_properties>
+            >& file_properties_by_formatter_name,
+        const sml::model& m) const override;
+
+public:
+    file_types file_type() const override;
 
 public:
     dogen::formatters::file format(const settings::selector& s,
