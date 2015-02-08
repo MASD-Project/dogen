@@ -40,6 +40,7 @@ Clock summary at [2015-02-08 Sun 03:57]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-02-08 Sun 17:28]--[2015-02-08 Sun 17:37] =>  0:09
     CLOCK: [2015-02-07 Sat 22:29]--[2015-02-07 Sat 22:33] =>  0:04
     CLOCK: [2015-02-07 Sat 15:45]--[2015-02-07 Sat 15:52] =>  0:07
     CLOCK: [2015-02-04 Wed 20:50]--[2015-02-04 Wed 21:08] =>  0:18
@@ -319,65 +320,8 @@ confusion. Rename the method.
 In order to use the settings selector, we need entities to have their
 identity properly populated.
 
-*** Populate the local settings                                       :story:
-
-We need to read the dynamic object for each SML entity and use it to
-populate all the various local settings.
-
-One slight complication: for local settings, we must not take into
-account default values. This is because otherwise we would end up
-overriding the "overriden" values globally with defaulted values. We
-need some kind of way of not creating any settings if the default
-values are being used, or of knowing that the default values were used
-and so not create local settings for those. This could be achieved by
-something similar to the "found" flags - =used_default= maybe; if all
-used defaults and "do not create defaults" is true, then do not add
-settings to container.
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via dynamic extensions, so we can start using
-  STL, Boost etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-Notes:
-
-- rename header file to file name override or something else quite
-  distinct. We need to ensure it is obvious that this property is only
-  used for non-dogen models.
-
-*** STARTED Create settings expander and switcher                     :story:
-    CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
-
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
-
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
-
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
-
-This could be done by the switcher. We should first expand the
-settings then switch them.
-
-*** STARTED Analysis on formattable types and formatter integration   :story:
+*** COMPLETED Analysis on formattable types and formatter integration :story:
+    CLOSED: [2015-02-08 Sun 17:36]
     CLOCK: [2015-02-08 Sun 02:45]--[2015-02-08 Sun 03:58] =>  1:13
 
 - split file properties from includes. File properties must exist at
@@ -442,6 +386,111 @@ settings then switch them.
 - names: =details_provider=, =information_provider=, just =provider=?
   and for top-level, =xxx_provider_selector=. Sample methods: select
   providers for object, select providers for exception, etc.
+
+*** Split file properties from includes                               :story:
+
+Split file properties from includes. File properties must exist at the
+formattable level because all formattables must have a relative and
+absolute path; only entities require includes. We need two separate
+containers, both by formatter name.
+
+*** Remove includes factory interface                                 :story:
+
+Remove the includes factory interface and add it directly to the
+formatter. includes factory then becomes responsible for generating a
+container of qname to formatter name to includes.
+
+*** Rename file name factory and file properties factory              :story:
+
+The existing names factory should be renamed file properties factory
+and the file properties factory should be renamed includes
+factory. The includes factory will receive a container of file
+property rather than file name. Presumably the formatters will also
+receive the same container.
+
+*** Create provider and provider selector interfaces                  :story:
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to move all properties in formatter interface
+to a provider interface in formattables; and to create a selector
+interface for those providers. We then need to implement that
+interface in formatters by using the formatter container and casting
+the types into the new interface. The main workflow will own the
+provider selector and pass it in to the formattables workflow.
+
+Ensure that the file properties factory return a container by qname
+and the includes factory take that container in to generate the
+includes with the formatters.
+
+*** Start using =formatters::file= from legacy formatters             :story:
+
+We need to get the legacy formatters to return the new
+=formatters::file=.
+
+*** Create a toggable replacement with legacy and new formatters      :story:
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
+the legacy formatters; we then need to overwrite those entries in the
+map that are produced by the new formatters. This should be easy to
+switch on and off since we will not be able to use the new formatters
+for a long while.
+
+*** Populate the local settings                                       :story:
+
+We need to read the dynamic object for each SML entity and use it to
+populate all the various local settings.
+
+One slight complication: for local settings, we must not take into
+account default values. This is because otherwise we would end up
+overriding the "overriden" values globally with defaulted values. We
+need some kind of way of not creating any settings if the default
+values are being used, or of knowing that the default values were used
+and so not create local settings for those. This could be achieved by
+something similar to the "found" flags - =used_default= maybe; if all
+used defaults and "do not create defaults" is true, then do not add
+settings to container.
+
+*** Implement include generation for class header formatter           :story:
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+Notes:
+
+- rename header file to file name override or something else quite
+  distinct. We need to ensure it is obvious that this property is only
+  used for non-dogen models.
+
+*** STARTED Create settings expander and switcher                     :story:
+    CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
+
+We need a class responsible for copying over all settings that exist
+both locally and globally. The idea is that, for those settings, the
+selector should be able to just query by formatter name locally and
+get the right values. This could be the expander.
+
+We also need a more intelligent class that determines what formatters
+are enabled and disabled. This is due to:
+
+- lack of support for a given formatter/facet by a type in the graph;
+  it must be propagated to all dependent types. We must be careful
+  with recursion (for example in the composite pattern).
+- a facet has been switched off. This must be propagated to all
+  formatters in that facet.
+- user has switched off a formatter. As with lack of support, this
+  must be propagated through the graph.
+
+This could be done by the switcher. We should first expand the
+settings then switch them.
 
 *** Absolute path support                                             :story:
 

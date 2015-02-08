@@ -28951,13 +28951,13 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O234">
       <dia:attribute name="obj_pos">
-        <dia:point val="443,127"/>
+        <dia:point val="443,126"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="442.95,126.95;478.2,134.45"/>
+        <dia:rectangle val="442.95,125.95;478.2,133.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="443,127"/>
+        <dia:point val="443,126"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.149999999999999"/>
@@ -29348,7 +29348,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="429.605,126"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="428.855,120.25;443.2,127.8"/>
+        <dia:rectangle val="428.855,120.25;443.2,126.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29357,7 +29357,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="429.605,126"/>
         <dia:point val="429.605,121"/>
         <dia:point val="443,121"/>
-        <dia:point val="443,127"/>
+        <dia:point val="443,126"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30679,7 +30679,7 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="478.15,127"/>
+        <dia:point val="478.15,126"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="477.4,121.25;489.832,127.8"/>
@@ -30688,7 +30688,7 @@ registry of all available formatters.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="478.15,127"/>
+        <dia:point val="478.15,126"/>
         <dia:point val="478.15,122"/>
         <dia:point val="489.632,122"/>
         <dia:point val="489.632,127"/>
