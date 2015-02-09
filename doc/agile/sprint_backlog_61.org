@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-08 Sun 23:47]
+Clock summary at [2015-02-09 Mon 20:54]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *18:12* |       |      |
+| *Total time*                                                        | *19:08* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 18:12 |      |
+| Active                                                              |         | 19:08 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -38,6 +38,7 @@ Clock summary at [2015-02-08 Sun 23:47]
 | COMPLETED Analysis on formattable types and formatter integration   |         |       | 1:13 |
 | COMPLETED Split file properties from includes                       |         |       | 0:57 |
 | COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
+| COMPLETED Improve building of file names                            |         |       | 0:56 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -341,7 +342,8 @@ identity properly populated.
 - the file types allows us to make any decisions related to where to
   place the file; we may need more file types to distinguish between
   the different cmakefiles, etc. It must be sufficient to determine
-  the absolute path.
+  the absolute path. We could also use them for public and private
+  includes.
 - the formatter must generate both the relative and absolute file
   names. This is because we need to know if the file is to be placed
   in include or source directory. This means that the formatter must
@@ -429,39 +431,154 @@ Remove the includes factory interface and add it directly to the
 formatter. includes factory then becomes responsible for generating a
 container of qname to formatter name to includes.
 
-*** File name generation is borked                                    :story:
+*** COMPLETED Improve building of file names                          :story:
+    CLOSED: [2015-02-09 Mon 20:50]
+    CLOCK: [2015-02-09 Mon 19:55]--[2015-02-09 Mon 20:51] =>  0:56
 
 With the latest changes we started generating wonky file names:
 
 : 2015-02-08 18:33:37.215644 [DEBUG] [cpp.types.class_header_formatter] filename: types/..hpp
 
-*** Start using =formatters::file= from legacy formatters             :story:
+We need a better way of knowing what is going into the file name
+builder. Split the file name builder parameters into its own type, and
+output the parameters when they get created by the factory. Pass those
+in to the builder as part of build.
 
-We need to get the legacy formatters to return the new
-=formatters::file=.
+*** COMPLETED Consider using an abstract factory in formatters        :story:
+    CLOSED: [2015-02-09 Mon 20:51]
 
-*** Create a toggable replacement with legacy and new formatters      :story:
+*Rationale*: We don't need it, lets just use the provider interface.
 
-As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
-the legacy formatters; we then need to overwrite those entries in the
-map that are produced by the new formatters. This should be easy to
-switch on and off since we will not be able to use the new formatters
-for a long while.
+At present we have a number of interfaces (or quasi-interfaces) coming
+out of formatter:
 
-*** Populate the local settings                                       :story:
+- file name generation
+- includes generation
+- opaque settings generation
+- opaque settings validator
 
-We need to read the dynamic object for each SML entity and use it to
-populate all the various local settings.
+Perhaps it makes more sense to aggregate them all into a factory of
+factories. We should look into the abstract factory pattern as it
+seems particularly suitable for this. The factory should remember the
+id of the formatter it comes from.
 
-One slight complication: for local settings, we must not take into
-account default values. This is because otherwise we would end up
-overriding the "overriden" values globally with defaulted values. We
-need some kind of way of not creating any settings if the default
-values are being used, or of knowing that the default values were used
-and so not create local settings for those. This could be achieved by
-something similar to the "found" flags - =used_default= maybe; if all
-used defaults and "do not create defaults" is true, then do not add
-settings to container.
+In terms of names, it is difficult to find a name for such an
+aggregate:
+
+- formatter components, e.g. =formatter_components_factory_interface=
+- formatter properties
+- formatter parts
+
+*** COMPLETED Support "cross-facet interference"                      :story:
+    CLOSED: [2015-02-09 Mon 20:52]
+
+*Rationale*: The new settings container supports this.
+
+In a few cases its useful to disable bits of a facet when another
+facet is switched off because those bits do not belong to the main
+facet the formatter is working on. At present this happens in the
+following cases:
+
+- Forward declaration of serialisation in domain when serialisation is
+  off
+- Friend of serialisation in domain when serialisation is
+  off
+- declaration and implementation of to_stream when IO is off
+- declaration and implementation of inserter when IO is off and
+  integrated IO is on.
+
+We need a way of accessing the on/off state of all facets from any
+formatter so that they can make cross facet decisions. A quick hack
+was to add yet another flag: =disable_io= which is disabled when the
+IO facet is not present and passed on to the relevant formatters. This
+needs to be replaced by a more general approach.
+
+*** COMPLETED Consider a more selective hashing generation             :epic:
+    CLOSED: [2015-02-09 Mon 20:52]
+
+*Rationale*: The new settings container supports this.
+
+At present we either generate hashing for all types or none at all. In
+practice, most users only need hashing for a few types. It would be
+great if we could have certain facets like hashing with a "disabled
+for all types except" approach. Users would then enable the types that
+they need.
+
+*** COMPLETED Use boilerplate to generate annotations                 :story:
+    CLOSED: [2015-02-09 Mon 20:53]
+
+*Rationale*: The new formatters will do this.
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to use my own licence and
+copyright attribution so that the generated code matches the general
+project choices.
+#+end_quote
+
+Remove all of the manual boilerplate and make use of the new
+class. This will involve bring across some dynamic extensions into the
+C++ model.
+
+*** COMPLETED Move all the fundamental configuration options into dynamic extensions :story:
+    CLOSED: [2015-02-09 Mon 20:53]
+
+*Rationale*: This is mostly done with the new settings.
+
+#+begin_quote
+*Story*: As a dogen user, I do not want to have to specify fundamental
+model options from the command line so that I do not forget to specify
+them and generate invalid models.
+#+end_quote
+
+There are a set of options that must not be supplied as command line
+arguments, such as backend and facet related properties etc. These
+should be attached to the diagram itself so that one does not need to
+supply it every time one code generates.
+
+**** Update all models and tests to use the new tags
+
+Once the config options are in we need to start making use of them to
+ensure they work exactly as before.
+
+**** Remove all C++ command line settings
+
+Once the overrides have been proven to work, we need to remove the
+command line options and make sure nothing breaks.
+
+**** Remove all of the config classes
+
+We have a number of settings in the =config= model that won't be used
+any longer:
+
+- =formatting_settings=
+- =annotation_settings=
+- =cpp_settings=
+- =code_generation_marker_settings=
+
+These should all be removed, with the corresponding command line
+arguments.
+
+*** Add absolute path support to file name builder                    :story:
+
+We have extended the file properties to have absolute and relative
+paths. The file name builder can now be changed to read the relevant
+properties for this. We need to look at the locator code to figure out
+how to create the path.
+
+We had assumed that all settings in config would be moved to
+dynamic. In reality, the project directory cannot be moved. This is
+because it is not hard-codable to a given diagram, but it is instead
+likely relative to the position of the directory in each computer. Due
+to this we need to somehow pass the config settings into the settings
+factories and take this into account when generating the c++
+settings. The same applies to include and source directories.
+
+We need to pass the knitting settings into the backend for this to work.
+
+*** Create a base formatter                                           :story:
+
+We could implement most of the formatter interface in a common base
+class and then only have the descendants override what they need.
 
 *** Implement include generation for class header formatter           :story:
 
@@ -484,6 +601,50 @@ Notes:
   distinct. We need to ensure it is obvious that this property is only
   used for non-dogen models.
 
+*** Consider renaming config settings to options                      :story:
+
+Now that it is well understood that settings are type-safe
+representations of dynamic objects, it makes sense to stop calling the
+command line options sent into dogen "settings". We should probably
+call them "options".
+
+Also delete all of the unused settings classes in config.
+
+*** Start using =formatters::file= from legacy formatters             :story:
+
+We need to get the legacy formatters to return the new
+=formatters::file=.
+
+*** Create a toggable replacement with legacy and new formatters      :story:
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
+the legacy formatters; we then need to overwrite those entries in the
+map that are produced by the new formatters. This should be easy to
+switch on and off since we will not be able to use the new formatters
+for a long while.
+
+This can be done in knit's cpp backend:
+
+: backend::value_type cpp_backend::generate()
+
+We just need to look at the map and update any values with the files
+from the new formatters.
+
+*** Populate the local settings                                       :story:
+
+We need to read the dynamic object for each SML entity and use it to
+populate all the various local settings.
+
+One slight complication: for local settings, we must not take into
+account default values. This is because otherwise we would end up
+overriding the "overriden" values globally with defaulted values. We
+need some kind of way of not creating any settings if the default
+values are being used, or of knowing that the default values were used
+and so not create local settings for those. This could be achieved by
+something similar to the "found" flags - =used_default= maybe; if all
+used defaults and "do not create defaults" is true, then do not add
+settings to container.
+
 *** STARTED Create settings expander and switcher                     :story:
     CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
 
@@ -505,13 +666,6 @@ are enabled and disabled. This is due to:
 
 This could be done by the switcher. We should first expand the
 settings then switch them.
-
-*** Add absolute path support to file name builder                    :story:
-
-We have extended the file properties to have absolute and relative
-paths. The file name builder can now be changed to read the relevant
-properties for this. We need to look at the locator code to figure out
-how to create the path.
 
 *** Includer generation should be done from dynamic extensions        :story:
 
@@ -570,28 +724,6 @@ headers.
 - we need multiple opaque settings (more than one formatter will need
   them).
 
-*** Consider using an abstract factory in formatters                  :story:
-
-At present we have a number of interfaces (or quasi-interfaces) coming
-out of formatter:
-
-- file name generation
-- includes generation
-- opaque settings generation
-- opaque settings validator
-
-Perhaps it makes more sense to aggregate them all into a factory of
-factories. We should look into the abstract factory pattern as it
-seems particularly suitable for this. The factory should remember the
-id of the formatter it comes from.
-
-In terms of names, it is difficult to find a name for such an
-aggregate:
-
-- formatter components, e.g. =formatter_components_factory_interface=
-- formatter properties
-- formatter parts
-
 *** Implement class header formatter                                  :story:
 
 - look at the old =om= types formatter implementation to see if there
@@ -615,83 +747,6 @@ Remove uses of old indenter.
 
 Not sure how applicable this would be, but we may be able to scavenge
 some tests.
-
-*** Support "cross-facet interference"                                :story:
-
-In a few cases its useful to disable bits of a facet when another
-facet is switched off because those bits do not belong to the main
-facet the formatter is working on. At present this happens in the
-following cases:
-
-- Forward declaration of serialisation in domain when serialisation is
-  off
-- Friend of serialisation in domain when serialisation is
-  off
-- declaration and implementation of to_stream when IO is off
-- declaration and implementation of inserter when IO is off and
-  integrated IO is on.
-
-We need a way of accessing the on/off state of all facets from any
-formatter so that they can make cross facet decisions. A quick hack
-was to add yet another flag: =disable_io= which is disabled when the
-IO facet is not present and passed on to the relevant formatters. This
-needs to be replaced by a more general approach.
-
-*** Consider a more selective hashing generation                       :epic:
-
-At present we either generate hashing for all types or none at all. In
-practice, most users only need hashing for a few types. It would be
-great if we could have certain facets like hashing with a "disabled
-for all types except" approach. Users would then enable the types that
-they need.
-
-*** Use boilerplate to generate annotations                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to use my own licence and
-copyright attribution so that the generated code matches the general
-project choices.
-#+end_quote
-
-Remove all of the manual boilerplate and make use of the new
-class. This will involve bring across some dynamic extensions into the
-C++ model.
-
-*** Move all the fundamental configuration options into dynamic extensions  :story:
-
-#+begin_quote
-*Story*: As a dogen user, I do not want to have to specify fundamental
-model options from the command line so that I do not forget to specify
-them and generate invalid models.
-#+end_quote
-
-There are a set of options that must not be supplied as command line
-arguments, such as backend and facet related properties etc. These
-should be attached to the diagram itself so that one does not need to
-supply it every time one code generates.
-
-**** Update all models and tests to use the new tags
-
-Once the config options are in we need to start making use of them to
-ensure they work exactly as before.
-
-**** Remove all C++ command line settings
-
-Once the overrides have been proven to work, we need to remove the
-command line options and make sure nothing breaks.
-
-**** Remove all of the config classes
-
-We have a number of settings in the =config= model that won't be used
-any longer:
-
-- =formatting_settings=
-- =annotation_settings=
-- =cpp_settings=
-- =code_generation_marker_settings=
-
-These should all be removed, with the corresponding command line
-arguments.
 
 *** Improve formatters code generation marker                         :story:
 
