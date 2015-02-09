@@ -46,6 +46,7 @@ public:
     cpp_settings(
         const bool enabled,
         const bool split_project,
+        const std::string& project_directory,
         const std::string& source_directory,
         const std::string& include_directory,
         const std::string& header_file_extension,
@@ -66,6 +67,11 @@ public:
 
     bool split_project() const;
     void split_project(const bool v);
+
+    const std::string& project_directory() const;
+    std::string& project_directory();
+    void project_directory(const std::string& v);
+    void project_directory(const std::string&& v);
 
     const std::string& source_directory() const;
     std::string& source_directory();
@@ -106,6 +112,7 @@ public:
 private:
     bool enabled_;
     bool split_project_;
+    std::string project_directory_;
     std::string source_directory_;
     std::string include_directory_;
     std::string header_file_extension_;

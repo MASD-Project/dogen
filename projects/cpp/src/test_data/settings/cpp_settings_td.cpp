@@ -45,12 +45,13 @@ void cpp_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.split_project(create_bool(position + 1));
-    v.source_directory(create_std_string(position + 2));
-    v.include_directory(create_std_string(position + 3));
-    v.header_file_extension(create_std_string(position + 4));
-    v.implementation_file_extension(create_std_string(position + 5));
-    v.enable_facet_folders(create_bool(position + 6));
-    v.enable_unique_file_names(create_bool(position + 7));
+    v.project_directory(create_std_string(position + 2));
+    v.source_directory(create_std_string(position + 3));
+    v.include_directory(create_std_string(position + 4));
+    v.header_file_extension(create_std_string(position + 5));
+    v.implementation_file_extension(create_std_string(position + 6));
+    v.enable_facet_folders(create_bool(position + 7));
+    v.enable_unique_file_names(create_bool(position + 8));
 }
 
 cpp_settings_generator::result_type

@@ -48,6 +48,7 @@
 #include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/state_td.hpp"
 #include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
+#include "dogen/cpp/test_data/formatters/file_details_td.hpp"
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/cpp/test_data/formatters/formatter_types_td.hpp"
 #include "dogen/cpp/test_data/formatters/odb/settings_td.hpp"

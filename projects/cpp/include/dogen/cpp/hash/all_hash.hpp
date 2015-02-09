@@ -48,6 +48,7 @@
 #include "dogen/cpp/hash/formattables/registrar_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/state_hash.hpp"
 #include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
+#include "dogen/cpp/hash/formatters/file_details_hash.hpp"
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/cpp/hash/formatters/formatter_types_hash.hpp"
 #include "dogen/cpp/hash/formatters/odb/settings_hash.hpp"

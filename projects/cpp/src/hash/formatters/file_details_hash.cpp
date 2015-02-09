@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/cpp_settings_hash.hpp"
+#include "dogen/cpp/hash/formatters/file_details_hash.hpp"
+#include "dogen/cpp/hash/formatters/file_types_hash.hpp"
 
 namespace {
 
@@ -33,20 +34,20 @@ inline void combine(std::size_t& seed, const HashableType& value)
 
 namespace dogen {
 namespace cpp {
-namespace settings {
+namespace formatters {
 
-std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
+std::size_t file_details_hasher::hash(const file_details&v) {
     std::size_t seed(0);
 
-    combine(seed, v.enabled());
     combine(seed, v.split_project());
+    combine(seed, v.file_type());
+    combine(seed, v.facet_directory());
+    combine(seed, v.extension());
+    combine(seed, v.facet_postfix());
+    combine(seed, v.formatter_postfix());
     combine(seed, v.project_directory());
     combine(seed, v.source_directory());
     combine(seed, v.include_directory());
-    combine(seed, v.header_file_extension());
-    combine(seed, v.implementation_file_extension());
-    combine(seed, v.enable_facet_folders());
-    combine(seed, v.enable_unique_file_names());
 
     return seed;
 }

@@ -33,6 +33,7 @@ cpp_settings::cpp_settings()
 cpp_settings::cpp_settings(
     const bool enabled,
     const bool split_project,
+    const std::string& project_directory,
     const std::string& source_directory,
     const std::string& include_directory,
     const std::string& header_file_extension,
@@ -41,6 +42,7 @@ cpp_settings::cpp_settings(
     const bool enable_unique_file_names)
     : enabled_(enabled),
       split_project_(split_project),
+      project_directory_(project_directory),
       source_directory_(source_directory),
       include_directory_(include_directory),
       header_file_extension_(header_file_extension),
@@ -52,6 +54,7 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(split_project_, other.split_project_);
+    swap(project_directory_, other.project_directory_);
     swap(source_directory_, other.source_directory_);
     swap(include_directory_, other.include_directory_);
     swap(header_file_extension_, other.header_file_extension_);
@@ -63,6 +66,7 @@ void cpp_settings::swap(cpp_settings& other) noexcept {
 bool cpp_settings::operator==(const cpp_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
         split_project_ == rhs.split_project_ &&
+        project_directory_ == rhs.project_directory_ &&
         source_directory_ == rhs.source_directory_ &&
         include_directory_ == rhs.include_directory_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
@@ -91,6 +95,22 @@ bool cpp_settings::split_project() const {
 
 void cpp_settings::split_project(const bool v) {
     split_project_ = v;
+}
+
+const std::string& cpp_settings::project_directory() const {
+    return project_directory_;
+}
+
+std::string& cpp_settings::project_directory() {
+    return project_directory_;
+}
+
+void cpp_settings::project_directory(const std::string& v) {
+    project_directory_ = v;
+}
+
+void cpp_settings::project_directory(const std::string&& v) {
+    project_directory_ = std::move(v);
 }
 
 const std::string& cpp_settings::source_directory() const {

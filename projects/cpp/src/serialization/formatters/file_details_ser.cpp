@@ -28,7 +28,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/cpp/serialization/settings/cpp_settings_ser.hpp"
+#include "dogen/cpp/serialization/formatters/file_details_ser.hpp"
+#include "dogen/cpp/serialization/formatters/file_types_ser.hpp"
 
 
 namespace boost {
@@ -36,32 +37,32 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::cpp::settings::cpp_settings& v,
+    const dogen::cpp::formatters::file_details& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("split_project", v.split_project_);
+    ar << make_nvp("file_type", v.file_type_);
+    ar << make_nvp("facet_directory", v.facet_directory_);
+    ar << make_nvp("extension", v.extension_);
+    ar << make_nvp("facet_postfix", v.facet_postfix_);
+    ar << make_nvp("formatter_postfix", v.formatter_postfix_);
     ar << make_nvp("project_directory", v.project_directory_);
     ar << make_nvp("source_directory", v.source_directory_);
     ar << make_nvp("include_directory", v.include_directory_);
-    ar << make_nvp("header_file_extension", v.header_file_extension_);
-    ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
-    ar << make_nvp("enable_facet_folders", v.enable_facet_folders_);
-    ar << make_nvp("enable_unique_file_names", v.enable_unique_file_names_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::cpp::settings::cpp_settings& v,
+    dogen::cpp::formatters::file_details& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("split_project", v.split_project_);
+    ar >> make_nvp("file_type", v.file_type_);
+    ar >> make_nvp("facet_directory", v.facet_directory_);
+    ar >> make_nvp("extension", v.extension_);
+    ar >> make_nvp("facet_postfix", v.facet_postfix_);
+    ar >> make_nvp("formatter_postfix", v.formatter_postfix_);
     ar >> make_nvp("project_directory", v.project_directory_);
     ar >> make_nvp("source_directory", v.source_directory_);
     ar >> make_nvp("include_directory", v.include_directory_);
-    ar >> make_nvp("header_file_extension", v.header_file_extension_);
-    ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
-    ar >> make_nvp("enable_facet_folders", v.enable_facet_folders_);
-    ar >> make_nvp("enable_unique_file_names", v.enable_unique_file_names_);
 }
 
 } }
@@ -69,16 +70,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::settings::cpp_settings& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::cpp::settings::cpp_settings& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::cpp::formatters::file_details& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::cpp::formatters::file_details& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::cpp::settings::cpp_settings& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::cpp::settings::cpp_settings& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::cpp::formatters::file_details& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::cpp::formatters::file_details& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::cpp::settings::cpp_settings& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::cpp::settings::cpp_settings& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::cpp::formatters::file_details& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::cpp::formatters::file_details& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::cpp::settings::cpp_settings& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::cpp::settings::cpp_settings& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::cpp::formatters::file_details& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::cpp::formatters::file_details& v, unsigned int version);
 
 } }

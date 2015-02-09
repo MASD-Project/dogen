@@ -48,6 +48,7 @@
 #include "dogen/cpp/io/formattables/registrar_info_io.hpp"
 #include "dogen/cpp/io/formattables/state_io.hpp"
 #include "dogen/cpp/io/formattables/visitor_info_io.hpp"
+#include "dogen/cpp/io/formatters/file_details_io.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/io/formatters/odb/settings_io.hpp"

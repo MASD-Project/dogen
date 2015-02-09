@@ -80,7 +80,7 @@ field_definition create_header_file_extension() {
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>(".hpp"));
+    r.default_value(boost::make_shared<text>("hpp"));
     return r;
 }
 
@@ -91,7 +91,7 @@ field_definition create_implementation_file_extension() {
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>(".cpp"));
+    r.default_value(boost::make_shared<text>("cpp"));
     return r;
 }
 

@@ -24,9 +24,9 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
-#include "dogen/cpp/types/formatters/file_name_builder.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
-#include "dogen/cpp/types/formatters/file_name_builder_factory.hpp"
+#include "dogen/cpp/types/formatters/file_details_factory.hpp"
+#include "dogen/cpp/types/formatters/file_properties_factory.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -37,7 +37,6 @@ const std::string file_properties_for_formatter_not_found(
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
 static logger lg(logger_factory(traits::class_header_formatter_name()));
-
 
 // FIXME
 const dogen::cpp::formattables::includes empty_includes =
@@ -52,11 +51,12 @@ namespace types {
 
 boost::filesystem::path class_header_formatter::
 get_relative_path(const formattables::class_info& c) const {
-    const auto& fs(c.file_properties_by_formatter_name());
-    const auto i(fs.find(formatter_name()));
-    if (i == fs.end()) {
+    const auto& fp(c.file_properties_by_formatter_name());
+    const auto i(fp.find(formatter_name()));
+    if (i == fp.end()) {
         BOOST_LOG_SEV(lg, error) << file_properties_for_formatter_not_found
                                  << formatter_name();
+
         BOOST_THROW_EXCEPTION(formatting_error(
                 file_properties_for_formatter_not_found +
                 formatter_name()));
@@ -79,11 +79,11 @@ std::string class_header_formatter::formatter_name() const {
 formattables::file_properties
 class_header_formatter::provide_file_properties(const settings::selector& s,
     const sml::qname& qn) const {
-    formattables::file_properties r;
-    const auto f = file_name_builder_factory();
-    const auto b(f.make(s, *this, qn));
-    r.relative_path(b.build());
-    return r;
+    file_details_factory fdf;
+    const auto fd(fdf.make(s, *this, qn));
+
+    file_properties_factory fpf;
+    return fpf.make(fd, qn);
 }
 
 formattables::includes class_header_formatter::provide_includes(

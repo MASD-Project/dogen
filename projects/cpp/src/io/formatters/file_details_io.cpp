@@ -21,7 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/settings/cpp_settings_io.hpp"
+#include "dogen/cpp/io/formatters/file_details_io.hpp"
+#include "dogen/cpp/io/formatters/file_types_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -33,9 +34,9 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen {
 namespace cpp {
-namespace settings {
+namespace formatters {
 
-std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
+std::ostream& operator<<(std::ostream& s, const file_details& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -43,16 +44,16 @@ std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::cpp_settings\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
+      << "\"__type__\": " << "\"dogen::cpp::formatters::file_details\"" << ", "
       << "\"split_project\": " << v.split_project() << ", "
+      << "\"file_type\": " << v.file_type() << ", "
+      << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
+      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
+      << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
+      << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\"" << ", "
       << "\"project_directory\": " << "\"" << tidy_up_string(v.project_directory()) << "\"" << ", "
       << "\"source_directory\": " << "\"" << tidy_up_string(v.source_directory()) << "\"" << ", "
-      << "\"include_directory\": " << "\"" << tidy_up_string(v.include_directory()) << "\"" << ", "
-      << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "
-      << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\"" << ", "
-      << "\"enable_facet_folders\": " << v.enable_facet_folders() << ", "
-      << "\"enable_unique_file_names\": " << v.enable_unique_file_names()
+      << "\"include_directory\": " << "\"" << tidy_up_string(v.include_directory()) << "\""
       << " }";
     return(s);
 }

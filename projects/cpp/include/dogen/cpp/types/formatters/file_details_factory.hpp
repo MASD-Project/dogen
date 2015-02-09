@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/cpp_settings_hash.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <string>
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
+#include "dogen/cpp/types/formatters/file_details.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace settings {
+namespace formatters {
 
-std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.enabled());
-    combine(seed, v.split_project());
-    combine(seed, v.project_directory());
-    combine(seed, v.source_directory());
-    combine(seed, v.include_directory());
-    combine(seed, v.header_file_extension());
-    combine(seed, v.implementation_file_extension());
-    combine(seed, v.enable_facet_folders());
-    combine(seed, v.enable_unique_file_names());
-
-    return seed;
-}
+/**
+ * @brief Creates all of the required file details, sourcing them from
+ * various places.
+ */
+class file_details_factory {
+public:
+    /**
+     * @brief Create file settings.
+     */
+    file_details make(const settings::selector& s,
+        const formatter_interface& f, const sml::qname qn) const;
+};
 
 } } }
+
+#endif

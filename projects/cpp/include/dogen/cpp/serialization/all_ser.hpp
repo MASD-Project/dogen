@@ -48,6 +48,7 @@
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/state_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
+#include "dogen/cpp/serialization/formatters/file_details_ser.hpp"
 #include "dogen/cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/cpp/serialization/formatters/formatter_types_ser.hpp"
 #include "dogen/cpp/serialization/formatters/odb/settings_ser.hpp"

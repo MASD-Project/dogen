@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_NAME_BUILDER_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_NAME_BUILDER_FACTORY_HPP
+#ifndef DOGEN_CPP_IO_FORMATTERS_FILE_DETAILS_IO_HPP
+#define DOGEN_CPP_IO_FORMATTERS_FILE_DETAILS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formatters/file_name_builder.hpp"
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
+#include <iosfwd>
+#include "dogen/cpp/types/formatters/file_details.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-/**
- * @brief Sets up a file name builder from settings.
- */
-class file_name_builder_factory {
-public:
-    /**
-     * @brief Set up the file name builder for a given formatter and
-     * qualified name.
-     */
-    file_name_builder make(const settings::selector& s,
-        const formatter_interface& f, const sml::qname qn) const;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::formatters::file_details& v);
 
 } } }
 
