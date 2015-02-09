@@ -1612,6 +1612,12 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Support for transactional writes                                  :story:
+
+It would be nice if dogen either generated all files or didn't touch
+the directory at all, at least as an option. We could simply generate
+into a temporary directory and then swap them at the end.
+
 *** Consider using boost pointer container for formatters             :story:
 
 At present we are using a container of shared pointers to house the
