@@ -57,18 +57,6 @@ struct field_definitions {
     static const dynamic::field_definition& split_project();
 
     /**
-     * @brief Name of the directory in which to place the
-     * implementation files.
-     */
-    static const dynamic::field_definition& source_directory();
-
-    /**
-     * @brief Name of the directory in which to place the header
-     * files.
-     */
-    static const dynamic::field_definition& include_directory();
-
-    /**
      * @brief Extension to use for header files, including the
      * leading dot.
      *
@@ -113,7 +101,6 @@ struct field_definitions {
          */
         static const dynamic::field_definition&
         requires_manual_default_constructor();
-
 
         /**
          * @brief If true, a manual move constructor must be generated

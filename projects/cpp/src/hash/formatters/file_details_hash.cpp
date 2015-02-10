@@ -30,6 +30,12 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -45,9 +51,9 @@ std::size_t file_details_hasher::hash(const file_details&v) {
     combine(seed, v.extension());
     combine(seed, v.facet_postfix());
     combine(seed, v.formatter_postfix());
-    combine(seed, v.project_directory());
-    combine(seed, v.source_directory());
-    combine(seed, v.include_directory());
+    combine(seed, hash_boost_filesystem_path(v.project_directory()));
+    combine(seed, hash_boost_filesystem_path(v.source_directory()));
+    combine(seed, hash_boost_filesystem_path(v.include_directory()));
 
     return seed;
 }

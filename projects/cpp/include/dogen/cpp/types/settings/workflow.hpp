@@ -29,8 +29,9 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/dynamic/types/indexer.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
@@ -67,7 +68,8 @@ private:
     /**
      * @brief Create the c++ settings.
      */
-    cpp_settings create_cpp_settings(const dynamic::object& o) const;
+    cpp_settings create_cpp_settings(const config::cpp_options& co,
+        const dynamic::object& o) const;
 
     /**
      * @brief Create the facet settings.
@@ -93,7 +95,8 @@ private:
     /**
      * @brief Creates the global settings.
      */
-    global_settings create_global_settings_activity(const dynamic::indexer& idx,
+    global_settings create_global_settings_activity(
+        const config::cpp_options& co, const dynamic::indexer& idx,
         const sml::model& m) const;
 
     /**
@@ -108,7 +111,8 @@ public:
      * @brief Generates the top-level settings from the supplied
      * model.
      */
-    settings execute(const std::forward_list<dynamic::field_definition>& fds,
+    settings execute(const config::cpp_options& co,
+        const std::forward_list<dynamic::field_definition>& fds,
         const sml::model& m) const;
 };
 

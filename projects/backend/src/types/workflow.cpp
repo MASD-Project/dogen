@@ -80,10 +80,9 @@ workflow::execute(const sml::model& m) const {
     std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
         const auto id(b->id());
-        BOOST_LOG_SEV(lg, debug) << "Generating files for backend: '"
-                                 << id << "'";
-        auto files(b->generate(m));
-        BOOST_LOG_SEV(lg, debug) << "Generated files for backend: '" << id
+        BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << id << "'";
+        auto files(b->generate(knitting_options_, m));
+        BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << id
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());
         r.splice_after(r.before_begin(), files);

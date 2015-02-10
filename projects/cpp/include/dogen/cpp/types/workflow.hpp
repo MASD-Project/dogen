@@ -69,6 +69,7 @@ private:
      * @brief Create the settings.
      */
     settings::settings create_settings_activty(
+        const config::knitting_options& o,
         const std::forward_list<dynamic::field_definition>& fds,
         const sml::model& m) const;
 
@@ -95,8 +96,8 @@ public:
 
     void validate() const override;
 
-    std::forward_list<dogen::formatters::file>
-    generate(const sml::model& m) const override;
+    std::forward_list<dogen::formatters::file> generate(
+        const config::knitting_options& o, const sml::model& m) const override;
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;

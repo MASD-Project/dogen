@@ -51,28 +51,6 @@ field_definition create_split_project() {
     return r;
 }
 
-field_definition create_source_directory() {
-    field_definition r;
-    r.name().simple("source_directory");
-    r.name().qualified(traits::model_name() + ".source_directory");
-    r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(value_types::text);
-    r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>("src"));
-    return r;
-}
-
-field_definition create_include_directory() {
-    field_definition r;
-    r.name().simple("include_directory");
-    r.name().qualified(traits::model_name() + ".include_directory");
-    r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(value_types::text);
-    r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<text>("include"));
-    return r;
-}
-
 field_definition create_header_file_extension() {
     field_definition r;
     r.name().simple("header_file_extension");
@@ -160,8 +138,6 @@ create_all_field_definitions() {
     using fd = dogen::cpp::settings::field_definitions;
     r.push_front(fd::enabled());
     r.push_front(fd::split_project());
-    r.push_front(fd::source_directory());
-    r.push_front(fd::include_directory());
     r.push_front(fd::header_file_extension());
     r.push_front(fd::implementation_file_extension());
     r.push_front(fd::enable_facet_folders());
@@ -194,16 +170,6 @@ const dynamic::field_definition& field_definitions::enabled() {
 
 const dynamic::field_definition& field_definitions::split_project() {
     static auto r(create_split_project());
-    return r;
-}
-
-const dynamic::field_definition& field_definitions::source_directory() {
-    static auto r(create_source_directory());
-    return r;
-}
-
-const dynamic::field_definition& field_definitions::include_directory() {
-    static auto r(create_include_directory());
     return r;
 }
 

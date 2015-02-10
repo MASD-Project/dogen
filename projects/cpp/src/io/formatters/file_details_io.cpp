@@ -51,9 +51,9 @@ std::ostream& operator<<(std::ostream& s, const file_details& v) {
       << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
       << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
       << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\"" << ", "
-      << "\"project_directory\": " << "\"" << tidy_up_string(v.project_directory()) << "\"" << ", "
-      << "\"source_directory\": " << "\"" << tidy_up_string(v.source_directory()) << "\"" << ", "
-      << "\"include_directory\": " << "\"" << tidy_up_string(v.include_directory()) << "\""
+      << "\"project_directory\": " << "\"" << v.project_directory().generic_string() << "\"" << ", "
+      << "\"source_directory\": " << "\"" << v.source_directory().generic_string() << "\"" << ", "
+      << "\"include_directory\": " << "\"" << v.include_directory().generic_string() << "\""
       << " }";
     return(s);
 }

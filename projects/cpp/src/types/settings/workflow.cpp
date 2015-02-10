@@ -88,10 +88,10 @@ workflow::create_general_settings(const dynamic::object& o) const {
     return f.make(o);
 }
 
-cpp_settings workflow::
-create_cpp_settings(const dynamic::object& o) const {
+cpp_settings workflow::create_cpp_settings(const config::cpp_options& co,
+    const dynamic::object& o) const {
     cpp_settings_factory f;
-    return f.make(o);
+    return f.make(co, o);
 }
 
 std::unordered_map<std::string, facet_settings> workflow::
@@ -109,13 +109,14 @@ create_formatter_settings(const dynamic::indexer& idx,
 }
 
 global_settings workflow::create_global_settings_activity(
-    const dynamic::indexer& idx, const sml::model& m) const {
+    const config::cpp_options& co, const dynamic::indexer& idx,
+    const sml::model& m) const {
     const auto mm(obtain_model_module(m));
     const auto o(mm.extensions());
 
     global_settings r;
     r.general_settings(create_general_settings(o));
-    r.cpp_settings(create_cpp_settings(o));
+    r.cpp_settings(create_cpp_settings(co, o));
     r.facet_settings(create_facet_settings(idx, o));
     r.formatter_settings(create_formatter_settings(idx, o));
     return r;
@@ -134,8 +135,8 @@ workflow::create_local_settings_activity(const dynamic::indexer& /*idx*/,
     return r;
 }
 
-settings workflow::
-execute(const std::forward_list<dynamic::field_definition>& fds,
+settings workflow::execute(const config::cpp_options& co,
+    const std::forward_list<dynamic::field_definition>& fds,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings.";
 
@@ -143,7 +144,7 @@ execute(const std::forward_list<dynamic::field_definition>& fds,
     idx.index(fds);
 
     settings r;
-    r.global_settings(create_global_settings_activity(idx, m));
+    r.global_settings(create_global_settings_activity(co, idx, m));
     r.local_settings(create_local_settings_activity(idx, m));
 
     BOOST_LOG_SEV(lg, debug) << "Settings: " << r;

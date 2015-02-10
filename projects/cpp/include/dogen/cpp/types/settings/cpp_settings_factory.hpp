@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
 #include "dogen/dynamic/types/object.hpp"
 
@@ -50,12 +51,25 @@ private:
      */
     cpp_settings create_default_settings() const;
 
+    /**
+     * @brief Populates the settings with values from the dynamic
+     * object.
+     */
+    void populate(const dynamic::object& o, cpp_settings& s) const;
+
+    /**
+     * @brief Populates the settings with values from the config
+     * options.
+     */
+    void populate(const config::cpp_options& co, cpp_settings& s) const;
+
 public:
     /**
      * @brief Creates the C++ settings from the dynamic object
      * properties. The missing values are defaulted.
      */
-    cpp_settings make(const dynamic::object& o) const;
+    cpp_settings
+    make(const config::cpp_options& co, const dynamic::object& o) const;
 
 private:
     cpp_settings default_settings_;

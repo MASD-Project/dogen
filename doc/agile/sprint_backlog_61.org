@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-10 Tue 20:41]
+Clock summary at [2015-02-10 Tue 21:50]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *20:15* |       |      |
+| *Total time*                                                        | *21:24* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 20:15 |      |
+| Active                                                              |         | 21:24 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -40,6 +40,7 @@ Clock summary at [2015-02-10 Tue 20:41]
 | COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
 | COMPLETED Improve building of file names                            |         |       | 0:56 |
 | COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
+| STARTED Add absolute path support to file name builder              |         |       | 1:09 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -571,7 +572,8 @@ say =cpp_settings= etc.
 
 Also delete all of the unused settings classes in config.
 
-*** Add absolute path support to file name builder                    :story:
+*** STARTED Add absolute path support to file name builder            :story:
+    CLOCK: [2015-02-10 Tue 20:41]--[2015-02-10 Tue 21:50] =>  1:09
 
 We have extended the file properties to have absolute and relative
 paths. The file name builder can now be changed to read the relevant

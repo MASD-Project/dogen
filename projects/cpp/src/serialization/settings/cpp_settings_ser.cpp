@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/cpp_settings_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 
 
 namespace boost {
@@ -40,9 +41,9 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("split_project", v.split_project_);
-    ar << make_nvp("project_directory", v.project_directory_);
-    ar << make_nvp("source_directory", v.source_directory_);
-    ar << make_nvp("include_directory", v.include_directory_);
+    ar << make_nvp("project_directory", v.project_directory_.generic_string());
+    ar << make_nvp("source_directory", v.source_directory_.generic_string());
+    ar << make_nvp("include_directory", v.include_directory_.generic_string());
     ar << make_nvp("header_file_extension", v.header_file_extension_);
     ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
     ar << make_nvp("enable_facet_folders", v.enable_facet_folders_);
@@ -55,9 +56,15 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("split_project", v.split_project_);
-    ar >> make_nvp("project_directory", v.project_directory_);
-    ar >> make_nvp("source_directory", v.source_directory_);
-    ar >> make_nvp("include_directory", v.include_directory_);
+    std::string project_directory_tmp;
+    ar >> make_nvp("project_directory", project_directory_tmp);
+    v.project_directory_ = project_directory_tmp;
+    std::string source_directory_tmp;
+    ar >> make_nvp("source_directory", source_directory_tmp);
+    v.source_directory_ = source_directory_tmp;
+    std::string include_directory_tmp;
+    ar >> make_nvp("include_directory", include_directory_tmp);
+    v.include_directory_ = include_directory_tmp;
     ar >> make_nvp("header_file_extension", v.header_file_extension_);
     ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
     ar >> make_nvp("enable_facet_folders", v.enable_facet_folders_);

@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include <string>
 #include "dogen/cpp/serialization/formatters/file_details_fwd_ser.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
@@ -40,11 +41,13 @@ namespace formatters {
 class file_details final {
 public:
     file_details(const file_details&) = default;
-    file_details(file_details&&) = default;
     ~file_details() = default;
 
 public:
     file_details();
+
+public:
+    file_details(file_details&& rhs);
 
 public:
     file_details(
@@ -54,9 +57,9 @@ public:
         const std::string& extension,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
-        const std::string& project_directory,
-        const std::string& source_directory,
-        const std::string& include_directory);
+        const boost::filesystem::path& project_directory,
+        const boost::filesystem::path& source_directory,
+        const boost::filesystem::path& include_directory);
 
 private:
     template<typename Archive>
@@ -92,20 +95,20 @@ public:
     void formatter_postfix(const std::string& v);
     void formatter_postfix(const std::string&& v);
 
-    const std::string& project_directory() const;
-    std::string& project_directory();
-    void project_directory(const std::string& v);
-    void project_directory(const std::string&& v);
+    const boost::filesystem::path& project_directory() const;
+    boost::filesystem::path& project_directory();
+    void project_directory(const boost::filesystem::path& v);
+    void project_directory(const boost::filesystem::path&& v);
 
-    const std::string& source_directory() const;
-    std::string& source_directory();
-    void source_directory(const std::string& v);
-    void source_directory(const std::string&& v);
+    const boost::filesystem::path& source_directory() const;
+    boost::filesystem::path& source_directory();
+    void source_directory(const boost::filesystem::path& v);
+    void source_directory(const boost::filesystem::path&& v);
 
-    const std::string& include_directory() const;
-    std::string& include_directory();
-    void include_directory(const std::string& v);
-    void include_directory(const std::string&& v);
+    const boost::filesystem::path& include_directory() const;
+    boost::filesystem::path& include_directory();
+    void include_directory(const boost::filesystem::path& v);
+    void include_directory(const boost::filesystem::path&& v);
 
 public:
     bool operator==(const file_details& rhs) const;
@@ -124,9 +127,9 @@ private:
     std::string extension_;
     std::string facet_postfix_;
     std::string formatter_postfix_;
-    std::string project_directory_;
-    std::string source_directory_;
-    std::string include_directory_;
+    boost::filesystem::path project_directory_;
+    boost::filesystem::path source_directory_;
+    boost::filesystem::path include_directory_;
 };
 
 } } }

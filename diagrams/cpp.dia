@@ -16398,7 +16398,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="373.572,94.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="373.351,94.2481;374.154,99.0653"/>
+        <dia:rectangle val="373.35,94.2481;374.154,99.0653"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16763,7 +16763,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#project_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16786,7 +16786,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#source_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16809,7 +16809,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#include_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -21250,7 +21250,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="205.803,132.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="205.744,132.442;214.121,134.402"/>
+        <dia:rectangle val="205.745,132.442;214.121,134.402"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23696,7 +23696,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="430.842,148.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="430.092,147.45;443.877,158.75"/>
+        <dia:rectangle val="430.092,147.45;443.878,158.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25773,7 +25773,7 @@ the SML model itself.
         <dia:point val="126.227,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.377,21.35;139.498,42.05"/>
+        <dia:rectangle val="125.377,21.35;139.497,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25971,7 +25971,7 @@ the SML model itself.
         <dia:point val="126.227,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.377,21.35;168.808,36.05"/>
+        <dia:rectangle val="125.377,21.35;168.807,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26337,7 +26337,7 @@ the SML model itself.
         <dia:point val="142.455,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.705,20.55;156.727,26.05"/>
+        <dia:rectangle val="141.705,20.55;156.728,26.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26553,7 +26553,7 @@ the SML model itself.
         <dia:point val="249.93,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="223.947,42.75;250.68,59.8"/>
+        <dia:rectangle val="223.948,42.75;250.68,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27074,7 +27074,7 @@ formattable type.#</dia:string>
         <dia:point val="218.648,55.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="218.582,55.4345;227.166,59.3881"/>
+        <dia:rectangle val="218.583,55.4345;227.166,59.3881"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28443,7 +28443,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="347,147.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="346.25,146.65;443.877,174.05"/>
+        <dia:rectangle val="346.25,146.65;443.878,174.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31637,7 +31637,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="312.045,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="263.91,29.95;312.795,37.6"/>
+        <dia:rectangle val="263.91,29.25;312.795,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31797,7 +31797,7 @@ in formattables.#</dia:string>
         <dia:point val="274.848,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="274.098,39.55;286.2,60.6"/>
+        <dia:rectangle val="274.098,39.55;286.2,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31869,7 +31869,7 @@ in formattables.#</dia:string>
         <dia:point val="319.27,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="318.52,39.55;338.29,60.6"/>
+        <dia:rectangle val="318.52,39.55;338.29,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32213,7 +32213,7 @@ interface in formattables.#</dia:string>
         <dia:point val="168.843,157.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="168.093,156.45;192.05,162.9"/>
+        <dia:rectangle val="168.093,156.45;192.05,162.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32394,7 +32394,7 @@ interface in formattables.#</dia:string>
         <dia:point val="168.843,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.582,147.95;169.593,154.6"/>
+        <dia:rectangle val="126.582,147.25;169.593,153.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32430,13 +32430,13 @@ interface in formattables.#</dia:string>
         <dia:point val="255,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="254.95,152.95;268.64,162.25"/>
+        <dia:rectangle val="254.95,152.95;272.105,162.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="255,153"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -32672,7 +32672,7 @@ interface in formattables.#</dia:string>
             <dia:string>#project_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32695,7 +32695,7 @@ interface in formattables.#</dia:string>
             <dia:string>#source_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32718,7 +32718,7 @@ interface in formattables.#</dia:string>
             <dia:string>#include_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::filesystem::path#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32785,7 +32785,7 @@ interface in formattables.#</dia:string>
         <dia:point val="273,177"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="268.54,162.15;273.75,178.6"/>
+        <dia:rectangle val="272.005,162.15;273.75,177.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32793,8 +32793,8 @@ interface in formattables.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="273,177"/>
         <dia:point val="273,171"/>
-        <dia:point val="268.59,171"/>
-        <dia:point val="268.59,162.2"/>
+        <dia:point val="272.055,171"/>
+        <dia:point val="272.055,162.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32857,7 +32857,7 @@ interface in formattables.#</dia:string>
         <dia:point val="245.998,180.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="245.248,179.85;259.2,191.6"/>
+        <dia:rectangle val="245.248,179.85;259.2,190.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32926,17 +32926,17 @@ interface in formattables.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="261.795,153"/>
+        <dia:point val="263.527,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="261.045,147.95;279.108,154.6"/>
+        <dia:rectangle val="262.777,147.25;279.108,153.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="261.795,153"/>
-        <dia:point val="261.795,148"/>
+        <dia:point val="263.527,153"/>
+        <dia:point val="263.527,148"/>
         <dia:point val="278.908,148"/>
         <dia:point val="278.908,153"/>
       </dia:attribute>
@@ -33001,7 +33001,7 @@ interface in formattables.#</dia:string>
         <dia:point val="273,180.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="265.81,179.85;273.75,191.6"/>
+        <dia:rectangle val="265.81,179.85;273.75,190.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33073,7 +33073,7 @@ interface in formattables.#</dia:string>
         <dia:point val="239.275,134"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="238.525,133.25;246.197,178.6"/>
+        <dia:rectangle val="238.525,133.25;246.198,177.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33145,7 +33145,7 @@ interface in formattables.#</dia:string>
         <dia:point val="264.55,134"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="263.8,133.25;288.465,178.6"/>
+        <dia:rectangle val="263.8,133.25;288.465,177.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

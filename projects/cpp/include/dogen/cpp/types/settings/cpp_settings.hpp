@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include <string>
 #include "dogen/cpp/serialization/settings/cpp_settings_fwd_ser.hpp"
 
@@ -36,19 +37,21 @@ namespace settings {
 class cpp_settings final {
 public:
     cpp_settings(const cpp_settings&) = default;
-    cpp_settings(cpp_settings&&) = default;
     ~cpp_settings() = default;
 
 public:
     cpp_settings();
 
 public:
+    cpp_settings(cpp_settings&& rhs);
+
+public:
     cpp_settings(
         const bool enabled,
         const bool split_project,
-        const std::string& project_directory,
-        const std::string& source_directory,
-        const std::string& include_directory,
+        const boost::filesystem::path& project_directory,
+        const boost::filesystem::path& source_directory,
+        const boost::filesystem::path& include_directory,
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
         const bool enable_facet_folders,
@@ -68,20 +71,20 @@ public:
     bool split_project() const;
     void split_project(const bool v);
 
-    const std::string& project_directory() const;
-    std::string& project_directory();
-    void project_directory(const std::string& v);
-    void project_directory(const std::string&& v);
+    const boost::filesystem::path& project_directory() const;
+    boost::filesystem::path& project_directory();
+    void project_directory(const boost::filesystem::path& v);
+    void project_directory(const boost::filesystem::path&& v);
 
-    const std::string& source_directory() const;
-    std::string& source_directory();
-    void source_directory(const std::string& v);
-    void source_directory(const std::string&& v);
+    const boost::filesystem::path& source_directory() const;
+    boost::filesystem::path& source_directory();
+    void source_directory(const boost::filesystem::path& v);
+    void source_directory(const boost::filesystem::path&& v);
 
-    const std::string& include_directory() const;
-    std::string& include_directory();
-    void include_directory(const std::string& v);
-    void include_directory(const std::string&& v);
+    const boost::filesystem::path& include_directory() const;
+    boost::filesystem::path& include_directory();
+    void include_directory(const boost::filesystem::path& v);
+    void include_directory(const boost::filesystem::path&& v);
 
     const std::string& header_file_extension() const;
     std::string& header_file_extension();
@@ -112,9 +115,9 @@ public:
 private:
     bool enabled_;
     bool split_project_;
-    std::string project_directory_;
-    std::string source_directory_;
-    std::string include_directory_;
+    boost::filesystem::path project_directory_;
+    boost::filesystem::path source_directory_;
+    boost::filesystem::path include_directory_;
     std::string header_file_extension_;
     std::string implementation_file_extension_;
     bool enable_facet_folders_;

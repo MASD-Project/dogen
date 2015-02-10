@@ -39,6 +39,13 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
 }
 
 namespace dogen {
@@ -55,9 +62,9 @@ populate(const unsigned int position, result_type& v) {
     v.extension(create_std_string(position + 3));
     v.facet_postfix(create_std_string(position + 4));
     v.formatter_postfix(create_std_string(position + 5));
-    v.project_directory(create_std_string(position + 6));
-    v.source_directory(create_std_string(position + 7));
-    v.include_directory(create_std_string(position + 8));
+    v.project_directory(create_boost_filesystem_path(position + 6));
+    v.source_directory(create_boost_filesystem_path(position + 7));
+    v.include_directory(create_boost_filesystem_path(position + 8));
 }
 
 file_details_generator::result_type

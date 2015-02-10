@@ -19,8 +19,12 @@
  *
  */
 #include <sstream>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/io/formatters/file_types_io.hpp"
+#include "dogen/cpp/types/formatters/building_error.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/types/formatters/file_properties_factory.hpp"
 
@@ -31,6 +35,7 @@ namespace {
 auto lg(logger_factory("cpp.formatters.file_properties_factory"));
 const std::string underscore("_");
 const std::string dot(".");
+const std::string unsupported_file_type("File type not supported: ");
 
 }
 
@@ -76,8 +81,29 @@ create_relative_path(const file_details& d, const sml::qname& qn) const {
 
 boost::filesystem::path file_properties_factory::
 create_absolute_path(
-    const file_details& /*d*/, const sml::qname& /*qn*/) const {
+    const file_details& d, const sml::qname& qn) const {
     boost::filesystem::path r;
+
+    const auto ft(d.file_type());
+    switch (ft) {
+    case file_types::cpp_header:
+        if (d.split_project())
+            r = d.include_directory();
+        else
+            r = d.project_directory() / qn.model_name();
+        break;
+
+    case file_types::cpp_implementation:
+        if (d.split_project())
+            r = d.source_directory();
+        else
+            r = d.project_directory() / qn.model_name();
+        break;
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
+        BOOST_THROW_EXCEPTION(building_error(unsupported_file_type +
+                boost::lexical_cast<std::string>(ft)));
+    }
     return r;
 }
 

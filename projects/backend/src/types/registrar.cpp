@@ -45,14 +45,14 @@ void registrar::validate() const {
 }
 
 void registrar::register_backend(std::shared_ptr<backend_interface> b) {
-    // note: not logging by design
+    // no logging by design
     if (!b)
         BOOST_THROW_EXCEPTION(registrar_error(null_backend));
 
     backends_.push_front(b);
 }
 
-const registrar::backends_type& registrar::
+const std::forward_list<std::shared_ptr<backend_interface> >& registrar::
 backends() const {
     return backends_;
 }

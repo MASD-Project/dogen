@@ -51,6 +51,9 @@ file_details file_details_factory::make(const settings::selector& s,
 
     const auto& cs(s.select_cpp_settings());
     r.split_project(cs.split_project());
+    r.project_directory(cs.project_directory());
+    r.source_directory(cs.source_directory());
+    r.include_directory(cs.include_directory());
 
     const auto& fcts(s.select_facet_settings(f.facet_name()));
     if (cs.enable_facet_folders())

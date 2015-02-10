@@ -28,6 +28,17 @@ file_details::file_details()
     : split_project_(static_cast<bool>(0)),
       file_type_(static_cast<dogen::cpp::formatters::file_types>(0)) { }
 
+file_details::file_details(file_details&& rhs)
+    : split_project_(std::move(rhs.split_project_)),
+      file_type_(std::move(rhs.file_type_)),
+      facet_directory_(std::move(rhs.facet_directory_)),
+      extension_(std::move(rhs.extension_)),
+      facet_postfix_(std::move(rhs.facet_postfix_)),
+      formatter_postfix_(std::move(rhs.formatter_postfix_)),
+      project_directory_(std::move(rhs.project_directory_)),
+      source_directory_(std::move(rhs.source_directory_)),
+      include_directory_(std::move(rhs.include_directory_)) { }
+
 file_details::file_details(
     const bool split_project,
     const dogen::cpp::formatters::file_types& file_type,
@@ -35,9 +46,9 @@ file_details::file_details(
     const std::string& extension,
     const std::string& facet_postfix,
     const std::string& formatter_postfix,
-    const std::string& project_directory,
-    const std::string& source_directory,
-    const std::string& include_directory)
+    const boost::filesystem::path& project_directory,
+    const boost::filesystem::path& source_directory,
+    const boost::filesystem::path& include_directory)
     : split_project_(split_project),
       file_type_(file_type),
       facet_directory_(facet_directory),
@@ -159,51 +170,51 @@ void file_details::formatter_postfix(const std::string&& v) {
     formatter_postfix_ = std::move(v);
 }
 
-const std::string& file_details::project_directory() const {
+const boost::filesystem::path& file_details::project_directory() const {
     return project_directory_;
 }
 
-std::string& file_details::project_directory() {
+boost::filesystem::path& file_details::project_directory() {
     return project_directory_;
 }
 
-void file_details::project_directory(const std::string& v) {
+void file_details::project_directory(const boost::filesystem::path& v) {
     project_directory_ = v;
 }
 
-void file_details::project_directory(const std::string&& v) {
+void file_details::project_directory(const boost::filesystem::path&& v) {
     project_directory_ = std::move(v);
 }
 
-const std::string& file_details::source_directory() const {
+const boost::filesystem::path& file_details::source_directory() const {
     return source_directory_;
 }
 
-std::string& file_details::source_directory() {
+boost::filesystem::path& file_details::source_directory() {
     return source_directory_;
 }
 
-void file_details::source_directory(const std::string& v) {
+void file_details::source_directory(const boost::filesystem::path& v) {
     source_directory_ = v;
 }
 
-void file_details::source_directory(const std::string&& v) {
+void file_details::source_directory(const boost::filesystem::path&& v) {
     source_directory_ = std::move(v);
 }
 
-const std::string& file_details::include_directory() const {
+const boost::filesystem::path& file_details::include_directory() const {
     return include_directory_;
 }
 
-std::string& file_details::include_directory() {
+boost::filesystem::path& file_details::include_directory() {
     return include_directory_;
 }
 
-void file_details::include_directory(const std::string& v) {
+void file_details::include_directory(const boost::filesystem::path& v) {
     include_directory_ = v;
 }
 
-void file_details::include_directory(const std::string&& v) {
+void file_details::include_directory(const boost::filesystem::path&& v) {
     include_directory_ = std::move(v);
 }
 

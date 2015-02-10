@@ -37,9 +37,6 @@ namespace backend {
  */
 class registrar {
 public:
-    typedef std::forward_list<std::shared_ptr<backend_interface>> backends_type;
-
-public:
     /**
      * @brief Ensures the registrar is ready to be used.
      */
@@ -53,10 +50,11 @@ public:
     /**
      * @brief Returns all available backends.
      */
-    const backends_type& backends() const;
+    const std::forward_list<std::shared_ptr<backend_interface> >&
+    backends() const;
 
 private:
-    backends_type backends_;
+    std::forward_list<std::shared_ptr<backend_interface> > backends_;
 };
 
 } }
