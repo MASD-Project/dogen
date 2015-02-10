@@ -27,11 +27,11 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/cpp_settings.hpp"
-#include "dogen/config/io/cpp_settings_io.hpp"
+#include "dogen/config/types/cpp_options.hpp"
+#include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
 
 using dogen::config::cpp_facet_types;
 
@@ -61,14 +61,14 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::test_data
 };
 
-dogen::config::cpp_settings non_split_project_settings() {
-    return dogen::config::test::mock_settings_factory::
-        make_cpp_settings(project_dir);
+dogen::config::cpp_options non_split_project_options() {
+    return dogen::config::test::mock_options_factory::
+        make_cpp_options(project_dir);
 }
 
-dogen::config::cpp_settings split_project_settings() {
-    return dogen::config::test::mock_settings_factory::
-        make_cpp_settings(src_dir, include_dir);
+dogen::config::cpp_options split_project_options() {
+    return dogen::config::test::mock_options_factory::
+        make_cpp_options(src_dir, include_dir);
 }
 
 dogen::cpp::formattables::content_descriptor
@@ -97,7 +97,7 @@ mock_descriptor(dogen::config::cpp_facet_types ft,
 }
 
 std::list<std::string>
-generate_all_filenames(dogen::config::cpp_settings s, bool with_path) {
+generate_all_filenames(dogen::config::cpp_options s, bool with_path) {
     using dogen::sml_to_cpp::locator;
     locator lm(test_model_name, s);
 
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_SUITE(locator)
 BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) {
     SETUP_TEST_LOG_SOURCE("split_project_configuration_results_in_expected_locations");
     using dogen::sml_to_cpp::locator;
-    const auto s(split_project_settings());
+    const auto s(split_project_options());
     BOOST_CHECK(s.split_project());
 
     locator lm(test_model_name, s);
@@ -187,7 +187,7 @@ BOOST_AUTO_TEST_CASE(split_project_configuration_results_in_expected_locations) 
 BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locations) {
     SETUP_TEST_LOG_SOURCE("non_split_project_configuration_results_in_expected_locations");
     using dogen::sml_to_cpp::locator;
-    const auto s(non_split_project_settings());
+    const auto s(non_split_project_options());
     BOOST_CHECK(!s.split_project());
 
     locator lm(test_model_name, s);
@@ -241,9 +241,9 @@ BOOST_AUTO_TEST_CASE(non_split_project_configuration_results_in_expected_locatio
 BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_locations) {
     SETUP_TEST_LOG_SOURCE("disabling_facet_folders_removes_facet_folders_from_locations");
 
-    auto s(split_project_settings());
+    auto s(split_project_options());
     s.disable_facet_folders(true);
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
     BOOST_CHECK(s.split_project());
 
     using dogen::sml_to_cpp::locator;
@@ -283,9 +283,9 @@ BOOST_AUTO_TEST_CASE(disabling_facet_folders_removes_facet_folders_from_location
 BOOST_AUTO_TEST_CASE(enabling_unique_file_names_results_in_different_names_across_facets) {
     SETUP_TEST_LOG_SOURCE("enabling_unique_file_names_results_in_different_names_across_facets");
 
-    auto s(split_project_settings());
+    auto s(split_project_options());
     s.disable_unique_file_names(true);
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     using dogen::sml_to_cpp::locator;
     locator lm(test_model_name, s);
@@ -307,9 +307,9 @@ BOOST_AUTO_TEST_CASE(enabling_unique_file_names_results_in_different_names_acros
 BOOST_AUTO_TEST_CASE(disabling_unique_file_names_results_in_the_same_names_across_facets) {
     SETUP_TEST_LOG_SOURCE("disabling_unique_file_names_results_in_the_same_names_across_facets");
 
-    auto s(split_project_settings());
+    auto s(split_project_options());
     s.disable_unique_file_names(false);
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     using dogen::sml_to_cpp::locator;
     locator lm(test_model_name, s);
@@ -329,14 +329,14 @@ BOOST_AUTO_TEST_CASE(disabling_unique_file_names_results_in_the_same_names_acros
 BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_location) {
     SETUP_TEST_LOG_SOURCE("changing_facet_folder_names_names_results_in_new_folder_names_in_location");
 
-    auto s(split_project_settings());
+    auto s(split_project_options());
     s.disable_unique_file_names(false);
     s.domain_facet_folder(unique_name + "_1");
     s.hash_facet_folder(unique_name + "_2");
     s.io_facet_folder(unique_name + "_3");
     s.serialization_facet_folder(unique_name + "_4");
     s.test_data_facet_folder(unique_name + "_5");
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     using dogen::sml_to_cpp::locator;
     locator lm(test_model_name, s);
@@ -358,10 +358,10 @@ BOOST_AUTO_TEST_CASE(changing_facet_folder_names_results_in_new_folder_names_in_
 BOOST_AUTO_TEST_CASE(changing_file_extensions_results_expected_file_names) {
     SETUP_TEST_LOG_SOURCE("changing_file_extensions_results_expected_file_names");
 
-    auto s(split_project_settings());
+    auto s(split_project_options());
     s.header_extension(header_extension);
     s.source_extension(source_extension);
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     using dogen::sml_to_cpp::locator;
     locator lm(test_model_name, s);

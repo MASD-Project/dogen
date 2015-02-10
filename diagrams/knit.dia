@@ -388,13 +388,13 @@
         <dia:point val="3,93"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,92.95;40.125,96.65"/>
+        <dia:rectangle val="2.95,92.95;37.045,96.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,93"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.075000000000003"/>
+        <dia:real val="33.994999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -536,10 +536,10 @@
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#settings#</dia:string>
+                <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const config::cpp_settings&amp;#</dia:string>
+                <dia:string>#const config::cpp_options&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -707,7 +707,7 @@
             <dia:string>#settings_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#config::output_settings#</dia:string>
+            <dia:string>#config::output_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1657,7 +1657,7 @@
             <dia:string>#settings_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#config::knitting_settings#</dia:string>
+            <dia:string>#config::knitting_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2536,7 +2536,7 @@
             <dia:string>#settings_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#config::knitting_settings#</dia:string>
+            <dia:string>#config::knitting_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3292,7 +3292,7 @@
         <dia:point val="-2.8575,81.0125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.7075,80.9625;21.5875,93.05"/>
+        <dia:rectangle val="-3.7075,80.9625;20.0475,93.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3300,8 +3300,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="-2.8575,81.0125"/>
         <dia:point val="-2.8575,87"/>
-        <dia:point val="21.5375,87"/>
-        <dia:point val="21.5375,93"/>
+        <dia:point val="19.9975,87"/>
+        <dia:point val="19.9975,93"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

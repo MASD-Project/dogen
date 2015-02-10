@@ -32,7 +32,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/io/map_io.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/cpp/io/formattables/file_info_io.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -59,8 +59,8 @@ const std::string module_path("dogen");
 using boost::filesystem::path;
 // bool test_workflow(path t, path e, path a) {
 
-//     using dogen::config::test::mock_settings_factory;
-//     const auto s(mock_settings_factory::make_settings(t, a, module_path));
+//     using dogen::config::test::mock_options_factory;
+//     const auto s(mock_options_factory::make_options(t, a, module_path));
 //     using dogen::utility::test::xml_deserialize;
 //     const auto m(xml_deserialize<dogen::sml::model>(t));
 

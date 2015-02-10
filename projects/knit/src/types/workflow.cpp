@@ -31,8 +31,8 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/frontend/types/workflow.hpp"
-#include "dogen/config/types/knitting_settings_validator.hpp"
-#include "dogen/config/io/knitting_settings_io.hpp"
+#include "dogen/config/types/knitting_options_validator.hpp"
+#include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
 #include "dogen/sml_to_cpp/types/workflow_failure.hpp"
@@ -72,34 +72,34 @@ namespace dogen {
 namespace knit {
 
 workflow::workflow(workflow&& rhs)
-    : knitting_settings_(std::move(rhs.knitting_settings_)) { }
+    : knitting_options_(std::move(rhs.knitting_options_)) { }
 
 workflow::
-workflow(const config::knitting_settings& s) : knitting_settings_(s) {
+workflow(const config::knitting_options& o) : knitting_options_(o) {
 
-    if (knitting_settings_.output().output_to_stdout()) {
+    if (knitting_options_.output().output_to_stdout()) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-    config::knitting_settings_validator::validate(knitting_settings_);
+    config::knitting_options_validator::validate(knitting_options_);
 }
 
-workflow::workflow(const config::knitting_settings& s, const output_fn& o)
-    : knitting_settings_(s), output_(o) {
+workflow::workflow(const config::knitting_options& o, const output_fn& fn)
+    : knitting_options_(o), output_(fn) {
 
-    if (!knitting_settings_.output().output_to_stdout() || !output_) {
+    if (!knitting_options_.output().output_to_stdout() || !output_) {
         BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
         BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
     }
-    config::knitting_settings_validator::validate(knitting_settings_);
+    config::knitting_options_validator::validate(knitting_options_);
 }
 
 bool workflow::housekeeping_required() const {
     return
-        !knitting_settings_.troubleshooting().stop_after_merging() &&
-        !knitting_settings_.troubleshooting().stop_after_formatting() &&
-        knitting_settings_.output().delete_extra_files() &&
-        knitting_settings_.output().output_to_file();
+        !knitting_options_.troubleshooting().stop_after_merging() &&
+        !knitting_options_.troubleshooting().stop_after_formatting() &&
+        knitting_options_.output().delete_extra_files() &&
+        knitting_options_.output().output_to_file();
 }
 
 void workflow::
@@ -113,14 +113,14 @@ housekeep(const std::map<boost::filesystem::path, std::string>& files,
             }),
         std::inserter(expected_files, expected_files.end()));
 
-    const auto& ip(knitting_settings_.output().ignore_patterns());
+    const auto& ip(knitting_options_.output().ignore_patterns());
     std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
     housekeeper hk(ignore_patterns, dirs, expected_files);
     hk.tidy_up();
 }
 
 void workflow::output_files(const outputters::outputter::value_type& o) const {
-    if (knitting_settings_.troubleshooting().stop_after_formatting()) {
+    if (knitting_options_.troubleshooting().stop_after_formatting()) {
         BOOST_LOG_SEV(lg, warn) << "Stopping after formatting, so no output.";
         return;
     }
@@ -131,7 +131,7 @@ void workflow::output_files(const outputters::outputter::value_type& o) const {
     }
 
     const auto lambda([&](outputters::outputter::ptr p) { p->output(o); });
-    outputters::factory f(knitting_settings_.output(), output_);
+    outputters::factory f(knitting_options_.output(), output_);
     boost::for_each(f.create(), lambda);
 }
 
@@ -164,7 +164,7 @@ boost::filesystem::path workflow::
 create_debug_file_path(const config::archive_types at,
     const boost::filesystem::path& original_path) const {
 
-    const auto& ts(knitting_settings_.troubleshooting());
+    const auto& ts(knitting_options_.troubleshooting());
     boost::filesystem::path r(ts.debug_dir());
     r /= original_path.stem().string() + target_postfix;
     r.replace_extension(extension(at));
@@ -190,11 +190,11 @@ workflow::obtain_input_descriptors_activity() const {
     }
     BOOST_LOG_SEV(lg, debug) << "Done creating paths to library models.";
 
-    const auto input_settings(knitting_settings_.input());
-    BOOST_LOG_SEV(lg, debug) << "Found " << input_settings.references().size()
+    const auto input_options(knitting_options_.input());
+    BOOST_LOG_SEV(lg, debug) << "Found " << input_options.references().size()
                              << " paths to reference models.";
 
-    for (const auto ref : input_settings.references()) {
+    for (const auto ref : input_options.references()) {
         BOOST_LOG_SEV(lg, debug) << "Reference model: "
                                  << ref.path().filename();
         frontend::input_descriptor id;
@@ -206,18 +206,18 @@ workflow::obtain_input_descriptors_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Done creating paths to reference models.";
 
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
-                             << input_settings.target().filename();
+                             << input_options.target().filename();
     frontend::input_descriptor target;
-    target.path(input_settings.target());
+    target.path(input_options.target());
     target.is_target(true);
-    target.external_module_path(input_settings.external_module_path());
+    target.external_module_path(input_options.external_module_path());
     r.push_back(target);
     return r;
 }
 
 std::list<sml::model> workflow::obtain_partial_sml_models_activity(
     const std::list<frontend::input_descriptor>& descriptors) const {
-    frontend::workflow w(knitting_settings_);
+    frontend::workflow w(knitting_options_);
     return w.execute(descriptors);
 }
 
@@ -235,7 +235,7 @@ boost::filesystem::path workflow::obtain_target_path_activity(
 
 std::pair<bool, sml::model> workflow::
 merge_models_activity(const std::list<sml::model>& models) const {
-    sml::workflow w(knitting_settings_);
+    sml::workflow w;
     const auto pair(w.execute(models));
     const auto& m(pair.second);
 
@@ -252,7 +252,7 @@ merge_models_activity(const std::list<sml::model>& models) const {
 void workflow::persist_model_activity(const boost::filesystem::path p,
     const sml::model& m) const {
 
-    const auto& ts(knitting_settings_.troubleshooting());
+    const auto& ts(knitting_options_.troubleshooting());
     using config::archive_types;
     archive_types at(ts.save_sml_model());
     if (at == archive_types::invalid)
@@ -263,20 +263,12 @@ void workflow::persist_model_activity(const boost::filesystem::path p,
     persister.persist(m, dp);
 }
 
-config::formatting_settings workflow::
-extract_formatting_settings_activity(const sml::model&) const {
-    config::formatting_settings r;
-    r.cpp(knitting_settings_.cpp());
-    return r;
-}
-
-void workflow::generate_model_activity(
-    const sml::model& m, const config::formatting_settings& fs) const {
+void workflow::generate_model_activity(const sml::model& m) const {
     try {
-        backend::workflow w(knitting_settings_);
+        backend::workflow w(knitting_options_);
         w.execute(m); // FIXME: throw away results for now
 
-        backends::factory f(m, fs);
+        backends::factory f(m, knitting_options_);
         boost::for_each(f.create(), [&](backends::backend::ptr p) {
                 create_files_for_backend(*p);
             });
@@ -289,7 +281,7 @@ void workflow::generate_model_activity(
 
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
-    BOOST_LOG_SEV(lg, debug) << "Knitting settings: " << knitting_settings_;
+    BOOST_LOG_SEV(lg, debug) << "Knitting options: " << knitting_options_;
 
     try {
         const auto d(obtain_input_descriptors_activity());
@@ -300,7 +292,7 @@ void workflow::execute() const {
         const auto has_generatable_types(pair.first);
         persist_model_activity(tp, m);
 
-        if (knitting_settings_.troubleshooting().stop_after_merging()) {
+        if (knitting_options_.troubleshooting().stop_after_merging()) {
             BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
             return;
         }
@@ -310,8 +302,7 @@ void workflow::execute() const {
             return;
         }
 
-        auto fs(extract_formatting_settings_activity(m));
-        generate_model_activity(m, fs);
+        generate_model_activity(m);
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;

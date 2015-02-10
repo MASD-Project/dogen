@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/config/io/cpp_settings_io.hpp"
+#include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
 
 using namespace dogen::utility::log;
@@ -59,49 +59,49 @@ using utility::exception::invalid_enum_value;
 
 locator::locator(locator&& rhs)
   : model_name_(std::move(rhs.model_name_)),
-    settings_(std::move(rhs.settings_)),
+    options_(std::move(rhs.options_)),
     source_directory_(std::move(rhs.source_directory_)),
     include_directory_(std::move(rhs.include_directory_)) { }
 
 locator::locator(const std::string& model_name,
-    const config::cpp_settings& settings) :
-    model_name_(model_name), settings_(settings) {
+    const config::cpp_options& options) :
+    model_name_(model_name), options_(options) {
 
-    if (settings_.split_project()) {
-        source_directory_ = settings_.source_directory();
-        include_directory_ = settings_.include_directory();
+    if (options_.split_project()) {
+        source_directory_ = options_.source_directory();
+        include_directory_ = options_.include_directory();
     } else {
-        source_directory_ = settings_.project_directory() / model_name_;
+        source_directory_ = options_.project_directory() / model_name_;
         source_directory_ /= src_dir;
 
-        include_directory_ = settings_.project_directory() / model_name_;
+        include_directory_ = options_.project_directory() / model_name_;
         include_directory_ /= include_dir;
     }
 
     BOOST_LOG_SEV(lg, debug)
         << "Initial configuration:"
-        << " settings: " << settings_
+        << " options: " << options_
         << " include_directory: " << include_directory_
         << " source_directory_: " << source_directory_
         << " model name: " << model_name;
 }
 
 std::string locator::facet_directory(const config::cpp_facet_types ft) const {
-    if (settings_.disable_facet_folders())
+    if (options_.disable_facet_folders())
         return empty;
 
     using config::cpp_facet_types;
     switch(ft) {
-    case cpp_facet_types::io: return settings_.io_facet_folder(); break;
-    case cpp_facet_types::types: return settings_.domain_facet_folder(); break;
-    case cpp_facet_types::hash: return settings_.hash_facet_folder(); break;
+    case cpp_facet_types::io: return options_.io_facet_folder(); break;
+    case cpp_facet_types::types: return options_.domain_facet_folder(); break;
+    case cpp_facet_types::hash: return options_.hash_facet_folder(); break;
     case cpp_facet_types::serialization:
-        return settings_.serialization_facet_folder();
+        return options_.serialization_facet_folder();
         break;
     case cpp_facet_types::test_data:
-        return settings_.test_data_facet_folder();
+        return options_.test_data_facet_folder();
         break;
-    case cpp_facet_types::odb: return settings_.odb_facet_folder(); break;
+    case cpp_facet_types::odb: return options_.odb_facet_folder(); break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_facet_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_types));
@@ -110,7 +110,7 @@ std::string locator::facet_directory(const config::cpp_facet_types ft) const {
 
 std::string locator::
 facet_postfix(const config::cpp_facet_types ft) const {
-    if (settings_.disable_unique_file_names())
+    if (options_.disable_unique_file_names())
         return empty;
 
     using config::cpp_facet_types;
@@ -129,7 +129,7 @@ facet_postfix(const config::cpp_facet_types ft) const {
 
 std::string
 locator::aspect_postfix(const cpp::formattables::aspect_types at) const {
-    if (settings_.disable_unique_file_names())
+    if (options_.disable_unique_file_names())
         return empty;
 
     using cpp::formattables::aspect_types;
@@ -159,9 +159,9 @@ locator::file_type_directory(const cpp::formattables::file_types flt) const {
 std::string locator::extension(const cpp::formattables::file_types flt) const {
     using cpp::formattables::file_types;
     switch(flt) {
-    case file_types::header: return settings_.header_extension(); break;
+    case file_types::header: return options_.header_extension(); break;
     case file_types::implementation:
-        return settings_.source_extension(); break;
+        return options_.source_extension(); break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_file_types;
         BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_file_types));
@@ -172,7 +172,7 @@ boost::filesystem::path locator::relative_logical_path(
     const cpp::formattables::content_descriptor& cd) const {
     boost::filesystem::path r;
 
-    if (settings_.split_project()) {
+    if (options_.split_project()) {
         for(auto n : cd.name().external_module_path())
             r /= n;
         return r / relative_physical_path(cd);
@@ -185,7 +185,7 @@ boost::filesystem::path locator::relative_physical_path(
     const cpp::formattables::content_descriptor& cd) const {
     boost::filesystem::path r;
     using cpp::formattables::file_types;
-    if (settings_.split_project())
+    if (options_.split_project())
         r /= cd.name().model_name();
     else if (cd.file_type() == file_types::header) {
         for(auto n : cd.name().external_module_path())
@@ -217,37 +217,37 @@ locator::absolute_path(const cpp::formattables::content_descriptor& cd) const {
 
 boost::filesystem::path
 locator::absolute_path_to_src(const std::string& name) const {
-    if (settings_.split_project())
+    if (options_.split_project())
         return source_directory_ / model_name_ / name;
     return source_directory_ / name;
 }
 
 boost::filesystem::path
 locator::absolute_path_to_include(const std::string& name) const {
-    if (settings_.split_project())
+    if (options_.split_project())
         return include_directory_ / model_name_ / name;
     return include_directory_ / name;
 }
 
 boost::filesystem::path
 locator::absolute_path(const std::string& name) const {
-    if (settings_.split_project()) {
+    if (options_.split_project()) {
         BOOST_LOG_SEV(lg, error) << absolute_path_with_split;
         BOOST_THROW_EXCEPTION(
             utility::exception::exception(absolute_path_with_split));
     }
-    return settings_.project_directory() / model_name_ / name;
+    return options_.project_directory() / model_name_ / name;
 }
 
 std::forward_list<boost::filesystem::path>
 locator::managed_directories() const {
     std::forward_list<boost::filesystem::path> r;
 
-    if (settings_.split_project()) {
+    if (options_.split_project()) {
         r.push_front(source_directory_ / model_name_);
         r.push_front(include_directory_ / model_name_);
     } else {
-        r.push_front(settings_.project_directory() / model_name_);
+        r.push_front(options_.project_directory() / model_name_);
     }
 
     return r;

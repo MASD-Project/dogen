@@ -27,7 +27,6 @@
 
 #include <list>
 #include <utility>
-#include "dogen/config/types/knitting_settings.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -38,14 +37,11 @@ namespace sml {
  */
 class workflow {
 public:
-    workflow() = delete;
+    workflow() = default;
     workflow(const workflow&) = default;
     ~workflow() = default;
     workflow(workflow&&) = default;
     workflow& operator=(const workflow&) = default;
-
-public:
-    explicit workflow(const config::knitting_settings& s);
 
 private:
     /**
@@ -99,9 +95,6 @@ public:
      * @note parameter copied by design.
      */
     std::pair<bool, model> execute(std::list<model> models) const;
-
-private:
-    const config::knitting_settings settings_;
 };
 
 } }

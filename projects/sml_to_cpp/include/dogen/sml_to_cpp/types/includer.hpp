@@ -30,7 +30,7 @@
 #include <string>
 #include <utility>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formattables/includes.hpp"
@@ -72,7 +72,7 @@ public:
     includer(includer&& rhs);
     includer(const sml::model& model,
         const locator& locator,
-        const config::cpp_settings& settings);
+        const config::cpp_options& options);
 
 private:
     /**
@@ -224,7 +224,7 @@ public:
 private:
     const sml::model model_;
     const locator locator_;
-    const config::cpp_settings settings_;
+    const config::cpp_options options_;
     const bool io_enabled_;
     const bool serialization_enabled_;
     const bool hash_enabled_;

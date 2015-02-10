@@ -29,7 +29,7 @@
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml_to_cpp/types/locator.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
@@ -81,9 +81,9 @@ const std::vector<cpp_facet_types> facets =
     cpp_facet_types::test_data
 };
 
-dogen::config::cpp_settings mock_settings() {
-    return dogen::config::test::mock_settings_factory::
-        make_cpp_settings(project_dir);
+dogen::config::cpp_options mock_options() {
+    return dogen::config::test::mock_options_factory::
+        make_cpp_options(project_dir);
 }
 
 std::string object_name() {
@@ -91,7 +91,7 @@ std::string object_name() {
 }
 
 dogen::sml_to_cpp::includer default_includer(const dogen::sml::model& m) {
-    auto s(mock_settings());
+    auto s(mock_options());
     s.use_integrated_io(false);
 
     dogen::sml_to_cpp::locator lm(m.name().simple_name(), s);
@@ -99,7 +99,7 @@ dogen::sml_to_cpp::includer default_includer(const dogen::sml::model& m) {
 }
 
 dogen::sml_to_cpp::includer includer_with_no_keys(const dogen::sml::model& m) {
-    auto s(mock_settings());
+    auto s(mock_options());
     s.use_integrated_io(false);
     dogen::sml_to_cpp::locator lm(m.name().simple_name(), s);
     return dogen::sml_to_cpp::includer(m, lm, s);

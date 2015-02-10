@@ -43,12 +43,12 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<archive_types_generator>();
     test_swap<cpp_facet_types_generator>();
-    test_swap<cpp_settings_generator>();
-    test_swap<input_settings_generator>();
-    test_swap<output_settings_generator>();
+    test_swap<cpp_options_generator>();
+    test_swap<input_options_generator>();
+    test_swap<output_options_generator>();
     test_swap<reference_generator>();
-    test_swap<knitting_settings_generator>();
-    test_swap<troubleshooting_settings_generator>();
+    test_swap<knitting_options_generator>();
+    test_swap<troubleshooting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

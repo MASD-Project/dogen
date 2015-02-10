@@ -26,7 +26,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/cpp/io/all_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
@@ -47,7 +47,7 @@ const mock_model_factory model_factory(flags);
 
 using dogen::sml::test::mock_model_factory;
 using dogen::utility::test::contains_checker;
-using dogen::config::test::mock_settings_factory;
+using dogen::config::test::mock_options_factory;
 
 BOOST_AUTO_TEST_SUITE(content_descriptor_factory)
 
@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_all_facets_enabled_produce
     BOOST_LOG_SEV(lg, debug) << "qname: "
                              << dogen::sml::string_converter::convert(qn);
 
-    const auto ft(mock_settings_factory::make_facets());
+    const auto ft(mock_options_factory::make_facets());
     dogen::cpp::formattables::content_descriptor_factory f(ft);
     const auto ct(dogen::cpp::formattables::content_types::enumeration);
     const auto cds(f.create(qn, ct));
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_with_some_facets_enabled_produc
     BOOST_LOG_SEV(lg, debug) << "qname: "
                              << dogen::sml::string_converter::convert(qn);
 
-    const auto ft(mock_settings_factory::make_facets(false));
+    const auto ft(mock_options_factory::make_facets(false));
     dogen::cpp::formattables::content_descriptor_factory f(ft);
     const auto ct(dogen::cpp::formattables::content_types::enumeration);
     const auto cds(f.create(qn, ct));
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(creating_content_descriptor_from_model_produces_expected_re
     const auto m(model_factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    const auto ft(mock_settings_factory::make_facets());
+    const auto ft(mock_options_factory::make_facets());
     dogen::cpp::formattables::content_descriptor_factory f(ft);
     const auto cds(f.create(m));
     BOOST_LOG_SEV(lg, debug) << "content descriptors: " << cds;

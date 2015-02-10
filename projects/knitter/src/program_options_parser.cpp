@@ -393,9 +393,9 @@ program_options_parser::parse_facet_types(const std::string& s) {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
 }
 
-config::cpp_settings program_options_parser::
-transform_cpp_settings(const boost::program_options::variables_map& vm) const {
-    config::cpp_settings r;
+config::cpp_options program_options_parser::
+transform_cpp_options(const boost::program_options::variables_map& vm) const {
+    config::cpp_options r;
 
     r.split_project(vm.count(cpp_split_project_arg));
 
@@ -486,9 +486,9 @@ transform_cpp_settings(const boost::program_options::variables_map& vm) const {
     return r;
 }
 
-config::input_settings program_options_parser::transform_input_settings(
+config::input_options program_options_parser::transform_input_options(
     const boost::program_options::variables_map& vm) const {
-    config::input_settings r;
+    config::input_options r;
 
     if (!vm.count(target_arg))
         throw_missing_target();
@@ -528,9 +528,9 @@ config::input_settings program_options_parser::transform_input_settings(
     return r;
 }
 
-config::troubleshooting_settings program_options_parser::
-transform_troubleshooting_settings(const variables_map& vm) const {
-    config::troubleshooting_settings r;
+config::troubleshooting_options program_options_parser::
+transform_troubleshooting_options(const variables_map& vm) const {
+    config::troubleshooting_options r;
 
     r.stop_after_merging(vm.count(stop_after_merging_arg));
     r.stop_after_formatting(vm.count(stop_after_formatting_arg));
@@ -561,9 +561,9 @@ transform_troubleshooting_settings(const variables_map& vm) const {
     return r;
 }
 
-config::output_settings program_options_parser::
-transform_output_settings(const variables_map& vm) const {
-    config::output_settings r;
+config::output_options program_options_parser::
+transform_output_options(const variables_map& vm) const {
+    config::output_options r;
     r.output_to_stdout(vm.count(output_to_stdout_arg));
     r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
     r.delete_extra_files(vm.count(delete_extra_files_arg));
@@ -575,21 +575,21 @@ transform_output_settings(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<config::knitting_settings> program_options_parser::parse() {
+boost::optional<config::knitting_options> program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<config::knitting_settings>();
+        return boost::optional<config::knitting_options>();
 
     const boost::program_options::variables_map vm(*optional_vm);
-    config::knitting_settings r;
+    config::knitting_options r;
     r.verbose(vm.count(verbose_arg));
-    r.input(transform_input_settings(vm));
-    r.cpp(transform_cpp_settings(vm));
-    r.troubleshooting(transform_troubleshooting_settings(vm));
-    r.output(transform_output_settings(vm));
+    r.input(transform_input_options(vm));
+    r.cpp(transform_cpp_options(vm));
+    r.troubleshooting(transform_troubleshooting_options(vm));
+    r.output(transform_output_options(vm));
 
-    return boost::optional<config::knitting_settings>(r);
+    return boost::optional<config::knitting_options>(r);
 }
 
 } }

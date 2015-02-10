@@ -43,7 +43,7 @@ const std::string includer_name("all");
 namespace dogen {
 namespace cpp_formatters {
 
-workflow::workflow(const config::formatting_settings& s) : settings_(s) { }
+workflow::workflow(const config::knitting_options& o) : options_(o) { }
 
 workflow::result_type
 workflow::format_cmakelists_activity(
@@ -59,12 +59,12 @@ workflow::format_cmakelists_activity(
     r.insert(std::make_pair(src_path, s.str()));
 
     if (p.include_cmakelists()) {
-        const auto f(settings_.cpp().enabled_facets());
+        const auto f(options_.cpp().enabled_facets());
         const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
         s.str("");
 
         cpp_formatters::include_cmakelists inc(s, odb_enabled,
-            settings_.cpp().odb_facet_folder());
+            options_.cpp().odb_facet_folder());
         inc.format(*p.include_cmakelists());
 
         const auto inc_path(p.include_cmakelists()->file_path());
@@ -96,7 +96,7 @@ workflow::format_file_infos_activity(
     for (const auto f : p.files()) {
         BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
         BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
-        cpp_formatters::factory factory(settings_);
+        cpp_formatters::factory factory(options_);
         cpp_formatters::file_formatter::shared_ptr ff;
         std::ostringstream s;
         ff = factory.create(s, f.descriptor());
@@ -111,14 +111,14 @@ workflow::result_type workflow::execute(const cpp::formattables::project& p) {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
     workflow::result_type r(format_file_infos_activity(p));
-    if (settings_.cpp().disable_cmakelists())
+    if (options_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else {
         const auto cm(format_cmakelists_activity(p));
         r.insert(cm.begin(), cm.end());
     }
 
-    const auto f(settings_.cpp().enabled_facets());
+    const auto f(options_.cpp().enabled_facets());
     const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
     if (odb_enabled)
         r.insert(format_odb_options_activity(p));

@@ -31,7 +31,6 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/formatting_settings.hpp"
 #include "dogen/cpp_formatters/types/workflow.hpp"
 #include "dogen/sml_to_cpp/types/workflow.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
@@ -48,12 +47,12 @@ public:
     cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    cpp_backend(const sml::model& model, const config::formatting_settings& s);
+    cpp_backend(const sml::model& model, const config::knitting_options& o);
     virtual ~cpp_backend() noexcept {}
 
 public:
     static backend::ptr
-    create(const sml::model& model, const config::formatting_settings& s);
+    create(const sml::model& model, const config::knitting_options& o);
 
 public:
     backend::value_type generate() override;

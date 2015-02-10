@@ -31,11 +31,11 @@
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/sml_to_cpp/types/file_info_factory.hpp"
 
 using dogen::config::cpp_facet_types;
-using dogen::config::test::mock_settings_factory;
+using dogen::config::test::mock_options_factory;
 using dogen::config::cpp_facet_types;
 using dogen::cpp::formattables::file_types;
 using dogen::cpp::formattables::aspect_types;
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_enumeration_produces_expected_result
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.enumerations().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto ei(boost::make_shared<dogen::cpp::formattables::enum_info>());
@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_exception_produces_expected_results)
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto& ex(m.objects().begin()->second);
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_module_produces_expected_results) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.modules().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto p(m.modules().begin()->second);
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_object_produces_expected_results) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::file_info_factory f(l);
     const auto& p(m.objects().begin()->second);
@@ -281,7 +281,7 @@ BOOST_AUTO_TEST_CASE(creating_non_empty_includer_file_info_produces_expected_res
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
     dogen::sml_to_cpp::file_info_factory f(l);
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(creating_empty_includer_file_info_produces_expected_results
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
     dogen::sml_to_cpp::file_info_factory f(l);
@@ -362,7 +362,7 @@ BOOST_AUTO_TEST_CASE(creating_file_info_for_registrar_produces_expected_results)
     const auto m(model_factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    const auto s(mock_settings_factory::make_cpp_settings(src_dir, inc_dir));
+    const auto s(mock_options_factory::make_cpp_options(src_dir, inc_dir));
     dogen::sml_to_cpp::locator l(m.name().simple_name(), s);
     dogen::sml_to_cpp::includer i(m, l, s);
     dogen::sml_to_cpp::file_info_factory f(l);

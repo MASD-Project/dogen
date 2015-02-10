@@ -34,8 +34,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
-#include "dogen/config/types/formatting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/utility/serialization/archive_types.hpp"
@@ -53,7 +52,7 @@ namespace knit {
  * read in the target model and all of its dependencies. There are two
  * types of dependencies:
  *
- * @li @e explicit: specified by the settings passed in; these are
+ * @li @e explicit: specified by the options passed in; these are
  * models created by the user and any models that they, in turn,
  * depend on.
  *
@@ -67,7 +66,7 @@ namespace knit {
  * model; all dependencies are resolved and validated.
  *
  * The workflow then instantiates all backends requested by the
- * settings passed in. They use the merged model to generate source
+ * options passed in. They use the merged model to generate source
  * code, and then outputted it to the desired destination.
  */
 class workflow {
@@ -81,8 +80,8 @@ public:
 
 public:
     workflow(workflow&& rhs);
-    explicit workflow(const config::knitting_settings& s);
-    workflow(const config::knitting_settings& s, const output_fn& o);
+    explicit workflow(const config::knitting_options& s);
+    workflow(const config::knitting_options& s, const output_fn& o);
 
 public: // public section for testing purposes only
     /**
@@ -155,24 +154,17 @@ private:
     merge_models_activity(const std::list<sml::model>& models) const;
 
     /**
-     * @brief Checks the settings chosen by the user to determine if
+     * @brief Checks the options chosen by the user to determine if
      * the SML model should be persisted; if so, persists it.
      */
     void persist_model_activity(const boost::filesystem::path p,
         const sml::model& m) const;
 
     /**
-     * @brief Extracts the formatting settings from the SML model.
-     */
-    config::formatting_settings
-    extract_formatting_settings_activity(const sml::model& m) const;
-
-    /**
      * @brief Given a merged model, generates all of its
      * representations.
      */
-    void generate_model_activity(const sml::model& m,
-        const config::formatting_settings& fs) const;
+    void generate_model_activity(const sml::model& m) const;
 
 public:
     /**
@@ -181,7 +173,7 @@ public:
     void execute() const;
 
 private:
-    const config::knitting_settings knitting_settings_;
+    const config::knitting_options knitting_options_;
     const output_fn output_;
 };
 

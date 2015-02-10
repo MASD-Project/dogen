@@ -42,13 +42,13 @@ void factory::log_output_disabled(std::string name) const {
 factory::production_type factory::create() const {
     production_type r;
 
-    if (settings_.output_to_file()) {
-        outputter::ptr o(new file_outputter(settings_.force_write()));
+    if (options_.output_to_file()) {
+        outputter::ptr o(new file_outputter(options_.force_write()));
         r.push_back(o);
     } else
         log_output_disabled(file_outputter::outputter_name());
 
-    if (settings_.output_to_stdout()) {
+    if (options_.output_to_stdout()) {
         outputter::ptr o(new stream_outputter(stream_fn_()));
         r.push_back(o);
     } else

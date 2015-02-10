@@ -31,7 +31,7 @@ namespace dogen {
  * @brief Stores the configuration for Dogen applications.
  *
  * The config model provides types to store general configuration
- * settings for all the different Dogen applications, such as
+ * options for all the different Dogen applications, such as
  * knitter, etc.
  *
  */

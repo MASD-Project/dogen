@@ -44,8 +44,8 @@ namespace frontend {
 
 std::shared_ptr<frontend::registrar> workflow::registrar_;
 
-workflow::workflow(const config::knitting_settings& ks)
-    : knitting_settings_(ks), dynamic_workflow_() {
+workflow::workflow(const config::knitting_options& o)
+    : knitting_options_(o), dynamic_workflow_() {
 
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
@@ -87,7 +87,7 @@ boost::filesystem::path workflow::
 create_debug_file_path(const config::archive_types at,
     const boost::filesystem::path& original_path) const {
 
-    const auto& ts(knitting_settings_.troubleshooting());
+    const auto& ts(knitting_options_.troubleshooting());
     boost::filesystem::path r(ts.debug_dir());
     r /= original_path.stem();
     r.replace_extension(extension(at));
@@ -98,13 +98,13 @@ frontend_settings
 workflow::create_frontend_settings(const boost::filesystem::path& p) const {
     frontend_settings r;
 
-    const auto& is(knitting_settings_.input());
+    const auto& is(knitting_options_.input());
     r.disable_model_module(is.disable_model_module());
 
-    //FIXME: using dia model settings for all frontends; mega-hack
-    const auto& ts(knitting_settings_.troubleshooting());
+    //FIXME: using dia model options for all frontends; mega-hack
+    const auto& to(knitting_options_.troubleshooting());
     using config::archive_types;
-    archive_types at(ts.save_dia_model());
+    archive_types at(to.save_dia_model());
     if (at == archive_types::invalid)
         return r;
 
@@ -125,9 +125,9 @@ create_sml_model_activity(const input_descriptor& d) const {
 void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
     const sml::model& m) const {
 
-    const auto& ts(knitting_settings_.troubleshooting());
+    const auto& to(knitting_options_.troubleshooting());
     using config::archive_types;
-    archive_types at(ts.save_sml_model());
+    archive_types at(to.save_sml_model());
     if (at == archive_types::invalid)
         return;
 

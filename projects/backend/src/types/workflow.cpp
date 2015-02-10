@@ -44,8 +44,8 @@ namespace backend {
 
 std::shared_ptr<backend::registrar> workflow::registrar_;
 
-workflow::workflow(const config::knitting_settings& ks)
-    : knitting_settings_(ks) { }
+workflow::workflow(const config::knitting_options& o)
+    : knitting_options_(o) { }
 
 backend::registrar& workflow::registrar() {
     if (!registrar_)

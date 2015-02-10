@@ -26,12 +26,12 @@ namespace knit {
 namespace backends {
 
 cpp_backend::
-cpp_backend(const sml::model& model, const config::formatting_settings& s) :
-    transformer_(model, s), formatter_(s) { }
+cpp_backend(const sml::model& model, const config::knitting_options& o) :
+    transformer_(model, o), formatter_(o) { }
 
 backend::ptr cpp_backend::
-create(const sml::model& model, const config::formatting_settings& s) {
-    return backend::ptr(new cpp_backend(model, s));
+create(const sml::model& model, const config::knitting_options& o) {
+    return backend::ptr(new cpp_backend(model, o));
 }
 
 backend::value_type cpp_backend::generate() {

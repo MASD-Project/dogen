@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/config/types/formatting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 
@@ -45,23 +45,23 @@ public:
     typedef file_formatter::shared_ptr result_type;
 
 public:
-    factory(const config::formatting_settings& s);
+    factory(const config::knitting_options& o);
 
 private:
-    result_type create_main_formatter(std::ostream& s,
+    result_type make_main_formatter(std::ostream& s,
         const cpp::formattables::content_descriptor& cd) const;
 
-    result_type create_registrar_formatter(
+    result_type make_registrar_formatter(
         std::ostream& s, const cpp::formattables::content_descriptor& cd) const;
 
-    result_type create_null_formatter(std::ostream& s) const;
+    result_type make_null_formatter(std::ostream& s) const;
 
 public:
     result_type create(std::ostream& s,
         const cpp::formattables::content_descriptor& cd) const;
 
 private:
-    const config::formatting_settings settings_;
+    const config::knitting_options options_;
     const bool disable_io_;
     const bool disable_serialization_;
 };

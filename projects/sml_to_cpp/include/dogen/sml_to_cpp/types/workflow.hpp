@@ -32,7 +32,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/formatting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/formattables/project.hpp"
 #include "dogen/cpp/types/formattables/file_info.hpp"
@@ -60,14 +60,14 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const sml::model& model, const config::formatting_settings& s);
+    workflow(const sml::model& model, const config::knitting_options& o);
     virtual ~workflow() noexcept {}
 
 private:
     /**
-     * @brief Ensure the C++ settings are consistent.
+     * @brief Ensure the C++ options are consistent.
      */
-    void validate_settings() const;
+    void validate_options() const;
 
 private:
     /**
@@ -177,7 +177,7 @@ public:
 private:
     context context_;
     const sml::model& model_;
-    const config::formatting_settings settings_;
+    const config::knitting_options options_;
     const locator locator_;
     mutable includer includer_;
     const file_info_factory file_info_factory_;

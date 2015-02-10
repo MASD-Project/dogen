@@ -27,7 +27,7 @@
 
 #include <vector>
 #include <functional>
-#include "dogen/config/types/output_settings.hpp"
+#include "dogen/config/types/output_options.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 
 namespace dogen {
@@ -50,14 +50,14 @@ private:
     void log_output_disabled(std::string name) const;
 
 public:
-    factory(config::output_settings settings, function_type stream_fn)
-        : settings_(settings), stream_fn_(stream_fn) { }
+    factory(config::output_options options, function_type stream_fn)
+        : options_(options), stream_fn_(stream_fn) { }
 
 public:
     production_type create() const;
 
 private:
-    const config::output_settings settings_;
+    const config::output_options options_;
     const function_type stream_fn_;
 };
 

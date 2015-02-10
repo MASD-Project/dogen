@@ -22,11 +22,11 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/types/knitting_settings_validator.hpp"
+#include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/version.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/workflow.hpp"
 
@@ -71,41 +71,41 @@ namespace knitter {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const dogen::config::knitting_settings& s) {
-    const boost::filesystem::path p(s.input().target());
+initialise_model_name(const dogen::config::knitting_options& o) {
+    const boost::filesystem::path p(o.input().target());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<config::knitting_settings> workflow::
-generate_knitting_settings_activity(const int argc, const char* argv[]) const {
+boost::optional<config::knitting_options> workflow::
+generate_knitting_options_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
-    boost::optional<config::knitting_settings> r(p.parse());
+    boost::optional<config::knitting_options> r(p.parse());
     if (r)
-        config::knitting_settings_validator::validate(*r);
+        config::knitting_options_validator::validate(*r);
 
     return r;
 }
 
-void workflow::initialise_logging_activity(const config::knitting_settings& s) {
-    const auto sev(s.verbose() ? severity_level::debug : severity_level::info);
+void workflow::initialise_logging_activity(const config::knitting_options& o) {
+    const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
     log_file_name_ = log_file_prefix + model_name_ + ".log";
     life_cycle_manager lcm;
     lcm.initialise(log_file_name_, sev);
     can_log_ = true;
 }
 
-void workflow::knit_activity(const config::knitting_settings& s) const {
+void workflow::knit_activity(const config::knitting_options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
-    if (s.output().output_to_stdout()) {
+    if (o.output().output_to_stdout()) {
         auto lambda([]() -> std::ostream& {return std::cout;});
-        knit::workflow w(s, lambda);
+        knit::workflow w(o, lambda);
         w.execute();
         BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
     }
 
-    knit::workflow w(s);
+    knit::workflow w(o);
     w.execute();
     BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
 }
@@ -147,9 +147,9 @@ void workflow::report_exception() const {
 
 int workflow::execute(const int argc, const char* argv[]) {
     try {
-        const auto o(generate_knitting_settings_activity(argc, argv));
+        const auto o(generate_knitting_options_activity(argc, argv));
 
-        /* can only happen if the settings are valid but do not
+        /* can only happen if the options are valid but do not
          * require any action.
          */
         if (!o)

@@ -41,8 +41,6 @@ auto lg(logger_factory("sml.workflow"));
 namespace dogen {
 namespace sml {
 
-workflow::workflow(const config::knitting_settings& s) : settings_(s) { }
-
 bool workflow::is_generatable(const type& t) const {
     const auto gt(t.generation_type());
     return

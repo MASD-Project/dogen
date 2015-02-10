@@ -29,7 +29,7 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/cpp_settings.hpp"
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/cpp/types/formattables/file_types.hpp"
@@ -52,7 +52,7 @@ public:
 public:
     locator(locator&& rhs);
     locator(const std::string& model_name,
-        const config::cpp_settings& settings);
+        const config::cpp_options& options);
 
 public:
     typedef boost::filesystem::path path;
@@ -146,7 +146,7 @@ public:
 
 private:
     const std::string model_name_;
-    const config::cpp_settings settings_;
+    const config::cpp_options options_;
     boost::filesystem::path source_directory_;
     boost::filesystem::path include_directory_;
 };

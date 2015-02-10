@@ -18,14 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/annotation_settings_hash.hpp"
 #include "dogen/config/hash/archive_types_hash.hpp"
-#include "dogen/config/hash/code_generation_marker_settings_hash.hpp"
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
-#include "dogen/config/hash/cpp_settings_hash.hpp"
-#include "dogen/config/hash/formatting_settings_hash.hpp"
-#include "dogen/config/hash/input_settings_hash.hpp"
-#include "dogen/config/hash/knitting_settings_hash.hpp"
-#include "dogen/config/hash/output_settings_hash.hpp"
+#include "dogen/config/hash/cpp_options_hash.hpp"
+#include "dogen/config/hash/input_options_hash.hpp"
+#include "dogen/config/hash/knitting_options_hash.hpp"
+#include "dogen/config/hash/output_options_hash.hpp"
 #include "dogen/config/hash/reference_hash.hpp"
-#include "dogen/config/hash/troubleshooting_settings_hash.hpp"
+#include "dogen/config/hash/troubleshooting_options_hash.hpp"

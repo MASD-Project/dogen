@@ -55,21 +55,21 @@ namespace dogen {
 namespace sml_to_cpp {
 
 workflow::
-workflow(const sml::model& model, const config::formatting_settings& s) :
-    model_(model), settings_(s),
-    locator_(model.name().model_name(), settings_.cpp()),
-    includer_(model_, locator_, settings_.cpp()),
+workflow(const sml::model& model, const config::knitting_options& o) :
+    model_(model), options_(o),
+    locator_(model.name().model_name(), options_.cpp()),
+    includer_(model_, locator_, options_.cpp()),
     file_info_factory_(locator_),
     transformer_(model_, context_),
-    descriptor_factory_(settings_.cpp().enabled_facets()),
+    descriptor_factory_(options_.cpp().enabled_facets()),
     extractor_() {
 
-    validate_settings();
+    validate_options();
 }
 
-void workflow::validate_settings() const {
-    if (settings_.cpp().use_integrated_io()) {
-        const auto f(settings_.cpp().enabled_facets());
+void workflow::validate_options() const {
+    if (options_.cpp().use_integrated_io()) {
+        const auto f(options_.cpp().enabled_facets());
         const bool has_io_facet(f.find(config::cpp_facet_types::io) != f.end());
         if (has_io_facet) {
             BOOST_LOG_SEV(lg, error)
@@ -79,7 +79,7 @@ void workflow::validate_settings() const {
         }
     }
 
-    const auto f(settings_.cpp().enabled_facets());
+    const auto f(options_.cpp().enabled_facets());
     if (f.find(config::cpp_facet_types::types) == f.end()) {
         BOOST_LOG_SEV(lg, error) << domain_facet_must_be_enabled;
         BOOST_THROW_EXCEPTION(workflow_failure(domain_facet_must_be_enabled));
@@ -147,7 +147,7 @@ void workflow::transform_module(const sml::module& m) {
 }
 
 void workflow::transform_registrar() {
-    const auto f(settings_.cpp().enabled_facets());
+    const auto f(options_.cpp().enabled_facets());
     if (f.find(config::cpp_facet_types::serialization) == f.end())
         return;
 
@@ -405,8 +405,8 @@ generate_cmakelists_activity(cpp::formattables::project& p) const {
         ci.product_name(model_.name().external_module_path().front());
 
     p.src_cmakelists(ci);
-    if (!settings_.cpp().split_project()) {
-        const auto f(settings_.cpp().enabled_facets());
+    if (!options_.cpp().split_project()) {
+        const auto f(options_.cpp().enabled_facets());
         ci.file_path(locator_.absolute_path(ci.file_name()));
         p.include_cmakelists(ci);
     }
@@ -420,7 +420,7 @@ generate_odb_options_activity(cpp::formattables::project& p) const {
     ooi.file_name(odb_options_file_name);
     ooi.file_path(locator_.absolute_path_to_src(ooi.file_name()));
     ooi.model_name(model_.name().model_name());
-    ooi.odb_folder(settings_.cpp().odb_facet_folder());
+    ooi.odb_folder(options_.cpp().odb_facet_folder());
 
     if (!model_.name().external_module_path().empty())
         ooi.product_name(model_.name().external_module_path().front());
@@ -436,12 +436,12 @@ managed_directories() const {
 cpp::formattables::project workflow::generation_sub_workflow() {
     cpp::formattables::project r;
     generate_file_infos_activity(r);
-    if (settings_.cpp().disable_cmakelists())
+    if (options_.cpp().disable_cmakelists())
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
     else
         generate_cmakelists_activity(r);
 
-    const auto f(settings_.cpp().enabled_facets());
+    const auto f(options_.cpp().enabled_facets());
     const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
     if (odb_enabled)
         generate_odb_options_activity(r);

@@ -32,7 +32,7 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/program_options.hpp>
 #include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 
 namespace dogen {
 namespace knitter {
@@ -82,20 +82,20 @@ private:
     static config::cpp_facet_types parse_facet_types(const std::string& s);
 
 private:
-    config::input_settings
-    transform_input_settings(const variables_map& vm) const;
-    config::cpp_settings transform_cpp_settings(const variables_map& vm) const;
-    config::troubleshooting_settings
-    transform_troubleshooting_settings(const variables_map& vm) const;
-    config::output_settings
-    transform_output_settings(const variables_map& vm) const;
+    config::input_options
+    transform_input_options(const variables_map& vm) const;
+    config::cpp_options transform_cpp_options(const variables_map& vm) const;
+    config::troubleshooting_options
+    transform_troubleshooting_options(const variables_map& vm) const;
+    config::output_options
+    transform_output_options(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<config::knitting_settings> parse();
+    boost::optional<config::knitting_options> parse();
 
 private:
     const std::vector<std::string> arguments_;

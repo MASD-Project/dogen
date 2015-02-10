@@ -22,7 +22,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/range/algorithm/find_first_of.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/io/cpp_settings_io.hpp"
+#include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/config/io/cpp_facet_types_io.hpp"
 #include "dogen/sml_to_cpp/types/includer.hpp"
 
@@ -50,7 +50,7 @@ namespace sml_to_cpp {
 includer::includer(includer&& rhs)
     : model_(std::move(rhs.model_)),
       locator_(std::move(rhs.locator_)),
-      settings_(std::move(rhs.settings_)),
+      options_(std::move(rhs.options_)),
       io_enabled_(std::move(rhs.io_enabled_)),
       serialization_enabled_(std::move(rhs.serialization_enabled_)),
       hash_enabled_(std::move(rhs.hash_enabled_)),
@@ -60,16 +60,16 @@ includer::includer(includer&& rhs)
 
 includer::includer(const sml::model& model,
     const locator& locator,
-    const config::cpp_settings& settings)
-    : model_(model), locator_(locator), settings_(settings),
-      io_enabled_(contains(settings_.enabled_facets(),
+    const config::cpp_options& options)
+    : model_(model), locator_(locator), options_(options),
+      io_enabled_(contains(options_.enabled_facets(),
               config::cpp_facet_types::io)),
-      serialization_enabled_(contains(settings_.enabled_facets(),
+      serialization_enabled_(contains(options_.enabled_facets(),
               config::cpp_facet_types::serialization)),
-      hash_enabled_(contains(settings_.enabled_facets(),
+      hash_enabled_(contains(options_.enabled_facets(),
               config::cpp_facet_types::hash)), boost_(), std_() {
 
-    BOOST_LOG_SEV(lg, debug) << "Initial configuration: " << settings_;
+    BOOST_LOG_SEV(lg, debug) << "Initial configuration: " << options_;
 }
 
 void includer::register_header(config::cpp_facet_types ft,
@@ -114,7 +114,7 @@ append_implementation_dependencies(const relationships& rel,
     const bool is_types(cd.facet_type() == cpp_facet_types::types);
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
     const bool domain_with_io(is_types &&
-        (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
+        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 
     if (is_header && io_enabled_ && (domain_with_io || is_io))
         inc.system().push_back(std_.include(std_types::iosfwd));
@@ -125,7 +125,7 @@ append_implementation_dependencies(const relationships& rel,
 
     // ostream:
     const bool is_implementation(cd.file_type() == file_types::implementation);
-    const bool io_without_iio(is_io && !settings_.use_integrated_io());
+    const bool io_without_iio(is_io && !options_.use_integrated_io());
     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
         inc.system().push_back(std_.include(std_types::ostream));
 
@@ -141,7 +141,7 @@ append_implementation_dependencies(const relationships& rel,
     const auto ser(cpp_facet_types::serialization);
     const bool is_serialization(cd.facet_type() == ser);
     if (is_implementation && is_serialization &&
-        !settings_.disable_xml_serialization())
+        !options_.disable_xml_serialization())
         inc.system().push_back(boost_.include(boost_types::nvp));
 
     // split free serialisation
@@ -158,11 +158,11 @@ append_implementation_dependencies(const relationships& rel,
 
     // boost archive types
     if (is_implementation && is_serialization) {
-        if (!settings_.disable_xml_serialization()) {
+        if (!options_.disable_xml_serialization()) {
             inc.system().push_back(boost_.include(boost_types::xml_oarchive));
             inc.system().push_back(boost_.include(boost_types::xml_iarchive));
         }
-        if (!settings_.disable_eos_serialization()) {
+        if (!options_.disable_eos_serialization()) {
             inc.system().push_back(boost_.include(boost_types::eos_oarchive));
             inc.system().push_back(boost_.include(boost_types::eos_iarchive));
         }
@@ -274,8 +274,8 @@ void includer::append_boost_dependencies(const relationships& rel,
 
     const bool is_io(cd.facet_type() == cpp_facet_types::io);
     const bool domain_with_io(is_types &&
-        (settings_.use_integrated_io() || rel.is_parent() || rel.is_child()));
-    const bool io_without_iio(is_io && !settings_.use_integrated_io());
+        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
+    const bool io_without_iio(is_io && !options_.use_integrated_io());
 
     /*
      * boost::gregorian::date
@@ -564,7 +564,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
          * headers in domain implementation.
          */
         const bool domain_with_io(is_types &&
-            (settings_.use_integrated_io() || rel.is_parent() ||
+            (options_.use_integrated_io() || rel.is_parent() ||
                 rel.is_child()));
 
         const auto io(cpp_facet_types::io);
@@ -710,7 +710,7 @@ cpp::formattables::includes includer::includes_for_enumeration(
 
     // nvp serialisation
     const bool is_serialization(ft == cpp_facet_types::serialization);
-    if (is_header && is_serialization && !settings_.disable_xml_serialization())
+    if (is_header && is_serialization && !options_.disable_xml_serialization())
         r.system().push_back(boost_.include(boost_types::nvp));
 
     // iosfwd
@@ -784,11 +784,11 @@ cpp::formattables::includes includer::includes_for_registrar(
         r.user().push_back(header_dependency(n, ft, main));
     }
 
-    if (!settings_.disable_xml_serialization()) {
+    if (!options_.disable_xml_serialization()) {
         r.system().push_back(boost_.include(boost_types::xml_oarchive));
         r.system().push_back(boost_.include(boost_types::xml_iarchive));
     }
-    if (!settings_.disable_eos_serialization()) {
+    if (!options_.disable_eos_serialization()) {
         r.system().push_back(boost_.include(boost_types::eos_oarchive));
         r.system().push_back(boost_.include(boost_types::eos_iarchive));
     }

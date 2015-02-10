@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/config/io/knitting_settings_io.hpp"
+#include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 
@@ -192,7 +192,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-dogen::config::knitting_settings
+dogen::config::knitting_options
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);
@@ -277,8 +277,8 @@ BOOST_AUTO_TEST_CASE(supplying_no_arguments_throws) {
     check_exception(std::vector<std::string> {}, missing_target);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_modeling_options_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_modeling_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         external_module_path_arg,
@@ -290,15 +290,15 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_settings) {
         disable_model_module_arg
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto is(s.input());
-    BOOST_CHECK(is.target().string() == target_value_arg);
-    BOOST_CHECK(is.external_module_path() == external_module_path_value_arg);
-    BOOST_CHECK(is.disable_model_module());
+    const auto io(ko.input());
+    BOOST_CHECK(io.target().string() == target_value_arg);
+    BOOST_CHECK(io.external_module_path() == external_module_path_value_arg);
+    BOOST_CHECK(io.disable_model_module());
 
-    const auto refs(is.references());
+    const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
     BOOST_CHECK(refs[0].path().string() == reference_value_1_arg);
     BOOST_CHECK(refs[1].path().string() == reference_value_2_arg);
@@ -317,11 +317,11 @@ BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_mod
         disable_model_module_arg
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto is(s.input());
-    const auto refs(is.references());
+    const auto io(ko.input());
+    const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
 
     BOOST_CHECK(refs[0].path().string() == reference_value_3_diagram);
@@ -332,17 +332,17 @@ BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_mod
         refs[1].external_module_path() == reference_value_4_module_path);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_modeling_options_other_than_target_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_modeling_options_other_than_target_results_in_expected_options");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto is(s.input());
+    const auto is(ko.input());
     BOOST_CHECK(is.target().string() == target_value_arg);
     BOOST_CHECK(is.external_module_path().empty());
     BOOST_REQUIRE(is.references().empty());
@@ -358,8 +358,8 @@ BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {
     check_exception(o, missing_target);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_cpp_arguments_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_cpp_arguments_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         cpp_split_project_arg,
@@ -386,35 +386,35 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_settings) {
         cpp_use_integrated_io_arg
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto cs(s.cpp());
-    BOOST_CHECK(cs.source_directory().string() == cpp_source_value_arg);
-    BOOST_CHECK(cs.include_directory().string() == cpp_include_value_arg);
+    const auto co(ko.cpp());
+    BOOST_CHECK(co.source_directory().string() == cpp_source_value_arg);
+    BOOST_CHECK(co.include_directory().string() == cpp_include_value_arg);
 
-    BOOST_CHECK(cs.disable_backend());
-    BOOST_CHECK(cs.disable_cmakelists());
-    BOOST_CHECK(cs.disable_complete_constructor());
-    BOOST_CHECK(cs.disable_facet_includers());
-    BOOST_CHECK(cs.disable_facet_folders());
-    BOOST_CHECK(cs.disable_unique_file_names());
-    BOOST_CHECK(cs.disable_xml_serialization());
-    BOOST_CHECK(cs.use_integrated_io());
+    BOOST_CHECK(co.disable_backend());
+    BOOST_CHECK(co.disable_cmakelists());
+    BOOST_CHECK(co.disable_complete_constructor());
+    BOOST_CHECK(co.disable_facet_includers());
+    BOOST_CHECK(co.disable_facet_folders());
+    BOOST_CHECK(co.disable_unique_file_names());
+    BOOST_CHECK(co.disable_xml_serialization());
+    BOOST_CHECK(co.use_integrated_io());
 
-    BOOST_CHECK(cs.header_extension() == cpp_header_extension_value_arg);
-    BOOST_CHECK(cs.source_extension() == cpp_source_extension_value_arg);
+    BOOST_CHECK(co.header_extension() == cpp_header_extension_value_arg);
+    BOOST_CHECK(co.source_extension() == cpp_source_extension_value_arg);
 
-    BOOST_CHECK(cs.domain_facet_folder() == cpp_domain_facet_folder_value_arg);
-    BOOST_CHECK(cs.hash_facet_folder() == cpp_hash_facet_folder_value_arg);
-    BOOST_CHECK(cs.hash_facet_folder() == cpp_hash_facet_folder_value_arg);
-    BOOST_CHECK(cs.io_facet_folder() == cpp_io_facet_folder_value_arg);
-    BOOST_CHECK(cs.serialization_facet_folder() ==
+    BOOST_CHECK(co.domain_facet_folder() == cpp_domain_facet_folder_value_arg);
+    BOOST_CHECK(co.hash_facet_folder() == cpp_hash_facet_folder_value_arg);
+    BOOST_CHECK(co.hash_facet_folder() == cpp_hash_facet_folder_value_arg);
+    BOOST_CHECK(co.io_facet_folder() == cpp_io_facet_folder_value_arg);
+    BOOST_CHECK(co.serialization_facet_folder() ==
         cpp_serialization_facet_folder_value_arg);
-    BOOST_CHECK(cs.test_data_facet_folder() ==
+    BOOST_CHECK(co.test_data_facet_folder() ==
         cpp_test_data_facet_folder_value_arg);
 
-    const auto facets(cs.enabled_facets());
+    const auto facets(co.enabled_facets());
     BOOST_REQUIRE(facets.size() == 3);
 
     using dogen::config::cpp_facet_types;
@@ -447,37 +447,37 @@ BOOST_AUTO_TEST_CASE(supplying_invalid_archive_type_throws) {
     check_exception(o2, invalid_archive_type);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_cpp_arguments_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_cpp_arguments_results_in_expected_options");
     const std::vector<std::string> o = { target_arg, target_value_arg };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto cs(s.cpp());
-    BOOST_CHECK(!cs.split_project());
-    BOOST_CHECK(!cs.project_directory().empty());
-    BOOST_CHECK(cs.source_directory().empty());
-    BOOST_CHECK(cs.include_directory().empty());
+    const auto co(ko.cpp());
+    BOOST_CHECK(!co.split_project());
+    BOOST_CHECK(!co.project_directory().empty());
+    BOOST_CHECK(co.source_directory().empty());
+    BOOST_CHECK(co.include_directory().empty());
 
-    BOOST_CHECK(!cs.disable_backend());
-    BOOST_CHECK(!cs.disable_cmakelists());
-    BOOST_CHECK(!cs.disable_complete_constructor());
-    BOOST_CHECK(!cs.disable_facet_folders());
-    BOOST_CHECK(!cs.disable_unique_file_names());
-    BOOST_CHECK(!cs.disable_xml_serialization());
-    BOOST_CHECK(!cs.use_integrated_io());
+    BOOST_CHECK(!co.disable_backend());
+    BOOST_CHECK(!co.disable_cmakelists());
+    BOOST_CHECK(!co.disable_complete_constructor());
+    BOOST_CHECK(!co.disable_facet_folders());
+    BOOST_CHECK(!co.disable_unique_file_names());
+    BOOST_CHECK(!co.disable_xml_serialization());
+    BOOST_CHECK(!co.use_integrated_io());
 
-    BOOST_CHECK(!cs.header_extension().empty());
-    BOOST_CHECK(!cs.source_extension().empty());
+    BOOST_CHECK(!co.header_extension().empty());
+    BOOST_CHECK(!co.source_extension().empty());
 
-    BOOST_CHECK(!cs.domain_facet_folder().empty());
-    BOOST_CHECK(!cs.hash_facet_folder().empty());
-    BOOST_CHECK(!cs.hash_facet_folder().empty());
-    BOOST_CHECK(!cs.io_facet_folder().empty());
-    BOOST_CHECK(!cs.serialization_facet_folder().empty());
+    BOOST_CHECK(!co.domain_facet_folder().empty());
+    BOOST_CHECK(!co.hash_facet_folder().empty());
+    BOOST_CHECK(!co.hash_facet_folder().empty());
+    BOOST_CHECK(!co.io_facet_folder().empty());
+    BOOST_CHECK(!co.serialization_facet_folder().empty());
 
-    const auto facets(cs.enabled_facets());
+    const auto facets(co.enabled_facets());
     BOOST_REQUIRE(facets.size() == 6);
 
     using dogen::config::cpp_facet_types;
@@ -519,18 +519,18 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_version_results_in_version) 
     check_version(o);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_project_directory_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_project_directory_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         cpp_project_dir_arg, cpp_project_dir_value_arg
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto cs(s.cpp());
-    BOOST_CHECK(cs.project_directory() == cpp_project_dir_value_arg);
+    const auto co(ko.cpp());
+    BOOST_CHECK(co.project_directory() == cpp_project_dir_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
@@ -540,12 +540,12 @@ BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
         cpp_split_project_arg
     };
 
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto cs(s.cpp());
-    BOOST_CHECK(!cs.source_directory().empty());
-    BOOST_CHECK(!cs.include_directory().empty());
+    const auto co(ko.cpp());
+    BOOST_CHECK(!co.source_directory().empty());
+    BOOST_CHECK(!co.include_directory().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_source_or_include_without_split_throws) {
@@ -600,13 +600,13 @@ BOOST_AUTO_TEST_CASE(supplying_include_and_no_source_throws) {
     check_exception(o, source_include_error);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_troubleshooting_options_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_troubleshooting_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg
     };
     const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     const auto ts(s.troubleshooting());
     BOOST_CHECK(ts.debug_dir().empty());
@@ -619,8 +619,8 @@ BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_s
     BOOST_CHECK(!ts.stop_after_merging());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_troubleshooting_options_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_troubleshooting_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         debug_dir_arg, debug_dir_value_arg,
@@ -629,7 +629,7 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_setti
         stop_after_merging_arg, stop_after_formatting_arg
     };
     const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
     const auto ts(s.troubleshooting());
     BOOST_CHECK(ts.debug_dir().string() == debug_dir_value_arg);
@@ -642,12 +642,12 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_setti
     BOOST_CHECK(ts.stop_after_formatting());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_save_sml_or_dia_results_in_settings_with_debug_dir) {
-    SETUP_TEST_LOG_SOURCE("supplying_save_sml_or_dia_results_in_settings_with_debug_dir");
+BOOST_AUTO_TEST_CASE(supplying_save_sml_or_dia_results_in_options_with_debug_dir) {
+    SETUP_TEST_LOG_SOURCE("supplying_save_sml_or_dia_results_in_options_with_debug_dir");
     typedef std::vector<std::string> vector;
     auto lambda([&](vector o) {
             const auto s(check_valid_arguments(o));
-            BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+            BOOST_LOG_SEV(lg, debug) << "options: " << s;
 
             const auto ts(s.troubleshooting());
             BOOST_CHECK(!ts.debug_dir().empty());
@@ -666,21 +666,21 @@ BOOST_AUTO_TEST_CASE(supplying_save_sml_or_dia_results_in_settings_with_debug_di
     lambda(o2);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_output_options_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_output_options_results_in_expected_options");
     const std::vector<std::string> o = { target_arg, target_value_arg };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto fs(s.output());
-    BOOST_CHECK(fs.output_to_file());
-    BOOST_CHECK(!fs.output_to_stdout());
-    BOOST_CHECK(!fs.delete_extra_files());
-    BOOST_CHECK(!fs.force_write());
+    const auto oo(ko.output());
+    BOOST_CHECK(oo.output_to_file());
+    BOOST_CHECK(!oo.output_to_stdout());
+    BOOST_CHECK(!oo.delete_extra_files());
+    BOOST_CHECK(!oo.force_write());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_settings) {
-    SETUP_TEST_LOG_SOURCE("supplying_output_options_results_in_expected_settings");
+BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_output_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         output_to_stdout_arg,
@@ -688,14 +688,14 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_settings) {
         delete_extra_files_arg,
         force_write_arg
     };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto fs(s.output());
-    BOOST_CHECK(fs.output_to_file());
-    BOOST_CHECK(fs.output_to_stdout());
-    BOOST_CHECK(fs.delete_extra_files());
-    BOOST_CHECK(fs.force_write());
+    const auto oo(ko.output());
+    BOOST_CHECK(oo.output_to_file());
+    BOOST_CHECK(oo.output_to_stdout());
+    BOOST_CHECK(oo.delete_extra_files());
+    BOOST_CHECK(oo.force_write());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_output_to_std_out_disables_output_to_file) {
@@ -704,33 +704,33 @@ BOOST_AUTO_TEST_CASE(supplying_output_to_std_out_disables_output_to_file) {
         target_arg, target_value_arg,
         output_to_stdout_arg,
     };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
-    const auto fs(s.output());
-    BOOST_CHECK(!fs.output_to_file());
-    BOOST_CHECK(fs.output_to_stdout());
+    const auto oo(ko.output());
+    BOOST_CHECK(!oo.output_to_file());
+    BOOST_CHECK(oo.output_to_stdout());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_settings_with_verbose_on) {
-    SETUP_TEST_LOG_SOURCE("supplying_verobose_flag_results_in_settings_with_verbose_on");
+BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_options_with_verbose_on) {
+    SETUP_TEST_LOG_SOURCE("supplying_verobose_flag_results_in_options_with_verbose_on");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
         verbose_arg
     };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
-    BOOST_CHECK(s.verbose());
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
+    BOOST_CHECK(ko.verbose());
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_verobose_flag_results_in_settings_with_verbose_off) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_verobose_flag_results_in_settings_with_verbose_off");
+BOOST_AUTO_TEST_CASE(not_supplying_verobose_flag_results_in_options_with_verbose_off) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_verobose_flag_results_in_options_with_verbose_off");
 
     const std::vector<std::string> o = { target_arg, target_value_arg };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "settings: " << s;
-    BOOST_CHECK(!s.verbose());
+    const auto ko(check_valid_arguments(o));
+    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
+    BOOST_CHECK(!ko.verbose());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

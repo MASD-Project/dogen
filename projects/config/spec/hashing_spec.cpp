@@ -44,12 +44,12 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 
     test_hashing<archive_types_generator>();
     test_hashing<cpp_facet_types_generator>();
-    test_hashing<cpp_settings_generator>();
-    test_hashing<input_settings_generator>();
-    test_hashing<output_settings_generator>();
+    test_hashing<cpp_options_generator>();
+    test_hashing<input_options_generator>();
+    test_hashing<output_options_generator>();
     test_hashing<reference_generator>();
-    test_hashing<knitting_settings_generator>();
-    test_hashing<troubleshooting_settings_generator>();
+    test_hashing<knitting_options_generator>();
+    test_hashing<troubleshooting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

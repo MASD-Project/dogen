@@ -34,8 +34,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/config/test/mock_settings_factory.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/test/mock_options_factory.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -75,36 +75,36 @@ file_asserters() {
     return r;
 }
 
-dogen::config::knitting_settings
-default_mock_settings(dogen::utility::test_data::codegen_tds tds) {
-    using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::make_knitting_settings(
+dogen::config::knitting_options
+default_mock_options(dogen::utility::test_data::codegen_tds tds) {
+    using dogen::config::test::mock_options_factory;
+    return mock_options_factory::make_knitting_options(
         tds.target(), tds.actual(), module_path);
 }
 
-dogen::config::knitting_settings debug_dogen_mock_settings() {
+dogen::config::knitting_options debug_dogen_mock_options() {
     typedef dogen::utility::test_data::debug_dogen tds;
-    using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::make_knitting_settings(
+    using dogen::config::test::mock_options_factory;
+    return mock_options_factory::make_knitting_options(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
         empty_module_path);
 }
 
-dogen::config::knitting_settings empty_tds_mock_settings() {
+dogen::config::knitting_options empty_tds_mock_options() {
     typedef dogen::utility::test_data::empty_tds tds;
-    using dogen::config::test::mock_settings_factory;
-    return mock_settings_factory::make_knitting_settings(
+    using dogen::config::test::mock_options_factory;
+    return mock_options_factory::make_knitting_options(
         tds::target(),
         tds::actual_src(),
         tds::actual_include(),
         empty_module_path);
 }
 
-template<typename SettingsFactoryFunction>
+template<typename OptionsFactoryFunction>
 bool check_code_generation(boost::filesystem::path target,
-    SettingsFactoryFunction sff) {
+    OptionsFactoryFunction sff) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(target);
 
@@ -116,7 +116,7 @@ bool check_code_generation(boost::filesystem::path target,
 }
 
 bool check_code_generation(boost::filesystem::path target) {
-    return check_code_generation(target, default_mock_settings);
+    return check_code_generation(target, default_mock_options);
 }
 
 }
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_SUITE(workflow)
 
 BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     SETUP_TEST_LOG("debug_options_generate_expected_debug_info");
-    auto s(debug_dogen_mock_settings());
+    auto s(debug_dogen_mock_options());
     auto ts(s.troubleshooting());
     typedef dogen::utility::test_data::debug_dogen tds;
     ts.debug_dir(tds::actual());
@@ -149,7 +149,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
 
 BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     SETUP_TEST_LOG("stdout_option_generates_expected_output");
-    auto s(empty_tds_mock_settings());
+    auto s(empty_tds_mock_options());
     auto fs(s.output());
     fs.output_to_stdout(true);
     fs.output_to_file(false);
@@ -185,7 +185,7 @@ BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
 
 BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     SETUP_TEST_LOG("disabling_cpp_backend_results_in_no_cpp_output");
-    auto s(empty_tds_mock_settings());
+    auto s(empty_tds_mock_options());
     auto cs(s.cpp());
     cs.disable_backend(true);
     s.cpp(cs);
@@ -200,10 +200,10 @@ BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
 
 BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
     SETUP_TEST_LOG("disable_full_ctor_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             cs.split_project(false);
             cs.disable_complete_constructor(true);
@@ -217,10 +217,10 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             cs.disable_facet_folders(true);
             s.cpp(cs);
@@ -233,10 +233,10 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
     SETUP_TEST_LOG("disable_model_module_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             cs.project_directory(cs.project_directory() /= extra_folder);
             s.cpp(cs);
@@ -254,10 +254,10 @@ BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             cs.disable_cmakelists(true);
             s.cpp(cs);
@@ -275,7 +275,7 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_settings(tds));
+    auto s(default_mock_options(tds));
     auto cs(s.cpp());
     using dogen::config::cpp_facet_types;
     std::set<cpp_facet_types> f = { cpp_facet_types::hash };
@@ -289,10 +289,10 @@ BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_domain_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
@@ -310,9 +310,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
-    using dogen::config::knitting_settings;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  knitting_settings {
-            auto s(default_mock_settings(tds));
+    using dogen::config::knitting_options;
+    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
@@ -330,10 +330,10 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
@@ -352,10 +352,10 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code");
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
@@ -378,7 +378,7 @@ BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_settings(tds));
+    auto s(default_mock_options(tds));
     auto cs(s.cpp());
     using dogen::config::cpp_facet_types;
     std::set<cpp_facet_types> f = {
@@ -412,7 +412,7 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_settings(tds));
+    auto s(default_mock_options(tds));
     dogen::knit::workflow w(s);
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(w.execute(), std::exception, c);
@@ -530,10 +530,10 @@ BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
     SETUP_TEST_LOG("eos_serialisation_model_generates_expected_code");
     const auto t(dia_sml::input_enable_eos_serialization_dia());
 
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            auto s(default_mock_settings(tds));
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            auto s(default_mock_options(tds));
             auto cs(s.cpp());
             using dogen::config::cpp_facet_types;
             std::set<cpp_facet_types> f = {
@@ -556,7 +556,7 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_settings(tds));
+    auto s(default_mock_options(tds));
     dogen::knit::workflow w(s);
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(w.execute(), std::exception, c);
@@ -574,11 +574,11 @@ BOOST_IGNORE_AUTO_TEST_CASE_(split_project_model_generates_expected_code) {
 
     // note that we keep the project name just to make the life easier
     // for the rebaselining scripts.
-    using dogen::config::knitting_settings;
+    using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_settings {
-            using dogen::config::test::mock_settings_factory;
-            return mock_settings_factory::make_knitting_settings(
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            using dogen::config::test::mock_options_factory;
+            return mock_options_factory::make_knitting_options(
                 tds.target(),
                 tds.actual() / "split_project/source",
                 tds.actual() / "split_project/dir/inc/dogen",
@@ -591,7 +591,7 @@ BOOST_IGNORE_AUTO_TEST_CASE_(split_project_model_generates_expected_code) {
 */
 BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_files) {
     SETUP_TEST_LOG("housekeeping_is_not_triggered_when_we_are_not_generating_files");
-    auto s(empty_tds_mock_settings());
+    auto s(empty_tds_mock_options());
     auto ts(s.troubleshooting());
     ts.stop_after_merging(true);
     s.troubleshooting(ts);
@@ -599,14 +599,14 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
     dogen::knit::workflow w1(s);
     BOOST_CHECK(!w1.housekeeping_required());
 
-    s = empty_tds_mock_settings();
+    s = empty_tds_mock_options();
     ts = s.troubleshooting();
     ts.stop_after_formatting(true);
     s.troubleshooting(ts);
     dogen::knit::workflow w2(s);
     BOOST_CHECK(!w2.housekeeping_required());
 
-    s = empty_tds_mock_settings();
+    s = empty_tds_mock_options();
     auto os = s.output();
     os.output_to_stdout(true);
     os.output_to_file(false);
@@ -616,7 +616,7 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
     dogen::knit::workflow w3(s, lambda);
     BOOST_CHECK(!w3.housekeeping_required());
 
-    s = empty_tds_mock_settings();
+    s = empty_tds_mock_options();
     os = s.output();
     os.delete_extra_files(false);
     s.output(os);
@@ -626,7 +626,7 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
 
 BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_delete_extra_files_is_requested) {
     SETUP_TEST_LOG("housekeeping_is_not_triggered_when_delete_extra_files_is_requested");
-    auto s = empty_tds_mock_settings();
+    auto s = empty_tds_mock_options();
     auto os = s.output();
     os.delete_extra_files(true);
     s.output(os);

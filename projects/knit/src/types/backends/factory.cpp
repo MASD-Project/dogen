@@ -29,8 +29,8 @@ namespace dogen {
 namespace knit {
 namespace backends {
 
-factory::factory(const sml::model& model, const config::formatting_settings& s)
-    : settings_(s), model_(model) { }
+factory::factory(const sml::model& model, const config::knitting_options& o)
+    : options_(o), model_(model) { }
 
 void factory::log_cpp_backend_disabled() const {
     using namespace dogen::utility::log;
@@ -38,13 +38,13 @@ void factory::log_cpp_backend_disabled() const {
 }
 
 factory::result_type factory::create() const {
-    if (settings_.cpp().disable_backend()) {
+    if (options_.cpp().disable_backend()) {
         log_cpp_backend_disabled();
         return result_type();
     }
 
     result_type r;
-    r.push_back(cpp_backend::create(model_, settings_));
+    r.push_back(cpp_backend::create(model_, options_));
     return r;
 }
 

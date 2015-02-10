@@ -28,7 +28,7 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/backend/types/registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
@@ -44,9 +44,9 @@ public:
     /**
      * @brief Initialises the workflow.
      *
-     * @param ks the knitting settings
+     * @param o the knitting options
      */
-    explicit workflow(const config::knitting_settings& ks);
+    explicit workflow(const config::knitting_options& o);
 
 private:
     /**
@@ -75,7 +75,7 @@ public:
 
 private:
     static std::shared_ptr<backend::registrar> registrar_;
-    const config::knitting_settings knitting_settings_;
+    const config::knitting_options knitting_options_;
 };
 
 } }

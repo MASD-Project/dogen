@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/config/types/formatting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/cpp/types/formattables/project.hpp"
 
 namespace dogen {
@@ -50,7 +50,7 @@ public:
     workflow& operator=(const workflow&) = default;
 
 public:
-    workflow(const config::formatting_settings& s);
+    workflow(const config::knitting_options& o);
     virtual ~workflow() noexcept {}
 
 public:
@@ -83,7 +83,7 @@ public:
     result_type execute(const cpp::formattables::project& p);
 
 private:
-    const config::formatting_settings settings_;
+    const config::knitting_options options_;
 };
 
 } }

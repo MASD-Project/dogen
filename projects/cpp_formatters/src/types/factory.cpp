@@ -65,14 +65,14 @@ bool contains(const std::set<dogen::config::cpp_facet_types>& f,
 namespace dogen {
 namespace cpp_formatters {
 
-factory::factory(const config::formatting_settings& s)
-    : settings_(s),
-      disable_io_(!contains(settings_.cpp().enabled_facets(),
+factory::factory(const config::knitting_options& o)
+    : options_(o),
+      disable_io_(!contains(options_.cpp().enabled_facets(),
               config::cpp_facet_types::io)),
-      disable_serialization_(!contains(settings_.cpp().enabled_facets(),
+      disable_serialization_(!contains(options_.cpp().enabled_facets(),
               config::cpp_facet_types::serialization)) { }
 
-factory::result_type factory::create_main_formatter(std::ostream& s,
+factory::result_type factory::make_main_formatter(std::ostream& s,
     const cpp::formattables::content_descriptor& cd) const {
 
     using config::cpp_facet_types;
@@ -81,13 +81,13 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
     case cpp_facet_types::types:
         if (cd.file_type() == file_types::header)
             return types_main_header_file_formatter::create(s,
-                settings_.cpp().disable_complete_constructor(),
-                settings_.cpp().use_integrated_io(),
+                options_.cpp().disable_complete_constructor(),
+                options_.cpp().use_integrated_io(),
                 disable_io_, disable_serialization_);
         else
             return domain_implementation::create(s,
-                settings_.cpp().disable_complete_constructor(),
-                settings_.cpp().use_integrated_io(),
+                options_.cpp().disable_complete_constructor(),
+                options_.cpp().use_integrated_io(),
                 disable_io_);
         break;
     case cpp_facet_types::io:
@@ -105,11 +105,11 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
     case cpp_facet_types::serialization:
         if (cd.file_type() == file_types::header)
             return serialization_header::create(s,
-                settings_.cpp().disable_xml_serialization());
+                options_.cpp().disable_xml_serialization());
         else
             return serialization_implementation::create(s,
-                settings_.cpp().disable_xml_serialization(),
-                settings_.cpp().disable_eos_serialization());
+                options_.cpp().disable_xml_serialization(),
+                options_.cpp().disable_eos_serialization());
         break;
     case cpp_facet_types::test_data:
         if (cd.file_type() == file_types::header)
@@ -129,7 +129,7 @@ factory::result_type factory::create_main_formatter(std::ostream& s,
     } }
 }
 
-factory::result_type factory::create_registrar_formatter(
+factory::result_type factory::make_registrar_formatter(
     std::ostream& s, const cpp::formattables::content_descriptor& cd) const {
 
     using cpp::formattables::file_types;
@@ -140,8 +140,8 @@ factory::result_type factory::create_registrar_formatter(
 
     case file_types::implementation:
         return registrar_implementation::create(s,
-            settings_.cpp().disable_xml_serialization(),
-            settings_.cpp().disable_eos_serialization());
+            options_.cpp().disable_xml_serialization(),
+            options_.cpp().disable_eos_serialization());
         break;
 
     default: {
@@ -152,7 +152,7 @@ factory::result_type factory::create_registrar_formatter(
     } }
 }
 
-factory::result_type factory::create_null_formatter(std::ostream& s) const {
+factory::result_type factory::make_null_formatter(std::ostream& s) const {
     return null_formatter::create(s);
 }
 
@@ -168,7 +168,7 @@ factory::result_type factory::create(std::ostream& s,
             return facet_includer::create(s);
             break;
         case content_types::registrar:
-            return create_registrar_formatter(s, cd);
+            return make_registrar_formatter(s, cd);
             break;
         case content_types::namespace_doc:
             return namespace_documentation::create(s);
@@ -181,10 +181,10 @@ factory::result_type factory::create(std::ostream& s,
         case content_types::value_object:
         case content_types::unversioned_key:
         case content_types::versioned_key:
-            return create_main_formatter(s, cd);
+            return make_main_formatter(s, cd);
             break;
         case content_types::user_defined_service:
-            return create_null_formatter(s);
+            return make_null_formatter(s);
             break;
         default: {
             std::ostringstream s;
@@ -198,7 +198,7 @@ factory::result_type factory::create(std::ostream& s,
         return forward_declarations_header::create(s);
         break;
     case aspect_types::null_aspect:
-        return create_null_formatter(s);
+        return make_null_formatter(s);
         break;
     default: {
         std::ostringstream s;

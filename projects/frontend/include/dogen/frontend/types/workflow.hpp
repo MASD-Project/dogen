@@ -27,7 +27,7 @@
 
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/knitting_settings.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
@@ -41,7 +41,7 @@ namespace frontend {
  */
 class workflow {
 public:
-    explicit workflow(const config::knitting_settings& ks);
+    explicit workflow(const config::knitting_options& o);
 
 public:
     /**
@@ -61,7 +61,7 @@ private:
 
     /**
      * @brief Generates the frontend settings given the current
-     * troubleshooting settings and the path supplied.
+     * troubleshooting options and the path supplied.
      */
     frontend_settings
     create_frontend_settings(const boost::filesystem::path& p) const;
@@ -82,7 +82,7 @@ private:
     sml::model create_sml_model_activity(const input_descriptor& d) const;
 
     /**
-     * @brief Checks the settings chosen by the user to determine if
+     * @brief Checks the options chosen by the user to determine if
      * the SML model should be persisted; if so, persists it.
      */
     void persist_sml_model_activity(const boost::filesystem::path& p,
@@ -98,7 +98,7 @@ public:
 
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
-    const config::knitting_settings knitting_settings_;
+    const config::knitting_options knitting_options_;
     const dynamic::workflow dynamic_workflow_;
 };
 
