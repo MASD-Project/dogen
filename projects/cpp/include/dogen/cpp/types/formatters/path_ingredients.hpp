@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PATH_INGREDIENTS_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PATH_INGREDIENTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include <string>
-#include "dogen/cpp/serialization/formatters/file_details_fwd_ser.hpp"
+#include "dogen/cpp/serialization/formatters/path_ingredients_fwd_ser.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -36,21 +36,21 @@ namespace cpp {
 namespace formatters {
 
 /**
- * @brief Details required to build both the absolute and relative file paths.
+ * @brief Ingredients required to build file and include paths.
  */
-class file_details final {
+class path_ingredients final {
 public:
-    file_details(const file_details&) = default;
-    ~file_details() = default;
+    path_ingredients(const path_ingredients&) = default;
+    ~path_ingredients() = default;
 
 public:
-    file_details();
+    path_ingredients();
 
 public:
-    file_details(file_details&& rhs);
+    path_ingredients(path_ingredients&& rhs);
 
 public:
-    file_details(
+    path_ingredients(
         const bool split_project,
         const dogen::cpp::formatters::file_types& file_type,
         const std::string& facet_directory,
@@ -63,10 +63,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const file_details& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const path_ingredients& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, file_details& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, path_ingredients& v, unsigned int version);
 
 public:
     bool split_project() const;
@@ -111,14 +111,14 @@ public:
     void include_directory(const boost::filesystem::path&& v);
 
 public:
-    bool operator==(const file_details& rhs) const;
-    bool operator!=(const file_details& rhs) const {
+    bool operator==(const path_ingredients& rhs) const;
+    bool operator!=(const path_ingredients& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(file_details& other) noexcept;
-    file_details& operator=(file_details other);
+    void swap(path_ingredients& other) noexcept;
+    path_ingredients& operator=(path_ingredients other);
 
 private:
     bool split_project_;
@@ -138,8 +138,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::formatters::file_details& lhs,
-    dogen::cpp::formatters::file_details& rhs) {
+    dogen::cpp::formatters::path_ingredients& lhs,
+    dogen::cpp::formatters::path_ingredients& rhs) {
     lhs.swap(rhs);
 }
 

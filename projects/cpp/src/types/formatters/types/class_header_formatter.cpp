@@ -23,16 +23,16 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/path_factory.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
-#include "dogen/cpp/types/formatters/file_details_factory.hpp"
-#include "dogen/cpp/types/formatters/file_properties_factory.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients_factory.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
 
-const std::string file_properties_for_formatter_not_found(
-    "File properties for formatter not found. Formatter: ");
+const std::string include_path_for_formatter_not_found(
+    "Include path for formatter not found. Formatter: ");
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
@@ -51,15 +51,14 @@ namespace types {
 
 boost::filesystem::path class_header_formatter::
 get_relative_path(const formattables::class_info& c) const {
-    const auto& fp(c.file_properties_by_formatter_name());
+    const auto& fp(c.include_path_by_formatter_name());
     const auto i(fp.find(formatter_name()));
     if (i == fp.end()) {
-        BOOST_LOG_SEV(lg, error) << file_properties_for_formatter_not_found
+        BOOST_LOG_SEV(lg, error) << include_path_for_formatter_not_found
                                  << formatter_name();
 
         BOOST_THROW_EXCEPTION(formatting_error(
-                file_properties_for_formatter_not_found +
-                formatter_name()));
+                include_path_for_formatter_not_found + formatter_name()));
     }
     return i->second.relative_path();
 }
@@ -79,11 +78,15 @@ std::string class_header_formatter::formatter_name() const {
 formattables::file_properties
 class_header_formatter::provide_file_properties(const settings::selector& s,
     const sml::qname& qn) const {
-    file_details_factory fdf;
-    const auto fd(fdf.make(s, *this, qn));
 
-    file_properties_factory fpf;
-    return fpf.make(fd, qn);
+    path_ingredients_factory pif;
+    const auto pi(pif.make(s, *this, qn));
+
+    path_factory pf;
+    formattables::file_properties r;
+    r.file_path(pf.make_file_path(pi, qn));
+    r.include_path(pf.make_include_path(pi, qn));
+    return r;
 }
 
 formattables::includes class_header_formatter::provide_includes(

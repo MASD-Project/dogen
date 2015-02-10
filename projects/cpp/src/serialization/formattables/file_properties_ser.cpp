@@ -38,20 +38,20 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::formattables::file_properties& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("relative_path", v.relative_path_.generic_string());
-    ar << make_nvp("absolute_path", v.absolute_path_.generic_string());
+    ar << make_nvp("file_path", v.file_path_.generic_string());
+    ar << make_nvp("include_path", v.include_path_.generic_string());
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::formattables::file_properties& v,
     const unsigned int /*version*/) {
-    std::string relative_path_tmp;
-    ar >> make_nvp("relative_path", relative_path_tmp);
-    v.relative_path_ = relative_path_tmp;
-    std::string absolute_path_tmp;
-    ar >> make_nvp("absolute_path", absolute_path_tmp);
-    v.absolute_path_ = absolute_path_tmp;
+    std::string file_path_tmp;
+    ar >> make_nvp("file_path", file_path_tmp);
+    v.file_path_ = file_path_tmp;
+    std::string include_path_tmp;
+    ar >> make_nvp("include_path", include_path_tmp);
+    v.include_path_ = include_path_tmp;
 }
 
 } }

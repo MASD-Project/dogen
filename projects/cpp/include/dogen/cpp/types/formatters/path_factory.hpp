@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_PROPERTIES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PATH_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PATH_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,8 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/cpp/types/formatters/file_details.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -38,26 +37,20 @@ namespace formatters {
 /**
  * @brief Builds file properties.
  */
-class file_properties_factory {
-private:
-    /**
-     * @brief Creates the relative path for the details and qualified name.
-     */
-    boost::filesystem::path
-    create_relative_path(const file_details& d, const sml::qname& qn) const;
-
-    /**
-     * @brief Creates the absolute path for the details and qualified name.
-     */
-    boost::filesystem::path
-    create_absolute_path(const file_details& d, const sml::qname& qn) const;
-
+class path_factory {
 public:
     /**
-     * @brief Builds a file name for the supplied qualified name.
+     * @brief Builds an absolute path for the supplied qualified name.
      */
-    formattables::file_properties
-    make(const file_details& d, const sml::qname& qn) const;
+    boost::filesystem::path
+    make_file_path(const path_ingredients& d, const sml::qname& qn) const;
+
+    /**
+     * @brief Builds a relative path from the top-level include
+     * directory for the supplied qualified name.
+     */
+    boost::filesystem::path
+    make_include_path(const path_ingredients& d, const sml::qname& qn) const;
 };
 
 } } }

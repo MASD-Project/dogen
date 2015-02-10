@@ -25,24 +25,24 @@ namespace cpp {
 namespace formattables {
 
 file_properties::file_properties(file_properties&& rhs)
-    : relative_path_(std::move(rhs.relative_path_)),
-      absolute_path_(std::move(rhs.absolute_path_)) { }
+    : file_path_(std::move(rhs.file_path_)),
+      include_path_(std::move(rhs.include_path_)) { }
 
 file_properties::file_properties(
-    const boost::filesystem::path& relative_path,
-    const boost::filesystem::path& absolute_path)
-    : relative_path_(relative_path),
-      absolute_path_(absolute_path) { }
+    const boost::filesystem::path& file_path,
+    const boost::filesystem::path& include_path)
+    : file_path_(file_path),
+      include_path_(include_path) { }
 
 void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
-    swap(relative_path_, other.relative_path_);
-    swap(absolute_path_, other.absolute_path_);
+    swap(file_path_, other.file_path_);
+    swap(include_path_, other.include_path_);
 }
 
 bool file_properties::operator==(const file_properties& rhs) const {
-    return relative_path_ == rhs.relative_path_ &&
-        absolute_path_ == rhs.absolute_path_;
+    return file_path_ == rhs.file_path_ &&
+        include_path_ == rhs.include_path_;
 }
 
 file_properties& file_properties::operator=(file_properties other) {
@@ -51,36 +51,36 @@ file_properties& file_properties::operator=(file_properties other) {
     return *this;
 }
 
-const boost::filesystem::path& file_properties::relative_path() const {
-    return relative_path_;
+const boost::filesystem::path& file_properties::file_path() const {
+    return file_path_;
 }
 
-boost::filesystem::path& file_properties::relative_path() {
-    return relative_path_;
+boost::filesystem::path& file_properties::file_path() {
+    return file_path_;
 }
 
-void file_properties::relative_path(const boost::filesystem::path& v) {
-    relative_path_ = v;
+void file_properties::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
 }
 
-void file_properties::relative_path(const boost::filesystem::path&& v) {
-    relative_path_ = std::move(v);
+void file_properties::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
 }
 
-const boost::filesystem::path& file_properties::absolute_path() const {
-    return absolute_path_;
+const boost::filesystem::path& file_properties::include_path() const {
+    return include_path_;
 }
 
-boost::filesystem::path& file_properties::absolute_path() {
-    return absolute_path_;
+boost::filesystem::path& file_properties::include_path() {
+    return include_path_;
 }
 
-void file_properties::absolute_path(const boost::filesystem::path& v) {
-    absolute_path_ = v;
+void file_properties::include_path(const boost::filesystem::path& v) {
+    include_path_ = v;
 }
 
-void file_properties::absolute_path(const boost::filesystem::path&& v) {
-    absolute_path_ = std::move(v);
+void file_properties::include_path(const boost::filesystem::path&& v) {
+    include_path_ = std::move(v);
 }
 
 } } }

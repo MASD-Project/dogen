@@ -40,8 +40,8 @@ file_properties_generator::file_properties_generator() : position_(0) { }
 
 void file_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.relative_path(create_boost_filesystem_path(position + 0));
-    v.absolute_path(create_boost_filesystem_path(position + 1));
+    v.file_path(create_boost_filesystem_path(position + 0));
+    v.include_path(create_boost_filesystem_path(position + 1));
 }
 
 file_properties_generator::result_type

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/file_details.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-file_details::file_details()
+path_ingredients::path_ingredients()
     : split_project_(static_cast<bool>(0)),
       file_type_(static_cast<dogen::cpp::formatters::file_types>(0)) { }
 
-file_details::file_details(file_details&& rhs)
+path_ingredients::path_ingredients(path_ingredients&& rhs)
     : split_project_(std::move(rhs.split_project_)),
       file_type_(std::move(rhs.file_type_)),
       facet_directory_(std::move(rhs.facet_directory_)),
@@ -39,7 +39,7 @@ file_details::file_details(file_details&& rhs)
       source_directory_(std::move(rhs.source_directory_)),
       include_directory_(std::move(rhs.include_directory_)) { }
 
-file_details::file_details(
+path_ingredients::path_ingredients(
     const bool split_project,
     const dogen::cpp::formatters::file_types& file_type,
     const std::string& facet_directory,
@@ -59,7 +59,7 @@ file_details::file_details(
       source_directory_(source_directory),
       include_directory_(include_directory) { }
 
-void file_details::swap(file_details& other) noexcept {
+void path_ingredients::swap(path_ingredients& other) noexcept {
     using std::swap;
     swap(split_project_, other.split_project_);
     swap(file_type_, other.file_type_);
@@ -72,7 +72,7 @@ void file_details::swap(file_details& other) noexcept {
     swap(include_directory_, other.include_directory_);
 }
 
-bool file_details::operator==(const file_details& rhs) const {
+bool path_ingredients::operator==(const path_ingredients& rhs) const {
     return split_project_ == rhs.split_project_ &&
         file_type_ == rhs.file_type_ &&
         facet_directory_ == rhs.facet_directory_ &&
@@ -84,137 +84,137 @@ bool file_details::operator==(const file_details& rhs) const {
         include_directory_ == rhs.include_directory_;
 }
 
-file_details& file_details::operator=(file_details other) {
+path_ingredients& path_ingredients::operator=(path_ingredients other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool file_details::split_project() const {
+bool path_ingredients::split_project() const {
     return split_project_;
 }
 
-void file_details::split_project(const bool v) {
+void path_ingredients::split_project(const bool v) {
     split_project_ = v;
 }
 
-dogen::cpp::formatters::file_types file_details::file_type() const {
+dogen::cpp::formatters::file_types path_ingredients::file_type() const {
     return file_type_;
 }
 
-void file_details::file_type(const dogen::cpp::formatters::file_types& v) {
+void path_ingredients::file_type(const dogen::cpp::formatters::file_types& v) {
     file_type_ = v;
 }
 
-const std::string& file_details::facet_directory() const {
+const std::string& path_ingredients::facet_directory() const {
     return facet_directory_;
 }
 
-std::string& file_details::facet_directory() {
+std::string& path_ingredients::facet_directory() {
     return facet_directory_;
 }
 
-void file_details::facet_directory(const std::string& v) {
+void path_ingredients::facet_directory(const std::string& v) {
     facet_directory_ = v;
 }
 
-void file_details::facet_directory(const std::string&& v) {
+void path_ingredients::facet_directory(const std::string&& v) {
     facet_directory_ = std::move(v);
 }
 
-const std::string& file_details::extension() const {
+const std::string& path_ingredients::extension() const {
     return extension_;
 }
 
-std::string& file_details::extension() {
+std::string& path_ingredients::extension() {
     return extension_;
 }
 
-void file_details::extension(const std::string& v) {
+void path_ingredients::extension(const std::string& v) {
     extension_ = v;
 }
 
-void file_details::extension(const std::string&& v) {
+void path_ingredients::extension(const std::string&& v) {
     extension_ = std::move(v);
 }
 
-const std::string& file_details::facet_postfix() const {
+const std::string& path_ingredients::facet_postfix() const {
     return facet_postfix_;
 }
 
-std::string& file_details::facet_postfix() {
+std::string& path_ingredients::facet_postfix() {
     return facet_postfix_;
 }
 
-void file_details::facet_postfix(const std::string& v) {
+void path_ingredients::facet_postfix(const std::string& v) {
     facet_postfix_ = v;
 }
 
-void file_details::facet_postfix(const std::string&& v) {
+void path_ingredients::facet_postfix(const std::string&& v) {
     facet_postfix_ = std::move(v);
 }
 
-const std::string& file_details::formatter_postfix() const {
+const std::string& path_ingredients::formatter_postfix() const {
     return formatter_postfix_;
 }
 
-std::string& file_details::formatter_postfix() {
+std::string& path_ingredients::formatter_postfix() {
     return formatter_postfix_;
 }
 
-void file_details::formatter_postfix(const std::string& v) {
+void path_ingredients::formatter_postfix(const std::string& v) {
     formatter_postfix_ = v;
 }
 
-void file_details::formatter_postfix(const std::string&& v) {
+void path_ingredients::formatter_postfix(const std::string&& v) {
     formatter_postfix_ = std::move(v);
 }
 
-const boost::filesystem::path& file_details::project_directory() const {
+const boost::filesystem::path& path_ingredients::project_directory() const {
     return project_directory_;
 }
 
-boost::filesystem::path& file_details::project_directory() {
+boost::filesystem::path& path_ingredients::project_directory() {
     return project_directory_;
 }
 
-void file_details::project_directory(const boost::filesystem::path& v) {
+void path_ingredients::project_directory(const boost::filesystem::path& v) {
     project_directory_ = v;
 }
 
-void file_details::project_directory(const boost::filesystem::path&& v) {
+void path_ingredients::project_directory(const boost::filesystem::path&& v) {
     project_directory_ = std::move(v);
 }
 
-const boost::filesystem::path& file_details::source_directory() const {
+const boost::filesystem::path& path_ingredients::source_directory() const {
     return source_directory_;
 }
 
-boost::filesystem::path& file_details::source_directory() {
+boost::filesystem::path& path_ingredients::source_directory() {
     return source_directory_;
 }
 
-void file_details::source_directory(const boost::filesystem::path& v) {
+void path_ingredients::source_directory(const boost::filesystem::path& v) {
     source_directory_ = v;
 }
 
-void file_details::source_directory(const boost::filesystem::path&& v) {
+void path_ingredients::source_directory(const boost::filesystem::path&& v) {
     source_directory_ = std::move(v);
 }
 
-const boost::filesystem::path& file_details::include_directory() const {
+const boost::filesystem::path& path_ingredients::include_directory() const {
     return include_directory_;
 }
 
-boost::filesystem::path& file_details::include_directory() {
+boost::filesystem::path& path_ingredients::include_directory() {
     return include_directory_;
 }
 
-void file_details::include_directory(const boost::filesystem::path& v) {
+void path_ingredients::include_directory(const boost::filesystem::path& v) {
     include_directory_ = v;
 }
 
-void file_details::include_directory(const boost::filesystem::path&& v) {
+void path_ingredients::include_directory(const boost::filesystem::path&& v) {
     include_directory_ = std::move(v);
 }
 

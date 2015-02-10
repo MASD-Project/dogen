@@ -28,8 +28,8 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const file_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::file_properties\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"absolute_path\": " << "\"" << v.absolute_path().generic_string() << "\""
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"include_path\": " << "\"" << v.include_path().generic_string() << "\""
       << " }";
     return(s);
 }

@@ -51,18 +51,20 @@ namespace formattables {
 
 registrar_info::registrar_info(
     const std::string& identity,
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name,
+    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
+    const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name,
     const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
     const std::list<std::string>& leaves,
     const std::list<std::string>& model_dependencies)
     : dogen::cpp::formattables::entity(identity,
-      file_properties_by_formatter_name,
+      file_path_by_formatter_name,
       name,
       documentation,
       namespaces,
+      include_path_by_formatter_name,
       includes_by_formatter_name),
       leaves_(leaves),
       model_dependencies_(model_dependencies) { }

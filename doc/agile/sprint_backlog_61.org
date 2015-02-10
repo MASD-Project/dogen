@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-10 Tue 21:50]
+Clock summary at [2015-02-10 Tue 23:33]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *21:24* |       |      |
+| *Total time*                                                        | *23:04* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 21:24 |      |
+| Active                                                              |         | 23:04 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -40,7 +40,7 @@ Clock summary at [2015-02-10 Tue 21:50]
 | COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
 | COMPLETED Improve building of file names                            |         |       | 0:56 |
 | COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
-| STARTED Add absolute path support to file name builder              |         |       | 1:09 |
+| STARTED Add absolute path support to file name builder              |         |       | 2:49 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -573,6 +573,8 @@ say =cpp_settings= etc.
 Also delete all of the unused settings classes in config.
 
 *** STARTED Add absolute path support to file name builder            :story:
+    CLOCK: [2015-02-10 Tue 23:12]--[2015-02-10 Tue 23:33] =>  0:21
+    CLOCK: [2015-02-10 Tue 21:52]--[2015-02-10 Tue 23:11] =>  1:19
     CLOCK: [2015-02-10 Tue 20:41]--[2015-02-10 Tue 21:50] =>  1:09
 
 We have extended the file properties to have absolute and relative
@@ -588,7 +590,18 @@ to this we need to somehow pass the config settings into the settings
 factories and take this into account when generating the c++
 settings. The same applies to include and source directories.
 
-We need to pass the knitting settings into the backend for this to work.
+We need to pass the knitting settings into the backend for this to
+work.
+
+Problem: there are two "aspects" to source and include
+directories. First, users can supply full path to these. Second, when
+using project directories, we default the source and include
+directories to hard-coded names (=src= and =include=). We need to
+handle both of these scenarios.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
 
 *** Implement include generation for class header formatter           :story:
 

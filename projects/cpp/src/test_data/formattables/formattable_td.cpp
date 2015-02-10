@@ -24,7 +24,6 @@
 #include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
@@ -41,15 +40,17 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::cpp::formattables::file_properties
-create_dogen_cpp_formattables_file_properties(const unsigned int position) {
-    return dogen::cpp::formattables::file_properties_generator::create(position);
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
 }
 
-std::unordered_map<std::string, dogen::cpp::formattables::file_properties> create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties> r;
+std::unordered_map<std::string, boost::filesystem::path> create_std_unordered_map_std_string_boost_filesystem_path(unsigned int position) {
+    std::unordered_map<std::string, boost::filesystem::path> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_file_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_filesystem_path(position + i)));
     }
     return r;
 }
@@ -64,7 +65,7 @@ namespace formattables {
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
-    v.file_properties_by_formatter_name(create_std_unordered_map_std_string_dogen_cpp_formattables_file_properties(position + 1));
+    v.file_path_by_formatter_name(create_std_unordered_map_std_string_boost_filesystem_path(position + 1));
 }
 
 formattable_generator::result_type*

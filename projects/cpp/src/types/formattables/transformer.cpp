@@ -200,8 +200,12 @@ void transformer::populate_formattable_properties(
         BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << f.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
         // type_has_no_file_properties + f.identity()));
-    } else
-        f.file_properties_by_formatter_name(i->second);
+    } else {
+        for (const auto pair : i->second) {
+            f.file_path_by_formatter_name().insert(
+                std::make_pair(pair.first, pair.second.file_path()));
+        }
+    }
 }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
@@ -218,13 +222,27 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     // FIXME: for now we are only supporting objects, so we need this
     // hack. logging is causing an expected slow down.
-    const auto i(includes_by_qname_by_formatter_name_.find(qn));
-    if (i == includes_by_qname_by_formatter_name_.end()) {
+    const auto i(file_properties_by_qname_by_formatter_name_.find(qn));
+    if (i == file_properties_by_qname_by_formatter_name_.end()) {
+        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << e.identity();
+        // BOOST_THROW_EXCEPTION(transformation_error(
+        // type_has_no_file_properties + f.identity()));
+    } else {
+        for (const auto pair : i->second) {
+            e.include_path_by_formatter_name().insert(
+                std::make_pair(pair.first, pair.second.include_path()));
+        }
+    }
+
+    // FIXME: for now we are only supporting objects, so we need this
+    // hack. logging is causing an expected slow down.
+    const auto j(includes_by_qname_by_formatter_name_.find(qn));
+    if (j == includes_by_qname_by_formatter_name_.end()) {
         BOOST_LOG_SEV(lg, error) << type_has_no_includes << e.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
         // type_has_no_includes + e.identity()));
     } else
-        e.includes_by_formatter_name(i->second);
+        e.includes_by_formatter_name(j->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,

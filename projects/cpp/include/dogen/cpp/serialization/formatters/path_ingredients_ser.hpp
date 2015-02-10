@@ -18,19 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FWD_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTERS_PATH_INGREDIENTS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTERS_PATH_INGREDIENTS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
 
-class file_details;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formatters::path_ingredients)
+namespace boost {
+namespace serialization {
 
-} } }
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::formatters::path_ingredients& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::formatters::path_ingredients& v, unsigned int version);
+
+} }
 
 #endif

@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_FORMATTERS_FILE_DETAILS_HASH_HPP
-#define DOGEN_CPP_HASH_FORMATTERS_FILE_DETAILS_HASH_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTERS_PATH_INGREDIENTS_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTERS_PATH_INGREDIENTS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/cpp/types/formatters/file_details.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients_fwd.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
+namespace boost {
+namespace serialization {
 
-struct file_details_hasher {
-public:
-    static std::size_t hash(const file_details& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::formatters::path_ingredients& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::cpp::formatters::path_ingredients& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::cpp::formatters::file_details> {
-public:
-    size_t operator()(const dogen::cpp::formatters::file_details& v) const {
-        return dogen::cpp::formatters::file_details_hasher::hash(v);
-    }
-};
-
-}
 #endif

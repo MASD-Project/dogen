@@ -39,6 +39,21 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_boost_filesystem_path(const std::unordered_map<std::string, boost::filesystem::path>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_boost_filesystem_path(i.second));
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_includes(const std::unordered_map<std::string, dogen::cpp::formattables::includes>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -62,6 +77,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
+    combine(seed, hash_std_unordered_map_std_string_boost_filesystem_path(v.include_path_by_formatter_name()));
     combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_includes(v.includes_by_formatter_name()));
 
     return seed;

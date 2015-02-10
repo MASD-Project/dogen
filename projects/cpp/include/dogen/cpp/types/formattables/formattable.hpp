@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/formattables/formattable_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
 public:
     formattable(
         const std::string& identity,
-        const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name);
+        const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name);
 
 private:
     template<typename Archive>
@@ -72,10 +72,10 @@ public:
     void identity(const std::string& v);
     void identity(const std::string&& v);
 
-    const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name() const;
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& file_properties_by_formatter_name();
-    void file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>& v);
-    void file_properties_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::file_properties>&& v);
+    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name() const;
+    std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name();
+    void file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>& v);
+    void file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>&& v);
 
 protected:
     bool compare(const formattable& rhs) const;
@@ -87,7 +87,7 @@ protected:
 
 private:
     std::string identity_;
-    std::unordered_map<std::string, dogen::cpp::formattables::file_properties> file_properties_by_formatter_name_;
+    std::unordered_map<std::string, boost::filesystem::path> file_path_by_formatter_name_;
 };
 
 inline formattable::~formattable() noexcept { }

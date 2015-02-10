@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_FORMATTERS_FILE_DETAILS_IO_HPP
-#define DOGEN_CPP_IO_FORMATTERS_FILE_DETAILS_IO_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PATH_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PATH_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/formatters/file_details.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::formatters::file_details& v);
+class path_factory;
 
 } } }
 

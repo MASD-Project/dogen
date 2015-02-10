@@ -44,8 +44,8 @@ public:
 
 public:
     file_properties(
-        const boost::filesystem::path& relative_path,
-        const boost::filesystem::path& absolute_path);
+        const boost::filesystem::path& file_path,
+        const boost::filesystem::path& include_path);
 
 private:
     template<typename Archive>
@@ -56,23 +56,23 @@ private:
 
 public:
     /**
-     * @brief Relative path to the file.
+     * @brief Path to the file, indicating the location in the file system where it will be written.
      */
     /**@{*/
-    const boost::filesystem::path& relative_path() const;
-    boost::filesystem::path& relative_path();
-    void relative_path(const boost::filesystem::path& v);
-    void relative_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
-     * @brief Absolute path to the file, indicating the location in the filesystem where it will be written.
+     * @brief Path to the file to be used for inclusion.
      */
     /**@{*/
-    const boost::filesystem::path& absolute_path() const;
-    boost::filesystem::path& absolute_path();
-    void absolute_path(const boost::filesystem::path& v);
-    void absolute_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& include_path() const;
+    boost::filesystem::path& include_path();
+    void include_path(const boost::filesystem::path& v);
+    void include_path(const boost::filesystem::path&& v);
     /**@}*/
 
 public:
@@ -86,8 +86,8 @@ public:
     file_properties& operator=(file_properties other);
 
 private:
-    boost::filesystem::path relative_path_;
-    boost::filesystem::path absolute_path_;
+    boost::filesystem::path file_path_;
+    boost::filesystem::path include_path_;
 };
 
 } } }

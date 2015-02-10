@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PATH_INGREDIENTS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PATH_INGREDIENTS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formatters/file_details.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
@@ -36,15 +36,15 @@ namespace cpp {
 namespace formatters {
 
 /**
- * @brief Creates all of the required file details, sourcing them from
- * various places.
+ * @brief Creates all of the required path ingredients, sourcing them
+ * from various places.
  */
-class file_details_factory {
+class path_ingredients_factory {
 public:
     /**
-     * @brief Create file settings.
+     * @brief Creates the path ingredients.
      */
-    file_details make(const settings::selector& s,
+    path_ingredients make(const settings::selector& s,
         const formatter_interface& f, const sml::qname qn) const;
 };
 

@@ -47,7 +47,7 @@ field_definition create_split_project() {
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
-    r.default_value(boost::make_shared<boolean>(true));
+    r.default_value(boost::make_shared<boolean>(false));
     return r;
 }
 

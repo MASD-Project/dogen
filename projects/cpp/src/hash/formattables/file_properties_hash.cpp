@@ -44,8 +44,8 @@ namespace formattables {
 std::size_t file_properties_hasher::hash(const file_properties&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_filesystem_path(v.relative_path()));
-    combine(seed, hash_boost_filesystem_path(v.absolute_path()));
+    combine(seed, hash_boost_filesystem_path(v.file_path()));
+    combine(seed, hash_boost_filesystem_path(v.include_path()));
 
     return seed;
 }

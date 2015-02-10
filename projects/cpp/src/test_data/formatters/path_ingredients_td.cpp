@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/formatters/file_details_td.hpp"
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
+#include "dogen/cpp/test_data/formatters/path_ingredients_td.hpp"
 
 namespace {
 
@@ -52,9 +52,9 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-file_details_generator::file_details_generator() : position_(0) { }
+path_ingredients_generator::path_ingredients_generator() : position_(0) { }
 
-void file_details_generator::
+void path_ingredients_generator::
 populate(const unsigned int position, result_type& v) {
     v.split_project(create_bool(position + 0));
     v.file_type(create_dogen_cpp_formatters_file_types(position + 1));
@@ -67,21 +67,21 @@ populate(const unsigned int position, result_type& v) {
     v.include_directory(create_boost_filesystem_path(position + 8));
 }
 
-file_details_generator::result_type
-file_details_generator::create(const unsigned int position) {
-    file_details r;
-    file_details_generator::populate(position, r);
+path_ingredients_generator::result_type
+path_ingredients_generator::create(const unsigned int position) {
+    path_ingredients r;
+    path_ingredients_generator::populate(position, r);
     return r;
 }
-file_details_generator::result_type*
-file_details_generator::create_ptr(const unsigned int position) {
-    file_details* p = new file_details();
-    file_details_generator::populate(position, *p);
+path_ingredients_generator::result_type*
+path_ingredients_generator::create_ptr(const unsigned int position) {
+    path_ingredients* p = new path_ingredients();
+    path_ingredients_generator::populate(position, *p);
     return p;
 }
 
-file_details_generator::result_type
-file_details_generator::operator()() {
+path_ingredients_generator::result_type
+path_ingredients_generator::operator()() {
     return create(position_++);
 }
 

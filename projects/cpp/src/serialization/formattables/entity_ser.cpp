@@ -41,6 +41,7 @@
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 
 
@@ -60,6 +61,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
+    ar << make_nvp("include_path_by_formatter_name", v.include_path_by_formatter_name_);
     ar << make_nvp("includes_by_formatter_name", v.includes_by_formatter_name_);
 }
 
@@ -72,6 +74,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
+    ar >> make_nvp("include_path_by_formatter_name", v.include_path_by_formatter_name_);
     ar >> make_nvp("includes_by_formatter_name", v.includes_by_formatter_name_);
 }
 

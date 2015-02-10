@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FILE_DETAILS_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTERS_PATH_INGREDIENTS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTERS_PATH_INGREDIENTS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class file_details_factory;
+class path_ingredients_generator {
+public:
+    path_ingredients_generator();
+
+public:
+    typedef dogen::cpp::formatters::path_ingredients result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
 

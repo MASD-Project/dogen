@@ -23,15 +23,15 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
-#include "dogen/cpp/io/formatters/file_details_io.hpp"
+#include "dogen/cpp/io/formatters/path_ingredients_io.hpp"
 #include "dogen/cpp/types/formatters/building_error.hpp"
-#include "dogen/cpp/types/formatters/file_details_factory.hpp"
+#include "dogen/cpp/types/formatters/path_ingredients_factory.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("cpp.formatters.file_details_factory"));
+auto lg(logger_factory("cpp.formatters.path_ingredients_factory"));
 
 const std::string unsupported_file_type("File type not supported: ");
 
@@ -41,12 +41,12 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-file_details file_details_factory::make(const settings::selector& s,
+path_ingredients path_ingredients_factory::make(const settings::selector& s,
     const formatter_interface& f, const sml::qname qn) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating file details for: "
+    BOOST_LOG_SEV(lg, debug) << "Creating path ingredients for: "
                              << sml::string_converter::convert(qn);
-    file_details r;
+    path_ingredients r;
     r.file_type(f.file_type());
 
     const auto& cs(s.select_cpp_settings());
@@ -78,8 +78,8 @@ file_details file_details_factory::make(const settings::selector& s,
                 boost::lexical_cast<std::string>(ft)));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "File details: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Done creating file details for: "
+    BOOST_LOG_SEV(lg, debug) << "Path ingredients: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Done creating path ingredients for: "
                              << sml::string_converter::convert(qn);
     return r;
 }

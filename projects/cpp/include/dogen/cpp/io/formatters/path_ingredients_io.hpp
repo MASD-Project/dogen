@@ -18,36 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_FORMATTERS_FILE_DETAILS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_FORMATTERS_FILE_DETAILS_TD_HPP
+#ifndef DOGEN_CPP_IO_FORMATTERS_PATH_INGREDIENTS_IO_HPP
+#define DOGEN_CPP_IO_FORMATTERS_PATH_INGREDIENTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/file_details.hpp"
+#include <iosfwd>
+#include "dogen/cpp/types/formatters/path_ingredients.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class file_details_generator {
-public:
-    file_details_generator();
-
-public:
-    typedef dogen::cpp::formatters::file_details result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::formatters::path_ingredients& v);
 
 } } }
 

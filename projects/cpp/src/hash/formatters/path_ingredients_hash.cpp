@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formatters/file_details_hash.hpp"
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
+#include "dogen/cpp/hash/formatters/path_ingredients_hash.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::size_t file_details_hasher::hash(const file_details&v) {
+std::size_t path_ingredients_hasher::hash(const path_ingredients&v) {
     std::size_t seed(0);
 
     combine(seed, v.split_project());
