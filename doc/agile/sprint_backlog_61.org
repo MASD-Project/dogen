@@ -599,6 +599,10 @@ using project directories, we default the source and include
 directories to hard-coded names (=src= and =include=). We need to
 handle both of these scenarios.
 
+- rename project directory to project path;
+- create source and include directory fields again;
+- use these if split project is false.
+
 *** Rename name builder to name factory                               :story:
 
 The name builder is just a factory so make the name reflect it.
@@ -622,7 +626,20 @@ Notes:
 
 - rename header file to file name override or something else quite
   distinct. We need to ensure it is obvious that this property is only
-  used for non-dogen models.
+  used for non-dogen models. Actually we can now just call it include
+  path.
+- however we still have a problem: when we compute the include path we
+  do not know if it is a system or user path. We need to change file
+  properties to take this into account. We need a include path class
+  with a include type: user or system. we could then use this.
+
+*** Create a list of valid values for field definitions               :story:
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types. At present this is only
+applicable to string fields.
 
 *** Create a toggable replacement with legacy and new formatters      :story:
 
