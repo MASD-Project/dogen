@@ -1612,6 +1612,15 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider adding =with= support for fluent properties              :story:
+
+It seems the java guys have decided to add the prefix =with= when
+using fluent interfaces, e.g.:
+
+: x.with_property_x(false).with_property_y(true);
+
+We could easily add this via dynamic extensions.
+
 *** Support for transactional writes                                  :story:
 
 It would be nice if dogen either generated all files or didn't touch
@@ -4146,7 +4155,6 @@ since they are implemented on the cpp. As there is no need for
 template types, this seems like an ok limitation.
 
 ** Tooling, infrastructure, blog posts, etc.
-
 *** Investigate NeoVim's emblems                                      :story:
 
 They appear to have emblems for issues, connected to waffle as well as
@@ -4630,6 +4638,9 @@ JSON.
 
 It may also be worth looking at the [[https://jaxb.java.net/2.2.4/docs/xjc.html][xjc]] command line tool interface to
 pick up ideas for Dogen.
+
+We should also support the annotations used by JAXB such as
+inheritance, etc.
 
 *** XML serialisation for interoperability                             :epic:
 
