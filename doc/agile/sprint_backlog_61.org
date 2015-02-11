@@ -635,6 +635,12 @@ Notes:
   properties to take this into account. We need a include path class
   with a include type: user or system. we could then use this.
 
+*** Implement type settings                                           :story:
+
+We need a class to represent the type related settings such as
+=family=, etc. We also need an associated factory. "type" may not be
+the best of names; we need to do some name-storming here.
+
 *** Add dynamic consistency validation                                :story:
 
 We need to check that the default values supplied for a field are
