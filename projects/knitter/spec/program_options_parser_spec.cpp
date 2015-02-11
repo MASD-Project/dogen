@@ -390,8 +390,8 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto co(ko.cpp());
-    BOOST_CHECK(co.source_directory().string() == cpp_source_value_arg);
-    BOOST_CHECK(co.include_directory().string() == cpp_include_value_arg);
+    BOOST_CHECK(co.source_directory_path().string() == cpp_source_value_arg);
+    BOOST_CHECK(co.include_directory_path().string() == cpp_include_value_arg);
 
     BOOST_CHECK(co.disable_backend());
     BOOST_CHECK(co.disable_cmakelists());
@@ -456,9 +456,9 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_options) {
 
     const auto co(ko.cpp());
     BOOST_CHECK(!co.split_project());
-    BOOST_CHECK(!co.project_directory().empty());
-    BOOST_CHECK(co.source_directory().empty());
-    BOOST_CHECK(co.include_directory().empty());
+    BOOST_CHECK(!co.project_directory_path().empty());
+    BOOST_CHECK(co.source_directory_path().empty());
+    BOOST_CHECK(co.include_directory_path().empty());
 
     BOOST_CHECK(!co.disable_backend());
     BOOST_CHECK(!co.disable_cmakelists());
@@ -530,7 +530,7 @@ BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto co(ko.cpp());
-    BOOST_CHECK(co.project_directory() == cpp_project_dir_value_arg);
+    BOOST_CHECK(co.project_directory_path() == cpp_project_dir_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
@@ -544,8 +544,8 @@ BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto co(ko.cpp());
-    BOOST_CHECK(!co.source_directory().empty());
-    BOOST_CHECK(!co.include_directory().empty());
+    BOOST_CHECK(!co.source_directory_path().empty());
+    BOOST_CHECK(!co.include_directory_path().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_source_or_include_without_split_throws) {

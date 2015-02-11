@@ -44,8 +44,8 @@ const std::string epp("package::path");
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string missing_source_include("You must supply source and include");
 const std::string missing_project_dir("You must supply the project directory");
-const std::string unexpected_source_include("Source and include directories");
-const std::string unexpected_project_dir("Project directories cannot be");
+const std::string unexpected_source_include("Source and include directory");
+const std::string unexpected_project_dir("Project directory path cannot be");
 
 dogen::config::knitting_options target_source_and_include() {
     return dogen::config::test::mock_options_factory::
@@ -68,11 +68,11 @@ split_project(const bool split, const boost::filesystem::path& include,
     const boost::filesystem::path& src) {
     auto o(target_only());
     o.cpp().split_project(split);
-    o.cpp().include_directory(include);
-    o.cpp().source_directory(src);
+    o.cpp().include_directory_path(include);
+    o.cpp().source_directory_path(src);
 
     if (!split)
-        o.cpp().project_directory(project_dir);
+        o.cpp().project_directory_path(project_dir);
 
     return o;
 }
@@ -82,11 +82,11 @@ split_project(const bool split, const boost::filesystem::path& proj) {
     auto o(target_only());
 
     o.cpp().split_project(split);
-    o.cpp().project_directory(proj);
+    o.cpp().project_directory_path(proj);
 
     if (split) {
-        o.cpp().include_directory(include_dir);
-        o.cpp().source_directory(src_dir);
+        o.cpp().include_directory_path(include_dir);
+        o.cpp().source_directory_path(src_dir);
     }
 
     return o;

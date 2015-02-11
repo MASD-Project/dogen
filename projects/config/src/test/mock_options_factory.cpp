@@ -81,8 +81,8 @@ cpp_options mock_options_factory::make_cpp_options(
 
     cpp_options r;
     r.split_project(true);
-    r.source_directory(src_dir);
-    r.include_directory(include_dir);
+    r.source_directory_path(src_dir);
+    r.include_directory_path(include_dir);
     r.enabled_facets(make_facets());
     r.header_extension(header_extension);
     r.source_extension(source_extension);
@@ -101,7 +101,7 @@ cpp_options mock_options_factory::make_cpp_options(
 
     cpp_options r(make_cpp_options(empty, empty));
     r.split_project(false);
-    r.project_directory(project_dir);
+    r.project_directory_path(project_dir);
     return r;
 }
 

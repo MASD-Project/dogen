@@ -77,9 +77,9 @@ populate(const dynamic::object& o, cpp_settings& s) const {
 
 void cpp_settings_factory::
 populate(const config::cpp_options& co, cpp_settings& s) const {
-    s.project_directory(co.project_directory());
-    s.source_directory(co.source_directory());
-    s.include_directory(co.include_directory());
+    s.project_directory(co.project_directory_path());
+    s.source_directory(co.source_directory_path());
+    s.include_directory(co.include_directory_path());
 }
 
 cpp_settings cpp_settings_factory::

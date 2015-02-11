@@ -414,17 +414,17 @@ transform_cpp_options(const boost::program_options::variables_map& vm) const {
     using boost::filesystem::path;
     if (r.split_project()) {
         if (!vm.count(cpp_source_dir_arg) && !vm.count(cpp_include_dir_arg)) {
-            r.source_directory(current_path_);
-            r.include_directory(current_path_);
+            r.source_directory_path(current_path_);
+            r.include_directory_path(current_path_);
         } else {
-            r.source_directory(vm[cpp_source_dir_arg].as<std::string>());
-            r.include_directory(vm[cpp_include_dir_arg].as<std::string>());
+            r.source_directory_path(vm[cpp_source_dir_arg].as<std::string>());
+            r.include_directory_path(vm[cpp_include_dir_arg].as<std::string>());
         }
     } else {
         if (!vm.count(cpp_project_dir_arg))
-            r.project_directory(current_path_);
+            r.project_directory_path(current_path_);
         else
-            r.project_directory(vm[cpp_project_dir_arg].as<std::string>());
+            r.project_directory_path(vm[cpp_project_dir_arg].as<std::string>());
     }
 
     r.disable_backend(vm.count(cpp_disable_backend_arg));

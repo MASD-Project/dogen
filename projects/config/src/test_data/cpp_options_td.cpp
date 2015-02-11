@@ -64,9 +64,9 @@ cpp_options_generator::cpp_options_generator() : position_(0) { }
 void cpp_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.split_project(create_bool(position + 0));
-    v.project_directory(create_boost_filesystem_path(position + 1));
-    v.source_directory(create_boost_filesystem_path(position + 2));
-    v.include_directory(create_boost_filesystem_path(position + 3));
+    v.project_directory_path(create_boost_filesystem_path(position + 1));
+    v.source_directory_path(create_boost_filesystem_path(position + 2));
+    v.include_directory_path(create_boost_filesystem_path(position + 3));
     v.disable_backend(create_bool(position + 4));
     v.disable_cmakelists(create_bool(position + 5));
     v.enabled_facets(create_std_set_dogen_config_cpp_facet_types(position + 6));

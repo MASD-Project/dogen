@@ -37,9 +37,9 @@ cpp_options::cpp_options()
 
 cpp_options::cpp_options(cpp_options&& rhs)
     : split_project_(std::move(rhs.split_project_)),
-      project_directory_(std::move(rhs.project_directory_)),
-      source_directory_(std::move(rhs.source_directory_)),
-      include_directory_(std::move(rhs.include_directory_)),
+      project_directory_path_(std::move(rhs.project_directory_path_)),
+      source_directory_path_(std::move(rhs.source_directory_path_)),
+      include_directory_path_(std::move(rhs.include_directory_path_)),
       disable_backend_(std::move(rhs.disable_backend_)),
       disable_cmakelists_(std::move(rhs.disable_cmakelists_)),
       enabled_facets_(std::move(rhs.enabled_facets_)),
@@ -61,9 +61,9 @@ cpp_options::cpp_options(cpp_options&& rhs)
 
 cpp_options::cpp_options(
     const bool split_project,
-    const boost::filesystem::path& project_directory,
-    const boost::filesystem::path& source_directory,
-    const boost::filesystem::path& include_directory,
+    const boost::filesystem::path& project_directory_path,
+    const boost::filesystem::path& source_directory_path,
+    const boost::filesystem::path& include_directory_path,
     const bool disable_backend,
     const bool disable_cmakelists,
     const std::set<dogen::config::cpp_facet_types>& enabled_facets,
@@ -83,9 +83,9 @@ cpp_options::cpp_options(
     const bool use_integrated_io,
     const bool disable_eos_serialization)
     : split_project_(split_project),
-      project_directory_(project_directory),
-      source_directory_(source_directory),
-      include_directory_(include_directory),
+      project_directory_path_(project_directory_path),
+      source_directory_path_(source_directory_path),
+      include_directory_path_(include_directory_path),
       disable_backend_(disable_backend),
       disable_cmakelists_(disable_cmakelists),
       enabled_facets_(enabled_facets),
@@ -108,9 +108,9 @@ cpp_options::cpp_options(
 void cpp_options::swap(cpp_options& other) noexcept {
     using std::swap;
     swap(split_project_, other.split_project_);
-    swap(project_directory_, other.project_directory_);
-    swap(source_directory_, other.source_directory_);
-    swap(include_directory_, other.include_directory_);
+    swap(project_directory_path_, other.project_directory_path_);
+    swap(source_directory_path_, other.source_directory_path_);
+    swap(include_directory_path_, other.include_directory_path_);
     swap(disable_backend_, other.disable_backend_);
     swap(disable_cmakelists_, other.disable_cmakelists_);
     swap(enabled_facets_, other.enabled_facets_);
@@ -133,9 +133,9 @@ void cpp_options::swap(cpp_options& other) noexcept {
 
 bool cpp_options::operator==(const cpp_options& rhs) const {
     return split_project_ == rhs.split_project_ &&
-        project_directory_ == rhs.project_directory_ &&
-        source_directory_ == rhs.source_directory_ &&
-        include_directory_ == rhs.include_directory_ &&
+        project_directory_path_ == rhs.project_directory_path_ &&
+        source_directory_path_ == rhs.source_directory_path_ &&
+        include_directory_path_ == rhs.include_directory_path_ &&
         disable_backend_ == rhs.disable_backend_ &&
         disable_cmakelists_ == rhs.disable_cmakelists_ &&
         enabled_facets_ == rhs.enabled_facets_ &&
@@ -170,52 +170,52 @@ void cpp_options::split_project(const bool v) {
     split_project_ = v;
 }
 
-const boost::filesystem::path& cpp_options::project_directory() const {
-    return project_directory_;
+const boost::filesystem::path& cpp_options::project_directory_path() const {
+    return project_directory_path_;
 }
 
-boost::filesystem::path& cpp_options::project_directory() {
-    return project_directory_;
+boost::filesystem::path& cpp_options::project_directory_path() {
+    return project_directory_path_;
 }
 
-void cpp_options::project_directory(const boost::filesystem::path& v) {
-    project_directory_ = v;
+void cpp_options::project_directory_path(const boost::filesystem::path& v) {
+    project_directory_path_ = v;
 }
 
-void cpp_options::project_directory(const boost::filesystem::path&& v) {
-    project_directory_ = std::move(v);
+void cpp_options::project_directory_path(const boost::filesystem::path&& v) {
+    project_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& cpp_options::source_directory() const {
-    return source_directory_;
+const boost::filesystem::path& cpp_options::source_directory_path() const {
+    return source_directory_path_;
 }
 
-boost::filesystem::path& cpp_options::source_directory() {
-    return source_directory_;
+boost::filesystem::path& cpp_options::source_directory_path() {
+    return source_directory_path_;
 }
 
-void cpp_options::source_directory(const boost::filesystem::path& v) {
-    source_directory_ = v;
+void cpp_options::source_directory_path(const boost::filesystem::path& v) {
+    source_directory_path_ = v;
 }
 
-void cpp_options::source_directory(const boost::filesystem::path&& v) {
-    source_directory_ = std::move(v);
+void cpp_options::source_directory_path(const boost::filesystem::path&& v) {
+    source_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& cpp_options::include_directory() const {
-    return include_directory_;
+const boost::filesystem::path& cpp_options::include_directory_path() const {
+    return include_directory_path_;
 }
 
-boost::filesystem::path& cpp_options::include_directory() {
-    return include_directory_;
+boost::filesystem::path& cpp_options::include_directory_path() {
+    return include_directory_path_;
 }
 
-void cpp_options::include_directory(const boost::filesystem::path& v) {
-    include_directory_ = v;
+void cpp_options::include_directory_path(const boost::filesystem::path& v) {
+    include_directory_path_ = v;
 }
 
-void cpp_options::include_directory(const boost::filesystem::path&& v) {
-    include_directory_ = std::move(v);
+void cpp_options::include_directory_path(const boost::filesystem::path&& v) {
+    include_directory_path_ = std::move(v);
 }
 
 bool cpp_options::disable_backend() const {

@@ -53,9 +53,9 @@ std::size_t cpp_options_hasher::hash(const cpp_options&v) {
     std::size_t seed(0);
 
     combine(seed, v.split_project());
-    combine(seed, hash_boost_filesystem_path(v.project_directory()));
-    combine(seed, hash_boost_filesystem_path(v.source_directory()));
-    combine(seed, hash_boost_filesystem_path(v.include_directory()));
+    combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
     combine(seed, v.disable_backend());
     combine(seed, v.disable_cmakelists());
     combine(seed, hash_std_set_dogen_config_cpp_facet_types(v.enabled_facets()));

@@ -52,9 +52,9 @@ public:
 public:
     cpp_options(
         const bool split_project,
-        const boost::filesystem::path& project_directory,
-        const boost::filesystem::path& source_directory,
-        const boost::filesystem::path& include_directory,
+        const boost::filesystem::path& project_directory_path,
+        const boost::filesystem::path& source_directory_path,
+        const boost::filesystem::path& include_directory_path,
         const bool disable_backend,
         const bool disable_cmakelists,
         const std::set<dogen::config::cpp_facet_types>& enabled_facets,
@@ -96,39 +96,39 @@ public:
     /**@}*/
 
     /**
-     * @brief Directory in which to place all of the C++ code.
+     * @brief Path to the directory in which to place all of the C++ code.
      *
      * Implies project splitting is off.
      */
     /**@{*/
-    const boost::filesystem::path& project_directory() const;
-    boost::filesystem::path& project_directory();
-    void project_directory(const boost::filesystem::path& v);
-    void project_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& project_directory_path() const;
+    boost::filesystem::path& project_directory_path();
+    void project_directory_path(const boost::filesystem::path& v);
+    void project_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
-     * @brief Directory in which to place the C++ implementation files.
+     * @brief Path to the directory in which to place the C++ implementation files.
      *
      * Can only be supplied if split project is set to true.
      */
     /**@{*/
-    const boost::filesystem::path& source_directory() const;
-    boost::filesystem::path& source_directory();
-    void source_directory(const boost::filesystem::path& v);
-    void source_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& source_directory_path() const;
+    boost::filesystem::path& source_directory_path();
+    void source_directory_path(const boost::filesystem::path& v);
+    void source_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
-     * @brief Directory in which to place the C++ header files.
+     * @brief Path to the directory in which to place the C++ header files.
      *
      * Can only be supplied if split project is set to true.
      */
     /**@{*/
-    const boost::filesystem::path& include_directory() const;
-    boost::filesystem::path& include_directory();
-    void include_directory(const boost::filesystem::path& v);
-    void include_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& include_directory_path() const;
+    boost::filesystem::path& include_directory_path();
+    void include_directory_path(const boost::filesystem::path& v);
+    void include_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -308,9 +308,9 @@ public:
 
 private:
     bool split_project_;
-    boost::filesystem::path project_directory_;
-    boost::filesystem::path source_directory_;
-    boost::filesystem::path include_directory_;
+    boost::filesystem::path project_directory_path_;
+    boost::filesystem::path source_directory_path_;
+    boost::filesystem::path include_directory_path_;
     bool disable_backend_;
     bool disable_cmakelists_;
     std::set<dogen::config::cpp_facet_types> enabled_facets_;

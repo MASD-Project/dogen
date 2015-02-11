@@ -178,13 +178,13 @@
         <dia:point val="-56,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-16.05;-38.895,3.65"/>
+        <dia:rectangle val="-56.05,-16.05;-36.97,3.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-56,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.055"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="19.600000000000005"/>
@@ -307,7 +307,7 @@ and include directories.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#project_directory#</dia:string>
+            <dia:string>#project_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -316,7 +316,7 @@ and include directories.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Directory in which to place all of the C++ code.
+            <dia:string>#Path to the directory in which to place all of the C++ code.
 
 Implies project splitting is off.#</dia:string>
           </dia:attribute>
@@ -332,7 +332,7 @@ Implies project splitting is off.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#source_directory#</dia:string>
+            <dia:string>#source_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -341,7 +341,7 @@ Implies project splitting is off.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Directory in which to place the C++ implementation files.
+            <dia:string>#Path to the directory in which to place the C++ implementation files.
 
 Can only be supplied if split project is set to true.#</dia:string>
           </dia:attribute>
@@ -357,7 +357,7 @@ Can only be supplied if split project is set to true.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#include_directory#</dia:string>
+            <dia:string>#include_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -366,7 +366,7 @@ Can only be supplied if split project is set to true.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Directory in which to place the C++ header files.
+            <dia:string>#Path to the directory in which to place the C++ header files.
 
 Can only be supplied if split project is set to true.#</dia:string>
           </dia:attribute>
@@ -1100,17 +1100,17 @@ interested in.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-47.4725,3.6"/>
+        <dia:point val="-46.51,3.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.2225,2.85;-36.9487,13.8"/>
+        <dia:rectangle val="-47.26,2.85;-36.9487,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-47.4725,3.6"/>
-        <dia:point val="-47.4725,9"/>
+        <dia:point val="-46.51,3.6"/>
+        <dia:point val="-46.51,9"/>
         <dia:point val="-37.1487,9"/>
         <dia:point val="-37.1487,13"/>
       </dia:attribute>
@@ -2292,7 +2292,7 @@ writing to output.#</dia:string>
         <dia:point val="-7.8575,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.5225,-26.75;-7.1075,-15.2"/>
+        <dia:rectangle val="-46.56,-26.75;-7.1075,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2300,8 +2300,8 @@ writing to output.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-7.8575,-26"/>
         <dia:point val="-7.8575,-21"/>
-        <dia:point val="-47.4725,-21"/>
-        <dia:point val="-47.4725,-16"/>
+        <dia:point val="-46.51,-21"/>
+        <dia:point val="-46.51,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

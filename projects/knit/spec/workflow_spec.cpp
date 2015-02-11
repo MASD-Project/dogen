@@ -238,7 +238,8 @@ BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
     auto lambda([](codegen_tds tds) -> knitting_options {
             auto s(default_mock_options(tds));
             auto cs(s.cpp());
-            cs.project_directory(cs.project_directory() /= extra_folder);
+            cs.project_directory_path(
+                cs.project_directory_path() /= extra_folder);
             s.cpp(cs);
 
             auto is(s.input());

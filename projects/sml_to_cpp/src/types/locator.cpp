@@ -68,13 +68,13 @@ locator::locator(const std::string& model_name,
     model_name_(model_name), options_(options) {
 
     if (options_.split_project()) {
-        source_directory_ = options_.source_directory();
-        include_directory_ = options_.include_directory();
+        source_directory_ = options_.source_directory_path();
+        include_directory_ = options_.include_directory_path();
     } else {
-        source_directory_ = options_.project_directory() / model_name_;
+        source_directory_ = options_.project_directory_path() / model_name_;
         source_directory_ /= src_dir;
 
-        include_directory_ = options_.project_directory() / model_name_;
+        include_directory_ = options_.project_directory_path() / model_name_;
         include_directory_ /= include_dir;
     }
 
@@ -236,7 +236,7 @@ locator::absolute_path(const std::string& name) const {
         BOOST_THROW_EXCEPTION(
             utility::exception::exception(absolute_path_with_split));
     }
-    return options_.project_directory() / model_name_ / name;
+    return options_.project_directory_path() / model_name_ / name;
 }
 
 std::forward_list<boost::filesystem::path>
@@ -247,7 +247,7 @@ locator::managed_directories() const {
         r.push_front(source_directory_ / model_name_);
         r.push_front(include_directory_ / model_name_);
     } else {
-        r.push_front(options_.project_directory() / model_name_);
+        r.push_front(options_.project_directory_path() / model_name_);
     }
 
     return r;
