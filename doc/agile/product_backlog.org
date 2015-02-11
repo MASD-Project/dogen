@@ -4038,7 +4038,16 @@ primitives so that I can model my domain more accurately.
 #+end_quote
 
 It would be nice to be able to add a default value in dia and have it
-set on the default constructor, if the type is a primitive or a =std::string=.
+set on the default constructor, if the type is a primitive or a
+=std::string=.
+
+These could be added as dynamic extensions; however, they should not
+be model specific - the same defaults should apply to all languages.
+
+Note also that there are two levels of default values: the type-level
+(all primitives of type =x= default to =y=) and the property level
+(instances of type =x= in class =z= default to =y=). The meta-data can
+be applied at each level to achieve the desired effect.
 
 *** Add support for interfaces                                         :epic:
 
