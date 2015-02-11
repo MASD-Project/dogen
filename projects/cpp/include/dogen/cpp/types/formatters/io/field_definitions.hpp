@@ -80,15 +80,14 @@ struct field_definitions {
         static const dynamic::field_definition& postfix();
 
         /**
-         * @brief File name override to apply.
+         * @brief Inclusion path override.
          */
-        static const dynamic::field_definition& file_name();
+        static const dynamic::field_definition& inclusion_path();
 
         /**
-         * @brief If true, the overridden file name is in system
-         * includes.
+         * @brief Delimiter to use for the inclusion path.
          */
-        static const dynamic::field_definition& is_system();
+        static const dynamic::field_definition& inclusion_delimiter();
     };
 
     /**

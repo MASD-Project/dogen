@@ -9,8 +9,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.file_name" : "boost/shared_ptr.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/shared_ptr.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/shared_ptr.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/shared_ptr.hpp"
             }
         },
         {
@@ -19,8 +19,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.file_name" : "boost/weak_ptr.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/weak_ptr.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/weak_ptr.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/weak_ptr.hpp"
             }
         },
         {
@@ -29,8 +29,8 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.file_name" : "boost/scoped_ptr.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/scoped_ptr.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/scoped_ptr.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/scoped_ptr.hpp"
             }
         },
         {
@@ -39,8 +39,8 @@
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
                 "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.file_name" : "boost/optional.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/optional.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/optional.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/optional.hpp"
             }
         },
         {
@@ -48,8 +48,8 @@
             "simple_name" : "variant",
             "extensions" : {
                 "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.file_name" : "boost/variant.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/serialization/variant.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/variant.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/variant.hpp"
             }
         },
         {
@@ -59,7 +59,7 @@
                 "asio"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/io_service.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/asio/io_service.hpp"
             }
         },
         {
@@ -69,7 +69,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/asio/ip/tcp.hpp"
             }
         },
         {
@@ -79,7 +79,7 @@
                 "asio", "ip", "tcp"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/asio/ip/tcp.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/asio/ip/tcp.hpp"
             }
         },
         {
@@ -90,7 +90,7 @@
             ],
             "extensions" : {
                 "cpp.type.requires_manual_move_constructor" : true,
-                "cpp.types.class_header_formatter.file_name" : "boost/filesystem/path.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/filesystem/path.hpp"
             }
         },
         {
@@ -100,9 +100,9 @@
                 "gregorian"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian_types.hpp",
-                "cpp.io.class_header_formatter.file_name" : "boost/date_time/gregorian/gregorian.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/gregorian/greg_serialize.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/date_time/gregorian/gregorian_types.hpp",
+                "cpp.io.class_header_formatter.inclusion_path" : "boost/date_time/gregorian/gregorian.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/date_time/gregorian/greg_serialize.hpp"
             }
         },
         {
@@ -112,9 +112,9 @@
                 "posix_time"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.io.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/posix_time_types.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/time_serialize.hpp",
+                "cpp.io.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -124,9 +124,9 @@
                 "posix_time"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time_types.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/date_time/posix_time/time_serialize.hpp",
-                "cpp.io.class_header_formatter.file_name" : "boost/date_time/posix_time/posix_time.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/posix_time_types.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/time_serialize.hpp",
+                "cpp.io.class_header_formatter.inclusion_path" : "boost/date_time/posix_time/posix_time.hpp"
             }
         },
         {
@@ -136,9 +136,9 @@
                 "property_tree"
             ],
             "extensions" : {
-                "cpp.types.class_header_formatter.file_name" : "boost/property_tree/ptree.hpp",
-                "cpp.serialization.class_header_formatter.file_name" : "boost/property_tree/ptree_serialization.hpp",
-                "cpp.io.class_header_formatter.file_name" : "boost/property_tree/json_parser.hpp"
+                "cpp.types.class_header_formatter.inclusion_path" : "boost/property_tree/ptree.hpp",
+                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/property_tree/ptree_serialization.hpp",
+                "cpp.io.class_header_formatter.inclusion_path" : "boost/property_tree/json_parser.hpp"
             }
         }
     ]

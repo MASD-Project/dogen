@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-11 Wed 22:09]
+Clock summary at [2015-02-11 Wed 22:27]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *25:21* |       |      |
+| *Total time*                                                        | *25:38* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 25:21 |      |
+| Active                                                              |         | 25:38 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -41,6 +41,7 @@ Clock summary at [2015-02-11 Wed 22:09]
 | COMPLETED Improve building of file names                            |         |       | 0:56 |
 | COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
 | COMPLETED Add absolute path support to path builder                 |         |       | 5:06 |
+| STARTED Implement include generation for class header formatter     |         |       | 0:17 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -606,26 +607,8 @@ handle both of these scenarios.
 - create source and include directory fields again;
 - use these if split project is false.
 
-*** Create a toggable replacement with legacy and new formatters      :story:
-
-As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
-the legacy formatters; we then need to overwrite those entries in the
-map that are produced by the new formatters. This should be easy to
-switch on and off since we will not be able to use the new formatters
-for a long while.
-
-This can be done in knit's cpp backend:
-
-: backend::value_type cpp_backend::generate()
-
-We just need to look at the map and update any values with the files
-from the new formatters.
-
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
-*** Implement include generation for class header formatter           :story:
+*** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-11 Wed 22:10]--[2015-02-11 Wed 22:27] =>  0:17
 
 Now that we have finished generating the path spec details, we need to
 make sure includes generation works as expected. Add both formatter
@@ -650,6 +633,31 @@ Notes:
   do not know if it is a system or user path. We need to change file
   properties to take this into account. We need a include path class
   with a include type: user or system. we could then use this.
+
+*** Add dynamic consistency validation                                :story:
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+*** Create a toggable replacement with legacy and new formatters      :story:
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
+the legacy formatters; we then need to overwrite those entries in the
+map that are produced by the new formatters. This should be easy to
+switch on and off since we will not be able to use the new formatters
+for a long while.
+
+This can be done in knit's cpp backend:
+
+: backend::value_type cpp_backend::generate()
+
+We just need to look at the map and update any values with the files
+from the new formatters.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
 
 *** Create a list of valid values for field definitions               :story:
 

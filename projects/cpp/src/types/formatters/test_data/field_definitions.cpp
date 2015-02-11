@@ -114,9 +114,9 @@ field_definition create_class_header_formatter_postfix() {
     return r;
 }
 
-field_definition create_class_header_formatter_file_name() {
+field_definition create_class_header_formatter_inclusion_path() {
     field_definition r;
-    r.name().simple("file_name");
+    r.name().simple("inclusion_path");
     r.name().qualified(traits::class_header_formatter_name() +
         "." + r.name().simple());
     r.ownership_hierarchy().model_name(
@@ -129,9 +129,9 @@ field_definition create_class_header_formatter_file_name() {
     return r;
 }
 
-field_definition create_class_header_formatter_is_system() {
+field_definition create_class_header_formatter_inclusion_delimiter() {
     field_definition r;
-    r.name().simple("is_system");
+    r.name().simple("inclusion_delimiter");
     r.name().qualified(traits::class_header_formatter_name() +
         "." + r.name().simple());
     r.ownership_hierarchy().model_name(
@@ -259,8 +259,8 @@ create_all_field_definitions() {
     using chf = fd::class_header_formatter;
     r.push_front(chf::enabled());
     r.push_front(chf::postfix());
-    r.push_front(chf::file_name());
-    r.push_front(chf::is_system());
+    r.push_front(chf::inclusion_path());
+    r.push_front(chf::inclusion_delimiter());
 
     using cif = fd::class_implementation_formatter;
     r.push_front(cif::postfix());
@@ -322,14 +322,14 @@ field_definitions::class_header_formatter::postfix() {
 }
 
 const dynamic::field_definition&
-field_definitions::class_header_formatter::file_name() {
-    static auto r(create_class_header_formatter_file_name());
+field_definitions::class_header_formatter::inclusion_path() {
+    static auto r(create_class_header_formatter_inclusion_path());
     return r;
 }
 
 const dynamic::field_definition&
-field_definitions::class_header_formatter::is_system() {
-    static auto r(create_class_header_formatter_is_system());
+field_definitions::class_header_formatter::inclusion_delimiter() {
+    static auto r(create_class_header_formatter_inclusion_delimiter());
     return r;
 }
 
