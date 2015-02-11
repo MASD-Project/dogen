@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_SETTINGS_FORMATTER_SETTINGS_IO_HPP
-#define DOGEN_CPP_IO_SETTINGS_FORMATTER_SETTINGS_IO_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_LOCAL_FORMATTER_SETTINGS_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_SETTINGS_LOCAL_FORMATTER_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/local_formatter_settings_fwd.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace settings {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::settings::formatter_settings& v);
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::settings::local_formatter_settings& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::cpp::settings::local_formatter_settings& v, unsigned int version);
+
+} }
 
 #endif

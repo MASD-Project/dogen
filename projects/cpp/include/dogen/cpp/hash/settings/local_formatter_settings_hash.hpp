@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
-#include <ostream>
-#include "dogen/cpp/io/settings/formatter_settings_io.hpp"
+#ifndef DOGEN_CPP_HASH_SETTINGS_LOCAL_FORMATTER_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_LOCAL_FORMATTER_SETTINGS_HASH_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include <functional>
+#include "dogen/cpp/types/settings/local_formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::formatter_settings\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
-      << " }";
-    return(s);
-}
+struct local_formatter_settings_hasher {
+public:
+    static std::size_t hash(const local_formatter_settings& v);
+};
 
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::settings::local_formatter_settings> {
+public:
+    size_t operator()(const dogen::cpp::settings::local_formatter_settings& v) const {
+        return dogen::cpp::settings::local_formatter_settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

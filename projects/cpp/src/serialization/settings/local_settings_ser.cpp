@@ -28,7 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/local_formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/local_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"

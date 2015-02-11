@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
+#include "dogen/cpp/hash/formattables/inclusion_delimiter_types_hash.hpp"
+#include "dogen/cpp/hash/settings/local_formatter_settings_hash.hpp"
 
 namespace {
 
@@ -29,17 +30,25 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 }
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t formatter_settings_hasher::hash(const formatter_settings&v) {
+std::size_t local_formatter_settings_hasher::hash(const local_formatter_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
-    combine(seed, v.postfix());
+    combine(seed, v.supported());
+    combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
+    combine(seed, v.inclusion_delimiter_type());
 
     return seed;
 }

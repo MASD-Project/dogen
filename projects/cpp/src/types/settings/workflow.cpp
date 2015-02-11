@@ -101,11 +101,20 @@ create_facet_settings(const dynamic::indexer& idx,
     return f.make(idx.field_definitions_by_facet_name(), o);
 }
 
-std::unordered_map<std::string, formatter_settings> workflow::
-create_formatter_settings(const dynamic::indexer& idx,
+std::unordered_map<std::string, global_formatter_settings> workflow::
+create_global_formatter_settings(const dynamic::indexer& idx,
     const dynamic::object& o) const {
+    const auto& fd(idx.field_definitions_by_formatter_name());
     formatter_settings_factory f;
-    return f.make(idx.field_definitions_by_formatter_name(), o);
+    return f.make_global_formatter_settings(fd, o);
+}
+
+std::unordered_map<std::string, local_formatter_settings> workflow::
+create_local_formatter_settings(const dynamic::indexer& idx,
+    const dynamic::object& o) const {
+    const auto& fd(idx.field_definitions_by_formatter_name());
+    formatter_settings_factory f;
+    return f.make_local_formatter_settings(fd, o);
 }
 
 global_settings workflow::create_global_settings_activity(
@@ -118,7 +127,7 @@ global_settings workflow::create_global_settings_activity(
     r.general_settings(create_general_settings(o));
     r.cpp_settings(create_cpp_settings(co, o));
     r.facet_settings(create_facet_settings(idx, o));
-    r.formatter_settings(create_formatter_settings(idx, o));
+    r.formatter_settings(create_global_formatter_settings(idx, o));
     return r;
 }
 

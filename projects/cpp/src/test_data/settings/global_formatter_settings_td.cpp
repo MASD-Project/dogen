@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/global_formatter_settings_td.hpp"
 
 namespace {
 
@@ -39,29 +39,29 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-formatter_settings_generator::formatter_settings_generator() : position_(0) { }
+global_formatter_settings_generator::global_formatter_settings_generator() : position_(0) { }
 
-void formatter_settings_generator::
+void global_formatter_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.postfix(create_std_string(position + 1));
 }
 
-formatter_settings_generator::result_type
-formatter_settings_generator::create(const unsigned int position) {
-    formatter_settings r;
-    formatter_settings_generator::populate(position, r);
+global_formatter_settings_generator::result_type
+global_formatter_settings_generator::create(const unsigned int position) {
+    global_formatter_settings r;
+    global_formatter_settings_generator::populate(position, r);
     return r;
 }
-formatter_settings_generator::result_type*
-formatter_settings_generator::create_ptr(const unsigned int position) {
-    formatter_settings* p = new formatter_settings();
-    formatter_settings_generator::populate(position, *p);
+global_formatter_settings_generator::result_type*
+global_formatter_settings_generator::create_ptr(const unsigned int position) {
+    global_formatter_settings* p = new global_formatter_settings();
+    global_formatter_settings_generator::populate(position, *p);
     return p;
 }
 
-formatter_settings_generator::result_type
-formatter_settings_generator::operator()() {
+global_formatter_settings_generator::result_type
+global_formatter_settings_generator::operator()() {
     return create(position_++);
 }
 

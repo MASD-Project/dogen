@@ -63,7 +63,8 @@ path_ingredients path_ingredients_factory::make(const settings::selector& s,
 
     r.facet_postfix(fcts.postfix());
 
-    const auto& fmts(s.select_formatter_settings(qn, f.formatter_name()));
+    const auto& fmts(s.select_global_formatter_settings(
+            qn, f.formatter_name()));
     r.formatter_postfix(fmts.postfix());
 
     const auto ft(f.file_type());

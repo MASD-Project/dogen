@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/cpp/test_data/settings/cpp_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/facet_settings_td.hpp"
-#include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/global_formatter_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/global_settings_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 
@@ -56,15 +56,15 @@ std::unordered_map<std::string, dogen::cpp::settings::facet_settings> create_std
     return r;
 }
 
-dogen::cpp::settings::formatter_settings
-create_dogen_cpp_settings_formatter_settings(const unsigned int position) {
-    return dogen::cpp::settings::formatter_settings_generator::create(position);
+dogen::cpp::settings::global_formatter_settings
+create_dogen_cpp_settings_global_formatter_settings(const unsigned int position) {
+    return dogen::cpp::settings::global_formatter_settings_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> create_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> r;
+std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings> create_std_unordered_map_std_string_dogen_cpp_settings_global_formatter_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_settings_formatter_settings(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_settings_global_formatter_settings(position + i)));
     }
     return r;
 }
@@ -82,7 +82,7 @@ populate(const unsigned int position, result_type& v) {
     v.general_settings(create_dogen_formatters_general_settings(position + 0));
     v.cpp_settings(create_dogen_cpp_settings_cpp_settings(position + 1));
     v.facet_settings(create_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(position + 2));
-    v.formatter_settings(create_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(position + 3));
+    v.formatter_settings(create_std_unordered_map_std_string_dogen_cpp_settings_global_formatter_settings(position + 3));
 }
 
 global_settings_generator::result_type

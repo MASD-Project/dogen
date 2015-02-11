@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/annotation.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
@@ -76,25 +77,22 @@ public:
     select_facet_settings(const std::string& facet_name) const;
 
     /**
-     * @brief Returns the formatter settings for the supplied
+     * @brief Returns the local formatter settings for the supplied
      * entity identity and formatter name.
-     *
-     * @pre There must exist settings for the supplied entity identity
-     * and formatter name.
      */
-    const formatter_settings&
-    select_formatter_settings(const std::string& identity,
+    boost::optional<local_formatter_settings>
+    select_local_formatter_settings(const std::string& identity,
         const std::string& formatter_name) const;
 
     /**
-     * @brief Returns the formatter settings for the supplied
+     * @brief Returns the global formatter settings for the supplied
      * qualified name and formatter name.
      *
      * @pre There must exist settings for the supplied qualified name
      * and formatter name.
      */
-    const formatter_settings&
-    select_formatter_settings(const sml::qname& qn,
+    const global_formatter_settings&
+    select_global_formatter_settings(const sml::qname& qn,
         const std::string& formatter_name) const;
 
 public:

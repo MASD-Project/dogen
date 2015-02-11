@@ -18,59 +18,59 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/global_formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-formatter_settings::formatter_settings()
+global_formatter_settings::global_formatter_settings()
     : enabled_(static_cast<bool>(0)) { }
 
-formatter_settings::formatter_settings(
+global_formatter_settings::global_formatter_settings(
     const bool enabled,
     const std::string& postfix)
     : enabled_(enabled),
       postfix_(postfix) { }
 
-void formatter_settings::swap(formatter_settings& other) noexcept {
+void global_formatter_settings::swap(global_formatter_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(postfix_, other.postfix_);
 }
 
-bool formatter_settings::operator==(const formatter_settings& rhs) const {
+bool global_formatter_settings::operator==(const global_formatter_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
         postfix_ == rhs.postfix_;
 }
 
-formatter_settings& formatter_settings::operator=(formatter_settings other) {
+global_formatter_settings& global_formatter_settings::operator=(global_formatter_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool formatter_settings::enabled() const {
+bool global_formatter_settings::enabled() const {
     return enabled_;
 }
 
-void formatter_settings::enabled(const bool v) {
+void global_formatter_settings::enabled(const bool v) {
     enabled_ = v;
 }
 
-const std::string& formatter_settings::postfix() const {
+const std::string& global_formatter_settings::postfix() const {
     return postfix_;
 }
 
-std::string& formatter_settings::postfix() {
+std::string& global_formatter_settings::postfix() {
     return postfix_;
 }
 
-void formatter_settings::postfix(const std::string& v) {
+void global_formatter_settings::postfix(const std::string& v) {
     postfix_ = v;
 }
 
-void formatter_settings::postfix(const std::string&& v) {
+void global_formatter_settings::postfix(const std::string&& v) {
     postfix_ = std::move(v);
 }
 

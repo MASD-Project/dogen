@@ -41,13 +41,13 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-formatter_settings formatter_settings_factory::
-create_settings_for_formatter(
+global_formatter_settings formatter_settings_factory::
+create_global_settings_for_formatter(
     const std::forward_list<dynamic::field_definition>& formatter_fields,
     const dynamic::object& o) const {
     using namespace dynamic;
 
-    formatter_settings r;
+    global_formatter_settings r;
     bool found_enabled(false), found_postfix(false);
     const auto& enabled_trait(traits::formatter::enabled());
     const auto& postfix_trait(traits::formatter::postfix());
@@ -96,17 +96,71 @@ create_settings_for_formatter(
     return r;
 }
 
-std::unordered_map<std::string, formatter_settings>
-formatter_settings_factory::make(const std::unordered_map<std::string,
+local_formatter_settings formatter_settings_factory::
+create_local_settings_for_formatter(
+    const std::forward_list<dynamic::field_definition>& formatter_fields,
+    const dynamic::object& o) const {
+    using namespace dynamic;
+
+    local_formatter_settings r;
+    bool found_enabled(false);
+    const auto& enabled_trait(traits::formatter::enabled());
+
+    for (const auto fd : formatter_fields) {
+        using namespace dynamic;
+        if (fd.name().simple() == enabled_trait) {
+            if (found_enabled) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_enabled = true;
+
+            if (has_field(o, fd))
+                r.enabled(get_boolean_content(o, fd));
+            else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.enabled(get_boolean_content(*fd.default_value()));
+            }
+        }
+    }
+
+    return r;
+}
+
+std::unordered_map<std::string, global_formatter_settings>
+formatter_settings_factory::
+make_global_formatter_settings(const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>
     >& field_definitions_by_formatter_name,
     const dynamic::object& o) const {
 
-    std::unordered_map<std::string, formatter_settings> r;
+    std::unordered_map<std::string, global_formatter_settings> r;
     for (const auto pair : field_definitions_by_formatter_name) {
         const auto& formatter_name(pair.first);
         const auto& formatter_fields(pair.second);
-        const auto s(create_settings_for_formatter(formatter_fields, o));
+        const auto s(create_global_settings_for_formatter(formatter_fields, o));
+        r.insert(std::make_pair(formatter_name, s));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, local_formatter_settings>
+formatter_settings_factory::
+make_local_formatter_settings(const std::unordered_map<std::string,
+        std::forward_list<dynamic::field_definition>
+        >& field_definitions_by_formatter_name,
+    const dynamic::object& o) const {
+
+    std::unordered_map<std::string, local_formatter_settings> r;
+    for (const auto pair : field_definitions_by_formatter_name) {
+        const auto& formatter_name(pair.first);
+        const auto& formatter_fields(pair.second);
+        const auto s(create_local_settings_for_formatter(formatter_fields, o));
         r.insert(std::make_pair(formatter_name, s));
     }
     return r;

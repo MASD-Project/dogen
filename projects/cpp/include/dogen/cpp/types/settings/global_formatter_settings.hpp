@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_FORMATTER_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_FORMATTER_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_GLOBAL_FORMATTER_SETTINGS_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_GLOBAL_FORMATTER_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,35 +27,35 @@
 
 #include <algorithm>
 #include <string>
-#include "dogen/cpp/serialization/settings/formatter_settings_fwd_ser.hpp"
+#include "dogen/cpp/serialization/settings/global_formatter_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
 /**
- * @brief Settings pertaining to a given formatter, but that are common to all formatters.
+ * @brief Global settings pertaining to a given formatter, but that are common to all formatters.
  */
-class formatter_settings final {
+class global_formatter_settings final {
 public:
-    formatter_settings(const formatter_settings&) = default;
-    formatter_settings(formatter_settings&&) = default;
-    ~formatter_settings() = default;
+    global_formatter_settings(const global_formatter_settings&) = default;
+    global_formatter_settings(global_formatter_settings&&) = default;
+    ~global_formatter_settings() = default;
 
 public:
-    formatter_settings();
+    global_formatter_settings();
 
 public:
-    formatter_settings(
+    global_formatter_settings(
         const bool enabled,
         const std::string& postfix);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const formatter_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const global_formatter_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, formatter_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, global_formatter_settings& v, unsigned int version);
 
 public:
     /**
@@ -77,14 +77,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const formatter_settings& rhs) const;
-    bool operator!=(const formatter_settings& rhs) const {
+    bool operator==(const global_formatter_settings& rhs) const;
+    bool operator!=(const global_formatter_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(formatter_settings& other) noexcept;
-    formatter_settings& operator=(formatter_settings other);
+    void swap(global_formatter_settings& other) noexcept;
+    global_formatter_settings& operator=(global_formatter_settings other);
 
 private:
     bool enabled_;
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::settings::formatter_settings& lhs,
-    dogen::cpp::settings::formatter_settings& rhs) {
+    dogen::cpp::settings::global_formatter_settings& lhs,
+    dogen::cpp::settings::global_formatter_settings& rhs) {
     lhs.swap(rhs);
 }
 

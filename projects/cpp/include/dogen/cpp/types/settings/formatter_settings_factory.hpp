@@ -30,7 +30,8 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/local_formatter_settings.hpp"
+#include "dogen/cpp/types/settings/global_formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,24 +49,46 @@ public:
 
 private:
     /**
-     * @brief Creates the settings for the facet implied by the facet
-     * fields.
+     * @brief Creates the global settings for the facet implied by the
+     * facet fields.
      */
-    formatter_settings create_settings_for_formatter(
+    global_formatter_settings create_global_settings_for_formatter(
+        const std::forward_list<dynamic::field_definition>& formatter_fields,
+        const dynamic::object& o) const;
+
+    /**
+     * @brief Creates the local settings for the facet implied by the
+     * facet fields.
+     */
+    local_formatter_settings create_local_settings_for_formatter(
         const std::forward_list<dynamic::field_definition>& formatter_fields,
         const dynamic::object& o) const;
 
 public:
     /**
-     * @brief Builds the formatter settings from the dynamic object.
+     * @brief Creates the global formatter settings from the dynamic
+     * object.
      *
-     * @return Formatter settings by formatter name.
+     * @return Global formatter settings by formatter name.
      */
-    std::unordered_map<std::string, formatter_settings>
-    make(const std::unordered_map<std::string,
+    std::unordered_map<std::string, global_formatter_settings>
+    make_global_formatter_settings(const std::unordered_map<std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_formatter_name,
         const dynamic::object& o) const;
+
+    /**
+     * @brief Creates the local formatter settings from the dynamic
+     * object.
+     *
+     * @return Local formatter settings by formatter name.
+     */
+    std::unordered_map<std::string, local_formatter_settings>
+    make_local_formatter_settings(const std::unordered_map<std::string,
+        std::forward_list<dynamic::field_definition>
+        >& field_definitions_by_formatter_name,
+        const dynamic::object& o) const;
+
 };
 
 } } }

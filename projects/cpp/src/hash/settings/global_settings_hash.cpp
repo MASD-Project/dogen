@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/hash/settings/cpp_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/facet_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/global_formatter_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/global_settings_hash.hpp"
 #include "dogen/formatters/hash/general_settings_hash.hpp"
 
@@ -42,7 +42,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_facet_se
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_global_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -63,7 +63,7 @@ std::size_t global_settings_hasher::hash(const global_settings&v) {
     combine(seed, v.general_settings());
     combine(seed, v.cpp_settings());
     combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_facet_settings(v.facet_settings()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(v.formatter_settings()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_global_formatter_settings(v.formatter_settings()));
 
     return seed;
 }

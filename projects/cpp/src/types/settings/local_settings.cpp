@@ -26,7 +26,7 @@ namespace settings {
 
 local_settings::local_settings(
     const dogen::formatters::general_settings& general_settings,
-    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings)
+    const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings)
     : general_settings_(general_settings),
       formatter_settings_(formatter_settings) { }
 
@@ -63,19 +63,19 @@ void local_settings::general_settings(const dogen::formatters::general_settings&
     general_settings_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& local_settings::formatter_settings() const {
+const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& local_settings::formatter_settings() const {
     return formatter_settings_;
 }
 
-std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& local_settings::formatter_settings() {
+std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& local_settings::formatter_settings() {
     return formatter_settings_;
 }
 
-void local_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v) {
+void local_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& v) {
     formatter_settings_ = v;
 }
 
-void local_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v) {
+void local_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>&& v) {
     formatter_settings_ = std::move(v);
 }
 

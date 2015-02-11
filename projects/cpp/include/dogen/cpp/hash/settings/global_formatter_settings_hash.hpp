@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_SETTINGS_FORMATTER_SETTINGS_HASH_HPP
-#define DOGEN_CPP_HASH_SETTINGS_FORMATTER_SETTINGS_HASH_HPP
+#ifndef DOGEN_CPP_HASH_SETTINGS_GLOBAL_FORMATTER_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_GLOBAL_FORMATTER_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/global_formatter_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-struct formatter_settings_hasher {
+struct global_formatter_settings_hasher {
 public:
-    static std::size_t hash(const formatter_settings& v);
+    static std::size_t hash(const global_formatter_settings& v);
 };
 
 } } }
@@ -42,10 +42,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::cpp::settings::formatter_settings> {
+struct hash<dogen::cpp::settings::global_formatter_settings> {
 public:
-    size_t operator()(const dogen::cpp::settings::formatter_settings& v) const {
-        return dogen::cpp::settings::formatter_settings_hasher::hash(v);
+    size_t operator()(const dogen::cpp::settings::global_formatter_settings& v) const {
+        return dogen::cpp::settings::global_formatter_settings_hasher::hash(v);
     }
 };
 

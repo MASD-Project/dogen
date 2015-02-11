@@ -39,7 +39,8 @@
 #include "dogen/cpp/types/settings/facet_settings.hpp"
 #include "dogen/cpp/types/settings/local_settings.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/local_formatter_settings.hpp"
+#include "dogen/cpp/types/settings/global_formatter_settings.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 
 namespace dogen {
@@ -79,10 +80,17 @@ private:
         const dynamic::object& o) const;
 
     /**
-     * @brief Create the formatter settings.
+     * @brief Create the global formatter settings.
      */
-    std::unordered_map<std::string, formatter_settings>
-    create_formatter_settings(const dynamic::indexer& idx,
+    std::unordered_map<std::string, global_formatter_settings>
+    create_global_formatter_settings(const dynamic::indexer& idx,
+        const dynamic::object& o) const;
+
+    /**
+     * @brief Create the local formatter settings.
+     */
+    std::unordered_map<std::string, local_formatter_settings>
+    create_local_formatter_settings(const dynamic::indexer& idx,
         const dynamic::object& o) const;
 
     /**

@@ -608,6 +608,7 @@ handle both of these scenarios.
 - use these if split project is false.
 
 *** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
     CLOCK: [2015-02-11 Wed 22:10]--[2015-02-11 Wed 22:27] =>  0:17
 
 Now that we have finished generating the path spec details, we need to

@@ -74,32 +74,33 @@ select_facet_settings(const std::string& facet_name) const {
     return i->second;
 }
 
-const formatter_settings& selector::
-select_formatter_settings(const std::string& identity,
+boost::optional<local_formatter_settings> selector::
+select_local_formatter_settings(const std::string& identity,
     const std::string& formatter_name) const {
     const auto& ls(settings_.local_settings());
     const auto i(ls.find(identity));
     if (i != ls.end()) {
         const auto& lfs(i->second.formatter_settings());
-        const auto i(lfs.find(formatter_name));
-        if (i != lfs.end())
-            return i->second;
+        const auto j(lfs.find(formatter_name));
+        if (j != lfs.end())
+            return j->second;
     }
 
+    return boost::optional<local_formatter_settings>();
+}
+
+const global_formatter_settings& selector::select_global_formatter_settings(
+    const sml::qname& qn, const std::string& formatter_name) const {
+    const auto identity(sml::string_converter::convert(qn));
+
     const auto& gfs(settings_.global_settings().formatter_settings());
-    const auto j(gfs.find(formatter_name));
-    if (j == gfs.end()) {
+    const auto i(gfs.find(formatter_name));
+    if (i == gfs.end()) {
         BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name;
         BOOST_THROW_EXCEPTION(
             selection_error(formatter_name_not_found + formatter_name));
     }
-    return j->second;
-}
-
-const formatter_settings& selector::select_formatter_settings(
-    const sml::qname& qn, const std::string& formatter_name) const {
-    const auto identity(sml::string_converter::convert(qn));
-    return select_formatter_settings(identity, formatter_name);
+    return i->second;
 }
 
 const cpp::settings::settings& selector::settings() const {

@@ -19,10 +19,9 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/settings/local_formatter_settings_io.hpp"
-#include "dogen/cpp/io/settings/local_settings_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/cpp/io/settings/global_formatter_settings_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -32,33 +31,21 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const local_settings& v) {
+std::ostream& operator<<(std::ostream& s, const global_formatter_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::local_settings\"" << ", "
-      << "\"general_settings\": " << v.general_settings() << ", "
-      << "\"formatter_settings\": " << v.formatter_settings()
+      << "\"__type__\": " << "\"dogen::cpp::settings::global_formatter_settings\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";
     return(s);
 }
