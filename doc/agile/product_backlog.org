@@ -4042,7 +4042,9 @@ set on the default constructor, if the type is a primitive or a
 =std::string=.
 
 These could be added as dynamic extensions; however, they should not
-be model specific - the same defaults should apply to all languages.
+be model specific - the same defaults should apply to all
+languages. However, note that in certain cases the default values may
+be language specific (e.g. =0.0f= for float, etc).
 
 Note also that there are two levels of default values: the type-level
 (all primitives of type =x= default to =y=) and the property level

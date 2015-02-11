@@ -6,7 +6,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int8_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
@@ -16,7 +15,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int16_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
@@ -26,7 +24,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int32_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
@@ -36,7 +33,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int64_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
@@ -46,7 +42,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "uint8_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
@@ -56,7 +51,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "uint16_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
@@ -66,7 +60,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "uint32_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
@@ -76,7 +69,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "uint64_t",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.types.class_header_formatter.inclusion_path" : "cstdint",

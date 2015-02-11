@@ -6,7 +6,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "bool",
-            "default_value" : "false",
             "extensions" : {
                 "cpp.type.family" : "boolean",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -15,7 +14,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "char",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "character",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -24,7 +22,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned char",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "character",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -33,7 +30,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "int",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -42,7 +38,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned int",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -51,7 +46,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "short",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -60,7 +54,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned short",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -69,7 +62,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -78,7 +70,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned long",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -87,7 +78,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long long",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -96,7 +86,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "unsigned long long",
-            "default_value" : "0",
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -105,7 +94,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "float",
-            "default_value" : "0.0f",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -114,7 +102,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "double",
-            "default_value" : "0.0d",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
                 "cpp.type.requires_manual_default_constructor" : true
@@ -123,7 +110,6 @@
         {
             "meta_type" : "primitive",
             "simple_name" : "long double",
-            "default_value" : "0.0d",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
                 "cpp.type.requires_manual_default_constructor" : true
