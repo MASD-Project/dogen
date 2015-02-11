@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DELIMITER_TYPES_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DELIMITER_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,14 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class includes_factory;
+/**
+ * @brief Types of delimiters to use in inclusion statements.
+ */
+enum class inclusion_delimiter_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    angle_brackets = 1, ///< Use angle brackets for include.
+    double_quotes = 2 ///< Use double-quotes for include.
+};
 
 } } }
 

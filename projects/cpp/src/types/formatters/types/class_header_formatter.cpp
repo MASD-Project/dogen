@@ -50,8 +50,8 @@ namespace formatters {
 namespace types {
 
 boost::filesystem::path class_header_formatter::
-get_relative_path(const formattables::class_info& c) const {
-    const auto& fp(c.include_path_by_formatter_name());
+get_inclusion_path(const formattables::class_info& c) const {
+    const auto& fp(c.inclusion_by_formatter_name());
     const auto i(fp.find(formatter_name()));
     if (i == fp.end()) {
         BOOST_LOG_SEV(lg, error) << include_path_for_formatter_not_found
@@ -60,7 +60,8 @@ get_relative_path(const formattables::class_info& c) const {
         BOOST_THROW_EXCEPTION(formatting_error(
                 include_path_for_formatter_not_found + formatter_name()));
     }
-    return i->second.relative_path();
+
+    return i->second.inclusion_path();
 }
 
 file_types class_header_formatter::file_type() const {
@@ -85,18 +86,24 @@ class_header_formatter::provide_file_properties(const settings::selector& s,
     path_factory pf;
     formattables::file_properties r;
     r.file_path(pf.make_file_path(pi, qn));
-    r.include_path(pf.make_include_path(pi, qn));
+
+    formattables::inclusion inc;
+    using dt = formattables::inclusion_delimiter_types;
+    inc.inclusion_delimiter_type(dt::double_quotes);
+    inc.inclusion_path(pf.make_include_path(pi, qn));
+    r.inclusion(inc);
+
     return r;
 }
 
-formattables::includes class_header_formatter::provide_includes(
-    const settings::selector& /*s*/,
+std::list<formattables::inclusion> class_header_formatter::
+provide_inclusion_dependencies(const settings::selector& /*s*/,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties>
         >& /*file_properties_by_formatter_name*/,
     const sml::model& /*m*/) const {
-    formattables::includes r;
+    std::list<formattables::inclusion>  r;
     return r;
 }
 
@@ -111,7 +118,7 @@ class_header_formatter::format(const settings::selector& s,
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(ss);
 
-    const auto rp(get_relative_path(c));
+    const auto rp(get_inclusion_path(c));
     dogen::cpp::formatters::boilerplate_formatter f;
     const auto a(s.select_annotation(c.identity()));
     f.format_begin(fo, a, empty_includes, rp);

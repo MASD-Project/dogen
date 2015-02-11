@@ -45,10 +45,10 @@ public:
 
 private:
     /**
-     * @brief Gets the relative path for the current formatter.
+     * @brief Gets the inclusion path for the current formatter.
      */
     boost::filesystem::path
-    get_relative_path(const formattables::class_info& c) const;
+    get_inclusion_path(const formattables::class_info& c) const;
 
 public:
     std::string facet_name() const override;
@@ -59,7 +59,8 @@ public:
     provide_file_properties(const settings::selector& s,
         const sml::qname& qn) const override;
 
-    formattables::includes provide_includes(const settings::selector& s,
+    std::list<formattables::inclusion> provide_inclusion_dependencies(
+        const settings::selector& s,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, formattables::file_properties>

@@ -21,16 +21,18 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
-#include "dogen/cpp/io/formattables/includes_io.hpp"
+#include "dogen/cpp/io/formattables/inclusion_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
-#include "dogen/cpp/types/formattables/includes_factory.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.formattables.includes_factory"));
+static logger lg(logger_factory(
+        "cpp.formattables.inclusion_dependencies_factory"));
 
 const std::string duplicate_formatter_name("Formatter name already inserted: ");
 const std::string formatter_not_found("Formatter not found: ");
@@ -42,48 +44,22 @@ namespace cpp {
 namespace formattables {
 
 std::unordered_map<sml::qname,
-                   std::unordered_map<std::string, includes>
-                   >
-includes_factory::make(
+                   std::unordered_map<std::string, std::list<inclusion> > >
+inclusion_dependencies_factory::make(
     const settings::selector& /*s*/, const provider_selector_interface& /*ps*/,
     const std::unordered_map<sml::qname,
     std::unordered_map<std::string, file_properties>
     >& /*file_properties_by_formatter_name*/,
     const sml::model& /*m*/) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining includes.";
+    BOOST_LOG_SEV(lg, debug) << "Obtaining inclusion dependencies.";
 
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, includes>
-        > r;
-/*
-    const auto includes_factories(create_includes_factories(c));
-    for (const auto pair : file_properties_by_formatter_name) {
-        const auto& qn(pair.first);
-        std::unordered_map<std::string, formattables::file_properties> fp;
-        for (const auto other_pair : pair.second) {
-            formattables::file_properties fp;
-            fp.relative_path(other_pair.second.relative_path());
-
-            const auto& formatter_name(other_pair.first);
-            const auto i(includes_factories.find(formatter_name));
-            if (i == includes_factories.end()) {
-                BOOST_LOG_SEV(lg, error) << formatter_not_found
-                                         << formatter_name;
-                BOOST_THROW_EXCEPTION(building_error(formatter_not_found +
-                        formatter_name));
-            }
-
-            const auto& f(*(i->second));
-            auto inc(f.make(m, qn, file_names));
-            fp.includes(inc);
-            all_props[formatter_name] = fp;
-        }
-        r[qn] = all_props;
-    }
-*/
-    BOOST_LOG_SEV(lg, debug) << "Includes: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining includes.";
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string,
+                                          std::list<inclusion>
+                                          >
+                       > r;
+    BOOST_LOG_SEV(lg, debug) << "Inclusion dependencies: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies.";
     return r;
 }
 

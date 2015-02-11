@@ -29,6 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include <string>
 #include "dogen/cpp/serialization/formatters/path_ingredients_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -57,9 +58,13 @@ public:
         const std::string& extension,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
-        const boost::filesystem::path& project_directory,
-        const boost::filesystem::path& source_directory,
-        const boost::filesystem::path& include_directory);
+        const boost::filesystem::path& project_directory_path,
+        const boost::filesystem::path& source_directory_path,
+        const boost::filesystem::path& include_directory_path,
+        const std::string& source_directory_name,
+        const std::string& include_directory_name,
+        const boost::filesystem::path& inclusion_path,
+        const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type);
 
 private:
     template<typename Archive>
@@ -95,20 +100,38 @@ public:
     void formatter_postfix(const std::string& v);
     void formatter_postfix(const std::string&& v);
 
-    const boost::filesystem::path& project_directory() const;
-    boost::filesystem::path& project_directory();
-    void project_directory(const boost::filesystem::path& v);
-    void project_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& project_directory_path() const;
+    boost::filesystem::path& project_directory_path();
+    void project_directory_path(const boost::filesystem::path& v);
+    void project_directory_path(const boost::filesystem::path&& v);
 
-    const boost::filesystem::path& source_directory() const;
-    boost::filesystem::path& source_directory();
-    void source_directory(const boost::filesystem::path& v);
-    void source_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& source_directory_path() const;
+    boost::filesystem::path& source_directory_path();
+    void source_directory_path(const boost::filesystem::path& v);
+    void source_directory_path(const boost::filesystem::path&& v);
 
-    const boost::filesystem::path& include_directory() const;
-    boost::filesystem::path& include_directory();
-    void include_directory(const boost::filesystem::path& v);
-    void include_directory(const boost::filesystem::path&& v);
+    const boost::filesystem::path& include_directory_path() const;
+    boost::filesystem::path& include_directory_path();
+    void include_directory_path(const boost::filesystem::path& v);
+    void include_directory_path(const boost::filesystem::path&& v);
+
+    const std::string& source_directory_name() const;
+    std::string& source_directory_name();
+    void source_directory_name(const std::string& v);
+    void source_directory_name(const std::string&& v);
+
+    const std::string& include_directory_name() const;
+    std::string& include_directory_name();
+    void include_directory_name(const std::string& v);
+    void include_directory_name(const std::string&& v);
+
+    const boost::filesystem::path& inclusion_path() const;
+    boost::filesystem::path& inclusion_path();
+    void inclusion_path(const boost::filesystem::path& v);
+    void inclusion_path(const boost::filesystem::path&& v);
+
+    dogen::cpp::formattables::inclusion_delimiter_types inclusion_delimiter_type() const;
+    void inclusion_delimiter_type(const dogen::cpp::formattables::inclusion_delimiter_types& v);
 
 public:
     bool operator==(const path_ingredients& rhs) const;
@@ -127,9 +150,13 @@ private:
     std::string extension_;
     std::string facet_postfix_;
     std::string formatter_postfix_;
-    boost::filesystem::path project_directory_;
-    boost::filesystem::path source_directory_;
-    boost::filesystem::path include_directory_;
+    boost::filesystem::path project_directory_path_;
+    boost::filesystem::path source_directory_path_;
+    boost::filesystem::path include_directory_path_;
+    std::string source_directory_name_;
+    std::string include_directory_name_;
+    boost::filesystem::path inclusion_path_;
+    dogen::cpp::formattables::inclusion_delimiter_types inclusion_delimiter_type_;
 };
 
 } } }

@@ -46,13 +46,15 @@ std::ostream& operator<<(std::ostream& s, const cpp_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::cpp_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"split_project\": " << v.split_project() << ", "
-      << "\"project_directory\": " << "\"" << v.project_directory().generic_string() << "\"" << ", "
-      << "\"source_directory\": " << "\"" << v.source_directory().generic_string() << "\"" << ", "
-      << "\"include_directory\": " << "\"" << v.include_directory().generic_string() << "\"" << ", "
+      << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
+      << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "
       << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\"" << ", "
       << "\"enable_facet_folders\": " << v.enable_facet_folders() << ", "
-      << "\"enable_unique_file_names\": " << v.enable_unique_file_names()
+      << "\"enable_unique_file_names\": " << v.enable_unique_file_names() << ", "
+      << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
+      << "\"source_directory_path\": " << "\"" << v.source_directory_path().generic_string() << "\"" << ", "
+      << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\""
       << " }";
     return(s);
 }

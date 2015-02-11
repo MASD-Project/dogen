@@ -115,12 +115,12 @@ std::unordered_map<
     >
 file_properties_factory::make(const settings::selector& s,
     const provider_selector_interface& ps, const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Building all file names.";
+    BOOST_LOG_SEV(lg, debug) << "Building all file properties.";
 
     const auto r(file_properties_for_objects(s, ps, m.objects()));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished building file names.";
-    BOOST_LOG_SEV(lg, debug) << "File names: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished building file properties.";
+    BOOST_LOG_SEV(lg, debug) << "File properties: " << r;
     return r;
 }
 

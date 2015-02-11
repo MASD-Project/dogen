@@ -36,6 +36,8 @@
 #include "dogen/cpp/hash/formattables/file_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/includes_hash.hpp"
+#include "dogen/cpp/hash/formattables/inclusion_delimiter_types_hash.hpp"
+#include "dogen/cpp/hash/formattables/inclusion_hash.hpp"
 #include "dogen/cpp/hash/formattables/inheritance_hash.hpp"
 #include "dogen/cpp/hash/formattables/namespace_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/nested_type_info_hash.hpp"

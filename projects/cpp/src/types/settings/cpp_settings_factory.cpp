@@ -36,6 +36,11 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
     cpp_settings r;
     r.enabled(get_boolean_content(*fd::enabled().default_value()));
     r.split_project(get_boolean_content(*fd::split_project().default_value()));
+    r.include_directory_name(
+        get_text_content(*fd::include_directory_name().default_value()));
+    r.source_directory_name(
+        get_text_content(*fd::source_directory_name().default_value()));
+    r.split_project(get_boolean_content(*fd::split_project().default_value()));
     r.header_file_extension(
         get_text_content(*fd::header_file_extension().default_value()));
     r.implementation_file_extension(
@@ -58,6 +63,14 @@ populate(const dynamic::object& o, cpp_settings& s) const {
     if (has_field(o, fd::split_project()))
         s.enabled(get_boolean_content(o, fd::split_project()));
 
+    if (has_field(o, fd::source_directory_name()))
+        s.source_directory_name(
+            get_text_content(o, fd::source_directory_name()));
+
+    if (has_field(o, fd::include_directory_name()))
+        s.include_directory_name(
+            get_text_content(o, fd::include_directory_name()));
+
     if (has_field(o, fd::header_file_extension()))
         s.header_file_extension(
             get_text_content(o, fd::header_file_extension()));
@@ -77,9 +90,9 @@ populate(const dynamic::object& o, cpp_settings& s) const {
 
 void cpp_settings_factory::
 populate(const config::cpp_options& co, cpp_settings& s) const {
-    s.project_directory(co.project_directory_path());
-    s.source_directory(co.source_directory_path());
-    s.include_directory(co.include_directory_path());
+    s.project_directory_path(co.project_directory_path());
+    s.source_directory_path(co.source_directory_path());
+    s.include_directory_path(co.include_directory_path());
 }
 
 cpp_settings cpp_settings_factory::

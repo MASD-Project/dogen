@@ -81,14 +81,13 @@ const std::string unsupported_object_type("Object type is not supported: ");
 const std::string concept_not_found("Concept not found in concept container: ");
 const std::string parent_class_info_not_found(
     "Type has a parent but no parent class info found: ");
-
 const std::string too_many_parents(
     "Type has more than one parent but multiple inheritance not supported: ");
-
 const std::string type_has_no_file_properties(
     "Could not find file properties for type: ");
-const std::string type_has_no_includes(
-    "Could not find includes for type: ");
+const std::string type_has_no_inclusion_dependencies(
+    "Could not find inclusion dependencies for type: ");
+const std::string type_has_no_inclusion("Could not find inclusion for type: ");
 
 const std::string no_visitees("Visitor is not visiting any types: ");
 
@@ -177,16 +176,20 @@ namespace cpp {
 namespace formattables {
 
 transformer::transformer(
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string,
-                                          formattables::includes>
-                       > includes_by_qname_by_formatter_name,
-        std::unordered_map<sml::qname,
-                           std::unordered_map<std::string,
-                                              formattables::file_properties>
-                           > file_properties_by_qname_by_formatter_name,
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string,
+                           std::list<formattables::inclusion>
+                           >
+        >& inclusion_dependencies_by_qname_by_formatter_name,
+        const std::unordered_map<
+            sml::qname,
+            std::unordered_map<std::string,
+                               formattables::file_properties>
+            >& file_properties_by_qname_by_formatter_name,
     const sml::model& m) :
-    includes_by_qname_by_formatter_name_(includes_by_qname_by_formatter_name),
+    inclusion_dependencies_by_qname_by_formatter_name_(
+        inclusion_dependencies_by_qname_by_formatter_name),
     file_properties_by_qname_by_formatter_name_(
         file_properties_by_qname_by_formatter_name),
     model_(m) { }
@@ -226,23 +229,31 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     if (i == file_properties_by_qname_by_formatter_name_.end()) {
         BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << e.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_properties + f.identity()));
+        // type_has_no_file_properties + e.identity()));
     } else {
         for (const auto pair : i->second) {
-            e.include_path_by_formatter_name().insert(
-                std::make_pair(pair.first, pair.second.include_path()));
+            const auto optional(pair.second.inclusion());
+            if (!optional) {
+                BOOST_LOG_SEV(lg, error) << type_has_no_inclusion
+                                         << e.identity();
+                BOOST_THROW_EXCEPTION(transformation_error(
+                        type_has_no_inclusion + e.identity()));
+            }
+            e.inclusion_by_formatter_name().insert(
+                std::make_pair(pair.first, *optional));
         }
     }
 
     // FIXME: for now we are only supporting objects, so we need this
     // hack. logging is causing an expected slow down.
-    const auto j(includes_by_qname_by_formatter_name_.find(qn));
-    if (j == includes_by_qname_by_formatter_name_.end()) {
-        BOOST_LOG_SEV(lg, error) << type_has_no_includes << e.identity();
+    const auto j(inclusion_dependencies_by_qname_by_formatter_name_.find(qn));
+    if (j == inclusion_dependencies_by_qname_by_formatter_name_.end()) {
+        BOOST_LOG_SEV(lg, error) << type_has_no_inclusion_dependencies
+                                 << e.identity();
         // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_includes + e.identity()));
+        // inclusion_dependencies + e.identity()));
     } else
-        e.includes_by_formatter_name(j->second);
+        e.inclusion_dependencies_by_formatter_name(j->second);
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,

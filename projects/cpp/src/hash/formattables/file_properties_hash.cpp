@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/formattables/file_properties_hash.hpp"
+#include "dogen/cpp/hash/formattables/inclusion_hash.hpp"
 
 namespace {
 
@@ -35,6 +36,16 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_cpp_formattables_inclusion(const boost::optional<dogen::cpp::formattables::inclusion>& v){
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -45,7 +56,7 @@ std::size_t file_properties_hasher::hash(const file_properties&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_boost_filesystem_path(v.include_path()));
+    combine(seed, hash_boost_optional_dogen_cpp_formattables_inclusion(v.inclusion()));
 
     return seed;
 }

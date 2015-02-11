@@ -33,57 +33,67 @@ cpp_settings::cpp_settings()
 cpp_settings::cpp_settings(cpp_settings&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       split_project_(std::move(rhs.split_project_)),
-      project_directory_(std::move(rhs.project_directory_)),
-      source_directory_(std::move(rhs.source_directory_)),
-      include_directory_(std::move(rhs.include_directory_)),
+      source_directory_name_(std::move(rhs.source_directory_name_)),
+      include_directory_name_(std::move(rhs.include_directory_name_)),
       header_file_extension_(std::move(rhs.header_file_extension_)),
       implementation_file_extension_(std::move(rhs.implementation_file_extension_)),
       enable_facet_folders_(std::move(rhs.enable_facet_folders_)),
-      enable_unique_file_names_(std::move(rhs.enable_unique_file_names_)) { }
+      enable_unique_file_names_(std::move(rhs.enable_unique_file_names_)),
+      project_directory_path_(std::move(rhs.project_directory_path_)),
+      source_directory_path_(std::move(rhs.source_directory_path_)),
+      include_directory_path_(std::move(rhs.include_directory_path_)) { }
 
 cpp_settings::cpp_settings(
     const bool enabled,
     const bool split_project,
-    const boost::filesystem::path& project_directory,
-    const boost::filesystem::path& source_directory,
-    const boost::filesystem::path& include_directory,
+    const std::string& source_directory_name,
+    const std::string& include_directory_name,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
     const bool enable_facet_folders,
-    const bool enable_unique_file_names)
+    const bool enable_unique_file_names,
+    const boost::filesystem::path& project_directory_path,
+    const boost::filesystem::path& source_directory_path,
+    const boost::filesystem::path& include_directory_path)
     : enabled_(enabled),
       split_project_(split_project),
-      project_directory_(project_directory),
-      source_directory_(source_directory),
-      include_directory_(include_directory),
+      source_directory_name_(source_directory_name),
+      include_directory_name_(include_directory_name),
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
       enable_facet_folders_(enable_facet_folders),
-      enable_unique_file_names_(enable_unique_file_names) { }
+      enable_unique_file_names_(enable_unique_file_names),
+      project_directory_path_(project_directory_path),
+      source_directory_path_(source_directory_path),
+      include_directory_path_(include_directory_path) { }
 
 void cpp_settings::swap(cpp_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(split_project_, other.split_project_);
-    swap(project_directory_, other.project_directory_);
-    swap(source_directory_, other.source_directory_);
-    swap(include_directory_, other.include_directory_);
+    swap(source_directory_name_, other.source_directory_name_);
+    swap(include_directory_name_, other.include_directory_name_);
     swap(header_file_extension_, other.header_file_extension_);
     swap(implementation_file_extension_, other.implementation_file_extension_);
     swap(enable_facet_folders_, other.enable_facet_folders_);
     swap(enable_unique_file_names_, other.enable_unique_file_names_);
+    swap(project_directory_path_, other.project_directory_path_);
+    swap(source_directory_path_, other.source_directory_path_);
+    swap(include_directory_path_, other.include_directory_path_);
 }
 
 bool cpp_settings::operator==(const cpp_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
         split_project_ == rhs.split_project_ &&
-        project_directory_ == rhs.project_directory_ &&
-        source_directory_ == rhs.source_directory_ &&
-        include_directory_ == rhs.include_directory_ &&
+        source_directory_name_ == rhs.source_directory_name_ &&
+        include_directory_name_ == rhs.include_directory_name_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
         enable_facet_folders_ == rhs.enable_facet_folders_ &&
-        enable_unique_file_names_ == rhs.enable_unique_file_names_;
+        enable_unique_file_names_ == rhs.enable_unique_file_names_ &&
+        project_directory_path_ == rhs.project_directory_path_ &&
+        source_directory_path_ == rhs.source_directory_path_ &&
+        include_directory_path_ == rhs.include_directory_path_;
 }
 
 cpp_settings& cpp_settings::operator=(cpp_settings other) {
@@ -108,52 +118,36 @@ void cpp_settings::split_project(const bool v) {
     split_project_ = v;
 }
 
-const boost::filesystem::path& cpp_settings::project_directory() const {
-    return project_directory_;
+const std::string& cpp_settings::source_directory_name() const {
+    return source_directory_name_;
 }
 
-boost::filesystem::path& cpp_settings::project_directory() {
-    return project_directory_;
+std::string& cpp_settings::source_directory_name() {
+    return source_directory_name_;
 }
 
-void cpp_settings::project_directory(const boost::filesystem::path& v) {
-    project_directory_ = v;
+void cpp_settings::source_directory_name(const std::string& v) {
+    source_directory_name_ = v;
 }
 
-void cpp_settings::project_directory(const boost::filesystem::path&& v) {
-    project_directory_ = std::move(v);
+void cpp_settings::source_directory_name(const std::string&& v) {
+    source_directory_name_ = std::move(v);
 }
 
-const boost::filesystem::path& cpp_settings::source_directory() const {
-    return source_directory_;
+const std::string& cpp_settings::include_directory_name() const {
+    return include_directory_name_;
 }
 
-boost::filesystem::path& cpp_settings::source_directory() {
-    return source_directory_;
+std::string& cpp_settings::include_directory_name() {
+    return include_directory_name_;
 }
 
-void cpp_settings::source_directory(const boost::filesystem::path& v) {
-    source_directory_ = v;
+void cpp_settings::include_directory_name(const std::string& v) {
+    include_directory_name_ = v;
 }
 
-void cpp_settings::source_directory(const boost::filesystem::path&& v) {
-    source_directory_ = std::move(v);
-}
-
-const boost::filesystem::path& cpp_settings::include_directory() const {
-    return include_directory_;
-}
-
-boost::filesystem::path& cpp_settings::include_directory() {
-    return include_directory_;
-}
-
-void cpp_settings::include_directory(const boost::filesystem::path& v) {
-    include_directory_ = v;
-}
-
-void cpp_settings::include_directory(const boost::filesystem::path&& v) {
-    include_directory_ = std::move(v);
+void cpp_settings::include_directory_name(const std::string&& v) {
+    include_directory_name_ = std::move(v);
 }
 
 const std::string& cpp_settings::header_file_extension() const {
@@ -202,6 +196,54 @@ bool cpp_settings::enable_unique_file_names() const {
 
 void cpp_settings::enable_unique_file_names(const bool v) {
     enable_unique_file_names_ = v;
+}
+
+const boost::filesystem::path& cpp_settings::project_directory_path() const {
+    return project_directory_path_;
+}
+
+boost::filesystem::path& cpp_settings::project_directory_path() {
+    return project_directory_path_;
+}
+
+void cpp_settings::project_directory_path(const boost::filesystem::path& v) {
+    project_directory_path_ = v;
+}
+
+void cpp_settings::project_directory_path(const boost::filesystem::path&& v) {
+    project_directory_path_ = std::move(v);
+}
+
+const boost::filesystem::path& cpp_settings::source_directory_path() const {
+    return source_directory_path_;
+}
+
+boost::filesystem::path& cpp_settings::source_directory_path() {
+    return source_directory_path_;
+}
+
+void cpp_settings::source_directory_path(const boost::filesystem::path& v) {
+    source_directory_path_ = v;
+}
+
+void cpp_settings::source_directory_path(const boost::filesystem::path&& v) {
+    source_directory_path_ = std::move(v);
+}
+
+const boost::filesystem::path& cpp_settings::include_directory_path() const {
+    return include_directory_path_;
+}
+
+boost::filesystem::path& cpp_settings::include_directory_path() {
+    return include_directory_path_;
+}
+
+void cpp_settings::include_directory_path(const boost::filesystem::path& v) {
+    include_directory_path_ = v;
+}
+
+void cpp_settings::include_directory_path(const boost::filesystem::path&& v) {
+    include_directory_path_ = std::move(v);
 }
 
 } } }

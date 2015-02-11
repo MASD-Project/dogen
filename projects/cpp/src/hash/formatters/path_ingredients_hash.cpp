@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/formattables/inclusion_delimiter_types_hash.hpp"
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
 #include "dogen/cpp/hash/formatters/path_ingredients_hash.hpp"
 
@@ -51,9 +52,13 @@ std::size_t path_ingredients_hasher::hash(const path_ingredients&v) {
     combine(seed, v.extension());
     combine(seed, v.facet_postfix());
     combine(seed, v.formatter_postfix());
-    combine(seed, hash_boost_filesystem_path(v.project_directory()));
-    combine(seed, hash_boost_filesystem_path(v.source_directory()));
-    combine(seed, hash_boost_filesystem_path(v.include_directory()));
+    combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
+    combine(seed, v.source_directory_name());
+    combine(seed, v.include_directory_name());
+    combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
+    combine(seed, v.inclusion_delimiter_type());
 
     return seed;
 }

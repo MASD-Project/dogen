@@ -26,23 +26,23 @@ namespace formattables {
 
 file_properties::file_properties(file_properties&& rhs)
     : file_path_(std::move(rhs.file_path_)),
-      include_path_(std::move(rhs.include_path_)) { }
+      inclusion_(std::move(rhs.inclusion_)) { }
 
 file_properties::file_properties(
     const boost::filesystem::path& file_path,
-    const boost::filesystem::path& include_path)
+    const boost::optional<dogen::cpp::formattables::inclusion>& inclusion)
     : file_path_(file_path),
-      include_path_(include_path) { }
+      inclusion_(inclusion) { }
 
 void file_properties::swap(file_properties& other) noexcept {
     using std::swap;
     swap(file_path_, other.file_path_);
-    swap(include_path_, other.include_path_);
+    swap(inclusion_, other.inclusion_);
 }
 
 bool file_properties::operator==(const file_properties& rhs) const {
     return file_path_ == rhs.file_path_ &&
-        include_path_ == rhs.include_path_;
+        inclusion_ == rhs.inclusion_;
 }
 
 file_properties& file_properties::operator=(file_properties other) {
@@ -67,20 +67,20 @@ void file_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::filesystem::path& file_properties::include_path() const {
-    return include_path_;
+const boost::optional<dogen::cpp::formattables::inclusion>& file_properties::inclusion() const {
+    return inclusion_;
 }
 
-boost::filesystem::path& file_properties::include_path() {
-    return include_path_;
+boost::optional<dogen::cpp::formattables::inclusion>& file_properties::inclusion() {
+    return inclusion_;
 }
 
-void file_properties::include_path(const boost::filesystem::path& v) {
-    include_path_ = v;
+void file_properties::inclusion(const boost::optional<dogen::cpp::formattables::inclusion>& v) {
+    inclusion_ = v;
 }
 
-void file_properties::include_path(const boost::filesystem::path&& v) {
-    include_path_ = std::move(v);
+void file_properties::inclusion(const boost::optional<dogen::cpp::formattables::inclusion>&& v) {
+    inclusion_ = std::move(v);
 }
 
 } } }

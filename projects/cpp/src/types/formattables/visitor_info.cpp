@@ -55,16 +55,16 @@ visitor_info::visitor_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name,
-    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
+    const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
+    const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name,
     const std::list<std::string>& types)
     : dogen::cpp::formattables::entity(identity,
       file_path_by_formatter_name,
       name,
       documentation,
       namespaces,
-      include_path_by_formatter_name,
-      includes_by_formatter_name),
+      inclusion_by_formatter_name,
+      inclusion_dependencies_by_formatter_name),
       types_(types) { }
 
 void visitor_info::to_stream(std::ostream& s) const {

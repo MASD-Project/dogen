@@ -26,14 +26,13 @@
 #endif
 
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <list>
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/formattables/entity_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/inclusion.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,8 +56,8 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name,
-        const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name);
+        const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
+        const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name);
 
 private:
     template<typename Archive>
@@ -107,15 +106,25 @@ public:
     void namespaces(const std::list<std::string>&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name() const;
-    std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name();
-    void include_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>& v);
-    void include_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>&& v);
+    /**
+     * @brief Inclusion settings for the current entity.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name() const;
+    std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name();
+    void inclusion_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& v);
+    void inclusion_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>&& v);
+    /**@}*/
 
-    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name() const;
-    std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name();
-    void includes_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::includes>& v);
-    void includes_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::includes>&& v);
+    /**
+     * @brief All inclusions for entities that this entity depends on.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name() const;
+    std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name();
+    void inclusion_dependencies_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& v);
+    void inclusion_dependencies_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >&& v);
+    /**@}*/
 
 protected:
     bool compare(const entity& rhs) const;
@@ -129,8 +138,8 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
-    std::unordered_map<std::string, boost::filesystem::path> include_path_by_formatter_name_;
-    std::unordered_map<std::string, dogen::cpp::formattables::includes> includes_by_formatter_name_;
+    std::unordered_map<std::string, dogen::cpp::formattables::inclusion> inclusion_by_formatter_name_;
+    std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> > inclusion_dependencies_by_formatter_name_;
 };
 
 inline entity::~entity() noexcept { }

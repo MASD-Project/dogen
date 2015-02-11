@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/formattables/includes_factory.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/formattables/file_properties_factory.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
@@ -48,14 +48,15 @@ workflow::create_file_properties_activity(const settings::selector& s,
 
 std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, formattables::includes> >
-workflow::create_includes_activity(const settings::selector& s,
+    std::unordered_map<std::string, std::list<formattables::inclusion> >
+    >
+workflow::create_inclusion_dependencies_activity(const settings::selector& s,
     const provider_selector_interface& ps, const sml::model& m,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties> >&
     file_properties_by_formatter_name) const {
-    formattables::includes_factory f;
+    formattables::inclusion_dependencies_factory f;
     return f.make(s, ps, file_properties_by_formatter_name, m);
 }
 
@@ -64,7 +65,7 @@ workflow::execute(const settings::selector& s,
     const provider_selector_interface& ps, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
     const auto fp(create_file_properties_activity(s, ps, m));
-    const auto inc(create_includes_activity(s, ps, m, fp));
+    const auto inc(create_inclusion_dependencies_activity(s, ps, m, fp));
 
     std::forward_list<std::shared_ptr<formattables::formattable>> r;
     r.splice_after(r.before_begin(),

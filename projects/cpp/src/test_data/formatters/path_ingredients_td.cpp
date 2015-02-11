@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/formattables/inclusion_delimiter_types_td.hpp"
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
 #include "dogen/cpp/test_data/formatters/path_ingredients_td.hpp"
 
@@ -46,6 +47,11 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
+dogen::cpp::formattables::inclusion_delimiter_types
+create_dogen_cpp_formattables_inclusion_delimiter_types(const unsigned int position) {
+    return dogen::cpp::formattables::inclusion_delimiter_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -62,9 +68,13 @@ populate(const unsigned int position, result_type& v) {
     v.extension(create_std_string(position + 3));
     v.facet_postfix(create_std_string(position + 4));
     v.formatter_postfix(create_std_string(position + 5));
-    v.project_directory(create_boost_filesystem_path(position + 6));
-    v.source_directory(create_boost_filesystem_path(position + 7));
-    v.include_directory(create_boost_filesystem_path(position + 8));
+    v.project_directory_path(create_boost_filesystem_path(position + 6));
+    v.source_directory_path(create_boost_filesystem_path(position + 7));
+    v.include_directory_path(create_boost_filesystem_path(position + 8));
+    v.source_directory_name(create_std_string(position + 9));
+    v.include_directory_name(create_std_string(position + 10));
+    v.inclusion_path(create_boost_filesystem_path(position + 11));
+    v.inclusion_delimiter_type(create_dogen_cpp_formattables_inclusion_delimiter_types(position + 12));
 }
 
 path_ingredients_generator::result_type

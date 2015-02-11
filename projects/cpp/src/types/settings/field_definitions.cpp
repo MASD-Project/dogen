@@ -32,7 +32,7 @@ using namespace dogen::cpp::formatters;
 field_definition create_enabled() {
     field_definition r;
     r.name().simple("enabled");
-    r.name().qualified(traits::model_name() + ".enabled");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
@@ -43,7 +43,7 @@ field_definition create_enabled() {
 field_definition create_split_project() {
     field_definition r;
     r.name().simple("split_project");
-    r.name().qualified(traits::model_name() + ".split_project");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
@@ -51,10 +51,32 @@ field_definition create_split_project() {
     return r;
 }
 
+field_definition create_source_directory_name() {
+    field_definition r;
+    r.name().simple("source_directory_name");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(traits::model_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("src"));
+    return r;
+}
+
+field_definition create_include_directory_name() {
+    field_definition r;
+    r.name().simple("include_directory_name");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(traits::model_name());
+    r.type(value_types::text);
+    r.scope(scope_types::root_module);
+    r.default_value(boost::make_shared<text>("include"));
+    return r;
+}
+
 field_definition create_header_file_extension() {
     field_definition r;
     r.name().simple("header_file_extension");
-    r.name().qualified(traits::model_name() + ".header_file_extension");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
@@ -65,7 +87,7 @@ field_definition create_header_file_extension() {
 field_definition create_implementation_file_extension() {
     field_definition r;
     r.name().simple("implementation_file_extension");
-    r.name().qualified(traits::model_name() + ".implementation_file_extension");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::root_module);
@@ -76,7 +98,7 @@ field_definition create_implementation_file_extension() {
 field_definition create_enable_facet_folders() {
     field_definition r;
     r.name().simple("enable_facet_folders");
-    r.name().qualified(traits::model_name() + ".enable_facet_folders");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
@@ -87,7 +109,7 @@ field_definition create_enable_facet_folders() {
 field_definition create_enable_unique_file_names() {
     field_definition r;
     r.name().simple("enable_unique_file_names");
-    r.name().qualified(traits::model_name() + ".enable_unique_file_names");
+    r.name().qualified(traits::model_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::root_module);
@@ -98,7 +120,7 @@ field_definition create_enable_unique_file_names() {
 field_definition create_type_family() {
     field_definition r;
     r.name().simple("family");
-    r.name().qualified(traits::model_name() + ".type.family");
+    r.name().qualified(traits::model_name() + ".type." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::entity);
@@ -109,8 +131,7 @@ field_definition
 create_type_requires_manual_default_constructor() {
     field_definition r;
     r.name().simple("requires_manual_default_constructor");
-    r.name().qualified(traits::model_name() +
-        ".type.requires_manual_default_constructor");
+    r.name().qualified(traits::model_name() + ".type." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::entity);
@@ -122,8 +143,7 @@ field_definition
 create_type_requires_manual_move_constructor() {
     field_definition r;
     r.name().simple("requires_manual_move_constructor");
-    r.name().qualified(traits::model_name() +
-        ".type.requires_manual_move_constructor");
+    r.name().qualified(traits::model_name() + ".type." + r.name().simple());
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::boolean);
     r.scope(scope_types::entity);
@@ -138,6 +158,8 @@ create_all_field_definitions() {
     using fd = dogen::cpp::settings::field_definitions;
     r.push_front(fd::enabled());
     r.push_front(fd::split_project());
+    r.push_front(fd::include_directory_name());
+    r.push_front(fd::source_directory_name());
     r.push_front(fd::header_file_extension());
     r.push_front(fd::implementation_file_extension());
     r.push_front(fd::enable_facet_folders());
@@ -170,6 +192,16 @@ const dynamic::field_definition& field_definitions::enabled() {
 
 const dynamic::field_definition& field_definitions::split_project() {
     static auto r(create_split_project());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::source_directory_name() {
+    static auto r(create_source_directory_name());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::include_directory_name() {
+    static auto r(create_include_directory_name());
     return r;
 }
 

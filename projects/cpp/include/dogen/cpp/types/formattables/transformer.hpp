@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <tuple>
 #include <memory>
 #include <unordered_map>
@@ -59,14 +60,18 @@ namespace formattables {
 class transformer {
 public:
     transformer(
-        std::unordered_map<sml::qname,
-                           std::unordered_map<std::string,
-                                              formattables::includes>
-                           > includes_by_qname_by_formatter_name,
-        std::unordered_map<sml::qname,
-                           std::unordered_map<std::string,
-                                              formattables::file_properties>
-                           > file_properties_by_qname_by_formatter_name,
+        const std::unordered_map<
+            sml::qname,
+            std::unordered_map<
+                std::string,
+                std::list<formattables::inclusion>
+                >
+            >& inclusion_dependencies_by_qname_by_formatter_name,
+            const std::unordered_map<
+                sml::qname,
+                std::unordered_map<std::string,
+                                   formattables::file_properties>
+                >& file_properties_by_qname_by_formatter_name,
             const sml::model& m);
 
 private:
@@ -178,10 +183,13 @@ public:
     std::shared_ptr<formattable> transform(const sml::object& o) const;
 
 private:
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, formattables::includes>
-                       > includes_by_qname_by_formatter_name_;
-    std::unordered_map<sml::qname,
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string,
+                           std::list<formattables::inclusion>
+                           >
+        > inclusion_dependencies_by_qname_by_formatter_name_;
+    const std::unordered_map<sml::qname,
                        std::unordered_map<std::string,
                                           formattables::file_properties>
                        > file_properties_by_qname_by_formatter_name_;

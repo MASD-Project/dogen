@@ -53,19 +53,19 @@ make_file_path(const path_ingredients& d, const sml::qname& qn) const {
     switch (ft) {
     case file_types::cpp_header:
         if (d.split_project())
-            r = d.include_directory();
+            r = d.include_directory_path();
         else {
-            r = d.project_directory() / qn.model_name();
-            r /= d.include_directory();
+            r = d.project_directory_path() / qn.model_name();
+            r /= d.include_directory_name();
         }
         break;
 
     case file_types::cpp_implementation:
         if (d.split_project())
-            r = d.source_directory();
+            r = d.source_directory_path();
         else {
-            r = d.project_directory() / qn.model_name();
-            r /= d.source_directory();
+            r = d.project_directory_path() / qn.model_name();
+            r /= d.source_directory_name();
         }
         break;
     default:

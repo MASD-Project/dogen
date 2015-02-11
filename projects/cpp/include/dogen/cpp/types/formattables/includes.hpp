@@ -36,16 +36,6 @@ namespace formattables {
 
 /**
  * @brief Captures include dependencies.
- *
- * The include dependencies we concern ourselves with are all files
- * required in order to successfully compile the current file. We make
- * the traditional distinction with regards to type of inclusion:
- *
- * @li @e System includes are those which are in the system include path and
- * are expected to be included using angle brackets;
- *
- *  @li @e User includes are those which are in the user include path
- *  and are expected to be included using double-quotes.
  */
 class includes final {
 public:
@@ -69,8 +59,6 @@ private:
 public:
     /**
      * @brief System includes.
-     *
-     * These are expected to use angle brackets and be on the system path.
      */
     /**@{*/
     const std::list<boost::filesystem::path>& system() const;
@@ -81,8 +69,6 @@ public:
 
     /**
      * @brief User includes.
-     *
-     * These are expected to use quotes and be on the user path.
      */
     /**@{*/
     const std::list<boost::filesystem::path>& user() const;

@@ -36,6 +36,8 @@
 #include "dogen/cpp/io/formattables/file_types_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/includes_io.hpp"
+#include "dogen/cpp/io/formattables/inclusion_delimiter_types_io.hpp"
+#include "dogen/cpp/io/formattables/inclusion_io.hpp"
 #include "dogen/cpp/io/formattables/inheritance_io.hpp"
 #include "dogen/cpp/io/formattables/namespace_info_io.hpp"
 #include "dogen/cpp/io/formattables/nested_type_info_io.hpp"

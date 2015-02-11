@@ -27,17 +27,17 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
 boost::filesystem::path
 create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
     s << "/a/path/number_" << position;
     return boost::filesystem::path(s.str());
-}
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
 }
 
 }
@@ -52,13 +52,15 @@ void cpp_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.split_project(create_bool(position + 1));
-    v.project_directory(create_boost_filesystem_path(position + 2));
-    v.source_directory(create_boost_filesystem_path(position + 3));
-    v.include_directory(create_boost_filesystem_path(position + 4));
-    v.header_file_extension(create_std_string(position + 5));
-    v.implementation_file_extension(create_std_string(position + 6));
-    v.enable_facet_folders(create_bool(position + 7));
-    v.enable_unique_file_names(create_bool(position + 8));
+    v.source_directory_name(create_std_string(position + 2));
+    v.include_directory_name(create_std_string(position + 3));
+    v.header_file_extension(create_std_string(position + 4));
+    v.implementation_file_extension(create_std_string(position + 5));
+    v.enable_facet_folders(create_bool(position + 6));
+    v.enable_unique_file_names(create_bool(position + 7));
+    v.project_directory_path(create_boost_filesystem_path(position + 8));
+    v.source_directory_path(create_boost_filesystem_path(position + 9));
+    v.include_directory_path(create_boost_filesystem_path(position + 10));
 }
 
 cpp_settings_generator::result_type

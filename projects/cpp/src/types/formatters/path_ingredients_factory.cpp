@@ -51,9 +51,11 @@ path_ingredients path_ingredients_factory::make(const settings::selector& s,
 
     const auto& cs(s.select_cpp_settings());
     r.split_project(cs.split_project());
-    r.project_directory(cs.project_directory());
-    r.source_directory(cs.source_directory());
-    r.include_directory(cs.include_directory());
+    r.source_directory_name(cs.source_directory_name());
+    r.include_directory_name(cs.include_directory_name());
+    r.project_directory_path(cs.project_directory_path());
+    r.source_directory_path(cs.source_directory_path());
+    r.include_directory_path(cs.include_directory_path());
 
     const auto& fcts(s.select_facet_settings(f.facet_name()));
     if (cs.enable_facet_folders())

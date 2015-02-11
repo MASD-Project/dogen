@@ -27,7 +27,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include "dogen/cpp/serialization/formattables/file_properties_ser.hpp"
+#include "dogen/cpp/serialization/formattables/inclusion_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -39,7 +41,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::file_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("file_path", v.file_path_.generic_string());
-    ar << make_nvp("include_path", v.include_path_.generic_string());
+    ar << make_nvp("inclusion", v.inclusion_);
 }
 
 template<typename Archive>
@@ -49,9 +51,7 @@ void load(Archive& ar,
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
-    std::string include_path_tmp;
-    ar >> make_nvp("include_path", include_path_tmp);
-    v.include_path_ = include_path_tmp;
+    ar >> make_nvp("inclusion", v.inclusion_);
 }
 
 } }

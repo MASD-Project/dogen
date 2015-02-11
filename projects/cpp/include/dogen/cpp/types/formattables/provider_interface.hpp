@@ -26,13 +26,14 @@
 #endif
 
 #include <string>
+#include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/inclusion.hpp"
 #include "dogen/cpp/types/formattables/file_properties.hpp"
 
 namespace dogen {
@@ -70,7 +71,8 @@ public:
     /**
      * @brief Provides the includes for the supplied qualified name.
      */
-    virtual includes provide_includes(const settings::selector& s,
+    virtual std::list<formattables::inclusion>
+    provide_inclusion_dependencies(const settings::selector& s,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, file_properties>

@@ -27,7 +27,9 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include <boost/optional.hpp>
 #include "dogen/cpp/serialization/formattables/file_properties_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/inclusion.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -45,7 +47,7 @@ public:
 public:
     file_properties(
         const boost::filesystem::path& file_path,
-        const boost::filesystem::path& include_path);
+        const boost::optional<dogen::cpp::formattables::inclusion>& inclusion);
 
 private:
     template<typename Archive>
@@ -66,13 +68,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Path to the file to be used for inclusion.
+     * @brief Inclusion details for this file, if applicable.
      */
     /**@{*/
-    const boost::filesystem::path& include_path() const;
-    boost::filesystem::path& include_path();
-    void include_path(const boost::filesystem::path& v);
-    void include_path(const boost::filesystem::path&& v);
+    const boost::optional<dogen::cpp::formattables::inclusion>& inclusion() const;
+    boost::optional<dogen::cpp::formattables::inclusion>& inclusion();
+    void inclusion(const boost::optional<dogen::cpp::formattables::inclusion>& v);
+    void inclusion(const boost::optional<dogen::cpp::formattables::inclusion>&& v);
     /**@}*/
 
 public:
@@ -87,7 +89,7 @@ public:
 
 private:
     boost::filesystem::path file_path_;
-    boost::filesystem::path include_path_;
+    boost::optional<dogen::cpp::formattables::inclusion> inclusion_;
 };
 
 } } }

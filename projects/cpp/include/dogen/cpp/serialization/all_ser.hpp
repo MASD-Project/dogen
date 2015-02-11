@@ -36,6 +36,8 @@
 #include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includes_ser.hpp"
+#include "dogen/cpp/serialization/formattables/inclusion_delimiter_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/inclusion_ser.hpp"
 #include "dogen/cpp/serialization/formattables/inheritance_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"

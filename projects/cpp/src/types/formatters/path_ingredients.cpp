@@ -26,7 +26,8 @@ namespace formatters {
 
 path_ingredients::path_ingredients()
     : split_project_(static_cast<bool>(0)),
-      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)) { }
+      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)),
+      inclusion_delimiter_type_(static_cast<dogen::cpp::formattables::inclusion_delimiter_types>(0)) { }
 
 path_ingredients::path_ingredients(path_ingredients&& rhs)
     : split_project_(std::move(rhs.split_project_)),
@@ -35,9 +36,13 @@ path_ingredients::path_ingredients(path_ingredients&& rhs)
       extension_(std::move(rhs.extension_)),
       facet_postfix_(std::move(rhs.facet_postfix_)),
       formatter_postfix_(std::move(rhs.formatter_postfix_)),
-      project_directory_(std::move(rhs.project_directory_)),
-      source_directory_(std::move(rhs.source_directory_)),
-      include_directory_(std::move(rhs.include_directory_)) { }
+      project_directory_path_(std::move(rhs.project_directory_path_)),
+      source_directory_path_(std::move(rhs.source_directory_path_)),
+      include_directory_path_(std::move(rhs.include_directory_path_)),
+      source_directory_name_(std::move(rhs.source_directory_name_)),
+      include_directory_name_(std::move(rhs.include_directory_name_)),
+      inclusion_path_(std::move(rhs.inclusion_path_)),
+      inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)) { }
 
 path_ingredients::path_ingredients(
     const bool split_project,
@@ -46,18 +51,26 @@ path_ingredients::path_ingredients(
     const std::string& extension,
     const std::string& facet_postfix,
     const std::string& formatter_postfix,
-    const boost::filesystem::path& project_directory,
-    const boost::filesystem::path& source_directory,
-    const boost::filesystem::path& include_directory)
+    const boost::filesystem::path& project_directory_path,
+    const boost::filesystem::path& source_directory_path,
+    const boost::filesystem::path& include_directory_path,
+    const std::string& source_directory_name,
+    const std::string& include_directory_name,
+    const boost::filesystem::path& inclusion_path,
+    const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type)
     : split_project_(split_project),
       file_type_(file_type),
       facet_directory_(facet_directory),
       extension_(extension),
       facet_postfix_(facet_postfix),
       formatter_postfix_(formatter_postfix),
-      project_directory_(project_directory),
-      source_directory_(source_directory),
-      include_directory_(include_directory) { }
+      project_directory_path_(project_directory_path),
+      source_directory_path_(source_directory_path),
+      include_directory_path_(include_directory_path),
+      source_directory_name_(source_directory_name),
+      include_directory_name_(include_directory_name),
+      inclusion_path_(inclusion_path),
+      inclusion_delimiter_type_(inclusion_delimiter_type) { }
 
 void path_ingredients::swap(path_ingredients& other) noexcept {
     using std::swap;
@@ -67,9 +80,13 @@ void path_ingredients::swap(path_ingredients& other) noexcept {
     swap(extension_, other.extension_);
     swap(facet_postfix_, other.facet_postfix_);
     swap(formatter_postfix_, other.formatter_postfix_);
-    swap(project_directory_, other.project_directory_);
-    swap(source_directory_, other.source_directory_);
-    swap(include_directory_, other.include_directory_);
+    swap(project_directory_path_, other.project_directory_path_);
+    swap(source_directory_path_, other.source_directory_path_);
+    swap(include_directory_path_, other.include_directory_path_);
+    swap(source_directory_name_, other.source_directory_name_);
+    swap(include_directory_name_, other.include_directory_name_);
+    swap(inclusion_path_, other.inclusion_path_);
+    swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
 }
 
 bool path_ingredients::operator==(const path_ingredients& rhs) const {
@@ -79,9 +96,13 @@ bool path_ingredients::operator==(const path_ingredients& rhs) const {
         extension_ == rhs.extension_ &&
         facet_postfix_ == rhs.facet_postfix_ &&
         formatter_postfix_ == rhs.formatter_postfix_ &&
-        project_directory_ == rhs.project_directory_ &&
-        source_directory_ == rhs.source_directory_ &&
-        include_directory_ == rhs.include_directory_;
+        project_directory_path_ == rhs.project_directory_path_ &&
+        source_directory_path_ == rhs.source_directory_path_ &&
+        include_directory_path_ == rhs.include_directory_path_ &&
+        source_directory_name_ == rhs.source_directory_name_ &&
+        include_directory_name_ == rhs.include_directory_name_ &&
+        inclusion_path_ == rhs.inclusion_path_ &&
+        inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_;
 }
 
 path_ingredients& path_ingredients::operator=(path_ingredients other) {
@@ -170,52 +191,108 @@ void path_ingredients::formatter_postfix(const std::string&& v) {
     formatter_postfix_ = std::move(v);
 }
 
-const boost::filesystem::path& path_ingredients::project_directory() const {
-    return project_directory_;
+const boost::filesystem::path& path_ingredients::project_directory_path() const {
+    return project_directory_path_;
 }
 
-boost::filesystem::path& path_ingredients::project_directory() {
-    return project_directory_;
+boost::filesystem::path& path_ingredients::project_directory_path() {
+    return project_directory_path_;
 }
 
-void path_ingredients::project_directory(const boost::filesystem::path& v) {
-    project_directory_ = v;
+void path_ingredients::project_directory_path(const boost::filesystem::path& v) {
+    project_directory_path_ = v;
 }
 
-void path_ingredients::project_directory(const boost::filesystem::path&& v) {
-    project_directory_ = std::move(v);
+void path_ingredients::project_directory_path(const boost::filesystem::path&& v) {
+    project_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& path_ingredients::source_directory() const {
-    return source_directory_;
+const boost::filesystem::path& path_ingredients::source_directory_path() const {
+    return source_directory_path_;
 }
 
-boost::filesystem::path& path_ingredients::source_directory() {
-    return source_directory_;
+boost::filesystem::path& path_ingredients::source_directory_path() {
+    return source_directory_path_;
 }
 
-void path_ingredients::source_directory(const boost::filesystem::path& v) {
-    source_directory_ = v;
+void path_ingredients::source_directory_path(const boost::filesystem::path& v) {
+    source_directory_path_ = v;
 }
 
-void path_ingredients::source_directory(const boost::filesystem::path&& v) {
-    source_directory_ = std::move(v);
+void path_ingredients::source_directory_path(const boost::filesystem::path&& v) {
+    source_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& path_ingredients::include_directory() const {
-    return include_directory_;
+const boost::filesystem::path& path_ingredients::include_directory_path() const {
+    return include_directory_path_;
 }
 
-boost::filesystem::path& path_ingredients::include_directory() {
-    return include_directory_;
+boost::filesystem::path& path_ingredients::include_directory_path() {
+    return include_directory_path_;
 }
 
-void path_ingredients::include_directory(const boost::filesystem::path& v) {
-    include_directory_ = v;
+void path_ingredients::include_directory_path(const boost::filesystem::path& v) {
+    include_directory_path_ = v;
 }
 
-void path_ingredients::include_directory(const boost::filesystem::path&& v) {
-    include_directory_ = std::move(v);
+void path_ingredients::include_directory_path(const boost::filesystem::path&& v) {
+    include_directory_path_ = std::move(v);
+}
+
+const std::string& path_ingredients::source_directory_name() const {
+    return source_directory_name_;
+}
+
+std::string& path_ingredients::source_directory_name() {
+    return source_directory_name_;
+}
+
+void path_ingredients::source_directory_name(const std::string& v) {
+    source_directory_name_ = v;
+}
+
+void path_ingredients::source_directory_name(const std::string&& v) {
+    source_directory_name_ = std::move(v);
+}
+
+const std::string& path_ingredients::include_directory_name() const {
+    return include_directory_name_;
+}
+
+std::string& path_ingredients::include_directory_name() {
+    return include_directory_name_;
+}
+
+void path_ingredients::include_directory_name(const std::string& v) {
+    include_directory_name_ = v;
+}
+
+void path_ingredients::include_directory_name(const std::string&& v) {
+    include_directory_name_ = std::move(v);
+}
+
+const boost::filesystem::path& path_ingredients::inclusion_path() const {
+    return inclusion_path_;
+}
+
+boost::filesystem::path& path_ingredients::inclusion_path() {
+    return inclusion_path_;
+}
+
+void path_ingredients::inclusion_path(const boost::filesystem::path& v) {
+    inclusion_path_ = v;
+}
+
+void path_ingredients::inclusion_path(const boost::filesystem::path&& v) {
+    inclusion_path_ = std::move(v);
+}
+
+dogen::cpp::formattables::inclusion_delimiter_types path_ingredients::inclusion_delimiter_type() const {
+    return inclusion_delimiter_type_;
+}
+
+void path_ingredients::inclusion_delimiter_type(const dogen::cpp::formattables::inclusion_delimiter_types& v) {
+    inclusion_delimiter_type_ = v;
 }
 
 } } }

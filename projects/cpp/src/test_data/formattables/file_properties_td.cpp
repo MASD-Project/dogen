@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
+#include "dogen/cpp/test_data/formattables/inclusion_td.hpp"
 
 namespace {
 
@@ -28,6 +29,18 @@ create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
     s << "/a/path/number_" << position;
     return boost::filesystem::path(s.str());
+}
+
+dogen::cpp::formattables::inclusion
+create_dogen_cpp_formattables_inclusion(const unsigned int position) {
+    return dogen::cpp::formattables::inclusion_generator::create(position);
+}
+
+boost::optional<dogen::cpp::formattables::inclusion>
+create_boost_optional_dogen_cpp_formattables_inclusion(unsigned int position) {
+    boost::optional<dogen::cpp::formattables::inclusion> r(
+        create_dogen_cpp_formattables_inclusion(position));
+    return r;
 }
 
 }
@@ -41,7 +54,7 @@ file_properties_generator::file_properties_generator() : position_(0) { }
 void file_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 0));
-    v.include_path(create_boost_filesystem_path(position + 1));
+    v.inclusion(create_boost_optional_dogen_cpp_formattables_inclusion(position + 1));
 }
 
 file_properties_generator::result_type

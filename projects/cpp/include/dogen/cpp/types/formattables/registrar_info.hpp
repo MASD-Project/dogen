@@ -54,8 +54,8 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name,
-        const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
+        const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
+        const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name,
         const std::list<std::string>& leaves,
         const std::list<std::string>& model_dependencies);
 

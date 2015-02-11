@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
+#include "dogen/cpp/io/formattables/inclusion_delimiter_types_io.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/io/formatters/path_ingredients_io.hpp"
 
@@ -51,9 +52,13 @@ std::ostream& operator<<(std::ostream& s, const path_ingredients& v) {
       << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
       << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
       << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\"" << ", "
-      << "\"project_directory\": " << "\"" << v.project_directory().generic_string() << "\"" << ", "
-      << "\"source_directory\": " << "\"" << v.source_directory().generic_string() << "\"" << ", "
-      << "\"include_directory\": " << "\"" << v.include_directory().generic_string() << "\""
+      << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
+      << "\"source_directory_path\": " << "\"" << v.source_directory_path().generic_string() << "\"" << ", "
+      << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\"" << ", "
+      << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
+      << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "
+      << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
+      << "\"inclusion_delimiter_type\": " << v.inclusion_delimiter_type()
       << " }";
     return(s);
 }

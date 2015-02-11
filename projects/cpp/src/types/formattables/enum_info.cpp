@@ -56,8 +56,8 @@ enum_info::enum_info(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, boost::filesystem::path>& include_path_by_formatter_name,
-    const std::unordered_map<std::string, dogen::cpp::formattables::includes>& includes_by_formatter_name,
+    const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
+    const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name,
     const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
     const std::string& type)
     : dogen::cpp::formattables::entity(identity,
@@ -65,8 +65,8 @@ enum_info::enum_info(
       name,
       documentation,
       namespaces,
-      include_path_by_formatter_name,
-      includes_by_formatter_name),
+      inclusion_by_formatter_name,
+      inclusion_dependencies_by_formatter_name),
       enumerators_(enumerators),
       type_(type) { }
 

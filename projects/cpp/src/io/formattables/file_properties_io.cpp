@@ -20,6 +20,22 @@
  */
 #include <ostream>
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
+#include "dogen/cpp/io/formattables/inclusion_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::formattables::inclusion>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -29,7 +45,7 @@ std::ostream& operator<<(std::ostream& s, const file_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::file_properties\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"include_path\": " << "\"" << v.include_path().generic_string() << "\""
+      << "\"inclusion\": " << v.inclusion()
       << " }";
     return(s);
 }

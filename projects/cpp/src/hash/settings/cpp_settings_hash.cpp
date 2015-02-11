@@ -46,13 +46,15 @@ std::size_t cpp_settings_hasher::hash(const cpp_settings&v) {
 
     combine(seed, v.enabled());
     combine(seed, v.split_project());
-    combine(seed, hash_boost_filesystem_path(v.project_directory()));
-    combine(seed, hash_boost_filesystem_path(v.source_directory()));
-    combine(seed, hash_boost_filesystem_path(v.include_directory()));
+    combine(seed, v.source_directory_name());
+    combine(seed, v.include_directory_name());
     combine(seed, v.header_file_extension());
     combine(seed, v.implementation_file_extension());
     combine(seed, v.enable_facet_folders());
     combine(seed, v.enable_unique_file_names());
+    combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
+    combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
 
     return seed;
 }

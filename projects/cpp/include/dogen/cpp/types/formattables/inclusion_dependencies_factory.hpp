@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUDES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
@@ -32,7 +33,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/inclusion.hpp"
 #include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
@@ -42,14 +43,13 @@ namespace formattables {
 /**
  * @brief Creates all includes for all types in a model.
  */
-class includes_factory {
+class inclusion_dependencies_factory {
 public:
     /**
      * @brief Create includes for the model.
      */
     std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, includes>
-                       >
+                       std::unordered_map<std::string, std::list<inclusion> > >
         make(const settings::selector& s,
             const provider_selector_interface& ps,
             const std::unordered_map<sml::qname,

@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {

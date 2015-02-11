@@ -41,13 +41,15 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("split_project", v.split_project_);
-    ar << make_nvp("project_directory", v.project_directory_.generic_string());
-    ar << make_nvp("source_directory", v.source_directory_.generic_string());
-    ar << make_nvp("include_directory", v.include_directory_.generic_string());
+    ar << make_nvp("source_directory_name", v.source_directory_name_);
+    ar << make_nvp("include_directory_name", v.include_directory_name_);
     ar << make_nvp("header_file_extension", v.header_file_extension_);
     ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
     ar << make_nvp("enable_facet_folders", v.enable_facet_folders_);
     ar << make_nvp("enable_unique_file_names", v.enable_unique_file_names_);
+    ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
+    ar << make_nvp("source_directory_path", v.source_directory_path_.generic_string());
+    ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
 }
 
 template<typename Archive>
@@ -56,19 +58,21 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("split_project", v.split_project_);
-    std::string project_directory_tmp;
-    ar >> make_nvp("project_directory", project_directory_tmp);
-    v.project_directory_ = project_directory_tmp;
-    std::string source_directory_tmp;
-    ar >> make_nvp("source_directory", source_directory_tmp);
-    v.source_directory_ = source_directory_tmp;
-    std::string include_directory_tmp;
-    ar >> make_nvp("include_directory", include_directory_tmp);
-    v.include_directory_ = include_directory_tmp;
+    ar >> make_nvp("source_directory_name", v.source_directory_name_);
+    ar >> make_nvp("include_directory_name", v.include_directory_name_);
     ar >> make_nvp("header_file_extension", v.header_file_extension_);
     ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
     ar >> make_nvp("enable_facet_folders", v.enable_facet_folders_);
     ar >> make_nvp("enable_unique_file_names", v.enable_unique_file_names_);
+    std::string project_directory_path_tmp;
+    ar >> make_nvp("project_directory_path", project_directory_path_tmp);
+    v.project_directory_path_ = project_directory_path_tmp;
+    std::string source_directory_path_tmp;
+    ar >> make_nvp("source_directory_path", source_directory_path_tmp);
+    v.source_directory_path_ = source_directory_path_tmp;
+    std::string include_directory_path_tmp;
+    ar >> make_nvp("include_directory_path", include_directory_path_tmp);
+    v.include_directory_path_ = include_directory_path_tmp;
 }
 
 } }

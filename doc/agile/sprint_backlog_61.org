@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-10 Tue 23:33]
+Clock summary at [2015-02-11 Wed 22:09]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *23:04* |       |      |
+| *Total time*                                                        | *25:21* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 23:04 |      |
+| Active                                                              |         | 25:21 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -40,7 +40,7 @@ Clock summary at [2015-02-10 Tue 23:33]
 | COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
 | COMPLETED Improve building of file names                            |         |       | 0:56 |
 | COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
-| STARTED Add absolute path support to file name builder              |         |       | 2:49 |
+| COMPLETED Add absolute path support to path builder                 |         |       | 5:06 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -572,7 +572,10 @@ say =cpp_settings= etc.
 
 Also delete all of the unused settings classes in config.
 
-*** STARTED Add absolute path support to file name builder            :story:
+*** COMPLETED Add absolute path support to path builder               :story:
+    CLOSED: [2015-02-11 Wed 22:08]
+    CLOCK: [2015-02-11 Wed 20:46]--[2015-02-11 Wed 22:08] =>  1:22
+    CLOCK: [2015-02-11 Wed 19:15]--[2015-02-11 Wed 20:10] =>  0:55
     CLOCK: [2015-02-10 Tue 23:12]--[2015-02-10 Tue 23:33] =>  0:21
     CLOCK: [2015-02-10 Tue 21:52]--[2015-02-10 Tue 23:11] =>  1:19
     CLOCK: [2015-02-10 Tue 20:41]--[2015-02-10 Tue 21:50] =>  1:09
@@ -602,6 +605,21 @@ handle both of these scenarios.
 - rename project directory to project path;
 - create source and include directory fields again;
 - use these if split project is false.
+
+*** Create a toggable replacement with legacy and new formatters      :story:
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
+the legacy formatters; we then need to overwrite those entries in the
+map that are produced by the new formatters. This should be easy to
+switch on and off since we will not be able to use the new formatters
+for a long while.
+
+This can be done in knit's cpp backend:
+
+: backend::value_type cpp_backend::generate()
+
+We just need to look at the map and update any values with the files
+from the new formatters.
 
 *** Rename name builder to name factory                               :story:
 
@@ -640,21 +658,6 @@ of possible values for a field definition - a domain. When processing
 the values we can then check that it is part of the domain and if not
 throw. This is required for the include types. At present this is only
 applicable to string fields.
-
-*** Create a toggable replacement with legacy and new formatters      :story:
-
-As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
-the legacy formatters; we then need to overwrite those entries in the
-map that are produced by the new formatters. This should be easy to
-switch on and off since we will not be able to use the new formatters
-for a long while.
-
-This can be done in knit's cpp backend:
-
-: backend::value_type cpp_backend::generate()
-
-We just need to look at the map and update any values with the files
-from the new formatters.
 
 *** Populate the local settings                                       :story:
 
@@ -697,6 +700,10 @@ settings then switch them.
 
 We could implement most of the formatter interface in a common base
 class and then only have the descendants override what they need.
+
+In reality we need probably more than one base formatter: one for c++
+types, etc. We could handle all of the path and include generation
+here. Name: =cpp_base_formatter=?
 
 *** Add support for opaque formatter settings                         :story:
 
