@@ -36,69 +36,6 @@ namespace cpp {
  */
 struct traits {
     /**
-     * @brief Valid values for Boolean types.
-     */
-    /*@{*/
-    static std::string bool_true();
-    static std::string bool_false();
-    /*@}*/
-
-    /**
-     * @brief If set to false, the C++ backend will not
-     * be generated.
-     */
-    static std::string enabled();
-
-    /**
-     * @brief If true, the project will be split.
-     *
-     * @deprecated used only for backwards compatibility.
-     */
-    static std::string split_project();
-
-    /**
-     * @brief Name of the directory in which to place the
-     * implementation files.
-     */
-    static std::string source_directory();
-
-    /**
-     * @brief Name of the directory in which to place the header
-     * files.
-     */
-    static std::string include_directory();
-
-    /**
-     * @brief Extension to use for header files, including the
-     * leading dot.
-     *
-     * Example: @e .hpp, @e .hxx
-     */
-    static std::string header_file_extension();
-
-    /**
-     * @brief Extension to use for implementation files, including
-     * the leading dot.
-     *
-     * Example: @e .cpp, @e .cxx.
-     */
-    static std::string implementation_file_extension();
-
-    /**
-     * @brief If true, files for each facet will be placed in a
-     * folder for the facet.
-     */
-    static std::string enable_facet_folders();
-
-    /**
-     * @brief If true, each file in each facet will have a name
-     * unique across all facets.
-     *
-     * This is achieved by using the facet's postfix.
-     */
-    static std::string enable_unique_file_names();
-
-    /**
      * @brief Tags related to facets.
      */
     struct facet {

@@ -23,56 +23,6 @@
 namespace dogen {
 namespace cpp {
 
-std::string traits::bool_true() {
-    static std::string r("true");
-    return r;
-}
-
-std::string traits::bool_false() {
-    static std::string r("false");
-    return r;
-}
-
-std::string traits::enabled() {
-    static std::string r("cpp.enabled");
-    return r;
-}
-
-std::string traits::split_project() {
-    static std::string r("cpp.split_project");
-    return r;
-}
-
-std::string traits::source_directory() {
-    static std::string r("cpp.source_directory");
-    return r;
-}
-
-std::string traits::include_directory() {
-    static std::string r("cpp.include_directory");
-    return r;
-}
-
-std::string traits::header_file_extension() {
-    static std::string r("cpp.header_file_extension");
-    return r;
-}
-
-std::string traits::implementation_file_extension() {
-    static std::string r("cpp.implementation_file_extension");
-    return r;
-}
-
-std::string traits::enable_facet_folders() {
-    static std::string r("cpp.enable_facet_folders");
-    return r;
-}
-
-std::string traits::enable_unique_file_names() {
-    static std::string r("cpp.enable_unique_file_names");
-    return r;
-}
-
 std::string traits::facet::enabled() {
     static std::string r("enabled");
     return r;
