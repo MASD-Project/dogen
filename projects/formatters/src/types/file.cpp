@@ -27,32 +27,27 @@ file::file()
     : overwrite_(static_cast<bool>(0)) { }
 
 file::file(file&& rhs)
-    : relative_path_(std::move(rhs.relative_path_)),
-      absolute_path_(std::move(rhs.absolute_path_)),
+    : path_(std::move(rhs.path_)),
       content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)) { }
 
 file::file(
-    const boost::filesystem::path& relative_path,
-    const boost::filesystem::path& absolute_path,
+    const boost::filesystem::path& path,
     const std::string& content,
     const bool overwrite)
-    : relative_path_(relative_path),
-      absolute_path_(absolute_path),
+    : path_(path),
       content_(content),
       overwrite_(overwrite) { }
 
 void file::swap(file& other) noexcept {
     using std::swap;
-    swap(relative_path_, other.relative_path_);
-    swap(absolute_path_, other.absolute_path_);
+    swap(path_, other.path_);
     swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
 }
 
 bool file::operator==(const file& rhs) const {
-    return relative_path_ == rhs.relative_path_ &&
-        absolute_path_ == rhs.absolute_path_ &&
+    return path_ == rhs.path_ &&
         content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_;
 }
@@ -63,36 +58,20 @@ file& file::operator=(file other) {
     return *this;
 }
 
-const boost::filesystem::path& file::relative_path() const {
-    return relative_path_;
+const boost::filesystem::path& file::path() const {
+    return path_;
 }
 
-boost::filesystem::path& file::relative_path() {
-    return relative_path_;
+boost::filesystem::path& file::path() {
+    return path_;
 }
 
-void file::relative_path(const boost::filesystem::path& v) {
-    relative_path_ = v;
+void file::path(const boost::filesystem::path& v) {
+    path_ = v;
 }
 
-void file::relative_path(const boost::filesystem::path&& v) {
-    relative_path_ = std::move(v);
-}
-
-const boost::filesystem::path& file::absolute_path() const {
-    return absolute_path_;
-}
-
-boost::filesystem::path& file::absolute_path() {
-    return absolute_path_;
-}
-
-void file::absolute_path(const boost::filesystem::path& v) {
-    absolute_path_ = v;
-}
-
-void file::absolute_path(const boost::filesystem::path&& v) {
-    absolute_path_ = std::move(v);
+void file::path(const boost::filesystem::path&& v) {
+    path_ = std::move(v);
 }
 
 const std::string& file::content() const {

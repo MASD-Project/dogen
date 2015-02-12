@@ -27,7 +27,8 @@ namespace backends {
 
 cpp_backend::
 cpp_backend(const sml::model& model, const config::knitting_options& o) :
-    transformer_(model, o), formatter_(o) { }
+    transformer_(model, o), formatter_(o),
+    model_(model)/*FIXME*/, backend_workflow_(o)/*FIXME*/ { }
 
 backend::ptr cpp_backend::
 create(const sml::model& model, const config::knitting_options& o) {
@@ -36,7 +37,17 @@ create(const sml::model& model, const config::knitting_options& o) {
 
 backend::value_type cpp_backend::generate() {
     const auto project(transformer_.execute());
-    const auto r(formatter_.execute(project));
+    /*const*/ auto r(formatter_.execute(project));
+
+    // FIXME: massive hack for now.
+    const bool dump_files(false); // set to true to use new formatters.
+    if (dump_files) {
+        const auto files(backend_workflow_.execute(model_));
+        for (const auto& f : files)
+            r[f.path()] = f.content();
+    } else
+        backend_workflow_.execute(model_);
+
     return r;
 }
 

@@ -50,6 +50,12 @@ private:
     boost::filesystem::path
     get_inclusion_path(const formattables::class_info& c) const;
 
+    /**
+     * @brief Gets the file path for the current formatter.
+     */
+    boost::filesystem::path
+    get_file_path(const formattables::class_info& c) const;
+
 public:
     std::string facet_name() const override;
 

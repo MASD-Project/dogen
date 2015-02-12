@@ -49,8 +49,7 @@ public:
 
 public:
     file(
-        const boost::filesystem::path& relative_path,
-        const boost::filesystem::path& absolute_path,
+        const boost::filesystem::path& path,
         const std::string& content,
         const bool overwrite);
 
@@ -63,23 +62,13 @@ private:
 
 public:
     /**
-     * @brief Relative path to the file.
-     */
-    /**@{*/
-    const boost::filesystem::path& relative_path() const;
-    boost::filesystem::path& relative_path();
-    void relative_path(const boost::filesystem::path& v);
-    void relative_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
      * @brief Absolute path to the file, indicating the location in the filesystem where it will be written.
      */
     /**@{*/
-    const boost::filesystem::path& absolute_path() const;
-    boost::filesystem::path& absolute_path();
-    void absolute_path(const boost::filesystem::path& v);
-    void absolute_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& path() const;
+    boost::filesystem::path& path();
+    void path(const boost::filesystem::path& v);
+    void path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -114,8 +103,7 @@ public:
     file& operator=(file other);
 
 private:
-    boost::filesystem::path relative_path_;
-    boost::filesystem::path absolute_path_;
+    boost::filesystem::path path_;
     std::string content_;
     bool overwrite_;
 };

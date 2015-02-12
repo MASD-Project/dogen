@@ -43,8 +43,7 @@ std::ostream& operator<<(std::ostream& s, const file& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::file\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
-      << "\"absolute_path\": " << "\"" << v.absolute_path().generic_string() << "\"" << ", "
+      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"overwrite\": " << v.overwrite()
       << " }";

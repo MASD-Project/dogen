@@ -13,37 +13,38 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-12 Thu 22:08]
+Clock summary at [2015-02-12 Thu 23:32]
 
-| Headline                                                            | Time    |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *29:43* |       |      |
-|---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 29:43 |      |
-| STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
-| COMPLETED Improvements to product backlog                           |         |       | 1:01 |
-| COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
-| COMPLETED Create a =formattable= base class                         |         |       | 0:32 |
-| COMPLETED Rename =file_settings= to =file_properties=               |         |       | 0:11 |
-| COMPLETED Create a class to generate file names                     |         |       | 0:20 |
-| COMPLETED Create a class to generate file properties                |         |       | 0:30 |
-| COMPLETED Create a formattables workflow                            |         |       | 1:56 |
-| COMPLETED Facet and formatter settings factories to use definitions |         |       | 1:54 |
-| COMPLETED Split global settings by formatter and facet              |         |       | 0:04 |
-| COMPLETED Create a settings facade for querying                     |         |       | 1:25 |
-| COMPLETED Implement file name factory                               |         |       | 3:39 |
-| COMPLETED Add field for =supported=                                 |         |       | 0:33 |
-| COMPLETED Rename =build= method on all factories to =make=          |         |       | 0:50 |
-| COMPLETED Populate entity's identity during transformation          |         |       | 0:07 |
-| COMPLETED Analysis on formattable types and formatter integration   |         |       | 1:13 |
-| COMPLETED Split file properties from includes                       |         |       | 0:57 |
-| COMPLETED Create provider and provider selector interfaces          |         |       | 1:32 |
-| COMPLETED Improve building of file names                            |         |       | 0:56 |
-| COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
-| COMPLETED Add absolute path support to path builder                 |         |       | 5:06 |
-| COMPLETED Populate the local settings                               |         |       | 3:06 |
-| STARTED Implement include generation for class header formatter     |         |       | 1:16 |
-| STARTED Create settings expander and switcher                       |         |       | 0:30 |
+| Headline                                                               | Time    |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                           | *31:06* |       |      |
+|------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                 |         | 31:06 |      |
+| STARTED Sprint and product backlog grooming                            |         |       | 0:38 |
+| COMPLETED Improvements to product backlog                              |         |       | 1:01 |
+| COMPLETED Tidy-up formatters workflow                                  |         |       | 0:20 |
+| COMPLETED Create a =formattable= base class                            |         |       | 0:32 |
+| COMPLETED Rename =file_settings= to =file_properties=                  |         |       | 0:11 |
+| COMPLETED Create a class to generate file names                        |         |       | 0:20 |
+| COMPLETED Create a class to generate file properties                   |         |       | 0:30 |
+| COMPLETED Create a formattables workflow                               |         |       | 1:56 |
+| COMPLETED Facet and formatter settings factories to use definitions    |         |       | 1:54 |
+| COMPLETED Split global settings by formatter and facet                 |         |       | 0:04 |
+| COMPLETED Create a settings facade for querying                        |         |       | 1:25 |
+| COMPLETED Implement file name factory                                  |         |       | 3:39 |
+| COMPLETED Add field for =supported=                                    |         |       | 0:33 |
+| COMPLETED Rename =build= method on all factories to =make=             |         |       | 0:50 |
+| COMPLETED Populate entity's identity during transformation             |         |       | 0:07 |
+| COMPLETED Analysis on formattable types and formatter integration      |         |       | 1:13 |
+| COMPLETED Split file properties from includes                          |         |       | 0:57 |
+| COMPLETED Create provider and provider selector interfaces             |         |       | 1:32 |
+| COMPLETED Improve building of file names                               |         |       | 0:56 |
+| COMPLETED Consider renaming config settings to options                 |         |       | 1:07 |
+| COMPLETED Add absolute path support to path builder                    |         |       | 5:06 |
+| COMPLETED Populate the local settings                                  |         |       | 3:06 |
+| COMPLETED Create a toggable replacement with legacy and new formatters |         |       | 0:28 |
+| STARTED Implement include generation for class header formatter        |         |       | 2:11 |
+| STARTED Create settings expander and switcher                          |         |       | 0:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -635,6 +636,23 @@ We need a class to represent the type related settings such as
 =family=, etc. We also need an associated factory. "type" may not be
 the best of names; we need to do some name-storming here.
 
+*** COMPLETED Create a toggable replacement with legacy and new formatters :story:
+    CLOSED: [2015-02-12 Thu 23:31]
+    CLOCK: [2015-02-12 Thu 23:03]--[2015-02-12 Thu 23:31] =>  0:28
+
+As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
+the legacy formatters; we then need to overwrite those entries in the
+map that are produced by the new formatters. This should be easy to
+switch on and off since we will not be able to use the new formatters
+for a long while.
+
+This can be done in knit's cpp backend:
+
+: backend::value_type cpp_backend::generate()
+
+We just need to look at the map and update any values with the files
+from the new formatters.
+
 *** STARTED Implement include generation for class header formatter   :story:
     CLOCK: [2015-02-12 Thu 22:08]--[2015-02-12 Thu 23:03] =>  0:55
     CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
@@ -665,21 +683,6 @@ Notes:
   with a include type: user or system. we could then use this.
 - add field definition =no_inclusion_required= and populate all
   relevant primitives.
-
-*** Create a toggable replacement with legacy and new formatters      :story:
-
-As [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_61.org#analysis-on-formattable-types-and-formatter-integration][per analysis]], we need to create a map of file from the output of
-the legacy formatters; we then need to overwrite those entries in the
-map that are produced by the new formatters. This should be easy to
-switch on and off since we will not be able to use the new formatters
-for a long while.
-
-This can be done in knit's cpp backend:
-
-: backend::value_type cpp_backend::generate()
-
-We just need to look at the map and update any values with the files
-from the new formatters.
 
 *** Create a list of valid values for field definitions               :story:
 

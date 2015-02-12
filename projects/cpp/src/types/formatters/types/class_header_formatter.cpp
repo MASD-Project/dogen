@@ -34,6 +34,9 @@ namespace {
 const std::string include_path_for_formatter_not_found(
     "Include path for formatter not found. Formatter: ");
 
+const std::string file_path_for_formatter_not_found(
+    "File path for formatter not found. Formatter: ");
+
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
 static logger lg(logger_factory(traits::class_header_formatter_name()));
@@ -51,17 +54,30 @@ namespace types {
 
 boost::filesystem::path class_header_formatter::
 get_inclusion_path(const formattables::class_info& c) const {
-    const auto& fp(c.inclusion_by_formatter_name());
-    const auto i(fp.find(formatter_name()));
-    if (i == fp.end()) {
+    const auto& ip(c.inclusion_by_formatter_name());
+    const auto i(ip.find(formatter_name()));
+    if (i == ip.end()) {
         BOOST_LOG_SEV(lg, error) << include_path_for_formatter_not_found
                                  << formatter_name();
 
         BOOST_THROW_EXCEPTION(formatting_error(
                 include_path_for_formatter_not_found + formatter_name()));
     }
-
     return i->second.inclusion_path();
+}
+
+boost::filesystem::path class_header_formatter::
+get_file_path(const formattables::class_info& c) const {
+    const auto& fp(c.file_path_by_formatter_name());
+    const auto i(fp.find(formatter_name()));
+    if (i == fp.end()) {
+        BOOST_LOG_SEV(lg, error) << file_path_for_formatter_not_found
+                                 << formatter_name();
+
+        BOOST_THROW_EXCEPTION(formatting_error(
+                file_path_for_formatter_not_found + formatter_name()));
+    }
+    return i->second;
 }
 
 file_types class_header_formatter::file_type() const {
@@ -118,19 +134,19 @@ class_header_formatter::format(const settings::selector& s,
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(ss);
 
-    const auto rp(get_inclusion_path(c));
+    const auto ip(get_inclusion_path(c));
     dogen::cpp::formatters::boilerplate_formatter f;
     const auto a(s.select_annotation(c.identity()));
-    f.format_begin(fo, a, empty_includes, rp);
-    f.format_end(fo, a, rp);
+    f.format_begin(fo, a, empty_includes, ip);
+    f.format_end(fo, a, ip);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;
     r.content(ss.str());
-    r.relative_path(rp);
+    r.path(get_file_path(c));
 
     BOOST_LOG_SEV(lg, debug) << "filename: "
-                             << r.relative_path().generic_string();
+                             << r.path().generic_string();
     BOOST_LOG_SEV(lg, debug) << "content: " << r.content();
     return r;
 }

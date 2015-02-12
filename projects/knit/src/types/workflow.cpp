@@ -43,7 +43,6 @@
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -265,9 +264,6 @@ void workflow::persist_model_activity(const boost::filesystem::path p,
 
 void workflow::generate_model_activity(const sml::model& m) const {
     try {
-        backend::workflow w(knitting_options_);
-        w.execute(m); // FIXME: throw away results for now
-
         backends::factory f(m, knitting_options_);
         boost::for_each(f.create(), [&](backends::backend::ptr p) {
                 create_files_for_backend(*p);

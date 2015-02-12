@@ -34,6 +34,7 @@
 #include "dogen/cpp_formatters/types/workflow.hpp"
 #include "dogen/sml_to_cpp/types/workflow.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
+#include "dogen/backend/types/workflow.hpp" // FIXME
 
 namespace dogen {
 namespace knit {
@@ -62,6 +63,8 @@ public:
 private:
     sml_to_cpp::workflow transformer_;
     cpp_formatters::workflow formatter_;
+    const sml::model& model_; // FIXME
+    dogen::backend::workflow backend_workflow_; // FIXME
 };
 
 } } }
