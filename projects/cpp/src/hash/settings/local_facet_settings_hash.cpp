@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/facet_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/local_facet_settings_hash.hpp"
 
 namespace {
 
@@ -35,13 +35,10 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t facet_settings_hasher::hash(const facet_settings&v) {
+std::size_t local_facet_settings_hasher::hash(const local_facet_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.enabled());
-    combine(seed, v.directory());
-    combine(seed, v.postfix());
-
+    combine(seed, v.supported());
     return seed;
 }
 

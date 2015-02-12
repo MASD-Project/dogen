@@ -50,6 +50,13 @@ public:
 
 private:
     /**
+     * @brief If the field has not been found, throws.
+     */
+    void ensure_field_is_present(
+        const bool found, const std::string& name) const;
+
+private:
+    /**
      * @brief Creates the global settings for the facet implied by the
      * facet fields.
      */
@@ -74,7 +81,7 @@ public:
      * @return Global formatter settings by formatter name.
      */
     std::unordered_map<std::string, global_formatter_settings>
-    make_global_formatter_settings(const std::unordered_map<std::string,
+    make_global_settings(const std::unordered_map<std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_formatter_name,
         const dynamic::object& o) const;
@@ -86,7 +93,7 @@ public:
      * @return Local formatter settings by formatter name.
      */
     std::unordered_map<std::string, local_formatter_settings>
-    make_local_formatter_settings(const std::unordered_map<std::string,
+    make_local_settings(const std::unordered_map<std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_formatter_name,
         const dynamic::object& o) const;

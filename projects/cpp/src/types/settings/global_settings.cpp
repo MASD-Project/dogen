@@ -27,7 +27,7 @@ namespace settings {
 global_settings::global_settings(
     const dogen::formatters::general_settings& general_settings,
     const dogen::cpp::settings::cpp_settings& cpp_settings,
-    const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings,
+    const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& facet_settings,
     const std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings>& formatter_settings)
     : general_settings_(general_settings),
       cpp_settings_(cpp_settings),
@@ -87,19 +87,19 @@ void global_settings::cpp_settings(const dogen::cpp::settings::cpp_settings&& v)
     cpp_settings_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& global_settings::facet_settings() const {
+const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& global_settings::facet_settings() const {
     return facet_settings_;
 }
 
-std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& global_settings::facet_settings() {
+std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& global_settings::facet_settings() {
     return facet_settings_;
 }
 
-void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v) {
+void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& v) {
     facet_settings_ = v;
 }
 
-void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>&& v) {
+void global_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>&& v) {
     facet_settings_ = std::move(v);
 }
 

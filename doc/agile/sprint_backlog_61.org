@@ -636,6 +636,7 @@ We need a class to represent the type related settings such as
 the best of names; we need to do some name-storming here.
 
 *** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-12 Thu 22:08]--[2015-02-12 Thu 23:03] =>  0:55
     CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
     CLOCK: [2015-02-11 Wed 22:10]--[2015-02-11 Wed 22:27] =>  0:17
 

@@ -41,6 +41,7 @@ void save(Archive& ar,
     ar << make_nvp("family_type", v.family_type_);
     ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar << make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
+    ar << make_nvp("inclusion_required", v.inclusion_required_);
 }
 
 template<typename Archive>
@@ -50,6 +51,7 @@ void load(Archive& ar,
     ar >> make_nvp("family_type", v.family_type_);
     ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
     ar >> make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
+    ar >> make_nvp("inclusion_required", v.inclusion_required_);
 }
 
 } }

@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include "dogen/cpp/serialization/settings/global_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 #include "dogen/cpp/types/settings/global_formatter_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 
@@ -52,7 +52,7 @@ public:
     global_settings(
         const dogen::formatters::general_settings& general_settings,
         const dogen::cpp::settings::cpp_settings& cpp_settings,
-        const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings,
+        const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& facet_settings,
         const std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings>& formatter_settings);
 
 private:
@@ -73,10 +73,10 @@ public:
     void cpp_settings(const dogen::cpp::settings::cpp_settings& v);
     void cpp_settings(const dogen::cpp::settings::cpp_settings&& v);
 
-    const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings() const;
-    std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& facet_settings();
-    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v);
-    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>&& v);
+    const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& facet_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& facet_settings();
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& v);
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>&& v);
 
     const std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings>& formatter_settings() const;
     std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings>& formatter_settings();
@@ -96,7 +96,7 @@ public:
 private:
     dogen::formatters::general_settings general_settings_;
     dogen::cpp::settings::cpp_settings cpp_settings_;
-    std::unordered_map<std::string, dogen::cpp::settings::facet_settings> facet_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings> facet_settings_;
     std::unordered_map<std::string, dogen::cpp::settings::global_formatter_settings> formatter_settings_;
 };
 

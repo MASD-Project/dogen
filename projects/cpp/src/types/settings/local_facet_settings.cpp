@@ -18,33 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/family_types_hash.hpp"
-#include "dogen/cpp/hash/settings/type_settings_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/cpp/types/settings/local_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t type_settings_hasher::hash(const type_settings&v) {
-    std::size_t seed(0);
+local_facet_settings::local_facet_settings()
+    : supported_(static_cast<bool>(0)) { }
 
-    combine(seed, v.family_type());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.inclusion_required());
+local_facet_settings::local_facet_settings(const bool supported)
+    : supported_(supported) { }
 
-    return seed;
+void local_facet_settings::swap(local_facet_settings& other) noexcept {
+    using std::swap;
+    swap(supported_, other.supported_);
+}
+
+bool local_facet_settings::operator==(const local_facet_settings& rhs) const {
+    return supported_ == rhs.supported_;
+}
+
+local_facet_settings& local_facet_settings::operator=(local_facet_settings other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+bool local_facet_settings::supported() const {
+    return supported_;
+}
+
+void local_facet_settings::supported(const bool v) {
+    supported_ = v;
 }
 
 } } }

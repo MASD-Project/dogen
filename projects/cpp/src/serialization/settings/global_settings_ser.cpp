@@ -29,7 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/cpp_settings_ser.hpp"
-#include "dogen/cpp/serialization/settings/facet_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/global_facet_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/global_formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/global_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"

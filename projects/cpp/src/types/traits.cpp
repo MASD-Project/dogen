@@ -78,6 +78,11 @@ std::string traits::facet::enabled() {
     return r;
 }
 
+std::string traits::facet::supported() {
+    static std::string r("supported");
+    return r;
+}
+
 std::string traits::facet::directory() {
     static std::string r("directory");
     return r;

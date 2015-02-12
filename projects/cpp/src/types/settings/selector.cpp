@@ -62,8 +62,8 @@ const cpp_settings& selector::select_cpp_settings() const {
     return settings_.global_settings().cpp_settings();
 }
 
-const facet_settings& selector::
-select_facet_settings(const std::string& facet_name) const {
+const global_facet_settings& selector::
+select_global_facet_settings(const std::string& facet_name) const {
     const auto& fs(settings_.global_settings().facet_settings());
     const auto i(fs.find(facet_name));
     if (i == fs.end()) {

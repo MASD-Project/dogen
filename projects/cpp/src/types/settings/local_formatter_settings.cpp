@@ -26,42 +26,30 @@ namespace settings {
 
 local_formatter_settings::local_formatter_settings()
     : enabled_(static_cast<bool>(0)),
-      supported_(static_cast<bool>(0)),
-      no_inclusion_required_(static_cast<bool>(0)),
       inclusion_delimiter_type_(static_cast<dogen::cpp::formattables::inclusion_delimiter_types>(0)) { }
 
 local_formatter_settings::local_formatter_settings(local_formatter_settings&& rhs)
     : enabled_(std::move(rhs.enabled_)),
-      supported_(std::move(rhs.supported_)),
-      no_inclusion_required_(std::move(rhs.no_inclusion_required_)),
       inclusion_path_(std::move(rhs.inclusion_path_)),
       inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)) { }
 
 local_formatter_settings::local_formatter_settings(
     const bool enabled,
-    const bool supported,
-    const bool no_inclusion_required,
     const boost::filesystem::path& inclusion_path,
     const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type)
     : enabled_(enabled),
-      supported_(supported),
-      no_inclusion_required_(no_inclusion_required),
       inclusion_path_(inclusion_path),
       inclusion_delimiter_type_(inclusion_delimiter_type) { }
 
 void local_formatter_settings::swap(local_formatter_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
-    swap(supported_, other.supported_);
-    swap(no_inclusion_required_, other.no_inclusion_required_);
     swap(inclusion_path_, other.inclusion_path_);
     swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
 }
 
 bool local_formatter_settings::operator==(const local_formatter_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
-        supported_ == rhs.supported_ &&
-        no_inclusion_required_ == rhs.no_inclusion_required_ &&
         inclusion_path_ == rhs.inclusion_path_ &&
         inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_;
 }
@@ -78,22 +66,6 @@ bool local_formatter_settings::enabled() const {
 
 void local_formatter_settings::enabled(const bool v) {
     enabled_ = v;
-}
-
-bool local_formatter_settings::supported() const {
-    return supported_;
-}
-
-void local_formatter_settings::supported(const bool v) {
-    supported_ = v;
-}
-
-bool local_formatter_settings::no_inclusion_required() const {
-    return no_inclusion_required_;
-}
-
-void local_formatter_settings::no_inclusion_required(const bool v) {
-    no_inclusion_required_ = v;
 }
 
 const boost::filesystem::path& local_formatter_settings::inclusion_path() const {

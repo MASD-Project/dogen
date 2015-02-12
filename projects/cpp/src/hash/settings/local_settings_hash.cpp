@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/settings/local_facet_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/local_formatter_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/local_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/type_settings_hash.hpp"
@@ -39,6 +40,15 @@ inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const b
         return seed;
 
     combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_local_facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
     return seed;
 }
 
@@ -71,6 +81,7 @@ std::size_t local_settings_hasher::hash(const local_settings&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_local_facet_settings(v.facet_settings()));
     combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_local_formatter_settings(v.formatter_settings()));
     combine(seed, hash_boost_optional_dogen_cpp_settings_type_settings(v.type_settings()));
 

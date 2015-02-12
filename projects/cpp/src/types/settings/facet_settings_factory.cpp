@@ -32,8 +32,8 @@ auto lg(logger_factory("cpp.settings.facet_settings_factory"));
 
 const std::string multiple_fields(
     "Facet has multiple fields with the same name: ");
-const std::string no_default_value(
-    "Field does not have a default value: ");
+const std::string no_default_value("Field does not have a default value: ");
+const std::string missing_expected_field("Could not find expected field: ");
 
 }
 
@@ -41,11 +41,20 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-facet_settings facet_settings_factory::create_settings_for_facet(
+void facet_settings_factory::
+ensure_field_is_present(const bool found, const std::string& name) const {
+    if (found)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << missing_expected_field << name;
+    BOOST_THROW_EXCEPTION(building_error(missing_expected_field + name));
+}
+
+global_facet_settings facet_settings_factory::create_global_settings_for_facet(
     const std::forward_list<dynamic::field_definition>& facet_fields,
     const dynamic::object& o) const {
 
-    facet_settings r;
+    global_facet_settings r;
     bool found_enabled(false), found_directory(false), found_postfix(false);
     const auto& enabled_trait(traits::facet::enabled());
     const auto& directory_trait(traits::facet::directory());
@@ -108,26 +117,87 @@ facet_settings facet_settings_factory::create_settings_for_facet(
                 r.postfix(get_text_content(*fd.default_value()));
             }
         }
+    }
+    ensure_field_is_present(found_enabled, enabled_trait);
+    ensure_field_is_present(found_directory, directory_trait);
+    ensure_field_is_present(found_postfix, postfix_trait);
 
-        // FIXME: check for all found_xxx or throw
+    return r;
+}
+
+boost::optional<local_facet_settings> facet_settings_factory::
+create_local_settings_for_facet(
+    const std::forward_list<dynamic::field_definition>& facet_fields,
+    const dynamic::object& o) const {
+
+    local_facet_settings r;
+    bool found_supported(false);
+    bool found_any_field(false);
+    const auto& supported_trait(traits::facet::supported());
+
+    for (const auto fd : facet_fields) {
+        using namespace dynamic;
+        if (fd.name().simple() == supported_trait) {
+            if (found_supported) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_supported = true;
+
+            if (has_field(o, fd)) {
+                r.supported(get_boolean_content(o, fd));
+                found_any_field = true;
+            } else {
+                if (!fd.default_value()) {
+                    const auto& n(fd.name().qualified());
+                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
+                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+                }
+                r.supported(get_boolean_content(*fd.default_value()));
+            }
+        }
+
+        if (found_any_field)
+            return r;
+
+        return boost::optional<local_facet_settings>();
     }
 
     return r;
 }
 
-std::unordered_map<std::string, facet_settings>
-facet_settings_factory::make(
+std::unordered_map<std::string, global_facet_settings>
+facet_settings_factory::make_global_settings(
     const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>>&
     field_definitions_by_facet_name,
     const dynamic::object& o) const {
 
-    std::unordered_map<std::string, facet_settings> r;
+    std::unordered_map<std::string, global_facet_settings> r;
     for (const auto pair : field_definitions_by_facet_name) {
         const auto& facet_name(pair.first);
         const auto& facet_fields(pair.second);
-        const auto s(create_settings_for_facet(facet_fields, o));
+        const auto s(create_global_settings_for_facet(facet_fields, o));
         r.insert(std::make_pair(facet_name, s));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, local_facet_settings>
+facet_settings_factory::make_local_settings(
+    const std::unordered_map<std::string,
+    std::forward_list<dynamic::field_definition>>&
+    field_definitions_by_facet_name,
+    const dynamic::object& o) const {
+
+    std::unordered_map<std::string, local_facet_settings> r;
+    for (const auto pair : field_definitions_by_facet_name) {
+        const auto& facet_name(pair.first);
+        const auto& facet_fields(pair.second);
+        const auto s(create_local_settings_for_facet(facet_fields, o));
+        if (s)
+            r.insert(std::make_pair(facet_name, *s));
     }
     return r;
 }

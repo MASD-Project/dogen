@@ -46,8 +46,6 @@ std::size_t local_formatter_settings_hasher::hash(const local_formatter_settings
     std::size_t seed(0);
 
     combine(seed, v.enabled());
-    combine(seed, v.supported());
-    combine(seed, v.no_inclusion_required());
     combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
     combine(seed, v.inclusion_delimiter_type());
 

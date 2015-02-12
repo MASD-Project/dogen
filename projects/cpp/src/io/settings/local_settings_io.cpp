@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
+#include "dogen/cpp/io/settings/local_facet_settings_io.hpp"
 #include "dogen/cpp/io/settings/local_formatter_settings_io.hpp"
 #include "dogen/cpp/io/settings/local_settings_io.hpp"
 #include "dogen/cpp/io/settings/type_settings_io.hpp"
@@ -46,6 +47,24 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
 }
 
 namespace std {
@@ -89,6 +108,7 @@ std::ostream& operator<<(std::ostream& s, const local_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::local_settings\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
+      << "\"facet_settings\": " << v.facet_settings() << ", "
       << "\"formatter_settings\": " << v.formatter_settings() << ", "
       << "\"type_settings\": " << v.type_settings()
       << " }";

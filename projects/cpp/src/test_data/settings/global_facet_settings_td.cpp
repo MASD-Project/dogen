@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/settings/facet_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/global_facet_settings_td.hpp"
 
 namespace {
 
@@ -39,30 +39,30 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-facet_settings_generator::facet_settings_generator() : position_(0) { }
+global_facet_settings_generator::global_facet_settings_generator() : position_(0) { }
 
-void facet_settings_generator::
+void global_facet_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.directory(create_std_string(position + 1));
     v.postfix(create_std_string(position + 2));
 }
 
-facet_settings_generator::result_type
-facet_settings_generator::create(const unsigned int position) {
-    facet_settings r;
-    facet_settings_generator::populate(position, r);
+global_facet_settings_generator::result_type
+global_facet_settings_generator::create(const unsigned int position) {
+    global_facet_settings r;
+    global_facet_settings_generator::populate(position, r);
     return r;
 }
-facet_settings_generator::result_type*
-facet_settings_generator::create_ptr(const unsigned int position) {
-    facet_settings* p = new facet_settings();
-    facet_settings_generator::populate(position, *p);
+global_facet_settings_generator::result_type*
+global_facet_settings_generator::create_ptr(const unsigned int position) {
+    global_facet_settings* p = new global_facet_settings();
+    global_facet_settings_generator::populate(position, *p);
     return p;
 }
 
-facet_settings_generator::result_type
-facet_settings_generator::operator()() {
+global_facet_settings_generator::result_type
+global_facet_settings_generator::operator()() {
     return create(position_++);
 }
 

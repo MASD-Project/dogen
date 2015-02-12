@@ -108,6 +108,11 @@ struct traits {
         static std::string enabled();
 
         /**
+         * @brief If set to true, the facet is not supported.
+         */
+        static std::string supported();
+
+        /**
          * @brief Directory in which to place files for this facet.
          */
         static std::string directory();

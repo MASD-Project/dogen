@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_FACET_SETTINGS_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_SETTINGS_FACET_SETTINGS_FWD_SER_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_GLOBAL_FACET_SETTINGS_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_SETTINGS_GLOBAL_FACET_SETTINGS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/settings/facet_settings_fwd.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::cpp::settings::facet_settings& v, unsigned int version);
+void save(Archive& ar, const dogen::cpp::settings::global_facet_settings& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::cpp::settings::facet_settings& v, unsigned int version);
+void load(Archive& ar, dogen::cpp::settings::global_facet_settings& v, unsigned int version);
 
 } }
 

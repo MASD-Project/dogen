@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-facet_settings::facet_settings()
+global_facet_settings::global_facet_settings()
     : enabled_(static_cast<bool>(0)) { }
 
-facet_settings::facet_settings(
+global_facet_settings::global_facet_settings(
     const bool enabled,
     const std::string& directory,
     const std::string& postfix)
@@ -35,62 +35,62 @@ facet_settings::facet_settings(
       directory_(directory),
       postfix_(postfix) { }
 
-void facet_settings::swap(facet_settings& other) noexcept {
+void global_facet_settings::swap(global_facet_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(directory_, other.directory_);
     swap(postfix_, other.postfix_);
 }
 
-bool facet_settings::operator==(const facet_settings& rhs) const {
+bool global_facet_settings::operator==(const global_facet_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
         directory_ == rhs.directory_ &&
         postfix_ == rhs.postfix_;
 }
 
-facet_settings& facet_settings::operator=(facet_settings other) {
+global_facet_settings& global_facet_settings::operator=(global_facet_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool facet_settings::enabled() const {
+bool global_facet_settings::enabled() const {
     return enabled_;
 }
 
-void facet_settings::enabled(const bool v) {
+void global_facet_settings::enabled(const bool v) {
     enabled_ = v;
 }
 
-const std::string& facet_settings::directory() const {
+const std::string& global_facet_settings::directory() const {
     return directory_;
 }
 
-std::string& facet_settings::directory() {
+std::string& global_facet_settings::directory() {
     return directory_;
 }
 
-void facet_settings::directory(const std::string& v) {
+void global_facet_settings::directory(const std::string& v) {
     directory_ = v;
 }
 
-void facet_settings::directory(const std::string&& v) {
+void global_facet_settings::directory(const std::string&& v) {
     directory_ = std::move(v);
 }
 
-const std::string& facet_settings::postfix() const {
+const std::string& global_facet_settings::postfix() const {
     return postfix_;
 }
 
-std::string& facet_settings::postfix() {
+std::string& global_facet_settings::postfix() {
     return postfix_;
 }
 
-void facet_settings::postfix(const std::string& v) {
+void global_facet_settings::postfix(const std::string& v) {
     postfix_ = v;
 }
 
-void facet_settings::postfix(const std::string&& v) {
+void global_facet_settings::postfix(const std::string&& v) {
     postfix_ = std::move(v);
 }
 

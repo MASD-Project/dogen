@@ -26,26 +26,31 @@ namespace settings {
 
 local_settings::local_settings(local_settings&& rhs)
     : general_settings_(std::move(rhs.general_settings_)),
+      facet_settings_(std::move(rhs.facet_settings_)),
       formatter_settings_(std::move(rhs.formatter_settings_)),
       type_settings_(std::move(rhs.type_settings_)) { }
 
 local_settings::local_settings(
     const boost::optional<dogen::formatters::general_settings>& general_settings,
+    const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& facet_settings,
     const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings,
     const boost::optional<dogen::cpp::settings::type_settings>& type_settings)
     : general_settings_(general_settings),
+      facet_settings_(facet_settings),
       formatter_settings_(formatter_settings),
       type_settings_(type_settings) { }
 
 void local_settings::swap(local_settings& other) noexcept {
     using std::swap;
     swap(general_settings_, other.general_settings_);
+    swap(facet_settings_, other.facet_settings_);
     swap(formatter_settings_, other.formatter_settings_);
     swap(type_settings_, other.type_settings_);
 }
 
 bool local_settings::operator==(const local_settings& rhs) const {
     return general_settings_ == rhs.general_settings_ &&
+        facet_settings_ == rhs.facet_settings_ &&
         formatter_settings_ == rhs.formatter_settings_ &&
         type_settings_ == rhs.type_settings_;
 }
@@ -70,6 +75,22 @@ void local_settings::general_settings(const boost::optional<dogen::formatters::g
 
 void local_settings::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
     general_settings_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& local_settings::facet_settings() const {
+    return facet_settings_;
+}
+
+std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& local_settings::facet_settings() {
+    return facet_settings_;
+}
+
+void local_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& v) {
+    facet_settings_ = v;
+}
+
+void local_settings::facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>&& v) {
+    facet_settings_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& local_settings::formatter_settings() const {

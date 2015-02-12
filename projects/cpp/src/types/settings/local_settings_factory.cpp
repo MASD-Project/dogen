@@ -25,6 +25,7 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/settings/local_settings_io.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
+#include "dogen/cpp/types/settings/facet_settings_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 #include "dogen/cpp/types/settings/local_settings_factory.hpp"
 
@@ -92,11 +93,15 @@ void generator::generate(const sml::qname& qn, const dynamic::object& o) {
     ls.general_settings(general_settings_factory_.make_only_if_overriden(o));
     found_any_settings |= (bool)ls.general_settings();
 
-    formatter_settings_factory fsf;
+    formatter_settings_factory fmt;
     ls.formatter_settings(
-        fsf.make_local_formatter_settings(
-            field_definitions_by_formatter_name_, o));
+        fmt.make_local_settings(field_definitions_by_formatter_name_, o));
     found_any_settings |= !ls.formatter_settings().empty();
+
+    facet_settings_factory fct;
+    ls.facet_settings(
+        fct.make_local_settings(field_definitions_by_formatter_name_, o));
+    found_any_settings |= !ls.facet_settings().empty();
 
     type_settings_factory tsf;
     ls.type_settings(tsf.make(o));

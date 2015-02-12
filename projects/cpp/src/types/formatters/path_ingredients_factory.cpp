@@ -57,7 +57,7 @@ path_ingredients path_ingredients_factory::make(const settings::selector& s,
     r.source_directory_path(cs.source_directory_path());
     r.include_directory_path(cs.include_directory_path());
 
-    const auto& fcts(s.select_facet_settings(f.facet_name()));
+    const auto& fcts(s.select_global_facet_settings(f.facet_name()));
     if (cs.enable_facet_folders())
         r.facet_directory(fcts.directory());
 

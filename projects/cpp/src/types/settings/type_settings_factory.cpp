@@ -102,6 +102,11 @@ make(const dynamic::object& o) const {
             get_boolean_content(o, fd::requires_manual_move_constructor()));
     }
 
+    if (has_field(o, fd::inclusion_required())) {
+        found_any_field = true;
+        r.inclusion_required(get_boolean_content(o, fd::inclusion_required()));
+    }
+
     if (found_any_field)
         return r;
 

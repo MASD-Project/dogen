@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/settings/local_facet_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/local_formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/local_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/type_settings_ser.hpp"
@@ -44,6 +45,7 @@ void save(Archive& ar,
     const dogen::cpp::settings::local_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("general_settings", v.general_settings_);
+    ar << make_nvp("facet_settings", v.facet_settings_);
     ar << make_nvp("formatter_settings", v.formatter_settings_);
     ar << make_nvp("type_settings", v.type_settings_);
 }
@@ -53,6 +55,7 @@ void load(Archive& ar,
     dogen::cpp::settings::local_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("general_settings", v.general_settings_);
+    ar >> make_nvp("facet_settings", v.facet_settings_);
     ar >> make_nvp("formatter_settings", v.formatter_settings_);
     ar >> make_nvp("type_settings", v.type_settings_);
 }

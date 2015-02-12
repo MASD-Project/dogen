@@ -35,7 +35,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 #include "dogen/cpp/types/settings/local_settings.hpp"
 #include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/settings/local_formatter_settings.hpp"
@@ -78,8 +78,8 @@ private:
     /**
      * @brief Create the facet settings.
      */
-    std::unordered_map<std::string, facet_settings>
-    create_facet_settings(const dynamic::indexer& idx,
+    std::unordered_map<std::string, global_facet_settings>
+    create_global_facet_settings(const dynamic::indexer& idx,
         const dynamic::object& o) const;
 
     /**

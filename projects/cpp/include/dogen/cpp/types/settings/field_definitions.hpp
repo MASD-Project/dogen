@@ -120,6 +120,12 @@ struct field_definitions {
          */
         static const dynamic::field_definition&
         requires_manual_move_constructor();
+
+        /**
+         * @brief If false, type does not require any include
+         * statements.
+         */
+        static const dynamic::field_definition& inclusion_required();
     };
 };
 

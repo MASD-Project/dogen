@@ -30,6 +30,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/settings/local_settings_fwd_ser.hpp"
+#include "dogen/cpp/types/settings/local_facet_settings.hpp"
 #include "dogen/cpp/types/settings/local_formatter_settings.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
@@ -50,6 +51,7 @@ public:
 public:
     local_settings(
         const boost::optional<dogen::formatters::general_settings>& general_settings,
+        const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& facet_settings,
         const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings,
         const boost::optional<dogen::cpp::settings::type_settings>& type_settings);
 
@@ -65,6 +67,11 @@ public:
     boost::optional<dogen::formatters::general_settings>& general_settings();
     void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
     void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
+
+    const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& facet_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& facet_settings();
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>& v);
+    void facet_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings>&& v);
 
     const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings() const;
     std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings();
@@ -88,6 +95,7 @@ public:
 
 private:
     boost::optional<dogen::formatters::general_settings> general_settings_;
+    std::unordered_map<std::string, dogen::cpp::settings::local_facet_settings> facet_settings_;
     std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings> formatter_settings_;
     boost::optional<dogen::cpp::settings::type_settings> type_settings_;
 };

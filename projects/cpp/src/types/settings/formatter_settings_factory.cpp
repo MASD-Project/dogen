@@ -34,12 +34,22 @@ const std::string multiple_fields(
     "Facet has multiple fields with the same name: ");
 const std::string no_default_value(
     "Field does not have a default value: ");
+const std::string missing_expected_field("Could not find expected field: ");
 
 }
 
 namespace dogen {
 namespace cpp {
 namespace settings {
+
+void formatter_settings_factory::
+ensure_field_is_present(const bool found, const std::string& name) const {
+    if (found)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << missing_expected_field << name;
+    BOOST_THROW_EXCEPTION(building_error(missing_expected_field + name));
+}
 
 global_formatter_settings formatter_settings_factory::
 create_global_settings_for_formatter(
@@ -92,6 +102,8 @@ create_global_settings_for_formatter(
             }
         }
     }
+    ensure_field_is_present(found_enabled, enabled_trait);
+    ensure_field_is_present(found_postfix, postfix_trait);
 
     return r;
 }
@@ -139,7 +151,7 @@ create_local_settings_for_formatter(
 
 std::unordered_map<std::string, global_formatter_settings>
 formatter_settings_factory::
-make_global_formatter_settings(const std::unordered_map<std::string,
+make_global_settings(const std::unordered_map<std::string,
     std::forward_list<dynamic::field_definition>
     >& field_definitions_by_formatter_name,
     const dynamic::object& o) const {
@@ -156,7 +168,7 @@ make_global_formatter_settings(const std::unordered_map<std::string,
 
 std::unordered_map<std::string, local_formatter_settings>
 formatter_settings_factory::
-make_local_formatter_settings(const std::unordered_map<std::string,
+make_local_settings(const std::unordered_map<std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_formatter_name,
     const dynamic::object& o) const {

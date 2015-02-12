@@ -18,24 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_SETTINGS_FACET_SETTINGS_IO_HPP
-#define DOGEN_CPP_IO_SETTINGS_FACET_SETTINGS_IO_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_GLOBAL_FACET_SETTINGS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_SETTINGS_GLOBAL_FACET_SETTINGS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace settings {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::settings::global_facet_settings)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::settings::facet_settings& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::settings::global_facet_settings& v, unsigned int version);
 
-} } }
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::settings::global_facet_settings& v, unsigned int version);
+
+} }
 
 #endif

@@ -18,24 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/settings/facet_settings_io.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include "dogen/cpp/io/settings/local_facet_settings_io.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const facet_settings& v) {
+std::ostream& operator<<(std::ostream& s, const local_facet_settings& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -43,10 +34,8 @@ std::ostream& operator<<(std::ostream& s, const facet_settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::facet_settings\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"__type__\": " << "\"dogen::cpp::settings::local_facet_settings\"" << ", "
+      << "\"supported\": " << v.supported()
       << " }";
     return(s);
 }

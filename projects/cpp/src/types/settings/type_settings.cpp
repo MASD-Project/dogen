@@ -27,27 +27,32 @@ namespace settings {
 type_settings::type_settings()
     : family_type_(static_cast<dogen::cpp::formattables::family_types>(0)),
       requires_manual_default_constructor_(static_cast<bool>(0)),
-      requires_manual_move_constructor_(static_cast<bool>(0)) { }
+      requires_manual_move_constructor_(static_cast<bool>(0)),
+      inclusion_required_(static_cast<bool>(0)) { }
 
 type_settings::type_settings(
     const dogen::cpp::formattables::family_types& family_type,
     const bool requires_manual_default_constructor,
-    const bool requires_manual_move_constructor)
+    const bool requires_manual_move_constructor,
+    const bool inclusion_required)
     : family_type_(family_type),
       requires_manual_default_constructor_(requires_manual_default_constructor),
-      requires_manual_move_constructor_(requires_manual_move_constructor) { }
+      requires_manual_move_constructor_(requires_manual_move_constructor),
+      inclusion_required_(inclusion_required) { }
 
 void type_settings::swap(type_settings& other) noexcept {
     using std::swap;
     swap(family_type_, other.family_type_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
     swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
+    swap(inclusion_required_, other.inclusion_required_);
 }
 
 bool type_settings::operator==(const type_settings& rhs) const {
     return family_type_ == rhs.family_type_ &&
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
-        requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_;
+        requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
+        inclusion_required_ == rhs.inclusion_required_;
 }
 
 type_settings& type_settings::operator=(type_settings other) {
@@ -78,6 +83,14 @@ bool type_settings::requires_manual_move_constructor() const {
 
 void type_settings::requires_manual_move_constructor(const bool v) {
     requires_manual_move_constructor_ = v;
+}
+
+bool type_settings::inclusion_required() const {
+    return inclusion_required_;
+}
+
+void type_settings::inclusion_required(const bool v) {
+    inclusion_required_ = v;
 }
 
 } } }

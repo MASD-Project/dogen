@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/settings/cpp_settings_io.hpp"
-#include "dogen/cpp/io/settings/facet_settings_io.hpp"
+#include "dogen/cpp/io/settings/global_facet_settings_io.hpp"
 #include "dogen/cpp/io/settings/global_formatter_settings_io.hpp"
 #include "dogen/cpp/io/settings/global_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::facet_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::global_facet_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

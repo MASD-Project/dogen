@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/family_types_hash.hpp"
-#include "dogen/cpp/hash/settings/type_settings_hash.hpp"
+#ifndef DOGEN_CPP_HASH_SETTINGS_LOCAL_FACET_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_LOCAL_FACET_SETTINGS_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <functional>
+#include "dogen/cpp/types/settings/local_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t type_settings_hasher::hash(const type_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.family_type());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.inclusion_required());
-
-    return seed;
-}
+struct local_facet_settings_hasher {
+public:
+    static std::size_t hash(const local_facet_settings& v);
+};
 
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::settings::local_facet_settings> {
+public:
+    size_t operator()(const dogen::cpp::settings::local_facet_settings& v) const {
+        return dogen::cpp::settings::local_facet_settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

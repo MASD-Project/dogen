@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_FACET_SETTINGS_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_SETTINGS_FACET_SETTINGS_SER_HPP
+#ifndef DOGEN_CPP_HASH_SETTINGS_GLOBAL_FACET_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_GLOBAL_FACET_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include <functional>
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::settings::facet_settings)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
+namespace settings {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::settings::facet_settings& v, unsigned int version);
+struct global_facet_settings_hasher {
+public:
+    static std::size_t hash(const global_facet_settings& v);
+};
 
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::settings::facet_settings& v, unsigned int version);
+} } }
 
-} }
+namespace std {
 
+template<>
+struct hash<dogen::cpp::settings::global_facet_settings> {
+public:
+    size_t operator()(const dogen::cpp::settings::global_facet_settings& v) const {
+        return dogen::cpp::settings::global_facet_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

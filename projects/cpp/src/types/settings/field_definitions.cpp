@@ -152,6 +152,17 @@ create_type_requires_manual_move_constructor() {
     return r;
 }
 
+field_definition create_type_inclusion_required() {
+    field_definition r;
+    r.name().simple("inclusion_required");
+    r.name().qualified(traits::model_name() + ".type." + r.name().simple());
+    r.ownership_hierarchy().model_name(traits::model_name());
+    r.type(value_types::boolean);
+    r.scope(scope_types::entity);
+    r.default_value(boost::make_shared<boolean>(true));
+    return r;
+}
+
 std::forward_list<field_definition>
 create_all_field_definitions() {
     std::forward_list<field_definition> r;
@@ -170,6 +181,7 @@ create_all_field_definitions() {
     r.push_front(type::family());
     r.push_front(type::requires_manual_default_constructor());
     r.push_front(type::requires_manual_move_constructor());
+    r.push_front(type::inclusion_required());
 
     return r;
 }
@@ -241,6 +253,12 @@ field_definitions::type::requires_manual_default_constructor() {
 const dynamic::field_definition&
 field_definitions::type::requires_manual_move_constructor() {
     static auto r(create_type_requires_manual_move_constructor());
+    return r;
+}
+
+const dynamic::field_definition&
+field_definitions::type::inclusion_required() {
+    static auto r(create_type_inclusion_required());
     return r;
 }
 

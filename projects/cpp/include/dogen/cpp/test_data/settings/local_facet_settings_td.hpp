@@ -18,33 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/family_types_hash.hpp"
-#include "dogen/cpp/hash/settings/type_settings_hash.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_LOCAL_FACET_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_SETTINGS_LOCAL_FACET_SETTINGS_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include "dogen/cpp/types/settings/local_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t type_settings_hasher::hash(const type_settings&v) {
-    std::size_t seed(0);
+class local_facet_settings_generator {
+public:
+    local_facet_settings_generator();
 
-    combine(seed, v.family_type());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.inclusion_required());
+public:
+    typedef dogen::cpp::settings::local_facet_settings result_type;
 
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

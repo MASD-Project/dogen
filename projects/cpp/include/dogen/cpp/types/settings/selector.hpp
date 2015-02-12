@@ -31,7 +31,7 @@
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -69,12 +69,13 @@ public:
     const cpp_settings& select_cpp_settings() const;
 
     /**
-     * @brief Returns the facet settings for the supplied facet name.
+     * @brief Returns the global facet settings for the supplied facet
+     * name.
      *
      * @pre There must exist settings for the supplied facet name.
      */
-    const facet_settings&
-    select_facet_settings(const std::string& facet_name) const;
+    const global_facet_settings&
+    select_global_facet_settings(const std::string& facet_name) const;
 
     /**
      * @brief Returns the local formatter settings for the supplied

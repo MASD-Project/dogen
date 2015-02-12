@@ -28,10 +28,11 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
-#include <boost/property_tree/ptree.hpp>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/cpp/types/settings/facet_settings.hpp"
+#include "dogen/cpp/types/settings/local_facet_settings.hpp"
+#include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,21 +50,49 @@ public:
 
 private:
     /**
-     * @brief Creates the settings for the facet implied by the facet
-     * fields.
+     * @brief If the field has not been found, throws.
      */
-    facet_settings create_settings_for_facet(
+    void ensure_field_is_present(
+        const bool found, const std::string& name) const;
+
+private:
+    /**
+     * @brief Creates the global settings for the facet implied by the
+     * facet fields.
+     */
+    global_facet_settings create_global_settings_for_facet(
+        const std::forward_list<dynamic::field_definition>& facet_fields,
+        const dynamic::object& o) const;
+
+    /**
+     * @brief Creates the local settings for the facet implied by the
+     * facet fields.
+     */
+    boost::optional<local_facet_settings> create_local_settings_for_facet(
         const std::forward_list<dynamic::field_definition>& facet_fields,
         const dynamic::object& o) const;
 
 public:
     /**
-     * @brief Builds the facet settings from the dynamic object.
+     * @brief Builds the global facet settings from the dynamic
+     * object.
      *
      * @return Facet settings by facet name.
      */
-    std::unordered_map<std::string, facet_settings>
-    make(const std::unordered_map<
+    std::unordered_map<std::string, global_facet_settings>
+    make_global_settings(const std::unordered_map<
+        std::string,
+        std::forward_list<dynamic::field_definition>
+        >& field_definitions_by_facet_name,
+        const dynamic::object& o) const;
+
+    /**
+     * @brief Builds the local facet settings from the dynamic object.
+     *
+     * @return Facet settings by facet name.
+     */
+    std::unordered_map<std::string, local_facet_settings>
+    make_local_settings(const std::unordered_map<
         std::string,
         std::forward_list<dynamic::field_definition>
         >& field_definitions_by_facet_name,

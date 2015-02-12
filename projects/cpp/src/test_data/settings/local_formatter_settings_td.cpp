@@ -51,10 +51,8 @@ local_formatter_settings_generator::local_formatter_settings_generator() : posit
 void local_formatter_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.supported(create_bool(position + 1));
-    v.no_inclusion_required(create_bool(position + 2));
-    v.inclusion_path(create_boost_filesystem_path(position + 3));
-    v.inclusion_delimiter_type(create_dogen_cpp_formattables_inclusion_delimiter_types(position + 4));
+    v.inclusion_path(create_boost_filesystem_path(position + 1));
+    v.inclusion_delimiter_type(create_dogen_cpp_formattables_inclusion_delimiter_types(position + 2));
 }
 
 local_formatter_settings_generator::result_type

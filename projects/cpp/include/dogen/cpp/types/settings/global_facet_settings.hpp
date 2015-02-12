@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_FACET_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_FACET_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_GLOBAL_FACET_SETTINGS_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_GLOBAL_FACET_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <string>
-#include "dogen/cpp/serialization/settings/facet_settings_fwd_ser.hpp"
+#include "dogen/cpp/serialization/settings/global_facet_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,27 +36,27 @@ namespace settings {
 /**
  * @brief Settings for the individual facets.
  */
-class facet_settings final {
+class global_facet_settings final {
 public:
-    facet_settings(const facet_settings&) = default;
-    facet_settings(facet_settings&&) = default;
-    ~facet_settings() = default;
+    global_facet_settings(const global_facet_settings&) = default;
+    global_facet_settings(global_facet_settings&&) = default;
+    ~global_facet_settings() = default;
 
 public:
-    facet_settings();
+    global_facet_settings();
 
 public:
-    facet_settings(
+    global_facet_settings(
         const bool enabled,
         const std::string& directory,
         const std::string& postfix);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const facet_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const global_facet_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, facet_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, global_facet_settings& v, unsigned int version);
 
 public:
     /**
@@ -78,14 +78,14 @@ public:
     void postfix(const std::string&& v);
 
 public:
-    bool operator==(const facet_settings& rhs) const;
-    bool operator!=(const facet_settings& rhs) const {
+    bool operator==(const global_facet_settings& rhs) const;
+    bool operator!=(const global_facet_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(facet_settings& other) noexcept;
-    facet_settings& operator=(facet_settings other);
+    void swap(global_facet_settings& other) noexcept;
+    global_facet_settings& operator=(global_facet_settings other);
 
 private:
     bool enabled_;
@@ -99,8 +99,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::settings::facet_settings& lhs,
-    dogen::cpp::settings::facet_settings& rhs) {
+    dogen::cpp::settings::global_facet_settings& lhs,
+    dogen::cpp::settings::global_facet_settings& rhs) {
     lhs.swap(rhs);
 }
 
