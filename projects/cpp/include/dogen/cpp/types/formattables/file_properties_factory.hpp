@@ -44,28 +44,6 @@ namespace formattables {
  * @brief Generates the file properties for all types in model.
  */
 class file_properties_factory {
-private:
-    /**
-     * @brief Generates all of the file names for the formatters and
-     * qualified name.
-     */
-    std::pair<sml::qname, std::unordered_map<std::string, file_properties> >
-    generate(const settings::selector& s,
-        const std::forward_list<
-            std::shared_ptr<formattables::provider_interface> >& providers,
-        const sml::qname& qn) const;
-
-    /**
-     * @brief Builds file properties for all objects.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, file_properties>
-        >
-    file_properties_for_objects(const settings::selector& s,
-        const provider_selector_interface& ps,
-        const std::unordered_map<sml::qname, sml::object>& objects) const;
-
 public:
     /**
      * @brief Generate file properties for a model.

@@ -31,6 +31,7 @@
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/enumerator_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_properties_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_types_td.hpp"
@@ -62,3 +63,4 @@
 #include "dogen/cpp/test_data/settings/local_formatter_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/local_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/settings_td.hpp"
+#include "dogen/cpp/test_data/settings/type_settings_td.hpp"

@@ -30,10 +30,9 @@
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor_factory.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("cpp.content_descriptor_factory"));
 
 const std::string invalid_enabled_facets("Invalid enabled facets request: ");

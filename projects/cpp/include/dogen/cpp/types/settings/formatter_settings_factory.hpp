@@ -28,6 +28,7 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/local_formatter_settings.hpp"
@@ -60,7 +61,8 @@ private:
      * @brief Creates the local settings for the facet implied by the
      * facet fields.
      */
-    local_formatter_settings create_local_settings_for_formatter(
+    boost::optional<local_formatter_settings>
+    create_local_settings_for_formatter(
         const std::forward_list<dynamic::field_definition>& formatter_fields,
         const dynamic::object& o) const;
 

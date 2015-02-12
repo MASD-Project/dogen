@@ -31,6 +31,7 @@
 #include "dogen/cpp/io/formattables/enum_info_io.hpp"
 #include "dogen/cpp/io/formattables/enumerator_info_io.hpp"
 #include "dogen/cpp/io/formattables/exception_info_io.hpp"
+#include "dogen/cpp/io/formattables/family_types_io.hpp"
 #include "dogen/cpp/io/formattables/file_info_io.hpp"
 #include "dogen/cpp/io/formattables/file_properties_io.hpp"
 #include "dogen/cpp/io/formattables/file_types_io.hpp"
@@ -62,3 +63,4 @@
 #include "dogen/cpp/io/settings/local_formatter_settings_io.hpp"
 #include "dogen/cpp/io/settings/local_settings_io.hpp"
 #include "dogen/cpp/io/settings/settings_io.hpp"
+#include "dogen/cpp/io/settings/type_settings_io.hpp"

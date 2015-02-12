@@ -25,26 +25,32 @@ namespace cpp {
 namespace formattables {
 
 inclusion::inclusion()
-    : inclusion_delimiter_type_(static_cast<dogen::cpp::formattables::inclusion_delimiter_types>(0)) { }
+    : no_inclusion_required_(static_cast<bool>(0)),
+      inclusion_delimiter_type_(static_cast<dogen::cpp::formattables::inclusion_delimiter_types>(0)) { }
 
 inclusion::inclusion(inclusion&& rhs)
-    : inclusion_path_(std::move(rhs.inclusion_path_)),
+    : no_inclusion_required_(std::move(rhs.no_inclusion_required_)),
+      inclusion_path_(std::move(rhs.inclusion_path_)),
       inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)) { }
 
 inclusion::inclusion(
+    const bool no_inclusion_required,
     const boost::filesystem::path& inclusion_path,
     const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type)
-    : inclusion_path_(inclusion_path),
+    : no_inclusion_required_(no_inclusion_required),
+      inclusion_path_(inclusion_path),
       inclusion_delimiter_type_(inclusion_delimiter_type) { }
 
 void inclusion::swap(inclusion& other) noexcept {
     using std::swap;
+    swap(no_inclusion_required_, other.no_inclusion_required_);
     swap(inclusion_path_, other.inclusion_path_);
     swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
 }
 
 bool inclusion::operator==(const inclusion& rhs) const {
-    return inclusion_path_ == rhs.inclusion_path_ &&
+    return no_inclusion_required_ == rhs.no_inclusion_required_ &&
+        inclusion_path_ == rhs.inclusion_path_ &&
         inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_;
 }
 
@@ -52,6 +58,14 @@ inclusion& inclusion::operator=(inclusion other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool inclusion::no_inclusion_required() const {
+    return no_inclusion_required_;
+}
+
+void inclusion::no_inclusion_required(const bool v) {
+    no_inclusion_required_ = v;
 }
 
 const boost::filesystem::path& inclusion::inclusion_path() const {

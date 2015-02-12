@@ -29,6 +29,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/string.hpp>
+#include "dogen/cpp/serialization/formattables/family_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 
 
@@ -61,6 +62,7 @@ void save(Archive& ar,
     ar << make_nvp("is_time_duration", v.is_time_duration_);
     ar << make_nvp("is_pair", v.is_pair_);
     ar << make_nvp("is_ptree", v.is_ptree_);
+    ar << make_nvp("family_type", v.family_type_);
 }
 
 template<typename Archive>
@@ -89,6 +91,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_time_duration", v.is_time_duration_);
     ar >> make_nvp("is_pair", v.is_pair_);
     ar >> make_nvp("is_ptree", v.is_ptree_);
+    ar >> make_nvp("family_type", v.family_type_);
 }
 
 } }

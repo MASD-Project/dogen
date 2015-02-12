@@ -1304,7 +1304,7 @@ a second line#</value>
 
 second line
 third line with &quot;quote&quot;
-#DOGEN cpp.type.family=some_family#</value>
+#DOGEN cpp.type.family=other#</value>
 									</value>
 								</item>
 							</values>

@@ -39,6 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::formattables::inclusion& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("no_inclusion_required", v.no_inclusion_required_);
     ar << make_nvp("inclusion_path", v.inclusion_path_.generic_string());
     ar << make_nvp("inclusion_delimiter_type", v.inclusion_delimiter_type_);
 }
@@ -47,6 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::formattables::inclusion& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("no_inclusion_required", v.no_inclusion_required_);
     std::string inclusion_path_tmp;
     ar >> make_nvp("inclusion_path", inclusion_path_tmp);
     v.inclusion_path_ = inclusion_path_tmp;

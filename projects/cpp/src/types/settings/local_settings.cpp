@@ -24,21 +24,30 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
+local_settings::local_settings(local_settings&& rhs)
+    : general_settings_(std::move(rhs.general_settings_)),
+      formatter_settings_(std::move(rhs.formatter_settings_)),
+      type_settings_(std::move(rhs.type_settings_)) { }
+
 local_settings::local_settings(
-    const dogen::formatters::general_settings& general_settings,
-    const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings)
+    const boost::optional<dogen::formatters::general_settings>& general_settings,
+    const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings,
+    const boost::optional<dogen::cpp::settings::type_settings>& type_settings)
     : general_settings_(general_settings),
-      formatter_settings_(formatter_settings) { }
+      formatter_settings_(formatter_settings),
+      type_settings_(type_settings) { }
 
 void local_settings::swap(local_settings& other) noexcept {
     using std::swap;
     swap(general_settings_, other.general_settings_);
     swap(formatter_settings_, other.formatter_settings_);
+    swap(type_settings_, other.type_settings_);
 }
 
 bool local_settings::operator==(const local_settings& rhs) const {
     return general_settings_ == rhs.general_settings_ &&
-        formatter_settings_ == rhs.formatter_settings_;
+        formatter_settings_ == rhs.formatter_settings_ &&
+        type_settings_ == rhs.type_settings_;
 }
 
 local_settings& local_settings::operator=(local_settings other) {
@@ -47,19 +56,19 @@ local_settings& local_settings::operator=(local_settings other) {
     return *this;
 }
 
-const dogen::formatters::general_settings& local_settings::general_settings() const {
+const boost::optional<dogen::formatters::general_settings>& local_settings::general_settings() const {
     return general_settings_;
 }
 
-dogen::formatters::general_settings& local_settings::general_settings() {
+boost::optional<dogen::formatters::general_settings>& local_settings::general_settings() {
     return general_settings_;
 }
 
-void local_settings::general_settings(const dogen::formatters::general_settings& v) {
+void local_settings::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
     general_settings_ = v;
 }
 
-void local_settings::general_settings(const dogen::formatters::general_settings&& v) {
+void local_settings::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
     general_settings_ = std::move(v);
 }
 
@@ -77,6 +86,22 @@ void local_settings::formatter_settings(const std::unordered_map<std::string, do
 
 void local_settings::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>&& v) {
     formatter_settings_ = std::move(v);
+}
+
+const boost::optional<dogen::cpp::settings::type_settings>& local_settings::type_settings() const {
+    return type_settings_;
+}
+
+boost::optional<dogen::cpp::settings::type_settings>& local_settings::type_settings() {
+    return type_settings_;
+}
+
+void local_settings::type_settings(const boost::optional<dogen::cpp::settings::type_settings>& v) {
+    type_settings_ = v;
+}
+
+void local_settings::type_settings(const boost::optional<dogen::cpp::settings::type_settings>&& v) {
+    type_settings_ = std::move(v);
 }
 
 } } }

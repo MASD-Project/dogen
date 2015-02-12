@@ -22,7 +22,23 @@
 #include <ostream>
 #include "dogen/cpp/io/settings/local_formatter_settings_io.hpp"
 #include "dogen/cpp/io/settings/local_settings_io.hpp"
+#include "dogen/cpp/io/settings/type_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -50,6 +66,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::cpp::settings::type_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace settings {
@@ -58,7 +89,8 @@ std::ostream& operator<<(std::ostream& s, const local_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::local_settings\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
-      << "\"formatter_settings\": " << v.formatter_settings()
+      << "\"formatter_settings\": " << v.formatter_settings() << ", "
+      << "\"type_settings\": " << v.type_settings()
       << " }";
     return(s);
 }

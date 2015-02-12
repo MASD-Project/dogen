@@ -96,7 +96,7 @@ create_global_settings_for_formatter(
     return r;
 }
 
-local_formatter_settings formatter_settings_factory::
+boost::optional<local_formatter_settings> formatter_settings_factory::
 create_local_settings_for_formatter(
     const std::forward_list<dynamic::field_definition>& formatter_fields,
     const dynamic::object& o) const {
@@ -104,6 +104,7 @@ create_local_settings_for_formatter(
 
     local_formatter_settings r;
     bool found_enabled(false);
+    bool found_any_field(false);
     const auto& enabled_trait(traits::formatter::enabled());
 
     for (const auto fd : formatter_fields) {
@@ -116,9 +117,10 @@ create_local_settings_for_formatter(
             }
             found_enabled = true;
 
-            if (has_field(o, fd))
+            if (has_field(o, fd)) {
                 r.enabled(get_boolean_content(o, fd));
-            else {
+                found_any_field = true;
+            } else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
@@ -129,7 +131,10 @@ create_local_settings_for_formatter(
         }
     }
 
-    return r;
+    if (found_any_field)
+        return r;
+
+    return boost::optional<local_formatter_settings>();
 }
 
 std::unordered_map<std::string, global_formatter_settings>
@@ -161,7 +166,8 @@ make_local_formatter_settings(const std::unordered_map<std::string,
         const auto& formatter_name(pair.first);
         const auto& formatter_fields(pair.second);
         const auto s(create_local_settings_for_formatter(formatter_fields, o));
-        r.insert(std::make_pair(formatter_name, s));
+        if (s)
+            r.insert(std::make_pair(formatter_name, *s));
     }
     return r;
 }

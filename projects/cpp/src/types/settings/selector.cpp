@@ -46,8 +46,8 @@ const dogen::formatters::general_settings& selector::select_general_settings(
 
     const auto& ls(settings_.local_settings());
     const auto i(ls.find(identity));
-    if (i != ls.end())
-        return i->second.general_settings();
+    if (i != ls.end() && i->second.general_settings())
+        return *(i->second.general_settings());
 
     return settings_.global_settings().general_settings();
 }

@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-11 Wed 22:27]
+Clock summary at [2015-02-12 Thu 22:08]
 
 | Headline                                                            | Time    |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                        | *25:38* |       |      |
+| *Total time*                                                        | *29:43* |       |      |
 |---------------------------------------------------------------------+---------+-------+------|
-| Active                                                              |         | 25:38 |      |
+| Active                                                              |         | 29:43 |      |
 | STARTED Sprint and product backlog grooming                         |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                           |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                               |         |       | 0:20 |
@@ -41,7 +41,8 @@ Clock summary at [2015-02-11 Wed 22:27]
 | COMPLETED Improve building of file names                            |         |       | 0:56 |
 | COMPLETED Consider renaming config settings to options              |         |       | 1:07 |
 | COMPLETED Add absolute path support to path builder                 |         |       | 5:06 |
-| STARTED Implement include generation for class header formatter     |         |       | 0:17 |
+| COMPLETED Populate the local settings                               |         |       | 3:06 |
+| STARTED Implement include generation for class header formatter     |         |       | 1:16 |
 | STARTED Create settings expander and switcher                       |         |       | 0:30 |
 #+end:
 
@@ -607,6 +608,33 @@ handle both of these scenarios.
 - create source and include directory fields again;
 - use these if split project is false.
 
+*** COMPLETED Populate the local settings                             :story:
+    CLOSED: [2015-02-12 Thu 21:15]
+    CLOCK: [2015-02-12 Thu 19:02]--[2015-02-12 Thu 22:08] =>  3:06
+
+We need to read the dynamic object for each SML entity and use it to
+populate all the various local settings.
+
+One slight complication: for local settings, we must not take into
+account default values. This is because otherwise we would end up
+overriding the "overriden" values globally with defaulted values. We
+need some kind of way of not creating any settings if the default
+values are being used, or of knowing that the default values were used
+and so not create local settings for those. This could be achieved by
+something similar to the "found" flags - =used_default= maybe; if all
+used defaults and "do not create defaults" is true, then do not add
+settings to container.
+
+Solution: return optional of settings; if no fields are present return
+nothing.
+
+*** COMPLETED Implement type settings                                 :story:
+    CLOSED: [2015-02-12 Thu 21:15]
+
+We need a class to represent the type related settings such as
+=family=, etc. We also need an associated factory. "type" may not be
+the best of names; we need to do some name-storming here.
+
 *** STARTED Implement include generation for class header formatter   :story:
     CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
     CLOCK: [2015-02-11 Wed 22:10]--[2015-02-11 Wed 22:27] =>  0:17
@@ -634,18 +662,8 @@ Notes:
   do not know if it is a system or user path. We need to change file
   properties to take this into account. We need a include path class
   with a include type: user or system. we could then use this.
-
-*** Implement type settings                                           :story:
-
-We need a class to represent the type related settings such as
-=family=, etc. We also need an associated factory. "type" may not be
-the best of names; we need to do some name-storming here.
-
-*** Add dynamic consistency validation                                :story:
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
+- add field definition =no_inclusion_required= and populate all
+  relevant primitives.
 
 *** Create a toggable replacement with legacy and new formatters      :story:
 
@@ -662,32 +680,27 @@ This can be done in knit's cpp backend:
 We just need to look at the map and update any values with the files
 from the new formatters.
 
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
 *** Create a list of valid values for field definitions               :story:
 
 In addition to default values, it should be possible to supply a list
 of possible values for a field definition - a domain. When processing
 the values we can then check that it is part of the domain and if not
-throw. This is required for the include types. At present this is only
-applicable to string fields.
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
 
-*** Populate the local settings                                       :story:
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
 
-We need to read the dynamic object for each SML entity and use it to
-populate all the various local settings.
+*** Add dynamic consistency validation                                :story:
 
-One slight complication: for local settings, we must not take into
-account default values. This is because otherwise we would end up
-overriding the "overriden" values globally with defaulted values. We
-need some kind of way of not creating any settings if the default
-values are being used, or of knowing that the default values were used
-and so not create local settings for those. This could be achieved by
-something similar to the "found" flags - =used_default= maybe; if all
-used defaults and "do not create defaults" is true, then do not add
-settings to container.
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
 
 *** STARTED Create settings expander and switcher                     :story:
     CLOCK: [2015-02-07 Sat 15:15]--[2015-02-07 Sat 15:45] =>  0:30
@@ -711,6 +724,22 @@ are enabled and disabled. This is due to:
 This could be done by the switcher. We should first expand the
 settings then switch them.
 
+In some ways we can think of the switcher as a dependency
+manager. This may inform the naming of this class.
+
+One thing to take into account is the different kinds of behaviours
+regarding enabling facets and formatters:
+
+- for serialisation we want it to be on and if its on, all types
+  should be serialisable.
+- for hashing we want it to be off (most likely) and if the user makes
+  use of a hashing container we want the type that is the key of the
+  container to have hashing on; no other types should have it on. We
+  also may want the user to manually switch hashing on for a type.
+- for forward declarations: if another formatter requires it for a
+  type, we want it on; if no one requires it we want it off. The user
+  may want to manually switch it on for a type.
+
 *** Create a base formatter                                           :story:
 
 We could implement most of the formatter interface in a common base
@@ -731,6 +760,13 @@ here. Name: =cpp_base_formatter=?
   throw if any supplied.
 - we need multiple opaque settings (more than one formatter will need
   them).
+- move provider and provider selector to top-level namespace and add a
+  provide opaque settings method to it.
+
+*** Read =generate_preamble= from dynamic object                      :story:
+
+We need to generate the field definitions and update the general
+settings factory.
 
 *** Implement class header formatter                                  :story:
 

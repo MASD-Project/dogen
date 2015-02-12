@@ -38,6 +38,7 @@ std::ostream& operator<<(std::ostream& s, const local_formatter_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::local_formatter_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"supported\": " << v.supported() << ", "
+      << "\"no_inclusion_required\": " << v.no_inclusion_required() << ", "
       << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
       << "\"inclusion_delimiter_type\": " << v.inclusion_delimiter_type()
       << " }";

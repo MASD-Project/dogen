@@ -31,6 +31,7 @@
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enumerator_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/family_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_properties_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
@@ -63,3 +64,4 @@
 #include "dogen/cpp/serialization/settings/local_formatter_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/local_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/type_settings_ser.hpp"

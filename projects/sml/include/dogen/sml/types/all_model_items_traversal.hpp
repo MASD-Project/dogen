@@ -57,7 +57,7 @@ void all_model_items_traversal(const model& m, const TraversalVisitor& v) {
 }
 
 template<typename TraversalVisitor> inline
-void all_model_items_traversal(model& m, TraversalVisitor& v) {
+void all_model_items_traversal(const model& m, TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 

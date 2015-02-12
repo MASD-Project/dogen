@@ -60,6 +60,7 @@ public:
 
 public:
     inclusion(
+        const bool no_inclusion_required,
         const boost::filesystem::path& inclusion_path,
         const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type);
 
@@ -71,6 +72,14 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion& v, unsigned int version);
 
 public:
+    /**
+     * @brief If true, this type does not require an include.
+     */
+    /**@{*/
+    bool no_inclusion_required() const;
+    void no_inclusion_required(const bool v);
+    /**@}*/
+
     /**
      * @brief Path to use in inclusion statement.
      *
@@ -102,6 +111,7 @@ public:
     inclusion& operator=(inclusion other);
 
 private:
+    bool no_inclusion_required_;
     boost::filesystem::path inclusion_path_;
     dogen::cpp::formattables::inclusion_delimiter_types inclusion_delimiter_type_;
 };

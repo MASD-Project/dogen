@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/content_extensions.hpp"
@@ -51,7 +52,10 @@ namespace formatters {
 
 general_settings_factory::general_settings_factory(
     const std::forward_list<boost::filesystem::path>& data_files_dirs) :
-    data_files_directories_(data_files_dirs) { }
+    data_files_directories_(data_files_dirs) {
+    BOOST_LOG_SEV(lg, debug) << "Initialised with data files directories: "
+                             << data_files_dirs;
+}
 
 void general_settings_factory::
 throw_missing_item(const std::string& msg, const std::string& n) const {
@@ -131,7 +135,10 @@ create_directory_list(const std::string& for_whom) const {
 }
 
 void general_settings_factory::hydrate_modelines() {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating modelines.";
     const auto dirs(create_directory_list(modeline_groups_dir));
+    BOOST_LOG_SEV(lg, debug) << "Modelines directories: " << dirs;
+
     hydration_workflow<modeline_group_hydrator> hw;
     modeline_groups_ = hw.hydrate(dirs);
 
@@ -140,15 +147,18 @@ void general_settings_factory::hydrate_modelines() {
         return;
     }
 
-    BOOST_LOG_SEV(lg, info) << "Loaded modeline groups. Found: "
-                            << modeline_groups_.size();
+    BOOST_LOG_SEV(lg, debug) << "Hydrated modeline groups. Found: "
+                             << modeline_groups_.size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << modeline_groups_;
 }
 
 void general_settings_factory::hydrate_licences() {
+    BOOST_LOG_SEV(lg, debug) << "Hydrating licences.";
     std::list<std::string> copyright_notices;
     licence_hydrator lh(copyright_notices);
     const auto dirs(create_directory_list(licence_dir));
+
+    BOOST_LOG_SEV(lg, debug) << "Licence directories: " << dirs;
     hydration_workflow<licence_hydrator> hw(lh);
     licences_ = hw.hydrate(dirs);
 
@@ -157,7 +167,8 @@ void general_settings_factory::hydrate_licences() {
         return;
     }
 
-    BOOST_LOG_SEV(lg, info) << "Loaded licences. Found: " << licences_.size();
+    BOOST_LOG_SEV(lg, debug) << "Hydrating licences. Found: "
+                             << licences_.size();
     BOOST_LOG_SEV(lg, debug) << "contents: " << licences_;
 }
 
@@ -166,8 +177,12 @@ bool general_settings_factory::empty() const {
 }
 
 void general_settings_factory::load_reference_data() {
+    BOOST_LOG_SEV(lg, debug) << "Loading reference data.";
+
     hydrate_modelines();
     hydrate_licences();
+
+    BOOST_LOG_SEV(lg, debug) << "Finished loading reference data.";
 }
 
 general_settings
@@ -177,6 +192,20 @@ general_settings_factory::make(const dynamic::object& o) const {
     const auto marker(extract_marker(o));
     const annotation a(modeline, licence, marker);
 
+    const bool generate_preamble(false); // FIXME: read from dynamic object
+    return general_settings(generate_preamble, a);
+}
+
+boost::optional<general_settings> general_settings_factory::
+make_only_if_overriden(const dynamic::object& o) const {
+    const auto modeline(extract_modeline(o));
+    const auto licence(extract_licence(o));
+    const auto marker(extract_marker(o));
+
+    if (!modeline && !licence && marker.empty())
+        return boost::optional<general_settings>();
+
+    const annotation a(modeline, licence, marker);
     const bool generate_preamble(false); // FIXME: read from dynamic object
     return general_settings(generate_preamble, a);
 }

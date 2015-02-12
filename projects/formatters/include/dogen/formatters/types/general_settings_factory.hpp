@@ -120,8 +120,18 @@ public:
      */
     general_settings make(const dynamic::object& o) const;
 
+    /**
+     * @brief Generates general settings from the dynamic object, only
+     * if at least one property has been overriden. If none have been
+     * overriden, does not generate the settings.
+     *
+     * @pre load reference data must have been called.
+     */
+    boost::optional<general_settings>
+    make_only_if_overriden(const dynamic::object& o) const;
+
 private:
-    const std::forward_list<boost::filesystem::path>& data_files_directories_;
+    std::forward_list<boost::filesystem::path> data_files_directories_;
     std::unordered_map<std::string, modeline_group> modeline_groups_;
     std::unordered_map<std::string, licence> licences_;
 };

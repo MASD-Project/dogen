@@ -45,6 +45,7 @@ namespace formattables {
 std::size_t inclusion_hasher::hash(const inclusion&v) {
     std::size_t seed(0);
 
+    combine(seed, v.no_inclusion_required());
     combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
     combine(seed, v.inclusion_delimiter_type());
 

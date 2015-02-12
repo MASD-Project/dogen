@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/formattables/family_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/nested_type_info_hash.hpp"
 
 namespace {
@@ -76,6 +77,7 @@ std::size_t nested_type_info_hasher::hash(const nested_type_info&v) {
     combine(seed, v.is_time_duration());
     combine(seed, v.is_pair());
     combine(seed, v.is_ptree());
+    combine(seed, v.family_type());
 
     return seed;
 }

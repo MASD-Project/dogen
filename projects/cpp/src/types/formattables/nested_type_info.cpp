@@ -40,7 +40,8 @@ nested_type_info::nested_type_info()
       is_ptime_(static_cast<bool>(0)),
       is_time_duration_(static_cast<bool>(0)),
       is_pair_(static_cast<bool>(0)),
-      is_ptree_(static_cast<bool>(0)) { }
+      is_ptree_(static_cast<bool>(0)),
+      family_type_(static_cast<dogen::cpp::formattables::family_types>(0)) { }
 
 nested_type_info::nested_type_info(
     const std::string& name,
@@ -64,7 +65,8 @@ nested_type_info::nested_type_info(
     const bool is_ptime,
     const bool is_time_duration,
     const bool is_pair,
-    const bool is_ptree)
+    const bool is_ptree,
+    const dogen::cpp::formattables::family_types& family_type)
     : name_(name),
       identifiable_name_(identifiable_name),
       complete_name_(complete_name),
@@ -86,7 +88,8 @@ nested_type_info::nested_type_info(
       is_ptime_(is_ptime),
       is_time_duration_(is_time_duration),
       is_pair_(is_pair),
-      is_ptree_(is_ptree) { }
+      is_ptree_(is_ptree),
+      family_type_(family_type) { }
 
 void nested_type_info::swap(nested_type_info& other) noexcept {
     using std::swap;
@@ -112,6 +115,7 @@ void nested_type_info::swap(nested_type_info& other) noexcept {
     swap(is_time_duration_, other.is_time_duration_);
     swap(is_pair_, other.is_pair_);
     swap(is_ptree_, other.is_ptree_);
+    swap(family_type_, other.family_type_);
 }
 
 bool nested_type_info::operator==(const nested_type_info& rhs) const {
@@ -136,7 +140,8 @@ bool nested_type_info::operator==(const nested_type_info& rhs) const {
         is_ptime_ == rhs.is_ptime_ &&
         is_time_duration_ == rhs.is_time_duration_ &&
         is_pair_ == rhs.is_pair_ &&
-        is_ptree_ == rhs.is_ptree_;
+        is_ptree_ == rhs.is_ptree_ &&
+        family_type_ == rhs.family_type_;
 }
 
 nested_type_info& nested_type_info::operator=(nested_type_info other) {
@@ -367,6 +372,14 @@ bool nested_type_info::is_ptree() const {
 
 void nested_type_info::is_ptree(const bool v) {
     is_ptree_ = v;
+}
+
+dogen::cpp::formattables::family_types nested_type_info::family_type() const {
+    return family_type_;
+}
+
+void nested_type_info::family_type(const dogen::cpp::formattables::family_types& v) {
+    family_type_ = v;
 }
 
 } } }

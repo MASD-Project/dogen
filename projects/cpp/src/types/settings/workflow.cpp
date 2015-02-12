@@ -22,11 +22,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/io/settings/settings_io.hpp"
 #include "dogen/cpp/types/settings/cpp_settings_factory.hpp"
 #include "dogen/cpp/types/settings/facet_settings_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
+#include "dogen/cpp/types/settings/local_settings_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 
@@ -45,6 +45,12 @@ const std::string multiple_model_modules(
 namespace dogen {
 namespace cpp {
 namespace settings {
+
+workflow::workflow() : general_settings_factory_(
+    std::forward_list<boost::filesystem::path> {
+        dogen::utility::filesystem::data_files_directory() }) {
+    general_settings_factory_.load_reference_data();
+}
 
 sml::module workflow::obtain_model_module(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's module.";
@@ -78,26 +84,19 @@ sml::module workflow::obtain_model_module(const sml::model& m) const {
 
 dogen::formatters::general_settings
 workflow::create_general_settings(const dynamic::object& o) const {
-    using namespace dogen::utility::filesystem;
-    const std::forward_list<boost::filesystem::path>
-        dirs({data_files_directory()});
-
-    using dogen::formatters::general_settings_factory;
-    general_settings_factory f(dirs);
-    f.load_reference_data();
-    return f.make(o);
+    return general_settings_factory_.make(o);
 }
 
 cpp_settings workflow::create_cpp_settings(const config::cpp_options& co,
     const dynamic::object& o) const {
-    cpp_settings_factory f;
+    const auto f = cpp_settings_factory();
     return f.make(co, o);
 }
 
 std::unordered_map<std::string, facet_settings> workflow::
 create_facet_settings(const dynamic::indexer& idx,
     const dynamic::object& o) const {
-    facet_settings_factory f;
+    const auto f = facet_settings_factory();
     return f.make(idx.field_definitions_by_facet_name(), o);
 }
 
@@ -105,16 +104,8 @@ std::unordered_map<std::string, global_formatter_settings> workflow::
 create_global_formatter_settings(const dynamic::indexer& idx,
     const dynamic::object& o) const {
     const auto& fd(idx.field_definitions_by_formatter_name());
-    formatter_settings_factory f;
+    const auto f = formatter_settings_factory();
     return f.make_global_formatter_settings(fd, o);
-}
-
-std::unordered_map<std::string, local_formatter_settings> workflow::
-create_local_formatter_settings(const dynamic::indexer& idx,
-    const dynamic::object& o) const {
-    const auto& fd(idx.field_definitions_by_formatter_name());
-    formatter_settings_factory f;
-    return f.make_local_formatter_settings(fd, o);
 }
 
 global_settings workflow::create_global_settings_activity(
@@ -131,17 +122,11 @@ global_settings workflow::create_global_settings_activity(
     return r;
 }
 
-local_settings workflow::create_local_settings(const dynamic::indexer& /*idx*/,
-    const sml::qname& /*qn*/, const dynamic::object& /*o*/) const {
-    local_settings r;
-    return r;
-}
-
 std::unordered_map<std::string, local_settings>
-workflow::create_local_settings_activity(const dynamic::indexer& /*idx*/,
-    const sml::model& /*m*/) const {
-    std::unordered_map<std::string, local_settings> r;
-    return r;
+workflow::create_local_settings_activity(const dynamic::indexer& idx,
+    const sml::model& m) const {
+    const auto f = local_settings_factory();
+    return f.make(general_settings_factory_, idx, m);
 }
 
 settings workflow::execute(const config::cpp_options& co,

@@ -124,6 +124,7 @@ field_definition create_type_family() {
     r.ownership_hierarchy().model_name(traits::model_name());
     r.type(value_types::text);
     r.scope(scope_types::entity);
+    r.default_value(boost::make_shared<text>("other"));
     return r;
 }
 

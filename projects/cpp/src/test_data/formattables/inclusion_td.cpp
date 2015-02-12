@@ -24,6 +24,10 @@
 
 namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 boost::filesystem::path
 create_boost_filesystem_path(const unsigned int position) {
     std::ostringstream s;
@@ -46,8 +50,9 @@ inclusion_generator::inclusion_generator() : position_(0) { }
 
 void inclusion_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_path(create_boost_filesystem_path(position + 0));
-    v.inclusion_delimiter_type(create_dogen_cpp_formattables_inclusion_delimiter_types(position + 1));
+    v.no_inclusion_required(create_bool(position + 0));
+    v.inclusion_path(create_boost_filesystem_path(position + 1));
+    v.inclusion_delimiter_type(create_dogen_cpp_formattables_inclusion_delimiter_types(position + 2));
 }
 
 inclusion_generator::result_type

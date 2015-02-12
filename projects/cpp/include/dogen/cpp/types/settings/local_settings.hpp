@@ -26,10 +26,12 @@
 #endif
 
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <string>
 #include <unordered_map>
 #include "dogen/cpp/serialization/settings/local_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/settings/local_formatter_settings.hpp"
+#include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 
 namespace dogen {
@@ -40,13 +42,16 @@ class local_settings final {
 public:
     local_settings() = default;
     local_settings(const local_settings&) = default;
-    local_settings(local_settings&&) = default;
     ~local_settings() = default;
 
 public:
+    local_settings(local_settings&& rhs);
+
+public:
     local_settings(
-        const dogen::formatters::general_settings& general_settings,
-        const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings);
+        const boost::optional<dogen::formatters::general_settings>& general_settings,
+        const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings,
+        const boost::optional<dogen::cpp::settings::type_settings>& type_settings);
 
 private:
     template<typename Archive>
@@ -56,15 +61,20 @@ private:
     friend void boost::serialization::load(Archive& ar, local_settings& v, unsigned int version);
 
 public:
-    const dogen::formatters::general_settings& general_settings() const;
-    dogen::formatters::general_settings& general_settings();
-    void general_settings(const dogen::formatters::general_settings& v);
-    void general_settings(const dogen::formatters::general_settings&& v);
+    const boost::optional<dogen::formatters::general_settings>& general_settings() const;
+    boost::optional<dogen::formatters::general_settings>& general_settings();
+    void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
+    void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
 
     const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings() const;
     std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& formatter_settings();
     void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>& v);
     void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings>&& v);
+
+    const boost::optional<dogen::cpp::settings::type_settings>& type_settings() const;
+    boost::optional<dogen::cpp::settings::type_settings>& type_settings();
+    void type_settings(const boost::optional<dogen::cpp::settings::type_settings>& v);
+    void type_settings(const boost::optional<dogen::cpp::settings::type_settings>&& v);
 
 public:
     bool operator==(const local_settings& rhs) const;
@@ -77,8 +87,9 @@ public:
     local_settings& operator=(local_settings other);
 
 private:
-    dogen::formatters::general_settings general_settings_;
+    boost::optional<dogen::formatters::general_settings> general_settings_;
     std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings> formatter_settings_;
+    boost::optional<dogen::cpp::settings::type_settings> type_settings_;
 };
 
 } } }

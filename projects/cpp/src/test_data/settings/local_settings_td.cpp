@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/cpp/test_data/settings/local_formatter_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/local_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/type_settings_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 
 namespace {
@@ -28,6 +29,13 @@ namespace {
 dogen::formatters::general_settings
 create_dogen_formatters_general_settings(const unsigned int position) {
     return dogen::formatters::general_settings_generator::create(position);
+}
+
+boost::optional<dogen::formatters::general_settings>
+create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
+    boost::optional<dogen::formatters::general_settings> r(
+        create_dogen_formatters_general_settings(position));
+    return r;
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -49,6 +57,18 @@ std::unordered_map<std::string, dogen::cpp::settings::local_formatter_settings> 
     return r;
 }
 
+dogen::cpp::settings::type_settings
+create_dogen_cpp_settings_type_settings(const unsigned int position) {
+    return dogen::cpp::settings::type_settings_generator::create(position);
+}
+
+boost::optional<dogen::cpp::settings::type_settings>
+create_boost_optional_dogen_cpp_settings_type_settings(unsigned int position) {
+    boost::optional<dogen::cpp::settings::type_settings> r(
+        create_dogen_cpp_settings_type_settings(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -59,8 +79,9 @@ local_settings_generator::local_settings_generator() : position_(0) { }
 
 void local_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.general_settings(create_dogen_formatters_general_settings(position + 0));
+    v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 0));
     v.formatter_settings(create_std_unordered_map_std_string_dogen_cpp_settings_local_formatter_settings(position + 1));
+    v.type_settings(create_boost_optional_dogen_cpp_settings_type_settings(position + 2));
 }
 
 local_settings_generator::result_type

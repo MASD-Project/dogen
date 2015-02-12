@@ -49,6 +49,7 @@ public:
     local_formatter_settings(
         const bool enabled,
         const bool supported,
+        const bool no_inclusion_required,
         const boost::filesystem::path& inclusion_path,
         const dogen::cpp::formattables::inclusion_delimiter_types& inclusion_delimiter_type);
 
@@ -65,6 +66,14 @@ public:
 
     bool supported() const;
     void supported(const bool v);
+
+    /**
+     * @brief If true, type does not require any include statements.
+     */
+    /**@{*/
+    bool no_inclusion_required() const;
+    void no_inclusion_required(const bool v);
+    /**@}*/
 
     const boost::filesystem::path& inclusion_path() const;
     boost::filesystem::path& inclusion_path();
@@ -87,6 +96,7 @@ public:
 private:
     bool enabled_;
     bool supported_;
+    bool no_inclusion_required_;
     boost::filesystem::path inclusion_path_;
     dogen::cpp::formattables::inclusion_delimiter_types inclusion_delimiter_type_;
 };

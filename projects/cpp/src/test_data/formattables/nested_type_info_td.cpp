@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
 
 namespace {
@@ -54,6 +55,11 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
+dogen::cpp::formattables::family_types
+create_dogen_cpp_formattables_family_types(const unsigned int position) {
+    return dogen::cpp::formattables::family_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -86,6 +92,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_time_duration(create_bool(position + 19));
     v.is_pair(create_bool(position + 20));
     v.is_ptree(create_bool(position + 21));
+    v.family_type(create_dogen_cpp_formattables_family_types(position + 22));
 }
 
 nested_type_info_generator::result_type

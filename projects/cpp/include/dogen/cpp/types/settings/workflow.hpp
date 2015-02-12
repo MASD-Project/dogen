@@ -28,7 +28,6 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
-#include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/dynamic/types/indexer.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
@@ -41,6 +40,7 @@
 #include "dogen/cpp/types/settings/global_settings.hpp"
 #include "dogen/cpp/types/settings/local_formatter_settings.hpp"
 #include "dogen/cpp/types/settings/global_formatter_settings.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 
 namespace dogen {
@@ -51,6 +51,9 @@ namespace settings {
  * @brief Orchestrator for the settings workflow.
  */
 class workflow {
+public:
+    workflow();
+
 private:
     /**
      * @brief Returns the model's module.
@@ -86,19 +89,6 @@ private:
     create_global_formatter_settings(const dynamic::indexer& idx,
         const dynamic::object& o) const;
 
-    /**
-     * @brief Create the local formatter settings.
-     */
-    std::unordered_map<std::string, local_formatter_settings>
-    create_local_formatter_settings(const dynamic::indexer& idx,
-        const dynamic::object& o) const;
-
-    /**
-     * @brief Creates the local settings for the object.
-     */
-    local_settings create_local_settings(const dynamic::indexer& idx,
-        const sml::qname& qn, const dynamic::object& o) const;
-
 private:
     /**
      * @brief Creates the global settings.
@@ -122,6 +112,9 @@ public:
     settings execute(const config::cpp_options& co,
         const std::forward_list<dynamic::field_definition>& fds,
         const sml::model& m) const;
+
+private:
+    dogen::formatters::general_settings_factory general_settings_factory_;
 };
 
 } } }

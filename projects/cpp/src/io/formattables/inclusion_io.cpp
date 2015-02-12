@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/inclusion_delimiter_types_io.hpp"
 #include "dogen/cpp/io/formattables/inclusion_io.hpp"
@@ -27,8 +28,15 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s, const inclusion& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::inclusion\"" << ", "
+      << "\"no_inclusion_required\": " << v.no_inclusion_required() << ", "
       << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
       << "\"inclusion_delimiter_type\": " << v.inclusion_delimiter_type()
       << " }";
