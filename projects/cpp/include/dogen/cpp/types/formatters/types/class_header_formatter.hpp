@@ -66,12 +66,12 @@ public:
         const sml::qname& qn) const override;
 
     std::list<formattables::inclusion> provide_inclusion_dependencies(
-        const settings::selector& s,
+        const settings::selector& s, const sml::model& m,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, formattables::file_properties>
             >& file_properties_by_formatter_name,
-        const sml::model& m) const override;
+        const sml::qname& qn) const override;
 
 public:
     file_types file_type() const override;

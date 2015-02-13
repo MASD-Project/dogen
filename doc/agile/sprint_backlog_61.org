@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-12 Thu 23:32]
+Clock summary at [2015-02-13 Fri 23:52]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *31:06* |       |      |
+| *Total time*                                                           | *33:48* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                 |         | 31:06 |      |
+| Active                                                                 |         | 33:48 |      |
 | STARTED Sprint and product backlog grooming                            |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                              |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                                  |         |       | 0:20 |
@@ -43,7 +43,7 @@ Clock summary at [2015-02-12 Thu 23:32]
 | COMPLETED Add absolute path support to path builder                    |         |       | 5:06 |
 | COMPLETED Populate the local settings                                  |         |       | 3:06 |
 | COMPLETED Create a toggable replacement with legacy and new formatters |         |       | 0:28 |
-| STARTED Implement include generation for class header formatter        |         |       | 2:11 |
+| STARTED Implement include generation for class header formatter        |         |       | 4:53 |
 | STARTED Create settings expander and switcher                          |         |       | 0:30 |
 #+end:
 
@@ -654,6 +654,7 @@ We just need to look at the map and update any values with the files
 from the new formatters.
 
 *** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-13 Fri 21:53]--[2015-02-13 Fri 23:52] =>  1:59
     CLOCK: [2015-02-13 Fri 21:10]--[2015-02-13 Fri 21:53] =>  0:43
     CLOCK: [2015-02-12 Thu 22:08]--[2015-02-12 Thu 23:03] =>  0:55
     CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
@@ -684,6 +685,20 @@ Notes:
   with a include type: user or system. we could then use this.
 - add field definition =no_inclusion_required= and populate all
   relevant primitives.
+
+We need to add the notion of aspects. This is because a lot of things
+we have dealt with individually are really all related to aspects. An
+aspect is a part of a formatter that can be enabled or disabled. For
+example:
+
+- manual move constructor
+- manual default constructor
+- inserter operator
+- swap function
+- etc.
+
+We could simply create aspect settings; local and global formatters
+would have a map of =aspect_settings= against an =aspect_name=.
 
 *** Create a list of valid values for field definitions               :story:
 

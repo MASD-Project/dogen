@@ -73,11 +73,12 @@ public:
      */
     virtual std::list<formattables::inclusion>
     provide_inclusion_dependencies(const settings::selector& s,
+        const sml::model& m,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, file_properties>
             >& file_properties_by_formatter_name,
-        const sml::model& m) const = 0;
+        const sml::qname& qn) const = 0;
 };
 
 } } }

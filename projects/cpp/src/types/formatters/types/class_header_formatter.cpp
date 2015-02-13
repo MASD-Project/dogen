@@ -22,9 +22,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/path_factory.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/path_ingredients_factory.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
@@ -33,9 +36,9 @@ namespace {
 
 const std::string include_path_for_formatter_not_found(
     "Include path for formatter not found. Formatter: ");
-
 const std::string file_path_for_formatter_not_found(
     "File path for formatter not found. Formatter: ");
+const std::string qname_not_found("Could not find qualified name in model: ");
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
@@ -113,13 +116,39 @@ class_header_formatter::provide_file_properties(const settings::selector& s,
 }
 
 std::list<formattables::inclusion> class_header_formatter::
-provide_inclusion_dependencies(const settings::selector& /*s*/,
+provide_inclusion_dependencies(const settings::selector& s,
+    const sml::model& m,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties>
         >& /*file_properties_by_formatter_name*/,
-    const sml::model& /*m*/) const {
+    const sml::qname& qn) const {
     std::list<formattables::inclusion>  r;
+
+    // algorithm: domain headers need it for the swap function.
+    // const auto ts(s.select_type_settings(types_fn));
+    // if (
+
+    const auto i(m.objects().find(qn));
+    if (i == m.objects().end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
+        BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
+    }
+
+    const auto io_fn(formatters::io::traits::facet_name());
+    const auto iofs(s.select_global_facet_settings(io_fn));
+    const bool io_enabled(iofs.enabled());
+
+    const auto types_fn(formatters::types::traits::facet_name());
+    const auto tfs(s.select_global_facet_settings(types_fn));
+    const bool use_integrated_io(
+        tfs.integrated_facets().find(io_fn) != tfs.integrated_facets().end());
+
+    if (io_enabled && use_integrated_io)
+        r.push_back(inclusion_constants::std::iosfwd());
+
+    // const auto& o(pair.second);
     return r;
 }
 
