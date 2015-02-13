@@ -952,14 +952,47 @@ lot of the Domain Driven Design ideas, we are also morphing them
 considerably. Perhaps a more apt name would be SDML - the Simplified
 Domain Modeling Language?
 
-Or instead We could follow the compiler theme and call it the =ir= or
+Or instead we could follow the compiler theme and call it the =ir= or
 intermediate representation, or =im= for intermediate model.
 
 After more thinking on this, and since we now have a =backend= and a
 =frontend=, it is obvious that SML is the =middleend=. However, this
 is not a very good name for the model as we also do some front-end-y
 things (such as the JSON implementation). =ir= and =im= still seem
-like the more likely candidates.
+like the more likely candidates. Actually, JSON is not a front-end; it
+is a direct representation of the middle-end into a file. The same
+could also be done in XML. It only becomes a front-end if there is an
+intermediate representation (such as the =dia= model) that needs to be
+transformed into SML.
+
+*** Consider renaming formatters                                      :story:
+
+After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
+seems it provides a good approach for formatters. If one thinks of the
+file as the view, then the formatters are the presenters and the model
+representing all presentation logic (e.g. =cpp=) is the presentation
+model. We could:
+
+- create a top-level folder called =presentation=;
+- rename =formatters= to =core= and move it to =presentation=;
+- move =cpp= to =presentation=;
+- in =cpp=:
+  - rename =formattables= to =presentables=;
+  - rename =formatters= to =presenters=;
+- in this light, =backend= is really the "meta-workflow" for all
+  possible presentations. It should really live under presentation. It
+  would make more sense to merge it with =core=, if it were not that
+  core contains all sorts of loose bits that are useful only in the
+  guts of presentation. We could call it =orchestration= or some such
+  name. Or we could leave it as =presentation::backends=.
+- move =file= to =backends=. We don't really want external clients to
+  have to know about =core= just to obtain a single type. Also,
+  backends shouldn't really have any dependencies.
+- grep for formatting, formattables, formatter, format, etc. and
+  ensure all usages have been replaced with present*.
+
+We should wait until the "great refactoring" is done so that we do not
+have to rename the legacy models too.
 
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
@@ -2943,7 +2976,8 @@ According to these rules we have:
 : s << "}" << std::endl;
 
 Indentation will be kept as simple as possible, with the expectation
-that there will be a further pass using clang format.
+that there will be a further pass using clang format. Note that using
+clang to manage indentation will make things a lot slower.
 
 Now of course there is the question of where to put this code in such
 a way that it compiles. What one then needs is a formatter template:
@@ -3376,7 +3410,8 @@ possible:
   writing. In addition, we should also have some dynamic extensions to
   determine which files require merging. The dynamic extension could
   be populated automatically (e.g. grep for the manual attribute) or
-  manually.
+  manually. Note that using clang to do merging will make things a lot
+  slower.
 
 *Random Thoughts*
 
