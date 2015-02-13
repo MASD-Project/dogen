@@ -55,12 +55,14 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
     const dynamic::object& o) const {
 
     global_facet_settings r;
-    bool found_enabled(false), found_directory(false), found_postfix(false);
+    bool found_enabled(false), found_directory(false), found_postfix(false),
+        found_integrated_facet(false);
     const auto& enabled_trait(traits::facet::enabled());
     const auto& directory_trait(traits::facet::directory());
     const auto& postfix_trait(traits::facet::postfix());
+    const auto& integrated_facet_trait(traits::facet::integrated_facet());
 
-    for (const auto fd : facet_fields) {
+    for (const auto& fd : facet_fields) {
         using namespace dynamic;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
@@ -116,8 +118,20 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
                 }
                 r.postfix(get_text_content(*fd.default_value()));
             }
+        } else if (fd.name().simple() == integrated_facet_trait) {
+            if (found_integrated_facet) {
+                const auto& n(fd.name().qualified());
+                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+            }
+            found_integrated_facet = true;
+            if (has_field(o, fd)) {
+                for (const auto s : get_text_collection_content(o, fd))
+                    r.integrated_facets().insert(s);
+            }
         }
     }
+
     ensure_field_is_present(found_enabled, enabled_trait);
     ensure_field_is_present(found_directory, directory_trait);
     ensure_field_is_present(found_postfix, postfix_trait);

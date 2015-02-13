@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <set>
 #include <string>
 #include "dogen/cpp/serialization/settings/global_facet_settings_fwd_ser.hpp"
 
@@ -49,7 +50,8 @@ public:
     global_facet_settings(
         const bool enabled,
         const std::string& directory,
-        const std::string& postfix);
+        const std::string& postfix,
+        const std::set<std::string>& integrated_facets);
 
 private:
     template<typename Archive>
@@ -77,6 +79,11 @@ public:
     void postfix(const std::string& v);
     void postfix(const std::string&& v);
 
+    const std::set<std::string>& integrated_facets() const;
+    std::set<std::string>& integrated_facets();
+    void integrated_facets(const std::set<std::string>& v);
+    void integrated_facets(const std::set<std::string>&& v);
+
 public:
     bool operator==(const global_facet_settings& rhs) const;
     bool operator!=(const global_facet_settings& rhs) const {
@@ -91,6 +98,7 @@ private:
     bool enabled_;
     std::string directory_;
     std::string postfix_;
+    std::set<std::string> integrated_facets_;
 };
 
 } } }

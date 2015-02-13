@@ -654,6 +654,7 @@ We just need to look at the map and update any values with the files
 from the new formatters.
 
 *** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-13 Fri 21:10]--[2015-02-13 Fri 21:53] =>  0:43
     CLOCK: [2015-02-12 Thu 22:08]--[2015-02-12 Thu 23:03] =>  0:55
     CLOCK: [2015-02-11 Wed 22:08]--[2015-02-11 Wed 23:07] =>  0:59
     CLOCK: [2015-02-11 Wed 22:10]--[2015-02-11 Wed 22:27] =>  0:17
@@ -853,6 +854,19 @@ reused by the more specialised formatters. However, now that we have
 many (many) settings classes, general settings may not be the most
 appropriate name. We need to look a bit more deeply into the role of
 this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
 
 *** Populate the "new" =class_info= properties                        :story:
 

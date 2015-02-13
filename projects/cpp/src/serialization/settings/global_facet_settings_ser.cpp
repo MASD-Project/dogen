@@ -27,6 +27,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/set.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/global_facet_settings_ser.hpp"
 
@@ -41,6 +42,7 @@ void save(Archive& ar,
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("directory", v.directory_);
     ar << make_nvp("postfix", v.postfix_);
+    ar << make_nvp("integrated_facets", v.integrated_facets_);
 }
 
 template<typename Archive>
@@ -50,6 +52,7 @@ void load(Archive& ar,
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("directory", v.directory_);
     ar >> make_nvp("postfix", v.postfix_);
+    ar >> make_nvp("integrated_facets", v.integrated_facets_);
 }
 
 } }

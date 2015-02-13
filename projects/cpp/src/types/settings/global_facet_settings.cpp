@@ -30,22 +30,26 @@ global_facet_settings::global_facet_settings()
 global_facet_settings::global_facet_settings(
     const bool enabled,
     const std::string& directory,
-    const std::string& postfix)
+    const std::string& postfix,
+    const std::set<std::string>& integrated_facets)
     : enabled_(enabled),
       directory_(directory),
-      postfix_(postfix) { }
+      postfix_(postfix),
+      integrated_facets_(integrated_facets) { }
 
 void global_facet_settings::swap(global_facet_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(directory_, other.directory_);
     swap(postfix_, other.postfix_);
+    swap(integrated_facets_, other.integrated_facets_);
 }
 
 bool global_facet_settings::operator==(const global_facet_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
         directory_ == rhs.directory_ &&
-        postfix_ == rhs.postfix_;
+        postfix_ == rhs.postfix_ &&
+        integrated_facets_ == rhs.integrated_facets_;
 }
 
 global_facet_settings& global_facet_settings::operator=(global_facet_settings other) {
@@ -92,6 +96,22 @@ void global_facet_settings::postfix(const std::string& v) {
 
 void global_facet_settings::postfix(const std::string&& v) {
     postfix_ = std::move(v);
+}
+
+const std::set<std::string>& global_facet_settings::integrated_facets() const {
+    return integrated_facets_;
+}
+
+std::set<std::string>& global_facet_settings::integrated_facets() {
+    return integrated_facets_;
+}
+
+void global_facet_settings::integrated_facets(const std::set<std::string>& v) {
+    integrated_facets_ = v;
+}
+
+void global_facet_settings::integrated_facets(const std::set<std::string>&& v) {
+    integrated_facets_ = std::move(v);
 }
 
 } } }

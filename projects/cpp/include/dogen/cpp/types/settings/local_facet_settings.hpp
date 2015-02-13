@@ -42,7 +42,9 @@ public:
     local_facet_settings();
 
 public:
-    explicit local_facet_settings(const bool supported);
+    local_facet_settings(
+        const bool enabled,
+        const bool supported);
 
 private:
     template<typename Archive>
@@ -52,6 +54,9 @@ private:
     friend void boost::serialization::load(Archive& ar, local_facet_settings& v, unsigned int version);
 
 public:
+    bool enabled() const;
+    void enabled(const bool v);
+
     bool supported() const;
     void supported(const bool v);
 
@@ -66,6 +71,7 @@ public:
     local_facet_settings& operator=(local_facet_settings other);
 
 private:
+    bool enabled_;
     bool supported_;
 };
 

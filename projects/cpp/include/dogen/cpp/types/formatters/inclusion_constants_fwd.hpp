@@ -18,44 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/traits.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INCLUSION_CONSTANTS_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INCLUSION_CONSTANTS_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
+namespace formatters {
 
-std::string traits::facet::enabled() {
-    static std::string r("enabled");
-    return r;
-}
+class inclusion_constants;
 
-std::string traits::facet::supported() {
-    static std::string r("supported");
-    return r;
-}
+} } }
 
-std::string traits::facet::directory() {
-    static std::string r("directory");
-    return r;
-}
-
-std::string traits::facet::postfix() {
-    static std::string r("postfix");
-    return r;
-}
-
-std::string traits::facet::integrated_facet() {
-    static std::string r("integrated_facet");
-    return r;
-}
-
-std::string traits::formatter::enabled() {
-    static std::string r("enabled");
-    return r;
-}
-
-std::string traits::formatter::postfix() {
-    static std::string r("postfix");
-    return r;
-}
-
-} }
+#endif

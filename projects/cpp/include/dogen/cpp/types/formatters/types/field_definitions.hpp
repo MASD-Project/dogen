@@ -66,6 +66,12 @@ struct field_definitions {
     static const dynamic::field_definition& postfix();
 
     /**
+     * @brief All facets that have been integrated with the present
+     * facet.
+     */
+    static const dynamic::field_definition& integrated_facets();
+
+    /**
      * @brief Fields supported by the class header formatter.
      */
     struct class_header_formatter {

@@ -29,6 +29,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_set_std_string(const std::set<std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -41,6 +49,7 @@ std::size_t global_facet_settings_hasher::hash(const global_facet_settings&v) {
     combine(seed, v.enabled());
     combine(seed, v.directory());
     combine(seed, v.postfix());
+    combine(seed, hash_std_set_std_string(v.integrated_facets()));
 
     return seed;
 }

@@ -55,10 +55,10 @@ void indexer::index(const std::forward_list<field_definition>& fds) {
             // fields that have a formatter cannot be in the facet
             // container too.
             continue;
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Field has no formatter: "
-                                     << fd.name().qualified();
         }
+
+        BOOST_LOG_SEV(lg, debug) << "Field has no formatter: "
+                                 << fd.name().qualified();
 
         const auto fct(oh.facet_name());
         if (!fct.empty())

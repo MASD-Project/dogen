@@ -25,24 +25,38 @@ namespace cpp {
 namespace settings {
 
 local_facet_settings::local_facet_settings()
-    : supported_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)),
+      supported_(static_cast<bool>(0)) { }
 
-local_facet_settings::local_facet_settings(const bool supported)
-    : supported_(supported) { }
+local_facet_settings::local_facet_settings(
+    const bool enabled,
+    const bool supported)
+    : enabled_(enabled),
+      supported_(supported) { }
 
 void local_facet_settings::swap(local_facet_settings& other) noexcept {
     using std::swap;
+    swap(enabled_, other.enabled_);
     swap(supported_, other.supported_);
 }
 
 bool local_facet_settings::operator==(const local_facet_settings& rhs) const {
-    return supported_ == rhs.supported_;
+    return enabled_ == rhs.enabled_ &&
+        supported_ == rhs.supported_;
 }
 
 local_facet_settings& local_facet_settings::operator=(local_facet_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool local_facet_settings::enabled() const {
+    return enabled_;
+}
+
+void local_facet_settings::enabled(const bool v) {
+    enabled_ = v;
 }
 
 bool local_facet_settings::supported() const {

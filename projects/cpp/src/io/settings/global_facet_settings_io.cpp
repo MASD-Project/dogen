@@ -31,6 +31,20 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace settings {
@@ -46,7 +60,8 @@ std::ostream& operator<<(std::ostream& s, const global_facet_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::global_facet_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
+      << "\"integrated_facets\": " << v.integrated_facets()
       << " }";
     return(s);
 }

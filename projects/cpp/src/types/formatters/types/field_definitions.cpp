@@ -51,7 +51,7 @@ field_definition create_supported() {
         dogen::cpp::formatters::traits::model_name());
     r.ownership_hierarchy().facet_name(traits::facet_name());
     r.type(value_types::boolean);
-    r.scope(scope_types::root_module);
+    r.scope(scope_types::entity);
     r.default_value(boost::make_shared<boolean>(true));
     return r;
 }
@@ -79,6 +79,18 @@ field_definition create_postfix() {
     r.type(value_types::text);
     r.scope(scope_types::root_module);
     r.default_value(boost::make_shared<text>(""));
+    return r;
+}
+
+field_definition create_integrated_facets() {
+    field_definition r;
+    r.name().simple("integrated_facet");
+    r.name().qualified(traits::facet_name() + "." + r.name().simple());
+    r.ownership_hierarchy().model_name(
+        dogen::cpp::formatters::traits::model_name());
+    r.ownership_hierarchy().facet_name(traits::facet_name());
+    r.type(value_types::text_collection);
+    r.scope(scope_types::root_module);
     return r;
 }
 
@@ -324,6 +336,7 @@ create_all_field_definitions() {
     r.push_front(fd::supported());
     r.push_front(fd::directory());
     r.push_front(fd::postfix());
+    r.push_front(fd::integrated_facets());
 
     using chf = fd::class_header_formatter;
     r.push_front(chf::enabled());
@@ -384,6 +397,11 @@ const dynamic::field_definition& field_definitions::directory() {
 
 const dynamic::field_definition& field_definitions::postfix() {
     static auto r(create_postfix());
+    return r;
+}
+
+const dynamic::field_definition& field_definitions::integrated_facets() {
+    static auto r(create_integrated_facets());
     return r;
 }
 

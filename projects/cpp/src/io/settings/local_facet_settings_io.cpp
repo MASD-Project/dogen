@@ -35,6 +35,7 @@ std::ostream& operator<<(std::ostream& s, const local_facet_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::local_facet_settings\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
       << "\"supported\": " << v.supported()
       << " }";
     return(s);

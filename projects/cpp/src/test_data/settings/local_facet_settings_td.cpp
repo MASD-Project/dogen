@@ -36,7 +36,8 @@ local_facet_settings_generator::local_facet_settings_generator() : position_(0) 
 
 void local_facet_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.supported(create_bool(position + 0));
+    v.enabled(create_bool(position + 0));
+    v.supported(create_bool(position + 1));
 }
 
 local_facet_settings_generator::result_type

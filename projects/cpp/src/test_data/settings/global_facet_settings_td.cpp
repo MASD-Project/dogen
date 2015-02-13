@@ -33,6 +33,14 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+std::set<std::string> create_std_set_std_string(unsigned int position) {
+    std::set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -46,6 +54,7 @@ populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.directory(create_std_string(position + 1));
     v.postfix(create_std_string(position + 2));
+    v.integrated_facets(create_std_set_std_string(position + 3));
 }
 
 global_facet_settings_generator::result_type

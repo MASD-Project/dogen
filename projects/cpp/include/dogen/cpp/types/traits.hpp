@@ -58,6 +58,12 @@ struct traits {
          * @brief Post-fix to apply to file names for this facet.
          */
         static std::string postfix();
+
+        /**
+         * @brief All facets that have been integrated with the present
+         * facet.
+         */
+        static std::string integrated_facet();
     };
 
     struct formatter {

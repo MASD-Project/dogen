@@ -38,7 +38,9 @@ namespace settings {
 std::size_t local_facet_settings_hasher::hash(const local_facet_settings&v) {
     std::size_t seed(0);
 
+    combine(seed, v.enabled());
     combine(seed, v.supported());
+
     return seed;
 }
 

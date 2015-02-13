@@ -37,6 +37,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::settings::local_facet_settings& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("supported", v.supported_);
 }
 
@@ -44,6 +45,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::settings::local_facet_settings& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("supported", v.supported_);
 }
 
