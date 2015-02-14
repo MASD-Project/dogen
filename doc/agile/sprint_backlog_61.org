@@ -698,7 +698,16 @@ example:
 - etc.
 
 We could simply create aspect settings; local and global formatters
-would have a map of =aspect_settings= against an =aspect_name=.
+would have a map of =aspect_settings= against an =aspect_name=. We
+need to remove the integrated facet approach and implement it in terms
+of this. We should go through the types formatter and figure out which
+aspects it has. For now we shall ignore relationships between aspects
+and facets (and any other kind of switching logic). For example, it is
+the responsibility of the user to ensure that if integrated io is
+used, the io facet is switched off. This is because it is very
+complicated to build in the generic logic of such dependencies. We
+have a story to handle this properly in the backlog, but it will
+require a lot of work.
 
 *** Create a list of valid values for field definitions               :story:
 
