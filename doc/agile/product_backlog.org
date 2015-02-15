@@ -23,12 +23,6 @@ multiple initialisation would fail.
 It would be useful to have a description of the purpose of the field
 so that we could print it to the command line.
 
-*** Add field definition group                                        :story:
-
-Fields should be grouped. This could conceivably be achieved by the
-owner, or maybe we need a high-level entity to do this
-aggregation. This is useful when printing fields out to the shell.
-
 *** Rename ODB parameters                                             :story:
 
 At present we use the following form:
@@ -4514,6 +4508,16 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Consider using bounded integers                                   :story:
+
+This library seems to improve static error checking with integers,
+etc:
+
+https://bitbucket.org/davidstone/bounded_integer
+
+However, off the top of my head, there are no cases for bounded
+integers in dogen yet.
 
 *** Consider creating a rules based engine                            :story:
 
