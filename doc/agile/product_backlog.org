@@ -4584,6 +4584,9 @@ of specifying unit tests, to see if it would make our tests
 clearer. We are already following some kind of Given and Then, but we
 should consider making it explicit.
 
+The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
+natively supports GWT.
+
 *** Multi-purpose models per language                                  :epic:
 
 #+begin_quote
