@@ -13,13 +13,13 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-13 Fri 23:52]
+Clock summary at [2015-02-15 Sun 23:29]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                           | *33:48* |       |      |
+| *Total time*                                                           | *36:21* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                 |         | 33:48 |      |
+| Active                                                                 |         | 36:21 |      |
 | STARTED Sprint and product backlog grooming                            |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                              |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                                  |         |       | 0:20 |
@@ -43,7 +43,8 @@ Clock summary at [2015-02-13 Fri 23:52]
 | COMPLETED Add absolute path support to path builder                    |         |       | 5:06 |
 | COMPLETED Populate the local settings                                  |         |       | 3:06 |
 | COMPLETED Create a toggable replacement with legacy and new formatters |         |       | 0:28 |
-| STARTED Implement include generation for class header formatter        |         |       | 4:53 |
+| STARTED Clean-up hierarchical support in dynamic                       |         |       | 2:16 |
+| STARTED Implement include generation for class header formatter        |         |       | 5:10 |
 | STARTED Create settings expander and switcher                          |         |       | 0:30 |
 #+end:
 
@@ -653,7 +654,34 @@ This can be done in knit's cpp backend:
 We just need to look at the map and update any values with the files
 from the new formatters.
 
+*** COMPLETED Add field definition group                              :story:
+    CLOSED: [2015-02-15 Sun 21:45]
+
+*Rationale*: This has been achieved by ownership hierarchy.
+
+Fields should be grouped. This could conceivably be achieved by the
+owner, or maybe we need a high-level entity to do this
+aggregation. This is useful when printing fields out to the shell.
+
+*** STARTED Clean-up hierarchical support in dynamic                  :story:
+    CLOCK: [2015-02-15 Sun 22:18]--[2015-02-15 Sun 23:28] =>  1:10
+    CLOCK: [2015-02-15 Sun 21:03]--[2015-02-15 Sun 22:09] =>  1:06
+
+At present there are a number of limitations on how we have
+implemented hierarchical support:
+
+- fields from one model will get mixed up with other models;
+- fields from one formatter in one facet will get mixed up with fields
+  from other formatters in other facets with the same name.
+
+We need to improve on the indexer. While we're at it, we should do a
+few other assorted clean-ups:
+
+- rename workflow (since we now have two);
+- rename content extensions since this is a selector in disguise;
+
 *** STARTED Implement include generation for class header formatter   :story:
+    CLOCK: [2015-02-15 Sun 20:46]--[2015-02-15 Sun 21:03] =>  0:17
     CLOCK: [2015-02-13 Fri 21:53]--[2015-02-13 Fri 23:52] =>  1:59
     CLOCK: [2015-02-13 Fri 21:10]--[2015-02-13 Fri 21:53] =>  0:43
     CLOCK: [2015-02-12 Thu 22:08]--[2015-02-12 Thu 23:03] =>  0:55
