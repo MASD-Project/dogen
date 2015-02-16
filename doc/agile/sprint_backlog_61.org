@@ -13,14 +13,14 @@ good architecture to handle file naming and include generation.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-15 Sun 23:29]
+Clock summary at [2015-02-15 Sun 23:54]
 
 | Headline                                                               | Time    |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                           | *36:21* |       |      |
 |------------------------------------------------------------------------+---------+-------+------|
 | Active                                                                 |         | 36:21 |      |
-| STARTED Sprint and product backlog grooming                            |         |       | 0:38 |
+| COMPLETED Sprint and product backlog grooming                          |         |       | 0:38 |
 | COMPLETED Improvements to product backlog                              |         |       | 1:01 |
 | COMPLETED Tidy-up formatters workflow                                  |         |       | 0:20 |
 | COMPLETED Create a =formattable= base class                            |         |       | 0:32 |
@@ -43,9 +43,9 @@ Clock summary at [2015-02-15 Sun 23:29]
 | COMPLETED Add absolute path support to path builder                    |         |       | 5:06 |
 | COMPLETED Populate the local settings                                  |         |       | 3:06 |
 | COMPLETED Create a toggable replacement with legacy and new formatters |         |       | 0:28 |
-| STARTED Clean-up hierarchical support in dynamic                       |         |       | 2:16 |
-| STARTED Implement include generation for class header formatter        |         |       | 5:10 |
-| STARTED Create settings expander and switcher                          |         |       | 0:30 |
+| POSTPONED Clean-up hierarchical support in dynamic                     |         |       | 2:16 |
+| POSTPONED Implement include generation for class header formatter      |         |       | 5:10 |
+| POSTPONED Create settings expander and switcher                        |         |       | 0:30 |
 #+end:
 
 *** COMPLETED Sprint and product backlog grooming                     :story:

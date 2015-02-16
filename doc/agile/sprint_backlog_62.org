@@ -14,14 +14,15 @@ header file formatter.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-15 Sun 23:44]
+Clock summary at [2015-02-16 Mon 22:03]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:06* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:06 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:06 |
+| Headline                                       | Time   |      |      |
+|------------------------------------------------+--------+------+------|
+| *Total time*                                   | *2:05* |      |      |
+|------------------------------------------------+--------+------+------|
+| Active                                         |        | 2:05 |      |
+| STARTED Sprint and product backlog grooming    |        |      | 0:06 |
+| STARTED Consider creating a rules based engine |        |      | 1:59 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -33,7 +34,111 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** STARTED Clean-up hierarchical support in dynamic                  :story:
+*** STARTED Consider creating a rules based engine                    :story:
+    CLOCK: [2015-02-16 Mon 20:03]--[2015-02-16 Mon 22:02] =>  1:59
+
+*New Understanding*
+
+After a considerable amount of thought, it became apparent that the
+current approach will not be particularly scalable. The fundamental
+requirements are:
+
+- a formatter must be supplied with all the data it requires to
+  format (and only the data it requires to format);
+- the data must be provided in a strongly typed form, such that the
+  formatter has the least amount of boiler plate code to access it
+  (casting, handling incorrect values, etc - but see next point);
+- formatters may have data that is specific to them and know one knows
+  about it (opaque settings); when the data is passed in, the
+  formatter will simply cast it to the expected type.
+
+At present we are failing on a number of these. The current settings
+implementation pushes a lot of the selection logic to the formatter,
+resulting on a lot of boiler plate just to access a flag, and more
+complex items require quite a lot of logic in the formatter.
+
+What we really need is a general settings engine that can be fed rules
+and then produces a =dynamic::object= with all the values populated
+for each formatter; we then have a settings class that is populated
+off of that dynamic object but does not require any knowledge about
+global and local settings, facet/formatter overrides, etc. It has a
+single "enabled" flag for the formatter, which may have been produced
+as a result of the model being enabled, the facet being enabled, the
+formatter being enabled, etc. Settings does not care (because the
+formatter does not care either).
+
+In this sense we split dynamic into two:
+
+- schema: what we currently call dynamic. Basically the strong types
+  around the dynamic extensions.
+- expansion: the rules engine that expands the basic dynamic object
+  populated by the user.
+
+For schema, very few changes are required:
+
+- rename dynamic model into dynamic/schema.
+- we need to load field definitions from file. Creating these manually
+  in code is a pain in the backside. Many of them are really similar
+  so copy and paste of text would increase productivity. We just need
+  to have the "traits" for the field name (as this is how we will
+  access the fields) but everything else can become data; a JSON
+  representation living in library.
+- we need to review infrastructure created for settings access; some
+  of it may no longer make sense (mainly indexer).
+
+Notes on how expansion will work:
+
+- it receives an SML model as input and produces an SML model with the
+  dynamic object expanded such that each object contains all the
+  required data.
+- it provides a registrar for client models to register their specific
+  operations. An operation is how we expand the dynamic object.
+- it will handle the includes, via operations provided by client
+  models.
+- it will handle file naming, via operations provided by client
+  models.
+- it will have dependencies between operations (or fixed order of
+  execution as supplied by client).
+- it will provide predicates and conditional operations; a conditional
+  operation will only execute if the predicate is true. It may also
+  provide an "else" for the predicate is false case.
+- operations are organised into a "transformation" sub-system because
+  we are transforming the dynamic object. However we always return a
+  new object rather than mutate the existing one.
+- as an example, the c++ model will supply a "create includes"
+  operation. This operation is instantiated by each formatter via a
+  data file. It is a composite operation made up of a set of
+  sub-operations. We need to break down each rule we use to determine
+  in includes and then provide a way to represent it as data. This is
+  the input for the operation. The output will be the set of includes
+  for the formatter. It will be slotted into the dynamic object.
+- we will also have an operation to create file paths. It will query
+  properties of the dynamic object to build up the ingredients. It
+  will then produce the final path.
+- each model will have its own "workflow" describing the order of
+  operations. Expander will execute each workflow in order. The
+  dynamic object will have the cumulative result of these
+  workflows.
+- a few operations are provided out of the box - copy global settings
+  locally (once upon a time called "merger"), etc. Perhaps we could
+  have a top-level workflow that executes these operations before the
+  model-specific workflows kick in.
+
+*Previous Understanding*
+
+It may be possible to reduce the relationships between models, facets,
+formatters and aspects to a set of rules, parsed by a rules engine:
+
+- objective: formatter is enabled; aspect is enabled.
+- aspect: streaming_operator
+- field definition: cpp.types.use_streaming_operator
+- implementation_includes: a, b, c
+- requires: io disabled
+
+This seems extremely complex but its worth starting a thought
+experiment.
+
+*** Clean-up hierarchical support in dynamic                          :story:
 
 At present there are a number of limitations on how we have
 implemented hierarchical support:
@@ -339,67 +444,3 @@ and facets. It may make more sense to define some string constants for
 them, perhaps in =traits=?
 
 ** Deprecated
-*** CANCELLED Start using =formatters::file= from legacy formatters   :story:
-    CLOSED: [2015-02-10 Tue 20:42]
-
-*Rationale*: We don't actually need this; side-by-side can be achieved
-without changing existing formatters.
-
-We need to get the legacy formatters to return the new
-=formatters::file=.
-
-*** CANCELLED Towards a more generic use of dynamic extensions         :epic:
-    CLOSED: [2015-02-07 Sat 15:52]
-
-*New Understanding*: We have decided to limit the dynamic extensions
-usage to extensibility. Where required parameters will be made visible
-via dynamic extensions but this should be kept to just those
-parameters that users can sensibly control.
-
-*Previous Understanding*
-
-We should do an inventory of all dogen features which can be
-reimplemented as dynamic extensions. For example, immutability should
-result in a generic parameter being added to the type at the SML
-level:
-
-: immutable = true
-
-which then gets resolved into a set of language specific parameters:
-
-: cpp.copy_constructor.status = disabled
-: cpp.setters.status = disabled
-: ...
-
-The formatter then looks for these tags to decide whether to add a
-method or not. If we had more languages, they would have equivalent
-formatting commands.
-
-The same would apply to facets. These would have a top-level generic
-parameter such as =hashing=:
-
-: hashing = true
-
-Which then expands to implementation specific hashing:
-
-: cpp.hashing.std_hashing = true
-
-or
-
-: cpp.hashing.boost_hashing = true
-
-The facet is now just a short-hand for a set of implementation
-specific parameters. There is some default mapping applied in this
-grouping. The user can shortcut the process by disabling the mapping
-and supplying implementation specific parameters:
-
-: hashing = false
-: cpp.hashing.boost_hashing = true
-
-Assuming =std_hashing= as a default.
-
-In addition, depending on the parameter, it may be propagatable /
-expandable. For example, if hashing is set to false in a type at the
-bottom of a graph relationship, we must propagate it to all members of
-the graph. Similarly, if hashing is disabled in the model, we must
-propagate it to all types in the model.

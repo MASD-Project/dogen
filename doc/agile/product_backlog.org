@@ -4519,20 +4519,6 @@ https://bitbucket.org/davidstone/bounded_integer
 However, off the top of my head, there are no cases for bounded
 integers in dogen yet.
 
-*** Consider creating a rules based engine                            :story:
-
-It may be possible to reduce the relationships between models, facets,
-formatters and aspects to a set of rules, parsed by a rules engine:
-
-- objective: formatter is enabled; aspect is enabled.
-- aspect: streaming_operator
-- field definition: cpp.types.use_streaming_operator
-- implementation_includes: a, b, c
-- requires: io disabled
-
-This seems extremely complex but its worth starting a thought
-experiment.
-
 *** Investigate support for biicode                                   :story:
 
 [[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
