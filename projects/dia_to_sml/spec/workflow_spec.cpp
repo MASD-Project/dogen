@@ -28,7 +28,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
@@ -49,8 +49,8 @@ namespace  {
 const std::string test_module("dia_to_sml");
 const std::string test_suite("workflow_spec");
 
-const dogen::dynamic::workflow& dynamic_workflow() {
-    using dogen::dynamic::test::mock_workflow_factory;
+const dogen::dynamic::schema::workflow& dynamic_schema_workflow() {
+    using dogen::dynamic::schema::test::mock_workflow_factory;
     return mock_workflow_factory::non_validating_workflow();
 }
 
@@ -67,7 +67,7 @@ bool test_workflow(
     const bool is_target(true);
     const std::string model_name(input_path.stem().string());
 
-    workflow w(dynamic_workflow());
+    workflow w(dynamic_schema_workflow());
     dogen::sml::model actual(w.execute(i, model_name, epp, is_target));
     return asserter::assert_object(expected_path, actual_path, actual);
 }

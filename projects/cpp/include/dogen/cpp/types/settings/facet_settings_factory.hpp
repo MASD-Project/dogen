@@ -29,8 +29,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/local_facet_settings.hpp"
 #include "dogen/cpp/types/settings/global_facet_settings.hpp"
 
@@ -61,16 +61,16 @@ private:
      * facet fields.
      */
     global_facet_settings create_global_settings_for_facet(
-        const std::forward_list<dynamic::field_definition>& facet_fields,
-        const dynamic::object& o) const;
+        const std::forward_list<dynamic::schema::field_definition>&
+        facet_fields, const dynamic::schema::object& o) const;
 
     /**
      * @brief Creates the local settings for the facet implied by the
      * facet fields.
      */
     boost::optional<local_facet_settings> create_local_settings_for_facet(
-        const std::forward_list<dynamic::field_definition>& facet_fields,
-        const dynamic::object& o) const;
+        const std::forward_list<dynamic::schema::field_definition>&
+        facet_fields, const dynamic::schema::object& o) const;
 
 public:
     /**
@@ -82,9 +82,9 @@ public:
     std::unordered_map<std::string, global_facet_settings>
     make_global_settings(const std::unordered_map<
         std::string,
-        std::forward_list<dynamic::field_definition>
+        std::forward_list<dynamic::schema::field_definition>
         >& field_definitions_by_facet_name,
-        const dynamic::object& o) const;
+        const dynamic::schema::object& o) const;
 
     /**
      * @brief Builds the local facet settings from the dynamic object.
@@ -94,9 +94,9 @@ public:
     std::unordered_map<std::string, local_facet_settings>
     make_local_settings(const std::unordered_map<
         std::string,
-        std::forward_list<dynamic::field_definition>
+        std::forward_list<dynamic::schema::field_definition>
         >& field_definitions_by_facet_name,
-        const dynamic::object& o) const;
+        const dynamic::schema::object& o) const;
 };
 
 } } }

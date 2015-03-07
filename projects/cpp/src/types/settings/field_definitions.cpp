@@ -19,14 +19,14 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/boolean.hpp"
+#include "dogen/dynamic/schema/types/text.hpp"
+#include "dogen/dynamic/schema/types/boolean.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
 
 namespace {
 
-using namespace dogen::dynamic;
+using namespace dogen::dynamic::schema;
 using namespace dogen::cpp::formatters;
 
 field_definition create_enabled() {
@@ -192,71 +192,71 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-const std::forward_list<dynamic::field_definition>&
+const std::forward_list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::enabled() {
+const dynamic::schema::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::split_project() {
+const dynamic::schema::field_definition& field_definitions::split_project() {
     static auto r(create_split_project());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::source_directory_name() {
+const dynamic::schema::field_definition& field_definitions::source_directory_name() {
     static auto r(create_source_directory_name());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::include_directory_name() {
+const dynamic::schema::field_definition& field_definitions::include_directory_name() {
     static auto r(create_include_directory_name());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::header_file_extension() {
+const dynamic::schema::field_definition& field_definitions::header_file_extension() {
     static auto r(create_header_file_extension());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::implementation_file_extension() {
     static auto r(create_implementation_file_extension());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::enable_facet_folders() {
+const dynamic::schema::field_definition& field_definitions::enable_facet_folders() {
     static auto r(create_enable_facet_folders());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::enable_unique_file_names() {
+const dynamic::schema::field_definition& field_definitions::enable_unique_file_names() {
     static auto r(create_enable_unique_file_names());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::type::family() {
+const dynamic::schema::field_definition& field_definitions::type::family() {
     static auto r(create_type_family());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::type::requires_manual_default_constructor() {
     static auto r(create_type_requires_manual_default_constructor());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::type::requires_manual_move_constructor() {
     static auto r(create_type_requires_manual_move_constructor());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::type::inclusion_required() {
     static auto r(create_type_inclusion_required());
     return r;

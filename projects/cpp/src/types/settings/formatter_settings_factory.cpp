@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
@@ -53,9 +53,9 @@ ensure_field_is_present(const bool found, const std::string& name) const {
 
 global_formatter_settings formatter_settings_factory::
 create_global_settings_for_formatter(
-    const std::forward_list<dynamic::field_definition>& formatter_fields,
-    const dynamic::object& o) const {
-    using namespace dynamic;
+    const std::forward_list<dynamic::schema::field_definition>&
+    formatter_fields, const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
 
     global_formatter_settings r;
     bool found_enabled(false), found_postfix(false);
@@ -63,7 +63,7 @@ create_global_settings_for_formatter(
     const auto& postfix_trait(traits::formatter::postfix());
 
     for (const auto fd : formatter_fields) {
-        using namespace dynamic;
+        using namespace dynamic::schema;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
                 const auto& n(fd.name().qualified());
@@ -110,9 +110,9 @@ create_global_settings_for_formatter(
 
 boost::optional<local_formatter_settings> formatter_settings_factory::
 create_local_settings_for_formatter(
-    const std::forward_list<dynamic::field_definition>& formatter_fields,
-    const dynamic::object& o) const {
-    using namespace dynamic;
+    const std::forward_list<dynamic::schema::field_definition>&
+    formatter_fields, const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
 
     local_formatter_settings r;
     bool found_enabled(false);
@@ -120,7 +120,6 @@ create_local_settings_for_formatter(
     const auto& enabled_trait(traits::formatter::enabled());
 
     for (const auto fd : formatter_fields) {
-        using namespace dynamic;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
                 const auto& n(fd.name().qualified());
@@ -151,10 +150,10 @@ create_local_settings_for_formatter(
 
 std::unordered_map<std::string, global_formatter_settings>
 formatter_settings_factory::
-make_global_settings(const std::unordered_map<std::string,
-    std::forward_list<dynamic::field_definition>
+make_global_settings(const std::unordered_map<
+        std::string, std::forward_list<dynamic::schema::field_definition>
     >& field_definitions_by_formatter_name,
-    const dynamic::object& o) const {
+    const dynamic::schema::object& o) const {
 
     std::unordered_map<std::string, global_formatter_settings> r;
     for (const auto pair : field_definitions_by_formatter_name) {
@@ -168,10 +167,10 @@ make_global_settings(const std::unordered_map<std::string,
 
 std::unordered_map<std::string, local_formatter_settings>
 formatter_settings_factory::
-make_local_settings(const std::unordered_map<std::string,
-        std::forward_list<dynamic::field_definition>
-        >& field_definitions_by_formatter_name,
-    const dynamic::object& o) const {
+make_local_settings(const std::unordered_map<
+    std::string, std::forward_list<dynamic::schema::field_definition>
+    >& field_definitions_by_formatter_name,
+    const dynamic::schema::object& o) const {
 
     std::unordered_map<std::string, local_formatter_settings> r;
     for (const auto pair : field_definitions_by_formatter_name) {

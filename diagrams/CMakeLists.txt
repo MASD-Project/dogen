@@ -39,7 +39,7 @@ add_custom_target(codegen_${target}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
@@ -362,13 +362,13 @@ if(use_latest_knitter)
 endif()
 add_dependencies(codegen codegen_${target})
 
-set(target dynamic)
+set(target schema)
 add_custom_target(codegen_${target}
-    COMMENT "Generating Dynamic model" VERBATIM
+    COMMENT "Generating Dynamic Schema model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${dogen_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
+    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/dynamic
     --cpp-enable-facet domain
     --cpp-enable-facet io
     --cpp-enable-facet hash
@@ -381,7 +381,7 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/test/.*
     --verbose
     --delete-extra-files
-    --external-module-path dogen)
+    --external-module-path dogen::dynamic)
 if(use_latest_knitter)
     add_dependencies(codegen_${target} knitter)
 endif()

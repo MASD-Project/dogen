@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
 #include "dogen/cpp/types/settings/initializer.hpp"
 
@@ -27,7 +27,7 @@ namespace cpp {
 namespace settings {
 
 void register_field_definitions() {
-    auto& rg(dogen::dynamic::workflow::registrar());
+    auto& rg(dogen::dynamic::schema::workflow::registrar());
     rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 

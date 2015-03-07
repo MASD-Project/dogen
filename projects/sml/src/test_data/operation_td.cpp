@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/test_data/object_td.hpp"
+#include "dogen/dynamic/schema/test_data/object_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/sml/test_data/parameter_td.hpp"
@@ -32,9 +32,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
+dogen::dynamic::schema::object
+create_dogen_dynamic_schema_object(const unsigned int position) {
+    return dogen::dynamic::schema::object_generator::create(position);
 }
 
 dogen::sml::parameter
@@ -72,7 +72,7 @@ operation_generator::operation_generator() : position_(0) { }
 void operation_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.extensions(create_dogen_dynamic_object(position + 1));
+    v.extensions(create_dogen_dynamic_schema_object(position + 1));
     v.name(create_std_string(position + 2));
     v.parameters(create_std_list_dogen_sml_parameter(position + 3));
     v.type(create_boost_optional_dogen_sml_nested_qname(position + 4));

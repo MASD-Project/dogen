@@ -22,8 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/text.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
@@ -63,9 +63,9 @@ throw_missing_item(const std::string& msg, const std::string& n) const {
     BOOST_THROW_EXCEPTION(building_error(msg + n));
 }
 
-boost::optional<licence>
-general_settings_factory::extract_licence(const dynamic::object& o) const {
-    using namespace dynamic;
+boost::optional<licence> general_settings_factory::
+extract_licence(const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
     using fd = field_definitions;
 
     if (!has_field(o, fd::licence_name()))
@@ -85,8 +85,8 @@ general_settings_factory::extract_licence(const dynamic::object& o) const {
     return l;
 }
 
-boost::optional<modeline>
-general_settings_factory::extract_modeline(const dynamic::object& o) const {
+boost::optional<modeline> general_settings_factory::
+extract_modeline(const dynamic::schema::object& o) const {
     using namespace dynamic;
     using fd = field_definitions;
 
@@ -107,9 +107,9 @@ general_settings_factory::extract_modeline(const dynamic::object& o) const {
     return j->second;
 }
 
-std::string
-general_settings_factory::extract_marker(const dynamic::object& o) const {
-    using namespace dynamic;
+std::string general_settings_factory::
+extract_marker(const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
     using cgm = field_definitions::code_generation_marker;
 
     if (!has_field(o, cgm::message()))
@@ -186,7 +186,7 @@ void general_settings_factory::load_reference_data() {
 }
 
 general_settings
-general_settings_factory::make(const dynamic::object& o) const {
+general_settings_factory::make(const dynamic::schema::object& o) const {
     const auto modeline(extract_modeline(o));
     const auto licence(extract_licence(o));
     const auto marker(extract_marker(o));
@@ -197,7 +197,7 @@ general_settings_factory::make(const dynamic::object& o) const {
 }
 
 boost::optional<general_settings> general_settings_factory::
-make_only_if_overriden(const dynamic::object& o) const {
+make_only_if_overriden(const dynamic::schema::object& o) const {
     const auto modeline(extract_modeline(o));
     const auto licence(extract_licence(o));
     const auto marker(extract_marker(o));

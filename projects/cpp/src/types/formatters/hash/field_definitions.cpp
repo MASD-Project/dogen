@@ -19,15 +19,15 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/boolean.hpp"
+#include "dogen/dynamic/schema/types/text.hpp"
+#include "dogen/dynamic/schema/types/boolean.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/field_definitions.hpp"
 
 namespace {
 
-using namespace dogen::dynamic;
+using namespace dogen::dynamic::schema;
 using namespace dogen::cpp::formatters::hash;
 
 field_definition create_enabled() {
@@ -43,16 +43,16 @@ field_definition create_enabled() {
     return r;
 }
 
-dogen::dynamic::field_definition create_supported() {
-    dogen::dynamic::field_definition r;
+dogen::dynamic::schema::field_definition create_supported() {
+    dogen::dynamic::schema::field_definition r;
     r.name().simple("supported");
     r.name().qualified(traits::facet_name() + "." + r.name().simple());
     r.ownership_hierarchy().model_name(
         dogen::cpp::formatters::traits::model_name());
     r.ownership_hierarchy().facet_name(traits::facet_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::entity);
-    r.default_value(boost::make_shared<dogen::dynamic::boolean>(true));
+    r.type(dogen::dynamic::schema::value_types::boolean);
+    r.scope(dogen::dynamic::schema::scope_types::entity);
+    r.default_value(boost::make_shared<dogen::dynamic::schema::boolean>(true));
     return r;
 }
 
@@ -284,87 +284,87 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-const std::forward_list<dynamic::field_definition>&
+const std::forward_list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::enabled() {
+const dynamic::schema::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::supported() {
+const dynamic::schema::field_definition& field_definitions::supported() {
     static auto r(create_supported());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::directory() {
+const dynamic::schema::field_definition& field_definitions::directory() {
     static auto r(create_directory());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::postfix() {
+const dynamic::schema::field_definition& field_definitions::postfix() {
     static auto r(create_postfix());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::enabled() {
     static auto r(create_class_header_formatter_enabled());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::postfix() {
     static auto r(create_class_header_formatter_postfix());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::inclusion_path() {
     static auto r(create_class_header_formatter_inclusion_path());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::inclusion_delimiter() {
     static auto r(create_class_header_formatter_inclusion_delimiter());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_implementation_formatter::enabled() {
     static auto r(create_class_implementation_formatter_enabled());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_implementation_formatter::postfix() {
     static auto r(create_class_implementation_formatter_postfix());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::enumeration_header_formatter::enabled() {
     static auto r(create_enumeration_header_formatter_enabled());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::enumeration_header_formatter::postfix() {
     static auto r(create_enumeration_header_formatter_postfix());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::enumeration_implementation_formatter::enabled() {
     static auto r(create_enumeration_implementation_formatter_enabled());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::enumeration_implementation_formatter::postfix() {
     static auto r(create_enumeration_implementation_formatter_postfix());
     return r;

@@ -26,7 +26,7 @@
 #endif
 
 #include <forward_list>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -41,29 +41,29 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::field_definition>&
+    static const std::forward_list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**
      * @brief If set to false, the facet will not be generated.
      */
-    static const dynamic::field_definition& enabled();
+    static const dynamic::schema::field_definition& enabled();
 
     /**
      * @brief If set to false, the type does not support the current
      * facet.
      */
-    static const dynamic::field_definition& supported();
+    static const dynamic::schema::field_definition& supported();
 
     /**
      * @brief Directory in which to place files for this facet.
      */
-    static const dynamic::field_definition& directory();
+    static const dynamic::schema::field_definition& directory();
 
     /**
      * @brief Post-fix to apply to file names for this facet.
      */
-    static const dynamic::field_definition& postfix();
+    static const dynamic::schema::field_definition& postfix();
 
     /**
      * @brief Fields supported by the class header formatter.
@@ -72,22 +72,22 @@ struct field_definitions {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const dynamic::field_definition& enabled();
+        static const dynamic::schema::field_definition& enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& postfix();
+        static const dynamic::schema::field_definition& postfix();
 
         /**
          * @brief Inclusion path override.
          */
-        static const dynamic::field_definition& inclusion_path();
+        static const dynamic::schema::field_definition& inclusion_path();
 
         /**
          * @brief Delimiter to use for the inclusion path.
          */
-        static const dynamic::field_definition& inclusion_delimiter();
+        static const dynamic::schema::field_definition& inclusion_delimiter();
     };
 
     /**
@@ -97,12 +97,12 @@ struct field_definitions {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const dynamic::field_definition& enabled();
+        static const dynamic::schema::field_definition& enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& postfix();
+        static const dynamic::schema::field_definition& postfix();
     };
 
     /**
@@ -112,12 +112,12 @@ struct field_definitions {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const dynamic::field_definition& enabled();
+        static const dynamic::schema::field_definition& enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& postfix();
+        static const dynamic::schema::field_definition& postfix();
     };
 
     /**
@@ -127,12 +127,12 @@ struct field_definitions {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const dynamic::field_definition& enabled();
+        static const dynamic::schema::field_definition& enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& postfix();
+        static const dynamic::schema::field_definition& postfix();
     };
 
 };

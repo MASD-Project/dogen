@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formatters/provider_selector.hpp"
@@ -51,7 +51,7 @@ cpp::formatters::registrar& workflow::registrar() {
 
 settings::settings workflow::
 create_settings_activty(const config::knitting_options& o,
-    const std::forward_list<dynamic::field_definition>& fds,
+    const std::forward_list<dynamic::schema::field_definition>& fds,
     const sml::model& m) const {
     settings::workflow w;
     return w.execute(o.cpp(), fds, m);
@@ -106,7 +106,7 @@ generate(const config::knitting_options& o, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     validate();
-    const auto& fds(dynamic::workflow::registrar().field_definitions());
+    const auto& fds(dynamic::schema::workflow::registrar().field_definitions());
     const auto s(create_settings_activty(o, fds, m));
     const auto& c(registrar().formatter_container());
 

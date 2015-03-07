@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <string>
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/sml/serialization/operation_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/parameter.hpp"
@@ -52,7 +52,7 @@ public:
 public:
     operation(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::dynamic::schema::object& extensions,
         const std::string& name,
         const std::list<dogen::sml::parameter>& parameters,
         const boost::optional<dogen::sml::nested_qname>& type);
@@ -83,10 +83,10 @@ public:
      * @brief Dynamic extensions for this element.
      */
     /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
+    const dogen::dynamic::schema::object& extensions() const;
+    dogen::dynamic::schema::object& extensions();
+    void extensions(const dogen::dynamic::schema::object& v);
+    void extensions(const dogen::dynamic::schema::object&& v);
     /**@}*/
 
     /**
@@ -131,7 +131,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::dynamic::object extensions_;
+    dogen::dynamic::schema::object extensions_;
     std::string name_;
     std::list<dogen::sml::parameter> parameters_;
     boost::optional<dogen::sml::nested_qname> type_;

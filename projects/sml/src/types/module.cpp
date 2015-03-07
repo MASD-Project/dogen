@@ -40,7 +40,7 @@ module::module(module&& rhs)
 
 module::module(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::dynamic::schema::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -101,19 +101,19 @@ void module::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& module::extensions() const {
+const dogen::dynamic::schema::object& module::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::object& module::extensions() {
+dogen::dynamic::schema::object& module::extensions() {
     return extensions_;
 }
 
-void module::extensions(const dogen::dynamic::object& v) {
+void module::extensions(const dogen::dynamic::schema::object& v) {
     extensions_ = v;
 }
 
-void module::extensions(const dogen::dynamic::object&& v) {
+void module::extensions(const dogen::dynamic::schema::object&& v) {
     extensions_ = std::move(v);
 }
 

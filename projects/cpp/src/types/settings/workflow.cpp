@@ -83,33 +83,33 @@ sml::module workflow::obtain_model_module(const sml::model& m) const {
 }
 
 dogen::formatters::general_settings
-workflow::create_general_settings(const dynamic::object& o) const {
+workflow::create_general_settings(const dynamic::schema::object& o) const {
     return general_settings_factory_.make(o);
 }
 
 cpp_settings workflow::create_cpp_settings(const config::cpp_options& co,
-    const dynamic::object& o) const {
+    const dynamic::schema::object& o) const {
     const auto f = cpp_settings_factory();
     return f.make(co, o);
 }
 
 std::unordered_map<std::string, global_facet_settings> workflow::
-create_global_facet_settings(const dynamic::indexer& idx,
-    const dynamic::object& o) const {
+create_global_facet_settings(const dynamic::schema::indexer& idx,
+    const dynamic::schema::object& o) const {
     const auto f = facet_settings_factory();
     return f.make_global_settings(idx.field_definitions_by_facet_name(), o);
 }
 
 std::unordered_map<std::string, global_formatter_settings> workflow::
-create_global_formatter_settings(const dynamic::indexer& idx,
-    const dynamic::object& o) const {
+create_global_formatter_settings(const dynamic::schema::indexer& idx,
+    const dynamic::schema::object& o) const {
     const auto& fd(idx.field_definitions_by_formatter_name());
     const auto f = formatter_settings_factory();
     return f.make_global_settings(fd, o);
 }
 
 global_settings workflow::create_global_settings_activity(
-    const config::cpp_options& co, const dynamic::indexer& idx,
+    const config::cpp_options& co, const dynamic::schema::indexer& idx,
     const sml::model& m) const {
     const auto mm(obtain_model_module(m));
     const auto o(mm.extensions());
@@ -123,18 +123,18 @@ global_settings workflow::create_global_settings_activity(
 }
 
 std::unordered_map<std::string, local_settings>
-workflow::create_local_settings_activity(const dynamic::indexer& idx,
+workflow::create_local_settings_activity(const dynamic::schema::indexer& idx,
     const sml::model& m) const {
     const auto f = local_settings_factory();
     return f.make(general_settings_factory_, idx, m);
 }
 
 settings workflow::execute(const config::cpp_options& co,
-    const std::forward_list<dynamic::field_definition>& fds,
+    const std::forward_list<dynamic::schema::field_definition>& fds,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings.";
 
-    dynamic::indexer idx;
+    dynamic::schema::indexer idx;
     idx.index(fds);
 
     settings r;

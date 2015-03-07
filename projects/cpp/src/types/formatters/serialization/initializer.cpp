@@ -19,7 +19,7 @@
  *
  */
 #include <memory>
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/serialization/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 
@@ -29,7 +29,7 @@ namespace formatters {
 namespace serialization {
 
 void register_field_definitions() {
-    auto& rg(dynamic::workflow::registrar());
+    auto& rg(dynamic::schema::workflow::registrar());
     rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 

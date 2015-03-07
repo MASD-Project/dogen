@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/cpp/types/formattables/family_types.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 
@@ -50,7 +50,7 @@ public:
     /**
      * @brief Construct the type settings, if available.
      */
-    boost::optional<type_settings> make(const dynamic::object& o) const;
+    boost::optional<type_settings> make(const dynamic::schema::object& o) const;
 };
 
 } } }

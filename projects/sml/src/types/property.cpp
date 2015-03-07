@@ -29,7 +29,7 @@ property::property()
 
 property::property(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::dynamic::schema::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type,
     const std::string& default_value,
@@ -86,19 +86,19 @@ void property::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& property::extensions() const {
+const dogen::dynamic::schema::object& property::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::object& property::extensions() {
+dogen::dynamic::schema::object& property::extensions() {
     return extensions_;
 }
 
-void property::extensions(const dogen::dynamic::object& v) {
+void property::extensions(const dogen::dynamic::schema::object& v) {
     extensions_ = v;
 }
 
-void property::extensions(const dogen::dynamic::object&& v) {
+void property::extensions(const dogen::dynamic::schema::object&& v) {
     extensions_ = std::move(v);
 }
 

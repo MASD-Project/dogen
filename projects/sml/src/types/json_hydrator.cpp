@@ -73,8 +73,8 @@ const std::string missing_module("Could not find module: ");
 namespace dogen {
 namespace sml {
 
-json_hydrator::json_hydrator(const dynamic::workflow& dynamic_workflow)
-    : dynamic_workflow_(dynamic_workflow) { }
+json_hydrator::json_hydrator(const dynamic::schema::workflow& w)
+    : dynamic_schema_workflow_(w) { }
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
@@ -169,21 +169,21 @@ void json_hydrator::read_module_path(const boost::property_tree::ptree& pt,
     }
 }
 
-dynamic::object json_hydrator::
+dynamic::schema::object json_hydrator::
 create_dynamic_extensions(const boost::property_tree::ptree& pt,
-    const dynamic::scope_types st) const {
+    const dynamic::schema::scope_types st) const {
     const auto i(pt.find(extensions_key));
     if (i == pt.not_found())
-        return dynamic::object();
+        return dynamic::schema::object();
 
-    dynamic::object r;
+    dynamic::schema::object r;
     std::list<std::pair<std::string, std::string> > kvps;
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto field_name(j->first);
         const auto field_value(j->second.get_value<std::string>());
         kvps.push_back(std::make_pair(field_name, field_value));
     }
-    return dynamic_workflow_.execute(st, kvps);
+    return dynamic_schema_workflow_.execute(st, kvps);
 }
 
 void json_hydrator::
@@ -207,7 +207,7 @@ read_element(const boost::property_tree::ptree& pt, model& m) const {
             if (documentation)
                 t.documentation(*documentation);
 
-            const auto scope(dynamic::scope_types::entity);
+            const auto scope(dynamic::schema::scope_types::entity);
             t.extensions(create_dynamic_extensions(pt, scope));
         });
 
@@ -261,7 +261,7 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
                              << sml::string_converter::convert(r.name());
 
     read_module_path(pt, r, r.name());
-    const auto scope(dynamic::scope_types::root_module);
+    const auto scope(dynamic::schema::scope_types::root_module);
     r.extensions(create_dynamic_extensions(pt, scope));
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));

@@ -150,7 +150,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/utility/include
     ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
-    ${CMAKE_SOURCE_DIR}/projects/dynamic/include
+    ${CMAKE_SOURCE_DIR}/projects/dynamic/schema/include
     )
 
 #
@@ -179,8 +179,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/schema/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/schema/spec)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)

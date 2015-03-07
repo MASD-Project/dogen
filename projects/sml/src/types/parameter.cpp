@@ -25,7 +25,7 @@ namespace sml {
 
 parameter::parameter(
     const std::string& documentation,
-    const dogen::dynamic::object& extensions,
+    const dogen::dynamic::schema::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type)
     : documentation_(documentation),
@@ -70,19 +70,19 @@ void parameter::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::object& parameter::extensions() const {
+const dogen::dynamic::schema::object& parameter::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::object& parameter::extensions() {
+dogen::dynamic::schema::object& parameter::extensions() {
     return extensions_;
 }
 
-void parameter::extensions(const dogen::dynamic::object& v) {
+void parameter::extensions(const dogen::dynamic::schema::object& v) {
     extensions_ = v;
 }
 
-void parameter::extensions(const dogen::dynamic::object&& v) {
+void parameter::extensions(const dogen::dynamic::schema::object&& v) {
     extensions_ = std::move(v);
 }
 

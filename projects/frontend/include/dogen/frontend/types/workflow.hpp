@@ -28,7 +28,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
@@ -99,7 +99,7 @@ public:
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
     const config::knitting_options knitting_options_;
-    const dynamic::workflow dynamic_workflow_;
+    const dynamic::schema::workflow dynamic_schema_workflow_;
 };
 
 } }

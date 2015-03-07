@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
 #include "dogen/cpp/types/settings/cpp_settings_factory.hpp"
 
@@ -30,7 +30,7 @@ cpp_settings_factory::cpp_settings_factory()
     : default_settings_(create_default_settings()) { }
 
 cpp_settings cpp_settings_factory::create_default_settings() const {
-    using namespace dynamic;
+    using namespace dynamic::schema;
     using fd = dogen::cpp::settings::field_definitions;
 
     cpp_settings r;
@@ -53,8 +53,8 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
 }
 
 void cpp_settings_factory::
-populate(const dynamic::object& o, cpp_settings& s) const {
-    using namespace dynamic;
+populate(const dynamic::schema::object& o, cpp_settings& s) const {
+    using namespace dynamic::schema;
     using fd = field_definitions;
 
     if (has_field(o, fd::enabled()))
@@ -96,7 +96,7 @@ populate(const config::cpp_options& co, cpp_settings& s) const {
 }
 
 cpp_settings cpp_settings_factory::
-make(const config::cpp_options& co, const dynamic::object& o) const {
+make(const config::cpp_options& co, const dynamic::schema::object& o) const {
     cpp_settings r(default_settings_);
     populate (o, r);
     populate (co, r);

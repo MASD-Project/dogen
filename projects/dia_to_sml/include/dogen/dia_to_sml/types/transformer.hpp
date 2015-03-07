@@ -28,8 +28,8 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/dynamic/types/scope_types.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -57,7 +57,7 @@ public:
      *
      * @pre model in context must be populated.
      */
-    transformer(const dynamic::workflow& dynamic_workflow, context& c);
+    transformer(const dynamic::schema::workflow& w, context& c);
 
 private:
     /**
@@ -175,8 +175,8 @@ private:
         e.documentation(o.comment().documentation());
 
         const auto& kvps(o.comment().key_value_pairs());
-        const auto scope(dynamic::scope_types::entity);
-        e.extensions(dynamic_workflow_.execute(scope, kvps));
+        const auto scope(dynamic::schema::scope_types::entity);
+        e.extensions(dynamic_schema_workflow_.execute(scope, kvps));
     }
 
     /**
@@ -301,7 +301,7 @@ public:
 private:
     context& context_;
     std::shared_ptr<identifier_parser> identifier_parser_;
-    const dynamic::workflow& dynamic_workflow_;
+    const dynamic::schema::workflow& dynamic_schema_workflow_;
 };
 
 } }

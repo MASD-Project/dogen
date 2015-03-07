@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/io/formattables/family_types_io.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
@@ -79,8 +79,8 @@ to_family_type(const std::string s) const {
 }
 
 boost::optional<type_settings> type_settings_factory::
-make(const dynamic::object& o) const {
-    using namespace dynamic;
+make(const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
 
     type_settings r;
     using fd = field_definitions::type;

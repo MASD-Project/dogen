@@ -26,7 +26,7 @@
 #endif
 
 #include <forward_list>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -40,33 +40,33 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::field_definition>&
+    static const std::forward_list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**
      * @brief If set to false, the C++ backend will not
      * be generated.
      */
-    static const dynamic::field_definition& enabled();
+    static const dynamic::schema::field_definition& enabled();
 
     /**
      * @brief If true, the project will be split.
      *
      * @deprecated used only for backwards compatibility.
      */
-    static const dynamic::field_definition& split_project();
+    static const dynamic::schema::field_definition& split_project();
 
     /**
      * @brief Name of the directory in which to place the
      * implementation files.
      */
-    static const dynamic::field_definition& source_directory_name();
+    static const dynamic::schema::field_definition& source_directory_name();
 
     /**
      * @brief Name of the directory in which to place the header
      * files.
      */
-    static const dynamic::field_definition& include_directory_name();
+    static const dynamic::schema::field_definition& include_directory_name();
 
     /**
      * @brief Extension to use for header files, including the
@@ -74,7 +74,7 @@ struct field_definitions {
      *
      * Example: @e .hpp, @e .hxx
      */
-    static const dynamic::field_definition& header_file_extension();
+    static const dynamic::schema::field_definition& header_file_extension();
 
     /**
      * @brief Extension to use for implementation files, including
@@ -82,13 +82,13 @@ struct field_definitions {
      *
      * Example: @e .cpp, @e .cxx.
      */
-    static const dynamic::field_definition& implementation_file_extension();
+    static const dynamic::schema::field_definition& implementation_file_extension();
 
     /**
      * @brief If true, files for each facet will be placed in a
      * folder for the facet.
      */
-    static const dynamic::field_definition& enable_facet_folders();
+    static const dynamic::schema::field_definition& enable_facet_folders();
 
     /**
      * @brief If true, each file in each facet will have a name
@@ -96,7 +96,7 @@ struct field_definitions {
      *
      * This is achieved by using the facet's postfix.
      */
-    static const dynamic::field_definition& enable_unique_file_names();
+    static const dynamic::schema::field_definition& enable_unique_file_names();
 
     /**
      * @brief Dynamic properties that belong to the type itself.
@@ -105,27 +105,27 @@ struct field_definitions {
         /**
          * @brief To which family does the type belong to.
          */
-        static const dynamic::field_definition& family();
+        static const dynamic::schema::field_definition& family();
 
         /**
          * @brief If true, a manual default constructor must be
          * generated for this type.
          */
-        static const dynamic::field_definition&
+        static const dynamic::schema::field_definition&
         requires_manual_default_constructor();
 
         /**
          * @brief If true, a manual move constructor must be generated
          * for this type.
          */
-        static const dynamic::field_definition&
+        static const dynamic::schema::field_definition&
         requires_manual_move_constructor();
 
         /**
          * @brief If false, type does not require any include
          * statements.
          */
-        static const dynamic::field_definition& inclusion_required();
+        static const dynamic::schema::field_definition& inclusion_required();
     };
 };
 

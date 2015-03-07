@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/sml/types/model_fwd.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
@@ -47,7 +47,7 @@ public:
     ~workflow() = default;
 
 public:
-    explicit workflow(const dynamic::workflow& dynamic_workflow);
+    explicit workflow(const dynamic::schema::workflow& w);
 
 private:
     /**
@@ -89,7 +89,7 @@ private:
     profiler profiler_;
     validator validator_;
     std::unique_ptr<transformer> transformer_;
-    const dynamic::workflow& dynamic_workflow_;
+    const dynamic::schema::workflow& dynamic_schema_workflow_;
 };
 
 } }

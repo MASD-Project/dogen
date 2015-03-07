@@ -27,7 +27,7 @@
 
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/cpp/types/settings/cpp_settings.hpp"
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -55,7 +55,7 @@ private:
      * @brief Populates the settings with values from the dynamic
      * object.
      */
-    void populate(const dynamic::object& o, cpp_settings& s) const;
+    void populate(const dynamic::schema::object& o, cpp_settings& s) const;
 
     /**
      * @brief Populates the settings with values from the config
@@ -69,7 +69,7 @@ public:
      * properties. The missing values are defaulted.
      */
     cpp_settings
-    make(const config::cpp_options& co, const dynamic::object& o) const;
+    make(const config::cpp_options& co, const dynamic::schema::object& o) const;
 
 private:
     cpp_settings default_settings_;

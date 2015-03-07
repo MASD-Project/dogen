@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
@@ -68,17 +68,19 @@ private:
     /**
      * @brief Extracts a licence from the dynamic object.
      */
-    boost::optional<licence> extract_licence(const dynamic::object& o) const;
+    boost::optional<licence>
+    extract_licence(const dynamic::schema::object& o) const;
 
     /**
      * @brief Extracts a modeline the dynamic object.
      */
-    boost::optional<modeline> extract_modeline(const dynamic::object& o) const;
+    boost::optional<modeline>
+    extract_modeline(const dynamic::schema::object& o) const;
 
     /**
      * @brief Extracts a code generation marker the dynamic object.
      */
-    std::string extract_marker(const dynamic::object& o) const;
+    std::string extract_marker(const dynamic::schema::object& o) const;
 
 private:
     /**
@@ -118,7 +120,7 @@ public:
      *
      * @pre load reference data must have been called.
      */
-    general_settings make(const dynamic::object& o) const;
+    general_settings make(const dynamic::schema::object& o) const;
 
     /**
      * @brief Generates general settings from the dynamic object, only
@@ -128,7 +130,7 @@ public:
      * @pre load reference data must have been called.
      */
     boost::optional<general_settings>
-    make_only_if_overriden(const dynamic::object& o) const;
+    make_only_if_overriden(const dynamic::schema::object& o) const;
 
 private:
     std::forward_list<boost::filesystem::path> data_files_directories_;

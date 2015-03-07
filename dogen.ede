@@ -19,7 +19,7 @@
    "/projects/sml_to_cpp/include"
    "/projects/formatters/include"
    "/projects/utility/include"
-   "/projects/dynamic/include"
+   "/projects/dynamic/schema/include"
 
    "/projects/test_models/all_primitives/include"
    "/projects/test_models/class_in_a_package/include"

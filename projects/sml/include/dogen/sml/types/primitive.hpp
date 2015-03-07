@@ -47,7 +47,7 @@ public:
 public:
     primitive(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::dynamic::schema::object& extensions,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,

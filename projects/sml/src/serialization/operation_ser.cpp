@@ -30,7 +30,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/optional.hpp>
 #include <boost/serialization/string.hpp>
-#include "dogen/dynamic/serialization/object_ser.hpp"
+#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 #include "dogen/sml/serialization/operation_ser.hpp"
 #include "dogen/sml/serialization/parameter_ser.hpp"

@@ -26,7 +26,7 @@
 #endif
 
 #include <forward_list>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -39,7 +39,7 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::field_definition>&
+    static const std::forward_list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**
@@ -48,21 +48,21 @@ struct field_definitions {
      * It is expected to be repeated in a model; order is kept as
      * provided by user.
      */
-    static const dynamic::field_definition& copyright_notices();
+    static const dynamic::schema::field_definition& copyright_notices();
 
     /**
      * @brief Name of the legal licence to use.
      *
      * Must match licences available in library.
      */
-    static const dynamic::field_definition& licence_name();
+    static const dynamic::schema::field_definition& licence_name();
 
     /**
      * @brief Name of the modeline group to use.
      *
      * Must match licences available in library.
      */
-    static const dynamic::field_definition& modeline_group_name();
+    static const dynamic::schema::field_definition& modeline_group_name();
 
     /**
      * @brief Whether to generate the preamble or not.
@@ -70,7 +70,7 @@ struct field_definitions {
      * The preamble is made up of a modeline, copyright
      * information and licensing details.
      */
-    static const dynamic::field_definition& generate_preamble();
+    static const dynamic::schema::field_definition& generate_preamble();
 
     /**
      * @brief Tags related to the code generation marker.
@@ -80,18 +80,18 @@ struct field_definitions {
          * @brief Whether to add the generation date and time to the
          * marker or not.
          */
-        static const dynamic::field_definition& add_date_time();
+        static const dynamic::schema::field_definition& add_date_time();
 
         /**
          * @brief Whether to add a warning not to modify code-generated
          * files or not.
          */
-        static const dynamic::field_definition& add_warning();
+        static const dynamic::schema::field_definition& add_warning();
 
         /**
          * @brief Message to place on all code-generated files.
          */
-        static const dynamic::field_definition& message();
+        static const dynamic::schema::field_definition& message();
     };
 };
 

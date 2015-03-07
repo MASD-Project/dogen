@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <string>
-#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/sml/serialization/parameter_fwd_ser.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 
@@ -47,7 +47,7 @@ public:
 public:
     parameter(
         const std::string& documentation,
-        const dogen::dynamic::object& extensions,
+        const dogen::dynamic::schema::object& extensions,
         const std::string& name,
         const dogen::sml::nested_qname& type);
 
@@ -77,10 +77,10 @@ public:
      * @brief Dynamic extensions for this element.
      */
     /**@{*/
-    const dogen::dynamic::object& extensions() const;
-    dogen::dynamic::object& extensions();
-    void extensions(const dogen::dynamic::object& v);
-    void extensions(const dogen::dynamic::object&& v);
+    const dogen::dynamic::schema::object& extensions() const;
+    dogen::dynamic::schema::object& extensions();
+    void extensions(const dogen::dynamic::schema::object& v);
+    void extensions(const dogen::dynamic::schema::object&& v);
     /**@}*/
 
     /**
@@ -115,7 +115,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::dynamic::object extensions_;
+    dogen::dynamic::schema::object extensions_;
     std::string name_;
     dogen::sml::nested_qname type_;
 };

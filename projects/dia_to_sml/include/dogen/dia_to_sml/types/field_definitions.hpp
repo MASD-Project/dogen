@@ -26,7 +26,7 @@
 #endif
 
 #include <forward_list>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace dia_to_sml {
@@ -39,7 +39,7 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::field_definition>&
+    static const std::forward_list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**
@@ -50,12 +50,12 @@ struct field_definitions {
      * they are not (e.g. model, package), it will be used to populate
      * the meta-type's documentation.
      */
-    static const dynamic::field_definition& comment();
+    static const dynamic::schema::field_definition& comment();
 
     /**
      * @brief Attribute that provides this entity its identity.
      */
-    static const dynamic::field_definition&  identity_attribute();
+    static const dynamic::schema::field_definition&  identity_attribute();
 };
 
 } }

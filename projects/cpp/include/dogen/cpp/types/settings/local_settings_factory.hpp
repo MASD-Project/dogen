@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/types/indexer.hpp"
+#include "dogen/dynamic/schema/types/indexer.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/local_settings.hpp"
@@ -53,7 +53,7 @@ public:
      */
     std::unordered_map<std::string, local_settings>
     make(const dogen::formatters::general_settings_factory&
-        general_settings_factory, const dynamic::indexer& idx,
+        general_settings_factory, const dynamic::schema::indexer& idx,
         const sml::model& m) const;
 };
 

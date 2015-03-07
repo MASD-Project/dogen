@@ -48,14 +48,14 @@ public:
     generator(const dogen::formatters::general_settings_factory&
         general_settings_factory, const std::unordered_map<
             std::string,
-            std::forward_list<dynamic::field_definition> >&
+            std::forward_list<dynamic::schema::field_definition> >&
         field_definitions_by_formatter_name);
 
 private:
     /**
      * @brief Generates the local settings for the identity.
      */
-    void generate(const sml::qname& qn, const dynamic::object& o);
+    void generate(const sml::qname& qn, const dynamic::schema::object& o);
 
 public:
     void operator()(const dogen::sml::type& t);
@@ -68,23 +68,23 @@ public:
 private:
     const dogen::formatters::general_settings_factory&
     general_settings_factory_;
-    const std::unordered_map<std::string,
-                             std::forward_list<dynamic::field_definition>
-                             >& field_definitions_by_formatter_name_;
+    const std::unordered_map<
+        std::string, std::forward_list<dynamic::schema::field_definition>
+        >& field_definitions_by_formatter_name_;
     std::unordered_map<std::string, local_settings> result_;
 };
 
 generator::generator(const dogen::formatters::general_settings_factory&
     general_settings_factory, const std::unordered_map<
-        std::string,
-        std::forward_list<dynamic::field_definition> >&
+        std::string, std::forward_list<dynamic::schema::field_definition> >&
     field_definitions_by_formatter_name)
     : general_settings_factory_(general_settings_factory),
       field_definitions_by_formatter_name_(
           field_definitions_by_formatter_name) {
 }
 
-void generator::generate(const sml::qname& qn, const dynamic::object& o) {
+void generator::
+generate(const sml::qname& qn, const dynamic::schema::object& o) {
     std::pair<std::string, local_settings> pair;
     pair.first = sml::string_converter::convert(qn);
 
@@ -130,7 +130,7 @@ generator::result() const {
 
 std::unordered_map<std::string, local_settings>
 local_settings_factory::make(const dogen::formatters::general_settings_factory&
-    general_settings_factory, const dynamic::indexer& idx,
+    general_settings_factory, const dynamic::schema::indexer& idx,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Building all local settings.";
 

@@ -24,9 +24,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/test/mock_workflow_factory.hpp"
-#include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -174,8 +174,8 @@ const std::string module_path_model(R"({
   }
 )");
 
-const dogen::dynamic::workflow& dynamic_workflow() {
-    using dogen::dynamic::test::mock_workflow_factory;
+const dogen::dynamic::schema::workflow& dynamic_workflow() {
+    using dogen::dynamic::schema::test::mock_workflow_factory;
     return mock_workflow_factory::non_validating_workflow();
 }
 
@@ -194,23 +194,25 @@ dogen::sml::model hydrate(const std::string content) {
     return hydrate(s);
 }
 
-dogen::dynamic::field_definition create_field_definition(const std::string n,
-    dogen::dynamic::value_types vt = dogen::dynamic::value_types::text) {
-    dogen::dynamic::field_definition r;
+dogen::dynamic::schema::field_definition
+create_field_definition(const std::string n,
+    dogen::dynamic::schema::value_types vt =
+    dogen::dynamic::schema::value_types::text) {
+    dogen::dynamic::schema::field_definition r;
     r.name().simple(n);
     r.name().qualified(n);
     r.type(vt);
-    r.scope(dogen::dynamic::scope_types::any);
+    r.scope(dogen::dynamic::schema::scope_types::any);
     return r;
 }
 
 struct register_fields {
     register_fields() {
-        auto& reg(dogen::dynamic::workflow::registrar());
+        auto& reg(dogen::dynamic::schema::workflow::registrar());
         reg.register_field_definition(create_field_definition(model_key));
         reg.register_field_definition(create_field_definition(some_key));
         reg.register_field_definition(create_field_definition(type_key,
-                dogen::dynamic::value_types::boolean));
+                dogen::dynamic::schema::value_types::boolean));
     }
 };
 
@@ -261,7 +263,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     const auto& dyn(m.extensions());
     BOOST_CHECK(dyn.fields().size() == 2);
 
-    using namespace dogen::dynamic;
+    using namespace dogen::dynamic::schema;
     {
         BOOST_REQUIRE(has_field(dyn, some_key));
         BOOST_REQUIRE(get_text_content(dyn, some_key) == some_value);

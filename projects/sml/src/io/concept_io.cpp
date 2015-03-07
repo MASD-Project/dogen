@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/dynamic/io/object_io.hpp"
+#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/operation_io.hpp"

@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dynamic/io/object_io.hpp"
+#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/parameter_io.hpp"
 

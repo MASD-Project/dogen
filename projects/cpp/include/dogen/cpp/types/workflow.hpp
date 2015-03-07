@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
@@ -70,7 +70,7 @@ private:
      */
     settings::settings create_settings_activty(
         const config::knitting_options& o,
-        const std::forward_list<dynamic::field_definition>& fds,
+        const std::forward_list<dynamic::schema::field_definition>& fds,
         const sml::model& m) const;
 
     /**

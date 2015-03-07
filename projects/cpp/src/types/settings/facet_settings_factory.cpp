@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/content_extensions.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/facet_settings_factory.hpp"
@@ -51,8 +51,8 @@ ensure_field_is_present(const bool found, const std::string& name) const {
 }
 
 global_facet_settings facet_settings_factory::create_global_settings_for_facet(
-    const std::forward_list<dynamic::field_definition>& facet_fields,
-    const dynamic::object& o) const {
+    const std::forward_list<dynamic::schema::field_definition>& facet_fields,
+    const dynamic::schema::object& o) const {
 
     global_facet_settings r;
     bool found_enabled(false), found_directory(false), found_postfix(false),
@@ -63,7 +63,7 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
     const auto& integrated_facet_trait(traits::facet::integrated_facet());
 
     for (const auto& fd : facet_fields) {
-        using namespace dynamic;
+        using namespace dynamic::schema;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
                 const auto& n(fd.name().qualified());
@@ -141,8 +141,8 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
 
 boost::optional<local_facet_settings> facet_settings_factory::
 create_local_settings_for_facet(
-    const std::forward_list<dynamic::field_definition>& facet_fields,
-    const dynamic::object& o) const {
+    const std::forward_list<dynamic::schema::field_definition>& facet_fields,
+    const dynamic::schema::object& o) const {
 
     local_facet_settings r;
     bool found_supported(false);
@@ -150,7 +150,7 @@ create_local_settings_for_facet(
     const auto& supported_trait(traits::facet::supported());
 
     for (const auto fd : facet_fields) {
-        using namespace dynamic;
+        using namespace dynamic::schema;
         if (fd.name().simple() == supported_trait) {
             if (found_supported) {
                 const auto& n(fd.name().qualified());
@@ -184,9 +184,9 @@ create_local_settings_for_facet(
 std::unordered_map<std::string, global_facet_settings>
 facet_settings_factory::make_global_settings(
     const std::unordered_map<std::string,
-    std::forward_list<dynamic::field_definition>>&
+    std::forward_list<dynamic::schema::field_definition>>&
     field_definitions_by_facet_name,
-    const dynamic::object& o) const {
+    const dynamic::schema::object& o) const {
 
     std::unordered_map<std::string, global_facet_settings> r;
     for (const auto pair : field_definitions_by_facet_name) {
@@ -201,9 +201,9 @@ facet_settings_factory::make_global_settings(
 std::unordered_map<std::string, local_facet_settings>
 facet_settings_factory::make_local_settings(
     const std::unordered_map<std::string,
-    std::forward_list<dynamic::field_definition>>&
+    std::forward_list<dynamic::schema::field_definition>>&
     field_definitions_by_facet_name,
-    const dynamic::object& o) const {
+    const dynamic::schema::object& o) const {
 
     std::unordered_map<std::string, local_facet_settings> r;
     for (const auto pair : field_definitions_by_facet_name) {

@@ -26,7 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include "dogen/dynamic/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/schema/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
@@ -36,7 +36,7 @@ namespace sml {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dynamic::register_types(ar);
+    dynamic::schema::register_types(ar);
 
     ar.template register_type<dogen::sml::enumeration>();
     ar.template register_type<dogen::sml::object>();

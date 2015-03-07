@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/test_data/object_td.hpp"
+#include "dogen/dynamic/schema/test_data/object_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/module_types_td.hpp"
@@ -34,9 +34,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::dynamic::object
-create_dogen_dynamic_object(const unsigned int position) {
-    return dogen::dynamic::object_generator::create(position);
+dogen::dynamic::schema::object
+create_dogen_dynamic_schema_object(const unsigned int position) {
+    return dogen::dynamic::schema::object_generator::create(position);
 }
 
 dogen::sml::qname
@@ -84,7 +84,7 @@ module_generator::module_generator() : position_(0) { }
 void module_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.extensions(create_dogen_dynamic_object(position + 1));
+    v.extensions(create_dogen_dynamic_schema_object(position + 1));
     v.name(create_dogen_sml_qname(position + 2));
     v.generation_type(create_dogen_sml_generation_types(position + 3));
     v.origin_type(create_dogen_sml_origin_types(position + 4));

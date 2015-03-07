@@ -19,17 +19,17 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/dynamic/types/text.hpp"
-#include "dogen/dynamic/types/boolean.hpp"
-#include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/dynamic/types/value_types.hpp"
+#include "dogen/dynamic/schema/types/text.hpp"
+#include "dogen/dynamic/schema/types/boolean.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
+#include "dogen/dynamic/schema/types/value_types.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 
 namespace {
 
-using namespace dogen::dynamic;
+using namespace dogen::dynamic::schema;
 using namespace dogen::cpp::formatters::odb;
 
 field_definition create_enabled() {
@@ -103,21 +103,21 @@ field_definition create_class_header_formatter_postfix() {
     return r;
 }
 
-dogen::dynamic::field_definition create_odb_pragma() {
-    dogen::dynamic::field_definition r;
+dogen::dynamic::schema::field_definition create_odb_pragma() {
+    dogen::dynamic::schema::field_definition r;
     r.name().simple("odb_pragma");
     r.name().qualified(r.name().simple());
     r.ownership_hierarchy().model_name(
         dogen::cpp::formatters::traits::model_name());
     r.ownership_hierarchy().facet_name(traits::facet_name());
-    r.type(dogen::dynamic::value_types::text_collection);
-    r.scope(dogen::dynamic::scope_types::any);
+    r.type(dogen::dynamic::schema::value_types::text_collection);
+    r.scope(dogen::dynamic::schema::scope_types::any);
     return r;
 }
 
-std::forward_list<dogen::dynamic::field_definition>
+std::forward_list<dogen::dynamic::schema::field_definition>
 create_all_field_definitions() {
-    using dogen::dynamic::field_definition;
+    using dogen::dynamic::schema::field_definition;
     std::forward_list<field_definition> r;
 
     using fd = dogen::cpp::formatters::odb::field_definitions;
@@ -139,40 +139,40 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-const std::forward_list<dynamic::field_definition>&
+const std::forward_list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::enabled() {
+const dynamic::schema::field_definition& field_definitions::enabled() {
     static auto r(create_enabled());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::directory() {
+const dynamic::schema::field_definition& field_definitions::directory() {
     static auto r(create_directory());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::postfix() {
+const dynamic::schema::field_definition& field_definitions::postfix() {
     static auto r(create_postfix());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::enabled() {
     static auto r(create_class_header_formatter_enabled());
     return r;
 }
 
-const dynamic::field_definition&
+const dynamic::schema::field_definition&
 field_definitions::class_header_formatter::postfix() {
     static auto r(create_class_header_formatter_postfix());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::odb_pragma() {
+const dynamic::schema::field_definition& field_definitions::odb_pragma() {
     static auto r(create_odb_pragma());
     return r;
 }

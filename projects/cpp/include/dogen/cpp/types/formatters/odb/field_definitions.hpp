@@ -26,7 +26,7 @@
 #endif
 
 #include <forward_list>
-#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -41,28 +41,28 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::field_definition>&
+    static const std::forward_list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**
      * @brief If set to false, the facet will not be generated.
      */
-    static const dynamic::field_definition& enabled();
+    static const dynamic::schema::field_definition& enabled();
 
     /**
      * @brief Directory in which to place files for this facet.
      */
-    static const dynamic::field_definition& directory();
+    static const dynamic::schema::field_definition& directory();
 
     /**
      * @brief Post-fix to apply to file names for this facet.
      */
-    static const dynamic::field_definition& postfix();
+    static const dynamic::schema::field_definition& postfix();
 
     /**
      * @brief The pragma used by the ODB compiler.
      */
-    static const dynamic::field_definition& odb_pragma();
+    static const dynamic::schema::field_definition& odb_pragma();
 
     /**
      * @brief Fields supported by the class header formatter.
@@ -71,12 +71,12 @@ struct field_definitions {
         /**
          * @brief If set to false, the formatter will not be generated.
          */
-        static const dynamic::field_definition& enabled();
+        static const dynamic::schema::field_definition& enabled();
 
         /**
          * @brief Post-fix to apply to file names for this formatter.
          */
-        static const dynamic::field_definition& postfix();
+        static const dynamic::schema::field_definition& postfix();
     };
 };
 

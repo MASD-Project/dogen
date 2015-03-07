@@ -14,15 +14,16 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-07 Sat 19:25]
+Clock summary at [2015-03-07 Sat 21:47]
 
-| Headline                                       | Time   |      |      |
-|------------------------------------------------+--------+------+------|
-| *Total time*                                   | *3:14* |      |      |
-|------------------------------------------------+--------+------+------|
-| Active                                         |        | 3:14 |      |
-| STARTED Sprint and product backlog grooming    |        |      | 1:05 |
-| STARTED Consider creating a rules based engine |        |      | 2:09 |
+| Headline                                         | Time   |      |      |
+|--------------------------------------------------+--------+------+------|
+| *Total time*                                     | *4:58* |      |      |
+|--------------------------------------------------+--------+------+------|
+| Active                                           |        | 4:58 |      |
+| STARTED Sprint and product backlog grooming      |        |      | 1:05 |
+| COMPLETED Consider creating a rules based engine |        |      | 2:09 |
+| COMPLETED Rename =dynamic= to =dynamic::schema=  |        |      | 1:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -36,7 +37,8 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** STARTED Consider creating a rules based engine                    :story:
+*** COMPLETED Consider creating a rules based engine                  :story:
+    CLOSED: [2015-03-07 Sat 19:28]
     CLOCK: [2015-03-07 Sat 17:38]--[2015-03-07 Sat 17:44] =>  0:06
     CLOCK: [2015-03-07 Sat 17:20]--[2015-03-07 Sat 17:24] =>  0:04
     CLOCK: [2015-02-16 Mon 20:03]--[2015-02-16 Mon 22:02] =>  1:59
@@ -142,10 +144,21 @@ formatters and aspects to a set of rules, parsed by a rules engine:
 This seems extremely complex but its worth starting a thought
 experiment.
 
-*** Rename =dynamic= to =dynamic::schema=                             :story:
+*** COMPLETED Rename =dynamic= to =dynamic::schema=                   :story:
+    CLOSED: [2015-03-07 Sat 21:45]
+    CLOCK: [2015-03-07 Sat 20:31]--[2015-03-07 Sat 21:45] =>  1:14
+    CLOCK: [2015-03-07 Sat 19:25]--[2015-03-07 Sat 19:55] =>  1:18
 
 As per analysis we need to create two "sub-models" in dynamic, so we
 need to move existing model into =dynamic::schema=.
+
+- registrar formatter does not use fully qualified name for registrars
+  on other models (serialisation).
+
+*** Generate registrar correctly when using external model path       :story:
+
+After the dynamic rename we borked the code generation of the
+registrar for serialisation. Fix it.
 
 *** Create a JSON file format for field definitions                   :story:
 

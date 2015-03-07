@@ -29,7 +29,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
-#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace dogen {
 namespace frontend {
@@ -61,7 +61,7 @@ public:
      * SML model.
      */
     virtual sml::model
-    generate(const dynamic::workflow& w, const input_descriptor& d,
+    generate(const dynamic::schema::workflow& w, const input_descriptor& d,
         const frontend_settings& s) = 0;
 };
 

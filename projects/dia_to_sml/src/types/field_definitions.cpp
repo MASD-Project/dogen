@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/dynamic/types/value_types.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
+#include "dogen/dynamic/schema/types/value_types.hpp"
 #include "dogen/dia_to_sml/types/traits.hpp"
 #include "dogen/dia_to_sml/types/field_definitions.hpp"
 
@@ -27,29 +27,29 @@ namespace {
 
 using dogen::dia_to_sml::traits;
 
-dogen::dynamic::field_definition create_comment() {
-    dogen::dynamic::field_definition r;
+dogen::dynamic::schema::field_definition create_comment() {
+    dogen::dynamic::schema::field_definition r;
     r.name().simple("comment");
     r.name().qualified("dia.comment");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::not_applicable);
+    r.type(dogen::dynamic::schema::value_types::boolean);
+    r.scope(dogen::dynamic::schema::scope_types::not_applicable);
     return r;
 }
 
-dogen::dynamic::field_definition create_identity_attribute() {
-    dogen::dynamic::field_definition r;
+dogen::dynamic::schema::field_definition create_identity_attribute() {
+    dogen::dynamic::schema::field_definition r;
     r.name().simple("identity_attribute");
     r.name().qualified("dia.identity_attribute");
     r.ownership_hierarchy().model_name(traits::model_name());
-    r.type(dogen::dynamic::value_types::boolean);
-    r.scope(dogen::dynamic::scope_types::property);
+    r.type(dogen::dynamic::schema::value_types::boolean);
+    r.scope(dogen::dynamic::schema::scope_types::property);
     return r;
 }
 
-std::forward_list<dogen::dynamic::field_definition>
+std::forward_list<dogen::dynamic::schema::field_definition>
 create_all_field_definitions() {
-    using dogen::dynamic::field_definition;
+    using dogen::dynamic::schema::field_definition;
     std::forward_list<field_definition> r;
 
     using dogen::dia_to_sml::field_definitions;
@@ -63,18 +63,19 @@ create_all_field_definitions() {
 namespace dogen {
 namespace dia_to_sml {
 
-const std::forward_list<dynamic::field_definition>&
+const std::forward_list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::comment() {
+const dynamic::schema::field_definition& field_definitions::comment() {
     static auto r(create_comment());
     return r;
 }
 
-const dynamic::field_definition& field_definitions::identity_attribute() {
+const dynamic::schema::field_definition&
+field_definitions::identity_attribute() {
     static auto r(create_identity_attribute());
     return r;
 }
