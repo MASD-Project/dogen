@@ -3243,7 +3243,8 @@ According to these rules we have:
 
 Indentation will be kept as simple as possible, with the expectation
 that there will be a further pass using clang format. Note that using
-clang to manage indentation will make things a lot slower.
+clang to manage indentation will make things a lot slower. Note also
+that clang supports Java and may in future support C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
 
 Now of course there is the question of where to put this code in such
 a way that it compiles. What one then needs is a formatter template:
