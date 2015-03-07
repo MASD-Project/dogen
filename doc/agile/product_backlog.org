@@ -4195,6 +4195,18 @@ since they are implemented on the cpp. As there is no need for
 template types, this seems like an ok limitation.
 
 ** Tooling, infrastructure, blog posts, etc.
+
+*** Use clang format to format the code base                          :story:
+
+It seems clang-format is being used by quite a lot of people to save
+time with the formatting of the code. More info:
+
+http://clang.llvm.org/docs/ClangFormat.html
+
+Emacs support:
+
+https://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format/clang-format.el
+
 *** Investigate NeoVim's emblems                                      :story:
 
 They appear to have emblems for issues, connected to waffle as well as
