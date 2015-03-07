@@ -442,6 +442,17 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Nested external model path results in strange references          :story:
+
+For the dynamic schema model we have an external model path of
+=dogen::dynamic::schema=. This is because there are two things we need to place
+under =dynamic= (also =dogen::dynamic::expansion=). This revealed a
+more general problem: nesting of external model paths results in
+"strange" references in dependent models. For example, in SML we have
+to say =schema::dynamic_object= to refer to
+=dogen::dynamic::schema::dynamic_object=. We need to figure out what
+is the best approach for this.
+
 *** Consider renaming qname                                           :story:
 
 As part of dynamic we came up with a better way of modeling names:
