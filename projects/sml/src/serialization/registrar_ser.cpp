@@ -36,7 +36,7 @@ namespace sml {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dynamic::schema::register_types(ar);
+    dogen::dynamic::schema::register_types(ar);
 
     ar.template register_type<dogen::sml::enumeration>();
     ar.template register_type<dogen::sml::object>();

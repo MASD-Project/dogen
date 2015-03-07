@@ -14,16 +14,17 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-07 Sat 21:47]
+Clock summary at [2015-03-07 Sat 22:12]
 
-| Headline                                         | Time   |      |      |
-|--------------------------------------------------+--------+------+------|
-| *Total time*                                     | *4:58* |      |      |
-|--------------------------------------------------+--------+------+------|
-| Active                                           |        | 4:58 |      |
-| STARTED Sprint and product backlog grooming      |        |      | 1:05 |
-| COMPLETED Consider creating a rules based engine |        |      | 2:09 |
-| COMPLETED Rename =dynamic= to =dynamic::schema=  |        |      | 1:44 |
+| Headline                                                              | Time   |      |      |
+|-----------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                          | *5:23* |      |      |
+|-----------------------------------------------------------------------+--------+------+------|
+| Active                                                                |        | 5:23 |      |
+| STARTED Sprint and product backlog grooming                           |        |      | 1:05 |
+| COMPLETED Consider creating a rules based engine                      |        |      | 2:09 |
+| COMPLETED Rename =dynamic= to =dynamic::schema=                       |        |      | 1:44 |
+| COMPLETED Generate registrar correctly when using external model path |        |      | 0:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -155,7 +156,9 @@ need to move existing model into =dynamic::schema=.
 - registrar formatter does not use fully qualified name for registrars
   on other models (serialisation).
 
-*** Generate registrar correctly when using external model path       :story:
+*** COMPLETED Generate registrar correctly when using external model path :story:
+    CLOSED: [2015-03-07 Sat 22:12]
+    CLOCK: [2015-03-07 Sat 21:47]--[2015-03-07 Sat 22:12] =>  0:25
 
 After the dynamic rename we borked the code generation of the
 registrar for serialisation. Fix it.

@@ -606,8 +606,11 @@ void transformer::model_to_registrar_info() {
     ri->namespaces(to_namespace_list(model_.name()));
 
     for (const auto& pair : model_.references()) {
-        if (pair.second != sml::origin_types::system)
-            ri->model_dependencies().push_back(pair.first.model_name());
+        if (pair.second != sml::origin_types::system) {
+            const auto l(to_namespace_list(pair.first));
+            const auto s(boost::algorithm::join(l, namespace_separator));
+            ri->model_dependencies().push_back(s);
+        }
     }
 
     for (const auto& l : model_.leaves())

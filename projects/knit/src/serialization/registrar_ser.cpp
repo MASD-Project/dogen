@@ -34,8 +34,8 @@ namespace knit {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    config::register_types(ar);
-    sml::register_types(ar);
+    dogen::config::register_types(ar);
+    dogen::sml::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

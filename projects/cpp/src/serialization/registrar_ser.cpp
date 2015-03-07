@@ -45,8 +45,8 @@ namespace cpp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    sml::register_types(ar);
-    config::register_types(ar);
+    dogen::sml::register_types(ar);
+    dogen::config::register_types(ar);
 
     ar.template register_type<dogen::cpp::formattables::class_info>();
     ar.template register_type<dogen::cpp::formattables::cmakelists_info>();
