@@ -5,27 +5,29 @@
 
 * Mission
 
-Make dynamic reflect the use cases we have found so far in formatters,
-implement inclusion for types header files and start implementing the
-header file formatter.
+Make dynamic reflect the use cases we have found so far in
+formatters. Flesh out the analysis into well defined stories and start
+implementing them.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-02-16 Mon 22:03]
+Clock summary at [2015-03-07 Sat 19:25]
 
 | Headline                                       | Time   |      |      |
 |------------------------------------------------+--------+------+------|
-| *Total time*                                   | *2:05* |      |      |
+| *Total time*                                   | *3:14* |      |      |
 |------------------------------------------------+--------+------+------|
-| Active                                         |        | 2:05 |      |
-| STARTED Sprint and product backlog grooming    |        |      | 0:06 |
-| STARTED Consider creating a rules based engine |        |      | 1:59 |
+| Active                                         |        | 3:14 |      |
+| STARTED Sprint and product backlog grooming    |        |      | 1:05 |
+| STARTED Consider creating a rules based engine |        |      | 2:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-03-07 Sat 19:16]--[2015-03-07 Sat 19:25] =>  0:09
+    CLOCK: [2015-03-07 Sat 17:44]--[2015-03-07 Sat 18:34] =>  0:50
     CLOCK: [2015-02-15 Sun 23:36]--[2015-02-15 Sun 23:42] =>  0:06
 
 Updates to sprint and product backlog.
@@ -35,6 +37,8 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Consider creating a rules based engine                    :story:
+    CLOCK: [2015-03-07 Sat 17:38]--[2015-03-07 Sat 17:44] =>  0:06
+    CLOCK: [2015-03-07 Sat 17:20]--[2015-03-07 Sat 17:24] =>  0:04
     CLOCK: [2015-02-16 Mon 20:03]--[2015-02-16 Mon 22:02] =>  1:59
 
 *New Understanding*
@@ -69,12 +73,12 @@ formatter does not care either).
 
 In this sense we split dynamic into two:
 
-- schema: what we currently call dynamic. Basically the strong types
+- =schema=: what we currently call dynamic. Basically the strong types
   around the dynamic extensions.
-- expansion: the rules engine that expands the basic dynamic object
+- =expansion=: the rules engine that expands the basic dynamic object
   populated by the user.
 
-For schema, very few changes are required:
+For =schema=, very few changes are required:
 
 - rename dynamic model into dynamic/schema.
 - we need to load field definitions from file. Creating these manually
@@ -138,6 +142,143 @@ formatters and aspects to a set of rules, parsed by a rules engine:
 This seems extremely complex but its worth starting a thought
 experiment.
 
+*** Rename =dynamic= to =dynamic::schema=                             :story:
+
+As per analysis we need to create two "sub-models" in dynamic, so we
+need to move existing model into =dynamic::schema=.
+
+*** Create a JSON file format for field definitions                   :story:
+
+We need to read the field definitions from file rather than hard-code
+them. We also need to figure out where to place them: in the central
+library folder or together with the models?
+
+The JSON support should live in =dynamic::schema=. We need a simple
+=hydrator= class with a simple test case.
+
+*** Convert all field definitions into JSON                           :story:
+
+- find all code that creates field definitions and move it to JSON.
+- create a workflow that reads in all field definitions and then
+  registers them.
+
+*** Create a =dynamic::expansion= model with a sample operation       :story:
+
+As per analysis we need to add support for predicates, operations and
+transformation. To start off with we should create a very simple
+operation (potentially with the predicate "true") that instantiates
+defaults. It goes through every field definition and for those with
+default values, it populates the field with it's default value.
+
+We probably just need a simple workflow that executes all operations
+on a supplied =dynamic::object= and returns the transformed
+=dynamic::object=. Operations are registered against the workflow.
+
+In terms of predicates: we do not seem to need fine grained
+predicates, that are then used to compose of a number of more complex
+predicates (e.g. "if path exists", "not", "true", etc.). It actually
+seems more wise to just have "preconditions" that are implemented in
+code (e.g. "ensure this list of fields exist"). This will avoid having
+a really complicated logic in data files that builds the
+preconditions. We could also have an optional precondition so that
+"true" is no longer required.
+
+Also we should name "operations" "expanders". After all we are
+executing the expansion workflow.
+
+*** Add an operation graph to expansion                               :story:
+
+This simply looks at all the registered operations and their
+dependencies (simply a string with the operation name) and ensures
+that:
+
+- all dependencies are met; and
+- there are no cycles in the graph of dependencies.
+
+The graph is then used to execute the operations in order.
+
+*** Create a "copy from root" operation                               :story:
+
+Some fields can only be populated at the root. However, we need them
+to be available on every dynamic object. We need an operation that
+takes into account the scope of the field and copies it. This may not
+be that straightforward. We should also look into other scopes to see
+what makes sense here to copy.
+
+This operation should execute after defaulting. It should live in
+dynamic.
+
+*** Add an "enabled" operation                                        :story:
+
+We need an operation that is able to look at the model, facet,
+formatter values for the enabled field and determine what value to use
+for the formatter. It's predicate is =true=. Or perhaps we need
+conditional and unconditional operations.
+
+This operation should execute after copy from root. It should live in
+dynamic.
+
+*** Create a "populate file path" operation                           :story:
+
+We need an operation that uses all the ingredients for a file path and
+generates the file path. It is unconditional. It depends on
+defaulting.
+
+This should populate both the inclusion path (and delimiter) and the
+full path. It should take into account overriding.
+
+We should consider having two operations: the full path and the
+inclusion path.
+
+This operation should live in c++.
+
+*** Create a "populate includes operation"                            :story:
+
+This operation needs to be implemented by every formatter. It queries
+the model to look for all the types it depends on and obtains the
+corresponding include paths from them. It places them in a formatter
+specific list of includes. It depends on the inclusion path operation.
+
+*** Create a "supported" operation                                    :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+*** Create an operation to populate c++ properties                    :story:
+
+There are a number of properties such as "requires default
+constructor" and so on that are specific to the c++ model. Some
+require looking at related types (do they have the property enabled?)
+some others require looking at the SML model graph. It seems they
+should all live under one single operation (or perhaps a few), but we
+do not have any good names for them.
+
+*** Add dynamic consistency validation                                :story:
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+*** Create a list of valid values for field definitions               :story:
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
+
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
+
 *** Clean-up hierarchical support in dynamic                          :story:
 
 At present there are a number of limitations on how we have
@@ -152,295 +293,5 @@ few other assorted clean-ups:
 
 - rename workflow (since we now have two);
 - rename content extensions since this is a selector in disguise;
-
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via dynamic extensions, so we can start using
-  STL, Boost etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-Notes:
-
-- rename header file to file name override or something else quite
-  distinct. We need to ensure it is obvious that this property is only
-  used for non-dogen models. Actually we can now just call it include
-  path.
-- however we still have a problem: when we compute the include path we
-  do not know if it is a system or user path. We need to change file
-  properties to take this into account. We need a include path class
-  with a include type: user or system. we could then use this.
-- add field definition =no_inclusion_required= and populate all
-  relevant primitives.
-
-We need to add the notion of aspects. This is because a lot of things
-we have dealt with individually are really all related to aspects. An
-aspect is a part of a formatter that can be enabled or disabled. For
-example:
-
-- manual move constructor
-- manual default constructor
-- inserter operator
-- swap function
-- etc.
-
-We could simply create aspect settings; local and global formatters
-would have a map of =aspect_settings= against an =aspect_name=. We
-need to remove the integrated facet approach and implement it in terms
-of this. We should go through the types formatter and figure out which
-aspects it has. For now we shall ignore relationships between aspects
-and facets (and any other kind of switching logic). For example, it is
-the responsibility of the user to ensure that if integrated io is
-used, the io facet is switched off. This is because it is very
-complicated to build in the generic logic of such dependencies. We
-have a story to handle this properly in the backlog, but it will
-require a lot of work.
-
-*** Create a list of valid values for field definitions               :story:
-
-In addition to default values, it should be possible to supply a list
-of possible values for a field definition - a domain. When processing
-the values we can then check that it is part of the domain and if not
-throw. This is required for the include types and for the family
-types. At present this is only applicable to string fields.
-
-In this sense, =boolean= is just a special case where the list is know
-up front. We should re-implement =boolean= this way. Possibly even add
-synonyms (e.g. =true=, =false=, =0=, =1=)?
-
-*** Add dynamic consistency validation                                :story:
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
-
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
-*** Create settings expander and switcher                             :story:
-
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
-
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
-
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
-
-This could be done by the switcher. We should first expand the
-settings then switch them.
-
-In some ways we can think of the switcher as a dependency
-manager. This may inform the naming of this class.
-
-One thing to take into account is the different kinds of behaviours
-regarding enabling facets and formatters:
-
-- for serialisation we want it to be on and if its on, all types
-  should be serialisable.
-- for hashing we want it to be off (most likely) and if the user makes
-  use of a hashing container we want the type that is the key of the
-  container to have hashing on; no other types should have it on. We
-  also may want the user to manually switch hashing on for a type.
-- for forward declarations: if another formatter requires it for a
-  type, we want it on; if no one requires it we want it off. The user
-  may want to manually switch it on for a type.
-
-*** Create a base formatter                                           :story:
-
-We could implement most of the formatter interface in a common base
-class and then only have the descendants override what they need.
-
-In reality we need probably more than one base formatter: one for c++
-types, etc. We could handle all of the path and include generation
-here. Name: =cpp_base_formatter=?
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to local settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-- we need multiple opaque settings (more than one formatter will need
-  them).
-- move provider and provider selector to top-level namespace and add a
-  provide opaque settings method to it.
-
-*** Read =generate_preamble= from dynamic object                      :story:
-
-We need to generate the field definitions and update the general
-settings factory.
-
-*** Implement class header formatter                                  :story:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
-
-*** C++ workflow should perform a consistency check                   :story:
-
-We should ensure that all facets and formatters available in the
-registrar have corresponding field definitions and vice-versa. This
-was originally to be done by some kind of "feature graph" class, but
-since we need to use this data for other purposes, the main workflow
-could take on this responsibility - or we could create some kind of
-"validator" class to which the workflow delegates.
-
-*** Add "model types"                                                 :story:
-
-At present we have a number of dynamic extensions that exist purely to
-deal with non-dogen models:
-
-- supported: is the facet supported by the external model
-- file_name: what is the external model naming for files for this
-  facet
-- is_system: is the file name a system include file or not?
-
-In reality, all of this could be avoided if we had a way of
-distinguishing between models that follow dogen conventions and those
-who do not; a "model type" of sorts such as "external" and "dogen" -
-naming needs more thought. With this we could infer the rest: if no
-file name is supplied then a given formatter/facet is not supported;
-if the model is_system then all types are system and so on.
-
-We should also have a flag in field definitions that verify that a
-parameter is only present if the model is a non-dogen model. For
-example, it makes no sense to supply =cpp.type.family= in a dogen
-model but it may make sense to do so in an external model. However,
-this would mean that if a user manually adds a type to a dogen model
-it cannot be extended. Requires a bit of thinking.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-*** Populate the "new" =class_info= properties                        :story:
-
-We need a way of populating the class aspects via the type settings
-and via information obtained in the SML model. We may want to create a
-class to handle this logic or maybe it can be done in transformer.
-
-*** Includer generation should be done from dynamic extensions        :story:
-
-*New Understanding*
-
-The true use case of this story is not to allow users to add includes
-at random; it is actually only useful in one scenario:
-
-- *merging code generation*: users add code which requires additional
-  includes. Without support for this, merging code generation would
-  have limited usefulness.
-
-*Previous Understanding*
-
-It would be nice if we could determine which includer files to create
-by looking at the dynamic extensions. For this we need a notion of an
-inclusion group, defined at the model level:
-
-- =cpp.types.includers.general=
-- =cpp.types.includers.value_objects=
-- ...
-
-Under each of these one would configure the aspect:
-
-- =cpp.types.includers.general.generate=: =true=
-- =cpp.types.includers.general.file_name=: =a/b/c=
-- =cpp.types.includers.general.is_system=: =false=
-
-Then, each type, module etc would declare its membership (as a list):
-
-- =cpp.includers.member=: =cpp.types.includers.general=
-- =cpp.includers.member=: =cpp.types.includers.value_objects=
-- ...
-
-*Previous understanding*
-
-We should simply go through all the types in the SML model and for
-each type and each facet create the corresponding inclusion
-path. locator can be used to generate standard paths, and a model
-specific mapping is required for other models such as std.
-
-Include then takes the relationships extracted by extractor, the
-mappings generated by this mapper and simply appends to the inclusion
-list the file names. it also appends the implementation specific
-headers.
-
-*** Consider creating constants for common fields                     :story:
-
-Fields such as =enabled=, =postfix= etc are common to all formatters
-and facets. It may make more sense to define some string constants for
-them, perhaps in =traits=?
 
 ** Deprecated

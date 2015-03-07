@@ -10,6 +10,278 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Implement include generation for class header formatter           :story:
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+Notes:
+
+- rename header file to file name override or something else quite
+  distinct. We need to ensure it is obvious that this property is only
+  used for non-dogen models. Actually we can now just call it include
+  path.
+- however we still have a problem: when we compute the include path we
+  do not know if it is a system or user path. We need to change file
+  properties to take this into account. We need a include path class
+  with a include type: user or system. we could then use this.
+- add field definition =no_inclusion_required= and populate all
+  relevant primitives.
+
+We need to add the notion of aspects. This is because a lot of things
+we have dealt with individually are really all related to aspects. An
+aspect is a part of a formatter that can be enabled or disabled. For
+example:
+
+- manual move constructor
+- manual default constructor
+- inserter operator
+- swap function
+- etc.
+
+We could simply create aspect settings; local and global formatters
+would have a map of =aspect_settings= against an =aspect_name=. We
+need to remove the integrated facet approach and implement it in terms
+of this. We should go through the types formatter and figure out which
+aspects it has. For now we shall ignore relationships between aspects
+and facets (and any other kind of switching logic). For example, it is
+the responsibility of the user to ensure that if integrated io is
+used, the io facet is switched off. This is because it is very
+complicated to build in the generic logic of such dependencies. We
+have a story to handle this properly in the backlog, but it will
+require a lot of work.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
+
+*** Create settings expander and switcher                             :story:
+
+We need a class responsible for copying over all settings that exist
+both locally and globally. The idea is that, for those settings, the
+selector should be able to just query by formatter name locally and
+get the right values. This could be the expander.
+
+We also need a more intelligent class that determines what formatters
+are enabled and disabled. This is due to:
+
+- lack of support for a given formatter/facet by a type in the graph;
+  it must be propagated to all dependent types. We must be careful
+  with recursion (for example in the composite pattern).
+- a facet has been switched off. This must be propagated to all
+  formatters in that facet.
+- user has switched off a formatter. As with lack of support, this
+  must be propagated through the graph.
+
+This could be done by the switcher. We should first expand the
+settings then switch them.
+
+In some ways we can think of the switcher as a dependency
+manager. This may inform the naming of this class.
+
+One thing to take into account is the different kinds of behaviours
+regarding enabling facets and formatters:
+
+- for serialisation we want it to be on and if its on, all types
+  should be serialisable.
+- for hashing we want it to be off (most likely) and if the user makes
+  use of a hashing container we want the type that is the key of the
+  container to have hashing on; no other types should have it on. We
+  also may want the user to manually switch hashing on for a type.
+- for forward declarations: if another formatter requires it for a
+  type, we want it on; if no one requires it we want it off. The user
+  may want to manually switch it on for a type.
+
+*** Create a base formatter                                           :story:
+
+We could implement most of the formatter interface in a common base
+class and then only have the descendants override what they need.
+
+In reality we need probably more than one base formatter: one for c++
+types, etc. We could handle all of the path and include generation
+here. Name: =cpp_base_formatter=?
+
+*** Add support for opaque formatter settings                         :story:
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to local settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+- we need multiple opaque settings (more than one formatter will need
+  them).
+- move provider and provider selector to top-level namespace and add a
+  provide opaque settings method to it.
+
+*** Read =generate_preamble= from dynamic object                      :story:
+
+We need to generate the field definitions and update the general
+settings factory.
+
+*** Implement class header formatter                                  :story:
+
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** C++ workflow should perform a consistency check                   :story:
+
+We should ensure that all facets and formatters available in the
+registrar have corresponding field definitions and vice-versa. This
+was originally to be done by some kind of "feature graph" class, but
+since we need to use this data for other purposes, the main workflow
+could take on this responsibility - or we could create some kind of
+"validator" class to which the workflow delegates.
+
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
+
+We should also have a flag in field definitions that verify that a
+parameter is only present if the model is a non-dogen model. For
+example, it makes no sense to supply =cpp.type.family= in a dogen
+model but it may make sense to do so in an external model. However,
+this would mean that if a user manually adds a type to a dogen model
+it cannot be extended. Requires a bit of thinking.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+*** Populate the "new" =class_info= properties                        :story:
+
+We need a way of populating the class aspects via the type settings
+and via information obtained in the SML model. We may want to create a
+class to handle this logic or maybe it can be done in transformer.
+
+*** Includer generation should be done from dynamic extensions        :story:
+
+*New Understanding*
+
+The true use case of this story is not to allow users to add includes
+at random; it is actually only useful in one scenario:
+
+- *merging code generation*: users add code which requires additional
+  includes. Without support for this, merging code generation would
+  have limited usefulness.
+
+*Previous Understanding*
+
+It would be nice if we could determine which includer files to create
+by looking at the dynamic extensions. For this we need a notion of an
+inclusion group, defined at the model level:
+
+- =cpp.types.includers.general=
+- =cpp.types.includers.value_objects=
+- ...
+
+Under each of these one would configure the aspect:
+
+- =cpp.types.includers.general.generate=: =true=
+- =cpp.types.includers.general.file_name=: =a/b/c=
+- =cpp.types.includers.general.is_system=: =false=
+
+Then, each type, module etc would declare its membership (as a list):
+
+- =cpp.includers.member=: =cpp.types.includers.general=
+- =cpp.includers.member=: =cpp.types.includers.value_objects=
+- ...
+
+*Previous understanding*
+
+We should simply go through all the types in the SML model and for
+each type and each facet create the corresponding inclusion
+path. locator can be used to generate standard paths, and a model
+specific mapping is required for other models such as std.
+
+Include then takes the relationships extracted by extractor, the
+mappings generated by this mapper and simply appends to the inclusion
+list the file names. it also appends the implementation specific
+headers.
+
+*** Consider creating constants for common fields                     :story:
+
+Fields such as =enabled=, =postfix= etc are common to all formatters
+and facets. It may make more sense to define some string constants for
+them, perhaps in =traits=?
+
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
