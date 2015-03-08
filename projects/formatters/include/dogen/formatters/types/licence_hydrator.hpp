@@ -25,9 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <istream>
+#include <iosfwd>
+#include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/licence.hpp"
 
 namespace dogen {
@@ -41,28 +40,21 @@ public:
     typedef licence value_type;
 
 public:
-    licence_hydrator() = delete;
+    licence_hydrator() = default;
     licence_hydrator(const licence_hydrator&) = default;
     licence_hydrator(licence_hydrator&&) = default;
     ~licence_hydrator() = default;
 
 public:
     /**
-     *
-     * Initialises the hydrator.
-     *
-     * @param copyright_notices copyright notices to apply to hydrated
-     * licences.
-     */
-    explicit licence_hydrator(const std::list<std::string>& copyright_notices);
-
-    /**
      * @brief Hydrate a licence based on the contents of the stream.
      */
-    value_type hydrate(std::istream& s) const;
+    licence hydrate(std::istream& s) const;
 
-private:
-    const std::list<std::string>& copyright_notices_;
+    /**
+     * @brief Hydrate a licence from the supplied path.
+     */
+    licence hydrate(const boost::filesystem::path& p) const;
 };
 
 } }

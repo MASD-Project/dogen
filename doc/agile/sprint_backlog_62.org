@@ -14,17 +14,18 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-07 Sat 22:12]
+Clock summary at [2015-03-08 Sun 20:22]
 
 | Headline                                                              | Time   |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *5:23* |      |      |
+| *Total time*                                                          | *8:05* |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| Active                                                                |        | 5:23 |      |
+| Active                                                                |        | 8:05 |      |
 | STARTED Sprint and product backlog grooming                           |        |      | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |        |      | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |        |      | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path |        |      | 0:25 |
+| STARTED Create a JSON file format for field definitions               |        |      | 2:42 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -163,7 +164,12 @@ need to move existing model into =dynamic::schema=.
 After the dynamic rename we borked the code generation of the
 registrar for serialisation. Fix it.
 
-*** Create a JSON file format for field definitions                   :story:
+*** STARTED Create a JSON file format for field definitions           :story:
+    CLOCK: [2015-03-08 Sun 20:07]--[2015-03-08 Sun 20:21] =>  0:14
+    CLOCK: [2015-03-08 Sun 19:40]--[2015-03-08 Sun 19:56] =>  0:16
+    CLOCK: [2015-03-08 Sun 19:13]--[2015-03-08 Sun 19:31] =>  0:18
+    CLOCK: [2015-03-08 Sun 18:02]--[2015-03-08 Sun 18:50] =>  1:11
+    CLOCK: [2015-03-08 Sun 16:46]--[2015-03-08 Sun 17:52] =>  1:06
 
 We need to read the field definitions from file rather than hard-code
 them. We also need to figure out where to place them: in the central
@@ -171,6 +177,18 @@ library folder or together with the models?
 
 The JSON support should live in =dynamic::schema=. We need a simple
 =hydrator= class with a simple test case.
+
+*** Apply relevant parts of dynamic refactor patch                    :story:
+
+We did a little tidy-up of dynamic that was put on hold due to some
+big-picture thinking. We need to figure out what part of it is still
+applicable, and copy it across from the patch.
+
+*** Remove copyright notices from licence hydrator                    :story:
+
+At present there seems to be no use case for adding a copyright notice
+when hydrating a licence; these only make sense in the context of a
+model. We should remove this.
 
 *** Convert all field definitions into JSON                           :story:
 

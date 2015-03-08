@@ -25,14 +25,14 @@ namespace {
 
 const std::string empty;
 const std::string test_module("dynamic_schema");
-const std::string test_suite("test_spec");
+const std::string test_suite("json_hydrator_spec");
 
 }
 
-BOOST_AUTO_TEST_SUITE(test)
+BOOST_AUTO_TEST_SUITE(json_hydrator)
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
+BOOST_AUTO_TEST_CASE(trivial_field_definition_hydrates_into_expected_collection) {
+    SETUP_TEST_LOG("trivial_field_definition_hydrates_into_expected_collection");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

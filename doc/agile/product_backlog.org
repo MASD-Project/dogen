@@ -312,12 +312,6 @@ processed comment; =applicable_to_parent_object= is not quite the
 right name but it is moving on the right direction. Once we settle on
 a good name we need to rename all usages of =dia.comment=.
 
-*** Remove copyright notices from licence hydrator                    :story:
-
-At present there seems to be no use case for adding a copyright notice
-when hydrating a licence; these only make sense in the context of a
-model. We should remove this.
-
 *** Improve support for modules in JSON                               :story:
 
 At present we are implying the existence of modules in JSON by looking

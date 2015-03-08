@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -45,6 +46,7 @@ const std::string invalid_editor("Invalid or unsupported editor: ");
 const std::string invalid_location(
     "Invalid or unsupported modeline location: ");
 const std::string no_fields("Modeline must have at least one field");
+const std::string failed_to_open_file("Failed to open file: ");
 
 const std::string cpp_group_name("c++");
 const std::string odb_group_name("odb");
@@ -120,8 +122,7 @@ void modeline_group_hydrator::validate_modeline(const modeline& m) const {
     }
 }
 
-modeline_group_hydrator::value_type
-modeline_group_hydrator::read_stream(std::istream& s) const {
+modeline_group modeline_group_hydrator::read_stream(std::istream& s) const {
     modeline_group_hydrator::value_type r;
 
     using namespace boost::property_tree;
@@ -162,8 +163,7 @@ modeline_group_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-modeline_group_hydrator::value_type
-modeline_group_hydrator::hydrate(std::istream& s) const {
+modeline_group modeline_group_hydrator::hydrate(std::istream& s) const {
     using namespace boost::property_tree;
     try {
         return read_stream(s);
@@ -179,6 +179,22 @@ modeline_group_hydrator::hydrate(std::istream& s) const {
         BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
+}
+
+modeline_group modeline_group_hydrator::
+hydrate(const boost::filesystem::path& p) const {
+    const auto gs(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Reading file: " << gs;
+
+    boost::filesystem::ifstream s(p);
+    if (s.fail()) {
+        BOOST_LOG_SEV(lg, error) << failed_to_open_file << ": " << gs;
+        BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
+    }
+
+    const auto r(hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "Read file successfully.";
+    return r;
 }
 
 } }

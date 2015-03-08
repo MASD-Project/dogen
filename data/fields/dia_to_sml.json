@@ -1,0 +1,24 @@
+[
+    {
+        "name" : {
+            "simple" : "comment",
+            "qualified" : "dia.comment",
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "dia_to_sml"
+        },
+        "type" : "boolean",
+        "scope" : "not_applicable"
+    },
+    {
+        "name" : {
+            "simple" : "identity_attribute",
+            "qualified" : "dia.identity_attribute",
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "dia_to_sml"
+        },
+        "type" : "boolean",
+        "scope" : "property"
+    }
+]

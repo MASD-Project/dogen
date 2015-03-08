@@ -29,7 +29,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include "dogen/utility/filesystem/file.hpp"
 
 namespace dogen {
@@ -37,6 +36,9 @@ namespace formatters {
 
 /**
  * @brief Hydrates all files found in the input directories.
+ *
+ * The Hydrator concept has one method called hydrate with a single
+ * parameter of type boost::filesystem::path.
  */
 template<typename Hydrator>
 class hydration_workflow {
@@ -52,8 +54,7 @@ private:
      */
     std::pair<std::string, typename Hydrator::value_type>
     hydrate(const boost::filesystem::path& p) {
-        boost::filesystem::ifstream s(p);
-        const auto value(hydrator_.hydrate(s));
+        const auto value(hydrator_.hydrate(p));
         return std::make_pair(p.filename().generic_string(), value);
     }
 

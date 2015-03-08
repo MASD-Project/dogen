@@ -21,6 +21,7 @@
 #include <istream>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -67,6 +68,7 @@ const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
+const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
@@ -309,11 +311,13 @@ void json_hydrator::post_process(model& m) const {
 }
 
 model json_hydrator::hydrate(std::istream& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
         const bool is_target(false);
         auto m(read_stream(s, is_target));
         post_process(m);
+        BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return m;
     } catch (const json_parser_error& e) {
         BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();
@@ -327,6 +331,21 @@ model json_hydrator::hydrate(std::istream& s) const {
         BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
+}
+
+model json_hydrator::hydrate(const boost::filesystem::path& p) const {
+    const auto gs(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
+    boost::filesystem::ifstream s(p);
+
+    if (s.fail()) {
+        BOOST_LOG_SEV(lg, error) << failed_to_open_file << ": " << gs;
+        BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
+    }
+
+    const auto r(hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
+    return r;
 }
 
 } }

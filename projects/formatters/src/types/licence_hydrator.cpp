@@ -18,20 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include <istream>
+#include <boost/filesystem/fstream.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/formatters/types/hydration_error.hpp"
 #include "dogen/formatters/types/licence_hydrator.hpp"
+
+using namespace dogen::utility::log;
+
+namespace {
+
+auto lg(logger_factory("formatters.licence_hydrator"));
+const std::string failed_to_open_file("Failed to open file: ");
+
+}
 
 namespace dogen {
 namespace formatters {
 
-licence_hydrator::
-licence_hydrator(const std::list<std::string>& copyright_notices)
-    : copyright_notices_(copyright_notices) { }
-
-licence_hydrator::value_type licence_hydrator::hydrate(std::istream& s) const {
-    value_type r;
+licence licence_hydrator::hydrate(std::istream& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading stream: ";
+    licence r;
     r.text(dogen::utility::filesystem::read_file_content(s));
-    r.copyright_notices(copyright_notices_);
+    BOOST_LOG_SEV(lg, debug) << "Read stream successfully.";
+    return r;
+}
+
+licence licence_hydrator::hydrate(const boost::filesystem::path& p) const {
+    const auto gs(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Reading file: " << gs;
+
+    boost::filesystem::ifstream s(p);
+    if (s.fail()) {
+        BOOST_LOG_SEV(lg, error) << failed_to_open_file << ": " << gs;
+        BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
+    }
+
+    const auto r(hydrate(s));
+    BOOST_LOG_SEV(lg, debug) << "Read file successfully.";
     return r;
 }
 

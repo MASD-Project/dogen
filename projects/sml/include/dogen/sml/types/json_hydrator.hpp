@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
@@ -104,6 +105,12 @@ public:
      * @brief Hydrates the model from the JSON stream.
      */
     model hydrate(std::istream& s) const;
+
+    /**
+     * @brief Opens up the file at path and then hydrates the model
+     * from the JSON stream.
+     */
+    model hydrate(const boost::filesystem::path& p) const;
 
 private:
     const dynamic::schema::workflow dynamic_schema_workflow_;

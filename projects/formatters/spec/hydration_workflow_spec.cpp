@@ -41,12 +41,13 @@ public:
 
     mock_hydrator() : counter_(0) { }
 
-    value_type hydrate(std::istream&) const {
+    value_type hydrate(const boost::filesystem::path&) const {
         ++counter_;
         std::ostringstream s;
         s << "file_" << counter_;
         return s.str();
     }
+
 
 private:
     mutable unsigned int counter_;

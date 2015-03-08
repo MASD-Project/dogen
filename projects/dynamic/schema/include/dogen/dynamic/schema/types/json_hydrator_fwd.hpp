@@ -18,38 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/json_hydrator.hpp"
-#include "dogen/frontend/types/json_sml_frontend.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_JSON_HYDRATOR_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_JSON_HYDRATOR_FWD_HPP
 
-using namespace dogen::utility::log;
-
-namespace {
-
-const std::string id("frontend.json_sml_frontend");
-const std::list<std::string> extensions({ ".json" });
-auto lg(logger_factory(id));
-const std::string empty;
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace frontend {
+namespace dynamic {
+namespace schema {
 
-std::string json_sml_frontend::id() const {
-    return ::id;
-}
+class json_hydrator;
 
-std::list<std::string> json_sml_frontend::supported_extensions() const {
-    return ::extensions;
-}
+} } }
 
-sml::model json_sml_frontend::
-generate(const dynamic::schema::workflow& w, const input_descriptor& id,
-    const frontend_settings& /*s*/) {
-    sml::json_hydrator h(w);
-    return h.hydrate(id.path());
-}
-
-} }
+#endif

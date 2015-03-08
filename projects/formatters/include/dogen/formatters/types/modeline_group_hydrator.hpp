@@ -28,6 +28,7 @@
 
 #include <string>
 #include <istream>
+#include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/modeline_field.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 
@@ -85,13 +86,18 @@ private:
     /**
      * @brief Parse the stream using INI syntax.
      */
-    value_type read_stream(std::istream& s) const;
+    modeline_group read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrate all the modeline groups found in the stream.
      */
-    value_type hydrate(std::istream& s) const;
+    modeline_group hydrate(std::istream& s) const;
+
+    /**
+     * @brief Hydrate all the modeline groups from the supplied path.
+     */
+    modeline_group hydrate(const boost::filesystem::path& p) const;
 };
 
 } }

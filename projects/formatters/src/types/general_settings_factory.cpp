@@ -154,8 +154,7 @@ void general_settings_factory::hydrate_modelines() {
 
 void general_settings_factory::hydrate_licences() {
     BOOST_LOG_SEV(lg, debug) << "Hydrating licences.";
-    std::list<std::string> copyright_notices;
-    licence_hydrator lh(copyright_notices);
+    const auto lh = licence_hydrator();
     const auto dirs(create_directory_list(licence_dir));
 
     BOOST_LOG_SEV(lg, debug) << "Licence directories: " << dirs;
