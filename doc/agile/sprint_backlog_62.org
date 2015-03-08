@@ -14,18 +14,18 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-08 Sun 20:22]
+Clock summary at [2015-03-08 Sun 23:45]
 
 | Headline                                                              | Time   |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *8:05* |      |      |
+| *Total time*                                                          | *9:12* |      |      |
 |-----------------------------------------------------------------------+--------+------+------|
-| Active                                                                |        | 8:05 |      |
+| Active                                                                |        | 9:12 |      |
 | STARTED Sprint and product backlog grooming                           |        |      | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |        |      | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |        |      | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path |        |      | 0:25 |
-| STARTED Create a JSON file format for field definitions               |        |      | 2:42 |
+| COMPLETED Create a JSON file format for field definitions             |        |      | 3:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -164,7 +164,16 @@ need to move existing model into =dynamic::schema=.
 After the dynamic rename we borked the code generation of the
 registrar for serialisation. Fix it.
 
-*** STARTED Create a JSON file format for field definitions           :story:
+*** COMPLETED Remove copyright notices from licence hydrator          :story:
+    CLOSED: [2015-03-08 Sun 23:44]
+
+At present there seems to be no use case for adding a copyright notice
+when hydrating a licence; these only make sense in the context of a
+model. We should remove this.
+
+*** COMPLETED Create a JSON file format for field definitions         :story:
+    CLOSED: [2015-03-08 Sun 23:45]
+    CLOCK: [2015-03-08 Sun 22:38]--[2015-03-08 Sun 23:45] =>  1:07
     CLOCK: [2015-03-08 Sun 20:07]--[2015-03-08 Sun 20:21] =>  0:14
     CLOCK: [2015-03-08 Sun 19:40]--[2015-03-08 Sun 19:56] =>  0:16
     CLOCK: [2015-03-08 Sun 19:13]--[2015-03-08 Sun 19:31] =>  0:18
@@ -184,11 +193,10 @@ We did a little tidy-up of dynamic that was put on hold due to some
 big-picture thinking. We need to figure out what part of it is still
 applicable, and copy it across from the patch.
 
-*** Remove copyright notices from licence hydrator                    :story:
+*** Add JSON support to dynamic workflow                              :story:
 
-At present there seems to be no use case for adding a copyright notice
-when hydrating a licence; these only make sense in the context of a
-model. We should remove this.
+We need to create the required activities in the dynamic schema's
+workflow to read in all the JSON files.
 
 *** Convert all field definitions into JSON                           :story:
 

@@ -32,6 +32,7 @@ namespace {
 
 auto lg(logger_factory("dynamic.schema.json_hydrator"));
 
+const std::string empty;
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
     "Failed to read option in JSON file: ");
@@ -39,14 +40,31 @@ const std::string invalid_path("Failed to find JSON path: ");
 const std::string definition_has_no_name("Field definition has no 'name'.");
 const std::string definition_has_no_hierarchy(
     "Field definition has no 'ownership_hierarchy'.");
+const std::string invalid_scope("Invalid or unsupported scope type: ");
+const std::string invalid_type("Invalid or unsupported type: ");
 
 const std::string name_key("name");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
 const std::string ownership_hierarchy_key("ownership_hierarchy");
 const std::string ownership_hierarchy_model_name_key("model_name");
+const std::string ownership_hierarchy_facet_name_key("facet_name");
+const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string type_key("type");
 const std::string scope_key("scope");
+
+const std::string scope_any("any");
+const std::string scope_not_applicable("not_applicable");
+const std::string scope_root_module("root_module");
+const std::string scope_any_module("any_module");
+const std::string scope_entity("entity");
+const std::string scope_property("property");
+const std::string scope_operation("operation");
+
+const std::string value_text("text");
+const std::string value_text_collection("text_collection");
+const std::string value_number("number");
+const std::string value_boolean("boolean");
 
 }
 
@@ -54,24 +72,58 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-scope_types json_hydrator::to_scope_type(const std::string& /*s*/) const {
-    scope_types r(scope_types::invalid);
-    return r;
+scope_types json_hydrator::to_scope_type(const std::string& s) const {
+    if (s == scope_any)
+        return scope_types::any;
+    else if (s == scope_not_applicable)
+        return scope_types::not_applicable;
+    else if (s == scope_root_module)
+        return scope_types::root_module;
+    else if (s == scope_any_module)
+        return scope_types::any_module;
+    else if (s == scope_entity)
+        return scope_types::entity;
+    else if (s == scope_property)
+        return scope_types::property;
+    else if (s == scope_operation)
+        return scope_types::operation;
+
+    BOOST_LOG_SEV(lg, error) << invalid_scope << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_scope + s));
 }
 
-value_types json_hydrator::to_value_type(const std::string& /*s*/) const {
-    value_types r(value_types::invalid);
-    return r;
+value_types json_hydrator::to_value_type(const std::string& s) const {
+    if (s == value_text)
+        return value_types::text;
+    else if (s == value_text_collection)
+        return value_types::text_collection;
+    else if (s == value_number)
+        return value_types::number;
+    else if (s == value_boolean)
+        return value_types::boolean;
+
+    BOOST_LOG_SEV(lg, error) << invalid_type << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_type + s));
 }
 
-name json_hydrator::read_name(const boost::property_tree::ptree& /*pt*/) const {
+name json_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     name r;
+    r.simple(pt.get<std::string>(name_simple_key));
+    r.qualified(pt.get<std::string>(name_qualified_key));
     return r;
 }
 
 ownership_hierarchy json_hydrator::
-read_ownership_hierarchy(const boost::property_tree::ptree& /*pt*/) const {
+read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     ownership_hierarchy r;
+
+    r.model_name(pt.get<std::string>(
+            ownership_hierarchy_model_name_key, empty));
+    r.facet_name(pt.get<std::string>(
+            ownership_hierarchy_facet_name_key, empty));
+    r.formatter_name(pt.get<std::string>(
+            ownership_hierarchy_formatter_name_key, empty));
+
     return r;
 }
 
@@ -85,22 +137,23 @@ read_stream(std::istream& s) const {
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         field_definition fd;
 
-        auto j(pt.find(name_key));
-        if (j == pt.not_found() || j->second.empty()) {
+        auto j(i->second.find(name_key));
+        if (j == i->second.not_found() || j->second.empty()) {
             BOOST_LOG_SEV(lg, error) << definition_has_no_name;
             BOOST_THROW_EXCEPTION(hydration_error(definition_has_no_name));
         }
-        fd.name(read_name(i->second));
+        fd.name(read_name(j->second));
 
-        j = pt.find(ownership_hierarchy_key);
-        if (j == pt.not_found() || j->second.empty()) {
+        j = i->second.find(ownership_hierarchy_key);
+        if (j == i->second.not_found() || j->second.empty()) {
             BOOST_LOG_SEV(lg, error) << definition_has_no_hierarchy;
             BOOST_THROW_EXCEPTION(hydration_error(definition_has_no_hierarchy));
         }
-        fd.ownership_hierarchy(read_ownership_hierarchy(i->second));
+        fd.ownership_hierarchy(read_ownership_hierarchy(j->second));
 
-        fd.type(to_value_type(i->second.get_value<std::string>(type_key)));
-        fd.scope(to_scope_type(i->second.get_value<std::string>(scope_key)));
+        fd.type(to_value_type(i->second.get<std::string>(type_key)));
+        fd.scope(to_scope_type(i->second.get<std::string>(scope_key)));
+
         r.push_front(fd);
     }
     return r;

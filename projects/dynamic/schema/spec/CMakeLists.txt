@@ -41,5 +41,5 @@ add_custom_target(run_dynamic_schema_spec
     DEPENDS dynamic_schema_spec)
 add_dependencies(run_all_specs run_dynamic_schema_spec)
 
-add_boost_tests(dynamic ${dynamic_schema_spec_files})
+add_boost_tests(dynamic_schema ${dynamic_schema_spec_files})
 install(TARGETS dynamic_schema_spec RUNTIME DESTINATION bin COMPONENT tests)

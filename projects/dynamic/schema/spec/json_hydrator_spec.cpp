@@ -18,8 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
+#include <istream>
+#include <iterator>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_io.hpp"
+#include "dogen/dynamic/schema/types/json_hydrator.hpp"
 
 namespace {
 
@@ -27,12 +33,59 @@ const std::string empty;
 const std::string test_module("dynamic_schema");
 const std::string test_suite("json_hydrator_spec");
 
+const std::string simple_name("a simple name");
+const std::string qualified_name("a qualified name");
+const std::string model_name("a model name");
+
+const std::string trivial_field_definition(R"([
+    {
+        "name" : {
+            "simple" : "a simple name",
+            "qualified" : "a qualified name"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "a model name"
+        },
+        "type" : "boolean",
+        "scope" : "not_applicable"
+    }
+])");
+
+std::forward_list<dogen::dynamic::schema::field_definition>
+hydrate(std::istream& s) {
+    dogen::dynamic::schema::json_hydrator h;
+    return h.hydrate(s);
+}
+
+std::forward_list<dogen::dynamic::schema::field_definition>
+hydrate(const std::string& content) {
+    std::istringstream s(content);
+    return hydrate(s);
+}
+
 }
 
 BOOST_AUTO_TEST_SUITE(json_hydrator)
 
 BOOST_AUTO_TEST_CASE(trivial_field_definition_hydrates_into_expected_collection) {
-    SETUP_TEST_LOG("trivial_field_definition_hydrates_into_expected_collection");
+    SETUP_TEST_LOG_SOURCE("trivial_field_definition_hydrates_into_expected_collection");
+
+    BOOST_LOG_SEV(lg, debug) << "input: " << trivial_field_definition;
+    const auto fds(hydrate(trivial_field_definition));
+    BOOST_LOG_SEV(lg, debug) << "field definitions: " << fds;
+
+    BOOST_REQUIRE(std::distance(fds.begin(), fds.end()) == 1);
+    const auto& fd(*fds.begin());
+
+    BOOST_CHECK(fd.name().simple() == simple_name);
+    BOOST_CHECK(fd.name().qualified() == qualified_name);
+    BOOST_CHECK(fd.ownership_hierarchy().model_name() == model_name);
+
+    const auto st(dogen::dynamic::schema::scope_types::not_applicable);
+    BOOST_CHECK(fd.scope() == st);
+
+    const auto vt(dogen::dynamic::schema::value_types::boolean);
+    BOOST_CHECK(fd.type() == vt);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

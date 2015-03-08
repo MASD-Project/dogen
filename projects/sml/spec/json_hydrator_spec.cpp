@@ -189,7 +189,7 @@ dogen::sml::model hydrate(const boost::filesystem::path& p) {
     return hydrate(s);
 }
 
-dogen::sml::model hydrate(const std::string content) {
+dogen::sml::model hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
 }
