@@ -1,0 +1,123 @@
+[
+    {
+        "name" : {
+            "simple" : "enabled",
+            "qualified" : "cpp.hash.enabled"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash"
+        },
+        "type" : "boolean",
+        "scope" : "root_module",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "supported",
+            "qualified" : "cpp.hash.supported"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "directory",
+            "qualified" : "cpp.hash.directory"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : "hash"
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.hash.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : "hash"
+    },
+    {
+        "name" : {
+            "simple" : "enabled",
+            "qualified" : "cpp.hash.class_header_formatter.enabled"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.hash.class_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "root_module",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.hash.class_header_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.hash.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_path",
+            "qualified" : "cpp.hash.class_header_formatter.inclusion_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.hash.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_delimiter",
+            "qualified" : "cpp.hash.class_header_formatter.inclusion_delimiter"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.hash.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity",
+        "default_value" : "angle_brackets"
+    },
+    {
+        "name" : {
+            "simple" : "enabled",
+            "qualified" : "cpp.hash.class_implementation_formatter.enabled"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.hash.class_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "root_module",
+        "default_value" : true
+    },
+]

@@ -1,0 +1,79 @@
+[
+    {
+        "name" : {
+            "simple" : "copyright_notice",
+            "qualified" : "copyright_notice"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "text_collection",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "licence_name",
+            "qualified" : "licence_name"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "text",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "modeline_group_name",
+            "qualified" : "modeline_group_name"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "text",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "generate_preamble",
+            "qualified" : "code_generation_marker.generate_preamble"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "boolean",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "add_date_time",
+            "qualified" : "code_generation_marker.add_date_time"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "boolean",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "add_warning",
+            "qualified" : "code_generation_marker.add_warning"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "boolean",
+        "scope" : "any"
+    },
+    {
+        "name" : {
+            "simple" : "message",
+            "qualified" : "code_generation_marker.message"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "formatters"
+        },
+        "type" : "text",
+        "scope" : "any"
+    }
+]

@@ -2,7 +2,7 @@
     {
         "name" : {
             "simple" : "comment",
-            "qualified" : "dia.comment",
+            "qualified" : "dia.comment"
         },
         "ownership_hierarchy" : {
             "model_name" : "dia_to_sml"
@@ -13,7 +13,7 @@
     {
         "name" : {
             "simple" : "identity_attribute",
-            "qualified" : "dia.identity_attribute",
+            "qualified" : "dia.identity_attribute"
         },
         "ownership_hierarchy" : {
             "model_name" : "dia_to_sml"
