@@ -75,8 +75,8 @@ const std::string failed_to_open_file("Failed to open file: ");
 namespace dogen {
 namespace sml {
 
-json_hydrator::json_hydrator(const dynamic::schema::workflow& w)
-    : dynamic_schema_workflow_(w) { }
+json_hydrator::json_hydrator(const dynamic::schema::object_factory& of)
+    : object_factory_(of) { }
 
 boost::optional<qname> containing_module(model& m, const qname& qn) {
     if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
@@ -185,7 +185,7 @@ create_dynamic_extensions(const boost::property_tree::ptree& pt,
         const auto field_value(j->second.get_value<std::string>());
         kvps.push_back(std::make_pair(field_name, field_value));
     }
-    return dynamic_schema_workflow_.execute(st, kvps);
+    return object_factory_.execute(st, kvps);
 }
 
 void json_hydrator::

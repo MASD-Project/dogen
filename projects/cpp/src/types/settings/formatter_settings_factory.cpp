@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
@@ -62,8 +62,9 @@ create_global_settings_for_formatter(
     const auto& enabled_trait(traits::formatter::enabled());
     const auto& postfix_trait(traits::formatter::postfix());
 
+    using namespace dynamic::schema;
+    const field_selector fs(o);
     for (const auto fd : formatter_fields) {
-        using namespace dynamic::schema;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
                 const auto& n(fd.name().qualified());
@@ -72,15 +73,15 @@ create_global_settings_for_formatter(
             }
             found_enabled = true;
 
-            if (has_field(o, fd))
-                r.enabled(get_boolean_content(o, fd));
+            if (fs.has_field(fd))
+                r.enabled(fs.get_boolean_content(fd));
             else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.enabled(get_boolean_content(*fd.default_value()));
+                r.enabled(fs.get_boolean_content(*fd.default_value()));
             }
         } else if (fd.name().simple() == postfix_trait) {
             if (found_postfix) {
@@ -90,15 +91,15 @@ create_global_settings_for_formatter(
             }
             found_postfix = true;
 
-            if (has_field(o, fd))
-                r.postfix(get_text_content(o, fd));
+            if (fs.has_field(fd))
+                r.postfix(fs.get_text_content(fd));
             else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.postfix(get_text_content(*fd.default_value()));
+                r.postfix(fs.get_text_content(*fd.default_value()));
             }
         }
     }
@@ -119,6 +120,8 @@ create_local_settings_for_formatter(
     bool found_any_field(false);
     const auto& enabled_trait(traits::formatter::enabled());
 
+    using namespace dynamic::schema;
+    const field_selector fs(o);
     for (const auto fd : formatter_fields) {
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
@@ -128,8 +131,8 @@ create_local_settings_for_formatter(
             }
             found_enabled = true;
 
-            if (has_field(o, fd)) {
-                r.enabled(get_boolean_content(o, fd));
+            if (fs.has_field(fd)) {
+                r.enabled(fs.get_boolean_content(fd));
                 found_any_field = true;
             } else {
                 if (!fd.default_value()) {
@@ -137,7 +140,7 @@ create_local_settings_for_formatter(
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.enabled(get_boolean_content(*fd.default_value()));
+                r.enabled(fs.get_boolean_content(*fd.default_value()));
             }
         }
     }

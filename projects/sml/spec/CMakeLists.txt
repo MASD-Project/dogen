@@ -32,6 +32,7 @@ target_link_libraries(${spec_name}
     ${main_name}
     sml
     utility
+    dynamic_schema
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 

@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/facet_settings_factory.hpp"
@@ -62,8 +62,9 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
     const auto& postfix_trait(traits::facet::postfix());
     const auto& integrated_facet_trait(traits::facet::integrated_facet());
 
+    using namespace dynamic::schema;
+    const field_selector fs(o);
     for (const auto& fd : facet_fields) {
-        using namespace dynamic::schema;
         if (fd.name().simple() == enabled_trait) {
             if (found_enabled) {
                 const auto& n(fd.name().qualified());
@@ -72,15 +73,15 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
             }
             found_enabled = true;
 
-            if (has_field(o, fd))
-                r.enabled(get_boolean_content(o, fd));
+            if (fs.has_field(fd))
+                r.enabled(fs.get_boolean_content(fd));
             else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.enabled(get_boolean_content(*fd.default_value()));
+                r.enabled(fs.get_boolean_content(*fd.default_value()));
             }
         } else if (fd.name().simple() == directory_trait) {
             if (found_directory) {
@@ -90,15 +91,15 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
             }
             found_directory = true;
 
-            if (has_field(o, fd))
-                r.directory(get_text_content(o, fd));
+            if (fs.has_field(fd))
+                r.directory(fs.get_text_content(fd));
             else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.directory(get_text_content(*fd.default_value()));
+                r.directory(fs.get_text_content(*fd.default_value()));
             }
         } else if (fd.name().simple() == postfix_trait) {
             if (found_postfix) {
@@ -108,15 +109,15 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
             }
             found_postfix = true;
 
-            if (has_field(o, fd))
-                r.postfix(get_text_content(o, fd));
+            if (fs.has_field(fd))
+                r.postfix(fs.get_text_content(fd));
             else {
                 if (!fd.default_value()) {
                     const auto& n(fd.name().qualified());
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.postfix(get_text_content(*fd.default_value()));
+                r.postfix(fs.get_text_content(*fd.default_value()));
             }
         } else if (fd.name().simple() == integrated_facet_trait) {
             if (found_integrated_facet) {
@@ -125,8 +126,8 @@ global_facet_settings facet_settings_factory::create_global_settings_for_facet(
                 BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
             }
             found_integrated_facet = true;
-            if (has_field(o, fd)) {
-                for (const auto s : get_text_collection_content(o, fd))
+            if (fs.has_field(fd)) {
+                for (const auto s : fs.get_text_collection_content(fd))
                     r.integrated_facets().insert(s);
             }
         }
@@ -149,8 +150,11 @@ create_local_settings_for_facet(
     bool found_any_field(false);
     const auto& supported_trait(traits::facet::supported());
 
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+
     for (const auto fd : facet_fields) {
-        using namespace dynamic::schema;
+
         if (fd.name().simple() == supported_trait) {
             if (found_supported) {
                 const auto& n(fd.name().qualified());
@@ -159,8 +163,8 @@ create_local_settings_for_facet(
             }
             found_supported = true;
 
-            if (has_field(o, fd)) {
-                r.supported(get_boolean_content(o, fd));
+            if (fs.has_field(fd)) {
+                r.supported(fs.get_boolean_content(fd));
                 found_any_field = true;
             } else {
                 if (!fd.default_value()) {
@@ -168,7 +172,7 @@ create_local_settings_for_facet(
                     BOOST_LOG_SEV(lg, error) << no_default_value << n;
                     BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
                 }
-                r.supported(get_boolean_content(*fd.default_value()));
+                r.supported(fs.get_boolean_content(*fd.default_value()));
             }
         }
 

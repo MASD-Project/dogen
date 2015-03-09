@@ -18,19 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_CONTENT_EXTENSIONS_FWD_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TYPES_CONTENT_EXTENSIONS_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/dynamic/schema/test/mock_object_factory.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace schema {
+namespace test {
 
-class content_extensions;
+const object_factory& mock_object_factory::non_validating_object_factory() {
+    static object_factory r(false/*throw_on_missing_field_definition*/);
+    return r;
+}
 
-} } }
-
-#endif
+} } } }

@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
@@ -198,11 +198,12 @@ transformer::obtain_opaque_parameters(const dynamic::schema::object& o) const {
 
     using namespace dynamic::schema;
     using fd = cpp::formatters::odb::field_definitions;
-    if (!has_field(o, fd::odb_pragma()))
+    const field_selector fs(o);
+    if (!fs.has_field(fd::odb_pragma()))
         return r;
 
     const auto sn(fd::odb_pragma().name().simple());
-    const auto tc(get_text_collection_content(o, fd::odb_pragma()));
+    const auto tc(fs.get_text_collection_content(fd::odb_pragma()));
     for (const auto& e : tc)
         r.push_back(std::make_pair(sn, e));
 

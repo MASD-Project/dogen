@@ -24,9 +24,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_object_factory.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -174,13 +174,13 @@ const std::string module_path_model(R"({
   }
 )");
 
-const dogen::dynamic::schema::workflow& dynamic_workflow() {
-    using dogen::dynamic::schema::test::mock_workflow_factory;
-    return mock_workflow_factory::non_validating_workflow();
+const dogen::dynamic::schema::object_factory& object_factory() {
+    using dogen::dynamic::schema::test::mock_object_factory;
+    return mock_object_factory::non_validating_object_factory();
 }
 
 dogen::sml::model hydrate(std::istream& s) {
-    dogen::sml::json_hydrator h(dynamic_workflow());
+    dogen::sml::json_hydrator h(object_factory());
     return h.hydrate(s);
 }
 
@@ -208,7 +208,7 @@ create_field_definition(const std::string n,
 
 struct register_fields {
     register_fields() {
-        auto& reg(dogen::dynamic::schema::workflow::registrar());
+        auto& reg(dogen::dynamic::schema::object_factory::registrar());
         reg.register_field_definition(create_field_definition(model_key));
         reg.register_field_definition(create_field_definition(some_key));
         reg.register_field_definition(create_field_definition(type_key,
@@ -264,12 +264,13 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     BOOST_CHECK(dyn.fields().size() == 2);
 
     using namespace dogen::dynamic::schema;
+    const field_selector fs(dyn);
     {
-        BOOST_REQUIRE(has_field(dyn, some_key));
-        BOOST_REQUIRE(get_text_content(dyn, some_key) == some_value);
+        BOOST_REQUIRE(fs.has_field(some_key));
+        BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
 
-        BOOST_REQUIRE(has_field(dyn, model_key));
-        BOOST_REQUIRE(get_text_content(dyn, model_key) == model_value);
+        BOOST_REQUIRE(fs.has_field(model_key));
+        BOOST_REQUIRE(fs.get_text_content(model_key) == model_value);
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -287,11 +288,12 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     {
         const auto& o(pair.second);
         const auto& dyn(o.extensions());
-        BOOST_REQUIRE(has_field(dyn, some_key));
-        BOOST_REQUIRE(get_text_content(dyn, some_key) == some_value);
+        const field_selector fs(dyn);
+        BOOST_REQUIRE(fs.has_field(some_key));
+        BOOST_REQUIRE(fs.get_text_content(some_key) == some_value);
 
-        BOOST_REQUIRE(has_field(dyn, type_key));
-        BOOST_REQUIRE(get_boolean_content(dyn, type_key) == type_value);
+        BOOST_REQUIRE(fs.has_field(type_key));
+        BOOST_REQUIRE(fs.get_boolean_content(type_key) == type_value);
     }
 }
 

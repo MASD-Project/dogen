@@ -18,32 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_WORKFLOW_FACTORY_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_WORKFLOW_FACTORY_HPP
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_SELECTION_ERROR_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_SELECTION_ERROR_FWD_HPP
 
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace dynamic {
 namespace schema {
-namespace test {
 
-/**
- * @brief Generates "mock" workflows. In reality these are just
- * instances of the workflow used for testing.
- */
-class mock_workflow_factory {
-public:
-    /**
-     * @brief Creates a workflow that does not throw if field
-     * instances do not have a corresponding field definition.
-     *
-     * This behaviour is useful when we do not have all of the c++
-     * field definitions and so on and it safe to ignore those.
-     */
-    static const workflow& non_validating_workflow();
-};
+class selection_error;
 
-} } } }
+} } }
 
 #endif

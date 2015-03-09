@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/object_factory.hpp"
 #include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 
@@ -28,7 +28,7 @@ namespace formatters {
 namespace odb {
 
 void register_field_definitions() {
-    auto& rg(dynamic::schema::workflow::registrar());
+    auto& rg(dynamic::schema::object_factory::registrar());
     rg.register_field_definitions(field_definitions::all_field_definitions());
 }
 

@@ -26,13 +26,13 @@
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
-#include "dogen/dynamic/schema/types/workflow_error.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/building_error.hpp"
+#include "dogen/dynamic/schema/types/object_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.schema.workflow"));
+static logger lg(logger_factory("dynamic.schema.object_factory"));
 
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
@@ -49,21 +49,21 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-std::shared_ptr<registrar> workflow::registrar_;
+std::shared_ptr<registrar> object_factory::registrar_;
 
-dynamic::schema::registrar& workflow::registrar() {
+dynamic::schema::registrar& object_factory::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<dynamic::schema::registrar>();
 
     return *registrar_;
 }
 
-workflow::workflow(const bool throw_on_missing_field_definition)
+object_factory::object_factory(const bool throw_on_missing_field_definition)
     : throw_on_missing_field_definition_(throw_on_missing_field_definition),
       field_definitions_by_complete_name_(
           create_field_definitions_by_complete_name()) { }
 
-std::unordered_map<std::string, field_definition> workflow::
+std::unordered_map<std::string, field_definition> object_factory::
 create_field_definitions_by_complete_name() const {
     std::unordered_map<std::string, field_definition> r;
 
@@ -76,14 +76,14 @@ create_field_definitions_by_complete_name() const {
         const auto result(r.insert(std::make_pair(qn, fd)));
         if (!result.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_field_definition << qn;
-            BOOST_THROW_EXCEPTION(workflow_error(
+            BOOST_THROW_EXCEPTION(building_error(
                     duplicate_field_definition + qn));
         }
     }
     return r;
 }
 
-boost::optional<field_definition> workflow::
+boost::optional<field_definition> object_factory::
 obtain_field_definition(const std::string& complete_name,
     const scope_types current_scope) const {
 
@@ -93,7 +93,7 @@ obtain_field_definition(const std::string& complete_name,
             BOOST_LOG_SEV(lg, error) << field_definition_not_found
                                      << complete_name;
 
-            BOOST_THROW_EXCEPTION(workflow_error(
+            BOOST_THROW_EXCEPTION(building_error(
                     field_definition_not_found + complete_name));
             return boost::optional<field_definition>();
         }
@@ -112,14 +112,14 @@ obtain_field_definition(const std::string& complete_name,
           << expected_scope << fd.scope()
           << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(workflow_error(s.str()));
+        BOOST_THROW_EXCEPTION(building_error(s.str()));
     }
 
     return boost::optional<field_definition>(fd);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-workflow::aggregate_raw_data_activity(
+object_factory::aggregate_raw_data_activity(
     const std::list<std::pair<std::string, std::string> >&
     raw_data) const {
     std::unordered_map<std::string, std::list<std::string> > r;
@@ -131,7 +131,7 @@ workflow::aggregate_raw_data_activity(
 }
 
 std::unordered_map<std::string, field_instance>
-workflow::create_fields_activity(
+object_factory::create_fields_activity(
     const std::unordered_map<std::string, std::list<std::string> >&
     aggregated_data, const scope_types current_scope) const {
     std::unordered_map<std::string, field_instance> r;
@@ -148,7 +148,7 @@ workflow::create_fields_activity(
     return r;
 }
 
-object workflow::execute(const scope_types current_scope,
+object object_factory::execute(const scope_types current_scope,
     const std::list<std::pair<std::string, std::string>>&
     raw_data) const {
     auto aggregated_raw_data(aggregate_raw_data_activity(raw_data));

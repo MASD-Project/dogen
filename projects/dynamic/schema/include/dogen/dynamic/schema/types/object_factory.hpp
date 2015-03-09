@@ -42,7 +42,7 @@ namespace schema {
 /**
  * @brief Produces a dynamic object from raw data.
  */
-class workflow {
+class object_factory {
 public:
     /**
      * @brief Returns the registrar. If it has not yet been
@@ -52,13 +52,14 @@ public:
 
 public:
     /**
-     * @brief Initialise the dynamic workflow.
+     * @brief Initialise the dynamic object factory.
      *
      * @param throw_on_missing_field_definition If true, any dynamic
      * extensions for which a field definition does not exist will
      * result in an exception. If false, they will be ignored.
      */
-    explicit workflow(const bool throw_on_missing_field_definition = true);
+    explicit object_factory(
+        const bool throw_on_missing_field_definition = true);
 
 private:
     /**

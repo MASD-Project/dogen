@@ -23,7 +23,7 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/schema/types/text.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
@@ -68,32 +68,34 @@ extract_licence(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
     using fd = field_definitions;
 
-    if (!has_field(o, fd::licence_name()))
+    const field_selector fs(o);
+    if (!fs.has_field(fd::licence_name()))
         return boost::optional<licence>();
 
-    const auto ln(get_text_content(o, fd::licence_name()));
+    const auto ln(fs.get_text_content(fd::licence_name()));
     const auto i(licences_.find(ln));
     if (i == licences_.end())
         throw_missing_item("Licence not found: ", ln);
 
-    if (!has_field(o, fd::copyright_notices()))
+    if (!fs.has_field(fd::copyright_notices()))
         return i->second;
 
     licence l(i->second);
-    const auto ch(get_text_collection_content(o, fd::copyright_notices()));
+    const auto ch(fs.get_text_collection_content(fd::copyright_notices()));
     l.copyright_notices(ch);
     return l;
 }
 
 boost::optional<modeline> general_settings_factory::
 extract_modeline(const dynamic::schema::object& o) const {
-    using namespace dynamic;
+    using namespace dynamic::schema;
     using fd = field_definitions;
 
-    if (!has_field(o, fd::modeline_group_name()))
+    const field_selector fs(o);
+    if (!fs.has_field(fd::modeline_group_name()))
         return boost::optional<modeline>();
 
-    const auto n(get_text_content(o, fd::modeline_group_name()));
+    const auto n(fs.get_text_content(fd::modeline_group_name()));
     const auto i(modeline_groups_.find(n));
     if (i == modeline_groups_.end())
         throw_missing_item("Modeline group not found: ", n);
@@ -112,15 +114,16 @@ extract_marker(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
     using cgm = field_definitions::code_generation_marker;
 
-    if (!has_field(o, cgm::message()))
+    const field_selector fs(o);
+    if (!fs.has_field(cgm::message()))
         return std::string();
 
-    const auto message(get_text_content(o, cgm::message()));
+    const auto message(fs.get_text_content(cgm::message()));
     if (message.empty())
         return message;
 
-    const bool add_date_time(get_boolean_content(o, cgm::add_date_time()));
-    const bool add_warning(get_boolean_content(o, cgm::add_warning()));
+    const bool add_date_time(fs.get_boolean_content(cgm::add_date_time()));
+    const bool add_warning(fs.get_boolean_content(cgm::add_warning()));
     code_generation_marker_factory f(add_date_time, add_warning, message);
 
     return f.make();

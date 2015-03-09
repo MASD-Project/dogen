@@ -50,7 +50,7 @@ std::list<std::string> dia_frontend::supported_extensions() const {
 dia_frontend::~dia_frontend() noexcept { }
 
 sml::model dia_frontend::
-generate(const dynamic::schema::workflow& w, const input_descriptor& d,
+generate(const dynamic::schema::object_factory& of, const input_descriptor& d,
     const frontend_settings& s) {
     BOOST_LOG_SEV(lg, debug) << "Hydrating dia. ";
 
@@ -66,7 +66,7 @@ generate(const dynamic::schema::workflow& w, const input_descriptor& d,
         p.persist(diagram, s.pre_processed_input_path());
     }
 
-    dogen::dia_to_sml::workflow wf(w);
+    dogen::dia_to_sml::workflow wf(of);
     return wf.execute(diagram, name, d.external_module_path(), d.is_target());
 }
 

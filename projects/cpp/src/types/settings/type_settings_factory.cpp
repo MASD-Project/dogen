@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/io/formattables/family_types_io.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
@@ -85,26 +85,27 @@ make(const dynamic::schema::object& o) const {
     type_settings r;
     using fd = field_definitions::type;
     bool found_any_field(false);
-    if (has_field(o, fd::family())) {
+    const field_selector fs(o);
+    if (fs.has_field(fd::family())) {
         found_any_field = true;
-        r.family_type(to_family_type(get_text_content(o, fd::family())));
+        r.family_type(to_family_type(fs.get_text_content(fd::family())));
     }
 
-    if (has_field(o, fd::requires_manual_default_constructor())) {
+    if (fs.has_field(fd::requires_manual_default_constructor())) {
         found_any_field = true;
         r.requires_manual_default_constructor(
-            get_boolean_content(o, fd::requires_manual_default_constructor()));
+            fs.get_boolean_content(fd::requires_manual_default_constructor()));
     }
 
-    if (has_field(o, fd::requires_manual_move_constructor())) {
+    if (fs.has_field(fd::requires_manual_move_constructor())) {
         found_any_field = true;
         r.requires_manual_move_constructor(
-            get_boolean_content(o, fd::requires_manual_move_constructor()));
+            fs.get_boolean_content(fd::requires_manual_move_constructor()));
     }
 
-    if (has_field(o, fd::inclusion_required())) {
+    if (fs.has_field(fd::inclusion_required())) {
         found_any_field = true;
-        r.inclusion_required(get_boolean_content(o, fd::inclusion_required()));
+        r.inclusion_required(fs.get_boolean_content(fd::inclusion_required()));
     }
 
     if (found_any_field)

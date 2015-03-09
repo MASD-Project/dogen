@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/types/content_extensions.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/settings/field_definitions.hpp"
 #include "dogen/cpp/types/settings/cpp_settings_factory.hpp"
 
@@ -34,21 +34,24 @@ cpp_settings cpp_settings_factory::create_default_settings() const {
     using fd = dogen::cpp::settings::field_definitions;
 
     cpp_settings r;
-    r.enabled(get_boolean_content(*fd::enabled().default_value()));
-    r.split_project(get_boolean_content(*fd::split_project().default_value()));
-    r.include_directory_name(
-        get_text_content(*fd::include_directory_name().default_value()));
-    r.source_directory_name(
-        get_text_content(*fd::source_directory_name().default_value()));
-    r.split_project(get_boolean_content(*fd::split_project().default_value()));
-    r.header_file_extension(
-        get_text_content(*fd::header_file_extension().default_value()));
-    r.implementation_file_extension(
-        get_text_content(*fd::implementation_file_extension().default_value()));
-    r.enable_facet_folders(
-        get_boolean_content(*fd::enable_facet_folders().default_value()));
-    r.enable_unique_file_names(
-        get_boolean_content(*fd::enable_unique_file_names().default_value()));
+    r.enabled(field_selector::get_boolean_content(
+            *fd::enabled().default_value()));
+    r.split_project(field_selector::get_boolean_content(
+            *fd::split_project().default_value()));
+    r.include_directory_name(field_selector::get_text_content(
+            *fd::include_directory_name().default_value()));
+    r.source_directory_name(field_selector::get_text_content(
+            *fd::source_directory_name().default_value()));
+    r.split_project(field_selector::get_boolean_content(
+            *fd::split_project().default_value()));
+    r.header_file_extension(field_selector::get_text_content(
+            *fd::header_file_extension().default_value()));
+    r.implementation_file_extension(field_selector::get_text_content(
+            *fd::implementation_file_extension().default_value()));
+    r.enable_facet_folders(field_selector::get_boolean_content(
+            *fd::enable_facet_folders().default_value()));
+    r.enable_unique_file_names(field_selector::get_boolean_content(
+            *fd::enable_unique_file_names().default_value()));
     return r;
 }
 
@@ -56,36 +59,37 @@ void cpp_settings_factory::
 populate(const dynamic::schema::object& o, cpp_settings& s) const {
     using namespace dynamic::schema;
     using fd = field_definitions;
+    const field_selector fs(o);
 
-    if (has_field(o, fd::enabled()))
-        s.enabled(get_boolean_content(o, fd::enabled()));
+    if (fs.has_field(fd::enabled()))
+        s.enabled(fs.get_boolean_content(fd::enabled()));
 
-    if (has_field(o, fd::split_project()))
-        s.enabled(get_boolean_content(o, fd::split_project()));
+    if (fs.has_field(fd::split_project()))
+        s.enabled(fs.get_boolean_content(fd::split_project()));
 
-    if (has_field(o, fd::source_directory_name()))
+    if (fs.has_field(fd::source_directory_name()))
         s.source_directory_name(
-            get_text_content(o, fd::source_directory_name()));
+            fs.get_text_content(fd::source_directory_name()));
 
-    if (has_field(o, fd::include_directory_name()))
+    if (fs.has_field(fd::include_directory_name()))
         s.include_directory_name(
-            get_text_content(o, fd::include_directory_name()));
+            fs.get_text_content(fd::include_directory_name()));
 
-    if (has_field(o, fd::header_file_extension()))
+    if (fs.has_field(fd::header_file_extension()))
         s.header_file_extension(
-            get_text_content(o, fd::header_file_extension()));
+            fs.get_text_content(fd::header_file_extension()));
 
-    if (has_field(o, fd::implementation_file_extension()))
+    if (fs.has_field(fd::implementation_file_extension()))
         s.implementation_file_extension(
-            get_text_content(o, fd::implementation_file_extension()));
+            fs.get_text_content(fd::implementation_file_extension()));
 
-    if (has_field(o, fd::enable_facet_folders()))
+    if (fs.has_field(fd::enable_facet_folders()))
         s.enable_facet_folders(
-            get_boolean_content(o, fd::enable_facet_folders()));
+            fs.get_boolean_content(fd::enable_facet_folders()));
 
-    if (has_field(o, fd::enable_unique_file_names()))
+    if (fs.has_field(fd::enable_unique_file_names()))
         s.enable_unique_file_names(
-            get_boolean_content(o, fd::enable_unique_file_names()));
+            fs.get_boolean_content(fd::enable_unique_file_names()));
 }
 
 void cpp_settings_factory::

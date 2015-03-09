@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_FIELD_ACCESS_ERROR_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TYPES_FIELD_ACCESS_ERROR_HPP
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_SELECTION_ERROR_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_SELECTION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@ namespace dynamic {
 namespace schema {
 
 /**
- * @brief An error occurred while trying to acces a field.
+ * @brief An error occurred when attempting to select.
  */
-class field_access_error : public virtual std::exception, public virtual boost::exception {
+class selection_error : public virtual std::exception, public virtual boost::exception {
 public:
-    field_access_error() = default;
-    ~field_access_error() noexcept = default;
+    selection_error() = default;
+    ~selection_error() noexcept = default;
 
 public:
-    field_access_error(const std::string& message) : message_(message) { }
+    selection_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

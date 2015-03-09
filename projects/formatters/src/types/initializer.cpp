@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/object_factory.hpp"
 #include "dogen/formatters/types/field_definitions.hpp"
 #include "dogen/formatters/types/initializer.hpp"
 
@@ -26,7 +26,7 @@ namespace dogen {
 namespace formatters {
 
 void initializer::initialize() {
-    auto& reg(dynamic::schema::workflow::registrar());
+    auto& reg(dynamic::schema::object_factory::registrar());
     using fd = field_definitions;
     reg.register_field_definitions(fd::all_field_definitions());
 }

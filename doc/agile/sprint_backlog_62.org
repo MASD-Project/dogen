@@ -14,18 +14,19 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-08 Sun 23:45]
+Clock summary at [2015-03-09 Mon 13:48]
 
-| Headline                                                              | Time   |      |      |
-|-----------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                          | *9:12* |      |      |
-|-----------------------------------------------------------------------+--------+------+------|
-| Active                                                                |        | 9:12 |      |
-| STARTED Sprint and product backlog grooming                           |        |      | 1:05 |
-| COMPLETED Consider creating a rules based engine                      |        |      | 2:09 |
-| COMPLETED Rename =dynamic= to =dynamic::schema=                       |        |      | 1:44 |
-| COMPLETED Generate registrar correctly when using external model path |        |      | 0:25 |
-| COMPLETED Create a JSON file format for field definitions             |        |      | 3:49 |
+| Headline                                                              | Time    |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                          | *11:06* |       |      |
+|-----------------------------------------------------------------------+---------+-------+------|
+| Active                                                                |         | 11:06 |      |
+| STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
+| COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
+| COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
+| COMPLETED Generate registrar correctly when using external model path |         |       | 0:25 |
+| COMPLETED Create a JSON file format for field definitions             |         |       | 3:49 |
+| COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -187,11 +188,18 @@ library folder or together with the models?
 The JSON support should live in =dynamic::schema=. We need a simple
 =hydrator= class with a simple test case.
 
-*** Apply relevant parts of dynamic refactor patch                    :story:
+*** COMPLETED Apply relevant parts of dynamic refactor patch          :story:
+    CLOSED: [2015-03-09 Mon 13:48]
+    CLOCK: [2015-03-09 Mon 12:23]--[2015-03-09 Mon 13:47] =>  1:24
+    CLOCK: [2015-03-08 Sun 23:45]--[2015-03-09 Mon 00:15] =>  0:30
 
 We did a little tidy-up of dynamic that was put on hold due to some
 big-picture thinking. We need to figure out what part of it is still
 applicable, and copy it across from the patch.
+
+- rename content extensions to field selector
+- pick up registrar changes
+- rename workflow to factory
 
 *** Add JSON support to dynamic workflow                              :story:
 
