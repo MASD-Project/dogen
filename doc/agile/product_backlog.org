@@ -1254,6 +1254,10 @@ could also be done in XML. It only becomes a front-end if there is an
 intermediate representation (such as the =dia= model) that needs to be
 transformed into SML.
 
+Another idea: common representation or =cr=. It is what is common to
+all modeled languages. What is not common goes into dynamic. This will
+also make the vision for this model much more focused.
+
 *** Consider renaming formatters                                      :story:
 
 After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
