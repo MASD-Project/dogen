@@ -436,6 +436,24 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Using types of non-referenced models produce bad error messages   :story:
+
+By mistake we made a reference to =dynamic::object= in the schema
+model, during the =dynamic= to =schema= refactoring. This resulted in
+the following, non-obvious, error message:
+
+: 2015-03-09 12:56:00.920766 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/merger.cpp(120): Throw in function void dogen::sml::merger::update_references()
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml13merging_errorEEE
+: std::exception::what: Cannot find target dependency: dynamic
+: [P12tag_workflow] = Code generation failure.
+
+What this is trying to say is that the =dynamic= model is not being
+referenced. We should make this a bit more obvious because it would be
+very difficult for the user to figure out what type is bringing in
+this dependency. It would make more sense to say "type X requires
+model Y, which is not part of the list of reference models" or
+something along these lines.
+
 *** Nested external model path results in strange references          :story:
 
 For the dynamic schema model we have an external model path of
