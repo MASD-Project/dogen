@@ -1,0 +1,94 @@
+[
+    {
+        "name" : {
+            "simple" : "enabled",
+            "qualified" : "cpp.odb.enabled"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb"
+        },
+        "type" : "boolean",
+        "scope" : "root_module",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "supported",
+            "qualified" : "cpp.odb.supported"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "directory",
+            "qualified" : "cpp.odb.directory"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : "odb"
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.odb.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : "odb"
+    },
+    {
+        "name" : {
+            "simple" : "enabled",
+            "qualified" : "cpp.odb.class_header_formatter.enabled"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb",
+            "formatter_name" : "cpp.odb.class_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "root_module",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.odb.class_header_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb",
+            "formatter_name" : "cpp.odb.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "odb_pragma",
+            "qualified" : "odb_pragma"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb"
+        },
+        "type" : "text_collection",
+        "scope" : "any"
+    }
+]

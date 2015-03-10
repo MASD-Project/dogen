@@ -2,11 +2,11 @@
     {
         "name" : {
             "simple" : "enabled",
-            "qualified" : "cpp.hash.enabled"
+            "qualified" : "cpp.serialization.enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "facet_name" : "cpp.serialization"
         },
         "type" : "boolean",
         "scope" : "root_module",
@@ -15,11 +15,11 @@
     {
         "name" : {
             "simple" : "supported",
-            "qualified" : "cpp.hash.supported"
+            "qualified" : "cpp.serialization.supported"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "facet_name" : "cpp.serialization"
         },
         "type" : "boolean",
         "scope" : "entity",
@@ -28,38 +28,38 @@
     {
         "name" : {
             "simple" : "directory",
-            "qualified" : "cpp.hash.directory"
+            "qualified" : "cpp.serialization.directory"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "facet_name" : "cpp.serialization"
         },
         "type" : "text",
         "scope" : "root_module",
-        "default_value" : "hash"
+        "default_value" : "serialization"
     },
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.postfix"
+            "qualified" : "cpp.serialization.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
+            "facet_name" : "cpp.serialization"
         },
         "type" : "text",
         "scope" : "root_module",
-        "default_value" : "hash"
+        "default_value" : "serialization"
     },
     {
         "name" : {
             "simple" : "enabled",
-            "qualified" : "cpp.hash.class_header_formatter.enabled"
+            "qualified" : "cpp.serialization.class_header_formatter.enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
         },
         "type" : "boolean",
         "scope" : "root_module",
@@ -68,12 +68,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.class_header_formatter.postfix"
+            "qualified" : "cpp.serialization.class_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
         },
         "type" : "text",
         "scope" : "root_module",
@@ -82,12 +82,12 @@
     {
         "name" : {
             "simple" : "inclusion_path",
-            "qualified" : "cpp.hash.class_header_formatter.inclusion_path"
+            "qualified" : "cpp.serialization.class_header_formatter.inclusion_path"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
         },
         "type" : "text",
         "scope" : "entity"
@@ -95,12 +95,12 @@
     {
         "name" : {
             "simple" : "inclusion_delimiter",
-            "qualified" : "cpp.hash.class_header_formatter.inclusion_delimiter"
+            "qualified" : "cpp.serialization.class_header_formatter.inclusion_delimiter"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
         },
         "type" : "text",
         "scope" : "entity",
@@ -109,12 +109,12 @@
     {
         "name" : {
             "simple" : "enabled",
-            "qualified" : "cpp.hash.class_implementation_formatter.enabled"
+            "qualified" : "cpp.serialization.class_implementation_formatter.enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_implementation_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_implementation_formatter"
         },
         "type" : "boolean",
         "scope" : "root_module",
@@ -123,12 +123,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.class_implementation_formatter.postfix"
+            "qualified" : "cpp.serialization.class_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.class_implementation_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_implementation_formatter"
         },
         "type" : "text",
         "scope" : "root_module",
@@ -137,12 +137,12 @@
     {
         "name" : {
             "simple" : "enabled",
-            "qualified" : "cpp.hash.enumeration_header_formatter.enabled"
+            "qualified" : "cpp.serialization.enumeration_header_formatter.enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enumeration_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
         },
         "type" : "boolean",
         "scope" : "root_module",
@@ -151,12 +151,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.enumeration_header_formatter.postfix"
+            "qualified" : "cpp.serialization.enumeration_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enumeration_header_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
         },
         "type" : "text",
         "scope" : "root_module",
@@ -165,12 +165,12 @@
     {
         "name" : {
             "simple" : "enabled",
-            "qualified" : "cpp.hash.enumeration_implementation_formatter.enabled"
+            "qualified" : "cpp.serialization.enumeration_implementation_formatter.enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enumeration_implementation_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_implementation_formatter"
         },
         "type" : "boolean",
         "scope" : "root_module",
@@ -179,12 +179,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.hash.enumeration_implementation_formatter.postfix"
+            "qualified" : "cpp.serialization.enumeration_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
-            "facet_name" : "cpp.hash",
-            "formatter_name" : "cpp.hash.enumeration_implementation_formatter"
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_implementation_formatter"
         },
         "type" : "text",
         "scope" : "root_module",

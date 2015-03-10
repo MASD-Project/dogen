@@ -14,20 +14,20 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-09 Mon 19:40]
+Clock summary at [2015-03-10 Tue 18:08]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *11:55* |       |      |
+| *Total time*                                                          | *12:19* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 11:55 |      |
+| Active                                                                |         | 12:19 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path |         |       | 0:25 |
 | COMPLETED Create a JSON file format for field definitions             |         |       | 3:49 |
 | COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
-| STARTED Convert all field definitions into JSON                       |         |       | 0:49 |
+| COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -202,17 +202,21 @@ applicable, and copy it across from the patch.
 - pick up registrar changes
 - rename workflow to factory
 
-*** STARTED Convert all field definitions into JSON                   :story:
+*** COMPLETED Convert all field definitions into JSON                 :story:
+    CLOSED: [2015-03-10 Tue 18:08]
+    CLOCK: [2015-03-10 Tue 17:42]--[2015-03-10 Tue 18:06] =>  0:24
     CLOCK: [2015-03-09 Mon 18:21]--[2015-03-09 Mon 19:10] =>  0:49
 
 - find all code that creates field definitions and move it to JSON.
-- create a workflow that reads in all field definitions and then
-  registers them.
 
 *** Add JSON support to dynamic workflow                              :story:
 
 We need to create the required activities in the dynamic schema's
 workflow to read in all the JSON files.
+
+- create a workflow that reads in all field definitions and then
+  registers them.
+
 
 *** Create a =dynamic::expansion= model with a sample operation       :story:
 
