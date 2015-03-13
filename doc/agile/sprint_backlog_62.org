@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-10 Tue 18:08]
+Clock summary at [2015-03-13 Fri 22:55]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *12:19* |       |      |
+| *Total time*                                                          | *13:37* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 12:19 |      |
+| Active                                                                |         | 13:37 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
@@ -28,6 +28,7 @@ Clock summary at [2015-03-10 Tue 18:08]
 | COMPLETED Create a JSON file format for field definitions             |         |       | 3:49 |
 | COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
 | COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
+| COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -209,6 +210,71 @@ applicable, and copy it across from the patch.
 
 - find all code that creates field definitions and move it to JSON.
 
+*** COMPLETED Analysis on the =cpp= refactoring                       :story:
+    CLOSED: [2015-03-13 Fri 22:53]
+    CLOCK: [2015-03-13 Fri 21:35]--[2015-03-13 Fri 22:53] =>  1:18
+
+We need to avoid past mistakes and start by designing the settings
+classes required by the formatters before we focus on the dynamic
+object representation.
+
+We shall settle on three types of settings:
+
+- general settings (as per formatters model)
+- principal settings (e.g. the settings common to all formatters of a given
+  language)
+- subsidiary settings (e.g. the settings that are only used by one or
+  a few formatters and which we cannot know about up front)
+
+For clarity we should also rename =settings::settings= to
+=settings::bundle=. We no longer require global, local, type, facet
+etc settings.
+
+*List of tasks*:
+
+- remove processing of includes and file names from formattables
+- remove all of the many settings from settings and implement the two
+  above ones; add inclusion related classes from formattables
+- remove path related classes from formatters (will be implemented as
+  operations/expansions)
+- remove all field definitions; instead add traits with the complete
+  name. We also need a field definition selector based on complete
+  name. Settings factories need to do a look-up for the required
+  fields on construction and cache the fields. Actually we probably
+  should have path ingredient settings; we can make use of these from
+  within the operation/expansion?
+
+*** Remove processing of includes and file names                      :story:
+
+This will be done via expansion. Remove also the entity properties.
+
+*** Refactor settings classes                                         :story:
+
+- remove all of the many settings from settings and implement the two
+  above ones;
+- add inclusion related classes from formattables
+- Create principal and subsidiary settings, and create a "type
+  settings" class or "settings for type"
+
+*** Remove path related classes from formatters                       :story:
+
+These will be implemented as operations/expansions.
+
+*** Remove all field definitions in code                              :story:
+
+Instead add traits with the complete name. We also need a field
+definition selector based on complete name. Settings factories need to
+do a look-up for the required fields on construction and cache the
+fields. Actually we probably should have path ingredient settings; we
+can make use of these from within the operation/expansion?
+
+*** Remove provider                                                   :story:
+
+We no longer require the provider, provider interface etc. These will
+be done as part of the expansions. We will need a way to obtain a file
+type given a formatter ID. This could be done with a selector. It will
+be used by the inclusion expander.
+
 *** Add JSON support to dynamic workflow                              :story:
 
 We need to create the required activities in the dynamic schema's
@@ -216,7 +282,6 @@ workflow to read in all the JSON files.
 
 - create a workflow that reads in all field definitions and then
   registers them.
-
 
 *** Create a =dynamic::expansion= model with a sample operation       :story:
 
