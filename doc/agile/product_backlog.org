@@ -61,47 +61,6 @@ complicated to build in the generic logic of such dependencies. We
 have a story to handle this properly in the backlog, but it will
 require a lot of work.
 
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
-*** Create settings expander and switcher                             :story:
-
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
-
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
-
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
-
-This could be done by the switcher. We should first expand the
-settings then switch them.
-
-In some ways we can think of the switcher as a dependency
-manager. This may inform the naming of this class.
-
-One thing to take into account is the different kinds of behaviours
-regarding enabling facets and formatters:
-
-- for serialisation we want it to be on and if its on, all types
-  should be serialisable.
-- for hashing we want it to be off (most likely) and if the user makes
-  use of a hashing container we want the type that is the key of the
-  container to have hashing on; no other types should have it on. We
-  also may want the user to manually switch hashing on for a type.
-- for forward declarations: if another formatter requires it for a
-  type, we want it on; if no one requires it we want it off. The user
-  may want to manually switch it on for a type.
-
 *** Create a base formatter                                           :story:
 
 We could implement most of the formatter interface in a common base
@@ -110,20 +69,6 @@ class and then only have the descendants override what they need.
 In reality we need probably more than one base formatter: one for c++
 types, etc. We could handle all of the path and include generation
 here. Name: =cpp_base_formatter=?
-
-*** Add support for opaque formatter settings                         :story:
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to local settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-- we need multiple opaque settings (more than one formatter will need
-  them).
-- move provider and provider selector to top-level namespace and add a
-  provide opaque settings method to it.
 
 *** Read =generate_preamble= from dynamic object                      :story:
 
@@ -224,6 +169,9 @@ contents. Having said that, one could say the same about any kind of
 comments.
 
 We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
 
 *** Populate the "new" =class_info= properties                        :story:
 

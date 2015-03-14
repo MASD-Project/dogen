@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-13 Fri 22:55]
+Clock summary at [2015-03-14 Sat 00:19]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *13:37* |       |      |
+| *Total time*                                                          | *14:59* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 13:37 |      |
+| Active                                                                |         | 14:59 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
@@ -29,6 +29,7 @@ Clock summary at [2015-03-13 Fri 22:55]
 | COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
 | COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
 | COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
+| STARTED Refactor settings classes                                     |         |       | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -230,6 +231,8 @@ For clarity we should also rename =settings::settings= to
 =settings::bundle=. We no longer require global, local, type, facet
 etc settings.
 
+Commit prior to refactoring: 909b9a6.
+
 *List of tasks*:
 
 - remove processing of includes and file names from formattables
@@ -244,11 +247,8 @@ etc settings.
   should have path ingredient settings; we can make use of these from
   within the operation/expansion?
 
-*** Remove processing of includes and file names                      :story:
-
-This will be done via expansion. Remove also the entity properties.
-
-*** Refactor settings classes                                         :story:
+*** STARTED Refactor settings classes                                 :story:
+    CLOCK: [2015-03-13 Fri 22:57]--[2015-03-14 Sat 00:19] =>  1:22
 
 - remove all of the many settings from settings and implement the two
   above ones;
@@ -256,9 +256,20 @@ This will be done via expansion. Remove also the entity properties.
 - Create principal and subsidiary settings, and create a "type
   settings" class or "settings for type"
 
+*** Remove processing of includes and file names                      :story:
+
+This will be done via expansion. Remove also the entity properties.
+
 *** Remove path related classes from formatters                       :story:
 
 These will be implemented as operations/expansions.
+
+*** Remove provider                                                   :story:
+
+We no longer require the provider, provider interface etc. These will
+be done as part of the expansions. We will need a way to obtain a file
+type given a formatter ID. This could be done with a selector. It will
+be used by the inclusion expander.
 
 *** Remove all field definitions in code                              :story:
 
@@ -267,13 +278,6 @@ definition selector based on complete name. Settings factories need to
 do a look-up for the required fields on construction and cache the
 fields. Actually we probably should have path ingredient settings; we
 can make use of these from within the operation/expansion?
-
-*** Remove provider                                                   :story:
-
-We no longer require the provider, provider interface etc. These will
-be done as part of the expansions. We will need a way to obtain a file
-type given a formatter ID. This could be done with a selector. It will
-be used by the inclusion expander.
 
 *** Add JSON support to dynamic workflow                              :story:
 
@@ -306,6 +310,30 @@ preconditions. We could also have an optional precondition so that
 
 Also we should name "operations" "expanders". After all we are
 executing the expansion workflow.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
+
+*** Add support for opaque formatter settings                         :story:
+
+*New Understanding*
+
+This is now taken care in the guise of subsidiary settings.
+
+*Previous Understanding*
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to local settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+- we need multiple opaque settings (more than one formatter will need
+  them).
+- move provider and provider selector to top-level namespace and add a
+  provide opaque settings method to it.
 
 *** Add an operation graph to expansion                               :story:
 
@@ -414,5 +442,49 @@ few other assorted clean-ups:
 
 - rename workflow (since we now have two);
 - rename content extensions since this is a selector in disguise;
+
+*** Create settings expander and switcher                             :story:
+
+*New Understanding*
+
+The expansion process now takes on this work. We need to refactor this
+story into an expander.
+
+*Previous Understanding*
+
+We need a class responsible for copying over all settings that exist
+both locally and globally. The idea is that, for those settings, the
+selector should be able to just query by formatter name locally and
+get the right values. This could be the expander.
+
+We also need a more intelligent class that determines what formatters
+are enabled and disabled. This is due to:
+
+- lack of support for a given formatter/facet by a type in the graph;
+  it must be propagated to all dependent types. We must be careful
+  with recursion (for example in the composite pattern).
+- a facet has been switched off. This must be propagated to all
+  formatters in that facet.
+- user has switched off a formatter. As with lack of support, this
+  must be propagated through the graph.
+
+This could be done by the switcher. We should first expand the
+settings then switch them.
+
+In some ways we can think of the switcher as a dependency
+manager. This may inform the naming of this class.
+
+One thing to take into account is the different kinds of behaviours
+regarding enabling facets and formatters:
+
+- for serialisation we want it to be on and if its on, all types
+  should be serialisable.
+- for hashing we want it to be off (most likely) and if the user makes
+  use of a hashing container we want the type that is the key of the
+  container to have hashing on; no other types should have it on. We
+  also may want the user to manually switch hashing on for a type.
+- for forward declarations: if another formatter requires it for a
+  type, we want it on; if no one requires it we want it off. The user
+  may want to manually switch it on for a type.
 
 ** Deprecated
