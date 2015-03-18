@@ -23,6 +23,7 @@
 #include <ostream>
 #include "dogen/cpp/io/formattables/nested_type_info_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
+#include "dogen/cpp/io/settings/special_formatter_settings_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -59,6 +60,22 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s<< " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace formattables {
@@ -77,7 +94,8 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
       << "\"type\": " << v.type() << ", "
       << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_fluent\": " << v.is_fluent()
+      << "\"is_fluent\": " << v.is_fluent() << ", "
+      << "\"special_formatter_settings\": " << v.special_formatter_settings()
       << " }";
     return(s);
 }

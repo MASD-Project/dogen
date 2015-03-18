@@ -46,8 +46,7 @@ public:
     type_settings(
         const dogen::cpp::formattables::family_types& family_type,
         const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor,
-        const bool inclusion_required);
+        const bool requires_manual_move_constructor);
 
 private:
     template<typename Archive>
@@ -66,14 +65,6 @@ public:
     bool requires_manual_move_constructor() const;
     void requires_manual_move_constructor(const bool v);
 
-    /**
-     * @brief If false, type does not require any include statements.
-     */
-    /**@{*/
-    bool inclusion_required() const;
-    void inclusion_required(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const type_settings& rhs) const;
     bool operator!=(const type_settings& rhs) const {
@@ -88,7 +79,6 @@ private:
     dogen::cpp::formattables::family_types family_type_;
     bool requires_manual_default_constructor_;
     bool requires_manual_move_constructor_;
-    bool inclusion_required_;
 };
 
 } } }

@@ -25,12 +25,12 @@
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/cpp/test_data/formattables/inclusion_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
+#include "dogen/cpp/test_data/settings/bundle_td.hpp"
 
 namespace {
 
@@ -48,33 +48,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::cpp::formattables::inclusion
-create_dogen_cpp_formattables_inclusion(const unsigned int position) {
-    return dogen::cpp::formattables::inclusion_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::cpp::formattables::inclusion> create_std_unordered_map_std_string_dogen_cpp_formattables_inclusion(unsigned int position) {
-    std::unordered_map<std::string, dogen::cpp::formattables::inclusion> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_formattables_inclusion(position + i)));
-    }
-    return r;
-}
-
-std::list<dogen::cpp::formattables::inclusion> create_std_list_dogen_cpp_formattables_inclusion(unsigned int position) {
-    std::list<dogen::cpp::formattables::inclusion> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_cpp_formattables_inclusion(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> > create_std_unordered_map_std_string_std_list_dogen_cpp_formattables_inclusion_(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_cpp_formattables_inclusion(position + i)));
-    }
-    return r;
+dogen::cpp::settings::bundle
+create_dogen_cpp_settings_bundle(const unsigned int position) {
+    return dogen::cpp::settings::bundle_generator::create(position);
 }
 
 }
@@ -90,8 +66,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.namespaces(create_std_list_std_string(position + 2));
-    v.inclusion_by_formatter_name(create_std_unordered_map_std_string_dogen_cpp_formattables_inclusion(position + 3));
-    v.inclusion_dependencies_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_cpp_formattables_inclusion_(position + 4));
+    v.settings(create_dogen_cpp_settings_bundle(position + 3));
 }
 
 entity_generator::result_type*

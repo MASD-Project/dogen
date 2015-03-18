@@ -42,7 +42,6 @@ std::size_t type_settings_hasher::hash(const type_settings&v) {
     combine(seed, v.family_type());
     combine(seed, v.requires_manual_default_constructor());
     combine(seed, v.requires_manual_move_constructor());
-    combine(seed, v.inclusion_required());
 
     return seed;
 }

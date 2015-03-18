@@ -38,8 +38,7 @@ std::ostream& operator<<(std::ostream& s, const type_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::type_settings\"" << ", "
       << "\"family_type\": " << v.family_type() << ", "
       << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
-      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
-      << "\"inclusion_required\": " << v.inclusion_required()
+      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor()
       << " }";
     return(s);
 }

@@ -22,12 +22,11 @@
 
 namespace {
 
-using dogen::cpp::formattables::inclusion;
-using dogen::cpp::formattables::inclusion_delimiter_types;
+using dogen::cpp::settings::inclusion;
+using dogen::cpp::settings::inclusion_delimiter_types;
 
 inclusion create_std_iosfwd() {
     inclusion r;
-    r.no_inclusion_required(false);
     r.inclusion_path("iosfwd");
     r.inclusion_delimiter_type(inclusion_delimiter_types::angle_brackets);
     return r;
@@ -35,7 +34,6 @@ inclusion create_std_iosfwd() {
 
 inclusion create_std_algorithm() {
     inclusion r;
-    r.no_inclusion_required(false);
     r.inclusion_path("algorithm");
     r.inclusion_delimiter_type(inclusion_delimiter_types::angle_brackets);
     return r;
@@ -43,7 +41,6 @@ inclusion create_std_algorithm() {
 
 inclusion create_std_ostream() {
     inclusion r;
-    r.no_inclusion_required(false);
     r.inclusion_path("ostream");
     r.inclusion_delimiter_type(inclusion_delimiter_types::angle_brackets);
     return r;
@@ -51,7 +48,6 @@ inclusion create_std_ostream() {
 
 inclusion create_std_functional() {
     inclusion r;
-    r.no_inclusion_required(false);
     r.inclusion_path("functional");
     r.inclusion_delimiter_type(inclusion_delimiter_types::angle_brackets);
     return r;
@@ -59,7 +55,6 @@ inclusion create_std_functional() {
 
 inclusion create_boost_nvp() {
     inclusion r;
-    r.no_inclusion_required(false);
     r.inclusion_path("boost/serialization/nvp.hpp");
     r.inclusion_delimiter_type(inclusion_delimiter_types::angle_brackets);
     return r;
@@ -71,27 +66,27 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-formattables::inclusion inclusion_constants::std::iosfwd() {
+settings::inclusion inclusion_constants::std::iosfwd() {
     static auto r(create_std_iosfwd());
     return r;
 }
 
-formattables::inclusion inclusion_constants::std::algorithm() {
+settings::inclusion inclusion_constants::std::algorithm() {
     static auto r(create_std_algorithm());
     return r;
 }
 
-formattables::inclusion inclusion_constants::std::ostream() {
+settings::inclusion inclusion_constants::std::ostream() {
     static auto r(create_std_ostream());
     return r;
 }
 
-formattables::inclusion inclusion_constants::std::functional() {
+settings::inclusion inclusion_constants::std::functional() {
     static auto r(create_std_functional());
     return r;
 }
 
-formattables::inclusion inclusion_constants::boost::nvp() {
+settings::inclusion inclusion_constants::boost::nvp() {
     static auto r(create_boost_nvp());
     return r;
 }

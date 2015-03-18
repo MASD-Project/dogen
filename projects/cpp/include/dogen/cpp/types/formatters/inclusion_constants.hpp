@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formattables/inclusion.hpp"
+#include "dogen/cpp/types/settings/inclusion.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -38,14 +38,14 @@ namespace formatters {
 struct inclusion_constants {
 
     struct std {
-        static formattables::inclusion iosfwd();
-        static formattables::inclusion algorithm();
-        static formattables::inclusion ostream();
-        static formattables::inclusion functional();
+        static settings::inclusion iosfwd();
+        static settings::inclusion algorithm();
+        static settings::inclusion ostream();
+        static settings::inclusion functional();
     };
 
     struct boost {
-        static formattables::inclusion nvp();
+        static settings::inclusion nvp();
     };
 };
 

@@ -61,24 +61,12 @@ public:
 
     std::string formatter_name() const override;
 
-    formattables::file_properties
-    provide_file_properties(const settings::selector& s,
-        const sml::qname& qn) const override;
-
-    std::list<formattables::inclusion> provide_inclusion_dependencies(
-        const settings::selector& s, const sml::model& m,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, formattables::file_properties>
-            >& file_properties_by_formatter_name,
-        const sml::qname& qn) const override;
-
 public:
     file_types file_type() const override;
 
 public:
-    dogen::formatters::file format(const settings::selector& s,
-        const formattables::class_info& c) const override;
+    dogen::formatters::file
+    format(const formattables::class_info& c) const override;
 };
 
 } } } }

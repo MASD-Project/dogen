@@ -26,11 +26,13 @@
 #endif
 
 #include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include <list>
 #include <string>
 #include <utility>
 #include "dogen/cpp/serialization/formattables/property_info_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/cpp/types/settings/special_formatter_settings_fwd.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -55,7 +57,8 @@ public:
         const dogen::cpp::formattables::nested_type_info& type,
         const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const bool is_immutable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings);
 
 private:
     template<typename Archive>
@@ -122,6 +125,11 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
+    const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings() const;
+    boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings();
+    void special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v);
+    void special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>&& v);
+
 public:
     bool operator==(const property_info& rhs) const;
     bool operator!=(const property_info& rhs) const {
@@ -139,6 +147,7 @@ private:
     std::list<std::pair<std::string, std::string> > opaque_parameters_;
     bool is_immutable_;
     bool is_fluent_;
+    boost::shared_ptr<dogen::cpp::settings::special_formatter_settings> special_formatter_settings_;
 };
 
 } } }

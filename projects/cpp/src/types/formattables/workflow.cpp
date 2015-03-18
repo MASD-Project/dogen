@@ -19,8 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
-#include "dogen/cpp/types/formattables/file_properties_factory.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -36,48 +34,23 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, formattables::file_properties> >
-workflow::create_file_properties_activity(const settings::selector& s,
-    const provider_selector_interface& ps,
-    const sml::model& m) const {
-    formattables::file_properties_factory f;
-    return f.make(s, ps, m);
-}
-
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<formattables::inclusion> >
-    >
-workflow::create_inclusion_dependencies_activity(const settings::selector& s,
-    const provider_selector_interface& ps, const sml::model& m,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, formattables::file_properties> >&
-    file_properties_by_formatter_name) const {
-    formattables::inclusion_dependencies_factory f;
-    return f.make(s, ps, file_properties_by_formatter_name, m);
-}
+workflow::workflow(const settings::workflow& w) : settings_workflow_(w) { }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::execute(const settings::selector& s,
-    const provider_selector_interface& ps, const sml::model& m) const {
+workflow::execute(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
-    const auto fp(create_file_properties_activity(s, ps, m));
-    const auto inc(create_inclusion_dependencies_activity(s, ps, m, fp));
 
     std::forward_list<std::shared_ptr<formattables::formattable>> r;
     r.splice_after(r.before_begin(),
-        to_formattables_activity(inc, fp, m, m.modules()));
+        to_formattables_activity(settings_workflow_, m, m.modules()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(inc, fp, m, m.concepts()));
+        to_formattables_activity(settings_workflow_, m, m.concepts()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(inc, fp, m, m.primitives()));
+        to_formattables_activity(settings_workflow_, m, m.primitives()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(inc, fp, m, m.enumerations()));
+        to_formattables_activity(settings_workflow_, m, m.enumerations()));
     r.splice_after(r.before_begin(),
-        to_formattables_activity(inc, fp, m, m.objects()));
+        to_formattables_activity(settings_workflow_, m, m.objects()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
     return r;

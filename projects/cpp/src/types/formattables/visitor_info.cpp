@@ -51,20 +51,16 @@ namespace formattables {
 
 visitor_info::visitor_info(
     const std::string& identity,
-    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
-    const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name,
+    const dogen::cpp::settings::bundle& settings,
     const std::list<std::string>& types)
     : dogen::cpp::formattables::entity(identity,
-      file_path_by_formatter_name,
       name,
       documentation,
       namespaces,
-      inclusion_by_formatter_name,
-      inclusion_dependencies_by_formatter_name),
+      settings),
       types_(types) { }
 
 void visitor_info::to_stream(std::ostream& s) const {

@@ -30,9 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formatters/registrar.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -41,16 +40,32 @@ namespace formatters {
 /**
  * @brief Generates all files for the supplied entity.
  */
-class workflow {
+class workflow final {
 public:
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static cpp::formatters::registrar& registrar();
+
+public:
+    /**
+     * @brief Ensures the workflow is in a valid state.
+     */
+    void validate() const;
+
     /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */
     std::forward_list<dogen::formatters::file>
-    execute(const settings::selector& s, const container& c,
-        const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
+    execute(const std::forward_list<
+            std::shared_ptr<formattables::formattable>
+            >& f)
     const;
+
+private:
+    static std::shared_ptr<cpp::formatters::registrar> registrar_;
 };
 
 } } }

@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iterator>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("cpp.formatters.workflow"));
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -29,9 +38,9 @@ namespace formatters {
  * @brief Responsible for dispatching the formattable to the
  * appropriate formatters.
  */
-class dispatcher : public formattables::formattable_visitor {
+class dispatcher final : public formattables::formattable_visitor {
 public:
-    dispatcher(const settings::selector& s, const container& c);
+    explicit dispatcher(const container& c);
     ~dispatcher() noexcept { }
 
 public:
@@ -55,17 +64,15 @@ public:
     format(const formattables::formattable& f);
 
 private:
-    const settings::selector& selector_;
     const container& container_;
     std::forward_list<dogen::formatters::file> files_;
 };
 
-dispatcher::dispatcher(const settings::selector& s, const container& c)
-    : selector_(s), container_(c) { }
+dispatcher::dispatcher(const container& c) : container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     for (const auto f : container_.class_formatters())
-        files_.push_front(f->format(selector_, c));
+        files_.push_front(f->format(c));
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {
@@ -98,11 +105,39 @@ dispatcher::format(const formattables::formattable& f) {
     return files_;
 }
 
+std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
+
+cpp::formatters::registrar& workflow::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<cpp::formatters::registrar>();
+
+    return *registrar_;
+}
+
+void workflow::validate() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
+
+    registrar().validate();
+    const auto& c(registrar().formatter_container());
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << std::distance(
+                                 c.class_formatters().begin(),
+                                 c.class_formatters().end())
+                             << " registered class formatter(s): ";
+
+    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
+    for (const auto& f : c.class_formatters())
+        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->formatter_name() << "'";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
+}
+
 std::forward_list<dogen::formatters::file>
-workflow::execute(const settings::selector& s, const container& c,
-    const std::forward_list<std::shared_ptr<formattables::formattable> >& f)
+workflow::execute(const std::forward_list<
+        std::shared_ptr<formattables::formattable>
+        >& f)
     const {
-    dispatcher d(s, c);
+    dispatcher d(registrar().formatter_container());
     std::forward_list<dogen::formatters::file> r;
     for (const auto sp : f)
         r.splice_after(r.before_begin(), d.format(*sp));

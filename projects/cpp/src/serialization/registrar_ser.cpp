@@ -38,6 +38,7 @@
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
+#include "dogen/cpp/serialization/settings/sample_settings_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 
 namespace dogen {
@@ -59,6 +60,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::cpp::formattables::primitive_info>();
     ar.template register_type<dogen::cpp::formattables::registrar_info>();
     ar.template register_type<dogen::cpp::formattables::visitor_info>();
+    ar.template register_type<dogen::cpp::settings::sample_settings>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

@@ -29,21 +29,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_boost_filesystem_path(const std::unordered_map<std::string, boost::filesystem::path>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_boost_filesystem_path(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -54,8 +39,6 @@ std::size_t formattable_hasher::hash(const formattable&v) {
     std::size_t seed(0);
 
     combine(seed, v.identity());
-    combine(seed, hash_std_unordered_map_std_string_boost_filesystem_path(v.file_path_by_formatter_name()));
-
     return seed;
 }
 

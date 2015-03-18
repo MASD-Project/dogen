@@ -175,85 +175,27 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-transformer::transformer(
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string,
-                           std::list<formattables::inclusion>
-                           >
-        >& inclusion_dependencies_by_qname_by_formatter_name,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string,
-                               formattables::file_properties>
-            >& file_properties_by_qname_by_formatter_name,
-    const sml::model& m) :
-    inclusion_dependencies_by_qname_by_formatter_name_(
-        inclusion_dependencies_by_qname_by_formatter_name),
-    file_properties_by_qname_by_formatter_name_(
-        file_properties_by_qname_by_formatter_name),
-    model_(m) { }
+transformer::transformer(const settings::workflow& w, const sml::model& m) :
+    settings_workflow_(w), model_(m) { }
 
-void transformer::populate_formattable_properties(
-    const sml::qname& qn, formattable& f) const {
-    // FIXME: for now we are only supporting objects, so we need this
-    // hack. logging is causing an expected slow down.
-    const auto i(file_properties_by_qname_by_formatter_name_.find(qn));
-    if (i == file_properties_by_qname_by_formatter_name_.end()) {
-        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << f.identity();
-        // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_properties + f.identity()));
-    } else {
-        for (const auto pair : i->second) {
-            f.file_path_by_formatter_name().insert(
-                std::make_pair(pair.first, pair.second.file_path()));
-        }
-    }
+
+void transformer::
+populate_formattable_properties(const sml::qname& qn, formattable& f) const {
+    f.identity(sml::string_converter::convert(qn));
 }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
+    const dynamic::schema::object& o,
     const std::string& documentation, entity& e) const {
 
     populate_formattable_properties(qn, e);
 
     e.name(qn.simple_name());
     e.documentation(documentation);
-    e.identity(sml::string_converter::convert(qn));
 
     name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
-
-    // FIXME: for now we are only supporting objects, so we need this
-    // hack. logging is causing an expected slow down.
-    const auto i(file_properties_by_qname_by_formatter_name_.find(qn));
-    if (i == file_properties_by_qname_by_formatter_name_.end()) {
-        BOOST_LOG_SEV(lg, error) << type_has_no_file_properties << e.identity();
-        // BOOST_THROW_EXCEPTION(transformation_error(
-        // type_has_no_file_properties + e.identity()));
-    } else {
-        for (const auto pair : i->second) {
-            const auto optional(pair.second.inclusion());
-            if (!optional) {
-                BOOST_LOG_SEV(lg, error) << type_has_no_inclusion
-                                         << e.identity();
-                BOOST_THROW_EXCEPTION(transformation_error(
-                        type_has_no_inclusion + e.identity()));
-            }
-            e.inclusion_by_formatter_name().insert(
-                std::make_pair(pair.first, *optional));
-        }
-    }
-
-    // FIXME: for now we are only supporting objects, so we need this
-    // hack. logging is causing an expected slow down.
-    const auto j(inclusion_dependencies_by_qname_by_formatter_name_.find(qn));
-    if (j == inclusion_dependencies_by_qname_by_formatter_name_.end()) {
-        BOOST_LOG_SEV(lg, error) << type_has_no_inclusion_dependencies
-                                 << e.identity();
-        // BOOST_THROW_EXCEPTION(transformation_error(
-        // inclusion_dependencies + e.identity()));
-    } else
-        e.inclusion_dependencies_by_formatter_name(j->second);
+    e.settings(settings_workflow_.execute(o));
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
@@ -391,7 +333,7 @@ transformer::to_enum_info(const sml::enumeration& e) const {
                              << sml::string_converter::convert(e.name());
 
     auto r(std::make_shared<enum_info>());
-    populate_entity_properties(e.name(), e.documentation(), *r);
+    populate_entity_properties(e.name(), e.extensions(), e.documentation(), *r);
     r->type(e.underlying_type().simple_name());
 
     for (const auto& en : e.enumerators())
@@ -407,7 +349,7 @@ to_namespace_info(const sml::module& m) const {
                              << sml::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
-    populate_entity_properties(m.name(), m.documentation(), *r);
+    populate_entity_properties(m.name(), m.extensions(), m.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module.";
     return r;
@@ -419,7 +361,7 @@ transformer::to_exception_info(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<exception_info>());
-    populate_entity_properties(o.name(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
     return r;
@@ -428,7 +370,7 @@ transformer::to_exception_info(const sml::object& o) const {
 std::shared_ptr<class_info>
 transformer::to_class_info(const sml::object& o, const class_types ct) const {
     auto r(std::make_shared<class_info>());
-    populate_entity_properties(o.name(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
 
     r->is_immutable(o.is_immutable());
     r->is_visitable(o.is_visitable());

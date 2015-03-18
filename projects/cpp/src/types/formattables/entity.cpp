@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/inclusion_io.hpp"
+#include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 
 
@@ -46,75 +46,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::formattables::inclusion>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 entity::entity(
     const std::string& identity,
-    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name,
     const std::string& name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& inclusion_by_formatter_name,
-    const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& inclusion_dependencies_by_formatter_name)
-    : dogen::cpp::formattables::formattable(identity,
-      file_path_by_formatter_name),
+    const dogen::cpp::settings::bundle& settings)
+    : dogen::cpp::formattables::formattable(identity),
       name_(name),
       documentation_(documentation),
       namespaces_(namespaces),
-      inclusion_by_formatter_name_(inclusion_by_formatter_name),
-      inclusion_dependencies_by_formatter_name_(inclusion_dependencies_by_formatter_name) { }
+      settings_(settings) { }
 
 void entity::to_stream(std::ostream& s) const {
     s << " { "
@@ -125,8 +71,7 @@ void entity::to_stream(std::ostream& s) const {
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
-      << "\"inclusion_by_formatter_name\": " << inclusion_by_formatter_name_ << ", "
-      << "\"inclusion_dependencies_by_formatter_name\": " << inclusion_dependencies_by_formatter_name_
+      << "\"settings\": " << settings_
       << " }";
 }
 
@@ -137,8 +82,7 @@ void entity::swap(entity& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
-    swap(inclusion_by_formatter_name_, other.inclusion_by_formatter_name_);
-    swap(inclusion_dependencies_by_formatter_name_, other.inclusion_dependencies_by_formatter_name_);
+    swap(settings_, other.settings_);
 }
 
 bool entity::compare(const entity& rhs) const {
@@ -146,8 +90,7 @@ bool entity::compare(const entity& rhs) const {
         name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_ &&
-        inclusion_by_formatter_name_ == rhs.inclusion_by_formatter_name_ &&
-        inclusion_dependencies_by_formatter_name_ == rhs.inclusion_dependencies_by_formatter_name_;
+        settings_ == rhs.settings_;
 }
 
 const std::string& entity::name() const {
@@ -198,36 +141,20 @@ void entity::namespaces(const std::list<std::string>&& v) {
     namespaces_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& entity::inclusion_by_formatter_name() const {
-    return inclusion_by_formatter_name_;
+const dogen::cpp::settings::bundle& entity::settings() const {
+    return settings_;
 }
 
-std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& entity::inclusion_by_formatter_name() {
-    return inclusion_by_formatter_name_;
+dogen::cpp::settings::bundle& entity::settings() {
+    return settings_;
 }
 
-void entity::inclusion_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& v) {
-    inclusion_by_formatter_name_ = v;
+void entity::settings(const dogen::cpp::settings::bundle& v) {
+    settings_ = v;
 }
 
-void entity::inclusion_by_formatter_name(const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>&& v) {
-    inclusion_by_formatter_name_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& entity::inclusion_dependencies_by_formatter_name() const {
-    return inclusion_dependencies_by_formatter_name_;
-}
-
-std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& entity::inclusion_dependencies_by_formatter_name() {
-    return inclusion_dependencies_by_formatter_name_;
-}
-
-void entity::inclusion_dependencies_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& v) {
-    inclusion_dependencies_by_formatter_name_ = v;
-}
-
-void entity::inclusion_dependencies_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >&& v) {
-    inclusion_dependencies_by_formatter_name_ = std::move(v);
+void entity::settings(const dogen::cpp::settings::bundle&& v) {
+    settings_ = std::move(v);
 }
 
 } } }

@@ -25,11 +25,9 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
-#include "dogen/cpp/types/formatters/path_factory.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
-#include "dogen/cpp/types/formatters/path_ingredients_factory.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -56,7 +54,10 @@ namespace formatters {
 namespace types {
 
 boost::filesystem::path class_header_formatter::
-get_inclusion_path(const formattables::class_info& c) const {
+get_inclusion_path(const formattables::class_info& /*c*/) const {
+    boost::filesystem::path r;
+    return r;
+    /*
     const auto& ip(c.inclusion_by_formatter_name());
     const auto i(ip.find(formatter_name()));
     if (i == ip.end()) {
@@ -67,10 +68,14 @@ get_inclusion_path(const formattables::class_info& c) const {
                 include_path_for_formatter_not_found + formatter_name()));
     }
     return i->second.inclusion_path();
+    */
 }
 
 boost::filesystem::path class_header_formatter::
-get_file_path(const formattables::class_info& c) const {
+get_file_path(const formattables::class_info& /*c*/) const {
+    boost::filesystem::path r;
+    return r;
+/*
     const auto& fp(c.file_path_by_formatter_name());
     const auto i(fp.find(formatter_name()));
     if (i == fp.end()) {
@@ -81,6 +86,7 @@ get_file_path(const formattables::class_info& c) const {
                 file_path_for_formatter_not_found + formatter_name()));
     }
     return i->second;
+*/
 }
 
 file_types class_header_formatter::file_type() const {
@@ -95,6 +101,7 @@ std::string class_header_formatter::formatter_name() const {
     return traits::class_header_formatter_name();
 }
 
+/*
 formattables::file_properties
 class_header_formatter::provide_file_properties(const settings::selector& s,
     const sml::qname& qn) const {
@@ -121,7 +128,7 @@ provide_inclusion_dependencies(const settings::selector& s,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, formattables::file_properties>
-        >& /*file_properties_by_formatter_name*/,
+        >& file_properties_by_formatter_name,
     const sml::qname& qn) const {
     std::list<formattables::inclusion>  r;
 
@@ -151,10 +158,10 @@ provide_inclusion_dependencies(const settings::selector& s,
     // const auto& o(pair.second);
     return r;
 }
+*/
 
 dogen::formatters::file
-class_header_formatter::format(const settings::selector& s,
-    const formattables::class_info& c) const {
+class_header_formatter::format(const formattables::class_info& c) const {
     boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 
@@ -165,7 +172,8 @@ class_header_formatter::format(const settings::selector& s,
 
     const auto ip(get_inclusion_path(c));
     dogen::cpp::formatters::boilerplate_formatter f;
-    const auto a(s.select_annotation(c.identity()));
+    // FIXME: optional general settings
+    const auto a(c.settings().general_settings()->annotation());
     f.format_begin(fo, a, empty_includes, ip);
     f.format_end(fo, a, ip);
 

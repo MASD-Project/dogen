@@ -48,7 +48,7 @@
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
+#include "dogen/cpp/types/settings/workflow.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -60,31 +60,20 @@ namespace formattables {
 class transformer {
 public:
     transformer(
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<
-                std::string,
-                std::list<formattables::inclusion>
-                >
-            >& inclusion_dependencies_by_qname_by_formatter_name,
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string,
-                                   formattables::file_properties>
-                >& file_properties_by_qname_by_formatter_name,
-            const sml::model& m);
+        const settings::workflow& w, const sml::model& m);
 
 private:
     /**
      * @brief Populates all properties at the formattables base class level.
      */
     void
-    populate_formattable_properties(const sml::qname& qn, formattable& e) const;
+    populate_formattable_properties(const sml::qname& qn, formattable& f) const;
 
     /**
      * @brief Populates all properties at the entity base class level.
      */
     void populate_entity_properties(const sml::qname& qn,
+        const dynamic::schema::object& o,
         const std::string& documentation, entity& e) const;
 
 private:
@@ -183,16 +172,7 @@ public:
     std::shared_ptr<formattable> transform(const sml::object& o) const;
 
 private:
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string,
-                           std::list<formattables::inclusion>
-                           >
-        > inclusion_dependencies_by_qname_by_formatter_name_;
-    const std::unordered_map<sml::qname,
-                       std::unordered_map<std::string,
-                                          formattables::file_properties>
-                       > file_properties_by_qname_by_formatter_name_;
+    const settings::workflow& settings_workflow_;
     const sml::model& model_;
 };
 

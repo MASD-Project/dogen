@@ -45,7 +45,6 @@ populate(const unsigned int position, result_type& v) {
     v.family_type(create_dogen_cpp_formattables_family_types(position + 0));
     v.requires_manual_default_constructor(create_bool(position + 1));
     v.requires_manual_move_constructor(create_bool(position + 2));
-    v.inclusion_required(create_bool(position + 3));
 }
 
 type_settings_generator::result_type

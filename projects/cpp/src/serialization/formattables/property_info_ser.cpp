@@ -28,10 +28,12 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/utility.hpp>
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
+#include "dogen/cpp/serialization/settings/special_formatter_settings_ser.hpp"
 
 
 namespace boost {
@@ -47,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("opaque_parameters", v.opaque_parameters_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("special_formatter_settings", v.special_formatter_settings_);
 }
 
 template<typename Archive>
@@ -59,6 +62,7 @@ void load(Archive& ar,
     ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("special_formatter_settings", v.special_formatter_settings_);
 }
 
 } }

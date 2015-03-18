@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
+#include <string>
 #include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/formattables/provider_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class formatter_interface : public formattables::provider_interface {
+class formatter_interface {
 public:
     formatter_interface() = default;
     formatter_interface(const formatter_interface&) = delete;
@@ -40,6 +40,16 @@ public:
     virtual ~formatter_interface() noexcept = 0;
 
 public:
+    /**
+     * @brief Name of the facet that the provider belongs to.
+     */
+    virtual std::string facet_name() const = 0;
+
+    /**
+     * @brief Name of the formatter the provider generates data for.
+     */
+    virtual std::string formatter_name() const = 0;
+
     /**
      * @brief Type of the file this formatter generates.
      */

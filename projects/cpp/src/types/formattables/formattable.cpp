@@ -30,51 +30,27 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::filesystem::path>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-formattable::formattable(
-    const std::string& identity,
-    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name)
-    : identity_(identity),
-      file_path_by_formatter_name_(file_path_by_formatter_name) { }
+formattable::formattable(const std::string& identity)
+    : identity_(identity) { }
 
 void formattable::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << ", "
-      << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\"" << ", "
-      << "\"file_path_by_formatter_name\": " << file_path_by_formatter_name_
+      << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\""
       << " }";
 }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(identity_, other.identity_);
-    swap(file_path_by_formatter_name_, other.file_path_by_formatter_name_);
 }
 
 bool formattable::compare(const formattable& rhs) const {
-    return identity_ == rhs.identity_ &&
-        file_path_by_formatter_name_ == rhs.file_path_by_formatter_name_;
+    return identity_ == rhs.identity_;
 }
 
 const std::string& formattable::identity() const {
@@ -91,22 +67,6 @@ void formattable::identity(const std::string& v) {
 
 void formattable::identity(const std::string&& v) {
     identity_ = std::move(v);
-}
-
-const std::unordered_map<std::string, boost::filesystem::path>& formattable::file_path_by_formatter_name() const {
-    return file_path_by_formatter_name_;
-}
-
-std::unordered_map<std::string, boost::filesystem::path>& formattable::file_path_by_formatter_name() {
-    return file_path_by_formatter_name_;
-}
-
-void formattable::file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>& v) {
-    file_path_by_formatter_name_ = v;
-}
-
-void formattable::file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>&& v) {
-    file_path_by_formatter_name_ = std::move(v);
 }
 
 } } }

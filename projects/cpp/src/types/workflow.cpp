@@ -19,10 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/schema/types/indexer.hpp"
 #include "dogen/dynamic/schema/types/object_factory.hpp"
-#include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/formatters/provider_selector.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -40,38 +39,20 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-std::shared_ptr<formatters::registrar> workflow::registrar_;
-
-cpp::formatters::registrar& workflow::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<cpp::formatters::registrar>();
-
-    return *registrar_;
-}
-
-settings::settings workflow::
-create_settings_activty(const config::knitting_options& o,
-    const std::forward_list<dynamic::schema::field_definition>& fds,
-    const sml::model& m) const {
-    settings::workflow w;
-    return w.execute(o.cpp(), fds, m);
-}
-
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::create_formattables_activty(const settings::selector& s,
-    const formattables::provider_selector_interface& ps,
+workflow::create_formattables_activty(const settings::workflow& sw,
     const sml::model& m) const {
-    formattables::workflow w;
-    return w.execute(s, ps, m);
+    formattables::workflow fw(sw);
+    return fw.execute(m);
 }
 
 std::forward_list<dogen::formatters::file>
-workflow::format_activty(const settings::selector& s,
-    const formatters::container& c,
-    const std::forward_list<std::shared_ptr<formattables::formattable> >&
-    f) const {
+workflow::format_activty(const std::forward_list<
+        std::shared_ptr<formattables::formattable>
+        >& f) const {
     formatters::workflow w;
-    return w.execute(s, c, f);
+    w.validate();
+    return w.execute(f);
 }
 
 std::string workflow::id() const {
@@ -86,34 +67,23 @@ std::vector<boost::filesystem::path> workflow::managed_directories() const {
 void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating c++ backend workflow.";
 
-    registrar().validate();
-    const auto& c(registrar().formatter_container());
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(
-                                 c.class_formatters().begin(),
-                                 c.class_formatters().end())
-                             << " registered class formatter(s): ";
-
-    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
-    for (const auto& f : c.class_formatters())
-        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->formatter_name() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
 }
 
 std::forward_list<dogen::formatters::file> workflow::
-generate(const config::knitting_options& o, const sml::model& m) const {
+generate(const config::knitting_options& /*o*/, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    validate();
     using dynamic::schema::object_factory;
     const auto& fds(object_factory::registrar().field_definitions());
-    const auto s(create_settings_activty(o, fds, m));
-    const auto& c(registrar().formatter_container());
 
-    const formatters::provider_selector ps(c);
-    const auto f(create_formattables_activty(s, ps, m));
-    const auto r(format_activty(s, c, f));
+    dynamic::schema::indexer idx;
+    idx.index(fds);
+    settings::workflow w(idx.field_definitions_by_formatter_name());
+    w.validate();
+    const auto f(create_formattables_activty(w, m));
+    const auto r(format_activty(f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";
     return r;

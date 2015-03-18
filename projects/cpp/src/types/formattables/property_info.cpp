@@ -19,6 +19,16 @@
  *
  */
 #include "dogen/cpp/types/formattables/property_info.hpp"
+#include "dogen/cpp/types/settings/special_formatter_settings.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& lhs,
+const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -34,13 +44,15 @@ property_info::property_info(
     const dogen::cpp::formattables::nested_type_info& type,
     const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const bool is_immutable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings)
     : name_(name),
       documentation_(documentation),
       type_(type),
       opaque_parameters_(opaque_parameters),
       is_immutable_(is_immutable),
-      is_fluent_(is_fluent) { }
+      is_fluent_(is_fluent),
+      special_formatter_settings_(special_formatter_settings) { }
 
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
@@ -50,6 +62,7 @@ void property_info::swap(property_info& other) noexcept {
     swap(opaque_parameters_, other.opaque_parameters_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(special_formatter_settings_, other.special_formatter_settings_);
 }
 
 bool property_info::operator==(const property_info& rhs) const {
@@ -58,7 +71,8 @@ bool property_info::operator==(const property_info& rhs) const {
         type_ == rhs.type_ &&
         opaque_parameters_ == rhs.opaque_parameters_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_fluent_ == rhs.is_fluent_;
+        is_fluent_ == rhs.is_fluent_ &&
+        special_formatter_settings_ == rhs.special_formatter_settings_;
 }
 
 property_info& property_info::operator=(property_info other) {
@@ -145,6 +159,22 @@ bool property_info::is_fluent() const {
 
 void property_info::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& property_info::special_formatter_settings() const {
+    return special_formatter_settings_;
+}
+
+boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& property_info::special_formatter_settings() {
+    return special_formatter_settings_;
+}
+
+void property_info::special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v) {
+    special_formatter_settings_ = v;
+}
+
+void property_info::special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>&& v) {
+    special_formatter_settings_ = std::move(v);
 }
 
 } } }

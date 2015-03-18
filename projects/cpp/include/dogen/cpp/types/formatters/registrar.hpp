@@ -35,13 +35,17 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class registrar {
+/**
+ * @brief Manages formatter registration.
+ */
+class registrar final {
 public:
     /**
      * @brief Ensures the registrar is ready to be used.
      */
     void validate() const;
 
+public:
     /**
      * @brief Registers a class formatter.
      */

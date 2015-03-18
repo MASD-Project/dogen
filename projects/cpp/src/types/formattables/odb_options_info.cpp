@@ -46,14 +46,12 @@ odb_options_info::odb_options_info(odb_options_info&& rhs)
 
 odb_options_info::odb_options_info(
     const std::string& identity,
-    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name,
     const std::string& model_name,
     const std::string& product_name,
     const boost::filesystem::path& file_path,
     const std::string& file_name,
     const std::string& odb_folder)
-    : dogen::cpp::formattables::formattable(identity,
-      file_path_by_formatter_name),
+    : dogen::cpp::formattables::formattable(identity),
       model_name_(model_name),
       product_name_(product_name),
       file_path_(file_path),

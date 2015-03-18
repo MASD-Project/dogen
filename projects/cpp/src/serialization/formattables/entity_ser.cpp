@@ -35,13 +35,12 @@
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/cpp/serialization/formattables/inclusion_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
+#include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(
@@ -60,8 +59,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
-    ar << make_nvp("inclusion_by_formatter_name", v.inclusion_by_formatter_name_);
-    ar << make_nvp("inclusion_dependencies_by_formatter_name", v.inclusion_dependencies_by_formatter_name_);
+    ar << make_nvp("settings", v.settings_);
 }
 
 template<typename Archive>
@@ -73,8 +71,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
-    ar >> make_nvp("inclusion_by_formatter_name", v.inclusion_by_formatter_name_);
-    ar >> make_nvp("inclusion_dependencies_by_formatter_name", v.inclusion_dependencies_by_formatter_name_);
+    ar >> make_nvp("settings", v.settings_);
 }
 
 } }

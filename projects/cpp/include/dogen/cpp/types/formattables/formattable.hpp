@@ -26,10 +26,8 @@
 #endif
 
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <string>
-#include <unordered_map>
 #include "dogen/cpp/serialization/formattables/formattable_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 
@@ -46,9 +44,7 @@ public:
     virtual ~formattable() noexcept = 0;
 
 public:
-    formattable(
-        const std::string& identity,
-        const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name);
+    explicit formattable(const std::string& identity);
 
 private:
     template<typename Archive>
@@ -72,11 +68,6 @@ public:
     void identity(const std::string& v);
     void identity(const std::string&& v);
 
-    const std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name() const;
-    std::unordered_map<std::string, boost::filesystem::path>& file_path_by_formatter_name();
-    void file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>& v);
-    void file_path_by_formatter_name(const std::unordered_map<std::string, boost::filesystem::path>&& v);
-
 protected:
     bool compare(const formattable& rhs) const;
 public:
@@ -87,7 +78,6 @@ protected:
 
 private:
     std::string identity_;
-    std::unordered_map<std::string, boost::filesystem::path> file_path_by_formatter_name_;
 };
 
 inline formattable::~formattable() noexcept { }

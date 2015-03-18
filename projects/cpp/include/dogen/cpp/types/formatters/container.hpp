@@ -37,7 +37,7 @@ namespace formatters {
 /**
  * @brief Simple container for all formatter types.
  */
-class container {
+class container final {
 public:
     /**
      * @brief Returns all available class formatters.

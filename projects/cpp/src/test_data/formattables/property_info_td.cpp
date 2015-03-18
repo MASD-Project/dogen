@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"
+#include "dogen/cpp/test_data/settings/special_formatter_settings_td.hpp"
 
 namespace {
 
@@ -55,6 +56,18 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::cpp::settings::special_formatter_settings*
+create_dogen_cpp_settings_special_formatter_settings_ptr(const unsigned int position) {
+    return dogen::cpp::settings::special_formatter_settings_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>
+create_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(unsigned int position) {
+    boost::shared_ptr<dogen::cpp::settings::special_formatter_settings> r(
+        create_dogen_cpp_settings_special_formatter_settings_ptr(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -71,6 +84,7 @@ populate(const unsigned int position, result_type& v) {
     v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 3));
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));
+    v.special_formatter_settings(create_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(position + 6));
 }
 
 property_info_generator::result_type

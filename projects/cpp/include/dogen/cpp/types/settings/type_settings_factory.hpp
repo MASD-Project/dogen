@@ -18,39 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_TYPE_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_TYPE_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_TYPE_SETTINGS_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_TYPE_SETTINGS_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/cpp/types/formattables/family_types.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-/**
- * @brief Constructs the type settings for the supplied object.
- */
 class type_settings_factory {
-private:
-    /**
-     * @brief Converts a string to its corresponding family type.
-     *
-     * @pre string must be a valid family type.
-     */
-    formattables::family_types to_family_type(const std::string s) const;
-
 public:
     /**
-     * @brief Construct the type settings, if available.
+     * @brief Produces the type settings.
      */
-    boost::optional<type_settings> make(const dynamic::schema::object& o) const;
+    type_settings make(const dynamic::schema::object& o) const;
 };
 
 } } }

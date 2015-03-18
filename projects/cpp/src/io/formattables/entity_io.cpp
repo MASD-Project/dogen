@@ -22,7 +22,7 @@
 #include <ostream>
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/inclusion_io.hpp"
+#include "dogen/cpp/io/settings/bundle_io.hpp"
 
 namespace dogen {
 namespace cpp {

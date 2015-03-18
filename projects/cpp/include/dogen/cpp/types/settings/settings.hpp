@@ -25,73 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <string>
-#include <unordered_map>
-#include "dogen/cpp/serialization/settings/settings_fwd_ser.hpp"
-#include "dogen/cpp/types/settings/global_settings.hpp"
-#include "dogen/cpp/types/settings/local_settings.hpp"
-
 namespace dogen {
 namespace cpp {
+
+/**
+ * @brief Settings for the C++ Model.
+ *
+ * This namespace contains all classes that model
+ * settings used by the formatters, as well as all
+ * classes required to extract those settings from
+ * the dynamic object.
+ *
+ */
 namespace settings {
-
-class settings final {
-public:
-    settings() = default;
-    settings(const settings&) = default;
-    settings(settings&&) = default;
-    ~settings() = default;
-
-public:
-    settings(
-        const dogen::cpp::settings::global_settings& global_settings,
-        const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const settings& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, settings& v, unsigned int version);
-
-public:
-    const dogen::cpp::settings::global_settings& global_settings() const;
-    dogen::cpp::settings::global_settings& global_settings();
-    void global_settings(const dogen::cpp::settings::global_settings& v);
-    void global_settings(const dogen::cpp::settings::global_settings&& v);
-
-    const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings() const;
-    std::unordered_map<std::string, dogen::cpp::settings::local_settings>& local_settings();
-    void local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>& v);
-    void local_settings(const std::unordered_map<std::string, dogen::cpp::settings::local_settings>&& v);
-
-public:
-    bool operator==(const settings& rhs) const;
-    bool operator!=(const settings& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(settings& other) noexcept;
-    settings& operator=(settings other);
-
-private:
-    dogen::cpp::settings::global_settings global_settings_;
-    std::unordered_map<std::string, dogen::cpp::settings::local_settings> local_settings_;
-};
-
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::cpp::settings::settings& lhs,
-    dogen::cpp::settings::settings& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

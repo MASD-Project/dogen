@@ -29,12 +29,10 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formattables/inclusion.hpp"
+#include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
-#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
+#include "dogen/cpp/types/settings/workflow.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -45,28 +43,19 @@ namespace formattables {
  * SML elements.
  */
 class workflow {
+public:
+    explicit workflow(const settings::workflow& w);
+
 private:
     /**
      * @brief Transforms the supplied SML elements into C++ entities.
      */
     template<typename AssociativeContainerOfElement>
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    to_formattables_activity(
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::list<formattables::inclusion> >
-            >& inclusion_dependencies_by_qname_by_formatter_name,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string,
-                               formattables::file_properties>
-            >& file_properties_by_qname_by_formatter_name,
-        const sml::model& m,
+    to_formattables_activity(const settings::workflow& w, const sml::model& m,
         const AssociativeContainerOfElement& c) const {
         std::forward_list<std::shared_ptr<formattables::formattable> > r;
-        formattables::transformer t(
-            inclusion_dependencies_by_qname_by_formatter_name,
-            file_properties_by_qname_by_formatter_name, m);
+        formattables::transformer t(w, m);
 
         for (const auto& pair : c) {
             const auto ng(sml::generation_types::no_generation);
@@ -78,36 +67,16 @@ private:
         return r;
     }
 
-    /**
-     * @brief Gets the file properties for the model.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, formattables::file_properties> >
-    create_file_properties_activity(const settings::selector& s,
-        const provider_selector_interface& ps,
-        const sml::model& m) const;
-
-    /**
-     * @brief Creates the inclusion dependencies for the model.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::list<formattables::inclusion> >
-        >
-    create_inclusion_dependencies_activity(const settings::selector& s,
-        const provider_selector_interface& ps, const sml::model& m,
-        const std::unordered_map<sml::qname,
-        std::unordered_map<std::string, formattables::file_properties> >&
-        file_properties_by_formatter_name) const;
-
 public:
     /**
      * @brief Executes the workflow.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    execute(const settings::selector& s, const provider_selector_interface& ps,
-        const sml::model& m) const;
+    execute(const sml::model& m) const;
+
+private:
+    const settings::workflow& settings_workflow_;
+
 };
 
 } } }

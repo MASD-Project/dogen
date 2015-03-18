@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/cpp/hash/formattables/inclusion_hash.hpp"
+#include "dogen/cpp/hash/settings/bundle_hash.hpp"
 
 namespace {
 
@@ -39,32 +39,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_formattables_inclusion(const std::unordered_map<std::string, dogen::cpp::formattables::inclusion>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_dogen_cpp_formattables_inclusion(const std::list<dogen::cpp::formattables::inclusion>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_cpp_formattables_inclusion_(const std::unordered_map<std::string, std::list<dogen::cpp::formattables::inclusion> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_cpp_formattables_inclusion(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -79,8 +53,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_formattables_inclusion(v.inclusion_by_formatter_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_cpp_formattables_inclusion_(v.inclusion_dependencies_by_formatter_name()));
+    combine(seed, v.settings());
 
     return seed;
 }

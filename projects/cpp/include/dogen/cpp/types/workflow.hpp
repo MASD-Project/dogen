@@ -25,22 +25,16 @@
 #pragma once
 #endif
 
+#include <string>
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
+#include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/registrar.hpp"
-#include "dogen/cpp/types/settings/settings.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formatters/formatter_types.hpp"
-#include "dogen/cpp/types/formattables/transformer.hpp"
-#include "dogen/cpp/types/formattables/file_properties.hpp"
-#include "dogen/cpp/types/formattables/provider_selector_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,7 +42,7 @@ namespace cpp {
 /**
  * @brief Manages the c++ backend workflow.
  */
-class workflow : public backend::backend_interface {
+class workflow final : public backend::backend_interface {
 public:
     workflow() = default;
     workflow(const workflow&) = delete;
@@ -57,37 +51,21 @@ public:
 public:
     ~workflow() noexcept;
 
-public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static cpp::formatters::registrar& registrar();
-
 private:
-    /**
-     * @brief Create the settings.
-     */
-    settings::settings create_settings_activty(
-        const config::knitting_options& o,
-        const std::forward_list<dynamic::schema::field_definition>& fds,
-        const sml::model& m) const;
-
     /**
      * @brief Create the formattables.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-    create_formattables_activty(const settings::selector& s,
-        const formattables::provider_selector_interface& ps,
-        const sml::model& m) const;
+        create_formattables_activty(const settings::workflow& sw,
+            const sml::model& m) const;
 
     /**
      * @brief Create the files.
      */
     std::forward_list<dogen::formatters::file>
-    format_activty(const settings::selector& s, const formatters::container& c,
-        const std::forward_list<std::shared_ptr<formattables::formattable> >&
-        f) const;
+    format_activty(const std::forward_list<
+            std::shared_ptr<formattables::formattable>
+            >& f) const;
 
 public:
     std::string id() const override;
@@ -98,10 +76,6 @@ public:
 
     std::forward_list<dogen::formatters::file> generate(
         const config::knitting_options& o, const sml::model& m) const override;
-
-private:
-    static std::shared_ptr<cpp::formatters::registrar> registrar_;
-    const std::forward_list<boost::filesystem::path> data_files_directories_;
 };
 
 } }
