@@ -1582,7 +1582,8 @@ models:
 - string table cannot have duplicate entries.
 - Issue error when a property is a value of an abstract class: SML
   should fail to merge if the user attempts to create a property of a
-  base class. It should allow pointers to the base class though.
+  base class. It should allow pointers to the base class though (raw,
+  shared pointers, boost optional etc).
 - Test relationships between objects and other meta types: We should
   validate that objects are only related to other objects - e.g. they
   cannot inherit from exception or enumeration or vice-versa. Add
