@@ -2971,6 +2971,13 @@ At present we are always adding =#pragrma once= to the header guard:
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
 
+*** Consider making header guards configurable                        :story:
+
+It may be nice to be able to switch parts of the header guards off (do
+not use namespaces, etc) or even to have a completely different policy
+to generate header guards. We do not have a use case for this yet, but
+this story is a place-holder for it.
+
 *** Adding types to package namespace                                 :story:
 
 Whilst it is possible to document a namespace, it is not possible to
