@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-18 Wed 22:57]
+Clock summary at [2015-03-19 Thu 12:05]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *20:38* |       |      |
+| *Total time*                                                          | *23:08* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 20:38 |      |
+| Active                                                                |         | 23:08 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
@@ -29,7 +29,9 @@ Clock summary at [2015-03-18 Wed 22:57]
 | COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
 | COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
 | COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
-| STARTED Refactor settings classes                                     |         |       | 7:01 |
+| STARTED Refactor settings classes                                     |         |       | 7:14 |
+| STARTED Create a =dynamic::expansion= model with a sample operation   |         |       | 1:12 |
+| STARTED Create a "supported" operation                                |         |       | 1:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -247,6 +249,24 @@ Commit prior to refactoring: 909b9a6.
   should have path ingredient settings; we can make use of these from
   within the operation/expansion?
 
+*** COMPLETED Remove processing of includes and file names            :story:
+    CLOSED: [2015-03-19 Thu 09:45]
+
+This will be done via expansion. Remove also the entity properties.
+
+*** COMPLETED Remove path related classes from formatters             :story:
+    CLOSED: [2015-03-19 Thu 09:45]
+
+These will be implemented as operations/expansions.
+
+*** COMPLETED Remove provider                                         :story:
+    CLOSED: [2015-03-19 Thu 09:45]
+
+We no longer require the provider, provider interface etc. These will
+be done as part of the expansions. We will need a way to obtain a file
+type given a formatter ID. This could be done with a selector. It will
+be used by the inclusion expander.
+
 *** STARTED Refactor settings classes                                 :story:
     CLOCK: [2015-03-18 Wed 22:14]--[2015-03-18 Wed 23:10] =>  0:56
     CLOCK: [2015-03-18 Wed 21:15]--[2015-03-18 Wed 21:55] =>  0:40
@@ -259,55 +279,9 @@ Commit prior to refactoring: 909b9a6.
 - Create principal and subsidiary settings, and create a "type
   settings" class or "settings for type"
 
-*** Implement new settings factories with caching                     :story:
-
-- create a field definition selector;
-- get factories to use the selector on construction and setup a cache
-  for all required fields. These could be const copies of the fields.
-- stop using has_field followed by get content - we now know that the
-  field either existed originally or was defaulted correctly.
-
-For type settings:
-
-:    using namespace dynamic::schema;
-:    using fd = field_definitions;
-:    const field_selector fs(o);
-:
-:    if (fs.has_field(fd::enabled()))
-:        s.enabled(fs.get_boolean_content(fd::enabled()));
-
-*** Remove processing of includes and file names                      :story:
-
-This will be done via expansion. Remove also the entity properties.
-
-*** Remove path related classes from formatters                       :story:
-
-These will be implemented as operations/expansions.
-
-*** Remove provider                                                   :story:
-
-We no longer require the provider, provider interface etc. These will
-be done as part of the expansions. We will need a way to obtain a file
-type given a formatter ID. This could be done with a selector. It will
-be used by the inclusion expander.
-
-*** Remove all field definitions in code                              :story:
-
-Instead add traits with the complete name. We also need a field
-definition selector based on complete name. Settings factories need to
-do a look-up for the required fields on construction and cache the
-fields. Actually we probably should have path ingredient settings; we
-can make use of these from within the operation/expansion?
-
-*** Add JSON support to dynamic workflow                              :story:
-
-We need to create the required activities in the dynamic schema's
-workflow to read in all the JSON files.
-
-- create a workflow that reads in all field definitions and then
-  registers them.
-
-*** Create a =dynamic::expansion= model with a sample operation       :story:
+*** STARTED Create a =dynamic::expansion= model with a sample operation :story:
+    CLOCK: [2015-03-19 Thu 09:54]--[2015-03-19 Thu 11:00] =>  1:06
+    CLOCK: [2015-03-19 Thu 09:47]--[2015-03-19 Thu 09:53] =>  0:06
 
 As per analysis we need to add support for predicates, operations and
 transformation. To start off with we should create a very simple
@@ -331,11 +305,44 @@ preconditions. We could also have an optional precondition so that
 Also we should name "operations" "expanders". After all we are
 executing the expansion workflow.
 
+*** Implement new settings factories with caching                     :story:
+
+- create a field definition selector;
+- get factories to use the selector on construction and setup a cache
+  for all required fields. These could be const copies of the fields.
+- stop using has_field followed by get content - we now know that the
+  field either existed originally or was defaulted correctly.
+
+For type settings:
+
+:    using namespace dynamic::schema;
+:    using fd = field_definitions;
+:    const field_selector fs(o);
+:
+:    if (fs.has_field(fd::enabled()))
+:        s.enabled(fs.get_boolean_content(fd::enabled()));
+
+*** Remove all field definitions in code                              :story:
+
+Instead add traits with the complete name. We also need a field
+definition selector based on complete name. Settings factories need to
+do a look-up for the required fields on construction and cache the
+fields. Actually we probably should have path ingredient settings; we
+can make use of these from within the operation/expansion?
+
+*** Add JSON support to dynamic workflow                              :story:
+
+We need to create the required activities in the dynamic schema's
+workflow to read in all the JSON files.
+
+- create a workflow that reads in all field definitions and then
+  registers them.
+
 *** Rename name builder to name factory                               :story:
 
 The name builder is just a factory so make the name reflect it.
 
-*** Add support for opaque formatter settings                         :story:
+*** STARTED Add support for opaque formatter settings                 :story:
 
 *New Understanding*
 
@@ -408,7 +415,9 @@ the model to look for all the types it depends on and obtains the
 corresponding include paths from them. It places them in a formatter
 specific list of includes. It depends on the inclusion path operation.
 
-*** Create a "supported" operation                                    :story:
+*** STARTED Create a "supported" operation                            :story:
+    CLOCK: [2015-03-19 Thu 11:51]--[2015-03-19 Thu 12:05] =>  0:14
+    CLOCK: [2015-03-19 Thu 11:00]--[2015-03-19 Thu 11:51] =>  0:51
 
 This needs a bit more analysis. The gist of it is that not all types
 support all formatters. We need a way to determine if a formatter is
@@ -420,6 +429,34 @@ we then need to take into account relationships and propagate this
 flag across the model such that, if a type =A= in a dogen model has a
 property of a type =B= from a non-dogen model which does not support a
 given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
 
 *** Create an operation to populate c++ properties                    :story:
 

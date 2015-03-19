@@ -94,7 +94,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Dynamic is responsible for managing run-time typed data.
+            <dia:string>#Dynamic schema is responsible for managing run-time typed data.
 
 The idea is to allow SML to carry data over to the formatting process without
 necessarily knowing about this data, but yet imposing some constraints on the
@@ -3204,7 +3204,7 @@ shape of this data.
         <dia:point val="117.68,2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.93,-7.45;129.887,2.8"/>
+        <dia:rectangle val="116.93,-7.45;129.888,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6290,7 +6290,7 @@ any.#</dia:string>
         <dia:point val="94.43,-11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,-11.75;95.18,3.6"/>
+        <dia:rectangle val="90.95,-11.75;95.18,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6772,7 +6772,7 @@ any.#</dia:string>
         <dia:point val="34,-24.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.25,-25.15;40.3425,-12.4"/>
+        <dia:rectangle val="33.25,-25.15;40.3425,-13.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
