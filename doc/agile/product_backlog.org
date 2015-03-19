@@ -384,6 +384,20 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Rename dynamic models                                             :story:
+
+At present we have named the dynamic models as follows:
+
+- =schema=: for =dynamic::schema=
+- =expansion=: for =dynamic::expansion=
+
+This is because the name of the model is used to generate the
+enclosing namespaces. Ideally we should name the models something like
+=dynamic_schema= but still generate the namespaces correctly. One way
+of doing this is to use the meta-data property for the model name,
+which would allow having a file name that is different from the model
+name. We have a dependency on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-a-property-for-the-model-name-as-dynamic-extensions][this]] story.
+
 *** Using types of non-referenced models produce bad error messages   :story:
 
 By mistake we made a reference to =dynamic::object= in the schema
@@ -1651,8 +1665,10 @@ This could also be supplied as part of dynamic extensions. The command
 line option is useful when we want to use the same diagram to test
 different aspects of the generation, as we do with the tests. The
 dynamic extensions option is useful when we don't want the file name
-to have the full name of the model. Can't think of a good reason for
-this so perhaps this is not a valid use case.
+to have the full name of the model.
+
+We now have a use case for this: the dynamic models. See Rename
+dynamic models.
 
 *** Warn if value or entity has methods                               :story:
 
