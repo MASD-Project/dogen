@@ -27,7 +27,6 @@
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 using namespace dogen::utility::log;

@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"

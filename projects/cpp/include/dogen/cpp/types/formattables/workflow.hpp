@@ -46,27 +46,6 @@ class workflow {
 public:
     explicit workflow(const settings::workflow& w);
 
-private:
-    /**
-     * @brief Transforms the supplied SML elements into C++ entities.
-     */
-    template<typename AssociativeContainerOfElement>
-    std::forward_list<std::shared_ptr<formattables::formattable> >
-    to_formattables_activity(const settings::workflow& w, const sml::model& m,
-        const AssociativeContainerOfElement& c) const {
-        std::forward_list<std::shared_ptr<formattables::formattable> > r;
-        formattables::transformer t(w, m);
-
-        for (const auto& pair : c) {
-            const auto ng(sml::generation_types::no_generation);
-            if (pair.second.generation_type() == ng)
-                continue;
-
-            r.push_front(t.transform(pair.second));
-        }
-        return r;
-    }
-
 public:
     /**
      * @brief Executes the workflow.

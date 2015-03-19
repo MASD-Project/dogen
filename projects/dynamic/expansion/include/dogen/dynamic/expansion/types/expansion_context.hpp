@@ -46,7 +46,7 @@ public:
 public:
     expansion_context(
         const dogen::sml::model& model,
-        const dogen::dynamic::schema::object& root,
+        const dogen::dynamic::schema::object& root_module,
         const std::list<dogen::dynamic::schema::field_definition>& field_definitions);
 
 private:
@@ -62,10 +62,10 @@ public:
     void model(const dogen::sml::model& v);
     void model(const dogen::sml::model&& v);
 
-    const dogen::dynamic::schema::object& root() const;
-    dogen::dynamic::schema::object& root();
-    void root(const dogen::dynamic::schema::object& v);
-    void root(const dogen::dynamic::schema::object&& v);
+    const dogen::dynamic::schema::object& root_module() const;
+    dogen::dynamic::schema::object& root_module();
+    void root_module(const dogen::dynamic::schema::object& v);
+    void root_module(const dogen::dynamic::schema::object&& v);
 
     const std::list<dogen::dynamic::schema::field_definition>& field_definitions() const;
     std::list<dogen::dynamic::schema::field_definition>& field_definitions();
@@ -84,7 +84,7 @@ public:
 
 private:
     dogen::sml::model model_;
-    dogen::dynamic::schema::object root_;
+    dogen::dynamic::schema::object root_module_;
     std::list<dogen::dynamic::schema::field_definition> field_definitions_;
 };
 

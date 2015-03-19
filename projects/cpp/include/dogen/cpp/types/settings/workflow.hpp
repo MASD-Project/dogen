@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <memory>
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/field_definition.hpp"

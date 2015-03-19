@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/cpp/types/settings/special_formatter_settings.hpp"

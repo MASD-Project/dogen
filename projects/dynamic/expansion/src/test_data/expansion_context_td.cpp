@@ -59,7 +59,7 @@ expansion_context_generator::expansion_context_generator() : position_(0) { }
 void expansion_context_generator::
 populate(const unsigned int position, result_type& v) {
     v.model(create_dogen_sml_model(position + 0));
-    v.root(create_dogen_dynamic_schema_object(position + 1));
+    v.root_module(create_dogen_dynamic_schema_object(position + 1));
     v.field_definitions(create_std_list_dogen_dynamic_schema_field_definition(position + 2));
 }
 

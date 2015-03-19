@@ -73,6 +73,25 @@ void all_model_items_traversal(const model& m, TraversalVisitor& v) {
     for (auto& pair : m.objects())
         v(pair.second);
 }
+
+template<typename TraversalVisitor> inline
+void all_model_items_traversal(model& m, TraversalVisitor& v) {
+    for (auto& pair : m.modules())
+        v(pair.second);
+
+    for (auto& pair : m.concepts())
+        v(pair.second);
+
+    for (auto& pair : m.primitives())
+        v(pair.second);
+
+    for (auto& pair : m.enumerations())
+        v(pair.second);
+
+    for (auto& pair : m.objects())
+        v(pair.second);
+}
+
 /**@}*/
 
 } }

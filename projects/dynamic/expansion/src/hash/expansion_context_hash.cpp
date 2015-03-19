@@ -50,7 +50,7 @@ std::size_t expansion_context_hasher::hash(const expansion_context&v) {
     std::size_t seed(0);
 
     combine(seed, v.model());
-    combine(seed, v.root());
+    combine(seed, v.root_module());
     combine(seed, hash_std_list_dogen_dynamic_schema_field_definition(v.field_definitions()));
 
     return seed;

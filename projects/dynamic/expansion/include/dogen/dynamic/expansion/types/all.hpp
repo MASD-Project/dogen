@@ -27,5 +27,5 @@
 #include "dogen/dynamic/expansion/types/registrar.hpp"
 #include "dogen/dynamic/expansion/types/registrar_error.hpp"
 #include "dogen/dynamic/expansion/types/root_object_copier.hpp"
+#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"
-#include "dogen/dynamic/expansion/types/worklow.hpp"

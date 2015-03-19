@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -34,26 +35,57 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief Generates the formattables.
+ */
+class formattable_generator {
+public:
+    formattable_generator(const settings::workflow& w, const sml::model& m)
+        : transformer_(w, m) { }
+
+private:
+    void add(std::shared_ptr<formattables::formattable> f) {
+        result_.push_front(f);
+    }
+
+    template<typename Generatable>
+    bool ignore(const Generatable& g) const {
+        return g.generation_type() == sml::generation_types::no_generation;
+    }
+
+    template<typename Transformable>
+    void transform(const Transformable& t) {
+        if (!ignore(t))
+            add(transformer_.transform(t));
+    }
+
+public:
+    void operator()(const dogen::sml::object& o) { transform(o); }
+    void operator()(const dogen::sml::enumeration& e) { transform(e); }
+    void operator()(const dogen::sml::primitive& p) { transform(p); }
+    void operator()(const dogen::sml::module& m) { transform(m); }
+    void operator()(const dogen::sml::concept& c) { transform(c); }
+
+public:
+    const std::forward_list<std::shared_ptr<formattables::formattable> >&
+    result() { return result_; }
+
+private:
+    std::forward_list<std::shared_ptr<formattables::formattable> > result_;
+    const transformer transformer_;
+};
+
 workflow::workflow(const settings::workflow& w) : settings_workflow_(w) { }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::execute(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
-    std::forward_list<std::shared_ptr<formattables::formattable>> r;
-    r.splice_after(r.before_begin(),
-        to_formattables_activity(settings_workflow_, m, m.modules()));
-    r.splice_after(r.before_begin(),
-        to_formattables_activity(settings_workflow_, m, m.concepts()));
-    r.splice_after(r.before_begin(),
-        to_formattables_activity(settings_workflow_, m, m.primitives()));
-    r.splice_after(r.before_begin(),
-        to_formattables_activity(settings_workflow_, m, m.enumerations()));
-    r.splice_after(r.before_begin(),
-        to_formattables_activity(settings_workflow_, m, m.objects()));
+    formattable_generator g(settings_workflow_, m);
+    all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
-    return r;
+    return g.result();
 }
 
 } } }

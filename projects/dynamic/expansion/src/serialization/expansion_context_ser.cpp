@@ -42,7 +42,7 @@ void save(Archive& ar,
     const dogen::dynamic::expansion::expansion_context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("model", v.model_);
-    ar << make_nvp("root", v.root_);
+    ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("field_definitions", v.field_definitions_);
 }
 
@@ -51,7 +51,7 @@ void load(Archive& ar,
     dogen::dynamic::expansion::expansion_context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("model", v.model_);
-    ar >> make_nvp("root", v.root_);
+    ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("field_definitions", v.field_definitions_);
 }
 

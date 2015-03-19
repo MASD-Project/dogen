@@ -18,47 +18,56 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_REGISTRAR_HPP
-#define DOGEN_DYNAMIC_EXPANSION_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_WORKFLOW_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <forward_list>
-#include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/expansion/types/expander_interface_fwd.hpp"
+#include <memory>
+#include <list>
+#include "dogen/sml/types/model.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/expansion/types/registrar.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
 /**
- * @brief Manages expander registration.
+ * @brief Orchestrator for the expansion workflow.
  */
-class registrar final {
+class workflow {
 public:
     /**
-     * @brief Ensures the registrar is ready to be used.
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
      */
-    void validate() const;
-
-public:
-    /**
-     * @brief Registers a expander.
-     */
-    void register_expander(boost::shared_ptr<const expander_interface> f);
-
-    /**
-     * @brief Returns all registered expanders.
-     */
-    const std::forward_list<boost::shared_ptr<const expander_interface> >&
-        expanders() const;
+    static expansion::registrar& registrar();
 
 private:
-    std::forward_list<
-        boost::shared_ptr<const expander_interface>
-        > expanders_;
+    /**
+     * @brief Returns the root module of the model.
+     *
+     * @pre there must exacly one root module.
+     */
+    sml::module obtain_root_module(const sml::model& m) const;
+
+public:
+    /**
+     * @brief Expands the dynamic fields in the object.
+     *
+     * @param fds all field definitions.
+     * @param m model one wishes to expand.
+     */
+    sml::model execute(
+        const std::list<schema::field_definition>& fds,
+        const sml::model& m) const;
+
+private:
+    static std::shared_ptr<expansion::registrar> registrar_;
 };
 
 } } }

@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-20,1"/>
+        <dia:point val="-34,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,0.95;5.205,5.15"/>
+        <dia:rectangle val="-34.05,2.95;-8.795,7.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-20,1"/>
+        <dia:point val="-34,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.155000000000005"/>
@@ -106,7 +106,7 @@ expands the contents of the dynamic's schema object.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-19.65,2.245"/>
+            <dia:point val="-33.65,4.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -119,22 +119,22 @@ expands the contents of the dynamic's schema object.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="40,26"/>
+        <dia:point val="41,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,25.95;56.335,31.05"/>
+        <dia:rectangle val="40.95,25.95;66.575,31.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="40,26"/>
+        <dia:point val="41,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5"/>
+        <dia:real val="5.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#worklow#</dia:string>
+        <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -305,6 +305,23 @@ expands the contents of the dynamic's schema object.
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#fds#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const std::forward_list&lt;schema::field_definitions&gt;&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
                 <dia:string>#m#</dia:string>
@@ -478,17 +495,17 @@ expands the contents of the dynamic's schema object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="40,26"/>
+        <dia:point val="41,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.5888,13.95;40.75,26.8"/>
+        <dia:rectangle val="28.5888,13.95;41.75,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="40,26"/>
-        <dia:point val="40,20"/>
+        <dia:point val="41,26"/>
+        <dia:point val="41,20"/>
         <dia:point val="28.6388,20"/>
         <dia:point val="28.6388,14"/>
       </dia:attribute>
@@ -516,7 +533,7 @@ expands the contents of the dynamic's schema object.
         <dia:point val="-11,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.05,41.95;9.57,48.85"/>
+        <dia:rectangle val="-11.05,41.95;9.57,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-11,42"/>
@@ -525,7 +542,7 @@ expands the contents of the dynamic's schema object.
         <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#expander_interface#</dia:string>
@@ -655,36 +672,6 @@ expands the contents of the dynamic's schema object.
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::forward_list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#can_expand#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1256,17 +1243,17 @@ expands the contents of the dynamic's schema object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="56.285,31"/>
+        <dia:point val="66.525,31.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.535,30.25;92.385,42.8"/>
+        <dia:rectangle val="65.775,31.05;92.385,42.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.285,31"/>
-        <dia:point val="56.285,37"/>
+        <dia:point val="66.525,31.8"/>
+        <dia:point val="66.525,37"/>
         <dia:point val="92.185,37"/>
         <dia:point val="92.185,42"/>
       </dia:attribute>
@@ -1327,17 +1314,17 @@ expands the contents of the dynamic's schema object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="40,31"/>
+        <dia:point val="41,31.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.47,30.25;40.75,42.8"/>
+        <dia:rectangle val="9.47,31.05;41.75,42.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="40,31"/>
-        <dia:point val="40,37"/>
+        <dia:point val="41,31.8"/>
+        <dia:point val="41,37"/>
         <dia:point val="9.52,37"/>
         <dia:point val="9.52,42"/>
       </dia:attribute>
@@ -1362,13 +1349,13 @@ expands the contents of the dynamic's schema object.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="62,10"/>
+        <dia:point val="77,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.95,9.95;93.35,14.45"/>
+        <dia:rectangle val="76.95,10.95;108.35,15.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="62,10"/>
+        <dia:point val="77,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.300000000000001"/>
@@ -1568,16 +1555,16 @@ expands the contents of the dynamic's schema object.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="98.25,9.91667"/>
+        <dia:point val="113.25,10.9167"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.2,9.86667;111.52,12.4667"/>
+        <dia:rectangle val="113.2,10.8667;126.52,13.4667"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="98.25,9.91667"/>
+        <dia:point val="113.25,10.9167"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.220000000000001"/>
@@ -1607,7 +1594,7 @@ of expanders.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="98.6,11.1617"/>
+            <dia:point val="113.6,12.1617"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1620,17 +1607,17 @@ of expanders.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="98.25,11.1667"/>
+        <dia:point val="113.25,12.1667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.8022,-8.77447;98.3007,11.5006"/>
+        <dia:rectangle val="106.802,-7.77447;113.301,12.5006"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="98.25,11.1667"/>
-        <dia:point val="93.3,11.1"/>
+        <dia:point val="113.25,12.1667"/>
+        <dia:point val="108.3,12.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -1645,7 +1632,7 @@ of expanders.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="91.8022,-8.17447"/>
+        <dia:point val="106.802,-7.17447"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O11" connection="3"/>
@@ -1654,13 +1641,13 @@ of expanders.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,11"/>
+        <dia:point val="56,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,10.95;50.295,14.05"/>
+        <dia:rectangle val="55.95,10.95;63.295,14.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,11"/>
+        <dia:point val="56,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.2450000000000001"/>
@@ -1800,19 +1787,19 @@ of expanders.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="46.6225,11"/>
+        <dia:point val="59.6225,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.5725,5.25;78.4,11.8"/>
+        <dia:rectangle val="59.5725,5.25;93.4,11.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="46.6225,11"/>
-        <dia:point val="46.6225,6"/>
-        <dia:point val="77.65,6"/>
-        <dia:point val="77.65,10"/>
+        <dia:point val="59.6225,11"/>
+        <dia:point val="59.6225,6"/>
+        <dia:point val="92.65,6"/>
+        <dia:point val="92.65,11"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1871,19 +1858,19 @@ of expanders.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="56.285,26"/>
+        <dia:point val="66.525,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.535,14.35;77.85,26.8"/>
+        <dia:rectangle val="65.775,15.35;92.85,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.285,26"/>
-        <dia:point val="56.285,20"/>
-        <dia:point val="77.65,20"/>
-        <dia:point val="77.65,14.4"/>
+        <dia:point val="66.525,26"/>
+        <dia:point val="66.525,20"/>
+        <dia:point val="92.65,20"/>
+        <dia:point val="92.65,15.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2143,7 +2130,7 @@ of expanders.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#root#</dia:string>
+            <dia:string>#root_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#schema::object#</dia:string>
@@ -2267,16 +2254,16 @@ of expanders.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.74,48.8"/>
+        <dia:point val="-0.74,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.6575,48.75;0.11,60.05"/>
+        <dia:rectangle val="-26.6575,47.95;0.11,60.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.74,48.8"/>
+        <dia:point val="-0.74,48"/>
         <dia:point val="-0.74,55"/>
         <dia:point val="-26.6075,55"/>
         <dia:point val="-26.6075,60"/>
@@ -2418,16 +2405,16 @@ of expanders.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="-0.74,48.8"/>
+        <dia:point val="-0.74,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.435,48.75;0.11,60.05"/>
+        <dia:rectangle val="-7.435,47.95;0.11,60.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-0.74,48.8"/>
+        <dia:point val="-0.74,48"/>
         <dia:point val="-0.74,55"/>
         <dia:point val="-7.385,55"/>
         <dia:point val="-7.385,60"/>

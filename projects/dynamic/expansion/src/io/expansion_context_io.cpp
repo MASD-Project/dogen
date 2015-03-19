@@ -46,7 +46,7 @@ std::ostream& operator<<(std::ostream& s, const expansion_context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::expansion::expansion_context\"" << ", "
       << "\"model\": " << v.model() << ", "
-      << "\"root\": " << v.root() << ", "
+      << "\"root_module\": " << v.root_module() << ", "
       << "\"field_definitions\": " << v.field_definitions()
       << " }";
     return(s);

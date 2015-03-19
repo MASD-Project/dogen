@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-19 Thu 15:58]
+Clock summary at [2015-03-19 Thu 17:19]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *24:25* |       |      |
+| *Total time*                                                          | *25:45* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 24:25 |      |
+| Active                                                                |         | 25:45 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
@@ -30,7 +30,7 @@ Clock summary at [2015-03-19 Thu 15:58]
 | COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
 | COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
 | STARTED Refactor settings classes                                     |         |       | 7:14 |
-| STARTED Create a =dynamic::expansion= model with a sample operation   |         |       | 1:40 |
+| STARTED Create a =dynamic::expansion= model with a sample operation   |         |       | 3:00 |
 | STARTED Create a "supported" operation                                |         |       | 1:54 |
 #+end:
 
@@ -280,6 +280,7 @@ be used by the inclusion expander.
   settings" class or "settings for type"
 
 *** STARTED Create a =dynamic::expansion= model with a sample operation :story:
+    CLOCK: [2015-03-19 Thu 15:59]--[2015-03-19 Thu 17:19] =>  1:20
     CLOCK: [2015-03-19 Thu 15:21]--[2015-03-19 Thu 15:31] =>  0:10
     CLOCK: [2015-03-19 Thu 14:28]--[2015-03-19 Thu 14:46] =>  0:18
     CLOCK: [2015-03-19 Thu 09:54]--[2015-03-19 Thu 11:00] =>  1:06

@@ -26,22 +26,22 @@ namespace expansion {
 
 expansion_context::expansion_context(
     const dogen::sml::model& model,
-    const dogen::dynamic::schema::object& root,
+    const dogen::dynamic::schema::object& root_module,
     const std::list<dogen::dynamic::schema::field_definition>& field_definitions)
     : model_(model),
-      root_(root),
+      root_module_(root_module),
       field_definitions_(field_definitions) { }
 
 void expansion_context::swap(expansion_context& other) noexcept {
     using std::swap;
     swap(model_, other.model_);
-    swap(root_, other.root_);
+    swap(root_module_, other.root_module_);
     swap(field_definitions_, other.field_definitions_);
 }
 
 bool expansion_context::operator==(const expansion_context& rhs) const {
     return model_ == rhs.model_ &&
-        root_ == rhs.root_ &&
+        root_module_ == rhs.root_module_ &&
         field_definitions_ == rhs.field_definitions_;
 }
 
@@ -67,20 +67,20 @@ void expansion_context::model(const dogen::sml::model&& v) {
     model_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& expansion_context::root() const {
-    return root_;
+const dogen::dynamic::schema::object& expansion_context::root_module() const {
+    return root_module_;
 }
 
-dogen::dynamic::schema::object& expansion_context::root() {
-    return root_;
+dogen::dynamic::schema::object& expansion_context::root_module() {
+    return root_module_;
 }
 
-void expansion_context::root(const dogen::dynamic::schema::object& v) {
-    root_ = v;
+void expansion_context::root_module(const dogen::dynamic::schema::object& v) {
+    root_module_ = v;
 }
 
-void expansion_context::root(const dogen::dynamic::schema::object&& v) {
-    root_ = std::move(v);
+void expansion_context::root_module(const dogen::dynamic::schema::object&& v) {
+    root_module_ = std::move(v);
 }
 
 const std::list<dogen::dynamic::schema::field_definition>& expansion_context::field_definitions() const {
