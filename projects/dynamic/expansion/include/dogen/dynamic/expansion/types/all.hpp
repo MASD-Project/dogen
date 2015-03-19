@@ -24,6 +24,7 @@
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
 #include "dogen/dynamic/expansion/types/grapher.hpp"
 #include "dogen/dynamic/expansion/types/graphing_error.hpp"
+#include "dogen/dynamic/expansion/types/initializer.hpp"
 #include "dogen/dynamic/expansion/types/registrar.hpp"
 #include "dogen/dynamic/expansion/types/registrar_error.hpp"
 #include "dogen/dynamic/expansion/types/root_object_copier.hpp"

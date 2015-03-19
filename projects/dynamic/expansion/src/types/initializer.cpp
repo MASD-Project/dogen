@@ -18,28 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
+#include "dogen/dynamic/expansion/types/workflow.hpp"
+#include "dogen/dynamic/expansion/types/initializer.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-default_value_expander::~default_value_expander() noexcept { }
-
-std::string default_value_expander::name() const {
-    static std::string name("default_value_expander");
-    return name;
+void register_expander(const expander_interface * const p) {
+    workflow::registrar()
+        .register_expander(boost::shared_ptr<const expander_interface>(p));
 }
 
-const std::forward_list<std::string>&
-default_value_expander::dependencies() const {
-    static std::forward_list<std::string> empty;
-    return empty;
+void initializer::initialize() {
+    register_expander(new default_value_expander());
 }
 
-void default_value_expander::
-expand(const expansion_context& /*ec*/, schema::object& /*o*/) const {
-}
-
-}  } }
+} } }

@@ -18,28 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include "dogen/dynamic/expansion/types/default_value_expander.hpp"
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_INITIALIZER_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_INITIALIZER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-default_value_expander::~default_value_expander() noexcept { }
+/**
+ * @brief Initialises all of the static state in this model.
+ */
+class initializer {
+public:
+    static void initialize();
+};
 
-std::string default_value_expander::name() const {
-    static std::string name("default_value_expander");
-    return name;
-}
+} } }
 
-const std::forward_list<std::string>&
-default_value_expander::dependencies() const {
-    static std::forward_list<std::string> empty;
-    return empty;
-}
-
-void default_value_expander::
-expand(const expansion_context& /*ec*/, schema::object& /*o*/) const {
-}
-
-}  } }
+#endif
