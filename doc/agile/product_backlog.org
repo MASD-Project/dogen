@@ -10,6 +10,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Investigate boost log config files                                :story:
+
+Our log files are growing quite a bit. We don't really want to log any
+less since the logging is very useful for troubleshooting. However, at
+any one time we just need to look at one or a couple of
+components. What we really need is something like log4j, where we can
+change log levels for a component or all components in a hierarchy. We
+need to investigate boost log solutions for this.
+
 *** Implement include generation for class header formatter           :story:
 
 Now that we have finished generating the path spec details, we need to
