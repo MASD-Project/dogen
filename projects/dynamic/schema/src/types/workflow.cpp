@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"

@@ -45,7 +45,7 @@ namespace settings {
 
 formatter_settings_factory::formatter_settings_factory(
     const std::unordered_map<
-        std::string, std::forward_list<dynamic::schema::field_definition>
+        std::string, std::list<dynamic::schema::field_definition>
         >& field_definitions_by_formatter_name
     ) : field_definitions_by_formatter_name_(
         field_definitions_by_formatter_name) { }
@@ -61,7 +61,7 @@ ensure_field_is_present(const bool found, const std::string& name) const {
 
 formatter_settings formatter_settings_factory::
 create_settings_for_formatter(
-    const std::forward_list<dynamic::schema::field_definition>&
+    const std::list<dynamic::schema::field_definition>&
     formatter_fields, const dynamic::schema::object& o) const {
 
     formatter_settings r;

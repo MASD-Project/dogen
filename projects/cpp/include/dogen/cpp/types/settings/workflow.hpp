@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <memory>
-#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
@@ -56,7 +56,7 @@ public:
      * @param field_definitions_by_formatter_name All fields by formatter name.
      */
     explicit workflow(const std::unordered_map<
-            std::string, std::forward_list<dynamic::schema::field_definition>
+            std::string, std::list<dynamic::schema::field_definition>
             >&
         field_definitions_by_formatter_name);
 

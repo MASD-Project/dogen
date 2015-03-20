@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
-#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -49,7 +49,7 @@ public:
      */
     explicit formatter_settings_factory(
         const std::unordered_map<
-            std::string, std::forward_list<dynamic::schema::field_definition>
+            std::string, std::list<dynamic::schema::field_definition>
             >& field_definitions_by_formatter_name
         );
 
@@ -65,7 +65,7 @@ private:
      */
     formatter_settings
     create_settings_for_formatter(
-        const std::forward_list<dynamic::schema::field_definition>&
+        const std::list<dynamic::schema::field_definition>&
         formatter_fields, const dynamic::schema::object& o) const;
 
 public:
@@ -77,7 +77,7 @@ public:
 
 private:
     const std::unordered_map<
-    std::string, std::forward_list<dynamic::schema::field_definition>
+    std::string, std::list<dynamic::schema::field_definition>
     >& field_definitions_by_formatter_name_;
 };
 

@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
 #include "dogen/dynamic/schema/types/indexer.hpp"
@@ -35,17 +35,17 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-const std::unordered_map<std::string, std::forward_list<field_definition> >&
+const std::unordered_map<std::string, std::list<field_definition> >&
 indexer::field_definitions_by_facet_name() const {
     return field_definitions_by_facet_name_;
 }
 
-const std::unordered_map<std::string, std::forward_list<field_definition> >&
+const std::unordered_map<std::string, std::list<field_definition> >&
 indexer::field_definitions_by_formatter_name() const {
     return field_definitions_by_formatter_name_;
 }
 
-void indexer::index(const std::forward_list<field_definition>& fds) {
+void indexer::index(const std::list<field_definition>& fds) {
     BOOST_LOG_SEV(lg, debug) << "Indexing field definitions.";
     for (const auto& fd : fds) {
         const auto oh(fd.ownership_hierarchy());

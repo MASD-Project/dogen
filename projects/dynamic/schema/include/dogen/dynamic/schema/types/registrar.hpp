@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <forward_list>
+#include <list>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
@@ -49,16 +49,16 @@ public:
      * @brief Registers a list of field definitions.
      */
     void register_field_definitions(
-        const std::forward_list<field_definition>& fds);
+        const std::list<field_definition>& fds);
 
 public:
     /**
      * @brief Returns all registered field definitions.
      */
-    const std::forward_list<field_definition>& field_definitions() const;
+    const std::list<field_definition>& field_definitions() const;
 
 private:
-    std::forward_list<field_definition> field_definitions_;
+    std::list<field_definition> field_definitions_;
 };
 
 } } }

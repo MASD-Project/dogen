@@ -606,4 +606,11 @@ and so decided to rename it to factory. However now there is only one
 and it is very confusing to see it called a factory rather than a
 workflow.
 
+*** COMPLETED Use a list instead of a forward list in schema's registrar :spike:
+    CLOSED: [2015-03-20 Fri 17:41]
+    CLOCK: [2015-03-20 Fri 17:13]--[2015-03-20 Fri 17:41] =>  0:28
+
+We need to use a list because we are now generating this type and
+dogen still has no support for forward lists.
+
 ** Deprecated

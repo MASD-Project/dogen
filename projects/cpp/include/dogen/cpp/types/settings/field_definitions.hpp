@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <forward_list>
+#include <list>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
@@ -40,7 +40,7 @@ struct field_definitions {
      * @brief Returns all the field definitions available in this
      * class.
      */
-    static const std::forward_list<dynamic::schema::field_definition>&
+    static const std::list<dynamic::schema::field_definition>&
     all_field_definitions();
 
     /**

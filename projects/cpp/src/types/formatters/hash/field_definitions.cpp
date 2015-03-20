@@ -247,9 +247,9 @@ create_enumeration_implementation_formatter_postfix() {
     return r;
 }
 
-std::forward_list<field_definition>
+std::list<field_definition>
 create_all_field_definitions() {
-    std::forward_list<field_definition> r;
+    std::list<field_definition> r;
 
     using fd = dogen::cpp::formatters::hash::field_definitions;
     r.push_front(fd::enabled());
@@ -284,7 +284,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-const std::forward_list<dynamic::schema::field_definition>&
+const std::list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;

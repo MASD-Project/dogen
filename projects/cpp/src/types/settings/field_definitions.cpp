@@ -163,9 +163,9 @@ field_definition create_type_inclusion_required() {
     return r;
 }
 
-std::forward_list<field_definition>
+std::list<field_definition>
 create_all_field_definitions() {
-    std::forward_list<field_definition> r;
+    std::list<field_definition> r;
 
     using fd = dogen::cpp::settings::field_definitions;
     r.push_front(fd::enabled());
@@ -192,7 +192,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-const std::forward_list<dynamic::schema::field_definition>&
+const std::list<dynamic::schema::field_definition>&
 field_definitions::all_field_definitions() {
     static auto r(create_all_field_definitions());
     return r;

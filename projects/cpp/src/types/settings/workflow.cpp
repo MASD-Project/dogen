@@ -46,7 +46,7 @@ cpp::settings::registrar& workflow::registrar() {
 }
 
 workflow::workflow(const std::unordered_map<
-        std::string, std::forward_list<dynamic::schema::field_definition>
+        std::string, std::list<dynamic::schema::field_definition>
         >& field_definitions_by_formatter_name)
     : factory_(field_definitions_by_formatter_name,
         registrar().opaque_settings_factories()) { }

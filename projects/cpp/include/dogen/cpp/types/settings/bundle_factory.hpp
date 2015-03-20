@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <forward_list>
 #include <unordered_map>
@@ -57,7 +58,7 @@ public:
      */
     bundle_factory(
         const std::unordered_map<
-            std::string, std::forward_list<dynamic::schema::field_definition>
+            std::string, std::list<dynamic::schema::field_definition>
             >& field_definitions_by_formatter_name,
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
@@ -95,7 +96,7 @@ public:
 
 private:
     const std::unordered_map<
-    std::string, std::forward_list<dynamic::schema::field_definition>
+    std::string, std::list<dynamic::schema::field_definition>
     >& field_definitions_by_formatter_name_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>

@@ -38,7 +38,7 @@ namespace settings {
 
 bundle_factory::bundle_factory(
     const std::unordered_map<
-        std::string, std::forward_list<dynamic::schema::field_definition>
+        std::string, std::list<dynamic::schema::field_definition>
         >& field_definitions_by_formatter_name,
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>

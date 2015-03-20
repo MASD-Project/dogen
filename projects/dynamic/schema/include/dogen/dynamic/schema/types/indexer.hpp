@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
-#include <forward_list>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
@@ -44,7 +44,7 @@ public:
      *
      * @pre Empty unless index has been run.
      */
-    const std::unordered_map<std::string, std::forward_list<field_definition> >&
+    const std::unordered_map<std::string, std::list<field_definition> >&
     field_definitions_by_facet_name() const;
 
     /**
@@ -52,19 +52,19 @@ public:
      *
      * @pre Empty unless index has been run.
      */
-    const std::unordered_map<std::string, std::forward_list<field_definition> >&
+    const std::unordered_map<std::string, std::list<field_definition> >&
     field_definitions_by_formatter_name() const;
 
 public:
     /**
      * @brief Setup all indices.
      */
-    void index(const std::forward_list<field_definition>& fds);
+    void index(const std::list<field_definition>& fds);
 
 private:
-    std::unordered_map<std::string, std::forward_list<field_definition> >
+    std::unordered_map<std::string, std::list<field_definition> >
     field_definitions_by_facet_name_;
-    std::unordered_map<std::string, std::forward_list<field_definition> >
+    std::unordered_map<std::string, std::list<field_definition> >
     field_definitions_by_formatter_name_;
 
 };
