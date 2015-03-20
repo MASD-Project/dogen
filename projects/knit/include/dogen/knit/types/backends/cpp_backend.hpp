@@ -63,8 +63,8 @@ public:
 private:
     sml_to_cpp::workflow transformer_;
     cpp_formatters::workflow formatter_;
-    // const sml::model& model_; // FIXME
-    // dogen::backend::workflow backend_workflow_; // FIXME
+    const sml::model& model_; // FIXME
+    dogen::backend::workflow backend_workflow_; // FIXME
 };
 
 } } }

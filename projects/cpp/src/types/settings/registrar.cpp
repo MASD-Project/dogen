@@ -29,8 +29,10 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.registrar"));
 
-const std::string no_factories("No factories provided.");
-const std::string null_factory("Factory supplied is null");
+const std::string no_factories(
+    "No special formatter settings factories have been provided.");
+const std::string null_factory(
+    "Special formatter settings factory supplied is null");
 
 }
 
@@ -39,10 +41,11 @@ namespace cpp {
 namespace settings {
 
 void registrar::validate() const {
-    if (special_formatter_settings_factories_.empty()) {
-        BOOST_LOG_SEV(lg, error) << no_factories;
-        BOOST_THROW_EXCEPTION(registrar_error(no_factories));
-    }
+    // FIXME: hack for now
+    // if (special_formatter_settings_factories_.empty()) {
+    //     BOOST_LOG_SEV(lg, error) << no_factories;
+    //     BOOST_THROW_EXCEPTION(registrar_error(no_factories));
+    // }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 

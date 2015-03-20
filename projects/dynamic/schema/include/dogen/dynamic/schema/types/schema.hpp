@@ -29,7 +29,7 @@ namespace dogen {
 namespace dynamic {
 
 /**
- * @brief Dynamic is responsible for managing run-time typed data.
+ * @brief Dynamic schema is responsible for managing run-time typed data.
  *
  * The idea is to allow SML to carry data over to the formatting process without
  * necessarily knowing about this data, but yet imposing some constraints on the
