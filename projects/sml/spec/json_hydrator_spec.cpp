@@ -24,7 +24,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/schema/test/mock_object_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -174,13 +174,13 @@ const std::string module_path_model(R"({
   }
 )");
 
-const dogen::dynamic::schema::object_factory& object_factory() {
-    using dogen::dynamic::schema::test::mock_object_factory;
-    return mock_object_factory::non_validating_object_factory();
+const dogen::dynamic::schema::workflow& schema_workflow() {
+    using dogen::dynamic::schema::test::mock_workflow_factory;
+    return mock_workflow_factory::non_validating_workflow();
 }
 
 dogen::sml::model hydrate(std::istream& s) {
-    dogen::sml::json_hydrator h(object_factory());
+    dogen::sml::json_hydrator h(schema_workflow());
     return h.hydrate(s);
 }
 
@@ -208,7 +208,7 @@ create_field_definition(const std::string n,
 
 struct register_fields {
     register_fields() {
-        auto& reg(dogen::dynamic::schema::object_factory::registrar());
+        auto& reg(dogen::dynamic::schema::workflow::registrar());
         reg.register_field_definition(create_field_definition(model_key));
         reg.register_field_definition(create_field_definition(some_key));
         reg.register_field_definition(create_field_definition(type_key,

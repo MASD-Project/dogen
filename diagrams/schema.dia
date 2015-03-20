@@ -2253,7 +2253,7 @@ shape of this data.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_factory#</dia:string>
+        <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/indexer.hpp"
-#include "dogen/dynamic/schema/types/object_factory.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -75,8 +75,7 @@ std::forward_list<dogen::formatters::file> workflow::
 generate(const config::knitting_options& /*o*/, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    using dynamic::schema::object_factory;
-    const auto& fds(object_factory::registrar().field_definitions());
+    const auto& fds(dynamic::schema::workflow::registrar().field_definitions());
 
     dynamic::schema::indexer idx;
     idx.index(fds);

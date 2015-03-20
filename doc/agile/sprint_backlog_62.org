@@ -597,4 +597,13 @@ regarding enabling facets and formatters:
   type, we want it on; if no one requires it we want it off. The user
   may want to manually switch it on for a type.
 
+*** COMPLETED Rename schema's object factory back to workflow         :spike:
+    CLOSED: [2015-03-20 Fri 16:59]
+    CLOCK: [2015-03-20 Fri 16:33]--[2015-03-20 Fri 16:59] =>  0:26
+
+At some point we probably had multiple workflows in dynamic's schema
+and so decided to rename it to factory. However now there is only one
+and it is very confusing to see it called a factory rather than a
+workflow.
+
 ** Deprecated

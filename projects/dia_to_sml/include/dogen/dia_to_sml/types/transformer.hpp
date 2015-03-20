@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/dynamic/schema/types/object_factory.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -57,7 +57,7 @@ public:
      *
      * @pre model in context must be populated.
      */
-    transformer(const dynamic::schema::object_factory& of, context& c);
+    transformer(const dynamic::schema::workflow& w, context& c);
 
 private:
     /**
@@ -176,7 +176,7 @@ private:
 
         const auto& kvps(o.comment().key_value_pairs());
         const auto scope(dynamic::schema::scope_types::entity);
-        e.extensions(object_factory_.execute(scope, kvps));
+        e.extensions(schema_workflow_.execute(scope, kvps));
     }
 
     /**
@@ -301,7 +301,7 @@ public:
 private:
     context& context_;
     std::shared_ptr<identifier_parser> identifier_parser_;
-    const dynamic::schema::object_factory& object_factory_;
+    const dynamic::schema::workflow& schema_workflow_;
 };
 
 } }

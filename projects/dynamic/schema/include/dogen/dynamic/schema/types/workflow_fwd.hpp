@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_OBJECT_FACTORY_FWD_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TYPES_OBJECT_FACTORY_FWD_HPP
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_WORKFLOW_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-class object_factory;
+class workflow;
 
 } } }
 

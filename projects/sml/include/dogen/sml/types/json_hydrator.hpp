@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/object_factory.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -47,7 +47,7 @@ public:
     ~json_hydrator() noexcept = default;
 
 public:
-    explicit json_hydrator(const dynamic::schema::object_factory& of);
+    explicit json_hydrator(const dynamic::schema::workflow& w);
 
 private:
     /**
@@ -113,7 +113,7 @@ public:
     model hydrate(const boost::filesystem::path& p) const;
 
 private:
-    const dynamic::schema::object_factory object_factory_;
+    const dynamic::schema::workflow schema_workflow_;
 };
 
 } }

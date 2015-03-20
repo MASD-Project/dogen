@@ -27,12 +27,12 @@
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/dynamic/schema/types/building_error.hpp"
-#include "dogen/dynamic/schema/types/object_factory.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.schema.object_factory"));
+static logger lg(logger_factory("dynamic.schema.workflow"));
 
 const std::string expected_scope(" Expected scope: ");
 const std::string actual_scope(" Actual scope: ");
@@ -49,21 +49,21 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-std::shared_ptr<registrar> object_factory::registrar_;
+std::shared_ptr<registrar> workflow::registrar_;
 
-dynamic::schema::registrar& object_factory::registrar() {
+dynamic::schema::registrar& workflow::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<dynamic::schema::registrar>();
 
     return *registrar_;
 }
 
-object_factory::object_factory(const bool throw_on_missing_field_definition)
+workflow::workflow(const bool throw_on_missing_field_definition)
     : throw_on_missing_field_definition_(throw_on_missing_field_definition),
       field_definitions_by_complete_name_(
           create_field_definitions_by_complete_name()) { }
 
-std::unordered_map<std::string, field_definition> object_factory::
+std::unordered_map<std::string, field_definition> workflow::
 create_field_definitions_by_complete_name() const {
     std::unordered_map<std::string, field_definition> r;
 
@@ -83,7 +83,7 @@ create_field_definitions_by_complete_name() const {
     return r;
 }
 
-boost::optional<field_definition> object_factory::
+boost::optional<field_definition> workflow::
 obtain_field_definition(const std::string& complete_name,
     const scope_types current_scope) const {
 
@@ -119,7 +119,7 @@ obtain_field_definition(const std::string& complete_name,
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-object_factory::aggregate_raw_data_activity(
+workflow::aggregate_raw_data_activity(
     const std::list<std::pair<std::string, std::string> >&
     raw_data) const {
     std::unordered_map<std::string, std::list<std::string> > r;
@@ -131,7 +131,7 @@ object_factory::aggregate_raw_data_activity(
 }
 
 std::unordered_map<std::string, field_instance>
-object_factory::create_fields_activity(
+workflow::create_fields_activity(
     const std::unordered_map<std::string, std::list<std::string> >&
     aggregated_data, const scope_types current_scope) const {
     std::unordered_map<std::string, field_instance> r;
@@ -148,7 +148,7 @@ object_factory::create_fields_activity(
     return r;
 }
 
-object object_factory::execute(const scope_types current_scope,
+object workflow::execute(const scope_types current_scope,
     const std::list<std::pair<std::string, std::string>>&
     raw_data) const {
     auto aggregated_raw_data(aggregate_raw_data_activity(raw_data));

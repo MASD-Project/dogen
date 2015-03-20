@@ -18,32 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_OBJECT_FACTORY_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_OBJECT_FACTORY_HPP
-
-#include "dogen/dynamic/schema/types/object_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace schema {
 namespace test {
 
-/**
- * @brief Generates "mock" object factories. In reality these are just
- * instances of the object factory used for testing.
- */
-class mock_object_factory {
-public:
-    /**
-     * @brief Creates a object factory that does not throw if field
-     * instances do not have a corresponding field definition.
-     *
-     * This behaviour is useful when we do not have all of the c++
-     * field definitions and so on and it safe to ignore those.
-     */
-    static const object_factory& non_validating_object_factory();
-};
+const workflow& mock_workflow_factory::non_validating_workflow() {
+    static workflow r(false/*throw_on_missing_field_definition*/);
+    return r;
+}
 
 } } } }
-
-#endif

@@ -69,12 +69,12 @@ const std::string multiple_inheritance(
 namespace dogen {
 namespace dia_to_sml {
 
-transformer::transformer(const dynamic::schema::object_factory& of, context& c)
+transformer::transformer(const dynamic::schema::workflow& w, context& c)
     : context_(c),
       identifier_parser_(new identifier_parser(c.top_level_module_names(),
               c.model().name().external_module_path(),
               c.model().name().model_name())),
-      object_factory_(of) {
+      schema_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
@@ -193,7 +193,7 @@ sml::property transformer::to_property(const processed_property& p) const {
 
     const auto& kvps(p.comment().key_value_pairs());
     const auto scope(dynamic::schema::scope_types::property);
-    r.extensions(object_factory_.execute(scope, kvps));
+    r.extensions(schema_workflow_.execute(scope, kvps));
 
     return r;
 }
@@ -470,7 +470,7 @@ void transformer::from_note(const processed_object& o) {
         module.documentation(documentation);
 
         const auto scope(scope_types::root_module);
-        module.extensions(object_factory_.execute(scope, kvps));
+        module.extensions(schema_workflow_.execute(scope, kvps));
 
         return;
     }
@@ -479,7 +479,7 @@ void transformer::from_note(const processed_object& o) {
     module.documentation(documentation);
 
     const auto scope(scope_types::any_module);
-    module.extensions(object_factory_.execute(scope, kvps));
+    module.extensions(schema_workflow_.execute(scope, kvps));
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {

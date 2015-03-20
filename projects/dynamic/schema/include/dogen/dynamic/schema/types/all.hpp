@@ -31,7 +31,6 @@
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 #include "dogen/dynamic/schema/types/name.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/object_factory.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/registrar.hpp"
 #include "dogen/dynamic/schema/types/registrar_error.hpp"
@@ -44,3 +43,4 @@
 #include "dogen/dynamic/schema/types/value_factory.hpp"
 #include "dogen/dynamic/schema/types/value_types.hpp"
 #include "dogen/dynamic/schema/types/value_visitor.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"

@@ -45,7 +45,7 @@ namespace frontend {
 std::shared_ptr<frontend::registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_options& o)
-    : knitting_options_(o), object_factory_() {
+    : knitting_options_(o), schema_workflow_() {
 
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
@@ -119,7 +119,7 @@ create_sml_model_activity(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
     auto& frontend(registrar().frontend_for_extension(extension));
     const auto s(create_frontend_settings(d.path()));
-    return frontend.generate(object_factory_, d, s);
+    return frontend.generate(schema_workflow_, d, s);
 }
 
 void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
