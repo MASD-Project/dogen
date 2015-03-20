@@ -26,7 +26,8 @@ namespace sml {
 model::model()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
       origin_type_(static_cast<dogen::sml::origin_types>(0)),
-      is_target_(static_cast<bool>(0)) { }
+      is_target_(static_cast<bool>(0)),
+      has_generatable_types_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
     : documentation_(std::move(rhs.documentation_)),
@@ -42,7 +43,8 @@ model::model(model&& rhs)
       primitives_(std::move(rhs.primitives_)),
       enumerations_(std::move(rhs.enumerations_)),
       objects_(std::move(rhs.objects_)),
-      is_target_(std::move(rhs.is_target_)) { }
+      is_target_(std::move(rhs.is_target_)),
+      has_generatable_types_(std::move(rhs.has_generatable_types_)) { }
 
 model::model(
     const std::string& documentation,
@@ -58,7 +60,8 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
-    const bool is_target)
+    const bool is_target,
+    const bool has_generatable_types)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -72,7 +75,8 @@ model::model(
       primitives_(primitives),
       enumerations_(enumerations),
       objects_(objects),
-      is_target_(is_target) { }
+      is_target_(is_target),
+      has_generatable_types_(has_generatable_types) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -90,6 +94,7 @@ void model::swap(model& other) noexcept {
     swap(enumerations_, other.enumerations_);
     swap(objects_, other.objects_);
     swap(is_target_, other.is_target_);
+    swap(has_generatable_types_, other.has_generatable_types_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -106,7 +111,8 @@ bool model::operator==(const model& rhs) const {
         primitives_ == rhs.primitives_ &&
         enumerations_ == rhs.enumerations_ &&
         objects_ == rhs.objects_ &&
-        is_target_ == rhs.is_target_;
+        is_target_ == rhs.is_target_ &&
+        has_generatable_types_ == rhs.has_generatable_types_;
 }
 
 model& model::operator=(model other) {
@@ -313,6 +319,14 @@ bool model::is_target() const {
 
 void model::is_target(const bool v) {
     is_target_ = v;
+}
+
+bool model::has_generatable_types() const {
+    return has_generatable_types_;
+}
+
+void model::has_generatable_types(const bool v) {
+    has_generatable_types_ = v;
 }
 
 } }

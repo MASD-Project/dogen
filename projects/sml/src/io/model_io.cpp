@@ -202,7 +202,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"primitives\": " << v.primitives() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"objects\": " << v.objects() << ", "
-      << "\"is_target\": " << v.is_target()
+      << "\"is_target\": " << v.is_target() << ", "
+      << "\"has_generatable_types\": " << v.has_generatable_types()
       << " }";
     return(s);
 }

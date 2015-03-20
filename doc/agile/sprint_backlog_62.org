@@ -14,24 +14,25 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-20 Fri 15:55]
+Clock summary at [2015-03-20 Fri 16:23]
 
-| Headline                                                              | Time    |       |      |
-|-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *27:48* |       |      |
-|-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 27:48 |      |
-| STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
-| COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
-| COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
-| COMPLETED Generate registrar correctly when using external model path |         |       | 0:25 |
-| COMPLETED Create a JSON file format for field definitions             |         |       | 3:49 |
-| COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
-| COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
-| COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
-| COMPLETED Refactor settings classes                                   |         |       | 8:59 |
-| STARTED Create a =dynamic::expansion= model with a sample operation   |         |       | 3:18 |
-| STARTED Create a "supported" operation                                |         |       | 1:54 |
+| Headline                                                                 | Time    |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                             | *28:07* |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                   |         | 28:07 |      |
+| STARTED Sprint and product backlog grooming                              |         |       | 1:05 |
+| COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
+| COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
+| COMPLETED Generate registrar correctly when using external model path    |         |       | 0:25 |
+| COMPLETED Create a JSON file format for field definitions                |         |       | 3:49 |
+| COMPLETED Apply relevant parts of dynamic refactor patch                 |         |       | 1:54 |
+| COMPLETED Convert all field definitions into JSON                        |         |       | 1:13 |
+| COMPLETED Analysis on the =cpp= refactoring                              |         |       | 1:18 |
+| COMPLETED Refactor settings classes                                      |         |       | 8:59 |
+| COMPLETED Add property to model to capture presence of generatable types |         |       | 0:14 |
+| STARTED Create a =dynamic::expansion= model with a sample operation      |         |       | 3:23 |
+| STARTED Create a "supported" operation                                   |         |       | 1:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -300,6 +301,35 @@ follows:
 - create odb settings in settings namespace and delete the odb
   settings classes.
 
+*** COMPLETED Add support for opaque formatter settings               :story:
+    CLOSED: [2015-03-20 Fri 16:04]
+
+*New Understanding*
+
+This is now taken care in the guise of subsidiary settings.
+
+*Previous Understanding*
+
+- create an empty opaque formatter settings class. Create a opaque
+  formatter settings factory interface class. Formatter interface to
+  return an opaque formatter settings factory interface.
+- add opaque formatter settings to local settings.
+- when formatting, cast additional formatter settings (if available)
+  and throw if cast fails. For formatters without opaque settings,
+  throw if any supplied.
+- we need multiple opaque settings (more than one formatter will need
+  them).
+- move provider and provider selector to top-level namespace and add a
+  provide opaque settings method to it.
+
+*** COMPLETED Add property to model to capture presence of generatable types :spike:
+    CLOSED: [2015-03-20 Fri 16:23]
+    CLOCK: [2015-03-20 Fri 16:09]--[2015-03-20 Fri 16:23] =>  0:14
+
+At present we have to return a pair from the SML workflow to denote
+whether the model is generatable or not. We should handle this with a
+boolean flag in the SML model.
+
 *** CANCELLED Add an "enabled" operation                              :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -318,6 +348,7 @@ This operation should execute after copy from root. It should live in
 dynamic.
 
 *** STARTED Create a =dynamic::expansion= model with a sample operation :story:
+    CLOCK: [2015-03-20 Fri 16:04]--[2015-03-20 Fri 16:09] =>  0:05
     CLOCK: [2015-03-19 Thu 17:19]--[2015-03-19 Thu 17:37] =>  0:18
     CLOCK: [2015-03-19 Thu 15:59]--[2015-03-19 Thu 17:19] =>  1:20
     CLOCK: [2015-03-19 Thu 15:21]--[2015-03-19 Thu 15:31] =>  0:10
@@ -346,26 +377,6 @@ preconditions. We could also have an optional precondition so that
 
 Also we should name "operations" "expanders". After all we are
 executing the expansion workflow.
-
-*** STARTED Add support for opaque formatter settings                 :story:
-
-*New Understanding*
-
-This is now taken care in the guise of subsidiary settings.
-
-*Previous Understanding*
-
-- create an empty opaque formatter settings class. Create a opaque
-  formatter settings factory interface class. Formatter interface to
-  return an opaque formatter settings factory interface.
-- add opaque formatter settings to local settings.
-- when formatting, cast additional formatter settings (if available)
-  and throw if cast fails. For formatters without opaque settings,
-  throw if any supplied.
-- we need multiple opaque settings (more than one formatter will need
-  them).
-- move provider and provider selector to top-level namespace and add a
-  provide opaque settings method to it.
 
 *** STARTED Create a "supported" operation                            :story:
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49

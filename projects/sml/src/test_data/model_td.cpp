@@ -173,6 +173,7 @@ populate(const unsigned int position, result_type& v) {
     v.enumerations(create_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(position + 11));
     v.objects(create_std_unordered_map_dogen_sml_qname_dogen_sml_object(position + 12));
     v.is_target(create_bool(position + 13));
+    v.has_generatable_types(create_bool(position + 14));
 }
 
 model_generator::result_type

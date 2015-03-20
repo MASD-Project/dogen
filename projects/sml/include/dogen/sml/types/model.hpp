@@ -96,7 +96,8 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& primitives,
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
-        const bool is_target);
+        const bool is_target,
+        const bool has_generatable_types);
 
 private:
     template<typename Archive>
@@ -247,6 +248,14 @@ public:
     void is_target(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true the model has at least one generable type, false otherwise.
+     */
+    /**@{*/
+    bool has_generatable_types() const;
+    void has_generatable_types(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -272,6 +281,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::enumeration> enumerations_;
     std::unordered_map<dogen::sml::qname, dogen::sml::object> objects_;
     bool is_target_;
+    bool has_generatable_types_;
 };
 
 } }

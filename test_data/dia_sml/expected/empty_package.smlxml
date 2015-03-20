@@ -180,6 +180,7 @@
 		<item_version>0</item_version>
 	</objects>
 	<is_target>1</is_target>
+	<has_generatable_types>0</has_generatable_types>
 </entity>
 </boost_serialization>
 

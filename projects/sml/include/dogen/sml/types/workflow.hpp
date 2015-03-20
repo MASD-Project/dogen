@@ -81,6 +81,12 @@ private:
      */
     void index_associations_activity(model& merged_model) const;
 
+    /**
+     * @brief Determines if the type has generatable types or not and
+     * updates the flag accordingly.
+     */
+    void update_model_generability_activity(model& merged_model) const;
+
 private:
     /**
      * @brief Returns true if there are any types that require code
@@ -94,7 +100,7 @@ public:
      *
      * @note parameter copied by design.
      */
-    std::pair<bool, model> execute(std::list<model> models) const;
+    model execute(std::list<model> models) const;
 };
 
 } }

@@ -101,8 +101,11 @@ void workflow::index_associations_activity(model& merged_model) const {
     indexer.index(merged_model);
 }
 
-std::pair<bool, model> workflow::
-execute(std::list<model> models) const {
+void workflow::update_model_generability_activity(model& merged_model) const {
+    merged_model.has_generatable_types(has_generatable_types(merged_model));
+}
+
+model workflow::execute(std::list<model> models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting SML workflow.";
 
     inject_system_types_activity(models);
@@ -111,10 +114,11 @@ execute(std::list<model> models) const {
     index_concepts_activity(r);
     index_properties_activity(r);
     index_associations_activity(r);
+    update_model_generability_activity(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished SML workflow.";
 
-    return std::pair<bool, model> { has_generatable_types(r), r };
+    return r;
 }
 
 } }

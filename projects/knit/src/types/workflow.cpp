@@ -232,20 +232,19 @@ boost::filesystem::path workflow::obtain_target_path_activity(
     return boost::filesystem::path();
 }
 
-std::pair<bool, sml::model> workflow::
+sml::model workflow::
 merge_models_activity(const std::list<sml::model>& models) const {
     sml::workflow w;
-    const auto pair(w.execute(models));
-    const auto& m(pair.second);
+    const auto r(w.execute(models));
 
-    BOOST_LOG_SEV(lg, debug) << "Merged model: " << m;
-    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << m.objects().size()
-                             << " modules: " << m.modules().size()
-                             << " concepts: " << m.concepts().size()
-                             << " enumerations: " << m.enumerations().size()
-                             << " primitives: " << m.primitives().size();
+    BOOST_LOG_SEV(lg, debug) << "Merged model: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
+                             << " modules: " << r.modules().size()
+                             << " concepts: " << r.concepts().size()
+                             << " enumerations: " << r.enumerations().size()
+                             << " primitives: " << r.primitives().size();
 
-    return pair;
+    return r;
 }
 
 void workflow::persist_model_activity(const boost::filesystem::path p,
@@ -283,9 +282,7 @@ void workflow::execute() const {
         const auto d(obtain_input_descriptors_activity());
         const auto tp(obtain_target_path_activity(d));
         const auto pm(obtain_partial_sml_models_activity(d));
-        const auto pair(merge_models_activity(pm));
-        const auto& m(pair.second);
-        const auto has_generatable_types(pair.first);
+        const auto m(merge_models_activity(pm));
         persist_model_activity(tp, m);
 
         if (knitting_options_.troubleshooting().stop_after_merging()) {
@@ -293,7 +290,7 @@ void workflow::execute() const {
             return;
         }
 
-        if (!has_generatable_types) {
+        if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }

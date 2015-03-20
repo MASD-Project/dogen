@@ -146,12 +146,8 @@ private:
 
     /**
      * @brief Execute the SML workflow.
-     *
-     * @return pair with the model and a flag; if true, the model is
-     * generatable.
      */
-    std::pair<bool, sml::model>
-    merge_models_activity(const std::list<sml::model>& models) const;
+    sml::model merge_models_activity(const std::list<sml::model>& models) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if
