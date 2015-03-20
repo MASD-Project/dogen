@@ -55,6 +55,11 @@ private:
      */
     sml::module obtain_root_module(const sml::model& m) const;
 
+    /**
+     * @brief Ensures the workflow is in a valid state.
+     */
+    void validate() const;
+
 public:
     /**
      * @brief Expands the dynamic fields in the object.

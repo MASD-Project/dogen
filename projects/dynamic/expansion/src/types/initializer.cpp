@@ -20,6 +20,7 @@
  */
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
+#include "dogen/dynamic/expansion/types/root_object_copier.hpp"
 #include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/dynamic/expansion/types/initializer.hpp"
 
@@ -34,6 +35,7 @@ void register_expander(const expander_interface * const p) {
 
 void initializer::initialize() {
     register_expander(new default_value_expander());
+    register_expander(new root_object_copier());
 }
 
 } } }

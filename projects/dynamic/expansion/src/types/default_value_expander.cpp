@@ -42,4 +42,4 @@ void default_value_expander::
 expand(const expansion_context& /*ec*/, schema::object& /*o*/) const {
 }
 
-}  } }
+} } }

@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
@@ -55,10 +56,20 @@ public:
         : expansion_context_(ec), expanders_(expanders) { }
 
 private:
-    template<typename Exensible>
-    void expand(Exensible& e) {
-        for (const auto expander : expanders_)
-            expander->expand(expansion_context_, e.extensions());
+    template<typename IdentifiableAndExensible>
+    void expand(IdentifiableAndExensible& ie) {
+        for (const auto expander : expanders_) {
+            using sml::string_converter;
+            BOOST_LOG_SEV(lg, debug) << "Performing expansion: '"
+                                     << expander->name()
+                                     << "' to '"
+                                     << string_converter::convert(ie.name());
+
+            auto& o(ie.extensions());
+            BOOST_LOG_SEV(lg, debug) << "Before expansion: " << o;
+            expander->expand(expansion_context_, ie.extensions());
+            BOOST_LOG_SEV(lg, debug) << "After expansion: " << o;
+        }
     }
 
 public:
@@ -113,13 +124,30 @@ sml::module workflow::obtain_root_module(const sml::model& m) const {
     return r;
 }
 
+void workflow::validate() const {
+    BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
+
+    registrar().validate();
+    const auto& expanders(registrar().expanders());
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << std::distance(expanders.begin(),
+                                 expanders.end())
+                             << " registered expander(s): ";
+
+    BOOST_LOG_SEV(lg, debug) << "Listing all expanders.";
+    for (const auto& f : expanders)
+        BOOST_LOG_SEV(lg, debug) << "Key: '" << f->name() << "'";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
+}
+
 sml::model workflow::execute(
     const std::list<schema::field_definition>& fds,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Expanding model: "
                              << sml::string_converter::convert(m.name());
 
-    registrar().validate();
+    validate();
 
     const auto rm(obtain_root_module(m));
     const expansion_context ec(m, rm.extensions(), fds);
