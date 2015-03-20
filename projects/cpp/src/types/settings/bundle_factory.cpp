@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
+#include "dogen/cpp/types/settings/bundle_factory.hpp"
 
 namespace {
 

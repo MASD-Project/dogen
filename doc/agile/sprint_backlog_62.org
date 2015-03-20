@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-20 Fri 16:23]
+Clock summary at [2015-03-20 Fri 17:51]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *28:07* |       |      |
+| *Total time*                                                             | *29:29* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 28:07 |      |
+| Active                                                                   |         | 29:29 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -31,7 +31,9 @@ Clock summary at [2015-03-20 Fri 16:23]
 | COMPLETED Analysis on the =cpp= refactoring                              |         |       | 1:18 |
 | COMPLETED Refactor settings classes                                      |         |       | 8:59 |
 | COMPLETED Add property to model to capture presence of generatable types |         |       | 0:14 |
-| STARTED Create a =dynamic::expansion= model with a sample operation      |         |       | 3:23 |
+| COMPLETED Rename schema's object factory back to workflow                |         |       | 0:26 |
+| COMPLETED Use a list instead of a forward list in schema's registrar     |         |       | 0:28 |
+| STARTED Create a =dynamic::expansion= model with a sample operation      |         |       | 3:51 |
 | STARTED Create a "supported" operation                                   |         |       | 1:54 |
 #+end:
 
@@ -330,6 +332,22 @@ At present we have to return a pair from the SML workflow to denote
 whether the model is generatable or not. We should handle this with a
 boolean flag in the SML model.
 
+*** COMPLETED Rename schema's object factory back to workflow         :spike:
+    CLOSED: [2015-03-20 Fri 16:59]
+    CLOCK: [2015-03-20 Fri 16:33]--[2015-03-20 Fri 16:59] =>  0:26
+
+At some point we probably had multiple workflows in dynamic's schema
+and so decided to rename it to factory. However now there is only one
+and it is very confusing to see it called a factory rather than a
+workflow.
+
+*** COMPLETED Use a list instead of a forward list in schema's registrar :spike:
+    CLOSED: [2015-03-20 Fri 17:41]
+    CLOCK: [2015-03-20 Fri 17:13]--[2015-03-20 Fri 17:41] =>  0:28
+
+We need to use a list because we are now generating this type and
+dogen still has no support for forward lists.
+
 *** CANCELLED Add an "enabled" operation                              :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -348,6 +366,9 @@ This operation should execute after copy from root. It should live in
 dynamic.
 
 *** STARTED Create a =dynamic::expansion= model with a sample operation :story:
+    CLOCK: [2015-03-20 Fri 17:41]--[2015-03-20 Fri 17:51] =>  0:10
+    CLOCK: [2015-03-20 Fri 17:05]--[2015-03-20 Fri 17:13] =>  0:08
+    CLOCK: [2015-03-20 Fri 16:23]--[2015-03-20 Fri 16:33] =>  0:10
     CLOCK: [2015-03-20 Fri 16:04]--[2015-03-20 Fri 16:09] =>  0:05
     CLOCK: [2015-03-19 Thu 17:19]--[2015-03-19 Thu 17:37] =>  0:18
     CLOCK: [2015-03-19 Thu 15:59]--[2015-03-19 Thu 17:19] =>  1:20
@@ -596,21 +617,5 @@ regarding enabling facets and formatters:
 - for forward declarations: if another formatter requires it for a
   type, we want it on; if no one requires it we want it off. The user
   may want to manually switch it on for a type.
-
-*** COMPLETED Rename schema's object factory back to workflow         :spike:
-    CLOSED: [2015-03-20 Fri 16:59]
-    CLOCK: [2015-03-20 Fri 16:33]--[2015-03-20 Fri 16:59] =>  0:26
-
-At some point we probably had multiple workflows in dynamic's schema
-and so decided to rename it to factory. However now there is only one
-and it is very confusing to see it called a factory rather than a
-workflow.
-
-*** COMPLETED Use a list instead of a forward list in schema's registrar :spike:
-    CLOSED: [2015-03-20 Fri 17:41]
-    CLOCK: [2015-03-20 Fri 17:13]--[2015-03-20 Fri 17:41] =>  0:28
-
-We need to use a list because we are now generating this type and
-dogen still has no support for forward lists.
 
 ** Deprecated

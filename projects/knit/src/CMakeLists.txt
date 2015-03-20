@@ -25,6 +25,8 @@ file(GLOB_RECURSE knit_files RELATIVE
 add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
     sml
+    dynamic_schema
+    dynamic_expansion
     dia
     dia_to_sml
     frontend
