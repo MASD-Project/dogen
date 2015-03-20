@@ -19,6 +19,13 @@ components. What we really need is something like log4j, where we can
 change log levels for a component or all components in a hierarchy. We
 need to investigate boost log solutions for this.
 
+*** Move some of the more verbose logging to fine debug               :story:
+
+We have a category for fine debug logging (=FINE_DEBUG=) but we are
+not making use of it. There is some rather verbose logging that could
+be moved to it. Go through all the logging and move some to
+=FINE_DEBUG=.
+
 *** Implement include generation for class header formatter           :story:
 
 Now that we have finished generating the path spec details, we need to
