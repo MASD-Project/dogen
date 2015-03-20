@@ -19,6 +19,11 @@ components. What we really need is something like log4j, where we can
 change log levels for a component or all components in a hierarchy. We
 need to investigate boost log solutions for this.
 
+It seems we cannot change severity per component ("channel") with our
+current setup. We need something akin to this:
+
+- [[http://www.boost.org/doc/libs/1_57_0/libs/log/doc/html/log/detailed/expressions.html#log.detailed.expressions.predicates.channel_severity_filter][Severity threshold per channel filter]]
+
 *** Move some of the more verbose logging to fine debug               :story:
 
 We have a category for fine debug logging (=FINE_DEBUG=) but we are
