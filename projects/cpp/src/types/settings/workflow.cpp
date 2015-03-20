@@ -49,7 +49,7 @@ workflow::workflow(const std::unordered_map<
         std::string, std::forward_list<dynamic::schema::field_definition>
         >& field_definitions_by_formatter_name)
     : factory_(field_definitions_by_formatter_name,
-        registrar().special_formatter_settings_factories()) { }
+        registrar().opaque_settings_factories()) { }
 
 bundle workflow::execute(const dynamic::schema::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle.";
@@ -65,15 +65,15 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
 
     registrar().validate();
-    const auto& factories(registrar().special_formatter_settings_factories());
+    const auto& factories(registrar().opaque_settings_factories());
     BOOST_LOG_SEV(lg, debug) << "Found "
                              << std::distance(factories.begin(),
                                  factories.end())
-                             << " registered special settings factories(s): ";
+                             << " registered opaque settings factories(s): ";
 
-    BOOST_LOG_SEV(lg, debug) << "Listing all special settings factories.";
+    BOOST_LOG_SEV(lg, debug) << "Listing all opaque settings factories.";
     for (const auto& f : factories)
-        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->formatter_name() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Key: '" << f->settings_key() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }

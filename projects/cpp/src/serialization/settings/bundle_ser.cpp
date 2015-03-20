@@ -31,8 +31,8 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
-#include "dogen/cpp/serialization/settings/common_formatter_settings_ser.hpp"
-#include "dogen/cpp/serialization/settings/special_formatter_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/type_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
@@ -47,8 +47,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("general_settings", v.general_settings_);
     ar << make_nvp("type_settings", v.type_settings_);
-    ar << make_nvp("common_formatter_settings", v.common_formatter_settings_);
-    ar << make_nvp("special_formatter_settings", v.special_formatter_settings_);
+    ar << make_nvp("formatter_settings", v.formatter_settings_);
+    ar << make_nvp("opaque_settings", v.opaque_settings_);
 }
 
 template<typename Archive>
@@ -57,8 +57,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("general_settings", v.general_settings_);
     ar >> make_nvp("type_settings", v.type_settings_);
-    ar >> make_nvp("common_formatter_settings", v.common_formatter_settings_);
-    ar >> make_nvp("special_formatter_settings", v.special_formatter_settings_);
+    ar >> make_nvp("formatter_settings", v.formatter_settings_);
+    ar >> make_nvp("opaque_settings", v.opaque_settings_);
 }
 
 } }

@@ -21,8 +21,8 @@
 #include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/cpp/io/settings/bundle_io.hpp"
-#include "dogen/cpp/io/settings/common_formatter_settings_io.hpp"
-#include "dogen/cpp/io/settings/special_formatter_settings_io.hpp"
+#include "dogen/cpp/io/settings/formatter_settings_io.hpp"
+#include "dogen/cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/cpp/io/settings/type_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
 
@@ -66,7 +66,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::common_formatter_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -84,7 +84,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -100,7 +100,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::special_formatter_settings> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -125,8 +125,8 @@ std::ostream& operator<<(std::ostream& s, const bundle& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::bundle\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
       << "\"type_settings\": " << v.type_settings() << ", "
-      << "\"common_formatter_settings\": " << v.common_formatter_settings() << ", "
-      << "\"special_formatter_settings\": " << v.special_formatter_settings()
+      << "\"formatter_settings\": " << v.formatter_settings() << ", "
+      << "\"opaque_settings\": " << v.opaque_settings()
       << " }";
     return(s);
 }

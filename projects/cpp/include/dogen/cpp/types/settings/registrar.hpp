@@ -27,7 +27,7 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/cpp/types/settings/special_formatter_settings_factory_interface_fwd.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_factory_interface_fwd.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -45,25 +45,22 @@ public:
 
 public:
     /**
-     * @brief Registers a special formatter settings factory.
+     * @brief Registers a opaque settings factory.
      */
-    void register_special_formatter_settings_factory(
-        boost::shared_ptr<
-            const special_formatter_settings_factory_interface
-            > f);
+    void register_opaque_settings_factory(
+        boost::shared_ptr<const opaque_settings_factory_interface> f);
 
     /**
-     * @brief Returns all registered special formatter settings
-     * factories.
+     * @brief Returns all registered opaque settings factories.
      */
     const std::forward_list<
-        boost::shared_ptr<const special_formatter_settings_factory_interface>
-        >& special_formatter_settings_factories() const;
+        boost::shared_ptr<const opaque_settings_factory_interface>
+        >& opaque_settings_factories() const;
 
 private:
     std::forward_list<
-        boost::shared_ptr<const special_formatter_settings_factory_interface>
-        > special_formatter_settings_factories_;
+        boost::shared_ptr<const opaque_settings_factory_interface>
+        > opaque_settings_factories_;
 };
 
 } } }

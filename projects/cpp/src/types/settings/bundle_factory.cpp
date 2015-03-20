@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
-#include "dogen/cpp/types/settings/common_formatter_settings_factory.hpp"
+#include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 
 namespace {
 
@@ -41,10 +41,10 @@ bundle_factory::bundle_factory(
         std::string, std::forward_list<dynamic::schema::field_definition>
         >& field_definitions_by_formatter_name,
     const std::forward_list<
-        boost::shared_ptr<const special_formatter_settings_factory_interface>
-        >& special_formatter_settings_factories) :
+        boost::shared_ptr<const opaque_settings_factory_interface>
+        >& opaque_settings_factories) :
     field_definitions_by_formatter_name_(field_definitions_by_formatter_name),
-    special_formatter_settings_factories_(special_formatter_settings_factories),
+    opaque_settings_factories_(opaque_settings_factories),
     general_settings_factory_(
         std::forward_list<boost::filesystem::path> {
             dogen::utility::filesystem::data_files_directory() }) {
@@ -62,26 +62,26 @@ create_type_settings(const dynamic::schema::object& o) const {
     return f.make(o);
 }
 
-std::unordered_map<std::string, common_formatter_settings>
-bundle_factory::create_common_formatter_settings(
+std::unordered_map<std::string, formatter_settings>
+bundle_factory::create_formatter_settings(
     const dynamic::schema::object& o) const {
-    common_formatter_settings_factory f(field_definitions_by_formatter_name_);
+    formatter_settings_factory f(field_definitions_by_formatter_name_);
     return f.make(o);
 }
 
 std::unordered_map<
     std::string,
-    boost::shared_ptr<special_formatter_settings>
-    > bundle_factory::create_special_formatter_settings(
+    boost::shared_ptr<opaque_settings>
+    > bundle_factory::create_opaque_settings(
         const dynamic::schema::object& o) const {
 
     std::unordered_map<
         std::string,
-        boost::shared_ptr<special_formatter_settings>
+        boost::shared_ptr<opaque_settings>
         > r;
 
-    for (const auto f : special_formatter_settings_factories_)
-        r[f->formatter_name()] = f->make(o);
+    for (const auto f : opaque_settings_factories_)
+        r[f->settings_key()] = f->make(o);
 
     return r;
 }
@@ -90,8 +90,8 @@ bundle bundle_factory::make(const dynamic::schema::object& o) const {
     bundle r;
     r.general_settings(create_general_settings(o));
     r.type_settings(create_type_settings(o));
-    r.common_formatter_settings(create_common_formatter_settings(o));
-    r.special_formatter_settings(create_special_formatter_settings(o));
+    r.formatter_settings(create_formatter_settings(o));
+    r.opaque_settings(create_opaque_settings(o));
     return r;
 }
 

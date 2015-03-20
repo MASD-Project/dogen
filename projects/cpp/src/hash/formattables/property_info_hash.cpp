@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/hash/formattables/nested_type_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/property_info_hash.hpp"
-#include "dogen/cpp/hash/settings/special_formatter_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 
 namespace {
 
@@ -47,7 +47,7 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v){
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -68,7 +68,7 @@ std::size_t property_info_hasher::hash(const property_info&v) {
     combine(seed, hash_std_list_std_pair_std_string_std_string_(v.opaque_parameters()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(v.special_formatter_settings()));
+    combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(v.opaque_settings()));
 
     return seed;
 }

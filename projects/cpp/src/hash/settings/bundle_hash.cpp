@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/cpp/hash/settings/common_formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/special_formatter_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/type_settings_hash.hpp"
 #include "dogen/formatters/hash/general_settings_hash.hpp"
 
@@ -53,7 +53,7 @@ inline std::size_t hash_boost_optional_dogen_cpp_settings_type_settings(const bo
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_common_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::common_formatter_settings>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -62,17 +62,17 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_common_f
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v){
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings_(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::special_formatter_settings> >& v){
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings(i.second));
+        combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(i.second));
     }
     return seed;
 }
@@ -88,8 +88,8 @@ std::size_t bundle_hasher::hash(const bundle&v) {
 
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
     combine(seed, hash_boost_optional_dogen_cpp_settings_type_settings(v.type_settings()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_common_formatter_settings(v.common_formatter_settings()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_special_formatter_settings_(v.special_formatter_settings()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(v.formatter_settings()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(v.opaque_settings()));
 
     return seed;
 }

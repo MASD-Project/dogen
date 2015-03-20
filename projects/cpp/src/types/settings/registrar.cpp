@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/cpp/types/settings/special_formatter_settings_factory_interface.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
 #include "dogen/cpp/types/settings/registrar_error.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
 
@@ -30,9 +30,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.registrar"));
 
 const std::string no_factories(
-    "No special formatter settings factories have been provided.");
+    "No opaque settings factories have been provided.");
 const std::string null_factory(
-    "Special formatter settings factory supplied is null");
+    "Opaque settings factory supplied is null");
 
 }
 
@@ -41,27 +41,26 @@ namespace cpp {
 namespace settings {
 
 void registrar::validate() const {
-    // FIXME: hack for now
-    // if (special_formatter_settings_factories_.empty()) {
-    //     BOOST_LOG_SEV(lg, error) << no_factories;
-    //     BOOST_THROW_EXCEPTION(registrar_error(no_factories));
-    // }
+    if (opaque_settings_factories_.empty()) {
+        BOOST_LOG_SEV(lg, error) << no_factories;
+        BOOST_THROW_EXCEPTION(registrar_error(no_factories));
+    }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void registrar::register_special_formatter_settings_factory(
-    boost::shared_ptr<const special_formatter_settings_factory_interface> f) {
+void registrar::register_opaque_settings_factory(
+    boost::shared_ptr<const opaque_settings_factory_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_factory));
 
-    special_formatter_settings_factories_.push_front(f);
+    opaque_settings_factories_.push_front(f);
 }
 
 const std::forward_list<
-    boost::shared_ptr<const special_formatter_settings_factory_interface>
-    >& registrar::special_formatter_settings_factories() const {
-    return special_formatter_settings_factories_;
+    boost::shared_ptr<const opaque_settings_factory_interface>
+    >& registrar::opaque_settings_factories() const {
+    return opaque_settings_factories_;
 }
 
 } } }

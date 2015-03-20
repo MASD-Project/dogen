@@ -32,7 +32,7 @@
 #include <utility>
 #include "dogen/cpp/serialization/formattables/property_info_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
-#include "dogen/cpp/types/settings/special_formatter_settings_fwd.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -58,7 +58,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings);
+        const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings);
 
 private:
     template<typename Archive>
@@ -125,10 +125,10 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings() const;
-    boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& special_formatter_settings();
-    void special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>& v);
-    void special_formatter_settings(const boost::shared_ptr<dogen::cpp::settings::special_formatter_settings>&& v);
+    const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings() const;
+    boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings();
+    void opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v);
+    void opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>&& v);
 
 public:
     bool operator==(const property_info& rhs) const;
@@ -147,7 +147,7 @@ private:
     std::list<std::pair<std::string, std::string> > opaque_parameters_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::shared_ptr<dogen::cpp::settings::special_formatter_settings> special_formatter_settings_;
+    boost::shared_ptr<dogen::cpp::settings::opaque_settings> opaque_settings_;
 };
 
 } } }

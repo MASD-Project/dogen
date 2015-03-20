@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-20 Fri 11:59]
+Clock summary at [2015-03-20 Fri 15:55]
 
 | Headline                                                              | Time    |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                          | *26:47* |       |      |
+| *Total time*                                                          | *27:48* |       |      |
 |-----------------------------------------------------------------------+---------+-------+------|
-| Active                                                                |         | 26:47 |      |
+| Active                                                                |         | 27:48 |      |
 | STARTED Sprint and product backlog grooming                           |         |       | 1:05 |
 | COMPLETED Consider creating a rules based engine                      |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                       |         |       | 1:44 |
@@ -29,7 +29,7 @@ Clock summary at [2015-03-20 Fri 11:59]
 | COMPLETED Apply relevant parts of dynamic refactor patch              |         |       | 1:54 |
 | COMPLETED Convert all field definitions into JSON                     |         |       | 1:13 |
 | COMPLETED Analysis on the =cpp= refactoring                           |         |       | 1:18 |
-| STARTED Refactor settings classes                                     |         |       | 7:58 |
+| COMPLETED Refactor settings classes                                   |         |       | 8:59 |
 | STARTED Create a =dynamic::expansion= model with a sample operation   |         |       | 3:18 |
 | STARTED Create a "supported" operation                                |         |       | 1:54 |
 #+end:
@@ -267,12 +267,30 @@ be done as part of the expansions. We will need a way to obtain a file
 type given a formatter ID. This could be done with a selector. It will
 be used by the inclusion expander.
 
-*** STARTED Refactor settings classes                                 :story:
+*** COMPLETED Refactor settings classes                               :story:
+    CLOSED: [2015-03-20 Fri 15:55]
+    CLOCK: [2015-03-20 Fri 14:54]--[2015-03-20 Fri 15:55] =>  1:01
     CLOCK: [2015-03-20 Fri 11:14]--[2015-03-20 Fri 11:58] =>  0:44
     CLOCK: [2015-03-18 Wed 22:14]--[2015-03-18 Wed 23:10] =>  0:56
     CLOCK: [2015-03-18 Wed 21:15]--[2015-03-18 Wed 21:55] =>  0:40
     CLOCK: [2015-03-18 Wed 13:15]--[2015-03-18 Wed 17:31] =>  4:16
     CLOCK: [2015-03-13 Fri 22:57]--[2015-03-14 Sat 00:19] =>  1:22
+
+*Final Understanding*
+
+After much to-ing and fro-ing, the final names for the classes are as
+follows:
+
+- general settings: settings common to all formatters in all models
+  (e.g. c#, c++);
+- type settings: settings specific to a type (e.g. common to all
+  formatters using that type for that model);
+- formatter settings: settings for each formatter but which have the
+  same shape for all formatters;
+- opaque settings: settings that we do not know about. May be for a
+  specific formatter, or may be common to several formatters.
+
+*Previous Understanding*
 
 - remove all of the many settings from settings and implement the two
   above ones;
@@ -281,6 +299,23 @@ be used by the inclusion expander.
   settings" class or "settings for type"
 - create odb settings in settings namespace and delete the odb
   settings classes.
+
+*** CANCELLED Add an "enabled" operation                              :story:
+    CLOSED: [2015-03-19 Thu 15:20]
+
+*New Understanding*
+
+Actually this is the same operation as supported.
+
+*Previous Understanding*
+
+We need an operation that is able to look at the model, facet,
+formatter values for the enabled field and determine what value to use
+for the formatter. It's predicate is =true=. Or perhaps we need
+conditional and unconditional operations.
+
+This operation should execute after copy from root. It should live in
+dynamic.
 
 *** STARTED Create a =dynamic::expansion= model with a sample operation :story:
     CLOCK: [2015-03-19 Thu 17:19]--[2015-03-19 Thu 17:37] =>  0:18
@@ -312,43 +347,6 @@ preconditions. We could also have an optional precondition so that
 Also we should name "operations" "expanders". After all we are
 executing the expansion workflow.
 
-*** Implement new settings factories with caching                     :story:
-
-- create a field definition selector;
-- get factories to use the selector on construction and setup a cache
-  for all required fields. These could be const copies of the fields.
-- stop using has_field followed by get content - we now know that the
-  field either existed originally or was defaulted correctly.
-
-For type settings:
-
-:    using namespace dynamic::schema;
-:    using fd = field_definitions;
-:    const field_selector fs(o);
-:
-:    if (fs.has_field(fd::enabled()))
-:        s.enabled(fs.get_boolean_content(fd::enabled()));
-
-*** Remove all field definitions in code                              :story:
-
-Instead add traits with the complete name. We also need a field
-definition selector based on complete name. Settings factories need to
-do a look-up for the required fields on construction and cache the
-fields. Actually we probably should have path ingredient settings; we
-can make use of these from within the operation/expansion?
-
-*** Add JSON support to dynamic workflow                              :story:
-
-We need to create the required activities in the dynamic schema's
-workflow to read in all the JSON files.
-
-- create a workflow that reads in all field definitions and then
-  registers them.
-
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
 *** STARTED Add support for opaque formatter settings                 :story:
 
 *New Understanding*
@@ -368,66 +366,6 @@ This is now taken care in the guise of subsidiary settings.
   them).
 - move provider and provider selector to top-level namespace and add a
   provide opaque settings method to it.
-
-*** Add an operation graph to expansion                               :story:
-
-This simply looks at all the registered operations and their
-dependencies (simply a string with the operation name) and ensures
-that:
-
-- all dependencies are met; and
-- there are no cycles in the graph of dependencies.
-
-The graph is then used to execute the operations in order.
-
-*** Create a "copy from root" operation                               :story:
-
-Some fields can only be populated at the root. However, we need them
-to be available on every dynamic object. We need an operation that
-takes into account the scope of the field and copies it. This may not
-be that straightforward. We should also look into other scopes to see
-what makes sense here to copy.
-
-This operation should execute after defaulting. It should live in
-dynamic.
-
-*** CANCELLED Add an "enabled" operation                              :story:
-    CLOSED: [2015-03-19 Thu 15:20]
-
-*New Understanding*
-
-Actually this is the same operation as supported.
-
-*Previous Understanding*
-
-We need an operation that is able to look at the model, facet,
-formatter values for the enabled field and determine what value to use
-for the formatter. It's predicate is =true=. Or perhaps we need
-conditional and unconditional operations.
-
-This operation should execute after copy from root. It should live in
-dynamic.
-
-*** Create a "populate file path" operation                           :story:
-
-We need an operation that uses all the ingredients for a file path and
-generates the file path. It is unconditional. It depends on
-defaulting.
-
-This should populate both the inclusion path (and delimiter) and the
-full path. It should take into account overriding.
-
-We should consider having two operations: the full path and the
-inclusion path.
-
-This operation should live in c++.
-
-*** Create a "populate includes operation"                            :story:
-
-This operation needs to be implemented by every formatter. It queries
-the model to look for all the types it depends on and obtains the
-corresponding include paths from them. It places them in a formatter
-specific list of includes. It depends on the inclusion path operation.
 
 *** STARTED Create a "supported" operation                            :story:
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49
@@ -481,6 +419,86 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
+
+*** Implement new settings factories with caching                     :story:
+
+- create a field definition selector;
+- get factories to use the selector on construction and setup a cache
+  for all required fields. These could be const copies of the fields.
+- stop using has_field followed by get content - we now know that the
+  field either existed originally or was defaulted correctly.
+
+For type settings:
+
+:    using namespace dynamic::schema;
+:    using fd = field_definitions;
+:    const field_selector fs(o);
+:
+:    if (fs.has_field(fd::enabled()))
+:        s.enabled(fs.get_boolean_content(fd::enabled()));
+
+*** Remove all field definitions in code                              :story:
+
+Instead add traits with the complete name. We also need a field
+definition selector based on complete name. Settings factories need to
+do a look-up for the required fields on construction and cache the
+fields. Actually we probably should have path ingredient settings; we
+can make use of these from within the operation/expansion?
+
+*** Add JSON support to dynamic workflow                              :story:
+
+We need to create the required activities in the dynamic schema's
+workflow to read in all the JSON files.
+
+- create a workflow that reads in all field definitions and then
+  registers them.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
+
+*** Add an operation graph to expansion                               :story:
+
+This simply looks at all the registered operations and their
+dependencies (simply a string with the operation name) and ensures
+that:
+
+- all dependencies are met; and
+- there are no cycles in the graph of dependencies.
+
+The graph is then used to execute the operations in order.
+
+*** Create a "copy from root" operation                               :story:
+
+Some fields can only be populated at the root. However, we need them
+to be available on every dynamic object. We need an operation that
+takes into account the scope of the field and copies it. This may not
+be that straightforward. We should also look into other scopes to see
+what makes sense here to copy.
+
+This operation should execute after defaulting. It should live in
+dynamic.
+
+*** Create a "populate file path" operation                           :story:
+
+We need an operation that uses all the ingredients for a file path and
+generates the file path. It is unconditional. It depends on
+defaulting.
+
+This should populate both the inclusion path (and delimiter) and the
+full path. It should take into account overriding.
+
+We should consider having two operations: the full path and the
+inclusion path.
+
+This operation should live in c++.
+
+*** Create a "populate includes operation"                            :story:
+
+This operation needs to be implemented by every formatter. It queries
+the model to look for all the types it depends on and obtains the
+corresponding include paths from them. It places them in a formatter
+specific list of includes. It depends on the inclusion path operation.
 
 *** Create an operation to populate c++ properties                    :story:
 

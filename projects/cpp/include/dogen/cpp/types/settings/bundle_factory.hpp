@@ -35,9 +35,9 @@
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
-#include "dogen/cpp/types/settings/common_formatter_settings.hpp"
-#include "dogen/cpp/types/settings/special_formatter_settings.hpp"
-#include "dogen/cpp/types/settings/special_formatter_settings_factory_interface.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/opaque_settings.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,15 +52,16 @@ public:
      * @brief Initialises the bundle factory.
      *
      * @param field_definitions_by_formatter_name All fields by formatter name.
-     * @param special_factories All special factories the system knows about.
+     * @param opaque_factories All factories of opaque settings know
+     * to the system.
      */
     bundle_factory(
         const std::unordered_map<
             std::string, std::forward_list<dynamic::schema::field_definition>
             >& field_definitions_by_formatter_name,
         const std::forward_list<
-        boost::shared_ptr<const special_formatter_settings_factory_interface>
-            >& special_formatter_settings_factories);
+            boost::shared_ptr<const opaque_settings_factory_interface>
+            >& opaque_settings_factories);
 
 private:
     /**
@@ -75,19 +76,16 @@ private:
     type_settings create_type_settings(const dynamic::schema::object& o) const;
 
     /**
-     * @brief Generates the common formatter settings.
+     * @brief Generates the formatter settings.
      */
-    std::unordered_map<std::string, common_formatter_settings>
-    create_common_formatter_settings(const dynamic::schema::object& o) const;
+    std::unordered_map<std::string, formatter_settings>
+    create_formatter_settings(const dynamic::schema::object& o) const;
 
     /**
-     * @brief Generates the common formatter settings.
+     * @brief Generates the opaque settings.
      */
-    std::unordered_map<
-        std::string,
-        boost::shared_ptr<special_formatter_settings>
-        >
-    create_special_formatter_settings(const dynamic::schema::object& o) const;
+    std::unordered_map<std::string, boost::shared_ptr<opaque_settings> >
+    create_opaque_settings(const dynamic::schema::object& o) const;
 
 public:
     /**
@@ -100,8 +98,8 @@ private:
     std::string, std::forward_list<dynamic::schema::field_definition>
     >& field_definitions_by_formatter_name_;
     const std::forward_list<
-    boost::shared_ptr<const special_formatter_settings_factory_interface>
-    >& special_formatter_settings_factories_;
+        boost::shared_ptr<const opaque_settings_factory_interface>
+        >& opaque_settings_factories_;
     dogen::formatters::general_settings_factory general_settings_factory_;
 };
 
