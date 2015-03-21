@@ -48,7 +48,7 @@ void registrar::validate() const {
 }
 
 void registrar::
-register_expander(boost::shared_ptr<const expander_interface> f) {
+register_expander(boost::shared_ptr<expander_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_expander));
@@ -56,7 +56,7 @@ register_expander(boost::shared_ptr<const expander_interface> f) {
     expanders_.push_front(f);
 }
 
-const std::forward_list<boost::shared_ptr<const expander_interface> >&
+const std::forward_list<boost::shared_ptr<expander_interface> >&
 registrar::expanders() const {
     return expanders_;
 }

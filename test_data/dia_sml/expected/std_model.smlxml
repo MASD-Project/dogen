@@ -137,7 +137,7 @@
 						<simple_name>class_c</simple_name>
 					</item>
 				</members>
-				<type>3</type>
+				<type>4</type>
 			</second>
 		</item>
 		<item>
@@ -339,7 +339,7 @@
 						<simple_name>class_j</simple_name>
 					</item>
 				</members>
-				<type>2</type>
+				<type>3</type>
 			</second>
 		</item>
 	</modules>

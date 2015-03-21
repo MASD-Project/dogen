@@ -20,7 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
@@ -44,48 +46,50 @@ namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-/**
- * @brief Performs all expansions.
- */
-class composite_expander {
+class dispatcher {
 public:
-    composite_expander(
-        const expansion_context& ec,
-        const std::forward_list<boost::shared_ptr<const expander_interface> >&
-        expanders)
-        : expansion_context_(ec), expanders_(expanders) { }
+    dispatcher(const expander_interface& e) : expander_(e) { }
 
 private:
     template<typename IdentifiableAndExensible>
-    void expand(IdentifiableAndExensible& ie) {
-        for (const auto expander : expanders_) {
-            using sml::string_converter;
-            BOOST_LOG_SEV(lg, debug) << "Performing expansion: '"
-                                     << expander->name()
-                                     << "' to '"
-                                     << string_converter::convert(ie.name());
+    void expand(schema::scope_types st, IdentifiableAndExensible& ie) {
+        using sml::string_converter;
+        BOOST_LOG_SEV(lg, debug) << "Performing expansion: '"
+                                 << expander_.name() << "' to '"
+                                 << string_converter::convert(ie.name());
 
-            auto& o(ie.extensions());
-            BOOST_LOG_SEV(lg, debug) << "Before expansion: " << o;
-            expander->expand(expansion_context_, ie.extensions());
-            BOOST_LOG_SEV(lg, debug) << "After expansion: " << o;
-        }
+        BOOST_LOG_SEV(lg, debug) << "Before expansion: " << ie.extensions();
+        expander_.expand(ie.name(), st, ie.extensions());
+        BOOST_LOG_SEV(lg, debug) << "After expansion: " << ie.extensions();
     }
 
 public:
     void operator()(dogen::sml::object& o) {
-        expand(o);
+        expand(schema::scope_types::entity, o);
         // FIXME: expand every property and operation
     }
-    void operator()(dogen::sml::enumeration& e) { expand(e); }
-    void operator()(dogen::sml::primitive& p) { expand(p); }
-    void operator()(dogen::sml::module& m) { expand(m); }
-    void operator()(dogen::sml::concept& c) { expand(c); }
+
+    void operator()(dogen::sml::enumeration& e) {
+        expand(schema::scope_types::entity, e);
+    }
+
+    void operator()(dogen::sml::primitive& p) {
+        expand(schema::scope_types::entity, p);
+    }
+
+    void operator()(dogen::sml::module& m) {
+        const auto st(m.type() == sml::module_types::root_model ?
+            schema::scope_types::root_module :
+            schema::scope_types::any_module);
+        expand(st, m);
+    }
+
+    void operator()(dogen::sml::concept& c) {
+        expand(schema::scope_types::entity, c);
+    }
 
 private:
-    const expansion_context& expansion_context_;
-    const std::forward_list<boost::shared_ptr<const expander_interface> >&
-    expanders_;
+    const expander_interface& expander_;
 };
 
 std::shared_ptr<expansion::registrar> workflow::registrar_;
@@ -95,36 +99,6 @@ expansion::registrar& workflow::registrar() {
         registrar_ = std::make_shared<expansion::registrar>();
 
     return *registrar_;
-}
-
-sml::module workflow::obtain_root_module(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining model's module.";
-
-    sml::module r;
-    bool found(false);
-    for (const auto pair : m.modules()) {
-        const auto mod(pair.second);
-        if (mod.generation_type() != sml::generation_types::full_generation ||
-            mod.type() != sml::module_types::model)
-            continue;
-
-        if (found) {
-            const auto n(sml::string_converter::convert(mod.name()));
-            BOOST_LOG_SEV(lg, error) << multiple_model_modules << n;
-            BOOST_THROW_EXCEPTION(workflow_error(multiple_model_modules + n));
-        }
-        r = pair.second;
-        found = true;
-    }
-
-    if (!found) {
-        const auto n(sml::string_converter::convert(r.name()));
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
-        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + n));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Obtained model's module.";
-    return r;
 }
 
 void workflow::validate() const {
@@ -145,6 +119,7 @@ void workflow::validate() const {
 }
 
 sml::model workflow::execute(
+    const config::cpp_options& options,
     const std::list<schema::field_definition>& fds,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Expanding model: "
@@ -152,18 +127,16 @@ sml::model workflow::execute(
 
     validate();
 
-    const auto rm(obtain_root_module(m));
-    expansion_context ec;
-    ec.field_definitions(fds);
-    ec.model(m);
-
-    sml::model r(m);
-    composite_expander ce(ec, registrar().expanders());
-    all_model_items_traversal(r, ce);
+    expansion_context ec(m, fds, options);
+    for (auto expander : registrar().expanders()) {
+        expander->setup(ec);
+        dispatcher d(*expander);
+        all_model_items_traversal(ec.model(), d);
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding model.";
 
-    return r;
+    return ec.model();
 }
 
 } } }

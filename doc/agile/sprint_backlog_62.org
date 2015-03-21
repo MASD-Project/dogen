@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-21 Sat 18:51]
+Clock summary at [2015-03-21 Sat 22:19]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *31:03* |       |      |
+| *Total time*                                                             | *32:19* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 31:03 |      |
+| Active                                                                   |         | 32:19 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -36,7 +36,7 @@ Clock summary at [2015-03-21 Sat 18:51]
 | COMPLETED Create a =dynamic::expansion= model with a sample operation    |         |       | 3:51 |
 | COMPLETED Determining the model module should be in SML                  |         |       | 0:38 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "default values" expander                               |         |       | 0:42 |
+| STARTED Create a "default values" expander                               |         |       | 1:58 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -472,6 +472,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "default values" expander                        :story:
+    CLOCK: [2015-03-21 Sat 21:03]--[2015-03-21 Sat 22:19] =>  1:16
     CLOCK: [2015-03-21 Sat 18:44]--[2015-03-21 Sat 18:51] =>  0:07
     CLOCK: [2015-03-21 Sat 17:29]--[2015-03-21 Sat 18:04] =>  0:35
 

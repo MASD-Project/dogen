@@ -111,7 +111,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
-				<type>3</type>
+				<type>4</type>
 			</second>
 		</item>
 		<item>
@@ -195,7 +195,7 @@
 						<simple_name>package2</simple_name>
 					</item>
 				</members>
-				<type>3</type>
+				<type>4</type>
 			</second>
 		</item>
 		<item>
@@ -291,7 +291,7 @@ This comment will be applied to the model namespace itself.
 						<simple_name>package</simple_name>
 					</item>
 				</members>
-				<type>2</type>
+				<type>3</type>
 			</second>
 		</item>
 	</modules>

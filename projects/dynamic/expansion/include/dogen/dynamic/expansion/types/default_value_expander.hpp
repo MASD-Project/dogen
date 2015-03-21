@@ -31,16 +31,26 @@ namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-class default_value_expander : public expander_interface {
+class default_value_expander final : public expander_interface {
 public:
     ~default_value_expander() noexcept;
 
 public:
-    std::string name() const final override;
+    /**
+     * @brief Name property for other expanders that need to declare
+     * it as a dependency.
+     */
+    static std::string static_name();
 
-    const std::forward_list<std::string>& dependencies() const final override;
-    void expand(const expansion_context& ec, schema::object& o)
-    const final override;
+public:
+    std::string name() const override;
+
+    const std::forward_list<std::string>& dependencies() const override;
+
+    void setup(expansion_context& ec) override;
+
+    void expand(const sml::qname& qn, const schema::scope_types& st,
+        schema::object& o) const override;
 };
 
 } } }

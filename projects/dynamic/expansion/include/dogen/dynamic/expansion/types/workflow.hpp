@@ -25,8 +25,9 @@
 #pragma once
 #endif
 
-#include <memory>
 #include <list>
+#include <memory>
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -49,13 +50,6 @@ public:
 
 private:
     /**
-     * @brief Returns the root module of the model.
-     *
-     * @pre there must exacly one root module.
-     */
-    sml::module obtain_root_module(const sml::model& m) const;
-
-    /**
      * @brief Ensures the workflow is in a valid state.
      */
     void validate() const;
@@ -68,6 +62,7 @@ public:
      * @param m model one wishes to expand.
      */
     sml::model execute(
+        const config::cpp_options& options,
         const std::list<schema::field_definition>& fds,
         const sml::model& m) const;
 

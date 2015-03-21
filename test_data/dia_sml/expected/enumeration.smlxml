@@ -110,7 +110,7 @@
 						<simple_name>shape_types</simple_name>
 					</item>
 				</members>
-				<type>3</type>
+				<type>4</type>
 			</second>
 		</item>
 		<item>
@@ -204,7 +204,7 @@
 						<simple_name>a_class</simple_name>
 					</item>
 				</members>
-				<type>2</type>
+				<type>3</type>
 			</second>
 		</item>
 	</modules>

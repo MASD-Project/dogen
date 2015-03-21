@@ -47,18 +47,16 @@ public:
     /**
      * @brief Registers a expander.
      */
-    void register_expander(boost::shared_ptr<const expander_interface> f);
+    void register_expander(boost::shared_ptr<expander_interface> f);
 
     /**
      * @brief Returns all registered expanders.
      */
-    const std::forward_list<boost::shared_ptr<const expander_interface> >&
+    const std::forward_list<boost::shared_ptr<expander_interface> >&
         expanders() const;
 
 private:
-    std::forward_list<
-        boost::shared_ptr<const expander_interface>
-        > expanders_;
+    std::forward_list<boost::shared_ptr<expander_interface> > expanders_;
 };
 
 } } }

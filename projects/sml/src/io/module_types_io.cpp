@@ -39,6 +39,9 @@ std::ostream& operator<<(std::ostream& s, const module_types& v) {
     case module_types::model:
         attr = "\"model\"";
         break;
+    case module_types::root_model:
+        attr = "\"root_model\"";
+        break;
     case module_types::regular:
         attr = "\"regular\"";
         break;

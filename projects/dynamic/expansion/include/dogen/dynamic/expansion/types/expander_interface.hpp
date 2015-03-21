@@ -27,7 +27,9 @@
 
 #include <string>
 #include <forward_list>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 
 namespace dogen {
@@ -56,10 +58,15 @@ public:
     virtual const std::forward_list<std::string>& dependencies() const = 0;
 
     /**
+     * @brief Sets up the expander. This method is called only once.
+     */
+    virtual void setup(expansion_context& ec) = 0;
+
+    /**
      * @brief Perform the expansion.
      */
-    virtual void
-    expand(const expansion_context& ec, schema::object& o) const = 0;
+    virtual void expand(const sml::qname& qn, const schema::scope_types& st,
+        schema::object& o) const = 0;
 };
 
 } } }

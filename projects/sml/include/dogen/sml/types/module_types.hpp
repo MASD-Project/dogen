@@ -35,7 +35,8 @@ enum class module_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     global = 1, ///< The module represents the global space.
     model = 2, ///< The module represents the model as a container of types.
-    regular = 3 ///< The module is a regular module.
+    root_model = 3, ///< The module represents the model as a container of types, and the model is the target model.
+    regular = 4 ///< The module is a regular module.
 };
 
 } }

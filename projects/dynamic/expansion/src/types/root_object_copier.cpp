@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
 #include "dogen/dynamic/expansion/types/root_object_copier.hpp"
 
@@ -27,19 +28,27 @@ namespace expansion {
 
 root_object_copier::~root_object_copier() noexcept { }
 
-std::string root_object_copier::name() const {
+std::string root_object_copier::static_name() {
     static std::string name("root_object_copier");
     return name;
 }
 
-const std::forward_list<std::string>&
-root_object_copier::dependencies() const {
-    static std::forward_list<std::string> r { "default_value_expander" };
+std::string root_object_copier::name() const {
+    return static_name();
+}
+
+const std::forward_list<std::string>& root_object_copier::dependencies() const {
+    static std::forward_list<std::string> r {
+        default_value_expander::static_name()
+    };
     return r;
 }
 
-void root_object_copier::
-expand(const expansion_context& /*ec*/, schema::object& /*o*/) const {
+void root_object_copier::setup(expansion_context& /*ec*/) {
+}
+
+void root_object_copier::expand(const sml::qname& /*qn*/,
+    const schema::scope_types& /*st*/, schema::object& /*o*/) const {
 }
 
 } } }

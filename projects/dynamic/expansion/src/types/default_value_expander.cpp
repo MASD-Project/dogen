@@ -19,6 +19,7 @@
  *
  */
 #include <string>
+#include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
 
 namespace dogen {
@@ -27,19 +28,26 @@ namespace expansion {
 
 default_value_expander::~default_value_expander() noexcept { }
 
-std::string default_value_expander::name() const {
+std::string default_value_expander::static_name() {
     static std::string name("default_value_expander");
     return name;
 }
 
-const std::forward_list<std::string>&
-default_value_expander::dependencies() const {
-    static std::forward_list<std::string> empty;
-    return empty;
+std::string default_value_expander::name() const {
+    return static_name();
 }
 
-void default_value_expander::
-expand(const expansion_context& /*ec*/, schema::object& /*o*/) const {
+const std::forward_list<std::string>&
+default_value_expander::dependencies() const {
+    static std::forward_list<std::string> r { options_copier::static_name() };
+    return r;
+}
+
+void default_value_expander::setup(expansion_context& /*ec*/) {
+}
+
+void default_value_expander::expand(const sml::qname& /*qn*/,
+    const schema::scope_types& /*st*/, schema::object& /*o*/) const {
 }
 
 } } }

@@ -255,7 +255,7 @@ expand_model_activity(const sml::model& merged_model) const {
     const auto& fds(rg.field_definitions());
 
     dynamic::expansion::workflow w;
-    const auto r(w.execute(fds, merged_model));
+    const auto r(w.execute(knitting_options_.cpp(), fds, merged_model));
     BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
     return r;
 }

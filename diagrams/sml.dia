@@ -13343,7 +13343,7 @@ parenting.#</dia:string>
         <dia:point val="7,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,84.95;13.7875,90.25"/>
+        <dia:rectangle val="6.95,84.95;13.7875,91.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="7,85"/>
@@ -13352,7 +13352,7 @@ parenting.#</dia:string>
         <dia:real val="6.7374999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#module_types#</dia:string>
@@ -13490,6 +13490,29 @@ parenting.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#root_model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#The module represents the model as a container of types, and the model is the target model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#regular#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -13559,7 +13582,7 @@ parenting.#</dia:string>
         <dia:point val="23.255,74.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.3188,73.65;24.005,85.8"/>
+        <dia:rectangle val="10.3187,73.65;24.005,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

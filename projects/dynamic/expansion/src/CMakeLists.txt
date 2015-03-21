@@ -24,8 +24,9 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(dynamic_expansion STATIC ${all_files})
 target_link_libraries(dynamic_expansion
-    dynamic_schema
     utility
+    config
+    dynamic_schema
     sml
     ${Boost_LIBRARIES})
 
