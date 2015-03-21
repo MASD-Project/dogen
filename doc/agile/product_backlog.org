@@ -769,11 +769,13 @@ has been done.
   to dispatch it to the correct type. This may be the right solution
   (to create such a base class).
 - population of model references should be distinct step in workflow,
-  after transformation (=update_model_references=).
+  after transformation (=update_model_references=). This could be done
+  in SML.
 - post-processing of leaves should have its own step in workflow. See
-  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket.
+  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. In fact, one could even argue that the
+  post-processing of leaves could be done in the SML workflow.
 - similar with original parent name. In effect all of the relationship
-  population seems like a separate step.
+  population seems like a separate step. This could be done in SML.
 - actually the right thing to do may even be to take away dispatching
   from the transformer and have specific methods to call from the
   outside world: transform large package, etc. These return the
