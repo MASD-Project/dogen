@@ -603,13 +603,6 @@ following error:
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
 
-*** Determining the model module should be in SML                     :story:
-
-At present we have a number of methods looking for the model
-module. However, =merger= already knows who the "main" model module
-is. We need to either provide a method to find it in SML or a property
-in model to record it.
-
 *** Handling missing default facet settings                           :story:
 
 At present we are just logging a warning when the user supplies

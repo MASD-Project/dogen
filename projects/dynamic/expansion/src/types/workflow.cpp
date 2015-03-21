@@ -73,7 +73,10 @@ private:
     }
 
 public:
-    void operator()(dogen::sml::object& o) { expand(o); }
+    void operator()(dogen::sml::object& o) {
+        expand(o);
+        // FIXME: expand every property and operation
+    }
     void operator()(dogen::sml::enumeration& e) { expand(e); }
     void operator()(dogen::sml::primitive& p) { expand(p); }
     void operator()(dogen::sml::module& m) { expand(m); }
