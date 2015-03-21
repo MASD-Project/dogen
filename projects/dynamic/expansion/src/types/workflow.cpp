@@ -153,7 +153,9 @@ sml::model workflow::execute(
     validate();
 
     const auto rm(obtain_root_module(m));
-    const expansion_context ec(m, rm.extensions(), fds);
+    expansion_context ec;
+    ec.field_definitions(fds);
+    ec.model(m);
 
     sml::model r(m);
     composite_expander ce(ec, registrar().expanders());

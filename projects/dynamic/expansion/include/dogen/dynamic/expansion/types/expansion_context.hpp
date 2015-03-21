@@ -27,9 +27,9 @@
 
 #include <algorithm>
 #include <list>
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/dynamic/expansion/serialization/expansion_context_fwd_ser.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
-#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -46,8 +46,8 @@ public:
 public:
     expansion_context(
         const dogen::sml::model& model,
-        const dogen::dynamic::schema::object& root_module,
-        const std::list<dogen::dynamic::schema::field_definition>& field_definitions);
+        const std::list<dogen::dynamic::schema::field_definition>& field_definitions,
+        const dogen::config::cpp_options& cpp_options);
 
 private:
     template<typename Archive>
@@ -62,15 +62,22 @@ public:
     void model(const dogen::sml::model& v);
     void model(const dogen::sml::model&& v);
 
-    const dogen::dynamic::schema::object& root_module() const;
-    dogen::dynamic::schema::object& root_module();
-    void root_module(const dogen::dynamic::schema::object& v);
-    void root_module(const dogen::dynamic::schema::object&& v);
-
     const std::list<dogen::dynamic::schema::field_definition>& field_definitions() const;
     std::list<dogen::dynamic::schema::field_definition>& field_definitions();
     void field_definitions(const std::list<dogen::dynamic::schema::field_definition>& v);
     void field_definitions(const std::list<dogen::dynamic::schema::field_definition>&& v);
+
+    /**
+     * @brief Command-line supplied options for the c++ model.
+     *
+     * Note: this is here as a bridge to the legacy approach.
+     */
+    /**@{*/
+    const dogen::config::cpp_options& cpp_options() const;
+    dogen::config::cpp_options& cpp_options();
+    void cpp_options(const dogen::config::cpp_options& v);
+    void cpp_options(const dogen::config::cpp_options&& v);
+    /**@}*/
 
 public:
     bool operator==(const expansion_context& rhs) const;
@@ -84,8 +91,8 @@ public:
 
 private:
     dogen::sml::model model_;
-    dogen::dynamic::schema::object root_module_;
     std::list<dogen::dynamic::schema::field_definition> field_definitions_;
+    dogen::config::cpp_options cpp_options_;
 };
 
 } } }

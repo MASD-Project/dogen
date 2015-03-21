@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/test_data/cpp_options_td.hpp"
 #include "dogen/dynamic/expansion/test_data/expansion_context_td.hpp"
 #include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 
 namespace {
@@ -28,11 +28,6 @@ namespace {
 dogen::sml::model
 create_dogen_sml_model(const unsigned int position) {
     return dogen::sml::model_generator::create(position);
-}
-
-dogen::dynamic::schema::object
-create_dogen_dynamic_schema_object(const unsigned int position) {
-    return dogen::dynamic::schema::object_generator::create(position);
 }
 
 dogen::dynamic::schema::field_definition
@@ -48,6 +43,11 @@ std::list<dogen::dynamic::schema::field_definition> create_std_list_dogen_dynami
     return r;
 }
 
+dogen::config::cpp_options
+create_dogen_config_cpp_options(const unsigned int position) {
+    return dogen::config::cpp_options_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -59,8 +59,8 @@ expansion_context_generator::expansion_context_generator() : position_(0) { }
 void expansion_context_generator::
 populate(const unsigned int position, result_type& v) {
     v.model(create_dogen_sml_model(position + 0));
-    v.root_module(create_dogen_dynamic_schema_object(position + 1));
-    v.field_definitions(create_std_list_dogen_dynamic_schema_field_definition(position + 2));
+    v.field_definitions(create_std_list_dogen_dynamic_schema_field_definition(position + 1));
+    v.cpp_options(create_dogen_config_cpp_options(position + 2));
 }
 
 expansion_context_generator::result_type

@@ -18,16 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/default_value_expander.hpp"
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-#include "dogen/dynamic/expansion/types/expansion.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/expansion/types/grapher.hpp"
-#include "dogen/dynamic/expansion/types/graphing_error.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/options_copier.hpp"
-#include "dogen/dynamic/expansion/types/registrar.hpp"
-#include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/root_object_copier.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow_error.hpp"
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_OPTIONS_COPIER_FWD_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_OPTIONS_COPIER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace dynamic {
+namespace expansion {
+
+class options_copier;
+
+} } }
+
+#endif

@@ -26,23 +26,23 @@ namespace expansion {
 
 expansion_context::expansion_context(
     const dogen::sml::model& model,
-    const dogen::dynamic::schema::object& root_module,
-    const std::list<dogen::dynamic::schema::field_definition>& field_definitions)
+    const std::list<dogen::dynamic::schema::field_definition>& field_definitions,
+    const dogen::config::cpp_options& cpp_options)
     : model_(model),
-      root_module_(root_module),
-      field_definitions_(field_definitions) { }
+      field_definitions_(field_definitions),
+      cpp_options_(cpp_options) { }
 
 void expansion_context::swap(expansion_context& other) noexcept {
     using std::swap;
     swap(model_, other.model_);
-    swap(root_module_, other.root_module_);
     swap(field_definitions_, other.field_definitions_);
+    swap(cpp_options_, other.cpp_options_);
 }
 
 bool expansion_context::operator==(const expansion_context& rhs) const {
     return model_ == rhs.model_ &&
-        root_module_ == rhs.root_module_ &&
-        field_definitions_ == rhs.field_definitions_;
+        field_definitions_ == rhs.field_definitions_ &&
+        cpp_options_ == rhs.cpp_options_;
 }
 
 expansion_context& expansion_context::operator=(expansion_context other) {
@@ -67,22 +67,6 @@ void expansion_context::model(const dogen::sml::model&& v) {
     model_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& expansion_context::root_module() const {
-    return root_module_;
-}
-
-dogen::dynamic::schema::object& expansion_context::root_module() {
-    return root_module_;
-}
-
-void expansion_context::root_module(const dogen::dynamic::schema::object& v) {
-    root_module_ = v;
-}
-
-void expansion_context::root_module(const dogen::dynamic::schema::object&& v) {
-    root_module_ = std::move(v);
-}
-
 const std::list<dogen::dynamic::schema::field_definition>& expansion_context::field_definitions() const {
     return field_definitions_;
 }
@@ -97,6 +81,22 @@ void expansion_context::field_definitions(const std::list<dogen::dynamic::schema
 
 void expansion_context::field_definitions(const std::list<dogen::dynamic::schema::field_definition>&& v) {
     field_definitions_ = std::move(v);
+}
+
+const dogen::config::cpp_options& expansion_context::cpp_options() const {
+    return cpp_options_;
+}
+
+dogen::config::cpp_options& expansion_context::cpp_options() {
+    return cpp_options_;
+}
+
+void expansion_context::cpp_options(const dogen::config::cpp_options& v) {
+    cpp_options_ = v;
+}
+
+void expansion_context::cpp_options(const dogen::config::cpp_options&& v) {
+    cpp_options_ = std::move(v);
 }
 
 } } }

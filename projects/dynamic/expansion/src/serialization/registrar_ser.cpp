@@ -26,6 +26,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/dynamic/schema/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 
@@ -35,6 +36,7 @@ namespace expansion {
 
 template<typename Archive>
 void register_types(Archive& ar) {
+    dogen::config::register_types(ar);
     dogen::sml::register_types(ar);
     dogen::dynamic::schema::register_types(ar);
 }

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/config/hash/cpp_options_hash.hpp"
 #include "dogen/dynamic/expansion/hash/expansion_context_hash.hpp"
 #include "dogen/dynamic/schema/hash/field_definition_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 
 namespace {
@@ -50,8 +50,8 @@ std::size_t expansion_context_hasher::hash(const expansion_context&v) {
     std::size_t seed(0);
 
     combine(seed, v.model());
-    combine(seed, v.root_module());
     combine(seed, hash_std_list_dogen_dynamic_schema_field_definition(v.field_definitions()));
+    combine(seed, v.cpp_options());
 
     return seed;
 }

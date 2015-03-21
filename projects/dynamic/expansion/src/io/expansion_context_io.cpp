@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
+#include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/dynamic/expansion/io/expansion_context_io.hpp"
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
-#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
 
 namespace std {
@@ -46,8 +46,8 @@ std::ostream& operator<<(std::ostream& s, const expansion_context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::expansion::expansion_context\"" << ", "
       << "\"model\": " << v.model() << ", "
-      << "\"root_module\": " << v.root_module() << ", "
-      << "\"field_definitions\": " << v.field_definitions()
+      << "\"field_definitions\": " << v.field_definitions() << ", "
+      << "\"cpp_options\": " << v.cpp_options()
       << " }";
     return(s);
 }
