@@ -51,10 +51,23 @@ public:
 
 private:
     /**
+     * @brief Creates a qualified name for the module.
+     */
+    sml::qname create_qualified_name_for_model(const std::string& model_name,
+        const std::string& external_module_path) const;
+
+    /**
+     * @brief Creates a module representing the model.
+     */
+    sml::module create_module_for_model(const sml::qname& qn,
+        const bool is_target) const;
+
+private:
+    /**
      * @brief Reset context and set it up with arguments supplied.
      */
     void initialise_context_activity(const std::string& model_name,
-        const std::string& external_module_path, bool is_target);
+        const std::string& external_module_path, const bool is_target);
 
     /**
      * @brief Setup the DAG of processed objects.

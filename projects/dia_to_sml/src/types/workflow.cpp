@@ -45,31 +45,48 @@ namespace dia_to_sml {
 workflow::workflow(const dynamic::schema::workflow& w)
     : schema_workflow_(w) { }
 
+sml::qname
+workflow::create_qualified_name_for_model(const std::string& model_name,
+    const std::string& external_module_path) const {
+
+    sml::qname r;
+    const auto epp(identifier_parser::parse_scoped_name(external_module_path));
+    r.external_module_path(epp);
+    r.model_name(model_name);
+    r.simple_name(model_name);
+
+    return r;
+}
+
+sml::module workflow::create_module_for_model(const sml::qname& qn,
+    const bool is_target) const {
+
+    sml::module r;
+    r.name(qn);
+    r.origin_type(sml::origin_types::user);
+    r.type(sml::module_types::model);
+    r.generation_type(is_target ?
+        sml::generation_types::full_generation :
+        sml::generation_types::no_generation);
+    return r;
+}
+
 void workflow::initialise_context_activity(const std::string& model_name,
     const std::string& external_module_path, bool is_target) {
 
     context_ = context();
+    sml::model& m(context_.model());
 
-    const auto epp(identifier_parser::parse_scoped_name(external_module_path));
-    context_.model().name().external_module_path(epp);
-    context_.model().name().model_name(model_name);
-    context_.model().name().simple_name(model_name);
-    context_.model().origin_type(sml::origin_types::user);
-    context_.model().is_target(is_target);
+    const auto& epp(external_module_path);
+    m.name(create_qualified_name_for_model(model_name, epp));
+    BOOST_LOG_SEV(lg, debug) << "Target model name: "
+                             << sml::string_converter::convert(m.name());
 
-    BOOST_LOG_SEV(lg, debug)
-        << "Target model name: "
-        << sml::string_converter::convert(context_.model().name());
-
-    sml::module m;
-    m.name(context_.model().name());
     m.origin_type(sml::origin_types::user);
-    m.type(sml::module_types::model);
-    m.generation_type(context_.model().is_target() ?
-        sml::generation_types::full_generation :
-        sml::generation_types::no_generation);
+    m.is_target(is_target);
 
-    context_.model().modules().insert(std::make_pair(m.name(), m));
+    const auto mm(create_module_for_model(m.name(), is_target));
+    m.modules().insert(std::make_pair(mm.name(), mm));
 }
 
 graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {
