@@ -641,8 +641,11 @@ true. For cases like comment it would make life easier.
 The model should be just dumb container of types. We have a few legacy
 properties left behind from the days where the model was also used in
 the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. This is required in order
-to simplify the graph in enricher.
+(=Element= etc) and deal with the fall out. Unnecessary properties:
+documentation, containing module, extensions.
+
+We need to keep the name because it is now used to locate the model's
+module.
 
 *** Add support for formatter and facet dependencies                  :story:
 
