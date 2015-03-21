@@ -44,7 +44,7 @@ const std::forward_list<std::string>& root_object_copier::dependencies() const {
     return r;
 }
 
-void root_object_copier::setup(expansion_context& /*ec*/) {
+void root_object_copier::setup(const expansion_context& /*ec*/) {
 }
 
 void root_object_copier::expand(const sml::qname& /*qn*/,

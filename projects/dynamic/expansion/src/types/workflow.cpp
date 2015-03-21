@@ -24,6 +24,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"
@@ -56,7 +57,8 @@ private:
         using sml::string_converter;
         BOOST_LOG_SEV(lg, debug) << "Performing expansion: '"
                                  << expander_.name() << "' to '"
-                                 << string_converter::convert(ie.name());
+                                 << string_converter::convert(ie.name())
+                                 << " at scope: " << st;
 
         BOOST_LOG_SEV(lg, debug) << "Before expansion: " << ie.extensions();
         expander_.expand(ie.name(), st, ie.extensions());

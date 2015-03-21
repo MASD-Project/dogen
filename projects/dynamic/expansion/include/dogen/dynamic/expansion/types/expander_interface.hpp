@@ -60,7 +60,7 @@ public:
     /**
      * @brief Sets up the expander. This method is called only once.
      */
-    virtual void setup(expansion_context& ec) = 0;
+    virtual void setup(const expansion_context& ec) = 0;
 
     /**
      * @brief Perform the expansion.

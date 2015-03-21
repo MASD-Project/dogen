@@ -87,4 +87,8 @@ field_instance field_instance_factory::make(const field_definition& fd,
     return r;
 }
 
+field_instance field_instance_factory::make(const field_definition& fd) const {
+    return field_instance(fd.default_value());
+}
+
 } } }

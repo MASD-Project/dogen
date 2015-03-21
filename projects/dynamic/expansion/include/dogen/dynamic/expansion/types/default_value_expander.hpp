@@ -25,16 +25,19 @@
 #pragma once
 #endif
 
+#include <list>
+#include <unordered_map>
+#include "dogen/dynamic/schema/types/scope_types.hpp"
+#include "dogen/dynamic/schema/hash/scope_types_hash.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
+#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
 class default_value_expander final : public expander_interface {
-public:
-    ~default_value_expander() noexcept;
-
 public:
     /**
      * @brief Name property for other expanders that need to declare
@@ -43,14 +46,34 @@ public:
     static std::string static_name();
 
 public:
+    default_value_expander();
+    ~default_value_expander() noexcept;
+
+private:
+    /**
+     * @brief Searches for the scope; if it exists, creates field
+     * instances for all of its field definitions.
+     *
+     * @return Number of fields created.
+     */
+    unsigned int create_field_instances(const schema::scope_types st,
+        schema::object& o) const;
+
+public:
     std::string name() const override;
 
     const std::forward_list<std::string>& dependencies() const override;
 
-    void setup(expansion_context& ec) override;
+    void setup(const expansion_context& ec) override;
 
     void expand(const sml::qname& qn, const schema::scope_types& st,
         schema::object& o) const override;
+
+private:
+    const schema::field_instance_factory factory_;
+    std::unordered_map<
+        schema::scope_types, std::list<schema::field_definition>
+        > fields_by_scope_;
 };
 
 } } }

@@ -64,6 +64,13 @@ public:
     field_instance make(const field_definition& fd,
         const std::list<std::string>& v) const;
 
+    /**
+     * @brief Creates a field instance from the default value.
+     *
+     * @pre fd must have a default value.
+     */
+    field_instance make(const field_definition& fd) const;
+
 private:
     const value_factory value_factory_;
 };

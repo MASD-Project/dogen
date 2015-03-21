@@ -33,9 +33,6 @@ namespace expansion {
 
 class options_copier final : public expander_interface {
 public:
-    ~options_copier() noexcept;
-
-public:
     /**
      * @brief Name property for other expanders that need to declare
      * it as a dependency.
@@ -43,11 +40,14 @@ public:
     static std::string static_name();
 
 public:
+    ~options_copier() noexcept;
+
+public:
     std::string name() const override;
 
     const std::forward_list<std::string>& dependencies() const override;
 
-    void setup(expansion_context& ec) override;
+    void setup(const expansion_context& ec) override;
 
     void expand(const sml::qname& qn, const schema::scope_types& st,
         schema::object& o) const override;

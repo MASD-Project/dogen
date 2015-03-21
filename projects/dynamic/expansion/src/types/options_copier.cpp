@@ -42,7 +42,7 @@ options_copier::dependencies() const {
     return r;
 }
 
-void options_copier::setup(expansion_context& /*ec*/) {
+void options_copier::setup(const expansion_context& /*ec*/) {
 }
 
 void options_copier::expand(const sml::qname& /*qn*/,

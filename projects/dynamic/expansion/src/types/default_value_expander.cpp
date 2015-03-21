@@ -19,18 +19,46 @@
  *
  */
 #include <string>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
+
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dynamic.expansion.default_value_expander"));
+
+}
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-default_value_expander::~default_value_expander() noexcept { }
-
 std::string default_value_expander::static_name() {
     static std::string name("default_value_expander");
     return name;
+}
+
+default_value_expander::default_value_expander() : factory_() { }
+default_value_expander::~default_value_expander() noexcept { }
+
+unsigned int default_value_expander::create_field_instances(
+    const schema::scope_types st, schema::object& o) const {
+    auto i(fields_by_scope_.find(st));
+    if (i == fields_by_scope_.end())
+        return 0;
+
+    unsigned int r(0);
+    for (const auto& fd : i->second) {
+        const auto n(fd.name().qualified());
+
+        // note: if there is a field with this name, we want the
+        // insert to fail. that is a valid scenario.
+        o.fields().insert(std::make_pair(n, factory_.make(fd)));
+        ++r;
+    }
+    return r;
 }
 
 std::string default_value_expander::name() const {
@@ -43,11 +71,22 @@ default_value_expander::dependencies() const {
     return r;
 }
 
-void default_value_expander::setup(expansion_context& /*ec*/) {
+void default_value_expander::setup(const expansion_context& ec) {
+    for (const auto& fd : ec.field_definitions()) {
+        if (!fd.default_value())
+            continue;
+
+        fields_by_scope_[fd.scope()].push_back(fd);
+    }
 }
 
 void default_value_expander::expand(const sml::qname& /*qn*/,
-    const schema::scope_types& /*st*/, schema::object& /*o*/) const {
+    const schema::scope_types& st, schema::object& o) const {
+
+    unsigned int created = create_field_instances(schema::scope_types::any, o);
+    created += create_field_instances(st, o);
+
+    BOOST_LOG_SEV(lg, debug) << "Total fields created: " << created;
 }
 
 } } }
