@@ -4540,6 +4540,32 @@ template types, this seems like an ok limitation.
 
 ** Tooling, infrastructure, blog posts, etc.
 
+*** Log analysis tool                                                 :story:
+
+We should create a log analyser tool (=logan=?), as follows:
+
+- separate repo.
+- use a dogen model to describe the tool's domain. Very simple domain.
+- use the dogen version line to determine the application, the version
+  and the run time. All other entries are foreign-keyed against this
+  entry.
+- use JSON object markers to extract JSON objects from the log line
+  into a postgres JSON field.
+- use ODB to create the database schema.
+- create a simple parser that is hard-coded to the log lines in dogen,
+  with perhaps an addition for threads.
+- when profiling is present, have a way to split profiling information
+  from the rest.
+- create some simple stored procs that compare two runs from a
+  performance perspective.
+- create a stored proc to list all errors and all warnings, with
+  perhaps some lines around it.
+- create a stored proc that does a text search using postgres text
+  search facilities.
+- we need to figure out how splunk decides to start loading the log
+  files (only after roll, incrementally - and if so, how does it keep
+  track, etc).
+
 *** Use clang format to format the code base                          :story:
 
 It seems clang-format is being used by quite a lot of people to save
