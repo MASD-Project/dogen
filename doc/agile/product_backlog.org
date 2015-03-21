@@ -1262,7 +1262,8 @@ report. This would be useful so that users can compare timings between
 releases.
 
 We should also be able to grep the log for all timings and save them
-down to get trends.
+down to get trends. We should add a log severity for this, perhaps
+PROFILE. Not sure what priority it would be at.
 
 *** Consider renaming SML                                             :story:
 
