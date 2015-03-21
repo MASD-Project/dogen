@@ -24,6 +24,44 @@ current setup. We need something akin to this:
 
 - [[http://www.boost.org/doc/libs/1_57_0/libs/log/doc/html/log/detailed/expressions.html#log.detailed.expressions.predicates.channel_severity_filter][Severity threshold per channel filter]]
 
+This could be implemented as follows:
+
+Create a log config file (say =logging.ini=) that contains a list of
+strings and valid severities:
+
+: root = fine_debug
+: cpp = debug
+: cpp.settings = info
+
+and so on. When the log is being initialised, a sorted list with these
+is loaded into memory. It is sorted by channel name. Note that =root=
+is a special value and is always at the bottom of the list (or even
+removed from the list altogether and handled specially). If root was
+not defined in the config file, we set it to a default. Note also that
+we convert the severity strings into enums, with adequate validation.
+
+Once the list is setup, we then loop through all the channels that
+have been defined. There is an assumption that all channels were
+defined statically and thus have already been defined by the time we
+initialise the log. This needs to be verified.
+
+For each channel, we loop through all values from the file - other
+than root - applying them as a regex against the channel name. Note
+that we sorted them so the closest match should be last. For each
+value that matches, we set the severity accordingly. If no matches are
+found, we apply the root setting.
+
+Some other tidbits:
+
+- we can now remove the =verbose= option, or perhaps it should be used
+  as a short-hand for the log configuration? if so we need a rule that
+  determines which one to use when both are present.
+- we could monitor the config file for changes, although for dogen
+  this is overkill.
+- if sorting proves too hard we could just say that the regexes are
+  applied in the order provided by the user, with the exception of
+  root.
+
 *** Move some of the more verbose logging to fine debug               :story:
 
 We have a category for fine debug logging (=FINE_DEBUG=) but we are
