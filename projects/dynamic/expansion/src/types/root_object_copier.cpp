@@ -26,12 +26,12 @@ namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-root_object_copier::~root_object_copier() noexcept { }
-
 std::string root_object_copier::static_name() {
     static std::string name("root_object_copier");
     return name;
 }
+
+root_object_copier::~root_object_copier() noexcept { }
 
 std::string root_object_copier::name() const {
     return static_name();

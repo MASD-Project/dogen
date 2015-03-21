@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/config/types/cpp_options.hpp"
+#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
 namespace dogen {
@@ -40,7 +42,20 @@ public:
     static std::string static_name();
 
 public:
+    options_copier();
     ~options_copier() noexcept;
+
+private:
+    /**
+     * @brief Creates a field in the dynamic object with the supplied
+     * name and value.
+     */
+    /**@{*/
+    void make_field(const std::string& n, const bool v,
+        schema::object& o) const;
+    void make_field(const std::string& n, const std::string& v,
+        schema::object& o) const;
+    /**@}*/
 
 public:
     std::string name() const override;
@@ -51,6 +66,11 @@ public:
 
     void expand(const sml::qname& qn, const schema::scope_types& st,
         schema::object& o) const override;
+
+private:
+    const schema::field_instance_factory factory_;
+
+    config::cpp_options options_;
 };
 
 } } }

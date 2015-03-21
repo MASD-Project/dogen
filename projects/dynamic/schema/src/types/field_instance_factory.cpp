@@ -34,6 +34,9 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.schema.field_instance_factory"));
 
+const std::string true_value("true");
+const std::string false_value("false");
+
 const std::string value_type_not_supported(
     "Value type is not supported by factory: ");
 const std::string expected_at_most_one_element(
@@ -89,6 +92,24 @@ field_instance field_instance_factory::make(const field_definition& fd,
 
 field_instance field_instance_factory::make(const field_definition& fd) const {
     return field_instance(fd.default_value());
+}
+
+field_instance field_instance_factory::make_text(const std::string& v) const {
+    return field_instance(value_factory_.make_text(v));
+}
+
+field_instance field_instance_factory::
+make_text_collection(const std::list<std::string>& v) const {
+    return field_instance(value_factory_.make_text_collection(v));
+}
+
+field_instance field_instance_factory::
+make_boolean(const std::string& v) const {
+    return field_instance(value_factory_.make_boolean(v));
+}
+
+field_instance field_instance_factory::make_boolean(const bool v) const {
+    return field_instance(value_factory_.make_boolean(v));
 }
 
 } } }

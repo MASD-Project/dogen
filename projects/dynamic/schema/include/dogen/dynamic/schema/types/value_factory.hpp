@@ -68,7 +68,10 @@ public:
     /**
      * @brief Creates a stand alone boolean value.
      */
+    /**@{*/
     boost::shared_ptr<value> make_boolean(const std::string& v) const;
+    boost::shared_ptr<value> make_boolean(const bool v) const;
+    /**@}*/
 };
 
 } } }

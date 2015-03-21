@@ -71,6 +71,25 @@ public:
      */
     field_instance make(const field_definition& fd) const;
 
+public:
+    /**
+     * @brief Makes a field instance with a text value.
+     */
+    field_instance make_text(const std::string& v) const;
+
+    /**
+     * @brief Makes a field instance with a collection of text values.
+     */
+    field_instance make_text_collection(const std::list<std::string>& v) const;
+
+    /**
+     * @brief Makes a field instance with a boolean value.
+     */
+    /**@{*/
+    field_instance make_boolean(const std::string& v) const;
+    field_instance make_boolean(const bool v) const;
+    /**@}*/
+
 private:
     const value_factory value_factory_;
 };

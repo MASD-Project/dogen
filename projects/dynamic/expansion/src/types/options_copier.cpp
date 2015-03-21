@@ -19,17 +19,40 @@
  *
  */
 #include <string>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dynamic.expansion.options_copier"));
+
+const std::string split_project("cpp.split_project");
+
+}
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-options_copier::~options_copier() noexcept { }
-
 std::string options_copier::static_name() {
     static std::string name("options_copier");
     return name;
+}
+
+options_copier::options_copier() : factory_() { }
+options_copier::~options_copier() noexcept { }
+
+void options_copier::make_field(const std::string& n, const bool v,
+    schema::object& o) const {
+    // ignoring result of insert by design.
+    o.fields().insert(std::make_pair(n, factory_.make_boolean(v)));
+}
+
+void options_copier::make_field(const std::string& n, const std::string& v,
+    schema::object& o) const {
+    // ignoring result of insert by design.
+    o.fields().insert(std::make_pair(n, factory_.make_text(v)));
 }
 
 std::string options_copier::name() const {
@@ -42,11 +65,19 @@ options_copier::dependencies() const {
     return r;
 }
 
-void options_copier::setup(const expansion_context& /*ec*/) {
+void options_copier::setup(const expansion_context& ec) {
+    options_ = ec.cpp_options();
 }
 
 void options_copier::expand(const sml::qname& /*qn*/,
-    const schema::scope_types& /*st*/, schema::object& /*o*/) const {
+    const schema::scope_types& st, schema::object& o) const {
+
+    if (st != schema::scope_types::root_module)
+        return;
+
+    make_field(split_project, options_.split_project(), o);
+
+    BOOST_LOG_SEV(lg, debug) << "Copied relevant options.";
 }
 
 } } }

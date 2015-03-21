@@ -101,4 +101,8 @@ value_factory::make_boolean(const std::string& v) const {
     return boost::make_shared<boolean>(to_bool(v));
 }
 
+boost::shared_ptr<value> value_factory::make_boolean(const bool v) const {
+    return boost::make_shared<boolean>(v);
+}
+
 } } }

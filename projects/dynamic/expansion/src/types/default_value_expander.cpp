@@ -52,9 +52,7 @@ unsigned int default_value_expander::create_field_instances(
     unsigned int r(0);
     for (const auto& fd : i->second) {
         const auto n(fd.name().qualified());
-
-        // note: if there is a field with this name, we want the
-        // insert to fail. that is a valid scenario.
+        // ignoring result of insert by design.
         o.fields().insert(std::make_pair(n, factory_.make(fd)));
         ++r;
     }
