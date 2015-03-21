@@ -69,6 +69,13 @@ not making use of it. There is some rather verbose logging that could
 be moved to it. Go through all the logging and move some to
 =FINE_DEBUG=.
 
+One strategy would be to put in the final object of each workflow as
+=DEBUG= (say the expanded model, etc) but the intermediate steps as
+=FINE_DEBUG=. This mirrors the way we investigate the problem: we
+could check if each sub-system has done it's job correctly, and spot
+the one that didn't; we can then just enable that one sub-system's
+=FINE_DEBUG= (when that is supported).
+
 *** Implement include generation for class header formatter           :story:
 
 Now that we have finished generating the path spec details, we need to
