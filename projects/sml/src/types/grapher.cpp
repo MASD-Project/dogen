@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -94,9 +93,7 @@ public:
         BOOST_LOG_SEV(lg, error) << found_cycle_in_graph
                                  << id << ". Graph as sexp: "
                                  << state_->stream_.str();
-
-        BOOST_THROW_EXCEPTION(graphing_error(found_cycle_in_graph +
-                boost::lexical_cast<std::string>(id)));
+        BOOST_THROW_EXCEPTION(graphing_error(found_cycle_in_graph + id));
     }
 
     const std::string sexp() { return state_->stream_.str(); }

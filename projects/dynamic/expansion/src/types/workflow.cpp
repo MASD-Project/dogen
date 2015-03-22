@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/string_converter.hpp"
@@ -26,7 +27,6 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 #include "dogen/dynamic/expansion/types/workflow.hpp"
@@ -60,6 +60,7 @@ private:
                                  << string_converter::convert(ie.name())
                                  << " at scope: " << st;
 
+        // FIXME: consider logging at fine debug
         BOOST_LOG_SEV(lg, debug) << "Before expansion: " << ie.extensions();
         expander_.expand(ie.name(), st, ie.extensions());
         BOOST_LOG_SEV(lg, debug) << "After expansion: " << ie.extensions();
@@ -94,6 +95,23 @@ private:
     const expander_interface& expander_;
 };
 
+class graph_visitor : public boost::default_dfs_visitor {
+public:
+    graph_visitor(expansion_context& ec) : context_(ec) { }
+
+public:
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        const auto expander(g[u]);
+        expander->setup(context_);
+        dispatcher d(*expander);
+        sml::all_model_items_traversal(context_.model(), d);
+    }
+
+private:
+    expansion_context& context_;
+};
+
 std::shared_ptr<expansion::registrar> workflow::registrar_;
 
 expansion::registrar& workflow::registrar() {
@@ -120,6 +138,28 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }
 
+graph_type workflow::build_expander_graph_activity() const {
+    grapher g;
+    for (auto e : registrar().expanders())
+        g.add(e);
+
+    g.generate();
+    return g.graph();
+}
+
+expansion_context workflow::create_expansion_context_activity(
+    const config::cpp_options& options,
+    const std::list<schema::field_definition>& fds,
+    const sml::model& m) const {
+    return expansion_context(m, fds, options);
+}
+
+void workflow::
+perform_expansion_activity(const graph_type& g,expansion_context& ec) const {
+    graph_visitor v(ec);
+    boost::depth_first_search(g, boost::visitor(v));
+}
+
 sml::model workflow::execute(
     const config::cpp_options& options,
     const std::list<schema::field_definition>& fds,
@@ -128,13 +168,9 @@ sml::model workflow::execute(
                              << sml::string_converter::convert(m.name());
 
     validate();
-
-    expansion_context ec(m, fds, options);
-    for (auto expander : registrar().expanders()) {
-        expander->setup(ec);
-        dispatcher d(*expander);
-        all_model_items_traversal(ec.model(), d);
-    }
+    auto g(build_expander_graph_activity());
+    auto ec(create_expansion_context_activity(options, fds, m));
+    perform_expansion_activity(g, ec);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding model.";
 

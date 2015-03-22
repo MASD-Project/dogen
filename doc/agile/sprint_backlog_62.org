@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-22 Sun 00:17]
+Clock summary at [2015-03-22 Sun 01:58]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *34:08* |       |      |
+| *Total time*                                                             | *35:49* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 34:08 |      |
+| Active                                                                   |         | 35:49 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -38,6 +38,7 @@ Clock summary at [2015-03-22 Sun 00:17]
 | COMPLETED Create a "default values" expander                             |         |       | 2:38 |
 | COMPLETED Create a "copy from options" expander                          |         |       | 0:47 |
 | COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
+| COMPLETED Add a graph to expansion workflow                              |         |       | 1:41 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 #+end:
 
@@ -465,6 +466,19 @@ what makes sense here to copy.
 This operation should execute after defaulting. It should live in
 dynamic.
 
+*** COMPLETED Add a graph to expansion workflow                       :story:
+    CLOSED: [2015-03-22 Sun 01:58]
+    CLOCK: [2015-03-22 Sun 00:17]--[2015-03-22 Sun 01:58] =>  1:41
+
+This simply looks at all the registered operations and their
+dependencies (simply a string with the operation name) and ensures
+that:
+
+- all dependencies are met; and
+- there are no cycles in the graph of dependencies.
+
+The graph is then used to execute the expansions in dependency order.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -535,6 +549,27 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
+*** Expansion must be performed before merging                        :story:
+
+We have placed the expansion after merging. However, this is not quite
+right: it is possible that each model has different settings on their
+root module. For example, one could use different source/include
+directories, extensions, etc for different modules. This means that
+the include paths computed will be different for each model. In order
+for this to work, we must expand each model separately and then merge.
+
+Also, this means that we must perform expansion for all models, even
+those that we are not going to generate or else the includes for those
+types will be wrong. This is unfortunate because it means the merged
+model is very large.
+
+*** Perform expansion of properties and operations                    :story:
+
+At present we are ignoring properties (and operations). This is ok as
+we don't really have a use case for expansion there. However, it would
+be nice if we could just expand them anyway. We just need to make sure
+we don't do things like copying from root object.
+
 *** Add JSON support to dynamic workflow                              :story:
 
 We need to create the required activities in the dynamic schema's
@@ -571,17 +606,6 @@ can make use of these from within the operation/expansion?
 *** Rename name builder to name factory                               :story:
 
 The name builder is just a factory so make the name reflect it.
-
-*** Add an operation graph to expansion                               :story:
-
-This simply looks at all the registered operations and their
-dependencies (simply a string with the operation name) and ensures
-that:
-
-- all dependencies are met; and
-- there are no cycles in the graph of dependencies.
-
-The graph is then used to execute the operations in order.
 
 *** Create a "populate file path" operation                           :story:
 

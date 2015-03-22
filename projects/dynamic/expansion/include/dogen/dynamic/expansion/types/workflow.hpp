@@ -31,7 +31,9 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/expansion/types/grapher.hpp"
 #include "dogen/dynamic/expansion/types/registrar.hpp"
+#include "dogen/dynamic/expansion/types/expansion_context.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -53,6 +55,26 @@ private:
      * @brief Ensures the workflow is in a valid state.
      */
     void validate() const;
+
+private:
+    /**
+     * @brief Creates a graph of expanders.
+     */
+    graph_type build_expander_graph_activity() const;
+
+    /**
+     * @brief Creates the expansion context.
+     */
+    expansion_context create_expansion_context_activity(
+        const config::cpp_options& options,
+        const std::list<schema::field_definition>& fds,
+        const sml::model& m) const;
+
+    /**
+     * @brief Performs the expansion.
+     */
+    void perform_expansion_activity(const graph_type& g,
+        expansion_context& ec) const;
 
 public:
     /**
