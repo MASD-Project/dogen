@@ -18,44 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_ROOT_OBJECT_COPIER_HPP
-#define DOGEN_DYNAMIC_EXPANSION_TYPES_ROOT_OBJECT_COPIER_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_ERROR_FWD_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-class root_object_copier : public expander_interface {
-public:
-    /**
-     * @brief Name property for other expanders that need to declare
-     * it as a dependency.
-     */
-    static std::string static_name();
-
-public:
-    ~root_object_copier() noexcept;
-
-public:
-    std::string name() const final override;
-
-    const std::forward_list<std::string>& dependencies() const final override;
-
-    void setup(const expansion_context& ec) override;
-
-    void expand(const sml::qname& qn, const schema::scope_types& st,
-        schema::object& o) const override;
-
-private:
-    schema::object root_object_;
-};
+class expansion_error;
 
 } } }
 

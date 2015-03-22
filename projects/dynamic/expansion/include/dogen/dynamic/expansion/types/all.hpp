@@ -22,6 +22,7 @@
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 #include "dogen/dynamic/expansion/types/expansion.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
+#include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/dynamic/expansion/types/grapher.hpp"
 #include "dogen/dynamic/expansion/types/graphing_error.hpp"
 #include "dogen/dynamic/expansion/types/initializer.hpp"

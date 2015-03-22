@@ -52,9 +52,10 @@ unsigned int default_value_expander::create_field_instances(
     unsigned int r(0);
     for (const auto& fd : i->second) {
         const auto n(fd.name().qualified());
-        // ignoring result of insert by design.
-        o.fields().insert(std::make_pair(n, factory_.make(fd)));
-        ++r;
+        const auto pair(std::make_pair(n, factory_.make(fd)));
+        const auto inserted(o.fields().insert(pair).second);
+        if (inserted)
+            ++r;
     }
     return r;
 }
@@ -81,10 +82,9 @@ void default_value_expander::setup(const expansion_context& ec) {
 void default_value_expander::expand(const sml::qname& /*qn*/,
     const schema::scope_types& st, schema::object& o) const {
 
-    unsigned int created = create_field_instances(schema::scope_types::any, o);
-    created += create_field_instances(st, o);
-
-    BOOST_LOG_SEV(lg, debug) << "Total fields created: " << created;
+    unsigned int c(create_field_instances(schema::scope_types::any, o));
+    c += create_field_instances(st, o);
+    BOOST_LOG_SEV(lg, debug) << "Total fields created: " << c;
 }
 
 } } }

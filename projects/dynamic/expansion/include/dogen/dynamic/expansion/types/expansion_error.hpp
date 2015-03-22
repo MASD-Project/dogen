@@ -18,43 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_ROOT_OBJECT_COPIER_HPP
-#define DOGEN_DYNAMIC_EXPANSION_TYPES_ROOT_OBJECT_COPIER_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_ERROR_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
 namespace dynamic {
 namespace expansion {
 
-class root_object_copier : public expander_interface {
+class expansion_error : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @brief Name property for other expanders that need to declare
-     * it as a dependency.
-     */
-    static std::string static_name();
+    expansion_error() = default;
+    ~expansion_error() noexcept = default;
 
 public:
-    ~root_object_copier() noexcept;
+    expansion_error(const std::string& message) : message_(message) { }
 
 public:
-    std::string name() const final override;
-
-    const std::forward_list<std::string>& dependencies() const final override;
-
-    void setup(const expansion_context& ec) override;
-
-    void expand(const sml::qname& qn, const schema::scope_types& st,
-        schema::object& o) const override;
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    schema::object root_object_;
+    const std::string message_;
 };
 
 } } }

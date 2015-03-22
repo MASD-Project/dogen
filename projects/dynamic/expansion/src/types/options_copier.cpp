@@ -43,16 +43,16 @@ std::string options_copier::static_name() {
 options_copier::options_copier() : factory_() { }
 options_copier::~options_copier() noexcept { }
 
-void options_copier::make_field(const std::string& n, const bool v,
+unsigned int options_copier::insert_field(const std::string& n, const bool v,
     schema::object& o) const {
-    // ignoring result of insert by design.
-    o.fields().insert(std::make_pair(n, factory_.make_boolean(v)));
+    const auto pair(std::make_pair(n, factory_.make_boolean(v)));
+    return o.fields().insert(pair).second ? 1 : 0;
 }
 
-void options_copier::make_field(const std::string& n, const std::string& v,
-    schema::object& o) const {
-    // ignoring result of insert by design.
-    o.fields().insert(std::make_pair(n, factory_.make_text(v)));
+unsigned int options_copier::insert_field(const std::string& n,
+    const std::string& v, schema::object& o) const {
+    const auto pair(std::make_pair(n, factory_.make_text(v)));
+    return o.fields().insert(pair).second ? 1 : 0;
 }
 
 std::string options_copier::name() const {
@@ -75,9 +75,8 @@ void options_copier::expand(const sml::qname& /*qn*/,
     if (st != schema::scope_types::root_module)
         return;
 
-    make_field(split_project, options_.split_project(), o);
-
-    BOOST_LOG_SEV(lg, debug) << "Copied relevant options.";
+    unsigned int c(insert_field(split_project, options_.split_project(), o));
+    BOOST_LOG_SEV(lg, debug) << "Total fields copied: " << c;
 }
 
 } } }

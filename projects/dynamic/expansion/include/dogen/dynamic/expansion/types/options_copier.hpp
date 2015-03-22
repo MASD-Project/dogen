@@ -49,11 +49,13 @@ private:
     /**
      * @brief Creates a field in the dynamic object with the supplied
      * name and value.
+     *
+     * @return number of inserted fields - either 0 or 1.
      */
     /**@{*/
-    void make_field(const std::string& n, const bool v,
+    unsigned int insert_field(const std::string& n, const bool v,
         schema::object& o) const;
-    void make_field(const std::string& n, const std::string& v,
+    unsigned int insert_field(const std::string& n, const std::string& v,
         schema::object& o) const;
     /**@}*/
 
@@ -69,7 +71,6 @@ public:
 
 private:
     const schema::field_instance_factory factory_;
-
     config::cpp_options options_;
 };
 

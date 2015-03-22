@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-21 Sat 23:53]
+Clock summary at [2015-03-22 Sun 00:17]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *33:46* |       |      |
+| *Total time*                                                             | *34:08* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 33:46 |      |
+| Active                                                                   |         | 34:08 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -37,6 +37,7 @@ Clock summary at [2015-03-21 Sat 23:53]
 | COMPLETED Determining the model module should be in SML                  |         |       | 0:38 |
 | COMPLETED Create a "default values" expander                             |         |       | 2:38 |
 | COMPLETED Create a "copy from options" expander                          |         |       | 0:47 |
+| COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 #+end:
 
@@ -451,6 +452,19 @@ kind of copying of the config model into the schema object. Create a
 simple operation that does this. It does mean a dependency on =config=
 from =dynamic::expansion= but its temporary.
 
+*** COMPLETED Create a "copy from root" expander                      :story:
+    CLOSED: [2015-03-22 Sun 00:17]
+    CLOCK: [2015-03-21 Sat 23:55]--[2015-03-22 Sun 00:17] =>  0:22
+
+Some fields can only be populated at the root. However, we need them
+to be available on every dynamic object. We need an operation that
+takes into account the scope of the field and copies it. This may not
+be that straightforward. We should also look into other scopes to see
+what makes sense here to copy.
+
+This operation should execute after defaulting. It should live in
+dynamic.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -520,17 +534,6 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
-
-*** Create a "copy from root" expander                                :story:
-
-Some fields can only be populated at the root. However, we need them
-to be available on every dynamic object. We need an operation that
-takes into account the scope of the field and copies it. This may not
-be that straightforward. We should also look into other scopes to see
-what makes sense here to copy.
-
-This operation should execute after defaulting. It should live in
-dynamic.
 
 *** Add JSON support to dynamic workflow                              :story:
 

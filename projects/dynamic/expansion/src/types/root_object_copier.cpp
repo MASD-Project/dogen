@@ -19,8 +19,21 @@
  *
  */
 #include <string>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dynamic/expansion/types/default_value_expander.hpp"
+#include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/dynamic/expansion/types/root_object_copier.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dynamic.expansion.root_object_copier"));
+
+const std::string model_module_not_found("Could not find the model module: ");
+
+}
 
 namespace dogen {
 namespace dynamic {
@@ -44,11 +57,29 @@ const std::forward_list<std::string>& root_object_copier::dependencies() const {
     return r;
 }
 
-void root_object_copier::setup(const expansion_context& /*ec*/) {
+void root_object_copier::setup(const expansion_context& ec) {
+    const auto& m(ec.model());
+    const auto i(m.modules().find(m.name()));
+    if (i == m.modules().end()) {
+        const auto n(sml::string_converter::convert(m.name()));
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
+        BOOST_THROW_EXCEPTION(expansion_error(model_module_not_found + n));
+    }
+
+    root_object_ = i->second.extensions();
 }
 
 void root_object_copier::expand(const sml::qname& /*qn*/,
-    const schema::scope_types& /*st*/, schema::object& /*o*/) const {
+    const schema::scope_types& st, schema::object& o) const {
+
+    if (st == schema::scope_types::root_module)
+        return;
+
+    unsigned int c(0);
+    for (const auto& pair : root_object_.fields())
+        c += o.fields().insert(pair).second ? 1 : 0;
+
+    BOOST_LOG_SEV(lg, debug) << "Total fields copied from root: " << c;
 }
 
 } } }
