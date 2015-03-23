@@ -18,15 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/test_data/boolean_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
-#include "dogen/dynamic/schema/test_data/name_td.hpp"
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
-#include "dogen/dynamic/schema/test_data/ownership_hierarchy_td.hpp"
-#include "dogen/dynamic/schema/test_data/repository_td.hpp"
-#include "dogen/dynamic/schema/test_data/scope_types_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_collection_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_types_td.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_HASH_REPOSITORY_HASH_HPP
+#define DOGEN_DYNAMIC_SCHEMA_HASH_REPOSITORY_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/dynamic/schema/types/repository.hpp"
+
+namespace dogen {
+namespace dynamic {
+namespace schema {
+
+struct repository_hasher {
+public:
+    static std::size_t hash(const repository& v);
+};
+
+} } }
+
+namespace std {
+
+template<>
+struct hash<dogen::dynamic::schema::repository> {
+public:
+    size_t operator()(const dogen::dynamic::schema::repository& v) const {
+        return dogen::dynamic::schema::repository_hasher::hash(v);
+    }
+};
+
+}
+#endif

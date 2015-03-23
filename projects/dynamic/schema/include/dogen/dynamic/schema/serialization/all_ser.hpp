@@ -25,6 +25,7 @@
 #include "dogen/dynamic/schema/serialization/object_ser.hpp"
 #include "dogen/dynamic/schema/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/schema/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/schema/serialization/repository_ser.hpp"
 #include "dogen/dynamic/schema/serialization/scope_types_ser.hpp"
 #include "dogen/dynamic/schema/serialization/text_collection_ser.hpp"
 #include "dogen/dynamic/schema/serialization/text_ser.hpp"

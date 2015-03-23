@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-23 Mon 17:07]
+Clock summary at [2015-03-23 Mon 18:08]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *39:06* |       |      |
+| *Total time*                                                             | *40:06* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 39:06 |      |
+| Active                                                                   |         | 40:06 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -44,6 +44,7 @@ Clock summary at [2015-03-23 Mon 17:07]
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Remove all field definitions in code                             |         |       | 0:24 |
 | STARTED Add JSON support to dynamic workflow                             |         |       | 0:50 |
+| STARTED Implement the repository workflow                                |         |       | 1:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -626,6 +627,12 @@ workflow to read in all the JSON files.
 
 - create a workflow that reads in all field definitions and then
   registers them.
+
+*** STARTED Implement the repository workflow                         :story:
+    CLOCK: [2015-03-23 Mon 17:07]--[2015-03-23 Mon 18:07] =>  1:00
+
+Code all classes related to the repository workflow in schema, and
+hook it up.
 
 *** Implement new settings factories with caching                     :story:
 

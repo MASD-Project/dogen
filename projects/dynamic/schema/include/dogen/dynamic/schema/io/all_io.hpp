@@ -24,6 +24,7 @@
 #include "dogen/dynamic/schema/io/name_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
+#include "dogen/dynamic/schema/io/repository_io.hpp"
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/io/text_collection_io.hpp"
 #include "dogen/dynamic/schema/io/text_io.hpp"

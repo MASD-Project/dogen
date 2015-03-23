@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
-#include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/schema/types/name.hpp"
@@ -67,20 +67,19 @@ private:
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    std::forward_list<field_definition> read_stream(std::istream& s) const;
+    std::list<field_definition> read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the field definitions from the JSON stream.
      */
-    std::forward_list<field_definition> hydrate(std::istream& s) const;
+    std::list<field_definition> hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the field
      * definitions from the JSON stream.
      */
-    std::forward_list<field_definition>
-    hydrate(const boost::filesystem::path& p) const;
+    std::list<field_definition> hydrate(const boost::filesystem::path& p) const;
 };
 
 } } }

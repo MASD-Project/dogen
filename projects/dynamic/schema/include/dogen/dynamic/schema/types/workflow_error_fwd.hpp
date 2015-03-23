@@ -18,15 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/test_data/boolean_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
-#include "dogen/dynamic/schema/test_data/name_td.hpp"
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
-#include "dogen/dynamic/schema/test_data/ownership_hierarchy_td.hpp"
-#include "dogen/dynamic/schema/test_data/repository_td.hpp"
-#include "dogen/dynamic/schema/test_data/scope_types_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_collection_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_types_td.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_WORKFLOW_ERROR_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_WORKFLOW_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
+
+namespace dogen {
+namespace dynamic {
+namespace schema {
+
+class workflow_error;
+
+} } }
+
+#endif

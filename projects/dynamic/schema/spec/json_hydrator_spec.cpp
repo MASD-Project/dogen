@@ -23,7 +23,7 @@
 #include <iterator>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 
@@ -51,13 +51,13 @@ const std::string trivial_field_definition(R"([
     }
 ])");
 
-std::forward_list<dogen::dynamic::schema::field_definition>
+std::list<dogen::dynamic::schema::field_definition>
 hydrate(std::istream& s) {
     dogen::dynamic::schema::json_hydrator h;
     return h.hydrate(s);
 }
 
-std::forward_list<dogen::dynamic::schema::field_definition>
+std::list<dogen::dynamic::schema::field_definition>
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);

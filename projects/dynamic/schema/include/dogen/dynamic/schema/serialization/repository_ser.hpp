@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/test_data/boolean_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
-#include "dogen/dynamic/schema/test_data/name_td.hpp"
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
-#include "dogen/dynamic/schema/test_data/ownership_hierarchy_td.hpp"
-#include "dogen/dynamic/schema/test_data/repository_td.hpp"
-#include "dogen/dynamic/schema/test_data/scope_types_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_collection_td.hpp"
-#include "dogen/dynamic/schema/test_data/text_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_td.hpp"
-#include "dogen/dynamic/schema/test_data/value_types_td.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_SERIALIZATION_REPOSITORY_SER_HPP
+#define DOGEN_DYNAMIC_SCHEMA_SERIALIZATION_REPOSITORY_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
+#include "dogen/dynamic/schema/types/repository.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::schema::repository)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::dynamic::schema::repository& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::dynamic::schema::repository& v, unsigned int version);
+
+} }
+
+#endif

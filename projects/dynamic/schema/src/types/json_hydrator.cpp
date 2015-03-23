@@ -26,10 +26,9 @@
 #include "dogen/dynamic/schema/types/hydration_error.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("dynamic.schema.json_hydrator"));
 
 const std::string empty;
@@ -127,13 +126,12 @@ read_ownership_hierarchy(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::forward_list<field_definition> json_hydrator::
-read_stream(std::istream& s) const {
+std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
     using namespace boost::property_tree;
     ptree pt;
     read_json(s, pt);
 
-    std::forward_list<field_definition> r;
+    std::list<field_definition> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         field_definition fd;
 
@@ -159,8 +157,7 @@ read_stream(std::istream& s) const {
     return r;
 }
 
-std::forward_list<field_definition> json_hydrator::
-hydrate(std::istream& s) const {
+std::list<field_definition> json_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -181,7 +178,7 @@ hydrate(std::istream& s) const {
     }
 }
 
-std::forward_list<field_definition> json_hydrator::
+std::list<field_definition> json_hydrator::
 hydrate(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
     boost::filesystem::ifstream s(p);

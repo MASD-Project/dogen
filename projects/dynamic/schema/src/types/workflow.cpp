@@ -26,7 +26,7 @@
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
 #include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
-#include "dogen/dynamic/schema/types/building_error.hpp"
+#include "dogen/dynamic/schema/types/workflow_error.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace {
@@ -76,7 +76,7 @@ create_field_definitions_by_complete_name() const {
         const auto result(r.insert(std::make_pair(qn, fd)));
         if (!result.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_field_definition << qn;
-            BOOST_THROW_EXCEPTION(building_error(
+            BOOST_THROW_EXCEPTION(workflow_error(
                     duplicate_field_definition + qn));
         }
     }
@@ -93,7 +93,7 @@ obtain_field_definition(const std::string& complete_name,
             BOOST_LOG_SEV(lg, error) << field_definition_not_found
                                      << complete_name;
 
-            BOOST_THROW_EXCEPTION(building_error(
+            BOOST_THROW_EXCEPTION(workflow_error(
                     field_definition_not_found + complete_name));
             return boost::optional<field_definition>();
         }
@@ -112,7 +112,7 @@ obtain_field_definition(const std::string& complete_name,
           << expected_scope << fd.scope()
           << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(building_error(s.str()));
+        BOOST_THROW_EXCEPTION(workflow_error(s.str()));
     }
 
     return boost::optional<field_definition>(fd);

@@ -24,6 +24,7 @@
 #include "dogen/dynamic/schema/hash/name_hash.hpp"
 #include "dogen/dynamic/schema/hash/object_hash.hpp"
 #include "dogen/dynamic/schema/hash/ownership_hierarchy_hash.hpp"
+#include "dogen/dynamic/schema/hash/repository_hash.hpp"
 #include "dogen/dynamic/schema/hash/scope_types_hash.hpp"
 #include "dogen/dynamic/schema/hash/text_collection_hash.hpp"
 #include "dogen/dynamic/schema/hash/text_hash.hpp"

@@ -47,3 +47,4 @@
 #include "dogen/dynamic/schema/types/value_types.hpp"
 #include "dogen/dynamic/schema/types/value_visitor.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/workflow_error.hpp"
