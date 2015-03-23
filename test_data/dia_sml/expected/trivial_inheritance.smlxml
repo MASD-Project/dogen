@@ -4276,6 +4276,7 @@ in the context of inheritance.
 	</objects>
 	<is_target>1</is_target>
 	<has_generatable_types>0</has_generatable_types>
+	<is_expandable>0</is_expandable>
 </entity>
 </boost_serialization>
 

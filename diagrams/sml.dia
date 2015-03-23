@@ -4853,16 +4853,16 @@ for Java, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="46.26,60"/>
+        <dia:point val="46.26,60.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.205,59.25;47.01,70.8"/>
+        <dia:rectangle val="43.205,60.05;47.01,70.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="46.26,60"/>
+        <dia:point val="46.26,60.8"/>
         <dia:point val="46.26,64.9167"/>
         <dia:point val="43.255,64.9167"/>
         <dia:point val="43.255,70"/>
@@ -4924,16 +4924,16 @@ for Java, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="36,60"/>
+        <dia:point val="36,60.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.205,59.25;36.75,70.8"/>
+        <dia:rectangle val="23.205,60.05;36.75,70.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="36,60"/>
+        <dia:point val="36,60.8"/>
         <dia:point val="36,65.0833"/>
         <dia:point val="23.255,65.0833"/>
         <dia:point val="23.255,70"/>
@@ -5256,16 +5256,16 @@ for Java, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="56.52,60"/>
+        <dia:point val="56.52,60.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.77,59.25;64.685,70.8"/>
+        <dia:rectangle val="55.77,60.05;64.685,70.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.52,60"/>
+        <dia:point val="56.52,60.8"/>
         <dia:point val="56.52,65"/>
         <dia:point val="64.485,65"/>
         <dia:point val="64.485,70"/>
@@ -6278,7 +6278,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         <dia:point val="36,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,49.95;56.57,60.05"/>
+        <dia:rectangle val="35.95,49.95;56.57,60.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="36,50"/>
@@ -6287,7 +6287,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="10.799999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -6597,6 +6597,32 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true the model has at least one generable type, false otherwise.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_expandable#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the model's dynamic extensions must go throw the expansion
+workflow in order to be usable.
+
+If false, the dynamic extensions cannot be expanded.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13582,7 +13608,7 @@ parenting.#</dia:string>
         <dia:point val="23.255,74.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.3187,73.65;24.005,85.8"/>
+        <dia:rectangle val="10.3188,73.65;24.005,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

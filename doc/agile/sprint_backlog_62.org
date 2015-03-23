@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-22 Sun 01:58]
+Clock summary at [2015-03-23 Mon 14:37]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *35:49* |       |      |
+| *Total time*                                                             | *36:38* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 35:49 |      |
+| Active                                                                   |         | 36:38 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -39,6 +39,7 @@ Clock summary at [2015-03-22 Sun 01:58]
 | COMPLETED Create a "copy from options" expander                          |         |       | 0:47 |
 | COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
 | COMPLETED Add a graph to expansion workflow                              |         |       | 1:41 |
+| STARTED Expansion must be performed before merging                       |         |       | 0:49 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 #+end:
 
@@ -496,6 +497,39 @@ conditional and unconditional operations.
 This operation should execute after copy from root. It should live in
 dynamic.
 
+*** STARTED Expansion must be performed before merging                :story:
+    CLOCK: [2015-03-23 Mon 13:47]--[2015-03-23 Mon 14:36] =>  0:49
+
+We have placed the expansion after merging. However, this is not quite
+right: it is possible that each model has different settings on their
+root module. For example, one could use different source/include
+directories, extensions, etc for different modules. This means that
+the include paths computed will be different for each model. In order
+for this to work, we must expand each model separately and then merge.
+
+Also, this means that we must perform expansion for all models, even
+those that we are not going to generate or else the includes for those
+types will be wrong. This is unfortunate because it means the merged
+model is very large.
+
+Actually, some of the system modules do not require expansion - or
+worse, cannot be expanded or else we would be generating
+non-compilable code. For example, expansion of the boost or c++
+standard library models would result in computing includes, paths etc
+for standard types. We need to be able to switch off expansion for
+certain models. The obvious thing would be to do so for all system
+models (e.g. =origin_types::system=) but this is in effect a way of
+saying that dogen models cannot be system models, which is true right
+now but shouldn't be true forever. One can imagine the LAM (Language
+Agnostic Model) described in the backlog, etc. So instead we need to
+add a "is expandable" property:
+
+- set it to true in Dia to SML;
+- set it in the JSON and read it during hydration;
+- in front-end workflow, perform expansion if "is expandable" is
+  true. If model's module is not found and "is expandable" is true,
+  throw.
+
 *** STARTED Create a "supported" expander                             :story:
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49
     CLOCK: [2015-03-19 Thu 11:51]--[2015-03-19 Thu 12:05] =>  0:14
@@ -548,23 +582,6 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
-
-*** Expansion must be performed before merging                        :story:
-
-We have placed the expansion after merging. However, this is not quite
-right: it is possible that each model has different settings on their
-root module. For example, one could use different source/include
-directories, extensions, etc for different modules. This means that
-the include paths computed will be different for each model. In order
-for this to work, we must expand each model separately and then merge.
-
-Also, this means that we must perform expansion for all models, even
-those that we are not going to generate or else the includes for those
-types will be wrong. This is unfortunate because it means the merged
-model is very large.
-
-We need a post processing workflow in SML. it could take on some of
-the leaves etc we do in dia to sml.
 
 *** Perform expansion of properties and operations                    :story:
 
@@ -718,3 +735,4 @@ regarding enabling facets and formatters:
   may want to manually switch it on for a type.
 
 ** Deprecated
+   

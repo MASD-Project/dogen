@@ -97,7 +97,8 @@ public:
         const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
         const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
         const bool is_target,
-        const bool has_generatable_types);
+        const bool has_generatable_types,
+        const bool is_expandable);
 
 private:
     template<typename Archive>
@@ -256,6 +257,17 @@ public:
     void has_generatable_types(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, the model's dynamic extensions must go throw the expansion
+     * workflow in order to be usable.
+     *
+     * If false, the dynamic extensions cannot be expanded.
+     */
+    /**@{*/
+    bool is_expandable() const;
+    void is_expandable(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -282,6 +294,7 @@ private:
     std::unordered_map<dogen::sml::qname, dogen::sml::object> objects_;
     bool is_target_;
     bool has_generatable_types_;
+    bool is_expandable_;
 };
 
 } }

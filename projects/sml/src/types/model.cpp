@@ -27,7 +27,8 @@ model::model()
     : generation_type_(static_cast<dogen::sml::generation_types>(0)),
       origin_type_(static_cast<dogen::sml::origin_types>(0)),
       is_target_(static_cast<bool>(0)),
-      has_generatable_types_(static_cast<bool>(0)) { }
+      has_generatable_types_(static_cast<bool>(0)),
+      is_expandable_(static_cast<bool>(0)) { }
 
 model::model(model&& rhs)
     : documentation_(std::move(rhs.documentation_)),
@@ -44,7 +45,8 @@ model::model(model&& rhs)
       enumerations_(std::move(rhs.enumerations_)),
       objects_(std::move(rhs.objects_)),
       is_target_(std::move(rhs.is_target_)),
-      has_generatable_types_(std::move(rhs.has_generatable_types_)) { }
+      has_generatable_types_(std::move(rhs.has_generatable_types_)),
+      is_expandable_(std::move(rhs.is_expandable_)) { }
 
 model::model(
     const std::string& documentation,
@@ -61,7 +63,8 @@ model::model(
     const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& enumerations,
     const std::unordered_map<dogen::sml::qname, dogen::sml::object>& objects,
     const bool is_target,
-    const bool has_generatable_types)
+    const bool has_generatable_types,
+    const bool is_expandable)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -76,7 +79,8 @@ model::model(
       enumerations_(enumerations),
       objects_(objects),
       is_target_(is_target),
-      has_generatable_types_(has_generatable_types) { }
+      has_generatable_types_(has_generatable_types),
+      is_expandable_(is_expandable) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -95,6 +99,7 @@ void model::swap(model& other) noexcept {
     swap(objects_, other.objects_);
     swap(is_target_, other.is_target_);
     swap(has_generatable_types_, other.has_generatable_types_);
+    swap(is_expandable_, other.is_expandable_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -112,7 +117,8 @@ bool model::operator==(const model& rhs) const {
         enumerations_ == rhs.enumerations_ &&
         objects_ == rhs.objects_ &&
         is_target_ == rhs.is_target_ &&
-        has_generatable_types_ == rhs.has_generatable_types_;
+        has_generatable_types_ == rhs.has_generatable_types_ &&
+        is_expandable_ == rhs.is_expandable_;
 }
 
 model& model::operator=(model other) {
@@ -327,6 +333,14 @@ bool model::has_generatable_types() const {
 
 void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
+}
+
+bool model::is_expandable() const {
+    return is_expandable_;
+}
+
+void model::is_expandable(const bool v) {
+    is_expandable_ = v;
 }
 
 } }
