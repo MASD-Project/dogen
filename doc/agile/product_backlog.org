@@ -1994,6 +1994,14 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Dia models are not always user models                             :story:
+
+At present there is an assumption that all models read in from dia are
+user models. In reality, it is entirely possible to have a system
+model such as LAM (Language Agnostic Model) which is a system
+model. We should tell Dia to SML if the model is a) system or not b)
+expandable or not.
+
 *** Consider adding =with= support for fluent properties              :story:
 
 It seems the java guys have decided to add the prefix =with= when
