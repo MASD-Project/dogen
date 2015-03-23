@@ -43,8 +43,6 @@
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -249,17 +247,6 @@ merge_models_activity(const std::list<sml::model>& models) const {
     return r;
 }
 
-sml::model workflow::
-expand_model_activity(const sml::model& merged_model) const {
-    const auto& rg(dynamic::schema::workflow().registrar());
-    const auto& fds(rg.field_definitions());
-
-    dynamic::expansion::workflow w;
-    const auto r(w.execute(knitting_options_.cpp(), fds, merged_model));
-    BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
-    return r;
-}
-
 void workflow::persist_model_activity(const boost::filesystem::path p,
     const sml::model& m) const {
 
@@ -267,7 +254,7 @@ void workflow::persist_model_activity(const boost::filesystem::path p,
     using config::archive_types;
     archive_types at(ts.save_sml_model());
     if (at == archive_types::invalid)
-        return;
+        return; // FIXME: should we not throw?
 
     const auto& dp(create_debug_file_path(at, p));
     sml::persister persister;
@@ -296,20 +283,19 @@ void workflow::execute() const {
         const auto tp(obtain_target_path_activity(d));
         const auto pm(obtain_partial_sml_models_activity(d));
         const auto m(merge_models_activity(pm));
-        const auto e(expand_model_activity(m));
-        persist_model_activity(tp, e);
+        persist_model_activity(tp, m);
 
         if (knitting_options_.troubleshooting().stop_after_merging()) {
             BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
             return;
         }
 
-        if (!e.has_generatable_types()) {
+        if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }
 
-        generate_model_activity(e);
+        generate_model_activity(m);
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;

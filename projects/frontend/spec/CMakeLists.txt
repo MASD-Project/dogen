@@ -32,6 +32,8 @@ target_link_libraries(frontend_spec
     utility
     dia
     sml
+    dynamic_schema
+    dynamic_expansion
     dia_to_sml
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

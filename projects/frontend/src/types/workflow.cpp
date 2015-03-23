@@ -22,8 +22,12 @@
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/persister.hpp"
+#include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 
 namespace {
@@ -114,22 +118,37 @@ workflow::create_frontend_settings(const boost::filesystem::path& p) const {
     return r;
 }
 
-sml::model workflow::
-create_sml_model_activity(const input_descriptor& d) const {
+sml::model workflow::create_model_activity(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
     auto& frontend(registrar().frontend_for_extension(extension));
     const auto s(create_frontend_settings(d.path()));
     return frontend.generate(schema_workflow_, d, s);
 }
 
-void workflow::persist_sml_model_activity(const boost::filesystem::path& p,
+sml::model workflow::expand_model_activity(const sml::model& m) const {
+    if (!m.is_expandable()) {
+        BOOST_LOG_SEV(lg, debug) << "Model is not expandable, so ignoring it: "
+                                 << sml::string_converter::convert(m.name());
+        return m;
+    }
+
+    const auto& rg(dynamic::schema::workflow().registrar());
+    const auto& fds(rg.field_definitions());
+
+    dynamic::expansion::workflow w;
+    const auto r(w.execute(knitting_options_.cpp(), fds, m));
+    BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
+    return r;
+}
+
+void workflow::persist_model_activity(const boost::filesystem::path& p,
     const sml::model& m) const {
 
     const auto& to(knitting_options_.troubleshooting());
     using config::archive_types;
     archive_types at(to.save_sml_model());
     if (at == archive_types::invalid)
-        return;
+        return; // FIXME: should we not throw?
 
     const auto& dp(create_debug_file_path(at, p));
     sml::persister persister;
@@ -143,8 +162,10 @@ workflow::execute(const std::list<input_descriptor>& descriptors) {
 
     std::list<sml::model> r;
     for (const auto& d : descriptors) {
-        r.push_back(create_sml_model_activity(d));
-        persist_sml_model_activity(d.path(), r.back());
+        auto m(create_model_activity(d));
+        auto e(expand_model_activity(m));
+        persist_model_activity(d.path(), e);
+        r.push_back(e);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing frontend workflow.";

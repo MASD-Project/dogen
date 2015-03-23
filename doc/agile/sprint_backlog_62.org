@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-23 Mon 14:59]
+Clock summary at [2015-03-23 Mon 15:10]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *37:00* |       |      |
+| *Total time*                                                             | *37:11* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 37:00 |      |
+| Active                                                                   |         | 37:11 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -39,7 +39,7 @@ Clock summary at [2015-03-23 Mon 14:59]
 | COMPLETED Create a "copy from options" expander                          |         |       | 0:47 |
 | COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
 | COMPLETED Add a graph to expansion workflow                              |         |       | 1:41 |
-| STARTED Expansion must be performed before merging                       |         |       | 1:11 |
+| COMPLETED Expansion must be performed before merging                     |         |       | 1:22 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 #+end:
 
@@ -480,24 +480,9 @@ that:
 
 The graph is then used to execute the expansions in dependency order.
 
-*** CANCELLED Add an "enabled" expander                               :story:
-    CLOSED: [2015-03-19 Thu 15:20]
-
-*New Understanding*
-
-Actually this is the same operation as supported.
-
-*Previous Understanding*
-
-We need an operation that is able to look at the model, facet,
-formatter values for the enabled field and determine what value to use
-for the formatter. It's predicate is =true=. Or perhaps we need
-conditional and unconditional operations.
-
-This operation should execute after copy from root. It should live in
-dynamic.
-
-*** STARTED Expansion must be performed before merging                :story:
+*** COMPLETED Expansion must be performed before merging              :story:
+    CLOSED: [2015-03-23 Mon 15:10]
+    CLOCK: [2015-03-23 Mon 14:59]--[2015-03-23 Mon 15:10] =>  0:11
     CLOCK: [2015-03-23 Mon 14:37]--[2015-03-23 Mon 14:59] =>  0:22
     CLOCK: [2015-03-23 Mon 13:47]--[2015-03-23 Mon 14:36] =>  0:49
 
@@ -530,6 +515,23 @@ add a "is expandable" property:
 - in front-end workflow, perform expansion if "is expandable" is
   true. If model's module is not found and "is expandable" is true,
   throw.
+
+*** CANCELLED Add an "enabled" expander                               :story:
+    CLOSED: [2015-03-19 Thu 15:20]
+
+*New Understanding*
+
+Actually this is the same operation as supported.
+
+*Previous Understanding*
+
+We need an operation that is able to look at the model, facet,
+formatter values for the enabled field and determine what value to use
+for the formatter. It's predicate is =true=. Or perhaps we need
+conditional and unconditional operations.
+
+This operation should execute after copy from root. It should live in
+dynamic.
 
 *** STARTED Create a "supported" expander                             :story:
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49

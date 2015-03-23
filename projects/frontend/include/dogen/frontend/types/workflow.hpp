@@ -79,13 +79,18 @@ private:
      * @brief Given an input descriptor, creates the associated SML
      * model.
      */
-    sml::model create_sml_model_activity(const input_descriptor& d) const;
+    sml::model create_model_activity(const input_descriptor& d) const;
+
+    /**
+     * @brief Execute the dynamic expansion workflow.
+     */
+    sml::model expand_model_activity(const sml::model& m) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if
      * the SML model should be persisted; if so, persists it.
      */
-    void persist_sml_model_activity(const boost::filesystem::path& p,
+    void persist_model_activity(const boost::filesystem::path& p,
         const sml::model& m) const;
 
 public:
