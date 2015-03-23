@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-23 Mon 15:10]
+Clock summary at [2015-03-23 Mon 17:07]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *37:11* |       |      |
+| *Total time*                                                             | *39:06* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 37:11 |      |
+| Active                                                                   |         | 39:06 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -40,7 +40,10 @@ Clock summary at [2015-03-23 Mon 15:10]
 | COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
 | COMPLETED Add a graph to expansion workflow                              |         |       | 1:41 |
 | COMPLETED Expansion must be performed before merging                     |         |       | 1:22 |
+| COMPLETED Perform some analysis on how field definitions will be used    |         |       | 0:41 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
+| STARTED Remove all field definitions in code                             |         |       | 0:24 |
+| STARTED Add JSON support to dynamic workflow                             |         |       | 0:50 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -516,6 +519,29 @@ add a "is expandable" property:
   true. If model's module is not found and "is expandable" is true,
   throw.
 
+*** COMPLETED Perform some analysis on how field definitions will be used :story:
+    CLOSED: [2015-03-23 Mon 16:43]
+    CLOCK: [2015-03-23 Mon 16:00]--[2015-03-23 Mon 16:41] =>  0:41
+
+We need to change our approach to field definition implementation,
+based on the use cases we gathered so far:
+
+- registrar is not useful because we are not using static registration;
+- indexer is not useful because we need to index (and query )in lots
+  of different places.
+
+What we need instead is:
+
+- a repository of field definitions, created once very early on and
+  passed around;
+- a repository workflow responsible for creating the repository from
+  file, indexing it, etc;
+- we need to pass the repository into the schema and expansion
+  workflows;
+- we need to pass the repository into the settings workflow in c++;
+- factories can then cache the field definitions on construction.
+- add support for default values in JSON.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -586,14 +612,14 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** Perform expansion of properties and operations                    :story:
+*** STARTED Remove all field definitions in code                      :story:
+    CLOCK: [2015-03-23 Mon 16:43]--[2015-03-23 Mon 17:07] =>  0:24
 
-At present we are ignoring properties (and operations). This is ok as
-we don't really have a use case for expansion there. However, it would
-be nice if we could just expand them anyway. We just need to make sure
-we don't do things like copying from root object.
+Instead add traits with the complete name for all relevant fields.
 
-*** Add JSON support to dynamic workflow                              :story:
+*** STARTED Add JSON support to dynamic workflow                      :story:
+    CLOCK: [2015-03-23 Mon 15:39]--[2015-03-23 Mon 16:00] =>  0:21
+    CLOCK: [2015-03-23 Mon 15:10]--[2015-03-23 Mon 15:39] =>  0:29
 
 We need to create the required activities in the dynamic schema's
 workflow to read in all the JSON files.
@@ -618,13 +644,17 @@ For type settings:
 :    if (fs.has_field(fd::enabled()))
 :        s.enabled(fs.get_boolean_content(fd::enabled()));
 
-*** Remove all field definitions in code                              :story:
+Actually, do we really need to cache? We just need the qualified name
+of the field which is how the object stores its fields.
 
-Instead add traits with the complete name. We also need a field
-definition selector based on complete name. Settings factories need to
-do a look-up for the required fields on construction and cache the
-fields. Actually we probably should have path ingredient settings; we
-can make use of these from within the operation/expansion?
+*** Add dynamic consistency validation                                :story:
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+Actually since we can only create fields from JSON, we should just add
+a check there.
 
 *** Rename name builder to name factory                               :story:
 
@@ -660,12 +690,6 @@ some others require looking at the SML model graph. It seems they
 should all live under one single operation (or perhaps a few), but we
 do not have any good names for them.
 
-*** Add dynamic consistency validation                                :story:
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
-
 *** Create a list of valid values for field definitions               :story:
 
 In addition to default values, it should be possible to supply a list
@@ -677,6 +701,13 @@ types. At present this is only applicable to string fields.
 In this sense, =boolean= is just a special case where the list is know
 up front. We should re-implement =boolean= this way. Possibly even add
 synonyms (e.g. =true=, =false=, =0=, =1=)?
+
+*** Perform expansion of properties and operations                    :story:
+
+At present we are ignoring properties (and operations). This is ok as
+we don't really have a use case for expansion there. However, it would
+be nice if we could just expand them anyway. We just need to make sure
+we don't do things like copying from root object.
 
 *** Clean-up hierarchical support in dynamic                          :story:
 
