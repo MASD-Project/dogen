@@ -27,9 +27,11 @@
 
 #include <list>
 #include <iosfwd>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/schema/types/name.hpp"
+#include "dogen/dynamic/schema/types/value.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
@@ -52,6 +54,12 @@ private:
      * @brief Converts a string to a value type.
      */
     value_types to_value_type(const std::string& s) const;
+
+    /**
+     * @brief Creates the field value.
+     */
+    boost::shared_ptr<value> create_value(const value_types vt,
+        const std::string& v) const;
 
     /**
      * @brief Reads the dynamic name from the property tree.

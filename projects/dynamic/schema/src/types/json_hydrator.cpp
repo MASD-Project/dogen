@@ -19,10 +19,13 @@
  *
  */
 #include <istream>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/schema/io/value_types_io.hpp"
+#include "dogen/dynamic/schema/types/value_factory.hpp"
 #include "dogen/dynamic/schema/types/hydration_error.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 
@@ -51,6 +54,7 @@ const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string type_key("type");
 const std::string scope_key("scope");
+const std::string default_value_key("default_value");
 
 const std::string scope_any("any");
 const std::string scope_not_applicable("not_applicable");
@@ -105,6 +109,20 @@ value_types json_hydrator::to_value_type(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(invalid_type + s));
 }
 
+boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
+    const std::string& v) const {
+
+    value_factory f;
+    switch (vt) {
+    case value_types::text: return f.make_text(v);
+    case value_types::boolean: return f.make_boolean(v);
+    default:
+        BOOST_LOG_SEV(lg, error) << invalid_type << "'" << vt << "'";
+        BOOST_THROW_EXCEPTION(hydration_error(invalid_type +
+                boost::lexical_cast<std::string>(vt)));
+    }
+}
+
 name json_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     name r;
     r.simple(pt.get<std::string>(name_simple_key));
@@ -151,6 +169,10 @@ std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
 
         fd.type(to_value_type(i->second.get<std::string>(type_key)));
         fd.scope(to_scope_type(i->second.get<std::string>(scope_key)));
+
+        const auto dv(i->second.get_optional<std::string>(default_value_key));
+        if (dv)
+            fd.default_value(create_value(fd.type(), *dv));
 
         r.push_front(fd);
     }
