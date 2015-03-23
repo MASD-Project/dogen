@@ -563,6 +563,9 @@ those that we are not going to generate or else the includes for those
 types will be wrong. This is unfortunate because it means the merged
 model is very large.
 
+We need a post processing workflow in SML. it could take on some of
+the leaves etc we do in dia to sml.
+
 *** Perform expansion of properties and operations                    :story:
 
 At present we are ignoring properties (and operations). This is ok as
