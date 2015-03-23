@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
@@ -38,14 +39,16 @@ namespace schema {
 std::list<field_definition> hydration_workflow::
 hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Finding all files in: " << dirs;
-    std::list<field_definition> r;
-    json_hydrator jh;
     const auto files(dogen::utility::filesystem::find_files(dirs));
+    BOOST_LOG_SEV(lg, debug) << "Files found: " << files;
+
+    json_hydrator jh;
+    std::list<field_definition> r;
     for (const auto& f : files) {
         auto fds(jh.hydrate(f));
         r.splice(r.end(), fds);
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished finding all files.";
+    BOOST_LOG_SEV(lg, debug) << "Finished hydrating all files.";
     return r;
 }
 

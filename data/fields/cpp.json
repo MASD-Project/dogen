@@ -142,17 +142,5 @@
         "type" : "boolean",
         "scope" : "entity",
         "default_value" : false
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_required",
-            "qualified" : "cpp.type.inclusion_required"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp"
-        },
-        "type" : "boolean",
-        "scope" : "entity",
-        "default_value" : false
     }
 ]

@@ -43,6 +43,7 @@
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -58,6 +59,7 @@ const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string target_postfix("_target");
 const std::string library_dir("library");
+const std::string fields_dir("fields");
 const std::string merged("merged_");
 const std::string invalid_archive_type("Invalid or unexpected archive type");
 const std::string codegen_error("Error occurred during code generation: ");
@@ -170,6 +172,13 @@ create_debug_file_path(const config::archive_types at,
     return r;
 }
 
+dynamic::schema::repository workflow::setup_schema_repository_activity() const {
+    using namespace dogen::utility::filesystem;
+    const auto dir(data_files_directory() / fields_dir);
+    dynamic::schema::repository_workflow w;
+    return w.execute(std::forward_list<boost::filesystem::path> { dir });
+}
+
 std::list<frontend::input_descriptor>
 workflow::obtain_input_descriptors_activity() const {
     std::list<frontend::input_descriptor> r;
@@ -279,6 +288,7 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, debug) << "Knitting options: " << knitting_options_;
 
     try {
+        setup_schema_repository_activity();
         const auto d(obtain_input_descriptors_activity());
         const auto tp(obtain_target_path_activity(d));
         const auto pm(obtain_partial_sml_models_activity(d));

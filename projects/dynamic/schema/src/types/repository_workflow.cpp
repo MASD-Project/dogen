@@ -21,6 +21,7 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/schema/io/repository_io.hpp"
 #include "dogen/dynamic/schema/types/workflow_error.hpp"
 #include "dogen/dynamic/schema/types/hydration_workflow.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
@@ -75,9 +76,12 @@ repository repository_workflow::create_repository_activity(
 
 repository repository_workflow::execute(
     const std::forward_list<boost::filesystem::path>& dirs) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating repository.";
 
     const auto fds(hydrate_directories_activity(dirs));
-    return create_repository_activity(fds);
+    const auto r(create_repository_activity(fds));
+    BOOST_LOG_SEV(lg, debug) << "Generated repository: " << r;
+    return r;
 }
 
 } } }
