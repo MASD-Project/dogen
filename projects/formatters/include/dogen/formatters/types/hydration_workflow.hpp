@@ -43,7 +43,6 @@ namespace formatters {
 template<typename Hydrator>
 class hydration_workflow {
 public:
-    hydration_workflow() = default;
     hydration_workflow(const hydration_workflow&) = default;
     hydration_workflow(hydration_workflow&&) = default;
     ~hydration_workflow() = default;
@@ -53,20 +52,23 @@ private:
      * @brief Hydrate the file given by path p.
      */
     std::pair<std::string, typename Hydrator::value_type>
-    hydrate(const boost::filesystem::path& p) {
+    hydrate(const boost::filesystem::path& p) const {
         const auto value(hydrator_.hydrate(p));
         return std::make_pair(p.filename().generic_string(), value);
     }
 
 public:
-    hydration_workflow(const Hydrator& h) : hydrator_(h) { }
+    /**
+     * @brief Initialises the workflow.
+     */
+    hydration_workflow() : hydrator_() { }
 
     /**
      * @brief Hydrates all files found on all the directories
      * supplied.
      */
     std::unordered_map<std::string, typename Hydrator::value_type>
-    hydrate(const std::forward_list<boost::filesystem::path>& dirs) {
+    hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
         std::unordered_map<std::string, typename Hydrator::value_type> r;
         const auto files(dogen::utility::filesystem::find_files(dirs));
         for (const auto& f : files)
@@ -75,7 +77,7 @@ public:
     }
 
 private:
-    Hydrator hydrator_;
+    const Hydrator hydrator_;
 };
 
 } }

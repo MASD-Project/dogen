@@ -157,11 +157,10 @@ void general_settings_factory::hydrate_modelines() {
 
 void general_settings_factory::hydrate_licences() {
     BOOST_LOG_SEV(lg, debug) << "Hydrating licences.";
-    const auto lh = licence_hydrator();
     const auto dirs(create_directory_list(licence_dir));
 
     BOOST_LOG_SEV(lg, debug) << "Licence directories: " << dirs;
-    hydration_workflow<licence_hydrator> hw(lh);
+    hydration_workflow<licence_hydrator> hw;
     licences_ = hw.hydrate(dirs);
 
     if (licences_.empty()) {
