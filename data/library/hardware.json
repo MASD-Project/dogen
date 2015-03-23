@@ -1,5 +1,6 @@
 {
     "model_name" : "hardware",
+    "is_expandable" : false,
     "documentation" : "Hardware-provided primitive types.",
     "origin" : "system",
     "elements" : [

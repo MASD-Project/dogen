@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-23 Mon 14:37]
+Clock summary at [2015-03-23 Mon 14:59]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *36:38* |       |      |
+| *Total time*                                                             | *37:00* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 36:38 |      |
+| Active                                                                   |         | 37:00 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -39,7 +39,7 @@ Clock summary at [2015-03-23 Mon 14:37]
 | COMPLETED Create a "copy from options" expander                          |         |       | 0:47 |
 | COMPLETED Create a "copy from root" expander                             |         |       | 0:22 |
 | COMPLETED Add a graph to expansion workflow                              |         |       | 1:41 |
-| STARTED Expansion must be performed before merging                       |         |       | 0:49 |
+| STARTED Expansion must be performed before merging                       |         |       | 1:11 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 #+end:
 
@@ -498,6 +498,7 @@ This operation should execute after copy from root. It should live in
 dynamic.
 
 *** STARTED Expansion must be performed before merging                :story:
+    CLOCK: [2015-03-23 Mon 14:37]--[2015-03-23 Mon 14:59] =>  0:22
     CLOCK: [2015-03-23 Mon 13:47]--[2015-03-23 Mon 14:36] =>  0:49
 
 We have placed the expansion after merging. However, this is not quite
@@ -735,4 +736,3 @@ regarding enabling facets and formatters:
   may want to manually switch it on for a type.
 
 ** Deprecated
-   

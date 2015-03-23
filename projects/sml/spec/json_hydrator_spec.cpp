@@ -65,9 +65,11 @@ const std::string missing_model_name("model_name");
 const std::string missing_type_name("simple_name");
 const std::string missing_origin("origin");
 const std::string missing_elements("elements");
+const std::string missing_is_expandable("is_expandable");
 
 const std::string trivial_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "documentation" : "a_doc",
     "origin" : "system",
     "elements" : [
@@ -82,6 +84,7 @@ const std::string trivial_model(R"({
 
 const std::string tagged_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "documentation" : "a_doc",
     "origin" : "system",
     "extensions" : {
@@ -104,6 +107,7 @@ const std::string tagged_model(R"({
 
 const std::string no_documentation_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -115,6 +119,7 @@ const std::string no_documentation_model(R"({
 )");
 
 const std::string no_name_model(R"({
+    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -127,6 +132,7 @@ const std::string no_name_model(R"({
 
 const std::string no_type_name_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "origin" : "system",
     "elements" : [
         {
@@ -138,6 +144,7 @@ const std::string no_type_name_model(R"({
 
 const std::string no_origin_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "elements" : [
         {
             "meta_type" : "object",
@@ -149,12 +156,14 @@ const std::string no_origin_model(R"({
 
 const std::string no_elements_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "origin" : "system"
   }
 )");
 
-const std::string empty_elments_model(R"({
+const std::string empty_elements_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "origin" : "system",
     "elements" : [ ]
   }
@@ -162,6 +171,7 @@ const std::string empty_elments_model(R"({
 
 const std::string module_path_model(R"({
     "model_name" : "a_model",
+    "is_expandable" : false,
     "origin" : "system",
     "module_path" : [ "module_1", "module_2", "module_3" ],
     "elements" : [
@@ -173,6 +183,20 @@ const std::string module_path_model(R"({
      ]
   }
 )");
+
+const std::string missing_is_expandable_model(R"({
+    "model_name" : "a_model",
+    "origin" : "system",
+    "elements" : [
+        {
+            "meta_type" : "object",
+            "simple_name" : "a_type",
+            "module_path" : [ "module_1" ]
+        }
+     ]
+  }
+)");
+
 
 const dogen::dynamic::schema::workflow& schema_workflow() {
     using dogen::dynamic::schema::test::mock_workflow_factory;
@@ -336,7 +360,14 @@ BOOST_AUTO_TEST_CASE(no_elements_model_throws) {
 BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
     SETUP_TEST_LOG_SOURCE("empty_elements_model_throws");
     contains_checker<hydration_error> c(missing_elements);
-    BOOST_CHECK_EXCEPTION(hydrate(empty_elments_model), hydration_error, c);
+    BOOST_CHECK_EXCEPTION(hydrate(empty_elements_model), hydration_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(missing_is_expandable_model_throws) {
+    SETUP_TEST_LOG_SOURCE("missing_is_expandable_model_throws");
+    contains_checker<hydration_error> c(missing_is_expandable);
+    BOOST_CHECK_EXCEPTION(hydrate(missing_is_expandable_model),
+        hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {

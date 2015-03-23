@@ -84,6 +84,7 @@ void workflow::initialise_context_activity(const std::string& model_name,
     BOOST_LOG_SEV(lg, debug) << "Target model name: "
                              << sml::string_converter::convert(m.name());
 
+    m.is_expandable(true);
     m.origin_type(sml::origin_types::user);
     m.is_target(is_target);
 

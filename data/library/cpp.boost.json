@@ -1,5 +1,6 @@
 {
     "model_name" : "boost",
+    "is_expandable" : false,
     "documentation" : "Boost Library types.",
     "origin" : "system",
     "elements" : [

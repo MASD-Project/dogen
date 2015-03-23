@@ -1,5 +1,6 @@
 {
     "model_name" : "std",
+    "is_expandable" : false,
     "documentation" : "C++ Standard Library types.",
     "origin" : "system",
     "elements" : [
