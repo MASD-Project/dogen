@@ -756,6 +756,36 @@ workflow does in each model.
 We should only implement this story when all of the major refactoring
 has been done.
 
+*** Create a "post-processing" workflow in SML                        :story:
+
+This story was spawned from "Refactor Dia to SML transformer". We need
+to create a create a "post-processing" workflow in SML that handles
+some of the work that is currently in Dia to SML. This will make life
+easier in terms of supporting JSON as a fully supported front-end.
+
+Post-processing tasks already identified:
+
+- population of model references: should be distinct step in workflow,
+  after transformation (=update_model_references=).
+- computation of leaves: See  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. 
+- setting original parent name: in effect all of the relationship
+  population.
+- identity processing: this should be done as a post-processing step
+  rather than during transformation.
+- containing module: this is not done in Dia to SML at the moment, its
+  only done in JSON hydrator. We are populating containment for the
+  global module in injector though; see
+  add_containing_module_to_non_contained_entities.
+
+We need to look into Dia to SML to see if there are any additional
+tasks that need to be moved across.
+
+As part of this work, we should also rename =sml::workflow= to perhaps
+=sml::merging_workflow= or something along these lines. This new
+workflow would then be =sml::augmenting_workflow= perhaps. We should
+also move any activities which are not related to merging into this
+workflow (e.g. injecting of system types, etc).
+
 *** Refactor Dia to SML transformer                                   :story:
 
 - remove all properties from context which are used only internally in
@@ -771,14 +801,6 @@ has been done.
   we did we could just return it and let workflow visit the base class
   to dispatch it to the correct type. This may be the right solution
   (to create such a base class).
-- population of model references should be distinct step in workflow,
-  after transformation (=update_model_references=). This could be done
-  in SML.
-- post-processing of leaves should have its own step in workflow. See
-  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. In fact, one could even argue that the
-  post-processing of leaves could be done in the SML workflow.
-- similar with original parent name. In effect all of the relationship
-  population seems like a separate step. This could be done in SML.
 - actually the right thing to do may even be to take away dispatching
   from the transformer and have specific methods to call from the
   outside world: transform large package, etc. These return the
@@ -792,12 +814,10 @@ has been done.
   in transformation - i.e. look for =dia.comment= field, if set, use
   its value to populate documentation. This could be done to all types
   for completeness.
-- the identity processing is similar in that it should be done as a
-  post-processing step rather than during transformation.
-- tests need to be cleaned up - we need to check for text of the
-  exception being thrown.
 - the workflow should not be creating transformers half-way
   through. They should be as stateless as possible.
+- tests need to be cleaned up - we need to check for text of the
+  exception being thrown.
 
 *** Update comments in C++ model                                      :story:
 
