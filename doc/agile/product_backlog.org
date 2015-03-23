@@ -2145,6 +2145,23 @@ Persister should support all archive types. At present it always
 outputs in XML; it should respect the archive type requested by the
 user.
 
+*** Persisters should throw on invalid archive types                  :story:
+
+At present we are checking to see if the archive type is invalid, and
+if so ignoring it:
+
+:     if (at == archive_types::invalid)
+:        return; // FIXME: should we not throw?
+:
+:    const auto& dp(create_debug_file_path(at, p));
+:    sml::persister persister;
+:    persister.persist(m, dp);
+
+We should:
+
+- pass the archive type into persister;
+- throw if the archive type is not supported.
+
 *** Generalise persister and remove serialisation helpers             :story:
 
 With the move of the knit persister into each model, it became obvious
