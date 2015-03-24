@@ -22,7 +22,6 @@
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 
 namespace dogen {
@@ -35,13 +34,7 @@ void register_opaque_settings_factories() {
         boost::make_shared<settings_factory>());
 }
 
-void register_field_definitions() {
-    auto& rg(dynamic::schema::workflow::registrar());
-    rg.register_field_definitions(field_definitions::all_field_definitions());
-}
-
 void initializer::initialize(registrar& /*rg*/) {
-    register_field_definitions();
     register_opaque_settings_factories();
 }
 

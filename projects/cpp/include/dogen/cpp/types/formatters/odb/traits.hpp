@@ -47,6 +47,11 @@ struct traits {
      * @brief Name of the class implementation formatter.
      */
     static std::string class_implementation_formatter_name();
+
+    /**
+     * @brief The pragma used by the ODB compiler.
+     */
+    static std::string odb_pragma();
 };
 
 } } } }

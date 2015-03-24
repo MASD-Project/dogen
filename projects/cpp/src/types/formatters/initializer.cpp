@@ -19,10 +19,6 @@
  *
  */
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
-#include "dogen/cpp/types/formatters/hash/initializer.hpp"
-#include "dogen/cpp/types/formatters/io/initializer.hpp"
-#include "dogen/cpp/types/formatters/test_data/initializer.hpp"
-#include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 
@@ -32,10 +28,6 @@ namespace formatters {
 
 void initializer::initialize(registrar& r) {
     types::initializer::initialize(r);
-    hash::initializer::initialize(r);
-    io::initializer::initialize(r);
-    test_data::initializer::initialize(r);
-    serialization::initializer::initialize(r);
     odb::initializer::initialize(r);
 }
 

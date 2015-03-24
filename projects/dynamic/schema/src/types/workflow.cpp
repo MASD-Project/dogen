@@ -49,15 +49,6 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-std::shared_ptr<registrar> workflow::registrar_;
-
-dynamic::schema::registrar& workflow::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<dynamic::schema::registrar>();
-
-    return *registrar_;
-}
-
 workflow::workflow(const repository& rp,
     const bool throw_on_missing_field_definition)
     : repository_(rp),

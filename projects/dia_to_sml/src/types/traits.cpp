@@ -23,8 +23,13 @@
 namespace dogen {
 namespace dia_to_sml {
 
-std::string traits::model_name() {
-    static std::string r("dia_to_sml");
+std::string traits::comment() {
+    static std::string r("dia.comment");
+    return r;
+}
+
+std::string traits::identity_attribute() {
+    static std::string r("dia.identity_attribute");
     return r;
 }
 

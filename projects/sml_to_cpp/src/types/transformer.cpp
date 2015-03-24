@@ -27,7 +27,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/cpp/types/formatters/odb/field_definitions.hpp"
+#include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -196,16 +196,15 @@ std::list<std::pair<std::string, std::string> >
 transformer::obtain_opaque_parameters(const dynamic::schema::object& o) const {
     std::list<std::pair<std::string, std::string> > r;
 
+    const auto odbp(cpp::formatters::odb::traits::odb_pragma());
     using namespace dynamic::schema;
-    using fd = cpp::formatters::odb::field_definitions;
     const field_selector fs(o);
-    if (!fs.has_field(fd::odb_pragma()))
+    if (!fs.has_field(odbp))
         return r;
 
-    const auto sn(fd::odb_pragma().name().simple());
-    const auto tc(fs.get_text_collection_content(fd::odb_pragma()));
+    const auto tc(fs.get_text_collection_content(odbp));
     for (const auto& e : tc)
-        r.push_back(std::make_pair(sn, e));
+        r.push_back(std::make_pair(odbp, e));
 
     return r;
 }

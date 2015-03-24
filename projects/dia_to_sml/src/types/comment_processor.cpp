@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dia_to_sml/types/traits.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/dia_to_sml/types/comment_processor.hpp"
 
@@ -36,7 +37,6 @@ const std::string empty;
 const std::string instruction_marker("#DOGEN ");
 const std::string equals("=");
 const std::string separator_not_found("Expected separator on KVP.");
-const std::string dia_comment("dia.comment");
 
 }
 
@@ -66,7 +66,7 @@ processed_comment comment_processor::process(const std::string& c) const {
 
             const auto key(line.substr(0, pos));
             const auto value(line.substr(pos + 1));
-            applicable_to_parent_object |= (key == dia_comment);
+            applicable_to_parent_object |= (key == traits::comment());
             r.key_value_pairs().push_back(std::make_pair(key, value));
         } else
             documentation_stream << line << std::endl;

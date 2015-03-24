@@ -42,4 +42,9 @@ std::string traits::class_implementation_formatter_name() {
     return r;
 }
 
+std::string traits::odb_pragma() {
+    static std::string r("odb_pragma");
+    return r;
+}
+
 } } } }

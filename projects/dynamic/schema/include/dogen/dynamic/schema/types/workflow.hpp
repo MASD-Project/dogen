@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/registrar.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -45,13 +44,6 @@ namespace schema {
  * @brief Produces a dynamic object from raw data.
  */
 class workflow {
-public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static dynamic::schema::registrar& registrar();
-
 public:
     /**
      * @brief Initialise the dynamic object factory.
@@ -108,8 +100,6 @@ public:
 private:
     const repository& repository_;
     const bool throw_on_missing_field_definition_;
-    static std::shared_ptr<dynamic::schema::registrar> registrar_;
-
 };
 
 } } }

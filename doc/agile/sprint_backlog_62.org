@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-24 Tue 08:57]
+Clock summary at [2015-03-24 Tue 10:54]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *42:57* |       |      |
+| *Total time*                                                             | *44:52* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 42:57 |      |
+| Active                                                                   |         | 44:52 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -43,8 +43,8 @@ Clock summary at [2015-03-24 Tue 08:57]
 | COMPLETED Perform some analysis on how field definitions will be used    |         |       | 0:41 |
 | COMPLETED Implement the repository workflow                              |         |       | 1:45 |
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
+| COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Remove all field definitions in code                             |         |       | 2:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -563,6 +563,18 @@ workflow to read in all the JSON files.
 - create a workflow that reads in all field definitions and then
   registers them.
 
+*** COMPLETED Remove all field definitions in code                    :story:
+    CLOSED: [2015-03-24 Tue 10:54]
+    CLOCK: [2015-03-24 Tue 10:00]--[2015-03-24 Tue 10:54] =>  0:54
+    CLOCK: [2015-03-24 Tue 09:17]--[2015-03-24 Tue 09:59] =>  0:42
+    CLOCK: [2015-03-24 Tue 08:58]--[2015-03-24 Tue 09:17] =>  0:19
+    CLOCK: [2015-03-24 Tue 07:28]--[2015-03-24 Tue 08:57] =>  1:29
+    CLOCK: [2015-03-23 Mon 21:47]--[2015-03-23 Mon 22:01] =>  0:14
+    CLOCK: [2015-03-23 Mon 21:21]--[2015-03-23 Mon 21:44] =>  0:23
+    CLOCK: [2015-03-23 Mon 16:43]--[2015-03-23 Mon 17:07] =>  0:24
+
+Instead add traits with the complete name for all relevant fields.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -632,16 +644,6 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
-
-*** STARTED Remove all field definitions in code                      :story:
-    CLOCK: [2015-03-24 Tue 09:17]--[2015-03-24 Tue 09:59] =>  0:42
-    CLOCK: [2015-03-24 Tue 08:58]--[2015-03-24 Tue 09:17] =>  0:19
-    CLOCK: [2015-03-24 Tue 07:28]--[2015-03-24 Tue 08:57] =>  1:29
-    CLOCK: [2015-03-23 Mon 21:47]--[2015-03-23 Mon 22:01] =>  0:14
-    CLOCK: [2015-03-23 Mon 21:21]--[2015-03-23 Mon 21:44] =>  0:23
-    CLOCK: [2015-03-23 Mon 16:43]--[2015-03-23 Mon 17:07] =>  0:24
-
-Instead add traits with the complete name for all relevant fields.
 
 *** Implement new settings factories with caching                     :story:
 

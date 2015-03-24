@@ -18,8 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/initializer.hpp"
-#include "dogen/dia_to_sml/types/initializer.hpp"
 #include "dogen/frontend/types/initializer.hpp"
 #include "dogen/cpp/types/initializer.hpp"
 #include "dogen/dynamic/expansion/types/initializer.hpp"
@@ -29,9 +27,7 @@ namespace dogen {
 namespace knit {
 
 void initializer::initialize() {
-    dogen::dia_to_sml::initializer::initialize();
     dogen::frontend::initializer::initialize();
-    dogen::formatters::initializer::initialize();
     dogen::dynamic::expansion::initializer::initialize();
     dogen::cpp::initializer::initialize();
 }

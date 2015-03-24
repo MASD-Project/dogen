@@ -31,8 +31,6 @@
 #include "dogen/dynamic/schema/types/name.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
-#include "dogen/dynamic/schema/types/registrar.hpp"
-#include "dogen/dynamic/schema/types/registrar_error.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/dynamic/schema/types/schema.hpp"

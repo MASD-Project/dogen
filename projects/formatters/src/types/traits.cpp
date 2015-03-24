@@ -23,8 +23,38 @@
 namespace dogen {
 namespace formatters {
 
-std::string traits::model_name() {
-    static std::string r("formatters");
+std::string traits::copyright_notices() {
+    static std::string r("copyright_notice");
+    return r;
+}
+
+std::string traits::licence_name() {
+    static std::string r("licence_name");
+    return r;
+}
+
+std::string traits::modeline_group_name() {
+    static std::string r("modeline_group_name");
+    return r;
+}
+
+std::string traits::generate_preamble() {
+    static std::string r("generate_preamble");
+    return r;
+}
+
+std::string traits::code_generation_marker::add_date_time() {
+    static std::string r("code_generation_marker.add_date_time");
+    return r;
+}
+
+std::string traits::code_generation_marker::add_warning() {
+    static std::string r("code_generation_marker.add_warning");
+    return r;
+}
+
+std::string traits::code_generation_marker::message() {
+    static std::string r("code_generation_marker.message");
     return r;
 }
 

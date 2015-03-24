@@ -24,7 +24,6 @@
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/dia_to_sml/types/initializer.hpp"
 
 namespace  {
 
@@ -42,13 +41,6 @@ struct exception_fixture {
     }
 };
 
-struct initializer {
-    initializer() {
-        dogen::dia_to_sml::initializer::initialize();
-    }
-};
-
 }
 
 BOOST_GLOBAL_FIXTURE(exception_fixture)
-BOOST_GLOBAL_FIXTURE(initializer)

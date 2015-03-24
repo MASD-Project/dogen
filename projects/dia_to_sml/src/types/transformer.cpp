@@ -29,7 +29,7 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia_to_sml/types/field_definitions.hpp"
+#include "dogen/dia_to_sml/types/traits.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
@@ -364,7 +364,7 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
 
     for (const auto& p : e.local_properties()) {
         const dynamic::schema::field_selector fs(p.extensions());
-        if (fs.has_field(field_definitions::identity_attribute()))
+        if (fs.has_field(traits::identity_attribute()))
             e.identity().push_back(p);
     }
 

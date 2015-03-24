@@ -22,7 +22,6 @@
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/field_definitions.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
@@ -35,14 +34,8 @@ void initialise_class_header_formatter(registrar& rg) {
     rg.register_formatter(std::make_shared<class_header_formatter>());
 }
 
-void register_field_definitions() {
-    auto& rg(dynamic::schema::workflow::registrar());
-    rg.register_field_definitions(field_definitions::all_field_definitions());
-}
-
 void initializer::initialize(registrar& rg) {
     initialise_class_header_formatter(rg);
-    register_field_definitions();
 }
 
 } } } }

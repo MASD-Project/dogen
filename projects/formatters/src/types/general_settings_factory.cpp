@@ -24,7 +24,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/schema/types/text.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/formatters/types/field_definitions.hpp"
+#include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
@@ -66,22 +66,20 @@ throw_missing_item(const std::string& msg, const std::string& n) const {
 boost::optional<licence> general_settings_factory::
 extract_licence(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
-    using fd = field_definitions;
-
     const field_selector fs(o);
-    if (!fs.has_field(fd::licence_name()))
+    if (!fs.has_field(traits::licence_name()))
         return boost::optional<licence>();
 
-    const auto ln(fs.get_text_content(fd::licence_name()));
+    const auto ln(fs.get_text_content(traits::licence_name()));
     const auto i(licences_.find(ln));
     if (i == licences_.end())
         throw_missing_item("Licence not found: ", ln);
 
-    if (!fs.has_field(fd::copyright_notices()))
+    if (!fs.has_field(traits::copyright_notices()))
         return i->second;
 
     licence l(i->second);
-    const auto ch(fs.get_text_collection_content(fd::copyright_notices()));
+    const auto ch(fs.get_text_collection_content(traits::copyright_notices()));
     l.copyright_notices(ch);
     return l;
 }
@@ -89,13 +87,11 @@ extract_licence(const dynamic::schema::object& o) const {
 boost::optional<modeline> general_settings_factory::
 extract_modeline(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
-    using fd = field_definitions;
-
     const field_selector fs(o);
-    if (!fs.has_field(fd::modeline_group_name()))
+    if (!fs.has_field(traits::modeline_group_name()))
         return boost::optional<modeline>();
 
-    const auto n(fs.get_text_content(fd::modeline_group_name()));
+    const auto n(fs.get_text_content(traits::modeline_group_name()));
     const auto i(modeline_groups_.find(n));
     if (i == modeline_groups_.end())
         throw_missing_item("Modeline group not found: ", n);
@@ -112,7 +108,7 @@ extract_modeline(const dynamic::schema::object& o) const {
 std::string general_settings_factory::
 extract_marker(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
-    using cgm = field_definitions::code_generation_marker;
+    using cgm = traits::code_generation_marker;
 
     const field_selector fs(o);
     if (!fs.has_field(cgm::message()))

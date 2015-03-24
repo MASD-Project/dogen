@@ -20,7 +20,6 @@
  */
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/initializer.hpp"
@@ -29,7 +28,6 @@ namespace dogen {
 namespace cpp {
 
 void initializer::initialize() {
-    settings::initializer::initialize();
     formatters::initializer::initialize(formatters::workflow::registrar());
     backend::workflow::register_backend(std::make_shared<workflow>());
 }
