@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-24 Tue 10:54]
+Clock summary at [2015-03-24 Tue 23:24]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *44:52* |       |      |
+| *Total time*                                                             | *45:36* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 44:52 |      |
+| Active                                                                   |         | 45:36 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -45,6 +45,7 @@ Clock summary at [2015-03-24 Tue 10:54]
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
+| STARTED Create a "populate file path" operation                          |         |       | 0:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -645,6 +646,36 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
+*** STARTED Create a "populate file path" operation                   :story:
+    CLOCK: [2015-03-24 Tue 23:11]--[2015-03-24 Tue 23:24] =>  0:13
+    CLOCK: [2015-03-24 Tue 13:03]--[2015-03-24 Tue 13:34] =>  0:31
+
+We need an operation that uses all the ingredients for a file path and
+generates the file path. It is unconditional. It depends on
+defaulting.
+
+This should populate both the inclusion path (and delimiter) and the
+full path. It should take into account overriding.
+
+We should consider having two operations: the full path and the
+inclusion path.
+
+This operation should live in c++.
+
+Tasks:
+
+- perform some validation in repository workflow that formatter fields
+  are not duplicated on simple name.
+- create a utility class in schema that has a table of names to
+  lambdas. Users supply lambdas. Utility resolves the field, uses the
+  default value if the field is not in dynamic object, and supplies
+  this value to lambda. Lambda knows of the underlying
+  object. Converts value to appropriate type and sets it.
+- add a field for the file path if it doesn't yet exist;
+- implement path settings factory, adding any missing fields;
+- create a file path expander that calls the factory for every
+  formatter
+
 *** Implement new settings factories with caching                     :story:
 
 - create a field definition selector;
@@ -677,20 +708,6 @@ a check there.
 *** Rename name builder to name factory                               :story:
 
 The name builder is just a factory so make the name reflect it.
-
-*** Create a "populate file path" operation                           :story:
-
-We need an operation that uses all the ingredients for a file path and
-generates the file path. It is unconditional. It depends on
-defaulting.
-
-This should populate both the inclusion path (and delimiter) and the
-full path. It should take into account overriding.
-
-We should consider having two operations: the full path and the
-inclusion path.
-
-This operation should live in c++.
 
 *** Create a "populate includes operation"                            :story:
 
