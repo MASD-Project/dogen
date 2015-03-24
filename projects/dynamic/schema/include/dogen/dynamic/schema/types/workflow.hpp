@@ -32,8 +32,10 @@
 #include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/registrar.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
+
 
 namespace dogen {
 namespace dynamic {
@@ -54,29 +56,29 @@ public:
     /**
      * @brief Initialise the dynamic object factory.
      *
+     *
+     * @param repository All field definitions.
      * @param throw_on_missing_field_definition If true, any dynamic
      * extensions for which a field definition does not exist will
      * result in an exception. If false, they will be ignored.
      */
-    explicit workflow(
+    workflow(
+        const repository& rp,
         const bool throw_on_missing_field_definition = true);
 
 private:
     /**
-     * @brief Organises field definitions by complete field name.
-     */
-    std::unordered_map<std::string, field_definition>
-    create_field_definitions_by_complete_name() const;
-
-    /**
-     * @brief Returns the field definition for the complete
-     * name, if one exists.
-     *
-     * @pre Current scope must be valid according to the field
-     * definition's scope.
+     * @brief Returns the field definition for the qualified name, if
+     * one exists.
      */
     boost::optional<field_definition>
-    obtain_field_definition(const std::string& complete_name,
+    obtain_field_definition(const std::string& n) const;
+
+    /**
+     * @brief Ensures the field definition is valid for the current
+     * scope.
+     */
+    void validate_scope(const field_definition& fd,
         const scope_types current_scope) const;
 
 private:
@@ -104,10 +106,10 @@ public:
         raw_data) const;
 
 private:
+    const repository& repository_;
     const bool throw_on_missing_field_definition_;
     static std::shared_ptr<dynamic::schema::registrar> registrar_;
-    const std::unordered_map<std::string, field_definition>
-    field_definitions_by_complete_name_;
+
 };
 
 } } }

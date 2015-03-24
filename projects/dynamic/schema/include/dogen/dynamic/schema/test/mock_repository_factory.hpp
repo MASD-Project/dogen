@@ -18,16 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_REPOSITORY_FACTORY_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_REPOSITORY_FACTORY_HPP
+
+#include <list>
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
 namespace dynamic {
 namespace schema {
 namespace test {
 
-workflow mock_workflow_factory::non_validating_workflow(const repository& rp) {
-    workflow r(rp, false/*throw_on_missing_field_definition*/);
-    return r;
-}
+/**
+ * @brief Generates a mock repository with a number of fields in it.
+ */
+class mock_repository_factory {
+private:
+    /**
+     * @brief Adds the field definition to the repository, populating
+     * all of the required containers.
+     */
+    void add_field_definition(const field_definition& fd, repository& rp) const;
+
+public:
+    /**
+     * @brief Creates the repository with canned fields, adding any
+     * additional fields the user may supply.
+     */
+    repository make(const std::list<field_definition>& additional_fields =
+        std::list<field_definition> {});
+};
 
 } } } }
+
+#endif

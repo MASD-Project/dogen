@@ -18,11 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_WORKFLOW_FACTORY_HPP
-#define DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_WORKFLOW_FACTORY_HPP
+#ifndef DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_FIELD_DEFINITION_FACTORY_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TEST_MOCK_FIELD_DEFINITION_FACTORY_HPP
 
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include <list>
+#include "dogen/dynamic/schema/types/value_types.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -30,19 +31,33 @@ namespace schema {
 namespace test {
 
 /**
- * @brief Generates "mock" schema workflows. In reality these are just
- * instances of the workflow used for testing.
+ * @brief Generates field definitions.
  */
-class mock_workflow_factory {
+class mock_field_definition_factory {
+private:
+    /**
+     * @brief Create the comment field.
+     */
+    field_definition create_comment() const;
+
+    /**
+     * @brief Create the identity attribute field.
+     */
+    field_definition create_identity_attribute() const;
+
 public:
     /**
-     * @brief Creates a workflow that does not throw if field
-     * instances do not have a corresponding field definition.
-     *
-     * This behaviour is useful when we do not have all of the c++
-     * field definitions and so on and it safe to ignore those.
+     * @brief Creates a set of canned field definitions, needed for
+     * testing.
      */
-    static workflow non_validating_workflow(const repository& rp);
+    std::list<field_definition> make_canned_field_definitions() const;
+
+    /**
+     * @brief Creates a field definition with most values set to
+     * sensible defaults.
+     */
+    field_definition make_field_definition(const std::string n,
+        value_types vt = value_types::text) const;
 };
 
 } } } }

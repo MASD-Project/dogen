@@ -24,6 +24,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/dynamic/schema/test/mock_field_definition_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
 #include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
@@ -198,13 +200,26 @@ const std::string missing_is_expandable_model(R"({
 )");
 
 
-const dogen::dynamic::schema::workflow& schema_workflow() {
-    using dogen::dynamic::schema::test::mock_workflow_factory;
-    return mock_workflow_factory::non_validating_workflow();
+dogen::dynamic::schema::repository create_repository() {
+    using namespace dogen::dynamic::schema;
+    test::mock_field_definition_factory f;
+
+    std::list<field_definition> fds;
+    fds.push_back(f.make_field_definition(model_key));
+    fds.push_back(f.make_field_definition(some_key));
+    fds.push_back(f.make_field_definition(type_key, value_types::boolean));
+
+    test::mock_repository_factory rf;
+    return rf.make(fds);
 }
 
 dogen::sml::model hydrate(std::istream& s) {
-    dogen::sml::json_hydrator h(schema_workflow());
+    const auto rp(create_repository());
+
+    using dogen::dynamic::schema::test::mock_workflow_factory;
+    const auto w(mock_workflow_factory::non_validating_workflow(rp));
+
+    dogen::sml::json_hydrator h(w);
     return h.hydrate(s);
 }
 
@@ -218,35 +233,11 @@ dogen::sml::model hydrate(const std::string& content) {
     return hydrate(s);
 }
 
-dogen::dynamic::schema::field_definition
-create_field_definition(const std::string n,
-    dogen::dynamic::schema::value_types vt =
-    dogen::dynamic::schema::value_types::text) {
-    dogen::dynamic::schema::field_definition r;
-    r.name().simple(n);
-    r.name().qualified(n);
-    r.type(vt);
-    r.scope(dogen::dynamic::schema::scope_types::any);
-    return r;
-}
-
-struct register_fields {
-    register_fields() {
-        auto& reg(dogen::dynamic::schema::workflow::registrar());
-        reg.register_field_definition(create_field_definition(model_key));
-        reg.register_field_definition(create_field_definition(some_key));
-        reg.register_field_definition(create_field_definition(type_key,
-                dogen::dynamic::schema::value_types::boolean));
-    }
-};
-
 }
 
 using dogen::utility::test::contains_checker;
 using dogen::sml::string_converter;
 using dogen::sml::hydration_error;
-
-BOOST_GLOBAL_FIXTURE(register_fields)
 
 BOOST_AUTO_TEST_SUITE(json_hydrator)
 

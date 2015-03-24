@@ -39,6 +39,7 @@
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/utility/serialization/archive_types.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace dogen {
 namespace knit {
@@ -142,6 +143,7 @@ private:
      * @brief Obtains all partial SML models.
      */
     std::list<sml::model> obtain_partial_sml_models_activity(
+        const dynamic::schema::workflow& schema_workflow,
         const std::list<frontend::input_descriptor>& descriptors) const;
 
     /**

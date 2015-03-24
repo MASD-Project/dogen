@@ -44,6 +44,7 @@
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
+
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -224,8 +225,9 @@ workflow::obtain_input_descriptors_activity() const {
 }
 
 std::list<sml::model> workflow::obtain_partial_sml_models_activity(
+    const dynamic::schema::workflow& schema_workflow,
     const std::list<frontend::input_descriptor>& descriptors) const {
-    frontend::workflow w(knitting_options_);
+    frontend::workflow w(schema_workflow, knitting_options_);
     return w.execute(descriptors);
 }
 
@@ -288,10 +290,11 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, debug) << "Knitting options: " << knitting_options_;
 
     try {
-        setup_schema_repository_activity();
+        const auto rp(setup_schema_repository_activity());
+        const dynamic::schema::workflow sw(rp);
         const auto d(obtain_input_descriptors_activity());
         const auto tp(obtain_target_path_activity(d));
-        const auto pm(obtain_partial_sml_models_activity(d));
+        const auto pm(obtain_partial_sml_models_activity(sw, d));
         const auto m(merge_models_activity(pm));
         persist_model_activity(tp, m);
 

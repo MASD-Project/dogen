@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-23 Mon 20:27]
+Clock summary at [2015-03-24 Tue 08:57]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *40:51* |       |      |
+| *Total time*                                                             | *42:57* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 40:51 |      |
+| Active                                                                   |         | 42:57 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -42,9 +42,9 @@ Clock summary at [2015-03-23 Mon 20:27]
 | COMPLETED Expansion must be performed before merging                     |         |       | 1:22 |
 | COMPLETED Perform some analysis on how field definitions will be used    |         |       | 0:41 |
 | COMPLETED Implement the repository workflow                              |         |       | 1:45 |
+| COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Remove all field definitions in code                             |         |       | 0:24 |
-| STARTED Add JSON support to dynamic workflow                             |         |       | 0:50 |
+| STARTED Remove all field definitions in code                             |         |       | 2:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -552,6 +552,17 @@ What we need instead is:
 Code all classes related to the repository workflow in schema, and
 hook it up.
 
+*** COMPLETED Add JSON support to dynamic workflow                    :story:
+    CLOSED: [2015-03-23 Mon 22:01]
+    CLOCK: [2015-03-23 Mon 15:39]--[2015-03-23 Mon 16:00] =>  0:21
+    CLOCK: [2015-03-23 Mon 15:10]--[2015-03-23 Mon 15:39] =>  0:29
+
+We need to create the required activities in the dynamic schema's
+workflow to read in all the JSON files.
+
+- create a workflow that reads in all field definitions and then
+  registers them.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -623,19 +634,12 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Remove all field definitions in code                      :story:
+    CLOCK: [2015-03-24 Tue 07:28]--[2015-03-24 Tue 08:57] =>  1:29
+    CLOCK: [2015-03-23 Mon 21:47]--[2015-03-23 Mon 22:01] =>  0:14
+    CLOCK: [2015-03-23 Mon 21:21]--[2015-03-23 Mon 21:44] =>  0:23
     CLOCK: [2015-03-23 Mon 16:43]--[2015-03-23 Mon 17:07] =>  0:24
 
 Instead add traits with the complete name for all relevant fields.
-
-*** STARTED Add JSON support to dynamic workflow                      :story:
-    CLOCK: [2015-03-23 Mon 15:39]--[2015-03-23 Mon 16:00] =>  0:21
-    CLOCK: [2015-03-23 Mon 15:10]--[2015-03-23 Mon 15:39] =>  0:29
-
-We need to create the required activities in the dynamic schema's
-workflow to read in all the JSON files.
-
-- create a workflow that reads in all field definitions and then
-  registers them.
 
 *** Implement new settings factories with caching                     :story:
 

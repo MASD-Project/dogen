@@ -53,7 +53,6 @@ repository repository_workflow::create_repository_activity(
     r.all_field_definitions(fds);
 
     for (const auto& fd : fds) {
-        const auto& oh(fd.ownership_hierarchy());
         const auto n(fd.name().qualified());
         const auto pair(std::make_pair(n, fd));
         const auto result(r.field_definitions_by_name().insert(pair));
@@ -62,6 +61,7 @@ repository repository_workflow::create_repository_activity(
             BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + n));
         }
 
+        const auto& oh(fd.ownership_hierarchy());
         r.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
         r.field_definitions_by_formatter_name()[oh.formatter_name()]
             .push_back(fd);

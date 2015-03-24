@@ -41,7 +41,8 @@ namespace frontend {
  */
 class workflow {
 public:
-    explicit workflow(const config::knitting_options& o);
+    workflow(const dynamic::schema::workflow& schema_workflow,
+        const config::knitting_options& o);
 
 public:
     /**
@@ -103,8 +104,8 @@ public:
 
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
+    const dynamic::schema::workflow& schema_workflow_;
     const config::knitting_options knitting_options_;
-    const dynamic::schema::workflow schema_workflow_;
 };
 
 } }

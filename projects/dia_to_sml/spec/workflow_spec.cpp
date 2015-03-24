@@ -28,13 +28,14 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
@@ -49,11 +50,6 @@ namespace  {
 const std::string test_module("dia_to_sml");
 const std::string test_suite("workflow_spec");
 
-const dogen::dynamic::schema::workflow& schema_workflow() {
-    using dogen::dynamic::schema::test::mock_workflow_factory;
-    return mock_workflow_factory::non_validating_workflow();
-}
-
 bool test_workflow(
     boost::filesystem::path input_path,
     boost::filesystem::path expected_path,
@@ -67,7 +63,13 @@ bool test_workflow(
     const bool is_target(true);
     const std::string model_name(input_path.stem().string());
 
-    workflow w(schema_workflow());
+    using namespace dogen::dynamic::schema::test;
+    mock_repository_factory rf;
+    const auto rp(rf.make());
+    const auto schema_workflow(
+        mock_workflow_factory::non_validating_workflow(rp));
+
+    workflow w(schema_workflow);
     dogen::sml::model actual(w.execute(i, model_name, epp, is_target));
     return asserter::assert_object(expected_path, actual_path, actual);
 }

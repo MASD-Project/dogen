@@ -58,64 +58,41 @@ dynamic::schema::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-workflow::workflow(const bool throw_on_missing_field_definition)
-    : throw_on_missing_field_definition_(throw_on_missing_field_definition),
-      field_definitions_by_complete_name_(
-          create_field_definitions_by_complete_name()) { }
-
-std::unordered_map<std::string, field_definition> workflow::
-create_field_definitions_by_complete_name() const {
-    std::unordered_map<std::string, field_definition> r;
-
-    registrar().validate();
-    BOOST_LOG_SEV(lg, debug) << "Field definitions: "
-                             << registrar().field_definitions();
-
-    for (const auto& fd : registrar().field_definitions()) {
-        const auto qn(fd.name().qualified());
-        const auto result(r.insert(std::make_pair(qn, fd)));
-        if (!result.second) {
-            BOOST_LOG_SEV(lg, error) << duplicate_field_definition << qn;
-            BOOST_THROW_EXCEPTION(workflow_error(
-                    duplicate_field_definition + qn));
-        }
-    }
-    return r;
-}
+workflow::workflow(const repository& rp,
+    const bool throw_on_missing_field_definition)
+    : repository_(rp),
+      throw_on_missing_field_definition_(throw_on_missing_field_definition) { }
 
 boost::optional<field_definition> workflow::
-obtain_field_definition(const std::string& complete_name,
-    const scope_types current_scope) const {
-
-    const auto i(field_definitions_by_complete_name_.find(complete_name));
-    if (i == field_definitions_by_complete_name_.end()) {
+obtain_field_definition(const std::string& n) const {
+    const auto i(repository_.field_definitions_by_name().find(n));
+    if (i == repository_.field_definitions_by_name().end()) {
         if (throw_on_missing_field_definition_) {
-            BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                     << complete_name;
+            BOOST_LOG_SEV(lg, error) << field_definition_not_found << n;
 
-            BOOST_THROW_EXCEPTION(workflow_error(
-                    field_definition_not_found + complete_name));
-            return boost::optional<field_definition>();
+            BOOST_THROW_EXCEPTION(
+                workflow_error(field_definition_not_found + n));
         }
 
-        BOOST_LOG_SEV(lg, warn) << field_definition_not_found << complete_name;
+        BOOST_LOG_SEV(lg, warn) << field_definition_not_found << n;
         return boost::optional<field_definition>();
     }
+    return i->second;
+}
 
-    const auto& fd(i->second);
+void workflow::validate_scope(const field_definition& fd,
+    const scope_types current_scope) const {
     if (fd.scope() != scope_types::any &&
         fd.scope() != scope_types::not_applicable &&
         fd.scope() != current_scope) {
 
         std::stringstream s;
-        s << field_used_in_invalid_scope << complete_name
+        s << field_used_in_invalid_scope << fd.name().qualified()
           << expected_scope << fd.scope()
           << actual_scope << current_scope;
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(workflow_error(s.str()));
     }
-
-    return boost::optional<field_definition>(fd);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
@@ -137,13 +114,14 @@ workflow::create_fields_activity(
     std::unordered_map<std::string, field_instance> r;
     field_instance_factory f;
     for (auto pair : aggregated_data) {
-        const auto& complete_name(pair.first);
-        const auto fd(obtain_field_definition(complete_name, current_scope));
+        const auto& n(pair.first);
+        const auto fd(obtain_field_definition(n));
         if (!fd)
             continue;
 
+        validate_scope(*fd, current_scope);
         const auto& values(pair.second);
-        r[complete_name] = f.make(*fd, values);
+        r[n] = f.make(*fd, values);
     }
     return r;
 }
