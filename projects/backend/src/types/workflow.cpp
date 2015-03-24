@@ -44,8 +44,9 @@ namespace backend {
 
 std::shared_ptr<backend::registrar> workflow::registrar_;
 
-workflow::workflow(const config::knitting_options& o)
-    : knitting_options_(o) { }
+workflow::workflow(const config::knitting_options& o,
+    const dynamic::schema::repository& rp)
+    : knitting_options_(o), repository_(rp) { }
 
 backend::registrar& workflow::registrar() {
     if (!registrar_)
@@ -81,7 +82,7 @@ workflow::execute(const sml::model& m) const {
     for(const auto b : registrar().backends()) {
         const auto id(b->id());
         BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << id << "'";
-        auto files(b->generate(knitting_options_, m));
+        auto files(b->generate(knitting_options_, repository_, m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << id
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());

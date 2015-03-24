@@ -35,6 +35,7 @@
 #include "dogen/sml_to_cpp/types/workflow.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/backend/types/workflow.hpp" // FIXME
+#include "dogen/dynamic/schema/types/repository.hpp" // FIXME
 
 namespace dogen {
 namespace knit {
@@ -48,12 +49,14 @@ public:
     cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    cpp_backend(const sml::model& model, const config::knitting_options& o);
+    cpp_backend(const config::knitting_options& o,
+        const dynamic::schema::repository& rp, const sml::model& model);
     virtual ~cpp_backend() noexcept {}
 
 public:
     static backend::ptr
-    create(const sml::model& model, const config::knitting_options& o);
+    create(const config::knitting_options& o,
+        const dynamic::schema::repository& rp, const sml::model& model);
 
 public:
     backend::value_type generate() override;

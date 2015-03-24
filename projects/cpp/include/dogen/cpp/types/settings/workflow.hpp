@@ -33,6 +33,7 @@
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,15 +51,7 @@ public:
     static cpp::settings::registrar& registrar();
 
 public:
-    /**
-     * @brief Initialises the bundle factory.
-     *
-     * @param field_definitions_by_formatter_name All fields by formatter name.
-     */
-    explicit workflow(const std::unordered_map<
-            std::string, std::list<dynamic::schema::field_definition>
-            >&
-        field_definitions_by_formatter_name);
+    explicit workflow(const dynamic::schema::repository& rp);
 
 public:
     /**

@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 
 namespace dogen {
@@ -41,17 +41,7 @@ namespace settings {
  */
 class formatter_settings_factory {
 public:
-    /**
-     * @brief Initialise the factory.
-     *
-     * @param field_definitions_by_formatter_name all available field
-     * definitions for formatters, organised by formatter name.
-     */
-    explicit formatter_settings_factory(
-        const std::unordered_map<
-            std::string, std::list<dynamic::schema::field_definition>
-            >& field_definitions_by_formatter_name
-        );
+    explicit formatter_settings_factory(const dynamic::schema::repository& rp);
 
 private:
     /**
@@ -76,9 +66,7 @@ public:
     make(const dynamic::schema::object& o) const;
 
 private:
-    const std::unordered_map<
-    std::string, std::list<dynamic::schema::field_definition>
-    >& field_definitions_by_formatter_name_;
+    const dynamic::schema::repository& repository_;
 };
 
 } } }

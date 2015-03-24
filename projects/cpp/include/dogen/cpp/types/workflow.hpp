@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
@@ -75,7 +75,9 @@ public:
     void validate() const override;
 
     std::forward_list<dogen::formatters::file> generate(
-        const config::knitting_options& o, const sml::model& m) const override;
+        const config::knitting_options& o,
+        const dynamic::schema::repository& rp,
+        const sml::model& m) const override;
 };
 
 } }

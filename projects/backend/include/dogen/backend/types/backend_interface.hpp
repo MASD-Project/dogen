@@ -31,6 +31,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/config/types/knitting_options.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
 namespace backend {
@@ -70,7 +71,9 @@ public:
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
-        const config::knitting_options& o, const sml::model& m) const = 0;
+        const config::knitting_options& o,
+        const dynamic::schema::repository& rp,
+        const sml::model& m) const = 0;
 };
 
 } }

@@ -27,8 +27,6 @@
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/hydration_error.hpp"
 #include "dogen/dynamic/schema/types/hydration_workflow.hpp"
-#include "dogen/dynamic/schema/types/indexer.hpp"
-#include "dogen/dynamic/schema/types/indexing_error.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 #include "dogen/dynamic/schema/types/name.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"

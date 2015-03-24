@@ -25,6 +25,7 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(backend STATIC ${all_files})
 target_link_libraries(backend
     config
+    dynamic_schema
     sml
     formatters
     utility

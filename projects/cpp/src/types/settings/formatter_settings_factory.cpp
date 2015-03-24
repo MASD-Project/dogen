@@ -44,11 +44,7 @@ namespace cpp {
 namespace settings {
 
 formatter_settings_factory::formatter_settings_factory(
-    const std::unordered_map<
-        std::string, std::list<dynamic::schema::field_definition>
-        >& field_definitions_by_formatter_name
-    ) : field_definitions_by_formatter_name_(
-        field_definitions_by_formatter_name) { }
+    const dynamic::schema::repository& rp) : repository_(rp) { }
 
 void formatter_settings_factory::
 ensure_field_is_present(const bool found, const std::string& name) const {
@@ -98,9 +94,14 @@ create_settings_for_formatter(
 std::unordered_map<std::string, formatter_settings>
 formatter_settings_factory::
 make(const dynamic::schema::object& o) const {
+    // FIXME: need to look for c++ formatters only
     std::unordered_map<std::string, formatter_settings> r;
-    for (const auto pair : field_definitions_by_formatter_name_) {
+    for (const auto pair : repository_.field_definitions_by_formatter_name()) {
         const auto& formatter_name(pair.first);
+
+        BOOST_LOG_SEV(lg, debug) << "Creating settings for formatter: '"
+                                 << formatter_name << "'";
+
         const auto& formatter_fields(pair.second);
         const auto s(create_settings_for_formatter(formatter_fields, o));
         r.insert(std::make_pair(formatter_name, s));

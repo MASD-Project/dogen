@@ -45,11 +45,8 @@ cpp::settings::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-workflow::workflow(const std::unordered_map<
-        std::string, std::list<dynamic::schema::field_definition>
-        >& field_definitions_by_formatter_name)
-    : factory_(field_definitions_by_formatter_name,
-        registrar().opaque_settings_factories()) { }
+workflow::workflow(const dynamic::schema::repository& rp)
+    : factory_(rp, registrar().opaque_settings_factories()) { }
 
 bundle workflow::execute(const dynamic::schema::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle.";

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/indexer.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
@@ -72,14 +71,12 @@ void workflow::validate() const {
 }
 
 std::forward_list<dogen::formatters::file> workflow::
-generate(const config::knitting_options& /*o*/, const sml::model& m) const {
+generate(const config::knitting_options& /*o*/,
+    const dynamic::schema::repository& rp,
+    const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    const auto& fds(dynamic::schema::workflow::registrar().field_definitions());
-
-    dynamic::schema::indexer idx;
-    idx.index(fds);
-    settings::workflow w(idx.field_definitions_by_formatter_name());
+    settings::workflow w(rp);
     w.validate();
     const auto f(create_formattables_activty(w, m));
     const auto r(format_activty(f));

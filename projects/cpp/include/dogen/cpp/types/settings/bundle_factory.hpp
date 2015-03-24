@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
@@ -56,10 +56,7 @@ public:
      * @param opaque_factories All factories of opaque settings know
      * to the system.
      */
-    bundle_factory(
-        const std::unordered_map<
-            std::string, std::list<dynamic::schema::field_definition>
-            >& field_definitions_by_formatter_name,
+    bundle_factory(const dynamic::schema::repository& rp,
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
             >& opaque_settings_factories);
@@ -95,9 +92,7 @@ public:
     bundle make(const dynamic::schema::object& o) const;
 
 private:
-    const std::unordered_map<
-    std::string, std::list<dynamic::schema::field_definition>
-    >& field_definitions_by_formatter_name_;
+    const dynamic::schema::repository& repository_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories_;

@@ -62,9 +62,12 @@ repository repository_workflow::create_repository_activity(
         }
 
         const auto& oh(fd.ownership_hierarchy());
-        r.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
-        r.field_definitions_by_formatter_name()[oh.formatter_name()]
-            .push_back(fd);
+        if (!oh.facet_name().empty())
+            r.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
+
+        if (!oh.formatter_name().empty())
+            r.field_definitions_by_formatter_name()[oh.formatter_name()]
+                .push_back(fd);
 
         // FIXME
         // facet_names_by_model_name_;

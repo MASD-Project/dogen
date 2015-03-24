@@ -168,7 +168,8 @@ private:
      * @brief Given a merged model, generates all of its
      * representations.
      */
-    void generate_model_activity(const sml::model& m) const;
+    void generate_model_activity(const dynamic::schema::repository& rp,
+        const sml::model& m) const;
 
 public:
     /**

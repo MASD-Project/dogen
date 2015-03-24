@@ -26,8 +26,9 @@
 #endif
 
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/sml/types/model.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
+#include "dogen/sml/types/model.hpp" // FIXME
+#include "dogen/dynamic/schema/types/repository.hpp" // FIXME
 
 namespace dogen {
 namespace knit {
@@ -45,7 +46,9 @@ public:
     typedef std::vector<backend::ptr> result_type;
 
 public:
-    factory(const sml::model& model, const config::knitting_options& o);
+    factory(const config::knitting_options& o,
+        const dynamic::schema::repository& rp,
+        const sml::model& model);
 
 private:
     void log_cpp_backend_disabled() const;
@@ -55,6 +58,7 @@ public:
 
 private:
     const config::knitting_options& options_;
+    const dynamic::schema::repository& repository_;
     const sml::model& model_;
 };
 
