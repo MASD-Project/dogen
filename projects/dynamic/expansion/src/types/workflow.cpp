@@ -149,9 +149,9 @@ graph_type workflow::build_expander_graph_activity() const {
 
 expansion_context workflow::create_expansion_context_activity(
     const config::cpp_options& options,
-    const std::list<schema::field_definition>& fds,
+    const schema::repository& rp,
     const sml::model& m) const {
-    return expansion_context(m, fds, options);
+    return expansion_context(m, rp, options);
 }
 
 void workflow::
@@ -162,14 +162,14 @@ perform_expansion_activity(const graph_type& g,expansion_context& ec) const {
 
 sml::model workflow::execute(
     const config::cpp_options& options,
-    const std::list<schema::field_definition>& fds,
+    const schema::repository& rp,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Expanding model: "
                              << sml::string_converter::convert(m.name());
 
     validate();
     auto g(build_expander_graph_activity());
-    auto ec(create_expansion_context_activity(options, fds, m));
+    auto ec(create_expansion_context_activity(options, rp, m));
     perform_expansion_activity(g, ec);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding model.";

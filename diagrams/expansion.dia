@@ -2085,13 +2085,13 @@ of expanders.#</dia:string>
         <dia:point val="-25,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,25.95;-3.275,30.45"/>
+        <dia:rectangle val="-25.05,25.95;-11.745,30.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-25,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.675000000000001"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2209,10 +2209,10 @@ of expanders.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#field_definitions#</dia:string>
+            <dia:string>#repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;schema::field_definition&gt;#</dia:string>
+            <dia:string>#schema::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2300,17 +2300,17 @@ Note: this is here as a bridge to the legacy approach.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14.1625,30.4"/>
+        <dia:point val="-18.3975,30.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.9125,29.65;-2.8,42.8"/>
+        <dia:rectangle val="-19.1475,29.65;-2.8,42.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14.1625,30.4"/>
-        <dia:point val="-14.1625,37"/>
+        <dia:point val="-18.3975,30.4"/>
+        <dia:point val="-18.3975,37"/>
         <dia:point val="-3,37"/>
         <dia:point val="-3,42"/>
       </dia:attribute>

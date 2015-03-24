@@ -26,10 +26,9 @@
 #endif
 
 #include <algorithm>
-#include <list>
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/dynamic/expansion/serialization/expansion_context_fwd_ser.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -46,7 +45,7 @@ public:
 public:
     expansion_context(
         const dogen::sml::model& model,
-        const std::list<dogen::dynamic::schema::field_definition>& field_definitions,
+        const dogen::dynamic::schema::repository& repository,
         const dogen::config::cpp_options& cpp_options);
 
 private:
@@ -62,10 +61,10 @@ public:
     void model(const dogen::sml::model& v);
     void model(const dogen::sml::model&& v);
 
-    const std::list<dogen::dynamic::schema::field_definition>& field_definitions() const;
-    std::list<dogen::dynamic::schema::field_definition>& field_definitions();
-    void field_definitions(const std::list<dogen::dynamic::schema::field_definition>& v);
-    void field_definitions(const std::list<dogen::dynamic::schema::field_definition>&& v);
+    const dogen::dynamic::schema::repository& repository() const;
+    dogen::dynamic::schema::repository& repository();
+    void repository(const dogen::dynamic::schema::repository& v);
+    void repository(const dogen::dynamic::schema::repository&& v);
 
     /**
      * @brief Command-line supplied options for the c++ model.
@@ -91,7 +90,7 @@ public:
 
 private:
     dogen::sml::model model_;
-    std::list<dogen::dynamic::schema::field_definition> field_definitions_;
+    dogen::dynamic::schema::repository repository_;
     dogen::config::cpp_options cpp_options_;
 };
 

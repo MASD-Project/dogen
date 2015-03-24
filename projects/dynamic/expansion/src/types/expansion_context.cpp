@@ -26,22 +26,22 @@ namespace expansion {
 
 expansion_context::expansion_context(
     const dogen::sml::model& model,
-    const std::list<dogen::dynamic::schema::field_definition>& field_definitions,
+    const dogen::dynamic::schema::repository& repository,
     const dogen::config::cpp_options& cpp_options)
     : model_(model),
-      field_definitions_(field_definitions),
+      repository_(repository),
       cpp_options_(cpp_options) { }
 
 void expansion_context::swap(expansion_context& other) noexcept {
     using std::swap;
     swap(model_, other.model_);
-    swap(field_definitions_, other.field_definitions_);
+    swap(repository_, other.repository_);
     swap(cpp_options_, other.cpp_options_);
 }
 
 bool expansion_context::operator==(const expansion_context& rhs) const {
     return model_ == rhs.model_ &&
-        field_definitions_ == rhs.field_definitions_ &&
+        repository_ == rhs.repository_ &&
         cpp_options_ == rhs.cpp_options_;
 }
 
@@ -67,20 +67,20 @@ void expansion_context::model(const dogen::sml::model&& v) {
     model_ = std::move(v);
 }
 
-const std::list<dogen::dynamic::schema::field_definition>& expansion_context::field_definitions() const {
-    return field_definitions_;
+const dogen::dynamic::schema::repository& expansion_context::repository() const {
+    return repository_;
 }
 
-std::list<dogen::dynamic::schema::field_definition>& expansion_context::field_definitions() {
-    return field_definitions_;
+dogen::dynamic::schema::repository& expansion_context::repository() {
+    return repository_;
 }
 
-void expansion_context::field_definitions(const std::list<dogen::dynamic::schema::field_definition>& v) {
-    field_definitions_ = v;
+void expansion_context::repository(const dogen::dynamic::schema::repository& v) {
+    repository_ = v;
 }
 
-void expansion_context::field_definitions(const std::list<dogen::dynamic::schema::field_definition>&& v) {
-    field_definitions_ = std::move(v);
+void expansion_context::repository(const dogen::dynamic::schema::repository&& v) {
+    repository_ = std::move(v);
 }
 
 const dogen::config::cpp_options& expansion_context::cpp_options() const {

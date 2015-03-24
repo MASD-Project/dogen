@@ -30,7 +30,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/expansion/types/grapher.hpp"
 #include "dogen/dynamic/expansion/types/registrar.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
@@ -67,7 +67,7 @@ private:
      */
     expansion_context create_expansion_context_activity(
         const config::cpp_options& options,
-        const std::list<schema::field_definition>& fds,
+        const schema::repository& rp,
         const sml::model& m) const;
 
     /**
@@ -83,9 +83,8 @@ public:
      * @param fds all field definitions.
      * @param m model one wishes to expand.
      */
-    sml::model execute(
-        const config::cpp_options& options,
-        const std::list<schema::field_definition>& fds,
+    sml::model execute(const config::cpp_options& options,
+        const schema::repository& rp,
         const sml::model& m) const;
 
 private:

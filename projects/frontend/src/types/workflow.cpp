@@ -48,9 +48,9 @@ namespace frontend {
 
 std::shared_ptr<frontend::registrar> workflow::registrar_;
 
-workflow::workflow(const dynamic::schema::workflow& schema_workflow,
-    const config::knitting_options& o)
-    : schema_workflow_(schema_workflow), knitting_options_(o) {
+workflow::workflow(const config::knitting_options& o,
+    const dynamic::schema::repository& rp)
+    : knitting_options_(o), repository_(rp), schema_workflow_(repository_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
@@ -133,11 +133,8 @@ sml::model workflow::expand_model_activity(const sml::model& m) const {
         return m;
     }
 
-    const auto& rg(dynamic::schema::workflow::registrar());
-    const auto& fds(rg.field_definitions());
-
     dynamic::expansion::workflow w;
-    const auto r(w.execute(knitting_options_.cpp(), fds, m));
+    const auto r(w.execute(knitting_options_.cpp(), repository_, m));
     BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
     return r;
 }

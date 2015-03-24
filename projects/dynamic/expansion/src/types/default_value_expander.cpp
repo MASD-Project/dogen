@@ -71,7 +71,7 @@ default_value_expander::dependencies() const {
 }
 
 void default_value_expander::setup(const expansion_context& ec) {
-    for (const auto& fd : ec.field_definitions()) {
+    for (const auto& fd : ec.repository().all_field_definitions()) {
         if (!fd.default_value())
             continue;
 

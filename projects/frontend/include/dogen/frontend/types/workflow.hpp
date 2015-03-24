@@ -28,6 +28,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/frontend/types/registrar.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
@@ -41,8 +42,8 @@ namespace frontend {
  */
 class workflow {
 public:
-    workflow(const dynamic::schema::workflow& schema_workflow,
-        const config::knitting_options& o);
+    workflow(const config::knitting_options& o,
+        const dynamic::schema::repository& rp);
 
 public:
     /**
@@ -104,8 +105,9 @@ public:
 
 private:
     static std::shared_ptr<frontend::registrar> registrar_;
-    const dynamic::schema::workflow& schema_workflow_;
     const config::knitting_options knitting_options_;
+    const dynamic::schema::repository& repository_;
+    const dynamic::schema::workflow schema_workflow_;
 };
 
 } }

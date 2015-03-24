@@ -634,6 +634,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Remove all field definitions in code                      :story:
+    CLOCK: [2015-03-24 Tue 08:58]--[2015-03-24 Tue 09:17] =>  0:19
     CLOCK: [2015-03-24 Tue 07:28]--[2015-03-24 Tue 08:57] =>  1:29
     CLOCK: [2015-03-23 Mon 21:47]--[2015-03-23 Mon 22:01] =>  0:14
     CLOCK: [2015-03-23 Mon 21:21]--[2015-03-23 Mon 21:44] =>  0:23

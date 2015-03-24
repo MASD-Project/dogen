@@ -21,22 +21,8 @@
 #include <ostream>
 #include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/dynamic/expansion/io/expansion_context_io.hpp"
-#include "dogen/dynamic/schema/io/field_definition_io.hpp"
+#include "dogen/dynamic/schema/io/repository_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::dynamic::schema::field_definition>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace dynamic {
@@ -46,7 +32,7 @@ std::ostream& operator<<(std::ostream& s, const expansion_context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::expansion::expansion_context\"" << ", "
       << "\"model\": " << v.model() << ", "
-      << "\"field_definitions\": " << v.field_definitions() << ", "
+      << "\"repository\": " << v.repository() << ", "
       << "\"cpp_options\": " << v.cpp_options()
       << " }";
     return(s);

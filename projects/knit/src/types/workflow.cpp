@@ -225,9 +225,9 @@ workflow::obtain_input_descriptors_activity() const {
 }
 
 std::list<sml::model> workflow::obtain_partial_sml_models_activity(
-    const dynamic::schema::workflow& schema_workflow,
+    const dynamic::schema::repository& rp,
     const std::list<frontend::input_descriptor>& descriptors) const {
-    frontend::workflow w(schema_workflow, knitting_options_);
+    frontend::workflow w(knitting_options_, rp);
     return w.execute(descriptors);
 }
 
@@ -290,12 +290,11 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, debug) << "Knitting options: " << knitting_options_;
 
     try {
-        const auto rp(setup_schema_repository_activity());
-        const dynamic::schema::workflow sw(rp);
         const auto d(obtain_input_descriptors_activity());
-        const auto tp(obtain_target_path_activity(d));
-        const auto pm(obtain_partial_sml_models_activity(sw, d));
+        const auto rp(setup_schema_repository_activity());
+        const auto pm(obtain_partial_sml_models_activity(rp, d));
         const auto m(merge_models_activity(pm));
+        const auto tp(obtain_target_path_activity(d));
         persist_model_activity(tp, m);
 
         if (knitting_options_.troubleshooting().stop_after_merging()) {

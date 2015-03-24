@@ -26,11 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
 #include "dogen/config/serialization/cpp_options_ser.hpp"
 #include "dogen/dynamic/expansion/serialization/expansion_context_ser.hpp"
-#include "dogen/dynamic/schema/serialization/field_definition_ser.hpp"
+#include "dogen/dynamic/schema/serialization/repository_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
 
 
@@ -42,7 +41,7 @@ void save(Archive& ar,
     const dogen::dynamic::expansion::expansion_context& v,
     const unsigned int /*version*/) {
     ar << make_nvp("model", v.model_);
-    ar << make_nvp("field_definitions", v.field_definitions_);
+    ar << make_nvp("repository", v.repository_);
     ar << make_nvp("cpp_options", v.cpp_options_);
 }
 
@@ -51,7 +50,7 @@ void load(Archive& ar,
     dogen::dynamic::expansion::expansion_context& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("model", v.model_);
-    ar >> make_nvp("field_definitions", v.field_definitions_);
+    ar >> make_nvp("repository", v.repository_);
     ar >> make_nvp("cpp_options", v.cpp_options_);
 }
 

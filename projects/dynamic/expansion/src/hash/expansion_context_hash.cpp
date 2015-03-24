@@ -20,7 +20,7 @@
  */
 #include "dogen/config/hash/cpp_options_hash.hpp"
 #include "dogen/dynamic/expansion/hash/expansion_context_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_hash.hpp"
+#include "dogen/dynamic/schema/hash/repository_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
 
 namespace {
@@ -30,14 +30,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_dynamic_schema_field_definition(const std::list<dogen::dynamic::schema::field_definition>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 }
@@ -50,7 +42,7 @@ std::size_t expansion_context_hasher::hash(const expansion_context&v) {
     std::size_t seed(0);
 
     combine(seed, v.model());
-    combine(seed, hash_std_list_dogen_dynamic_schema_field_definition(v.field_definitions()));
+    combine(seed, v.repository());
     combine(seed, v.cpp_options());
 
     return seed;

@@ -20,7 +20,7 @@
  */
 #include "dogen/config/test_data/cpp_options_td.hpp"
 #include "dogen/dynamic/expansion/test_data/expansion_context_td.hpp"
-#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
+#include "dogen/dynamic/schema/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 
 namespace {
@@ -30,17 +30,9 @@ create_dogen_sml_model(const unsigned int position) {
     return dogen::sml::model_generator::create(position);
 }
 
-dogen::dynamic::schema::field_definition
-create_dogen_dynamic_schema_field_definition(const unsigned int position) {
-    return dogen::dynamic::schema::field_definition_generator::create(position);
-}
-
-std::list<dogen::dynamic::schema::field_definition> create_std_list_dogen_dynamic_schema_field_definition(unsigned int position) {
-    std::list<dogen::dynamic::schema::field_definition> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_dynamic_schema_field_definition(position + i));
-    }
-    return r;
+dogen::dynamic::schema::repository
+create_dogen_dynamic_schema_repository(const unsigned int position) {
+    return dogen::dynamic::schema::repository_generator::create(position);
 }
 
 dogen::config::cpp_options
@@ -59,7 +51,7 @@ expansion_context_generator::expansion_context_generator() : position_(0) { }
 void expansion_context_generator::
 populate(const unsigned int position, result_type& v) {
     v.model(create_dogen_sml_model(position + 0));
-    v.field_definitions(create_std_list_dogen_dynamic_schema_field_definition(position + 1));
+    v.repository(create_dogen_dynamic_schema_repository(position + 1));
     v.cpp_options(create_dogen_config_cpp_options(position + 2));
 }
 
