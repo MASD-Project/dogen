@@ -18,20 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/backend/types/workflow.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/dynamic/expansion/types/workflow.hpp"
+#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/settings/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
-#include "dogen/cpp/types/workflow.hpp"
-#include "dogen/cpp/types/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
+namespace settings {
 
-void initializer::initialize() {
-    settings::initializer::initialize();
-    formatters::initializer::initialize(formatters::workflow::registrar());
-    backend::workflow::register_backend(std::make_shared<workflow>());
+void register_expander(dynamic::expansion::expander_interface * const p) {
+    dynamic::expansion::workflow::registrar()
+        .register_expander(
+            boost::shared_ptr<dynamic::expansion::expander_interface>(p));
 }
 
-} }
+void initializer::initialize() {
+    register_expander(new path_expander());
+}
+
+} } }

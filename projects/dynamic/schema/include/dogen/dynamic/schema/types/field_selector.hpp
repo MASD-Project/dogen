@@ -42,6 +42,12 @@ class field_selector {
 public:
     explicit field_selector(const object& o);
 
+private:
+    /**
+     * @brief Throws if the field has no default value.
+     */
+    void ensure_default_value(const field_definition& fd) const;
+
 public:
     /**
      * @brief Returns true if a field exists in an object.

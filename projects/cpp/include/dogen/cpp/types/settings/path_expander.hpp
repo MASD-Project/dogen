@@ -28,9 +28,12 @@
 #include <list>
 #include <memory>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory_fwd.hpp"
 
@@ -55,6 +58,43 @@ public:
 
 private:
     /**
+     * @brief All relevant properties we need to remember for each formatter.
+     */
+    struct formatter_properties {
+        std::string formatter_name;
+        dynamic::schema::field_definition file_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_path;
+    };
+
+    /**
+     * @brief Sets up formatter fields.
+     */
+    void setup_formatter_fields(const dynamic::schema::repository& rp,
+        const std::string& formatter_name,
+        formatter_properties& fp) const;
+
+    /**
+     * @brief Creates the set of formatter properties for a given
+     * formatter.
+     */
+    formatter_properties make_formatter_properties(
+        const dynamic::schema::repository& rp,
+        const formatters::formatter_interface& f) const;
+
+    /**
+     * @brief Generates all of the formatter properties, using the
+     * repository data and the registered formatters.
+     */
+    std::unordered_map<std::string, formatter_properties>
+        make_formatter_properties(const dynamic::schema::repository& rp) const;
+
+private:
+    /**
+     * @brief Throws if not yet setup.
+     */
+    void ensure_is_setup() const;
+
+    /**
      * @brief Builds an absolute path for the supplied qualified name.
      */
     boost::filesystem::path make_file_path(
@@ -64,7 +104,7 @@ private:
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
-    boost::filesystem::path make_include_path(
+    boost::filesystem::path make_inclusion_path(
         const path_settings& ps, const sml::qname& qn) const;
 
 public:
@@ -79,6 +119,7 @@ public:
 
 private:
     std::shared_ptr<const path_settings_factory> factory_;
+    std::unordered_map<std::string, formatter_properties> formatter_properties_;
 };
 
 } } }

@@ -62,9 +62,9 @@ struct traits {
     static std::string integrated_facet();
 
     /**
-     * @brief File extension to use.
+     * @brief Full path to the file for this formatter.
      */
-    static std::string extension();
+    static std::string file_path();
 
     /**
      * @brief Is inclusion required for this type and formatter.
@@ -79,7 +79,17 @@ struct traits {
     /**
      * @brief Type of notation to use in inclusion.
      */
-    static std::string inclusion_delimiter_type();
+    static std::string inclusion_delimiter();
+
+    /**
+     * @brief File extension to use for header files.
+     */
+    static std::string header_file_extension();
+
+    /**
+     * @brief File extension to use for implementation files.
+     */
+    static std::string implementation_file_extension();
 
     /**
      * @brief Name of the directory containing the include files.

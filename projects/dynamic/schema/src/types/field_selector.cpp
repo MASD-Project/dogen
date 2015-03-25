@@ -50,6 +50,14 @@ namespace schema {
 
 field_selector::field_selector(const object& o) : object_(o) { }
 
+void field_selector::ensure_default_value(const field_definition& fd) const {
+    if (!fd.default_value()) {
+        const auto& n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << no_default_value << "'" << n << "'";
+        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
+    }
+}
+
 bool field_selector::has_field(const std::string& qualified_field_name) const {
     const auto i(object_.fields().find(qualified_field_name));
     return (i != object_.fields().end());
@@ -106,11 +114,7 @@ get_text_content_or_default(const field_definition& fd) const {
     if (has_field(fd))
         return get_text_content(fd);
 
-    if (!fd.default_value()) {
-        const auto& n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << no_default_value << n;
-        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
-    }
+    ensure_default_value(fd);
     return get_text_content(*fd.default_value());
 }
 
@@ -155,11 +159,7 @@ get_text_collection_content_or_default(const field_definition& fd) const {
     if (has_field(fd))
         return get_text_collection_content(fd);
 
-    if (!fd.default_value()) {
-        const auto& n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << no_default_value << n;
-        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
-    }
+    ensure_default_value(fd);
     return get_text_collection_content(*fd.default_value());
 }
 
@@ -195,11 +195,7 @@ get_boolean_content_or_default(const field_definition& fd) const {
     if (has_field(fd))
         return get_boolean_content(fd);
 
-    if (!fd.default_value()) {
-        const auto& n(fd.name().qualified());
-        BOOST_LOG_SEV(lg, error) << no_default_value << n;
-        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
-    }
+    ensure_default_value(fd);
     return get_boolean_content(*fd.default_value());
 }
 

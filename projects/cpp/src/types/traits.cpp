@@ -48,8 +48,8 @@ std::string traits::integrated_facet() {
     return r;
 }
 
-std::string traits::extension() {
-    static std::string r("extension");
+std::string traits::file_path() {
+    static std::string r("file_path");
     return r;
 }
 
@@ -63,8 +63,8 @@ std::string traits::inclusion_path() {
     return r;
 }
 
-std::string traits::inclusion_delimiter_type() {
-    static std::string r("inclusion_delimiter_type");
+std::string traits::inclusion_delimiter() {
+    static std::string r("inclusion_delimiter");
     return r;
 }
 
@@ -77,5 +77,16 @@ std::string traits::source_directory_name() {
     static std::string r("cpp.source_directory_name");
     return r;
 }
+
+std::string traits::header_file_extension() {
+    static std::string r("cpp.header_file_extension");
+    return r;
+}
+
+std::string traits::implementation_file_extension() {
+    static std::string r("cpp.implementation_file_extension");
+    return r;
+}
+
 
 } }

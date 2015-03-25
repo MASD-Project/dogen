@@ -99,6 +99,11 @@ field_instance field_instance_factory::make_text(const std::string& v) const {
 }
 
 field_instance field_instance_factory::
+make_text(const boost::filesystem::path& v) const {
+    return field_instance(value_factory_.make_text(v.generic_string()));
+}
+
+field_instance field_instance_factory::
 make_text_collection(const std::list<std::string>& v) const {
     return field_instance(value_factory_.make_text_collection(v));
 }

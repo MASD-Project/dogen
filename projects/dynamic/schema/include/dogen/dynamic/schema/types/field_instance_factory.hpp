@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
+#include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/value.hpp"
 #include "dogen/dynamic/schema/types/value_factory.hpp"
 #include "dogen/dynamic/schema/types/field_instance.hpp"
@@ -76,6 +77,12 @@ public:
      * @brief Makes a field instance with a text value.
      */
     field_instance make_text(const std::string& v) const;
+
+    /**
+     * @brief Makes a field instance with a text value using the
+     * generic string version of the path.
+     */
+    field_instance make_text(const boost::filesystem::path& v) const;
 
     /**
      * @brief Makes a field instance with a collection of text values.

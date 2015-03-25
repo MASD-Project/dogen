@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
@@ -86,6 +87,12 @@ void path_settings_factory::setup_top_level_fields(
 
     fp.source_directory_name =
         field_definition_for_name(rp, traits::source_directory_name());
+
+    fp.header_file_extension =
+        field_definition_for_name(rp, traits::header_file_extension());
+
+    fp.implementation_file_extension =
+        field_definition_for_name(rp, traits::implementation_file_extension());
 }
 
 void path_settings_factory::setup_facet_fields(
@@ -111,16 +118,16 @@ void path_settings_factory::setup_facet_fields(
     }
 
     if (!found_directory) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::directory() << " for facet: "
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::directory() << "' for facet: "
                                  << facet_name;
         BOOST_THROW_EXCEPTION(
             building_error(field_definition_not_found + traits::directory()));
     }
 
     if (!found_postfix) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::postfix() << " for facet: "
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::postfix() << "' for facet: "
                                  << facet_name;
         BOOST_THROW_EXCEPTION(
             building_error(field_definition_not_found + traits::directory()));
@@ -139,62 +146,45 @@ void path_settings_factory::setup_formatter_fields(
             building_error(no_fields_for_formatter + formatter_name));
     }
 
-    bool found_directory(false), found_postfix(false),
-        found_extension(false), found_inclusion_required(false),
-        found_inclusion_path(false), found_inclusion_delimiter_type(false);
+    bool found_postfix(false), found_inclusion_required(false),
+        found_inclusion_path(false), found_inclusion_delimiter(false);
 
     for (const auto fd : i->second) {
-        if (fd.name().simple() == traits::directory()) {
-            fp.facet_directory = fd;
-            found_directory = true;
-        } else if (fd.name().simple() == traits::postfix()) {
-            fp.facet_postfix = fd;
+        if (fd.name().simple() == traits::postfix()) {
+            fp.formatter_postfix = fd;
             found_postfix = true;
-        } else if (fd.name().simple() == traits::extension()) {
-            fp.extension = fd;
-            found_extension = true;
         } else if (fd.name().simple() == traits::inclusion_required()) {
             fp.inclusion_required = fd;
             found_inclusion_required = true;
         } else if (fd.name().simple() == traits::inclusion_path()) {
             fp.inclusion_path = fd;
             found_inclusion_path = true;
-        } else if (fd.name().simple() == traits::inclusion_delimiter_type()) {
-            fp.inclusion_delimiter_type = fd;
-            found_inclusion_delimiter_type = true;
+        } else if (fd.name().simple() == traits::inclusion_delimiter()) {
+            fp.inclusion_delimiter = fd;
+            found_inclusion_delimiter = true;
         }
     }
 
-    if (!found_directory) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::directory() << " for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::directory()));
-    }
-
     if (!found_postfix) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::postfix() << " for formatter: "
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::postfix() << "' for formatter: "
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::directory()));
+            building_error(field_definition_not_found + traits::postfix()));
     }
 
-    if (!found_extension) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::postfix() << " for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::directory()));
-    }
+    BOOST_LOG_SEV(lg, debug) << "Inclusion field definitions: "
+                             << "inclusion_required: "
+                             << found_inclusion_required
+                             << " inclusion_path: "
+                             << found_inclusion_path
+                             << " inclusion_delimiter: "
+                             << found_inclusion_delimiter;
 
-    const bool found_all(found_inclusion_required &&
-        found_inclusion_required && found_inclusion_path &&
-        found_inclusion_delimiter_type);
-    const bool found_none(!found_inclusion_required &&
-        !found_inclusion_required && !found_inclusion_path &&
-        !found_inclusion_delimiter_type);
+    const bool found_all(found_inclusion_required && found_inclusion_path &&
+        found_inclusion_delimiter);
+    const bool found_none(!found_inclusion_required && !found_inclusion_path &&
+        !found_inclusion_delimiter);
 
     if (!found_all && !found_none) {
         BOOST_LOG_SEV(lg, error) << found_some_field_definitions
@@ -209,7 +199,7 @@ path_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,
     const formatters::formatter_interface& f) const {
 
-    path_settings_factory::formatter_properties r;
+    formatter_properties r;
     r.file_type = f.file_type();
     r.formatter_name = f.formatter_name();
     setup_top_level_fields(rp, r);
@@ -223,8 +213,7 @@ std::unordered_map<std::string, path_settings_factory::formatter_properties>
 path_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp) const {
     const auto& c(formatters::workflow::registrar().formatter_container());
-    std::unordered_map<std::string,
-                       path_settings_factory::formatter_properties> r;
+    std::unordered_map<std::string, formatter_properties> r;
 
     for (const auto& f : c.all_formatters()) {
         // formatter names are known to be unique
@@ -249,8 +238,19 @@ path_settings path_settings_factory::create_settings_for_formatter(
 
     r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
-    r.extension(fs.get_text_content_or_default(fp.extension));
     r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
+
+    if (fp.file_type == formatters::file_types::cpp_header) {
+        r.extension(fs.get_text_content_or_default(fp.header_file_extension));
+    } else if (fp.file_type == formatters::file_types::cpp_header) {
+        r.extension(fs.get_text_content_or_default(
+                fp.implementation_file_extension));
+    }
+
+    r.include_directory_name(
+        fs.get_text_content_or_default(fp.include_directory_name));
+    r.source_directory_name(
+        fs.get_text_content_or_default(fp.source_directory_name));
 
     if (fp.inclusion_required) {
         r.inclusion_required(
@@ -258,13 +258,12 @@ path_settings path_settings_factory::create_settings_for_formatter(
     }
 
     if (fp.inclusion_path) {
-        r.inclusion_path(
-            fs.get_text_content_or_default(*fp.inclusion_path));
+        if (fs.has_field(*fp.inclusion_path))
+            r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
     }
 
-    if (fp.inclusion_delimiter_type) {
-        const auto del(
-            fs.get_text_content_or_default(*fp.inclusion_delimiter_type));
+    if (fp.inclusion_delimiter) {
+        const auto del(fs.get_text_content_or_default(*fp.inclusion_delimiter));
         r.inclusion_delimiter_type(inclusion_delimiter_type_from_string(del));
     }
 
@@ -276,9 +275,6 @@ make(const dynamic::schema::object& o) const {
     std::unordered_map<std::string, path_settings> r;
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Creating settings for formatter: '"
-                                 << fp.formatter_name << "'";
-
         const auto s(create_settings_for_formatter(fp, o));
         r.insert(std::make_pair(fp.formatter_name, s));
     }

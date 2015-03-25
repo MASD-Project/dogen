@@ -78,13 +78,13 @@ private:
         dogen::cpp::formatters::file_types file_type;
         dynamic::schema::field_definition facet_directory;
         dynamic::schema::field_definition facet_postfix;
-        dynamic::schema::field_definition extension;
         dynamic::schema::field_definition formatter_postfix;
-        dynamic::schema::field_definition file_path;
         boost::optional<dynamic::schema::field_definition> inclusion_required;
         boost::optional<dynamic::schema::field_definition> inclusion_path;
         boost::optional<dynamic::schema::field_definition>
-        inclusion_delimiter_type;
+        inclusion_delimiter;
+        dynamic::schema::field_definition header_file_extension;
+        dynamic::schema::field_definition implementation_file_extension;
         dynamic::schema::field_definition include_directory_name;
         dynamic::schema::field_definition source_directory_name;
     };
