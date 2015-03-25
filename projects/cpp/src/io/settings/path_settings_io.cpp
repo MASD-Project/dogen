@@ -55,6 +55,7 @@ std::ostream& operator<<(std::ostream& s, const path_settings& v) {
       << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
       << "\"source_directory_path\": " << "\"" << v.source_directory_path().generic_string() << "\"" << ", "
       << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\"" << ", "
+      << "\"inclusion_required\": " << v.inclusion_required() << ", "
       << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
       << "\"inclusion_delimiter_type\": " << v.inclusion_delimiter_type() << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "

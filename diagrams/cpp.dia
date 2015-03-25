@@ -27113,7 +27113,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="127,191"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.95,190.95;151.42,203.45"/>
+        <dia:rectangle val="126.95,190.95;151.42,204.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="127,191"/>
@@ -27122,7 +27122,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.400000000000002"/>
+        <dia:real val="13.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#path_settings#</dia:string>
@@ -27402,6 +27402,29 @@ registry of all available formatters.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#inclusion_required#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27729,7 +27752,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="167.912,194.6"/>
         <dia:point val="167.912,208"/>
         <dia:point val="139.185,208"/>
-        <dia:point val="139.185,203.4"/>
+        <dia:point val="139.185,204.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28460,7 +28483,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="200.232,146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.787,132.55;200.982,146.8"/>
+        <dia:rectangle val="194.788,132.55;200.982,146.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29598,7 +29621,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="139.185,191"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.25,179.25;139.385,192.6"/>
+        <dia:rectangle val="134.25,179.25;139.385,191.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29634,7 +29657,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="139.803,173.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.213,173.437;139.866,177.177"/>
+        <dia:rectangle val="138.212,173.437;139.866,177.177"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29704,7 +29727,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="142.215,180"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.465,179.25;168.112,192.6"/>
+        <dia:rectangle val="141.465,179.25;168.112,191.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

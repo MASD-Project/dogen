@@ -53,6 +53,11 @@ std::string traits::extension() {
     return r;
 }
 
+std::string traits::inclusion_required() {
+    static std::string r("inclusion_required");
+    return r;
+}
+
 std::string traits::inclusion_path() {
     static std::string r("inclusion_path");
     return r;

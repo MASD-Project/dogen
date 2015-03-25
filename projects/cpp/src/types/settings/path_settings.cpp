@@ -27,6 +27,7 @@ namespace settings {
 path_settings::path_settings()
     : split_project_(static_cast<bool>(0)),
       file_type_(static_cast<dogen::cpp::formatters::file_types>(0)),
+      inclusion_required_(static_cast<bool>(0)),
       inclusion_delimiter_type_(static_cast<dogen::cpp::settings::inclusion_delimiter_types>(0)) { }
 
 path_settings::path_settings(path_settings&& rhs)
@@ -39,6 +40,7 @@ path_settings::path_settings(path_settings&& rhs)
       project_directory_path_(std::move(rhs.project_directory_path_)),
       source_directory_path_(std::move(rhs.source_directory_path_)),
       include_directory_path_(std::move(rhs.include_directory_path_)),
+      inclusion_required_(std::move(rhs.inclusion_required_)),
       inclusion_path_(std::move(rhs.inclusion_path_)),
       inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)),
       include_directory_name_(std::move(rhs.include_directory_name_)),
@@ -54,6 +56,7 @@ path_settings::path_settings(
     const boost::filesystem::path& project_directory_path,
     const boost::filesystem::path& source_directory_path,
     const boost::filesystem::path& include_directory_path,
+    const bool inclusion_required,
     const boost::filesystem::path& inclusion_path,
     const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
     const std::string& include_directory_name,
@@ -67,6 +70,7 @@ path_settings::path_settings(
       project_directory_path_(project_directory_path),
       source_directory_path_(source_directory_path),
       include_directory_path_(include_directory_path),
+      inclusion_required_(inclusion_required),
       inclusion_path_(inclusion_path),
       inclusion_delimiter_type_(inclusion_delimiter_type),
       include_directory_name_(include_directory_name),
@@ -83,6 +87,7 @@ void path_settings::swap(path_settings& other) noexcept {
     swap(project_directory_path_, other.project_directory_path_);
     swap(source_directory_path_, other.source_directory_path_);
     swap(include_directory_path_, other.include_directory_path_);
+    swap(inclusion_required_, other.inclusion_required_);
     swap(inclusion_path_, other.inclusion_path_);
     swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
     swap(include_directory_name_, other.include_directory_name_);
@@ -99,6 +104,7 @@ bool path_settings::operator==(const path_settings& rhs) const {
         project_directory_path_ == rhs.project_directory_path_ &&
         source_directory_path_ == rhs.source_directory_path_ &&
         include_directory_path_ == rhs.include_directory_path_ &&
+        inclusion_required_ == rhs.inclusion_required_ &&
         inclusion_path_ == rhs.inclusion_path_ &&
         inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_ &&
         include_directory_name_ == rhs.include_directory_name_ &&
@@ -237,6 +243,14 @@ void path_settings::include_directory_path(const boost::filesystem::path& v) {
 
 void path_settings::include_directory_path(const boost::filesystem::path&& v) {
     include_directory_path_ = std::move(v);
+}
+
+bool path_settings::inclusion_required() const {
+    return inclusion_required_;
+}
+
+void path_settings::inclusion_required(const bool v) {
+    inclusion_required_ = v;
 }
 
 const boost::filesystem::path& path_settings::inclusion_path() const {

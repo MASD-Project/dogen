@@ -67,6 +67,11 @@ struct traits {
     static std::string extension();
 
     /**
+     * @brief Is inclusion required for this type and formatter.
+     */
+    static std::string inclusion_required();
+
+    /**
      * @brief Include path to use for type.
      */
     static std::string inclusion_path();

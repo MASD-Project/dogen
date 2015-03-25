@@ -58,6 +58,7 @@ public:
         const boost::filesystem::path& project_directory_path,
         const boost::filesystem::path& source_directory_path,
         const boost::filesystem::path& include_directory_path,
+        const bool inclusion_required,
         const boost::filesystem::path& inclusion_path,
         const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
         const std::string& include_directory_name,
@@ -112,6 +113,9 @@ public:
     void include_directory_path(const boost::filesystem::path& v);
     void include_directory_path(const boost::filesystem::path&& v);
 
+    bool inclusion_required() const;
+    void inclusion_required(const bool v);
+
     const boost::filesystem::path& inclusion_path() const;
     boost::filesystem::path& inclusion_path();
     void inclusion_path(const boost::filesystem::path& v);
@@ -150,6 +154,7 @@ private:
     boost::filesystem::path project_directory_path_;
     boost::filesystem::path source_directory_path_;
     boost::filesystem::path include_directory_path_;
+    bool inclusion_required_;
     boost::filesystem::path inclusion_path_;
     dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type_;
     std::string include_directory_name_;

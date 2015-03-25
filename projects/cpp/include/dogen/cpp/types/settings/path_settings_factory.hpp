@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -79,8 +80,11 @@ private:
         dynamic::schema::field_definition facet_postfix;
         dynamic::schema::field_definition extension;
         dynamic::schema::field_definition formatter_postfix;
-        dynamic::schema::field_definition inclusion_path;
-        dynamic::schema::field_definition inclusion_delimiter_type;
+        dynamic::schema::field_definition file_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_required;
+        boost::optional<dynamic::schema::field_definition> inclusion_path;
+        boost::optional<dynamic::schema::field_definition>
+        inclusion_delimiter_type;
         dynamic::schema::field_definition include_directory_name;
         dynamic::schema::field_definition source_directory_name;
     };

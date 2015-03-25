@@ -71,10 +71,11 @@ populate(const unsigned int position, result_type& v) {
     v.project_directory_path(create_boost_filesystem_path(position + 6));
     v.source_directory_path(create_boost_filesystem_path(position + 7));
     v.include_directory_path(create_boost_filesystem_path(position + 8));
-    v.inclusion_path(create_boost_filesystem_path(position + 9));
-    v.inclusion_delimiter_type(create_dogen_cpp_settings_inclusion_delimiter_types(position + 10));
-    v.include_directory_name(create_std_string(position + 11));
-    v.source_directory_name(create_std_string(position + 12));
+    v.inclusion_required(create_bool(position + 9));
+    v.inclusion_path(create_boost_filesystem_path(position + 10));
+    v.inclusion_delimiter_type(create_dogen_cpp_settings_inclusion_delimiter_types(position + 11));
+    v.include_directory_name(create_std_string(position + 12));
+    v.source_directory_name(create_std_string(position + 13));
 }
 
 path_settings_generator::result_type

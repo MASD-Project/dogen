@@ -55,6 +55,7 @@ std::size_t path_settings_hasher::hash(const path_settings&v) {
     combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
+    combine(seed, v.inclusion_required());
     combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
     combine(seed, v.inclusion_delimiter_type());
     combine(seed, v.include_directory_name());

@@ -41,6 +41,10 @@ const std::string no_fields_for_formatter(
 const std::string invalid_delimiter(
     "Invalid or unsupported inclusion delimiter type: ");
 const std::string field_not_found("Could not find expected field: ");
+const std::string field_definition_not_found(
+    "Could not find expected field definition: ");
+const std::string found_some_field_definitions(
+    "Formatter defines some but not all include field definitions: ");
 
 }
 
@@ -95,11 +99,31 @@ void path_settings_factory::setup_facet_fields(
         BOOST_THROW_EXCEPTION(building_error(no_fields_for_facet + facet_name));
     }
 
+    bool found_directory(false), found_postfix(false);
     for (const auto fd : i->second) {
-        if (fd.name().simple() == traits::directory())
+        if (fd.name().simple() == traits::directory()) {
             fp.facet_directory = fd;
-        else if (fd.name().simple() == traits::postfix())
+            found_directory = true;
+        } else if (fd.name().simple() == traits::postfix()) {
             fp.facet_postfix = fd;
+            found_postfix = true;
+        }
+    }
+
+    if (!found_directory) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << traits::directory() << " for facet: "
+                                 << facet_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::directory()));
+    }
+
+    if (!found_postfix) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << traits::postfix() << " for facet: "
+                                 << facet_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::directory()));
     }
 }
 
@@ -115,17 +139,68 @@ void path_settings_factory::setup_formatter_fields(
             building_error(no_fields_for_formatter + formatter_name));
     }
 
+    bool found_directory(false), found_postfix(false),
+        found_extension(false), found_inclusion_required(false),
+        found_inclusion_path(false), found_inclusion_delimiter_type(false);
+
     for (const auto fd : i->second) {
-        if (fd.name().simple() == traits::directory())
+        if (fd.name().simple() == traits::directory()) {
             fp.facet_directory = fd;
-        else if (fd.name().simple() == traits::postfix())
+            found_directory = true;
+        } else if (fd.name().simple() == traits::postfix()) {
             fp.facet_postfix = fd;
-        else if (fd.name().simple() == traits::extension())
+            found_postfix = true;
+        } else if (fd.name().simple() == traits::extension()) {
             fp.extension = fd;
-        else if (fd.name().simple() == traits::inclusion_path())
+            found_extension = true;
+        } else if (fd.name().simple() == traits::inclusion_required()) {
+            fp.inclusion_required = fd;
+            found_inclusion_required = true;
+        } else if (fd.name().simple() == traits::inclusion_path()) {
             fp.inclusion_path = fd;
-        else if (fd.name().simple() == traits::inclusion_delimiter_type())
+            found_inclusion_path = true;
+        } else if (fd.name().simple() == traits::inclusion_delimiter_type()) {
             fp.inclusion_delimiter_type = fd;
+            found_inclusion_delimiter_type = true;
+        }
+    }
+
+    if (!found_directory) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << traits::directory() << " for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::directory()));
+    }
+
+    if (!found_postfix) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << traits::postfix() << " for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::directory()));
+    }
+
+    if (!found_extension) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << traits::postfix() << " for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::directory()));
+    }
+
+    const bool found_all(found_inclusion_required &&
+        found_inclusion_required && found_inclusion_path &&
+        found_inclusion_delimiter_type);
+    const bool found_none(!found_inclusion_required &&
+        !found_inclusion_required && !found_inclusion_path &&
+        !found_inclusion_delimiter_type);
+
+    if (!found_all && !found_none) {
+        BOOST_LOG_SEV(lg, error) << found_some_field_definitions
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(found_some_field_definitions + formatter_name));
     }
 }
 
@@ -176,10 +251,22 @@ path_settings path_settings_factory::create_settings_for_formatter(
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
     r.extension(fs.get_text_content_or_default(fp.extension));
     r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
-    r.inclusion_path(fs.get_text_content_or_default(fp.inclusion_path));
 
-    const auto del(fs.get_text_content_or_default(fp.inclusion_delimiter_type));
-    r.inclusion_delimiter_type(inclusion_delimiter_type_from_string(del));
+    if (fp.inclusion_required) {
+        r.inclusion_required(
+            fs.get_boolean_content_or_default(*fp.inclusion_required));
+    }
+
+    if (fp.inclusion_path) {
+        r.inclusion_path(
+            fs.get_text_content_or_default(*fp.inclusion_path));
+    }
+
+    if (fp.inclusion_delimiter_type) {
+        const auto del(
+            fs.get_text_content_or_default(*fp.inclusion_delimiter_type));
+        r.inclusion_delimiter_type(inclusion_delimiter_type_from_string(del));
+    }
 
     return r;
 }

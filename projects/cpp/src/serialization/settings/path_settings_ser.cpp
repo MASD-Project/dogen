@@ -50,6 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
     ar << make_nvp("source_directory_path", v.source_directory_path_.generic_string());
     ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
+    ar << make_nvp("inclusion_required", v.inclusion_required_);
     ar << make_nvp("inclusion_path", v.inclusion_path_.generic_string());
     ar << make_nvp("inclusion_delimiter_type", v.inclusion_delimiter_type_);
     ar << make_nvp("include_directory_name", v.include_directory_name_);
@@ -75,6 +76,7 @@ void load(Archive& ar,
     std::string include_directory_path_tmp;
     ar >> make_nvp("include_directory_path", include_directory_path_tmp);
     v.include_directory_path_ = include_directory_path_tmp;
+    ar >> make_nvp("inclusion_required", v.inclusion_required_);
     std::string inclusion_path_tmp;
     ar >> make_nvp("inclusion_path", inclusion_path_tmp);
     v.inclusion_path_ = inclusion_path_tmp;
