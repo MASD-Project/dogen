@@ -1311,6 +1311,14 @@ Another idea: common representation or =cr=. It is what is common to
 all modeled languages. What is not common goes into dynamic. This will
 also make the vision for this model much more focused.
 
+Some more thinking on this: SML is a meta-model, or a model that
+provides a language to talk about programming objects in
+general. There may be other models suitable for formatting; for
+example one may want to take a model of a neuron and represent it in
+[[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][HOC]]. In this case the formatters would bind directly to the neuron
+model rather than SML. So the name of SML must reflect the fact that
+it is a model of programming objects.
+
 *** Consider renaming formatters                                      :story:
 
 After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
