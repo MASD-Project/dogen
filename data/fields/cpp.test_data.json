@@ -81,6 +81,33 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.test_data.class_header_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_required",
+            "qualified" : "cpp.test_data.class_header_formatter.inclusion_required"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.class_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
             "simple" : "inclusion_path",
             "qualified" : "cpp.test_data.class_header_formatter.inclusion_path"
         },
@@ -136,6 +163,19 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "test_data.class_implementation_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "test_data",
+            "formatter_name" : "test_data.class_implementation_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
             "simple" : "enabled",
             "qualified" : "cpp.test_data.enumeration_header_formatter.enabled"
         },
@@ -164,6 +204,60 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.test_data.enumeration_header_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.enumeration_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_required",
+            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_required"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.enumeration_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_path",
+            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.enumeration_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_delimiter",
+            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_delimiter"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity",
+        "default_value" : "angle_brackets"
+    },
+    {
+        "name" : {
             "simple" : "enabled",
             "qualified" : "cpp.test_data.enumeration_implementation_formatter.enabled"
         },
@@ -189,5 +283,18 @@
         "type" : "text",
         "scope" : "root_module",
         "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.test_data.enumeration_implementation_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.test_data",
+            "formatter_name" : "cpp.test_data.enumeration_implementation_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
     }
 ]

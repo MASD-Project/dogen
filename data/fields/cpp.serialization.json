@@ -81,6 +81,33 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.serialization.class_header_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_required",
+            "qualified" : "cpp.serialization.class_header_formatter.inclusion_required"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.class_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
             "simple" : "inclusion_path",
             "qualified" : "cpp.serialization.class_header_formatter.inclusion_path"
         },
@@ -136,6 +163,19 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.serialization.class_implementation_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.hash",
+            "formatter_name" : "cpp.serialization.class_implementation_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
             "simple" : "enabled",
             "qualified" : "cpp.serialization.enumeration_header_formatter.enabled"
         },
@@ -164,6 +204,60 @@
     },
     {
         "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.serialization.enumeration_header_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_required",
+            "qualified" : "cpp.serialization.enumeration_header_formatter.inclusion_required"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
+        },
+        "type" : "boolean",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_path",
+            "qualified" : "cpp.serialization.enumeration_header_formatter.inclusion_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_delimiter",
+            "qualified" : "cpp.serialization.enumeration_header_formatter.inclusion_delimiter"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity",
+        "default_value" : "angle_brackets"
+    },
+    {
+        "name" : {
             "simple" : "enabled",
             "qualified" : "cpp.serialization.enumeration_implementation_formatter.enabled"
         },
@@ -189,5 +283,18 @@
         "type" : "text",
         "scope" : "root_module",
         "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "file_path",
+            "qualified" : "cpp.serialization.enumeration_implementation_formatter.file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.enumeration_implementation_formatter"
+        },
+        "type" : "text",
+        "scope" : "entity"
     }
 ]
