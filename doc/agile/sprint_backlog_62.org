@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-25 Wed 17:27]
+Clock summary at [2015-03-25 Wed 18:18]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *47:57* |       |      |
+| *Total time*                                                             | *48:43* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 47:57 |      |
+| Active                                                                   |         | 48:43 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -45,7 +45,7 @@ Clock summary at [2015-03-25 Wed 17:27]
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate file path" operation                          |         |       | 3:00 |
+| STARTED Create a "populate file path" operation                          |         |       | 3:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -648,6 +648,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate file path" operation                   :story:
+    CLOCK: [2015-03-25 Wed 17:28]--[2015-03-25 Wed 18:14] =>  0:46
     CLOCK: [2015-03-25 Wed 15:11]--[2015-03-25 Wed 17:27] =>  2:12
     CLOCK: [2015-03-24 Tue 23:11]--[2015-03-24 Tue 23:24] =>  0:13
     CLOCK: [2015-03-24 Tue 13:03]--[2015-03-24 Tue 13:34] =>  0:31
@@ -667,8 +668,7 @@ This operation should live in c++.
 Tasks:
 
 - all formatters, file types and facet; all fields for the facet and
-  formatter
-
+  formatter.
 - add a field for the file path if it doesn't yet exist;
 - implement path settings factory, adding any missing fields;
 - create a file path expander that calls the factory for every

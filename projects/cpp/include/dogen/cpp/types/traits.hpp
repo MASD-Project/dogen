@@ -75,6 +75,16 @@ struct traits {
      * @brief Type of notation to use in inclusion.
      */
     static std::string inclusion_delimiter_type();
+
+    /**
+     * @brief Name of the directory containing the include files.
+     */
+    static std::string include_directory_name();
+
+    /**
+     * @brief Name of the directory containing the source files.
+     */
+    static std::string source_directory_name();
 };
 
 } }

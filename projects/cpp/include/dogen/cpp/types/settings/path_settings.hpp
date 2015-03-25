@@ -59,7 +59,9 @@ public:
         const boost::filesystem::path& source_directory_path,
         const boost::filesystem::path& include_directory_path,
         const boost::filesystem::path& inclusion_path,
-        const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type);
+        const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
+        const std::string& include_directory_name,
+        const std::string& source_directory_name);
 
 private:
     template<typename Archive>
@@ -118,6 +120,16 @@ public:
     dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type() const;
     void inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v);
 
+    const std::string& include_directory_name() const;
+    std::string& include_directory_name();
+    void include_directory_name(const std::string& v);
+    void include_directory_name(const std::string&& v);
+
+    const std::string& source_directory_name() const;
+    std::string& source_directory_name();
+    void source_directory_name(const std::string& v);
+    void source_directory_name(const std::string&& v);
+
 public:
     bool operator==(const path_settings& rhs) const;
     bool operator!=(const path_settings& rhs) const {
@@ -140,6 +152,8 @@ private:
     boost::filesystem::path include_directory_path_;
     boost::filesystem::path inclusion_path_;
     dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type_;
+    std::string include_directory_name_;
+    std::string source_directory_name_;
 };
 
 } } }

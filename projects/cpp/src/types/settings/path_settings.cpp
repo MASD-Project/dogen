@@ -40,7 +40,9 @@ path_settings::path_settings(path_settings&& rhs)
       source_directory_path_(std::move(rhs.source_directory_path_)),
       include_directory_path_(std::move(rhs.include_directory_path_)),
       inclusion_path_(std::move(rhs.inclusion_path_)),
-      inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)) { }
+      inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)),
+      include_directory_name_(std::move(rhs.include_directory_name_)),
+      source_directory_name_(std::move(rhs.source_directory_name_)) { }
 
 path_settings::path_settings(
     const bool split_project,
@@ -53,7 +55,9 @@ path_settings::path_settings(
     const boost::filesystem::path& source_directory_path,
     const boost::filesystem::path& include_directory_path,
     const boost::filesystem::path& inclusion_path,
-    const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type)
+    const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
+    const std::string& include_directory_name,
+    const std::string& source_directory_name)
     : split_project_(split_project),
       file_type_(file_type),
       facet_directory_(facet_directory),
@@ -64,7 +68,9 @@ path_settings::path_settings(
       source_directory_path_(source_directory_path),
       include_directory_path_(include_directory_path),
       inclusion_path_(inclusion_path),
-      inclusion_delimiter_type_(inclusion_delimiter_type) { }
+      inclusion_delimiter_type_(inclusion_delimiter_type),
+      include_directory_name_(include_directory_name),
+      source_directory_name_(source_directory_name) { }
 
 void path_settings::swap(path_settings& other) noexcept {
     using std::swap;
@@ -79,6 +85,8 @@ void path_settings::swap(path_settings& other) noexcept {
     swap(include_directory_path_, other.include_directory_path_);
     swap(inclusion_path_, other.inclusion_path_);
     swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
+    swap(include_directory_name_, other.include_directory_name_);
+    swap(source_directory_name_, other.source_directory_name_);
 }
 
 bool path_settings::operator==(const path_settings& rhs) const {
@@ -92,7 +100,9 @@ bool path_settings::operator==(const path_settings& rhs) const {
         source_directory_path_ == rhs.source_directory_path_ &&
         include_directory_path_ == rhs.include_directory_path_ &&
         inclusion_path_ == rhs.inclusion_path_ &&
-        inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_;
+        inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_ &&
+        include_directory_name_ == rhs.include_directory_name_ &&
+        source_directory_name_ == rhs.source_directory_name_;
 }
 
 path_settings& path_settings::operator=(path_settings other) {
@@ -251,6 +261,38 @@ dogen::cpp::settings::inclusion_delimiter_types path_settings::inclusion_delimit
 
 void path_settings::inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v) {
     inclusion_delimiter_type_ = v;
+}
+
+const std::string& path_settings::include_directory_name() const {
+    return include_directory_name_;
+}
+
+std::string& path_settings::include_directory_name() {
+    return include_directory_name_;
+}
+
+void path_settings::include_directory_name(const std::string& v) {
+    include_directory_name_ = v;
+}
+
+void path_settings::include_directory_name(const std::string&& v) {
+    include_directory_name_ = std::move(v);
+}
+
+const std::string& path_settings::source_directory_name() const {
+    return source_directory_name_;
+}
+
+std::string& path_settings::source_directory_name() {
+    return source_directory_name_;
+}
+
+void path_settings::source_directory_name(const std::string& v) {
+    source_directory_name_ = v;
+}
+
+void path_settings::source_directory_name(const std::string&& v) {
+    source_directory_name_ = std::move(v);
 }
 
 } } }

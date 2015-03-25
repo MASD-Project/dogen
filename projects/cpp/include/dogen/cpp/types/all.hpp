@@ -151,6 +151,7 @@
 #include "dogen/cpp/types/settings/odb_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
+#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"

@@ -73,6 +73,8 @@ populate(const unsigned int position, result_type& v) {
     v.include_directory_path(create_boost_filesystem_path(position + 8));
     v.inclusion_path(create_boost_filesystem_path(position + 9));
     v.inclusion_delimiter_type(create_dogen_cpp_settings_inclusion_delimiter_types(position + 10));
+    v.include_directory_name(create_std_string(position + 11));
+    v.source_directory_name(create_std_string(position + 12));
 }
 
 path_settings_generator::result_type

@@ -35,7 +35,7 @@
 #include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/config/types/cpp_options.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -46,7 +46,7 @@ namespace settings {
  */
 class path_settings_factory {
 public:
-    path_settings_factory(const config::knitting_options& o,
+    path_settings_factory(const config::cpp_options& o,
         const dynamic::schema::repository& rp);
 
 private:
@@ -57,6 +57,16 @@ private:
      */
     settings::inclusion_delimiter_types
     inclusion_delimiter_type_from_string(const std::string& v) const;
+
+    /**
+     * @brief Returns the field definition for the name by querying
+     * the main field definition container.
+     *
+     * @pre field for name must exist.
+     */
+    dynamic::schema::field_definition
+    field_definition_for_name(const dynamic::schema::repository& rp,
+        const std::string& field_name) const;
 
 private:
     /**
@@ -71,7 +81,15 @@ private:
         dynamic::schema::field_definition formatter_postfix;
         dynamic::schema::field_definition inclusion_path;
         dynamic::schema::field_definition inclusion_delimiter_type;
+        dynamic::schema::field_definition include_directory_name;
+        dynamic::schema::field_definition source_directory_name;
     };
+
+    /**
+     * @brief Sets up top-level fields.
+     */
+    void setup_top_level_fields(const dynamic::schema::repository& rp,
+        formatter_properties& fp) const;
 
     /**
      * @brief Sets up facet fields.
@@ -117,7 +135,7 @@ public:
     make(const dynamic::schema::object& o) const;
 
 private:
-    const config::knitting_options& options_;
+    const config::cpp_options& options_;
     std::unordered_map<std::string, formatter_properties> formatter_properties_;
 };
 

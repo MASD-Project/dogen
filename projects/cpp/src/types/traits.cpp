@@ -63,4 +63,14 @@ std::string traits::inclusion_delimiter_type() {
     return r;
 }
 
+std::string traits::include_directory_name() {
+    static std::string r("cpp.include_directory_name");
+    return r;
+}
+
+std::string traits::source_directory_name() {
+    static std::string r("cpp.source_directory_name");
+    return r;
+}
+
 } }

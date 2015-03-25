@@ -40,6 +40,7 @@ const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
 const std::string invalid_delimiter(
     "Invalid or unsupported inclusion delimiter type: ");
+const std::string field_not_found("Could not find expected field: ");
 
 }
 
@@ -48,10 +49,20 @@ namespace cpp {
 namespace settings {
 
 path_settings_factory::
-path_settings_factory(const config::knitting_options& o,
+path_settings_factory(const config::cpp_options& o,
     const dynamic::schema::repository& rp)
     : options_(o), formatter_properties_(make_formatter_properties(rp)) { }
 
+dynamic::schema::field_definition path_settings_factory::
+field_definition_for_name(const dynamic::schema::repository& rp,
+    const std::string& field_name) const {
+    const auto i(rp.field_definitions_by_name().find(field_name));
+    if (i == rp.field_definitions_by_name().end()) {
+        BOOST_LOG_SEV(lg, error) << field_not_found << field_name;
+        BOOST_THROW_EXCEPTION(building_error(field_not_found + field_name));
+    }
+    return i->second;
+}
 settings::inclusion_delimiter_types path_settings_factory::
 inclusion_delimiter_type_from_string(const std::string& v) const {
     if (v == "angle_brackets")
@@ -61,6 +72,16 @@ inclusion_delimiter_type_from_string(const std::string& v) const {
 
     BOOST_LOG_SEV(lg, error) << invalid_delimiter << v;
     BOOST_THROW_EXCEPTION(building_error(invalid_delimiter + v));
+}
+
+void path_settings_factory::setup_top_level_fields(
+    const dynamic::schema::repository& rp, formatter_properties& fp) const {
+
+    fp.include_directory_name =
+        field_definition_for_name(rp, traits::include_directory_name());
+
+    fp.source_directory_name =
+        field_definition_for_name(rp, traits::source_directory_name());
 }
 
 void path_settings_factory::setup_facet_fields(
@@ -116,6 +137,7 @@ path_settings_factory::make_formatter_properties(
     path_settings_factory::formatter_properties r;
     r.file_type = f.file_type();
     r.formatter_name = f.formatter_name();
+    setup_top_level_fields(rp, r);
     setup_facet_fields(rp, f.facet_name(), r);
     setup_formatter_fields(rp, f.formatter_name(), r);
 
@@ -142,10 +164,10 @@ path_settings path_settings_factory::create_settings_for_formatter(
     path_settings r;
     r.file_type(fp.file_type);
 
-    r.split_project(options_.cpp().split_project());
-    r.project_directory_path(options_.cpp().project_directory_path());
-    r.source_directory_path(options_.cpp().source_directory_path());
-    r.include_directory_path(options_.cpp().include_directory_path());
+    r.split_project(options_.split_project());
+    r.project_directory_path(options_.project_directory_path());
+    r.source_directory_path(options_.source_directory_path());
+    r.include_directory_path(options_.include_directory_path());
 
     using namespace dynamic::schema;
     const field_selector fs(o);
