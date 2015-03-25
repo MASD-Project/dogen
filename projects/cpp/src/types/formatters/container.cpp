@@ -24,14 +24,14 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
-container::class_formatters() {
-    return class_formatters_;
-}
-
 const std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
 container::class_formatters() const {
     return class_formatters_;
+}
+
+const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+container::all_formatters() const {
+    return all_formatters_;
 }
 
 } } }

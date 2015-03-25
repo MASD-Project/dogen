@@ -30,7 +30,12 @@
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
+#include "dogen/cpp/types/formatters/file_types.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -41,21 +46,68 @@ namespace settings {
  */
 class path_settings_factory {
 public:
-    explicit path_settings_factory(const dynamic::schema::repository& rp);
+    path_settings_factory(const config::knitting_options& o,
+        const dynamic::schema::repository& rp);
 
 private:
     /**
-     * @brief If the field has not been found, throws.
+     * @brief Converts string into an inclusion delimiter type.
+     *
+     * @pre v must be a valid delimiter type.
      */
-    void ensure_field_is_present(
-        const bool found, const std::string& name) const;
+    settings::inclusion_delimiter_types
+    inclusion_delimiter_type_from_string(const std::string& v) const;
 
+private:
+    /**
+     * @brief All relevant properties we need to remember for each formatter.
+     */
+    struct formatter_properties {
+        std::string formatter_name;
+        dogen::cpp::formatters::file_types file_type;
+        dynamic::schema::field_definition facet_directory;
+        dynamic::schema::field_definition facet_postfix;
+        dynamic::schema::field_definition extension;
+        dynamic::schema::field_definition formatter_postfix;
+        dynamic::schema::field_definition inclusion_path;
+        dynamic::schema::field_definition inclusion_delimiter_type;
+    };
+
+    /**
+     * @brief Sets up facet fields.
+     */
+    void setup_facet_fields(const dynamic::schema::repository& rp,
+        const std::string& facet_name,
+        formatter_properties& fp) const;
+
+    /**
+     * @brief Sets up formatter fields.
+     */
+    void setup_formatter_fields(const dynamic::schema::repository& rp,
+        const std::string& formatter_name,
+        formatter_properties& fp) const;
+
+    /**
+     * @brief Creates the set of formatter properties for a given
+     * formatter.
+     */
+    formatter_properties make_formatter_properties(
+        const dynamic::schema::repository& rp,
+        const formatters::formatter_interface& f) const;
+
+    /**
+     * @brief Generates all of the formatter properties, using the
+     * repository data and the registered formatters.
+     */
+    std::unordered_map<std::string, formatter_properties>
+    make_formatter_properties(const dynamic::schema::repository& rp) const;
+
+private:
     /**
      * @brief Creates the path settings for a given formatter.
      */
     path_settings create_settings_for_formatter(
-        const std::list<dynamic::schema::field_definition>&
-        formatter_fields, const dynamic::schema::object& o) const;
+        const formatter_properties& fp, const dynamic::schema::object& o) const;
 
 public:
     /**
@@ -65,7 +117,8 @@ public:
     make(const dynamic::schema::object& o) const;
 
 private:
-    const dynamic::schema::repository& repository_;
+    const config::knitting_options& options_;
+    std::unordered_map<std::string, formatter_properties> formatter_properties_;
 };
 
 } } }

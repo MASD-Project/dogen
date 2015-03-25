@@ -39,6 +39,8 @@ const std::string not_boolean_field("Field does not have boolean content: ");
 const std::string not_text_field("Field does not have text content: ");
 const std::string unexpected_field_type("Field has an unexpected type: ");
 typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
+const std::string no_default_value(
+    "Field does not have a default value: ");
 
 }
 
@@ -99,6 +101,30 @@ get_text_content(const std::string& qualified_field_name) const {
     }
 }
 
+std::string field_selector::
+get_text_content_or_default(const field_definition& fd) const {
+    if (has_field(fd))
+        return get_text_content(fd);
+
+    if (!fd.default_value()) {
+        const auto& n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << no_default_value << n;
+        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
+    }
+    return get_text_content(*fd.default_value());
+}
+
+std::list<std::string>
+field_selector::get_text_collection_content(const value& v) {
+    try {
+        const auto& b(dynamic_cast<const text_collection&>(v));
+        return b.content();
+    } catch(const std::bad_cast& e) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(selection_error(unexpected_value_type));
+    }
+}
+
 std::string field_selector::get_text_content(const field_definition& fd) const {
     return get_text_content(fd.name().qualified());
 }
@@ -122,6 +148,19 @@ get_text_collection_content(const std::string& qualified_field_name) const {
 std::list<std::string> field_selector::
 get_text_collection_content(const field_definition& fd) const {
     return get_text_collection_content(fd.name().qualified());
+}
+
+std::list<std::string> field_selector::
+get_text_collection_content_or_default(const field_definition& fd) const {
+    if (has_field(fd))
+        return get_text_collection_content(fd);
+
+    if (!fd.default_value()) {
+        const auto& n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << no_default_value << n;
+        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
+    }
+    return get_text_collection_content(*fd.default_value());
 }
 
 bool field_selector::get_boolean_content(const value& v) {
@@ -149,6 +188,19 @@ get_boolean_content(const std::string& qualified_field_name) const {
 
 bool field_selector::get_boolean_content(const field_definition& fd) const {
     return get_boolean_content(fd.name().qualified());
+}
+
+bool field_selector::
+get_boolean_content_or_default(const field_definition& fd) const {
+    if (has_field(fd))
+        return get_boolean_content(fd);
+
+    if (!fd.default_value()) {
+        const auto& n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << no_default_value << n;
+        BOOST_THROW_EXCEPTION(selection_error(no_default_value + n));
+    }
+    return get_boolean_content(*fd.default_value());
 }
 
 } } }

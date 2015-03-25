@@ -46,8 +46,6 @@ public:
 public:
     repository(
         const std::list<dogen::dynamic::schema::field_definition>& all_field_definitions,
-        const std::unordered_map<std::string, std::list<std::string> >& facet_names_by_model_name,
-        const std::unordered_map<std::string, std::list<std::string> >& formatter_names_by_model_name,
         const std::unordered_map<std::string, dogen::dynamic::schema::field_definition>& field_definitions_by_name,
         const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_facet_name,
         const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_formatter_name);
@@ -68,26 +66,6 @@ public:
     std::list<dogen::dynamic::schema::field_definition>& all_field_definitions();
     void all_field_definitions(const std::list<dogen::dynamic::schema::field_definition>& v);
     void all_field_definitions(const std::list<dogen::dynamic::schema::field_definition>&& v);
-    /**@}*/
-
-    /**
-     * @brief All qualified facet names for each model name.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& facet_names_by_model_name() const;
-    std::unordered_map<std::string, std::list<std::string> >& facet_names_by_model_name();
-    void facet_names_by_model_name(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void facet_names_by_model_name(const std::unordered_map<std::string, std::list<std::string> >&& v);
-    /**@}*/
-
-    /**
-     * @brief All qualified formatter names for each model name.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& formatter_names_by_model_name() const;
-    std::unordered_map<std::string, std::list<std::string> >& formatter_names_by_model_name();
-    void formatter_names_by_model_name(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void formatter_names_by_model_name(const std::unordered_map<std::string, std::list<std::string> >&& v);
     /**@}*/
 
     /**
@@ -132,8 +110,6 @@ public:
 
 private:
     std::list<dogen::dynamic::schema::field_definition> all_field_definitions_;
-    std::unordered_map<std::string, std::list<std::string> > facet_names_by_model_name_;
-    std::unordered_map<std::string, std::list<std::string> > formatter_names_by_model_name_;
     std::unordered_map<std::string, dogen::dynamic::schema::field_definition> field_definitions_by_name_;
     std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> > field_definitions_by_facet_name_;
     std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> > field_definitions_by_formatter_name_;

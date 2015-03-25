@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 
@@ -33,9 +34,12 @@ static logger lg(logger_factory(
 
 const std::string multiple_fields(
     "Facet has multiple fields with the same name: ");
-const std::string no_default_value(
-        "Field does not have a default value: ");
 const std::string missing_expected_field("Could not find expected field: ");
+const std::string no_fields_for_facet("Could not find any fields for facet: ");
+const std::string no_fields_for_formatter(
+    "Could not find any fields for formatter: ");
+const std::string invalid_delimiter(
+    "Invalid or unsupported inclusion delimiter type: ");
 
 }
 
@@ -43,66 +47,131 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-path_settings_factory::path_settings_factory(
-    const dynamic::schema::repository& rp) : repository_(rp) { }
+path_settings_factory::
+path_settings_factory(const config::knitting_options& o,
+    const dynamic::schema::repository& rp)
+    : options_(o), formatter_properties_(make_formatter_properties(rp)) { }
 
-void path_settings_factory::
-ensure_field_is_present(const bool found, const std::string& name) const {
-    if (found)
-        return;
+settings::inclusion_delimiter_types path_settings_factory::
+inclusion_delimiter_type_from_string(const std::string& v) const {
+    if (v == "angle_brackets")
+        return inclusion_delimiter_types::angle_brackets;
+    else if (v == "double_quotes")
+        return inclusion_delimiter_types::double_quotes;
 
-    BOOST_LOG_SEV(lg, error) << missing_expected_field << name;
-    BOOST_THROW_EXCEPTION(building_error(missing_expected_field + name));
+    BOOST_LOG_SEV(lg, error) << invalid_delimiter << v;
+    BOOST_THROW_EXCEPTION(building_error(invalid_delimiter + v));
+}
+
+void path_settings_factory::setup_facet_fields(
+    const dynamic::schema::repository& rp,
+    const std::string& facet_name,
+    path_settings_factory::formatter_properties& fp) const {
+
+    const auto i(rp.field_definitions_by_facet_name().find(facet_name));
+    if (i == rp.field_definitions_by_facet_name().end()) {
+        BOOST_LOG_SEV(lg, error) << no_fields_for_facet << facet_name;
+        BOOST_THROW_EXCEPTION(building_error(no_fields_for_facet + facet_name));
+    }
+
+    for (const auto fd : i->second) {
+        if (fd.name().simple() == traits::directory())
+            fp.facet_directory = fd;
+        else if (fd.name().simple() == traits::postfix())
+            fp.facet_postfix = fd;
+    }
+}
+
+void path_settings_factory::setup_formatter_fields(
+    const dynamic::schema::repository& rp,
+    const std::string& formatter_name,
+    path_settings_factory::formatter_properties& fp) const {
+
+    const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
+    if (i == rp.field_definitions_by_facet_name().end()) {
+        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(no_fields_for_formatter + formatter_name));
+    }
+
+    for (const auto fd : i->second) {
+        if (fd.name().simple() == traits::directory())
+            fp.facet_directory = fd;
+        else if (fd.name().simple() == traits::postfix())
+            fp.facet_postfix = fd;
+        else if (fd.name().simple() == traits::extension())
+            fp.extension = fd;
+        else if (fd.name().simple() == traits::inclusion_path())
+            fp.inclusion_path = fd;
+        else if (fd.name().simple() == traits::inclusion_delimiter_type())
+            fp.inclusion_delimiter_type = fd;
+    }
+}
+
+path_settings_factory::formatter_properties
+path_settings_factory::make_formatter_properties(
+    const dynamic::schema::repository& rp,
+    const formatters::formatter_interface& f) const {
+
+    path_settings_factory::formatter_properties r;
+    r.file_type = f.file_type();
+    r.formatter_name = f.formatter_name();
+    setup_facet_fields(rp, f.facet_name(), r);
+    setup_formatter_fields(rp, f.formatter_name(), r);
+
+    return r;
+}
+
+std::unordered_map<std::string, path_settings_factory::formatter_properties>
+path_settings_factory::make_formatter_properties(
+    const dynamic::schema::repository& rp) const {
+    const auto& c(formatters::workflow::registrar().formatter_container());
+    std::unordered_map<std::string,
+                       path_settings_factory::formatter_properties> r;
+
+    for (const auto& f : c.all_formatters()) {
+        // formatter names are known to be unique
+        r[f->formatter_name()] = make_formatter_properties(rp, *f);
+    }
+    return r;
 }
 
 path_settings path_settings_factory::create_settings_for_formatter(
-    const std::list<dynamic::schema::field_definition>&
-    /*formatter_fields*/, const dynamic::schema::object& /*o*/) const {
+    const formatter_properties& fp, const dynamic::schema::object& o) const {
 
     path_settings r;
-    // bool found_enabled(false);
-    // const auto& enabled_trait(traits::formatter::enabled());
+    r.file_type(fp.file_type);
 
-    // using namespace dynamic::schema;
-    // const field_selector fs(o);
-    // for (const auto fd : formatter_fields) {
-    //     if (fd.name().simple() == enabled_trait) {
-    //         if (found_enabled) {
-    //             const auto& n(fd.name().qualified());
-    //             BOOST_LOG_SEV(lg, error) << multiple_fields << n;
-    //             BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
-    //         }
-    //         found_enabled = true;
+    r.split_project(options_.cpp().split_project());
+    r.project_directory_path(options_.cpp().project_directory_path());
+    r.source_directory_path(options_.cpp().source_directory_path());
+    r.include_directory_path(options_.cpp().include_directory_path());
 
-    //         if (fs.has_field(fd)) {
-    //             r.enabled(fs.get_boolean_content(fd));
-    //         } else {
-    //             if (!fd.default_value()) {
-    //                 const auto& n(fd.name().qualified());
-    //                 BOOST_LOG_SEV(lg, error) << no_default_value << n;
-    //                 BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
-    //             }
-    //             r.enabled(fs.get_boolean_content(*fd.default_value()));
-    //         }
-    //     }
-    // }
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+
+    r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
+    r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
+    r.extension(fs.get_text_content_or_default(fp.extension));
+    r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
+    r.inclusion_path(fs.get_text_content_or_default(fp.inclusion_path));
+
+    const auto del(fs.get_text_content_or_default(fp.inclusion_delimiter_type));
+    r.inclusion_delimiter_type(inclusion_delimiter_type_from_string(del));
 
     return r;
 }
 
 std::unordered_map<std::string, path_settings> path_settings_factory::
 make(const dynamic::schema::object& o) const {
-    // FIXME: need to look for c++ formatters only
     std::unordered_map<std::string, path_settings> r;
-    for (const auto pair : repository_.field_definitions_by_formatter_name()) {
-        const auto& formatter_name(pair.first);
-
+    for (const auto& pair : formatter_properties_) {
+        const auto& fp(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Creating settings for formatter: '"
-                                 << formatter_name << "'";
+                                 << fp.formatter_name << "'";
 
-        const auto& formatter_fields(pair.second);
-        const auto s(create_settings_for_formatter(formatter_fields, o));
-        r.insert(std::make_pair(formatter_name, s));
+        const auto s(create_settings_for_formatter(fp, o));
+        r.insert(std::make_pair(fp.formatter_name, s));
     }
     return r;
 }

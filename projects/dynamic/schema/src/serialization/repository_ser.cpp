@@ -42,8 +42,6 @@ void save(Archive& ar,
     const dogen::dynamic::schema::repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("all_field_definitions", v.all_field_definitions_);
-    ar << make_nvp("facet_names_by_model_name", v.facet_names_by_model_name_);
-    ar << make_nvp("formatter_names_by_model_name", v.formatter_names_by_model_name_);
     ar << make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
     ar << make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
     ar << make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);
@@ -54,8 +52,6 @@ void load(Archive& ar,
     dogen::dynamic::schema::repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("all_field_definitions", v.all_field_definitions_);
-    ar >> make_nvp("facet_names_by_model_name", v.facet_names_by_model_name_);
-    ar >> make_nvp("formatter_names_by_model_name", v.formatter_names_by_model_name_);
     ar >> make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
     ar >> make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
     ar >> make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);

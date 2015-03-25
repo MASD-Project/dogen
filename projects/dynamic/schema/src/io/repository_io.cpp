@@ -47,38 +47,6 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::dynamic::schema::field_definition>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -121,8 +89,6 @@ std::ostream& operator<<(std::ostream& s, const repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::dynamic::schema::repository\"" << ", "
       << "\"all_field_definitions\": " << v.all_field_definitions() << ", "
-      << "\"facet_names_by_model_name\": " << v.facet_names_by_model_name() << ", "
-      << "\"formatter_names_by_model_name\": " << v.formatter_names_by_model_name() << ", "
       << "\"field_definitions_by_name\": " << v.field_definitions_by_name() << ", "
       << "\"field_definitions_by_facet_name\": " << v.field_definitions_by_facet_name() << ", "
       << "\"field_definitions_by_formatter_name\": " << v.field_definitions_by_formatter_name()

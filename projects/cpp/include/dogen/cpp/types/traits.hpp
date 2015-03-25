@@ -36,47 +36,45 @@ namespace cpp {
  */
 struct traits {
     /**
-     * @brief Tags related to facets.
+     * @brief If set to false, no generation will occur.
      */
-    struct facet {
-        /**
-         * @brief If set to false, the facet will not be generated.
-         */
-        static std::string enabled();
+    static std::string enabled();
 
-        /**
-         * @brief If set to true, the facet is not supported.
-         */
-        static std::string supported();
+    /**
+     * @brief If set to true, the facet is not supported.
+     */
+    static std::string supported();
 
-        /**
-         * @brief Directory in which to place files for this facet.
-         */
-        static std::string directory();
+    /**
+     * @brief Directory in which to place files for this facet.
+     */
+    static std::string directory();
 
-        /**
-         * @brief Post-fix to apply to file names for this facet.
-         */
-        static std::string postfix();
+    /**
+     * @brief Post-fix to apply to file names.
+     */
+    static std::string postfix();
 
-        /**
-         * @brief All facets that have been integrated with the present
-         * facet.
-         */
-        static std::string integrated_facet();
-    };
+    /**
+     * @brief All facets that have been integrated with the present
+     * facet.
+     */
+    static std::string integrated_facet();
 
-    struct formatter {
-        /**
-         * @brief If set to false, the formatter will not be generated.
-         */
-        static std::string enabled();
+    /**
+     * @brief File extension to use.
+     */
+    static std::string extension();
 
-        /**
-         * @brief Post-fix to apply to file names for this formatter.
-         */
-        static std::string postfix();
-    };
+    /**
+     * @brief Include path to use for type.
+     */
+    static std::string inclusion_path();
+
+    /**
+     * @brief Type of notation to use in inclusion.
+     */
+    static std::string inclusion_delimiter_type();
 };
 
 } }

@@ -38,23 +38,6 @@ inline std::size_t hash_std_list_dogen_dynamic_schema_field_definition(const std
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const std::unordered_map<std::string, std::list<std::string> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_list_std_string(i.second));
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(const std::unordered_map<std::string, dogen::dynamic::schema::field_definition>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -83,8 +66,6 @@ std::size_t repository_hasher::hash(const repository&v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_dynamic_schema_field_definition(v.all_field_definitions()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.facet_names_by_model_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.formatter_names_by_model_name()));
     combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(v.field_definitions_by_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(v.field_definitions_by_facet_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(v.field_definitions_by_formatter_name()));

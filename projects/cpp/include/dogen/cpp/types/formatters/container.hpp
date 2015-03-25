@@ -28,31 +28,41 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
+class registrar;
+
 /**
  * @brief Simple container for all formatter types.
  */
 class container final {
+private:
+    friend class registrar;
+
 public:
     /**
      * @brief Returns all available class formatters.
      */
-    /**@{*/
-    std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
-    class_formatters();
-
     const std::forward_list<
         std::shared_ptr<formatters::class_formatter_interface>
     >&
     class_formatters() const;
-    /**@}*/
+
+public:
+    /**
+     * @brief Returns all available formatters.
+     */
+    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+    all_formatters() const;
 
 private:
+    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
+    all_formatters_;
     std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
     class_formatters_;
 };

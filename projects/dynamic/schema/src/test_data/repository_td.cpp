@@ -43,22 +43,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string_(unsigned int position) {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
-    }
-    return r;
-}
-
 std::unordered_map<std::string, dogen::dynamic::schema::field_definition> create_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(unsigned int position) {
     std::unordered_map<std::string, dogen::dynamic::schema::field_definition> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -86,11 +70,9 @@ repository_generator::repository_generator() : position_(0) { }
 void repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.all_field_definitions(create_std_list_dogen_dynamic_schema_field_definition(position + 0));
-    v.facet_names_by_model_name(create_std_unordered_map_std_string_std_list_std_string_(position + 1));
-    v.formatter_names_by_model_name(create_std_unordered_map_std_string_std_list_std_string_(position + 2));
-    v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(position + 3));
-    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 4));
-    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 5));
+    v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(position + 1));
+    v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 2));
+    v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 3));
 }
 
 repository_generator::result_type

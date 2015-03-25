@@ -14,14 +14,14 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-24 Tue 23:24]
+Clock summary at [2015-03-25 Wed 17:27]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *45:36* |       |      |
+| *Total time*                                                             | *47:57* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 45:36 |      |
-| STARTED Sprint and product backlog grooming                              |         |       | 1:19 |
+| Active                                                                   |         | 47:57 |      |
+| STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path    |         |       | 0:25 |
@@ -45,10 +45,11 @@ Clock summary at [2015-03-24 Tue 23:24]
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate file path" operation                          |         |       | 0:44 |
+| STARTED Create a "populate file path" operation                          |         |       | 3:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-03-25 Wed 15:06]--[2015-03-25 Wed 15:11] =>  0:05
     CLOCK: [2015-03-21 Sat 17:12]--[2015-03-21 Sat 17:26] =>  0:14
     CLOCK: [2015-03-07 Sat 19:16]--[2015-03-07 Sat 19:25] =>  0:09
     CLOCK: [2015-03-07 Sat 17:44]--[2015-03-07 Sat 18:34] =>  0:50
@@ -647,6 +648,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate file path" operation                   :story:
+    CLOCK: [2015-03-25 Wed 15:11]--[2015-03-25 Wed 17:27] =>  2:12
     CLOCK: [2015-03-24 Tue 23:11]--[2015-03-24 Tue 23:24] =>  0:13
     CLOCK: [2015-03-24 Tue 13:03]--[2015-03-24 Tue 13:34] =>  0:31
 
@@ -664,17 +666,54 @@ This operation should live in c++.
 
 Tasks:
 
-- perform some validation in repository workflow that formatter fields
-  are not duplicated on simple name.
-- create a utility class in schema that has a table of names to
-  lambdas. Users supply lambdas. Utility resolves the field, uses the
-  default value if the field is not in dynamic object, and supplies
-  this value to lambda. Lambda knows of the underlying
-  object. Converts value to appropriate type and sets it.
+- all formatters, file types and facet; all fields for the facet and
+  formatter
+
 - add a field for the file path if it doesn't yet exist;
 - implement path settings factory, adding any missing fields;
 - create a file path expander that calls the factory for every
   formatter
+
+*** Consider using the same API as boost property tree in selector    :story:
+
+At present we have the type of the value in the method names in the
+selector, e.g. =get_text_content=. It would be better to have a =get=
+that takes in a template parameter, e.g. =get<text>=. However, in
+order to do this we need to have some kind of mapping between the
+schema value (=text=) and the raw value (=std::string=). This requires
+some template magic.
+
+Once this is done we can also make the API a bit more like the
+property tree API such as for example returning =boost::optional= for
+the cases where the field may not exist.
+
+*** Default value expansion is not very efficient                     :story:
+
+We added an expansion that generates the default values for all fields
+not supplied by the user. However, this is not particularly efficient;
+its easy to query for the field in the settings factory and if not
+found, use the default value. This would make the objects a lot
+smaller. In theory all we need to do is to remove this
+expansion. Factories are being coded to use the default value.
+
+*** Check for duplicate formatter names in formatter registrar        :story:
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
+
+*** Create a "populator" utility in Schema                            :story:
+
+Create a utility class in schema that has a table of names to
+lambdas. Users supply lambdas. Utility resolves the field, uses the
+default value if the field is not in dynamic object, and supplies this
+value to lambda. Lambda knows of the underlying object. Converts value
+to appropriate type and sets it.
+
+*** Check for duplicate fields in repository workflow                 :story:
+
+perform some validation in repository workflow that formatter fields
+are not duplicated on simple name.
 
 *** Implement new settings factories with caching                     :story:
 

@@ -23,38 +23,43 @@
 namespace dogen {
 namespace cpp {
 
-std::string traits::facet::enabled() {
+std::string traits::enabled() {
     static std::string r("enabled");
     return r;
 }
 
-std::string traits::facet::supported() {
+std::string traits::supported() {
     static std::string r("supported");
     return r;
 }
 
-std::string traits::facet::directory() {
+std::string traits::directory() {
     static std::string r("directory");
     return r;
 }
 
-std::string traits::facet::postfix() {
+std::string traits::postfix() {
     static std::string r("postfix");
     return r;
 }
 
-std::string traits::facet::integrated_facet() {
+std::string traits::integrated_facet() {
     static std::string r("integrated_facet");
     return r;
 }
 
-std::string traits::formatter::enabled() {
-    static std::string r("enabled");
+std::string traits::extension() {
+    static std::string r("extension");
     return r;
 }
 
-std::string traits::formatter::postfix() {
-    static std::string r("postfix");
+std::string traits::inclusion_path() {
+    static std::string r("inclusion_path");
+    return r;
+}
+
+std::string traits::inclusion_delimiter_type() {
+    static std::string r("inclusion_delimiter_type");
     return r;
 }
 

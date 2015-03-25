@@ -51,7 +51,8 @@ void registrar::register_formatter(
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
-    formatter_container_.class_formatters().push_front(f);
+    formatter_container_.class_formatters_.push_front(f);
+    formatter_container_.all_formatters_.push_front(f);
 }
 
 const container& registrar::formatter_container() const {

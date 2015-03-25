@@ -58,35 +58,35 @@ ensure_field_is_present(const bool found, const std::string& name) const {
 formatter_settings formatter_settings_factory::
 create_settings_for_formatter(
     const std::list<dynamic::schema::field_definition>&
-    formatter_fields, const dynamic::schema::object& o) const {
+    /*formatter_fields*/, const dynamic::schema::object& /*o*/) const {
 
     formatter_settings r;
-    bool found_enabled(false);
-    const auto& enabled_trait(traits::formatter::enabled());
+    // bool found_enabled(false);
+    // const auto& enabled_trait(traits::formatter::enabled());
 
-    using namespace dynamic::schema;
-    const field_selector fs(o);
-    for (const auto fd : formatter_fields) {
-        if (fd.name().simple() == enabled_trait) {
-            if (found_enabled) {
-                const auto& n(fd.name().qualified());
-                BOOST_LOG_SEV(lg, error) << multiple_fields << n;
-                BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
-            }
-            found_enabled = true;
+    // using namespace dynamic::schema;
+    // const field_selector fs(o);
+    // for (const auto fd : formatter_fields) {
+    //     if (fd.name().simple() == enabled_trait) {
+    //         if (found_enabled) {
+    //             const auto& n(fd.name().qualified());
+    //             BOOST_LOG_SEV(lg, error) << multiple_fields << n;
+    //             BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
+    //         }
+    //         found_enabled = true;
 
-            if (fs.has_field(fd)) {
-                r.enabled(fs.get_boolean_content(fd));
-            } else {
-                if (!fd.default_value()) {
-                    const auto& n(fd.name().qualified());
-                    BOOST_LOG_SEV(lg, error) << no_default_value << n;
-                    BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
-                }
-                r.enabled(fs.get_boolean_content(*fd.default_value()));
-            }
-        }
-    }
+    //         if (fs.has_field(fd)) {
+    //             r.enabled(fs.get_boolean_content(fd));
+    //         } else {
+    //             if (!fd.default_value()) {
+    //                 const auto& n(fd.name().qualified());
+    //                 BOOST_LOG_SEV(lg, error) << no_default_value << n;
+    //                 BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
+    //             }
+    //             r.enabled(fs.get_boolean_content(*fd.default_value()));
+    //         }
+    //     }
+    // }
 
     return r;
 }

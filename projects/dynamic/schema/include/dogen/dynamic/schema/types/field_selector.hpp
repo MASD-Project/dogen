@@ -83,6 +83,24 @@ public:
 
     /**
      * @brief Returns the content for the field, assuming it is a text
+     * field.
+     *
+     * If the field does not exist, returns the default value.
+     *
+     * @pre field definition must have a default value.
+     */
+    std::string get_text_content_or_default(const field_definition& fd) const;
+
+    /**
+     * @brief Returns the content for the field, assuming it is a text
+     * collection field.
+     *
+     * @pre Field value type must be text collection.
+     */
+    static std::list<std::string> get_text_collection_content(const value& v);
+
+    /**
+     * @brief Returns the content for the field, assuming it is a text
      * collection field.
      *
      * @pre has_field must be true.
@@ -94,6 +112,17 @@ public:
     std::list<std::string>
     get_text_collection_content(const field_definition& fd) const;
     /**@}*/
+
+    /**
+     * @brief Returns the content for the field, assuming it is a text
+     * collection field.
+     *
+     * If the field does not exist, returns the default value.
+     *
+     * @pre field definition must have a default value.
+     */
+    std::list<std::string>
+    get_text_collection_content_or_default(const field_definition& fd) const;
 
     /**
      * @brief Returns the content for the field, assuming it is a boolean
@@ -114,6 +143,17 @@ public:
     bool get_boolean_content(const std::string& qualified_field_name) const;
     bool get_boolean_content(const field_definition& fd) const;
     /**@}*/
+
+    /**
+     * @brief Returns the content for the field, assuming it is a boolean
+     * field.
+     *
+     * If the field does not exist, returns the default value.
+     *
+     * @pre field definition must have a default value.
+     */
+    bool get_boolean_content_or_default(const field_definition& fd) const;
+
 
 private:
     const object& object_;
