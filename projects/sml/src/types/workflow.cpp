@@ -20,7 +20,6 @@
  */
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/merger.hpp"
 #include "dogen/sml/types/resolver.hpp"
@@ -66,12 +65,6 @@ bool workflow::has_generatable_types(const sml::model& m) const {
     return false;
 }
 
-void workflow::inject_system_types_activity(std::list<model>& models) const {
-    injector i;
-    for (auto& m : models)
-        i.inject(m);
-}
-
 model workflow::
 create_merged_model_activity(const std::list<model>& models) const {
     merger mg;
@@ -108,7 +101,6 @@ void workflow::update_model_generability_activity(model& merged_model) const {
 model workflow::execute(std::list<model> models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting SML workflow.";
 
-    inject_system_types_activity(models);
     auto r(create_merged_model_activity(models));
     resolve_types_activity(r);
     index_concepts_activity(r);

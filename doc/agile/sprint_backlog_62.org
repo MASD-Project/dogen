@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 17:14]
+Clock summary at [2015-03-26 Thu 17:31]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *54:32* |       |      |
+| *Total time*                                                             | *54:49* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 54:32 |      |
+| Active                                                                   |         | 54:49 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -47,6 +47,7 @@ Clock summary at [2015-03-26 Thu 17:14]
 | COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
 | COMPLETED Improve performance in populating file path                    |         |       | 2:23 |
 | COMPLETED Implement the formatter settings factory                       |         |       | 1:14 |
+| COMPLETED Split SML workflow into two                                    |         |       | 0:17 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Propagate file and include paths to the formatter                |         |       | 0:03 |
 #+end:
@@ -651,6 +652,29 @@ easiest path. We need to do a few tweaks:
 
 We need to start reading the formatter settings again so we can go
 back to formatting.
+
+*** COMPLETED Split SML workflow into two                             :story:
+    CLOSED: [2015-03-26 Thu 17:31]
+    CLOCK: [2015-03-26 Thu 17:14]--[2015-03-26 Thu 17:31] =>  0:17
+
+*Final Understanding*
+
+Actually since it was just the injector, we ended up removing it from
+the merging workflow and using it directly. We did consider creating
+an "enrichment" workflow but then almost all the operations "enrich"
+the model (but all others require a merged model) so it doesn't make a
+lot of sense. It would be nice to somehow create a workflow that
+handles injection and expansion, but not quite sure where to put it;
+SML cannot depend on expansion and expansion shouldn't really
+inject. For now it stays in frontend, the least hacky approach of a
+set of very hacky options.
+
+*Previous Understanding*
+
+We need to do all of the non-merging aspects of the SML workflow
+before expansion takes place. This is because otherwise the generated
+types won't have the correct meta-data. We need to split the workflow
+into a "merging" workflow and a "enriching" workflow.
 
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]

@@ -84,6 +84,11 @@ private:
     sml::model create_model_activity(const input_descriptor& d) const;
 
     /**
+     * @brief Injects system types into the model.
+     */
+    void inject_system_types_activity(sml::model& m) const;
+
+    /**
      * @brief Execute the dynamic expansion workflow.
      */
     sml::model expand_model_activity(const sml::model& m) const;

@@ -24,6 +24,7 @@
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/injector.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
@@ -126,6 +127,11 @@ sml::model workflow::create_model_activity(const input_descriptor& d) const {
     return frontend.generate(schema_workflow_, d, s);
 }
 
+void workflow::inject_system_types_activity(sml::model& m) const {
+    sml::injector i;
+    i.inject(m);
+}
+
 sml::model workflow::expand_model_activity(const sml::model& m) const {
     if (!m.is_expandable()) {
         BOOST_LOG_SEV(lg, debug) << "Model is not expandable, so ignoring it: "
@@ -161,6 +167,7 @@ workflow::execute(const std::list<input_descriptor>& descriptors) {
     std::list<sml::model> r;
     for (const auto& d : descriptors) {
         auto m(create_model_activity(d));
+        inject_system_types_activity(m);
         auto e(expand_model_activity(m));
         persist_model_activity(d.path(), e);
         r.push_back(e);

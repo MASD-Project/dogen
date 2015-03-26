@@ -138,16 +138,10 @@ create_settings_for_formatter(const formatter_properties& fp,
 
     formatter_settings r;
     r.enabled(fs.get_boolean_content_or_default(fp.enabled));
+    r.file_path(fs.get_text_content(fp.file_path));
 
-    // FIXME: hack for now
-    if (fs.has_field(fp.file_path))
-        r.file_path(fs.get_text_content(fp.file_path));
-
-    if (fp.inclusion_path) {
-        // FIXME: hack for now
-        if (fs.has_field(*fp.inclusion_path))
-            r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
-    }
+    if (fp.inclusion_path)
+        r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
 
     if (fp.inclusion_dependency && fs.has_field(*fp.inclusion_dependency)) {
         r.inclusion_dependencies(

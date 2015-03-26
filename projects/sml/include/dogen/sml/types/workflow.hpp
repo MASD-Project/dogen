@@ -52,11 +52,6 @@ private:
 
 private:
     /**
-     * @brief Injects system types into model.
-     */
-    void inject_system_types_activity(std::list<model>& models) const;
-
-    /**
      * @brief Create the merged model.
      */
     model create_merged_model_activity(const std::list<model>& models) const;
