@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_GLOBAL_PATH_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_GLOBAL_PATH_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_PATH_SETTINGS_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_PATH_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,26 +28,26 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include <string>
-#include "dogen/cpp/serialization/settings/global_path_settings_fwd_ser.hpp"
+#include "dogen/cpp/serialization/settings/path_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-class global_path_settings final {
+class path_settings final {
 public:
-    global_path_settings(const global_path_settings&) = default;
-    ~global_path_settings() = default;
+    path_settings(const path_settings&) = default;
+    ~path_settings() = default;
 
 public:
-    global_path_settings();
+    path_settings();
 
 public:
-    global_path_settings(global_path_settings&& rhs);
+    path_settings(path_settings&& rhs);
 
 public:
-    global_path_settings(
+    path_settings(
         const bool split_project,
         const dogen::cpp::formatters::file_types& file_type,
         const std::string& facet_directory,
@@ -62,10 +62,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const global_path_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const path_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, global_path_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, path_settings& v, unsigned int version);
 
 public:
     bool split_project() const;
@@ -120,14 +120,14 @@ public:
     void source_directory_name(const std::string&& v);
 
 public:
-    bool operator==(const global_path_settings& rhs) const;
-    bool operator!=(const global_path_settings& rhs) const {
+    bool operator==(const path_settings& rhs) const;
+    bool operator!=(const path_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(global_path_settings& other) noexcept;
-    global_path_settings& operator=(global_path_settings other);
+    void swap(path_settings& other) noexcept;
+    path_settings& operator=(path_settings other);
 
 private:
     bool split_project_;
@@ -149,8 +149,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::settings::global_path_settings& lhs,
-    dogen::cpp::settings::global_path_settings& rhs) {
+    dogen::cpp::settings::path_settings& lhs,
+    dogen::cpp::settings::path_settings& rhs) {
     lhs.swap(rhs);
 }
 

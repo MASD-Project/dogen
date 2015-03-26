@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
-#include "dogen/cpp/io/settings/global_path_settings_io.hpp"
+#include "dogen/cpp/io/settings/path_settings_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -36,7 +36,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const global_path_settings& v) {
+std::ostream& operator<<(std::ostream& s, const path_settings& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -44,7 +44,7 @@ std::ostream& operator<<(std::ostream& s, const global_path_settings& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::global_path_settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::settings::path_settings\"" << ", "
       << "\"split_project\": " << v.split_project() << ", "
       << "\"file_type\": " << v.file_type() << ", "
       << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "

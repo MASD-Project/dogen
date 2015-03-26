@@ -31,8 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/scope_types.hpp"
-#include "dogen/cpp/types/settings/global_path_settings.hpp"
-#include "dogen/cpp/types/settings/local_path_settings.hpp"
+#include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
@@ -65,6 +64,7 @@ private:
         std::string formatter_name;
         dynamic::schema::field_definition file_path;
         boost::optional<dynamic::schema::field_definition> inclusion_path;
+        path_settings settings;
     };
 
     /**
@@ -80,16 +80,23 @@ private:
      */
     formatter_properties make_formatter_properties(
         const dynamic::schema::repository& rp,
-        const formatters::formatter_interface& f) const;
+        const std::string& formatter_name,
+        const std::unordered_map<std::string, path_settings>& ps) const;
 
     /**
      * @brief Generates all of the formatter properties, using the
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-        make_formatter_properties(const dynamic::schema::repository& rp) const;
+        make_formatter_properties(const dynamic::schema::repository& rp,
+            const dynamic::schema::object& root) const;
 
 private:
+    /**
+     * @brief Returns the model's root dynamic object.
+     */
+    dynamic::schema::object obtain_root_object(const sml::model& m) const;
+
     /**
      * @brief Throws if not yet setup.
      */
@@ -98,15 +105,29 @@ private:
     /**
      * @brief Builds an absolute path for the supplied qualified name.
      */
-    boost::filesystem::path make_file_path(const global_path_settings& gps,
+    boost::filesystem::path make_file_path(const path_settings& ps,
         const sml::qname& qn) const;
 
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
-    boost::filesystem::path make_inclusion_path(const global_path_settings& gps,
+    boost::filesystem::path make_inclusion_path(const path_settings& ps,
         const sml::qname& qn) const;
+
+private:
+    /**
+     * @brief Handles the dynamic expansion of the file path.
+     */
+    void expand_file_path(const sml::qname& qn, const formatter_properties& fp,
+        dynamic::schema::object& o) const;
+
+    /**
+     * @brief Handles the dynamic expansion of the include path.
+     */
+    void expand_include_path(const sml::qname& qn,
+        const formatter_properties& fp,
+        dynamic::schema::object& o) const;
 
 public:
     std::string name() const override;

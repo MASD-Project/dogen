@@ -32,8 +32,7 @@
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
-#include "dogen/cpp/types/settings/local_path_settings.hpp"
-#include "dogen/cpp/types/settings/global_path_settings.hpp"
+#include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
@@ -127,16 +126,10 @@ private:
 
 private:
     /**
-     * @brief Creates the global path settings for a given formatter.
-     */
-    global_path_settings create_global_settings_for_formatter(
-        const formatter_properties& fp, const dynamic::schema::object& o) const;
-
-    /**
      * @brief Creates the path settings for a given formatter.
      */
-    local_path_settings create_local_settings_for_formatter(
-        const formatter_properties& fp, const dynamic::schema::object& o) const;
+    path_settings create_settings_for_formatter(const formatter_properties& fp,
+        const dynamic::schema::object& o) const;
 
 public:
     /**
@@ -144,14 +137,8 @@ public:
      *
      * @pre object must be the root object.
      */
-    std::unordered_map<std::string, global_path_settings>
-    make_global_settings(const dynamic::schema::object& o) const;
-
-    /**
-     * @brief Produce the local path settings.
-     */
-    std::unordered_map<std::string, local_path_settings>
-    make_local_settings(const dynamic::schema::object& o) const;
+    std::unordered_map<std::string, path_settings>
+    make(const dynamic::schema::object& o) const;
 
 private:
     const config::cpp_options& options_;

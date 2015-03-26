@@ -225,11 +225,11 @@ path_settings_factory::make_formatter_properties(
     return r;
 }
 
-global_path_settings path_settings_factory::
-create_global_settings_for_formatter(const formatter_properties& fp,
+path_settings path_settings_factory::
+create_settings_for_formatter(const formatter_properties& fp,
     const dynamic::schema::object& o) const {
 
-    global_path_settings r;
+    path_settings r;
     r.file_type(fp.file_type);
 
     r.split_project(options_.split_project());
@@ -259,53 +259,12 @@ create_global_settings_for_formatter(const formatter_properties& fp,
     return r;
 }
 
-local_path_settings path_settings_factory::create_local_settings_for_formatter(
-    const formatter_properties& fp, const dynamic::schema::object& o) const {
-
-    local_path_settings r;
-    using namespace dynamic::schema;
-    const field_selector fs(o);
-
-    if (!fp.inclusion_required || !fp.inclusion_path ||
-        !fp.inclusion_delimiter) {
-        BOOST_LOG_SEV(lg, error) << inclusion_not_supported
-                                 << fp.formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(inclusion_not_supported + fp.formatter_name));
-    }
-
-    r.inclusion_required(
-        fs.get_boolean_content_or_default(*fp.inclusion_required));
-
-    if (fs.has_field(*fp.inclusion_path))
-        r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
-
-    const auto del(fs.get_text_content_or_default(*fp.inclusion_delimiter));
-    r.inclusion_delimiter_type(inclusion_delimiter_type_from_string(del));
-
-    return r;
-}
-
-std::unordered_map<std::string, global_path_settings> path_settings_factory::
-make_global_settings(const dynamic::schema::object& o) const {
-    std::unordered_map<std::string, global_path_settings> r;
+std::unordered_map<std::string, path_settings> path_settings_factory::
+make(const dynamic::schema::object& o) const {
+    std::unordered_map<std::string, path_settings> r;
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);
-        const auto s(create_global_settings_for_formatter(fp, o));
-        r.insert(std::make_pair(fp.formatter_name, s));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, local_path_settings> path_settings_factory::
-make_local_settings(const dynamic::schema::object& o) const {
-    std::unordered_map<std::string, local_path_settings> r;
-    for (const auto& pair : formatter_properties_) {
-        const auto& fp(pair.second);
-        if (!fp.inclusion_required)
-            continue;
-
-        const auto s(create_local_settings_for_formatter(fp, o));
+        const auto s(create_settings_for_formatter(fp, o));
         r.insert(std::make_pair(fp.formatter_name, s));
     }
     return r;

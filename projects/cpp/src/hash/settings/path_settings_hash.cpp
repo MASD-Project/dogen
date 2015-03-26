@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
-#include "dogen/cpp/hash/settings/global_path_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/path_settings_hash.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t global_path_settings_hasher::hash(const global_path_settings&v) {
+std::size_t path_settings_hasher::hash(const path_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.split_project());

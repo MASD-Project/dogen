@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
-#include "dogen/cpp/test_data/settings/global_path_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/path_settings_td.hpp"
 
 namespace {
 
@@ -52,9 +52,9 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-global_path_settings_generator::global_path_settings_generator() : position_(0) { }
+path_settings_generator::path_settings_generator() : position_(0) { }
 
-void global_path_settings_generator::
+void path_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.split_project(create_bool(position + 0));
     v.file_type(create_dogen_cpp_formatters_file_types(position + 1));
@@ -69,21 +69,21 @@ populate(const unsigned int position, result_type& v) {
     v.source_directory_name(create_std_string(position + 10));
 }
 
-global_path_settings_generator::result_type
-global_path_settings_generator::create(const unsigned int position) {
-    global_path_settings r;
-    global_path_settings_generator::populate(position, r);
+path_settings_generator::result_type
+path_settings_generator::create(const unsigned int position) {
+    path_settings r;
+    path_settings_generator::populate(position, r);
     return r;
 }
-global_path_settings_generator::result_type*
-global_path_settings_generator::create_ptr(const unsigned int position) {
-    global_path_settings* p = new global_path_settings();
-    global_path_settings_generator::populate(position, *p);
+path_settings_generator::result_type*
+path_settings_generator::create_ptr(const unsigned int position) {
+    path_settings* p = new path_settings();
+    path_settings_generator::populate(position, *p);
     return p;
 }
 
-global_path_settings_generator::result_type
-global_path_settings_generator::operator()() {
+path_settings_generator::result_type
+path_settings_generator::operator()() {
     return create(position_++);
 }
 

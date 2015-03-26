@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 13:41]
+Clock summary at [2015-03-26 Thu 15:27]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *51:33* |       |      |
+| *Total time*                                                             | *52:49* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 51:33 |      |
+| Active                                                                   |         | 52:49 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -46,7 +46,7 @@ Clock summary at [2015-03-26 Thu 13:41]
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Improve performance in populating file path                      |         |       | 0:41 |
+| STARTED Improve performance in populating file path                      |         |       | 1:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -680,17 +680,18 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Improve performance in populating file path               :story:
+    CLOCK: [2015-03-26 Thu 14:11]--[2015-03-26 Thu 15:27] =>  1:16
     CLOCK: [2015-03-26 Thu 13:31]--[2015-03-26 Thu 13:41] =>  0:10
     CLOCK: [2015-03-26 Thu 10:48]--[2015-03-26 Thu 11:19] =>  0:31
 
 We now have major performance issues. This is because we took the
 easiest path. We need to do a few tweaks:
 
-- do not expand default values
-- do not copy from root object
 - for each expander that needs data from the root object, create it
   during setup and cache it. This means we need to split the path
   factory into two (root and formatter).
+- do not expand default values
+- do not copy from root object
 - for general settings, create an expander that uses the formatter
   field, unless none is found in which case it uses the root object
   field.

@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_GLOBAL_PATH_SETTINGS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_SETTINGS_GLOBAL_PATH_SETTINGS_TD_HPP
+#ifndef DOGEN_CPP_HASH_SETTINGS_PATH_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_PATH_SETTINGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/settings/global_path_settings.hpp"
+#include <functional>
+#include "dogen/cpp/types/settings/path_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-class global_path_settings_generator {
+struct path_settings_hasher {
 public:
-    global_path_settings_generator();
-
-public:
-    typedef dogen::cpp::settings::global_path_settings result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const path_settings& v);
 };
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::cpp::settings::path_settings> {
+public:
+    size_t operator()(const dogen::cpp::settings::path_settings& v) const {
+        return dogen::cpp::settings::path_settings_hasher::hash(v);
+    }
+};
+
+}
 #endif

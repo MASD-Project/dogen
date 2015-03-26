@@ -28,6 +28,7 @@
 #include "dogen/dynamic/expansion/types/root_object_copier.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
@@ -49,8 +50,9 @@ const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
-const std::string no_path_settings_for_formatter(
+const std::string missing_path_settings(
     "Could not find any path settings for formatter: ");
+const std::string model_module_not_found("Model module not found for model: ");
 
 }
 
@@ -79,7 +81,6 @@ void path_expander::setup_formatter_fields(
     }
 
     bool found_file_path(false);
-
     for (const auto fd : i->second) {
         if (fd.name().simple() == traits::file_path()) {
             fp.file_path = fd;
@@ -101,61 +102,90 @@ void path_expander::setup_formatter_fields(
 path_expander::formatter_properties
 path_expander::make_formatter_properties(
     const dynamic::schema::repository& rp,
-    const formatters::formatter_interface& f) const {
+    const std::string& formatter_name,
+    const std::unordered_map<std::string, path_settings>& ps) const {
+
+    const auto i(ps.find(formatter_name));
+    if (i == ps.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_path_settings << formatter_name;
+
+        using dynamic::expansion::expansion_error;
+        BOOST_THROW_EXCEPTION(
+            expansion_error(missing_path_settings + formatter_name));
+    }
 
     formatter_properties r;
-    r.formatter_name = f.formatter_name();
-    setup_formatter_fields(rp, f.formatter_name(), r);
+    r.settings = i->second;
+    r.formatter_name = formatter_name;
+    setup_formatter_fields(rp, formatter_name, r);
 
     return r;
 }
 
 std::unordered_map<std::string, path_expander::formatter_properties>
-path_expander::make_formatter_properties(
-    const dynamic::schema::repository& rp) const {
+path_expander::make_formatter_properties(const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root) const {
     const auto& c(formatters::workflow::registrar().formatter_container());
     std::unordered_map<std::string, formatter_properties> r;
 
+    const auto ps(factory_->make(root));
     for (const auto& f : c.all_formatters()) {
-        // formatter names are known to be unique
-        r[f->formatter_name()] = make_formatter_properties(rp, *f);
+        const auto& fn(f->formatter_name());
+        r[fn] = make_formatter_properties(rp, fn, ps);
     }
     return r;
 }
 
 void path_expander::ensure_is_setup() const {
-    if (!factory_) {
-        BOOST_LOG_SEV(lg, error) << expander_not_setup;
+    if (factory_)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << expander_not_setup;
+    using dynamic::expansion::expansion_error;
+    BOOST_THROW_EXCEPTION(expansion_error(expander_not_setup));
+}
+
+dynamic::schema::object path_expander::
+obtain_root_object(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
+
+    const auto i(m.modules().find(m.name()));
+    if (i == m.modules().end()) {
+        const auto n(sml::string_converter::convert(m.name()));
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
 
         using dynamic::expansion::expansion_error;
-        BOOST_THROW_EXCEPTION(expansion_error(expander_not_setup));
+        BOOST_THROW_EXCEPTION(expansion_error(model_module_not_found + n));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
+    return i->second.extensions();
 }
 
 boost::filesystem::path path_expander::
-make_file_path(const global_path_settings& gps, const sml::qname& qn) const {
+make_file_path(const path_settings& ps, const sml::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
                              << sml::string_converter::convert(qn);
 
     boost::filesystem::path r;
 
-    const auto ft(gps.file_type());
+    const auto ft(ps.file_type());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        if (gps.split_project())
-            r = gps.include_directory_path();
+        if (ps.split_project())
+            r = ps.include_directory_path();
         else {
-            r = gps.project_directory_path() / qn.model_name();
-            r /= gps.include_directory_name();
+            r = ps.project_directory_path() / qn.model_name();
+            r /= ps.include_directory_name();
         }
         break;
 
     case formatters::file_types::cpp_implementation:
-        if (gps.split_project())
-            r = gps.source_directory_path();
+        if (ps.split_project())
+            r = ps.source_directory_path();
         else {
-            r = gps.project_directory_path() / qn.model_name();
-            r /= gps.source_directory_name();
+            r = ps.project_directory_path() / qn.model_name();
+            r /= ps.source_directory_name();
         }
         break;
 
@@ -167,35 +197,32 @@ make_file_path(const global_path_settings& gps, const sml::qname& qn) const {
                 boost::lexical_cast<std::string>(ft)));
     }
 
-    r /= make_inclusion_path(gps, qn);
+    r /= make_inclusion_path(ps, qn);
 
-    BOOST_LOG_SEV(lg, debug) << "File path: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Done creating file path for: "
-                             << sml::string_converter::convert(qn);
+    BOOST_LOG_SEV(lg, debug) << "Done creating file path. Result: " << r;
     return r;
 }
 
 boost::filesystem::path path_expander::
-make_inclusion_path(const global_path_settings& gps,
-    const sml::qname& qn) const {
+make_inclusion_path(const path_settings& ps, const sml::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
                              << sml::string_converter::convert(qn);
 
     boost::filesystem::path r;
 
-    if (gps.split_project()) {
+    if (ps.split_project()) {
         for(auto n : qn.external_module_path())
             r /= n;
 
         r /= qn.model_name();
-    } else if (gps.file_type() == formatters::file_types::cpp_header) {
+    } else if (ps.file_type() == formatters::file_types::cpp_header) {
         for(auto n : qn.external_module_path())
             r /= n;
         r /= qn.model_name();
     }
 
-    if (!gps.facet_directory().empty())
-        r /= gps.facet_directory();
+    if (!ps.facet_directory().empty())
+        r /= ps.facet_directory();
 
     for(auto n : qn.module_path())
         r /= n;
@@ -203,19 +230,16 @@ make_inclusion_path(const global_path_settings& gps,
     std::ostringstream stream;
     stream << qn.simple_name();
 
-    if (!gps.formatter_postfix().empty())
-        stream << underscore << gps.formatter_postfix();
+    if (!ps.formatter_postfix().empty())
+        stream << underscore << ps.formatter_postfix();
 
-    if (!gps.facet_postfix().empty())
-        stream << underscore << gps.facet_postfix();
+    if (!ps.facet_postfix().empty())
+        stream << underscore << ps.facet_postfix();
 
-    stream << dot << gps.extension();
+    stream << dot << ps.extension();
     r /= stream.str();
 
-    BOOST_LOG_SEV(lg, debug) << "Inclusion path: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Done creating inclusion path for: "
-                             << sml::string_converter::convert(qn);
-
+    BOOST_LOG_SEV(lg, debug) << "Done creating inclusion path. Result: " << r;
     return r;
 }
 
@@ -234,42 +258,47 @@ const std::forward_list<std::string>& path_expander::dependencies() const {
 }
 
 void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
-    formatter_properties_ = make_formatter_properties(ec.repository());
     factory_ = std::make_shared<path_settings_factory>(
-        ec.cpp_options(),
-        ec.repository());
+            ec.cpp_options(), ec.repository());
+    const auto root(obtain_root_object(ec.model()));
+    formatter_properties_ = make_formatter_properties(ec.repository(), root);
 }
 
-void path_expander::expand(const sml::qname& /*qn*/,
+void path_expander::expand_file_path(const sml::qname& qn,
+    const formatter_properties& fp, dynamic::schema::object& o) const {
+
+    const auto file_path(make_file_path(fp.settings, qn));
+    dynamic::schema::field_instance_factory f;
+    o.fields()[fp.file_path.name().qualified()] = f.make_text(file_path);
+}
+
+void path_expander::expand_include_path(const sml::qname& qn,
+    const formatter_properties& fp, dynamic::schema::object& o) const {
+
+    const bool inclusion_paths_not_supported(!fp.inclusion_path);
+    if (inclusion_paths_not_supported)
+        return;
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const bool override_found(fs.has_field(*fp.inclusion_path));
+    if (override_found)
+        return;
+
+    dynamic::schema::field_instance_factory f;
+    const auto ip(make_inclusion_path(fp.settings, qn));
+    o.fields()[fp.inclusion_path->name().qualified()] = f.make_text(ip);
+}
+
+void path_expander::expand(const sml::qname& qn,
     const dynamic::schema::scope_types& /*st*/,
-    dynamic::schema::object& /*o*/) const {
+    dynamic::schema::object& o) const {
 
     ensure_is_setup();
-    // const auto lps(factory_->make_local_settings(o));
-    // global_path_settings gps;
-    // for (const auto& pair : formatter_properties_) {
-    //     const auto& fp(pair.second);
-    //     const auto i(lps.find(fp.formatter_name));
-    //     if (i == lps.end()) {
-    //         BOOST_LOG_SEV(lg, error) << no_path_settings_for_formatter
-    //                                  << fp.formatter_name;
-    //         BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-    //                 no_path_settings_for_formatter + fp.formatter_name));
-    //     }
-
-
-    //     dynamic::schema::field_instance_factory f;
-    //     const auto file_path(make_file_path(gps, qn));
-    //     o.fields()[fp.file_path.name().qualified()] = f.make_text(file_path);
-
-    //     if (fp.inclusion_path) {
-    //         // FIXME missing delimiter
-    //         // FIXME path override
-    //         const auto inclusion_path(make_inclusion_path(gps, i->second, qn));
-    //         o.fields()[fp.inclusion_path->name().qualified()] =
-    //             f.make_text(inclusion_path);
-    //     }
-    // }
+    for (const auto& pair : formatter_properties_) {
+        expand_file_path(qn, pair.second, o);
+        expand_include_path(qn, pair.second, o);
+    }
 }
 
 } } }

@@ -18,38 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/settings/inclusion_delimiter_types_hash.hpp"
-#include "dogen/cpp/hash/settings/local_path_settings_hash.hpp"
+#ifndef DOGEN_CPP_IO_SETTINGS_PATH_SETTINGS_IO_HPP
+#define DOGEN_CPP_IO_SETTINGS_PATH_SETTINGS_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-}
+#include <iosfwd>
+#include "dogen/cpp/types/settings/path_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t local_path_settings_hasher::hash(const local_path_settings&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.inclusion_required());
-    combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
-    combine(seed, v.inclusion_delimiter_type());
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::settings::path_settings& v);
 
 } } }
+
+#endif
