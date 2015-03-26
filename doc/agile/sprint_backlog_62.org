@@ -967,4 +967,16 @@ such as c files first, then standard c++ files, then boost, etc. We
 should have a function that given a list of includes performs this
 ordering.
 
+*** External module path and references as meta-data                  :story:
+
+It actually does not make a lot of sense to allow users to supply
+external module paths and references as command line options. This is
+because the model will fail to build unless we provide the correct
+ones; these are not configurable items in this sense. The project
+path, etc are - and so should remain command line options.
+
+We need to move these two into the meta-data. This would also mean we
+no longer need to pass in external module paths for references, which
+is much cleaner.
+
 ** Deprecated
