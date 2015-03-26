@@ -771,6 +771,13 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
+*** Implement the general settings workflow with root object          :story:
+
+We need to change the settings workflow to take in the root object;
+and we then need to pass it to the general settings workflow so that
+we first check to see if a field exists on the current object; if it
+doesn't we then either use the root object or the default value.
+
 *** Consider creating field definition templates                      :story:
 
 At present we need to copy and paste a lot of field definitions to
