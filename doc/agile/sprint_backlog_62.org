@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 15:27]
+Clock summary at [2015-03-26 Thu 15:56]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *52:49* |       |      |
+| *Total time*                                                             | *53:15* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 52:49 |      |
+| Active                                                                   |         | 53:15 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -45,8 +45,8 @@ Clock summary at [2015-03-26 Thu 15:27]
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
+| COMPLETED Improve performance in populating file path                    |         |       | 2:23 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Improve performance in populating file path                      |         |       | 1:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -609,6 +609,40 @@ Tasks:
 - create a file path expander that calls the factory for every
   formatter
 
+*** COMPLETED Default value expansion is not very efficient           :story:
+    CLOSED: [2015-03-26 Thu 15:49]
+
+We added an expansion that generates the default values for all fields
+not supplied by the user. However, this is not particularly efficient;
+its easy to query for the field in the settings factory and if not
+found, use the default value. This would make the objects a lot
+smaller. In theory all we need to do is to remove this
+expansion. Factories are being coded to use the default value.
+
+*** COMPLETED Improve performance in populating file path             :story:
+    CLOSED: [2015-03-26 Thu 15:55]
+    CLOCK: [2015-03-26 Thu 15:45]--[2015-03-26 Thu 15:55] =>  0:10
+    CLOCK: [2015-03-26 Thu 15:28]--[2015-03-26 Thu 15:44] =>  0:16
+    CLOCK: [2015-03-26 Thu 14:11]--[2015-03-26 Thu 15:27] =>  1:16
+    CLOCK: [2015-03-26 Thu 13:31]--[2015-03-26 Thu 13:41] =>  0:10
+    CLOCK: [2015-03-26 Thu 10:48]--[2015-03-26 Thu 11:19] =>  0:31
+
+We now have major performance issues. This is because we took the
+easiest path. We need to do a few tweaks:
+
+- for each expander that needs data from the root object, create it
+  during setup and cache it. This means we need to split the path
+  factory into two (root and formatter).
+- do not expand default values
+- do not copy from root object
+- for general settings, create an expander that uses the formatter
+  field, unless none is found in which case it uses the root object
+  field. Actually this is the role of the bundle factory; we just need
+  access to the root object.
+- only populate include path if inclusion_required is true.
+- do not compute file paths for non-targets. Supply the generatability
+  enum to the expander to decide.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -625,6 +659,22 @@ conditional and unconditional operations.
 
 This operation should execute after copy from root. It should live in
 dynamic.
+
+*** CANCELLED Create a "populator" utility in Schema                  :story:
+    CLOSED: [2015-03-26 Thu 15:50]
+
+*Final Understanding*
+
+Actually by caching the field definitions we have made the code a lot
+smaller so there is no need for further hacking.
+
+*Previous Understanding*
+
+Create a utility class in schema that has a table of names to
+lambdas. Users supply lambdas. Utility resolves the field, uses the
+default value if the field is not in dynamic object, and supplies this
+value to lambda. Lambda knows of the underlying object. Converts value
+to appropriate type and sets it.
 
 *** STARTED Create a "supported" expander                             :story:
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49
@@ -679,28 +729,6 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** STARTED Improve performance in populating file path               :story:
-    CLOCK: [2015-03-26 Thu 15:28]--[2015-03-26 Thu 15:44] =>  0:16
-    CLOCK: [2015-03-26 Thu 14:11]--[2015-03-26 Thu 15:27] =>  1:16
-    CLOCK: [2015-03-26 Thu 13:31]--[2015-03-26 Thu 13:41] =>  0:10
-    CLOCK: [2015-03-26 Thu 10:48]--[2015-03-26 Thu 11:19] =>  0:31
-
-We now have major performance issues. This is because we took the
-easiest path. We need to do a few tweaks:
-
-- for each expander that needs data from the root object, create it
-  during setup and cache it. This means we need to split the path
-  factory into two (root and formatter).
-- do not expand default values
-- do not copy from root object
-- for general settings, create an expander that uses the formatter
-  field, unless none is found in which case it uses the root object
-  field.
-- do not compute file paths for non-targets. Supply the generatability
-  enum to the expander to decide.
-- only populate file path if the type is in the target model. only
-  populate include path if inclusion_required is true.
-
 *** Consider creating field definition templates                      :story:
 
 At present we need to copy and paste a lot of field definitions to
@@ -742,28 +770,11 @@ Once this is done we can also make the API a bit more like the
 property tree API such as for example returning =boost::optional= for
 the cases where the field may not exist.
 
-*** Default value expansion is not very efficient                     :story:
-
-We added an expansion that generates the default values for all fields
-not supplied by the user. However, this is not particularly efficient;
-its easy to query for the field in the settings factory and if not
-found, use the default value. This would make the objects a lot
-smaller. In theory all we need to do is to remove this
-expansion. Factories are being coded to use the default value.
-
 *** Check for duplicate formatter names in formatter registrar        :story:
 
 At present it is possible to register a formatter name more than
 once. Registrar should keep track of the names and throw if the name
 is duplicated.
-
-*** Create a "populator" utility in Schema                            :story:
-
-Create a utility class in schema that has a table of names to
-lambdas. Users supply lambdas. Utility resolves the field, uses the
-default value if the field is not in dynamic object, and supplies this
-value to lambda. Lambda knows of the underlying object. Converts value
-to appropriate type and sets it.
 
 *** Check for duplicate fields in repository workflow                 :story:
 

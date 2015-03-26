@@ -64,7 +64,7 @@ std::string path_expander::static_name() {
     return name;
 }
 
-path_expander::path_expander() { }
+path_expander::path_expander() : requires_file_path_expansion_(false) { }
 path_expander::~path_expander() noexcept { }
 
 void path_expander::setup_formatter_fields(
@@ -261,6 +261,8 @@ const std::forward_list<std::string>& path_expander::dependencies() const {
 }
 
 void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
+
+    requires_file_path_expansion_ = ec.model().is_target();
     factory_ = std::make_shared<path_settings_factory>(
             ec.cpp_options(), ec.repository());
     const auto root(obtain_root_object(ec.model()));
@@ -269,6 +271,9 @@ void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
 
 void path_expander::expand_file_path(const sml::qname& qn,
     const formatter_properties& fp, dynamic::schema::object& o) const {
+
+    if (!requires_file_path_expansion_)
+        return;
 
     const auto file_path(make_file_path(fp.settings, qn));
     dynamic::schema::field_instance_factory f;

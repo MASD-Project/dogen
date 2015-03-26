@@ -140,6 +140,7 @@ public:
         dynamic::schema::object& o) const override;
 
 private:
+    bool requires_file_path_expansion_;
     std::shared_ptr<const path_settings_factory> factory_;
     std::unordered_map<std::string, formatter_properties> formatter_properties_;
 };
