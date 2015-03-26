@@ -577,6 +577,37 @@ workflow to read in all the JSON files.
 
 Instead add traits with the complete name for all relevant fields.
 
+*** COMPLETED Create a "populate file path" operation                 :story:
+    CLOSED: [2015-03-26 Thu 10:31]
+    CLOCK: [2015-03-25 Wed 22:30]--[2015-03-25 Wed 23:44] =>  1:14
+    CLOCK: [2015-03-25 Wed 21:40]--[2015-03-25 Wed 22:03] =>  0:23
+    CLOCK: [2015-03-25 Wed 20:50]--[2015-03-25 Wed 21:22] =>  0:32
+    CLOCK: [2015-03-25 Wed 17:28]--[2015-03-25 Wed 18:14] =>  0:46
+    CLOCK: [2015-03-25 Wed 15:11]--[2015-03-25 Wed 17:27] =>  2:12
+    CLOCK: [2015-03-24 Tue 23:11]--[2015-03-24 Tue 23:24] =>  0:13
+    CLOCK: [2015-03-24 Tue 13:03]--[2015-03-24 Tue 13:34] =>  0:31
+
+We need an operation that uses all the ingredients for a file path and
+generates the file path. It is unconditional. It depends on
+defaulting.
+
+This should populate both the inclusion path (and delimiter) and the
+full path. It should take into account overriding.
+
+We should consider having two operations: the full path and the
+inclusion path.
+
+This operation should live in c++.
+
+Tasks:
+
+- all formatters, file types and facet; all fields for the facet and
+  formatter.
+- add a field for the file path if it doesn't yet exist;
+- implement path settings factory, adding any missing fields;
+- create a file path expander that calls the factory for every
+  formatter
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -647,37 +678,51 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** STARTED Create a "populate file path" operation                   :story:
-    CLOCK: [2015-03-25 Wed 22:30]--[2015-03-25 Wed 23:44] =>  1:14
-    CLOCK: [2015-03-25 Wed 21:40]--[2015-03-25 Wed 22:03] =>  0:23
-    CLOCK: [2015-03-25 Wed 20:50]--[2015-03-25 Wed 21:22] =>  0:32
-    CLOCK: [2015-03-25 Wed 17:28]--[2015-03-25 Wed 18:14] =>  0:46
-    CLOCK: [2015-03-25 Wed 15:11]--[2015-03-25 Wed 17:27] =>  2:12
-    CLOCK: [2015-03-24 Tue 23:11]--[2015-03-24 Tue 23:24] =>  0:13
-    CLOCK: [2015-03-24 Tue 13:03]--[2015-03-24 Tue 13:34] =>  0:31
+*** Improve performance in populating file path                       :story:
 
-We need an operation that uses all the ingredients for a file path and
-generates the file path. It is unconditional. It depends on
-defaulting.
+We now have major performance issues. This is because we took the
+easiest path. We need to do a few tweaks:
 
-This should populate both the inclusion path (and delimiter) and the
-full path. It should take into account overriding.
-
-We should consider having two operations: the full path and the
-inclusion path.
-
-This operation should live in c++.
-
-Tasks:
-
-- all formatters, file types and facet; all fields for the facet and
-  formatter.
-- add a field for the file path if it doesn't yet exist;
-- implement path settings factory, adding any missing fields;
-- create a file path expander that calls the factory for every
-  formatter
+- do not expand default values
+- do not copy from root object
+- for each expander that needs data from the root object, create it
+  during setup and cache it. This means we need to split the path
+  factory into two (root and formatter).
+- for general settings, create an expander that uses the formatter
+  field, unless none is found in which case it uses the root object
+  field.
+- do not compute file paths for non-targets. Supply the generatability
+  enum to the expander to decide.
 - only populate file path if the type is in the target model. only
   populate include path if inclusion_required is true.
+
+*** Consider creating field definition templates                      :story:
+
+At present we need to copy and paste a lot of field definitions to
+instantiate it for each formatter. It would be great if we could
+somehow mark a field definition as a facet or formatter template and
+then have it automatically instantiated for each facet/formatter. This
+could be done as part of the repository workflow.
+
+- augment field definition with template information; perhaps
+  =template_types= with =formatter_template=, =facet_template= and
+  =not_a_template=. If a template, then cannot have ownership
+  hierarchy details.
+- JSON hydrator returns the field definitions as templates.
+- repository workflow locates templates and for every template expands
+  it against each formatter/facet, saving the results to the
+  repository.
+- we need some kind of "model registration" for this so that we know
+  of all models, facets and formatters in repository workflow; we
+  cannot access the formatter registry. This could be done by
+  supplying a list of =ownership_hierarchy= produced by each
+  model. This is done by looking at the registered formatters. We
+  don't need static registration, just a way of the backend to
+  generate the list and then knit can supply it to the repository
+  formatter.
+- the non-common fields such as the include details cannot be
+  templatised (because they don't apply to all formatters). We need to
+  keep these in each JSON file.
 
 *** Consider using the same API as boost property tree in selector    :story:
 
