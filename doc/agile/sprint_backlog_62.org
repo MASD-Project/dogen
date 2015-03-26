@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 15:56]
+Clock summary at [2015-03-26 Thu 17:14]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *53:15* |       |      |
+| *Total time*                                                             | *54:32* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 53:15 |      |
+| Active                                                                   |         | 54:32 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -46,7 +46,9 @@ Clock summary at [2015-03-26 Thu 15:56]
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
 | COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
 | COMPLETED Improve performance in populating file path                    |         |       | 2:23 |
+| COMPLETED Implement the formatter settings factory                       |         |       | 1:14 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
+| STARTED Propagate file and include paths to the formatter                |         |       | 0:03 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -643,6 +645,13 @@ easiest path. We need to do a few tweaks:
 - do not compute file paths for non-targets. Supply the generatability
   enum to the expander to decide.
 
+*** COMPLETED Implement the formatter settings factory                :story:
+    CLOSED: [2015-03-26 Thu 17:14]
+    CLOCK: [2015-03-26 Thu 15:59]--[2015-03-26 Thu 17:13] =>  1:14
+
+We need to start reading the formatter settings again so we can go
+back to formatting.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -728,6 +737,13 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
+
+*** STARTED Propagate file and include paths to the formatter         :story:
+    CLOCK: [2015-03-26 Thu 15:56]--[2015-03-26 Thu 15:59] =>  0:03
+
+Now we are generating file and include paths again we should re-enable
+the new formatting workflow, so we can keep track of changes by
+looking at the log files.
 
 *** Consider creating field definition templates                      :story:
 

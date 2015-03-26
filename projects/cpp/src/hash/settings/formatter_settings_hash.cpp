@@ -19,8 +19,6 @@
  *
  */
 #include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_delimiter_types_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_hash.hpp"
 
 namespace {
 
@@ -37,7 +35,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_cpp_settings_inclusion(const std::list<dogen::cpp::settings::inclusion>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -63,12 +61,9 @@ std::size_t formatter_settings_hasher::hash(const formatter_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
-    combine(seed, v.supported());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, v.inclusion_required());
     combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
-    combine(seed, v.inclusion_delimiter_type());
-    combine(seed, hash_std_list_dogen_cpp_settings_inclusion(v.inclusion_dependencies()));
+    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_set_std_string(v.integrated_facets()));
 
     return seed;

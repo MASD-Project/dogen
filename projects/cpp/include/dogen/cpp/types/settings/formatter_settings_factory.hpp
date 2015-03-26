@@ -28,9 +28,13 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -45,18 +49,47 @@ public:
 
 private:
     /**
-     * @brief If the field has not been found, throws.
+     * @brief Converts string into an inclusion delimiter type.
+     *
+     * @pre v must be a valid delimiter type.
      */
-    void ensure_field_is_present(
-        const bool found, const std::string& name) const;
+    inclusion_delimiter_types
+    inclusion_delimiter_type_from_string(const std::string& v) const;
 
+private:
+    /**
+     * @brief All relevant properties we need to remember for each formatter.
+     */
+    struct formatter_properties {
+        dynamic::schema::field_definition enabled;
+        dynamic::schema::field_definition file_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_dependency;
+        boost::optional<dynamic::schema::field_definition> integrated_facet;
+    };
+
+    /**
+     * @brief Creates the set of formatter properties for a given
+     * formatter.
+     */
+    formatter_properties make_formatter_properties(
+        const dynamic::schema::repository& rp,
+        const std::string& formatter_name) const;
+
+    /**
+     * @brief Generates all of the formatter properties, using the
+     * repository data and the registered formatters.
+     */
+    std::unordered_map<std::string, formatter_properties>
+    make_formatter_properties(const dynamic::schema::repository& rp) const;
+
+private:
     /**
      * @brief Creates the formatter settings for a given formatter.
      */
     formatter_settings
     create_settings_for_formatter(
-        const std::list<dynamic::schema::field_definition>&
-        formatter_fields, const dynamic::schema::object& o) const;
+        const formatter_properties& fp, const dynamic::schema::object& o) const;
 
 public:
     /**
@@ -66,7 +99,8 @@ public:
     make(const dynamic::schema::object& o) const;
 
 private:
-    const dynamic::schema::repository& repository_;
+    const std::unordered_map<std::string, formatter_properties>
+    formatter_properties_;
 };
 
 } } }

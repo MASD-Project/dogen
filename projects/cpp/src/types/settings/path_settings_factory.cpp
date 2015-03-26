@@ -39,13 +39,9 @@ const std::string missing_expected_field("Could not find expected field: ");
 const std::string no_fields_for_facet("Could not find any fields for facet: ");
 const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
-const std::string invalid_delimiter(
-    "Invalid or unsupported inclusion delimiter type: ");
 const std::string field_not_found("Could not find expected field: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
-const std::string found_some_field_definitions(
-    "Formatter defines some but not all include field definitions: ");
 const std::string inclusion_not_supported(
     "Attempting to get inclusion properties for a formatter "
     "that does not support them: ");
@@ -70,16 +66,6 @@ field_definition_for_name(const dynamic::schema::repository& rp,
         BOOST_THROW_EXCEPTION(building_error(field_not_found + field_name));
     }
     return i->second;
-}
-settings::inclusion_delimiter_types path_settings_factory::
-inclusion_delimiter_type_from_string(const std::string& v) const {
-    if (v == "angle_brackets")
-        return inclusion_delimiter_types::angle_brackets;
-    else if (v == "double_quotes")
-        return inclusion_delimiter_types::double_quotes;
-
-    BOOST_LOG_SEV(lg, error) << invalid_delimiter << v;
-    BOOST_THROW_EXCEPTION(building_error(invalid_delimiter + v));
 }
 
 void path_settings_factory::setup_top_level_fields(
@@ -149,22 +135,12 @@ void path_settings_factory::setup_formatter_fields(
             building_error(no_fields_for_formatter + formatter_name));
     }
 
-    bool found_postfix(false), found_inclusion_required(false),
-        found_inclusion_path(false), found_inclusion_delimiter(false);
+    bool found_postfix(false);
 
     for (const auto fd : i->second) {
         if (fd.name().simple() == traits::postfix()) {
             fp.formatter_postfix = fd;
             found_postfix = true;
-        } else if (fd.name().simple() == traits::inclusion_required()) {
-            fp.inclusion_required = fd;
-            found_inclusion_required = true;
-        } else if (fd.name().simple() == traits::inclusion_path()) {
-            fp.inclusion_path = fd;
-            found_inclusion_path = true;
-        } else if (fd.name().simple() == traits::inclusion_delimiter()) {
-            fp.inclusion_delimiter = fd;
-            found_inclusion_delimiter = true;
         }
     }
 
@@ -174,26 +150,6 @@ void path_settings_factory::setup_formatter_fields(
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(
             building_error(field_definition_not_found + traits::postfix()));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Inclusion field definitions: "
-                             << "inclusion_required: "
-                             << found_inclusion_required
-                             << " inclusion_path: "
-                             << found_inclusion_path
-                             << " inclusion_delimiter: "
-                             << found_inclusion_delimiter;
-
-    const bool found_all(found_inclusion_required && found_inclusion_path &&
-        found_inclusion_delimiter);
-    const bool found_none(!found_inclusion_required && !found_inclusion_path &&
-        !found_inclusion_delimiter);
-
-    if (!found_all && !found_none) {
-        BOOST_LOG_SEV(lg, error) << found_some_field_definitions
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(found_some_field_definitions + formatter_name));
     }
 }
 
@@ -218,10 +174,9 @@ path_settings_factory::make_formatter_properties(
     const auto& c(formatters::workflow::registrar().formatter_container());
     std::unordered_map<std::string, formatter_properties> r;
 
-    for (const auto& f : c.all_formatters()) {
-        // formatter names are known to be unique
+    for (const auto& f : c.all_formatters())
         r[f->formatter_name()] = make_formatter_properties(rp, *f);
-    }
+
     return r;
 }
 

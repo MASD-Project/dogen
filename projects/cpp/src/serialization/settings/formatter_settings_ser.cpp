@@ -31,8 +31,6 @@
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
-#include "dogen/cpp/serialization/settings/inclusion_delimiter_types_ser.hpp"
-#include "dogen/cpp/serialization/settings/inclusion_ser.hpp"
 #include "dogen/utility/serialization/path.hpp"
 
 
@@ -44,11 +42,8 @@ void save(Archive& ar,
     const dogen::cpp::settings::formatter_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
-    ar << make_nvp("supported", v.supported_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
-    ar << make_nvp("inclusion_required", v.inclusion_required_);
     ar << make_nvp("inclusion_path", v.inclusion_path_.generic_string());
-    ar << make_nvp("inclusion_delimiter_type", v.inclusion_delimiter_type_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("integrated_facets", v.integrated_facets_);
 }
@@ -58,15 +53,12 @@ void load(Archive& ar,
     dogen::cpp::settings::formatter_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
-    ar >> make_nvp("supported", v.supported_);
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
-    ar >> make_nvp("inclusion_required", v.inclusion_required_);
     std::string inclusion_path_tmp;
     ar >> make_nvp("inclusion_path", inclusion_path_tmp);
     v.inclusion_path_ = inclusion_path_tmp;
-    ar >> make_nvp("inclusion_delimiter_type", v.inclusion_delimiter_type_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("integrated_facets", v.integrated_facets_);
 }

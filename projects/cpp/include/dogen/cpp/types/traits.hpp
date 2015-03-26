@@ -82,6 +82,11 @@ struct traits {
     static std::string inclusion_delimiter();
 
     /**
+     * @brief Files this file must include
+     */
+    static std::string inclusion_dependency();
+
+    /**
      * @brief File extension to use for header files.
      */
     static std::string header_file_extension();

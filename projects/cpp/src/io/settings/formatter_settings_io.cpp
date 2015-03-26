@@ -22,22 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <ostream>
 #include "dogen/cpp/io/settings/formatter_settings_io.hpp"
-#include "dogen/cpp/io/settings/inclusion_delimiter_types_io.hpp"
-#include "dogen/cpp/io/settings/inclusion_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::settings::inclusion>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -45,6 +29,20 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
 }
 
 namespace std {
@@ -75,11 +73,8 @@ std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::formatter_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
-      << "\"supported\": " << v.supported() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"inclusion_required\": " << v.inclusion_required() << ", "
       << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
-      << "\"inclusion_delimiter_type\": " << v.inclusion_delimiter_type() << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"integrated_facets\": " << v.integrated_facets()
       << " }";

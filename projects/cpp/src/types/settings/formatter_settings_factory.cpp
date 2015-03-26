@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 
@@ -33,9 +34,17 @@ static logger lg(logger_factory(
 
 const std::string multiple_fields(
     "Facet has multiple fields with the same name: ");
+const std::string no_fields_for_formatter(
+    "Could not find any fields for formatter: ");
 const std::string no_default_value(
         "Field does not have a default value: ");
 const std::string missing_expected_field("Could not find expected field: ");
+const std::string found_some_field_definitions(
+    "Formatter defines some but not all include field definitions: ");
+const std::string field_definition_not_found(
+    "Could not find expected field definition: ");
+const std::string invalid_delimiter(
+    "Invalid or unsupported inclusion delimiter type: ");
 
 }
 
@@ -44,49 +53,114 @@ namespace cpp {
 namespace settings {
 
 formatter_settings_factory::formatter_settings_factory(
-    const dynamic::schema::repository& rp) : repository_(rp) { }
+    const dynamic::schema::repository& rp)
+    : formatter_properties_(make_formatter_properties(rp)) { }
 
-void formatter_settings_factory::
-ensure_field_is_present(const bool found, const std::string& name) const {
-    if (found)
-        return;
+settings::inclusion_delimiter_types formatter_settings_factory::
+inclusion_delimiter_type_from_string(const std::string& v) const {
+    if (v == "angle_brackets")
+        return inclusion_delimiter_types::angle_brackets;
+    else if (v == "double_quotes")
+        return inclusion_delimiter_types::double_quotes;
 
-    BOOST_LOG_SEV(lg, error) << missing_expected_field << name;
-    BOOST_THROW_EXCEPTION(building_error(missing_expected_field + name));
+    BOOST_LOG_SEV(lg, error) << invalid_delimiter << v;
+    BOOST_THROW_EXCEPTION(building_error(invalid_delimiter + v));
+}
+
+formatter_settings_factory::formatter_properties
+formatter_settings_factory::make_formatter_properties(
+    const dynamic::schema::repository& rp,
+    const std::string& formatter_name) const {
+    const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
+    if (i == rp.field_definitions_by_facet_name().end()) {
+        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(no_fields_for_formatter + formatter_name));
+    }
+
+    formatter_properties r;
+    bool found_enabled(false), found_file_path(false);
+    for (const auto fd : i->second) {
+        if (fd.name().simple() == traits::enabled()) {
+            r.enabled = fd;
+            found_enabled = true;
+        } else if (fd.name().simple() == traits::file_path()) {
+            r.file_path = fd;
+            found_file_path = true;
+        } else if (fd.name().simple() == traits::inclusion_path())
+            r.inclusion_path = fd;
+        else if (fd.name().simple() == traits::inclusion_dependency())
+            r.inclusion_dependency = fd;
+        else if (fd.name().simple() == traits::integrated_facet())
+            r.integrated_facet = fd;
+    }
+
+    if (!found_enabled) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::enabled() << "' for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::postfix()));
+    }
+
+    if (!found_file_path) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::enabled() << "' for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(field_definition_not_found + traits::postfix()));
+    }
+
+    return r;
+}
+
+std::unordered_map<
+    std::string, formatter_settings_factory::formatter_properties
+    >
+formatter_settings_factory::make_formatter_properties(
+    const dynamic::schema::repository& rp) const {
+    const auto& c(formatters::workflow::registrar().formatter_container());
+    std::unordered_map<std::string, formatter_properties> r;
+
+    for (const auto& f : c.all_formatters()) {
+        const auto& fn(f->formatter_name());
+        r[fn] = make_formatter_properties(rp, fn);
+    }
+    return r;
 }
 
 formatter_settings formatter_settings_factory::
-create_settings_for_formatter(
-    const std::list<dynamic::schema::field_definition>&
-    /*formatter_fields*/, const dynamic::schema::object& /*o*/) const {
+create_settings_for_formatter(const formatter_properties& fp,
+    const dynamic::schema::object& o) const {
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
 
     formatter_settings r;
-    // bool found_enabled(false);
-    // const auto& enabled_trait(traits::formatter::enabled());
+    r.enabled(fs.get_boolean_content_or_default(fp.enabled));
 
-    // using namespace dynamic::schema;
-    // const field_selector fs(o);
-    // for (const auto fd : formatter_fields) {
-    //     if (fd.name().simple() == enabled_trait) {
-    //         if (found_enabled) {
-    //             const auto& n(fd.name().qualified());
-    //             BOOST_LOG_SEV(lg, error) << multiple_fields << n;
-    //             BOOST_THROW_EXCEPTION(building_error(multiple_fields + n));
-    //         }
-    //         found_enabled = true;
+    // FIXME: hack for now
+    if (fs.has_field(fp.file_path))
+        r.file_path(fs.get_text_content(fp.file_path));
 
-    //         if (fs.has_field(fd)) {
-    //             r.enabled(fs.get_boolean_content(fd));
-    //         } else {
-    //             if (!fd.default_value()) {
-    //                 const auto& n(fd.name().qualified());
-    //                 BOOST_LOG_SEV(lg, error) << no_default_value << n;
-    //                 BOOST_THROW_EXCEPTION(building_error(no_default_value + n));
-    //             }
-    //             r.enabled(fs.get_boolean_content(*fd.default_value()));
-    //         }
-    //     }
-    // }
+    if (fp.inclusion_path) {
+        // FIXME: hack for now
+        if (fs.has_field(*fp.inclusion_path))
+            r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
+    }
+
+    if (fp.inclusion_dependency && fs.has_field(*fp.inclusion_dependency)) {
+        r.inclusion_dependencies(
+            fs.get_text_collection_content(*fp.inclusion_dependency));
+    }
+
+    if (fp.integrated_facet && fs.has_field(*fp.integrated_facet)) {
+        const auto fcts(
+            fs.get_text_collection_content(*fp.inclusion_dependency));
+
+        for (const auto f : fcts)
+            r.integrated_facets().insert(f);
+    }
 
     return r;
 }
@@ -94,17 +168,10 @@ create_settings_for_formatter(
 std::unordered_map<std::string, formatter_settings>
 formatter_settings_factory::
 make(const dynamic::schema::object& o) const {
-    // FIXME: need to look for c++ formatters only
     std::unordered_map<std::string, formatter_settings> r;
-    for (const auto pair : repository_.field_definitions_by_formatter_name()) {
-        const auto& formatter_name(pair.first);
-
-        BOOST_LOG_SEV(lg, debug) << "Creating settings for formatter: '"
-                                 << formatter_name << "'";
-
-        const auto& formatter_fields(pair.second);
-        const auto s(create_settings_for_formatter(formatter_fields, o));
-        r.insert(std::make_pair(formatter_name, s));
+    for (const auto& pair : formatter_properties_) {
+        const auto s(create_settings_for_formatter(pair.second, o));
+        r.insert(std::make_pair(pair.first, s));
     }
     return r;
 }

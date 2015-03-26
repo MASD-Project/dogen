@@ -31,8 +31,6 @@
 #include <set>
 #include <string>
 #include "dogen/cpp/serialization/settings/formatter_settings_fwd_ser.hpp"
-#include "dogen/cpp/types/settings/inclusion.hpp"
-#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,12 +50,9 @@ public:
 public:
     formatter_settings(
         const bool enabled,
-        const bool supported,
         const boost::filesystem::path& file_path,
-        const bool inclusion_required,
         const boost::filesystem::path& inclusion_path,
-        const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
-        const std::list<dogen::cpp::settings::inclusion>& inclusion_dependencies,
+        const std::list<std::string>& inclusion_dependencies,
         const std::set<std::string>& integrated_facets);
 
 private:
@@ -71,34 +66,20 @@ public:
     bool enabled() const;
     void enabled(const bool v);
 
-    bool supported() const;
-    void supported(const bool v);
-
     const boost::filesystem::path& file_path() const;
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
-
-    /**
-     * @brief If false, type does not require any include statements.
-     */
-    /**@{*/
-    bool inclusion_required() const;
-    void inclusion_required(const bool v);
-    /**@}*/
 
     const boost::filesystem::path& inclusion_path() const;
     boost::filesystem::path& inclusion_path();
     void inclusion_path(const boost::filesystem::path& v);
     void inclusion_path(const boost::filesystem::path&& v);
 
-    dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type() const;
-    void inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v);
-
-    const std::list<dogen::cpp::settings::inclusion>& inclusion_dependencies() const;
-    std::list<dogen::cpp::settings::inclusion>& inclusion_dependencies();
-    void inclusion_dependencies(const std::list<dogen::cpp::settings::inclusion>& v);
-    void inclusion_dependencies(const std::list<dogen::cpp::settings::inclusion>&& v);
+    const std::list<std::string>& inclusion_dependencies() const;
+    std::list<std::string>& inclusion_dependencies();
+    void inclusion_dependencies(const std::list<std::string>& v);
+    void inclusion_dependencies(const std::list<std::string>&& v);
 
     const std::set<std::string>& integrated_facets() const;
     std::set<std::string>& integrated_facets();
@@ -117,12 +98,9 @@ public:
 
 private:
     bool enabled_;
-    bool supported_;
     boost::filesystem::path file_path_;
-    bool inclusion_required_;
     boost::filesystem::path inclusion_path_;
-    dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type_;
-    std::list<dogen::cpp::settings::inclusion> inclusion_dependencies_;
+    std::list<std::string> inclusion_dependencies_;
     std::set<std::string> integrated_facets_;
 };
 

@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -52,14 +51,6 @@ public:
 
 private:
     /**
-     * @brief Converts string into an inclusion delimiter type.
-     *
-     * @pre v must be a valid delimiter type.
-     */
-    settings::inclusion_delimiter_types
-    inclusion_delimiter_type_from_string(const std::string& v) const;
-
-    /**
      * @brief Returns the field definition for the name by querying
      * the main field definition container.
      *
@@ -79,10 +70,6 @@ private:
         dynamic::schema::field_definition facet_directory;
         dynamic::schema::field_definition facet_postfix;
         dynamic::schema::field_definition formatter_postfix;
-        boost::optional<dynamic::schema::field_definition> inclusion_required;
-        boost::optional<dynamic::schema::field_definition> inclusion_path;
-        boost::optional<dynamic::schema::field_definition>
-        inclusion_delimiter;
         dynamic::schema::field_definition header_file_extension;
         dynamic::schema::field_definition implementation_file_extension;
         dynamic::schema::field_definition include_directory_name;
@@ -142,7 +129,8 @@ public:
 
 private:
     const config::cpp_options& options_;
-    std::unordered_map<std::string, formatter_properties> formatter_properties_;
+    const std::unordered_map<std::string, formatter_properties>
+    formatter_properties_;
 };
 
 } } }

@@ -25,58 +25,40 @@ namespace cpp {
 namespace settings {
 
 formatter_settings::formatter_settings()
-    : enabled_(static_cast<bool>(0)),
-      supported_(static_cast<bool>(0)),
-      inclusion_required_(static_cast<bool>(0)),
-      inclusion_delimiter_type_(static_cast<dogen::cpp::settings::inclusion_delimiter_types>(0)) { }
+    : enabled_(static_cast<bool>(0)) { }
 
 formatter_settings::formatter_settings(formatter_settings&& rhs)
     : enabled_(std::move(rhs.enabled_)),
-      supported_(std::move(rhs.supported_)),
       file_path_(std::move(rhs.file_path_)),
-      inclusion_required_(std::move(rhs.inclusion_required_)),
       inclusion_path_(std::move(rhs.inclusion_path_)),
-      inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
       integrated_facets_(std::move(rhs.integrated_facets_)) { }
 
 formatter_settings::formatter_settings(
     const bool enabled,
-    const bool supported,
     const boost::filesystem::path& file_path,
-    const bool inclusion_required,
     const boost::filesystem::path& inclusion_path,
-    const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
-    const std::list<dogen::cpp::settings::inclusion>& inclusion_dependencies,
+    const std::list<std::string>& inclusion_dependencies,
     const std::set<std::string>& integrated_facets)
     : enabled_(enabled),
-      supported_(supported),
       file_path_(file_path),
-      inclusion_required_(inclusion_required),
       inclusion_path_(inclusion_path),
-      inclusion_delimiter_type_(inclusion_delimiter_type),
       inclusion_dependencies_(inclusion_dependencies),
       integrated_facets_(integrated_facets) { }
 
 void formatter_settings::swap(formatter_settings& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
-    swap(supported_, other.supported_);
     swap(file_path_, other.file_path_);
-    swap(inclusion_required_, other.inclusion_required_);
     swap(inclusion_path_, other.inclusion_path_);
-    swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
     swap(integrated_facets_, other.integrated_facets_);
 }
 
 bool formatter_settings::operator==(const formatter_settings& rhs) const {
     return enabled_ == rhs.enabled_ &&
-        supported_ == rhs.supported_ &&
         file_path_ == rhs.file_path_ &&
-        inclusion_required_ == rhs.inclusion_required_ &&
         inclusion_path_ == rhs.inclusion_path_ &&
-        inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
         integrated_facets_ == rhs.integrated_facets_;
 }
@@ -95,14 +77,6 @@ void formatter_settings::enabled(const bool v) {
     enabled_ = v;
 }
 
-bool formatter_settings::supported() const {
-    return supported_;
-}
-
-void formatter_settings::supported(const bool v) {
-    supported_ = v;
-}
-
 const boost::filesystem::path& formatter_settings::file_path() const {
     return file_path_;
 }
@@ -117,14 +91,6 @@ void formatter_settings::file_path(const boost::filesystem::path& v) {
 
 void formatter_settings::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
-}
-
-bool formatter_settings::inclusion_required() const {
-    return inclusion_required_;
-}
-
-void formatter_settings::inclusion_required(const bool v) {
-    inclusion_required_ = v;
 }
 
 const boost::filesystem::path& formatter_settings::inclusion_path() const {
@@ -143,27 +109,19 @@ void formatter_settings::inclusion_path(const boost::filesystem::path&& v) {
     inclusion_path_ = std::move(v);
 }
 
-dogen::cpp::settings::inclusion_delimiter_types formatter_settings::inclusion_delimiter_type() const {
-    return inclusion_delimiter_type_;
-}
-
-void formatter_settings::inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v) {
-    inclusion_delimiter_type_ = v;
-}
-
-const std::list<dogen::cpp::settings::inclusion>& formatter_settings::inclusion_dependencies() const {
+const std::list<std::string>& formatter_settings::inclusion_dependencies() const {
     return inclusion_dependencies_;
 }
 
-std::list<dogen::cpp::settings::inclusion>& formatter_settings::inclusion_dependencies() {
+std::list<std::string>& formatter_settings::inclusion_dependencies() {
     return inclusion_dependencies_;
 }
 
-void formatter_settings::inclusion_dependencies(const std::list<dogen::cpp::settings::inclusion>& v) {
+void formatter_settings::inclusion_dependencies(const std::list<std::string>& v) {
     inclusion_dependencies_ = v;
 }
 
-void formatter_settings::inclusion_dependencies(const std::list<dogen::cpp::settings::inclusion>&& v) {
+void formatter_settings::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
 }
 

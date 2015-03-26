@@ -20,8 +20,6 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
-#include "dogen/cpp/test_data/settings/inclusion_delimiter_types_td.hpp"
-#include "dogen/cpp/test_data/settings/inclusion_td.hpp"
 
 namespace {
 
@@ -36,28 +34,18 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-dogen::cpp::settings::inclusion_delimiter_types
-create_dogen_cpp_settings_inclusion_delimiter_types(const unsigned int position) {
-    return dogen::cpp::settings::inclusion_delimiter_types_generator::create(position);
-}
-
-dogen::cpp::settings::inclusion
-create_dogen_cpp_settings_inclusion(const unsigned int position) {
-    return dogen::cpp::settings::inclusion_generator::create(position);
-}
-
-std::list<dogen::cpp::settings::inclusion> create_std_list_dogen_cpp_settings_inclusion(unsigned int position) {
-    std::list<dogen::cpp::settings::inclusion> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_cpp_settings_inclusion(position + i));
-    }
-    return r;
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
 }
 
 std::set<std::string> create_std_set_std_string(unsigned int position) {
@@ -79,13 +67,10 @@ formatter_settings_generator::formatter_settings_generator() : position_(0) { }
 void formatter_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.supported(create_bool(position + 1));
-    v.file_path(create_boost_filesystem_path(position + 2));
-    v.inclusion_required(create_bool(position + 3));
-    v.inclusion_path(create_boost_filesystem_path(position + 4));
-    v.inclusion_delimiter_type(create_dogen_cpp_settings_inclusion_delimiter_types(position + 5));
-    v.inclusion_dependencies(create_std_list_dogen_cpp_settings_inclusion(position + 6));
-    v.integrated_facets(create_std_set_std_string(position + 7));
+    v.file_path(create_boost_filesystem_path(position + 1));
+    v.inclusion_path(create_boost_filesystem_path(position + 2));
+    v.inclusion_dependencies(create_std_list_std_string(position + 3));
+    v.integrated_facets(create_std_set_std_string(position + 4));
 }
 
 formatter_settings_generator::result_type

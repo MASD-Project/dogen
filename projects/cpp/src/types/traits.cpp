@@ -68,6 +68,11 @@ std::string traits::inclusion_delimiter() {
     return r;
 }
 
+std::string traits::inclusion_dependency() {
+    static std::string r("inclusion_dependency");
+    return r;
+}
+
 std::string traits::include_directory_name() {
     static std::string r("cpp.include_directory_name");
     return r;
