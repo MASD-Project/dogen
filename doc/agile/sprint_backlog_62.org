@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-25 Wed 23:44]
+Clock summary at [2015-03-26 Thu 13:41]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *50:52* |       |      |
+| *Total time*                                                             | *51:33* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 50:52 |      |
+| Active                                                                   |         | 51:33 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -44,8 +44,9 @@ Clock summary at [2015-03-25 Wed 23:44]
 | COMPLETED Implement the repository workflow                              |         |       | 1:45 |
 | COMPLETED Add JSON support to dynamic workflow                           |         |       | 0:50 |
 | COMPLETED Remove all field definitions in code                           |         |       | 4:25 |
+| COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate file path" operation                          |         |       | 5:55 |
+| STARTED Improve performance in populating file path                      |         |       | 0:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -678,7 +679,9 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** Improve performance in populating file path                       :story:
+*** STARTED Improve performance in populating file path               :story:
+    CLOCK: [2015-03-26 Thu 13:31]--[2015-03-26 Thu 13:41] =>  0:10
+    CLOCK: [2015-03-26 Thu 10:48]--[2015-03-26 Thu 11:19] =>  0:31
 
 We now have major performance issues. This is because we took the
 easiest path. We need to do a few tweaks:

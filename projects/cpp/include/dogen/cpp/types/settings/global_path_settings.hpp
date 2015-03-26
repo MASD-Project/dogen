@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_PATH_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_PATH_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_GLOBAL_PATH_SETTINGS_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_GLOBAL_PATH_SETTINGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,27 +28,26 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include <string>
-#include "dogen/cpp/serialization/settings/path_settings_fwd_ser.hpp"
+#include "dogen/cpp/serialization/settings/global_path_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-class path_settings final {
+class global_path_settings final {
 public:
-    path_settings(const path_settings&) = default;
-    ~path_settings() = default;
+    global_path_settings(const global_path_settings&) = default;
+    ~global_path_settings() = default;
 
 public:
-    path_settings();
+    global_path_settings();
 
 public:
-    path_settings(path_settings&& rhs);
+    global_path_settings(global_path_settings&& rhs);
 
 public:
-    path_settings(
+    global_path_settings(
         const bool split_project,
         const dogen::cpp::formatters::file_types& file_type,
         const std::string& facet_directory,
@@ -58,18 +57,15 @@ public:
         const boost::filesystem::path& project_directory_path,
         const boost::filesystem::path& source_directory_path,
         const boost::filesystem::path& include_directory_path,
-        const bool inclusion_required,
-        const boost::filesystem::path& inclusion_path,
-        const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
         const std::string& include_directory_name,
         const std::string& source_directory_name);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const path_settings& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const global_path_settings& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, path_settings& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, global_path_settings& v, unsigned int version);
 
 public:
     bool split_project() const;
@@ -113,17 +109,6 @@ public:
     void include_directory_path(const boost::filesystem::path& v);
     void include_directory_path(const boost::filesystem::path&& v);
 
-    bool inclusion_required() const;
-    void inclusion_required(const bool v);
-
-    const boost::filesystem::path& inclusion_path() const;
-    boost::filesystem::path& inclusion_path();
-    void inclusion_path(const boost::filesystem::path& v);
-    void inclusion_path(const boost::filesystem::path&& v);
-
-    dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type() const;
-    void inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v);
-
     const std::string& include_directory_name() const;
     std::string& include_directory_name();
     void include_directory_name(const std::string& v);
@@ -135,14 +120,14 @@ public:
     void source_directory_name(const std::string&& v);
 
 public:
-    bool operator==(const path_settings& rhs) const;
-    bool operator!=(const path_settings& rhs) const {
+    bool operator==(const global_path_settings& rhs) const;
+    bool operator!=(const global_path_settings& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(path_settings& other) noexcept;
-    path_settings& operator=(path_settings other);
+    void swap(global_path_settings& other) noexcept;
+    global_path_settings& operator=(global_path_settings other);
 
 private:
     bool split_project_;
@@ -154,9 +139,6 @@ private:
     boost::filesystem::path project_directory_path_;
     boost::filesystem::path source_directory_path_;
     boost::filesystem::path include_directory_path_;
-    bool inclusion_required_;
-    boost::filesystem::path inclusion_path_;
-    dogen::cpp::settings::inclusion_delimiter_types inclusion_delimiter_type_;
     std::string include_directory_name_;
     std::string source_directory_name_;
 };
@@ -167,8 +149,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::cpp::settings::path_settings& lhs,
-    dogen::cpp::settings::path_settings& rhs) {
+    dogen::cpp::settings::global_path_settings& lhs,
+    dogen::cpp::settings::global_path_settings& rhs) {
     lhs.swap(rhs);
 }
 

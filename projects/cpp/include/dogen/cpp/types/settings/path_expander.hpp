@@ -31,7 +31,8 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/scope_types.hpp"
-#include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/settings/global_path_settings.hpp"
+#include "dogen/cpp/types/settings/local_path_settings.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
@@ -97,15 +98,15 @@ private:
     /**
      * @brief Builds an absolute path for the supplied qualified name.
      */
-    boost::filesystem::path make_file_path(
-        const path_settings& ps, const sml::qname& qn) const;
+    boost::filesystem::path make_file_path(const global_path_settings& gps,
+        const sml::qname& qn) const;
 
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
-    boost::filesystem::path make_inclusion_path(
-        const path_settings& ps, const sml::qname& qn) const;
+    boost::filesystem::path make_inclusion_path(const global_path_settings& gps,
+        const sml::qname& qn) const;
 
 public:
     std::string name() const override;

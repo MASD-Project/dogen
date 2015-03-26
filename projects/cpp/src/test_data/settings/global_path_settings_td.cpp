@@ -20,8 +20,7 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/formatters/file_types_td.hpp"
-#include "dogen/cpp/test_data/settings/inclusion_delimiter_types_td.hpp"
-#include "dogen/cpp/test_data/settings/path_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/global_path_settings_td.hpp"
 
 namespace {
 
@@ -47,20 +46,15 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-dogen::cpp::settings::inclusion_delimiter_types
-create_dogen_cpp_settings_inclusion_delimiter_types(const unsigned int position) {
-    return dogen::cpp::settings::inclusion_delimiter_types_generator::create(position);
-}
-
 }
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-path_settings_generator::path_settings_generator() : position_(0) { }
+global_path_settings_generator::global_path_settings_generator() : position_(0) { }
 
-void path_settings_generator::
+void global_path_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.split_project(create_bool(position + 0));
     v.file_type(create_dogen_cpp_formatters_file_types(position + 1));
@@ -71,28 +65,25 @@ populate(const unsigned int position, result_type& v) {
     v.project_directory_path(create_boost_filesystem_path(position + 6));
     v.source_directory_path(create_boost_filesystem_path(position + 7));
     v.include_directory_path(create_boost_filesystem_path(position + 8));
-    v.inclusion_required(create_bool(position + 9));
-    v.inclusion_path(create_boost_filesystem_path(position + 10));
-    v.inclusion_delimiter_type(create_dogen_cpp_settings_inclusion_delimiter_types(position + 11));
-    v.include_directory_name(create_std_string(position + 12));
-    v.source_directory_name(create_std_string(position + 13));
+    v.include_directory_name(create_std_string(position + 9));
+    v.source_directory_name(create_std_string(position + 10));
 }
 
-path_settings_generator::result_type
-path_settings_generator::create(const unsigned int position) {
-    path_settings r;
-    path_settings_generator::populate(position, r);
+global_path_settings_generator::result_type
+global_path_settings_generator::create(const unsigned int position) {
+    global_path_settings r;
+    global_path_settings_generator::populate(position, r);
     return r;
 }
-path_settings_generator::result_type*
-path_settings_generator::create_ptr(const unsigned int position) {
-    path_settings* p = new path_settings();
-    path_settings_generator::populate(position, *p);
+global_path_settings_generator::result_type*
+global_path_settings_generator::create_ptr(const unsigned int position) {
+    global_path_settings* p = new global_path_settings();
+    global_path_settings_generator::populate(position, *p);
     return p;
 }
 
-path_settings_generator::result_type
-path_settings_generator::operator()() {
+global_path_settings_generator::result_type
+global_path_settings_generator::operator()() {
     return create(position_++);
 }
 

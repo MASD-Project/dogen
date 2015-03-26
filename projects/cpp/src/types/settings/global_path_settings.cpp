@@ -18,19 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/settings/global_path_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-path_settings::path_settings()
+global_path_settings::global_path_settings()
     : split_project_(static_cast<bool>(0)),
-      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)),
-      inclusion_required_(static_cast<bool>(0)),
-      inclusion_delimiter_type_(static_cast<dogen::cpp::settings::inclusion_delimiter_types>(0)) { }
+      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)) { }
 
-path_settings::path_settings(path_settings&& rhs)
+global_path_settings::global_path_settings(global_path_settings&& rhs)
     : split_project_(std::move(rhs.split_project_)),
       file_type_(std::move(rhs.file_type_)),
       facet_directory_(std::move(rhs.facet_directory_)),
@@ -40,13 +38,10 @@ path_settings::path_settings(path_settings&& rhs)
       project_directory_path_(std::move(rhs.project_directory_path_)),
       source_directory_path_(std::move(rhs.source_directory_path_)),
       include_directory_path_(std::move(rhs.include_directory_path_)),
-      inclusion_required_(std::move(rhs.inclusion_required_)),
-      inclusion_path_(std::move(rhs.inclusion_path_)),
-      inclusion_delimiter_type_(std::move(rhs.inclusion_delimiter_type_)),
       include_directory_name_(std::move(rhs.include_directory_name_)),
       source_directory_name_(std::move(rhs.source_directory_name_)) { }
 
-path_settings::path_settings(
+global_path_settings::global_path_settings(
     const bool split_project,
     const dogen::cpp::formatters::file_types& file_type,
     const std::string& facet_directory,
@@ -56,9 +51,6 @@ path_settings::path_settings(
     const boost::filesystem::path& project_directory_path,
     const boost::filesystem::path& source_directory_path,
     const boost::filesystem::path& include_directory_path,
-    const bool inclusion_required,
-    const boost::filesystem::path& inclusion_path,
-    const dogen::cpp::settings::inclusion_delimiter_types& inclusion_delimiter_type,
     const std::string& include_directory_name,
     const std::string& source_directory_name)
     : split_project_(split_project),
@@ -70,13 +62,10 @@ path_settings::path_settings(
       project_directory_path_(project_directory_path),
       source_directory_path_(source_directory_path),
       include_directory_path_(include_directory_path),
-      inclusion_required_(inclusion_required),
-      inclusion_path_(inclusion_path),
-      inclusion_delimiter_type_(inclusion_delimiter_type),
       include_directory_name_(include_directory_name),
       source_directory_name_(source_directory_name) { }
 
-void path_settings::swap(path_settings& other) noexcept {
+void global_path_settings::swap(global_path_settings& other) noexcept {
     using std::swap;
     swap(split_project_, other.split_project_);
     swap(file_type_, other.file_type_);
@@ -87,14 +76,11 @@ void path_settings::swap(path_settings& other) noexcept {
     swap(project_directory_path_, other.project_directory_path_);
     swap(source_directory_path_, other.source_directory_path_);
     swap(include_directory_path_, other.include_directory_path_);
-    swap(inclusion_required_, other.inclusion_required_);
-    swap(inclusion_path_, other.inclusion_path_);
-    swap(inclusion_delimiter_type_, other.inclusion_delimiter_type_);
     swap(include_directory_name_, other.include_directory_name_);
     swap(source_directory_name_, other.source_directory_name_);
 }
 
-bool path_settings::operator==(const path_settings& rhs) const {
+bool global_path_settings::operator==(const global_path_settings& rhs) const {
     return split_project_ == rhs.split_project_ &&
         file_type_ == rhs.file_type_ &&
         facet_directory_ == rhs.facet_directory_ &&
@@ -104,208 +90,173 @@ bool path_settings::operator==(const path_settings& rhs) const {
         project_directory_path_ == rhs.project_directory_path_ &&
         source_directory_path_ == rhs.source_directory_path_ &&
         include_directory_path_ == rhs.include_directory_path_ &&
-        inclusion_required_ == rhs.inclusion_required_ &&
-        inclusion_path_ == rhs.inclusion_path_ &&
-        inclusion_delimiter_type_ == rhs.inclusion_delimiter_type_ &&
         include_directory_name_ == rhs.include_directory_name_ &&
         source_directory_name_ == rhs.source_directory_name_;
 }
 
-path_settings& path_settings::operator=(path_settings other) {
+global_path_settings& global_path_settings::operator=(global_path_settings other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool path_settings::split_project() const {
+bool global_path_settings::split_project() const {
     return split_project_;
 }
 
-void path_settings::split_project(const bool v) {
+void global_path_settings::split_project(const bool v) {
     split_project_ = v;
 }
 
-dogen::cpp::formatters::file_types path_settings::file_type() const {
+dogen::cpp::formatters::file_types global_path_settings::file_type() const {
     return file_type_;
 }
 
-void path_settings::file_type(const dogen::cpp::formatters::file_types& v) {
+void global_path_settings::file_type(const dogen::cpp::formatters::file_types& v) {
     file_type_ = v;
 }
 
-const std::string& path_settings::facet_directory() const {
+const std::string& global_path_settings::facet_directory() const {
     return facet_directory_;
 }
 
-std::string& path_settings::facet_directory() {
+std::string& global_path_settings::facet_directory() {
     return facet_directory_;
 }
 
-void path_settings::facet_directory(const std::string& v) {
+void global_path_settings::facet_directory(const std::string& v) {
     facet_directory_ = v;
 }
 
-void path_settings::facet_directory(const std::string&& v) {
+void global_path_settings::facet_directory(const std::string&& v) {
     facet_directory_ = std::move(v);
 }
 
-const std::string& path_settings::extension() const {
+const std::string& global_path_settings::extension() const {
     return extension_;
 }
 
-std::string& path_settings::extension() {
+std::string& global_path_settings::extension() {
     return extension_;
 }
 
-void path_settings::extension(const std::string& v) {
+void global_path_settings::extension(const std::string& v) {
     extension_ = v;
 }
 
-void path_settings::extension(const std::string&& v) {
+void global_path_settings::extension(const std::string&& v) {
     extension_ = std::move(v);
 }
 
-const std::string& path_settings::facet_postfix() const {
+const std::string& global_path_settings::facet_postfix() const {
     return facet_postfix_;
 }
 
-std::string& path_settings::facet_postfix() {
+std::string& global_path_settings::facet_postfix() {
     return facet_postfix_;
 }
 
-void path_settings::facet_postfix(const std::string& v) {
+void global_path_settings::facet_postfix(const std::string& v) {
     facet_postfix_ = v;
 }
 
-void path_settings::facet_postfix(const std::string&& v) {
+void global_path_settings::facet_postfix(const std::string&& v) {
     facet_postfix_ = std::move(v);
 }
 
-const std::string& path_settings::formatter_postfix() const {
+const std::string& global_path_settings::formatter_postfix() const {
     return formatter_postfix_;
 }
 
-std::string& path_settings::formatter_postfix() {
+std::string& global_path_settings::formatter_postfix() {
     return formatter_postfix_;
 }
 
-void path_settings::formatter_postfix(const std::string& v) {
+void global_path_settings::formatter_postfix(const std::string& v) {
     formatter_postfix_ = v;
 }
 
-void path_settings::formatter_postfix(const std::string&& v) {
+void global_path_settings::formatter_postfix(const std::string&& v) {
     formatter_postfix_ = std::move(v);
 }
 
-const boost::filesystem::path& path_settings::project_directory_path() const {
+const boost::filesystem::path& global_path_settings::project_directory_path() const {
     return project_directory_path_;
 }
 
-boost::filesystem::path& path_settings::project_directory_path() {
+boost::filesystem::path& global_path_settings::project_directory_path() {
     return project_directory_path_;
 }
 
-void path_settings::project_directory_path(const boost::filesystem::path& v) {
+void global_path_settings::project_directory_path(const boost::filesystem::path& v) {
     project_directory_path_ = v;
 }
 
-void path_settings::project_directory_path(const boost::filesystem::path&& v) {
+void global_path_settings::project_directory_path(const boost::filesystem::path&& v) {
     project_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& path_settings::source_directory_path() const {
+const boost::filesystem::path& global_path_settings::source_directory_path() const {
     return source_directory_path_;
 }
 
-boost::filesystem::path& path_settings::source_directory_path() {
+boost::filesystem::path& global_path_settings::source_directory_path() {
     return source_directory_path_;
 }
 
-void path_settings::source_directory_path(const boost::filesystem::path& v) {
+void global_path_settings::source_directory_path(const boost::filesystem::path& v) {
     source_directory_path_ = v;
 }
 
-void path_settings::source_directory_path(const boost::filesystem::path&& v) {
+void global_path_settings::source_directory_path(const boost::filesystem::path&& v) {
     source_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& path_settings::include_directory_path() const {
+const boost::filesystem::path& global_path_settings::include_directory_path() const {
     return include_directory_path_;
 }
 
-boost::filesystem::path& path_settings::include_directory_path() {
+boost::filesystem::path& global_path_settings::include_directory_path() {
     return include_directory_path_;
 }
 
-void path_settings::include_directory_path(const boost::filesystem::path& v) {
+void global_path_settings::include_directory_path(const boost::filesystem::path& v) {
     include_directory_path_ = v;
 }
 
-void path_settings::include_directory_path(const boost::filesystem::path&& v) {
+void global_path_settings::include_directory_path(const boost::filesystem::path&& v) {
     include_directory_path_ = std::move(v);
 }
 
-bool path_settings::inclusion_required() const {
-    return inclusion_required_;
-}
-
-void path_settings::inclusion_required(const bool v) {
-    inclusion_required_ = v;
-}
-
-const boost::filesystem::path& path_settings::inclusion_path() const {
-    return inclusion_path_;
-}
-
-boost::filesystem::path& path_settings::inclusion_path() {
-    return inclusion_path_;
-}
-
-void path_settings::inclusion_path(const boost::filesystem::path& v) {
-    inclusion_path_ = v;
-}
-
-void path_settings::inclusion_path(const boost::filesystem::path&& v) {
-    inclusion_path_ = std::move(v);
-}
-
-dogen::cpp::settings::inclusion_delimiter_types path_settings::inclusion_delimiter_type() const {
-    return inclusion_delimiter_type_;
-}
-
-void path_settings::inclusion_delimiter_type(const dogen::cpp::settings::inclusion_delimiter_types& v) {
-    inclusion_delimiter_type_ = v;
-}
-
-const std::string& path_settings::include_directory_name() const {
+const std::string& global_path_settings::include_directory_name() const {
     return include_directory_name_;
 }
 
-std::string& path_settings::include_directory_name() {
+std::string& global_path_settings::include_directory_name() {
     return include_directory_name_;
 }
 
-void path_settings::include_directory_name(const std::string& v) {
+void global_path_settings::include_directory_name(const std::string& v) {
     include_directory_name_ = v;
 }
 
-void path_settings::include_directory_name(const std::string&& v) {
+void global_path_settings::include_directory_name(const std::string&& v) {
     include_directory_name_ = std::move(v);
 }
 
-const std::string& path_settings::source_directory_name() const {
+const std::string& global_path_settings::source_directory_name() const {
     return source_directory_name_;
 }
 
-std::string& path_settings::source_directory_name() {
+std::string& global_path_settings::source_directory_name() {
     return source_directory_name_;
 }
 
-void path_settings::source_directory_name(const std::string& v) {
+void global_path_settings::source_directory_name(const std::string& v) {
     source_directory_name_ = v;
 }
 
-void path_settings::source_directory_name(const std::string&& v) {
+void global_path_settings::source_directory_name(const std::string&& v) {
     source_directory_name_ = std::move(v);
 }
 

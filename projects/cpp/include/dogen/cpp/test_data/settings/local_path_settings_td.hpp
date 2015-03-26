@@ -18,26 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_PATH_SETTINGS_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_SETTINGS_PATH_SETTINGS_SER_HPP
+#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_LOCAL_PATH_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_SETTINGS_LOCAL_PATH_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/settings/local_path_settings.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::settings::path_settings)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace cpp {
+namespace settings {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::settings::path_settings& v, unsigned int version);
+class local_path_settings_generator {
+public:
+    local_path_settings_generator();
 
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::settings::path_settings& v, unsigned int version);
+public:
+    typedef dogen::cpp::settings::local_path_settings result_type;
 
-} }
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } }
 
 #endif

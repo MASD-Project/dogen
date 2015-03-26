@@ -19,8 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/formatters/file_types_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_delimiter_types_hash.hpp"
-#include "dogen/cpp/hash/settings/path_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/global_path_settings_hash.hpp"
 
 namespace {
 
@@ -43,7 +42,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t path_settings_hasher::hash(const path_settings&v) {
+std::size_t global_path_settings_hasher::hash(const global_path_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.split_project());
@@ -55,9 +54,6 @@ std::size_t path_settings_hasher::hash(const path_settings&v) {
     combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
-    combine(seed, v.inclusion_required());
-    combine(seed, hash_boost_filesystem_path(v.inclusion_path()));
-    combine(seed, v.inclusion_delimiter_type());
     combine(seed, v.include_directory_name());
     combine(seed, v.source_directory_name());
 
