@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/default_value_expander.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 #include "dogen/dynamic/expansion/types/expansion.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
@@ -29,6 +28,5 @@
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/registrar.hpp"
 #include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/root_object_copier.hpp"
 #include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"

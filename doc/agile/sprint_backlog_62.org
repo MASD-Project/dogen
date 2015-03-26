@@ -680,6 +680,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Improve performance in populating file path               :story:
+    CLOCK: [2015-03-26 Thu 15:28]--[2015-03-26 Thu 15:44] =>  0:16
     CLOCK: [2015-03-26 Thu 14:11]--[2015-03-26 Thu 15:27] =>  1:16
     CLOCK: [2015-03-26 Thu 13:31]--[2015-03-26 Thu 13:41] =>  0:10
     CLOCK: [2015-03-26 Thu 10:48]--[2015-03-26 Thu 11:19] =>  0:31

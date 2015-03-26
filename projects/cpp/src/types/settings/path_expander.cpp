@@ -25,7 +25,6 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
-#include "dogen/dynamic/expansion/types/root_object_copier.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
@@ -80,13 +79,15 @@ void path_expander::setup_formatter_fields(
                 no_fields_for_formatter + formatter_name));
     }
 
-    bool found_file_path(false);
+    bool found_file_path(false), found_inclusion_path(false);
     for (const auto fd : i->second) {
         if (fd.name().simple() == traits::file_path()) {
             fp.file_path = fd;
             found_file_path = true;
-        } else if (fd.name().simple() == traits::inclusion_path())
+        } else if (fd.name().simple() == traits::inclusion_path()) {
             fp.inclusion_path = fd;
+            found_inclusion_path = true;
+        }
     }
 
     if (!found_file_path) {
@@ -96,6 +97,11 @@ void path_expander::setup_formatter_fields(
         BOOST_THROW_EXCEPTION(
             dynamic::expansion::expansion_error(
                 field_definition_not_found + traits::file_path()));
+    }
+
+    if (!found_inclusion_path) {
+        BOOST_LOG_SEV(lg, debug) << "Formatter does not support inclusion: "
+                                 << formatter_name;
     }
 }
 
@@ -249,10 +255,7 @@ std::string path_expander::name() const {
 
 const std::forward_list<std::string>& path_expander::dependencies() const {
     using namespace dynamic::expansion;
-    static std::forward_list<std::string> r {
-        options_copier::static_name(),
-        root_object_copier::static_name(),
-    };
+    static std::forward_list<std::string> r { options_copier::static_name() };
 
     return r;
 }
@@ -282,8 +285,11 @@ void path_expander::expand_include_path(const sml::qname& qn,
     using namespace dynamic::schema;
     const field_selector fs(o);
     const bool override_found(fs.has_field(*fp.inclusion_path));
-    if (override_found)
+    if (override_found) {
+        BOOST_LOG_SEV(lg, debug) << "Include path has been overriden: "
+                                 << fp.formatter_name;
         return;
+    }
 
     dynamic::schema::field_instance_factory f;
     const auto ip(make_inclusion_path(fp.settings, qn));
