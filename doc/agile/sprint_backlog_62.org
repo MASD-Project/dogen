@@ -957,4 +957,14 @@ regarding enabling facets and formatters:
   type, we want it on; if no one requires it we want it off. The user
   may want to manually switch it on for a type.
 
+*** Consider creating a include list sorter                           :story:
+
+There are a few cases where we want the include files to be ordered in
+certain ways (in one case the code breaks otherwise; FIXME search
+backlog for it). In general we probably want to ensure the includes
+are ordered in a specific way like we do with regular source code,
+such as c files first, then standard c++ files, then boost, etc. We
+should have a function that given a list of includes performs this
+ordering.
+
 ** Deprecated
