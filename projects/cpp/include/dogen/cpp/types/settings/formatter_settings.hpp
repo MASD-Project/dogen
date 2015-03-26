@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include <boost/optional.hpp>
 #include <list>
 #include <set>
 #include <string>
@@ -51,7 +52,7 @@ public:
     formatter_settings(
         const bool enabled,
         const boost::filesystem::path& file_path,
-        const boost::filesystem::path& inclusion_path,
+        const boost::optional<boost::filesystem::path>& inclusion_path,
         const std::list<std::string>& inclusion_dependencies,
         const std::set<std::string>& integrated_facets);
 
@@ -71,10 +72,10 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
-    const boost::filesystem::path& inclusion_path() const;
-    boost::filesystem::path& inclusion_path();
-    void inclusion_path(const boost::filesystem::path& v);
-    void inclusion_path(const boost::filesystem::path&& v);
+    const boost::optional<boost::filesystem::path>& inclusion_path() const;
+    boost::optional<boost::filesystem::path>& inclusion_path();
+    void inclusion_path(const boost::optional<boost::filesystem::path>& v);
+    void inclusion_path(const boost::optional<boost::filesystem::path>&& v);
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -99,7 +100,7 @@ public:
 private:
     bool enabled_;
     boost::filesystem::path file_path_;
-    boost::filesystem::path inclusion_path_;
+    boost::optional<boost::filesystem::path> inclusion_path_;
     std::list<std::string> inclusion_dependencies_;
     std::set<std::string> integrated_facets_;
 };

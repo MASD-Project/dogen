@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/string.hpp>
 #include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
@@ -43,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
-    ar << make_nvp("inclusion_path", v.inclusion_path_.generic_string());
+    ar << make_nvp("inclusion_path", v.inclusion_path_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("integrated_facets", v.integrated_facets_);
 }
@@ -56,9 +57,7 @@ void load(Archive& ar,
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
-    std::string inclusion_path_tmp;
-    ar >> make_nvp("inclusion_path", inclusion_path_tmp);
-    v.inclusion_path_ = inclusion_path_tmp;
+    ar >> make_nvp("inclusion_path", v.inclusion_path_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("integrated_facets", v.integrated_facets_);
 }

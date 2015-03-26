@@ -32,10 +32,13 @@
 
 namespace {
 
-const std::string include_path_for_formatter_not_found(
-    "Include path for formatter not found. Formatter: ");
-const std::string file_path_for_formatter_not_found(
-    "File path for formatter not found. Formatter: ");
+const std::string formatter_settings_not_found(
+    "Could not find settings for formatter: ");
+const std::string inclusion_path_not_set(
+    "Inclusion path for formatter is not set. Formatter: ");
+const std::string file_path_not_set(
+    "File path for formatter is not set. Formatter: ");
+
 const std::string qname_not_found("Could not find qualified name in model: ");
 
 using namespace dogen::utility::log;
@@ -53,40 +56,34 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-boost::filesystem::path class_header_formatter::
-get_inclusion_path(const formattables::class_info& /*c*/) const {
-    boost::filesystem::path r;
-    return r;
-    /*
-    const auto& ip(c.inclusion_by_formatter_name());
-    const auto i(ip.find(formatter_name()));
-    if (i == ip.end()) {
-        BOOST_LOG_SEV(lg, error) << include_path_for_formatter_not_found
-                                 << formatter_name();
+void class_header_formatter::validate(
+    const settings::formatter_settings& fs) const {
 
-        BOOST_THROW_EXCEPTION(formatting_error(
-                include_path_for_formatter_not_found + formatter_name()));
+    if (!fs.inclusion_path() || fs.inclusion_path()->empty()) {
+        BOOST_LOG_SEV(lg, error) << inclusion_path_not_set << formatter_name();
+        BOOST_THROW_EXCEPTION(formatting_error(inclusion_path_not_set
+                + formatter_name()));
     }
-    return i->second.inclusion_path();
-    */
+
+    if (fs.file_path().empty()) {
+        BOOST_LOG_SEV(lg, error) << file_path_not_set << formatter_name();
+        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set
+                + formatter_name()));
+    }
 }
 
-boost::filesystem::path class_header_formatter::
-get_file_path(const formattables::class_info& /*c*/) const {
-    boost::filesystem::path r;
-    return r;
-/*
-    const auto& fp(c.file_path_by_formatter_name());
-    const auto i(fp.find(formatter_name()));
-    if (i == fp.end()) {
-        BOOST_LOG_SEV(lg, error) << file_path_for_formatter_not_found
+settings::formatter_settings class_header_formatter::
+formatter_settings_for_formatter(const formattables::class_info& c) const {
+    const auto& fs(c.settings().formatter_settings());
+    const auto i(fs.find(formatter_name()));
+    if (i == fs.end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_settings_not_found
                                  << formatter_name();
 
         BOOST_THROW_EXCEPTION(formatting_error(
-                file_path_for_formatter_not_found + formatter_name()));
+                formatter_settings_not_found + formatter_name()));
     }
     return i->second;
-*/
 }
 
 file_types class_header_formatter::file_type() const {
@@ -170,21 +167,23 @@ class_header_formatter::format(const formattables::class_info& c) const {
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(ss);
 
-    const auto ip(get_inclusion_path(c));
+    const auto fs(formatter_settings_for_formatter(c));
+    validate(fs);
+
     dogen::cpp::formatters::boilerplate_formatter f;
     // FIXME: optional general settings
     const auto a(c.settings().general_settings()->annotation());
-    f.format_begin(fo, a, empty_includes, ip);
-    f.format_end(fo, a, ip);
+    f.format_begin(fo, a, empty_includes, *fs.inclusion_path());
+    f.format_end(fo, a, *fs.inclusion_path());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;
     r.content(ss.str());
-    r.path(get_file_path(c));
+    r.path(fs.file_path());
 
-    BOOST_LOG_SEV(lg, debug) << "filename: "
+    BOOST_LOG_SEV(lg, debug) << "Filename: "
                              << r.path().generic_string();
-    BOOST_LOG_SEV(lg, debug) << "content: " << r.content();
+    BOOST_LOG_SEV(lg, debug) << "Content: " << r.content();
     return r;
 }
 

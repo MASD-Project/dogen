@@ -140,8 +140,11 @@ create_settings_for_formatter(const formatter_properties& fp,
     r.enabled(fs.get_boolean_content_or_default(fp.enabled));
     r.file_path(fs.get_text_content(fp.file_path));
 
-    if (fp.inclusion_path)
-        r.inclusion_path(fs.get_text_content(*fp.inclusion_path));
+    if (fp.inclusion_path) {
+        using boost::filesystem::path;
+        const path p(fs.get_text_content(*fp.inclusion_path));
+        r.inclusion_path(p);
+    }
 
     if (fp.inclusion_dependency && fs.has_field(*fp.inclusion_dependency)) {
         r.inclusion_dependencies(

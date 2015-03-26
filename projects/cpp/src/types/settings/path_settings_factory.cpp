@@ -42,9 +42,6 @@ const std::string no_fields_for_formatter(
 const std::string field_not_found("Could not find expected field: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
-const std::string inclusion_not_supported(
-    "Attempting to get inclusion properties for a formatter "
-    "that does not support them: ");
 
 }
 

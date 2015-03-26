@@ -19677,7 +19677,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="273.345,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="266.248,133.45;274.095,147.8"/>
+        <dia:rectangle val="265.173,133.45;274.095,147.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19685,8 +19685,8 @@ for a given C++ entity.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="273.345,134.2"/>
         <dia:point val="273.345,141"/>
-        <dia:point val="266.298,141"/>
-        <dia:point val="266.298,147"/>
+        <dia:point val="265.223,141"/>
+        <dia:point val="265.223,147"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -24823,16 +24823,16 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O205">
       <dia:attribute name="obj_pos">
-        <dia:point val="257,147"/>
+        <dia:point val="254,147"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="256.95,146.95;275.645,153.05"/>
+        <dia:rectangle val="253.95,146.95;276.495,153.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="257,147"/>
+        <dia:point val="254,147"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.594999999999999"/>
+        <dia:real val="22.445"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -24976,7 +24976,7 @@ registry of all available formatters.#</dia:string>
             <dia:string>#inclusion_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
+            <dia:string>#boost::optional&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26383,17 +26383,17 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="266.298,153"/>
+        <dia:point val="265.223,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="240.005,152.95;266.498,168.8"/>
+        <dia:rectangle val="240.005,152.95;265.423,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="266.298,153"/>
-        <dia:point val="266.298,163"/>
+        <dia:point val="265.223,153"/>
+        <dia:point val="265.223,163"/>
         <dia:point val="240.755,163"/>
         <dia:point val="240.755,168"/>
       </dia:attribute>

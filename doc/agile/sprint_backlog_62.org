@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 17:31]
+Clock summary at [2015-03-26 Thu 17:54]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *54:49* |       |      |
+| *Total time*                                                             | *55:12* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 54:49 |      |
+| Active                                                                   |         | 55:12 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -47,9 +47,9 @@ Clock summary at [2015-03-26 Thu 17:31]
 | COMPLETED Create a "populate file path" operation                        |         |       | 5:55 |
 | COMPLETED Improve performance in populating file path                    |         |       | 2:23 |
 | COMPLETED Implement the formatter settings factory                       |         |       | 1:14 |
-| COMPLETED Split SML workflow into two                                    |         |       | 0:17 |
+| COMPLETED Move injection out of the SML merging workflow                 |         |       | 0:17 |
+| COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Propagate file and include paths to the formatter                |         |       | 0:03 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -653,7 +653,7 @@ easiest path. We need to do a few tweaks:
 We need to start reading the formatter settings again so we can go
 back to formatting.
 
-*** COMPLETED Split SML workflow into two                             :story:
+*** COMPLETED Move injection out of the SML merging workflow          :story:
     CLOSED: [2015-03-26 Thu 17:31]
     CLOCK: [2015-03-26 Thu 17:14]--[2015-03-26 Thu 17:31] =>  0:17
 
@@ -675,6 +675,15 @@ We need to do all of the non-merging aspects of the SML workflow
 before expansion takes place. This is because otherwise the generated
 types won't have the correct meta-data. We need to split the workflow
 into a "merging" workflow and a "enriching" workflow.
+
+*** COMPLETED Propagate file and include paths to the formatter       :story:
+    CLOSED: [2015-03-26 Thu 17:54]
+    CLOCK: [2015-03-26 Thu 17:31]--[2015-03-26 Thu 17:54] =>  0:23
+    CLOCK: [2015-03-26 Thu 15:56]--[2015-03-26 Thu 15:59] =>  0:03
+
+Now we are generating file and include paths again we should re-enable
+the new formatting workflow, so we can keep track of changes by
+looking at the log files.
 
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
@@ -761,13 +770,6 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
-
-*** STARTED Propagate file and include paths to the formatter         :story:
-    CLOCK: [2015-03-26 Thu 15:56]--[2015-03-26 Thu 15:59] =>  0:03
-
-Now we are generating file and include paths again we should re-enable
-the new formatting workflow, so we can keep track of changes by
-looking at the log files.
 
 *** Consider creating field definition templates                      :story:
 

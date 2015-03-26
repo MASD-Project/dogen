@@ -37,7 +37,7 @@ formatter_settings::formatter_settings(formatter_settings&& rhs)
 formatter_settings::formatter_settings(
     const bool enabled,
     const boost::filesystem::path& file_path,
-    const boost::filesystem::path& inclusion_path,
+    const boost::optional<boost::filesystem::path>& inclusion_path,
     const std::list<std::string>& inclusion_dependencies,
     const std::set<std::string>& integrated_facets)
     : enabled_(enabled),
@@ -93,19 +93,19 @@ void formatter_settings::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::filesystem::path& formatter_settings::inclusion_path() const {
+const boost::optional<boost::filesystem::path>& formatter_settings::inclusion_path() const {
     return inclusion_path_;
 }
 
-boost::filesystem::path& formatter_settings::inclusion_path() {
+boost::optional<boost::filesystem::path>& formatter_settings::inclusion_path() {
     return inclusion_path_;
 }
 
-void formatter_settings::inclusion_path(const boost::filesystem::path& v) {
+void formatter_settings::inclusion_path(const boost::optional<boost::filesystem::path>& v) {
     inclusion_path_ = v;
 }
 
-void formatter_settings::inclusion_path(const boost::filesystem::path&& v) {
+void formatter_settings::inclusion_path(const boost::optional<boost::filesystem::path>&& v) {
     inclusion_path_ = std::move(v);
 }
 

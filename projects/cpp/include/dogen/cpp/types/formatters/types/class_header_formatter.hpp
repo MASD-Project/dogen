@@ -26,6 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {
@@ -45,16 +46,16 @@ public:
 
 private:
     /**
-     * @brief Gets the inclusion path for the current formatter.
+     * @brief Ensures all expected settings are available and set to
+     * valid values.
      */
-    boost::filesystem::path
-    get_inclusion_path(const formattables::class_info& c) const;
+    void validate(const settings::formatter_settings& fs) const;
 
     /**
-     * @brief Gets the file path for the current formatter.
+     * @brief Gets the formatter settings for this formatter.
      */
-    boost::filesystem::path
-    get_file_path(const formattables::class_info& c) const;
+    settings::formatter_settings formatter_settings_for_formatter(
+        const formattables::class_info& c) const;
 
 public:
     std::string facet_name() const override;
