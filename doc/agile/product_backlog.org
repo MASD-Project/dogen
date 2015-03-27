@@ -4943,6 +4943,60 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Improving test data generation via SML "reflection"               :story:
+
+A really random but perhaps implementable idea: to create a
+description of test data as JSON objects. For example, one could
+supply a "SML instantiation description language" for a user model,
+such as:
+
+: {
+:    "__type__" : {
+:        "model_name": "my_model",
+:        "external_module_path": []
+:        "module_path": [],
+:        "simple_name": "my_type"
+:    },
+:    "property_0" : true
+: }
+
+Where =__type__= is the "meta-type" for the object we want to
+instantiate, allowing us to locate it in the SML model, and the
+remaining properties are as per user SML model. Once the type is
+located, one could then iterate through the properties in SML and
+locate their instance values in the JSON.
+
+With this JSON and an SML instance of =my_model= we could generate
+code that looks like so:
+
+: my_model m;
+: m.property_0(true);
+
+This would allow users to provide JSON descriptions of the test data
+factories. If we took this approach we should consider renaming test
+data to something a bit better (sample data?).
+
+In this light, the current test data is akin to a "generic
+instantiation language" in that all strings are instantiated with the
+same values (or algorithm of value generation), all ints etc.
+
+This is almost like reflection, in that if one had a strongly typed
+model for the instantiation description language, it would look like a
+reflected SML model. The problem, of course, is that we do not code
+generate SML; we code generate in language specific models such as
+=cpp=, etc. We would also have to have some kind of reflection support
+for these models, and a transformation layer between the SML
+reflection and the implementation model. This is what the formatter
+would then use to output.
+
+*Notes*
+
+- See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#make-test-data-generator-more-configurable][Make test data generator more configurable]]
+- this idea stems from the need to generate [[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][Hoc]] files from a neuron
+  model described SML. For that particular use case we would have a
+  language model (=hoc=) that uses the instantiation description
+  language to generate hoc files.
+
 *** Consider using bounded integers                                   :story:
 
 This library seems to improve static error checking with integers,

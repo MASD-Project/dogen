@@ -785,10 +785,17 @@ Tasks:
 - create a hydration workflow that reads in all the data and pass it
   in to the factory; we probably need something like a repository to
   contain the data;
+- remove =make_only_if_overriden=;
 - convert modelines to JSON
 - pass in root object and "key" for the modeline group;
-- remove =make_only_if_overriden=;
-- read generate_preamble from the dynamic object;
+- read generate_preamble from the dynamic object.
+
+*** Create a "populate includes operation"                            :story:
+
+This operation needs to be implemented by every formatter. It queries
+the model to look for all the types it depends on and obtains the
+corresponding include paths from them. It places them in a formatter
+specific list of includes. It depends on the inclusion path operation.
 
 *** Consider creating field definition templates                      :story:
 
@@ -874,13 +881,6 @@ a check there.
 *** Rename name builder to name factory                               :story:
 
 The name builder is just a factory so make the name reflect it.
-
-*** Create a "populate includes operation"                            :story:
-
-This operation needs to be implemented by every formatter. It queries
-the model to look for all the types it depends on and obtains the
-corresponding include paths from them. It places them in a formatter
-specific list of includes. It depends on the inclusion path operation.
 
 *** Create an operation to populate c++ properties                    :story:
 
