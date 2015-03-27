@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-27 Fri 18:13]
+Clock summary at [2015-03-27 Fri 18:43]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *60:22* |       |      |
+| *Total time*                                                             | *60:51* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 60:22 |      |
+| Active                                                                   |         | 60:51 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -51,6 +51,7 @@ Clock summary at [2015-03-27 Fri 18:13]
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
+| STARTED Create a "populate includes operation"                           |         |       | 0:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -801,7 +802,8 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** Create a "populate includes operation"                            :story:
+*** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-27 Fri 18:13]--[2015-03-27 Fri 18:42] =>  0:29
 
 This operation needs to be implemented by every formatter. It queries
 the model to look for all the types it depends on and obtains the

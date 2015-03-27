@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
@@ -28,6 +29,7 @@
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
+#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -55,6 +57,65 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+class inclusion_expander final : public dynamic::expansion::expander_interface {
+public:
+    std::string name() const override;
+
+    const std::forward_list<std::string>& dependencies() const override;
+
+    void setup(const dynamic::expansion::expansion_context& ec) override;
+
+    void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
+        dynamic::schema::object& o) const override;
+};
+
+std::string inclusion_expander::name() const {
+    static std::string name("cpp.types.inclusion_expander");
+    return name;
+}
+
+const std::forward_list<std::string>& inclusion_expander::
+dependencies() const {
+    static std::forward_list<std::string>
+        r { settings::path_expander::static_name() };
+    return r;
+}
+
+void inclusion_expander::setup(
+    const dynamic::expansion::expansion_context& /*ec*/) {
+}
+
+void inclusion_expander::
+expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
+    dynamic::schema::object& /*o*/) const {
+
+    // algorithm: domain headers need it for the swap function.
+    // const auto ts(s.select_type_settings(types_fn));
+    // if (
+
+    // const auto i(m.objects().find(qn));
+    // if (i == m.objects().end()) {
+    //     const auto n(sml::string_converter::convert(qn));
+    //     BOOST_LOG_SEV(lg, error) << qname_not_found << n;
+    //     BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
+    // }
+
+    // const auto io_fn(formatters::io::traits::facet_name());
+    // const auto iofs(s.select_global_facet_settings(io_fn));
+    // const bool io_enabled(iofs.enabled());
+
+    // const auto types_fn(formatters::types::traits::facet_name());
+    // const auto tfs(s.select_global_facet_settings(types_fn));
+    // const bool use_integrated_io(
+    //     tfs.integrated_facets().find(io_fn) != tfs.integrated_facets().end());
+
+    // if (io_enabled && use_integrated_io)
+    //     r.push_back(inclusion_constants::std::iosfwd());
+
+    // const auto& o(pair.second);
+    // return r;
+}
 
 void class_header_formatter::validate(
     const settings::formatter_settings& fs) const {
@@ -86,6 +147,11 @@ formatter_settings_for_formatter(const formattables::class_info& c) const {
     return i->second;
 }
 
+boost::shared_ptr<dynamic::expansion::expander_interface>
+class_header_formatter::create_expander() const {
+    return boost::make_shared<inclusion_expander>();
+}
+
 file_types class_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
@@ -97,65 +163,6 @@ std::string class_header_formatter::facet_name() const {
 std::string class_header_formatter::formatter_name() const {
     return traits::class_header_formatter_name();
 }
-
-/*
-formattables::file_properties
-class_header_formatter::provide_file_properties(const settings::selector& s,
-    const sml::qname& qn) const {
-
-    path_ingredients_factory pif;
-    const auto pi(pif.make(s, *this, qn));
-
-    path_factory pf;
-    formattables::file_properties r;
-    r.file_path(pf.make_file_path(pi, qn));
-
-    formattables::inclusion inc;
-    using dt = formattables::inclusion_delimiter_types;
-    inc.inclusion_delimiter_type(dt::double_quotes);
-    inc.inclusion_path(pf.make_include_path(pi, qn));
-    r.inclusion(inc);
-
-    return r;
-}
-
-std::list<formattables::inclusion> class_header_formatter::
-provide_inclusion_dependencies(const settings::selector& s,
-    const sml::model& m,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, formattables::file_properties>
-        >& file_properties_by_formatter_name,
-    const sml::qname& qn) const {
-    std::list<formattables::inclusion>  r;
-
-    // algorithm: domain headers need it for the swap function.
-    // const auto ts(s.select_type_settings(types_fn));
-    // if (
-
-    const auto i(m.objects().find(qn));
-    if (i == m.objects().end()) {
-        const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-        BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
-    }
-
-    const auto io_fn(formatters::io::traits::facet_name());
-    const auto iofs(s.select_global_facet_settings(io_fn));
-    const bool io_enabled(iofs.enabled());
-
-    const auto types_fn(formatters::types::traits::facet_name());
-    const auto tfs(s.select_global_facet_settings(types_fn));
-    const bool use_integrated_io(
-        tfs.integrated_facets().find(io_fn) != tfs.integrated_facets().end());
-
-    if (io_enabled && use_integrated_io)
-        r.push_back(inclusion_constants::std::iosfwd());
-
-    // const auto& o(pair.second);
-    return r;
-}
-*/
 
 dogen::formatters::file
 class_header_formatter::format(const formattables::class_info& c) const {

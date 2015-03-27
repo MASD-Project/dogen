@@ -20,6 +20,7 @@
  */
 #include <memory>
 #include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
@@ -29,9 +30,15 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
+void register_expander(
+    boost::shared_ptr<dynamic::expansion::expander_interface> p) {
+    dynamic::expansion::workflow::registrar().register_expander(p);
+}
+
 void initialise_class_header_formatter(registrar& rg) {
-    const auto id(traits::class_header_formatter_name());
-    rg.register_formatter(std::make_shared<class_header_formatter>());
+    const auto f(std::make_shared<class_header_formatter>());
+    rg.register_formatter(f);
+    register_expander(f->create_expander());
 }
 
 void initializer::initialize(registrar& rg) {
