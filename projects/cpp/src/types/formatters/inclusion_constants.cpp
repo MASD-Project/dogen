@@ -30,22 +30,22 @@ std::string inclusion_constants::std::iosfwd() {
 }
 
 std::string inclusion_constants::std::algorithm() {
-    static ::std::string r("<iosfwd>");
+    static ::std::string r("<algorithm>");
     return r;
 }
 
 std::string inclusion_constants::std::ostream() {
-    static ::std::string r("<iosfwd>");
+    static ::std::string r("<ostream>");
     return r;
 }
 
 std::string inclusion_constants::std::functional() {
-    static ::std::string r("<iosfwd>");
+    static ::std::string r("<functional>");
     return r;
 }
 
 std::string inclusion_constants::boost::nvp() {
-    static ::std::string r("<iosfwd>");
+    static ::std::string r("<boost/serialization/nvp.hpp>");
     return r;
 }
 

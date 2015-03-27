@@ -147,6 +147,19 @@
     },
     {
         "name" : {
+            "simple" : "inclusion_dependency",
+            "qualified" : "cpp.types.inclusion_dependency"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.types",
+            "formatter_name" : "cpp.types.class_header_formatter"
+        },
+        "type" : "text_collection",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
             "simple" : "enabled",
             "qualified" : "cpp.types.class_implementation_formatter.enabled"
         },

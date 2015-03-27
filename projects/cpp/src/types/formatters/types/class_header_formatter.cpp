@@ -23,7 +23,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/dynamic/expansion/types/expansion_error.hpp"
+#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
@@ -40,7 +43,10 @@ const std::string inclusion_path_not_set(
     "Inclusion path for formatter is not set. Formatter: ");
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
-
+const std::string no_fields_for_formatter(
+    "Could not find any fields for formatter: ");
+const std::string field_definition_not_found(
+    "Could not find expected field definition: ");
 const std::string qname_not_found("Could not find qualified name in model: ");
 
 using namespace dogen::utility::log;
@@ -59,6 +65,11 @@ namespace formatters {
 namespace types {
 
 class inclusion_expander final : public dynamic::expansion::expander_interface {
+private:
+    struct formatter_properties {
+        dynamic::schema::field_definition inclusion_dependency;
+    };
+
 public:
     std::string name() const override;
 
@@ -68,6 +79,9 @@ public:
 
     void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
         dynamic::schema::object& o) const override;
+
+private:
+    boost::optional<formatter_properties> formatter_properties_;
 };
 
 std::string inclusion_expander::name() const {
@@ -82,21 +96,49 @@ dependencies() const {
     return r;
 }
 
-void inclusion_expander::setup(
-    const dynamic::expansion::expansion_context& /*ec*/) {
+void inclusion_expander::
+setup(const dynamic::expansion::expansion_context& ec) {
+    const auto fn(traits::class_header_formatter_name());
+    const auto& rp(ec.repository());
+    const auto i(rp.field_definitions_by_formatter_name().find(fn));
+    if (i == rp.field_definitions_by_formatter_name().end()) {
+        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << fn;
+        BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
+                no_fields_for_formatter + fn));
+    }
+
+    formatter_properties_ = formatter_properties();
+    bool found_inclusion_dependency(false);
+    for (const auto fd : i->second) {
+        if (fd.name().simple() == cpp::traits::inclusion_dependency()) {
+            formatter_properties_->inclusion_dependency = fd;
+            found_inclusion_dependency = true;
+        }
+    }
+
+    if (!found_inclusion_dependency) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found
+                                 << cpp::traits::inclusion_dependency()
+                                 << " for formatter: " << fn;
+        BOOST_THROW_EXCEPTION(
+            dynamic::expansion::expansion_error(field_definition_not_found +
+                cpp::traits::inclusion_dependency()));
+    }
 }
 
 void inclusion_expander::
 expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
-    dynamic::schema::object& /*o*/) const {
+    dynamic::schema::object& o) const {
 
+    // we only handle includes for objects.
     // const auto i(m.objects().find(qn));
     // if (i == m.objects().end())
     //     return;
 
-    // std::list<std::string> includes;
+    std::list<std::string> includes;
+
     // algorithm: domain headers need it for the swap function.
-    // includes.push_back(inclusion_constants::std::algorithm());
+    includes.push_back(inclusion_constants::std::algorithm());
 
     // const auto n(sml::string_converter::convert(qn));
     // BOOST_LOG_SEV(lg, error) << qname_not_found << n;
@@ -116,6 +158,10 @@ expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
 
     // const auto& o(pair.second);
     // return r;
+
+    dynamic::schema::field_instance_factory f;
+    o.fields()[formatter_properties_->inclusion_dependency.name().qualified()] =
+        f.make_text_collection(includes);
 }
 
 void class_header_formatter::validate(

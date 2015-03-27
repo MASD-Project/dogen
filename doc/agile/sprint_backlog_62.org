@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-27 Fri 18:43]
+Clock summary at [2015-03-27 Fri 23:16]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *60:51* |       |      |
+| *Total time*                                                             | *62:06* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 60:51 |      |
+| Active                                                                   |         | 62:06 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -51,7 +51,7 @@ Clock summary at [2015-03-27 Fri 18:43]
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate includes operation"                           |         |       | 0:29 |
+| STARTED Create a "populate includes operation"                           |         |       | 1:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -803,6 +803,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-27 Fri 22:38]--[2015-03-27 Fri 23:12] =>  0:34
     CLOCK: [2015-03-27 Fri 21:56]--[2015-03-27 Fri 22:37] =>  0:41
     CLOCK: [2015-03-27 Fri 18:13]--[2015-03-27 Fri 18:42] =>  0:29
 
@@ -810,6 +811,18 @@ This operation needs to be implemented by every formatter. It queries
 the model to look for all the types it depends on and obtains the
 corresponding include paths from them. It places them in a formatter
 specific list of includes. It depends on the inclusion path operation.
+
+Notes:
+
+- we need to remember the model after setup.
+- we could use a base inclusion expander that sets up the formatter
+  properties and remembers the model, etc. Derived expanders just
+  need to provide an expansion method. We could even have a utility
+  method to set the field back into the dynamic object.
+- massive impedance mismatch between the boilerplate formatters and
+  the inclusion dependency meta-data. We should probably just use a
+  =std::list<std::string> to represent includes at the formatter
+  level, but we need to check.
 
 *** Consider creating field definition templates                      :story:
 

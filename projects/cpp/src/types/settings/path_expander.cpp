@@ -73,7 +73,7 @@ void path_expander::setup_formatter_fields(
     formatter_properties& fp) const {
 
     const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
-    if (i == rp.field_definitions_by_facet_name().end()) {
+    if (i == rp.field_definitions_by_formatter_name().end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
         BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
                 no_fields_for_formatter + formatter_name));
