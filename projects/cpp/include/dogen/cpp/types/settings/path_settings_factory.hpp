@@ -32,7 +32,6 @@
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
-#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/config/types/cpp_options.hpp"

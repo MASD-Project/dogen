@@ -56,17 +56,6 @@ formatter_settings_factory::formatter_settings_factory(
     const dynamic::schema::repository& rp)
     : formatter_properties_(make_formatter_properties(rp)) { }
 
-settings::inclusion_delimiter_types formatter_settings_factory::
-inclusion_delimiter_type_from_string(const std::string& v) const {
-    if (v == "angle_brackets")
-        return inclusion_delimiter_types::angle_brackets;
-    else if (v == "double_quotes")
-        return inclusion_delimiter_types::double_quotes;
-
-    BOOST_LOG_SEV(lg, error) << invalid_delimiter << v;
-    BOOST_THROW_EXCEPTION(building_error(invalid_delimiter + v));
-}
-
 formatter_settings_factory::formatter_properties
 formatter_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,

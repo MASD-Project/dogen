@@ -53,8 +53,6 @@
 #include "dogen/cpp/hash/formatters/serialization/settings_hash.hpp"
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_delimiter_types_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_hash.hpp"
 #include "dogen/cpp/hash/settings/odb_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/path_settings_hash.hpp"

@@ -53,8 +53,6 @@
 #include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"
 #include "dogen/cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
-#include "dogen/cpp/test_data/settings/inclusion_delimiter_types_td.hpp"
-#include "dogen/cpp/test_data/settings/inclusion_td.hpp"
 #include "dogen/cpp/test_data/settings/odb_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/path_settings_td.hpp"

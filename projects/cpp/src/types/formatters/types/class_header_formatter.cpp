@@ -90,16 +90,17 @@ void inclusion_expander::
 expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
     dynamic::schema::object& /*o*/) const {
 
-    // algorithm: domain headers need it for the swap function.
-    // const auto ts(s.select_type_settings(types_fn));
-    // if (
-
     // const auto i(m.objects().find(qn));
-    // if (i == m.objects().end()) {
-    //     const auto n(sml::string_converter::convert(qn));
-    //     BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-    //     BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
-    // }
+    // if (i == m.objects().end())
+    //     return;
+
+    // std::list<std::string> includes;
+    // algorithm: domain headers need it for the swap function.
+    // includes.push_back(inclusion_constants::std::algorithm());
+
+    // const auto n(sml::string_converter::convert(qn));
+    // BOOST_LOG_SEV(lg, error) << qname_not_found << n;
+    // BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
 
     // const auto io_fn(formatters::io::traits::facet_name());
     // const auto iofs(s.select_global_facet_settings(io_fn));

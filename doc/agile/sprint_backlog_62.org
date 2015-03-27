@@ -803,6 +803,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-27 Fri 21:56]--[2015-03-27 Fri 22:37] =>  0:41
     CLOCK: [2015-03-27 Fri 18:13]--[2015-03-27 Fri 18:42] =>  0:29
 
 This operation needs to be implemented by every formatter. It queries

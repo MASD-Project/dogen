@@ -146,8 +146,6 @@
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
-#include "dogen/cpp/types/settings/inclusion.hpp"
-#include "dogen/cpp/types/settings/inclusion_delimiter_types.hpp"
 #include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/settings/odb_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
