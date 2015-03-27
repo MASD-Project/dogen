@@ -130,11 +130,6 @@ relationships extractor::extract_dependency_graph(const sml::object& ao) const {
         }
     }
 
-    for (const auto& n : r.names()) {
-        if (r.forward_decls().find(n) != r.forward_decls().end())
-            r.forward_decls().erase(n);
-    }
-
     BOOST_LOG_SEV(lg, debug) << "Extracted dependency graph.";
     return r;
 }
