@@ -40,6 +40,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::modeline_group& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("modelines", v.modelines_);
 }
 
@@ -47,6 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::modeline_group& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("modelines", v.modelines_);
 }
 

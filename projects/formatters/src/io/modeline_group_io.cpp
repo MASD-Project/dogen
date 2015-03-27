@@ -55,6 +55,7 @@ namespace formatters {
 std::ostream& operator<<(std::ostream& s, const modeline_group& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::modeline_group\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"modelines\": " << v.modelines()
       << " }";
     return(s);

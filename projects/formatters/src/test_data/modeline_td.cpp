@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/formatters/test_data/editors_td.hpp"
 #include "dogen/formatters/test_data/modeline_field_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
 #include "dogen/formatters/test_data/modeline_td.hpp"
 
 namespace {
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
 
 dogen::formatters::editors
 create_dogen_formatters_editors(const unsigned int position) {
@@ -57,9 +64,10 @@ modeline_generator::modeline_generator() : position_(0) { }
 
 void modeline_generator::
 populate(const unsigned int position, result_type& v) {
-    v.editor(create_dogen_formatters_editors(position + 0));
-    v.location(create_dogen_formatters_modeline_locations(position + 1));
-    v.fields(create_std_list_dogen_formatters_modeline_field(position + 2));
+    v.name(create_std_string(position + 0));
+    v.editor(create_dogen_formatters_editors(position + 1));
+    v.location(create_dogen_formatters_modeline_locations(position + 2));
+    v.fields(create_std_list_dogen_formatters_modeline_field(position + 3));
 }
 
 modeline_generator::result_type

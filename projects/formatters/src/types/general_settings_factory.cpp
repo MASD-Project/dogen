@@ -34,7 +34,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("formatters.general_settings_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
-const std::string cpp_modeline("c++");
+const std::string cpp_modeline("cpp");
 
 }
 

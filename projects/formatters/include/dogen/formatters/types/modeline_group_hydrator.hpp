@@ -29,6 +29,7 @@
 #include <string>
 #include <istream>
 #include <boost/filesystem/path.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include "dogen/formatters/types/modeline_field.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 
@@ -44,35 +45,19 @@ private:
      * @brief Given a field value representing an editor enumeration,
      * returns the corresponding enum.
      */
-    editors translate_editor_enum(const std::string value) const;
+    editors to_editor(const std::string value) const;
 
     /**
      * @brief Given a field value representing an location
      * enumeration, returns the corresponding enum.
      */
-    modeline_locations translate_location_enum(const std::string value) const;
+    modeline_locations to_modeline_location(const std::string value) const;
 
+private:
     /**
-     * @brief Given a field value, we translate any of the well defined
-     * special values.
-     *
-     * As the INI file format does not support spaces, tabs etc as
-     * field values, we hacked a convention around it: to use the word
-     * space for a space, etc. This method performs the translation.
+     * @brief Reads a modeline from the property tree.
      */
-    std::string translate_special_values(const std::string value) const;
-
-    /**
-     * @brief Returns true if the name of the group is valid, false
-     * otherwise.
-     */
-    bool is_group_name_valid(const std::string& n) const;
-
-    /**
-     * @brief Checks the contents of the modeline and throws
-     * exceptions as required.
-     */
-    void validate_modeline(const modeline& mg) const;
+    modeline read_modeline(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Parse the stream using INI syntax.

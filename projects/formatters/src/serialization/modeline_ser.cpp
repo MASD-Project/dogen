@@ -28,6 +28,7 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
 #include "dogen/formatters/serialization/editors_ser.hpp"
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
@@ -41,6 +42,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::modeline& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("editor", v.editor_);
     ar << make_nvp("location", v.location_);
     ar << make_nvp("fields", v.fields_);
@@ -50,6 +52,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::modeline& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("editor", v.editor_);
     ar >> make_nvp("location", v.location_);
     ar >> make_nvp("fields", v.fields_);

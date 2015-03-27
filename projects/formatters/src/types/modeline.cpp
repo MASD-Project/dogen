@@ -28,22 +28,26 @@ modeline::modeline()
       location_(static_cast<dogen::formatters::modeline_locations>(0)) { }
 
 modeline::modeline(
+    const std::string& name,
     const dogen::formatters::editors& editor,
     const dogen::formatters::modeline_locations& location,
     const std::list<dogen::formatters::modeline_field>& fields)
-    : editor_(editor),
+    : name_(name),
+      editor_(editor),
       location_(location),
       fields_(fields) { }
 
 void modeline::swap(modeline& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(editor_, other.editor_);
     swap(location_, other.location_);
     swap(fields_, other.fields_);
 }
 
 bool modeline::operator==(const modeline& rhs) const {
-    return editor_ == rhs.editor_ &&
+    return name_ == rhs.name_ &&
+        editor_ == rhs.editor_ &&
         location_ == rhs.location_ &&
         fields_ == rhs.fields_;
 }
@@ -52,6 +56,22 @@ modeline& modeline::operator=(modeline other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& modeline::name() const {
+    return name_;
+}
+
+std::string& modeline::name() {
+    return name_;
+}
+
+void modeline::name(const std::string& v) {
+    name_ = v;
+}
+
+void modeline::name(const std::string&& v) {
+    name_ = std::move(v);
 }
 
 dogen::formatters::editors modeline::editor() const {

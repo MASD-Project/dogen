@@ -686,6 +686,13 @@ Now we are generating file and include paths again we should re-enable
 the new formatting workflow, so we can keep track of changes by
 looking at the log files.
 
+*** COMPLETED Convert all files in library into JSON                  :story:
+    CLOSED: [2015-03-27 Fri 16:24]
+
+We started off by using the INI format, but then subsequently found it
+too inexpressive to be able to carry SML representations and started
+using JSON. However, modeline groups, etc are still in INI format.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -773,6 +780,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Implement the general settings workflow with root object  :story:
+    CLOCK: [2015-03-27 Fri 14:41]--[2015-03-27 Fri 16:23] =>  1:42
     CLOCK: [2015-03-26 Thu 22:21]--[2015-03-27 Fri 00:02] =>  1:41
 
 We need to change the settings workflow to take in the root object;
@@ -990,5 +998,20 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
+
+*** Hydrators provide no context when errors occur                    :story:
+
+We tried to parse a JSON file using the INI parser and got the
+following errors:
+
+: 2015-03-27 15:16:05.291132 [DEBUG] [formatters.modeline_group_hydrator] Reading file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/modeline_groups/emacs.json
+: 2015-03-27 15:16:05.291215 [ERROR] [formatters.modeline_group_hydrator] Failed to parse INI file: : <unspecified file>(1): '=' character not found in line
+: 2015-03-27 15:16:05.291933 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/formatters/src/types/modeline_group_hydrator.cpp(172): Throw in function dogen::formatters::modeline_group dogen::formatters::modeline_group_hydrator::hydrate(std::istream &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10formatters15hydration_errorEEE
+: std::exception::what: Failed to parse INI file: <unspecified file>(1): '=' character not found in line
+: [P12tag_workflow] = Code generation failure.
+
+The exception provides no context to the file being parsed. We need to
+catch the exception and augment it with the file name.
 
 ** Deprecated

@@ -18,11 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 #include "dogen/formatters/io/editors_io.hpp"
 #include "dogen/formatters/io/modeline_field_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace std {
 
@@ -44,6 +53,7 @@ namespace formatters {
 std::ostream& operator<<(std::ostream& s, const modeline& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::modeline\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"editor\": " << v.editor() << ", "
       << "\"location\": " << v.location() << ", "
       << "\"fields\": " << v.fields()

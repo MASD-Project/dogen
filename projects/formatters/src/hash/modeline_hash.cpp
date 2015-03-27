@@ -48,6 +48,7 @@ namespace formatters {
 std::size_t modeline_hasher::hash(const modeline&v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, v.editor());
     combine(seed, v.location());
     combine(seed, hash_std_list_dogen_formatters_modeline_field(v.fields()));

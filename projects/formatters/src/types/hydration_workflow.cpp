@@ -66,7 +66,7 @@ hydration_workflow::hydrate_modeline_groups(
     for (const auto& f : files) {
         BOOST_LOG_SEV(lg, debug) << "Hydrating file: " << f.generic_string();
         const auto mg(h.hydrate(f));
-        const auto pair(std::make_pair(f.filename().generic_string(), mg));
+        const auto pair(std::make_pair(mg.name(), mg));
         r.insert(pair);
     }
 

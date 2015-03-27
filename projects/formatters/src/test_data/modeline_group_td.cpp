@@ -52,7 +52,8 @@ modeline_group_generator::modeline_group_generator() : position_(0) { }
 
 void modeline_group_generator::
 populate(const unsigned int position, result_type& v) {
-    v.modelines(create_std_unordered_map_std_string_dogen_formatters_modeline(position + 0));
+    v.name(create_std_string(position + 0));
+    v.modelines(create_std_unordered_map_std_string_dogen_formatters_modeline(position + 1));
 }
 
 modeline_group_generator::result_type

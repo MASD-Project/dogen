@@ -23,22 +23,43 @@
 namespace dogen {
 namespace formatters {
 
-modeline_group::modeline_group(const std::unordered_map<std::string, dogen::formatters::modeline>& modelines)
-    : modelines_(modelines) { }
+modeline_group::modeline_group(
+    const std::string& name,
+    const std::unordered_map<std::string, dogen::formatters::modeline>& modelines)
+    : name_(name),
+      modelines_(modelines) { }
 
 void modeline_group::swap(modeline_group& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(modelines_, other.modelines_);
 }
 
 bool modeline_group::operator==(const modeline_group& rhs) const {
-    return modelines_ == rhs.modelines_;
+    return name_ == rhs.name_ &&
+        modelines_ == rhs.modelines_;
 }
 
 modeline_group& modeline_group::operator=(modeline_group other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& modeline_group::name() const {
+    return name_;
+}
+
+std::string& modeline_group::name() {
+    return name_;
+}
+
+void modeline_group::name(const std::string& v) {
+    name_ = v;
+}
+
+void modeline_group::name(const std::string&& v) {
+    name_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::formatters::modeline>& modeline_group::modelines() const {

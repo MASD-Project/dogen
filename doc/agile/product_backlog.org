@@ -2539,12 +2539,6 @@ a =std::ostringstream= to format once and reuse the resulting
 string. Probably worth doing this change after the performance tests
 are in.
 
-*** Convert all files in library into JSON                            :story:
-
-We started off by using the INI format, but then subsequently found it
-too inexpressive to be able to carry SML representations and started
-using JSON. However, modeline groups, etc are still in INI format.
-
 *** Consider model as a container of types                            :story:
 
 At present model is composed of objects, primitives, concepts,

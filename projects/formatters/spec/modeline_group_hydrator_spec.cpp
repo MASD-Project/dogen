@@ -41,56 +41,94 @@ const std::string duplicate_group("Duplicate modeline group");
 const std::string invalid_dir("INVALID_DIRECTORY__");
 const std::string dir_not_found_message("Could not find directory");
 const std::string not_a_dir_message("Not a directory");
-const std::string invalid_file_message("Failed to parse INI file");
-const std::string emacs_modeline_group("modeline_groups/emacs");
-const std::string invalid_ini_file("NOTINITFILE");
+const std::string invalid_file_message("Failed to parse JSON file");
+const std::string emacs_modeline_group("modeline_groups/emacs.json");
+const std::string invalid_json_file("NOTJSONTFILE");
 
 const std::string no_editor(R"(
-[c++]
-location = top
-mode = c++
-tab-width = 4
-indent-tabs-mode = nil
-c-basic-offset = 4
-)");
-const std::string no_editor_message("Editor was not supplied");
+{
+    "group_name" : "emacs",
+    "modelines" : [
+        {
+            "modeline_name" : "cpp",
+            "location" : "top",
+            "fields" : [
+                {
+                    "name" : "mode",
+                    "value" : "c++"
+                }
+            ]
+        }
+    ]
+})");
+const std::string no_editor_message("No such node (editor)");
 
 const std::string unsupported_editor(R"(
-[c++]
-editor = gedit
-location = top
-mode = c++
-tab-width = 4
-indent-tabs-mode = nil
-c-basic-offset = 4
-)");
+{
+    "group_name" : "emacs",
+    "modelines" : [
+        {
+            "modeline_name" : "cpp",
+            "editor" : "gedit",
+            "location" : "top",
+            "fields" : [
+                {
+                    "name" : "mode",
+                    "value" : "c++"
+                }
+            ]
+        }
+    ]
+})");
 const std::string unsupported_editor_message("Invalid or unsupported editor");
 
 const std::string no_location(R"(
-[c++]
-editor = emacs
-mode = c++
-tab-width = 4
-indent-tabs-mode = nil
-c-basic-offset = 4
-)");
+{
+    "group_name" : "emacs",
+    "modelines" : [
+        {
+            "modeline_name" : "cpp",
+            "editor" : "emacs",
+            "fields" : [
+                {
+                    "name" : "mode",
+                    "value" : "c++"
+                }
+            ]
+        }
+    ]
+})");
 
 const std::string invalid_location(R"(
-[c++]
-editor = emacs
-location = middle
-mode = c++
-tab-width = 4
-indent-tabs-mode = nil
-c-basic-offset = 4
-)");
-const std::string invalid_location_message("Invalid or unsupported modeline");
+{
+    "group_name" : "emacs",
+    "modelines" : [
+        {
+            "modeline_name" : "cpp",
+            "editor" : "emacs",
+            "location" : "middle",
+            "fields" : [
+                {
+                    "name" : "mode",
+                    "value" : "c++"
+                }
+            ]
+        }
+    ]
+})");
+const std::string invalid_location_message("Invalid or unsupported modeline location");
 
 const std::string no_fields(R"(
-[c++]
-editor = emacs
-location = top
-)");
+{
+    "group_name" : "emacs",
+    "modelines" : [
+        {
+            "modeline_name" : "cpp",
+            "editor" : "emacs",
+            "location" : "top"
+        }
+   ]
+})");
 const std::string no_fields_message("Modeline must have at least");
 
 }
@@ -125,10 +163,10 @@ BOOST_AUTO_TEST_CASE(hydrating_emacs_modeline_group_results_in_expected_modeline
     }
 }
 
-BOOST_AUTO_TEST_CASE(supplying_invalid_ini_file_throws) {
-    SETUP_TEST_LOG_SOURCE("supplying_invalid_ini_file_throws");
+BOOST_AUTO_TEST_CASE(supplying_invalid_json_file_throws) {
+    SETUP_TEST_LOG_SOURCE("supplying_invalid_json_file_throws");
 
-    std::istringstream s(invalid_ini_file);
+    std::istringstream s(invalid_json_file);
     using namespace dogen::utility::filesystem;
 
     dogen::formatters::modeline_group_hydrator h;
@@ -166,7 +204,8 @@ BOOST_AUTO_TEST_CASE(not_supplying_location_results_in_a_valid_location) {
     BOOST_LOG_SEV(lg, debug) << "modeline group: " << r;
     BOOST_CHECK(r.modelines().size() == 1);
     const auto& ml(r.modelines().begin()->second);
-    BOOST_CHECK(ml.location() != dogen::formatters::modeline_locations::invalid);
+    BOOST_CHECK(ml.location() !=
+       dogen::formatters::modeline_locations::invalid);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_invalid_location_throws) {

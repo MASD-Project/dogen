@@ -48,7 +48,9 @@ public:
     ~modeline_group() = default;
 
 public:
-    explicit modeline_group(const std::unordered_map<std::string, dogen::formatters::modeline>& modelines);
+    modeline_group(
+        const std::string& name,
+        const std::unordered_map<std::string, dogen::formatters::modeline>& modelines);
 
 private:
     template<typename Archive>
@@ -58,6 +60,16 @@ private:
     friend void boost::serialization::load(Archive& ar, modeline_group& v, unsigned int version);
 
 public:
+    /**
+     * @brief Name of the modeline group. Must be unique
+     */
+    /**@{*/
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief All the modelines for this group.
      */
@@ -79,6 +91,7 @@ public:
     modeline_group& operator=(modeline_group other);
 
 private:
+    std::string name_;
     std::unordered_map<std::string, dogen::formatters::modeline> modelines_;
 };
 

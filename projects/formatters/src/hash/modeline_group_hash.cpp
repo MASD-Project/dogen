@@ -47,7 +47,9 @@ namespace formatters {
 std::size_t modeline_group_hasher::hash(const modeline_group&v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, hash_std_unordered_map_std_string_dogen_formatters_modeline(v.modelines()));
+
     return seed;
 }
 

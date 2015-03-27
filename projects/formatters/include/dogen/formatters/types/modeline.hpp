@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <list>
+#include <string>
 #include "dogen/formatters/serialization/modeline_fwd_ser.hpp"
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/modeline_field.hpp"
@@ -58,6 +59,7 @@ public:
 
 public:
     modeline(
+        const std::string& name,
         const dogen::formatters::editors& editor,
         const dogen::formatters::modeline_locations& location,
         const std::list<dogen::formatters::modeline_field>& fields);
@@ -70,6 +72,16 @@ private:
     friend void boost::serialization::load(Archive& ar, modeline& v, unsigned int version);
 
 public:
+    /**
+     * @brief Name of the modeline. Must be unique within a group.
+     */
+    /**@{*/
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief The modeline will use the syntax for this editor.
      */
@@ -107,6 +119,7 @@ public:
     modeline& operator=(modeline other);
 
 private:
+    std::string name_;
     dogen::formatters::editors editor_;
     dogen::formatters::modeline_locations location_;
     std::list<dogen::formatters::modeline_field> fields_;
