@@ -123,7 +123,7 @@ void modeline_group_hydrator::validate_modeline(const modeline& m) const {
 }
 
 modeline_group modeline_group_hydrator::read_stream(std::istream& s) const {
-    modeline_group_hydrator::value_type r;
+    modeline_group r;
 
     using namespace boost::property_tree;
     ptree pt;

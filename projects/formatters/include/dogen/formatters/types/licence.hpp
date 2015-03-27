@@ -58,8 +58,6 @@ private:
 public:
     /**
      * @brief All copyright notices for the current file.
-     *
-     * A Copyright holder is a pair of name and email address.
      */
     /**@{*/
     const std::list<std::string>& copyright_notices() const;

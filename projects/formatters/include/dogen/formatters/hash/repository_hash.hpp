@@ -18,15 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
+#ifndef DOGEN_FORMATTERS_HASH_REPOSITORY_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_REPOSITORY_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/formatters/types/repository.hpp"
+
+namespace dogen {
+namespace formatters {
+
+struct repository_hasher {
+public:
+    static std::size_t hash(const repository& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::repository> {
+public:
+    size_t operator()(const dogen::formatters::repository& v) const {
+        return dogen::formatters::repository_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -30,54 +30,43 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/formatters/types/modeline_group.hpp"
+#include "dogen/formatters/types/repository.hpp"
 
 namespace dogen {
 namespace formatters {
 
 /**
- * @brief Hydrates all files found in the input directories.
- *
- * The Hydrator concept has one method called hydrate with a single
- * parameter of type boost::filesystem::path.
+ * @brief Hydrates all reference data used by the formatters model
+ * into a repository.
  */
-template<typename Hydrator>
 class hydration_workflow {
+    /**
+     * @brief Creates the list of directories to load data from.
+     */
+    std::forward_list<boost::filesystem::path> create_directory_list(
+        const std::forward_list<boost::filesystem::path>& dirs,
+        const std::string& for_whom) const;
+
+    /**
+     * @brief Hydrates all the modelines available in the library.
+     */
+    std::unordered_map<std::string, modeline_group> hydrate_modeline_groups(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Hydrates all the licence texts available in the library.
+     */
+    std::unordered_map<std::string, std::string> hydrate_licence_texts(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
+
 public:
-    hydration_workflow(const hydration_workflow&) = default;
-    hydration_workflow(hydration_workflow&&) = default;
-    ~hydration_workflow() = default;
-
-private:
     /**
-     * @brief Hydrate the file given by path p.
+     * @brief Hydrate all files found in the supplied directories into
+     * objects of the formatters' domain.
      */
-    std::pair<std::string, typename Hydrator::value_type>
-    hydrate(const boost::filesystem::path& p) const {
-        const auto value(hydrator_.hydrate(p));
-        return std::make_pair(p.filename().generic_string(), value);
-    }
-
-public:
-    /**
-     * @brief Initialises the workflow.
-     */
-    hydration_workflow() : hydrator_() { }
-
-    /**
-     * @brief Hydrates all files found on all the directories
-     * supplied.
-     */
-    std::unordered_map<std::string, typename Hydrator::value_type>
-    hydrate(const std::forward_list<boost::filesystem::path>& dirs) const {
-        std::unordered_map<std::string, typename Hydrator::value_type> r;
-        const auto files(dogen::utility::filesystem::find_files(dirs));
-        for (const auto& f : files)
-            r.insert(hydrate(f));
-        return r;
-    }
-
-private:
-    const Hydrator hydrator_;
+    repository hydrate(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
 };
 
 } }

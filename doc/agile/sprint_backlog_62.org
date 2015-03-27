@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-26 Thu 17:54]
+Clock summary at [2015-03-27 Fri 00:03]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *55:12* |       |      |
+| *Total time*                                                             | *56:53* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 55:12 |      |
+| Active                                                                   |         | 56:53 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -50,6 +50,7 @@ Clock summary at [2015-03-26 Thu 17:54]
 | COMPLETED Move injection out of the SML merging workflow                 |         |       | 0:17 |
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
+| STARTED Implement the general settings workflow with root object         |         |       | 1:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -771,12 +772,23 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** Implement the general settings workflow with root object          :story:
+*** STARTED Implement the general settings workflow with root object  :story:
+    CLOCK: [2015-03-26 Thu 22:21]--[2015-03-27 Fri 00:02] =>  1:41
 
 We need to change the settings workflow to take in the root object;
 and we then need to pass it to the general settings workflow so that
 we first check to see if a field exists on the current object; if it
 doesn't we then either use the root object or the default value.
+
+Tasks:
+
+- create a hydration workflow that reads in all the data and pass it
+  in to the factory; we probably need something like a repository to
+  contain the data;
+- convert modelines to JSON
+- pass in root object and "key" for the modeline group;
+- remove =make_only_if_overriden=;
+- read generate_preamble from the dynamic object;
 
 *** Consider creating field definition templates                      :story:
 

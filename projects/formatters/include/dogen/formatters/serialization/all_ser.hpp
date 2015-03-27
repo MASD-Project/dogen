@@ -30,3 +30,4 @@
 #include "dogen/formatters/serialization/modeline_ser.hpp"
 #include "dogen/formatters/serialization/padding_types_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen/formatters/serialization/repository_ser.hpp"

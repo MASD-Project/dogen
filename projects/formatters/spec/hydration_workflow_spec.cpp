@@ -68,16 +68,16 @@ BOOST_AUTO_TEST_CASE(hydrating_modeline_groups_in_data_directory_produces_expect
         data_files_directory() / modeline_groups_dir
     };
 
-    dogen::formatters::hydration_workflow<mock_hydrator> hw;
-    const auto r(hw.hydrate(d));
+    // dogen::formatters::hydration_workflow<mock_hydrator> hw;
+    // const auto r(hw.hydrate(d));
 
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
-    BOOST_CHECK(!r.empty());
+    // BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    // BOOST_CHECK(!r.empty());
 
-    for (const auto& pair : r) {
-        BOOST_CHECK(!pair.first.empty());
-        BOOST_CHECK(!pair.second.empty());
-    }
+    // for (const auto& pair : r) {
+    //     BOOST_CHECK(!pair.first.empty());
+    //     BOOST_CHECK(!pair.second.empty());
+    // }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

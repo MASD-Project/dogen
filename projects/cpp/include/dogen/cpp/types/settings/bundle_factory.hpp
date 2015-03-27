@@ -32,12 +32,12 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
 
 namespace dogen {
@@ -52,7 +52,7 @@ public:
     /**
      * @brief Initialises the bundle factory.
      *
-     * @param field_definitions_by_formatter_name All fields by formatter name.
+     * @param rp repository of dynamic schema data.
      * @param opaque_factories All factories of opaque settings know
      * to the system.
      */
@@ -60,6 +60,13 @@ public:
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
             >& opaque_settings_factories);
+
+private:
+    /**
+     * @brief Creates the formatters' repository.
+     */
+    dogen::formatters::repository create_formatters_repository(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
 
 private:
     /**
@@ -92,11 +99,11 @@ public:
     bundle make(const dynamic::schema::object& o) const;
 
 private:
-    const dynamic::schema::repository& repository_;
+    const dynamic::schema::repository& schema_repository_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories_;
-    dogen::formatters::general_settings_factory general_settings_factory_;
+    const dogen::formatters::repository formatters_repository_;
 };
 
 } } }

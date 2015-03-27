@@ -21,6 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
+#include "dogen/formatters/types/hydration_workflow.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
 #include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
@@ -41,17 +43,22 @@ bundle_factory::bundle_factory(
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories) :
-    repository_(rp),
+    schema_repository_(rp),
     opaque_settings_factories_(opaque_settings_factories),
-    general_settings_factory_(
-        std::forward_list<boost::filesystem::path> {
-            dogen::utility::filesystem::data_files_directory() }) {
-    general_settings_factory_.load_reference_data();
+    formatters_repository_(create_formatters_repository(
+            std::forward_list<boost::filesystem::path> {
+                dogen::utility::filesystem::data_files_directory() })) { }
+
+dogen::formatters::repository bundle_factory::create_formatters_repository(
+    const std::forward_list<boost::filesystem::path>& dirs) const {
+    dogen::formatters::hydration_workflow hw;
+    return hw.hydrate(dirs);
 }
 
 dogen::formatters::general_settings bundle_factory::
 create_general_settings(const dynamic::schema::object& o) const {
-    return general_settings_factory_.make(o);
+    dogen::formatters::general_settings_factory f(formatters_repository_);
+    return f.make(o);
 }
 
 type_settings bundle_factory::
@@ -63,7 +70,7 @@ create_type_settings(const dynamic::schema::object& o) const {
 std::unordered_map<std::string, formatter_settings>
 bundle_factory::create_formatter_settings(
     const dynamic::schema::object& o) const {
-    formatter_settings_factory f(repository_);
+    formatter_settings_factory f(schema_repository_);
     return f.make(o);
 }
 

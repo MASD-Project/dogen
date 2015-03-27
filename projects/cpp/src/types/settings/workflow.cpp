@@ -48,16 +48,6 @@ cpp::settings::registrar& workflow::registrar() {
 workflow::workflow(const dynamic::schema::repository& rp)
     : factory_(rp, registrar().opaque_settings_factories()) { }
 
-bundle workflow::execute(const dynamic::schema::object& o) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating settings bundle.";
-    bundle r(factory_.make(o));
-
-    BOOST_LOG_SEV(lg, debug) << "Settings bundle: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle.";
-
-    return r;
-}
-
 void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
 
@@ -73,6 +63,16 @@ void workflow::validate() const {
         BOOST_LOG_SEV(lg, debug) << "Key: '" << f->settings_key() << "'";
 
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
+}
+
+bundle workflow::execute(const dynamic::schema::object& o) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating settings bundle.";
+    bundle r(factory_.make(o));
+
+    BOOST_LOG_SEV(lg, debug) << "Settings bundle: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle.";
+
+    return r;
 }
 
 } } }

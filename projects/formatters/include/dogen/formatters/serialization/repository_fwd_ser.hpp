@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_FWD_HPP
-#define DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_FWD_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_REPOSITORY_FWD_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_REPOSITORY_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatters {
+#include "dogen/formatters/types/repository_fwd.hpp"
 
-class licence_hydrator;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::formatters::repository& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::formatters::repository& v, unsigned int version);
 
 } }
 

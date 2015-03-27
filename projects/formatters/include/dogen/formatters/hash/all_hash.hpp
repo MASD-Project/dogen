@@ -29,3 +29,4 @@
 #include "dogen/formatters/hash/modeline_hash.hpp"
 #include "dogen/formatters/hash/modeline_locations_hash.hpp"
 #include "dogen/formatters/hash/padding_types_hash.hpp"
+#include "dogen/formatters/hash/repository_hash.hpp"

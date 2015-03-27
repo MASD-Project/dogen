@@ -34,6 +34,7 @@
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
+#include "dogen/formatters/types/repository.hpp"
 
 namespace dogen {
 namespace formatters {
@@ -53,10 +54,9 @@ public:
     /**
      * @brief Initialise a new general settings factory.
      *
-     * @param data_files_directories where to look for reference data.
+     * @param rp where to look up reference data.
      */
-    explicit general_settings_factory(
-        const std::forward_list<boost::filesystem::path>& data_files_dirs);
+    explicit general_settings_factory(const repository& rp);
 
 private:
     /*
@@ -82,39 +82,7 @@ private:
      */
     std::string extract_marker(const dynamic::schema::object& o) const;
 
-private:
-    /**
-     * @brief Creates the actual list of directories used by hydrators
-     * to load data.
-     */
-    std::forward_list<boost::filesystem::path>
-    create_directory_list(const std::string& for_whom) const;
-
-    /**
-     * @brief Hydrates all the modelines available in the library.
-     */
-    void hydrate_modelines();
-
-    /**
-     * @brief Hydrates all the licences available in the library.
-     */
-    void hydrate_licences();
-
 public:
-    /**
-     * @brief Returns true if there is any reference data at all in the
-     * factory.
-     *
-     * @note This method is mainly for tests.
-     */
-    bool empty() const;
-
-    /**
-     * @brief Loads all of the required reference data from the file
-     * system.
-     */
-    void load_reference_data();
-
     /**
      * @brief Generates general settings from the dynamic object.
      *
@@ -122,20 +90,8 @@ public:
      */
     general_settings make(const dynamic::schema::object& o) const;
 
-    /**
-     * @brief Generates general settings from the dynamic object, only
-     * if at least one property has been overriden. If none have been
-     * overriden, does not generate the settings.
-     *
-     * @pre load reference data must have been called.
-     */
-    boost::optional<general_settings>
-    make_only_if_overriden(const dynamic::schema::object& o) const;
-
 private:
-    std::forward_list<boost::filesystem::path> data_files_directories_;
-    std::unordered_map<std::string, modeline_group> modeline_groups_;
-    std::unordered_map<std::string, licence> licences_;
+    const repository& repository_;
 };
 
 } }

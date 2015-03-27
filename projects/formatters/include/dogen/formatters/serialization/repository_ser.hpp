@@ -18,44 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_HPP
-#define DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_HPP
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_REPOSITORY_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/licence.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/formatters/types/repository.hpp"
 
-namespace dogen {
-namespace formatters {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatters::repository)
+namespace boost {
+namespace serialization {
 
-/**
- * @brief Hydrates a licence based on the contents of the stream.
- */
-class licence_hydrator {
-public:
-    typedef licence value_type;
+template<typename Archive>
+void save(Archive& ar, const dogen::formatters::repository& v, unsigned int version);
 
-public:
-    licence_hydrator() = default;
-    licence_hydrator(const licence_hydrator&) = default;
-    licence_hydrator(licence_hydrator&&) = default;
-    ~licence_hydrator() = default;
-
-public:
-    /**
-     * @brief Hydrate a licence based on the contents of the stream.
-     */
-    licence hydrate(std::istream& s) const;
-
-    /**
-     * @brief Hydrate a licence from the supplied path.
-     */
-    licence hydrate(const boost::filesystem::path& p) const;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::formatters::repository& v, unsigned int version);
 
 } }
 

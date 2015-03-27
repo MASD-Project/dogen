@@ -29,3 +29,4 @@
 #include "dogen/formatters/io/modeline_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"
 #include "dogen/formatters/io/padding_types_io.hpp"
+#include "dogen/formatters/io/repository_io.hpp"

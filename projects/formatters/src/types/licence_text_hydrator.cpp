@@ -23,13 +23,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/types/hydration_error.hpp"
-#include "dogen/formatters/types/licence_hydrator.hpp"
+#include "dogen/formatters/types/licence_text_hydrator.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatters.licence_hydrator"));
+auto lg(logger_factory("formatters.licence_text_hydrator"));
 const std::string failed_to_open_file("Failed to open file: ");
 
 }
@@ -37,15 +37,15 @@ const std::string failed_to_open_file("Failed to open file: ");
 namespace dogen {
 namespace formatters {
 
-licence licence_hydrator::hydrate(std::istream& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Reading stream: ";
-    licence r;
-    r.text(dogen::utility::filesystem::read_file_content(s));
+std::string licence_text_hydrator::hydrate(std::istream& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading stream.";
+    const auto r(dogen::utility::filesystem::read_file_content(s));
     BOOST_LOG_SEV(lg, debug) << "Read stream successfully.";
     return r;
 }
 
-licence licence_hydrator::hydrate(const boost::filesystem::path& p) const {
+std::string licence_text_hydrator::
+hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Reading file: " << gs;
 

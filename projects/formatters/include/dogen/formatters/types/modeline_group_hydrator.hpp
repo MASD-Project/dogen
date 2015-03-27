@@ -39,15 +39,6 @@ namespace formatters {
  * @brief Hydrates a modeline group in a stream.
  */
 class modeline_group_hydrator {
-public:
-    typedef modeline_group value_type;
-
-public:
-    modeline_group_hydrator() = default;
-    modeline_group_hydrator(const modeline_group_hydrator&) = default;
-    modeline_group_hydrator& operator=(const modeline_group_hydrator&) = delete;
-    modeline_group_hydrator(modeline_group_hydrator&&) = default;
-
 private:
     /**
      * @brief Given a field value representing an editor enumeration,
