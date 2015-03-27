@@ -57,6 +57,7 @@ public:
      * to the system.
      */
     bundle_factory(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object,
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
             >& opaque_settings_factories);
@@ -100,6 +101,7 @@ public:
 
 private:
     const dynamic::schema::repository& schema_repository_;
+    const dynamic::schema::object& root_object_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories_;

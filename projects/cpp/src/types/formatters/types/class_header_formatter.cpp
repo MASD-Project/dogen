@@ -170,11 +170,16 @@ class_header_formatter::format(const formattables::class_info& c) const {
     const auto fs(formatter_settings_for_formatter(c));
     validate(fs);
 
+    const auto ip(*fs.inclusion_path());
     dogen::cpp::formatters::boilerplate_formatter f;
-    // FIXME: optional general settings
-    const auto a(c.settings().general_settings()->annotation());
-    f.format_begin(fo, a, empty_includes, *fs.inclusion_path());
-    f.format_end(fo, a, *fs.inclusion_path());
+    const auto gs(c.settings().general_settings());
+    if (gs)
+        f.format_begin(fo, gs->annotation(), empty_includes, ip);
+
+    // do formatting.
+
+    if (gs)
+        f.format_end(fo, gs->annotation(), ip);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;

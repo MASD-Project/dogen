@@ -18,11 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
+#include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
+
 
 namespace {
 
@@ -31,12 +35,29 @@ const std::string id("cpp.workflow");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
+const std::string model_module_not_found("Model module not found for model: ");
+
 }
 
 namespace dogen {
 namespace cpp {
 
 workflow::~workflow() noexcept { }
+
+dynamic::schema::object
+workflow::obtain_root_object(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
+
+    const auto i(m.modules().find(m.name()));
+    if (i == m.modules().end()) {
+        const auto n(sml::string_converter::convert(m.name()));
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
+        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + n));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
+    return i->second.extensions();
+}
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::create_formattables_activty(const settings::workflow& sw,
@@ -76,7 +97,8 @@ generate(const config::knitting_options& /*o*/,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
-    settings::workflow w(rp);
+    const auto ro(obtain_root_object(m));
+    settings::workflow w(rp, ro);
     w.validate();
     const auto f(create_formattables_activty(w, m));
     const auto r(format_activty(f));

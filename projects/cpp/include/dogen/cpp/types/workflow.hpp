@@ -53,6 +53,12 @@ public:
 
 private:
     /**
+     * @brief Returns the root object.
+     */
+    dynamic::schema::object obtain_root_object(const sml::model& m) const;
+
+private:
+    /**
      * @brief Create the formattables.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >

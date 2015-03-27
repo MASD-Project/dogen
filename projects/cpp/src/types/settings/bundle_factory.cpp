@@ -32,6 +32,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.bundle_factory"));
 
+const std::string cpp_modeline_name("cpp");
+
 }
 
 namespace dogen {
@@ -40,10 +42,12 @@ namespace settings {
 
 bundle_factory::bundle_factory(
     const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object,
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories) :
     schema_repository_(rp),
+    root_object_(root_object),
     opaque_settings_factories_(opaque_settings_factories),
     formatters_repository_(create_formatters_repository(
             std::forward_list<boost::filesystem::path> {
@@ -57,8 +61,9 @@ dogen::formatters::repository bundle_factory::create_formatters_repository(
 
 dogen::formatters::general_settings bundle_factory::
 create_general_settings(const dynamic::schema::object& o) const {
-    dogen::formatters::general_settings_factory f(formatters_repository_);
-    return f.make(o);
+    using dogen::formatters::general_settings_factory;
+    general_settings_factory f(formatters_repository_, root_object_);
+    return f.make(cpp_modeline_name, o);
 }
 
 type_settings bundle_factory::

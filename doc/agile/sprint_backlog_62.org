@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-27 Fri 00:03]
+Clock summary at [2015-03-27 Fri 18:13]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *56:53* |       |      |
+| *Total time*                                                             | *60:22* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 56:53 |      |
+| Active                                                                   |         | 60:22 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -49,8 +49,8 @@ Clock summary at [2015-03-27 Fri 00:03]
 | COMPLETED Implement the formatter settings factory                       |         |       | 1:14 |
 | COMPLETED Move injection out of the SML merging workflow                 |         |       | 0:17 |
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
+| COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Implement the general settings workflow with root object         |         |       | 1:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -693,6 +693,28 @@ We started off by using the INI format, but then subsequently found it
 too inexpressive to be able to carry SML representations and started
 using JSON. However, modeline groups, etc are still in INI format.
 
+*** COMPLETED Implement the general settings workflow with root object :story:
+    CLOSED: [2015-03-27 Fri 18:13]
+    CLOCK: [2015-03-27 Fri 18:01]--[2015-03-27 Fri 18:13] =>  0:12
+    CLOCK: [2015-03-27 Fri 16:26]--[2015-03-27 Fri 18:01] =>  1:35
+    CLOCK: [2015-03-27 Fri 14:41]--[2015-03-27 Fri 16:23] =>  1:42
+    CLOCK: [2015-03-26 Thu 22:21]--[2015-03-27 Fri 00:02] =>  1:41
+
+We need to change the settings workflow to take in the root object;
+and we then need to pass it to the general settings workflow so that
+we first check to see if a field exists on the current object; if it
+doesn't we then either use the root object or the default value.
+
+Tasks:
+
+- create a hydration workflow that reads in all the data and pass it
+  in to the factory; we probably need something like a repository to
+  contain the data;
+- remove =make_only_if_overriden=;
+- convert modelines to JSON
+- pass in root object and "key" for the modeline group;
+- read generate_preamble from the dynamic object.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -778,25 +800,6 @@ In order to implement this feature we need to:
   means we can have simpler or more complex policies as time allows us
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
-
-*** STARTED Implement the general settings workflow with root object  :story:
-    CLOCK: [2015-03-27 Fri 14:41]--[2015-03-27 Fri 16:23] =>  1:42
-    CLOCK: [2015-03-26 Thu 22:21]--[2015-03-27 Fri 00:02] =>  1:41
-
-We need to change the settings workflow to take in the root object;
-and we then need to pass it to the general settings workflow so that
-we first check to see if a field exists on the current object; if it
-doesn't we then either use the root object or the default value.
-
-Tasks:
-
-- create a hydration workflow that reads in all the data and pass it
-  in to the factory; we probably need something like a repository to
-  contain the data;
-- remove =make_only_if_overriden=;
-- convert modelines to JSON
-- pass in root object and "key" for the modeline group;
-- read generate_preamble from the dynamic object.
 
 *** Create a "populate includes operation"                            :story:
 
