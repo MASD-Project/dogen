@@ -3372,8 +3372,7 @@ According to these rules we have:
 
 Indentation will be kept as simple as possible, with the expectation
 that there will be a further pass using clang format. Note that using
-clang to manage indentation will make things a lot slower. Note also
-that clang supports Java and may in future support C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
+clang to manage indentation will make things a lot slower.
 
 Now of course there is the question of where to put this code in such
 a way that it compiles. What one then needs is a formatter template:
@@ -3440,6 +3439,58 @@ format method. There are a few advantages to this approach:
 - new templates with use cases we havent foreseen could be done, but
   if they need more dynamic extensions the user would have to add
   types to the C++ model.
+
+Start of more recent notes on this
+
+- =@insert_code= is a really bad idea. First, we will generate two
+  versions of the same CPP file, forcing us to do all sorts of CMake
+  hacks to ignore one and keep the other. Second, we are no longer
+  WYSIWYG - the user doesn't really know what will make it into
+  compilation.
+- stitch should make no attempt to understand or augment the user
+  supplied code. If the user requires the generated code to be a
+  function or a class or anything else, it is the user's
+  responsibility to add that using the appropriate stitch
+  commands. Stitch literally just does two things: it either copies
+  across verbatim or copies across as a streaming line. This solves
+  the problem of passing arbitrary data into a template.
+- users are expected to create two CPP files for each formatter: the
+  formatter file and the stitch template, which gets generated into
+  something like =_stitch.cpp=, e.g. =class_header_formatter.cpp= and
+  =class_header_formatter_stitch.cpp=, generated from
+  =class_header_formatter.stitch=. =class_header_formatter.cpp=
+  includes =class_header_formatter_stitch.cpp= and calls a format
+  function. The generated code is next to the stitch template.
+- we may just need one or two control knobs such as the name of the
+  stream used by stitch (i.e. =s= in the examples above). The user is
+  responsible for defining a variable with that name to make the code
+  compilable. This could be done via =<#@ stream_name "abc #>"=, where
+  =stream_name= is known to stitch.
+- note that stitch knows nothing about CPP, HPP, etc files. It will
+  simply transform according to rules. Users will probably want to
+  manually create a =_stitch.hpp= file where they declare the function
+  (or class, etc); then include the =_stitch.hpp= in a =.cpp= of their
+  choosing and make use of it there, and finally use stitch to create
+  a =_stitch.cpp= file where the real work is done. However this is
+  not a concern of stitch. Users should supply the extension of the
+  transformed file (e.g. <=@ file_extension ".cpp" #>=).
+- stitch processes templates by lines. It either reads the verbatim
+  start command =<#+= in which case it expects nothing on that line
+  and then will continue in verbatim mode until =#>= (any lines in
+  between will be copied to the output verbatim); or the variable
+  definition =<#@ xxx "" #>= where xxx must be known to stitch (these
+  must be the first lines in a template); or its a normal line, with
+  potentially the inline verbatim command <#= which must be closed on
+  the same line with =#>=. These will be streamed out. The state
+  machine is really trivial.
+- the stitch binary should work in a "directory mode"; given a
+  directory, it will look up all files with the well known extension
+  =.stitch=; these it will transform. If the generated file is
+  different for a potentially existing file, it will overwrite
+  it. Each project will have its stitch targets just like dogen. Users
+  will manually trigger stitching as they do with dogen.
+
+End of more recent notes
 
 We could create a totally separate tool for this that would make use
 of existing infrastructure: =stitch=. The tool could be made up of a
