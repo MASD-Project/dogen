@@ -2002,6 +2002,18 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Indent generated c++ code using clang                             :story:
+
+We should generate un-indented c++ code and then rely on clang-format
+to do the indentation. We can allow users to supply their own
+configurations and supply those to clang. This can be done via the
+meta-data, or if there is a well defined file for clang, we could use
+it instead.
+
+Note that using clang to manage indentation will make things a lot
+slower. Note also that clang supports Java and may in future support
+C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
+
 *** Dia models are not always user models                             :story:
 
 At present there is an assumption that all models read in from dia are
