@@ -14,14 +14,14 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-27 Fri 23:16]
+Clock summary at [2015-03-28 Sat 20:08]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *62:06* |       |      |
+| *Total time*                                                             | *63:45* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 62:06 |      |
-| STARTED Sprint and product backlog grooming                              |         |       | 1:24 |
+| Active                                                                   |         | 63:45 |      |
+| STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path    |         |       | 0:25 |
@@ -51,10 +51,11 @@ Clock summary at [2015-03-27 Fri 23:16]
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate includes operation"                           |         |       | 1:44 |
+| STARTED Create a "populate includes operation"                           |         |       | 3:03 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-03-28 Sat 19:13]--[2015-03-28 Sat 19:33] =>  0:20
     CLOCK: [2015-03-25 Wed 15:06]--[2015-03-25 Wed 15:11] =>  0:05
     CLOCK: [2015-03-21 Sat 17:12]--[2015-03-21 Sat 17:26] =>  0:14
     CLOCK: [2015-03-07 Sat 19:16]--[2015-03-07 Sat 19:25] =>  0:09
@@ -803,6 +804,8 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-28 Sat 19:33]--[2015-03-28 Sat 20:08] =>  0:35
+    CLOCK: [2015-03-28 Sat 18:21]--[2015-03-28 Sat 19:05] =>  0:44
     CLOCK: [2015-03-27 Fri 22:38]--[2015-03-27 Fri 23:12] =>  0:34
     CLOCK: [2015-03-27 Fri 21:56]--[2015-03-27 Fri 22:37] =>  0:41
     CLOCK: [2015-03-27 Fri 18:13]--[2015-03-27 Fri 18:42] =>  0:29
@@ -822,7 +825,35 @@ Notes:
 - massive impedance mismatch between the boilerplate formatters and
   the inclusion dependency meta-data. We should probably just use a
   =std::list<std::string> to represent includes at the formatter
-  level, but we need to check.
+  level, but we need to check. Actually no one is yet using this code
+  so we can change it at will.
+- we need to simplify the story around include paths. There are two
+  use cases: the include path ready to be stamped as an include
+  statement and the header guards. The include path for the include
+  statement could come with delimiters (<>, "", etc). The header
+  guards however cannot. So due to this we have split the two things
+  so we can recombine them later. However, this just generates a whole
+  load of unnecessary complexity. To make matters worse, there is only
+  a need to compute header guards for dogen types since the user is
+  not expected to overload them (one can, possibly, configure its
+  generation but not supply an override). Perhaps the cleaner solution
+  is to have a header guards field and a include directive field, both
+  generated as part of the path expansion. Formatter settings extract
+  both.
+
+Tasks:
+
+- remove delimiter field, create a header guards field.
+- rename include path field to include directive; add delimiters to
+  all usages of this field.
+- populate header guards in path expander, copying code from the
+  formatter (upper-casing etc.).
+- update header guards in boilerplate to take in a string, and to do
+  nothing to the supplied header guard string (other than outputting
+  it).
+- when generating include directive field for dogen types, add the
+  appropriate delimiters.
+- change include formatter to use a list of strings.
 
 *** Consider creating field definition templates                      :story:
 
@@ -851,6 +882,14 @@ could be done as part of the repository workflow.
 - the non-common fields such as the include details cannot be
   templatised (because they don't apply to all formatters). We need to
   keep these in each JSON file.
+
+*** Consider creating internal and external fields                    :story:
+
+At present any dynamic field is automatically exposed to the outside
+world, allowing users to set them. This is not always ideal; for
+example, the file path should not be settable. Perhaps field
+definitions should have a "internal" or "external" property that stops
+users from being able to override certain fields.
 
 *** Consider using the same API as boost property tree in selector    :story:
 
