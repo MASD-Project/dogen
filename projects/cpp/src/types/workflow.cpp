@@ -27,7 +27,6 @@
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
-
 namespace {
 
 const std::string id("cpp.workflow");
@@ -80,16 +79,12 @@ std::string workflow::id() const {
 }
 
 std::vector<boost::filesystem::path> workflow::managed_directories() const {
+    // FIXME: needed for housekeeper, obtained from options.
     std::vector<boost::filesystem::path> r;
     return r;
 }
 
-void workflow::validate() const {
-    BOOST_LOG_SEV(lg, debug) << "Validating c++ backend workflow.";
-
-
-    BOOST_LOG_SEV(lg, debug) << "Finished validating c++ backend workflow.";
-}
+void workflow::validate() const { }
 
 std::forward_list<dogen::formatters::file> workflow::
 generate(const config::knitting_options& /*o*/,

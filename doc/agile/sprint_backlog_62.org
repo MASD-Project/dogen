@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-28 Sat 20:08]
+Clock summary at [2015-03-28 Sat 21:54]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *63:45* |       |      |
+| *Total time*                                                             | *65:26* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 63:45 |      |
+| Active                                                                   |         | 65:26 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -51,7 +51,8 @@ Clock summary at [2015-03-28 Sat 20:08]
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate includes operation"                           |         |       | 3:03 |
+| STARTED Create a "populate includes operation"                           |         |       | 3:13 |
+| STARTED Consider creating field definition templates                     |         |       | 1:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -804,6 +805,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-28 Sat 20:09]--[2015-03-28 Sat 20:19] =>  0:10
     CLOCK: [2015-03-28 Sat 19:33]--[2015-03-28 Sat 20:08] =>  0:35
     CLOCK: [2015-03-28 Sat 18:21]--[2015-03-28 Sat 19:05] =>  0:44
     CLOCK: [2015-03-27 Fri 22:38]--[2015-03-27 Fri 23:12] =>  0:34
@@ -855,7 +857,9 @@ Tasks:
   appropriate delimiters.
 - change include formatter to use a list of strings.
 
-*** Consider creating field definition templates                      :story:
+*** STARTED Consider creating field definition templates              :story:
+    CLOCK: [2015-03-28 Sat 21:17]--[2015-03-28 Sat 21:54] =>  0:37
+    CLOCK: [2015-03-28 Sat 20:20]--[2015-03-28 Sat 21:14] =>  0:54
 
 At present we need to copy and paste a lot of field definitions to
 instantiate it for each formatter. It would be great if we could
@@ -882,6 +886,38 @@ could be done as part of the repository workflow.
 - the non-common fields such as the include details cannot be
   templatised (because they don't apply to all formatters). We need to
   keep these in each JSON file.
+
+Rules:
+
+- all field definitions must have a field definition type.
+- no template can have qualified name.
+- global template: cannot have ownership hierarchy.
+- facet template: cannot have formatter name or facet name. If model
+  name is filled in, only applies to facets in that model.
+- formatter template: cannot have formatter name. If model name or
+  facet name is filled in, only applies to formatters in that model
+  and or facet.
+- instance: throws not a template.
+
+*** Consider renaming =ownership_hierarchy=                           :story:
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+*** Compute managed directories from knitting options                 :story:
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+*** Add =static_formatter_name=                                       :story:
+
+At present formatter names are defined as traits, we should use the
+"static" approach. Facet names can stay as traits as they are common
+across formatters.
 
 *** Consider creating internal and external fields                    :story:
 
