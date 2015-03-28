@@ -65,6 +65,9 @@ namespace formatters {
 namespace types {
 
 class inclusion_expander final : public dynamic::expansion::expander_interface {
+public:
+    ~inclusion_expander() noexcept { }
+
 private:
     struct formatter_properties {
         dynamic::schema::field_definition inclusion_dependency;
