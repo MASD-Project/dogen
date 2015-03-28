@@ -2002,6 +2002,11 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Rename =codgen= targets                                           :story:
+
+These are really the =knitting= or =knitter= targets because we are
+calling =knitter=.
+
 *** Indent generated c++ code using clang                             :story:
 
 We should generate un-indented c++ code and then rely on clang-format
