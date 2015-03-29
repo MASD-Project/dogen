@@ -18,16 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/hash/boolean_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_instance_hash.hpp"
-#include "dogen/dynamic/schema/hash/name_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
-#include "dogen/dynamic/schema/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/dynamic/schema/hash/repository_hash.hpp"
-#include "dogen/dynamic/schema/hash/scope_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_collection_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_types_hash.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATOR_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATOR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace dynamic {
+namespace schema {
+
+class instantiator;
+
+} } }
+
+#endif

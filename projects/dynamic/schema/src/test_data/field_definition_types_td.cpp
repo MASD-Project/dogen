@@ -18,16 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/hash/boolean_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_instance_hash.hpp"
-#include "dogen/dynamic/schema/hash/name_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
-#include "dogen/dynamic/schema/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/dynamic/schema/hash/repository_hash.hpp"
-#include "dogen/dynamic/schema/hash/scope_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_collection_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_types_hash.hpp"
+#include "dogen/dynamic/schema/test_data/field_definition_types_td.hpp"
+
+namespace dogen {
+namespace dynamic {
+namespace schema {
+
+field_definition_types_generator::field_definition_types_generator() : position_(0) { }
+void field_definition_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<field_definition_types>(position % 6);
+}
+
+field_definition_types_generator::result_type
+field_definition_types_generator::create(const unsigned int  position) {
+    result_type r;
+    field_definition_types_generator::populate(position, r);
+    return r;
+}
+
+field_definition_types_generator::result_type
+field_definition_types_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

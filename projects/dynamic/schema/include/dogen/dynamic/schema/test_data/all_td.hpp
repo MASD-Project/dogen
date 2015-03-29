@@ -20,6 +20,7 @@
  */
 #include "dogen/dynamic/schema/test_data/boolean_td.hpp"
 #include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
+#include "dogen/dynamic/schema/test_data/field_definition_types_td.hpp"
 #include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
 #include "dogen/dynamic/schema/test_data/name_td.hpp"
 #include "dogen/dynamic/schema/test_data/object_td.hpp"

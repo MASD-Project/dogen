@@ -20,6 +20,7 @@
  */
 #include "dogen/dynamic/schema/io/boolean_io.hpp"
 #include "dogen/dynamic/schema/io/field_definition_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_types_io.hpp"
 #include "dogen/dynamic/schema/io/field_instance_io.hpp"
 #include "dogen/dynamic/schema/io/name_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"

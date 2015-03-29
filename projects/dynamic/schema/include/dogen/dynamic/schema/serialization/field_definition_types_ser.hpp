@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/hash/boolean_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_definition_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/field_instance_hash.hpp"
-#include "dogen/dynamic/schema/hash/name_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
-#include "dogen/dynamic/schema/hash/ownership_hierarchy_hash.hpp"
-#include "dogen/dynamic/schema/hash/repository_hash.hpp"
-#include "dogen/dynamic/schema/hash/scope_types_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_collection_hash.hpp"
-#include "dogen/dynamic/schema/hash/text_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_hash.hpp"
-#include "dogen/dynamic/schema/hash/value_types_hash.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_SERIALIZATION_FIELD_DEFINITION_TYPES_SER_HPP
+#define DOGEN_DYNAMIC_SCHEMA_SERIALIZATION_FIELD_DEFINITION_TYPES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "dogen/dynamic/schema/types/field_definition_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::dynamic::schema::field_definition_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("field_definition_types", v);
+}
+
+#endif

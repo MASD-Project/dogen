@@ -20,6 +20,7 @@
  */
 #include "dogen/dynamic/schema/serialization/boolean_ser.hpp"
 #include "dogen/dynamic/schema/serialization/field_definition_ser.hpp"
+#include "dogen/dynamic/schema/serialization/field_definition_types_ser.hpp"
 #include "dogen/dynamic/schema/serialization/field_instance_ser.hpp"
 #include "dogen/dynamic/schema/serialization/name_ser.hpp"
 #include "dogen/dynamic/schema/serialization/object_ser.hpp"

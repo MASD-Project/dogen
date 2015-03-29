@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/io/repository_io.hpp"
-#include "dogen/dynamic/schema/types/workflow_error.hpp"
-#include "dogen/dynamic/schema/types/hydration_workflow.hpp"
+#include "dogen/dynamic/schema/types/building_error.hpp"
 #include "dogen/dynamic/schema/types/repository_factory.hpp"
-#include "dogen/dynamic/schema/types/repository_workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.schema.repository_workflow"));
+static logger lg(logger_factory("dynamic.schema.repository_factory"));
+
+const std::string duplicate_qualified_name(
+    "Qualified name defined more than once: ");
 
 }
 
@@ -38,25 +37,29 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
-std::list<field_definition> repository_workflow::hydrate_directories_activity(
-    const std::forward_list<boost::filesystem::path>& dirs) const {
-    hydration_workflow w;
-    return w.hydrate(dirs);
-}
+repository
+repository_factory::make(const std::list<field_definition>& fds) const {
+    repository r;
+    r.all_field_definitions(fds);
 
-repository repository_workflow::create_repository_activity(
-    const std::list<field_definition>& fds) const {
-    repository_factory f;
-    return f.make(fds);
-}
+    for (const auto& fd : fds) {
+        const auto n(fd.name().qualified());
+        const auto pair(std::make_pair(n, fd));
+        const auto result(r.field_definitions_by_name().insert(pair));
+        if (!result.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_qualified_name + n));
+        }
 
-repository repository_workflow::execute(
-    const std::forward_list<boost::filesystem::path>& dirs) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating repository.";
+        const auto& oh(fd.ownership_hierarchy());
+        if (!oh.facet_name().empty())
+            r.field_definitions_by_facet_name()[oh.facet_name()].push_back(fd);
 
-    const auto fds(hydrate_directories_activity(dirs));
-    const auto r(create_repository_activity(fds));
-    BOOST_LOG_SEV(lg, debug) << "Generated repository: " << r;
+        if (!oh.formatter_name().empty())
+            r.field_definitions_by_formatter_name()[oh.formatter_name()]
+                .push_back(fd);
+    }
+
     return r;
 }
 
