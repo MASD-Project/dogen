@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-29 Sun 20:53]
+Clock summary at [2015-03-29 Sun 22:20]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *69:54* |       |      |
+| *Total time*                                                             | *70:42* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 69:54 |      |
+| Active                                                                   |         | 70:42 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -52,7 +52,7 @@ Clock summary at [2015-03-29 Sun 20:53]
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Create a "populate includes operation"                           |         |       | 3:13 |
-| STARTED Consider creating field definition templates                     |         |       | 5:47 |
+| STARTED Consider creating field definition templates                     |         |       | 6:35 |
 | STARTED Compute managed directories from knitting options                |         |       | 0:12 |
 #+end:
 
@@ -859,7 +859,7 @@ Tasks:
 - change include formatter to use a list of strings.
 
 *** STARTED Consider creating field definition templates              :story:
-    CLOCK: [2015-03-29 Sun 21:32]
+    CLOCK: [2015-03-29 Sun 21:32]--[2015-03-29 Sun 22:20] =>  0:48
     CLOCK: [2015-03-29 Sun 20:40]--[2015-03-29 Sun 20:53] =>  0:13
     CLOCK: [2015-03-29 Sun 18:43]--[2015-03-29 Sun 19:02] =>  0:19
     CLOCK: [2015-03-29 Sun 17:03]--[2015-03-29 Sun 18:43] =>  1:40

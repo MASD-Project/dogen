@@ -44,50 +44,6 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_required",
-            "qualified" : "cpp.test_data.class_header_formatter.inclusion_required"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : true
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_path",
-            "qualified" : "cpp.test_data.class_header_formatter.inclusion_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_delimiter",
-            "qualified" : "cpp.test_data.class_header_formatter.inclusion_delimiter"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : "angle_brackets"
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.test_data.class_implementation_formatter.postfix"
         },
@@ -115,50 +71,6 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_required",
-            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_required"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.enumeration_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : true
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_path",
-            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.enumeration_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_delimiter",
-            "qualified" : "cpp.test_data.enumeration_header_formatter.inclusion_delimiter"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data",
-            "formatter_name" : "cpp.test_data.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : "angle_brackets"
     },
     {
         "name" : {
