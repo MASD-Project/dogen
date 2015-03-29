@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-29 Sun 22:20]
+Clock summary at [2015-03-29 Sun 22:25]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *70:42* |       |      |
+| *Total time*                                                             | *70:47* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 70:42 |      |
+| Active                                                                   |         | 70:47 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -50,9 +50,9 @@ Clock summary at [2015-03-29 Sun 22:20]
 | COMPLETED Move injection out of the SML merging workflow                 |         |       | 0:17 |
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
+| COMPLETED Consider creating field definition templates                   |         |       | 6:40 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Create a "populate includes operation"                           |         |       | 3:13 |
-| STARTED Consider creating field definition templates                     |         |       | 6:35 |
 | STARTED Compute managed directories from knitting options                |         |       | 0:12 |
 #+end:
 
@@ -719,6 +719,57 @@ Tasks:
 - pass in root object and "key" for the modeline group;
 - read generate_preamble from the dynamic object.
 
+*** COMPLETED Consider creating field definition templates            :story:
+    CLOSED: [2015-03-29 Sun 22:25]
+    CLOCK: [2015-03-29 Sun 22:20]--[2015-03-29 Sun 22:25] =>  0:05
+    CLOCK: [2015-03-29 Sun 21:32]--[2015-03-29 Sun 22:20] =>  0:48
+    CLOCK: [2015-03-29 Sun 20:40]--[2015-03-29 Sun 20:53] =>  0:13
+    CLOCK: [2015-03-29 Sun 18:43]--[2015-03-29 Sun 19:02] =>  0:19
+    CLOCK: [2015-03-29 Sun 17:03]--[2015-03-29 Sun 18:43] =>  1:40
+    CLOCK: [2015-03-29 Sun 15:37]--[2015-03-29 Sun 16:35] =>  0:58
+    CLOCK: [2015-03-29 Sun 14:51]--[2015-03-29 Sun 15:36] =>  0:45
+    CLOCK: [2015-03-29 Sun 14:18]--[2015-03-29 Sun 14:39] =>  0:21
+    CLOCK: [2015-03-28 Sat 21:17]--[2015-03-28 Sat 21:54] =>  0:37
+    CLOCK: [2015-03-28 Sat 20:20]--[2015-03-28 Sat 21:14] =>  0:54
+
+At present we need to copy and paste a lot of field definitions to
+instantiate it for each formatter. It would be great if we could
+somehow mark a field definition as a facet or formatter template and
+then have it automatically instantiated for each facet/formatter. This
+could be done as part of the repository workflow.
+
+- augment field definition with template information; perhaps
+  =template_types= with =formatter_template=, =facet_template= and
+  =not_a_template=. If a template, then cannot have ownership
+  hierarchy details.
+- JSON hydrator returns the field definitions as templates.
+- repository workflow locates templates and for every template expands
+  it against each formatter/facet, saving the results to the
+  repository.
+- we need some kind of "model registration" for this so that we know
+  of all models, facets and formatters in repository workflow; we
+  cannot access the formatter registry. This could be done by
+  supplying a list of =ownership_hierarchy= produced by each
+  model. This is done by looking at the registered formatters. We
+  don't need static registration, just a way of the backend to
+  generate the list and then knit can supply it to the repository
+  formatter.
+- the non-common fields such as the include details cannot be
+  templatised (because they don't apply to all formatters). We need to
+  keep these in each JSON file.
+
+Rules:
+
+- all field definitions must have a field definition type.
+- no template can have qualified name.
+- global template: cannot have ownership hierarchy.
+- facet template: cannot have formatter name or facet name. If model
+  name is filled in, only applies to facets in that model.
+- formatter template: cannot have formatter name. If model name or
+  facet name is filled in, only applies to formatters in that model
+  and or facet.
+- instance: throws not a template.
+
 *** CANCELLED Add an "enabled" expander                               :story:
     CLOSED: [2015-03-19 Thu 15:20]
 
@@ -858,55 +909,6 @@ Tasks:
   appropriate delimiters.
 - change include formatter to use a list of strings.
 
-*** STARTED Consider creating field definition templates              :story:
-    CLOCK: [2015-03-29 Sun 21:32]--[2015-03-29 Sun 22:20] =>  0:48
-    CLOCK: [2015-03-29 Sun 20:40]--[2015-03-29 Sun 20:53] =>  0:13
-    CLOCK: [2015-03-29 Sun 18:43]--[2015-03-29 Sun 19:02] =>  0:19
-    CLOCK: [2015-03-29 Sun 17:03]--[2015-03-29 Sun 18:43] =>  1:40
-    CLOCK: [2015-03-29 Sun 15:37]--[2015-03-29 Sun 16:35] =>  0:58
-    CLOCK: [2015-03-29 Sun 14:51]--[2015-03-29 Sun 15:36] =>  0:45
-    CLOCK: [2015-03-29 Sun 14:18]--[2015-03-29 Sun 14:39] =>  0:21
-    CLOCK: [2015-03-28 Sat 21:17]--[2015-03-28 Sat 21:54] =>  0:37
-    CLOCK: [2015-03-28 Sat 20:20]--[2015-03-28 Sat 21:14] =>  0:54
-
-At present we need to copy and paste a lot of field definitions to
-instantiate it for each formatter. It would be great if we could
-somehow mark a field definition as a facet or formatter template and
-then have it automatically instantiated for each facet/formatter. This
-could be done as part of the repository workflow.
-
-- augment field definition with template information; perhaps
-  =template_types= with =formatter_template=, =facet_template= and
-  =not_a_template=. If a template, then cannot have ownership
-  hierarchy details.
-- JSON hydrator returns the field definitions as templates.
-- repository workflow locates templates and for every template expands
-  it against each formatter/facet, saving the results to the
-  repository.
-- we need some kind of "model registration" for this so that we know
-  of all models, facets and formatters in repository workflow; we
-  cannot access the formatter registry. This could be done by
-  supplying a list of =ownership_hierarchy= produced by each
-  model. This is done by looking at the registered formatters. We
-  don't need static registration, just a way of the backend to
-  generate the list and then knit can supply it to the repository
-  formatter.
-- the non-common fields such as the include details cannot be
-  templatised (because they don't apply to all formatters). We need to
-  keep these in each JSON file.
-
-Rules:
-
-- all field definitions must have a field definition type.
-- no template can have qualified name.
-- global template: cannot have ownership hierarchy.
-- facet template: cannot have formatter name or facet name. If model
-  name is filled in, only applies to facets in that model.
-- formatter template: cannot have formatter name. If model name or
-  facet name is filled in, only applies to formatters in that model
-  and or facet.
-- instance: throws not a template.
-
 *** STARTED Compute managed directories from knitting options         :story:
     CLOCK: [2015-03-29 Sun 14:39]--[2015-03-29 Sun 14:51] =>  0:12
 
@@ -939,6 +941,13 @@ default values.
 
 In addition, we have the case where at the facet level we may have a
 default value for a field but not at the formatter level - =postfix=.
+
+*** Consider supporting multiple formatter groups                     :story:
+
+In some cases it would be nice for a field to belong to multiple
+groups. For example =integrated_facet= is only applicable to class
+header formatters. We could implement this by making the formatter
+group a collection and having formatters belong to multiple groups.
 
 *** Consider renaming =ownership_hierarchy=                           :story:
 

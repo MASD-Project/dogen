@@ -198,18 +198,5 @@
         "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
-    },
-    {
-        "name" : {
-            "simple" : "inclusion_required",
-            "qualified" : "cpp.type.inclusion_required"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : false
     }
 ]
