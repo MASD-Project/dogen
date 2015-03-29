@@ -20,6 +20,8 @@
  */
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
+#include "dogen/cpp/types/formatters/io/initializer.hpp"
+#include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 
 namespace dogen {
@@ -29,6 +31,8 @@ namespace formatters {
 void initializer::initialize(registrar& r) {
     types::initializer::initialize(r);
     odb::initializer::initialize(r);
+    io::initializer::initialize(r);
+    serialization::initializer::initialize(r);
 }
 
 } } }

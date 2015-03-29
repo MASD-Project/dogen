@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_ENRICHER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_ENRICHER_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include <memory>
+#include "dogen/cpp/types/formatters/io/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/io/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace serialization {
+namespace io {
 
-class enricher;
+void initialise_class_header_formatter(registrar& rg) {
+    const auto f(std::make_shared<class_header_formatter>());
+    rg.register_formatter(f);
+}
+
+void initializer::initialize(registrar& rg) {
+    initialise_class_header_formatter(rg);
+}
 
 } } } }
-
-#endif

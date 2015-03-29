@@ -70,7 +70,6 @@ public:
 
     file_types file_type() const override;
 
-public:
     dogen::formatters::file
     format(const formattables::class_info& c) const override;
 };
