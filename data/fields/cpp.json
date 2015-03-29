@@ -25,6 +25,17 @@
     },
     {
         "name" : {
+            "simple" : "file_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp"
+        },
+        "value_type" : "text",
+        "definition_type" : "formatter_template",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
             "simple" : "split_project",
             "qualified" : "cpp.split_project"
         },

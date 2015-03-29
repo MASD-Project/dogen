@@ -57,20 +57,6 @@
     },
     {
         "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.class_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "inclusion_required",
             "qualified" : "cpp.types.class_header_formatter.inclusion_required"
         },
@@ -144,20 +130,6 @@
     },
     {
         "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.class_implementation_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_implementation_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.enumeration_header_formatter.postfix"
         },
@@ -170,20 +142,6 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.enumeration_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.enumeration_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
     },
     {
         "name" : {
@@ -246,20 +204,6 @@
     },
     {
         "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.enumeration_implementation_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types.enumeration",
-            "formatter_name" : "cpp.types.enumeration_implementation_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.exception_header_formatter.postfix"
         },
@@ -272,20 +216,6 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.exception_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.exception_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
     },
     {
         "name" : {
@@ -348,20 +278,6 @@
     },
     {
         "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.namespace_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.namespace_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "inclusion_required",
             "qualified" : "cpp.types.namespace_header_formatter.inclusion_required"
         },
@@ -418,20 +334,6 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.types.visitor_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.visitor_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
     },
     {
         "name" : {

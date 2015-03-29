@@ -859,6 +859,7 @@ Tasks:
 - change include formatter to use a list of strings.
 
 *** STARTED Consider creating field definition templates              :story:
+    CLOCK: [2015-03-29 Sun 21:32]
     CLOCK: [2015-03-29 Sun 20:40]--[2015-03-29 Sun 20:53] =>  0:13
     CLOCK: [2015-03-29 Sun 18:43]--[2015-03-29 Sun 19:02] =>  0:19
     CLOCK: [2015-03-29 Sun 17:03]--[2015-03-29 Sun 18:43] =>  1:40
@@ -925,6 +926,19 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
+
+*** Field definition templates do not support facet specific defaults :story:
+
+At present we cannot use field definition templates for fields that
+require facet specific default values such as =directory=. We could
+either support something like a "variable", e.g. "find facet simple
+name" or we could do overrides - the field definition is defined as a
+template but then overriden at a facet level. Or we could handle
+default values in a totally separate way - maybe a file with just the
+default values.
+
+In addition, we have the case where at the facet level we may have a
+default value for a field but not at the formatter level - =postfix=.
 
 *** Consider renaming =ownership_hierarchy=                           :story:
 
@@ -1131,5 +1145,11 @@ following errors:
 
 The exception provides no context to the file being parsed. We need to
 catch the exception and augment it with the file name.
+
+*** Add a validate JSON target                                        :story:
+
+It would be nice to be able to validate all of the JSON we have in the
+library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
+to validate.
 
 ** Deprecated

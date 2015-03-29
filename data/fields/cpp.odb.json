@@ -44,20 +44,6 @@
     },
     {
         "name" : {
-            "simple" : "file_path",
-            "qualified" : "cpp.odb.class_header_formatter.file_path"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.odb",
-            "formatter_name" : "cpp.odb.class_header_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "odb_pragma",
             "qualified" : "odb_pragma"
         },
