@@ -1,20 +1,6 @@
 [
     {
         "name" : {
-            "simple" : "supported",
-            "qualified" : "cpp.hash.supported"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.hash"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "directory",
             "qualified" : "cpp.hash.directory"
         },

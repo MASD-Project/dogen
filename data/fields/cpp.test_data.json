@@ -1,20 +1,6 @@
 [
     {
         "name" : {
-            "simple" : "supported",
-            "qualified" : "cpp.test_data.supported"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.test_data"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "directory",
             "qualified" : "cpp.test_data.directory"
         },

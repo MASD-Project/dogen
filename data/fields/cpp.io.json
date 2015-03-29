@@ -1,20 +1,6 @@
 [
     {
         "name" : {
-            "simple" : "supported",
-            "qualified" : "cpp.io.supported"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.io"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "directory",
             "qualified" : "cpp.io.directory"
         },
