@@ -44,6 +44,7 @@
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
+#include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -172,11 +173,23 @@ create_debug_file_path(const config::archive_types at,
     return r;
 }
 
-dynamic::schema::repository workflow::setup_schema_repository_activity() const {
+
+std::forward_list<dynamic::schema::ownership_hierarchy> workflow::
+obtain_ownership_hierarchy() const {
+    const auto rg(backend::workflow::registrar());
+    std::forward_list<dynamic::schema::ownership_hierarchy> r;
+    for (const auto b : rg.backends())
+        r.splice_after(r.before_begin(), b->ownership_hierarchy());
+
+    return r;
+}
+
+dynamic::schema::repository workflow::setup_schema_repository_activity(
+    const std::forward_list<dynamic::schema::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / fields_dir);
     dynamic::schema::repository_workflow w;
-    return w.execute(std::forward_list<boost::filesystem::path> { dir });
+    return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
 std::list<frontend::input_descriptor>
@@ -291,7 +304,8 @@ void workflow::execute() const {
 
     try {
         const auto d(obtain_input_descriptors_activity());
-        const auto rp(setup_schema_repository_activity());
+        const auto oh(obtain_ownership_hierarchy());
+        const auto rp(setup_schema_repository_activity(oh));
         const auto pm(obtain_partial_sml_models_activity(rp, d));
         const auto m(merge_models_activity(pm));
         const auto tp(obtain_target_path_activity(d));

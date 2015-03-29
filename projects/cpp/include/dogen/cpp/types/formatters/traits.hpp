@@ -36,6 +36,11 @@ struct traits {
      * @brief Name of this model.
      */
     static std::string model_name();
+
+    /**
+     * @brief Name of the header formatter group.
+     */
+    static std::string header_formatter_group_name();
 };
 
 } } }

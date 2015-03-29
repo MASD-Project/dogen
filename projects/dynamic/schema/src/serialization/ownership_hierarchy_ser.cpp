@@ -41,6 +41,7 @@ void save(Archive& ar,
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("facet_name", v.facet_name_);
     ar << make_nvp("formatter_name", v.formatter_name_);
+    ar << make_nvp("formatter_group_name", v.formatter_group_name_);
 }
 
 template<typename Archive>
@@ -50,6 +51,7 @@ void load(Archive& ar,
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("facet_name", v.facet_name_);
     ar >> make_nvp("formatter_name", v.formatter_name_);
+    ar >> make_nvp("formatter_group_name", v.formatter_group_name_);
 }
 
 } }

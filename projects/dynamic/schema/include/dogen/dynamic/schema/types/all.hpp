@@ -28,6 +28,7 @@
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/hydration_error.hpp"
 #include "dogen/dynamic/schema/types/hydration_workflow.hpp"
+#include "dogen/dynamic/schema/types/instantiation_error.hpp"
 #include "dogen/dynamic/schema/types/instantiator.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
 #include "dogen/dynamic/schema/types/name.hpp"

@@ -30,7 +30,8 @@ field_definition mock_field_definition_factory::create_comment() const {
     r.name().simple("comment");
     r.name().qualified("dia.comment");
     r.ownership_hierarchy().model_name("dia_to_sml");
-    r.type(value_types::boolean);
+    r.value_type(value_types::boolean);
+    r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
 }
@@ -41,7 +42,8 @@ create_identity_attribute() const {
     r.name().simple("identity_attribute");
     r.name().qualified("dia.identity_attribute");
     r.ownership_hierarchy().model_name("dia_to_sml");
-    r.type(dogen::dynamic::schema::value_types::boolean);
+    r.value_type(dogen::dynamic::schema::value_types::boolean);
+    r.definition_type(field_definition_types::instance);
     r.scope(dogen::dynamic::schema::scope_types::property);
     return r;
 }
@@ -59,7 +61,8 @@ make_field_definition(const std::string n, value_types vt) const {
     dogen::dynamic::schema::field_definition r;
     r.name().simple(n);
     r.name().qualified(n);
-    r.type(vt);
+    r.value_type(vt);
+    r.definition_type(field_definition_types::instance);
     r.scope(dogen::dynamic::schema::scope_types::any);
     return r;
 }

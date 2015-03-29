@@ -39,7 +39,8 @@ std::ostream& operator<<(std::ostream& s, const ownership_hierarchy& v) {
       << "\"__type__\": " << "\"dogen::dynamic::schema::ownership_hierarchy\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
-      << "\"formatter_name\": " << "\"" << tidy_up_string(v.formatter_name()) << "\""
+      << "\"formatter_name\": " << "\"" << tidy_up_string(v.formatter_name()) << "\"" << ", "
+      << "\"formatter_group_name\": " << "\"" << tidy_up_string(v.formatter_group_name()) << "\""
       << " }";
     return(s);
 }

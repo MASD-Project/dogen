@@ -67,7 +67,7 @@ field_instance field_instance_factory::make(const field_definition& fd,
     const std::list<std::string>& v) const {
     field_instance r;
 
-    switch (fd.type()) {
+    switch (fd.value_type()) {
     case value_types::text:
         ensure_at_most_one_element(v);
         r.value(value_factory_.make_text(v.front()));
@@ -83,9 +83,9 @@ field_instance field_instance_factory::make(const field_definition& fd,
         break;
 
     default:
-        BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.type();
+        BOOST_LOG_SEV(lg, error) << value_type_not_supported << fd.value_type();
         BOOST_THROW_EXCEPTION(building_error(value_type_not_supported +
-                boost::lexical_cast<std::string>(fd.type())));
+                boost::lexical_cast<std::string>(fd.value_type())));
     }
     return r;
 }

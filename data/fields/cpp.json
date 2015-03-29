@@ -7,7 +7,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -19,7 +19,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : false
     },
@@ -31,7 +31,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "src"
     },
@@ -43,7 +43,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "include"
     },
@@ -55,7 +55,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "hpp"
     },
@@ -67,7 +67,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "cpp"
     },
@@ -79,7 +79,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -91,7 +91,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -103,7 +103,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "entity",
         "default_value" : "other"
     },
@@ -115,7 +115,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "entity",
         "default_value" : false
     },
@@ -127,7 +127,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "entity",
         "default_value" : false
     },
@@ -139,7 +139,7 @@
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "entity",
         "default_value" : false
     }

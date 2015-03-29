@@ -7,7 +7,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "text_collection",
+        "value_type" : "text_collection",
         "scope" : "any"
     },
     {
@@ -18,7 +18,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "any"
     },
     {
@@ -29,7 +29,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "any"
     },
     {
@@ -40,7 +40,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "any"
     },
     {
@@ -51,7 +51,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "any"
     },
     {
@@ -62,7 +62,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "any"
     },
     {
@@ -73,7 +73,7 @@
         "ownership_hierarchy" : {
             "model_name" : "formatters"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "any"
     }
 ]

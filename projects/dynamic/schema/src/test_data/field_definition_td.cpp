@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
+#include "dogen/dynamic/schema/test_data/field_definition_types_td.hpp"
 #include "dogen/dynamic/schema/test_data/name_td.hpp"
 #include "dogen/dynamic/schema/test_data/ownership_hierarchy_td.hpp"
 #include "dogen/dynamic/schema/test_data/scope_types_td.hpp"
@@ -59,6 +60,11 @@ create_boost_shared_ptr_dogen_dynamic_schema_value(unsigned int position) {
     return r;
 }
 
+dogen::dynamic::schema::field_definition_types
+create_dogen_dynamic_schema_field_definition_types(const unsigned int position) {
+    return dogen::dynamic::schema::field_definition_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -70,10 +76,11 @@ field_definition_generator::field_definition_generator() : position_(0) { }
 void field_definition_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_dynamic_schema_name(position + 0));
-    v.type(create_dogen_dynamic_schema_value_types(position + 1));
+    v.value_type(create_dogen_dynamic_schema_value_types(position + 1));
     v.scope(create_dogen_dynamic_schema_scope_types(position + 2));
     v.ownership_hierarchy(create_dogen_dynamic_schema_ownership_hierarchy(position + 3));
     v.default_value(create_boost_shared_ptr_dogen_dynamic_schema_value(position + 4));
+    v.definition_type(create_dogen_dynamic_schema_field_definition_types(position + 5));
 }
 
 field_definition_generator::result_type

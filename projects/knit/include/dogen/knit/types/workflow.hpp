@@ -34,6 +34,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
@@ -128,10 +129,20 @@ private:
         const boost::filesystem::path& original_path) const;
 
 private:
+
+    /**
+     * @brief Obtains the complete ownership hierarchy across all
+     * backends.
+     */
+    std::forward_list<dynamic::schema::ownership_hierarchy>
+    obtain_ownership_hierarchy() const;
+
     /**
      * @brief Sets up the dynamic schema repository.
      */
-    dynamic::schema::repository setup_schema_repository_activity() const;
+    dynamic::schema::repository setup_schema_repository_activity(
+        const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
+        const;
 
     /**
      * @brief Create a list of all input descriptors.

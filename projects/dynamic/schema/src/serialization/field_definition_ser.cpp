@@ -29,6 +29,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 #include "dogen/dynamic/schema/serialization/field_definition_ser.hpp"
+#include "dogen/dynamic/schema/serialization/field_definition_types_ser.hpp"
 #include "dogen/dynamic/schema/serialization/name_ser.hpp"
 #include "dogen/dynamic/schema/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/schema/serialization/scope_types_ser.hpp"
@@ -44,10 +45,11 @@ void save(Archive& ar,
     const dogen::dynamic::schema::field_definition& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("type", v.type_);
+    ar << make_nvp("value_type", v.value_type_);
     ar << make_nvp("scope", v.scope_);
     ar << make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
     ar << make_nvp("default_value", v.default_value_);
+    ar << make_nvp("definition_type", v.definition_type_);
 }
 
 template<typename Archive>
@@ -55,10 +57,11 @@ void load(Archive& ar,
     dogen::dynamic::schema::field_definition& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("type", v.type_);
+    ar >> make_nvp("value_type", v.value_type_);
     ar >> make_nvp("scope", v.scope_);
     ar >> make_nvp("ownership_hierarchy", v.ownership_hierarchy_);
     ar >> make_nvp("default_value", v.default_value_);
+    ar >> make_nvp("definition_type", v.definition_type_);
 }
 
 } }

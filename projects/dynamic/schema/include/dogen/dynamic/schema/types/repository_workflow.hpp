@@ -29,6 +29,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
 namespace dogen {
@@ -47,6 +48,14 @@ private:
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
+     * @brief Instantiates all templates into field definition
+     * instances.
+     */
+    std::list<field_definition> instantiate_templates_activity(
+        const std::forward_list<ownership_hierarchy>& oh,
+        const std::list<field_definition>& fds) const;
+
+    /**
      * @brief Index fields into the repository.
      */
     repository create_repository_activity(
@@ -58,6 +67,7 @@ public:
      * supplied directories.
      */
     repository execute(
+        const std::forward_list<ownership_hierarchy>& oh,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 };
 

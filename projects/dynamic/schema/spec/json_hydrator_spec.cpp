@@ -46,7 +46,7 @@ const std::string trivial_field_definition(R"([
         "ownership_hierarchy" : {
             "model_name" : "a model name"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "not_applicable"
     }
 ])");
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(trivial_field_definition_hydrates_into_expected_collection)
     BOOST_CHECK(fd.scope() == st);
 
     const auto vt(dogen::dynamic::schema::value_types::boolean);
-    BOOST_CHECK(fd.type() == vt);
+    BOOST_CHECK(fd.value_type() == vt);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

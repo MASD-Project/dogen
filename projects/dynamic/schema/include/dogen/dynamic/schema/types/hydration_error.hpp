@@ -32,6 +32,9 @@ namespace dogen {
 namespace dynamic {
 namespace schema {
 
+/**
+ * @brief An error occurred whilst trying to hydrate field definitions.
+ */
 class hydration_error : public virtual std::exception, public virtual boost::exception {
 public:
     hydration_error() = default;

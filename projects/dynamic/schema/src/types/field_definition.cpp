@@ -35,36 +35,41 @@ namespace dynamic {
 namespace schema {
 
 field_definition::field_definition()
-    : type_(static_cast<dogen::dynamic::schema::value_types>(0)),
-      scope_(static_cast<dogen::dynamic::schema::scope_types>(0)) { }
+    : value_type_(static_cast<dogen::dynamic::schema::value_types>(0)),
+      scope_(static_cast<dogen::dynamic::schema::scope_types>(0)),
+      definition_type_(static_cast<dogen::dynamic::schema::field_definition_types>(0)) { }
 
 field_definition::field_definition(
     const dogen::dynamic::schema::name& name,
-    const dogen::dynamic::schema::value_types& type,
+    const dogen::dynamic::schema::value_types& value_type,
     const dogen::dynamic::schema::scope_types& scope,
     const dogen::dynamic::schema::ownership_hierarchy& ownership_hierarchy,
-    const boost::shared_ptr<dogen::dynamic::schema::value>& default_value)
+    const boost::shared_ptr<dogen::dynamic::schema::value>& default_value,
+    const dogen::dynamic::schema::field_definition_types& definition_type)
     : name_(name),
-      type_(type),
+      value_type_(value_type),
       scope_(scope),
       ownership_hierarchy_(ownership_hierarchy),
-      default_value_(default_value) { }
+      default_value_(default_value),
+      definition_type_(definition_type) { }
 
 void field_definition::swap(field_definition& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(type_, other.type_);
+    swap(value_type_, other.value_type_);
     swap(scope_, other.scope_);
     swap(ownership_hierarchy_, other.ownership_hierarchy_);
     swap(default_value_, other.default_value_);
+    swap(definition_type_, other.definition_type_);
 }
 
 bool field_definition::operator==(const field_definition& rhs) const {
     return name_ == rhs.name_ &&
-        type_ == rhs.type_ &&
+        value_type_ == rhs.value_type_ &&
         scope_ == rhs.scope_ &&
         ownership_hierarchy_ == rhs.ownership_hierarchy_ &&
-        default_value_ == rhs.default_value_;
+        default_value_ == rhs.default_value_ &&
+        definition_type_ == rhs.definition_type_;
 }
 
 field_definition& field_definition::operator=(field_definition other) {
@@ -89,12 +94,12 @@ void field_definition::name(const dogen::dynamic::schema::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::dynamic::schema::value_types field_definition::type() const {
-    return type_;
+dogen::dynamic::schema::value_types field_definition::value_type() const {
+    return value_type_;
 }
 
-void field_definition::type(const dogen::dynamic::schema::value_types& v) {
-    type_ = v;
+void field_definition::value_type(const dogen::dynamic::schema::value_types& v) {
+    value_type_ = v;
 }
 
 dogen::dynamic::schema::scope_types field_definition::scope() const {
@@ -135,6 +140,14 @@ void field_definition::default_value(const boost::shared_ptr<dogen::dynamic::sch
 
 void field_definition::default_value(const boost::shared_ptr<dogen::dynamic::schema::value>&& v) {
     default_value_ = std::move(v);
+}
+
+dogen::dynamic::schema::field_definition_types field_definition::definition_type() const {
+    return definition_type_;
+}
+
+void field_definition::definition_type(const dogen::dynamic::schema::field_definition_types& v) {
+    definition_type_ = v;
 }
 
 } } }

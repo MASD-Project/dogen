@@ -64,8 +64,8 @@ public:
      * @brief Complete ownership hierarchy for this backend, listing
      * all available models, facet and formatters.
      */
-    std::forward_list<dynamic::schema::ownership_hierarchy>
-    ownership_hierarchy() const;
+    virtual std::forward_list<dynamic::schema::ownership_hierarchy>
+    ownership_hierarchy() const = 0;
 
     /**
      * @brief Generates the source code for the backend.

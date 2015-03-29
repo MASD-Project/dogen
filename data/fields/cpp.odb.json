@@ -8,7 +8,7 @@
             "model_name" : "cpp",
             "facet_name" : "cpp.odb"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -21,7 +21,7 @@
             "model_name" : "cpp",
             "facet_name" : "cpp.odb"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "entity",
         "default_value" : true
     },
@@ -34,7 +34,7 @@
             "model_name" : "cpp",
             "facet_name" : "cpp.odb"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "odb"
     },
@@ -47,7 +47,7 @@
             "model_name" : "cpp",
             "facet_name" : "cpp.odb"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : "odb"
     },
@@ -61,7 +61,7 @@
             "facet_name" : "cpp.odb",
             "formatter_name" : "cpp.odb.class_header_formatter"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -75,7 +75,7 @@
             "facet_name" : "cpp.odb",
             "formatter_name" : "cpp.odb.class_header_formatter"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -89,7 +89,7 @@
             "facet_name" : "cpp.odb",
             "formatter_name" : "cpp.odb.class_header_formatter"
         },
-        "type" : "text",
+        "value_type" : "text",
         "scope" : "entity"
     },
     {
@@ -101,7 +101,7 @@
             "model_name" : "cpp",
             "facet_name" : "cpp.odb"
         },
-        "type" : "text_collection",
+        "value_type" : "text_collection",
         "scope" : "any"
     }
 ]

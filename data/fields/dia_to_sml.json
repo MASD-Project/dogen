@@ -7,7 +7,7 @@
         "ownership_hierarchy" : {
             "model_name" : "dia_to_sml"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "not_applicable"
     },
     {
@@ -18,7 +18,7 @@
         "ownership_hierarchy" : {
             "model_name" : "dia_to_sml"
         },
-        "type" : "boolean",
+        "value_type" : "boolean",
         "scope" : "property"
     }
 ]

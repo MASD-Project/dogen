@@ -52,7 +52,7 @@ const std::string ownership_hierarchy_key("ownership_hierarchy");
 const std::string ownership_hierarchy_model_name_key("model_name");
 const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
-const std::string type_key("type");
+const std::string value_type_key("value_type");
 const std::string scope_key("scope");
 const std::string default_value_key("default_value");
 
@@ -167,12 +167,13 @@ std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
         }
         fd.ownership_hierarchy(read_ownership_hierarchy(j->second));
 
-        fd.type(to_value_type(i->second.get<std::string>(type_key)));
+        fd.value_type(to_value_type(
+                i->second.get<std::string>(value_type_key)));
         fd.scope(to_scope_type(i->second.get<std::string>(scope_key)));
 
         const auto dv(i->second.get_optional<std::string>(default_value_key));
         if (dv)
-            fd.default_value(create_value(fd.type(), *dv));
+            fd.default_value(create_value(fd.value_type(), *dv));
 
         r.push_front(fd);
     }

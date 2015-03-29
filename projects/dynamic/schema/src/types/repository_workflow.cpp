@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/io/repository_io.hpp"
+#include "dogen/dynamic/schema/types/instantiator.hpp"
 #include "dogen/dynamic/schema/types/workflow_error.hpp"
 #include "dogen/dynamic/schema/types/hydration_workflow.hpp"
 #include "dogen/dynamic/schema/types/repository_factory.hpp"
@@ -44,6 +45,27 @@ std::list<field_definition> repository_workflow::hydrate_directories_activity(
     return w.hydrate(dirs);
 }
 
+std::list<field_definition> repository_workflow::instantiate_templates_activity(
+    const std::forward_list<ownership_hierarchy>& oh,
+    const std::list<field_definition>& fds) const {
+    std::list<field_definition> r;
+
+    const instantiator ins(oh);
+    unsigned int counter(0);
+    for (const auto fd : fds) {
+        if (!ins.is_instantiable(fd)) {
+            r.push_back(fd);
+            continue;
+        }
+
+        r.splice(r.end(), ins.instantiate(fd));
+        ++counter;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Number of templates instantiated: " << counter;
+    return r;
+}
+
 repository repository_workflow::create_repository_activity(
     const std::list<field_definition>& fds) const {
     repository_factory f;
@@ -51,11 +73,14 @@ repository repository_workflow::create_repository_activity(
 }
 
 repository repository_workflow::execute(
+    const std::forward_list<ownership_hierarchy>& oh,
     const std::forward_list<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Generating repository.";
 
-    const auto fds(hydrate_directories_activity(dirs));
-    const auto r(create_repository_activity(fds));
+    const auto original(hydrate_directories_activity(dirs));
+    const auto instantiated(instantiate_templates_activity(oh, original));
+    const auto r(create_repository_activity(instantiated));
+
     BOOST_LOG_SEV(lg, debug) << "Generated repository: " << r;
     return r;
 }

@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/schema/serialization/field_definition_fwd_ser.hpp"
+#include "dogen/dynamic/schema/types/field_definition_types.hpp"
 #include "dogen/dynamic/schema/types/name.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"
@@ -53,10 +54,11 @@ public:
 public:
     field_definition(
         const dogen::dynamic::schema::name& name,
-        const dogen::dynamic::schema::value_types& type,
+        const dogen::dynamic::schema::value_types& value_type,
         const dogen::dynamic::schema::scope_types& scope,
         const dogen::dynamic::schema::ownership_hierarchy& ownership_hierarchy,
-        const boost::shared_ptr<dogen::dynamic::schema::value>& default_value);
+        const boost::shared_ptr<dogen::dynamic::schema::value>& default_value,
+        const dogen::dynamic::schema::field_definition_types& definition_type);
 
 private:
     template<typename Archive>
@@ -80,8 +82,8 @@ public:
      * @brief Type of the field.
      */
     /**@{*/
-    dogen::dynamic::schema::value_types type() const;
-    void type(const dogen::dynamic::schema::value_types& v);
+    dogen::dynamic::schema::value_types value_type() const;
+    void value_type(const dogen::dynamic::schema::value_types& v);
     /**@}*/
 
     /**
@@ -112,6 +114,14 @@ public:
     void default_value(const boost::shared_ptr<dogen::dynamic::schema::value>&& v);
     /**@}*/
 
+    /**
+     * @brief Type of the field definition.
+     */
+    /**@{*/
+    dogen::dynamic::schema::field_definition_types definition_type() const;
+    void definition_type(const dogen::dynamic::schema::field_definition_types& v);
+    /**@}*/
+
 public:
     bool operator==(const field_definition& rhs) const;
     bool operator!=(const field_definition& rhs) const {
@@ -124,10 +134,11 @@ public:
 
 private:
     dogen::dynamic::schema::name name_;
-    dogen::dynamic::schema::value_types type_;
+    dogen::dynamic::schema::value_types value_type_;
     dogen::dynamic::schema::scope_types scope_;
     dogen::dynamic::schema::ownership_hierarchy ownership_hierarchy_;
     boost::shared_ptr<dogen::dynamic::schema::value> default_value_;
+    dogen::dynamic::schema::field_definition_types definition_type_;
 };
 
 } } }

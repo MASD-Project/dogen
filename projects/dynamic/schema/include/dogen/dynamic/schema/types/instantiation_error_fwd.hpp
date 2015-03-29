@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATION_ERROR_FWD_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATION_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace cpp {
-namespace formatters {
+namespace dynamic {
+namespace schema {
 
-std::string traits::model_name() {
-    static std::string r("cpp");
-    return r;
-}
-
-std::string traits::header_formatter_group_name() {
-    static std::string r("cpp.header_files");
-    return r;
-}
+class instantiation_error;
 
 } } }
+
+#endif

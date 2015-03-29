@@ -18,20 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
+#ifndef DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATION_ERROR_HPP
+#define DOGEN_DYNAMIC_SCHEMA_TYPES_INSTANTIATION_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/exception/info.hpp>
+#include <string>
 
 namespace dogen {
-namespace cpp {
-namespace formatters {
+namespace dynamic {
+namespace schema {
 
-std::string traits::model_name() {
-    static std::string r("cpp");
-    return r;
-}
+/**
+ * @brief An error occurred whilst trying to instantiate a field definition template.
+ */
+class instantiation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    instantiation_error() = default;
+    ~instantiation_error() noexcept = default;
 
-std::string traits::header_formatter_group_name() {
-    static std::string r("cpp.header_files");
-    return r;
-}
+public:
+    instantiation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } } }
+
+#endif
