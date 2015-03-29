@@ -14,14 +14,14 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-29 Sun 22:25]
+Clock summary at [2015-03-29 Sun 22:35]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                             | *70:47* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
 | Active                                                                   |         | 70:47 |      |
-| STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
+| COMPLETED Sprint and product backlog grooming                            |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
 | COMPLETED Generate registrar correctly when using external model path    |         |       | 0:25 |
@@ -51,12 +51,13 @@ Clock summary at [2015-03-29 Sun 22:25]
 | COMPLETED Propagate file and include paths to the formatter              |         |       | 0:26 |
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | COMPLETED Consider creating field definition templates                   |         |       | 6:40 |
-| STARTED Create a "supported" expander                                    |         |       | 1:54 |
-| STARTED Create a "populate includes operation"                           |         |       | 3:13 |
-| STARTED Compute managed directories from knitting options                |         |       | 0:12 |
+| POSTPONED Create a "supported" expander                                  |         |       | 1:54 |
+| POSTPONED Create a "populate includes operation"                         |         |       | 3:13 |
+| POSTPONED Compute managed directories from knitting options              |         |       | 0:12 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-03-29 Sun 22:33]
     CLOCK: [2015-03-28 Sat 19:13]--[2015-03-28 Sat 19:33] =>  0:20
     CLOCK: [2015-03-25 Wed 15:06]--[2015-03-25 Wed 15:11] =>  0:05
     CLOCK: [2015-03-21 Sat 17:12]--[2015-03-21 Sat 17:26] =>  0:14
@@ -66,7 +67,8 @@ Clock summary at [2015-03-29 Sun 22:25]
 
 Updates to sprint and product backlog.
 
-*** STARTED Updates to the manual and readme files                    :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-03-29 Sun 22:33]
 
 Use downtime to update the manual and / or readme file.
 
@@ -770,40 +772,8 @@ Rules:
   and or facet.
 - instance: throws not a template.
 
-*** CANCELLED Add an "enabled" expander                               :story:
-    CLOSED: [2015-03-19 Thu 15:20]
-
-*New Understanding*
-
-Actually this is the same operation as supported.
-
-*Previous Understanding*
-
-We need an operation that is able to look at the model, facet,
-formatter values for the enabled field and determine what value to use
-for the formatter. It's predicate is =true=. Or perhaps we need
-conditional and unconditional operations.
-
-This operation should execute after copy from root. It should live in
-dynamic.
-
-*** CANCELLED Create a "populator" utility in Schema                  :story:
-    CLOSED: [2015-03-26 Thu 15:50]
-
-*Final Understanding*
-
-Actually by caching the field definitions we have made the code a lot
-smaller so there is no need for further hacking.
-
-*Previous Understanding*
-
-Create a utility class in schema that has a table of names to
-lambdas. Users supply lambdas. Utility resolves the field, uses the
-default value if the field is not in dynamic object, and supplies this
-value to lambda. Lambda knows of the underlying object. Converts value
-to appropriate type and sets it.
-
-*** STARTED Create a "supported" expander                             :story:
+*** POSTPONED Create a "supported" expander                           :story:
+    CLOSED: [2015-03-29 Sun 22:33]
     CLOCK: [2015-03-19 Thu 14:30]--[2015-03-19 Thu 15:19] =>  0:49
     CLOCK: [2015-03-19 Thu 11:51]--[2015-03-19 Thu 12:05] =>  0:14
     CLOCK: [2015-03-19 Thu 11:00]--[2015-03-19 Thu 11:51] =>  0:51
@@ -856,7 +826,8 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** STARTED Create a "populate includes operation"                    :story:
+*** POSTPONED Create a "populate includes operation"                  :story:
+    CLOSED: [2015-03-29 Sun 22:33]
     CLOCK: [2015-03-28 Sat 20:09]--[2015-03-28 Sat 20:19] =>  0:10
     CLOCK: [2015-03-28 Sat 19:33]--[2015-03-28 Sat 20:08] =>  0:35
     CLOCK: [2015-03-28 Sat 18:21]--[2015-03-28 Sat 19:05] =>  0:44
@@ -909,7 +880,8 @@ Tasks:
   appropriate delimiters.
 - change include formatter to use a list of strings.
 
-*** STARTED Compute managed directories from knitting options         :story:
+*** POSTPONED Compute managed directories from knitting options       :story:
+    CLOSED: [2015-03-29 Sun 22:33]
     CLOCK: [2015-03-29 Sun 14:39]--[2015-03-29 Sun 14:51] =>  0:12
 
 At present the backend is returning empty managed directories. This
@@ -929,236 +901,36 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
-*** Field definition templates do not support facet specific defaults :story:
-
-At present we cannot use field definition templates for fields that
-require facet specific default values such as =directory=. We could
-either support something like a "variable", e.g. "find facet simple
-name" or we could do overrides - the field definition is defined as a
-template but then overriden at a facet level. Or we could handle
-default values in a totally separate way - maybe a file with just the
-default values.
-
-In addition, we have the case where at the facet level we may have a
-default value for a field but not at the formatter level - =postfix=.
-
-*** Consider supporting multiple formatter groups                     :story:
-
-In some cases it would be nice for a field to belong to multiple
-groups. For example =integrated_facet= is only applicable to class
-header formatters. We could implement this by making the formatter
-group a collection and having formatters belong to multiple groups.
-
-*** Consider renaming =ownership_hierarchy=                           :story:
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
-*** Add =static_formatter_name=                                       :story:
-
-At present formatter names are defined as traits, we should use the
-"static" approach. Facet names can stay as traits as they are common
-across formatters.
-
-*** Consider creating internal and external fields                    :story:
-
-At present any dynamic field is automatically exposed to the outside
-world, allowing users to set them. This is not always ideal; for
-example, the file path should not be settable. Perhaps field
-definitions should have a "internal" or "external" property that stops
-users from being able to override certain fields.
-
-*** Consider using the same API as boost property tree in selector    :story:
-
-At present we have the type of the value in the method names in the
-selector, e.g. =get_text_content=. It would be better to have a =get=
-that takes in a template parameter, e.g. =get<text>=. However, in
-order to do this we need to have some kind of mapping between the
-schema value (=text=) and the raw value (=std::string=). This requires
-some template magic.
-
-Once this is done we can also make the API a bit more like the
-property tree API such as for example returning =boost::optional= for
-the cases where the field may not exist.
-
-*** Check for duplicate formatter names in formatter registrar        :story:
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
-
-*** Add validation for field definitions                              :story:
-
-Perform some validation in repository workflow:
-
-- that formatter fields are not duplicated on simple name.
-- fields are not duplicated on qualified name.
-- instances have qualified name populated.
-- only instances are left after instantiation.
-
-*** Implement new settings factories with caching                     :story:
-
-- create a field definition selector;
-- get factories to use the selector on construction and setup a cache
-  for all required fields. These could be const copies of the fields.
-- stop using has_field followed by get content - we now know that the
-  field either existed originally or was defaulted correctly.
-
-For type settings:
-
-:    using namespace dynamic::schema;
-:    using fd = field_definitions;
-:    const field_selector fs(o);
-:
-:    if (fs.has_field(fd::enabled()))
-:        s.enabled(fs.get_boolean_content(fd::enabled()));
-
-Actually, do we really need to cache? We just need the qualified name
-of the field which is how the object stores its fields.
-
-*** Add dynamic consistency validation                                :story:
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
-
-Actually since we can only create fields from JSON, we should just add
-a check there.
-
-*** Rename name builder to name factory                               :story:
-
-The name builder is just a factory so make the name reflect it.
-
-*** Create an operation to populate c++ properties                    :story:
-
-There are a number of properties such as "requires default
-constructor" and so on that are specific to the c++ model. Some
-require looking at related types (do they have the property enabled?)
-some others require looking at the SML model graph. It seems they
-should all live under one single operation (or perhaps a few), but we
-do not have any good names for them.
-
-*** Create a list of valid values for field definitions               :story:
-
-In addition to default values, it should be possible to supply a list
-of possible values for a field definition - a domain. When processing
-the values we can then check that it is part of the domain and if not
-throw. This is required for the include types and for the family
-types. At present this is only applicable to string fields.
-
-In this sense, =boolean= is just a special case where the list is know
-up front. We should re-implement =boolean= this way. Possibly even add
-synonyms (e.g. =true=, =false=, =0=, =1=)?
-
-*** Perform expansion of properties and operations                    :story:
-
-At present we are ignoring properties (and operations). This is ok as
-we don't really have a use case for expansion there. However, it would
-be nice if we could just expand them anyway. We just need to make sure
-we don't do things like copying from root object.
-
-*** Clean-up hierarchical support in dynamic                          :story:
-
-At present there are a number of limitations on how we have
-implemented hierarchical support:
-
-- fields from one model will get mixed up with other models;
-- fields from one formatter in one facet will get mixed up with fields
-  from other formatters in other facets with the same name.
-
-We need to improve on the indexer. While we're at it, we should do a
-few other assorted clean-ups:
-
-- rename workflow (since we now have two);
-- rename content extensions since this is a selector in disguise;
-
-*** Create settings expander and switcher                             :story:
+** Deprecated
+*** CANCELLED Add an "enabled" expander                               :story:
+    CLOSED: [2015-03-19 Thu 15:20]
 
 *New Understanding*
 
-The expansion process now takes on this work. We need to refactor this
-story into an expander.
+Actually this is the same operation as supported.
 
 *Previous Understanding*
 
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
+We need an operation that is able to look at the model, facet,
+formatter values for the enabled field and determine what value to use
+for the formatter. It's predicate is =true=. Or perhaps we need
+conditional and unconditional operations.
 
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
+This operation should execute after copy from root. It should live in
+dynamic.
 
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
+*** CANCELLED Create a "populator" utility in Schema                  :story:
+    CLOSED: [2015-03-26 Thu 15:50]
 
-This could be done by the switcher. We should first expand the
-settings then switch them.
+*Final Understanding*
 
-In some ways we can think of the switcher as a dependency
-manager. This may inform the naming of this class.
+Actually by caching the field definitions we have made the code a lot
+smaller so there is no need for further hacking.
 
-One thing to take into account is the different kinds of behaviours
-regarding enabling facets and formatters:
+*Previous Understanding*
 
-- for serialisation we want it to be on and if its on, all types
-  should be serialisable.
-- for hashing we want it to be off (most likely) and if the user makes
-  use of a hashing container we want the type that is the key of the
-  container to have hashing on; no other types should have it on. We
-  also may want the user to manually switch hashing on for a type.
-- for forward declarations: if another formatter requires it for a
-  type, we want it on; if no one requires it we want it off. The user
-  may want to manually switch it on for a type.
-
-*** Consider creating a include list sorter                           :story:
-
-There are a few cases where we want the include files to be ordered in
-certain ways (in one case the code breaks otherwise; FIXME search
-backlog for it). In general we probably want to ensure the includes
-are ordered in a specific way like we do with regular source code,
-such as c files first, then standard c++ files, then boost, etc. We
-should have a function that given a list of includes performs this
-ordering.
-
-*** External module path and references as meta-data                  :story:
-
-It actually does not make a lot of sense to allow users to supply
-external module paths and references as command line options. This is
-because the model will fail to build unless we provide the correct
-ones; these are not configurable items in this sense. The project
-path, etc are - and so should remain command line options.
-
-We need to move these two into the meta-data. This would also mean we
-no longer need to pass in external module paths for references, which
-is much cleaner.
-
-*** Hydrators provide no context when errors occur                    :story:
-
-We tried to parse a JSON file using the INI parser and got the
-following errors:
-
-: 2015-03-27 15:16:05.291132 [DEBUG] [formatters.modeline_group_hydrator] Reading file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/modeline_groups/emacs.json
-: 2015-03-27 15:16:05.291215 [ERROR] [formatters.modeline_group_hydrator] Failed to parse INI file: : <unspecified file>(1): '=' character not found in line
-: 2015-03-27 15:16:05.291933 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/formatters/src/types/modeline_group_hydrator.cpp(172): Throw in function dogen::formatters::modeline_group dogen::formatters::modeline_group_hydrator::hydrate(std::istream &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10formatters15hydration_errorEEE
-: std::exception::what: Failed to parse INI file: <unspecified file>(1): '=' character not found in line
-: [P12tag_workflow] = Code generation failure.
-
-The exception provides no context to the file being parsed. We need to
-catch the exception and augment it with the file name.
-
-*** Add a validate JSON target                                        :story:
-
-It would be nice to be able to validate all of the JSON we have in the
-library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
-to validate.
-
-** Deprecated
+Create a utility class in schema that has a table of names to
+lambdas. Users supply lambdas. Utility resolves the field, uses the
+default value if the field is not in dynamic object, and supplies this
+value to lambda. Lambda knows of the underlying object. Converts value
+to appropriate type and sets it.
