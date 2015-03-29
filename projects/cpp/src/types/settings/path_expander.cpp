@@ -136,7 +136,8 @@ path_expander::make_formatter_properties(const dynamic::schema::repository& rp,
 
     const auto ps(factory_->make(root));
     for (const auto& f : c.all_formatters()) {
-        const auto& fn(f->formatter_name());
+        const auto oh(f->ownership_hierarchy());
+        const auto& fn(oh.formatter_name());
         r[fn] = make_formatter_properties(rp, fn, ps);
     }
     return r;

@@ -6815,7 +6815,7 @@ any.#</dia:string>
                 <dia:string>#ownership_hierarchy#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;ownership_hierarchy&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;ownership_hierarchy&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7177,13 +7177,13 @@ any.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="58,-8"/>
+        <dia:point val="60,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.95,-8.05;68.1575,-1.15"/>
+        <dia:rectangle val="59.95,-8.05;70.1575,-1.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="58,-8"/>
+        <dia:point val="60,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.1075"/>
@@ -7707,13 +7707,13 @@ any.#</dia:string>
         <dia:point val="-1,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,17.95;29.58,23.85"/>
+        <dia:rectangle val="-1.05,17.95;32.66,23.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-1,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.530000000000001"/>
+        <dia:real val="33.609999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.7999999999999998"/>
@@ -7811,7 +7811,7 @@ any.#</dia:string>
             <dia:string>#ownership_hierarchy_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7888,7 +7888,7 @@ any.#</dia:string>
                 <dia:string>#ownership_hierarchy#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;ownership_hierarchy&gt;&amp;#</dia:string>
+                <dia:string>#const std::forward_list&lt;ownership_hierarchy&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7997,15 +7997,15 @@ any.#</dia:string>
         <dia:point val="48.285,-12.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.535,-12.85;63.2538,-6.4"/>
+        <dia:rectangle val="47.535,-12.85;65.2537,-6.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="48.285,-12.1"/>
-        <dia:point val="63.0538,-12.1"/>
-        <dia:point val="63.0538,-8"/>
+        <dia:point val="65.0537,-12.1"/>
+        <dia:point val="65.0537,-8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -8066,7 +8066,7 @@ any.#</dia:string>
         <dia:point val="-26.12,22.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.87,21.65;14.465,29.05"/>
+        <dia:rectangle val="-26.87,21.65;16.005,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8074,8 +8074,8 @@ any.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-26.12,22.4"/>
         <dia:point val="-26.12,29"/>
-        <dia:point val="14.265,29"/>
-        <dia:point val="14.265,23.8"/>
+        <dia:point val="15.805,29"/>
+        <dia:point val="15.805,23.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8134,17 +8134,17 @@ any.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="14.265,18"/>
+        <dia:point val="15.805,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.515,-8.05;40.3425,19.6"/>
+        <dia:rectangle val="15.055,-8.05;40.3425,19.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="14.265,18"/>
-        <dia:point val="14.265,13"/>
+        <dia:point val="15.805,18"/>
+        <dia:point val="15.805,13"/>
         <dia:point val="40.1425,13"/>
         <dia:point val="40.1425,-8"/>
       </dia:attribute>

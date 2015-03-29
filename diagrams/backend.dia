@@ -634,13 +634,13 @@
         <dia:point val="34,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,-9.05;72.665,-2.15"/>
+        <dia:rectangle val="33.95,-9.05;67.275,-2.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="34,-9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="38.614999999999995"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -772,7 +772,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;schema::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;schema::ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -825,10 +825,10 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#o#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const config::knitting_options&amp;#</dia:string>
+                <dia:string>#const sml::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -954,7 +954,7 @@
         <dia:point val="83.9175,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.565,-2.25;84.6675,8.8"/>
+        <dia:rectangle val="67.175,-2.25;84.6675,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -962,8 +962,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="83.9175,8"/>
         <dia:point val="83.9175,3"/>
-        <dia:point val="72.615,3"/>
-        <dia:point val="72.615,-2.2"/>
+        <dia:point val="67.225,3"/>
+        <dia:point val="67.225,-2.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

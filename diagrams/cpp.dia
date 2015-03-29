@@ -7513,13 +7513,13 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="302,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="301.95,98.95;340.665,105.85"/>
+        <dia:rectangle val="301.95,98.95;335.275,105.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="302,99"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="38.614999999999995"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -7651,7 +7651,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;schema::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;schema::ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7704,10 +7704,10 @@ descend from it. Names are in identifiable name format.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#o#</dia:string>
+                <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const config::knitting_options&amp;#</dia:string>
+                <dia:string>#const sml::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17479,17 +17479,17 @@ facet of the C++ language.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="340.615,99"/>
+        <dia:point val="335.225,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="339.865,84.95;353.839,99.8"/>
+        <dia:rectangle val="334.475,84.95;353.839,99.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="340.615,99"/>
-        <dia:point val="340.615,94"/>
+        <dia:point val="335.225,99"/>
+        <dia:point val="335.225,94"/>
         <dia:point val="353.639,94"/>
         <dia:point val="353.639,85"/>
       </dia:attribute>
@@ -19908,17 +19908,17 @@ for a given C++ entity.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="340.615,105.8"/>
+        <dia:point val="335.225,105.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="339.865,105.05;416.2,129.8"/>
+        <dia:rectangle val="334.475,105.05;416.2,129.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="340.615,105.8"/>
-        <dia:point val="340.615,111"/>
+        <dia:point val="335.225,105.8"/>
+        <dia:point val="335.225,111"/>
         <dia:point val="416,111"/>
         <dia:point val="416,129"/>
       </dia:attribute>

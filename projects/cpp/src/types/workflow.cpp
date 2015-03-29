@@ -74,22 +74,30 @@ workflow::format_activty(const std::forward_list<
     return w.execute(f);
 }
 
-std::string workflow::id() const {
+std::string workflow::name() const {
     return ::id;
 }
 
-std::vector<boost::filesystem::path> workflow::managed_directories() const {
-    // FIXME: needed for housekeeper, obtained from options.
+std::vector<boost::filesystem::path>
+workflow::managed_directories(const sml::model& /*m*/) const {
     std::vector<boost::filesystem::path> r;
+    // FIXME: needed for housekeeper
     return r;
 }
 
-void workflow::validate() const { }
+std::forward_list<dynamic::schema::ownership_hierarchy>
+workflow::ownership_hierarchy() const {
+    using formatters::workflow;
+    const auto af(workflow::registrar().formatter_container().all_formatters());
+    std::forward_list<dynamic::schema::ownership_hierarchy> r;
+    for (const auto f : af)
+        r.push_front(f->ownership_hierarchy());
+
+    return r;
+}
 
 std::forward_list<dogen::formatters::file> workflow::
-generate(const config::knitting_options& /*o*/,
-    const dynamic::schema::repository& rp,
-    const sml::model& m) const {
+generate(const dynamic::schema::repository& rp, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto ro(obtain_root_object(m));

@@ -55,35 +55,14 @@ backend::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-void workflow::validate_backends_activity() const {
-    BOOST_LOG_SEV(lg, debug) << "Validating backend workflow.";
-    registrar().validate();
-    const auto& backends(registrar().backends());
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(backends.begin(), backends.end())
-                             << " registered backend(s): ";
-
-    for (const auto& b : backends) {
-        BOOST_LOG_SEV(lg, debug) << "Backend: '" << b->id() << "'";
-        b->validate();
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished validating backend workflow.";
-}
-
-void workflow::register_backend(std::shared_ptr<backend_interface> b) {
-    registrar().register_backend(b);
-}
-
 std::forward_list<formatters::file>
 workflow::execute(const sml::model& m) const {
-    validate_backends_activity();
-
     std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
-        const auto id(b->id());
-        BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << id << "'";
-        auto files(b->generate(knitting_options_, repository_, m));
-        BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << id
+        const auto n(b->name());
+        BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << n << "'";
+        auto files(b->generate(repository_, m));
+        BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << n
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());
         r.splice_after(r.before_begin(), files);

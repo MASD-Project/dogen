@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -41,14 +42,10 @@ public:
 
 public:
     /**
-     * @brief Name of the facet that the provider belongs to.
+     * @brief Ownership hierarchy for this formatter
      */
-    virtual std::string facet_name() const = 0;
-
-    /**
-     * @brief Name of the formatter the provider generates data for.
-     */
-    virtual std::string formatter_name() const = 0;
+    virtual dynamic::schema::ownership_hierarchy
+    ownership_hierarchy() const = 0;
 
     /**
      * @brief Type of the file this formatter generates.

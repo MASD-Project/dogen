@@ -28,6 +28,7 @@
 #include <vector>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/config/types/knitting_options.hpp"
@@ -49,20 +50,22 @@ public:
 
 public:
     /**
-     * @brief Unique identifier for the backend, for logging purposes.
+     * @brief Name of the backend. It must be unique.
      */
-    virtual std::string id() const = 0;
+    virtual std::string name() const = 0;
 
     /**
      * @brief Returns all directories managed by this backend.
      */
     virtual std::vector<boost::filesystem::path>
-    managed_directories() const = 0;
+    managed_directories(const sml::model& m) const = 0;
 
     /**
-     * @brief Ensures the backend is in a valid state to operate.
+     * @brief Complete ownership hierarchy for this backend, listing
+     * all available models, facet and formatters.
      */
-    virtual void validate() const = 0;
+    std::forward_list<dynamic::schema::ownership_hierarchy>
+    ownership_hierarchy() const;
 
     /**
      * @brief Generates the source code for the backend.
@@ -71,7 +74,6 @@ public:
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
-        const config::knitting_options& o,
         const dynamic::schema::repository& rp,
         const sml::model& m) const = 0;
 };

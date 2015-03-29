@@ -45,24 +45,12 @@ public:
     workflow(const config::knitting_options& o,
         const dynamic::schema::repository& rp);
 
-private:
+public:
     /**
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
     static backend::registrar& registrar();
-
-private:
-    /**
-     * @brief Ensures are backends have been initialised correctly.
-     */
-    void validate_backends_activity() const;
-
-public:
-    /**
-     * @brief Registers a backend with the workflow.
-     */
-    static void register_backend(std::shared_ptr<backend_interface> b);
 
     /**
      * @brief Generates files for the supplied model using all

@@ -38,7 +38,7 @@ namespace types {
 /**
  * @brief Creates the C++ domain representation for a class.
  */
-class class_header_formatter : public formatters::class_formatter_interface {
+class class_header_formatter final : public class_formatter_interface {
 public:
     class_header_formatter() = default;
     class_header_formatter(const class_header_formatter&) = delete;
@@ -66,11 +66,8 @@ public:
     create_expander() const;
 
 public:
-    std::string facet_name() const override;
+    dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 
-    std::string formatter_name() const override;
-
-public:
     file_types file_type() const override;
 
 public:

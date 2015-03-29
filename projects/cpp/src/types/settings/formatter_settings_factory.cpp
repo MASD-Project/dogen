@@ -112,7 +112,8 @@ formatter_settings_factory::make_formatter_properties(
     std::unordered_map<std::string, formatter_properties> r;
 
     for (const auto& f : c.all_formatters()) {
-        const auto& fn(f->formatter_name());
+        const auto oh(f->ownership_hierarchy());
+        const auto& fn(oh.formatter_name());
         r[fn] = make_formatter_properties(rp, fn);
     }
     return r;

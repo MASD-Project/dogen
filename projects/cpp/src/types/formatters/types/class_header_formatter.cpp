@@ -27,6 +27,7 @@
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
@@ -170,29 +171,28 @@ expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
 void class_header_formatter::validate(
     const settings::formatter_settings& fs) const {
 
+    const auto& fn(ownership_hierarchy().formatter_name());
     if (!fs.inclusion_path() || fs.inclusion_path()->empty()) {
-        BOOST_LOG_SEV(lg, error) << inclusion_path_not_set << formatter_name();
-        BOOST_THROW_EXCEPTION(formatting_error(inclusion_path_not_set
-                + formatter_name()));
+        BOOST_LOG_SEV(lg, error) << inclusion_path_not_set << fn;
+        BOOST_THROW_EXCEPTION(formatting_error(inclusion_path_not_set + fn));
     }
 
     if (fs.file_path().empty()) {
-        BOOST_LOG_SEV(lg, error) << file_path_not_set << formatter_name();
-        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set
-                + formatter_name()));
+        BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
+        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
     }
 }
 
 settings::formatter_settings class_header_formatter::
 formatter_settings_for_formatter(const formattables::class_info& c) const {
     const auto& fs(c.settings().formatter_settings());
-    const auto i(fs.find(formatter_name()));
+    const auto& fn(ownership_hierarchy().formatter_name());
+    const auto i(fs.find(fn));
     if (i == fs.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_settings_not_found
-                                 << formatter_name();
+        BOOST_LOG_SEV(lg, error) << formatter_settings_not_found << fn;
 
-        BOOST_THROW_EXCEPTION(formatting_error(
-                formatter_settings_not_found + formatter_name()));
+        BOOST_THROW_EXCEPTION(
+            formatting_error(formatter_settings_not_found + fn));
     }
     return i->second;
 }
@@ -202,16 +202,16 @@ class_header_formatter::create_expander() const {
     return boost::make_shared<inclusion_expander>();
 }
 
+dynamic::schema::ownership_hierarchy
+class_header_formatter::ownership_hierarchy() const {
+    static dynamic::schema::ownership_hierarchy
+        r(formatters::traits::model_name(), traits::facet_name(),
+            traits::class_header_formatter_name());
+    return r;
+}
+
 file_types class_header_formatter::file_type() const {
     return file_types::cpp_header;
-}
-
-std::string class_header_formatter::facet_name() const {
-    return traits::facet_name();
-}
-
-std::string class_header_formatter::formatter_name() const {
-    return traits::class_header_formatter_name();
 }
 
 dogen::formatters::file

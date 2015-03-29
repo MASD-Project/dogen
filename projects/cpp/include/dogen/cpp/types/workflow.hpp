@@ -74,14 +74,15 @@ private:
             >& f) const;
 
 public:
-    std::string id() const override;
+    std::string name() const override;
 
-    std::vector<boost::filesystem::path> managed_directories() const override;
+    std::vector<boost::filesystem::path>
+        managed_directories(const sml::model& m) const override;
 
-    void validate() const override;
+    std::forward_list<dynamic::schema::ownership_hierarchy>
+        ownership_hierarchy() const;
 
     std::forward_list<dogen::formatters::file> generate(
-        const config::knitting_options& o,
         const dynamic::schema::repository& rp,
         const sml::model& m) const override;
 };

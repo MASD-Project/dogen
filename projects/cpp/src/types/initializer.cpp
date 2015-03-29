@@ -31,7 +31,8 @@ namespace cpp {
 void initializer::initialize() {
     settings::initializer::initialize();
     formatters::initializer::initialize(formatters::workflow::registrar());
-    backend::workflow::register_backend(std::make_shared<workflow>());
+    backend::workflow::registrar().register_backend(
+        std::make_shared<workflow>());
 }
 
 } }

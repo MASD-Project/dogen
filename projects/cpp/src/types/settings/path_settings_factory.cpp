@@ -157,10 +157,11 @@ path_settings_factory::make_formatter_properties(
 
     formatter_properties r;
     r.file_type = f.file_type();
-    r.formatter_name = f.formatter_name();
+    const auto oh(f.ownership_hierarchy());
+    r.formatter_name = oh.formatter_name();
     setup_top_level_fields(rp, r);
-    setup_facet_fields(rp, f.facet_name(), r);
-    setup_formatter_fields(rp, f.formatter_name(), r);
+    setup_facet_fields(rp, oh.facet_name(), r);
+    setup_formatter_fields(rp, oh.formatter_name(), r);
 
     return r;
 }
@@ -171,8 +172,10 @@ path_settings_factory::make_formatter_properties(
     const auto& c(formatters::workflow::registrar().formatter_container());
     std::unordered_map<std::string, formatter_properties> r;
 
-    for (const auto& f : c.all_formatters())
-        r[f->formatter_name()] = make_formatter_properties(rp, *f);
+    for (const auto& f : c.all_formatters()) {
+        const auto oh(f->ownership_hierarchy());
+        r[oh.formatter_name()] = make_formatter_properties(rp, *f);
+    }
 
     return r;
 }
