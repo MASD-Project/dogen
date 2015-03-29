@@ -279,7 +279,7 @@ std::list<field_definition>
 instantiator::instantiate(const field_definition& fd) const {
     validate(fd);
 
-    BOOST_LOG_SEV(lg, debug) << "Instantiating field definition template" << fd;
+    BOOST_LOG_SEV(lg, debug) << "Instantiating template: " << fd;
 
     std::list<field_definition> r;
     const auto dt(fd.definition_type());
@@ -295,7 +295,7 @@ instantiator::instantiate(const field_definition& fd) const {
                 boost::lexical_cast<std::string>(dt)));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Instantiation result" << r;
+    BOOST_LOG_SEV(lg, debug) << "Instantiation result: " << r;
     return r;
 }
 

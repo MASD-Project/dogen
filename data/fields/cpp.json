@@ -1,14 +1,13 @@
 [
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.enabled"
+            "simple" : "enabled"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "instance",
+        "definition_type" : "global_template",
         "scope" : "root_module",
         "default_value" : true
     },

@@ -1,20 +1,6 @@
 [
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "supported",
             "qualified" : "cpp.types.supported"
         },
@@ -67,21 +53,6 @@
         "value_type" : "text_collection",
         "definition_type" : "instance",
         "scope" : "root_module"
-    },
-    {
-        "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.class_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
     },
     {
         "name" : {
@@ -172,21 +143,6 @@
     },
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.class_implementation_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_implementation_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.class_implementation_formatter.postfix"
         },
@@ -213,21 +169,6 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "entity"
-    },
-    {
-        "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.enumeration_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.enumeration_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
     },
     {
         "name" : {
@@ -304,21 +245,6 @@
     },
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.enumeration_implementation_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.enumeration_implementation_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.enumeration_implementation_formatter.postfix"
         },
@@ -345,21 +271,6 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "entity"
-    },
-    {
-        "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.exception_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.exception_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
     },
     {
         "name" : {
@@ -436,21 +347,6 @@
     },
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.namespace_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.namespace_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.namespace_header_formatter.postfix"
         },
@@ -521,21 +417,6 @@
         "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
-    },
-    {
-        "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.types.visitor_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.visitor_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
     },
     {
         "name" : {

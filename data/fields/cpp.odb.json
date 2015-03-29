@@ -1,20 +1,6 @@
 [
     {
         "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.odb.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.odb"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
-    },
-    {
-        "name" : {
             "simple" : "supported",
             "qualified" : "cpp.odb.supported"
         },
@@ -54,21 +40,6 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "odb"
-    },
-    {
-        "name" : {
-            "simple" : "enabled",
-            "qualified" : "cpp.odb.class_header_formatter.enabled"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.odb",
-            "formatter_name" : "cpp.odb.class_header_formatter"
-        },
-        "value_type" : "boolean",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : true
     },
     {
         "name" : {

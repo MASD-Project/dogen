@@ -154,7 +154,11 @@ boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
 name json_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     name r;
     r.simple(pt.get<std::string>(name_simple_key));
-    r.qualified(pt.get<std::string>(name_qualified_key));
+
+    const auto qualified(pt.get_optional<std::string>(name_qualified_key));
+    if (qualified)
+        r.qualified(*qualified);
+
     return r;
 }
 

@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-29 Sun 19:02]
+Clock summary at [2015-03-29 Sun 20:53]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *69:41* |       |      |
+| *Total time*                                                             | *69:54* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 69:41 |      |
+| Active                                                                   |         | 69:54 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -52,7 +52,7 @@ Clock summary at [2015-03-29 Sun 19:02]
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Create a "populate includes operation"                           |         |       | 3:13 |
-| STARTED Consider creating field definition templates                     |         |       | 5:34 |
+| STARTED Consider creating field definition templates                     |         |       | 5:47 |
 | STARTED Compute managed directories from knitting options                |         |       | 0:12 |
 #+end:
 
@@ -859,6 +859,7 @@ Tasks:
 - change include formatter to use a list of strings.
 
 *** STARTED Consider creating field definition templates              :story:
+    CLOCK: [2015-03-29 Sun 20:40]--[2015-03-29 Sun 20:53] =>  0:13
     CLOCK: [2015-03-29 Sun 18:43]--[2015-03-29 Sun 19:02] =>  0:19
     CLOCK: [2015-03-29 Sun 17:03]--[2015-03-29 Sun 18:43] =>  1:40
     CLOCK: [2015-03-29 Sun 15:37]--[2015-03-29 Sun 16:35] =>  0:58
@@ -905,13 +906,6 @@ Rules:
   and or facet.
 - instance: throws not a template.
 
-*** Consider renaming =ownership_hierarchy=                           :story:
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
 *** STARTED Compute managed directories from knitting options         :story:
     CLOCK: [2015-03-29 Sun 14:39]--[2015-03-29 Sun 14:51] =>  0:12
 
@@ -931,6 +925,13 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
+
+*** Consider renaming =ownership_hierarchy=                           :story:
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
 
 *** Add =static_formatter_name=                                       :story:
 
@@ -965,10 +966,14 @@ At present it is possible to register a formatter name more than
 once. Registrar should keep track of the names and throw if the name
 is duplicated.
 
-*** Check for duplicate fields in repository workflow                 :story:
+*** Add validation for field definitions                              :story:
 
-perform some validation in repository workflow that formatter fields
-are not duplicated on simple name.
+Perform some validation in repository workflow:
+
+- that formatter fields are not duplicated on simple name.
+- fields are not duplicated on qualified name.
+- instances have qualified name populated.
+- only instances are left after instantiation.
 
 *** Implement new settings factories with caching                     :story:
 
