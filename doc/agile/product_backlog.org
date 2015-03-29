@@ -456,6 +456,112 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Field definition templates do not support facet specific defaults :story:
+
+At present we cannot use field definition templates for fields that
+require facet specific default values such as =directory=. We could
+either support something like a "variable", e.g. "find facet simple
+name" or we could do overrides - the field definition is defined as a
+template but then overriden at a facet level. Or we could handle
+default values in a totally separate way - maybe a file with just the
+default values.
+
+In addition, we have the case where at the facet level we may have a
+default value for a field but not at the formatter level - =postfix=.
+
+*** Consider supporting multiple formatter groups                     :story:
+
+In some cases it would be nice for a field to belong to multiple
+groups. For example =integrated_facet= is only applicable to class
+header formatters. We could implement this by making the formatter
+group a collection and having formatters belong to multiple groups.
+
+*** Consider renaming =ownership_hierarchy=                           :story:
+
+We came up with the name =ownership_hierarchy= because we could not
+think of anything else. However, it is not a particularly good name,
+and it is increasingly so now that we need to use it across models. We
+need a better name for this value type.
+
+*** Consider creating internal and external fields                    :story:
+
+At present any dynamic field is automatically exposed to the outside
+world, allowing users to set them. This is not always ideal; for
+example, the file path should not be settable. Perhaps field
+definitions should have a "internal" or "external" property that stops
+users from being able to override certain fields.
+
+*** Consider using the same API as boost property tree in selector    :story:
+
+At present we have the type of the value in the method names in the
+selector, e.g. =get_text_content=. It would be better to have a =get=
+that takes in a template parameter, e.g. =get<text>=. However, in
+order to do this we need to have some kind of mapping between the
+schema value (=text=) and the raw value (=std::string=). This requires
+some template magic.
+
+Once this is done we can also make the API a bit more like the
+property tree API such as for example returning =boost::optional= for
+the cases where the field may not exist.
+
+*** Add dynamic consistency validation                                :story:
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+Actually since we can only create fields from JSON, we should just add
+a check there.
+
+*** Rename name builder to name factory                               :story:
+
+The name builder is just a factory so make the name reflect it.
+
+*** Create a list of valid values for field definitions               :story:
+
+In addition to default values, it should be possible to supply a list
+of possible values for a field definition - a domain. When processing
+the values we can then check that it is part of the domain and if not
+throw. This is required for the include types and for the family
+types. At present this is only applicable to string fields.
+
+In this sense, =boolean= is just a special case where the list is know
+up front. We should re-implement =boolean= this way. Possibly even add
+synonyms (e.g. =true=, =false=, =0=, =1=)?
+
+*** External module path and references as meta-data                  :story:
+
+It actually does not make a lot of sense to allow users to supply
+external module paths and references as command line options. This is
+because the model will fail to build unless we provide the correct
+ones; these are not configurable items in this sense. The project
+path, etc are - and so should remain command line options.
+
+We need to move these two into the meta-data. This would also mean we
+no longer need to pass in external module paths for references, which
+is much cleaner.
+
+*** Hydrators provide no context when errors occur                    :story:
+
+We tried to parse a JSON file using the INI parser and got the
+following errors:
+
+: 2015-03-27 15:16:05.291132 [DEBUG] [formatters.modeline_group_hydrator] Reading file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/modeline_groups/emacs.json
+: 2015-03-27 15:16:05.291215 [ERROR] [formatters.modeline_group_hydrator] Failed to parse INI file: : <unspecified file>(1): '=' character not found in line
+: 2015-03-27 15:16:05.291933 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/formatters/src/types/modeline_group_hydrator.cpp(172): Throw in function dogen::formatters::modeline_group dogen::formatters::modeline_group_hydrator::hydrate(std::istream &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10formatters15hydration_errorEEE
+: std::exception::what: Failed to parse INI file: <unspecified file>(1): '=' character not found in line
+: [P12tag_workflow] = Code generation failure.
+
+The exception provides no context to the file being parsed. We need to
+catch the exception and augment it with the file name.
+
+*** Add a validate JSON target                                        :story:
+
+It would be nice to be able to validate all of the JSON we have in the
+library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
+to validate.
+
 *** Rename dynamic models                                             :story:
 
 At present we have named the dynamic models as follows:

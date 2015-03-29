@@ -1,0 +1,276 @@
+#+title: Sprint Backlog 63
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission
+
+Start implementing types header formatter using stitch.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-03-29 Sun 22:40]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:08* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:08 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:08 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-03-29 Sun 22:32]--[2015-03-29 Sun 22:40] =>  0:08
+
+Updates to sprint and product backlog.
+
+*** STARTED Updates to the manual and readme files                    :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** STARTED Create a "supported" expander                             :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+*** STARTED Create a "populate includes operation"                    :story:
+
+This operation needs to be implemented by every formatter. It queries
+the model to look for all the types it depends on and obtains the
+corresponding include paths from them. It places them in a formatter
+specific list of includes. It depends on the inclusion path operation.
+
+Notes:
+
+- we need to remember the model after setup.
+- we could use a base inclusion expander that sets up the formatter
+  properties and remembers the model, etc. Derived expanders just
+  need to provide an expansion method. We could even have a utility
+  method to set the field back into the dynamic object.
+- massive impedance mismatch between the boilerplate formatters and
+  the inclusion dependency meta-data. We should probably just use a
+  =std::list<std::string> to represent includes at the formatter
+  level, but we need to check. Actually no one is yet using this code
+  so we can change it at will.
+- we need to simplify the story around include paths. There are two
+  use cases: the include path ready to be stamped as an include
+  statement and the header guards. The include path for the include
+  statement could come with delimiters (<>, "", etc). The header
+  guards however cannot. So due to this we have split the two things
+  so we can recombine them later. However, this just generates a whole
+  load of unnecessary complexity. To make matters worse, there is only
+  a need to compute header guards for dogen types since the user is
+  not expected to overload them (one can, possibly, configure its
+  generation but not supply an override). Perhaps the cleaner solution
+  is to have a header guards field and a include directive field, both
+  generated as part of the path expansion. Formatter settings extract
+  both.
+
+Tasks:
+
+- remove delimiter field, create a header guards field.
+- rename include path field to include directive; add delimiters to
+  all usages of this field.
+- populate header guards in path expander, copying code from the
+  formatter (upper-casing etc.).
+- update header guards in boilerplate to take in a string, and to do
+  nothing to the supplied header guard string (other than outputting
+  it).
+- when generating include directive field for dogen types, add the
+  appropriate delimiters.
+- change include formatter to use a list of strings.
+
+*** STARTED Compute managed directories from knitting options         :story:
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Add =static_formatter_name=                                       :story:
+
+At present formatter names are defined as traits, we should use the
+"static" approach. Facet names can stay as traits as they are common
+across formatters.
+
+*** Check for duplicate formatter names in formatter registrar        :story:
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
+
+*** Add validation for field definitions                              :story:
+
+Perform some validation in repository workflow:
+
+- that formatter fields are not duplicated on simple name.
+- fields are not duplicated on qualified name.
+- instances have qualified name populated.
+- only instances are left after instantiation.
+
+*** Implement new settings factories with caching                     :story:
+
+- create a field definition selector;
+- get factories to use the selector on construction and setup a cache
+  for all required fields. These could be const copies of the fields.
+- stop using has_field followed by get content - we now know that the
+  field either existed originally or was defaulted correctly.
+
+For type settings:
+
+:    using namespace dynamic::schema;
+:    using fd = field_definitions;
+:    const field_selector fs(o);
+:
+:    if (fs.has_field(fd::enabled()))
+:        s.enabled(fs.get_boolean_content(fd::enabled()));
+
+Actually, do we really need to cache? We just need the qualified name
+of the field which is how the object stores its fields.
+
+*** Create an operation to populate c++ properties                    :story:
+
+There are a number of properties such as "requires default
+constructor" and so on that are specific to the c++ model. Some
+require looking at related types (do they have the property enabled?)
+some others require looking at the SML model graph. It seems they
+should all live under one single operation (or perhaps a few), but we
+do not have any good names for them.
+
+*** Perform expansion of properties and operations                    :story:
+
+At present we are ignoring properties (and operations). This is ok as
+we don't really have a use case for expansion there. However, it would
+be nice if we could just expand them anyway. We just need to make sure
+we don't do things like copying from root object.
+
+*** Clean-up hierarchical support in dynamic                          :story:
+
+At present there are a number of limitations on how we have
+implemented hierarchical support:
+
+- fields from one model will get mixed up with other models;
+- fields from one formatter in one facet will get mixed up with fields
+  from other formatters in other facets with the same name.
+
+We need to improve on the indexer. While we're at it, we should do a
+few other assorted clean-ups:
+
+- rename workflow (since we now have two);
+- rename content extensions since this is a selector in disguise;
+
+*** Create settings expander and switcher                             :story:
+
+*New Understanding*
+
+The expansion process now takes on this work. We need to refactor this
+story into an expander.
+
+*Previous Understanding*
+
+We need a class responsible for copying over all settings that exist
+both locally and globally. The idea is that, for those settings, the
+selector should be able to just query by formatter name locally and
+get the right values. This could be the expander.
+
+We also need a more intelligent class that determines what formatters
+are enabled and disabled. This is due to:
+
+- lack of support for a given formatter/facet by a type in the graph;
+  it must be propagated to all dependent types. We must be careful
+  with recursion (for example in the composite pattern).
+- a facet has been switched off. This must be propagated to all
+  formatters in that facet.
+- user has switched off a formatter. As with lack of support, this
+  must be propagated through the graph.
+
+This could be done by the switcher. We should first expand the
+settings then switch them.
+
+In some ways we can think of the switcher as a dependency
+manager. This may inform the naming of this class.
+
+One thing to take into account is the different kinds of behaviours
+regarding enabling facets and formatters:
+
+- for serialisation we want it to be on and if its on, all types
+  should be serialisable.
+- for hashing we want it to be off (most likely) and if the user makes
+  use of a hashing container we want the type that is the key of the
+  container to have hashing on; no other types should have it on. We
+  also may want the user to manually switch hashing on for a type.
+- for forward declarations: if another formatter requires it for a
+  type, we want it on; if no one requires it we want it off. The user
+  may want to manually switch it on for a type.
+
+*** Consider creating a include list sorter                           :story:
+
+There are a few cases where we want the include files to be ordered in
+certain ways (in one case the code breaks otherwise; FIXME search
+backlog for it). In general we probably want to ensure the includes
+are ordered in a specific way like we do with regular source code,
+such as c files first, then standard c++ files, then boost, etc. We
+should have a function that given a list of includes performs this
+ordering.
+
+** Deprecated
