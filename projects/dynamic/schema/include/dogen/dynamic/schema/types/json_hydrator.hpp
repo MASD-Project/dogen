@@ -32,6 +32,8 @@
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/dynamic/schema/types/name.hpp"
 #include "dogen/dynamic/schema/types/value.hpp"
+#include "dogen/dynamic/schema/types/value_types.hpp"
+#include "dogen/dynamic/schema/types/field_definition_types.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 
@@ -54,6 +56,11 @@ private:
      * @brief Converts a string to a value type.
      */
     value_types to_value_type(const std::string& s) const;
+
+    /**
+     * @brief Converts a string to a field definition type.
+     */
+    field_definition_types to_field_definition_type(const std::string& s) const;
 
     /**
      * @brief Creates the field value.

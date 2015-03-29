@@ -8,6 +8,7 @@
             "model_name" : "dia_to_sml"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "not_applicable"
     },
     {
@@ -19,6 +20,7 @@
             "model_name" : "dia_to_sml"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "property"
     }
 ]

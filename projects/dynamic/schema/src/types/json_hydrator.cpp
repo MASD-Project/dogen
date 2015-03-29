@@ -25,6 +25,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/io/value_types_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_types_io.hpp"
 #include "dogen/dynamic/schema/types/value_factory.hpp"
 #include "dogen/dynamic/schema/types/hydration_error.hpp"
 #include "dogen/dynamic/schema/types/json_hydrator.hpp"
@@ -43,7 +44,9 @@ const std::string definition_has_no_name("Field definition has no 'name'.");
 const std::string definition_has_no_hierarchy(
     "Field definition has no 'ownership_hierarchy'.");
 const std::string invalid_scope("Invalid or unsupported scope type: ");
-const std::string invalid_type("Invalid or unsupported type: ");
+const std::string invalid_value_type("Invalid or unsupported value type: ");
+const std::string invalid_definition_type(
+    "Invalid or unsupported field definition type: ");
 
 const std::string name_key("name");
 const std::string name_simple_key("simple");
@@ -53,6 +56,7 @@ const std::string ownership_hierarchy_model_name_key("model_name");
 const std::string ownership_hierarchy_facet_name_key("facet_name");
 const std::string ownership_hierarchy_formatter_name_key("formatter_name");
 const std::string value_type_key("value_type");
+const std::string field_definition_type_key("definition_type");
 const std::string scope_key("scope");
 const std::string default_value_key("default_value");
 
@@ -64,10 +68,17 @@ const std::string scope_entity("entity");
 const std::string scope_property("property");
 const std::string scope_operation("operation");
 
-const std::string value_text("text");
-const std::string value_text_collection("text_collection");
-const std::string value_number("number");
-const std::string value_boolean("boolean");
+const std::string value_type_text("text");
+const std::string value_type_text_collection("text_collection");
+const std::string value_type_number("number");
+const std::string value_type_boolean("boolean");
+
+const std::string field_definition_type_instance("instance");
+const std::string field_definition_type_global_template("global_template");
+const std::string field_definition_type_model_template("model_template");
+const std::string field_definition_type_facet_template("facet_template");
+const std::string field_definition_type_formatter_template(
+    "formatter_template");
 
 }
 
@@ -96,17 +107,34 @@ scope_types json_hydrator::to_scope_type(const std::string& s) const {
 }
 
 value_types json_hydrator::to_value_type(const std::string& s) const {
-    if (s == value_text)
+    if (s == value_type_text)
         return value_types::text;
-    else if (s == value_text_collection)
+    else if (s == value_type_text_collection)
         return value_types::text_collection;
-    else if (s == value_number)
+    else if (s == value_type_number)
         return value_types::number;
-    else if (s == value_boolean)
+    else if (s == value_type_boolean)
         return value_types::boolean;
 
-    BOOST_LOG_SEV(lg, error) << invalid_type << "'" << s << "'";
-    BOOST_THROW_EXCEPTION(hydration_error(invalid_type + s));
+    BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type + s));
+}
+
+field_definition_types json_hydrator::
+to_field_definition_type(const std::string& s) const {
+    if (s == field_definition_type_instance)
+        return field_definition_types::instance;
+    if (s == field_definition_type_global_template)
+        return field_definition_types::global_template;
+    if (s == field_definition_type_model_template)
+        return field_definition_types::model_template;
+    if (s == field_definition_type_facet_template)
+        return field_definition_types::facet_template;
+    if (s == field_definition_type_formatter_template)
+        return field_definition_types::formatter_template;
+
+    BOOST_LOG_SEV(lg, error) << invalid_definition_type << "'" << s << "'";
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_definition_type + s));
 }
 
 boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
@@ -117,8 +145,8 @@ boost::shared_ptr<value> json_hydrator::create_value(const value_types vt,
     case value_types::text: return f.make_text(v);
     case value_types::boolean: return f.make_boolean(v);
     default:
-        BOOST_LOG_SEV(lg, error) << invalid_type << "'" << vt << "'";
-        BOOST_THROW_EXCEPTION(hydration_error(invalid_type +
+        BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << vt << "'";
+        BOOST_THROW_EXCEPTION(hydration_error(invalid_value_type +
                 boost::lexical_cast<std::string>(vt)));
     }
 }
@@ -169,6 +197,8 @@ std::list<field_definition> json_hydrator::read_stream(std::istream& s) const {
 
         fd.value_type(to_value_type(
                 i->second.get<std::string>(value_type_key)));
+        fd.definition_type(to_field_definition_type(
+                i->second.get<std::string>(field_definition_type_key)));
         fd.scope(to_scope_type(i->second.get<std::string>(scope_key)));
 
         const auto dv(i->second.get_optional<std::string>(default_value_key));

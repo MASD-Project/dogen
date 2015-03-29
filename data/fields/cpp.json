@@ -8,6 +8,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -20,6 +21,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : false
     },
@@ -32,6 +34,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "src"
     },
@@ -44,6 +47,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "include"
     },
@@ -56,6 +60,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "hpp"
     },
@@ -68,6 +73,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "cpp"
     },
@@ -80,6 +86,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -92,6 +99,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -104,6 +112,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "other"
     },
@@ -116,6 +125,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -128,6 +138,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
     },
@@ -140,6 +151,7 @@
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : false
     }

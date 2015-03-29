@@ -47,6 +47,7 @@ const std::string trivial_field_definition(R"([
             "model_name" : "a model name"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "not_applicable"
     }
 ])");

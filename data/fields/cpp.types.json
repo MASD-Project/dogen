@@ -9,6 +9,7 @@
             "facet_name" : "cpp.types"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -22,6 +23,7 @@
             "facet_name" : "cpp.types"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -35,6 +37,7 @@
             "facet_name" : "cpp.types"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "types"
     },
@@ -48,6 +51,7 @@
             "facet_name" : "cpp.types"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : "types"
     },
@@ -61,6 +65,7 @@
             "facet_name" : "cpp.types"
         },
         "value_type" : "text_collection",
+        "definition_type" : "instance",
         "scope" : "root_module"
     },
     {
@@ -74,6 +79,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -88,6 +94,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -102,6 +109,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -115,6 +123,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -129,6 +138,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -142,6 +152,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
     },
@@ -156,6 +167,7 @@
             "formatter_name" : "cpp.types.class_header_formatter"
         },
         "value_type" : "text_collection",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -169,6 +181,7 @@
             "formatter_name" : "cpp.types.class_implementation_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -183,6 +196,7 @@
             "formatter_name" : "cpp.types.class_implementation_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -197,6 +211,7 @@
             "formatter_name" : "cpp.types.class_implementation_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -210,6 +225,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -224,6 +240,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -238,6 +255,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -251,6 +269,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -265,6 +284,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -278,6 +298,7 @@
             "formatter_name" : "cpp.types.enumeration_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
     },
@@ -292,6 +313,7 @@
             "formatter_name" : "cpp.types.enumeration_implementation_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -306,6 +328,7 @@
             "formatter_name" : "cpp.types.enumeration_implementation_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -320,6 +343,7 @@
             "formatter_name" : "cpp.types.enumeration_implementation_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -333,6 +357,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -347,6 +372,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -361,6 +387,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -374,6 +401,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -388,6 +416,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -401,6 +430,7 @@
             "formatter_name" : "cpp.types.exception_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
     },
@@ -415,6 +445,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -429,6 +460,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -443,6 +475,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -456,6 +489,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -470,6 +504,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -483,6 +518,7 @@
             "formatter_name" : "cpp.types.namespace_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
     },
@@ -497,6 +533,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : true
     },
@@ -511,6 +548,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
     },
@@ -525,6 +563,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -538,6 +577,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "boolean",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },
@@ -552,6 +592,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity"
     },
     {
@@ -565,6 +606,7 @@
             "formatter_name" : "cpp.types.visitor_header_formatter"
         },
         "value_type" : "text",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : "angle_brackets"
     }
