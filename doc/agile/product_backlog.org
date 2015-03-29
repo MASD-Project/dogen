@@ -1693,6 +1693,9 @@ models:
 - property must have non-empty name.
 - is versioned objects must have a property called version.
 - string table cannot have duplicate entries.
+- duplicate checks: properties cannot have duplicate names; classes in
+  a package cannot have the same name; namespaces at the same level
+  cannot have the same name;
 - Issue error when a property is a value of an abstract class: SML
   should fail to merge if the user attempts to create a property of a
   base class. It should allow pointers to the base class though (raw,
