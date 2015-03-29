@@ -14,13 +14,13 @@ implementing them.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-28 Sat 21:54]
+Clock summary at [2015-03-29 Sun 14:52]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *65:26* |       |      |
+| *Total time*                                                             | *65:59* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 65:26 |      |
+| Active                                                                   |         | 65:59 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 1:44 |
 | COMPLETED Consider creating a rules based engine                         |         |       | 2:09 |
 | COMPLETED Rename =dynamic= to =dynamic::schema=                          |         |       | 1:44 |
@@ -52,7 +52,8 @@ Clock summary at [2015-03-28 Sat 21:54]
 | COMPLETED Implement the general settings workflow with root object       |         |       | 5:10 |
 | STARTED Create a "supported" expander                                    |         |       | 1:54 |
 | STARTED Create a "populate includes operation"                           |         |       | 3:13 |
-| STARTED Consider creating field definition templates                     |         |       | 1:31 |
+| STARTED Consider creating field definition templates                     |         |       | 1:52 |
+| STARTED Compute managed directories from knitting options                |         |       | 0:12 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -858,6 +859,7 @@ Tasks:
 - change include formatter to use a list of strings.
 
 *** STARTED Consider creating field definition templates              :story:
+    CLOCK: [2015-03-29 Sun 14:18]--[2015-03-29 Sun 14:39] =>  0:21
     CLOCK: [2015-03-28 Sat 21:17]--[2015-03-28 Sat 21:54] =>  0:37
     CLOCK: [2015-03-28 Sat 20:20]--[2015-03-28 Sat 21:14] =>  0:54
 
@@ -906,12 +908,25 @@ think of anything else. However, it is not a particularly good name,
 and it is increasingly so now that we need to use it across models. We
 need a better name for this value type.
 
-*** Compute managed directories from knitting options                 :story:
+*** STARTED Compute managed directories from knitting options         :story:
+    CLOCK: [2015-03-29 Sun 14:39]--[2015-03-29 Sun 14:51] =>  0:12
 
 At present the backend is returning empty managed directories. This
 means housekeeping will fail in the new world. We need to change the
 interface of this method to take in the knitting options and return
 the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
 
 *** Add =static_formatter_name=                                       :story:
 
