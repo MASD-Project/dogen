@@ -151,6 +151,8 @@
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
 #include "dogen/cpp/types/settings/registrar_error.hpp"
+#include "dogen/cpp/types/settings/selection_error.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/settings/settings.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"

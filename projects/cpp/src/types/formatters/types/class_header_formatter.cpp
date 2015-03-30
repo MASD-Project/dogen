@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
 #include <sstream>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
@@ -27,16 +28,20 @@
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
-#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+using namespace dogen::cpp::formatters::types;
+static logger lg(logger_factory(traits::class_header_formatter_name()));
 
 const std::string formatter_settings_not_found(
     "Could not find settings for formatter: ");
@@ -53,16 +58,14 @@ const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 const std::string qname_not_found("Could not find qualified name in model: ");
 
-using namespace dogen::utility::log;
-using namespace dogen::cpp::formatters::types;
-static logger lg(logger_factory(traits::class_header_formatter_name()));
-
 }
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+void null_deleter(const sml::model *) {}
 
 class inclusion_expander final : public dynamic::expansion::expander_interface {
 public:
@@ -71,6 +74,7 @@ public:
 private:
     struct formatter_properties {
         dynamic::schema::field_definition inclusion_dependency;
+        std::shared_ptr<const sml::model> model;
     };
 
 public:
@@ -111,6 +115,9 @@ setup(const dynamic::expansion::expansion_context& ec) {
     }
 
     formatter_properties_ = formatter_properties();
+    formatter_properties_->model =
+        std::shared_ptr<const sml::model>(&ec.model(), &null_deleter);
+
     bool found_inclusion_dependency(false);
     for (const auto fd : i->second) {
         if (fd.name().simple() == cpp::traits::inclusion_dependency()) {
@@ -130,34 +137,30 @@ setup(const dynamic::expansion::expansion_context& ec) {
 }
 
 void inclusion_expander::
-expand(const sml::qname& /*qn*/, const dynamic::schema::scope_types& /*st*/,
+expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     dynamic::schema::object& o) const {
 
+    const auto& m(*formatter_properties_->model);
+
     // we only handle includes for objects.
-    // const auto i(m.objects().find(qn));
-    // if (i == m.objects().end())
-    //     return;
+    const auto i(m.objects().find(qn));
+    if (i == m.objects().end())
+        return;
 
     std::list<std::string> includes;
 
     // algorithm: domain headers need it for the swap function.
     includes.push_back(inclusion_constants::std::algorithm());
 
-    // const auto n(sml::string_converter::convert(qn));
-    // BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-    // BOOST_THROW_EXCEPTION(formatting_error(qname_not_found + n));
-
+    // settings::selector s(formatter_properties_->settings);
     // const auto io_fn(formatters::io::traits::facet_name());
-    // const auto iofs(s.select_global_facet_settings(io_fn));
-    // const bool io_enabled(iofs.enabled());
+    // const bool io_enabled(s.is_formatter_enabled(io_fn));
 
     // const auto types_fn(formatters::types::traits::facet_name());
-    // const auto tfs(s.select_global_facet_settings(types_fn));
-    // const bool use_integrated_io(
-    //     tfs.integrated_facets().find(io_fn) != tfs.integrated_facets().end());
+    // const bool use_integrated_io(s.is_facet_integrated(io_fn));
 
     // if (io_enabled && use_integrated_io)
-    //     r.push_back(inclusion_constants::std::iosfwd());
+    //     includes.push_back(inclusion_constants::std::iosfwd());
 
     // const auto& o(pair.second);
     // return r;
