@@ -30,14 +30,13 @@
 
 namespace {
 
-const std::string test_module("cpp_formatters");
+const std::string test_module("cpp");
 const std::string test_suite("boilerplate_formatter_spec");
 const std::string marker("this is a marker");
 const std::string empty;
 const std::string empty_marker;
 const dogen::formatters::licence empty_licence = dogen::formatters::licence();
-const dogen::cpp::formattables::includes empty_includes =
-    dogen::cpp::formattables::includes();
+const auto empty_includes(std::list<std::string>{});
 const std::string empty_guard;
 const std::string a_guard("A_PATH_HPP");
 const bool generate_premable(true);
@@ -245,13 +244,13 @@ dogen::formatters::licence mock_licence(const bool multiline = false) {
     return r;
 }
 
-dogen::cpp::formattables::includes mock_includes() {
-    dogen::cpp::formattables::includes r;
+std::list<std::string> mock_includes() {
+    std::list<std::string> r;
     // FIXME: bug in generic_string so not testing win32 paths atm
-    r.system().push_back("win32/system_inc_1");
-    r.system().push_back("unix/system_inc_2");
-    r.user().push_back("user_inc_1");
-    r.user().push_back("user_inc_2");
+    r.push_back("<win32/system_inc_1>");
+    r.push_back("<unix/system_inc_2>");
+    r.push_back("\"user_inc_1\"");
+    r.push_back("\"user_inc_2\"");
     return r;
 }
 

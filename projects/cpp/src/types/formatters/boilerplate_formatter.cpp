@@ -144,19 +144,19 @@ void boilerplate_formatter::format_guards_end(std::ostream& s,
 }
 
 void boilerplate_formatter::
-format_includes(std::ostream& s, const formattables::includes& i) const {
+format_includes(std::ostream& s, const std::list<std::string>& includes) const {
     include_formatter f;
-    f.format(s, i);
+    f.format(s, includes);
 }
 
 void boilerplate_formatter::
 format_begin(std::ostream& s, const dogen::formatters::annotation& a,
-    const formattables::includes& i,
+    const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
     format_preamble(s, a);
     format_guards_begin(s, header_guard);
-    format_includes(s, i);
+    format_includes(s, includes);
 }
 
 void boilerplate_formatter::format_postamble(std::ostream& s,

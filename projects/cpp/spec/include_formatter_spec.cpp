@@ -31,10 +31,9 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("cpp_formatters");
+const std::string test_module("cpp");
 const std::string test_suite("include_formatter_spec");
-const dogen::cpp::formattables::includes empty_includes =
-    dogen::cpp::formattables::includes();
+const auto empty_includes(std::list<std::string>{});
 
 const std::string with_includes(R"(#include <win32/system_inc_1>
 #include <unix/system_inc_2>
@@ -53,14 +52,14 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     SETUP_TEST_LOG_SOURCE("non_empty_includes_produces_expected_preprocessor_includes");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    dogen::cpp::formattables::includes i;
+    std::list<std::string> includes;
     // FIXME: not using windows formatting for now, problems with
     // FIXME: boost path.
     // i.system().push_back("win32\\system_inc_1");
-    i.system().push_back("win32/system_inc_1");
-    i.system().push_back("unix/system_inc_2");
-    i.user().push_back("user_inc_1");
-    i.user().push_back("user_inc_2");
+    includes.push_back("<win32/system_inc_1>");
+    includes.push_back("<unix/system_inc_2>");
+    includes.push_back("\"user_inc_1\"");
+    includes.push_back("\"user_inc_2\"");
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
@@ -68,7 +67,7 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     fo.push(s);
 
     dogen::cpp::formatters::include_formatter f;
-    f.format(fo, i);
+    f.format(fo, includes);
     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include "dogen/cpp/types/formattables/includes.hpp"
 
@@ -43,7 +44,7 @@ public:
     include_formatter(include_formatter&& rhs) = default;
 
 public:
-    void format(std::ostream& s, const formattables::includes& i) const;
+    void format(std::ostream& s, const std::list<std::string>& includes) const;
 };
 
 } } }

@@ -38,18 +38,11 @@ namespace cpp {
 namespace formatters {
 
 void include_formatter::
-format(std::ostream& s, const formattables::includes& i) const {
-    for (const auto& inc : i.system()) {
-        s << include << open_system << inc.generic_string()
-          << close_system << std::endl;
-    }
+format(std::ostream& s, const std::list<std::string>& includes) const {
+    for (const auto& inc : includes)
+        s << include << inc << std::endl;
 
-    for (const auto& inc : i.user()) {
-        s << include << open_user << inc.generic_string()
-          << close_user << std::endl;
-    }
-
-    if (!i.system().empty() || !i.user().empty())
+    if (!includes.empty())
         s << dogen::formatters::manage_blank_lines << std::endl;
 }
 

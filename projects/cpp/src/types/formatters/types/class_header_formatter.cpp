@@ -57,10 +57,6 @@ using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
 static logger lg(logger_factory(traits::class_header_formatter_name()));
 
-// FIXME
-const dogen::cpp::formattables::includes empty_includes =
-    dogen::cpp::formattables::includes();
-
 }
 
 namespace dogen {
@@ -235,7 +231,7 @@ class_header_formatter::format(const formattables::class_info& c) const {
     dogen::cpp::formatters::boilerplate_formatter f;
     const auto gs(c.settings().general_settings());
     if (gs)
-        f.format_begin(fo, gs->annotation(), empty_includes, hg);
+        f.format_begin(fo, gs->annotation(), fs.inclusion_dependencies(), hg);
 
     // do formatting.
 

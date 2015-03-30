@@ -278,7 +278,6 @@ std::string path_expander::
 to_header_guard_name(const boost::filesystem::path& p) const {
     bool is_first(true);
     std::ostringstream ss;
-    ss << double_quote;
     for (const auto& token : p) {
         std::string s(token.string());
         boost::replace_all(s, dot, separator);
@@ -286,7 +285,6 @@ to_header_guard_name(const boost::filesystem::path& p) const {
         ss << (is_first ? empty : separator) << s;
         is_first = false;
     }
-    ss << double_quote;
     return ss.str();
 }
 

@@ -29,7 +29,6 @@
 #include <string>
 #include <list>
 #include "dogen/formatters/types/annotation.hpp"
-#include "dogen/cpp/types/formattables/includes.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -109,14 +108,15 @@ private:
      * @brief Formats the preprocessor includes.
      */
     void format_includes(std::ostream& s,
-        const formattables::includes& i) const;
+        const std::list<std::string>& includes) const;
 
 public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
     void format_begin(std::ostream& s,
-        const dogen::formatters::annotation& a, const formattables::includes& i,
+        const dogen::formatters::annotation& a,
+        const std::list<std::string>& includes,
         const std::string& header_guard) const;
 
     /**

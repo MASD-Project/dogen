@@ -29,7 +29,7 @@
 
 namespace {
 
-const std::string test_module("cpp_formatters");
+const std::string test_module("cpp");
 const std::string test_suite("header_guard_formatter_spec");
 const std::string empty;
 const std::string empty_guard;
