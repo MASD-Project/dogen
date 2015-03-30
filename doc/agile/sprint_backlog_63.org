@@ -12,15 +12,15 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-03-30 Mon 13:13]
+Clock summary at [2015-03-30 Mon 18:03]
 
 | Headline                                       | Time   |      |      |
 |------------------------------------------------+--------+------+------|
-| *Total time*                                   | *1:48* |      |      |
+| *Total time*                                   | *4:21* |      |      |
 |------------------------------------------------+--------+------+------|
-| Active                                         |        | 1:48 |      |
+| Active                                         |        | 4:21 |      |
 | STARTED Sprint and product backlog grooming    |        |      | 0:08 |
-| STARTED Create a "populate includes operation" |        |      | 1:40 |
+| STARTED Create a "populate includes operation" |        |      | 4:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -99,6 +99,8 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-03-30 Mon 17:05]--[2015-03-30 Mon 18:03] =>  0:58
+    CLOCK: [2015-03-30 Mon 16:25]--[2015-03-30 Mon 17:04] =>  0:39
     CLOCK: [2015-03-30 Mon 14:58]--[2015-03-30 Mon 15:06] =>  0:08
     CLOCK: [2015-03-30 Mon 13:13]--[2015-03-30 Mon 14:01] =>  0:48
     CLOCK: [2015-03-30 Mon 12:56]--[2015-03-30 Mon 13:13] =>  0:17
@@ -149,6 +151,26 @@ Tasks:
   appropriate delimiters.
 - change include formatter to use a list of strings.
 
+Notes:
+
+- Actually we have gone the wrong way about inclusion. The expander is
+  not at the individual formatter level, but instead is a global
+  expander for all formatters. It receives some kind of "computation"
+  function from each formatter that, given a map of (qname,
+  formatter) to inclusion directive, produces a set of inclusion
+  dependencies. This is done on setup. Then, for each object, all the
+  expander does is to look up the qname to retrieve the inclusion
+  dependencies. The function can be available in the formatter
+  interface to make our life easier; =compute_inclusion_dependencies=?
+  On further thought we probably need to specialise this function for
+  each entity type as we need to receive the entity to compute as well
+  as the map above. Internally (in the CPP) we can create a class to
+  handle the work. We also need access to the dynamic object to figure
+  out what formatters are enabled etc. This is done internally using a
+  selector.
+- Consider renaming setup to =prepare=? Not sure if it makes a lot of
+  difference.
+
 *** STARTED Compute managed directories from knitting options         :story:
 
 At present the backend is returning empty managed directories. This
@@ -167,6 +189,14 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
+
+*** Expand fields from command line options into dynamic              :story:
+
+We need to ensure the following fields are populated, from the command
+line options:
+
+- integrated facets
+- enabled
 
 *** Add =static_formatter_name=                                       :story:
 
