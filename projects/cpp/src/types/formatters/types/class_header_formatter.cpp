@@ -40,10 +40,13 @@ namespace {
 
 const std::string formatter_settings_not_found(
     "Could not find settings for formatter: ");
-const std::string inclusion_path_not_set(
-    "Inclusion path for formatter is not set. Formatter: ");
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
+const std::string header_guard_not_set(
+    "Header guard for formatter is not set. Formatter: ");
+const std::string include_directive_not_set(
+    "Include directive for formatter is not set. Formatter: ");
+
 const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
 const std::string field_definition_not_found(
@@ -172,14 +175,14 @@ void class_header_formatter::validate(
     const settings::formatter_settings& fs) const {
 
     const auto& fn(ownership_hierarchy().formatter_name());
-    if (!fs.inclusion_path() || fs.inclusion_path()->empty()) {
-        BOOST_LOG_SEV(lg, error) << inclusion_path_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(inclusion_path_not_set + fn));
-    }
-
     if (fs.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
+    }
+
+    if (!fs.header_guard() || fs.header_guard()->empty()) {
+        BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
+        BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
     }
 }
 
@@ -228,16 +231,16 @@ class_header_formatter::format(const formattables::class_info& c) const {
     const auto fs(formatter_settings_for_formatter(c));
     validate(fs);
 
-    const auto ip(*fs.inclusion_path());
+    const auto hg(*fs.header_guard());
     dogen::cpp::formatters::boilerplate_formatter f;
     const auto gs(c.settings().general_settings());
     if (gs)
-        f.format_begin(fo, gs->annotation(), empty_includes, ip);
+        f.format_begin(fo, gs->annotation(), empty_includes, hg);
 
     // do formatting.
 
     if (gs)
-        f.format_end(fo, gs->annotation(), ip);
+        f.format_end(fo, gs->annotation(), hg);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;

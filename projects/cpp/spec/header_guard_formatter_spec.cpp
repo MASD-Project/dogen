@@ -23,7 +23,6 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/cpp/types/formatters/header_guard_formatter.hpp"
@@ -33,8 +32,8 @@ namespace {
 const std::string test_module("cpp_formatters");
 const std::string test_suite("header_guard_formatter_spec");
 const std::string empty;
-const boost::filesystem::path empty_path;
-const boost::filesystem::path non_empty_path("a/file.hpp");
+const std::string empty_guard;
+const std::string non_empty_guard("A_FILE_HPP");
 
 const std::string with_guard(R"(#ifndef A_FILE_HPP
 #define A_FILE_HPP
@@ -63,8 +62,8 @@ BOOST_AUTO_TEST_CASE(non_empty_path_produces_expected_header_guards) {
     fo.push(s);
 
     dogen::cpp::formatters::header_guard_formatter f;
-    f.format_begin(fo, non_empty_path);
-    f.format_end(fo, non_empty_path);
+    f.format_begin(fo, non_empty_guard);
+    f.format_end(fo, non_empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(with_guard, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -80,8 +79,8 @@ BOOST_AUTO_TEST_CASE(empty_path_produces_no_header_guards) {
     fo.push(s);
 
     dogen::cpp::formatters::header_guard_formatter f;
-    f.format_begin(s, empty_path);
-    f.format_end(s, empty_path);
+    f.format_begin(s, empty_guard);
+    f.format_end(s, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";

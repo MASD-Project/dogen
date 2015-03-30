@@ -53,18 +53,18 @@ std::string traits::file_path() {
     return r;
 }
 
+std::string traits::header_guard() {
+    static std::string r("header_guard");
+    return r;
+}
+
 std::string traits::inclusion_required() {
     static std::string r("inclusion_required");
     return r;
 }
 
-std::string traits::inclusion_path() {
-    static std::string r("inclusion_path");
-    return r;
-}
-
-std::string traits::inclusion_delimiter() {
-    static std::string r("inclusion_delimiter");
+std::string traits::inclusion_directive() {
+    static std::string r("inclusion_directive");
     return r;
 }
 

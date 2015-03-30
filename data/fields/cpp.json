@@ -36,6 +36,18 @@
     },
     {
         "name" : {
+            "simple" : "header_guard"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "formatter_group" : "cpp.header_files"
+        },
+        "value_type" : "text",
+        "definition_type" : "formatter_template",
+        "scope" : "entity"
+    },
+    {
+        "name" : {
             "simple" : "inclusion_required"
         },
         "ownership_hierarchy" : {
@@ -48,7 +60,7 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_path"
+            "simple" : "inclusion_directive"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp"
@@ -59,15 +71,14 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_delimiter"
+            "simple" : "inclusion_dependency"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
-        "value_type" : "text",
+        "value_type" : "text_collection",
         "definition_type" : "formatter_template",
-        "scope" : "entity",
-        "default_value" : "angle_brackets"
+        "scope" : "entity"
     },
     {
         "name" : {

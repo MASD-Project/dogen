@@ -44,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("file_path", v.file_path_.generic_string());
-    ar << make_nvp("inclusion_path", v.inclusion_path_);
+    ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar << make_nvp("integrated_facets", v.integrated_facets_);
 }
@@ -57,7 +57,7 @@ void load(Archive& ar,
     std::string file_path_tmp;
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
-    ar >> make_nvp("inclusion_path", v.inclusion_path_);
+    ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
     ar >> make_nvp("integrated_facets", v.integrated_facets_);
 }

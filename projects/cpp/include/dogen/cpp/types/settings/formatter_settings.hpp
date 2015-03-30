@@ -52,7 +52,7 @@ public:
     formatter_settings(
         const bool enabled,
         const boost::filesystem::path& file_path,
-        const boost::optional<boost::filesystem::path>& inclusion_path,
+        const boost::optional<std::string>& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::set<std::string>& integrated_facets);
 
@@ -72,10 +72,15 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
-    const boost::optional<boost::filesystem::path>& inclusion_path() const;
-    boost::optional<boost::filesystem::path>& inclusion_path();
-    void inclusion_path(const boost::optional<boost::filesystem::path>& v);
-    void inclusion_path(const boost::optional<boost::filesystem::path>&& v);
+    /**
+     * @brief Header guard to use for this file, if applicable.
+     */
+    /**@{*/
+    const boost::optional<std::string>& header_guard() const;
+    boost::optional<std::string>& header_guard();
+    void header_guard(const boost::optional<std::string>& v);
+    void header_guard(const boost::optional<std::string>&& v);
+    /**@}*/
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -100,7 +105,7 @@ public:
 private:
     bool enabled_;
     boost::filesystem::path file_path_;
-    boost::optional<boost::filesystem::path> inclusion_path_;
+    boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
     std::set<std::string> integrated_facets_;
 };

@@ -44,28 +44,13 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::string header_guard_formatter::
-to_header_guard_name(const boost::filesystem::path& p) const {
-    bool is_first(true);
-    std::ostringstream stream;
-    for (const auto& token : p) {
-        std::string s(token.string());
-        boost::replace_all(s, dot, separator);
-        boost::to_upper(s);
-        stream << (is_first ? empty : separator) << s;
-        is_first = false;
-    }
-    return stream.str();
-}
-
 void header_guard_formatter::
-format_begin(std::ostream& s, const boost::filesystem::path& p) {
-    if (p.empty())
+format_begin(std::ostream& s, const std::string& header_guard) {
+    if (header_guard.empty())
         return;
 
-    const auto guard_name(to_header_guard_name(p));
-    s << ifndef << guard_name;
-    s << std::endl << define << guard_name;
+    s << ifndef << header_guard;
+    s << std::endl << define << header_guard;
 
     s << std::endl << std::endl
       << msvc_line_1 << std::endl
@@ -75,8 +60,8 @@ format_begin(std::ostream& s, const boost::filesystem::path& p) {
 }
 
 void header_guard_formatter::
-format_end(std::ostream& s, const boost::filesystem::path& p) {
-    if (p.empty())
+format_end(std::ostream& s, const std::string& header_guard) {
+    if (header_guard.empty())
         return;
 
     s << endif << std::endl;

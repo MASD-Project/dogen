@@ -67,19 +67,19 @@ struct traits {
     static std::string file_path();
 
     /**
+     * @brief Header guards to use for this file, if any.
+     */
+    static std::string header_guard();
+
+    /**
      * @brief Is inclusion required for this type and formatter.
      */
     static std::string inclusion_required();
 
     /**
-     * @brief Include path to use for type.
+     * @brief Delimited include path to use for type.
      */
-    static std::string inclusion_path();
-
-    /**
-     * @brief Type of notation to use in inclusion.
-     */
-    static std::string inclusion_delimiter();
+    static std::string inclusion_directive();
 
     /**
      * @brief Files this file must include

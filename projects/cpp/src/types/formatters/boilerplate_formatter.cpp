@@ -123,24 +123,24 @@ format_preamble(std::ostream& s, const dogen::formatters::annotation& a) const {
 }
 
 void boilerplate_formatter::format_guards_begin(std::ostream& s,
-    const boost::filesystem::path& relative_file_path) const {
+    const std::string& header_guard) const {
     if (!generate_header_guards_)
         return;
 
     header_guard_formatter f;
-    f.format_begin(s, relative_file_path);
+    f.format_begin(s, header_guard);
 
-    if (!relative_file_path.empty())
+    if (!header_guard.empty())
         s << std::endl;
 }
 
 void boilerplate_formatter::format_guards_end(std::ostream& s,
-    const boost::filesystem::path& relative_file_path) const {
+    const std::string& header_guard) const {
     if (!generate_header_guards_)
         return;
 
     header_guard_formatter f;
-    f.format_end(s, relative_file_path);
+    f.format_end(s, header_guard);
 }
 
 void boilerplate_formatter::
@@ -152,10 +152,10 @@ format_includes(std::ostream& s, const formattables::includes& i) const {
 void boilerplate_formatter::
 format_begin(std::ostream& s, const dogen::formatters::annotation& a,
     const formattables::includes& i,
-    const boost::filesystem::path& relative_file_path) const {
+    const std::string& header_guard) const {
 
     format_preamble(s, a);
-    format_guards_begin(s, relative_file_path);
+    format_guards_begin(s, header_guard);
     format_includes(s, i);
 }
 
@@ -182,9 +182,9 @@ void boilerplate_formatter::format_postamble(std::ostream& s,
 
 void boilerplate_formatter::
 format_end(std::ostream& s, const dogen::formatters::annotation& a,
-    const boost::filesystem::path& relative_file_path) const {
+    const std::string& header_guard) const {
     format_postamble(s, a);
-    format_guards_end(s, relative_file_path);
+    format_guards_end(s, header_guard);
 }
 
 } } }

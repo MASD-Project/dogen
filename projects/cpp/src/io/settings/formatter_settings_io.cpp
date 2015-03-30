@@ -23,27 +23,27 @@
 #include <ostream>
 #include "dogen/cpp/io/settings/formatter_settings_io.hpp"
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<boost::filesystem::path>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace std {
@@ -89,7 +89,7 @@ std::ostream& operator<<(std::ostream& s, const formatter_settings& v) {
       << "\"__type__\": " << "\"dogen::cpp::settings::formatter_settings\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"inclusion_path\": " << v.inclusion_path() << ", "
+      << "\"header_guard\": " << v.header_guard() << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"integrated_facets\": " << v.integrated_facets()
       << " }";

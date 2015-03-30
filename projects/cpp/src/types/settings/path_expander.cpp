@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
@@ -39,8 +40,11 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.path_expander"));
 
+const std::string empty;
 const std::string underscore("_");
+const std::string double_quote("\"");
 const std::string dot(".");
+const std::string separator("_");
 const std::string unsupported_file_type("File type not supported: ");
 
 const std::string expander_not_setup(
@@ -79,14 +83,19 @@ void path_expander::setup_formatter_fields(
                 no_fields_for_formatter + formatter_name));
     }
 
-    bool found_file_path(false), found_inclusion_path(false);
+    bool found_file_path(false), found_inclusion_path(false),
+        found_header_guard(false);
+
     for (const auto fd : i->second) {
         if (fd.name().simple() == traits::file_path()) {
             fp.file_path = fd;
             found_file_path = true;
-        } else if (fd.name().simple() == traits::inclusion_path()) {
-            fp.inclusion_path = fd;
+        } else if (fd.name().simple() == traits::inclusion_directive()) {
+            fp.inclusion_directive = fd;
             found_inclusion_path = true;
+        } else if (fd.name().simple() == traits::header_guard()) {
+            fp.header_guard = fd;
+            found_header_guard = true;
         }
     }
 
@@ -101,6 +110,11 @@ void path_expander::setup_formatter_fields(
 
     if (!found_inclusion_path) {
         BOOST_LOG_SEV(lg, debug) << "Formatter does not support inclusion: "
+                                 << formatter_name;
+    }
+
+    if (!found_header_guard) {
+        BOOST_LOG_SEV(lg, debug) << "Formatter does not support header guards: "
                                  << formatter_name;
     }
 }
@@ -170,47 +184,6 @@ obtain_root_object(const sml::model& m) const {
 }
 
 boost::filesystem::path path_expander::
-make_file_path(const path_settings& ps, const sml::qname& qn) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
-                             << sml::string_converter::convert(qn);
-
-    boost::filesystem::path r;
-
-    const auto ft(ps.file_type());
-    switch (ft) {
-    case formatters::file_types::cpp_header:
-        if (ps.split_project())
-            r = ps.include_directory_path();
-        else {
-            r = ps.project_directory_path() / qn.model_name();
-            r /= ps.include_directory_name();
-        }
-        break;
-
-    case formatters::file_types::cpp_implementation:
-        if (ps.split_project())
-            r = ps.source_directory_path();
-        else {
-            r = ps.project_directory_path() / qn.model_name();
-            r /= ps.source_directory_name();
-        }
-        break;
-
-    default:
-        BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
-
-        using dynamic::expansion::expansion_error;
-        BOOST_THROW_EXCEPTION(expansion_error(unsupported_file_type +
-                boost::lexical_cast<std::string>(ft)));
-    }
-
-    r /= make_inclusion_path(ps, qn);
-
-    BOOST_LOG_SEV(lg, debug) << "Done creating file path. Result: " << r;
-    return r;
-}
-
-boost::filesystem::path path_expander::
 make_inclusion_path(const path_settings& ps, const sml::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
                              << sml::string_converter::convert(qn);
@@ -250,6 +223,128 @@ make_inclusion_path(const path_settings& ps, const sml::qname& qn) const {
     return r;
 }
 
+boost::filesystem::path path_expander::
+make_file_path(const path_settings& ps,
+    const boost::filesystem::path& inclusion_path,
+    const sml::qname& qn) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
+                             << sml::string_converter::convert(qn);
+
+    boost::filesystem::path r;
+
+    const auto ft(ps.file_type());
+    switch (ft) {
+    case formatters::file_types::cpp_header:
+        if (ps.split_project())
+            r = ps.include_directory_path();
+        else {
+            r = ps.project_directory_path() / qn.model_name();
+            r /= ps.include_directory_name();
+        }
+        break;
+
+    case formatters::file_types::cpp_implementation:
+        if (ps.split_project())
+            r = ps.source_directory_path();
+        else {
+            r = ps.project_directory_path() / qn.model_name();
+            r /= ps.source_directory_name();
+        }
+        break;
+
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
+
+        using dynamic::expansion::expansion_error;
+        BOOST_THROW_EXCEPTION(expansion_error(unsupported_file_type +
+                boost::lexical_cast<std::string>(ft)));
+    }
+
+    r /= inclusion_path;
+
+    BOOST_LOG_SEV(lg, debug) << "Done creating file path. Result: " << r;
+    return r;
+}
+
+std::string path_expander::
+to_inclusion_directive(const boost::filesystem::path& p) const {
+    std::ostringstream ss;
+    ss << double_quote << p.generic_string() << double_quote;
+    return ss.str();
+
+}
+
+std::string path_expander::
+to_header_guard_name(const boost::filesystem::path& p) const {
+    bool is_first(true);
+    std::ostringstream ss;
+    ss << double_quote;
+    for (const auto& token : p) {
+        std::string s(token.string());
+        boost::replace_all(s, dot, separator);
+        boost::to_upper(s);
+        ss << (is_first ? empty : separator) << s;
+        is_first = false;
+    }
+    ss << double_quote;
+    return ss.str();
+}
+
+void path_expander::expand_file_path(const formatter_properties& fp,
+    const boost::filesystem::path& file_path,
+    dynamic::schema::object& o) const {
+
+    if (!requires_file_path_expansion_)
+        return;
+
+    dynamic::schema::field_instance_factory f;
+    o.fields()[fp.file_path.name().qualified()] = f.make_text(file_path);
+}
+
+void path_expander::expand_header_guard(const formatter_properties& fp,
+    const boost::filesystem::path& inclusion_path,
+    dynamic::schema::object& o) const {
+
+    const bool header_guard_not_supported(!fp.header_guard);
+    if (header_guard_not_supported)
+        return;
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const bool override_found(fs.has_field(*fp.header_guard));
+    if (override_found) {
+        BOOST_LOG_SEV(lg, debug) << "Header guard has been overriden: "
+                                 << fp.formatter_name;
+        return;
+    }
+
+    dynamic::schema::field_instance_factory f;
+    const auto n(fp.header_guard->name().qualified());
+    o.fields()[n] = f.make_text(to_header_guard_name(inclusion_path));
+}
+
+void path_expander::expand_include_directive(const formatter_properties& fp,
+    const boost::filesystem::path& inclusion_path,
+    dynamic::schema::object& o) const {
+
+    const bool inclusion_directive_not_supported(!fp.inclusion_directive);
+    if (inclusion_directive_not_supported)
+        return;
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const bool override_found(fs.has_field(*fp.inclusion_directive));
+    if (override_found) {
+        BOOST_LOG_SEV(lg, debug) << "Include directive has been overriden: "
+                                 << fp.formatter_name;
+        return;
+    }
+
+    dynamic::schema::field_instance_factory f;
+    const auto n(fp.inclusion_directive->name().qualified());
+    o.fields()[n] = f.make_text(to_inclusion_directive(inclusion_path));
+}
+
 std::string path_expander::name() const {
     return static_name();
 }
@@ -265,41 +360,9 @@ void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
 
     requires_file_path_expansion_ = ec.model().is_target();
     factory_ = std::make_shared<path_settings_factory>(
-            ec.cpp_options(), ec.repository());
+        ec.cpp_options(), ec.repository());
     const auto root(obtain_root_object(ec.model()));
     formatter_properties_ = make_formatter_properties(ec.repository(), root);
-}
-
-void path_expander::expand_file_path(const sml::qname& qn,
-    const formatter_properties& fp, dynamic::schema::object& o) const {
-
-    if (!requires_file_path_expansion_)
-        return;
-
-    const auto file_path(make_file_path(fp.settings, qn));
-    dynamic::schema::field_instance_factory f;
-    o.fields()[fp.file_path.name().qualified()] = f.make_text(file_path);
-}
-
-void path_expander::expand_include_path(const sml::qname& qn,
-    const formatter_properties& fp, dynamic::schema::object& o) const {
-
-    const bool inclusion_paths_not_supported(!fp.inclusion_path);
-    if (inclusion_paths_not_supported)
-        return;
-
-    using namespace dynamic::schema;
-    const field_selector fs(o);
-    const bool override_found(fs.has_field(*fp.inclusion_path));
-    if (override_found) {
-        BOOST_LOG_SEV(lg, debug) << "Include path has been overriden: "
-                                 << fp.formatter_name;
-        return;
-    }
-
-    dynamic::schema::field_instance_factory f;
-    const auto ip(make_inclusion_path(fp.settings, qn));
-    o.fields()[fp.inclusion_path->name().qualified()] = f.make_text(ip);
 }
 
 void path_expander::expand(const sml::qname& qn,
@@ -308,8 +371,13 @@ void path_expander::expand(const sml::qname& qn,
 
     ensure_is_setup();
     for (const auto& pair : formatter_properties_) {
-        expand_file_path(qn, pair.second, o);
-        expand_include_path(qn, pair.second, o);
+        const auto& fp(pair.second);
+        const auto inclusion_path(make_inclusion_path(fp.settings, qn));
+        const auto file_path(make_file_path(fp.settings, inclusion_path, qn));
+
+        expand_file_path(fp, file_path, o);
+        expand_header_guard(fp, inclusion_path, o);
+        expand_include_directive(fp, inclusion_path, o);
     }
 }
 

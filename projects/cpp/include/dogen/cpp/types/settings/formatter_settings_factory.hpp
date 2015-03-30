@@ -53,7 +53,7 @@ private:
     struct formatter_properties {
         dynamic::schema::field_definition enabled;
         dynamic::schema::field_definition file_path;
-        boost::optional<dynamic::schema::field_definition> inclusion_path;
+        boost::optional<dynamic::schema::field_definition> header_guard;
         boost::optional<dynamic::schema::field_definition> inclusion_dependency;
         boost::optional<dynamic::schema::field_definition> integrated_facet;
     };

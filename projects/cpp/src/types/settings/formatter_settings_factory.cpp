@@ -43,8 +43,6 @@ const std::string found_some_field_definitions(
     "Formatter defines some but not all include field definitions: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
-const std::string invalid_delimiter(
-    "Invalid or unsupported inclusion delimiter type: ");
 
 }
 
@@ -76,8 +74,8 @@ formatter_settings_factory::make_formatter_properties(
         } else if (fd.name().simple() == traits::file_path()) {
             r.file_path = fd;
             found_file_path = true;
-        } else if (fd.name().simple() == traits::inclusion_path())
-            r.inclusion_path = fd;
+        } else if (fd.name().simple() == traits::header_guard())
+          r.header_guard = fd;
         else if (fd.name().simple() == traits::inclusion_dependency())
             r.inclusion_dependency = fd;
         else if (fd.name().simple() == traits::integrated_facet())
@@ -130,11 +128,8 @@ create_settings_for_formatter(const formatter_properties& fp,
     r.enabled(fs.get_boolean_content_or_default(fp.enabled));
     r.file_path(fs.get_text_content(fp.file_path));
 
-    if (fp.inclusion_path) {
-        using boost::filesystem::path;
-        const path p(fs.get_text_content(*fp.inclusion_path));
-        r.inclusion_path(p);
-    }
+    if (fp.header_guard)
+        r.header_guard(fs.get_text_content(*fp.header_guard));
 
     if (fp.inclusion_dependency && fs.has_field(*fp.inclusion_dependency)) {
         r.inclusion_dependencies(

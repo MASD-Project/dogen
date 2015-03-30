@@ -34,17 +34,17 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-boost::optional<boost::filesystem::path>
-create_boost_optional_boost_filesystem_path(unsigned int position) {
-    boost::optional<boost::filesystem::path> r(
-        create_boost_filesystem_path(position));
-    return r;
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+boost::optional<std::string>
+create_boost_optional_std_string(unsigned int position) {
+    boost::optional<std::string> r(
+        create_std_string(position));
+    return r;
 }
 
 std::list<std::string> create_std_list_std_string(unsigned int position) {
@@ -75,7 +75,7 @@ void formatter_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.file_path(create_boost_filesystem_path(position + 1));
-    v.inclusion_path(create_boost_optional_boost_filesystem_path(position + 2));
+    v.header_guard(create_boost_optional_std_string(position + 2));
     v.inclusion_dependencies(create_std_list_std_string(position + 3));
     v.integrated_facets(create_std_set_std_string(position + 4));
 }

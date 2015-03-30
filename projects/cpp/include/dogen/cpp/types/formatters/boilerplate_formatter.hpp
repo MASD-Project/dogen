@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <string>
 #include <list>
-#include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/annotation.hpp"
 #include "dogen/cpp/types/formattables/includes.hpp"
 
@@ -98,13 +97,13 @@ private:
      * @brief Formats the starting part of the header guards.
      */
     void format_guards_begin(std::ostream& s,
-        const boost::filesystem::path& relative_file_path) const;
+        const std::string& header_guard) const;
 
     /**
      * @brief Formats the ending part of the header guards.
      */
     void format_guards_end(std::ostream& s,
-        const boost::filesystem::path& relative_file_path) const;
+        const std::string& header_guard) const;
 
     /**
      * @brief Formats the preprocessor includes.
@@ -118,13 +117,13 @@ public:
      */
     void format_begin(std::ostream& s,
         const dogen::formatters::annotation& a, const formattables::includes& i,
-        const boost::filesystem::path& relative_file_path) const;
+        const std::string& header_guard) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
     void format_end(std::ostream& s, const dogen::formatters::annotation& a,
-        const boost::filesystem::path& relative_file_path) const;
+        const std::string& header_guard) const;
 
 private:
     const bool generate_preamble_;

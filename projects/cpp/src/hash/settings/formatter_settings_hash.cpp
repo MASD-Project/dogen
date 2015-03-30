@@ -35,13 +35,13 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v){
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v){
     std::size_t seed(0);
 
     if (!v)
         return seed;
 
-    combine(seed, hash_boost_filesystem_path(*v));
+    combine(seed, *v);
     return seed;
 }
 
@@ -72,7 +72,7 @@ std::size_t formatter_settings_hasher::hash(const formatter_settings&v) {
 
     combine(seed, v.enabled());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_boost_optional_boost_filesystem_path(v.inclusion_path()));
+    combine(seed, hash_boost_optional_std_string(v.header_guard()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
     combine(seed, hash_std_set_std_string(v.integrated_facets()));
 

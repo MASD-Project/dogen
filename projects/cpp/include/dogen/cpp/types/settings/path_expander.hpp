@@ -63,7 +63,8 @@ private:
     struct formatter_properties {
         std::string formatter_name;
         dynamic::schema::field_definition file_path;
-        boost::optional<dynamic::schema::field_definition> inclusion_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_directive;
+        boost::optional<dynamic::schema::field_definition> header_guard;
         path_settings settings;
     };
 
@@ -103,30 +104,50 @@ private:
     void ensure_is_setup() const;
 
     /**
-     * @brief Builds an absolute path for the supplied qualified name.
-     */
-    boost::filesystem::path make_file_path(const path_settings& ps,
-        const sml::qname& qn) const;
-
-    /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(const path_settings& ps,
         const sml::qname& qn) const;
 
+    /**
+     * @brief Builds an absolute path for the supplied qualified name.
+     */
+    boost::filesystem::path make_file_path(const path_settings& ps,
+        const boost::filesystem::path& inclusion_path,
+        const sml::qname& qn) const;
+
+    /**
+     * @brief Converts a relative path to an inclusion directive.
+     */
+    std::string to_inclusion_directive(const boost::filesystem::path& p) const;
+
+    /**
+     * @brief Converts a relative path to a header file into a C++
+     * header guard name.
+     */
+    std::string to_header_guard_name(const boost::filesystem::path& p) const;
+
 private:
     /**
      * @brief Handles the dynamic expansion of the file path.
      */
-    void expand_file_path(const sml::qname& qn, const formatter_properties& fp,
+    void expand_file_path(const formatter_properties& fp,
+        const boost::filesystem::path& file_path,
         dynamic::schema::object& o) const;
 
     /**
-     * @brief Handles the dynamic expansion of the include path.
+     * @brief Handles the dynamic expansion of the header guard.
      */
-    void expand_include_path(const sml::qname& qn,
-        const formatter_properties& fp,
+    void expand_header_guard(const formatter_properties& fp,
+        const boost::filesystem::path& inclusion_path,
+        dynamic::schema::object& o) const;
+
+    /**
+     * @brief Handles the dynamic expansion of the include directive.
+     */
+    void expand_include_directive(const formatter_properties& fp,
+        const boost::filesystem::path& inclusion_path,
         dynamic::schema::object& o) const;
 
 public:

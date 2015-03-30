@@ -57,20 +57,6 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_dependency",
-            "qualified" : "cpp.types.inclusion_dependency"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.types",
-            "formatter_name" : "cpp.types.class_header_formatter"
-        },
-        "value_type" : "text_collection",
-        "definition_type" : "instance",
-        "scope" : "entity"
-    },
-    {
-        "name" : {
             "simple" : "postfix",
             "qualified" : "cpp.types.class_implementation_formatter.postfix"
         },

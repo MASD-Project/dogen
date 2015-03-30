@@ -10,7 +10,7 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>"
             }
         },
         {
@@ -19,7 +19,7 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>"
             }
         },
         {
@@ -27,7 +27,7 @@
             "simple_name" : "int32_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -36,7 +36,7 @@
             "simple_name" : "int64_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -45,7 +45,7 @@
             "simple_name" : "uint8_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -54,7 +54,7 @@
             "simple_name" : "uint16_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -63,7 +63,7 @@
             "simple_name" : "uint32_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -72,7 +72,7 @@
             "simple_name" : "uint64_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
-                "cpp.types.class_header_formatter.inclusion_path" : "cstdint",
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -81,8 +81,8 @@
             "simple_name" : "string",
             "extensions" : {
                 "cpp.type.family" : "string",
-                "cpp.types.class_header_formatter.inclusion_path" : "string",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/string.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<string>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>"
             }
         },
         {
@@ -91,8 +91,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "vector",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/vector.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<vector>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/vector.hpp>"
             }
         },
         {
@@ -101,8 +101,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "deque",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/deque.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<deque>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/deque.hpp>"
             }
         },
         {
@@ -111,7 +111,7 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "array"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<array>"
             }
         },
         {
@@ -120,8 +120,8 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "list",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/list.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<list>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/list.hpp>"
             }
         },
         {
@@ -130,7 +130,7 @@
             "object_type" : "sequence_container",
             "extensions" : {
                 "cpp.type.family" : "sequence_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "forward_list"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<forward_list>"
             }
         },
         {
@@ -139,8 +139,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "set",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/set.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<set>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>"
             }
         },
         {
@@ -149,8 +149,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "multiset",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/multiset.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>"
             }
         },
         {
@@ -159,7 +159,7 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.type.family" : "hash_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "unordered_set"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>"
             }
         },
         {
@@ -168,8 +168,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "map",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/map.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<map>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/map.hpp>"
             }
         },
         {
@@ -178,8 +178,8 @@
             "object_type" : "ordered_container",
             "extensions" : {
                 "cpp.type.family" : "ordered_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "multimap",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/multimap.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<multimap>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multimap.hpp>"
             }
         },
         {
@@ -188,15 +188,15 @@
             "object_type" : "hash_container",
             "extensions" : {
                 "cpp.type.family" : "hash_container",
-                "cpp.types.class_header_formatter.inclusion_path" : "unordered_map"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>"
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "pair",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_path" : "pair",
-                "cpp.serialization.class_header_formatter.inclusion_path" : "boost/serialization/pair.hpp"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<pair>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/pair.hpp>"
             }
         },
         {
@@ -205,7 +205,7 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.inclusion_path" : "memory"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
         {
@@ -214,7 +214,7 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.inclusion_path" : "memory"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
         {
@@ -223,14 +223,14 @@
             "object_type" : "smart_pointer",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.inclusion_path" : "memory"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "function",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_path" : "functional"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<functional>"
             }
         },
         {
@@ -238,14 +238,14 @@
             "simple_name" : "optional",
             "extensions" : {
                 "cpp.type.family" : "smart_pointer",
-                "cpp.types.class_header_formatter.inclusion_path" : "functional"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<functional>"
             }
         },
         {
             "meta_type" : "object",
             "simple_name" : "ostream",
             "extensions" : {
-                "cpp.types.class_header_formatter.inclusion_path" : "ostream"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<ostream>"
             }
         }
     ]

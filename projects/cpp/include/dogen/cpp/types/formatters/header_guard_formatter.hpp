@@ -27,7 +27,6 @@
 
 #include <iosfwd>
 #include <string>
-#include <boost/filesystem/path.hpp>
 
 namespace dogen {
 namespace cpp {
@@ -45,23 +44,16 @@ public:
         const header_guard_formatter&) = delete;
     header_guard_formatter(header_guard_formatter&& rhs) = default;
 
-private:
-    /**
-     * @brief Converts a relative path to a header file into a C++
-     * header guard name.
-     */
-    std::string to_header_guard_name(const boost::filesystem::path& p) const;
-
 public:
     /**
      * @brief Creates the starting block of the header guard.
      */
-    void format_begin(std::ostream& s, const boost::filesystem::path& p);
+    void format_begin(std::ostream& s, const std::string& header_guard);
 
     /**
      * @brief Creates the ending block of the header guard.
      */
-    void format_end(std::ostream& s, const boost::filesystem::path& p);
+    void format_end(std::ostream& s, const std::string& header_guard);
 };
 
 } } }

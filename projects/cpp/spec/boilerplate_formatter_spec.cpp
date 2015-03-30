@@ -38,8 +38,8 @@ const std::string empty_marker;
 const dogen::formatters::licence empty_licence = dogen::formatters::licence();
 const dogen::cpp::formattables::includes empty_includes =
     dogen::cpp::formattables::includes();
-const boost::filesystem::path empty_path;
-const boost::filesystem::path a_path("a/path.hpp");
+const std::string empty_guard;
+const std::string a_guard("A_PATH_HPP");
 const bool generate_premable(true);
 
 const std::string modeline_top(R"(/* -*- a_field: a_value -*-
@@ -276,8 +276,8 @@ BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -297,8 +297,8 @@ BOOST_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) 
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -318,8 +318,8 @@ BOOST_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -339,8 +339,8 @@ BOOST_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -359,8 +359,8 @@ BOOST_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -381,8 +381,8 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -403,8 +403,8 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_cor
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(
         asserter::assert_equals_marker(licence_no_copyright_notices, r));
@@ -424,8 +424,8 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
     indent_filter::push(fo, 4);
     fo.push(s);
 
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -444,8 +444,8 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correct
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -464,8 +464,8 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -484,8 +484,8 @@ BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_path);
-    f.format_end(fo, a, empty_path);
+    f.format_begin(fo, a, empty_includes, empty_guard);
+    f.format_end(fo, a, empty_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -505,8 +505,8 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, a_path);
-    f.format_end(fo, a, a_path);
+    f.format_begin(fo, a, empty_includes, a_guard);
+    f.format_end(fo, a, a_guard);
     const auto r(s.str());
     BOOST_CHECK(r == guards_with_top_modeline);
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_top_modeline, r));
@@ -527,8 +527,8 @@ BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly)
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, a_path);
-    f.format_end(fo, a, a_path);
+    f.format_begin(fo, a, empty_includes, a_guard);
+    f.format_end(fo, a, a_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_bottom_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -549,8 +549,8 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f;
-    f.format_begin(fo, a, inc, a_path);
-    f.format_end(fo, a, a_path);
+    f.format_begin(fo, a, inc, a_guard);
+    f.format_end(fo, a, a_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -571,8 +571,8 @@ BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
     fo.push(s);
 
     dogen::cpp::formatters::boilerplate_formatter f(!generate_premable);
-    f.format_begin(fo, a, inc, a_path);
-    f.format_end(fo, a, a_path);
+    f.format_begin(fo, a, inc, a_guard);
+    f.format_end(fo, a, a_guard);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
