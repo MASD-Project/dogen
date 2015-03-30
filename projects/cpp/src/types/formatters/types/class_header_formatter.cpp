@@ -29,6 +29,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/path_expander.hpp"
+#include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
@@ -65,7 +66,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-void null_deleter(const sml::model *) {}
+void null_deleter(const dynamic::expansion::expansion_context *) {}
 
 class inclusion_expander final : public dynamic::expansion::expander_interface {
 public:
@@ -74,7 +75,7 @@ public:
 private:
     struct formatter_properties {
         dynamic::schema::field_definition inclusion_dependency;
-        std::shared_ptr<const sml::model> model;
+        std::shared_ptr<const dynamic::expansion::expansion_context> context;
     };
 
 public:
@@ -115,8 +116,9 @@ setup(const dynamic::expansion::expansion_context& ec) {
     }
 
     formatter_properties_ = formatter_properties();
-    formatter_properties_->model =
-        std::shared_ptr<const sml::model>(&ec.model(), &null_deleter);
+    formatter_properties_->context =
+        std::shared_ptr<const dynamic::expansion::expansion_context>(
+            &ec, &null_deleter);
 
     bool found_inclusion_dependency(false);
     for (const auto fd : i->second) {
@@ -140,7 +142,7 @@ void inclusion_expander::
 expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     dynamic::schema::object& o) const {
 
-    const auto& m(*formatter_properties_->model);
+    const auto& m(formatter_properties_->context->model());
 
     // we only handle includes for objects.
     const auto i(m.objects().find(qn));
@@ -152,18 +154,22 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     // algorithm: domain headers need it for the swap function.
     includes.push_back(inclusion_constants::std::algorithm());
 
-    // settings::selector s(formatter_properties_->settings);
-    // const auto io_fn(formatters::io::traits::facet_name());
-    // const bool io_enabled(s.is_formatter_enabled(io_fn));
+    selector s(formatter_properties_->context->repository(), o);
+    const auto io_fn(formatters::io::traits::facet_name());
+    const bool io_enabled(s.is_formatter_enabled(io_fn));
 
-    // const auto types_fn(formatters::types::traits::facet_name());
-    // const bool use_integrated_io(s.is_facet_integrated(io_fn));
+    const auto types_fn(formatters::types::traits::facet_name());
+    const bool use_integrated_io(s.is_facet_integrated(types_fn, io_fn));
 
-    // if (io_enabled && use_integrated_io)
-    //     includes.push_back(inclusion_constants::std::iosfwd());
+    if (io_enabled && use_integrated_io)
+        includes.push_back(inclusion_constants::std::iosfwd());
 
-    // const auto& o(pair.second);
-    // return r;
+    // const auto& rel(i->second.relationships());
+    // const auto ra(rel.find(sml::relationship_types::regular_associations));
+    // for (const auto a : ra) {
+    //     m.objects().find(
+    //     selector s(formatter_properties_->context->repository(), o);
+    // }
 
     dynamic::schema::field_instance_factory f;
     o.fields()[formatter_properties_->inclusion_dependency.name().qualified()] =

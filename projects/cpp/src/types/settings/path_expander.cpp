@@ -355,7 +355,6 @@ const std::forward_list<std::string>& path_expander::dependencies() const {
 }
 
 void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
-
     requires_file_path_expansion_ = ec.model().is_target();
     factory_ = std::make_shared<path_settings_factory>(
         ec.cpp_options(), ec.repository());

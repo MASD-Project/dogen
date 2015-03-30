@@ -18,37 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_SELECTOR_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_SELECTOR_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SELECTOR_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen/cpp/types/settings/bundle.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace settings {
+namespace formatters {
 
-/**
- * @brief Performs a set of canned queries over a settings bundle.
- */
 class selector {
 public:
-    explicit selector(const bundle& b);
+    selector(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& o);
+
+private:
+    /**
+     * @brief Returns a qualified field name.
+     */
+    std::string qualify(const std::string& prefix,
+        const std::string& field_name) const;
 
 public:
-    /**
-     * @brief Returns the formatter settings for the supplied
-     * formatter name.
-     *
-     * @pre There must be settings for this formatter name.
-     */
-    const formatter_settings& settings_for_formatter(
-        const std::string& formatter_name) const;
-
     /**
      * @brief Returns true if the supplied formatter is enabled, false
      * otherwise.
@@ -62,8 +60,10 @@ public:
     bool is_facet_integrated(const std::string& formatter_name,
         const std::string& facet_name) const;
 
-public:
-    const bundle& bundle_;
+private:
+    const dynamic::schema::repository& repository_;
+    const dynamic::schema::object& object_;
+    const dynamic::schema::field_selector field_selector_;
 };
 
 } } }

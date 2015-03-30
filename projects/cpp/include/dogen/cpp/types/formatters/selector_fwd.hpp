@@ -18,21 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_SELECTION_ERROR_FWD_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_SELECTION_ERROR_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SELECTOR_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SELECTOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
-#include <string>
-
 namespace dogen {
 namespace cpp {
-namespace settings {
+namespace formatters {
 
-class selection_error;
+class selector;
 
 } } }
 
