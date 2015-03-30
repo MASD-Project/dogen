@@ -31,6 +31,22 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
+*** COMPLETED Clean-up hierarchical support in dynamic                :story:
+    CLOSED: [2015-03-30 Mon 07:29]
+
+At present there are a number of limitations on how we have
+implemented hierarchical support:
+
+- fields from one model will get mixed up with other models;
+- fields from one formatter in one facet will get mixed up with fields
+  from other formatters in other facets with the same name.
+
+We need to improve on the indexer. While we're at it, we should do a
+few other assorted clean-ups:
+
+- rename workflow (since we now have two);
+- rename content extensions since this is a selector in disguise;
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -203,21 +219,6 @@ At present we are ignoring properties (and operations). This is ok as
 we don't really have a use case for expansion there. However, it would
 be nice if we could just expand them anyway. We just need to make sure
 we don't do things like copying from root object.
-
-*** Clean-up hierarchical support in dynamic                          :story:
-
-At present there are a number of limitations on how we have
-implemented hierarchical support:
-
-- fields from one model will get mixed up with other models;
-- fields from one formatter in one facet will get mixed up with fields
-  from other formatters in other facets with the same name.
-
-We need to improve on the indexer. While we're at it, we should do a
-few other assorted clean-ups:
-
-- rename workflow (since we now have two);
-- rename content extensions since this is a selector in disguise;
 
 *** Create settings expander and switcher                             :story:
 
