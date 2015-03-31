@@ -5126,6 +5126,13 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add vagrant and docker support                                    :story:
+
+It would be nice to provide vagrant and docker support to dogen in
+terms of development. The idea is that you can =git clone= the repo
+and then =vagrant up= it and you would be ready to start coding. This
+would make drive-by patches much easier.
+
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
 When we start supporting more than one language, one interesting
