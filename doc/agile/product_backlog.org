@@ -3548,7 +3548,7 @@ format method. There are a few advantages to this approach:
   if they need more dynamic extensions the user would have to add
   types to the C++ model.
 
-Start of more recent notes on this
+Start of more recent notes on this:
 
 - =@insert_code= is a really bad idea. First, we will generate two
   versions of the same CPP file, forcing us to do all sorts of CMake
@@ -3597,6 +3597,24 @@ Start of more recent notes on this
   different for a potentially existing file, it will overwrite
   it. Each project will have its stitch targets just like dogen. Users
   will manually trigger stitching as they do with dogen.
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. All these files are automatically
+  added to the list of "exceptions" for housekeeping so that they do
+  not get deleted. However, stitch would not know anything at all
+  about any of this; this is all knitter's functionality. The problem
+  is at present we haven't got a good place to perform the stitching
+  as part of knitter's workflows. Perhaps as part of the expansion, we
+  could set a number of stitch fields which would then be picked up by
+  some knit-specific workflow classes.
 
 End of more recent notes
 
