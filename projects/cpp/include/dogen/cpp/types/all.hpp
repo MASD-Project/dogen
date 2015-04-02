@@ -19,6 +19,15 @@
  *
  */
 #include "dogen/cpp/types/cpp.hpp"
+#include "dogen/cpp/types/expansion/container.hpp"
+#include "dogen/cpp/types/expansion/expander.hpp"
+#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_provider.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_factory.hpp"
+#include "dogen/cpp/types/expansion/registrar.hpp"
+#include "dogen/cpp/types/expansion/workflow.hpp"
 #include "dogen/cpp/types/formattables/abilities.hpp"
 #include "dogen/cpp/types/formattables/aspect_types.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"

@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/serialization/expansion/expansion_inputs_ser.hpp"
+#include "dogen/cpp/serialization/expansion/path_derivatives_ser.hpp"
 #include "dogen/cpp/serialization/formattables/abilities_ser.hpp"
 #include "dogen/cpp/serialization/formattables/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_aspects_ser.hpp"
