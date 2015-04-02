@@ -45,7 +45,7 @@ public:
 public:
     expansion_inputs(
         const dogen::cpp::expansion::path_derivatives& path_derivatives,
-        const std::list<std::string>& inclusion_dependencies_by_formatter_name);
+        const std::list<std::string>& inclusion_dependencies);
 
 private:
     template<typename Archive>
@@ -60,10 +60,10 @@ public:
     void path_derivatives(const dogen::cpp::expansion::path_derivatives& v);
     void path_derivatives(const dogen::cpp::expansion::path_derivatives&& v);
 
-    const std::list<std::string>& inclusion_dependencies_by_formatter_name() const;
-    std::list<std::string>& inclusion_dependencies_by_formatter_name();
-    void inclusion_dependencies_by_formatter_name(const std::list<std::string>& v);
-    void inclusion_dependencies_by_formatter_name(const std::list<std::string>&& v);
+    const std::list<std::string>& inclusion_dependencies() const;
+    std::list<std::string>& inclusion_dependencies();
+    void inclusion_dependencies(const std::list<std::string>& v);
+    void inclusion_dependencies(const std::list<std::string>&& v);
 
 public:
     bool operator==(const expansion_inputs& rhs) const;
@@ -77,7 +77,7 @@ public:
 
 private:
     dogen::cpp::expansion::path_derivatives path_derivatives_;
-    std::list<std::string> inclusion_dependencies_by_formatter_name_;
+    std::list<std::string> inclusion_dependencies_;
 };
 
 } } }

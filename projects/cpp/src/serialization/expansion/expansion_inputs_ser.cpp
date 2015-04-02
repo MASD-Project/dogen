@@ -41,7 +41,7 @@ void save(Archive& ar,
     const dogen::cpp::expansion::expansion_inputs& v,
     const unsigned int /*version*/) {
     ar << make_nvp("path_derivatives", v.path_derivatives_);
-    ar << make_nvp("inclusion_dependencies_by_formatter_name", v.inclusion_dependencies_by_formatter_name_);
+    ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
 template<typename Archive>
@@ -49,7 +49,7 @@ void load(Archive& ar,
     dogen::cpp::expansion::expansion_inputs& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("path_derivatives", v.path_derivatives_);
-    ar >> make_nvp("inclusion_dependencies_by_formatter_name", v.inclusion_dependencies_by_formatter_name_);
+    ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
 } }

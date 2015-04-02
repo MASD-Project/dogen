@@ -12,15 +12,15 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-02 Thu 16:03]
+Clock summary at [2015-04-02 Thu 18:02]
 
 | Headline                                       | Time   |      |      |
 |------------------------------------------------+--------+------+------|
-| *Total time*                                   | *6:49* |      |      |
+| *Total time*                                   | *8:47* |      |      |
 |------------------------------------------------+--------+------+------|
-| Active                                         |        | 6:49 |      |
+| Active                                         |        | 8:47 |      |
 | STARTED Sprint and product backlog grooming    |        |      | 0:08 |
-| STARTED Create a "populate includes operation" |        |      | 6:41 |
+| STARTED Create a "populate includes operation" |        |      | 8:39 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -99,6 +99,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-04-02 Thu 16:04]--[2015-04-02 Thu 18:02] =>  1:58
     CLOCK: [2015-04-02 Thu 15:03]--[2015-04-02 Thu 16:03] =>  1:00
     CLOCK: [2015-04-01 Wed 16:44]--[2015-04-01 Wed 18:12] =>  1:28
     CLOCK: [2015-03-30 Mon 17:05]--[2015-03-30 Mon 18:03] =>  0:58

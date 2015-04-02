@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const expansion_inputs& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::expansion::expansion_inputs\"" << ", "
       << "\"path_derivatives\": " << v.path_derivatives() << ", "
-      << "\"inclusion_dependencies_by_formatter_name\": " << v.inclusion_dependencies_by_formatter_name()
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);
 }

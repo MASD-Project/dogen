@@ -54,7 +54,7 @@ expansion_inputs_generator::expansion_inputs_generator() : position_(0) { }
 void expansion_inputs_generator::
 populate(const unsigned int position, result_type& v) {
     v.path_derivatives(create_dogen_cpp_expansion_path_derivatives(position + 0));
-    v.inclusion_dependencies_by_formatter_name(create_std_list_std_string(position + 1));
+    v.inclusion_dependencies(create_std_list_std_string(position + 1));
 }
 
 expansion_inputs_generator::result_type

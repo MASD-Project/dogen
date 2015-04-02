@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_CONTAINER_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_CONTAINER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_PROVISION_ERROR_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_PROVISION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/exception/info.hpp>
+#include <string>
+
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-class container {
-    
+/**
+ * @brief An error occurred whilst providing inclusion dependencies.
+ */
+class provision_error : public virtual std::exception, public virtual boost::exception {
+public:
+    provision_error() = default;
+    ~provision_error() noexcept = default;
+
+public:
+    provision_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } }

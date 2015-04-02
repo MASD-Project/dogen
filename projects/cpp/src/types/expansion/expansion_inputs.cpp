@@ -26,19 +26,19 @@ namespace expansion {
 
 expansion_inputs::expansion_inputs(
     const dogen::cpp::expansion::path_derivatives& path_derivatives,
-    const std::list<std::string>& inclusion_dependencies_by_formatter_name)
+    const std::list<std::string>& inclusion_dependencies)
     : path_derivatives_(path_derivatives),
-      inclusion_dependencies_by_formatter_name_(inclusion_dependencies_by_formatter_name) { }
+      inclusion_dependencies_(inclusion_dependencies) { }
 
 void expansion_inputs::swap(expansion_inputs& other) noexcept {
     using std::swap;
     swap(path_derivatives_, other.path_derivatives_);
-    swap(inclusion_dependencies_by_formatter_name_, other.inclusion_dependencies_by_formatter_name_);
+    swap(inclusion_dependencies_, other.inclusion_dependencies_);
 }
 
 bool expansion_inputs::operator==(const expansion_inputs& rhs) const {
     return path_derivatives_ == rhs.path_derivatives_ &&
-        inclusion_dependencies_by_formatter_name_ == rhs.inclusion_dependencies_by_formatter_name_;
+        inclusion_dependencies_ == rhs.inclusion_dependencies_;
 }
 
 expansion_inputs& expansion_inputs::operator=(expansion_inputs other) {
@@ -63,20 +63,20 @@ void expansion_inputs::path_derivatives(const dogen::cpp::expansion::path_deriva
     path_derivatives_ = std::move(v);
 }
 
-const std::list<std::string>& expansion_inputs::inclusion_dependencies_by_formatter_name() const {
-    return inclusion_dependencies_by_formatter_name_;
+const std::list<std::string>& expansion_inputs::inclusion_dependencies() const {
+    return inclusion_dependencies_;
 }
 
-std::list<std::string>& expansion_inputs::inclusion_dependencies_by_formatter_name() {
-    return inclusion_dependencies_by_formatter_name_;
+std::list<std::string>& expansion_inputs::inclusion_dependencies() {
+    return inclusion_dependencies_;
 }
 
-void expansion_inputs::inclusion_dependencies_by_formatter_name(const std::list<std::string>& v) {
-    inclusion_dependencies_by_formatter_name_ = v;
+void expansion_inputs::inclusion_dependencies(const std::list<std::string>& v) {
+    inclusion_dependencies_ = v;
 }
 
-void expansion_inputs::inclusion_dependencies_by_formatter_name(const std::list<std::string>&& v) {
-    inclusion_dependencies_by_formatter_name_ = std::move(v);
+void expansion_inputs::inclusion_dependencies(const std::list<std::string>&& v) {
+    inclusion_dependencies_ = std::move(v);
 }
 
 } } }

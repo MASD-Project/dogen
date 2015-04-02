@@ -48,7 +48,7 @@ std::size_t expansion_inputs_hasher::hash(const expansion_inputs&v) {
     std::size_t seed(0);
 
     combine(seed, v.path_derivatives());
-    combine(seed, hash_std_list_std_string(v.inclusion_dependencies_by_formatter_name()));
+    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
 
     return seed;
 }
