@@ -99,6 +99,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-04-03 Fri 16:17]
     CLOCK: [2015-04-02 Thu 16:04]--[2015-04-02 Thu 18:02] =>  1:58
     CLOCK: [2015-04-02 Thu 15:03]--[2015-04-02 Thu 16:03] =>  1:00
     CLOCK: [2015-04-01 Wed 16:44]--[2015-04-01 Wed 18:12] =>  1:28

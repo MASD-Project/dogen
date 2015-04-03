@@ -25,12 +25,37 @@
 #pragma once
 #endif
 
+#include <forward_list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/object.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
 class container {
-    
+public:
+    const std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::object>
+            >
+        >&
+    object_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::object>
+            >
+        >&
+    object_providers();
+
+private:
+    std::forward_list<
+    boost::shared_ptr<
+        inclusion_dependencies_provider_interface<sml::object>
+        >
+    > object_providers_;
 };
 
 } } }

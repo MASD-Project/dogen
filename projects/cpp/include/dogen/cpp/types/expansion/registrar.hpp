@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/object.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
 
 namespace dogen {
@@ -34,6 +37,11 @@ namespace expansion {
 class registrar {
 public:
     const expansion::container& container() const;
+
+public:
+    void register_provider(boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::object>
+            > p);
 
 private:
     expansion::container container_;

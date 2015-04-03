@@ -26,6 +26,7 @@
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/path_expander.hpp"
@@ -65,6 +66,27 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+class provider : public expansion::
+        inclusion_dependencies_provider_interface<sml::object> {
+
+    std::pair<std::string, std::list<std::string> >
+    provide(const std::unordered_map<
+            sml::qname,
+            std::unordered_map<std::string, expansion::path_derivatives>
+            >& pd,
+        const sml::object& o) const;
+};
+
+std::pair<std::string, std::list<std::string> >
+provider::provide(const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, expansion::path_derivatives>
+        >& /*pd*/,
+    const sml::object& /*o*/) const {
+    std::pair<std::string, std::list<std::string> > r;
+    return r;
+}
 
 void null_deleter(const dynamic::expansion::expansion_context *) {}
 
@@ -221,6 +243,11 @@ class_header_formatter::ownership_hierarchy() const {
 
 file_types class_header_formatter::file_type() const {
     return file_types::cpp_header;
+}
+
+void class_header_formatter::register_inclusion_dependencies_provider(
+    expansion::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file

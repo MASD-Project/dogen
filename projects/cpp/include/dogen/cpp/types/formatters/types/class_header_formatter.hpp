@@ -70,6 +70,9 @@ public:
 
     file_types file_type() const override;
 
+    void register_inclusion_dependencies_provider(
+        expansion::registrar& rg) const override;
+
     dogen::formatters::file
     format(const formattables::class_info& c) const override;
 };

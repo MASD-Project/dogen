@@ -18,29 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/expansion/container.hpp"
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_PROVIDER_INTERFACE_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_PROVIDER_INTERFACE_FWD_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-const std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::object>
-        >
-    >&
-container::object_providers() const {
-    return object_providers_;
-}
-
-std::forward_list<
-    boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::object>
-        >
-    >&
-container::object_providers() {
-    return object_providers_;
-}
+class inclusion_dependencies_provider_interface;
 
 } } }
+
+#endif

@@ -41,6 +41,10 @@ file_types class_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
+void class_header_formatter::register_inclusion_dependencies_provider(
+    expansion::registrar& /*rg*/) const {
+}
+
 dogen::formatters::file class_header_formatter::
 format(const formattables::class_info& /*c*/) const {
     dogen::formatters::file r;

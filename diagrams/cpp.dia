@@ -20342,7 +20342,7 @@ the dynamic object.
         <dia:point val="140.988,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.037,21.35;141.838,36.05"/>
+        <dia:rectangle val="139.038,21.35;141.838,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20456,7 +20456,7 @@ the dynamic object.
         <dia:point val="140.988,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.138,21.35;149.498,42.05"/>
+        <dia:rectangle val="140.138,21.35;149.497,42.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20654,7 +20654,7 @@ the dynamic object.
         <dia:point val="140.988,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.138,21.35;180.808,36.05"/>
+        <dia:rectangle val="140.138,21.35;180.807,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21092,7 +21092,7 @@ the dynamic object.
         <dia:point val="243.68,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="233.947,42.75;244.43,59.8"/>
+        <dia:rectangle val="233.948,42.75;244.43,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21541,7 +21541,7 @@ formattable type.#</dia:string>
         <dia:point val="228.648,55.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="228.581,55.4332;230.722,59.2192"/>
+        <dia:rectangle val="228.581,55.4332;230.722,59.2191"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23593,7 +23593,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="144,-6.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="128.477,-10.45;144.75,-1.95"/>
+        <dia:rectangle val="128.478,-10.45;144.75,-1.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24079,7 +24079,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="116.52,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.77,59.25;125.108,67.8"/>
+        <dia:rectangle val="115.77,59.25;125.107,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27756,7 +27756,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="378.572,96.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="372.538,96.2336;378.639,99.3839"/>
+        <dia:rectangle val="372.538,96.2336;378.638,99.3839"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29440,7 +29440,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="337,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="336.95,-49.05;515.05,90.05"/>
+        <dia:rectangle val="336.95,-49.05;519.209,90.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29449,7 +29449,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="337,-48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="178"/>
+        <dia:real val="182.15910366412209"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="138"/>
@@ -30062,7 +30062,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="373.22,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="368.95,35.35;373.97,50.6"/>
+        <dia:rectangle val="368.95,35.35;373.97,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30287,7 +30287,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#inclusion_dependencies_provider#</dia:string>
+        <dia:string>#inclusion_dependencies_provider_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -30461,13 +30461,13 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="427,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="426.95,48.95;462.97,56.65"/>
+        <dia:rectangle val="426.95,48.95;470.285,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="427,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.920000000000002"/>
+        <dia:real val="43.234999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -30563,7 +30563,7 @@ file paths in the dynamic object.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30595,7 +30595,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::module&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::module&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30611,7 +30611,7 @@ file paths in the dynamic object.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30643,7 +30643,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::object&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::object&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30659,7 +30659,7 @@ file paths in the dynamic object.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30691,7 +30691,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::concept&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::concept&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30707,7 +30707,7 @@ file paths in the dynamic object.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30739,7 +30739,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::exception&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::exception&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30755,7 +30755,7 @@ file paths in the dynamic object.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30787,7 +30787,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::enumeration&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::enumeration&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30803,7 +30803,7 @@ file paths in the dynamic object.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register#</dia:string>
+            <dia:string>#register_provider#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -30835,7 +30835,7 @@ file paths in the dynamic object.#</dia:string>
                 <dia:string>#p#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::primitive&gt;&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::primitive&gt;&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30897,7 +30897,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="427,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="414.868,36.95;427.75,50.6"/>
+        <dia:rectangle val="414.868,36.95;427.75,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30933,13 +30933,13 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="457,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="456.95,30.95;509.14,38.65"/>
+        <dia:rectangle val="456.95,30.95;512.99,38.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="457,31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="52.089999999999996"/>
+        <dia:real val="55.939999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -31041,7 +31041,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::module&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::module&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31071,7 +31071,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::object&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::object&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31101,7 +31101,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::concept&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::concept&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31131,7 +31131,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::exception&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::exception&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31161,7 +31161,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::enumeration&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::enumeration&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31191,7 +31191,7 @@ file paths in the dynamic object.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider&lt;sml::primitive&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;expansion::boost::shared_ptr&lt;expansion::inclusion_dependencies_provider_interface&lt;sml::primitive&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31258,17 +31258,17 @@ file paths in the dynamic object.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="462.92,49"/>
+        <dia:point val="470.235,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="456.95,38.55;463.67,50.6"/>
+        <dia:rectangle val="456.95,38.55;470.985,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="462.92,49"/>
-        <dia:point val="462.92,43"/>
+        <dia:point val="470.235,49"/>
+        <dia:point val="470.235,43"/>
         <dia:point val="457,43"/>
         <dia:point val="457,38.6"/>
       </dia:attribute>
@@ -31330,17 +31330,17 @@ file paths in the dynamic object.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="483.045,31"/>
+        <dia:point val="484.97,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="414.868,25.95;483.795,32.6"/>
+        <dia:rectangle val="414.868,25.25;485.72,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="483.045,31"/>
-        <dia:point val="483.045,26"/>
+        <dia:point val="484.97,31"/>
+        <dia:point val="484.97,26"/>
         <dia:point val="414.918,26"/>
         <dia:point val="414.918,31"/>
       </dia:attribute>
@@ -31402,17 +31402,17 @@ file paths in the dynamic object.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="444.96,56.6"/>
+        <dia:point val="448.618,56.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="419.315,56.55;445.16,67.6"/>
+        <dia:rectangle val="419.315,56.55;448.817,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="444.96,56.6"/>
-        <dia:point val="444.96,61"/>
+        <dia:point val="448.618,56.6"/>
+        <dia:point val="448.618,61"/>
         <dia:point val="420.065,61"/>
         <dia:point val="420.065,66"/>
       </dia:attribute>
@@ -31477,7 +31477,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="363.425,69.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="362.675,68.85;393.2,76.8"/>
+        <dia:rectangle val="362.675,68.85;393.2,76.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31706,7 +31706,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="394.298,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="382.925,35.35;395.048,50.6"/>
+        <dia:rectangle val="382.925,35.35;395.048,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31778,7 +31778,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="393,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="392.25,52.599;394.498,67.6"/>
+        <dia:rectangle val="392.25,52.599;394.498,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32362,7 +32362,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="469.425,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="468.675,38.55;509.29,67.6"/>
+        <dia:rectangle val="468.675,38.55;513.14,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32370,8 +32370,8 @@ file paths in the dynamic object.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="469.425,66"/>
         <dia:point val="469.425,61"/>
-        <dia:point val="509.09,61"/>
-        <dia:point val="509.09,38.6"/>
+        <dia:point val="512.94,61"/>
+        <dia:point val="512.94,38.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32434,7 +32434,7 @@ file paths in the dynamic object.#</dia:string>
         <dia:point val="420.065,71.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="419.315,70.45;469.625,87.8"/>
+        <dia:rectangle val="419.315,70.45;469.625,87.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32704,7 +32704,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="345,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="344.25,33.95;350.63,50.6"/>
+        <dia:rectangle val="344.25,33.95;350.63,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32884,17 +32884,17 @@ from dynamic expansion.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="444.96,48.9497"/>
+        <dia:point val="448.618,48.9497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="442.216,33.9999;445.71,50.5497"/>
+        <dia:rectangle val="442.216,33.9999;449.368,49.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="444.96,48.9497"/>
-        <dia:point val="444.96,42"/>
+        <dia:point val="448.618,48.9497"/>
+        <dia:point val="448.618,42"/>
         <dia:point val="442.266,42"/>
         <dia:point val="442.266,34.0499"/>
       </dia:attribute>
@@ -33070,7 +33070,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="401,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="400.25,18.95;407.881,32.6"/>
+        <dia:rectangle val="400.25,18.95;407.881,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
