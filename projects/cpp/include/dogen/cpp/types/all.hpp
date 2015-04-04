@@ -25,6 +25,7 @@
 #include "dogen/cpp/types/expansion/expansion_inputs.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/cpp/types/expansion/initializer.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_factory.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"

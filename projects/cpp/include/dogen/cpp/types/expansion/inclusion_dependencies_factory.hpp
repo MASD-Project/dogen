@@ -71,6 +71,13 @@ public:
     std::unordered_map<std::string,std::list<std::string> >
     make(const dogen::sml::concept& c) const;
     /**@}*/
+
+private:
+    const container& container_;
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, expansion::path_derivatives>
+        >& path_derivatives_;
 };
 
 } } }

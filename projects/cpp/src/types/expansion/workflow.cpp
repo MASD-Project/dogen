@@ -33,7 +33,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.settings.workflow"));
+static logger lg(logger_factory("cpp.expansion.workflow"));
 
 const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");

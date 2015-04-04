@@ -18,43 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_EXPANDER_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_EXPANDER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INITIALIZER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-class expander : public dynamic::expansion::expander_interface {
-public:
-    ~expander() noexcept { }
-
-public:
-    std::string name() const override;
-
-    const std::forward_list<std::string>& dependencies() const override;
-
-    void setup(const dynamic::expansion::expansion_context& ec) override;
-
-    void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
-        dynamic::schema::object& o) const override;
-
-private:
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string,
-                                          expansion::expansion_inputs>
-                       > expansion_inputs_;
-};
+class initializer;
 
 } } }
 

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/cpp/types/expansion/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/expansion/expander.hpp"
@@ -33,7 +34,8 @@ std::string expander::name() const {
 }
 
 const std::forward_list<std::string>& expander::dependencies() const {
-    static std::forward_list<std::string>r;
+    using namespace dynamic::expansion;
+    static std::forward_list<std::string> r { options_copier::static_name() };
     return r;
 }
 

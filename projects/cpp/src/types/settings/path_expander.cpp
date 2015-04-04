@@ -350,7 +350,6 @@ std::string path_expander::name() const {
 const std::forward_list<std::string>& path_expander::dependencies() const {
     using namespace dynamic::expansion;
     static std::forward_list<std::string> r { options_copier::static_name() };
-
     return r;
 }
 
