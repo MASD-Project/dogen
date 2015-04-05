@@ -20,6 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
@@ -27,6 +30,7 @@
 #include "dogen/cpp/types/expansion/path_derivatives_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/expansion/expansion_inputs.hpp"
+#include "dogen/cpp/io/expansion/expansion_inputs_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/expansion/workflow.hpp"
 
@@ -326,7 +330,7 @@ workflow::execute(
     const auto d(obtain_inclusion_dependencies_activity(rg.container(), pd, m));
     const auto r(merge_into_expansion_inputs_activity(pd, d));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
+    BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
     return r;
 }
 
