@@ -12,15 +12,15 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-04 Sat 17:17]
+Clock summary at [2015-04-06 Mon 20:23]
 
 | Headline                                       | Time    |       |       |
 |------------------------------------------------+---------+-------+-------|
-| *Total time*                                   | *10:22* |       |       |
+| *Total time*                                   | *11:36* |       |       |
 |------------------------------------------------+---------+-------+-------|
-| Active                                         |         | 10:22 |       |
+| Active                                         |         | 11:36 |       |
 | STARTED Sprint and product backlog grooming    |         |       |  0:08 |
-| STARTED Create a "populate includes operation" |         |       | 10:14 |
+| STARTED Create a "populate includes operation" |         |       | 11:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -99,6 +99,7 @@ In order to implement this feature we need to:
   enabled we can move forward.
 
 *** STARTED Create a "populate includes operation"                    :story:
+    CLOCK: [2015-04-06 Mon 19:09]--[2015-04-06 Mon 20:23] =>  1:14
     CLOCK: [2015-04-04 Sat 16:30]--[2015-04-04 Sat 17:17] =>  0:47
     CLOCK: [2015-04-03 Fri 16:17]--[2015-04-03 Fri 17:05] =>  0:48
     CLOCK: [2015-04-02 Thu 16:04]--[2015-04-02 Thu 18:02] =>  1:58
@@ -194,6 +195,16 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
+
+*** Adding a dependency to a non-existent expander crashes dogen      :story:
+
+We are not checking that all dependencies exist when building the
+graph. If we add a dependency to a expander that does not exist we
+crash and burn:
+
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/spec/workflow_spec.cpp(550): last checkpoint
+: dogen_knit_spec: /usr/include/boost/smart_ptr/shared_ptr.hpp:653: typename boost::detail::sp_member_access<T>::type boost::shared_ptr<dogen::dynamic::expansion::expander_interface>::operator->() const [Y = dogen::dynamic::expansion::expander_interface]: Assertion `px != 0' failed.
+: unknown location(0): fatal error in "all_primitives_model_generates_expected_code": signal: SIGABRT (application abort requested)
 
 *** Expand fields from command line options into dynamic              :story:
 

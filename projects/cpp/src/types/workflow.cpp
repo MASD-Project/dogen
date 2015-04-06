@@ -70,7 +70,6 @@ workflow::format_activty(const std::forward_list<
         std::shared_ptr<formattables::formattable>
         >& f) const {
     formatters::workflow w;
-    w.validate();
     return w.execute(f);
 }
 
@@ -99,7 +98,6 @@ workflow::ownership_hierarchy() const {
 std::forward_list<dogen::formatters::file> workflow::
 generate(const dynamic::schema::repository& rp, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
-
     const auto ro(obtain_root_object(m));
     settings::workflow w(rp, ro);
     w.validate();

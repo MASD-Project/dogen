@@ -85,6 +85,7 @@ provider::provide(const std::unordered_map<
         >& /*pd*/,
     const sml::object& /*o*/) const {
     std::pair<std::string, std::list<std::string> > r;
+    r.first = traits::class_header_formatter_name();
     return r;
 }
 

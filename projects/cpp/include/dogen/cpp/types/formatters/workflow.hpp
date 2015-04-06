@@ -50,11 +50,6 @@ public:
 
 public:
     /**
-     * @brief Ensures the workflow is in a valid state.
-     */
-    void validate() const;
-
-    /**
      * @brief Converts the supplied entity into all supported
      * representations.
      */

@@ -223,7 +223,7 @@ create_path_settings_activity(const config::cpp_options& opts,
     BOOST_LOG_SEV(lg, debug) << "Started creating path settings.";
     settings::path_settings_factory f(opts, rp);
     const auto r(f.make(o));
-    BOOST_LOG_SEV(lg, debug) << "Created path settings.";
+    BOOST_LOG_SEV(lg, debug) << "Created path settings";
     return r;
 }
 

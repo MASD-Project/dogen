@@ -31,6 +31,7 @@ static logger
 lg(logger_factory("cpp.expansion.inclusion_dependencies_factory"));
 
 const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string empty_formatter_name("Formatter name is empty.");
 
 }
 
@@ -50,6 +51,12 @@ inclusion_dependencies_factory::make(const dogen::sml::object& o) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : container_.object_providers()) {
         const auto pair(p->provide(path_derivatives_, o));
+
+        if (pair.first.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+        }
+
         const auto result(r.insert(pair));
         if (!result.second) {
             const auto n(sml::string_converter::convert(o.name()));

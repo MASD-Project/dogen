@@ -114,26 +114,6 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-void workflow::validate() const {
-    BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
-
-    registrar().validate();
-    const auto& c(registrar().formatter_container());
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(
-                                 c.class_formatters().begin(),
-                                 c.class_formatters().end())
-                             << " registered class formatter(s): ";
-
-    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
-    for (const auto& f : c.class_formatters())
-        BOOST_LOG_SEV(lg, debug) << "Name: '"
-                                 << f->ownership_hierarchy().formatter_name()
-                                 << "'";
-
-    BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
-}
-
 std::forward_list<dogen::formatters::file>
 workflow::execute(const std::forward_list<
         std::shared_ptr<formattables::formattable>

@@ -361,20 +361,20 @@ void path_expander::setup(const dynamic::expansion::expansion_context& ec) {
     formatter_properties_ = make_formatter_properties(ec.repository(), root);
 }
 
-void path_expander::expand(const sml::qname& qn,
+void path_expander::expand(const sml::qname& /*qn*/,
     const dynamic::schema::scope_types& /*st*/,
-    dynamic::schema::object& o) const {
+    dynamic::schema::object& /*o*/) const {
 
-    ensure_is_setup();
-    for (const auto& pair : formatter_properties_) {
-        const auto& fp(pair.second);
-        const auto inclusion_path(make_inclusion_path(fp.settings, qn));
-        const auto file_path(make_file_path(fp.settings, inclusion_path, qn));
+    // ensure_is_setup();
+    // for (const auto& pair : formatter_properties_) {
+    //     const auto& fp(pair.second);
+    //     const auto inclusion_path(make_inclusion_path(fp.settings, qn));
+    //     const auto file_path(make_file_path(fp.settings, inclusion_path, qn));
 
-        expand_file_path(fp, file_path, o);
-        expand_header_guard(fp, inclusion_path, o);
-        expand_include_directive(fp, inclusion_path, o);
-    }
+    //     expand_file_path(fp, file_path, o);
+    //     expand_header_guard(fp, inclusion_path, o);
+    //     expand_include_directive(fp, inclusion_path, o);
+    // }
 }
 
 } } }

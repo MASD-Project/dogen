@@ -42,6 +42,7 @@ const std::string no_fields_for_formatter(
 const std::string field_not_found("Could not find expected field: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
+const std::string empty_formatter_name("Formatter name is empty.");
 
 }
 
@@ -174,6 +175,10 @@ path_settings_factory::make_formatter_properties(
 
     for (const auto& f : c.all_formatters()) {
         const auto oh(f->ownership_hierarchy());
+        if (oh.formatter_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+        }
         r[oh.formatter_name()] = make_formatter_properties(rp, *f);
     }
 

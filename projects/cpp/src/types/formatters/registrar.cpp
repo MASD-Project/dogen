@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
 #include "dogen/cpp/types/formatters/registrar_error.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
 
@@ -38,10 +39,22 @@ namespace cpp {
 namespace formatters {
 
 void registrar::validate() const {
-    if (formatter_container_.class_formatters().empty()) {
+    const auto& fc(formatter_container_);
+    if (fc.class_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_formatters;
         BOOST_THROW_EXCEPTION(registrar_error(no_formatters));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << std::distance(
+                                 fc.class_formatters().begin(),
+                                 fc.class_formatters().end())
+                             << " registered class formatter(s): ";
+
+    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
+    for (const auto& f : fc.class_formatters())
+        BOOST_LOG_SEV(lg, debug) << f->ownership_hierarchy();
+
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 

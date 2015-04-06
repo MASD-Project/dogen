@@ -28,6 +28,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/expansion/expansion_inputs.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
@@ -35,9 +37,59 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
+/**
+ * @brief Performs all of the expansions required by the c++ model.
+ */
 class expander : public dynamic::expansion::expander_interface {
 public:
-    ~expander() noexcept { }
+    expander();
+    ~expander() noexcept;
+
+private:
+    /**
+     * @brief Field definitions we need to remember for each formatter.
+     */
+    struct field_definitions {
+        dynamic::schema::field_definition file_path;
+        boost::optional<dynamic::schema::field_definition> inclusion_directive;
+        boost::optional<dynamic::schema::field_definition> header_guard;
+    };
+
+    /**
+     * @brief Sets up all field definitions for a given formatter.
+     */
+    field_definitions field_definitions_for_formatter_name(
+        const dynamic::schema::repository& rp,
+        const std::string& formatter_name) const;
+
+    /**
+     * @brief Generates all of the formatter field definitions, using
+     * the repository data and the registered formatters.
+     */
+    std::unordered_map<std::string, field_definitions>
+    setup_field_definitions(const dynamic::schema::repository& rp,
+        const formatters::container& fc) const;
+
+private:
+    /**
+     * @brief Handles the dynamic expansion of the file path.
+     */
+    void expand_file_path(const field_definitions& fd,
+        const expansion::expansion_inputs& ei, dynamic::schema::object& o) const;
+
+    /**
+     * @brief Handles the dynamic expansion of the header guard.
+     */
+    void expand_header_guard(const std::string& formatter_name,
+        const field_definitions& fd, const expansion::expansion_inputs& ei,
+        dynamic::schema::object& o) const;
+
+    /**
+     * @brief Handles the dynamic expansion of the include directive.
+     */
+    void expand_include_directive(const std::string& formatter_name,
+        const field_definitions& fd, const expansion::expansion_inputs& ei,
+        dynamic::schema::object& o) const;
 
 public:
     std::string name() const override;
@@ -50,6 +102,8 @@ public:
         dynamic::schema::object& o) const override;
 
 private:
+    bool requires_file_path_expansion_;
+    std::unordered_map<std::string, field_definitions> field_definitions_;
     std::unordered_map<sml::qname,
                        std::unordered_map<std::string,
                                           expansion::expansion_inputs>

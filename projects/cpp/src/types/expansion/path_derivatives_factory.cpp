@@ -41,7 +41,7 @@ const std::string unsupported_file_type("File type not supported: ");
 
 const std::string missing_path_settings(
     "Could not find any path settings for formatter: ");
-
+const std::string empty_formatter_name("Empty formatter name was supplied.");
 }
 
 namespace dogen {
@@ -161,6 +161,11 @@ make(const sml::qname& qn) const {
     std::unordered_map<std::string, path_derivatives> r;
 
     for (const auto& pair : path_settings_) {
+        if (pair.first.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+        }
+
         const auto& s(pair.second);
         const auto inclusion_path(make_inclusion_path(s, qn));
 
