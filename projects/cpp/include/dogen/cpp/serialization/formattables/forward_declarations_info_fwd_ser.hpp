@@ -18,13 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORWARD_DECLARATIONS_INFO_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORWARD_DECLARATIONS_INFO_FWD_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-forward_declarations_formatter_interface::
-~forward_declarations_formatter_interface() noexcept { }
+#include "dogen/cpp/types/formattables/forward_declarations_info_fwd.hpp"
 
-} } }
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::formattables::forward_declarations_info& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::formattables::forward_declarations_info& v, unsigned int version);
+
+} }
+
+#endif

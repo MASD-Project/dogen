@@ -37,6 +37,8 @@
 #include "dogen/cpp/serialization/formattables/file_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includes_ser.hpp"
 #include "dogen/cpp/serialization/formattables/inheritance_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"

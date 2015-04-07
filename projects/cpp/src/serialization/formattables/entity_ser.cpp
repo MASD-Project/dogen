@@ -35,6 +35,8 @@
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"

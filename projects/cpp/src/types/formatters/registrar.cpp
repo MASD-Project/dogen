@@ -29,7 +29,10 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.registrar"));
 
-const std::string no_formatters("No formatters provided.");
+const std::string no_all_formatters("All formatters container is empty.");
+const std::string no_class_formatters("No class formatters provided.");
+const std::string no_forward_declarations_formatters(
+    "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null");
 
 }
@@ -41,18 +44,29 @@ namespace formatters {
 void registrar::validate() const {
     const auto& fc(formatter_container_);
     if (fc.class_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_formatters;
-        BOOST_THROW_EXCEPTION(registrar_error(no_formatters));
+        BOOST_LOG_SEV(lg, error) << no_class_formatters;
+        BOOST_THROW_EXCEPTION(registrar_error(no_class_formatters));
+    }
+
+    if (fc.forward_declarations_formatters().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_forward_declarations_formatters;
+        BOOST_THROW_EXCEPTION(
+            registrar_error(no_forward_declarations_formatters));
+    }
+
+    if (fc.all_formatters().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_all_formatters;
+        BOOST_THROW_EXCEPTION(registrar_error(no_all_formatters));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found "
                              << std::distance(
                                  fc.class_formatters().begin(),
                                  fc.class_formatters().end())
-                             << " registered class formatter(s): ";
+                             << " registered formatter(s): ";
 
-    BOOST_LOG_SEV(lg, debug) << "Listing all class formatters.";
-    for (const auto& f : fc.class_formatters())
+    BOOST_LOG_SEV(lg, debug) << "Listing all formatters.";
+    for (const auto& f : fc.all_formatters())
         BOOST_LOG_SEV(lg, debug) << f->ownership_hierarchy();
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
@@ -65,6 +79,16 @@ void registrar::register_formatter(
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     formatter_container_.class_formatters_.push_front(f);
+    formatter_container_.all_formatters_.push_front(f);
+}
+
+void registrar::register_formatter(
+    std::shared_ptr<forward_declarations_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.forward_declarations_formatters_.push_front(f);
     formatter_container_.all_formatters_.push_front(f);
 }
 

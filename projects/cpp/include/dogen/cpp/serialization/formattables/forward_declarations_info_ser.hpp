@@ -18,36 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORWARD_DECLARATIONS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORWARD_DECLARATIONS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORWARD_DECLARATIONS_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORWARD_DECLARATIONS_INFO_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
+namespace boost {
 
-class forward_declarations_formatter_interface : public formatter_interface {
-public:
-    forward_declarations_formatter_interface() = default;
-    forward_declarations_formatter_interface(const forward_declarations_formatter_interface&) = delete;
-    forward_declarations_formatter_interface(forward_declarations_formatter_interface&&) = default;
-    virtual ~forward_declarations_formatter_interface() noexcept = 0;
+template<>struct
+is_virtual_base_of<
+    dogen::cpp::formattables::entity,
+    dogen::cpp::formattables::forward_declarations_info
+> : public mpl::true_ {};
 
-public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const formattables::forward_declarations_info& fd) const = 0;
-};
+}
 
-} } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formattables::forward_declarations_info)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::formattables::forward_declarations_info& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::formattables::forward_declarations_info& v, unsigned int version);
+
+} }
 
 #endif

@@ -18,26 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/test_data/formattables/entity_td.hpp"
+#include "dogen/cpp/test_data/formattables/includers_info_td.hpp"
+
+
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-const std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>&
-container::class_formatters() const {
-    return class_formatters_;
+includers_info_generator::includers_info_generator() : position_(0) { }
+
+void includers_info_generator::
+populate(const unsigned int position, result_type& v) {
+    dogen::cpp::formattables::entity_generator::populate(position, v);
 }
 
-const std::forward_list<
-    std::shared_ptr<formatters::forward_declarations_formatter_interface>
-    >& container::forward_declarations_formatters() const {
-    return forward_declarations_formatters_;
+includers_info_generator::result_type
+includers_info_generator::create(const unsigned int position) {
+    includers_info r;
+    includers_info_generator::populate(position, r);
+    return r;
+}
+includers_info_generator::result_type*
+includers_info_generator::create_ptr(const unsigned int position) {
+    includers_info* p = new includers_info();
+    includers_info_generator::populate(position, *p);
+    return p;
 }
 
-const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
-container::all_formatters() const {
-    return all_formatters_;
+includers_info_generator::result_type
+includers_info_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

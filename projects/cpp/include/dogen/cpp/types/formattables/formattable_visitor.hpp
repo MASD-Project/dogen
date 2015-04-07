@@ -30,6 +30,8 @@
 #include "dogen/cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/enum_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/exception_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/includers_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/namespace_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/new_class_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info_fwd.hpp"
@@ -134,6 +136,26 @@ public:
     virtual void visit(const dogen::cpp::formattables::new_class_info&) { }
     virtual void visit(dogen::cpp::formattables::new_class_info&) const { }
     virtual void visit(dogen::cpp::formattables::new_class_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::includers_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::includers_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::includers_info&) { }
+    virtual void visit(dogen::cpp::formattables::includers_info&) const { }
+    virtual void visit(dogen::cpp::formattables::includers_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::forward_declarations_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) { }
+    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) const { }
+    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) { }
     /**@}*/
 
     /**

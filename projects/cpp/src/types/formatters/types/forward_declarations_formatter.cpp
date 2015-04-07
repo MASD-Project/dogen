@@ -18,28 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
+#include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
-#include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-template<typename Formatter>
-inline void initialise_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
+dynamic::schema::ownership_hierarchy
+forward_declarations_formatter::ownership_hierarchy() const {
+    static dynamic::schema::ownership_hierarchy
+        r(formatters::traits::model_name(), traits::facet_name(),
+            traits::forward_declarations_formatter_name(),
+            formatters::traits::header_formatter_group_name());
+    return r;
 }
 
-void initializer::initialize(registrar& rg) {
-    initialise_formatter<class_header_formatter>(rg);
-    initialise_formatter<forward_declarations_formatter>(rg);
+file_types forward_declarations_formatter::file_type() const {
+    return file_types::cpp_header;
+}
+
+void forward_declarations_formatter::register_inclusion_dependencies_provider(
+    expansion::registrar& /*rg*/) const {
+}
+
+dogen::formatters::file forward_declarations_formatter::
+format(const formattables::forward_declarations_info& /*fd*/) const {
+    dogen::formatters::file r;
+    return r;
 }
 
 } } } }

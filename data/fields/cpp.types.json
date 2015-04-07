@@ -25,7 +25,7 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "types"
+        "default_value" : ""
     },
     {
         "name" : {
@@ -144,5 +144,20 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.types.forward_declarations_formatter"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.types",
+            "formatter_name" : "cpp.types.forward_declarations_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : "fwd"
     }
 ]

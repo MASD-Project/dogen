@@ -36,6 +36,12 @@ std::string traits::class_header_formatter_name() {
     return r;
 }
 
+std::string traits::forward_declarations_formatter_name() {
+    static std::string r(traits::facet_name() +
+        ".forward_declarations_formatter");
+    return r;
+}
+
 std::string traits::class_implementation_formatter_name() {
     static std::string r(traits::facet_name() +
         ".class_implementation_formatter");

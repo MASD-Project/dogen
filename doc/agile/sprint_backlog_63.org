@@ -12,14 +12,15 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-07 Tue 14:03]
+Clock summary at [2015-04-07 Tue 14:45]
 
 | Headline                                       | Time    |       |       |
 |------------------------------------------------+---------+-------+-------|
-| *Total time*                                   | *12:15* |       |       |
+| *Total time*                                   | *12:57* |       |       |
 |------------------------------------------------+---------+-------+-------|
-| Active                                         |         | 12:15 |       |
+| Active                                         |         | 12:57 |       |
 | STARTED Sprint and product backlog grooming    |         |       |  0:08 |
+| COMPLETED Add support for forward declarations |         |       |  0:42 |
 | STARTED Create a "populate includes operation" |         |       | 12:07 |
 #+end:
 
@@ -47,6 +48,13 @@ few other assorted clean-ups:
 
 - rename workflow (since we now have two);
 - rename content extensions since this is a selector in disguise;
+
+*** COMPLETED Add support for forward declarations                    :story:
+    CLOSED: [2015-04-07 Tue 14:45]
+    CLOCK: [2015-04-07 Tue 14:03]--[2015-04-07 Tue 14:45] =>  0:42
+
+We need to have the basic skeleton for forward declarations in order
+to be able to access the forward declaration include directives.
 
 *** STARTED Create a "supported" expander                             :story:
 

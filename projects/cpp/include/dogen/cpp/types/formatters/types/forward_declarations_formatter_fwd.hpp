@@ -18,13 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_FORWARD_DECLARATIONS_FORMATTER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_FORWARD_DECLARATIONS_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-forward_declarations_formatter_interface::
-~forward_declarations_formatter_interface() noexcept { }
+class forward_declarations_formatter;
 
-} } }
+} } } }
+
+#endif

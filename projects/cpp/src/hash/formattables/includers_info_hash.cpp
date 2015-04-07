@@ -18,19 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORWARD_DECLARATIONS_FORMATTER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORWARD_DECLARATIONS_FORMATTER_FWD_HPP
+#include "dogen/cpp/hash/formattables/entity_hash.hpp"
+#include "dogen/cpp/hash/formattables/includers_info_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-class forward_declarations_formatter;
+std::size_t includers_info_hasher::hash(const includers_info&v) {
+    std::size_t seed(0);
+
+    combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
+    return seed;
+}
 
 } } }
-
-#endif

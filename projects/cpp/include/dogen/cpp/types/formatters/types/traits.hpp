@@ -44,6 +44,11 @@ struct traits {
     static std::string class_header_formatter_name();
 
     /**
+     * @brief Name of the forward declaration's formatter.
+     */
+    static std::string forward_declarations_formatter_name();
+
+    /**
      * @brief Name of the class implementation formatter.
      */
     static std::string class_implementation_formatter_name();

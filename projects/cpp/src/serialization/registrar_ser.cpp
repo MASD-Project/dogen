@@ -32,6 +32,8 @@
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
@@ -54,6 +56,8 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::cpp::formattables::concept_info>();
     ar.template register_type<dogen::cpp::formattables::enum_info>();
     ar.template register_type<dogen::cpp::formattables::exception_info>();
+    ar.template register_type<dogen::cpp::formattables::forward_declarations_info>();
+    ar.template register_type<dogen::cpp::formattables::includers_info>();
     ar.template register_type<dogen::cpp::formattables::namespace_info>();
     ar.template register_type<dogen::cpp::formattables::new_class_info>();
     ar.template register_type<dogen::cpp::formattables::odb_options_info>();

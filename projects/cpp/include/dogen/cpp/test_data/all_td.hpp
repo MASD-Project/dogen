@@ -37,6 +37,8 @@
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/includers_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/includes_td.hpp"
 #include "dogen/cpp/test_data/formattables/inheritance_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"

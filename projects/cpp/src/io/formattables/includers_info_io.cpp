@@ -18,13 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#include <ostream>
+#include "dogen/cpp/io/formattables/entity_io.hpp"
+#include "dogen/cpp/io/formattables/includers_info_io.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-forward_declarations_formatter_interface::
-~forward_declarations_formatter_interface() noexcept { }
+std::ostream& operator<<(std::ostream& s, const includers_info& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } } }

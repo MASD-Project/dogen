@@ -18,13 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#ifndef DOGEN_CPP_HASH_FORMATTABLES_INCLUDERS_INFO_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTABLES_INCLUDERS_INFO_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/cpp/types/formattables/includers_info.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-forward_declarations_formatter_interface::
-~forward_declarations_formatter_interface() noexcept { }
+struct includers_info_hasher {
+public:
+    static std::size_t hash(const includers_info& v);
+};
 
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::formattables::includers_info> {
+public:
+    size_t operator()(const dogen::cpp::formattables::includers_info& v) const {
+        return dogen::cpp::formattables::includers_info_hasher::hash(v);
+    }
+};
+
+}
+#endif

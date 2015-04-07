@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -50,6 +51,12 @@ public:
      * @brief Registers a class formatter.
      */
     void register_formatter(std::shared_ptr<class_formatter_interface> f);
+
+    /**
+     * @brief Registers a forward declaration formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<forward_declarations_formatter_interface> f);
 
     /**
      * @brief Returns all available formatters.

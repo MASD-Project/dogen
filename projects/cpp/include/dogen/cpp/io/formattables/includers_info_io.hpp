@@ -18,13 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#ifndef DOGEN_CPP_IO_FORMATTABLES_INCLUDERS_INFO_IO_HPP
+#define DOGEN_CPP_IO_FORMATTABLES_INCLUDERS_INFO_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/cpp/types/formattables/includers_info.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
+namespace formattables {
 
-forward_declarations_formatter_interface::
-~forward_declarations_formatter_interface() noexcept { }
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::formattables::includers_info& v);
 
 } } }
+
+#endif
