@@ -75,9 +75,9 @@ class provider : public expansion::
 
     std::pair<std::string, std::list<std::string> >
     provide(const dynamic::schema::repository& rp, const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, expansion::path_derivatives>
-            >& pd,
+        sml::qname,
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives,
         const sml::object& o) const;
 };
 
@@ -85,7 +85,8 @@ std::pair<std::string, std::list<std::string> >
 provider::provide(const dynamic::schema::repository& rp,
     const std::unordered_map<
         sml::qname,
-        std::unordered_map<std::string, expansion::path_derivatives> >& /*pd*/,
+        std::unordered_map<std::string, std::string> >&
+    /*inclusion_directives*/,
     const sml::object& o) const {
     std::pair<std::string, std::list<std::string> > r;
     r.first = traits::class_header_formatter_name();

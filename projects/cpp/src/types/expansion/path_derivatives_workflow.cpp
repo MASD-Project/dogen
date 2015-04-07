@@ -29,14 +29,13 @@
 #include "dogen/cpp/types/expansion/path_derivatives.hpp"
 #include "dogen/cpp/io/expansion/path_derivatives_io.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_factory.hpp"
-#include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.expansion.workflow"));
+static logger lg(logger_factory("cpp.expansion.path_derivatives_workflow"));
 
 const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");
@@ -50,9 +49,9 @@ namespace expansion {
 /**
  * @brief Generates all path derivatives.
  */
-class path_derivatives_generator {
+class generator {
 public:
-    path_derivatives_generator(
+    generator(
         const std::unordered_map<std::string, settings::path_settings>& ps)
         : factory_(ps) { }
 
@@ -61,7 +60,7 @@ private:
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
      */
-    void generate_path_derivatives_for_qname(const sml::qname& qn);
+    void generate(const sml::qname& qn);
 
 public:
     void operator()(const dogen::sml::object& o);
@@ -82,8 +81,7 @@ private:
                        > result_;
 };
 
-void path_derivatives_generator::
-generate_path_derivatives_for_qname(const sml::qname& qn) {
+void generator::generate(const sml::qname& qn) {
     const auto pair(result_.insert(std::make_pair(qn, factory_.make(qn))));
     const bool inserted(pair.second);
     if (!inserted) {
@@ -93,110 +91,29 @@ generate_path_derivatives_for_qname(const sml::qname& qn) {
     }
 }
 
-void path_derivatives_generator::operator()(const dogen::sml::object& o) {
-    generate_path_derivatives_for_qname(o.name());
+void generator::operator()(const dogen::sml::object& o) {
+    generate(o.name());
 }
 
-void path_derivatives_generator::operator()(const dogen::sml::enumeration& e) {
-    generate_path_derivatives_for_qname(e.name());
+void generator::operator()(const dogen::sml::enumeration& e) {
+    generate(e.name());
 }
 
-void path_derivatives_generator::operator()(const dogen::sml::primitive& p) {
-    generate_path_derivatives_for_qname(p.name());
+void generator::operator()(const dogen::sml::primitive& p) {
+    generate(p.name());
 }
 
-void path_derivatives_generator::operator()(const dogen::sml::module& m) {
-    generate_path_derivatives_for_qname(m.name());
+void generator::operator()(const dogen::sml::module& m) {
+    generate(m.name());
 }
 
-void path_derivatives_generator::operator()(const dogen::sml::concept& c) {
-    generate_path_derivatives_for_qname(c.name());
+void generator::operator()(const dogen::sml::concept& c) {
+    generate(c.name());
 }
 
 const std::unordered_map<sml::qname,
                          std::unordered_map<std::string, path_derivatives>
-                         >& path_derivatives_generator::result() const {
-    return result_;
-}
-
-/**
- * @brief Generates all inclusion dependencies.
- */
-class inclusion_dependencies_generator {
-public:
-    inclusion_dependencies_generator(const dynamic::schema::repository& rp,
-        const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, path_derivatives>
-            >& pd)
-        : factory_(rp, c, pd) { }
-
-private:
-    /**
-     * @brief Generates all of the path derivatives for the formatters
-     * and qualified name.
-     */
-    template<typename Entity>
-    void generate_inclusion_dependencies(const Entity& e) {
-        const auto deps(factory_.make(e));
-        const auto pair(result_.insert(std::make_pair(e.name(), deps)));
-        const bool inserted(pair.second);
-        if (!inserted) {
-            const auto n(sml::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(workflow_error(duplicate_qname + n));
-        }
-    }
-
-public:
-    void operator()(const dogen::sml::object& o);
-    void operator()(const dogen::sml::enumeration& e);
-    void operator()(const dogen::sml::primitive& p);
-    void operator()(const dogen::sml::module& m);
-    void operator()(const dogen::sml::concept& c);
-
-public:
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >& result() const;
-
-private:
-    const inclusion_dependencies_factory factory_;
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::list<std::string> >
-        > result_;
-};
-
-void inclusion_dependencies_generator::operator()(const dogen::sml::object& o) {
-    generate_inclusion_dependencies(o);
-}
-
-void inclusion_dependencies_generator::
-operator()(const dogen::sml::enumeration& e) {
-    generate_inclusion_dependencies(e);
-}
-
-void inclusion_dependencies_generator::
-operator()(const dogen::sml::primitive& p) {
-    generate_inclusion_dependencies(p);
-}
-
-void inclusion_dependencies_generator::operator()(const dogen::sml::module& m) {
-    generate_inclusion_dependencies(m);
-}
-
-void inclusion_dependencies_generator::
-operator()(const dogen::sml::concept& c) {
-    generate_inclusion_dependencies(c);
-}
-
-const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >& inclusion_dependencies_generator::result() const {
+                         >& generator::result() const {
     return result_;
 }
 
@@ -237,7 +154,7 @@ std::unordered_map<
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining path derivatives.";
 
-    path_derivatives_generator g(ps);
+    generator g(ps);
     sml::all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining path derivatives.";

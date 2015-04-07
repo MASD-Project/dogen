@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/cpp/types/expansion/path_derivatives.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,9 +56,9 @@ public:
     virtual std::pair<std::string, std::list<std::string> >
     provide(const dynamic::schema::repository& rp,
         const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, path_derivatives>
-        >& pd,
+            sml::qname,
+            std::unordered_map<std::string, std::string>
+            >& inclusion_directives,
         const Element& e) const = 0;
 };
 

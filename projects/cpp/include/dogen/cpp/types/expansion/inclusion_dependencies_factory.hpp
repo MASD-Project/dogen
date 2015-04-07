@@ -34,7 +34,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
-#include "dogen/cpp/types/expansion/path_derivatives.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,8 +48,8 @@ public:
         const container& c,
         const std::unordered_map<
             sml::qname,
-            std::unordered_map<std::string, expansion::path_derivatives>
-            >& pd);
+            std::unordered_map<std::string, std::string>
+            >& inclusion_directives);
 
 public:
     /**
@@ -78,8 +77,8 @@ private:
     const container& container_;
     const std::unordered_map<
         sml::qname,
-        std::unordered_map<std::string, expansion::path_derivatives>
-        >& path_derivatives_;
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives_;
 };
 
 } } }

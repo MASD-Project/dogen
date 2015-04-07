@@ -33,9 +33,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/expansion/container.hpp"
-#include "dogen/cpp/types/expansion/registrar.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -70,26 +68,6 @@ private:
     obtain_path_derivatives_activity(
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const;
-
-    /**
-     * @brief Initialises the registrar with all the providers sourced
-     * from the formatters container.
-     */
-    // void initialise_registrar_activity(
-    //     const formatters::container& fc, registrar& rg) const;
-
-    /**
-     * @brief Obtains all of the inclusion dependencies for a model.
-     */
-    // std::unordered_map<
-    //     sml::qname,
-    //     std::unordered_map<std::string, std::list<std::string> >
-    //     > obtain_inclusion_dependencies_activity(
-    //         const dynamic::schema::repository& rp, const container& c,
-    //         const std::unordered_map<
-    //             sml::qname,
-    //             std::unordered_map<std::string, path_derivatives>
-    //             >& pd, const sml::model& m) const;
 
 public:
     /**

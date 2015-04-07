@@ -43,15 +43,16 @@ inclusion_dependencies_factory::
 inclusion_dependencies_factory(const dynamic::schema::repository& rp,
     const container& c, const std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, expansion::path_derivatives>
-    >& pd)
-    : repository_(rp), container_(c), path_derivatives_(pd) { }
+    std::unordered_map<std::string, std::string>
+    >& inclusion_directives)
+  : repository_(rp), container_(c),
+    inclusion_directives_(inclusion_directives) { }
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const dogen::sml::object& o) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : container_.object_providers()) {
-        const auto pair(p->provide(repository_, path_derivatives_, o));
+        const auto pair(p->provide(repository_, inclusion_directives_, o));
 
         if (pair.first.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
