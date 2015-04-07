@@ -20,7 +20,7 @@
  */
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/cpp/types/expansion/expander.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_expander.hpp"
 #include "dogen/cpp/types/expansion/initializer.hpp"
 
 namespace dogen {
@@ -34,7 +34,7 @@ void register_expander(dynamic::expansion::expander_interface * const p) {
 }
 
 void initializer::initialize() {
-    register_expander(new expander());
+    register_expander(new path_derivatives_expander());
 }
 
 } } }

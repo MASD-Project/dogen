@@ -18,16 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-#include "dogen/dynamic/expansion/types/expansion.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/expansion/types/expansion_error.hpp"
-#include "dogen/dynamic/expansion/types/expansion_types.hpp"
-#include "dogen/dynamic/expansion/types/grapher.hpp"
-#include "dogen/dynamic/expansion/types/graphing_error.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/options_copier.hpp"
-#include "dogen/dynamic/expansion/types/registrar.hpp"
-#include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow_error.hpp"
+#include <ostream>
+#include <stdexcept>
+#include "dogen/dynamic/expansion/io/expansion_types_io.hpp"
+
+namespace dogen {
+namespace dynamic {
+namespace expansion {
+
+std::ostream& operator<<(std::ostream& s, const expansion_types& v) {
+    s << "{ " << "\"__type__\": " << "\"expansion_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case expansion_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case expansion_types::stand_alone_model_expansion:
+        attr = "\"stand_alone_model_expansion\"";
+        break;
+    case expansion_types::merged_model_expansion:
+        attr = "\"merged_model_expansion\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for expansion_types");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

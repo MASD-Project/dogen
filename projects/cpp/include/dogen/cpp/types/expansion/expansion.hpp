@@ -18,26 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_EXPANSION_EXPANSION_INPUTS_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_EXPANSION_EXPANSION_INPUTS_SER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_EXPANSION_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_EXPANSION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
+namespace dogen {
+namespace cpp {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::expansion::expansion_inputs)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::cpp::expansion::expansion_inputs& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::cpp::expansion::expansion_inputs& v, unsigned int version);
-
-} }
+/**
+ * @brief Expansion related classes.
+ *
+ */
+namespace expansion {
+} } }
 
 #endif

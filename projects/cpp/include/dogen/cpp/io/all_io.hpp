@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/io/expansion/expansion_inputs_io.hpp"
 #include "dogen/cpp/io/expansion/path_derivatives_io.hpp"
 #include "dogen/cpp/io/formattables/abilities_io.hpp"
 #include "dogen/cpp/io/formattables/aspect_types_io.hpp"

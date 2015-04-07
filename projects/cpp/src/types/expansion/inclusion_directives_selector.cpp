@@ -22,16 +22,16 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/expansion/selection_error.hpp"
-#include "dogen/cpp/types/expansion/path_derivatives_selector.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.expansion.path_derivatives_selector"));
+static logger lg(logger_factory("cpp.expansion.inclusion_directives_selector"));
 
-const std::string formatter_path_derivatives_missing(
+const std::string formatter_inclusion_directives_missing(
     "Could not find path derivatives for formatter: ");
-const std::string qname_path_derivatives_missing(
+const std::string qname_inclusion_directives_missing(
     "Could not find path derivatives for qname: ");
 
 }
@@ -40,47 +40,47 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
-path_derivatives_selector::path_derivatives_selector(
+inclusion_directives_selector::inclusion_directives_selector(
     const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, expansion::path_derivatives> >& pd)
-    : path_derivatives_(pd) {}
+    sml::qname,
+    std::unordered_map<std::string, std::string> >& id)
+    : inclusion_directives_(id) {}
 
-const expansion::path_derivatives&
-path_derivatives_selector::path_derivatives_for_formatter_name(
-    const std::unordered_map<std::string, expansion::path_derivatives>&
-    pd, const std::string& formatter_name) const {
+std::string inclusion_directives_selector::
+inclusion_directives_for_formatter_name(
+    const std::unordered_map<std::string, std::string>& id,
+    const std::string& formatter_name) const {
 
-    const auto i(pd.find(formatter_name));
-    if (i == pd.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_path_derivatives_missing
+    const auto i(id.find(formatter_name));
+    if (i == id.end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_inclusion_directives_missing
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(
-            selection_error(formatter_path_derivatives_missing +
+            selection_error(formatter_inclusion_directives_missing +
                 formatter_name));
     }
     return i->second;
 }
 
-const std::unordered_map<std::string, expansion::path_derivatives>&
-path_derivatives_selector::
-path_derivatives_for_qname(const sml::qname& qn) const {
-    const auto i(path_derivatives_.find(qn));
-    if (i == path_derivatives_.end()) {
+const std::unordered_map<std::string, std::string>&
+inclusion_directives_selector::
+inclusion_directives_for_qname(const sml::qname& qn) const {
+    const auto i(inclusion_directives_.find(qn));
+    if (i == inclusion_directives_.end()) {
         const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << qname_path_derivatives_missing << n;
+        BOOST_LOG_SEV(lg, error) << qname_inclusion_directives_missing << n;
         BOOST_THROW_EXCEPTION(
-            selection_error(qname_path_derivatives_missing + n));
+            selection_error(qname_inclusion_directives_missing + n));
     }
     return i->second;
 }
 
-std::string path_derivatives_selector::
+std::string inclusion_directives_selector::
 select_inclusion_directive(const sml::qname& qn,
     const std::string& formatter_name) const {
-    const auto& pdqn(path_derivatives_for_qname(qn));
-    const auto& pdfn(path_derivatives_for_formatter_name(pdqn, formatter_name));
-    return pdfn.inclusion_directive();
+    const auto& id(inclusion_directives_for_qname(qn));
+    const auto& r(inclusion_directives_for_formatter_name(id, formatter_name));
+    return r;
 }
 
 } } }

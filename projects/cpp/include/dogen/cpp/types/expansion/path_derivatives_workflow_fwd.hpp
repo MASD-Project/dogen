@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_EXPANSION_EXPANSION_INPUTS_IO_HPP
-#define DOGEN_CPP_IO_EXPANSION_EXPANSION_INPUTS_IO_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_WORKFLOW_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::cpp::expansion::expansion_inputs& v);
+class path_derivatives_workflow;
 
 } } }
 

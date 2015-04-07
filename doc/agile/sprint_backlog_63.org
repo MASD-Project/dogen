@@ -12,17 +12,18 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-07 Tue 15:43]
+Clock summary at [2015-04-07 Tue 17:14]
 
-| Headline                                                         | Time    |       |       |
-|------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                     | *13:55* |       |       |
-|------------------------------------------------------------------+---------+-------+-------|
-| Active                                                           |         | 13:55 |       |
-| STARTED Sprint and product backlog grooming                      |         |       |  0:08 |
-| COMPLETED Add support for forward declarations                   |         |       |  0:42 |
-| COMPLETED Create a selector for path derivatives data structures |         |       |  0:58 |
-| STARTED Create a "populate includes operation"                   |         |       | 12:07 |
+| Headline                                                              | Time    |       |       |
+|-----------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                          | *15:26* |       |       |
+|-----------------------------------------------------------------------+---------+-------+-------|
+| Active                                                                |         | 15:26 |       |
+| STARTED Sprint and product backlog grooming                           |         |       |  0:08 |
+| COMPLETED Add support for forward declarations                        |         |       |  0:42 |
+| COMPLETED Create a selector for path derivatives data structures      |         |       |  0:58 |
+| STARTED Split merged model expansion from individual models expansion |         |       |  1:31 |
+| STARTED Create a "populate includes operation"                        |         |       | 12:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -63,6 +64,28 @@ to be able to access the forward declaration include directives.
 
 We need some kind of helper class to help us find data in the path
 derivatives data structures.
+
+*** STARTED Split merged model expansion from individual models expansion :spike:
+    CLOCK: [2015-04-07 Tue 15:43]--[2015-04-07 Tue 17:14] =>  1:31
+
+It is not possible to perform the inclusion dependencies expansion
+before we merge. This is because there are no relationships yet. We
+cannot compute the relationships until we merge. However, the path
+related expansions must be done before merging. Thus we must split the
+expansion into a two-step process: before merging and after merging.
+
+Tasks:
+
+- split path derivatives workflow from inclusion dependencies workflow
+- create a expansion types enum:  =stand_alone_model= and
+  =merged_model=. Add this property to expander interface.
+- Each expansion type has its own graph. Workflow is executed with an
+  expansion type.
+- Create a inclusion dependencies workflow that computes all of the
+  inclusion dependencies against qname and formatter name. We no
+  longer need expansion inputs.
+- Create a inclusion dependencies expander that uses the result of its
+  workflow to setup the inclusion dependencies.
 
 *** STARTED Create a "supported" expander                             :story:
 

@@ -18,24 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_EXPANSION_EXPANSION_INPUTS_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_EXPANSION_EXPANSION_INPUTS_FWD_SER_HPP
+#include "dogen/dynamic/expansion/test_data/expansion_types_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace dynamic {
+namespace expansion {
 
-#include "dogen/cpp/types/expansion/expansion_inputs_fwd.hpp"
+expansion_types_generator::expansion_types_generator() : position_(0) { }
+void expansion_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<expansion_types>(position % 3);
+}
 
-namespace boost {
-namespace serialization {
+expansion_types_generator::result_type
+expansion_types_generator::create(const unsigned int  position) {
+    result_type r;
+    expansion_types_generator::populate(position, r);
+    return r;
+}
 
-template<class Archive>
-void save(Archive& ar, const dogen::cpp::expansion::expansion_inputs& v, unsigned int version);
+expansion_types_generator::result_type
+expansion_types_generator::operator()() {
+    return create(position_++);
+}
 
-template<class Archive>
-void load(Archive& ar, dogen::cpp::expansion::expansion_inputs& v, unsigned int version);
-
-} }
-
-#endif
+} } }

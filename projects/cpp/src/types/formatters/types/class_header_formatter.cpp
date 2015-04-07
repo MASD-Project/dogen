@@ -31,7 +31,7 @@
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"
-#include "dogen/cpp/types/expansion/path_derivatives_selector.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -85,7 +85,7 @@ std::pair<std::string, std::list<std::string> >
 provider::provide(const dynamic::schema::repository& rp,
     const std::unordered_map<
         sml::qname,
-        std::unordered_map<std::string, expansion::path_derivatives> >& pd,
+        std::unordered_map<std::string, expansion::path_derivatives> >& /*pd*/,
     const sml::object& o) const {
     std::pair<std::string, std::list<std::string> > r;
     r.first = traits::class_header_formatter_name();
@@ -103,21 +103,21 @@ provider::provide(const dynamic::schema::repository& rp,
     if (io_enabled && use_integrated_io)
         r.second.push_back(inclusion_constants::std::iosfwd());
 
-    const auto& rel(o.relationships());
-    const expansion::path_derivatives_selector pd_sel(pd);
-    auto i(rel.find(sml::relationship_types::weak_associations));
-    if (i != rel.end()) {
-        const auto fn(traits::forward_declarations_formatter_name());
-        for (const auto aqn : i->second)
-            r.second.push_back(pd_sel.select_inclusion_directive(aqn, fn));
-    }
+    // const auto& rel(o.relationships());
+    // const expansion::path_derivatives_selector pd_sel(pd);
+    // auto i(rel.find(sml::relationship_types::weak_associations));
+    // if (i != rel.end()) {
+    //     const auto fn(traits::forward_declarations_formatter_name());
+    //     for (const auto aqn : i->second)
+    //         r.second.push_back(pd_sel.select_inclusion_directive(aqn, fn));
+    // }
 
-    i = rel.find(sml::relationship_types::regular_associations);
-    if (i != rel.end()) {
-        const auto fn(traits::class_header_formatter_name());
-        for (const auto aqn : i->second)
-            r.second.push_back(pd_sel.select_inclusion_directive(aqn, fn));
-    }
+    // i = rel.find(sml::relationship_types::regular_associations);
+    // if (i != rel.end()) {
+    //     const auto fn(traits::class_header_formatter_name());
+    //     for (const auto aqn : i->second)
+    //         r.second.push_back(pd_sel.select_inclusion_directive(aqn, fn));
+    // }
 
     return r;
 }

@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_HASH_EXPANSION_EXPANSION_INPUTS_HASH_HPP
-#define DOGEN_CPP_HASH_EXPANSION_EXPANSION_INPUTS_HASH_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
-
 namespace dogen {
 namespace cpp {
-namespace expansion {
+namespace settings {
 
-struct expansion_inputs_hasher {
-public:
-    static std::size_t hash(const expansion_inputs& v);
-};
+class inclusion_directives_factory;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::cpp::expansion::expansion_inputs> {
-public:
-    size_t operator()(const dogen::cpp::expansion::expansion_inputs& v) const {
-        return dogen::cpp::expansion::expansion_inputs_hasher::hash(v);
-    }
-};
-
-}
 #endif

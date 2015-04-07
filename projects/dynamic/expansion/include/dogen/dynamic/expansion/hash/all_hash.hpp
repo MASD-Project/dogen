@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/dynamic/expansion/hash/expansion_context_hash.hpp"
+#include "dogen/dynamic/expansion/hash/expansion_types_hash.hpp"

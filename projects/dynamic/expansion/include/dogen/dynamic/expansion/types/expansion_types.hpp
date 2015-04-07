@@ -18,18 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_WORKFLOW_FWD_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_WORKFLOW_FWD_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_TYPES_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace cpp {
+namespace dynamic {
 namespace expansion {
 
-class workflow;
+enum class expansion_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    stand_alone_model_expansion = 1, ///< The expansion must be performed in each stand alone model.
+    merged_model_expansion = 2 ///< The expansion must be performed in the final merged model.
+};
 
 } } }
 

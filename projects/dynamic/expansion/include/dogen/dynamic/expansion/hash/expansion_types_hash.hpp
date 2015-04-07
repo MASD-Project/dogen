@@ -18,16 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-#include "dogen/dynamic/expansion/types/expansion.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/expansion/types/expansion_error.hpp"
+#ifndef DOGEN_DYNAMIC_EXPANSION_HASH_EXPANSION_TYPES_HASH_HPP
+#define DOGEN_DYNAMIC_EXPANSION_HASH_EXPANSION_TYPES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
 #include "dogen/dynamic/expansion/types/expansion_types.hpp"
-#include "dogen/dynamic/expansion/types/grapher.hpp"
-#include "dogen/dynamic/expansion/types/graphing_error.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/options_copier.hpp"
-#include "dogen/dynamic/expansion/types/registrar.hpp"
-#include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow_error.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::dynamic::expansion::expansion_types> {
+public:
+    size_t operator()(const dogen::dynamic::expansion::expansion_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
+
+#endif

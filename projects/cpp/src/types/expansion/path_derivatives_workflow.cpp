@@ -27,12 +27,11 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives.hpp"
+#include "dogen/cpp/io/expansion/path_derivatives_io.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
-#include "dogen/cpp/io/expansion/expansion_inputs_io.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/types/expansion/workflow.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_workflow.hpp"
 
 namespace {
 
@@ -201,7 +200,7 @@ const std::unordered_map<
     return result_;
 }
 
-dynamic::schema::object workflow::
+dynamic::schema::object path_derivatives_workflow::
 obtain_root_object_activity(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
 
@@ -216,7 +215,8 @@ obtain_root_object_activity(const sml::model& m) const {
     return i->second.extensions();
 }
 
-std::unordered_map<std::string, settings::path_settings> workflow::
+std::unordered_map<std::string, settings::path_settings>
+path_derivatives_workflow::
 create_path_settings_activity(const config::cpp_options& opts,
     const dynamic::schema::repository& rp,
     const dynamic::schema::object& o) const {
@@ -231,7 +231,7 @@ create_path_settings_activity(const config::cpp_options& opts,
 std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, path_derivatives>
-    > workflow::obtain_path_derivatives_activity(
+    > path_derivatives_workflow::obtain_path_derivatives_activity(
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const {
 
@@ -244,94 +244,58 @@ std::unordered_map<
     return g.result();
 }
 
-void workflow::initialise_registrar_activity(
-    const formatters::container& fc, registrar& rg) const {
+// void workflow::initialise_registrar_activity(
+//     const formatters::container& fc, registrar& rg) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-    for (const auto f : fc.all_formatters()) {
-        BOOST_LOG_SEV(lg, debug) << "Registered: "
-                                 << f->ownership_hierarchy().formatter_name();
-        f->register_inclusion_dependencies_provider(rg);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
-}
+//     BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
+//     for (const auto f : fc.all_formatters()) {
+//         BOOST_LOG_SEV(lg, debug) << "Registered: "
+//                                  << f->ownership_hierarchy().formatter_name();
+//         f->register_inclusion_dependencies_provider(rg);
+//     }
+//     BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
+// }
 
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >
-workflow::obtain_inclusion_dependencies_activity(
-    const dynamic::schema::repository& rp, const container& c,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, path_derivatives>
-        >& pd, const sml::model& m) const {
+// std::unordered_map<
+//     sml::qname,
+//     std::unordered_map<std::string, std::list<std::string> >
+//     >
+// workflow::obtain_inclusion_dependencies_activity(
+//     const dynamic::schema::repository& rp, const container& c,
+//     const std::unordered_map<
+//         sml::qname,
+//         std::unordered_map<std::string, path_derivatives>
+//         >& pd, const sml::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
+//     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
-    inclusion_dependencies_generator g(rp, c, pd);
-    sml::all_model_items_traversal(m, g);
+//     inclusion_dependencies_generator g(rp, c, pd);
+//     sml::all_model_items_traversal(m, g);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies.";
-    return g.result();
-}
-
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, expansion_inputs>
-    >
-workflow::merge_into_expansion_inputs_activity(
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, path_derivatives>
-            >& pd,
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string, std::list<std::string> >
-                >& inclusion_dependencies) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Merging into expansion inputs.";
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, expansion_inputs>
-        > r;
-
-    for (const auto& qn_pair : pd) {
-        auto& formatter_map(r[qn_pair.first]);
-        for (const auto& fn_pair : qn_pair.second)
-            formatter_map[fn_pair.first].path_derivatives(fn_pair.second);
-    }
-
-    for (const auto& qn_pair : inclusion_dependencies) {
-        auto& formatter_map(r[qn_pair.first]);
-        for (const auto& fn_pair : qn_pair.second)
-            formatter_map[fn_pair.first].inclusion_dependencies(fn_pair.second);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished merging into expansion inputs.";
-    return r;
-}
+//     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies.";
+//     return g.result();
+// }
 
 std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, expansion_inputs>
+    std::unordered_map<std::string, path_derivatives>
     >
-workflow::execute(
+path_derivatives_workflow::execute(
     const config::cpp_options& opts, const dynamic::schema::repository& rp,
-    const formatters::container& fc, const sml::model& m) const {
+    const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     const auto ro(obtain_root_object_activity(m));
     const auto ps(create_path_settings_activity(opts, rp, ro));
-    const auto pd(obtain_path_derivatives_activity(ps, m));
+    const auto r(obtain_path_derivatives_activity(ps, m));
 
-    registrar rg;
-    initialise_registrar_activity(fc, rg);
-    const auto& c(rg.container());
-    const auto d(obtain_inclusion_dependencies_activity(rp, c, pd, m));
-    const auto r(merge_into_expansion_inputs_activity(pd, d));
+    // registrar rg;
+    // initialise_registrar_activity(fc, rg);
+    // const auto& c(rg.container());
+    // const auto d(obtain_inclusion_dependencies_activity(rp, c, pd, m));
+    // const auto r(merge_into_expansion_inputs_activity(pd, d));
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
     return r;

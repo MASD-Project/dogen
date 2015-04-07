@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_SELECTOR_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_SELECTOR_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_SELECTOR_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,6 @@
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/cpp/types/expansion/path_derivatives.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -38,11 +37,11 @@ namespace expansion {
 /**
  * @brief Provides a set of canned queries over path derivatives data.
  */
-class path_derivatives_selector {
+class inclusion_directives_selector {
 public:
-    path_derivatives_selector(const std::unordered_map<
+    inclusion_directives_selector(const std::unordered_map<
             sml::qname,
-            std::unordered_map<std::string, expansion::path_derivatives> >& pd);
+            std::unordered_map<std::string, std::string> >& id);
 
 private:
     /**
@@ -50,18 +49,17 @@ private:
      *
      * @pre Formatter name must exist in path derivatives collection.
      */
-    const expansion::path_derivatives&
-    path_derivatives_for_formatter_name(
-        const std::unordered_map<std::string, expansion::path_derivatives>&
-        pd, const std::string& formatter_name) const;
+    std::string inclusion_directives_for_formatter_name(
+        const std::unordered_map<std::string, std::string>&
+        id, const std::string& formatter_name) const;
 
     /**
      * @brief Returns the path derivatives for a given qname.
      *
      * @pre qname must exist in path derivatives collection.
      */
-    const std::unordered_map<std::string, expansion::path_derivatives>&
-    path_derivatives_for_qname(const sml::qname& qn) const;
+    const std::unordered_map<std::string, std::string>&
+    inclusion_directives_for_qname(const sml::qname& qn) const;
 
 public:
     /**
@@ -77,8 +75,8 @@ public:
 private:
     const std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, expansion::path_derivatives> >&
-    path_derivatives_;
+    std::unordered_map<std::string, std::string> >&
+    inclusion_directives_;
 };
 
 } } }

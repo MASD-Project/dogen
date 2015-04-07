@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_WORKFLOW_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,16 +36,15 @@
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
 #include "dogen/cpp/types/expansion/registrar.hpp"
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
 /**
- * @brief Executes the expansion inputs creation workflow.
+ * @brief Executes the path derivatives workflow.
  */
-class workflow {
+class path_derivatives_workflow {
 private:
     /**
      * @brief Obtains the root object for the model.
@@ -76,37 +75,21 @@ private:
      * @brief Initialises the registrar with all the providers sourced
      * from the formatters container.
      */
-    void initialise_registrar_activity(
-        const formatters::container& fc, registrar& rg) const;
+    // void initialise_registrar_activity(
+    //     const formatters::container& fc, registrar& rg) const;
 
     /**
      * @brief Obtains all of the inclusion dependencies for a model.
      */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::list<std::string> >
-        > obtain_inclusion_dependencies_activity(
-            const dynamic::schema::repository& rp, const container& c,
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string, path_derivatives>
-                >& pd, const sml::model& m) const;
-
-    /**
-     * @brief Merges the arguments into the expansion inputs.
-     */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, expansion_inputs>
-        > merge_into_expansion_inputs_activity(
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string, path_derivatives>
-                >& pd,
-            const std::unordered_map<
-                sml::qname,
-                std::unordered_map<std::string, std::list<std::string> >
-                >& inclusion_dependencies) const;
+    // std::unordered_map<
+    //     sml::qname,
+    //     std::unordered_map<std::string, std::list<std::string> >
+    //     > obtain_inclusion_dependencies_activity(
+    //         const dynamic::schema::repository& rp, const container& c,
+    //         const std::unordered_map<
+    //             sml::qname,
+    //             std::unordered_map<std::string, path_derivatives>
+    //             >& pd, const sml::model& m) const;
 
 public:
     /**
@@ -114,11 +97,10 @@ public:
      */
     std::unordered_map<
     sml::qname,
-    std::unordered_map<std::string, expansion_inputs>
+    std::unordered_map<std::string, path_derivatives>
     >
     execute(const config::cpp_options& opts,
-        const dynamic::schema::repository& rp,
-        const formatters::container& fc, const sml::model& m) const;
+        const dynamic::schema::repository& rp, const sml::model& m) const;
 };
 
 } } }

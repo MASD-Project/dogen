@@ -19,3 +19,4 @@
  *
  */
 #include "dogen/dynamic/expansion/io/expansion_context_io.hpp"
+#include "dogen/dynamic/expansion/io/expansion_types_io.hpp"

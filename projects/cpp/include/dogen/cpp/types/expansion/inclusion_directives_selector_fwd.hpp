@@ -18,39 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/expansion/expansion_inputs_hash.hpp"
-#include "dogen/cpp/hash/expansion/path_derivatives_hash.hpp"
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_SELECTOR_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_SELECTOR_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-std::size_t expansion_inputs_hasher::hash(const expansion_inputs&v) {
-    std::size_t seed(0);
-
-    combine(seed, v.path_derivatives());
-    combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
-
-    return seed;
-}
+class inclusion_directives_selector;
 
 } } }
+
+#endif

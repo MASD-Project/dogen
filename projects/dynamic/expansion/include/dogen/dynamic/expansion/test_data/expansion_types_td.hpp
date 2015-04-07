@@ -18,16 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-#include "dogen/dynamic/expansion/types/expansion.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/expansion/types/expansion_error.hpp"
+#ifndef DOGEN_DYNAMIC_EXPANSION_TEST_DATA_EXPANSION_TYPES_TD_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TEST_DATA_EXPANSION_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/expansion/types/expansion_types.hpp"
-#include "dogen/dynamic/expansion/types/grapher.hpp"
-#include "dogen/dynamic/expansion/types/graphing_error.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/options_copier.hpp"
-#include "dogen/dynamic/expansion/types/registrar.hpp"
-#include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow_error.hpp"
+
+namespace dogen {
+namespace dynamic {
+namespace expansion {
+
+class expansion_types_generator {
+public:
+    expansion_types_generator();
+
+public:
+    typedef dogen::dynamic::expansion::expansion_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} } }
+
+#endif

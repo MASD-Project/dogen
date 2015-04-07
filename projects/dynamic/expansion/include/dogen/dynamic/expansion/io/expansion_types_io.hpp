@@ -18,18 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_EXPANDER_FWD_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_EXPANDER_FWD_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_IO_EXPANSION_TYPES_IO_HPP
+#define DOGEN_DYNAMIC_EXPANSION_IO_EXPANSION_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/dynamic/expansion/types/expansion_types.hpp"
+
 namespace dogen {
-namespace cpp {
+namespace dynamic {
 namespace expansion {
 
-class expander;
+std::ostream& operator<<(std::ostream& s, const expansion_types& v);
 
 } } }
 

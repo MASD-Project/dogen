@@ -27,14 +27,14 @@
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/expansion/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/expansion/expander.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_workflow.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.expansion.expander"));
+static logger lg(logger_factory("cpp.expansion.path_derivatives_expander"));
 
 const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
@@ -44,8 +44,8 @@ const std::string field_definitions_not_found(
     "Could not find expected field definitions for formatter: ");
 const std::string missing_path_settings(
     "Could not find any path settings for formatter: ");
-const std::string no_expansion_inputs_for_qn(
-    "Could not find any expansion inputs for qname: ");
+const std::string no_path_derivatives_for_qn(
+    "Could not find any path derivatives for qname: ");
 
 }
 
@@ -53,10 +53,11 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
-expander::expander() : requires_file_path_expansion_(false) {}
-expander::~expander() noexcept {}
+path_derivatives_expander::path_derivatives_expander() : requires_file_path_expansion_(false) {}
+path_derivatives_expander::~path_derivatives_expander() noexcept {}
 
-expander::field_definitions expander::field_definitions_for_formatter_name(
+path_derivatives_expander::field_definitions
+path_derivatives_expander::field_definitions_for_formatter_name(
     const dynamic::schema::repository& rp,
     const std::string& formatter_name) const {
 
@@ -77,8 +78,8 @@ expander::field_definitions expander::field_definitions_for_formatter_name(
             r.inclusion_directive = fd;
         else if (fd.name().simple() == traits::header_guard())
             r.header_guard = fd;
-        else if (fd.name().simple() == cpp::traits::inclusion_dependency())
-            r.inclusion_dependency = fd;
+        // else if (fd.name().simple() == cpp::traits::inclusion_dependency())
+        //     r.inclusion_dependency = fd;
     }
 
     if (!found_file_path) {
@@ -100,17 +101,18 @@ expander::field_definitions expander::field_definitions_for_formatter_name(
                                  << formatter_name;
     }
 
-    if (!r.inclusion_dependency) {
-        BOOST_LOG_SEV(lg, debug)
-            << "Formatter does not support inclusion dependencies: "
-            << formatter_name;
-    }
+    // if (!r.inclusion_dependency) {
+    //     BOOST_LOG_SEV(lg, debug)
+    //         << "Formatter does not support inclusion dependencies: "
+    //         << formatter_name;
+    // }
 
     return r;
 }
 
-std::unordered_map<std::string, expander::field_definitions>
-expander::setup_field_definitions(const dynamic::schema::repository& rp,
+std::unordered_map<std::string, path_derivatives_expander::field_definitions>
+path_derivatives_expander::
+setup_field_definitions(const dynamic::schema::repository& rp,
     const formatters::container& fc) const {
 
     std::unordered_map<std::string, field_definitions> r;
@@ -122,20 +124,21 @@ expander::setup_field_definitions(const dynamic::schema::repository& rp,
     return r;
 }
 
-void expander::expand_file_path(const field_definitions& fd,
-    const expansion::expansion_inputs& ei,
+void path_derivatives_expander::expand_file_path(const field_definitions& fd,
+    const expansion::path_derivatives& pd,
     dynamic::schema::object& o) const {
 
     if (!requires_file_path_expansion_)
         return;
 
     dynamic::schema::field_instance_factory f;
-    const auto& fp(ei.path_derivatives().file_path());
+    const auto& fp(pd.file_path());
     o.fields()[fd.file_path.name().qualified()] = f.make_text(fp);
 }
 
-void expander::expand_header_guard(const std::string& formatter_name,
-    const field_definitions& fd, const expansion::expansion_inputs& ei,
+void path_derivatives_expander::
+expand_header_guard(const std::string& formatter_name,
+    const field_definitions& fd, const path_derivatives& pd,
     dynamic::schema::object& o) const {
 
     const bool header_guard_not_supported(!fd.header_guard);
@@ -153,11 +156,12 @@ void expander::expand_header_guard(const std::string& formatter_name,
 
     dynamic::schema::field_instance_factory f;
     const auto& n(fd.header_guard->name().qualified());
-    o.fields()[n] = f.make_text(ei.path_derivatives().header_guard());
+    o.fields()[n] = f.make_text(pd.header_guard());
 }
 
-void expander::expand_include_directive(const std::string& formatter_name,
-    const field_definitions& fd, const expansion::expansion_inputs& ei,
+void path_derivatives_expander::
+expand_include_directive(const std::string& formatter_name,
+    const field_definitions& fd, const path_derivatives& pd,
     dynamic::schema::object& o) const {
 
     const bool inclusion_directive_not_supported(!fd.inclusion_directive);
@@ -175,42 +179,45 @@ void expander::expand_include_directive(const std::string& formatter_name,
 
     dynamic::schema::field_instance_factory f;
     const auto n(fd.inclusion_directive->name().qualified());
-    o.fields()[n] = f.make_text(ei.path_derivatives().inclusion_directive());
+    o.fields()[n] = f.make_text(pd.inclusion_directive());
 }
 
-void expander::expand_include_dependencies(const std::string& formatter_name,
-    const field_definitions& fd, const expansion::expansion_inputs& ei,
-    dynamic::schema::object& o) const {
-    const bool inclusion_dependencies_not_supported(!fd.inclusion_dependency);
-    if (inclusion_dependencies_not_supported)
-        return;
+// void path_derivatives_expander::
+// expand_include_dependencies(const std::string& formatter_name,
+//     const field_definitions& fd, const path_derivatives& pd,
+//     dynamic::schema::object& o) const {
+//     const bool inclusion_dependencies_not_supported(!fd.inclusion_dependency);
+//     if (inclusion_dependencies_not_supported)
+//         return;
 
-    using namespace dynamic::schema;
-    const field_selector fs(o);
-    const bool override_found(fs.has_field(*fd.inclusion_dependency));
-    if (override_found) {
-        BOOST_LOG_SEV(lg, debug) << "Inclusion dependency has been overriden: "
-                                 << formatter_name;
-        return;
-    }
+//     using namespace dynamic::schema;
+//     const field_selector fs(o);
+//     const bool override_found(fs.has_field(*fd.inclusion_dependency));
+//     if (override_found) {
+//         BOOST_LOG_SEV(lg, debug) << "Inclusion dependency has been overriden: "
+//                                  << formatter_name;
+//         return;
+//     }
 
-    dynamic::schema::field_instance_factory f;
-    const auto n(fd.inclusion_dependency->name().qualified());
-    o.fields()[n] = f.make_text_collection(ei.inclusion_dependencies());
-}
+//     dynamic::schema::field_instance_factory f;
+//     const auto n(fd.inclusion_dependency->name().qualified());
+//     o.fields()[n] = f.make_text_collection(ei.inclusion_dependencies());
+// }
 
-std::string expander::name() const {
+std::string path_derivatives_expander::name() const {
     static std::string name("cpp.expansion.expander");
     return name;
 }
 
-const std::forward_list<std::string>& expander::dependencies() const {
+const std::forward_list<std::string>&
+path_derivatives_expander::dependencies() const {
     using namespace dynamic::expansion;
     static std::forward_list<std::string> r { options_copier::static_name() };
     return r;
 }
 
-void expander::setup(const dynamic::expansion::expansion_context& ec) {
+void path_derivatives_expander::
+setup(const dynamic::expansion::expansion_context& ec) {
     requires_file_path_expansion_ = ec.model().is_target();
 
     formatters::workflow::registrar().validate();
@@ -220,21 +227,21 @@ void expander::setup(const dynamic::expansion::expansion_context& ec) {
 
     const auto& m(ec.model());
     const auto& opts(ec.cpp_options());
-    workflow w;
-    expansion_inputs_ = w.execute(opts, rp, fc, m);
+    path_derivatives_workflow w;
+    path_derivatives_ = w.execute(opts, rp, m);
 }
 
-void expander::
+void path_derivatives_expander::
 expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     dynamic::schema::object& o) const {
     const auto n(sml::string_converter::convert(qn));
     BOOST_LOG_SEV(lg, debug) << "Performing expansion for: " << n;
 
-    const auto i(expansion_inputs_.find(qn));
-    if (i == expansion_inputs_.end()) {
-        BOOST_LOG_SEV(lg, error) << no_expansion_inputs_for_qn << n;
+    const auto i(path_derivatives_.find(qn));
+    if (i == path_derivatives_.end()) {
+        BOOST_LOG_SEV(lg, error) << no_path_derivatives_for_qn << n;
         BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-                no_expansion_inputs_for_qn + n));
+                no_path_derivatives_for_qn + n));
     }
 
     for (const auto& pair : i->second) {
@@ -248,11 +255,10 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
         }
 
         const auto& fd(j->second);
-        const auto& ei(pair.second);
-        expand_file_path(fd, ei, o);
-        expand_header_guard(formatter_name, fd, ei, o);
-        expand_include_directive(formatter_name, fd, ei, o);
-        expand_include_dependencies(formatter_name, fd, ei, o);
+        const auto& pd(pair.second);
+        expand_file_path(fd, pd, o);
+        expand_header_guard(formatter_name, fd, pd, o);
+        expand_include_directive(formatter_name, fd, pd, o);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished performing expansion for: " << n;
 }

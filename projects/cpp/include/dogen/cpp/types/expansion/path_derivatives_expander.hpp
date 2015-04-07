@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_EXPANDER_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_EXPANDER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_EXPANDER_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
 namespace dogen {
@@ -38,12 +38,14 @@ namespace cpp {
 namespace expansion {
 
 /**
- * @brief Performs all of the expansions required by the c++ model.
+ * @brief Performs all of the path derivatives expansions required by
+ * the c++ model.
  */
-class expander : public dynamic::expansion::expander_interface {
+class path_derivatives_expander
+    : public dynamic::expansion::expander_interface {
 public:
-    expander();
-    ~expander() noexcept;
+    path_derivatives_expander();
+    ~path_derivatives_expander() noexcept;
 
 private:
     /**
@@ -53,7 +55,6 @@ private:
         dynamic::schema::field_definition file_path;
         boost::optional<dynamic::schema::field_definition> inclusion_directive;
         boost::optional<dynamic::schema::field_definition> header_guard;
-        boost::optional<dynamic::schema::field_definition> inclusion_dependency;
     };
 
     /**
@@ -76,27 +77,20 @@ private:
      * @brief Handles the dynamic expansion of the file path.
      */
     void expand_file_path(const field_definitions& fd,
-        const expansion::expansion_inputs& ei, dynamic::schema::object& o) const;
+        const path_derivatives& pd, dynamic::schema::object& o) const;
 
     /**
      * @brief Handles the dynamic expansion of the header guard.
      */
     void expand_header_guard(const std::string& formatter_name,
-        const field_definitions& fd, const expansion::expansion_inputs& ei,
+        const field_definitions& fd, const path_derivatives& pd,
         dynamic::schema::object& o) const;
 
     /**
      * @brief Handles the dynamic expansion of the include directive.
      */
     void expand_include_directive(const std::string& formatter_name,
-        const field_definitions& fd, const expansion::expansion_inputs& ei,
-        dynamic::schema::object& o) const;
-
-    /**
-     * @brief Handles the dynamic expansion of the include dependencies.
-     */
-    void expand_include_dependencies(const std::string& formatter_name,
-        const field_definitions& fd, const expansion::expansion_inputs& ei,
+        const field_definitions& fd, const path_derivatives& pd,
         dynamic::schema::object& o) const;
 
 public:
@@ -113,9 +107,8 @@ private:
     bool requires_file_path_expansion_;
     std::unordered_map<std::string, field_definitions> field_definitions_;
     std::unordered_map<sml::qname,
-                       std::unordered_map<std::string,
-                                          expansion::expansion_inputs>
-                       > expansion_inputs_;
+                       std::unordered_map<std::string, path_derivatives>
+                       > path_derivatives_;
 };
 
 } } }

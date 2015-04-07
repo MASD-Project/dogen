@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
-#include "dogen/dynamic/expansion/types/expansion.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/expansion/types/expansion_error.hpp"
+#ifndef DOGEN_DYNAMIC_EXPANSION_SERIALIZATION_EXPANSION_TYPES_SER_HPP
+#define DOGEN_DYNAMIC_EXPANSION_SERIALIZATION_EXPANSION_TYPES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
 #include "dogen/dynamic/expansion/types/expansion_types.hpp"
-#include "dogen/dynamic/expansion/types/grapher.hpp"
-#include "dogen/dynamic/expansion/types/graphing_error.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/options_copier.hpp"
-#include "dogen/dynamic/expansion/types/registrar.hpp"
-#include "dogen/dynamic/expansion/types/registrar_error.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow_error.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::dynamic::expansion::expansion_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("expansion_types", v);
+}
+
+#endif

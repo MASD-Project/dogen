@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_SELECTOR_FWD_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_SELECTOR_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
-class path_derivatives_selector;
+class inclusion_dependencies_expander;
 
 } } }
 

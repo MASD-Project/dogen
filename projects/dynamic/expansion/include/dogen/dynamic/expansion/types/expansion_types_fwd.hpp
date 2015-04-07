@@ -18,37 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_EXPANSION_EXPANSION_INPUTS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_EXPANSION_EXPANSION_INPUTS_TD_HPP
+#ifndef DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_TYPES_FWD_HPP
+#define DOGEN_DYNAMIC_EXPANSION_TYPES_EXPANSION_TYPES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/expansion/expansion_inputs.hpp"
-
 namespace dogen {
-namespace cpp {
+namespace dynamic {
 namespace expansion {
 
-class expansion_inputs_generator {
-public:
-    expansion_inputs_generator();
-
-public:
-    typedef dogen::cpp::expansion::expansion_inputs result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
+enum class expansion_types : unsigned int;
 } } }
 
 #endif
