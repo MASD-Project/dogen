@@ -12,17 +12,17 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-07 Tue 17:45]
+Clock summary at [2015-04-07 Tue 21:40]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *15:56* |       |       |
+| *Total time*                                                          | *16:07* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                |         | 15:56 |       |
+| Active                                                                |         | 16:07 |       |
 | STARTED Sprint and product backlog grooming                           |         |       |  0:08 |
 | COMPLETED Add support for forward declarations                        |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures      |         |       |  0:58 |
-| STARTED Split merged model expansion from individual models expansion |         |       |  2:01 |
+| STARTED Split merged model expansion from individual models expansion |         |       |  2:12 |
 | STARTED Create a "populate includes operation"                        |         |       | 12:07 |
 #+end:
 
@@ -66,6 +66,8 @@ We need some kind of helper class to help us find data in the path
 derivatives data structures.
 
 *** STARTED Split merged model expansion from individual models expansion :spike:
+    CLOCK: [2015-04-07 Tue 21:38]--[2015-04-07 Tue 21:40] =>  0:02
+    CLOCK: [2015-04-07 Tue 21:22]--[2015-04-07 Tue 21:31] =>  0:09
     CLOCK: [2015-04-07 Tue 17:15]--[2015-04-07 Tue 17:45] =>  0:30
     CLOCK: [2015-04-07 Tue 15:43]--[2015-04-07 Tue 17:14] =>  1:31
 

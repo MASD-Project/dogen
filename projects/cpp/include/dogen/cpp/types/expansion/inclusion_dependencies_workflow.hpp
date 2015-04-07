@@ -42,9 +42,10 @@ namespace expansion {
  */
 class inclusion_dependencies_workflow {
 private:
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, std::string>
-                       >
+    std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, std::string>
+    >
     obtain_inclusion_directives_activity(const sml::model& m) const;
 
     /**
@@ -60,7 +61,8 @@ private:
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::list<std::string> >
-    > obtain_inclusion_dependencies_activity(
+    >
+    obtain_inclusion_dependencies_activity(
         const dynamic::schema::repository& rp, const container& c,
         const std::unordered_map<sml::qname,
         std::unordered_map<std::string, std::string> >&
@@ -70,9 +72,10 @@ public:
     /**
      * @brief Execute the workflow.
      */
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, std::list<std::string>>
-                       >
+    std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, std::list<std::string> >
+    >
     execute(const dynamic::schema::repository& rp, const sml::model& m) const;
 };
 

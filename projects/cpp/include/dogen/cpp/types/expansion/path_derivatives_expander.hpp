@@ -43,6 +43,7 @@ namespace expansion {
  */
 class path_derivatives_expander
     : public dynamic::expansion::expander_interface {
+
 public:
     path_derivatives_expander();
     ~path_derivatives_expander() noexcept;

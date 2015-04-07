@@ -62,8 +62,8 @@ private:
      * @brief Obtains all path derivatives for the supplied model.
      */
     std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, path_derivatives>
+        sml::qname,
+        std::unordered_map<std::string, path_derivatives>
     >
     obtain_path_derivatives_activity(
         const std::unordered_map<std::string, settings::path_settings>& ps,
@@ -74,8 +74,8 @@ public:
      * @brief Execute the workflow.
      */
     std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, path_derivatives>
+        sml::qname,
+        std::unordered_map<std::string, path_derivatives>
     >
     execute(const config::cpp_options& opts,
         const dynamic::schema::repository& rp, const sml::model& m) const;
