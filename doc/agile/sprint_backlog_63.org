@@ -12,16 +12,17 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-07 Tue 14:45]
+Clock summary at [2015-04-07 Tue 15:43]
 
-| Headline                                       | Time    |       |       |
-|------------------------------------------------+---------+-------+-------|
-| *Total time*                                   | *12:57* |       |       |
-|------------------------------------------------+---------+-------+-------|
-| Active                                         |         | 12:57 |       |
-| STARTED Sprint and product backlog grooming    |         |       |  0:08 |
-| COMPLETED Add support for forward declarations |         |       |  0:42 |
-| STARTED Create a "populate includes operation" |         |       | 12:07 |
+| Headline                                                         | Time    |       |       |
+|------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                     | *13:55* |       |       |
+|------------------------------------------------------------------+---------+-------+-------|
+| Active                                                           |         | 13:55 |       |
+| STARTED Sprint and product backlog grooming                      |         |       |  0:08 |
+| COMPLETED Add support for forward declarations                   |         |       |  0:42 |
+| COMPLETED Create a selector for path derivatives data structures |         |       |  0:58 |
+| STARTED Create a "populate includes operation"                   |         |       | 12:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -55,6 +56,13 @@ few other assorted clean-ups:
 
 We need to have the basic skeleton for forward declarations in order
 to be able to access the forward declaration include directives.
+
+*** COMPLETED Create a selector for path derivatives data structures  :story:
+    CLOSED: [2015-04-07 Tue 15:43]
+    CLOCK: [2015-04-07 Tue 14:45]--[2015-04-07 Tue 15:43] =>  0:58
+
+We need some kind of helper class to help us find data in the path
+derivatives data structures.
 
 *** STARTED Create a "supported" expander                             :story:
 
