@@ -28,7 +28,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
-#include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -57,13 +56,6 @@ private:
      */
     settings::formatter_settings formatter_settings_for_formatter(
         const formattables::class_info& c) const;
-
-public:
-    /**
-     * @brief Create the expander associated with this formatter.
-     */
-    boost::shared_ptr<dynamic::expansion::expander_interface>
-    create_expander() const;
 
 public:
     dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;

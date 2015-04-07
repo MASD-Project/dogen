@@ -30,15 +30,9 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-void register_expander(
-    boost::shared_ptr<dynamic::expansion::expander_interface> p) {
-    dynamic::expansion::workflow::registrar().register_expander(p);
-}
-
 void initialise_class_header_formatter(registrar& rg) {
     const auto f(std::make_shared<class_header_formatter>());
     rg.register_formatter(f);
-    register_expander(f->create_expander());
 }
 
 void initializer::initialize(registrar& rg) {

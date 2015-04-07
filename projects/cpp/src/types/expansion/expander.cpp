@@ -68,19 +68,17 @@ expander::field_definitions expander::field_definitions_for_formatter_name(
     }
 
     field_definitions r;
-    bool found_file_path(false), found_inclusion_path(false),
-        found_header_guard(false);
+    bool found_file_path(false);
     for (const auto fd : i->second) {
         if (fd.name().simple() == traits::file_path()) {
             r.file_path = fd;
             found_file_path = true;
-        } else if (fd.name().simple() == traits::inclusion_directive()) {
+        } else if (fd.name().simple() == traits::inclusion_directive())
             r.inclusion_directive = fd;
-            found_inclusion_path = true;
-        } else if (fd.name().simple() == traits::header_guard()) {
+        else if (fd.name().simple() == traits::header_guard())
             r.header_guard = fd;
-            found_header_guard = true;
-        }
+        else if (fd.name().simple() == cpp::traits::inclusion_dependency())
+            r.inclusion_dependency = fd;
     }
 
     if (!found_file_path) {
@@ -92,14 +90,20 @@ expander::field_definitions expander::field_definitions_for_formatter_name(
                 field_definition_not_found + traits::file_path()));
     }
 
-    if (!found_inclusion_path) {
+    if (!r.inclusion_directive) {
         BOOST_LOG_SEV(lg, debug) << "Formatter does not support inclusion: "
                                  << formatter_name;
     }
 
-    if (!found_header_guard) {
+    if (!r.header_guard) {
         BOOST_LOG_SEV(lg, debug) << "Formatter does not support header guards: "
                                  << formatter_name;
+    }
+
+    if (!r.inclusion_dependency) {
+        BOOST_LOG_SEV(lg, debug)
+            << "Formatter does not support inclusion dependencies: "
+            << formatter_name;
     }
 
     return r;
@@ -174,6 +178,27 @@ void expander::expand_include_directive(const std::string& formatter_name,
     o.fields()[n] = f.make_text(ei.path_derivatives().inclusion_directive());
 }
 
+void expander::expand_include_dependencies(const std::string& formatter_name,
+    const field_definitions& fd, const expansion::expansion_inputs& ei,
+    dynamic::schema::object& o) const {
+    const bool inclusion_dependencies_not_supported(!fd.inclusion_dependency);
+    if (inclusion_dependencies_not_supported)
+        return;
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const bool override_found(fs.has_field(*fd.inclusion_dependency));
+    if (override_found) {
+        BOOST_LOG_SEV(lg, debug) << "Inclusion dependency has been overriden: "
+                                 << formatter_name;
+        return;
+    }
+
+    dynamic::schema::field_instance_factory f;
+    const auto n(fd.inclusion_dependency->name().qualified());
+    o.fields()[n] = f.make_text_collection(ei.inclusion_dependencies());
+}
+
 std::string expander::name() const {
     static std::string name("cpp.expansion.expander");
     return name;
@@ -227,6 +252,7 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
         expand_file_path(fd, ei, o);
         expand_header_guard(formatter_name, fd, ei, o);
         expand_include_directive(formatter_name, fd, ei, o);
+        expand_include_dependencies(formatter_name, fd, ei, o);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished performing expansion for: " << n;
 }

@@ -53,6 +53,7 @@ private:
         dynamic::schema::field_definition file_path;
         boost::optional<dynamic::schema::field_definition> inclusion_directive;
         boost::optional<dynamic::schema::field_definition> header_guard;
+        boost::optional<dynamic::schema::field_definition> inclusion_dependency;
     };
 
     /**
@@ -88,6 +89,13 @@ private:
      * @brief Handles the dynamic expansion of the include directive.
      */
     void expand_include_directive(const std::string& formatter_name,
+        const field_definitions& fd, const expansion::expansion_inputs& ei,
+        dynamic::schema::object& o) const;
+
+    /**
+     * @brief Handles the dynamic expansion of the include dependencies.
+     */
+    void expand_include_dependencies(const std::string& formatter_name,
         const field_definitions& fd, const expansion::expansion_inputs& ei,
         dynamic::schema::object& o) const;
 

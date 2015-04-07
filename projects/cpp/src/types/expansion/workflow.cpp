@@ -125,12 +125,13 @@ const std::unordered_map<sml::qname,
  */
 class inclusion_dependencies_generator {
 public:
-    inclusion_dependencies_generator(const container& c,
+    inclusion_dependencies_generator(const dynamic::schema::repository& rp,
+        const container& c,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, path_derivatives>
             >& pd)
-        : factory_(c, pd) { }
+        : factory_(rp, c, pd) { }
 
 private:
     /**
@@ -261,14 +262,15 @@ std::unordered_map<
     std::unordered_map<std::string, std::list<std::string> >
     >
 workflow::obtain_inclusion_dependencies_activity(
-    const container& c, const std::unordered_map<
+    const dynamic::schema::repository& rp, const container& c,
+    const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, path_derivatives>
         >& pd, const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
-    inclusion_dependencies_generator g(c, pd);
+    inclusion_dependencies_generator g(rp, c, pd);
     sml::all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies.";
@@ -327,7 +329,8 @@ workflow::execute(
 
     registrar rg;
     initialise_registrar_activity(fc, rg);
-    const auto d(obtain_inclusion_dependencies_activity(rg.container(), pd, m));
+    const auto& c(rg.container());
+    const auto d(obtain_inclusion_dependencies_activity(rp, c, pd, m));
     const auto r(merge_into_expansion_inputs_activity(pd, d));
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;

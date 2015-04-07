@@ -85,7 +85,8 @@ private:
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::list<std::string> >
-        > obtain_inclusion_dependencies_activity(const container& c,
+        > obtain_inclusion_dependencies_activity(
+            const dynamic::schema::repository& rp, const container& c,
             const std::unordered_map<
                 sml::qname,
                 std::unordered_map<std::string, path_derivatives>

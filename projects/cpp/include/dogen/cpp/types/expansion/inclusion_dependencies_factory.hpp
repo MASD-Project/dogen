@@ -45,7 +45,8 @@ namespace expansion {
  */
 class inclusion_dependencies_factory {
 public:
-    inclusion_dependencies_factory(const container& c,
+    inclusion_dependencies_factory(const dynamic::schema::repository& rp,
+        const container& c,
         const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, expansion::path_derivatives>
@@ -73,6 +74,7 @@ public:
     /**@}*/
 
 private:
+    const dynamic::schema::repository& repository_;
     const container& container_;
     const std::unordered_map<
         sml::qname,

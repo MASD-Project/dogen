@@ -29,7 +29,6 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/settings/path_expander.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -71,7 +70,7 @@ class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
     std::pair<std::string, std::list<std::string> >
-    provide(const std::unordered_map<
+    provide(const dynamic::schema::repository& rp, const std::unordered_map<
             sml::qname,
             std::unordered_map<std::string, expansion::path_derivatives>
             >& pd,
@@ -79,105 +78,19 @@ class provider : public expansion::
 };
 
 std::pair<std::string, std::list<std::string> >
-provider::provide(const std::unordered_map<
+provider::provide(const dynamic::schema::repository& rp,
+    const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, expansion::path_derivatives>
         >& /*pd*/,
-    const sml::object& /*o*/) const {
+    const sml::object& o) const {
     std::pair<std::string, std::list<std::string> > r;
     r.first = traits::class_header_formatter_name();
-    return r;
-}
-
-void null_deleter(const dynamic::expansion::expansion_context *) {}
-
-class inclusion_expander final : public dynamic::expansion::expander_interface {
-public:
-    ~inclusion_expander() noexcept { }
-
-private:
-    struct formatter_properties {
-        dynamic::schema::field_definition inclusion_dependency;
-        std::shared_ptr<const dynamic::expansion::expansion_context> context;
-    };
-
-public:
-    std::string name() const override;
-
-    const std::forward_list<std::string>& dependencies() const override;
-
-    void setup(const dynamic::expansion::expansion_context& ec) override;
-
-    void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
-        dynamic::schema::object& o) const override;
-
-private:
-    boost::optional<formatter_properties> formatter_properties_;
-};
-
-std::string inclusion_expander::name() const {
-    static std::string name("cpp.types.inclusion_expander");
-    return name;
-}
-
-const std::forward_list<std::string>& inclusion_expander::
-dependencies() const {
-    static std::forward_list<std::string>
-        r { settings::path_expander::static_name() };
-    return r;
-}
-
-void inclusion_expander::
-setup(const dynamic::expansion::expansion_context& ec) {
-    const auto fn(traits::class_header_formatter_name());
-    const auto& rp(ec.repository());
-    const auto i(rp.field_definitions_by_formatter_name().find(fn));
-    if (i == rp.field_definitions_by_formatter_name().end()) {
-        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << fn;
-        BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-                no_fields_for_formatter + fn));
-    }
-
-    formatter_properties_ = formatter_properties();
-    formatter_properties_->context =
-        std::shared_ptr<const dynamic::expansion::expansion_context>(
-            &ec, &null_deleter);
-
-    bool found_inclusion_dependency(false);
-    for (const auto fd : i->second) {
-        if (fd.name().simple() == cpp::traits::inclusion_dependency()) {
-            formatter_properties_->inclusion_dependency = fd;
-            found_inclusion_dependency = true;
-        }
-    }
-
-    if (!found_inclusion_dependency) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << cpp::traits::inclusion_dependency()
-                                 << " for formatter: " << fn;
-        BOOST_THROW_EXCEPTION(
-            dynamic::expansion::expansion_error(field_definition_not_found +
-                cpp::traits::inclusion_dependency()));
-    }
-}
-
-void inclusion_expander::
-expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
-    dynamic::schema::object& o) const {
-
-    const auto& m(formatter_properties_->context->model());
-
-    // we only handle includes for objects.
-    const auto i(m.objects().find(qn));
-    if (i == m.objects().end())
-        return;
-
-    std::list<std::string> includes;
 
     // algorithm: domain headers need it for the swap function.
-    includes.push_back(inclusion_constants::std::algorithm());
+    r.second.push_back(inclusion_constants::std::algorithm());
 
-    selector s(formatter_properties_->context->repository(), o);
+    selector s(rp, o.extensions());
     const auto io_fn(formatters::io::traits::facet_name());
     const bool io_enabled(s.is_formatter_enabled(io_fn));
 
@@ -185,7 +98,7 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     const bool use_integrated_io(s.is_facet_integrated(types_fn, io_fn));
 
     if (io_enabled && use_integrated_io)
-        includes.push_back(inclusion_constants::std::iosfwd());
+        r.second.push_back(inclusion_constants::std::iosfwd());
 
     // const auto& rel(i->second.relationships());
     // const auto ra(rel.find(sml::relationship_types::regular_associations));
@@ -194,9 +107,7 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     //     selector s(formatter_properties_->context->repository(), o);
     // }
 
-    dynamic::schema::field_instance_factory f;
-    o.fields()[formatter_properties_->inclusion_dependency.name().qualified()] =
-        f.make_text_collection(includes);
+    return r;
 }
 
 void class_header_formatter::validate(
@@ -226,11 +137,6 @@ formatter_settings_for_formatter(const formattables::class_info& c) const {
             formatting_error(formatter_settings_not_found + fn));
     }
     return i->second;
-}
-
-boost::shared_ptr<dynamic::expansion::expander_interface>
-class_header_formatter::create_expander() const {
-    return boost::make_shared<inclusion_expander>();
 }
 
 dynamic::schema::ownership_hierarchy
