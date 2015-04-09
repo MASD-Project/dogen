@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
@@ -32,15 +33,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.settings.formatter_settings_factory"));
 
-const std::string multiple_fields(
-    "Facet has multiple fields with the same name: ");
-const std::string no_fields_for_formatter(
-    "Could not find any fields for formatter: ");
-const std::string no_default_value(
-        "Field does not have a default value: ");
-const std::string missing_expected_field("Could not find expected field: ");
-const std::string found_some_field_definitions(
-    "Formatter defines some but not all include field definitions: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 
@@ -58,16 +50,11 @@ formatter_settings_factory::formatter_properties
 formatter_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,
     const std::string& formatter_name) const {
-    const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
-    if (i == rp.field_definitions_by_facet_name().end()) {
-        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(no_fields_for_formatter + formatter_name));
-    }
 
     formatter_properties r;
     bool found_enabled(false), found_file_path(false);
-    for (const auto fd : i->second) {
+    const dynamic::schema::repository_selector s(rp);
+    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
         if (fd.name().simple() == traits::enabled()) {
             r.enabled = fd;
             found_enabled = true;

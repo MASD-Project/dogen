@@ -28,7 +28,6 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"

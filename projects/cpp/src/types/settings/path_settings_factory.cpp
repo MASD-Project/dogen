@@ -21,25 +21,16 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "cpp.settings.path_settings_factory"));
+static logger lg(logger_factory("cpp.settings.path_settings_factory"));
 
-const std::string multiple_fields(
-    "Facet has multiple fields with the same name: ");
-const std::string missing_expected_field("Could not find expected field: ");
-const std::string no_fields_for_facet("Could not find any fields for facet: ");
-const std::string no_fields_for_formatter(
-    "Could not find any fields for formatter: ");
-const std::string field_not_found("Could not find expected field: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 const std::string empty_formatter_name("Formatter name is empty.");
@@ -52,34 +43,25 @@ namespace settings {
 
 path_settings_factory::
 path_settings_factory(const config::cpp_options& o,
-    const dynamic::schema::repository& rp)
-    : options_(o), formatter_properties_(make_formatter_properties(rp)) { }
-
-dynamic::schema::field_definition path_settings_factory::
-field_definition_for_name(const dynamic::schema::repository& rp,
-    const std::string& field_name) const {
-    const auto i(rp.field_definitions_by_name().find(field_name));
-    if (i == rp.field_definitions_by_name().end()) {
-        BOOST_LOG_SEV(lg, error) << field_not_found << field_name;
-        BOOST_THROW_EXCEPTION(building_error(field_not_found + field_name));
-    }
-    return i->second;
-}
+    const dynamic::schema::repository& rp,
+    const formatters::container& fc)
+    : options_(o), formatter_properties_(make_formatter_properties(rp, fc)) { }
 
 void path_settings_factory::setup_top_level_fields(
     const dynamic::schema::repository& rp, formatter_properties& fp) const {
 
+    const dynamic::schema::repository_selector s(rp);
     fp.include_directory_name =
-        field_definition_for_name(rp, traits::include_directory_name());
+        s.select_field_by_name(traits::include_directory_name());
 
     fp.source_directory_name =
-        field_definition_for_name(rp, traits::source_directory_name());
+        s.select_field_by_name(traits::source_directory_name());
 
     fp.header_file_extension =
-        field_definition_for_name(rp, traits::header_file_extension());
+        s.select_field_by_name(traits::header_file_extension());
 
     fp.implementation_file_extension =
-        field_definition_for_name(rp, traits::implementation_file_extension());
+        s.select_field_by_name(traits::implementation_file_extension());
 }
 
 void path_settings_factory::setup_facet_fields(
@@ -87,14 +69,9 @@ void path_settings_factory::setup_facet_fields(
     const std::string& facet_name,
     path_settings_factory::formatter_properties& fp) const {
 
-    const auto i(rp.field_definitions_by_facet_name().find(facet_name));
-    if (i == rp.field_definitions_by_facet_name().end()) {
-        BOOST_LOG_SEV(lg, error) << no_fields_for_facet << facet_name;
-        BOOST_THROW_EXCEPTION(building_error(no_fields_for_facet + facet_name));
-    }
-
     bool found_directory(false), found_postfix(false);
-    for (const auto fd : i->second) {
+    const dynamic::schema::repository_selector s(rp);
+    for (const auto fd : s.select_fields_by_facet_name(facet_name)) {
         if (fd.name().simple() == traits::directory()) {
             fp.facet_directory = fd;
             found_directory = true;
@@ -126,23 +103,16 @@ void path_settings_factory::setup_formatter_fields(
     const std::string& formatter_name,
     path_settings_factory::formatter_properties& fp) const {
 
-    const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
-    if (i == rp.field_definitions_by_facet_name().end()) {
-        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(no_fields_for_formatter + formatter_name));
-    }
-
-    bool found_postfix(false);
-
-    for (const auto fd : i->second) {
+    bool found(false);
+    const dynamic::schema::repository_selector s(rp);
+    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
         if (fd.name().simple() == traits::postfix()) {
             fp.formatter_postfix = fd;
-            found_postfix = true;
+            found = true;
         }
     }
 
-    if (!found_postfix) {
+    if (!found) {
         BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
                                  << traits::postfix() << "' for formatter: "
                                  << formatter_name;
@@ -169,12 +139,12 @@ path_settings_factory::make_formatter_properties(
 
 std::unordered_map<std::string, path_settings_factory::formatter_properties>
 path_settings_factory::make_formatter_properties(
-    const dynamic::schema::repository& rp) const {
-    const auto& c(formatters::workflow::registrar().formatter_container());
+    const dynamic::schema::repository& rp,
+    const formatters::container& fc) const {
     std::unordered_map<std::string, formatter_properties> r;
 
-    for (const auto& f : c.all_formatters()) {
-        const auto oh(f->ownership_hierarchy());
+    for (const auto f : fc.all_formatters()) {
+        const auto& oh(f->ownership_hierarchy());
         if (oh.formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
@@ -199,7 +169,6 @@ create_settings_for_formatter(const formatter_properties& fp,
 
     using namespace dynamic::schema;
     const field_selector fs(o);
-
     r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
     r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));

@@ -12,16 +12,17 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-07 Tue 21:40]
+Clock summary at [2015-04-09 Thu 16:19]
 
 | Headline                                                              | Time    |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                          | *16:07* |       |       |
+| *Total time*                                                          | *16:51* |       |       |
 |-----------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                |         | 16:07 |       |
+| Active                                                                |         | 16:51 |       |
 | STARTED Sprint and product backlog grooming                           |         |       |  0:08 |
 | COMPLETED Add support for forward declarations                        |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures      |         |       |  0:58 |
+| COMPLETED Refactor field definition selection into its own class      |         |       |  0:44 |
 | STARTED Split merged model expansion from individual models expansion |         |       |  2:12 |
 | STARTED Create a "populate includes operation"                        |         |       | 12:07 |
 #+end:
@@ -64,6 +65,14 @@ to be able to access the forward declaration include directives.
 
 We need some kind of helper class to help us find data in the path
 derivatives data structures.
+
+*** COMPLETED Refactor field definition selection into its own class  :story:
+    CLOSED: [2015-04-09 Thu 16:19]
+    CLOCK: [2015-04-09 Thu 16:18]--[2015-04-09 Thu 17:32] =>  1:14
+    CLOCK: [2015-04-09 Thu 15:34]--[2015-04-09 Thu 16:18] =>  0:44
+
+Create a simple selection utility class to house all of the canned
+queries we have on repositories.
 
 *** STARTED Split merged model expansion from individual models expansion :spike:
     CLOCK: [2015-04-07 Tue 21:38]--[2015-04-07 Tue 21:40] =>  0:02

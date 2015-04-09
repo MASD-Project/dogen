@@ -34,6 +34,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -43,6 +44,9 @@ namespace expansion {
  * @brief Executes the path derivatives workflow.
  */
 class path_derivatives_workflow {
+public:
+    explicit path_derivatives_workflow(const formatters::container& c);
+
 private:
     /**
      * @brief Obtains the root object for the model.
@@ -79,6 +83,9 @@ public:
     >
     execute(const config::cpp_options& opts,
         const dynamic::schema::repository& rp, const sml::model& m) const;
+
+private:
+    const formatters::container& container_;
 };
 
 } } }

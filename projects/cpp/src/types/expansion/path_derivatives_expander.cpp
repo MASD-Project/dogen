@@ -22,8 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/cpp/types/traits.hpp"
@@ -42,8 +43,6 @@ const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 const std::string field_definitions_not_found(
     "Could not find expected field definitions for formatter: ");
-const std::string missing_path_settings(
-    "Could not find any path settings for formatter: ");
 const std::string no_path_derivatives_for_qn(
     "Could not find any path derivatives for qname: ");
 
@@ -61,16 +60,10 @@ path_derivatives_expander::field_definitions_for_formatter_name(
     const dynamic::schema::repository& rp,
     const std::string& formatter_name) const {
 
-    const auto i(rp.field_definitions_by_formatter_name().find(formatter_name));
-    if (i == rp.field_definitions_by_formatter_name().end()) {
-        BOOST_LOG_SEV(lg, error) << no_fields_for_formatter << formatter_name;
-        BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-                no_fields_for_formatter + formatter_name));
-    }
-
     field_definitions r;
     bool found_file_path(false);
-    for (const auto fd : i->second) {
+    const dynamic::schema::repository_selector s(rp);
+    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
         if (fd.name().simple() == traits::file_path()) {
             r.file_path = fd;
             found_file_path = true;
@@ -227,7 +220,7 @@ setup(const dynamic::expansion::expansion_context& ec) {
 
     const auto& m(ec.model());
     const auto& opts(ec.cpp_options());
-    path_derivatives_workflow w;
+    path_derivatives_workflow w(fc);
     path_derivatives_ = w.execute(opts, rp, m);
 }
 
@@ -238,7 +231,7 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
     BOOST_LOG_SEV(lg, debug) << "Performing expansion for: " << n;
 
     const auto i(path_derivatives_.find(qn));
-    if (i == path_derivatives_.end()) {
+    if (i == path_derivatives_.end() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << no_path_derivatives_for_qn << n;
         BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
                 no_path_derivatives_for_qn + n));

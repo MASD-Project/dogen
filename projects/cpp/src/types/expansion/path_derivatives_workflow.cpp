@@ -117,6 +117,10 @@ const std::unordered_map<sml::qname,
     return result_;
 }
 
+path_derivatives_workflow::
+path_derivatives_workflow(const formatters::container& c)
+    : container_(c) { }
+
 dynamic::schema::object path_derivatives_workflow::
 obtain_root_object_activity(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
@@ -139,7 +143,7 @@ create_path_settings_activity(const config::cpp_options& opts,
     const dynamic::schema::object& o) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating path settings.";
-    settings::path_settings_factory f(opts, rp);
+    settings::path_settings_factory f(opts, rp, container_);
     const auto r(f.make(o));
     BOOST_LOG_SEV(lg, debug) << "Created path settings";
     return r;

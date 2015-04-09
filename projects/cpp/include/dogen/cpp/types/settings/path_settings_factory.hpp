@@ -34,6 +34,7 @@
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 
 namespace dogen {
@@ -46,18 +47,8 @@ namespace settings {
 class path_settings_factory {
 public:
     path_settings_factory(const config::cpp_options& o,
-        const dynamic::schema::repository& rp);
-
-private:
-    /**
-     * @brief Returns the field definition for the name by querying
-     * the main field definition container.
-     *
-     * @pre field for name must exist.
-     */
-    dynamic::schema::field_definition
-    field_definition_for_name(const dynamic::schema::repository& rp,
-        const std::string& field_name) const;
+        const dynamic::schema::repository& rp,
+        const formatters::container& fc);
 
 private:
     /**
@@ -108,7 +99,8 @@ private:
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::schema::repository& rp) const;
+    make_formatter_properties(const dynamic::schema::repository& rp,
+        const formatters::container& fc) const;
 
 private:
     /**

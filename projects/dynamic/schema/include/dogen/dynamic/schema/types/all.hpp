@@ -36,6 +36,7 @@
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/repository_factory.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/dynamic/schema/types/schema.hpp"
 #include "dogen/dynamic/schema/types/scope_types.hpp"

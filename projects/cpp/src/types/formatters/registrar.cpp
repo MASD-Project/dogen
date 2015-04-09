@@ -61,8 +61,8 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Found "
                              << std::distance(
-                                 fc.class_formatters().begin(),
-                                 fc.class_formatters().end())
+                                 fc.all_formatters().begin(),
+                                 fc.all_formatters().end())
                              << " registered formatter(s): ";
 
     BOOST_LOG_SEV(lg, debug) << "Listing all formatters.";

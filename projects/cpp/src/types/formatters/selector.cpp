@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/selection_error.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
@@ -30,8 +31,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.selector"));
 
-const std::string field_definition_not_found(
-    "Could not find field definition for field: ");
 const std::string no_default_value_for_field(
     "Field definition does not have a default value: ");
 const std::string dot(".");
@@ -56,17 +55,13 @@ bool selector::is_formatter_enabled(const std::string& formatter_name) const {
     if (field_selector_.has_field(fn))
         return field_selector_.get_boolean_content(fn);
 
-    const auto i(repository_.field_definitions_by_name().find(fn));
-    if (i == repository_.field_definitions_by_name().end()) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << fn;
-        BOOST_THROW_EXCEPTION(selection_error(field_definition_not_found + fn));
-    }
-
-    if (!i->second.default_value()) {
+    const dynamic::schema::repository_selector s(repository_);
+    const auto& fd(s.select_field_by_name(fn));
+    if (!fd.default_value()) {
         BOOST_LOG_SEV(lg, error) << no_default_value_for_field << fn;
         BOOST_THROW_EXCEPTION(selection_error(no_default_value_for_field + fn));
     }
-    return field_selector_.get_boolean_content(*i->second.default_value());
+    return field_selector_.get_boolean_content(*fd.default_value());
 }
 
 bool selector::is_facet_integrated(const std::string& formatter_name,
