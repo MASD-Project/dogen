@@ -64,6 +64,8 @@ public:
 
     const std::forward_list<std::string>& dependencies() const override;
 
+    expansion_types expansion_type() const override;
+
     void setup(const expansion_context& ec) override;
 
     void expand(const sml::qname& qn, const schema::scope_types& st,

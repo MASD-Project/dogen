@@ -65,6 +65,10 @@ options_copier::dependencies() const {
     return r;
 }
 
+expansion_types options_copier::expansion_type() const {
+    return expansion_types::stand_alone_model_expansion;
+}
+
 void options_copier::setup(const expansion_context& ec) {
     options_ = ec.cpp_options();
 }

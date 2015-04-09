@@ -177,6 +177,12 @@ path_derivatives_expander::dependencies() const {
     return r;
 }
 
+dynamic::expansion::expansion_types path_derivatives_expander::
+expansion_type() const {
+    using dynamic::expansion::expansion_types;
+    return expansion_types::stand_alone_model_expansion;
+}
+
 void path_derivatives_expander::
 setup(const dynamic::expansion::expansion_context& ec) {
     requires_file_path_expansion_ = ec.model().is_target();

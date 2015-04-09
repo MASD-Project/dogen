@@ -45,6 +45,9 @@ namespace expansion {
 // FIXME: hack for now
 class root_expander : public expander_interface {
 public:
+    root_expander(const expansion_types et) : expansion_type_(et) {}
+
+public:
     std::string name() const override { return ::root_id; }
 
     const std::forward_list<std::string>& dependencies() const override {
@@ -52,10 +55,15 @@ public:
         return r;
     }
 
+    expansion_types expansion_type() const override { return expansion_type_; }
+
     void setup(const expansion_context&) override { }
 
     void expand(const sml::qname&, const schema::scope_types&,
         schema::object&) const override { }
+
+private:
+    const expansion_types expansion_type_;
 };
 
 /**
@@ -97,8 +105,9 @@ private:
     std::shared_ptr<state> state_;
 };
 
-grapher::grapher() : built_(false), root_vertex_(boost::add_vertex(graph_)) {
-    graph_[root_vertex_] = boost::make_shared<root_expander>();
+grapher::grapher(const expansion_types et)
+    : built_(false), root_vertex_(boost::add_vertex(graph_)) {
+    graph_[root_vertex_] = boost::make_shared<root_expander>(et);
     expander_name_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
 }
 

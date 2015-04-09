@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_EXPANDER_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_PATH_DERIVATIVES_EXPANDER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -80,6 +80,8 @@ public:
     std::string name() const override;
 
     const std::forward_list<std::string>& dependencies() const override;
+
+    dynamic::expansion::expansion_types expansion_type() const override;
 
     void setup(const dynamic::expansion::expansion_context& ec) override;
 

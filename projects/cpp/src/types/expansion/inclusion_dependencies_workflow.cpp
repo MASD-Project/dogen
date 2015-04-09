@@ -158,6 +158,9 @@ inclusion_dependencies_generator::result() const {
     return result_;
 }
 
+inclusion_dependencies_workflow::inclusion_dependencies_workflow(
+    const formatters::container& c) : container_(c) {}
+
 std::unordered_map<
     sml::qname,
     std::unordered_map<std::string, std::string>

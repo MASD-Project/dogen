@@ -28,9 +28,10 @@
 #include <string>
 #include <forward_list>
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/dynamic/expansion/types/expansion_context.hpp"
-#include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
+#include "dogen/dynamic/expansion/types/expansion_types.hpp"
+#include "dogen/dynamic/expansion/types/expansion_context.hpp"
 
 namespace dogen {
 namespace dynamic {
@@ -56,6 +57,11 @@ public:
      * @pre There must be no circular dependencies between expanders.
      */
     virtual const std::forward_list<std::string>& dependencies() const = 0;
+
+    /**
+     * @brief Type of the expansion performed by this expander.
+     */
+    virtual expansion_types expansion_type() const = 0;
 
     /**
      * @brief Sets up the expander. This method is called only once.

@@ -101,6 +101,8 @@ public:
 
     const std::forward_list<std::string>& dependencies() const override;
 
+    dynamic::expansion::expansion_types expansion_type() const override;
+
     void setup(const dynamic::expansion::expansion_context& ec) override;
 
     void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
