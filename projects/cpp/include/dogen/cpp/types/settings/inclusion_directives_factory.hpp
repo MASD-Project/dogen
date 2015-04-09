@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
@@ -40,7 +41,7 @@ namespace settings {
 class inclusion_directives_factory {
 public:
     inclusion_directives_factory(const dynamic::schema::repository& rp,
-        const formatters::container& c);
+        const formatters::container& fc);
 
 private:
     /**
@@ -71,14 +72,15 @@ private:
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::schema::repository& rp) const;
+    make_formatter_properties(const dynamic::schema::repository& rp,
+        const formatters::container& fc) const;
 
 private:
     /**
      * @brief Creates the inclusion directive for a given formatter.
      */
-    std::pair<std::string, std::string>
-    create_inclusion_directive_for_formatter(const formatter_properties& fp,
+    boost::optional<std::string> create_inclusion_directive_for_formatter(
+        const formatter_properties& fp,
         const dynamic::schema::object& o) const;
 
 public:
@@ -91,7 +93,6 @@ public:
 private:
     const std::unordered_map<std::string, formatter_properties>
     formatter_properties_;
-    const formatters::container& container_;
 };
 
 } } }

@@ -43,9 +43,8 @@ namespace settings {
 
 inclusion_directives_factory::
 inclusion_directives_factory(const dynamic::schema::repository& rp,
-    const formatters::container& c)
-    : formatter_properties_(make_formatter_properties(rp)),
-      container_(c) {}
+    const formatters::container& fc)
+    : formatter_properties_(make_formatter_properties(rp, fc)) {}
 
 void inclusion_directives_factory::
 setup_formatter_fields(const dynamic::schema::repository& rp,
@@ -87,10 +86,11 @@ std::unordered_map<
     inclusion_directives_factory::formatter_properties
     >
 inclusion_directives_factory::
-make_formatter_properties(const dynamic::schema::repository& rp) const {
+make_formatter_properties(const dynamic::schema::repository& rp,
+    const formatters::container& fc) const {
     std::unordered_map<std::string, formatter_properties> r;
 
-    for (const auto f : container_.all_formatters()) {
+    for (const auto f : fc.all_formatters()) {
         const auto& oh(f->ownership_hierarchy());
         if (oh.formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
@@ -102,13 +102,32 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
     return r;
 }
 
-std::pair<std::string, std::string>
-inclusion_directives_factory::
-create_inclusion_directive_for_formatter(const formatter_properties& /*fp*/,
-    const dynamic::schema::object& /*o*/) const {
-    std::pair<std::string, std::string> r;
+boost::optional<std::string> inclusion_directives_factory::
+create_inclusion_directive_for_formatter(const formatter_properties& fp,
+    const dynamic::schema::object& o) const {
+    boost::optional<std::string> r;
+
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    if (!fs.has_field(fp.inclusion_directive))
+        return r;
+
+    r = fs.get_text_content(fp.inclusion_directive);
     return r;
 }
 
+std::unordered_map<std::string, std::string>
+inclusion_directives_factory::make(const dynamic::schema::object& o) const {
+    std::unordered_map<std::string, std::string> r;
+    for (const auto& pair : formatter_properties_) {
+        const auto& fp(pair.second);
+        const auto id(create_inclusion_directive_for_formatter(fp, o));
+        if (!id)
+            continue;
+
+        r.insert(std::make_pair(fp.formatter_name, *id));
+    }
+    return r;
+}
 
 } } }
