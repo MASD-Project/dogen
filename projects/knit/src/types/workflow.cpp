@@ -30,20 +30,23 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/schema/types/repository_workflow.hpp"
+#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
+#include "dogen/knit/types/outputters/factory.hpp"
+#include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/sml_to_cpp/types/workflow_failure.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp" // FIXME
-#include "dogen/knit/types/outputters/factory.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/workflow.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
@@ -175,7 +178,7 @@ create_debug_file_path(const config::archive_types at,
 
 
 std::forward_list<dynamic::schema::ownership_hierarchy> workflow::
-obtain_ownership_hierarchy() const {
+obtain_ownership_hierarchy_activity() const {
     const auto rg(backend::workflow::registrar());
     std::forward_list<dynamic::schema::ownership_hierarchy> r;
     for (const auto b : rg.backends())
@@ -270,6 +273,22 @@ merge_models_activity(const std::list<sml::model>& models) const {
     return r;
 }
 
+sml::model workflow::expand_model_activity(
+    const dynamic::schema::repository& rp, const sml::model& m) const {
+    if (!m.is_expandable()) {
+        BOOST_LOG_SEV(lg, debug) << "Model is not expandable, so ignoring it: "
+                                 << sml::string_converter::convert(m.name());
+        return m;
+    }
+
+    dynamic::expansion::workflow w;
+    using dynamic::expansion::expansion_types;
+    const auto et(expansion_types::merged_model_expansion);
+    const auto r(w.execute(et, knitting_options_.cpp(), rp, m));
+    BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
+    return r;
+}
+
 void workflow::persist_model_activity(const boost::filesystem::path p,
     const sml::model& m) const {
 
@@ -304,24 +323,25 @@ void workflow::execute() const {
 
     try {
         const auto d(obtain_input_descriptors_activity());
-        const auto oh(obtain_ownership_hierarchy());
+        const auto oh(obtain_ownership_hierarchy_activity());
         const auto rp(setup_schema_repository_activity(oh));
         const auto pm(obtain_partial_sml_models_activity(rp, d));
-        const auto m(merge_models_activity(pm));
+        const auto mm(merge_models_activity(pm));
+        const auto em(expand_model_activity(rp, mm));
         const auto tp(obtain_target_path_activity(d));
-        persist_model_activity(tp, m);
+        persist_model_activity(tp, em);
 
         if (knitting_options_.troubleshooting().stop_after_merging()) {
             BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
             return;
         }
 
-        if (!m.has_generatable_types()) {
+        if (!em.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }
 
-        generate_model_activity(rp, m);
+        generate_model_activity(rp, em);
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;

@@ -150,9 +150,8 @@ void inclusion_dependencies_expander::expand(
 
     const auto i(inclusion_dependencies_.find(qn));
     if (i == inclusion_dependencies_.end() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, error) << no_inclusion_dependencies_for_qn << n;
-        BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-                no_inclusion_dependencies_for_qn + n));
+        BOOST_LOG_SEV(lg, warn) << no_inclusion_dependencies_for_qn << n;
+        return;
     }
 
     for (const auto& pair : i->second) {

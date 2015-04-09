@@ -133,6 +133,7 @@ void merger::add_target(const model& target) {
     has_target_ = true;
     merged_model_.name(target.name());
     merged_model_.documentation(target.documentation());
+    merged_model_.is_expandable(target.is_expandable());
     merged_model_.leaves(target.leaves());
     merged_model_.modules(target.modules());
     merged_model_.references(target.references());

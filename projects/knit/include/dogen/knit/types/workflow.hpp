@@ -135,7 +135,7 @@ private:
      * backends.
      */
     std::forward_list<dynamic::schema::ownership_hierarchy>
-    obtain_ownership_hierarchy() const;
+    obtain_ownership_hierarchy_activity() const;
 
     /**
      * @brief Sets up the dynamic schema repository.
@@ -167,6 +167,12 @@ private:
      * @brief Execute the SML workflow.
      */
     sml::model merge_models_activity(const std::list<sml::model>& models) const;
+
+    /**
+     * @brief Execute the dynamic expansion workflow.
+     */
+    sml::model expand_model_activity(const dynamic::schema::repository& rp,
+        const sml::model& m) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if

@@ -117,8 +117,11 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename Entity>
-    void generate(const Entity& e) {
+    template<typename ExtensibleNameableAndGeneratable>
+    void generate(const ExtensibleNameableAndGeneratable& e) {
+        if (e.generation_type() == sml::generation_types::no_generation)
+            return;
+
         const auto deps(factory_.make(e));
         const auto pair(result_.insert(std::make_pair(e.name(), deps)));
         const bool inserted(pair.second);

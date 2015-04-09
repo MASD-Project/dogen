@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 
@@ -49,7 +50,7 @@ private:
      *
      * @pre Formatter name must exist in path derivatives collection.
      */
-    std::string inclusion_directives_for_formatter_name(
+    boost::optional<std::string> inclusion_directives_for_formatter_name(
         const std::unordered_map<std::string, std::string>&
         id, const std::string& formatter_name) const;
 
@@ -66,11 +67,10 @@ public:
      * @brief Returns the inclusion directive for a given qname and
      * formatter name.
      *
-     * @pre qname and formatter names must exist in path derivatives
-     * collection.
+     * @pre qname must exist in path derivatives collection.
      */
-    std::string select_inclusion_directive(const sml::qname& qn,
-        const std::string& formatter_name) const;
+    boost::optional<std::string> select_inclusion_directive(
+        const sml::qname& qn, const std::string& formatter_name) const;
 
 private:
     const std::unordered_map<

@@ -30,9 +30,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.expansion.inclusion_directives_selector"));
 
 const std::string formatter_inclusion_directives_missing(
-    "Could not find path derivatives for formatter: ");
+    "Could not find inclusion directives for formatter: ");
 const std::string qname_inclusion_directives_missing(
-    "Could not find path derivatives for qname: ");
+    "Could not find inclusion directives for qname: ");
 
 }
 
@@ -46,18 +46,16 @@ inclusion_directives_selector::inclusion_directives_selector(
     std::unordered_map<std::string, std::string> >& id)
     : inclusion_directives_(id) {}
 
-std::string inclusion_directives_selector::
+boost::optional<std::string> inclusion_directives_selector::
 inclusion_directives_for_formatter_name(
     const std::unordered_map<std::string, std::string>& id,
     const std::string& formatter_name) const {
 
     const auto i(id.find(formatter_name));
     if (i == id.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_inclusion_directives_missing
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            selection_error(formatter_inclusion_directives_missing +
-                formatter_name));
+        BOOST_LOG_SEV(lg, warn) << formatter_inclusion_directives_missing
+                                << formatter_name;
+        return boost::optional<std::string>();
     }
     return i->second;
 }
@@ -75,11 +73,11 @@ inclusion_directives_for_qname(const sml::qname& qn) const {
     return i->second;
 }
 
-std::string inclusion_directives_selector::
+boost::optional<std::string> inclusion_directives_selector::
 select_inclusion_directive(const sml::qname& qn,
     const std::string& formatter_name) const {
     const auto& id(inclusion_directives_for_qname(qn));
-    const auto& r(inclusion_directives_for_formatter_name(id, formatter_name));
+    const auto r(inclusion_directives_for_formatter_name(id, formatter_name));
     return r;
 }
 

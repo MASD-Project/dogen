@@ -12,19 +12,19 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-09 Thu 19:26]
+Clock summary at [2015-04-09 Thu 23:08]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *19:51* |       |       |
+| *Total time*                                                            | *20:45* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 19:51 |       |
+| Active                                                                  |         | 20:45 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:08 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
 | COMPLETED Refactor field definition selection into its own class        |         |       |  1:58 |
 | COMPLETED Split merged model expansion from individual models expansion |         |       |  3:58 |
-| STARTED Create a "populate includes operation"                          |         |       | 12:07 |
+| COMPLETED Create a "populate includes operation"                        |         |       | 13:01 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -105,57 +105,9 @@ Tasks:
 - Create a inclusion dependencies expander that uses the result of its
   workflow to setup the inclusion dependencies.
 
-*** STARTED Create a "supported" expander                             :story:
-
-This needs a bit more analysis. The gist of it is that not all types
-support all formatters. We need a way to determine if a formatter is
-not supported. This probably should be inferred by a "is dogen model"
-property (see backlog); e.g. non-dogen models need their types to have
-an inclusion setup in order to be "supported", otherwise they should
-default to "not-supported". However the "supported" flag is populated,
-we then need to take into account relationships and propagate this
-flag across the model such that, if a type =A= in a dogen model has a
-property of a type =B= from a non-dogen model which does not support a
-given formatter =f=, then =A= must also not support =f=.
-
-In order to implement this feature we need to:
-
-- update the SML grapher to take into account relationships
-  (properties that the class has) as well as inheritance.
-- we must only visit related types if we ourselves do not have values
-  for all supported fields.
-- we also need a visitor that detects cycles; when a cycle is found we
-  simply assume that the status of the revisited class is true (or
-  whatever the default value of "supported" is) and we write a warning
-  to the log file. We should output the complete path of the cycle.
-- users can override this by setting supported for all formatters
-  where there are cycles.
-- we could perhaps have a bitmask by qname; we could start by
-  generating all bitmasks for all qnames and setting them to default
-  value. We could then find all qnames that have supported set to
-  false and update the corresponding bitmasks. Then we could use the
-  graph to loop through the qnames and "and" the bitmasks of each
-  qname with the bitmasks of their related qnames. The position of
-  each field is allocated by the algorithm (e.g. the first "supported"
-  field is at position 0 and so on). Actually the first position of
-  the bitmask could be used to indicate if the bitmask has already
-  been processed or not. In the presence of a cycle force it to true.
-- we need a class that takes the SML model and computes the supported
-  bitmasks for each qname; the supported expander then simply takes
-  this (perhaps as part of the expansion context), looks up for the
-  current qname and uses the field list to set the flags
-  appropriately.
-- we should remove all traces of supported from a settings
-  perspective; supported and multi-level enabled are just artefacts of
-  the meta-data. From a settings perspective, there is just a
-  formatter level (common formatter settings) enabled which determines
-  whether the formatter is on or off. How that flag came to be
-  computed is not relevant outside the expansion process. This also
-  means we can have simpler or more complex policies as time allows us
-  improve on this story; provided we can at least set all flags to
-  enabled we can move forward.
-
-*** STARTED Create a "populate includes operation"                    :story:
+*** COMPLETED Create a "populate includes operation"                  :story:
+    CLOSED: [2015-04-09 Thu 23:08]
+    CLOCK: [2015-04-09 Thu 22:14]--[2015-04-09 Thu 23:08] =>  0:54
     CLOCK: [2015-04-07 Tue 13:24]--[2015-04-07 Tue 14:03] =>  0:39
     CLOCK: [2015-04-06 Mon 19:09]--[2015-04-06 Mon 20:23] =>  1:14
     CLOCK: [2015-04-04 Sat 16:30]--[2015-04-04 Sat 17:17] =>  0:47
@@ -234,6 +186,56 @@ Notes:
   selector.
 - Consider renaming setup to =prepare=? Not sure if it makes a lot of
   difference.
+
+*** STARTED Create a "supported" expander                             :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
 
 *** STARTED Compute managed directories from knitting options         :story:
 
