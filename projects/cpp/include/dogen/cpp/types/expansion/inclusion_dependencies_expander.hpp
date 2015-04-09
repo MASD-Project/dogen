@@ -39,11 +39,10 @@ namespace expansion {
  * @brief Performs the include dependencies expansion required by the
  * c++ model.
  */
-class include_dependencies_expander
+class inclusion_dependencies_expander
     : public dynamic::expansion::expander_interface {
 public:
-    include_dependencies_expander();
-    ~include_dependencies_expander() noexcept;
+    ~inclusion_dependencies_expander() noexcept;
 
 private:
     /**
@@ -70,10 +69,11 @@ private:
 
 private:
     /**
-     * @brief Handles the dynamic expansion of the include dependencies.
+     * @brief Handles the dynamic expansion of the include
+     * dependencies for a given formatter.
      */
-    void expand_include_dependencies(const std::string& formatter_name,
-        const field_definitions& fd, /*FIXME*/
+    void expand_inclusion_dependencies(const std::string& formatter_name,
+        const field_definitions& fd, const std::list<std::string>& deps,
         dynamic::schema::object& o) const;
 
 public:
@@ -90,7 +90,7 @@ private:
     std::unordered_map<std::string, field_definitions> field_definitions_;
     std::unordered_map<sml::qname,
                        std::unordered_map<std::string, std::list<std::string> >
-                       > include_dependencies_;
+                       > inclusion_dependencies_;
 };
 
 } } }

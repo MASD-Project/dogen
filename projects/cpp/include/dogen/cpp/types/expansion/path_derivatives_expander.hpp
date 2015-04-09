@@ -74,20 +74,23 @@ private:
 
 private:
     /**
-     * @brief Handles the dynamic expansion of the file path.
+     * @brief Handles the dynamic expansion of the file path for a
+     * given formatter.
      */
     void expand_file_path(const field_definitions& fd,
         const path_derivatives& pd, dynamic::schema::object& o) const;
 
     /**
-     * @brief Handles the dynamic expansion of the header guard.
+     * @brief Handles the dynamic expansion of the header guard for a
+     * given formatter.
      */
     void expand_header_guard(const std::string& formatter_name,
         const field_definitions& fd, const path_derivatives& pd,
         dynamic::schema::object& o) const;
 
     /**
-     * @brief Handles the dynamic expansion of the include directive.
+     * @brief Handles the dynamic expansion of the include directive
+     * for a given formatter.
      */
     void expand_include_directive(const std::string& formatter_name,
         const field_definitions& fd, const path_derivatives& pd,

@@ -21,12 +21,12 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_workflow.hpp"
@@ -37,8 +37,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.expansion.path_derivatives_expander"));
 
-const std::string no_fields_for_formatter(
-    "Could not find any fields for formatter: ");
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 const std::string field_definitions_not_found(
@@ -71,8 +69,6 @@ path_derivatives_expander::field_definitions_for_formatter_name(
             r.inclusion_directive = fd;
         else if (fd.name().simple() == traits::header_guard())
             r.header_guard = fd;
-        // else if (fd.name().simple() == cpp::traits::inclusion_dependency())
-        //     r.inclusion_dependency = fd;
     }
 
     if (!found_file_path) {
@@ -93,12 +89,6 @@ path_derivatives_expander::field_definitions_for_formatter_name(
         BOOST_LOG_SEV(lg, debug) << "Formatter does not support header guards: "
                                  << formatter_name;
     }
-
-    // if (!r.inclusion_dependency) {
-    //     BOOST_LOG_SEV(lg, debug)
-    //         << "Formatter does not support inclusion dependencies: "
-    //         << formatter_name;
-    // }
 
     return r;
 }
@@ -175,30 +165,8 @@ expand_include_directive(const std::string& formatter_name,
     o.fields()[n] = f.make_text(pd.inclusion_directive());
 }
 
-// void path_derivatives_expander::
-// expand_include_dependencies(const std::string& formatter_name,
-//     const field_definitions& fd, const path_derivatives& pd,
-//     dynamic::schema::object& o) const {
-//     const bool inclusion_dependencies_not_supported(!fd.inclusion_dependency);
-//     if (inclusion_dependencies_not_supported)
-//         return;
-
-//     using namespace dynamic::schema;
-//     const field_selector fs(o);
-//     const bool override_found(fs.has_field(*fd.inclusion_dependency));
-//     if (override_found) {
-//         BOOST_LOG_SEV(lg, debug) << "Inclusion dependency has been overriden: "
-//                                  << formatter_name;
-//         return;
-//     }
-
-//     dynamic::schema::field_instance_factory f;
-//     const auto n(fd.inclusion_dependency->name().qualified());
-//     o.fields()[n] = f.make_text_collection(ei.inclusion_dependencies());
-// }
-
 std::string path_derivatives_expander::name() const {
-    static std::string name("cpp.expansion.expander");
+    static std::string name("cpp.expansion.path_derivatives_expander");
     return name;
 }
 
