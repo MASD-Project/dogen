@@ -41,32 +41,39 @@ namespace expansion {
  * @brief Executes the inclusion dependencies workflow.
  */
 class inclusion_dependencies_workflow {
+public:
+    explicit inclusion_dependencies_workflow(const formatters::container& c);
+
 private:
+    /**
+     * @brief Obtains all of the inclusion directives for this model.
+     */
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string>
     >
-    obtain_inclusion_directives_activity(const sml::model& m) const;
+    obtain_inclusion_directives_activity(const dynamic::schema::repository& rp,
+        const sml::model& m) const;
 
     /**
      * @brief Initialises the registrar with all the providers sourced
      * from the formatters container.
      */
-    void initialise_registrar_activity(
-        const formatters::container& fc, registrar& rg) const;
+    void initialise_registrar_activity(registrar& rg) const;
 
     /**
-     * @brief Obtains all of the inclusion dependencies for a model.
+     * @brief Obtains all of the inclusion dependencies for this model.
      */
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::list<std::string> >
-    >
+        >
     obtain_inclusion_dependencies_activity(
         const dynamic::schema::repository& rp, const container& c,
-        const std::unordered_map<sml::qname,
-        std::unordered_map<std::string, std::string> >&
-        inclusion_directives, const sml::model& m) const;
+        const std::unordered_map<
+            sml::qname,
+            std::unordered_map<std::string, std::string>
+            >& inclusion_directives, const sml::model& m) const;
 
 public:
     /**
@@ -77,6 +84,9 @@ public:
         std::unordered_map<std::string, std::list<std::string> >
     >
     execute(const dynamic::schema::repository& rp, const sml::model& m) const;
+
+private:
+    const formatters::container& container_;
 };
 
 } } }

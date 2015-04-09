@@ -165,19 +165,6 @@ std::unordered_map<
     return g.result();
 }
 
-// void workflow::initialise_registrar_activity(
-//     const formatters::container& fc, registrar& rg) const {
-
-//     BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-//     for (const auto f : fc.all_formatters()) {
-//         BOOST_LOG_SEV(lg, debug) << "Registered: "
-//                                  << f->ownership_hierarchy().formatter_name();
-//         f->register_inclusion_dependencies_provider(rg);
-//     }
-//     BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
-// }
-
-
 // std::unordered_map<
 //     sml::qname,
 //     std::unordered_map<std::string, std::list<std::string> >
