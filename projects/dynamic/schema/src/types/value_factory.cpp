@@ -89,10 +89,7 @@ boost::shared_ptr<value> value_factory::make_text(const std::string& v) const {
 
 boost::shared_ptr<value> value_factory::make_text_collection(
     const std::list<std::string>& v) const {
-    auto r(boost::make_shared<text_collection>());
-    for (const auto& i : v)
-        r->content().push_front(i);
-
+    auto r(boost::make_shared<text_collection>(v));
     return r;
 }
 

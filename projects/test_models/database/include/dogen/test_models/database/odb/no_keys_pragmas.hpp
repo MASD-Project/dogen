@@ -33,8 +33,8 @@ namespace database {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(no_keys) no_id
 #pragma db object(no_keys) schema("kitanda")
+#pragma db object(no_keys) no_id
 
 
 #endif

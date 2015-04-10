@@ -12,20 +12,20 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-10 Fri 16:26]
+Clock summary at [2015-04-10 Fri 16:40]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *22:21* |       |       |
+| *Total time*                                                            | *22:35* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 22:21 |       |
+| Active                                                                  |         | 22:35 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:21 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
 | COMPLETED Refactor field definition selection into its own class        |         |       |  1:58 |
 | COMPLETED Split merged model expansion from individual models expansion |         |       |  3:58 |
 | COMPLETED Create a "populate includes operation"                        |         |       | 13:01 |
-| COMPLETED Consider creating a include list sorter                       |         |       |  1:23 |
+| COMPLETED Consider creating a include list sorter                       |         |       |  1:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -212,6 +212,7 @@ of the field which is how the object stores its fields.
 
 *** COMPLETED Consider creating a include list sorter                 :story:
     CLOSED: [2015-04-10 Fri 16:07]
+    CLOCK: [2015-04-10 Fri 16:26]--[2015-04-10 Fri 16:40] =>  0:14
     CLOCK: [2015-04-10 Fri 16:07]--[2015-04-10 Fri 16:26] =>  0:19
     CLOCK: [2015-04-10 Fri 15:03]--[2015-04-10 Fri 16:07] =>  1:04
 

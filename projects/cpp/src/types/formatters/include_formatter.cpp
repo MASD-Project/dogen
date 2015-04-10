@@ -26,10 +26,6 @@
 namespace {
 
 const std::string include("#include ");
-const std::string open_system("<");
-const std::string close_system(">");
-const std::string open_user("\"");
-const std::string close_user("\"");
 
 }
 
