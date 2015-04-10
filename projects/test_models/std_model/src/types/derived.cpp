@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "dogen/test_models/std_model/io/base_io.hpp"
-#include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
 #include "dogen/test_models/std_model/types/derived.hpp"
+#include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
 
 namespace std {
 

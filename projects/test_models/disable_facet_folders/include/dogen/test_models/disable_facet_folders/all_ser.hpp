@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/disable_facet_folders/package1/first_class_ser.hpp"
 #include "dogen/test_models/disable_facet_folders/registrar_ser.hpp"
+#include "dogen/test_models/disable_facet_folders/package1/first_class_ser.hpp"

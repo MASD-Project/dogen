@@ -225,8 +225,8 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include "class_in_a_package/serialization/package1/first_class_ser.hpp"
 #include "class_in_a_package/serialization/registrar_ser.hpp"
+#include "class_in_a_package/serialization/package1/first_class_ser.hpp"
 
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_fwd_ser.hpp
 Contents: 
@@ -759,15 +759,15 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
 
 
@@ -830,14 +830,14 @@ Contents:
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 
 namespace class_in_a_package {
 

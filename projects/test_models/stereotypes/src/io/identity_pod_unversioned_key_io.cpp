@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/stereotypes/io/identity_pod_unversioned_key_io.hpp"
 #include "dogen/test_models/stereotypes/io/value_io.hpp"
+#include "dogen/test_models/stereotypes/io/identity_pod_unversioned_key_io.hpp"
 
 namespace dogen {
 namespace test_models {

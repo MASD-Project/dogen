@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/stereotypes/hash/base_with_concept_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/further_refined_hash.hpp"
+#include "dogen/test_models/stereotypes/hash/base_with_concept_hash.hpp"
 
 namespace {
 

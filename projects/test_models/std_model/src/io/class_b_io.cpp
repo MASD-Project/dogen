@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/test_models/std_model/io/class_a_io.hpp"
 #include "dogen/test_models/std_model/io/class_b_io.hpp"
 #include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"

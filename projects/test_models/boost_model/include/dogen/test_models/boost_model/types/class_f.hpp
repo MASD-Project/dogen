@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include <list>
 #include <algorithm>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <list>
 #include "dogen/test_models/boost_model/serialization/class_f_fwd_ser.hpp"
 
 namespace dogen {

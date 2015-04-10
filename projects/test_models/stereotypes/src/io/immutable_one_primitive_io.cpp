@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/test_models/stereotypes/io/immutable_one_primitive_io.hpp"
 
 namespace dogen {

@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
-#include "dogen/test_models/std_model/hash/class_a_hash.hpp"
-#include "dogen/test_models/std_model/serialization/class_f_fwd_ser.hpp"
 #include "dogen/test_models/std_model/types/class_a.hpp"
+#include "dogen/test_models/std_model/hash/class_a_hash.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
+#include "dogen/test_models/std_model/serialization/class_f_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

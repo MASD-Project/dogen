@@ -105,9 +105,9 @@ add_custom_target(build_test_models)
 
 # targets for each test model
 foreach(dia_model ${all_dia_test_models})
-    set(ignore_file false)
+    set(ignore_dependencies false)
     if (dia_model MATCHES "disable_cmakelists")
-        set(ignore_file true)
+        set(ignore_dependencies true)
     endif()
 
     set(model_name "")
@@ -124,12 +124,15 @@ foreach(dia_model ${all_dia_test_models})
     set(expect_dir "${top_dir}/expected/${model_folder_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
-    if(EXISTS "${actual_dir}" AND NOT ignore_file)
+    if(EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
         if (model_name STREQUAL "disable_model_package")
             set(main_target_name "unnamed_model")
         endif()
-        add_dependencies(build_test_models ${main_target_name})
+
+        if (NOT ignore_dependencies)
+            add_dependencies(build_test_models ${main_target_name})
+        endif()
 
         set(target_name "diff_${model_name}")
         add_custom_target(${target_name}

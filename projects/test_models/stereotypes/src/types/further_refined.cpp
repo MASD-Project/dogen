@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/stereotypes/io/base_with_concept_io.hpp"
 #include "dogen/test_models/stereotypes/types/further_refined.hpp"
+#include "dogen/test_models/stereotypes/io/base_with_concept_io.hpp"
 
 namespace dogen {
 namespace test_models {

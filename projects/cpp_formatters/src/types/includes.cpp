@@ -18,14 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <ostream>
 #include "dogen/sml_to_cpp/types/boost_model_helper.hpp" // FIXME: hack
 #include "dogen/cpp_formatters/types/includes.hpp"
 
 namespace {
-
-const bool is_system(true);
-const bool is_user(false);
 
 const std::string include("#include ");
 const std::string open_system("<");
@@ -33,31 +31,60 @@ const std::string close_system(">");
 const std::string open_user("\"");
 const std::string close_user("\"");
 
+const char angle_bracket('<');
+const std::string boost_name("boost");
+const std::string boost_serialization_gregorian("greg_serialize.hpp");
+
 }
 
 namespace dogen {
 namespace cpp_formatters {
 
+bool include_directive_comparer(
+    const std::string& lhs, const std::string& rhs) {
+    if (lhs.empty() || rhs.empty())
+        return false;
+
+    const bool lhs_has_angle_brackets(lhs[0] == angle_bracket);
+    const bool rhs_has_angle_brackets(rhs[0] == angle_bracket);
+
+    if (lhs_has_angle_brackets && !rhs_has_angle_brackets)
+        return true;
+
+    if (!lhs_has_angle_brackets && rhs_has_angle_brackets)
+        return false;
+
+    if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
+        const auto npos(std::string::npos);
+        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
+        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
+        if (!lhs_is_boost && rhs_is_boost)
+            return false;
+
+        if (lhs_is_boost && !rhs_is_boost)
+            return true;
+
+        // FIXME: hacks for headers that must be last
+        const bool lhs_is_gregorian(
+            lhs.find_first_of(boost_serialization_gregorian) != npos);
+        const bool rhs_is_gregorian(
+            rhs.find_first_of(boost_serialization_gregorian) != npos);
+        if (lhs_is_gregorian && !rhs_is_gregorian)
+            return true;
+
+        if (!lhs_is_gregorian && rhs_is_gregorian)
+            return false;
+    }
+
+    return lhs.size() < rhs.size();
+}
+
 includes::includes(std::ostream& stream, const bool blank_line)
     : stream_(stream), utility_(stream_, indenter_), blank_line_(blank_line) { }
 
-void includes::format(std::list<std::string> v, bool is_system) {
-    v.sort();
-
-    // FIXME: hacks for headers that must be last
-    sml_to_cpp::boost_model_helper boost_;
-    const auto gd(
-        boost_.include(sml_to_cpp::boost_types::serialization_gregorian_date));
-    const auto i(std::find(v.begin(), v.end(), gd));
-    if (i != v.end())
-        v.splice(v.end(), v, i);
-
-    for (auto i : v) {
-        stream_ << include << (is_system ? open_system : open_user)
-                << i
-                << (is_system ? close_system : close_user)
-                << std::endl;
-    }
+void includes::format(std::list<std::string> v) {
+    for (auto i : v)
+        stream_ << include << i << std::endl;
 }
 
 void includes::format(const cpp::formattables::file_info& f) {
@@ -66,17 +93,21 @@ void includes::format(const cpp::formattables::file_info& f) {
     if (inc.system().empty() && inc.user().empty())
         return;
 
-    std::list<std::string> system;
-    for (const auto i : inc.system())
-        system.push_back(i.generic_string());
+    std::list<std::string> combined;
+    for (const auto i : inc.system()) {
+        std::ostringstream s;
+        s << open_system << i.generic_string() << close_system;
+        combined.push_back(s.str());
+    }
 
-    format(system, is_system);
+    for (const auto i : inc.user()) {
+        std::ostringstream s;
+        s << open_user << i.generic_string() << close_user;
+        combined.push_back(s.str());
+    }
 
-    std::list<std::string> user;
-    for (const auto i : inc.user())
-        user.push_back(i.generic_string());
-
-    format(user, is_user);
+    combined.sort(include_directive_comparer);
+    format(combined);
 
     if (blank_line_)
         utility_.blank_line();

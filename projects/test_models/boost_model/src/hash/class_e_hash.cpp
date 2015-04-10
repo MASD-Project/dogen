@@ -19,8 +19,8 @@
  *
  */
 #include <boost/variant/apply_visitor.hpp>
-#include "dogen/test_models/boost_model/hash/class_derived_hash.hpp"
 #include "dogen/test_models/boost_model/hash/class_e_hash.hpp"
+#include "dogen/test_models/boost_model/hash/class_derived_hash.hpp"
 
 namespace {
 

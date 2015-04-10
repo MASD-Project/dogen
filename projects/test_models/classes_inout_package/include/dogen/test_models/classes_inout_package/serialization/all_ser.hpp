@@ -19,5 +19,5 @@
  *
  */
 #include "dogen/test_models/classes_inout_package/serialization/class_2_ser.hpp"
-#include "dogen/test_models/classes_inout_package/serialization/package_1/class_1_ser.hpp"
 #include "dogen/test_models/classes_inout_package/serialization/registrar_ser.hpp"
+#include "dogen/test_models/classes_inout_package/serialization/package_1/class_1_ser.hpp"

@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <iosfwd>
 #include <list>
-#include "dogen/test_models/std_model/serialization/derived_fwd_ser.hpp"
+#include <iosfwd>
+#include <algorithm>
 #include "dogen/test_models/std_model/types/base.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
+#include "dogen/test_models/std_model/serialization/derived_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

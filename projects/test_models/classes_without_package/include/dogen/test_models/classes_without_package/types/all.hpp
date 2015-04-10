@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/classes_without_package/types/class_1.hpp"
-#include "dogen/test_models/classes_without_package/types/class_2.hpp"
-#include "dogen/test_models/classes_without_package/types/class_3.hpp"
 #include "dogen/test_models/classes_without_package/types/class_4.hpp"
+#include "dogen/test_models/classes_without_package/types/class_3.hpp"
 #include "dogen/test_models/classes_without_package/types/class_5.hpp"
+#include "dogen/test_models/classes_without_package/types/class_2.hpp"
+#include "dogen/test_models/classes_without_package/types/class_1.hpp"

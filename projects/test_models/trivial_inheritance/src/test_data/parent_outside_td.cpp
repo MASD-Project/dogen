@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_inheritance/test_data/parent_outside_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/pkg4/child_td.hpp"
+#include "dogen/test_models/trivial_inheritance/test_data/parent_outside_td.hpp"
 
 namespace {
 

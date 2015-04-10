@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
-#include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/test_models/trivial_inheritance/types/pkg1/parent.hpp"
+#include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

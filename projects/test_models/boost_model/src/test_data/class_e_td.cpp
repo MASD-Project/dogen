@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_e_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
 
 namespace {
 

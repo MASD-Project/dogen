@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <vector>
-#include "dogen/test_models/boost_model/serialization/pkg1/class_c_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/test_models/boost_model/types/class_a.hpp"
+#include "dogen/test_models/boost_model/serialization/pkg1/class_c_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

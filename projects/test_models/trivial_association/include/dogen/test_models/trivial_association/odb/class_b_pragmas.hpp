@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/trivial_association/odb/class_a_pragmas.hpp"
 #include "dogen/test_models/trivial_association/types/class_b.hpp"
+#include "dogen/test_models/trivial_association/odb/class_a_pragmas.hpp"
 
 // class has no ODB pragmas defined.
 

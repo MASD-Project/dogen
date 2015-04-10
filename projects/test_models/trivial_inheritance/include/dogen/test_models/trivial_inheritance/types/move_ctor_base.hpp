@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include <iosfwd>
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_base_fwd_ser.hpp"
 
 namespace dogen {

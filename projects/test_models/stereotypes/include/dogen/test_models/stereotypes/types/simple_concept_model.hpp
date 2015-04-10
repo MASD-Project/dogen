@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/stereotypes/serialization/simple_concept_model_fwd_ser.hpp"
 #include "dogen/test_models/stereotypes/types/entity.hpp"
+#include "dogen/test_models/stereotypes/serialization/simple_concept_model_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

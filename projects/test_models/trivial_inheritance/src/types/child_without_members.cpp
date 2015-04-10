@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/trivial_inheritance/io/parent_without_members_io.hpp"
 #include "dogen/test_models/trivial_inheritance/types/child_without_members.hpp"
+#include "dogen/test_models/trivial_inheritance/io/parent_without_members_io.hpp"
 
 namespace dogen {
 namespace test_models {

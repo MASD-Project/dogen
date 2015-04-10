@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/std_model/types/derived.hpp"
 #include "dogen/test_models/std_model/odb/base_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/pkg1/class_c_pragmas.hpp"
-#include "dogen/test_models/std_model/types/derived.hpp"
 
 // class has no ODB pragmas defined.
 

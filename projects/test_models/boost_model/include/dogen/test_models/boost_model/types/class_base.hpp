@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
+#include <algorithm>
 #include "dogen/test_models/boost_model/serialization/class_base_fwd_ser.hpp"
 
 namespace dogen {

@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/class_in_a_package/serialization/package1/first_class_ser.hpp"
 #include "dogen/test_models/class_in_a_package/serialization/registrar_ser.hpp"
+#include "dogen/test_models/class_in_a_package/serialization/package1/first_class_ser.hpp"

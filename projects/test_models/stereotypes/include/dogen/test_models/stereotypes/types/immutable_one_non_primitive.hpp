@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include "dogen/test_models/stereotypes/serialization/immutable_one_non_primitive_fwd_ser.hpp"
 
 namespace dogen {

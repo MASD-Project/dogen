@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/boost_model/types/class_b.hpp"
 #include "dogen/test_models/boost_model/odb/class_a_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/class_base_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/pkg1/class_c_pragmas.hpp"
-#include "dogen/test_models/boost_model/types/class_b.hpp"
 
 // class has no ODB pragmas defined.
 

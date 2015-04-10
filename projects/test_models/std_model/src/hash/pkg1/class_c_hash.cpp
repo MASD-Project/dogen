@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/test_models/std_model/hash/class_a_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
+#include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
+#include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
 
 namespace {
 

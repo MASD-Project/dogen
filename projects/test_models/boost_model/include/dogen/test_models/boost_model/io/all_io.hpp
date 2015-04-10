@@ -19,12 +19,12 @@
  *
  */
 #include "dogen/test_models/boost_model/io/class_a_io.hpp"
-#include "dogen/test_models/boost_model/io/class_b_io.hpp"
-#include "dogen/test_models/boost_model/io/class_base_io.hpp"
-#include "dogen/test_models/boost_model/io/class_d_io.hpp"
-#include "dogen/test_models/boost_model/io/class_derived_io.hpp"
-#include "dogen/test_models/boost_model/io/class_e_io.hpp"
 #include "dogen/test_models/boost_model/io/class_f_io.hpp"
-#include "dogen/test_models/boost_model/io/class_g_io.hpp"
+#include "dogen/test_models/boost_model/io/class_d_io.hpp"
+#include "dogen/test_models/boost_model/io/class_e_io.hpp"
+#include "dogen/test_models/boost_model/io/class_b_io.hpp"
 #include "dogen/test_models/boost_model/io/class_h_io.hpp"
+#include "dogen/test_models/boost_model/io/class_g_io.hpp"
+#include "dogen/test_models/boost_model/io/class_base_io.hpp"
 #include "dogen/test_models/boost_model/io/pkg1/class_c_io.hpp"
+#include "dogen/test_models/boost_model/io/class_derived_io.hpp"

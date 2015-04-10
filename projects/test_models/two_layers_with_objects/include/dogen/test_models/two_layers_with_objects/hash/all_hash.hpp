@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/two_layers_with_objects/hash/Package_2/class_2_hash.hpp"
 #include "dogen/test_models/two_layers_with_objects/hash/package_1/class_1_hash.hpp"
+#include "dogen/test_models/two_layers_with_objects/hash/Package_2/class_2_hash.hpp"

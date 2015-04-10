@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include "dogen/test_models/std_model/serialization/class_a_unversioned_key_fwd_ser.hpp"
 
 namespace dogen {

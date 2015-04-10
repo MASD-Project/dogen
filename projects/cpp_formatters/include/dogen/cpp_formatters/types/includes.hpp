@@ -47,7 +47,7 @@ public:
     explicit includes(std::ostream& stream, const bool blank_line = true);
 
 private:
-    void format(std::list<std::string> v, bool is_system);
+    void format(std::list<std::string> v);
 
 public:
     void format(const cpp::formattables::file_info& f);

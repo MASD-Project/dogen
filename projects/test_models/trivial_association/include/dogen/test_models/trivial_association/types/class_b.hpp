@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/trivial_association/serialization/class_b_fwd_ser.hpp"
 #include "dogen/test_models/trivial_association/types/class_a.hpp"
+#include "dogen/test_models/trivial_association/serialization/class_b_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

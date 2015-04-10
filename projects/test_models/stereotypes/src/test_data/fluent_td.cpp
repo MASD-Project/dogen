@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/test_models/stereotypes/test_data/fluent_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/value_td.hpp"
+#include "dogen/test_models/stereotypes/test_data/fluent_td.hpp"
 
 namespace {
 

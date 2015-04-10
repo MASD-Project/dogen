@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/test_models/std_model/test_data/class_a_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_unversioned_key_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_versioned_key_td.hpp"
 #include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
+#include "dogen/test_models/std_model/test_data/class_a_versioned_key_td.hpp"
+#include "dogen/test_models/std_model/test_data/class_a_unversioned_key_td.hpp"
 
 namespace {
 

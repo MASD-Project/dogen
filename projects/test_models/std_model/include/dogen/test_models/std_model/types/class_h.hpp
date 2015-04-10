@@ -27,11 +27,11 @@
 
 #include <algorithm>
 #include <unordered_set>
+#include "dogen/test_models/std_model/types/class_a.hpp"
 #include "dogen/test_models/std_model/hash/class_a_hash.hpp"
+#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/test_models/std_model/serialization/class_h_fwd_ser.hpp"
-#include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
 
 namespace dogen {
 namespace test_models {

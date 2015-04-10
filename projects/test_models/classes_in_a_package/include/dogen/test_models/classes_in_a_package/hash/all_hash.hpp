@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/classes_in_a_package/hash/package_1/class_1_hash.hpp"
 #include "dogen/test_models/classes_in_a_package/hash/package_1/class_2_hash.hpp"
 #include "dogen/test_models/classes_in_a_package/hash/package_1/class_3_hash.hpp"
-#include "dogen/test_models/classes_in_a_package/hash/package_1/class_4_hash.hpp"
 #include "dogen/test_models/classes_in_a_package/hash/package_1/class_5_hash.hpp"
+#include "dogen/test_models/classes_in_a_package/hash/package_1/class_4_hash.hpp"
+#include "dogen/test_models/classes_in_a_package/hash/package_1/class_1_hash.hpp"

@@ -12,22 +12,24 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-09 Thu 23:08]
+Clock summary at [2015-04-10 Fri 16:07]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *20:45* |       |       |
+| *Total time*                                                            | *22:02* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 20:45 |       |
-| STARTED Sprint and product backlog grooming                             |         |       |  0:08 |
+| Active                                                                  |         | 22:02 |       |
+| STARTED Sprint and product backlog grooming                             |         |       |  0:21 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
 | COMPLETED Refactor field definition selection into its own class        |         |       |  1:58 |
 | COMPLETED Split merged model expansion from individual models expansion |         |       |  3:58 |
 | COMPLETED Create a "populate includes operation"                        |         |       | 13:01 |
+| COMPLETED Consider creating a include list sorter                       |         |       |  1:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-10 Fri 14:50]--[2015-04-10 Fri 15:03] =>  0:13
     CLOCK: [2015-03-29 Sun 22:32]--[2015-03-29 Sun 22:40] =>  0:08
 
 Updates to sprint and product backlog.
@@ -187,6 +189,39 @@ Notes:
 - Consider renaming setup to =prepare=? Not sure if it makes a lot of
   difference.
 
+*** COMPLETED Implement new settings factories with caching           :story:
+    CLOSED: [2015-04-10 Fri 14:57]
+
+- create a field definition selector;
+- get factories to use the selector on construction and setup a cache
+  for all required fields. These could be const copies of the fields.
+- stop using has_field followed by get content - we now know that the
+  field either existed originally or was defaulted correctly.
+
+For type settings:
+
+:    using namespace dynamic::schema;
+:    using fd = field_definitions;
+:    const field_selector fs(o);
+:
+:    if (fs.has_field(fd::enabled()))
+:        s.enabled(fs.get_boolean_content(fd::enabled()));
+
+Actually, do we really need to cache? We just need the qualified name
+of the field which is how the object stores its fields.
+
+*** COMPLETED Consider creating a include list sorter                 :story:
+    CLOSED: [2015-04-10 Fri 16:07]
+    CLOCK: [2015-04-10 Fri 15:03]--[2015-04-10 Fri 16:07] =>  1:04
+
+There are a few cases where we want the include files to be ordered in
+certain ways (in one case the code breaks otherwise; FIXME search
+backlog for it). In general we probably want to ensure the includes
+are ordered in a specific way like we do with regular source code,
+such as c files first, then standard c++ files, then boost, etc. We
+should have a function that given a list of includes performs this
+ordering.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -295,25 +330,12 @@ Perform some validation in repository workflow:
 - instances have qualified name populated.
 - only instances are left after instantiation.
 
-*** Implement new settings factories with caching                     :story:
+*** Perform expansion of properties and operations                    :story:
 
-- create a field definition selector;
-- get factories to use the selector on construction and setup a cache
-  for all required fields. These could be const copies of the fields.
-- stop using has_field followed by get content - we now know that the
-  field either existed originally or was defaulted correctly.
-
-For type settings:
-
-:    using namespace dynamic::schema;
-:    using fd = field_definitions;
-:    const field_selector fs(o);
-:
-:    if (fs.has_field(fd::enabled()))
-:        s.enabled(fs.get_boolean_content(fd::enabled()));
-
-Actually, do we really need to cache? We just need the qualified name
-of the field which is how the object stores its fields.
+At present we are ignoring properties (and operations). This is ok as
+we don't really have a use case for expansion there. However, it would
+be nice if we could just expand them anyway. We just need to make sure
+we don't do things like copying from root object.
 
 *** Create an operation to populate c++ properties                    :story:
 
@@ -323,13 +345,6 @@ require looking at related types (do they have the property enabled?)
 some others require looking at the SML model graph. It seems they
 should all live under one single operation (or perhaps a few), but we
 do not have any good names for them.
-
-*** Perform expansion of properties and operations                    :story:
-
-At present we are ignoring properties (and operations). This is ok as
-we don't really have a use case for expansion there. However, it would
-be nice if we could just expand them anyway. We just need to make sure
-we don't do things like copying from root object.
 
 *** Create settings expander and switcher                             :story:
 
@@ -374,16 +389,6 @@ regarding enabling facets and formatters:
 - for forward declarations: if another formatter requires it for a
   type, we want it on; if no one requires it we want it off. The user
   may want to manually switch it on for a type.
-
-*** Consider creating a include list sorter                           :story:
-
-There are a few cases where we want the include files to be ordered in
-certain ways (in one case the code breaks otherwise; FIXME search
-backlog for it). In general we probably want to ensure the includes
-are ordered in a specific way like we do with regular source code,
-such as c files first, then standard c++ files, then boost, etc. We
-should have a function that given a list of includes performs this
-ordering.
 
 *** Incorrect application of formatter templates                      :story:
 

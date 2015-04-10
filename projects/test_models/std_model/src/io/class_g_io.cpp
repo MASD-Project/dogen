@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include "dogen/test_models/std_model/io/class_a_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_unversioned_key_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_versioned_key_io.hpp"
 #include "dogen/test_models/std_model/io/class_g_io.hpp"
 #include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
+#include "dogen/test_models/std_model/io/class_a_versioned_key_io.hpp"
+#include "dogen/test_models/std_model/io/class_a_unversioned_key_io.hpp"
 
 namespace std {
 

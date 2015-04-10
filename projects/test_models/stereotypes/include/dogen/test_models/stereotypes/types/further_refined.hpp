@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
-#include "dogen/test_models/stereotypes/serialization/further_refined_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/test_models/stereotypes/types/base_with_concept.hpp"
+#include "dogen/test_models/stereotypes/serialization/further_refined_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

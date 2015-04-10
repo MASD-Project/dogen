@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/stereotypes/test_data/identity_pod_versioned_key_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/value_td.hpp"
+#include "dogen/test_models/stereotypes/test_data/identity_pod_versioned_key_td.hpp"
 
 namespace {
 

@@ -19,12 +19,12 @@
  *
  */
 #include "dogen/test_models/boost_model/test_data/class_a_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_b_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_base_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_d_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_e_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_f_td.hpp"
-#include "dogen/test_models/boost_model/test_data/class_g_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_d_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_e_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_b_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_h_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_g_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_base_td.hpp"
 #include "dogen/test_models/boost_model/test_data/pkg1/class_c_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"

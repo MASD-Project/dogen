@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include <list>
 #include "dogen/test_models/boost_model/serialization/class_g_fwd_ser.hpp"
 
 namespace dogen {

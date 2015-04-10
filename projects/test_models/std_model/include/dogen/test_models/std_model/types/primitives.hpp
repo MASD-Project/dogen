@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <cstdint>
+#include <algorithm>
 #include "dogen/test_models/std_model/serialization/primitives_fwd_ser.hpp"
 
 namespace dogen {

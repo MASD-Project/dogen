@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <ostream>
 #include "dogen/test_models/boost_model/io/class_f_io.hpp"
 
 namespace std {

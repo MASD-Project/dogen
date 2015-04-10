@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/shared_ptr.hpp>
-#include <unordered_map>
 #include <vector>
-#include "dogen/test_models/boost_model/serialization/class_b_fwd_ser.hpp"
+#include <algorithm>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/test_models/boost_model/types/class_a_fwd.hpp"
-#include "dogen/test_models/boost_model/types/class_base_fwd.hpp"
 #include "dogen/test_models/boost_model/types/pkg1/class_c.hpp"
+#include "dogen/test_models/boost_model/types/class_base_fwd.hpp"
+#include "dogen/test_models/boost_model/serialization/class_b_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

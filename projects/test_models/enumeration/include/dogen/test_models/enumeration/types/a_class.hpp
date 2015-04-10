@@ -26,10 +26,10 @@
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/enumeration/serialization/a_class_fwd_ser.hpp"
 #include "dogen/test_models/enumeration/types/book_types.hpp"
 #include "dogen/test_models/enumeration/types/colour_types.hpp"
 #include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
+#include "dogen/test_models/enumeration/serialization/a_class_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

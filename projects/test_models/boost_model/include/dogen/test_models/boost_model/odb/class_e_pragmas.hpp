@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/boost_model/odb/class_derived_pragmas.hpp"
 #include "dogen/test_models/boost_model/types/class_e.hpp"
+#include "dogen/test_models/boost_model/odb/class_derived_pragmas.hpp"
 
 // class has no ODB pragmas defined.
 

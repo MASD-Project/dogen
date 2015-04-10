@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/date_time/posix_time/time_serialize.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/nvp.hpp>
 #include <boost/date_time/gregorian/greg_serialize.hpp>
+#include <boost/date_time/posix_time/time_serialize.hpp>
 #include "dogen/test_models/boost_model/serialization/class_f_ser.hpp"
 
 

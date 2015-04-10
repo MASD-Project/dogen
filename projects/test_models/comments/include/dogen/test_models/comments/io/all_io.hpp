@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/comments/io/multi_line_io.hpp"
 #include "dogen/test_models/comments/io/one_line_io.hpp"
+#include "dogen/test_models/comments/io/multi_line_io.hpp"

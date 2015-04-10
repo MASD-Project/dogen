@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
+#include <algorithm>
 #include "dogen/test_models/trivial_inheritance/serialization/parent_without_members_fwd_ser.hpp"
 
 namespace dogen {

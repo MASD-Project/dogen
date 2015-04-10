@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/stereotypes/odb/base_with_concept_pragmas.hpp"
 #include "dogen/test_models/stereotypes/types/further_refined.hpp"
+#include "dogen/test_models/stereotypes/odb/base_with_concept_pragmas.hpp"
 
 // class has no ODB pragmas defined.
 

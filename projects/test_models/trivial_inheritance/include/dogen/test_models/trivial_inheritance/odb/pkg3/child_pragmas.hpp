@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/trivial_inheritance/odb/pkg2/parent_pragmas.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg3/child.hpp"
+#include "dogen/test_models/trivial_inheritance/odb/pkg2/parent_pragmas.hpp"
 
 // class has no ODB pragmas defined.
 

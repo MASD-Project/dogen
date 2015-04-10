@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/test_models/stereotypes/io/fluent_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/test_models/stereotypes/io/value_io.hpp"
+#include "dogen/test_models/stereotypes/io/fluent_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

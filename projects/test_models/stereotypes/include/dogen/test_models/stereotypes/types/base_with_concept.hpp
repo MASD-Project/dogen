@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
 #include <string>
+#include <algorithm>
 #include "dogen/test_models/stereotypes/serialization/base_with_concept_fwd_ser.hpp"
 
 namespace dogen {

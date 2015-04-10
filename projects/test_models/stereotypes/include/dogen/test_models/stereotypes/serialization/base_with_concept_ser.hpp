@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen/test_models/stereotypes/types/base_with_concept.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::stereotypes::base_with_concept)

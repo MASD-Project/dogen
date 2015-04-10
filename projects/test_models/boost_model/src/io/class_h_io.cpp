@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <ostream>
 #include <sstream>
+#include <boost/algorithm/string.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include "dogen/test_models/boost_model/io/class_h_io.hpp"
 
 namespace boost {

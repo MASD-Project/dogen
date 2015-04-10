@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/variant/apply_visitor.hpp>
-#include <ostream>
-#include "dogen/test_models/boost_model/io/class_derived_io.hpp"
 #include "dogen/test_models/boost_model/io/class_e_io.hpp"
+#include "dogen/test_models/boost_model/io/class_derived_io.hpp"
 
 namespace boost {
 

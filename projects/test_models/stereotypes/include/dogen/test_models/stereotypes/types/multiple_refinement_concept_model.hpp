@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include "dogen/test_models/stereotypes/serialization/multiple_refinement_concept_model_fwd_ser.hpp"
 
 namespace dogen {

@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/stereotypes/serialization/identity_pod_unversioned_key_fwd_ser.hpp"
 #include "dogen/test_models/stereotypes/types/value.hpp"
+#include "dogen/test_models/stereotypes/serialization/identity_pod_unversioned_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

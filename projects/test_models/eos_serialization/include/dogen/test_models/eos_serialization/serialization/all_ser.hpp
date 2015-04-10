@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/eos_serialization/serialization/first_class_ser.hpp"
 #include "dogen/test_models/eos_serialization/serialization/registrar_ser.hpp"
+#include "dogen/test_models/eos_serialization/serialization/first_class_ser.hpp"

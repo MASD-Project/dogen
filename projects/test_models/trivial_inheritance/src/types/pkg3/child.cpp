@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/trivial_inheritance/io/pkg2/parent_io.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg3/child.hpp"
+#include "dogen/test_models/trivial_inheritance/io/pkg2/parent_io.hpp"
 
 namespace dogen {
 namespace test_models {

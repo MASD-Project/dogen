@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
-#include <utility>
 #include <vector>
+#include <utility>
+#include <algorithm>
 #include "dogen/test_models/std_model/serialization/class_j_fwd_ser.hpp"
 
 namespace dogen {

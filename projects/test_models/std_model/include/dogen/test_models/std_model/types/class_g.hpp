@@ -25,19 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
-#include <unordered_map>
 #include <vector>
-#include "dogen/test_models/std_model/hash/class_a_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
-#include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/test_models/std_model/serialization/class_g_fwd_ser.hpp"
+#include <algorithm>
+#include <unordered_map>
 #include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
+#include "dogen/test_models/std_model/hash/class_a_hash.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
+#include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
+#include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
+#include "dogen/test_models/std_model/serialization/class_g_fwd_ser.hpp"
+#include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
+#include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
+#include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
 
 namespace dogen {
 namespace test_models {

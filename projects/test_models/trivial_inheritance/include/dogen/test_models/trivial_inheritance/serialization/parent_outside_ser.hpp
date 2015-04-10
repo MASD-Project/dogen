@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen/test_models/trivial_inheritance/types/parent_outside.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::trivial_inheritance::parent_outside)
