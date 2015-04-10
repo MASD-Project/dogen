@@ -12,23 +12,25 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-10 Fri 16:40]
+Clock summary at [2015-04-10 Fri 16:50]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *22:35* |       |       |
+| *Total time*                                                            | *22:45* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 22:35 |       |
-| STARTED Sprint and product backlog grooming                             |         |       |  0:21 |
+| Active                                                                  |         | 22:45 |       |
+| STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
 | COMPLETED Refactor field definition selection into its own class        |         |       |  1:58 |
 | COMPLETED Split merged model expansion from individual models expansion |         |       |  3:58 |
 | COMPLETED Create a "populate includes operation"                        |         |       | 13:01 |
 | COMPLETED Consider creating a include list sorter                       |         |       |  1:37 |
+| STARTED Create the stitch and stitcher projects                         |         |       |  0:03 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-10 Fri 16:40]--[2015-04-10 Fri 16:47] =>  0:07
     CLOCK: [2015-04-10 Fri 14:50]--[2015-04-10 Fri 15:03] =>  0:13
     CLOCK: [2015-03-29 Sun 22:32]--[2015-03-29 Sun 22:40] =>  0:08
 
@@ -293,149 +295,24 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
-*** Adding a dependency to a non-existent expander crashes dogen      :story:
+*** STARTED Create the stitch and stitcher projects                   :story:
+    CLOCK: [2015-04-10 Fri 16:47]--[2015-04-10 Fri 16:50] =>  0:03
 
-We are not checking that all dependencies exist when building the
-graph. If we add a dependency to a expander that does not exist we
-crash and burn:
+We need to create a simple model for stitch and a command line utility
+around it.
 
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/spec/workflow_spec.cpp(550): last checkpoint
-: dogen_knit_spec: /usr/include/boost/smart_ptr/shared_ptr.hpp:653: typename boost::detail::sp_member_access<T>::type boost::shared_ptr<dogen::dynamic::expansion::expander_interface>::operator->() const [Y = dogen::dynamic::expansion::expander_interface]: Assertion `px != 0' failed.
-: unknown location(0): fatal error in "all_primitives_model_generates_expected_code": signal: SIGABRT (application abort requested)
+*** Add basic functionality to stitch                                 :story:
 
-*** Expand fields from command line options into dynamic              :story:
+We need to implement stitch as per analysis in backlog, with a few
+simple unit tests.
 
-We need to ensure the following fields are populated, from the command
-line options:
+*** Create a forward declarations formatter using stitch              :story:
 
-- integrated facets
-- enabled
-
-*** Add =static_formatter_name=                                       :story:
-
-At present formatter names are defined as traits, we should use the
-"static" approach. Facet names can stay as traits as they are common
-across formatters.
-
-*** Check for duplicate formatter names in formatter registrar        :story:
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
-
-*** Add validation for field definitions                              :story:
-
-Perform some validation in repository workflow:
-
-- that formatter fields are not duplicated on simple name.
-- fields are not duplicated on qualified name.
-- instances have qualified name populated.
-- only instances are left after instantiation.
-
-*** Perform expansion of properties and operations                    :story:
-
-At present we are ignoring properties (and operations). This is ok as
-we don't really have a use case for expansion there. However, it would
-be nice if we could just expand them anyway. We just need to make sure
-we don't do things like copying from root object.
-
-*** Create an operation to populate c++ properties                    :story:
-
-There are a number of properties such as "requires default
-constructor" and so on that are specific to the c++ model. Some
-require looking at related types (do they have the property enabled?)
-some others require looking at the SML model graph. It seems they
-should all live under one single operation (or perhaps a few), but we
-do not have any good names for them.
-
-*** Create settings expander and switcher                             :story:
-
-*New Understanding*
-
-The expansion process now takes on this work. We need to refactor this
-story into an expander.
-
-*Previous Understanding*
-
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
-
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
-
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
-
-This could be done by the switcher. We should first expand the
-settings then switch them.
-
-In some ways we can think of the switcher as a dependency
-manager. This may inform the naming of this class.
-
-One thing to take into account is the different kinds of behaviours
-regarding enabling facets and formatters:
-
-- for serialisation we want it to be on and if its on, all types
-  should be serialisable.
-- for hashing we want it to be off (most likely) and if the user makes
-  use of a hashing container we want the type that is the key of the
-  container to have hashing on; no other types should have it on. We
-  also may want the user to manually switch hashing on for a type.
-- for forward declarations: if another formatter requires it for a
-  type, we want it on; if no one requires it we want it off. The user
-  may want to manually switch it on for a type.
-
-*** Incorrect application of formatter templates                      :story:
-
-At present we are applying formatter templates across all formatters
-in C++ mode; this only makes sense because we do not have CMake and
-ODB formatters. However, when these are added we will need to filter
-the formatters further. For example, C++ formatters (both headers and
-implementation) need inclusion dependencies but CMake files don't.
-
-*** Consider supporting multiple formatter groups                     :story:
-
-In some cases it would be nice for a field to belong to multiple
-groups. For example =integrated_facet= is only applicable to class
-header formatters. We could implement this by making the formatter
-group a collection and having formatters belong to multiple groups.
-
-*** Some test models do not build on run all specs                    :story:
-
-For some reason we are not building some of the test models when doing
-a run all specs, in particular:
-
-- exception
-- comments
-
-this may be because we have no specs for them. We need to find a way
-to build them somehow.
-
-*** Improve error reporting around JSON                               :story:
-
-At present when we break the JSON we get errors like so:
-
-: Error: Failed to parse JSON file<unspecified file>(75): expected object name.
-
-These are not very useful in diagnosing the problem. In the log file
-we do a bit better:
-
-: 2015-03-30 12:02:12.897202 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/fields/cpp.json
-: 2015-03-30 12:02:12.897216 [DEBUG] [dynamic.schema.json_hydrator] Parsing JSON stream.
-: 2015-03-30 12:02:12.897450 [ERROR] [dynamic.schema.json_hydrator] Failed to parse JSON file: <unspecified file>(75): expected object name
-: 2015-03-30 12:02:12.897515 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dynamic/schema/src/types/json_hydrator.cpp(226): Throw in function std::list<field_definition> dogen::dynamic::schema::json_hydrator::hydrate(std::istream &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen7dynamic6schema15hydration_errorEEE
-: std::exception::what: Failed to parse JSON file<unspecified file>(75): expected object name
-: [P12tag_workflow] = Code generation failure.
-
-But it requires a lot of context to know whats going on. We need to
-append more details to the exception.
+We need to start making use of stitch in dogen. To start off with, we
+will manually run the stitch command against a template to generate
+the =cpp= file and include the header file from the formatter. We also
+need to inject the stitch file name to the list of ignores, probably
+by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
+avoid clashes with the source code of stitch itself.
 
 ** Deprecated
