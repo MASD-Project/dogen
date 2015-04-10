@@ -25,19 +25,19 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formattables/class_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/cmakelists_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/enum_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/exception_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/forward_declarations_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/includers_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/namespace_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/new_class_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/odb_options_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/primitive_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/registrar_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/class_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/concept_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/visitor_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/primitive_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/new_class_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/namespace_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/exception_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/registrar_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/includers_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/odb_options_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info_fwd.hpp"
 
 namespace dogen {
 namespace cpp {

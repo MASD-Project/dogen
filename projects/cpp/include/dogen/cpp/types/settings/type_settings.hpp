@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
-#include "dogen/cpp/serialization/settings/type_settings_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/family_types.hpp"
+#include "dogen/cpp/serialization/settings/type_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

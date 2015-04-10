@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
 #include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
+#include "dogen/formatters/hash/editors_hash.hpp"
 #include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
 #include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
+#include "dogen/formatters/hash/annotation_hash.hpp"
 #include "dogen/formatters/hash/repository_hash.hpp"
+#include "dogen/formatters/hash/padding_types_hash.hpp"
+#include "dogen/formatters/hash/comment_styles_hash.hpp"
+#include "dogen/formatters/hash/modeline_group_hash.hpp"
+#include "dogen/formatters/hash/modeline_field_hash.hpp"
+#include "dogen/formatters/hash/general_settings_hash.hpp"
+#include "dogen/formatters/hash/modeline_locations_hash.hpp"

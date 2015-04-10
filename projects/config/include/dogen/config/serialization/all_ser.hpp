@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/serialization/archive_types_ser.hpp"
-#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
-#include "dogen/config/serialization/cpp_options_ser.hpp"
-#include "dogen/config/serialization/input_options_ser.hpp"
-#include "dogen/config/serialization/knitting_options_ser.hpp"
-#include "dogen/config/serialization/output_options_ser.hpp"
 #include "dogen/config/serialization/reference_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
+#include "dogen/config/serialization/cpp_options_ser.hpp"
+#include "dogen/config/serialization/archive_types_ser.hpp"
+#include "dogen/config/serialization/input_options_ser.hpp"
+#include "dogen/config/serialization/output_options_ser.hpp"
+#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
+#include "dogen/config/serialization/knitting_options_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_options_ser.hpp"

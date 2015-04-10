@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
-#include "dogen/dynamic/schema/serialization/repository_fwd_ser.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/schema/serialization/repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

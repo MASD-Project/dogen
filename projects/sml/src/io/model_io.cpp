@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/dynamic/schema/io/object_io.hpp"
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
-#include "dogen/sml/io/origin_types_io.hpp"
+#include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/enumeration_io.hpp"
+#include "dogen/sml/io/origin_types_io.hpp"
+#include "dogen/sml/io/generation_types_io.hpp"
+#include "dogen/dynamic/schema/io/object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/sml/types/enumeration_fwd.hpp"
 #include "dogen/sml/types/object_fwd.hpp"
 #include "dogen/sml/types/primitive_fwd.hpp"
+#include "dogen/sml/types/enumeration_fwd.hpp"
 
 namespace dogen {
 namespace sml {

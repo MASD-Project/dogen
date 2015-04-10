@@ -26,8 +26,8 @@
 #endif
 
 #include <algorithm>
-#include "dogen/formatters/serialization/general_settings_fwd_ser.hpp"
 #include "dogen/formatters/types/annotation.hpp"
+#include "dogen/formatters/serialization/general_settings_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {

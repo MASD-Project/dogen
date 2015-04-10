@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/cmakelists_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
+#include "dogen/cpp/hash/formattables/cmakelists_info_hash.hpp"
 
 namespace {
 

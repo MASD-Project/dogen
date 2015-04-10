@@ -25,17 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <iosfwd>
 #include <list>
+#include <iosfwd>
 #include <string>
 #include <utility>
-#include "dogen/cpp/serialization/formattables/class_info_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/class_types.hpp"
+#include <algorithm>
+#include "dogen/sml/types/generation_types.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/types/formattables/class_types.hpp"
 #include "dogen/cpp/types/formattables/parent_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
-#include "dogen/sml/types/generation_types.hpp"
+#include "dogen/cpp/serialization/formattables/class_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

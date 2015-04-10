@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/schema/test_data/text_collection_td.hpp"
 #include "dogen/dynamic/schema/test_data/value_td.hpp"
+#include "dogen/dynamic/schema/test_data/text_collection_td.hpp"
 
 namespace {
 

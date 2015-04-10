@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
+#include "dogen/cpp/hash/formattables/includes_hash.hpp"
 #include "dogen/cpp/hash/formattables/file_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/cpp/hash/formattables/includes_hash.hpp"
+#include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
 
 namespace {
 

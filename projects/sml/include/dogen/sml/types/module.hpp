@@ -25,16 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/optional.hpp>
 #include <list>
 #include <string>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/sml/serialization/module_fwd_ser.hpp"
-#include "dogen/sml/types/generation_types.hpp"
+#include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/origin_types.hpp"
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/generation_types.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/sml/serialization/module_fwd_ser.hpp"
 
 namespace dogen {
 namespace sml {

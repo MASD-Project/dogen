@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/test_models/database/serialization/foreign_key_fwd_ser.hpp"
 #include "dogen/test_models/database/types/primary_key_2_fwd.hpp"
+#include "dogen/test_models/database/serialization/foreign_key_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {

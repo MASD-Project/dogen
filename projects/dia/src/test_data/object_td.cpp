@@ -19,10 +19,10 @@
  *
  */
 #include <sstream>
+#include "dogen/dia/test_data/object_td.hpp"
 #include "dogen/dia/test_data/attribute_td.hpp"
 #include "dogen/dia/test_data/child_node_td.hpp"
 #include "dogen/dia/test_data/connection_td.hpp"
-#include "dogen/dia/test_data/object_td.hpp"
 
 namespace {
 

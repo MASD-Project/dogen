@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dynamic/schema/io/value_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/dynamic/schema/types/text.hpp"
+#include "dogen/dynamic/schema/io/value_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

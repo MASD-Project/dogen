@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
+#include "dogen/sml/hash/primitive_hash.hpp"
 
 namespace {
 

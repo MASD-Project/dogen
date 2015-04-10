@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/dynamic/schema/io/value_io.hpp"
 #include "dogen/dynamic/schema/types/boolean.hpp"
 

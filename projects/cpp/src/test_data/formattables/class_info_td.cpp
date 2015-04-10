@@ -19,12 +19,12 @@
  *
  */
 #include <sstream>
+#include "dogen/sml/test_data/generation_types_td.hpp"
+#include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_types_td.hpp"
-#include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/parent_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"
-#include "dogen/sml/test_data/generation_types_td.hpp"
 
 namespace {
 

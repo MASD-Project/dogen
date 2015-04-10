@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
-#include "dogen/dynamic/schema/serialization/value_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/dynamic/schema/types/value_visitor.hpp"
+#include "dogen/dynamic/schema/serialization/value_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

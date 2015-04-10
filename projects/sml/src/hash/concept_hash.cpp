@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
-#include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/sml/hash/property_hash.hpp"
 #include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/origin_types_hash.hpp"
-#include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/hash/generation_types_hash.hpp"
+#include "dogen/dynamic/schema/hash/object_hash.hpp"
 
 namespace {
 

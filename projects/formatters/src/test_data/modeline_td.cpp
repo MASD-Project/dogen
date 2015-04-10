@@ -20,9 +20,9 @@
  */
 #include <sstream>
 #include "dogen/formatters/test_data/editors_td.hpp"
+#include "dogen/formatters/test_data/modeline_td.hpp"
 #include "dogen/formatters/test_data/modeline_field_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
 
 namespace {
 

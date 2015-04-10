@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
-#include "dogen/cpp/hash/settings/bundle_hash.hpp"
 
 namespace {
 

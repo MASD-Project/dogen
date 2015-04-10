@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <iosfwd>
 #include <list>
+#include <iosfwd>
 #include <string>
-#include "dogen/cpp/serialization/formattables/enum_info_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/enumerator_info.hpp"
+#include "dogen/cpp/serialization/formattables/enum_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

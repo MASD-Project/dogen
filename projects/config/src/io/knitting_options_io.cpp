@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/config/io/cpp_options_io.hpp"
 #include "dogen/config/io/input_options_io.hpp"
-#include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/config/io/output_options_io.hpp"
+#include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/config/io/troubleshooting_options_io.hpp"
 
 namespace dogen {

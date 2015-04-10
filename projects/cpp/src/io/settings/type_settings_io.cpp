@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/formattables/family_types_io.hpp"
+#include <boost/io/ios_state.hpp>
 #include "dogen/cpp/io/settings/type_settings_io.hpp"
+#include "dogen/cpp/io/formattables/family_types_io.hpp"
 
 namespace dogen {
 namespace cpp {

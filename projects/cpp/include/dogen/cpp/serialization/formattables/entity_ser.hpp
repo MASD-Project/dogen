@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen/cpp/types/formattables/entity.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formattables::entity)

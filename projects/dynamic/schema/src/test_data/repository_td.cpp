@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
 #include "dogen/dynamic/schema/test_data/repository_td.hpp"
+#include "dogen/dynamic/schema/test_data/field_definition_td.hpp"
 
 namespace {
 

@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/shared_ptr.hpp>
 #include <string>
 #include <vector>
-#include "dogen/dia/serialization/composite_fwd_ser.hpp"
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dia/types/attribute_fwd.hpp"
 #include "dogen/dia/types/composite_fwd.hpp"
+#include "dogen/dia/serialization/composite_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia {

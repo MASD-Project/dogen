@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/abilities_hash.hpp"
-#include "dogen/cpp/hash/formattables/class_aspects_hash.hpp"
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/inheritance_hash.hpp"
-#include "dogen/cpp/hash/formattables/new_class_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/state_hash.hpp"
+#include "dogen/cpp/hash/formattables/entity_hash.hpp"
+#include "dogen/cpp/hash/formattables/abilities_hash.hpp"
+#include "dogen/cpp/hash/formattables/inheritance_hash.hpp"
+#include "dogen/cpp/hash/formattables/class_aspects_hash.hpp"
+#include "dogen/cpp/hash/formattables/new_class_info_hash.hpp"
 
 namespace {
 

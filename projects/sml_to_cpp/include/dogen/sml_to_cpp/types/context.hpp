@@ -26,18 +26,18 @@
 #endif
 
 #include <algorithm>
-#include <boost/shared_ptr.hpp>
 #include <unordered_map>
-#include "dogen/cpp/types/formattables/class_info_fwd.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml_to_cpp/types/relationships.hpp"
 #include "dogen/cpp/types/formattables/enum_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/class_info_fwd.hpp"
+#include "dogen/cpp/types/formattables/visitor_info_fwd.hpp"
+#include "dogen/sml_to_cpp/serialization/context_fwd_ser.hpp"
 #include "dogen/cpp/types/formattables/exception_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/namespace_info_fwd.hpp"
 #include "dogen/cpp/types/formattables/registrar_info_fwd.hpp"
-#include "dogen/cpp/types/formattables/visitor_info_fwd.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml_to_cpp/serialization/context_fwd_ser.hpp"
-#include "dogen/sml_to_cpp/types/relationships.hpp"
 
 namespace dogen {
 namespace sml_to_cpp {

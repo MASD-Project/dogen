@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/cpp/io/formattables/class_types_io.hpp"
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/io/formattables/class_types_io.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
-#include "dogen/cpp/types/formattables/class_info.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
 
 namespace std {
 

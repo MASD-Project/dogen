@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/shared_ptr.hpp>
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen/cpp/serialization/formattables/property_info_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/nested_type_info.hpp"
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
 #include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
+#include "dogen/cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/cpp/serialization/formattables/property_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

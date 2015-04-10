@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/test_data/cpp_facet_types_td.hpp"
-#include "dogen/cpp/test_data/formattables/aspect_types_td.hpp"
-#include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
-#include "dogen/cpp/test_data/formattables/content_types_td.hpp"
-#include "dogen/cpp/test_data/formattables/file_types_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/config/test_data/cpp_facet_types_td.hpp"
+#include "dogen/cpp/test_data/formattables/file_types_td.hpp"
+#include "dogen/cpp/test_data/formattables/aspect_types_td.hpp"
+#include "dogen/cpp/test_data/formattables/content_types_td.hpp"
+#include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
 
 namespace {
 

@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
-#include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
+#include "dogen/sml/test_data/nested_qname_td.hpp"
+#include "dogen/dynamic/schema/test_data/object_td.hpp"
 
 namespace {
 

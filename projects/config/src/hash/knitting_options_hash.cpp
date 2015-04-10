@@ -20,8 +20,8 @@
  */
 #include "dogen/config/hash/cpp_options_hash.hpp"
 #include "dogen/config/hash/input_options_hash.hpp"
-#include "dogen/config/hash/knitting_options_hash.hpp"
 #include "dogen/config/hash/output_options_hash.hpp"
+#include "dogen/config/hash/knitting_options_hash.hpp"
 #include "dogen/config/hash/troubleshooting_options_hash.hpp"
 
 namespace {

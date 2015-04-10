@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/sml/io/nested_qname_io.hpp"
+#include <boost/io/ios_state.hpp>
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/nested_qname_io.hpp"
 
 namespace std {
 

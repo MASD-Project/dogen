@@ -19,10 +19,10 @@
  *
  */
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/cpp/hash/settings/type_settings_hash.hpp"
 #include "dogen/formatters/hash/general_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/formatter_settings_hash.hpp"
 
 namespace {
 

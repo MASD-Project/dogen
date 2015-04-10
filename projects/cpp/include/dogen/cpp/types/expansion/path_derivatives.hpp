@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include <string>
 #include "dogen/cpp/serialization/expansion/path_derivatives_fwd_ser.hpp"
 
 namespace dogen {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/settings/odb_settings_io.hpp"
 #include "dogen/cpp/io/settings/opaque_settings_io.hpp"
 

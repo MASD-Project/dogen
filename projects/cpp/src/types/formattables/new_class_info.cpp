@@ -19,11 +19,11 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/formattables/abilities_io.hpp"
-#include "dogen/cpp/io/formattables/class_aspects_io.hpp"
-#include "dogen/cpp/io/formattables/entity_io.hpp"
-#include "dogen/cpp/io/formattables/inheritance_io.hpp"
 #include "dogen/cpp/io/formattables/state_io.hpp"
+#include "dogen/cpp/io/formattables/entity_io.hpp"
+#include "dogen/cpp/io/formattables/abilities_io.hpp"
+#include "dogen/cpp/io/formattables/inheritance_io.hpp"
+#include "dogen/cpp/io/formattables/class_aspects_io.hpp"
 #include "dogen/cpp/types/formattables/new_class_info.hpp"
 
 namespace dogen {

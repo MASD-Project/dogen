@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
 #include <vector>
-#include "dogen/sml/serialization/enumeration_fwd_ser.hpp"
-#include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/qname.hpp"
+#include <algorithm>
 #include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/enumerator.hpp"
+#include "dogen/sml/serialization/enumeration_fwd_ser.hpp"
 
 namespace dogen {
 namespace sml {

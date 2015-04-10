@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/utility.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/string.hpp>
-#include <boost/serialization/utility.hpp>
+#include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_types_ser.hpp"
-#include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
-#include "dogen/sml/serialization/generation_types_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(

@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
+#include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include <list>
-#include "dogen/dia_to_sml/serialization/node_fwd_ser.hpp"
-#include "dogen/dia_to_sml/types/node_fwd.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/dia_to_sml/types/node_fwd.hpp"
+#include "dogen/dia_to_sml/serialization/node_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia_to_sml {

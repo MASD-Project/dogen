@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen/config/serialization/knitting_options_fwd_ser.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/config/types/input_options.hpp"
 #include "dogen/config/types/output_options.hpp"
 #include "dogen/config/types/troubleshooting_options.hpp"
+#include "dogen/config/serialization/knitting_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace config {

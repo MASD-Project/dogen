@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dia/hash/object_hash.hpp"
 #include "dogen/dia/hash/attribute_hash.hpp"
 #include "dogen/dia/hash/child_node_hash.hpp"
 #include "dogen/dia/hash/connection_hash.hpp"
-#include "dogen/dia/hash/object_hash.hpp"
 
 namespace {
 

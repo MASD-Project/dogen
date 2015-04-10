@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/formatters/io/annotation_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/licence_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
+#include "dogen/formatters/io/annotation_io.hpp"
 
 namespace boost {
 

@@ -25,16 +25,16 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include <string>
-#include <unordered_map>
-#include "dogen/cpp/serialization/settings/bundle_fwd_ser.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
+#include "dogen/cpp/serialization/settings/bundle_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

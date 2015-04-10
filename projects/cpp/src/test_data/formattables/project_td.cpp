@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/file_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/project_td.hpp"
+#include "dogen/cpp/test_data/formattables/file_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 
 namespace {
 

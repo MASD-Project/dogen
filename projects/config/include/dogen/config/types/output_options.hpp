@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "dogen/config/serialization/output_options_fwd_ser.hpp"
 
 namespace dogen {

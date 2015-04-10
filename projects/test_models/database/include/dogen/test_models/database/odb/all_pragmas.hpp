@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/database/odb/foreign_key_pragmas.hpp"
-#include "dogen/test_models/database/odb/no_keys_2_pragmas.hpp"
 #include "dogen/test_models/database/odb/no_keys_pragmas.hpp"
-#include "dogen/test_models/database/odb/primary_key_2_pragmas.hpp"
+#include "dogen/test_models/database/odb/no_keys_2_pragmas.hpp"
+#include "dogen/test_models/database/odb/foreign_key_pragmas.hpp"
 #include "dogen/test_models/database/odb/primary_key_pragmas.hpp"
+#include "dogen/test_models/database/odb/primary_key_2_pragmas.hpp"

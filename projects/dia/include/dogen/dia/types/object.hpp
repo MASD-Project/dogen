@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/optional.hpp>
 #include <string>
 #include <vector>
-#include "dogen/dia/serialization/object_fwd_ser.hpp"
+#include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/child_node.hpp"
 #include "dogen/dia/types/connection.hpp"
+#include "dogen/dia/serialization/object_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia {

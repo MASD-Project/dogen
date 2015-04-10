@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
+#include <list>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include <list>
-#include "dogen/cpp/serialization/formattables/project_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/cpp/types/formattables/file_info.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
+#include "dogen/cpp/serialization/formattables/project_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/database/serialization/foreign_key_ser.hpp"
-#include "dogen/test_models/database/serialization/no_keys_2_ser.hpp"
 #include "dogen/test_models/database/serialization/no_keys_ser.hpp"
-#include "dogen/test_models/database/serialization/primary_key_2_ser.hpp"
-#include "dogen/test_models/database/serialization/primary_key_ser.hpp"
+#include "dogen/test_models/database/serialization/no_keys_2_ser.hpp"
 #include "dogen/test_models/database/serialization/registrar_ser.hpp"
+#include "dogen/test_models/database/serialization/foreign_key_ser.hpp"
+#include "dogen/test_models/database/serialization/primary_key_ser.hpp"
+#include "dogen/test_models/database/serialization/primary_key_2_ser.hpp"

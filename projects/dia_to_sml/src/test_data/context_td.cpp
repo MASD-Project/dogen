@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/dia_to_sml/test_data/context_td.hpp"
 
 namespace {
 

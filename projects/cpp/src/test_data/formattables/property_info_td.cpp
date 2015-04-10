@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/property_info_td.hpp"
 #include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
+#include "dogen/cpp/test_data/formattables/property_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
 
 namespace {
 

@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
-#include "dogen/cpp/serialization/formattables/concept_info_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/entity.hpp"
+#include <algorithm>
 #include "dogen/cpp/types/formattables/state.hpp"
+#include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/serialization/formattables/concept_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

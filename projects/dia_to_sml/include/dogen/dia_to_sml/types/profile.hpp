@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
+#include <algorithm>
 #include "dogen/dia_to_sml/serialization/profile_fwd_ser.hpp"
 
 namespace dogen {

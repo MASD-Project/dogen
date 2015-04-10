@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/hash/expansion_context_hash.hpp"
 #include "dogen/dynamic/expansion/hash/expansion_types_hash.hpp"
+#include "dogen/dynamic/expansion/hash/expansion_context_hash.hpp"

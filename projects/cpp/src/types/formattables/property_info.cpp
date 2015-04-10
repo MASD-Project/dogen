@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
+#include "dogen/cpp/types/formattables/property_info.hpp"
 
 namespace boost {
 

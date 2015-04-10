@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/optional.hpp>
 #include <list>
 #include <string>
+#include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen/sml/types/parameter.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/sml/serialization/operation_fwd_ser.hpp"
-#include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/parameter.hpp"
 
 namespace dogen {
 namespace sml {

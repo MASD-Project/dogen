@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/nvp.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/dia_to_sml/serialization/node_ser.hpp"
 
 
 namespace boost {

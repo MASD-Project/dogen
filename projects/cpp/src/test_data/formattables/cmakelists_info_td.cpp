@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
+#include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
 
 namespace {
 

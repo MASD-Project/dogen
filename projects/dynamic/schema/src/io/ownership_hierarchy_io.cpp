@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
 
 

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/formattables/cmakelists_info_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include "dogen/cpp/io/formattables/cmakelists_info_io.hpp"
 
 namespace dogen {
 namespace cpp {

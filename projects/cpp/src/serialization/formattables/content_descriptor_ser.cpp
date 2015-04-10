@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
-#include "dogen/cpp/serialization/formattables/aspect_types_ser.hpp"
-#include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
-#include "dogen/cpp/serialization/formattables/content_types_ser.hpp"
-#include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
 #include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/file_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/aspect_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/content_types_ser.hpp"
+#include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 
 
 namespace boost {

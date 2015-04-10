@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
-#include "dogen/sml/serialization/nested_qname_fwd_ser.hpp"
-#include "dogen/sml/types/nested_qname.hpp"
+#include <algorithm>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/nested_qname.hpp"
+#include "dogen/sml/serialization/nested_qname_fwd_ser.hpp"
 
 namespace dogen {
 namespace sml {

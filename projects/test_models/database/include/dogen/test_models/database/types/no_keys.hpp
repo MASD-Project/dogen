@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <string>
 #include "dogen/test_models/database/serialization/no_keys_fwd_ser.hpp"
 
 namespace dogen {

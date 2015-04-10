@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
-#include "dogen/formatters/serialization/modeline_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/formatters/types/editors.hpp"
 #include "dogen/formatters/types/modeline_field.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
+#include "dogen/formatters/serialization/modeline_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/dia_to_sml/io/profile_io.hpp"
 
 

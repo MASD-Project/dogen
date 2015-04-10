@@ -18,6 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/serialization/expansion_context_ser.hpp"
-#include "dogen/dynamic/expansion/serialization/expansion_types_ser.hpp"
 #include "dogen/dynamic/expansion/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/expansion/serialization/expansion_types_ser.hpp"
+#include "dogen/dynamic/expansion/serialization/expansion_context_ser.hpp"

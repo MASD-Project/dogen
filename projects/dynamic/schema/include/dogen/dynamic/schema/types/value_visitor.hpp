@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include "dogen/dynamic/schema/types/text_fwd.hpp"
 #include "dogen/dynamic/schema/types/boolean_fwd.hpp"
 #include "dogen/dynamic/schema/types/text_collection_fwd.hpp"
-#include "dogen/dynamic/schema/types/text_fwd.hpp"
 
 namespace dogen {
 namespace dynamic {

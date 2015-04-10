@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/annotation_td.hpp"
 #include "dogen/formatters/test_data/licence_td.hpp"
 #include "dogen/formatters/test_data/modeline_td.hpp"
+#include "dogen/formatters/test_data/annotation_td.hpp"
 
 namespace {
 

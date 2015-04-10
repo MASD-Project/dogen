@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/io/archive_types_io.hpp"
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/config/io/cpp_options_io.hpp"
-#include "dogen/config/io/input_options_io.hpp"
-#include "dogen/config/io/knitting_options_io.hpp"
-#include "dogen/config/io/output_options_io.hpp"
 #include "dogen/config/io/reference_io.hpp"
+#include "dogen/config/io/cpp_options_io.hpp"
+#include "dogen/config/io/archive_types_io.hpp"
+#include "dogen/config/io/input_options_io.hpp"
+#include "dogen/config/io/output_options_io.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
+#include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/config/io/troubleshooting_options_io.hpp"

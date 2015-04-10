@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
+#include <algorithm>
 #include "dogen/cpp/serialization/settings/opaque_settings_fwd_ser.hpp"
 
 namespace dogen {

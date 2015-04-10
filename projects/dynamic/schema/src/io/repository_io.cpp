@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/dynamic/schema/io/field_definition_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/dynamic/schema/io/repository_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_io.hpp"
 
 namespace std {
 

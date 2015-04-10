@@ -25,19 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <iosfwd>
 #include <list>
+#include <iosfwd>
+#include <algorithm>
 #include <unordered_map>
+#include "dogen/sml/types/type.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/property.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/types/operation.hpp"
+#include "dogen/sml/types/object_types.hpp"
+#include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
 #include "dogen/sml/serialization/object_fwd_ser.hpp"
-#include "dogen/sml/types/object_types.hpp"
-#include "dogen/sml/types/operation.hpp"
-#include "dogen/sml/types/property.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/relationship_types.hpp"
-#include "dogen/sml/types/type.hpp"
 
 namespace dogen {
 namespace sml {

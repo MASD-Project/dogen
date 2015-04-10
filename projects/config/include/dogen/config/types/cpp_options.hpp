@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include <set>
 #include <string>
-#include "dogen/config/serialization/cpp_options_fwd_ser.hpp"
+#include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_facet_types.hpp"
+#include "dogen/config/serialization/cpp_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace config {

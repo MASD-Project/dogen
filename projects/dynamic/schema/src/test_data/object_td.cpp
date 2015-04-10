@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
 #include "dogen/dynamic/schema/test_data/object_td.hpp"
+#include "dogen/dynamic/schema/test_data/field_instance_td.hpp"
 
 namespace {
 

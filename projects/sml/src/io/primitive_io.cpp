@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
+#include "dogen/sml/io/primitive_io.hpp"
 
 namespace dogen {
 namespace sml {

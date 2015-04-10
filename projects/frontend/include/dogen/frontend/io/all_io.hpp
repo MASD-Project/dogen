@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/frontend/io/frontend_settings_io.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
+#include "dogen/frontend/io/frontend_settings_io.hpp"

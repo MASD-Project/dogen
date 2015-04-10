@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/schema/serialization/field_instance_fwd_ser.hpp"
 #include "dogen/dynamic/schema/types/value_fwd.hpp"
+#include "dogen/dynamic/schema/serialization/field_instance_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

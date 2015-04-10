@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml_to_cpp/test_data/context_td.hpp"
 #include "dogen/sml_to_cpp/test_data/relationships_td.hpp"
+#include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
 
 namespace {
 

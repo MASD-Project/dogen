@@ -19,20 +19,20 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
+#include "dogen/cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/includers_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/namespace_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/new_class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/registrar_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
-#include "dogen/cpp/test_data/settings/bundle_td.hpp"
+#include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
 
 namespace {
 

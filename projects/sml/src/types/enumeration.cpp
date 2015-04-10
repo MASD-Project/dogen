@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
+#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 
 namespace std {

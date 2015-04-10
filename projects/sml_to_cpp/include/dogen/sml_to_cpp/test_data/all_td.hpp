@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml_to_cpp/test_data/boost_types_td.hpp"
 #include "dogen/sml_to_cpp/test_data/context_td.hpp"
-#include "dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp"
-#include "dogen/sml_to_cpp/test_data/relationships_td.hpp"
 #include "dogen/sml_to_cpp/test_data/std_types_td.hpp"
+#include "dogen/sml_to_cpp/test_data/boost_types_td.hpp"
+#include "dogen/sml_to_cpp/test_data/relationships_td.hpp"
+#include "dogen/sml_to_cpp/test_data/inclusion_lists_td.hpp"

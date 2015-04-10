@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/database/odb/primary_key_2_pragmas.hpp"
 #include "dogen/test_models/database/types/foreign_key.hpp"
+#include "dogen/test_models/database/odb/primary_key_2_pragmas.hpp"
 
 namespace dogen {
 namespace test_models {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/database/test_data/foreign_key_td.hpp"
-#include "dogen/test_models/database/test_data/no_keys_2_td.hpp"
 #include "dogen/test_models/database/test_data/no_keys_td.hpp"
-#include "dogen/test_models/database/test_data/primary_key_2_td.hpp"
+#include "dogen/test_models/database/test_data/no_keys_2_td.hpp"
+#include "dogen/test_models/database/test_data/foreign_key_td.hpp"
 #include "dogen/test_models/database/test_data/primary_key_td.hpp"
+#include "dogen/test_models/database/test_data/primary_key_2_td.hpp"

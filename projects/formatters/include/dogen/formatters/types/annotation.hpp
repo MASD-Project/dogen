@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include <string>
-#include "dogen/formatters/serialization/annotation_fwd_ser.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/modeline.hpp"
+#include "dogen/formatters/serialization/annotation_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/dynamic/schema/io/boolean_io.hpp"
+#include <boost/io/ios_state.hpp>
 #include "dogen/dynamic/schema/io/value_io.hpp"
+#include "dogen/dynamic/schema/io/boolean_io.hpp"
 
 namespace dogen {
 namespace dynamic {

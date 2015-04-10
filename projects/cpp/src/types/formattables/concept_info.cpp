@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/state_io.hpp"
+#include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/concept_info.hpp"
 
 namespace dogen {

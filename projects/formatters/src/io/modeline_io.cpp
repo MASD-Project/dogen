@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/editors_io.hpp"
-#include "dogen/formatters/io/modeline_field_io.hpp"
 #include "dogen/formatters/io/modeline_io.hpp"
+#include "dogen/formatters/io/modeline_field_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"
 
 

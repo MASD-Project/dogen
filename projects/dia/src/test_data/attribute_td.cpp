@@ -19,17 +19,17 @@
  *
  */
 #include <sstream>
-#include "dogen/dia/test_data/attribute_td.hpp"
-#include "dogen/dia/test_data/boolean_td.hpp"
-#include "dogen/dia/test_data/color_td.hpp"
-#include "dogen/dia/test_data/composite_td.hpp"
-#include "dogen/dia/test_data/enumeration_td.hpp"
 #include "dogen/dia/test_data/font_td.hpp"
-#include "dogen/dia/test_data/integer_td.hpp"
-#include "dogen/dia/test_data/point_td.hpp"
 #include "dogen/dia/test_data/real_td.hpp"
-#include "dogen/dia/test_data/rectangle_td.hpp"
+#include "dogen/dia/test_data/color_td.hpp"
+#include "dogen/dia/test_data/point_td.hpp"
 #include "dogen/dia/test_data/string_td.hpp"
+#include "dogen/dia/test_data/boolean_td.hpp"
+#include "dogen/dia/test_data/integer_td.hpp"
+#include "dogen/dia/test_data/attribute_td.hpp"
+#include "dogen/dia/test_data/composite_td.hpp"
+#include "dogen/dia/test_data/rectangle_td.hpp"
+#include "dogen/dia/test_data/enumeration_td.hpp"
 
 namespace {
 

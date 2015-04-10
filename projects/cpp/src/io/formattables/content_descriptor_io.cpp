@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
-#include "dogen/cpp/io/formattables/aspect_types_io.hpp"
-#include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
-#include "dogen/cpp/io/formattables/content_types_io.hpp"
-#include "dogen/cpp/io/formattables/file_types_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
+#include "dogen/cpp/io/formattables/file_types_io.hpp"
+#include "dogen/cpp/io/formattables/aspect_types_io.hpp"
+#include "dogen/cpp/io/formattables/content_types_io.hpp"
+#include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 
 namespace dogen {
 namespace cpp {

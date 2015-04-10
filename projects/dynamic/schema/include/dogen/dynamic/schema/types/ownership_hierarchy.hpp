@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include "dogen/dynamic/schema/serialization/ownership_hierarchy_fwd_ser.hpp"
 
 namespace dogen {

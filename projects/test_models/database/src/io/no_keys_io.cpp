@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/algorithm/string.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <ostream>
 #include "dogen/test_models/database/io/no_keys_io.hpp"
 
 

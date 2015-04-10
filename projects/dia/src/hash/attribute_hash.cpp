@@ -19,17 +19,17 @@
  *
  */
 #include <boost/variant/apply_visitor.hpp>
-#include "dogen/dia/hash/attribute_hash.hpp"
-#include "dogen/dia/hash/boolean_hash.hpp"
-#include "dogen/dia/hash/color_hash.hpp"
-#include "dogen/dia/hash/composite_hash.hpp"
-#include "dogen/dia/hash/enumeration_hash.hpp"
 #include "dogen/dia/hash/font_hash.hpp"
-#include "dogen/dia/hash/integer_hash.hpp"
-#include "dogen/dia/hash/point_hash.hpp"
 #include "dogen/dia/hash/real_hash.hpp"
-#include "dogen/dia/hash/rectangle_hash.hpp"
+#include "dogen/dia/hash/color_hash.hpp"
+#include "dogen/dia/hash/point_hash.hpp"
 #include "dogen/dia/hash/string_hash.hpp"
+#include "dogen/dia/hash/boolean_hash.hpp"
+#include "dogen/dia/hash/integer_hash.hpp"
+#include "dogen/dia/hash/attribute_hash.hpp"
+#include "dogen/dia/hash/composite_hash.hpp"
+#include "dogen/dia/hash/rectangle_hash.hpp"
+#include "dogen/dia/hash/enumeration_hash.hpp"
 
 namespace {
 

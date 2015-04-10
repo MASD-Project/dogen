@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/config/test_data/input_options_td.hpp"
 #include "dogen/config/test_data/reference_td.hpp"
+#include "dogen/config/test_data/input_options_td.hpp"
 
 namespace {
 

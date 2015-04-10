@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen/config/io/cpp_options_io.hpp"
-#include "dogen/dynamic/expansion/io/expansion_context_io.hpp"
-#include "dogen/dynamic/schema/io/repository_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
+#include "dogen/config/io/cpp_options_io.hpp"
+#include "dogen/dynamic/schema/io/repository_io.hpp"
+#include "dogen/dynamic/expansion/io/expansion_context_io.hpp"
 
 namespace dogen {
 namespace dynamic {

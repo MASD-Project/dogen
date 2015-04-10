@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/dia_to_sml/io/node_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/dia_to_sml/io/node_io.hpp"
 
 namespace boost {
 

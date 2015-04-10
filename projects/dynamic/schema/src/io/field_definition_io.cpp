@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/dynamic/schema/io/field_definition_io.hpp"
-#include "dogen/dynamic/schema/io/field_definition_types_io.hpp"
 #include "dogen/dynamic/schema/io/name_io.hpp"
-#include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
-#include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/io/value_io.hpp"
+#include "dogen/dynamic/schema/io/scope_types_io.hpp"
 #include "dogen/dynamic/schema/io/value_types_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_io.hpp"
+#include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
+#include "dogen/dynamic/schema/io/field_definition_types_io.hpp"
 
 namespace boost {
 

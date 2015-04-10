@@ -20,8 +20,8 @@
  */
 #include "dogen/config/test_data/cpp_options_td.hpp"
 #include "dogen/config/test_data/input_options_td.hpp"
-#include "dogen/config/test_data/knitting_options_td.hpp"
 #include "dogen/config/test_data/output_options_td.hpp"
+#include "dogen/config/test_data/knitting_options_td.hpp"
 #include "dogen/config/test_data/troubleshooting_options_td.hpp"
 
 namespace {

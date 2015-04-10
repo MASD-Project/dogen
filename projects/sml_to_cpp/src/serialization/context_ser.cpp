@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
-#include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/utility/serialization/unordered_map.hpp"
+#include "dogen/sml_to_cpp/serialization/context_ser.hpp"
+#include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
-#include "dogen/sml_to_cpp/serialization/context_ser.hpp"
-#include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
 
 
 namespace boost {

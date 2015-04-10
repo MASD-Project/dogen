@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/types/field_instance.hpp"
 #include "dogen/dynamic/schema/types/value.hpp"
+#include "dogen/dynamic/schema/types/field_instance.hpp"
 
 namespace boost {
 

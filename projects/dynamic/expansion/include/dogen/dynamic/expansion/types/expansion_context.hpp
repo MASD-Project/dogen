@@ -26,10 +26,10 @@
 #endif
 
 #include <algorithm>
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/dynamic/expansion/serialization/expansion_context_fwd_ser.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/config/types/cpp_options.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/expansion/serialization/expansion_context_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

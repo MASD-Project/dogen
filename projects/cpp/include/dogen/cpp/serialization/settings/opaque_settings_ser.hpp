@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::settings::opaque_settings)

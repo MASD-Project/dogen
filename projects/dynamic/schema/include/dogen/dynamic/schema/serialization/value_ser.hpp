@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen/dynamic/schema/types/value.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::dynamic::schema::value)

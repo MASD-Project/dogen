@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

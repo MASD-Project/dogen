@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/dynamic/schema/io/field_instance_io.hpp"
 #include "dogen/dynamic/schema/io/value_io.hpp"
+#include "dogen/dynamic/schema/io/field_instance_io.hpp"
 
 namespace boost {
 

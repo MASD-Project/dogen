@@ -25,21 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/variant.hpp>
 #include <string>
 #include <vector>
-#include "dogen/dia/serialization/attribute_fwd_ser.hpp"
-#include "dogen/dia/types/boolean.hpp"
-#include "dogen/dia/types/color.hpp"
-#include "dogen/dia/types/composite.hpp"
-#include "dogen/dia/types/enumeration.hpp"
+#include <algorithm>
+#include <boost/variant.hpp>
 #include "dogen/dia/types/font.hpp"
-#include "dogen/dia/types/integer.hpp"
-#include "dogen/dia/types/point.hpp"
 #include "dogen/dia/types/real.hpp"
-#include "dogen/dia/types/rectangle.hpp"
+#include "dogen/dia/types/color.hpp"
+#include "dogen/dia/types/point.hpp"
 #include "dogen/dia/types/string.hpp"
+#include "dogen/dia/types/boolean.hpp"
+#include "dogen/dia/types/integer.hpp"
+#include "dogen/dia/types/composite.hpp"
+#include "dogen/dia/types/rectangle.hpp"
+#include "dogen/dia/types/enumeration.hpp"
+#include "dogen/dia/serialization/attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia {

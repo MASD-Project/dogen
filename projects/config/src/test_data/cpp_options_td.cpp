@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/config/test_data/cpp_facet_types_td.hpp"
 #include "dogen/config/test_data/cpp_options_td.hpp"
+#include "dogen/config/test_data/cpp_facet_types_td.hpp"
 
 namespace {
 

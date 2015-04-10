@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
+#include <algorithm>
 #include "dogen/formatters/serialization/licence_fwd_ser.hpp"
 
 namespace dogen {

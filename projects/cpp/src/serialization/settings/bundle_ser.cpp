@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
-#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
-#include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/type_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
-#include "dogen/utility/serialization/unordered_map.hpp"
+#include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
 
 
 namespace boost {

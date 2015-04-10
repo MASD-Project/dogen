@@ -18,30 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include "dogen/config/serialization/registrar_ser.hpp"
-#include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
-#include "dogen/cpp/serialization/settings/odb_settings_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
+#include "dogen/config/serialization/registrar_ser.hpp"
+#include "dogen/cpp/serialization/settings/odb_settings_ser.hpp"
+#include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/primitive_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/new_class_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
 
 namespace dogen {
 namespace cpp {

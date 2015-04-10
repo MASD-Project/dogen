@@ -27,13 +27,13 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/schema/serialization/field_definition_fwd_ser.hpp"
-#include "dogen/dynamic/schema/types/field_definition_types.hpp"
 #include "dogen/dynamic/schema/types/name.hpp"
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
-#include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/value_fwd.hpp"
+#include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/dynamic/schema/types/value_types.hpp"
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/schema/types/field_definition_types.hpp"
+#include "dogen/dynamic/schema/serialization/field_definition_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

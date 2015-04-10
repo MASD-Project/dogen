@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include <boost/filesystem/path.hpp>
-#include <boost/shared_ptr.hpp>
 #include <string>
-#include "dogen/cpp/serialization/formattables/file_info_fwd_ser.hpp"
-#include "dogen/cpp/types/formattables/content_descriptor.hpp"
-#include "dogen/cpp/types/formattables/formattable_fwd.hpp"
+#include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/formattables/includes.hpp"
+#include "dogen/cpp/types/formattables/formattable_fwd.hpp"
+#include "dogen/cpp/types/formattables/content_descriptor.hpp"
+#include "dogen/cpp/serialization/formattables/file_info_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

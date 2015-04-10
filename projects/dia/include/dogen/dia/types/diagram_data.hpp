@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <vector>
-#include "dogen/dia/serialization/diagram_data_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/dia/types/attribute.hpp"
+#include "dogen/dia/serialization/diagram_data_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia {

@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <iosfwd>
-#include "dogen/sml/serialization/primitive_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/sml/types/type.hpp"
+#include "dogen/sml/serialization/primitive_fwd_ser.hpp"
 
 namespace dogen {
 namespace sml {

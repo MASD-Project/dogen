@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/formattables/cmakelists_info_io.hpp"
-#include "dogen/cpp/io/formattables/file_info_io.hpp"
-#include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
 #include "dogen/cpp/io/formattables/project_io.hpp"
+#include "dogen/cpp/io/formattables/file_info_io.hpp"
+#include "dogen/cpp/io/formattables/cmakelists_info_io.hpp"
+#include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
 
 namespace std {
 

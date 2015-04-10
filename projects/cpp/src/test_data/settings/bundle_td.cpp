@@ -20,10 +20,10 @@
  */
 #include <sstream>
 #include "dogen/cpp/test_data/settings/bundle_td.hpp"
-#include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
-#include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/type_settings_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
+#include "dogen/cpp/test_data/settings/formatter_settings_td.hpp"
 
 namespace {
 

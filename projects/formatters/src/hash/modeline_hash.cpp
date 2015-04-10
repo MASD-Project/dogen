@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
 #include "dogen/formatters/hash/modeline_hash.hpp"
+#include "dogen/formatters/hash/modeline_field_hash.hpp"
 #include "dogen/formatters/hash/modeline_locations_hash.hpp"
 
 namespace {

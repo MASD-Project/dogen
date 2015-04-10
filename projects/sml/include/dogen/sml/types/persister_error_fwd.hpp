@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <boost/exception/info.hpp>
 #include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace sml {

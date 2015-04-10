@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/input_options_hash.hpp"
 #include "dogen/config/hash/reference_hash.hpp"
+#include "dogen/config/hash/input_options_hash.hpp"
 
 namespace {
 

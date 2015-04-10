@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
-#include <boost/io/ios_state.hpp>
 #include <ostream>
-#include "dogen/config/io/cpp_facet_types_io.hpp"
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/config/io/cpp_options_io.hpp"
+#include "dogen/config/io/cpp_facet_types_io.hpp"
 
 namespace std {
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/hash/diagram_data_hash.hpp"
-#include "dogen/dia/hash/diagram_hash.hpp"
 #include "dogen/dia/hash/layer_hash.hpp"
+#include "dogen/dia/hash/diagram_hash.hpp"
+#include "dogen/dia/hash/diagram_data_hash.hpp"
 
 namespace {
 

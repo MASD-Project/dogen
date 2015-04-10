@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/test_data/diagram_data_td.hpp"
-#include "dogen/dia/test_data/diagram_td.hpp"
 #include "dogen/dia/test_data/layer_td.hpp"
+#include "dogen/dia/test_data/diagram_td.hpp"
+#include "dogen/dia/test_data/diagram_data_td.hpp"
 
 namespace {
 

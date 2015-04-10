@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string.hpp>
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/enum_info_io.hpp"
 #include "dogen/cpp/io/formattables/enumerator_info_io.hpp"

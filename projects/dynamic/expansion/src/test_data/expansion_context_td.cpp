@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/test_data/cpp_options_td.hpp"
-#include "dogen/dynamic/expansion/test_data/expansion_context_td.hpp"
-#include "dogen/dynamic/schema/test_data/repository_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
+#include "dogen/config/test_data/cpp_options_td.hpp"
+#include "dogen/dynamic/schema/test_data/repository_td.hpp"
+#include "dogen/dynamic/expansion/test_data/expansion_context_td.hpp"
 
 namespace {
 

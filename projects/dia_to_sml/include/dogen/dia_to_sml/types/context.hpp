@@ -25,15 +25,15 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia_to_sml {

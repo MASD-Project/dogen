@@ -19,16 +19,16 @@
  *
  */
 #include <sstream>
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
-#include "dogen/sml/test_data/concept_td.hpp"
-#include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
+#include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/sml/test_data/object_td.hpp"
-#include "dogen/sml/test_data/origin_types_td.hpp"
+#include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
-#include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/sml/test_data/enumeration_td.hpp"
+#include "dogen/sml/test_data/origin_types_td.hpp"
+#include "dogen/sml/test_data/generation_types_td.hpp"
+#include "dogen/dynamic/schema/test_data/object_td.hpp"
 
 namespace {
 

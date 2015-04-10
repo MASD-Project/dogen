@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/utility.hpp>
-#include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
+#include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 
 
 namespace boost {

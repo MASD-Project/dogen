@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
-#include "dogen/dynamic/schema/serialization/object_fwd_ser.hpp"
 #include "dogen/dynamic/schema/types/field_instance.hpp"
+#include "dogen/dynamic/schema/serialization/object_fwd_ser.hpp"
 
 namespace dogen {
 namespace dynamic {

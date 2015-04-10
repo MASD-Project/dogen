@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/class_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/enum_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/exception_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/namespace_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/registrar_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml_to_cpp/hash/context_hash.hpp"
 #include "dogen/sml_to_cpp/hash/relationships_hash.hpp"
+#include "dogen/cpp/hash/formattables/enum_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/class_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/exception_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/namespace_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/registrar_info_hash.hpp"
 
 namespace {
 

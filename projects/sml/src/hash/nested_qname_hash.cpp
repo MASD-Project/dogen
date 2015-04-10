@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/nested_qname_hash.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/sml/hash/nested_qname_hash.hpp"
 
 namespace {
 

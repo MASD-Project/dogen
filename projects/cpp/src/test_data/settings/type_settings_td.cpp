@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 #include "dogen/cpp/test_data/settings/type_settings_td.hpp"
+#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 
 namespace {
 

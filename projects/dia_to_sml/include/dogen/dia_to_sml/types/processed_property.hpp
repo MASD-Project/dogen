@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
-#include "dogen/dia_to_sml/serialization/processed_property_fwd_ser.hpp"
+#include <algorithm>
 #include "dogen/dia_to_sml/types/processed_comment.hpp"
+#include "dogen/dia_to_sml/serialization/processed_property_fwd_ser.hpp"
 
 namespace dogen {
 namespace dia_to_sml {

@@ -19,10 +19,10 @@
  *
  */
 #include <sstream>
-#include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
+#include "dogen/cpp/test_data/formattables/includes_td.hpp"
 #include "dogen/cpp/test_data/formattables/file_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
-#include "dogen/cpp/test_data/formattables/includes_td.hpp"
+#include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
 
 namespace {
 

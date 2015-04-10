@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <string>
+#include <algorithm>
 #include <unordered_map>
-#include "dogen/formatters/serialization/modeline_group_fwd_ser.hpp"
 #include "dogen/formatters/types/modeline.hpp"
+#include "dogen/formatters/serialization/modeline_group_fwd_ser.hpp"
 
 namespace dogen {
 namespace formatters {

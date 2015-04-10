@@ -26,10 +26,10 @@
 #endif
 
 #include <algorithm>
-#include <boost/optional.hpp>
 #include <unordered_set>
-#include "dogen/sml/hash/qname_hash.hpp"
+#include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml_to_cpp/serialization/relationships_fwd_ser.hpp"
 
 namespace dogen {

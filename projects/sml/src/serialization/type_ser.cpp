@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/nvp.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/optional.hpp>
-#include <boost/serialization/string.hpp>
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
-#include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/sml/serialization/object_ser.hpp"
-#include "dogen/sml/serialization/origin_types_ser.hpp"
-#include "dogen/sml/serialization/primitive_ser.hpp"
-#include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
+#include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/sml/serialization/object_ser.hpp"
+#include "dogen/sml/serialization/primitive_ser.hpp"
+#include "dogen/sml/serialization/enumeration_ser.hpp"
+#include "dogen/sml/serialization/origin_types_ser.hpp"
+#include "dogen/sml/serialization/generation_types_ser.hpp"
+#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(

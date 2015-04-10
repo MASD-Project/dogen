@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/sml_to_cpp/types/context.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/visitor_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
-#include "dogen/cpp/types/formattables/visitor_info.hpp"
-#include "dogen/sml_to_cpp/types/context.hpp"
 
 namespace boost {
 

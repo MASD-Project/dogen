@@ -19,15 +19,15 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/formattables/class_info_io.hpp"
-#include "dogen/cpp/io/formattables/enum_info_io.hpp"
-#include "dogen/cpp/io/formattables/exception_info_io.hpp"
-#include "dogen/cpp/io/formattables/namespace_info_io.hpp"
-#include "dogen/cpp/io/formattables/registrar_info_io.hpp"
-#include "dogen/cpp/io/formattables/visitor_info_io.hpp"
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml_to_cpp/io/context_io.hpp"
 #include "dogen/sml_to_cpp/io/relationships_io.hpp"
+#include "dogen/cpp/io/formattables/enum_info_io.hpp"
+#include "dogen/cpp/io/formattables/class_info_io.hpp"
+#include "dogen/cpp/io/formattables/visitor_info_io.hpp"
+#include "dogen/cpp/io/formattables/exception_info_io.hpp"
+#include "dogen/cpp/io/formattables/namespace_info_io.hpp"
+#include "dogen/cpp/io/formattables/registrar_info_io.hpp"
 
 namespace boost {
 

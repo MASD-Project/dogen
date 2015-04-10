@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include <list>
 #include <string>
+#include <algorithm>
 #include "dogen/sml_to_cpp/serialization/inclusion_lists_fwd_ser.hpp"
 
 namespace dogen {

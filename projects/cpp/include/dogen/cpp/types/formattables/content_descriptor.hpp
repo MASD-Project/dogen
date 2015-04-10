@@ -26,12 +26,12 @@
 #endif
 
 #include <algorithm>
+#include "dogen/sml/types/qname.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/cpp/serialization/formattables/content_descriptor_fwd_ser.hpp"
+#include "dogen/cpp/types/formattables/file_types.hpp"
 #include "dogen/cpp/types/formattables/aspect_types.hpp"
 #include "dogen/cpp/types/formattables/content_types.hpp"
-#include "dogen/cpp/types/formattables/file_types.hpp"
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/cpp/serialization/formattables/content_descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace cpp {

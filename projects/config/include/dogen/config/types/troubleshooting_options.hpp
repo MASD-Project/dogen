@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/serialization/troubleshooting_options_fwd_ser.hpp"
 #include "dogen/config/types/archive_types.hpp"
+#include "dogen/config/serialization/troubleshooting_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace config {

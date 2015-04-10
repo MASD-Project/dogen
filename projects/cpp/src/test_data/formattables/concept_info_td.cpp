@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/state_td.hpp"
+#include "dogen/cpp/test_data/formattables/entity_td.hpp"
+#include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
 
 namespace {
 
