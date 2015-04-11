@@ -30,6 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.parser"));
 
+const std::string equals("=");
 const std::string start_scriptlet_block("<#+");
 const std::string start_scriptlet_segment("<#=");
 const std::string start_declaration("<#@");
@@ -42,6 +43,7 @@ const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
+// const std::string separator_not_found("Expected separator on KVP.");
 
 }
 
@@ -60,6 +62,7 @@ text_template parser::parse(const std::string& s) const {
         in_declarations_block(true);
     std::string line;
     std::istringstream is(s);
+    std::list<std::pair<std::string, std::string> > kvps;
     while (std::getline(is, line)) {
         if (boost::starts_with(line, start_declaration)) {
             BOOST_LOG_SEV(lg, debug) << "is declaration";
@@ -68,12 +71,25 @@ text_template parser::parse(const std::string& s) const {
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
             }
 
-            // FIXME
+            // FIXME: need to setup fields in order to manage kvps
+            // boost::replace_all(line, start_declaration, line);
+            // boost::replace_all(line, end_block, line);
+
+            // const auto pos(line.find_first_of(equals));
+            // if (pos == std::string::npos) {
+            //     BOOST_LOG_SEV(lg, error) << separator_not_found;
+            //     BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
+            // }
+
+            // const auto key(line.substr(0, pos));
+            // const auto value(line.substr(pos + 1));
+            // kvps.push_back(std::make_pair(key, value));
             continue;
         }
+
         in_declarations_block = false;
 
-        if (boost::starts_with(line, start_scriptlet_block)) {
+        if (boost::contains(line, start_scriptlet_block)) {
             if (line.size() != 3) {
                 BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
                 BOOST_THROW_EXCEPTION(
@@ -97,7 +113,7 @@ text_template parser::parse(const std::string& s) const {
             continue;
         }
 
-        if (boost::starts_with(line, end_block)) {
+        if (boost::contains(line, end_block)) {
             BOOST_LOG_SEV(lg, debug) << "is end block";
 
             if (line.size() != 2) {

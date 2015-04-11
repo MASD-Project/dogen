@@ -12,13 +12,13 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-11 Sat 16:06]
+Clock summary at [2015-04-11 Sat 20:27]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *27:29* |       |       |
+| *Total time*                                                            | *29:48* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 27:29 |       |
+| Active                                                                  |         | 29:48 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
@@ -28,7 +28,8 @@ Clock summary at [2015-04-11 Sat 16:06]
 | COMPLETED Consider creating a include list sorter                       |         |       |  1:37 |
 | COMPLETED Create the stitch and stitcher projects                       |         |       |  1:31 |
 | COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
-| STARTED Add basic functionality to stitch                               |         |       |  2:07 |
+| COMPLETED Fix streaming of strings in variants                          |         |       |  1:02 |
+| STARTED Add basic functionality to stitch                               |         |       |  3:24 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -338,6 +339,7 @@ the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
 *** STARTED Add basic functionality to stitch                         :story:
+    CLOCK: [2015-04-11 Sat 19:39]--[2015-04-11 Sat 20:27] =>  0:48
     CLOCK: [2015-04-11 Sat 19:11]--[2015-04-11 Sat 19:31] =>  0:20
     CLOCK: [2015-04-11 Sat 18:00]--[2015-04-11 Sat 18:09] =>  0:09
     CLOCK: [2015-04-11 Sat 14:42]--[2015-04-11 Sat 16:06] =>  1:24
