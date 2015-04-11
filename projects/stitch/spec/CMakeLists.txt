@@ -40,5 +40,5 @@ add_custom_target(run_stitch_spec
     DEPENDS stitch_spec)
 add_dependencies(run_all_specs run_stitch_spec)
 
-add_boost_tests(spec ${stitch_spec_files})
+add_boost_tests(stitch ${stitch_spec_files})
 install(TARGETS stitch_spec RUNTIME DESTINATION bin COMPONENT tests)
