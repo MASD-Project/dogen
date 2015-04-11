@@ -40,6 +40,8 @@ const std::string cannot_start_scriptlet(
 const std::string end_without_start("Found end block without a start block.");
 const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
+const std::string unexpected_additional_content(
+    "Unexpected additional content.");
 
 }
 
@@ -72,6 +74,12 @@ text_template parser::parse(const std::string& s) const {
         in_declarations_block = false;
 
         if (boost::starts_with(line, start_scriptlet_block)) {
+            if (line.size() != 3) {
+                BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
+                BOOST_THROW_EXCEPTION(
+                    parsing_error(unexpected_additional_content));
+            }
+
             BOOST_LOG_SEV(lg, debug) << "is scriplet";
 
             if (in_scriplet_block) {
@@ -91,6 +99,12 @@ text_template parser::parse(const std::string& s) const {
 
         if (boost::starts_with(line, end_block)) {
             BOOST_LOG_SEV(lg, debug) << "is end block";
+
+            if (line.size() != 2) {
+                BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
+                BOOST_THROW_EXCEPTION(
+                    parsing_error(unexpected_additional_content));
+            }
 
             if (!in_scriplet_block && !in_mixed_content_block) {
                 BOOST_LOG_SEV(lg, error) << end_without_start;
