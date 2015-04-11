@@ -226,6 +226,33 @@ such as c files first, then standard c++ files, then boost, etc. We
 should have a function that given a list of includes performs this
 ordering.
 
+*** COMPLETED Create the stitch and stitcher projects                 :story:
+    CLOSED: [2015-04-11 Sat 08:45]
+    CLOCK: [2015-04-11 Sat 08:25]--[2015-04-11 Sat 08:45] =>  0:20
+    CLOCK: [2015-04-10 Fri 16:51]--[2015-04-10 Fri 17:59] =>  1:08
+    CLOCK: [2015-04-10 Fri 16:47]--[2015-04-10 Fri 16:50] =>  0:03
+
+We need to create a simple model for stitch and a command line utility
+around it. [[https://msdn.microsoft.com/en-us/library/ff697256.aspx][T4 terminology]]:
+
+#+begin_quote
+A T4 template consists of declarations, enclosed in <#@...#> angle
+brackets, followed by a sequence of text strings and
+scriptlets. Scriptlets are fragments of C# or Visual Basic contained
+in <#= …#> or <#+ …#> angle brackets. T4 templates follow the
+following overall syntax:
+
+- A declaration of the language used by the scriptlets. All scriptlets
+  in a template must be written in the same language.
+- A sequence of so called “property processor” declarations that
+  define template properties use to pass parameters to the template.
+- A series of arbitrary text strings and scriptlets. The scriptlets
+  are interspersed with the text, with scriptlets used to dynamically
+  generate specific text as defined by the scriptlet expression.
+- A sequence of declarations of template-specific methods. These
+  methods can be called from scriptlets within the template.
+#+end_quote
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -295,16 +322,15 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
-*** STARTED Create the stitch and stitcher projects                   :story:
-    CLOCK: [2015-04-10 Fri 16:47]--[2015-04-10 Fri 16:50] =>  0:03
-
-We need to create a simple model for stitch and a command line utility
-around it.
-
 *** Add basic functionality to stitch                                 :story:
 
 We need to implement stitch as per analysis in backlog, with a few
 simple unit tests.
+
+We could make use of the meta-data to build the copyright etc
+information when instantiating a stitch template. We need to split the
+fields into knitter and stitch fields so that we do not load the wrong
+fields.
 
 *** Create a forward declarations formatter using stitch              :story:
 

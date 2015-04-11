@@ -152,12 +152,13 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
     ${CMAKE_SOURCE_DIR}/projects/dynamic/schema/include
     ${CMAKE_SOURCE_DIR}/projects/dynamic/expansion/include
+    ${CMAKE_SOURCE_DIR}/projects/stitch/include
     )
 
 #
 # add all other projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_sml/spec)
@@ -165,25 +166,30 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_formatters)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_formatters/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_formatters/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_cpp/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sml_to_cpp/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/schema/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/schema/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/expansion/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/expansion/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/spec)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
