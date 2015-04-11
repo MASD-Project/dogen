@@ -30,10 +30,9 @@
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/workflow.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("knitter"));
 const std::string log_file_prefix("log/dogen_knitter_");
 const std::string get_help("Use --help option to see usage instructions.");

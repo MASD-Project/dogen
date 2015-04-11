@@ -12,13 +12,13 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-11 Sat 11:24]
+Clock summary at [2015-04-11 Sat 11:51]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *25:22* |       |       |
+| *Total time*                                                            | *25:48* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 25:22 |       |
+| Active                                                                  |         | 25:48 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
@@ -28,6 +28,7 @@ Clock summary at [2015-04-11 Sat 11:24]
 | COMPLETED Consider creating a include list sorter                       |         |       |  1:37 |
 | COMPLETED Create the stitch and stitcher projects                       |         |       |  1:31 |
 | COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
+| STARTED Add basic functionality to stitch                               |         |       |  0:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -329,7 +330,8 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
-*** Add basic functionality to stitch                                 :story:
+*** STARTED Add basic functionality to stitch                         :story:
+    CLOCK: [2015-04-11 Sat 11:25]--[2015-04-11 Sat 11:51] =>  0:26
 
 We need to implement stitch as per analysis in backlog, with a few
 simple unit tests.

@@ -20,19 +20,32 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/types/parser.hpp"
 
 namespace {
 
 const std::string empty;
 const std::string test_module("stitch");
-const std::string test_suite("test_spec");
+const std::string test_suite("parser_spec");
+
+const std::string only_text_content_in_single_line("some text content");
+
+dogen::stitch::text_template parse(const std::string& s) {
+    dogen::stitch::parser p;
+    return p.parse(s);
+}
 
 }
 
-BOOST_AUTO_TEST_SUITE(test)
+BOOST_AUTO_TEST_SUITE(parser)
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
+BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("string_with_only_text_content_in_single_line_results_in_expected_template");
+    const auto tt(parse(only_text_content_in_single_line));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+
+    // BOOST_REQUIRE(tt.content().size() == 1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
