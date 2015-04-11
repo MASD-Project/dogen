@@ -153,6 +153,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dynamic/schema/include
     ${CMAKE_SOURCE_DIR}/projects/dynamic/expansion/include
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
+    ${CMAKE_SOURCE_DIR}/projects/stitcher/include
     )
 
 #
@@ -190,6 +191,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/expansion/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dynamic/expansion/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/spec)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)

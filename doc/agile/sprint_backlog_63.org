@@ -12,13 +12,13 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-10 Fri 16:50]
+Clock summary at [2015-04-11 Sat 11:24]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *22:45* |       |       |
+| *Total time*                                                            | *25:22* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 22:45 |       |
+| Active                                                                  |         | 25:22 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
@@ -26,7 +26,8 @@ Clock summary at [2015-04-10 Fri 16:50]
 | COMPLETED Split merged model expansion from individual models expansion |         |       |  3:58 |
 | COMPLETED Create a "populate includes operation"                        |         |       | 13:01 |
 | COMPLETED Consider creating a include list sorter                       |         |       |  1:37 |
-| STARTED Create the stitch and stitcher projects                         |         |       |  0:03 |
+| COMPLETED Create the stitch and stitcher projects                       |         |       |  1:31 |
+| COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -252,6 +253,12 @@ following overall syntax:
 - A sequence of declarations of template-specific methods. These
   methods can be called from scriptlets within the template.
 #+end_quote
+
+*** COMPLETED Create a =stitcher= skeleton                            :story:
+    CLOSED: [2015-04-11 Sat 11:24]
+    CLOCK: [2015-04-11 Sat 10:15]--[2015-04-11 Sat 11:24] =>  1:09
+
+We need to clone =knitter= into =stitcher= and rename namespaces etc.
 
 *** STARTED Create a "supported" expander                             :story:
 
