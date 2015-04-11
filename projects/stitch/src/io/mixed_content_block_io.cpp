@@ -43,7 +43,7 @@ struct boost_variant_std_string_dogen_stitch_mixed_content_line_visitor : public
     ~boost_variant_std_string_dogen_stitch_mixed_content_line_visitor() { stream_ << " }"; }
 
     void operator()(const std::string& v) const {
-        stream_ << v;
+        stream_ << "\"" << tidy_up_string(v) << "\"";
     }
 
     void operator()(const dogen::stitch::mixed_content_line& v) const {

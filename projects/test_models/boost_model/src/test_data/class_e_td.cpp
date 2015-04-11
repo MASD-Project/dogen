@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/test_models/boost_model/test_data/class_e_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
 
@@ -72,6 +73,31 @@ std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, 
     return r;
 }
 
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+char create_char(const unsigned int position) {
+    return static_cast<char>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
+}
+
+
+boost::variant<int, std::string, char>
+create_boost_variant_int_std_string_char(unsigned int position) {
+    boost::variant<int, std::string, char> r;
+
+    if (position == 0 || ((position % 3) == 0))
+        r = create_int(position);
+    else if (position == 1 || ((position %4) == 0))
+        r = create_std_string(position);
+    else if ((position % 2) == 0)
+        r = create_char(position);
+
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -85,6 +111,7 @@ populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_variant_int_double(position + 0));
     v.prop_1(create_boost_variant_int_dogen_test_models_boost_model_class_derived_double(position + 1));
     v.prop_2(create_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(position + 2));
+    v.prop_3(create_boost_variant_int_std_string_char(position + 3));
 }
 
 class_e_generator::result_type

@@ -112,8 +112,9 @@ sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
             utility_.open_scope();
             {
                 positive_indenter_scope s(indenter_);
-                stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
-                        << utility_.quote(", ") << ";" << std::endl;
+                stream_ << indenter_ << "if (i != v.begin()) s"
+                        << space_inserter << utility_.quote(", ")
+                        << ";" << std::endl;
 
                 if (containee.is_date() || containee.is_ptime() ||
                     containee.is_time_duration()) {
@@ -537,6 +538,13 @@ variant_helper(const cpp::formattables::nested_type_info& nti) {
 
                         stream_ << indenter_ << "stream_" << space_inserter
                                 << utility_.quote(" }") << ";"
+                                << std::endl;
+                    } else if (c.is_string_like() || c.is_char_like()) {
+                        const std::string tus(c.is_char_like() ? "v" :
+                            "tidy_up_string(v)");
+
+                        stream_ << indenter_ << "stream_" << space_inserter
+                                << utility_.quote_escaped_streamed(tus) << ";"
                                 << std::endl;
                     } else
                         stream_ << indenter_ << "stream_ << v;" << std::endl;

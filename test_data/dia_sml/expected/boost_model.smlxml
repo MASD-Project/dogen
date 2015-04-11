@@ -2734,7 +2734,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>3</count>
+					<count>4</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -2996,6 +2996,96 @@
 											</children>
 											<is_pointer>0</is_pointer>
 										</item>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+							</children>
+							<is_pointer>0</is_pointer>
+						</type>
+						<default_value></default_value>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<extensions>
+							<fields>
+								<count>0</count>
+								<bucket_count>11</bucket_count>
+								<item_version>0</item_version>
+							</fields>
+						</extensions>
+						<name>prop_3</name>
+						<type>
+							<type>
+								<model_name>boost</model_name>
+								<external_module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_module_path>
+								<module_path>
+									<count>0</count>
+									<item_version>0</item_version>
+								</module_path>
+								<simple_name>variant</simple_name>
+							</type>
+							<children>
+								<count>3</count>
+								<item_version>0</item_version>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>int</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name>std</model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>string</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
+									</children>
+									<is_pointer>0</is_pointer>
+								</item>
+								<item>
+									<type>
+										<model_name></model_name>
+										<external_module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_module_path>
+										<module_path>
+											<count>0</count>
+											<item_version>0</item_version>
+										</module_path>
+										<simple_name>char</simple_name>
+									</type>
+									<children>
+										<count>0</count>
+										<item_version>0</item_version>
 									</children>
 									<is_pointer>0</is_pointer>
 								</item>

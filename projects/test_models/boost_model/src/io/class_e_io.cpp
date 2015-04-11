@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/variant/apply_visitor.hpp>
 #include "dogen/test_models/boost_model/io/class_e_io.hpp"
 #include "dogen/test_models/boost_model/io/class_derived_io.hpp"
@@ -112,6 +113,53 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::varian
 
 }
 
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace boost {
+
+struct boost_variant_int_std_string_char_visitor : public boost::static_visitor<> {
+    boost_variant_int_std_string_char_visitor(std::ostream& s) : stream_(s) {
+        s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
+        s << "\"data\": ";
+    }
+
+    ~boost_variant_int_std_string_char_visitor() { stream_ << " }"; }
+
+    void operator()(const int v) const {
+        stream_ << "{ " << "\"__type__\": " << "\"int\"" << ", ";
+        stream_ << "\"value\": ";
+        stream_ << v;
+        stream_ << " }";
+    }
+
+    void operator()(const std::string& v) const {
+        stream_ << "\"" << tidy_up_string(v) << "\"";
+    }
+
+    void operator()(const char v) const {
+        stream_ << "{ " << "\"__type__\": " << "\"char\"" << ", ";
+        stream_ << "\"value\": ";
+        stream_ << v;
+        stream_ << " }";
+    }
+
+private:
+    std::ostream& stream_;
+};
+
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<int, std::string, char>& v) {
+    boost::apply_visitor(boost_variant_int_std_string_char_visitor(s), v);
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace test_models {
 namespace boost_model {
@@ -127,7 +175,8 @@ std::ostream& operator<<(std::ostream& s, const class_e& v) {
       << "\"__type__\": " << "\"dogen::test_models::boost_model::class_e\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_2\": " << v.prop_2()
+      << "\"prop_2\": " << v.prop_2() << ", "
+      << "\"prop_3\": " << v.prop_3()
       << " }";
     return(s);
 }

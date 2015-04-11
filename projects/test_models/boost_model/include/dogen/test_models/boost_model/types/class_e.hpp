@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <vector>
 #include <algorithm>
 #include <boost/variant.hpp>
@@ -48,7 +49,8 @@ public:
     class_e(
         const boost::variant<int, double>& prop_0,
         const boost::variant<int, dogen::test_models::boost_model::class_derived, double>& prop_1,
-        const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& prop_2);
+        const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& prop_2,
+        const boost::variant<int, std::string, char>& prop_3);
 
 private:
     template<typename Archive>
@@ -73,6 +75,11 @@ public:
     void prop_2(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& v);
     void prop_2(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >&& v);
 
+    const boost::variant<int, std::string, char>& prop_3() const;
+    boost::variant<int, std::string, char>& prop_3();
+    void prop_3(const boost::variant<int, std::string, char>& v);
+    void prop_3(const boost::variant<int, std::string, char>&& v);
+
 public:
     bool operator==(const class_e& rhs) const;
     bool operator!=(const class_e& rhs) const {
@@ -87,6 +94,7 @@ private:
     boost::variant<int, double> prop_0_;
     boost::variant<int, dogen::test_models::boost_model::class_derived, double> prop_1_;
     std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> > prop_2_;
+    boost::variant<int, std::string, char> prop_3_;
 };
 
 } } }

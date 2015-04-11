@@ -81,6 +81,29 @@ inline std::size_t hash_std_vector_boost_variant_int_dogen_test_models_boost_mod
     return seed;
 }
 
+struct boost_variant_int_std_string_char_visitor : public boost::static_visitor<> {
+    boost_variant_int_std_string_char_visitor() : hash(0) {}
+    void operator()(const int v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const std::string& v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const char v) const {
+        combine(hash, v);
+    }
+
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_boost_variant_int_std_string_char(const boost::variant<int, std::string, char>& v) {
+    boost_variant_int_std_string_char_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
+}
+
 }
 
 namespace dogen {
@@ -93,6 +116,7 @@ std::size_t class_e_hasher::hash(const class_e&v) {
     combine(seed, hash_boost_variant_int_double(v.prop_0()));
     combine(seed, hash_boost_variant_int_dogen_test_models_boost_model_class_derived_double(v.prop_1()));
     combine(seed, hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(v.prop_2()));
+    combine(seed, hash_boost_variant_int_std_string_char(v.prop_3()));
 
     return seed;
 }
