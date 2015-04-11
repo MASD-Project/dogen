@@ -3760,6 +3760,18 @@ Start of more recent notes on this:
   as part of knitter's workflows. Perhaps as part of the expansion, we
   could set a number of stitch fields which would then be picked up by
   some knit-specific workflow classes.
+- when we have merging support we can actually implement =insert_code=
+  in a good way. We could mark the formatters with meta-data stating
+  they have a method which is a stitch template. That then results in
+  a c++ operation which makes reference to stitch. When converting SML
+  into the CPP model we can add a "content" property to the stitchable
+  operations that contains the expansion of the stitch
+  template. Finally, when inside of the stitch template that is
+  code-generating, we will loop through all of the operations. For the
+  stitched ones, we can then dump the content property. Merge support
+  is required because formatters are always expected to have a
+  component of hand-crafting (include providers etc) and cannot be
+  implemented without it.
 
 End of more recent notes
 
