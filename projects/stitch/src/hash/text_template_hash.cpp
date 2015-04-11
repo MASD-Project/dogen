@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/block_hash.hpp"
+#include <boost/variant/apply_visitor.hpp>
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/dynamic/schema/hash/object_hash.hpp"
+#include "dogen/stitch/hash/scriptlet_block_hash.hpp"
+#include "dogen/stitch/hash/mixed_content_block_hash.hpp"
 
 namespace {
 
@@ -31,16 +33,29 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_stitch_block(const boost::shared_ptr<dogen::stitch::block>& v){
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
+struct boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor : public boost::static_visitor<> {
+    boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor() : hash(0) {}
+    void operator()(const dogen::stitch::mixed_content_block& v) const {
+        combine(hash, v);
+    }
+
+    void operator()(const dogen::stitch::scriptlet_block& v) const {
+        combine(hash, v);
+    }
+
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block(const boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block>& v) {
+    boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_stitch_block_(const std::list<boost::shared_ptr<dogen::stitch::block> >& v){
+inline std::size_t hash_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v){
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_stitch_block(i));
+        combine(seed, hash_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block(i));
     }
     return seed;
 }
@@ -54,7 +69,7 @@ std::size_t text_template_hasher::hash(const text_template&v) {
     std::size_t seed(0);
 
     combine(seed, v.extensions());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_stitch_block_(v.content()));
+    combine(seed, hash_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(v.content()));
 
     return seed;
 }

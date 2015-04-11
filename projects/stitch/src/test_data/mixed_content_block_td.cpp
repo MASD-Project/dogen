@@ -18,21 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_td.hpp"
+#include <sstream>
 #include "dogen/stitch/test_data/mixed_content_line_td.hpp"
 #include "dogen/stitch/test_data/mixed_content_block_td.hpp"
 
 namespace {
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
 
 dogen::stitch::mixed_content_line
 create_dogen_stitch_mixed_content_line(const unsigned int position) {
     return dogen::stitch::mixed_content_line_generator::create(position);
 }
 
-std::list<dogen::stitch::mixed_content_line> create_std_list_dogen_stitch_mixed_content_line(unsigned int position) {
-    std::list<dogen::stitch::mixed_content_line> r;
+
+boost::variant<std::string, dogen::stitch::mixed_content_line>
+create_boost_variant_std_string_dogen_stitch_mixed_content_line(unsigned int position) {
+    boost::variant<std::string, dogen::stitch::mixed_content_line> r;
+
+    if (position == 0 || ((position % 2) == 0))
+        r = create_std_string(position);
+    else if (position == 1 || ((position %3) == 0))
+        r = create_dogen_stitch_mixed_content_line(position);
+
+    return r;
+}
+
+std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> > create_std_list_boost_variant_std_string_dogen_stitch_mixed_content_line_(unsigned int position) {
+    std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_stitch_mixed_content_line(position + i));
+        r.push_back(create_boost_variant_std_string_dogen_stitch_mixed_content_line(position + i));
     }
     return r;
 }
@@ -46,8 +65,7 @@ mixed_content_block_generator::mixed_content_block_generator() : position_(0) { 
 
 void mixed_content_block_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::stitch::block_generator::populate(position, v);
-    v.content(create_std_list_dogen_stitch_mixed_content_line(position + 0));
+    v.content(create_std_list_boost_variant_std_string_dogen_stitch_mixed_content_line_(position + 0));
 }
 
 mixed_content_block_generator::result_type

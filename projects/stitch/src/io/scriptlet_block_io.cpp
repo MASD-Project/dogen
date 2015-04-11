@@ -19,15 +19,39 @@
  *
  */
 #include <ostream>
-#include "dogen/stitch/io/block_io.hpp"
-#include "dogen/stitch/io/scriptlet_line_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/stitch/io/scriptlet_block_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
 std::ostream& operator<<(std::ostream& s, const scriptlet_block& v) {
-    v.to_stream(s);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::scriptlet_block\"" << ", "
+      << "\"content\": " << v.content()
+      << " }";
     return(s);
 }
 

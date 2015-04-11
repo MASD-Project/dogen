@@ -18,22 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_IO_TEXT_BLOCK_IO_HPP
-#define DOGEN_STITCH_IO_TEXT_BLOCK_IO_HPP
+#ifndef DOGEN_STITCH_TYPES_PARSING_ERROR_FWD_HPP
+#define DOGEN_STITCH_TYPES_PARSING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/stitch/types/text_block.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace stitch {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::stitch::text_block& v);
+class parsing_error;
 
 } }
 

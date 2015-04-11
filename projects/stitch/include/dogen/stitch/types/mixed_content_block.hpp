@@ -26,25 +26,24 @@
 #endif
 
 #include <list>
-#include <iosfwd>
+#include <string>
 #include <algorithm>
-#include "dogen/stitch/types/block.hpp"
+#include <boost/variant.hpp>
 #include "dogen/stitch/types/mixed_content_line.hpp"
 #include "dogen/stitch/serialization/mixed_content_block_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class mixed_content_block final : public dogen::stitch::block {
+class mixed_content_block final {
 public:
     mixed_content_block() = default;
     mixed_content_block(const mixed_content_block&) = default;
     mixed_content_block(mixed_content_block&&) = default;
-
-    virtual ~mixed_content_block() noexcept { }
+    ~mixed_content_block() = default;
 
 public:
-    explicit mixed_content_block(const std::list<dogen::stitch::mixed_content_line>& content);
+    explicit mixed_content_block(const std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> >& content);
 
 private:
     template<typename Archive>
@@ -54,30 +53,10 @@ private:
     friend void boost::serialization::load(Archive& ar, mixed_content_block& v, unsigned int version);
 
 public:
-    virtual void accept(const block_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(block_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const block_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(block_visitor& v) override {
-        v.visit(*this);
-    }
-
-public:
-    void to_stream(std::ostream& s) const override;
-
-public:
-    const std::list<dogen::stitch::mixed_content_line>& content() const;
-    std::list<dogen::stitch::mixed_content_line>& content();
-    void content(const std::list<dogen::stitch::mixed_content_line>& v);
-    void content(const std::list<dogen::stitch::mixed_content_line>&& v);
+    const std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> >& content() const;
+    std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> >& content();
+    void content(const std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> >& v);
+    void content(const std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> >&& v);
 
 public:
     bool operator==(const mixed_content_block& rhs) const;
@@ -86,14 +65,11 @@ public:
     }
 
 public:
-    bool equals(const dogen::stitch::block& other) const override;
-
-public:
     void swap(mixed_content_block& other) noexcept;
     mixed_content_block& operator=(mixed_content_block other);
 
 private:
-    std::list<dogen::stitch::mixed_content_line> content_;
+    std::list<boost::variant<std::string, dogen::stitch::mixed_content_line> > content_;
 };
 
 } }

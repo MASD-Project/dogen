@@ -18,19 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/block_hash.hpp"
+#ifndef DOGEN_STITCH_TYPES_PARSING_ERROR_HPP
+#define DOGEN_STITCH_TYPES_PARSING_ERROR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-
-}
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace stitch {
 
-std::size_t block_hasher::hash(const block&) {
-    std::size_t seed(0);
-    return seed;
-}
+/**
+ * @brief An error occurred whilst parsing.
+ */
+class parsing_error : public virtual std::exception, public virtual boost::exception {
+public:
+    parsing_error() = default;
+    ~parsing_error() noexcept = default;
+
+public:
+    parsing_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
+
+#endif

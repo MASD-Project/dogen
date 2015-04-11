@@ -26,18 +26,7 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
 #include "dogen/stitch/types/scriptlet_block.hpp"
-
-namespace boost {
-
-template<>struct
-is_virtual_base_of<
-    dogen::stitch::block,
-    dogen::stitch::scriptlet_block
-> : public mpl::true_ {};
-
-}
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::scriptlet_block)
 namespace boost {

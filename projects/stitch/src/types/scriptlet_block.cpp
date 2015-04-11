@@ -18,58 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/stitch/io/block_io.hpp"
-#include "dogen/stitch/io/scriptlet_line_io.hpp"
 #include "dogen/stitch/types/scriptlet_block.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::scriptlet_line>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace stitch {
 
-scriptlet_block::scriptlet_block(const std::list<dogen::stitch::scriptlet_line>& content)
-    : dogen::stitch::block(),
-      content_(content) { }
-
-void scriptlet_block::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::scriptlet_block\"" << ", "
-      << "\"__parent_0__\": ";
-    block::to_stream(s);
-    s << ", "
-      << "\"content\": " << content_
-      << " }";
-}
+scriptlet_block::scriptlet_block(const std::list<std::string>& content)
+    : content_(content) { }
 
 void scriptlet_block::swap(scriptlet_block& other) noexcept {
-    block::swap(other);
-
     using std::swap;
     swap(content_, other.content_);
 }
 
-bool scriptlet_block::equals(const dogen::stitch::block& other) const {
-    const scriptlet_block* const p(dynamic_cast<const scriptlet_block* const>(&other));
-    if (!p) return false;
-    return *this == *p;
-}
-
 bool scriptlet_block::operator==(const scriptlet_block& rhs) const {
-    return block::compare(rhs) &&
-        content_ == rhs.content_;
+    return content_ == rhs.content_;
 }
 
 scriptlet_block& scriptlet_block::operator=(scriptlet_block other) {
@@ -78,19 +41,19 @@ scriptlet_block& scriptlet_block::operator=(scriptlet_block other) {
     return *this;
 }
 
-const std::list<dogen::stitch::scriptlet_line>& scriptlet_block::content() const {
+const std::list<std::string>& scriptlet_block::content() const {
     return content_;
 }
 
-std::list<dogen::stitch::scriptlet_line>& scriptlet_block::content() {
+std::list<std::string>& scriptlet_block::content() {
     return content_;
 }
 
-void scriptlet_block::content(const std::list<dogen::stitch::scriptlet_line>& v) {
+void scriptlet_block::content(const std::list<std::string>& v) {
     content_ = v;
 }
 
-void scriptlet_block::content(const std::list<dogen::stitch::scriptlet_line>&& v) {
+void scriptlet_block::content(const std::list<std::string>&& v) {
     content_ = std::move(v);
 }
 

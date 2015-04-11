@@ -18,8 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/block_hash.hpp"
-#include "dogen/stitch/hash/scriptlet_line_hash.hpp"
 #include "dogen/stitch/hash/scriptlet_block_hash.hpp"
 
 namespace {
@@ -31,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_stitch_scriptlet_line(const std::list<dogen::stitch::scriptlet_line>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -47,9 +45,7 @@ namespace stitch {
 std::size_t scriptlet_block_hasher::hash(const scriptlet_block&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::stitch::block&>(v));
-
-    combine(seed, hash_std_list_dogen_stitch_scriptlet_line(v.content()));
+    combine(seed, hash_std_list_std_string(v.content()));
     return seed;
 }
 

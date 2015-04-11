@@ -36,13 +36,6 @@ namespace stitch {
  * template into a object representation of the text template.
  */
 class parser {
-private:
-    /**
-     * @brief Returns true if there are any of the start markers in
-     * the string.
-     */
-    bool has_start_markers(const std::string& s) const;
-
 public:
     /**
      * @brief Parse the string.

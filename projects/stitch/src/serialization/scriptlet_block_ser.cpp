@@ -22,20 +22,15 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/stitch/serialization/block_ser.hpp"
-#include "dogen/stitch/serialization/scriptlet_line_ser.hpp"
 #include "dogen/stitch/serialization/scriptlet_block_ser.hpp"
 
-
-BOOST_CLASS_TRACKING(
-    dogen::stitch::scriptlet_block,
-    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -44,8 +39,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::scriptlet_block& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("block", base_object<dogen::stitch::block>(v));
-
     ar << make_nvp("content", v.content_);
 }
 
@@ -53,8 +46,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::scriptlet_block& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("block", base_object<dogen::stitch::block>(v));
-
     ar >> make_nvp("content", v.content_);
 }
 

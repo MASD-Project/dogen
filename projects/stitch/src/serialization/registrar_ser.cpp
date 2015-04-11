@@ -26,10 +26,7 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/stitch/serialization/text_block_ser.hpp"
-#include "dogen/stitch/serialization/scriptlet_block_ser.hpp"
 #include "dogen/dynamic/schema/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/mixed_content_block_ser.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -37,10 +34,6 @@ namespace stitch {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::dynamic::schema::register_types(ar);
-
-    ar.template register_type<dogen::stitch::mixed_content_block>();
-    ar.template register_type<dogen::stitch::scriptlet_block>();
-    ar.template register_type<dogen::stitch::text_block>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

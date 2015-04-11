@@ -27,9 +27,10 @@
 
 #include <list>
 #include <algorithm>
-#include <boost/shared_ptr.hpp>
-#include "dogen/stitch/types/block_fwd.hpp"
+#include <boost/variant.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/stitch/types/scriptlet_block.hpp"
+#include "dogen/stitch/types/mixed_content_block.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +46,7 @@ public:
 public:
     text_template(
         const dogen::dynamic::schema::object& extensions,
-        const std::list<boost::shared_ptr<dogen::stitch::block> >& content);
+        const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content);
 
 private:
     template<typename Archive>
@@ -60,10 +61,10 @@ public:
     void extensions(const dogen::dynamic::schema::object& v);
     void extensions(const dogen::dynamic::schema::object&& v);
 
-    const std::list<boost::shared_ptr<dogen::stitch::block> >& content() const;
-    std::list<boost::shared_ptr<dogen::stitch::block> >& content();
-    void content(const std::list<boost::shared_ptr<dogen::stitch::block> >& v);
-    void content(const std::list<boost::shared_ptr<dogen::stitch::block> >&& v);
+    const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content() const;
+    std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content();
+    void content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v);
+    void content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >&& v);
 
 public:
     bool operator==(const text_template& rhs) const;
@@ -77,7 +78,7 @@ public:
 
 private:
     dogen::dynamic::schema::object extensions_;
-    std::list<boost::shared_ptr<dogen::stitch::block> > content_;
+    std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> > content_;
 };
 
 } }

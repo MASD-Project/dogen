@@ -18,24 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/text_template.hpp"
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::stitch::block>& lhs,
-const boost::shared_ptr<dogen::stitch::block>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
 
 namespace dogen {
 namespace stitch {
 
 text_template::text_template(
     const dogen::dynamic::schema::object& extensions,
-    const std::list<boost::shared_ptr<dogen::stitch::block> >& content)
+    const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content)
     : extensions_(extensions),
       content_(content) { }
 
@@ -72,19 +62,19 @@ void text_template::extensions(const dogen::dynamic::schema::object&& v) {
     extensions_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::stitch::block> >& text_template::content() const {
+const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& text_template::content() const {
     return content_;
 }
 
-std::list<boost::shared_ptr<dogen::stitch::block> >& text_template::content() {
+std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& text_template::content() {
     return content_;
 }
 
-void text_template::content(const std::list<boost::shared_ptr<dogen::stitch::block> >& v) {
+void text_template::content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v) {
     content_ = v;
 }
 
-void text_template::content(const std::list<boost::shared_ptr<dogen::stitch::block> >&& v) {
+void text_template::content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >&& v) {
     content_ = std::move(v);
 }
 

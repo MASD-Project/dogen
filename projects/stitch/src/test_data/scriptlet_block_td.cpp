@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_td.hpp"
-#include "dogen/stitch/test_data/scriptlet_line_td.hpp"
+#include <sstream>
 #include "dogen/stitch/test_data/scriptlet_block_td.hpp"
 
 namespace {
 
-dogen::stitch::scriptlet_line
-create_dogen_stitch_scriptlet_line(const unsigned int position) {
-    return dogen::stitch::scriptlet_line_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-std::list<dogen::stitch::scriptlet_line> create_std_list_dogen_stitch_scriptlet_line(unsigned int position) {
-    std::list<dogen::stitch::scriptlet_line> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_stitch_scriptlet_line(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -46,8 +46,7 @@ scriptlet_block_generator::scriptlet_block_generator() : position_(0) { }
 
 void scriptlet_block_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::stitch::block_generator::populate(position, v);
-    v.content(create_std_list_dogen_stitch_scriptlet_line(position + 0));
+    v.content(create_std_list_std_string(position + 0));
 }
 
 scriptlet_block_generator::result_type

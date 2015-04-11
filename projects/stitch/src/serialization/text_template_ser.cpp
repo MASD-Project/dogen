@@ -24,14 +24,15 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/variant.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/stitch/serialization/block_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
 #include "dogen/dynamic/schema/serialization/object_ser.hpp"
+#include "dogen/stitch/serialization/scriptlet_block_ser.hpp"
+#include "dogen/stitch/serialization/mixed_content_block_ser.hpp"
 
 
 namespace boost {

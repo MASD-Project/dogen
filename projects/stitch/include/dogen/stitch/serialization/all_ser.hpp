@@ -18,15 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/block_ser.hpp"
 #include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/text_line_ser.hpp"
 #include "dogen/stitch/serialization/formatter_ser.hpp"
 #include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/text_block_ser.hpp"
 #include "dogen/stitch/serialization/segment_types_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/scriptlet_line_ser.hpp"
 #include "dogen/stitch/serialization/scriptlet_block_ser.hpp"
 #include "dogen/stitch/serialization/mixed_content_line_ser.hpp"
 #include "dogen/stitch/serialization/mixed_content_block_ser.hpp"

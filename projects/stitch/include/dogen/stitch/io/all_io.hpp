@@ -18,14 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/io/block_io.hpp"
 #include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/text_line_io.hpp"
 #include "dogen/stitch/io/formatter_io.hpp"
-#include "dogen/stitch/io/text_block_io.hpp"
 #include "dogen/stitch/io/segment_types_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/scriptlet_line_io.hpp"
 #include "dogen/stitch/io/scriptlet_block_io.hpp"
 #include "dogen/stitch/io/mixed_content_line_io.hpp"
 #include "dogen/stitch/io/mixed_content_block_io.hpp"

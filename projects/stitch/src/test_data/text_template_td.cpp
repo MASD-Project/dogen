@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/block_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
 #include "dogen/dynamic/schema/test_data/object_td.hpp"
+#include "dogen/stitch/test_data/scriptlet_block_td.hpp"
+#include "dogen/stitch/test_data/mixed_content_block_td.hpp"
 
 namespace {
 
@@ -29,22 +30,33 @@ create_dogen_dynamic_schema_object(const unsigned int position) {
     return dogen::dynamic::schema::object_generator::create(position);
 }
 
-dogen::stitch::block*
-create_dogen_stitch_block_ptr(const unsigned int position) {
-    return dogen::stitch::block_generator::create_ptr(position);
+dogen::stitch::mixed_content_block
+create_dogen_stitch_mixed_content_block(const unsigned int position) {
+    return dogen::stitch::mixed_content_block_generator::create(position);
 }
 
-boost::shared_ptr<dogen::stitch::block>
-create_boost_shared_ptr_dogen_stitch_block(unsigned int position) {
-    boost::shared_ptr<dogen::stitch::block> r(
-        create_dogen_stitch_block_ptr(position));
+dogen::stitch::scriptlet_block
+create_dogen_stitch_scriptlet_block(const unsigned int position) {
+    return dogen::stitch::scriptlet_block_generator::create(position);
+}
+
+
+boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block>
+create_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block(unsigned int position) {
+    boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> r;
+
+    if (position == 0 || ((position % 2) == 0))
+        r = create_dogen_stitch_mixed_content_block(position);
+    else if (position == 1 || ((position %3) == 0))
+        r = create_dogen_stitch_scriptlet_block(position);
+
     return r;
 }
 
-std::list<boost::shared_ptr<dogen::stitch::block> > create_std_list_boost_shared_ptr_dogen_stitch_block_(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::stitch::block> > r;
+std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> > create_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(unsigned int position) {
+    std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_boost_shared_ptr_dogen_stitch_block(position + i));
+        r.push_back(create_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block(position + i));
     }
     return r;
 }
@@ -59,7 +71,7 @@ text_template_generator::text_template_generator() : position_(0) { }
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.extensions(create_dogen_dynamic_schema_object(position + 0));
-    v.content(create_std_list_boost_shared_ptr_dogen_stitch_block_(position + 1));
+    v.content(create_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(position + 1));
 }
 
 text_template_generator::result_type

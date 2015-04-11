@@ -26,25 +26,22 @@
 #endif
 
 #include <list>
-#include <iosfwd>
+#include <string>
 #include <algorithm>
-#include "dogen/stitch/types/block.hpp"
-#include "dogen/stitch/types/scriptlet_line.hpp"
 #include "dogen/stitch/serialization/scriptlet_block_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class scriptlet_block final : public dogen::stitch::block {
+class scriptlet_block final {
 public:
     scriptlet_block() = default;
     scriptlet_block(const scriptlet_block&) = default;
     scriptlet_block(scriptlet_block&&) = default;
-
-    virtual ~scriptlet_block() noexcept { }
+    ~scriptlet_block() = default;
 
 public:
-    explicit scriptlet_block(const std::list<dogen::stitch::scriptlet_line>& content);
+    explicit scriptlet_block(const std::list<std::string>& content);
 
 private:
     template<typename Archive>
@@ -54,30 +51,10 @@ private:
     friend void boost::serialization::load(Archive& ar, scriptlet_block& v, unsigned int version);
 
 public:
-    virtual void accept(const block_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(block_visitor& v) const override {
-        v.visit(*this);
-    }
-
-    virtual void accept(const block_visitor& v) override {
-        v.visit(*this);
-    }
-
-    virtual void accept(block_visitor& v) override {
-        v.visit(*this);
-    }
-
-public:
-    void to_stream(std::ostream& s) const override;
-
-public:
-    const std::list<dogen::stitch::scriptlet_line>& content() const;
-    std::list<dogen::stitch::scriptlet_line>& content();
-    void content(const std::list<dogen::stitch::scriptlet_line>& v);
-    void content(const std::list<dogen::stitch::scriptlet_line>&& v);
+    const std::list<std::string>& content() const;
+    std::list<std::string>& content();
+    void content(const std::list<std::string>& v);
+    void content(const std::list<std::string>&& v);
 
 public:
     bool operator==(const scriptlet_block& rhs) const;
@@ -86,14 +63,11 @@ public:
     }
 
 public:
-    bool equals(const dogen::stitch::block& other) const override;
-
-public:
     void swap(scriptlet_block& other) noexcept;
     scriptlet_block& operator=(scriptlet_block other);
 
 private:
-    std::list<dogen::stitch::scriptlet_line> content_;
+    std::list<std::string> content_;
 };
 
 } }

@@ -18,14 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/block_hash.hpp"
 #include "dogen/stitch/hash/segment_hash.hpp"
-#include "dogen/stitch/hash/text_line_hash.hpp"
 #include "dogen/stitch/hash/formatter_hash.hpp"
-#include "dogen/stitch/hash/text_block_hash.hpp"
 #include "dogen/stitch/hash/segment_types_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
-#include "dogen/stitch/hash/scriptlet_line_hash.hpp"
 #include "dogen/stitch/hash/scriptlet_block_hash.hpp"
 #include "dogen/stitch/hash/mixed_content_line_hash.hpp"
 #include "dogen/stitch/hash/mixed_content_block_hash.hpp"
