@@ -12,13 +12,13 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-12 Sun 17:30]
+Clock summary at [2015-04-12 Sun 19:33]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *31:41* |       |       |
+| *Total time*                                                            | *32:40* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 31:41 |       |
+| Active                                                                  |         | 32:40 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
@@ -30,7 +30,7 @@ Clock summary at [2015-04-12 Sun 17:30]
 | COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
 | COMPLETED Fix streaming of strings in variants                          |         |       |  1:02 |
 | COMPLETED Add basic functionality to stitch                             |         |       |  4:17 |
-| STARTED Implement a basic formatter in stitch                           |         |       |  1:00 |
+| STARTED Implement a basic formatter in stitch                           |         |       |  1:59 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -290,6 +290,7 @@ fields into knitter and stitch fields so that we do not load the wrong
 fields.
 
 *** STARTED Implement a basic formatter in stitch                     :story:
+    CLOCK: [2015-04-12 Sun 18:34]--[2015-04-12 Sun 19:33] =>  0:59
     CLOCK: [2015-04-12 Sun 16:30]--[2015-04-12 Sun 17:30] =>  1:00
 
 We need to create a formatter in stitch that can implement the trivial
