@@ -79,7 +79,7 @@ dynamic::schema::ownership_hierarchy formatter::ownership_hierarchy() const {
     return r;
 }
 
-dogen::formatters::file formatter::format(const text_template& tt) const {
+dogen::formatters::file formatter::format(const text_template& /*tt*/) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting template.";
 
     // std::ostringstream ss;
@@ -87,7 +87,7 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
     // dogen::formatters::indent_filter::push(fo, 4);
     // fo.push(ss);
     // visitor v(fo);
-    
+
     dogen::formatters::file r;
     // for (const auto& b : tt.content()) {
     //     boost::apply_visitor(v, b);
