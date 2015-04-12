@@ -18,13 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/types/formatter.hpp"
+
+namespace {
+
+const std::string model_name("stitch");
+const std::string facet_name;
+const std::string formatter_name("stitch.formatter");
+const std::string group_name;
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("stitch.formatters"));
+
+}
 
 namespace dogen {
 namespace stitch {
 
-bool formatter::operator==(const formatter& /*rhs*/) const {
-    return true;
+dynamic::schema::ownership_hierarchy formatter::ownership_hierarchy() const {
+    static dynamic::schema::ownership_hierarchy
+        r(model_name, facet_name, formatter_name, group_name);
+    return r;
+}
+
+dogen::formatters::file formatter::format(const text_template& /*tt*/) const {
+    dogen::formatters::file r;
+    return r;
 }
 
 } }

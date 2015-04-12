@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stitch/hash/segment_hash.hpp"
-#include "dogen/stitch/hash/formatter_hash.hpp"
 #include "dogen/stitch/hash/segment_types_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/stitch/hash/scriptlet_block_hash.hpp"

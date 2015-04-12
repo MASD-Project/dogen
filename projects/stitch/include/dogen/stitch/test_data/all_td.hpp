@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stitch/test_data/segment_td.hpp"
-#include "dogen/stitch/test_data/formatter_td.hpp"
 #include "dogen/stitch/test_data/segment_types_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
 #include "dogen/stitch/test_data/scriptlet_block_td.hpp"

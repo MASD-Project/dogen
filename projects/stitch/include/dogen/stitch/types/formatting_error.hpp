@@ -18,25 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_FORMATTER_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_FORMATTER_SER_HPP
+#ifndef DOGEN_STITCH_TYPES_FORMATTING_ERROR_HPP
+#define DOGEN_STITCH_TYPES_FORMATTING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/formatter.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::formatter)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stitch {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::formatter& v, unsigned int version);
+/**
+ * @brief An error occurred whilst formatting.
+ */
+class formatting_error : public virtual std::exception, public virtual boost::exception {
+public:
+    formatting_error() = default;
+    ~formatting_error() noexcept = default;
 
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::formatter& v, unsigned int version);
+public:
+    formatting_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } }
 

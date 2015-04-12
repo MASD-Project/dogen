@@ -27,5 +27,6 @@
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/scriptlet_block.hpp"
+#include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/mixed_content_line.hpp"
 #include "dogen/stitch/types/mixed_content_block.hpp"

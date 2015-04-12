@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_FORMATTER_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_FORMATTER_FWD_SER_HPP
+#ifndef DOGEN_STITCH_TYPES_FORMATTING_ERROR_FWD_HPP
+#define DOGEN_STITCH_TYPES_FORMATTING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/formatter_fwd.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stitch {
 
-template<class Archive>
-void save(Archive& ar, const dogen::stitch::formatter& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::stitch::formatter& v, unsigned int version);
+class formatting_error;
 
 } }
 

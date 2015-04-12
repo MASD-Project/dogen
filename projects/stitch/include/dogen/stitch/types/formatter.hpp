@@ -25,33 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/stitch/serialization/formatter_fwd_ser.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/stitch/types/text_template.hpp"
 
 namespace dogen {
 namespace stitch {
 
+/**
+ * @brief Format a text template into a file.
+ */
 class formatter final {
 public:
-    formatter() = default;
-    formatter(const formatter&) = default;
-    formatter(formatter&&) = default;
-    ~formatter() = default;
-    formatter& operator=(const formatter&) = default;
+    /**
+     * @brief Ownership hierarchy for this formatter
+     */
+    dynamic::schema::ownership_hierarchy ownership_hierarchy() const;
 
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const formatter& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, formatter& v, unsigned int version);
-
-public:
-    bool operator==(const formatter& rhs) const;
-    bool operator!=(const formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Formats the text template.
+     */
+    dogen::formatters::file format(const text_template& tt) const;
 };
 
 } }

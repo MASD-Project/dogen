@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/formatter_io.hpp"
 #include "dogen/stitch/io/segment_types_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/io/scriptlet_block_io.hpp"

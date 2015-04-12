@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/formatter_ser.hpp"
 #include "dogen/stitch/serialization/registrar_ser.hpp"
 #include "dogen/stitch/serialization/segment_types_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
