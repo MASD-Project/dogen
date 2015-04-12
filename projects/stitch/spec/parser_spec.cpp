@@ -21,6 +21,9 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
+#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -81,6 +84,9 @@ const std::string two_scriptlet_ends(R"(<#+
 single line
 #>
 #>)");
+const std::string licence_declaration("<#@ licence_name=gpl_v3 #>");
+const std::string licence_name("licence_name");
+const std::string licence_value("gpl_v3");
 
 const std::string only_text_content_second_line("other text content");
 const std::string single_line_scriptlet_block_content("single line");
@@ -91,7 +97,12 @@ const std::string starting_scriptlet_block_in_block(
 const std::string end_without_start("without a start block");
 
 dogen::stitch::text_template parse(const std::string& s) {
-    dogen::stitch::parser p;
+    using namespace dogen::dynamic::schema::test;
+    mock_repository_factory rf;
+    const auto rp(rf.make());
+    const auto w(mock_workflow_factory::non_validating_workflow(rp));
+
+    dogen::stitch::parser p(w);
     return p.parse(s);
 }
 
@@ -253,6 +264,17 @@ BOOST_AUTO_TEST_CASE(two_scriptlet_ends_throws) {
 
     contains_checker<parsing_error> c(end_without_start);
     BOOST_CHECK_EXCEPTION(parse(two_scriptlet_ends), parsing_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("licence_declaration_results_in_expected_template");
+    const auto tt(parse(licence_declaration));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+
+    BOOST_CHECK(tt.content().empty());
+    BOOST_REQUIRE(tt.extensions().fields().size() == 1);
+    dogen::dynamic::schema::field_selector fs(tt.extensions());
+    BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

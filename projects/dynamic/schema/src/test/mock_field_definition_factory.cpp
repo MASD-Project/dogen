@@ -25,12 +25,23 @@ namespace dynamic {
 namespace schema {
 namespace test {
 
+field_definition mock_field_definition_factory::licence_name() const {
+    field_definition r;
+    r.name().simple("licence_name");
+    r.name().qualified("licence_name");
+    r.ownership_hierarchy().model_name("formatters");
+    r.value_type(value_types::text);
+    r.definition_type(field_definition_types::instance);
+    r.scope(scope_types::not_applicable);
+    return r;
+}
+
 field_definition mock_field_definition_factory::create_comment() const {
     field_definition r;
     r.name().simple("comment");
     r.name().qualified("dia.comment");
     r.ownership_hierarchy().model_name("dia_to_sml");
-    r.value_type(value_types::boolean);
+    r.value_type(value_types::text);
     r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
     return r;
@@ -42,9 +53,9 @@ create_identity_attribute() const {
     r.name().simple("identity_attribute");
     r.name().qualified("dia.identity_attribute");
     r.ownership_hierarchy().model_name("dia_to_sml");
-    r.value_type(dogen::dynamic::schema::value_types::boolean);
+    r.value_type(value_types::text);
     r.definition_type(field_definition_types::instance);
-    r.scope(dogen::dynamic::schema::scope_types::property);
+    r.scope(scope_types::property);
     return r;
 }
 
@@ -53,6 +64,7 @@ make_canned_field_definitions() const {
     std::list<field_definition> r;
     r.push_back(create_comment());
     r.push_back(create_identity_attribute());
+    r.push_back(licence_name());
     return r;
 }
 
@@ -63,7 +75,7 @@ make_field_definition(const std::string n, value_types vt) const {
     r.name().qualified(n);
     r.value_type(vt);
     r.definition_type(field_definition_types::instance);
-    r.scope(dogen::dynamic::schema::scope_types::any);
+    r.scope(scope_types::any);
     return r;
 }
 

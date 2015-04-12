@@ -36,6 +36,11 @@ namespace test {
 class mock_field_definition_factory {
 private:
     /**
+     * @brief Create the licence name field.
+     */
+    field_definition licence_name() const;
+
+    /**
      * @brief Create the comment field.
      */
     field_definition create_comment() const;

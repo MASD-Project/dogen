@@ -27,6 +27,7 @@
 
 #include <string>
 #include "dogen/stitch/types/text_template.hpp"
+#include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -37,10 +38,16 @@ namespace stitch {
  */
 class parser {
 public:
+    explicit parser(const dynamic::schema::workflow& w);
+
+public:
     /**
      * @brief Parse the string.
      */
     text_template parse(const std::string& s) const;
+
+private:
+    const dynamic::schema::workflow& schema_workflow_;
 };
 
 } }

@@ -67,9 +67,9 @@
 							<first>dia.comment</first>
 							<second class_id="18" tracking_level="0" version="0">
 								<value class_id="19" tracking_level="0" version="1">
-									<px class_id="0" tracking_level="1" version="0" object_id="_0">
+									<px class_id="1" tracking_level="1" version="0" object_id="_0">
 										<value class_id="20" tracking_level="0" version="0"></value>
-										<content>1</content>
+										<content>true</content>
 									</px>
 								</value>
 							</second>
@@ -139,9 +139,9 @@
 							<first>dia.comment</first>
 							<second>
 								<value>
-									<px class_id_reference="0" object_id="_1">
+									<px class_id_reference="1" object_id="_1">
 										<value></value>
-										<content>1</content>
+										<content>true</content>
 									</px>
 								</value>
 							</second>
@@ -225,9 +225,9 @@ This comment will be applied to the model namespace itself.
 							<first>dia.comment</first>
 							<second>
 								<value>
-									<px class_id_reference="0" object_id="_2">
+									<px class_id_reference="1" object_id="_2">
 										<value></value>
-										<content>1</content>
+										<content>true</content>
 									</px>
 								</value>
 							</second>

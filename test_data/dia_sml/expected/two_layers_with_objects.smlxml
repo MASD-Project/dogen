@@ -202,16 +202,27 @@
 				<documentation></documentation>
 				<extensions>
 					<fields>
-						<count>1</count>
+						<count>2</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="18" tracking_level="0" version="0">
 							<first>dia.comment</first>
 							<second class_id="19" tracking_level="0" version="0">
 								<value class_id="20" tracking_level="0" version="1">
-									<px class_id="0" tracking_level="1" version="0" object_id="_0">
+									<px class_id="1" tracking_level="1" version="0" object_id="_0">
 										<value class_id="21" tracking_level="0" version="0"></value>
-										<content>1</content>
+										<content>true</content>
+									</px>
+								</value>
+							</second>
+						</item>
+						<item>
+							<first>licence_name</first>
+							<second>
+								<value>
+									<px class_id_reference="1" object_id="_1">
+										<value></value>
+										<content>gpl_v2</content>
 									</px>
 								</value>
 							</second>
@@ -300,7 +311,7 @@
 				</module_path>
 				<simple_name>class_2</simple_name>
 			</first>
-			<second class_id="4" tracking_level="1" version="0" object_id="_1">
+			<second class_id="4" tracking_level="1" version="0" object_id="_2">
 				<type class_id="27" tracking_level="0" version="0">
 					<documentation></documentation>
 					<extensions>
@@ -429,7 +440,7 @@
 				</module_path>
 				<simple_name>class_1</simple_name>
 			</first>
-			<second object_id="_2">
+			<second object_id="_3">
 				<type>
 					<documentation></documentation>
 					<extensions>

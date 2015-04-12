@@ -526,16 +526,27 @@ in the context of inheritance.
 </documentation>
 				<extensions>
 					<fields>
-						<count>1</count>
+						<count>2</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="19" tracking_level="0" version="0">
 							<first>dia.comment</first>
 							<second class_id="20" tracking_level="0" version="0">
 								<value class_id="21" tracking_level="0" version="1">
-									<px class_id="0" tracking_level="1" version="0" object_id="_0">
+									<px class_id="1" tracking_level="1" version="0" object_id="_0">
 										<value class_id="22" tracking_level="0" version="0"></value>
-										<content>1</content>
+										<content>true</content>
+									</px>
+								</value>
+							</second>
+						</item>
+						<item>
+							<first>licence_name</first>
+							<second>
+								<value>
+									<px class_id_reference="1" object_id="_1">
+										<value></value>
+										<content>gpl_v2</content>
 									</px>
 								</value>
 							</second>
@@ -863,7 +874,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_empty_descendant</simple_name>
 			</first>
-			<second class_id="4" tracking_level="1" version="0" object_id="_1">
+			<second class_id="4" tracking_level="1" version="0" object_id="_2">
 				<type class_id="28" tracking_level="0" version="0">
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -997,7 +1008,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_2">
+			<second object_id="_3">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1165,7 +1176,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_of_a_child1</simple_name>
 			</first>
-			<second object_id="_3">
+			<second object_id="_4">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1297,7 +1308,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_with_members</simple_name>
 			</first>
-			<second object_id="_4">
+			<second object_id="_5">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1463,7 +1474,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent</simple_name>
 			</first>
-			<second object_id="_5">
+			<second object_id="_6">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1611,7 +1622,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>second_child_without_members</simple_name>
 			</first>
-			<second object_id="_6">
+			<second object_id="_7">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1743,7 +1754,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_without_members</simple_name>
 			</first>
-			<second object_id="_7">
+			<second object_id="_8">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -1876,7 +1887,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_8">
+			<second object_id="_9">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2042,7 +2053,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child_of_a_child2</simple_name>
 			</first>
-			<second object_id="_9">
+			<second object_id="_10">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2207,7 +2218,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_with_members</simple_name>
 			</first>
-			<second object_id="_10">
+			<second object_id="_11">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2377,7 +2388,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_without_members</simple_name>
 			</first>
-			<second object_id="_11">
+			<second object_id="_12">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2503,7 +2514,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>child</simple_name>
 			</first>
-			<second object_id="_12">
+			<second object_id="_13">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2671,7 +2682,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant2</simple_name>
 			</first>
-			<second object_id="_13">
+			<second object_id="_14">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2836,7 +2847,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent_outside</simple_name>
 			</first>
-			<second object_id="_14">
+			<second object_id="_15">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -2983,7 +2994,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>third_child_with_members</simple_name>
 			</first>
-			<second object_id="_15">
+			<second object_id="_16">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3179,7 +3190,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_descendant</simple_name>
 			</first>
-			<second object_id="_16">
+			<second object_id="_17">
 				<type>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -3347,7 +3358,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>service_interface</simple_name>
 			</first>
-			<second object_id="_17">
+			<second object_id="_18">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3441,7 +3452,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>service</simple_name>
 			</first>
-			<second object_id="_18">
+			<second object_id="_19">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3535,7 +3546,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>base</simple_name>
 			</first>
-			<second object_id="_19">
+			<second object_id="_20">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3660,7 +3671,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant1</simple_name>
 			</first>
-			<second object_id="_20">
+			<second object_id="_21">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3811,7 +3822,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>descendant3</simple_name>
 			</first>
-			<second object_id="_21">
+			<second object_id="_22">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -3977,7 +3988,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>parent</simple_name>
 			</first>
-			<second object_id="_22">
+			<second object_id="_23">
 				<type>
 					<documentation></documentation>
 					<extensions>
@@ -4125,7 +4136,7 @@ in the context of inheritance.
 				</module_path>
 				<simple_name>move_ctor_base</simple_name>
 			</first>
-			<second object_id="_23">
+			<second object_id="_24">
 				<type>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>

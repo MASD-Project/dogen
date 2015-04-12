@@ -2084,9 +2084,9 @@
 									<first>dia.identity_attribute</first>
 									<second class_id="34" tracking_level="0" version="0">
 										<value class_id="35" tracking_level="0" version="1">
-											<px class_id="0" tracking_level="1" version="0" object_id="_6">
+											<px class_id="1" tracking_level="1" version="0" object_id="_6">
 												<value class_id="36" tracking_level="0" version="0"></value>
-												<content>1</content>
+												<content>true</content>
 											</px>
 										</value>
 									</second>
@@ -2192,7 +2192,7 @@
 									<first>dia.identity_attribute</first>
 									<second>
 										<value>
-											<px class_id_reference="0" object_id_reference="_6"></px>
+											<px class_id_reference="1" object_id_reference="_6"></px>
 										</value>
 									</second>
 								</item>

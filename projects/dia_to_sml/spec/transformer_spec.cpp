@@ -143,9 +143,8 @@ void transform(dogen::dia_to_sml::context& c,
     using namespace dogen::dynamic::schema::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto schema_workflow(
-        mock_workflow_factory::non_validating_workflow(rp));
-    dogen::dia_to_sml::transformer t(schema_workflow, c);
+    const auto w(mock_workflow_factory::non_validating_workflow(rp));
+    dogen::dia_to_sml::transformer t(w, c);
 
     for (const auto& po : lpo)
         t.transform(po, mock_profile(po));
@@ -158,9 +157,8 @@ void transform(dogen::dia_to_sml::context& c,
     using namespace dogen::dynamic::schema::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto schema_workflow(
-        mock_workflow_factory::non_validating_workflow(rp));
-    dogen::dia_to_sml::transformer t(schema_workflow, c);
+    const auto w(mock_workflow_factory::non_validating_workflow(rp));
+    dogen::dia_to_sml::transformer t(w, c);
     t.transform(po, p);
 }
 

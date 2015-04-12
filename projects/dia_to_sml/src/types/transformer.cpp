@@ -471,7 +471,6 @@ void transformer::from_note(const processed_object& o) {
 
         const auto scope(scope_types::root_module);
         module.extensions(schema_workflow_.execute(scope, kvps));
-
         return;
     }
 

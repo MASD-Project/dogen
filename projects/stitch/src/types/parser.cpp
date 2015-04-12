@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
@@ -30,6 +31,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.parser"));
 
+const std::string empty;
 const std::string equals("=");
 const std::string start_scriptlet_block("<#+");
 const std::string start_scriptlet_segment("<#=");
@@ -43,12 +45,14 @@ const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
-// const std::string separator_not_found("Expected separator on KVP.");
+const std::string separator_not_found("Expected separator on KVP.");
 
 }
 
 namespace dogen {
 namespace stitch {
+
+parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
 
 text_template parser::parse(const std::string& s) const {
     text_template r;
@@ -71,19 +75,23 @@ text_template parser::parse(const std::string& s) const {
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
             }
 
-            // FIXME: need to setup fields in order to manage kvps
-            // boost::replace_all(line, start_declaration, line);
-            // boost::replace_all(line, end_block, line);
+            boost::replace_all(line, start_declaration, empty);
+            boost::replace_all(line, end_block, empty);
+            boost::trim(line);
 
-            // const auto pos(line.find_first_of(equals));
-            // if (pos == std::string::npos) {
-            //     BOOST_LOG_SEV(lg, error) << separator_not_found;
-            //     BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
-            // }
+            const auto pos(line.find_first_of(equals));
+            if (pos == std::string::npos) {
+                BOOST_LOG_SEV(lg, error) << separator_not_found;
+                BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
+            }
 
-            // const auto key(line.substr(0, pos));
-            // const auto value(line.substr(pos + 1));
-            // kvps.push_back(std::make_pair(key, value));
+            const auto key(line.substr(0, pos));
+            const auto value(line.substr(pos + 1));
+            kvps.push_back(std::make_pair(key, value));
+
+            using dynamic::schema::scope_types;
+            const auto scope(scope_types::root_module);
+            r.extensions(schema_workflow_.execute(scope, kvps));
             continue;
         }
 
