@@ -12,13 +12,13 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-12 Sun 15:10]
+Clock summary at [2015-04-12 Sun 17:30]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                            | *30:41* |       |       |
+| *Total time*                                                            | *31:41* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
-| Active                                                                  |         | 30:41 |       |
+| Active                                                                  |         | 31:41 |       |
 | STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
@@ -29,7 +29,8 @@ Clock summary at [2015-04-12 Sun 15:10]
 | COMPLETED Create the stitch and stitcher projects                       |         |       |  1:31 |
 | COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
 | COMPLETED Fix streaming of strings in variants                          |         |       |  1:02 |
-| STARTED Add basic functionality to stitch                               |         |       |  4:17 |
+| COMPLETED Add basic functionality to stitch                             |         |       |  4:17 |
+| STARTED Implement a basic formatter in stitch                           |         |       |  1:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -269,6 +270,38 @@ We need to clone =knitter= into =stitcher= and rename namespaces etc.
 It seems that a boost variant with a string does not get streamed
 properly. We need to fix this as we need it for stitch.
 
+*** COMPLETED Add basic functionality to stitch                       :story:
+    CLOSED: [2015-04-12 Sun 16:34]
+    CLOCK: [2015-04-12 Sun 14:47]--[2015-04-12 Sun 15:10] =>  0:23
+    CLOCK: [2015-04-12 Sun 14:16]--[2015-04-12 Sun 14:46] =>  0:30
+    CLOCK: [2015-04-11 Sat 19:39]--[2015-04-11 Sat 20:27] =>  0:48
+    CLOCK: [2015-04-11 Sat 19:11]--[2015-04-11 Sat 19:31] =>  0:20
+    CLOCK: [2015-04-11 Sat 18:00]--[2015-04-11 Sat 18:09] =>  0:09
+    CLOCK: [2015-04-11 Sat 14:42]--[2015-04-11 Sat 16:06] =>  1:24
+    CLOCK: [2015-04-11 Sat 14:07]--[2015-04-11 Sat 14:24] =>  0:17
+    CLOCK: [2015-04-11 Sat 11:25]--[2015-04-11 Sat 11:51] =>  0:26
+
+We need to implement stitch as per analysis in backlog, with a few
+simple unit tests.
+
+We could make use of the meta-data to build the copyright etc
+information when instantiating a stitch template. We need to split the
+fields into knitter and stitch fields so that we do not load the wrong
+fields.
+
+*** STARTED Implement a basic formatter in stitch                     :story:
+    CLOCK: [2015-04-12 Sun 16:30]--[2015-04-12 Sun 17:30] =>  1:00
+
+We need to create a formatter in stitch that can implement the trivial
+use cases we have covered with the parser. We must also start creating
+a stitch template for the formatter and perhaps implement the stitch
+output manually just to give stitch a target.
+
+Actually, a stitch template does not make a lot of sense. This is
+because stitch has nothing to add to the output other than what it
+reads from its object model. So the template would contain nothing but
+c++ code, with very little text.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -337,24 +370,6 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
-
-*** STARTED Add basic functionality to stitch                         :story:
-    CLOCK: [2015-04-12 Sun 14:47]--[2015-04-12 Sun 15:10] =>  0:23
-    CLOCK: [2015-04-12 Sun 14:16]--[2015-04-12 Sun 14:46] =>  0:30
-    CLOCK: [2015-04-11 Sat 19:39]--[2015-04-11 Sat 20:27] =>  0:48
-    CLOCK: [2015-04-11 Sat 19:11]--[2015-04-11 Sat 19:31] =>  0:20
-    CLOCK: [2015-04-11 Sat 18:00]--[2015-04-11 Sat 18:09] =>  0:09
-    CLOCK: [2015-04-11 Sat 14:42]--[2015-04-11 Sat 16:06] =>  1:24
-    CLOCK: [2015-04-11 Sat 14:07]--[2015-04-11 Sat 14:24] =>  0:17
-    CLOCK: [2015-04-11 Sat 11:25]--[2015-04-11 Sat 11:51] =>  0:26
-
-We need to implement stitch as per analysis in backlog, with a few
-simple unit tests.
-
-We could make use of the meta-data to build the copyright etc
-information when instantiating a stitch template. We need to split the
-fields into knitter and stitch fields so that we do not load the wrong
-fields.
 
 *** Create a forward declarations formatter using stitch              :story:
 

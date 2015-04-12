@@ -435,6 +435,9 @@ add_custom_target(codegen_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
+    --ignore-files-matching-regex .*.stitch
+    --ignore-files-matching-regex .*_stitch.cpp
+    --ignore-files-matching-regex .*_stitch.hpp
     --verbose
     --delete-extra-files
     --external-module-path dogen)
