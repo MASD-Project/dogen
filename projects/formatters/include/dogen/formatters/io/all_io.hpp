@@ -26,7 +26,7 @@
 #include "dogen/formatters/io/repository_io.hpp"
 #include "dogen/formatters/io/padding_types_io.hpp"
 #include "dogen/formatters/io/comment_styles_io.hpp"
-#include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/io/modeline_field_io.hpp"
+#include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"

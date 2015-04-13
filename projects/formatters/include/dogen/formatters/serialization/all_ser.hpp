@@ -27,7 +27,7 @@
 #include "dogen/formatters/serialization/repository_ser.hpp"
 #include "dogen/formatters/serialization/padding_types_ser.hpp"
 #include "dogen/formatters/serialization/comment_styles_ser.hpp"
-#include "dogen/formatters/serialization/modeline_group_ser.hpp"
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
+#include "dogen/formatters/serialization/modeline_group_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"

@@ -18,10 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/test_data/node_td.hpp"
-#include "dogen/dia_to_sml/test_data/context_td.hpp"
-#include "dogen/dia_to_sml/test_data/profile_td.hpp"
-#include "dogen/dia_to_sml/test_data/object_types_td.hpp"
-#include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
-#include "dogen/dia_to_sml/test_data/processed_comment_td.hpp"
-#include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_UTILITY_FORMATTER_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_UTILITY_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace formatters {
+
+class utility_formatter;
+
+} }
+
+#endif

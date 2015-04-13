@@ -25,7 +25,7 @@
 #include "dogen/config/types/input_options.hpp"
 #include "dogen/config/types/output_options.hpp"
 #include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/validation_error.hpp"
 #include "dogen/config/types/knitting_options.hpp"
+#include "dogen/config/types/validation_error.hpp"
 #include "dogen/config/types/troubleshooting_options.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"

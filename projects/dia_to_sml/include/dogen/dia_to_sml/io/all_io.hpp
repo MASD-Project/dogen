@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/dia_to_sml/io/node_io.hpp"
-#include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/io/context_io.hpp"
+#include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/io/object_types_io.hpp"
 #include "dogen/dia_to_sml/io/processed_object_io.hpp"
 #include "dogen/dia_to_sml/io/processed_comment_io.hpp"

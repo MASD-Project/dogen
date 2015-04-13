@@ -44,7 +44,7 @@ public:
 
 public:
     segment(
-        const dogen::stitch::segment_types& segment_type,
+        const dogen::stitch::segment_types& type,
         const std::string& content);
 
 private:
@@ -55,8 +55,8 @@ private:
     friend void boost::serialization::load(Archive& ar, segment& v, unsigned int version);
 
 public:
-    dogen::stitch::segment_types segment_type() const;
-    void segment_type(const dogen::stitch::segment_types& v);
+    dogen::stitch::segment_types type() const;
+    void type(const dogen::stitch::segment_types& v);
 
     const std::string& content() const;
     std::string& content();
@@ -74,7 +74,7 @@ public:
     segment& operator=(segment other);
 
 private:
-    dogen::stitch::segment_types segment_type_;
+    dogen::stitch::segment_types type_;
     std::string content_;
 };
 

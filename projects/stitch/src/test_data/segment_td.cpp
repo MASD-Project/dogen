@@ -44,7 +44,7 @@ segment_generator::segment_generator() : position_(0) { }
 
 void segment_generator::
 populate(const unsigned int position, result_type& v) {
-    v.segment_type(create_dogen_stitch_segment_types(position + 0));
+    v.type(create_dogen_stitch_segment_types(position + 0));
     v.content(create_std_string(position + 1));
 }
 

@@ -39,7 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::segment& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("segment_type", v.segment_type_);
+    ar << make_nvp("type", v.type_);
     ar << make_nvp("content", v.content_);
 }
 
@@ -47,7 +47,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::segment& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("segment_type", v.segment_type_);
+    ar >> make_nvp("type", v.type_);
     ar >> make_nvp("content", v.content_);
 }
 

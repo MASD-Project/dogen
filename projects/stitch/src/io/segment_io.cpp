@@ -37,7 +37,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const segment& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::segment\"" << ", "
-      << "\"segment_type\": " << v.segment_type() << ", "
+      << "\"type\": " << v.type() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
       << " }";
     return(s);

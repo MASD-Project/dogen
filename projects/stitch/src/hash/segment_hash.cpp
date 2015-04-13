@@ -38,7 +38,7 @@ namespace stitch {
 std::size_t segment_hasher::hash(const segment&v) {
     std::size_t seed(0);
 
-    combine(seed, v.segment_type());
+    combine(seed, v.type());
     combine(seed, v.content());
 
     return seed;

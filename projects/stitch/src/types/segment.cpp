@@ -24,22 +24,22 @@ namespace dogen {
 namespace stitch {
 
 segment::segment()
-    : segment_type_(static_cast<dogen::stitch::segment_types>(0)) { }
+    : type_(static_cast<dogen::stitch::segment_types>(0)) { }
 
 segment::segment(
-    const dogen::stitch::segment_types& segment_type,
+    const dogen::stitch::segment_types& type,
     const std::string& content)
-    : segment_type_(segment_type),
+    : type_(type),
       content_(content) { }
 
 void segment::swap(segment& other) noexcept {
     using std::swap;
-    swap(segment_type_, other.segment_type_);
+    swap(type_, other.type_);
     swap(content_, other.content_);
 }
 
 bool segment::operator==(const segment& rhs) const {
-    return segment_type_ == rhs.segment_type_ &&
+    return type_ == rhs.type_ &&
         content_ == rhs.content_;
 }
 
@@ -49,12 +49,12 @@ segment& segment::operator=(segment other) {
     return *this;
 }
 
-dogen::stitch::segment_types segment::segment_type() const {
-    return segment_type_;
+dogen::stitch::segment_types segment::type() const {
+    return type_;
 }
 
-void segment::segment_type(const dogen::stitch::segment_types& v) {
-    segment_type_ = v;
+void segment::type(const dogen::stitch::segment_types& v) {
+    type_ = v;
 }
 
 const std::string& segment::content() const {

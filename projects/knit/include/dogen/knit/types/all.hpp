@@ -26,7 +26,7 @@
 #include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
 #include "dogen/knit/types/outputters/factory.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/knit/types/backends/cpp_backend.hpp"
+#include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/knit/types/outputters/file_outputter.hpp"
 #include "dogen/knit/types/outputters/stream_outputter.hpp"
