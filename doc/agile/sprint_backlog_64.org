@@ -113,6 +113,18 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
+*** STARTED Fix build errors in Windows and Linux 32-bit              :story:
+    CLOCK: [2015-04-13 Mon 15:50]--[2015-04-13 Mon 16:18] =>  0:28
+
+It seems a number of test models are failing in the knitting tests for
+both Windows and Linux 32-bit. Looking at the diffs it seems the
+problems are in the includers. This is likely to be due to the new
+sorting algorithm, that does not take into account cases where the
+sorting criteria is identical all the way to the size of the
+string. This then means its the luck of the draw for these strings.
+
+We need to add further criteria to disambiguate strings.
+
 *** Create a forward declarations formatter using stitch              :story:
 
 We need to start making use of stitch in dogen. To start off with, we

@@ -82,7 +82,10 @@ bool include_directive_comparer(
             return false;
     }
 
-    return lhs.size() < rhs.size();
+    if (lhs.size() != rhs.size())
+        return lhs.size() < rhs.size();
+
+    return lhs < rhs;
 }
 
 inclusion_dependencies_factory::

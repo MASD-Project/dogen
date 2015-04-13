@@ -19,12 +19,12 @@
  *
  */
 #include "dogen/test_models/boost_model/serialization/class_a_ser.hpp"
-#include "dogen/test_models/boost_model/serialization/class_f_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/class_b_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_d_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_e_ser.hpp"
-#include "dogen/test_models/boost_model/serialization/class_b_ser.hpp"
-#include "dogen/test_models/boost_model/serialization/class_h_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/class_f_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_g_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/class_h_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/registrar_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_base_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/pkg1/class_c_ser.hpp"

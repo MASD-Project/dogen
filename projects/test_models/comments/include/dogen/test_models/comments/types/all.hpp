@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/comments/types/one_line.hpp"
 #include "dogen/test_models/comments/types/comments.hpp"
+#include "dogen/test_models/comments/types/one_line.hpp"
 #include "dogen/test_models/comments/types/multi_line.hpp"
 #include "dogen/test_models/comments/types/package/package.hpp"
 #include "dogen/test_models/comments/types/package/package2/package2.hpp"

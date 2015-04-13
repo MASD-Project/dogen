@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/trivial_association/odb/class_d_pragmas.hpp"
-#include "dogen/test_models/trivial_association/odb/class_c_pragmas.hpp"
-#include "dogen/test_models/trivial_association/odb/class_b_pragmas.hpp"
 #include "dogen/test_models/trivial_association/odb/class_a_pragmas.hpp"
+#include "dogen/test_models/trivial_association/odb/class_b_pragmas.hpp"
+#include "dogen/test_models/trivial_association/odb/class_c_pragmas.hpp"
+#include "dogen/test_models/trivial_association/odb/class_d_pragmas.hpp"

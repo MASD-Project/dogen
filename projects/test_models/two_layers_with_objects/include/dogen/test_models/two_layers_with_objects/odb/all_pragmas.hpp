@@ -18,5 +18,5 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/two_layers_with_objects/odb/package_1/class_1_pragmas.hpp"
 #include "dogen/test_models/two_layers_with_objects/odb/Package_2/class_2_pragmas.hpp"
+#include "dogen/test_models/two_layers_with_objects/odb/package_1/class_1_pragmas.hpp"

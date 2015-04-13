@@ -76,7 +76,10 @@ bool include_directive_comparer(
             return false;
     }
 
-    return lhs.size() < rhs.size();
+    if (lhs.size() != rhs.size())
+        return lhs.size() < rhs.size();
+
+    return lhs < rhs;
 }
 
 includes::includes(std::ostream& stream, const bool blank_line)

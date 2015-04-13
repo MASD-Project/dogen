@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/trivial_inheritance/types/descendant3_fwd.hpp"
 #include "dogen/test_models/trivial_inheritance/types/descendant2_fwd.hpp"
+#include "dogen/test_models/trivial_inheritance/types/descendant3_fwd.hpp"
 
 namespace dogen {
 namespace test_models {
