@@ -1,0 +1,125 @@
+#+title: Sprint Backlog 64
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission
+
+Finish implementing stitch and stitcher and create the first
+formatters using it.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-04-13 Mon 07:11]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:07* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:07 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:07 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-13 Mon 07:04]--[2015-04-13 Mon 07:11] =>  0:07
+
+Updates to sprint and product backlog.
+
+*** STARTED Updates to the manual and readme files                    :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** STARTED Implement a basic formatter in stitch                     :story:
+
+We need to create a formatter in stitch that can implement the trivial
+use cases we have covered with the parser. We must also start creating
+a stitch template for the formatter and perhaps implement the stitch
+output manually just to give stitch a target.
+
+Actually, a stitch template does not make a lot of sense. This is
+because stitch has nothing to add to the output other than what it
+reads from its object model. So the template would contain nothing but
+c++ code, with very little text.
+
+*** STARTED Create a "supported" expander                             :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+*** STARTED Compute managed directories from knitting options         :story:
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Create a forward declarations formatter using stitch              :story:
+
+We need to start making use of stitch in dogen. To start off with, we
+will manually run the stitch command against a template to generate
+the =cpp= file and include the header file from the formatter. We also
+need to inject the stitch file name to the list of ignores, probably
+by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
+avoid clashes with the source code of stitch itself.
+
+** Deprecated
