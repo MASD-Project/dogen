@@ -18,17 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
-#include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
-#include "dogen/formatters/test_data/spacing_types_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
+#include <ostream>
+#include <stdexcept>
+#include "dogen/formatters/io/quote_types_io.hpp"
+
+namespace dogen {
+namespace formatters {
+
+std::ostream& operator<<(std::ostream& s, const quote_types& v) {
+    s << "{ " << "\"__type__\": " << "\"quote_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case quote_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case quote_types::single_quote:
+        attr = "\"single_quote\"";
+        break;
+    case quote_types::double_quote:
+        attr = "\"double_quote\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for quote_types");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} }

@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
-#include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
 #include "dogen/formatters/test_data/spacing_types_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
+
+namespace dogen {
+namespace formatters {
+
+spacing_types_generator::spacing_types_generator() : position_(0) { }
+void spacing_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<spacing_types>(position % 5);
+}
+
+spacing_types_generator::result_type
+spacing_types_generator::create(const unsigned int  position) {
+    result_type r;
+    spacing_types_generator::populate(position, r);
+    return r;
+}
+
+spacing_types_generator::result_type
+spacing_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }

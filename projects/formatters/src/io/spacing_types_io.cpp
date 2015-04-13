@@ -18,17 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/io/file_io.hpp"
-#include "dogen/formatters/io/editors_io.hpp"
-#include "dogen/formatters/io/licence_io.hpp"
-#include "dogen/formatters/io/modeline_io.hpp"
-#include "dogen/formatters/io/annotation_io.hpp"
-#include "dogen/formatters/io/repository_io.hpp"
-#include "dogen/formatters/io/quote_types_io.hpp"
-#include "dogen/formatters/io/padding_types_io.hpp"
+#include <ostream>
+#include <stdexcept>
 #include "dogen/formatters/io/spacing_types_io.hpp"
-#include "dogen/formatters/io/comment_styles_io.hpp"
-#include "dogen/formatters/io/modeline_field_io.hpp"
-#include "dogen/formatters/io/modeline_group_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
-#include "dogen/formatters/io/modeline_locations_io.hpp"
+
+namespace dogen {
+namespace formatters {
+
+std::ostream& operator<<(std::ostream& s, const spacing_types& v) {
+    s << "{ " << "\"__type__\": " << "\"spacing_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case spacing_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case spacing_types::no_space:
+        attr = "\"no_space\"";
+        break;
+    case spacing_types::left_space:
+        attr = "\"left_space\"";
+        break;
+    case spacing_types::right_space:
+        attr = "\"right_space\"";
+        break;
+    case spacing_types::left_and_right_space:
+        attr = "\"left_and_right_space\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for spacing_types");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} }

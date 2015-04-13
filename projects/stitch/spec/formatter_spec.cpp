@@ -29,6 +29,8 @@
 namespace {
 
 const std::string empty;
+const std::string single_line_text_only("This is a template");
+
 const std::string test_module("stitch");
 const std::string test_suite("formatter_spec");
 

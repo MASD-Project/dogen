@@ -18,17 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
-#include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
-#include "dogen/formatters/test_data/spacing_types_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
+#ifndef DOGEN_FORMATTERS_TEST_DATA_SPACING_TYPES_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_SPACING_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/spacing_types.hpp"
+
+namespace dogen {
+namespace formatters {
+
+class spacing_types_generator {
+public:
+    spacing_types_generator();
+
+public:
+    typedef dogen::formatters::spacing_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} }
+
+#endif

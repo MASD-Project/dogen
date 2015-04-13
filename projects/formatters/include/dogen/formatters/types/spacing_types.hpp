@@ -18,17 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
-#include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
-#include "dogen/formatters/test_data/spacing_types_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_SPACING_TYPES_HPP
+#define DOGEN_FORMATTERS_TYPES_SPACING_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace formatters {
+
+enum class spacing_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    no_space = 1,
+    left_space = 2,
+    right_space = 3,
+    left_and_right_space = 4
+};
+
+} }
+
+#endif

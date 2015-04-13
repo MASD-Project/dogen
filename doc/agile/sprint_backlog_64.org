@@ -13,14 +13,17 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-13 Mon 07:11]
+Clock summary at [2015-04-13 Mon 19:05]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:07* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:07 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:07 |
+| Headline                                             | Time   |      |      |
+|------------------------------------------------------+--------+------+------|
+| *Total time*                                         | *2:52* |      |      |
+|------------------------------------------------------+--------+------+------|
+| Active                                               |        | 2:52 |      |
+| STARTED Sprint and product backlog grooming          |        |      | 0:07 |
+| COMPLETED Create a formatting utilities class        |        |      | 1:17 |
+| STARTED Implement a basic formatter in stitch        |        |      | 1:00 |
+| STARTED Fix build errors in Windows and Linux 32-bit |        |      | 0:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -32,7 +35,17 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
+*** COMPLETED Create a formatting utilities class                     :spike:
+    CLOSED: [2015-04-13 Mon 19:05]
+    CLOCK: [2015-04-13 Mon 17:04]--[2015-04-13 Mon 18:05] =>  1:01
+    CLOCK: [2015-04-13 Mon 16:48]--[2015-04-13 Mon 17:04] =>  0:16
+
+The stitch formatter needs to make use of basic features such as
+quoting etc. This is a good time to tidy-up the old utilities
+formatter.
+
 *** STARTED Implement a basic formatter in stitch                     :story:
+    CLOCK: [2015-04-13 Mon 18:05]--[2015-04-13 Mon 19:05] =>  1:00
 
 We need to create a formatter in stitch that can implement the trivial
 use cases we have covered with the parser. We must also start creating

@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/test_data/file_td.hpp"
-#include "dogen/formatters/test_data/editors_td.hpp"
-#include "dogen/formatters/test_data/licence_td.hpp"
-#include "dogen/formatters/test_data/modeline_td.hpp"
-#include "dogen/formatters/test_data/annotation_td.hpp"
-#include "dogen/formatters/test_data/repository_td.hpp"
-#include "dogen/formatters/test_data/quote_types_td.hpp"
-#include "dogen/formatters/test_data/padding_types_td.hpp"
-#include "dogen/formatters/test_data/spacing_types_td.hpp"
-#include "dogen/formatters/test_data/comment_styles_td.hpp"
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
-#include "dogen/formatters/test_data/modeline_group_td.hpp"
-#include "dogen/formatters/test_data/general_settings_td.hpp"
-#include "dogen/formatters/test_data/modeline_locations_td.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_QUOTE_TYPES_HPP
+#define DOGEN_FORMATTERS_TYPES_QUOTE_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace formatters {
+
+/**
+ * @brief Types of quotes that can be used in streaming.
+ */
+enum class quote_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    single_quote = 1,
+    double_quote = 2
+};
+
+} }
+
+#endif
