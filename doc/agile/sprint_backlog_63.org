@@ -12,14 +12,14 @@ Start implementing types header formatter using stitch.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-12 Sun 19:33]
+Clock summary at [2015-04-13 Mon 07:09]
 
 | Headline                                                                | Time    |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
 | *Total time*                                                            | *32:40* |       |       |
 |-------------------------------------------------------------------------+---------+-------+-------|
 | Active                                                                  |         | 32:40 |       |
-| STARTED Sprint and product backlog grooming                             |         |       |  0:28 |
+| COMPLETED Sprint and product backlog grooming                           |         |       |  0:28 |
 | COMPLETED Add support for forward declarations                          |         |       |  0:42 |
 | COMPLETED Create a selector for path derivatives data structures        |         |       |  0:58 |
 | COMPLETED Refactor field definition selection into its own class        |         |       |  1:58 |
@@ -30,17 +30,19 @@ Clock summary at [2015-04-12 Sun 19:33]
 | COMPLETED Create a =stitcher= skeleton                                  |         |       |  1:09 |
 | COMPLETED Fix streaming of strings in variants                          |         |       |  1:02 |
 | COMPLETED Add basic functionality to stitch                             |         |       |  4:17 |
-| STARTED Implement a basic formatter in stitch                           |         |       |  1:59 |
+| POSTPONED Implement a basic formatter in stitch                         |         |       |  1:59 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-04-13 Mon 07:08]
     CLOCK: [2015-04-10 Fri 16:40]--[2015-04-10 Fri 16:47] =>  0:07
     CLOCK: [2015-04-10 Fri 14:50]--[2015-04-10 Fri 15:03] =>  0:13
     CLOCK: [2015-03-29 Sun 22:32]--[2015-03-29 Sun 22:40] =>  0:08
 
 Updates to sprint and product backlog.
 
-*** STARTED Updates to the manual and readme files                    :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-04-13 Mon 07:08]
 
 Use downtime to update the manual and / or readme file.
 
@@ -289,7 +291,8 @@ information when instantiating a stitch template. We need to split the
 fields into knitter and stitch fields so that we do not load the wrong
 fields.
 
-*** STARTED Implement a basic formatter in stitch                     :story:
+*** POSTPONED Implement a basic formatter in stitch                   :story:
+    CLOSED: [2015-04-13 Mon 07:08]
     CLOCK: [2015-04-12 Sun 18:34]--[2015-04-12 Sun 19:33] =>  0:59
     CLOCK: [2015-04-12 Sun 16:30]--[2015-04-12 Sun 17:30] =>  1:00
 
@@ -303,7 +306,8 @@ because stitch has nothing to add to the output other than what it
 reads from its object model. So the template would contain nothing but
 c++ code, with very little text.
 
-*** STARTED Create a "supported" expander                             :story:
+*** POSTPONED Create a "supported" expander                           :story:
+    CLOSED: [2015-04-13 Mon 07:08]
 
 This needs a bit more analysis. The gist of it is that not all types
 support all formatters. We need a way to determine if a formatter is
@@ -353,7 +357,8 @@ In order to implement this feature we need to:
   improve on this story; provided we can at least set all flags to
   enabled we can move forward.
 
-*** STARTED Compute managed directories from knitting options         :story:
+*** POSTPONED Compute managed directories from knitting options       :story:
+    CLOSED: [2015-04-13 Mon 07:08]
 
 At present the backend is returning empty managed directories. This
 means housekeeping will fail in the new world. We need to change the
@@ -371,14 +376,5 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
-
-*** Create a forward declarations formatter using stitch              :story:
-
-We need to start making use of stitch in dogen. To start off with, we
-will manually run the stitch command against a template to generate
-the =cpp= file and include the header file from the formatter. We also
-need to inject the stitch file name to the list of ignores, probably
-by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
-avoid clashes with the source code of stitch itself.
 
 ** Deprecated
