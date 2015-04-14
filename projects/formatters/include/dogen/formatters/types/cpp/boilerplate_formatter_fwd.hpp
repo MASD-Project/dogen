@@ -18,43 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_HEADER_GUARD_FORMATTER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_HEADER_GUARD_FORMATTER_FWD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_CPP_BOILERPLATE_FORMATTER_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_CPP_BOILERPLATE_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include <string>
-
 namespace dogen {
-namespace cpp {
 namespace formatters {
+namespace cpp {
 
-/**
- * @brief Generates C++ header guards.
- */
-
-class header_guard_formatter {
-public:
-    header_guard_formatter() = default;
-    header_guard_formatter(const header_guard_formatter&) = default;
-    header_guard_formatter& operator=(
-        const header_guard_formatter&) = delete;
-    header_guard_formatter(header_guard_formatter&& rhs) = default;
-
-public:
-    /**
-     * @brief Creates the starting block of the header guard.
-     */
-    void format_begin(std::ostream& s, const std::string& header_guard);
-
-    /**
-     * @brief Creates the ending block of the header guard.
-     */
-    void format_end(std::ostream& s, const std::string& header_guard);
-};
+class boilerplate_formatter;
 
 } } }
 

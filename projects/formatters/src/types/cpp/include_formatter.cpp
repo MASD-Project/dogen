@@ -18,35 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_INCLUDE_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_INCLUDE_FORMATTER_HPP
+#include <ostream>
+#include <boost/filesystem/path.hpp>
+#include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/formatters/types/cpp/include_formatter.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <list>
-#include <iosfwd>
-#include "dogen/cpp/types/formattables/includes.hpp"
+const std::string include("#include ");
+
+}
 
 namespace dogen {
-namespace cpp {
 namespace formatters {
+namespace cpp {
 
-/**
- * @brief Generates preprocessor include statements.
- */
-class include_formatter {
-public:
-    include_formatter() = default;
-    include_formatter(const include_formatter&) = default;
-    include_formatter& operator=(const include_formatter&) = delete;
-    include_formatter(include_formatter&& rhs) = default;
+void include_formatter::
+format(std::ostream& s, const std::list<std::string>& includes) const {
+    for (const auto& inc : includes)
+        s << include << inc << std::endl;
 
-public:
-    void format(std::ostream& s, const std::list<std::string>& includes) const;
-};
+    if (!includes.empty())
+        s << dogen::formatters::manage_blank_lines << std::endl;
+}
 
 } } }
-
-#endif

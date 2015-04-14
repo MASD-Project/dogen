@@ -24,6 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -38,7 +39,7 @@
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
+
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -178,7 +179,6 @@ void class_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file
 class_header_formatter::format(const formattables::class_info& c) const {
-    boilerplate_formatter boilerplate_;
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
 
     std::ostringstream ss;
@@ -190,7 +190,7 @@ class_header_formatter::format(const formattables::class_info& c) const {
     validate(fs);
 
     const auto hg(*fs.header_guard());
-    dogen::cpp::formatters::boilerplate_formatter f;
+    dogen::formatters::cpp::boilerplate_formatter f;
     const auto gs(c.settings().general_settings());
     if (gs)
         f.format_begin(fo, gs->annotation(), fs.inclusion_dependencies(), hg);

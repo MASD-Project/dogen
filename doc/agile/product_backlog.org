@@ -3752,14 +3752,18 @@ Start of more recent notes on this:
   =class_header_formatter_stitch.cpp= file. It would also
   ignore/generate a =class_header_formatter_stitch.hpp= file and
   automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. All these files are automatically
-  added to the list of "exceptions" for housekeeping so that they do
-  not get deleted. However, stitch would not know anything at all
-  about any of this; this is all knitter's functionality. The problem
-  is at present we haven't got a good place to perform the stitching
-  as part of knitter's workflows. Perhaps as part of the expansion, we
-  could set a number of stitch fields which would then be picked up by
-  some knit-specific workflow classes.
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
 - when we have merging support we can actually implement =insert_code=
   in a good way. We could mark the formatters with meta-data stating
   they have a method which is a stitch template. That then results in

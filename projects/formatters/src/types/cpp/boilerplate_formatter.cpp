@@ -22,9 +22,9 @@
 #include <ostream>
 #include "dogen/formatters/types/modeline_formatter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
-#include "dogen/cpp/types/formatters/include_formatter.hpp"
-#include "dogen/cpp/types/formatters/header_guard_formatter.hpp"
-#include "dogen/cpp/types/formatters/boilerplate_formatter.hpp"
+#include "dogen/formatters/types/cpp/include_formatter.hpp"
+#include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
+#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 
 namespace {
 
@@ -37,8 +37,8 @@ const bool documenting_previous_identifier(true);
 }
 
 namespace dogen {
-namespace cpp {
 namespace formatters {
+namespace cpp {
 
 boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble, const bool generate_header_guards)
@@ -46,10 +46,9 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-add_modeline(std::list<std::string>& content,
-    const dogen::formatters::modeline& m) const {
+add_modeline(std::list<std::string>& content, const modeline& m) const {
     std::ostringstream s;
-    dogen::formatters::modeline_formatter f;
+    modeline_formatter f;
     f.format(s, m);
     content.push_back(s.str());
 }
@@ -64,8 +63,7 @@ add_marker(std::list<std::string>& content,
 }
 
 void boilerplate_formatter::
-add_licence(std::list<std::string>& content,
-    const dogen::formatters::licence& l) const {
+add_licence(std::list<std::string>& content, const licence& l) const {
     std::ostringstream s;
     for (const auto h : l.copyright_notices())
         s << h << std::endl;
@@ -79,12 +77,12 @@ add_licence(std::list<std::string>& content,
 }
 
 void boilerplate_formatter::
-format_preamble(std::ostream& s, const dogen::formatters::annotation& a) const {
+format_preamble(std::ostream& s, const annotation& a) const {
     if (!generate_preamble_)
         return;
 
     bool is_top(false);
-    const auto top(dogen::formatters::modeline_locations::top);
+    const auto top(modeline_locations::top);
     bool has_modeline(a.modeline() != nullptr);
     std::list<std::string> content;
     if (has_modeline) {
@@ -102,20 +100,20 @@ format_preamble(std::ostream& s, const dogen::formatters::annotation& a) const {
         return;
 
     if (has_modeline && is_top && content.size() == 1) {
-        dogen::formatters::comment_formatter cf(
+        comment_formatter cf(
             start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatters::comment_styles::cpp_style,
+            comment_styles::cpp_style,
             !last_line_is_blank);
 
         cf.format(s, content, !line_between_blocks);
     } else {
-        dogen::formatters::comment_formatter cf(
+        comment_formatter cf(
             is_top ? start_on_first_line : !start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatters::comment_styles::c_style,
+            comment_styles::c_style,
             last_line_is_blank);
 
         cf.format(s, content, line_between_blocks);
@@ -150,7 +148,7 @@ format_includes(std::ostream& s, const std::list<std::string>& includes) const {
 }
 
 void boilerplate_formatter::
-format_begin(std::ostream& s, const dogen::formatters::annotation& a,
+format_begin(std::ostream& s, const annotation& a,
     const std::list<std::string>& includes,
     const std::string& header_guard) const {
 
@@ -160,20 +158,20 @@ format_begin(std::ostream& s, const dogen::formatters::annotation& a,
 }
 
 void boilerplate_formatter::format_postamble(std::ostream& s,
-    const dogen::formatters::annotation& a) const {
+    const annotation& a) const {
     if (!a.modeline())
         return;
 
     const auto m(*a.modeline());
-    if (m.location() == dogen::formatters::modeline_locations::bottom) {
+    if (m.location() == modeline_locations::bottom) {
         std::list<std::string> content;
         add_modeline(content, m);
 
-        dogen::formatters::comment_formatter cf(
+        comment_formatter cf(
             !start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatters::comment_styles::c_style,
+            comment_styles::c_style,
             !last_line_is_blank);
 
         cf.format(s, content);
@@ -181,7 +179,7 @@ void boilerplate_formatter::format_postamble(std::ostream& s,
 }
 
 void boilerplate_formatter::
-format_end(std::ostream& s, const dogen::formatters::annotation& a,
+format_end(std::ostream& s, const annotation& a,
     const std::string& header_guard) const {
     format_postamble(s, a);
     format_guards_end(s, header_guard);

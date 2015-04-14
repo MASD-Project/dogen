@@ -26,12 +26,12 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/cpp/types/formatters/include_formatter.hpp"
+#include "dogen/formatters/types/cpp/include_formatter.hpp"
 
 namespace {
 
 const std::string empty;
-const std::string test_module("cpp");
+const std::string test_module("formatters");
 const std::string test_suite("include_formatter_spec");
 const auto empty_includes(std::list<std::string>{});
 
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::cpp::formatters::include_formatter f;
+    dogen::formatters::cpp::include_formatter f;
     f.format(fo, includes);
     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::cpp::formatters::include_formatter f;
+    dogen::formatters::cpp::include_formatter f;
     f.format(fo, empty_includes);
     BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";

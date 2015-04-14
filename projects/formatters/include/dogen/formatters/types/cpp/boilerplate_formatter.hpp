@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_BOILERPLATE_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_BOILERPLATE_FORMATTER_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_CPP_BOILERPLATE_FORMATTER_HPP
+#define DOGEN_FORMATTERS_TYPES_CPP_BOILERPLATE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,8 +31,8 @@
 #include "dogen/formatters/types/annotation.hpp"
 
 namespace dogen {
-namespace cpp {
 namespace formatters {
+namespace cpp {
 
 /**
  * @brief Formats all of the boilerplate content in a C++ file such as
@@ -60,8 +60,7 @@ private:
     /**
      * @brief Adds the formatted modeline to the content.
      */
-    void add_modeline(std::list<std::string>& content,
-        const dogen::formatters::modeline& m) const;
+    void add_modeline(std::list<std::string>& content, const modeline& m) const;
 
     /**
      * @brief Adds the formatted modeline to the content.
@@ -72,8 +71,7 @@ private:
     /**
      * @brief Adds the formatted modeline to the content.
      */
-    void add_licence(std::list<std::string>& content,
-        const dogen::formatters::licence& l) const;
+    void add_licence(std::list<std::string>& content, const licence& l) const;
 
     /**
      * @brief Formats the file's preamble.
@@ -81,16 +79,14 @@ private:
      * The preamble is made up of the modeline, any potential code
      * generation marker and the licence.
      */
-    void format_preamble(std::ostream& s,
-        const dogen::formatters::annotation& a) const;
+    void format_preamble(std::ostream& s, const annotation& a) const;
 
     /**
      * @brief Formats the file's postamble.
      *
      * The postamble is composed of a bottom modeline, if any.
      */
-    void format_postamble(std::ostream& s,
-        const dogen::formatters::annotation& a) const;
+    void format_postamble(std::ostream& s, const annotation& a) const;
 
     /**
      * @brief Formats the starting part of the header guards.
@@ -114,15 +110,14 @@ public:
     /**
      * @brief Formats the initial section of boilerplate.
      */
-    void format_begin(std::ostream& s,
-        const dogen::formatters::annotation& a,
+    void format_begin(std::ostream& s, const annotation& a,
         const std::list<std::string>& includes,
         const std::string& header_guard) const;
 
     /**
      * @brief Formats the end of the boilerplate.
      */
-    void format_end(std::ostream& s, const dogen::formatters::annotation& a,
+    void format_end(std::ostream& s, const annotation& a,
         const std::string& header_guard) const;
 
 private:
