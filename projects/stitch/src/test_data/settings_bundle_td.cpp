@@ -41,13 +41,6 @@ create_dogen_stitch_stitching_settings(const unsigned int position) {
     return dogen::stitch::stitching_settings_generator::create(position);
 }
 
-boost::optional<dogen::stitch::stitching_settings>
-create_boost_optional_dogen_stitch_stitching_settings(unsigned int position) {
-    boost::optional<dogen::stitch::stitching_settings> r(
-        create_dogen_stitch_stitching_settings(position));
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -58,7 +51,7 @@ settings_bundle_generator::settings_bundle_generator() : position_(0) { }
 void settings_bundle_generator::
 populate(const unsigned int position, result_type& v) {
     v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 0));
-    v.stitching_settings(create_boost_optional_dogen_stitch_stitching_settings(position + 1));
+    v.stitching_settings(create_dogen_stitch_stitching_settings(position + 1));
 }
 
 settings_bundle_generator::result_type

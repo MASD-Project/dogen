@@ -20,6 +20,7 @@
  */
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/segment.hpp"
+#include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
@@ -33,4 +34,5 @@
 #include "dogen/stitch/types/mixed_content_line.hpp"
 #include "dogen/stitch/types/stitching_settings.hpp"
 #include "dogen/stitch/types/mixed_content_block.hpp"
+#include "dogen/stitch/types/settings_bundle_factory.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"

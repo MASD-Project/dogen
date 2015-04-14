@@ -24,10 +24,12 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/stitch/serialization/stitching_settings_ser.hpp"
 
 
@@ -39,6 +41,8 @@ void save(Archive& ar,
     const dogen::stitch::stitching_settings& v,
     const unsigned int /*version*/) {
     ar << make_nvp("stream_variable_name", v.stream_variable_name_);
+    ar << make_nvp("template_path", v.template_path_);
+    ar << make_nvp("file_path", v.file_path_);
 }
 
 template<typename Archive>
@@ -46,6 +50,8 @@ void load(Archive& ar,
     dogen::stitch::stitching_settings& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("stream_variable_name", v.stream_variable_name_);
+    ar >> make_nvp("template_path", v.template_path_);
+    ar >> make_nvp("file_path", v.file_path_);
 }
 
 } }

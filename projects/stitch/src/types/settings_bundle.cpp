@@ -29,7 +29,7 @@ settings_bundle::settings_bundle(settings_bundle&& rhs)
 
 settings_bundle::settings_bundle(
     const boost::optional<dogen::formatters::general_settings>& general_settings,
-    const boost::optional<dogen::stitch::stitching_settings>& stitching_settings)
+    const dogen::stitch::stitching_settings& stitching_settings)
     : general_settings_(general_settings),
       stitching_settings_(stitching_settings) { }
 
@@ -66,19 +66,19 @@ void settings_bundle::general_settings(const boost::optional<dogen::formatters::
     general_settings_ = std::move(v);
 }
 
-const boost::optional<dogen::stitch::stitching_settings>& settings_bundle::stitching_settings() const {
+const dogen::stitch::stitching_settings& settings_bundle::stitching_settings() const {
     return stitching_settings_;
 }
 
-boost::optional<dogen::stitch::stitching_settings>& settings_bundle::stitching_settings() {
+dogen::stitch::stitching_settings& settings_bundle::stitching_settings() {
     return stitching_settings_;
 }
 
-void settings_bundle::stitching_settings(const boost::optional<dogen::stitch::stitching_settings>& v) {
+void settings_bundle::stitching_settings(const dogen::stitch::stitching_settings& v) {
     stitching_settings_ = v;
 }
 
-void settings_bundle::stitching_settings(const boost::optional<dogen::stitch::stitching_settings>&& v) {
+void settings_bundle::stitching_settings(const dogen::stitch::stitching_settings&& v) {
     stitching_settings_ = std::move(v);
 }
 

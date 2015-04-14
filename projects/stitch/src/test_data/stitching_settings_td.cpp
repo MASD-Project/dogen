@@ -29,6 +29,20 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
+boost::optional<boost::filesystem::path>
+create_boost_optional_boost_filesystem_path(unsigned int position) {
+    boost::optional<boost::filesystem::path> r(
+        create_boost_filesystem_path(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -39,6 +53,8 @@ stitching_settings_generator::stitching_settings_generator() : position_(0) { }
 void stitching_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.stream_variable_name(create_std_string(position + 0));
+    v.template_path(create_boost_optional_boost_filesystem_path(position + 1));
+    v.file_path(create_boost_optional_boost_filesystem_path(position + 2));
 }
 
 stitching_settings_generator::result_type

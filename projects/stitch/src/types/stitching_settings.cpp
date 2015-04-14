@@ -23,16 +23,30 @@
 namespace dogen {
 namespace stitch {
 
-stitching_settings::stitching_settings(const std::string& stream_variable_name)
-    : stream_variable_name_(stream_variable_name) { }
+stitching_settings::stitching_settings(stitching_settings&& rhs)
+    : stream_variable_name_(std::move(rhs.stream_variable_name_)),
+      template_path_(std::move(rhs.template_path_)),
+      file_path_(std::move(rhs.file_path_)) { }
+
+stitching_settings::stitching_settings(
+    const std::string& stream_variable_name,
+    const boost::optional<boost::filesystem::path>& template_path,
+    const boost::optional<boost::filesystem::path>& file_path)
+    : stream_variable_name_(stream_variable_name),
+      template_path_(template_path),
+      file_path_(file_path) { }
 
 void stitching_settings::swap(stitching_settings& other) noexcept {
     using std::swap;
     swap(stream_variable_name_, other.stream_variable_name_);
+    swap(template_path_, other.template_path_);
+    swap(file_path_, other.file_path_);
 }
 
 bool stitching_settings::operator==(const stitching_settings& rhs) const {
-    return stream_variable_name_ == rhs.stream_variable_name_;
+    return stream_variable_name_ == rhs.stream_variable_name_ &&
+        template_path_ == rhs.template_path_ &&
+        file_path_ == rhs.file_path_;
 }
 
 stitching_settings& stitching_settings::operator=(stitching_settings other) {
@@ -55,6 +69,38 @@ void stitching_settings::stream_variable_name(const std::string& v) {
 
 void stitching_settings::stream_variable_name(const std::string&& v) {
     stream_variable_name_ = std::move(v);
+}
+
+const boost::optional<boost::filesystem::path>& stitching_settings::template_path() const {
+    return template_path_;
+}
+
+boost::optional<boost::filesystem::path>& stitching_settings::template_path() {
+    return template_path_;
+}
+
+void stitching_settings::template_path(const boost::optional<boost::filesystem::path>& v) {
+    template_path_ = v;
+}
+
+void stitching_settings::template_path(const boost::optional<boost::filesystem::path>&& v) {
+    template_path_ = std::move(v);
+}
+
+const boost::optional<boost::filesystem::path>& stitching_settings::file_path() const {
+    return file_path_;
+}
+
+boost::optional<boost::filesystem::path>& stitching_settings::file_path() {
+    return file_path_;
+}
+
+void stitching_settings::file_path(const boost::optional<boost::filesystem::path>& v) {
+    file_path_ = v;
+}
+
+void stitching_settings::file_path(const boost::optional<boost::filesystem::path>&& v) {
+    file_path_ = std::move(v);
 }
 
 } }

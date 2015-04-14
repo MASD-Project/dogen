@@ -27,6 +27,8 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/stitch/serialization/stitching_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,11 +38,16 @@ class stitching_settings final {
 public:
     stitching_settings() = default;
     stitching_settings(const stitching_settings&) = default;
-    stitching_settings(stitching_settings&&) = default;
     ~stitching_settings() = default;
 
 public:
-    explicit stitching_settings(const std::string& stream_variable_name);
+    stitching_settings(stitching_settings&& rhs);
+
+public:
+    stitching_settings(
+        const std::string& stream_variable_name,
+        const boost::optional<boost::filesystem::path>& template_path,
+        const boost::optional<boost::filesystem::path>& file_path);
 
 private:
     template<typename Archive>
@@ -55,6 +62,16 @@ public:
     void stream_variable_name(const std::string& v);
     void stream_variable_name(const std::string&& v);
 
+    const boost::optional<boost::filesystem::path>& template_path() const;
+    boost::optional<boost::filesystem::path>& template_path();
+    void template_path(const boost::optional<boost::filesystem::path>& v);
+    void template_path(const boost::optional<boost::filesystem::path>&& v);
+
+    const boost::optional<boost::filesystem::path>& file_path() const;
+    boost::optional<boost::filesystem::path>& file_path();
+    void file_path(const boost::optional<boost::filesystem::path>& v);
+    void file_path(const boost::optional<boost::filesystem::path>&& v);
+
 public:
     bool operator==(const stitching_settings& rhs) const;
     bool operator!=(const stitching_settings& rhs) const {
@@ -67,6 +84,8 @@ public:
 
 private:
     std::string stream_variable_name_;
+    boost::optional<boost::filesystem::path> template_path_;
+    boost::optional<boost::filesystem::path> file_path_;
 };
 
 } }

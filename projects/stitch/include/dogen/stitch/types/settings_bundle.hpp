@@ -46,7 +46,7 @@ public:
 public:
     settings_bundle(
         const boost::optional<dogen::formatters::general_settings>& general_settings,
-        const boost::optional<dogen::stitch::stitching_settings>& stitching_settings);
+        const dogen::stitch::stitching_settings& stitching_settings);
 
 private:
     template<typename Archive>
@@ -61,10 +61,10 @@ public:
     void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
     void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
 
-    const boost::optional<dogen::stitch::stitching_settings>& stitching_settings() const;
-    boost::optional<dogen::stitch::stitching_settings>& stitching_settings();
-    void stitching_settings(const boost::optional<dogen::stitch::stitching_settings>& v);
-    void stitching_settings(const boost::optional<dogen::stitch::stitching_settings>&& v);
+    const dogen::stitch::stitching_settings& stitching_settings() const;
+    dogen::stitch::stitching_settings& stitching_settings();
+    void stitching_settings(const dogen::stitch::stitching_settings& v);
+    void stitching_settings(const dogen::stitch::stitching_settings&& v);
 
 public:
     bool operator==(const settings_bundle& rhs) const;
@@ -78,7 +78,7 @@ public:
 
 private:
     boost::optional<dogen::formatters::general_settings> general_settings_;
-    boost::optional<dogen::stitch::stitching_settings> stitching_settings_;
+    dogen::stitch::stitching_settings stitching_settings_;
 };
 
 } }

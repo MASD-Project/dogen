@@ -41,16 +41,6 @@ inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const b
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_stitch_stitching_settings(const boost::optional<dogen::stitch::stitching_settings>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -60,7 +50,7 @@ std::size_t settings_bundle_hasher::hash(const settings_bundle&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
-    combine(seed, hash_boost_optional_dogen_stitch_stitching_settings(v.stitching_settings()));
+    combine(seed, v.stitching_settings());
 
     return seed;
 }

@@ -30,13 +30,30 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<boost::filesystem::path>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace stitch {
 
 std::ostream& operator<<(std::ostream& s, const stitching_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::stitching_settings\"" << ", "
-      << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\""
+      << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
+      << "\"template_path\": " << v.template_path() << ", "
+      << "\"file_path\": " << v.file_path()
       << " }";
     return(s);
 }

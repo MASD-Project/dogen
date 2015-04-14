@@ -13,17 +13,17 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-14 Tue 20:32]
+Clock summary at [2015-04-14 Tue 20:50]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *5:42* |      |      |
+| *Total time*                                         | *5:58* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Active                                               |        | 5:42 |      |
+| Active                                               |        | 5:58 |      |
 | STARTED Sprint and product backlog grooming          |        |      | 0:07 |
 | COMPLETED Create a formatting utilities class        |        |      | 1:17 |
 | COMPLETED Implement a basic formatter in stitch      |        |      | 3:02 |
-| STARTED Add support for dynamic extensions in stitch |        |      | 0:48 |
+| STARTED Add support for dynamic extensions in stitch |        |      | 1:04 |
 | STARTED Fix build errors in Windows and Linux 32-bit |        |      | 0:28 |
 #+end:
 
@@ -63,6 +63,7 @@ reads from its object model. So the template would contain nothing but
 c++ code, with very little text.
 
 *** STARTED Add support for dynamic extensions in stitch              :story:
+    CLOCK: [2015-04-14 Tue 20:33]--[2015-04-14 Tue 20:49] =>  0:16
     CLOCK: [2015-04-14 Tue 19:44]--[2015-04-14 Tue 20:32] =>  0:48
 
 There are a number of things that would be useful in stitch:

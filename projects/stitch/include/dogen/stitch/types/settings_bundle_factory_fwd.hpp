@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
+#ifndef DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FACTORY_FWD_HPP
+#define DOGEN_STITCH_TYPES_SETTINGS_BUNDLE_FACTORY_FWD_HPP
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<empty>\"";
-    s << " }";
-    return s;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace stitch {
 
-std::ostream& operator<<(std::ostream& s, const settings_bundle& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::settings_bundle\"" << ", "
-      << "\"general_settings\": " << v.general_settings() << ", "
-      << "\"stitching_settings\": " << v.stitching_settings()
-      << " }";
-    return(s);
-}
+class settings_bundle_factory;
 
 } }
+
+#endif
