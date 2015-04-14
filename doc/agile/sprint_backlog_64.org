@@ -13,16 +13,16 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-13 Mon 19:05]
+Clock summary at [2015-04-14 Tue 19:12]
 
 | Headline                                             | Time   |      |      |
 |------------------------------------------------------+--------+------+------|
-| *Total time*                                         | *2:52* |      |      |
+| *Total time*                                         | *4:23* |      |      |
 |------------------------------------------------------+--------+------+------|
-| Active                                               |        | 2:52 |      |
+| Active                                               |        | 4:23 |      |
 | STARTED Sprint and product backlog grooming          |        |      | 0:07 |
 | COMPLETED Create a formatting utilities class        |        |      | 1:17 |
-| STARTED Implement a basic formatter in stitch        |        |      | 1:00 |
+| STARTED Implement a basic formatter in stitch        |        |      | 2:31 |
 | STARTED Fix build errors in Windows and Linux 32-bit |        |      | 0:28 |
 #+end:
 
@@ -45,6 +45,7 @@ quoting etc. This is a good time to tidy-up the old utilities
 formatter.
 
 *** STARTED Implement a basic formatter in stitch                     :story:
+    CLOCK: [2015-04-14 Tue 17:40]--[2015-04-14 Tue 19:11] =>  1:31
     CLOCK: [2015-04-13 Mon 18:05]--[2015-04-13 Mon 19:05] =>  1:00
 
 We need to create a formatter in stitch that can implement the trivial
