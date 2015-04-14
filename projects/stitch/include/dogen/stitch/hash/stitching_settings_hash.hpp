@@ -18,11 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/scriptlet_block_io.hpp"
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/mixed_content_line_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/stitch/io/mixed_content_block_io.hpp"
+#ifndef DOGEN_STITCH_HASH_STITCHING_SETTINGS_HASH_HPP
+#define DOGEN_STITCH_HASH_STITCHING_SETTINGS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/stitch/types/stitching_settings.hpp"
+
+namespace dogen {
+namespace stitch {
+
+struct stitching_settings_hasher {
+public:
+    static std::size_t hash(const stitching_settings& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::stitch::stitching_settings> {
+public:
+    size_t operator()(const dogen::stitch::stitching_settings& v) const {
+        return dogen::stitch::stitching_settings_hasher::hash(v);
+    }
+};
+
+}
+#endif

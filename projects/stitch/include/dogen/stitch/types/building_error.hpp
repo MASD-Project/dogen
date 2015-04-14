@@ -18,11 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/scriptlet_block_io.hpp"
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/mixed_content_line_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/stitch/io/mixed_content_block_io.hpp"
+#ifndef DOGEN_STITCH_TYPES_BUILDING_ERROR_HPP
+#define DOGEN_STITCH_TYPES_BUILDING_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace dogen {
+namespace stitch {
+
+/**
+ * @brief An error occurred whilst building.
+ */
+class building_error : public virtual std::exception, public virtual boost::exception {
+public:
+    building_error() = default;
+    ~building_error() noexcept = default;
+
+public:
+    building_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} }
+
+#endif

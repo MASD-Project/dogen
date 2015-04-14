@@ -45,6 +45,7 @@ quoting etc. This is a good time to tidy-up the old utilities
 formatter.
 
 *** STARTED Implement a basic formatter in stitch                     :story:
+    CLOCK: [2015-04-14 Tue 19:12]--[2015-04-14 Tue 19:28] =>  0:16
     CLOCK: [2015-04-14 Tue 17:40]--[2015-04-14 Tue 19:11] =>  1:31
     CLOCK: [2015-04-13 Mon 18:05]--[2015-04-13 Mon 19:05] =>  1:00
 
@@ -138,6 +139,15 @@ sorting criteria is identical all the way to the size of the
 string. This then means its the luck of the draw for these strings.
 
 We need to add further criteria to disambiguate strings.
+
+*** Split knitting from stitching settings                            :story:
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
 
 *** Create a forward declarations formatter using stitch              :story:
 

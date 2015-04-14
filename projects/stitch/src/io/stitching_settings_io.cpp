@@ -18,11 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/scriptlet_block_io.hpp"
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/mixed_content_line_io.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/stitch/io/mixed_content_block_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace stitch {
+
+std::ostream& operator<<(std::ostream& s, const stitching_settings& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::stitching_settings\"" << ", "
+      << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\""
+      << " }";
+    return(s);
+}
+
+} }

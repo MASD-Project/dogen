@@ -24,19 +24,23 @@ namespace dogen {
 namespace stitch {
 
 text_template::text_template(
+    const dogen::stitch::settings_bundle& settings,
     const dogen::dynamic::schema::object& extensions,
     const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content)
-    : extensions_(extensions),
+    : settings_(settings),
+      extensions_(extensions),
       content_(content) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
+    swap(settings_, other.settings_);
     swap(extensions_, other.extensions_);
     swap(content_, other.content_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return extensions_ == rhs.extensions_ &&
+    return settings_ == rhs.settings_ &&
+        extensions_ == rhs.extensions_ &&
         content_ == rhs.content_;
 }
 
@@ -44,6 +48,22 @@ text_template& text_template::operator=(text_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::stitch::settings_bundle& text_template::settings() const {
+    return settings_;
+}
+
+dogen::stitch::settings_bundle& text_template::settings() {
+    return settings_;
+}
+
+void text_template::settings(const dogen::stitch::settings_bundle& v) {
+    settings_ = v;
+}
+
+void text_template::settings(const dogen::stitch::settings_bundle&& v) {
+    settings_ = std::move(v);
 }
 
 const dogen::dynamic::schema::object& text_template::extensions() const {

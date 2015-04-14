@@ -19,21 +19,18 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/variant.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
-#include "dogen/stitch/serialization/scriptlet_block_ser.hpp"
 #include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/mixed_content_block_ser.hpp"
+#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#include "dogen/formatters/serialization/general_settings_ser.hpp"
 
 
 namespace boost {
@@ -41,20 +38,18 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::stitch::text_template& v,
+    const dogen::stitch::settings_bundle& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("settings", v.settings_);
-    ar << make_nvp("extensions", v.extensions_);
-    ar << make_nvp("content", v.content_);
+    ar << make_nvp("general_settings", v.general_settings_);
+    ar << make_nvp("stitching_settings", v.stitching_settings_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::stitch::text_template& v,
+    dogen::stitch::settings_bundle& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("settings", v.settings_);
-    ar >> make_nvp("extensions", v.extensions_);
-    ar >> make_nvp("content", v.content_);
+    ar >> make_nvp("general_settings", v.general_settings_);
+    ar >> make_nvp("stitching_settings", v.stitching_settings_);
 }
 
 } }
@@ -62,16 +57,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::text_template& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::stitch::text_template& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::stitch::text_template& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::stitch::text_template& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::stitch::text_template& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::stitch::text_template& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::stitch::text_template& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::stitch::text_template& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::stitch::settings_bundle& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::stitch::settings_bundle& v, unsigned int version);
 
 } }

@@ -21,9 +21,15 @@
 #include "dogen/stitch/test_data/text_template_td.hpp"
 #include "dogen/dynamic/schema/test_data/object_td.hpp"
 #include "dogen/stitch/test_data/scriptlet_block_td.hpp"
+#include "dogen/stitch/test_data/settings_bundle_td.hpp"
 #include "dogen/stitch/test_data/mixed_content_block_td.hpp"
 
 namespace {
+
+dogen::stitch::settings_bundle
+create_dogen_stitch_settings_bundle(const unsigned int position) {
+    return dogen::stitch::settings_bundle_generator::create(position);
+}
 
 dogen::dynamic::schema::object
 create_dogen_dynamic_schema_object(const unsigned int position) {
@@ -70,8 +76,9 @@ text_template_generator::text_template_generator() : position_(0) { }
 
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
-    v.extensions(create_dogen_dynamic_schema_object(position + 0));
-    v.content(create_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(position + 1));
+    v.settings(create_dogen_stitch_settings_bundle(position + 0));
+    v.extensions(create_dogen_dynamic_schema_object(position + 1));
+    v.content(create_std_list_boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_(position + 2));
 }
 
 text_template_generator::result_type

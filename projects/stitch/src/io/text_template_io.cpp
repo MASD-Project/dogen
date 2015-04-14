@@ -23,6 +23,7 @@
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/stitch/io/scriptlet_block_io.hpp"
+#include "dogen/stitch/io/settings_bundle_io.hpp"
 #include "dogen/stitch/io/mixed_content_block_io.hpp"
 
 namespace boost {
@@ -74,6 +75,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::text_template\"" << ", "
+      << "\"settings\": " << v.settings() << ", "
       << "\"extensions\": " << v.extensions() << ", "
       << "\"content\": " << v.content()
       << " }";

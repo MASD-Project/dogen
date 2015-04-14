@@ -18,11 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/scriptlet_block_io.hpp"
-#include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/mixed_content_line_io.hpp"
-#include "dogen/stitch/io/stitching_settings_io.hpp"
-#include "dogen/stitch/io/mixed_content_block_io.hpp"
+#ifndef DOGEN_STITCH_SERIALIZATION_STITCHING_SETTINGS_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_STITCHING_SETTINGS_FWD_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/stitch/types/stitching_settings_fwd.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::stitch::stitching_settings& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::stitch::stitching_settings& v, unsigned int version);
+
+} }
+
+#endif

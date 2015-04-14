@@ -30,6 +30,7 @@
 #include <boost/variant.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/stitch/types/scriptlet_block.hpp"
+#include "dogen/stitch/types/settings_bundle.hpp"
 #include "dogen/stitch/types/mixed_content_block.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
@@ -45,6 +46,7 @@ public:
 
 public:
     text_template(
+        const dogen::stitch::settings_bundle& settings,
         const dogen::dynamic::schema::object& extensions,
         const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content);
 
@@ -56,6 +58,11 @@ private:
     friend void boost::serialization::load(Archive& ar, text_template& v, unsigned int version);
 
 public:
+    const dogen::stitch::settings_bundle& settings() const;
+    dogen::stitch::settings_bundle& settings();
+    void settings(const dogen::stitch::settings_bundle& v);
+    void settings(const dogen::stitch::settings_bundle&& v);
+
     const dogen::dynamic::schema::object& extensions() const;
     dogen::dynamic::schema::object& extensions();
     void extensions(const dogen::dynamic::schema::object& v);
@@ -77,6 +84,7 @@ public:
     text_template& operator=(text_template other);
 
 private:
+    dogen::stitch::settings_bundle settings_;
     dogen::dynamic::schema::object extensions_;
     std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> > content_;
 };
