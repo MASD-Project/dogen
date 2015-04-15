@@ -35,6 +35,9 @@
 namespace dogen {
 namespace stitch {
 
+/**
+ * @brief Creates the stitching settings.
+ */
 class stitching_settings_factory {
 public:
     stitching_settings_factory(const dynamic::schema::repository& rp);
@@ -82,6 +85,9 @@ private:
     extract_inclusion_dependencies(const dynamic::schema::object& o) const;
 
 public:
+    /**
+     * @brief Create the stitching settings.
+     */
     stitching_settings make(const dynamic::schema::object& o) const;
 
 private:
