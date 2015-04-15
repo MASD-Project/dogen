@@ -29,11 +29,13 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/file.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
 #include "dogen/stitch/types/text_template.hpp"
+#include "dogen/stitch/types/formatter.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -42,6 +44,9 @@ namespace stitch {
  * @brief Performs the stitch workflow.
  */
 class workflow {
+public:
+    workflow();
+
 private:
     /**
      * @brief Returns all stitch templates that can be found from p.
@@ -52,6 +57,12 @@ private:
      */
     std::list<boost::filesystem::path> get_text_template_paths_activity(
         const boost::filesystem::path& file_or_directory) const;
+
+    /**
+     * @brief Ensures the file paths point to valid templates.
+     */
+    void validate_text_template_paths(
+        const std::list<boost::filesystem::path>& text_template_paths) const;
 
     /**
      * @brief Reads all of the supplied stitch text templates into memory.
@@ -66,9 +77,14 @@ private:
     obtain_ownership_hierarchy_activity() const;
 
     /**
+     * @brief Creates the formatters' repository.
+     */
+    dogen::formatters::repository create_formatters_repository_activity() const;
+
+    /**
      * @brief Sets up the dynamic schema repository.
      */
-    dynamic::schema::repository setup_schema_repository_activity(
+    dynamic::schema::repository create_schema_repository_activity(
         const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
         const;
 
@@ -76,13 +92,16 @@ private:
      * @brief Parses all of the strings that contain text templates.
      */
     std::list<text_template> parse_text_templates_activity(
+        const dynamic::schema::repository& rp,
         const std::list<std::string>& text_templates_as_string) const;
 
     /**
      * @brief Creates the settings bundles.
      */
     std::list<text_template> obtain_settings_bundle_activity(
-        const std::list<text_template>& text_template) const;
+        const dynamic::schema::repository& schema_repository,
+        const dogen::formatters::repository& formatters_repository,
+        const std::list<text_template>& text_templates) const;
 
     /**
      * @brief Formats all of the supplied text templates.
@@ -108,6 +127,9 @@ public:
      * @li if @code p is a file, code-generates the stitch template.
      */
     void execute(const boost::filesystem::path& p) const;
+
+private:
+    const formatter formatter_;
 };
 
 } }
