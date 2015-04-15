@@ -25,6 +25,7 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
@@ -83,26 +84,13 @@ housekeeper::housekeeper(
         std::placeholders::_1);
 }
 
-std::set<boost::filesystem::path>
-housekeeper::files_in_directory(const boost::filesystem::path& d) const {
-    using namespace boost::filesystem;
-    std::set<path> r;
-
-    for (recursive_directory_iterator end, i(d); i != end; ++i) {
-        const path p(*i);
-        if (is_regular_file(p))
-            r.insert(p);
-    }
-
-    return r;
-}
-
 std::set<boost::filesystem::path> housekeeper::
 find_files_in_managed_directories() const {
     std::set<boost::filesystem::path> r;
 
+    using utility::filesystem::find_files;
     for (const auto d : managed_directories_) {
-        const auto f(files_in_directory(d));
+        const auto f(find_files(d));
         r.insert(f.begin(), f.end());
     }
 

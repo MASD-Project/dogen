@@ -69,14 +69,6 @@ public:
 
 private:
     /**
-     * @brief Returns all the files in the supplied directory.
-     *
-     * @pre dir must be a valid directory.
-     */
-    std::set<boost::filesystem::path>
-    files_in_directory(const boost::filesystem::path& d) const;
-
-    /**
      * @brief Returns all files in all managed directories.
      */
     std::set<boost::filesystem::path> find_files_in_managed_directories() const;
