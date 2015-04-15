@@ -26,19 +26,16 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/formatters/test/mock_general_settings_factory.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 
 namespace {
 
 const std::string test_module("formatters");
 const std::string test_suite("boilerplate_formatter_spec");
-const std::string marker("this is a marker");
 const std::string empty;
-const std::string empty_marker;
-const dogen::formatters::licence empty_licence = dogen::formatters::licence();
-const auto empty_includes(std::list<std::string>{});
-const std::string empty_guard;
-const std::string a_guard("A_PATH_HPP");
+
+dogen::formatters::test::mock_general_settings_factory factory_;
 const bool generate_premable(true);
 
 const std::string modeline_top(R"(/* -*- a_field: a_value -*-
@@ -211,47 +208,20 @@ const std::string disabled_preamble(R"(#ifndef A_PATH_HPP
 #endif
 )");
 
-dogen::formatters::modeline
-mock_modeline(const dogen::formatters::modeline_locations l) {
-    dogen::formatters::modeline r;
-    r.editor(dogen::formatters::editors::emacs);
-    r.location(l);
+std::string format(const dogen::formatters::annotation& a,
+    const std::list<std::string>& inclusion_dependencies,
+    const std::string& header_guard,
+    const bool generate_premable = true) {
 
-    using dogen::formatters::modeline_field;
-    modeline_field mf;
-    mf.name("a_field");
-    mf.value("a_value");
+    std::ostringstream s;
+    boost::iostreams::filtering_ostream fo;
+    dogen::formatters::indent_filter::push(fo, 4);
+    fo.push(s);
 
-    r.fields(std::list<modeline_field>{ mf });
-    return r;
-}
-
-dogen::formatters::licence mock_licence(const bool multiline = false) {
-    dogen::formatters::licence r;
-
-    r.copyright_notices().push_back("a_holder");
-    if (multiline)
-        r.copyright_notices().push_back("another_holder");
-
-    if (multiline) {
-        std::ostringstream s;
-        s << "first line of licence text" << std::endl
-          << "second line of licence text" << std::endl;
-        r.text(s.str());
-    } else
-        r.text("licence text");
-
-    return r;
-}
-
-std::list<std::string> mock_includes() {
-    std::list<std::string> r;
-    // FIXME: bug in generic_string so not testing win32 paths atm
-    r.push_back("<win32/system_inc_1>");
-    r.push_back("<unix/system_inc_2>");
-    r.push_back("\"user_inc_1\"");
-    r.push_back("\"user_inc_2\"");
-    return r;
+    dogen::formatters::cpp::boilerplate_formatter f(generate_premable);
+    f.format_begin(fo, a, inclusion_dependencies, header_guard);
+    f.format_end(fo, a, header_guard);
+    return s.str();
 }
 
 }
@@ -265,19 +235,11 @@ BOOST_AUTO_TEST_SUITE(boilerplate_formatter)
 BOOST_AUTO_TEST_CASE(top_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("top_modeline_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const auto a(factory_.make_annotation());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -286,19 +248,12 @@ BOOST_AUTO_TEST_CASE(top_modeline_and_multiline_licence_is_formatted_correctly) 
     SETUP_TEST_LOG_SOURCE("top_modeline_and_multiline_licence_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence(true/*multiline licence*/));
-    const annotation a(m, l, marker);
+    const auto a(factory_.make_annotation(modeline_locations::top,
+            true/*multiline licence*/));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(multiline_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -307,19 +262,11 @@ BOOST_AUTO_TEST_CASE(bottom_modeline_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("bottom_modeline_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::bottom));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const auto a(factory_.make_annotation(modeline_locations::bottom));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -328,19 +275,14 @@ BOOST_AUTO_TEST_CASE(no_marker_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("no_marker_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence());
-    const annotation a(m, l, empty_marker);
+    const auto a(factory_.make_annotation(modeline_locations::top,
+            false/*multiline licence*/,
+            false/*use_empty_licence*/,
+            true/*use_empty_marker*/));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(no_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -349,18 +291,14 @@ BOOST_AUTO_TEST_CASE(no_licence_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("no_licence_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
-    const annotation a(m, empty_licence, marker);
+    const auto a(factory_.make_annotation(modeline_locations::top,
+            false/*use_multiline licence*/,
+            true/*use_empty_licence*/,
+            false/*use_empty_marker*/));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(no_licence, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -369,20 +307,14 @@ BOOST_AUTO_TEST_CASE(licence_with_holder_but_no_text_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("licence_with_holder_but_no_text_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
+    const auto m(factory_.make_modeline(modeline_locations::top));
     licence l;
     l.copyright_notices().push_back("a_holder");
-    const annotation a(m, l, marker);
+    const annotation a(m, l, factory_.make_marker());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(licence_no_text, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -391,20 +323,14 @@ BOOST_AUTO_TEST_CASE(licence_with_text_but_no_copyright_notices_is_formatted_cor
     SETUP_TEST_LOG_SOURCE("licence_with_text_but_no_copyright_notices_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
+    const auto m(factory_.make_modeline(modeline_locations::top));
     licence l;
     l.text("licence text");
-    const annotation a(m, l, marker);
+    const annotation a(m, l, factory_.make_marker());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(
         asserter::assert_equals_marker(licence_no_copyright_notices, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -414,18 +340,12 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_marker_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("preamble_with_just_marker_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const modeline m;
-    dogen::formatters::cpp::boilerplate_formatter f;
-    const annotation a(m, empty_licence, marker);
+    auto a(factory_.make_empty_annotation());
+    a.code_generation_marker(factory_.make_marker());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_marker, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -434,18 +354,15 @@ BOOST_AUTO_TEST_CASE(preamble_with_just_modeline_at_the_top_is_formatted_correct
     SETUP_TEST_LOG_SOURCE("preamble_with_just_modeline_at_the_top_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
-    const annotation a(m, empty_licence, empty_marker);
+    const annotation a(factory_.make_annotation(
+            modeline_locations::top,
+            false/*use_multiline licence*/,
+            true/*use_empty_licence*/,
+            true/*use_empty_marker*/));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_top, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -454,18 +371,15 @@ BOOST_AUTO_TEST_CASE(postamble_with_just_modeline_at_the_bottom_is_formatted_cor
     SETUP_TEST_LOG_SOURCE("postamble_with_just_modeline_at_the_bottom_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::bottom));
-    const annotation a(m, empty_licence, empty_marker);
+    const annotation a(factory_.make_annotation(
+            modeline_locations::bottom,
+            false/*use_multiline licence*/,
+            true/*use_empty_licence*/,
+            true/*use_empty_marker*/));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(just_modeline_bottom, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -474,18 +388,11 @@ BOOST_AUTO_TEST_CASE(not_supplying_content_results_in_no_boilerplate) {
     SETUP_TEST_LOG_SOURCE("not_supplying_content_results_in_no_boilerplate");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const modeline m;
-    const annotation a(m, empty_licence, empty_marker);
+    const annotation a(factory_.make_empty_annotation());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard(true/*is_empty*/));
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, empty_guard);
-    f.format_end(fo, a, empty_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(empty, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -494,19 +401,11 @@ BOOST_AUTO_TEST_CASE(header_guards_with_top_modeline_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("header_guards_with_top_modeline_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const annotation a(factory_.make_annotation());
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard());
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, a_guard);
-    f.format_end(fo, a, a_guard);
-    const auto r(s.str());
     BOOST_CHECK(r == guards_with_top_modeline);
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -516,19 +415,11 @@ BOOST_AUTO_TEST_CASE(header_guards_with_bottom_modeline_are_formatted_correctly)
     SETUP_TEST_LOG_SOURCE("header_guards_with_bottom_modeline_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto m(mock_modeline(modeline_locations::bottom));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const annotation a(factory_.make_annotation(modeline_locations::bottom));
+    const auto inc(factory_.make_includes(true/*is_empty*/));
+    const auto hg(factory_.make_header_guard());
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, empty_includes, a_guard);
-    f.format_end(fo, a, a_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(guards_with_bottom_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -537,20 +428,11 @@ BOOST_AUTO_TEST_CASE(includes_are_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("includes_are_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto inc(mock_includes());
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const annotation a(factory_.make_annotation());
+    const auto inc(factory_.make_includes());
+    const auto hg(factory_.make_header_guard());
+    const auto r(format(a, inc, hg));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f;
-    f.format_begin(fo, a, inc, a_guard);
-    f.format_end(fo, a, a_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(includes_with_top_modeline, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
@@ -559,20 +441,11 @@ BOOST_AUTO_TEST_CASE(disabled_preamble_is_formatted_correctly) {
     SETUP_TEST_LOG_SOURCE("disabled_preamble_is_formatted_correctly");
     BOOST_LOG_SEV(lg, debug) << "Disable modeline top";
 
-    const auto inc(mock_includes());
-    const auto m(mock_modeline(modeline_locations::top));
-    const auto l(mock_licence());
-    const annotation a(m, l, marker);
+    const annotation a(factory_.make_annotation());
+    const auto inc(factory_.make_includes());
+    const auto hg(factory_.make_header_guard());
+    const auto r(format(a, inc, hg, !generate_premable));
 
-    std::ostringstream s;
-    boost::iostreams::filtering_ostream fo;
-    indent_filter::push(fo, 4);
-    fo.push(s);
-
-    dogen::formatters::cpp::boilerplate_formatter f(!generate_premable);
-    f.format_begin(fo, a, inc, a_guard);
-    f.format_end(fo, a, a_guard);
-    const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(disabled_preamble, r));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
 }
