@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include <boost/variant/static_visitor.hpp>
-#include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/utility_formatter.hpp"
+#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
+#include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
 namespace {
@@ -28,6 +31,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("stitch.formatters"));
 
+const std::string empty_header_guard;
 const std::string model_name("stitch");
 const std::string facet_name;
 const std::string formatter_name("stitch.formatter");
@@ -35,6 +39,8 @@ const std::string group_name;
 
 const std::string inserter("<<");
 const std::string endl("std::endl;");
+
+const std::string empty_stream_name("Stream name cannot be empty");
 
 }
 
@@ -102,10 +108,27 @@ dynamic::schema::ownership_hierarchy formatter::ownership_hierarchy() const {
 dogen::formatters::file formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting template.";
 
+    const auto& ss(tt.settings().stitching_settings());
+    const auto stream_variable_name(ss.stream_variable_name());
+    if (stream_variable_name.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_stream_name;
+        BOOST_THROW_EXCEPTION(formatting_error(empty_stream_name));
+    }
+
     std::ostringstream s;
-    visitor v("stream_", s);
+    dogen::formatters::cpp::boilerplate_formatter f;
+    const auto gs(tt.settings().general_settings());
+    if (gs) {
+        const auto& id(ss.inclusion_dependencies());
+        f.format_begin(s, gs->annotation(), id, empty_header_guard);
+    }
+
+    visitor v(stream_variable_name, s);
     for (const auto& b : tt.content())
         boost::apply_visitor(v, b);
+
+    if (gs)
+        f.format_end(s, gs->annotation(), empty_header_guard);
 
     dogen::formatters::file r;
     r.content(s.str());

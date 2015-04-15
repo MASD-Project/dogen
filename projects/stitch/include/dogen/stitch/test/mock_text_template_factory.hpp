@@ -37,6 +37,12 @@ namespace test {
 class mock_text_template_factory {
 private:
     /**
+     * @brief Creates an empty text template, with the exception of
+     * the key settings.
+     */
+    text_template make_text_template_with_trivial_settings() const;
+
+    /**
      * @brief Makes a mixed content block with @code how_many text lines.
      */
     mixed_content_block make_text_only_mixed_content_block(
@@ -132,6 +138,12 @@ public:
      * followed by single-line text.
      */
     text_template make_complex_structure() const;
+
+    /**
+     * @brief Populate general settings in the template. Also includes
+     * a single line of text.
+     */
+    text_template make_with_general_settings() const;
 
 private:
 };

@@ -99,6 +99,18 @@ unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
+const std::string with_general_settings(R"(/* -*- a_field: a_value -*-
+ *
+ * this is a marker
+ *
+ * a_holder
+ *
+ * licence text
+ *
+ */
+stream_ << "This is line numnber: 0" << std::endl;
+)");
+
 dogen::formatters::file format(const dogen::stitch::text_template& tt) {
     dogen::stitch::formatter f;
     return f.format(tt);
@@ -257,5 +269,18 @@ BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
     const auto& c(r.content());
     BOOST_CHECK(asserter::assert_equals(complex_structure, c));
 }
+
+BOOST_AUTO_TEST_CASE(general_settings_result_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("general_settings_result_in_expected_template");
+
+    const auto tt(factory.make_with_general_settings());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+    const auto& c(r.content());
+    BOOST_CHECK(asserter::assert_equals(with_general_settings, c));
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
