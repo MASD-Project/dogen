@@ -69,6 +69,7 @@ std::size_t repository_hasher::hash(const repository&v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(v.field_definitions_by_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(v.field_definitions_by_facet_name()));
     combine(seed, hash_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(v.field_definitions_by_formatter_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(v.field_definitions_by_model_name()));
 
     return seed;
 }

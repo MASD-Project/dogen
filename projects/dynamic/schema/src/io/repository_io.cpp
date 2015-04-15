@@ -91,7 +91,8 @@ std::ostream& operator<<(std::ostream& s, const repository& v) {
       << "\"all_field_definitions\": " << v.all_field_definitions() << ", "
       << "\"field_definitions_by_name\": " << v.field_definitions_by_name() << ", "
       << "\"field_definitions_by_facet_name\": " << v.field_definitions_by_facet_name() << ", "
-      << "\"field_definitions_by_formatter_name\": " << v.field_definitions_by_formatter_name()
+      << "\"field_definitions_by_formatter_name\": " << v.field_definitions_by_formatter_name() << ", "
+      << "\"field_definitions_by_model_name\": " << v.field_definitions_by_model_name()
       << " }";
     return(s);
 }

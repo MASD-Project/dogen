@@ -32,6 +32,7 @@ const std::string field_not_found("Could not find expected field: ");
 const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
 const std::string no_fields_for_facet("Could not find any fields for facet: ");
+const std::string no_fields_for_model("Could not find any fields for model: ");
 
 }
 
@@ -71,6 +72,17 @@ select_fields_by_facet_name(const std::string& n) const {
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, error) << no_fields_for_facet << n;
         BOOST_THROW_EXCEPTION(selection_error(no_fields_for_facet + n));
+    }
+    return i->second;
+}
+
+const std::list<field_definition>& repository_selector::
+select_fields_by_model_name(const std::string& n) const {
+    const auto& c(repository_.field_definitions_by_model_name());
+    const auto i(c.find(n));
+    if (i == c.end()) {
+        BOOST_LOG_SEV(lg, error) << no_fields_for_model << n;
+        BOOST_THROW_EXCEPTION(selection_error(no_fields_for_model + n));
     }
     return i->second;
 }

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -42,7 +43,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("stream_variable_name", v.stream_variable_name_);
     ar << make_nvp("template_path", v.template_path_);
-    ar << make_nvp("file_path", v.file_path_);
+    ar << make_nvp("output_path", v.output_path_);
+    ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
 template<typename Archive>
@@ -51,7 +53,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("stream_variable_name", v.stream_variable_name_);
     ar >> make_nvp("template_path", v.template_path_);
-    ar >> make_nvp("file_path", v.file_path_);
+    ar >> make_nvp("output_path", v.output_path_);
+    ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
 } }

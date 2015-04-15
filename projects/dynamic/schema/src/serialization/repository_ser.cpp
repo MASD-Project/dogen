@@ -45,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
     ar << make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
     ar << make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);
+    ar << make_nvp("field_definitions_by_model_name", v.field_definitions_by_model_name_);
 }
 
 template<typename Archive>
@@ -55,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("field_definitions_by_name", v.field_definitions_by_name_);
     ar >> make_nvp("field_definitions_by_facet_name", v.field_definitions_by_facet_name_);
     ar >> make_nvp("field_definitions_by_formatter_name", v.field_definitions_by_formatter_name_);
+    ar >> make_nvp("field_definitions_by_model_name", v.field_definitions_by_model_name_);
 }
 
 } }

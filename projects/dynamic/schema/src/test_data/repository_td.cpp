@@ -73,6 +73,7 @@ populate(const unsigned int position, result_type& v) {
     v.field_definitions_by_name(create_std_unordered_map_std_string_dogen_dynamic_schema_field_definition(position + 1));
     v.field_definitions_by_facet_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 2));
     v.field_definitions_by_formatter_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 3));
+    v.field_definitions_by_model_name(create_std_unordered_map_std_string_std_list_dogen_dynamic_schema_field_definition_(position + 4));
 }
 
 repository_generator::result_type

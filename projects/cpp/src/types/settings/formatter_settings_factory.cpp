@@ -74,7 +74,7 @@ formatter_settings_factory::make_formatter_properties(
                                  << traits::enabled() << "' for formatter: "
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::postfix()));
+            building_error(field_definition_not_found + traits::enabled()));
     }
 
     if (!found_file_path) {

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
@@ -47,7 +48,8 @@ public:
     stitching_settings(
         const std::string& stream_variable_name,
         const boost::optional<boost::filesystem::path>& template_path,
-        const boost::optional<boost::filesystem::path>& file_path);
+        const boost::optional<boost::filesystem::path>& output_path,
+        const std::list<std::string>& inclusion_dependencies);
 
 private:
     template<typename Archive>
@@ -67,10 +69,15 @@ public:
     void template_path(const boost::optional<boost::filesystem::path>& v);
     void template_path(const boost::optional<boost::filesystem::path>&& v);
 
-    const boost::optional<boost::filesystem::path>& file_path() const;
-    boost::optional<boost::filesystem::path>& file_path();
-    void file_path(const boost::optional<boost::filesystem::path>& v);
-    void file_path(const boost::optional<boost::filesystem::path>&& v);
+    const boost::optional<boost::filesystem::path>& output_path() const;
+    boost::optional<boost::filesystem::path>& output_path();
+    void output_path(const boost::optional<boost::filesystem::path>& v);
+    void output_path(const boost::optional<boost::filesystem::path>&& v);
+
+    const std::list<std::string>& inclusion_dependencies() const;
+    std::list<std::string>& inclusion_dependencies();
+    void inclusion_dependencies(const std::list<std::string>& v);
+    void inclusion_dependencies(const std::list<std::string>&& v);
 
 public:
     bool operator==(const stitching_settings& rhs) const;
@@ -85,7 +92,8 @@ public:
 private:
     std::string stream_variable_name_;
     boost::optional<boost::filesystem::path> template_path_;
-    boost::optional<boost::filesystem::path> file_path_;
+    boost::optional<boost::filesystem::path> output_path_;
+    std::list<std::string> inclusion_dependencies_;
 };
 
 } }

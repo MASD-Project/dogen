@@ -28,11 +28,13 @@ repository::repository(
     const std::list<dogen::dynamic::schema::field_definition>& all_field_definitions,
     const std::unordered_map<std::string, dogen::dynamic::schema::field_definition>& field_definitions_by_name,
     const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_facet_name,
-    const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_formatter_name)
+    const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_formatter_name,
+    const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_model_name)
     : all_field_definitions_(all_field_definitions),
       field_definitions_by_name_(field_definitions_by_name),
       field_definitions_by_facet_name_(field_definitions_by_facet_name),
-      field_definitions_by_formatter_name_(field_definitions_by_formatter_name) { }
+      field_definitions_by_formatter_name_(field_definitions_by_formatter_name),
+      field_definitions_by_model_name_(field_definitions_by_model_name) { }
 
 void repository::swap(repository& other) noexcept {
     using std::swap;
@@ -40,13 +42,15 @@ void repository::swap(repository& other) noexcept {
     swap(field_definitions_by_name_, other.field_definitions_by_name_);
     swap(field_definitions_by_facet_name_, other.field_definitions_by_facet_name_);
     swap(field_definitions_by_formatter_name_, other.field_definitions_by_formatter_name_);
+    swap(field_definitions_by_model_name_, other.field_definitions_by_model_name_);
 }
 
 bool repository::operator==(const repository& rhs) const {
     return all_field_definitions_ == rhs.all_field_definitions_ &&
         field_definitions_by_name_ == rhs.field_definitions_by_name_ &&
         field_definitions_by_facet_name_ == rhs.field_definitions_by_facet_name_ &&
-        field_definitions_by_formatter_name_ == rhs.field_definitions_by_formatter_name_;
+        field_definitions_by_formatter_name_ == rhs.field_definitions_by_formatter_name_ &&
+        field_definitions_by_model_name_ == rhs.field_definitions_by_model_name_;
 }
 
 repository& repository::operator=(repository other) {
@@ -117,6 +121,22 @@ void repository::field_definitions_by_formatter_name(const std::unordered_map<st
 
 void repository::field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >&& v) {
     field_definitions_by_formatter_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& repository::field_definitions_by_model_name() const {
+    return field_definitions_by_model_name_;
+}
+
+std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& repository::field_definitions_by_model_name() {
+    return field_definitions_by_model_name_;
+}
+
+void repository::field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& v) {
+    field_definitions_by_model_name_ = v;
+}
+
+void repository::field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >&& v) {
+    field_definitions_by_model_name_ = std::move(v);
 }
 
 } } }

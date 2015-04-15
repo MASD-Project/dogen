@@ -48,7 +48,8 @@ public:
         const std::list<dogen::dynamic::schema::field_definition>& all_field_definitions,
         const std::unordered_map<std::string, dogen::dynamic::schema::field_definition>& field_definitions_by_name,
         const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_facet_name,
-        const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_formatter_name);
+        const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_formatter_name,
+        const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_model_name);
 
 private:
     template<typename Archive>
@@ -98,6 +99,11 @@ public:
     void field_definitions_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_model_name() const;
+    std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& field_definitions_by_model_name();
+    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >& v);
+    void field_definitions_by_model_name(const std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> >&& v);
+
 public:
     bool operator==(const repository& rhs) const;
     bool operator!=(const repository& rhs) const {
@@ -113,6 +119,7 @@ private:
     std::unordered_map<std::string, dogen::dynamic::schema::field_definition> field_definitions_by_name_;
     std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> > field_definitions_by_facet_name_;
     std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> > field_definitions_by_formatter_name_;
+    std::unordered_map<std::string, std::list<dogen::dynamic::schema::field_definition> > field_definitions_by_model_name_;
 };
 
 } } }

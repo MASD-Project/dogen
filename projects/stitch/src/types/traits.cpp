@@ -18,22 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/traits.hpp"
-#include "dogen/stitch/types/segment.hpp"
-#include "dogen/stitch/types/expander.hpp"
-#include "dogen/stitch/types/workflow.hpp"
-#include "dogen/stitch/types/formatter.hpp"
-#include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/segment_types.hpp"
-#include "dogen/stitch/types/text_template.hpp"
-#include "dogen/stitch/types/building_error.hpp"
-#include "dogen/stitch/types/workflow_error.hpp"
-#include "dogen/stitch/types/scriptlet_block.hpp"
-#include "dogen/stitch/types/settings_bundle.hpp"
-#include "dogen/stitch/types/formatting_error.hpp"
-#include "dogen/stitch/types/mixed_content_line.hpp"
-#include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/stitch/types/mixed_content_block.hpp"
-#include "dogen/stitch/types/settings_bundle_factory.hpp"
-#include "dogen/stitch/types/stitching_settings_factory.hpp"
+
+namespace dogen {
+namespace stitch {
+
+std::string traits::model_name() {
+    static std::string r("stitch");
+    return r;
+}
+
+std::string traits::stream_variable_name() {
+    static std::string r("stream_variable_name");
+    return r;
+}
+
+std::string traits::template_path() {
+    static std::string r("template_path");
+    return r;
+}
+
+std::string traits::output_path() {
+    static std::string r("output_path");
+    return r;
+}
+
+std::string traits::inclusion_dependency() {
+    static std::string r("inclusion_dependency");
+    return r;
+}
+
+} }

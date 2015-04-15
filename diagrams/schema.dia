@@ -4624,7 +4624,7 @@ Formatter groups can span facets.#</dia:string>
         <dia:point val="-22,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-22.05,2.95;15.895,8.25"/>
+        <dia:rectangle val="-22.05,2.95;15.895,9.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-22,3"/>
@@ -4633,7 +4633,7 @@ Formatter groups can span facets.#</dia:string>
         <dia:real val="37.844999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#repository#</dia:string>
@@ -4804,6 +4804,29 @@ Formatter groups can span facets.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All field definitions for all qualified formatter names, for all models.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#field_definitions_by_model_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string,std::list&lt;field_definition&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8668,7 +8691,7 @@ Formatter groups can span facets.#</dia:string>
         <dia:point val="-40.3175,-11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.0675,-11.75;-2.8775,4.6"/>
+        <dia:rectangle val="-41.0675,-11.75;-2.8775,3.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

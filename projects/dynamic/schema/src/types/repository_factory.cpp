@@ -58,6 +58,10 @@ repository_factory::make(const std::list<field_definition>& fds) const {
         if (!oh.formatter_name().empty())
             r.field_definitions_by_formatter_name()[oh.formatter_name()]
                 .push_back(fd);
+
+        if (!oh.model_name().empty())
+            r.field_definitions_by_model_name()[oh.model_name()]
+                .push_back(fd);
     }
 
     return r;

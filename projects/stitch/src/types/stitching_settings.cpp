@@ -26,27 +26,32 @@ namespace stitch {
 stitching_settings::stitching_settings(stitching_settings&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),
       template_path_(std::move(rhs.template_path_)),
-      file_path_(std::move(rhs.file_path_)) { }
+      output_path_(std::move(rhs.output_path_)),
+      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)) { }
 
 stitching_settings::stitching_settings(
     const std::string& stream_variable_name,
     const boost::optional<boost::filesystem::path>& template_path,
-    const boost::optional<boost::filesystem::path>& file_path)
+    const boost::optional<boost::filesystem::path>& output_path,
+    const std::list<std::string>& inclusion_dependencies)
     : stream_variable_name_(stream_variable_name),
       template_path_(template_path),
-      file_path_(file_path) { }
+      output_path_(output_path),
+      inclusion_dependencies_(inclusion_dependencies) { }
 
 void stitching_settings::swap(stitching_settings& other) noexcept {
     using std::swap;
     swap(stream_variable_name_, other.stream_variable_name_);
     swap(template_path_, other.template_path_);
-    swap(file_path_, other.file_path_);
+    swap(output_path_, other.output_path_);
+    swap(inclusion_dependencies_, other.inclusion_dependencies_);
 }
 
 bool stitching_settings::operator==(const stitching_settings& rhs) const {
     return stream_variable_name_ == rhs.stream_variable_name_ &&
         template_path_ == rhs.template_path_ &&
-        file_path_ == rhs.file_path_;
+        output_path_ == rhs.output_path_ &&
+        inclusion_dependencies_ == rhs.inclusion_dependencies_;
 }
 
 stitching_settings& stitching_settings::operator=(stitching_settings other) {
@@ -87,20 +92,36 @@ void stitching_settings::template_path(const boost::optional<boost::filesystem::
     template_path_ = std::move(v);
 }
 
-const boost::optional<boost::filesystem::path>& stitching_settings::file_path() const {
-    return file_path_;
+const boost::optional<boost::filesystem::path>& stitching_settings::output_path() const {
+    return output_path_;
 }
 
-boost::optional<boost::filesystem::path>& stitching_settings::file_path() {
-    return file_path_;
+boost::optional<boost::filesystem::path>& stitching_settings::output_path() {
+    return output_path_;
 }
 
-void stitching_settings::file_path(const boost::optional<boost::filesystem::path>& v) {
-    file_path_ = v;
+void stitching_settings::output_path(const boost::optional<boost::filesystem::path>& v) {
+    output_path_ = v;
 }
 
-void stitching_settings::file_path(const boost::optional<boost::filesystem::path>&& v) {
-    file_path_ = std::move(v);
+void stitching_settings::output_path(const boost::optional<boost::filesystem::path>&& v) {
+    output_path_ = std::move(v);
+}
+
+const std::list<std::string>& stitching_settings::inclusion_dependencies() const {
+    return inclusion_dependencies_;
+}
+
+std::list<std::string>& stitching_settings::inclusion_dependencies() {
+    return inclusion_dependencies_;
+}
+
+void stitching_settings::inclusion_dependencies(const std::list<std::string>& v) {
+    inclusion_dependencies_ = v;
+}
+
+void stitching_settings::inclusion_dependencies(const std::list<std::string>&& v) {
+    inclusion_dependencies_ = std::move(v);
 }
 
 } }

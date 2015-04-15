@@ -67,6 +67,15 @@ public:
     const std::list<field_definition>&
     select_fields_by_facet_name(const std::string& n) const;
 
+    /**
+     * @brief Returns the field definitions corresponding to the
+     * supplied model name.
+     *
+     * @pre facet name must exist.
+     */
+    const std::list<field_definition>&
+    select_fields_by_model_name(const std::string& n) const;
+
 private:
     const repository& repository_;
 };

@@ -43,6 +43,14 @@ create_boost_optional_boost_filesystem_path(unsigned int position) {
     return r;
 }
 
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -54,7 +62,8 @@ void stitching_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.stream_variable_name(create_std_string(position + 0));
     v.template_path(create_boost_optional_boost_filesystem_path(position + 1));
-    v.file_path(create_boost_optional_boost_filesystem_path(position + 2));
+    v.output_path(create_boost_optional_boost_filesystem_path(position + 2));
+    v.inclusion_dependencies(create_std_list_std_string(position + 3));
 }
 
 stitching_settings_generator::result_type

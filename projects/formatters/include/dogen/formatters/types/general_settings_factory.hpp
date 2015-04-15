@@ -29,7 +29,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"

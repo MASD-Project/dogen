@@ -1,0 +1,50 @@
+[
+    {
+        "name" : {
+            "simple" : "stream_variable_name",
+            "qualified" : "stream_variable_name"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : "stream_"
+    },
+    {
+        "name" : {
+            "simple" : "template_path",
+            "qualified" : "template_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module"
+    },
+    {
+        "name" : {
+            "simple" : "output_path",
+            "qualified" : "output_path"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module"
+    },
+    {
+        "name" : {
+            "simple" : "inclusion_dependency"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text_collection",
+        "definition_type" : "formatter_template",
+        "scope" : "root_module"
+    }
+]
