@@ -34,7 +34,6 @@ const std::string empty;
 const std::string test_module("stitch");
 const std::string test_suite("workflow_spec");
 
-
 }
 
 using dogen::utility::test::contains_checker;
