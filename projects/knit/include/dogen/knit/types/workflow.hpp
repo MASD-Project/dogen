@@ -129,7 +129,6 @@ private:
         const boost::filesystem::path& original_path) const;
 
 private:
-
     /**
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
