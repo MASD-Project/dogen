@@ -46,35 +46,35 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-path dia_sml::data_set() {
+path stitch::data_set() {
     return validating_resolver::resolve(::data_set);
 }
 
-path dia_sml::non_existent_file() {
+path stitch::non_existent_file() {
     return resolver::resolve(::non_existent_file);
 }
 
-path dia_sml::input() {
+path stitch::input() {
     return validating_resolver::resolve(::input);
 }
 
-path dia_sml::input_simple_template_stitch() {
+path stitch::input_simple_template_stitch() {
     return validating_resolver::resolve(::input_simple_template_stitch);
 }
 
-path dia_sml::expected() {
+path stitch::expected() {
     return validating_resolver::resolve(::expected);
 }
 
-path dia_sml::expected_simple_template_stitch_cpp() {
+path stitch::expected_simple_template_stitch_cpp() {
     return validating_resolver::resolve(::expected_simple_template_stitch_cpp);
 }
 
-path dia_sml::actual() {
+path stitch::actual() {
     return validating_resolver::resolve(::actual);
 }
 
-path dia_sml::actual_simple_template_stitch_cpp() {
+path stitch::actual_simple_template_stitch_cpp() {
     return resolver::resolve(::actual_simple_template_stitch_cpp);
 }
 

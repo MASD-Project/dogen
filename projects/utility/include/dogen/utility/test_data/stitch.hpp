@@ -31,13 +31,13 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-class dia_sml {
+class stitch {
 public:
-    dia_sml() = delete;
-    dia_sml(const dia_sml&) = delete;
-    ~dia_sml() = delete;
-    dia_sml(dia_sml&&) = delete;
-    dia_sml& operator=(const dia_sml&) = delete;
+    stitch() = delete;
+    stitch(const stitch&) = delete;
+    ~stitch() = delete;
+    stitch(stitch&&) = delete;
+    stitch& operator=(const stitch&) = delete;
 
 public:
     static boost::filesystem::path data_set();
