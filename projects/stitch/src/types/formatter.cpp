@@ -33,7 +33,7 @@ static logger lg(logger_factory("stitch.formatters"));
 
 const std::string empty_header_guard;
 const std::string model_name("stitch");
-const std::string facet_name;
+const std::string facet_name("types");
 const std::string formatter_name("stitch.formatter");
 const std::string group_name;
 
@@ -132,6 +132,8 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
 
     dogen::formatters::file r;
     r.content(s.str());
+    if (tt.settings().stitching_settings().output_path())
+        r.path(*tt.settings().stitching_settings().output_path());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted template.";
 

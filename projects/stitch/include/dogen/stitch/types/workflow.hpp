@@ -29,6 +29,7 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
@@ -46,6 +47,13 @@ namespace stitch {
 class workflow {
 public:
     workflow();
+
+private:
+    /**
+     * @brief Expands the dynamic object.
+     */
+    void perform_expansion(const boost::filesystem::path& p,
+        dynamic::schema::object& o) const;
 
 private:
     /**
@@ -67,7 +75,8 @@ private:
     /**
      * @brief Reads all of the supplied stitch text templates into memory.
      */
-    std::list<std::string> read_text_templates_activity(
+    std::list<std::pair<boost::filesystem::path, std::string> >
+    read_text_templates_activity(
         const std::list<boost::filesystem::path>& text_template_paths) const;
 
     /**
@@ -93,15 +102,16 @@ private:
      */
     std::list<text_template> parse_text_templates_activity(
         const dynamic::schema::repository& rp,
-        const std::list<std::string>& text_templates_as_string) const;
+        const std::list<std::pair<boost::filesystem::path, std::string> >&
+            text_templates_as_string) const;
 
     /**
      * @brief Creates the settings bundles.
      */
-    std::list<text_template> obtain_settings_bundle_activity(
+    void populate_settings_bundle_activity(
         const dynamic::schema::repository& schema_repository,
         const dogen::formatters::repository& formatters_repository,
-        const std::list<text_template>& text_templates) const;
+        std::list<text_template>& text_templates) const;
 
     /**
      * @brief Formats all of the supplied text templates.

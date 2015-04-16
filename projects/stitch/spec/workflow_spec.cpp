@@ -21,12 +21,13 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/utility/test_data/stitch.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
 #include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/parser.hpp"
+#include "dogen/stitch/types/workflow_error.hpp"
+#include "dogen/stitch/types/workflow.hpp"
 
 namespace {
 
@@ -37,12 +38,16 @@ const std::string test_suite("workflow_spec");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::stitch::parsing_error;
+using dogen::stitch::workflow_error;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
 BOOST_AUTO_TEST_CASE(test) {
     SETUP_TEST_LOG_SOURCE("test");
+
+    dogen::stitch::workflow w;
+    using namespace dogen::utility::test_data;
+    w.execute(stitch::input_simple_template_stitch());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

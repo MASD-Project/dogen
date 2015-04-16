@@ -30,6 +30,7 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/stitch/types/parser.hpp"
+#include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/settings_bundle_factory.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
 #include "dogen/stitch/types/workflow.hpp"
@@ -50,6 +51,12 @@ namespace dogen {
 namespace stitch {
 
 workflow::workflow() : formatter_() {}
+
+void workflow::perform_expansion(const boost::filesystem::path& p,
+    dynamic::schema::object& o) const {
+    expander e;
+    e.expand(p, o);
+}
 
 std::list<boost::filesystem::path> workflow::
 get_text_template_paths_activity(
@@ -81,9 +88,10 @@ void workflow::validate_text_template_paths(
     }
 }
 
-std::list<std::string> workflow::read_text_templates_activity(
+std::list<std::pair<boost::filesystem::path, std::string> >
+workflow::read_text_templates_activity(
     const std::list<boost::filesystem::path>& text_template_paths) const {
-    std::list<std::string> r;
+    std::list<std::pair<boost::filesystem::path, std::string> > r;
     for (const auto& path : text_template_paths) {
         using utility::filesystem::read_file_content;
         const auto content(read_file_content(path));
@@ -92,7 +100,7 @@ std::list<std::string> workflow::read_text_templates_activity(
             BOOST_THROW_EXCEPTION(
                 workflow_error(empty_template + path.generic_string()));
         }
-        r.push_back(content);
+        r.push_back(std::make_pair(path, content));
     }
     return r;
 }
@@ -122,25 +130,27 @@ dynamic::schema::repository workflow::create_schema_repository_activity(
 
 std::list<text_template> workflow::parse_text_templates_activity(
     const dynamic::schema::repository& rp,
-    const std::list<std::string>& text_templates_as_string) const {
+    const std::list<std::pair<boost::filesystem::path, std::string> >&
+    text_templates_as_string) const {
     std::list<text_template> r;
     parser p(rp);
-    for (const auto& s : text_templates_as_string)
-        r.push_back(p.parse(s));
+    for (const auto& pair : text_templates_as_string) {
+        auto tt(p.parse(pair.second));
+        perform_expansion(pair.first, tt.extensions());
+        r.push_back(tt);
+    }
 
     return r;
 }
 
-std::list<text_template> workflow::obtain_settings_bundle_activity(
+void workflow::populate_settings_bundle_activity(
     const dynamic::schema::repository& schema_repository,
     const dogen::formatters::repository& formatters_repository,
-    const std::list<text_template>& text_templates) const {
+    std::list<text_template>& text_templates) const {
 
-    std::list<text_template> r(text_templates);
     settings_bundle_factory f(schema_repository, formatters_repository);
-    for (auto& tt : r)
+    for (auto& tt : text_templates)
         tt.settings(f.make(tt.extensions()));
-    return r;
 }
 
 std::list<formatters::file> workflow::format_text_templates_activity(
@@ -159,16 +169,15 @@ output_files_activity(const std::list<formatters::file>& files) const {
 void workflow::execute(const boost::filesystem::path& p) const {
     const auto paths(get_text_template_paths_activity(p));
     validate_text_template_paths(paths);
+
     const auto templates_as_strings(read_text_templates_activity(paths));
     const auto oh(obtain_ownership_hierarchy_activity());
     const auto schema_rp(create_schema_repository_activity(oh));
-    const auto raw_tt(
-        parse_text_templates_activity(schema_rp, templates_as_strings));
 
+    auto tt(parse_text_templates_activity(schema_rp, templates_as_strings));
     const auto formatters_rp(create_formatters_repository_activity());
-    const auto tt_sb(obtain_settings_bundle_activity(schema_rp,
-            formatters_rp, raw_tt));
-    const auto files(format_text_templates_activity(tt_sb));
+    populate_settings_bundle_activity(schema_rp, formatters_rp, tt);
+    const auto files(format_text_templates_activity(tt));
     output_files_activity(files);
 }
 
