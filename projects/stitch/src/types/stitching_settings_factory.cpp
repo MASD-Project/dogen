@@ -47,7 +47,8 @@ stitching_settings_factory::formatter_properties stitching_settings_factory::
 make_formatter_properties(const dynamic::schema::repository& rp) const {
     formatter_properties r;
     bool found_stream_variable_name(false), found_template_path(false),
-        found_output_path(false), found_inclusion_dependency(false);
+        found_output_path(false), found_relative_output_directory(false),
+        found_inclusion_dependency(false);
     const dynamic::schema::repository_selector s(rp);
     for (const auto fd : s.select_fields_by_model_name(traits::model_name())) {
         if (fd.name().simple() == traits::stream_variable_name()) {
@@ -59,6 +60,9 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
         } else if (fd.name().simple() == traits::output_path()) {
             r.output_path = fd;
             found_output_path = true;
+        } else if (fd.name().simple() == traits::relative_output_directory()) {
+            r.relative_output_directory = fd;
+            found_relative_output_directory = true;
         } else if (fd.name().simple() == traits::inclusion_dependency()) {
             r.inclusion_dependency = fd;
             found_inclusion_dependency = true;
@@ -84,6 +88,13 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
                                  << traits::output_path();
         BOOST_THROW_EXCEPTION(building_error(field_definition_not_found
                 + traits::output_path()));
+    }
+
+    if (!found_relative_output_directory) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::relative_output_directory();
+        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found
+                + traits::relative_output_directory()));
     }
 
     if (!found_inclusion_dependency) {
@@ -126,6 +137,17 @@ extract_output_path(const dynamic::schema::object& o) const {
     return boost::filesystem::path(text);
 }
 
+boost::optional<boost::filesystem::path> stitching_settings_factory::
+extract_relative_output_directory(const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    if (!fs.has_field(traits::relative_output_directory()))
+        return boost::optional<boost::filesystem::path>();
+
+    const auto text(fs.get_text_content(traits::relative_output_directory()));
+    return boost::filesystem::path(text);
+}
+
 std::list<std::string> stitching_settings_factory::
 extract_inclusion_dependencies(const dynamic::schema::object& o) const {
     std::list<std::string> r;
@@ -144,6 +166,7 @@ make(const dynamic::schema::object& o) const {
     r.stream_variable_name(extract_stream_variable_name(o));
     r.template_path(extract_template_path(o));
     r.output_path(extract_output_path(o));
+    r.relative_output_directory(extract_relative_output_directory(o));
     r.inclusion_dependencies(extract_inclusion_dependencies(o));
     return r;
 }

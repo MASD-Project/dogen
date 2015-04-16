@@ -38,6 +38,18 @@
     },
     {
         "name" : {
+            "simple" : "relative_output_directory",
+            "qualified" : "relative_output_directory"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module"
+    },
+    {
+        "name" : {
             "simple" : "inclusion_dependency"
         },
         "ownership_hierarchy" : {

@@ -43,6 +43,11 @@ std::string traits::output_path() {
     return r;
 }
 
+std::string traits::relative_output_directory() {
+    static std::string r("relative_output_directory");
+    return r;
+}
+
 std::string traits::inclusion_dependency() {
     static std::string r("inclusion_dependency");
     return r;

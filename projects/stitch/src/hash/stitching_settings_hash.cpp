@@ -64,6 +64,7 @@ std::size_t stitching_settings_hasher::hash(const stitching_settings&v) {
     combine(seed, v.stream_variable_name());
     combine(seed, hash_boost_optional_boost_filesystem_path(v.template_path()));
     combine(seed, hash_boost_optional_boost_filesystem_path(v.output_path()));
+    combine(seed, hash_boost_optional_boost_filesystem_path(v.relative_output_directory()));
     combine(seed, hash_std_list_std_string(v.inclusion_dependencies()));
 
     return seed;

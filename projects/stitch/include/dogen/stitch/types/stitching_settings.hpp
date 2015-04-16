@@ -49,6 +49,7 @@ public:
         const std::string& stream_variable_name,
         const boost::optional<boost::filesystem::path>& template_path,
         const boost::optional<boost::filesystem::path>& output_path,
+        const boost::optional<boost::filesystem::path>& relative_output_directory,
         const std::list<std::string>& inclusion_dependencies);
 
 private:
@@ -74,6 +75,11 @@ public:
     void output_path(const boost::optional<boost::filesystem::path>& v);
     void output_path(const boost::optional<boost::filesystem::path>&& v);
 
+    const boost::optional<boost::filesystem::path>& relative_output_directory() const;
+    boost::optional<boost::filesystem::path>& relative_output_directory();
+    void relative_output_directory(const boost::optional<boost::filesystem::path>& v);
+    void relative_output_directory(const boost::optional<boost::filesystem::path>&& v);
+
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
     void inclusion_dependencies(const std::list<std::string>& v);
@@ -93,6 +99,7 @@ private:
     std::string stream_variable_name_;
     boost::optional<boost::filesystem::path> template_path_;
     boost::optional<boost::filesystem::path> output_path_;
+    boost::optional<boost::filesystem::path> relative_output_directory_;
     std::list<std::string> inclusion_dependencies_;
 };
 

@@ -54,6 +54,12 @@ struct traits {
     static std::string output_path();
 
     /**
+     * @brief Relative path to the directory in which to place the
+     * output, if any.
+     */
+    static std::string relative_output_directory();
+
+    /**
      * @brief Inclusion dependencies required by the template.
      */
     static std::string inclusion_dependency();

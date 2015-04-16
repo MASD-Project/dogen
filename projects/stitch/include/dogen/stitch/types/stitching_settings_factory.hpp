@@ -50,6 +50,7 @@ private:
         dynamic::schema::field_definition stream_variable_name;
         dynamic::schema::field_definition template_path;
         dynamic::schema::field_definition output_path;
+        dynamic::schema::field_definition relative_output_directory;
         dynamic::schema::field_definition inclusion_dependency;
     };
 
@@ -77,6 +78,12 @@ private:
      */
     boost::optional<boost::filesystem::path>
     extract_output_path(const dynamic::schema::object& o) const;
+
+    /**
+     * @brief Extracts the relative output directory.
+     */
+    boost::optional<boost::filesystem::path>
+    extract_relative_output_directory(const dynamic::schema::object& o) const;
 
     /**
      * @brief Extracts inclusion dependencies.

@@ -68,6 +68,7 @@ std::ostream& operator<<(std::ostream& s, const stitching_settings& v) {
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
       << "\"template_path\": " << v.template_path() << ", "
       << "\"output_path\": " << v.output_path() << ", "
+      << "\"relative_output_directory\": " << v.relative_output_directory() << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);

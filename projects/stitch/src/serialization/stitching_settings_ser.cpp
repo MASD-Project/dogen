@@ -44,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("stream_variable_name", v.stream_variable_name_);
     ar << make_nvp("template_path", v.template_path_);
     ar << make_nvp("output_path", v.output_path_);
+    ar << make_nvp("relative_output_directory", v.relative_output_directory_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
@@ -54,6 +55,7 @@ void load(Archive& ar,
     ar >> make_nvp("stream_variable_name", v.stream_variable_name_);
     ar >> make_nvp("template_path", v.template_path_);
     ar >> make_nvp("output_path", v.output_path_);
+    ar >> make_nvp("relative_output_directory", v.relative_output_directory_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
 }
 
