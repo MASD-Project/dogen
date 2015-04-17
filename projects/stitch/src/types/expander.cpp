@@ -40,7 +40,7 @@ void expander::expand(
     if (!template_path)
         return;
 
-    std::string output_filename(template_path->filename().generic_string());
+    std::string output_filename(template_path->stem().generic_string());
     output_filename += stitch_postfix;
 
     const dynamic::schema::field_selector fs(o);
@@ -49,7 +49,8 @@ void expander::expand(
         const auto tc(fs.get_text_content(traits::relative_output_directory()));
         using namespace boost::filesystem;
         path rel_dir(tc);
-        absolute_output_directory = absolute(rel_dir, *template_path);
+        absolute_output_directory = absolute(rel_dir,
+            template_path->parent_path());
     } else
         absolute_output_directory = template_path->parent_path();
 

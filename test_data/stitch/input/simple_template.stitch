@@ -1,3 +1,4 @@
+<#@ relative_output_directory=../actual #>
 <#+
 #include <sstream>
 
