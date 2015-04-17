@@ -4159,6 +4159,25 @@ possible:
   include file for all types, there is no need to support this feature
   at the global settings level, so this fits nicely with the existing
   settings infrastructure.
+- merging could be done without needing clang, which would also make
+  it cross language. All that is required is for the language to
+  support some kind of meta-data to mark a method as "manually
+  generated". This could even be done using comments but this is not
+  ideal. The process would then be: dogen would open up an existing
+  source file and locate the attribute; then look for a open brackets
+  to indicate the start of the method (={=) and then find the matching
+  close brackets (=}=). We could keep a counter and increment it when
+  a new open bracket is found and decrement it when a close bracket is
+  found. When its zero we are done. All the code from the attribute to
+  the close brackets would be lifted. A very simple regex matching
+  would be done to find the method name - or perhaps some trivial
+  parsing could be done, but it should be kept as simple as
+  possible. The objective is simply to figure out the method name. The
+  method is copied across and stored in the =cpp= model, in the
+  correct method. When code generating, if a method is marked as
+  "manually generated" and if there is implementation content, we dump
+  that; otherwise we generate the skeleton of the method as if it was
+  not "manually generated".
 
 *** Visitor adaptor for usage in ranges                               :story:
 
@@ -5047,6 +5066,8 @@ It also comes with a couple of useful emblems:
 
 https://github.com/Reactive-Extensions/RxCpp
 
+We should push both the C++ libraries as well as the dogen binary.
+
 *** Investigate AppVeyor's windows support for builds                 :story:
 
 These guys seem to have good windows support:
@@ -5314,6 +5335,98 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Model groups and multi-language support                           :story:
+
+At present we have hard-coded knit to support a single C++ model,
+cpp. However, in reality the world looks more like this:
+
+- there are "groups of models" that have models that target specific
+  languages. We need to give a name to the "default" model group in
+  dogen. We should choose something from the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][sewing terms]]; for now
+  lets call it =quilt=. =quilt= contains a number of languages such as
+  =cpp=. A user can only generate one model group at a time. Users can
+  generate one or more languages within a group (depending on what the
+  group supports).
+- we should have a top-level folder to house all model groups:
+  =backends=. The existing =backend= model becomes =backends::core=.
+- there may be facilities that are language specific, shared by model
+  groups. These can be housed in language specific folders:
+  =backends::cpp= and so on. For instance, the language specific stuff
+  now in =formatters= should move here.
+- different groups may express SML models differently; almost by
+  definition, they will, or else there is little purpose in having
+  multiple groups. For example, one can imagine a model group (say
+  =pleat=) which expresses [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-language-agnostic-models-lam][LAM]] as a model that is identical on every
+  supported language, ignoring native types; that is, expresses LAM as
+  a LAM model. However, =quilt= would still express LAM as a mapping
+  between generic LAM types and concrete native types (e.g. LAM
+  dictionary is a C++ unordered map). A good candidate for =pleat=
+  would be [[http://www.eclipse.org/modeling/emf/][eCore]].
+- if one was to try to generate code that is identical to =protobuf=,
+  the xsd tool, =odb=, etc one would generate model groups for these.
+- we may need multiple "needles" for each model group. For example,
+  the supporting libraries for =quilt= may be (and almost certainly,
+  will be) totally different than that of those in =pleat=. And of
+  course, needle would have different expressions in each programming
+  language. So perhaps needle is more of a concept than a physical
+  thing. We should rename it to something meaningful that represents
+  "a library with supporting code for a given model group". However,
+  it does make sense to have a top-level folder to house all of the
+  supporting libraries, so maybe needle does exist physically as the
+  namespace to house all of the different supporting libraries. For
+  example: =dogen::needle::quilt=, etc.
+- the different needle libraries should be pushed to the appropriate
+  repositories (e.g. nuget for C# and maybe C++, biicode for C++,
+  maven for Java, etc).
+- in the model groups world, each model most likely will only support
+  a single model group: for example either quilt or pleat, etc. This
+  is because some types only make sense with a given model group (say
+  for example a cross platform =String= type in pleat won't exist in
+  quilt and so forth). This means one must filter the models one is
+  loading depending on the model group. This applies to both internal
+  and external models. Also a model group may support a different
+  subset of programming languages compared to another model group.
+- we need a better name than "model group".
+
+*** Add support for type "labels" or "tags"                           :story:
+
+It may be useful to "tag" a number of types with a "label", and to
+allow users to access these at run time. This only makes sense in the
+context of reflection. This story needs a bit more fleshing out.
+
+*** Splitting facets into their own projects                          :story:
+
+It is not always desirable to generate a facet as part of the main
+model. For example, say we want to support coherence. We don't want to
+generate a single shared object with the model and also include
+coherence in it because this means everyone will have to link against
+the coherence libraries. Instead, one would like to create "project
+facets"; that is, to be able to somehow create a top-level project
+just for that facet (or perhaps group of facets) such that they would
+end up in a different project and thus different shared object. For
+example:
+
+: project_a/cpp/types
+: project_a/cpp/coherence
+
+would become
+
+: project_a/cpp/types
+: project_a.coherence/cpp/coherence
+
+Or some such approach.
+
+*** Support for platform specific code                                :story:
+
+There are some features which may only make sense on a given platform,
+or may have different expressions depending on a platform. For
+example, [[https://msdn.microsoft.com/en-us/library/aa370448%2528v%3Dvs.85%2529.aspx][DLL Main]] is required on Windows but not on UNIX. These files
+must be correctly handled by CMake such that they are excluded on UNIX
+and added on Windows. Same with [[http://en.wikipedia.org/wiki/Precompiled_header][StdAfx.h]] and cpp, which will require
+looking into pre-compiled headers support in CMake.
+
+
+
 *** Add vagrant and docker support                                    :story:
 
 It would be nice to provide vagrant and docker support to dogen in
@@ -5438,6 +5551,8 @@ there are associated emblems:
 https://github.com/Manu343726/snail
 
 We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
 
 *** Investigate ModelQ for ideas                                      :story:
 
