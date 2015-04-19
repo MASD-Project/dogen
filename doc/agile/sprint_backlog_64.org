@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-18 Sat 21:25]
+Clock summary at [2015-04-19 Sun 22:46]
 
 | Headline                                               | Time    |       |      |
 |--------------------------------------------------------+---------+-------+------|
-| *Total time*                                           | *13:36* |       |      |
+| *Total time*                                           | *15:17* |       |      |
 |--------------------------------------------------------+---------+-------+------|
-| Active                                                 |         | 13:36 |      |
+| Active                                                 |         | 15:17 |      |
 | STARTED Sprint and product backlog grooming            |         |       | 0:46 |
 | COMPLETED Create a formatting utilities class          |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch        |         |       | 3:02 |
@@ -27,7 +27,7 @@ Clock summary at [2015-04-18 Sat 21:25]
 | COMPLETED Create a stitch workflow                     |         |       | 2:22 |
 | COMPLETED Add expander that computes output path       |         |       | 1:04 |
 | COMPLETED Add support for dynamic extensions in stitch |         |       | 3:44 |
-| STARTED Refactor =knit= workflows                      |         |       | 0:29 |
+| COMPLETED Refactor =knit= workflows                    |         |       | 2:10 |
 | STARTED Move outputters from knit to formatters model  |         |       | 0:24 |
 #+end:
 
@@ -119,6 +119,17 @@ There are a number of things that would be useful in stitch:
 - we need include dependencies support. Users add includes and we
   extract them and pass them over to boilerplate.
 
+*** COMPLETED Refactor =knit= workflows                               :story:
+    CLOSED: [2015-04-19 Sun 22:45]
+    CLOCK: [2015-04-19 Sun 21:52]--[2015-04-19 Sun 22:44] =>  0:52
+    CLOCK: [2015-04-19 Sun 21:02]--[2015-04-19 Sun 21:51] =>  0:49
+    CLOCK: [2015-04-18 Sat 20:58]--[2015-04-18 Sat 21:25] =>  0:27
+    CLOCK: [2015-04-18 Sat 07:16]--[2015-04-18 Sat 07:18] =>  0:02
+
+Create a backend workflow that has activities for each
+backend. Actually create two sub-workflows: sml model workflow and
+backend workflow. Then create a top-level workflow that calls both.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -196,16 +207,6 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
-
-*** STARTED Refactor =knit= workflows                                 :story:
-    CLOCK: [2015-04-19 Sun 21:52]--[2015-04-19 Sun 22:44] =>  0:52
-    CLOCK: [2015-04-19 Sun 21:02]--[2015-04-19 Sun 21:51] =>  0:49
-    CLOCK: [2015-04-18 Sat 20:58]--[2015-04-18 Sat 21:25] =>  0:27
-    CLOCK: [2015-04-18 Sat 07:16]--[2015-04-18 Sat 07:18] =>  0:02
-
-Create a backend workflow that has activities for each
-backend. Actually create two sub-workflows: sml model workflow and
-backend workflow. Then create a top-level workflow that calls both.
 
 *** STARTED Move outputters from knit to formatters model             :story:
     CLOCK: [2015-04-18 Sat 06:22]--[2015-04-18 Sat 06:40] =>  0:45
