@@ -27,19 +27,14 @@
 
 #include <map>
 #include <string>
-#include <utility>
 #include <functional>
 #include <forward_list>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
-#include "dogen/frontend/types/input_descriptor.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/backends/backend.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
-#include "dogen/utility/serialization/archive_types.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
@@ -112,22 +107,6 @@ private:
      */
     void create_files_for_backend(backends::backend& b) const;
 
-    /**
-     * @brief Given an archive type and a model name, returns the
-     * appropriate file extension.
-     *
-     * @param archive_type one of the supported boost archive types.
-     */
-    std::string extension(const config::archive_types at) const;
-
-    /**
-     * @brief Given the original file path, generates a new file path
-     * for the archive in question.
-     */
-    boost::filesystem::path
-    create_debug_file_path(const config::archive_types at,
-        const boost::filesystem::path& original_path) const;
-
 private:
     /**
      * @brief Obtains the complete ownership hierarchy across all
@@ -142,43 +121,6 @@ private:
     dynamic::schema::repository setup_schema_repository_activity(
         const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
         const;
-
-    /**
-     * @brief Create a list of all input descriptors.
-     */
-    std::list<frontend::input_descriptor>
-    obtain_input_descriptors_activity() const;
-
-    /**
-     * @brief Obtains all partial SML models.
-     */
-    std::list<sml::model> obtain_partial_sml_models_activity(
-        const dynamic::schema::repository& rp,
-        const std::list<frontend::input_descriptor>& descriptors) const;
-
-    /**
-     * @brief Returns the path to the target model.
-     */
-    boost::filesystem::path obtain_target_path_activity(
-        const std::list<frontend::input_descriptor>& descriptors) const;
-
-    /**
-     * @brief Execute the SML workflow.
-     */
-    sml::model merge_models_activity(const std::list<sml::model>& models) const;
-
-    /**
-     * @brief Execute the dynamic expansion workflow.
-     */
-    sml::model expand_model_activity(const dynamic::schema::repository& rp,
-        const sml::model& m) const;
-
-    /**
-     * @brief Checks the options chosen by the user to determine if
-     * the SML model should be persisted; if so, persists it.
-     */
-    void persist_model_activity(const boost::filesystem::path p,
-        const sml::model& m) const;
 
     /**
      * @brief Given a merged model, generates all of its

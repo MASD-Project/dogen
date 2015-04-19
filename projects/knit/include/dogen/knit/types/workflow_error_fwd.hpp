@@ -18,18 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/knit/types/knit.hpp"
-#include "dogen/knit/types/workflow.hpp"
-#include "dogen/knit/types/housekeeper.hpp"
-#include "dogen/knit/types/initializer.hpp"
-#include "dogen/knit/types/workflow_error.hpp"
-#include "dogen/knit/types/backends/backend.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
-#include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
-#include "dogen/knit/types/backends/cpp_backend.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
-#include "dogen/knit/types/outputters/file_outputter.hpp"
-#include "dogen/knit/types/outputters/stream_outputter.hpp"
-#include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
-#include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
+#ifndef DOGEN_KNIT_TYPES_WORKFLOW_ERROR_FWD_HPP
+#define DOGEN_KNIT_TYPES_WORKFLOW_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace dogen {
+namespace knit {
+
+class workflow_error;
+
+} }
+
+#endif
