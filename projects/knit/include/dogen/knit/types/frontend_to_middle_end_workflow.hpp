@@ -28,12 +28,12 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
+#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/sml/types/model.hpp"
 
 namespace dogen {
 namespace knit {

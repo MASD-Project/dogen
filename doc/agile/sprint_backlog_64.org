@@ -198,6 +198,7 @@ the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
 *** STARTED Refactor =knit= workflows                                 :story:
+    CLOCK: [2015-04-19 Sun 21:52]--[2015-04-19 Sun 22:44] =>  0:52
     CLOCK: [2015-04-19 Sun 21:02]--[2015-04-19 Sun 21:51] =>  0:49
     CLOCK: [2015-04-18 Sat 20:58]--[2015-04-18 Sat 21:25] =>  0:27
     CLOCK: [2015-04-18 Sat 07:16]--[2015-04-18 Sat 07:18] =>  0:02

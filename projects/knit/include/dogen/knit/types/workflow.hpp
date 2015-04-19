@@ -29,12 +29,9 @@
 #include <string>
 #include <functional>
 #include <forward_list>
-#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/knit/types/backends/backend.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
@@ -90,25 +87,6 @@ public: // public section for testing purposes only
 
 private:
     /**
-     * @brief Performs a housekeeping run for the supplied directories.
-     */
-    void housekeep(const std::map<boost::filesystem::path, std::string>& files,
-        const std::forward_list<boost::filesystem::path>& dirs) const;
-
-    /**
-     * @brief Outputs the pair file name and contents to its output
-     * destination.
-     */
-    void output_files(const outputters::outputter::value_type& o) const;
-
-    /**
-     * @brief Transforms the model into generated code, according to
-     * the backend passed in.
-     */
-    void create_files_for_backend(backends::backend& b) const;
-
-private:
-    /**
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
      */
@@ -121,13 +99,6 @@ private:
     dynamic::schema::repository setup_schema_repository_activity(
         const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
         const;
-
-    /**
-     * @brief Given a merged model, generates all of its
-     * representations.
-     */
-    void generate_model_activity(const dynamic::schema::repository& rp,
-        const sml::model& m) const;
 
 public:
     /**

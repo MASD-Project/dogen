@@ -18,13 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_RESULT_OF_USE_DECLTYPE
-#include <boost/filesystem.hpp>
-#include <boost/range/combine.hpp>
-#include <boost/range/adaptors.hpp>
-#include <boost/range/algorithm.hpp>
-#include <boost/range/algorithm/set_algorithm.hpp>
-#include <boost/range/algorithm/for_each.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -33,26 +26,22 @@
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/io/knitting_options_io.hpp"
-#include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/sml_to_cpp/types/workflow_failure.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp" // FIXME
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
+#include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/workflow.hpp"
-
-using namespace dogen::utility::log;
 
 typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("knit.workflow"));
 
 const std::string fields_dir("fields");
-const std::string codegen_error("Error occurred during code generation: ");
 const std::string incorrect_stdout_config(
     "Configuration for output to stdout is incorrect");
 const std::string code_generation_failure("Code generation failure.");
@@ -93,49 +82,6 @@ bool workflow::housekeeping_required() const {
         knitting_options_.output().output_to_file();
 }
 
-void workflow::
-housekeep(const std::map<boost::filesystem::path, std::string>& files,
-    const std::forward_list<boost::filesystem::path>& dirs) const {
-    using boost::adaptors::transformed;
-    using boost::filesystem::path;
-    std::set<path> expected_files;
-    boost::copy(files | transformed([&](std::pair<path, std::string> p) {
-                return p.first;
-            }),
-        std::inserter(expected_files, expected_files.end()));
-
-    const auto& ip(knitting_options_.output().ignore_patterns());
-    std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
-    housekeeper hk(ignore_patterns, dirs, expected_files);
-    hk.tidy_up();
-}
-
-void workflow::output_files(const outputters::outputter::value_type& o) const {
-    if (knitting_options_.troubleshooting().stop_after_formatting()) {
-        BOOST_LOG_SEV(lg, warn) << "Stopping after formatting, so no output.";
-        return;
-    }
-
-    if (o.empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
-        return;
-    }
-
-    const auto lambda([&](outputters::outputter::ptr p) { p->output(o); });
-    outputters::factory f(knitting_options_.output(), output_);
-    boost::for_each(f.create(), lambda);
-}
-
-void workflow::create_files_for_backend(backends::backend& b) const {
-    const auto files(b.generate());
-    output_files(files);
-
-    if (!housekeeping_required())
-        return;
-
-    housekeep(files, b.managed_directories());
-}
-
 std::forward_list<dynamic::schema::ownership_hierarchy> workflow::
 obtain_ownership_hierarchy_activity() const {
     const auto rg(backend::workflow::registrar());
@@ -152,20 +98,6 @@ dynamic::schema::repository workflow::setup_schema_repository_activity(
     const auto dir(data_files_directory() / fields_dir);
     dynamic::schema::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
-}
-
-void workflow::generate_model_activity(const dynamic::schema::repository& rp,
-    const sml::model& m) const {
-    try {
-        backends::factory f(knitting_options_, rp, m);
-        boost::for_each(f.create(), [&](backends::backend::ptr p) {
-                create_files_for_backend(*p);
-            });
-    } catch(const dogen::cpp_formatters::formatting_error& e) {
-        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
-    } catch(const dogen::sml_to_cpp::workflow_failure& e) {
-        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
-    }
 }
 
 void workflow::execute() const {
@@ -189,7 +121,12 @@ void workflow::execute() const {
             return;
         }
 
-        generate_model_activity(rp, m);
+        middle_end_to_backend_workflow mbw(knitting_options_, rp, output_);
+        mbw.execute(m);
+    } catch(const dogen::cpp_formatters::formatting_error& e) {
+        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
+    } catch(const dogen::sml_to_cpp::workflow_failure& e) {
+        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;
