@@ -2267,6 +2267,16 @@ Note that using clang to manage indentation will make things a lot
 slower. Note also that clang supports Java and may in future support
 C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
 
+Another option is to create fallback modes. The preferred indenter for
+a given language (say c++) may not exist for another language (say
+c#); for these we use a dogen created indenter that is very basic. It
+may support some of the configuration parameters supplied for the
+clang indenter. The key thing is that we take away indenting from the
+formaters - they become flat - and then we always apply the indenter;
+either a clang based one or a simplified one. Either way, the code
+should live in formatters and make use of the language-specific
+folders as required.
+
 *** Dia models are not always user models                             :story:
 
 At present there is an assumption that all models read in from dia are
