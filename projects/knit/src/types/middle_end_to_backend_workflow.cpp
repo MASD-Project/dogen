@@ -21,8 +21,9 @@
 #include <boost/filesystem.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
 #include "dogen/knit/types/backends/factory.hpp"
+#include "dogen/formatters/types/stream_writer.hpp"
+#include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
 
 namespace {
@@ -66,7 +67,41 @@ perform_housekeeping_activity(
     hk.tidy_up();
 }
 
-void middle_end_to_backend_workflow::output_files_activity(
+const std::forward_list<
+    std::shared_ptr<dogen::formatters::file_writer_interface>
+    >
+middle_end_to_backend_workflow::obtain_file_writers_activity() const {
+    std::forward_list<
+        std::shared_ptr<dogen::formatters::file_writer_interface>
+        > r;
+
+    const config::output_options& options(knitting_options_.output());
+    if (options.output_to_file()) {
+        const auto fw(options.force_write());
+        using dogen::formatters::filesystem_writer;
+        const auto w(std::make_shared<filesystem_writer>(fw));
+        r.push_front(w);
+    } else {
+        BOOST_LOG_SEV(lg, debug)
+            << "Outputting to file disabled, so ignoring it.";
+    }
+
+    if (options.output_to_stdout()) {
+        using dogen::formatters::stream_writer;
+        const auto w(std::make_shared<stream_writer>(output_()));
+        r.push_front(w);
+    } else {
+        BOOST_LOG_SEV(lg, debug)
+            << "Outputting to stream disabled, so ignoring it.";
+    }
+
+    return r;
+}
+
+void middle_end_to_backend_workflow::write_files_activity(
+    const std::forward_list<
+        std::shared_ptr<dogen::formatters::file_writer_interface>
+        >& writers,
     const std::forward_list<formatters::file>& files) const {
     if (knitting_options_.troubleshooting().stop_after_formatting()) {
         BOOST_LOG_SEV(lg, warn) << "Stopping after formatting, so no output.";
@@ -78,16 +113,16 @@ void middle_end_to_backend_workflow::output_files_activity(
         return;
     }
 
-    outputters::factory f(knitting_options_.output(), output_);
-    for (const auto outputter : f.make())
-        outputter->output(files);
+    for (const auto writer : writers)
+        writer->write(files);
 }
 
 void middle_end_to_backend_workflow::execute(const sml::model& m) const {
     backends::factory f(knitting_options_);
     for (const auto b : f.make()) {
+        const auto writers(obtain_file_writers_activity());
         const auto files(b->generate(knitting_options_, repository_, m));
-        output_files_activity(files);
+        write_files_activity(writers, files);
 
         const auto md(b->managed_directories(knitting_options_, m));
         perform_housekeeping_activity(files, md);

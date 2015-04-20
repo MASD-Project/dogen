@@ -34,8 +34,8 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/formatters/types/file_writer_interface.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/knit/types/outputters/outputter.hpp"
 
 namespace dogen {
 namespace knit {
@@ -68,10 +68,21 @@ private:
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
+     * @brief Obtains the file writers, according to configuration.
+     */
+    const std::forward_list<
+        std::shared_ptr<dogen::formatters::file_writer_interface>
+        >
+    obtain_file_writers_activity() const;
+
+    /**
      * @brief Outputs the pair file name and contents to its output
      * destination.
      */
-    void output_files_activity(
+    void write_files_activity(
+        const std::forward_list<
+            std::shared_ptr<dogen::formatters::file_writer_interface>
+            >& writers,
         const std::forward_list<formatters::file>& files) const;
 
 public:

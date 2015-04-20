@@ -46,7 +46,6 @@
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/modeline_formatter.hpp"
 #include "dogen/formatters/types/modeline_locations.hpp"
-#include "dogen/formatters/types/file_writer_factory.hpp"
 #include "dogen/formatters/types/cpp/include_formatter.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
 #include "dogen/formatters/types/licence_text_hydrator.hpp"

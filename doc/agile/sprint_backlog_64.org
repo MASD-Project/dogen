@@ -13,23 +13,23 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-20 Mon 19:00]
+Clock summary at [2015-04-20 Mon 22:54]
 
-| Headline                                               | Time    |       |      |
-|--------------------------------------------------------+---------+-------+------|
-| *Total time*                                           | *17:45* |       |      |
-|--------------------------------------------------------+---------+-------+------|
-| Active                                                 |         | 17:45 |      |
-| STARTED Sprint and product backlog grooming            |         |       | 0:46 |
-| COMPLETED Create a formatting utilities class          |         |       | 1:17 |
-| COMPLETED Implement a basic formatter in stitch        |         |       | 3:02 |
-| COMPLETED Fix build errors in Windows and Linux 32-bit |         |       | 0:28 |
-| COMPLETED Create a stitch workflow                     |         |       | 2:22 |
-| COMPLETED Add expander that computes output path       |         |       | 1:04 |
-| COMPLETED Add support for dynamic extensions in stitch |         |       | 3:44 |
-| COMPLETED Refactor =knit= workflows                    |         |       | 2:10 |
-| COMPLETED Use =formatters::file= in legacy formatters  |         |       | 2:28 |
-| STARTED Move outputters from knit to formatters model  |         |       | 0:24 |
+| Headline                                                | Time    |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| *Total time*                                            | *18:43* |       |      |
+|---------------------------------------------------------+---------+-------+------|
+| Active                                                  |         | 18:43 |      |
+| STARTED Sprint and product backlog grooming             |         |       | 0:46 |
+| COMPLETED Create a formatting utilities class           |         |       | 1:17 |
+| COMPLETED Implement a basic formatter in stitch         |         |       | 3:02 |
+| COMPLETED Fix build errors in Windows and Linux 32-bit  |         |       | 0:28 |
+| COMPLETED Create a stitch workflow                      |         |       | 2:22 |
+| COMPLETED Add expander that computes output path        |         |       | 1:04 |
+| COMPLETED Add support for dynamic extensions in stitch  |         |       | 3:44 |
+| COMPLETED Refactor =knit= workflows                     |         |       | 2:10 |
+| COMPLETED Use =formatters::file= in legacy formatters   |         |       | 2:28 |
+| COMPLETED Move outputters from knit to formatters model |         |       | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -155,6 +155,18 @@ manageable.
 - rename backend to backend interface
 - pass the model into the generate method of the backend
 
+*** COMPLETED Move outputters from knit to formatters model           :story:
+    CLOSED: [2015-04-20 Mon 22:53]
+    CLOCK: [2015-04-20 Mon 21:55]--[2015-04-20 Mon 22:53] =>  0:58
+    CLOCK: [2015-04-18 Sat 06:22]--[2015-04-18 Sat 06:40] =>  0:45
+    CLOCK: [2015-04-17 Fri 21:38]--[2015-04-17 Fri 21:44] =>  0:06
+
+We need to move outputting to formatters so that it can be reused in
+stitch.
+
+- create and implement the writers in formatters.
+- replace knit::outputters with formatters::writer
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -214,16 +226,6 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** STARTED Move outputters from knit to formatters model             :story:
-    CLOCK: [2015-04-18 Sat 06:22]--[2015-04-18 Sat 06:40] =>  0:45
-    CLOCK: [2015-04-17 Fri 21:38]--[2015-04-17 Fri 21:44] =>  0:06
-
-We need to move outputting to formatters so that it can be reused in
-stitch.
-
-- create and implement the writers in formatters.
-- replace knit::outputters with formatters::writer
-
 *** Handling of managed directories is incorrect                      :story:
 
 At present we are querying the dia to sml transformer to figure out
@@ -264,12 +266,19 @@ some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
 
-*** Remove the overwrite flag in =formatters::file=                   :story:
+*** Consider removing the overwrite flag in =formatters::file=        :story:
 
 Investigate if the overwrite flag makes sense in file; it seems we
 only use it in two scenarios: force overwrite requested by user or
 file contents have changed, both of which can be done in the
 file_writer.
+
+Actually this flag is needed. It is required to handle the case where
+we do not code-generate files, unless they do not exist. For example,
+for service headers and implementation we should create the files, but
+then subsequently not touch them. The overwrite flag should be set to
+false. We need to figure out how to implement this and remove the
+hacks around file writing.
 
 *** Split knitting from stitching settings                            :story:
 
