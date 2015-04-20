@@ -33,6 +33,7 @@ Clock summary at [2015-04-20 Mon 22:54]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-20 Mon 22:53]--[2015-04-20 Mon 23:01] =>  0:08
     CLOCK: [2015-04-18 Sat 06:41]--[2015-04-18 Sat 07:15] =>  0:34
     CLOCK: [2015-04-15 Wed 16:10]--[2015-04-15 Wed 16:15] =>  0:05
     CLOCK: [2015-04-13 Mon 07:04]--[2015-04-13 Mon 07:11] =>  0:07
@@ -225,6 +226,25 @@ Solution for cycles:
   all other edges. Finally, once the graph has been processed we
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
+
+*** Implement file writing in stitch                                  :story:
+
+We need to start writing files in stitch by making use of formatter's
+file writers. As part of this we need to get the workflow tests to
+pass.
+
+*** Get a trivial stitcher to work                                    :story:
+
+Now that we have implemented most of stitch, we should get stitcher up
+and running. All we need is a few command line options, maybe even
+just one - the directory to process or the template to process.
+
+We probably also need version and help.
+
+*** Add support for inline code in stitch                             :story:
+
+At present we do not support the =<#=xyz#>= and =<#+xyz#>= forms in
+stitch. We need to support these.
 
 *** Handling of managed directories is incorrect                      :story:
 
