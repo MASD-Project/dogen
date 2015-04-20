@@ -23,12 +23,14 @@
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/dynamic/schema/types/repository_workflow.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
+#include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/settings_bundle_factory.hpp"
@@ -58,40 +60,42 @@ void workflow::perform_expansion(const boost::filesystem::path& p,
     e.expand(p, o);
 }
 
-std::list<boost::filesystem::path> workflow::
+std::forward_list<boost::filesystem::path> workflow::
 get_text_template_paths_activity(
     const boost::filesystem::path& file_or_directory) const {
-    std::list<boost::filesystem::path> r;
+    std::forward_list<boost::filesystem::path> r;
     if (boost::filesystem::is_directory(file_or_directory)) {
         using utility::filesystem::find_files;
         const auto candidates(find_files(file_or_directory));
         for (const auto& candidate : candidates) {
             const auto extension(candidate.extension());
             if (extension.generic_string() == stitch_extension)
-                r.push_back(candidate);
+                r.push_front(candidate);
         }
         return r;
     }
 
     const auto extension(file_or_directory.extension());
     if (extension.generic_string() == stitch_extension)
-        r.push_back(file_or_directory);
+        r.push_front(file_or_directory);
 
     return r;
 }
 
-void workflow::validate_text_template_paths(
-    const std::list<boost::filesystem::path>& text_template_paths) const {
+void workflow::
+validate_text_template_paths(const std::forward_list<boost::filesystem::path>&
+    text_template_paths) const {
     if (text_template_paths.empty()) {
         BOOST_LOG_SEV(lg, error) << no_template_paths;
         BOOST_THROW_EXCEPTION(workflow_error(no_template_paths));
     }
 }
 
-std::list<std::pair<boost::filesystem::path, std::string> >
+std::forward_list<std::pair<boost::filesystem::path, std::string> >
 workflow::read_text_templates_activity(
-    const std::list<boost::filesystem::path>& text_template_paths) const {
-    std::list<std::pair<boost::filesystem::path, std::string> > r;
+    const std::forward_list<boost::filesystem::path>&
+    text_template_paths) const {
+    std::forward_list<std::pair<boost::filesystem::path, std::string> > r;
     for (const auto& path : text_template_paths) {
         using utility::filesystem::read_file_content;
         const auto content(read_file_content(path));
@@ -100,7 +104,7 @@ workflow::read_text_templates_activity(
             BOOST_THROW_EXCEPTION(
                 workflow_error(empty_template + path.generic_string()));
         }
-        r.push_back(std::make_pair(path, content));
+        r.push_front(std::make_pair(path, content));
     }
     return r;
 }
@@ -128,16 +132,16 @@ dynamic::schema::repository workflow::create_schema_repository_activity(
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
-std::list<text_template> workflow::parse_text_templates_activity(
+std::forward_list<text_template> workflow::parse_text_templates_activity(
     const dynamic::schema::repository& rp,
-    const std::list<std::pair<boost::filesystem::path, std::string> >&
+    const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
-    std::list<text_template> r;
+    std::forward_list<text_template> r;
     parser p(rp);
     for (const auto& pair : text_templates_as_string) {
         auto tt(p.parse(pair.second));
         perform_expansion(pair.first, tt.extensions());
-        r.push_back(tt);
+        r.push_front(tt);
     }
 
     return r;
@@ -146,24 +150,26 @@ std::list<text_template> workflow::parse_text_templates_activity(
 void workflow::populate_settings_bundle_activity(
     const dynamic::schema::repository& schema_repository,
     const dogen::formatters::repository& formatters_repository,
-    std::list<text_template>& text_templates) const {
+    std::forward_list<text_template>& text_templates) const {
 
     settings_bundle_factory f(schema_repository, formatters_repository);
     for (auto& tt : text_templates)
         tt.settings(f.make(tt.extensions()));
 }
 
-std::list<formatters::file> workflow::format_text_templates_activity(
-    const std::list<text_template>& text_templates) const {
-    std::list<formatters::file> r;
+std::forward_list<formatters::file> workflow::format_text_templates_activity(
+    const std::forward_list<text_template>& text_templates) const {
+    std::forward_list<formatters::file> r;
     for (const auto& tt : text_templates)
-        r.push_back(formatter_.format(tt));
+        r.push_front(formatter_.format(tt));
     return r;
 }
 
 void workflow::
-output_files_activity(const std::list<formatters::file>& files) const {
+write_files_activity(const std::forward_list<formatters::file>& files) const {
     BOOST_LOG_SEV(lg, debug) << "Files: " << files;
+    formatters::filesystem_writer w(false/*force_write*/);
+    w.write(files);
 }
 
 void workflow::execute(const boost::filesystem::path& p) const {
@@ -178,7 +184,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
     const auto formatters_rp(create_formatters_repository_activity());
     populate_settings_bundle_activity(schema_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
-    output_files_activity(files);
+    write_files_activity(files);
 }
 
 } }

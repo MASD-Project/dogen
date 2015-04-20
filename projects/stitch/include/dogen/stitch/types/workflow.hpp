@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
@@ -63,21 +62,23 @@ private:
      * .stitch. If p is a directory, it and it sub-directories are
      * searched for files with the @code .stitch extension.
      */
-    std::list<boost::filesystem::path> get_text_template_paths_activity(
+    std::forward_list<boost::filesystem::path> get_text_template_paths_activity(
         const boost::filesystem::path& file_or_directory) const;
 
     /**
      * @brief Ensures the file paths point to valid templates.
      */
     void validate_text_template_paths(
-        const std::list<boost::filesystem::path>& text_template_paths) const;
+        const std::forward_list<boost::filesystem::path>&
+        text_template_paths) const;
 
     /**
      * @brief Reads all of the supplied stitch text templates into memory.
      */
-    std::list<std::pair<boost::filesystem::path, std::string> >
+    std::forward_list<std::pair<boost::filesystem::path, std::string> >
     read_text_templates_activity(
-        const std::list<boost::filesystem::path>& text_template_paths) const;
+        const std::forward_list<boost::filesystem::path>&
+        text_template_paths) const;
 
     /**
      * @brief Obtains the ownership hierarchy.
@@ -100,10 +101,11 @@ private:
     /**
      * @brief Parses all of the strings that contain text templates.
      */
-    std::list<text_template> parse_text_templates_activity(
+    std::forward_list<text_template> parse_text_templates_activity(
         const dynamic::schema::repository& rp,
-        const std::list<std::pair<boost::filesystem::path, std::string> >&
-            text_templates_as_string) const;
+        const std::forward_list<
+        std::pair<boost::filesystem::path, std::string>
+        >& text_templates_as_string) const;
 
     /**
      * @brief Creates the settings bundles.
@@ -111,18 +113,19 @@ private:
     void populate_settings_bundle_activity(
         const dynamic::schema::repository& schema_repository,
         const dogen::formatters::repository& formatters_repository,
-        std::list<text_template>& text_templates) const;
+        std::forward_list<text_template>& text_templates) const;
 
     /**
      * @brief Formats all of the supplied text templates.
      */
-    std::list<formatters::file> format_text_templates_activity(
-        const std::list<text_template>& text_templates) const;
+    std::forward_list<formatters::file> format_text_templates_activity(
+        const std::forward_list<text_template>& text_templates) const;
 
     /**
-     * @brief Outputs all of the files into the filesystem.
+     * @brief Writes all of the files into the filesystem.
      */
-    void output_files_activity(const std::list<formatters::file>& files) const;
+    void write_files_activity(
+        const std::forward_list<formatters::file>& files) const;
 
 public:
     /**
