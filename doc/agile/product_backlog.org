@@ -4200,6 +4200,15 @@ possible:
   "manually generated" and if there is implementation content, we dump
   that; otherwise we generate the skeleton of the method as if it was
   not "manually generated".
+- merging could be done as part of SML, in meta-data. That is, we
+  could annotate the merged method into language specific properties
+  in the meta-data and then query those in the language specific model
+  generation. We could have another SML workflow to look for files; it
+  could use the meta-data for file path. The extension will tell it
+  what "function parser" to use. We could literally look through the
+  meta-data extensions looking for file path, and for each run the
+  "function parser"; it will return a set of "manual" functions. These
+  we can then slot into the meta-data and reuse later on.
 
 *** Visitor adaptor for usage in ranges                               :story:
 
