@@ -96,20 +96,17 @@ void file_outputter::log_content_changes() const {
     BOOST_LOG_SEV(lg, debug) << "File contents have changed, need to write";
 }
 
-bool file_outputter::content_changed(outputter::value_entry_type value) const {
+bool file_outputter::content_changed(const formatters::file& file) const {
     if (force_write_)
         return true;
 
-    const boost::filesystem::path path(value.first);
-    const std::string contents(value.second);
-
-    if (!boost::filesystem::exists(path))
+    if (!boost::filesystem::exists(file.path()))
         return true;
 
     using dogen::utility::filesystem::read_file_content;
-    std::string existing_contents(read_file_content(path));
+    std::string existing_content(read_file_content(file.path()));
 
-    if (existing_contents == contents) {
+    if (existing_content == file.content()) {
         log_no_content_changes();
         return false;
     }
@@ -117,14 +114,12 @@ bool file_outputter::content_changed(outputter::value_entry_type value) const {
     return true;
 }
 
-void file_outputter::to_file(outputter::value_entry_type value) const {
+void file_outputter::output(const formatters::file& file) const {
     try {
-        const boost::filesystem::path path(value.first);
-        const std::string contents(value.second);
+        const auto gs(file.path().generic_string());
+        BOOST_LOG_SEV(lg, debug) << "Processing file: " << gs;
 
-        BOOST_LOG_SEV(lg, debug) << "Processing file: " << path.string();
-
-        boost::filesystem::path dir(path);
+        boost::filesystem::path dir(file.path());
         dir.remove_filename();
 
         using boost::filesystem::create_directories;
@@ -132,25 +127,27 @@ void file_outputter::to_file(outputter::value_entry_type value) const {
         log_created_directories(created, dir);
 
         using dogen::utility::filesystem::write_file_content;
-        if (contents.empty()) {
-            if (!boost::filesystem::exists(path)) {
-                log_writing_file(path.string());
+        if (file.content().empty()) {
+            if (!boost::filesystem::exists(file.path())) {
+                log_writing_file(gs);
 
-                // FIXME: massive hack to deal with ranlib warnings on OSX
-                const auto hc(create_hacked_contents(path.stem().string()));
-                if (boost::ends_with(path.string(), ".cpp"))
-                    write_file_content(path, hc);
+                // FIXME: massive hack to deal with ranlib warnings on
+                // OSX
+                const auto fn(file.path().stem().generic_string());
+                const auto hc(create_hacked_contents(fn));
+                if (boost::ends_with(gs, ".cpp"))
+                    write_file_content(file.path(), hc);
                 else
-                    write_file_content(path, contents);
+                    write_file_content(file.path(), file.content());
             } else
-                log_not_writing_file(path.string());
+                log_not_writing_file(gs);
             return;
         }
 
-        if (created || content_changed(value)) {
-            log_writing_file(path.string());
-            write_file_content(path, contents);
-            log_wrote_file(path.string());
+        if (created || content_changed(file)) {
+            log_writing_file(gs);
+            write_file_content(file.path(), file.content());
+            log_wrote_file(gs);
         }
     } catch(const std::exception& e) {
         const std::string message(error_generating_files);
@@ -164,9 +161,9 @@ std::string file_outputter::outputter_name() {
 }
 
 void file_outputter::
-output(outputter::value_type value) const {
-    for (const auto pair : value)
-        to_file(pair);
+output(const std::forward_list<formatters::file>& files) const {
+    for (const auto file : files)
+        output(file);
 }
 
 } } }

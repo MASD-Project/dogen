@@ -18,19 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNIT_TYPES_BACKENDS_BACKEND_FWD_HPP
-#define DOGEN_KNIT_TYPES_BACKENDS_BACKEND_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/knit/types/backends/backend_interface.hpp"
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-class backend;
+backend_interface::~backend_interface() noexcept {}
 
 } } }
-
-#endif

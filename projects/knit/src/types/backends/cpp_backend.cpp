@@ -18,45 +18,99 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_map>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml_to_cpp/types/workflow.hpp"
+#include "dogen/cpp_formatters/types/workflow.hpp"
+#include "dogen/backend/types/workflow.hpp" // FIXME
+#include "dogen/knit/types/backends/backend_error.hpp"
 #include "dogen/knit/types/backends/cpp_backend.hpp"
+
+namespace  {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("knit.backends.cpp_backend"));
+
+// FIXME: massive hack for now.
+// set it to true to use new formatters.
+const bool perform_override_of_legacy_files(false);
+
+const std::string duplicate_file_path("File path already exists: ");
+
+}
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-cpp_backend::
-cpp_backend(const config::knitting_options& o,
-    const dynamic::schema::repository& rp,
-    const sml::model& model) :
-    transformer_(model, o), formatter_(o),
-    model_(model), backend_workflow_(o, rp) { }
+cpp_backend::~cpp_backend() noexcept {}
 
-backend::ptr cpp_backend::
-create(const config::knitting_options& o, const dynamic::schema::repository& rp,
-    const sml::model& model) {
-    return backend::ptr(new cpp_backend(o, rp, model));
+cpp::formattables::project cpp_backend::create_project(
+    const config::knitting_options& o, const sml::model& model) const {
+    sml_to_cpp::workflow w(model, o);
+    return w.execute();
 }
 
-backend::value_type cpp_backend::generate() {
-    const auto project(transformer_.execute());
-    /*const*/ auto r(formatter_.execute(project));
+std::forward_list<formatters::file> cpp_backend::
+format_files(const config::knitting_options& o,
+    const cpp::formattables::project& p) const {
+    cpp_formatters::workflow w(o);
+    return w.execute(p);
+}
 
-    // FIXME: massive hack for now.
-    const bool dump_files(false); // set to true to use new formatters.
-    if (dump_files) {
-        const auto files(backend_workflow_.execute(model_));
-        for (const auto& f : files)
-            r[f.path()] = f.content();
-    } else
-        backend_workflow_.execute(model_);
+std::forward_list<formatters::file> cpp_backend::
+format_files(const config::knitting_options& o,
+    const dynamic::schema::repository& rp, const sml::model& m) const {
+    dogen::backend::workflow w(o, rp);
+    return w.execute(m);
+}
 
+std::forward_list<formatters::file> cpp_backend::override_legacy_files(
+    const std::forward_list<formatters::file>& old_world,
+    const std::forward_list<formatters::file>& new_world) const {
+
+    if (!perform_override_of_legacy_files)
+        return old_world;
+
+    std::unordered_map<std::string, formatters::file> overrides;
+    for (const auto& f : new_world) {
+        const auto gs(f.path().generic_string());
+        const auto result(overrides.insert(std::make_pair(gs, f)));
+        if (!result.second) {
+            BOOST_LOG_SEV(lg, error) << duplicate_file_path << gs;
+            BOOST_THROW_EXCEPTION(backend_error(duplicate_file_path + gs));
+        }
+    }
+
+    std::forward_list<formatters::file> r;
+    for (const auto& f : old_world) {
+        const auto i(overrides.find(f.path().generic_string()));
+        if (i != overrides.end())
+            r.push_front(i->second);
+        else
+            r.push_front(f);
+    }
     return r;
 }
 
-std::forward_list<boost::filesystem::path>
-cpp_backend::managed_directories() const {
-    return transformer_.managed_directories();
+std::forward_list<boost::filesystem::path> cpp_backend::
+managed_directories(const config::knitting_options& o,
+    const sml::model& m) const {
+    sml_to_cpp::workflow w(m, o);
+    return w.managed_directories();
+}
+
+std::forward_list<formatters::file> cpp_backend::
+generate(const config::knitting_options& o,
+    const dynamic::schema::repository& rp,
+    const sml::model& m) {
+
+    const auto p(create_project(o, m));
+    const auto old_world(format_files(o, p));
+    const auto new_world(format_files(o, rp, m));
+    const auto r(override_legacy_files(old_world, new_world));
+    return r;
 }
 
 } } }

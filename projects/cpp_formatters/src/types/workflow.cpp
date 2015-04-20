@@ -18,11 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/lexical_cast.hpp>
-#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
-#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp_formatters/types/factory.hpp"
 #include "dogen/cpp_formatters/types/file_formatter.hpp"
 #include "dogen/cpp_formatters/types/src_cmakelists.hpp"
@@ -45,39 +42,63 @@ namespace cpp_formatters {
 
 workflow::workflow(const config::knitting_options& o) : options_(o) { }
 
-workflow::result_type
+std::forward_list<formatters::file>
 workflow::format_cmakelists_activity(
     const cpp::formattables::project& p) const {
-    const auto src_path(p.src_cmakelists().file_path());
-    BOOST_LOG_SEV(lg, debug) << "Formatting: " << src_path.string();
 
-    std::ostringstream s;
-    cpp_formatters::src_cmakelists f(s);
-    f.format(p.src_cmakelists());
+    std::forward_list<formatters::file> r;
+    if (options_.cpp().disable_cmakelists()) {
+        BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
+        return r;
+    }
 
-    workflow::result_type r;
-    r.insert(std::make_pair(src_path, s.str()));
+    {
+        const auto path(p.src_cmakelists().file_path());
+        BOOST_LOG_SEV(lg, debug) << "Formatting: " << path.string();
+
+        std::ostringstream s;
+        cpp_formatters::src_cmakelists fmt(s);
+        fmt.format(p.src_cmakelists());
+
+        formatters::file file;
+        file.path(path);
+        file.content(s.str());
+        r.push_front(file);
+    }
 
     if (p.include_cmakelists()) {
-        const auto f(options_.cpp().enabled_facets());
-        const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
-        s.str("");
+        const auto path(p.include_cmakelists()->file_path());
+        BOOST_LOG_SEV(lg, debug) << "Formatting: " << path.string();
 
-        cpp_formatters::include_cmakelists inc(s, odb_enabled,
-            options_.cpp().odb_facet_folder());
-        inc.format(*p.include_cmakelists());
+        const auto fct(options_.cpp().enabled_facets());
+        const auto i(fct.find(config::cpp_facet_types::odb));
+        const bool is_odb_enabled(i != fct.end());
+        const auto fct_folder(options_.cpp().odb_facet_folder());
 
-        const auto inc_path(p.include_cmakelists()->file_path());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: " << inc_path.string();
-        r.insert(std::make_pair(inc_path, s.str()));
+        std::ostringstream s;
+        cpp_formatters::include_cmakelists fmt(s, is_odb_enabled, fct_folder);
+        fmt.format(*p.include_cmakelists());
+
+        formatters::file file;
+        file.path(path);
+        file.content(s.str());
+        r.push_front(file);
     }
 
     return r;
 }
 
-workflow::result_entry_type
-workflow::format_odb_options_activity(
-    const cpp::formattables::project& p) const {
+std::forward_list<formatters::file> workflow::
+format_odb_options_activity(const cpp::formattables::project& p) const {
+    std::forward_list<formatters::file> r;
+    const auto fcts(options_.cpp().enabled_facets());
+    const auto i(fcts.find(config::cpp_facet_types::odb));
+    const bool is_odb_enabled(i != fcts.end());
+    if (!is_odb_enabled) {
+        BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
+        return r;
+    }
+
     const auto path(p.odb_options().file_path());
     BOOST_LOG_SEV(lg, debug) << "Formatting:" << path.string();
 
@@ -85,45 +106,45 @@ workflow::format_odb_options_activity(
     cpp_formatters::odb_options f(s);
     f.format(p.odb_options());
 
-    return std::make_pair(path, s.str());
+    formatters::file file;
+    file.path(path);
+    file.content(s.str());
+    r.push_front(file);
+
+    return r;
 }
 
-workflow::result_type
-workflow::format_file_infos_activity(
-    const cpp::formattables::project& p) const {
-    workflow::result_type r;
+std::forward_list<formatters::file> workflow::
+format_file_infos_activity(const cpp::formattables::project& p) const {
 
+    std::ostringstream s;
+    std::forward_list<formatters::file> r;
+    cpp_formatters::factory factory(options_);
+    cpp_formatters::file_formatter::shared_ptr fmt;
     for (const auto f : p.files()) {
         BOOST_LOG_SEV(lg, debug) << "Formatting:" << f.file_path().string();
         BOOST_LOG_SEV(lg, debug) << "Descriptor:" << f.descriptor();
-        cpp_formatters::factory factory(options_);
-        cpp_formatters::file_formatter::shared_ptr ff;
-        std::ostringstream s;
-        ff = factory.create(s, f.descriptor());
-        ff->format(f);
-        r.insert(std::make_pair(f.file_path(), s.str()));
+
+        fmt = factory.create(s, f.descriptor());
+        fmt->format(f);
+
+        formatters::file file;
+        file.path(f.file_path());
+        file.content(s.str());
+        r.push_front(file);
+        s.str("");
     }
 
     return r;
 }
 
-workflow::result_type workflow::execute(const cpp::formattables::project& p) {
+std::forward_list<formatters::file>
+workflow::execute(const cpp::formattables::project& p) const {
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow started.";
 
-    workflow::result_type r(format_file_infos_activity(p));
-    if (options_.cpp().disable_cmakelists())
-        BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
-    else {
-        const auto cm(format_cmakelists_activity(p));
-        r.insert(cm.begin(), cm.end());
-    }
-
-    const auto f(options_.cpp().enabled_facets());
-    const bool odb_enabled(f.find(config::cpp_facet_types::odb) != f.end());
-    if (odb_enabled)
-        r.insert(format_odb_options_activity(p));
-    else
-        BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
+    std::forward_list<formatters::file> r(format_file_infos_activity(p));
+    r.splice_after(r.before_begin(), format_cmakelists_activity(p));
+    r.splice_after(r.before_begin(), format_odb_options_activity(p));
 
     BOOST_LOG_SEV(lg, info) << "C++ formatters workflow finished.";
     return r;

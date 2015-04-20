@@ -25,13 +25,8 @@
 #pragma once
 #endif
 
-#include <map>
-#include <utility>
-#include <string>
-#include <sstream>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/object.hpp"
+#include <forward_list>
+#include "dogen/formatters/types/file.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/cpp/types/formattables/project.hpp"
 
@@ -53,34 +48,31 @@ public:
     workflow(const config::knitting_options& o);
     virtual ~workflow() noexcept {}
 
-public:
-    typedef std::map<boost::filesystem::path, std::string> result_type;
-    typedef std::pair<boost::filesystem::path, std::string> result_entry_type;
-
 private:
     /**
      * @brief Create the cmakelists makefiles.
      */
-    result_type
-        format_cmakelists_activity(const cpp::formattables::project& p) const;
+    std::forward_list<formatters::file> format_cmakelists_activity(
+        const cpp::formattables::project& p) const;
 
     /**
      * @brief Creates the ODB compiler options file.
      */
-    result_entry_type
-        format_odb_options_activity(const cpp::formattables::project& p) const;
+    std::forward_list<formatters::file> format_odb_options_activity(
+        const cpp::formattables::project& p) const;
 
     /**
      * @brief Generate all C++ files.
      */
-    result_type
-        format_file_infos_activity(const cpp::formattables::project& p) const;
+    std::forward_list<formatters::file> format_file_infos_activity(
+        const cpp::formattables::project& p) const;
 
 public:
     /**
      * @brief Execute the workflow.
      */
-    result_type execute(const cpp::formattables::project& p);
+    std::forward_list<formatters::file> execute(
+        const cpp::formattables::project& p) const;
 
 private:
     const config::knitting_options options_;

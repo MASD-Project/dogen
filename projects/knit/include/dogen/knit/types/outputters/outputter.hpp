@@ -25,11 +25,8 @@
 #pragma once
 #endif
 
-#include <map>
-#include <string>
-#include <ostream>
-#include <memory>
-#include <boost/filesystem/path.hpp>
+#include <forward_list>
+#include "dogen/formatters/types/file.hpp"
 
 namespace dogen {
 namespace knit {
@@ -46,15 +43,11 @@ protected:
     outputter() = default;
 
 public:
-    typedef std::shared_ptr<outputter> ptr;
-    typedef std::map<boost::filesystem::path, std::string> value_type;
-    typedef std::pair<boost::filesystem::path, std::string> value_entry_type;
-
-public:
     /**
      * @brief Write input to output medium.
      */
-    virtual void output(value_type value) const = 0;
+    virtual void output(
+        const std::forward_list<formatters::file>& files) const = 0;
 };
 
 } } }

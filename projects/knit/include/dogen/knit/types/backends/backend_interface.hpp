@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNIT_TYPES_BACKENDS_FACTORY_HPP
-#define DOGEN_KNIT_TYPES_BACKENDS_FACTORY_HPP
+#ifndef DOGEN_KNIT_TYPES_BACKENDS_BACKEND_INTERFACE_HPP
+#define DOGEN_KNIT_TYPES_BACKENDS_BACKEND_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,32 +27,42 @@
 
 #include <memory>
 #include <forward_list>
+#include <boost/filesystem/path.hpp>
+#include "dogen/formatters/types/file.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/knit/types/backends/backend_interface.hpp"
+#include "dogen/sml/types/model.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp" // FIXME
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-class factory {
+class backend_interface {
 public:
-    factory() = delete;
-    factory(const factory&) = default;
-    ~factory() = default;
-    factory(factory&&) = default;
-    factory& operator=(const factory&) = default;
+    backend_interface(const backend_interface&) = default;
+    backend_interface(backend_interface&&) = default;
+    backend_interface& operator=(const backend_interface&) = default;
 
 public:
-    explicit factory(const config::knitting_options& o);
+    virtual ~backend_interface() noexcept = 0;
 
-private:
-    void log_cpp_backend_disabled() const;
+protected:
+    backend_interface() = default;
 
 public:
-    std::forward_list<std::shared_ptr<backend_interface> > make() const;
+    /**
+     * @brief Get all directories managed by this backend.
+     */
+    virtual std::forward_list<boost::filesystem::path>
+    managed_directories(const config::knitting_options& o,
+        const sml::model& m) const = 0;
 
-private:
-    const config::knitting_options& options_;
+    /**
+     * @brief Generate code for this backend.
+     */
+    virtual std::forward_list<formatters::file> generate(
+        const config::knitting_options& o,
+        const dynamic::schema::repository& rp, const sml::model& m) = 0;
 };
 
 } } }

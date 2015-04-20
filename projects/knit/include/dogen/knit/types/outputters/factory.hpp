@@ -25,8 +25,9 @@
 #pragma once
 #endif
 
-#include <vector>
+#include <memory>
 #include <functional>
+#include <forward_list>
 #include "dogen/config/types/output_options.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 
@@ -44,7 +45,6 @@ public:
 
 public:
     typedef std::function<std::ostream& ()> function_type;
-    typedef std::vector<outputter::ptr> production_type;
 
 private:
     void log_output_disabled(std::string name) const;
@@ -54,7 +54,7 @@ public:
         : options_(options), stream_fn_(stream_fn) { }
 
 public:
-    production_type create() const;
+    std::forward_list<std::shared_ptr<outputter> > make() const;
 
 private:
     const config::output_options options_;

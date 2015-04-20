@@ -22,31 +22,33 @@
 #include "dogen/knit/types/backends/cpp_backend.hpp"
 #include "dogen/knit/types/backends/factory.hpp"
 
+namespace {
+
 static dogen::utility::log::logger
 lg(dogen::utility::log::logger_factory("knit.backends.factory"));
+
+}
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-factory::factory(const config::knitting_options& o,
-    const dynamic::schema::repository& rp,
-    const sml::model& model)
-    : options_(o), repository_(rp), model_(model) { }
+factory::factory(const config::knitting_options& o) : options_(o)  { }
 
 void factory::log_cpp_backend_disabled() const {
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg, info) << "C++ backend is disabled, skipping it.";
 }
 
-factory::result_type factory::create() const {
+std::forward_list<std::shared_ptr<backend_interface> >
+factory::make() const {
+    std::forward_list<std::shared_ptr<backend_interface> > r;
     if (options_.cpp().disable_backend()) {
         log_cpp_backend_disabled();
-        return result_type();
+        return r;
     }
 
-    result_type r;
-    r.push_back(cpp_backend::create(options_, repository_, model_));
+    r.push_front(std::make_shared<cpp_backend>());
     return r;
 }
 

@@ -26,7 +26,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
 
 namespace dogen {
@@ -35,7 +34,6 @@ namespace knit {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::config::register_types(ar);
-    dogen::sml::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

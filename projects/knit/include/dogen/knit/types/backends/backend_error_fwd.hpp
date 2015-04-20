@@ -18,50 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNIT_TYPES_BACKENDS_BACKEND_HPP
-#define DOGEN_KNIT_TYPES_BACKENDS_BACKEND_HPP
+#ifndef DOGEN_KNIT_TYPES_BACKENDS_BACKEND_ERROR_FWD_HPP
+#define DOGEN_KNIT_TYPES_BACKENDS_BACKEND_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <map>
 #include <string>
-#include <memory>
-#include <forward_list>
-#include <boost/filesystem/path.hpp>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-class backend {
-public:
-    backend(const backend&) = default;
-    virtual ~backend() noexcept = default;
-    backend(backend&&) = default;
-    backend& operator=(const backend&) = default;
-
-protected:
-    backend() = default;
-
-public:
-    typedef std::shared_ptr<backend> ptr;
-    typedef std::map<boost::filesystem::path, std::string> value_type;
-    typedef std::pair<boost::filesystem::path, std::string> value_entry_type;
-
-public:
-    /**
-     * @brief Generate code for this backend.
-     */
-    virtual value_type generate() = 0;
-
-    /**
-     * @brief Get all directories managed by this backend.
-     */
-    virtual std::forward_list<boost::filesystem::path>
-    managed_directories() const = 0;
-};
+class backend_error;
 
 } } }
 

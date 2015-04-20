@@ -20,8 +20,8 @@
  */
 #include "dogen/knit/types/outputters/stream_outputter.hpp"
 #include "dogen/knit/types/outputters/file_outputter.hpp"
-#include "dogen/knit/types/outputters/factory.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/knit/types/outputters/factory.hpp"
 
 namespace {
 
@@ -39,18 +39,20 @@ void factory::log_output_disabled(std::string name) const {
                              << " disabled, so ignoring it.";
 }
 
-factory::production_type factory::create() const {
-    production_type r;
+std::forward_list<std::shared_ptr<outputter> >
+factory::make() const {
+    std::forward_list<std::shared_ptr<outputter> > r;
 
     if (options_.output_to_file()) {
-        outputter::ptr o(new file_outputter(options_.force_write()));
-        r.push_back(o);
+        const auto fw(options_.force_write());
+        const auto o(std::make_shared<file_outputter>(fw));
+        r.push_front(o);
     } else
         log_output_disabled(file_outputter::outputter_name());
 
     if (options_.output_to_stdout()) {
-        outputter::ptr o(new stream_outputter(stream_fn_()));
-        r.push_back(o);
+        const auto o(std::make_shared<stream_outputter>(stream_fn_()));
+        r.push_front(o);
     } else
         log_output_disabled(stream_outputter::outputter_name());
 

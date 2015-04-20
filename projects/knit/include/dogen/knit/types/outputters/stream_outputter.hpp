@@ -52,7 +52,8 @@ public:
      */
     static std::string outputter_name();
 
-    void output(outputter::value_type value) const override;
+    void output(
+        const std::forward_list<formatters::file>& files) const override;
 
 private:
     std::ostream& stream_;

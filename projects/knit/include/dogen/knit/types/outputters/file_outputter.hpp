@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include <map>
-#include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/knit/types/outputters/outputter.hpp"
 
@@ -60,12 +58,12 @@ private:
     /**@}*/
 
 private:
-    bool content_changed(outputter::value_entry_type value) const;
+    bool content_changed(const formatters::file& file) const;
 
     /**
-     * @brief Outputs the pair passed in to a file.
+     * @brief Outputs the file.
      */
-    void to_file(outputter::value_entry_type value) const;
+    void output(const formatters::file& file) const;
 
 public:
     /**
@@ -76,7 +74,8 @@ public:
     /**
      * @brief Outputs all of the generated code to files.
      */
-    void output(outputter::value_type value) const override;
+    void output(
+        const std::forward_list<formatters::file>& files) const override;
 
 private:
     const bool force_write_;

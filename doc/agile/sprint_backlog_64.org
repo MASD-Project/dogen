@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-19 Sun 22:46]
+Clock summary at [2015-04-20 Mon 19:00]
 
 | Headline                                               | Time    |       |      |
 |--------------------------------------------------------+---------+-------+------|
-| *Total time*                                           | *15:17* |       |      |
+| *Total time*                                           | *17:45* |       |      |
 |--------------------------------------------------------+---------+-------+------|
-| Active                                                 |         | 15:17 |      |
+| Active                                                 |         | 17:45 |      |
 | STARTED Sprint and product backlog grooming            |         |       | 0:46 |
 | COMPLETED Create a formatting utilities class          |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch        |         |       | 3:02 |
@@ -28,6 +28,7 @@ Clock summary at [2015-04-19 Sun 22:46]
 | COMPLETED Add expander that computes output path       |         |       | 1:04 |
 | COMPLETED Add support for dynamic extensions in stitch |         |       | 3:44 |
 | COMPLETED Refactor =knit= workflows                    |         |       | 2:10 |
+| COMPLETED Use =formatters::file= in legacy formatters  |         |       | 2:28 |
 | STARTED Move outputters from knit to formatters model  |         |       | 0:24 |
 #+end:
 
@@ -130,6 +131,30 @@ Create a backend workflow that has activities for each
 backend. Actually create two sub-workflows: sml model workflow and
 backend workflow. Then create a top-level workflow that calls both.
 
+*** COMPLETED Use =formatters::file= in legacy formatters             :story:
+    CLOSED: [2015-04-20 Mon 18:56]
+    CLOCK: [2015-04-20 Mon 17:31]--[2015-04-20 Mon 18:56] =>  1:25
+    CLOCK: [2015-04-20 Mon 15:35]--[2015-04-20 Mon 16:38] =>  1:03
+
+We should make use of formatters file in preparation for using the new
+world formatters.
+
+- remove all of the typedefs in outputters, cpp_formatters, etc.
+- cpp formatters to start creating formatters::file
+- housekeeper to create a map of files if required; actually, add
+  activity that generates the set.
+
+*** COMPLETED Minor refactor to legacy =backend=                      :story:
+    CLOSED: [2015-04-20 Mon 18:57]
+
+We should take this opportunity to make the legacy backend a bit more
+manageable.
+
+- cpp_backend to be split into activities: transform, legacy generate,
+  new world overwrite.
+- rename backend to backend interface
+- pass the model into the generate method of the backend
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -189,7 +214,38 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** STARTED Compute managed directories from knitting options         :story:
+*** STARTED Move outputters from knit to formatters model             :story:
+    CLOCK: [2015-04-18 Sat 06:22]--[2015-04-18 Sat 06:40] =>  0:45
+    CLOCK: [2015-04-17 Fri 21:38]--[2015-04-17 Fri 21:44] =>  0:06
+
+We need to move outputting to formatters so that it can be reused in
+stitch.
+
+- create and implement the writers in formatters.
+- replace knit::outputters with formatters::writer
+
+*** Handling of managed directories is incorrect                      :story:
+
+At present we are querying the dia to sml transformer to figure out
+what the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an SML model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
 
 At present the backend is returning empty managed directories. This
 means housekeeping will fail in the new world. We need to change the
@@ -207,36 +263,6 @@ populate the managed directories as a text collection. We then need
 some settings and a factory to pull out the managed directories from
 the root object. This could be done in =managed_directories=, by
 having an SML model as input.
-
-*** STARTED Move outputters from knit to formatters model             :story:
-    CLOCK: [2015-04-18 Sat 06:22]--[2015-04-18 Sat 06:40] =>  0:45
-    CLOCK: [2015-04-17 Fri 21:38]--[2015-04-17 Fri 21:44] =>  0:06
-
-We need to move outputting to formatters so that it can be reused in
-stitch.
-
-- create and implement the writers in formatters.
-- replace knit::outputters with formatters::writer
-
-*** Use =formatters::file= in legacy formatters                       :story:
-
-We should make use of formatters file in preparation for using the new
-world formatters.
-
-- remove all of the typedefs in outputters, cpp_formatters, etc.
-- cpp formatters to start creating formatters::file
-- housekeeper to create a map of files if required; actually, add
-  activity that generates the set.
-
-*** Minor refactor to legacy =backend=                                :story:
-
-We should take this opportunity to make the legacy backend a bit more
-manageable.
-
-- cpp_backend to be split into activities: transform, legacy generate,
-  new world overwrite.
-- rename backend to backend interface
-- pass the model into the generate method of the backend
 
 *** Remove the overwrite flag in =formatters::file=                   :story:
 

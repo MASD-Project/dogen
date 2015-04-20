@@ -33,6 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/formatters/types/file.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/knit/types/outputters/outputter.hpp"
 
@@ -63,7 +64,7 @@ private:
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void perform_housekeeping_activity(
-        const std::map<boost::filesystem::path, std::string>& files,
+        const std::forward_list<formatters::file>& files,
         const std::forward_list<boost::filesystem::path>& dirs) const;
 
     /**
@@ -71,7 +72,7 @@ private:
      * destination.
      */
     void output_files_activity(
-        const outputters::outputter::value_type& o) const;
+        const std::forward_list<formatters::file>& files) const;
 
 public:
     /**

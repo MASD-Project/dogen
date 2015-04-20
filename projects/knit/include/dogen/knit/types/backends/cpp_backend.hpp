@@ -25,49 +25,63 @@
 #pragma once
 #endif
 
-#include <map>
-#include <string>
-#include <utility>
-#include <sstream>
-#include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp_formatters/types/workflow.hpp"
-#include "dogen/sml_to_cpp/types/workflow.hpp"
-#include "dogen/knit/types/backends/backend.hpp"
-#include "dogen/backend/types/workflow.hpp" // FIXME
-#include "dogen/dynamic/schema/types/repository.hpp" // FIXME
+#include "dogen/cpp/types/formattables/project.hpp"
+#include "dogen/knit/types/backends/backend_interface.hpp"
 
 namespace dogen {
 namespace knit {
 namespace backends {
 
-class cpp_backend : public backend {
+class cpp_backend : public backend_interface {
 public:
-    cpp_backend() = delete;
+    cpp_backend() = default;
     cpp_backend(const cpp_backend&) = default;
     cpp_backend(cpp_backend&&) = default;
     cpp_backend& operator=(const cpp_backend&) = default;
 
 public:
-    cpp_backend(const config::knitting_options& o,
-        const dynamic::schema::repository& rp, const sml::model& model);
-    virtual ~cpp_backend() noexcept {}
-
-public:
-    static backend::ptr
-    create(const config::knitting_options& o,
-        const dynamic::schema::repository& rp, const sml::model& model);
-
-public:
-    backend::value_type generate() override;
-    std::forward_list<boost::filesystem::path>
-    managed_directories() const override;
+    virtual ~cpp_backend() noexcept;
 
 private:
-    sml_to_cpp::workflow transformer_;
-    cpp_formatters::workflow formatter_;
-    const sml::model& model_; // FIXME
-    dogen::backend::workflow backend_workflow_; // FIXME
+    /**
+     * @brief Creates the c++ project.
+     */
+    cpp::formattables::project
+    create_project(const config::knitting_options& o,
+        const sml::model& model) const;
+
+    /**
+     * @brief Formats the project into files.
+     */
+    std::forward_list<formatters::file>
+    format_files(const config::knitting_options& o,
+        const cpp::formattables::project& p) const;
+
+    /**
+     * @brief Generates files with the new-world formatters
+     */
+    std::forward_list<formatters::file>
+    format_files(const config::knitting_options& o,
+        const dynamic::schema::repository& rp,
+        const sml::model& m) const;
+
+    /**
+     * @brief Overrides the old-world files with the new-world
+     * versions.
+     */
+    std::forward_list<formatters::file> override_legacy_files(
+        const std::forward_list<formatters::file>& old_world,
+        const std::forward_list<formatters::file>& new_world) const;
+
+public:
+    std::forward_list<boost::filesystem::path>
+    managed_directories(const config::knitting_options& o,
+        const sml::model& m) const override;
+
+    std::forward_list<formatters::file> generate(
+        const config::knitting_options& o,
+        const dynamic::schema::repository& rp,
+        const sml::model& m) override;
 };
 
 } } }

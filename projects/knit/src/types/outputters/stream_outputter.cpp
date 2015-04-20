@@ -25,7 +25,7 @@ namespace {
 
 const std::string outputter_name("Stream outputter");
 const std::string file_name("Filename: ");
-const std::string contents("Contents: ");
+const std::string content("Content: ");
 
 }
 
@@ -40,10 +40,10 @@ std::string stream_outputter::outputter_name() {
 }
 
 void stream_outputter::
-output(outputter::value_type value) const {
-    for (auto pair : value) {
-        stream_ << file_name << pair.first.generic_string() << std::endl
-                << contents << std::endl << pair.second << std::endl;
+output(const std::forward_list<formatters::file>& files) const {
+    for (const auto& file : files) {
+        stream_ << file_name << file.path().generic_string() << std::endl
+                << content << std::endl << file.content() << std::endl;
     }
 }
 
