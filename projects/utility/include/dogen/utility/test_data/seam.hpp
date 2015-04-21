@@ -44,9 +44,11 @@ public:
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_simple_template_stitch_cpp();
+    static boost::filesystem::path expected_empty_template_stitch_cpp();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_simple_template_stitch_cpp();
+    static boost::filesystem::path actual_empty_template_stitch_cpp();
 };
 
 } } }

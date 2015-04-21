@@ -37,6 +37,8 @@ const std::string empty;
 const std::string test_module("stitch");
 const std::string test_suite("workflow_spec");
 
+const std::string empty_template("Template has no content");
+
 }
 
 using dogen::utility::test::contains_checker;
@@ -55,6 +57,16 @@ BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     BOOST_CHECK(asserter::assert_file(
             seam::expected_simple_template_stitch_cpp(),
             seam::actual_simple_template_stitch_cpp()));
+}
+
+BOOST_AUTO_TEST_CASE(empty_template_throws) {
+    SETUP_TEST_LOG_SOURCE("empty_template_throws");
+
+    dogen::stitch::workflow w;
+    using namespace dogen::utility::test_data;
+    contains_checker<dogen::stitch::workflow_error> c(empty_template);
+    BOOST_CHECK_EXCEPTION(w.execute(stitch::input_empty_template_stitch());,
+        workflow_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

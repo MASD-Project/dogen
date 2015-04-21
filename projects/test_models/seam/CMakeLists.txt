@@ -42,6 +42,7 @@ else()
         file(MAKE_DIRECTORY "${expected_dir}")
     endif()
 endif()
+message(STATUS "Created data set for model: ${model_name}")
 
 set(target_name "diff_${model_name}")
 add_custom_target(${target_name}
@@ -62,5 +63,6 @@ add_custom_target(${target_name}
     COMMAND mkdir ${actual_dir}
     WORKING_DIRECTORY ${stage_bin_dir})
 add_dependencies(clean_test_models ${target_name})
+message(STATUS "Processed model: ${model_name}")
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)

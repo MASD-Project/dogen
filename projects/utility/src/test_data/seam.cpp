@@ -31,10 +31,14 @@ path data_set("seam");
 path expected("seam/expected");
 path expected_simple_template_stitch_cpp(
     "seam/expected/src/simple_template_stitch.cpp");
+path expected_empty_template_stitch_cpp(
+    "seam/expected/src/empty_template_stitch.cpp");
 
 path actual("seam/actual");
 path actual_simple_template_stitch_cpp(
     "seam/actual/src/simple_template_stitch.cpp");
+path actual_empty_template_stitch_cpp(
+    "seam/actual/src/empty_template_stitch.cpp");
 
 }
 
@@ -54,12 +58,20 @@ path seam::expected_simple_template_stitch_cpp() {
     return validating_resolver::resolve(::expected_simple_template_stitch_cpp);
 }
 
+path seam::expected_empty_template_stitch_cpp() {
+    return validating_resolver::resolve(::expected_empty_template_stitch_cpp);
+}
+
 path seam::actual() {
     return validating_resolver::resolve(::actual);
 }
 
 path seam::actual_simple_template_stitch_cpp() {
     return resolver::resolve(::actual_simple_template_stitch_cpp);
+}
+
+path seam::actual_empty_template_stitch_cpp() {
+    return resolver::resolve(::actual_empty_template_stitch_cpp);
 }
 
 } } }
