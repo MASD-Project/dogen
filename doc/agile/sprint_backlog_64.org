@@ -13,14 +13,14 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-20 Mon 23:15]
+Clock summary at [2015-04-21 Tue 15:40]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *19:05* |       |      |
+| *Total time*                                            | *20:42* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Active                                                  |         | 19:05 |      |
-| STARTED Sprint and product backlog grooming             |         |       | 0:54 |
+| Active                                                  |         | 20:42 |      |
+| STARTED Sprint and product backlog grooming             |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class           |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch         |         |       | 3:02 |
 | COMPLETED Fix build errors in Windows and Linux 32-bit  |         |       | 0:28 |
@@ -30,10 +30,11 @@ Clock summary at [2015-04-20 Mon 23:15]
 | COMPLETED Refactor =knit= workflows                     |         |       | 2:10 |
 | COMPLETED Use =formatters::file= in legacy formatters   |         |       | 2:28 |
 | COMPLETED Move outputters from knit to formatters model |         |       | 1:22 |
-| STARTED Implement file writing in stitch                |         |       | 0:14 |
+| COMPLETED Implement file writing in stitch              |         |       | 1:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-21 Tue 15:26]--[2015-04-21 Tue 15:39] =>  0:13
     CLOCK: [2015-04-20 Mon 22:53]--[2015-04-20 Mon 23:01] =>  0:08
     CLOCK: [2015-04-18 Sat 06:41]--[2015-04-18 Sat 07:15] =>  0:34
     CLOCK: [2015-04-15 Wed 16:10]--[2015-04-15 Wed 16:15] =>  0:05
@@ -169,6 +170,21 @@ stitch.
 - create and implement the writers in formatters.
 - replace knit::outputters with formatters::writer
 
+*** COMPLETED Implement file writing in stitch                        :story:
+    CLOSED: [2015-04-21 Tue 15:32]
+    CLOCK: [2015-04-21 Tue 14:02]--[2015-04-21 Tue 15:26] =>  1:24
+    CLOCK: [2015-04-20 Mon 23:01]--[2015-04-20 Mon 23:15] =>  0:14
+
+We need to start writing files in stitch by making use of formatter's
+file writers. As part of this we need to get the workflow tests to
+pass.
+
+- we should remember the "last known indentation level" for a
+  scriptlet line and use that for non-scriptlet lines. Actually, this
+  does not work at all as we may not have the last indentation
+  level. Lets leave indentation for later.
+- we need to add diff/rebase support to the stitch test data set.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -228,16 +244,28 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** STARTED Implement file writing in stitch                          :story:
-    CLOCK: [2015-04-20 Mon 23:01]--[2015-04-20 Mon 23:15] =>  0:14
+*** Add test coverage to stitch's workflow                            :story:
 
-We need to start writing files in stitch by making use of formatter's
-file writers. As part of this we need to get the workflow tests to
-pass.
+We must make sure we don't start adding lots of pointless workflow
+tests. Tests that are validating the formatter/parser behaviour
+already exist so we don't have to worry about that. Objectives of
+workflow tests are to answer these questions:
 
-- we should remember the "last known indentation level" for a
-  scriptlet line and use that for non-scriptlet lines.
-- we need to add diff/rebase support to the stitch test data set.
+- do we write files in to the expected locations?
+- do the files produce valid c++?
+- does the c++ produce the expected template output?
+- does the workflow itself work? i.e. the integration between parser,
+  formatter, etc.
+
+This means we probably just need a single positive test with a
+template that makes use of all available features. We could also add a
+few negative tests:
+
+- template not found.
+- invalid relative directory: tricky one to test as we are supposed to
+  create one.
+- invalid template: no need for lots of variations, just one.
+- empty template;
 
 *** Get a trivial stitcher to work                                    :story:
 

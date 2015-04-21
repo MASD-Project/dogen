@@ -18,35 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_STITCH_HPP
-#define DOGEN_UTILITY_TEST_DATA_STITCH_HPP
+#include <sstream>
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/asserter.hpp"
+#include "dogen/utility/test/logging.hpp"
+#include "simple_template_stitch.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace  {
 
-#include <boost/filesystem/path.hpp>
+const std::string test_suite("seam_spec");
+const std::string test_module("seam");
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+const std::string simple_template_output(R"(this is a simple template
+)");
 
-class stitch {
-public:
-    stitch() = delete;
-    stitch(const stitch&) = delete;
-    ~stitch() = delete;
-    stitch(stitch&&) = delete;
-    stitch& operator=(const stitch&) = delete;
+}
 
-public:
-    static boost::filesystem::path data_set();
-    static boost::filesystem::path non_existent_file();
+using dogen::utility::test::asserter;
 
-    static boost::filesystem::path input();
-    static boost::filesystem::path input_simple_template_stitch();
-};
+BOOST_AUTO_TEST_SUITE(seam)
 
-} } }
+BOOST_AUTO_TEST_CASE(simple_template_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("simple_template_produces_expected_output");
 
-#endif
+    std::ostringstream s;
+    simple_template(s);
+    const auto r(s.str());
+    BOOST_CHECK(asserter::assert_equals_marker(simple_template_output, r));
+}
+
+BOOST_AUTO_TEST_SUITE_END()

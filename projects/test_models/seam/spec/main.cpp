@@ -18,35 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_STITCH_HPP
-#define DOGEN_UTILITY_TEST_DATA_STITCH_HPP
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE seam_spec
+#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test_monitor.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace  {
 
-#include <boost/filesystem/path.hpp>
+const std::string error_msg("Error during test");
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+inline void translate(const boost::exception& e) {
+    std::cerr << std::endl << boost::diagnostic_information(e);
+    throw std::runtime_error(error_msg);
+}
 
-class stitch {
-public:
-    stitch() = delete;
-    stitch(const stitch&) = delete;
-    ~stitch() = delete;
-    stitch(stitch&&) = delete;
-    stitch& operator=(const stitch&) = delete;
-
-public:
-    static boost::filesystem::path data_set();
-    static boost::filesystem::path non_existent_file();
-
-    static boost::filesystem::path input();
-    static boost::filesystem::path input_simple_template_stitch();
+struct exception_fixture {
+    exception_fixture() {
+        ::boost::unit_test::unit_test_monitor.register_exception_translator<
+            boost::exception>(&translate);
+    }
 };
 
-} } }
+}
 
-#endif
+BOOST_GLOBAL_FIXTURE(exception_fixture)

@@ -48,6 +48,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/exception/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/stereotypes/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
     )
 
 #
@@ -65,6 +66,12 @@ if(EOS_FOUND)
     include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/eos_serialization/include)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/eos_serialization)
 endif()
+
+# global targets
+add_custom_target(rebase_test_models)
+add_custom_target(diff_test_models)
+add_custom_target(clean_test_models)
+add_custom_target(build_test_models)
 
 #
 # add projects
@@ -96,12 +103,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/spec)
-
-# global targets
-add_custom_target(rebase_test_models)
-add_custom_target(diff_test_models)
-add_custom_target(clean_test_models)
-add_custom_target(build_test_models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 
 # targets for each test model
 foreach(dia_model ${all_dia_test_models})
@@ -121,7 +123,7 @@ foreach(dia_model ${all_dia_test_models})
     endif()
 
     set(actual_dir "${top_dir}/actual/${model_folder_name}")
-    set(expect_dir "${top_dir}/expected/${model_folder_name}")
+    set(expected_dir "${top_dir}/expected/${model_folder_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
     if(EXISTS "${actual_dir}")
@@ -136,7 +138,7 @@ foreach(dia_model ${all_dia_test_models})
 
         set(target_name "diff_${model_name}")
         add_custom_target(${target_name}
-            COMMAND diff -r -u ${expect_dir} ${actual_dir}
+            COMMAND diff -r -u ${expected_dir} ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(diff_test_models ${target_name})
 

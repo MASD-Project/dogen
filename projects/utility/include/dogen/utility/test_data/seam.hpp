@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_STITCH_HPP
-#define DOGEN_UTILITY_TEST_DATA_STITCH_HPP
+#ifndef DOGEN_UTILITY_TEST_DATA_SEAM_HPP
+#define DOGEN_UTILITY_TEST_DATA_SEAM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,20 +31,22 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-class stitch {
+class seam {
 public:
-    stitch() = delete;
-    stitch(const stitch&) = delete;
-    ~stitch() = delete;
-    stitch(stitch&&) = delete;
-    stitch& operator=(const stitch&) = delete;
+    seam() = delete;
+    seam(const seam&) = delete;
+    ~seam() = delete;
+    seam(seam&&) = delete;
+    seam& operator=(const seam&) = delete;
 
 public:
     static boost::filesystem::path data_set();
-    static boost::filesystem::path non_existent_file();
 
-    static boost::filesystem::path input();
-    static boost::filesystem::path input_simple_template_stitch();
+    static boost::filesystem::path expected();
+    static boost::filesystem::path expected_simple_template_stitch_cpp();
+
+    static boost::filesystem::path actual();
+    static boost::filesystem::path actual_simple_template_stitch_cpp();
 };
 
 } } }

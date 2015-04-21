@@ -20,25 +20,21 @@
  */
 #include "dogen/utility/test_data/resolver.hpp"
 #include "dogen/utility/test_data/validating_resolver.hpp"
-#include "dogen/utility/test_data/stitch.hpp"
+#include "dogen/utility/test_data/seam.hpp"
 
 using boost::filesystem::path;
 
 namespace {
 
-path data_set("stitch");
-path non_existent_file("stitch/input/non_existent_file.stitch");
-path input("stitch/input");
-path input_simple_template_stitch("stitch/input/simple_template.stitch");
+path data_set("seam");
 
-path expected("stitch/expected");
+path expected("seam/expected");
 path expected_simple_template_stitch_cpp(
-    "stitch/expected/simple_template_stitch.cpp");
+    "seam/expected/src/simple_template_stitch.cpp");
 
-path actual(
-    "stitch/actual");
+path actual("seam/actual");
 path actual_simple_template_stitch_cpp(
-    "stitch/actual/simple_template_stitch.cpp");
+    "seam/actual/src/simple_template_stitch.cpp");
 
 }
 
@@ -46,20 +42,24 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-path stitch::data_set() {
+path seam::data_set() {
     return validating_resolver::resolve(::data_set);
 }
 
-path stitch::non_existent_file() {
-    return resolver::resolve(::non_existent_file);
+path seam::expected() {
+    return validating_resolver::resolve(::expected);
 }
 
-path stitch::input() {
-    return validating_resolver::resolve(::input);
+path seam::expected_simple_template_stitch_cpp() {
+    return validating_resolver::resolve(::expected_simple_template_stitch_cpp);
 }
 
-path stitch::input_simple_template_stitch() {
-    return validating_resolver::resolve(::input_simple_template_stitch);
+path seam::actual() {
+    return validating_resolver::resolve(::actual);
+}
+
+path seam::actual_simple_template_stitch_cpp() {
+    return resolver::resolve(::actual_simple_template_stitch_cpp);
 }
 
 } } }

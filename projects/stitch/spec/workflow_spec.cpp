@@ -20,8 +20,10 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/utility/test/asserter.hpp"
+#include "dogen/utility/test_data/seam.hpp"
 #include "dogen/utility/test_data/stitch.hpp"
+#include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
 #include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
@@ -38,16 +40,21 @@ const std::string test_suite("workflow_spec");
 }
 
 using dogen::utility::test::contains_checker;
+using dogen::utility::test::asserter;
 using dogen::stitch::workflow_error;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG_SOURCE("test");
+BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
+    SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
 
     dogen::stitch::workflow w;
     using namespace dogen::utility::test_data;
     w.execute(stitch::input_simple_template_stitch());
+
+    BOOST_CHECK(asserter::assert_file(
+            seam::expected_simple_template_stitch_cpp(),
+            seam::actual_simple_template_stitch_cpp()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

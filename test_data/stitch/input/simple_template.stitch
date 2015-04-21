@@ -1,11 +1,11 @@
-<#@ relative_output_directory=../actual #>
+<#@ relative_output_directory=../../seam/actual/src #>
+<#@ stream_variable_name=s #>
 <#+
-#include <sstream>
+#include "simple_template_stitch.hpp"
 
-void simple_template() {
-    std::ostringstream stream_;
+void simple_template(std::ostream& s) {
 #>
-this is a template
+this is a simple template
 <#+
 }
 #>

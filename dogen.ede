@@ -55,6 +55,7 @@
    "/projects/test_models/eos_serialization/include"
    "/projects/test_models/database/include"
    "/projects/test_models/test_model_sanitizer/include"
+   "/projects/test_models/stitch/include/"
    )
  :system-include-path
  '("/usr/local/pfh/include"
