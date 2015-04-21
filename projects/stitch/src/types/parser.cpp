@@ -40,6 +40,10 @@ const std::string end_block("#>");
 
 const std::string cannot_start_scriptlet(
     "Cannot start scriptlet block in scriptlet block.");
+const std::string cannot_start_scriptlet_in_middle(
+    "Cannot start scriplet block in the middle of a line.");
+const std::string cannot_start_scriptlet_segment(
+    "Cannot start scriptlet segment in scriptlet block.");
 const std::string end_without_start("Found end block without a start block.");
 const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
@@ -55,6 +59,7 @@ namespace stitch {
 parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
 
 text_template parser::parse(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     text_template r;
 
     if (s.empty())
@@ -68,8 +73,10 @@ text_template parser::parse(const std::string& s) const {
     std::istringstream is(s);
     std::list<std::pair<std::string, std::string> > kvps;
     while (std::getline(is, line)) {
+        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << line;
+
         if (boost::starts_with(line, start_declaration)) {
-            BOOST_LOG_SEV(lg, debug) << "is declaration";
+            BOOST_LOG_SEV(lg, debug) << "Line is declaration";
             if (!in_declarations_block) {
                 BOOST_LOG_SEV(lg, error) << unexpected_declaration;
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
@@ -97,23 +104,34 @@ text_template parser::parse(const std::string& s) const {
 
         in_declarations_block = false;
 
-        if (boost::contains(line, start_scriptlet_block)) {
+        if (boost::starts_with(line, start_scriptlet_block)) {
+            BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
+
+            if (in_scriplet_block) {
+                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
+                BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
+            }
+
+            if (boost::ends_with(line, end_block)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
+                boost::replace_all(line, start_scriptlet_block, empty);
+                boost::replace_all(line, end_block, empty);
+
+                sb.content().push_back(line);
+                r.content().push_back(sb);
+                sb.content().clear();
+                continue;
+            }
+
             if (line.size() != 3) {
                 BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
                 BOOST_THROW_EXCEPTION(
                     parsing_error(unexpected_additional_content));
             }
 
-            BOOST_LOG_SEV(lg, debug) << "is scriplet";
-
-            if (in_scriplet_block) {
-                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
-                BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
-            }
             in_scriplet_block = true;
-
             if (in_mixed_content_block) {
-                BOOST_LOG_SEV(lg, debug) << "closing mixed content";
+                BOOST_LOG_SEV(lg, debug) << "Closing mixed content";
                 in_mixed_content_block = false;
                 r.content().push_back(mcb);
                 mcb.content().clear();
@@ -121,8 +139,36 @@ text_template parser::parse(const std::string& s) const {
             continue;
         }
 
+        if (boost::contains(line, start_scriptlet_block)) {
+            BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
+            BOOST_THROW_EXCEPTION(
+                parsing_error(cannot_start_scriptlet_in_middle));
+        }
+
+        if (boost::contains(line, start_declaration)) {
+            BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+            BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
+        }
+
+        if (boost::contains(line, start_scriptlet_segment)) {
+            BOOST_LOG_SEV(lg, debug) << "Line has scriplet segment";
+
+            if (in_scriplet_block) {
+                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_segment;
+                BOOST_THROW_EXCEPTION(
+                    parsing_error(cannot_start_scriptlet_segment));
+            }
+
+            continue;
+        }
+
         if (boost::contains(line, end_block)) {
-            BOOST_LOG_SEV(lg, debug) << "is end block";
+            BOOST_LOG_SEV(lg, debug) << "Closing end block";
+
+            if (!in_scriplet_block && !in_mixed_content_block) {
+                BOOST_LOG_SEV(lg, error) << end_without_start;
+                BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+            }
 
             if (line.size() != 2) {
                 BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
@@ -130,13 +176,8 @@ text_template parser::parse(const std::string& s) const {
                     parsing_error(unexpected_additional_content));
             }
 
-            if (!in_scriplet_block && !in_mixed_content_block) {
-                BOOST_LOG_SEV(lg, error) << end_without_start;
-                BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
-            }
-
             if (in_scriplet_block) {
-                BOOST_LOG_SEV(lg, debug) << "closing scriptlet block";
+                BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
 
                 in_scriplet_block = false;
                 r.content().push_back(sb);
@@ -144,7 +185,7 @@ text_template parser::parse(const std::string& s) const {
                 continue;
             }
 
-            BOOST_LOG_SEV(lg, debug) << "closing mixed content block";
+            BOOST_LOG_SEV(lg, debug) << "Closing mixed content block";
             in_mixed_content_block = false;
             r.content().push_back(mcb);
             mcb.content().clear();
@@ -152,7 +193,7 @@ text_template parser::parse(const std::string& s) const {
         }
 
         if (in_scriplet_block) {
-            BOOST_LOG_SEV(lg, debug) << "line in scriptlet block";
+            BOOST_LOG_SEV(lg, debug) << "Line in scriptlet block";
             sb.content().push_back(line);
             continue;
         }
@@ -160,13 +201,13 @@ text_template parser::parse(const std::string& s) const {
         const auto i(line.find_first_of(start_scriptlet_segment));
         const bool has_mixed_content(i != std::string::npos);
         if (has_mixed_content) {
-            BOOST_LOG_SEV(lg, debug) << "mixed content line";
+            BOOST_LOG_SEV(lg, debug) << "Mixed content line";
             // FIXME
             continue;
         }
 
         in_mixed_content_block = true;
-        BOOST_LOG_SEV(lg, debug) << "text line";
+        BOOST_LOG_SEV(lg, debug) << "Text line";
         mcb.content().push_back(line);
     }
 
@@ -176,10 +217,11 @@ text_template parser::parse(const std::string& s) const {
     }
 
     if (in_mixed_content_block) {
-        BOOST_LOG_SEV(lg, debug) << "finishing mixed content block";
+        BOOST_LOG_SEV(lg, debug) << "Finishing mixed content block";
         r.content().push_back(mcb);
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
     return r;
 }
 

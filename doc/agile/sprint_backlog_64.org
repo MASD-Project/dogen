@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-21 Tue 18:04]
+Clock summary at [2015-04-21 Tue 21:59]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *22:57* |       |      |
+| *Total time*                                            | *24:19* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Active                                                  |         | 22:57 |      |
+| Active                                                  |         | 24:19 |      |
 | STARTED Sprint and product backlog grooming             |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class           |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch         |         |       | 3:02 |
@@ -33,6 +33,7 @@ Clock summary at [2015-04-21 Tue 18:04]
 | COMPLETED Implement file writing in stitch              |         |       | 1:38 |
 | COMPLETED Add test coverage to stitch's workflow        |         |       | 0:43 |
 | COMPLETED Get a trivial stitcher to work                |         |       | 1:32 |
+| STARTED Add support for inline code in stitch           |         |       | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -296,10 +297,13 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** Add support for inline code in stitch                             :story:
+*** STARTED Add support for inline code in stitch                     :story:
+    CLOCK: [2015-04-21 Tue 20:37]--[2015-04-21 Tue 21:59] =>  1:22
 
 At present we do not support the =<#=xyz#>= and =<#+xyz#>= forms in
 stitch. We need to support these.
+
+This is actually not trivial. We may need to use spirit for this.
 
 *** Handling of managed directories is incorrect                      :story:
 
