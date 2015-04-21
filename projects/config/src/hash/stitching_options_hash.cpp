@@ -18,15 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
-#include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+#include "dogen/config/hash/stitching_options_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace config {
+
+std::size_t stitching_options_hasher::hash(const stitching_options&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.verbose());
+    combine(seed, hash_boost_filesystem_path(v.target()));
+    combine(seed, v.force_write());
+    combine(seed, v.output_to_file());
+    combine(seed, v.output_to_stdout());
+
+    return seed;
+}
+
+} }

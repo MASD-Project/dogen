@@ -29,7 +29,6 @@
 #include <vector>
 #include <functional>
 #include <boost/optional.hpp>
-#include <boost/tuple/tuple.hpp>
 #include <boost/program_options.hpp>
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
@@ -100,7 +99,7 @@ public:
 private:
     const std::vector<std::string> arguments_;
     std::function<void(const std::string&)> help_function_;
-    std::function<void()>  version_function_;
+    std::function<void()> version_function_;
     const boost::filesystem::path current_path_;
 };
 

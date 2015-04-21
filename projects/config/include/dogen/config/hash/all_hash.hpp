@@ -25,4 +25,5 @@
 #include "dogen/config/hash/output_options_hash.hpp"
 #include "dogen/config/hash/cpp_facet_types_hash.hpp"
 #include "dogen/config/hash/knitting_options_hash.hpp"
+#include "dogen/config/hash/stitching_options_hash.hpp"
 #include "dogen/config/hash/troubleshooting_options_hash.hpp"

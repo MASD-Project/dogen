@@ -29,10 +29,9 @@
 #include <vector>
 #include <functional>
 #include <boost/optional.hpp>
-#include <boost/tuple/tuple.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/config/types/stitching_options.hpp"
 
 namespace dogen {
 namespace stitcher {
@@ -58,49 +57,34 @@ public:
     program_options_parser(const int argc, const char* argv[]);
 
 private:
-    void throw_project_dir_with_split() const;
-    void throw_include_source_without_split() const;
-    void throw_missing_include_source() const;
     void throw_missing_target() const;
 
 private:
     typedef boost::program_options::options_description options_description;
-
     options_description general_options_factory() const;
     options_description troubleshooting_options_factory() const;
-    options_description modeling_options_factory() const;
+    options_description input_options_factory() const;
     options_description output_options_factory() const;
-    options_description cpp_options_factory() const;
     options_description options_factory() const;
 
 private:
     typedef boost::program_options::variables_map variables_map;
     boost::optional<variables_map> variables_map_factory() const;
 
-private:
-    static config::archive_types parse_archive_type(const std::string& s);
-    static config::cpp_facet_types parse_facet_types(const std::string& s);
-
-private:
-    config::input_options
-    transform_input_options(const variables_map& vm) const;
-    config::cpp_options transform_cpp_options(const variables_map& vm) const;
-    config::troubleshooting_options
-    transform_troubleshooting_options(const variables_map& vm) const;
-    config::output_options
-    transform_output_options(const variables_map& vm) const;
+    config::stitching_options transform_options(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
     void version_function(std::function<void()> value);
 
+
 public:
-    boost::optional<config::knitting_options> parse();
+    boost::optional<config::stitching_options> parse();
 
 private:
     const std::vector<std::string> arguments_;
     std::function<void(const std::string&)> help_function_;
-    std::function<void()>  version_function_;
+    std::function<void()> version_function_;
     const boost::filesystem::path current_path_;
 };
 

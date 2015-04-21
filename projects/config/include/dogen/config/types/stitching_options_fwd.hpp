@@ -18,15 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
-#include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+#ifndef DOGEN_CONFIG_TYPES_STITCHING_OPTIONS_FWD_HPP
+#define DOGEN_CONFIG_TYPES_STITCHING_OPTIONS_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace config {
+
+class stitching_options;
+
+} }
+
+#endif

@@ -18,15 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
+#ifndef DOGEN_CONFIG_HASH_STITCHING_OPTIONS_HASH_HPP
+#define DOGEN_CONFIG_HASH_STITCHING_OPTIONS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
 #include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+
+namespace dogen {
+namespace config {
+
+struct stitching_options_hasher {
+public:
+    static std::size_t hash(const stitching_options& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::config::stitching_options> {
+public:
+    size_t operator()(const dogen::config::stitching_options& v) const {
+        return dogen::config::stitching_options_hasher::hash(v);
+    }
+};
+
+}
+#endif

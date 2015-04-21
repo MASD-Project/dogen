@@ -19,6 +19,8 @@
  *
  */
 #include <boost/filesystem/operations.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/stitch/types/traits.hpp"
@@ -26,9 +28,12 @@
 
 namespace {
 
-const std::string stitch_postfix("_stitch.cpp");
-}
+using namespace dogen::utility::log;
+auto lg(logger_factory("stitch.expander"));
 
+const std::string stitch_postfix("_stitch.cpp");
+
+}
 
 namespace dogen {
 namespace stitch {
@@ -37,8 +42,16 @@ void expander::expand(
     const boost::optional<boost::filesystem::path>& template_path,
     dynamic::schema::object& o) const {
 
-    if (!template_path)
+    BOOST_LOG_SEV(lg, debug) << "Before expansion: " << o;
+
+    if (!template_path) {
+        BOOST_LOG_SEV(lg, debug)
+            << "No template path supplied so not performing expansion";
         return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Template path: "
+                             << template_path->generic_string();
 
     std::string output_filename(template_path->stem().generic_string());
     output_filename += stitch_postfix;
@@ -59,6 +72,8 @@ void expander::expand(
     const dynamic::schema::field_instance_factory f;
     const auto v(f.make_text(absolute_output_directory.generic_string()));
     o.fields()[traits::output_path()] = v;
+
+    BOOST_LOG_SEV(lg, debug) << "After expansion: " << o;
 }
 
 } }

@@ -205,7 +205,7 @@ program_options_parser::output_options_factory() const {
             " no differences")
         ("output-to-file", "Create files. Disabled by default if "
             "output-to-stdout is chosen.")
-        ("output-to-stdout", " Output generated code to standard output. "
+        ("output-to-stdout", "Output generated code to standard output. "
             "Disables output-to-file by default.");
 
     return r;

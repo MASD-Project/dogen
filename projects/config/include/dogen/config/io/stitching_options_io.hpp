@@ -18,15 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
+#ifndef DOGEN_CONFIG_IO_STITCHING_OPTIONS_IO_HPP
+#define DOGEN_CONFIG_IO_STITCHING_OPTIONS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
 #include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+
+namespace dogen {
+namespace config {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::config::stitching_options& v);
+
+} }
+
+#endif

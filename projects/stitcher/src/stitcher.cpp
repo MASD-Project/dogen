@@ -20,8 +20,7 @@
  */
 #include "dogen/stitcher/workflow.hpp"
 
-int main(const int /*argc*/, const char* /*argv*/[]) {
-    // dogen::knitter::workflow w;
-    // return w.execute(argc, argv);
-    return 0;
+int main(const int argc, const char* argv[]) {
+    dogen::stitcher::workflow w;
+    return w.execute(argc, argv);
 }

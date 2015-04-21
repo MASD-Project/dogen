@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-21 Tue 16:31]
+Clock summary at [2015-04-21 Tue 18:04]
 
 | Headline                                                | Time    |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *21:25* |       |      |
+| *Total time*                                            | *22:57* |       |      |
 |---------------------------------------------------------+---------+-------+------|
-| Active                                                  |         | 21:25 |      |
+| Active                                                  |         | 22:57 |      |
 | STARTED Sprint and product backlog grooming             |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class           |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch         |         |       | 3:02 |
@@ -32,6 +32,7 @@ Clock summary at [2015-04-21 Tue 16:31]
 | COMPLETED Move outputters from knit to formatters model |         |       | 1:22 |
 | COMPLETED Implement file writing in stitch              |         |       | 1:38 |
 | COMPLETED Add test coverage to stitch's workflow        |         |       | 0:43 |
+| COMPLETED Get a trivial stitcher to work                |         |       | 1:32 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -226,6 +227,16 @@ few negative tests:
 A positive test that is required is running stitch against a directory
 of templates.
 
+*** COMPLETED Get a trivial stitcher to work                          :story:
+    CLOSED: [2015-04-21 Tue 18:04]
+    CLOCK: [2015-04-21 Tue 16:32]--[2015-04-21 Tue 18:04] =>  1:32
+
+Now that we have implemented most of stitch, we should get stitcher up
+and running. All we need is a few command line options, maybe even
+just one - the directory to process or the template to process.
+
+We probably also need version and help.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -284,14 +295,6 @@ Solution for cycles:
   all other edges. Finally, once the graph has been processed we
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
-
-*** Get a trivial stitcher to work                                    :story:
-
-Now that we have implemented most of stitch, we should get stitcher up
-and running. All we need is a few command line options, maybe even
-just one - the directory to process or the template to process.
-
-We probably also need version and help.
 
 *** Add support for inline code in stitch                             :story:
 

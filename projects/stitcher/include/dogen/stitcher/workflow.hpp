@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/config/types/stitching_options.hpp"
 
 namespace dogen {
 namespace stitcher {
@@ -41,28 +41,27 @@ public:
 
 private:
     /**
-     * @brief Sets up the model name from the options.
+     * @brief Sets up the template name from the options.
      */
-    void initialise_model_name(const dogen::config::knitting_options& o);
+    void initialise_template_name(const dogen::config::stitching_options& o);
 
-private:
     /**
      * @brief Given the main arguments, generates the knitting options.
      */
-    boost::optional<dogen::config::knitting_options>
-    generate_knitting_options_activity(
+    boost::optional<dogen::config::stitching_options>
+    generate_stitching_options_activity(
         const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging_activity(const dogen::config::knitting_options& o);
+    void initialise_logging_activity(const dogen::config::stitching_options& o);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application options.
      */
-    void knit_activity(const dogen::config::knitting_options& o) const;
+    void stitch_activity(const dogen::config::stitching_options& o) const;
 
 private:
      /**
@@ -91,7 +90,7 @@ public:
 
 private:
     bool can_log_;
-    std::string model_name_;
+    std::string template_name_;
     boost::filesystem::path log_file_name_;
 };
 

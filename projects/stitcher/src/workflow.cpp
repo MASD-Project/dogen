@@ -22,11 +22,9 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/version.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 #include "dogen/stitcher/parser_validation_error.hpp"
-#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 #include "dogen/stitcher/workflow.hpp"
 
@@ -48,7 +46,7 @@ const std::string errors_msg(" finished with errors.");
  */
 void help(const std::string& d) {
     std::cout << "Dogen Stitcher." << std::endl
-              << "Generates domain objects from a Dia diagram."
+              << "Generates C++ code from a stitch text template."
               << std::endl << std::endl << d << std::endl;
 }
 
@@ -71,42 +69,39 @@ namespace stitcher {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const dogen::config::knitting_options& o) {
-    const boost::filesystem::path p(o.input().target());
-    model_name_ = p.stem().filename().string();
+initialise_template_name(const dogen::config::stitching_options& o) {
+    const boost::filesystem::path p(o.target());
+    template_name_ = p.stem().filename().string();
 }
 
-boost::optional<config::knitting_options> workflow::
-generate_knitting_options_activity(const int argc, const char* argv[]) const {
+boost::optional<config::stitching_options> workflow::
+generate_stitching_options_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
-    boost::optional<config::knitting_options> r(p.parse());
-    if (r)
-        config::knitting_options_validator::validate(*r);
-
+    boost::optional<config::stitching_options> r(p.parse());
     return r;
 }
 
-void workflow::initialise_logging_activity(const config::knitting_options& o) {
+void workflow::initialise_logging_activity(const config::stitching_options& o) {
     const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
-    log_file_name_ = log_file_prefix + model_name_ + ".log";
+    log_file_name_ = log_file_prefix + template_name_ + ".log";
     life_cycle_manager lcm;
     lcm.initialise(log_file_name_, sev);
     can_log_ = true;
 }
 
-void workflow::knit_activity(const config::knitting_options& o) const {
+void workflow::stitch_activity(const config::stitching_options& o) const {
     BOOST_LOG_SEV(lg, info) << stitcher_product << " started.";
-    if (o.output().output_to_stdout()) {
+    if (o.output_to_stdout()) {
         // auto lambda([]() -> std::ostream& {return std::cout;});
         // stitch::workflow w(o, lambda);
         // w.execute();
         BOOST_LOG_SEV(lg, info) << stitcher_product << " finished.";
     }
 
-    // stitch::workflow w(o);
-    // w.execute();
+    stitch::workflow w;
+    w.execute(o.target());
     BOOST_LOG_SEV(lg, info) << stitcher_product << " finished.";
 }
 
@@ -117,10 +112,10 @@ void workflow::report_exception_common() const {
                   << "' " << std::endl;
     }
 
-    if (model_name_.empty())
+    if (template_name_.empty())
         return;
 
-    std::cerr << "Failed to generate model: '" << model_name_ << "'."
+    std::cerr << "Failed to generate template: '" << template_name_ << "'."
               << std::endl;
 }
 
@@ -147,7 +142,7 @@ void workflow::report_exception() const {
 
 int workflow::execute(const int argc, const char* argv[]) {
     try {
-        const auto o(generate_knitting_options_activity(argc, argv));
+        const auto o(generate_stitching_options_activity(argc, argv));
 
         /* can only happen if the options are valid but do not
          * require any action.
@@ -156,9 +151,9 @@ int workflow::execute(const int argc, const char* argv[]) {
             return 0;
 
         const auto& s(*o);
-        initialise_model_name(s);
+        initialise_template_name(s);
         initialise_logging_activity(s);
-        knit_activity(s);
+        stitch_activity(s);
     } catch (const stitcher::parser_validation_error& e) {
         /* log known not to be initialised as we are still parsing
          * command line options.

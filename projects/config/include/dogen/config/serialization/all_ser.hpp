@@ -26,4 +26,5 @@
 #include "dogen/config/serialization/output_options_ser.hpp"
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 #include "dogen/config/serialization/knitting_options_ser.hpp"
+#include "dogen/config/serialization/stitching_options_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_options_ser.hpp"

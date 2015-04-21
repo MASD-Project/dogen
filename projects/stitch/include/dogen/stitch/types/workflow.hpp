@@ -56,6 +56,12 @@ private:
 
 private:
     /**
+     * @brief Returns the absolute path for the supplied path.
+     */
+    boost::filesystem::path make_absolute_path_activity(
+        const boost::filesystem::path& p) const;
+
+    /**
      * @brief Returns all stitch templates that can be found from p.
      *
      * If p is a file, it is returned if its extension is @code

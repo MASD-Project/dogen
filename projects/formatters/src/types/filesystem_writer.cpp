@@ -74,8 +74,9 @@ bool filesystem_writer::content_changed(const file& f) const {
 
 void filesystem_writer::create_directories(
     const boost::filesystem::path& file_path) const {
-    auto dir(file_path);
-    dir.remove_filename();
+    const auto dir(file_path.parent_path());
+    if (dir.empty() || dir.generic_string() == "/")
+        return;
 
     using boost::filesystem::create_directories;
     const bool created(create_directories(dir));

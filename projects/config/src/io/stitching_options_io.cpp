@@ -18,15 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
-#include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/config/io/stitching_options_io.hpp"
+
+namespace dogen {
+namespace config {
+
+std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::config::stitching_options\"" << ", "
+      << "\"verbose\": " << v.verbose() << ", "
+      << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"output_to_file\": " << v.output_to_file() << ", "
+      << "\"output_to_stdout\": " << v.output_to_stdout()
+      << " }";
+    return(s);
+}
+
+} }

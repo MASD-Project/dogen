@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/types/config.hpp"
-#include "dogen/config/types/reference.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/input_options.hpp"
-#include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/cpp_facet_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/config/types/validation_error.hpp"
+#ifndef DOGEN_CONFIG_SERIALIZATION_STITCHING_OPTIONS_SER_HPP
+#define DOGEN_CONFIG_SERIALIZATION_STITCHING_OPTIONS_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/split_free.hpp>
 #include "dogen/config/types/stitching_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
-#include "dogen/config/types/knitting_options_validator.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::config::stitching_options)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::config::stitching_options& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::config::stitching_options& v, unsigned int version);
+
+} }
+
+#endif
