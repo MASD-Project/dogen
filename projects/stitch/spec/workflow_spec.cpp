@@ -59,6 +59,18 @@ BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
             seam::actual_simple_template_stitch_cpp()));
 }
 
+BOOST_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
+    SETUP_TEST_LOG_SOURCE("complex_template_results_in_expected_output");
+
+    dogen::stitch::workflow w;
+    using namespace dogen::utility::test_data;
+    w.execute(stitch::input_complex_template_stitch());
+
+    BOOST_CHECK(asserter::assert_file(
+            seam::expected_complex_template_stitch_cpp(),
+            seam::actual_complex_template_stitch_cpp()));
+}
+
 BOOST_AUTO_TEST_CASE(empty_template_throws) {
     SETUP_TEST_LOG_SOURCE("empty_template_throws");
 

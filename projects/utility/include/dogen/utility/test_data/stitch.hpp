@@ -46,6 +46,7 @@ public:
     static boost::filesystem::path input();
     static boost::filesystem::path input_simple_template_stitch();
     static boost::filesystem::path input_empty_template_stitch();
+    static boost::filesystem::path input_complex_template_stitch();
 };
 
 } } }

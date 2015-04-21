@@ -31,6 +31,7 @@ path non_existent_file("stitch/input/non_existent_file.stitch");
 path input("stitch/input");
 path input_simple_template_stitch("stitch/input/simple_template.stitch");
 path input_empty_template_stitch("stitch/input/empty_template.stitch");
+path input_complex_template_stitch("stitch/input/complex_template.stitch");
 
 }
 
@@ -56,6 +57,10 @@ path stitch::input_simple_template_stitch() {
 
 path stitch::input_empty_template_stitch() {
     return validating_resolver::resolve(::input_empty_template_stitch);
+}
+
+path stitch::input_complex_template_stitch() {
+    return validating_resolver::resolve(::input_complex_template_stitch);
 }
 
 } } }

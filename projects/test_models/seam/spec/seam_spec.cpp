@@ -23,6 +23,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "simple_template_stitch.hpp"
+#include "complex_template_stitch.hpp"
 
 namespace  {
 
@@ -30,6 +31,12 @@ const std::string test_suite("seam_spec");
 const std::string test_module("seam");
 
 const std::string simple_template_output(R"(this is a simple template
+)");
+const std::string complex_template_output(R"(this is a relatively more
+    complex
+    complex
+    complex
+  template
 )");
 
 }
@@ -45,6 +52,15 @@ BOOST_AUTO_TEST_CASE(simple_template_produces_expected_output) {
     simple_template(s);
     const auto r(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(simple_template_output, r));
+}
+
+BOOST_AUTO_TEST_CASE(complex_template_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("complex_template_produces_expected_output");
+
+    std::ostringstream s;
+    complex_template(s);
+    const auto r(s.str());
+    BOOST_CHECK(asserter::assert_equals_marker(complex_template_output, r));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
