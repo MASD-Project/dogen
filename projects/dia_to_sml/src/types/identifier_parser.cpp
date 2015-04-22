@@ -153,7 +153,7 @@ struct grammar : qi::grammar<Iterator> {
         templated_name = qi::lit("<")[start_template_]
             >> template_argument_list >> qi::lit(">")[end_template_];
         template_argument_list %= type_name
-            >> *(qi::lit(",")[next_type_argument_] >> type_name);
+            >> *(qi::lit(",")[next_type_argument_] >> *qi::space >> type_name);
 
         on_error<fail>
             (

@@ -280,10 +280,15 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qnames) {
 
     nqn.children(std::list<dogen::sml::nested_qname> { c, d });
 
-    const std::string s("std::unordered_map<std::string,my::type>");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
-    const auto a(ip.parse_qname(s));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const std::string s1("std::unordered_map<std::string,my::type>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s1;
+    const auto a1(ip.parse_qname(s1));
+    BOOST_CHECK(asserter::assert_equals(nqn, a1));
+
+    const std::string s2("std::unordered_map<std::string,    my::type>");
+    BOOST_LOG_SEV(lg, info) << "input: " << s2;
+    const auto a2(ip.parse_qname(s2));
+    BOOST_CHECK(asserter::assert_equals(nqn, a2));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qnames) {

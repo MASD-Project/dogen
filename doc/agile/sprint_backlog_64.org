@@ -13,27 +13,28 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-21 Tue 21:59]
+Clock summary at [2015-04-22 Wed 13:37]
 
-| Headline                                                | Time    |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| *Total time*                                            | *24:19* |       |      |
-|---------------------------------------------------------+---------+-------+------|
-| Active                                                  |         | 24:19 |      |
-| STARTED Sprint and product backlog grooming             |         |       | 1:07 |
-| COMPLETED Create a formatting utilities class           |         |       | 1:17 |
-| COMPLETED Implement a basic formatter in stitch         |         |       | 3:02 |
-| COMPLETED Fix build errors in Windows and Linux 32-bit  |         |       | 0:28 |
-| COMPLETED Create a stitch workflow                      |         |       | 2:22 |
-| COMPLETED Add expander that computes output path        |         |       | 1:04 |
-| COMPLETED Add support for dynamic extensions in stitch  |         |       | 3:44 |
-| COMPLETED Refactor =knit= workflows                     |         |       | 2:10 |
-| COMPLETED Use =formatters::file= in legacy formatters   |         |       | 2:28 |
-| COMPLETED Move outputters from knit to formatters model |         |       | 1:22 |
-| COMPLETED Implement file writing in stitch              |         |       | 1:38 |
-| COMPLETED Add test coverage to stitch's workflow        |         |       | 0:43 |
-| COMPLETED Get a trivial stitcher to work                |         |       | 1:32 |
-| STARTED Add support for inline code in stitch           |         |       | 1:22 |
+| Headline                                                        | Time    |       |      |
+|-----------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                    | *24:48* |       |      |
+|-----------------------------------------------------------------+---------+-------+------|
+| Active                                                          |         | 24:48 |      |
+| STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
+| COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
+| COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
+| COMPLETED Fix build errors in Windows and Linux 32-bit          |         |       | 0:28 |
+| COMPLETED Create a stitch workflow                              |         |       | 2:22 |
+| COMPLETED Add expander that computes output path                |         |       | 1:04 |
+| COMPLETED Add support for dynamic extensions in stitch          |         |       | 3:44 |
+| COMPLETED Refactor =knit= workflows                             |         |       | 2:10 |
+| COMPLETED Use =formatters::file= in legacy formatters           |         |       | 2:28 |
+| COMPLETED Move outputters from knit to formatters model         |         |       | 1:22 |
+| COMPLETED Implement file writing in stitch                      |         |       | 1:38 |
+| COMPLETED Add test coverage to stitch's workflow                |         |       | 0:43 |
+| COMPLETED Get a trivial stitcher to work                        |         |       | 1:32 |
+| COMPLETED Add support for spaces after commas on template types |         |       | 0:29 |
+| STARTED Add support for inline code in stitch                   |         |       | 1:22 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -237,6 +238,23 @@ and running. All we need is a few command line options, maybe even
 just one - the directory to process or the template to process.
 
 We probably also need version and help.
+
+*** COMPLETED Add support for spaces after commas on template types   :spike:
+    CLOSED: [2015-04-22 Wed 13:37]
+    CLOCK: [2015-04-22 Wed 13:08]--[2015-04-22 Wed 13:37] =>  0:29
+
+Since we are looking at spirit, this may be the time to fix the long
+standing and annoying bug that stops us from having spaces after
+commas when defining a type with template parameters, like so:
+
+: std::unordered_map<std::string,my::type>
+
+We don't really need anything clever, just to support spaces after
+commas:
+
+: std::unordered_map<std::string, my::type>
+
+This will improve readability in diagrams.
 
 *** STARTED Create a "supported" expander                             :story:
 
