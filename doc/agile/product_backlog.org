@@ -23,6 +23,13 @@ implementation with spirit see:
 We will require parsing identifiers from JSON so we need access to
 identifier parser within SML.
 
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
 *** Adding a dependency to a non-existent expander crashes dogen      :story:
 
 We are not checking that all dependencies exist when building the
