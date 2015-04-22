@@ -18,23 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_MIXED_CONTENT_BLOCK_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_MIXED_CONTENT_BLOCK_FWD_SER_HPP
+#ifndef DOGEN_STITCH_TEST_DATA_LINE_TD_HPP
+#define DOGEN_STITCH_TEST_DATA_LINE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/mixed_content_block_fwd.hpp"
+#include "dogen/stitch/types/line.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stitch {
 
-template<class Archive>
-void save(Archive& ar, const dogen::stitch::mixed_content_block& v, unsigned int version);
+class line_generator {
+public:
+    line_generator();
 
-template<class Archive>
-void load(Archive& ar, dogen::stitch::mixed_content_block& v, unsigned int version);
+public:
+    typedef dogen::stitch::line result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
 

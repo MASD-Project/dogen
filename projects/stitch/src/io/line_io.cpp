@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/scriptlet_block_hash.hpp"
+#include <ostream>
+#include "dogen/stitch/io/line_io.hpp"
+#include "dogen/stitch/io/segment_io.hpp"
 
-namespace {
+namespace std {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::segment>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
     }
-    return seed;
+    s << "] ";
+    return s;
 }
 
 }
@@ -42,11 +39,12 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
 namespace dogen {
 namespace stitch {
 
-std::size_t scriptlet_block_hasher::hash(const scriptlet_block&v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_std_list_std_string(v.content()));
-    return seed;
+std::ostream& operator<<(std::ostream& s, const line& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::stitch::line\"" << ", "
+      << "\"segments\": " << v.segments()
+      << " }";
+    return(s);
 }
 
 } }

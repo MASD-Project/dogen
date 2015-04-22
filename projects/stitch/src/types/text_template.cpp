@@ -26,22 +26,22 @@ namespace stitch {
 text_template::text_template(
     const dogen::stitch::settings_bundle& settings,
     const dogen::dynamic::schema::object& extensions,
-    const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content)
+    const std::list<dogen::stitch::line>& lines)
     : settings_(settings),
       extensions_(extensions),
-      content_(content) { }
+      lines_(lines) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
     swap(settings_, other.settings_);
     swap(extensions_, other.extensions_);
-    swap(content_, other.content_);
+    swap(lines_, other.lines_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
     return settings_ == rhs.settings_ &&
         extensions_ == rhs.extensions_ &&
-        content_ == rhs.content_;
+        lines_ == rhs.lines_;
 }
 
 text_template& text_template::operator=(text_template other) {
@@ -82,20 +82,20 @@ void text_template::extensions(const dogen::dynamic::schema::object&& v) {
     extensions_ = std::move(v);
 }
 
-const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& text_template::content() const {
-    return content_;
+const std::list<dogen::stitch::line>& text_template::lines() const {
+    return lines_;
 }
 
-std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& text_template::content() {
-    return content_;
+std::list<dogen::stitch::line>& text_template::lines() {
+    return lines_;
 }
 
-void text_template::content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v) {
-    content_ = v;
+void text_template::lines(const std::list<dogen::stitch::line>& v) {
+    lines_ = v;
 }
 
-void text_template::content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >&& v) {
-    content_ = std::move(v);
+void text_template::lines(const std::list<dogen::stitch::line>&& v) {
+    lines_ = std::move(v);
 }
 
 } }

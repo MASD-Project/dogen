@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
 namespace dogen {
@@ -36,6 +38,24 @@ namespace stitch {
  * @brief Format a text template into a file.
  */
 class formatter final {
+private:
+    /**
+     * @brief Formats a line with just text.
+     */
+    void format_text_line(const std::string& stream_name, const std::string& l,
+        std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with just scriptlet.
+     */
+    void format_scriptlet_line(const std::string& l, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with mixed content.
+     */
+    void format_mixed_content_line(const std::string& stream_name,
+        const line& l, std::ostream& s) const;
+
 public:
     /**
      * @brief Ownership hierarchy for this formatter

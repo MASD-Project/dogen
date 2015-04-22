@@ -27,11 +27,9 @@
 
 #include <list>
 #include <algorithm>
-#include <boost/variant.hpp>
+#include "dogen/stitch/types/line.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/stitch/types/scriptlet_block.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
-#include "dogen/stitch/types/mixed_content_block.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,7 +46,7 @@ public:
     text_template(
         const dogen::stitch::settings_bundle& settings,
         const dogen::dynamic::schema::object& extensions,
-        const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content);
+        const std::list<dogen::stitch::line>& lines);
 
 private:
     template<typename Archive>
@@ -68,10 +66,10 @@ public:
     void extensions(const dogen::dynamic::schema::object& v);
     void extensions(const dogen::dynamic::schema::object&& v);
 
-    const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content() const;
-    std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& content();
-    void content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v);
-    void content(const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >&& v);
+    const std::list<dogen::stitch::line>& lines() const;
+    std::list<dogen::stitch::line>& lines();
+    void lines(const std::list<dogen::stitch::line>& v);
+    void lines(const std::list<dogen::stitch::line>&& v);
 
 public:
     bool operator==(const text_template& rhs) const;
@@ -86,7 +84,7 @@ public:
 private:
     dogen::stitch::settings_bundle settings_;
     dogen::dynamic::schema::object extensions_;
-    std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> > content_;
+    std::list<dogen::stitch::line> lines_;
 };
 
 } }

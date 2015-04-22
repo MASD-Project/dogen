@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_MIXED_CONTENT_LINE_HPP
-#define DOGEN_STITCH_TYPES_MIXED_CONTENT_LINE_HPP
+#ifndef DOGEN_STITCH_TYPES_LINE_HPP
+#define DOGEN_STITCH_TYPES_LINE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,27 +28,27 @@
 #include <list>
 #include <algorithm>
 #include "dogen/stitch/types/segment.hpp"
-#include "dogen/stitch/serialization/mixed_content_line_fwd_ser.hpp"
+#include "dogen/stitch/serialization/line_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class mixed_content_line final {
+class line final {
 public:
-    mixed_content_line() = default;
-    mixed_content_line(const mixed_content_line&) = default;
-    mixed_content_line(mixed_content_line&&) = default;
-    ~mixed_content_line() = default;
+    line() = default;
+    line(const line&) = default;
+    line(line&&) = default;
+    ~line() = default;
 
 public:
-    explicit mixed_content_line(const std::list<dogen::stitch::segment>& segments);
+    explicit line(const std::list<dogen::stitch::segment>& segments);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const mixed_content_line& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const line& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, mixed_content_line& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, line& v, unsigned int version);
 
 public:
     const std::list<dogen::stitch::segment>& segments() const;
@@ -57,14 +57,14 @@ public:
     void segments(const std::list<dogen::stitch::segment>&& v);
 
 public:
-    bool operator==(const mixed_content_line& rhs) const;
-    bool operator!=(const mixed_content_line& rhs) const {
+    bool operator==(const line& rhs) const;
+    bool operator!=(const line& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(mixed_content_line& other) noexcept;
-    mixed_content_line& operator=(mixed_content_line other);
+    void swap(line& other) noexcept;
+    line& operator=(line other);
 
 private:
     std::list<dogen::stitch::segment> segments_;
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stitch::mixed_content_line& lhs,
-    dogen::stitch::mixed_content_line& rhs) {
+    dogen::stitch::line& lhs,
+    dogen::stitch::line& rhs) {
     lhs.swap(rhs);
 }
 

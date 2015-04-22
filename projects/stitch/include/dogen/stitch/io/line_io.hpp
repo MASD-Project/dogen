@@ -18,36 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/hash/segment_hash.hpp"
-#include "dogen/stitch/hash/mixed_content_line_hash.hpp"
+#ifndef DOGEN_STITCH_IO_LINE_IO_HPP
+#define DOGEN_STITCH_IO_LINE_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <iosfwd>
+#include "dogen/stitch/types/line.hpp"
 
 namespace dogen {
 namespace stitch {
 
-std::size_t mixed_content_line_hasher::hash(const mixed_content_line&v) {
-    std::size_t seed(0);
-
-    combine(seed, hash_std_list_dogen_stitch_segment(v.segments()));
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::stitch::line& v);
 
 } }
+
+#endif

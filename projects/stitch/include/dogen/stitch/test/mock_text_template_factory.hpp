@@ -43,23 +43,22 @@ private:
     text_template make_text_template_with_trivial_settings() const;
 
     /**
-     * @brief Makes a mixed content block with @code how_many text lines.
+     * @brief Makes @code how_many lines with a single text segment.
      */
-    mixed_content_block make_text_only_mixed_content_block(
-        const unsigned int how_many = 1) const;
+    std::list<line> make_text_only_lines(const unsigned int how_many = 1) const;
 
     /**
-     * @brief Makes a mixed content block with @code how_many lines of
-     * mixed content. All lines have the following mix: text, text
-     * with scriptlet, text.
+     * @brief Makes @code how_many lines, each with the following
+     * segments: text, scriptlet, text.
      */
-    mixed_content_block make_mixed_content_only_mixed_content_block(
-        const unsigned int how_many = 1) const;
+    std::list<line>
+    make_mixed_content_lines(const unsigned int how_many = 1) const;
 
     /**
-     * @brief Makes a scriptlet block with @code how_many lines.
+     * @brief Makes @code how_many lines with a single scriptlet segment.
      */
-    scriptlet_block make_scriptlet_block(const unsigned int how_many = 1) const;
+    std::list<line>
+    make_scriptlet_only_lines(const unsigned int how_many = 1) const;
 
 public:
     /**
@@ -81,13 +80,13 @@ public:
     /**
      * @brief Creates a text template with a single-line scriptlet.
      */
-    text_template make_single_line_scriptlet_block() const;
+    text_template make_single_scriptlet_line() const;
 
     /**
      * @brief Creates a text template with @code how_many scriptlet
      * lines.
      */
-    text_template make_multi_line_scriptlet_block(
+    text_template make_multiple_scriptlet_lines(
         const unsigned int how_many = 2) const;
 
     /**

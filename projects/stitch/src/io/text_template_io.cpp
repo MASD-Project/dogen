@@ -19,45 +19,14 @@
  *
  */
 #include <ostream>
-#include <boost/variant/apply_visitor.hpp>
+#include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/dynamic/schema/io/object_io.hpp"
-#include "dogen/stitch/io/scriptlet_block_io.hpp"
 #include "dogen/stitch/io/settings_bundle_io.hpp"
-#include "dogen/stitch/io/mixed_content_block_io.hpp"
-
-namespace boost {
-
-struct boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor : public boost::static_visitor<> {
-    boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor(std::ostream& s) : stream_(s) {
-        s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
-        s << "\"data\": ";
-    }
-
-    ~boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor() { stream_ << " }"; }
-
-    void operator()(const dogen::stitch::mixed_content_block& v) const {
-        stream_ << v;
-    }
-
-    void operator()(const dogen::stitch::scriptlet_block& v) const {
-        stream_ << v;
-    }
-
-private:
-    std::ostream& stream_;
-};
-
-inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block>& v) {
-    boost::apply_visitor(boost_variant_dogen_stitch_mixed_content_block_dogen_stitch_scriptlet_block_visitor(s), v);
-    return s;
-}
-
-}
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::variant<dogen::stitch::mixed_content_block, dogen::stitch::scriptlet_block> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::line>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -77,7 +46,7 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
       << "\"__type__\": " << "\"dogen::stitch::text_template\"" << ", "
       << "\"settings\": " << v.settings() << ", "
       << "\"extensions\": " << v.extensions() << ", "
-      << "\"content\": " << v.content()
+      << "\"lines\": " << v.lines()
       << " }";
     return(s);
 }

@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_HASH_MIXED_CONTENT_LINE_HASH_HPP
-#define DOGEN_STITCH_HASH_MIXED_CONTENT_LINE_HASH_HPP
+#include "dogen/stitch/hash/line_hash.hpp"
+#include "dogen/stitch/hash/segment_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/stitch/types/mixed_content_line.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
-struct mixed_content_line_hasher {
-public:
-    static std::size_t hash(const mixed_content_line& v);
-};
+std::size_t line_hasher::hash(const line&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_list_dogen_stitch_segment(v.segments()));
+    return seed;
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::stitch::mixed_content_line> {
-public:
-    size_t operator()(const dogen::stitch::mixed_content_line& v) const {
-        return dogen::stitch::mixed_content_line_hasher::hash(v);
-    }
-};
-
-}
-#endif

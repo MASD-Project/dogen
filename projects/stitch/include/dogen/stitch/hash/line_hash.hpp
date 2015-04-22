@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SCRIPTLET_BLOCK_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SCRIPTLET_BLOCK_SER_HPP
+#ifndef DOGEN_STITCH_HASH_LINE_HASH_HPP
+#define DOGEN_STITCH_HASH_LINE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/scriptlet_block.hpp"
+#include <functional>
+#include "dogen/stitch/types/line.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::scriptlet_block)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace stitch {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::scriptlet_block& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::scriptlet_block& v, unsigned int version);
+struct line_hasher {
+public:
+    static std::size_t hash(const line& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::stitch::line> {
+public:
+    size_t operator()(const dogen::stitch::line& v) const {
+        return dogen::stitch::line_hasher::hash(v);
+    }
+};
+
+}
 #endif

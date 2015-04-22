@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/segment.hpp"
@@ -29,11 +30,8 @@
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/building_error.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"
-#include "dogen/stitch/types/scriptlet_block.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
-#include "dogen/stitch/types/mixed_content_line.hpp"
 #include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/stitch/types/mixed_content_block.hpp"
 #include "dogen/stitch/types/settings_bundle_factory.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"

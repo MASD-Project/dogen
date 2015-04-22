@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SCRIPTLET_BLOCK_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SCRIPTLET_BLOCK_FWD_SER_HPP
+#ifndef DOGEN_STITCH_TYPES_LINE_FWD_HPP
+#define DOGEN_STITCH_TYPES_LINE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/stitch/types/scriptlet_block_fwd.hpp"
+namespace dogen {
+namespace stitch {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::stitch::scriptlet_block& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::stitch::scriptlet_block& v, unsigned int version);
+class line;
 
 } }
 

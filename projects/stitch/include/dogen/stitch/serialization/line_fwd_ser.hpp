@@ -18,25 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_MIXED_CONTENT_BLOCK_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_MIXED_CONTENT_BLOCK_SER_HPP
+#ifndef DOGEN_STITCH_SERIALIZATION_LINE_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_LINE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/mixed_content_block.hpp"
+#include "dogen/stitch/types/line_fwd.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::mixed_content_block)
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::mixed_content_block& v, unsigned int version);
+template<class Archive>
+void save(Archive& ar, const dogen::stitch::line& v, unsigned int version);
 
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::mixed_content_block& v, unsigned int version);
+template<class Archive>
+void load(Archive& ar, dogen::stitch::line& v, unsigned int version);
 
 } }
 

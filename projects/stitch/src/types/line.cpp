@@ -18,43 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/scriptlet_block.hpp"
+#include "dogen/stitch/types/line.hpp"
 
 namespace dogen {
 namespace stitch {
 
-scriptlet_block::scriptlet_block(const std::list<std::string>& content)
-    : content_(content) { }
+line::line(const std::list<dogen::stitch::segment>& segments)
+    : segments_(segments) { }
 
-void scriptlet_block::swap(scriptlet_block& other) noexcept {
+void line::swap(line& other) noexcept {
     using std::swap;
-    swap(content_, other.content_);
+    swap(segments_, other.segments_);
 }
 
-bool scriptlet_block::operator==(const scriptlet_block& rhs) const {
-    return content_ == rhs.content_;
+bool line::operator==(const line& rhs) const {
+    return segments_ == rhs.segments_;
 }
 
-scriptlet_block& scriptlet_block::operator=(scriptlet_block other) {
+line& line::operator=(line other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<std::string>& scriptlet_block::content() const {
-    return content_;
+const std::list<dogen::stitch::segment>& line::segments() const {
+    return segments_;
 }
 
-std::list<std::string>& scriptlet_block::content() {
-    return content_;
+std::list<dogen::stitch::segment>& line::segments() {
+    return segments_;
 }
 
-void scriptlet_block::content(const std::list<std::string>& v) {
-    content_ = v;
+void line::segments(const std::list<dogen::stitch::segment>& v) {
+    segments_ = v;
 }
 
-void scriptlet_block::content(const std::list<std::string>&& v) {
-    content_ = std::move(v);
+void line::segments(const std::list<dogen::stitch::segment>&& v) {
+    segments_ = std::move(v);
 }
 
 } }

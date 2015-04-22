@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-22 Wed 13:37]
+Clock summary at [2015-04-22 Wed 15:25]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *24:48* |       |      |
+| *Total time*                                                    | *26:35* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 24:48 |      |
+| Active                                                          |         | 26:35 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -34,6 +34,7 @@ Clock summary at [2015-04-22 Wed 13:37]
 | COMPLETED Add test coverage to stitch's workflow                |         |       | 0:43 |
 | COMPLETED Get a trivial stitcher to work                        |         |       | 1:32 |
 | COMPLETED Add support for spaces after commas on template types |         |       | 0:29 |
+| COMPLETED Simplify stitch model to use lines rather than blocks |         |       | 1:47 |
 | STARTED Add support for inline code in stitch                   |         |       | 1:22 |
 #+end:
 
@@ -256,6 +257,14 @@ commas:
 
 This will improve readability in diagrams.
 
+*** COMPLETED Simplify stitch model to use lines rather than blocks   :spike:
+    CLOSED: [2015-04-22 Wed 15:25]
+    CLOCK: [2015-04-22 Wed 13:38]--[2015-04-22 Wed 15:25] =>  1:47
+
+It seems we have gone a bit overboard with the number of types in
+stitch. The whole thing can be modeled with just lines and
+segments. Update the model, parser and formatter.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -314,6 +323,16 @@ Solution for cycles:
   all other edges. Finally, once the graph has been processed we
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
+
+*** Create a spirit based stitch parser                               :spike:
+
+Whilst trying to add inline support, it became obvious that our
+simplistic parser will not do: it is a bit complicated to represent
+all the permutations when adding inline. We need to:
+
+- write a parser using spirit
+- simplify the model, removing blocks and adding three types of lines:
+  text, scriptlet and mixed; split to it's own story.
 
 *** STARTED Add support for inline code in stitch                     :story:
     CLOCK: [2015-04-21 Tue 20:37]--[2015-04-21 Tue 21:59] =>  1:22

@@ -42,8 +42,8 @@ const std::string cannot_start_scriptlet(
     "Cannot start scriptlet block in scriptlet block.");
 const std::string cannot_start_scriptlet_in_middle(
     "Cannot start scriplet block in the middle of a line.");
-const std::string cannot_start_scriptlet_segment(
-    "Cannot start scriptlet segment in scriptlet block.");
+const std::string scriptlet_segment_not_supported(
+    "Scriptlet segment is not supported.");
 const std::string end_without_start("Found end block without a start block.");
 const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
@@ -65,35 +65,40 @@ text_template parser::parse(const std::string& s) const {
     if (s.empty())
         return r;
 
-    scriptlet_block sb;
-    mixed_content_block mcb;
-    bool in_scriplet_block(false), in_mixed_content_block(false),
-        in_declarations_block(true);
-    std::string line;
+    line output_line;
+    bool in_scriplet_block(false), in_declarations_block(true);
+    std::string input_line;
     std::istringstream is(s);
     std::list<std::pair<std::string, std::string> > kvps;
-    while (std::getline(is, line)) {
-        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << line;
+    while (std::getline(is, input_line)) {
+        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
 
-        if (boost::starts_with(line, start_declaration)) {
+        if (boost::contains(input_line, start_scriptlet_segment)) {
+            BOOST_LOG_SEV(lg, debug) << "Line has scriplet segment";
+            BOOST_LOG_SEV(lg, error) << scriptlet_segment_not_supported;
+            BOOST_THROW_EXCEPTION(
+                parsing_error(scriptlet_segment_not_supported));
+        }
+
+        if (boost::starts_with(input_line, start_declaration)) {
             BOOST_LOG_SEV(lg, debug) << "Line is declaration";
             if (!in_declarations_block) {
                 BOOST_LOG_SEV(lg, error) << unexpected_declaration;
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
             }
 
-            boost::replace_all(line, start_declaration, empty);
-            boost::replace_all(line, end_block, empty);
-            boost::trim(line);
+            boost::replace_all(input_line, start_declaration, empty);
+            boost::replace_all(input_line, end_block, empty);
+            boost::trim(input_line);
 
-            const auto pos(line.find_first_of(equals));
+            const auto pos(input_line.find_first_of(equals));
             if (pos == std::string::npos) {
                 BOOST_LOG_SEV(lg, error) << separator_not_found;
                 BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
             }
 
-            const auto key(line.substr(0, pos));
-            const auto value(line.substr(pos + 1));
+            const auto key(input_line.substr(0, pos));
+            const auto value(input_line.substr(pos + 1));
             kvps.push_back(std::make_pair(key, value));
 
             using dynamic::schema::scope_types;
@@ -104,7 +109,7 @@ text_template parser::parse(const std::string& s) const {
 
         in_declarations_block = false;
 
-        if (boost::starts_with(line, start_scriptlet_block)) {
+        if (boost::starts_with(input_line, start_scriptlet_block)) {
             BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
 
             if (in_scriplet_block) {
@@ -112,65 +117,50 @@ text_template parser::parse(const std::string& s) const {
                 BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
             }
 
-            if (boost::ends_with(line, end_block)) {
+            if (boost::ends_with(input_line, end_block)) {
                 BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
-                boost::replace_all(line, start_scriptlet_block, empty);
-                boost::replace_all(line, end_block, empty);
+                boost::replace_all(input_line, start_scriptlet_block, empty);
+                boost::replace_all(input_line, end_block, empty);
 
-                sb.content().push_back(line);
-                r.content().push_back(sb);
-                sb.content().clear();
+                segment sg;
+                sg.type(segment_types::scriptlet);
+                sg.content(input_line);
+                output_line.segments().push_back(sg);
+                r.lines().push_back(output_line);
+                output_line.segments().clear();
                 continue;
             }
 
-            if (line.size() != 3) {
+            if (input_line.size() != 3) {
                 BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
                 BOOST_THROW_EXCEPTION(
                     parsing_error(unexpected_additional_content));
             }
 
             in_scriplet_block = true;
-            if (in_mixed_content_block) {
-                BOOST_LOG_SEV(lg, debug) << "Closing mixed content";
-                in_mixed_content_block = false;
-                r.content().push_back(mcb);
-                mcb.content().clear();
-            }
             continue;
         }
 
-        if (boost::contains(line, start_scriptlet_block)) {
+        if (boost::contains(input_line, start_scriptlet_block)) {
             BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
             BOOST_THROW_EXCEPTION(
                 parsing_error(cannot_start_scriptlet_in_middle));
         }
 
-        if (boost::contains(line, start_declaration)) {
+        if (boost::contains(input_line, start_declaration)) {
             BOOST_LOG_SEV(lg, error) << unexpected_declaration;
             BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
         }
 
-        if (boost::contains(line, start_scriptlet_segment)) {
-            BOOST_LOG_SEV(lg, debug) << "Line has scriplet segment";
-
-            if (in_scriplet_block) {
-                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_segment;
-                BOOST_THROW_EXCEPTION(
-                    parsing_error(cannot_start_scriptlet_segment));
-            }
-
-            continue;
-        }
-
-        if (boost::contains(line, end_block)) {
+        if (boost::contains(input_line, end_block)) {
             BOOST_LOG_SEV(lg, debug) << "Closing end block";
 
-            if (!in_scriplet_block && !in_mixed_content_block) {
+            if (!in_scriplet_block) {
                 BOOST_LOG_SEV(lg, error) << end_without_start;
                 BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
             }
 
-            if (line.size() != 2) {
+            if (input_line.size() != 2) {
                 BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
                 BOOST_THROW_EXCEPTION(
                     parsing_error(unexpected_additional_content));
@@ -178,47 +168,23 @@ text_template parser::parse(const std::string& s) const {
 
             if (in_scriplet_block) {
                 BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
-
                 in_scriplet_block = false;
-                r.content().push_back(sb);
-                sb.content().clear();
                 continue;
             }
-
-            BOOST_LOG_SEV(lg, debug) << "Closing mixed content block";
-            in_mixed_content_block = false;
-            r.content().push_back(mcb);
-            mcb.content().clear();
-            continue;
         }
 
-        if (in_scriplet_block) {
-            BOOST_LOG_SEV(lg, debug) << "Line in scriptlet block";
-            sb.content().push_back(line);
-            continue;
-        }
-
-        const auto i(line.find_first_of(start_scriptlet_segment));
-        const bool has_mixed_content(i != std::string::npos);
-        if (has_mixed_content) {
-            BOOST_LOG_SEV(lg, debug) << "Mixed content line";
-            // FIXME
-            continue;
-        }
-
-        in_mixed_content_block = true;
-        BOOST_LOG_SEV(lg, debug) << "Text line";
-        mcb.content().push_back(line);
+        segment sg;
+        sg.type(
+            in_scriplet_block ? segment_types::scriptlet : segment_types::text);
+        sg.content(input_line);
+        output_line.segments().push_back(sg);
+        r.lines().push_back(output_line);
+        output_line.segments().clear();
     }
 
     if (in_scriplet_block) {
         BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
         BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
-    }
-
-    if (in_mixed_content_block) {
-        BOOST_LOG_SEV(lg, debug) << "Finishing mixed content block";
-        r.content().push_back(mcb);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";

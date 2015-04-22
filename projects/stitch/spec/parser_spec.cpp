@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
     const auto tt(parse(empty));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
-    BOOST_CHECK(tt.content().empty());
+    BOOST_CHECK(tt.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_expected_template) {
@@ -130,14 +130,13 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
     const auto tt(parse(only_text_content_in_single_line));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_REQUIRE(tt.content().size() == 1);
-    const auto& block(tt.content().front());
-    const auto& mcb(boost::get<dogen::stitch::mixed_content_block>(block));
+    BOOST_REQUIRE(tt.lines().size() == 1);
+    const auto& line(tt.lines().front());
 
-    BOOST_REQUIRE(mcb.content().size() == 1);
-    const auto& line(mcb.content().front());
-    const auto s(boost::get<std::string>(line));
-    BOOST_CHECK(s == only_text_content_in_single_line);
+    BOOST_REQUIRE(line.segments().size() == 1);
+    const auto& sg(line.segments().front());
+    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg.content() == only_text_content_in_single_line);
 }
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expected_template) {
@@ -145,29 +144,26 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expecte
     const auto tt(parse(only_text_content_muti_line));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_REQUIRE(tt.content().size() == 1);
-    const auto& block(tt.content().front());
-    const auto& mcb(boost::get<dogen::stitch::mixed_content_block>(block));
+    BOOST_REQUIRE(tt.lines().size() == 2);
 
-    BOOST_REQUIRE(mcb.content().size() == 2);
-    const auto& front(mcb.content().front());
-    const auto s1(boost::get<std::string>(front));
-    BOOST_CHECK(s1 == only_text_content_in_single_line);
+    const auto& l1(tt.lines().front());
+    BOOST_REQUIRE(l1.segments().size() == 1);
+    const auto& sg1(l1.segments().front());
+    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
 
-    const auto& back(mcb.content().back());
-    const auto s2(boost::get<std::string>(back));
-    BOOST_CHECK(s2 == only_text_content_second_line);
+    const auto& l2(tt.lines().back());
+    BOOST_REQUIRE(l2.segments().size() == 1);
+    const auto& sg2(l2.segments().front());
+    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg2.content() == only_text_content_second_line);
 }
 
-BOOST_AUTO_TEST_CASE(empty_scriptlet_block_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("empty_scriptlet_block_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(empty_scriptlet_block_results_in_empty_template) {
+    SETUP_TEST_LOG_SOURCE("empty_scriptlet_block_results_in_empty_template");
     const auto tt(parse(empty_scriptlet_block));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
-
-    BOOST_REQUIRE(tt.content().size() == 1);
-    const auto& block(tt.content().front());
-    const auto& sb(boost::get<dogen::stitch::scriptlet_block>(block));
-    BOOST_CHECK(sb.content().empty());
+    BOOST_CHECK(tt.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
@@ -175,13 +171,13 @@ BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
     const auto tt(parse(single_line_scriptlet_block));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_REQUIRE(tt.content().size() == 1);
-    const auto& block(tt.content().front());
-    const auto& sb(boost::get<dogen::stitch::scriptlet_block>(block));
-    BOOST_REQUIRE(sb.content().size() == 1);
+    BOOST_REQUIRE(tt.lines().size() == 1);
+    const auto& line(tt.lines().front());
 
-    const auto& front(sb.content().front());
-    BOOST_CHECK(front == single_line_scriptlet_block_content);
+    BOOST_REQUIRE(line.segments().size() == 1);
+    const auto& sg(line.segments().front());
+    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::scriptlet);
+    BOOST_CHECK(sg.content() == single_line_scriptlet_block_content);
 }
 
 BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
@@ -189,26 +185,28 @@ BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_templat
     const auto tt(parse(text_scriptlet_text_single_line));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_REQUIRE(tt.content().size() == 3);
-    auto i(tt.content().begin());
-    const auto& tb1(boost::get<dogen::stitch::mixed_content_block>(*i));
-    BOOST_REQUIRE(tb1.content().size() == 1);
-    const auto& tb1_front(tb1.content().front());
-    const auto s1(boost::get<std::string>(tb1_front));
-    BOOST_CHECK(s1 == only_text_content_in_single_line);
+    BOOST_REQUIRE(tt.lines().size() == 3);
+
+    auto i(tt.lines().begin());
+    const auto l1(*i);
+    BOOST_REQUIRE(l1.segments().size() == 1);
+    const auto& sg1(l1.segments().front());
+    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
 
     ++i;
-    const auto& sb(boost::get<dogen::stitch::scriptlet_block>(*i));
-    BOOST_REQUIRE(sb.content().size() == 1);
-    const auto& sb_front(sb.content().front());
-    BOOST_CHECK(sb_front == single_line_scriptlet_block_content);
+    const auto l2(*i);
+    BOOST_REQUIRE(l2.segments().size() == 1);
+    const auto& sg2(l2.segments().front());
+    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::scriptlet);
+    BOOST_CHECK(sg2.content() == single_line_scriptlet_block_content);
 
     ++i;
-    const auto& tb2(boost::get<dogen::stitch::mixed_content_block>(*i));
-    BOOST_REQUIRE(tb2.content().size() == 1);
-    const auto& tb2_front(tb2.content().front());
-    const auto s2(boost::get<std::string>(tb2_front));
-    BOOST_CHECK(s2 == only_text_content_second_line);
+    const auto l3(*i);
+    BOOST_REQUIRE(l3.segments().size() == 1);
+    const auto& sg3(l3.segments().front());
+    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg3.content() == only_text_content_second_line);
 }
 
 BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_template) {
@@ -216,25 +214,28 @@ BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_te
     const auto tt(parse(scriptlet_text_scriptlet_single_line));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_REQUIRE(tt.content().size() == 3);
-    auto i(tt.content().begin());
-    const auto& sb1(boost::get<dogen::stitch::scriptlet_block>(*i));
-    BOOST_REQUIRE(sb1.content().size() == 1);
-    const auto& sb1_front(sb1.content().front());
-    BOOST_CHECK(sb1_front == single_line_scriptlet_block_content);
+    BOOST_REQUIRE(tt.lines().size() == 3);
+
+    auto i(tt.lines().begin());
+    const auto l1(*i);
+    BOOST_REQUIRE(l1.segments().size() == 1);
+    const auto& sg1(l1.segments().front());
+    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::scriptlet);
+    BOOST_CHECK(sg1.content() == single_line_scriptlet_block_content);
 
     ++i;
-    const auto& tb1(boost::get<dogen::stitch::mixed_content_block>(*i));
-    BOOST_REQUIRE(tb1.content().size() == 1);
-    const auto& tb1_front(tb1.content().front());
-    const auto s1(boost::get<std::string>(tb1_front));
-    BOOST_CHECK(s1 == only_text_content_in_single_line);
+    const auto l2(*i);
+    BOOST_REQUIRE(l2.segments().size() == 1);
+    const auto& sg2(l2.segments().front());
+    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::text);
+    BOOST_CHECK(sg2.content() == only_text_content_in_single_line);
 
     ++i;
-    const auto& sb2(boost::get<dogen::stitch::scriptlet_block>(*i));
-    BOOST_REQUIRE(sb2.content().size() == 1);
-    const auto& sb2_front(sb1.content().front());
-    BOOST_CHECK(sb2_front == single_line_scriptlet_block_content);
+    const auto l3(*i);
+    BOOST_REQUIRE(l3.segments().size() == 1);
+    const auto& sg3(l3.segments().front());
+    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::scriptlet);
+    BOOST_CHECK(sg3.content() == single_line_scriptlet_block_content);
 }
 
 BOOST_AUTO_TEST_CASE(scriptlet_start_additional_characters_throws) {
@@ -278,7 +279,7 @@ BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
     const auto tt(parse(licence_declaration));
     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    BOOST_CHECK(tt.content().empty());
+    BOOST_CHECK(tt.lines().empty());
     BOOST_REQUIRE(tt.extensions().fields().size() == 1);
     dogen::dynamic::schema::field_selector fs(tt.extensions());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
@@ -286,10 +287,18 @@ BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
 
 BOOST_AUTO_TEST_CASE(stand_alone_inline_scriptlet_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("stand_alone_inline_scriptlet_block_results_in_expected_template");
-    const auto tt(parse(stand_alone_inline_scriptlet_block));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    // const auto tt(parse(stand_alone_inline_scriptlet_block));
+    // BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
-    // BOOST_REQUIRE(tt.content().size() == 1);
+    // BOOST_REQUIRE(tt.lines().size() == 1);
+    // const auto& line(tt.lines().front());
+
+    // BOOST_REQUIRE(line.segments().size() == 1);
+    // const auto& sg(line.segments().front());
+    // BOOST_CHECK(sg.type() == dogen::stitch::segment_types::text);
+    // BOOST_CHECK(sg.content() == only_text_content_in_single_line);
+
+    // BOOST_REQUIRE(tt.lines().size() == 1);
     // auto i(tt.content().begin());
     // const auto& mcb(boost::get<dogen::stitch::mixed_content_block>(*i));
     // BOOST_REQUIRE(mcb.content().size() == 1);

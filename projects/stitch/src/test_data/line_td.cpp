@@ -18,21 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#include "dogen/stitch/test_data/scriptlet_block_td.hpp"
+#include "dogen/stitch/test_data/line_td.hpp"
+#include "dogen/stitch/test_data/segment_td.hpp"
 
 namespace {
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+dogen::stitch::segment
+create_dogen_stitch_segment(const unsigned int position) {
+    return dogen::stitch::segment_generator::create(position);
 }
 
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
+std::list<dogen::stitch::segment> create_std_list_dogen_stitch_segment(unsigned int position) {
+    std::list<dogen::stitch::segment> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
+        r.push_back(create_dogen_stitch_segment(position + i));
     }
     return r;
 }
@@ -42,28 +41,28 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 namespace dogen {
 namespace stitch {
 
-scriptlet_block_generator::scriptlet_block_generator() : position_(0) { }
+line_generator::line_generator() : position_(0) { }
 
-void scriptlet_block_generator::
+void line_generator::
 populate(const unsigned int position, result_type& v) {
-    v.content(create_std_list_std_string(position + 0));
+    v.segments(create_std_list_dogen_stitch_segment(position + 0));
 }
 
-scriptlet_block_generator::result_type
-scriptlet_block_generator::create(const unsigned int position) {
-    scriptlet_block r;
-    scriptlet_block_generator::populate(position, r);
+line_generator::result_type
+line_generator::create(const unsigned int position) {
+    line r;
+    line_generator::populate(position, r);
     return r;
 }
-scriptlet_block_generator::result_type*
-scriptlet_block_generator::create_ptr(const unsigned int position) {
-    scriptlet_block* p = new scriptlet_block();
-    scriptlet_block_generator::populate(position, *p);
+line_generator::result_type*
+line_generator::create_ptr(const unsigned int position) {
+    line* p = new line();
+    line_generator::populate(position, *p);
     return p;
 }
 
-scriptlet_block_generator::result_type
-scriptlet_block_generator::operator()() {
+line_generator::result_type
+line_generator::operator()() {
     return create(position_++);
 }
 

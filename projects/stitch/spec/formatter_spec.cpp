@@ -44,10 +44,10 @@ const std::string multiple_text_lines_content(
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string single_line_scriptlet_block(R"(unsigned int i0;
+const std::string single_scriptlet_line(R"(unsigned int i0;
 )");
 
-const std::string multi_line_scriptlet_block(R"(unsigned int i0;
+const std::string multiple_scriptlet_lines(R"(unsigned int i0;
 unsigned int i1;
 )");
 
@@ -160,28 +160,28 @@ BOOST_AUTO_TEST_CASE(multiple_text_lines_results_in_expected_template) {
     BOOST_CHECK(asserter::assert_equals(multiple_text_lines_content, c));
 }
 
-BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("single_line_scriptlet_block_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(single_scriptlet_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("single_scriptlet_line_results_in_expected_template");
 
-    const auto tt(factory.make_single_line_scriptlet_block());
+    const auto tt(factory.make_single_scriptlet_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(single_line_scriptlet_block, c));
+    BOOST_CHECK(asserter::assert_equals(single_scriptlet_line, c));
 }
 
-BOOST_AUTO_TEST_CASE(multi_line_scriptlet_block_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("multi_line_scriptlet_block_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(multiple_scriptlet_lines_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("multiple_scriptlet_lines_results_in_expected_template");
 
-    const auto tt(factory.make_multi_line_scriptlet_block());
+    const auto tt(factory.make_multiple_scriptlet_lines());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(multi_line_scriptlet_block, c));
+    BOOST_CHECK(asserter::assert_equals(multiple_scriptlet_lines, c));
 }
 
 BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
@@ -281,6 +281,5 @@ BOOST_AUTO_TEST_CASE(general_settings_result_in_expected_template) {
     const auto& c(r.content());
     BOOST_CHECK(asserter::assert_equals(with_general_settings, c));
 }
-
 
 BOOST_AUTO_TEST_SUITE_END()

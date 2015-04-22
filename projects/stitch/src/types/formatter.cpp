@@ -18,11 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/variant/static_visitor.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
+#include "dogen/stitch/io/segment_types_io.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -40,64 +41,54 @@ const std::string group_name;
 const std::string inserter("<<");
 const std::string endl("std::endl;");
 
-const std::string empty_stream_name("Stream name cannot be empty");
+const std::string empty_stream_name("Stream name cannot be empty.");
+const std::string empty_line("Line has no content.");
+const std::string unsupported_segment_type("Segment type is unsupported: ");
 
 }
 
 namespace dogen {
 namespace stitch {
 
-class visitor : public boost::static_visitor<> {
-public:
-    visitor(const std::string& stream_name, std::ostream& s)
-        : utility_(s), stream_name_(stream_name), stream_(s) { }
+void formatter::format_text_line(const std::string& stream_name,
+    const std::string& l, std::ostream& s) const {
+    const auto spaces(formatters::spacing_types::left_and_right_space);
+    s << stream_name;
 
-public:
-    void operator()(const mixed_content_line& l) const {
-        bool is_first(true);
-        const auto spaces(formatters::spacing_types::left_and_right_space);
-        for (const auto& s : l.segments()) {
-            if (is_first) {
-                stream_ << stream_name_;
-                is_first = false;
-            }
+    const formatters::utility_formatter u(s);
+    u.insert(inserter, spaces);
+    u.insert_quoted(l, true/*escape_content*/);
+    u.insert(inserter, spaces);
+    u.insert(endl);
+    s << std::endl;
+}
 
-            utility_.insert(inserter, spaces);
-            if (s.type() == segment_types::text)
-                utility_.insert_quoted(s.content(), true/*escape_content*/);
-            else
-                stream_ << s.content();
+void formatter::
+format_scriptlet_line(const std::string& l, std::ostream& s) const {
+    s << l << std::endl;
+}
+
+void formatter::format_mixed_content_line(const std::string& stream_name,
+    const line& l, std::ostream& s) const {
+    const auto spaces(formatters::spacing_types::left_and_right_space);
+    const formatters::utility_formatter u(s);
+    bool is_first(true);
+    for (const auto& sg : l.segments()) {
+        if (is_first) {
+            s << stream_name;
+            is_first = false;
         }
-        utility_.insert(inserter, spaces);
-        utility_.insert(endl);
-        stream_ << std::endl;
-    }
 
-    void operator()(const std::string& l) const {
-        const auto spaces(formatters::spacing_types::left_and_right_space);
-        stream_ << stream_name_;
-        utility_.insert(inserter, spaces);
-        utility_.insert_quoted(l, true/*escape_content*/);
-        utility_.insert(inserter, spaces);
-        utility_.insert(endl);
-        stream_ << std::endl;
+        u.insert(inserter, spaces);
+        if (sg.type() == segment_types::text)
+            u.insert_quoted(sg.content(), true/*escape_content*/);
+        else
+            s << sg.content();
     }
-
-    void operator()(const mixed_content_block& b) const {
-        for (const auto& l : b.content())
-            boost::apply_visitor(*this, l);
-    }
-
-    void operator()(const scriptlet_block& b) const {
-        for (const auto& l : b.content())
-            stream_ << l << std::endl;
-    }
-
-private:
-    const formatters::utility_formatter utility_;
-    const std::string stream_name_;
-    std::ostream& stream_;
-};
+    u.insert(inserter, spaces);
+    u.insert(endl);
+    s << std::endl;
+}
 
 dynamic::schema::ownership_hierarchy formatter::ownership_hierarchy() const {
     static dynamic::schema::ownership_hierarchy
@@ -123,9 +114,28 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
         f.format_begin(s, gs->annotation(), id, empty_header_guard);
     }
 
-    visitor v(stream_variable_name, s);
-    for (const auto& b : tt.content())
-        boost::apply_visitor(v, b);
+    for (const auto& l : tt.lines()) {
+        if (l.segments().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_line;
+            BOOST_THROW_EXCEPTION(formatting_error(empty_line));
+        }
+
+        if (l.segments().size() > 1) {
+            format_mixed_content_line(stream_variable_name, l, s);
+            continue;
+        }
+
+        const auto& sg(l.segments().front());
+        if (sg.type() == segment_types::text)
+            format_text_line(stream_variable_name, sg.content(), s);
+        else if (sg.type() == segment_types::scriptlet)
+            format_scriptlet_line(sg.content(), s);
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_segment_type << sg.type();
+            BOOST_THROW_EXCEPTION(formatting_error(unsupported_segment_type +
+                    boost::lexical_cast<std::string>(sg.type())));
+        }
+    }
 
     if (gs)
         f.format_end(s, gs->annotation(), empty_header_guard);
