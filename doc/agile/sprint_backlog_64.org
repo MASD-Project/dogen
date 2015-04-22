@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-22 Wed 15:25]
+Clock summary at [2015-04-22 Wed 16:17]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *26:35* |       |      |
+| *Total time*                                                    | *27:20* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 26:35 |      |
+| Active                                                          |         | 27:20 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -35,6 +35,8 @@ Clock summary at [2015-04-22 Wed 15:25]
 | COMPLETED Get a trivial stitcher to work                        |         |       | 1:32 |
 | COMPLETED Add support for spaces after commas on template types |         |       | 0:29 |
 | COMPLETED Simplify stitch model to use lines rather than blocks |         |       | 1:47 |
+| COMPLETED Consider using Microsoft's T4 terminology for stitch  |         |       | 0:06 |
+| STARTED Create a spirit based stitch parser                     |         |       | 0:39 |
 | STARTED Add support for inline code in stitch                   |         |       | 1:22 |
 #+end:
 
@@ -265,6 +267,33 @@ It seems we have gone a bit overboard with the number of types in
 stitch. The whole thing can be modeled with just lines and
 segments. Update the model, parser and formatter.
 
+*** COMPLETED Consider using Microsoft's T4 terminology for stitch    :spike:
+    CLOSED: [2015-04-22 Wed 15:42]
+    CLOCK: [2015-04-22 Wed 15:36]--[2015-04-22 Wed 15:42] =>  0:06
+
+We found [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][a page]] documenting the elements of T4. These are:
+
+- *Directives*: Text template directives provide general instructions to
+  the text templating engine about how to generate the transformation
+  code and the output file.
+- *Text blocks*: A text block inserts text directly into the output
+  file. There is no special formatting for text blocks.
+- *Control blocks*: Control blocks are sections of program code that
+  are used to transform the templates. Two types:
+  - *Standard control blocks*: A standard control block is a section
+    of program code that generates part of the output file.
+  - *Expression control blocks*: An expression control block evaluates
+    an expression and converts it to a string.
+
+Actually, in terms of the domain types used in stitch, we are probably
+ok to leave them as they are. A scriptlet is just a control block of
+either kind. If a line contains a single segment, this must be a
+standard control block. If a line contains a mix of text and
+scriptlet, the scriptlet must be an expression control block. We can
+use these terms in the spirit parser, but we don't need to worry about
+changing the domain types. We need to document this in the code
+somewhere.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -324,7 +353,9 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** Create a spirit based stitch parser                               :spike:
+*** STARTED Create a spirit based stitch parser                       :spike:
+    CLOCK: [2015-04-22 Wed 15:43]--[2015-04-22 Wed 16:17] =>  0:34
+    CLOCK: [2015-04-22 Wed 15:31]--[2015-04-22 Wed 15:36] =>  0:05
 
 Whilst trying to add inline support, it became obvious that our
 simplistic parser will not do: it is a bit complicated to represent
@@ -333,6 +364,21 @@ all the permutations when adding inline. We need to:
 - write a parser using spirit
 - simplify the model, removing blocks and adding three types of lines:
   text, scriptlet and mixed; split to it's own story.
+
+Rules:
+
+- standard control blocks multi-line must have only start and end markers on
+  start and end lines;
+- standard control blocks single line must not have anything else in line;
+- directive block must be single line and not have anything else in
+  line and must be the first line or preceded by another directive
+  block;
+- expression control blocks must start and end on the same line.
+
+State Machine:
+
+#+caption: State machine for parser
+[[https://raw.github.com/kitanda/dogen/master/doc/misc/text_template_state_diagram.jpeg]]
 
 *** STARTED Add support for inline code in stitch                     :story:
     CLOCK: [2015-04-21 Tue 20:37]--[2015-04-21 Tue 21:59] =>  1:22
