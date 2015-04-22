@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#define BOOST_SPIRIT_USE_PHOENIX_V3
 #include <functional>
 #include <boost/tokenizer.hpp>
 #include <boost/throw_exception.hpp>
@@ -31,17 +32,16 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/dia_to_sml/types/parsing_error.hpp"
 #include "dogen/dia_to_sml/types/nested_qname_builder.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/identifier_parser.hpp"
-
-using namespace dogen::utility::log;
 
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("dia_to_sml.identifier_parser"));
 
 const char* scope_delimiter = "::";

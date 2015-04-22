@@ -22,8 +22,24 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+
+#include <functional>
+#include <boost/tokenizer.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/range/algorithm.hpp>
+#include <boost/spirit/include/qi.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/spirit/include/phoenix_function.hpp>
+#include <boost/spirit/include/phoenix_stl.hpp>
+#include <boost/spirit/include/phoenix_core.hpp>
+#include <boost/spirit/include/phoenix_fusion.hpp>
+#include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/phoenix_object.hpp>
+#include <boost/spirit/repository/include/qi_distinct.hpp>
+
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
+#include "dogen/stitch/types/builder.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
 namespace {
@@ -50,6 +66,98 @@ const std::string unfinished_scriplet("Start scriptlet block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
 const std::string separator_not_found("Expected separator on KVP.");
+
+using namespace boost::spirit;
+
+template<typename Iterator>
+struct grammar : qi::grammar<Iterator> {
+    std::shared_ptr<dogen::stitch::builder> builder;
+    qi::rule<Iterator, std::string()> content, new_lined_content;
+    qi::rule<Iterator> standard_control_block_begin,
+        expression_control_block_begin, directive_begin,
+        control_block_end, expression_block, standard_block, text_block,
+        directive, text_template;
+    std::function<void()> start_standard_control_block_,
+        start_expression_control_block_, start_directive_,
+        end_control_block_;
+    std::function<void(const std::string&)> add_content_;
+
+    void start_standard_control_block() {
+        builder->start_standard_control_block();
+    }
+    void start_expression_control_block() {
+        builder->start_expression_control_block();
+    }
+    void start_directive() {
+        builder->start_directive();
+    }
+    void end_control_block() {
+        builder->end_control_block();
+    }
+
+    void add_content(const std::string& s) { builder->add_content(s); }
+
+    void setup_functors() {
+        start_standard_control_block_ = std::bind(
+            &grammar::start_standard_control_block, this);
+        start_expression_control_block_ = std::bind(
+            &grammar::start_expression_control_block, this);
+        start_directive_ = std::bind(&grammar::start_directive, this);
+        end_control_block_ = std::bind(&grammar::end_control_block, this);
+        add_content_ = std::bind(&grammar::add_content, this,
+            std::placeholders::_1);
+    }
+
+    grammar(std::shared_ptr<dogen::stitch::builder> b)
+        : grammar::base_type(text_template), builder(b) {
+        setup_functors();
+        using qi::on_error;
+        using qi::fail;
+        using boost::spirit::qi::labels::_val;
+        using boost::spirit::qi::_1;
+        using boost::spirit::ascii::string;
+
+        using boost::phoenix::val;
+        using boost::phoenix::at_c;
+        using boost::phoenix::push_back;
+        using boost::phoenix::construct;
+
+        standard_control_block_begin = string("<#+");
+        expression_control_block_begin = string("<#=");
+        directive_begin = string("<#@");
+        control_block_end = string("#>");
+        content = *(boost::spirit::qi::char_ - boost::spirit::qi::eol);
+        new_lined_content = *(boost::spirit::qi::char_);
+
+        expression_block =
+            expression_control_block_begin[start_expression_control_block_] >>
+            -(content[add_content_]) >>
+            control_block_end[end_control_block_];
+        standard_block =
+            standard_control_block_begin[start_standard_control_block_] >>
+            -(new_lined_content[add_content_]) >>
+            control_block_end[end_control_block_];
+        directive =
+            directive_begin >>
+            content[add_content_] >>
+            control_block_end;
+        text_block = new_lined_content[add_content_];
+        text_template =
+            *(directive) >>
+            *(expression_block | standard_block | text_block);
+
+        on_error<fail>
+            (
+                text_template,
+                std::cout << val("Error! Expecting ")
+                << _4                               // what failed?
+                << val(" here: \"")
+                << construct<std::string>(_3, _2)   // iterators to error-pos, end
+                << val("\"")
+                << std::endl
+                );
+    }
+};
 
 }
 

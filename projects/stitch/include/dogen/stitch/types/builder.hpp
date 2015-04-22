@@ -18,21 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/line.hpp"
-#include "dogen/stitch/types/parser.hpp"
-#include "dogen/stitch/types/traits.hpp"
-#include "dogen/stitch/types/builder.hpp"
-#include "dogen/stitch/types/segment.hpp"
-#include "dogen/stitch/types/expander.hpp"
-#include "dogen/stitch/types/workflow.hpp"
-#include "dogen/stitch/types/formatter.hpp"
-#include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/segment_types.hpp"
+#ifndef DOGEN_STITCH_TYPES_BUILDER_FWD_HPP
+#define DOGEN_STITCH_TYPES_BUILDER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
 #include "dogen/stitch/types/text_template.hpp"
-#include "dogen/stitch/types/building_error.hpp"
-#include "dogen/stitch/types/workflow_error.hpp"
-#include "dogen/stitch/types/settings_bundle.hpp"
-#include "dogen/stitch/types/formatting_error.hpp"
-#include "dogen/stitch/types/stitching_settings.hpp"
-#include "dogen/stitch/types/settings_bundle_factory.hpp"
-#include "dogen/stitch/types/stitching_settings_factory.hpp"
+
+namespace dogen {
+namespace stitch {
+
+class builder {
+public:
+    builder();
+
+public:
+    void start_standard_control_block();
+    void start_expression_control_block();
+    void start_directive();
+    void add_content(const std::string& content);
+    void end_control_block();
+
+public:
+    text_template build();
+
+private:
+    bool in_standard_control_block_;
+    bool in_expression_control_block_;
+    bool in_directive_;
+    text_template text_template_;
+};
+
+} }
+
+#endif
