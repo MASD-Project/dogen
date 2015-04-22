@@ -10,6 +10,11 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Move =identifier_parser= to SML                                   :story:
+
+We will require parsing identifiers from JSON so we need access to
+identifier parser within SML.
+
 *** Adding a dependency to a non-existent expander crashes dogen      :story:
 
 We are not checking that all dependencies exist when building the
