@@ -10,6 +10,14 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add kvp support to =identifier_parser=                            :story:
+
+We have code to split kvps all over the place. We should do this in a
+single pace, and use boost spirit or tokenizer. For one such
+implementation with spirit see:
+
+[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
+
 *** Move =identifier_parser= to SML                                   :story:
 
 We will require parsing identifiers from JSON so we need access to
