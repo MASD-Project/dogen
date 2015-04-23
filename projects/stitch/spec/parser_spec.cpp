@@ -101,13 +101,14 @@ const std::string starting_scriptlet_block_in_block(
 const std::string end_without_start("without a start block");
 const std::string inline_block(" inline block ");
 
-dogen::stitch::text_template parse(const std::string& s) {
+dogen::stitch::text_template
+parse(const std::string& s, const bool use_spirit_parser = false) {
     using namespace dogen::dynamic::schema::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
-    dogen::stitch::parser p(w);
+    dogen::stitch::parser p(w, use_spirit_parser);
     return p.parse(s);
 }
 

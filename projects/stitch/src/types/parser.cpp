@@ -19,16 +19,13 @@
  *
  */
 #include <sstream>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-
 #include <functional>
-#include <boost/tokenizer.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
@@ -36,7 +33,6 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
-
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/builder.hpp"
@@ -164,15 +160,16 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen {
 namespace stitch {
 
-parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
+parser::parser(const dynamic::schema::workflow& w,
+    const bool use_spirit_parser) : schema_workflow_(w),
+                                    use_spirit_parser_(use_spirit_parser) {}
 
-text_template parser::parse(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
+text_template parser::parse_with_spirit(const std::string& /*s*/) const {
     text_template r;
-
-    if (s.empty())
-        return r;
-
+    return r;
+}
+text_template parser::parse_with_legacy(const std::string& s) const {
+    text_template r;
     line output_line;
     bool in_scriplet_block(false), in_declarations_block(true);
     std::string input_line;
@@ -297,6 +294,17 @@ text_template parser::parse(const std::string& s) const {
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
     return r;
+}
+
+text_template parser::parse(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
+    if (s.empty())
+        return text_template();
+
+    if (use_spirit_parser_)
+        return parse_with_spirit(s);
+    else
+        return parse_with_legacy(s);
 }
 
 } }
