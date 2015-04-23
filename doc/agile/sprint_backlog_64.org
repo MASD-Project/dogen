@@ -401,6 +401,7 @@ Grammar:
 - template: *(text block | expression block | standard block)
 
 *** STARTED Add support for inline code in stitch                     :story:
+    CLOCK: [2015-04-23 Thu 20:06]--[2015-04-23 Thu 20:51] =>  0:45
     CLOCK: [2015-04-21 Tue 20:37]--[2015-04-21 Tue 21:59] =>  1:22
 
 At present we do not support the =<#=xyz#>= and =<#+xyz#>= forms in

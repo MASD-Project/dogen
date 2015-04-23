@@ -31,15 +31,18 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("stitch.builder"));
 
 const std::string new_line("\n");
+const std::string equals("=");
+
 const std::string unsupported_state("State is not supported: ");
+const std::string separator_not_found("Expected separator on kvp.");
 
 }
-
 
 namespace dogen {
 namespace stitch {
 
-builder::builder() : current_state_(state_types::in_text_block) {}
+builder::builder(const dynamic::schema::workflow& w)
+    : schema_workflow_(w), current_state_(state_types::in_text_block) {}
 
 void builder::start_standard_control_block() {
     BOOST_LOG_SEV(lg, debug) << "Starting standard control block";
@@ -56,14 +59,38 @@ void builder::start_directive() {
     current_state_ = state_types::in_directive;
 }
 
+void builder::process_directive(const std::string& c) {
+    const auto pos(c.find_first_of(equals));
+    if (pos == std::string::npos) {
+        BOOST_LOG_SEV(lg, error) << separator_not_found;
+        BOOST_THROW_EXCEPTION(building_error(separator_not_found));
+    }
+
+    const auto key(c.substr(0, pos));
+    const auto value(c.substr(pos + 1));
+    directives_.push_back(std::make_pair(key, value));
+}
+
 void builder::add_segmented_content(const std::string& c) {
     switch (current_state_) {
-    case state_types::in_standard_control_block:
+    case state_types::in_standard_control_block: {
+        segment sg;
+        sg.content(c);
+        sg.type(segment_types::scriptlet);
+        current_line_->segments().push_back(sg);
         break;
-    case state_types::in_expression_control_block:
+    }
+    case state_types::in_expression_control_block: {
+        segment sg;
+        sg.content(c);
+        sg.type(segment_types::scriptlet);
+        current_line_->segments().push_back(sg);
         break;
-    case state_types::in_directive:
+    }
+    case state_types::in_directive: {
+        process_directive(c);
         break;
+    }
     case state_types::in_text_block: {
         segment sg;
         sg.content(c);
@@ -120,6 +147,10 @@ void builder::end_control_block() {
 text_template builder::build() {
     if (current_line_)
         text_template_.lines().push_back(*current_line_);
+
+    using dynamic::schema::scope_types;
+    const auto scope(scope_types::root_module);
+    text_template_.extensions(schema_workflow_.execute(scope, directives_));
 
     return text_template_;
 }

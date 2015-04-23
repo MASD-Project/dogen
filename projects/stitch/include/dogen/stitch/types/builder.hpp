@@ -18,15 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_BUILDER_FWD_HPP
-#define DOGEN_STITCH_TYPES_BUILDER_FWD_HPP
+#ifndef DOGEN_STITCH_TYPES_BUILDER_HPP
+#define DOGEN_STITCH_TYPES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <string>
+#include <utility>
 #include <boost/optional.hpp>
+#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
@@ -35,7 +38,7 @@ namespace stitch {
 
 class builder {
 public:
-    builder();
+    explicit builder(const dynamic::schema::workflow& w);
 
 private:
     enum class state_types : unsigned int {
@@ -46,6 +49,7 @@ private:
     };
 
 private:
+    void process_directive(const std::string& c);
     void add_segmented_content(const std::string& c);
 
 public:
@@ -59,6 +63,8 @@ public:
     text_template build();
 
 private:
+    const dynamic::schema::workflow& schema_workflow_;
+    std::list<std::pair<std::string, std::string> > directives_;
     boost::optional<line> current_line_;
     state_types current_state_;
     text_template text_template_;

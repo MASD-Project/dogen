@@ -64,7 +64,7 @@ const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
-const std::string separator_not_found("Expected separator on KVP.");
+const std::string separator_not_found("Expected separator on kvp.");
 
 using namespace boost::spirit;
 
@@ -125,8 +125,8 @@ struct grammar : qi::grammar<Iterator> {
         expression_control_block_begin = string("<#=");
         directive_begin = string("<#@");
         control_block_end = string("#>");
-        content = *(boost::spirit::qi::char_ - boost::spirit::qi::eol);
-        new_lined_content = *(boost::spirit::qi::char_);
+        content %= lexeme[*(boost::spirit::qi::char_ - boost::spirit::qi::eol)];
+        new_lined_content %= lexeme[*(boost::spirit::qi::char_)];
 
         expression_block =
             expression_control_block_begin[start_expression_control_block_] >>
@@ -142,8 +142,7 @@ struct grammar : qi::grammar<Iterator> {
             control_block_end;
         text_block = new_lined_content[add_content_];
         text_template = text_block;
-            // *(directive) >>
-            // *(expression_block | standard_block | text_block);
+        // standard_block |  *(expression_block | standard_block | text_block);
 
         on_error<fail>
             (
@@ -170,7 +169,7 @@ parser::parser(const dynamic::schema::workflow& w,
 text_template parser::parse_with_spirit(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing with spirit.";
 
-    std::shared_ptr<builder> b(new builder());
+    const auto b(std::make_shared<builder>(schema_workflow_));
     std::string::const_iterator it(s.begin());
     std::string::const_iterator end(s.end());
 
