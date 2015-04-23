@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
 #include <sstream>
 #include <functional>
 #include <boost/throw_exception.hpp>
@@ -34,6 +35,7 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
 #include "dogen/stitch/types/builder.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -50,6 +52,7 @@ const std::string start_scriptlet_segment("<#=");
 const std::string start_declaration("<#@");
 const std::string end_block("#>");
 
+const std::string error_msg("Failed to parse string: ");
 const std::string cannot_start_scriptlet(
     "Cannot start scriptlet block in scriptlet block.");
 const std::string cannot_start_scriptlet_in_middle(
@@ -138,9 +141,9 @@ struct grammar : qi::grammar<Iterator> {
             content[add_content_] >>
             control_block_end;
         text_block = new_lined_content[add_content_];
-        text_template =
-            *(directive) >>
-            *(expression_block | standard_block | text_block);
+        text_template = text_block;
+            // *(directive) >>
+            // *(expression_block | standard_block | text_block);
 
         on_error<fail>
             (
@@ -164,11 +167,30 @@ parser::parser(const dynamic::schema::workflow& w,
     const bool use_spirit_parser) : schema_workflow_(w),
                                     use_spirit_parser_(use_spirit_parser) {}
 
-text_template parser::parse_with_spirit(const std::string& /*s*/) const {
-    text_template r;
+text_template parser::parse_with_spirit(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing with spirit.";
+
+    std::shared_ptr<builder> b(new builder());
+    std::string::const_iterator it(s.begin());
+    std::string::const_iterator end(s.end());
+
+    grammar<std::string::const_iterator> g(b);
+    const bool ok(boost::spirit::qi::parse(it, end, g));
+
+    if (!ok || it != end) {
+        BOOST_LOG_SEV(lg, error) << error_msg << s;
+        BOOST_THROW_EXCEPTION(parsing_error(error_msg + s));
+    }
+
+    const auto r(b->build());
+    BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }
+
 text_template parser::parse_with_legacy(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing with legacy.";
+
     text_template r;
     line output_line;
     bool in_scriplet_block(false), in_declarations_block(true);
@@ -293,6 +315,7 @@ text_template parser::parse_with_legacy(const std::string& s) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
+    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }
 

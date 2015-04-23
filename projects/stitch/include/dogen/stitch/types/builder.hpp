@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include <boost/optional.hpp>
+#include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
 namespace dogen {
@@ -34,6 +36,14 @@ namespace stitch {
 class builder {
 public:
     builder();
+
+private:
+    enum class state_types : unsigned int {
+        in_text_block,
+        in_standard_control_block,
+        in_expression_control_block,
+        in_directive
+    };
 
 public:
     void start_standard_control_block();
@@ -46,9 +56,8 @@ public:
     text_template build();
 
 private:
-    bool in_standard_control_block_;
-    bool in_expression_control_block_;
-    bool in_directive_;
+    boost::optional<line> current_line_;
+    state_types current_state_;
     text_template text_template_;
 };
 

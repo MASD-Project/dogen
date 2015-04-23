@@ -122,14 +122,12 @@ BOOST_AUTO_TEST_SUITE(parser)
 BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
     const auto tt(parse(empty));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
     BOOST_CHECK(tt.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_in_single_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_in_single_line));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    const auto tt(parse(only_text_content_in_single_line, true/*use_spirit*/));
 
     BOOST_REQUIRE(tt.lines().size() == 1);
     const auto& line(tt.lines().front());
@@ -142,8 +140,7 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_multi_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_muti_line));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+    const auto tt(parse(only_text_content_muti_line, true/*use_spirit*/));
 
     BOOST_REQUIRE(tt.lines().size() == 2);
 
@@ -163,14 +160,12 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expecte
 BOOST_AUTO_TEST_CASE(empty_scriptlet_block_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_scriptlet_block_results_in_empty_template");
     const auto tt(parse(empty_scriptlet_block));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
     BOOST_CHECK(tt.lines().empty());
 }
 
 BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("single_line_scriptlet_block_results_in_expected_template");
     const auto tt(parse(single_line_scriptlet_block));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
 
     BOOST_REQUIRE(tt.lines().size() == 1);
     const auto& line(tt.lines().front());
@@ -184,8 +179,6 @@ BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
 BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("text_scriptlet_text_single_line_results_in_expected_template");
     const auto tt(parse(text_scriptlet_text_single_line));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
-
     BOOST_REQUIRE(tt.lines().size() == 3);
 
     auto i(tt.lines().begin());
@@ -213,8 +206,6 @@ BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_templat
 BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_single_line_results_in_expected_template");
     const auto tt(parse(scriptlet_text_scriptlet_single_line));
-    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
-
     BOOST_REQUIRE(tt.lines().size() == 3);
 
     auto i(tt.lines().begin());
@@ -289,8 +280,6 @@ BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
 BOOST_AUTO_TEST_CASE(stand_alone_inline_scriptlet_block_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("stand_alone_inline_scriptlet_block_results_in_expected_template");
     // const auto tt(parse(stand_alone_inline_scriptlet_block));
-    // BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
-
     // BOOST_REQUIRE(tt.lines().size() == 1);
     // const auto& line(tt.lines().front());
 
