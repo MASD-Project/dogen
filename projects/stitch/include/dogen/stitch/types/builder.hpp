@@ -45,6 +45,9 @@ private:
         in_directive
     };
 
+private:
+    void add_segmented_content(const std::string& c);
+
 public:
     void start_standard_control_block();
     void start_expression_control_block();

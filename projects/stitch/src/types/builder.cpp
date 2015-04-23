@@ -56,6 +56,30 @@ void builder::start_directive() {
     current_state_ = state_types::in_directive;
 }
 
+void builder::add_segmented_content(const std::string& c) {
+    switch (current_state_) {
+    case state_types::in_standard_control_block:
+        break;
+    case state_types::in_expression_control_block:
+        break;
+    case state_types::in_directive:
+        break;
+    case state_types::in_text_block: {
+        segment sg;
+        sg.content(c);
+        sg.type(segment_types::text);
+        current_line_->segments().push_back(sg);
+        break;
+    }
+    default: {
+        const auto int_state(static_cast<unsigned int>(current_state_));
+        BOOST_LOG_SEV(lg, error) << unsupported_state << int_state;
+        BOOST_THROW_EXCEPTION(building_error(unsupported_state +
+                boost::lexical_cast<std::string>(int_state)));
+    } }
+    return;
+}
+
 void builder::add_content(const std::string& content) {
     BOOST_LOG_SEV(lg, debug) << "Adding content: " << content;
 
@@ -67,27 +91,7 @@ void builder::add_content(const std::string& content) {
     const bool has_new_line(boost::contains(content, new_line));
     if (!has_new_line) {
         BOOST_LOG_SEV(lg, debug) << "Content does not have new lines.";
-
-        switch (current_state_) {
-        case state_types::in_standard_control_block:
-            break;
-        case state_types::in_expression_control_block:
-            break;
-        case state_types::in_directive:
-            break;
-        case state_types::in_text_block: {
-            segment sg;
-            sg.content(content);
-            sg.type(segment_types::text);
-            current_line_->segments().push_back(sg);
-            break;
-        }
-        default: {
-            const auto int_state(static_cast<unsigned int>(current_state_));
-            BOOST_LOG_SEV(lg, error) << unsupported_state << int_state;
-            BOOST_THROW_EXCEPTION(building_error(unsupported_state +
-                    boost::lexical_cast<std::string>(int_state)));
-        } }
+        add_segmented_content(content);
         return;
     }
 
@@ -105,27 +109,7 @@ void builder::add_content(const std::string& content) {
             current_line_ = line();
         }
         is_first = false;
-
-        switch (current_state_) {
-        case state_types::in_standard_control_block:
-            break;
-        case state_types::in_expression_control_block:
-            break;
-        case state_types::in_directive:
-            break;
-        case state_types::in_text_block: {
-            segment sg;
-            sg.content(input_line);
-            sg.type(segment_types::text);
-            current_line_->segments().push_back(sg);
-            break;
-        }
-        default: {
-            const auto int_state(static_cast<unsigned int>(current_state_));
-            BOOST_LOG_SEV(lg, error) << unsupported_state << int_state;
-            BOOST_THROW_EXCEPTION(building_error(unsupported_state +
-                    boost::lexical_cast<std::string>(int_state)));
-        } }
+        add_segmented_content(input_line);
     }
 }
 

@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-23 Thu 08:32]
+Clock summary at [2015-04-23 Thu 08:39]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *29:47* |       |      |
+| *Total time*                                                    | *29:54* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 29:47 |      |
+| Active                                                          |         | 29:54 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -36,7 +36,7 @@ Clock summary at [2015-04-23 Thu 08:32]
 | COMPLETED Add support for spaces after commas on template types |         |       | 0:29 |
 | COMPLETED Simplify stitch model to use lines rather than blocks |         |       | 1:47 |
 | COMPLETED Consider using Microsoft's T4 terminology for stitch  |         |       | 0:06 |
-| STARTED Create a spirit based stitch parser                     |         |       | 3:06 |
+| STARTED Create a spirit based stitch parser                     |         |       | 3:13 |
 | STARTED Add support for inline code in stitch                   |         |       | 1:22 |
 #+end:
 
@@ -354,6 +354,7 @@ Solution for cycles:
   look at the values of b, and update a accordingly.
 
 *** STARTED Create a spirit based stitch parser                       :spike:
+    CLOCK: [2015-04-23 Thu 08:32]--[2015-04-23 Thu 08:39] =>  0:07
     CLOCK: [2015-04-23 Thu 07:46]--[2015-04-23 Thu 08:32] =>  0:46
     CLOCK: [2015-04-23 Thu 07:37]--[2015-04-23 Thu 07:45] =>  0:08
     CLOCK: [2015-04-22 Wed 16:18]--[2015-04-22 Wed 17:51] =>  1:33
