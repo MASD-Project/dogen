@@ -18,11 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/token_types_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#ifndef DOGEN_STITCH_SERIALIZATION_TOKEN_TYPES_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_TOKEN_TYPES_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <boost/serialization/nvp.hpp>
+#include "dogen/stitch/types/token_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::stitch::token_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("token_types", v);
+}
+
+#endif

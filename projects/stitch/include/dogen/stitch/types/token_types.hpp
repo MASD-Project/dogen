@@ -18,11 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/token_types_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#ifndef DOGEN_STITCH_TYPES_TOKEN_TYPES_HPP
+#define DOGEN_STITCH_TYPES_TOKEN_TYPES_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace stitch {
+
+enum class token_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    directive = 1,
+    start_standard_control_block = 2,
+    standard_control_block_content = 3,
+    end_standard_control_block = 4,
+    expression_control_block = 5,
+    text_content = 6,
+    eol = 7,
+    eof = 8
+};
+
+} }
+
+#endif

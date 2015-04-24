@@ -38,11 +38,10 @@ namespace stitch {
  */
 class parser {
 public:
-    parser(const dynamic::schema::workflow& w,
-        const bool use_spirit_parser = false);
+    parser(const dynamic::schema::workflow& w, const bool use_new = false);
 
 private:
-    text_template parse_with_spirit(const std::string& s) const;
+    text_template parse_with_new(const std::string& s) const;
     text_template parse_with_legacy(const std::string& s) const;
 
 public:
@@ -53,7 +52,7 @@ public:
 
 private:
     const dynamic::schema::workflow& schema_workflow_;
-    const bool use_spirit_parser_;
+    const bool use_new_;
 };
 
 } }

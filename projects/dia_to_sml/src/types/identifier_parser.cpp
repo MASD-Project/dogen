@@ -80,8 +80,8 @@ char_spec(String const& str) { return ascii::char_(str); }
 typedef traits::char_spec<std::string>::type charset_tag_type;
 typedef traits::distinct_spec<charset_tag_type>::type keyword_tag_type;
 
-std::string const keyword_spec("0-9a-zA-Z_");
-keyword_tag_type const keyword = distinct_spec(char_spec(keyword_spec));
+const std::string keyword_spec("0-9a-zA-Z_");
+const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 }
 

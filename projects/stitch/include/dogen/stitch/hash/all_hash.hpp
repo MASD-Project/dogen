@@ -20,6 +20,7 @@
  */
 #include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/segment_hash.hpp"
+#include "dogen/stitch/hash/token_types_hash.hpp"
 #include "dogen/stitch/hash/segment_types_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/stitch/hash/settings_bundle_hash.hpp"

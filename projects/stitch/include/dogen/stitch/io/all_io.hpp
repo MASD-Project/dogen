@@ -20,6 +20,7 @@
  */
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/io/segment_io.hpp"
+#include "dogen/stitch/io/token_types_io.hpp"
 #include "dogen/stitch/io/segment_types_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/io/settings_bundle_io.hpp"

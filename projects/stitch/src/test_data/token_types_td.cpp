@@ -18,11 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/token_types_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#include "dogen/stitch/test_data/token_types_td.hpp"
+
+namespace dogen {
+namespace stitch {
+
+token_types_generator::token_types_generator() : position_(0) { }
+void token_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<token_types>(position % 9);
+}
+
+token_types_generator::result_type
+token_types_generator::create(const unsigned int  position) {
+    result_type r;
+    token_types_generator::populate(position, r);
+    return r;
+}
+
+token_types_generator::result_type
+token_types_generator::operator()() {
+    return create(position_++);
+}
+
+} }

@@ -20,6 +20,7 @@
  */
 #include "dogen/stitch/test_data/line_td.hpp"
 #include "dogen/stitch/test_data/segment_td.hpp"
+#include "dogen/stitch/test_data/token_types_td.hpp"
 #include "dogen/stitch/test_data/segment_types_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
 #include "dogen/stitch/test_data/settings_bundle_td.hpp"

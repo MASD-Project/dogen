@@ -18,11 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/token_types_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#ifndef DOGEN_STITCH_TYPES_TOKENIZATION_ERROR_FWD_HPP
+#define DOGEN_STITCH_TYPES_TOKENIZATION_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace dogen {
+namespace stitch {
+
+class tokenization_error;
+
+} }
+
+#endif

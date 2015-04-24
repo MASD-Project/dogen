@@ -18,11 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
-#include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/token_types_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
-#include "dogen/stitch/serialization/text_template_ser.hpp"
-#include "dogen/stitch/serialization/settings_bundle_ser.hpp"
-#include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+#ifndef DOGEN_STITCH_TYPES_TOKENIZER_HPP
+#define DOGEN_STITCH_TYPES_TOKENIZER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include "dogen/stitch/types/token_types.hpp"
+
+namespace dogen {
+namespace stitch {
+
+class tokenizer {
+public:
+    tokenizer(const std::string& original_string);
+
+private:
+    bool handle_new_line();
+    std::string obtain_current_line();
+    bool handle_directive(const std::string& line);
+
+public:
+    bool advance();
+    token_types current_token_type() const;
+    std::string current_token_content() const;
+
+private:
+    const std::string& original_string_;
+    token_types current_token_type_;
+    std::string current_token_content_;
+    unsigned int position_;
+};
+
+} }
+
+#endif

@@ -102,13 +102,13 @@ const std::string end_without_start("without a start block");
 const std::string inline_block(" inline block ");
 
 dogen::stitch::text_template
-parse(const std::string& s, const bool use_spirit_parser = false) {
+parse(const std::string& s, const bool use_new = false) {
     using namespace dogen::dynamic::schema::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
-    dogen::stitch::parser p(w, use_spirit_parser);
+    dogen::stitch::parser p(w, use_new);
     return p.parse(s);
 }
 
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_in_single_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_in_single_line, true/*use_spirit*/));
+    const auto tt(parse(only_text_content_in_single_line));
 
     BOOST_REQUIRE(tt.lines().size() == 1);
     const auto& line(tt.lines().front());
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
 
 BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("string_with_only_text_content_multi_line_results_in_expected_template");
-    const auto tt(parse(only_text_content_muti_line, true/*use_spirit*/));
+    const auto tt(parse(only_text_content_muti_line));
 
     BOOST_REQUIRE(tt.lines().size() == 2);
 

@@ -21,23 +21,17 @@
 #include <memory>
 #include <sstream>
 #include <functional>
+#include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/spirit/include/phoenix_function.hpp>
-#include <boost/spirit/include/phoenix_stl.hpp>
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_fusion.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_object.hpp>
-#include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/builder.hpp"
+#include "dogen/stitch/types/tokenizer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
 namespace {
@@ -66,124 +60,50 @@ const std::string unexpected_additional_content(
     "Unexpected additional content.");
 const std::string separator_not_found("Expected separator on kvp.");
 
-using namespace boost::spirit;
-
-template<typename Iterator>
-struct grammar : qi::grammar<Iterator> {
-    std::shared_ptr<dogen::stitch::builder> builder;
-    qi::rule<Iterator, std::string()> content, new_lined_content;
-    qi::rule<Iterator> standard_control_block_begin,
-        expression_control_block_begin, directive_begin,
-        control_block_end, expression_block, standard_block, text_block,
-        directive, text_template;
-    std::function<void()> start_standard_control_block_,
-        start_expression_control_block_, start_directive_,
-        end_control_block_;
-    std::function<void(const std::string&)> add_content_;
-
-    void start_standard_control_block() {
-        builder->start_standard_control_block();
-    }
-    void start_expression_control_block() {
-        builder->start_expression_control_block();
-    }
-    void start_directive() {
-        builder->start_directive();
-    }
-    void end_control_block() {
-        builder->end_control_block();
-    }
-
-    void add_content(const std::string& s) { builder->add_content(s); }
-
-    void setup_functors() {
-        start_standard_control_block_ = std::bind(
-            &grammar::start_standard_control_block, this);
-        start_expression_control_block_ = std::bind(
-            &grammar::start_expression_control_block, this);
-        start_directive_ = std::bind(&grammar::start_directive, this);
-        end_control_block_ = std::bind(&grammar::end_control_block, this);
-        add_content_ = std::bind(&grammar::add_content, this,
-            std::placeholders::_1);
-    }
-
-    grammar(std::shared_ptr<dogen::stitch::builder> b)
-        : grammar::base_type(text_template), builder(b) {
-        setup_functors();
-        using qi::on_error;
-        using qi::fail;
-        using boost::spirit::qi::labels::_val;
-        using boost::spirit::qi::_1;
-        using boost::spirit::ascii::string;
-
-        using boost::phoenix::val;
-        using boost::phoenix::at_c;
-        using boost::phoenix::push_back;
-        using boost::phoenix::construct;
-
-        standard_control_block_begin = string("<#+");
-        expression_control_block_begin = string("<#=");
-        directive_begin = string("<#@");
-        control_block_end = string("#>");
-        content %= lexeme[*(boost::spirit::qi::char_ - boost::spirit::qi::eol)];
-        new_lined_content %= lexeme[*(boost::spirit::qi::char_)];
-
-        expression_block =
-            expression_control_block_begin[start_expression_control_block_] >>
-            -(content[add_content_]) >>
-            control_block_end[end_control_block_];
-        standard_block =
-            standard_control_block_begin[start_standard_control_block_] >>
-            -(new_lined_content[add_content_]) >>
-            control_block_end[end_control_block_];
-        directive =
-            directive_begin >>
-            content[add_content_] >>
-            control_block_end;
-        text_block = new_lined_content[add_content_];
-        text_template = text_block;
-        // standard_block |  *(expression_block | standard_block | text_block);
-
-        on_error<fail>
-            (
-                text_template,
-                std::cout << val("Error! Expecting ")
-                << _4                               // what failed?
-                << val(" here: \"")
-                << construct<std::string>(_3, _2)   // iterators to error-pos, end
-                << val("\"")
-                << std::endl
-                );
-    }
-};
-
 }
 
 namespace dogen {
 namespace stitch {
 
 parser::parser(const dynamic::schema::workflow& w,
-    const bool use_spirit_parser) : schema_workflow_(w),
-                                    use_spirit_parser_(use_spirit_parser) {}
+    const bool use_new) : schema_workflow_(w),
+                                    use_new_(use_new) {}
 
-text_template parser::parse_with_spirit(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing with spirit.";
+text_template parser::parse_with_new(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing with new.";
 
-    const auto b(std::make_shared<builder>(schema_workflow_));
-    std::string::const_iterator it(s.begin());
-    std::string::const_iterator end(s.end());
+    tokenizer t(s);
+    text_template r;
+    boost::optional<line> current_line;
+    while (t.advance()) {
+        if (t.current_token_type() == token_types::eof) {
+            BOOST_LOG_SEV(lg, debug) << "Found end of file.";
+            continue;
+        }
 
-    grammar<std::string::const_iterator> g(b);
-    const bool ok(boost::spirit::qi::parse(it, end, g));
+        if (!current_line) {
+            BOOST_LOG_SEV(lg, debug) << "No current line so creating it.";
+            current_line = line();
+        }
 
-    if (!ok || it != end) {
-        BOOST_LOG_SEV(lg, error) << error_msg << s;
-        BOOST_THROW_EXCEPTION(parsing_error(error_msg + s));
+        if (t.current_token_type() == token_types::eol) {
+            BOOST_LOG_SEV(lg, debug) << "Found end of line.";
+            r.lines().push_back(*current_line);
+            current_line = boost::optional<line>();
+            continue;
+        }
+
+        if (t.current_token_type() == token_types::text_content) {
+            segment sg;
+            sg.type(segment_types::text);
+            sg.content(t.current_token_content());
+            current_line->segments().push_back(sg);
+            continue;
+        }
+
+        if (current_line)
+            r.lines().push_back(*current_line);
     }
-
-    const auto r(b->build());
-    BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }
 
@@ -323,8 +243,8 @@ text_template parser::parse(const std::string& s) const {
     if (s.empty())
         return text_template();
 
-    if (use_spirit_parser_)
-        return parse_with_spirit(s);
+    if (use_new_)
+        return parse_with_new(s);
     else
         return parse_with_legacy(s);
 }
