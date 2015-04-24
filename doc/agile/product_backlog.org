@@ -1584,6 +1584,9 @@ model rather than SML. So the name of SML must reflect the fact that
 it is a model of programming objects. Object-Oriented Programming
 Language Model?
 
+Another idea: the Middle-End Model (MEM) or just Middle-End (ME). SML
+is the middle-end of the code generation process.
+
 *** Consider renaming formatters                                      :story:
 
 After reading the [[http://martinfowler.com/eaaDev/PresentationModel.html][Presentation Model]] pattern a bit more carefully, it
@@ -2477,10 +2480,12 @@ all the diagrams:
 We should take advantage of this to define =include_directories= and
 =add_subdirectory=. At present we are doing these manually.
 
-*** Consider using spirit JSON                                        :story:
+*** Consider using a proper JSON library                              :story:
 
 We could use a full-blow JSON parser rather than the property tree
 one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
+Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
 
 *** Persisters only support XML                                       :story:
 
@@ -3572,7 +3577,12 @@ into the available attributes and see if they make sense as dogen
 traits to control JSON. Some of these may have wider application and
 be used to control other serialisation formats.
 
-*** Raw JSON vs cooked JSON                                           :story:
+*** Add support for JSON serialisation                                :story:
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
 
 If we do implement customisable JSON serialisation, we should still
 use the raw format in streaming. We need a way to disable the cooked
@@ -5805,7 +5815,13 @@ handling all of the use cases (reorder columns, remove columns, add
 columns, updating rows, etc). All of this code can be inferred from
 the type hierarchy.
 
-*** Add support for BSON                                              :story:
+*** Consider replacing out libxml bindings with RapidXML              :story:
+
+We rolled our own libxml bindings for reading the dia XML. However, it
+may make more sense to use [[https://github.com/dwd/rapidxml][RapidXML]] instead. It seems basic but our
+needs are also very basic.
+
+*** Add support for BSON serialisation                                :story:
 
 It would be useful to support Mongo DB's BSON. There is a C++ stand
 alone library for this:
