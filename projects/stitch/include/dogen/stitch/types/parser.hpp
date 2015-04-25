@@ -70,6 +70,12 @@ private:
     line parse_line_with_expression_block(const std::string& input_line) const;
 
     /**
+     * @brief Parses lines that contain inline standard blocks.
+     */
+    line parse_line_with_inline_standard_block(
+        const std::string& input_line) const;
+
+    /**
      * @brief Parse lines with declarations.
      */
     std::pair<std::string, std::string>

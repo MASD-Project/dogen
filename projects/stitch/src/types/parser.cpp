@@ -169,6 +169,19 @@ parse_line_with_expression_block(const std::string& input_line) const {
     return r;
 }
 
+line parser::
+parse_line_with_inline_standard_block(const std::string& input_line) const {
+    BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
+    auto cooked_line(input_line);
+    boost::replace_all(cooked_line, start_scriptlet_block, empty);
+    boost::replace_all(cooked_line, end_block, empty);
+
+    const auto sg(create_scriptlet_segment(cooked_line, do_trim));
+    line r;
+    r.segments().push_back(sg);
+    return r;
+}
+
 std::pair<std::string, std::string> parser::
 parse_line_with_declaration(const std::string& input_line) const {
 
@@ -199,13 +212,14 @@ parse_line_with_declaration(const std::string& input_line) const {
     return std::make_pair(key, value);
 }
 
+
 text_template parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     if (s.empty())
         return text_template();
 
-    text_template r;
     line output_line;
+    std::list<line> lines;
     bool in_scriplet_block(false), in_declarations_block(true);
     std::string input_line;
     std::istringstream is(s);
@@ -214,7 +228,7 @@ text_template parser::parse(const std::string& s) const {
         BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
 
         if (boost::contains(input_line, start_scriptlet_segment)) {
-            r.lines().push_back(parse_line_with_expression_block(input_line));
+            lines.push_back(parse_line_with_expression_block(input_line));
             continue;
         }
 
@@ -241,17 +255,8 @@ text_template parser::parse(const std::string& s) const {
             }
 
             if (boost::ends_with(input_line, end_block)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
-                boost::replace_all(input_line, start_scriptlet_block, empty);
-                boost::replace_all(input_line, end_block, empty);
-
-                segment sg;
-                sg.type(segment_types::scriptlet);
-                boost::trim(input_line);
-                sg.content(input_line);
-                output_line.segments().push_back(sg);
-                r.lines().push_back(output_line);
-                output_line.segments().clear();
+                const auto l(parse_line_with_inline_standard_block(input_line));
+                lines.push_back(l);
                 continue;
             }
 
@@ -302,7 +307,7 @@ text_template parser::parse(const std::string& s) const {
             in_scriplet_block ? segment_types::scriptlet : segment_types::text);
         sg.content(input_line);
         output_line.segments().push_back(sg);
-        r.lines().push_back(output_line);
+        lines.push_back(output_line);
         output_line.segments().clear();
     }
 
@@ -310,6 +315,9 @@ text_template parser::parse(const std::string& s) const {
         BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
         BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
     }
+
+    text_template r;
+    r.lines(lines);
 
     if (!kvps.empty()) {
         using dynamic::schema::scope_types;
