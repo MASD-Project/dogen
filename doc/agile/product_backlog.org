@@ -1991,10 +1991,20 @@ Validator should provide contextual validation error messages:
 : in object 'my_object (Dia ID: O0)
 : property 'my_property' has empty name.
 
-*Merged with validator command line option:*
+*** Validation-only or dry-run mode                                   :story:
+
+Both stitcher and knitter could do with a "dry-run" mode in which we'd
+do everything except for actually outputting.
+
+*For Knitter*
 
 It would be nice if one could just check if a dia diagram is valid for
 code generation, e.g. =--validate= or something along those lines.
+
+*For Stitch*
+
+We are interested in performing the parsing. This would be useful for
+example for a flymake mode in emacs.
 
 *** Vistor is only supported at the base class level                  :story:
 
