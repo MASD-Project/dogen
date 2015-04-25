@@ -48,7 +48,6 @@ endmacro()
 #
 # compiler and linker flags
 
-
 # enable as many warnings as possible
 set(warning_flags "-Wall -Wextra")
 

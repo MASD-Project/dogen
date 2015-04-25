@@ -32,3 +32,11 @@ set_target_properties(cpp PROPERTIES
     OUTPUT_NAME dogen_cpp)
 
 install(TARGETS cpp ARCHIVE DESTINATION lib COMPONENT libraries)
+
+add_custom_target(stitch_cpp
+    COMMENT "Stitching C++ model" VERBATIM
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${stitcher_binary}
+    --target ${CMAKE_CURRENT_SOURCE_DIR}/
+    --verbose)
+add_dependencies(stitch_all stitch_cpp)

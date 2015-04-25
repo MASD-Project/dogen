@@ -16,27 +16,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-add_custom_target(codegen)
-
-set(dogen_dir "${CMAKE_BINARY_DIR}/stage/bin/")
-set(dogen_binary "${dogen_dir}/dogen_knitter")
-set(dogen_version "")
-set(use_latest_knitter FALSE)
-execute_process(
-    COMMAND ${dogen_binary} --version
-    COMMAND head -n1
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    OUTPUT_VARIABLE dogen_version
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-message(STATUS "Using: ${dogen_version}")
-
 set(target sml)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
@@ -55,15 +39,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target dia)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
@@ -78,15 +62,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target config)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Config model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
@@ -101,15 +85,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target cpp)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
@@ -124,19 +108,22 @@ add_custom_target(codegen_${target}
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
+    --ignore-files-matching-regex .*stitch
+    --ignore-files-matching-regex .*_stitch.hpp
+    --ignore-files-matching-regex .*_stitch.cpp
     --verbose
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target database)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
     --cpp-enable-facet domain
@@ -156,15 +143,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen::test_models)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target knit)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
@@ -183,15 +170,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target dia_to_sml)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Dia to SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
@@ -210,15 +197,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target cpp_formatters)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating C++ Formatters model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
@@ -240,15 +227,15 @@ add_custom_target(codegen_${target}
     --external-module-path dogen)
 
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target sml_to_cpp)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating SML to C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
@@ -269,15 +256,15 @@ add_custom_target(codegen_${target}
     --external-module-path dogen)
 
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target formatters)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
@@ -301,15 +288,15 @@ add_custom_target(codegen_${target}
     --external-module-path dogen)
 
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target frontend)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Frontend model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
@@ -330,15 +317,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target backend)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Backend model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen
@@ -359,15 +346,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target schema)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Dynamic Schema model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/dynamic
     --cpp-enable-facet domain
@@ -384,15 +371,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen::dynamic)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target expansion)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Dynamic Expansion model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
@@ -412,15 +399,15 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen::dynamic)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})
 
 set(target stitch)
-add_custom_target(codegen_${target}
+add_custom_target(knit_${target}
     COMMENT "Generating Stitch model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${dogen_binary}
+    COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
@@ -439,6 +426,6 @@ add_custom_target(codegen_${target}
     --delete-extra-files
     --external-module-path dogen)
 if(use_latest_knitter)
-    add_dependencies(codegen_${target} knitter)
+    add_dependencies(knit_${target} knitter)
 endif()
-add_dependencies(codegen codegen_${target})
+add_dependencies(knit_all knit_${target})

@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-25 Sat 16:01]
+Clock summary at [2015-04-25 Sat 20:58]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *36:56* |       |      |
+| *Total time*                                                    | *37:30* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 36:56 |      |
+| Active                                                          |         | 37:30 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -40,6 +40,7 @@ Clock summary at [2015-04-25 Sat 16:01]
 | COMPLETED Add support for inline code in stitch                 |         |       | 2:07 |
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
+| STARTED Create a forward declarations formatter using stitch    |         |       | 0:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -462,6 +463,16 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
+*** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
+
+We need to start making use of stitch in dogen. To start off with, we
+will manually run the stitch command against a template to generate
+the =cpp= file and include the header file from the formatter. We also
+need to inject the stitch file name to the list of ignores, probably
+by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
+avoid clashes with the source code of stitch itself.
+
 *** Handling of managed directories is incorrect                      :story:
 
 At present we are querying the dia to sml transformer to figure out
@@ -524,14 +535,5 @@ knitting - but some do. We need a way to filter these. One possibility
 is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
-
-*** Create a forward declarations formatter using stitch              :story:
-
-We need to start making use of stitch in dogen. To start off with, we
-will manually run the stitch command against a template to generate
-the =cpp= file and include the header file from the formatter. We also
-need to inject the stitch file name to the list of ignores, probably
-by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
-avoid clashes with the source code of stitch itself.
 
 ** Deprecated

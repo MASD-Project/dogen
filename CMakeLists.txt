@@ -274,6 +274,48 @@ else()
 endif()
 
 #
+# Top-level knitter target.
+#
+add_custom_target(knit_all)
+set(use_latest_knitter FALSE)
+if(use_latest_knitter)
+    add_dependencies(knit_all knitter)
+endif()
+
+set(knitter_binary "${stage_bin_dir}/dogen_knitter")
+set(knitter_version "")
+execute_process(
+    COMMAND ${knitter_binary} --version
+    COMMAND head -n1
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    OUTPUT_VARIABLE knitter_version
+    RESULT_VARIABLE ret_var
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message(STATUS "Using: ${knitter_version}")
+
+#
+# Top-level stitcher target.
+#
+add_custom_target(stitch_all)
+set(use_latest_stitcher FALSE)
+if(use_latest_stitcher)
+    add_dependencies(stitch_all stitcher)
+endif()
+
+set(stitcher_binary "${stage_bin_dir}/dogen_stitcher")
+set(stitcher_version "")
+execute_process(
+    COMMAND ${stitcher_binary} --version
+    COMMAND head -n1
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    OUTPUT_VARIABLE stitcher_version
+    RESULT_VARIABLE ret_var
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+message(STATUS "Using: ${stitcher_version}")
+
+#
 # aggregate targets
 #
 add_custom_target(run_all_specs)
