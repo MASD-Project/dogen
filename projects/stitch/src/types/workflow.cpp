@@ -46,6 +46,7 @@ const std::string fields_dir("fields");
 const std::string stitch_extension(".stitch");
 const std::string no_template_paths("No paths to text templates found.");
 const std::string empty_template("Template has no content: ");
+const std::string error_in_file("Failed to parse file: ");
 
 }
 
@@ -139,9 +140,14 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     std::forward_list<text_template> r;
     const parser p(rp);
     for (const auto& pair : text_templates_as_string) {
-        auto tt(p.parse(pair.second));
-        perform_expansion(pair.first, tt.extensions());
-        r.push_front(tt);
+        try {
+            auto tt(p.parse(pair.second));
+            perform_expansion(pair.first, tt.extensions());
+            r.push_front(tt);
+        } catch(boost::exception& e) {
+            e << error_in_file(pair.first.generic_string());
+            throw;
+        }
     }
 
     return r;

@@ -22,6 +22,7 @@
 #include <sstream>
 #include <functional>
 #include <boost/optional.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
@@ -218,102 +219,111 @@ text_template parser::parse(const std::string& s) const {
     if (s.empty())
         return text_template();
 
-    line output_line;
     std::list<line> lines;
-    bool in_scriplet_block(false), in_declarations_block(true);
-    std::string input_line;
-    std::istringstream is(s);
+    unsigned int line_number(0);
     std::list<std::pair<std::string, std::string> > kvps;
-    while (std::getline(is, input_line)) {
-        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
+    try {
+        line output_line;
+        bool in_scriplet_block(false), in_declarations_block(true);
+        std::string input_line;
+        std::istringstream is(s);
 
-        if (boost::contains(input_line, start_scriptlet_segment)) {
-            lines.push_back(parse_line_with_expression_block(input_line));
-            continue;
-        }
+        while (std::getline(is, input_line)) {
+            ++line_number;
+            BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
 
-        if (boost::starts_with(input_line, start_declaration)) {
-            BOOST_LOG_SEV(lg, debug) << "Line is declaration";
-            if (!in_declarations_block) {
+            if (boost::contains(input_line, start_scriptlet_segment)) {
+                lines.push_back(parse_line_with_expression_block(input_line));
+                continue;
+            }
+
+            if (boost::starts_with(input_line, start_declaration)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is declaration";
+                if (!in_declarations_block) {
+                    BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(unexpected_declaration));
+                }
+
+                const auto kvp(parse_line_with_declaration(input_line));
+                kvps.push_back(kvp);
+                continue;
+            }
+
+            in_declarations_block = false;
+
+            if (boost::starts_with(input_line, start_scriptlet_block)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
+
+                if (in_scriplet_block) {
+                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
+                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
+                }
+
+                if (boost::ends_with(input_line, end_block)) {
+                    const auto l(parse_line_with_inline_standard_block(input_line));
+                    lines.push_back(l);
+                    continue;
+                }
+
+                if (input_line.size() != 3) {
+                    BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(unexpected_additional_content));
+                }
+
+                in_scriplet_block = true;
+                continue;
+            }
+
+            if (boost::contains(input_line, start_scriptlet_block)) {
+                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
+                BOOST_THROW_EXCEPTION(
+                    parsing_error(cannot_start_scriptlet_in_middle));
+            }
+
+            if (boost::contains(input_line, start_declaration)) {
                 BOOST_LOG_SEV(lg, error) << unexpected_declaration;
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
             }
 
-            const auto kvp(parse_line_with_declaration(input_line));
-            kvps.push_back(kvp);
-            continue;
+            if (boost::contains(input_line, end_block)) {
+                BOOST_LOG_SEV(lg, debug) << "Closing end block";
+
+                if (!in_scriplet_block) {
+                    BOOST_LOG_SEV(lg, error) << end_without_start;
+                    BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+                }
+
+                if (input_line.size() != 2) {
+                    BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(unexpected_additional_content));
+                }
+
+                if (in_scriplet_block) {
+                    BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
+                    in_scriplet_block = false;
+                    continue;
+                }
+            }
+
+            segment sg;
+            sg.type(in_scriplet_block ?
+                segment_types::scriptlet : segment_types::text);
+            sg.content(input_line);
+            output_line.segments().push_back(sg);
+            lines.push_back(output_line);
+            output_line.segments().clear();
         }
 
-        in_declarations_block = false;
-
-        if (boost::starts_with(input_line, start_scriptlet_block)) {
-            BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
-
-            if (in_scriplet_block) {
-                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
-                BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
-            }
-
-            if (boost::ends_with(input_line, end_block)) {
-                const auto l(parse_line_with_inline_standard_block(input_line));
-                lines.push_back(l);
-                continue;
-            }
-
-            if (input_line.size() != 3) {
-                BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
-                BOOST_THROW_EXCEPTION(
-                    parsing_error(unexpected_additional_content));
-            }
-
-            in_scriplet_block = true;
-            continue;
+        if (in_scriplet_block) {
+            BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
+            BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
         }
-
-        if (boost::contains(input_line, start_scriptlet_block)) {
-            BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
-            BOOST_THROW_EXCEPTION(
-                parsing_error(cannot_start_scriptlet_in_middle));
-        }
-
-        if (boost::contains(input_line, start_declaration)) {
-            BOOST_LOG_SEV(lg, error) << unexpected_declaration;
-            BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
-        }
-
-        if (boost::contains(input_line, end_block)) {
-            BOOST_LOG_SEV(lg, debug) << "Closing end block";
-
-            if (!in_scriplet_block) {
-                BOOST_LOG_SEV(lg, error) << end_without_start;
-                BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
-            }
-
-            if (input_line.size() != 2) {
-                BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
-                BOOST_THROW_EXCEPTION(
-                    parsing_error(unexpected_additional_content));
-            }
-
-            if (in_scriplet_block) {
-                BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
-                in_scriplet_block = false;
-                continue;
-            }
-        }
-
-        segment sg;
-        sg.type(
-            in_scriplet_block ? segment_types::scriptlet : segment_types::text);
-        sg.content(input_line);
-        output_line.segments().push_back(sg);
-        lines.push_back(output_line);
-        output_line.segments().clear();
-    }
-
-    if (in_scriplet_block) {
-        BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
-        BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
+    } catch (boost::exception& e) {
+        e << error_at_line(boost::lexical_cast<std::string>(line_number));
+        throw;
     }
 
     text_template r;

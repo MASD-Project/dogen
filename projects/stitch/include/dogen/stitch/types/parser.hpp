@@ -37,6 +37,11 @@ namespace dogen {
 namespace stitch {
 
 /**
+ * @brief Provides line number information on errors.
+ */
+typedef boost::error_info<struct tag_line_number, std::string> error_at_line;
+
+/**
  * @brief Converts a string that respects the grammer of a text
  * template into a object representation of the text template.
  */

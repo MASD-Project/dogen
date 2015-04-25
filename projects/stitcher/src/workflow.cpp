@@ -18,13 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <iostream>
+#include <boost/exception/all.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/config/version.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 #include "dogen/stitcher/parser_validation_error.hpp"
+#include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 #include "dogen/stitcher/workflow.hpp"
 
@@ -38,7 +41,7 @@ const std::string get_help("Use --help option to see usage instructions.");
 const std::string stitcher_product("Dogen Stitcher v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
-const std::string log_file_msg("See the log file for details: ");
+const std::string log_file_msg("See the log file for details.");
 const std::string errors_msg(" finished with errors.");
 
 /**
@@ -108,8 +111,11 @@ void workflow::stitch_activity(const config::stitching_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << stitcher_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.string()
-                  << "' " << std::endl;
+        std::cerr << log_file_name_.string() << ":0: " << log_file_msg
+                  << std::endl;
+
+            // << log_file_msg << "'" << log_file_name_.string()
+            //       << "' " << std::endl;
     }
 
     if (template_name_.empty())
@@ -131,7 +137,16 @@ void workflow::report_exception(const std::exception& e) const {
                                  << boost::diagnostic_information(*be);
     }
 
-    std::cerr << "Error: " << e.what() << "." << std::endl;
+    if (be) {
+        const auto file_name(boost::get_error_info<stitch::error_in_file>(e));
+        if (file_name)
+            std::cerr << *file_name;
+
+        const auto line_number(boost::get_error_info<stitch::error_at_line>(e));
+        if (line_number)
+            std::cerr << ":" << *line_number << ": error: ";
+    }
+    std::cerr << e.what() << std::endl;
     report_exception_common();
 }
 

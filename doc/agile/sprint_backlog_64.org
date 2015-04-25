@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-25 Sat 13:29]
+Clock summary at [2015-04-25 Sat 16:01]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *36:07* |       |      |
+| *Total time*                                                    | *36:56* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 36:07 |      |
+| Active                                                          |         | 36:56 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -39,6 +39,7 @@ Clock summary at [2015-04-25 Sat 13:29]
 | COMPLETED Create a new stitch parser                            |         |       | 7:27 |
 | COMPLETED Add support for inline code in stitch                 |         |       | 2:07 |
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
+| COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -394,6 +395,14 @@ Problems:
 - we do not detect <#= <#= errors.
 - add expressions to workflow tests.
 
+*** COMPLETED Report line numbers when throwing errors in stitch      :story:
+    CLOSED: [2015-04-25 Sat 16:01]
+    CLOCK: [2015-04-25 Sat 15:12]--[2015-04-25 Sat 16:01] =>  0:49
+
+At present we just throw in stitch. In a template with many lines this
+is going to be a nightmare. We need some indication of the line (and
+ideally column) number where it all went wrong.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -452,12 +461,6 @@ Solution for cycles:
   all other edges. Finally, once the graph has been processed we
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
-
-*** Report line numbers when throwing errors in stitch                :story:
-
-At present we just throw in stitch. In a template with many lines this
-is going to be a nightmare. We need some indication of the line (and
-ideally column) number where it all went wrong.
 
 *** Handling of managed directories is incorrect                      :story:
 

@@ -41,6 +41,11 @@ namespace dogen {
 namespace stitch {
 
 /**
+ * @brief Provides file name information on errors.
+ */
+typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
+
+/**
  * @brief Performs the stitch workflow.
  */
 class workflow {

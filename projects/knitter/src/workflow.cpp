@@ -135,7 +135,7 @@ void workflow::report_exception(const std::exception& e) const {
                                  << boost::diagnostic_information(*be);
     }
 
-    std::cerr << "Error: " << e.what() << "." << std::endl;
+    std::cerr << "Error: " << e.what() << std::endl;
     report_exception_common();
 }
 
