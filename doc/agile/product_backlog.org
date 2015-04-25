@@ -621,6 +621,15 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Consider moving dia diagrams to their own project                 :story:
+
+We originally create a diagrams top-level directory for all of the
+diagrams that generate dogen models. However it may make more sense to
+have the diagrams closer to the project they generate; for example a
+folder within the project. Also, the name "diagrams" is a bit
+misleading. These are not just diagrams, they are also the dogen
+input. We need a name that is a bit more meaningful.
+
 *** Field definition templates do not support facet specific defaults :story:
 
 At present we cannot use field definition templates for fields that
