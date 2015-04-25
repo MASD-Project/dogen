@@ -60,11 +60,6 @@ void workflow::perform_expansion(const boost::filesystem::path& p,
     e.expand(p, o);
 }
 
-boost::filesystem::path workflow::make_absolute_path_activity(
-    const boost::filesystem::path& p) const {
-    return boost::filesystem::absolute(p);
-}
-
 std::forward_list<boost::filesystem::path> workflow::
 get_text_template_paths_activity(
     const boost::filesystem::path& file_or_directory) const {
@@ -142,7 +137,7 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    parser p(rp);
+    const parser p(rp);
     for (const auto& pair : text_templates_as_string) {
         auto tt(p.parse(pair.second));
         perform_expansion(pair.first, tt.extensions());
@@ -178,11 +173,7 @@ write_files_activity(const std::forward_list<formatters::file>& files) const {
 }
 
 void workflow::execute(const boost::filesystem::path& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Starting workflow for: "
-                             << p.generic_string();
-
-    const auto abs(make_absolute_path_activity(p));
-    const auto paths(get_text_template_paths_activity(abs));
+    const auto paths(get_text_template_paths_activity(p));
     validate_text_template_paths(paths);
 
     const auto templates_as_strings(read_text_templates_activity(paths));
@@ -194,8 +185,6 @@ void workflow::execute(const boost::filesystem::path& p) const {
     populate_settings_bundle_activity(schema_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
     write_files_activity(files);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
 }
 
 } }

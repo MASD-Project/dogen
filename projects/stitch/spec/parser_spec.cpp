@@ -121,13 +121,13 @@ const std::string start_and_end("start and end in the same line");
 const std::string middle_of_line("the middle of a line");
 
 dogen::stitch::text_template
-parse(const std::string& s, const bool use_new = false) {
+parse(const std::string& s) {
     using namespace dogen::dynamic::schema::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
-    dogen::stitch::parser p(w, use_new);
+    const dogen::stitch::parser p(w);
     return p.parse(s);
 }
 

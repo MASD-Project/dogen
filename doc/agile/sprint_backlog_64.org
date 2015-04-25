@@ -13,7 +13,7 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-25 Sat 07:17]
+Clock summary at [2015-04-25 Sat 07:25]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
@@ -36,7 +36,7 @@ Clock summary at [2015-04-25 Sat 07:17]
 | COMPLETED Add support for spaces after commas on template types |         |       | 0:29 |
 | COMPLETED Simplify stitch model to use lines rather than blocks |         |       | 1:47 |
 | COMPLETED Consider using Microsoft's T4 terminology for stitch  |         |       | 0:06 |
-| STARTED Create a new stitch parser                              |         |       | 7:27 |
+| COMPLETED Create a new stitch parser                            |         |       | 7:27 |
 | STARTED Add support for inline code in stitch                   |         |       | 2:07 |
 #+end:
 
@@ -294,6 +294,80 @@ use these terms in the spirit parser, but we don't need to worry about
 changing the domain types. We need to document this in the code
 somewhere.
 
+*** COMPLETED Create a new stitch parser                              :spike:
+    CLOSED: [2015-04-25 Sat 07:24]
+    CLOCK: [2015-04-25 Sat 06:08]--[2015-04-25 Sat 07:17] =>  1:09
+    CLOCK: [2015-04-24 Fri 14:59]--[2015-04-24 Fri 18:04] =>  3:05
+    CLOCK: [2015-04-23 Thu 08:32]--[2015-04-23 Thu 08:39] =>  0:07
+    CLOCK: [2015-04-23 Thu 07:46]--[2015-04-23 Thu 08:32] =>  0:46
+    CLOCK: [2015-04-23 Thu 07:37]--[2015-04-23 Thu 07:45] =>  0:08
+    CLOCK: [2015-04-22 Wed 16:18]--[2015-04-22 Wed 17:51] =>  1:33
+    CLOCK: [2015-04-22 Wed 15:43]--[2015-04-22 Wed 16:17] =>  0:34
+    CLOCK: [2015-04-22 Wed 15:31]--[2015-04-22 Wed 15:36] =>  0:05
+
+*New Understanding*
+
+Improve existing parser by adding expression support.
+
+*Previous Understanding*
+
+Whilst trying to add expression support, it became obvious that our
+simplistic parser will not do: it is a bit complicated to represent
+all the permutations when adding inline. We need to:
+
+- write a parser using spirit
+- simplify the model, removing blocks and adding three types of lines:
+  text, scriptlet and mixed; split to it's own story.
+
+Rules:
+
+- standard control blocks multi-line must have only start and end markers on
+  start and end lines;
+- standard control blocks single line must not have anything else in line;
+- directive block must be single line and not have anything else in
+  line and must be the first line or preceded by another directive
+  block;
+- expression control blocks must start and end on the same line.
+
+State Machine:
+
+#+caption: State machine for parser
+[[https://raw.github.com/kitanda/dogen/master/doc/misc/text_template_state_diagram.jpeg]]
+
+Grammar:
+
+- <#+ or <#=: state transition in builder to control block;
+- eol: push line in builder
+- #>: state transition in builder to end of control block
+- start standard control block
+- start expression control block
+- end control block
+- content: qi::char - qi::eol
+- expression block: start expression control block << content << end
+  control block
+- standard block: start expression control block << *([qi::eol])
+  << *(content << *([qi::eol])) << end control block
+- text block: *([content] << *([qi::eol]))
+- template: *(text block | expression block | standard block)
+
+*Notes on Spirit*
+
+- this is actually also quite tricky to do with spirit.
+- had a look at the mono implementation [[https://github.com/mono/monodevelop/tree/master/main/src/addins/TextTemplating/Mono.TextTemplating/Mono.TextTemplating][here]]. It seems much easier to
+  follow their approach and parse the string. We can copy most of
+  their logic and transpose it to our model and perhaps tidy-up our
+  model a bit when their types are better than ours.
+
+*Notes on Mono*
+
+- after it was all said and done, creating a tokeniser etc was not
+  that much different from just expanding our hack to process
+  expressions. So instead of refactoring the parser we just extended
+  it to support expressions, using an approach similar to that of
+  mono.
+- we also noticed some commonalities between this task and SAX. A
+  story will be raised for this in the backlog.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -352,63 +426,6 @@ Solution for cycles:
   all other edges. Finally, once the graph has been processed we
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
-
-*** STARTED Create a new stitch parser                                :spike:
-    CLOCK: [2015-04-25 Sat 06:08]--[2015-04-25 Sat 07:17] =>  1:09
-    CLOCK: [2015-04-24 Fri 14:59]--[2015-04-24 Fri 18:04] =>  3:05
-    CLOCK: [2015-04-23 Thu 08:32]--[2015-04-23 Thu 08:39] =>  0:07
-    CLOCK: [2015-04-23 Thu 07:46]--[2015-04-23 Thu 08:32] =>  0:46
-    CLOCK: [2015-04-23 Thu 07:37]--[2015-04-23 Thu 07:45] =>  0:08
-    CLOCK: [2015-04-22 Wed 16:18]--[2015-04-22 Wed 17:51] =>  1:33
-    CLOCK: [2015-04-22 Wed 15:43]--[2015-04-22 Wed 16:17] =>  0:34
-    CLOCK: [2015-04-22 Wed 15:31]--[2015-04-22 Wed 15:36] =>  0:05
-
-Whilst trying to add inline support, it became obvious that our
-simplistic parser will not do: it is a bit complicated to represent
-all the permutations when adding inline. We need to:
-
-- write a parser using spirit
-- simplify the model, removing blocks and adding three types of lines:
-  text, scriptlet and mixed; split to it's own story.
-
-Rules:
-
-- standard control blocks multi-line must have only start and end markers on
-  start and end lines;
-- standard control blocks single line must not have anything else in line;
-- directive block must be single line and not have anything else in
-  line and must be the first line or preceded by another directive
-  block;
-- expression control blocks must start and end on the same line.
-
-State Machine:
-
-#+caption: State machine for parser
-[[https://raw.github.com/kitanda/dogen/master/doc/misc/text_template_state_diagram.jpeg]]
-
-Grammar:
-
-- <#+ or <#=: state transition in builder to control block;
-- eol: push line in builder
-- #>: state transition in builder to end of control block
-- start standard control block
-- start expression control block
-- end control block
-- content: qi::char - qi::eol
-- expression block: start expression control block << content << end
-  control block
-- standard block: start expression control block << *([qi::eol])
-  << *(content << *([qi::eol])) << end control block
-- text block: *([content] << *([qi::eol]))
-- template: *(text block | expression block | standard block)
-
-*Notes on Spirit*
-
-- this is actually also quite tricky to do with spirit.
-- had a look at the mono implementation [[https://github.com/mono/monodevelop/tree/master/main/src/addins/TextTemplating/Mono.TextTemplating/Mono.TextTemplating][here]]. It seems much easier to
-  follow their approach and parse the string. We can copy most of
-  their logic and transpose it to our model and perhaps tidy-up our
-  model a bit when their types are better than ours.
 
 *** STARTED Add support for inline code in stitch                     :story:
     CLOCK: [2015-04-23 Thu 20:06]--[2015-04-23 Thu 20:51] =>  0:45

@@ -31,7 +31,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/tokenizer.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
 namespace {
@@ -67,50 +66,12 @@ const std::string separator_not_found("Expected separator on kvp.");
 namespace dogen {
 namespace stitch {
 
-parser::parser(const dynamic::schema::workflow& w,
-    const bool use_new) : schema_workflow_(w),
-                                    use_new_(use_new) {}
+parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
 
-text_template parser::parse_with_new(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing with new.";
-
-    tokenizer t(s);
-    text_template r;
-    boost::optional<line> current_line;
-    while (t.advance()) {
-        if (t.current_token_type() == token_types::eof) {
-            BOOST_LOG_SEV(lg, debug) << "Found end of file.";
-            continue;
-        }
-
-        if (!current_line) {
-            BOOST_LOG_SEV(lg, debug) << "No current line so creating it.";
-            current_line = line();
-        }
-
-        if (t.current_token_type() == token_types::eol) {
-            BOOST_LOG_SEV(lg, debug) << "Found end of line.";
-            r.lines().push_back(*current_line);
-            current_line = boost::optional<line>();
-            continue;
-        }
-
-        if (t.current_token_type() == token_types::text_content) {
-            segment sg;
-            sg.type(segment_types::text);
-            sg.content(t.current_token_content());
-            current_line->segments().push_back(sg);
-            continue;
-        }
-
-        if (current_line)
-            r.lines().push_back(*current_line);
-    }
-    return r;
-}
-
-text_template parser::parse_with_legacy(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing with legacy.";
+text_template parser::parse(const std::string& s) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
+    if (s.empty())
+        return text_template();
 
     text_template r;
     line output_line;
@@ -308,17 +269,6 @@ text_template parser::parse_with_legacy(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
-}
-
-text_template parser::parse(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
-    if (s.empty())
-        return text_template();
-
-    if (use_new_)
-        return parse_with_new(s);
-    else
-        return parse_with_legacy(s);
 }
 
 } }
