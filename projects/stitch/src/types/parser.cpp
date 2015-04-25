@@ -29,8 +29,9 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
+#include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
+#include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/types/parser.hpp"
 
 namespace {
@@ -60,6 +61,7 @@ const std::string unexpected_additional_content(
 const std::string unexpected_standard(
     "Standard control blocks are not supported in mixed lines");
 const std::string separator_not_found("Expected separator on kvp.");
+const bool do_trim(true);
 
 }
 
@@ -67,6 +69,102 @@ namespace dogen {
 namespace stitch {
 
 parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
+
+segment parser::create_segment(const segment_types st, const std::string& c,
+    const bool trim_content) const {
+    segment r;
+    r.type(st);
+    if (trim_content)
+        r.content(boost::trim_copy(c));
+    else
+        r.content(c);
+
+    return r;
+}
+
+segment parser::create_text_segment(const std::string& c,
+    const bool trim_content) const {
+    return create_segment(segment_types::text, c, trim_content);
+}
+
+segment parser::create_scriptlet_segment(const std::string& c,
+    const bool trim_content) const {
+    return create_segment(segment_types::scriptlet, c, trim_content);
+}
+
+line parser::
+parse_line_with_expression_block(const std::string input_line) const {
+    BOOST_LOG_SEV(lg, debug) << "Parsing line with expression block.";
+
+    std::string s;
+    unsigned int pos(0);
+    bool in_expression(false);
+    std::list<segment> segments;
+    const auto len(input_line.length());
+    while (pos < len) {
+        const auto c(input_line[pos]);
+        BOOST_LOG_SEV(lg, debug) << "c: " << c;
+        if (c == '<' && pos + 2 < len && input_line[pos + 1] == '#') {
+            const auto type(input_line[pos + 2]);
+            if (type == '@') {
+                BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+                BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
+            } else if (type == '+') {
+                BOOST_LOG_SEV(lg, error) << unexpected_standard;
+                BOOST_THROW_EXCEPTION(parsing_error(unexpected_standard));
+            } else if (type == '=') {
+                BOOST_LOG_SEV(lg, debug) << "Line has expression start";
+
+                if (in_expression) {
+                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
+                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
+                }
+
+                if (!s.empty()) {
+                    segments.push_back(create_text_segment(s));
+                    s.clear();
+                }
+
+                in_expression = true;
+                pos += 3;
+                continue;
+            }
+        } else if (c == '#' && pos + 1 < len &&
+            input_line[pos + 1] == '>') {
+            BOOST_LOG_SEV(lg, debug) << "Line has expression end";
+            if (!in_expression) {
+                BOOST_LOG_SEV(lg, error) << end_without_start;
+                BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+            }
+
+            segments.push_back(create_scriptlet_segment(s, do_trim));
+            s.clear();
+
+            in_expression = false;
+            pos += 2;
+            continue;
+        }
+        s += c;
+        BOOST_LOG_SEV(lg, debug) << "s: " << s;
+        ++pos;
+    }
+
+    if (in_expression) {
+        BOOST_LOG_SEV(lg, error) << scriptlet_expression_not_ended;
+        BOOST_THROW_EXCEPTION(parsing_error(scriptlet_expression_not_ended));
+    }
+
+    if (!s.empty()) {
+        segments.push_back(create_text_segment(s));
+        s.clear();
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished parsing line with expression block.";
+
+    const line r(segments);
+    BOOST_LOG_SEV(lg, debug) << "Line: " << r;
+    return r;
+}
 
 text_template parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
@@ -83,78 +181,7 @@ text_template parser::parse(const std::string& s) const {
         BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
 
         if (boost::contains(input_line, start_scriptlet_segment)) {
-            BOOST_LOG_SEV(lg, debug) << "Line has scriplet segment";
-
-            unsigned int pos(0);
-            const auto len(input_line.length());
-            std::string s;
-            bool in_expression(false);
-            while (pos < len) {
-                const auto c(input_line[pos]);
-                BOOST_LOG_SEV(lg, debug) << "c: " << c;
-                if (c == '<' && pos + 2 < len && input_line[pos + 1] == '#') {
-                    const auto type(input_line[pos + 2]);
-                    if (type == '@') {
-                        BOOST_LOG_SEV(lg, error) << unexpected_declaration;
-                        BOOST_THROW_EXCEPTION(
-                            parsing_error(unexpected_declaration));
-                    } else if (type == '+') {
-                        BOOST_LOG_SEV(lg, error) << unexpected_standard;
-                        BOOST_THROW_EXCEPTION(
-                            parsing_error(unexpected_standard));
-                    } else if (type == '=') {
-                        BOOST_LOG_SEV(lg, debug) << "Line has expression start";
-                        if (!s.empty()) {
-                            segment sg;
-                            sg.type(segment_types::text);
-                            boost::trim(s);
-                            sg.content(s);
-                            output_line.segments().push_back(sg);
-                            s.clear();
-                        }
-
-                        in_expression = true;
-                        pos += 3;
-                        continue;
-                    }
-                } else if (c == '#' && pos + 1 < len &&
-                    input_line[pos + 1] == '>') {
-                    BOOST_LOG_SEV(lg, debug) << "Line has expression end";
-                    if (!in_expression) {
-                        BOOST_LOG_SEV(lg, error) << end_without_start;
-                        BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
-                    }
-
-                    segment sg;
-                    sg.type(segment_types::scriptlet);
-                    boost::trim(s);
-                    sg.content(s);
-                    output_line.segments().push_back(sg);
-                    s.clear();
-
-                    in_expression = false;
-                    pos += 2;
-                    continue;
-                }
-                s += c;
-                BOOST_LOG_SEV(lg, debug) << "s: " << s;
-                ++pos;
-            }
-
-            if (in_expression) {
-                BOOST_LOG_SEV(lg, error) << scriptlet_expression_not_ended;
-                BOOST_THROW_EXCEPTION(
-                    parsing_error(scriptlet_expression_not_ended));
-            }
-
-            if (!s.empty()) {
-                segment sg;
-                sg.type(segment_types::text);
-                sg.content(s);
-                output_line.segments().push_back(sg);
-                s.clear();
-            }
-            r.lines().push_back(output_line);
+            r.lines().push_back(parse_line_with_expression_block(input_line));
             continue;
         }
 

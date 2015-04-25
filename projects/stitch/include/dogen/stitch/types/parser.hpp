@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include "dogen/stitch/types/line.hpp"
+#include "dogen/stitch/types/segment.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 
@@ -39,6 +41,30 @@ namespace stitch {
 class parser {
 public:
     explicit parser(const dynamic::schema::workflow& w);
+
+private:
+    /**
+     * @brief Creates a segment with the supplied properties.
+     */
+    segment create_segment(const segment_types st, const std::string& c,
+        const bool trim_content) const;
+
+    /**
+     * @brief Creates a segment of type text.
+     */
+    segment create_text_segment(const std::string& c,
+        const bool trim_content = false) const;
+
+    /**
+     * @brief Creates a segment of type scriptlet.
+     */
+    segment create_scriptlet_segment(const std::string& c,
+        const bool trim_content = false) const;
+
+    /**
+     * @brief Parses lines that contain expression blocks.
+     */
+    line parse_line_with_expression_block(const std::string input_line) const;
 
 public:
     /**

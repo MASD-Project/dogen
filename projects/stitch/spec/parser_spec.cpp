@@ -104,6 +104,7 @@ const std::string stray_end_expression_block("<#= inline block#>zzz#>");
 const std::string multiline_expression_block(R"(<#=
 single line
 #>)");
+const std::string expression_in_expression("<#= <#= single line #> #>");
 
 const std::string licence_declaration("<#@ licence_name=gpl_v3 #>");
 const std::string licence_name("licence_name");
@@ -449,6 +450,13 @@ BOOST_AUTO_TEST_CASE(stray_end_expression_block_throws) {
 
     contains_checker<parsing_error> c(end_without_start);
     BOOST_CHECK_EXCEPTION(parse(stray_end_expression_block), parsing_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(expression_in_expression_throws) {
+    SETUP_TEST_LOG_SOURCE("expression_in_expression_throws");
+
+    contains_checker<parsing_error> c(starting_scriptlet_block_in_block);
+    BOOST_CHECK_EXCEPTION(parse(expression_in_expression), parsing_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
