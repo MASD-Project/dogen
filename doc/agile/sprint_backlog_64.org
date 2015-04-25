@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-25 Sat 07:53]
+Clock summary at [2015-04-25 Sat 08:18]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *35:20* |       |      |
+| *Total time*                                                    | *35:43* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 35:20 |      |
+| Active                                                          |         | 35:43 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -38,7 +38,7 @@ Clock summary at [2015-04-25 Sat 07:53]
 | COMPLETED Consider using Microsoft's T4 terminology for stitch  |         |       | 0:06 |
 | COMPLETED Create a new stitch parser                            |         |       | 7:27 |
 | COMPLETED Add support for inline code in stitch                 |         |       | 2:07 |
-| STARTED Refactor parser                                         |         |       | 0:27 |
+| STARTED Refactor parser                                         |         |       | 0:50 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -380,9 +380,17 @@ stitch. We need to support these.
 This is actually not trivial. We may need to use spirit for this.
 
 *** STARTED Refactor parser                                           :story:
+    CLOCK: [2015-04-25 Sat 07:54]--[2015-04-25 Sat 08:17] =>  0:23
     CLOCK: [2015-04-25 Sat 07:26]--[2015-04-25 Sat 07:53] =>  0:27
 
 We need to create a few functions to break down the parse method.
+
+Problems:
+
+- we can only handle a single declaration per template. Added fix but
+  still need tests.
+- we do not detect <#= <#= errors.
+- add expressions to workflow tests.
 
 *** STARTED Create a "supported" expander                             :story:
 

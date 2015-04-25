@@ -26,9 +26,11 @@
 #endif
 
 #include <string>
+#include <utility>
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/segment.hpp"
 #include "dogen/stitch/types/text_template.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 
 namespace dogen {
@@ -61,10 +63,17 @@ private:
     segment create_scriptlet_segment(const std::string& c,
         const bool trim_content = false) const;
 
+private:
     /**
      * @brief Parses lines that contain expression blocks.
      */
-    line parse_line_with_expression_block(const std::string input_line) const;
+    line parse_line_with_expression_block(const std::string& input_line) const;
+
+    /**
+     * @brief Parse lines with declarations.
+     */
+    std::pair<std::string, std::string>
+    parse_line_with_declaration(const std::string& input_line) const;
 
 public:
     /**

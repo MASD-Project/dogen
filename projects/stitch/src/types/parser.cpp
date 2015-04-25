@@ -61,6 +61,9 @@ const std::string unexpected_additional_content(
 const std::string unexpected_standard(
     "Standard control blocks are not supported in mixed lines");
 const std::string separator_not_found("Expected separator on kvp.");
+const std::string invalid_declaration(
+    "Invalid characters used in declaration: ");
+
 const bool do_trim(true);
 
 }
@@ -93,7 +96,7 @@ segment parser::create_scriptlet_segment(const std::string& c,
 }
 
 line parser::
-parse_line_with_expression_block(const std::string input_line) const {
+parse_line_with_expression_block(const std::string& input_line) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing line with expression block.";
 
     std::string s;
@@ -166,6 +169,39 @@ parse_line_with_expression_block(const std::string input_line) const {
     return r;
 }
 
+std::pair<std::string, std::string> parser::
+parse_line_with_declaration(const std::string& input_line) const {
+
+    auto cooked_line(input_line);
+    boost::replace_first(cooked_line, start_declaration, empty);
+    boost::replace_last(cooked_line, end_block, empty);
+    boost::trim(cooked_line);
+
+    // FIXME
+    // const std::string reserved("<#");
+    // auto pos(cooked_line.find_first_of(reserved));
+    // if (pos != std::string::npos) {
+    //     BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+    //     BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+    // }
+
+    // pos = cooked_line.find_first_of(end_block);
+    // if (pos != std::string::npos) {
+    //     BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+    //     BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+    // }
+
+    const auto pos(cooked_line.find_first_of(equals));
+    if (pos == std::string::npos) {
+        BOOST_LOG_SEV(lg, error) << separator_not_found << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(separator_not_found + cooked_line));
+    }
+
+    const auto key(cooked_line.substr(0, pos));
+    const auto value(cooked_line.substr(pos + 1));
+    return std::make_pair(key, value);
+}
+
 text_template parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     if (s.empty())
@@ -192,23 +228,8 @@ text_template parser::parse(const std::string& s) const {
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
             }
 
-            boost::replace_all(input_line, start_declaration, empty);
-            boost::replace_all(input_line, end_block, empty);
-            boost::trim(input_line);
-
-            const auto pos(input_line.find_first_of(equals));
-            if (pos == std::string::npos) {
-                BOOST_LOG_SEV(lg, error) << separator_not_found;
-                BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
-            }
-
-            const auto key(input_line.substr(0, pos));
-            const auto value(input_line.substr(pos + 1));
-            kvps.push_back(std::make_pair(key, value));
-
-            using dynamic::schema::scope_types;
-            const auto scope(scope_types::root_module);
-            r.extensions(schema_workflow_.execute(scope, kvps));
+            const auto kvp(parse_line_with_declaration(input_line));
+            kvps.push_back(kvp);
             continue;
         }
 
@@ -291,6 +312,12 @@ text_template parser::parse(const std::string& s) const {
     if (in_scriplet_block) {
         BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
         BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
+    }
+
+    if (!kvps.empty()) {
+        using dynamic::schema::scope_types;
+        const auto scope(scope_types::root_module);
+        r.extensions(schema_workflow_.execute(scope, kvps));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
