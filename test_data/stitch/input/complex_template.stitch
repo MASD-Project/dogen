@@ -11,7 +11,7 @@ this is a relatively more
 <#+
     for (auto i = 0; i < 3; ++i) {
 #>
-    complex
+    complex (<#= i #>)
 <#+
 }
 #>

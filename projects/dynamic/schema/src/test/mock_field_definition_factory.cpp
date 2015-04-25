@@ -25,6 +25,17 @@ namespace dynamic {
 namespace schema {
 namespace test {
 
+field_definition mock_field_definition_factory::copyright_notice() const {
+    field_definition r;
+    r.name().simple("copyright_notice");
+    r.name().qualified("copyright_notice");
+    r.ownership_hierarchy().model_name("formatters");
+    r.value_type(value_types::text);
+    r.definition_type(field_definition_types::instance);
+    r.scope(scope_types::not_applicable);
+    return r;
+}
+
 field_definition mock_field_definition_factory::licence_name() const {
     field_definition r;
     r.name().simple("licence_name");
@@ -65,6 +76,7 @@ make_canned_field_definitions() const {
     r.push_back(create_comment());
     r.push_back(create_identity_attribute());
     r.push_back(licence_name());
+    r.push_back(copyright_notice());
     return r;
 }
 

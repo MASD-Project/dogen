@@ -100,6 +100,8 @@ const std::string text_expression_block_text_expression_block_text(
     "some text content<#= inline block #>other text "
     "content<#= inline block #>some text content");
 const std::string untermined_expression_block("<#= inline block#zzz");
+const std::string multiple_start_expression_block("<#= <#= inline block#>");
+const std::string multiple_end_expression_block("<#= inline block#> #>");
 const std::string stray_end_expression_block("<#= inline block#>zzz#>");
 const std::string multiline_expression_block(R"(<#=
 single line
@@ -107,8 +109,15 @@ single line
 const std::string expression_in_expression("<#= <#= single line #> #>");
 
 const std::string licence_declaration("<#@ licence_name=gpl_v3 #>");
+const std::string multiple_declarations(R"(<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>)");
+const std::string multiple_start_declarations("<#@ <#@ licence_name=gpl_v3 #>");
+const std::string multiple_end_declarations("<#@ licence_name=gpl_v3 #> #>");
 const std::string licence_name("licence_name");
 const std::string licence_value("gpl_v3");
+const std::string copyright_notice_name("copyright_notice");
+const std::string copyright_notice_value(
+    "Copyright(C) 2012 Kitanda <info@kitanda.co.uk>");
 
 const std::string only_text_content_second_line("other text content");
 const std::string single_line_scriptlet_block_content("single line");
@@ -120,6 +129,7 @@ const std::string end_without_start("without a start block");
 const std::string inline_block("inline block");
 const std::string start_and_end("start and end in the same line");
 const std::string middle_of_line("the middle of a line");
+const std::string invalid_characters("Invalid characters used");
 
 dogen::stitch::text_template
 parse(const std::string& s) {
@@ -188,6 +198,18 @@ BOOST_AUTO_TEST_CASE(inline_scriptlet_block_results_in_expected_template) {
     const auto& sg(line.segments().front());
     BOOST_CHECK(sg.type() == dogen::stitch::segment_types::scriptlet);
     BOOST_CHECK(sg.content() == single_line_scriptlet_block_content);
+}
+
+BOOST_AUTO_TEST_CASE(invalid_inline_scriptlets_throw) {
+    SETUP_TEST_LOG_SOURCE("invalid_inline_scriptlets_throw");
+
+    contains_checker<parsing_error> c1(starting_scriptlet_block_in_block);
+    BOOST_CHECK_EXCEPTION(
+        parse(multiple_start_expression_block), parsing_error, c1);
+
+    contains_checker<parsing_error> c2(end_without_start);
+    BOOST_CHECK_EXCEPTION(
+        parse(multiple_end_expression_block), parsing_error, c2);
 }
 
 BOOST_AUTO_TEST_CASE(empty_scriptlet_block_results_in_empty_template) {
@@ -322,6 +344,27 @@ BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
     BOOST_REQUIRE(tt.extensions().fields().size() == 1);
     dogen::dynamic::schema::field_selector fs(tt.extensions());
     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
+}
+
+BOOST_AUTO_TEST_CASE(multiple_declarations_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("multiple_declarations_results_in_expected_template");
+    const auto tt(parse(multiple_declarations));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+
+    BOOST_CHECK(tt.lines().empty());
+    BOOST_REQUIRE(tt.extensions().fields().size() == 2);
+    dogen::dynamic::schema::field_selector fs(tt.extensions());
+    BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
+    BOOST_CHECK(
+        fs.get_text_content(copyright_notice_name) == copyright_notice_value);
+}
+
+BOOST_AUTO_TEST_CASE(invalid_declaration_throws) {
+    SETUP_TEST_LOG_SOURCE("invalid_declaration_throws");
+
+    contains_checker<parsing_error> c(invalid_characters);
+    BOOST_CHECK_EXCEPTION(parse(multiple_start_declarations), parsing_error, c);
+    BOOST_CHECK_EXCEPTION(parse(multiple_end_declarations), parsing_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_expression_block_results_in_expected_template) {

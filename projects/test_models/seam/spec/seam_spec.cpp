@@ -33,9 +33,9 @@ const std::string test_module("seam");
 const std::string simple_template_output(R"(this is a simple template
 )");
 const std::string complex_template_output(R"(this is a relatively more
-    complex
-    complex
-    complex
+    complex (0)
+    complex (1)
+    complex (2)
   template
 )");
 

@@ -58,7 +58,7 @@
 				<documentation></documentation>
 				<extensions>
 					<fields>
-						<count>2</count>
+						<count>3</count>
 						<bucket_count>11</bucket_count>
 						<item_version>0</item_version>
 						<item class_id="17" tracking_level="0" version="0">
@@ -79,6 +79,17 @@
 									<px class_id_reference="1" object_id="_1">
 										<value></value>
 										<content>gpl_v2</content>
+									</px>
+								</value>
+							</second>
+						</item>
+						<item>
+							<first>copyright_notice</first>
+							<second>
+								<value>
+									<px class_id_reference="1" object_id="_2">
+										<value></value>
+										<content>Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;</content>
 									</px>
 								</value>
 							</second>
@@ -154,7 +165,7 @@
 				</module_path>
 				<simple_name>class_1</simple_name>
 			</first>
-			<second class_id="4" tracking_level="1" version="0" object_id="_2">
+			<second class_id="4" tracking_level="1" version="0" object_id="_3">
 				<type class_id="27" tracking_level="0" version="0">
 					<documentation></documentation>
 					<extensions>

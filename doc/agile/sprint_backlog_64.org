@@ -380,6 +380,7 @@ stitch. We need to support these.
 This is actually not trivial. We may need to use spirit for this.
 
 *** STARTED Refactor parser                                           :story:
+    CLOCK: [2015-04-25 Sat 12:53]--[2015-04-25 Sat 13:17] =>  0:24
     CLOCK: [2015-04-25 Sat 07:54]--[2015-04-25 Sat 08:17] =>  0:23
     CLOCK: [2015-04-25 Sat 07:26]--[2015-04-25 Sat 07:53] =>  0:27
 

@@ -177,19 +177,16 @@ parse_line_with_declaration(const std::string& input_line) const {
     boost::replace_last(cooked_line, end_block, empty);
     boost::trim(cooked_line);
 
-    // FIXME
-    // const std::string reserved("<#");
-    // auto pos(cooked_line.find_first_of(reserved));
-    // if (pos != std::string::npos) {
-    //     BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
-    //     BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
-    // }
+    const std::string reserved("<#");
+    if (boost::contains(cooked_line, reserved)) {
+        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+    }
 
-    // pos = cooked_line.find_first_of(end_block);
-    // if (pos != std::string::npos) {
-    //     BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
-    //     BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
-    // }
+    if (boost::contains(cooked_line, end_block)) {
+        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+    }
 
     const auto pos(cooked_line.find_first_of(equals));
     if (pos == std::string::npos) {

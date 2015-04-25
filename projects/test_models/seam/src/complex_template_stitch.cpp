@@ -23,7 +23,7 @@
 void complex_template(std::ostream& s) {
 s << "this is a relatively more" << std::endl;
     for (auto i = 0; i < 3; ++i) {
-s << "    complex" << std::endl;
+s << "    complex (" << i << ")" << std::endl;
 }
 s << "  template" << std::endl;
 }
