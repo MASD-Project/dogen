@@ -51,13 +51,15 @@ const std::string cannot_start_scriptlet(
     "Cannot start scriptlet block in scriptlet block.");
 const std::string cannot_start_scriptlet_in_middle(
     "Cannot start scriplet block in the middle of a line.");
-const std::string scriptlet_segment_not_supported(
-    "Scriptlet segment is not supported.");
+const std::string scriptlet_expression_not_ended(
+    "Scriptlet expressions must start and end in the same line.");
 const std::string end_without_start("Found end block without a start block.");
 const std::string unexpected_declaration("Unexpected declaration.");
 const std::string unfinished_scriplet("Start scriptlet block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
+const std::string unexpected_standard(
+    "Standard control blocks are not supported in mixed lines");
 const std::string separator_not_found("Expected separator on kvp.");
 
 }
@@ -121,9 +123,78 @@ text_template parser::parse_with_legacy(const std::string& s) const {
 
         if (boost::contains(input_line, start_scriptlet_segment)) {
             BOOST_LOG_SEV(lg, debug) << "Line has scriplet segment";
-            BOOST_LOG_SEV(lg, error) << scriptlet_segment_not_supported;
-            BOOST_THROW_EXCEPTION(
-                parsing_error(scriptlet_segment_not_supported));
+
+            unsigned int pos(0);
+            const auto len(input_line.length());
+            std::string s;
+            bool in_expression(false);
+            while (pos < len) {
+                const auto c(input_line[pos]);
+                BOOST_LOG_SEV(lg, debug) << "c: " << c;
+                if (c == '<' && pos + 2 < len && input_line[pos + 1] == '#') {
+                    const auto type(input_line[pos + 2]);
+                    if (type == '@') {
+                        BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+                        BOOST_THROW_EXCEPTION(
+                            parsing_error(unexpected_declaration));
+                    } else if (type == '+') {
+                        BOOST_LOG_SEV(lg, error) << unexpected_standard;
+                        BOOST_THROW_EXCEPTION(
+                            parsing_error(unexpected_standard));
+                    } else if (type == '=') {
+                        BOOST_LOG_SEV(lg, debug) << "Line has expression start";
+                        if (!s.empty()) {
+                            segment sg;
+                            sg.type(segment_types::text);
+                            boost::trim(s);
+                            sg.content(s);
+                            output_line.segments().push_back(sg);
+                            s.clear();
+                        }
+
+                        in_expression = true;
+                        pos += 3;
+                        continue;
+                    }
+                } else if (c == '#' && pos + 1 < len &&
+                    input_line[pos + 1] == '>') {
+                    BOOST_LOG_SEV(lg, debug) << "Line has expression end";
+                    if (!in_expression) {
+                        BOOST_LOG_SEV(lg, error) << end_without_start;
+                        BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+                    }
+
+                    segment sg;
+                    sg.type(segment_types::scriptlet);
+                    boost::trim(s);
+                    sg.content(s);
+                    output_line.segments().push_back(sg);
+                    s.clear();
+
+                    in_expression = false;
+                    pos += 2;
+                    continue;
+                }
+                s += c;
+                BOOST_LOG_SEV(lg, debug) << "s: " << s;
+                ++pos;
+            }
+
+            if (in_expression) {
+                BOOST_LOG_SEV(lg, error) << scriptlet_expression_not_ended;
+                BOOST_THROW_EXCEPTION(
+                    parsing_error(scriptlet_expression_not_ended));
+            }
+
+            if (!s.empty()) {
+                segment sg;
+                sg.type(segment_types::text);
+                sg.content(s);
+                output_line.segments().push_back(sg);
+                s.clear();
+            }
+            r.lines().push_back(output_line);
+            continue;
         }
 
         if (boost::starts_with(input_line, start_declaration)) {
@@ -170,6 +241,7 @@ text_template parser::parse_with_legacy(const std::string& s) const {
 
                 segment sg;
                 sg.type(segment_types::scriptlet);
+                boost::trim(input_line);
                 sg.content(input_line);
                 output_line.segments().push_back(sg);
                 r.lines().push_back(output_line);
