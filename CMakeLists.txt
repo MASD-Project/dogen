@@ -321,6 +321,9 @@ message(STATUS "Using: ${stitcher_version}")
 add_custom_target(run_all_specs)
 add_custom_target(rebase)
 add_custom_target(diff)
+add_custom_target(knit_and_stitch)
+add_dependencies(knit_and_stitch knit_all)
+add_dependencies(knit_and_stitch stitch_all)
 
 #
 # include all sub directories
