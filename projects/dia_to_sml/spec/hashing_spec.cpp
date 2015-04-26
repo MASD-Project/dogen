@@ -43,8 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<context_generator>();
-    // FIXME: bug in composition?
-    // test_hashing<node_generator>();
     test_hashing<profile_generator>();
     test_hashing<object_types_generator>();
     test_hashing<processed_object_generator>();

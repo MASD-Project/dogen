@@ -30,7 +30,6 @@
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/sml/types/model_fwd.hpp"
-#include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
 #include "dogen/dia_to_sml/types/validator.hpp"

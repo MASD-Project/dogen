@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/serialization/node_ser.hpp"
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
 #include "dogen/dia_to_sml/serialization/profile_ser.hpp"
 #include "dogen/dia_to_sml/serialization/registrar_ser.hpp"

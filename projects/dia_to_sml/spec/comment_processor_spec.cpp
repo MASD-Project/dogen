@@ -25,7 +25,7 @@
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/dia_to_sml/types/parsing_error.hpp"
+#include "dogen/dia_to_sml/types/processing_error.hpp"
 #include "dogen/dia_to_sml/io/processed_comment_io.hpp"
 #include "dogen/dia_to_sml/types/comment_processor.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -68,7 +68,7 @@ const std::string no_sep_msg("Expected separator");
 
 }
 
-using dogen::dia_to_sml::parsing_error;
+using dogen::dia_to_sml::processing_error;
 
 BOOST_AUTO_TEST_SUITE(comment_processor)
 
@@ -202,7 +202,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_key_throws) {
 
     BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_key;
     dogen::dia_to_sml::comment_processor cp;
-    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), parsing_error);
+    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), processing_error);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_value_throws) {
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_value_throws) {
 
     BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_value;
     dogen::dia_to_sml::comment_processor cp;
-    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), parsing_error);
+    BOOST_CHECK_THROW(cp.process(instruction_with_no_key), processing_error);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_but_no_key_value_pair_throws) {
@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_but_no_key_value_pair_throw
 
     BOOST_LOG_SEV(lg, info) << "input: " << empty_instruction;
     dogen::dia_to_sml::comment_processor cp;
-    BOOST_CHECK_THROW(cp.process(empty_instruction), parsing_error);
+    BOOST_CHECK_THROW(cp.process(empty_instruction), processing_error);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_key_value_pairs) {

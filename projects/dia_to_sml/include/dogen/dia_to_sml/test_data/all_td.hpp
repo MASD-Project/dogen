@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia_to_sml/test_data/node_td.hpp"
 #include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/dia_to_sml/test_data/profile_td.hpp"
 #include "dogen/dia_to_sml/test_data/object_types_td.hpp"

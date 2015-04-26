@@ -32,9 +32,9 @@
 #include "dogen/dynamic/schema/types/scope_types.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object.hpp"
+#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
-#include "dogen/dia_to_sml/types/identifier_parser.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/profile.hpp"
 
@@ -300,7 +300,7 @@ public:
 
 private:
     context& context_;
-    std::shared_ptr<identifier_parser> identifier_parser_;
+    std::shared_ptr<sml::identifier_parser> identifier_parser_;
     const dynamic::schema::workflow& schema_workflow_;
 };
 

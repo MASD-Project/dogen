@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/traits.hpp"
-#include "dogen/dia_to_sml/types/parsing_error.hpp"
+#include "dogen/dia_to_sml/types/processing_error.hpp"
 #include "dogen/dia_to_sml/types/comment_processor.hpp"
 
 using namespace dogen::utility::log;
@@ -61,7 +61,7 @@ processed_comment comment_processor::process(const std::string& c) const {
             const auto pos(line.find_first_of(equals));
             if (pos == std::string::npos) {
                 BOOST_LOG_SEV(lg, error) << separator_not_found;
-                BOOST_THROW_EXCEPTION(parsing_error(separator_not_found));
+                BOOST_THROW_EXCEPTION(processing_error(separator_not_found));
             }
 
             const auto key(line.substr(0, pos));

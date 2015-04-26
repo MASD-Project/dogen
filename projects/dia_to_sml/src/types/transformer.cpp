@@ -71,7 +71,7 @@ namespace dia_to_sml {
 
 transformer::transformer(const dynamic::schema::workflow& w, context& c)
     : context_(c),
-      identifier_parser_(new identifier_parser(c.top_level_module_names(),
+      identifier_parser_(new sml::identifier_parser(c.top_level_module_names(),
               c.model().name().external_module_path(),
               c.model().name().model_name())),
       schema_workflow_(w) {
