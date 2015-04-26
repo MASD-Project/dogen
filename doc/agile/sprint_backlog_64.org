@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 18:36]
+Clock summary at [2015-04-26 Sun 19:26]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *42:07* |       |      |
+| *Total time*                                                    | *42:57* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 42:07 |      |
+| Active                                                          |         | 42:57 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:39 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -42,6 +42,7 @@ Clock summary at [2015-04-26 Sun 18:36]
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 | COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
+| COMPLETED Move =identifier_parser= to SML                       |         |       | 0:50 |
 | STARTED Create a forward declarations formatter using stitch    |         |       | 3:33 |
 #+end:
 
@@ -741,6 +742,14 @@ Note: we should consider using [[https://github.com/jamboree/bustache][bustache]
 There is also [[https://www.youtube.com/watch?v%3DhTnoEjqUZjI][boostache]] but I could not find any code in github for
 it.
 
+*** COMPLETED Move =identifier_parser= to SML                         :story:
+    CLOSED: [2015-04-26 Sun 19:08]
+    CLOCK: [2015-04-26 Sun 19:07]--[2015-04-26 Sun 19:26] =>  0:19
+    CLOCK: [2015-04-26 Sun 18:36]--[2015-04-26 Sun 19:07] =>  0:31
+
+We will require parsing identifiers from JSON so we need access to
+identifier parser within SML.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -848,11 +857,6 @@ Tasks:
 - add new field for namespaces to stitch
 - move namespaces formatter to =formatters::cpp=
 - use both from within stitch
-
-*** Move =identifier_parser= to SML                                   :story:
-
-We will require parsing identifiers from JSON so we need access to
-identifier parser within SML.
 
 *** Move namespace formatter to formatters                            :story:
 
