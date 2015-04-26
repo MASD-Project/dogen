@@ -8237,7 +8237,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:point val="133,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.95,34.95;145.225,37.25"/>
+        <dia:rectangle val="132.95,34.95;145.225,38.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="133,35"/>
@@ -8246,7 +8246,7 @@ descend from it. Names are in identifiable name format.#</dia:string>
         <dia:real val="12.175000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.1999999999999997"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#forward_declarations_info#</dia:string>
@@ -8335,7 +8335,55 @@ descend from it. Names are in identifiable name format.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_enum#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Returns true if the type for which we are creating a forward declaration is
+an enumeration, false otherwise.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#enum_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#The underlying type of the enumeration, if we are an enum forward declaration.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -19628,7 +19676,7 @@ the dynamic object.
         <dia:point val="140.988,21.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.138,21.35;180.808,35.05"/>
+        <dia:rectangle val="140.138,21.35;180.807,35.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20066,7 +20114,7 @@ the dynamic object.
         <dia:point val="243.68,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="233.947,41.75;244.43,59.8"/>
+        <dia:rectangle val="233.948,41.75;244.43,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20604,7 +20652,7 @@ to the grammmar of the C++ language.#</dia:string>
         <dia:point val="232.572,28.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="232.513,28.2407;234.399,35.1321"/>
+        <dia:rectangle val="232.513,28.2407;234.4,35.1322"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30673,7 +30721,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="393.803,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="393.738,70.4147;395.818,75.0642"/>
+        <dia:rectangle val="393.739,70.4147;395.818,75.0642"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31905,7 +31953,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="539.633,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="538.883,17.25;550.315,32.6"/>
+        <dia:rectangle val="538.883,17.25;550.315,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31977,7 +32025,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="387,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="359.06,54.25;387.75,61.8"/>
+        <dia:rectangle val="359.06,54.25;387.75,61.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32361,7 +32409,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="444.618,70.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="443.868,69.85;487.77,77.8"/>
+        <dia:rectangle val="443.868,69.85;487.77,77.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32433,7 +32481,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="500.14,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="499.39,60.95;507.2,68.6"/>
+        <dia:rectangle val="499.39,60.25;507.2,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32505,7 +32553,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="475,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="439.567,56.55;475.75,68.6"/>
+        <dia:rectangle val="439.568,56.55;475.75,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32577,7 +32625,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="487.57,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="486.82,38.55;495.17,68.6"/>
+        <dia:rectangle val="486.82,38.55;495.17,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

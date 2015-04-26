@@ -21,6 +21,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -43,6 +44,9 @@ void save(Archive& ar,
     const dogen::cpp::formattables::forward_declarations_info& v,
     const unsigned int /*version*/) {
     ar << make_nvp("entity", base_object<dogen::cpp::formattables::entity>(v));
+
+    ar << make_nvp("is_enum", v.is_enum_);
+    ar << make_nvp("enum_type", v.enum_type_);
 }
 
 template<typename Archive>
@@ -50,6 +54,9 @@ void load(Archive& ar,
     dogen::cpp::formattables::forward_declarations_info& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("entity", base_object<dogen::cpp::formattables::entity>(v));
+
+    ar >> make_nvp("is_enum", v.is_enum_);
+    ar >> make_nvp("enum_type", v.enum_type_);
 }
 
 } }

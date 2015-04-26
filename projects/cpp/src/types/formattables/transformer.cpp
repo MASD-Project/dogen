@@ -460,10 +460,7 @@ transformer::to_visitor_info(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<visitor_info>());
-    r->name(o.name().simple_name());
-
-    name_builder b;
-    r->namespaces(b.namespace_list(model_, o.name()));
+    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
 
     auto i(o.relationships().find(sml::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -472,6 +469,7 @@ transformer::to_visitor_info(const sml::object& o) const {
         BOOST_THROW_EXCEPTION(transformation_error(no_visitees + sn));
     }
 
+    name_builder b;
     for (const auto qn : i->second)
         r->types().push_back(b.qualified_name(model_, qn));
 
@@ -479,10 +477,27 @@ transformer::to_visitor_info(const sml::object& o) const {
     return r;
 }
 
+std::shared_ptr<forward_declarations_info> transformer::
+to_forward_declarations_info(const sml::object& o) const {
+    auto r(std::make_shared<forward_declarations_info>());
+    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
+    return r;
+}
+
+std::shared_ptr<forward_declarations_info> transformer::
+to_forward_declarations_info(const sml::enumeration& e) const {
+    auto r(std::make_shared<forward_declarations_info>());
+    populate_entity_properties(e.name(), e.extensions(), e.documentation(), *r);
+    r->is_enum(true);
+    r->enum_type(e.name().simple_name());
+    return r;
+}
+
 std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const sml::enumeration& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_enum_info(e));
+    r.push_front(to_forward_declarations_info(e));
     return r;
 }
 
@@ -513,6 +528,8 @@ transform(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_forward_declarations_info(o));
+
     switch(o.object_type()) {
     case sml::object_types::factory: // FIXME: mega-hack
     case sml::object_types::user_defined_service:

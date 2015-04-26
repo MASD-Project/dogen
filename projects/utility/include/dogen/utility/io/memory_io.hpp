@@ -18,33 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/forward_declarations_info_hash.hpp"
+#ifndef DOGEN_UTILITY_IO_MEMORY_IO_HPP
+#define DOGEN_UTILITY_IO_MEMORY_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+#include <memory>
+#include <ostream>
+#include "dogen/utility/io/jsonify_io.hpp"
+
+namespace std {
+
+template<typename T>
+inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
+    using dogen::utility::streaming::jsonify;
+    if (p)
+        s << *p;
+    else
+        s << "\"shared_ptr\": \"empty shared pointer\"";
+
+    return s;
 }
 
 }
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
-
-std::size_t forward_declarations_info_hasher::hash(const forward_declarations_info&v) {
-    std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
-
-    combine(seed, v.is_enum());
-    combine(seed, v.enum_type());
-
-    return seed;
-}
-
-} } }
+#endif

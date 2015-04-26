@@ -21,7 +21,10 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/memory_io.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -87,7 +90,9 @@ workflow::execute(const sml::model& m) const {
     all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
-    return g.result();
+    const auto r(g.result());
+    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
+    return r;
 }
 
 } } }

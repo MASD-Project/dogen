@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_fwd_ser.hpp"
@@ -36,9 +37,11 @@ namespace formattables {
 
 class forward_declarations_info final : public dogen::cpp::formattables::entity {
 public:
-    forward_declarations_info() = default;
     forward_declarations_info(const forward_declarations_info&) = default;
     forward_declarations_info(forward_declarations_info&&) = default;
+
+public:
+    forward_declarations_info();
 
     virtual ~forward_declarations_info() noexcept { }
 
@@ -48,7 +51,9 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const dogen::cpp::settings::bundle& settings);
+        const dogen::cpp::settings::bundle& settings,
+        const bool is_enum,
+        const std::string& enum_type);
 
 private:
     template<typename Archive>
@@ -78,6 +83,26 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Returns true if the type for which we are creating a forward declaration is
+     * an enumeration, false otherwise.
+     */
+    /**@{*/
+    bool is_enum() const;
+    void is_enum(const bool v);
+    /**@}*/
+
+    /**
+     * @brief The underlying type of the enumeration, if we are an enum forward declaration.
+     */
+    /**@{*/
+    const std::string& enum_type() const;
+    std::string& enum_type();
+    void enum_type(const std::string& v);
+    void enum_type(const std::string&& v);
+    /**@}*/
+
+public:
     bool operator==(const forward_declarations_info& rhs) const;
     bool operator!=(const forward_declarations_info& rhs) const {
         return !this->operator==(rhs);
@@ -90,6 +115,9 @@ public:
     void swap(forward_declarations_info& other) noexcept;
     forward_declarations_info& operator=(forward_declarations_info other);
 
+private:
+    bool is_enum_;
+    std::string enum_type_;
 };
 
 } } }

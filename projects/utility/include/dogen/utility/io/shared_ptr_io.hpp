@@ -32,13 +32,14 @@
 namespace boost {
 
 template<typename T>
-inline std::ostream& operator<<(std::ostream& stream, const shared_ptr<T>& pointer) {
+inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
     using dogen::utility::streaming::jsonify;
-    if (pointer)
-        stream << *pointer;
+    if (p)
+        s << *p;
     else
-        stream << "\"shared_ptr\": \"empty shared pointer\"";
-    return(stream);
+        s << "\"shared_ptr\": \"empty shared pointer\"";
+
+    return s;
 }
 
 }

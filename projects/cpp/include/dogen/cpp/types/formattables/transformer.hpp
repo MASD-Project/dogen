@@ -49,6 +49,7 @@
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 
 namespace dogen {
@@ -145,6 +146,18 @@ private:
      * @pre value object must have a visitor type.
      */
     std::shared_ptr<visitor_info> to_visitor_info(const sml::object& o) const;
+
+    /**
+     * @brief Creates a forward declaration for the object.
+     */
+    std::shared_ptr<forward_declarations_info>
+    to_forward_declarations_info(const sml::object& o) const;
+
+    /**
+     * @brief Creates a forward declaration for the enumeration.
+     */
+    std::shared_ptr<forward_declarations_info>
+    to_forward_declarations_info(const sml::enumeration& e) const;
 
 public:
     /**

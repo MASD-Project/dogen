@@ -19,6 +19,8 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/forward_declarations_info_io.hpp"
 

@@ -18,10 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
 
+namespace {
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -32,6 +45,8 @@ forward_declarations_info_generator::forward_declarations_info_generator() : pos
 void forward_declarations_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::entity_generator::populate(position, v);
+    v.is_enum(create_bool(position + 0));
+    v.enum_type(create_std_string(position + 1));
 }
 
 forward_declarations_info_generator::result_type
