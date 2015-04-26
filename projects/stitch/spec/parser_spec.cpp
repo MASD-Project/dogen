@@ -113,8 +113,11 @@ const std::string multiple_declarations(R"(<#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>)");
 const std::string multiple_start_declarations("<#@ <#@ licence_name=gpl_v3 #>");
 const std::string multiple_end_declarations("<#@ licence_name=gpl_v3 #> #>");
+const std::string namespaces_declaration("<#@ containing_namespaces=a::b::c #>");
 const std::string licence_name("licence_name");
 const std::string licence_value("gpl_v3");
+const std::string namespaces_name("containing_namespaces");
+const std::string namespaces_value("a::b::c");
 const std::string copyright_notice_name("copyright_notice");
 const std::string copyright_notice_value(
     "Copyright(C) 2012 Kitanda <info@kitanda.co.uk>");
@@ -500,6 +503,17 @@ BOOST_AUTO_TEST_CASE(expression_in_expression_throws) {
 
     contains_checker<parsing_error> c(starting_scriptlet_block_in_block);
     BOOST_CHECK_EXCEPTION(parse(expression_in_expression), parsing_error, c);
+}
+
+BOOST_AUTO_TEST_CASE(namespaces_declaration_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("namespaces_declaration_results_in_expected_template");
+    const auto tt(parse(namespaces_declaration));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+
+    BOOST_CHECK(tt.lines().empty());
+    BOOST_REQUIRE(tt.extensions().fields().size() == 1);
+    dogen::dynamic::schema::field_selector fs(tt.extensions());
+    BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

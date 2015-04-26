@@ -52,6 +52,7 @@ private:
         dynamic::schema::field_definition output_path;
         dynamic::schema::field_definition relative_output_directory;
         dynamic::schema::field_definition inclusion_dependency;
+        dynamic::schema::field_definition containing_namespaces;
     };
 
     /**
@@ -90,6 +91,12 @@ private:
      */
     std::list<std::string>
     extract_inclusion_dependencies(const dynamic::schema::object& o) const;
+
+    /**
+     * @brief Extract containing namespaces.
+     */
+    std::list<std::string>
+    extract_containing_namespaces(const dynamic::schema::object& o) const;
 
 public:
     /**

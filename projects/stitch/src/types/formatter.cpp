@@ -22,7 +22,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
-#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/stitch/io/segment_types_io.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"
@@ -107,38 +108,39 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
     }
 
     std::ostringstream s;
-    dogen::formatters::cpp::boilerplate_formatter f;
-    const auto gs(tt.settings().general_settings());
-    if (gs) {
+    {
         const auto& id(ss.inclusion_dependencies());
-        f.format_begin(s, gs->annotation(), id, empty_header_guard);
+        dogen::formatters::cpp::scoped_boilerplate_formatter
+            sbf(s, tt.settings().general_settings(), id, empty_header_guard);
+
+        dogen::formatters::cpp::scoped_namespace_formatter snf(
+            s, ss.containing_namespaces(), false/*create_anonymous_namespace*/);
+
+        for (const auto& l : tt.lines()) {
+            if (l.segments().empty()) {
+                BOOST_LOG_SEV(lg, error) << empty_line;
+                BOOST_THROW_EXCEPTION(formatting_error(empty_line));
+            }
+
+            if (l.segments().size() > 1) {
+                format_mixed_content_line(stream_variable_name, l, s);
+                continue;
+            }
+
+            const auto& sg(l.segments().front());
+            if (sg.type() == segment_types::text)
+                format_text_line(stream_variable_name, sg.content(), s);
+            else if (sg.type() == segment_types::scriptlet)
+                format_scriptlet_line(sg.content(), s);
+            else {
+                BOOST_LOG_SEV(lg, error) << unsupported_segment_type
+                                         << sg.type();
+                BOOST_THROW_EXCEPTION(
+                    formatting_error(unsupported_segment_type +
+                        boost::lexical_cast<std::string>(sg.type())));
+            }
+        }
     }
-
-    for (const auto& l : tt.lines()) {
-        if (l.segments().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_line;
-            BOOST_THROW_EXCEPTION(formatting_error(empty_line));
-        }
-
-        if (l.segments().size() > 1) {
-            format_mixed_content_line(stream_variable_name, l, s);
-            continue;
-        }
-
-        const auto& sg(l.segments().front());
-        if (sg.type() == segment_types::text)
-            format_text_line(stream_variable_name, sg.content(), s);
-        else if (sg.type() == segment_types::scriptlet)
-            format_scriptlet_line(sg.content(), s);
-        else {
-            BOOST_LOG_SEV(lg, error) << unsupported_segment_type << sg.type();
-            BOOST_THROW_EXCEPTION(formatting_error(unsupported_segment_type +
-                    boost::lexical_cast<std::string>(sg.type())));
-        }
-    }
-
-    if (gs)
-        f.format_end(s, gs->annotation(), empty_header_guard);
 
     dogen::formatters::file r;
     r.content(s.str());

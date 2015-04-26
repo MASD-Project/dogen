@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 20:47]
+Clock summary at [2015-04-26 Sun 21:33]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *44:15* |       |      |
+| *Total time*                                                    | *45:00* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 44:15 |      |
+| Active                                                          |         | 45:00 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:39 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -45,8 +45,8 @@ Clock summary at [2015-04-26 Sun 20:47]
 | COMPLETED Move =identifier_parser= to SML                       |         |       | 0:50 |
 | COMPLETED Move namespace formatter to formatters                |         |       | 0:46 |
 | COMPLETED Split =identifier_parser= into utility and SML        |         |       | 0:21 |
+| COMPLETED Add namespace support to stitch templates             |         |       | 0:56 |
 | STARTED Create a forward declarations formatter using stitch    |         |       | 3:33 |
-| STARTED Add namespace support to stitch templates               |         |       | 0:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -775,6 +775,22 @@ We can't really have a stitch dependency in SML just because of
 =identifier_parser=. In reality, the bits of identifier parser we need
 are quite generic. Move them to utility.
 
+*** COMPLETED Add namespace support to stitch templates               :story:
+    CLOSED: [2015-04-26 Sun 21:32]
+    CLOCK: [2015-04-26 Sun 20:47]--[2015-04-26 Sun 21:32] =>  0:45
+    CLOCK: [2015-04-26 Sun 20:15]--[2015-04-26 Sun 20:26] =>  0:11
+
+At present we are having to manually add the namespaces to the
+templates. It would be nice to pass it in via a declaration and have
+it rendered using namespace formatting (the same as we use for knit).
+
+Tasks:
+
+- move identifier parser to SML
+- move namespaces formatter to =formatters::cpp=
+- add new field for namespaces to stitch
+- use both from within stitch
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -869,20 +885,6 @@ avoid clashes with the source code of stitch itself.
 - solve the relocation problem and implement serialisation forward
   declarations. actually, in truth, it is a totally separate forward
   declarations formatter.
-
-*** STARTED Add namespace support to stitch templates                 :story:
-    CLOCK: [2015-04-26 Sun 20:15]--[2015-04-26 Sun 20:26] =>  0:11
-
-At present we are having to manually add the namespaces to the
-templates. It would be nice to pass it in via a declaration and have
-it rendered using namespace formatting (the same as we use for knit).
-
-Tasks:
-
-- move identifier parser to SML
-- move namespaces formatter to =formatters::cpp=
-- add new field for namespaces to stitch
-- use both from within stitch
 
 *** Contents change check is done twice                               :story:
 

@@ -28,19 +28,22 @@ stitching_settings::stitching_settings(stitching_settings&& rhs)
       template_path_(std::move(rhs.template_path_)),
       output_path_(std::move(rhs.output_path_)),
       relative_output_directory_(std::move(rhs.relative_output_directory_)),
-      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)) { }
+      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
+      containing_namespaces_(std::move(rhs.containing_namespaces_)) { }
 
 stitching_settings::stitching_settings(
     const std::string& stream_variable_name,
     const boost::optional<boost::filesystem::path>& template_path,
     const boost::optional<boost::filesystem::path>& output_path,
     const boost::optional<boost::filesystem::path>& relative_output_directory,
-    const std::list<std::string>& inclusion_dependencies)
+    const std::list<std::string>& inclusion_dependencies,
+    const std::list<std::string>& containing_namespaces)
     : stream_variable_name_(stream_variable_name),
       template_path_(template_path),
       output_path_(output_path),
       relative_output_directory_(relative_output_directory),
-      inclusion_dependencies_(inclusion_dependencies) { }
+      inclusion_dependencies_(inclusion_dependencies),
+      containing_namespaces_(containing_namespaces) { }
 
 void stitching_settings::swap(stitching_settings& other) noexcept {
     using std::swap;
@@ -49,6 +52,7 @@ void stitching_settings::swap(stitching_settings& other) noexcept {
     swap(output_path_, other.output_path_);
     swap(relative_output_directory_, other.relative_output_directory_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
+    swap(containing_namespaces_, other.containing_namespaces_);
 }
 
 bool stitching_settings::operator==(const stitching_settings& rhs) const {
@@ -56,7 +60,8 @@ bool stitching_settings::operator==(const stitching_settings& rhs) const {
         template_path_ == rhs.template_path_ &&
         output_path_ == rhs.output_path_ &&
         relative_output_directory_ == rhs.relative_output_directory_ &&
-        inclusion_dependencies_ == rhs.inclusion_dependencies_;
+        inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
+        containing_namespaces_ == rhs.containing_namespaces_;
 }
 
 stitching_settings& stitching_settings::operator=(stitching_settings other) {
@@ -143,6 +148,22 @@ void stitching_settings::inclusion_dependencies(const std::list<std::string>& v)
 
 void stitching_settings::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
+}
+
+const std::list<std::string>& stitching_settings::containing_namespaces() const {
+    return containing_namespaces_;
+}
+
+std::list<std::string>& stitching_settings::containing_namespaces() {
+    return containing_namespaces_;
+}
+
+void stitching_settings::containing_namespaces(const std::list<std::string>& v) {
+    containing_namespaces_ = v;
+}
+
+void stitching_settings::containing_namespaces(const std::list<std::string>&& v) {
+    containing_namespaces_ = std::move(v);
 }
 
 } }

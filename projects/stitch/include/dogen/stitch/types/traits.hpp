@@ -63,6 +63,11 @@ struct traits {
      * @brief Inclusion dependencies required by the template.
      */
     static std::string inclusion_dependency();
+
+    /**
+     * @brief Namespaces that contain the content in the template.
+     */
+    static std::string containing_namespaces();
 };
 
 } }

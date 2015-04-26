@@ -69,7 +69,8 @@ std::ostream& operator<<(std::ostream& s, const stitching_settings& v) {
       << "\"template_path\": " << v.template_path() << ", "
       << "\"output_path\": " << v.output_path() << ", "
       << "\"relative_output_directory\": " << v.relative_output_directory() << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
+      << "\"containing_namespaces\": " << v.containing_namespaces()
       << " }";
     return(s);
 }

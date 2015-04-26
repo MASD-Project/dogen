@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
@@ -48,7 +49,7 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
     formatter_properties r;
     bool found_stream_variable_name(false), found_template_path(false),
         found_output_path(false), found_relative_output_directory(false),
-        found_inclusion_dependency(false);
+        found_inclusion_dependency(false), found_containing_namespaces(false);
     const dynamic::schema::repository_selector s(rp);
     for (const auto fd : s.select_fields_by_model_name(traits::model_name())) {
         if (fd.name().simple() == traits::stream_variable_name()) {
@@ -66,6 +67,9 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
         } else if (fd.name().simple() == traits::inclusion_dependency()) {
             r.inclusion_dependency = fd;
             found_inclusion_dependency = true;
+        } else if (fd.name().simple() == traits::containing_namespaces()) {
+            r.containing_namespaces = fd;
+            found_containing_namespaces = true;
         }
     }
 
@@ -102,6 +106,13 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
                                  << traits::inclusion_dependency();
         BOOST_THROW_EXCEPTION(building_error(field_definition_not_found
                 + traits::inclusion_dependency()));
+    }
+
+    if (!found_containing_namespaces) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::containing_namespaces();
+        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found
+                + traits::containing_namespaces()));
     }
 
     return r;
@@ -160,6 +171,23 @@ extract_inclusion_dependencies(const dynamic::schema::object& o) const {
     return fs.get_text_collection_content(fd);
 }
 
+std::list<std::string> stitching_settings_factory::
+extract_containing_namespaces(const dynamic::schema::object& o) const {
+    std::list<std::string> r;
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const auto& fd(formatter_properties_.containing_namespaces);
+    if (!fs.has_field(fd))
+        return r;
+
+    const auto s(fs.get_text_content(fd));
+    if (s.empty())
+        return r;
+
+    using utility::string::splitter;
+    return splitter::split_scoped(s);
+}
+
 stitching_settings stitching_settings_factory::
 make(const dynamic::schema::object& o) const {
     stitching_settings r;
@@ -168,6 +196,7 @@ make(const dynamic::schema::object& o) const {
     r.output_path(extract_output_path(o));
     r.relative_output_directory(extract_relative_output_directory(o));
     r.inclusion_dependencies(extract_inclusion_dependencies(o));
+    r.containing_namespaces(extract_containing_namespaces(o));
     return r;
 }
 

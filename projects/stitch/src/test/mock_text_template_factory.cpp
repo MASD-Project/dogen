@@ -217,4 +217,14 @@ text_template mock_text_template_factory::make_with_general_settings() const {
     return r;
 }
 
+text_template
+mock_text_template_factory::make_with_containing_namespace() const {
+    text_template r(make_text_template_with_trivial_settings());
+    auto& cn(r.settings().stitching_settings().containing_namespaces());
+    cn.push_back("first");
+    cn.push_back("second");
+    r.lines(make_text_only_lines());
+    return r;
+}
+
 } } }

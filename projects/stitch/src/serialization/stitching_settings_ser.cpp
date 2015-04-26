@@ -46,6 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("output_path", v.output_path_);
     ar << make_nvp("relative_output_directory", v.relative_output_directory_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
+    ar << make_nvp("containing_namespaces", v.containing_namespaces_);
 }
 
 template<typename Archive>
@@ -57,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("output_path", v.output_path_);
     ar >> make_nvp("relative_output_directory", v.relative_output_directory_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
+    ar >> make_nvp("containing_namespaces", v.containing_namespaces_);
 }
 
 } }

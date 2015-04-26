@@ -50,7 +50,8 @@ public:
         const boost::optional<boost::filesystem::path>& template_path,
         const boost::optional<boost::filesystem::path>& output_path,
         const boost::optional<boost::filesystem::path>& relative_output_directory,
-        const std::list<std::string>& inclusion_dependencies);
+        const std::list<std::string>& inclusion_dependencies,
+        const std::list<std::string>& containing_namespaces);
 
 private:
     template<typename Archive>
@@ -85,6 +86,11 @@ public:
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
 
+    const std::list<std::string>& containing_namespaces() const;
+    std::list<std::string>& containing_namespaces();
+    void containing_namespaces(const std::list<std::string>& v);
+    void containing_namespaces(const std::list<std::string>&& v);
+
 public:
     bool operator==(const stitching_settings& rhs) const;
     bool operator!=(const stitching_settings& rhs) const {
@@ -101,6 +107,7 @@ private:
     boost::optional<boost::filesystem::path> output_path_;
     boost::optional<boost::filesystem::path> relative_output_directory_;
     std::list<std::string> inclusion_dependencies_;
+    std::list<std::string> containing_namespaces_;
 };
 
 } }

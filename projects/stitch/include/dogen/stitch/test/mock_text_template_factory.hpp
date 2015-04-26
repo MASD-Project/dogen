@@ -144,6 +144,11 @@ public:
      */
     text_template make_with_general_settings() const;
 
+    /**
+     * @brief Populate containing namespace in the text template.
+     */
+    text_template make_with_containing_namespace() const;
+
 private:
 };
 

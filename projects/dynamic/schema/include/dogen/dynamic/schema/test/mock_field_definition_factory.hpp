@@ -36,6 +36,11 @@ namespace test {
 class mock_field_definition_factory {
 private:
     /**
+     * @brief Creat the containing namespaces field.
+     */
+    field_definition containing_namespaces() const;
+
+    /**
      * @brief Creat the copyright notice field.
      */
     field_definition copyright_notice() const;

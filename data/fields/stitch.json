@@ -59,5 +59,17 @@
         "value_type" : "text_collection",
         "definition_type" : "instance",
         "scope" : "root_module"
+    },
+    {
+        "name" : {
+            "simple" : "containing_namespaces",
+            "qualified" : "containing_namespaces"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "stitch"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module"
     }
 ]

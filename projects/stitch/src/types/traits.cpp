@@ -53,4 +53,9 @@ std::string traits::inclusion_dependency() {
     return r;
 }
 
+std::string traits::containing_namespaces() {
+    static std::string r("containing_namespaces");
+    return r;
+}
+
 } }
