@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/sml/types/sml.hpp"
+#include "dogen/sml/types/node.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -44,6 +45,7 @@
 #include "dogen/sml/types/type_visitor.hpp"
 #include "dogen/sml/types/json_hydrator.hpp"
 #include "dogen/sml/types/merging_error.hpp"
+#include "dogen/sml/types/parsing_error.hpp"
 #include "dogen/sml/types/graphing_error.hpp"
 #include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
@@ -54,9 +56,11 @@
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/resolution_error.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/consumer_interface.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
+#include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
