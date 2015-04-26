@@ -18,7 +18,7 @@
 # MA 02110-1301, USA.
 set(target sml)
 add_custom_target(knit_${target}
-    COMMENT "Generating SML model" VERBATIM
+    COMMENT "Knitting SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -45,7 +45,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target dia)
 add_custom_target(knit_${target}
-    COMMENT "Generating Dia model" VERBATIM
+    COMMENT "Knitting Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -68,7 +68,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target config)
 add_custom_target(knit_${target}
-    COMMENT "Generating Config model" VERBATIM
+    COMMENT "Knitting Config model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -91,7 +91,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target cpp)
 add_custom_target(knit_${target}
-    COMMENT "Generating C++ model" VERBATIM
+    COMMENT "Knitting C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -121,7 +121,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target database)
 add_custom_target(knit_${target}
-    COMMENT "Generating database model" VERBATIM
+    COMMENT "Knitting database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -149,7 +149,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target knit)
 add_custom_target(knit_${target}
-    COMMENT "Generating knit model" VERBATIM
+    COMMENT "Knitting knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -176,7 +176,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target dia_to_sml)
 add_custom_target(knit_${target}
-    COMMENT "Generating Dia to SML model" VERBATIM
+    COMMENT "Knitting Dia to SML model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -203,7 +203,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target cpp_formatters)
 add_custom_target(knit_${target}
-    COMMENT "Generating C++ Formatters model" VERBATIM
+    COMMENT "Knitting C++ Formatters model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -233,7 +233,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target sml_to_cpp)
 add_custom_target(knit_${target}
-    COMMENT "Generating SML to C++ model" VERBATIM
+    COMMENT "Knitting SML to C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -262,7 +262,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target formatters)
 add_custom_target(knit_${target}
-    COMMENT "Generating the Formatters Model" VERBATIM
+    COMMENT "Knitting the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -294,7 +294,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target frontend)
 add_custom_target(knit_${target}
-    COMMENT "Generating Frontend model" VERBATIM
+    COMMENT "Knitting Frontend model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -323,7 +323,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target backend)
 add_custom_target(knit_${target}
-    COMMENT "Generating Backend model" VERBATIM
+    COMMENT "Knitting Backend model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -352,7 +352,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target schema)
 add_custom_target(knit_${target}
-    COMMENT "Generating Dynamic Schema model" VERBATIM
+    COMMENT "Knitting Dynamic Schema model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -377,7 +377,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target expansion)
 add_custom_target(knit_${target}
-    COMMENT "Generating Dynamic Expansion model" VERBATIM
+    COMMENT "Knitting Dynamic Expansion model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
@@ -405,7 +405,7 @@ add_dependencies(knit_all knit_${target})
 
 set(target stitch)
 add_custom_target(knit_${target}
-    COMMENT "Generating Stitch model" VERBATIM
+    COMMENT "Knitting Stitch model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
