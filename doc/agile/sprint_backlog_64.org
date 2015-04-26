@@ -13,14 +13,14 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 12:51]
+Clock summary at [2015-04-26 Sun 18:36]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *40:21* |       |      |
+| *Total time*                                                    | *42:07* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 40:21 |      |
-| STARTED Sprint and product backlog grooming                     |         |       | 1:30 |
+| Active                                                          |         | 42:07 |      |
+| STARTED Sprint and product backlog grooming                     |         |       | 1:39 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -42,10 +42,11 @@ Clock summary at [2015-04-26 Sun 12:51]
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 | COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
-| STARTED Create a forward declarations formatter using stitch    |         |       | 1:56 |
+| STARTED Create a forward declarations formatter using stitch    |         |       | 3:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-26 Sun 18:27]--[2015-04-26 Sun 18:36] =>  0:09
     CLOCK: [2015-04-26 Sun 11:42]--[2015-04-26 Sun 11:46] =>  0:04
     CLOCK: [2015-04-26 Sun 10:15]--[2015-04-26 Sun 10:34] =>  0:19
     CLOCK: [2015-04-21 Tue 15:26]--[2015-04-21 Tue 15:39] =>  0:13
@@ -800,6 +801,7 @@ Solution for cycles:
   look at the values of b, and update a accordingly.
 
 *** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-26 Sun 16:50]--[2015-04-26 Sun 18:27] =>  1:37
     CLOCK: [2015-04-26 Sun 12:11]--[2015-04-26 Sun 12:51] =>  0:40
     CLOCK: [2015-04-26 Sun 11:47]--[2015-04-26 Sun 12:10] =>  0:23
     CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
@@ -831,31 +833,31 @@ avoid clashes with the source code of stitch itself.
 - suppress class header formatter and enable forward declarations
   formatter; we want to start using new code from now on.
 - solve the relocation problem and implement serialisation forward
-  declarations.
+  declarations. actually, in truth, it is a totally separate forward
+  declarations formatter.
 
-*** Solve the problem of "relocatable" formatters                     :story:
+*** Add namespace support to stitch templates                         :story:
 
-*New Understanding*
+At present we are having to manually add the namespaces to the
+templates. It would be nice to pass it in via a declaration and have
+it rendered using namespace formatting (the same as we use for knit).
 
-We need to solve this problem because the forward declaration is used
-from both types and serialisation.
+Tasks:
 
-*Previous Understanding*
+- move identifier parser to SML
+- add new field for namespaces to stitch
+- move namespaces formatter to =formatters::cpp=
+- use both from within stitch
 
-There may be cases where a formatter is the same for all facets, but
-we still need to have it instantiated for every facet. At present that
-is not possible because formatters have hard-coded ownership
-hierarchies. In addition, there is the potential for inclusion
-dependencies generation which is also facet specific.
+*** Move =identifier_parser= to SML                                   :story:
 
-This could be solved by instantiating the formatter in the initializer
-of every facet, and supplying the facet name to the constructor; the
-ownership hierarchy would then use this facet name. This would mean
-that the same formatter would be registered for every facet.
+We will require parsing identifiers from JSON so we need access to
+identifier parser within SML.
 
-We don't yet have a use case for this. It was thought to be needed for
-forward declarations but at present we only need them for types. It is
-probably needed in order to integrate knit and stitch.
+*** Move namespace formatter to formatters                            :story:
+
+We need to make use of the namespace formatter from stitch so it needs
+to move into =formatters= model.
 
 *** Contents change check is done twice                               :story:
 

@@ -10,6 +10,23 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Solve the problem of "relocatable" formatters                     :story:
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types. It is
+probably needed in order to integrate knit and stitch.
+
 *** Consider splitting =formattables::transformer=                    :story:
 
 We have two different responsibilities within transformer:
@@ -176,11 +193,6 @@ single pace, and use boost spirit or tokenizer. For one such
 implementation with spirit see:
 
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Move =identifier_parser= to SML                                   :story:
-
-We will require parsing identifiers from JSON so we need access to
-identifier parser within SML.
 
 *** Consider renaming includers                                       :story:
 
