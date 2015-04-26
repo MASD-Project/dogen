@@ -44,6 +44,7 @@ Clock summary at [2015-04-26 Sun 08:33]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-26 Sun 10:15]--[2015-04-26 Sun 10:34] =>  0:19
     CLOCK: [2015-04-21 Tue 15:26]--[2015-04-21 Tue 15:39] =>  0:13
     CLOCK: [2015-04-20 Mon 22:53]--[2015-04-20 Mon 23:01] =>  0:08
     CLOCK: [2015-04-18 Sat 06:41]--[2015-04-18 Sat 07:15] =>  0:34
@@ -53,6 +54,7 @@ Clock summary at [2015-04-26 Sun 08:33]
 Updates to sprint and product backlog.
 
 *** STARTED Updates to the manual and readme files                    :story:
+    CLOCK: [2015-04-26 Sun 10:34]--[2015-04-26 Sun 11:25] =>  0:51
 
 Use downtime to update the manual and / or readme file.
 
@@ -404,6 +406,50 @@ At present we just throw in stitch. In a template with many lines this
 is going to be a nightmare. We need some indication of the line (and
 ideally column) number where it all went wrong.
 
+*** COMPLETED Naming of libraries and binaries                         :epic:
+    CLOSED: [2015-04-26 Sun 11:25]
+
+*New Understanding*
+
+Update manual with the content of this story.
+
+*Previous Understanding*
+
+*Note*: create a document with all of these names and close this story.
+
+We have a common problem with certain combination of utilities and
+libraries; often we end up with a library which should be named after
+the binary. For example, we should really call the "engine" library
+"dogen" as all its missing is the command line interface. In addition
+to this, it seems we are going to have more than one binary in the
+code base. In order to solve this we should adopt a naming strategy
+for both libraries and binaries. One approach is to choose verbs from
+a "theme" such as "weaving" - a lot of these tools are doing things
+that look a bit like weaving - and then use the noun for the library
+and the verb for the binary. Dogen is then a suite of utilities for
+domain generation.
+
+ For example:
+
+- stitch - library that generates formatters
+- stitcher - command line tool for generating formatters
+- knit - library that code generates [done]
+- knitter - command line tool for code generation [done]
+- tailor - tool to generate JSON / SML from Dia diagrams
+- sew - command line tool to generate JSON / SML from Dia
+  diagrams
+- needle: the small library with support for boost and standard
+  library (hashing, test data, etc.)
+- patch: library with code to update a dia Diagram given a C++ code
+  base. Doesn't create new classes - only adds or removes methods in
+  existing classes.
+- patcher: tool that uses the patch library.
+
+All binaries are prefixed with dogen to avoid clashes,
+e.g. =dogen_knitter=.
+
+See the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][Wikipedia glossary of sewing terms]].
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -488,15 +534,6 @@ avoid clashes with the source code of stitch itself.
 - update formatters workflow to visit forward declarations and  format
   them.
 - implement the stitcher template for forward declarations.
-- solve the problem of relocatable formatters. Basically we want to be
-  able to use forward declarations from within any facet. At present
-  that is not possible because formatters have hard-coded ownership
-  hierarchies. In addition, there is the potential for inclusion
-  dependencies generation which is also facet specific. However in the
-  case of forward declarations this is not an issue. It seems that for
-  forward declarations we could get away with supplying the facet when
-  constructing the formatter and then having it registered against
-  every facet. Investigate this possibility.
 
 *** Handling of managed directories is incorrect                      :story:
 
@@ -560,50 +597,6 @@ knitting - but some do. We need a way to filter these. One possibility
 is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
-
-*** Naming of libraries and binaries                                   :epic:
-
-*New Understanding*
-
-Update manual with the content of this story.
-
-*Previous Understanding*
-
-*Note*: create a document with all of these names and close this story.
-
-We have a common problem with certain combination of utilities and
-libraries; often we end up with a library which should be named after
-the binary. For example, we should really call the "engine" library
-"dogen" as all its missing is the command line interface. In addition
-to this, it seems we are going to have more than one binary in the
-code base. In order to solve this we should adopt a naming strategy
-for both libraries and binaries. One approach is to choose verbs from
-a "theme" such as "weaving" - a lot of these tools are doing things
-that look a bit like weaving - and then use the noun for the library
-and the verb for the binary. Dogen is then a suite of utilities for
-domain generation.
-
- For example:
-
-- stitch - library that generates formatters
-- stitcher - command line tool for generating formatters
-- knit - library that code generates [done]
-- knitter - command line tool for code generation [done]
-- tailor - tool to generate JSON / SML from Dia diagrams
-- sew - command line tool to generate JSON / SML from Dia
-  diagrams
-- needle: the small library with support for boost and standard
-  library (hashing, test data, etc.)
-- patch: library with code to update a dia Diagram given a C++ code
-  base. Doesn't create new classes - only adds or removes methods in
-  existing classes.
-- patcher: tool that uses the patch library.
-
-All binaries are prefixed with dogen to avoid clashes,
-e.g. =dogen_knitter=.
-
-See the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][Wikipedia glossary of sewing terms]].
-
 
 *** Code-generating formatters as text templates                       :epic:
 
@@ -889,5 +882,21 @@ Note: we should consider using [[https://github.com/jamboree/bustache][bustache]
 
 There is also [[https://www.youtube.com/watch?v%3DhTnoEjqUZjI][boostache]] but I could not find any code in github for
 it.
+
+*** Solve the problem of "relocatable" formatters                     :story:
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types.
 
 ** Deprecated

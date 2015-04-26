@@ -337,17 +337,59 @@ Lets look at each of these in more detail.
 
 *** Main Models
 
-The main models are hooked together in a fashion similar to that of
-the internals of a compiler. They belong to one of three groups: the
+Dogen is made up of a large number of main models, hooked together in
+different ways. But before we look into the main models, we need to
+understand the users of these models: the suite of tools.
+
+**** Dogen as a suite of tools
+
+Dogen is really just a suite of different tools that are related to
+code generation. Since we could not think of natural names to use,
+sewing was used as a theme. The naming scheme uses a couple of simple
+conventions:
+
+- top-level libraries that implement a tool use the infinitive form of
+  the verb (minus the "to", where applicable).
+- where applicable, we may have an executable binary that wraps the
+  top-level library. In this case, we use the noun closest to the
+  verb - even if in some cases we have to "nounify" the verb.
+
+At present, the following tools exist or have been planned:
+
+| Tool Name | Top-level library | Status  | Description                                             |
+|-----------+-------------------+---------+---------------------------------------------------------|
+| knitter   | knit              | started | Code-generation of models.                              |
+| stitcher  | stitch            | started | Basic text-templating support (similar to T4).          |
+| darner    | darn              | vision  | Generates JSON from Dia diagrams                        |
+|           | needle            | vision  | Library with supporting code, used by generated models. |
+| patch     | patcher           | vision  | Updates a dia Diagram given a C++ code base.            |
+|           | quilt             | vision  | Native domain model representation                      |
+|           | pleat             | vision  | Cross-language domain model representation              |
+
+Note that all binaries are prefixed with =dogen= to avoid clashes,
+e.g. =dogen_knitter=. The next sections provide details on each of
+these tools.
+
+It is important to notice that a main model may be used by more than
+one tool; however, to simplify things we describe the main models
+below from a tool's perspective.
+
+**** Knit
+
+The main objective of dogen was always to do code generation. As such,
+=knit= can be thought as its most important part, since that is it's
+objective. =knit= uses a number of main models, and hooks them
+together in a fashion similar to that of the internals of a
+compiler. Thus, these main models belong to one of three groups: the
 /front-end/, the /middle-end/ and the /backend/. The front-end group
 of models allows for different sources of domain information to be
-plugged into Dogen. The middle-end model - as there is only one - is
+plugged into =knit=. The middle-end model - as there is only one - is
 where all the language neutral transformations take place; It can be
 thought of as a bridge between domain modeling and code
 generation. Finally, the backend group of models are responsible for
-expressing SML as code.
+expressing the middle-end as code.
 
-**** The Front-end
+***** The Front-end
 
 When we started developing Dogen, we chose Dia as our main input
 format. Dia is a simple yet very powerful tool for drawing structured
@@ -376,14 +418,19 @@ direct dependency with Dia's code base. Since Dia XML changes very
 infrequently and since we use such a small part of Dia's
 functionality, this turned out to be a good decision.
 
-**** The middle-end
+Dogen also supports JSON as an input. However, since it was done
+specifically for Dogen, we added this directly to the middle-end. See
+the next section for details.
 
-We store the domain model internally as SML - a /meta-model/ largely
-based on Domain Driven Design. SML is designed to capture all the
-details of the domain model that are required for code generation, but
-in a form that is programming-language-agnostic. It is an intermediate
-model in between the front-ends (specific to a tool, for example) and
-the backends (specific to a programming language).
+***** The middle-end
+
+We store the domain model internally as SML - the Simplified Modeling
+Language. SML is a /meta-model/ largely based on Domain Driven
+Design. SML is designed to capture all the details of the domain model
+that are required for code generation, but in a form that is
+programming-language-agnostic. It is an intermediate model in between
+the front-ends (specific to a tool, for example) and the backends
+(specific to a programming language, for example).
 
 It is important not to confuse SML with other, more generic
 meta-models such as UML or the language-specific Reflection
@@ -392,7 +439,16 @@ like UML is; it is instead a special purpose meta-model for code
 generation, so it may appear to be very terse and not particularly
 obvious.
 
-**** The backends
+Models in SML can be in one of two forms: /partial/ or /merged/. A
+partial model is a model that has been read directly from the input,
+but which is incomplete; it may not provide definitions for all types,
+for example. A /merged/ model is one that was created by merging a
+number of partial models together, by resolving all definitions and by
+doing a number of required transformations so that the model is ready
+to be consumed. The job of the middle-end is to provide infrastructure
+to do all of these.
+
+***** The backends
 
 The role of the backend is to express the meta-model as code. We can
 think of this as the transformation of one representation of the
@@ -410,7 +466,7 @@ the data structures that we have deemed to be representative of the
 fundamental concepts of the problem domain. As part of the
 transformation process, the backend performs an expansion of these
 data structures, providing useful behaviours or "facilities". These
-facilities are aggregated in logical bundles called /facets/. They are
+facilities are aggregated in logical groups called /facets/. They are
 specific to the backend in question, although there are commonalities
 between backends - for example, all backends need to provide a
 definition of the domain types.
@@ -423,11 +479,12 @@ them in aggregate. /Facets/ provide the first level of grouping.
 Facets are housed in one or more folders in the file system, named
 after the facet. The facet folders are in turn composed of zero or
 more files and folders, with folders representing modules in the
-programming language in question - if it supports such a
-concept. Within a facet, files are grouped into "kinds": in Dogen
-parlance these are known as /features/ because each kind provides a
-new chunk of functionality to the system. A feature is effectively a
-type of file. Within a feature we have atomic chunks which we call
+programming language in question - if it supports such a concept
+(namespaces in C++ and C#, packages in Java and so on). Within a
+facet, files are grouped into "kinds": in Dogen parlance these are
+known as /features/ because each kind provides a new chunk of
+functionality to the system. A feature is effectively a type of
+file. Within a feature we have atomic chunks which we call
 /aspects/. Aspects can be related to other aspects in a chain of
 dependencies. An aspect may exist in multiple features, with different
 expressions. For example, "constructors" is one such an aspect.
@@ -464,7 +521,7 @@ formatting code generic to all backends, so that we can reuse it. It
 is then used by concrete formatter models such as =cpp_formatters=,
 and so on.
 
-***** The C++ backend
+****** The C++ backend
 
 The objective of the C++ backend =cpp= is to generate a C++
 representation of the domain model. At present only C++-11 is
@@ -493,7 +550,7 @@ The C++ backend defines the following facets:
 | test_data     | provides a set of "generators" that create test instances of the domain types.                        |
 | odb           | provides ODB support; the odb compiler is executed against the model to generate ORM mappings for it. |
 
-****** Design and evolution of the C++ backend
+******* Design and evolution of the C++ backend
 
 Whilst the purpose of the C++ backend is to generate standard's
 compliant C++ code, it is important to note that the Dogen's =cpp=
@@ -582,9 +639,9 @@ After much, much thinking, it was decided that the best way to handle
 this was to augment SML with the data required by the formatters. The
 /meta-data subsystem/ was born.
 
-**** The Meta-Data Subsystem
+***** The Dynamic Subsystem
 
-The meta-data subsystem has two main responsibilities:
+The =dynamic= subsystem has two main responsibilities:
 
 - to augment the front-end, providing a way of expressing middle-end
   constructs that are not naturally available in front-end language;
@@ -592,13 +649,27 @@ The meta-data subsystem has two main responsibilities:
   middle-end, without coupling the middle-end too much to the
   backends.
 
-The meta-data subsystem has the prefix /meta-data/ because it uses
+The =dynamic= subsystem is called "dynamic" because it uses
 weakly-typed annotations on top of a strongly typed object model to
-avoid coupling. We will now describe this machinery detail and delve
-into the data structures that implement them, as well as the historic
-context for the decisions made.
+avoid coupling. The =dynamic= subsystem is made up of two models:
 
-***** Meta-data in the Front-End
+- =dynamic::schema=: provides the type system that describes the
+  meta-data, including a way of validating it.
+- =dynamic::expansion=: provides a way to hook transformations that
+  augment the meta-data, possibly in several steps, before its
+  consumed.
+
+We will now describe this machinery detail and delve into the data
+structures that implement them. But first we will explore the need for
+=dynamic= in the first place.
+
+****** Evolution of Dynamic
+
+Dynamic evolved over time. It start off to solve problems we had in
+the front-end and then it was also used to solve problems in the
+backend. Lets look at this in turn.
+
+******* Dynamic in the Front-End
 
 As explained in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#the-front-end][front-end section]], the SML meta-model is
 bootstrapped from Dia diagrams. We soon found the need to transport
@@ -629,7 +700,7 @@ JSON document using a schema defined by Dogen. These other front-ends
 may or may not require Dogen instructions; if they do not, they must
 provide some other way to supply the meta-data definitions.
 
-***** Meta-data in the Middle-End
+******* Meta-data in the Middle-End
 
 As explained in the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/manual/manual.org#design-and-evolution-of-the-c-backend][Design and evolution of the C++ backend]], it is
 quite difficult to split duties between the middle-end and the
@@ -657,14 +728,16 @@ manually hard-coded in the transformation process.
 The solution to this conundrum was to leverage the instructions above
 to augment the middle-end with formatter specific information. This
 was done by keeping the required information in SML but storing it in
-a format that is transparent to the middle-end. We call this format
-the /meta-data/. The meta-data provides a generic mechanism to
-decorate objects with very simply structured data. We then allow each
-subsystem to take responsibility of its own keys and values: they
-define them, populate them with defaults, perform validation and
-ultimately consume them. In order to support this, SML defines a set
-of interfaces and a registration process that enables interested
-parties to hook into the transformation process.
+a format that is transparent to the middle-end. We first had a
+weakly typed implementation that used =boost::property_tree= but we
+soon found the need for a more strongly typed approach, that included
+validation. This is now =dynamic::schema=.
+
+=dynamic::schema= provides a generic mechanism to decorate objects
+with very simply structured data. We then allow each subsystem to take
+responsibility of its own keys and values: they define them, populate
+them with defaults, perform validation and ultimately consume
+them. This is done by creating JSON files with field definitions.
 
 This approach also has the side-benefit that we can expose all the
 configuration knobs directly to users via the front-end instructions;
@@ -672,14 +745,13 @@ in the past this had to be done by creating new command line options,
 but again that would be far too static in a world of plug-ins and
 run-time decisions.
 
-***** Tags
+****** Tags
 
 A simple flat structure of key-value-pairs was sufficient for the
 needs of the front-end, but unfortunately it was not good enough to
 express all the complex data structures required by the formatters. So
-we interpreted the meta-data definitions to mean paths in a tree, with
-a corresponding value which can be a scalar or an array. In terms of
-implementation we used =boost::ptree= to store the data.
+we interpreted the meta-data definitions to mean paths in a logical
+tree, with a corresponding value which can be a scalar or an array.
 
 So it was that, as part of this formalisation process, we named the
 keys as /tags/ because they require a well-defined syntax in order to
@@ -718,7 +790,7 @@ For details on the meaning of these terms, see the [[https://github.com/DomainDr
 section. Example tags: =cpp.types.main.enabled=,
 =cpp.serialisation.main.enabled=.
 
-***** Complete List of Tags
+****** Complete List of Tags
 
 The following table lists all of the available tags, the model that
 makes them available and describes what the tag controls. Providers of
