@@ -489,7 +489,7 @@ to_forward_declarations_info(const sml::enumeration& e) const {
     auto r(std::make_shared<forward_declarations_info>());
     populate_entity_properties(e.name(), e.extensions(), e.documentation(), *r);
     r->is_enum(true);
-    r->enum_type(e.name().simple_name());
+    r->enum_type("unsigned int"); // FIXME
     return r;
 }
 

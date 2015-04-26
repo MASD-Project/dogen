@@ -114,7 +114,8 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
             sbf(s, tt.settings().general_settings(), id, empty_header_guard);
 
         dogen::formatters::cpp::scoped_namespace_formatter snf(
-            s, ss.containing_namespaces(), false/*create_anonymous_namespace*/);
+            s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
+            true/*add_new_line_*/);
 
         for (const auto& l : tt.lines()) {
             if (l.segments().empty()) {

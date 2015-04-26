@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
@@ -95,13 +94,8 @@ format(const formattables::forward_declarations_info& fd) const {
     const auto fs(s.formatter_settings_for_formatter(fn));
     validate(fs);
 
-    {
-        const auto gs(fd.settings().general_settings());
-        dogen::formatters::cpp::scoped_boilerplate_formatter sbf(
-            fo, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
-        forward_declarations_formatter_stitch(fo);
-    }
+    const auto gs(fd.settings().general_settings());
+    forward_declarations_formatter_stitch(fo, gs, fs, fd);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << fd.name();
     dogen::formatters::file r;

@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 21:33]
+Clock summary at [2015-04-26 Sun 22:47]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *45:00* |       |      |
+| *Total time*                                                    | *46:01* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 45:00 |      |
+| Active                                                          |         | 46:01 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:39 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -46,7 +46,7 @@ Clock summary at [2015-04-26 Sun 21:33]
 | COMPLETED Move namespace formatter to formatters                |         |       | 0:46 |
 | COMPLETED Split =identifier_parser= into utility and SML        |         |       | 0:21 |
 | COMPLETED Add namespace support to stitch templates             |         |       | 0:56 |
-| STARTED Create a forward declarations formatter using stitch    |         |       | 3:33 |
+| COMPLETED Create a forward declarations formatter using stitch  |         |       | 4:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -791,6 +791,43 @@ Tasks:
 - add new field for namespaces to stitch
 - use both from within stitch
 
+*** COMPLETED Create a forward declarations formatter using stitch    :story:
+    CLOSED: [2015-04-26 Sun 22:45]
+    CLOCK: [2015-04-26 Sun 22:09]--[2015-04-26 Sun 22:47] =>  0:38
+    CLOCK: [2015-04-26 Sun 21:46]--[2015-04-26 Sun 22:09] =>  0:23
+    CLOCK: [2015-04-26 Sun 16:50]--[2015-04-26 Sun 18:27] =>  1:37
+    CLOCK: [2015-04-26 Sun 12:11]--[2015-04-26 Sun 12:51] =>  0:40
+    CLOCK: [2015-04-26 Sun 11:47]--[2015-04-26 Sun 12:10] =>  0:23
+    CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
+    CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
+    CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
+
+We need to start making use of stitch in dogen. To start off with, we
+will manually run the stitch command against a template to generate
+the =cpp= file and include the header file from the formatter. We also
+need to inject the stitch file name to the list of ignores, probably
+by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
+avoid clashes with the source code of stitch itself.
+
+*Tasks*:
+
+- transformer to return a list of formattables; objects that have
+  forward declarations need at least two types in c++ for each SML
+  type. We should do this across the board.
+- forward declarations type needs to know if its a class or enum, and
+  if enum the type; as well as name.
+- add method in transformer to create the forward declarations info.
+- ensure forward declarations have header guard populated in
+  expansion.
+- create a forward declarations formatter and register it (add
+  container in registrar, etc.)
+- update formatters workflow to visit forward declarations and  format
+  them.
+- implement the stitcher template for forward declarations.
+- solve the relocation problem and implement serialisation forward
+  declarations. actually, in truth, it is a totally separate forward
+  declarations formatter.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -850,41 +887,11 @@ Solution for cycles:
   should check all of the pairs in a cycle; for these we should simply
   look at the values of b, and update a accordingly.
 
-*** STARTED Create a forward declarations formatter using stitch      :story:
-    CLOCK: [2015-04-26 Sun 16:50]--[2015-04-26 Sun 18:27] =>  1:37
-    CLOCK: [2015-04-26 Sun 12:11]--[2015-04-26 Sun 12:51] =>  0:40
-    CLOCK: [2015-04-26 Sun 11:47]--[2015-04-26 Sun 12:10] =>  0:23
-    CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
-    CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
-    CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
+*** Output new world forward declarations                             :story:
 
-We need to start making use of stitch in dogen. To start off with, we
-will manually run the stitch command against a template to generate
-the =cpp= file and include the header file from the formatter. We also
-need to inject the stitch file name to the list of ignores, probably
-by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
-avoid clashes with the source code of stitch itself.
-
-*Tasks*:
-
-- transformer to return a list of formattables; objects that have
-  forward declarations need at least two types in c++ for each SML
-  type. We should do this across the board.
-- forward declarations type needs to know if its a class or enum, and
-  if enum the type; as well as name.
-- add method in transformer to create the forward declarations info.
-- ensure forward declarations have header guard populated in
-  expansion.
-- create a forward declarations formatter and register it (add
-  container in registrar, etc.)
-- update formatters workflow to visit forward declarations and  format
-  them.
-- implement the stitcher template for forward declarations.
-- suppress class header formatter and enable forward declarations
-  formatter; we want to start using new code from now on.
-- solve the relocation problem and implement serialisation forward
-  declarations. actually, in truth, it is a totally separate forward
-  declarations formatter.
+We need to find a way to suppress class header formatter and enable
+forward declarations formatter; we want to start using new code from
+now on.
 
 *** Contents change check is done twice                               :story:
 

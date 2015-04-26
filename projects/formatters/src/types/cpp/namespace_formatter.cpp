@@ -32,8 +32,9 @@ namespace formatters {
 namespace cpp {
 
 namespace_formatter::namespace_formatter(
-    const bool create_anonymous_namespace)
-    : create_anonymous_namespace_(create_anonymous_namespace) {}
+    const bool create_anonymous_namespace, const bool add_new_line)
+    : create_anonymous_namespace_(create_anonymous_namespace),
+      add_new_line_(add_new_line) {}
 
 void namespace_formatter::
 format_begin(std::ostream& s, const std::string& ns) const {
@@ -89,6 +90,9 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
         format_end(s, n);
         first = false;
     }
+
+    if (add_new_line_)
+        s << std::endl;
 }
 
 } } }

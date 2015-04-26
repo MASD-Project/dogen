@@ -114,7 +114,8 @@ stream_ << "This is line numnber: 0" << std::endl;
 const std::string with_containing_namespaces(R"(namespace first {
 namespace second {
 stream_ << "This is line numnber: 0" << std::endl;
-} })");
+} }
+)");
 
 dogen::formatters::file format(const dogen::stitch::text_template& tt) {
     dogen::stitch::formatter f;

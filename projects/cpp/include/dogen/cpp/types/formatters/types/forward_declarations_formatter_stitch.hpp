@@ -27,12 +27,21 @@
 
 #include <ostream>
 
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void forward_declarations_formatter_stitch(std::ostream& s);
+void forward_declarations_formatter_stitch(std::ostream& s,
+    const boost::optional<dogen::formatters::general_settings>& gs,
+    const settings::formatter_settings& fs,
+    const formattables::forward_declarations_info& fd);
 
 } } } }
 
