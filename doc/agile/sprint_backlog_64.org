@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-25 Sat 21:10]
+Clock summary at [2015-04-26 Sun 08:33]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *37:41* |       |      |
+| *Total time*                                                    | *37:49* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 37:41 |      |
+| Active                                                          |         | 37:49 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
@@ -40,7 +40,7 @@ Clock summary at [2015-04-25 Sat 21:10]
 | COMPLETED Add support for inline code in stitch                 |         |       | 2:07 |
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
-| STARTED Create a forward declarations formatter using stitch    |         |       | 0:45 |
+| STARTED Create a forward declarations formatter using stitch    |         |       | 0:53 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -464,6 +464,7 @@ Solution for cycles:
   look at the values of b, and update a accordingly.
 
 *** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
     CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
     CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
 
@@ -487,6 +488,15 @@ avoid clashes with the source code of stitch itself.
 - update formatters workflow to visit forward declarations and  format
   them.
 - implement the stitcher template for forward declarations.
+- solve the problem of relocatable formatters. Basically we want to be
+  able to use forward declarations from within any facet. At present
+  that is not possible because formatters have hard-coded ownership
+  hierarchies. In addition, there is the potential for inclusion
+  dependencies generation which is also facet specific. However in the
+  case of forward declarations this is not an issue. It seems that for
+  forward declarations we could get away with supplying the facet when
+  constructing the formatter and then having it registered against
+  every facet. Investigate this possibility.
 
 *** Handling of managed directories is incorrect                      :story:
 
