@@ -38,6 +38,9 @@ namespace cpp {
  */
 class namespace_formatter {
 public:
+    explicit namespace_formatter(const bool create_anonymous_namespace = true);
+
+public:
     /**
      * @brief Formats the opening of a single namespace.
      */
@@ -46,7 +49,7 @@ public:
     /**
      * @brief Formats the closing of a single namespace.
      */
-    void format_end(std::ostream& s) const;
+    void format_end(std::ostream& s, const std::string& ns) const;
 
 public:
     /**
@@ -58,6 +61,9 @@ public:
      * @brief Formats the closing of the namespaces.
      */
     void format_end(std::ostream& s, const std::list<std::string>& ns) const;
+
+private:
+    const bool create_anonymous_namespace_;
 };
 
 } } }

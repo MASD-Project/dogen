@@ -31,24 +31,36 @@ namespace dogen {
 namespace formatters {
 namespace cpp {
 
+namespace_formatter::namespace_formatter(
+    const bool create_anonymous_namespace)
+    : create_anonymous_namespace_(create_anonymous_namespace) {}
+
 void namespace_formatter::
 format_begin(std::ostream& s, const std::string& ns) const {
-    s << "namespace";
+    if (!create_anonymous_namespace_ && ns.empty())
+        return;
+
+    s << "namespace ";
     if (ns.empty())
-        s << " {";
+        s << "{";
     else
-        s << " " << ns << " {";
+        s << ns << " {";
 
     s << std::endl;
 }
 
 void namespace_formatter::
-format_end(std::ostream& s) const {
-    s << "}"; // no std::endl by design
+format_end(std::ostream& s, const std::string& ns) const {
+    if (!create_anonymous_namespace_ && ns.empty())
+        return;
+
+    s << "}"; // no space and no std::endl by design
 }
 
 void namespace_formatter::
 format_begin(std::ostream& s, const std::list<std::string>& ns) const {
+    if (!create_anonymous_namespace_ && ns.empty())
+        return;
 
     if (ns.empty()) {
         format_begin(s, empty);
@@ -61,8 +73,11 @@ format_begin(std::ostream& s, const std::list<std::string>& ns) const {
 
 void namespace_formatter::
 format_end(std::ostream& s, const std::list<std::string>& ns) const {
+    if (!create_anonymous_namespace_ && ns.empty())
+        return;
+
     if (ns.empty()) {
-        format_end(s);
+        format_end(s, empty);
         return;
     }
 
@@ -71,7 +86,7 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
         if (!first)
             s << " ";
 
-        format_end(s);
+        format_end(s, n);
         first = false;
     }
 }

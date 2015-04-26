@@ -40,7 +40,8 @@ namespace cpp {
 class scoped_namespace_formatter {
 public:
     scoped_namespace_formatter(
-        std::ostream& s, const std::list<std::string>& ns);
+        std::ostream& s, const std::list<std::string>& ns,
+        const bool create_anonymous_namespace = true);
 
     ~scoped_namespace_formatter();
 

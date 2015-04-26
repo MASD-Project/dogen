@@ -86,7 +86,7 @@ void namespace_documentation::format_namespace(
         for (auto ns : ni.namespaces()) {
             if (!first)
                 stream_ << " ";
-            nsf.format_end(stream_);
+            nsf.format_end(stream_, ns);
             first = false;
         }
     }
