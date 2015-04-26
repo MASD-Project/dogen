@@ -24,7 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -33,13 +33,13 @@
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
+#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
-
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -48,8 +48,6 @@ using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
 static logger lg(logger_factory(traits::class_header_formatter_name()));
 
-const std::string formatter_settings_not_found(
-    "Could not find settings for formatter: ");
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
@@ -130,8 +128,8 @@ provider::provide(const dynamic::schema::repository& rp,
     return r;
 }
 
-void class_header_formatter::validate(
-    const settings::formatter_settings& fs) const {
+void class_header_formatter::
+validate(const settings::formatter_settings& fs) const {
 
     const auto& fn(ownership_hierarchy().formatter_name());
     if (fs.file_path().empty()) {
@@ -143,20 +141,6 @@ void class_header_formatter::validate(
         BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
     }
-}
-
-settings::formatter_settings class_header_formatter::
-formatter_settings_for_formatter(const formattables::class_info& c) const {
-    const auto& fs(c.settings().formatter_settings());
-    const auto& fn(ownership_hierarchy().formatter_name());
-    const auto i(fs.find(fn));
-    if (i == fs.end()) {
-        BOOST_LOG_SEV(lg, error) << formatter_settings_not_found << fn;
-
-        BOOST_THROW_EXCEPTION(
-            formatting_error(formatter_settings_not_found + fn));
-    }
-    return i->second;
 }
 
 dynamic::schema::ownership_hierarchy
@@ -186,19 +170,18 @@ class_header_formatter::format(const formattables::class_info& c) const {
     dogen::formatters::indent_filter::push(fo, 4);
     fo.push(ss);
 
-    const auto fs(formatter_settings_for_formatter(c));
+    const settings::selector s(c.settings());
+    const auto& fn(ownership_hierarchy().formatter_name());
+    const auto fs(s.formatter_settings_for_formatter(fn));
     validate(fs);
 
-    const auto hg(*fs.header_guard());
-    dogen::formatters::cpp::boilerplate_formatter f;
-    const auto gs(c.settings().general_settings());
-    if (gs)
-        f.format_begin(fo, gs->annotation(), fs.inclusion_dependencies(), hg);
+    {
+        const auto gs(c.settings().general_settings());
+        dogen::formatters::cpp::scoped_boilerplate_formatter sbf(
+            fo, gs, fs.inclusion_dependencies(), *fs.header_guard());
 
-    // do formatting.
-
-    if (gs)
-        f.format_end(fo, gs->annotation(), hg);
+        // do formatting.
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;

@@ -20,10 +20,17 @@
  */
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
 
-void complex_template(std::ostream& s) {
+namespace dogen {
+namespace cpp {
+namespace formatters {
+namespace types {
+
+void forward_declarations_formatter_stitch(std::ostream& s) {
 s << "this is a relatively more" << std::endl;
     for (auto i = 0; i < 3; ++i) {
 s << "    complex (" << i << ")" << std::endl;
 }
 s << "  template" << std::endl;
 }
+
+} } } }

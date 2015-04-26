@@ -51,12 +51,6 @@ private:
      */
     void validate(const settings::formatter_settings& fs) const;
 
-    /**
-     * @brief Gets the formatter settings for this formatter.
-     */
-    settings::formatter_settings formatter_settings_for_formatter(
-        const formattables::class_info& c) const;
-
 public:
     dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 

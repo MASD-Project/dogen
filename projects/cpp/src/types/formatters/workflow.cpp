@@ -46,6 +46,7 @@ public:
 public:
     using formattable_visitor::visit;
     void visit(const formattables::class_info& c) override;
+    void visit(const formattables::forward_declarations_info& fd) override;
     void visit(const formattables::enum_info& e) override;
     void visit(const formattables::exception_info& e) override;
     void visit(const formattables::registrar_info& r) override;
@@ -73,6 +74,11 @@ dispatcher::dispatcher(const container& c) : container_(c) { }
 void dispatcher::visit(const formattables::class_info& c) {
     for (const auto f : container_.class_formatters())
         files_.push_front(f->format(c));
+}
+
+void dispatcher::visit(const formattables::forward_declarations_info& fd) {
+    for (const auto f : container_.forward_declarations_formatters())
+        files_.push_front(f->format(fd));
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {

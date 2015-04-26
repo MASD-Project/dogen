@@ -4,7 +4,12 @@
 <#@ inclusion_dependency="dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp" #>
 <#@ modeline_group_name=emacs #>
 <#+
-void complex_template(std::ostream& s) {
+namespace dogen {
+namespace cpp {
+namespace formatters {
+namespace types {
+
+void forward_declarations_formatter_stitch(std::ostream& s) {
 #>
 this is a relatively more
 <#+
@@ -15,4 +20,8 @@ this is a relatively more
 }
 #>
   template
-<#+ } #>
+<#+
+}
+
+} } } }
+#>

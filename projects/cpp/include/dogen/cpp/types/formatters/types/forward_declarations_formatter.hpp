@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -34,6 +35,13 @@ namespace types {
 
 class forward_declarations_formatter
     : public forward_declarations_formatter_interface {
+private:
+    /**
+     * @brief Ensures all expected settings are available and set to
+     * valid values.
+     */
+    void validate(const settings::formatter_settings& fs) const;
+
 public:
     dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 
