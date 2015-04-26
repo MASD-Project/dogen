@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
-#include <list>
 #include "dogen/formatters/types/annotation.hpp"
 
 namespace dogen {

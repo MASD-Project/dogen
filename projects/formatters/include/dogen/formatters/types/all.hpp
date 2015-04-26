@@ -54,3 +54,4 @@
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
