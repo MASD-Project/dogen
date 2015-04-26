@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <memory>
+#include <forward_list>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
@@ -44,8 +46,8 @@ public:
         : transformer_(w, m) { }
 
 private:
-    void add(std::shared_ptr<formattables::formattable> f) {
-        result_.push_front(f);
+    void add(std::forward_list<std::shared_ptr<formattables::formattable> > f) {
+        result_.splice_after(result_.before_begin(), f);
     }
 
     template<typename Generatable>

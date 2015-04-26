@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 11:46]
+Clock summary at [2015-04-26 Sun 12:10]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *39:18* |       |      |
+| *Total time*                                                    | *39:41* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 39:18 |      |
+| Active                                                          |         | 39:41 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:30 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -42,7 +42,7 @@ Clock summary at [2015-04-26 Sun 11:46]
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 | COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
-| STARTED Create a forward declarations formatter using stitch    |         |       | 0:53 |
+| STARTED Create a forward declarations formatter using stitch    |         |       | 1:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -800,6 +800,7 @@ Solution for cycles:
   look at the values of b, and update a accordingly.
 
 *** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-26 Sun 11:47]--[2015-04-26 Sun 12:10] =>  0:23
     CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
     CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
     CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
@@ -816,6 +817,8 @@ avoid clashes with the source code of stitch itself.
 - transformer to return a list of formattables; objects that have
   forward declarations need at least two types in c++ for each SML
   type. We should do this across the board.
+- forward declarations type needs to know if its a class or enum, and
+  if enum the type; as well as name.
 - add method in transformer to create the forward declarations info.
 - ensure forward declarations have header guard populated in
   expansion.
@@ -824,5 +827,7 @@ avoid clashes with the source code of stitch itself.
 - update formatters workflow to visit forward declarations and  format
   them.
 - implement the stitcher template for forward declarations.
+- suppress class header formatter and enable forward declarations
+  formatter; we want to start using new code from now on.
 
 ** Deprecated

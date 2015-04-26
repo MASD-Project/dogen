@@ -28,6 +28,7 @@
 #include <list>
 #include <tuple>
 #include <memory>
+#include <forward_list>
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
@@ -149,27 +150,32 @@ public:
     /**
      * @brief Transform an SML enumeration into a C++ entity.
      */
-    std::shared_ptr<formattable> transform(const sml::enumeration& e) const;
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const sml::enumeration& e) const;
 
     /**
      * @brief Transform an SML module into a C++ entity.
      */
-    std::shared_ptr<formattable> transform(const sml::module& m) const;
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const sml::module& m) const;
 
     /**
      * @brief Transform an SML concept into a C++ entity.
      */
-    std::shared_ptr<formattable> transform(const sml::concept& c) const;
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const sml::concept& c) const;
 
     /**
      * @brief Transform an SML primitive into a C++ entity.
      */
-    std::shared_ptr<formattable> transform(const sml::primitive& p) const;
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const sml::primitive& p) const;
 
     /**
      * @brief Transform an SML object into a C++ entity.
      */
-    std::shared_ptr<formattable> transform(const sml::object& o) const;
+    std::forward_list<std::shared_ptr<formattable> >
+    transform(const sml::object& o) const;
 
 private:
     const settings::workflow& settings_workflow_;

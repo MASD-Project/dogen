@@ -10,6 +10,25 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider splitting =formattables::transformer=                    :story:
+
+We have two different responsibilities within transformer:
+
+- to perform an individual (1-1) transformation of an SML type into a
+  formatable;
+- to determine how many transformations of an SML type are required,
+  and to do them.
+
+Maybe we should have a top-level transformer that collaborates with
+specific transformers, aligned to =cpp= types
+(e.g. =class_info_transformer=, =enum_info_transformer= and so on,
+each taking different (or the same) SML types). The role of the
+top-level transformer is to call all of the sub-transformers for a
+given SML type.
+
+This work should be done when we finish all the work in the
+transformer.
+
 *** Handling of managed directories is incorrect                      :story:
 
 At present we are querying the dia to sml transformer to figure out

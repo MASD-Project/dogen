@@ -479,47 +479,62 @@ transformer::to_visitor_info(const sml::object& o) const {
     return r;
 }
 
-std::shared_ptr<formattable>
+std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const sml::enumeration& e) const {
-    return to_enum_info(e);
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_enum_info(e));
+    return r;
 }
 
-std::shared_ptr<formattable> transformer::
+std::forward_list<std::shared_ptr<formattable> > transformer::
 transform(const sml::module& m) const {
-    return to_namespace_info(m);
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(to_namespace_info(m));
+    return r;
 }
 
-std::shared_ptr<formattable>
+std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const sml::concept& /*c*/) const {
-    return std::make_shared<concept_info>();
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(std::make_shared<concept_info>());
+    return r;
 }
 
-std::shared_ptr<formattable>
+std::forward_list<std::shared_ptr<formattable> >
 transformer::transform(const sml::primitive& /*p*/) const {
-    return std::make_shared<primitive_info>();
+    std::forward_list<std::shared_ptr<formattable> > r;
+    r.push_front(std::make_shared<primitive_info>());
+    return r;
 }
 
-std::shared_ptr<formattable> transformer::
+std::forward_list<std::shared_ptr<formattable> > transformer::
 transform(const sml::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
                              << sml::string_converter::convert(o.name());
 
+    std::forward_list<std::shared_ptr<formattable> > r;
     switch(o.object_type()) {
     case sml::object_types::factory: // FIXME: mega-hack
     case sml::object_types::user_defined_service:
-        return to_class_info(o, class_types::service);
+        r.push_front(to_class_info(o, class_types::service));
+        break;
     case sml::object_types::visitor:
-        return to_visitor_info(o);
+        r.push_front(to_visitor_info(o));
+        break;
     case sml::object_types::user_defined_value_object:
     case sml::object_types::entity:
     case sml::object_types::keyed_entity:
-        return to_class_info(o, class_types::user_defined);
+        r.push_front(to_class_info(o, class_types::user_defined));
+        break;
     case sml::object_types::exception:
-        return to_exception_info(o);
+        r.push_front(to_exception_info(o));
+        break;
     case sml::object_types::versioned_key:
-        return to_class_info(o, class_types::versioned_key);
+        r.push_front(to_class_info(o, class_types::versioned_key));
+        break;
     case sml::object_types::unversioned_key:
-        return to_class_info(o, class_types::unversioned_key);
+        r.push_front(to_class_info(o, class_types::unversioned_key));
+        break;
     default: {
         const auto n(sml::string_converter::convert(o.name()));
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
@@ -528,6 +543,7 @@ transform(const sml::object& o) const {
                 boost::lexical_cast<std::string>(o.object_type())));
     } };
 
+    return r;
     BOOST_LOG_SEV(lg, debug) << "Transformed object.";
 }
 
