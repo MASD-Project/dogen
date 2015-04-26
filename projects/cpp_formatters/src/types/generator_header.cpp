@@ -22,14 +22,13 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/generator_header.hpp"
@@ -162,8 +161,8 @@ void generator_header::format_enumeration(
 
     const auto ei(*o);
     {
-        std::list<std::string> namespaces(ei.namespaces());
-        namespace_helper ns_helper(stream_, namespaces);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
         generator_class(ei);
@@ -182,8 +181,9 @@ void generator_header::format_class(const cpp::formattables::file_info& f) {
 
     {
         const cpp::formattables::class_info& ci(*o);
-        std::list<std::string> namespaces(ci.namespaces());
-        namespace_helper ns_helper(stream_, namespaces);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
+
         utility_.blank_line();
 
         generator_class(ci);

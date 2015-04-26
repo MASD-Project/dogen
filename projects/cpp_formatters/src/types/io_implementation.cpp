@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
@@ -29,8 +30,6 @@
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
@@ -87,7 +86,8 @@ void io_implementation::format_enumeration(
     }
 
     const auto ei(*o);
-    namespace_helper ns_helper(stream_, ei.namespaces());
+    using dogen::formatters::cpp::scoped_namespace_formatter;
+    scoped_namespace_formatter nsh(stream_, ei.namespaces());
     utility_.blank_line();
 
     stream_ << "std::ostream& operator<<(std::ostream& s, "
@@ -154,7 +154,8 @@ void io_implementation::format_class(const cpp::formattables::file_info& f) {
     const cpp::formattables::class_info& ci(*o);
     io_helper_methods(ci);
 
-    namespace_helper ns_helper(stream_, ci.namespaces());
+    using dogen::formatters::cpp::scoped_namespace_formatter;
+    scoped_namespace_formatter nsh(stream_, ci.namespaces());
     utility_.blank_line();
 
     stream_ << "std::ostream& operator<<(std::ostream& s, ";

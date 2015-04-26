@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
+#include "dogen/formatters/types/cpp/namespace_formatter.hpp"
 
 namespace {
 
@@ -28,34 +28,52 @@ const std::string empty;
 }
 
 namespace dogen {
-namespace cpp_formatters {
+namespace formatters {
+namespace cpp {
 
-namespace_helper::namespace_helper(std::ostream& stream,
-    const std::list<std::string>& namespaces)
-    : stream_(stream), namespace_formatter_(stream), namespaces_(namespaces) {
+void namespace_formatter::
+format_begin(std::ostream& s, const std::string& ns) const {
+    s << "namespace";
+    if (ns.empty())
+        s << " {";
+    else
+        s << " " << ns << " {";
 
-    if (namespaces_.empty()) {
-        namespace_formatter_.format_start(empty);
+    s << std::endl;
+}
+
+void namespace_formatter::
+format_end(std::ostream& s) const {
+    s << "}"; // no std::endl by design
+}
+
+void namespace_formatter::
+format_begin(std::ostream& s, const std::list<std::string>& ns) const {
+
+    if (ns.empty()) {
+        format_begin(s, empty);
         return;
     }
 
-    for (auto ns : namespaces_)
-        namespace_formatter_.format_start(ns);
+    for (auto n : ns)
+        format_begin(s, n);
 }
 
-namespace_helper::~namespace_helper() {
-    if (namespaces_.empty()) {
-        namespace_formatter_.format_end();
+void namespace_formatter::
+format_end(std::ostream& s, const std::list<std::string>& ns) const {
+    if (ns.empty()) {
+        format_end(s);
         return;
     }
 
     bool first(true);
-    for (auto ns : namespaces_) {
+    for (auto n : ns) {
         if (!first)
-            stream_ << " ";
-        namespace_formatter_.format_end();
+            s << " ";
+
+        format_end(s);
         first = false;
     }
 }
 
-} }
+} } }

@@ -21,13 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/doxygen_comments.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/visitor.hpp"
 
@@ -53,7 +52,8 @@ file_formatter::shared_ptr visitor::create(std::ostream& stream) {
 
 void visitor::format(const cpp::formattables::visitor_info& vi) {
     {
-        namespace_helper ns(stream_, vi.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, vi.namespaces());
         utility_.blank_line();
 
         doxygen_comments dc(stream_, indenter_);

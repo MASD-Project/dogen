@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 19:26]
+Clock summary at [2015-04-26 Sun 20:13]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *42:57* |       |      |
+| *Total time*                                                    | *43:43* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 42:57 |      |
+| Active                                                          |         | 43:43 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:39 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -43,6 +43,7 @@ Clock summary at [2015-04-26 Sun 19:26]
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 | COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
 | COMPLETED Move =identifier_parser= to SML                       |         |       | 0:50 |
+| COMPLETED Move namespace formatter to formatters                |         |       | 0:46 |
 | STARTED Create a forward declarations formatter using stitch    |         |       | 3:33 |
 #+end:
 
@@ -750,6 +751,20 @@ it.
 We will require parsing identifiers from JSON so we need access to
 identifier parser within SML.
 
+*** COMPLETED Move namespace formatter to formatters                  :story:
+    CLOSED: [2015-04-26 Sun 20:13]
+    CLOCK: [2015-04-26 Sun 19:27]--[2015-04-26 Sun 20:13] =>  0:46
+
+We need to make use of the namespace formatter from stitch so it needs
+to move into =formatters= model.
+
+Tasks:
+
+- create a namespace formatter inspired in =cpp_formatters=, and add a
+  scoped version;
+- update =cpp_formatters= to use it and delete the legacy one;
+- remove skeleton classes from =cpp= model.
+
 *** STARTED Create a "supported" expander                             :story:
 
 This needs a bit more analysis. The gist of it is that not all types
@@ -857,11 +872,6 @@ Tasks:
 - add new field for namespaces to stitch
 - move namespaces formatter to =formatters::cpp=
 - use both from within stitch
-
-*** Move namespace formatter to formatters                            :story:
-
-We need to make use of the namespace formatter from stitch so it needs
-to move into =formatters= model.
 
 *** Contents change check is done twice                               :story:
 

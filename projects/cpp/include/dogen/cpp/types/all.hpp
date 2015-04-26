@@ -109,7 +109,6 @@
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/cpp/types/formatters/namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/test_data/test_data.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"

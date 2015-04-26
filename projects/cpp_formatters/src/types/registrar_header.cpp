@@ -21,10 +21,9 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/registrar_header.hpp"
@@ -69,7 +68,9 @@ void registrar_header::format(const cpp::formattables::file_info& f) {
 
     {
         const auto ri(*o);
-        namespace_helper ns(stream_, ri.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ri.namespaces());
+
         utility_.blank_line();
         stream_ << indenter_ << "template<typename Archive>" << std::endl
                 << indenter_ << "void register_types(Archive& ar);"

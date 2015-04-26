@@ -22,12 +22,11 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/enum_declaration.hpp"
 #include "dogen/cpp_formatters/types/exception_declaration.hpp"
@@ -103,7 +102,9 @@ swap_method(const cpp::formattables::class_info& ci) {
     if (ci.all_properties().empty() || ci.is_parent() || ci.is_immutable())
         return;
 
-    namespace_helper ns(stream_, std::list<std::string> { "std" });
+    const auto ns = std::list<std::string> { "std" };
+    using dogen::formatters::cpp::scoped_namespace_formatter;
+    scoped_namespace_formatter nsh(stream_, ns);
     utility_.blank_line();
 
     stream_ << indenter_ << "template<>" << std::endl
@@ -130,7 +131,8 @@ swap_method(const cpp::formattables::class_info& ci) {
 void types_main_header_file_formatter::visit(
     cpp::formattables::class_info& ci) {
     {
-        namespace_helper ns(stream_, ci.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
         utility_.blank_line();
 
         cpp_formatters::class_declaration f(stream_, disable_serialization_,
@@ -155,7 +157,8 @@ void types_main_header_file_formatter::visit(
 
 void types_main_header_file_formatter::visit(cpp::formattables::enum_info& ei) {
     {
-        namespace_helper ns(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
         enum_declaration f(stream_);
         f.format(ei);
@@ -166,7 +169,8 @@ void types_main_header_file_formatter::visit(cpp::formattables::enum_info& ei) {
 void types_main_header_file_formatter::
 visit(cpp::formattables::exception_info& ei) {
     {
-        namespace_helper ns(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
         exception_declaration f(stream_);
         f.format(ei);

@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
@@ -29,9 +30,7 @@
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/hash_implementation.hpp"
@@ -655,7 +654,9 @@ void hash_implementation::format_class(const cpp::formattables::file_info& f) {
 
     const cpp::formattables::class_info& ci(*o);
     {
-        namespace_helper nsh(stream_, std::list<std::string> { });
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, std::list<std::string> { });
+
         utility_.blank_line();
         combine_function(ci);
         create_helper_methods(ci);
@@ -663,7 +664,8 @@ void hash_implementation::format_class(const cpp::formattables::file_info& f) {
     }
     utility_.blank_line(2);
     {
-        namespace_helper ns_helper(stream_, ci.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
         utility_.blank_line();
 
         hasher_hash_method(ci);

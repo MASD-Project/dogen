@@ -23,15 +23,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/generator_implementation.hpp"
@@ -648,7 +647,8 @@ create_helper_methods(const cpp::formattables::class_info& ci) {
     if (props.empty())
         return;
 
-    namespace_helper ns_helper(stream_, std::list<std::string> { });
+    using dogen::formatters::cpp::scoped_namespace_formatter;
+    scoped_namespace_formatter nsh(stream_, std::list<std::string> { });
     std::unordered_set<std::string> types_done;
 
     utility_.blank_line();
@@ -829,8 +829,8 @@ void generator_implementation::format_class(
     utility_.blank_line(2);
 
     {
-        std::list<std::string> ns(ci.namespaces());
-        namespace_helper ns_helper(stream_, ns);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
 
         utility_.blank_line();
         default_constructor(ci);
@@ -858,8 +858,8 @@ void generator_implementation::format_enumeration(
 
     const auto ei(*o);
     {
-        std::list<std::string> ns(ei.namespaces());
-        namespace_helper ns_helper(stream_, ns);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
 
         utility_.blank_line();
         const std::string name(ei.name() + "_generator");

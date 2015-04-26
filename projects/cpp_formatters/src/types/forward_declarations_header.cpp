@@ -23,16 +23,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/forward_declarations_header.hpp"
 
 using namespace dogen::utility::log;
@@ -69,7 +68,8 @@ void forward_declarations_header::
 format_serialization_class(const cpp::formattables::class_info& ci) {
     {
         std::list<std::string> ns({ boost_ns, serialization_ns });
-        namespace_helper nsh(stream_, ns);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ns);
         utility_.blank_line();
 
         stream_ << indenter_ << "template<class Archive>" << std::endl
@@ -94,7 +94,8 @@ format_serialization_class(const cpp::formattables::class_info& ci) {
 void forward_declarations_header::
 format_domain_class(const cpp::formattables::class_info& ci) {
     {
-        namespace_helper nsh(stream_, ci.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "class " << ci.name() << ";" << std::endl;
@@ -136,7 +137,8 @@ format_enumeration(const cpp::formattables::file_info& f) {
 
     const auto ei(*o);
     {
-        namespace_helper nsh(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "enum class " << ei.name()
@@ -157,7 +159,8 @@ void forward_declarations_header::format_exception(
 
     const auto ei(*o);
     {
-        namespace_helper nsh(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "class " << ei.name() << ";" << std::endl;

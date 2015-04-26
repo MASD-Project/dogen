@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
@@ -30,8 +31,6 @@
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/io_header.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 
 using namespace dogen::utility::log;
@@ -68,7 +67,8 @@ void io_header::format_class(const cpp::formattables::file_info& f) {
 
     {
         const cpp::formattables::class_info& ci(*o);
-        namespace_helper helper1(stream_, ci.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "std::ostream&" << std::endl
@@ -98,7 +98,8 @@ void io_header::format_enumeration(const cpp::formattables::file_info& f) {
 
     const auto ei(*o);
     {
-        namespace_helper ns_helper(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
         stream_ << indenter_ << "std::ostream& operator<<(std::ostream& s, "

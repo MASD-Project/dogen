@@ -23,15 +23,14 @@
 #include <ostream>
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/serialization_header.hpp"
@@ -95,8 +94,9 @@ void serialization_header::format_class(const cpp::formattables::file_info& f) {
     if (!ci.is_parent() && !parents.empty())
     {
         {
-            std::list<std::string> ns { boost_ns };
-            namespace_helper nsh(stream_, ns);
+            const auto ns = std::list<std::string> { boost_ns };
+            using dogen::formatters::cpp::scoped_namespace_formatter;
+            scoped_namespace_formatter nsh(stream_, ns);
             utility_.blank_line();
 
             for (const auto p : parents) {
@@ -131,8 +131,10 @@ void serialization_header::format_class(const cpp::formattables::file_info& f) {
     }
 
     {
-        std::list<std::string> ns { boost_ns, serialization_ns };
-        namespace_helper nsh(stream_, ns);
+        const auto ns = std::list<std::string> { boost_ns, serialization_ns };
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ns);
+
         utility_.blank_line();
         load_and_save_functions(ci);
         utility_.blank_line();

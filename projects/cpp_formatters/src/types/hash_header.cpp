@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
@@ -29,9 +30,7 @@
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/hash_header.hpp"
@@ -123,7 +122,9 @@ void hash_header::format_enumeration(const cpp::formattables::file_info& f) {
 
     const auto ei(*o);
     {
-        namespace_helper nsh(stream_, std::list<std::string> { std_ns });
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        const auto ns(std::list<std::string> { std_ns });
+        scoped_namespace_formatter nsh(stream_, ns);
         utility_.blank_line();
 
         stream_ << indenter_ << "template<>" << std::endl
@@ -165,7 +166,9 @@ void hash_header::format_class(const cpp::formattables::file_info& f) {
 
     const cpp::formattables::class_info& ci(*o);
     {
-        namespace_helper nsh(stream_, ci.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
+
         utility_.blank_line();
         hash_helper_class(ci);
         utility_.blank_line();
@@ -173,9 +176,9 @@ void hash_header::format_class(const cpp::formattables::file_info& f) {
 
     utility_.blank_line(2);
     {
-        std::list<std::string> namespaces;
-        namespaces.push_back(std_ns);
-        namespace_helper nsh(stream_, namespaces);
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        const auto ns = std::list<std::string> { std_ns };
+        scoped_namespace_formatter nsh(stream_, ns);
 
         utility_.blank_line();
         hash_class(ci);

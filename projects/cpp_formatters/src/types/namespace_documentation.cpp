@@ -22,13 +22,13 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp_formatters/types/doxygen_comments.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/namespace_documentation.hpp"
 
@@ -73,20 +73,20 @@ void namespace_documentation::format_namespace(
 
         auto other_ns(ni.namespaces());
         other_ns.pop_back();
-        namespace_formatter nsf(stream_);
+        dogen::formatters::cpp::namespace_formatter nsf;
         for (auto ns : other_ns)
-            nsf.format_start(ns);
+            nsf.format_begin(stream_, ns);
         utility_.blank_line();
 
         doxygen_comments dc(stream_, indenter_);
         dc.format(ni.documentation());
-        nsf.format_start(ni.namespaces().back());
+        nsf.format_begin(stream_, ni.namespaces().back());
 
         bool first(true);
         for (auto ns : ni.namespaces()) {
             if (!first)
                 stream_ << " ";
-            nsf.format_end();
+            nsf.format_end(stream_);
             first = false;
         }
     }

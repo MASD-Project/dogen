@@ -18,18 +18,48 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_FORMATTERS_TYPES_NAMESPACE_FORMATTER_FWD_HPP
-#define DOGEN_CPP_FORMATTERS_TYPES_NAMESPACE_FORMATTER_FWD_HPP
+#ifndef DOGEN_FORMATTERS_TYPES_CPP_NAMESPACE_FORMATTER_HPP
+#define DOGEN_FORMATTERS_TYPES_CPP_NAMESPACE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
+#include <iosfwd>
+#include <string>
+
 namespace dogen {
-namespace cpp_formatters {
+namespace formatters {
+namespace cpp {
 
-class namespace_formatter;
+/**
+ * @brief Formats C++ namespaces.
+ */
+class namespace_formatter {
+public:
+    /**
+     * @brief Formats the opening of a single namespace.
+     */
+    void format_begin(std::ostream& s, const std::string& ns) const;
 
-} }
+    /**
+     * @brief Formats the closing of a single namespace.
+     */
+    void format_end(std::ostream& s) const;
+
+public:
+    /**
+     * @brief Formats the opening of the namespaces.
+     */
+    void format_begin(std::ostream& s, const std::list<std::string>& ns) const;
+
+    /**
+     * @brief Formats the closing of the namespaces.
+     */
+    void format_end(std::ostream& s, const std::list<std::string>& ns) const;
+};
+
+} } }
 
 #endif

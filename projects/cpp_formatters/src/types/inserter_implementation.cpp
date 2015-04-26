@@ -22,9 +22,9 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
 
 using namespace dogen::utility::log;
@@ -95,7 +95,8 @@ sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto containee(children.front());
 
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"
@@ -156,7 +157,8 @@ associative_container_helper(const cpp::formattables::nested_type_info& nti) {
 
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"
@@ -251,7 +253,8 @@ smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
 
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"
@@ -327,7 +330,8 @@ optional_helper(const cpp::formattables::nested_type_info& nti) {
 
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"
@@ -397,7 +401,8 @@ pair_helper(const cpp::formattables::nested_type_info& nti) {
 
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"
@@ -470,7 +475,8 @@ variant_helper(const cpp::formattables::nested_type_info& nti) {
 
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_
@@ -586,7 +592,8 @@ void inserter_implementation::ptree_helper(
     }
 
     {
-        namespace_helper ns_helper(stream_, nti.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, nti.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline std::ostream& operator<<"

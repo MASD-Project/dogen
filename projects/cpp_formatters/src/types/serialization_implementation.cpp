@@ -24,11 +24,11 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/enum_info.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/exception_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/qname.hpp"
@@ -294,8 +294,10 @@ void serialization_implementation::format_class(
     }
 
     {
-        std::list<std::string> ns { boost_ns, serialization_ns };
-        namespace_helper nsh(stream_, ns);
+        const auto ns = std::list<std::string> { boost_ns, serialization_ns };
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ns);
+
         utility_.blank_line();
         save_function(ci);
         load_function(ci);
@@ -303,8 +305,10 @@ void serialization_implementation::format_class(
     utility_.blank_line(2);
 
     {
-        std::list<std::string> ns { boost_ns, serialization_ns };
-        namespace_helper nsh(stream_, ns);
+        const auto ns = std::list<std::string> { boost_ns, serialization_ns };
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ns);
+
         utility_.blank_line();
         template_instantiations(ci);
     }

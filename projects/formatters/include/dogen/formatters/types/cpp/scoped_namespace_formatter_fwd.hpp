@@ -18,27 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#include <ostream>
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
+#ifndef DOGEN_FORMATTERS_TYPES_CPP_SCOPED_NAMESPACE_FORMATTER_FWD_HPP
+#define DOGEN_FORMATTERS_TYPES_CPP_SCOPED_NAMESPACE_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace cpp_formatters {
+namespace formatters {
+namespace cpp {
 
-namespace_formatter::namespace_formatter(std::ostream& stream)
-    : stream_(stream) { }
+class scoped_namespace_formatter;
 
-void namespace_formatter::format_start(const std::string& name) {
-    stream_ << "namespace";
-    if (name.empty())
-        stream_ << " {";
-    else
-        stream_ << " " << name << " {";
-    stream_ << std::endl;
-}
+} } }
 
-void namespace_formatter::format_end() {
-    stream_ << "}"; // no std::endl by design
-}
-
-} }
+#endif

@@ -23,12 +23,11 @@
 #include <boost/pointer_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/header_guards.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/indenter.hpp"
 #include "dogen/cpp_formatters/types/utility.hpp"
@@ -93,7 +92,8 @@ smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     }
     const auto container(nti);
     {
-        namespace_helper ns_helper(stream_, container.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, container.namespaces());
 
         utility_.blank_line();
         stream_ << indenter_ << "inline bool operator=="
@@ -215,7 +215,8 @@ void domain_implementation::format_class(
     for (const auto p : props)
         recursive_helper_method_creator(p.type(), types_done);
 
-    namespace_helper ns_helper(stream_, ci.namespaces());
+    using dogen::formatters::cpp::scoped_namespace_formatter;
+    scoped_namespace_formatter nsh(stream_, ci.namespaces());
     utility_.blank_line();
     class_implementation(f.descriptor(), ci);
     inserter_operator(ci);

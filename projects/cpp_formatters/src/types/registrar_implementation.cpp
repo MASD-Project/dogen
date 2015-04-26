@@ -21,10 +21,9 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
-#include "dogen/cpp_formatters/types/namespace_formatter.hpp"
-#include "dogen/cpp_formatters/types/namespace_helper.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
 #include "dogen/cpp_formatters/types/registrar_implementation.hpp"
@@ -78,7 +77,8 @@ void registrar_implementation::format(const cpp::formattables::file_info& f) {
 
     {
         const auto ei(*o);
-        namespace_helper ns(stream_, ei.namespaces());
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
 
         const auto deps(ei.model_dependencies());
         const auto leaves(ei.leaves());
