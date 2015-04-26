@@ -20,11 +20,8 @@
  */
 #define BOOST_SPIRIT_USE_PHOENIX_V3
 #include <functional>
-#include <boost/tokenizer.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/range/algorithm.hpp>
 #include <boost/spirit/include/qi.hpp>
-#include <boost/algorithm/string/trim.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
@@ -32,7 +29,6 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
-#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/types/parsing_error.hpp"
@@ -44,8 +40,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("sml.identifier_parser"));
 
-const char* scope_delimiter = "::";
-const char* comma_delimiter = ",";
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
@@ -198,36 +192,6 @@ nested_qname identifier_parser::parse_qname(const std::string& n) const {
     }
 
     const auto r(builder->build());
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
-    return r;
-}
-
-std::list<std::string>
-identifier_parser::parse_scoped_name(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "parsing scoped name: " << n;
-
-    const boost::char_separator<char> sep(scope_delimiter);
-    boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
-
-    std::list<std::string> r;
-    boost::copy(tokens, std::inserter(r, r.end()));
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
-    return r;
-}
-
-std::list<std::string>
-identifier_parser::parse_csv_string(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "parsing csv string: " << n;
-
-    const boost::char_separator<char> sep(comma_delimiter);
-    boost::tokenizer<boost::char_separator<char> > tokens(n, sep);
-
-    std::list<std::string> r;
-    for (auto t : tokens) {
-        boost::trim(t);
-        r.push_back(t);
-    }
-
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
     return r;
 }

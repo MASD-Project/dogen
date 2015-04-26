@@ -19,11 +19,11 @@
  *
  */
 #include <boost/graph/depth_first_search.hpp>
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
@@ -50,8 +50,8 @@ workflow::create_qualified_name_for_model(const std::string& model_name,
     const std::string& external_module_path) const {
 
     sml::qname r;
-    using sml::identifier_parser;
-    const auto epp(identifier_parser::parse_scoped_name(external_module_path));
+    using utility::string::splitter;
+    const auto epp(splitter::split_scoped(external_module_path));
     r.external_module_path(epp);
     r.model_name(model_name);
     r.simple_name(model_name);

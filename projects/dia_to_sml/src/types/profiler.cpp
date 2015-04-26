@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/identifier_parser.hpp"
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia_to_sml/io/profile_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -71,7 +71,8 @@ process_object_type(profile& o, const object_types ot) const {
 
 void profiler::
 process_stereotype(profile& o, const std::string& s) const {
-    const auto stereotypes(sml::identifier_parser::parse_csv_string(s));
+    using utility::string::splitter;
+    const auto stereotypes(splitter::split_csv(s));
 
     for (const auto& stereotype : stereotypes) {
         if (stereotype == enumeration)
