@@ -450,155 +450,9 @@ e.g. =dogen_knitter=.
 
 See the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][Wikipedia glossary of sewing terms]].
 
-*** STARTED Create a "supported" expander                             :story:
-
-This needs a bit more analysis. The gist of it is that not all types
-support all formatters. We need a way to determine if a formatter is
-not supported. This probably should be inferred by a "is dogen model"
-property (see backlog); e.g. non-dogen models need their types to have
-an inclusion setup in order to be "supported", otherwise they should
-default to "not-supported". However the "supported" flag is populated,
-we then need to take into account relationships and propagate this
-flag across the model such that, if a type =A= in a dogen model has a
-property of a type =B= from a non-dogen model which does not support a
-given formatter =f=, then =A= must also not support =f=.
-
-In order to implement this feature we need to:
-
-- update the SML grapher to take into account relationships
-  (properties that the class has) as well as inheritance.
-- we must only visit related types if we ourselves do not have values
-  for all supported fields.
-- we also need a visitor that detects cycles; when a cycle is found we
-  simply assume that the status of the revisited class is true (or
-  whatever the default value of "supported" is) and we write a warning
-  to the log file. We should output the complete path of the cycle.
-- users can override this by setting supported for all formatters
-  where there are cycles.
-- we could perhaps have a bitmask by qname; we could start by
-  generating all bitmasks for all qnames and setting them to default
-  value. We could then find all qnames that have supported set to
-  false and update the corresponding bitmasks. Then we could use the
-  graph to loop through the qnames and "and" the bitmasks of each
-  qname with the bitmasks of their related qnames. The position of
-  each field is allocated by the algorithm (e.g. the first "supported"
-  field is at position 0 and so on). Actually the first position of
-  the bitmask could be used to indicate if the bitmask has already
-  been processed or not. In the presence of a cycle force it to true.
-- we need a class that takes the SML model and computes the supported
-  bitmasks for each qname; the supported expander then simply takes
-  this (perhaps as part of the expansion context), looks up for the
-  current qname and uses the field list to set the flags
-  appropriately.
-- we should remove all traces of supported from a settings
-  perspective; supported and multi-level enabled are just artefacts of
-  the meta-data. From a settings perspective, there is just a
-  formatter level (common formatter settings) enabled which determines
-  whether the formatter is on or off. How that flag came to be
-  computed is not relevant outside the expansion process. This also
-  means we can have simpler or more complex policies as time allows us
-  improve on this story; provided we can at least set all flags to
-  enabled we can move forward.
-
-Solution for cycles:
-
-- detect the cycle and then remember the pair (a, b) where b is the
-  start of the cycle and a is the last vertex before the cycle. We
-  should assume that a is (true, true) for the edge (a, b) and compute
-  all other edges. Finally, once the graph has been processed we
-  should check all of the pairs in a cycle; for these we should simply
-  look at the values of b, and update a accordingly.
-
-*** STARTED Create a forward declarations formatter using stitch      :story:
-    CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
-    CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
-    CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
-
-We need to start making use of stitch in dogen. To start off with, we
-will manually run the stitch command against a template to generate
-the =cpp= file and include the header file from the formatter. We also
-need to inject the stitch file name to the list of ignores, probably
-by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
-avoid clashes with the source code of stitch itself.
-
-*Tasks*:
-
-- transformer to return a list of formattables; objects that have
-  forward declarations need at least two types in c++ for each SML
-  type. We should do this across the board.
-- add method in transformer to create the forward declarations info.
-- ensure forward declarations have header guard populated in
-  expansion.
-- create a forward declarations formatter and register it (add
-  container in registrar, etc.)
-- update formatters workflow to visit forward declarations and  format
-  them.
-- implement the stitcher template for forward declarations.
-
-*** Handling of managed directories is incorrect                      :story:
-
-At present we are querying the dia to sml transformer to figure out
-what the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
-
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
-
-- list of files;
-- list of managed directories.
-
-Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an SML model as input.
-
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-*** Split knitting from stitching settings                            :story:
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
-
-*** Code-generating formatters as text templates                       :epic:
+*** COMPLETED Code-generating formatters as text templates             :epic:
+    CLOSED: [2015-04-26 Sun 11:42]
+    CLOCK: [2015-04-26 Sun 11:27]--[2015-04-26 Sun 11:42] =>  0:15
 
 *New Understanding*
 
@@ -883,6 +737,154 @@ Note: we should consider using [[https://github.com/jamboree/bustache][bustache]
 There is also [[https://www.youtube.com/watch?v%3DhTnoEjqUZjI][boostache]] but I could not find any code in github for
 it.
 
+*** STARTED Create a "supported" expander                             :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+Solution for cycles:
+
+- detect the cycle and then remember the pair (a, b) where b is the
+  start of the cycle and a is the last vertex before the cycle. We
+  should assume that a is (true, true) for the edge (a, b) and compute
+  all other edges. Finally, once the graph has been processed we
+  should check all of the pairs in a cycle; for these we should simply
+  look at the values of b, and update a accordingly.
+
+*** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
+    CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
+    CLOCK: [2015-04-25 Sat 20:24]--[2015-04-25 Sat 20:58] =>  0:34
+
+We need to start making use of stitch in dogen. To start off with, we
+will manually run the stitch command against a template to generate
+the =cpp= file and include the header file from the formatter. We also
+need to inject the stitch file name to the list of ignores, probably
+by ignoring =*_stitch.cpp=, =*_stitch.hpp= and =*.stitch=. This should
+avoid clashes with the source code of stitch itself.
+
+*Tasks*:
+
+- transformer to return a list of formattables; objects that have
+  forward declarations need at least two types in c++ for each SML
+  type. We should do this across the board.
+- add method in transformer to create the forward declarations info.
+- ensure forward declarations have header guard populated in
+  expansion.
+- create a forward declarations formatter and register it (add
+  container in registrar, etc.)
+- update formatters workflow to visit forward declarations and  format
+  them.
+- implement the stitcher template for forward declarations.
+
+*** Handling of managed directories is incorrect                      :story:
+
+At present we are querying the dia to sml transformer to figure out
+what the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an SML model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Consider removing the overwrite flag in =formatters::file=        :story:
+
+Investigate if the overwrite flag makes sense in file; it seems we
+only use it in two scenarios: force overwrite requested by user or
+file contents have changed, both of which can be done in the
+file_writer.
+
+Actually this flag is needed. It is required to handle the case where
+we do not code-generate files, unless they do not exist. For example,
+for service headers and implementation we should create the files, but
+then subsequently not touch them. The overwrite flag should be set to
+false. We need to figure out how to implement this and remove the
+hacks around file writing.
+
+*** Split knitting from stitching settings                            :story:
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
 *** Solve the problem of "relocatable" formatters                     :story:
 
 There may be cases where a formatter is the same for all facets, but
@@ -898,5 +900,21 @@ that the same formatter would be registered for every facet.
 
 We don't yet have a use case for this. It was thought to be needed for
 forward declarations but at present we only need them for types.
+
+*** Update dynamic section in manual                                  :story:
+
+We need to talk about the new fields, field templates, etc.
+
+*** Add stitch section in manual                                      :story:
+
+We need to document stitch:
+
+- formal definition of the language and its limitations;
+- command line usage of the tool.
+
+*** Indent stitch output using clang format                           :story:
+
+We need to indent the output coming out of stitch as it is not
+suitable for reading as-is.
 
 ** Deprecated

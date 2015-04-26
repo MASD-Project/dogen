@@ -46,6 +46,46 @@ also stitch as required. This could be achieved as follows:
   stitch with the template and uses it to create a file. Same
   challenge as with the header.
 
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
+*** Implement stitch with merging                                     :story:
+
+When we have merging support we can actually implement stitch in a
+good way. We could mark the formatters with meta-data stating they
+have a method which is a stitch template. That then results in a c++
+operation which makes reference to stitch. When converting SML into
+the CPP model we can add a "content" property to the stitchable
+operations that contains the expansion of the stitch
+template. Finally, when inside of the stitch template that is
+code-generating, we will loop through all of the operations. For the
+stitched ones, we can then dump the content property. Merge support is
+required because formatters are always expected to have a component of
+hand-crafting (include providers etc) and cannot be implemented
+without it.
+
 *** Add kvp support to =identifier_parser=                            :story:
 
 We have code to split kvps all over the place. We should do this in a
@@ -5227,7 +5267,23 @@ must be correctly handled by CMake such that they are excluded on UNIX
 and added on Windows. Same with [[http://en.wikipedia.org/wiki/Precompiled_header][StdAfx.h]] and cpp, which will require
 looking into pre-compiled headers support in CMake.
 
+*** Add support for plugins                                           :story:
 
+An interesting idea is to generate a model that contains formatters,
+create a dynamic library and then have some kind of loading mechanism
+in Dogen. The interesting thing is that with static factories, dogen
+could make use of this without any code changes at all (e.g. loading
+the library into the process is sufficient to trigger registration,
+and then its up to the dynamic extensions to decide whether to use the
+formatters or not). So a user could create a model with formatters,
+add its own text templates, compile and link it and then add it to
+Dogen and then make use of the new formatters. The usual constraints
+apply such as ABI (ensure one is using the same compiler as used to
+compile Dogen, flags, etc).
+
+This may also make sense for the front-end, but less so.
+
+See [[http://apolukhin.github.io/Boost.DLL/index.html][Boost.DLL]].
 
 *** Add vagrant and docker support                                    :story:
 
