@@ -13,13 +13,13 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 12:10]
+Clock summary at [2015-04-26 Sun 12:51]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *39:41* |       |      |
+| *Total time*                                                    | *40:21* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 39:41 |      |
+| Active                                                          |         | 40:21 |      |
 | STARTED Sprint and product backlog grooming                     |         |       | 1:30 |
 | STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
@@ -42,7 +42,7 @@ Clock summary at [2015-04-26 Sun 12:10]
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
 | COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
-| STARTED Create a forward declarations formatter using stitch    |         |       | 1:16 |
+| STARTED Create a forward declarations formatter using stitch    |         |       | 1:56 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -800,6 +800,7 @@ Solution for cycles:
   look at the values of b, and update a accordingly.
 
 *** STARTED Create a forward declarations formatter using stitch      :story:
+    CLOCK: [2015-04-26 Sun 12:11]--[2015-04-26 Sun 12:51] =>  0:40
     CLOCK: [2015-04-26 Sun 11:47]--[2015-04-26 Sun 12:10] =>  0:23
     CLOCK: [2015-04-26 Sun 08:25]--[2015-04-26 Sun 08:33] =>  0:08
     CLOCK: [2015-04-25 Sat 20:59]--[2015-04-25 Sat 21:10] =>  0:11
@@ -829,5 +830,51 @@ avoid clashes with the source code of stitch itself.
 - implement the stitcher template for forward declarations.
 - suppress class header formatter and enable forward declarations
   formatter; we want to start using new code from now on.
+- solve the relocation problem and implement serialisation forward
+  declarations.
+
+*** Solve the problem of "relocatable" formatters                     :story:
+
+*New Understanding*
+
+We need to solve this problem because the forward declaration is used
+from both types and serialisation.
+
+*Previous Understanding*
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types. It is
+probably needed in order to integrate knit and stitch.
+
+*** Contents change check is done twice                               :story:
+
+We seem to check twice if a file has changed:
+
+: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+
+This is in stitch but it should be the same for knit.
+
+*** Stitch does not handle directories very well                      :story:
+
+At present we seem to generate log files called =.= when we use stitch
+against a directory. This should only happen if we use =.= on the
+target parameter, e.g.:
+
+: --target .
+
+Not sure why it is happening when we call stitch from CMake since it
+should use the full path to the =cpp= directory.
 
 ** Deprecated

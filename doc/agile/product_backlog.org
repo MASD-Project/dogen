@@ -108,23 +108,6 @@ We need to document stitch:
 We need to indent the output coming out of stitch as it is not
 suitable for reading as-is.
 
-*** Solve the problem of "relocatable" formatters                     :story:
-
-There may be cases where a formatter is the same for all facets, but
-we still need to have it instantiated for every facet. At present that
-is not possible because formatters have hard-coded ownership
-hierarchies. In addition, there is the potential for inclusion
-dependencies generation which is also facet specific.
-
-This could be solved by instantiating the formatter in the initializer
-of every facet, and supplying the facet name to the constructor; the
-ownership hierarchy would then use this facet name. This would mean
-that the same formatter would be registered for every facet.
-
-We don't yet have a use case for this. It was thought to be needed for
-forward declarations but at present we only need them for types. It is
-probably needed in order to integrate knit and stitch.
-
 *** Integration of stitch and dogen                                   :story:
 
 Now that we have implemented stitch and proved it works (more or
