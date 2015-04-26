@@ -10,6 +10,102 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Handling of managed directories is incorrect                      :story:
+
+At present we are querying the dia to sml transformer to figure out
+what the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an SML model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Consider removing the overwrite flag in =formatters::file=        :story:
+
+Investigate if the overwrite flag makes sense in file; it seems we
+only use it in two scenarios: force overwrite requested by user or
+file contents have changed, both of which can be done in the
+file_writer.
+
+Actually this flag is needed. It is required to handle the case where
+we do not code-generate files, unless they do not exist. For example,
+for service headers and implementation we should create the files, but
+then subsequently not touch them. The overwrite flag should be set to
+false. We need to figure out how to implement this and remove the
+hacks around file writing.
+
+*** Split knitting from stitching settings                            :story:
+
+At present we only have a single common directory with all of the
+available fields. Not all fields apply to both stitching and
+knitting - but some do. We need a way to filter these. One possibility
+is to use an approach similar to the formatter groups in the ownership
+hierarchy. For now we simply have fields that have no meaning in
+stitching but can be supplied by users.
+
+*** Update dynamic section in manual                                  :story:
+
+We need to talk about the new fields, field templates, etc.
+
+*** Add stitch section in manual                                      :story:
+
+We need to document stitch:
+
+- formal definition of the language and its limitations;
+- command line usage of the tool.
+
+*** Indent stitch output using clang format                           :story:
+
+We need to indent the output coming out of stitch as it is not
+suitable for reading as-is.
+
+*** Solve the problem of "relocatable" formatters                     :story:
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types. It is
+probably needed in order to integrate knit and stitch.
+
 *** Integration of stitch and dogen                                   :story:
 
 Now that we have implemented stitch and proved it works (more or
@@ -70,21 +166,6 @@ also stitch as required. This could be achieved as follows:
   to perform the stitching as part of knitter's workflows. Perhaps as
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
-
-*** Implement stitch with merging                                     :story:
-
-When we have merging support we can actually implement stitch in a
-good way. We could mark the formatters with meta-data stating they
-have a method which is a stitch template. That then results in a c++
-operation which makes reference to stitch. When converting SML into
-the CPP model we can add a "content" property to the stitchable
-operations that contains the expansion of the stitch
-template. Finally, when inside of the stitch template that is
-code-generating, we will loop through all of the operations. For the
-stitched ones, we can then dump the content property. Merge support is
-required because formatters are always expected to have a component of
-hand-crafting (include providers etc) and cannot be implemented
-without it.
 
 *** Add kvp support to =identifier_parser=                            :story:
 
@@ -3358,6 +3439,21 @@ sufficient.
 
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
+
+*** Implement stitch with merging                                     :story:
+
+When we have merging support we can actually implement stitch in a
+good way. We could mark the formatters with meta-data stating they
+have a method which is a stitch template. That then results in a c++
+operation which makes reference to stitch. When converting SML into
+the CPP model we can add a "content" property to the stitchable
+operations that contains the expansion of the stitch
+template. Finally, when inside of the stitch template that is
+code-generating, we will loop through all of the operations. For the
+stitched ones, we can then dump the content property. Merge support is
+required because formatters are always expected to have a component of
+hand-crafting (include providers etc) and cannot be implemented
+without it.
 
 *** Allow cross model inheritance                                     :story:
 

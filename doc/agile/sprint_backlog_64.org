@@ -13,14 +13,15 @@ formatters using it.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-26 Sun 08:33]
+Clock summary at [2015-04-26 Sun 11:46]
 
 | Headline                                                        | Time    |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                    | *37:49* |       |      |
+| *Total time*                                                    | *39:18* |       |      |
 |-----------------------------------------------------------------+---------+-------+------|
-| Active                                                          |         | 37:49 |      |
-| STARTED Sprint and product backlog grooming                     |         |       | 1:07 |
+| Active                                                          |         | 39:18 |      |
+| STARTED Sprint and product backlog grooming                     |         |       | 1:30 |
+| STARTED Updates to the manual and readme files                  |         |       | 0:51 |
 | COMPLETED Create a formatting utilities class                   |         |       | 1:17 |
 | COMPLETED Implement a basic formatter in stitch                 |         |       | 3:02 |
 | COMPLETED Fix build errors in Windows and Linux 32-bit          |         |       | 0:28 |
@@ -40,10 +41,12 @@ Clock summary at [2015-04-26 Sun 08:33]
 | COMPLETED Add support for inline code in stitch                 |         |       | 2:07 |
 | COMPLETED Tidy-up parser with helper functions and more tests   |         |       | 1:14 |
 | COMPLETED Report line numbers when throwing errors in stitch    |         |       | 0:49 |
+| COMPLETED Code-generating formatters as text templates          |         |       | 0:15 |
 | STARTED Create a forward declarations formatter using stitch    |         |       | 0:53 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-26 Sun 11:42]--[2015-04-26 Sun 11:46] =>  0:04
     CLOCK: [2015-04-26 Sun 10:15]--[2015-04-26 Sun 10:34] =>  0:19
     CLOCK: [2015-04-21 Tue 15:26]--[2015-04-21 Tue 15:39] =>  0:13
     CLOCK: [2015-04-20 Mon 22:53]--[2015-04-20 Mon 23:01] =>  0:08
@@ -821,100 +824,5 @@ avoid clashes with the source code of stitch itself.
 - update formatters workflow to visit forward declarations and  format
   them.
 - implement the stitcher template for forward declarations.
-
-*** Handling of managed directories is incorrect                      :story:
-
-At present we are querying the dia to sml transformer to figure out
-what the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
-
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
-
-- list of files;
-- list of managed directories.
-
-Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an SML model as input.
-
-*** Consider removing the overwrite flag in =formatters::file=        :story:
-
-Investigate if the overwrite flag makes sense in file; it seems we
-only use it in two scenarios: force overwrite requested by user or
-file contents have changed, both of which can be done in the
-file_writer.
-
-Actually this flag is needed. It is required to handle the case where
-we do not code-generate files, unless they do not exist. For example,
-for service headers and implementation we should create the files, but
-then subsequently not touch them. The overwrite flag should be set to
-false. We need to figure out how to implement this and remove the
-hacks around file writing.
-
-*** Split knitting from stitching settings                            :story:
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
-
-*** Solve the problem of "relocatable" formatters                     :story:
-
-There may be cases where a formatter is the same for all facets, but
-we still need to have it instantiated for every facet. At present that
-is not possible because formatters have hard-coded ownership
-hierarchies. In addition, there is the potential for inclusion
-dependencies generation which is also facet specific.
-
-This could be solved by instantiating the formatter in the initializer
-of every facet, and supplying the facet name to the constructor; the
-ownership hierarchy would then use this facet name. This would mean
-that the same formatter would be registered for every facet.
-
-We don't yet have a use case for this. It was thought to be needed for
-forward declarations but at present we only need them for types.
-
-*** Update dynamic section in manual                                  :story:
-
-We need to talk about the new fields, field templates, etc.
-
-*** Add stitch section in manual                                      :story:
-
-We need to document stitch:
-
-- formal definition of the language and its limitations;
-- command line usage of the tool.
-
-*** Indent stitch output using clang format                           :story:
-
-We need to indent the output coming out of stitch as it is not
-suitable for reading as-is.
 
 ** Deprecated
