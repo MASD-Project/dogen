@@ -142,7 +142,7 @@ format_enumeration(const cpp::formattables::file_info& f) {
         utility_.blank_line();
 
         stream_ << indenter_ << "enum class " << ei.name()
-                << " : unsigned int;";
+                << " : unsigned int;" << std::endl;
         utility_.blank_line();
     }
     utility_.blank_line(2);

@@ -53,11 +53,8 @@ now on.
 
 We will also have to deal with all the breaks that this generates.
 
-*** Text of GPL V2 licence is the same as V3                          :story:
-
-We seem to have copied and pasted the licence across.
-
-*** Fix missing new line in enumeration forward declarations          :story:
+*** STARTED Fix missing new line in enumeration forward declarations  :story:
+    CLOCK: [2015-04-27 Mon 18:08]--[2015-04-27 Mon 18:38] =>  0:30
 
 For now we put in a hack in the stitch template not to output
 those.
@@ -67,6 +64,10 @@ those.
 - fix legacy formatters;
 - rebase the world
 - fix template.
+
+*** Text of GPL V2 licence is the same as V3                          :story:
+
+We seem to have copied and pasted the licence across.
 
 *** Inclusion provision needs to cater for optional case              :story:
 

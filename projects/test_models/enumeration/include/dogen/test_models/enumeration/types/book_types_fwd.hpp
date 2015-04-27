@@ -30,6 +30,7 @@ namespace test_models {
 namespace enumeration {
 
 enum class book_types : unsigned int;
+
 } } }
 
 #endif

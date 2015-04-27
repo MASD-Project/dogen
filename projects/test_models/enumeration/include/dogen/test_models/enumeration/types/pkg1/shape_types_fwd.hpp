@@ -31,6 +31,7 @@ namespace enumeration {
 namespace pkg1 {
 
 enum class shape_types : unsigned int;
+
 } } } }
 
 #endif
