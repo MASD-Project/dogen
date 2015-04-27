@@ -5287,6 +5287,24 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Compile stitch template output with clang                         :story:
+
+Once we have integrated clang for formatting stitch output, it would be
+great to also to be great to integrate it for compilation. It would
+work as follows:
+
+- start creating compilation databases when we do a regular build with
+  clang;
+- within stitch, get clang to detect the compilation database "near"
+  the template; presumably clang has some infrastructure to do so
+  already - if not we could perform a file look up.
+- create a mapping of template lines to output lines during output
+  generation.
+- run clang with the compilation database options against the template
+  output. Use the mapping to provide a cross reference between the
+  template output and the template. We could use a scheme similar to
+  GCC (included from, etc).
+
 *** Model groups and multi-language support                           :story:
 
 At present we have hard-coded knit to support a single C++ model,
