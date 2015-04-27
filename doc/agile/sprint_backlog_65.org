@@ -13,16 +13,17 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-27 Mon 18:06]
+Clock summary at [2015-04-27 Mon 18:50]
 
-| Headline                                        | Time   |      |      |
-|-------------------------------------------------+--------+------+------|
-| *Total time*                                    | *4:13* |      |      |
-|-------------------------------------------------+--------+------+------|
-| Active                                          |        | 4:13 |      |
-| STARTED Sprint and product backlog grooming     |        |      | 1:02 |
-| COMPLETED Fix borked gcc build                  |        |      | 0:35 |
-| COMPLETED Output new world forward declarations |        |      | 2:36 |
+| Headline                                                           | Time   |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                       | *4:45* |      |      |
+|--------------------------------------------------------------------+--------+------+------|
+| Active                                                             |        | 4:45 |      |
+| STARTED Sprint and product backlog grooming                        |        |      | 1:02 |
+| COMPLETED Fix borked gcc build                                     |        |      | 0:35 |
+| COMPLETED Output new world forward declarations                    |        |      | 2:36 |
+| COMPLETED Fix missing new line in enumeration forward declarations |        |      | 0:32 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -53,7 +54,9 @@ now on.
 
 We will also have to deal with all the breaks that this generates.
 
-*** STARTED Fix missing new line in enumeration forward declarations  :story:
+*** COMPLETED Fix missing new line in enumeration forward declarations :story:
+    CLOSED: [2015-04-27 Mon 18:50]
+    CLOCK: [2015-04-27 Mon 18:48]--[2015-04-27 Mon 18:50] =>  0:02
     CLOCK: [2015-04-27 Mon 18:08]--[2015-04-27 Mon 18:38] =>  0:30
 
 For now we put in a hack in the stitch template not to output

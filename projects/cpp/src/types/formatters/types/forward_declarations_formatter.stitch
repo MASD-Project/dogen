@@ -24,6 +24,7 @@ void forward_declarations_formatter_stitch(std::ostream& s,
 #>
 
 enum class <#= fd.name() #> : <#= fd.enum_type() #>;
+
 <#+
         } else {
 #>
