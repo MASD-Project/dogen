@@ -57,7 +57,7 @@ namespace {
 class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
-    std::pair<std::string, std::list<std::string> >
+    boost::optional<expansion::inclusion_dependencies_for_formatter>
     provide(const dynamic::schema::repository& rp, const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string>
@@ -65,19 +65,21 @@ class provider : public expansion::
         const sml::object& o) const;
 };
 
-std::pair<std::string, std::list<std::string> >
+boost::optional<expansion::inclusion_dependencies_for_formatter>
 provider::provide(const dynamic::schema::repository& /*rp*/,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string> >&
     /*inclusion_directives*/,
     const sml::object& o) const {
-    std::pair<std::string, std::list<std::string> > r;
+    boost::optional<expansion::inclusion_dependencies_for_formatter> r;
 
     if (o.object_type() == sml::object_types::exception) {
-        r.first = traits::forward_declarations_formatter_name();
-        r.second.push_back(inclusion_constants::std::string());
-        r.second.push_back(inclusion_constants::boost::exception::info());
+        r = expansion::inclusion_dependencies_for_formatter();
+        r->formatter_name(traits::forward_declarations_formatter_name());
+        auto& id(r->inclusion_dependencies());
+        id.push_back(inclusion_constants::std::string());
+        id.push_back(inclusion_constants::boost::exception::info());
     }
     return r;
 }

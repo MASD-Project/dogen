@@ -101,24 +101,27 @@ std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const dogen::sml::object& o) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : container_.object_providers()) {
-        auto pair(p->provide(repository_, inclusion_directives_, o));
+        auto idf(p->provide(repository_, inclusion_directives_, o));
 
-        // FIXME: hack
-        if (pair.first.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        if (!idf)
             continue;
-            // BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+
+        if (idf->formatter_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
 
-        pair.second.sort(include_directive_comparer);
+        auto id(idf->inclusion_dependencies());
+        id.sort(include_directive_comparer);
 
-        const auto result(r.insert(pair));
+        const auto result(r.insert(std::make_pair(idf->formatter_name(), id)));
         if (!result.second) {
             const auto n(sml::string_converter::convert(o.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << pair.first
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
+                                     << idf->formatter_name()
                                      << " for type: " << n;
-            BOOST_THROW_EXCEPTION(
-                building_error(duplicate_formatter_name + pair.first));
+            BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
+                    idf->formatter_name()));
         }
     }
     return r;

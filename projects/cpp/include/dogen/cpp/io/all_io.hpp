@@ -60,3 +60,4 @@
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/cpp/io/formatters/serialization/settings_io.hpp"
 #include "dogen/cpp/io/formattables/forward_declarations_info_io.hpp"
+#include "dogen/cpp/io/expansion/inclusion_dependencies_for_formatter_io.hpp"

@@ -29,8 +29,10 @@
 #include <string>
 #include <utility>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_for_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -53,7 +55,7 @@ public:
     /**
      * @brief Provide the inclusion dependencies.
      */
-    virtual std::pair<std::string, std::list<std::string> >
+    virtual boost::optional<inclusion_dependencies_for_formatter>
     provide(const dynamic::schema::repository& rp,
         const std::unordered_map<
             sml::qname,

@@ -13,18 +13,19 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-27 Mon 19:07]
+Clock summary at [2015-04-27 Mon 19:51]
 
 | Headline                                                           | Time   |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *4:55* |      |      |
+| *Total time*                                                       | *5:16* |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| Active                                                             |        | 4:55 |      |
+| Active                                                             |        | 5:16 |      |
 | STARTED Sprint and product backlog grooming                        |        |      | 1:02 |
 | COMPLETED Fix borked gcc build                                     |        |      | 0:35 |
 | COMPLETED Output new world forward declarations                    |        |      | 2:36 |
 | COMPLETED Fix missing new line in enumeration forward declarations |        |      | 0:32 |
 | COMPLETED Text of GPL V2 licence is the same as V3                 |        |      | 0:10 |
+| COMPLETED Inclusion provision needs to cater for optional case     |        |      | 0:21 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -75,7 +76,9 @@ those.
 
 We seem to have copied and pasted the licence across.
 
-*** Inclusion provision needs to cater for optional case              :story:
+*** COMPLETED Inclusion provision needs to cater for optional case    :story:
+    CLOSED: [2015-04-27 Mon 19:51]
+    CLOCK: [2015-04-27 Mon 19:30]--[2015-04-27 Mon 19:51] =>  0:21
 
 While implementing forward declarations we hit a problem: Exceptions
 require includes for forward declarations but no other type requires

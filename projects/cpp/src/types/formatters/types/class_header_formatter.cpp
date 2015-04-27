@@ -30,6 +30,7 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_for_formatter.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
@@ -74,7 +75,7 @@ namespace {
 class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
-    std::pair<std::string, std::list<std::string> >
+    boost::optional<expansion::inclusion_dependencies_for_formatter>
     provide(const dynamic::schema::repository& rp, const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string>
@@ -82,18 +83,20 @@ class provider : public expansion::
         const sml::object& o) const;
 };
 
-std::pair<std::string, std::list<std::string> >
+boost::optional<expansion::inclusion_dependencies_for_formatter>
 provider::provide(const dynamic::schema::repository& rp,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string> >&
     inclusion_directives,
     const sml::object& o) const {
-    std::pair<std::string, std::list<std::string> > r;
-    r.first = traits::class_header_formatter_name();
+    boost::optional<expansion::inclusion_dependencies_for_formatter>
+        r = expansion::inclusion_dependencies_for_formatter();
+    r->formatter_name(traits::class_header_formatter_name());
 
     // algorithm: domain headers need it for the swap function.
-    r.second.push_back(inclusion_constants::std::algorithm());
+    auto& id(r->inclusion_dependencies());
+    id.push_back(inclusion_constants::std::algorithm());
 
     selector s(rp, o.extensions());
     const auto io_fn(formatters::io::traits::facet_name());
@@ -103,7 +106,7 @@ provider::provide(const dynamic::schema::repository& rp,
     const bool use_integrated_io(s.is_facet_integrated(types_fn, io_fn));
 
     if (io_enabled && use_integrated_io)
-        r.second.push_back(inclusion_constants::std::iosfwd());
+        id.push_back(inclusion_constants::std::iosfwd());
 
     const auto& rel(o.relationships());
     const expansion::inclusion_directives_selector id_sel(inclusion_directives);
@@ -111,9 +114,9 @@ provider::provide(const dynamic::schema::repository& rp,
     if (i != rel.end()) {
         const auto fn(traits::forward_declarations_formatter_name());
         for (const auto aqn : i->second) {
-            const auto id(id_sel.select_inclusion_directive(aqn, fn));
-            if (id)
-                r.second.push_back(*id);
+            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
+            if (id2)
+                id.push_back(*id2);
         }
     }
 
@@ -121,9 +124,9 @@ provider::provide(const dynamic::schema::repository& rp,
     if (i != rel.end()) {
         const auto fn(traits::class_header_formatter_name());
         for (const auto aqn : i->second) {
-            const auto id(id_sel.select_inclusion_directive(aqn, fn));
-            if (id)
-                r.second.push_back(*id);
+            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
+            if (id2)
+                id.push_back(*id2);
         }
     }
 
