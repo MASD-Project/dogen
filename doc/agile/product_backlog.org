@@ -109,17 +109,6 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
-*** Update dynamic section in manual                                  :story:
-
-We need to talk about the new fields, field templates, etc.
-
-*** Add stitch section in manual                                      :story:
-
-We need to document stitch:
-
-- formal definition of the language and its limitations;
-- command line usage of the tool.
-
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
@@ -185,14 +174,6 @@ also stitch as required. This could be achieved as follows:
   to perform the stitching as part of knitter's workflows. Perhaps as
   part of the expansion, we could set a number of stitch fields which
   would then be picked up by some knit-specific workflow classes.
-
-*** Add kvp support to =identifier_parser=                            :story:
-
-We have code to split kvps all over the place. We should do this in a
-single pace, and use boost spirit or tokenizer. For one such
-implementation with spirit see:
-
-[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
 
 *** Consider renaming includers                                       :story:
 

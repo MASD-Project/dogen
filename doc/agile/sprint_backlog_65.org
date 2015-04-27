@@ -1,0 +1,146 @@
+#+title: Sprint Backlog 65
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission
+
+Implement as many formatters as possible using the new cpp
+architecture.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-04-27 Mon 14:17]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:45* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:45 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:10 |
+| COMPLETED Fix borked gcc build              |        |      | 0:35 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-27 Mon 14:05]--[2015-04-27 Mon 14:15] =>  0:10
+
+Updates to sprint and product backlog.
+
+*** STARTED Updates to the manual and readme files                    :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** COMPLETED Fix borked gcc build                                    :story:
+    CLOSED: [2015-04-27 Mon 14:15]
+    CLOCK: [2015-04-27 Mon 13:00]--[2015-04-27 Mon 13:35] =>  0:35
+
+The last few builds on travis have failed. Figure out why and fix it.
+
+*** STARTED Create a "supported" expander                             :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+Solution for cycles:
+
+- detect the cycle and then remember the pair (a, b) where b is the
+  start of the cycle and a is the last vertex before the cycle. We
+  should assume that a is (true, true) for the edge (a, b) and compute
+  all other edges. Finally, once the graph has been processed we
+  should check all of the pairs in a cycle; for these we should simply
+  look at the values of b, and update a accordingly.
+
+*** Output new world forward declarations                             :story:
+
+We need to find a way to suppress class header formatter and enable
+forward declarations formatter; we want to start using new code from
+now on.
+
+*** Contents change check is done twice                               :story:
+
+We seem to check twice if a file has changed:
+
+: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
+
+This is in stitch but it should be the same for knit.
+
+*** Stitch does not handle directories very well                      :story:
+
+At present we seem to generate log files called =.= when we use stitch
+against a directory. This should only happen if we use =.= on the
+target parameter, e.g.:
+
+: --target .
+
+Not sure why it is happening when we call stitch from CMake since it
+should use the full path to the =cpp= directory.
+
+*** Update dynamic section in manual                                  :story:
+
+We need to talk about the new fields, field templates, etc.
+
+*** Add stitch section in manual                                      :story:
+
+We need to document stitch:
+
+- formal definition of the language and its limitations;
+- command line usage of the tool.
+
+*** Add kvp support to =identifier_parser=                            :story:
+
+We have code to split kvps all over the place. We should do this in a
+single pace, and use boost spirit or tokenizer. For one such
+implementation with spirit see:
+
+[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
+
+** Deprecated
