@@ -10,6 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Move sorting of includes into utility                             :story:
+
+When we implemented the sorting of includes we added it directly to
+=cpp_formatters= and to =inclusion_dependency_factory=, copy and
+paste. Maybe we should move this to utility, even if we are only using
+it temporarily, to avoid having problems when the code gets out of sync.
+
 *** Create a "supported" expander                                     :story:
 
 This needs a bit more analysis. The gist of it is that not all types
