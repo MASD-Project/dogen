@@ -30,6 +30,7 @@ namespace cpp {
 namespace formattables {
 
 enum class class_types : unsigned int;
+
 } } }
 
 #endif

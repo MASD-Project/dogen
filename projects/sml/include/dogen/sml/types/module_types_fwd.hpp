@@ -29,6 +29,7 @@ namespace dogen {
 namespace sml {
 
 enum class module_types : unsigned int;
+
 } }
 
 #endif

@@ -29,6 +29,7 @@ namespace dogen {
 namespace formatters {
 
 enum class comment_styles : unsigned int;
+
 } }
 
 #endif

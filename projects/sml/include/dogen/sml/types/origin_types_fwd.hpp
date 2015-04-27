@@ -29,6 +29,7 @@ namespace dogen {
 namespace sml {
 
 enum class origin_types : unsigned int;
+
 } }
 
 #endif

@@ -29,6 +29,7 @@ namespace dogen {
 namespace sml {
 
 enum class relationship_types : unsigned int;
+
 } }
 
 #endif

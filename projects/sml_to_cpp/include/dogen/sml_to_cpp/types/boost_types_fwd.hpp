@@ -29,6 +29,7 @@ namespace dogen {
 namespace sml_to_cpp {
 
 enum class boost_types : unsigned int;
+
 } }
 
 #endif

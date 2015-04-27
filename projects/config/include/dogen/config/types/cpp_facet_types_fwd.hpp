@@ -29,6 +29,7 @@ namespace dogen {
 namespace config {
 
 enum class cpp_facet_types : unsigned int;
+
 } }
 
 #endif

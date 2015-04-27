@@ -29,6 +29,7 @@ namespace dogen {
 namespace config {
 
 enum class archive_types : unsigned int;
+
 } }
 
 #endif

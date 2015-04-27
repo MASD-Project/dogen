@@ -30,6 +30,7 @@ namespace cpp {
 namespace formatters {
 
 enum class formatter_types : unsigned int;
+
 } } }
 
 #endif

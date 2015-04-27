@@ -29,6 +29,7 @@ namespace dogen {
 namespace stitch {
 
 enum class segment_types : unsigned int;
+
 } }
 
 #endif

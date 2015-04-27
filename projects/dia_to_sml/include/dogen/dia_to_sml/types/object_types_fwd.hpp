@@ -29,6 +29,7 @@ namespace dogen {
 namespace dia_to_sml {
 
 enum class object_types : unsigned int;
+
 } }
 
 #endif

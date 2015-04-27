@@ -30,6 +30,7 @@ namespace dynamic {
 namespace expansion {
 
 enum class expansion_types : unsigned int;
+
 } } }
 
 #endif

@@ -29,6 +29,7 @@ namespace dogen {
 namespace formatters {
 
 enum class modeline_locations : unsigned int;
+
 } }
 
 #endif

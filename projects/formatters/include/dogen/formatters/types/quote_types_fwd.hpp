@@ -29,6 +29,7 @@ namespace dogen {
 namespace formatters {
 
 enum class quote_types : unsigned int;
+
 } }
 
 #endif

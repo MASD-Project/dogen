@@ -30,6 +30,7 @@ namespace dynamic {
 namespace schema {
 
 enum class value_types : unsigned int;
+
 } } }
 
 #endif

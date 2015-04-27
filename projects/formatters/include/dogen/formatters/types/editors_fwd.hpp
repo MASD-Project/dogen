@@ -29,6 +29,7 @@ namespace dogen {
 namespace formatters {
 
 enum class editors : unsigned int;
+
 } }
 
 #endif

@@ -29,6 +29,7 @@ namespace dogen {
 namespace formatters {
 
 enum class padding_types : unsigned int;
+
 } }
 
 #endif
