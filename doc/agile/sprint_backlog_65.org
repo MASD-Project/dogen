@@ -95,7 +95,9 @@ from provider.
 - do the appropriate actions in inclusion dependency factory when
   provider returns null for optional.
 
-*** Consider adding a ownership hierarchy method in registrar         :story:
+*** COMPLETED Consider adding a ownership hierarchy method in registrar :story:
+    CLOSED: [2015-04-27 Mon 21:46]
+    CLOCK: [2015-04-27 Mon 21:31]--[2015-04-27 Mon 21:46] =>  0:15
 
 In a few cases we seem to need the ownership hierarchy for all
 formatters. We should move this logic to formatter registrar.

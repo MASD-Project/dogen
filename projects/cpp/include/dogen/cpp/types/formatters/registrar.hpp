@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
@@ -40,18 +42,18 @@ namespace formatters {
  * @brief Manages formatter registration.
  */
 class registrar final {
-private:
-    /**
-     * @brief Dump to log file information about the registered
-     * formatters.
-     */
-    void log_registrar_info() const;
-
 public:
     /**
      * @brief Ensures the registrar is ready to be used.
      */
     void validate() const;
+
+private:
+    /**
+     * @brief Perform common registration.
+     */
+    void common_registration(
+        std::shared_ptr<formatters::formatter_interface> f);
 
 public:
     /**
@@ -65,13 +67,22 @@ public:
     void register_formatter(
         std::shared_ptr<forward_declarations_formatter_interface> f);
 
+public:
     /**
      * @brief Returns all available formatters.
      */
     const container& formatter_container() const;
 
+    /**
+     * @brief Returns the ownership hierarchy for all formatters.
+     */
+    const std::forward_list<dynamic::schema::ownership_hierarchy>&
+        ownership_hierarchy() const;
+
 private:
     container formatter_container_;
+    std::forward_list<dynamic::schema::ownership_hierarchy>
+        ownership_hierarchy_;
 };
 
 } } }

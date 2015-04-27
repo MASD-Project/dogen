@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
 #include "dogen/cpp/types/formatters/registrar_error.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
@@ -42,17 +42,6 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-void registrar::log_registrar_info() const {
-    // create a list so that the log is easier to parse.
-    std::list<dynamic::schema::ownership_hierarchy> l;
-    for (const auto& f : formatter_container_.all_formatters())
-        l.push_front(f->ownership_hierarchy());
-
-    BOOST_LOG_SEV(lg, debug) << "Found " << l.size()
-                             << " registered formatter(s): ";
-    BOOST_LOG_SEV(lg, debug) << "Listing all formatters: " << l;
-}
-
 void registrar::validate() const {
     const auto& fc(formatter_container_);
     if (fc.class_formatters().empty()) {
@@ -72,7 +61,19 @@ void registrar::validate() const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
-    log_registrar_info();
+    BOOST_LOG_SEV(lg, debug) << "Found "
+                             << std::distance(
+                                 fc.all_formatters().begin(),
+                                 fc.all_formatters().end())
+                             << " registered formatter(s): ";
+    BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
+                             << ownership_hierarchy_;
+}
+
+void registrar::
+common_registration(std::shared_ptr<formatters::formatter_interface> f) {
+    ownership_hierarchy_.push_front(f->ownership_hierarchy());
+    formatter_container_.all_formatters_.push_front(f);
 }
 
 void registrar::register_formatter(
@@ -82,7 +83,7 @@ void registrar::register_formatter(
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     formatter_container_.class_formatters_.push_front(f);
-    formatter_container_.all_formatters_.push_front(f);
+    common_registration(f);
 }
 
 void registrar::register_formatter(
@@ -92,11 +93,16 @@ void registrar::register_formatter(
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     formatter_container_.forward_declarations_formatters_.push_front(f);
-    formatter_container_.all_formatters_.push_front(f);
+    common_registration(f);
 }
 
 const container& registrar::formatter_container() const {
     return formatter_container_;
+}
+
+const std::forward_list<dynamic::schema::ownership_hierarchy>&
+registrar::ownership_hierarchy() const {
+    return ownership_hierarchy_;
 }
 
 } } }

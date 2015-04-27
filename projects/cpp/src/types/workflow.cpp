@@ -87,12 +87,7 @@ workflow::managed_directories(const sml::model& /*m*/) const {
 std::forward_list<dynamic::schema::ownership_hierarchy>
 workflow::ownership_hierarchy() const {
     using formatters::workflow;
-    const auto af(workflow::registrar().formatter_container().all_formatters());
-    std::forward_list<dynamic::schema::ownership_hierarchy> r;
-    for (const auto f : af)
-        r.push_front(f->ownership_hierarchy());
-
-    return r;
+    return workflow::registrar().ownership_hierarchy();
 }
 
 std::forward_list<dogen::formatters::file> workflow::
