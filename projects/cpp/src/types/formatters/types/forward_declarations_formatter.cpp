@@ -19,14 +19,18 @@
  *
  */
 #include <sstream>
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
 
@@ -47,6 +51,38 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
+
+namespace {
+
+class provider : public expansion::
+        inclusion_dependencies_provider_interface<sml::object> {
+
+    std::pair<std::string, std::list<std::string> >
+    provide(const dynamic::schema::repository& rp, const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, std::string>
+        >& inclusion_directives,
+        const sml::object& o) const;
+};
+
+std::pair<std::string, std::list<std::string> >
+provider::provide(const dynamic::schema::repository& /*rp*/,
+    const std::unordered_map<
+        sml::qname,
+        std::unordered_map<std::string, std::string> >&
+    /*inclusion_directives*/,
+    const sml::object& o) const {
+    std::pair<std::string, std::list<std::string> > r;
+
+    if (o.object_type() == sml::object_types::exception) {
+        r.first = traits::forward_declarations_formatter_name();
+        r.second.push_back(inclusion_constants::std::string());
+        r.second.push_back(inclusion_constants::boost::exception::info());
+    }
+    return r;
+}
+
+}
 
 void forward_declarations_formatter::
 validate(const settings::formatter_settings& fs) const {
@@ -77,7 +113,8 @@ file_types forward_declarations_formatter::file_type() const {
 }
 
 void forward_declarations_formatter::register_inclusion_dependencies_provider(
-    expansion::registrar& /*rg*/) const {
+    expansion::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file forward_declarations_formatter::
@@ -101,10 +138,6 @@ format(const formattables::forward_declarations_info& fd) const {
     dogen::formatters::file r;
     r.content(ss.str());
     r.path(fs.file_path());
-
-    BOOST_LOG_SEV(lg, debug) << "Filename: "
-                             << r.path().generic_string();
-    BOOST_LOG_SEV(lg, debug) << "Content: " << r.content();
     return r;
 }
 

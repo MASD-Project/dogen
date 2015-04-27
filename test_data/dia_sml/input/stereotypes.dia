@@ -1765,22 +1765,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="5.0625,-10.875"/>
+        <dia:point val="5,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.0125,-10.925;31.8075,0.475"/>
+        <dia:rectangle val="4.95,-16.05;33.285,-2.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="5.0625,-10.875"/>
+        <dia:point val="5,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.695"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.300000000000001"/>
+        <dia:real val="13.700000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1806,7 +1806,10 @@ These are the main cases:
 @li @e entity: pods marked as entity must have an identity
 @li @e keyed: entities marked as keyed will generate external keys.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#DOGEN modeline_group_name=emacs#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1815,7 +1818,7 @@ These are the main cases:
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="5.4125,-9.63"/>
+            <dia:point val="5.35,-14.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

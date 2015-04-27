@@ -65,13 +65,13 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Class" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="19.5625,8.5625"/>
+        <dia:point val="11,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.5125,8.5125;24.7325,13.0125"/>
+        <dia:rectangle val="10.95,7.95;16.17,12.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="19.5625,8.5625"/>
+        <dia:point val="11,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.1200000000000001"/>
@@ -250,13 +250,13 @@ a second line#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="29.25,7.875"/>
+        <dia:point val="21,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.2,7.825;34.1975,10.125"/>
+        <dia:rectangle val="20.95,7.95;25.9475,10.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29.25,7.875"/>
+        <dia:point val="21,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="4.8975"/>
@@ -419,14 +419,14 @@ it will be ignored.#</dia:string>
         <dia:point val="12.385,5.4375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.3221,5.37461;22.2923,8.95865"/>
+        <dia:rectangle val="12.3187,5.37121;13.9444,8.21217"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="12.385,5.4375"/>
-        <dia:point val="22.1225,8.5625"/>
+        <dia:point val="13.56,8"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -441,79 +441,25 @@ it will be ignored.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="17.2538,7.5"/>
+        <dia:point val="12.9725,7.21875"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O2" connection="6"/>
         <dia:connection handle="1" to="O0" connection="1"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O4">
+    <dia:object type="UML - LargePackage" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="2.0625,-7.9375"/>
+        <dia:point val="5,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.0125,-7.9875;25.7275,-3.7875"/>
+        <dia:rectangle val="4.95,13.95;34.3625,35.7844"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2.0625,-7.9375"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="23.615000000000002"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
-      </dia:attribute>
-      <dia:attribute name="text">
-        <dia:composite type="text">
-          <dia:attribute name="string">
-            <dia:string>#This model demonstrates the use of comments in dogen.
-
-This comment will be applied to the model namespace itself.
-#DOGEN dia.comment=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="font">
-            <dia:font family="monospace" style="0" name="Courier"/>
-          </dia:attribute>
-          <dia:attribute name="height">
-            <dia:real val="0.80000000000000004"/>
-          </dia:attribute>
-          <dia:attribute name="pos">
-            <dia:point val="2.4125,-6.6925"/>
-          </dia:attribute>
-          <dia:attribute name="color">
-            <dia:color val="#000000"/>
-          </dia:attribute>
-          <dia:attribute name="alignment">
-            <dia:enum val="0"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-    </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O5">
-      <dia:attribute name="obj_pos">
-        <dia:point val="46.9375,1.9375"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.8875,0.8875;76.3,22.7219"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="46.9375,1.9375"/>
+        <dia:point val="5,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.3125"/>
@@ -540,21 +486,21 @@ This comment will be applied to the model namespace itself.
         <dia:string>#package#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O6">
+    <dia:object type="UML - Note" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="47.875,3.6875"/>
+        <dia:point val="5.9375,16.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.825,3.6375;56.14,6.2375"/>
+        <dia:rectangle val="5.8875,16.7;15.7425,19.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47.875,3.6875"/>
+        <dia:point val="5.9375,16.75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.2149999999999999"/>
+        <dia:real val="9.7550000000000008"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -581,7 +527,7 @@ This comment will be applied to the model namespace itself.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="48.225,4.9325"/>
+            <dia:point val="6.2875,17.995"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -591,20 +537,20 @@ This comment will be applied to the model namespace itself.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O5"/>
+      <dia:childnode parent="O4"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O7">
+    <dia:object type="UML - LargePackage" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="51.1875,12.7969"/>
+        <dia:point val="9.25,25.8594"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.1375,11.7469;70.3625,19.3469"/>
+        <dia:rectangle val="9.2,24.8094;28.425,32.4094"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51.1875,12.7969"/>
+        <dia:point val="9.25,25.8594"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.125"/>
@@ -630,23 +576,23 @@ This comment will be applied to the model namespace itself.
       <dia:attribute name="name">
         <dia:string>#package2#</dia:string>
       </dia:attribute>
-      <dia:childnode parent="O5"/>
+      <dia:childnode parent="O4"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O8">
+    <dia:object type="UML - Note" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="53.875,15.4844"/>
+        <dia:point val="11.9375,28.5469"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.825,15.4344;62.14,18.0344"/>
+        <dia:rectangle val="11.8875,28.4969;21.7425,31.0969"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53.875,15.4844"/>
+        <dia:point val="11.9375,28.5469"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.2149999999999999"/>
+        <dia:real val="9.7550000000000008"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -673,7 +619,7 @@ This comment will be applied to the model namespace itself.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="54.225,16.7294"/>
+            <dia:point val="12.2875,29.7919"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -683,7 +629,64 @@ This comment will be applied to the model namespace itself.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O7"/>
+      <dia:childnode parent="O6"/>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O8">
+      <dia:attribute name="obj_pos">
+        <dia:point val="5,-12"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="4.95,-12.05;33.285,-5.45"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="5,-12"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="28.235000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="6.5"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#This model demonstrates the use of comments in dogen.
+
+This comment will be applied to the model namespace itself.
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#DOGEN modeline_group_name=emacs#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="5.35,-10.755"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>

@@ -34,7 +34,7 @@ auto lg(logger_factory("knit.backends.cpp_backend"));
 
 // FIXME: massive hack for now.
 // set it to true to use new formatters.
-const bool perform_override_of_legacy_files(false);
+const bool perform_override_of_legacy_files(true);
 
 const std::string duplicate_file_path("File path already exists: ");
 
@@ -76,6 +76,8 @@ std::forward_list<formatters::file> cpp_backend::override_legacy_files(
     std::unordered_map<std::string, formatters::file> overrides;
     for (const auto& f : new_world) {
         const auto gs(f.path().generic_string());
+        BOOST_LOG_SEV(lg, debug) << "Adding override: " << gs;
+
         const auto result(overrides.insert(std::make_pair(gs, f)));
         if (!result.second) {
             BOOST_LOG_SEV(lg, error) << duplicate_file_path << gs;
@@ -84,12 +86,18 @@ std::forward_list<formatters::file> cpp_backend::override_legacy_files(
     }
 
     std::forward_list<formatters::file> r;
-    for (const auto& f : old_world) {
-        const auto i(overrides.find(f.path().generic_string()));
-        if (i != overrides.end())
+    auto old_world_reverted(old_world);
+    old_world_reverted.reverse();
+    for (const auto& f : old_world_reverted) {
+        const auto gs(f.path().generic_string());
+        const auto i(overrides.find(gs));
+        if (i != overrides.end()) {
+            BOOST_LOG_SEV(lg, debug) << "File has been overriden: " << gs;
             r.push_front(i->second);
-        else
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "Using legacy for file: " << gs;
             r.push_front(f);
+        }
     }
     return r;
 }

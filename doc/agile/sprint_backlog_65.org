@@ -13,15 +13,16 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-27 Mon 15:07]
+Clock summary at [2015-04-27 Mon 18:06]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *1:37* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 1:37 |      |
-| STARTED Sprint and product backlog grooming |        |      | 1:02 |
-| COMPLETED Fix borked gcc build              |        |      | 0:35 |
+| Headline                                        | Time   |      |      |
+|-------------------------------------------------+--------+------+------|
+| *Total time*                                    | *4:13* |      |      |
+|-------------------------------------------------+--------+------+------|
+| Active                                          |        | 4:13 |      |
+| STARTED Sprint and product backlog grooming     |        |      | 1:02 |
+| COMPLETED Fix borked gcc build                  |        |      | 0:35 |
+| COMPLETED Output new world forward declarations |        |      | 2:36 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -40,11 +41,54 @@ Use downtime to update the manual and / or readme file.
 
 The last few builds on travis have failed. Figure out why and fix it.
 
-*** Output new world forward declarations                             :story:
+*** COMPLETED Output new world forward declarations                   :story:
+    CLOSED: [2015-04-27 Mon 17:01]
+    CLOCK: [2015-04-27 Mon 17:55]--[2015-04-27 Mon 18:06] =>  0:11
+    CLOCK: [2015-04-27 Mon 17:02]--[2015-04-27 Mon 17:35] =>  0:33
+    CLOCK: [2015-04-27 Mon 15:09]--[2015-04-27 Mon 17:01] =>  1:52
 
 We need to find a way to suppress class header formatter and enable
 forward declarations formatter; we want to start using new code from
 now on.
+
+We will also have to deal with all the breaks that this generates.
+
+*** Text of GPL V2 licence is the same as V3                          :story:
+
+We seem to have copied and pasted the licence across.
+
+*** Fix missing new line in enumeration forward declarations          :story:
+
+For now we put in a hack in the stitch template not to output
+those.
+
+*Tasks*
+
+- fix legacy formatters;
+- rebase the world
+- fix template.
+
+*** Inclusion provision needs to cater for optional case              :story:
+
+While implementing forward declarations we hit a problem: Exceptions
+require includes for forward declarations but no other type requires
+this. In order for this to work, we need to refactor inclusion
+provision to allow for optional inclusion dependencies. For now we put
+in a massive hack that allows empty formatter names to be returned
+from provider.
+
+*Tasks*
+
+- add a class to represent the inclusion dependency rather than use a
+  pair of a list etc.
+- make the return type of the interface optional.
+- do the appropriate actions in inclusion dependency factory when
+  provider returns null for optional.
+
+*** Consider adding a ownership hierarchy method in registrar         :story:
+
+In a few cases we seem to need the ownership hierarchy for all
+formatters. We should move this logic to formatter registrar.
 
 *** Contents change check is done twice                               :story:
 

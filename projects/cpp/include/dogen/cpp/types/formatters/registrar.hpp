@@ -40,6 +40,13 @@ namespace formatters {
  * @brief Manages formatter registration.
  */
 class registrar final {
+private:
+    /**
+     * @brief Dump to log file information about the registered
+     * formatters.
+     */
+    void log_registrar_info() const;
+
 public:
     /**
      * @brief Ensures the registrar is ready to be used.

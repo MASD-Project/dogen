@@ -5924,22 +5924,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="3,-2"/>
+        <dia:point val="3.33333,-2.91667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,-2.05;29.745,4.55"/>
+        <dia:rectangle val="3.28333,-2.96667;31.6183,6.03333"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="3,-2"/>
+        <dia:point val="3.33333,-2.91667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.695"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5959,7 +5959,10 @@ This model is responsible for taking instances of types in the C++
 model and generating a file representation of these types according
 to the grammar of the C++-11 programming language.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -5968,7 +5971,7 @@ to the grammar of the C++-11 programming language.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="3.35,-0.755"/>
+            <dia:point val="3.68333,-1.67167"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

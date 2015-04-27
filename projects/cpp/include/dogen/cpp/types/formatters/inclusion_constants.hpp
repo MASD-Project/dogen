@@ -38,6 +38,7 @@ namespace formatters {
 struct inclusion_constants {
 
     struct std {
+        static ::std::string string();
         static ::std::string iosfwd();
         static ::std::string algorithm();
         static ::std::string ostream();
@@ -45,7 +46,13 @@ struct inclusion_constants {
     };
 
     struct boost {
-        static ::std::string nvp();
+        struct serialization {
+            static ::std::string nvp();
+        };
+
+        struct exception {
+            static ::std::string info();
+        };
     };
 };
 

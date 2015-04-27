@@ -68,7 +68,7 @@
         <dia:point val="-34,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.05,2.95;-8.795,7.15"/>
+        <dia:rectangle val="-34.05,2.95;-5.715,9.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,10 +77,10 @@
         <dia:point val="-34,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.155000000000005"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="6.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -97,7 +97,10 @@
             <dia:string>#Dynamic expansion is responsible for providing a framework that
 expands the contents of the dynamic's schema object.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3081,7 +3084,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="17.905,49.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.155,48.85;29.84,61.6"/>
+        <dia:rectangle val="17.155,48.85;29.84,60.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

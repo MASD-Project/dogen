@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
 #include "dogen/cpp/types/formatters/registrar_error.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
@@ -41,6 +42,17 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
+void registrar::log_registrar_info() const {
+    // create a list so that the log is easier to parse.
+    std::list<dynamic::schema::ownership_hierarchy> l;
+    for (const auto& f : formatter_container_.all_formatters())
+        l.push_front(f->ownership_hierarchy());
+
+    BOOST_LOG_SEV(lg, debug) << "Found " << l.size()
+                             << " registered formatter(s): ";
+    BOOST_LOG_SEV(lg, debug) << "Listing all formatters: " << l;
+}
+
 void registrar::validate() const {
     const auto& fc(formatter_container_);
     if (fc.class_formatters().empty()) {
@@ -59,17 +71,8 @@ void registrar::validate() const {
         BOOST_THROW_EXCEPTION(registrar_error(no_all_formatters));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(
-                                 fc.all_formatters().begin(),
-                                 fc.all_formatters().end())
-                             << " registered formatter(s): ";
-
-    BOOST_LOG_SEV(lg, debug) << "Listing all formatters.";
-    for (const auto& f : fc.all_formatters())
-        BOOST_LOG_SEV(lg, debug) << f->ownership_hierarchy();
-
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
+    log_registrar_info();
 }
 
 void registrar::register_formatter(

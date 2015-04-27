@@ -3655,7 +3655,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>16.9,-5.81667</value>
+										<value>17,-3</value>
 									</value>
 								</item>
 							</values>
@@ -3668,7 +3668,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>16.85,-5.86667;42.49,-1.66667</value>
+										<value>16.95,-3.05;45.285,1.15</value>
 									</value>
 								</item>
 							</values>
@@ -3701,7 +3701,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>16.9,-5.81667</value>
+										<value>17,-3</value>
 									</value>
 								</item>
 							</values>
@@ -3714,7 +3714,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>25.540000000000003</value>
+										<value>28.235000000000003</value>
 									</value>
 								</item>
 							</values>
@@ -3793,9 +3793,9 @@
 															<which>6</which>
 															<value>
 																<value>##DOGEN dia.comment=true
-#DOGEN licence_name=gpl_v2
-#DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</value>
+#DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
+#DOGEN modeline_group_name=emacs#</value>
 															</value>
 														</item>
 													</values>
@@ -3842,7 +3842,7 @@
 														<item>
 															<which>5</which>
 															<value>
-																<value>17.25,-4.57167</value>
+																<value>17.35,-1.755</value>
 															</value>
 														</item>
 													</values>

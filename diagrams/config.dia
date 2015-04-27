@@ -3092,7 +3092,7 @@ writing to output.#</dia:string>
         <dia:point val="-79,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-79.05,-45.05;-54.18,-38.45"/>
+        <dia:rectangle val="-79.05,-45.05;-50.715,-36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3101,10 +3101,10 @@ writing to output.#</dia:string>
         <dia:point val="-79,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.77"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3124,7 +3124,10 @@ The config model provides types to store general configuration
 options for all the different Dogen applications, such as
 knitter, etc.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

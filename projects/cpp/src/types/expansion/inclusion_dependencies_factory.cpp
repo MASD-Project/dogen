@@ -103,9 +103,11 @@ inclusion_dependencies_factory::make(const dogen::sml::object& o) const {
     for (const auto p : container_.object_providers()) {
         auto pair(p->provide(repository_, inclusion_directives_, o));
 
+        // FIXME: hack
         if (pair.first.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+            continue;
+            // BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
 
         pair.second.sort(include_directive_comparer);

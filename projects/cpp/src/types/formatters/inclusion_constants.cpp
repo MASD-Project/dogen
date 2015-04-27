@@ -24,6 +24,11 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
+std::string inclusion_constants::std::string() {
+    static ::std::string r("<string>");
+    return r;
+}
+
 std::string inclusion_constants::std::iosfwd() {
     static ::std::string r("<iosfwd>");
     return r;
@@ -44,8 +49,13 @@ std::string inclusion_constants::std::functional() {
     return r;
 }
 
-std::string inclusion_constants::boost::nvp() {
+std::string inclusion_constants::boost::serialization::nvp() {
     static ::std::string r("<boost/serialization/nvp.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::exception::info() {
+    static ::std::string r("<boost/exception/info.hpp>");
     return r;
 }
 

@@ -69,6 +69,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
+namespace {
+
 class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
@@ -126,6 +128,8 @@ provider::provide(const dynamic::schema::repository& rp,
     }
 
     return r;
+}
+
 }
 
 void class_header_formatter::
@@ -187,10 +191,6 @@ class_header_formatter::format(const formattables::class_info& c) const {
     dogen::formatters::file r;
     r.content(ss.str());
     r.path(fs.file_path());
-
-    BOOST_LOG_SEV(lg, debug) << "Filename: "
-                             << r.path().generic_string();
-    BOOST_LOG_SEV(lg, debug) << "Content: " << r.content();
     return r;
 }
 

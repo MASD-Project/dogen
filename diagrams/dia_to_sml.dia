@@ -6330,7 +6330,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,4.95;-86.405,86.75"/>
+        <dia:rectangle val="-117.05,4.95;-86.405,89.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6342,7 +6342,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="30.545000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="81.700000000000003"/>
+        <dia:real val="84.099999999999994"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6456,7 +6456,10 @@ the root of an inheritance tree.
 
 @li @b comparable: unused as of yet.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

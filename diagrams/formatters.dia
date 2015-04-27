@@ -4945,22 +4945,22 @@ Padding in this context is understood as the addition of spaces.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="-87,-78"/>
+        <dia:point val="-91,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-87.05,-78.05;-62.95,-71.45"/>
+        <dia:rectangle val="-91.05,-78.05;-62.715,-69.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-87,-78"/>
+        <dia:point val="-91,-78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.000000000000004"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4980,7 +4980,10 @@ This model is the repository of all formatting related code
 which is not language specific. Language-specific models can
 then make use of it.
 
-#DOGEN dia.comment=true#</dia:string>
+#DOGEN dia.comment=true
+#DOGEN licence_name=gpl_v3
+#DOGEN modeline_group_name=emacs
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -4989,7 +4992,7 @@ then make use of it.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-86.65,-76.755"/>
+            <dia:point val="-90.65,-76.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -10134,7 +10137,7 @@ then make use of it.
         <dia:point val="200.458,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.52,-26.05;201.208,-20.4"/>
+        <dia:rectangle val="157.52,-26.75;201.208,-21.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10206,7 +10209,7 @@ then make use of it.
         <dia:point val="174.993,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.327,2.95;175.743,9.6"/>
+        <dia:rectangle val="141.327,2.25;175.743,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
