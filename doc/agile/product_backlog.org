@@ -10,6 +10,90 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Create a "supported" expander                                     :story:
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+Solution for cycles:
+
+- detect the cycle and then remember the pair (a, b) where b is the
+  start of the cycle and a is the last vertex before the cycle. We
+  should assume that a is (true, true) for the edge (a, b) and compute
+  all other edges. Finally, once the graph has been processed we
+  should check all of the pairs in a cycle; for these we should simply
+  look at the values of b, and update a accordingly.
+
+*Other notes*
+
+- we need some validation to ensure that some types will be generated
+  at all. The existing "generatable types" logic will have to be
+  removed or perhaps updated; we should take the opportunity to make
+  it reflect whether a type belongs to the target model or not. This
+  has no bearing on generatability (other that non-target types are
+  always not generated). So at the middle-end level we need to check
+  if there are any target types at all, and if not, just want the user
+  and exit. Then, a second layer is required at the model group /
+  language level to determine if there are any types to generate. It
+  is entirely possible that we end up not generating anything at all
+  because once we went through the graph everything got
+  disabled. Users will have to somehow debug this when things go
+  wrong.
+- following on from this, we probably need a "dump info" option that
+  explains the enabled/supported decisions for a given model, for all
+  target types; possibly, users could then supply regexes to filter
+  this info (e.g. why did you not generate =hash= for type =xyz=? can
+  I see all types for formatter =abc=?). It may be useful to have an
+  option to toggle between "target only types" and "all types",
+  because the system types may be the ones causing the problem.
+- the enabled supported logic applies to all formatters across all
+  model groups. We need a way
+
 *** Solve the problem of "relocatable" formatters                     :story:
 
 There may be cases where a formatter is the same for all facets, but
@@ -2406,6 +2490,18 @@ them even if they are on the same namespace as the containing type.
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
+
+*** Consider adding "application" to ownership hierarchy              :story:
+
+Not all fields make sense to all tools in the dogen suite; some are
+knit specific, some are stitch specific and some are shared. At
+present this is not a problem because stitch loads up all of knit's
+fields and assumes users won't make use of them. If they do, nothing
+bad "should" happen. But a better way to solve this may be to only
+load fields that belong to an application. We could add "application"
+to ownership hierarchy, and filter on that. Note though that we would
+need some way of saying "all applications" (e.g. at present, leave the
+field blank).
 
 *** Create a "utility" model like formatters for frontends            :story:
 
@@ -4959,28 +5055,6 @@ clang's analysis checks:
 
 https://github.com/neovim/neovim
 
-*** Consider c++ itself as a front-end                                 :epic:
-
-One can imagine a clang-based front-end that reads C++ code suitably
-annotated, perhaps with =Generatable= or some such attributes -
-basically all attributes required to build a sensible SML model. The
-frontend will parse the code and generate SML. We can then generate
-serialisation, hashing etc for the hand-crafted code.
-
-Previous story merged with this one:
-
-*Add a utility that converts C++ code into JSON model*
-
-#+begin_quote
-*Story*: As a dogen user, I want to generate system models
- automatically so that I don't have to create them manually.
-#+end_quote
-
-We should be able to create a clang based utility that given a set of
-libraries returns a basic JSON model for dogen for them, with as much
-filled in as possible such as include directories, etc. This would
-save us a lot of time instead of manually adding these.
-
 *** Consider adding issues emblem                                     :story:
 
 Boost.DI seems to have a new emblem for issues:
@@ -5268,6 +5342,100 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+
+*** Consider c++ itself as a front-end                                 :epic:
+
+One can imagine a clang-based front-end that reads C++ code suitably
+annotated, perhaps with =Generatable= or some such attributes -
+basically all attributes required to build a sensible SML model. The
+frontend will parse the code and generate SML. We can then generate
+serialisation, hashing etc for the hand-crafted code.
+
+One very good use case for this is for legacy code bases. One could
+benefit from adding serialisation and IO support to an existing legacy
+code base. This raises the interesting problem that we would need to:
+
+- disable the types facet;
+- inject types created from the c++ code with the types facet
+  properties populated (namely include and file path).
+- to be totally non-intrusive: generate a shared library that provides
+  dogen code and requires the presence of the user code library.
+
+This requires a bit of thinking as the architecture does not support
+any of these.
+
+The c++ frontend would also open some interesting possibilities:
+
+- *read c++ and generate JSON*. This is a great way to import types into
+  dogen; given a set of libraries returns a basic JSON model for dogen
+  for them, with as much filled in as possible such as include
+  directories, etc. This would save us a lot of time instead of
+  manually adding these. The story for this was: As a dogen user, I
+  want to generate system models automatically so that I don't have to
+  create them manually.
+- *read c++ and generate dia*. This would allow creating diagrams of
+  existing code bases. Not trivial because the layout of the diagram
+  would be quite hard to get right.
+- *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
+
+*** Improvements to project layout                                    :story:
+
+Given all of the ideals floating around (mutli-language needle, model
+groups, etc), there is a general direction in which the projects
+layout seems to be evolving. This story captures that direction.
+
+: / projects
+:   / config -> not the best of names, still needs some thinking.
+:   / dynamic
+:     / schema
+:     / expansion
+:   / sanity
+:   / dia -> whilst we use it for the frontend, this is not frontend specific.
+:   / formatting -> rename of the formatters model. Generic formatting code.
+:   / frontend?
+:     / common -> current frontend model. all code common across frontends.
+:     / dia_to_sml
+:     / xsd -> XML schema support (vision)
+:     / <all other frontends>
+:   / mem -> new name for SML? middle-end.
+:   / backend
+:     / common -> current backend model. all code common across backends.
+:     / quilt -> model group for "native models"
+:       / cpp
+:       / csharp (vision)
+:       / java (vision)
+:       / <all other languages>
+:     / pleat -> model group for "cross-language compatible" models
+:       / cpp (vision)
+:       / csharp (vision)
+:       / java (vision)
+:       / <all other languages>
+:   / test_models
+:     / knit -> consider splitting them by tool?
+:       / all_primitives
+:       / <all other knit test models>
+:     / stitch -> consider splitting them by tool?
+:       / seam
+:   / utility -> consider renaming to common? or find a sewing term for this?
+:   / knit
+:   / knitter
+:   / stitch
+:   / stitcher
+
+*Notes*:
+
+- We settled on =common= for models to house shared code; =core= was
+  also considered, but its not always the case that the shared code is
+  "core code".
+- note that when we say =backend=, =frontend= and =middle-end= we are
+  implicitly talking about =knit=. Its not very elegant to have the
+  knit internals so prominent at the top, but its not obvious how else
+  to organise the code.
+- it would be nice to have top-level folders for tools (e.g. =knit=)
+  that would contain both the =knit= library and the =knitter=
+  tool. However we haven't found a good way of structuring the folders
+  that way.
+
 *** Compile stitch template output with clang                         :story:
 
 Once we have integrated clang for formatting stitch output, it would be
@@ -5337,7 +5505,35 @@ cpp. However, in reality the world looks more like this:
   loading depending on the model group. This applies to both internal
   and external models. Also a model group may support a different
   subset of programming languages compared to another model group.
-- we need a better name than "model group".
+- we need a better name than "model group". word-storming: dimension,
+  universe, space, package, module, ensemble, generation unit,
+  assembly.
+- Another way to think about it is that model groups are really
+  backends. Backends support one or more "languages" (we need a word
+  to reflect variations such as XML). Only one backend can be enabled
+  at one time. One or more languages can be enabled, depending on what
+  the backend supports. The options that configure languages and
+  backends are in the meta-data; it does not make sense to supply
+  these in the command-line because the model is coupled with the
+  backend to a large extent (for example, native types are only
+  supported in the native backend and so on).
+- model groups and type support: some types will only make sense with
+  certain model groups. For example, if one were to create a "cross
+  platform string type", say String, for =pleat= which would then be
+  implemented in =needle::pleat= for all languages, it would not make
+  sense to try to use this type from =quilt=. This means that we need
+  some kind of way to associate types with a model group. In terms of
+  code generation, the formatter "enabled/disabled" logic will kick
+  in, and if the type has no formatters in a given backend, then it is
+  effectively disabled. But one wonders if this is a sensible way to
+  figure out what types are available to which model groups. Seems
+  like one would have to spend a lot of time looking into the
+  meta-data to determine whats available.
+- we probably need to add the model group to the ownership hierarchy,
+  but at present we cannot think of a use case for it; we never enable
+  anything across languages in a model group. In the same vein, we
+  would also need the language. Fields would then be
+  =quilt.cpp.enabled= and so on.
 
 *** Add support for type "labels" or "tags"                           :story:
 
