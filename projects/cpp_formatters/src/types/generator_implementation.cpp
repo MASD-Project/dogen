@@ -648,7 +648,8 @@ create_helper_methods(const cpp::formattables::class_info& ci) {
         return;
 
     using dogen::formatters::cpp::scoped_namespace_formatter;
-    scoped_namespace_formatter nsh(stream_, std::list<std::string> { });
+    const auto ns = std::list<std::string> { };
+    scoped_namespace_formatter nsh(stream_, ns);
     std::unordered_set<std::string> types_done;
 
     utility_.blank_line();
