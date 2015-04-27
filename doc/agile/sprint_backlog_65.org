@@ -13,17 +13,18 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-27 Mon 18:50]
+Clock summary at [2015-04-27 Mon 19:07]
 
 | Headline                                                           | Time   |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *4:45* |      |      |
+| *Total time*                                                       | *4:55* |      |      |
 |--------------------------------------------------------------------+--------+------+------|
-| Active                                                             |        | 4:45 |      |
+| Active                                                             |        | 4:55 |      |
 | STARTED Sprint and product backlog grooming                        |        |      | 1:02 |
 | COMPLETED Fix borked gcc build                                     |        |      | 0:35 |
 | COMPLETED Output new world forward declarations                    |        |      | 2:36 |
 | COMPLETED Fix missing new line in enumeration forward declarations |        |      | 0:32 |
+| COMPLETED Text of GPL V2 licence is the same as V3                 |        |      | 0:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -68,7 +69,9 @@ those.
 - rebase the world
 - fix template.
 
-*** Text of GPL V2 licence is the same as V3                          :story:
+*** COMPLETED Text of GPL V2 licence is the same as V3                :story:
+    CLOSED: [2015-04-27 Mon 18:56]
+    CLOCK: [2015-04-27 Mon 18:55]--[2015-04-27 Mon 19:05] =>  0:10
 
 We seem to have copied and pasted the licence across.
 
