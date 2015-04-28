@@ -4845,6 +4845,20 @@ error_info boilerplate in the exception header.
 
 ** Tooling, infrastructure, blog posts, etc.
 
+Stuff that is not directly related to the problem domain but its
+needed by Dogen.
+
+*** Consider tagging the git branch in version                        :story:
+
+At present we make use of rev-list to determine the minor
+version. However, this is always off of master, which means that if
+you have a few more commits on your integration branch you will end up
+with a build that lies. We should consider:
+
+- adding the git commit SHA to the build, perhaps comments.
+- adding the branch to the build, perhaps comments.
+- rev-listing the current branch rather than always master.
+
 *** Consider using Given-When-Then for unit tests                      :epic:
 
 We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
