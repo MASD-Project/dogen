@@ -34,22 +34,17 @@ void forward_declarations_formatter_stitch(std::ostream& s,
 
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
-    {
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, fd.namespaces(), false/*create_anonymous_namespace*/,
-           true/*add_new_line*/);
-
-        if (fd.is_enum()) {
 s << std::endl;
-s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
+s << "namespace boost {" << std::endl;
+s << "namespace serialization {" << std::endl;
 s << std::endl;
-        } else {
+s << "template<class Archive>" << std::endl;
+s << "void save(Archive& ar, const " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
 s << std::endl;
-s << "class " << fd.name() << ";" << std::endl;
+s << "template<class Archive>" << std::endl;
+s << "void load(Archive& ar, " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
 s << std::endl;
-        }
-    }
+s << "} }" << std::endl;
 s << std::endl;
 }
 

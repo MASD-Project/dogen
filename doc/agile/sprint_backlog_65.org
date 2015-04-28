@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-28 Tue 14:27]
+Clock summary at [2015-04-28 Tue 16:28]
 
 | Headline                                                            | Time   |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *7:04* |      |      |
+| *Total time*                                                        | *8:41* |      |      |
 |---------------------------------------------------------------------+--------+------+------|
-| Active                                                              |        | 7:04 |      |
+| Active                                                              |        | 8:41 |      |
 | STARTED Sprint and product backlog grooming                         |        |      | 2:01 |
 | COMPLETED Fix borked gcc build                                      |        |      | 0:35 |
 | COMPLETED Output new world forward declarations                     |        |      | 2:36 |
@@ -28,7 +28,8 @@ Clock summary at [2015-04-28 Tue 14:27]
 | COMPLETED Inclusion provision needs to cater for optional case      |        |      | 0:21 |
 | COMPLETED Consider adding a ownership hierarchy method in registrar |        |      | 0:15 |
 | COMPLETED Improve streaming of empty lines in stitch                |        |      | 0:16 |
-| STARTED Implement types class header formatter using stitch         |        |      | 0:18 |
+| COMPLETED Implement serialization forward declarations formatter    |        |      | 0:17 |
+| STARTED Implement types class header formatter using stitch         |        |      | 1:38 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -309,6 +310,14 @@ At present we stream empty lines as follows:
 We should really be doing:
 
 : s << std::endl;
+
+*** COMPLETED Implement serialization forward declarations formatter  :story:
+    CLOSED: [2015-04-28 Tue 16:28]
+    CLOCK: [2015-04-28 Tue 16:10]--[2015-04-28 Tue 16:27] =>  0:17
+
+We didn't implement the serialization forward declarations
+formatter. It is totally separate from the types one so that's why it
+got missed. We need it for the class header formatter to work.
 
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-04-28 Tue 14:27]--[2015-04-28 Tue 15:47] =>  1:20

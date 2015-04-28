@@ -36,7 +36,7 @@ inline void initialise_formatter(registrar& rg) {
 
 void initializer::initialize(registrar& rg) {
     initialise_formatter<class_header_formatter>(rg);
-    // initialise_formatter<forward_declarations_formatter>(rg); // FIXME
+    initialise_formatter<forward_declarations_formatter>(rg);
 }
 
 } } } }

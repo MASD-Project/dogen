@@ -27,9 +27,11 @@
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
@@ -44,6 +46,8 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
+const std::string inclusion_missing(
+    "Expected inclusion is missing. Formatter: ");
 
 }
 
@@ -70,17 +74,23 @@ provider::provide(const dynamic::schema::repository& /*rp*/,
     const std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string> >&
-    /*inclusion_directives*/,
+    inclusion_directives,
     const sml::object& o) const {
-    boost::optional<expansion::inclusion_dependencies_for_formatter> r;
-
-    if (o.object_type() == sml::object_types::exception) {
+    boost::optional<expansion::inclusion_dependencies_for_formatter>
         r = expansion::inclusion_dependencies_for_formatter();
-        r->formatter_name(traits::forward_declarations_formatter_name());
-        auto& id(r->inclusion_dependencies());
-        id.push_back(inclusion_constants::std::string());
-        id.push_back(inclusion_constants::boost::exception::info());
-    }
+    r->formatter_name(traits::forward_declarations_formatter_name());
+
+    auto& id(r->inclusion_dependencies());
+    const expansion::inclusion_directives_selector id_sel(inclusion_directives);
+    const auto fn(formatters::types::traits::
+        forward_declarations_formatter_name());
+    const auto id2(id_sel.select_inclusion_directive(o.name(), fn));
+    if (!id2) {
+        BOOST_LOG_SEV(lg, error) << inclusion_missing << fn;
+        BOOST_THROW_EXCEPTION(formatting_error(inclusion_missing + fn));
+    } else
+        id.push_back(*id2);
+
     return r;
 }
 

@@ -16,13 +16,15 @@ void forward_declarations_formatter_stitch(std::ostream& s,
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
 #>
+
 namespace boost {
 namespace serialization {
-template<class Archive>
-void save(Archive& ar, const <#= #>&, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, <#= #>& v, unsigned int version);
+void save(Archive& ar, const <#= fd.qualified_name() #>& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, <#= fd.qualified_name() #>& v, unsigned int version);
 
 } }
 

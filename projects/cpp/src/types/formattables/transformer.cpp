@@ -196,6 +196,12 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
     e.settings(settings_workflow_.execute(o));
+
+    std::list<std::string> ns(e.namespaces());
+    ns.push_back(e.name());
+
+    using boost::join;
+    e.qualified_name(join(ns, namespace_separator));
 }
 
 void transformer::to_nested_type_info(const sml::nested_qname& nqn,
