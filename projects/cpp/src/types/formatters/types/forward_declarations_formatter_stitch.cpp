@@ -41,16 +41,16 @@ void forward_declarations_formatter_stitch(std::ostream& s,
            true/*add_new_line*/);
 
         if (fd.is_enum()) {
-s << "" << std::endl;
+s << std::endl;
 s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
-s << "" << std::endl;
+s << std::endl;
         } else {
-s << "" << std::endl;
+s << std::endl;
 s << "class " << fd.name() << ";" << std::endl;
-s << "" << std::endl;
+s << std::endl;
         }
     }
-s << "" << std::endl;
+s << std::endl;
 }
 
 } } } }

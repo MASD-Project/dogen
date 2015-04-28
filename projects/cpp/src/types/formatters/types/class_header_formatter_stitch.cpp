@@ -40,13 +40,13 @@ void class_header_formatter_stitch(std::ostream& s,
            s, c.namespaces(), false/*create_anonymous_namespace*/,
            true/*add_new_line*/);
 
-s << "" << std::endl;
+s << std::endl;
 s << "class " << c.name() << " {" << std::endl;
-s << "" << std::endl;
+s << std::endl;
 s << "};" << std::endl;
-s << "" << std::endl;
+s << std::endl;
     }
-s << "" << std::endl;
+s << std::endl;
 }
 
 } } } }
