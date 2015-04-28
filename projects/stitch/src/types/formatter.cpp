@@ -58,8 +58,10 @@ void formatter::format_text_line(const std::string& stream_name,
 
     const formatters::utility_formatter u(s);
     u.insert(inserter, spaces);
-    u.insert_quoted(l, true/*escape_content*/);
-    u.insert(inserter, spaces);
+    if (!l.empty()) {
+        u.insert_quoted(l, true/*escape_content*/);
+        u.insert(inserter, spaces);
+    }
     u.insert(endl);
     s << std::endl;
 }

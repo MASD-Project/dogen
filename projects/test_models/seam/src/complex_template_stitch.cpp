@@ -25,5 +25,6 @@ s << "this is a relatively more" << std::endl;
     for (auto i = 0; i < 3; ++i) {
 s << "    complex (" << i << ")" << std::endl;
 }
+s << std::endl;
 s << "  template" << std::endl;
 }

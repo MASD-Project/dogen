@@ -117,6 +117,10 @@ stream_ << "This is line numnber: 0" << std::endl;
 } }
 )");
 
+const std::string empty_lines(R"(stream_ << std::endl;
+stream_ << std::endl;
+)");
+
 dogen::formatters::file format(const dogen::stitch::text_template& tt) {
     dogen::stitch::formatter f;
     return f.format(tt);
@@ -298,6 +302,18 @@ BOOST_AUTO_TEST_CASE(containing_namespaces_result_in_expected_template) {
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     const auto& c(r.content());
     BOOST_CHECK(asserter::assert_equals(with_containing_namespaces, c));
+}
+
+BOOST_AUTO_TEST_CASE(empty_lines_result_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("empty_lines_result_in_expected_template");
+
+    const auto tt(factory.make_empty_text_lines());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+    const auto& c(r.content());
+    BOOST_CHECK(asserter::assert_equals(empty_lines, c));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

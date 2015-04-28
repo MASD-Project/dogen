@@ -24,6 +24,7 @@
 
 namespace {
 
+const std::string empty;
 const std::string stream_variable_name("stream_");
 const std::string single_line_text("This is a template");
 const std::string line_text("This is line numnber: ");
@@ -50,17 +51,21 @@ make_text_template_with_trivial_settings() const {
     return r;
 }
 
-std::list<line> mock_text_template_factory::
-make_text_only_lines(const unsigned int how_many) const {
+std::list<line> mock_text_template_factory::make_text_only_lines(
+    const unsigned int how_many, const bool empty_content) const {
     std::ostringstream ss;
     std::list<line> r;
     for(unsigned int i = 0; i != how_many; ++i) {
         segment sg;
         sg.type(segment_types::text);
 
-        ss << line_text << i;
-        sg.content(ss.str());
-        ss.str("");
+        if (empty_content)
+            sg.content(empty);
+        else {
+            ss << line_text << i;
+            sg.content(ss.str());
+            ss.str("");
+        }
 
         line l;
         l.segments().push_back(sg);
@@ -224,6 +229,13 @@ mock_text_template_factory::make_with_containing_namespace() const {
     cn.push_back("first");
     cn.push_back("second");
     r.lines(make_text_only_lines());
+    return r;
+}
+
+text_template mock_text_template_factory::
+make_empty_text_lines(const unsigned int how_many) const {
+    text_template r(make_text_template_with_trivial_settings());
+    r.lines(make_text_only_lines(how_many, true/*empty_content*/));
     return r;
 }
 

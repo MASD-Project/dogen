@@ -45,7 +45,8 @@ private:
     /**
      * @brief Makes @code how_many lines with a single text segment.
      */
-    std::list<line> make_text_only_lines(const unsigned int how_many = 1) const;
+    std::list<line> make_text_only_lines(const unsigned int how_many = 1,
+        const bool empty_content = false) const;
 
     /**
      * @brief Makes @code how_many lines, each with the following
@@ -148,6 +149,11 @@ public:
      * @brief Populate containing namespace in the text template.
      */
     text_template make_with_containing_namespace() const;
+
+    /**
+     * @brief Text template with empty text lines.
+     */
+    text_template make_empty_text_lines(const unsigned int how_many = 2) const;
 
 private:
 };
