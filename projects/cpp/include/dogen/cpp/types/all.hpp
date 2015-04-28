@@ -173,5 +173,6 @@
 #include "dogen/cpp/types/formatters/serialization/enumeration_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/enumeration_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_implementation_formatter.hpp"
+#include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/test_data/enumeration_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/enumeration_implementation_formatter.hpp"

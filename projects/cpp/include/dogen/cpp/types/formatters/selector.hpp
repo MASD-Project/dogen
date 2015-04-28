@@ -54,6 +54,12 @@ public:
     bool is_formatter_enabled(const std::string& formatter_name) const;
 
     /**
+     * @brief Returns true if the supplied facet is enabled, false
+     * otherwise.
+     */
+    bool is_facet_enabled(const std::string& facet_name) const;
+
+    /**
      * @brief Returns true if the supplied facet is part of the
      * integrated facets for the supplied formatter.
      */

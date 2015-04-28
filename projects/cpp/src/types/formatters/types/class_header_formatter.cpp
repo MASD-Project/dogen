@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
@@ -63,6 +64,8 @@ const std::string field_definition_not_found(
     "Could not find expected field definition: ");
 const std::string qname_not_found("Could not find qualified name in model: ");
 const std::string path_details_missing("Path details not found for qname: ");
+const std::string inclusion_missing(
+    "Expected inclusion is missing. Formatter: ");
 
 }
 
@@ -109,8 +112,22 @@ provider::provide(const dynamic::schema::repository& rp,
     if (io_enabled && use_integrated_io)
         id.push_back(inclusion_constants::std::iosfwd());
 
-    const auto& rel(o.relationships());
     const expansion::inclusion_directives_selector id_sel(inclusion_directives);
+    const auto ser_fn(formatters::serialization::traits::facet_name());
+    const bool ser_enabled(s.is_facet_enabled(ser_fn));
+    if (ser_enabled) {
+        const auto fn(formatters::serialization::traits::
+            forward_declarations_formatter_name());
+        const auto id2(id_sel.select_inclusion_directive(o.name(), fn));
+        if (!id2) {
+            BOOST_LOG_SEV(lg, error) << inclusion_missing << fn;
+            
+            // BOOST_THROW_EXCEPTION(formatting_error(inclusion_missing + fn));
+        } else
+            id.push_back(*id2);
+    }
+
+    const auto& rel(o.relationships());
     auto i(rel.find(sml::relationship_types::weak_associations));
     if (i != rel.end()) {
         const auto fn(traits::forward_declarations_formatter_name());

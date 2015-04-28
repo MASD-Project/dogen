@@ -64,6 +64,20 @@ bool selector::is_formatter_enabled(const std::string& formatter_name) const {
     return field_selector_.get_boolean_content(*fd.default_value());
 }
 
+bool selector::is_facet_enabled(const std::string& facet_name) const {
+    const std::string fn(qualify(facet_name, traits::enabled()));
+    if (field_selector_.has_field(fn))
+        return field_selector_.get_boolean_content(fn);
+
+    const dynamic::schema::repository_selector s(repository_);
+    const auto& fd(s.select_field_by_name(fn));
+    if (!fd.default_value()) {
+        BOOST_LOG_SEV(lg, error) << no_default_value_for_field << fn;
+        BOOST_THROW_EXCEPTION(selection_error(no_default_value_for_field + fn));
+    }
+    return field_selector_.get_boolean_content(*fd.default_value());
+}
+
 bool selector::is_facet_integrated(const std::string& formatter_name,
     const std::string& facet_name) const {
 

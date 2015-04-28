@@ -18,50 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_FORWARD_DECLARATIONS_FORMATTER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_FORWARD_DECLARATIONS_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-struct traits {
+class forward_declarations_formatter
+    : public forward_declarations_formatter_interface {
+private:
     /**
-     * @brief Name of this facet.
+     * @brief Ensures all expected settings are available and set to
+     * valid values.
      */
-    static std::string facet_name();
+    void validate(const cpp::settings::formatter_settings& fs) const;
 
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
+public:
+    dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 
-    /**
-     * @brief Name of the forward declaration's formatter.
-     */
-    static std::string forward_declarations_formatter_name();
+    file_types file_type() const override;
 
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
+    void register_inclusion_dependencies_provider(
+        expansion::registrar& rg) const override;
 
-    /**
-     * @brief Name of the enumeration header formatter.
-     */
-    static std::string enumeration_header_formatter_name();
-
-    /**
-     * @brief Name of the enumeration implementation formatter.
-     */
-    static std::string enumeration_implementation_formatter_name();
+    dogen::formatters::file
+    format(const formattables::forward_declarations_info& fd) const override;
 };
 
 } } } }

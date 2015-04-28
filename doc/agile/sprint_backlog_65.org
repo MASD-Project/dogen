@@ -311,11 +311,24 @@ We should really be doing:
 : s << std::endl;
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-04-28 Tue 14:27]--[2015-04-28 Tue 15:47] =>  1:20
     CLOCK: [2015-04-28 Tue 14:22]--[2015-04-28 Tue 14:27] =>  0:05
     CLOCK: [2015-04-28 Tue 13:53]--[2015-04-28 Tue 14:06] =>  0:13
 
 We need to implement a stitch template for the class header formatter
 in types, plug it in and start working through the diffs.
+
+*** Improve streaming of empty expressions in stitch                  :spike:
+
+We have a problem with empty expressions:
+
+: <#= #>
+
+Results in:
+
+: s << <<
+
+We need to ignore empty expressions.
 
 *** Create a base formatter                                           :story:
 

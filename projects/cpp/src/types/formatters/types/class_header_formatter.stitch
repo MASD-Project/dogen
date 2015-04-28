@@ -21,9 +21,41 @@ void class_header_formatter_stitch(std::ostream& s,
            s, c.namespaces(), false/*create_anonymous_namespace*/,
            true/*add_new_line*/);
 
+        std::string final_status;
+        if (!c.is_parent())
+            final_status = "final ";
+
 #>
 
-class <#= c.name() #> {
+class <#= c.name() #> <#= final_status #>{
+public:
+<#+
+        if (!c.requires_manual_default_constructor())
+#>
+    <#= c.name() #>() = default;
+    <#= c.name() #>(const <#= c.name() #>&) = default;
+<#+
+        if (!c.requires_manual_move_constructor())
+#>
+    <#= c.name() #>(<#= c.name() #>&&) = default;
+<#+
+        if (!c.is_parent() && c.parents().empty())
+#>
+    ~<#= c.name() #>() = default;
+<#+
+        if (c.is_immutable())
+#>
+    <#= c.name() #>& operator=(const <#= c.name() #>&) = delete;
+<#+
+        if (c.all_properties().empty())
+#>
+    <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
+
+public:
+<#+
+        if (c.requires_manual_default_constructor())
+#>
+    <#= c.name() #>();
 
 };
 

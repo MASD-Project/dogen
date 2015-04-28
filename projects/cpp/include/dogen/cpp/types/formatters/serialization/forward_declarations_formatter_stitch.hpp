@@ -18,51 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_FORWARD_DECLARATIONS_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_FORWARD_DECLARATIONS_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include <ostream>
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-struct traits {
-    /**
-     * @brief Name of this facet.
-     */
-    static std::string facet_name();
-
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
-
-    /**
-     * @brief Name of the forward declaration's formatter.
-     */
-    static std::string forward_declarations_formatter_name();
-
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
-
-    /**
-     * @brief Name of the enumeration header formatter.
-     */
-    static std::string enumeration_header_formatter_name();
-
-    /**
-     * @brief Name of the enumeration implementation formatter.
-     */
-    static std::string enumeration_implementation_formatter_name();
-};
+void forward_declarations_formatter_stitch(std::ostream& s,
+    const boost::optional<dogen::formatters::general_settings>& gs,
+    const settings::formatter_settings& fs,
+    const formattables::forward_declarations_info& fd);
 
 } } } }
 

@@ -20,51 +20,35 @@
  */
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace types {
+namespace serialization {
 
-void class_header_formatter_stitch(std::ostream& s,
+void forward_declarations_formatter_stitch(std::ostream& s,
     const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
-    const formattables::class_info& c) {
+    const formattables::forward_declarations_info& fd) {
 
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
 
     {
         dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, c.namespaces(), false/*create_anonymous_namespace*/,
+           s, fd.namespaces(), false/*create_anonymous_namespace*/,
            true/*add_new_line*/);
 
-        std::string final_status;
-        if (!c.is_parent())
-            final_status = "final ";
-
+        if (fd.is_enum()) {
 s << std::endl;
-s << "class " << c.name() << " " << final_status << "{" << std::endl;
-s << "public:" << std::endl;
-        if (!c.requires_manual_default_constructor())
-s << "    " << c.name() << "() = default;" << std::endl;
-s << "    " << c.name() << "(const " << c.name() << "&) = default;" << std::endl;
-        if (!c.requires_manual_move_constructor())
-s << "    " << c.name() << "(" << c.name() << "&&) = default;" << std::endl;
-        if (!c.is_parent() && c.parents().empty())
-s << "    ~" << c.name() << "() = default;" << std::endl;
-        if (c.is_immutable())
-s << "    " << c.name() << "& operator=(const " << c.name() << "&) = delete;" << std::endl;
-        if (c.all_properties().empty())
-s << "    " << c.name() << "& operator=(const " << c.name() << "&) = default;" << std::endl;
+s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
 s << std::endl;
-s << "public:" << std::endl;
-        if (c.requires_manual_default_constructor())
-s << "    " << c.name() << "();" << std::endl;
+        } else {
 s << std::endl;
-s << "};" << std::endl;
+s << "class " << fd.name() << ";" << std::endl;
 s << std::endl;
+        }
     }
 s << std::endl;
 }
