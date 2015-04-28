@@ -484,94 +484,15 @@ could check if each sub-system has done it's job correctly, and spot
 the one that didn't; we can then just enable that one sub-system's
 =FINE_DEBUG= (when that is supported).
 
-*** Implement include generation for class header formatter           :story:
-
-Now that we have finished generating the path spec details, we need to
-make sure includes generation works as expected. Add both formatter
-level includes as well as model level includes.
-
-We also need to deal with:
-
-- exposing formatter id as a static property so we can create
-  dependencies between formatters;
-- includes overrides via dynamic extensions, so we can start using
-  STL, Boost etc classes.
-- includes of STL, Boost etc that are formatter level dependencies -
-  this needs to be handled via traits.
-
-Notes:
-
-- rename header file to file name override or something else quite
-  distinct. We need to ensure it is obvious that this property is only
-  used for non-dogen models. Actually we can now just call it include
-  path.
-- however we still have a problem: when we compute the include path we
-  do not know if it is a system or user path. We need to change file
-  properties to take this into account. We need a include path class
-  with a include type: user or system. we could then use this.
-- add field definition =no_inclusion_required= and populate all
-  relevant primitives.
-
-We need to add the notion of aspects. This is because a lot of things
-we have dealt with individually are really all related to aspects. An
-aspect is a part of a formatter that can be enabled or disabled. For
-example:
-
-- manual move constructor
-- manual default constructor
-- inserter operator
-- swap function
-- etc.
-
-We could simply create aspect settings; local and global formatters
-would have a map of =aspect_settings= against an =aspect_name=. We
-need to remove the integrated facet approach and implement it in terms
-of this. We should go through the types formatter and figure out which
-aspects it has. For now we shall ignore relationships between aspects
-and facets (and any other kind of switching logic). For example, it is
-the responsibility of the user to ensure that if integrated io is
-used, the io facet is switched off. This is because it is very
-complicated to build in the generic logic of such dependencies. We
-have a story to handle this properly in the backlog, but it will
-require a lot of work.
-
-*** Create a base formatter                                           :story:
-
-We could implement most of the formatter interface in a common base
-class and then only have the descendants override what they need.
-
-In reality we need probably more than one base formatter: one for c++
-types, etc. We could handle all of the path and include generation
-here. Name: =cpp_base_formatter=?
+We probably should only do this at the end, as we want to make sure
+that the code generator is usable with full logging on. Or perhaps set
+the default to fine debug. We should also add a command line option,
+perhaps really verbose.
 
 *** Read =generate_preamble= from dynamic object                      :story:
 
 We need to generate the field definitions and update the general
 settings factory.
-
-*** Implement class header formatter                                  :story:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 *** Improve formatters code generation marker                         :story:
 
@@ -653,51 +574,6 @@ We need a way of populating the class aspects via the type settings
 and via information obtained in the SML model. We may want to create a
 class to handle this logic or maybe it can be done in transformer.
 
-*** Includer generation should be done from dynamic extensions        :story:
-
-*New Understanding*
-
-The true use case of this story is not to allow users to add includes
-at random; it is actually only useful in one scenario:
-
-- *merging code generation*: users add code which requires additional
-  includes. Without support for this, merging code generation would
-  have limited usefulness.
-
-*Previous Understanding*
-
-It would be nice if we could determine which includer files to create
-by looking at the dynamic extensions. For this we need a notion of an
-inclusion group, defined at the model level:
-
-- =cpp.types.includers.general=
-- =cpp.types.includers.value_objects=
-- ...
-
-Under each of these one would configure the aspect:
-
-- =cpp.types.includers.general.generate=: =true=
-- =cpp.types.includers.general.file_name=: =a/b/c=
-- =cpp.types.includers.general.is_system=: =false=
-
-Then, each type, module etc would declare its membership (as a list):
-
-- =cpp.includers.member=: =cpp.types.includers.general=
-- =cpp.includers.member=: =cpp.types.includers.value_objects=
-- ...
-
-*Previous understanding*
-
-We should simply go through all the types in the SML model and for
-each type and each facet create the corresponding inclusion
-path. locator can be used to generate standard paths, and a model
-specific mapping is required for other models such as std.
-
-Include then takes the relationships extracted by extractor, the
-mappings generated by this mapper and simply appends to the inclusion
-list the file names. it also appends the implementation specific
-headers.
-
 *** Consider creating constants for common fields                     :story:
 
 Fields such as =enabled=, =postfix= etc are common to all formatters
@@ -749,13 +625,6 @@ have a nested structure with namespaces containing types.
 
 See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#sml-json-hydrator-read_module_path-needs-refactoring][SML json hydrator =read_module_path= needs refactoring]].
 
-*** Handling of modelines is incorrect in general settings            :story:
-
-At present the general settings are hard-coded to look for a C++
-modeline. This will not work for CMake files, etc. We need to think
-how multiple modelines will be supported. See general settings factory
-in formatters.
-
 *** Consider renaming model module to root module                     :story:
 
 It would be more sensible to call it root module rather than model
@@ -778,23 +647,6 @@ SML validator story in backlog for rules that apply to settings.
 
 Actually what we need is a rules engine that infers all of this. It
 does validation at the same time.
-
-*** Tidy-up sml consumer interface                                    :story:
-
-After implementing the includes for the class header formatter we
-should figure out if we need the multiple passes machinery. Most
-likely all of that should be scraped.
-
-*** Add include files at the formatter level                          :story:
-
-We need to remove all the include files from =includer= which are
-related to formatter specific code. We need to inject these
-dependencies inside of the formatters.
-
-- implement includer in terms of json files
-- get includer to work off of object relationships
-- remove relationships from transformer
-- remove helper models boost and std
 
 *** Add frontends and backends to =info= command line option          :story:
 
@@ -838,20 +690,6 @@ parameter which disables the generation of a cpp file for a
 service. This would stop us from having to create noddy translation
 units with dummy functions just to avoid having to define exclusion
 regexes.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
-
-*** Delete content types                                              :story:
-
-Now we have the type system representing the content, we can delete
-this enumeration.
-
-*** Delete aspect types                                               :story:
-
-Now we have the type system representing the aspects, we can delete
-this enumeration.
 
 *** Delete key implementation formatter                               :story:
 
@@ -923,7 +761,7 @@ consistent with the field's type. This could be done with a
 Actually since we can only create fields from JSON, we should just add
 a check there.
 
-*** Rename name builder to name factory                               :story:
+*** Rename cpp's name builder to name factory                         :story:
 
 The name builder is just a factory so make the name reflect it.
 
@@ -1378,6 +1216,13 @@ We have a lot of fine grained test models for historic reasons. A lot
 of these could be collapsed into a smaller number of models, focused
 on testing a set of well defined features.
 
+One thing to keep in mind is that when we do fundamental work (such as
+moving from the old formatting architecture to the new one), it is
+really useful to have small, incremental test models because we can
+then get tests to pass, one by one, as we refactor. We don't want to
+move to a world where you need to implement all the features in one
+go.
+
 **** Models that need changing
 
 Merge the following models into a =basic= or =trivial= model (no
@@ -1474,7 +1319,7 @@ need to provide the property and class that contained this string. To
 reproduce this problem create an enumeration but remove the
 =enumeration= stereotype.
 
-*** Add new warnings to compilation                                   :story:
+*** Add new c++ warnings to compilation                               :story:
 
 - =-Wunused-private-field=: Seems like this warning is not part of
   =-Wall=
@@ -1536,6 +1381,8 @@ should rename it to =types= too.
 We should probably create a notion of "mandatory" facets to make this
 more general.
 
+Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-c-itself-as-a-front-end][one use case]] where types needs to be off.
+
 *** Allow for generation of class with the same name as package       :story:
 
 At present its not possible to generate a class inside a package with
@@ -1560,7 +1407,7 @@ set of diagrams supplied in the dogen package. However, to ensure
 these samples are actually working we need to test them as part of
 sanity. This means we need the same diagrams packaged twice.
 
-*** Move the mock factories into the test_data directory              :story:
+*** Consider moving the mock factories into the test_data directory   :story:
 
 There is no good conceptual reason to split the mock factories from
 the test_data generators. However, we did it because we don't have a
@@ -1624,7 +1471,7 @@ For some reason the log file is full of errors like this:
 Presumably the errors are not fatal as code generation still
 works. Investigate the errors and tidy-up the log.
 
-*** Add tests for =name_builder=                                      :story:
+*** Add tests for cpp's =name_builder=                                :story:
 
 We refactored tagger code related to flattening names into this class
 but added no tests. We need good coverage, hopefully available from
@@ -1641,12 +1488,6 @@ class and add tests.
 - empty marker
 - different marker for two objects
 - consider moving generate preamble into annotation
-
-*** Add tests for main header file formatter with optionality         :story:
-
-We should add a couple of tests that exercise the annotation
-factory. As it will have its own tests, we just need to make sure it
-works in general. For example, pass in an empty annotation.
 
 *** Remove speculative facet layers for hash and serialization        :story:
 
@@ -1682,6 +1523,9 @@ need to change any states in the state machine. Its probably wiser to
 just use manipulators to perform the state transitions and leave the
 =put= undisturbed. We can leave this until we have a good way of
 getting metrics out of the system.
+
+Actually we should also decide if indent stream is needed at all in a
+stitch world.
 
 *** Consider creating an iostreams filter for comments                :story:
 
@@ -1762,6 +1606,9 @@ We should also be able to grep the log for all timings and save them
 down to get trends. We should add a log severity for this, perhaps
 PROFILE. Not sure what priority it would be at.
 
+We should also be able to get a command-line report, e.g. =--profile=
+would show all the timings for all the components.
+
 *** Consider renaming SML                                             :story:
 
 Originally we intended to rename SML - the Simplified Modeling
@@ -1831,6 +1678,11 @@ model. We could:
 We should wait until the "great refactoring" is done so that we do not
 have to rename the legacy models too.
 
+*Merged with duplicate*
+
+These are not really formatters; not sure what the right name should
+be though; templates?
+
 *** Canned tests rely on copy constructors rather than cloning        :story:
 
 If an object has pointers, the canned tests will not perform a deep
@@ -1858,7 +1710,7 @@ is in the tests that use the mock factory, resulting in duplication
 and possibly missing coverage. We should really just have a mock
 factory test with this validation.
 
-*** Sanitizer: Add tests for empty objects                            :story:
+*** Add tests for empty objects                                       :story:
 
 This was mainly in the context of IO but could be useful for other
 facets. Example:
@@ -1949,7 +1801,10 @@ we need to disable CMake generation and do it by hand. However:
 
 - for well-known dependencies such as boost we could create a
   convention (e.g. assume/require that the CMake boost libraries flags
-  are set via find boost)
+  are set via find boost). alternatively, the types should contain
+  meta-data that has information about linking requirements; e.g. if
+  you use a type from a boost model, it should provide you with
+  linking information in its meta-data.
 - for user level dependencies we should add dynamic extensions at the
   model level.
 
@@ -2013,7 +1868,7 @@ create an unversioned key. We should only generate the versioned
 key. However, it does make life easier. Wait for real world use cases
 to decide.
 
-*** Detect invalid child nodes                                        :story:
+*** Detect invalid child nodes in dia diagram                         :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to know when there are invalid child
@@ -2030,7 +1885,7 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Add tests for SML workflow                                        :story:
+*** Add tests for SML main workflow                                   :story:
 
 We don't seem to have any. A few come to mind:
 
@@ -2102,11 +1957,6 @@ transformation code:
 We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
-
-*** Consider renaming formatters                                      :story:
-
-These are not really formatters; not sure what the right name should
-be though; templates?
 
 *** Inserter for enumerations shouldn't throw                         :story:
 
@@ -2229,21 +2079,6 @@ stereotype in a class that has parents.
 
 Note: is this true? We are using derived visitable in C++ model.
 
-*** Refactor boost and std helpers and enums                          :story:
-
-We shouldn't really have std and boost enums. These are just a repeat
-of the SML models. We should have a find object by name in a model which
-returns the appropriate qname given a type name. Then the helpers bind
-to those qnames; given a qname, they return the include information,
-etc. In the current implementation, the enums are basically a
-duplication of the static models.
-
-In reality we should really load up these models from a file, such
-that users can add their own bindings without having to change C++
-code. This could be done with a config file using boost property
-tree. However, one would need some kind of way of mapping types into
-primitives, sequence containers etc - some kind of "concepts".
-
 *** Add a property for the model name as dynamic extensions           :story:
 
 #+begin_quote
@@ -2319,12 +2154,6 @@ vectors:
 :        create_std_vector_std_string_ptr(position));
 :    return r;
 :}
-
-*** Strange logging behaviour in tests                                :story:
-
-As reported by JS for some reason if a test has a null pointer
-de-reference, the next test will log to both files. This means the
-logger is not being switched off properly in the presence of exceptions.
 
 *** Unordered map of user type in package fails                       :story:
 
@@ -2406,12 +2235,6 @@ http://lists.boost.org/boost-users/2012/11/76458.php
 However, it should be pretty trivial to generate serialisation code by
 hand at least for =std::array= or to use a solution similar to
 =std::unordered_map=.
-
-*** Rename =inserter_implementation=                                  :story:
-
-We used =inserter_implementation= to provide all sorts of utility
-methods for IO. This class should really be named IO utility or
-something of the sort.
 
 *** Cross model referencing tests                                     :story:
 
@@ -2522,11 +2345,6 @@ when we support full models.
 methods and to link them back to language specific methods. Not
 quite frontend, but not far.
 
-*** Rename =codgen= targets                                           :story:
-
-These are really the =knitting= or =knitter= targets because we are
-calling =knitter=.
-
 *** Indent generated c++ code using clang                             :story:
 
 We should generate un-indented c++ code and then rely on clang-format
@@ -2565,6 +2383,16 @@ using fluent interfaces, e.g.:
 : x.with_property_x(false).with_property_y(true);
 
 We could easily add this via dynamic extensions.
+
+*** Consider creating a netty like builder for fluency                :story:
+
+An alternative to fluent properties is to have a fluent builder, as
+used by Netty quite extensively. This allows the class itself to
+remain immutable; the builder just calls the complete constructor at
+the end. We could easily have a "buildable" stereotype that generates
+a builder just like we do for visitor.
+
+See [[https://github.com/netty/netty/blob/master/example/src/main/java/io/netty/example/echo/EchoServer.java][this example]] (ServerBootstrap in particular).
 
 *** Support for transactional writes                                  :story:
 
@@ -2658,6 +2486,9 @@ thought of as "external" as they are defined by users. It would be
 nice if we could move one or the other to dynamic extensions to make
 things cleaner.
 
+We should probably more =visitable= etc to meta-data; it is nice to
+see what concepts a type uses at a glance.
+
 *** Attributes versus properties                                      :story:
 
 At present we have assumed that all attributes in objects should be
@@ -2688,16 +2519,6 @@ Due to moving classes around, we seem to have lots of cases where code
 in a namespace (say =sml=) refers to types in that namespace with
 qualification (say =sml::qname=). We need to do a grep in each project
 to look for instances of a namespace and ensure they are valid.
-
-*** Add support for spaces in template types                          :story:
-
-At present we do not allow any spaces when declaring a type that has
-template parameters:
-
-: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
-
-We need to look into how to add this to the spirit parsing rules as it
-causes a lot of pain.
 
 *** Add support for =std::forward_list=                               :story:
 
@@ -3080,13 +2901,6 @@ other aspects of the model.
 _All_ may be too strong a word as there quite a few. We need good
 coverage around the combinations one can do within the domain
 formatter.
-
-*** Formatters should cache qname formatting                          :story:
-
-We seem to re-format the same qname lots of times. We should just use
-a =std::ostringstream= to format once and reuse the resulting
-string. Probably worth doing this change after the performance tests
-are in.
 
 *** Consider model as a container of types                            :story:
 
@@ -3740,6 +3554,10 @@ same logic to determine what system models to load. The only exception
 is the hardware model, which must always be loaded (or we need some
 kind of mapping between "empty" model name and the hardware model).
 
+We should keep in mind the model groups too; not all models are
+applicable to all model groups. We should only consider compatible
+models.
+
 *** Make JSON SML a fully supported frontend                          :story:
 
 #+begin_quote
@@ -4084,6 +3902,8 @@ A first step for this would be to have a language enumeration in SML
 which is a property of the model, and one entry of which is "language
 agnostic".
 
+See also the model groups work.
+
 *** Add getter and setter prefixes                                    :story:
 
 #+begin_quote
@@ -4125,7 +3945,7 @@ model. One would still have to define a large package, but it could be
 empty, or contain only the types which only have connections inside
 the package, plus comments for the package, etc.
 
-*** Consider adding merging code generation support                    :epic:
+*** Add merging code generation support                                :epic:
 
 #+begin_quote
 *Story*: As a dogen user, I want to manually change some code in
@@ -5016,13 +4836,38 @@ However this would then mean that IO and serialisation would fail
 since they are implemented on the cpp. As there is no need for
 template types, this seems like an ok limitation.
 
+*** Add support for error info augmenting of exceptions               :story:
+
+When we declare a boost exception, we some times need to augment it
+with additional data. This is explained [[http://www.boost.org/doc/libs/1_58_0/libs/exception/doc/tutorial_transporting_data.html][here]]. We should be able to add
+these tags to the exception class and have dogen generate the
+error_info boilerplate in the exception header.
+
 ** Tooling, infrastructure, blog posts, etc.
+
+*** Consider using Given-When-Then for unit tests                      :epic:
+
+We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
+of specifying unit tests, to see if it would make our tests
+clearer. We are already following some kind of Given and Then, but we
+should consider making it explicit.
+
+The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
+natively supports GWT.
+
+*** Add vagrant and docker support                                    :story:
+
+It would be nice to provide vagrant and docker support to dogen in
+terms of development. The idea is that you can =git clone= the repo
+and then =vagrant up= it and you would be ready to start coding. This
+would make drive-by patches much easier.
 
 *** Log analysis tool                                                 :story:
 
 We should create a log analyser tool (=logan=?), as follows:
 
-- separate repo.
+- separate repo. it could be incubated in dogen to start off with
+  though.
 - use a dogen model to describe the tool's domain. Very simple domain.
 - use the dogen version line to determine the application, the version
   and the run time. All other entries are foreign-keyed against this
@@ -5043,6 +4888,18 @@ We should create a log analyser tool (=logan=?), as follows:
 - we need to figure out how splunk decides to start loading the log
   files (only after roll, incrementally - and if so, how does it keep
   track, etc).
+
+*** Investigate support for biicode                                   :story:
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
 
 *** Use clang format to format the code base                          :story:
 
@@ -5349,7 +5206,6 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
-
 *** Consider c++ itself as a front-end                                 :epic:
 
 One can imagine a clang-based front-end that reads C++ code suitably
@@ -5597,13 +5453,6 @@ This may also make sense for the front-end, but less so.
 
 See [[http://apolukhin.github.io/Boost.DLL/index.html][Boost.DLL]].
 
-*** Add vagrant and docker support                                    :story:
-
-It would be nice to provide vagrant and docker support to dogen in
-terms of development. The idea is that you can =git clone= the repo
-and then =vagrant up= it and you would be ready to start coding. This
-would make drive-by patches much easier.
-
 *** Add support for Language Agnostic Models (LAM)                    :story:
 
 When we start supporting more than one language, one interesting
@@ -5712,18 +5561,6 @@ https://bitbucket.org/davidstone/bounded_integer
 However, off the top of my head, there are no cases for bounded
 integers in dogen yet.
 
-*** Investigate support for biicode                                   :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
 *** Investigate ModelQ for ideas                                      :story:
 
 We need to mine this project for potential ideas - see how their
@@ -5761,16 +5598,6 @@ the management of dependency injection from generated code. We also
 have access to all interfaces and their implementations so a lot of
 the clever logic done at run time by castle/guice etc could be done in
 the generated code.
-
-*** Consider using Given-When-Then for unit tests                      :epic:
-
-We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
-of specifying unit tests, to see if it would make our tests
-clearer. We are already following some kind of Given and Then, but we
-should consider making it explicit.
-
-The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
-natively supports GWT.
 
 *** Multi-purpose models per language                                  :epic:
 

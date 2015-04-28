@@ -29,6 +29,7 @@ Clock summary at [2015-04-27 Mon 19:51]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-04-28 Tue 11:15]--[2015-04-28 Tue 12:14] =>  0:59
     CLOCK: [2015-04-27 Mon 14:15]--[2015-04-27 Mon 15:07] =>  0:52
     CLOCK: [2015-04-27 Mon 14:05]--[2015-04-27 Mon 14:15] =>  0:10
 
@@ -102,6 +103,241 @@ from provider.
 In a few cases we seem to need the ownership hierarchy for all
 formatters. We should move this logic to formatter registrar.
 
+*** COMPLETED Refactor boost and std helpers and enums                :story:
+    CLOSED: [2015-04-28 Tue 11:50]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+We shouldn't really have std and boost enums. These are just a repeat
+of the SML models. We should have a find object by name in a model which
+returns the appropriate qname given a type name. Then the helpers bind
+to those qnames; given a qname, they return the include information,
+etc. In the current implementation, the enums are basically a
+duplication of the static models.
+
+In reality we should really load up these models from a file, such
+that users can add their own bindings without having to change C++
+code. This could be done with a config file using boost property
+tree. However, one would need some kind of way of mapping types into
+primitives, sequence containers etc - some kind of "concepts".
+
+*** COMPLETED Implement include generation for class header formatter :story:
+    CLOSED: [2015-04-28 Tue 11:51]
+
+*Rationale*: this has been implemented and will be completed with the
+ current stitch template work.
+
+Now that we have finished generating the path spec details, we need to
+make sure includes generation works as expected. Add both formatter
+level includes as well as model level includes.
+
+We also need to deal with:
+
+- exposing formatter id as a static property so we can create
+  dependencies between formatters;
+- includes overrides via dynamic extensions, so we can start using
+  STL, Boost etc classes.
+- includes of STL, Boost etc that are formatter level dependencies -
+  this needs to be handled via traits.
+
+Notes:
+
+- rename header file to file name override or something else quite
+  distinct. We need to ensure it is obvious that this property is only
+  used for non-dogen models. Actually we can now just call it include
+  path.
+- however we still have a problem: when we compute the include path we
+  do not know if it is a system or user path. We need to change file
+  properties to take this into account. We need a include path class
+  with a include type: user or system. we could then use this.
+- add field definition =no_inclusion_required= and populate all
+  relevant primitives.
+
+We need to add the notion of aspects. This is because a lot of things
+we have dealt with individually are really all related to aspects. An
+aspect is a part of a formatter that can be enabled or disabled. For
+example:
+
+- manual move constructor
+- manual default constructor
+- inserter operator
+- swap function
+- etc.
+
+We could simply create aspect settings; local and global formatters
+would have a map of =aspect_settings= against an =aspect_name=. We
+need to remove the integrated facet approach and implement it in terms
+of this. We should go through the types formatter and figure out which
+aspects it has. For now we shall ignore relationships between aspects
+and facets (and any other kind of switching logic). For example, it is
+the responsibility of the user to ensure that if integrated io is
+used, the io facet is switched off. This is because it is very
+complicated to build in the generic logic of such dependencies. We
+have a story to handle this properly in the backlog, but it will
+require a lot of work.
+
+*** COMPLETED Includer generation should be done from dynamic extensions :story:
+    CLOSED: [2015-04-28 Tue 11:52]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+*New Understanding*
+
+The true use case of this story is not to allow users to add includes
+at random; it is actually only useful in one scenario:
+
+- *merging code generation*: users add code which requires additional
+  includes. Without support for this, merging code generation would
+  have limited usefulness.
+
+*Previous Understanding*
+
+It would be nice if we could determine which includer files to create
+by looking at the dynamic extensions. For this we need a notion of an
+inclusion group, defined at the model level:
+
+- =cpp.types.includers.general=
+- =cpp.types.includers.value_objects=
+- ...
+
+Under each of these one would configure the aspect:
+
+- =cpp.types.includers.general.generate=: =true=
+- =cpp.types.includers.general.file_name=: =a/b/c=
+- =cpp.types.includers.general.is_system=: =false=
+
+Then, each type, module etc would declare its membership (as a list):
+
+- =cpp.includers.member=: =cpp.types.includers.general=
+- =cpp.includers.member=: =cpp.types.includers.value_objects=
+- ...
+
+*Previous understanding*
+
+We should simply go through all the types in the SML model and for
+each type and each facet create the corresponding inclusion
+path. locator can be used to generate standard paths, and a model
+specific mapping is required for other models such as std.
+
+Include then takes the relationships extracted by extractor, the
+mappings generated by this mapper and simply appends to the inclusion
+list the file names. it also appends the implementation specific
+headers.
+
+*** COMPLETED Handling of modelines is incorrect in general settings  :story:
+    CLOSED: [2015-04-28 Tue 11:53]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+At present the general settings are hard-coded to look for a C++
+modeline. This will not work for CMake files, etc. We need to think
+how multiple modelines will be supported. See general settings factory
+in formatters.
+
+*** COMPLETED Add include files at the formatter level                :story:
+    CLOSED: [2015-04-28 Tue 11:54]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+We need to remove all the include files from =includer= which are
+related to formatter specific code. We need to inject these
+dependencies inside of the formatters.
+
+- implement includer in terms of json files
+- get includer to work off of object relationships
+- remove relationships from transformer
+- remove helper models boost and std
+
+*** COMPLETED Delete content types                                    :story:
+    CLOSED: [2015-04-28 Tue 11:54]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+Now we have the type system representing the content, we can delete
+this enumeration.
+
+*** COMPLETED Delete aspect types                                     :story:
+    CLOSED: [2015-04-28 Tue 11:54]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+Now we have the type system representing the aspects, we can delete
+this enumeration.
+
+*** COMPLETED Rename =codgen= targets                                 :story:
+    CLOSED: [2015-04-28 Tue 11:55]
+
+*Rationale*: fixed in previous sprint.
+
+These are really the =knitting= or =knitter= targets because we are
+calling =knitter=.
+
+*** COMPLETED Add support for spaces in template types                :story:
+    CLOSED: [2015-04-28 Tue 12:00]
+
+*Rationale*: Fixed in previous sprint.
+
+At present we do not allow any spaces when declaring a type that has
+template parameters:
+
+: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
+
+We need to look into how to add this to the spirit parsing rules as it
+causes a lot of pain.
+
+*** COMPLETED Formatters should cache qname formatting                :story:
+    CLOSED: [2015-04-28 Tue 12:02]
+
+*Rationale*: Will be done as part of architecture refactor.
+
+We seem to re-format the same qname lots of times. We should just use
+a =std::ostringstream= to format once and reuse the resulting
+string. Probably worth doing this change after the performance tests
+are in.
+
+*** Create a base formatter                                           :story:
+
+We could implement most of the formatter interface in a common base
+class and then only have the descendants override what they need.
+
+In reality we need probably more than one base formatter: one for c++
+types, etc. We could handle all of the path and include generation
+here. Name: =cpp_base_formatter=?
+
+*** Implement class header formatter                                  :story:
+
+- look at the old =om= types formatter implementation to see if there
+  is any code to scavenge. This model was deleted around commit
+  10157ad.
+
+**** Tidy-up =types_main_header_file_formatter=                        :task:
+
+Clean up internal functions in file and add documentation.
+
+**** Copy across documentation from =om=                               :task:
+
+We did a lot of doxygen comments that are readily applicable, copy
+them across.
+
+**** Make use of indenting stream                                      :task:
+
+Remove uses of old indenter.
+
+**** Copy across =om= types formatter tests                            :task:
+
+Not sure how applicable this would be, but we may be able to scavenge
+some tests.
+
+*** Tidy-up sml consumer interface                                    :story:
+
+After implementing the includes for the class header formatter we
+should figure out if we need the multiple passes machinery. Most
+likely all of that should be scraped.
+
+*** Remove =cpp_formatters::formatting_error=                         :story:
+
+Use the =formatters::formating_error= instead.
+
 *** Contents change check is done twice                               :story:
 
 We seem to check twice if a file has changed:
@@ -142,3 +378,29 @@ implementation with spirit see:
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
 
 ** Deprecated
+*** CANCELLED Add tests for main header file formatter with optionality :story:
+    CLOSED: [2015-04-28 Tue 11:50]
+
+*Rationale*: we already have tests for optionality at the boilerplate level.
+
+We should add a couple of tests that exercise the annotation
+factory. As it will have its own tests, we just need to make sure it
+works in general. For example, pass in an empty annotation.
+
+*** CANCELLED Strange logging behaviour in tests                      :story:
+    CLOSED: [2015-04-28 Tue 11:48]
+
+*Rationale*: can't reproduce.
+
+As reported by JS for some reason if a test has a null pointer
+de-reference, the next test will log to both files. This means the
+logger is not being switched off properly in the presence of exceptions.
+
+*** CANCELLED Rename =inserter_implementation=                        :story:
+    CLOSED: [2015-04-28 Tue 11:50]
+
+*Rationale*: won't be a problem after architecture refactor.
+
+We used =inserter_implementation= to provide all sorts of utility
+methods for IO. This class should really be named IO utility or
+something of the sort.
