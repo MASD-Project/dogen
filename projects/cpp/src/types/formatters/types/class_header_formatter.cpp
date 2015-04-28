@@ -121,7 +121,7 @@ provider::provide(const dynamic::schema::repository& rp,
         const auto id2(id_sel.select_inclusion_directive(o.name(), fn));
         if (!id2) {
             BOOST_LOG_SEV(lg, error) << inclusion_missing << fn;
-            // BOOST_THROW_EXCEPTION(formatting_error(inclusion_missing + fn));
+            BOOST_THROW_EXCEPTION(formatting_error(inclusion_missing + fn));
         } else
             id.push_back(*id2);
     }
