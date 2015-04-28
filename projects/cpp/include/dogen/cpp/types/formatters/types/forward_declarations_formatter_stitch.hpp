@@ -26,10 +26,8 @@
 #endif
 
 #include <ostream>
-
 #include <boost/optional.hpp>
 #include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 

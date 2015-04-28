@@ -41,6 +41,7 @@
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
 namespace {
@@ -182,13 +183,8 @@ class_header_formatter::format(const formattables::class_info& c) const {
     const auto fs(s.formatter_settings_for_formatter(fn));
     validate(fs);
 
-    {
-        const auto gs(c.settings().general_settings());
-        dogen::formatters::cpp::scoped_boilerplate_formatter sbf(
-            fo, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
-        // do formatting.
-    }
+    const auto gs(c.settings().general_settings());
+    class_header_formatter_stitch(fo, gs, fs, c);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;

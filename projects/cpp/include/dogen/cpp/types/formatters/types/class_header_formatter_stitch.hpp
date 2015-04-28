@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,39 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <ostream>
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void forward_declarations_formatter_stitch(std::ostream& s,
+void class_header_formatter_stitch(std::ostream& s,
     const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
-    const formattables::forward_declarations_info& fd) {
-
-    dogen::formatters::cpp::scoped_boilerplate_formatter
-       sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
-    {
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, fd.namespaces(), false/*create_anonymous_namespace*/,
-           true/*add_new_line*/);
-
-        if (fd.is_enum()) {
-s << "" << std::endl;
-s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
-s << "" << std::endl;
-        } else {
-s << "" << std::endl;
-s << "class " << fd.name() << ";" << std::endl;
-s << "" << std::endl;
-        }
-    }
-s << "" << std::endl;
-}
+    const formattables::class_info& fd);
 
 } } } }
+
+#endif

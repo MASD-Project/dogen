@@ -20,35 +20,31 @@
  */
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void forward_declarations_formatter_stitch(std::ostream& s,
+void class_header_formatter_stitch(std::ostream& s,
     const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
-    const formattables::forward_declarations_info& fd) {
+    const formattables::class_info& c) {
 
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
 
     {
         dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, fd.namespaces(), false/*create_anonymous_namespace*/,
+           s, c.namespaces(), false/*create_anonymous_namespace*/,
            true/*add_new_line*/);
 
-        if (fd.is_enum()) {
 s << "" << std::endl;
-s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
+s << "class " << c.name() << " {" << std::endl;
 s << "" << std::endl;
-        } else {
+s << "};" << std::endl;
 s << "" << std::endl;
-s << "class " << fd.name() << ";" << std::endl;
-s << "" << std::endl;
-        }
     }
 s << "" << std::endl;
 }

@@ -13,19 +13,22 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-27 Mon 19:51]
+Clock summary at [2015-04-28 Tue 14:27]
 
-| Headline                                                           | Time   |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                       | *5:16* |      |      |
-|--------------------------------------------------------------------+--------+------+------|
-| Active                                                             |        | 5:16 |      |
-| STARTED Sprint and product backlog grooming                        |        |      | 1:02 |
-| COMPLETED Fix borked gcc build                                     |        |      | 0:35 |
-| COMPLETED Output new world forward declarations                    |        |      | 2:36 |
-| COMPLETED Fix missing new line in enumeration forward declarations |        |      | 0:32 |
-| COMPLETED Text of GPL V2 licence is the same as V3                 |        |      | 0:10 |
-| COMPLETED Inclusion provision needs to cater for optional case     |        |      | 0:21 |
+| Headline                                                            | Time   |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                        | *7:04* |      |      |
+|---------------------------------------------------------------------+--------+------+------|
+| Active                                                              |        | 7:04 |      |
+| STARTED Sprint and product backlog grooming                         |        |      | 2:01 |
+| COMPLETED Fix borked gcc build                                      |        |      | 0:35 |
+| COMPLETED Output new world forward declarations                     |        |      | 2:36 |
+| COMPLETED Fix missing new line in enumeration forward declarations  |        |      | 0:32 |
+| COMPLETED Text of GPL V2 licence is the same as V3                  |        |      | 0:10 |
+| COMPLETED Inclusion provision needs to cater for optional case      |        |      | 0:21 |
+| COMPLETED Consider adding a ownership hierarchy method in registrar |        |      | 0:15 |
+| COMPLETED Improve streaming of empty lines in stitch                |        |      | 0:16 |
+| STARTED Implement types class header formatter using stitch         |        |      | 0:18 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -295,6 +298,25 @@ a =std::ostringstream= to format once and reuse the resulting
 string. Probably worth doing this change after the performance tests
 are in.
 
+*** COMPLETED Improve streaming of empty lines in stitch              :spike:
+    CLOSED: [2015-04-28 Tue 14:22]
+    CLOCK: [2015-04-28 Tue 14:06]--[2015-04-28 Tue 14:22] =>  0:16
+
+At present we stream empty lines as follows:
+
+: s << "" << std::endl;
+
+We should really be doing:
+
+: s << std::endl;
+
+*** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-04-28 Tue 14:22]--[2015-04-28 Tue 14:27] =>  0:05
+    CLOCK: [2015-04-28 Tue 13:53]--[2015-04-28 Tue 14:06] =>  0:13
+
+We need to implement a stitch template for the class header formatter
+in types, plug it in and start working through the diffs.
+
 *** Create a base formatter                                           :story:
 
 We could implement most of the formatter interface in a common base
@@ -303,30 +325,6 @@ class and then only have the descendants override what they need.
 In reality we need probably more than one base formatter: one for c++
 types, etc. We could handle all of the path and include generation
 here. Name: =cpp_base_formatter=?
-
-*** Implement class header formatter                                  :story:
-
-- look at the old =om= types formatter implementation to see if there
-  is any code to scavenge. This model was deleted around commit
-  10157ad.
-
-**** Tidy-up =types_main_header_file_formatter=                        :task:
-
-Clean up internal functions in file and add documentation.
-
-**** Copy across documentation from =om=                               :task:
-
-We did a lot of doxygen comments that are readily applicable, copy
-them across.
-
-**** Make use of indenting stream                                      :task:
-
-Remove uses of old indenter.
-
-**** Copy across =om= types formatter tests                            :task:
-
-Not sure how applicable this would be, but we may be able to scavenge
-some tests.
 
 *** Tidy-up sml consumer interface                                    :story:
 
