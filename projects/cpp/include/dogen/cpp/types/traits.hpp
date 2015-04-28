@@ -105,6 +105,11 @@ struct traits {
      * @brief Name of the directory containing the source files.
      */
     static std::string source_directory_name();
+
+    /**
+     * @brief If true, the complete constructor is not generated.
+     */
+    static std::string disable_complete_constructor();
 };
 
 } }

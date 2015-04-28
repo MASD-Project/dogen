@@ -28,7 +28,6 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/settings/type_settings_ser.hpp"
-#include "dogen/cpp/serialization/formattables/family_types_ser.hpp"
 
 
 namespace boost {
@@ -38,9 +37,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::settings::type_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("family_type", v.family_type_);
-    ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
-    ar << make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
 }
 
@@ -48,9 +44,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::settings::type_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("family_type", v.family_type_);
-    ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
-    ar >> make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
 }
 

@@ -332,6 +332,46 @@ To test diff:
 
 : diff -u /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/expected/all_primitives/include/dogen/test_models/all_primitives/serialization/a_class_fwd_ser.hpp /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/all_primitives/include/dogen/test_models/all_primitives/serialization/a_class_fwd_ser.hpp
 
+Notes:
+
+- we can't access disable complete constructor option. Figure out how to.
+
+*** STARTED Implement options copier and remove options from context  :story:
+    CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
+    CLOCK: [2015-04-28 Tue 18:52]--[2015-04-28 Tue 19:33] =>  0:41
+
+At present the path derivatives expander is getting access to the C++
+options via the expansion context. This was obviously a temporary hack
+to get things moving. The right thing must surely be to add the root
+object to the context, and to read the options from the root
+object. These for now must be populated via the options copier; in the
+future one can imagine that users define them in diagrams.
+
+Actually, the directories supplied to dogen do need to be command line
+options. This is because they tend to be created by CMake on the fly
+as absolute paths and as such cannot be hard-coded into the
+diagram. This being the case, perhaps we should just supply the
+knitting options to the expansion context. This does mean that now
+expansion is a knitting thing - it could have been used by
+stitch. Needs a bit more thinking.
+
+*Tasks to read options from root object*
+
+Not yet clear this is the right solution, but if it is, this is what
+needs to be done.
+
+- check that we have all the required fields in JSON for all of the
+  c++ options we require for now.
+- update options copier to copy these options. In many cases we will
+  have to "redirect" the option. For example, =domain_facet_folder=
+  becomes the types directory and so forth. Having said that we
+  probably won't need these for now.
+- remove options from context, and add root object instead. We may
+  need to do the usual "locate root object" routine.
+- update the path settings factory to read these from the root object.
+- add options to type settings where it makes sense (e.g. disable
+  complete constructor) and implement the type settings factory.
+
 *** Improve streaming of empty expressions in stitch                  :spike:
 
 We have a problem with empty expressions:

@@ -19,14 +19,8 @@
  *
  */
 #include "dogen/cpp/test_data/settings/type_settings_td.hpp"
-#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 
 namespace {
-
-dogen::cpp::formattables::family_types
-create_dogen_cpp_formattables_family_types(const unsigned int position) {
-    return dogen::cpp::formattables::family_types_generator::create(position);
-}
 
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
@@ -42,10 +36,7 @@ type_settings_generator::type_settings_generator() : position_(0) { }
 
 void type_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.family_type(create_dogen_cpp_formattables_family_types(position + 0));
-    v.requires_manual_default_constructor(create_bool(position + 1));
-    v.requires_manual_move_constructor(create_bool(position + 2));
-    v.disable_complete_constructor(create_bool(position + 3));
+    v.disable_complete_constructor(create_bool(position + 0));
 }
 
 type_settings_generator::result_type

@@ -93,5 +93,9 @@ std::string traits::implementation_file_extension() {
     return r;
 }
 
+std::string traits::disable_complete_constructor() {
+    static std::string r("cpp.disable_complete_constructor");
+    return r;
+}
 
 } }

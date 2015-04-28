@@ -50,7 +50,9 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
-path_derivatives_expander::path_derivatives_expander() : requires_file_path_expansion_(false) {}
+path_derivatives_expander::path_derivatives_expander()
+  : requires_file_path_expansion_(false) {}
+
 path_derivatives_expander::~path_derivatives_expander() noexcept {}
 
 path_derivatives_expander::field_definitions
@@ -191,11 +193,8 @@ setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());
     const auto& rp(ec.repository());
     field_definitions_ = setup_field_definitions(rp, fc);
-
-    const auto& m(ec.model());
-    const auto& opts(ec.cpp_options());
     path_derivatives_workflow w(fc);
-    path_derivatives_ = w.execute(opts, rp, m);
+    path_derivatives_ = w.execute(ec.cpp_options(), rp, ec.model());
 }
 
 void path_derivatives_expander::

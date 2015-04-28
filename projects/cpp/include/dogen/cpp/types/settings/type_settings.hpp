@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen/cpp/types/formattables/family_types.hpp"
 #include "dogen/cpp/serialization/settings/type_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,11 +42,7 @@ public:
     type_settings();
 
 public:
-    type_settings(
-        const dogen::cpp::formattables::family_types& family_type,
-        const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor,
-        const bool disable_complete_constructor);
+    explicit type_settings(const bool disable_complete_constructor);
 
 private:
     template<typename Archive>
@@ -57,15 +52,6 @@ private:
     friend void boost::serialization::load(Archive& ar, type_settings& v, unsigned int version);
 
 public:
-    dogen::cpp::formattables::family_types family_type() const;
-    void family_type(const dogen::cpp::formattables::family_types& v);
-
-    bool requires_manual_default_constructor() const;
-    void requires_manual_default_constructor(const bool v);
-
-    bool requires_manual_move_constructor() const;
-    void requires_manual_move_constructor(const bool v);
-
     bool disable_complete_constructor() const;
     void disable_complete_constructor(const bool v);
 
@@ -80,9 +66,6 @@ public:
     type_settings& operator=(type_settings other);
 
 private:
-    dogen::cpp::formattables::family_types family_type_;
-    bool requires_manual_default_constructor_;
-    bool requires_manual_move_constructor_;
     bool disable_complete_constructor_;
 };
 

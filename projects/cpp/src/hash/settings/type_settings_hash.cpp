@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/hash/settings/type_settings_hash.hpp"
-#include "dogen/cpp/hash/formattables/family_types_hash.hpp"
 
 namespace {
 
@@ -39,11 +38,7 @@ namespace settings {
 std::size_t type_settings_hasher::hash(const type_settings&v) {
     std::size_t seed(0);
 
-    combine(seed, v.family_type());
-    combine(seed, v.requires_manual_default_constructor());
-    combine(seed, v.requires_manual_move_constructor());
     combine(seed, v.disable_complete_constructor());
-
     return seed;
 }
 

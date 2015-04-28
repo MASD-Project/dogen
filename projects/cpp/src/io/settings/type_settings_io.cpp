@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen/cpp/io/settings/type_settings_io.hpp"
-#include "dogen/cpp/io/formattables/family_types_io.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,9 +35,6 @@ std::ostream& operator<<(std::ostream& s, const type_settings& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::type_settings\"" << ", "
-      << "\"family_type\": " << v.family_type() << ", "
-      << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
-      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
       << "\"disable_complete_constructor\": " << v.disable_complete_constructor()
       << " }";
     return(s);
