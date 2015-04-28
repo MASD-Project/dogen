@@ -13,23 +13,25 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-28 Tue 17:48]
+Clock summary at [2015-04-28 Tue 23:54]
 
-| Headline                                                            | Time   |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                        | *9:07* |      |      |
-|---------------------------------------------------------------------+--------+------+------|
-| Active                                                              |        | 9:07 |      |
-| STARTED Sprint and product backlog grooming                         |        |      | 2:01 |
-| COMPLETED Fix borked gcc build                                      |        |      | 0:35 |
-| COMPLETED Output new world forward declarations                     |        |      | 2:36 |
-| COMPLETED Fix missing new line in enumeration forward declarations  |        |      | 0:32 |
-| COMPLETED Text of GPL V2 licence is the same as V3                  |        |      | 0:10 |
-| COMPLETED Inclusion provision needs to cater for optional case      |        |      | 0:21 |
-| COMPLETED Consider adding a ownership hierarchy method in registrar |        |      | 0:15 |
-| COMPLETED Improve streaming of empty lines in stitch                |        |      | 0:16 |
-| COMPLETED Implement serialization forward declarations formatter    |        |      | 0:17 |
-| STARTED Implement types class header formatter using stitch         |        |      | 2:04 |
+| Headline                                                                 | Time    |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                             | *10:26* |       |      |
+|--------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                   |         | 10:26 |      |
+| STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
+| COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
+| COMPLETED Output new world forward declarations                          |         |       | 2:36 |
+| COMPLETED Fix missing new line in enumeration forward declarations       |         |       | 0:32 |
+| COMPLETED Text of GPL V2 licence is the same as V3                       |         |       | 0:10 |
+| COMPLETED Inclusion provision needs to cater for optional case           |         |       | 0:21 |
+| COMPLETED Consider adding a ownership hierarchy method in registrar      |         |       | 0:15 |
+| COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
+| COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
+| STARTED Implement types class header formatter using stitch              |         |       | 2:04 |
+| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 0:29 |
+| STARTED Implement options copier and remove options from context         |         |       | 0:50 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -335,6 +337,15 @@ To test diff:
 Notes:
 
 - we can't access disable complete constructor option. Figure out how to.
+
+*** STARTED Add support for =disable_complete_constructor= in options copier
+    CLOCK: [2015-04-28 Tue 23:25]--[2015-04-28 Tue 23:54] =>  0:29
+
+Class header requires =disable_complete_constructor=.
+
+- add field to JSON.
+- update options copier to copy from options
+- implement reading in the type settings factory.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09

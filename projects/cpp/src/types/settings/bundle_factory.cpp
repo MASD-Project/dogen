@@ -68,7 +68,7 @@ create_general_settings(const dynamic::schema::object& o) const {
 
 type_settings bundle_factory::
 create_type_settings(const dynamic::schema::object& o) const {
-    type_settings_factory f;
+    type_settings_factory f(schema_repository_);
     return f.make(o);
 }
 

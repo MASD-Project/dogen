@@ -51,20 +51,27 @@ public:
 #>
     <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
 
-public:
 <#+
-        if (c.requires_manual_default_constructor())
+        if (c.requires_manual_default_constructor()) {
 #>
+public:
     <#= c.name() #>();
 
+<#+
+        }
+#>
 <#+
         if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
             c.class_type() != cpp::formattables::class_types::versioned_key &&
             c.requires_manual_move_constructor() &&
-            !c.all_properties().empty())
+            !c.all_properties().empty()) {
 #>
 public:
     <#= c.name() #>(<#= c.name() #>&& rhs);
+
+<#+
+        }
+#>
 
 };
 

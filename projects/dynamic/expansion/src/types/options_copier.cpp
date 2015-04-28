@@ -28,6 +28,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.expansion.options_copier"));
 
 const std::string split_project("cpp.split_project");
+const std::string disable_complete_constructor(
+    "cpp.type.disable_complete_constructor");
 
 }
 
@@ -80,6 +82,9 @@ void options_copier::expand(const sml::qname& /*qn*/,
         return;
 
     unsigned int c(insert_field(split_project, options_.split_project(), o));
+    c += insert_field(disable_complete_constructor,
+        options_.disable_complete_constructor(), o);
+
     BOOST_LOG_SEV(lg, debug) << "Total fields copied: " << c;
 }
 

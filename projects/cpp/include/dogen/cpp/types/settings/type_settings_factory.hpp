@@ -26,6 +26,8 @@
 #endif
 
 #include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/type_settings.hpp"
 
 namespace dogen {
@@ -34,10 +36,31 @@ namespace settings {
 
 class type_settings_factory {
 public:
+    explicit type_settings_factory(const dynamic::schema::repository& rp);
+
+private:
+    /**
+     * @brief All relevant properties we need to remember for each formatter.
+     */
+    struct field_definitions {
+        dynamic::schema::field_definition disable_complete_constructor;
+    };
+
+    /**
+     * @brief Creates the set of formatter properties for a given
+     * formatter.
+     */
+    field_definitions make_field_definitions(
+        const dynamic::schema::repository& rp) const;
+
+public:
     /**
      * @brief Produces the type settings.
      */
     type_settings make(const dynamic::schema::object& o) const;
+
+private:
+    const field_definitions field_definitions_;
 };
 
 } } }

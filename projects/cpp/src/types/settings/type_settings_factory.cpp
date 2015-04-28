@@ -21,6 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
 
 namespace {
@@ -34,9 +36,27 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
+type_settings_factory::
+type_settings_factory(const dynamic::schema::repository& rp)
+    : field_definitions_(make_field_definitions(rp)) {}
+
+type_settings_factory::field_definitions
+type_settings_factory::make_field_definitions(
+    const dynamic::schema::repository& rp) const {
+    field_definitions r;
+    const dynamic::schema::repository_selector s(rp);
+    r.disable_complete_constructor =
+        s.select_field_by_name(traits::type::disable_complete_constructor());
+    return r;
+}
+
 type_settings type_settings_factory::
-make(const dynamic::schema::object& /*o*/) const {
+make(const dynamic::schema::object& o) const {
+    const dynamic::schema::field_selector fs(o);
     type_settings r;
+    r.disable_complete_constructor(fs.get_boolean_content_or_default(
+            field_definitions_.disable_complete_constructor));
+
     return r;
 }
 

@@ -106,10 +106,12 @@ struct traits {
      */
     static std::string source_directory_name();
 
-    /**
-     * @brief If true, the complete constructor is not generated.
-     */
-    static std::string disable_complete_constructor();
+    struct type {
+        /**
+         * @brief If true, the complete constructor is not generated.
+         */
+        static std::string disable_complete_constructor();
+    };
 };
 
 } }
