@@ -41,6 +41,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::parent_info& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("qualified_name", v.qualified_name_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("properties", v.properties_);
 }
@@ -50,6 +51,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::parent_info& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("qualified_name", v.qualified_name_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("properties", v.properties_);
 }

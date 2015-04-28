@@ -66,9 +66,10 @@ void entity_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::formattable_generator::populate(position, v);
     v.name(create_std_string(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.namespaces(create_std_list_std_string(position + 2));
-    v.settings(create_dogen_cpp_settings_bundle(position + 3));
+    v.qualified_name(create_std_string(position + 1));
+    v.documentation(create_std_string(position + 2));
+    v.namespaces(create_std_list_std_string(position + 3));
+    v.settings(create_dogen_cpp_settings_bundle(position + 4));
 }
 
 entity_generator::result_type*

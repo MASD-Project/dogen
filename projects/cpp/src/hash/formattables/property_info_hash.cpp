@@ -63,6 +63,7 @@ std::size_t property_info_hasher::hash(const property_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
+    combine(seed, v.qualified_name());
     combine(seed, v.documentation());
     combine(seed, v.type());
     combine(seed, hash_std_list_std_pair_std_string_std_string_(v.opaque_parameters()));

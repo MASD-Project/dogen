@@ -40,6 +40,7 @@ property_info::property_info()
 
 property_info::property_info(
     const std::string& name,
+    const std::string& qualified_name,
     const std::string& documentation,
     const dogen::cpp::formattables::nested_type_info& type,
     const std::list<std::pair<std::string, std::string> >& opaque_parameters,
@@ -47,6 +48,7 @@ property_info::property_info(
     const bool is_fluent,
     const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings)
     : name_(name),
+      qualified_name_(qualified_name),
       documentation_(documentation),
       type_(type),
       opaque_parameters_(opaque_parameters),
@@ -57,6 +59,7 @@ property_info::property_info(
 void property_info::swap(property_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(qualified_name_, other.qualified_name_);
     swap(documentation_, other.documentation_);
     swap(type_, other.type_);
     swap(opaque_parameters_, other.opaque_parameters_);
@@ -67,6 +70,7 @@ void property_info::swap(property_info& other) noexcept {
 
 bool property_info::operator==(const property_info& rhs) const {
     return name_ == rhs.name_ &&
+        qualified_name_ == rhs.qualified_name_ &&
         documentation_ == rhs.documentation_ &&
         type_ == rhs.type_ &&
         opaque_parameters_ == rhs.opaque_parameters_ &&
@@ -95,6 +99,22 @@ void property_info::name(const std::string& v) {
 
 void property_info::name(const std::string&& v) {
     name_ = std::move(v);
+}
+
+const std::string& property_info::qualified_name() const {
+    return qualified_name_;
+}
+
+std::string& property_info::qualified_name() {
+    return qualified_name_;
+}
+
+void property_info::qualified_name(const std::string& v) {
+    qualified_name_ = v;
+}
+
+void property_info::qualified_name(const std::string&& v) {
+    qualified_name_ = std::move(v);
 }
 
 const std::string& property_info::documentation() const {

@@ -74,6 +74,7 @@ std::ostream& operator<<(std::ostream& s, const nested_type_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::nested_type_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
       << "\"identifiable_name\": " << "\"" << tidy_up_string(v.identifiable_name()) << "\"" << ", "
       << "\"complete_name\": " << "\"" << tidy_up_string(v.complete_name()) << "\"" << ", "
       << "\"complete_identifiable_name\": " << "\"" << tidy_up_string(v.complete_identifiable_name()) << "\"" << ", "

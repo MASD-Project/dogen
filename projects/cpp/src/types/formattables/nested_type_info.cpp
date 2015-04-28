@@ -45,6 +45,7 @@ nested_type_info::nested_type_info()
 
 nested_type_info::nested_type_info(
     const std::string& name,
+    const std::string& qualified_name,
     const std::string& identifiable_name,
     const std::string& complete_name,
     const std::string& complete_identifiable_name,
@@ -68,6 +69,7 @@ nested_type_info::nested_type_info(
     const bool is_ptree,
     const dogen::cpp::formattables::family_types& family_type)
     : name_(name),
+      qualified_name_(qualified_name),
       identifiable_name_(identifiable_name),
       complete_name_(complete_name),
       complete_identifiable_name_(complete_identifiable_name),
@@ -94,6 +96,7 @@ nested_type_info::nested_type_info(
 void nested_type_info::swap(nested_type_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(qualified_name_, other.qualified_name_);
     swap(identifiable_name_, other.identifiable_name_);
     swap(complete_name_, other.complete_name_);
     swap(complete_identifiable_name_, other.complete_identifiable_name_);
@@ -120,6 +123,7 @@ void nested_type_info::swap(nested_type_info& other) noexcept {
 
 bool nested_type_info::operator==(const nested_type_info& rhs) const {
     return name_ == rhs.name_ &&
+        qualified_name_ == rhs.qualified_name_ &&
         identifiable_name_ == rhs.identifiable_name_ &&
         complete_name_ == rhs.complete_name_ &&
         complete_identifiable_name_ == rhs.complete_identifiable_name_ &&
@@ -164,6 +168,22 @@ void nested_type_info::name(const std::string& v) {
 
 void nested_type_info::name(const std::string&& v) {
     name_ = std::move(v);
+}
+
+const std::string& nested_type_info::qualified_name() const {
+    return qualified_name_;
+}
+
+std::string& nested_type_info::qualified_name() {
+    return qualified_name_;
+}
+
+void nested_type_info::qualified_name(const std::string& v) {
+    qualified_name_ = v;
+}
+
+void nested_type_info::qualified_name(const std::string&& v) {
+    qualified_name_ = std::move(v);
 }
 
 const std::string& nested_type_info::identifiable_name() const {

@@ -26,21 +26,25 @@ namespace formattables {
 
 parent_info::parent_info(
     const std::string& name,
+    const std::string& qualified_name,
     const std::list<std::string>& namespaces,
     const std::list<dogen::cpp::formattables::property_info>& properties)
     : name_(name),
+      qualified_name_(qualified_name),
       namespaces_(namespaces),
       properties_(properties) { }
 
 void parent_info::swap(parent_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(qualified_name_, other.qualified_name_);
     swap(namespaces_, other.namespaces_);
     swap(properties_, other.properties_);
 }
 
 bool parent_info::operator==(const parent_info& rhs) const {
     return name_ == rhs.name_ &&
+        qualified_name_ == rhs.qualified_name_ &&
         namespaces_ == rhs.namespaces_ &&
         properties_ == rhs.properties_;
 }
@@ -65,6 +69,22 @@ void parent_info::name(const std::string& v) {
 
 void parent_info::name(const std::string&& v) {
     name_ = std::move(v);
+}
+
+const std::string& parent_info::qualified_name() const {
+    return qualified_name_;
+}
+
+std::string& parent_info::qualified_name() {
+    return qualified_name_;
+}
+
+void parent_info::qualified_name(const std::string& v) {
+    qualified_name_ = v;
+}
+
+void parent_info::qualified_name(const std::string&& v) {
+    qualified_name_ = std::move(v);
 }
 
 const std::list<std::string>& parent_info::namespaces() const {

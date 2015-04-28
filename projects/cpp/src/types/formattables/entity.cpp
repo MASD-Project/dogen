@@ -53,11 +53,13 @@ namespace formattables {
 entity::entity(
     const std::string& identity,
     const std::string& name,
+    const std::string& qualified_name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings)
     : dogen::cpp::formattables::formattable(identity),
       name_(name),
+      qualified_name_(qualified_name),
       documentation_(documentation),
       namespaces_(namespaces),
       settings_(settings) { }
@@ -69,6 +71,7 @@ void entity::to_stream(std::ostream& s) const {
     formattable::to_stream(s);
     s << ", "
       << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
+      << "\"qualified_name\": " << "\"" << tidy_up_string(qualified_name_) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"namespaces\": " << namespaces_ << ", "
       << "\"settings\": " << settings_
@@ -80,6 +83,7 @@ void entity::swap(entity& other) noexcept {
 
     using std::swap;
     swap(name_, other.name_);
+    swap(qualified_name_, other.qualified_name_);
     swap(documentation_, other.documentation_);
     swap(namespaces_, other.namespaces_);
     swap(settings_, other.settings_);
@@ -88,6 +92,7 @@ void entity::swap(entity& other) noexcept {
 bool entity::compare(const entity& rhs) const {
     return formattable::compare(rhs) &&
         name_ == rhs.name_ &&
+        qualified_name_ == rhs.qualified_name_ &&
         documentation_ == rhs.documentation_ &&
         namespaces_ == rhs.namespaces_ &&
         settings_ == rhs.settings_;
@@ -107,6 +112,22 @@ void entity::name(const std::string& v) {
 
 void entity::name(const std::string&& v) {
     name_ = std::move(v);
+}
+
+const std::string& entity::qualified_name() const {
+    return qualified_name_;
+}
+
+std::string& entity::qualified_name() {
+    return qualified_name_;
+}
+
+void entity::qualified_name(const std::string& v) {
+    qualified_name_ = v;
+}
+
+void entity::qualified_name(const std::string&& v) {
+    qualified_name_ = std::move(v);
 }
 
 const std::string& entity::documentation() const {

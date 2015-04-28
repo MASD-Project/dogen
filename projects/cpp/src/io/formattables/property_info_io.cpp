@@ -90,6 +90,7 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::property_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"opaque_parameters\": " << v.opaque_parameters() << ", "

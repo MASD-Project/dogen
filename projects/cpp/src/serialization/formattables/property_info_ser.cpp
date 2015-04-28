@@ -44,6 +44,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::property_info& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("qualified_name", v.qualified_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("type", v.type_);
     ar << make_nvp("opaque_parameters", v.opaque_parameters_);
@@ -57,6 +58,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::property_info& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("qualified_name", v.qualified_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("type", v.type_);
     ar >> make_nvp("opaque_parameters", v.opaque_parameters_);

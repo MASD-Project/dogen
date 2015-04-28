@@ -71,28 +71,29 @@ nested_type_info_generator::nested_type_info_generator() : position_(0) { }
 void nested_type_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.identifiable_name(create_std_string(position + 1));
-    v.complete_name(create_std_string(position + 2));
-    v.complete_identifiable_name(create_std_string(position + 3));
-    v.is_primitive(create_bool(position + 4));
-    v.is_enumeration(create_bool(position + 5));
-    v.is_string_like(create_bool(position + 6));
-    v.is_char_like(create_bool(position + 7));
-    v.is_int_like(create_bool(position + 8));
-    v.is_sequence_container(create_bool(position + 9));
-    v.is_associative_container(create_bool(position + 10));
-    v.is_smart_pointer(create_bool(position + 11));
-    v.is_optional_like(create_bool(position + 12));
-    v.is_variant_like(create_bool(position + 13));
-    v.children(create_std_list_dogen_cpp_formattables_nested_type_info(position + 14));
-    v.namespaces(create_std_list_std_string(position + 15));
-    v.is_filesystem_path(create_bool(position + 16));
-    v.is_date(create_bool(position + 17));
-    v.is_ptime(create_bool(position + 18));
-    v.is_time_duration(create_bool(position + 19));
-    v.is_pair(create_bool(position + 20));
-    v.is_ptree(create_bool(position + 21));
-    v.family_type(create_dogen_cpp_formattables_family_types(position + 22));
+    v.qualified_name(create_std_string(position + 1));
+    v.identifiable_name(create_std_string(position + 2));
+    v.complete_name(create_std_string(position + 3));
+    v.complete_identifiable_name(create_std_string(position + 4));
+    v.is_primitive(create_bool(position + 5));
+    v.is_enumeration(create_bool(position + 6));
+    v.is_string_like(create_bool(position + 7));
+    v.is_char_like(create_bool(position + 8));
+    v.is_int_like(create_bool(position + 9));
+    v.is_sequence_container(create_bool(position + 10));
+    v.is_associative_container(create_bool(position + 11));
+    v.is_smart_pointer(create_bool(position + 12));
+    v.is_optional_like(create_bool(position + 13));
+    v.is_variant_like(create_bool(position + 14));
+    v.children(create_std_list_dogen_cpp_formattables_nested_type_info(position + 15));
+    v.namespaces(create_std_list_std_string(position + 16));
+    v.is_filesystem_path(create_bool(position + 17));
+    v.is_date(create_bool(position + 18));
+    v.is_ptime(create_bool(position + 19));
+    v.is_time_duration(create_bool(position + 20));
+    v.is_pair(create_bool(position + 21));
+    v.is_ptree(create_bool(position + 22));
+    v.family_type(create_dogen_cpp_formattables_family_types(position + 23));
 }
 
 nested_type_info_generator::result_type

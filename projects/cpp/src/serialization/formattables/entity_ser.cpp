@@ -59,6 +59,7 @@ void save(Archive& ar,
     ar << make_nvp("formattable", base_object<dogen::cpp::formattables::formattable>(v));
 
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("qualified_name", v.qualified_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("namespaces", v.namespaces_);
     ar << make_nvp("settings", v.settings_);
@@ -71,6 +72,7 @@ void load(Archive& ar,
     ar >> make_nvp("formattable", base_object<dogen::cpp::formattables::formattable>(v));
 
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("qualified_name", v.qualified_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("namespaces", v.namespaces_);
     ar >> make_nvp("settings", v.settings_);

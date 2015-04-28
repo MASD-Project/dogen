@@ -52,6 +52,7 @@ public:
     entity(
         const std::string& identity,
         const std::string& name,
+        const std::string& qualified_name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings);
@@ -77,6 +78,16 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Fully qualified name of the entity.
+     */
+    /**@{*/
+    const std::string& qualified_name() const;
+    std::string& qualified_name();
+    void qualified_name(const std::string& v);
+    void qualified_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -118,6 +129,7 @@ protected:
 
 private:
     std::string name_;
+    std::string qualified_name_;
     std::string documentation_;
     std::list<std::string> namespaces_;
     dogen::cpp::settings::bundle settings_;

@@ -39,6 +39,7 @@ std::size_t enumerator_info_hasher::hash(const enumerator_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
+    combine(seed, v.qualified_name());
     combine(seed, v.documentation());
     combine(seed, v.value());
 

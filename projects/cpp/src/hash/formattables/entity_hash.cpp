@@ -51,6 +51,7 @@ std::size_t entity_hasher::hash(const entity&v) {
     combine(seed, dynamic_cast<const dogen::cpp::formattables::formattable&>(v));
 
     combine(seed, v.name());
+    combine(seed, v.qualified_name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, v.settings());

@@ -53,6 +53,7 @@ public:
 public:
     property_info(
         const std::string& name,
+        const std::string& qualified_name,
         const std::string& documentation,
         const dogen::cpp::formattables::nested_type_info& type,
         const std::list<std::pair<std::string, std::string> >& opaque_parameters,
@@ -78,6 +79,16 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Fully qualified name of the entity.
+     */
+    /**@{*/
+    const std::string& qualified_name() const;
+    std::string& qualified_name();
+    void qualified_name(const std::string& v);
+    void qualified_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -142,6 +153,7 @@ public:
 
 private:
     std::string name_;
+    std::string qualified_name_;
     std::string documentation_;
     dogen::cpp::formattables::nested_type_info type_;
     std::list<std::pair<std::string, std::string> > opaque_parameters_;

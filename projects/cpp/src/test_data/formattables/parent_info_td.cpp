@@ -62,8 +62,9 @@ parent_info_generator::parent_info_generator() : position_(0) { }
 void parent_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.namespaces(create_std_list_std_string(position + 1));
-    v.properties(create_std_list_dogen_cpp_formattables_property_info(position + 2));
+    v.qualified_name(create_std_string(position + 1));
+    v.namespaces(create_std_list_std_string(position + 2));
+    v.properties(create_std_list_dogen_cpp_formattables_property_info(position + 3));
 }
 
 parent_info_generator::result_type

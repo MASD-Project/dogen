@@ -40,8 +40,9 @@ enumerator_info_generator::enumerator_info_generator() : position_(0) { }
 void enumerator_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.value(create_std_string(position + 2));
+    v.qualified_name(create_std_string(position + 1));
+    v.documentation(create_std_string(position + 2));
+    v.value(create_std_string(position + 3));
 }
 
 enumerator_info_generator::result_type

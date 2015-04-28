@@ -48,6 +48,7 @@ public:
 public:
     parent_info(
         const std::string& name,
+        const std::string& qualified_name,
         const std::list<std::string>& namespaces,
         const std::list<dogen::cpp::formattables::property_info>& properties);
 
@@ -69,6 +70,16 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Fully qualified name of the entity.
+     */
+    /**@{*/
+    const std::string& qualified_name() const;
+    std::string& qualified_name();
+    void qualified_name(const std::string& v);
+    void qualified_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -103,6 +114,7 @@ public:
 
 private:
     std::string name_;
+    std::string qualified_name_;
     std::list<std::string> namespaces_;
     std::list<dogen::cpp::formattables::property_info> properties_;
 };

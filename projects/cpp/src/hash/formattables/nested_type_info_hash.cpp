@@ -56,6 +56,7 @@ std::size_t nested_type_info_hasher::hash(const nested_type_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
+    combine(seed, v.qualified_name());
     combine(seed, v.identifiable_name());
     combine(seed, v.complete_name());
     combine(seed, v.complete_identifiable_name());

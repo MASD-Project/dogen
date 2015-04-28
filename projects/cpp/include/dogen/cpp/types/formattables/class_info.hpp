@@ -58,6 +58,7 @@ public:
     class_info(
         const std::string& identity,
         const std::string& name,
+        const std::string& qualified_name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings,

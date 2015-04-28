@@ -41,6 +41,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::nested_type_info& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("qualified_name", v.qualified_name_);
     ar << make_nvp("identifiable_name", v.identifiable_name_);
     ar << make_nvp("complete_name", v.complete_name_);
     ar << make_nvp("complete_identifiable_name", v.complete_identifiable_name_);
@@ -70,6 +71,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::nested_type_info& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("qualified_name", v.qualified_name_);
     ar >> make_nvp("identifiable_name", v.identifiable_name_);
     ar >> make_nvp("complete_name", v.complete_name_);
     ar >> make_nvp("complete_identifiable_name", v.complete_identifiable_name_);

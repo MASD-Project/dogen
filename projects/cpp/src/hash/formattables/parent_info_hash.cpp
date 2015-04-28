@@ -56,6 +56,7 @@ std::size_t parent_info_hasher::hash(const parent_info&v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
+    combine(seed, v.qualified_name());
     combine(seed, hash_std_list_std_string(v.namespaces()));
     combine(seed, hash_std_list_dogen_cpp_formattables_property_info(v.properties()));
 

@@ -46,6 +46,7 @@ public:
 public:
     enumerator_info(
         const std::string& name,
+        const std::string& qualified_name,
         const std::string& documentation,
         const std::string& value);
 
@@ -67,6 +68,16 @@ public:
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Fully qualified name of the entity.
+     */
+    /**@{*/
+    const std::string& qualified_name() const;
+    std::string& qualified_name();
+    void qualified_name(const std::string& v);
+    void qualified_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -105,6 +116,7 @@ public:
 
 private:
     std::string name_;
+    std::string qualified_name_;
     std::string documentation_;
     std::string value_;
 };

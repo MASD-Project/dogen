@@ -26,21 +26,25 @@ namespace formattables {
 
 enumerator_info::enumerator_info(
     const std::string& name,
+    const std::string& qualified_name,
     const std::string& documentation,
     const std::string& value)
     : name_(name),
+      qualified_name_(qualified_name),
       documentation_(documentation),
       value_(value) { }
 
 void enumerator_info::swap(enumerator_info& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(qualified_name_, other.qualified_name_);
     swap(documentation_, other.documentation_);
     swap(value_, other.value_);
 }
 
 bool enumerator_info::operator==(const enumerator_info& rhs) const {
     return name_ == rhs.name_ &&
+        qualified_name_ == rhs.qualified_name_ &&
         documentation_ == rhs.documentation_ &&
         value_ == rhs.value_;
 }
@@ -65,6 +69,22 @@ void enumerator_info::name(const std::string& v) {
 
 void enumerator_info::name(const std::string&& v) {
     name_ = std::move(v);
+}
+
+const std::string& enumerator_info::qualified_name() const {
+    return qualified_name_;
+}
+
+std::string& enumerator_info::qualified_name() {
+    return qualified_name_;
+}
+
+void enumerator_info::qualified_name(const std::string& v) {
+    qualified_name_ = v;
+}
+
+void enumerator_info::qualified_name(const std::string&& v) {
+    qualified_name_ = std::move(v);
 }
 
 const std::string& enumerator_info::documentation() const {

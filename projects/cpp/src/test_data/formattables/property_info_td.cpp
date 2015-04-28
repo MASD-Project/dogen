@@ -79,12 +79,13 @@ property_info_generator::property_info_generator() : position_(0) { }
 void property_info_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.documentation(create_std_string(position + 1));
-    v.type(create_dogen_cpp_formattables_nested_type_info(position + 2));
-    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 3));
-    v.is_immutable(create_bool(position + 4));
-    v.is_fluent(create_bool(position + 5));
-    v.opaque_settings(create_boost_shared_ptr_dogen_cpp_settings_opaque_settings(position + 6));
+    v.qualified_name(create_std_string(position + 1));
+    v.documentation(create_std_string(position + 2));
+    v.type(create_dogen_cpp_formattables_nested_type_info(position + 3));
+    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 4));
+    v.is_immutable(create_bool(position + 5));
+    v.is_fluent(create_bool(position + 6));
+    v.opaque_settings(create_boost_shared_ptr_dogen_cpp_settings_opaque_settings(position + 7));
 }
 
 property_info_generator::result_type

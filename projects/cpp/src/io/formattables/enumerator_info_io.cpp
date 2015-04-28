@@ -38,6 +38,7 @@ std::ostream& operator<<(std::ostream& s, const enumerator_info& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::enumerator_info\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
