@@ -200,7 +200,6 @@ void class_declaration::move_constructor(
         return;
 
     utility_.public_access_specifier();
-    const auto p(*props.begin());
     stream_ << indenter_ << ci.name() << "(" << ci.name()
             << "&& rhs);" << std::endl;
     utility_.blank_line();

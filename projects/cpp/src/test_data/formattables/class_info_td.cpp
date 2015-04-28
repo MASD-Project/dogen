@@ -129,6 +129,7 @@ populate(const unsigned int position, result_type& v) {
     v.generation_type(create_dogen_sml_generation_types(position + 17));
     v.generate_complete_constructor(create_bool(position + 18));
     v.enable_integrated_io(create_bool(position + 19));
+    v.disable_complete_constructor(create_bool(position + 20));
 }
 
 class_info_generator::result_type

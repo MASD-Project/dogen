@@ -46,7 +46,8 @@ public:
     type_settings(
         const dogen::cpp::formattables::family_types& family_type,
         const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor);
+        const bool requires_manual_move_constructor,
+        const bool disable_complete_constructor);
 
 private:
     template<typename Archive>
@@ -65,6 +66,9 @@ public:
     bool requires_manual_move_constructor() const;
     void requires_manual_move_constructor(const bool v);
 
+    bool disable_complete_constructor() const;
+    void disable_complete_constructor(const bool v);
+
 public:
     bool operator==(const type_settings& rhs) const;
     bool operator!=(const type_settings& rhs) const {
@@ -79,6 +83,7 @@ private:
     dogen::cpp::formattables::family_types family_type_;
     bool requires_manual_default_constructor_;
     bool requires_manual_move_constructor_;
+    bool disable_complete_constructor_;
 };
 
 } } }

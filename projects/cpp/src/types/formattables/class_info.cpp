@@ -122,7 +122,8 @@ class_info::class_info()
       class_type_(static_cast<dogen::cpp::formattables::class_types>(0)),
       generation_type_(static_cast<dogen::sml::generation_types>(0)),
       generate_complete_constructor_(static_cast<bool>(0)),
-      enable_integrated_io_(static_cast<bool>(0)) { }
+      enable_integrated_io_(static_cast<bool>(0)),
+      disable_complete_constructor_(static_cast<bool>(0)) { }
 
 class_info::class_info(
     const std::string& identity,
@@ -150,7 +151,8 @@ class_info::class_info(
     const dogen::cpp::formattables::class_types& class_type,
     const dogen::sml::generation_types& generation_type,
     const bool generate_complete_constructor,
-    const bool enable_integrated_io)
+    const bool enable_integrated_io,
+    const bool disable_complete_constructor)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
@@ -176,7 +178,8 @@ class_info::class_info(
       class_type_(class_type),
       generation_type_(generation_type),
       generate_complete_constructor_(generate_complete_constructor),
-      enable_integrated_io_(enable_integrated_io) { }
+      enable_integrated_io_(enable_integrated_io),
+      disable_complete_constructor_(disable_complete_constructor) { }
 
 void class_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -209,7 +212,8 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"class_type\": " << class_type_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"generate_complete_constructor\": " << generate_complete_constructor_ << ", "
-      << "\"enable_integrated_io\": " << enable_integrated_io_
+      << "\"enable_integrated_io\": " << enable_integrated_io_ << ", "
+      << "\"disable_complete_constructor\": " << disable_complete_constructor_
       << " }";
 }
 
@@ -237,6 +241,7 @@ void class_info::swap(class_info& other) noexcept {
     swap(generation_type_, other.generation_type_);
     swap(generate_complete_constructor_, other.generate_complete_constructor_);
     swap(enable_integrated_io_, other.enable_integrated_io_);
+    swap(disable_complete_constructor_, other.disable_complete_constructor_);
 }
 
 bool class_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -266,7 +271,8 @@ bool class_info::operator==(const class_info& rhs) const {
         class_type_ == rhs.class_type_ &&
         generation_type_ == rhs.generation_type_ &&
         generate_complete_constructor_ == rhs.generate_complete_constructor_ &&
-        enable_integrated_io_ == rhs.enable_integrated_io_;
+        enable_integrated_io_ == rhs.enable_integrated_io_ &&
+        disable_complete_constructor_ == rhs.disable_complete_constructor_;
 }
 
 class_info& class_info::operator=(class_info other) {
@@ -489,6 +495,14 @@ bool class_info::enable_integrated_io() const {
 
 void class_info::enable_integrated_io(const bool v) {
     enable_integrated_io_ = v;
+}
+
+bool class_info::disable_complete_constructor() const {
+    return disable_complete_constructor_;
+}
+
+void class_info::disable_complete_constructor(const bool v) {
+    disable_complete_constructor_ = v;
 }
 
 } } }

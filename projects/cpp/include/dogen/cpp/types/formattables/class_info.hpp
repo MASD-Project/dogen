@@ -81,7 +81,8 @@ public:
         const dogen::cpp::formattables::class_types& class_type,
         const dogen::sml::generation_types& generation_type,
         const bool generate_complete_constructor,
-        const bool enable_integrated_io);
+        const bool enable_integrated_io,
+        const bool disable_complete_constructor);
 
 private:
     template<typename Archive>
@@ -290,6 +291,9 @@ public:
     void enable_integrated_io(const bool v);
     /**@}*/
 
+    bool disable_complete_constructor() const;
+    void disable_complete_constructor(const bool v);
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -324,6 +328,7 @@ private:
     dogen::sml::generation_types generation_type_;
     bool generate_complete_constructor_;
     bool enable_integrated_io_;
+    bool disable_complete_constructor_;
 };
 
 } } }

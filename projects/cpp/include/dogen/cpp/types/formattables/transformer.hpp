@@ -61,8 +61,7 @@ namespace formattables {
  */
 class transformer {
 public:
-    transformer(
-        const settings::workflow& w, const sml::model& m);
+    transformer(const settings::workflow& w, const sml::model& m);
 
 private:
     /**

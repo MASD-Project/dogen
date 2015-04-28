@@ -489,7 +489,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="50,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,34.95;75.575,53.05"/>
+        <dia:rectangle val="49.95,34.95;75.575,53.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,35"/>
@@ -498,7 +498,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.000000000000004"/>
+        <dia:real val="18.800000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_info#</dia:string>
@@ -1048,6 +1048,29 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, IO operations will be in the class itself rather than on a separate facet.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#disable_complete_constructor#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19328,16 +19351,16 @@ the dynamic object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="50,53"/>
+        <dia:point val="50,53.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.0175,52.25;50.75,67.8"/>
+        <dia:rectangle val="43.0175,53.05;50.75,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50,53"/>
+        <dia:point val="50,53.8"/>
         <dia:point val="50,60"/>
         <dia:point val="43.0675,60"/>
         <dia:point val="43.0675,67"/>
@@ -20609,16 +20632,16 @@ to the grammmar of the C++ language.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.525,53"/>
+        <dia:point val="75.525,53.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.7125,52.25;76.275,67.8"/>
+        <dia:rectangle val="72.7125,53.05;76.275,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.525,53"/>
+        <dia:point val="75.525,53.8"/>
         <dia:point val="75.525,60"/>
         <dia:point val="72.7625,60"/>
         <dia:point val="72.7625,67"/>
@@ -25691,7 +25714,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="227,129"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.95,128.95;243.72,133.45"/>
+        <dia:rectangle val="226.95,128.95;243.72,134.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="227,129"/>
@@ -25700,7 +25723,7 @@ registry of all available formatters.#</dia:string>
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#type_settings#</dia:string>
@@ -25839,6 +25862,29 @@ registry of all available formatters.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#requires_manual_move_constructor#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#disable_complete_constructor#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>

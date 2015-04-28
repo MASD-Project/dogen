@@ -63,6 +63,13 @@ s << "public:" << std::endl;
         if (c.requires_manual_default_constructor())
 s << "    " << c.name() << "();" << std::endl;
 s << std::endl;
+        if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
+            c.class_type() != cpp::formattables::class_types::versioned_key &&
+            c.requires_manual_move_constructor() &&
+            !c.all_properties().empty())
+s << "public:" << std::endl;
+s << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
+s << std::endl;
 s << "};" << std::endl;
 s << std::endl;
     }
