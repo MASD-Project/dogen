@@ -1003,6 +1003,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1172,6 +1173,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1304,6 +1306,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1469,6 +1472,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1618,6 +1622,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -1750,6 +1755,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -1882,6 +1888,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2049,6 +2056,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2214,6 +2222,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2384,6 +2393,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -2509,6 +2519,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -2678,6 +2689,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2843,6 +2855,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -2990,6 +3003,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -3186,6 +3200,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -3354,6 +3369,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -3448,6 +3464,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -3542,6 +3559,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -3667,6 +3685,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -3818,6 +3837,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -3983,6 +4003,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -4132,6 +4153,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 		<item>
@@ -4293,6 +4315,7 @@ in the context of inheritance.
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>0</is_final>
 			</second>
 		</item>
 	</objects>

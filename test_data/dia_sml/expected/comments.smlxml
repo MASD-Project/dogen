@@ -432,6 +432,7 @@ third line with &quot;quote&quot;
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 		<item>
@@ -630,6 +631,7 @@ a second line
 					<count>0</count>
 					<item_version>0</item_version>
 				</identity>
+				<is_final>1</is_final>
 			</second>
 		</item>
 	</objects>
