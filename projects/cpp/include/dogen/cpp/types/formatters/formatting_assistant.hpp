@@ -75,7 +75,15 @@ private:
      * @brief Obtains the formatter settings for the formatter as
      * given by the ownership hierarchy.
      */
-    settings::formatter_settings formatter_settings() const;
+    settings::formatter_settings
+    formatter_settings(const std::string& formatter_name) const;
+
+public:
+    /**
+     * @brief Returns true if the formatter is enabled, false
+     * otherwise.
+     */
+    bool is_formatter_enabled(const std::string& formatter_name) const;
 
 public:
     /**

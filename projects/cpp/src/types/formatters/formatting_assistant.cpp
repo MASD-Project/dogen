@@ -67,17 +67,25 @@ formatting_assistant::formatting_assistant(const formattables::entity& e,
     const dynamic::schema::ownership_hierarchy& oh,
     const formatters::file_types ft) :
     entity_(e), ownership_hierarchy_(oh),
-    formatter_settings_(formatter_settings()), file_type_(ft) {
+    formatter_settings_(formatter_settings(oh.formatter_name())),
+    file_type_(ft) {
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
     validate();
 }
 
-settings::formatter_settings formatting_assistant::formatter_settings() const {
+settings::formatter_settings formatting_assistant::
+formatter_settings(const std::string& formatter_name) const {
     const settings::selector s(entity_.settings());
-    const auto& fn(ownership_hierarchy_.formatter_name());
+    const auto& fn(formatter_name);
     return s.formatter_settings_for_formatter(fn);
+}
+
+bool formatting_assistant::
+is_formatter_enabled(const std::string& formatter_name) const {
+    const auto fs(formatter_settings(formatter_name));
+    return fs.enabled();
 }
 
 void formatting_assistant::validate() const {
