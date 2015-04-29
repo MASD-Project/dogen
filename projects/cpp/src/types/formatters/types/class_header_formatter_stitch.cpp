@@ -125,6 +125,35 @@ fa.stream() << "    void to_stream(std::ostream& s) const override;" << std::end
 fa.stream() << std::endl;
                 }
             }
+
+            if (!c.properties().empty()) {
+fa.stream() << "public:" << std::endl;
+                for (const auto p : c.properties()) {
+                    if (p.type().is_primitive() || p.type().is_enumeration()) {
+fa.stream() << "    " << p.type().complete_name() << " " << p.name() << "() const;" << std::endl;
+                        if (p.is_immutable())
+                            continue;
+
+                        if (p.is_fluent()) {
+fa.stream() << "    " << c.name() << "& " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
+                        } else {
+fa.stream() << "    void " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
+                        }
+                    } else {
+fa.stream() << "    const " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
+                        if (p.is_immutable())
+                            continue;
+
+fa.stream() << "    " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
+                        if (p.is_fluent()) {
+fa.stream() << "    " << c.name() << "& " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
+                        } else {
+fa.stream() << "    void " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
+                        }
+                    }
+fa.stream() << std::endl;
+                }
+            }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         }

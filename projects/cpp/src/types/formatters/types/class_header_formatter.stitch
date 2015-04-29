@@ -144,6 +144,53 @@ public:
 <#+
                 }
             }
+
+            if (!c.properties().empty()) {
+#>
+public:
+<#+
+                for (const auto p : c.properties()) {
+                    if (p.type().is_primitive() || p.type().is_enumeration()) {
+#>
+    <#= p.type().complete_name() #> <#= p.name() #>() const;
+<#+
+                        if (p.is_immutable())
+                            continue;
+
+                        if (p.is_fluent()) {
+#>
+    <#= c.name() #>& <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+<#+
+                        } else {
+#>
+    void <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+<#+
+                        }
+                    } else {
+#>
+    const <#= p.type().complete_name() #>& <#= p.name() #>() const;
+<#+
+                        if (p.is_immutable())
+                            continue;
+
+#>
+    <#= p.type().complete_name() #>& <#= p.name() #>() const;
+<#+
+                        if (p.is_fluent()) {
+#>
+    <#= c.name() #>& <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+<#+
+                        } else {
+#>
+    void <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+<#+
+                        }
+                    }
+#>
+
+<#+
+                }
+            }
 #>
 };
 

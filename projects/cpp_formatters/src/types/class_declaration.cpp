@@ -319,7 +319,7 @@ object_getters_and_setters(const std::string class_name,
 
     if (!pi.is_immutable()) {
         // Popsicle immutability
-        stream_ << indenter_ << "" << pi.type().complete_name()
+        stream_ << indenter_ << pi.type().complete_name()
                 << "& " << pi.name() << "();" << std::endl;
 
         // traditional setter
