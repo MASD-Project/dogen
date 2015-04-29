@@ -82,6 +82,7 @@ fa.stream() << std::endl;
             using formatters::serialization::traits;
             const auto disable_serialization(
                 !fa.is_formatter_enabled(traits::class_header_formatter_name()));
+
             if (!disable_serialization) {
 fa.stream() << "private:" << std::endl;
 fa.stream() << "    template<typename Archive>" << std::endl;
@@ -90,6 +91,29 @@ fa.stream() << std::endl;
 fa.stream() << "    template<typename Archive>" << std::endl;
 fa.stream() << "    friend void boost::serialization::load(Archive& ar, " << c.name() << "& v, unsigned int version);" << std::endl;
 fa.stream() << std::endl;
+            }
+
+            if (c.is_visitable()) {
+fa.stream() << "    virtual void accept(const " << c.name() << "_visitor& v) const = 0;" << std::endl;
+fa.stream() << "    virtual void accept(" << c.name() << "_visitor& v) const = 0;" << std::endl;
+fa.stream() << "    virtual void accept(const " << c.name() << "_visitor& v) = 0;" << std::endl;
+fa.stream() << "    virtual void accept(" << c.name() << "_visitor& v) = 0;" << std::endl;
+            } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+fa.stream() << "    virtual void accept(const " << c.original_parent_name() << "_visitor& v) const override {" << std::endl;
+fa.stream() << "        v.visit(*this);" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    virtual void accept(" << c.original_parent_name() << "_visitor& v) const override {" << std::endl;
+fa.stream() << "        v.visit(*this);" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    virtual void accept(const " << c.original_parent_name() << "_visitor& v) override {" << std::endl;
+fa.stream() << "        v.visit(*this);" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    virtual void accept(" << c.original_parent_name() << "_visitor& v) override {" << std::endl;
+fa.stream() << "        v.visit(*this);" << std::endl;
+fa.stream() << "    }" << std::endl;
             }
 fa.stream() << std::endl;
 fa.stream() << "};" << std::endl;

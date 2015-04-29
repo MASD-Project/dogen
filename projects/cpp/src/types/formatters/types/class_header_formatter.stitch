@@ -91,6 +91,7 @@ public:
             using formatters::serialization::traits;
             const auto disable_serialization(
                 !fa.is_formatter_enabled(traits::class_header_formatter_name()));
+
             if (!disable_serialization) {
 #>
 private:
@@ -102,10 +103,35 @@ private:
 
 <#+
             }
+
+            if (c.is_visitable()) {
+#>
+    virtual void accept(const <#= c.name() #>_visitor& v) const = 0;
+    virtual void accept(<#= c.name() #>_visitor& v) const = 0;
+    virtual void accept(const <#= c.name() #>_visitor& v) = 0;
+    virtual void accept(<#= c.name() #>_visitor& v) = 0;
+<#+
+            } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+#>
+    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(<#= c.original_parent_name() #>_visitor& v) const override {
+        v.visit(*this);
+    }
+
+    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) override {
+        v.visit(*this);
+    }
+
+    virtual void accept(<#= c.original_parent_name() #>_visitor& v) override {
+        v.visit(*this);
+    }
+<#+
+            }
 #>
 
-<#+
-#>
 };
 
 <#+

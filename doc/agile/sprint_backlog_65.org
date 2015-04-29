@@ -367,6 +367,7 @@ We are doing some computations in the template that should be done
 during transformation.
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-04-29 Wed 21:42]--[2015-04-29 Wed 21:57] =>  0:15
     CLOCK: [2015-04-29 Wed 21:20]--[2015-04-29 Wed 21:41] =>  0:21
     CLOCK: [2015-04-29 Wed 17:49]--[2015-04-29 Wed 18:39] =>  0:50
     CLOCK: [2015-04-28 Tue 17:21]--[2015-04-28 Tue 17:47] =>  0:26

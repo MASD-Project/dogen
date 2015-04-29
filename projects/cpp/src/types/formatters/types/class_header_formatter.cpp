@@ -139,6 +139,16 @@ provider::provide(const dynamic::schema::repository& rp,
         }
     }
 
+    i = rel.find(sml::relationship_types::visited_by);
+    if (i != rel.end()) {
+        const auto fn(traits::class_header_formatter_name());
+        for (const auto aqn : i->second) {
+            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
+            if (id2)
+                id.push_back(*id2);
+        }
+    }
+
     return r;
 }
 

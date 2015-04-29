@@ -379,7 +379,9 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
 
     r->is_immutable(o.is_immutable());
-    r->is_visitable(o.is_visitable());
+    r->is_visitable(o.is_visitable() &&
+        r->class_type() != class_types::unversioned_key &&
+        r->class_type() != class_types::versioned_key);
     r->is_parent(o.is_parent());
     r->is_final(o.is_final());
     r->generation_type(o.generation_type());
