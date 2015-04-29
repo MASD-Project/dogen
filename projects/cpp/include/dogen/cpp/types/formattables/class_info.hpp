@@ -80,7 +80,6 @@ public:
         const bool is_original_parent_visitable,
         const dogen::cpp::formattables::class_types& class_type,
         const dogen::sml::generation_types& generation_type,
-        const bool generate_complete_constructor,
         const bool enable_integrated_io,
         const bool disable_complete_constructor,
         const bool is_final);
@@ -277,14 +276,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If set to true, a complete constructor will be generated.
-     */
-    /**@{*/
-    bool generate_complete_constructor() const;
-    void generate_complete_constructor(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, IO operations will be in the class itself rather than on a separate facet.
      */
     /**@{*/
@@ -330,7 +321,6 @@ private:
     bool is_original_parent_visitable_;
     dogen::cpp::formattables::class_types class_type_;
     dogen::sml::generation_types generation_type_;
-    bool generate_complete_constructor_;
     bool enable_integrated_io_;
     bool disable_complete_constructor_;
     bool is_final_;
