@@ -101,7 +101,7 @@ provider::provide(const dynamic::schema::repository& rp,
     const auto types_fn(formatters::types::traits::facet_name());
     const bool use_integrated_io(s.is_facet_integrated(types_fn, io_fn));
 
-    if (io_enabled && use_integrated_io)
+    if (io_enabled && (use_integrated_io || o.is_parent() || o.is_child()))
         id.push_back(inclusion_constants::std::iosfwd());
 
     const expansion::inclusion_directives_selector id_sel(inclusion_directives);

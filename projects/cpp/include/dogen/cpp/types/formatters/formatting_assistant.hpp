@@ -78,12 +78,22 @@ private:
     settings::formatter_settings
     formatter_settings(const std::string& formatter_name) const;
 
-public:
     /**
      * @brief Returns true if the formatter is enabled, false
      * otherwise.
      */
     bool is_formatter_enabled(const std::string& formatter_name) const;
+
+public:
+    /**
+     * @brief Returns true if serialization is enabled.
+     */
+    bool is_serialization_enabled() const;
+
+    /**
+     * @brief Returns true if io is enabled.
+     */
+    bool is_io_enabled() const;
 
 public:
     /**

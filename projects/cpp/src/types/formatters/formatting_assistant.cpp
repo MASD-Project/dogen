@@ -20,6 +20,8 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
+#include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
@@ -86,6 +88,16 @@ bool formatting_assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto fs(formatter_settings(formatter_name));
     return fs.enabled();
+}
+
+bool formatting_assistant::is_serialization_enabled() const {
+    using formatters::serialization::traits;
+    return is_formatter_enabled(traits::class_header_formatter_name());
+}
+
+bool formatting_assistant::is_io_enabled() const {
+    using formatters::io::traits;
+    return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
 void formatting_assistant::validate() const {
