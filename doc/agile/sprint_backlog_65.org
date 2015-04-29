@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-28 Tue 23:54]
+Clock summary at [2015-04-29 Wed 15:07]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *10:26* |       |      |
+| *Total time*                                                             | *10:43* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 10:26 |      |
+| Active                                                                   |         | 10:43 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -30,7 +30,7 @@ Clock summary at [2015-04-28 Tue 23:54]
 | COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
 | COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
 | STARTED Implement types class header formatter using stitch              |         |       | 2:04 |
-| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 0:29 |
+| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 0:46 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
 #+end:
 
@@ -339,6 +339,7 @@ Notes:
 - we can't access disable complete constructor option. Figure out how to.
 
 *** STARTED Add support for =disable_complete_constructor= in options copier
+    CLOCK: [2015-04-29 Wed 14:50]--[2015-04-29 Wed 15:07] =>  0:17
     CLOCK: [2015-04-28 Tue 23:25]--[2015-04-28 Tue 23:54] =>  0:29
 
 Class header requires =disable_complete_constructor=.
@@ -346,6 +347,10 @@ Class header requires =disable_complete_constructor=.
 - add field to JSON.
 - update options copier to copy from options
 - implement reading in the type settings factory.
+- type settings cannot be optional as we need to know whether to
+  disable complete constructor.
+- stop passing in settings that can be derived.
+- bump up log file to reveal rest of class.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
