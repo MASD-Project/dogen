@@ -452,6 +452,12 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
             r->requires_manual_default_constructor(true);
     }
 
+    if (r->all_properties().empty())
+        r->disable_complete_constructor(true);
+    else
+        r->disable_complete_constructor(
+            r->settings().type_settings().disable_complete_constructor());
+
     if (r->class_type() == class_types::unversioned_key ||
         r->class_type() == class_types::versioned_key ||
         r->all_properties().empty())

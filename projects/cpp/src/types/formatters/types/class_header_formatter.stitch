@@ -15,15 +15,10 @@ dogen::formatters::file class_header_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
-            const auto ts(fa.type_settings());
-
-            std::string final_status;
-            if (c.is_final())
-                final_status = "final ";
 
 #>
 
-class <#= c.name() #> <#= final_status #>{
+class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
 public:
 <#+
             if (!c.requires_manual_default_constructor())
@@ -65,11 +60,28 @@ public:
 <#+
             }
 
-            if (!ts.disable_complete_constructor()) {
+            if (!c.disable_complete_constructor()) {
 #>
 public:
-
 <#+
+                const auto prop_count(c.all_properties().size());
+                if (prop_count == 1) {
+                    const auto p(*c.all_properties().begin());
+#>
+    explicit <#= c.name() #>(<#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>);
+<#+
+                } else {
+#>
+    <#= c.name() #>(
+<#+
+                    int pos(0);
+                    for (const auto& p : c.all_properties()) {
+#>
+        const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= fa.make_parameter_separator_text(prop_count, pos) #>
+<#+
+                    ++pos;
+                    }
+                }
             }
 #>
 };

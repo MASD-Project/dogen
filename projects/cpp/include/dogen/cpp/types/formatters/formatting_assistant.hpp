@@ -34,6 +34,8 @@
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/property_info.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -43,6 +45,26 @@ namespace formatters {
  * @brief Provides a number of utilities to formatters.
  */
 class formatting_assistant {
+public:
+    /**
+     * @brief Returns the text to use for a given class for the @code
+     * final keyword. If non-empty, includes a trailing space.
+     */
+    static std::string
+    make_final_keyword_text(const formattables::class_info& c);
+
+    /**
+     * @brief Returns the by-ref to use given the property.
+     */
+    static std::string make_by_ref_text(const formattables::property_info& p);
+
+    /**
+     * @brief Returns nothing, a comma or end brackets with semi-colon.
+     */
+    static std::string
+    make_parameter_separator_text(const unsigned int number_of_parameters,
+        const unsigned int parameter_position);
+
 public:
     formatting_assistant(const formattables::entity& e,
         const dynamic::schema::ownership_hierarchy& oh,
@@ -73,11 +95,6 @@ public:
      */
     dogen::formatters::cpp::scoped_namespace_formatter
     make_scoped_namespace_formatter();
-
-    /**
-     * @brief Returns the type settings.
-     */
-    const settings::type_settings& type_settings() const;
 
     /**
      * @brief Returns the stream that is currently being populated.

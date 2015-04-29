@@ -34,14 +34,9 @@ dogen::formatters::file class_header_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
-            const auto ts(fa.type_settings());
-
-            std::string final_status;
-            if (c.is_final())
-                final_status = "final ";
 
 fa.stream() << std::endl;
-fa.stream() << "class " << c.name() << " " << final_status << "{" << std::endl;
+fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "{" << std::endl;
 fa.stream() << "public:" << std::endl;
             if (!c.requires_manual_default_constructor())
 fa.stream() << "    " << c.name() << "() = default;" << std::endl;
@@ -66,9 +61,20 @@ fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
 fa.stream() << std::endl;
             }
 
-            if (!ts.disable_complete_constructor()) {
+            if (!c.disable_complete_constructor()) {
 fa.stream() << "public:" << std::endl;
-fa.stream() << std::endl;
+                const auto prop_count(c.all_properties().size());
+                if (prop_count == 1) {
+                    const auto p(*c.all_properties().begin());
+fa.stream() << "    explicit " << c.name() << "(" << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ");" << std::endl;
+                } else {
+fa.stream() << "    " << c.name() << "(" << std::endl;
+                    int pos(0);
+                    for (const auto& p : c.all_properties()) {
+fa.stream() << "        const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << fa.make_parameter_separator_text(prop_count, pos) << std::endl;
+                    ++pos;
+                    }
+                }
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;

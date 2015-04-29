@@ -28,6 +28,10 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.formatting_assistant"));
 
+const std::string empty;
+const std::string by_ref_text = "&";
+const std::string final_keyword_text = "final ";
+
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
@@ -38,6 +42,26 @@ const std::string header_guard_not_set(
 namespace dogen {
 namespace cpp {
 namespace formatters {
+
+std::string formatting_assistant::
+make_final_keyword_text(const formattables::class_info& c) {
+    return c.is_final() ? final_keyword_text : empty;
+}
+
+std::string formatting_assistant::
+make_by_ref_text(const formattables::property_info& p) {
+    return p.type().is_primitive() ? empty : by_ref_text;
+}
+
+std::string formatting_assistant::
+make_parameter_separator_text(const unsigned int number_of_parameters,
+    const unsigned int parameter_position) {
+    if (parameter_position == number_of_parameters - 1)
+        return ");";
+    if (parameter_position == 0 && number_of_parameters == 1)
+        return empty;
+    return ",";
+}
 
 formatting_assistant::formatting_assistant(const formattables::entity& e,
     const dynamic::schema::ownership_hierarchy& oh,
@@ -86,10 +110,6 @@ formatting_assistant::make_scoped_namespace_formatter() {
         filtering_stream_, entity_.namespaces(),
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
-}
-
-const settings::type_settings& formatting_assistant::type_settings() const {
-    return entity_.settings().type_settings();
 }
 
 std::ostream& formatting_assistant::stream() {
