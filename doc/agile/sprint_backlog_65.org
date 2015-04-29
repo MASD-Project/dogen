@@ -505,6 +505,11 @@ implementation with spirit see:
 
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
 
+*** Investigate adding polymode support for stitch                    :story:
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+
 ** Deprecated
 *** CANCELLED Add tests for main header file formatter with optionality :story:
     CLOSED: [2015-04-28 Tue 11:50]
