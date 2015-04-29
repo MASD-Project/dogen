@@ -121,7 +121,8 @@ object::object()
       is_original_parent_visitable_(static_cast<bool>(0)),
       is_inheritance_root_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::sml::object_types>(0)),
-      is_aggregate_root_(static_cast<bool>(0)) { }
+      is_aggregate_root_(static_cast<bool>(0)),
+      is_final_(static_cast<bool>(0)) { }
 
 object::object(
     const std::string& documentation,
@@ -147,7 +148,8 @@ object::object(
     const bool is_inheritance_root,
     const dogen::sml::object_types& object_type,
     const bool is_aggregate_root,
-    const std::list<dogen::sml::property>& identity)
+    const std::list<dogen::sml::property>& identity,
+    const bool is_final)
     : dogen::sml::type(documentation,
       extensions,
       name,
@@ -171,7 +173,8 @@ object::object(
       is_inheritance_root_(is_inheritance_root),
       object_type_(object_type),
       is_aggregate_root_(is_aggregate_root),
-      identity_(identity) { }
+      identity_(identity),
+      is_final_(is_final) { }
 
 void object::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -202,7 +205,8 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_inheritance_root\": " << is_inheritance_root_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"is_aggregate_root\": " << is_aggregate_root_ << ", "
-      << "\"identity\": " << identity_
+      << "\"identity\": " << identity_ << ", "
+      << "\"is_final\": " << is_final_
       << " }";
 }
 
@@ -228,6 +232,7 @@ void object::swap(object& other) noexcept {
     swap(object_type_, other.object_type_);
     swap(is_aggregate_root_, other.is_aggregate_root_);
     swap(identity_, other.identity_);
+    swap(is_final_, other.is_final_);
 }
 
 bool object::equals(const dogen::sml::type& other) const {
@@ -255,7 +260,8 @@ bool object::operator==(const object& rhs) const {
         is_inheritance_root_ == rhs.is_inheritance_root_ &&
         object_type_ == rhs.object_type_ &&
         is_aggregate_root_ == rhs.is_aggregate_root_ &&
-        identity_ == rhs.identity_;
+        identity_ == rhs.identity_ &&
+        is_final_ == rhs.is_final_;
 }
 
 object& object::operator=(object other) {
@@ -454,6 +460,14 @@ void object::identity(const std::list<dogen::sml::property>& v) {
 
 void object::identity(const std::list<dogen::sml::property>&& v) {
     identity_ = std::move(v);
+}
+
+bool object::is_final() const {
+    return is_final_;
+}
+
+void object::is_final(const bool v) {
+    is_final_ = v;
 }
 
 } }

@@ -69,6 +69,7 @@ void save(Archive& ar,
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("identity", v.identity_);
+    ar << make_nvp("is_final", v.is_final_);
 }
 
 template<typename Archive>
@@ -95,6 +96,7 @@ void load(Archive& ar,
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("identity", v.identity_);
+    ar >> make_nvp("is_final", v.is_final_);
 }
 
 } }

@@ -82,7 +82,8 @@ public:
         const dogen::sml::generation_types& generation_type,
         const bool generate_complete_constructor,
         const bool enable_integrated_io,
-        const bool disable_complete_constructor);
+        const bool disable_complete_constructor,
+        const bool is_final);
 
 private:
     template<typename Archive>
@@ -294,6 +295,9 @@ public:
     bool disable_complete_constructor() const;
     void disable_complete_constructor(const bool v);
 
+    bool is_final() const;
+    void is_final(const bool v);
+
 public:
     bool operator==(const class_info& rhs) const;
     bool operator!=(const class_info& rhs) const {
@@ -329,6 +333,7 @@ private:
     bool generate_complete_constructor_;
     bool enable_integrated_io_;
     bool disable_complete_constructor_;
+    bool is_final_;
 };
 
 } } }

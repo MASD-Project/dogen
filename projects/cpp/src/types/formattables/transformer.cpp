@@ -381,6 +381,7 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     r->is_immutable(o.is_immutable());
     r->is_visitable(o.is_visitable());
     r->is_parent(o.is_parent());
+    r->is_final(o.is_final());
     r->generation_type(o.generation_type());
     r->class_type(ct);
 

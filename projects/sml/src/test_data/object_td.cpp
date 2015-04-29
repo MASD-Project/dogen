@@ -129,6 +129,7 @@ populate(const unsigned int position, result_type& v) {
     v.object_type(create_dogen_sml_object_types(position + 15));
     v.is_aggregate_root(create_bool(position + 16));
     v.identity(create_std_list_dogen_sml_property(position + 17));
+    v.is_final(create_bool(position + 18));
 }
 
 object_generator::result_type

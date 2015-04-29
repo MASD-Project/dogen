@@ -106,6 +106,7 @@ std::size_t class_info_hasher::hash(const class_info&v) {
     combine(seed, v.generate_complete_constructor());
     combine(seed, v.enable_integrated_io());
     combine(seed, v.disable_complete_constructor());
+    combine(seed, v.is_final());
 
     return seed;
 }

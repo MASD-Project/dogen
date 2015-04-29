@@ -80,7 +80,8 @@ public:
         const bool is_inheritance_root,
         const dogen::sml::object_types& object_type,
         const bool is_aggregate_root,
-        const std::list<dogen::sml::property>& identity);
+        const std::list<dogen::sml::property>& identity,
+        const bool is_final);
 
 private:
     template<typename Archive>
@@ -279,6 +280,14 @@ public:
     void identity(const std::list<dogen::sml::property>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the type cannot be inherited from.
+     */
+    /**@{*/
+    bool is_final() const;
+    void is_final(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -311,6 +320,7 @@ private:
     dogen::sml::object_types object_type_;
     bool is_aggregate_root_;
     std::list<dogen::sml::property> identity_;
+    bool is_final_;
 };
 
 } }

@@ -5697,7 +5697,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="48,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,84.95;75.885,99.05"/>
+        <dia:rectangle val="47.95,84.95;75.885,99.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,85"/>
@@ -5706,7 +5706,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000002"/>
+        <dia:real val="14.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -6116,6 +6116,29 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
             <dia:string>#List of properties that make up the identity operation.
 
 @note temporarily moved here until we have property types.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_final#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the type cannot be inherited from.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9153,16 +9176,16 @@ not have a need for it.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48,99"/>
+        <dia:point val="48,99.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3587,98.25;48.75,109.8"/>
+        <dia:rectangle val="44.3587,99.05;48.75,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48,99"/>
+        <dia:point val="48,99.8"/>
         <dia:point val="48,104"/>
         <dia:point val="44.4087,104"/>
         <dia:point val="44.4087,109"/>
@@ -11178,16 +11201,16 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.835,99"/>
+        <dia:point val="75.835,99.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.085,98.25;79.455,109.8"/>
+        <dia:rectangle val="75.085,99.05;79.455,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.835,99"/>
+        <dia:point val="75.835,99.8"/>
         <dia:point val="75.835,104"/>
         <dia:point val="79.255,104"/>
         <dia:point val="79.255,109"/>

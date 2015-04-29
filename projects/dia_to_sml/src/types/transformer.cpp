@@ -301,6 +301,7 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
 
     const auto j(context_.parent_ids().find(o.id()));
     ao.is_parent(j != context_.parent_ids().end());
+    ao.is_final(!ao.is_parent());
     context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
 
     if (!ao.is_child()) {

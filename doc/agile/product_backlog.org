@@ -2041,8 +2041,9 @@ models:
 - it is not possible to be immutable and be in an inheritance
   relationship. FIXME: why is that?
 - user models cannot have stereotype of primitive.
-- We don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
+- we don't support generic types (see [[Supporting%20user%20defined%20generic%20types][Supporting user defined generic
 types]]) so we should throw if a user attempts to use them.
+- a type marked as final cannot have descendants.
 
 For merged models:
 
@@ -3392,6 +3393,10 @@ model inheritance by using dynamic extensions:
 There may be some fallout in places where we assume that the
 descendents are all in this model such as serialisation, visitors.
 
+Now that we have =is_final= in SML, we should check when adding cross
+model inheritance that the type we have inherited from is not
+final. This may just be part of the validator's work.
+
 *** Add support for inner classes                                     :story:
 
 Inner classes could be expressed in the same way as the short-hand for
@@ -3412,7 +3417,7 @@ defined as final by the user, via dynamic extensions. This was to be
 done using =dia.is_final=. We never did implement it properly.
 
 - define attribute in dia to sml
-- propagate it to sml
+- use it to update =is_final= in sml
 
 *** Consider representing namespaces in file names rather than directories :story:
 
@@ -3576,6 +3581,14 @@ full-blown JSON frontend useful for code generation. For this we need:
 
 In order to test this we could generate a model from both Dia and JSON
 and make sure we arrive at the same SML.
+
+As part of this work we probably need to create a new stage in the SML
+pipeline where we populate:
+
+- inheritance related properties (is_parent, leaves, is_final)
+
+We need to look at the dia to sml transformer and see what it is doing
+that is also required by JSON and move it to SML.
 
 *** Consider adding facet specific types                               :epic:
 

@@ -18,7 +18,7 @@ dogen::formatters::file class_header_formatter_stitch(
             const auto ts(fa.type_settings());
 
             std::string final_status;
-            if (!c.is_parent())
+            if (c.is_final())
                 final_status = "final ";
 
 #>

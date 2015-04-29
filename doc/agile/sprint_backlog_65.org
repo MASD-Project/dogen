@@ -349,6 +349,14 @@ Responsibilities:
 This way the stitch template can call the assistant and the format
 method does very little..
 
+*** COMPLETED Add =is_final= in SML                                   :story:
+    CLOSED: [2015-04-29 Wed 17:42]
+    CLOCK: [2015-04-29 Wed 17:25]--[2015-04-29 Wed 17:42] =>  0:17
+
+Finality should be an SML level concept. We could infer it using the
+same logic as =cpp= uses at present. Add it to SML, then cpp and then
+make use of it in the formatter.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-04-28 Tue 17:21]--[2015-04-28 Tue 17:47] =>  0:26
     CLOCK: [2015-04-28 Tue 14:27]--[2015-04-28 Tue 15:47] =>  1:20

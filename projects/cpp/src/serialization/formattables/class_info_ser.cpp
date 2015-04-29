@@ -72,6 +72,7 @@ void save(Archive& ar,
     ar << make_nvp("generate_complete_constructor", v.generate_complete_constructor_);
     ar << make_nvp("enable_integrated_io", v.enable_integrated_io_);
     ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
+    ar << make_nvp("is_final", v.is_final_);
 }
 
 template<typename Archive>
@@ -101,6 +102,7 @@ void load(Archive& ar,
     ar >> make_nvp("generate_complete_constructor", v.generate_complete_constructor_);
     ar >> make_nvp("enable_integrated_io", v.enable_integrated_io_);
     ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
+    ar >> make_nvp("is_final", v.is_final_);
 }
 
 } }

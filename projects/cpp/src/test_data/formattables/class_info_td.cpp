@@ -130,6 +130,7 @@ populate(const unsigned int position, result_type& v) {
     v.generate_complete_constructor(create_bool(position + 18));
     v.enable_integrated_io(create_bool(position + 19));
     v.disable_complete_constructor(create_bool(position + 20));
+    v.is_final(create_bool(position + 21));
 }
 
 class_info_generator::result_type

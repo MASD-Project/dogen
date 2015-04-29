@@ -105,6 +105,7 @@ std::size_t object_hasher::hash(const object&v) {
     combine(seed, v.object_type());
     combine(seed, v.is_aggregate_root());
     combine(seed, hash_std_list_dogen_sml_property(v.identity()));
+    combine(seed, v.is_final());
 
     return seed;
 }
