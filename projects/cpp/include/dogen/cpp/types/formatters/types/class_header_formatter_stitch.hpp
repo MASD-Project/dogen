@@ -25,20 +25,17 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include <boost/optional.hpp>
-#include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void class_header_formatter_stitch(std::ostream& s,
-    const settings::formatter_settings& fs,
-    const formattables::class_info& fd);
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::formatting_assistant& fa, const formattables::class_info& fd);
 
 } } } }
 

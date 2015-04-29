@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-29 Wed 16:00]
+Clock summary at [2015-04-29 Wed 17:24]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *11:03* |       |      |
+| *Total time*                                                             | *12:27* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 11:03 |      |
+| Active                                                                   |         | 12:27 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -29,6 +29,7 @@ Clock summary at [2015-04-29 Wed 16:00]
 | COMPLETED Consider adding a ownership hierarchy method in registrar      |         |       | 0:15 |
 | COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
 | COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
+| COMPLETED Create a formatter helper                                      |         |       | 1:24 |
 | STARTED Implement types class header formatter using stitch              |         |       | 2:04 |
 | STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
@@ -321,6 +322,33 @@ We didn't implement the serialization forward declarations
 formatter. It is totally separate from the types one so that's why it
 got missed. We need it for the class header formatter to work.
 
+*** COMPLETED Create a formatter helper                               :story:
+    CLOSED: [2015-04-29 Wed 17:24]
+    CLOCK: [2015-04-29 Wed 16:00]--[2015-04-29 Wed 17:24] =>  1:24
+
+We could implement most of the formatter interface in a common base
+class and then only have the descendants override what they need.
+
+In reality we need probably more than one base formatter: one for c++
+types, etc. We could handle all of the path and include generation
+here. Name: =cpp_base_formatter=?
+
+Actually maybe we just need a helper class. Prefer the name
+=assistant= to helper.
+
+Responsibilities:
+
+- obtain the formatter settings from a given entity;
+- validate the formatter settings (maybe needs a validate header,
+  validate implementation versions);
+- given string, generate file;
+- create the scoped boiler plate;
+- create the scoped namespace formatter;
+- it could own a =stringstream= too, making our life even easier.
+
+This way the stitch template can call the assistant and the format
+method does very little..
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-04-28 Tue 17:21]--[2015-04-28 Tue 17:47] =>  0:26
     CLOCK: [2015-04-28 Tue 14:27]--[2015-04-28 Tue 15:47] =>  1:20
@@ -400,31 +428,6 @@ Results in:
 : s << <<
 
 We need to ignore empty expressions.
-
-*** Create a formatter helper                                         :story:
-
-We could implement most of the formatter interface in a common base
-class and then only have the descendants override what they need.
-
-In reality we need probably more than one base formatter: one for c++
-types, etc. We could handle all of the path and include generation
-here. Name: =cpp_base_formatter=?
-
-Actually maybe we just need a helper class. Prefer the name
-=assistant= to helper.
-
-Responsibilities:
-
-- obtain the formatter settings from a given entity;
-- validate the formatter settings (maybe needs a validate header,
-  validate implementation versions);
-- given string, generate file;
-- create the scoped boiler plate;
-- create the scoped namespace formatter;
-- it could own a =stringstream= too, making our life even easier.
-
-This way the stitch template can call the assistant and the format
-method does very little..
 
 *** Do we use =formatter_types=?                                      :story:
 

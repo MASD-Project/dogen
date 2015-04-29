@@ -44,13 +44,6 @@ public:
     class_header_formatter(class_header_formatter&&) = default;
     ~class_header_formatter() noexcept = default;
 
-private:
-    /**
-     * @brief Ensures all expected settings are available and set to
-     * valid values.
-     */
-    void validate(const settings::formatter_settings& fs) const;
-
 public:
     dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 

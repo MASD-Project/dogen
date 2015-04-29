@@ -18,39 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void forward_declarations_formatter_stitch(std::ostream& s,
-    const settings::formatter_settings& fs,
+dogen::formatters::file forward_declarations_formatter_stitch(
+    formatters::formatting_assistant& fa,
     const formattables::forward_declarations_info& fd) {
 
-    const auto gs(fd.settings().general_settings());
-    dogen::formatters::cpp::scoped_boilerplate_formatter
-       sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
     {
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, fd.namespaces(), false/*create_anonymous_namespace*/,
-           true/*add_new_line*/);
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 
-        if (fd.is_enum()) {
-s << std::endl;
-s << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
-s << std::endl;
-        } else {
-s << std::endl;
-s << "class " << fd.name() << ";" << std::endl;
-s << std::endl;
+            if (fd.is_enum()) {
+fa.stream() << std::endl;
+fa.stream() << "enum class " << fd.name() << " : " << fd.enum_type() << ";" << std::endl;
+fa.stream() << std::endl;
+            } else {
+fa.stream() << std::endl;
+fa.stream() << "class " << fd.name() << ";" << std::endl;
+fa.stream() << std::endl;
+            }
         }
+fa.stream() << std::endl;
     }
-s << std::endl;
+    return fa.make_file();
 }
 
 } } } }

@@ -22,11 +22,9 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
@@ -86,21 +84,6 @@ provider::provide(const dynamic::schema::repository& /*rp*/,
 
 }
 
-void forward_declarations_formatter::
-validate(const settings::formatter_settings& fs) const {
-
-    const auto& fn(ownership_hierarchy().formatter_name());
-    if (fs.file_path().empty()) {
-        BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
-    }
-
-    if (!fs.header_guard() || fs.header_guard()->empty()) {
-        BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
-    }
-}
-
 dynamic::schema::ownership_hierarchy
 forward_declarations_formatter::ownership_hierarchy() const {
     static dynamic::schema::ownership_hierarchy
@@ -122,23 +105,9 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 dogen::formatters::file forward_declarations_formatter::
 format(const formattables::forward_declarations_info& fd) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << fd.name();
-
-    std::ostringstream ss;
-    boost::iostreams::filtering_ostream fo;
-    dogen::formatters::indent_filter::push(fo, 4);
-    fo.push(ss);
-
-    const settings::selector s(fd.settings());
-    const auto& fn(ownership_hierarchy().formatter_name());
-    const auto fs(s.formatter_settings_for_formatter(fn));
-    validate(fs);
-
-    forward_declarations_formatter_stitch(fo, fs, fd);
-
+    formatting_assistant fa(fd, ownership_hierarchy(), file_type());
+    const auto r(forward_declarations_formatter_stitch(fa, fd));
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << fd.name();
-    dogen::formatters::file r;
-    r.content(ss.str());
-    r.path(fs.file_path());
     return r;
 }
 

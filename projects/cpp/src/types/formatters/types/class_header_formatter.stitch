@@ -1,93 +1,89 @@
 <#@ licence_name=gpl_v3 #>
 <#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
 <#@ modeline_group_name=emacs #>
-<#@ stream_variable_name=s #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/formatting_assistant.hpp" #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp" #>
-<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
-<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp" #>
 <#@ containing_namespaces=dogen::cpp::formatters::types #>
 <#+
 
-void class_header_formatter_stitch(std::ostream& s,
-    const settings::formatter_settings& fs,
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
     const formattables::class_info& c) {
 
-    const auto gs(c.settings().general_settings());
-    dogen::formatters::cpp::scoped_boilerplate_formatter
-       sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
     {
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, c.namespaces(), false/*create_anonymous_namespace*/,
-           true/*add_new_line*/);
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+            const auto ts(fa.type_settings());
 
-        const auto ts(c.settings().type_settings());
-
-        std::string final_status;
-        if (!c.is_parent())
-            final_status = "final ";
+            std::string final_status;
+            if (!c.is_parent())
+                final_status = "final ";
 
 #>
 
 class <#= c.name() #> <#= final_status #>{
 public:
 <#+
-        if (!c.requires_manual_default_constructor())
+            if (!c.requires_manual_default_constructor())
 #>
     <#= c.name() #>() = default;
     <#= c.name() #>(const <#= c.name() #>&) = default;
 <#+
-        if (!c.requires_manual_move_constructor())
+            if (!c.requires_manual_move_constructor())
 #>
     <#= c.name() #>(<#= c.name() #>&&) = default;
 <#+
-        if (!c.is_parent() && c.parents().empty())
+            if (!c.is_parent() && c.parents().empty())
 #>
     ~<#= c.name() #>() = default;
 <#+
-        if (c.is_immutable())
+            if (c.is_immutable())
 #>
     <#= c.name() #>& operator=(const <#= c.name() #>&) = delete;
 <#+
-        if (c.all_properties().empty())
+            if (c.all_properties().empty())
 #>
     <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
 
 <#+
-        if (c.requires_manual_default_constructor()) {
+            if (c.requires_manual_default_constructor()) {
 #>
 public:
     <#= c.name() #>();
 
 <#+
-        }
+            }
 #>
 <#+
-        if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
-            c.class_type() != cpp::formattables::class_types::versioned_key &&
-            c.requires_manual_move_constructor() &&
-            !c.all_properties().empty()) {
+            if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
+                c.class_type() != cpp::formattables::class_types::versioned_key &&
+                c.requires_manual_move_constructor() &&
+                !c.all_properties().empty()) {
 #>
 public:
     <#= c.name() #>(<#= c.name() #>&& rhs);
 
 <#+
-        }
+            }
 
-        if (!ts.disable_complete_constructor()) {
+            if (!ts.disable_complete_constructor()) {
 #>
 public:
 
 <#+
-        }
+            }
 #>
 };
 
 <#+
+        }
     }
 #>
 
 <#+
+    return fa.make_file();
 }
 
 #>

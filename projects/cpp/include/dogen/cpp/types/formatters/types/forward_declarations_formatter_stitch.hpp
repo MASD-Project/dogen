@@ -25,10 +25,8 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include <boost/optional.hpp>
-#include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 
 namespace dogen {
@@ -36,8 +34,9 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-void forward_declarations_formatter_stitch(std::ostream& s,
-    const settings::formatter_settings& fs,
+dogen::formatters::file
+forward_declarations_formatter_stitch(
+    formatters::formatting_assistant& fa,
     const formattables::forward_declarations_info& fd);
 
 } } } }

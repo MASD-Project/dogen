@@ -18,71 +18,67 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-void class_header_formatter_stitch(std::ostream& s,
-    const settings::formatter_settings& fs,
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
     const formattables::class_info& c) {
 
-    const auto gs(c.settings().general_settings());
-    dogen::formatters::cpp::scoped_boilerplate_formatter
-       sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-
     {
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
-           s, c.namespaces(), false/*create_anonymous_namespace*/,
-           true/*add_new_line*/);
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+            const auto ts(fa.type_settings());
 
-        const auto ts(c.settings().type_settings());
+            std::string final_status;
+            if (!c.is_parent())
+                final_status = "final ";
 
-        std::string final_status;
-        if (!c.is_parent())
-            final_status = "final ";
+fa.stream() << std::endl;
+fa.stream() << "class " << c.name() << " " << final_status << "{" << std::endl;
+fa.stream() << "public:" << std::endl;
+            if (!c.requires_manual_default_constructor())
+fa.stream() << "    " << c.name() << "() = default;" << std::endl;
+fa.stream() << "    " << c.name() << "(const " << c.name() << "&) = default;" << std::endl;
+            if (!c.requires_manual_move_constructor())
+fa.stream() << "    " << c.name() << "(" << c.name() << "&&) = default;" << std::endl;
+            if (!c.is_parent() && c.parents().empty())
+fa.stream() << "    ~" << c.name() << "() = default;" << std::endl;
+            if (c.is_immutable())
+fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = delete;" << std::endl;
+            if (c.all_properties().empty())
+fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = default;" << std::endl;
+fa.stream() << std::endl;
+            if (c.requires_manual_default_constructor()) {
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    " << c.name() << "();" << std::endl;
+fa.stream() << std::endl;
+            }
+            if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
+                c.class_type() != cpp::formattables::class_types::versioned_key &&
+                c.requires_manual_move_constructor() &&
+                !c.all_properties().empty()) {
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
+fa.stream() << std::endl;
+            }
 
-s << std::endl;
-s << "class " << c.name() << " " << final_status << "{" << std::endl;
-s << "public:" << std::endl;
-        if (!c.requires_manual_default_constructor())
-s << "    " << c.name() << "() = default;" << std::endl;
-s << "    " << c.name() << "(const " << c.name() << "&) = default;" << std::endl;
-        if (!c.requires_manual_move_constructor())
-s << "    " << c.name() << "(" << c.name() << "&&) = default;" << std::endl;
-        if (!c.is_parent() && c.parents().empty())
-s << "    ~" << c.name() << "() = default;" << std::endl;
-        if (c.is_immutable())
-s << "    " << c.name() << "& operator=(const " << c.name() << "&) = delete;" << std::endl;
-        if (c.all_properties().empty())
-s << "    " << c.name() << "& operator=(const " << c.name() << "&) = default;" << std::endl;
-s << std::endl;
-        if (c.requires_manual_default_constructor()) {
-s << "public:" << std::endl;
-s << "    " << c.name() << "();" << std::endl;
-s << std::endl;
+            if (!ts.disable_complete_constructor()) {
+fa.stream() << "public:" << std::endl;
+fa.stream() << std::endl;
+            }
+fa.stream() << "};" << std::endl;
+fa.stream() << std::endl;
         }
-        if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
-            c.class_type() != cpp::formattables::class_types::versioned_key &&
-            c.requires_manual_move_constructor() &&
-            !c.all_properties().empty()) {
-s << "public:" << std::endl;
-s << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
-s << std::endl;
-        }
-
-        if (!ts.disable_complete_constructor()) {
-s << "public:" << std::endl;
-s << std::endl;
-        }
-s << "};" << std::endl;
-s << std::endl;
     }
-s << std::endl;
+fa.stream() << std::endl;
+    return fa.make_file();
 }
 
 } } } }

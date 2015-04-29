@@ -18,15 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
 #include <sstream>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
-#include "dogen/dynamic/schema/types/field_instance_factory.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
@@ -34,7 +30,7 @@
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -51,10 +47,6 @@ using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
 static logger lg(logger_factory(traits::class_header_formatter_name()));
 
-const std::string file_path_not_set(
-    "File path for formatter is not set. Formatter: ");
-const std::string header_guard_not_set(
-    "Header guard for formatter is not set. Formatter: ");
 const std::string include_directive_not_set(
     "Include directive for formatter is not set. Formatter: ");
 
@@ -152,21 +144,6 @@ provider::provide(const dynamic::schema::repository& rp,
 
 }
 
-void class_header_formatter::
-validate(const settings::formatter_settings& fs) const {
-
-    const auto& fn(ownership_hierarchy().formatter_name());
-    if (fs.file_path().empty()) {
-        BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
-    }
-
-    if (!fs.header_guard() || fs.header_guard()->empty()) {
-        BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
-    }
-}
-
 dynamic::schema::ownership_hierarchy
 class_header_formatter::ownership_hierarchy() const {
     static dynamic::schema::ownership_hierarchy
@@ -188,23 +165,9 @@ void class_header_formatter::register_inclusion_dependencies_provider(
 dogen::formatters::file
 class_header_formatter::format(const formattables::class_info& c) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
-
-    std::ostringstream ss;
-    boost::iostreams::filtering_ostream fo;
-    dogen::formatters::indent_filter::push(fo, 4);
-    fo.push(ss);
-
-    const settings::selector s(c.settings());
-    const auto& fn(ownership_hierarchy().formatter_name());
-    const auto fs(s.formatter_settings_for_formatter(fn));
-    validate(fs);
-
-    class_header_formatter_stitch(fo, fs, c);
-
+    formatting_assistant fa(c, ownership_hierarchy(), file_type());
+    const auto r(class_header_formatter_stitch(fa, c));
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
-    dogen::formatters::file r;
-    r.content(ss.str());
-    r.path(fs.file_path());
     return r;
 }
 
