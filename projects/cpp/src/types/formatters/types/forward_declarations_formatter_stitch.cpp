@@ -28,10 +28,10 @@ namespace formatters {
 namespace types {
 
 void forward_declarations_formatter_stitch(std::ostream& s,
-    const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
     const formattables::forward_declarations_info& fd) {
 
+    const auto gs(fd.settings().general_settings());
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
 

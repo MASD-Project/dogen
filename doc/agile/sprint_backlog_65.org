@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-29 Wed 15:07]
+Clock summary at [2015-04-29 Wed 16:00]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *10:43* |       |      |
+| *Total time*                                                             | *11:03* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 10:43 |      |
+| Active                                                                   |         | 11:03 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -30,7 +30,7 @@ Clock summary at [2015-04-29 Wed 15:07]
 | COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
 | COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
 | STARTED Implement types class header formatter using stitch              |         |       | 2:04 |
-| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 0:46 |
+| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
 #+end:
 
@@ -332,13 +332,14 @@ in types, plug it in and start working through the diffs.
 
 To test diff:
 
-: diff -u /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/expected/all_primitives/include/dogen/test_models/all_primitives/serialization/a_class_fwd_ser.hpp /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/all_primitives/include/dogen/test_models/all_primitives/serialization/a_class_fwd_ser.hpp
+: head -n50 /home/marco/Development/DomainDrivenConsulting/dogen/projects/test_models/all_primitives/include/dogen/test_models/all_primitives/types/a_class.hpp > expected.txt && grep -B20 -A25 -e "\#ifndef DOGEN_TEST_MODELS_ALL_PRIMITIVES_TYPES_A_CLASS_HPP" /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/log/knit/workflow_spec/all_primitives_model_generates_expected_code.log > actual.txt && diff -u expected.txt actual.txt 
 
 Notes:
 
 - we can't access disable complete constructor option. Figure out how to.
 
 *** STARTED Add support for =disable_complete_constructor= in options copier
+    CLOCK: [2015-04-29 Wed 15:39]--[2015-04-29 Wed 15:59] =>  0:20
     CLOCK: [2015-04-29 Wed 14:50]--[2015-04-29 Wed 15:07] =>  0:17
     CLOCK: [2015-04-28 Tue 23:25]--[2015-04-28 Tue 23:54] =>  0:29
 
@@ -400,7 +401,7 @@ Results in:
 
 We need to ignore empty expressions.
 
-*** Create a base formatter                                           :story:
+*** Create a formatter helper                                         :story:
 
 We could implement most of the formatter interface in a common base
 class and then only have the descendants override what they need.
@@ -408,6 +409,27 @@ class and then only have the descendants override what they need.
 In reality we need probably more than one base formatter: one for c++
 types, etc. We could handle all of the path and include generation
 here. Name: =cpp_base_formatter=?
+
+Actually maybe we just need a helper class. Prefer the name
+=assistant= to helper.
+
+Responsibilities:
+
+- obtain the formatter settings from a given entity;
+- validate the formatter settings (maybe needs a validate header,
+  validate implementation versions);
+- given string, generate file;
+- create the scoped boiler plate;
+- create the scoped namespace formatter;
+- it could own a =stringstream= too, making our life even easier.
+
+This way the stitch template can call the assistant and the format
+method does very little..
+
+*** Do we use =formatter_types=?                                      :story:
+
+We need to figure out if we need this enumeration in =cpp::formatters=
+and if not remove it.
 
 *** Tidy-up sml consumer interface                                    :story:
 

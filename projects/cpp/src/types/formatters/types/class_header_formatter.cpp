@@ -199,8 +199,7 @@ class_header_formatter::format(const formattables::class_info& c) const {
     const auto fs(s.formatter_settings_for_formatter(fn));
     validate(fs);
 
-    const auto gs(c.settings().general_settings());
-    class_header_formatter_stitch(fo, gs, fs, c);
+    class_header_formatter_stitch(fo, fs, c);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     dogen::formatters::file r;

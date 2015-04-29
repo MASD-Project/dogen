@@ -133,8 +133,7 @@ format(const formattables::forward_declarations_info& fd) const {
     const auto fs(s.formatter_settings_for_formatter(fn));
     validate(fs);
 
-    const auto gs(fd.settings().general_settings());
-    forward_declarations_formatter_stitch(fo, gs, fs, fd);
+    forward_declarations_formatter_stitch(fo, fs, fd);
 
     BOOST_LOG_SEV(lg, debug) << "Formatted type: " << fd.name();
     dogen::formatters::file r;

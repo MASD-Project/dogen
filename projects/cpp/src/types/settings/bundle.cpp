@@ -42,7 +42,7 @@ bundle::bundle(bundle&& rhs)
 
 bundle::bundle(
     const boost::optional<dogen::formatters::general_settings>& general_settings,
-    const boost::optional<dogen::cpp::settings::type_settings>& type_settings,
+    const dogen::cpp::settings::type_settings& type_settings,
     const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings)
     : general_settings_(general_settings),
@@ -87,19 +87,19 @@ void bundle::general_settings(const boost::optional<dogen::formatters::general_s
     general_settings_ = std::move(v);
 }
 
-const boost::optional<dogen::cpp::settings::type_settings>& bundle::type_settings() const {
+const dogen::cpp::settings::type_settings& bundle::type_settings() const {
     return type_settings_;
 }
 
-boost::optional<dogen::cpp::settings::type_settings>& bundle::type_settings() {
+dogen::cpp::settings::type_settings& bundle::type_settings() {
     return type_settings_;
 }
 
-void bundle::type_settings(const boost::optional<dogen::cpp::settings::type_settings>& v) {
+void bundle::type_settings(const dogen::cpp::settings::type_settings& v) {
     type_settings_ = v;
 }
 
-void bundle::type_settings(const boost::optional<dogen::cpp::settings::type_settings>&& v) {
+void bundle::type_settings(const dogen::cpp::settings::type_settings&& v) {
     type_settings_ = std::move(v);
 }
 

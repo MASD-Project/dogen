@@ -28,10 +28,10 @@ namespace formatters {
 namespace types {
 
 void class_header_formatter_stitch(std::ostream& s,
-    const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
     const formattables::class_info& c) {
 
+    const auto gs(c.settings().general_settings());
     dogen::formatters::cpp::scoped_boilerplate_formatter
        sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
 
@@ -39,6 +39,8 @@ void class_header_formatter_stitch(std::ostream& s,
         dogen::formatters::cpp::scoped_namespace_formatter snf(
            s, c.namespaces(), false/*create_anonymous_namespace*/,
            true/*add_new_line*/);
+
+        const auto ts(c.settings().type_settings());
 
         std::string final_status;
         if (!c.is_parent())
@@ -72,7 +74,11 @@ s << "public:" << std::endl;
 s << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
 s << std::endl;
         }
+
+        if (!ts.disable_complete_constructor()) {
+s << "public:" << std::endl;
 s << std::endl;
+        }
 s << "};" << std::endl;
 s << std::endl;
     }

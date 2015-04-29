@@ -43,16 +43,6 @@ inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const b
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_cpp_settings_type_settings(const boost::optional<dogen::cpp::settings::type_settings>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v){
     std::size_t seed(0);
     for (const auto i : v) {
@@ -87,7 +77,7 @@ std::size_t bundle_hasher::hash(const bundle&v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
-    combine(seed, hash_boost_optional_dogen_cpp_settings_type_settings(v.type_settings()));
+    combine(seed, v.type_settings());
     combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(v.formatter_settings()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(v.opaque_settings()));
 

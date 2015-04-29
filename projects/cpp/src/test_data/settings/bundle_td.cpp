@@ -44,13 +44,6 @@ create_dogen_cpp_settings_type_settings(const unsigned int position) {
     return dogen::cpp::settings::type_settings_generator::create(position);
 }
 
-boost::optional<dogen::cpp::settings::type_settings>
-create_boost_optional_dogen_cpp_settings_type_settings(unsigned int position) {
-    boost::optional<dogen::cpp::settings::type_settings> r(
-        create_dogen_cpp_settings_type_settings(position));
-    return r;
-}
-
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -101,7 +94,7 @@ bundle_generator::bundle_generator() : position_(0) { }
 void bundle_generator::
 populate(const unsigned int position, result_type& v) {
     v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 0));
-    v.type_settings(create_boost_optional_dogen_cpp_settings_type_settings(position + 1));
+    v.type_settings(create_dogen_cpp_settings_type_settings(position + 1));
     v.formatter_settings(create_std_unordered_map_std_string_dogen_cpp_settings_formatter_settings(position + 2));
     v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + 3));
 }

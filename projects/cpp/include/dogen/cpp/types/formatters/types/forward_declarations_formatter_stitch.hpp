@@ -37,7 +37,6 @@ namespace formatters {
 namespace types {
 
 void forward_declarations_formatter_stitch(std::ostream& s,
-    const boost::optional<dogen::formatters::general_settings>& gs,
     const settings::formatter_settings& fs,
     const formattables::forward_declarations_info& fd);
 
