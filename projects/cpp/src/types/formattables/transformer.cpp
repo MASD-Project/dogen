@@ -452,6 +452,11 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
             r->requires_manual_default_constructor(true);
     }
 
+    if (r->class_type() == class_types::unversioned_key ||
+        r->class_type() == class_types::versioned_key ||
+        r->all_properties().empty())
+        r->requires_manual_move_constructor(false);
+
     i = o.relationships().find(sml::relationship_types::leaves);
     if (i != o.relationships().end()) {
         for (const auto l : i->second)

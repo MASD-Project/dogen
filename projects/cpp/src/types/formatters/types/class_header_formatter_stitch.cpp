@@ -60,10 +60,7 @@ fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "();" << std::endl;
 fa.stream() << std::endl;
             }
-            if (c.class_type() != cpp::formattables::class_types::unversioned_key &&
-                c.class_type() != cpp::formattables::class_types::versioned_key &&
-                c.requires_manual_move_constructor() &&
-                !c.all_properties().empty()) {
+            if (c.requires_manual_move_constructor()) {
 fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
 fa.stream() << std::endl;

@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-29 Wed 17:24]
+Clock summary at [2015-04-29 Wed 17:48]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *12:27* |       |      |
+| *Total time*                                                             | *12:50* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 12:27 |      |
+| Active                                                                   |         | 12:50 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -30,6 +30,8 @@ Clock summary at [2015-04-29 Wed 17:24]
 | COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
 | COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
 | COMPLETED Create a formatter helper                                      |         |       | 1:24 |
+| COMPLETED Add =is_final= in SML                                          |         |       | 0:17 |
+| COMPLETED Simplify logic around move construction                        |         |       | 0:06 |
 | STARTED Implement types class header formatter using stitch              |         |       | 2:04 |
 | STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
@@ -356,6 +358,13 @@ method does very little..
 Finality should be an SML level concept. We could infer it using the
 same logic as =cpp= uses at present. Add it to SML, then cpp and then
 make use of it in the formatter.
+
+*** COMPLETED Simplify logic around move construction                 :story:
+    CLOSED: [2015-04-29 Wed 17:48]
+    CLOCK: [2015-04-29 Wed 17:42]--[2015-04-29 Wed 17:48] =>  0:06
+
+We are doing some computations in the template that should be done
+during transformation.
 
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-04-28 Tue 17:21]--[2015-04-28 Tue 17:47] =>  0:26
