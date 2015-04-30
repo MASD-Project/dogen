@@ -134,22 +134,15 @@ fa.stream() << "    " << p.type().complete_name() << " " << p.name() << "() cons
                         if (p.is_immutable())
                             continue;
 
-                        if (p.is_fluent()) {
-fa.stream() << "    " << c.name() << "& " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
-                        } else {
-fa.stream() << "    void " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
-                        }
+fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
                     } else {
 fa.stream() << "    const " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
                         if (p.is_immutable())
                             continue;
 
 fa.stream() << "    " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
-                        if (p.is_fluent()) {
-fa.stream() << "    " << c.name() << "& " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
-                        } else {
-fa.stream() << "    void " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
-                        }
+fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
+fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << "&& v);" << std::endl;
                     }
 fa.stream() << std::endl;
                 }

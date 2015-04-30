@@ -157,15 +157,9 @@ public:
                         if (p.is_immutable())
                             continue;
 
-                        if (p.is_fluent()) {
 #>
-    <#= c.name() #>& <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
 <#+
-                        } else {
-#>
-    void <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
-<#+
-                        }
                     } else {
 #>
     const <#= p.type().complete_name() #>& <#= p.name() #>() const;
@@ -175,16 +169,9 @@ public:
 
 #>
     <#= p.type().complete_name() #>& <#= p.name() #>() const;
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
+    <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
 <#+
-                        if (p.is_fluent()) {
-#>
-    <#= c.name() #>& <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
-<#+
-                        } else {
-#>
-    void <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
-<#+
-                        }
                     }
 #>
 

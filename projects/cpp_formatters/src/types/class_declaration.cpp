@@ -328,12 +328,8 @@ object_getters_and_setters(const std::string class_name,
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << pi.name() << "(const " << pi.type().complete_name();
-
-        if (!pi.type().is_primitive())
-            stream_ << "&";
-
-        stream_ << " v);" << std::endl;
+        stream_ << pi.name() << "(const " << pi.type().complete_name()
+                << "& v);" << std::endl;
 
         // move setter
         stream_ << indenter_;
@@ -341,12 +337,8 @@ object_getters_and_setters(const std::string class_name,
             stream_ << class_name << "& ";
         else
             stream_ << "void ";
-        stream_ << pi.name() << "(const " << pi.type().complete_name();
-
-        if (!pi.type().is_primitive())
-            stream_ << "&&";
-
-        stream_ << " v);" << std::endl;
+        stream_ << pi.name() << "(const " << pi.type().complete_name()
+                << "&& v);" << std::endl;
     }
 
     if (!pi.is_immutable())

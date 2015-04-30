@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -32,6 +33,7 @@ static logger lg(logger_factory("cpp.formatters.formatting_assistant"));
 
 const std::string empty;
 const std::string by_ref_text = "&";
+const std::string void_keyword_text = "void";
 const std::string final_keyword_text = "final ";
 
 const std::string file_path_not_set(
@@ -63,6 +65,18 @@ make_parameter_separator_text(const unsigned int number_of_parameters,
     if (parameter_position == 0 && number_of_parameters == 1)
         return empty;
     return ",";
+}
+
+std::string formatting_assistant::
+make_setter_return_type(const std::string& containing_type_name,
+    const formattables::property_info& p) {
+    std::ostringstream s;
+    if (p.is_fluent())
+        s << containing_type_name << by_ref_text;
+    else
+        s << void_keyword_text;
+
+    return s.str();
 }
 
 formatting_assistant::formatting_assistant(const formattables::entity& e,

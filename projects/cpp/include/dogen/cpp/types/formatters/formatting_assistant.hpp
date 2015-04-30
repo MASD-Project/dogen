@@ -65,6 +65,14 @@ public:
     make_parameter_separator_text(const unsigned int number_of_parameters,
         const unsigned int parameter_position);
 
+    /**
+     * @brief Makes the return type of a setter, taking into account
+     * fluency.
+     */
+    static std::string
+    make_setter_return_type(const std::string& containing_type_name,
+        const formattables::property_info& p);
+
 public:
     formatting_assistant(const formattables::entity& e,
         const dynamic::schema::ownership_hierarchy& oh,
