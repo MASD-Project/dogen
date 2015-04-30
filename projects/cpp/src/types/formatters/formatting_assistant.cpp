@@ -110,6 +110,13 @@ is_formatter_enabled(const std::string& formatter_name) const {
     return fs.enabled();
 }
 
+bool formatting_assistant::
+is_facet_integrated(const std::string& facet_name) const {
+    const auto& f(formatter_settings_.integrated_facets());
+    const auto i(f.find(facet_name));
+    return i != f.end();
+}
+
 bool formatting_assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
@@ -118,6 +125,11 @@ bool formatting_assistant::is_serialization_enabled() const {
 bool formatting_assistant::is_io_enabled() const {
     using formatters::io::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
+}
+
+bool formatting_assistant::is_io_integrated() const {
+    using formatters::io::traits;
+    return is_facet_integrated(traits::facet_name());
 }
 
 void formatting_assistant::validate() const {

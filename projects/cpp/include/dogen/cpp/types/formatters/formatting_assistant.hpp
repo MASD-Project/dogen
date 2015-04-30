@@ -92,6 +92,12 @@ private:
      */
     bool is_formatter_enabled(const std::string& formatter_name) const;
 
+    /**
+     * @brief Returns true if the facet is integrated with the current
+     * formatter.
+     */
+    bool is_facet_integrated(const std::string& facet_name) const;
+
 public:
     /**
      * @brief Returns the property as a member variable.
@@ -109,6 +115,12 @@ public:
      * @brief Returns true if io is enabled.
      */
     bool is_io_enabled() const;
+
+    /**
+     * @brief Returns true if io is integrated with the current
+     * formatter.
+     */
+    bool is_io_integrated() const;
 
 public:
     /**

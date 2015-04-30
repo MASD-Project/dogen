@@ -218,6 +218,21 @@ fa.stream() << "    " << p.type().complete_name() << " " << fa.make_member_varia
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
+            if (c.is_parent()) {
+fa.stream() << "inline " << c.name() << "::~" << c.name() << "() noexcept { }" << std::endl;
+fa.stream() << std::endl;
+            }
+
+            if (fa.is_io_enabled() && fa.is_io_integrated()) {
+fa.stream() << "    std::ostream& operator<<(std::ostream& s, const " << c.name() << "& v);" << std::endl;
+fa.stream() << std::endl;
+            }
+
+            if (!c.is_parent()) {
+fa.stream() << "inline bool operator==(const " << c.name() << "& lhs, const " << c.name() << "& rhs) {" << std::endl;
+fa.stream() << "    return lhs.equals(rhs);" << std::endl;
+fa.stream() << "}" << std::endl;
+            }
         } // snf
     } // sbf
 fa.stream() << std::endl;
