@@ -21,6 +21,9 @@ dogen::formatters::file class_header_formatter_stitch(
 class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
 public:
 <#+
+            /*
+             * Compiler generated constructors and destructors.
+             */
             if (!c.requires_manual_default_constructor())
 #>
     <#= c.name() #>() = default;
@@ -43,6 +46,9 @@ public:
     <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
 
 <#+
+            /*
+             * Manually generated constructors and destructors.
+             */
             if (c.requires_manual_default_constructor()) {
 #>
 public:
@@ -87,6 +93,9 @@ public:
 <#+
             }
 
+            /*
+             * Friends
+             */
             if (fa.is_serialization_enabled()) {
 #>
 private:
@@ -99,6 +108,9 @@ private:
 <#+
             }
 
+            /*
+             * Visitation.
+             */
             if (c.is_visitable()) {
 #>
 public:
@@ -130,6 +142,9 @@ public:
 <#+
             }
 
+            /*
+             * Streaming
+             */
             if (fa.is_io_enabled()) {
                 if (c.is_parent()) {
 #>
@@ -145,6 +160,9 @@ public:
                 }
             }
 
+            /*
+             * Getters and setters.
+             */
             if (!c.properties().empty()) {
 #>
 public:
@@ -178,12 +196,52 @@ public:
 <#+
                 }
             }
+
+            /*
+             * Equality.
+             *
+             * Equality is only public in leaf classes - MEC++-33.
+             */
+            if (c.is_parent()) {
 #>
+protected:
+    bool compare(const <#= c.name() #>& rhs) const;
+<#+
+            } else {
+#>
+    bool operator==(const <#= c.name() #>& rhs) const;
+    bool operator!=(const <#= c.name() #>& rhs) const {
+        return !this->operator==(rhs);
+    }
+<#+
+            }
+#>
+
+<#+
+            if (c.is_parent() && c.parents().empty()) {
+#>
+    virtual bool equals(const <#= c.name() #>& other) const = 0;
+<#+
+            } else if (c.is_parent()) {
+#>
+    virtual bool equals(const <#= c.original_parent_name_qualified() #>& other) const = 0;
+<#+
+            } else if (!c.parents().empty()) {
+#>
+    bool equals(const <#= c.original_parent_name_qualified() #>& other) const override;
+<#+
+            }
+#>
+
+<#+
+        
+#>
+
 };
 
 <#+
-        }
-    }
+        } // snf
+    } // sbf
 #>
 
 <#+

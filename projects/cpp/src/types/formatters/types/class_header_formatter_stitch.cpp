@@ -38,6 +38,9 @@ dogen::formatters::file class_header_formatter_stitch(
 fa.stream() << std::endl;
 fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "{" << std::endl;
 fa.stream() << "public:" << std::endl;
+            /*
+             * Compiler generated constructors and destructors.
+             */
             if (!c.requires_manual_default_constructor())
 fa.stream() << "    " << c.name() << "() = default;" << std::endl;
 fa.stream() << "    " << c.name() << "(const " << c.name() << "&) = default;" << std::endl;
@@ -50,6 +53,9 @@ fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = d
             if (c.all_properties().empty())
 fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = default;" << std::endl;
 fa.stream() << std::endl;
+            /*
+             * Manually generated constructors and destructors.
+             */
             if (c.requires_manual_default_constructor()) {
 fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "();" << std::endl;
@@ -78,6 +84,9 @@ fa.stream() << "        const " << p.type().complete_name() << fa.make_by_ref_te
 fa.stream() << std::endl;
             }
 
+            /*
+             * Friends
+             */
             if (fa.is_serialization_enabled()) {
 fa.stream() << "private:" << std::endl;
 fa.stream() << "    template<typename Archive>" << std::endl;
@@ -88,6 +97,9 @@ fa.stream() << "    friend void boost::serialization::load(Archive& ar, " << c.n
 fa.stream() << std::endl;
             }
 
+            /*
+             * Visitation.
+             */
             if (c.is_visitable()) {
 fa.stream() << "public:" << std::endl;
 fa.stream() << "    virtual void accept(const " << c.name() << "_visitor& v) const = 0;" << std::endl;
@@ -115,6 +127,9 @@ fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
             }
 
+            /*
+             * Streaming
+             */
             if (fa.is_io_enabled()) {
                 if (c.is_parent()) {
 fa.stream() << "public:" << std::endl;
@@ -126,6 +141,9 @@ fa.stream() << std::endl;
                 }
             }
 
+            /*
+             * Getters and setters.
+             */
             if (!c.properties().empty()) {
 fa.stream() << "public:" << std::endl;
                 for (const auto p : c.properties()) {
@@ -147,10 +165,36 @@ fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.nam
 fa.stream() << std::endl;
                 }
             }
+
+            /*
+             * Equality.
+             *
+             * Equality is only public in leaf classes - MEC++-33.
+             */
+            if (c.is_parent()) {
+fa.stream() << "protected:" << std::endl;
+fa.stream() << "    bool compare(const " << c.name() << "& rhs) const;" << std::endl;
+            } else {
+fa.stream() << "    bool operator==(const " << c.name() << "& rhs) const;" << std::endl;
+fa.stream() << "    bool operator!=(const " << c.name() << "& rhs) const {" << std::endl;
+fa.stream() << "        return !this->operator==(rhs);" << std::endl;
+fa.stream() << "    }" << std::endl;
+            }
+fa.stream() << std::endl;
+            if (c.is_parent() && c.parents().empty()) {
+fa.stream() << "    virtual bool equals(const " << c.name() << "& other) const = 0;" << std::endl;
+            } else if (c.is_parent()) {
+fa.stream() << "    virtual bool equals(const " << c.original_parent_name_qualified() << "& other) const = 0;" << std::endl;
+            } else if (!c.parents().empty()) {
+fa.stream() << "    bool equals(const " << c.original_parent_name_qualified() << "& other) const override;" << std::endl;
+            }
+fa.stream() << std::endl;
+        
+fa.stream() << std::endl;
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
-        }
-    }
+        } // snf
+    } // sbf
 fa.stream() << std::endl;
     return fa.make_file();
 }
