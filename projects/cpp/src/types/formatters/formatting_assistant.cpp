@@ -35,6 +35,7 @@ const std::string empty;
 const std::string by_ref_text = "&";
 const std::string void_keyword_text = "void";
 const std::string final_keyword_text = "final ";
+const std::string member_variable_postfix("_");
 
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
@@ -96,6 +97,11 @@ formatter_settings(const std::string& formatter_name) const {
     const settings::selector s(entity_.settings());
     const auto& fn(formatter_name);
     return s.formatter_settings_for_formatter(fn);
+}
+
+std::string formatting_assistant::make_member_variable_name(
+    const formattables::property_info& p) const {
+    return p.name() + member_variable_postfix;
 }
 
 bool formatting_assistant::

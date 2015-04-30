@@ -258,6 +258,22 @@ public:
                 }
             }
 #>
+
+<#+
+            /*
+             * Member variables.
+             */
+            if (!c.properties().empty()) {
+#>
+private:
+<#+
+                for (const auto& p : c.properties()) {
+#>
+    <#= p.type().complete_name() #> <#= fa.make_member_variable_name(p) #>;
+<#+
+                }
+            }
+#>
 };
 
 <#+

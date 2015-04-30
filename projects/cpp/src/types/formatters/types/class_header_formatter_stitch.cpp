@@ -206,6 +206,16 @@ fa.stream() << "    void swap(" << c.name() << "& other) noexcept;" << std::endl
 fa.stream() << "    " << c.name() << "& operator=(" << c.name() << " other);" << std::endl;
                 }
             }
+fa.stream() << std::endl;
+            /*
+             * Member variables.
+             */
+            if (!c.properties().empty()) {
+fa.stream() << "private:" << std::endl;
+                for (const auto& p : c.properties()) {
+fa.stream() << "    " << p.type().complete_name() << " " << fa.make_member_variable_name(p) << ";" << std::endl;
+                }
+            }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         } // snf

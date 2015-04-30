@@ -94,6 +94,13 @@ private:
 
 public:
     /**
+     * @brief Returns the property as a member variable.
+     */
+    std::string make_member_variable_name(
+        const formattables::property_info& p) const;
+
+public:
+    /**
      * @brief Returns true if serialization is enabled.
      */
     bool is_serialization_enabled() const;
