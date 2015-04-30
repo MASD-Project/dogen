@@ -175,12 +175,13 @@ fa.stream() << std::endl;
 fa.stream() << "protected:" << std::endl;
 fa.stream() << "    bool compare(const " << c.name() << "& rhs) const;" << std::endl;
             } else {
+fa.stream() << "public:" << std::endl;
 fa.stream() << "    bool operator==(const " << c.name() << "& rhs) const;" << std::endl;
 fa.stream() << "    bool operator!=(const " << c.name() << "& rhs) const {" << std::endl;
 fa.stream() << "        return !this->operator==(rhs);" << std::endl;
 fa.stream() << "    }" << std::endl;
             }
-fa.stream() << std::endl;
+
             if (c.is_parent() && c.parents().empty()) {
 fa.stream() << "    virtual bool equals(const " << c.name() << "& other) const = 0;" << std::endl;
             } else if (c.is_parent()) {
@@ -189,8 +190,22 @@ fa.stream() << "    virtual bool equals(const " << c.original_parent_name_qualif
 fa.stream() << "    bool equals(const " << c.original_parent_name_qualified() << "& other) const override;" << std::endl;
             }
 fa.stream() << std::endl;
-        
-fa.stream() << std::endl;
+            /*
+             * Swap and assignment.
+             *
+             * Swap and assignment are only public in leaf classes - MEC++-33
+             */
+            if (!c.all_properties().empty() && !c.is_immutable()) {
+                if (c.is_parent()) {
+fa.stream() << "protected:" << std::endl;
+                } else {
+fa.stream() << "public:" << std::endl;
+                }
+fa.stream() << "    void swap(" << c.name() << "& other) noexcept;" << std::endl;
+                if (!c.is_parent()) {
+fa.stream() << "    " << c.name() << "& operator=(" << c.name() << " other);" << std::endl;
+                }
+            }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         } // snf

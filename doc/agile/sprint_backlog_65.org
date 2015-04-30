@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-04-30 Thu 08:21]
+Clock summary at [2015-04-30 Thu 19:00]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *15:26* |       |      |
+| *Total time*                                                             | *15:49* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 15:26 |      |
+| Active                                                                   |         | 15:49 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -32,7 +32,7 @@ Clock summary at [2015-04-30 Thu 08:21]
 | COMPLETED Create a formatter helper                                      |         |       | 1:24 |
 | COMPLETED Add =is_final= in SML                                          |         |       | 0:17 |
 | COMPLETED Simplify logic around move construction                        |         |       | 0:06 |
-| STARTED Implement types class header formatter using stitch              |         |       | 4:40 |
+| STARTED Implement types class header formatter using stitch              |         |       | 5:03 |
 | STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
 #+end:
@@ -367,6 +367,7 @@ We are doing some computations in the template that should be done
 during transformation.
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-04-30 Thu 18:37]--[2015-04-30 Thu 19:00] =>  0:23
     CLOCK: [2015-04-30 Thu 08:00]--[2015-04-30 Thu 08:21] =>  0:21
     CLOCK: [2015-04-30 Thu 07:39]--[2015-04-30 Thu 08:00] =>  0:21
     CLOCK: [2015-04-29 Wed 22:09]--[2015-04-29 Wed 22:27] =>  0:18
@@ -440,6 +441,15 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
+
+*** Assignment operator seems to pass types by value                  :story:
+
+The code for the operator is as follows:
+
+:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+:                << " other);" << std::endl;
+
+If this is the case we need to fix it and regenerate all models.
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 

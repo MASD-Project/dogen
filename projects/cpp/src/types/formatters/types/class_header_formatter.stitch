@@ -209,15 +209,14 @@ protected:
 <#+
             } else {
 #>
+public:
     bool operator==(const <#= c.name() #>& rhs) const;
     bool operator!=(const <#= c.name() #>& rhs) const {
         return !this->operator==(rhs);
     }
 <#+
             }
-#>
 
-<#+
             if (c.is_parent() && c.parents().empty()) {
 #>
     virtual bool equals(const <#= c.name() #>& other) const = 0;
@@ -234,9 +233,31 @@ protected:
 #>
 
 <#+
-        
+            /*
+             * Swap and assignment.
+             *
+             * Swap and assignment are only public in leaf classes - MEC++-33
+             */
+            if (!c.all_properties().empty() && !c.is_immutable()) {
+                if (c.is_parent()) {
 #>
-
+protected:
+<#+
+                } else {
+#>
+public:
+<#+
+                }
+#>
+    void swap(<#= c.name() #>& other) noexcept;
+<#+
+                if (!c.is_parent()) {
+#>
+    <#= c.name() #>& operator=(<#= c.name() #> other);
+<#+
+                }
+            }
+#>
 };
 
 <#+
