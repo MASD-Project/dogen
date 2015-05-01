@@ -39,6 +39,7 @@ Clock summary at [2015-05-01 Fri 17:23]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-01 Fri 16:02]--[2015-05-01 Fri 16:13] =>  0:11
     CLOCK: [2015-04-28 Tue 11:15]--[2015-04-28 Tue 12:14] =>  0:59
     CLOCK: [2015-04-27 Mon 14:15]--[2015-04-27 Mon 15:07] =>  0:52
     CLOCK: [2015-04-27 Mon 14:05]--[2015-04-27 Mon 14:15] =>  0:10
@@ -446,6 +447,56 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
+
+*** STARTED Move a few activities from the frontends to SML           :story:
+    CLOCK: [2015-05-01 Fri 16:13]--[2015-05-01 Fri 16:41] =>  0:28
+
+*New Understanding*
+
+Actually it seems we need to handle different tasks in different
+classes:
+
+- leaves: this seems like a job for =association_indexer=.
+- inheritance: i.e. setting original parent name and is original
+  parent visitable. In =association_indexer=.
+- model references: should be done as part of the merging process? we
+  need a class to compute model references though ("dependency
+  manager"?).
+- identity processing: property indexer (identity is done via
+  properties)
+- containing module: No good place to put this in so create a new
+  class: =module_indexer=.
+
+*Previous Understanding*
+
+This story was spawned from "Refactor Dia to SML transformer". We need
+to create a create a "post-processing" workflow in SML that handles
+some of the work that is currently in Dia to SML. This will make life
+easier in terms of supporting JSON as a fully supported front-end.
+
+Post-processing tasks already identified:
+
+- population of model references: should be distinct step in workflow,
+  after transformation (=update_model_references=).
+- computation of leaves: See  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. 
+- setting original parent name and is original parent visitable;
+  investigate all of the relationship population to see what else
+  applies (e.g. what else is inferrable).
+- identity processing: this should be done as a post-processing step
+  rather than during transformation.
+- containing module: this is not done in Dia to SML at the moment, its
+  only done in JSON hydrator. We are populating containment for the
+  global module in injector though; see
+  add_containing_module_to_non_contained_entities.
+
+We need to look into Dia to SML to see if there are any additional
+tasks that need to be moved across.
+
+As part of this work, we should also rename =sml::workflow= to perhaps
+=sml::merging_workflow= or something along these lines. This new
+workflow would then be =sml::augmenting_workflow= perhaps. We should
+also move any activities which are not related to merging into this
+workflow (e.g. injecting of system types, etc).
 
 *** STARTED Assignment operator seems to pass types by value          :story:
     CLOCK: [2015-05-01 Fri 11:32]--[2015-05-01 Fri 11:39] =>  0:07

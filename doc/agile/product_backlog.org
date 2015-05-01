@@ -702,6 +702,14 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+
+*** Consider renaming SML workflow                                    :story:
+
+Since the main SML workflow is focused on producing a merged model, we
+should perhaps rename it to =sml::merging_workflow= or something along
+these lines. However, we need to keep in mind that as well as merging
+we perform a lot of other activities on the models.
+
 *** Consider moving dia diagrams to their own project                 :story:
 
 We originally create a diagrams top-level directory for all of the
@@ -1109,36 +1117,6 @@ workflow does in each model.
 
 We should only implement this story when all of the major refactoring
 has been done.
-
-*** Create a "post-processing" workflow in SML                        :story:
-
-This story was spawned from "Refactor Dia to SML transformer". We need
-to create a create a "post-processing" workflow in SML that handles
-some of the work that is currently in Dia to SML. This will make life
-easier in terms of supporting JSON as a fully supported front-end.
-
-Post-processing tasks already identified:
-
-- population of model references: should be distinct step in workflow,
-  after transformation (=update_model_references=).
-- computation of leaves: See  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. 
-- setting original parent name: in effect all of the relationship
-  population.
-- identity processing: this should be done as a post-processing step
-  rather than during transformation.
-- containing module: this is not done in Dia to SML at the moment, its
-  only done in JSON hydrator. We are populating containment for the
-  global module in injector though; see
-  add_containing_module_to_non_contained_entities.
-
-We need to look into Dia to SML to see if there are any additional
-tasks that need to be moved across.
-
-As part of this work, we should also rename =sml::workflow= to perhaps
-=sml::merging_workflow= or something along these lines. This new
-workflow would then be =sml::augmenting_workflow= perhaps. We should
-also move any activities which are not related to merging into this
-workflow (e.g. injecting of system types, etc).
 
 *** Refactor Dia to SML transformer                                   :story:
 
