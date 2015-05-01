@@ -13,32 +13,34 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-01 Fri 17:25]
+Clock summary at [2015-05-01 Fri 23:25]
 
-| Headline                                                                 | Time    |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *19:08* |       |      |
-|--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 19:08 |      |
-| STARTED Sprint and product backlog grooming                              |         |       | 2:12 |
-| COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
-| COMPLETED Output new world forward declarations                          |         |       | 2:36 |
-| COMPLETED Fix missing new line in enumeration forward declarations       |         |       | 0:32 |
-| COMPLETED Text of GPL V2 licence is the same as V3                       |         |       | 0:10 |
-| COMPLETED Inclusion provision needs to cater for optional case           |         |       | 0:21 |
-| COMPLETED Consider adding a ownership hierarchy method in registrar      |         |       | 0:15 |
-| COMPLETED Improve streaming of empty lines in stitch                     |         |       | 0:16 |
-| COMPLETED Implement serialization forward declarations formatter         |         |       | 0:17 |
-| COMPLETED Create a formatter helper                                      |         |       | 1:24 |
-| COMPLETED Add =is_final= in SML                                          |         |       | 0:17 |
-| COMPLETED Simplify logic around move construction                        |         |       | 0:06 |
-| COMPLETED Analysis on frontend activities that belong in SML             |         |       | 0:28 |
-| STARTED Implement types class header formatter using stitch              |         |       | 7:03 |
-| STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
-| STARTED Implement options copier and remove options from context         |         |       | 0:50 |
-| STARTED Refactor SML association indexer                                 |         |       | 0:20 |
-| STARTED Improve references management                                    |         |       | 0:13 |
-| STARTED Assignment operator seems to pass types by value                 |         |       | 0:07 |
+| Headline                                                                   | Time    |       |      |
+|----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                               | *21:17* |       |      |
+|----------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                     |         | 21:17 |      |
+| STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
+| COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
+| COMPLETED Output new world forward declarations                            |         |       | 2:36 |
+| COMPLETED Fix missing new line in enumeration forward declarations         |         |       | 0:32 |
+| COMPLETED Text of GPL V2 licence is the same as V3                         |         |       | 0:10 |
+| COMPLETED Inclusion provision needs to cater for optional case             |         |       | 0:21 |
+| COMPLETED Consider adding a ownership hierarchy method in registrar        |         |       | 0:15 |
+| COMPLETED Improve streaming of empty lines in stitch                       |         |       | 0:16 |
+| COMPLETED Implement serialization forward declarations formatter           |         |       | 0:17 |
+| COMPLETED Create a formatter helper                                        |         |       | 1:24 |
+| COMPLETED Add =is_final= in SML                                            |         |       | 0:17 |
+| COMPLETED Simplify logic around move construction                          |         |       | 0:06 |
+| COMPLETED Analysis on frontend activities that belong in SML               |         |       | 0:28 |
+| COMPLETED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
+| STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
+| STARTED Implement options copier and remove options from context           |         |       | 0:50 |
+| STARTED Refactor SML association indexer                                   |         |       | 1:16 |
+| STARTED Improve references management                                      |         |       | 0:13 |
+| STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
+| STARTED Move injection to merging workflow                                 |         |       | 0:21 |
+| STARTED Try making path expansion a merged model expansion                 |         |       | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -509,6 +511,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor SML association indexer                          :story:
+    CLOCK: [2015-05-01 Fri 21:34]--[2015-05-01 Fri 22:09] =>  0:35
     CLOCK: [2015-05-01 Fri 17:30]--[2015-05-01 Fri 17:51] =>  0:21
     CLOCK: [2015-05-01 Fri 16:50]--[2015-05-01 Fri 17:04] =>  0:14
     CLOCK: [2015-05-01 Fri 16:42]--[2015-05-01 Fri 16:48] =>  0:06
@@ -613,6 +616,39 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
+*** STARTED Move injection to merging workflow                        :story:
+    CLOCK: [2015-05-01 Fri 22:10]--[2015-05-01 Fri 22:31] =>  0:21
+
+*New Understanding*
+
+This can't be done because of expansion. We need the injected system
+types to exist or else expansion of inclusions will fail. This happens
+because the types do not exist during the stand alone model expansion
+and as such do not get their file paths set; when we do the merged
+model expansion, we fail because we cannot find the file paths. In
+order for this to work, we need to ensure stand alone model expansion
+happens in the merged model too - does it really need to be a partial
+model operation?
+
+*Previous Understanding*
+
+At present we are performing injection in the partial model. There
+doesn't seem to be any good reason for this. Try moving it to the
+merged model and see what breaks.
+
+*** STARTED Try making path expansion a merged model expansion        :story:
+    CLOCK: [2015-05-01 Fri 22:32]--[2015-05-01 Fri 23:24] =>  0:52
+
+There shouldn't be any reason why path expansion cannot be done at the
+merged model level, provided we do it to all types (not just target
+model). Try it and see what happens.
+
+We seem to fail with a weird  file path error:
+
+: std::exception::what: Field not found: cpp.types.class_header_formatter.file_path
+
+However file paths are being generated as expected.
+
 *** Add identity management to =property_indexer=                     :story:
 
 At present we are populating the identity properties in dia to sml. We
@@ -621,7 +657,11 @@ need to move this to property indexer in SML.
 *** Create a module indexer                                           :story:
 
 We need to create a class that computes module containment. At present
-this is done in JSON hydrator..
+this is done in JSON hydrator.
+
+In addition, we also have huge amounts of nonsense in injector, in
+particular =add_containing_module_to_non_contained_entities=. This
+should also be handled by the module indexer.
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 
