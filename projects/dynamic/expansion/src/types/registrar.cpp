@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/dynamic/expansion/io/expansion_types_io.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 #include "dogen/dynamic/expansion/types/registrar_error.hpp"
@@ -30,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dynamic.expansion..registrar"));
+static logger lg(logger_factory("dynamic.expansion.registrar"));
 
 const std::string no_stand_alone_expanders(
     "No stand alone model expanders provided.");
@@ -63,9 +64,9 @@ void registrar::validate() const {
                                  stand_alone_model_expanders_.end())
                              << " registered stand alone model expander(s): ";
 
-    BOOST_LOG_SEV(lg, debug) << "Listing all stand alone model expanders.";
     for (const auto& f : stand_alone_model_expanders_)
-        BOOST_LOG_SEV(lg, debug) << "Key: '" << f->name() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->name()
+                                 << "'. Dependencies: " << f->dependencies();
 
     BOOST_LOG_SEV(lg, debug) << "Found "
                              << std::distance(
@@ -73,9 +74,9 @@ void registrar::validate() const {
                                  merged_model_expanders_.end())
                              << " registered merged model expander(s): ";
 
-    BOOST_LOG_SEV(lg, debug) << "Listing all merged model expanders.";
     for (const auto& f : merged_model_expanders_)
-        BOOST_LOG_SEV(lg, debug) << "Key: '" << f->name() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Name: '" << f->name()
+                                 << "'. Dependencies: " << f->dependencies();
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
