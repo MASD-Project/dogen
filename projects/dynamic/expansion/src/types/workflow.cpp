@@ -35,11 +35,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.expansion.workflow"));
 
-const std::string model_module_not_found(
-    "No generatable model modules found.");
-const std::string multiple_model_modules(
-    "More than one model module is generatable: ");
-
 }
 
 namespace dogen {
@@ -126,7 +121,8 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }
 
-graph_type workflow::build_expander_graph_activity(const expansion_types et) const {
+graph_type workflow::
+build_expander_graph_activity(const expansion_types et) const {
     grapher g(et);
     for (auto e : registrar().expanders(et))
         g.add(e);
