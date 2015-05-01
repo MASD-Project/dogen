@@ -43,17 +43,6 @@ const std::string object_not_found("Object not found in object container: ");
 namespace dogen {
 namespace sml {
 
-class association_indexer::context {
-public:
-    context(sml::model& m) : model_(m) { }
-
-public:
-    sml::model& model() { return model_; }
-
-private:
-    sml::model& model_;
-};
-
 void association_indexer::remove_duplicates(std::list<qname>& names,
     std::unordered_set<sml::qname> processed) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
@@ -76,8 +65,8 @@ void association_indexer::remove_duplicates(std::list<qname>& names,
                              << names.size();
 }
 
-void association_indexer::recurse_nested_qnames(object& o,
-    const nested_qname& nqn, bool& is_pointer) const {
+void association_indexer::recurse_nested_qnames(const model& m,
+    object& o, const nested_qname& nqn, bool& is_pointer) const {
     const auto qn(nqn.type());
     auto& rels(o.relationships());
     if (is_pointer)
@@ -85,20 +74,20 @@ void association_indexer::recurse_nested_qnames(object& o,
     else
         rels[relationship_types::regular_associations].push_back(qn);
 
-    const auto i(context_->model().primitives().find(qn));
-    if (i != context_->model().primitives().end()) {
+    const auto i(m.primitives().find(qn));
+    if (i != m.primitives().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto j(context_->model().enumerations().find(qn));
-    if (j != context_->model().enumerations().end()) {
+    const auto j(m.enumerations().find(qn));
+    if (j != m.enumerations().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto k(context_->model().objects().find(qn));
-    if (k == context_->model().objects().end()) {
+    const auto k(m.objects().find(qn));
+    if (k == m.objects().end()) {
         const auto n(sml::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << object_not_found << n;
         BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
@@ -113,25 +102,25 @@ void association_indexer::recurse_nested_qnames(object& o,
         if (is_first && k->second.object_type() == hc)
             rels[relationship_types::hash_container_keys].push_back(c.type());
 
-        recurse_nested_qnames(o, c, is_pointer);
+        recurse_nested_qnames(m, o, c, is_pointer);
         is_first = false;
     }
 }
 
-void association_indexer::index_object(object& o) {
+void association_indexer::index_object(const model& m, object& o) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: "
                              << sml::string_converter::convert(o.name());
 
     for (const auto& p : o.local_properties()) {
         const auto nqn(p.type());
         bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(o, nqn, is_pointer);
+        recurse_nested_qnames(m, o, nqn, is_pointer);
     }
 
     for (const auto& op : o.operations()) {
         for (const auto& p : op.parameters()) {
             bool is_pointer(p.type().is_pointer());
-            recurse_nested_qnames(o, p.type(), is_pointer);
+            recurse_nested_qnames(m, o, p.type(), is_pointer);
         }
 
         if (!op.type())
@@ -139,7 +128,7 @@ void association_indexer::index_object(object& o) {
 
         const auto nqn(*op.type());
         bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(o, nqn, is_pointer);
+        recurse_nested_qnames(m, o, nqn, is_pointer);
     }
 
     auto i(o.relationships().find(relationship_types::regular_associations));
@@ -161,16 +150,14 @@ void association_indexer::index_object(object& o) {
 void association_indexer::index(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
-    context_ = std::unique_ptr<context>(new context(m));
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o);
+        index_object(m, o);
     }
-    context_ = std::unique_ptr<context>();
 }
 
 } }

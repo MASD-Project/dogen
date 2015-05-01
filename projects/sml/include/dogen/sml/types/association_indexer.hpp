@@ -70,9 +70,6 @@ public:
     ~association_indexer() noexcept = default;
 
 private:
-    class context;
-
-private:
     /**
      * @brief Removes duplicate qnames, preserving the original order
      * of elements in the list.
@@ -89,22 +86,19 @@ private:
      * @brief Iterates through the nested qname recursively, picking
      * up associations as it goes along.
      */
-    void recurse_nested_qnames(object& o, const nested_qname& nqn,
-        bool& is_pointer) const;
+    void recurse_nested_qnames(const model& m, object& o,
+        const nested_qname& nqn, bool& is_pointer) const;
 
     /**
      * @brief Indexes a specific object.
      */
-    void index_object(object& o);
+    void index_object(const model& m, object& o);
 
 public:
     /**
      * @brief Indexes all objects in the model.
      */
     void index(model& m);
-
-private:
-    mutable std::shared_ptr<context> context_;
 };
 
 } }
