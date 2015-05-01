@@ -283,6 +283,19 @@ crash and burn:
 : dogen_knit_spec: /usr/include/boost/smart_ptr/shared_ptr.hpp:653: typename boost::detail::sp_member_access<T>::type boost::shared_ptr<dogen::dynamic::expansion::expander_interface>::operator->() const [Y = dogen::dynamic::expansion::expander_interface]: Assertion `px != 0' failed.
 : unknown location(0): fatal error in "all_primitives_model_generates_expected_code": signal: SIGABRT (application abort requested)
 
+The cause of this is that we may end up creating vertices for
+dependencies (initialised with a null shared pointer) but never
+actually =add= the expander that corresponds to that expander name to
+the graph. We then visit the graph and assume all vertices have valid
+expanders, which results in the error above.
+
+We can do two things:
+
+- validate that all dependencies exist by placing all expanders in a
+  set and resolving the dependencies; this can be done before the
+  graph.
+- checking that the expander pointer points to not null or throw.
+
 *** Expand fields from command line options into dynamic              :story:
 
 We need to ensure the following fields are populated, from the command
