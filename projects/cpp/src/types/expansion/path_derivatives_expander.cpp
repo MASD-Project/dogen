@@ -50,6 +50,11 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
+std::string path_derivatives_expander::static_name() {
+    static std::string name("cpp.expansion.path_derivatives_expander");
+    return name;
+}
+
 path_derivatives_expander::path_derivatives_expander()
   : requires_file_path_expansion_(false) {}
 
@@ -168,8 +173,7 @@ expand_include_directive(const std::string& formatter_name,
 }
 
 std::string path_derivatives_expander::name() const {
-    static std::string name("cpp.expansion.path_derivatives_expander");
-    return name;
+    return static_name();
 }
 
 const std::forward_list<std::string>&

@@ -44,6 +44,12 @@ class path_derivatives_expander
     : public dynamic::expansion::expander_interface {
 
 public:
+    /**
+     * @brief Name as a static function.
+     */
+    static std::string static_name();
+
+public:
     path_derivatives_expander();
     ~path_derivatives_expander() noexcept;
 

@@ -122,7 +122,6 @@ grapher::vertex_for_expander(const std::string& n) {
     const auto r(boost::add_vertex(graph_));
     expander_name_to_vertex_.insert(std::make_pair(n, r));
     BOOST_LOG_SEV(lg, debug) << "Created vertex: " << n;
-
     return r;
 }
 
