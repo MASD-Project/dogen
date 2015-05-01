@@ -277,6 +277,9 @@ private:
 };
 
 <#+
+            /*
+             * Destructor implementation.
+             */
             if (c.is_parent()) {
 #>
 inline <#= c.name() #>::~<#= c.name() #>() noexcept { }
@@ -284,6 +287,9 @@ inline <#= c.name() #>::~<#= c.name() #>() noexcept { }
 <#+
             }
 
+            /*
+             * Global inserter operator implementation
+             */
             if (fa.is_io_enabled() && fa.is_io_integrated()) {
 #>
     std::ostream& operator<<(std::ostream& s, const <#= c.name() #>& v);
@@ -291,21 +297,37 @@ inline <#= c.name() #>::~<#= c.name() #>() noexcept { }
 <#+
             }
 
-            if (!c.is_parent()) {
+            /*
+             * Global equality operator implementation.
+             */
+            if (c.is_parent()) {
 #>
 inline bool operator==(const <#= c.name() #>& lhs, const <#= c.name() #>& rhs) {
     return lhs.equals(rhs);
 }
+
 <#+
             }
-#>
-<#+
         } // snf
-    } // sbf
+
+        if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
 #>
 
-<#+
-    return fa.make_file();
+namespace std {
+
+template<>
+inline void swap(
+    <#= c.qualified_name() #>& lhs,
+    <#= c.qualified_name() #>& rhs) {
+    lhs.swap(rhs);
 }
 
+}
+
+<#+
+        }
+    } // sbf
+
+    return fa.make_file();
+}
 #>

@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-01 Fri 11:41]
+Clock summary at [2015-05-01 Fri 17:23]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *16:21* |       |      |
+| *Total time*                                                             | *16:40* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 16:21 |      |
+| Active                                                                   |         | 16:40 |      |
 | STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
@@ -32,7 +32,7 @@ Clock summary at [2015-05-01 Fri 11:41]
 | COMPLETED Create a formatter helper                                      |         |       | 1:24 |
 | COMPLETED Add =is_final= in SML                                          |         |       | 0:17 |
 | COMPLETED Simplify logic around move construction                        |         |       | 0:06 |
-| STARTED Implement types class header formatter using stitch              |         |       | 5:28 |
+| STARTED Implement types class header formatter using stitch              |         |       | 5:47 |
 | STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
 | STARTED Assignment operator seems to pass types by value                 |         |       | 0:07 |
@@ -368,6 +368,7 @@ We are doing some computations in the template that should be done
 during transformation.
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
     CLOCK: [2015-04-30 Thu 19:11]--[2015-04-30 Thu 19:27] =>  0:16
     CLOCK: [2015-04-30 Thu 19:01]--[2015-04-30 Thu 19:10] =>  0:09
     CLOCK: [2015-04-30 Thu 18:37]--[2015-04-30 Thu 19:00] =>  0:23

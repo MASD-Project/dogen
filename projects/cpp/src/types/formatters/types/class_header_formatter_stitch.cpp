@@ -218,25 +218,49 @@ fa.stream() << "    " << p.type().complete_name() << " " << fa.make_member_varia
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
+            /*
+             * Destructor implementation.
+             */
             if (c.is_parent()) {
 fa.stream() << "inline " << c.name() << "::~" << c.name() << "() noexcept { }" << std::endl;
 fa.stream() << std::endl;
             }
 
+            /*
+             * Global inserter operator implementation
+             */
             if (fa.is_io_enabled() && fa.is_io_integrated()) {
 fa.stream() << "    std::ostream& operator<<(std::ostream& s, const " << c.name() << "& v);" << std::endl;
 fa.stream() << std::endl;
             }
 
-            if (!c.is_parent()) {
+            /*
+             * Global equality operator implementation.
+             */
+            if (c.is_parent()) {
 fa.stream() << "inline bool operator==(const " << c.name() << "& lhs, const " << c.name() << "& rhs) {" << std::endl;
 fa.stream() << "    return lhs.equals(rhs);" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
             }
         } // snf
-    } // sbf
+
+        if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
 fa.stream() << std::endl;
+fa.stream() << "namespace std {" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template<>" << std::endl;
+fa.stream() << "inline void swap(" << std::endl;
+fa.stream() << "    " << c.qualified_name() << "& lhs," << std::endl;
+fa.stream() << "    " << c.qualified_name() << "& rhs) {" << std::endl;
+fa.stream() << "    lhs.swap(rhs);" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+        }
+    } // sbf
+
     return fa.make_file();
 }
-
 } } } }
