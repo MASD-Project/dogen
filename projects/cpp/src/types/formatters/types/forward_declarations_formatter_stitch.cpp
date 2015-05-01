@@ -44,9 +44,9 @@ fa.stream() << std::endl;
 fa.stream() << "class " << fd.name() << ";" << std::endl;
 fa.stream() << std::endl;
             }
-        }
+        } // snf
 fa.stream() << std::endl;
-    }
+    } // sbf
     return fa.make_file();
 }
 

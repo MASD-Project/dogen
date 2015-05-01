@@ -76,7 +76,16 @@ std::forward_list<formatters::file> cpp_backend::override_legacy_files(
     std::unordered_map<std::string, formatters::file> overrides;
     for (const auto& f : new_world) {
         const auto gs(f.path().generic_string());
-        BOOST_LOG_SEV(lg, debug) << "Adding override: " << gs;
+
+        // FIXME: for now some of the formatters are generating blank
+        // files. we do not want these to interfere with the rest so
+        // we skip them.
+        if (gs.empty()) {
+            BOOST_LOG_SEV(lg, debug) << "Ignoring empty override.";
+            continue;
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Adding override: '" << gs << "'";
 
         const auto result(overrides.insert(std::make_pair(gs, f)));
         if (!result.second) {

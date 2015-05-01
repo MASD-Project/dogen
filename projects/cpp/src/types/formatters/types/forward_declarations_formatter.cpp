@@ -104,10 +104,8 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file forward_declarations_formatter::
 format(const formattables::forward_declarations_info& fd) const {
-    BOOST_LOG_SEV(lg, debug) << "Formatting type: " << fd.name();
     formatting_assistant fa(fd, ownership_hierarchy(), file_type());
     const auto r(forward_declarations_formatter_stitch(fa, fd));
-    BOOST_LOG_SEV(lg, debug) << "Formatted type: " << fd.name();
     return r;
 }
 

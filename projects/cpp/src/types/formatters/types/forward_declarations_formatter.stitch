@@ -29,11 +29,11 @@ class <#= fd.name() #>;
 
 <#+
             }
-        }
+        } // snf
 #>
 
 <#+
-    }
+    } // sbf
     return fa.make_file();
 }
 

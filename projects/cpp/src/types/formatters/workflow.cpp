@@ -44,7 +44,24 @@ public:
     ~dispatcher() noexcept { }
 
 private:
-    void log_file_details(const dogen::formatters::file& f) const;
+    template<typename Formatter, typename Entity>
+    void format(const Formatter& f, const Entity& e,
+        const bool skip_push = false) {
+        BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
+                                 << "' with '"
+                                 << f.ownership_hierarchy().formatter_name()
+                                 << "'";
+
+        const auto file(f.format(e));
+
+        if (!skip_push)
+            files_.push_front(file);
+
+        BOOST_LOG_SEV(lg, debug) << "Filename: "
+                                 << file.path().generic_string();
+        BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();
+        BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << e.name() << "'";
+    }
 
 public:
     using formattable_visitor::visit;
@@ -79,36 +96,14 @@ private:
 
 dispatcher::dispatcher(const container& c) : container_(c) { }
 
-void dispatcher::log_file_details(const dogen::formatters::file& f) const {
-    BOOST_LOG_SEV(lg, debug) << "Filename: "
-                             << f.path().generic_string();
-    BOOST_LOG_SEV(lg, debug) << "Content: " << f.content();
-}
-
 void dispatcher::visit(const formattables::class_info& c) {
-    for (const auto f : container_.class_formatters()) {
-        BOOST_LOG_SEV(lg, debug) << "Processing: '" << c.name() << "' with '"
-                                 << f->ownership_hierarchy().formatter_name()
-                                 << "'";
-
-        const auto file(f->format(c));
-        log_file_details(file);
-
-        // FIXME: disabled for now
-        // files_.push_front(file);
-    }
+    for (const auto f : container_.class_formatters())
+        format(*f, c, true/*skip_push*/);
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
-    for (const auto f : container_.forward_declarations_formatters()) {
-        BOOST_LOG_SEV(lg, debug) << "Processing: '" << fd.name() << "' with '"
-                                 << f->ownership_hierarchy().formatter_name()
-                                 << "'";
-
-        const auto file(f->format(fd));
-        log_file_details(file);
-        files_.push_front(file);
-    }
+    for (const auto f : container_.forward_declarations_formatters())
+        format(*f, fd);
 }
 
 void dispatcher::visit(const formattables::enum_info& /*e*/) {

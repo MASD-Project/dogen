@@ -399,6 +399,12 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
             pi.name(qn.simple_name());
             pi.namespaces(b.namespace_list(model_, qn));
 
+            std::list<std::string> ns(pi.namespaces());
+            ns.push_back(pi.name());
+
+            using boost::join;
+            pi.qualified_name(join(ns, namespace_separator));
+
             const auto j(o.inherited_properties().find(qn));
             if (j != o.inherited_properties().end()) {
                 for (const auto& prop : j->second) {

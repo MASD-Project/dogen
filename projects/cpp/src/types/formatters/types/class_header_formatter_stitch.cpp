@@ -36,7 +36,17 @@ dogen::formatters::file class_header_formatter_stitch(
             auto snf(fa.make_scoped_namespace_formatter());
 
 fa.stream() << std::endl;
+            if (c.parents().empty()) {
 fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "{" << std::endl;
+            } else if (c.parents().size() == 1) {
+fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << ": public " << c.parents().front().qualified_name() << " {" << std::endl;
+            } else {
+                int pos(0);
+                for (const auto p : c.parents()) {
+fa.stream() << "    public" << p.qualified_name() << fa.make_parameter_separator_text(c.parents().size(), pos) << std::endl;
+                    ++pos;
+                }
+            }
 fa.stream() << "public:" << std::endl;
             /*
              * Compiler generated constructors and destructors.
@@ -61,6 +71,23 @@ fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "();" << std::endl;
 fa.stream() << std::endl;
             }
+
+            /*
+             * according to MEC++, item 33, base classes should always be
+             * abstract. this avoids all sorts of tricky problems with
+             * assignment and swap.
+             *
+             * incidentally, this also fixes some strange clang errors:
+             * undefined reference to `vtable.
+             */
+            if (c.is_parent()) {
+fa.stream() << "    virtual ~" << c.name() << "() noexcept = 0;" << std::endl;
+fa.stream() << std::endl;
+            } else if (c.parents().size() != 0) {
+fa.stream() << "    virtual ~" << c.name() << "() noexcept { }" << std::endl;
+fa.stream() << std::endl;
+            }
+
             if (c.requires_manual_move_constructor()) {
 fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
@@ -72,7 +99,7 @@ fa.stream() << "public:" << std::endl;
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                     const auto p(*c.all_properties().begin());
-fa.stream() << "    explicit " << c.name() << "(" << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ");" << std::endl;
+fa.stream() << "    explicit " << c.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ");" << std::endl;
                 } else {
 fa.stream() << "    " << c.name() << "(" << std::endl;
                     int pos(0);
@@ -136,6 +163,7 @@ fa.stream() << "public:" << std::endl;
 fa.stream() << "    virtual void to_stream(std::ostream& s) const;" << std::endl;
 fa.stream() << std::endl;
                 } else if (!c.parents().empty()) {
+fa.stream() << "public:" << std::endl;
 fa.stream() << "    void to_stream(std::ostream& s) const override;" << std::endl;
 fa.stream() << std::endl;
                 }
@@ -180,22 +208,27 @@ fa.stream() << "    bool operator==(const " << c.name() << "& rhs) const;" << st
 fa.stream() << "    bool operator!=(const " << c.name() << "& rhs) const {" << std::endl;
 fa.stream() << "        return !this->operator==(rhs);" << std::endl;
 fa.stream() << "    }" << std::endl;
+fa.stream() << std::endl;
             }
 
-            if (c.is_parent() && c.parents().empty()) {
+            if (c.is_parent() || !c.parents().empty()) {
+fa.stream() << "public:" << std::endl;
+                if (c.is_parent() && c.parents().empty()) {
 fa.stream() << "    virtual bool equals(const " << c.name() << "& other) const = 0;" << std::endl;
-            } else if (c.is_parent()) {
+                } else if (c.is_parent()) {
 fa.stream() << "    virtual bool equals(const " << c.original_parent_name_qualified() << "& other) const = 0;" << std::endl;
-            } else if (!c.parents().empty()) {
+                } else if (!c.parents().empty()) {
 fa.stream() << "    bool equals(const " << c.original_parent_name_qualified() << "& other) const override;" << std::endl;
-            }
+                }
 fa.stream() << std::endl;
-            /*
+             }
+
+             /*
              * Swap and assignment.
              *
              * Swap and assignment are only public in leaf classes - MEC++-33
              */
-            if (!c.all_properties().empty() && !c.is_immutable()) {
+            if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
                 if (c.is_parent()) {
 fa.stream() << "protected:" << std::endl;
                 } else {
@@ -205,8 +238,9 @@ fa.stream() << "    void swap(" << c.name() << "& other) noexcept;" << std::endl
                 if (!c.is_parent()) {
 fa.stream() << "    " << c.name() << "& operator=(" << c.name() << " other);" << std::endl;
                 }
-            }
 fa.stream() << std::endl;
+            }
+
             /*
              * Member variables.
              */
@@ -243,7 +277,7 @@ fa.stream() << "    return lhs.equals(rhs);" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
             }
-        } // snf
+        }
 
         if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
 fa.stream() << std::endl;
@@ -257,8 +291,8 @@ fa.stream() << "    lhs.swap(rhs);" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "}" << std::endl;
+        } // snf
 fa.stream() << std::endl;
-        }
     } // sbf
 
     return fa.make_file();

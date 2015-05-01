@@ -149,6 +149,16 @@ provider::provide(const dynamic::schema::repository& rp,
         }
     }
 
+    i = rel.find(sml::relationship_types::parents);
+    if (i != rel.end()) {
+        const auto fn(traits::class_header_formatter_name());
+        for (const auto aqn : i->second) {
+            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
+            if (id2)
+                id.push_back(*id2);
+        }
+    }
+
     return r;
 }
 
@@ -174,10 +184,8 @@ void class_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file
 class_header_formatter::format(const formattables::class_info& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Formatting type: " << c.name();
     formatting_assistant fa(c, ownership_hierarchy(), file_type());
     const auto r(class_header_formatter_stitch(fa, c));
-    BOOST_LOG_SEV(lg, debug) << "Formatted type: " << c.name();
     return r;
 }
 

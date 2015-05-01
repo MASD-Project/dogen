@@ -18,7 +18,25 @@ dogen::formatters::file class_header_formatter_stitch(
 
 #>
 
+<#+
+            if (c.parents().empty()) {
+#>
 class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
+<#+
+            } else if (c.parents().size() == 1) {
+#>
+class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>: public <#= c.parents().front().qualified_name() #> {
+<#+
+            } else {
+                int pos(0);
+                for (const auto p : c.parents()) {
+#>
+    public<#= p.qualified_name() #><#= fa.make_parameter_separator_text(c.parents().size(), pos) #>
+<#+
+                    ++pos;
+                }
+            }
+#>
 public:
 <#+
             /*
@@ -56,8 +74,27 @@ public:
 
 <#+
             }
+
+            /*
+             * according to MEC++, item 33, base classes should always be
+             * abstract. this avoids all sorts of tricky problems with
+             * assignment and swap.
+             *
+             * incidentally, this also fixes some strange clang errors:
+             * undefined reference to `vtable.
+             */
+            if (c.is_parent()) {
 #>
+    virtual ~<#= c.name() #>() noexcept = 0;
+
 <#+
+            } else if (c.parents().size() != 0) {
+#>
+    virtual ~<#= c.name() #>() noexcept { }
+
+<#+
+            }
+
             if (c.requires_manual_move_constructor()) {
 #>
 public:
@@ -74,7 +111,7 @@ public:
                 if (prop_count == 1) {
                     const auto p(*c.all_properties().begin());
 #>
-    explicit <#= c.name() #>(<#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>);
+    explicit <#= c.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>);
 <#+
                 } else {
 #>
@@ -154,6 +191,7 @@ public:
 <#+
                 } else if (!c.parents().empty()) {
 #>
+public:
     void to_stream(std::ostream& s) const override;
 
 <#+
@@ -214,31 +252,38 @@ public:
     bool operator!=(const <#= c.name() #>& rhs) const {
         return !this->operator==(rhs);
     }
+
 <#+
             }
 
-            if (c.is_parent() && c.parents().empty()) {
+            if (c.is_parent() || !c.parents().empty()) {
+#>
+public:
+<#+
+                if (c.is_parent() && c.parents().empty()) {
 #>
     virtual bool equals(const <#= c.name() #>& other) const = 0;
 <#+
-            } else if (c.is_parent()) {
+                } else if (c.is_parent()) {
 #>
     virtual bool equals(const <#= c.original_parent_name_qualified() #>& other) const = 0;
 <#+
-            } else if (!c.parents().empty()) {
+                } else if (!c.parents().empty()) {
 #>
     bool equals(const <#= c.original_parent_name_qualified() #>& other) const override;
 <#+
-            }
+                }
 #>
 
 <#+
-            /*
+             }
+
+             /*
              * Swap and assignment.
              *
              * Swap and assignment are only public in leaf classes - MEC++-33
              */
-            if (!c.all_properties().empty() && !c.is_immutable()) {
+            if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
                 if (c.is_parent()) {
 #>
 protected:
@@ -256,10 +301,11 @@ public:
     <#= c.name() #>& operator=(<#= c.name() #> other);
 <#+
                 }
-            }
 #>
 
 <#+
+            }
+
             /*
              * Member variables.
              */
@@ -308,7 +354,7 @@ inline bool operator==(const <#= c.name() #>& lhs, const <#= c.name() #>& rhs) {
 
 <#+
             }
-        } // snf
+        }
 
         if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
 #>
@@ -323,9 +369,11 @@ inline void swap(
 }
 
 }
+<#+
+        } // snf
+#>
 
 <#+
-        }
     } // sbf
 
     return fa.make_file();
