@@ -25,8 +25,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/indexing_error.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
 
@@ -37,6 +37,7 @@ namespace {
 auto lg(logger_factory("sml.association_indexer"));
 
 const std::string object_not_found("Object not found in object container: ");
+const std::string child_with_no_parents("Object is child but has no parents: ");
 
 }
 
@@ -107,7 +108,7 @@ void association_indexer::recurse_nested_qnames(const model& m,
     }
 }
 
-void association_indexer::index_object(const model& m, object& o) {
+void association_indexer::index_object(const model& m, object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: "
                              << sml::string_converter::convert(o.name());
 
@@ -147,9 +148,36 @@ void association_indexer::index_object(const model& m, object& o) {
     }
 }
 
+std::unordered_map<sml::qname, std::list<sml::qname> > association_indexer::
+obtain_leaves(const model& m) const {
+    std::unordered_map<sml::qname, std::list<sml::qname> > r;
+    for (auto& pair : m.objects()) {
+        auto& o(pair.second);
+
+        // FIXME: massive hack. must not add leafs for services.
+        const auto uds(object_types::user_defined_service);
+        const bool is_service(o.object_type() == uds);
+        if (o.is_parent() || !o.is_child() || is_service)
+            continue;
+
+        using sml::relationship_types;
+        const auto i(o.relationships().find(relationship_types::parents));
+        if (i == o.relationships().end() || i->second.empty()) {
+            const auto n(sml::string_converter::convert(o.name()));
+            BOOST_LOG_SEV(lg, error) << child_with_no_parents << n;
+            BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + n));
+        }
+
+        for (const auto& parent : i->second)
+            r[parent].push_back(o.name());
+    }
+    return r;
+}
+
 void association_indexer::index(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
+    std::unordered_map<sml::qname, std::list<sml::qname> > leaves;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 

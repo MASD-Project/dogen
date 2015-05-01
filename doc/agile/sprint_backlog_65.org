@@ -427,6 +427,22 @@ workflow would then be =sml::augmenting_workflow= perhaps. We should
 also move any activities which are not related to merging into this
 workflow (e.g. injecting of system types, etc).
 
+*** COMPLETED Add support for =disable_complete_constructor= in options copier
+    CLOSED: [2015-05-01 Fri 17:30]
+    CLOCK: [2015-04-29 Wed 15:39]--[2015-04-29 Wed 15:59] =>  0:20
+    CLOCK: [2015-04-29 Wed 14:50]--[2015-04-29 Wed 15:07] =>  0:17
+    CLOCK: [2015-04-28 Tue 23:25]--[2015-04-28 Tue 23:54] =>  0:29
+
+Class header requires =disable_complete_constructor=.
+
+- add field to JSON.
+- update options copier to copy from options
+- implement reading in the type settings factory.
+- type settings cannot be optional as we need to know whether to
+  disable complete constructor.
+- stop passing in settings that can be derived.
+- bump up log file to reveal rest of class.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -455,21 +471,6 @@ To test diff:
 Notes:
 
 - we can't access disable complete constructor option. Figure out how to.
-
-*** STARTED Add support for =disable_complete_constructor= in options copier
-    CLOCK: [2015-04-29 Wed 15:39]--[2015-04-29 Wed 15:59] =>  0:20
-    CLOCK: [2015-04-29 Wed 14:50]--[2015-04-29 Wed 15:07] =>  0:17
-    CLOCK: [2015-04-28 Tue 23:25]--[2015-04-28 Tue 23:54] =>  0:29
-
-Class header requires =disable_complete_constructor=.
-
-- add field to JSON.
-- update options copier to copy from options
-- implement reading in the type settings factory.
-- type settings cannot be optional as we need to know whether to
-  disable complete constructor.
-- stop passing in settings that can be derived.
-- bump up log file to reveal rest of class.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
@@ -508,6 +509,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor SML association indexer                          :story:
+    CLOCK: [2015-05-01 Fri 17:30]--[2015-05-01 Fri 17:51] =>  0:21
     CLOCK: [2015-05-01 Fri 16:50]--[2015-05-01 Fri 17:04] =>  0:14
     CLOCK: [2015-05-01 Fri 16:42]--[2015-05-01 Fri 16:48] =>  0:06
 

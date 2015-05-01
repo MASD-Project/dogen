@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <memory>
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
@@ -90,9 +89,27 @@ private:
         const nested_qname& nqn, bool& is_pointer) const;
 
     /**
+     * @brief Computes all the leaves for all parents.
+     */
+    std::unordered_map<sml::qname, std::list<sml::qname> >
+    obtain_leaves(const model& m) const;
+
+private:
+    /**
      * @brief Indexes a specific object.
      */
-    void index_object(const model& m, object& o);
+    void index_object(const model& m, object& o) const;
+
+private:
+    /**
+     * @brief Handles all relationships other than leaves.
+     */
+    void handle_non_leaves_relationships(model& m) const;
+
+    /**
+     * @brief Hand
+     */
+    void handle_leaves_relationships(model& m) const;
 
 public:
     /**
