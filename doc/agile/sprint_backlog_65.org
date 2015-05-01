@@ -13,14 +13,14 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-01 Fri 17:23]
+Clock summary at [2015-05-01 Fri 17:25]
 
 | Headline                                                                 | Time    |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                             | *16:40* |       |      |
+| *Total time*                                                             | *19:08* |       |      |
 |--------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                   |         | 16:40 |      |
-| STARTED Sprint and product backlog grooming                              |         |       | 2:01 |
+| Active                                                                   |         | 19:08 |      |
+| STARTED Sprint and product backlog grooming                              |         |       | 2:12 |
 | COMPLETED Fix borked gcc build                                           |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                          |         |       | 2:36 |
 | COMPLETED Fix missing new line in enumeration forward declarations       |         |       | 0:32 |
@@ -32,9 +32,12 @@ Clock summary at [2015-05-01 Fri 17:23]
 | COMPLETED Create a formatter helper                                      |         |       | 1:24 |
 | COMPLETED Add =is_final= in SML                                          |         |       | 0:17 |
 | COMPLETED Simplify logic around move construction                        |         |       | 0:06 |
+| COMPLETED Analysis on frontend activities that belong in SML             |         |       | 0:28 |
 | STARTED Implement types class header formatter using stitch              |         |       | 7:03 |
 | STARTED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | STARTED Implement options copier and remove options from context         |         |       | 0:50 |
+| STARTED Refactor SML association indexer                                 |         |       | 0:20 |
+| STARTED Improve references management                                    |         |       | 0:13 |
 | STARTED Assignment operator seems to pass types by value                 |         |       | 0:07 |
 #+end:
 
@@ -368,6 +371,62 @@ make use of it in the formatter.
 We are doing some computations in the template that should be done
 during transformation.
 
+*** COMPLETED Analysis on frontend activities that belong in SML      :story:
+    CLOSED: [2015-05-01 Fri 17:19]
+    CLOCK: [2015-05-01 Fri 16:13]--[2015-05-01 Fri 16:41] =>  0:28
+
+These tasks have been split into their own stories.
+
+*New Understanding*
+
+Actually it seems we need to handle different tasks in different
+classes:
+
+- leaves: this seems like a job for =association_indexer=.
+- inheritance: i.e. setting original parent name and is original
+  parent visitable. In =association_indexer=.
+- model references: should be done as part of the merging process? we
+  need a class to compute model references though ("dependency
+  manager"?). Actually, we could construe this as being associations
+  (relationships between models?). Finally decision: we need a
+  dependency manager. It has two roles: given a partial model,
+  computes all references.
+- identity processing: property indexer (identity is done via
+  properties)
+- containing module: No good place to put this in so create a new
+  class: =module_indexer=.
+
+*Previous Understanding*
+
+This story was spawned from "Refactor Dia to SML transformer". We need
+to create a create a "post-processing" workflow in SML that handles
+some of the work that is currently in Dia to SML. This will make life
+easier in terms of supporting JSON as a fully supported front-end.
+
+Post-processing tasks already identified:
+
+- population of model references: should be distinct step in workflow,
+  after transformation (=update_model_references=).
+- computation of leaves: See  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. 
+- setting original parent name and is original parent visitable;
+  investigate all of the relationship population to see what else
+  applies (e.g. what else is inferrable).
+- identity processing: this should be done as a post-processing step
+  rather than during transformation.
+- containing module: this is not done in Dia to SML at the moment, its
+  only done in JSON hydrator. We are populating containment for the
+  global module in injector though; see
+  add_containing_module_to_non_contained_entities.
+
+We need to look into Dia to SML to see if there are any additional
+tasks that need to be moved across.
+
+As part of this work, we should also rename =sml::workflow= to perhaps
+=sml::merging_workflow= or something along these lines. This new
+workflow would then be =sml::augmenting_workflow= perhaps. We should
+also move any activities which are not related to merging into this
+workflow (e.g. injecting of system types, etc).
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -448,55 +507,51 @@ needs to be done.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
 
-*** STARTED Move a few activities from the frontends to SML           :story:
-    CLOCK: [2015-05-01 Fri 16:13]--[2015-05-01 Fri 16:41] =>  0:28
+*** STARTED Refactor SML association indexer                          :story:
+    CLOCK: [2015-05-01 Fri 16:50]--[2015-05-01 Fri 17:04] =>  0:14
+    CLOCK: [2015-05-01 Fri 16:42]--[2015-05-01 Fri 16:48] =>  0:06
 
-*New Understanding*
+There are a number of tasks that need to be done in association
+indexer:
 
-Actually it seems we need to handle different tasks in different
-classes:
+- remove context, pass model to methods that require it.
+- add leaf processing, original parent processing, etc.
+- add model references; the problem here is that we have already
+  merged. We need to figure out how references are used.
 
-- leaves: this seems like a job for =association_indexer=.
-- inheritance: i.e. setting original parent name and is original
-  parent visitable. In =association_indexer=.
-- model references: should be done as part of the merging process? we
-  need a class to compute model references though ("dependency
-  manager"?).
-- identity processing: property indexer (identity is done via
-  properties)
-- containing module: No good place to put this in so create a new
-  class: =module_indexer=.
+Note:
 
-*Previous Understanding*
+At present in =dia_to_sml::workflow::post_process_model_activity= we
+are post-processing by going through every single object; in reality
+we only need to go through the leaves.
 
-This story was spawned from "Refactor Dia to SML transformer". We need
-to create a create a "post-processing" workflow in SML that handles
-some of the work that is currently in Dia to SML. This will make life
-easier in terms of supporting JSON as a fully supported front-end.
+*** STARTED Improve references management                             :story:
+    CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13
 
-Post-processing tasks already identified:
+At present, we compute model references as follows:
 
-- population of model references: should be distinct step in workflow,
-  after transformation (=update_model_references=).
-- computation of leaves: See  also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#dia-to-sml-workflow-should-post-process-model-by-leaves][this]] ticket. 
-- setting original parent name and is original parent visitable;
-  investigate all of the relationship population to see what else
-  applies (e.g. what else is inferrable).
-- identity processing: this should be done as a post-processing step
-  rather than during transformation.
-- containing module: this is not done in Dia to SML at the moment, its
-  only done in JSON hydrator. We are populating containment for the
-  global module in injector though; see
-  add_containing_module_to_non_contained_entities.
+- in dia to sml we first loop through all types and figure out the
+  distinct model names. This is done by creating a "shallow" qname
+  with just the model name and setting its origin type to unknown.
+- when we merge, we take the references of target - the only ones we
+  care about - and then we check that against the list of the models
+  we are about to merge. If there are any missing models we complain
+  (see comments below). We then loop through the list of references
+  and "resolve" the origin type of the model.
 
-We need to look into Dia to SML to see if there are any additional
-tasks that need to be moved across.
+Note: We could actually also complain if there are too many models, or
+more cleverly avoid merging those models which are not required. Or
+even more cleverly, we could avoid loading them in the first place, if
+only we could load target first.
 
-As part of this work, we should also rename =sml::workflow= to perhaps
-=sml::merging_workflow= or something along these lines. This new
-workflow would then be =sml::augmenting_workflow= perhaps. We should
-also move any activities which are not related to merging into this
-workflow (e.g. injecting of system types, etc).
+A slightly better way of doing this would be:
+
+- in SML create a references updater that takes a model and computes
+  its reference requirements. It could also receive a list of "other"
+  models from which to get their origin types to avoid using =unknown=
+  at all, and checks that all reference requirements have been met.
+- the current step =update_references= is just a call to the
+  references updater, prior to merging, with the target model.
 
 *** STARTED Assignment operator seems to pass types by value          :story:
     CLOCK: [2015-05-01 Fri 11:32]--[2015-05-01 Fri 11:39] =>  0:07
@@ -555,6 +610,16 @@ story in backlog.
 :  
 :      utility_.open_scope();
 :      {
+
+*** Add identity management to =property_indexer=                     :story:
+
+At present we are populating the identity properties in dia to sml. We
+need to move this to property indexer in SML.
+
+*** Create a module indexer                                           :story:
+
+We need to create a class that computes module containment. At present
+this is done in JSON hydrator..
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 

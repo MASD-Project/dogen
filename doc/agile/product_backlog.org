@@ -1156,12 +1156,6 @@ has been done.
 We have a very large blurb in this model that is rather old, and
 reflects a legacy understanding of the role of the C++ model.
 
-*** Dia to SML workflow should post-process model by leaves           :story:
-
-At present in =dia_to_sml::workflow::post_process_model_activity= we
-are post-processing by going through every single object; in reality
-we only need to go through the leaves.
-
 *** Refactor code around model origination                            :story:
 
 In the past we added a number of knobs around generation, all with
