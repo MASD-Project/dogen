@@ -32,7 +32,6 @@
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/dia_to_sml/serialization/context_fwd_ser.hpp"
 
 namespace dogen {
@@ -53,7 +52,6 @@ public:
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
-        const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
         const std::unordered_set<std::string>& top_level_module_names,
         const dogen::sml::model& model);
 
@@ -96,16 +94,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Maps a QName to its corresponding top-most parent in an inheritance tree.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent() const;
-    std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent();
-    void original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v);
-    void original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v);
-    /**@}*/
-
-    /**
      * @brief All modules that sit just below the model.
      */
     /**@{*/
@@ -139,7 +127,6 @@ private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::sml::qname> id_to_qname_;
-    std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
     std::unordered_set<std::string> top_level_module_names_;
     dogen::sml::model model_;
 };

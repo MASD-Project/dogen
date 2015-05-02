@@ -96,24 +96,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace dia_to_sml {
 
@@ -123,7 +105,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
       << "\"id_to_qname\": " << v.id_to_qname() << ", "
-      << "\"original_parent\": " << v.original_parent() << ", "
       << "\"top_level_module_names\": " << v.top_level_module_names() << ", "
       << "\"model\": " << v.model()
       << " }";

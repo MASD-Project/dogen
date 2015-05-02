@@ -50,22 +50,23 @@ private:
      */
     struct generalization_details {
         std::unordered_map<qname, std::list<qname> > leaves;
-        std::unordered_map<qname, qname> original_parent;
+        std::unordered_map<qname, std::list<qname> > original_parents;
     };
 
 private:
     /**
-     * @brief Returns true if type has generalization relationships.
+     * @brief Returns true if type is a leaf type in an inheritance
+     * tree.
      */
-    bool is_in_generalization_relationships(const sml::object& o) const;
+    bool is_leaf(const sml::object& o) const;
 
 private:
     /**
      * @brief Populates the leaves container recursively.
      *
-     * @return original parent of the tree we are recursing into.
+     * @return original parents of the tree we are recursing into.
      */
-    qname recurse_generalization(
+    std::list<qname> recurse_generalization(
         const model& m, const sml::qname& leaf, const sml::object& o,
         generalization_details& d) const;
 

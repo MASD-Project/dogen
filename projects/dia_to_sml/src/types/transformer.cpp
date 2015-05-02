@@ -47,7 +47,6 @@ const std::string empty;
 const std::string unsigned_int("unsigned int");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string empty_package_id("Supplied package id is empty");
-const std::string original_parent_not_found("Object has no original parent: ");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string empty_parent_container(
     "Object has an entry in child to parent container but its empty: ");
@@ -274,41 +273,6 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
     ao.is_parent(j != context_.parent_ids().end());
     ao.is_final(!ao.is_parent());
     context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
-
-    if (!ao.is_child()) {
-        ao.is_inheritance_root(ao.is_parent());
-        context_.original_parent().insert(
-            std::make_pair(ao.name(), ao.name()));
-    } else {
-        using sml::relationship_types;
-        const auto k(ao.relationships().find(relationship_types::parents));
-        if (k == ao.relationships().end() && k->second.empty()) {
-            BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
-                                     << ao.name().simple_name();
-
-            BOOST_THROW_EXCEPTION(
-                transformation_error(parent_not_found +
-                    ao.name().simple_name()));
-        }
-
-        for (const auto& parent_name : k->second) {
-            const auto j(context_.original_parent().find(parent_name));
-            if (j == context_.original_parent().end()) {
-                BOOST_LOG_SEV(lg, error)
-                    << "Could not find the original parent of "
-                    << ao.name().simple_name();
-
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(original_parent_not_found +
-                        ao.name().simple_name()));
-            }
-            context_.original_parent().insert(
-                std::make_pair(ao.name(), j->second));
-            using sml::relationship_types;
-            ao.relationships()[relationship_types::original_parents].push_back(
-                j->second);
-        }
-    }
 
     ao.is_immutable(p.is_immutable());
     if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {

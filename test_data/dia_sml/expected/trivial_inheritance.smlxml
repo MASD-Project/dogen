@@ -807,29 +807,10 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships class_id="32" tracking_level="0" version="0">
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 					<item class_id="33" tracking_level="0" version="0">
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>move_ctor_base</simple_name>
-							</item>
-						</second>
-					</item>
-					<item>
 						<first>2</first>
 						<second>
 							<count>1</count>
@@ -975,29 +956,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg1</item>
-								</module_path>
-								<simple_name>parent</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -1110,28 +1071,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_with_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -1276,28 +1218,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_without_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -1448,7 +1371,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1539,28 +1462,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_with_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -1672,28 +1576,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_without_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -1840,28 +1725,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_outside</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -2006,28 +1872,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_with_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -2176,7 +2023,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2271,7 +2118,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2397,29 +2244,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg2</item>
-								</module_path>
-								<simple_name>parent</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -2565,28 +2392,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>base</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -2735,7 +2543,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2859,28 +2667,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>parent_with_members</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -3028,28 +2817,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>move_ctor_base</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -3355,7 +3125,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3446,28 +3216,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>base</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -3612,28 +3363,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>base</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>2</first>
 						<second>
@@ -3784,7 +3516,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3915,7 +3647,7 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>

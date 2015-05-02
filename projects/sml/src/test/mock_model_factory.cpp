@@ -307,7 +307,6 @@ void parent_to_child(const bool properties_indexed,
     add_relationship(child, original_parent,
         relationship_types::original_parents);
 
-    original_parent.is_inheritance_root(true);
     if (add_leaf_relationship)
         add_relationship(parent, child, relationship_types::leaves);
 

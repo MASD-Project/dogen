@@ -1623,7 +1623,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>1</is_inheritance_root>
+				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1747,29 +1747,10 @@
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>2</count>
+					<count>1</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 					<item class_id="36" tracking_level="0" version="0">
-						<first>1</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>boost_model</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>class_base</simple_name>
-							</item>
-						</second>
-					</item>
-					<item>
 						<first>2</first>
 						<second>
 							<count>1</count>

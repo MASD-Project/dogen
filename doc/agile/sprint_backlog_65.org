@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-02 Sat 20:28]
+Clock summary at [2015-05-02 Sat 22:59]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *23:51* |       |      |
+| *Total time*                                                               | *25:33* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 23:51 |      |
+| Active                                                                     |         | 25:33 |      |
 | STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
@@ -37,9 +37,9 @@ Clock summary at [2015-05-02 Sat 20:28]
 | COMPLETED Try making path expansion a merged model expansion               |         |       | 1:20 |
 | COMPLETED Remove merged and stand alone expansions                         |         |       | 0:13 |
 | COMPLETED Move injection to merging workflow                               |         |       | 0:29 |
+| COMPLETED Refactor SML association indexer                                 |         |       | 4:43 |
 | STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
-| STARTED Refactor SML association indexer                                   |         |       | 3:01 |
 | STARTED Improve references management                                      |         |       | 0:13 |
 | STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
 #+end:
@@ -499,6 +499,39 @@ At present we are performing injection in the partial model. There
 doesn't seem to be any good reason for this. Try moving it to the
 merged model and see what breaks.
 
+*** COMPLETED Refactor SML association indexer                        :story:
+    CLOSED: [2015-05-02 Sat 22:59]
+    CLOCK: [2015-05-02 Sat 22:19]--[2015-05-02 Sat 22:59] =>  0:40
+    CLOCK: [2015-05-02 Sat 20:28]--[2015-05-02 Sat 21:30] =>  1:02
+    CLOCK: [2015-05-02 Sat 19:51]--[2015-05-02 Sat 20:28] =>  0:37
+    CLOCK: [2015-05-02 Sat 19:34]--[2015-05-02 Sat 19:50] =>  0:16
+    CLOCK: [2015-05-02 Sat 16:42]--[2015-05-02 Sat 17:34] =>  0:52
+    CLOCK: [2015-05-01 Fri 21:34]--[2015-05-01 Fri 22:09] =>  0:35
+    CLOCK: [2015-05-01 Fri 17:30]--[2015-05-01 Fri 17:51] =>  0:21
+    CLOCK: [2015-05-01 Fri 16:50]--[2015-05-01 Fri 17:04] =>  0:14
+    CLOCK: [2015-05-01 Fri 16:42]--[2015-05-01 Fri 16:48] =>  0:06
+
+There are a number of tasks that need to be done in association
+indexer:
+
+- remove context, pass model to methods that require it.
+- add leaf processing, original parent processing, etc.
+- add model references; the problem here is that we have already
+  merged. We need to figure out how references are used.
+
+Note:
+
+At present in =dia_to_sml::workflow::post_process_model_activity= we
+are post-processing by going through every single object; in reality
+we only need to go through the leaves.
+
+We've hit another difficulty. In order to inject we need to have
+leaves already generated; but in order to index the associations we
+need to have injected system types (as we may have associations
+against a system type). The only way to solve this is to break out
+leaves from associations. We could have a two stage association
+indexing: leaves and all other relationships.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -563,36 +596,6 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
-
-*** STARTED Refactor SML association indexer                          :story:
-    CLOCK: [2015-05-02 Sat 19:51]--[2015-05-02 Sat 20:28] =>  0:37
-    CLOCK: [2015-05-02 Sat 19:34]--[2015-05-02 Sat 19:50] =>  0:16
-    CLOCK: [2015-05-02 Sat 16:42]--[2015-05-02 Sat 17:34] =>  0:52
-    CLOCK: [2015-05-01 Fri 21:34]--[2015-05-01 Fri 22:09] =>  0:35
-    CLOCK: [2015-05-01 Fri 17:30]--[2015-05-01 Fri 17:51] =>  0:21
-    CLOCK: [2015-05-01 Fri 16:50]--[2015-05-01 Fri 17:04] =>  0:14
-    CLOCK: [2015-05-01 Fri 16:42]--[2015-05-01 Fri 16:48] =>  0:06
-
-There are a number of tasks that need to be done in association
-indexer:
-
-- remove context, pass model to methods that require it.
-- add leaf processing, original parent processing, etc.
-- add model references; the problem here is that we have already
-  merged. We need to figure out how references are used.
-
-Note:
-
-At present in =dia_to_sml::workflow::post_process_model_activity= we
-are post-processing by going through every single object; in reality
-we only need to go through the leaves.
-
-We've hit another difficulty. In order to inject we need to have
-leaves already generated; but in order to index the associations we
-need to have injected system types (as we may have associations
-against a system type). The only way to solve this is to break out
-leaves from associations. We could have a two stage association
-indexing: leaves and all other relationships.
 
 *** STARTED Improve references management                             :story:
     CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13

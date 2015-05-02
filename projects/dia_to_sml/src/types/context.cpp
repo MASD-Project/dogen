@@ -27,13 +27,11 @@ context::context(
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
-    const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
     const std::unordered_set<std::string>& top_level_module_names,
     const dogen::sml::model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
       parent_ids_(parent_ids),
       id_to_qname_(id_to_qname),
-      original_parent_(original_parent),
       top_level_module_names_(top_level_module_names),
       model_(model) { }
 
@@ -42,7 +40,6 @@ void context::swap(context& other) noexcept {
     swap(child_id_to_parent_ids_, other.child_id_to_parent_ids_);
     swap(parent_ids_, other.parent_ids_);
     swap(id_to_qname_, other.id_to_qname_);
-    swap(original_parent_, other.original_parent_);
     swap(top_level_module_names_, other.top_level_module_names_);
     swap(model_, other.model_);
 }
@@ -51,7 +48,6 @@ bool context::operator==(const context& rhs) const {
     return child_id_to_parent_ids_ == rhs.child_id_to_parent_ids_ &&
         parent_ids_ == rhs.parent_ids_ &&
         id_to_qname_ == rhs.id_to_qname_ &&
-        original_parent_ == rhs.original_parent_ &&
         top_level_module_names_ == rhs.top_level_module_names_ &&
         model_ == rhs.model_;
 }
@@ -108,22 +104,6 @@ void context::id_to_qname(const std::unordered_map<std::string, dogen::sml::qnam
 
 void context::id_to_qname(const std::unordered_map<std::string, dogen::sml::qname>&& v) {
     id_to_qname_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& context::original_parent() const {
-    return original_parent_;
-}
-
-std::unordered_map<dogen::sml::qname, dogen::sml::qname>& context::original_parent() {
-    return original_parent_;
-}
-
-void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& v) {
-    original_parent_ = v;
-}
-
-void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v) {
-    original_parent_ = std::move(v);
 }
 
 const std::unordered_set<std::string>& context::top_level_module_names() const {
