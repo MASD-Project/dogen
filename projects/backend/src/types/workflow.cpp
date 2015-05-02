@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/consumption_workflow.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/workflow.hpp"
 

@@ -532,6 +532,17 @@ against a system type). The only way to solve this is to break out
 leaves from associations. We could have a two stage association
 indexing: leaves and all other relationships.
 
+*** COMPLETED Tidy-up sml consumer interface                          :story:
+    CLOSED: [2015-05-02 Sat 23:42]
+    CLOCK: [2015-05-02 Sat 23:30]--[2015-05-02 Sat 23:42] =>  0:12
+
+After implementing the includes for the class header formatter we
+should figure out if we need the multiple passes machinery. Most
+likely all of that should be scraped.
+
+Actually do we even need the consumption workflow at all. At present
+no one seems to be using it. If so remove it and associated classes.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -737,12 +748,6 @@ We need to ignore empty expressions.
 
 We need to figure out if we need this enumeration in =cpp::formatters=
 and if not remove it.
-
-*** Tidy-up sml consumer interface                                    :story:
-
-After implementing the includes for the class header formatter we
-should figure out if we need the multiple passes machinery. Most
-likely all of that should be scraped.
 
 *** Remove =cpp_formatters::formatting_error=                         :story:
 
