@@ -54,7 +54,6 @@ public:
         const std::unordered_set<std::string>& parent_ids,
         const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
         const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
-        const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
         const std::unordered_set<std::string>& top_level_module_names,
         const dogen::sml::model& model);
 
@@ -107,16 +106,6 @@ public:
     /**@}*/
 
     /**
-     * @brief All outermost derived objects in an inheritance tree.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves() const;
-    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves();
-    void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v);
-    void leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v);
-    /**@}*/
-
-    /**
      * @brief All modules that sit just below the model.
      */
     /**@{*/
@@ -151,7 +140,6 @@ private:
     std::unordered_set<std::string> parent_ids_;
     std::unordered_map<std::string, dogen::sml::qname> id_to_qname_;
     std::unordered_map<dogen::sml::qname, dogen::sml::qname> original_parent_;
-    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > leaves_;
     std::unordered_set<std::string> top_level_module_names_;
     dogen::sml::model model_;
 };

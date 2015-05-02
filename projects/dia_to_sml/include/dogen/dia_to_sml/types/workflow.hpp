@@ -85,11 +85,6 @@ private:
      */
     void graph_to_context_activity(const graph_type& g);
 
-    /**
-     * @brief Performs any required post-processing to the SML model.
-     */
-    void post_process_model_activity();
-
 public:
     sml::model execute(const dia::diagram& diagram,
         const std::string& model_name,

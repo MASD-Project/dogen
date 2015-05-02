@@ -74,23 +74,6 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(const 
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_sml_qname(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -103,7 +86,6 @@ std::size_t context_hasher::hash(const context&v) {
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
     combine(seed, hash_std_unordered_map_std_string_dogen_sml_qname(v.id_to_qname()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_qname(v.original_parent()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(v.leaves()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));
     combine(seed, v.model());
 

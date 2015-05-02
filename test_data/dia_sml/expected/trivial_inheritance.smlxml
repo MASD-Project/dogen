@@ -48,156 +48,9 @@
 		</item>
 	</references>
 	<leaves class_id="14" tracking_level="0" version="0">
-		<count>12</count>
-		<bucket_count>23</bucket_count>
+		<count>0</count>
+		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>move_ctor_empty_descendant</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>child_without_members</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>second_child_without_members</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>child_of_a_child2</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>child_with_members</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>child_of_a_child1</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>pkg4</item>
-			</module_path>
-			<simple_name>child</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>move_ctor_descendant</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>pkg3</item>
-			</module_path>
-			<simple_name>child</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>descendant2</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>descendant3</simple_name>
-		</item>
-		<item>
-			<model_name>trivial_inheritance</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>pkg1</item>
-			</module_path>
-			<simple_name>child</simple_name>
-		</item>
 	</leaves>
 	<modules class_id="15" tracking_level="0" version="0">
 		<count>5</count>
@@ -1591,29 +1444,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg3</item>
-								</module_path>
-								<simple_name>child</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -2339,52 +2172,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>3</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>second_child_without_members</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_of_a_child1</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_of_a_child2</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -2477,40 +2267,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>2</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_without_members</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_with_members</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -2972,29 +2731,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg4</item>
-								</module_path>
-								<simple_name>child</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -3120,40 +2859,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>3</count>
+					<count>2</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>2</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_of_a_child1</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>child_of_a_child2</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>1</first>
 						<second>
@@ -3643,40 +3351,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>2</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>descendant2</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>descendant3</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -3769,28 +3446,9 @@ in the context of inheritance.
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>3</count>
+					<count>2</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>descendant3</simple_name>
-							</item>
-						</second>
-					</item>
 					<item>
 						<first>1</first>
 						<second>
@@ -4122,29 +3780,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg1</item>
-								</module_path>
-								<simple_name>child</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -4273,40 +3911,9 @@ in the context of inheritance.
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
-						<first>5</first>
-						<second>
-							<count>2</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>move_ctor_descendant</simple_name>
-							</item>
-							<item>
-								<model_name>trivial_inheritance</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>move_ctor_empty_descendant</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>

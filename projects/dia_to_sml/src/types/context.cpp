@@ -28,14 +28,12 @@ context::context(
     const std::unordered_set<std::string>& parent_ids,
     const std::unordered_map<std::string, dogen::sml::qname>& id_to_qname,
     const std::unordered_map<dogen::sml::qname, dogen::sml::qname>& original_parent,
-    const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& leaves,
     const std::unordered_set<std::string>& top_level_module_names,
     const dogen::sml::model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
       parent_ids_(parent_ids),
       id_to_qname_(id_to_qname),
       original_parent_(original_parent),
-      leaves_(leaves),
       top_level_module_names_(top_level_module_names),
       model_(model) { }
 
@@ -45,7 +43,6 @@ void context::swap(context& other) noexcept {
     swap(parent_ids_, other.parent_ids_);
     swap(id_to_qname_, other.id_to_qname_);
     swap(original_parent_, other.original_parent_);
-    swap(leaves_, other.leaves_);
     swap(top_level_module_names_, other.top_level_module_names_);
     swap(model_, other.model_);
 }
@@ -55,7 +52,6 @@ bool context::operator==(const context& rhs) const {
         parent_ids_ == rhs.parent_ids_ &&
         id_to_qname_ == rhs.id_to_qname_ &&
         original_parent_ == rhs.original_parent_ &&
-        leaves_ == rhs.leaves_ &&
         top_level_module_names_ == rhs.top_level_module_names_ &&
         model_ == rhs.model_;
 }
@@ -128,22 +124,6 @@ void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen:
 
 void context::original_parent(const std::unordered_map<dogen::sml::qname, dogen::sml::qname>&& v) {
     original_parent_ = std::move(v);
-}
-
-const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& context::leaves() const {
-    return leaves_;
-}
-
-std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& context::leaves() {
-    return leaves_;
-}
-
-void context::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >& v) {
-    leaves_ = v;
-}
-
-void context::leaves(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> >&& v) {
-    leaves_ = std::move(v);
 }
 
 const std::unordered_set<std::string>& context::top_level_module_names() const {

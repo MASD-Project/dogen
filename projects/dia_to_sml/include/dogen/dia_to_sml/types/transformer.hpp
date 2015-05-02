@@ -180,11 +180,6 @@ private:
     }
 
     /**
-     * @brief Populates the leaves container recursively.
-     */
-    void add_leaf(const sml::qname& leaf, const sml::object& ao);
-
-    /**
      * @brief Update the SML abstract object using the processed
      * object and the profile.
      */

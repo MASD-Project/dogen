@@ -48,21 +48,9 @@
 		</item>
 	</references>
 	<leaves class_id="14" tracking_level="0" version="0">
-		<count>1</count>
+		<count>0</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item>
-			<model_name>std_model</model_name>
-			<external_module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_module_path>
-			<module_path>
-				<count>0</count>
-				<item_version>0</item_version>
-			</module_path>
-			<simple_name>derived</simple_name>
-		</item>
 	</leaves>
 	<modules class_id="15" tracking_level="0" version="0">
 		<count>2</count>
@@ -2017,28 +2005,9 @@
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
 				<relationships>
-					<count>1</count>
+					<count>0</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="36" tracking_level="0" version="0">
-						<first>5</first>
-						<second>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>
-								<model_name>std_model</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>derived</simple_name>
-							</item>
-						</second>
-					</item>
 				</relationships>
 				<is_inheritance_root>1</is_inheritance_root>
 				<object_type>8</object_type>
@@ -4377,7 +4346,7 @@
 					<count>2</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item>
+					<item class_id="36" tracking_level="0" version="0">
 						<first>1</first>
 						<second>
 							<count>1</count>

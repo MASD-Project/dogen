@@ -76,22 +76,6 @@ std::unordered_map<dogen::sml::qname, dogen::sml::qname> create_std_unordered_ma
     return r;
 }
 
-std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
-    std::list<dogen::sml::qname> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_sml_qname(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, std::list<dogen::sml::qname> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_list_dogen_sml_qname(position + i)));
-    }
-    return r;
-}
-
 dogen::sml::model
 create_dogen_sml_model(const unsigned int position) {
     return dogen::sml::model_generator::create(position);
@@ -110,9 +94,8 @@ populate(const unsigned int position, result_type& v) {
     v.parent_ids(create_std_unordered_set_std_string(position + 1));
     v.id_to_qname(create_std_unordered_map_std_string_dogen_sml_qname(position + 2));
     v.original_parent(create_std_unordered_map_dogen_sml_qname_dogen_sml_qname(position + 3));
-    v.leaves(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_qname_(position + 4));
-    v.top_level_module_names(create_std_unordered_set_std_string(position + 5));
-    v.model(create_dogen_sml_model(position + 6));
+    v.top_level_module_names(create_std_unordered_set_std_string(position + 4));
+    v.model(create_dogen_sml_model(position + 5));
 }
 
 context_generator::result_type

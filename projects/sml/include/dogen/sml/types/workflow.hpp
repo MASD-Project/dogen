@@ -57,6 +57,11 @@ private:
     model create_merged_model_activity(const std::list<model>& models) const;
 
     /**
+     * @brief Index leaves.
+     */
+    void index_leaves_relationships_activity(model& merged_model) const;
+
+    /**
      * @brief Injects system types into the model.
      */
     void inject_system_types_activity(sml::model& m) const;
@@ -77,9 +82,9 @@ private:
     void index_properties_activity(model& merged_model) const;
 
     /**
-     * @brief Index all associations of all objects in model.
+     * @brief Index all relationships that are not leaves related.
      */
-    void index_associations_activity(model& merged_model) const;
+    void index_non_leaves_relationships_activity(model& merged_model) const;
 
     /**
      * @brief Determines if the type has generatable types or not and

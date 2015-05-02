@@ -78,8 +78,8 @@ private:
      * somewhere else, if any.
      */
     void remove_duplicates(std::list<qname>& names,
-        std::unordered_set<sml::qname> processed =
-        std::unordered_set<sml::qname>()) const;
+        std::unordered_set<qname> processed =
+        std::unordered_set<qname>()) const;
 
     /**
      * @brief Iterates through the nested qname recursively, picking
@@ -89,10 +89,22 @@ private:
         const nested_qname& nqn, bool& is_pointer) const;
 
     /**
+     * @brief Populates the leaves container recursively.
+     */
+    void add_leaf(const model& m, const sml::qname& leaf, const sml::object& o,
+        std::unordered_map<qname, std::list<qname> >& leaves) const;
+
+    /**
      * @brief Computes all the leaves for all parents.
      */
-    std::unordered_map<sml::qname, std::list<sml::qname> >
+    std::unordered_map<qname, std::list<qname> >
     obtain_leaves(const model& m) const;
+
+    /**
+     * @brief Populates the leaves replationships.
+     */
+    void populate_leaves(const std::unordered_map<qname, std::list<qname> >&
+        leaves, model& m) const;
 
 private:
     /**
@@ -100,22 +112,16 @@ private:
      */
     void index_object(const model& m, object& o) const;
 
-private:
+public:
+    /**
+     * @brief Indexes the leaves for this model.
+     */
+    void index_leaves(model& m) const;
+
     /**
      * @brief Handles all relationships other than leaves.
      */
-    void handle_non_leaves_relationships(model& m) const;
-
-    /**
-     * @brief Hand
-     */
-    void handle_leaves_relationships(model& m) const;
-
-public:
-    /**
-     * @brief Indexes all objects in the model.
-     */
-    void index(model& m);
+    void index_non_leaves_relationships(model& m) const;
 };
 
 } }

@@ -75,6 +75,12 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
+
+void workflow::index_leaves_relationships_activity(model& merged_model) const {
+    association_indexer indexer;
+    indexer.index_leaves(merged_model);
+}
+
 void workflow::inject_system_types_activity(sml::model& m) const {
     sml::injector i;
     i.inject(m);
@@ -95,9 +101,10 @@ void workflow::index_properties_activity(model& merged_model) const {
     indexer.index(merged_model);
 }
 
-void workflow::index_associations_activity(model& merged_model) const {
+void workflow::
+index_non_leaves_relationships_activity(model& merged_model) const {
     association_indexer indexer;
-    indexer.index(merged_model);
+    indexer.index_non_leaves_relationships(merged_model);
 }
 
 void workflow::update_model_generability_activity(model& merged_model) const {
@@ -108,11 +115,12 @@ model workflow::execute(std::list<model> models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting SML workflow.";
 
     auto r(create_merged_model_activity(models));
+    index_leaves_relationships_activity(r);
     inject_system_types_activity(r);
     resolve_types_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
-    index_associations_activity(r);
+    index_non_leaves_relationships_activity(r);
     update_model_generability_activity(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished SML workflow.";

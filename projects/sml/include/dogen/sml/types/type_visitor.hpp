@@ -38,13 +38,13 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::sml::primitive
+     * @brief Accept visits for type dogen::sml::object
      */
     /**@{*/
-    virtual void visit(const dogen::sml::primitive&) const { }
-    virtual void visit(const dogen::sml::primitive&) { }
-    virtual void visit(dogen::sml::primitive&) const { }
-    virtual void visit(dogen::sml::primitive&) { }
+    virtual void visit(const dogen::sml::object&) const { }
+    virtual void visit(const dogen::sml::object&) { }
+    virtual void visit(dogen::sml::object&) const { }
+    virtual void visit(dogen::sml::object&) { }
     /**@}*/
 
     /**
@@ -58,13 +58,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::sml::object
+     * @brief Accept visits for type dogen::sml::primitive
      */
     /**@{*/
-    virtual void visit(const dogen::sml::object&) const { }
-    virtual void visit(const dogen::sml::object&) { }
-    virtual void visit(dogen::sml::object&) const { }
-    virtual void visit(dogen::sml::object&) { }
+    virtual void visit(const dogen::sml::primitive&) const { }
+    virtual void visit(const dogen::sml::primitive&) { }
+    virtual void visit(dogen::sml::primitive&) const { }
+    virtual void visit(dogen::sml::primitive&) { }
     /**@}*/
 };
 

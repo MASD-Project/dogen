@@ -134,30 +134,12 @@ void workflow::graph_to_context_activity(const graph_type& g) {
     boost::depth_first_search(g, boost::visitor(v));
 }
 
-void workflow::post_process_model_activity() {
-    for (auto& pair : context_.model().objects()) {
-        auto i(context_.leaves().find(pair.first));
-        if (i == context_.leaves().end())
-            continue;
-
-        // for every base (abstract) type which has concrete
-        // implementations (leafs), find them and add them to the type
-        // itself; then add each leaf type to the model's leaf
-        // container.
-        using sml::relationship_types;
-        pair.second.relationships()[relationship_types::leaves] = i->second;
-        for (const auto& j : i->second)
-            context_.model().leaves().insert(j);
-    }
-}
-
 sml::model workflow::execute(const dia::diagram& diagram,
     const std::string& model_name, const std::string& external_module_path,
     bool is_target) {
 
     initialise_context_activity(model_name, external_module_path, is_target);
     graph_to_context_activity(generate_graph_activity(diagram));
-    post_process_model_activity();
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << context_.model();
     return context_.model();

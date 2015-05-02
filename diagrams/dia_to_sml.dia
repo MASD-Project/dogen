@@ -940,7 +940,7 @@ into its SML representation.#</dia:string>
         <dia:point val="101,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,5.95;131.965,13.65"/>
+        <dia:rectangle val="100.95,5.95;131.965,12.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="101,6"/>
@@ -949,7 +949,7 @@ into its SML representation.#</dia:string>
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.5999999999999996"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -1120,29 +1120,6 @@ into its SML representation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Maps a QName to its corresponding top-most parent in an inheritance tree.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#leaves#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,std::list&lt;sml::qname&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All outermost derived objects in an inheritance tree.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1496,7 +1473,7 @@ into its SML representation.#</dia:string>
         <dia:point val="94.835,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.085,13.55;116.657,24.8"/>
+        <dia:rectangle val="94.085,12.75;116.657,24.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1505,7 +1482,7 @@ into its SML representation.#</dia:string>
         <dia:point val="94.835,24"/>
         <dia:point val="94.835,18"/>
         <dia:point val="116.457,18"/>
-        <dia:point val="116.457,13.6"/>
+        <dia:point val="116.457,12.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

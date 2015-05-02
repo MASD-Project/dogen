@@ -212,35 +212,6 @@ sml::enumerator transformer::to_enumerator(const processed_property& p,
     return r;
 }
 
-void transformer::add_leaf(const sml::qname& leaf, const sml::object& ao) {
-    using sml::generation_types;
-
-    if (!ao.is_child())
-        return;
-
-    using sml::relationship_types;
-    const auto i(ao.relationships().find(relationship_types::parents));
-    if (i == ao.relationships().end() || i->second.empty()) {
-        BOOST_LOG_SEV(lg, error) << "Object is child but has no parents "
-                                 << ao.name().simple_name();
-
-        BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
-                ao.name().simple_name()));
-    }
-
-    for (const auto& parent : i->second) {
-        auto k(context_.model().objects().find(parent));
-        if (k == context_.model().objects().end()) {
-            BOOST_LOG_SEV(lg, error) << "Could not find the parent of "
-                                     << parent.simple_name();
-            BOOST_THROW_EXCEPTION(transformation_error(parent_not_found +
-                    parent.simple_name()));
-        }
-        add_leaf(leaf, k->second);
-        context_.leaves()[parent].push_back(leaf);
-    }
-}
-
 void transformer::
 update_object(sml::object& ao, const processed_object& o, const profile& p) {
 
@@ -338,12 +309,6 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
                 j->second);
         }
     }
-
-    // FIXME: massive hack. must not add leafs for services.
-    const bool is_service(ao.object_type() ==
-        sml::object_types::user_defined_service);
-    if (!ao.is_parent() && ao.is_child() && !is_service)
-        add_leaf(ao.name(), ao);
 
     ao.is_immutable(p.is_immutable());
     if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {

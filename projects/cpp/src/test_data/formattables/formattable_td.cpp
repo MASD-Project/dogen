@@ -57,27 +57,27 @@ populate(const unsigned int position, result_type& v) {
 formattable_generator::result_type*
 formattable_generator::create_ptr(const unsigned int position) {
     if ((position % 12) == 0)
-        return dogen::cpp::formattables::cmakelists_info_generator::create_ptr(position);
-    if ((position % 12) == 1)
-        return dogen::cpp::formattables::enum_info_generator::create_ptr(position);
-    if ((position % 12) == 2)
-        return dogen::cpp::formattables::exception_info_generator::create_ptr(position);
-    if ((position % 12) == 3)
-        return dogen::cpp::formattables::registrar_info_generator::create_ptr(position);
-    if ((position % 12) == 4)
-        return dogen::cpp::formattables::odb_options_info_generator::create_ptr(position);
-    if ((position % 12) == 5)
         return dogen::cpp::formattables::namespace_info_generator::create_ptr(position);
-    if ((position % 12) == 6)
+    if ((position % 12) == 1)
+        return dogen::cpp::formattables::cmakelists_info_generator::create_ptr(position);
+    if ((position % 12) == 2)
         return dogen::cpp::formattables::visitor_info_generator::create_ptr(position);
-    if ((position % 12) == 7)
-        return dogen::cpp::formattables::new_class_info_generator::create_ptr(position);
-    if ((position % 12) == 8)
+    if ((position % 12) == 3)
+        return dogen::cpp::formattables::concept_info_generator::create_ptr(position);
+    if ((position % 12) == 4)
         return dogen::cpp::formattables::includers_info_generator::create_ptr(position);
+    if ((position % 12) == 5)
+        return dogen::cpp::formattables::registrar_info_generator::create_ptr(position);
+    if ((position % 12) == 6)
+        return dogen::cpp::formattables::exception_info_generator::create_ptr(position);
+    if ((position % 12) == 7)
+        return dogen::cpp::formattables::enum_info_generator::create_ptr(position);
+    if ((position % 12) == 8)
+        return dogen::cpp::formattables::odb_options_info_generator::create_ptr(position);
     if ((position % 12) == 9)
         return dogen::cpp::formattables::forward_declarations_info_generator::create_ptr(position);
     if ((position % 12) == 10)
-        return dogen::cpp::formattables::concept_info_generator::create_ptr(position);
+        return dogen::cpp::formattables::new_class_info_generator::create_ptr(position);
     if ((position % 12) == 11)
         return dogen::cpp::formattables::primitive_info_generator::create_ptr(position);
     return dogen::cpp::formattables::class_info_generator::create_ptr(position);
