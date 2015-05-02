@@ -27,6 +27,7 @@
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
+#include "dogen/sml/types/generalization_indexer.hpp"
 #include "dogen/sml/types/workflow.hpp"
 
 using namespace dogen::utility::log;
@@ -76,9 +77,9 @@ create_merged_model_activity(const std::list<model>& models) const {
 }
 
 
-void workflow::index_leaves_relationships_activity(model& merged_model) const {
-    association_indexer indexer;
-    indexer.index_leaves(merged_model);
+void workflow::index_generalizations_activity(model& merged_model) const {
+    generalization_indexer idx;
+    idx.index(merged_model);
 }
 
 void workflow::inject_system_types_activity(sml::model& m) const {
@@ -92,19 +93,18 @@ void workflow::resolve_types_activity(model& merged_model) const {
 }
 
 void workflow::index_concepts_activity(model& merged_model) const {
-    concept_indexer indexer;
-    indexer.index(merged_model);
+    concept_indexer idx;
+    idx.index(merged_model);
 }
 
 void workflow::index_properties_activity(model& merged_model) const {
-    property_indexer indexer;
-    indexer.index(merged_model);
+    property_indexer idx;
+    idx.index(merged_model);
 }
 
-void workflow::
-index_non_leaves_relationships_activity(model& merged_model) const {
-    association_indexer indexer;
-    indexer.index_non_leaves_relationships(merged_model);
+void workflow::index_associations_activity(model& merged_model) const {
+    association_indexer idx;
+    idx.index(merged_model);
 }
 
 void workflow::update_model_generability_activity(model& merged_model) const {
@@ -115,12 +115,12 @@ model workflow::execute(std::list<model> models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting SML workflow.";
 
     auto r(create_merged_model_activity(models));
-    index_leaves_relationships_activity(r);
+    index_generalizations_activity(r);
     inject_system_types_activity(r);
     resolve_types_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
-    index_non_leaves_relationships_activity(r);
+    index_associations_activity(r);
     update_model_generability_activity(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished SML workflow.";

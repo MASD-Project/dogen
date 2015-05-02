@@ -63,4 +63,5 @@
 #include "dogen/sml/types/association_indexer.hpp"
 #include "dogen/sml/types/consumption_workflow.hpp"
 #include "dogen/sml/types/nested_qname_builder.hpp"
+#include "dogen/sml/types/generalization_indexer.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"

@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-02 Sat 19:50]
+Clock summary at [2015-05-02 Sat 20:28]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *23:14* |       |      |
+| *Total time*                                                               | *23:51* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 23:14 |      |
+| Active                                                                     |         | 23:51 |      |
 | STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
@@ -39,7 +39,7 @@ Clock summary at [2015-05-02 Sat 19:50]
 | COMPLETED Move injection to merging workflow                               |         |       | 0:29 |
 | STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
-| STARTED Refactor SML association indexer                                   |         |       | 2:24 |
+| STARTED Refactor SML association indexer                                   |         |       | 3:01 |
 | STARTED Improve references management                                      |         |       | 0:13 |
 | STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
 #+end:
@@ -565,6 +565,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor SML association indexer                          :story:
+    CLOCK: [2015-05-02 Sat 19:51]--[2015-05-02 Sat 20:28] =>  0:37
     CLOCK: [2015-05-02 Sat 19:34]--[2015-05-02 Sat 19:50] =>  0:16
     CLOCK: [2015-05-02 Sat 16:42]--[2015-05-02 Sat 17:34] =>  0:52
     CLOCK: [2015-05-01 Fri 21:34]--[2015-05-01 Fri 22:09] =>  0:35

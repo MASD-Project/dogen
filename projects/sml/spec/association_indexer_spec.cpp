@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_association_indexer) {
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     dogen::sml::association_indexer i;
-    i.index_non_leaves_relationships(a);
+    i.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_properties_is_untouched_by_as
     BOOST_REQUIRE(a.objects().size() == 1);
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(a);
+    ind.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_property_results_in_expected_indices) 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_association_index
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << a;
 
     dogen::sml::association_indexer i;
-    i.index_non_leaves_relationships(a);
+    i.index(a);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -244,7 +244,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -313,7 +313,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_single_parameter_resu
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_multiple_parameters_r
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -379,7 +379,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_operation_with_return_type_results_i
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     using dogen::sml::relationship_types;
@@ -417,7 +417,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -488,7 +488,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
     BOOST_REQUIRE(m.objects().size() == 2);
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     for (const auto& pair : m.objects()) {
         const auto& qn(pair.first);
@@ -526,7 +526,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_property_throws) {
     dogen::sml::association_indexer i;
     using dogen::sml::indexing_error;
     contains_checker<indexing_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(i.index_non_leaves_relationships(m), indexing_error, c);
+    BOOST_CHECK_EXCEPTION(i.index(m), indexing_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) {
@@ -538,7 +538,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices) 
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     bool found(false);
@@ -581,7 +581,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
 
     bool found(false);
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
@@ -630,7 +630,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     bool found(false);
@@ -669,7 +669,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
 
     bool found(false);
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {
@@ -709,7 +709,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
 
     bool found(false);
     dogen::sml::association_indexer ind;
-    ind.index_non_leaves_relationships(m);
+    ind.index(m);
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.objects()) {

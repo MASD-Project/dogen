@@ -29,6 +29,7 @@
 #include <unordered_set>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 
@@ -39,11 +40,9 @@ namespace sml {
  * @brief Information indexer that specialises in indexing
  * associations for objects.
  *
- * @section sml_association_indexer_0 Model requirements
+ * @section sml_association_indexer_0 Requirements
  *
- * The association indexer expects to receive a partial model such as
- * ones coming straight out of Dia to SML transformation. The indexing
- * of properties is expected to have taken place.
+ * The indexing of properties is expected to have taken place.
  *
  * @section sml_property_indexer_1 Indexing Process
  *
@@ -52,8 +51,8 @@ namespace sml {
  * their presence.
  *
  * Associations are of two types: @e regular or @e pointer. This
- distinction is required due to the usage of the association at code
- generation time.
+ * distinction is required due to the usage of the association at code
+ * generation time.
  *
  * A @e regular association means a full type definition is required
  * to be available due to the association. A @e pointer definition
@@ -88,24 +87,6 @@ private:
     void recurse_nested_qnames(const model& m, object& o,
         const nested_qname& nqn, bool& is_pointer) const;
 
-    /**
-     * @brief Populates the leaves container recursively.
-     */
-    void add_leaf(const model& m, const sml::qname& leaf, const sml::object& o,
-        std::unordered_map<qname, std::list<qname> >& leaves) const;
-
-    /**
-     * @brief Computes all the leaves for all parents.
-     */
-    std::unordered_map<qname, std::list<qname> >
-    obtain_leaves(const model& m) const;
-
-    /**
-     * @brief Populates the leaves replationships.
-     */
-    void populate_leaves(const std::unordered_map<qname, std::list<qname> >&
-        leaves, model& m) const;
-
 private:
     /**
      * @brief Indexes a specific object.
@@ -114,14 +95,9 @@ private:
 
 public:
     /**
-     * @brief Indexes the leaves for this model.
+     * @brief Indexes all association relationships.
      */
-    void index_leaves(model& m) const;
-
-    /**
-     * @brief Handles all relationships other than leaves.
-     */
-    void index_non_leaves_relationships(model& m) const;
+    void index(model& m) const;
 };
 
 } }
