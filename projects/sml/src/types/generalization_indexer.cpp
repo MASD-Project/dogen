@@ -45,12 +45,28 @@ const std::string parent_not_found("Could not find parent: ");
 namespace dogen {
 namespace sml {
 
-void generalization_indexer::
-add_leaf(const model& m, const sml::qname& leaf, const sml::object& o,
-    std::unordered_map<qname, std::list<qname> >& leaves) const {
+bool generalization_indexer::
+is_in_generalization_relationships(const sml::object& o) const {
+    // FIXME: massive hack. must not add leafs for services.
+    const auto uds(object_types::user_defined_service);
+    const bool is_service(o.object_type() == uds);
+    if (o.is_parent() || !o.is_child() || is_service) {
+        BOOST_LOG_SEV(lg, debug)
+            << "Type is not in a generalization relationship."
+            << " is parent: " << o.is_parent()
+            << " is child: " << o.is_child()
+            << " is service: " << is_service;
+        return false;
+    }
+    return true;
+}
+
+qname generalization_indexer::
+recurse_generalization(const model& m, const sml::qname& leaf,
+    const sml::object& o, generalization_details& d) const {
 
     if (!o.is_child())
-        return;
+        return o.name();
 
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -67,45 +83,45 @@ add_leaf(const model& m, const sml::qname& leaf, const sml::object& o,
             BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + n));
         }
 
-        add_leaf(m, leaf, j->second, leaves);
-        leaves[parent].push_back(leaf);
+        const auto op(recurse_generalization(m, leaf, j->second, d));
+        d.original_parent[o.name()] = op;
+        BOOST_LOG_SEV(lg, debug) << "Type: "
+                                 << string_converter::convert(parent)
+                                 << " has original parent: "
+                                 << string_converter::convert(op);
+
+        d.leaves[parent].push_back(leaf);
         BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: "
                                  << string_converter::convert(parent);
     }
+    return qname();
 }
 
-std::unordered_map<qname, std::list<qname> > generalization_indexer::
-obtain_leaves(const model& m) const {
+generalization_indexer::generalization_details generalization_indexer::
+obtain_details(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining leaves.";
-    std::unordered_map<qname, std::list<qname> > r;
+    generalization_details r;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Processing type: "
                                  << string_converter::convert(o.name());
 
-        // FIXME: massive hack. must not add leafs for services.
-        const auto uds(object_types::user_defined_service);
-        const bool is_service(o.object_type() == uds);
-        if (o.is_parent() || !o.is_child() || is_service) {
-            BOOST_LOG_SEV(lg, debug) << "Type is not a leaf."
-                                     << " is parent: " << o.is_parent()
-                                     << " is child: " << o.is_child()
-                                     << " is service: " << is_service;
+        if (!is_in_generalization_relationships(o))
             continue;
-        }
 
-        add_leaf(m, o.name(), o, r);
+        recurse_generalization(m, o.name(), o, r);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining leaves: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Leaves: " << r.leaves;
+    BOOST_LOG_SEV(lg, debug) << "Original parent: " << r.original_parent;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining details.";
     return r;
 }
 
 void generalization_indexer::
-populate_leaves(const std::unordered_map<qname, std::list<qname> >& leaves,
-    model& m) const {
+populate(const generalization_details& d, model& m) const {
 
-    for (const auto& pair : leaves) {
+    for (const auto& pair : d.leaves) {
         const auto& parent(pair.first);
         auto i(m.objects().find(parent));
         if (i == m.objects().end()) {
@@ -123,8 +139,8 @@ populate_leaves(const std::unordered_map<qname, std::list<qname> >& leaves,
 }
 
 void generalization_indexer::index(model& m) const {
-    const auto l(obtain_leaves(m));
-    populate_leaves(l, m);
+    const auto d(obtain_details(m));
+    populate(d, m);
 }
 
 } }
