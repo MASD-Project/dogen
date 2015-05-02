@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-01 Fri 23:25]
+Clock summary at [2015-05-02 Sat 16:14]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *21:17* |       |      |
+| *Total time*                                                               | *21:45* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 21:17 |      |
+| Active                                                                     |         | 21:45 |      |
 | STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
@@ -34,13 +34,13 @@ Clock summary at [2015-05-01 Fri 23:25]
 | COMPLETED Simplify logic around move construction                          |         |       | 0:06 |
 | COMPLETED Analysis on frontend activities that belong in SML               |         |       | 0:28 |
 | COMPLETED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
+| COMPLETED Try making path expansion a merged model expansion               |         |       | 1:20 |
 | STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
 | STARTED Refactor SML association indexer                                   |         |       | 1:16 |
 | STARTED Improve references management                                      |         |       | 0:13 |
 | STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
 | STARTED Move injection to merging workflow                                 |         |       | 0:21 |
-| STARTED Try making path expansion a merged model expansion                 |         |       | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -445,6 +445,25 @@ Class header requires =disable_complete_constructor=.
 - stop passing in settings that can be derived.
 - bump up log file to reveal rest of class.
 
+*** COMPLETED Try making path expansion a merged model expansion      :story:
+    CLOSED: [2015-05-02 Sat 16:14]
+    CLOCK: [2015-05-02 Sat 15:45]--[2015-05-02 Sat 16:13] =>  0:28
+    CLOCK: [2015-05-01 Fri 22:32]--[2015-05-01 Fri 23:24] =>  0:52
+
+There shouldn't be any reason why path expansion cannot be done at the
+merged model level, provided we do it to all types (not just target
+model). Try it and see what happens.
+
+We seem to fail with a weird  file path error:
+
+: std::exception::what: Field not found: cpp.types.class_header_formatter.file_path
+
+However file paths are being generated as expected.
+
+The problem was related to the fact that we ignore non-target models
+and the merged model was not marked as target. Mark it as target for
+now.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -636,18 +655,31 @@ At present we are performing injection in the partial model. There
 doesn't seem to be any good reason for this. Try moving it to the
 merged model and see what breaks.
 
-*** STARTED Try making path expansion a merged model expansion        :story:
-    CLOCK: [2015-05-01 Fri 22:32]--[2015-05-01 Fri 23:24] =>  0:52
+*** Remove merged and stand alone expansions                          :story:
 
-There shouldn't be any reason why path expansion cannot be done at the
-merged model level, provided we do it to all types (not just target
-model). Try it and see what happens.
+Now that we no longer require stand alone expansions, we need to
+remove all of the machinery we added for it:
 
-We seem to fail with a weird  file path error:
+- registrar has two containers
+- enum
 
-: std::exception::what: Field not found: cpp.types.class_header_formatter.file_path
+*** Do not compute inclusion directives for system models             :story:
 
-However file paths are being generated as expected.
+It seems we are computing inclusion directives and other path
+derivatives for system models:
+
+: {
+:   "__type__": "dogen::cpp::expansion::path_derivatives",
+:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
+:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
+:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
+: }
+
+This comes out of the workflow, so we possibly are then ignoring it
+for the non-target types. So:
+
+- can we avoid computing these altogether?
+- are we ignoring it?
 
 *** Add identity management to =property_indexer=                     :story:
 

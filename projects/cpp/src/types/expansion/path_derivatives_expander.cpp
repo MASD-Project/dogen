@@ -186,12 +186,14 @@ path_derivatives_expander::dependencies() const {
 dynamic::expansion::expansion_types path_derivatives_expander::
 expansion_type() const {
     using dynamic::expansion::expansion_types;
-    return expansion_types::stand_alone_model_expansion;
+    return expansion_types::merged_model_expansion;
 }
 
 void path_derivatives_expander::
 setup(const dynamic::expansion::expansion_context& ec) {
     requires_file_path_expansion_ = ec.model().is_target();
+    BOOST_LOG_SEV(lg, debug) << "requires_file_path_expansion: "
+                             << requires_file_path_expansion_;
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());

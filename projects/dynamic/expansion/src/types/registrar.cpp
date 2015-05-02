@@ -50,7 +50,7 @@ namespace expansion {
 void registrar::validate() const {
     if (stand_alone_model_expanders_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_stand_alone_expanders;
-        BOOST_THROW_EXCEPTION(registrar_error(no_stand_alone_expanders));
+        // BOOST_THROW_EXCEPTION(registrar_error(no_stand_alone_expanders));
     }
 
     if (merged_model_expanders_.empty()) {

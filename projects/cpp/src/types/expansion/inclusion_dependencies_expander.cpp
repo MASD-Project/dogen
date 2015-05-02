@@ -28,6 +28,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
+#include "dogen/cpp/types/expansion/path_derivatives_expander.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_workflow.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_expander.hpp"
 
@@ -120,7 +121,9 @@ std::string inclusion_dependencies_expander::name() const {
 const std::forward_list<std::string>&
 inclusion_dependencies_expander::dependencies() const {
     using namespace dynamic::expansion;
-    static std::forward_list<std::string> r;
+    static std::forward_list<std::string> r {
+        path_derivatives_expander::static_name()
+    };
     return r;
 }
 
