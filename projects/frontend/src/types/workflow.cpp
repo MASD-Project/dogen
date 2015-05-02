@@ -28,7 +28,6 @@
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 
 namespace {
@@ -132,21 +131,6 @@ void workflow::inject_system_types_activity(sml::model& m) const {
     i.inject(m);
 }
 
-sml::model workflow::expand_model_activity(const sml::model& m) const {
-    if (!m.is_expandable()) {
-        BOOST_LOG_SEV(lg, debug) << "Model is not expandable, so ignoring it: "
-                                 << sml::string_converter::convert(m.name());
-        return m;
-    }
-
-    dynamic::expansion::workflow w;
-    using dynamic::expansion::expansion_types;
-    const auto et(expansion_types::stand_alone_model_expansion);
-    const auto r(w.execute(et, knitting_options_.cpp(), repository_, m));
-    BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
-    return r;
-}
-
 void workflow::persist_model_activity(const boost::filesystem::path& p,
     const sml::model& m) const {
 
@@ -170,9 +154,8 @@ workflow::execute(const std::list<input_descriptor>& descriptors) {
     for (const auto& d : descriptors) {
         auto m(create_model_activity(d));
         inject_system_types_activity(m);
-        auto e(expand_model_activity(m));
-        persist_model_activity(d.path(), e);
-        r.push_back(e);
+        persist_model_activity(d.path(), m);
+        r.push_back(m);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing frontend workflow.";

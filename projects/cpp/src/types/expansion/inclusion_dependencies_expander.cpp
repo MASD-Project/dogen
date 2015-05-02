@@ -127,12 +127,6 @@ inclusion_dependencies_expander::dependencies() const {
     return r;
 }
 
-dynamic::expansion::expansion_types inclusion_dependencies_expander::
-expansion_type() const {
-    using dynamic::expansion::expansion_types;
-    return expansion_types::merged_model_expansion;
-}
-
 void inclusion_dependencies_expander::
 setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());

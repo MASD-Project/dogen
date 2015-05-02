@@ -170,9 +170,7 @@ expand_model_activity(const sml::model& m) const {
     }
 
     dynamic::expansion::workflow w;
-    using dynamic::expansion::expansion_types;
-    const auto et(expansion_types::merged_model_expansion);
-    const auto r(w.execute(et, knitting_options_.cpp(), repository_, m));
+    const auto r(w.execute(knitting_options_.cpp(), repository_, m));
     BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
     return r;
 }

@@ -31,7 +31,6 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/expansion/types/expansion_types.hpp"
 #include "dogen/dynamic/expansion/types/grapher.hpp"
 #include "dogen/dynamic/expansion/types/registrar.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
@@ -61,7 +60,7 @@ private:
     /**
      * @brief Creates a graph of expanders.
      */
-    graph_type build_expander_graph_activity(const expansion_types et) const;
+    graph_type build_expander_graph_activity() const;
 
     /**
      * @brief Creates the expansion context.
@@ -82,7 +81,6 @@ public:
      * @brief Expands the dynamic fields in the object.
      */
     sml::model execute(
-        const expansion_types expansion_type,
         const config::cpp_options& options,
         const schema::repository& rp,
         const sml::model& m) const;

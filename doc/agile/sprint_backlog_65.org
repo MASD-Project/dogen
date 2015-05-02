@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-02 Sat 16:14]
+Clock summary at [2015-05-02 Sat 16:30]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *21:45* |       |      |
+| *Total time*                                                               | *21:58* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 21:45 |      |
+| Active                                                                     |         | 21:58 |      |
 | STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
@@ -35,6 +35,7 @@ Clock summary at [2015-05-02 Sat 16:14]
 | COMPLETED Analysis on frontend activities that belong in SML               |         |       | 0:28 |
 | COMPLETED Add support for =disable_complete_constructor= in options copier |         |       | 1:06 |
 | COMPLETED Try making path expansion a merged model expansion               |         |       | 1:20 |
+| COMPLETED Remove merged and stand alone expansions                         |         |       | 0:13 |
 | STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
 | STARTED Refactor SML association indexer                                   |         |       | 1:16 |
@@ -464,6 +465,18 @@ The problem was related to the fact that we ignore non-target models
 and the merged model was not marked as target. Mark it as target for
 now.
 
+*** COMPLETED Remove merged and stand alone expansions                :story:
+    CLOSED: [2015-05-02 Sat 16:29]
+    CLOCK: [2015-05-02 Sat 16:16]--[2015-05-02 Sat 16:29] =>  0:13
+
+Now that we no longer require stand alone expansions, we need to
+remove all of the machinery we added for it:
+
+- registrar has two containers
+- enum
+- all code that makes use of workflow must not use enum
+- not required in frontend any more.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -654,14 +667,6 @@ model operation?
 At present we are performing injection in the partial model. There
 doesn't seem to be any good reason for this. Try moving it to the
 merged model and see what breaks.
-
-*** Remove merged and stand alone expansions                          :story:
-
-Now that we no longer require stand alone expansions, we need to
-remove all of the machinery we added for it:
-
-- registrar has two containers
-- enum
 
 *** Do not compute inclusion directives for system models             :story:
 

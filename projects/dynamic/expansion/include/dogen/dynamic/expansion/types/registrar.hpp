@@ -27,7 +27,6 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/expansion/types/expansion_types.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface_fwd.hpp"
 
 namespace dogen {
@@ -44,13 +43,6 @@ public:
      */
     void validate() const;
 
-private:
-    /**
-     * @brief Returns true if the expansion type is supported by the
-     * registrar, false otherwise.
-     */
-    bool is_supported_expansion_type(const expansion_types et) const;
-
 public:
     /**
      * @brief Registers a expander.
@@ -58,30 +50,14 @@ public:
     void register_expander(boost::shared_ptr<expander_interface> f);
 
     /**
-     * @brief Returns all expanders registered for stand alone model
-     * expansion.
+     * @brief Returns the expanders.
      */
     const std::forward_list<boost::shared_ptr<expander_interface> >&
-        stand_alone_model_expanders() const;
-
-    /**
-     * @brief Returns all expanders registered for merged model
-     * expansion.
-     */
-    const std::forward_list<boost::shared_ptr<expander_interface> >&
-        merged_model_expanders() const;
-
-    /**
-     * @brief Returns the expanders for the requested expansion type.
-     */
-    const std::forward_list<boost::shared_ptr<expander_interface> >&
-        expanders(const expansion_types et) const;
+        expanders() const;
 
 private:
     std::forward_list<boost::shared_ptr<expander_interface> >
-        stand_alone_model_expanders_;
-    std::forward_list<boost::shared_ptr<expander_interface> >
-        merged_model_expanders_;
+        expanders_;
 };
 
 } } }

@@ -122,9 +122,9 @@ void workflow::validate() const {
 }
 
 graph_type workflow::
-build_expander_graph_activity(const expansion_types et) const {
-    grapher g(et);
-    for (auto e : registrar().expanders(et))
+build_expander_graph_activity() const {
+    grapher g;
+    for (auto e : registrar().expanders())
         g.add(e);
 
     g.generate();
@@ -145,7 +145,6 @@ perform_expansion_activity(const graph_type& g, expansion_context& ec) const {
 }
 
 sml::model workflow::execute(
-    const expansion_types et,
     const config::cpp_options& options,
     const schema::repository& rp,
     const sml::model& m) const {
@@ -153,7 +152,7 @@ sml::model workflow::execute(
                              << sml::string_converter::convert(m.name());
 
     validate();
-    auto g(build_expander_graph_activity(et));
+    auto g(build_expander_graph_activity());
     auto ec(create_expansion_context_activity(options, rp, m));
     perform_expansion_activity(g, ec);
 

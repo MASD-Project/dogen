@@ -30,7 +30,6 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/dynamic/expansion/types/expansion_types.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
 namespace dogen {
@@ -54,7 +53,7 @@ private:
     vertex_descriptor_type;
 
 public:
-    explicit grapher(const expansion_types et);
+    grapher();
 
 private:
     /**

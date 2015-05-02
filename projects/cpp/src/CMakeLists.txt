@@ -26,6 +26,7 @@ add_library(cpp STATIC ${all_files})
 target_link_libraries(cpp
     formatters
     backend
+    dynamic_expansion
     ${Boost_LIBRARIES})
 
 set_target_properties(cpp PROPERTIES

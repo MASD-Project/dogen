@@ -27,7 +27,6 @@
 #include "dogen/dynamic/expansion/types/options_copier.hpp"
 #include "dogen/dynamic/expansion/types/workflow_error.hpp"
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
-#include "dogen/dynamic/expansion/types/expansion_types.hpp"
 #include "dogen/dynamic/expansion/types/registrar_error.hpp"
 #include "dogen/dynamic/expansion/types/expansion_context.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"

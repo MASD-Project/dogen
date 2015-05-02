@@ -18,5 +18,4 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/expansion/test_data/expansion_types_td.hpp"
 #include "dogen/dynamic/expansion/test_data/expansion_context_td.hpp"
