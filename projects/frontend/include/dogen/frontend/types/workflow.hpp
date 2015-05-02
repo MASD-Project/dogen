@@ -84,11 +84,6 @@ private:
     sml::model create_model_activity(const input_descriptor& d) const;
 
     /**
-     * @brief Injects system types into the model.
-     */
-    void inject_system_types_activity(sml::model& m) const;
-
-    /**
      * @brief Checks the options chosen by the user to determine if
      * the SML model should be persisted; if so, persists it.
      */

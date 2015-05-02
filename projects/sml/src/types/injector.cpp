@@ -130,7 +130,7 @@ object injector::create_key(const qname& qn, const generation_types gt,
         inject_version(r);
 
     BOOST_LOG_SEV(lg, debug) << "Created key: "
-                             << sml::string_converter::convert(kqn);
+                             << string_converter::convert(kqn);
     return r;
 }
 
@@ -153,7 +153,7 @@ object injector::create_key_extractor(const object& ke) const {
     qn.external_module_path(ke.name().external_module_path());
 
     BOOST_LOG_SEV(lg, debug) << "Creating extractor: "
-                             << sml::string_converter::convert(qn);
+                             << string_converter::convert(qn);
 
     r.name(qn);
     r.generation_type(ke.generation_type());
@@ -168,7 +168,7 @@ object injector::create_key_extractor(const object& ke) const {
     nested_qname nqn;
     const auto i(ke.relationships().find(relationship_types::unversioned_keys));
     if (i == ke.relationships().end() || i->second.size() != 1) {
-        const auto n(sml::string_converter::convert(ke.name()));
+        const auto n(string_converter::convert(ke.name()));
         BOOST_LOG_SEV(lg, error) << unversioned_key_not_found << n;
         BOOST_THROW_EXCEPTION(injection_error(unversioned_key_not_found + n));
     }
@@ -182,7 +182,7 @@ object injector::create_key_extractor(const object& ke) const {
     r.operations().push_back(opuv);
 
     BOOST_LOG_SEV(lg, debug) << "Created extractor: "
-                             << sml::string_converter::convert(qn);
+                             << string_converter::convert(qn);
     return r;
 }
 
@@ -195,12 +195,12 @@ void injector::inject_keys() {
         auto& o(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Visiting: "
-                                 << sml::string_converter::convert(qn);
+                                 << string_converter::convert(qn);
         if (o.object_type() != object_types::keyed_entity)
             continue;
 
         if (o.identity().empty()) {
-            const auto n(sml::string_converter::convert(qn));
+            const auto n(string_converter::convert(qn));
             BOOST_LOG_SEV(lg, error) << empty_identity << n;
 
             BOOST_THROW_EXCEPTION(injection_error(empty_identity + n));
@@ -227,7 +227,7 @@ void injector::inject_keys() {
 
     for (const auto& o : objects) {
         if (!insert(o)) {
-            const auto n(sml::string_converter::convert(o.name()));
+            const auto n(string_converter::convert(o.name()));
             BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname + n));
         }
@@ -239,7 +239,7 @@ void injector::inject_keys() {
 
 void injector::inject_version(object& p) const {
     BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
-                             << sml::string_converter::convert(p.name());
+                             << string_converter::convert(p.name());
 
     qname qn;
     qn.simple_name(uint_name);
@@ -278,7 +278,7 @@ create_visitor(const object& o, const std::list<qname>& leaves) const {
     qn.external_module_path(o.name().external_module_path());
 
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: "
-                             << sml::string_converter::convert(qn);
+                             << string_converter::convert(qn);
 
     r.name(qn);
     r.generation_type(o.generation_type());
@@ -290,7 +290,7 @@ create_visitor(const object& o, const std::list<qname>& leaves) const {
         r.relationships()[relationship_types::visits].push_back(l);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: "
-                             << sml::string_converter::convert(qn);
+                             << string_converter::convert(qn);
     return r;
 }
 
@@ -302,7 +302,7 @@ void injector::inject_visited_by(object& root, const std::list<qname>& leaves,
     for (const auto& l : leaves) {
         auto i(context_->model().objects().find(l));
         if (i == context_->model().objects().end()) {
-            const auto n(sml::string_converter::convert(l));
+            const auto n(string_converter::convert(l));
             BOOST_LOG_SEV(lg, error) << leaf_not_found << n;
             BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + n));
         }
@@ -327,7 +327,7 @@ void injector::inject_visitors() {
             !i->second.empty());
 
         if (!has_leaves) {
-            const auto n(sml::string_converter::convert(o.name()));
+            const auto n(string_converter::convert(o.name()));
             BOOST_LOG_SEV(lg, error) << zero_leaves << n;
             BOOST_THROW_EXCEPTION(injection_error(zero_leaves + n));
         }
@@ -339,10 +339,10 @@ void injector::inject_visitors() {
 
     for (const auto v : visitors) {
         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
-                                 << sml::string_converter::convert(v.name());
+                                 << string_converter::convert(v.name());
 
         if (!insert(v)) {
-            const auto n(sml::string_converter::convert(v.name()));
+            const auto n(string_converter::convert(v.name()));
             BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
             BOOST_THROW_EXCEPTION(injection_error(duplicate_qname + n));
         }
@@ -357,7 +357,7 @@ void injector::inject_global_module() {
     auto& model(context_->model());
     const auto i(model.modules().find(qn));
     if (i != model.modules().end()) {
-        const auto n(sml::string_converter::convert(model.name()));
+        const auto n(string_converter::convert(model.name()));
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << n;
         BOOST_THROW_EXCEPTION(injection_error(
                 model_already_has_global_module + n));

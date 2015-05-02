@@ -57,6 +57,11 @@ private:
     model create_merged_model_activity(const std::list<model>& models) const;
 
     /**
+     * @brief Injects system types into the model.
+     */
+    void inject_system_types_activity(sml::model& m) const;
+
+    /**
      * @brief Resolve all types.
      */
     void resolve_types_activity(model& merged_model) const;

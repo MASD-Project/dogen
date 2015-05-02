@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/merger.hpp"
+#include "dogen/sml/types/injector.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/concept_indexer.hpp"
 #include "dogen/sml/types/property_indexer.hpp"
@@ -74,6 +75,11 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
+void workflow::inject_system_types_activity(sml::model& m) const {
+    sml::injector i;
+    i.inject(m);
+}
+
 void workflow::resolve_types_activity(model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
@@ -102,6 +108,7 @@ model workflow::execute(std::list<model> models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting SML workflow.";
 
     auto r(create_merged_model_activity(models));
+    inject_system_types_activity(r);
     resolve_types_activity(r);
     index_concepts_activity(r);
     index_properties_activity(r);
