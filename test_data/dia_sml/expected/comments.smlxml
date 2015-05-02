@@ -425,7 +425,6 @@ third line with &quot;quote&quot;
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -624,7 +623,6 @@ a second line
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>

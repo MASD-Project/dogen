@@ -5656,7 +5656,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="64.485,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.8675,72.95;65.335,85.05"/>
+        <dia:rectangle val="56.8675,72.95;65.335,81.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5664,8 +5664,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="64.485,73"/>
         <dia:point val="64.485,80"/>
-        <dia:point val="61.9175,80"/>
-        <dia:point val="61.9175,85"/>
+        <dia:point val="56.9175,80"/>
+        <dia:point val="56.9175,81"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5694,19 +5694,19 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,85"/>
+        <dia:point val="43,81"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,84.95;75.885,99.85"/>
+        <dia:rectangle val="42.95,80.95;70.885,95.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,85"/>
+        <dia:point val="43,81"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.800000000000002"/>
+        <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -6022,29 +6022,6 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_inheritance_root#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#True if this object is at the root of an inheritance graph.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9176,17 +9153,17 @@ not have a need for it.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48,99.8"/>
+        <dia:point val="43,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3587,99.05;48.75,109.8"/>
+        <dia:rectangle val="42.25,94.25;44.6087,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48,99.8"/>
-        <dia:point val="48,104"/>
+        <dia:point val="43,95"/>
+        <dia:point val="43,104"/>
         <dia:point val="44.4087,104"/>
         <dia:point val="44.4087,109"/>
       </dia:attribute>
@@ -11202,17 +11179,17 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.835,99.8"/>
+        <dia:point val="70.835,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.085,99.05;79.455,109.8"/>
+        <dia:rectangle val="70.085,94.25;79.455,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.835,99.8"/>
-        <dia:point val="75.835,104"/>
+        <dia:point val="70.835,95"/>
+        <dia:point val="70.835,104"/>
         <dia:point val="79.255,104"/>
         <dia:point val="79.255,109"/>
       </dia:attribute>

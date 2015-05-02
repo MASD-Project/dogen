@@ -125,11 +125,10 @@ populate(const unsigned int position, result_type& v) {
     v.is_child(create_bool(position + 11));
     v.is_original_parent_visitable(create_bool(position + 12));
     v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 13));
-    v.is_inheritance_root(create_bool(position + 14));
-    v.object_type(create_dogen_sml_object_types(position + 15));
-    v.is_aggregate_root(create_bool(position + 16));
-    v.identity(create_std_list_dogen_sml_property(position + 17));
-    v.is_final(create_bool(position + 18));
+    v.object_type(create_dogen_sml_object_types(position + 14));
+    v.is_aggregate_root(create_bool(position + 15));
+    v.identity(create_std_list_dogen_sml_property(position + 16));
+    v.is_final(create_bool(position + 17));
 }
 
 object_generator::result_type

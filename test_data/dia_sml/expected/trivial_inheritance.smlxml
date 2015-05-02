@@ -830,7 +830,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -980,7 +979,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1094,7 +1092,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1241,7 +1238,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1371,7 +1367,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1485,7 +1480,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1599,7 +1593,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1748,7 +1741,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -1895,7 +1887,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2023,7 +2014,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2118,7 +2108,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2268,7 +2257,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2415,7 +2403,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2543,7 +2530,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2690,7 +2676,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2840,7 +2825,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -2935,7 +2919,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>5</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3030,7 +3013,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>5</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3125,7 +3107,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3239,7 +3220,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3386,7 +3366,6 @@ in the context of inheritance.
 						</second>
 					</item>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3516,7 +3495,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>
@@ -3647,7 +3625,6 @@ in the context of inheritance.
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<is_inheritance_root>0</is_inheritance_root>
 				<object_type>8</object_type>
 				<is_aggregate_root>0</is_aggregate_root>
 				<identity>

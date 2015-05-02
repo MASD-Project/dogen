@@ -77,7 +77,6 @@ public:
         const bool is_child,
         const bool is_original_parent_visitable,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
-        const bool is_inheritance_root,
         const dogen::sml::object_types& object_type,
         const bool is_aggregate_root,
         const std::list<dogen::sml::property>& identity,
@@ -245,14 +244,6 @@ public:
     void relationships(const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >&& v);
 
     /**
-     * @brief True if this object is at the root of an inheritance graph.
-     */
-    /**@{*/
-    bool is_inheritance_root() const;
-    void is_inheritance_root(const bool v);
-    /**@}*/
-
-    /**
      * @brief What kind of object is this.
      */
     /**@{*/
@@ -316,7 +307,6 @@ private:
     bool is_child_;
     bool is_original_parent_visitable_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
-    bool is_inheritance_root_;
     dogen::sml::object_types object_type_;
     bool is_aggregate_root_;
     std::list<dogen::sml::property> identity_;

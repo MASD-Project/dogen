@@ -65,7 +65,6 @@ void save(Archive& ar,
     ar << make_nvp("is_child", v.is_child_);
     ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar << make_nvp("relationships", v.relationships_);
-    ar << make_nvp("is_inheritance_root", v.is_inheritance_root_);
     ar << make_nvp("object_type", v.object_type_);
     ar << make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar << make_nvp("identity", v.identity_);
@@ -92,7 +91,6 @@ void load(Archive& ar,
     ar >> make_nvp("is_child", v.is_child_);
     ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
     ar >> make_nvp("relationships", v.relationships_);
-    ar >> make_nvp("is_inheritance_root", v.is_inheritance_root_);
     ar >> make_nvp("object_type", v.object_type_);
     ar >> make_nvp("is_aggregate_root", v.is_aggregate_root_);
     ar >> make_nvp("identity", v.identity_);
