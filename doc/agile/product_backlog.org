@@ -4839,7 +4839,26 @@ template types, this seems like an ok limitation.
 When we declare a boost exception, we some times need to augment it
 with additional data. This is explained [[http://www.boost.org/doc/libs/1_58_0/libs/exception/doc/tutorial_transporting_data.html][here]]. We should be able to add
 these tags to the exception class and have dogen generate the
-error_info boilerplate in the exception header.
+=error_info= boilerplate in the exception header.
+
+Note that we can have many tags associated with a given
+exception. They all need to have meaningful names. They should all
+have globally unique names, unless the name makes sense in the context
+of more than one exception. We could make the tags a property of the
+exception (e.g. inner class). Or we could simply have a global class
+that declares all of the application tags in one go. If most tags are
+exception specific, then the first approach is better. If many tags
+are shared, the latter is preferable.
+
+*** Ensure an error info tag is not set already before we set it      :story:
+
+Now that we will start making use of error info tags in anger, one
+problem we have spotted is that some times we reset the same tag:
+i.e. when an exception has been thrown, we do not want to set the same
+tag multiple times because it overwrites it. There should be a way to
+either allow multiple bits of information to be associated with the
+same tag, or a way to check if the tag has been already set. But if it
+is, what then? We can't throw.
 
 ** Tooling, infrastructure, blog posts, etc.
 
