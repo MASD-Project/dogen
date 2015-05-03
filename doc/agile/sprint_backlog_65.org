@@ -45,6 +45,7 @@ Clock summary at [2015-05-02 Sat 22:59]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-03 Sun 09:14]--[2015-05-03 Sun 09:34] =>  0:20
     CLOCK: [2015-05-01 Fri 16:02]--[2015-05-01 Fri 16:13] =>  0:11
     CLOCK: [2015-04-28 Tue 11:15]--[2015-04-28 Tue 12:14] =>  0:59
     CLOCK: [2015-04-27 Mon 14:15]--[2015-04-27 Mon 15:07] =>  0:52
@@ -669,7 +670,17 @@ To test diff:
 
 Notes:
 
-- we can't access disable complete constructor option. Figure out how to.
+- we can't access disable complete constructor option. Figure out how
+  to.
+
+Remaining problems with trivial inheritance:
+
+- no support for comments on classes and methods.
+- primitive types have includes; not honouring "requires include?"
+  flag.
+- leaf types do not have visitor methods.
+- too much space after end of namespaces and before end if.
+- class marked as service is being generated.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
