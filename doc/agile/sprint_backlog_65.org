@@ -554,6 +554,94 @@ should perhaps rename it to =sml::merging_workflow= or something along
 these lines. However, we need to keep in mind that as well as merging
 we perform a lot of other activities on the models.
 
+*** POSTPONED Improve references management                           :story:
+    CLOSED: [2015-05-03 Sun 09:21]
+    CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13
+
+At present, we compute model references as follows:
+
+- in dia to sml we first loop through all types and figure out the
+  distinct model names. This is done by creating a "shallow" qname
+  with just the model name and setting its origin type to unknown.
+- when we merge, we take the references of target - the only ones we
+  care about - and then we check that against the list of the models
+  we are about to merge. If there are any missing models we complain
+  (see comments below). We then loop through the list of references
+  and "resolve" the origin type of the model.
+
+Note: We could actually also complain if there are too many models, or
+more cleverly avoid merging those models which are not required. Or
+even more cleverly, we could avoid loading them in the first place, if
+only we could load target first.
+
+A slightly better way of doing this would be:
+
+- in SML create a references updater that takes a model and computes
+  its reference requirements. It could also receive a list of "other"
+  models from which to get their origin types to avoid using =unknown=
+  at all, and checks that all reference requirements have been met.
+- the current step =update_references= is just a call to the
+  references updater, prior to merging, with the target model.
+
+*** POSTPONED Assignment operator seems to pass types by value        :story:
+    CLOSED: [2015-05-03 Sun 09:21]
+    CLOCK: [2015-05-01 Fri 11:32]--[2015-05-01 Fri 11:39] =>  0:07
+
+The code for the operator is as follows:
+
+:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+:                << " other);" << std::endl;
+
+If this is the case we need to fix it and regenerate all models.
+
+Actually we have implemented assignment in terms of swap, so that is
+why we copy. We need to figure out if this was a good idea. Raise
+story in backlog.
+
+: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: index f9f91af..663f0ac 100644
+: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: @@ -253,7 +253,7 @@ public:
+:  <#+
+:                  if (!c.is_parent()) {
+:  #>
+: -    <#= c.name() #>& operator=(<#= c.name() #> other);
+: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
+:  <#+
+:                  }
+:              }
+: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
+: index c2eeb3c..534ab69 100644
+: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
+: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
+: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
+:  
+:      // assignment is only available in leaf classes - MEC++-33
+:      if (!ci.is_parent()) {
+: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+: -                << " other);" << std::endl;
+: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
+: +                << "& other);" << std::endl;
+:      }
+:  
+:      utility_.blank_line();
+: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
+: index 5c9fe50..9276701 100644
+: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
+: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
+: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
+:          return;
+:  
+:      stream_ << indenter_ << ci.name() << "& "
+: -            << ci.name() << "::operator=(" << ci.name()
+: -            << " other) ";
+: +            << ci.name() << "::operator=(const " << ci.name()
+: +            << "& other) ";
+:  
+:      utility_.open_scope();
+:      {
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
@@ -618,130 +706,6 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
-
-*** STARTED Improve references management                             :story:
-    CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13
-
-At present, we compute model references as follows:
-
-- in dia to sml we first loop through all types and figure out the
-  distinct model names. This is done by creating a "shallow" qname
-  with just the model name and setting its origin type to unknown.
-- when we merge, we take the references of target - the only ones we
-  care about - and then we check that against the list of the models
-  we are about to merge. If there are any missing models we complain
-  (see comments below). We then loop through the list of references
-  and "resolve" the origin type of the model.
-
-Note: We could actually also complain if there are too many models, or
-more cleverly avoid merging those models which are not required. Or
-even more cleverly, we could avoid loading them in the first place, if
-only we could load target first.
-
-A slightly better way of doing this would be:
-
-- in SML create a references updater that takes a model and computes
-  its reference requirements. It could also receive a list of "other"
-  models from which to get their origin types to avoid using =unknown=
-  at all, and checks that all reference requirements have been met.
-- the current step =update_references= is just a call to the
-  references updater, prior to merging, with the target model.
-
-*** STARTED Assignment operator seems to pass types by value          :story:
-    CLOCK: [2015-05-01 Fri 11:32]--[2015-05-01 Fri 11:39] =>  0:07
-
-The code for the operator is as follows:
-
-:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-:                << " other);" << std::endl;
-
-If this is the case we need to fix it and regenerate all models.
-
-Actually we have implemented assignment in terms of swap, so that is
-why we copy. We need to figure out if this was a good idea. Raise
-story in backlog.
-
-: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: index f9f91af..663f0ac 100644
-: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: @@ -253,7 +253,7 @@ public:
-:  <#+
-:                  if (!c.is_parent()) {
-:  #>
-: -    <#= c.name() #>& operator=(<#= c.name() #> other);
-: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
-:  <#+
-:                  }
-:              }
-: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
-: index c2eeb3c..534ab69 100644
-: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
-: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
-: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
-:  
-:      // assignment is only available in leaf classes - MEC++-33
-:      if (!ci.is_parent()) {
-: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-: -                << " other);" << std::endl;
-: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
-: +                << "& other);" << std::endl;
-:      }
-:  
-:      utility_.blank_line();
-: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
-: index 5c9fe50..9276701 100644
-: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
-: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
-: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
-:          return;
-:  
-:      stream_ << indenter_ << ci.name() << "& "
-: -            << ci.name() << "::operator=(" << ci.name()
-: -            << " other) ";
-: +            << ci.name() << "::operator=(const " << ci.name()
-: +            << "& other) ";
-:  
-:      utility_.open_scope();
-:      {
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
-
-*** Add identity management to =property_indexer=                     :story:
-
-At present we are populating the identity properties in dia to sml. We
-need to move this to property indexer in SML.
-
-*** Create a module indexer                                           :story:
-
-We need to create a class that computes module containment. At present
-this is done in JSON hydrator.
-
-In addition, we also have huge amounts of nonsense in injector, in
-particular =add_containing_module_to_non_contained_entities=. This
-should also be handled by the module indexer.
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 
