@@ -543,6 +543,17 @@ likely all of that should be scraped.
 Actually do we even need the consumption workflow at all. At present
 no one seems to be using it. If so remove it and associated classes.
 
+*** COMPLETED Consider renaming SML workflow                          :story:
+    CLOSED: [2015-05-03 Sun 08:12]
+
+*Rationale*: Since we only have one workflow in SML, and since it is
+not likely we will need more than one for now, we'll leave it as is.
+
+Since the main SML workflow is focused on producing a merged model, we
+should perhaps rename it to =sml::merging_workflow= or something along
+these lines. However, we need to keep in mind that as well as merging
+we perform a lot of other activities on the models.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19

@@ -10,6 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming formatter groups and model groups to sets       :story:
+
+We should try to keep the words groups and sets to their mathematical
+as much as possible - given our limitations. As such, where we are
+using "group" we probably mean "set" since there is no associated
+operation with the set; it is merely a way of gathering elements.
+
 *** Move sorting of includes into utility                             :story:
 
 When we implemented the sorting of includes we added it directly to
@@ -714,14 +721,6 @@ special way so try to remove this.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
-
-
-*** Consider renaming SML workflow                                    :story:
-
-Since the main SML workflow is focused on producing a merged model, we
-should perhaps rename it to =sml::merging_workflow= or something along
-these lines. However, we need to keep in mind that as well as merging
-we perform a lot of other activities on the models.
 
 *** Consider moving dia diagrams to their own project                 :story:
 
