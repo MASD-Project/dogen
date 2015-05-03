@@ -1,0 +1,665 @@
+diff --git a/data/fields/dia_to_sml.json b/data/fields/dia_to_sml.json
+index b19bdfa..72d206d 100644
+--- a/data/fields/dia_to_sml.json
++++ b/data/fields/dia_to_sml.json
+@@ -10,17 +10,5 @@
+         "value_type" : "boolean",
+         "definition_type" : "instance",
+         "scope" : "not_applicable"
+-    },
+-    {
+-        "name" : {
+-            "simple" : "identity_attribute",
+-            "qualified" : "dia.identity_attribute"
+-        },
+-        "ownership_hierarchy" : {
+-            "model_name" : "dia_to_sml"
+-        },
+-        "value_type" : "boolean",
+-        "definition_type" : "instance",
+-        "scope" : "property"
+     }
+ ]
+diff --git a/data/fields/sml.json b/data/fields/sml.json
+new file mode 100644
+index 0000000..453f26e
+--- /dev/null
++++ b/data/fields/sml.json
+@@ -0,0 +1,14 @@
++[
++    {
++        "name" : {
++            "simple" : "identity_attribute",
++            "qualified" : "sml.identity_attribute"
++        },
++        "ownership_hierarchy" : {
++            "model_name" : "sml"
++        },
++        "value_type" : "boolean",
++        "definition_type" : "instance",
++        "scope" : "property"
++    }
++]
+diff --git a/diagrams/sml.dia b/diagrams/sml.dia
+index 615524f..bc9633a 100644
+--- a/diagrams/sml.dia
++++ b/diagrams/sml.dia
+@@ -14555,5 +14555,217 @@ from inputs and generates SML types off of them.#</dia:string>
+         <dia:connection handle="1" to="O11" connection="10"/>
+       </dia:connections>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O128">
++      <dia:attribute name="obj_pos">
++        <dia:point val="39,41"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="38.95,40.95;52.64,44.65"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="39,41"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="13.59"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3.6000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#traits#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#service#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations">
++        <dia:composite type="umloperation">
++          <dia:attribute name="name">
++            <dia:string>#identity_attribute#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="stereotype">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="inheritance_type">
++            <dia:enum val="2"/>
++          </dia:attribute>
++          <dia:attribute name="query">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="true"/>
++          </dia:attribute>
++          <dia:attribute name="parameters"/>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O129">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="40.1225,33.6"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="39.3725,32.85;45.995,42.5502"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="40.1225,33.6"/>
++        <dia:point val="40.1225,38"/>
++        <dia:point val="45.795,38"/>
++        <dia:point val="45.795,40.9502"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O88" connection="6"/>
++        <dia:connection handle="1" to="O128" connection="10"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/sprint_backlog_65.org b/doc/agile/sprint_backlog_65.org
+index 103c511..2853b1f 100644
+--- a/doc/agile/sprint_backlog_65.org
++++ b/doc/agile/sprint_backlog_65.org
+@@ -13,13 +13,13 @@ architecture.
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree
+-Clock summary at [2015-05-02 Sat 22:59]
++Clock summary at [2015-05-02 Sat 23:29]
+ 
+ | Headline                                                                   | Time    |       |      |
+ |----------------------------------------------------------------------------+---------+-------+------|
+-| *Total time*                                                               | *25:33* |       |      |
++| *Total time*                                                               | *25:56* |       |      |
+ |----------------------------------------------------------------------------+---------+-------+------|
+-| Active                                                                     |         | 25:33 |      |
++| Active                                                                     |         | 25:56 |      |
+ | STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
+ | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
+ | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
+@@ -42,6 +42,7 @@ Clock summary at [2015-05-02 Sat 22:59]
+ | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
+ | STARTED Improve references management                                      |         |       | 0:13 |
+ | STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
++| STARTED Add identity management to =property_indexer=                      |         |       | 0:23 |
+ #+end:
+ 
+ *** STARTED Sprint and product backlog grooming                       :story:
+@@ -647,6 +648,8 @@ A slightly better way of doing this would be:
+ - the current step =update_references= is just a call to the
+   references updater, prior to merging, with the target model.
+ 
++We should probably call it =references_indexer=.
++
+ *** STARTED Assignment operator seems to pass types by value          :story:
+     CLOCK: [2015-05-01 Fri 11:32]--[2015-05-01 Fri 11:39] =>  0:07
+ 
+@@ -729,7 +732,8 @@ need to create a story to clean up the =origin_type= and
+ =generation_type= and then we can make use of it to determine if we
+ need to compute inclusion, path etc or not.
+ 
+-*** Add identity management to =property_indexer=                     :story:
++*** STARTED Add identity management to =property_indexer=             :story:
++    CLOCK: [2015-05-02 Sat 23:06]--[2015-05-02 Sat 23:29] =>  0:23
+ 
+ At present we are populating the identity properties in dia to sml. We
+ need to move this to property indexer in SML.
+diff --git a/doc/manual/manual.org b/doc/manual/manual.org
+index 5189389..47ae201 100644
+--- a/doc/manual/manual.org
++++ b/doc/manual/manual.org
+@@ -800,7 +800,7 @@ documentation.
+ | Model | Tag                    | Description                                              |
+ |-------+------------------------+----------------------------------------------------------|
+ | Dia   | dia.comment            | Comment provided by user when dia does not allow for it. |
+-| Dia   | dia.identity_attribute | Attribute that provides this entity its identity.        |
++| Dia   | sml.identity_attribute | Attribute that provides this entity its identity.        |
+ 
+ *** Test Models
+ 
+diff --git a/projects/dia_to_sml/include/dogen/dia_to_sml/types/traits.hpp b/projects/dia_to_sml/include/dogen/dia_to_sml/types/traits.hpp
+index 07adbe2..016a501 100644
+--- a/projects/dia_to_sml/include/dogen/dia_to_sml/types/traits.hpp
++++ b/projects/dia_to_sml/include/dogen/dia_to_sml/types/traits.hpp
+@@ -40,11 +40,6 @@ struct traits {
+      * the meta-type's documentation.
+      */
+     static std::string comment();
+-
+-    /**
+-     * @brief Attribute that provides this entity its identity.
+-     */
+-    static std::string identity_attribute();
+ };
+ 
+ } }
+diff --git a/projects/dia_to_sml/src/types/traits.cpp b/projects/dia_to_sml/src/types/traits.cpp
+index c0db3b6..9d37664 100644
+--- a/projects/dia_to_sml/src/types/traits.cpp
++++ b/projects/dia_to_sml/src/types/traits.cpp
+@@ -28,9 +28,4 @@ std::string traits::comment() {
+     return r;
+ }
+ 
+-std::string traits::identity_attribute() {
+-    static std::string r("dia.identity_attribute");
+-    return r;
+-}
+-
+ } }
+diff --git a/projects/dia_to_sml/src/types/transformer.cpp b/projects/dia_to_sml/src/types/transformer.cpp
+index 7536a29..9fc87c0 100644
+--- a/projects/dia_to_sml/src/types/transformer.cpp
++++ b/projects/dia_to_sml/src/types/transformer.cpp
+@@ -292,12 +292,6 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
+     update_object(e, o, p);
+     e.is_aggregate_root(p.is_aggregate_root());
+ 
+-    for (const auto& p : e.local_properties()) {
+-        const dynamic::schema::field_selector fs(p.extensions());
+-        if (fs.has_field(traits::identity_attribute()))
+-            e.identity().push_back(p);
+-    }
+-
+     if (p.is_entity())
+         e.object_type(sml::object_types::entity);
+     else if (p.is_keyed_entity())
+diff --git a/projects/dynamic/schema/src/test/mock_field_definition_factory.cpp b/projects/dynamic/schema/src/test/mock_field_definition_factory.cpp
+index 12296c9..887e5a6 100644
+--- a/projects/dynamic/schema/src/test/mock_field_definition_factory.cpp
++++ b/projects/dynamic/schema/src/test/mock_field_definition_factory.cpp
+@@ -73,7 +73,7 @@ field_definition mock_field_definition_factory::
+ create_identity_attribute() const {
+     field_definition r;
+     r.name().simple("identity_attribute");
+-    r.name().qualified("dia.identity_attribute");
++    r.name().qualified("sml.identity_attribute");
+     r.ownership_hierarchy().model_name("dia_to_sml");
+     r.value_type(value_types::text);
+     r.definition_type(field_definition_types::instance);
+diff --git a/projects/sml/include/dogen/sml/types/all.hpp b/projects/sml/include/dogen/sml/types/all.hpp
+index 21422fb..3d9172e 100644
+--- a/projects/sml/include/dogen/sml/types/all.hpp
++++ b/projects/sml/include/dogen/sml/types/all.hpp
+@@ -26,6 +26,7 @@
+ #include "dogen/sml/types/merger.hpp"
+ #include "dogen/sml/types/module.hpp"
+ #include "dogen/sml/types/object.hpp"
++#include "dogen/sml/types/traits.hpp"
+ #include "dogen/sml/types/concept.hpp"
+ #include "dogen/sml/types/injector.hpp"
+ #include "dogen/sml/types/property.hpp"
+diff --git a/projects/sml/include/dogen/sml/types/traits.hpp b/projects/sml/include/dogen/sml/types/traits.hpp
+new file mode 100644
+index 0000000..27aacd3
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/traits.hpp
+@@ -0,0 +1,42 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_TRAITS_HPP
++#define DOGEN_SML_TYPES_TRAITS_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++
++namespace dogen {
++namespace sml {
++
++struct traits {
++    /**
++     * @brief Attribute that provides this entity its identity.
++     */
++    static std::string identity_attribute();
++};
++
++} }
++
++#endif
+diff --git a/projects/sml/include/dogen/sml/types/traits_fwd.hpp b/projects/sml/include/dogen/sml/types/traits_fwd.hpp
+new file mode 100644
+index 0000000..9af569b
+--- /dev/null
++++ b/projects/sml/include/dogen/sml/types/traits_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_SML_TYPES_TRAITS_FWD_HPP
++#define DOGEN_SML_TYPES_TRAITS_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace sml {
++
++class traits;
++
++} }
++
++#endif
+diff --git a/projects/sml/src/types/property_indexer.cpp b/projects/sml/src/types/property_indexer.cpp
+index 48a58c6..c2ddccd 100644
+--- a/projects/sml/src/types/property_indexer.cpp
++++ b/projects/sml/src/types/property_indexer.cpp
+@@ -25,6 +25,8 @@
+ #include <boost/lexical_cast.hpp>
+ #include "dogen/utility/io/list_io.hpp"
+ #include "dogen/utility/log/logger.hpp"
++#include "dogen/dynamic/schema/types/field_selector.hpp"
++#include "dogen/sml/types/traits.hpp"
+ #include "dogen/sml/types/object.hpp"
+ #include "dogen/sml/types/indexing_error.hpp"
+ #include "dogen/sml/types/string_converter.hpp"
+@@ -103,6 +105,12 @@ void property_indexer::index_object(object& o, model& m,
+     o.local_properties().insert(o.local_properties().begin(),
+         concept_properties.begin(), concept_properties.end());
+ 
++    for (const auto& p : o.local_properties()) {
++        const dynamic::schema::field_selector fs(o.extensions());
++        if (fs.has_field(traits::identity_attribute()))
++            o.identity().push_back(p);
++    }
++
+     i = o.relationships().find(relationship_types::parents);
+     if (i != o.relationships().end()) {
+         for (const auto& qn : i->second) {
+diff --git a/projects/sml/src/types/traits.cpp b/projects/sml/src/types/traits.cpp
+new file mode 100644
+index 0000000..c877bad
+--- /dev/null
++++ b/projects/sml/src/types/traits.cpp
+@@ -0,0 +1,31 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/sml/types/traits.hpp"
++
++namespace dogen {
++namespace sml {
++
++std::string traits::identity_attribute() {
++    static std::string r("sml.identity_attribute");
++    return r;
++}
++
++} }
+diff --git a/test_data/dia_sml/input/std_model.dia b/test_data/dia_sml/input/std_model.dia
+index 248deee..732e032 100644
+--- a/test_data/dia_sml/input/std_model.dia
++++ b/test_data/dia_sml/input/std_model.dia
+@@ -178,7 +178,7 @@
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
++            <dia:string>##DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+diff --git a/test_data/dia_sml/input/stereotypes.dia b/test_data/dia_sml/input/stereotypes.dia
+index af753bb..afb5675 100644
+--- a/test_data/dia_sml/input/stereotypes.dia
++++ b/test_data/dia_sml/input/stereotypes.dia
+@@ -180,7 +180,7 @@
+           <dia:attribute name="comment">
+             <dia:string>#Identity attribute.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1116,7 +1116,7 @@
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
++            <dia:string>##DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1946,7 +1946,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2105,7 +2105,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#First identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2130,7 +2130,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Second identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2327,7 +2327,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Identity property
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2462,7 +2462,7 @@ These are the main cases:
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>##DOGEN dia.identity_attribute=true#</dia:string>
++            <dia:string>##DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2598,7 +2598,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2757,7 +2757,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#First identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2782,7 +2782,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Second identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -2941,7 +2941,7 @@ These are the main cases:
+           <dia:attribute name="comment">
+             <dia:string>#Identity property.
+ 
+-#DOGEN dia.identity_attribute=true#</dia:string>
++#DOGEN sml.identity_attribute=true#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
