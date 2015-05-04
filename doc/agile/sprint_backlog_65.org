@@ -678,9 +678,27 @@ Remaining problems with trivial inheritance:
 - no support for comments on classes and methods.
 - primitive types have includes; not honouring "requires include?"
   flag.
-- leaf types do not have visitor methods.
+- leaf types do not have visitor methods. This is because
+  =is_original_parent_visitable= is not being populated.
 - too much space after end of namespaces and before end if.
 - class marked as service is being generated.
+
+*** Modeling of visitors in =cpp= can be improved                     :story:
+
+In the =cpp= model we are assuming that if the original parent was
+visitable, then the visitor was named after it:
+
+:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+: #>
+: public:
+:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
+
+The right thing to do here is to have a =visitor_info= attached to the
+=class_info= that is generated during transformation and deals with
+all such rules. The template should just loop through the visitor
+infos. In addition, the visitor infos should tell the template if they
+are abstract or implemented. We may be able to reuse the existing
+=visitor_info= class for this.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09

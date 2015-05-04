@@ -160,6 +160,7 @@ populate(const generalization_details& d, model& m) const {
             BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
         }
 
+        // FIXME: surely is child is always true?
         if (!i->second.is_child())
             continue;
 
