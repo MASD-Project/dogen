@@ -5384,6 +5384,12 @@ given a name, see if it matches.
 
 See Spell Checker section of [[http://blog.llvm.org/2010/04/amazing-feats-of-clang-error-recovery.html][this]] post.
 
+Seems like the name of the algorithm used is [[http://en.wikipedia.org/wiki/Levenshtein_distance][Levenshtein
+distance]]. Still haven't found clang's API for this but there are
+several implementations available.
+
+- https://github.com/cdmh/algorithms
+
 *** Consider using a graph in SML for indexing and other tasks        :story:
 
 To keep things simple we created a number of specialised indexers,
