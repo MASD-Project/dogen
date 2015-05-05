@@ -13,14 +13,14 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-02 Sat 22:59]
+Clock summary at [2015-05-05 Tue 17:27]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *25:33* |       |      |
+| *Total time*                                                               | *28:26* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 25:33 |      |
-| STARTED Sprint and product backlog grooming                                |         |       | 2:12 |
+| Active                                                                     |         | 28:26 |      |
+| STARTED Sprint and product backlog grooming                                |         |       | 2:32 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
 | COMPLETED Fix missing new line in enumeration forward declarations         |         |       | 0:32 |
@@ -38,10 +38,11 @@ Clock summary at [2015-05-02 Sat 22:59]
 | COMPLETED Remove merged and stand alone expansions                         |         |       | 0:13 |
 | COMPLETED Move injection to merging workflow                               |         |       | 0:29 |
 | COMPLETED Refactor SML association indexer                                 |         |       | 4:43 |
-| STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
+| COMPLETED Tidy-up sml consumer interface                                   |         |       | 0:12 |
+| POSTPONED Improve references management                                    |         |       | 0:13 |
+| POSTPONED Assignment operator seems to pass types by value                 |         |       | 0:07 |
+| STARTED Implement types class header formatter using stitch                |         |       | 9:24 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
-| STARTED Improve references management                                      |         |       | 0:13 |
-| STARTED Assignment operator seems to pass types by value                   |         |       | 0:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -644,6 +645,7 @@ story in backlog.
 :      {
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
     CLOCK: [2015-04-30 Thu 19:11]--[2015-04-30 Thu 19:27] =>  0:16
@@ -675,30 +677,23 @@ Notes:
 
 Remaining problems with trivial inheritance:
 
-- no support for comments on classes and methods.
 - primitive types have includes; not honouring "requires include?"
   flag.
+- no support for comments on classes and methods.
 - leaf types do not have visitor methods. This is because
   =is_original_parent_visitable= is not being populated.
 - too much space after end of namespaces and before end if.
 - class marked as service is being generated.
 
-*** Modeling of visitors in =cpp= can be improved                     :story:
+Tasks:
 
-In the =cpp= model we are assuming that if the original parent was
-visitable, then the visitor was named after it:
-
-:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
-: #>
-: public:
-:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
-
-The right thing to do here is to have a =visitor_info= attached to the
-=class_info= that is generated during transformation and deals with
-all such rules. The template should just loop through the visitor
-infos. In addition, the visitor infos should tell the template if they
-are abstract or implemented. We may be able to reuse the existing
-=visitor_info= class for this.
+- create an inclusion assistant to make client code more readable.
+- create a inclusion directives repository with the inclusion
+  directives and a "does not require inclusion" set. Factory to use
+  the set to avoid generating inclusions for primitives. Client code
+  to use the set to check if a type needs inclusion. This way we avoid
+  logic errors where we forgot to generate an include where we should
+  have. Its not very efficient though.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
@@ -735,6 +730,23 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
+
+*** Modeling of visitors in =cpp= can be improved                     :story:
+
+In the =cpp= model we are assuming that if the original parent was
+visitable, then the visitor was named after it:
+
+:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+: #>
+: public:
+:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
+
+The right thing to do here is to have a =visitor_info= attached to the
+=class_info= that is generated during transformation and deals with
+all such rules. The template should just loop through the visitor
+infos. In addition, the visitor infos should tell the template if they
+are abstract or implemented. We may be able to reuse the existing
+=visitor_info= class for this.
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 

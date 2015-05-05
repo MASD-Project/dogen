@@ -61,4 +61,5 @@
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/formatters/serialization/settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
+#include "dogen/cpp/serialization/expansion/inclusion_directives_repository_ser.hpp"
 #include "dogen/cpp/serialization/expansion/inclusion_dependencies_for_formatter_ser.hpp"

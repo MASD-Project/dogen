@@ -98,6 +98,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
+    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-enable-facet domain
     --cpp-enable-facet io
