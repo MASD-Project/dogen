@@ -645,7 +645,6 @@ story in backlog.
 :      {
 
 *** STARTED Implement types class header formatter using stitch       :story:
-    CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
     CLOCK: [2015-04-30 Thu 19:11]--[2015-04-30 Thu 19:27] =>  0:16
@@ -685,16 +684,6 @@ Remaining problems with trivial inheritance:
 - too much space after end of namespaces and before end if.
 - class marked as service is being generated.
 
-Tasks:
-
-- create an inclusion assistant to make client code more readable.
-- create a inclusion directives repository with the inclusion
-  directives and a "does not require inclusion" set. Factory to use
-  the set to avoid generating inclusions for primitives. Client code
-  to use the set to check if a type needs inclusion. This way we avoid
-  logic errors where we forgot to generate an include where we should
-  have. Its not very efficient though.
-
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
     CLOCK: [2015-04-28 Tue 18:52]--[2015-04-28 Tue 19:33] =>  0:41
@@ -730,6 +719,25 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
+
+*** STARTED Refactor includes directive generation                    :story:
+    CLOCK: [2015-05-05 Tue 17:30]--[2015-05-05 Tue 18:00] =>  0:30
+    CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
+
+At present inclusion directives and usage of inclusion dependencies is
+a bit messy. We need to clean it up a bit before we start using it on
+all formatters or else we will generate a lot of boilerplate code for
+no reason.
+
+Tasks:
+
+- create an inclusion assistant to make client code more readable.
+- create a inclusion directives repository with the inclusion
+  directives and a "does not require inclusion" set. Factory to use
+  the set to avoid generating inclusions for primitives. Client code
+  to use the set to check if a type needs inclusion. This way we avoid
+  logic errors where we forgot to generate an include where we should
+  have. Its not very efficient though.
 
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
