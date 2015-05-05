@@ -48,13 +48,15 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_required"
+            "simple" : "inclusion_required",
+            "qualified" : "cpp.inclusion_required"
+
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp"
         },
         "value_type" : "boolean",
-        "definition_type" : "formatter_template",
+        "definition_type" : "instance",
         "scope" : "entity",
         "default_value" : true
     },

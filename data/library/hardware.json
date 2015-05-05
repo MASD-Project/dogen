@@ -9,6 +9,7 @@
             "simple_name" : "bool",
             "extensions" : {
                 "cpp.type.family" : "boolean",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -17,6 +18,7 @@
             "simple_name" : "char",
             "extensions" : {
                 "cpp.type.family" : "character",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -25,6 +27,7 @@
             "simple_name" : "unsigned char",
             "extensions" : {
                 "cpp.type.family" : "character",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -33,6 +36,7 @@
             "simple_name" : "int",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -41,6 +45,7 @@
             "simple_name" : "unsigned int",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -49,6 +54,7 @@
             "simple_name" : "short",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -57,6 +63,7 @@
             "simple_name" : "unsigned short",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -65,6 +72,7 @@
             "simple_name" : "long",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -73,6 +81,7 @@
             "simple_name" : "unsigned long",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -81,6 +90,7 @@
             "simple_name" : "long long",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -89,6 +99,7 @@
             "simple_name" : "unsigned long long",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -97,6 +108,7 @@
             "simple_name" : "float",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -105,6 +117,7 @@
             "simple_name" : "double",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         },
@@ -113,6 +126,7 @@
             "simple_name" : "long double",
             "extensions" : {
                 "cpp.type.family" : "floating_point",
+                "cpp.inclusion_required" : false,
                 "cpp.type.requires_manual_default_constructor" : true
             }
         }
