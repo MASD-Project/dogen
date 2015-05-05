@@ -855,6 +855,18 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Investigate current support for =std::set= and =std::map=         :story:
+
+It seems that we do not support sets and maps at present. When we
+tried to use a set, we got errors in the guts of test data generation:
+
+: /usr/bin/../lib/gcc/x86_64-linux-gnu/4.9/../../../../include/c++/4.9/bits/stl_function.h:371:20: error: invalid operands to binary expression ('const dogen::sml::qname' and 'const dogen::sml::qname')
+:       { return __x < __y; }
+
+This could be a bug (e.g. we are placing the =operator<= in the wrong
+place etc). Or it could be that we just never needed ordered maps and
+sets so we never added proper support.
+
 *** Consider moving dia diagrams to their own project                 :story:
 
 We originally create a diagrams top-level directory for all of the
