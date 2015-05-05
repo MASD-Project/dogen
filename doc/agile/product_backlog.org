@@ -5370,6 +5370,20 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider offering identifier suggestions for misspelling           :story:
+
+We just bumped into an error where a type was not spelled correctly:
+
+: Error: Object has property with undefined type: <cpp><expansion><inlcusion_directives_repository>
+
+We meant to say =inclusion= rather than =inlcusion=. We should
+investigate if the clang "misspell" matching is available to use from
+the outside word; it would be useful in cases such as this. We should
+be able to just push all of the available qnames in SML and then,
+given a name, see if it matches.
+
+See Spell Checker section of [[http://blog.llvm.org/2010/04/amazing-feats-of-clang-error-recovery.html][this]] post.
+
 *** Consider using a graph in SML for indexing and other tasks        :story:
 
 To keep things simple we created a number of specialised indexers,
