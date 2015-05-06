@@ -56,19 +56,14 @@ class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
     boost::optional<expansion::inclusion_dependencies_for_formatter>
-    provide(const dynamic::schema::repository& rp, const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives,
-        const sml::object& o) const;
+    provide(const dynamic::schema::repository& rp,
+        const expansion::inclusion_directives_repository& idr,
+        const sml::object& o) const override;
 };
 
 boost::optional<expansion::inclusion_dependencies_for_formatter>
 provider::provide(const dynamic::schema::repository& /*rp*/,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string> >&
-    /*inclusion_directives*/,
+    const expansion::inclusion_directives_repository& /*idr*/,
     const sml::object& o) const {
     boost::optional<expansion::inclusion_dependencies_for_formatter> r;
 

@@ -30,6 +30,7 @@
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -40,13 +41,9 @@ namespace expansion {
  */
 class inclusion_directives_factory {
 public:
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-    >
-    make(const dynamic::schema::repository& rp,
-         const formatters::container& fc,
-         const sml::model& m) const;
+    inclusion_directives_repository make(
+        const dynamic::schema::repository& rp,
+        const formatters::container& fc, const sml::model& m) const;
 };
 
 } } }

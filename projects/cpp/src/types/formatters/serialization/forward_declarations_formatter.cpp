@@ -62,26 +62,22 @@ class provider : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
 
     boost::optional<expansion::inclusion_dependencies_for_formatter>
-    provide(const dynamic::schema::repository& rp, const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives,
-        const sml::object& o) const;
+    provide(const dynamic::schema::repository& rp,
+        const expansion::inclusion_directives_repository& idr,
+        const sml::object& o) const override;
 };
 
 boost::optional<expansion::inclusion_dependencies_for_formatter>
-provider::provide(const dynamic::schema::repository& /*rp*/,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string> >&
-    inclusion_directives,
+provider::provide(const dynamic::schema::repository& /*srp*/,
+    const expansion::inclusion_directives_repository& idr,
     const sml::object& o) const {
     boost::optional<expansion::inclusion_dependencies_for_formatter>
         r = expansion::inclusion_dependencies_for_formatter();
     r->formatter_name(traits::forward_declarations_formatter_name());
 
     auto& id(r->inclusion_dependencies());
-    const expansion::inclusion_directives_selector id_sel(inclusion_directives);
+    const expansion::inclusion_directives_selector
+        id_sel(idr.inclusion_directives());
     const auto fn(formatters::types::traits::
         forward_declarations_formatter_name());
     const auto id2(id_sel.select_inclusion_directive(o.name(), fn));

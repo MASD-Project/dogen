@@ -27,6 +27,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/expansion/building_error.hpp"
+#include "dogen/cpp/io/expansion/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_factory.hpp"
 
@@ -97,11 +98,8 @@ inclusion_directives_generator::result() const {
     return result_;
 }
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string,std::string>
-    >
-inclusion_directives_factory::make(const dynamic::schema::repository& rp,
+inclusion_directives_repository inclusion_directives_factory::
+make(const dynamic::schema::repository& rp,
     const formatters::container& fc,
     const sml::model& m) const {
 
@@ -110,7 +108,9 @@ inclusion_directives_factory::make(const dynamic::schema::repository& rp,
     inclusion_directives_generator g(rp, fc);
     sml::all_model_items_traversal(m, g);
 
-    const auto& r(g.result());
+    inclusion_directives_repository r;
+    r.inclusion_directives(g.result());
+
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives:"
                              << r;
     return r;

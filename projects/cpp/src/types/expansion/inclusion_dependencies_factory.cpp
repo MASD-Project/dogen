@@ -105,13 +105,9 @@ bool include_directive_comparer(
 class inclusion_dependencies_generator {
 public:
     inclusion_dependencies_generator(const dynamic::schema::repository& rp,
-        const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives)
+        const container& c, const inclusion_directives_repository& idrp)
         : schema_repository_(rp), container_(c),
-          inclusion_directives_(inclusion_directives) {}
+          inclusion_directives_repository_(idrp) {}
 
 private:
     /**
@@ -136,7 +132,8 @@ private:
 
         auto& r(create_map_for_qname(e.name()));
         for (const auto p : providers) {
-            auto idff(p->provide(schema_repository_, inclusion_directives_, e));
+            const auto& idrp(inclusion_directives_repository_);
+            auto idff(p->provide(schema_repository_, idrp, e));
 
             if (!idff)
                 continue;
@@ -177,10 +174,7 @@ public:
 private:
     const dynamic::schema::repository& schema_repository_;
     const container& container_;
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives_;
+    const inclusion_directives_repository& inclusion_directives_repository_;
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::list<std::string> >
@@ -214,14 +208,12 @@ std::unordered_map<sml::qname,
                    std::unordered_map<std::string, std::list<std::string> >
                    >
 inclusion_dependencies_factory::make(const dynamic::schema::repository& rp,
-    const container& c, const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives, const sml::model& m) const {
+    const container& c, const inclusion_directives_repository& idrp,
+    const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
-    inclusion_dependencies_generator g(rp, c, inclusion_directives);
+    inclusion_dependencies_generator g(rp, c, idrp);
     sml::all_model_items_traversal(m, g);
 
     const auto& r(g.result());

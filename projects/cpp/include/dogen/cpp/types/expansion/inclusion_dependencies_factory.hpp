@@ -32,6 +32,7 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,11 +49,8 @@ public:
     std::unordered_map<sml::qname,
                        std::unordered_map<std::string, std::list<std::string> >
                        >
-    make(const dynamic::schema::repository& rp, const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives, const sml::model& m) const;
+    make(const dynamic::schema::repository& srp, const container& c,
+        const inclusion_directives_repository& idrp, const sml::model& m) const;
 };
 
 } } }

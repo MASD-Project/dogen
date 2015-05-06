@@ -32,6 +32,7 @@
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
 #include "dogen/cpp/types/expansion/registrar.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,11 +49,9 @@ private:
     /**
      * @brief Obtains all of the inclusion directives for this model.
      */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-    >
-    obtain_inclusion_directives_activity(const dynamic::schema::repository& rp,
+    inclusion_directives_repository
+    obtain_inclusion_directives_repository_activity(
+        const dynamic::schema::repository& rp,
         const sml::model& m) const;
 
     /**
@@ -69,11 +68,8 @@ private:
         std::unordered_map<std::string, std::list<std::string> >
         >
     obtain_inclusion_dependencies_activity(
-        const dynamic::schema::repository& rp, const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives, const sml::model& m) const;
+        const dynamic::schema::repository& srp, const container& c,
+        const inclusion_directives_repository& idrp, const sml::model& m) const;
 
 public:
     /**

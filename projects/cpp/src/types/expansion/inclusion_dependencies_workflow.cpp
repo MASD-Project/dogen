@@ -43,12 +43,9 @@ namespace expansion {
 inclusion_dependencies_workflow::inclusion_dependencies_workflow(
     const formatters::container& c) : container_(c) {}
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::string>
-    >
-inclusion_dependencies_workflow::
-obtain_inclusion_directives_activity(const dynamic::schema::repository& rp,
+inclusion_directives_repository inclusion_dependencies_workflow::
+obtain_inclusion_directives_repository_activity(
+    const dynamic::schema::repository& rp,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
 
@@ -76,15 +73,13 @@ std::unordered_map<
     >
 inclusion_dependencies_workflow::
 obtain_inclusion_dependencies_activity(
-    const dynamic::schema::repository& rp, const container& c,
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives, const sml::model& m) const {
+    const dynamic::schema::repository& srp, const container& c,
+    const inclusion_directives_repository& idrp,
+    const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
     inclusion_dependencies_factory f;
-    const auto r(f.make(rp, c, inclusion_directives, m));
+    const auto r(f.make(srp, c, idrp, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies:";
     return r;
@@ -99,8 +94,8 @@ execute(const dynamic::schema::repository& rp, const sml::model& m) const {
     registrar rg;
     initialise_registrar_activity(rg);
     const auto c(rg.container());
-    const auto id(obtain_inclusion_directives_activity(rp, m));
-    const auto r(obtain_inclusion_dependencies_activity(rp, c, id, m));
+    const auto idrp(obtain_inclusion_directives_repository_activity(rp, m));
+    const auto r(obtain_inclusion_dependencies_activity(rp, c, idrp, m));
     return r;
 }
 

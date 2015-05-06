@@ -32,6 +32,7 @@
 #include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_for_formatter.hpp"
 
 namespace dogen {
@@ -56,11 +57,8 @@ public:
      * @brief Provide the inclusion dependencies.
      */
     virtual boost::optional<inclusion_dependencies_for_formatter>
-    provide(const dynamic::schema::repository& rp,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives,
+    provide(const dynamic::schema::repository& srp,
+        const inclusion_directives_repository& idrp,
         const Element& e) const = 0;
 };
 

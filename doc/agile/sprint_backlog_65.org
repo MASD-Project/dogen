@@ -721,6 +721,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor includes directive generation                    :story:
+    CLOCK: [2015-05-06 Wed 17:05]--[2015-05-06 Wed 17:35] =>  0:30
     CLOCK: [2015-05-06 Wed 16:15]--[2015-05-06 Wed 17:05] =>  0:50
     CLOCK: [2015-05-05 Tue 17:30]--[2015-05-05 Tue 18:00] =>  0:30
     CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
@@ -739,6 +740,18 @@ Tasks:
   to use the set to check if a type needs inclusion. This way we avoid
   logic errors where we forgot to generate an include where we should
   have. Its not very efficient though.
+
+*** Consider dropping the prefix inclusion in expansion               :story:
+
+At present we have really long class names because they all need
+"inclusion" on the name. In reality, we have two concepts:
+
+- directives
+- dependencies
+
+We don't need the prefix "inclusion" to make these understandable. We
+can probably get away with removing it from all of the expansion
+classes without significant loss of meaning.
 
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
