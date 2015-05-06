@@ -868,6 +868,12 @@ trivial inheritance:
 : +    return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
 :  }
 
+The problem is that generalisation indexer is now dependent on the
+order of the objects in the unordered map. Depending on which way we
+traverse up the tree, we end up with a differently ordered leaf
+container. We need to find a way to guarantee order. We should also
+look into how dia to sml guaranteed ordering.
+
 ** Deprecated
 *** CANCELLED Add tests for main header file formatter with optionality :story:
     CLOSED: [2015-04-28 Tue 11:50]
