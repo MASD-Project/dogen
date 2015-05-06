@@ -18,19 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
+#include "dogen/cpp/hash/settings/inclusion_directives_settings_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-class inclusion_directives_factory;
+std::size_t inclusion_directives_settings_hasher::hash(const inclusion_directives_settings&v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.inclusion_directives()));
+    combine(seed, v.requires_inclusion_directives());
+
+    return seed;
+}
 
 } } }
-
-#endif

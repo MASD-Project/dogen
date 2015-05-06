@@ -24,12 +24,13 @@
 #include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
-#include "dogen/cpp/types/settings/inclusion_directives_factory.hpp"
+#include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.settings.inclusion_directives_factory"));
+static logger lg(logger_factory(
+        "cpp.settings.inclusion_directives_settings_factory"));
 
 const std::string field_definition_not_found(
     "Could not find expected field definition: ");
@@ -41,12 +42,12 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-inclusion_directives_factory::
-inclusion_directives_factory(const dynamic::schema::repository& rp,
+inclusion_directives_settings_factory::
+inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
     const formatters::container& fc)
     : formatter_properties_(make_formatter_properties(rp, fc)) {}
 
-void inclusion_directives_factory::
+void inclusion_directives_settings_factory::
 setup_formatter_fields(const dynamic::schema::repository& rp,
     const std::string& formatter_name,
     formatter_properties& fp) const {
@@ -69,8 +70,8 @@ setup_formatter_fields(const dynamic::schema::repository& rp,
     }
 }
 
-inclusion_directives_factory::formatter_properties
-inclusion_directives_factory::make_formatter_properties(
+inclusion_directives_settings_factory::formatter_properties
+inclusion_directives_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,
     const formatters::formatter_interface& f) const {
 
@@ -83,9 +84,9 @@ inclusion_directives_factory::make_formatter_properties(
 
 std::unordered_map<
     std::string,
-    inclusion_directives_factory::formatter_properties
+    inclusion_directives_settings_factory::formatter_properties
     >
-inclusion_directives_factory::
+inclusion_directives_settings_factory::
 make_formatter_properties(const dynamic::schema::repository& rp,
     const formatters::container& fc) const {
     std::unordered_map<std::string, formatter_properties> r;
@@ -102,7 +103,7 @@ make_formatter_properties(const dynamic::schema::repository& rp,
     return r;
 }
 
-boost::optional<std::string> inclusion_directives_factory::
+boost::optional<std::string> inclusion_directives_settings_factory::
 create_inclusion_directive_for_formatter(const formatter_properties& fp,
     const dynamic::schema::object& o) const {
     boost::optional<std::string> r;
@@ -117,7 +118,8 @@ create_inclusion_directive_for_formatter(const formatter_properties& fp,
 }
 
 std::unordered_map<std::string, std::string>
-inclusion_directives_factory::make(const dynamic::schema::object& o) const {
+inclusion_directives_settings_factory::make(
+    const dynamic::schema::object& o) const {
     std::unordered_map<std::string, std::string> r;
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);

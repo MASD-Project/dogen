@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_SETTINGS_FACTORY_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_INCLUSION_DIRECTIVES_SETTINGS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,9 +38,9 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-class inclusion_directives_factory {
+class inclusion_directives_settings_factory {
 public:
-    inclusion_directives_factory(const dynamic::schema::repository& rp,
+    inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
         const formatters::container& fc);
 
 private:

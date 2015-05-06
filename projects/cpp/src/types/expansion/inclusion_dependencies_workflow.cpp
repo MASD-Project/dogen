@@ -23,7 +23,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
-#include "dogen/cpp/types/expansion/inclusion_directives_factory.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_workflow.hpp"
 
 namespace {
@@ -49,7 +49,7 @@ obtain_inclusion_directives_repository_activity(
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
 
-    inclusion_directives_factory f;
+    inclusion_directives_repository_factory f;
     const auto r(f.make(rp, container_, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";

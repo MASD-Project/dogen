@@ -28,13 +28,14 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/expansion/building_error.hpp"
 #include "dogen/cpp/io/expansion/inclusion_directives_repository_io.hpp"
-#include "dogen/cpp/types/settings/inclusion_directives_factory.hpp"
-#include "dogen/cpp/types/expansion/inclusion_directives_factory.hpp"
+#include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.expansion.inclusion_directives_factory"));
+static logger lg(logger_factory(
+        "cpp.expansion.inclusion_directives_repository_factory"));
 
 const std::string duplicate_qname("Duplicate qname: ");
 
@@ -83,7 +84,7 @@ public:
     >& result() const;
 
 private:
-    const settings::inclusion_directives_factory factory_;
+    const settings::inclusion_directives_settings_factory factory_;
     std::unordered_map<
         sml::qname,
         std::unordered_map<std::string, std::string>
@@ -98,7 +99,7 @@ inclusion_directives_generator::result() const {
     return result_;
 }
 
-inclusion_directives_repository inclusion_directives_factory::
+inclusion_directives_repository inclusion_directives_repository_factory::
 make(const dynamic::schema::repository& rp,
     const formatters::container& fc,
     const sml::model& m) const {

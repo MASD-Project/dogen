@@ -18,18 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/sml/types/model.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-class inclusion_directives_factory;
+/**
+ * @brief Creates the inclusion directives for an SML model.
+ */
+class inclusion_directives_repository_factory {
+public:
+    inclusion_directives_repository make(
+        const dynamic::schema::repository& rp,
+        const formatters::container& fc, const sml::model& m) const;
+};
 
 } } }
 
