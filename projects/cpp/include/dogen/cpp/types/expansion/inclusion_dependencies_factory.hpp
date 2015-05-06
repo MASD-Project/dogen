@@ -29,11 +29,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/expansion/container.hpp"
 
 namespace dogen {
@@ -45,41 +42,17 @@ namespace expansion {
  */
 class inclusion_dependencies_factory {
 public:
-    inclusion_dependencies_factory(const dynamic::schema::repository& rp,
-        const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives);
-
-public:
     /**
      * @brief Create inclusion dependencies.
      */
-    /**@{*/
-    std::unordered_map<std::string,std::list<std::string> >
-    make(const dogen::sml::object& o) const;
-
-    std::unordered_map<std::string,std::list<std::string> >
-    make(const dogen::sml::enumeration& e) const;
-
-    std::unordered_map<std::string,std::list<std::string> >
-    make(const dogen::sml::primitive& p) const;
-
-    std::unordered_map<std::string,std::list<std::string> >
-    make(const dogen::sml::module& m) const;
-
-    std::unordered_map<std::string,std::list<std::string> >
-    make(const dogen::sml::concept& c) const;
-    /**@}*/
-
-private:
-    const dynamic::schema::repository& repository_;
-    const container& container_;
-    const std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives_;
+    std::unordered_map<sml::qname,
+                       std::unordered_map<std::string, std::list<std::string> >
+                       >
+    make(const dynamic::schema::repository& rp, const container& c,
+        const std::unordered_map<
+            sml::qname,
+            std::unordered_map<std::string, std::string>
+            >& inclusion_directives, const sml::model& m) const;
 };
 
 } } }

@@ -20,14 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/pair_io.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/types/settings/inclusion_directives_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_factory.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_workflow.hpp"
@@ -38,7 +32,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.expansion.inclusion_dependencies_workflow"));
 
-const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");
 
 }
@@ -46,67 +39,6 @@ const std::string model_module_not_found("Model module not found for model: ");
 namespace dogen {
 namespace cpp {
 namespace expansion {
-
-/**
- * @brief Generates all inclusion dependencies.
- */
-class inclusion_dependencies_generator {
-public:
-    inclusion_dependencies_generator(const dynamic::schema::repository& rp,
-        const container& c,
-        const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string>
-            >& inclusion_directives) : factory_(rp, c, inclusion_directives) { }
-
-private:
-    /**
-     * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
-     */
-    template<typename ExtensibleNameableAndGeneratable>
-    void generate(const ExtensibleNameableAndGeneratable& e) {
-        if (e.generation_type() == sml::generation_types::no_generation)
-            return;
-
-        const auto deps(factory_.make(e));
-        const auto pair(result_.insert(std::make_pair(e.name(), deps)));
-        const bool inserted(pair.second);
-        if (!inserted) {
-            const auto n(sml::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(workflow_error(duplicate_qname + n));
-        }
-    }
-
-public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
-
-public:
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >& result() const;
-
-private:
-    const inclusion_dependencies_factory factory_;
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::list<std::string> >
-        > result_;
-};
-
-const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >&
-inclusion_dependencies_generator::result() const {
-    return result_;
-}
 
 inclusion_dependencies_workflow::inclusion_dependencies_workflow(
     const formatters::container& c) : container_(c) {}
@@ -151,12 +83,10 @@ obtain_inclusion_dependencies_activity(
         >& inclusion_directives, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
-    inclusion_dependencies_generator g(rp, c, inclusion_directives);
-    sml::all_model_items_traversal(m, g);
+    inclusion_dependencies_factory f;
+    const auto r(f.make(rp, c, inclusion_directives, m));
 
-    const auto& r(g.result());
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies:"
-                             << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies:";
     return r;
 }
 
