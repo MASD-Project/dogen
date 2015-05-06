@@ -721,6 +721,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor includes directive generation                    :story:
+    CLOCK: [2015-05-06 Wed 17:53]--[2015-05-06 Wed 18:06] =>  0:13
     CLOCK: [2015-05-06 Wed 17:36]--[2015-05-06 Wed 17:43] =>  0:07
     CLOCK: [2015-05-06 Wed 17:05]--[2015-05-06 Wed 17:35] =>  0:30
     CLOCK: [2015-05-06 Wed 16:15]--[2015-05-06 Wed 17:05] =>  0:50
@@ -742,7 +743,19 @@ Tasks:
   logic errors where we forgot to generate an include where we should
   have. Its not very efficient though.
 
-*** Consider dropping the prefix inclusion in expansion               :story:
+*** STARTED Consider dropping the prefix inclusion in expansion       :story:
+    CLOCK: [2015-05-06 Wed 17:44]--[2015-05-06 Wed 17:52] =>  0:08
+
+*New Understanding*
+
+The problem with this is that "directive" does not have any
+meaning. We could get away with dependencies, but directive is very
+open ended. We cannot start changing meta-data keys (e.g. =directive=
+instead of =inclusion_directive=) because that would confuse users; so
+we would end up with two names in two different places, probably even
+more confusing.
+
+*Previous Understanding*
 
 At present we have really long class names because they all need
 "inclusion" on the name. In reality, we have two concepts:
