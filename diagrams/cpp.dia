@@ -34095,7 +34095,7 @@ order to generate a compilable C++ file.
         <dia:point val="392,-10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="391.95,-10.05;431.82,3.05"/>
+        <dia:rectangle val="391.95,-10.05;431.82,2.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="392,-10"/>
@@ -34104,7 +34104,7 @@ order to generate a compilable C++ file.
         <dia:real val="39.769999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13"/>
+        <dia:real val="12.199999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#inclusion_dependencies_assistant#</dia:string>
@@ -34273,10 +34273,10 @@ order to generate a compilable C++ file.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#id#</dia:string>
+                <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;sml::qname, std::unordered_map&lt;std::string, std::string&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const expansion::inclusion_directives_repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -35128,16 +35128,16 @@ order to generate a compilable C++ file.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="411.885,3"/>
+        <dia:point val="411.885,2.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="383.565,2.25;412.635,15.8"/>
+        <dia:rectangle val="383.565,1.45;412.635,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="411.885,3"/>
+        <dia:point val="411.885,2.2"/>
         <dia:point val="411.885,10"/>
         <dia:point val="383.615,10"/>
         <dia:point val="383.615,15"/>
@@ -35383,14 +35383,14 @@ Hides traits from client.#</dia:string>
         <dia:point val="385.145,5.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="385.083,2.60244;392.163,5.11223"/>
+        <dia:rectangle val="385.08,1.81145;392.2,5.11536"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="385.145,5.05"/>
-        <dia:point val="392,3"/>
+        <dia:point val="392,2.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -35405,7 +35405,7 @@ Hides traits from client.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="388.572,4.525"/>
+        <dia:point val="388.572,4.125"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O284" connection="4"/>

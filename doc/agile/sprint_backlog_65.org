@@ -13,13 +13,13 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-06 Wed 18:20]
+Clock summary at [2015-05-07 Thu 20:40]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                               | *30:44* |       |      |
+| *Total time*                                                               | *32:09* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                     |         | 30:44 |      |
+| Active                                                                     |         | 32:09 |      |
 | STARTED Sprint and product backlog grooming                                |         |       | 2:32 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
@@ -43,7 +43,7 @@ Clock summary at [2015-05-06 Wed 18:20]
 | POSTPONED Assignment operator seems to pass types by value                 |         |       | 0:07 |
 | STARTED Implement types class header formatter using stitch                |         |       | 7:03 |
 | STARTED Implement options copier and remove options from context           |         |       | 0:50 |
-| STARTED Refactor includes directive generation                             |         |       | 4:31 |
+| STARTED Refactor includes directive generation                             |         |       | 5:56 |
 | STARTED Consider dropping the prefix inclusion in expansion                |         |       | 0:08 |
 #+end:
 
@@ -723,6 +723,7 @@ needs to be done.
   complete constructor) and implement the type settings factory.
 
 *** STARTED Refactor includes directive generation                    :story:
+    CLOCK: [2015-05-07 Thu 19:13]--[2015-05-07 Thu 19:51] =>  0:38
     CLOCK: [2015-05-07 Thu 07:49]--[2015-05-07 Thu 08:36] =>  0:47
     CLOCK: [2015-05-06 Wed 17:53]--[2015-05-06 Wed 18:06] =>  0:13
     CLOCK: [2015-05-06 Wed 17:36]--[2015-05-06 Wed 17:43] =>  0:07
