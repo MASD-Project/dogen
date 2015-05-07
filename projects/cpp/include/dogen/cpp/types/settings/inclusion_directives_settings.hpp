@@ -46,7 +46,7 @@ public:
 public:
     inclusion_directives_settings(
         const std::unordered_map<std::string, std::string>& inclusion_directives,
-        const bool requires_inclusion_directives);
+        const bool inclusion_required);
 
 private:
     template<typename Archive>
@@ -61,8 +61,8 @@ public:
     void inclusion_directives(const std::unordered_map<std::string, std::string>& v);
     void inclusion_directives(const std::unordered_map<std::string, std::string>&& v);
 
-    bool requires_inclusion_directives() const;
-    void requires_inclusion_directives(const bool v);
+    bool inclusion_required() const;
+    void inclusion_required(const bool v);
 
 public:
     bool operator==(const inclusion_directives_settings& rhs) const;
@@ -76,7 +76,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> inclusion_directives_;
-    bool requires_inclusion_directives_;
+    bool inclusion_required_;
 };
 
 } } }

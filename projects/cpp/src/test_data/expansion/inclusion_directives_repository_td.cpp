@@ -70,7 +70,7 @@ inclusion_directives_repository_generator::inclusion_directives_repository_gener
 void inclusion_directives_repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.inclusion_directives(create_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(position + 0));
-    v.types_without_inclusion_directives(create_std_unordered_set_dogen_sml_qname(position + 1));
+    v.inclusion_not_required(create_std_unordered_set_dogen_sml_qname(position + 1));
 }
 
 inclusion_directives_repository_generator::result_type

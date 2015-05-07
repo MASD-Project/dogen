@@ -63,7 +63,7 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directives_settings& v
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::inclusion_directives_settings\"" << ", "
       << "\"inclusion_directives\": " << v.inclusion_directives() << ", "
-      << "\"requires_inclusion_directives\": " << v.requires_inclusion_directives()
+      << "\"inclusion_required\": " << v.inclusion_required()
       << " }";
     return(s);
 }

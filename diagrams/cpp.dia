@@ -32379,7 +32379,7 @@ from dynamic expansion.#</dia:string>
         <dia:point val="485,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="433.567,56.55;485.75,67.8"/>
+        <dia:rectangle val="433.568,56.55;485.75,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34773,7 +34773,7 @@ order to generate a compilable C++ file.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#types_without_inclusion_directives#</dia:string>
+            <dia:string>#inclusion_not_required#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_set&lt;sml::qname&gt;#</dia:string>
@@ -35293,7 +35293,7 @@ verbose.#</dia:string>
         <dia:point val="347.342,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="347.287,-4.29978;348.403,1.05588"/>
+        <dia:rectangle val="347.286,-4.29982;348.403,1.05588"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35808,7 +35808,7 @@ Hides traits from client.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#requires_inclusion_directives#</dia:string>
+            <dia:string>#inclusion_required#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -35878,7 +35878,7 @@ Hides traits from client.#</dia:string>
         <dia:point val="207.34,194.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="206.59,193.55;242.155,207.8"/>
+        <dia:rectangle val="206.59,193.55;242.155,207.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35950,7 +35950,7 @@ Hides traits from client.#</dia:string>
         <dia:point val="369.767,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="364.257,18.55;370.517,32.6"/>
+        <dia:rectangle val="364.257,18.55;370.517,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

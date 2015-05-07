@@ -47,7 +47,7 @@ public:
 public:
     inclusion_directives_repository(
         const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives,
-        const std::unordered_set<dogen::sml::qname>& types_without_inclusion_directives);
+        const std::unordered_set<dogen::sml::qname>& inclusion_not_required);
 
 private:
     template<typename Archive>
@@ -62,10 +62,10 @@ public:
     void inclusion_directives(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& v);
     void inclusion_directives(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >&& v);
 
-    const std::unordered_set<dogen::sml::qname>& types_without_inclusion_directives() const;
-    std::unordered_set<dogen::sml::qname>& types_without_inclusion_directives();
-    void types_without_inclusion_directives(const std::unordered_set<dogen::sml::qname>& v);
-    void types_without_inclusion_directives(const std::unordered_set<dogen::sml::qname>&& v);
+    const std::unordered_set<dogen::sml::qname>& inclusion_not_required() const;
+    std::unordered_set<dogen::sml::qname>& inclusion_not_required();
+    void inclusion_not_required(const std::unordered_set<dogen::sml::qname>& v);
+    void inclusion_not_required(const std::unordered_set<dogen::sml::qname>&& v);
 
 public:
     bool operator==(const inclusion_directives_repository& rhs) const;
@@ -79,7 +79,7 @@ public:
 
 private:
     std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> > inclusion_directives_;
-    std::unordered_set<dogen::sml::qname> types_without_inclusion_directives_;
+    std::unordered_set<dogen::sml::qname> inclusion_not_required_;
 };
 
 } } }

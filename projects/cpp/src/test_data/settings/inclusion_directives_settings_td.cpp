@@ -52,7 +52,7 @@ inclusion_directives_settings_generator::inclusion_directives_settings_generator
 void inclusion_directives_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.inclusion_directives(create_std_unordered_map_std_string_std_string(position + 0));
-    v.requires_inclusion_directives(create_bool(position + 1));
+    v.inclusion_required(create_bool(position + 1));
 }
 
 inclusion_directives_settings_generator::result_type

@@ -26,19 +26,19 @@ namespace expansion {
 
 inclusion_directives_repository::inclusion_directives_repository(
     const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives,
-    const std::unordered_set<dogen::sml::qname>& types_without_inclusion_directives)
+    const std::unordered_set<dogen::sml::qname>& inclusion_not_required)
     : inclusion_directives_(inclusion_directives),
-      types_without_inclusion_directives_(types_without_inclusion_directives) { }
+      inclusion_not_required_(inclusion_not_required) { }
 
 void inclusion_directives_repository::swap(inclusion_directives_repository& other) noexcept {
     using std::swap;
     swap(inclusion_directives_, other.inclusion_directives_);
-    swap(types_without_inclusion_directives_, other.types_without_inclusion_directives_);
+    swap(inclusion_not_required_, other.inclusion_not_required_);
 }
 
 bool inclusion_directives_repository::operator==(const inclusion_directives_repository& rhs) const {
     return inclusion_directives_ == rhs.inclusion_directives_ &&
-        types_without_inclusion_directives_ == rhs.types_without_inclusion_directives_;
+        inclusion_not_required_ == rhs.inclusion_not_required_;
 }
 
 inclusion_directives_repository& inclusion_directives_repository::operator=(inclusion_directives_repository other) {
@@ -63,20 +63,20 @@ void inclusion_directives_repository::inclusion_directives(const std::unordered_
     inclusion_directives_ = std::move(v);
 }
 
-const std::unordered_set<dogen::sml::qname>& inclusion_directives_repository::types_without_inclusion_directives() const {
-    return types_without_inclusion_directives_;
+const std::unordered_set<dogen::sml::qname>& inclusion_directives_repository::inclusion_not_required() const {
+    return inclusion_not_required_;
 }
 
-std::unordered_set<dogen::sml::qname>& inclusion_directives_repository::types_without_inclusion_directives() {
-    return types_without_inclusion_directives_;
+std::unordered_set<dogen::sml::qname>& inclusion_directives_repository::inclusion_not_required() {
+    return inclusion_not_required_;
 }
 
-void inclusion_directives_repository::types_without_inclusion_directives(const std::unordered_set<dogen::sml::qname>& v) {
-    types_without_inclusion_directives_ = v;
+void inclusion_directives_repository::inclusion_not_required(const std::unordered_set<dogen::sml::qname>& v) {
+    inclusion_not_required_ = v;
 }
 
-void inclusion_directives_repository::types_without_inclusion_directives(const std::unordered_set<dogen::sml::qname>&& v) {
-    types_without_inclusion_directives_ = std::move(v);
+void inclusion_directives_repository::inclusion_not_required(const std::unordered_set<dogen::sml::qname>&& v) {
+    inclusion_not_required_ = std::move(v);
 }
 
 } } }

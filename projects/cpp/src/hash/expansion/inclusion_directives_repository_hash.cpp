@@ -66,7 +66,7 @@ std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directi
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(v.inclusion_directives()));
-    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.types_without_inclusion_directives()));
+    combine(seed, hash_std_unordered_set_dogen_sml_qname(v.inclusion_not_required()));
 
     return seed;
 }

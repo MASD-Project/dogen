@@ -59,7 +59,7 @@ std::string traits::header_guard() {
 }
 
 std::string traits::inclusion_required() {
-    static std::string r("inclusion_required");
+    static std::string r("cpp.inclusion_required");
     return r;
 }
 

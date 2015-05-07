@@ -60,10 +60,22 @@ private:
      */
     template<typename ExtensibleAndNameable>
     void generate(const ExtensibleAndNameable& e) {
-        const auto directives(factory_.make(e.extensions()));
-        const auto pair(result_.insert(std::make_pair(e.name(), directives)));
-        const bool inserted(pair.second);
-        if (!inserted) {
+        const auto settings(factory_.make(e.extensions()));
+        if (!settings.inclusion_required()) {
+            auto& inr(result_.inclusion_not_required());
+            const auto pair(inr.insert(e.name()));
+            if (!pair.second) {
+                const auto n(sml::string_converter::convert(e.name()));
+                BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+                BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+            }
+            return;
+        }
+
+        const auto& sid(settings.inclusion_directives());
+        auto& rid(result_.inclusion_directives());
+        const auto pair(rid.insert(std::make_pair(e.name(), sid)));
+        if (!pair.second) {
             const auto n(sml::string_converter::convert(e.name()));
             BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
@@ -78,41 +90,25 @@ public:
     void operator()(const dogen::sml::concept& c) { generate(c); }
 
 public:
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::string>
-    >& result() const;
+    const inclusion_directives_repository& result() const { return result_; }
 
 private:
     const settings::inclusion_directives_settings_factory factory_;
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::string>
-        > result_;
+    inclusion_directives_repository result_;
 };
-
-const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::string>
-    >&
-inclusion_directives_generator::result() const {
-    return result_;
-}
 
 inclusion_directives_repository inclusion_directives_repository_factory::
 make(const dynamic::schema::repository& rp,
     const formatters::container& fc,
     const sml::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started creating inclusion directives.";
+    BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
     inclusion_directives_generator g(rp, fc);
     sml::all_model_items_traversal(m, g);
+    const auto r(g.result());
 
-    inclusion_directives_repository r;
-    r.inclusion_directives(g.result());
-
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives:"
+    BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"
                              << r;
     return r;
 }

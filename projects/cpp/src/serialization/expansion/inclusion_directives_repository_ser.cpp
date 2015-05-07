@@ -42,7 +42,7 @@ void save(Archive& ar,
     const dogen::cpp::expansion::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("inclusion_directives", v.inclusion_directives_);
-    ar << make_nvp("types_without_inclusion_directives", v.types_without_inclusion_directives_);
+    ar << make_nvp("inclusion_not_required", v.inclusion_not_required_);
 }
 
 template<typename Archive>
@@ -50,7 +50,7 @@ void load(Archive& ar,
     dogen::cpp::expansion::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("inclusion_directives", v.inclusion_directives_);
-    ar >> make_nvp("types_without_inclusion_directives", v.types_without_inclusion_directives_);
+    ar >> make_nvp("inclusion_not_required", v.inclusion_not_required_);
 }
 
 } }

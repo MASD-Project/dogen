@@ -33,10 +33,12 @@
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
+
 
 class inclusion_directives_settings_factory {
 public:
@@ -75,24 +77,36 @@ private:
     make_formatter_properties(const dynamic::schema::repository& rp,
         const formatters::container& fc) const;
 
+    /**
+     * @brief Gets up the inclusion required field.
+     */
+    dynamic::schema::field_definition get_inclusion_required_field(
+        const dynamic::schema::repository& rp) const;
+
 private:
     /**
-     * @brief Creates the inclusion directive for a given formatter.
+     * @brief Obtains the inclusion directive for a given formatter.
      */
-    boost::optional<std::string> create_inclusion_directive_for_formatter(
+    boost::optional<std::string> obtain_inclusion_directive_for_formatter(
         const formatter_properties& fp,
         const dynamic::schema::object& o) const;
 
+    /**
+     * @brief Obtains the value of the inclusion required flag.
+     */
+    bool obtain_inclusion_required(const dynamic::schema::object& o) const;
+
 public:
     /**
-     * @brief Produce the inclusion directives for all formatters.
+     * @brief Produce the inclusion directive settings for all
+     * formatters.
      */
-    std::unordered_map<std::string, std::string>
-    make(const dynamic::schema::object& o) const;
+    inclusion_directives_settings make(const dynamic::schema::object& o) const;
 
 private:
     const std::unordered_map<std::string, formatter_properties>
     formatter_properties_;
+    dynamic::schema::field_definition inclusion_required_;
 };
 
 } } }

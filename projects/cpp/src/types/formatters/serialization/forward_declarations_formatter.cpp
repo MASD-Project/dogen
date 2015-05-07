@@ -76,8 +76,7 @@ provider::provide(const dynamic::schema::repository& /*srp*/,
     r->formatter_name(traits::forward_declarations_formatter_name());
 
     auto& id(r->inclusion_dependencies());
-    const expansion::inclusion_directives_selector
-        id_sel(idr.inclusion_directives());
+    const expansion::inclusion_directives_selector id_sel(idr);
     const auto fn(formatters::types::traits::
         forward_declarations_formatter_name());
     const auto id2(id_sel.select_inclusion_directive(o.name(), fn));

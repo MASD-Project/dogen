@@ -30,6 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -40,9 +41,8 @@ namespace expansion {
  */
 class inclusion_directives_selector {
 public:
-    inclusion_directives_selector(const std::unordered_map<
-            sml::qname,
-            std::unordered_map<std::string, std::string> >& id);
+    explicit inclusion_directives_selector(
+        const inclusion_directives_repository& rp);
 
 private:
     /**
@@ -62,6 +62,12 @@ private:
     const std::unordered_map<std::string, std::string>&
     inclusion_directives_for_qname(const sml::qname& qn) const;
 
+    /**
+     * @brief Returns true if the qname does not require inclusion
+     * directives.
+     */
+    bool inclusion_not_required(const sml::qname& qn) const;
+
 public:
     /**
      * @brief Returns the inclusion directive for a given qname and
@@ -73,10 +79,7 @@ public:
         const sml::qname& qn, const std::string& formatter_name) const;
 
 private:
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::string> >&
-    inclusion_directives_;
+    const inclusion_directives_repository& repository_;
 };
 
 } } }

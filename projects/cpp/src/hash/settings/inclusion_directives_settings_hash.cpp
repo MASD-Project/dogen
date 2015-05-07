@@ -48,7 +48,7 @@ std::size_t inclusion_directives_settings_hasher::hash(const inclusion_directive
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_std_string(v.inclusion_directives()));
-    combine(seed, v.requires_inclusion_directives());
+    combine(seed, v.inclusion_required());
 
     return seed;
 }

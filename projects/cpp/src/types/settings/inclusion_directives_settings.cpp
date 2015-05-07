@@ -25,23 +25,23 @@ namespace cpp {
 namespace settings {
 
 inclusion_directives_settings::inclusion_directives_settings()
-    : requires_inclusion_directives_(static_cast<bool>(0)) { }
+    : inclusion_required_(static_cast<bool>(0)) { }
 
 inclusion_directives_settings::inclusion_directives_settings(
     const std::unordered_map<std::string, std::string>& inclusion_directives,
-    const bool requires_inclusion_directives)
+    const bool inclusion_required)
     : inclusion_directives_(inclusion_directives),
-      requires_inclusion_directives_(requires_inclusion_directives) { }
+      inclusion_required_(inclusion_required) { }
 
 void inclusion_directives_settings::swap(inclusion_directives_settings& other) noexcept {
     using std::swap;
     swap(inclusion_directives_, other.inclusion_directives_);
-    swap(requires_inclusion_directives_, other.requires_inclusion_directives_);
+    swap(inclusion_required_, other.inclusion_required_);
 }
 
 bool inclusion_directives_settings::operator==(const inclusion_directives_settings& rhs) const {
     return inclusion_directives_ == rhs.inclusion_directives_ &&
-        requires_inclusion_directives_ == rhs.requires_inclusion_directives_;
+        inclusion_required_ == rhs.inclusion_required_;
 }
 
 inclusion_directives_settings& inclusion_directives_settings::operator=(inclusion_directives_settings other) {
@@ -66,12 +66,12 @@ void inclusion_directives_settings::inclusion_directives(const std::unordered_ma
     inclusion_directives_ = std::move(v);
 }
 
-bool inclusion_directives_settings::requires_inclusion_directives() const {
-    return requires_inclusion_directives_;
+bool inclusion_directives_settings::inclusion_required() const {
+    return inclusion_required_;
 }
 
-void inclusion_directives_settings::requires_inclusion_directives(const bool v) {
-    requires_inclusion_directives_ = v;
+void inclusion_directives_settings::inclusion_required(const bool v) {
+    inclusion_required_ = v;
 }
 
 } } }

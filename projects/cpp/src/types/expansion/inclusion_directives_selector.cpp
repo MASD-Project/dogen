@@ -41,10 +41,7 @@ namespace cpp {
 namespace expansion {
 
 inclusion_directives_selector::inclusion_directives_selector(
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::string> >& id)
-    : inclusion_directives_(id) {}
+    const inclusion_directives_repository& rp) : repository_(rp) {}
 
 boost::optional<std::string> inclusion_directives_selector::
 inclusion_directives_for_formatter_name(
@@ -63,8 +60,8 @@ inclusion_directives_for_formatter_name(
 const std::unordered_map<std::string, std::string>&
 inclusion_directives_selector::
 inclusion_directives_for_qname(const sml::qname& qn) const {
-    const auto i(inclusion_directives_.find(qn));
-    if (i == inclusion_directives_.end()) {
+    const auto i(repository_.inclusion_directives().find(qn));
+    if (i == repository_.inclusion_directives().end()) {
         const auto n(sml::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << qname_inclusion_directives_missing << n;
         BOOST_THROW_EXCEPTION(
@@ -73,9 +70,18 @@ inclusion_directives_for_qname(const sml::qname& qn) const {
     return i->second;
 }
 
+bool inclusion_directives_selector::
+inclusion_not_required(const sml::qname& qn) const {
+    const auto i(repository_.inclusion_not_required().find(qn));
+    return i != repository_.inclusion_not_required().end();
+}
+
 boost::optional<std::string> inclusion_directives_selector::
 select_inclusion_directive(const sml::qname& qn,
     const std::string& formatter_name) const {
+    if (inclusion_not_required(qn))
+        return boost::optional<std::string>();
+
     const auto& id(inclusion_directives_for_qname(qn));
     const auto r(inclusion_directives_for_formatter_name(id, formatter_name));
     return r;

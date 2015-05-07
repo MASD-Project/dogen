@@ -99,8 +99,7 @@ provider::provide(const dynamic::schema::repository& rp,
     if (io_enabled && (use_integrated_io || o.is_parent() || o.is_child()))
         id.push_back(inclusion_constants::std::iosfwd());
 
-    const expansion::inclusion_directives_selector
-        id_sel(idr.inclusion_directives());
+    const expansion::inclusion_directives_selector id_sel(idr);
     const auto ser_fn(formatters::serialization::traits::facet_name());
     const bool ser_enabled(s.is_facet_enabled(ser_fn));
     if (ser_enabled) {

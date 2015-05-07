@@ -45,7 +45,8 @@ namespace settings {
 inclusion_directives_settings_factory::
 inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
     const formatters::container& fc)
-    : formatter_properties_(make_formatter_properties(rp, fc)) {}
+    : formatter_properties_(make_formatter_properties(rp, fc)),
+      inclusion_required_(get_inclusion_required_field(rp)) {}
 
 void inclusion_directives_settings_factory::
 setup_formatter_fields(const dynamic::schema::repository& rp,
@@ -63,10 +64,11 @@ setup_formatter_fields(const dynamic::schema::repository& rp,
 
     if (!found) {
         BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::postfix() << "' for formatter: "
+                                 << traits::inclusion_directive()
+                                 << "' for formatter: "
                                  << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::postfix()));
+        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found +
+                traits::inclusion_directive()));
     }
 }
 
@@ -103,8 +105,14 @@ make_formatter_properties(const dynamic::schema::repository& rp,
     return r;
 }
 
+dynamic::schema::field_definition inclusion_directives_settings_factory::
+get_inclusion_required_field(const dynamic::schema::repository& rp) const {
+    const dynamic::schema::repository_selector s(rp);
+    return s.select_field_by_name(traits::inclusion_required());
+}
+
 boost::optional<std::string> inclusion_directives_settings_factory::
-create_inclusion_directive_for_formatter(const formatter_properties& fp,
+obtain_inclusion_directive_for_formatter(const formatter_properties& fp,
     const dynamic::schema::object& o) const {
     boost::optional<std::string> r;
 
@@ -117,17 +125,26 @@ create_inclusion_directive_for_formatter(const formatter_properties& fp,
     return r;
 }
 
-std::unordered_map<std::string, std::string>
-inclusion_directives_settings_factory::make(
+bool inclusion_directives_settings_factory::
+obtain_inclusion_required(const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    return fs.get_boolean_content_or_default(inclusion_required_);
+}
+
+inclusion_directives_settings inclusion_directives_settings_factory::make(
     const dynamic::schema::object& o) const {
-    std::unordered_map<std::string, std::string> r;
+    inclusion_directives_settings r;
+
+    const auto inclusion_required(obtain_inclusion_required(o));
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);
-        const auto id(create_inclusion_directive_for_formatter(fp, o));
+        const auto id(obtain_inclusion_directive_for_formatter(fp, o));
         if (!id)
             continue;
 
-        r.insert(std::make_pair(fp.formatter_name, *id));
+        r.inclusion_directives().insert(std::make_pair(fp.formatter_name, *id));
+        r.inclusion_required(inclusion_required);
     }
     return r;
 }

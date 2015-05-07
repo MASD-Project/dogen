@@ -89,7 +89,7 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directives_repository&
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::expansion::inclusion_directives_repository\"" << ", "
       << "\"inclusion_directives\": " << v.inclusion_directives() << ", "
-      << "\"types_without_inclusion_directives\": " << v.types_without_inclusion_directives()
+      << "\"inclusion_not_required\": " << v.inclusion_not_required()
       << " }";
     return(s);
 }
