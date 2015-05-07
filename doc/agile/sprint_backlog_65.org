@@ -874,6 +874,11 @@ traverse up the tree, we end up with a differently ordered leaf
 container. We need to find a way to guarantee order. We should also
 look into how dia to sml guaranteed ordering.
 
+We could sort the leaves before slotting them into the types and
+model. We already do something similar in
+=sml/src/types/concept_indexer.cpp=, with =operator<=. This will
+probably move a lot of code on both test models and dogen models.
+
 ** Deprecated
 *** CANCELLED Add tests for main header file formatter with optionality :story:
     CLOSED: [2015-04-28 Tue 11:50]
