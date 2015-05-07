@@ -36,8 +36,8 @@ populate(const unsigned int /*position*/, result_type& /*v*/) {
 parent_without_members_generator::result_type*
 parent_without_members_generator::create_ptr(const unsigned int position) {
     if ((position % 1) == 0)
-        return dogen::test_models::trivial_inheritance::child_with_members_generator::create_ptr(position);
-    return dogen::test_models::trivial_inheritance::child_without_members_generator::create_ptr(position);
+        return dogen::test_models::trivial_inheritance::child_without_members_generator::create_ptr(position);
+    return dogen::test_models::trivial_inheritance::child_with_members_generator::create_ptr(position);
 }
 
 

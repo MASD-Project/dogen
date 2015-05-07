@@ -37,10 +37,10 @@ populate(const unsigned int /*position*/, result_type& /*v*/) {
 value_generator::result_type*
 value_generator::create_ptr(const unsigned int position) {
     if ((position % 2) == 0)
-        return dogen::dynamic::schema::boolean_generator::create_ptr(position);
+        return dogen::dynamic::schema::text_generator::create_ptr(position);
     if ((position % 2) == 1)
         return dogen::dynamic::schema::text_collection_generator::create_ptr(position);
-    return dogen::dynamic::schema::text_generator::create_ptr(position);
+    return dogen::dynamic::schema::boolean_generator::create_ptr(position);
 }
 
 

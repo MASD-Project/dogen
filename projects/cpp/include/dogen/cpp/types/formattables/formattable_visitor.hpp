@@ -59,6 +59,66 @@ public:
     /**@}*/
 
     /**
+     * @brief Accept visits for type dogen::cpp::formattables::cmakelists_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) { }
+    virtual void visit(dogen::cpp::formattables::cmakelists_info&) const { }
+    virtual void visit(dogen::cpp::formattables::cmakelists_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::concept_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::concept_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::concept_info&) { }
+    virtual void visit(dogen::cpp::formattables::concept_info&) const { }
+    virtual void visit(dogen::cpp::formattables::concept_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::enum_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::enum_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::enum_info&) { }
+    virtual void visit(dogen::cpp::formattables::enum_info&) const { }
+    virtual void visit(dogen::cpp::formattables::enum_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::exception_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::exception_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::exception_info&) { }
+    virtual void visit(dogen::cpp::formattables::exception_info&) const { }
+    virtual void visit(dogen::cpp::formattables::exception_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::forward_declarations_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) { }
+    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) const { }
+    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::cpp::formattables::includers_info
+     */
+    /**@{*/
+    virtual void visit(const dogen::cpp::formattables::includers_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::includers_info&) { }
+    virtual void visit(dogen::cpp::formattables::includers_info&) const { }
+    virtual void visit(dogen::cpp::formattables::includers_info&) { }
+    /**@}*/
+
+    /**
      * @brief Accept visits for type dogen::cpp::formattables::namespace_info
      */
     /**@{*/
@@ -79,73 +139,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::cpp::formattables::cmakelists_info
+     * @brief Accept visits for type dogen::cpp::formattables::odb_options_info
      */
     /**@{*/
-    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::cmakelists_info&) { }
-    virtual void visit(dogen::cpp::formattables::cmakelists_info&) const { }
-    virtual void visit(dogen::cpp::formattables::cmakelists_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::visitor_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::visitor_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::visitor_info&) { }
-    virtual void visit(dogen::cpp::formattables::visitor_info&) const { }
-    virtual void visit(dogen::cpp::formattables::visitor_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::concept_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::concept_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::concept_info&) { }
-    virtual void visit(dogen::cpp::formattables::concept_info&) const { }
-    virtual void visit(dogen::cpp::formattables::concept_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::exception_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::exception_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::exception_info&) { }
-    virtual void visit(dogen::cpp::formattables::exception_info&) const { }
-    virtual void visit(dogen::cpp::formattables::exception_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::includers_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::includers_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::includers_info&) { }
-    virtual void visit(dogen::cpp::formattables::includers_info&) const { }
-    virtual void visit(dogen::cpp::formattables::includers_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::registrar_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::registrar_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::registrar_info&) { }
-    virtual void visit(dogen::cpp::formattables::registrar_info&) const { }
-    virtual void visit(dogen::cpp::formattables::registrar_info&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::cpp::formattables::enum_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::cpp::formattables::enum_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::enum_info&) { }
-    virtual void visit(dogen::cpp::formattables::enum_info&) const { }
-    virtual void visit(dogen::cpp::formattables::enum_info&) { }
+    virtual void visit(const dogen::cpp::formattables::odb_options_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::odb_options_info&) { }
+    virtual void visit(dogen::cpp::formattables::odb_options_info&) const { }
+    virtual void visit(dogen::cpp::formattables::odb_options_info&) { }
     /**@}*/
 
     /**
@@ -159,23 +159,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::cpp::formattables::odb_options_info
+     * @brief Accept visits for type dogen::cpp::formattables::registrar_info
      */
     /**@{*/
-    virtual void visit(const dogen::cpp::formattables::odb_options_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::odb_options_info&) { }
-    virtual void visit(dogen::cpp::formattables::odb_options_info&) const { }
-    virtual void visit(dogen::cpp::formattables::odb_options_info&) { }
+    virtual void visit(const dogen::cpp::formattables::registrar_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::registrar_info&) { }
+    virtual void visit(dogen::cpp::formattables::registrar_info&) const { }
+    virtual void visit(dogen::cpp::formattables::registrar_info&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::cpp::formattables::forward_declarations_info
+     * @brief Accept visits for type dogen::cpp::formattables::visitor_info
      */
     /**@{*/
-    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) const { }
-    virtual void visit(const dogen::cpp::formattables::forward_declarations_info&) { }
-    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) const { }
-    virtual void visit(dogen::cpp::formattables::forward_declarations_info&) { }
+    virtual void visit(const dogen::cpp::formattables::visitor_info&) const { }
+    virtual void visit(const dogen::cpp::formattables::visitor_info&) { }
+    virtual void visit(dogen::cpp::formattables::visitor_info&) const { }
+    virtual void visit(dogen::cpp::formattables::visitor_info&) { }
     /**@}*/
 };
 

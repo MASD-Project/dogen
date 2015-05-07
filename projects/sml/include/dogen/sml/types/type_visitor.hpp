@@ -38,16 +38,6 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::sml::object
-     */
-    /**@{*/
-    virtual void visit(const dogen::sml::object&) const { }
-    virtual void visit(const dogen::sml::object&) { }
-    virtual void visit(dogen::sml::object&) const { }
-    virtual void visit(dogen::sml::object&) { }
-    /**@}*/
-
-    /**
      * @brief Accept visits for type dogen::sml::enumeration
      */
     /**@{*/
@@ -55,6 +45,16 @@ public:
     virtual void visit(const dogen::sml::enumeration&) { }
     virtual void visit(dogen::sml::enumeration&) const { }
     virtual void visit(dogen::sml::enumeration&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::sml::object
+     */
+    /**@{*/
+    virtual void visit(const dogen::sml::object&) const { }
+    virtual void visit(const dogen::sml::object&) { }
+    virtual void visit(dogen::sml::object&) const { }
+    virtual void visit(dogen::sml::object&) { }
     /**@}*/
 
     /**

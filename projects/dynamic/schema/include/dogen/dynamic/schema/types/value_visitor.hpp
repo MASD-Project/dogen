@@ -39,16 +39,6 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::dynamic::schema::text
-     */
-    /**@{*/
-    virtual void visit(const dogen::dynamic::schema::text&) const { }
-    virtual void visit(const dogen::dynamic::schema::text&) { }
-    virtual void visit(dogen::dynamic::schema::text&) const { }
-    virtual void visit(dogen::dynamic::schema::text&) { }
-    /**@}*/
-
-    /**
      * @brief Accept visits for type dogen::dynamic::schema::boolean
      */
     /**@{*/
@@ -56,6 +46,16 @@ public:
     virtual void visit(const dogen::dynamic::schema::boolean&) { }
     virtual void visit(dogen::dynamic::schema::boolean&) const { }
     virtual void visit(dogen::dynamic::schema::boolean&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::dynamic::schema::text
+     */
+    /**@{*/
+    virtual void visit(const dogen::dynamic::schema::text&) const { }
+    virtual void visit(const dogen::dynamic::schema::text&) { }
+    virtual void visit(dogen::dynamic::schema::text&) const { }
+    virtual void visit(dogen::dynamic::schema::text&) { }
     /**@}*/
 
     /**

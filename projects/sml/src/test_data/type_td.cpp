@@ -82,10 +82,10 @@ populate(const unsigned int position, result_type& v) {
 type_generator::result_type*
 type_generator::create_ptr(const unsigned int position) {
     if ((position % 2) == 0)
-        return dogen::sml::enumeration_generator::create_ptr(position);
+        return dogen::sml::object_generator::create_ptr(position);
     if ((position % 2) == 1)
         return dogen::sml::primitive_generator::create_ptr(position);
-    return dogen::sml::object_generator::create_ptr(position);
+    return dogen::sml::enumeration_generator::create_ptr(position);
 }
 
 

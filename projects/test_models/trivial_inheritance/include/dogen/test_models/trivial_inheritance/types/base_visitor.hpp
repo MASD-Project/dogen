@@ -38,16 +38,6 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::test_models::trivial_inheritance::descendant3
-     */
-    /**@{*/
-    virtual void visit(const dogen::test_models::trivial_inheritance::descendant3&) const { }
-    virtual void visit(const dogen::test_models::trivial_inheritance::descendant3&) { }
-    virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) const { }
-    virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) { }
-    /**@}*/
-
-    /**
      * @brief Accept visits for type dogen::test_models::trivial_inheritance::descendant2
      */
     /**@{*/
@@ -55,6 +45,16 @@ public:
     virtual void visit(const dogen::test_models::trivial_inheritance::descendant2&) { }
     virtual void visit(dogen::test_models::trivial_inheritance::descendant2&) const { }
     virtual void visit(dogen::test_models::trivial_inheritance::descendant2&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::test_models::trivial_inheritance::descendant3
+     */
+    /**@{*/
+    virtual void visit(const dogen::test_models::trivial_inheritance::descendant3&) const { }
+    virtual void visit(const dogen::test_models::trivial_inheritance::descendant3&) { }
+    virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) const { }
+    virtual void visit(dogen::test_models::trivial_inheritance::descendant3&) { }
     /**@}*/
 };
 

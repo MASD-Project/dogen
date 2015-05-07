@@ -48,6 +48,21 @@ const std::string child_with_no_original_parent(
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Add comparable support for qnames.
+ *
+ * This is required as part of the current (very sub-optimal)
+ * implementation of concept processing.
+ */
+inline bool operator<(const qname& lhs, const qname& rhs) {
+    return
+        lhs.model_name() < rhs.model_name() ||
+        (lhs.model_name() == rhs.model_name() &&
+            (lhs.external_module_path() < rhs.external_module_path() ||
+                (lhs.external_module_path() == rhs.external_module_path() &&
+                    (lhs.simple_name() < rhs.simple_name()))));
+}
+
 bool generalization_indexer::is_leaf(const sml::object& o) const {
     // FIXME: massive hack. must not add leafs for services.
     const auto uds(object_types::user_defined_service);
@@ -144,6 +159,7 @@ populate(const generalization_details& d, model& m) const {
 
         const auto rt(relationship_types::leaves);
         i->second.relationships()[rt] = pair.second;
+        i->second.relationships()[rt].sort();
 
         for (const auto& l : pair.second) {
             if (l.model_name() == m.name().model_name())
