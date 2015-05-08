@@ -86,6 +86,25 @@ A slightly better way of doing this would be:
 - the current step =update_references= is just a call to the
   references updater, prior to merging, with the target model.
 
+Note:
+
+It seems that the references are incorrect at present; on rebuild, we
+see serialisation's registrar moving for no reason:
+
+: -    dogen::config::register_types(ar);
+:      dogen::sml::register_types(ar);
+: -    dogen::dynamic::schema::register_types(ar);
+: +    dogen::config::register_types(ar);
+
+The references have not changed at all in the dogen invocation:
+
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
+:    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
+
+We need to fix this with the refactor.
+
 *** Assignment operator seems to pass types by value                  :story:
 
 The code for the operator is as follows:
