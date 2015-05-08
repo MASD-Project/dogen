@@ -91,6 +91,4 @@ inline bool operator==(const move_ctor_base& lhs, const move_ctor_base& rhs) {
 
 } } }
 
-
-
 #endif

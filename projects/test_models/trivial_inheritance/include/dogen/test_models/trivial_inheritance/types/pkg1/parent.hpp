@@ -81,6 +81,4 @@ inline bool operator==(const parent& lhs, const parent& rhs) {
 
 } } } }
 
-
-
 #endif

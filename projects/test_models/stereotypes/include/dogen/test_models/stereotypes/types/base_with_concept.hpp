@@ -102,6 +102,4 @@ inline bool operator==(const base_with_concept& lhs, const base_with_concept& rh
 
 } } }
 
-
-
 #endif

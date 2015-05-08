@@ -82,6 +82,4 @@ inline bool operator==(const base& lhs, const base& rhs) {
 
 } } }
 
-
-
 #endif

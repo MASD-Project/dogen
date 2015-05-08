@@ -151,7 +151,7 @@ void types_main_header_file_formatter::visit(
     utility_.blank_line(2);
 
     swap_method(ci);
-    if (!ci.all_properties().empty())
+    if (!ci.all_properties().empty() && !ci.is_parent() && !ci.is_immutable())
         utility_.blank_line(2);
 }
 

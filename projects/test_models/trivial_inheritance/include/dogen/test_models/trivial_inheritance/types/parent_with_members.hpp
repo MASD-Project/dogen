@@ -80,6 +80,4 @@ inline bool operator==(const parent_with_members& lhs, const parent_with_members
 
 } } }
 
-
-
 #endif

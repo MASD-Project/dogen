@@ -83,6 +83,4 @@ inline bool operator==(const third_child_with_members& lhs, const third_child_wi
 
 } } }
 
-
-
 #endif

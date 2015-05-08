@@ -80,6 +80,4 @@ inline bool operator==(const class_base& lhs, const class_base& rhs) {
 
 } } }
 
-
-
 #endif
