@@ -186,7 +186,7 @@ fa.stream() << "    const " << p.type().complete_name() << "& " << p.name() << "
                         if (p.is_immutable())
                             continue;
 
-fa.stream() << "    " << p.type().complete_name() << "& " << p.name() << "() const;" << std::endl;
+fa.stream() << "    " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << "();" << std::endl;
 fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
 fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << "&& v);" << std::endl;
                     }

@@ -176,12 +176,28 @@ populate(const generalization_details& d, model& m) const {
             BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
         }
 
-        // FIXME: surely is child is always true?
-        if (!i->second.is_child())
+        auto& o(i->second);
+        if (!o.is_child()) {
+            // a bit of a hack, top-level types have themselves as the
+            // original parent of the container just to make our life easier.
+            const auto n(string_converter::convert(qn));
+            BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
+                                     << n;
             continue;
+        }
+
 
         const auto rt(relationship_types::original_parents);
-        i->second.relationships()[rt] = pair.second;
+        o.relationships()[rt] = pair.second;
+        for (const auto& opn : pair.second) {
+            const auto j(m.objects().find(opn));
+            if (j == m.objects().end()) {
+                const auto n(string_converter::convert(opn));
+                BOOST_LOG_SEV(lg, error) << object_not_found << n;
+                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+            }
+            o.is_original_parent_visitable(j->second.is_visitable());
+        }
     }
 }
 

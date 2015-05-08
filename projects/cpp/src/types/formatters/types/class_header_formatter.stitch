@@ -224,7 +224,7 @@ public:
                             continue;
 
 #>
-    <#= p.type().complete_name() #>& <#= p.name() #>() const;
+    <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>();
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
 <#+

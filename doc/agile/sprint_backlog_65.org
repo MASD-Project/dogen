@@ -685,6 +685,7 @@ story in backlog.
 :      {
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-08 Fri 17:47]--[2015-05-08 Fri 18:08] =>  0:21
     CLOCK: [2015-05-01 Fri 14:45]--[2015-05-01 Fri 16:01] =>  1:16
     CLOCK: [2015-05-01 Fri 14:25]--[2015-05-01 Fri 14:44] =>  0:19
     CLOCK: [2015-04-30 Thu 19:11]--[2015-04-30 Thu 19:27] =>  0:16
@@ -723,6 +724,7 @@ Remaining problems with trivial inheritance:
   =is_original_parent_visitable= is not being populated.
 - too much space after end of namespaces and before end if.
 - class marked as service is being generated.
+- services are being generated.
 
 *** STARTED Implement options copier and remove options from context  :story:
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
