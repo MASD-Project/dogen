@@ -166,6 +166,4 @@ inline bool operator==(const type& lhs, const type& rhs) {
 
 } }
 
-
-
 #endif

@@ -143,6 +143,4 @@ inline bool operator==(const entity& lhs, const entity& rhs) {
 
 } } }
 
-
-
 #endif

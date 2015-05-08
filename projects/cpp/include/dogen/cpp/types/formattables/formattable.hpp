@@ -88,6 +88,4 @@ inline bool operator==(const formattable& lhs, const formattable& rhs) {
 
 } } }
 
-
-
 #endif
