@@ -463,12 +463,6 @@ line options:
 - integrated facets
 - enabled
 
-*** Add =static_formatter_name=                                       :story:
-
-At present formatter names are defined as traits, we should use the
-"static" approach. Facet names can stay as traits as they are common
-across formatters.
-
 *** Check for duplicate formatter names in formatter registrar        :story:
 
 At present it is possible to register a formatter name more than

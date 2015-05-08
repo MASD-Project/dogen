@@ -40,7 +40,8 @@ namespace {
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::serialization;
-static logger lg(logger_factory(traits::forward_declarations_formatter_name()));
+static logger
+lg(logger_factory(forward_declarations_formatter::static_formatter_name()));
 
 }
 
@@ -63,7 +64,7 @@ public:
 };
 
 std::string provider::formatter_name() const {
-    return traits::forward_declarations_formatter_name();
+    return forward_declarations_formatter::static_formatter_name();
 }
 
 boost::optional<std::list<std::string> >
@@ -71,7 +72,7 @@ provider::provide(const dynamic::schema::repository& /*srp*/,
     const expansion::inclusion_directives_repository& idr,
     const sml::object& o) const {
 
-    const auto self_fn(traits::forward_declarations_formatter_name());
+    const auto self_fn(forward_declarations_formatter::static_formatter_name());
     expansion::inclusion_dependencies_builder builder(idr);
 
     using tp = formatters::types::traits;
@@ -83,11 +84,15 @@ provider::provide(const dynamic::schema::repository& /*srp*/,
 
 }
 
+std::string forward_declarations_formatter::static_formatter_name() {
+    return traits::forward_declarations_formatter_name();
+}
+
 dynamic::schema::ownership_hierarchy
 forward_declarations_formatter::ownership_hierarchy() const {
     static dynamic::schema::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
-            traits::forward_declarations_formatter_name(),
+            forward_declarations_formatter::static_formatter_name(),
             formatters::traits::header_formatter_group_name());
     return r;
 }

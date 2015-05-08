@@ -41,7 +41,8 @@ namespace {
 
 using namespace dogen::utility::log;
 using namespace dogen::cpp::formatters::types;
-static logger lg(logger_factory(traits::class_header_formatter_name()));
+static logger
+lg(logger_factory(class_header_formatter::static_formatter_name()));
 
 const std::string include_directive_not_set(
     "Include directive for formatter is not set. Formatter: ");
@@ -76,7 +77,7 @@ public:
 };
 
 std::string provider::formatter_name() const {
-    return traits::class_header_formatter_name();
+    return class_header_formatter::static_formatter_name();
 }
 
 boost::optional<std::list<std::string> >
@@ -84,7 +85,7 @@ provider::provide(const dynamic::schema::repository& rp,
     const expansion::inclusion_directives_repository& idr,
     const sml::object& o) const {
 
-    const auto self_fn(traits::class_header_formatter_name());
+    const auto self_fn(class_header_formatter::static_formatter_name());
     expansion::inclusion_dependencies_builder builder(idr);
 
     // algorithm: domain headers need it for the swap function.
@@ -121,11 +122,15 @@ provider::provide(const dynamic::schema::repository& rp,
 
 }
 
+std::string class_header_formatter::static_formatter_name() {
+    return traits::class_header_formatter_name();
+}
+
 dynamic::schema::ownership_hierarchy
 class_header_formatter::ownership_hierarchy() const {
     static dynamic::schema::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
-            traits::class_header_formatter_name(),
+            class_header_formatter::static_formatter_name(),
             formatters::traits::header_formatter_group_name());
     return r;
 }

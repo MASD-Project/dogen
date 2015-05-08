@@ -36,6 +36,12 @@ namespace serialization {
 
 class class_header_formatter final : public class_formatter_interface {
 public:
+    /**
+     * @brief Returns the formatter name.
+     */
+    static std::string static_formatter_name();
+
+public:
     dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
 
     file_types file_type() const override;
