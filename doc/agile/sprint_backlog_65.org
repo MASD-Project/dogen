@@ -596,6 +596,35 @@ across formatters.
 
 We need this sooner rather than later because using the traits directly
 
+*** COMPLETED Tests failing on Windows and Linux                      :story:
+    CLOSED: [2015-05-08 Fri 21:27]
+
+At present both Ming and gcc 32-bit are borked. The failure is on
+trivial inheritance:
+
+: --- /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/trivial_inheritance/expected/trivial_inheritance/src/test_data/move_ctor_base_td.cpp	2014-08-30 03:30:33.000000000 +0100
+: +++ /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/trivial_inheritance/actual/trivial_inheritance/src/test_data/move_ctor_base_td.cpp	2015-05-06 06:42:32.357516805 +0100
+: @@ -47,8 +47,8 @@
+:  move_ctor_base_generator::result_type*
+:  move_ctor_base_generator::create_ptr(const unsigned int position) {
+:      if ((position % 1) == 0)
+: -        return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
+: -    return dogen::test_models::trivial_inheritance::move_ctor_descendant_generator::create_ptr(position);
+: +        return dogen::test_models::trivial_inheritance::move_ctor_descendant_generator::create_ptr(position);
+: +    return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
+:  }
+
+The problem is that generalisation indexer is now dependent on the
+order of the objects in the unordered map. Depending on which way we
+traverse up the tree, we end up with a differently ordered leaf
+container. We need to find a way to guarantee order. We should also
+look into how dia to sml guaranteed ordering.
+
+We could sort the leaves before slotting them into the types and
+model. We already do something similar in
+=sml/src/types/concept_indexer.cpp=, with =operator<=. This will
+probably move a lot of code on both test models and dogen models.
+
 *** POSTPONED Improve references management                           :story:
     CLOSED: [2015-05-03 Sun 09:21]
     CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13
@@ -869,34 +898,6 @@ implementation with spirit see:
 
 We need a way to visualise stitch templates that is a bit more
 readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
-
-*** Tests failing on Windows and Linux                                :story:
-
-At present both Ming and gcc 32-bit are borked. The failure is on
-trivial inheritance:
-
-: --- /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/trivial_inheritance/expected/trivial_inheritance/src/test_data/move_ctor_base_td.cpp	2014-08-30 03:30:33.000000000 +0100
-: +++ /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/trivial_inheritance/actual/trivial_inheritance/src/test_data/move_ctor_base_td.cpp	2015-05-06 06:42:32.357516805 +0100
-: @@ -47,8 +47,8 @@
-:  move_ctor_base_generator::result_type*
-:  move_ctor_base_generator::create_ptr(const unsigned int position) {
-:      if ((position % 1) == 0)
-: -        return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
-: -    return dogen::test_models::trivial_inheritance::move_ctor_descendant_generator::create_ptr(position);
-: +        return dogen::test_models::trivial_inheritance::move_ctor_descendant_generator::create_ptr(position);
-: +    return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
-:  }
-
-The problem is that generalisation indexer is now dependent on the
-order of the objects in the unordered map. Depending on which way we
-traverse up the tree, we end up with a differently ordered leaf
-container. We need to find a way to guarantee order. We should also
-look into how dia to sml guaranteed ordering.
-
-We could sort the leaves before slotting them into the types and
-model. We already do something similar in
-=sml/src/types/concept_indexer.cpp=, with =operator<=. This will
-probably move a lot of code on both test models and dogen models.
 
 ** Deprecated
 *** CANCELLED Add tests for main header file formatter with optionality :story:
