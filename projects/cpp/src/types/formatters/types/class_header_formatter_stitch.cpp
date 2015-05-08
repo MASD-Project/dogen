@@ -36,6 +36,7 @@ dogen::formatters::file class_header_formatter_stitch(
             auto snf(fa.make_scoped_namespace_formatter());
 
 fa.stream() << std::endl;
+            fa.comment(c.documentation());
             if (c.parents().empty()) {
 fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "{" << std::endl;
             } else if (c.parents().size() == 1) {
@@ -175,6 +176,8 @@ fa.stream() << std::endl;
             if (!c.properties().empty()) {
 fa.stream() << "public:" << std::endl;
                 for (const auto p : c.properties()) {
+                    fa.comment_start_property(p);
+
                     if (p.type().is_primitive() || p.type().is_enumeration()) {
 fa.stream() << "    " << p.type().complete_name() << " " << p.name() << "() const;" << std::endl;
                         if (p.is_immutable())
@@ -190,6 +193,7 @@ fa.stream() << "    " << p.type().complete_name() << fa.make_by_ref_text(p) << "
 fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " v);" << std::endl;
 fa.stream() << "    " << fa.make_setter_return_type(c.name(), p) << " " << p.name() << "(const " << p.type().complete_name() << "&& v);" << std::endl;
                     }
+                    fa.comment_end_property(p);
 fa.stream() << std::endl;
                 }
             }

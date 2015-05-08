@@ -20,6 +20,8 @@
  */
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/comment_formatter.hpp"
+#include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
@@ -36,6 +38,11 @@ const std::string by_ref_text = "&";
 const std::string void_keyword_text = "void";
 const std::string final_keyword_text = "final ";
 const std::string member_variable_postfix("_");
+
+const bool start_on_first_line(true);
+const bool use_documentation_tool_markup(true);
+const bool last_line_is_blank(true);
+const bool documenting_previous_identifier(true);
 
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
@@ -153,13 +160,13 @@ formatting_assistant::make_scoped_boilerplate_formatter() {
     const auto& fs(formatter_settings_);
     const auto gs(entity_.settings().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
-        filtering_stream_, gs, fs.inclusion_dependencies(), *fs.header_guard());
+        stream(), gs, fs.inclusion_dependencies(), *fs.header_guard());
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
 formatting_assistant::make_scoped_namespace_formatter() {
     return dogen::formatters::cpp::scoped_namespace_formatter(
-        filtering_stream_, entity_.namespaces(),
+        stream(), entity_.namespaces(),
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
 }
@@ -173,6 +180,76 @@ dogen::formatters::file formatting_assistant::make_file() const {
     r.content(stream_.str());
     r.path(formatter_settings_.file_path());
     return r;
+}
+
+void formatting_assistant::comment(const std::string& c) {
+    if (c.empty())
+        return;
+
+    dogen::formatters::comment_formatter f(
+        !start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::c_style,
+        !last_line_is_blank);
+    f.format(stream(), c);
+}
+
+void formatting_assistant::
+comment_start_property(const formattables::property_info& p) {
+    if (p.documentation().empty())
+        return;
+
+    {
+        dogen::formatters::positive_indenter_scope pis(stream());
+        dogen::formatters::comment_formatter f(
+            !start_on_first_line,
+            use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            dogen::formatters::comment_styles::c_style,
+            !last_line_is_blank);
+
+        f.format(stream(), p.documentation());
+        if (!p.is_immutable()) {
+            f.format_doxygen_start_block(stream(), p.documentation());
+            stream() << std::endl;
+        }
+    }
+}
+
+void formatting_assistant::
+comment_end_property(const formattables::property_info& p) {
+    if (p.documentation().empty())
+        return;
+
+    {
+        dogen::formatters::positive_indenter_scope pis(stream());
+        dogen::formatters::comment_formatter f(
+            start_on_first_line,
+            use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            dogen::formatters::comment_styles::c_style,
+            !last_line_is_blank);
+
+        if (!p.is_immutable()) {
+            f.format_doxygen_end_block(stream(), p.documentation());
+            stream() << std::endl;
+        }
+    }
+}
+
+void formatting_assistant::comment_inline(const std::string& c) {
+    if (c.empty())
+        return;
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        documenting_previous_identifier,
+        dogen::formatters::comment_styles::cpp_style,
+        !last_line_is_blank);
+
+    f.format(stream(), c);
 }
 
 } } }

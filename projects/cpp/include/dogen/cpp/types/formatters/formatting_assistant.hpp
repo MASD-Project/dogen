@@ -152,6 +152,29 @@ public:
      */
     dogen::formatters::file make_file() const;
 
+public:
+    /**
+     * @brief Adds a top-level comment with doxygen keywords.
+     */
+    void comment(const std::string& c);
+
+    /**
+     * @brief Adds comments for the starting of a property, including
+     * blocks.
+     */
+    void comment_start_property(const formattables::property_info& p);
+
+    /**
+     * @brief Adds comments for the end of a property, including
+     * blocks.
+     */
+    void comment_end_property(const formattables::property_info& p);
+
+    /**
+     * @brief Adds an inline comment to the current line.
+     */
+    void comment_inline(const std::string& c);
+
 private:
     const formattables::entity& entity_;
     const dynamic::schema::ownership_hierarchy& ownership_hierarchy_;

@@ -19,6 +19,7 @@ dogen::formatters::file class_header_formatter_stitch(
 #>
 
 <#+
+            fa.comment(c.documentation());
             if (c.parents().empty()) {
 #>
 class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
@@ -206,6 +207,8 @@ public:
 public:
 <#+
                 for (const auto p : c.properties()) {
+                    fa.comment_start_property(p);
+
                     if (p.type().is_primitive() || p.type().is_enumeration()) {
 #>
     <#= p.type().complete_name() #> <#= p.name() #>() const;
@@ -229,6 +232,7 @@ public:
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
 <#+
                     }
+                    fa.comment_end_property(p);
 #>
 
 <#+
