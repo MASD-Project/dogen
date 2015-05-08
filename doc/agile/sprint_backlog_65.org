@@ -558,6 +558,33 @@ should perhaps rename it to =sml::merging_workflow= or something along
 these lines. However, we need to keep in mind that as well as merging
 we perform a lot of other activities on the models.
 
+*** COMPLETED Refactor includes directive generation                  :story:
+    CLOSED: [2015-05-08 Fri 16:46]
+    CLOCK: [2015-05-08 Fri 14:52]--[2015-05-08 Fri 16:46] =>  1:54
+    CLOCK: [2015-05-07 Thu 19:13]--[2015-05-07 Thu 19:51] =>  0:38
+    CLOCK: [2015-05-07 Thu 07:49]--[2015-05-07 Thu 08:36] =>  0:47
+    CLOCK: [2015-05-06 Wed 17:53]--[2015-05-06 Wed 18:06] =>  0:13
+    CLOCK: [2015-05-06 Wed 17:36]--[2015-05-06 Wed 17:43] =>  0:07
+    CLOCK: [2015-05-06 Wed 17:05]--[2015-05-06 Wed 17:35] =>  0:30
+    CLOCK: [2015-05-06 Wed 16:15]--[2015-05-06 Wed 17:05] =>  0:50
+    CLOCK: [2015-05-05 Tue 17:30]--[2015-05-05 Tue 18:00] =>  0:30
+    CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
+
+At present inclusion directives and usage of inclusion dependencies is
+a bit messy. We need to clean it up a bit before we start using it on
+all formatters or else we will generate a lot of boilerplate code for
+no reason.
+
+Tasks:
+
+- create an inclusion assistant to make client code more readable.
+- create a inclusion directives repository with the inclusion
+  directives and a "does not require inclusion" set. Factory to use
+  the set to avoid generating inclusions for primitives. Client code
+  to use the set to check if a type needs inclusion. This way we avoid
+  logic errors where we forgot to generate an include where we should
+  have. Its not very efficient though.
+
 *** POSTPONED Improve references management                           :story:
     CLOSED: [2015-05-03 Sun 09:21]
     CLOCK: [2015-05-01 Fri 17:04]--[2015-05-01 Fri 17:17] =>  0:13
@@ -721,31 +748,6 @@ needs to be done.
 - update the path settings factory to read these from the root object.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
-
-*** STARTED Refactor includes directive generation                    :story:
-    CLOCK: [2015-05-07 Thu 19:13]--[2015-05-07 Thu 19:51] =>  0:38
-    CLOCK: [2015-05-07 Thu 07:49]--[2015-05-07 Thu 08:36] =>  0:47
-    CLOCK: [2015-05-06 Wed 17:53]--[2015-05-06 Wed 18:06] =>  0:13
-    CLOCK: [2015-05-06 Wed 17:36]--[2015-05-06 Wed 17:43] =>  0:07
-    CLOCK: [2015-05-06 Wed 17:05]--[2015-05-06 Wed 17:35] =>  0:30
-    CLOCK: [2015-05-06 Wed 16:15]--[2015-05-06 Wed 17:05] =>  0:50
-    CLOCK: [2015-05-05 Tue 17:30]--[2015-05-05 Tue 18:00] =>  0:30
-    CLOCK: [2015-05-05 Tue 15:04]--[2015-05-05 Tue 17:25] =>  2:21
-
-At present inclusion directives and usage of inclusion dependencies is
-a bit messy. We need to clean it up a bit before we start using it on
-all formatters or else we will generate a lot of boilerplate code for
-no reason.
-
-Tasks:
-
-- create an inclusion assistant to make client code more readable.
-- create a inclusion directives repository with the inclusion
-  directives and a "does not require inclusion" set. Factory to use
-  the set to avoid generating inclusions for primitives. Client code
-  to use the set to check if a type needs inclusion. This way we avoid
-  logic errors where we forgot to generate an include where we should
-  have. Its not very efficient though.
 
 *** STARTED Consider dropping the prefix inclusion in expansion       :story:
     CLOCK: [2015-05-06 Wed 17:44]--[2015-05-06 Wed 17:52] =>  0:08

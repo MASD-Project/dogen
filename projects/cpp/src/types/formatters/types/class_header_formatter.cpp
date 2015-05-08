@@ -25,19 +25,15 @@
 #include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/expansion/inclusion_dependencies_for_formatter.hpp"
+#include "dogen/cpp/types/expansion/inclusion_dependencies_builder.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/expansion/provision_error.hpp"
-#include "dogen/cpp/types/expansion/inclusion_directives_selector.hpp"
-#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
-#include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/io/traits.hpp"
-#include "dogen/cpp/types/formatters/types/traits.hpp"
-#include "dogen/cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
@@ -68,93 +64,59 @@ namespace types {
 
 namespace {
 
-class provider : public expansion::
+class provider final : public expansion::
         inclusion_dependencies_provider_interface<sml::object> {
+public:
+    std::string formatter_name() const override;
 
-    boost::optional<expansion::inclusion_dependencies_for_formatter>
+    boost::optional<std::list<std::string> >
     provide(const dynamic::schema::repository& srp,
         const expansion::inclusion_directives_repository& idr,
         const sml::object& o) const override;
 };
 
-boost::optional<expansion::inclusion_dependencies_for_formatter>
+std::string provider::formatter_name() const {
+    return traits::class_header_formatter_name();
+}
+
+boost::optional<std::list<std::string> >
 provider::provide(const dynamic::schema::repository& rp,
     const expansion::inclusion_directives_repository& idr,
     const sml::object& o) const {
-    boost::optional<expansion::inclusion_dependencies_for_formatter>
-        r = expansion::inclusion_dependencies_for_formatter();
-    r->formatter_name(traits::class_header_formatter_name());
+
+    const auto self_fn(traits::class_header_formatter_name());
+    expansion::inclusion_dependencies_builder builder(idr);
 
     // algorithm: domain headers need it for the swap function.
-    auto& id(r->inclusion_dependencies());
-    id.push_back(inclusion_constants::std::algorithm());
+    builder.add(inclusion_constants::std::algorithm());
 
     selector s(rp, o.extensions());
-    const auto io_fn(formatters::io::traits::facet_name());
-    const bool io_enabled(s.is_formatter_enabled(io_fn));
+    if (s.is_integrated_io_enabled() || o.is_parent() || o.is_child())
+        builder.add(inclusion_constants::std::iosfwd());
 
-    const auto types_fn(formatters::types::traits::facet_name());
-    const bool use_integrated_io(s.is_facet_integrated(types_fn, io_fn));
-
-    if (io_enabled && (use_integrated_io || o.is_parent() || o.is_child()))
-        id.push_back(inclusion_constants::std::iosfwd());
-
-    const expansion::inclusion_directives_selector id_sel(idr);
-    const auto ser_fn(formatters::serialization::traits::facet_name());
-    const bool ser_enabled(s.is_facet_enabled(ser_fn));
-    if (ser_enabled) {
-        const auto fn(formatters::serialization::traits::
-            forward_declarations_formatter_name());
-        const auto id2(id_sel.select_inclusion_directive(o.name(), fn));
-        if (!id2) {
-            BOOST_LOG_SEV(lg, error) << inclusion_missing << fn;
-            BOOST_THROW_EXCEPTION(formatting_error(inclusion_missing + fn));
-        } else
-            id.push_back(*id2);
+    if (s.is_serialization_enabled()) {
+        using ser = formatters::serialization::traits;
+        const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
+        builder.add(o.name(), ser_fwd_fn);
     }
 
-    const auto& rel(o.relationships());
-    auto i(rel.find(sml::relationship_types::weak_associations));
-    if (i != rel.end()) {
-        const auto fn(traits::forward_declarations_formatter_name());
-        for (const auto aqn : i->second) {
-            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
-            if (id2)
-                id.push_back(*id2);
-        }
-    }
+    const auto lambda([&](const sml::object& o,
+            const sml::relationship_types rt,
+            const std::string& fn) {
+            auto i(o.relationships().find(rt));
+            if (i == o.relationships().end())
+                return;
 
-    i = rel.find(sml::relationship_types::regular_associations);
-    if (i != rel.end()) {
-        const auto fn(traits::class_header_formatter_name());
-        for (const auto aqn : i->second) {
-            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
-            if (id2)
-                id.push_back(*id2);
-        }
-    }
+            builder.add(i->second, fn);
+        });
 
-    i = rel.find(sml::relationship_types::visited_by);
-    if (i != rel.end()) {
-        const auto fn(traits::class_header_formatter_name());
-        for (const auto aqn : i->second) {
-            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
-            if (id2)
-                id.push_back(*id2);
-        }
-    }
-
-    i = rel.find(sml::relationship_types::parents);
-    if (i != rel.end()) {
-        const auto fn(traits::class_header_formatter_name());
-        for (const auto aqn : i->second) {
-            const auto id2(id_sel.select_inclusion_directive(aqn, fn));
-            if (id2)
-                id.push_back(*id2);
-        }
-    }
-
-    return r;
+    using rt = sml::relationship_types;
+    const auto fwd_fn(traits::forward_declarations_formatter_name());
+    lambda(o, rt::weak_associations, fwd_fn);
+    lambda(o, rt::regular_associations, self_fn);
+    lambda(o, rt::visited_by, self_fn);
+    lambda(o, rt::parents, self_fn);
+    return builder.build();
 }
 
 }

@@ -27,25 +27,26 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-void forward_declarations_formatter_stitch(std::ostream& s,
-    const boost::optional<dogen::formatters::general_settings>& gs,
-    const settings::formatter_settings& fs,
+dogen::formatters::file forward_declarations_formatter_stitch(
+    formatters::formatting_assistant& fa,
     const formattables::forward_declarations_info& fd) {
 
-    dogen::formatters::cpp::scoped_boilerplate_formatter
-       sbf(s, gs, fs.inclusion_dependencies(), *fs.header_guard());
-s << std::endl;
-s << "namespace boost {" << std::endl;
-s << "namespace serialization {" << std::endl;
-s << std::endl;
-s << "template<class Archive>" << std::endl;
-s << "void save(Archive& ar, const " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
-s << std::endl;
-s << "template<class Archive>" << std::endl;
-s << "void load(Archive& ar, " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
-s << std::endl;
-s << "} }" << std::endl;
-s << std::endl;
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+fa.stream() << std::endl;
+fa.stream() << "namespace boost {" << std::endl;
+fa.stream() << "namespace serialization {" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template<class Archive>" << std::endl;
+fa.stream() << "void save(Archive& ar, const " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template<class Archive>" << std::endl;
+fa.stream() << "void load(Archive& ar, " << fd.qualified_name() << "& v, unsigned int version);" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "} }" << std::endl;
+fa.stream() << std::endl;
+    } // sbf
+    return fa.make_file();
 }
 
 } } } }

@@ -18,21 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_REGISTRATION_ERROR_FWD_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_REGISTRATION_ERROR_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_BUILDER_FWD_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-class registration_error;
+class inclusion_dependencies_builder;
 
 } } }
 

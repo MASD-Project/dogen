@@ -62,4 +62,3 @@
 #include "dogen/cpp/hash/formattables/forward_declarations_info_hash.hpp"
 #include "dogen/cpp/hash/settings/inclusion_directives_settings_hash.hpp"
 #include "dogen/cpp/hash/expansion/inclusion_directives_repository_hash.hpp"
-#include "dogen/cpp/hash/expansion/inclusion_dependencies_for_formatter_hash.hpp"

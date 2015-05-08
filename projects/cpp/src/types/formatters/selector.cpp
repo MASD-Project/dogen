@@ -23,6 +23,10 @@
 #include "dogen/dynamic/schema/types/field_selector.hpp"
 #include "dogen/dynamic/schema/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/selection_error.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 
@@ -51,7 +55,7 @@ qualify(const std::string& prefix, const std::string& field_name) const {
 }
 
 bool selector::is_formatter_enabled(const std::string& formatter_name) const {
-    const std::string fn(qualify(formatter_name, traits::enabled()));
+    const auto fn(qualify(formatter_name, cpp::traits::enabled()));
     if (field_selector_.has_field(fn))
         return field_selector_.get_boolean_content(fn);
 
@@ -65,7 +69,7 @@ bool selector::is_formatter_enabled(const std::string& formatter_name) const {
 }
 
 bool selector::is_facet_enabled(const std::string& facet_name) const {
-    const std::string fn(qualify(facet_name, traits::enabled()));
+    const auto fn(qualify(facet_name, cpp::traits::enabled()));
     if (field_selector_.has_field(fn))
         return field_selector_.get_boolean_content(fn);
 
@@ -81,7 +85,7 @@ bool selector::is_facet_enabled(const std::string& facet_name) const {
 bool selector::is_facet_integrated(const std::string& formatter_name,
     const std::string& facet_name) const {
 
-    const std::string fn(qualify(formatter_name, traits::integrated_facet()));
+    const auto fn(qualify(formatter_name, cpp::traits::integrated_facet()));
     if (!field_selector_.has_field(fn))
         return false;
 
@@ -91,6 +95,25 @@ bool selector::is_facet_integrated(const std::string& formatter_name,
             return true;
     }
     return false;
+}
+
+bool selector::is_io_enabled() const {
+    const auto io_fn(formatters::io::traits::facet_name());
+    return is_formatter_enabled(io_fn);
+}
+
+bool selector::is_integrated_io_enabled() const {
+    if (is_io_enabled()) {
+        const auto io_fn(formatters::io::traits::facet_name());
+        const auto types_fn(formatters::types::traits::facet_name());
+        return is_facet_integrated(types_fn, io_fn);
+    }
+    return false;
+}
+
+bool selector::is_serialization_enabled() const {
+    const auto ser_fn(formatters::serialization::traits::facet_name());
+    return is_facet_enabled(ser_fn);
 }
 
 } } }

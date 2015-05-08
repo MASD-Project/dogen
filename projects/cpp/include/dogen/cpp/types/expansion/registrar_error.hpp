@@ -18,18 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/expansion/inclusion_dependencies_assistant.hpp"
+#ifndef DOGEN_CPP_TYPES_EXPANSION_REGISTRAR_ERROR_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_REGISTRAR_ERROR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace cpp {
 namespace expansion {
 
-inclusion_dependencies_assistant::inclusion_dependencies_assistant(
-    const inclusion_directives_repository& rp,
-    const dynamic::schema::object& o) : repository_(rp), object_(o) {}
+/**
+ * @brief An error occurred whilst registring.
+ */
+class registrar_error : public virtual std::exception, public virtual boost::exception {
+public:
+    registrar_error() = default;
+    ~registrar_error() noexcept = default;
 
-// bool inclusion_dependencies_assistant::is_io_enabled() const {
-    
-// }
+public:
+    registrar_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } } }
+
+#endif

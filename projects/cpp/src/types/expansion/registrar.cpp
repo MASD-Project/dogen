@@ -18,7 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/expansion/registrar_error.hpp"
 #include "dogen/cpp/types/expansion/registrar.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("cpp.expansion.registrar"));
+
+const std::string empty_formatter_name("Formatter name is empty.");
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -31,6 +43,11 @@ const expansion::container& registrar::container() const {
 void registrar::register_provider(boost::shared_ptr<
         inclusion_dependencies_provider_interface<sml::object>
         > p) {
+
+    if (p->formatter_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
     container_.object_providers().push_front(p);
 }
 

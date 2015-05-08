@@ -42,7 +42,6 @@ lg(logger_factory("cpp.expansion.inclusion_dependencies_factory"));
 
 const std::string duplicate_qname("Duplicate qname: ");
 const std::string duplicate_formatter_name("Duplicate formatter name: ");
-const std::string empty_formatter_name("Formatter name is empty.");
 const std::string empty_include_directive("Include directive is empty.");
 
 const char angle_bracket('<');
@@ -132,28 +131,25 @@ private:
 
         auto& r(create_map_for_qname(e.name()));
         for (const auto p : providers) {
-            const auto& idrp(inclusion_directives_repository_);
-            auto idff(p->provide(schema_repository_, idrp, e));
+            BOOST_LOG_SEV(lg, debug) << "Providing for: "
+                                     << p->formatter_name();
 
-            if (!idff)
+            const auto& idrp(inclusion_directives_repository_);
+            auto id(p->provide(schema_repository_, idrp, e));
+
+            if (!id)
                 continue;
 
-            if (idff->formatter_name().empty()) {
-                BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-                BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
-            }
-
-            auto id(idff->inclusion_dependencies());
-            id.sort(include_directive_comparer);
-            const auto id_pair(std::make_pair(idff->formatter_name(), id));
+            id->sort(include_directive_comparer);
+            const auto id_pair(std::make_pair(p->formatter_name(), *id));
             const bool inserted(r.insert(id_pair).second);
             if (!inserted) {
                 const auto n(sml::string_converter::convert(e.name()));
                 BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
-                                         << idff->formatter_name()
+                                         << p->formatter_name()
                                          << " for type: " << n;
                 BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
-                        idff->formatter_name()));
+                        p->formatter_name()));
             }
         }
     }

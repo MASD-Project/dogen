@@ -66,6 +66,23 @@ public:
     bool is_facet_integrated(const std::string& formatter_name,
         const std::string& facet_name) const;
 
+public:
+    /**
+     * @brief Returns true if the io facet is enabled.
+     */
+    bool is_io_enabled() const;
+
+    /**
+     * @brief Returns true if the io facet is enabled and integrated
+     * against the types facet.
+     */
+    bool is_integrated_io_enabled() const;
+
+    /**
+     * @brief Returns true if the serialization fact is enabled.
+     */
+    bool is_serialization_enabled() const;
+
 private:
     const dynamic::schema::repository& repository_;
     const dynamic::schema::object& object_;

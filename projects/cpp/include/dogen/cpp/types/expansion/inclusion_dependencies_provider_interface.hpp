@@ -33,7 +33,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/cpp/types/expansion/inclusion_directives_repository.hpp"
-#include "dogen/cpp/types/expansion/inclusion_dependencies_for_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -54,9 +53,15 @@ public:
 
 public:
     /**
+     * @brief Name of the formatter for which we are providing the
+     * dependencies.
+     */
+    virtual std::string formatter_name() const = 0;
+
+    /**
      * @brief Provide the inclusion dependencies.
      */
-    virtual boost::optional<inclusion_dependencies_for_formatter>
+    virtual boost::optional<std::list<std::string> >
     provide(const dynamic::schema::repository& srp,
         const inclusion_directives_repository& idrp,
         const Element& e) const = 0;
