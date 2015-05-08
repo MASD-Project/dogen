@@ -46,13 +46,17 @@ public:
 private:
     template<typename Formatter, typename Entity>
     void format(const Formatter& f, const Entity& e,
+        const bool empty_content = false,
         const bool skip_push = false) {
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
                                  << "' with '"
                                  << f.ownership_hierarchy().formatter_name()
                                  << "'";
 
-        const auto file(f.format(e));
+        auto file(f.format(e));
+
+        if (empty_content)
+            file.content().clear();
 
         if (!skip_push)
             files_.push_front(file);
@@ -97,8 +101,11 @@ private:
 dispatcher::dispatcher(const container& c) : container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
+    // for now we must not generate services.
+    const auto service(formattables::class_types::service);
+    const bool empty_content(c.class_type() == service);
     for (const auto f : container_.class_formatters())
-        format(*f, c, true/*skip_push*/);
+        format(*f, c, empty_content, true/*skip_push*/);
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
