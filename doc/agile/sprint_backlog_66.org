@@ -1,0 +1,210 @@
+#+title: Sprint Backlog 66
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission
+
+Implement as many formatters as possible using the new cpp
+architecture.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree
+Clock summary at [2015-05-10 Sun 23:14]
+
+| Headline                                    | Time   |      |      |
+|---------------------------------------------+--------+------+------|
+| *Total time*                                | *0:13* |      |      |
+|---------------------------------------------+--------+------+------|
+| Active                                      |        | 0:13 |      |
+| STARTED Sprint and product backlog grooming |        |      | 0:13 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-10 Sun 23:01]--[2015-05-10 Sun 23:14] =>  0:13
+
+Updates to sprint and product backlog.
+
+*** STARTED Updates to the manual and readme files                    :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** Improve references management                                     :story:
+
+At present, we compute model references as follows:
+
+- in dia to sml we first loop through all types and figure out the
+  distinct model names. This is done by creating a "shallow" qname
+  with just the model name and setting its origin type to unknown.
+- when we merge, we take the references of target - the only ones we
+  care about - and then we check that against the list of the models
+  we are about to merge. If there are any missing models we complain
+  (see comments below). We then loop through the list of references
+  and "resolve" the origin type of the model.
+
+Note: We could actually also complain if there are too many models, or
+more cleverly avoid merging those models which are not required. Or
+even more cleverly, we could avoid loading them in the first place, if
+only we could load target first.
+
+A slightly better way of doing this would be:
+
+- in SML create a references updater that takes a model and computes
+  its reference requirements. It could also receive a list of "other"
+  models from which to get their origin types to avoid using =unknown=
+  at all, and checks that all reference requirements have been met.
+- the current step =update_references= is just a call to the
+  references updater, prior to merging, with the target model.
+
+*** Assignment operator seems to pass types by value                  :story:
+
+The code for the operator is as follows:
+
+:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+:                << " other);" << std::endl;
+
+If this is the case we need to fix it and regenerate all models.
+
+Actually we have implemented assignment in terms of swap, so that is
+why we copy. We need to figure out if this was a good idea. Raise
+story in backlog.
+
+: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: index f9f91af..663f0ac 100644
+: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
+: @@ -253,7 +253,7 @@ public:
+:  <#+
+:                  if (!c.is_parent()) {
+:  #>
+: -    <#= c.name() #>& operator=(<#= c.name() #> other);
+: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
+:  <#+
+:                  }
+:              }
+: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
+: index c2eeb3c..534ab69 100644
+: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
+: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
+: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
+:  
+:      // assignment is only available in leaf classes - MEC++-33
+:      if (!ci.is_parent()) {
+: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
+: -                << " other);" << std::endl;
+: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
+: +                << "& other);" << std::endl;
+:      }
+:  
+:      utility_.blank_line();
+: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
+: index 5c9fe50..9276701 100644
+: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
+: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
+: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
+:          return;
+:  
+:      stream_ << indenter_ << ci.name() << "& "
+: -            << ci.name() << "::operator=(" << ci.name()
+: -            << " other) ";
+: +            << ci.name() << "::operator=(const " << ci.name()
+: +            << "& other) ";
+:  
+:      utility_.open_scope();
+:      {
+
+*** Implement types class header formatter using stitch               :story:
+
+We need to implement a stitch template for the class header formatter
+in types, plug it in and start working through the diffs.
+
+To test diff:
+
+: head -n50 /home/marco/Development/DomainDrivenConsulting/dogen/projects/test_models/all_primitives/include/dogen/test_models/all_primitives/types/a_class.hpp > expected.txt && grep -B20 -A25 -e "\#ifndef DOGEN_TEST_MODELS_ALL_PRIMITIVES_TYPES_A_CLASS_HPP" /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/log/knit/workflow_spec/all_primitives_model_generates_expected_code.log > actual.txt && diff -u expected.txt actual.txt 
+
+Notes:
+
+- we can't access disable complete constructor option. Figure out how
+  to.
+
+Remaining problems with trivial inheritance:
+
+- primitive types have includes; not honouring "requires include?"
+  flag.
+- leaf types do not have visitor methods. This is because
+  =is_original_parent_visitable= is not being populated.
+- too much space after end of namespaces and before end if.
+- no support for comments on classes and methods.
+- visitor includes in descendants.
+- class marked as service is being generated.
+
+Trivial inheritance is now green.
+
+Problems with std model:
+
+- keys are not final.
+- dependencies on hashes are not included
+- duplicate includes. after sort we need some kind of distinct. Or
+  perhaps the SML indexer should only add distinct qnames.
+
+*** Implement options copier and remove options from context          :story:
+
+At present the path derivatives expander is getting access to the C++
+options via the expansion context. This was obviously a temporary hack
+to get things moving. The right thing must surely be to add the root
+object to the context, and to read the options from the root
+object. These for now must be populated via the options copier; in the
+future one can imagine that users define them in diagrams.
+
+Actually, the directories supplied to dogen do need to be command line
+options. This is because they tend to be created by CMake on the fly
+as absolute paths and as such cannot be hard-coded into the
+diagram. This being the case, perhaps we should just supply the
+knitting options to the expansion context. This does mean that now
+expansion is a knitting thing - it could have been used by
+stitch. Needs a bit more thinking.
+
+*Tasks to read options from root object*
+
+Not yet clear this is the right solution, but if it is, this is what
+needs to be done.
+
+- check that we have all the required fields in JSON for all of the
+  c++ options we require for now.
+- update options copier to copy these options. In many cases we will
+  have to "redirect" the option. For example, =domain_facet_folder=
+  becomes the types directory and so forth. Having said that we
+  probably won't need these for now.
+- remove options from context, and add root object instead. We may
+  need to do the usual "locate root object" routine.
+- update the path settings factory to read these from the root object.
+- add options to type settings where it makes sense (e.g. disable
+  complete constructor) and implement the type settings factory.
+
+*** Consider dropping the prefix inclusion in expansion               :story:
+
+*New Understanding*
+
+The problem with this is that "directive" does not have any
+meaning. We could get away with dependencies, but directive is very
+open ended. We cannot start changing meta-data keys (e.g. =directive=
+instead of =inclusion_directive=) because that would confuse users; so
+we would end up with two names in two different places, probably even
+more confusing.
+
+*Previous Understanding*
+
+At present we have really long class names because they all need
+"inclusion" on the name. In reality, we have two concepts:
+
+- directives
+- dependencies
+
+We don't need the prefix "inclusion" to make these understandable. We
+can probably get away with removing it from all of the expansion
+classes without significant loss of meaning.
+
+** Deprecated

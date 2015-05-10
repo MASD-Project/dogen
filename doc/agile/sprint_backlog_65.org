@@ -13,14 +13,14 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-10 Sun 23:11]
+Clock summary at [2015-05-10 Sun 23:13]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
 | *Total time*                                                               | *36:10* |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
 | Active                                                                     |         | 36:10 |      |
-| STARTED Sprint and product backlog grooming                                |         |       | 2:32 |
+| COMPLETED Sprint and product backlog grooming                              |         |       | 2:32 |
 | COMPLETED Fix borked gcc build                                             |         |       | 0:35 |
 | COMPLETED Output new world forward declarations                            |         |       | 2:36 |
 | COMPLETED Fix missing new line in enumeration forward declarations         |         |       | 0:32 |
@@ -48,7 +48,8 @@ Clock summary at [2015-05-10 Sun 23:11]
 | POSTPONED Consider dropping the prefix inclusion in expansion              |         |       | 0:08 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-05-10 Sun 23:13]
     CLOCK: [2015-05-03 Sun 09:14]--[2015-05-03 Sun 09:34] =>  0:20
     CLOCK: [2015-05-01 Fri 16:02]--[2015-05-01 Fri 16:13] =>  0:11
     CLOCK: [2015-04-28 Tue 11:15]--[2015-04-28 Tue 12:14] =>  0:59
@@ -57,7 +58,8 @@ Clock summary at [2015-05-10 Sun 23:11]
 
 Updates to sprint and product backlog.
 
-*** STARTED Updates to the manual and readme files                    :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-05-10 Sun 23:13]
 
 Use downtime to update the manual and / or readme file.
 
