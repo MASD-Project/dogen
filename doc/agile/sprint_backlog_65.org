@@ -13,7 +13,7 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-08 Fri 22:40]
+Clock summary at [2015-05-10 Sun 23:11]
 
 | Headline                                                                   | Time    |       |      |
 |----------------------------------------------------------------------------+---------+-------+------|
@@ -43,9 +43,9 @@ Clock summary at [2015-05-08 Fri 22:40]
 | COMPLETED Add =static_formatter_name=                                      |         |       | 0:17 |
 | POSTPONED Improve references management                                    |         |       | 0:13 |
 | POSTPONED Assignment operator seems to pass types by value                 |         |       | 0:07 |
-| STARTED Implement types class header formatter using stitch                |         |       | 8:53 |
-| STARTED Implement options copier and remove options from context           |         |       | 0:50 |
-| STARTED Consider dropping the prefix inclusion in expansion                |         |       | 0:08 |
+| POSTPONED Implement types class header formatter using stitch              |         |       | 8:53 |
+| POSTPONED Implement options copier and remove options from context         |         |       | 0:50 |
+| POSTPONED Consider dropping the prefix inclusion in expansion              |         |       | 0:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -713,7 +713,8 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
-*** STARTED Implement types class header formatter using stitch       :story:
+*** POSTPONED Implement types class header formatter using stitch     :story:
+    CLOSED: [2015-05-10 Sun 23:09]
     CLOCK: [2015-05-08 Fri 22:18]--[2015-05-08 Fri 22:36] =>  0:18
     CLOCK: [2015-05-08 Fri 22:05]--[2015-05-08 Fri 22:17] =>  0:12
     CLOCK: [2015-05-08 Fri 18:28]--[2015-05-08 Fri 19:09] =>  0:41
@@ -768,7 +769,8 @@ Problems with std model:
 - duplicate includes. after sort we need some kind of distinct. Or
   perhaps the SML indexer should only add distinct qnames.
 
-*** STARTED Implement options copier and remove options from context  :story:
+*** POSTPONED Implement options copier and remove options from context :story:
+    CLOSED: [2015-05-10 Sun 23:09]
     CLOCK: [2015-04-28 Tue 19:34]--[2015-04-28 Tue 19:43] =>  0:09
     CLOCK: [2015-04-28 Tue 18:52]--[2015-04-28 Tue 19:33] =>  0:41
 
@@ -804,7 +806,8 @@ needs to be done.
 - add options to type settings where it makes sense (e.g. disable
   complete constructor) and implement the type settings factory.
 
-*** STARTED Consider dropping the prefix inclusion in expansion       :story:
+*** POSTPONED Consider dropping the prefix inclusion in expansion     :story:
+    CLOSED: [2015-05-10 Sun 23:09]
     CLOCK: [2015-05-06 Wed 17:44]--[2015-05-06 Wed 17:52] =>  0:08
 
 *New Understanding*
@@ -827,88 +830,6 @@ At present we have really long class names because they all need
 We don't need the prefix "inclusion" to make these understandable. We
 can probably get away with removing it from all of the expansion
 classes without significant loss of meaning.
-
-*** Modeling of visitors in =cpp= can be improved                     :story:
-
-In the =cpp= model we are assuming that if the original parent was
-visitable, then the visitor was named after it:
-
-:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
-: #>
-: public:
-:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
-
-The right thing to do here is to have a =visitor_info= attached to the
-=class_info= that is generated during transformation and deals with
-all such rules. The template should just loop through the visitor
-infos. In addition, the visitor infos should tell the template if they
-are abstract or implemented. We may be able to reuse the existing
-=visitor_info= class for this.
-
-*** Improve streaming of empty expressions in stitch                  :spike:
-
-We have a problem with empty expressions:
-
-: <#= #>
-
-Results in:
-
-: s << <<
-
-We need to ignore empty expressions.
-
-*** Do we use =formatter_types=?                                      :story:
-
-We need to figure out if we need this enumeration in =cpp::formatters=
-and if not remove it.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
-
-*** Contents change check is done twice                               :story:
-
-We seem to check twice if a file has changed:
-
-: 2015-04-26 12:37:28.451464 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-: 2015-04-26 12:37:28.451486 [DEBUG] [formatters.filesystem_writer] File contents have not changed, and force write is false so not writing.
-
-This is in stitch but it should be the same for knit.
-
-*** Stitch does not handle directories very well                      :story:
-
-At present we seem to generate log files called =.= when we use stitch
-against a directory. This should only happen if we use =.= on the
-target parameter, e.g.:
-
-: --target .
-
-Not sure why it is happening when we call stitch from CMake since it
-should use the full path to the =cpp= directory.
-
-*** Update dynamic section in manual                                  :story:
-
-We need to talk about the new fields, field templates, etc.
-
-*** Add stitch section in manual                                      :story:
-
-We need to document stitch:
-
-- formal definition of the language and its limitations;
-- command line usage of the tool.
-
-*** Add kvp support to =identifier_parser=                            :story:
-
-We have code to split kvps all over the place. We should do this in a
-single pace, and use boost spirit or tokenizer. For one such
-implementation with spirit see:
-
-[[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Investigate adding polymode support for stitch                    :story:
-
-We need a way to visualise stitch templates that is a bit more
-readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
 
 ** Deprecated
 *** CANCELLED Add tests for main header file formatter with optionality :story:
