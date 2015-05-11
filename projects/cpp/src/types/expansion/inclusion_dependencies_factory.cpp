@@ -141,6 +141,7 @@ private:
                 continue;
 
             id->sort(include_directive_comparer);
+            id->unique();
             const auto id_pair(std::make_pair(p->formatter_name(), *id));
             const bool inserted(r.insert(id_pair).second);
             if (!inserted) {

@@ -13,16 +13,18 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-11 Mon 17:38]
+Clock summary at [2015-05-11 Mon 17:57]
 
-| Headline                                                    | Time   |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *3:55* |      |      |
-|-------------------------------------------------------------+--------+------+------|
-| Active                                                      |        | 3:55 |      |
-| STARTED Sprint and product backlog grooming                 |        |      | 0:13 |
-| COMPLETED Add a validate JSON target                        |        |      | 0:41 |
-| STARTED Implement types class header formatter using stitch |        |      | 3:01 |
+| Headline                                                          | Time   |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                      | *4:13* |      |      |
+|-------------------------------------------------------------------+--------+------+------|
+| Active                                                            |        | 4:13 |      |
+| STARTED Sprint and product backlog grooming                       |        |      | 0:13 |
+| COMPLETED Add a validate JSON target                              |        |      | 0:41 |
+| COMPLETED Add support for =inclusion_required= at formatter level |        |      | 1:09 |
+| COMPLETED Remove duplicate includes                               |        |      | 0:18 |
+| STARTED Implement types class header formatter using stitch       |        |      | 1:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -42,8 +44,30 @@ It would be nice to be able to validate all of the JSON we have in the
 library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
 to validate.
 
-*** STARTED Implement types class header formatter using stitch       :story:
+*** COMPLETED Add support for =inclusion_required= at formatter level :story:
+    CLOSED: [2015-05-11 Mon 17:41]
     CLOCK: [2015-05-11 Mon 16:29]--[2015-05-11 Mon 17:38] =>  1:09
+
+In order to support hashing properly we need to be able to exclude
+some includes. The inclusion required was implemented at the facet
+level, so its not fine grained enough for this. Add it at formatter
+level too.
+
+*** COMPLETED Remove duplicate includes                               :story:
+    CLOSED: [2015-05-11 Mon 17:56]
+    CLOCK: [2015-05-11 Mon 17:38]--[2015-05-11 Mon 17:56] =>  0:18
+
+At present we seem to have duplicate qnames in the relationships
+containers. There isn't any good reason for this so we need to remove
+them during SML workflow. This is not a problem at present because we
+copy the relationships into a set before we start creating includes
+for them.
+
+Actually the problem is not the qnames themselves, but the include
+files. Multiple qnames are pointing to the same include file. We need
+to remove duplicates on the includes container.
+
+*** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 15:44]--[2015-05-11 Mon 15:59] =>  0:15
     CLOCK: [2015-05-11 Mon 14:55]--[2015-05-11 Mon 15:43] =>  0:48
     CLOCK: [2015-05-11 Mon 14:53]--[2015-05-11 Mon 14:55] =>  0:02
@@ -77,9 +101,9 @@ Trivial inheritance is now green.
 Problems with std model:
 
 - dependencies on hashes are not included
-- keys are not final.
 - duplicate includes. after sort we need some kind of distinct. Or
   perhaps the SML indexer should only add distinct qnames.
+- keys are not final.
 
 *** Improve references management                                     :story:
 

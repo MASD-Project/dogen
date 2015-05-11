@@ -143,6 +143,11 @@ void association_indexer::index_object(const model& m, object& o) const {
         // weak associations.
         remove_duplicates(i->second, regular_associations);
     }
+
+    const auto hck(relationship_types::hash_container_keys);
+    i = o.relationships().find(hck);
+    if (i != o.relationships().end())
+        remove_duplicates(i->second);
 }
 
 void association_indexer::index(model& m) const {
