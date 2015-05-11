@@ -1064,12 +1064,6 @@ following errors:
 The exception provides no context to the file being parsed. We need to
 catch the exception and augment it with the file name.
 
-*** Add a validate JSON target                                        :story:
-
-It would be nice to be able to validate all of the JSON we have in the
-library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
-to validate.
-
 *** Rename dynamic models                                             :story:
 
 At present we have named the dynamic models as follows:
@@ -1541,7 +1535,9 @@ The log file is not much better:
 We should instead mention that the string was empty or blank. We also
 need to provide the property and class that contained this string. To
 reproduce this problem create an enumeration but remove the
-=enumeration= stereotype.
+=enumeration= stereotype. This is a very common error when creating
+enumerations (forgetting to set the stereotype). We should supply some
+kind of clue ("did you mean to set the stereotype to enumeration?").
 
 *** Add new c++ warnings to compilation                               :story:
 
