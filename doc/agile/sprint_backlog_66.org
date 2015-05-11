@@ -13,14 +13,16 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-10 Sun 23:14]
+Clock summary at [2015-05-11 Mon 14:55]
 
-| Headline                                    | Time   |      |      |
-|---------------------------------------------+--------+------+------|
-| *Total time*                                | *0:13* |      |      |
-|---------------------------------------------+--------+------+------|
-| Active                                      |        | 0:13 |      |
-| STARTED Sprint and product backlog grooming |        |      | 0:13 |
+| Headline                                                    | Time   |      |      |
+|-------------------------------------------------------------+--------+------+------|
+| *Total time*                                                | *1:43* |      |      |
+|-------------------------------------------------------------+--------+------+------|
+| Active                                                      |        | 1:43 |      |
+| STARTED Sprint and product backlog grooming                 |        |      | 0:13 |
+| COMPLETED Add a validate JSON target                        |        |      | 0:41 |
+| STARTED Implement types class header formatter using stitch |        |      | 0:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -31,6 +33,50 @@ Updates to sprint and product backlog.
 *** STARTED Updates to the manual and readme files                    :story:
 
 Use downtime to update the manual and / or readme file.
+
+*** COMPLETED Add a validate JSON target                              :story:
+    CLOSED: [2015-05-11 Mon 14:54]
+    CLOCK: [2015-05-11 Mon 14:12]--[2015-05-11 Mon 14:53] =>  0:41
+
+It would be nice to be able to validate all of the JSON we have in the
+library by running a single target. We could detect [[http://stedolan.github.io/jq/][jq]] and then use it
+to validate.
+
+*** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-11 Mon 14:53]--[2015-05-11 Mon 14:55] =>  0:02
+    CLOCK: [2015-05-11 Mon 13:25]--[2015-05-11 Mon 14:12] =>  0:47
+
+We need to implement a stitch template for the class header formatter
+in types, plug it in and start working through the diffs.
+
+To test diff:
+
+: head -n50 /home/marco/Development/DomainDrivenConsulting/dogen/projects/test_models/all_primitives/include/dogen/test_models/all_primitives/types/a_class.hpp > expected.txt && grep -B20 -A25 -e "\#ifndef DOGEN_TEST_MODELS_ALL_PRIMITIVES_TYPES_A_CLASS_HPP" /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/log/knit/workflow_spec/all_primitives_model_generates_expected_code.log > actual.txt && diff -u expected.txt actual.txt 
+
+Notes:
+
+- we can't access disable complete constructor option. Figure out how
+  to.
+
+Remaining problems with trivial inheritance:
+
+- primitive types have includes; not honouring "requires include?"
+  flag.
+- leaf types do not have visitor methods. This is because
+  =is_original_parent_visitable= is not being populated.
+- too much space after end of namespaces and before end if.
+- no support for comments on classes and methods.
+- visitor includes in descendants.
+- class marked as service is being generated.
+
+Trivial inheritance is now green.
+
+Problems with std model:
+
+- dependencies on hashes are not included
+- keys are not final.
+- duplicate includes. after sort we need some kind of distinct. Or
+  perhaps the SML indexer should only add distinct qnames.
 
 *** Improve references management                                     :story:
 
@@ -115,40 +161,6 @@ story in backlog.
 :  
 :      utility_.open_scope();
 :      {
-
-*** Implement types class header formatter using stitch               :story:
-
-We need to implement a stitch template for the class header formatter
-in types, plug it in and start working through the diffs.
-
-To test diff:
-
-: head -n50 /home/marco/Development/DomainDrivenConsulting/dogen/projects/test_models/all_primitives/include/dogen/test_models/all_primitives/types/a_class.hpp > expected.txt && grep -B20 -A25 -e "\#ifndef DOGEN_TEST_MODELS_ALL_PRIMITIVES_TYPES_A_CLASS_HPP" /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/log/knit/workflow_spec/all_primitives_model_generates_expected_code.log > actual.txt && diff -u expected.txt actual.txt 
-
-Notes:
-
-- we can't access disable complete constructor option. Figure out how
-  to.
-
-Remaining problems with trivial inheritance:
-
-- primitive types have includes; not honouring "requires include?"
-  flag.
-- leaf types do not have visitor methods. This is because
-  =is_original_parent_visitable= is not being populated.
-- too much space after end of namespaces and before end if.
-- no support for comments on classes and methods.
-- visitor includes in descendants.
-- class marked as service is being generated.
-
-Trivial inheritance is now green.
-
-Problems with std model:
-
-- keys are not final.
-- dependencies on hashes are not included
-- duplicate includes. after sort we need some kind of distinct. Or
-  perhaps the SML indexer should only add distinct qnames.
 
 *** Implement options copier and remove options from context          :story:
 

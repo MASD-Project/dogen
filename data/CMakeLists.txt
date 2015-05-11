@@ -32,3 +32,60 @@ foreach(dir ${subdir})
     endif()
 endforeach()
 message(STATUS "Copied all data files.")
+
+if (WITH_JSON_VALIDATION)
+    set(files "")
+
+    #
+    # Fields
+    #
+    file(GLOB_RECURSE files RELATIVE
+        "${CMAKE_CURRENT_SOURCE_DIR}/fields"
+        "${CMAKE_CURRENT_SOURCE_DIR}/fields/*.json")
+
+    add_custom_target(validate_json_fields)
+    add_dependencies(validate_json_all validate_json_fields)
+    foreach(file ${files})
+        add_custom_target(validate_json_fields_${file}
+             COMMENT "Validating JSON for fields/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . fields/${file} > /dev/null)
+        add_dependencies(validate_json_fields validate_json_fields_${file})
+    endforeach()
+
+    #
+    # library
+    #
+    file(GLOB_RECURSE files RELATIVE
+        "${CMAKE_CURRENT_SOURCE_DIR}/library"
+        "${CMAKE_CURRENT_SOURCE_DIR}/library/*.json")
+
+    add_custom_target(validate_json_library)
+    add_dependencies(validate_json_all validate_json_library)
+    foreach(file ${files})
+        add_custom_target(validate_json_library_${file}
+             COMMENT "Validating JSON for library/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . library/${file} > /dev/null)
+        add_dependencies(validate_json_library validate_json_library_${file})
+    endforeach()
+
+    #
+    # modeline_groups
+    #
+    file(GLOB_RECURSE files RELATIVE
+        "${CMAKE_CURRENT_SOURCE_DIR}/modeline_groups"
+        "${CMAKE_CURRENT_SOURCE_DIR}/modeline_groups/*.json")
+
+    add_custom_target(validate_json_modeline_groups)
+    add_dependencies(validate_json_all validate_json_modeline_groups)
+    foreach(file ${files})
+        add_custom_target(validate_json_modeline_groups_${file}
+             COMMENT "Validating JSON for modeline_groups/${file}."
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${JQ_COMMAND} . modeline_groups/${file} > /dev/null)
+        add_dependencies(validate_json_modeline_groups
+            validate_json_modeline_groups_${file})
+    endforeach()
+
+endif()

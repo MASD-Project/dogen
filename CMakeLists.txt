@@ -44,6 +44,7 @@ option(WITH_DEBUG "Build the project with debug symbols" off)
 option(WITH_DOXYGEN "Build the project documentation" off)
 option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
+option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 
 #
 # check for dependencies
@@ -166,14 +167,26 @@ file(GLOB_RECURSE all_dia_test_models ABSOLUTE
 #
 # setup git
 #
-find_program(CTEST_GIT_COMMAND NAMES git)
-if(NOT DEFINED CTEST_GIT_COMMAND)
+find_program(GIT_COMMAND NAMES git)
+if(NOT DEFINED GIT_COMMAND)
     message(FATAL_ERROR "git not found.")
 endif()
-message(STATUS "Found git (${CTEST_GIT_COMMAND})...")
+message(STATUS "Found git (${GIT_COMMAND})...")
+
+#
+# setup jq, for JSON validation.
+#
+find_program(JQ_COMMAND NAMES jq)
+if(NOT DEFINED JQ_COMMAND)
+    message(STATUS "jq not found, disabling JSON validation.")
+    set(WITH_JSON_VALIDATION "off")
+else()
+    message(STATUS "Found jq (${JQ_COMMAND})...")
+    add_custom_target(validate_json_all)
+endif()
 
 # hash of the top commit
-execute_process(COMMAND ${CTEST_GIT_COMMAND} rev-list -n 1 HEAD
+execute_process(COMMAND ${GIT_COMMAND} rev-list -n 1 HEAD
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     ERROR_VARIABLE git_error
     OUTPUT_VARIABLE CURRENT_GIT_COMMIT
@@ -182,7 +195,7 @@ execute_process(COMMAND ${CTEST_GIT_COMMAND} rev-list -n 1 HEAD
 
 # commit count
 execute_process(
-    COMMAND ${CTEST_GIT_COMMAND} rev-list master
+    COMMAND ${GIT_COMMAND} rev-list master
     COMMAND wc -l
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     ERROR_VARIABLE git_error
@@ -246,6 +259,7 @@ if (WITH_DOXYGEN)
         # input file
         set(doxy_file ${stage_doxygen_dir}/dogen.doxy)
         add_custom_target(doxy ALL
+            COMMENT "Generating doxygen documentation."
             COMMAND rm -rf ${stage_doxygen_dir}/html
             COMMAND ${DOXYGEN_EXECUTABLE} ${doxy_file}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -253,6 +267,7 @@ if (WITH_DOXYGEN)
 
         set(target_dir "/usr/share/cdash/doxygen/dogen")
         add_custom_target(deploy_doxy
+            COMMENT "Deploying doxygen documentation."
             COMMAND rm -rf ${target_dir}.new
             COMMAND mkdir ${target_dir}.new
             COMMAND cp -r ${stage_dir}/doxygen/html ${target_dir}.new/
