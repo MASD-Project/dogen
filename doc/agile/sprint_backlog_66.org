@@ -13,17 +13,18 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-11 Mon 17:57]
+Clock summary at [2015-05-11 Mon 18:02]
 
 | Headline                                                          | Time   |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *4:13* |      |      |
+| *Total time*                                                      | *4:16* |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| Active                                                            |        | 4:13 |      |
+| Active                                                            |        | 4:16 |      |
 | STARTED Sprint and product backlog grooming                       |        |      | 0:13 |
 | COMPLETED Add a validate JSON target                              |        |      | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level |        |      | 1:09 |
 | COMPLETED Remove duplicate includes                               |        |      | 0:18 |
+| COMPLETED Ensure keys have =is_final= set in sml                  |        |      | 0:03 |
 | STARTED Implement types class header formatter using stitch       |        |      | 1:52 |
 #+end:
 
@@ -66,6 +67,14 @@ for them.
 Actually the problem is not the qnames themselves, but the include
 files. Multiple qnames are pointing to the same include file. We need
 to remove duplicates on the includes container.
+
+*** COMPLETED Ensure keys have =is_final= set in sml                  :story:
+    CLOSED: [2015-05-11 Mon 18:01]
+    CLOCK: [2015-05-11 Mon 17:58]--[2015-05-11 Mon 18:01] =>  0:03
+
+At present we are not marking keys as final in the new world
+formatters. This is likely because we are not setting =is_final= for
+keys when we generate them.
 
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 15:44]--[2015-05-11 Mon 15:59] =>  0:15

@@ -114,6 +114,7 @@ object injector::create_key(const qname& qn, const generation_types gt,
     kqn.external_module_path(qn.external_module_path());
 
     object r;
+    r.is_final(true);
     r.name(kqn);
     r.generation_type(gt);
     r.origin_type(origin_types::system);
@@ -145,7 +146,6 @@ object injector::create_unversioned_key(const qname& qn,
 }
 
 object injector::create_key_extractor(const object& ke) const {
-    object r;
     qname qn;
     qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
     qn.model_name(ke.name().model_name());
@@ -155,7 +155,9 @@ object injector::create_key_extractor(const object& ke) const {
     BOOST_LOG_SEV(lg, debug) << "Creating extractor: "
                              << string_converter::convert(qn);
 
+    object r;
     r.name(qn);
+    r.is_final(true);
     r.generation_type(ke.generation_type());
     r.origin_type(origin_types::system);
     r.object_type(object_types::key_extractor);
@@ -270,7 +272,6 @@ void injector::inject_version() {
 
 object injector::
 create_visitor(const object& o, const std::list<qname>& leaves) const {
-    object r;
     qname qn;
     qn.simple_name(o.name().simple_name() + "_" + visitor_name);
     qn.model_name(o.name().model_name());
@@ -280,7 +281,9 @@ create_visitor(const object& o, const std::list<qname>& leaves) const {
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: "
                              << string_converter::convert(qn);
 
+    object r;
     r.name(qn);
+    r.is_final(true);
     r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
     r.object_type(object_types::visitor);
