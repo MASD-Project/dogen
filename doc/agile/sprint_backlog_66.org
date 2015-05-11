@@ -29,6 +29,7 @@ Clock summary at [2015-05-11 Mon 18:19]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-11 Mon 18:57]--[2015-05-11 Mon 19:28] =>  0:31
     CLOCK: [2015-05-10 Sun 23:01]--[2015-05-10 Sun 23:14] =>  0:13
 
 Updates to sprint and product backlog.
@@ -76,7 +77,17 @@ At present we are not marking keys as final in the new world
 formatters. This is likely because we are not setting =is_final= for
 keys when we generate them.
 
+*** COMPLETED Populate property =is_original_parent_visitable= in SML :story:
+    CLOSED: [2015-05-11 Mon 19:06]
+
+*Rationale*: Story implemented in previous sprint.
+
+To make life easier in C++ model, we've added a new SML property:
+=is_original_parent_visitable=. We need to look at the SML
+transformation and ensure this property is populated correctly.
+
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
     CLOCK: [2015-05-11 Mon 18:01]--[2015-05-11 Mon 18:18] =>  0:17
     CLOCK: [2015-05-11 Mon 15:44]--[2015-05-11 Mon 15:59] =>  0:15
     CLOCK: [2015-05-11 Mon 14:55]--[2015-05-11 Mon 15:43] =>  0:48
@@ -125,6 +136,21 @@ Problems with models that disable facets and disable full constructor
 model:
 
 - not honouring flags set in command line options.
+
+*** Expand fields from command line options into dynamic              :story:
+
+We need to ensure the following fields are populated, from the command
+line options:
+
+- integrated facets
+- enabled
+
+*** Consider creating constants for common fields                     :story:
+
+Fields such as =enabled=, =postfix= etc are common to all formatters
+and facets. It may make more sense to define some string constants for
+them, perhaps in =traits=?
+
 
 *** Improve references management                                     :story:
 
@@ -267,4 +293,21 @@ We don't need the prefix "inclusion" to make these understandable. We
 can probably get away with removing it from all of the expansion
 classes without significant loss of meaning.
 
+*** Add new c++ warnings to compilation                               :story:
+
+- =-Wunused-private-field=: Seems like this warning is not part of
+  =-Wall=
+- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
+
 ** Deprecated
+*** CANCELLED Handling missing default facet settings                 :story:
+    CLOSED: [2015-05-11 Mon 19:08]
+
+*Rationale*: We don't have facet settings any more and we are checking
+this properly for the formatter settings.
+
+At present we are just logging a warning when the user supplies
+dynamic extensions for a facet that we do not have defaults
+for. However, it may make more sense to just throw if someone is
+assuming support for something which we do not support. We need to
+think about this use case properly.

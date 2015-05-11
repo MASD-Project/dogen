@@ -537,14 +537,6 @@ We can do two things:
   graph.
 - checking that the expander pointer points to not null or throw.
 
-*** Expand fields from command line options into dynamic              :story:
-
-We need to ensure the following fields are populated, from the command
-line options:
-
-- integrated facets
-- enabled
-
 *** Check for duplicate formatter names in formatter registrar        :story:
 
 At present it is possible to register a formatter name more than
@@ -822,12 +814,6 @@ We need a way of populating the class aspects via the type settings
 and via information obtained in the SML model. We may want to create a
 class to handle this logic or maybe it can be done in transformer.
 
-*** Consider creating constants for common fields                     :story:
-
-Fields such as =enabled=, =postfix= etc are common to all formatters
-and facets. It may make more sense to define some string constants for
-them, perhaps in =traits=?
-
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
@@ -1078,7 +1064,7 @@ of doing this is to use the meta-data property for the model name,
 which would allow having a file name that is different from the model
 name. We have a dependency on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-a-property-for-the-model-name-as-dynamic-extensions][this]] story.
 
-*** Using types of non-referenced models produce bad error messages   :story:
+*** Using types of non-referenced models produces bad error messages  :story:
 
 By mistake we made a reference to =dynamic::object= in the schema
 model, during the =dynamic= to =schema= refactoring. This resulted in
@@ -1131,6 +1117,9 @@ enumerations for the exception part:
 
 We should just do the lexical cast once at the top and use it for both
 logging and the exception message.
+
+In addition we should be using =string_converter= for qnames now
+instead of io'ing them directly.
 
 *** Consider renaming module path to internal module path             :story:
 
@@ -1191,12 +1180,6 @@ across all elements and see if this is a win or not. Also, we can move
 base class for all elements. Validator would have to make sure the
 model is not nonsensical (object inheriting from a primitive, etc).
 
-*** Populate property =is_original_parent_visitable= in SML           :story:
-
-To make life easier in C++ model, we've added a new SML property:
-=is_original_parent_visitable=. We need to look at the SML
-transformation and ensure this property is populated correctly.
-
 *** Improve errors in dia objects                                     :story:
 
 At present when adding blank spaces in a dia object we get the
@@ -1210,14 +1193,6 @@ following error:
 
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
-
-*** Handling missing default facet settings                           :story:
-
-At present we are just logging a warning when the user supplies
-dynamic extensions for a facet that we do not have defaults
-for. However, it may make more sense to just throw if someone is
-assuming support for something which we do not support. We need to
-think about this use case properly.
 
 *** Improve resolution of partial types in resolver                   :story:
 
@@ -1539,12 +1514,6 @@ reproduce this problem create an enumeration but remove the
 enumerations (forgetting to set the stereotype). We should supply some
 kind of clue ("did you mean to set the stereotype to enumeration?").
 
-*** Add new c++ warnings to compilation                               :story:
-
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
-
 *** Move code to C++ 14                                               :story:
 
 #+begin_quote
@@ -1636,12 +1605,12 @@ could add regexes but then its not very maintainable and not visible
 from the project diagram.
 
 The correct solution for this may be to have some tags that state that
-an object only has representations in certain facets.
+an object only has representations in certain facets. This is captured
+by this story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-facet-specific-types][Consider adding facet specific types]].
 
 *** Add tests for general settings factory                            :story:
 
-Zero coverage on this one for some reason. Some simple tests come to
-mind:
+Some simple tests come to mind:
 
 - empty data files directory results in empty factory;
 - valid data files directory results in non-empty factory;
@@ -1689,13 +1658,14 @@ For some reason the log file is full of errors like this:
 : 2014-01-20 18:28:31.219549 [ERROR] [dia_to_sml.processor] Did not find expected attribute value type: composite
 
 Presumably the errors are not fatal as code generation still
-works. Investigate the errors and tidy-up the log.
+works. Investigate the errors and tidy-up the log. Since the errors
+are not fatal we should at least downgrade them to warnings.
 
 *** Add tests for cpp's =name_builder=                                :story:
 
-We refactored tagger code related to flattening names into this class
-but added no tests. We need good coverage, hopefully available from
-C++ formatters.
+Name builder is responsible for converting a nested qualified name
+into a C++ representation. We need some basic tests around this class
+with different composition scenarios.
 
 *** Add tests for =annotation_factory=                                :story:
 
@@ -1709,15 +1679,19 @@ class and add tests.
 - different marker for two objects
 - consider moving generate preamble into annotation
 
-*** Remove speculative facet layers for hash and serialization        :story:
+*** Rename hash and serialization facets                              :story:
 
-For some unfathomable reason we decided to add a layer of indirection
-for both hash and serialization. This is for speculative reasons as in
-the future we may want to add boost hash and other forms of
-serialization. However, in keeping with the (often violated) rule that
-we never add code without a use case, we need to remove this.
+We originally called our support for =std::hash= just =hash= and our
+support for =boost::serialization= just =serialization=. The problem
+is:
 
-Instead of =serialization= we need to call it =boost_serialization=.
+- we may want to also support =boost::hash=.
+- we may want to support other serialisation types.
+
+We should rename these. Perhaps:
+
+- =std_hash=
+- =boost_serialization=: a tad verbose, but quite explicit.
 
 *** Feature models should always be tested by knit                     :epic:
 
@@ -1746,6 +1720,9 @@ getting metrics out of the system.
 
 Actually we should also decide if indent stream is needed at all in a
 stitch world.
+
+It was shown that indent streams are useful for at least one use case:
+for comments.
 
 *** Consider creating an iostreams filter for comments                :story:
 
@@ -2107,7 +2084,7 @@ error.
 
 *** Add tests for SML main workflow                                   :story:
 
-We don't seem to have any. A few come to mind:
+A few come to mind:
 
 - model with no generatable types returns false
 - model with generatable types returns true
@@ -2748,6 +2725,9 @@ for the vast majority of cases, we don't require a full blown list; a
 simple forward list would do. Problem is Dogen does not support
 forward lists just yet. We need to add support for these, including
 solving the missing boost serialisation problem.
+
+We seem to have partial support for this at present; the type is in
+library.
 
 *** Use diagram files to setup test models in cmakefile               :story:
 
