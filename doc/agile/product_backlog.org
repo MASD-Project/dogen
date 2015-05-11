@@ -5932,6 +5932,20 @@ an interface file (IDL-like) and as such is closer to [[*Add%20support%20for%20t
 
 See also this article: [[https://www.softwariness.com/articles/api-design-for-swig/][C++ API Design for SWIG]]
 
+*** Consider adding support for Boost.Operators                       :story:
+
+It may or may not make sense to add support for [[http://www.boost.org/doc/libs/1_58_0/libs/utility/operators.htm][Boost.Operators]]. There
+is a bit of boilerplate which seems easy to code-generate; however,
+the point of adding operators is surely that one needs some
+hand-crafted functionality. At any rate, this story keeps track of the
+thinking on this topic. Articles:
+
+- [[http://arne-mertz.de/2015/01/operator-overloading-the-basics/][Operator Overloading: The Basics]]
+- [[http://arne-mertz.de/2015/01/operator-overloading-common-practice/][Operator Overloading: Common Practice]]
+- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-1/][Operator Overloading – Introduction to Boost.Operators, Part 1]]
+- [[http://arne-mertz.de/2015/02/operator-overloading-introduction-to-boost-operators-part-2/][Operator Overloading – Introduction to Boost.Operators, Part 2]]
+- [[http://arne-mertz.de/2015/03/operator-overloading-introduction-to-boost-operators-part-3/][Operator Overloading – Introduction to Boost.Operators, Part 3]]
+
 *** Add yuml markup language support                                  :story:
 
 #+begin_quote
