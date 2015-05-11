@@ -45,8 +45,8 @@ type_settings_factory::make_field_definitions(
     const dynamic::schema::repository& rp) const {
     field_definitions r;
     const dynamic::schema::repository_selector s(rp);
-    r.disable_complete_constructor =
-        s.select_field_by_name(traits::type::disable_complete_constructor());
+    const auto dcc(traits::cpp::type::disable_complete_constructor());
+    r.disable_complete_constructor = s.select_field_by_name(dcc);
     return r;
 }
 
@@ -54,9 +54,8 @@ type_settings type_settings_factory::
 make(const dynamic::schema::object& o) const {
     const dynamic::schema::field_selector fs(o);
     type_settings r;
-    r.disable_complete_constructor(fs.get_boolean_content_or_default(
-            field_definitions_.disable_complete_constructor));
-
+    const auto& fd(field_definitions_.disable_complete_constructor);
+    r.disable_complete_constructor(fs.get_boolean_content_or_default(fd));
     return r;
 }
 

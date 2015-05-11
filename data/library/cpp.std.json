@@ -10,7 +10,8 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -19,7 +20,8 @@
             "extensions" : {
                 "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
-                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>"
+                "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -27,8 +29,9 @@
             "simple_name" : "int32_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -36,8 +39,9 @@
             "simple_name" : "int64_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -45,8 +49,9 @@
             "simple_name" : "uint8_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -54,8 +59,9 @@
             "simple_name" : "uint16_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -63,8 +69,9 @@
             "simple_name" : "uint32_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -72,8 +79,9 @@
             "simple_name" : "uint64_t",
             "extensions" : {
                 "cpp.type.family" : "integer",
+                "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
-                "cpp.type.requires_manual_default_constructor" : true
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -82,7 +90,8 @@
             "extensions" : {
                 "cpp.type.family" : "string",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<string>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>"
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>",
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {

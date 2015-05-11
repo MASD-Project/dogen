@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
+#include <memory>
+#include "dogen/cpp/types/formatters/hash/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/hash/initializer.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/cpp/types/formatters/io/initializer.hpp"
-#include "dogen/cpp/types/formatters/serialization/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace hash {
 
-void initializer::initialize(registrar& rg) {
-    types::initializer::initialize(rg);
-    hash::initializer::initialize(rg);
-    odb::initializer::initialize(rg);
-    io::initializer::initialize(rg);
-    serialization::initializer::initialize(rg);
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter(f);
 }
 
-} } }
+void initializer::initialize(registrar& rg) {
+    initialise_formatter<class_header_formatter>(rg);
+}
+
+} } } }

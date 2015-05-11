@@ -25,6 +25,7 @@
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/selection_error.hpp"
@@ -112,8 +113,13 @@ bool selector::is_integrated_io_enabled() const {
 }
 
 bool selector::is_serialization_enabled() const {
-    const auto ser_fn(formatters::serialization::traits::facet_name());
-    return is_facet_enabled(ser_fn);
+    const auto fn(formatters::serialization::traits::facet_name());
+    return is_facet_enabled(fn);
+}
+
+bool selector::is_hash_enabled() const {
+    const auto fn(formatters::hash::traits::facet_name());
+    return is_facet_enabled(fn);
 }
 
 } } }

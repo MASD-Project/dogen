@@ -18,23 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/types/initializer.hpp"
-#include "dogen/cpp/types/formatters/hash/initializer.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/cpp/types/formatters/io/initializer.hpp"
-#include "dogen/cpp/types/formatters/serialization/initializer.hpp"
-#include "dogen/cpp/types/formatters/initializer.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace hash {
 
-void initializer::initialize(registrar& rg) {
-    types::initializer::initialize(rg);
-    hash::initializer::initialize(rg);
-    odb::initializer::initialize(rg);
-    io::initializer::initialize(rg);
-    serialization::initializer::initialize(rg);
-}
+class initializer;
 
-} } }
+} } } }
+
+#endif

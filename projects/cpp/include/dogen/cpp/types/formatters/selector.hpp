@@ -83,6 +83,11 @@ public:
      */
     bool is_serialization_enabled() const;
 
+    /**
+     * @brief Returns true if the hash fact is enabled.
+     */
+    bool is_hash_enabled() const;
+
 private:
     const dynamic::schema::repository& repository_;
     const dynamic::schema::object& object_;

@@ -34,6 +34,7 @@
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 
@@ -115,8 +116,14 @@ provider::provide(const dynamic::schema::repository& rp,
     const auto fwd_fn(traits::forward_declarations_formatter_name());
     lambda(o, rt::weak_associations, fwd_fn);
     lambda(o, rt::regular_associations, self_fn);
-    lambda(o, rt::hash_container_keys, self_fn);
     lambda(o, rt::parents, self_fn);
+
+    if (s.is_hash_enabled()) {
+        using hash = formatters::hash::traits;
+        const auto hash_fn(hash::traits::class_header_formatter_name());
+        lambda(o, rt::hash_container_keys, hash_fn);
+    }
+
     if (o.is_visitable())
         lambda(o, rt::visited_by, self_fn);
 

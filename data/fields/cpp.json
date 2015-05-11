@@ -84,6 +84,19 @@
     },
     {
         "name" : {
+            "simple" : "inclusion_required"
+
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "formatter_template",
+        "scope" : "entity",
+        "default_value" : true
+    },
+    {
+        "name" : {
             "simple" : "split_project",
             "qualified" : "cpp.split_project"
         },

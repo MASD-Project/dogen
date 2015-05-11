@@ -52,16 +52,16 @@ void path_settings_factory::setup_top_level_fields(
 
     const dynamic::schema::repository_selector s(rp);
     fp.include_directory_name =
-        s.select_field_by_name(traits::include_directory_name());
+        s.select_field_by_name(traits::cpp::include_directory_name());
 
     fp.source_directory_name =
-        s.select_field_by_name(traits::source_directory_name());
+        s.select_field_by_name(traits::cpp::source_directory_name());
 
     fp.header_file_extension =
-        s.select_field_by_name(traits::header_file_extension());
+        s.select_field_by_name(traits::cpp::header_file_extension());
 
     fp.implementation_file_extension =
-        s.select_field_by_name(traits::implementation_file_extension());
+        s.select_field_by_name(traits::cpp::implementation_file_extension());
 }
 
 void path_settings_factory::setup_facet_fields(

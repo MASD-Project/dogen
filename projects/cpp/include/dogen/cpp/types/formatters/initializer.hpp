@@ -36,7 +36,7 @@ namespace formatters {
  */
 class initializer {
 public:
-    static void initialize(registrar& r);
+    static void initialize(registrar& rg);
 };
 
 } } }

@@ -59,7 +59,7 @@ std::string traits::header_guard() {
 }
 
 std::string traits::inclusion_required() {
-    static std::string r("cpp.inclusion_required");
+    static std::string r("inclusion_required");
     return r;
 }
 
@@ -73,27 +73,32 @@ std::string traits::inclusion_dependency() {
     return r;
 }
 
-std::string traits::include_directory_name() {
+std::string traits::cpp::inclusion_required() {
+    static std::string r("cpp.inclusion_required");
+    return r;
+}
+
+std::string traits::cpp::include_directory_name() {
     static std::string r("cpp.include_directory_name");
     return r;
 }
 
-std::string traits::source_directory_name() {
+std::string traits::cpp::source_directory_name() {
     static std::string r("cpp.source_directory_name");
     return r;
 }
 
-std::string traits::header_file_extension() {
+std::string traits::cpp::header_file_extension() {
     static std::string r("cpp.header_file_extension");
     return r;
 }
 
-std::string traits::implementation_file_extension() {
+std::string traits::cpp::implementation_file_extension() {
     static std::string r("cpp.implementation_file_extension");
     return r;
 }
 
-std::string traits::type::disable_complete_constructor() {
+std::string traits::cpp::type::disable_complete_constructor() {
     static std::string r("cpp.type.disable_complete_constructor");
     return r;
 }

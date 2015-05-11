@@ -13,16 +13,16 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-11 Mon 14:55]
+Clock summary at [2015-05-11 Mon 15:43]
 
 | Headline                                                    | Time   |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| *Total time*                                                | *1:43* |      |      |
+| *Total time*                                                | *2:31* |      |      |
 |-------------------------------------------------------------+--------+------+------|
-| Active                                                      |        | 1:43 |      |
+| Active                                                      |        | 2:31 |      |
 | STARTED Sprint and product backlog grooming                 |        |      | 0:13 |
 | COMPLETED Add a validate JSON target                        |        |      | 0:41 |
-| STARTED Implement types class header formatter using stitch |        |      | 0:49 |
+| STARTED Implement types class header formatter using stitch |        |      | 1:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -43,6 +43,7 @@ library by running a single target. We could detect [[http://stedolan.github.io/
 to validate.
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-11 Mon 14:55]--[2015-05-11 Mon 15:43] =>  0:48
     CLOCK: [2015-05-11 Mon 14:53]--[2015-05-11 Mon 14:55] =>  0:02
     CLOCK: [2015-05-11 Mon 13:25]--[2015-05-11 Mon 14:12] =>  0:47
 

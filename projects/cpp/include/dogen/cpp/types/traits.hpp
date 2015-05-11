@@ -72,11 +72,6 @@ struct traits {
     static std::string header_guard();
 
     /**
-     * @brief Is inclusion required for this type and formatter.
-     */
-    static std::string inclusion_required();
-
-    /**
      * @brief Delimited include path to use for type.
      */
     static std::string inclusion_directive();
@@ -87,30 +82,42 @@ struct traits {
     static std::string inclusion_dependency();
 
     /**
-     * @brief File extension to use for header files.
+     * @brief Is inclusion required for this type and formatter.
      */
-    static std::string header_file_extension();
+    static std::string inclusion_required();
 
-    /**
-     * @brief File extension to use for implementation files.
-     */
-    static std::string implementation_file_extension();
-
-    /**
-     * @brief Name of the directory containing the include files.
-     */
-    static std::string include_directory_name();
-
-    /**
-     * @brief Name of the directory containing the source files.
-     */
-    static std::string source_directory_name();
-
-    struct type {
+    struct cpp {
         /**
-         * @brief If true, the complete constructor is not generated.
+         * @brief Is inclusion required for all formatters.
          */
-        static std::string disable_complete_constructor();
+        static std::string inclusion_required();
+
+        /**
+         * @brief File extension to use for header files.
+         */
+        static std::string header_file_extension();
+
+        /**
+         * @brief File extension to use for implementation files.
+         */
+        static std::string implementation_file_extension();
+
+        /**
+         * @brief Name of the directory containing the include files.
+         */
+        static std::string include_directory_name();
+
+        /**
+         * @brief Name of the directory containing the source files.
+         */
+        static std::string source_directory_name();
+
+        struct type {
+            /**
+             * @brief If true, the complete constructor is not generated.
+             */
+            static std::string disable_complete_constructor();
+        };
     };
 };
 
