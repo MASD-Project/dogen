@@ -60,7 +60,7 @@ public:
 #>
     <#= c.name() #>& operator=(const <#= c.name() #>&) = delete;
 <#+
-            if (c.all_properties().empty())
+            else if (c.all_properties().empty())
 #>
     <#= c.name() #>& operator=(const <#= c.name() #>&) = default;
 
@@ -213,9 +213,12 @@ public:
 #>
     <#= p.type().complete_name() #> <#= p.name() #>() const;
 <#+
-                        if (p.is_immutable())
-                            continue;
+                        if (p.is_immutable()) {
+#>
 
+<#+
+                            continue;
+                        }
 #>
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
 <#+
@@ -223,9 +226,12 @@ public:
 #>
     const <#= p.type().complete_name() #>& <#= p.name() #>() const;
 <#+
-                        if (p.is_immutable())
-                            continue;
+                        if (p.is_immutable()) {
+#>
 
+<#+
+                            continue;
+                        }
 #>
     <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>();
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> v);
@@ -300,7 +306,7 @@ public:
 #>
     void swap(<#= c.name() #>& other) noexcept;
 <#+
-                if (!c.is_parent()) {
+                if (!c.is_parent() && !c.is_immutable()) {
 #>
     <#= c.name() #>& operator=(<#= c.name() #> other);
 <#+

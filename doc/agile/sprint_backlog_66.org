@@ -13,19 +13,19 @@ architecture.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-11 Mon 18:02]
+Clock summary at [2015-05-11 Mon 18:19]
 
 | Headline                                                          | Time   |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *4:16* |      |      |
+| *Total time*                                                      | *4:33* |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| Active                                                            |        | 4:16 |      |
+| Active                                                            |        | 4:33 |      |
 | STARTED Sprint and product backlog grooming                       |        |      | 0:13 |
 | COMPLETED Add a validate JSON target                              |        |      | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level |        |      | 1:09 |
 | COMPLETED Remove duplicate includes                               |        |      | 0:18 |
 | COMPLETED Ensure keys have =is_final= set in sml                  |        |      | 0:03 |
-| STARTED Implement types class header formatter using stitch       |        |      | 1:52 |
+| STARTED Implement types class header formatter using stitch       |        |      | 2:09 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -77,6 +77,7 @@ formatters. This is likely because we are not setting =is_final= for
 keys when we generate them.
 
 *** STARTED Implement types class header formatter using stitch       :story:
+    CLOCK: [2015-05-11 Mon 18:01]--[2015-05-11 Mon 18:18] =>  0:17
     CLOCK: [2015-05-11 Mon 15:44]--[2015-05-11 Mon 15:59] =>  0:15
     CLOCK: [2015-05-11 Mon 14:55]--[2015-05-11 Mon 15:43] =>  0:48
     CLOCK: [2015-05-11 Mon 14:53]--[2015-05-11 Mon 14:55] =>  0:02
@@ -113,6 +114,17 @@ Problems with std model:
 - duplicate includes. after sort we need some kind of distinct. Or
   perhaps the SML indexer should only add distinct qnames.
 - keys are not final.
+
+Problems with stereotypes:
+
+- whitespace handling of immutability causes diffs.
+- we generate assignment operator even though immutability is on.
+- non-generatable stereotype is not being honoured.
+
+Problems with models that disable facets and disable full constructor
+model:
+
+- not honouring flags set in command line options.
 
 *** Improve references management                                     :story:
 

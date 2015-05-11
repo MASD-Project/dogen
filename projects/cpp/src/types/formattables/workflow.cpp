@@ -55,7 +55,9 @@ private:
 
     template<typename Generatable>
     bool ignore(const Generatable& g) const {
-        return g.generation_type() == sml::generation_types::no_generation;
+        return
+            g.generation_type() == sml::generation_types::no_generation ||
+            g.generation_type() == sml::generation_types::partial_generation;
     }
 
     template<typename Transformable>
