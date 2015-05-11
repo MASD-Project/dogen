@@ -362,6 +362,11 @@ stitching but can be supplied by users.
 We need to indent the output coming out of stitch as it is not
 suitable for reading as-is.
 
+This article has a good example of how to consume clang, but
+unfortunately its not about indenting:
+
+- [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
+
 *** Integration of stitch and dogen                                   :story:
 
 Now that we have implemented stitch and proved it works (more or
