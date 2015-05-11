@@ -568,50 +568,6 @@ some others require looking at the SML model graph. It seems they
 should all live under one single operation (or perhaps a few), but we
 do not have any good names for them.
 
-*** Create settings expander and switcher                             :story:
-
-*New Understanding*
-
-The expansion process now takes on this work. We need to refactor this
-story into an expander.
-
-*Previous Understanding*
-
-We need a class responsible for copying over all settings that exist
-both locally and globally. The idea is that, for those settings, the
-selector should be able to just query by formatter name locally and
-get the right values. This could be the expander.
-
-We also need a more intelligent class that determines what formatters
-are enabled and disabled. This is due to:
-
-- lack of support for a given formatter/facet by a type in the graph;
-  it must be propagated to all dependent types. We must be careful
-  with recursion (for example in the composite pattern).
-- a facet has been switched off. This must be propagated to all
-  formatters in that facet.
-- user has switched off a formatter. As with lack of support, this
-  must be propagated through the graph.
-
-This could be done by the switcher. We should first expand the
-settings then switch them.
-
-In some ways we can think of the switcher as a dependency
-manager. This may inform the naming of this class.
-
-One thing to take into account is the different kinds of behaviours
-regarding enabling facets and formatters:
-
-- for serialisation we want it to be on and if its on, all types
-  should be serialisable.
-- for hashing we want it to be off (most likely) and if the user makes
-  use of a hashing container we want the type that is the key of the
-  container to have hashing on; no other types should have it on. We
-  also may want the user to manually switch hashing on for a type.
-- for forward declarations: if another formatter requires it for a
-  type, we want it on; if no one requires it we want it off. The user
-  may want to manually switch it on for a type.
-
 *** Incorrect application of formatter templates                      :story:
 
 At present we are applying formatter templates across all formatters
