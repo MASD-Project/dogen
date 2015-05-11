@@ -25,12 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
 #include "dogen/cpp/serialization/expansion/inclusion_directives_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,9 +44,7 @@ public:
     ~inclusion_directives_repository() = default;
 
 public:
-    inclusion_directives_repository(
-        const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives,
-        const std::unordered_set<dogen::sml::qname>& inclusion_not_required);
+    explicit inclusion_directives_repository(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname);
 
 private:
     template<typename Archive>
@@ -57,15 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion_directives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives() const;
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives();
-    void inclusion_directives(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& v);
-    void inclusion_directives(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >&& v);
-
-    const std::unordered_set<dogen::sml::qname>& inclusion_not_required() const;
-    std::unordered_set<dogen::sml::qname>& inclusion_not_required();
-    void inclusion_not_required(const std::unordered_set<dogen::sml::qname>& v);
-    void inclusion_not_required(const std::unordered_set<dogen::sml::qname>&& v);
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname() const;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname();
+    void inclusion_directives_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& v);
+    void inclusion_directives_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>&& v);
 
 public:
     bool operator==(const inclusion_directives_repository& rhs) const;
@@ -78,8 +70,7 @@ public:
     inclusion_directives_repository& operator=(inclusion_directives_repository other);
 
 private:
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> > inclusion_directives_;
-    std::unordered_set<dogen::sml::qname> inclusion_not_required_;
+    std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings> inclusion_directives_by_qname_;
 };
 
 } } }

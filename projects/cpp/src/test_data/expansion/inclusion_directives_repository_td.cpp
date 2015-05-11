@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/cpp/test_data/settings/inclusion_directives_settings_td.hpp"
 #include "dogen/cpp/test_data/expansion/inclusion_directives_repository_td.hpp"
 
 namespace {
@@ -29,32 +29,15 @@ create_dogen_sml_qname(const unsigned int position) {
     return dogen::sml::qname_generator::create(position);
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+dogen::cpp::settings::inclusion_directives_settings
+create_dogen_cpp_settings_inclusion_directives_settings(const unsigned int position) {
+    return dogen::cpp::settings::inclusion_directives_settings_generator::create(position);
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
+std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings> create_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_inclusion_directives_settings(unsigned int position) {
+    std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
-    }
-    return r;
-}
-
-std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> > create_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_unordered_map_std_string_std_string(position + i)));
-    }
-    return r;
-}
-
-std::unordered_set<dogen::sml::qname> create_std_unordered_set_dogen_sml_qname(unsigned int position) {
-    std::unordered_set<dogen::sml::qname> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_dogen_sml_qname(position + i));
+        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_settings_inclusion_directives_settings(position + i)));
     }
     return r;
 }
@@ -69,8 +52,7 @@ inclusion_directives_repository_generator::inclusion_directives_repository_gener
 
 void inclusion_directives_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_directives(create_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(position + 0));
-    v.inclusion_not_required(create_std_unordered_set_dogen_sml_qname(position + 1));
+    v.inclusion_directives_by_qname(create_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_inclusion_directives_settings(position + 0));
 }
 
 inclusion_directives_repository_generator::result_type

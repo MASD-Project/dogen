@@ -60,6 +60,7 @@
 #include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/formatters/serialization/settings_ser.hpp"
+#include "dogen/cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
 #include "dogen/cpp/serialization/settings/inclusion_directives_settings_ser.hpp"
 #include "dogen/cpp/serialization/expansion/inclusion_directives_repository_ser.hpp"

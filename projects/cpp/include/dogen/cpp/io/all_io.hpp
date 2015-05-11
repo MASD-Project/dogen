@@ -59,6 +59,7 @@
 #include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/cpp/io/formatters/serialization/settings_io.hpp"
+#include "dogen/cpp/io/settings/inclusion_directive_settings_io.hpp"
 #include "dogen/cpp/io/formattables/forward_declarations_info_io.hpp"
 #include "dogen/cpp/io/settings/inclusion_directives_settings_io.hpp"
 #include "dogen/cpp/io/expansion/inclusion_directives_repository_io.hpp"

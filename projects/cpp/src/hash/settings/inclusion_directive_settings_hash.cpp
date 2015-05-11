@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/hash/settings/inclusion_directive_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_directives_settings_hash.hpp"
 
 namespace {
 
@@ -30,12 +29,13 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_cpp_settings_inclusion_directive_settings(const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& v){
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v){
     std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
     return seed;
 }
 
@@ -45,11 +45,11 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t inclusion_directives_settings_hasher::hash(const inclusion_directives_settings&v) {
+std::size_t inclusion_directive_settings_hasher::hash(const inclusion_directive_settings&v) {
     std::size_t seed(0);
 
     combine(seed, v.inclusion_required());
-    combine(seed, hash_std_unordered_map_std_string_dogen_cpp_settings_inclusion_directive_settings(v.inclusion_directive_settings()));
+    combine(seed, hash_boost_optional_std_string(v.inclusion_directive()));
 
     return seed;
 }

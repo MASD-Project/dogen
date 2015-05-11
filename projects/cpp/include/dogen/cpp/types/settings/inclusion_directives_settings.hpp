@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen/cpp/types/settings/inclusion_directive_settings.hpp"
 #include "dogen/cpp/serialization/settings/inclusion_directives_settings_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,8 +46,8 @@ public:
 
 public:
     inclusion_directives_settings(
-        const std::unordered_map<std::string, std::string>& inclusion_directives,
-        const bool inclusion_required);
+        const bool inclusion_required,
+        const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directive_settings);
 
 private:
     template<typename Archive>
@@ -56,13 +57,13 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion_directives_settings& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, std::string>& inclusion_directives() const;
-    std::unordered_map<std::string, std::string>& inclusion_directives();
-    void inclusion_directives(const std::unordered_map<std::string, std::string>& v);
-    void inclusion_directives(const std::unordered_map<std::string, std::string>&& v);
-
     bool inclusion_required() const;
     void inclusion_required(const bool v);
+
+    const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directive_settings() const;
+    std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directive_settings();
+    void inclusion_directive_settings(const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& v);
+    void inclusion_directive_settings(const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>&& v);
 
 public:
     bool operator==(const inclusion_directives_settings& rhs) const;
@@ -75,8 +76,8 @@ public:
     inclusion_directives_settings& operator=(inclusion_directives_settings other);
 
 private:
-    std::unordered_map<std::string, std::string> inclusion_directives_;
     bool inclusion_required_;
+    std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings> inclusion_directive_settings_;
 };
 
 } } }

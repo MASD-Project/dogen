@@ -59,6 +59,7 @@
 #include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"
+#include "dogen/cpp/test_data/settings/inclusion_directive_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"
 #include "dogen/cpp/test_data/settings/inclusion_directives_settings_td.hpp"
 #include "dogen/cpp/test_data/expansion/inclusion_directives_repository_td.hpp"

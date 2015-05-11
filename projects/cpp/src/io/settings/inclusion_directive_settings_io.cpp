@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/settings/inclusion_directive_settings_io.hpp"
-#include "dogen/cpp/io/settings/inclusion_directives_settings_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -32,19 +31,16 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
+namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
     return s;
 }
 
@@ -54,7 +50,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::ostream& operator<<(std::ostream& s, const inclusion_directives_settings& v) {
+std::ostream& operator<<(std::ostream& s, const inclusion_directive_settings& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -62,9 +58,9 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directives_settings& v
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::cpp::settings::inclusion_directives_settings\"" << ", "
+      << "\"__type__\": " << "\"dogen::cpp::settings::inclusion_directive_settings\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required() << ", "
-      << "\"inclusion_directive_settings\": " << v.inclusion_directive_settings()
+      << "\"inclusion_directive\": " << v.inclusion_directive()
       << " }";
     return(s);
 }

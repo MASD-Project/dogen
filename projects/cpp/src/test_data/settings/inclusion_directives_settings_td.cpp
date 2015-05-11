@@ -19,9 +19,14 @@
  *
  */
 #include <sstream>
+#include "dogen/cpp/test_data/settings/inclusion_directive_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/inclusion_directives_settings_td.hpp"
 
 namespace {
+
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -29,16 +34,17 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
-    }
-    return r;
+dogen::cpp::settings::inclusion_directive_settings
+create_dogen_cpp_settings_inclusion_directive_settings(const unsigned int position) {
+    return dogen::cpp::settings::inclusion_directive_settings_generator::create(position);
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings> create_std_unordered_map_std_string_dogen_cpp_settings_inclusion_directive_settings(unsigned int position) {
+    std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_cpp_settings_inclusion_directive_settings(position + i)));
+    }
+    return r;
 }
 
 }
@@ -51,8 +57,8 @@ inclusion_directives_settings_generator::inclusion_directives_settings_generator
 
 void inclusion_directives_settings_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_directives(create_std_unordered_map_std_string_std_string(position + 0));
-    v.inclusion_required(create_bool(position + 1));
+    v.inclusion_required(create_bool(position + 0));
+    v.inclusion_directive_settings(create_std_unordered_map_std_string_dogen_cpp_settings_inclusion_directive_settings(position + 1));
 }
 
 inclusion_directives_settings_generator::result_type

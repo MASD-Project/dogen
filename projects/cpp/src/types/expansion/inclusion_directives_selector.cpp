@@ -43,25 +43,10 @@ namespace expansion {
 inclusion_directives_selector::inclusion_directives_selector(
     const inclusion_directives_repository& rp) : repository_(rp) {}
 
-boost::optional<std::string> inclusion_directives_selector::
-inclusion_directives_for_formatter_name(
-    const std::unordered_map<std::string, std::string>& id,
-    const std::string& formatter_name) const {
-
-    const auto i(id.find(formatter_name));
-    if (i == id.end()) {
-        BOOST_LOG_SEV(lg, warn) << formatter_inclusion_directives_missing
-                                << formatter_name;
-        return boost::optional<std::string>();
-    }
-    return i->second;
-}
-
-const std::unordered_map<std::string, std::string>&
-inclusion_directives_selector::
+const settings::inclusion_directives_settings& inclusion_directives_selector::
 inclusion_directives_for_qname(const sml::qname& qn) const {
-    const auto i(repository_.inclusion_directives().find(qn));
-    if (i == repository_.inclusion_directives().end()) {
+    const auto i(repository_.inclusion_directives_by_qname().find(qn));
+    if (i == repository_.inclusion_directives_by_qname().end()) {
         const auto n(sml::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << qname_inclusion_directives_missing << n;
         BOOST_THROW_EXCEPTION(
@@ -70,21 +55,45 @@ inclusion_directives_for_qname(const sml::qname& qn) const {
     return i->second;
 }
 
-bool inclusion_directives_selector::
-inclusion_not_required(const sml::qname& qn) const {
-    const auto i(repository_.inclusion_not_required().find(qn));
-    return i != repository_.inclusion_not_required().end();
+const settings::inclusion_directive_settings&
+inclusion_directives_selector::inclusion_directives_for_formatter(
+    const settings::inclusion_directives_settings& ids,
+    const std::string& formatter_name) const {
+
+    const auto i(ids.inclusion_directive_settings().find(formatter_name));
+    if (i == ids.inclusion_directive_settings().end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_inclusion_directives_missing
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(selection_error(
+                formatter_inclusion_directives_missing + formatter_name));
+    }
+    return i->second;
 }
 
-boost::optional<std::string> inclusion_directives_selector::
-select_inclusion_directive(const sml::qname& qn,
+boost::optional<std::string>
+inclusion_directives_selector::select_inclusion_directive(
+    const sml::qname& qn,
     const std::string& formatter_name) const {
-    if (inclusion_not_required(qn))
+
+    const auto& id_qn(inclusion_directives_for_qname(qn));
+    bool inclusion_not_required(!id_qn.inclusion_required());
+    if (inclusion_not_required)
         return boost::optional<std::string>();
 
-    const auto& id(inclusion_directives_for_qname(qn));
-    const auto r(inclusion_directives_for_formatter_name(id, formatter_name));
-    return r;
+    const auto& fn(formatter_name);
+    const auto& id_fmt(inclusion_directives_for_formatter(id_qn, fn));
+    inclusion_not_required = !id_fmt.inclusion_required();
+    if (inclusion_not_required)
+        return boost::optional<std::string>();
+
+    if (!id_fmt.inclusion_directive()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << formatter_inclusion_directives_missing
+                                 << n;
+        BOOST_THROW_EXCEPTION(
+            selection_error(formatter_inclusion_directives_missing + n));
+    }
+    return id_fmt.inclusion_directive();
 }
 
 } } }

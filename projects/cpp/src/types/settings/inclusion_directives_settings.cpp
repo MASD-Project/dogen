@@ -28,20 +28,20 @@ inclusion_directives_settings::inclusion_directives_settings()
     : inclusion_required_(static_cast<bool>(0)) { }
 
 inclusion_directives_settings::inclusion_directives_settings(
-    const std::unordered_map<std::string, std::string>& inclusion_directives,
-    const bool inclusion_required)
-    : inclusion_directives_(inclusion_directives),
-      inclusion_required_(inclusion_required) { }
+    const bool inclusion_required,
+    const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directive_settings)
+    : inclusion_required_(inclusion_required),
+      inclusion_directive_settings_(inclusion_directive_settings) { }
 
 void inclusion_directives_settings::swap(inclusion_directives_settings& other) noexcept {
     using std::swap;
-    swap(inclusion_directives_, other.inclusion_directives_);
     swap(inclusion_required_, other.inclusion_required_);
+    swap(inclusion_directive_settings_, other.inclusion_directive_settings_);
 }
 
 bool inclusion_directives_settings::operator==(const inclusion_directives_settings& rhs) const {
-    return inclusion_directives_ == rhs.inclusion_directives_ &&
-        inclusion_required_ == rhs.inclusion_required_;
+    return inclusion_required_ == rhs.inclusion_required_ &&
+        inclusion_directive_settings_ == rhs.inclusion_directive_settings_;
 }
 
 inclusion_directives_settings& inclusion_directives_settings::operator=(inclusion_directives_settings other) {
@@ -50,28 +50,28 @@ inclusion_directives_settings& inclusion_directives_settings::operator=(inclusio
     return *this;
 }
 
-const std::unordered_map<std::string, std::string>& inclusion_directives_settings::inclusion_directives() const {
-    return inclusion_directives_;
-}
-
-std::unordered_map<std::string, std::string>& inclusion_directives_settings::inclusion_directives() {
-    return inclusion_directives_;
-}
-
-void inclusion_directives_settings::inclusion_directives(const std::unordered_map<std::string, std::string>& v) {
-    inclusion_directives_ = v;
-}
-
-void inclusion_directives_settings::inclusion_directives(const std::unordered_map<std::string, std::string>&& v) {
-    inclusion_directives_ = std::move(v);
-}
-
 bool inclusion_directives_settings::inclusion_required() const {
     return inclusion_required_;
 }
 
 void inclusion_directives_settings::inclusion_required(const bool v) {
     inclusion_required_ = v;
+}
+
+const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directives_settings::inclusion_directive_settings() const {
+    return inclusion_directive_settings_;
+}
+
+std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& inclusion_directives_settings::inclusion_directive_settings() {
+    return inclusion_directive_settings_;
+}
+
+void inclusion_directives_settings::inclusion_directive_settings(const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>& v) {
+    inclusion_directive_settings_ = v;
+}
+
+void inclusion_directives_settings::inclusion_directive_settings(const std::unordered_map<std::string, dogen::cpp::settings::inclusion_directive_settings>&& v) {
+    inclusion_directive_settings_ = std::move(v);
 }
 
 } } }

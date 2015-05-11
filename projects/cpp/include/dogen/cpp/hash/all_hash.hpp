@@ -59,6 +59,7 @@
 #include "dogen/cpp/hash/formattables/odb_options_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/formatters/serialization/settings_hash.hpp"
+#include "dogen/cpp/hash/settings/inclusion_directive_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/forward_declarations_info_hash.hpp"
 #include "dogen/cpp/hash/settings/inclusion_directives_settings_hash.hpp"
 #include "dogen/cpp/hash/expansion/inclusion_directives_repository_hash.hpp"

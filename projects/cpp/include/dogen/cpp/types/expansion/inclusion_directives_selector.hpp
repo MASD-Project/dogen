@@ -46,27 +46,24 @@ public:
 
 private:
     /**
-     * @brief Returns the path derivatives for a given formatter name.
+     * @brief Returns the inclusion directives settings for a given qname.
      *
-     * @pre Formatter name must exist in path derivatives collection.
+     * @pre qname must exist in inclusion directives settings
+     * collection.
      */
-    boost::optional<std::string> inclusion_directives_for_formatter_name(
-        const std::unordered_map<std::string, std::string>&
-        id, const std::string& formatter_name) const;
-
-    /**
-     * @brief Returns the path derivatives for a given qname.
-     *
-     * @pre qname must exist in path derivatives collection.
-     */
-    const std::unordered_map<std::string, std::string>&
+    const settings::inclusion_directives_settings&
     inclusion_directives_for_qname(const sml::qname& qn) const;
 
     /**
-     * @brief Returns true if the qname does not require inclusion
-     * directives.
+     * @brief Returns the inclusion directive settings for a given
+     * formatter name.
+     *
+     * @pre formatter name must exist in collection.
      */
-    bool inclusion_not_required(const sml::qname& qn) const;
+    const settings::inclusion_directive_settings&
+    inclusion_directives_for_formatter(
+        const settings::inclusion_directives_settings& ids,
+        const std::string& formatter_name) const;
 
 public:
     /**

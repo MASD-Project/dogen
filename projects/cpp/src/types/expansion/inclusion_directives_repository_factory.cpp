@@ -60,26 +60,16 @@ private:
      */
     template<typename ExtensibleAndNameable>
     void generate(const ExtensibleAndNameable& e) {
+        auto& id_qn(result_.inclusion_directives_by_qname());
         const auto settings(factory_.make(e.extensions()));
-        if (!settings.inclusion_required()) {
-            auto& inr(result_.inclusion_not_required());
-            const auto pair(inr.insert(e.name()));
-            if (!pair.second) {
-                const auto n(sml::string_converter::convert(e.name()));
-                BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-                BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
-            }
-            return;
-        }
+        const auto pair(id_qn.insert(std::make_pair(e.name(), settings)));
 
-        const auto& sid(settings.inclusion_directives());
-        auto& rid(result_.inclusion_directives());
-        const auto pair(rid.insert(std::make_pair(e.name(), sid)));
-        if (!pair.second) {
-            const auto n(sml::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
-        }
+        if (pair.second)
+            return;
+
+        const auto n(sml::string_converter::convert(e.name()));
+        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
     }
 
 public:

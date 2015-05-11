@@ -46,29 +46,41 @@ inclusion_directives_settings_factory::
 inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
     const formatters::container& fc)
     : formatter_properties_(make_formatter_properties(rp, fc)),
-      inclusion_required_(get_inclusion_required_field(rp)) {}
+      inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
 
 void inclusion_directives_settings_factory::
 setup_formatter_fields(const dynamic::schema::repository& rp,
     const std::string& formatter_name,
     formatter_properties& fp) const {
 
-    bool found(false);
+    bool found_inclusion_directive(false), found_inclusion_required(false);
     const dynamic::schema::repository_selector s(rp);
     for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
         if (fd.name().simple() == traits::inclusion_directive()) {
             fp.inclusion_directive = fd;
-            found = true;
+            found_inclusion_directive = true;
+        } else if (fd.name().simple() == traits::inclusion_required()) {
+            fp.inclusion_required = fd;
+            found_inclusion_required = true;
         }
     }
 
-    if (!found) {
+    if (!found_inclusion_directive) {
         BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
                                  << traits::inclusion_directive()
                                  << "' for formatter: "
                                  << formatter_name;
         BOOST_THROW_EXCEPTION(building_error(field_definition_not_found +
                 traits::inclusion_directive()));
+    }
+
+    if (!found_inclusion_required) {
+        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
+                                 << traits::inclusion_required()
+                                 << "' for formatter: "
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found +
+                traits::inclusion_required()));
     }
 }
 
@@ -106,7 +118,7 @@ make_formatter_properties(const dynamic::schema::repository& rp,
 }
 
 dynamic::schema::field_definition inclusion_directives_settings_factory::
-get_inclusion_required_field(const dynamic::schema::repository& rp) const {
+get_top_level_inclusion_required_field(const dynamic::schema::repository& rp) const {
     const dynamic::schema::repository_selector s(rp);
     return s.select_field_by_name(traits::cpp::inclusion_required());
 }
@@ -126,7 +138,16 @@ obtain_inclusion_directive_for_formatter(const formatter_properties& fp,
 }
 
 bool inclusion_directives_settings_factory::
-obtain_inclusion_required(const dynamic::schema::object& o) const {
+obtain_inclusion_required_for_formatter(const formatter_properties& fp,
+    const dynamic::schema::object& o) const {
+    using namespace dynamic::schema;
+    const field_selector fs(o);
+    const auto r(fs.get_boolean_content_or_default(fp.inclusion_required));
+    return r;
+}
+
+bool inclusion_directives_settings_factory::
+obtain_top_level_inclusion_required(const dynamic::schema::object& o) const {
     using namespace dynamic::schema;
     const field_selector fs(o);
     return fs.get_boolean_content_or_default(inclusion_required_);
@@ -134,17 +155,22 @@ obtain_inclusion_required(const dynamic::schema::object& o) const {
 
 inclusion_directives_settings inclusion_directives_settings_factory::make(
     const dynamic::schema::object& o) const {
-    inclusion_directives_settings r;
 
-    const auto inclusion_required(obtain_inclusion_required(o));
+    inclusion_directives_settings r;
+    const auto ir(obtain_top_level_inclusion_required(o));
+    r.inclusion_required(ir);
+
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);
         const auto id(obtain_inclusion_directive_for_formatter(fp, o));
-        if (!id)
-            continue;
 
-        r.inclusion_directives().insert(std::make_pair(fp.formatter_name, *id));
-        r.inclusion_required(inclusion_required);
+        inclusion_directive_settings st;
+        st.inclusion_directive(id);
+
+        const auto fir(obtain_inclusion_required_for_formatter(fp, o));
+        st.inclusion_required(fir);
+        const auto id_pair(std::make_pair(fp.formatter_name, st));
+        r.inclusion_directive_settings().insert(id_pair);
     }
     return r;
 }

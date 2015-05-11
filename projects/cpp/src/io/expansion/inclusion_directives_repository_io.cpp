@@ -19,39 +19,13 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/cpp/io/settings/inclusion_directives_settings_io.hpp"
 #include "dogen/cpp/io/expansion/inclusion_directives_repository_io.hpp"
 
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,20 +41,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::sml::qname>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace cpp {
 namespace expansion {
@@ -88,8 +48,7 @@ namespace expansion {
 std::ostream& operator<<(std::ostream& s, const inclusion_directives_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::expansion::inclusion_directives_repository\"" << ", "
-      << "\"inclusion_directives\": " << v.inclusion_directives() << ", "
-      << "\"inclusion_not_required\": " << v.inclusion_not_required()
+      << "\"inclusion_directives_by_qname\": " << v.inclusion_directives_by_qname()
       << " }";
     return(s);
 }

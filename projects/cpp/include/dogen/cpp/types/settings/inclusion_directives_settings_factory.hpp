@@ -52,6 +52,7 @@ private:
     struct formatter_properties {
         std::string formatter_name;
         dynamic::schema::field_definition inclusion_directive;
+        dynamic::schema::field_definition inclusion_required;
     };
 
     /**
@@ -78,9 +79,10 @@ private:
         const formatters::container& fc) const;
 
     /**
-     * @brief Gets up the inclusion required field.
+     * @brief Gets up the top-level (non-formatter specific) inclusion
+     * required field.
      */
-    dynamic::schema::field_definition get_inclusion_required_field(
+    dynamic::schema::field_definition get_top_level_inclusion_required_field(
         const dynamic::schema::repository& rp) const;
 
 private:
@@ -92,9 +94,17 @@ private:
         const dynamic::schema::object& o) const;
 
     /**
+     * @brief Obtains the inclusion required flag for a given formatter.
+     */
+    bool obtain_inclusion_required_for_formatter(
+        const formatter_properties& fp,
+        const dynamic::schema::object& o) const;
+
+    /**
      * @brief Obtains the value of the inclusion required flag.
      */
-    bool obtain_inclusion_required(const dynamic::schema::object& o) const;
+    bool obtain_top_level_inclusion_required(
+        const dynamic::schema::object& o) const;
 
 public:
     /**
