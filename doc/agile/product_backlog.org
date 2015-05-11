@@ -5930,6 +5930,8 @@ or python by creating a formatter for it. Boost.Python would be more
 straightforward as it is plain C++ code; SWIG would require generating
 an interface file (IDL-like) and as such is closer to [[*Add%20support%20for%20thrift%20and%20protocol%20buffers][this]] story.
 
+See also this article: [[https://www.softwariness.com/articles/api-design-for-swig/][C++ API Design for SWIG]]
+
 *** Add yuml markup language support                                  :story:
 
 #+begin_quote
