@@ -112,6 +112,7 @@
 #include "dogen/cpp/types/formatters/test_data/test_data.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/settings/type_settings_factory.hpp"
+#include "dogen/cpp/types/expansion/enabled_flag_expander.hpp"
 #include "dogen/cpp/types/formattables/content_descriptor.hpp"
 #include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/odb/settings_factory.hpp"

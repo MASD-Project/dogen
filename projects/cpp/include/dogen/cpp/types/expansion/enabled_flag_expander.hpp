@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_HPP
-#define DOGEN_CPP_TYPES_EXPANSION_INCLUSION_DEPENDENCIES_EXPANDER_HPP
+#ifndef DOGEN_CPP_TYPES_EXPANSION_ENABLED_FLAG_EXPANDER_HPP
+#define DOGEN_CPP_TYPES_EXPANSION_ENABLED_FLAG_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,8 +27,9 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
@@ -36,21 +37,18 @@ namespace dogen {
 namespace cpp {
 namespace expansion {
 
-/**
- * @brief Performs the include dependencies expansion required by the
- * c++ model.
- */
-class inclusion_dependencies_expander
+class enabled_flag_expander
     : public dynamic::expansion::expander_interface {
 public:
-    ~inclusion_dependencies_expander() noexcept;
+    ~enabled_flag_expander() noexcept;
 
 private:
     /**
      * @brief Field definitions we need to remember for each formatter.
      */
     struct field_definitions {
-        boost::optional<dynamic::schema::field_definition> inclusion_dependency;
+        dynamic::schema::field_definition facet_enabled;
+        dynamic::schema::field_definition formatter_enabled;
     };
 
     /**
@@ -70,28 +68,34 @@ private:
 
 private:
     /**
-     * @brief Handles the dynamic expansion of the include
-     * dependencies for a given formatter.
+     * @brief Properties at the formatter level.
      */
-    void expand_inclusion_dependencies(const std::string& formatter_name,
-        const field_definitions& fd, const std::list<std::string>& deps,
-        dynamic::schema::object& o) const;
-
-public:
-    std::string name() const override;
-
-    const std::forward_list<std::string>& dependencies() const override;
-
-    void setup(const dynamic::expansion::expansion_context& ec) override;
-
-    void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
-        dynamic::schema::object& o) const override;
+    struct formatter_properties {
+        bool facet_enabled;
+        bool formatter_enabled;
+    };
 
 private:
-    std::unordered_map<std::string, field_definitions> field_definitions_;
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, std::list<std::string> >
-                       > inclusion_dependencies_;
+    /**
+     * @brief Returns a qualified field name.
+     */
+    std::string qualify(const std::string& prefix,
+        const std::string& field_name) const;
+
+    /**
+     * @brief Obtains the root object for the model.
+     */
+    dynamic::schema::object
+    obtain_root_object(const sml::model& m) const;
+
+    /**
+     * @brief
+     */
+    std::unordered_map<std::string, formatter_properties>
+    setup_formatter_properties() const;
+
+private:
+    std::unordered_map<std::string, formatter_properties> formatter_proprties_;
 };
 
 } } }
