@@ -56,13 +56,6 @@ private:
     };
 
     /**
-     * @brief Sets up formatter fields.
-     */
-    void setup_formatter_fields(const dynamic::schema::repository& rp,
-        const std::string& formatter_name,
-        formatter_properties& fp) const;
-
-    /**
      * @brief Creates the set of formatter properties for a given
      * formatter.
      */

@@ -13,20 +13,20 @@ the move to needle.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-11 Mon 22:35]
+Clock summary at [2015-05-12 Tue 13:17]
 
 | Headline                                                          | Time   |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *6:12* |      |      |
+| *Total time*                                                      | *7:08* |      |      |
 |-------------------------------------------------------------------+--------+------+------|
-| Active                                                            |        | 6:12 |      |
+| Active                                                            |        | 7:08 |      |
 | STARTED Sprint and product backlog grooming                       |        |      | 0:54 |
 | COMPLETED Add a validate JSON target                              |        |      | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level |        |      | 1:09 |
 | COMPLETED Remove duplicate includes                               |        |      | 0:18 |
 | COMPLETED Ensure keys have =is_final= set in sml                  |        |      | 0:03 |
 | STARTED Implement types class header formatter using stitch       |        |      | 2:28 |
-| STARTED Create a trivial "enabled" expander                       |        |      | 0:39 |
+| STARTED Create a trivial "enabled" expander                       |        |      | 1:35 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -150,6 +150,7 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create a trivial "enabled" expander                       :story:
+    CLOCK: [2015-05-12 Tue 12:21]--[2015-05-12 Tue 13:17] =>  0:56
     CLOCK: [2015-05-11 Mon 21:38]--[2015-05-11 Mon 22:17] =>  0:39
 
 For now we just need a very simple expander that looks into the root

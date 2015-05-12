@@ -36,10 +36,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.selector"));
 
-const std::string no_default_value_for_field(
-    "Field definition does not have a default value: ");
-const std::string dot(".");
-
 }
 
 namespace dogen {
@@ -50,47 +46,31 @@ selector::selector(const dynamic::schema::repository& rp,
     const dynamic::schema::object& o)
     : repository_(rp), object_(o), field_selector_(object_) { }
 
-std::string selector::
-qualify(const std::string& prefix, const std::string& field_name) const {
-    return prefix + dot + field_name;
-}
-
 bool selector::is_formatter_enabled(const std::string& formatter_name) const {
-    const auto fn(qualify(formatter_name, cpp::traits::enabled()));
-    if (field_selector_.has_field(fn))
-        return field_selector_.get_boolean_content(fn);
-
+    const auto enabled(cpp::traits::enabled());
     const dynamic::schema::repository_selector s(repository_);
-    const auto& fd(s.select_field_by_name(fn));
-    if (!fd.default_value()) {
-        BOOST_LOG_SEV(lg, error) << no_default_value_for_field << fn;
-        BOOST_THROW_EXCEPTION(selection_error(no_default_value_for_field + fn));
-    }
-    return field_selector_.get_boolean_content(*fd.default_value());
+    const auto& fd(s.select_field_by_name(formatter_name, enabled));
+    return field_selector_.get_boolean_content_or_default(fd);
 }
 
 bool selector::is_facet_enabled(const std::string& facet_name) const {
-    const auto fn(qualify(facet_name, cpp::traits::enabled()));
-    if (field_selector_.has_field(fn))
-        return field_selector_.get_boolean_content(fn);
-
+    const auto enabled(cpp::traits::enabled());
     const dynamic::schema::repository_selector s(repository_);
-    const auto& fd(s.select_field_by_name(fn));
-    if (!fd.default_value()) {
-        BOOST_LOG_SEV(lg, error) << no_default_value_for_field << fn;
-        BOOST_THROW_EXCEPTION(selection_error(no_default_value_for_field + fn));
-    }
-    return field_selector_.get_boolean_content(*fd.default_value());
+    const auto& fd(s.select_field_by_name(facet_name, enabled));
+    return field_selector_.get_boolean_content_or_default(fd);
 }
 
 bool selector::is_facet_integrated(const std::string& formatter_name,
     const std::string& facet_name) const {
 
-    const auto fn(qualify(formatter_name, cpp::traits::integrated_facet()));
-    if (!field_selector_.has_field(fn))
+    const auto int_fct(cpp::traits::integrated_facet());
+    const dynamic::schema::repository_selector s(repository_);
+    const auto& fd(s.select_field_by_name(formatter_name, int_fct));
+
+    if (!field_selector_.has_field(fd))
         return false;
 
-    const auto col(field_selector_.get_text_collection_content(fn));
+    const auto col(field_selector_.get_text_collection_content(fd));
     for (const auto f : col) {
         if (facet_name == f)
             return true;

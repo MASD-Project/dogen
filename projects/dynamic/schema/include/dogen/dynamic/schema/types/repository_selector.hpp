@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 
@@ -40,6 +41,36 @@ class repository_selector {
 public:
     explicit repository_selector(const repository& rp);
 
+private:
+    /**
+     * @brief Returns a qualified field name.
+     */
+    std::string qualify(const std::string& prefix,
+        const std::string& field_name) const;
+
+public:
+    /**
+     * @brief Tries to get the field definition corresponding to the supplied
+     * qualified field definition name.
+     *
+     * @return if one exists, returns it. Returns Null otherwise.
+     */
+    boost::optional<const field_definition&>
+    try_select_field_by_name(const std::string& n) const;
+
+    /**
+     * @brief Tries to get the field definition corresponding to the
+     * qualified field definition name made up of the prefix and the
+     * simple field name.
+     *
+     * Prefixes are expected to be formatter and facet names.
+     *
+     * @return if one exists, returns it. Returns Null otherwise.
+     */
+    boost::optional<const field_definition&>
+    try_select_field_by_name(const std::string& prefix,
+        const std::string& simple_field_name) const;
+
 public:
     /**
      * @brief Returns the field definition corresponding to the supplied
@@ -48,6 +79,19 @@ public:
      * @pre name must exist.
      */
     const field_definition& select_field_by_name(const std::string& n) const;
+
+    /**
+     * @brief Returns the field definition corresponding to the
+     * qualified field definition name made up of the prefix and the
+     * simple field name.
+     *
+     * Prefixes are expected to be formatter and facet names.
+     *
+     * @pre qualified field name must exist.
+     */
+    const field_definition& select_field_by_name(
+        const std::string& prefix,
+        const std::string& simple_field_name) const;
 
     /**
      * @brief Returns the field definitions corresponding to the

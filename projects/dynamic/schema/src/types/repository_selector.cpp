@@ -28,6 +28,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.schema.repository_selector"));
 
+const std::string dot(".");
 const std::string field_not_found("Could not find expected field: ");
 const std::string no_fields_for_formatter(
     "Could not find any fields for formatter: ");
@@ -43,15 +44,41 @@ namespace schema {
 repository_selector::repository_selector(const repository& rp)
     : repository_(rp) {}
 
-const field_definition& repository_selector::
-select_field_by_name(const std::string& n) const {
+std::string repository_selector::
+qualify(const std::string& prefix, const std::string& field_name) const {
+    return prefix + dot + field_name;
+}
+
+boost::optional<const field_definition&> repository_selector::
+try_select_field_by_name(const std::string& n) const {
     const auto& c(repository_.field_definitions_by_name());
     const auto i(c.find(n));
-    if (i == c.end()) {
+    if (i == c.end())
+        return boost::optional<const field_definition&>();
+
+    return i->second;
+}
+
+boost::optional<const field_definition&> repository_selector::
+try_select_field_by_name(const std::string& prefix,
+    const std::string& simple_field_name) const {
+    return try_select_field_by_name(qualify(prefix, simple_field_name));
+}
+
+const field_definition& repository_selector::
+select_field_by_name(const std::string& n) const {
+    const auto r(try_select_field_by_name(n));
+    if (!r) {
         BOOST_LOG_SEV(lg, error) << field_not_found << n;
         BOOST_THROW_EXCEPTION(selection_error(field_not_found + n));
     }
-    return i->second;
+    return *r;
+}
+
+const field_definition& repository_selector::select_field_by_name(
+    const std::string& prefix,
+    const std::string& simple_field_name) const {
+    return select_field_by_name(qualify(prefix, simple_field_name));
 }
 
 const std::list<field_definition>& repository_selector::

@@ -32,8 +32,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.settings.inclusion_directives_settings_factory"));
 
-const std::string field_definition_not_found(
-    "Could not find expected field definition: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 
 }
@@ -48,51 +46,22 @@ inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
     : formatter_properties_(make_formatter_properties(rp, fc)),
       inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
 
-void inclusion_directives_settings_factory::
-setup_formatter_fields(const dynamic::schema::repository& rp,
-    const std::string& formatter_name,
-    formatter_properties& fp) const {
-
-    bool found_inclusion_directive(false), found_inclusion_required(false);
-    const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
-        if (fd.name().simple() == traits::inclusion_directive()) {
-            fp.inclusion_directive = fd;
-            found_inclusion_directive = true;
-        } else if (fd.name().simple() == traits::inclusion_required()) {
-            fp.inclusion_required = fd;
-            found_inclusion_required = true;
-        }
-    }
-
-    if (!found_inclusion_directive) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::inclusion_directive()
-                                 << "' for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found +
-                traits::inclusion_directive()));
-    }
-
-    if (!found_inclusion_required) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::inclusion_required()
-                                 << "' for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(building_error(field_definition_not_found +
-                traits::inclusion_required()));
-    }
-}
-
 inclusion_directives_settings_factory::formatter_properties
 inclusion_directives_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,
     const formatters::formatter_interface& f) const {
 
     formatter_properties r;
-    const auto oh(f.ownership_hierarchy());
-    r.formatter_name = oh.formatter_name();
-    setup_formatter_fields(rp, oh.formatter_name(), r);
+    const auto fn(f.ownership_hierarchy().formatter_name());
+    r.formatter_name = fn;
+
+    const dynamic::schema::repository_selector s(rp);
+    const auto& id(traits::inclusion_directive());
+    r.inclusion_directive = s.select_field_by_name(fn, id);
+
+    const auto& ir(traits::inclusion_required());
+    r.inclusion_required = s.select_field_by_name(fn, ir);
+
     return r;
 }
 

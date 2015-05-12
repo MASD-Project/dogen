@@ -51,6 +51,45 @@ void path_settings_factory::setup_top_level_fields(
     const dynamic::schema::repository& rp, formatter_properties& fp) const {
 
     const dynamic::schema::repository_selector s(rp);
+    const auto& idn(traits::cpp::include_directory_name());
+    fp.include_directory_name = s.select_field_by_name(idn);
+
+    const auto& sdn(traits::cpp::source_directory_name());
+    fp.source_directory_name = s.select_field_by_name(sdn);
+
+    const auto& hde(traits::cpp::header_file_extension());
+    fp.header_file_extension = s.select_field_by_name(hde);
+
+    const auto& ife(traits::cpp::implementation_file_extension());
+    fp.implementation_file_extension = s.select_field_by_name(ife);
+}
+
+void path_settings_factory::setup_facet_fields(
+    const dynamic::schema::repository& rp,
+    const std::string& facet_name,
+    path_settings_factory::formatter_properties& fp) const {
+
+    const auto& fn(facet_name);
+    const dynamic::schema::repository_selector s(rp);
+    fp.facet_directory = s.select_field_by_name(fn, traits::directory());
+    fp.facet_postfix = s.select_field_by_name(fn, traits::postfix());
+}
+
+/*
+void path_settings_factory::setup_formatter_fields(
+    const dynamic::schema::repository& rp,
+    const std::string& formatter_name,
+    path_settings_factory::formatter_properties& fp) const {
+
+    const auto& fn(formatter_name);
+    const dynamic::schema::repository_selector s(rp);
+    fp.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
+}
+
+void path_settings_factory::setup_top_level_fields(
+    const dynamic::schema::repository& rp, formatter_properties& fp) const {
+
+    const dynamic::schema::repository_selector s(rp);
     fp.include_directory_name =
         s.select_field_by_name(traits::cpp::include_directory_name());
 
@@ -97,6 +136,7 @@ void path_settings_factory::setup_facet_fields(
             building_error(field_definition_not_found + traits::directory()));
     }
 }
+*/
 
 void path_settings_factory::setup_formatter_fields(
     const dynamic::schema::repository& rp,

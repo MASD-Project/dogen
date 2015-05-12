@@ -39,13 +39,6 @@ public:
     selector(const dynamic::schema::repository& rp,
         const dynamic::schema::object& o);
 
-private:
-    /**
-     * @brief Returns a qualified field name.
-     */
-    std::string qualify(const std::string& prefix,
-        const std::string& field_name) const;
-
 public:
     /**
      * @brief Returns true if the supplied formatter is enabled, false

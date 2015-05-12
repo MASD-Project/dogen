@@ -33,9 +33,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.settings.formatter_settings_factory"));
 
-const std::string field_definition_not_found(
-    "Could not find expected field definition: ");
-
 }
 
 namespace dogen {
@@ -52,38 +49,17 @@ formatter_settings_factory::make_formatter_properties(
     const std::string& formatter_name) const {
 
     formatter_properties r;
-    bool found_enabled(false), found_file_path(false);
+    const auto& fn(formatter_name);
     const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
-        if (fd.name().simple() == traits::enabled()) {
-            r.enabled = fd;
-            found_enabled = true;
-        } else if (fd.name().simple() == traits::file_path()) {
-            r.file_path = fd;
-            found_file_path = true;
-        } else if (fd.name().simple() == traits::header_guard())
-          r.header_guard = fd;
-        else if (fd.name().simple() == traits::inclusion_dependency())
-            r.inclusion_dependency = fd;
-        else if (fd.name().simple() == traits::integrated_facet())
-            r.integrated_facet = fd;
-    }
+    r.enabled = s.select_field_by_name(fn, traits::enabled());
+    r.file_path = s.select_field_by_name(fn, traits::file_path());
+    r.header_guard = s.try_select_field_by_name(fn, traits::header_guard());
 
-    if (!found_enabled) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::enabled() << "' for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::enabled()));
-    }
+    const auto& id(traits::inclusion_dependency());
+    r.inclusion_dependency = s.try_select_field_by_name(fn, id);
 
-    if (!found_file_path) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::enabled() << "' for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::postfix()));
-    }
+    const auto& ifct(traits::integrated_facet());
+    r.integrated_facet = s.try_select_field_by_name(fn, ifct);
 
     return r;
 }
