@@ -66,31 +66,13 @@ path_derivatives_expander::field_definitions_for_formatter_name(
     const std::string& formatter_name) const {
 
     field_definitions r;
-    bool found_file_path(false);
+    const auto& fn(formatter_name);
     const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
-        if (fd.name().simple() == traits::file_path()) {
-            r.file_path = fd;
-            found_file_path = true;
-        } else if (fd.name().simple() == traits::inclusion_directive())
-            r.inclusion_directive = fd;
-        else if (fd.name().simple() == traits::header_guard())
-            r.header_guard = fd;
-    }
+    r.file_path = s.select_field_by_name(fn, traits::file_path());
 
-    if (!found_file_path) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found
-                                 << traits::file_path() << " for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            dynamic::expansion::expansion_error(
-                field_definition_not_found + traits::file_path()));
-    }
-
-    if (!r.inclusion_directive) {
-        BOOST_LOG_SEV(lg, debug) << "Formatter does not support inclusion: "
-                                 << formatter_name;
-    }
+    const auto& id(traits::inclusion_directive());
+    r.inclusion_directive = s.select_field_by_name(fn, id);
+    r.header_guard = s.try_select_field_by_name(fn, traits::header_guard());
 
     if (!r.header_guard) {
         BOOST_LOG_SEV(lg, debug) << "Formatter does not support header guards: "

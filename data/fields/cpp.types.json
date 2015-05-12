@@ -148,7 +148,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.types.forward_declarations_formatter"
+            "qualified" : "cpp.types.forward_declarations_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",

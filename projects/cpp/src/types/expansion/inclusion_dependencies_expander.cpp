@@ -53,16 +53,16 @@ namespace expansion {
 
 inclusion_dependencies_expander::~inclusion_dependencies_expander() noexcept {}
 
-inclusion_dependencies_expander::field_definitions inclusion_dependencies_expander::
+inclusion_dependencies_expander::field_definitions
+inclusion_dependencies_expander::
 field_definitions_for_formatter_name(const dynamic::schema::repository& rp,
     const std::string& formatter_name) const {
 
     field_definitions r;
+    const auto& fn(formatter_name);
+    const auto& id(cpp::traits::inclusion_dependency());
     const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
-         if (fd.name().simple() == cpp::traits::inclusion_dependency())
-             r.inclusion_dependency = fd;
-    }
+    r.inclusion_dependency = s.try_select_field_by_name(fn, id);
 
     if (!r.inclusion_dependency) {
         BOOST_LOG_SEV(lg, debug)

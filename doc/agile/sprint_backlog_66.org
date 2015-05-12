@@ -13,23 +13,25 @@ the move to needle.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-12 Tue 13:17]
+Clock summary at [2015-05-12 Tue 17:14]
 
-| Headline                                                          | Time   |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                      | *7:08* |      |      |
-|-------------------------------------------------------------------+--------+------+------|
-| Active                                                            |        | 7:08 |      |
-| STARTED Sprint and product backlog grooming                       |        |      | 0:54 |
-| COMPLETED Add a validate JSON target                              |        |      | 0:41 |
-| COMPLETED Add support for =inclusion_required= at formatter level |        |      | 1:09 |
-| COMPLETED Remove duplicate includes                               |        |      | 0:18 |
-| COMPLETED Ensure keys have =is_final= set in sml                  |        |      | 0:03 |
-| STARTED Implement types class header formatter using stitch       |        |      | 2:28 |
-| STARTED Create a trivial "enabled" expander                       |        |      | 1:35 |
+| Headline                                                                    | Time   |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                | *7:38* |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| Active                                                                      |        | 7:38 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:00 |
+| COMPLETED Add a validate JSON target                                        |        |      | 0:41 |
+| COMPLETED Add support for =inclusion_required= at formatter level           |        |      | 1:09 |
+| COMPLETED Remove duplicate includes                                         |        |      | 0:18 |
+| COMPLETED Ensure keys have =is_final= set in sml                            |        |      | 0:03 |
+| COMPLETED Improve field definition querying in schema's repository selector |        |      | 1:20 |
+| STARTED Implement types class header formatter using stitch                 |        |      | 2:28 |
+| STARTED Create a trivial "enabled" expander                                 |        |      | 0:39 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-12 Tue 17:08]--[2015-05-12 Tue 17:14] =>  0:06
     CLOCK: [2015-05-11 Mon 22:25]--[2015-05-11 Mon 22:35] =>  0:10
     CLOCK: [2015-05-11 Mon 18:57]--[2015-05-11 Mon 19:28] =>  0:31
     CLOCK: [2015-05-10 Sun 23:01]--[2015-05-10 Sun 23:14] =>  0:13
@@ -97,6 +99,27 @@ Fields such as =enabled=, =postfix= etc are common to all formatters
 and facets. It may make more sense to define some string constants for
 them, perhaps in =traits=?
 
+*** COMPLETED Improve field definition querying in schema's repository selector :story:
+    CLOSED: [2015-05-12 Tue 17:09]
+    CLOCK: [2015-05-12 Tue 16:44]--[2015-05-12 Tue 17:08] =>  0:24
+    CLOCK: [2015-05-12 Tue 12:21]--[2015-05-12 Tue 13:17] =>  0:56
+
+Why do we loop through the field definitions to find a field? Surely
+it makes more sense to supply the desired field name plus the
+ownership hierarchy to the selector and ask for the field directly?
+We would have to tell it if its the model, facet or formatter's
+version we are looking for but the method name could imply that -
+"for facet", etc. This would clean up all the "found_" flags and
+associated madness.
+
+Actually, we still need to support the old linear search API. This is
+because the qualified field name is not always the prefix + simple
+name. For example, for general settings and for stitch, the qualified
+field names do not have a prefix. This requires a bit of thinking: we
+could just add a prefix (e.g. =formatters.copyright_notice=) but it
+would make the fields less readable, and this was the reason why we
+didn't add it in the first place. For now, we will leave stitch as it is.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -150,21 +173,12 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create a trivial "enabled" expander                       :story:
-    CLOCK: [2015-05-12 Tue 12:21]--[2015-05-12 Tue 13:17] =>  0:56
     CLOCK: [2015-05-11 Mon 21:38]--[2015-05-11 Mon 22:17] =>  0:39
 
 For now we just need a very simple expander that looks into the root
 object and switches the formatter's "enabled" flag at the entity level
 on/off. Implement this to allow us to get the disable facet knit tests
 to pass.
-
-- why do we loop through the field definitions to find a field? Surely
-  it makes more sense to supply the desired field name plus the
-  ownership hierarchy to the selector and ask for the field directly?
-  We would have to tell it if its the model, facet or formatter's
-  version we are looking for but the method name could imply that -
-  "for facet", etc. This would clean up all the "found_" flags and
-  associated madness.
 
 *** Create a "supported" expander                                     :story:
 

@@ -75,7 +75,6 @@ void path_settings_factory::setup_facet_fields(
     fp.facet_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
-/*
 void path_settings_factory::setup_formatter_fields(
     const dynamic::schema::repository& rp,
     const std::string& formatter_name,
@@ -84,81 +83,6 @@ void path_settings_factory::setup_formatter_fields(
     const auto& fn(formatter_name);
     const dynamic::schema::repository_selector s(rp);
     fp.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
-}
-
-void path_settings_factory::setup_top_level_fields(
-    const dynamic::schema::repository& rp, formatter_properties& fp) const {
-
-    const dynamic::schema::repository_selector s(rp);
-    fp.include_directory_name =
-        s.select_field_by_name(traits::cpp::include_directory_name());
-
-    fp.source_directory_name =
-        s.select_field_by_name(traits::cpp::source_directory_name());
-
-    fp.header_file_extension =
-        s.select_field_by_name(traits::cpp::header_file_extension());
-
-    fp.implementation_file_extension =
-        s.select_field_by_name(traits::cpp::implementation_file_extension());
-}
-
-void path_settings_factory::setup_facet_fields(
-    const dynamic::schema::repository& rp,
-    const std::string& facet_name,
-    path_settings_factory::formatter_properties& fp) const {
-
-    bool found_directory(false), found_postfix(false);
-    const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_facet_name(facet_name)) {
-        if (fd.name().simple() == traits::directory()) {
-            fp.facet_directory = fd;
-            found_directory = true;
-        } else if (fd.name().simple() == traits::postfix()) {
-            fp.facet_postfix = fd;
-            found_postfix = true;
-        }
-    }
-
-    if (!found_directory) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::directory() << "' for facet: "
-                                 << facet_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::directory()));
-    }
-
-    if (!found_postfix) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::postfix() << "' for facet: "
-                                 << facet_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::directory()));
-    }
-}
-*/
-
-void path_settings_factory::setup_formatter_fields(
-    const dynamic::schema::repository& rp,
-    const std::string& formatter_name,
-    path_settings_factory::formatter_properties& fp) const {
-
-    bool found(false);
-    const dynamic::schema::repository_selector s(rp);
-    for (const auto fd : s.select_fields_by_formatter_name(formatter_name)) {
-        if (fd.name().simple() == traits::postfix()) {
-            fp.formatter_postfix = fd;
-            found = true;
-        }
-    }
-
-    if (!found) {
-        BOOST_LOG_SEV(lg, error) << field_definition_not_found << " '"
-                                 << traits::postfix() << "' for formatter: "
-                                 << formatter_name;
-        BOOST_THROW_EXCEPTION(
-            building_error(field_definition_not_found + traits::postfix()));
-    }
 }
 
 path_settings_factory::formatter_properties

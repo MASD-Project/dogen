@@ -87,7 +87,8 @@ make_formatter_properties(const dynamic::schema::repository& rp,
 }
 
 dynamic::schema::field_definition inclusion_directives_settings_factory::
-get_top_level_inclusion_required_field(const dynamic::schema::repository& rp) const {
+get_top_level_inclusion_required_field(
+    const dynamic::schema::repository& rp) const {
     const dynamic::schema::repository_selector s(rp);
     return s.select_field_by_name(traits::cpp::inclusion_required());
 }

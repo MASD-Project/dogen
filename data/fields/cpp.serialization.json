@@ -90,7 +90,7 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.forward_declarations_formatter"
+            "qualified" : "cpp.serialization.forward_declarations_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",

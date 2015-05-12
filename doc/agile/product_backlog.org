@@ -10,6 +10,19 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider fields where "qualified name" is not qualified           :story:
+
+At present, the the qualified field name is not always a prefix +
+simple name. For example, for general settings and for stitch, the
+qualified field names do not have a prefix. We could just add a prefix
+to make everything symmetric (e.g. =formatters.copyright_notice=) but
+it would make the fields less readable at the usage point and this was
+the reason why we didn't add it in the first place. For now, we will
+leave stitch as it is.
+
+This may even be a more wide-ranging question: why do users need to
+know who owns the field? e.g. =dia.comment=, do I care?
+
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
 In the =cpp= model we are assuming that if the original parent was
