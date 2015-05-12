@@ -37,16 +37,22 @@ namespace cpp {
 namespace settings {
 
 type_settings_factory::
-type_settings_factory(const dynamic::schema::repository& rp)
-    : field_definitions_(make_field_definitions(rp)) {}
+type_settings_factory(const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object)
+    : properties_(make_properties(rp, root_object)) {}
 
-type_settings_factory::field_definitions
-type_settings_factory::make_field_definitions(
-    const dynamic::schema::repository& rp) const {
-    field_definitions r;
+type_settings_factory::properties type_settings_factory::make_properties(
+    const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object) const {
+    properties r;
     const dynamic::schema::repository_selector s(rp);
     const auto dcc(traits::cpp::type::disable_complete_constructor());
     r.disable_complete_constructor = s.select_field_by_name(dcc);
+
+    const dynamic::schema::field_selector fs(root_object);
+    r.root_disable_complete_constructor =
+        fs.get_boolean_content_or_default(r.disable_complete_constructor);
+
     return r;
 }
 
@@ -54,8 +60,15 @@ type_settings type_settings_factory::
 make(const dynamic::schema::object& o) const {
     const dynamic::schema::field_selector fs(o);
     type_settings r;
-    const auto& fd(field_definitions_.disable_complete_constructor);
-    r.disable_complete_constructor(fs.get_boolean_content_or_default(fd));
+    const auto& fd(properties_.disable_complete_constructor);
+    if (fs.has_field(fd)) {
+        r.disable_complete_constructor(
+            fs.get_boolean_content_or_default(fd));
+    } else {
+        r.disable_complete_constructor(
+            properties_.root_disable_complete_constructor);
+    }
+
     return r;
 }
 

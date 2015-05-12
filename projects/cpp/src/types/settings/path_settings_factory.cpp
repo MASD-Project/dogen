@@ -31,8 +31,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.path_settings_factory"));
 
-const std::string field_definition_not_found(
-    "Could not find expected field definition: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 
 }

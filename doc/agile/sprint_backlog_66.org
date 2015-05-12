@@ -13,21 +13,21 @@ the move to needle.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-12 Tue 17:14]
+Clock summary at [2015-05-12 Tue 19:46]
 
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *7:38* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Active                                                                      |        | 7:38 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:00 |
-| COMPLETED Add a validate JSON target                                        |        |      | 0:41 |
-| COMPLETED Add support for =inclusion_required= at formatter level           |        |      | 1:09 |
-| COMPLETED Remove duplicate includes                                         |        |      | 0:18 |
-| COMPLETED Ensure keys have =is_final= set in sml                            |        |      | 0:03 |
-| COMPLETED Improve field definition querying in schema's repository selector |        |      | 1:20 |
-| STARTED Implement types class header formatter using stitch                 |        |      | 2:28 |
-| STARTED Create a trivial "enabled" expander                                 |        |      | 0:39 |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *10:10* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Active                                                                      |         | 10:10 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:00 |
+| COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
+| COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
+| COMPLETED Remove duplicate includes                                         |         |       | 0:18 |
+| COMPLETED Ensure keys have =is_final= set in sml                            |         |       | 0:03 |
+| COMPLETED Improve field definition querying in schema's repository selector |         |       | 1:20 |
+| STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
+| STARTED Create a trivial "enabled" expander                                 |         |       | 3:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -173,12 +173,36 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create a trivial "enabled" expander                       :story:
+    CLOCK: [2015-05-12 Tue 18:46]--[2015-05-12 Tue 19:47] =>  1:01
+    CLOCK: [2015-05-12 Tue 17:15]--[2015-05-12 Tue 18:46] =>  1:31
     CLOCK: [2015-05-11 Mon 21:38]--[2015-05-11 Mon 22:17] =>  0:39
 
 For now we just need a very simple expander that looks into the root
 object and switches the formatter's "enabled" flag at the entity level
 on/off. Implement this to allow us to get the disable facet knit tests
 to pass.
+
+Actually we have a big problem: after we implemented all the changes,
+the includes are still wrong. The problem is that the formatting
+assistant we are using to build the includes is making use of
+formatting settings; but we are still in the expansion phase, so the
+settings are not ready to be read yet. Worse, even if we looked at the
+meta-data, we couldn't get the information we need. This is because
+properties like =enabled= are set in the root object (by say the
+options copier or the enabled flag expander) not in the individual
+objects. So the code as it is won't work.
+
+However, we could this make it work if we move the logic of falling
+back to root object into the options copier or enabled flag
+expander. This would mean we would increase the size of the meta-data
+a lot (e.g. every single object would then have a formatter's enabled
+flag set). In addition, we need a provider's assistant that relies
+only on the meta-data when answering questions such as what formatters
+are enabled.
+
+This is not a problem for the other use case of the formatter's
+assistant (in stitch/formatters) because the settings have been setup
+by then.
 
 *** Create a "supported" expander                                     :story:
 

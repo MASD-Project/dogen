@@ -44,13 +44,15 @@ namespace settings {
  */
 class formatter_settings_factory {
 public:
-    explicit formatter_settings_factory(const dynamic::schema::repository& rp);
+    formatter_settings_factory(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object);
 
 private:
     /**
      * @brief All relevant properties we need to remember for each formatter.
      */
     struct formatter_properties {
+        bool root_enabled;
         dynamic::schema::field_definition enabled;
         dynamic::schema::field_definition file_path;
         boost::optional<dynamic::schema::field_definition> header_guard;
@@ -59,19 +61,21 @@ private:
     };
 
     /**
-     * @brief Creates the set of formatter properties for a given
+     * @brief Sets up the set of formatter properties for a given
      * formatter.
      */
-    formatter_properties make_formatter_properties(
+    void setup_field_definitions_for_formatter_name(
         const dynamic::schema::repository& rp,
-        const std::string& formatter_name) const;
+        const std::string& formatter_name,
+        formatter_properties& fp) const;
 
     /**
      * @brief Generates all of the formatter properties, using the
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::schema::repository& rp) const;
+    make_formatter_properties(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object) const;
 
 private:
     /**

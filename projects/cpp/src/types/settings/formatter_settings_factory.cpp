@@ -40,42 +40,47 @@ namespace cpp {
 namespace settings {
 
 formatter_settings_factory::formatter_settings_factory(
-    const dynamic::schema::repository& rp)
-    : formatter_properties_(make_formatter_properties(rp)) { }
-
-formatter_settings_factory::formatter_properties
-formatter_settings_factory::make_formatter_properties(
     const dynamic::schema::repository& rp,
-    const std::string& formatter_name) const {
+    const dynamic::schema::object& root_object)
+    : formatter_properties_(make_formatter_properties(rp, root_object)) { }
 
-    formatter_properties r;
+void formatter_settings_factory::setup_field_definitions_for_formatter_name(
+    const dynamic::schema::repository& rp,
+    const std::string& formatter_name,
+    formatter_properties& fp) const {
+
     const auto& fn(formatter_name);
     const dynamic::schema::repository_selector s(rp);
-    r.enabled = s.select_field_by_name(fn, traits::enabled());
-    r.file_path = s.select_field_by_name(fn, traits::file_path());
-    r.header_guard = s.try_select_field_by_name(fn, traits::header_guard());
+    fp.enabled = s.select_field_by_name(fn, traits::enabled());
+    fp.file_path = s.select_field_by_name(fn, traits::file_path());
+    fp.header_guard = s.try_select_field_by_name(fn, traits::header_guard());
 
     const auto& id(traits::inclusion_dependency());
-    r.inclusion_dependency = s.try_select_field_by_name(fn, id);
+    fp.inclusion_dependency = s.try_select_field_by_name(fn, id);
 
     const auto& ifct(traits::integrated_facet());
-    r.integrated_facet = s.try_select_field_by_name(fn, ifct);
-
-    return r;
+    fp.integrated_facet = s.try_select_field_by_name(fn, ifct);
 }
 
 std::unordered_map<
     std::string, formatter_settings_factory::formatter_properties
     >
 formatter_settings_factory::make_formatter_properties(
-    const dynamic::schema::repository& rp) const {
+    const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object) const {
     const auto& c(formatters::workflow::registrar().formatter_container());
     std::unordered_map<std::string, formatter_properties> r;
 
+    using namespace dynamic::schema;
+    const field_selector fs(root_object);
     for (const auto& f : c.all_formatters()) {
         const auto oh(f->ownership_hierarchy());
         const auto& fn(oh.formatter_name());
-        r[fn] = make_formatter_properties(rp, fn);
+
+        formatter_properties fp;
+        setup_field_definitions_for_formatter_name(rp, fn, fp);
+        fp.root_enabled = fs.get_boolean_content_or_default(fp.enabled);
+        r[fn] = fp;
     }
     return r;
 }
@@ -88,7 +93,11 @@ create_settings_for_formatter(const formatter_properties& fp,
     const field_selector fs(o);
 
     formatter_settings r;
-    r.enabled(fs.get_boolean_content_or_default(fp.enabled));
+    if (fs.has_field(fp.enabled))
+        r.enabled(fs.get_boolean_content_or_default(fp.enabled));
+    else
+        r.enabled(fp.root_enabled);
+
     r.file_path(fs.get_text_content(fp.file_path));
 
     if (fp.header_guard)

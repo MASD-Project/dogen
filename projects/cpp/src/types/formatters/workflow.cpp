@@ -19,8 +19,10 @@
  *
  */
 #include <iterator>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
+#include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 
 namespace {
@@ -28,6 +30,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.workflow"));
 
+const std::string formatter_settings_not_found(
+    "Could not find settings for formatter: ");
 }
 
 namespace dogen {
@@ -48,10 +52,23 @@ private:
     void format(const Formatter& f, const Entity& e,
         const bool empty_content = false,
         const bool skip_push = false) {
+        const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
-                                 << "' with '"
-                                 << f.ownership_hierarchy().formatter_name()
-                                 << "'";
+                                 << "' with '" << fn << "'";
+
+        const auto fs(e.settings().formatter_settings());
+        const auto i(fs.find(fn));
+        if (i == fs.end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_settings_not_found << fn;
+            BOOST_THROW_EXCEPTION(
+                workflow_error(formatter_settings_not_found + fn));
+        }
+
+        const auto is_formatter_enabled(i->second.enabled());
+        if (!is_formatter_enabled) {
+            BOOST_LOG_SEV(lg, debug) << "Formatter not enabled for type.";
+            return;
+        }
 
         auto file(f.format(e));
 

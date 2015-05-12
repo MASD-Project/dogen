@@ -59,6 +59,12 @@ private:
         schema::object& o) const;
     /**@}*/
 
+private:
+    /**
+     * @brief Returns true if the facet is enabled in the options.
+     */
+    bool is_facet_enabled(const config::cpp_facet_types ft) const;
+
 public:
     std::string name() const override;
 

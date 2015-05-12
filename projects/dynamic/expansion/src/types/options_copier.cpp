@@ -27,9 +27,18 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dynamic.expansion.options_copier"));
 
+// FIXME: we are not referencing cpp::traits to avoid circular
+// dependencies.
 const std::string split_project("cpp.split_project");
 const std::string disable_complete_constructor(
     "cpp.type.disable_complete_constructor");
+
+const std::string cpp_types_enabled("cpp.types.enabled");
+const std::string cpp_hash_enabled("cpp.hash.enabled");
+const std::string cpp_serialization_enabled("cpp.serialization.enabled");
+const std::string cpp_io_enabled("cpp.io.enabled");
+const std::string cpp_test_data_enabled("cpp.test_data.enabled");
+const std::string cpp_odb_enabled("cpp.odb.enabled");
 
 }
 
@@ -57,6 +66,12 @@ unsigned int options_copier::insert_field(const std::string& n,
     return o.fields().insert(pair).second ? 1 : 0;
 }
 
+bool options_copier::
+is_facet_enabled(const config::cpp_facet_types ft) const {
+    const auto i(options_.enabled_facets().find(ft));
+    return i != options_.enabled_facets().end();
+}
+
 std::string options_copier::name() const {
     return static_name();
 }
@@ -80,6 +95,16 @@ void options_copier::expand(const sml::qname& /*qn*/,
     unsigned int c(insert_field(split_project, options_.split_project(), o));
     c += insert_field(disable_complete_constructor,
         options_.disable_complete_constructor(), o);
+
+    using ft = config::cpp_facet_types;
+    c += insert_field(cpp_types_enabled, is_facet_enabled(ft::types), o);
+    c += insert_field(cpp_hash_enabled, is_facet_enabled(ft::hash), o);
+    c += insert_field(cpp_serialization_enabled,
+        is_facet_enabled(ft::serialization), o);
+    c += insert_field(cpp_io_enabled, is_facet_enabled(ft::io), o);
+    c += insert_field(cpp_test_data_enabled,
+        is_facet_enabled(ft::test_data), o);
+    c += insert_field(cpp_odb_enabled, is_facet_enabled(ft::odb), o);
 
     BOOST_LOG_SEV(lg, debug) << "Total fields copied: " << c;
 }

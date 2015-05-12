@@ -68,14 +68,14 @@ create_general_settings(const dynamic::schema::object& o) const {
 
 type_settings bundle_factory::
 create_type_settings(const dynamic::schema::object& o) const {
-    type_settings_factory f(schema_repository_);
+    type_settings_factory f(schema_repository_, root_object_);
     return f.make(o);
 }
 
 std::unordered_map<std::string, formatter_settings>
 bundle_factory::create_formatter_settings(
     const dynamic::schema::object& o) const {
-    formatter_settings_factory f(schema_repository_);
+    formatter_settings_factory f(schema_repository_, root_object_);
     return f.make(o);
 }
 

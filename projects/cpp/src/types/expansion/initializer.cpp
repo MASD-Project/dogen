@@ -22,6 +22,7 @@
 #include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/cpp/types/expansion/path_derivatives_expander.hpp"
 #include "dogen/cpp/types/expansion/inclusion_dependencies_expander.hpp"
+#include "dogen/cpp/types/expansion/enabled_flag_expander.hpp"
 #include "dogen/cpp/types/expansion/initializer.hpp"
 
 namespace dogen {
@@ -37,6 +38,7 @@ void register_expander(dynamic::expansion::expander_interface * const p) {
 void initializer::initialize() {
     register_expander(new path_derivatives_expander());
     register_expander(new inclusion_dependencies_expander());
+    register_expander(new enabled_flag_expander());
 }
 
 } } }

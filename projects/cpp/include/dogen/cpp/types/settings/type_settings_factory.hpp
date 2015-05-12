@@ -36,22 +36,23 @@ namespace settings {
 
 class type_settings_factory {
 public:
-    explicit type_settings_factory(const dynamic::schema::repository& rp);
+    type_settings_factory(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object);
 
 private:
     /**
-     * @brief All relevant properties we need to remember for each formatter.
+     * @brief All relevant properties we need to remember.
      */
-    struct field_definitions {
+    struct properties {
+        bool root_disable_complete_constructor;
         dynamic::schema::field_definition disable_complete_constructor;
     };
 
     /**
-     * @brief Creates the set of formatter properties for a given
-     * formatter.
+     * @brief Creates the properties.
      */
-    field_definitions make_field_definitions(
-        const dynamic::schema::repository& rp) const;
+    properties make_properties(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object) const;
 
 public:
     /**
@@ -60,7 +61,7 @@ public:
     type_settings make(const dynamic::schema::object& o) const;
 
 private:
-    const field_definitions field_definitions_;
+    const properties properties_;
 };
 
 } } }

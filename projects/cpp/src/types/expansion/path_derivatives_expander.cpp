@@ -37,8 +37,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.expansion.path_derivatives_expander"));
 
-const std::string field_definition_not_found(
-    "Could not find expected field definition: ");
 const std::string field_definitions_not_found(
     "Could not find expected field definitions for formatter: ");
 const std::string no_path_derivatives_for_qn(
@@ -199,7 +197,7 @@ expand(const sml::qname& qn, const dynamic::schema::scope_types& /*st*/,
             BOOST_LOG_SEV(lg, error) << field_definitions_not_found
                                      << "'" << formatter_name << "'";
             BOOST_THROW_EXCEPTION(dynamic::expansion::expansion_error(
-                    field_definition_not_found + formatter_name));
+                    field_definitions_not_found + formatter_name));
         }
 
         const auto& fd(j->second);

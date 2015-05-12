@@ -30,6 +30,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
 #include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/dynamic/expansion/types/expander_interface.hpp"
 
@@ -44,7 +45,8 @@ public:
 
 private:
     /**
-     * @brief Field definitions we need to remember for each formatter.
+     * @brief Field definitions we need to remember for each
+     * formatter.
      */
     struct field_definitions {
         dynamic::schema::field_definition facet_enabled;
@@ -52,50 +54,32 @@ private:
     };
 
     /**
-     * @brief Sets up all field definitions for a given formatter.
+     * @brief Sets up all formatter properties for a given formatter.
      */
-    field_definitions field_definitions_for_formatter_name(
+    field_definitions make_field_definitions(
         const dynamic::schema::repository& rp,
-        const std::string& formatter_name) const;
+        const dynamic::schema::ownership_hierarchy& oh) const;
 
     /**
-     * @brief Generates all of the formatter field definitions, using
-     * the repository data and the registered formatters.
+     * @brief Generates all field_ definitions for all formatters,
+     * using the repository data and the registered formatters.
      */
     std::unordered_map<std::string, field_definitions>
-    setup_field_definitions(const dynamic::schema::repository& rp,
+    make_field_definitions(const dynamic::schema::repository& rp,
         const formatters::container& fc) const;
 
-private:
-    /**
-     * @brief Properties at the formatter level.
-     */
-    struct formatter_properties {
-        bool facet_enabled;
-        bool formatter_enabled;
-    };
+public:
+    std::string name() const override;
+
+    const std::forward_list<std::string>& dependencies() const override;
+
+    void setup(const dynamic::expansion::expansion_context& ec) override;
+
+    void expand(const sml::qname& qn, const dynamic::schema::scope_types& st,
+        dynamic::schema::object& o) const override;
 
 private:
-    /**
-     * @brief Returns a qualified field name.
-     */
-    std::string qualify(const std::string& prefix,
-        const std::string& field_name) const;
-
-    /**
-     * @brief Obtains the root object for the model.
-     */
-    dynamic::schema::object
-    obtain_root_object(const sml::model& m) const;
-
-    /**
-     * @brief
-     */
-    std::unordered_map<std::string, formatter_properties>
-    setup_formatter_properties() const;
-
-private:
-    std::unordered_map<std::string, formatter_properties> formatter_proprties_;
+    std::unordered_map<std::string, field_definitions> field_definitions_;
 };
 
 } } }
