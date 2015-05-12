@@ -13,14 +13,14 @@ the move to needle.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-12 Tue 19:46]
+Clock summary at [2015-05-12 Tue 22:40]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:10* |       |      |
+| *Total time*                                                                | *10:30* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 10:10 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:00 |
+| Active                                                                      |         | 10:30 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
 | COMPLETED Remove duplicate includes                                         |         |       | 0:18 |
@@ -31,6 +31,7 @@ Clock summary at [2015-05-12 Tue 19:46]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-12 Tue 22:20]--[2015-05-12 Tue 22:40] =>  0:20
     CLOCK: [2015-05-12 Tue 17:08]--[2015-05-12 Tue 17:14] =>  0:06
     CLOCK: [2015-05-11 Mon 22:25]--[2015-05-11 Mon 22:35] =>  0:10
     CLOCK: [2015-05-11 Mon 18:57]--[2015-05-11 Mon 19:28] =>  0:31
@@ -287,6 +288,32 @@ Solution for cycles:
   because the system types may be the ones causing the problem.
 - the enabled supported logic applies to all formatters across all
   model groups. We need a way
+
+*** Add support for disabling formatters                              :story:
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must throw.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
 
 *** Create settings expander and switcher                             :story:
 
