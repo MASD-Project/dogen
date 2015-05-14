@@ -13,14 +13,14 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-13 Wed 22:29]
+Clock summary at [2015-05-14 Thu 19:48]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:16* |       |      |
+| *Total time*                                                                | *16:19* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 15:16 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:32 |
+| Active                                                                      |         | 16:19 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
 | COMPLETED Remove duplicate includes                                         |         |       | 0:18 |
@@ -28,10 +28,14 @@ Clock summary at [2015-05-13 Wed 22:29]
 | COMPLETED Improve field definition querying in schema's repository selector |         |       | 1:20 |
 | COMPLETED Analyse the correct way of implementing the formattables workflow |         |       | 3:34 |
 | CANCELLED Create a trivial "enabled" expander                               |         |       | 3:11 |
+| COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
+| Create the formatter properties                                             |         |       | 0:15 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-14 Thu 19:46]--[2015-05-14 Thu 19:48] =>  0:02
+    CLOCK: [2015-05-14 Thu 19:40]--[2015-05-14 Thu 19:46] =>  0:06
     CLOCK: [2015-05-13 Wed 19:45]--[2015-05-13 Wed 20:08] =>  0:23
     CLOCK: [2015-05-13 Wed 17:09]--[2015-05-13 Wed 17:58] =>  0:49
     CLOCK: [2015-05-12 Tue 22:20]--[2015-05-12 Tue 22:40] =>  0:20
@@ -427,17 +431,80 @@ model:
 - not honouring flags set in command line options.
 
 *** Create the formatter properties                                   :story:
+    CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19
 
 Create a formattables class for the formatter properties: enabled,
 file path, header guard, inclusion dependencies, integrated facets -
 i.e. the formatter settings needs to move to formattables.
 
-Do not delete the settings just yet.
-
 This class will be populated by looking at the output of multiple
-sub-workflows.
+sub-workflows. In fact, it probably makes sense to create a factory
+that handles the manufacturing of all path derivatives and inclusion
+dependencies gunk and then generates the formatter properties. We just
+need the enablement map as input (as well as the model) and we can
+then output qname to formatter name to formatter properties.
 
-*** Create the enabler in formattables                                :story:
+This would be a good place to put the processing of integrated facets
+supplied in meta-data, as well as doing a hack for now of the command
+line options.
+
+We probably don't need settings support for this.
+
+*** Move the path derivatives workflow into formatables               :story:
+
+As per analysis, we need to move away from expansion. Get these
+classes in formattables and hook them in to workflow. Must return the
+path derivatives per qname per formatter name.
+
+We need to also create a workflow step that takes the path derivatives
+and builds the inclusion directives repository.
+
+We just need to unhook the expander; everything else is useful exactly
+as is.
+
+- remove the directory path properties from path settings; these are
+  read from command line options and will continue to do so; they are
+  not settings.
+- add cpp options to the path derivatives workflow.
+- delete the expander
+
+*** Move the inclusion dependencies workflow into formatables         :story:
+
+As per analysis, we need to move away from expansion. Get these
+classes in formattables and hook them in to workflow. It must output
+the inclusion dependencies per qname per formatter name.
+
+It must also:
+
+- take in the enabler output to be able to determine which formatters
+  are enabled for which type.
+- take in global aspect settings. Won't be used for now.
+
+At present the inclusion directives repository factory is reading the
+inclusion directives from the meta-data. We could easily change it to
+read it from the output of the path derivatives. Actually it makes
+more sense to make the inclusion directives selector work off of the
+output of the path derivatives; we do not need any transformations
+then.
+
+We need to read the inclusion dependencies from the dynamic object and
+merge that with the generated inclusion dependencies. At present this
+is done in the expander, so it needs to be moved to the workflow.
+
+Tasks:
+
+- delete the expander
+
+*** Delete dynamic expansion                                          :story:
+
+As per analysis we do not need dynamic expansion so get rid of it.
+
+*** Rename dynamic schema back to dynamic                             :story:
+
+Once we are back to just having =dynamic::schema=, it makes no sense
+to have nesting. Rename it back to just =dynamic=.
+
+*** Create a simple enabler in formattables                           :story:
 
 Create an enabler responsible for determining which formatters are on
 and off. It may use settings to figure out what is enabled and
@@ -467,6 +534,10 @@ enabled?  e.g. if not found its disabled.
 Since there are no easy names we could call it "enabler" for now - he
 who is responsible for enabling.
 
+Tasks:
+
+- update includes provider to take in enablement.
+
 *** Create the =global_aspect_settings= class                         :story:
 
 Create a class to manage the global aspect settings:
@@ -479,54 +550,7 @@ Create a class to manage the global aspect settings:
 These can only be set on the root object. Add these settings o bundle
 using the same approach as general settings. Create factory.
 
-*** Move the path derivatives workflow into formatables               :story:
-
-As per analysis, we need to move away from expansion. Get these
-classes in formattables and hook them in to workflow. Must return the
-path derivatives per qname per formatter name.
-
-We need to also create a workflow step that takes the path derivatives
-and builds the inclusion directives repository.
-
-We just need to unhook the expander; everything else is useful exactly
-as is.
-
-*** Move the inclusion dependencies workflow into formatables         :story:
-
-As per analysis, we need to move away from expansion. Get these
-classes in formattables and hook them in to workflow. It must output
-the inclusion dependencies per qname per formatter name.
-
-It must also:
-
-- take in the enabler output to be able to determine which formatters
-  are enabled for which type.
-- take in global aspect settings. Won't be used for now.
-
-At present the inclusion directives repository factory is reading the
-inclusion directives from the meta-data. We could easily change it to
-read it from the output of the path derivatives. Actually it makes
-more sense to make the inclusion directives selector work off of the
-output of the path derivatives; we do not need any transformations
-then.
-
-We need to read the inclusion dependencies from the dynamic object and
-merge that with the generated inclusion dependencies. At present this
-is done in the expander, so it needs to be moved to the workflow.
-
-*** Consider creating a formatter properties factory                  :story:
-
-It probably makes sense to create a factory that handles the
-manufacturing of all path derivatives and inclusion dependencies gunk
-and then generates the formatter properties. We just need the
-enablement map as input (as well as the model) and we can then output
-qname to formatter name to formatter properties.
-
-This would be a good place to put the processing of integrated facets
-supplied in meta-data, as well as doing a hack for now of the command
-line options.
-
-We probably don't need settings support for this.
+- update includes provider to take in global aspect settings.
 
 *** Add support for "field gathering"                                 :story:
 
@@ -578,15 +602,6 @@ type.
 
 The other option is to align them to SML types and to produce
 different =cpp= types.
-
-*** Delete dynamic expansion                                          :story:
-
-As per analysis we do not need dynamic expansion so get rid of it.
-
-*** Rename dynamic schema back to dynamic                             :story:
-
-Once we are back to just having =dynamic::schema=, it makes no sense
-to have nesting. Rename it back to just =dynamic=.
 
 *** Remove intermediate fields from dynamic                           :story:
 
