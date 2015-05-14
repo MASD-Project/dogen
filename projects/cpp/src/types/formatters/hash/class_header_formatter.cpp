@@ -46,7 +46,7 @@ file_types class_header_formatter::file_type() const {
 }
 
 void class_header_formatter::register_inclusion_dependencies_provider(
-    expansion::registrar& /*rg*/) const {
+    formattables::registrar& /*rg*/) const {
 }
 
 dogen::formatters::file class_header_formatter::

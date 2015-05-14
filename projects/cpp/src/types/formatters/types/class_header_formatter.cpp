@@ -22,12 +22,10 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/expansion/types/expansion_error.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/cpp/types/expansion/inclusion_dependencies_builder.hpp"
-#include "dogen/cpp/types/expansion/inclusion_dependencies_provider_interface.hpp"
-#include "dogen/cpp/types/expansion/provision_error.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
@@ -66,14 +64,14 @@ namespace types {
 
 namespace {
 
-class provider final : public expansion::
+class provider final : public formattables::
         inclusion_dependencies_provider_interface<sml::object> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
     provide(const dynamic::schema::repository& srp,
-        const expansion::inclusion_directives_repository& idr,
+        const formattables::inclusion_directives_repository& idr,
         const sml::object& o) const override;
 };
 
@@ -83,11 +81,11 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const dynamic::schema::repository& rp,
-    const expansion::inclusion_directives_repository& idr,
+    const formattables::inclusion_directives_repository& idr,
     const sml::object& o) const {
 
     const auto self_fn(class_header_formatter::static_formatter_name());
-    expansion::inclusion_dependencies_builder builder(idr);
+    formattables::inclusion_dependencies_builder builder(idr);
 
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
@@ -150,7 +148,7 @@ file_types class_header_formatter::file_type() const {
 }
 
 void class_header_formatter::register_inclusion_dependencies_provider(
-    expansion::registrar& rg) const {
+    formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
 }
 

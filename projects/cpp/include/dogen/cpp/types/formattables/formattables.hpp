@@ -32,6 +32,27 @@ namespace cpp {
  * @brief Formattables contains all types required by the formatters
  * and those used to generate them.
  *
+ * @section cpp_1 Inclusion Directive and Inclusion Dependency
+ *
+ * In this module we use two similar terms with very different meanings:
+ * inclusion directive and inclusion dependency.
+ *
+ * An inclusion directive is a string with delimiters but without the
+ * #include pragma. For example "a/b/c,hpp" and <a/b/c.hpp> are
+ * inclusion directives; note that the quotes and angle brackets are part
+ * of the directive. There should be an inclusion directive associated
+ * with every pair (qname, formatter name). The inclusion directive
+ * repository contains the complete set of inclusion directives - the
+ * inclusion directives universe if you'd like.
+ *
+ * Inclusion dependencies are a set of inclusion directives.  They are
+ * also associated with a pair (qname, formatter).  The inclusion
+ * dependences for each formatter are created by the inclusion
+ * dependencies providers. Each formatter is expected to supply one of
+ * one of these. It uses the inclusion directives available n the
+ * repository to assemble the inclusion dependencies that the formatter
+ * needs in order to generate a compilable C++ file.
+ *
  */
 namespace formattables {
 } } }

@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
-#include "dogen/cpp/types/expansion/registrar.hpp"
+#include "dogen/cpp/types/formattables/registrar.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -59,7 +59,7 @@ public:
      * formatter may know of.
      */
     virtual void register_inclusion_dependencies_provider(
-        expansion::registrar& rg) const = 0;
+        formattables::registrar& rg) const = 0;
 };
 
 } } }

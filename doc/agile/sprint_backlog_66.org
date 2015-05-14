@@ -359,6 +359,21 @@ This is not a problem for the other use case of the formatter's
 assistant (in stitch/formatters) because the settings have been setup
 by then.
 
+*** COMPLETED Merge expansion namespace with formattables             :story:
+    CLOSED: [2015-05-14 Thu 08:59]
+    CLOCK: [2015-05-14 Thu 07:44]--[2015-05-14 Thu 08:24] =>  0:40
+
+We should be able to edit the dia file and move all types from
+expansion to formattables. This just requires expanding (pun not
+intended) the formattables package area and updating all child
+nodes. We can then delete the expansion package.
+
+For code generation we then need to copy the files across and update
+the namespaces.
+
+- O0: formattables
+- O228: expansion
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
