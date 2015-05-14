@@ -5299,6 +5299,20 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Detect moved files                                                :story:
+
+It would be nice if we could detect files that are non-generatable and
+have been moved, so we could move them across. For this we need to
+know:
+
+- that the file is not generatable: e.g. service, etc.
+- that the new file name is equal to the previous file name, just in a
+  different directory.
+
+We could then just replace the empty file with the contents of the
+previous file. Of course, we would still need updating namespaces,
+etc.
+
 *** Consider offering identifier suggestions for misspelling           :story:
 
 We just bumped into an error where a type was not spelled correctly:
