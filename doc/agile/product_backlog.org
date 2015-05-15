@@ -6199,6 +6199,8 @@ it in anger with dogen:
 
 - moving types in and out of packages does not work very well.
 - comments for packages are missing.
+- cannot wrap attributes; this is a problem when we have attributes
+  with very long types.
 
 *** Consider adding YQL support                                        :epic:
 
