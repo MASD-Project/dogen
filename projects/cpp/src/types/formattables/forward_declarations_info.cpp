@@ -46,6 +46,7 @@ forward_declarations_info::forward_declarations_info(
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings,
+    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const bool is_enum,
     const std::string& enum_type)
     : dogen::cpp::formattables::entity(identity,
@@ -53,7 +54,8 @@ forward_declarations_info::forward_declarations_info(
       qualified_name,
       documentation,
       namespaces,
-      settings),
+      settings,
+      formatter_properties),
       is_enum_(is_enum),
       enum_type_(enum_type) { }
 

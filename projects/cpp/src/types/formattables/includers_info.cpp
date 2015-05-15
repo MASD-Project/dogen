@@ -32,13 +32,15 @@ includers_info::includers_info(
     const std::string& qualified_name,
     const std::string& documentation,
     const std::list<std::string>& namespaces,
-    const dogen::cpp::settings::bundle& settings)
+    const dogen::cpp::settings::bundle& settings,
+    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
       documentation,
       namespaces,
-      settings) { }
+      settings,
+      formatter_properties) { }
 
 void includers_info::to_stream(std::ostream& s) const {
     s << " { "

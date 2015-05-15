@@ -62,6 +62,7 @@ public:
         const std::string& documentation,
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings,
+        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
         const std::list<dogen::cpp::formattables::property_info>& properties,
         const std::list<dogen::cpp::formattables::property_info>& all_properties,
         const bool has_primitive_properties,

@@ -55,6 +55,7 @@ public:
         const std::string& documentation,
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings,
+        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
         const std::list<std::string>& leaves,
         const std::list<std::string>& model_dependencies);
 

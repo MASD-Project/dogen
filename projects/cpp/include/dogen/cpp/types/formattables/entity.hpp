@@ -29,8 +29,10 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/serialization/formattables/entity_fwd_ser.hpp"
 
 namespace dogen {
@@ -55,7 +57,8 @@ public:
         const std::string& qualified_name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const dogen::cpp::settings::bundle& settings);
+        const dogen::cpp::settings::bundle& settings,
+        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
 
 private:
     template<typename Archive>
@@ -119,6 +122,11 @@ public:
     void settings(const dogen::cpp::settings::bundle& v);
     void settings(const dogen::cpp::settings::bundle&& v);
 
+    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties() const;
+    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties();
+    void formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& v);
+    void formatter_properties(const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>&& v);
+
 protected:
     bool compare(const entity& rhs) const;
 public:
@@ -133,6 +141,7 @@ private:
     std::string documentation_;
     std::list<std::string> namespaces_;
     dogen::cpp::settings::bundle settings_;
+    std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> formatter_properties_;
 };
 
 inline entity::~entity() noexcept { }

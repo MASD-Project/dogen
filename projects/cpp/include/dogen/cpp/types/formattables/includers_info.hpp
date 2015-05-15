@@ -49,7 +49,8 @@ public:
         const std::string& qualified_name,
         const std::string& documentation,
         const std::list<std::string>& namespaces,
-        const dogen::cpp::settings::bundle& settings);
+        const dogen::cpp::settings::bundle& settings,
+        const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties);
 
 private:
     template<typename Archive>

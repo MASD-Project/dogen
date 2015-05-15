@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-14 Thu 19:48]
+Clock summary at [2015-05-15 Fri 09:16]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:19* |       |      |
+| *Total time*                                                                | *17:24* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 16:19 |      |
+| Active                                                                      |         | 17:24 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -30,7 +30,7 @@ Clock summary at [2015-05-14 Thu 19:48]
 | CANCELLED Create a trivial "enabled" expander                               |         |       | 3:11 |
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
-| Create the formatter properties                                             |         |       | 0:15 |
+| STARTED Create the formatter properties                                     |         |       | 1:20 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -430,7 +430,8 @@ model:
 
 - not honouring flags set in command line options.
 
-*** Create the formatter properties                                   :story:
+*** STARTED Create the formatter properties                           :story:
+    CLOCK: [2015-05-15 Fri 08:10]--[2015-05-15 Fri 09:15] =>  1:05
     CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19
 
 Create a formattables class for the formatter properties: enabled,

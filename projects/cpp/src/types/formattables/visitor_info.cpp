@@ -56,13 +56,15 @@ visitor_info::visitor_info(
     const std::string& documentation,
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings,
+    const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<std::string>& types)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
       documentation,
       namespaces,
-      settings),
+      settings,
+      formatter_properties),
       types_(types) { }
 
 void visitor_info::to_stream(std::ostream& s) const {
