@@ -35,7 +35,6 @@ static logger lg(logger_factory(
         "cpp.formattables.path_derivatives_repository_factory"));
 
 const std::string duplicate_qname("Duplicate qname: ");
-const std::string model_module_not_found("Model module not found for model: ");
 
 }
 
@@ -89,40 +88,22 @@ void generator::generate(const sml::qname& qn) {
 
 }
 
-path_derivatives_repository_factory::
-path_derivatives_repository_factory(const formatters::container& c)
-    : container_(c) { }
-
-dynamic::schema::object path_derivatives_repository_factory::
-obtain_root_object_activity(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
-
-    const auto i(m.modules().find(m.name()));
-    if (i == m.modules().end()) {
-        const auto n(sml::string_converter::convert(m.name()));
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(model_module_not_found + n));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
-    return i->second.extensions();
-}
-
 std::unordered_map<std::string, settings::path_settings>
 path_derivatives_repository_factory::
-create_path_settings_activity(const config::cpp_options& opts,
+create_path_settings(const config::cpp_options& opts,
     const dynamic::schema::repository& rp,
-    const dynamic::schema::object& o) const {
+    const dynamic::schema::object& o,
+    const formatters::container& c) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating path settings.";
-    settings::path_settings_factory f(opts, rp, container_);
+    settings::path_settings_factory f(opts, rp, c);
     const auto r(f.make(o));
     BOOST_LOG_SEV(lg, debug) << "Created path settings";
     return r;
 }
 
 path_derivatives_repository path_derivatives_repository_factory::
-obtain_path_derivatives_activity(
+obtain_path_derivatives(
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const sml::model& m) const {
 
@@ -137,14 +118,12 @@ obtain_path_derivatives_activity(
 
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts, const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object, const formatters::container& c,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-
-    const auto ro(obtain_root_object_activity(m));
-    const auto ps(create_path_settings_activity(opts, rp, ro));
-    const auto r(obtain_path_derivatives_activity(ps, m));
-
+    const auto ps(create_path_settings(opts, rp, root_object, c));
+    const auto r(obtain_path_derivatives(ps, m));
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
     return r;
 }

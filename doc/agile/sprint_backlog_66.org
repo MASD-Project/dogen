@@ -508,6 +508,7 @@ Tasks:
   removed when we get rid of expanders.
 
 *** STARTED Move the path derivatives workflow into formatables       :story:
+    CLOCK: [2015-05-15 Fri 15:42]--[2015-05-15 Fri 15:53] =>  0:11
     CLOCK: [2015-05-15 Fri 15:28]--[2015-05-15 Fri 15:42] =>  0:14
 
 As per analysis, we need to move away from expansion. Get these

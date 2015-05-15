@@ -80,6 +80,12 @@ private:
 
 private:
     /**
+     * @brief Obtains the root object for the model.
+     */
+    dynamic::schema::object obtain_root_object(const sml::model& m) const;
+
+private:
+    /**
      * @brief Handles the dynamic expansion of the file path for a
      * given formatter.
      */

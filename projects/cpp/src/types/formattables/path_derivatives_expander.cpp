@@ -41,6 +41,7 @@ const std::string field_definitions_not_found(
     "Could not find expected field definitions for formatter: ");
 const std::string no_path_derivatives_for_qn(
     "Could not find any path derivatives for qname: ");
+const std::string model_module_not_found("Model module not found for model: ");
 
 }
 
@@ -92,6 +93,22 @@ setup_field_definitions(const dynamic::schema::repository& rp,
         r[fn] = field_definitions_for_formatter_name(rp, fn);
     }
     return r;
+}
+
+dynamic::schema::object path_derivatives_expander::
+obtain_root_object(const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
+
+    const auto i(m.modules().find(m.name()));
+    if (i == m.modules().end()) {
+        using dynamic::expansion::expansion_error;
+        const auto n(sml::string_converter::convert(m.name()));
+        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
+        BOOST_THROW_EXCEPTION(expansion_error(model_module_not_found + n));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
+    return i->second.extensions();
 }
 
 void path_derivatives_expander::expand_file_path(const field_definitions& fd,
@@ -173,8 +190,10 @@ setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());
     const auto& rp(ec.repository());
     field_definitions_ = setup_field_definitions(rp, fc);
-    path_derivatives_repository_factory f(fc);
-    const auto pd(f.make(ec.cpp_options(), rp, ec.model()));
+
+    const auto ro(obtain_root_object(ec.model()));
+    path_derivatives_repository_factory f;
+    const auto pd(f.make(ec.cpp_options(), rp, ro, fc, ec.model()));
     path_derivatives_ = pd.path_derivatives_by_qname();
 }
 

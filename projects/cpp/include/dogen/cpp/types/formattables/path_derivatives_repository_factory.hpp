@@ -30,10 +30,8 @@
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
-#include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 
@@ -45,29 +43,20 @@ namespace formattables {
  * @brief Creates path derivatives repositories.
  */
 class path_derivatives_repository_factory {
-public:
-    explicit path_derivatives_repository_factory(
-        const formatters::container& c);
-
 private:
-    /**
-     * @brief Obtains the root object for the model.
-     */
-    dynamic::schema::object
-    obtain_root_object_activity(const sml::model& m) const;
-
     /**
      * @brief Creates the path settings.
      */
     std::unordered_map<std::string, settings::path_settings>
-    create_path_settings_activity(const config::cpp_options& opts,
+    create_path_settings(const config::cpp_options& opts,
         const dynamic::schema::repository& rp,
-        const dynamic::schema::object& o) const;
+        const dynamic::schema::object& o,
+        const formatters::container& c) const;
 
     /**
      * @brief Obtains all path derivatives for the supplied model.
      */
-    path_derivatives_repository obtain_path_derivatives_activity(
+    path_derivatives_repository obtain_path_derivatives(
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const;
 
@@ -76,10 +65,10 @@ public:
      * @brief Create a path derivatives repository.
      */
     path_derivatives_repository make(const config::cpp_options& opts,
-        const dynamic::schema::repository& rp, const sml::model& m) const;
-
-private:
-    const formatters::container& container_;
+        const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object,
+        const formatters::container& c,
+        const sml::model& m) const;
 };
 
 } } }
