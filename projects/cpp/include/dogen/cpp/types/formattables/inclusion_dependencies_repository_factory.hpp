@@ -25,13 +25,8 @@
 #pragma once
 #endif
 
-#include <string>
-#include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
-#include "dogen/cpp/types/formattables/registrar.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
 
@@ -45,22 +40,6 @@ namespace formattables {
 class inclusion_dependencies_repository_factory {
 private:
     /**
-     * @brief Obtains all of the inclusion directives for this model.
-     */
-    inclusion_directives_repository
-    obtain_inclusion_directives_repository_activity(
-        const dynamic::schema::repository& rp,
-        const formatters::container& c,
-        const sml::model& m) const;
-
-    /**
-     * @brief Initialises the registrar with all the providers sourced
-     * from the formatters container.
-     */
-    void initialise_registrar_activity(const formatters::container& c,
-        registrar& rg) const;
-
-    /**
      * @brief Obtains all of the inclusion dependencies for this model.
      */
     inclusion_dependencies_repository obtain_inclusion_dependencies_activity(
@@ -71,10 +50,9 @@ public:
     /**
      * @brief Create the inclusion dependencies repository.
      */
-    inclusion_dependencies_repository execute(
-        const dynamic::schema::repository& rp,
-        const formatters::container& c,
-        const sml::model& m) const;
+    inclusion_dependencies_repository make(
+        const dynamic::schema::repository& srp, const container& c,
+        const inclusion_directives_repository& idrp, const sml::model& m) const;
 };
 
 } } }

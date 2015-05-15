@@ -29,6 +29,7 @@
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_expander.hpp"
+#include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_expander.hpp"
 
@@ -89,6 +90,29 @@ inclusion_dependencies_expander::setup_field_definitions(
     return r;
 }
 
+inclusion_directives_repository inclusion_dependencies_expander::
+obtain_inclusion_directives_repository(const dynamic::schema::repository& rp,
+    const formatters::container& c, const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
+
+    inclusion_directives_repository_factory f;
+    const auto r(f.make(rp, c, m));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";
+    return r;
+}
+
+void inclusion_dependencies_expander::initialise_registrar(
+    const formatters::container& c, registrar& rg) const {
+    BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
+    for (const auto f : c.all_formatters()) {
+        BOOST_LOG_SEV(lg, debug) << "Registered: "
+                                 << f->ownership_hierarchy().formatter_name();
+        f->register_inclusion_dependencies_provider(rg);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
+}
+
 void inclusion_dependencies_expander::
 expand_inclusion_dependencies(const std::string& formatter_name,
     const field_definitions& fd, const std::list<std::string>& deps,
@@ -130,10 +154,18 @@ inclusion_dependencies_expander::dependencies() const {
 void inclusion_dependencies_expander::
 setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());
-    const auto& rp(ec.repository());
-    field_definitions_ = setup_field_definitions(rp, fc);
+    const auto& srp(ec.repository());
+    field_definitions_ = setup_field_definitions(srp, fc);
+
+    const auto& m(ec.model());
+    const auto idrp(obtain_inclusion_directives_repository(srp, fc, m));
+
+    registrar rg;
+    initialise_registrar(fc, rg);
+    const auto pc(rg.container());
+
     inclusion_dependencies_repository_factory f;
-    const auto id_rp(f.execute(rp, fc, ec.model()));
+    const auto id_rp(f.make(srp, pc, idrp, m));
     inclusion_dependencies_ = id_rp.inclusion_dependencies_by_qname();
 }
 

@@ -22,11 +22,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-#include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
-#include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 
 namespace {
@@ -97,36 +95,11 @@ private:
 
 }
 
-inclusion_directives_repository inclusion_dependencies_repository_factory::
-obtain_inclusion_directives_repository_activity(
-    const dynamic::schema::repository& rp,
-    const formatters::container& c,
-    const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
-
-    inclusion_directives_repository_factory f;
-    const auto r(f.make(rp, c, m));
-
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";
-    return r;
-}
-
-void inclusion_dependencies_repository_factory::initialise_registrar_activity(
-    const formatters::container& c, registrar& rg) const {
-    BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-    for (const auto f : c.all_formatters()) {
-        BOOST_LOG_SEV(lg, debug) << "Registered: "
-                                 << f->ownership_hierarchy().formatter_name();
-        f->register_inclusion_dependencies_provider(rg);
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
-}
-
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-obtain_inclusion_dependencies_activity(
-    const dynamic::schema::repository& srp, const container& c,
+make(const dynamic::schema::repository& srp, const container& c,
     const inclusion_directives_repository& idrp,
     const sml::model& m) const {
+
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
     const inclusion_dependencies_factory f(srp, c, idrp);
@@ -136,20 +109,6 @@ obtain_inclusion_dependencies_activity(
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
                              << g.result();
     return g.result();
-}
-
-inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-execute(const dynamic::schema::repository& rp, const formatters::container& c,
-    const sml::model& m) const {
-
-    const auto idrp(obtain_inclusion_directives_repository_activity(rp, c, m));
-
-    registrar rg;
-    initialise_registrar_activity(c, rg);
-    const auto pc(rg.container());
-
-    const auto r(obtain_inclusion_dependencies_activity(rp, pc, idrp, m));
-    return r;
 }
 
 } } }

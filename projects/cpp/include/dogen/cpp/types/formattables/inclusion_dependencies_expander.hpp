@@ -70,6 +70,21 @@ private:
 
 private:
     /**
+     * @brief Obtains all of the inclusion directives for this model.
+     */
+    inclusion_directives_repository obtain_inclusion_directives_repository(
+        const dynamic::schema::repository& rp, const formatters::container& c,
+        const sml::model& m) const;
+
+    /**
+     * @brief Initialises the registrar with all the providers sourced
+     * from the formatters container.
+     */
+    void initialise_registrar(const formatters::container& c,
+        registrar& rg) const;
+
+private:
+    /**
      * @brief Handles the dynamic expansion of the include
      * dependencies for a given formatter.
      */
