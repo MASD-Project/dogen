@@ -59,10 +59,16 @@ workflow::obtain_root_object(const sml::model& m) const {
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::create_formattables_activty(const settings::workflow& sw,
+workflow::create_formattables_activty(
+    const config::cpp_options& opts,
+    const dynamic::schema::repository& srp,
+    const dynamic::schema::object& root_object,
+    const formatters::container& fc,
+    const settings::workflow& sw,
     const sml::model& m) const {
-    formattables::workflow fw(sw);
-    return fw.execute(m);
+
+    formattables::workflow fw;
+    return fw.execute(opts, srp, root_object, fc, sw, m);
 }
 
 std::forward_list<dogen::formatters::file>
@@ -90,13 +96,20 @@ workflow::ownership_hierarchy() const {
     return workflow::registrar().ownership_hierarchy();
 }
 
-std::forward_list<dogen::formatters::file> workflow::
-generate(const dynamic::schema::repository& rp, const sml::model& m) const {
+std::forward_list<dogen::formatters::file>
+workflow::generate(const config::knitting_options& ko,
+    const dynamic::schema::repository& rp,
+    const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
+
     const auto ro(obtain_root_object(m));
     settings::workflow w(rp, ro);
     w.validate();
-    const auto f(create_formattables_activty(w, m));
+
+    formatters::workflow::registrar().validate();
+    const auto& fc(formatters::workflow::registrar().formatter_container());
+
+    const auto f(create_formattables_activty(ko.cpp(), rp, ro, fc, w, m));
     const auto r(format_activty(f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

@@ -60,7 +60,7 @@ workflow::execute(const sml::model& m) const {
     for(const auto b : registrar().backends()) {
         const auto n(b->name());
         BOOST_LOG_SEV(lg, debug) << "Generating files for: '" << n << "'";
-        auto files(b->generate(repository_, m));
+        auto files(b->generate(knitting_options_, repository_, m));
         BOOST_LOG_SEV(lg, debug) << "Generated files for : '" << n
                                  << "'. Total files: "
                                  << std::distance(files.begin(), files.end());

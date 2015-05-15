@@ -74,6 +74,7 @@ public:
      * @param m Model to generate.
      */
     virtual std::forward_list<formatters::file> generate(
+        const config::knitting_options& ko,
         const dynamic::schema::repository& rp,
         const sml::model& m) const = 0;
 };

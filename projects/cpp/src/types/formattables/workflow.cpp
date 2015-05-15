@@ -25,6 +25,8 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include "dogen/cpp/types/formattables/transformer.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -40,12 +42,14 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+namespace {
+
 /**
  * @brief Generates the formattables.
  */
-class formattable_generator {
+class generator {
 public:
-    formattable_generator(const settings::workflow& w, const sml::model& m)
+    generator(const settings::workflow& w, const sml::model& m)
         : transformer_(w, m) { }
 
 private:
@@ -82,13 +86,21 @@ private:
     const transformer transformer_;
 };
 
-workflow::workflow(const settings::workflow& w) : settings_workflow_(w) { }
+}
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::execute(const sml::model& m) const {
+workflow::execute(const config::cpp_options& /*opts*/,
+    const dynamic::schema::repository& /*srp*/,
+    const dynamic::schema::object& /*root_object*/,
+    const formatters::container& /*fc*/,
+    const settings::workflow& w,
+    const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
-    formattable_generator g(settings_workflow_, m);
+    // formatter_properties_repository_factory f;
+    // f.make(opts, srp, root_object, fc, m);
+
+    generator g(w, m);
     all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";

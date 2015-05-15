@@ -30,9 +30,11 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -62,7 +64,11 @@ private:
      * @brief Create the formattables.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
-        create_formattables_activty(const settings::workflow& sw,
+        create_formattables_activty(const config::cpp_options& opts,
+            const dynamic::schema::repository& srp,
+            const dynamic::schema::object& root_object,
+            const formatters::container& fc,
+            const settings::workflow& sw,
             const sml::model& m) const;
 
     /**
@@ -83,6 +89,7 @@ public:
         ownership_hierarchy() const;
 
     std::forward_list<dogen::formatters::file> generate(
+        const config::knitting_options& ko,
         const dynamic::schema::repository& rp,
         const sml::model& m) const override;
 };

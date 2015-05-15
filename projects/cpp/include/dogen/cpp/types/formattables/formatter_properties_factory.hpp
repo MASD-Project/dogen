@@ -66,7 +66,8 @@ public:
     make(const std::unordered_map<std::string, path_derivatives>&
         path_derivatives,
         const std::unordered_map<std::string, std::list<std::string> >&
-        inclusion_dependencies) const;
+        inclusion_dependencies,
+        const std::unordered_map<std::string, bool>& enablement) const;
 
 public:
     const std::unordered_map<std::string, std::unordered_set<std::string> >

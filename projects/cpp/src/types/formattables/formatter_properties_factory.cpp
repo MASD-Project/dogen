@@ -67,27 +67,23 @@ formatter_properties_factory::make(
     const std::unordered_map<std::string, path_derivatives>&
     path_derivatives,
     const std::unordered_map<std::string, std::list<std::string> >&
-    inclusion_dependencies) const {
+    inclusion_dependencies,
+    const std::unordered_map<std::string, bool>& enablement) const {
 
     std::unordered_map<std::string, formatter_properties> r;
     for (const auto& pair : path_derivatives) {
-        const auto& fn(pair.first);
-        const auto& pd(pair.second);
-        r[fn].file_path(pd.file_path());
-        r[fn].header_guard(pd.header_guard());
+        r[pair.first].file_path(pair.second.file_path());
+        r[pair.first].header_guard(pair.second.header_guard());
     }
 
-    for (const auto& pair : inclusion_dependencies) {
-        const auto& fn(pair.first);
-        const auto& id(pair.second);
-        r[fn].inclusion_dependencies(id);
-    }
+    for (const auto& pair : inclusion_dependencies)
+        r[pair.first].inclusion_dependencies(pair.second);
 
-    for (const auto& pair : integrated_facets_) {
-        const auto& fn(pair.first);
-        const auto& ifct(pair.second);
-        r[fn].integrated_facets(ifct);
-    }
+    for (const auto& pair : integrated_facets_)
+        r[pair.first].integrated_facets(pair.second);
+
+    for (const auto& pair : enablement)
+        r[pair.first].enabled(pair.second);
 
     return r;
 }

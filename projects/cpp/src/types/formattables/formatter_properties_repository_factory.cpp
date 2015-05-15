@@ -25,6 +25,7 @@
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
 namespace {
@@ -32,28 +33,11 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formattables.path_derivatives_expander"));
 
-const std::string model_module_not_found("Model module not found for model: ");
-
 }
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
-
-dynamic::schema::object formatter_properties_repository_factory::
-obtain_root_object(const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
-
-    const auto i(m.modules().find(m.name()));
-    if (i == m.modules().end()) {
-        const auto n(sml::string_converter::convert(m.name()));
-        BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(model_module_not_found + n));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
-    return i->second.extensions();
-}
 
 void formatter_properties_repository_factory::initialise_registrar(
     const formatters::container& c, registrar& rg) const {
@@ -93,19 +77,70 @@ create_inclusion_dependencies_repository(
     return f.make(srp, pc, idrp, m);
 }
 
+enablement_repository formatter_properties_repository_factory::
+create_enablement_repository() const {
+    enablement_repository r;
+    return r;
+}
+
+std::unordered_map<
+    sml::qname,
+    formatter_properties_repository_factory::merged_formatter_data
+    >
+formatter_properties_repository_factory::merge(
+    const path_derivatives_repository& pdrp,
+    const inclusion_dependencies_repository& idrp,
+    const enablement_repository& erp) const {
+
+    std::unordered_map<sml::qname, merged_formatter_data> r;
+    for (const auto& pair : pdrp.path_derivatives_by_qname())
+        r[pair.first].path_derivatives = pair.second;
+
+    for (const auto& pair : idrp.inclusion_dependencies_by_qname())
+        r[pair.first].inclusion_dependencies = pair.second;
+
+    for (const auto& pair : erp.enablement_by_qname())
+        r[pair.first].enablement = pair.second;
+
+    return r;
+}
+
+formatter_properties_repository formatter_properties_repository_factory::
+create_formatter_properties(
+    const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object,
+    const formatters::container& fc,
+    const std::unordered_map<sml::qname, merged_formatter_data>& mfd) const {
+
+    formatter_properties_repository r;
+    formatter_properties_factory f(rp, root_object, fc);
+    for (const auto& pair : mfd) {
+        r.formatter_properties_by_qname()[pair.first] = f.make(
+            pair.second.path_derivatives,
+            pair.second.inclusion_dependencies,
+            pair.second.enablement);
+    }
+
+    return r;
+}
+
 formatter_properties_repository formatter_properties_repository_factory::
 make(const config::cpp_options& opts, const dynamic::schema::repository& srp,
-    const formatters::container& fc, const sml::model& m) const {
+    const dynamic::schema::object& root_object, const formatters::container& fc,
+    const sml::model& m) const {
 
-    const auto ro(obtain_root_object(m));
+    const auto& ro(root_object);
     const auto pdrp(create_path_derivatives_repository(opts, srp, ro, fc, m));
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
 
     registrar rg;
     initialise_registrar(fc, rg);
-    create_inclusion_dependencies_repository(srp, rg.container(), idrp, m);
+    const auto pc(rg.container());
+    const auto idprp(create_inclusion_dependencies_repository(srp, pc, idrp, m));
+    const auto erp(create_enablement_repository());
 
-    formatter_properties_repository r;
+    const auto mfd(merge(pdrp, idprp, erp));
+    const auto r(create_formatter_properties(srp, ro, fc, mfd));
     return r;
 }
 

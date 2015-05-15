@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
+#include <unordered_map>
 #include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
@@ -34,6 +37,7 @@
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
+#include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
@@ -45,11 +49,14 @@ namespace formattables {
  */
 class formatter_properties_repository_factory {
 private:
-    /**
-     * @brief Obtains the root object for the model.
-     */
-    dynamic::schema::object obtain_root_object(const sml::model& m) const;
+    struct merged_formatter_data {
+        std::unordered_map<std::string, path_derivatives> path_derivatives;
+        std::unordered_map<std::string, std::list<std::string> >
+        inclusion_dependencies;
+        std::unordered_map<std::string,bool> enablement;
+    };
 
+private:
     /**
      * @brief Initialises the registrar with all the providers sourced
      * from the formatters container.
@@ -82,10 +89,34 @@ private:
         const dynamic::schema::repository& srp, const container& pc,
         const inclusion_directives_repository& idrp, const sml::model& m) const;
 
+    /**
+     * @brief Creates the enablement repository.
+     */
+    enablement_repository create_enablement_repository() const;
+
+    /**
+     * @brief Merge all data structures.
+     */
+    std::unordered_map<sml::qname, merged_formatter_data>
+    merge(const path_derivatives_repository& pdrp,
+        const inclusion_dependencies_repository& idrp,
+        const enablement_repository& erp) const;
+
+    /**
+     * @brief Produce the formatter properties.
+     */
+    formatter_properties_repository
+    create_formatter_properties(
+        const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object,
+        const formatters::container& fc,
+        const std::unordered_map<sml::qname, merged_formatter_data>& mfd) const;
+
 public:
     formatter_properties_repository make(
         const config::cpp_options& opts,
         const dynamic::schema::repository& srp,
+        const dynamic::schema::object& root_object,
         const formatters::container& fc,
         const sml::model& m) const;
 };
