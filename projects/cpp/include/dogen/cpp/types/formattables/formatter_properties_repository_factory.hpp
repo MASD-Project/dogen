@@ -30,8 +30,10 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/registrar.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
@@ -48,6 +50,13 @@ private:
      */
     dynamic::schema::object obtain_root_object(const sml::model& m) const;
 
+    /**
+     * @brief Initialises the registrar with all the providers sourced
+     * from the formatters container.
+     */
+    void initialise_registrar(const formatters::container& c,
+        registrar& rg) const;
+
 private:
     /**
      * @brief Create the path derivatives repository.
@@ -61,12 +70,22 @@ private:
      * @brief Create the inclusion directives repository.
      */
     inclusion_directives_repository create_inclusion_directives_repository(
-        const path_derivatives_repository& pdrp) const;
+        const dynamic::schema::repository& srp,
+        const formatters::container& fc,
+        const path_derivatives_repository& pdrp,
+        const sml::model& m) const;
+
+    /**
+     * @brief Create the inclusion dependencies repository.
+     */
+    inclusion_dependencies_repository create_inclusion_dependencies_repository(
+        const dynamic::schema::repository& srp, const container& pc,
+        const inclusion_directives_repository& idrp, const sml::model& m) const;
 
 public:
     formatter_properties_repository make(
         const config::cpp_options& opts,
-        const dynamic::schema::repository& rp,
+        const dynamic::schema::repository& srp,
         const formatters::container& fc,
         const sml::model& m) const;
 };

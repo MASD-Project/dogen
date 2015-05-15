@@ -435,6 +435,8 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create the formatter properties                           :story:
+    CLOCK: [2015-05-15 Fri 18:25]--[2015-05-15 Fri 18:34] =>  0:09
+    CLOCK: [2015-05-15 Fri 18:00]--[2015-05-15 Fri 18:24] =>  0:24
     CLOCK: [2015-05-15 Fri 15:23]--[2015-05-15 Fri 15:27] =>  0:04
     CLOCK: [2015-05-15 Fri 08:10]--[2015-05-15 Fri 09:15] =>  1:05
     CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19

@@ -24,4 +24,21 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+std::unordered_map<std::string, formatter_properties>
+formatter_properties_factory::make(
+    const std::unordered_map<std::string, path_derivatives>&
+    path_derivatives,
+    const std::unordered_map<std::string, std::string>&
+    /*inclusion_directives*/) const {
+
+    std::unordered_map<std::string, formatter_properties> r;
+    for (const auto& pair : path_derivatives) {
+        const auto& fn(pair.first);
+        const auto& pd(pair.second);
+        r[fn].file_path(pd.file_path());
+        r[fn].header_guard(pd.header_guard());
+    }
+    return r;
+}
+
 } } }

@@ -25,10 +25,30 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include "dogen/cpp/types/formattables/path_derivatives.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief Creates the formatter properties.
+ */
+class formatter_properties_factory {
+public:
+    /**
+     * @brief Create the formatter properties.
+     */
+    std::unordered_map<std::string, formatter_properties>
+    make(
+        const std::unordered_map<std::string, path_derivatives>&
+        path_derivatives,
+        const std::unordered_map<std::string, std::string>&
+        inclusion_directives) const;
+};
 
 } } }
 

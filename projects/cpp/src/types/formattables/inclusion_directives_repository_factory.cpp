@@ -155,14 +155,14 @@ make(const dynamic::schema::repository& rp,
 
 inclusion_directives_repository
 inclusion_directives_repository_factory::make_new(
-    const dynamic::schema::repository& rp,
+    const dynamic::schema::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
-    generator_new g(rp, fc, pdrp);
+    generator_new g(srp, fc, pdrp);
     sml::all_model_items_traversal(m, g);
     const auto r(g.result());
 
@@ -171,6 +171,5 @@ inclusion_directives_repository_factory::make_new(
     return r;
 
 }
-
 
 } } }
