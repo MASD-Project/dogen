@@ -29,8 +29,12 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/sml/types/module.hpp"
+#include "dogen/sml/types/object.hpp"
+#include "dogen/sml/types/concept.hpp"
+#include "dogen/sml/types/primitive.hpp"
+#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 
@@ -43,14 +47,43 @@ namespace formattables {
  */
 class inclusion_dependencies_factory {
 public:
+    inclusion_dependencies_factory(const dynamic::schema::repository& srp,
+        const container& c, const inclusion_directives_repository& idrp);
+public:
     /**
-     * @brief Create inclusion dependencies.
+     * @brief Makes inclusion dependencies for an object.
      */
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, std::list<std::string> >
-                       >
-    make(const dynamic::schema::repository& srp, const container& c,
-        const inclusion_directives_repository& idrp, const sml::model& m) const;
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::object& o) const;
+
+    /**
+     * @brief Makes inclusion dependencies for an enumeration.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::enumeration& e) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a primitive.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::primitive& p) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a module.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::module& m) const;
+
+    /**
+     * @brief Makes inclusion dependencies for a concept.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::concept& c) const;
+
+private:
+    const dynamic::schema::repository& schema_repository_;
+    const container& provider_container_;
+    const inclusion_directives_repository& inclusion_directives_repository_;
 };
 
 } } }

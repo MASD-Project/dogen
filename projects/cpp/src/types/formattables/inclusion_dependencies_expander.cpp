@@ -132,10 +132,8 @@ setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());
     const auto& rp(ec.repository());
     field_definitions_ = setup_field_definitions(rp, fc);
-
-    const auto& m(ec.model());
-    inclusion_dependencies_repository_factory f(fc);
-    const auto id_rp(f.execute(rp, m));
+    inclusion_dependencies_repository_factory f;
+    const auto id_rp(f.execute(rp, fc, ec.model()));
     inclusion_dependencies_ = id_rp.inclusion_dependencies_by_qname();
 }
 

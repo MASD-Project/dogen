@@ -21,8 +21,11 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
+#include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 
@@ -32,6 +35,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.inclusion_dependencies_repository_factory"));
 
+const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");
 
 }
@@ -40,26 +44,77 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_repository_factory::inclusion_dependencies_repository_factory(
-    const formatters::container& c) : container_(c) {}
+namespace {
+
+/**
+ * @brief Generates all inclusion dependencies.
+ */
+class generator final {
+public:
+    explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
+
+private:
+    /**
+     * @brief Generates all of the inclusion dependencies for the
+     * formatters and qualified name.
+     */
+    template<typename SmlEntity>
+    void generate(const SmlEntity& e) {
+        if (e.generation_type() == sml::generation_types::no_generation)
+            return;
+
+        const auto id(factory_.make(e));
+
+        // note: optional return may have be cleaner here, but however it
+        // would complicate the logic in the factory.
+        if (id.empty())
+            return;
+
+        const auto pair(std::make_pair(e.name(), id));
+        auto& deps(result_.inclusion_dependencies_by_qname());
+        const auto res(deps.insert(pair));
+        if (!res.second) {
+            const auto n(sml::string_converter::convert(e.name()));
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        }
+    }
+
+public:
+    void operator()(const dogen::sml::object& o) { generate(o); }
+    void operator()(const dogen::sml::enumeration& e) { generate(e); }
+    void operator()(const dogen::sml::primitive& p) { generate(p); }
+    void operator()(const dogen::sml::module& m) { generate(m); }
+    void operator()(const dogen::sml::concept& c) { generate(c); }
+
+public:
+    const inclusion_dependencies_repository& result() const { return result_; }
+
+private:
+    const inclusion_dependencies_factory& factory_;
+    inclusion_dependencies_repository result_;
+};
+
+}
 
 inclusion_directives_repository inclusion_dependencies_repository_factory::
 obtain_inclusion_directives_repository_activity(
     const dynamic::schema::repository& rp,
+    const formatters::container& c,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
 
     inclusion_directives_repository_factory f;
-    const auto r(f.make(rp, container_, m));
+    const auto r(f.make(rp, c, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";
     return r;
 }
 
-void inclusion_dependencies_repository_factory::
-initialise_registrar_activity(registrar& rg) const {
+void inclusion_dependencies_repository_factory::initialise_registrar_activity(
+    const formatters::container& c, registrar& rg) const {
     BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
-    for (const auto f : container_.all_formatters()) {
+    for (const auto f : c.all_formatters()) {
         BOOST_LOG_SEV(lg, debug) << "Registered: "
                                  << f->ownership_hierarchy().formatter_name();
         f->register_inclusion_dependencies_provider(rg);
@@ -74,21 +129,26 @@ obtain_inclusion_dependencies_activity(
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
-    inclusion_dependencies_factory f;
-    inclusion_dependencies_repository r;
-    r.inclusion_dependencies_by_qname(f.make(srp, c, idrp, m));
+    const inclusion_dependencies_factory f(srp, c, idrp);
+    generator g(f);
+    sml::all_model_items_traversal(m, g);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies:";
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
+                             << g.result();
+    return g.result();
 }
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-execute(const dynamic::schema::repository& rp, const sml::model& m) const {
+execute(const dynamic::schema::repository& rp, const formatters::container& c,
+    const sml::model& m) const {
+
+    const auto idrp(obtain_inclusion_directives_repository_activity(rp, c, m));
+
     registrar rg;
-    initialise_registrar_activity(rg);
-    const auto c(rg.container());
-    const auto idrp(obtain_inclusion_directives_repository_activity(rp, m));
-    const auto r(obtain_inclusion_dependencies_activity(rp, c, idrp, m));
+    initialise_registrar_activity(c, rg);
+    const auto pc(rg.container());
+
+    const auto r(obtain_inclusion_dependencies_activity(rp, pc, idrp, m));
     return r;
 }
 

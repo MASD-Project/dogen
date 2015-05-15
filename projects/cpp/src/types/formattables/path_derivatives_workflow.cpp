@@ -46,6 +46,8 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+namespace {
+
 /**
  * @brief Generates all path derivatives.
  */
@@ -115,6 +117,8 @@ const std::unordered_map<sml::qname,
                          std::unordered_map<std::string, path_derivatives>
                          >& generator::result() const {
     return result_;
+}
+
 }
 
 path_derivatives_workflow::

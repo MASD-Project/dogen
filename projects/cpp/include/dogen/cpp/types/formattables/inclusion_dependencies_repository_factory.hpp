@@ -40,13 +40,9 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Executes the inclusion dependencies workflow.
+ * @brief Creates the inclusion dependencies repository.
  */
 class inclusion_dependencies_repository_factory {
-public:
-    explicit inclusion_dependencies_repository_factory(
-        const formatters::container& c);
-
 private:
     /**
      * @brief Obtains all of the inclusion directives for this model.
@@ -54,13 +50,15 @@ private:
     inclusion_directives_repository
     obtain_inclusion_directives_repository_activity(
         const dynamic::schema::repository& rp,
+        const formatters::container& c,
         const sml::model& m) const;
 
     /**
      * @brief Initialises the registrar with all the providers sourced
      * from the formatters container.
      */
-    void initialise_registrar_activity(registrar& rg) const;
+    void initialise_registrar_activity(const formatters::container& c,
+        registrar& rg) const;
 
     /**
      * @brief Obtains all of the inclusion dependencies for this model.
@@ -71,13 +69,12 @@ private:
 
 public:
     /**
-     * @brief Execute the workflow.
+     * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository execute(
-        const dynamic::schema::repository& rp, const sml::model& m) const;
-
-private:
-    const formatters::container& container_;
+        const dynamic::schema::repository& rp,
+        const formatters::container& c,
+        const sml::model& m) const;
 };
 
 } } }

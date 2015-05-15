@@ -20,17 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/pair_io.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/enumeration.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 
@@ -40,7 +30,6 @@ using namespace dogen::utility::log;
 static logger
 lg(logger_factory("cpp.formattables.inclusion_dependencies_factory"));
 
-const std::string duplicate_qname("Duplicate qname: ");
 const std::string duplicate_formatter_name("Duplicate formatter name: ");
 const std::string empty_include_directive("Include directive is empty.");
 
@@ -98,124 +87,79 @@ bool include_directive_comparer(
     return lhs < rhs;
 }
 
-/**
- * @brief Generates all inclusion dependencies.
- */
-class inclusion_dependencies_generator {
-public:
-    inclusion_dependencies_generator(const dynamic::schema::repository& rp,
-        const container& c, const inclusion_directives_repository& idrp)
-        : schema_repository_(rp), container_(c),
-          inclusion_directives_repository_(idrp) {}
+template<typename SmlEntity>
+std::unordered_map<std::string, std::list<std::string> >
+generate(const dynamic::schema::repository& srp,
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<SmlEntity>
+            >
+        > providers, const inclusion_directives_repository& idrp,
+    const SmlEntity& e) {
 
-private:
-    /**
-     * @brief Returns the map for the supplied qname.
-     */
-    std::unordered_map<std::string, std::list<std::string> >&
-    create_map_for_qname(const sml::qname& qn);
+    const auto n(sml::string_converter::convert(e.name()));
+    BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << n;
 
-    /**
-     * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
-     */
-    template<typename SmlEntity>
-    void generate(std::forward_list<
-            boost::shared_ptr<
-                inclusion_dependencies_provider_interface<SmlEntity>
-                >
-            > providers, const SmlEntity& e) {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    for (const auto p : providers) {
+        BOOST_LOG_SEV(lg, debug) << "Providing for: " << p->formatter_name();
+        auto id(p->provide(srp, idrp, e));
 
-        if (e.generation_type() == sml::generation_types::no_generation)
-            return;
+        if (!id)
+            continue;
 
-        auto& r(create_map_for_qname(e.name()));
-        for (const auto p : providers) {
-            BOOST_LOG_SEV(lg, debug) << "Providing for: "
-                                     << p->formatter_name();
-
-            const auto& idrp(inclusion_directives_repository_);
-            auto id(p->provide(schema_repository_, idrp, e));
-
-            if (!id)
-                continue;
-
-            id->sort(include_directive_comparer);
-            id->unique();
-            const auto id_pair(std::make_pair(p->formatter_name(), *id));
-            const bool inserted(r.insert(id_pair).second);
-            if (!inserted) {
-                const auto n(sml::string_converter::convert(e.name()));
-                BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
-                                         << p->formatter_name()
-                                         << " for type: " << n;
-                BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
-                        p->formatter_name()));
-            }
+        id->sort(include_directive_comparer);
+        id->unique();
+        const auto id_pair(std::make_pair(p->formatter_name(), *id));
+        const bool inserted(r.insert(id_pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name
+                                     << p->formatter_name()
+                                     << " for type: " << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_formatter_name +
+                    p->formatter_name()));
         }
     }
 
-public:
-    void operator()(const dogen::sml::object& o);
-    void operator()(const dogen::sml::enumeration& /*e*/) {}
-    void operator()(const dogen::sml::primitive& /*p*/) {}
-    void operator()(const dogen::sml::module& /*m*/) {}
-    void operator()(const dogen::sml::concept& /*c*/) {}
+    BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies for: "
+                             << n;
 
-public:
-    const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >& result() const;
-
-private:
-    const dynamic::schema::repository& schema_repository_;
-    const container& container_;
-    const inclusion_directives_repository& inclusion_directives_repository_;
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, std::list<std::string> >
-        > result_;
-};
-
-std::unordered_map<std::string, std::list<std::string> >&
-inclusion_dependencies_generator::create_map_for_qname(const sml::qname& qn) {
-    const auto i(result_.find(qn));
-    if (i != result_.end()) {
-        const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
-    }
-    return result_[qn];
+    return r;
 }
 
-void inclusion_dependencies_generator::operator()(const dogen::sml::object& o) {
-    generate(container_.object_providers(), o);
+inclusion_dependencies_factory::inclusion_dependencies_factory(
+    const dynamic::schema::repository& srp, const container& c,
+    const inclusion_directives_repository& idrp)
+    : schema_repository_(srp), provider_container_(c),
+      inclusion_directives_repository_(idrp) {}
+
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::object& o) const {
+    return generate(schema_repository_, provider_container_.object_providers(),
+        inclusion_directives_repository_, o);
 }
 
-const std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >&
-inclusion_dependencies_generator::result() const {
-    return result_;
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::enumeration& /*e*/) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    return r;
 }
 
-std::unordered_map<sml::qname,
-                   std::unordered_map<std::string, std::list<std::string> >
-                   >
-inclusion_dependencies_factory::make(const dynamic::schema::repository& rp,
-    const container& c, const inclusion_directives_repository& idrp,
-    const sml::model& m) const {
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::primitive& /*p*/) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    return r;
+}
 
-    BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::module& /*m*/) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    return r;
+}
 
-    inclusion_dependencies_generator g(rp, c, idrp);
-    sml::all_model_items_traversal(m, g);
-
-    const auto& r(g.result());
-    BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
-                             << r;
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::concept& /*c*/) const {
+    std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
