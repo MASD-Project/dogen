@@ -6201,6 +6201,9 @@ it in anger with dogen:
 - comments for packages are missing.
 - cannot wrap attributes; this is a problem when we have attributes
   with very long types.
+- changing a diagram in the filesystem does not trigger any alerts
+  etc - its very easy to loose changes because one updates the files
+  from git but the diagram was opened in dia, and did not refresh.
 
 *** Consider adding YQL support                                        :epic:
 
