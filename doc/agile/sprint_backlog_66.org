@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 21:56]
+Clock summary at [2015-05-15 Fri 23:39]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *23:50* |       |      |
+| *Total time*                                                                | *25:31* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 23:50 |      |
+| Active                                                                      |         | 25:31 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -35,6 +35,7 @@ Clock summary at [2015-05-15 Fri 21:56]
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 | STARTED Move the inclusion dependencies workflow into formatables           |         |       | 3:25 |
 | STARTED Move the path derivatives workflow into formatables                 |         |       | 0:52 |
+| STARTED Create a simple enabler in formattables                             |         |       | 1:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -539,16 +540,8 @@ as is.
 - add cpp options to the path derivatives workflow.
 - delete the expander
 
-*** Delete dynamic expansion                                          :story:
-
-As per analysis we do not need dynamic expansion so get rid of it.
-
-*** Rename dynamic schema back to dynamic                             :story:
-
-Once we are back to just having =dynamic::schema=, it makes no sense
-to have nesting. Rename it back to just =dynamic=.
-
-*** Create a simple enabler in formattables                           :story:
+*** STARTED Create a simple enabler in formattables                   :story:
+    CLOCK: [2015-05-15 Fri 21:57]--[2015-05-15 Fri 23:38] =>  1:41
 
 Create an enabler responsible for determining which formatters are on
 and off. It may use settings to figure out what is enabled and
@@ -581,6 +574,15 @@ who is responsible for enabling.
 Tasks:
 
 - update includes provider to take in enablement.
+
+*** Delete dynamic expansion                                          :story:
+
+As per analysis we do not need dynamic expansion so get rid of it.
+
+*** Rename dynamic schema back to dynamic                             :story:
+
+Once we are back to just having =dynamic::schema=, it makes no sense
+to have nesting. Rename it back to just =dynamic=.
 
 *** Create the =global_aspect_settings= class                         :story:
 

@@ -26,6 +26,7 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
+#include "dogen/cpp/types/formattables/enablement_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
 namespace {
@@ -78,9 +79,11 @@ create_inclusion_dependencies_repository(
 }
 
 enablement_repository formatter_properties_repository_factory::
-create_enablement_repository() const {
-    enablement_repository r;
-    return r;
+create_enablement_repository(const dynamic::schema::repository& srp,
+    const dynamic::schema::object& root_object, const formatters::container& fc,
+    const sml::model& m) const {
+    enablement_repository_factory f;
+    return f.make(srp, root_object, fc, m);
 }
 
 std::unordered_map<
@@ -132,14 +135,14 @@ make(const config::cpp_options& opts, const dynamic::schema::repository& srp,
     const auto& ro(root_object);
     const auto pdrp(create_path_derivatives_repository(opts, srp, ro, fc, m));
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
+    const auto erp(create_enablement_repository(srp, root_object, fc, m));
 
     registrar rg;
     initialise_registrar(fc, rg);
     const auto pc(rg.container());
-    const auto idprp(create_inclusion_dependencies_repository(srp, pc, idrp, m));
-    const auto erp(create_enablement_repository());
+    const auto dprp(create_inclusion_dependencies_repository(srp, pc, idrp, m));
 
-    const auto mfd(merge(pdrp, idprp, erp));
+    const auto mfd(merge(pdrp, dprp, erp));
     const auto r(create_formatter_properties(srp, ro, fc, mfd));
     return r;
 }

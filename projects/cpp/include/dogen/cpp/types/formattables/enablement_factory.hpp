@@ -18,37 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_ENABLEMENT_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_ENABLEMENT_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_ENABLEMENT_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_ENABLEMENT_FACTORY_HPP
+
+#include <string>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/global_enablement_properties.hpp"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
-#include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/formattables/global_enablement_properties.hpp"
-#include "dogen/cpp/types/formattables/enablement_repository.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the enablement repository.
+ * @brief Creates the enablement for all formatters.
  */
-class enablement_repository_factory {
-private:
+class enablement_factory {
+public:
+    enablement_factory(
+        const dynamic::schema::repository& srp,
+        const formatters::container& fc,
+        const std::unordered_map<std::string,
+                                 global_enablement_properties>& gep);
+
 private:
     struct field_definitions {
-        dynamic::schema::field_definition model_enabled;
-        dynamic::schema::field_definition facet_enabled;
-        dynamic::schema::field_definition formatter_enabled;
+        dynamic::schema::field_definition enabled;
+        dynamic::schema::field_definition supported;
     };
 
     /**
@@ -59,25 +63,38 @@ private:
         const formatters::container& fc) const;
 
 private:
+    struct local_enablement_properties {
+        boost::optional<bool> enabled;
+        bool supported;
+    };
+
     /**
-     * @brief Creates the global enablement properties for all
-     * formatter names.
+     * @brief Creates the local enablement properties for all
+     * formatters.
      */
-    std::unordered_map<std::string, global_enablement_properties>
-    obtain_global_properties(
-        const std::unordered_map<std::string, field_definitions>&
-        field_definitions,
-        const dynamic::schema::object& root_object) const;
+    std::unordered_map<std::string, local_enablement_properties>
+    obtain_local_properties(const dynamic::schema::object& o) const;
+
+    /**
+     * @brief Computes the final enablement value for each formatter.
+     */
+    std::unordered_map<std::string, bool>
+    compute_enablement_value(
+        const std::unordered_map<std::string, local_enablement_properties>&
+        lep) const;
 
 public:
     /**
-     * @brief Create the enablement repository.
+     *  @brief Create the enablement for all formatters.
      */
-    enablement_repository make(
-        const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
-        const formatters::container& fc,
-        const sml::model& m) const;
+    std::unordered_map<std::string, bool>
+    make(const dynamic::schema::object& o) const;
+
+private:
+    const std::unordered_map<std::string, global_enablement_properties>&
+    global_enablement_properties_;
+    const std::unordered_map<std::string, field_definitions>
+    field_definitions_;
 };
 
 } } }

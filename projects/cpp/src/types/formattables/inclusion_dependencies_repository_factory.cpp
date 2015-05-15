@@ -34,7 +34,6 @@ static logger lg(logger_factory(
         "cpp.formattables.inclusion_dependencies_repository_factory"));
 
 const std::string duplicate_qname("Duplicate qname: ");
-const std::string model_module_not_found("Model module not found for model: ");
 
 }
 

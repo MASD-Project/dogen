@@ -92,7 +92,10 @@ private:
     /**
      * @brief Creates the enablement repository.
      */
-    enablement_repository create_enablement_repository() const;
+    enablement_repository
+    create_enablement_repository(const dynamic::schema::repository& srp,
+        const dynamic::schema::object& root_object,
+        const formatters::container& fc, const sml::model& m) const;
 
     /**
      * @brief Merge all data structures.
