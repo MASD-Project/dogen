@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_REPOSITORY_FACTORY_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,17 +35,19 @@
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 /**
- * @brief Executes the path derivatives workflow.
+ * @brief Creates path derivatives repositories.
  */
-class path_derivatives_workflow {
+class path_derivatives_repository_factory {
 public:
-    explicit path_derivatives_workflow(const formatters::container& c);
+    explicit path_derivatives_repository_factory(
+        const formatters::container& c);
 
 private:
     /**
@@ -65,23 +67,15 @@ private:
     /**
      * @brief Obtains all path derivatives for the supplied model.
      */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, path_derivatives>
-    >
-    obtain_path_derivatives_activity(
+    path_derivatives_repository obtain_path_derivatives_activity(
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const;
 
 public:
     /**
-     * @brief Execute the workflow.
+     * @brief Create a path derivatives repository.
      */
-    std::unordered_map<
-        sml::qname,
-        std::unordered_map<std::string, path_derivatives>
-    >
-    execute(const config::cpp_options& opts,
+    path_derivatives_repository make(const config::cpp_options& opts,
         const dynamic::schema::repository& rp, const sml::model& m) const;
 
 private:

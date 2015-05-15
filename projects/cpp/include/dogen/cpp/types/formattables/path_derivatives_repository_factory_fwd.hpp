@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_WORKFLOW_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_WORKFLOW_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_PATH_DERIVATIVES_REPOSITORY_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class path_derivatives_workflow;
+class path_derivatives_repository_factory;
 
 } } }
 

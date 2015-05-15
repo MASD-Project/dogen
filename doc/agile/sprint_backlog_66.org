@@ -434,6 +434,7 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create the formatter properties                           :story:
+    CLOCK: [2015-05-15 Fri 15:23]--[2015-05-15 Fri 15:27] =>  0:04
     CLOCK: [2015-05-15 Fri 08:10]--[2015-05-15 Fri 09:15] =>  1:05
     CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19
 
@@ -506,7 +507,8 @@ Tasks:
 - inclusion dependencies is creating directives - this can only be
   removed when we get rid of expanders.
 
-*** Move the path derivatives workflow into formatables               :story:
+*** STARTED Move the path derivatives workflow into formatables       :story:
+    CLOCK: [2015-05-15 Fri 15:28]--[2015-05-15 Fri 15:42] =>  0:14
 
 As per analysis, we need to move away from expansion. Get these
 classes in formattables and hook them in to workflow. Must return the

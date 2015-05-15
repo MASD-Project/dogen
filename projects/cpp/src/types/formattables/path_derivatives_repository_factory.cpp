@@ -20,22 +20,19 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/pair_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
-#include "dogen/cpp/types/formattables/path_derivatives.hpp"
-#include "dogen/cpp/io/formattables/path_derivatives_io.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
+#include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
-#include "dogen/cpp/types/workflow_error.hpp"
-#include "dogen/cpp/types/formattables/path_derivatives_workflow.hpp"
+#include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.formattables.path_derivatives_workflow"));
+static logger lg(logger_factory(
+        "cpp.formattables.path_derivatives_repository_factory"));
 
 const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");
@@ -65,67 +62,38 @@ private:
     void generate(const sml::qname& qn);
 
 public:
-    void operator()(const dogen::sml::object& o);
-    void operator()(const dogen::sml::enumeration& e);
-    void operator()(const dogen::sml::primitive& p);
-    void operator()(const dogen::sml::module& m);
-    void operator()(const dogen::sml::concept& c);
+    void operator()(const dogen::sml::object& o) { generate(o.name()); }
+    void operator()(const dogen::sml::enumeration& e) { generate(e.name()); }
+    void operator()(const dogen::sml::primitive& p) { generate(p.name()); }
+    void operator()(const dogen::sml::module& m) { generate(m.name()); }
+    void operator()(const dogen::sml::concept& c) { generate(c.name()); }
 
 public:
-    const std::unordered_map<sml::qname,
-                             std::unordered_map<std::string, path_derivatives>
-                             >& result() const;
+    const path_derivatives_repository & result() const { return result_; }
 
 private:
     const path_derivatives_factory factory_;
-    std::unordered_map<sml::qname,
-                       std::unordered_map<std::string, path_derivatives>
-                       > result_;
+    path_derivatives_repository result_;
 };
 
 void generator::generate(const sml::qname& qn) {
-    const auto pair(result_.insert(std::make_pair(qn, factory_.make(qn))));
+    auto& pd(result_.path_derivatives_by_qname());
+    const auto pair(pd.insert(std::make_pair(qn, factory_.make(qn))));
     const bool inserted(pair.second);
     if (!inserted) {
         const auto n(sml::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qname + n));
+        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
     }
 }
 
-void generator::operator()(const dogen::sml::object& o) {
-    generate(o.name());
 }
 
-void generator::operator()(const dogen::sml::enumeration& e) {
-    generate(e.name());
-}
-
-void generator::operator()(const dogen::sml::primitive& p) {
-    generate(p.name());
-}
-
-void generator::operator()(const dogen::sml::module& m) {
-    generate(m.name());
-}
-
-void generator::operator()(const dogen::sml::concept& c) {
-    generate(c.name());
-}
-
-const std::unordered_map<sml::qname,
-                         std::unordered_map<std::string, path_derivatives>
-                         >& generator::result() const {
-    return result_;
-}
-
-}
-
-path_derivatives_workflow::
-path_derivatives_workflow(const formatters::container& c)
+path_derivatives_repository_factory::
+path_derivatives_repository_factory(const formatters::container& c)
     : container_(c) { }
 
-dynamic::schema::object path_derivatives_workflow::
+dynamic::schema::object path_derivatives_repository_factory::
 obtain_root_object_activity(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
 
@@ -133,7 +101,7 @@ obtain_root_object_activity(const sml::model& m) const {
     if (i == m.modules().end()) {
         const auto n(sml::string_converter::convert(m.name()));
         BOOST_LOG_SEV(lg, error) << model_module_not_found << n;
-        BOOST_THROW_EXCEPTION(workflow_error(model_module_not_found + n));
+        BOOST_THROW_EXCEPTION(building_error(model_module_not_found + n));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained model's root object.";
@@ -141,7 +109,7 @@ obtain_root_object_activity(const sml::model& m) const {
 }
 
 std::unordered_map<std::string, settings::path_settings>
-path_derivatives_workflow::
+path_derivatives_repository_factory::
 create_path_settings_activity(const config::cpp_options& opts,
     const dynamic::schema::repository& rp,
     const dynamic::schema::object& o) const {
@@ -153,12 +121,10 @@ create_path_settings_activity(const config::cpp_options& opts,
     return r;
 }
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, path_derivatives>
-    > path_derivatives_workflow::obtain_path_derivatives_activity(
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const sml::model& m) const {
+path_derivatives_repository path_derivatives_repository_factory::
+obtain_path_derivatives_activity(
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining path derivatives.";
 
@@ -169,11 +135,7 @@ std::unordered_map<
     return g.result();
 }
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, path_derivatives>
-    >
-path_derivatives_workflow::execute(
+path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts, const dynamic::schema::repository& rp,
     const sml::model& m) const {
 

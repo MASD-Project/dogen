@@ -25,11 +25,21 @@
 #pragma once
 #endif
 
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 class formatter_properties_factory final {
+// private:
+// public:
+//     formatter_properties_repository make(
+//         const config::cpp_options& opts,
+//         const dynamic::schema::repository& rp,
+//         const formatters::container& fc,
+//         const sml::model& m
+//         ) const;
 };
 
 } } }

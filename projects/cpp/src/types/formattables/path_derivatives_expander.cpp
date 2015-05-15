@@ -29,7 +29,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
-#include "dogen/cpp/types/formattables/path_derivatives_workflow.hpp"
+#include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_expander.hpp"
 
 namespace {
@@ -173,8 +173,9 @@ setup(const dynamic::expansion::expansion_context& ec) {
     const auto& fc(formatters::workflow::registrar().formatter_container());
     const auto& rp(ec.repository());
     field_definitions_ = setup_field_definitions(rp, fc);
-    path_derivatives_workflow w(fc);
-    path_derivatives_ = w.execute(ec.cpp_options(), rp, ec.model());
+    path_derivatives_repository_factory f(fc);
+    const auto pd(f.make(ec.cpp_options(), rp, ec.model()));
+    path_derivatives_ = pd.path_derivatives_by_qname();
 }
 
 void path_derivatives_expander::
