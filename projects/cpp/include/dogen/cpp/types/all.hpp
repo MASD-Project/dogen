@@ -140,6 +140,7 @@
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
+#include "dogen/cpp/types/formattables/inclusion_directives_factory.hpp"
 #include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/serialization/settings_factory.hpp"
 #include "dogen/cpp/types/formatters/types/visitor_header_formatter.hpp"

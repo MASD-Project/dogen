@@ -29,6 +29,7 @@
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
+#include "dogen/cpp/types/formattables/inclusion_directives_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 
 namespace {
@@ -45,12 +46,14 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+namespace {
+
 /**
  * @brief Generates all inclusion directives.
  */
-class inclusion_directives_generator {
+class generator {
 public:
-    inclusion_directives_generator(const dynamic::schema::repository& rp,
+    generator(const dynamic::schema::repository& rp,
         const formatters::container& fc) : factory_(rp, fc) { }
 
 private:
@@ -87,6 +90,53 @@ private:
     inclusion_directives_repository result_;
 };
 
+/**
+ * @brief Generates all inclusion directives.
+ */
+class generator_new {
+public:
+    generator_new(const dynamic::schema::repository& srp,
+        const formatters::container& fc,
+        const path_derivatives_repository& pdrp) : factory_(srp, fc, pdrp) { }
+
+private:
+    /**
+     * @brief Generates all of the inclusion dependencies for the
+     * formatters and qualified name.
+     */
+    template<typename ExtensibleAndNameable>
+    void generate(const ExtensibleAndNameable& e) {
+        auto& id_qn(result_.inclusion_directives_by_qname_new());
+        const auto id(factory_.make(e.extensions(), e.name()));
+        if (!id)
+            return;
+
+        const auto pair(id_qn.insert(std::make_pair(e.name(), *id)));
+        if (pair.second)
+            return;
+
+        const auto n(sml::string_converter::convert(e.name()));
+        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+    }
+
+public:
+    void operator()(const dogen::sml::object& o) { generate(o); }
+    void operator()(const dogen::sml::enumeration& e) { generate(e); }
+    void operator()(const dogen::sml::primitive& p) { generate(p); }
+    void operator()(const dogen::sml::module& m) { generate(m); }
+    void operator()(const dogen::sml::concept& c) { generate(c); }
+
+public:
+    const inclusion_directives_repository& result() const { return result_; }
+
+private:
+    const inclusion_directives_factory factory_;
+    inclusion_directives_repository result_;
+};
+
+}
+
 inclusion_directives_repository inclusion_directives_repository_factory::
 make(const dynamic::schema::repository& rp,
     const formatters::container& fc,
@@ -94,7 +144,7 @@ make(const dynamic::schema::repository& rp,
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
-    inclusion_directives_generator g(rp, fc);
+    generator g(rp, fc);
     sml::all_model_items_traversal(m, g);
     const auto r(g.result());
 
@@ -102,5 +152,25 @@ make(const dynamic::schema::repository& rp,
                              << r;
     return r;
 }
+
+inclusion_directives_repository
+inclusion_directives_repository_factory::make_new(
+    const dynamic::schema::repository& rp,
+    const formatters::container& fc,
+    const path_derivatives_repository& pdrp,
+    const sml::model& m) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
+
+    generator_new g(rp, fc, pdrp);
+    sml::all_model_items_traversal(m, g);
+    const auto r(g.result());
+
+    BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"
+                             << r;
+    return r;
+
+}
+
 
 } } }

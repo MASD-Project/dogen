@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 16:20]
+Clock summary at [2015-05-15 Fri 18:00]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:16* |       |      |
+| *Total time*                                                                | *21:55* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 20:16 |      |
+| Active                                                                      |         | 21:55 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -33,7 +33,7 @@ Clock summary at [2015-05-15 Fri 16:20]
 | STARTED Create the formatter properties                                     |         |       | 1:24 |
 | STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
-| STARTED Move the inclusion dependencies workflow into formatables           |         |       | 1:46 |
+| STARTED Move the inclusion dependencies workflow into formatables           |         |       | 3:25 |
 | STARTED Move the path derivatives workflow into formatables                 |         |       | 0:52 |
 #+end:
 
@@ -474,6 +474,7 @@ After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
 
 *** STARTED Move the inclusion dependencies workflow into formatables :story:
+    CLOCK: [2015-05-15 Fri 16:21]--[2015-05-15 Fri 18:00] =>  1:39
     CLOCK: [2015-05-15 Fri 15:04]--[2015-05-15 Fri 15:19] =>  0:15
     CLOCK: [2015-05-15 Fri 10:38]--[2015-05-15 Fri 11:00] =>  0:22
     CLOCK: [2015-05-15 Fri 09:47]--[2015-05-15 Fri 10:38] =>  0:51

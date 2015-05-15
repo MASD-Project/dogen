@@ -30,6 +30,7 @@
 #include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 
 namespace dogen {
@@ -41,9 +42,21 @@ namespace formattables {
  */
 class inclusion_directives_repository_factory {
 public:
+    /**
+     * @brief Create the inclusion directives for an SML model.
+     */
     inclusion_directives_repository make(
         const dynamic::schema::repository& rp,
         const formatters::container& fc, const sml::model& m) const;
+
+    /**
+     * @brief Create the inclusion directives for an SML model.
+     */
+    inclusion_directives_repository make_new(
+        const dynamic::schema::repository& rp,
+        const formatters::container& fc,
+        const path_derivatives_repository& pdrp,
+        const sml::model& m) const;
 };
 
 } } }

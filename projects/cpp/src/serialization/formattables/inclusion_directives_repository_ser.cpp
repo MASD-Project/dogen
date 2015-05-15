@@ -21,6 +21,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -41,6 +42,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("inclusion_directives_by_qname", v.inclusion_directives_by_qname_);
+    ar << make_nvp("inclusion_directives_by_qname_new", v.inclusion_directives_by_qname_new_);
 }
 
 template<typename Archive>
@@ -48,6 +50,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("inclusion_directives_by_qname", v.inclusion_directives_by_qname_);
+    ar >> make_nvp("inclusion_directives_by_qname_new", v.inclusion_directives_by_qname_new_);
 }
 
 } }

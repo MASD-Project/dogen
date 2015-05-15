@@ -24,16 +24,21 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-inclusion_directives_repository::inclusion_directives_repository(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname)
-    : inclusion_directives_by_qname_(inclusion_directives_by_qname) { }
+inclusion_directives_repository::inclusion_directives_repository(
+    const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname,
+    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_by_qname_new)
+    : inclusion_directives_by_qname_(inclusion_directives_by_qname),
+      inclusion_directives_by_qname_new_(inclusion_directives_by_qname_new) { }
 
 void inclusion_directives_repository::swap(inclusion_directives_repository& other) noexcept {
     using std::swap;
     swap(inclusion_directives_by_qname_, other.inclusion_directives_by_qname_);
+    swap(inclusion_directives_by_qname_new_, other.inclusion_directives_by_qname_new_);
 }
 
 bool inclusion_directives_repository::operator==(const inclusion_directives_repository& rhs) const {
-    return inclusion_directives_by_qname_ == rhs.inclusion_directives_by_qname_;
+    return inclusion_directives_by_qname_ == rhs.inclusion_directives_by_qname_ &&
+        inclusion_directives_by_qname_new_ == rhs.inclusion_directives_by_qname_new_;
 }
 
 inclusion_directives_repository& inclusion_directives_repository::operator=(inclusion_directives_repository other) {
@@ -56,6 +61,22 @@ void inclusion_directives_repository::inclusion_directives_by_qname(const std::u
 
 void inclusion_directives_repository::inclusion_directives_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>&& v) {
     inclusion_directives_by_qname_ = std::move(v);
+}
+
+const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::inclusion_directives_by_qname_new() const {
+    return inclusion_directives_by_qname_new_;
+}
+
+std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_repository::inclusion_directives_by_qname_new() {
+    return inclusion_directives_by_qname_new_;
+}
+
+void inclusion_directives_repository::inclusion_directives_by_qname_new(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& v) {
+    inclusion_directives_by_qname_new_ = v;
+}
+
+void inclusion_directives_repository::inclusion_directives_by_qname_new(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >&& v) {
+    inclusion_directives_by_qname_new_ = std::move(v);
 }
 
 } } }

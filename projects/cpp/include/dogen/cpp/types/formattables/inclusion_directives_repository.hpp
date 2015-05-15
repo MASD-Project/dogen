@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/sml/types/qname.hpp"
@@ -44,7 +45,9 @@ public:
     ~inclusion_directives_repository() = default;
 
 public:
-    explicit inclusion_directives_repository(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname);
+    inclusion_directives_repository(
+        const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& inclusion_directives_by_qname,
+        const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_by_qname_new);
 
 private:
     template<typename Archive>
@@ -59,6 +62,11 @@ public:
     void inclusion_directives_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& v);
     void inclusion_directives_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>&& v);
 
+    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_by_qname_new() const;
+    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& inclusion_directives_by_qname_new();
+    void inclusion_directives_by_qname_new(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >& v);
+    void inclusion_directives_by_qname_new(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> >&& v);
+
 public:
     bool operator==(const inclusion_directives_repository& rhs) const;
     bool operator!=(const inclusion_directives_repository& rhs) const {
@@ -71,6 +79,7 @@ public:
 
 private:
     std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings> inclusion_directives_by_qname_;
+    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::string> > inclusion_directives_by_qname_new_;
 };
 
 } } }
