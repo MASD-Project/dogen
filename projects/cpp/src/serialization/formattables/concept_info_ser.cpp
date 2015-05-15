@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -27,9 +28,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/cpp/serialization/formattables/state_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(
@@ -45,7 +46,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("entity", base_object<dogen::cpp::formattables::entity>(v));
 
-    ar << make_nvp("state", v.state_);
+    ar << make_nvp("properties", v.properties_);
+    ar << make_nvp("all_properties", v.all_properties_);
 }
 
 template<typename Archive>
@@ -54,7 +56,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("entity", base_object<dogen::cpp::formattables::entity>(v));
 
-    ar >> make_nvp("state", v.state_);
+    ar >> make_nvp("properties", v.properties_);
+    ar >> make_nvp("all_properties", v.all_properties_);
 }
 
 } }

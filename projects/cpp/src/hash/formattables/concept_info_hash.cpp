@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/state_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/concept_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/property_info_hash.hpp"
 
 namespace {
 
@@ -29,6 +29,14 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_list_dogen_cpp_formattables_property_info(const std::list<dogen::cpp::formattables::property_info>& v){
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
 }
 
 }
@@ -42,7 +50,9 @@ std::size_t concept_info_hasher::hash(const concept_info&v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
 
-    combine(seed, v.state());
+    combine(seed, hash_std_list_dogen_cpp_formattables_property_info(v.properties()));
+    combine(seed, hash_std_list_dogen_cpp_formattables_property_info(v.all_properties()));
+
     return seed;
 }
 

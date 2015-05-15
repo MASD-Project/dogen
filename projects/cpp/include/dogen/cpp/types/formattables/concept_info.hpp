@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/cpp/types/formattables/state.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/serialization/formattables/concept_info_fwd_ser.hpp"
 
 namespace dogen {
@@ -52,7 +53,8 @@ public:
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings,
         const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
-        const dogen::cpp::formattables::state& state);
+        const std::list<dogen::cpp::formattables::property_info>& properties,
+        const std::list<dogen::cpp::formattables::property_info>& all_properties);
 
 private:
     template<typename Archive>
@@ -82,10 +84,25 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const dogen::cpp::formattables::state& state() const;
-    dogen::cpp::formattables::state& state();
-    void state(const dogen::cpp::formattables::state& v);
-    void state(const dogen::cpp::formattables::state&& v);
+    /**
+     * @brief Properties of the type itself (e.g. excludes inherited properties).
+     */
+    /**@{*/
+    const std::list<dogen::cpp::formattables::property_info>& properties() const;
+    std::list<dogen::cpp::formattables::property_info>& properties();
+    void properties(const std::list<dogen::cpp::formattables::property_info>& v);
+    void properties(const std::list<dogen::cpp::formattables::property_info>&& v);
+    /**@}*/
+
+    /**
+     * @brief All properties of the type including inherited.
+     */
+    /**@{*/
+    const std::list<dogen::cpp::formattables::property_info>& all_properties() const;
+    std::list<dogen::cpp::formattables::property_info>& all_properties();
+    void all_properties(const std::list<dogen::cpp::formattables::property_info>& v);
+    void all_properties(const std::list<dogen::cpp::formattables::property_info>&& v);
+    /**@}*/
 
 public:
     bool operator==(const concept_info& rhs) const;
@@ -101,7 +118,8 @@ public:
     concept_info& operator=(concept_info other);
 
 private:
-    dogen::cpp::formattables::state state_;
+    std::list<dogen::cpp::formattables::property_info> properties_;
+    std::list<dogen::cpp::formattables::property_info> all_properties_;
 };
 
 } } }

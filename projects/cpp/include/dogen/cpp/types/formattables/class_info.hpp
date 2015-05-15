@@ -114,8 +114,7 @@ public:
 
 public:
     /**
-     * @brief Properties of the class itself (e.g. excludes inherited
-     * properties).
+     * @brief Properties of the type itself (e.g. excludes inherited properties).
      */
     /**@{*/
     const std::list<dogen::cpp::formattables::property_info>& properties() const;
@@ -125,7 +124,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All properties of the class including inherited.
+     * @brief All properties of the type including inherited.
      */
     /**@{*/
     const std::list<dogen::cpp::formattables::property_info>& all_properties() const;

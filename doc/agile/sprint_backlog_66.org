@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 09:16]
+Clock summary at [2015-05-15 Fri 09:25]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:24* |       |      |
+| *Total time*                                                                | *17:32* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 17:24 |      |
+| Active                                                                      |         | 17:32 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -31,6 +31,7 @@ Clock summary at [2015-05-15 Fri 09:16]
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
 | STARTED Create the formatter properties                                     |         |       | 1:20 |
+| STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -451,6 +452,17 @@ line options.
 
 We probably don't need settings support for this.
 
+*** STARTED Remove unused classes and properties in cpp               :story:
+    CLOCK: [2015-05-15 Fri 09:17]--[2015-05-15 Fri 09:25] =>  0:08
+
+We have a few classes that were made for exploratory reasons but in
+reality we won't use them. Remove them:
+
+- remove new class info and associated classes.
+- remove type settings and related infrastructure.
+- has_primitive_properties: seems unused.
+- remove family types and all the family gunk.
+
 *** Move the path derivatives workflow into formatables               :story:
 
 As per analysis, we need to move away from expansion. Get these
@@ -610,15 +622,6 @@ With the previous approach we had fields in dynamic that were
 generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
-
-*** Remove unused classes and properties in cpp                       :story:
-
-We have a few classes that were made for exploratory reasons but in
-reality we won't use them. Remove them:
-
-- remove new class info and associated classes.
-- remove type settings and related infrastructure.
-- has_primitive_properties: seems unused.
 
 *** Stitch gcc release builds are borked                              :spike:
 

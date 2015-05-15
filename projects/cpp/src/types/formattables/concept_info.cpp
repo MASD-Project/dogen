@@ -19,9 +19,23 @@
  *
  */
 #include <ostream>
-#include "dogen/cpp/io/formattables/state_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/concept_info.hpp"
+#include "dogen/cpp/io/formattables/property_info_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::formattables::property_info>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -35,7 +49,8 @@ concept_info::concept_info(
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings,
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
-    const dogen::cpp::formattables::state& state)
+    const std::list<dogen::cpp::formattables::property_info>& properties,
+    const std::list<dogen::cpp::formattables::property_info>& all_properties)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
@@ -43,7 +58,8 @@ concept_info::concept_info(
       namespaces,
       settings,
       formatter_properties),
-      state_(state) { }
+      properties_(properties),
+      all_properties_(all_properties) { }
 
 void concept_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -51,7 +67,8 @@ void concept_info::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     entity::to_stream(s);
     s << ", "
-      << "\"state\": " << state_
+      << "\"properties\": " << properties_ << ", "
+      << "\"all_properties\": " << all_properties_
       << " }";
 }
 
@@ -59,7 +76,8 @@ void concept_info::swap(concept_info& other) noexcept {
     entity::swap(other);
 
     using std::swap;
-    swap(state_, other.state_);
+    swap(properties_, other.properties_);
+    swap(all_properties_, other.all_properties_);
 }
 
 bool concept_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -70,7 +88,8 @@ bool concept_info::equals(const dogen::cpp::formattables::formattable& other) co
 
 bool concept_info::operator==(const concept_info& rhs) const {
     return entity::compare(rhs) &&
-        state_ == rhs.state_;
+        properties_ == rhs.properties_ &&
+        all_properties_ == rhs.all_properties_;
 }
 
 concept_info& concept_info::operator=(concept_info other) {
@@ -79,20 +98,36 @@ concept_info& concept_info::operator=(concept_info other) {
     return *this;
 }
 
-const dogen::cpp::formattables::state& concept_info::state() const {
-    return state_;
+const std::list<dogen::cpp::formattables::property_info>& concept_info::properties() const {
+    return properties_;
 }
 
-dogen::cpp::formattables::state& concept_info::state() {
-    return state_;
+std::list<dogen::cpp::formattables::property_info>& concept_info::properties() {
+    return properties_;
 }
 
-void concept_info::state(const dogen::cpp::formattables::state& v) {
-    state_ = v;
+void concept_info::properties(const std::list<dogen::cpp::formattables::property_info>& v) {
+    properties_ = v;
 }
 
-void concept_info::state(const dogen::cpp::formattables::state&& v) {
-    state_ = std::move(v);
+void concept_info::properties(const std::list<dogen::cpp::formattables::property_info>&& v) {
+    properties_ = std::move(v);
+}
+
+const std::list<dogen::cpp::formattables::property_info>& concept_info::all_properties() const {
+    return all_properties_;
+}
+
+std::list<dogen::cpp::formattables::property_info>& concept_info::all_properties() {
+    return all_properties_;
+}
+
+void concept_info::all_properties(const std::list<dogen::cpp::formattables::property_info>& v) {
+    all_properties_ = v;
+}
+
+void concept_info::all_properties(const std::list<dogen::cpp::formattables::property_info>&& v) {
+    all_properties_ = std::move(v);
 }
 
 } } }

@@ -18,15 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/test_data/formattables/state_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/property_info_td.hpp"
 
 namespace {
 
-dogen::cpp::formattables::state
-create_dogen_cpp_formattables_state(const unsigned int position) {
-    return dogen::cpp::formattables::state_generator::create(position);
+dogen::cpp::formattables::property_info
+create_dogen_cpp_formattables_property_info(const unsigned int position) {
+    return dogen::cpp::formattables::property_info_generator::create(position);
+}
+
+std::list<dogen::cpp::formattables::property_info> create_std_list_dogen_cpp_formattables_property_info(unsigned int position) {
+    std::list<dogen::cpp::formattables::property_info> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_cpp_formattables_property_info(position + i));
+    }
+    return r;
 }
 
 }
@@ -40,7 +48,8 @@ concept_info_generator::concept_info_generator() : position_(0) { }
 void concept_info_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::entity_generator::populate(position, v);
-    v.state(create_dogen_cpp_formattables_state(position + 0));
+    v.properties(create_std_list_dogen_cpp_formattables_property_info(position + 0));
+    v.all_properties(create_std_list_dogen_cpp_formattables_property_info(position + 1));
 }
 
 concept_info_generator::result_type

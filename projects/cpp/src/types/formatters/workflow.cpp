@@ -93,7 +93,6 @@ public:
     void visit(const formattables::registrar_info& r) override;
     void visit(const formattables::namespace_info& n) override;
     void visit(const formattables::visitor_info& v) override;
-    void visit(const formattables::new_class_info& c) override;
     void visit(const formattables::concept_info& c) override;
     void visit(const formattables::primitive_info& p) override;
 
@@ -143,9 +142,6 @@ void dispatcher::visit(const formattables::namespace_info& /*n*/) {
 }
 
 void dispatcher::visit(const formattables::visitor_info& /*v*/) {
-}
-
-void dispatcher::visit(const formattables::new_class_info& /*c*/) {
 }
 
 void dispatcher::visit(const formattables::concept_info& /*c*/) {
