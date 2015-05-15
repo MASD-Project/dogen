@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 15:19]
+Clock summary at [2015-05-15 Fri 16:20]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:20* |       |      |
+| *Total time*                                                                | *20:16* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 19:20 |      |
+| Active                                                                      |         | 20:16 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -30,10 +30,11 @@ Clock summary at [2015-05-15 Fri 15:19]
 | CANCELLED Create a trivial "enabled" expander                               |         |       | 3:11 |
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
-| STARTED Create the formatter properties                                     |         |       | 1:20 |
+| STARTED Create the formatter properties                                     |         |       | 1:24 |
 | STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 | STARTED Move the inclusion dependencies workflow into formatables           |         |       | 1:46 |
+| STARTED Move the path derivatives workflow into formatables                 |         |       | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -508,6 +509,7 @@ Tasks:
   removed when we get rid of expanders.
 
 *** STARTED Move the path derivatives workflow into formatables       :story:
+    CLOCK: [2015-05-15 Fri 15:53]--[2015-05-15 Fri 16:20] =>  0:27
     CLOCK: [2015-05-15 Fri 15:42]--[2015-05-15 Fri 15:53] =>  0:11
     CLOCK: [2015-05-15 Fri 15:28]--[2015-05-15 Fri 15:42] =>  0:14
 

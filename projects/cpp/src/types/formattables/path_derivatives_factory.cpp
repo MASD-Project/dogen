@@ -170,7 +170,7 @@ make(const sml::qname& qn) const {
         const auto inclusion_path(make_inclusion_path(s, qn));
 
         path_derivatives pd;
-        pd.inclusion_directive(to_inclusion_directive(inclusion_path));
+        pd.computed_inclusion_directive(to_inclusion_directive(inclusion_path));
 
         const auto file_path(make_file_path(s, inclusion_path, qn));
         pd.file_path(file_path);

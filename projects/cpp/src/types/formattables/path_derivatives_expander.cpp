@@ -166,7 +166,7 @@ expand_include_directive(const std::string& formatter_name,
 
     dynamic::schema::field_instance_factory f;
     const auto n(fd.inclusion_directive->name().qualified());
-    o.fields()[n] = f.make_text(pd.inclusion_directive());
+    o.fields()[n] = f.make_text(pd.computed_inclusion_directive());
 }
 
 std::string path_derivatives_expander::name() const {

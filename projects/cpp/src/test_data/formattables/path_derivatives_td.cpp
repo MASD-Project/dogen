@@ -48,7 +48,7 @@ void path_derivatives_generator::
 populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 0));
     v.header_guard(create_std_string(position + 1));
-    v.inclusion_directive(create_std_string(position + 2));
+    v.computed_inclusion_directive(create_std_string(position + 2));
 }
 
 path_derivatives_generator::result_type

@@ -39,7 +39,7 @@ std::ostream& operator<<(std::ostream& s, const path_derivatives& v) {
       << "\"__type__\": " << "\"dogen::cpp::formattables::path_derivatives\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\""
+      << "\"computed_inclusion_directive\": " << "\"" << tidy_up_string(v.computed_inclusion_directive()) << "\""
       << " }";
     return(s);
 }
