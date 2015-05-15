@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/serialization/formattables/formatter_properties_fwd_ser.hpp"
 
@@ -51,7 +52,7 @@ public:
     formatter_properties(
         const bool enabled,
         const boost::filesystem::path& file_path,
-        const std::string& header_guard,
+        const boost::optional<std::string>& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::unordered_set<std::string>& integrated_facets);
 
@@ -71,10 +72,10 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
-    const std::string& header_guard() const;
-    std::string& header_guard();
-    void header_guard(const std::string& v);
-    void header_guard(const std::string&& v);
+    const boost::optional<std::string>& header_guard() const;
+    boost::optional<std::string>& header_guard();
+    void header_guard(const boost::optional<std::string>& v);
+    void header_guard(const boost::optional<std::string>&& v);
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -99,7 +100,7 @@ public:
 private:
     bool enabled_;
     boost::filesystem::path file_path_;
-    std::string header_guard_;
+    boost::optional<std::string> header_guard_;
     std::list<std::string> inclusion_dependencies_;
     std::unordered_set<std::string> integrated_facets_;
 };

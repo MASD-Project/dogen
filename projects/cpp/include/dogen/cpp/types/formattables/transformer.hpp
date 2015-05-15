@@ -51,6 +51,7 @@
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -61,7 +62,8 @@ namespace formattables {
  */
 class transformer {
 public:
-    transformer(const settings::workflow& w, const sml::model& m);
+    transformer(const settings::workflow& w,
+        const formatter_properties_repository& rp, const sml::model& m);
 
 private:
     /**
@@ -191,6 +193,7 @@ public:
 
 private:
     const settings::workflow& settings_workflow_;
+    const formatter_properties_repository& repository_;
     const sml::model& model_;
 };
 

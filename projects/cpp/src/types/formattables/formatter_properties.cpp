@@ -37,7 +37,7 @@ formatter_properties::formatter_properties(formatter_properties&& rhs)
 formatter_properties::formatter_properties(
     const bool enabled,
     const boost::filesystem::path& file_path,
-    const std::string& header_guard,
+    const boost::optional<std::string>& header_guard,
     const std::list<std::string>& inclusion_dependencies,
     const std::unordered_set<std::string>& integrated_facets)
     : enabled_(enabled),
@@ -93,19 +93,19 @@ void formatter_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const std::string& formatter_properties::header_guard() const {
+const boost::optional<std::string>& formatter_properties::header_guard() const {
     return header_guard_;
 }
 
-std::string& formatter_properties::header_guard() {
+boost::optional<std::string>& formatter_properties::header_guard() {
     return header_guard_;
 }
 
-void formatter_properties::header_guard(const std::string& v) {
+void formatter_properties::header_guard(const boost::optional<std::string>& v) {
     header_guard_ = v;
 }
 
-void formatter_properties::header_guard(const std::string&& v) {
+void formatter_properties::header_guard(const boost::optional<std::string>&& v) {
     header_guard_ = std::move(v);
 }
 

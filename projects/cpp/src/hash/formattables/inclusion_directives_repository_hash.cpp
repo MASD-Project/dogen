@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/cpp/hash/settings/inclusion_directives_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/inclusion_directives_repository_hash.hpp"
 
 namespace {
@@ -29,15 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value)
 {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_inclusion_directives_settings(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::inclusion_directives_settings>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
 }
 
 inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
@@ -67,9 +57,7 @@ namespace formattables {
 std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directives_repository&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_inclusion_directives_settings(v.inclusion_directives_by_qname()));
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(v.inclusion_directives_by_qname_new()));
-
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_string_(v.inclusion_directives_by_qname()));
     return seed;
 }
 

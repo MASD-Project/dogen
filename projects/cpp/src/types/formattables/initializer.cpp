@@ -36,9 +36,9 @@ void register_expander(dynamic::expansion::expander_interface * const p) {
 }
 
 void initializer::initialize() {
-    register_expander(new path_derivatives_expander());
-    register_expander(new inclusion_dependencies_expander());
-    register_expander(new enabled_flag_expander());
+    // register_expander(new path_derivatives_expander());
+    // register_expander(new inclusion_dependencies_expander());
+    // register_expander(new enabled_flag_expander());
 }
 
 } } }

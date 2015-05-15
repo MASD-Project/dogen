@@ -44,27 +44,6 @@ public:
     explicit inclusion_directives_selector(
         const inclusion_directives_repository& rp);
 
-private:
-    /**
-     * @brief Returns the inclusion directives settings for a given qname.
-     *
-     * @pre qname must exist in inclusion directives settings
-     * collection.
-     */
-    const settings::inclusion_directives_settings&
-    inclusion_directives_for_qname(const sml::qname& qn) const;
-
-    /**
-     * @brief Returns the inclusion directive settings for a given
-     * formatter name.
-     *
-     * @pre formatter name must exist in collection.
-     */
-    const settings::inclusion_directive_settings&
-    inclusion_directives_for_formatter(
-        const settings::inclusion_directives_settings& ids,
-        const std::string& formatter_name) const;
-
 public:
     /**
      * @brief Returns the inclusion directive for a given qname and

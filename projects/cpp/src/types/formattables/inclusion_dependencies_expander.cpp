@@ -91,14 +91,16 @@ inclusion_dependencies_expander::setup_field_definitions(
 }
 
 inclusion_directives_repository inclusion_dependencies_expander::
-obtain_inclusion_directives_repository(const dynamic::schema::repository& rp,
-    const formatters::container& c, const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
+obtain_inclusion_directives_repository(const dynamic::schema::repository& /*rp*/,
+    const formatters::container& /*c*/, const sml::model& /*m*/) const {
+    // BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion directives.";
 
-    inclusion_directives_repository_factory f;
-    const auto r(f.make(rp, c, m));
+    // inclusion_directives_repository_factory f;
+    // const auto r(f.make(rp, c, m));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";
+    // BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion directives.";
+
+    inclusion_directives_repository r;
     return r;
 }
 

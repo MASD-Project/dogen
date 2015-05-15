@@ -53,49 +53,7 @@ namespace {
  */
 class generator {
 public:
-    generator(const dynamic::schema::repository& rp,
-        const formatters::container& fc) : factory_(rp, fc) { }
-
-private:
-    /**
-     * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
-     */
-    template<typename ExtensibleAndNameable>
-    void generate(const ExtensibleAndNameable& e) {
-        auto& id_qn(result_.inclusion_directives_by_qname());
-        const auto settings(factory_.make(e.extensions()));
-        const auto pair(id_qn.insert(std::make_pair(e.name(), settings)));
-
-        if (pair.second)
-            return;
-
-        const auto n(sml::string_converter::convert(e.name()));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
-    }
-
-public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
-
-public:
-    const inclusion_directives_repository& result() const { return result_; }
-
-private:
-    const settings::inclusion_directives_settings_factory factory_;
-    inclusion_directives_repository result_;
-};
-
-/**
- * @brief Generates all inclusion directives.
- */
-class generator_new {
-public:
-    generator_new(const dynamic::schema::repository& srp,
+    generator(const dynamic::schema::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp) : factory_(srp, fc, pdrp) { }
 
@@ -106,11 +64,11 @@ private:
      */
     template<typename ExtensibleAndNameable>
     void generate(const ExtensibleAndNameable& e) {
-        auto& id_qn(result_.inclusion_directives_by_qname_new());
         const auto id(factory_.make(e.extensions(), e.name()));
         if (!id)
             return;
 
+        auto& id_qn(result_.inclusion_directives_by_qname());
         const auto pair(id_qn.insert(std::make_pair(e.name(), *id)));
         if (pair.second)
             return;
@@ -137,24 +95,7 @@ private:
 
 }
 
-inclusion_directives_repository inclusion_directives_repository_factory::
-make(const dynamic::schema::repository& rp,
-    const formatters::container& fc,
-    const sml::model& m) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
-
-    generator g(rp, fc);
-    sml::all_model_items_traversal(m, g);
-    const auto r(g.result());
-
-    BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"
-                             << r;
-    return r;
-}
-
-inclusion_directives_repository
-inclusion_directives_repository_factory::make_new(
+inclusion_directives_repository inclusion_directives_repository_factory::make(
     const dynamic::schema::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
@@ -162,7 +103,7 @@ inclusion_directives_repository_factory::make_new(
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
-    generator_new g(srp, fc, pdrp);
+    generator g(srp, fc, pdrp);
     sml::all_model_items_traversal(m, g);
     const auto r(g.result());
 

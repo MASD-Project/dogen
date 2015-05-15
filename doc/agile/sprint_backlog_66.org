@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 23:39]
+Clock summary at [2015-05-16 Sat 00:29]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *25:31* |       |      |
+| *Total time*                                                                | *26:19* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 25:31 |      |
+| Active                                                                      |         | 26:19 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -30,7 +30,7 @@ Clock summary at [2015-05-15 Fri 23:39]
 | CANCELLED Create a trivial "enabled" expander                               |         |       | 3:11 |
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
-| STARTED Create the formatter properties                                     |         |       | 3:19 |
+| STARTED Create the formatter properties                                     |         |       | 4:07 |
 | STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 | STARTED Move the inclusion dependencies workflow into formatables           |         |       | 3:25 |
@@ -436,6 +436,7 @@ model:
 - not honouring flags set in command line options.
 
 *** STARTED Create the formatter properties                           :story:
+    CLOCK: [2015-05-15 Fri 23:40]--[2015-05-16 Sat 00:28] =>  0:48
     CLOCK: [2015-05-15 Fri 20:57]--[2015-05-15 Fri 21:56] =>  0:59
     CLOCK: [2015-05-15 Fri 18:36]--[2015-05-15 Fri 18:59] =>  0:23
     CLOCK: [2015-05-15 Fri 18:25]--[2015-05-15 Fri 18:34] =>  0:09

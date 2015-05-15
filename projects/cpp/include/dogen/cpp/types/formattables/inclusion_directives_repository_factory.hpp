@@ -46,13 +46,6 @@ public:
      * @brief Create the inclusion directives for an SML model.
      */
     inclusion_directives_repository make(
-        const dynamic::schema::repository& rp,
-        const formatters::container& fc, const sml::model& m) const;
-
-    /**
-     * @brief Create the inclusion directives for an SML model.
-     */
-    inclusion_directives_repository make_new(
         const dynamic::schema::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,

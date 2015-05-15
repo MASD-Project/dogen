@@ -88,8 +88,9 @@ const std::string type_has_no_file_properties(
 const std::string type_has_no_inclusion_dependencies(
     "Could not find inclusion dependencies for type: ");
 const std::string type_has_no_inclusion("Could not find inclusion for type: ");
-
 const std::string no_visitees("Visitor is not visiting any types: ");
+const std::string formatter_properties_missing(
+    "Could not find formatter properties for type: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -175,9 +176,9 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-transformer::transformer(const settings::workflow& w, const sml::model& m) :
-    settings_workflow_(w), model_(m) { }
-
+transformer::transformer(const settings::workflow& w,
+    const formatter_properties_repository& repository, const sml::model& m) :
+    settings_workflow_(w), repository_(repository), model_(m) { }
 
 void transformer::
 populate_formattable_properties(const sml::qname& qn, formattable& f) const {
@@ -192,6 +193,15 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     e.name(qn.simple_name());
     e.documentation(documentation);
+
+    const auto i(repository_.formatter_properties_by_qname().find(qn));
+    if (i == repository_.formatter_properties_by_qname().end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << n;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(formatter_properties_missing + n));
+    }
+    e.formatter_properties(i->second);
 
     name_builder b;
     e.namespaces(b.namespace_list(model_, qn));

@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
-#include "dogen/cpp/serialization/settings/inclusion_directives_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_directives_repository_ser.hpp"
 
 
@@ -42,7 +41,6 @@ void save(Archive& ar,
     const dogen::cpp::formattables::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("inclusion_directives_by_qname", v.inclusion_directives_by_qname_);
-    ar << make_nvp("inclusion_directives_by_qname_new", v.inclusion_directives_by_qname_new_);
 }
 
 template<typename Archive>
@@ -50,7 +48,6 @@ void load(Archive& ar,
     dogen::cpp::formattables::inclusion_directives_repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("inclusion_directives_by_qname", v.inclusion_directives_by_qname_);
-    ar >> make_nvp("inclusion_directives_by_qname_new", v.inclusion_directives_by_qname_new_);
 }
 
 } }

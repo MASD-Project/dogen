@@ -100,7 +100,7 @@ bundle bundle_factory::make(const dynamic::schema::object& o) const {
     bundle r;
     r.general_settings(create_general_settings(o));
     r.type_settings(create_type_settings(o));
-    r.formatter_settings(create_formatter_settings(o));
+    // r.formatter_settings(create_formatter_settings(o));
     r.opaque_settings(create_opaque_settings(o));
     return r;
 }

@@ -30,8 +30,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.formatters.workflow"));
 
-const std::string formatter_settings_not_found(
-    "Could not find settings for formatter: ");
+const std::string formatter_properties_not_found(
+    "Could not find properties for formatter: ");
 }
 
 namespace dogen {
@@ -56,12 +56,11 @@ private:
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
                                  << "' with '" << fn << "'";
 
-        const auto fs(e.settings().formatter_settings());
-        const auto i(fs.find(fn));
-        if (i == fs.end()) {
-            BOOST_LOG_SEV(lg, error) << formatter_settings_not_found << fn;
+        const auto i(e.formatter_properties().find(fn));
+        if (i == e.formatter_properties().end()) {
+            BOOST_LOG_SEV(lg, error) << formatter_properties_not_found << fn;
             BOOST_THROW_EXCEPTION(
-                workflow_error(formatter_settings_not_found + fn));
+                workflow_error(formatter_properties_not_found + fn));
         }
 
         const auto is_formatter_enabled(i->second.enabled());

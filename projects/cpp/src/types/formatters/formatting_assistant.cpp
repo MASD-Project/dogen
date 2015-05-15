@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
@@ -48,6 +47,8 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
+const std::string formatter_properties_missing(
+    "Could not find formatter properties for formatter: ");
 
 }
 
@@ -91,7 +92,7 @@ formatting_assistant::formatting_assistant(const formattables::entity& e,
     const dynamic::schema::ownership_hierarchy& oh,
     const formatters::file_types ft) :
     entity_(e), ownership_hierarchy_(oh),
-    formatter_settings_(formatter_settings(oh.formatter_name())),
+    formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
     file_type_(ft) {
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
@@ -99,11 +100,16 @@ formatting_assistant::formatting_assistant(const formattables::entity& e,
     validate();
 }
 
-settings::formatter_settings formatting_assistant::
-formatter_settings(const std::string& formatter_name) const {
-    const settings::selector s(entity_.settings());
+formattables::formatter_properties formatting_assistant::
+obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
-    return s.formatter_settings_for_formatter(fn);
+    const auto i(entity_.formatter_properties().find(fn));
+    if (i == entity_.formatter_properties().end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << fn;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(formatter_properties_missing + fn));
+    }
+    return i->second;
 }
 
 std::string formatting_assistant::make_member_variable_name(
@@ -113,13 +119,13 @@ std::string formatting_assistant::make_member_variable_name(
 
 bool formatting_assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
-    const auto fs(formatter_settings(formatter_name));
-    return fs.enabled();
+    const auto fp(obtain_formatter_properties(formatter_name));
+    return fp.enabled();
 }
 
 bool formatting_assistant::
 is_facet_integrated(const std::string& facet_name) const {
-    const auto& f(formatter_settings_.integrated_facets());
+    const auto& f(formatter_properties_.integrated_facets());
     const auto i(f.find(facet_name));
     return i != f.end();
 }
@@ -141,14 +147,14 @@ bool formatting_assistant::is_io_integrated() const {
 
 void formatting_assistant::validate() const {
     const auto& fn(ownership_hierarchy_.formatter_name());
-    const auto& fs(formatter_settings_);
-    if (fs.file_path().empty()) {
+    const auto& fp(formatter_properties_);
+    if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
     }
 
     if (file_type_ == file_types::cpp_header) {
-        if (!fs.header_guard() || fs.header_guard()->empty()) {
+        if (!fp.header_guard() || fp.header_guard()->empty()) {
             BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
             BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
         }
@@ -157,10 +163,10 @@ void formatting_assistant::validate() const {
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
 formatting_assistant::make_scoped_boilerplate_formatter() {
-    const auto& fs(formatter_settings_);
+    const auto& fp(formatter_properties_);
     const auto gs(entity_.settings().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
-        stream(), gs, fs.inclusion_dependencies(), *fs.header_guard());
+        stream(), gs, fp.inclusion_dependencies(), *fp.header_guard());
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
@@ -178,7 +184,7 @@ std::ostream& formatting_assistant::stream() {
 dogen::formatters::file formatting_assistant::make_file() const {
     dogen::formatters::file r;
     r.content(stream_.str());
-    r.path(formatter_settings_.file_path());
+    r.path(formatter_properties_.file_path());
     return r;
 }
 

@@ -32,7 +32,7 @@
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
@@ -83,8 +83,8 @@ private:
      * @brief Obtains the formatter settings for the formatter as
      * given by the ownership hierarchy.
      */
-    settings::formatter_settings
-    formatter_settings(const std::string& formatter_name) const;
+    formattables::formatter_properties
+    obtain_formatter_properties(const std::string& formatter_name) const;
 
     /**
      * @brief Returns true if the formatter is enabled, false
@@ -178,7 +178,7 @@ public:
 private:
     const formattables::entity& entity_;
     const dynamic::schema::ownership_hierarchy& ownership_hierarchy_;
-    const settings::formatter_settings formatter_settings_;
+    const formattables::formatter_properties formatter_properties_;
     const formatters::file_types file_type_;
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;

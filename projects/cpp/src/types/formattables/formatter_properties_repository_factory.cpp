@@ -27,6 +27,7 @@
 #include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository_factory.hpp"
+#include "dogen/cpp/io/formattables/formatter_properties_repository_io.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
 namespace {
@@ -67,7 +68,7 @@ create_inclusion_directives_repository(
     const path_derivatives_repository& pdrp,
     const sml::model& m) const {
     inclusion_directives_repository_factory f;
-    return f.make_new(srp, fc, pdrp, m);
+    return f.make(srp, fc, pdrp, m);
 }
 
 inclusion_dependencies_repository formatter_properties_repository_factory::
@@ -132,6 +133,7 @@ make(const config::cpp_options& opts, const dynamic::schema::repository& srp,
     const dynamic::schema::object& root_object, const formatters::container& fc,
     const sml::model& m) const {
 
+    BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
     const auto& ro(root_object);
     const auto pdrp(create_path_derivatives_repository(opts, srp, ro, fc, m));
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
@@ -144,6 +146,8 @@ make(const config::cpp_options& opts, const dynamic::schema::repository& srp,
 
     const auto mfd(merge(pdrp, dprp, erp));
     const auto r(create_formatter_properties(srp, ro, fc, mfd));
+
+    BOOST_LOG_SEV(lg, debug) << "Built formatter properties repository: " << r;
     return r;
 }
 

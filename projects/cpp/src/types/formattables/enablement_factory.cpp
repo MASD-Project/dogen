@@ -56,12 +56,13 @@ enablement_factory::create_field_definitions(
 
     std::unordered_map<std::string, field_definitions> r;
     for (const auto& f : fc.all_formatters()) {
+        field_definitions fd;
         const auto oh(f->ownership_hierarchy());
         const auto& fn(oh.formatter_name());
-
-        field_definitions fd;
         fd.enabled = s.select_field_by_name(fn, traits::enabled());
-        fd.supported = s.select_field_by_name(fn, traits::supported());
+
+        const auto& fctn(oh.facet_name());
+        fd.supported = s.select_field_by_name(fctn, traits::supported());
         r[fn] = fd;
     }
     return r;

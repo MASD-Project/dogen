@@ -49,8 +49,7 @@ namespace {
  */
 class generator {
 public:
-    generator(const settings::workflow& w, const sml::model& m)
-        : transformer_(w, m) { }
+    explicit generator(const transformer& t) : transformer_(t) { }
 
 private:
     void add(std::forward_list<std::shared_ptr<formattables::formattable> > f) {
@@ -83,24 +82,25 @@ public:
 
 private:
     std::forward_list<std::shared_ptr<formattables::formattable> > result_;
-    const transformer transformer_;
+    const transformer& transformer_;
 };
 
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::execute(const config::cpp_options& /*opts*/,
-    const dynamic::schema::repository& /*srp*/,
-    const dynamic::schema::object& /*root_object*/,
-    const formatters::container& /*fc*/,
+workflow::execute(const config::cpp_options& opts,
+    const dynamic::schema::repository& srp,
+    const dynamic::schema::object& root_object,
+    const formatters::container& fc,
     const settings::workflow& w,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
-    // formatter_properties_repository_factory f;
-    // f.make(opts, srp, root_object, fc, m);
+    formatter_properties_repository_factory f;
+    const auto fprp(f.make(opts, srp, root_object, fc, m));
+    const transformer t(w, fprp, m);
 
-    generator g(w, m);
+    generator g(t);
     all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
