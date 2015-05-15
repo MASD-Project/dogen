@@ -35194,13 +35194,13 @@ verbose.#</dia:string>
         <dia:point val="334,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="333.95,50.95;380.365,53.85"/>
+        <dia:rectangle val="333.95,50.95;381.135,53.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="334,51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="46.314999999999998"/>
+        <dia:real val="47.085000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -35298,7 +35298,7 @@ verbose.#</dia:string>
             <dia:string>#inclusion_dependencies_by_qname#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;sml::qname, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -36400,7 +36400,7 @@ verbose.#</dia:string>
         <dia:point val="386,55.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.108,53.75;386.75,64.05"/>
+        <dia:rectangle val="357.493,53.75;386.75,64.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36408,8 +36408,8 @@ verbose.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="386,55.4"/>
         <dia:point val="386,64"/>
-        <dia:point val="357.158,64"/>
-        <dia:point val="357.158,53.8"/>
+        <dia:point val="357.543,64"/>
+        <dia:point val="357.543,53.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

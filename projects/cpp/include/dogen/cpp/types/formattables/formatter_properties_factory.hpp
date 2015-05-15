@@ -25,8 +25,13 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
+#include <unordered_set>
 #include <unordered_map>
+#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
 
@@ -37,17 +42,35 @@ namespace formattables {
 /**
  * @brief Creates the formatter properties.
  */
+
 class formatter_properties_factory {
+public:
+    formatter_properties_factory(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object,
+        const formatters::container& fc);
+
+private:
+    /**
+     * @brief Obtain integrated facets.
+     */
+    std::unordered_map<std::string, std::unordered_set<std::string> >
+    obtain_integrated_facets(const dynamic::schema::repository& rp,
+        const dynamic::schema::object& root_object,
+        const formatters::container& fc) const;
+
 public:
     /**
      * @brief Create the formatter properties.
      */
     std::unordered_map<std::string, formatter_properties>
-    make(
-        const std::unordered_map<std::string, path_derivatives>&
+    make(const std::unordered_map<std::string, path_derivatives>&
         path_derivatives,
-        const std::unordered_map<std::string, std::string>&
-        inclusion_directives) const;
+        const std::unordered_map<std::string, std::list<std::string> >&
+        inclusion_dependencies) const;
+
+public:
+    const std::unordered_map<std::string, std::unordered_set<std::string> >
+    integrated_facets_;
 };
 
 } } }

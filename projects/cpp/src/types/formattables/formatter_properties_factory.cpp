@@ -18,18 +18,56 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
+formatter_properties_factory::formatter_properties_factory(
+    const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object,
+    const formatters::container& fc)
+    : integrated_facets_(obtain_integrated_facets(rp, root_object, fc)) {}
+
+std::unordered_map<std::string, std::unordered_set<std::string> >
+formatter_properties_factory::
+obtain_integrated_facets(const dynamic::schema::repository& rp,
+    const dynamic::schema::object& root_object,
+    const formatters::container& fc) const {
+
+    const dynamic::schema::field_selector fs(root_object);
+    const dynamic::schema::repository_selector s(rp);
+    const auto& ifct(traits::integrated_facet());
+    std::unordered_map<std::string, std::unordered_set<std::string> > r;
+    for (const auto& f : fc.all_formatters()) {
+        const auto oh(f->ownership_hierarchy());
+        const auto& fn(oh.formatter_name());
+        const auto iffd(s.try_select_field_by_name(fn, ifct));
+
+        if (!iffd)
+            continue;
+
+        if (fs.has_field(*iffd)) {
+            const auto fcts(fs.get_text_collection_content(*iffd));
+            std::unordered_set<std::string> set;
+            for (const auto f : fcts)
+                set.insert(f);
+            r[fn] = set;
+        }
+    }
+    return r;
+}
+
 std::unordered_map<std::string, formatter_properties>
 formatter_properties_factory::make(
     const std::unordered_map<std::string, path_derivatives>&
     path_derivatives,
-    const std::unordered_map<std::string, std::string>&
-    /*inclusion_directives*/) const {
+    const std::unordered_map<std::string, std::list<std::string> >&
+    inclusion_dependencies) const {
 
     std::unordered_map<std::string, formatter_properties> r;
     for (const auto& pair : path_derivatives) {
@@ -38,6 +76,19 @@ formatter_properties_factory::make(
         r[fn].file_path(pd.file_path());
         r[fn].header_guard(pd.header_guard());
     }
+
+    for (const auto& pair : inclusion_dependencies) {
+        const auto& fn(pair.first);
+        const auto& id(pair.second);
+        r[fn].inclusion_dependencies(id);
+    }
+
+    for (const auto& pair : integrated_facets_) {
+        const auto& fn(pair.first);
+        const auto& ifct(pair.second);
+        r[fn].integrated_facets(ifct);
+    }
+
     return r;
 }
 
