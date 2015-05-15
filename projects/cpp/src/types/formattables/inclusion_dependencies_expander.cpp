@@ -29,7 +29,7 @@
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_expander.hpp"
-#include "dogen/cpp/types/formattables/inclusion_dependencies_workflow.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_expander.hpp"
 
 namespace {
@@ -134,8 +134,9 @@ setup(const dynamic::expansion::expansion_context& ec) {
     field_definitions_ = setup_field_definitions(rp, fc);
 
     const auto& m(ec.model());
-    inclusion_dependencies_workflow w(fc);
-    inclusion_dependencies_ = w.execute(rp, m);
+    inclusion_dependencies_repository_factory f(fc);
+    const auto id_rp(f.execute(rp, m));
+    inclusion_dependencies_ = id_rp.inclusion_dependencies_by_qname();
 }
 
 void inclusion_dependencies_expander::expand(

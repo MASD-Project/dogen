@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_WORKFLOW_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_WORKFLOW_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_REPOSITORY_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-class inclusion_dependencies_workflow;
+class inclusion_dependencies_repository_factory;
 
 } } }
 

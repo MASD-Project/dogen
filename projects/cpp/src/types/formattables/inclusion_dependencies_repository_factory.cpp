@@ -24,13 +24,13 @@
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
-#include "dogen/cpp/types/formattables/inclusion_dependencies_workflow.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "cpp.formattables.inclusion_dependencies_workflow"));
+        "cpp.formattables.inclusion_dependencies_repository_factory"));
 
 const std::string model_module_not_found("Model module not found for model: ");
 
@@ -40,10 +40,10 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_workflow::inclusion_dependencies_workflow(
+inclusion_dependencies_repository_factory::inclusion_dependencies_repository_factory(
     const formatters::container& c) : container_(c) {}
 
-inclusion_directives_repository inclusion_dependencies_workflow::
+inclusion_directives_repository inclusion_dependencies_repository_factory::
 obtain_inclusion_directives_repository_activity(
     const dynamic::schema::repository& rp,
     const sml::model& m) const {
@@ -56,7 +56,7 @@ obtain_inclusion_directives_repository_activity(
     return r;
 }
 
-void inclusion_dependencies_workflow::
+void inclusion_dependencies_repository_factory::
 initialise_registrar_activity(registrar& rg) const {
     BOOST_LOG_SEV(lg, debug) << "Started registering all providers.";
     for (const auto f : container_.all_formatters()) {
@@ -67,11 +67,7 @@ initialise_registrar_activity(registrar& rg) const {
     BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
 }
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >
-inclusion_dependencies_workflow::
+inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 obtain_inclusion_dependencies_activity(
     const dynamic::schema::repository& srp, const container& c,
     const inclusion_directives_repository& idrp,
@@ -79,17 +75,14 @@ obtain_inclusion_dependencies_activity(
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
     inclusion_dependencies_factory f;
-    const auto r(f.make(srp, c, idrp, m));
+    inclusion_dependencies_repository r;
+    r.inclusion_dependencies_by_qname(f.make(srp, c, idrp, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining inclusion dependencies:";
     return r;
 }
 
-std::unordered_map<
-    sml::qname,
-    std::unordered_map<std::string, std::list<std::string> >
-    >
-inclusion_dependencies_workflow::
+inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 execute(const dynamic::schema::repository& rp, const sml::model& m) const {
     registrar rg;
     initialise_registrar_activity(rg);

@@ -30123,7 +30123,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="396,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="395.95,49.95;421.19,55.25"/>
+        <dia:rectangle val="395.95,49.95;421.19,54.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="396,50"/>
@@ -30132,10 +30132,10 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#inclusion_dependencies_workflow#</dia:string>
+        <dia:string>#inclusion_dependencies_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -30231,7 +30231,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;sml::qname,std::unordered_map&lt;std::string,std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
+            <dia:string>#inclusion_dependencies_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32819,7 +32819,7 @@ main, or from another initialiser.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="421.14,55.2"/>
+        <dia:point val="421.14,54.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="258.95,0.75;421.89,70.05"/>
@@ -32828,7 +32828,7 @@ main, or from another initialiser.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="421.14,55.2"/>
+        <dia:point val="421.14,54.4"/>
         <dia:point val="421.14,70"/>
         <dia:point val="259,70"/>
         <dia:point val="259,0.8"/>
@@ -33390,7 +33390,7 @@ verbose.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="408.57,55.2"/>
+        <dia:point val="408.57,54.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="284.717,18.35;409.32,67.05"/>
@@ -33399,7 +33399,7 @@ verbose.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="408.57,55.2"/>
+        <dia:point val="408.57,54.4"/>
         <dia:point val="408.57,67"/>
         <dia:point val="284.767,67"/>
         <dia:point val="284.767,18.4"/>

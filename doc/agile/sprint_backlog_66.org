@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-15 Fri 09:25]
+Clock summary at [2015-05-15 Fri 09:47]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:32* |       |      |
+| *Total time*                                                                | *17:52* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 17:32 |      |
+| Active                                                                      |         | 17:52 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -32,6 +32,8 @@ Clock summary at [2015-05-15 Fri 09:25]
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
 | STARTED Create the formatter properties                                     |         |       | 1:20 |
 | STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
+| STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
+| STARTED Move the inclusion dependencies workflow into formatables           |         |       | 0:18 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -463,25 +465,14 @@ reality we won't use them. Remove them:
 - has_primitive_properties: seems unused.
 - remove family types and all the family gunk.
 
-*** Move the path derivatives workflow into formatables               :story:
+*** STARTED Tidy-up cpp diagram                                       :story:
+    CLOCK: [2015-05-15 Fri 09:26]--[2015-05-15 Fri 09:28] =>  0:02
 
-As per analysis, we need to move away from expansion. Get these
-classes in formattables and hook them in to workflow. Must return the
-path derivatives per qname per formatter name.
+After all the new classes, expansion changes etc the cpp diagram
+became really messy. Make it reflect the new reality.
 
-We need to also create a workflow step that takes the path derivatives
-and builds the inclusion directives repository.
-
-We just need to unhook the expander; everything else is useful exactly
-as is.
-
-- remove the directory path properties from path settings; these are
-  read from command line options and will continue to do so; they are
-  not settings.
-- add cpp options to the path derivatives workflow.
-- delete the expander
-
-*** Move the inclusion dependencies workflow into formatables         :story:
+*** STARTED Move the inclusion dependencies workflow into formatables :story:
+    CLOCK: [2015-05-15 Fri 09:29]--[2015-05-15 Fri 09:47] =>  0:18
 
 As per analysis, we need to move away from expansion. Get these
 classes in formattables and hook them in to workflow. It must output
@@ -506,6 +497,24 @@ is done in the expander, so it needs to be moved to the workflow.
 
 Tasks:
 
+- delete the expander
+
+*** Move the path derivatives workflow into formatables               :story:
+
+As per analysis, we need to move away from expansion. Get these
+classes in formattables and hook them in to workflow. Must return the
+path derivatives per qname per formatter name.
+
+We need to also create a workflow step that takes the path derivatives
+and builds the inclusion directives repository.
+
+We just need to unhook the expander; everything else is useful exactly
+as is.
+
+- remove the directory path properties from path settings; these are
+  read from command line options and will continue to do so; they are
+  not settings.
+- add cpp options to the path derivatives workflow.
 - delete the expander
 
 *** Delete dynamic expansion                                          :story:
