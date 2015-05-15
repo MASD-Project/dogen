@@ -23,8 +23,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
-#include "dogen/cpp/types/settings/type_settings_factory.hpp"
-#include "dogen/cpp/types/settings/formatter_settings_factory.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 
 namespace {
@@ -40,13 +38,10 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bundle_factory::bundle_factory(
-    const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object,
+bundle_factory::bundle_factory(const dynamic::schema::object& root_object,
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories) :
-    schema_repository_(rp),
     root_object_(root_object),
     opaque_settings_factories_(opaque_settings_factories),
     formatters_repository_(create_formatters_repository(
@@ -64,19 +59,6 @@ create_general_settings(const dynamic::schema::object& o) const {
     using dogen::formatters::general_settings_factory;
     general_settings_factory f(formatters_repository_, root_object_);
     return f.make(cpp_modeline_name, o);
-}
-
-type_settings bundle_factory::
-create_type_settings(const dynamic::schema::object& o) const {
-    type_settings_factory f(schema_repository_, root_object_);
-    return f.make(o);
-}
-
-std::unordered_map<std::string, formatter_settings>
-bundle_factory::create_formatter_settings(
-    const dynamic::schema::object& o) const {
-    formatter_settings_factory f(schema_repository_, root_object_);
-    return f.make(o);
 }
 
 std::unordered_map<
@@ -99,8 +81,6 @@ std::unordered_map<
 bundle bundle_factory::make(const dynamic::schema::object& o) const {
     bundle r;
     r.general_settings(create_general_settings(o));
-    r.type_settings(create_type_settings(o));
-    // r.formatter_settings(create_formatter_settings(o));
     r.opaque_settings(create_opaque_settings(o));
     return r;
 }

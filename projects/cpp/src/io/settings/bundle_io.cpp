@@ -21,10 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/settings/bundle_io.hpp"
-#include "dogen/cpp/io/settings/type_settings_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/cpp/io/settings/opaque_settings_io.hpp"
-#include "dogen/cpp/io/settings/formatter_settings_io.hpp"
 
 namespace boost {
 
@@ -47,24 +45,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
 }
 
 namespace boost {
@@ -109,8 +89,6 @@ std::ostream& operator<<(std::ostream& s, const bundle& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::bundle\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
-      << "\"type_settings\": " << v.type_settings() << ", "
-      << "\"formatter_settings\": " << v.formatter_settings() << ", "
       << "\"opaque_settings\": " << v.opaque_settings()
       << " }";
     return(s);

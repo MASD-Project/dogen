@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-16 Sat 00:29]
+Clock summary at [2015-05-16 Sat 00:49]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *26:19* |       |      |
+| *Total time*                                                                | *26:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 26:19 |      |
+| Active                                                                      |         | 26:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -31,7 +31,7 @@ Clock summary at [2015-05-16 Sat 00:29]
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
 | STARTED Create the formatter properties                                     |         |       | 4:07 |
-| STARTED Remove unused classes and properties in cpp                         |         |       | 0:08 |
+| STARTED Remove unused classes and properties in cpp                         |         |       | 0:25 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 | STARTED Move the inclusion dependencies workflow into formatables           |         |       | 3:25 |
 | STARTED Move the path derivatives workflow into formatables                 |         |       | 0:52 |
@@ -468,6 +468,7 @@ Tasks:
 - start using formatter properties in formatters.
 
 *** STARTED Remove unused classes and properties in cpp               :story:
+    CLOCK: [2015-05-16 Sat 00:32]--[2015-05-16 Sat 00:49] =>  0:17
     CLOCK: [2015-05-15 Fri 09:17]--[2015-05-15 Fri 09:25] =>  0:08
 
 We have a few classes that were made for exploratory reasons but in

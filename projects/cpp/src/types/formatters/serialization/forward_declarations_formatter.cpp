@@ -26,7 +26,6 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/cpp/types/settings/selector.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"

@@ -30,11 +30,9 @@
 #include <memory>
 #include <unordered_map>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -52,8 +50,7 @@ public:
     static cpp::settings::registrar& registrar();
 
 public:
-    workflow(const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object);
+    explicit workflow(const dynamic::schema::object& root_object);
 
 public:
     /**

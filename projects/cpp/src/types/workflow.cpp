@@ -103,7 +103,7 @@ workflow::generate(const config::knitting_options& ko,
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto ro(obtain_root_object(m));
-    settings::workflow w(rp, ro);
+    settings::workflow w(ro);
     w.validate();
 
     formatters::workflow::registrar().validate();

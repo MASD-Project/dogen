@@ -36,32 +36,22 @@ namespace settings {
 
 bundle::bundle(bundle&& rhs)
     : general_settings_(std::move(rhs.general_settings_)),
-      type_settings_(std::move(rhs.type_settings_)),
-      formatter_settings_(std::move(rhs.formatter_settings_)),
       opaque_settings_(std::move(rhs.opaque_settings_)) { }
 
 bundle::bundle(
     const boost::optional<dogen::formatters::general_settings>& general_settings,
-    const dogen::cpp::settings::type_settings& type_settings,
-    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings)
     : general_settings_(general_settings),
-      type_settings_(type_settings),
-      formatter_settings_(formatter_settings),
       opaque_settings_(opaque_settings) { }
 
 void bundle::swap(bundle& other) noexcept {
     using std::swap;
     swap(general_settings_, other.general_settings_);
-    swap(type_settings_, other.type_settings_);
-    swap(formatter_settings_, other.formatter_settings_);
     swap(opaque_settings_, other.opaque_settings_);
 }
 
 bool bundle::operator==(const bundle& rhs) const {
     return general_settings_ == rhs.general_settings_ &&
-        type_settings_ == rhs.type_settings_ &&
-        formatter_settings_ == rhs.formatter_settings_ &&
         opaque_settings_ == rhs.opaque_settings_;
 }
 
@@ -85,38 +75,6 @@ void bundle::general_settings(const boost::optional<dogen::formatters::general_s
 
 void bundle::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
     general_settings_ = std::move(v);
-}
-
-const dogen::cpp::settings::type_settings& bundle::type_settings() const {
-    return type_settings_;
-}
-
-dogen::cpp::settings::type_settings& bundle::type_settings() {
-    return type_settings_;
-}
-
-void bundle::type_settings(const dogen::cpp::settings::type_settings& v) {
-    type_settings_ = v;
-}
-
-void bundle::type_settings(const dogen::cpp::settings::type_settings&& v) {
-    type_settings_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& bundle::formatter_settings() const {
-    return formatter_settings_;
-}
-
-std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& bundle::formatter_settings() {
-    return formatter_settings_;
-}
-
-void bundle::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v) {
-    formatter_settings_ = v;
-}
-
-void bundle::formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v) {
-    formatter_settings_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& bundle::opaque_settings() const {

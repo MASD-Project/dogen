@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {

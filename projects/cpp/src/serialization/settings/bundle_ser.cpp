@@ -32,10 +32,8 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
-#include "dogen/cpp/serialization/settings/type_settings_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
-#include "dogen/cpp/serialization/settings/formatter_settings_ser.hpp"
 
 
 namespace boost {
@@ -46,8 +44,6 @@ void save(Archive& ar,
     const dogen::cpp::settings::bundle& v,
     const unsigned int /*version*/) {
     ar << make_nvp("general_settings", v.general_settings_);
-    ar << make_nvp("type_settings", v.type_settings_);
-    ar << make_nvp("formatter_settings", v.formatter_settings_);
     ar << make_nvp("opaque_settings", v.opaque_settings_);
 }
 
@@ -56,8 +52,6 @@ void load(Archive& ar,
     dogen::cpp::settings::bundle& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("general_settings", v.general_settings_);
-    ar >> make_nvp("type_settings", v.type_settings_);
-    ar >> make_nvp("formatter_settings", v.formatter_settings_);
     ar >> make_nvp("opaque_settings", v.opaque_settings_);
 }
 

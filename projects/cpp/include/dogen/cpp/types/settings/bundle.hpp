@@ -30,9 +30,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/cpp/serialization/settings/bundle_fwd_ser.hpp"
 
@@ -52,8 +50,6 @@ public:
 public:
     bundle(
         const boost::optional<dogen::formatters::general_settings>& general_settings,
-        const dogen::cpp::settings::type_settings& type_settings,
-        const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings);
 
 private:
@@ -68,16 +64,6 @@ public:
     boost::optional<dogen::formatters::general_settings>& general_settings();
     void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
     void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
-
-    const dogen::cpp::settings::type_settings& type_settings() const;
-    dogen::cpp::settings::type_settings& type_settings();
-    void type_settings(const dogen::cpp::settings::type_settings& v);
-    void type_settings(const dogen::cpp::settings::type_settings&& v);
-
-    const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings() const;
-    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& formatter_settings();
-    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>& v);
-    void formatter_settings(const std::unordered_map<std::string, dogen::cpp::settings::formatter_settings>&& v);
 
     const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings();
@@ -96,8 +82,6 @@ public:
 
 private:
     boost::optional<dogen::formatters::general_settings> general_settings_;
-    dogen::cpp::settings::type_settings type_settings_;
-    std::unordered_map<std::string, dogen::cpp::settings::formatter_settings> formatter_settings_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > opaque_settings_;
 };
 

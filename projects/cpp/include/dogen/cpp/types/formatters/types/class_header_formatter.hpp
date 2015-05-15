@@ -26,7 +26,6 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 
 namespace dogen {

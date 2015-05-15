@@ -30,14 +30,12 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
-#include "dogen/cpp/types/settings/type_settings.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
-#include "dogen/cpp/types/settings/formatter_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
 
 namespace dogen {
@@ -49,15 +47,7 @@ namespace settings {
  */
 class bundle_factory final {
 public:
-    /**
-     * @brief Initialises the bundle factory.
-     *
-     * @param rp repository of dynamic schema data.
-     * @param opaque_factories All factories of opaque settings know
-     * to the system.
-     */
-    bundle_factory(const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+    bundle_factory(const dynamic::schema::object& root_object,
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
             >& opaque_settings_factories);
@@ -71,21 +61,10 @@ private:
 
 private:
     /**
-     * @brief Generates the type settings.
+     * @brief Create the general settings.
      */
     dogen::formatters::general_settings
     create_general_settings(const dynamic::schema::object& o) const;
-
-    /**
-     * @brief Generates the type settings.
-     */
-    type_settings create_type_settings(const dynamic::schema::object& o) const;
-
-    /**
-     * @brief Generates the formatter settings.
-     */
-    std::unordered_map<std::string, formatter_settings>
-    create_formatter_settings(const dynamic::schema::object& o) const;
 
     /**
      * @brief Generates the opaque settings.
@@ -100,7 +79,6 @@ public:
     bundle make(const dynamic::schema::object& o) const;
 
 private:
-    const dynamic::schema::repository& schema_repository_;
     const dynamic::schema::object& root_object_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>

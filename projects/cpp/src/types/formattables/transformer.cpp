@@ -473,8 +473,7 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     if (r->all_properties().empty())
         r->disable_complete_constructor(true);
     else
-        r->disable_complete_constructor(
-            r->settings().type_settings().disable_complete_constructor());
+        r->disable_complete_constructor(false); // FIXME
 
     if (r->class_type() == class_types::unversioned_key ||
         r->class_type() == class_types::versioned_key ||
