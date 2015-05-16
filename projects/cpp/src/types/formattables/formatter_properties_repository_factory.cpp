@@ -98,7 +98,7 @@ formatter_properties_repository_factory::merge(
 
     std::unordered_map<sml::qname, merged_formatter_data> r;
     for (const auto& pair : pdrp.path_derivatives_by_qname())
-        r[pair.first].path_derivatives = pair.second;
+        r[pair.first].path_derivatives_ = pair.second;
 
     for (const auto& pair : idrp.inclusion_dependencies_by_qname())
         r[pair.first].inclusion_dependencies = pair.second;
@@ -120,7 +120,7 @@ create_formatter_properties(
     formatter_properties_factory f(rp, root_object, fc);
     for (const auto& pair : mfd) {
         r.formatter_properties_by_qname()[pair.first] = f.make(
-            pair.second.path_derivatives,
+            pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
             pair.second.enablement);
     }

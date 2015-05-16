@@ -50,7 +50,7 @@ namespace formattables {
 class formatter_properties_repository_factory {
 private:
     struct merged_formatter_data {
-        std::unordered_map<std::string, path_derivatives> path_derivatives;
+        std::unordered_map<std::string, path_derivatives> path_derivatives_;
         std::unordered_map<std::string, std::list<std::string> >
         inclusion_dependencies;
         std::unordered_map<std::string,bool> enablement;
