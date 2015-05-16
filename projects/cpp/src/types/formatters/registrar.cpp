@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/dynamic/schema/io/ownership_hierarchy_io.hpp"
+#include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/cpp/types/formatters/registrar_error.hpp"
 #include "dogen/cpp/types/formatters/registrar.hpp"
 
@@ -100,7 +100,7 @@ const container& registrar::formatter_container() const {
     return formatter_container_;
 }
 
-const std::forward_list<dynamic::schema::ownership_hierarchy>&
+const std::forward_list<dynamic::ownership_hierarchy>&
 registrar::ownership_hierarchy() const {
     return ownership_hierarchy_;
 }

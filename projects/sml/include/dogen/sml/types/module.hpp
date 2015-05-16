@@ -30,10 +30,10 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/generation_types.hpp"
-#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/sml/serialization/module_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,7 +58,7 @@ public:
 public:
     module(
         const std::string& documentation,
-        const dogen::dynamic::schema::object& extensions,
+        const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
         const dogen::sml::generation_types& generation_type,
         const dogen::sml::origin_types& origin_type,
@@ -92,10 +92,10 @@ public:
      * @brief Dynamic extensions for this element.
      */
     /**@{*/
-    const dogen::dynamic::schema::object& extensions() const;
-    dogen::dynamic::schema::object& extensions();
-    void extensions(const dogen::dynamic::schema::object& v);
-    void extensions(const dogen::dynamic::schema::object&& v);
+    const dogen::dynamic::object& extensions() const;
+    dogen::dynamic::object& extensions();
+    void extensions(const dogen::dynamic::object& v);
+    void extensions(const dogen::dynamic::object&& v);
     /**@}*/
 
     /**
@@ -165,7 +165,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::dynamic::schema::object extensions_;
+    dogen::dynamic::object extensions_;
     dogen::sml::qname name_;
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;

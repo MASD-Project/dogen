@@ -28,11 +28,11 @@
 #include <vector>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/config/types/knitting_options.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
 
 namespace dogen {
 namespace backend {
@@ -64,7 +64,7 @@ public:
      * @brief Complete ownership hierarchy for this backend, listing
      * all available models, facet and formatters.
      */
-    virtual std::forward_list<dynamic::schema::ownership_hierarchy>
+    virtual std::forward_list<dynamic::ownership_hierarchy>
     ownership_hierarchy() const = 0;
 
     /**
@@ -75,7 +75,7 @@ public:
      */
     virtual std::forward_list<formatters::file> generate(
         const config::knitting_options& ko,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const sml::model& m) const = 0;
 };
 

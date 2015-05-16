@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formattables/registrar.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
@@ -45,8 +45,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    virtual dynamic::schema::ownership_hierarchy
-    ownership_hierarchy() const = 0;
+    virtual dynamic::ownership_hierarchy ownership_hierarchy() const = 0;
 
     /**
      * @brief Type of the file this formatter generates.

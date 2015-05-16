@@ -29,7 +29,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/registrar.hpp"
@@ -50,7 +50,7 @@ public:
     static cpp::settings::registrar& registrar();
 
 public:
-    explicit workflow(const dynamic::schema::object& root_object);
+    explicit workflow(const dynamic::object& root_object);
 
 public:
     /**
@@ -62,7 +62,7 @@ public:
     /**
      * @brief Generates the settings bundle.
      */
-    bundle execute(const dynamic::schema::object& o) const;
+    bundle execute(const dynamic::object& o) const;
 
 private:
     static std::shared_ptr<cpp::settings::registrar> registrar_;

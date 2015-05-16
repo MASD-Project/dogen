@@ -32,7 +32,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -49,7 +49,7 @@ public:
 
 public:
     middle_end_to_backend_workflow(const config::knitting_options& o,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const output_fn& of);
 
 public: // public section for testing purposes only
@@ -93,7 +93,7 @@ public:
 
 private:
     const config::knitting_options& knitting_options_;
-    const dynamic::schema::repository& repository_;
+    const dynamic::repository& repository_;
     const output_fn output_;
 };
 

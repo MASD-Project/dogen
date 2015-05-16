@@ -28,7 +28,7 @@
 #include <memory>
 #include <forward_list>
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/backend/types/registrar.hpp"
@@ -43,7 +43,7 @@ namespace backend {
 class workflow {
 public:
     workflow(const config::knitting_options& o,
-        const dynamic::schema::repository& rp);
+        const dynamic::repository& rp);
 
 public:
     /**
@@ -61,7 +61,7 @@ public:
 private:
     static std::shared_ptr<backend::registrar> registrar_;
     const config::knitting_options knitting_options_;
-    const dynamic::schema::repository& repository_;
+    const dynamic::repository& repository_;
 };
 
 } }

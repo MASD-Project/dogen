@@ -42,10 +42,10 @@ namespace cpp {
 namespace formattables {
 
 inclusion_directives_factory::inclusion_directives_factory(
-    const dynamic::schema::repository& srp,
+    const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp)
-    : schema_repository_(srp), container_(fc), path_repository_(pdrp) {}
+    : dynamic_repository_(srp), container_(fc), path_repository_(pdrp) {}
 
 std::unordered_map<std::string, formattables::path_derivatives>
 inclusion_directives_factory::path_derivatives_for_qname(
@@ -93,9 +93,9 @@ void inclusion_directives_factory::validate_inclusion_directive(
 }
 
 settings::inclusion_directives_settings inclusion_directives_factory::
-create_inclusion_directives_settings(const dynamic::schema::object& o) const {
+create_inclusion_directives_settings(const dynamic::object& o) const {
     using factory = settings::inclusion_directives_settings_factory;
-    const factory f(schema_repository_, container_);
+    const factory f(dynamic_repository_, container_);
     return f.make(o);
 }
 
@@ -128,7 +128,7 @@ inclusion_directives_factory::obtain_include_directive(
 
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
-make(const dynamic::schema::object& o, const sml::qname& qn) const {
+make(const dynamic::object& o, const sml::qname& qn) const {
     const auto tn(sml::string_converter::convert(qn));
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {

@@ -89,7 +89,7 @@ bool include_directive_comparer(
 
 template<typename SmlEntity>
 std::unordered_map<std::string, std::list<std::string> >
-generate(const dynamic::schema::repository& srp,
+generate(const dynamic::repository& srp,
     std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<SmlEntity>
@@ -128,14 +128,14 @@ generate(const dynamic::schema::repository& srp,
 }
 
 inclusion_dependencies_factory::inclusion_dependencies_factory(
-    const dynamic::schema::repository& srp, const container& c,
+    const dynamic::repository& srp, const container& c,
     const inclusion_directives_repository& idrp)
-    : schema_repository_(srp), provider_container_(c),
+    : dynamic_repository_(srp), provider_container_(c),
       inclusion_directives_repository_(idrp) {}
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const sml::object& o) const {
-    return generate(schema_repository_, provider_container_.object_providers(),
+    return generate(dynamic_repository_, provider_container_.object_providers(),
         inclusion_directives_repository_, o);
 }
 

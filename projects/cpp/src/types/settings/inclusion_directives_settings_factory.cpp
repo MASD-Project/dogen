@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
@@ -41,21 +41,21 @@ namespace cpp {
 namespace settings {
 
 inclusion_directives_settings_factory::
-inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
+inclusion_directives_settings_factory(const dynamic::repository& rp,
     const formatters::container& fc)
     : formatter_properties_(make_formatter_properties(rp, fc)),
       inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
 
 inclusion_directives_settings_factory::formatter_properties
 inclusion_directives_settings_factory::make_formatter_properties(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::formatter_interface& f) const {
 
     formatter_properties r;
     const auto fn(f.ownership_hierarchy().formatter_name());
     r.formatter_name = fn;
 
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     const auto& id(traits::inclusion_directive());
     r.inclusion_directive = s.select_field_by_name(fn, id);
 
@@ -70,7 +70,7 @@ std::unordered_map<
     inclusion_directives_settings_factory::formatter_properties
     >
 inclusion_directives_settings_factory::
-make_formatter_properties(const dynamic::schema::repository& rp,
+make_formatter_properties(const dynamic::repository& rp,
     const formatters::container& fc) const {
     std::unordered_map<std::string, formatter_properties> r;
 
@@ -86,19 +86,19 @@ make_formatter_properties(const dynamic::schema::repository& rp,
     return r;
 }
 
-dynamic::schema::field_definition inclusion_directives_settings_factory::
+dynamic::field_definition inclusion_directives_settings_factory::
 get_top_level_inclusion_required_field(
-    const dynamic::schema::repository& rp) const {
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository& rp) const {
+    const dynamic::repository_selector s(rp);
     return s.select_field_by_name(traits::cpp::inclusion_required());
 }
 
 boost::optional<std::string> inclusion_directives_settings_factory::
 obtain_inclusion_directive_for_formatter(const formatter_properties& fp,
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
     boost::optional<std::string> r;
 
-    using namespace dynamic::schema;
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(fp.inclusion_directive))
         return r;
@@ -109,22 +109,22 @@ obtain_inclusion_directive_for_formatter(const formatter_properties& fp,
 
 bool inclusion_directives_settings_factory::
 obtain_inclusion_required_for_formatter(const formatter_properties& fp,
-    const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+    const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     const auto r(fs.get_boolean_content_or_default(fp.inclusion_required));
     return r;
 }
 
 bool inclusion_directives_settings_factory::
-obtain_top_level_inclusion_required(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+obtain_top_level_inclusion_required(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     return fs.get_boolean_content_or_default(inclusion_required_);
 }
 
 inclusion_directives_settings inclusion_directives_settings_factory::make(
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
 
     inclusion_directives_settings r;
     const auto ir(obtain_top_level_inclusion_required(o));

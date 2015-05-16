@@ -24,7 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/dia/types/composite.hpp"
@@ -68,12 +68,12 @@ const std::string multiple_inheritance(
 namespace dogen {
 namespace dia_to_sml {
 
-transformer::transformer(const dynamic::schema::workflow& w, context& c)
+transformer::transformer(const dynamic::workflow& w, context& c)
     : context_(c),
       identifier_parser_(new sml::identifier_parser(c.top_level_module_names(),
               c.model().name().external_module_path(),
               c.model().name().model_name())),
-      schema_workflow_(w) {
+      dynamic_workflow_(w) {
 
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
@@ -191,8 +191,8 @@ sml::property transformer::to_property(const processed_property& p) const {
     r.documentation(p.comment().documentation());
 
     const auto& kvps(p.comment().key_value_pairs());
-    const auto scope(dynamic::schema::scope_types::property);
-    r.extensions(schema_workflow_.execute(scope, kvps));
+    const auto scope(dynamic::scope_types::property);
+    r.extensions(dynamic_workflow_.execute(scope, kvps));
 
     return r;
 }
@@ -293,7 +293,7 @@ void transformer::to_entity(const processed_object& o, const profile& p) {
     e.is_aggregate_root(p.is_aggregate_root());
 
     for (const auto& p : e.local_properties()) {
-        const dynamic::schema::field_selector fs(p.extensions());
+        const dynamic::field_selector fs(p.extensions());
         if (fs.has_field(traits::identity_attribute()))
             e.identity().push_back(p);
     }
@@ -394,13 +394,13 @@ void transformer::from_note(const processed_object& o) {
     const auto& documentation(o.comment().documentation());
     const auto& kvps(o.comment().key_value_pairs());
     const sml::model& model(context_.model());
-    using dynamic::schema::scope_types;
+    using dynamic::scope_types;
     if (o.child_node_id().empty()) {
         auto& module(module_for_qname(model.name()));
         module.documentation(documentation);
 
         const auto scope(scope_types::root_module);
-        module.extensions(schema_workflow_.execute(scope, kvps));
+        module.extensions(dynamic_workflow_.execute(scope, kvps));
         return;
     }
 
@@ -408,7 +408,7 @@ void transformer::from_note(const processed_object& o) {
     module.documentation(documentation);
 
     const auto scope(scope_types::any_module);
-    module.extensions(schema_workflow_.execute(scope, kvps));
+    module.extensions(dynamic_workflow_.execute(scope, kvps));
 }
 
 void transformer::to_concept(const processed_object& o, const profile& p) {

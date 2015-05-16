@@ -27,8 +27,8 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
@@ -49,8 +49,8 @@ private:
      */
     std::unordered_map<std::string, settings::path_settings>
     create_path_settings(const config::cpp_options& opts,
-        const dynamic::schema::repository& rp,
-        const dynamic::schema::object& o,
+        const dynamic::repository& rp,
+        const dynamic::object& o,
         const formatters::container& c) const;
 
     /**
@@ -65,8 +65,8 @@ public:
      * @brief Create a path derivatives repository.
      */
     path_derivatives_repository make(const config::cpp_options& opts,
-        const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+        const dynamic::repository& rp,
+        const dynamic::object& root_object,
         const formatters::container& c,
         const sml::model& m) const;
 };

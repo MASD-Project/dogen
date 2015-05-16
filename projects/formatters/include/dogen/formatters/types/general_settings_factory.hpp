@@ -29,7 +29,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"
 #include "dogen/formatters/types/licence.hpp"
@@ -64,32 +64,32 @@ public:
      * @param fallback object to use to construct defaults, if any.
      */
     general_settings_factory(const repository& rp,
-        const dynamic::schema::object& fallback);
+        const dynamic::object& fallback);
 
 private:
     /**
      * @brief Extracts the licence text from the dynamic object.
      */
     boost::optional<std::string>
-    extract_licence_text(const dynamic::schema::object& o) const;
+    extract_licence_text(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the copyright notices from the dynamic object.
      */
     boost::optional<std::list<std::string>>
-    extract_copyright_notices(const dynamic::schema::object& o) const;
+    extract_copyright_notices(const dynamic::object& o) const;
 
     /**
      * @brief Extracts a licence from the dynamic object.
      */
     boost::optional<licence>
-    extract_licence(const dynamic::schema::object& o) const;
+    extract_licence(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the modeline group name from the dynamic object.
      */
     boost::optional<modeline_group>
-    extract_modeline_group(const dynamic::schema::object& o) const;
+    extract_modeline_group(const dynamic::object& o) const;
 
     /**
      * @brief Returns the modeline for the supplied modeline name.
@@ -104,40 +104,40 @@ private:
      */
     boost::optional<modeline>
     extract_modeline(const std::string& modeline_name,
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
     /**
      * @brief Extracts a code generation marker the dynamic object.
      */
     boost::optional<std::string>
-    extract_marker(const dynamic::schema::object& o) const;
+    extract_marker(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the marker from the supplied dynamic object; if
      * none is found, uses the default marker.
      */
     std::string
-    extract_marker_or_default(const dynamic::schema::object& o) const;
+    extract_marker_or_default(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the generate preamble field.
      */
     boost::optional<bool>
-    extract_generate_preamble(const dynamic::schema::object& o) const;
+    extract_generate_preamble(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the generate preamble; if none is found, uses
      * the default value.
      */
     bool extract_generate_preamble_or_default(
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
 public:
     /**
      * @brief Generates general settings from the dynamic object.
      */
     general_settings make(const std::string& modeline_name,
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
 private:
     const repository& repository_;

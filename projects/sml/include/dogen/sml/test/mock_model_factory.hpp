@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
 namespace sml {
@@ -149,7 +149,7 @@ public:
     };
 
 public:
-    typedef std::function<void(dynamic::schema::object& o)>
+    typedef std::function<void(dynamic::object& o)>
     dynamic_extension_function_type;
 
 public:

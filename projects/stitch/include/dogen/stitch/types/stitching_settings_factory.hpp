@@ -28,8 +28,8 @@
 #include <string>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/stitch/types/stitching_settings.hpp"
 
 namespace dogen {
@@ -40,69 +40,69 @@ namespace stitch {
  */
 class stitching_settings_factory {
 public:
-    stitching_settings_factory(const dynamic::schema::repository& rp);
+    stitching_settings_factory(const dynamic::repository& rp);
 
 private:
     /**
      * @brief All relevant properties we need to remember for each formatter.
      */
     struct formatter_properties {
-        dynamic::schema::field_definition stream_variable_name;
-        dynamic::schema::field_definition template_path;
-        dynamic::schema::field_definition output_path;
-        dynamic::schema::field_definition relative_output_directory;
-        dynamic::schema::field_definition inclusion_dependency;
-        dynamic::schema::field_definition containing_namespaces;
+        dynamic::field_definition stream_variable_name;
+        dynamic::field_definition template_path;
+        dynamic::field_definition output_path;
+        dynamic::field_definition relative_output_directory;
+        dynamic::field_definition inclusion_dependency;
+        dynamic::field_definition containing_namespaces;
     };
 
     /**
      * @brief Creates the formatter properties.
      */
     formatter_properties
-    make_formatter_properties(const dynamic::schema::repository& rp) const;
+    make_formatter_properties(const dynamic::repository& rp) const;
 
 private:
     /**
      * @brief Extracts the stream variable name.
      */
     std::string
-    extract_stream_variable_name(const dynamic::schema::object& o) const;
+    extract_stream_variable_name(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the template path.
      */
     boost::optional<boost::filesystem::path>
-    extract_template_path(const dynamic::schema::object& o) const;
+    extract_template_path(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the file path.
      */
     boost::optional<boost::filesystem::path>
-    extract_output_path(const dynamic::schema::object& o) const;
+    extract_output_path(const dynamic::object& o) const;
 
     /**
      * @brief Extracts the relative output directory.
      */
     boost::optional<boost::filesystem::path>
-    extract_relative_output_directory(const dynamic::schema::object& o) const;
+    extract_relative_output_directory(const dynamic::object& o) const;
 
     /**
      * @brief Extracts inclusion dependencies.
      */
     std::list<std::string>
-    extract_inclusion_dependencies(const dynamic::schema::object& o) const;
+    extract_inclusion_dependencies(const dynamic::object& o) const;
 
     /**
      * @brief Extract containing namespaces.
      */
     std::list<std::string>
-    extract_containing_namespaces(const dynamic::schema::object& o) const;
+    extract_containing_namespaces(const dynamic::object& o) const;
 
 public:
     /**
      * @brief Create the stitching settings.
      */
-    stitching_settings make(const dynamic::schema::object& o) const;
+    stitching_settings make(const dynamic::object& o) const;
 
 private:
     const formatter_properties formatter_properties_;

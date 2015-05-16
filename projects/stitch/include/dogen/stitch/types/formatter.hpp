@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 
@@ -60,7 +60,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    dynamic::schema::ownership_hierarchy ownership_hierarchy() const;
+    dynamic::ownership_hierarchy ownership_hierarchy() const;
 
     /**
      * @brief Formats the text template.

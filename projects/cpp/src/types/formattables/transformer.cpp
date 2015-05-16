@@ -186,7 +186,7 @@ populate_formattable_properties(const sml::qname& qn, formattable& f) const {
 }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
-    const dynamic::schema::object& o,
+    const dynamic::object& o,
     const std::string& documentation, entity& e) const {
 
     populate_formattable_properties(qn, e);

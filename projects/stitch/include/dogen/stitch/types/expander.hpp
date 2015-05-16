@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 
 namespace dogen {
 namespace stitch {
@@ -41,7 +41,7 @@ public:
      * @brief Execute the expansion.
      */
     void expand(const boost::optional<boost::filesystem::path>& template_path,
-        dynamic::schema::object& o) const;
+        dynamic::object& o) const;
 };
 
 } }

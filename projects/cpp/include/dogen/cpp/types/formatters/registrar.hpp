@@ -29,7 +29,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
@@ -76,13 +76,12 @@ public:
     /**
      * @brief Returns the ownership hierarchy for all formatters.
      */
-    const std::forward_list<dynamic::schema::ownership_hierarchy>&
+    const std::forward_list<dynamic::ownership_hierarchy>&
         ownership_hierarchy() const;
 
 private:
     container formatter_container_;
-    std::forward_list<dynamic::schema::ownership_hierarchy>
-        ownership_hierarchy_;
+    std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };
 
 } } }

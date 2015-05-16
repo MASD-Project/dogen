@@ -35,7 +35,7 @@ std::string settings_factory::settings_key() const {
 }
 
 boost::shared_ptr<settings::opaque_settings>
-settings_factory::make(const dynamic::schema::object& /*o*/) const {
+settings_factory::make(const dynamic::object& /*o*/) const {
     auto r(boost::make_shared<settings::odb_settings>());
     return r;
 }

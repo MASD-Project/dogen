@@ -32,7 +32,7 @@ operation::operation(operation&& rhs)
 
 operation::operation(
     const std::string& documentation,
-    const dogen::dynamic::schema::object& extensions,
+    const dogen::dynamic::object& extensions,
     const std::string& name,
     const std::list<dogen::sml::parameter>& parameters,
     const boost::optional<dogen::sml::nested_qname>& type)
@@ -81,19 +81,19 @@ void operation::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& operation::extensions() const {
+const dogen::dynamic::object& operation::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::schema::object& operation::extensions() {
+dogen::dynamic::object& operation::extensions() {
     return extensions_;
 }
 
-void operation::extensions(const dogen::dynamic::schema::object& v) {
+void operation::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void operation::extensions(const dogen::dynamic::schema::object&& v) {
+void operation::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 

@@ -45,7 +45,7 @@ cpp::settings::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-workflow::workflow(const dynamic::schema::object& root_object)
+workflow::workflow(const dynamic::object& root_object)
     : factory_(root_object, registrar().opaque_settings_factories()) { }
 
 void workflow::validate() const {
@@ -65,7 +65,7 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }
 
-bundle workflow::execute(const dynamic::schema::object& o) const {
+bundle workflow::execute(const dynamic::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle.";
     bundle r(factory_.make(o));
 

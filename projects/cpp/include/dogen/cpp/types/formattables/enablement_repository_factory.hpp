@@ -27,9 +27,9 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/global_enablement_properties.hpp"
@@ -46,16 +46,16 @@ class enablement_repository_factory {
 private:
 private:
     struct field_definitions {
-        dynamic::schema::field_definition model_enabled;
-        dynamic::schema::field_definition facet_enabled;
-        dynamic::schema::field_definition formatter_enabled;
+        dynamic::field_definition model_enabled;
+        dynamic::field_definition facet_enabled;
+        dynamic::field_definition formatter_enabled;
     };
 
     /**
      * @brief Creates the field definitions for all formatters.
      */
     std::unordered_map<std::string, field_definitions>
-    create_field_definitions(const dynamic::schema::repository& rp,
+    create_field_definitions(const dynamic::repository& rp,
         const formatters::container& fc) const;
 
 private:
@@ -67,15 +67,15 @@ private:
     obtain_global_properties(
         const std::unordered_map<std::string, field_definitions>&
         field_definitions,
-        const dynamic::schema::object& root_object) const;
+        const dynamic::object& root_object) const;
 
 public:
     /**
      * @brief Create the enablement repository.
      */
     enablement_repository make(
-        const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+        const dynamic::repository& rp,
+        const dynamic::object& root_object,
         const formatters::container& fc,
         const sml::model& m) const;
 };

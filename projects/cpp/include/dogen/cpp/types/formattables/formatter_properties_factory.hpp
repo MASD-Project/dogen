@@ -29,8 +29,8 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
@@ -45,8 +45,8 @@ namespace formattables {
 
 class formatter_properties_factory {
 public:
-    formatter_properties_factory(const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+    formatter_properties_factory(const dynamic::repository& rp,
+        const dynamic::object& root_object,
         const formatters::container& fc);
 
 private:
@@ -54,8 +54,8 @@ private:
      * @brief Obtain integrated facets.
      */
     std::unordered_map<std::string, std::unordered_set<std::string> >
-    obtain_integrated_facets(const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+    obtain_integrated_facets(const dynamic::repository& rp,
+        const dynamic::object& root_object,
         const formatters::container& fc) const;
 
 public:

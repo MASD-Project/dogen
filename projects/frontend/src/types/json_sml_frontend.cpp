@@ -46,7 +46,7 @@ std::list<std::string> json_sml_frontend::supported_extensions() const {
 }
 
 sml::model json_sml_frontend::
-generate(const dynamic::schema::workflow& w, const input_descriptor& id,
+generate(const dynamic::workflow& w, const input_descriptor& id,
     const frontend_settings& /*s*/) {
     sml::json_hydrator h(w);
     return h.hydrate(id.path());

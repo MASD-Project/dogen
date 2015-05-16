@@ -24,7 +24,7 @@ file(GLOB_RECURSE stitch_files RELATIVE
 
 add_library(stitch STATIC ${stitch_files})
 target_link_libraries(stitch
-    dynamic_schema
+    dynamic
     utility
     formatters
     ${Boost_LIBRARIES})

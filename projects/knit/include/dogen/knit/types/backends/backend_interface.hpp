@@ -31,7 +31,7 @@
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp" // FIXME
+#include "dogen/dynamic/types/repository.hpp" // FIXME
 
 namespace dogen {
 namespace knit {
@@ -62,7 +62,7 @@ public:
      */
     virtual std::forward_list<formatters::file> generate(
         const config::knitting_options& o,
-        const dynamic::schema::repository& rp, const sml::model& m) = 0;
+        const dynamic::repository& rp, const sml::model& m) = 0;
 };
 
 } } }

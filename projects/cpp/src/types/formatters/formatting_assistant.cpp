@@ -89,7 +89,7 @@ make_setter_return_type(const std::string& containing_type_name,
 }
 
 formatting_assistant::formatting_assistant(const formattables::entity& e,
-    const dynamic::schema::ownership_hierarchy& oh,
+    const dynamic::ownership_hierarchy& oh,
     const formatters::file_types ft) :
     entity_(e), ownership_hierarchy_(oh),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),

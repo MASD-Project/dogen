@@ -367,7 +367,7 @@
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2166,7 +2166,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2577,7 +2577,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

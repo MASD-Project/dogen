@@ -30,8 +30,8 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -44,7 +44,7 @@ namespace knit {
 class frontend_to_middle_end_workflow {
 public:
     frontend_to_middle_end_workflow(const config::knitting_options& o,
-        const dynamic::schema::repository& rp);
+        const dynamic::repository& rp);
 
 private:
     /**
@@ -102,7 +102,7 @@ public:
 
 private:
     const config::knitting_options& knitting_options_;
-    const dynamic::schema::repository repository_;
+    const dynamic::repository repository_;
 };
 
 } }

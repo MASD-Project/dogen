@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
 
@@ -28,19 +28,19 @@ namespace cpp {
 namespace formattables {
 
 formatter_properties_factory::formatter_properties_factory(
-    const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object,
+    const dynamic::repository& rp,
+    const dynamic::object& root_object,
     const formatters::container& fc)
     : integrated_facets_(obtain_integrated_facets(rp, root_object, fc)) {}
 
 std::unordered_map<std::string, std::unordered_set<std::string> >
 formatter_properties_factory::
-obtain_integrated_facets(const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object,
+obtain_integrated_facets(const dynamic::repository& rp,
+    const dynamic::object& root_object,
     const formatters::container& fc) const {
 
-    const dynamic::schema::field_selector fs(root_object);
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::field_selector fs(root_object);
+    const dynamic::repository_selector s(rp);
     const auto& ifct(traits::integrated_facet());
     std::unordered_map<std::string, std::unordered_set<std::string> > r;
     for (const auto& f : fc.all_formatters()) {

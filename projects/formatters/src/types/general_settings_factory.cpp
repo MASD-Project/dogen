@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/text.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/types/text.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
@@ -47,7 +47,7 @@ general_settings_factory::general_settings_factory(const repository& rp)
     : repository_(rp) { }
 
 general_settings_factory::general_settings_factory(const repository& rp,
-    const dynamic::schema::object& fallback)
+    const dynamic::object& fallback)
     : repository_(rp),
       default_licence_text_(extract_licence_text(fallback)),
       default_copyright_notices_(extract_copyright_notices(fallback)),
@@ -56,8 +56,8 @@ general_settings_factory::general_settings_factory(const repository& rp,
       default_generate_preamble_(extract_generate_preamble(fallback)) { }
 
 boost::optional<std::string> general_settings_factory::
-extract_licence_text(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_licence_text(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::licence_name()))
         return boost::optional<std::string>();
@@ -72,8 +72,8 @@ extract_licence_text(const dynamic::schema::object& o) const {
 }
 
 boost::optional<std::list<std::string> > general_settings_factory::
-extract_copyright_notices(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_copyright_notices(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
 
     if (!fs.has_field(traits::copyright_notices()))
@@ -83,7 +83,7 @@ extract_copyright_notices(const dynamic::schema::object& o) const {
 }
 
 boost::optional<licence> general_settings_factory::
-extract_licence(const dynamic::schema::object& o) const {
+extract_licence(const dynamic::object& o) const {
     const auto overriden_licence_text(extract_licence_text(o));
     const auto overriden_copyright_notices(extract_copyright_notices(o));
 
@@ -107,8 +107,8 @@ extract_licence(const dynamic::schema::object& o) const {
 }
 
 boost::optional<modeline_group> general_settings_factory::
-extract_modeline_group(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_modeline_group(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::modeline_group_name()))
         return boost::optional<modeline_group>();
@@ -135,7 +135,7 @@ modeline general_settings_factory::get_modeline_from_group(
 
 boost::optional<modeline> general_settings_factory::
 extract_modeline(const std::string& modeline_name,
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
 
     const auto overridden_modeline_group(extract_modeline_group(o));
     if (!overridden_modeline_group && !default_modeline_group_)
@@ -150,8 +150,8 @@ extract_modeline(const std::string& modeline_name,
 }
 
 boost::optional<std::string> general_settings_factory::
-extract_marker(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_marker(const dynamic::object& o) const {
+    using namespace dynamic;
     using cgm = traits::code_generation_marker;
 
     const field_selector fs(o);
@@ -170,7 +170,7 @@ extract_marker(const dynamic::schema::object& o) const {
 }
 
 std::string general_settings_factory::
-extract_marker_or_default(const dynamic::schema::object& o) const {
+extract_marker_or_default(const dynamic::object& o) const {
     const auto overridden_marker(extract_marker(o));
     if (overridden_marker)
         return *overridden_marker;
@@ -181,8 +181,8 @@ extract_marker_or_default(const dynamic::schema::object& o) const {
 }
 
 boost::optional<bool> general_settings_factory::
-extract_generate_preamble(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_generate_preamble(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::generate_preamble()))
         return boost::optional<bool>();
@@ -191,7 +191,7 @@ extract_generate_preamble(const dynamic::schema::object& o) const {
 }
 
 bool general_settings_factory::
-extract_generate_preamble_or_default(const dynamic::schema::object& o) const {
+extract_generate_preamble_or_default(const dynamic::object& o) const {
     const auto overriden_generate_preamble(extract_generate_preamble(o));
     if (!overriden_generate_preamble && !default_generate_preamble_)
         return true; // random default.
@@ -204,7 +204,7 @@ extract_generate_preamble_or_default(const dynamic::schema::object& o) const {
 
 general_settings
 general_settings_factory::make(const std::string& modeline_name,
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
     const auto modeline(extract_modeline(modeline_name, o));
     const auto licence(extract_licence(o));
     const auto marker(extract_marker_or_default(o));

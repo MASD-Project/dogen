@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/building_error.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"
@@ -41,16 +41,16 @@ namespace dogen {
 namespace stitch {
 
 stitching_settings_factory::
-stitching_settings_factory(const dynamic::schema::repository& rp)
+stitching_settings_factory(const dynamic::repository& rp)
     : formatter_properties_(make_formatter_properties(rp)) {}
 
 stitching_settings_factory::formatter_properties stitching_settings_factory::
-make_formatter_properties(const dynamic::schema::repository& rp) const {
+make_formatter_properties(const dynamic::repository& rp) const {
     formatter_properties r;
     bool found_stream_variable_name(false), found_template_path(false),
         found_output_path(false), found_relative_output_directory(false),
         found_inclusion_dependency(false), found_containing_namespaces(false);
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     for (const auto fd : s.select_fields_by_model_name(traits::model_name())) {
         if (fd.name().simple() == traits::stream_variable_name()) {
             r.stream_variable_name = fd;
@@ -119,16 +119,16 @@ make_formatter_properties(const dynamic::schema::repository& rp) const {
 }
 
 std::string stitching_settings_factory::
-extract_stream_variable_name(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_stream_variable_name(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     const auto& fp(formatter_properties_);
     return fs.get_text_content_or_default(fp.stream_variable_name);
 }
 
 boost::optional<boost::filesystem::path> stitching_settings_factory::
-extract_template_path(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_template_path(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::template_path()))
         return boost::optional<boost::filesystem::path>();
@@ -138,8 +138,8 @@ extract_template_path(const dynamic::schema::object& o) const {
 }
 
 boost::optional<boost::filesystem::path> stitching_settings_factory::
-extract_output_path(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_output_path(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::output_path()))
         return boost::optional<boost::filesystem::path>();
@@ -149,8 +149,8 @@ extract_output_path(const dynamic::schema::object& o) const {
 }
 
 boost::optional<boost::filesystem::path> stitching_settings_factory::
-extract_relative_output_directory(const dynamic::schema::object& o) const {
-    using namespace dynamic::schema;
+extract_relative_output_directory(const dynamic::object& o) const {
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(traits::relative_output_directory()))
         return boost::optional<boost::filesystem::path>();
@@ -160,9 +160,9 @@ extract_relative_output_directory(const dynamic::schema::object& o) const {
 }
 
 std::list<std::string> stitching_settings_factory::
-extract_inclusion_dependencies(const dynamic::schema::object& o) const {
+extract_inclusion_dependencies(const dynamic::object& o) const {
     std::list<std::string> r;
-    using namespace dynamic::schema;
+    using namespace dynamic;
     const field_selector fs(o);
     const auto& fd(formatter_properties_.inclusion_dependency);
     if (!fs.has_field(fd))
@@ -172,9 +172,9 @@ extract_inclusion_dependencies(const dynamic::schema::object& o) const {
 }
 
 std::list<std::string> stitching_settings_factory::
-extract_containing_namespaces(const dynamic::schema::object& o) const {
+extract_containing_namespaces(const dynamic::object& o) const {
     std::list<std::string> r;
-    using namespace dynamic::schema;
+    using namespace dynamic;
     const field_selector fs(o);
     const auto& fd(formatter_properties_.containing_namespaces);
     if (!fs.has_field(fd))
@@ -189,7 +189,7 @@ extract_containing_namespaces(const dynamic::schema::object& o) const {
 }
 
 stitching_settings stitching_settings_factory::
-make(const dynamic::schema::object& o) const {
+make(const dynamic::object& o) const {
     stitching_settings r;
     r.stream_variable_name(extract_stream_variable_name(o));
     r.template_path(extract_template_path(o));

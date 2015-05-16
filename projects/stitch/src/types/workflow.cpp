@@ -26,8 +26,8 @@
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/schema/types/repository_workflow.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/repository_workflow.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -56,7 +56,7 @@ namespace stitch {
 workflow::workflow() : formatter_() {}
 
 void workflow::perform_expansion(const boost::filesystem::path& p,
-    dynamic::schema::object& o) const {
+    dynamic::object& o) const {
     expander e;
     e.expand(p, o);
 }
@@ -110,9 +110,9 @@ workflow::read_text_templates_activity(
     return r;
 }
 
-std::forward_list<dynamic::schema::ownership_hierarchy>
+std::forward_list<dynamic::ownership_hierarchy>
 workflow::obtain_ownership_hierarchy_activity() const {
-    std::forward_list<dynamic::schema::ownership_hierarchy> r;
+    std::forward_list<dynamic::ownership_hierarchy> r;
     r.push_front(formatter_.ownership_hierarchy());
     return r;
 }
@@ -125,16 +125,16 @@ create_formatters_repository_activity() const {
     return hw.hydrate(dirs);
 }
 
-dynamic::schema::repository workflow::create_schema_repository_activity(
-    const std::forward_list<dynamic::schema::ownership_hierarchy>& oh) const {
+dynamic::repository workflow::create_dynamic_repository_activity(
+    const std::forward_list<dynamic::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / fields_dir);
-    dynamic::schema::repository_workflow w;
+    dynamic::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
 std::forward_list<text_template> workflow::parse_text_templates_activity(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
@@ -154,11 +154,11 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
 }
 
 void workflow::populate_settings_bundle_activity(
-    const dynamic::schema::repository& schema_repository,
+    const dynamic::repository& dynamic_repository,
     const dogen::formatters::repository& formatters_repository,
     std::forward_list<text_template>& text_templates) const {
 
-    settings_bundle_factory f(schema_repository, formatters_repository);
+    settings_bundle_factory f(dynamic_repository, formatters_repository);
     for (auto& tt : text_templates)
         tt.settings(f.make(tt.extensions()));
 }
@@ -184,11 +184,11 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto templates_as_strings(read_text_templates_activity(paths));
     const auto oh(obtain_ownership_hierarchy_activity());
-    const auto schema_rp(create_schema_repository_activity(oh));
+    const auto dynamic_rp(create_dynamic_repository_activity(oh));
 
-    auto tt(parse_text_templates_activity(schema_rp, templates_as_strings));
+    auto tt(parse_text_templates_activity(dynamic_rp, templates_as_strings));
     const auto formatters_rp(create_formatters_repository_activity());
-    populate_settings_bundle_activity(schema_rp, formatters_rp, tt);
+    populate_settings_bundle_activity(dynamic_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
     write_files_activity(files);
 }

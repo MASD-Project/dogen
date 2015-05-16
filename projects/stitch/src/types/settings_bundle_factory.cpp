@@ -32,26 +32,26 @@ namespace dogen {
 namespace stitch {
 
 settings_bundle_factory::
-settings_bundle_factory(const dynamic::schema::repository& schema_repository,
+settings_bundle_factory(const dynamic::repository& dynamic_repository,
     const dogen::formatters::repository& formatters_repository)
-    : schema_repository_(schema_repository),
+    : dynamic_repository_(dynamic_repository),
       formatters_repository_(formatters_repository) {}
 
 boost::optional<formatters::general_settings> settings_bundle_factory::
-make_general_settings(const dynamic::schema::object& o) const {
+make_general_settings(const dynamic::object& o) const {
     using dogen::formatters::general_settings_factory;
     general_settings_factory f(formatters_repository_);
     return f.make(cpp_modeline_name, o);
 }
 
 stitching_settings settings_bundle_factory::
-make_stitching_settings(const dynamic::schema::object& o) const {
-    stitching_settings_factory f(schema_repository_);
+make_stitching_settings(const dynamic::object& o) const {
+    stitching_settings_factory f(dynamic_repository_);
     return f.make(o);
 }
 
 settings_bundle
-settings_bundle_factory::make(const dynamic::schema::object& o) const {
+settings_bundle_factory::make(const dynamic::object& o) const {
     settings_bundle r;
     r.general_settings(make_general_settings(o));
     r.stitching_settings(make_stitching_settings(o));

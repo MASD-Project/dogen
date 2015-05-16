@@ -62,7 +62,7 @@ private:
      */
     std::forward_list<formatters::file>
     format_files(const config::knitting_options& o,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const sml::model& m) const;
 
     /**
@@ -80,7 +80,7 @@ public:
 
     std::forward_list<formatters::file> generate(
         const config::knitting_options& o,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const sml::model& m) override;
 };
 

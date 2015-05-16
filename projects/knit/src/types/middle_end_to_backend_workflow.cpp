@@ -38,7 +38,7 @@ namespace knit {
 
 middle_end_to_backend_workflow::
 middle_end_to_backend_workflow(const config::knitting_options& o,
-    const dynamic::schema::repository& rp, const output_fn& of)
+    const dynamic::repository& rp, const output_fn& of)
     : knitting_options_(o), repository_(rp), output_(of) {}
 
 bool middle_end_to_backend_workflow::housekeeping_required() const {

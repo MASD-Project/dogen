@@ -28,9 +28,9 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
@@ -42,7 +42,7 @@ namespace settings {
 
 class inclusion_directives_settings_factory {
 public:
-    inclusion_directives_settings_factory(const dynamic::schema::repository& rp,
+    inclusion_directives_settings_factory(const dynamic::repository& rp,
         const formatters::container& fc);
 
 private:
@@ -51,8 +51,8 @@ private:
      */
     struct formatter_properties {
         std::string formatter_name;
-        dynamic::schema::field_definition inclusion_directive;
-        dynamic::schema::field_definition inclusion_required;
+        dynamic::field_definition inclusion_directive;
+        dynamic::field_definition inclusion_required;
     };
 
     /**
@@ -60,7 +60,7 @@ private:
      * formatter.
      */
     formatter_properties make_formatter_properties(
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const formatters::formatter_interface& f) const;
 
     /**
@@ -68,15 +68,15 @@ private:
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::schema::repository& rp,
+    make_formatter_properties(const dynamic::repository& rp,
         const formatters::container& fc) const;
 
     /**
      * @brief Gets up the top-level (non-formatter specific) inclusion
      * required field.
      */
-    dynamic::schema::field_definition get_top_level_inclusion_required_field(
-        const dynamic::schema::repository& rp) const;
+    dynamic::field_definition get_top_level_inclusion_required_field(
+        const dynamic::repository& rp) const;
 
 private:
     /**
@@ -84,32 +84,32 @@ private:
      */
     boost::optional<std::string> obtain_inclusion_directive_for_formatter(
         const formatter_properties& fp,
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
     /**
      * @brief Obtains the inclusion required flag for a given formatter.
      */
     bool obtain_inclusion_required_for_formatter(
         const formatter_properties& fp,
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
     /**
      * @brief Obtains the value of the inclusion required flag.
      */
     bool obtain_top_level_inclusion_required(
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
 public:
     /**
      * @brief Produce the inclusion directive settings for all
      * formatters.
      */
-    inclusion_directives_settings make(const dynamic::schema::object& o) const;
+    inclusion_directives_settings make(const dynamic::object& o) const;
 
 private:
     const std::unordered_map<std::string, formatter_properties>
     formatter_properties_;
-    dynamic::schema::field_definition inclusion_required_;
+    dynamic::field_definition inclusion_required_;
 };
 
 } } }

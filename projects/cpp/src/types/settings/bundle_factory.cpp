@@ -38,7 +38,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bundle_factory::bundle_factory(const dynamic::schema::object& root_object,
+bundle_factory::bundle_factory(const dynamic::object& root_object,
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories) :
@@ -55,7 +55,7 @@ dogen::formatters::repository bundle_factory::create_formatters_repository(
 }
 
 dogen::formatters::general_settings bundle_factory::
-create_general_settings(const dynamic::schema::object& o) const {
+create_general_settings(const dynamic::object& o) const {
     using dogen::formatters::general_settings_factory;
     general_settings_factory f(formatters_repository_, root_object_);
     return f.make(cpp_modeline_name, o);
@@ -64,8 +64,7 @@ create_general_settings(const dynamic::schema::object& o) const {
 std::unordered_map<
     std::string,
     boost::shared_ptr<opaque_settings>
-    > bundle_factory::create_opaque_settings(
-        const dynamic::schema::object& o) const {
+> bundle_factory::create_opaque_settings(const dynamic::object& o) const {
 
     std::unordered_map<
         std::string,
@@ -78,7 +77,7 @@ std::unordered_map<
     return r;
 }
 
-bundle bundle_factory::make(const dynamic::schema::object& o) const {
+bundle bundle_factory::make(const dynamic::object& o) const {
     bundle r;
     r.general_settings(create_general_settings(o));
     r.opaque_settings(create_opaque_settings(o));

@@ -27,8 +27,8 @@
 
 #include <memory>
 #include <forward_list>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
@@ -51,8 +51,8 @@ public:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     execute(const config::cpp_options& opts,
-        const dynamic::schema::repository& srp,
-        const dynamic::schema::object& root_object,
+        const dynamic::repository& srp,
+        const dynamic::object& root_object,
         const formatters::container& fc,
         const settings::workflow& w,
         const sml::model& m) const;

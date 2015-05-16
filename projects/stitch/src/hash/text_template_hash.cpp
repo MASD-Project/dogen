@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/stitch/hash/line_hash.hpp"
+#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
 #include "dogen/stitch/hash/settings_bundle_hash.hpp"
 
 namespace {

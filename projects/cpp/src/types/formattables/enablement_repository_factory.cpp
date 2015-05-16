@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
@@ -83,9 +83,9 @@ private:
 std::unordered_map<std::string,
                    enablement_repository_factory::field_definitions>
 enablement_repository_factory::create_field_definitions(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::container& fc) const {
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     std::unordered_map<std::string, field_definitions> r;
     for (const auto& f : fc.all_formatters()) {
         const auto oh(f->ownership_hierarchy());
@@ -110,9 +110,9 @@ enablement_repository_factory::create_field_definitions(
 std::unordered_map<std::string, global_enablement_properties>
 enablement_repository_factory::obtain_global_properties(
     const std::unordered_map<std::string, field_definitions>& field_definitions,
-    const dynamic::schema::object& root_object) const {
+    const dynamic::object& root_object) const {
     std::unordered_map<std::string, global_enablement_properties> r;
-    const dynamic::schema::field_selector fs(root_object);
+    const dynamic::field_selector fs(root_object);
     for (const auto& pair : field_definitions) {
         const auto& fn(pair.first);
         const auto& fd(pair.second);
@@ -129,8 +129,8 @@ enablement_repository_factory::obtain_global_properties(
 }
 
 enablement_repository enablement_repository_factory::make(
-    const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object,
+    const dynamic::repository& rp,
+    const dynamic::object& root_object,
     const formatters::container& fc,
     const sml::model& m) const {
 

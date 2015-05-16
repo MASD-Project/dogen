@@ -29,8 +29,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml/serialization/parameter_ser.hpp"
+#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 
 
 namespace boost {

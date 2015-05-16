@@ -35,12 +35,12 @@
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
+#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 
 
 namespace boost {

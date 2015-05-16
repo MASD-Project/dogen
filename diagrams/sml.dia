@@ -4122,7 +4122,7 @@ for Java, etc.#</dia:string>
             <dia:string>#extensions#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#schema::object#</dia:string>
+            <dia:string>#dynamic::object#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -33,10 +33,10 @@
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
+#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 
 
 BOOST_CLASS_TRACKING(

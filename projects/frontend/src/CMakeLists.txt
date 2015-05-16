@@ -25,7 +25,7 @@ file(GLOB_RECURSE all_files RELATIVE
 add_library(frontend STATIC ${all_files})
 target_link_libraries(frontend
     config
-    dynamic_schema
+    dynamic
     dia
     sml
     dia_to_sml

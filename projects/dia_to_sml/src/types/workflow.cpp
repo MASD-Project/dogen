@@ -42,8 +42,7 @@ static logger lg(logger_factory("dia_to_sml.workflow"));
 namespace dogen {
 namespace dia_to_sml {
 
-workflow::workflow(const dynamic::schema::workflow& w)
-    : schema_workflow_(w) { }
+workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
 
 sml::qname
 workflow::create_qualified_name_for_model(const std::string& model_name,
@@ -126,7 +125,7 @@ void workflow::transformation_activity(const processed_object& o) {
 
 void workflow::graph_to_context_activity(const graph_type& g) {
     transformer_ = std::unique_ptr<transformer>(
-        new transformer(schema_workflow_, context_));
+        new transformer(dynamic_workflow_, context_));
     const auto f(std::bind(&workflow::transformation_activity, this,
             std::placeholders::_1));
     visitor v(f);

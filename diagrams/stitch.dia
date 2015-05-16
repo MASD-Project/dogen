@@ -828,7 +828,7 @@
             <dia:string>#extensions#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#schema::object#</dia:string>
+            <dia:string>#dynamic::object#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2974,7 +2974,7 @@
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#dynamic::schema::object&amp;#</dia:string>
+                <dia:string>#dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

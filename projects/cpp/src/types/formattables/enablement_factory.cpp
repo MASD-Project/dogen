@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/traits.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/enablement_factory.hpp"
 
@@ -41,7 +41,7 @@ namespace cpp {
 namespace formattables {
 
 enablement_factory::enablement_factory(
-    const dynamic::schema::repository& srp,
+    const dynamic::repository& srp,
     const formatters::container& fc,
     const std::unordered_map<std::string,
                              global_enablement_properties>& gep)
@@ -50,9 +50,9 @@ enablement_factory::enablement_factory(
 
 std::unordered_map<std::string, enablement_factory::field_definitions>
 enablement_factory::create_field_definitions(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::container& fc) const {
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
 
     std::unordered_map<std::string, field_definitions> r;
     for (const auto& f : fc.all_formatters()) {
@@ -70,9 +70,9 @@ enablement_factory::create_field_definitions(
 
 std::unordered_map<std::string, enablement_factory::local_enablement_properties>
 enablement_factory::obtain_local_properties(
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
     std::unordered_map<std::string, local_enablement_properties> r;
-    const dynamic::schema::field_selector fs(o);
+    const dynamic::field_selector fs(o);
     for (const auto& pair : field_definitions_) {
         const auto& fn(pair.first);
         const auto& fd(pair.second);
@@ -122,7 +122,7 @@ enablement_factory::compute_enablement_value(
 }
 
 std::unordered_map<std::string, bool>
-enablement_factory::make(const dynamic::schema::object& o) const {
+enablement_factory::make(const dynamic::object& o) const {
     const auto lep(obtain_local_properties(o));
     return compute_enablement_value(lep);
 }

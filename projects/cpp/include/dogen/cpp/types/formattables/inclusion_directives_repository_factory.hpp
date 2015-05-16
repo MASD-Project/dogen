@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
@@ -46,7 +46,7 @@ public:
      * @brief Create the inclusion directives for an SML model.
      */
     inclusion_directives_repository make(
-        const dynamic::schema::repository& srp,
+        const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,
         const sml::model& m) const;

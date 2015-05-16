@@ -95,7 +95,7 @@ private:
 }
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-make(const dynamic::schema::repository& srp, const container& c,
+make(const dynamic::repository& srp, const container& c,
     const inclusion_directives_repository& idrp,
     const sml::model& m) const {
 

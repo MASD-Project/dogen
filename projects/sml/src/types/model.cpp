@@ -48,7 +48,7 @@ model::model(model&& rhs)
 
 model::model(
     const std::string& documentation,
-    const dogen::dynamic::schema::object& extensions,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -137,19 +137,19 @@ void model::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& model::extensions() const {
+const dogen::dynamic::object& model::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::schema::object& model::extensions() {
+dogen::dynamic::object& model::extensions() {
     return extensions_;
 }
 
-void model::extensions(const dogen::dynamic::schema::object& v) {
+void model::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void model::extensions(const dogen::dynamic::schema::object&& v) {
+void model::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 

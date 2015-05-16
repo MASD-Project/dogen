@@ -5440,7 +5440,7 @@ seems like the least bad approach.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#schema::ownership_hierarchy#</dia:string>
+            <dia:string>#dynamic::ownership_hierarchy#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5660,7 +5660,7 @@ seems like the least bad approach.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;schema::ownership_hierarchy&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;dynamic::ownership_hierarchy&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5764,7 +5764,7 @@ seems like the least bad approach.
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16217,7 +16217,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21312,7 +21312,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21646,7 +21646,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -22476,7 +22476,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -22524,7 +22524,7 @@ registry of all available formatters.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24125,7 +24125,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -25428,7 +25428,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -26578,10 +26578,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#schema_repository_;#</dia:string>
+            <dia:string>#dynamic_repository_;#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#schema::repository#</dia:string>
+            <dia:string>#dynamic::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26681,7 +26681,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp; #</dia:string>
+                <dia:string>#const dynamic::repository&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28216,7 +28216,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28626,7 +28626,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28674,7 +28674,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -29924,7 +29924,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30787,7 +30787,7 @@ verbose.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32082,7 +32082,7 @@ verbose.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33408,7 +33408,7 @@ verbose.#</dia:string>
                 <dia:string>#root_object#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -33975,7 +33975,7 @@ verbose.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34224,7 +34224,7 @@ verbose.#</dia:string>
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::schema::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34275,7 +34275,7 @@ verbose.#</dia:string>
                 <dia:string>#o#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const schema::object&amp;#</dia:string>
+                <dia:string>#const dynamic::object&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

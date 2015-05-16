@@ -72,7 +72,7 @@ private:
      * API.
      */
     std::list<std::pair<std::string, std::string> >
-    obtain_opaque_parameters(const dynamic::schema::object& o) const;
+    obtain_opaque_parameters(const dynamic::object& o) const;
 
 private:
     /**

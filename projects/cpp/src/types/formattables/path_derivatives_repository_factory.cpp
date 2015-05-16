@@ -91,8 +91,8 @@ void generator::generate(const sml::qname& qn) {
 std::unordered_map<std::string, settings::path_settings>
 path_derivatives_repository_factory::
 create_path_settings(const config::cpp_options& opts,
-    const dynamic::schema::repository& rp,
-    const dynamic::schema::object& o,
+    const dynamic::repository& rp,
+    const dynamic::object& o,
     const formatters::container& c) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating path settings.";
@@ -117,8 +117,8 @@ obtain_path_derivatives(
 }
 
 path_derivatives_repository path_derivatives_repository_factory::make(
-    const config::cpp_options& opts, const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object, const formatters::container& c,
+    const config::cpp_options& opts, const dynamic::repository& rp,
+    const dynamic::object& root_object, const formatters::container& c,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";

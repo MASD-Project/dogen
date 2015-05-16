@@ -28,9 +28,9 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/schema/types/scope_types.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/dynamic/types/scope_types.hpp"
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -47,7 +47,7 @@ public:
     ~json_hydrator() noexcept = default;
 
 public:
-    explicit json_hydrator(const dynamic::schema::workflow& w);
+    explicit json_hydrator(const dynamic::workflow& w);
 
 private:
     /**
@@ -79,9 +79,9 @@ private:
      * @brief Creates the dynamic object by reading meta-data from the
      * property tree.
      */
-    dynamic::schema::object
-    create_dynamic_extensions(const boost::property_tree::ptree& pt,
-        const dynamic::schema::scope_types st) const;
+    dynamic::object create_dynamic_extensions(
+        const boost::property_tree::ptree& pt,
+        const dynamic::scope_types st) const;
 
     /**
      * @brief Reads an SML element from the property tree.
@@ -113,7 +113,7 @@ public:
     model hydrate(const boost::filesystem::path& p) const;
 
 private:
-    const dynamic::schema::workflow schema_workflow_;
+    const dynamic::workflow dynamic_workflow_;
 };
 
 } }

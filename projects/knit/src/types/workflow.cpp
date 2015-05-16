@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/dynamic/schema/types/repository_workflow.hpp"
+#include "dogen/dynamic/types/repository_workflow.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/io/knitting_options_io.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
@@ -82,21 +82,21 @@ bool workflow::housekeeping_required() const {
         knitting_options_.output().output_to_file();
 }
 
-std::forward_list<dynamic::schema::ownership_hierarchy> workflow::
+std::forward_list<dynamic::ownership_hierarchy> workflow::
 obtain_ownership_hierarchy_activity() const {
     const auto rg(backend::workflow::registrar());
-    std::forward_list<dynamic::schema::ownership_hierarchy> r;
+    std::forward_list<dynamic::ownership_hierarchy> r;
     for (const auto b : rg.backends())
         r.splice_after(r.before_begin(), b->ownership_hierarchy());
 
     return r;
 }
 
-dynamic::schema::repository workflow::setup_schema_repository_activity(
-    const std::forward_list<dynamic::schema::ownership_hierarchy>& oh) const {
+dynamic::repository workflow::setup_dynamic_repository_activity(
+    const std::forward_list<dynamic::ownership_hierarchy>& oh) const {
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / fields_dir);
-    dynamic::schema::repository_workflow w;
+    dynamic::repository_workflow w;
     return w.execute(oh, std::forward_list<boost::filesystem::path> { dir });
 }
 
@@ -106,7 +106,7 @@ void workflow::execute() const {
 
     try {
         const auto oh(obtain_ownership_hierarchy_activity());
-        const auto rp(setup_schema_repository_activity(oh));
+        const auto rp(setup_dynamic_repository_activity(oh));
 
         frontend_to_middle_end_workflow fmw(knitting_options_, rp);
         const auto m(fmw.execute());

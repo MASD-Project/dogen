@@ -53,7 +53,7 @@ namespace {
  */
 class generator {
 public:
-    generator(const dynamic::schema::repository& srp,
+    generator(const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp) : factory_(srp, fc, pdrp) { }
 
@@ -96,7 +96,7 @@ private:
 }
 
 inclusion_directives_repository inclusion_directives_repository_factory::make(
-    const dynamic::schema::repository& srp,
+    const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
     const sml::model& m) const {

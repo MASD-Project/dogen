@@ -28,9 +28,9 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-dynamic::schema::ownership_hierarchy
+dynamic::ownership_hierarchy
 class_header_formatter::ownership_hierarchy() const {
-    static dynamic::schema::ownership_hierarchy
+    static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
             traits::class_header_formatter_name(),
             formatters::traits::header_formatter_group_name());

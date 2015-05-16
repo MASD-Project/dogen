@@ -26,7 +26,7 @@
 #endif
 
 #include <sstream>
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
@@ -75,7 +75,7 @@ public:
 
 public:
     formatting_assistant(const formattables::entity& e,
-        const dynamic::schema::ownership_hierarchy& oh,
+        const dynamic::ownership_hierarchy& oh,
         const formatters::file_types ft);
 
 private:
@@ -177,7 +177,7 @@ public:
 
 private:
     const formattables::entity& entity_;
-    const dynamic::schema::ownership_hierarchy& ownership_hierarchy_;
+    const dynamic::ownership_hierarchy& ownership_hierarchy_;
     const formattables::formatter_properties formatter_properties_;
     const formatters::file_types file_type_;
     std::ostringstream stream_;

@@ -19,7 +19,6 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"

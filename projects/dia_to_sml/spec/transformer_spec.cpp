@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/dia_to_sml/types/transformer.hpp"
 #include "dogen/dia_to_sml/types/profiler.hpp"
@@ -32,8 +32,8 @@
 #include "dogen/dia_to_sml/io/context_io.hpp"
 #include "dogen/dia_to_sml/types/processed_object.hpp"
 #include "dogen/dia_to_sml/test/mock_processed_object_factory.hpp"
-#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/test/mock_repository_factory.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::dia_to_sml;
@@ -135,12 +135,12 @@ dogen::sml::qname get_parent_name(const dogen::sml::object& o) {
     return i->second.front();
 }
 
-dogen::dynamic::schema::repository empty_repository;
+dogen::dynamic::repository empty_repository;
 
 void transform(dogen::dia_to_sml::context& c,
     std::initializer_list<dogen::dia_to_sml::processed_object> lpo) {
 
-    using namespace dogen::dynamic::schema::test;
+    using namespace dogen::dynamic::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
@@ -154,7 +154,7 @@ void transform(dogen::dia_to_sml::context& c,
     const dogen::dia_to_sml::processed_object& po,
     const dogen::dia_to_sml::profile& p) {
 
-    using namespace dogen::dynamic::schema::test;
+    using namespace dogen::dynamic::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
     const auto w(mock_workflow_factory::non_validating_workflow(rp));

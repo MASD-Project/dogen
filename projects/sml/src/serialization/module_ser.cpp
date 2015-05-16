@@ -32,10 +32,10 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/module_ser.hpp"
+#include "dogen/dynamic/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/module_types_ser.hpp"
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
-#include "dogen/dynamic/schema/serialization/object_ser.hpp"
 
 
 namespace boost {

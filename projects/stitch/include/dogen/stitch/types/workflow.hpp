@@ -28,9 +28,9 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/ownership_hierarchy.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
@@ -57,7 +57,7 @@ private:
      * @brief Expands the dynamic object.
      */
     void perform_expansion(const boost::filesystem::path& p,
-        dynamic::schema::object& o) const;
+        dynamic::object& o) const;
 
 private:
     /**
@@ -94,7 +94,7 @@ private:
     /**
      * @brief Obtains the ownership hierarchy.
      */
-    std::forward_list<dynamic::schema::ownership_hierarchy>
+    std::forward_list<dynamic::ownership_hierarchy>
     obtain_ownership_hierarchy_activity() const;
 
     /**
@@ -103,17 +103,17 @@ private:
     dogen::formatters::repository create_formatters_repository_activity() const;
 
     /**
-     * @brief Sets up the dynamic schema repository.
+     * @brief Sets up the dynamic repository.
      */
-    dynamic::schema::repository create_schema_repository_activity(
-        const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
+    dynamic::repository create_dynamic_repository_activity(
+        const std::forward_list<dynamic::ownership_hierarchy>& oh)
         const;
 
     /**
      * @brief Parses all of the strings that contain text templates.
      */
     std::forward_list<text_template> parse_text_templates_activity(
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const std::forward_list<
         std::pair<boost::filesystem::path, std::string>
         >& text_templates_as_string) const;
@@ -122,7 +122,7 @@ private:
      * @brief Creates the settings bundles.
      */
     void populate_settings_bundle_activity(
-        const dynamic::schema::repository& schema_repository,
+        const dynamic::repository& dynamic_repository,
         const dogen::formatters::repository& formatters_repository,
         std::forward_list<text_template>& text_templates) const;
 

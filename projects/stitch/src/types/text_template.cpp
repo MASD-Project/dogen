@@ -25,7 +25,7 @@ namespace stitch {
 
 text_template::text_template(
     const dogen::stitch::settings_bundle& settings,
-    const dogen::dynamic::schema::object& extensions,
+    const dogen::dynamic::object& extensions,
     const std::list<dogen::stitch::line>& lines)
     : settings_(settings),
       extensions_(extensions),
@@ -66,19 +66,19 @@ void text_template::settings(const dogen::stitch::settings_bundle&& v) {
     settings_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& text_template::extensions() const {
+const dogen::dynamic::object& text_template::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::schema::object& text_template::extensions() {
+dogen::dynamic::object& text_template::extensions() {
     return extensions_;
 }
 
-void text_template::extensions(const dogen::dynamic::schema::object& v) {
+void text_template::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void text_template::extensions(const dogen::dynamic::schema::object&& v) {
+void text_template::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 

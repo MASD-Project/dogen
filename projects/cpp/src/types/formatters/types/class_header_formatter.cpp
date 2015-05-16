@@ -70,7 +70,7 @@ public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-    provide(const dynamic::schema::repository& srp,
+    provide(const dynamic::repository& srp,
         const formattables::inclusion_directives_repository& idr,
         const sml::object& o) const override;
 };
@@ -80,7 +80,7 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const dynamic::schema::repository& rp,
+provider::provide(const dynamic::repository& rp,
     const formattables::inclusion_directives_repository& idr,
     const sml::object& o) const {
 
@@ -134,9 +134,9 @@ std::string class_header_formatter::static_formatter_name() {
     return traits::class_header_formatter_name();
 }
 
-dynamic::schema::ownership_hierarchy
+dynamic::ownership_hierarchy
 class_header_formatter::ownership_hierarchy() const {
-    static dynamic::schema::ownership_hierarchy
+    static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
             class_header_formatter::static_formatter_name(),
             formatters::traits::header_formatter_group_name());

@@ -22,8 +22,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/parameter_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/dynamic/schema/io/object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

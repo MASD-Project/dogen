@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/stitch/test_data/line_td.hpp"
+#include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/stitch/test_data/text_template_td.hpp"
-#include "dogen/dynamic/schema/test_data/object_td.hpp"
 #include "dogen/stitch/test_data/settings_bundle_td.hpp"
 
 namespace {
@@ -30,9 +30,9 @@ create_dogen_stitch_settings_bundle(const unsigned int position) {
     return dogen::stitch::settings_bundle_generator::create(position);
 }
 
-dogen::dynamic::schema::object
-create_dogen_dynamic_schema_object(const unsigned int position) {
-    return dogen::dynamic::schema::object_generator::create(position);
+dogen::dynamic::object
+create_dogen_dynamic_object(const unsigned int position) {
+    return dogen::dynamic::object_generator::create(position);
 }
 
 dogen::stitch::line
@@ -58,7 +58,7 @@ text_template_generator::text_template_generator() : position_(0) { }
 void text_template_generator::
 populate(const unsigned int position, result_type& v) {
     v.settings(create_dogen_stitch_settings_bundle(position + 0));
-    v.extensions(create_dogen_dynamic_schema_object(position + 1));
+    v.extensions(create_dogen_dynamic_object(position + 1));
     v.lines(create_std_list_dogen_stitch_line(position + 2));
 }
 

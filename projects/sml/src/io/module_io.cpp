@@ -22,10 +22,10 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/module_types_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/dynamic/schema/io/object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {

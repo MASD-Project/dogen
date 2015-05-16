@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/sml/hash/property_hash.hpp"
+#include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/sml/hash/nested_qname_hash.hpp"
-#include "dogen/dynamic/schema/hash/object_hash.hpp"
 
 namespace {
 

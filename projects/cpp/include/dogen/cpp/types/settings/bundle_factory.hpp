@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
@@ -47,7 +47,7 @@ namespace settings {
  */
 class bundle_factory final {
 public:
-    bundle_factory(const dynamic::schema::object& root_object,
+    bundle_factory(const dynamic::object& root_object,
         const std::forward_list<
             boost::shared_ptr<const opaque_settings_factory_interface>
             >& opaque_settings_factories);
@@ -64,22 +64,22 @@ private:
      * @brief Create the general settings.
      */
     dogen::formatters::general_settings
-    create_general_settings(const dynamic::schema::object& o) const;
+    create_general_settings(const dynamic::object& o) const;
 
     /**
      * @brief Generates the opaque settings.
      */
     std::unordered_map<std::string, boost::shared_ptr<opaque_settings> >
-    create_opaque_settings(const dynamic::schema::object& o) const;
+    create_opaque_settings(const dynamic::object& o) const;
 
 public:
     /**
      * @brief Produces the settings bundle.
      */
-    bundle make(const dynamic::schema::object& o) const;
+    bundle make(const dynamic::object& o) const;
 
 private:
-    const dynamic::schema::object& root_object_;
+    const dynamic::object& root_object_;
     const std::forward_list<
         boost::shared_ptr<const opaque_settings_factory_interface>
         >& opaque_settings_factories_;

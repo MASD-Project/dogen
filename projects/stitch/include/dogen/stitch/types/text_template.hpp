@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include "dogen/stitch/types/line.hpp"
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
 #include "dogen/stitch/serialization/text_template_fwd_ser.hpp"
 
@@ -45,7 +45,7 @@ public:
 public:
     text_template(
         const dogen::stitch::settings_bundle& settings,
-        const dogen::dynamic::schema::object& extensions,
+        const dogen::dynamic::object& extensions,
         const std::list<dogen::stitch::line>& lines);
 
 private:
@@ -61,10 +61,10 @@ public:
     void settings(const dogen::stitch::settings_bundle& v);
     void settings(const dogen::stitch::settings_bundle&& v);
 
-    const dogen::dynamic::schema::object& extensions() const;
-    dogen::dynamic::schema::object& extensions();
-    void extensions(const dogen::dynamic::schema::object& v);
-    void extensions(const dogen::dynamic::schema::object&& v);
+    const dogen::dynamic::object& extensions() const;
+    dogen::dynamic::object& extensions();
+    void extensions(const dogen::dynamic::object& v);
+    void extensions(const dogen::dynamic::object&& v);
 
     const std::list<dogen::stitch::line>& lines() const;
     std::list<dogen::stitch::line>& lines();
@@ -83,7 +83,7 @@ public:
 
 private:
     dogen::stitch::settings_bundle settings_;
-    dogen::dynamic::schema::object extensions_;
+    dogen::dynamic::object extensions_;
     std::list<dogen::stitch::line> lines_;
 };
 

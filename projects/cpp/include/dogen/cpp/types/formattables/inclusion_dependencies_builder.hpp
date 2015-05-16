@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include "dogen/dynamic/schema/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 
 namespace dogen {

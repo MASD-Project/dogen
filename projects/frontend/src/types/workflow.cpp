@@ -26,7 +26,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 
 namespace {
@@ -48,8 +48,8 @@ namespace frontend {
 std::shared_ptr<frontend::registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_options& o,
-    const dynamic::schema::repository& rp)
-    : knitting_options_(o), repository_(rp), schema_workflow_(repository_) {
+    const dynamic::repository& rp)
+    : knitting_options_(o), repository_(rp), dynamic_workflow_(repository_) {
 
     BOOST_LOG_SEV(lg, debug) << "Initialising frontend workflow. ";
     registrar().validate();
@@ -122,7 +122,7 @@ sml::model workflow::create_model_activity(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
     auto& frontend(registrar().frontend_for_extension(extension));
     const auto s(create_frontend_settings(d.path()));
-    return frontend.generate(schema_workflow_, d, s);
+    return frontend.generate(dynamic_workflow_, d, s);
 }
 
 void workflow::persist_model_activity(const boost::filesystem::path& p,

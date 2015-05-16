@@ -19,7 +19,6 @@
  *
  */
 #include <memory>
-#include "dogen/dynamic/schema/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"

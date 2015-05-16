@@ -76,8 +76,8 @@ private:
      * @brief Populates all properties at the entity base class level.
      */
     void populate_entity_properties(const sml::qname& qn,
-        const dynamic::schema::object& o,
-        const std::string& documentation, entity& e) const;
+        const dynamic::object& o, const std::string& documentation,
+        entity& e) const;
 
 private:
     /**

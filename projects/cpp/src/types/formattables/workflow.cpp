@@ -89,8 +89,8 @@ private:
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::execute(const config::cpp_options& opts,
-    const dynamic::schema::repository& srp,
-    const dynamic::schema::object& root_object,
+    const dynamic::repository& srp,
+    const dynamic::object& root_object,
     const formatters::container& fc,
     const settings::workflow& w,
     const sml::model& m) const {

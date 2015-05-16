@@ -61,7 +61,7 @@ format_files(const config::knitting_options& o,
 
 std::forward_list<formatters::file> cpp_backend::
 format_files(const config::knitting_options& o,
-    const dynamic::schema::repository& rp, const sml::model& m) const {
+    const dynamic::repository& rp, const sml::model& m) const {
     dogen::backend::workflow w(o, rp);
     return w.execute(m);
 }
@@ -120,7 +120,7 @@ managed_directories(const config::knitting_options& o,
 
 std::forward_list<formatters::file> cpp_backend::
 generate(const config::knitting_options& o,
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const sml::model& m) {
 
     const auto p(create_project(o, m));

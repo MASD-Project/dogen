@@ -93,8 +93,8 @@ void formatter::format_mixed_content_line(const std::string& stream_name,
     s << std::endl;
 }
 
-dynamic::schema::ownership_hierarchy formatter::ownership_hierarchy() const {
-    static dynamic::schema::ownership_hierarchy
+dynamic::ownership_hierarchy formatter::ownership_hierarchy() const {
+    static dynamic::ownership_hierarchy
         r(model_name, facet_name, formatter_name, group_name);
     return r;
 }

@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/sml/types/type.hpp"
 #include "dogen/sml/io/qname_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/dynamic/schema/io/object_io.hpp"
 
 
 inline std::string tidy_up_string(std::string s) {
@@ -66,7 +66,7 @@ type::type(type&& rhs)
 
 type::type(
     const std::string& documentation,
-    const dogen::dynamic::schema::object& extensions,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -125,19 +125,19 @@ void type::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& type::extensions() const {
+const dogen::dynamic::object& type::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::schema::object& type::extensions() {
+dogen::dynamic::object& type::extensions() {
     return extensions_;
 }
 
-void type::extensions(const dogen::dynamic::schema::object& v) {
+void type::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void type::extensions(const dogen::dynamic::schema::object&& v) {
+void type::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 

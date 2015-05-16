@@ -28,7 +28,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/test/building_error.hpp"
-#include "dogen/dynamic/schema/types/value_factory.hpp"
+#include "dogen/dynamic/types/value_factory.hpp"
 #include "dogen/sml/test/mock_model_factory.hpp"
 
 namespace {
@@ -362,8 +362,8 @@ std::string boost_serialization_forward_declaration_filename(
     return serialization_forward_declaration + name_for_file_name(qn);
 }
 
-void add_test_dynamic_extensions(dogen::dynamic::schema::object& o) {
-    using namespace dogen::dynamic::schema;
+void add_test_dynamic_extensions(dogen::dynamic::object& o) {
+    using namespace dogen::dynamic;
 
     value_factory f;
     o.fields().insert(std::make_pair(licence_name_key,

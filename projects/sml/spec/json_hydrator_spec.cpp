@@ -24,11 +24,11 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/dynamic/schema/test/mock_field_definition_factory.hpp"
-#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/test/mock_field_definition_factory.hpp"
+#include "dogen/dynamic/test/mock_repository_factory.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -200,8 +200,8 @@ const std::string missing_is_expandable_model(R"({
 )");
 
 
-dogen::dynamic::schema::repository create_repository() {
-    using namespace dogen::dynamic::schema;
+dogen::dynamic::repository create_repository() {
+    using namespace dogen::dynamic;
     test::mock_field_definition_factory f;
 
     std::list<field_definition> fds;
@@ -216,7 +216,7 @@ dogen::dynamic::schema::repository create_repository() {
 dogen::sml::model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
-    using dogen::dynamic::schema::test::mock_workflow_factory;
+    using dogen::dynamic::test::mock_workflow_factory;
     const auto w(mock_workflow_factory::non_validating_workflow(rp));
 
     dogen::sml::json_hydrator h(w);
@@ -278,7 +278,7 @@ BOOST_AUTO_TEST_CASE(tagged_model_hydrates_into_expected_model) {
     const auto& dyn(m.extensions());
     BOOST_CHECK(dyn.fields().size() == 2);
 
-    using namespace dogen::dynamic::schema;
+    using namespace dogen::dynamic;
     const field_selector fs(dyn);
     {
         BOOST_REQUIRE(fs.has_field(some_key));

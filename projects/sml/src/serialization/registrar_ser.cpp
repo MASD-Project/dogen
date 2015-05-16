@@ -29,14 +29,14 @@
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
-#include "dogen/dynamic/schema/serialization/registrar_ser.hpp"
+#include "dogen/dynamic/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace sml {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::dynamic::schema::register_types(ar);
+    dogen::dynamic::register_types(ar);
 
     ar.template register_type<dogen::sml::enumeration>();
     ar.template register_type<dogen::sml::object>();

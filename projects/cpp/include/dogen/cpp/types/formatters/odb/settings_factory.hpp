@@ -41,7 +41,7 @@ public:
     std::string settings_key() const;
 
     boost::shared_ptr<settings::opaque_settings>
-        make(const dynamic::schema::object& o) const;
+        make(const dynamic::object& o) const;
 };
 
 } } } }

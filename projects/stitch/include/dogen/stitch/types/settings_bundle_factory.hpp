@@ -26,8 +26,8 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/stitch/types/settings_bundle.hpp"
@@ -42,7 +42,7 @@ namespace stitch {
 class settings_bundle_factory {
 public:
     settings_bundle_factory(
-        const dynamic::schema::repository& schema_repository,
+        const dynamic::repository& dynamic_repository,
         const dogen::formatters::repository& formatters_repository);
 
 private:
@@ -50,22 +50,22 @@ private:
      * @brief Create the general settings.
      */
     boost::optional<formatters::general_settings>
-    make_general_settings(const dynamic::schema::object& o) const;
+    make_general_settings(const dynamic::object& o) const;
 
     /**
      * @brief Create the stitching settings.
      */
     stitching_settings
-    make_stitching_settings(const dynamic::schema::object& o) const;
+    make_stitching_settings(const dynamic::object& o) const;
 
 public:
     /**
      * @brief Create the settings bundle.
      */
-    settings_bundle make(const dynamic::schema::object& o) const;
+    settings_bundle make(const dynamic::object& o) const;
 
 private:
-    const dynamic::schema::repository& schema_repository_;
+    const dynamic::repository& dynamic_repository_;
     const dogen::formatters::repository& formatters_repository_;
 };
 

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
+#include "dogen/dynamic/types/object.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 
 namespace dogen {
@@ -53,7 +53,7 @@ public:
      * @brief Produces the special settings for this formatter.
      */
     virtual boost::shared_ptr<opaque_settings>
-    make(const dynamic::schema::object& o) const = 0;
+    make(const dynamic::object& o) const = 0;
 };
 
 } } }

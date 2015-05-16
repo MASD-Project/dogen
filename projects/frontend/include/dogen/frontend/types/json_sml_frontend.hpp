@@ -38,7 +38,7 @@ class json_sml_frontend final : public frontend_interface {
 public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
-    sml::model generate(const dynamic::schema::workflow& w,
+    sml::model generate(const dynamic::workflow& w,
         const input_descriptor& d, const frontend_settings& s) override;
 };
 

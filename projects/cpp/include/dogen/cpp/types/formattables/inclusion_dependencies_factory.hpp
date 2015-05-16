@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/module.hpp"
 #include "dogen/sml/types/object.hpp"
@@ -47,7 +47,7 @@ namespace formattables {
  */
 class inclusion_dependencies_factory {
 public:
-    inclusion_dependencies_factory(const dynamic::schema::repository& srp,
+    inclusion_dependencies_factory(const dynamic::repository& srp,
         const container& c, const inclusion_directives_repository& idrp);
 public:
     /**
@@ -81,7 +81,7 @@ public:
     make(const sml::concept& c) const;
 
 private:
-    const dynamic::schema::repository& schema_repository_;
+    const dynamic::repository& dynamic_repository_;
     const container& provider_container_;
     const inclusion_directives_repository& inclusion_directives_repository_;
 };

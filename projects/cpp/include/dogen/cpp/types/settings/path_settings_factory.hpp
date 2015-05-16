@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/field_definition.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
@@ -47,7 +47,7 @@ namespace settings {
 class path_settings_factory {
 public:
     path_settings_factory(const config::cpp_options& o,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const formatters::container& fc);
 
 private:
@@ -57,32 +57,32 @@ private:
     struct formatter_properties {
         std::string formatter_name;
         dogen::cpp::formatters::file_types file_type;
-        dynamic::schema::field_definition facet_directory;
-        dynamic::schema::field_definition facet_postfix;
-        dynamic::schema::field_definition formatter_postfix;
-        dynamic::schema::field_definition header_file_extension;
-        dynamic::schema::field_definition implementation_file_extension;
-        dynamic::schema::field_definition include_directory_name;
-        dynamic::schema::field_definition source_directory_name;
+        dynamic::field_definition facet_directory;
+        dynamic::field_definition facet_postfix;
+        dynamic::field_definition formatter_postfix;
+        dynamic::field_definition header_file_extension;
+        dynamic::field_definition implementation_file_extension;
+        dynamic::field_definition include_directory_name;
+        dynamic::field_definition source_directory_name;
     };
 
     /**
      * @brief Sets up top-level fields.
      */
-    void setup_top_level_fields(const dynamic::schema::repository& rp,
+    void setup_top_level_fields(const dynamic::repository& rp,
         formatter_properties& fp) const;
 
     /**
      * @brief Sets up facet fields.
      */
-    void setup_facet_fields(const dynamic::schema::repository& rp,
+    void setup_facet_fields(const dynamic::repository& rp,
         const std::string& facet_name,
         formatter_properties& fp) const;
 
     /**
      * @brief Sets up formatter fields.
      */
-    void setup_formatter_fields(const dynamic::schema::repository& rp,
+    void setup_formatter_fields(const dynamic::repository& rp,
         const std::string& formatter_name,
         formatter_properties& fp) const;
 
@@ -91,7 +91,7 @@ private:
      * formatter.
      */
     formatter_properties make_formatter_properties(
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const formatters::formatter_interface& f) const;
 
     /**
@@ -99,7 +99,7 @@ private:
      * repository data and the registered formatters.
      */
     std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::schema::repository& rp,
+    make_formatter_properties(const dynamic::repository& rp,
         const formatters::container& fc) const;
 
 private:
@@ -107,7 +107,7 @@ private:
      * @brief Creates the path settings for a given formatter.
      */
     path_settings create_settings_for_formatter(const formatter_properties& fp,
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
 public:
     /**
@@ -116,7 +116,7 @@ public:
      * @pre object must be the root object.
      */
     std::unordered_map<std::string, path_settings>
-    make(const dynamic::schema::object& o) const;
+    make(const dynamic::object& o) const;
 
 private:
     const config::cpp_options& options_;

@@ -50,7 +50,7 @@ std::list<std::string> dia_frontend::supported_extensions() const {
 dia_frontend::~dia_frontend() noexcept { }
 
 sml::model dia_frontend::
-generate(const dynamic::schema::workflow& w, const input_descriptor& d,
+generate(const dynamic::workflow& w, const input_descriptor& d,
     const frontend_settings& s) {
     BOOST_LOG_SEV(lg, debug) << "Hydrating dia. ";
 

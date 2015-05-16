@@ -72,7 +72,7 @@ const bool do_trim(true);
 namespace dogen {
 namespace stitch {
 
-parser::parser(const dynamic::schema::workflow& w) : schema_workflow_(w) {}
+parser::parser(const dynamic::workflow& w) : dynamic_workflow_(w) {}
 
 segment parser::create_segment(const segment_types st, const std::string& c,
     const bool trim_content) const {
@@ -330,9 +330,9 @@ text_template parser::parse(const std::string& s) const {
     r.lines(lines);
 
     if (!kvps.empty()) {
-        using dynamic::schema::scope_types;
+        using dynamic::scope_types;
         const auto scope(scope_types::root_module);
-        r.extensions(schema_workflow_.execute(scope, kvps));
+        r.extensions(dynamic_workflow_.execute(scope, kvps));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing.";

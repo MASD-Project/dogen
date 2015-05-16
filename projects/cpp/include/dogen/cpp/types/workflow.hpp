@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/settings/workflow.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -57,7 +57,7 @@ private:
     /**
      * @brief Returns the root object.
      */
-    dynamic::schema::object obtain_root_object(const sml::model& m) const;
+    dynamic::object obtain_root_object(const sml::model& m) const;
 
 private:
     /**
@@ -65,8 +65,8 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
         create_formattables_activty(const config::cpp_options& opts,
-            const dynamic::schema::repository& srp,
-            const dynamic::schema::object& root_object,
+            const dynamic::repository& srp,
+            const dynamic::object& root_object,
             const formatters::container& fc,
             const settings::workflow& sw,
             const sml::model& m) const;
@@ -85,12 +85,11 @@ public:
     std::vector<boost::filesystem::path>
         managed_directories(const sml::model& m) const override;
 
-    std::forward_list<dynamic::schema::ownership_hierarchy>
-        ownership_hierarchy() const;
+    std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy() const;
 
     std::forward_list<dogen::formatters::file> generate(
         const config::knitting_options& ko,
-        const dynamic::schema::repository& rp,
+        const dynamic::repository& rp,
         const sml::model& m) const override;
 };
 

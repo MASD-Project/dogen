@@ -34,8 +34,8 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
-#include "dogen/dynamic/schema/test/mock_repository_factory.hpp"
-#include "dogen/dynamic/schema/test/mock_workflow_factory.hpp"
+#include "dogen/dynamic/test/mock_repository_factory.hpp"
+#include "dogen/dynamic/test/mock_workflow_factory.hpp"
 #include "dogen/dia_to_sml/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
@@ -63,13 +63,13 @@ bool test_workflow(
     const bool is_target(true);
     const std::string model_name(input_path.stem().string());
 
-    using namespace dogen::dynamic::schema::test;
+    using namespace dogen::dynamic::test;
     mock_repository_factory rf;
     const auto rp(rf.make());
-    const auto schema_workflow(
+    const auto dynamic_workflow(
         mock_workflow_factory::non_validating_workflow(rp));
 
-    workflow w(schema_workflow);
+    workflow w(dynamic_workflow);
     dogen::sml::model actual(w.execute(i, model_name, epp, is_target));
     return asserter::assert_object(expected_path, actual_path, actual);
 }

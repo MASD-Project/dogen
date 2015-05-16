@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -69,15 +69,15 @@ private:
      * @brief Create the path derivatives repository.
      */
     path_derivatives_repository create_path_derivatives_repository(
-        const config::cpp_options& opts, const dynamic::schema::repository& rp,
-        const dynamic::schema::object& ro, const formatters::container& fc,
+        const config::cpp_options& opts, const dynamic::repository& rp,
+        const dynamic::object& ro, const formatters::container& fc,
         const sml::model& m) const;
 
     /**
      * @brief Create the inclusion directives repository.
      */
     inclusion_directives_repository create_inclusion_directives_repository(
-        const dynamic::schema::repository& srp,
+        const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,
         const sml::model& m) const;
@@ -86,15 +86,15 @@ private:
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository create_inclusion_dependencies_repository(
-        const dynamic::schema::repository& srp, const container& pc,
+        const dynamic::repository& srp, const container& pc,
         const inclusion_directives_repository& idrp, const sml::model& m) const;
 
     /**
      * @brief Creates the enablement repository.
      */
     enablement_repository
-    create_enablement_repository(const dynamic::schema::repository& srp,
-        const dynamic::schema::object& root_object,
+    create_enablement_repository(const dynamic::repository& srp,
+        const dynamic::object& root_object,
         const formatters::container& fc, const sml::model& m) const;
 
     /**
@@ -110,16 +110,16 @@ private:
      */
     formatter_properties_repository
     create_formatter_properties(
-        const dynamic::schema::repository& rp,
-        const dynamic::schema::object& root_object,
+        const dynamic::repository& rp,
+        const dynamic::object& root_object,
         const formatters::container& fc,
         const std::unordered_map<sml::qname, merged_formatter_data>& mfd) const;
 
 public:
     formatter_properties_repository make(
         const config::cpp_options& opts,
-        const dynamic::schema::repository& srp,
-        const dynamic::schema::object& root_object,
+        const dynamic::repository& srp,
+        const dynamic::object& root_object,
         const formatters::container& fc,
         const sml::model& m) const;
 };

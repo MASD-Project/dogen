@@ -43,7 +43,7 @@ private:
      * @brief Obtains all of the inclusion dependencies for this model.
      */
     inclusion_dependencies_repository obtain_inclusion_dependencies_activity(
-        const dynamic::schema::repository& srp, const container& c,
+        const dynamic::repository& srp, const container& c,
         const inclusion_directives_repository& idrp, const sml::model& m) const;
 
 public:
@@ -51,7 +51,7 @@ public:
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository make(
-        const dynamic::schema::repository& srp, const container& c,
+        const dynamic::repository& srp, const container& c,
         const inclusion_directives_repository& idrp, const sml::model& m) const;
 };
 

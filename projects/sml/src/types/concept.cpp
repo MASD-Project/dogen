@@ -49,7 +49,7 @@ concept::concept(
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::string& documentation,
-    const dogen::dynamic::schema::object& extensions,
+    const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
@@ -175,19 +175,19 @@ void concept::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::dynamic::schema::object& concept::extensions() const {
+const dogen::dynamic::object& concept::extensions() const {
     return extensions_;
 }
 
-dogen::dynamic::schema::object& concept::extensions() {
+dogen::dynamic::object& concept::extensions() {
     return extensions_;
 }
 
-void concept::extensions(const dogen::dynamic::schema::object& v) {
+void concept::extensions(const dogen::dynamic::object& v) {
     extensions_ = v;
 }
 
-void concept::extensions(const dogen::dynamic::schema::object&& v) {
+void concept::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 

@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-16 Sat 01:26]
+Clock summary at [2015-05-16 Sat 02:45]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *27:10* |       |      |
+| *Total time*                                                                | *28:29* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 27:10 |      |
+| Active                                                                      |         | 28:29 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -35,6 +35,7 @@ Clock summary at [2015-05-16 Sat 01:26]
 | COMPLETED Move the path derivatives workflow into formatables               |         |       | 0:52 |
 | COMPLETED Create a simple enabler in formattables                           |         |       | 1:41 |
 | COMPLETED Delete dynamic expansion                                          |         |       | 0:22 |
+| COMPLETED Rename dynamic schema back to dynamic                             |         |       | 1:19 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 #+end:
@@ -532,6 +533,13 @@ Tasks:
 
 As per analysis we do not need dynamic expansion so get rid of it.
 
+*** COMPLETED Rename dynamic schema back to dynamic                   :story:
+    CLOSED: [2015-05-16 Sat 02:45]
+    CLOCK: [2015-05-16 Sat 01:26]--[2015-05-16 Sat 02:45] =>  1:19
+
+Once we are back to just having =dynamic::schema=, it makes no sense
+to have nesting. Rename it back to just =dynamic=.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -589,11 +597,6 @@ model:
 
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
-
-*** Rename dynamic schema back to dynamic                             :story:
-
-Once we are back to just having =dynamic::schema=, it makes no sense
-to have nesting. Rename it back to just =dynamic=.
 
 *** Create the =global_aspect_settings= class                         :story:
 

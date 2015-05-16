@@ -28,8 +28,8 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
@@ -44,7 +44,7 @@ namespace formattables {
  */
 class inclusion_directives_factory {
 public:
-    inclusion_directives_factory(const dynamic::schema::repository& srp,
+    inclusion_directives_factory(const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp);
 
@@ -77,7 +77,7 @@ private:
      */
     settings::inclusion_directives_settings
     create_inclusion_directives_settings(
-        const dynamic::schema::object& o) const;
+        const dynamic::object& o) const;
 
     /**
      * @brief Obtains the include directive, if it exists.
@@ -94,10 +94,10 @@ public:
      * @brief Create the inclusion directives for a given SML entity.
      */
     boost::optional<std::unordered_map<std::string, std::string> >
-    make(const dynamic::schema::object& o, const sml::qname& qn) const;
+    make(const dynamic::object& o, const sml::qname& qn) const;
 
 private:
-    const dynamic::schema::repository& schema_repository_;
+    const dynamic::repository& dynamic_repository_;
     const formatters::container& container_;
     const path_derivatives_repository& path_repository_;
 };

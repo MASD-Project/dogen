@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "dogen/stitch/io/line_io.hpp"
+#include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/dynamic/schema/io/object_io.hpp"
 #include "dogen/stitch/io/settings_bundle_io.hpp"
 
 namespace std {

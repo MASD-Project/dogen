@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/persister.hpp"
@@ -53,7 +53,7 @@ namespace knit {
 
 frontend_to_middle_end_workflow::
 frontend_to_middle_end_workflow(const config::knitting_options& o,
-    const dynamic::schema::repository& rp)
+    const dynamic::repository& rp)
     : knitting_options_(o), repository_(rp) {}
 
 std::string frontend_to_middle_end_workflow::

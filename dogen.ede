@@ -19,8 +19,7 @@
    "/projects/sml_to_cpp/include"
    "/projects/formatters/include"
    "/projects/utility/include"
-   "/projects/dynamic/schema/include"
-   "/projects/dynamic/expansion/include"
+   "/projects/dynamic/include"
    "/projects/stitch/include"
    "/projects/stitcher/include"
 

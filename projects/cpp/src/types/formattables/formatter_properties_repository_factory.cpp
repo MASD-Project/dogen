@@ -54,7 +54,7 @@ void formatter_properties_repository_factory::initialise_registrar(
 
 path_derivatives_repository formatter_properties_repository_factory::
 create_path_derivatives_repository(const config::cpp_options& opts,
-    const dynamic::schema::repository& rp, const dynamic::schema::object& ro,
+    const dynamic::repository& rp, const dynamic::object& ro,
     const formatters::container& fc,
     const sml::model& m) const {
     path_derivatives_repository_factory f;
@@ -63,7 +63,7 @@ create_path_derivatives_repository(const config::cpp_options& opts,
 
 inclusion_directives_repository formatter_properties_repository_factory::
 create_inclusion_directives_repository(
-    const dynamic::schema::repository& srp,
+    const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
     const sml::model& m) const {
@@ -73,15 +73,15 @@ create_inclusion_directives_repository(
 
 inclusion_dependencies_repository formatter_properties_repository_factory::
 create_inclusion_dependencies_repository(
-    const dynamic::schema::repository& srp, const container& pc,
+    const dynamic::repository& srp, const container& pc,
     const inclusion_directives_repository& idrp, const sml::model& m) const {
     inclusion_dependencies_repository_factory f;
     return f.make(srp, pc, idrp, m);
 }
 
 enablement_repository formatter_properties_repository_factory::
-create_enablement_repository(const dynamic::schema::repository& srp,
-    const dynamic::schema::object& root_object, const formatters::container& fc,
+create_enablement_repository(const dynamic::repository& srp,
+    const dynamic::object& root_object, const formatters::container& fc,
     const sml::model& m) const {
     enablement_repository_factory f;
     return f.make(srp, root_object, fc, m);
@@ -111,8 +111,8 @@ formatter_properties_repository_factory::merge(
 
 formatter_properties_repository formatter_properties_repository_factory::
 create_formatter_properties(
-    const dynamic::schema::repository& rp,
-    const dynamic::schema::object& root_object,
+    const dynamic::repository& rp,
+    const dynamic::object& root_object,
     const formatters::container& fc,
     const std::unordered_map<sml::qname, merged_formatter_data>& mfd) const {
 
@@ -129,8 +129,8 @@ create_formatter_properties(
 }
 
 formatter_properties_repository formatter_properties_repository_factory::
-make(const config::cpp_options& opts, const dynamic::schema::repository& srp,
-    const dynamic::schema::object& root_object, const formatters::container& fc,
+make(const config::cpp_options& opts, const dynamic::repository& srp,
+    const dynamic::object& root_object, const formatters::container& fc,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";

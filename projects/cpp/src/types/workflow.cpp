@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/dynamic/schema/types/workflow.hpp"
+#include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
@@ -43,8 +43,7 @@ namespace cpp {
 
 workflow::~workflow() noexcept { }
 
-dynamic::schema::object
-workflow::obtain_root_object(const sml::model& m) const {
+dynamic::object workflow::obtain_root_object(const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining model's root object.";
 
     const auto i(m.modules().find(m.name()));
@@ -61,8 +60,8 @@ workflow::obtain_root_object(const sml::model& m) const {
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::create_formattables_activty(
     const config::cpp_options& opts,
-    const dynamic::schema::repository& srp,
-    const dynamic::schema::object& root_object,
+    const dynamic::repository& srp,
+    const dynamic::object& root_object,
     const formatters::container& fc,
     const settings::workflow& sw,
     const sml::model& m) const {
@@ -90,7 +89,7 @@ workflow::managed_directories(const sml::model& /*m*/) const {
     return r;
 }
 
-std::forward_list<dynamic::schema::ownership_hierarchy>
+std::forward_list<dynamic::ownership_hierarchy>
 workflow::ownership_hierarchy() const {
     using formatters::workflow;
     return workflow::registrar().ownership_hierarchy();
@@ -98,7 +97,7 @@ workflow::ownership_hierarchy() const {
 
 std::forward_list<dogen::formatters::file>
 workflow::generate(const config::knitting_options& ko,
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 

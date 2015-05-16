@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
-#include "dogen/dynamic/schema/types/repository_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
+#include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
@@ -41,14 +41,14 @@ namespace settings {
 
 path_settings_factory::
 path_settings_factory(const config::cpp_options& o,
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::container& fc)
     : options_(o), formatter_properties_(make_formatter_properties(rp, fc)) { }
 
 void path_settings_factory::setup_top_level_fields(
-    const dynamic::schema::repository& rp, formatter_properties& fp) const {
+    const dynamic::repository& rp, formatter_properties& fp) const {
 
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     const auto& idn(traits::cpp::include_directory_name());
     fp.include_directory_name = s.select_field_by_name(idn);
 
@@ -63,29 +63,29 @@ void path_settings_factory::setup_top_level_fields(
 }
 
 void path_settings_factory::setup_facet_fields(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const std::string& facet_name,
     path_settings_factory::formatter_properties& fp) const {
 
     const auto& fn(facet_name);
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     fp.facet_directory = s.select_field_by_name(fn, traits::directory());
     fp.facet_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
 void path_settings_factory::setup_formatter_fields(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const std::string& formatter_name,
     path_settings_factory::formatter_properties& fp) const {
 
     const auto& fn(formatter_name);
-    const dynamic::schema::repository_selector s(rp);
+    const dynamic::repository_selector s(rp);
     fp.formatter_postfix = s.select_field_by_name(fn, traits::postfix());
 }
 
 path_settings_factory::formatter_properties
 path_settings_factory::make_formatter_properties(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::formatter_interface& f) const {
 
     formatter_properties r;
@@ -101,7 +101,7 @@ path_settings_factory::make_formatter_properties(
 
 std::unordered_map<std::string, path_settings_factory::formatter_properties>
 path_settings_factory::make_formatter_properties(
-    const dynamic::schema::repository& rp,
+    const dynamic::repository& rp,
     const formatters::container& fc) const {
     std::unordered_map<std::string, formatter_properties> r;
 
@@ -119,7 +119,7 @@ path_settings_factory::make_formatter_properties(
 
 path_settings path_settings_factory::
 create_settings_for_formatter(const formatter_properties& fp,
-    const dynamic::schema::object& o) const {
+    const dynamic::object& o) const {
 
     path_settings r;
     r.file_type(fp.file_type);
@@ -129,7 +129,7 @@ create_settings_for_formatter(const formatter_properties& fp,
     r.source_directory_path(options_.source_directory_path());
     r.include_directory_path(options_.include_directory_path());
 
-    using namespace dynamic::schema;
+    using namespace dynamic;
     const field_selector fs(o);
     r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
@@ -151,7 +151,7 @@ create_settings_for_formatter(const formatter_properties& fp,
 }
 
 std::unordered_map<std::string, path_settings> path_settings_factory::
-make(const dynamic::schema::object& o) const {
+make(const dynamic::object& o) const {
     std::unordered_map<std::string, path_settings> r;
     for (const auto& pair : formatter_properties_) {
         const auto& fp(pair.second);

@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
@@ -193,11 +193,11 @@ transformer::transformer(const sml::model& m, context& c)
     : model_(m), context_(c) { }
 
 std::list<std::pair<std::string, std::string> >
-transformer::obtain_opaque_parameters(const dynamic::schema::object& o) const {
+transformer::obtain_opaque_parameters(const dynamic::object& o) const {
     std::list<std::pair<std::string, std::string> > r;
 
     const auto odbp(cpp::formatters::odb::traits::odb_pragma());
-    using namespace dynamic::schema;
+    using namespace dynamic;
     const field_selector fs(o);
     if (!fs.has_field(odbp))
         return r;

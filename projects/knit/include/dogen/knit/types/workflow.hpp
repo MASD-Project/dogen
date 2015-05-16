@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/knitting_options.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 
 namespace dogen {
 namespace knit {
@@ -90,15 +90,14 @@ private:
      * @brief Obtains the complete ownership hierarchy across all
      * backends.
      */
-    std::forward_list<dynamic::schema::ownership_hierarchy>
+    std::forward_list<dynamic::ownership_hierarchy>
     obtain_ownership_hierarchy_activity() const;
 
     /**
-     * @brief Sets up the dynamic schema repository.
+     * @brief Sets up the dynamic repository.
      */
-    dynamic::schema::repository setup_schema_repository_activity(
-        const std::forward_list<dynamic::schema::ownership_hierarchy>& oh)
-        const;
+    dynamic::repository setup_dynamic_repository_activity(
+        const std::forward_list<dynamic::ownership_hierarchy>& oh) const;
 
 public:
     /**

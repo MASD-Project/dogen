@@ -26,9 +26,9 @@
 #endif
 
 #include <string>
-#include "dogen/dynamic/schema/types/object.hpp"
-#include "dogen/dynamic/schema/types/repository.hpp"
-#include "dogen/dynamic/schema/types/field_selector.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_selector.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -36,8 +36,7 @@ namespace formatters {
 
 class selector {
 public:
-    selector(const dynamic::schema::repository& rp,
-        const dynamic::schema::object& o);
+    selector(const dynamic::repository& rp, const dynamic::object& o);
 
 public:
     /**
@@ -82,9 +81,9 @@ public:
     bool is_hash_enabled() const;
 
 private:
-    const dynamic::schema::repository& repository_;
-    const dynamic::schema::object& object_;
-    const dynamic::schema::field_selector field_selector_;
+    const dynamic::repository& repository_;
+    const dynamic::object& object_;
+    const dynamic::field_selector field_selector_;
 };
 
 } } }

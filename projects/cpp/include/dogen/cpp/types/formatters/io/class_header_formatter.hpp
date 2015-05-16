@@ -35,7 +35,7 @@ namespace io {
 
 class class_header_formatter final : public class_formatter_interface {
 public:
-    dynamic::schema::ownership_hierarchy ownership_hierarchy() const override;
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
     file_types file_type() const override;
 
