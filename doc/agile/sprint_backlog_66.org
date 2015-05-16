@@ -383,6 +383,148 @@ the namespaces.
 - O0: formattables
 - O228: expansion
 
+*** COMPLETED Create the formatter properties                         :story:
+    CLOSED: [2015-05-16 Sat 00:50]
+    CLOCK: [2015-05-15 Fri 23:40]--[2015-05-16 Sat 00:28] =>  0:48
+    CLOCK: [2015-05-15 Fri 20:57]--[2015-05-15 Fri 21:56] =>  0:59
+    CLOCK: [2015-05-15 Fri 18:36]--[2015-05-15 Fri 18:59] =>  0:23
+    CLOCK: [2015-05-15 Fri 18:25]--[2015-05-15 Fri 18:34] =>  0:09
+    CLOCK: [2015-05-15 Fri 18:00]--[2015-05-15 Fri 18:24] =>  0:24
+    CLOCK: [2015-05-15 Fri 15:23]--[2015-05-15 Fri 15:27] =>  0:04
+    CLOCK: [2015-05-15 Fri 08:10]--[2015-05-15 Fri 09:15] =>  1:05
+    CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19
+
+Create a formattables class for the formatter properties: enabled,
+file path, header guard, inclusion dependencies, integrated facets -
+i.e. the formatter settings needs to move to formattables.
+
+This class will be populated by looking at the output of multiple
+sub-workflows. In fact, it probably makes sense to create a factory
+that handles the manufacturing of all path derivatives and inclusion
+dependencies gunk and then generates the formatter properties. We just
+need the enablement map as input (as well as the model) and we can
+then output qname to formatter name to formatter properties.
+
+This would be a good place to put the processing of integrated facets
+supplied in meta-data, as well as doing a hack for now of the command
+line options.
+
+We probably don't need settings support for this.
+
+Tasks:
+
+- add formatter properties to transformer.
+- start using formatter properties in formatters.
+
+*** COMPLETED Remove unused classes and properties in cpp             :story:
+    CLOSED: [2015-05-16 Sat 01:02]
+    CLOCK: [2015-05-16 Sat 00:50]--[2015-05-16 Sat 01:02] =>  0:12
+    CLOCK: [2015-05-16 Sat 00:32]--[2015-05-16 Sat 00:49] =>  0:17
+    CLOCK: [2015-05-15 Fri 09:17]--[2015-05-15 Fri 09:25] =>  0:08
+
+We have a few classes that were made for exploratory reasons but in
+reality we won't use them. Remove them:
+
+- remove new class info and associated classes.
+- remove type settings and related infrastructure.
+- has_primitive_properties: seems unused.
+- remove family types and all the family gunk.
+
+*** COMPLETED Move the inclusion dependencies workflow into formatables :story:
+    CLOSED: [2015-05-16 Sat 01:03]
+    CLOCK: [2015-05-15 Fri 16:21]--[2015-05-15 Fri 18:00] =>  1:39
+    CLOCK: [2015-05-15 Fri 15:04]--[2015-05-15 Fri 15:19] =>  0:15
+    CLOCK: [2015-05-15 Fri 10:38]--[2015-05-15 Fri 11:00] =>  0:22
+    CLOCK: [2015-05-15 Fri 09:47]--[2015-05-15 Fri 10:38] =>  0:51
+    CLOCK: [2015-05-15 Fri 09:29]--[2015-05-15 Fri 09:47] =>  0:18
+
+As per analysis, we need to move away from expansion. Get these
+classes in formattables and hook them in to workflow. It must output
+the inclusion dependencies per qname per formatter name.
+
+It must also:
+
+- take in the enabler output to be able to determine which formatters
+  are enabled for which type.
+- take in global aspect settings. Won't be used for now.
+
+At present the inclusion directives repository factory is reading the
+inclusion directives from the meta-data. We could easily change it to
+read it from the output of the path derivatives. Actually it makes
+more sense to make the inclusion directives selector work off of the
+output of the path derivatives; we do not need any transformations
+then.
+
+We need to read the inclusion dependencies from the dynamic object and
+merge that with the generated inclusion dependencies. At present this
+is done in the expander, so it needs to be moved to the workflow.
+
+Tasks:
+
+- delete the expander
+- inclusion dependencies is creating provider container, this should
+  be the responsibility of a workflow somewhere and passed in.
+- inclusion dependencies is creating directives - this can only be
+  removed when we get rid of expanders.
+
+*** COMPLETED Move the path derivatives workflow into formatables     :story:
+    CLOSED: [2015-05-16 Sat 01:03]
+    CLOCK: [2015-05-15 Fri 15:53]--[2015-05-15 Fri 16:20] =>  0:27
+    CLOCK: [2015-05-15 Fri 15:42]--[2015-05-15 Fri 15:53] =>  0:11
+    CLOCK: [2015-05-15 Fri 15:28]--[2015-05-15 Fri 15:42] =>  0:14
+
+As per analysis, we need to move away from expansion. Get these
+classes in formattables and hook them in to workflow. Must return the
+path derivatives per qname per formatter name.
+
+We need to also create a workflow step that takes the path derivatives
+and builds the inclusion directives repository.
+
+We just need to unhook the expander; everything else is useful exactly
+as is.
+
+- remove the directory path properties from path settings; these are
+  read from command line options and will continue to do so; they are
+  not settings.
+- add cpp options to the path derivatives workflow.
+- delete the expander
+
+*** COMPLETED Create a simple enabler in formattables                 :story:
+    CLOSED: [2015-05-16 Sat 01:03]
+    CLOCK: [2015-05-15 Fri 21:57]--[2015-05-15 Fri 23:38] =>  1:41
+
+Create an enabler responsible for determining which formatters are on
+and off. It may use settings to figure out what is enabled and
+supported, both locally and globally. It also uses the command line
+options to start off with.
+
+We may need to create settings like so:
+
+- global enablement: model enabled, facet enabled, formatter enabled.
+- local enablement: formatter enabled, formatter supported.
+
+Instead of creating settings, it may make more sense to just read
+these fields on the fly in enabler.
+
+For now, implement a root object based approach; later on we can try
+to see if we can quickly hack the enabled/supported logic using the
+cycles workaround. Enabler will return a map of qname per formatter
+name to boolean - or perhaps we could return just the ones that are
+enabled?  e.g. if not found its disabled.
+
+*Naming analysis*
+
+- [[http://english.stackexchange.com/questions/92781/what-term-describes-the-state-of-being-either-enabled-or-disabled][What term describes the state of being either enabled or disabled?]]
+- [[http://english.stackexchange.com/questions/22372/push-is-to-pushable-as-enable-disable-are-to-what?rq%3D1][“Push” is to “pushable” as “enable”/“disable” are to what?]]
+- [[http://english.stackexchange.com/questions/31878/noun-for-enable-enability-enabliness?rq%3D1][Noun for enable (“enability”, “enabliness”)?]]
+
+Since there are no easy names we could call it "enabler" for now - he
+who is responsible for enabling.
+
+Tasks:
+
+- update includes provider to take in enablement.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -435,147 +577,11 @@ model:
 
 - not honouring flags set in command line options.
 
-*** STARTED Create the formatter properties                           :story:
-    CLOCK: [2015-05-15 Fri 23:40]--[2015-05-16 Sat 00:28] =>  0:48
-    CLOCK: [2015-05-15 Fri 20:57]--[2015-05-15 Fri 21:56] =>  0:59
-    CLOCK: [2015-05-15 Fri 18:36]--[2015-05-15 Fri 18:59] =>  0:23
-    CLOCK: [2015-05-15 Fri 18:25]--[2015-05-15 Fri 18:34] =>  0:09
-    CLOCK: [2015-05-15 Fri 18:00]--[2015-05-15 Fri 18:24] =>  0:24
-    CLOCK: [2015-05-15 Fri 15:23]--[2015-05-15 Fri 15:27] =>  0:04
-    CLOCK: [2015-05-15 Fri 08:10]--[2015-05-15 Fri 09:15] =>  1:05
-    CLOCK: [2015-05-14 Thu 19:20]--[2015-05-14 Thu 19:35] =>  0:19
-
-Create a formattables class for the formatter properties: enabled,
-file path, header guard, inclusion dependencies, integrated facets -
-i.e. the formatter settings needs to move to formattables.
-
-This class will be populated by looking at the output of multiple
-sub-workflows. In fact, it probably makes sense to create a factory
-that handles the manufacturing of all path derivatives and inclusion
-dependencies gunk and then generates the formatter properties. We just
-need the enablement map as input (as well as the model) and we can
-then output qname to formatter name to formatter properties.
-
-This would be a good place to put the processing of integrated facets
-supplied in meta-data, as well as doing a hack for now of the command
-line options.
-
-We probably don't need settings support for this.
-
-Tasks:
-
-- add formatter properties to transformer.
-- start using formatter properties in formatters.
-
-*** STARTED Remove unused classes and properties in cpp               :story:
-    CLOCK: [2015-05-16 Sat 00:32]--[2015-05-16 Sat 00:49] =>  0:17
-    CLOCK: [2015-05-15 Fri 09:17]--[2015-05-15 Fri 09:25] =>  0:08
-
-We have a few classes that were made for exploratory reasons but in
-reality we won't use them. Remove them:
-
-- remove new class info and associated classes.
-- remove type settings and related infrastructure.
-- has_primitive_properties: seems unused.
-- remove family types and all the family gunk.
-
 *** STARTED Tidy-up cpp diagram                                       :story:
     CLOCK: [2015-05-15 Fri 09:26]--[2015-05-15 Fri 09:28] =>  0:02
 
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
-
-*** STARTED Move the inclusion dependencies workflow into formatables :story:
-    CLOCK: [2015-05-15 Fri 16:21]--[2015-05-15 Fri 18:00] =>  1:39
-    CLOCK: [2015-05-15 Fri 15:04]--[2015-05-15 Fri 15:19] =>  0:15
-    CLOCK: [2015-05-15 Fri 10:38]--[2015-05-15 Fri 11:00] =>  0:22
-    CLOCK: [2015-05-15 Fri 09:47]--[2015-05-15 Fri 10:38] =>  0:51
-    CLOCK: [2015-05-15 Fri 09:29]--[2015-05-15 Fri 09:47] =>  0:18
-
-As per analysis, we need to move away from expansion. Get these
-classes in formattables and hook them in to workflow. It must output
-the inclusion dependencies per qname per formatter name.
-
-It must also:
-
-- take in the enabler output to be able to determine which formatters
-  are enabled for which type.
-- take in global aspect settings. Won't be used for now.
-
-At present the inclusion directives repository factory is reading the
-inclusion directives from the meta-data. We could easily change it to
-read it from the output of the path derivatives. Actually it makes
-more sense to make the inclusion directives selector work off of the
-output of the path derivatives; we do not need any transformations
-then.
-
-We need to read the inclusion dependencies from the dynamic object and
-merge that with the generated inclusion dependencies. At present this
-is done in the expander, so it needs to be moved to the workflow.
-
-Tasks:
-
-- delete the expander
-- inclusion dependencies is creating provider container, this should
-  be the responsibility of a workflow somewhere and passed in.
-- inclusion dependencies is creating directives - this can only be
-  removed when we get rid of expanders.
-
-*** STARTED Move the path derivatives workflow into formatables       :story:
-    CLOCK: [2015-05-15 Fri 15:53]--[2015-05-15 Fri 16:20] =>  0:27
-    CLOCK: [2015-05-15 Fri 15:42]--[2015-05-15 Fri 15:53] =>  0:11
-    CLOCK: [2015-05-15 Fri 15:28]--[2015-05-15 Fri 15:42] =>  0:14
-
-As per analysis, we need to move away from expansion. Get these
-classes in formattables and hook them in to workflow. Must return the
-path derivatives per qname per formatter name.
-
-We need to also create a workflow step that takes the path derivatives
-and builds the inclusion directives repository.
-
-We just need to unhook the expander; everything else is useful exactly
-as is.
-
-- remove the directory path properties from path settings; these are
-  read from command line options and will continue to do so; they are
-  not settings.
-- add cpp options to the path derivatives workflow.
-- delete the expander
-
-*** STARTED Create a simple enabler in formattables                   :story:
-    CLOCK: [2015-05-15 Fri 21:57]--[2015-05-15 Fri 23:38] =>  1:41
-
-Create an enabler responsible for determining which formatters are on
-and off. It may use settings to figure out what is enabled and
-supported, both locally and globally. It also uses the command line
-options to start off with.
-
-We may need to create settings like so:
-
-- global enablement: model enabled, facet enabled, formatter enabled.
-- local enablement: formatter enabled, formatter supported.
-
-Instead of creating settings, it may make more sense to just read
-these fields on the fly in enabler.
-
-For now, implement a root object based approach; later on we can try
-to see if we can quickly hack the enabled/supported logic using the
-cycles workaround. Enabler will return a map of qname per formatter
-name to boolean - or perhaps we could return just the ones that are
-enabled?  e.g. if not found its disabled.
-
-*Naming analysis*
-
-- [[http://english.stackexchange.com/questions/92781/what-term-describes-the-state-of-being-either-enabled-or-disabled][What term describes the state of being either enabled or disabled?]]
-- [[http://english.stackexchange.com/questions/22372/push-is-to-pushable-as-enable-disable-are-to-what?rq%3D1][“Push” is to “pushable” as “enable”/“disable” are to what?]]
-- [[http://english.stackexchange.com/questions/31878/noun-for-enable-enability-enabliness?rq%3D1][Noun for enable (“enability”, “enabliness”)?]]
-
-Since there are no easy names we could call it "enabler" for now - he
-who is responsible for enabling.
-
-Tasks:
-
-- update includes provider to take in enablement.
 
 *** Delete dynamic expansion                                          :story:
 

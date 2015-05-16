@@ -1303,8 +1303,7 @@ a second line#</value>
 										<value>#first line
 
 second line
-third line with &quot;quote&quot;
-#DOGEN cpp.type.family=other#</value>
+third line with &quot;quote&quot;#</value>
 									</value>
 								</item>
 							</values>

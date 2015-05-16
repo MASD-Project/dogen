@@ -65,7 +65,6 @@ public:
         const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
         const std::list<dogen::cpp::formattables::property_info>& properties,
         const std::list<dogen::cpp::formattables::property_info>& all_properties,
-        const bool has_primitive_properties,
         const bool requires_stream_manipulators,
         const bool requires_manual_move_constructor,
         const bool requires_manual_default_constructor,
@@ -131,15 +130,6 @@ public:
     std::list<dogen::cpp::formattables::property_info>& all_properties();
     void all_properties(const std::list<dogen::cpp::formattables::property_info>& v);
     void all_properties(const std::list<dogen::cpp::formattables::property_info>&& v);
-    /**@}*/
-
-    /**
-     * @brief True if the class has at least one property which is a
-     * primitive, false otherwise.
-     */
-    /**@{*/
-    bool has_primitive_properties() const;
-    void has_primitive_properties(const bool v);
     /**@}*/
 
     /**
@@ -305,7 +295,6 @@ public:
 private:
     std::list<dogen::cpp::formattables::property_info> properties_;
     std::list<dogen::cpp::formattables::property_info> all_properties_;
-    bool has_primitive_properties_;
     bool requires_stream_manipulators_;
     bool requires_manual_move_constructor_;
     bool requires_manual_default_constructor_;

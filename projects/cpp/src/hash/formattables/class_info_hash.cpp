@@ -87,7 +87,6 @@ std::size_t class_info_hasher::hash(const class_info&v) {
 
     combine(seed, hash_std_list_dogen_cpp_formattables_property_info(v.properties()));
     combine(seed, hash_std_list_dogen_cpp_formattables_property_info(v.all_properties()));
-    combine(seed, v.has_primitive_properties());
     combine(seed, v.requires_stream_manipulators());
     combine(seed, v.requires_manual_move_constructor());
     combine(seed, v.requires_manual_default_constructor());

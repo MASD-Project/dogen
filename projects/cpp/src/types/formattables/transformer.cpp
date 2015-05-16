@@ -292,7 +292,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     complete_name += my_complete_name;
 }
 
-std::tuple<property_info, bool, bool, bool, bool>
+std::tuple<property_info, bool, bool, bool>
 transformer::to_property_info(const sml::property p, const bool is_immutable,
     const bool is_fluent) const {
 
@@ -302,7 +302,6 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
     pi.is_immutable(is_immutable);
     pi.is_fluent(is_fluent);
 
-    bool has_primitive_properties(false);
     bool requires_stream_manipulators(false);
     bool requires_manual_move_constructor(false);
     bool requires_manual_default_constructor(false);
@@ -315,7 +314,6 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     to_nested_type_info(t, nti, complete_name, requires_stream_manipulators);
     if (nti.is_primitive()) {
-        has_primitive_properties = true;
         requires_manual_default_constructor = true;
     } else if (nti.is_enumeration())
         requires_manual_default_constructor = true;
@@ -328,7 +326,6 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
     // pi.opaque_parameters(reader.odb_pragma());
 
     return std::make_tuple(pi,
-        has_primitive_properties,
         requires_stream_manipulators,
         requires_manual_move_constructor,
         requires_manual_default_constructor);
@@ -458,15 +455,12 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
         r->properties().push_back(std::get<0>(tuple));
 
         if (std::get<1>(tuple))
-            r->has_primitive_properties(true);
-
-        if (std::get<2>(tuple))
             r->requires_stream_manipulators(true);
 
-        if (std::get<3>(tuple))
+        if (std::get<2>(tuple))
             r->requires_manual_move_constructor(true);
 
-        if (std::get<4>(tuple))
+        if (std::get<3>(tuple))
             r->requires_manual_default_constructor(true);
     }
 

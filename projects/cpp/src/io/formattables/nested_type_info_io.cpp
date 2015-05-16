@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/formattables/family_types_io.hpp"
 #include "dogen/cpp/io/formattables/nested_type_info_io.hpp"
 
 
@@ -95,8 +94,7 @@ std::ostream& operator<<(std::ostream& s, const nested_type_info& v) {
       << "\"is_ptime\": " << v.is_ptime() << ", "
       << "\"is_time_duration\": " << v.is_time_duration() << ", "
       << "\"is_pair\": " << v.is_pair() << ", "
-      << "\"is_ptree\": " << v.is_ptree() << ", "
-      << "\"family_type\": " << v.family_type()
+      << "\"is_ptree\": " << v.is_ptree()
       << " }";
     return(s);
 }

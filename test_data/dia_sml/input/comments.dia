@@ -274,8 +274,7 @@ a second line#</dia:string>
         <dia:string>#first line
 
 second line
-third line with "quote"
-#DOGEN cpp.type.family=other#</dia:string>
+third line with "quote"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

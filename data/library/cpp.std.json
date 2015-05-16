@@ -8,7 +8,6 @@
             "meta_type" : "primitive",
             "simple_name" : "int8_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -18,7 +17,6 @@
             "meta_type" : "primitive",
             "simple_name" : "int16_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -28,7 +26,6 @@
             "meta_type" : "primitive",
             "simple_name" : "int32_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -38,7 +35,6 @@
             "meta_type" : "primitive",
             "simple_name" : "int64_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -48,7 +44,6 @@
             "meta_type" : "primitive",
             "simple_name" : "uint8_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -58,7 +53,6 @@
             "meta_type" : "primitive",
             "simple_name" : "uint16_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -68,7 +62,6 @@
             "meta_type" : "primitive",
             "simple_name" : "uint32_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -78,7 +71,6 @@
             "meta_type" : "primitive",
             "simple_name" : "uint64_t",
             "extensions" : {
-                "cpp.type.family" : "integer",
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -88,7 +80,6 @@
             "meta_type" : "object",
             "simple_name" : "string",
             "extensions" : {
-                "cpp.type.family" : "string",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<string>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false
@@ -99,7 +90,6 @@
             "simple_name" : "vector",
             "object_type" : "sequence_container",
             "extensions" : {
-                "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<vector>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/vector.hpp>"
             }
@@ -109,7 +99,6 @@
             "simple_name" : "deque",
             "object_type" : "sequence_container",
             "extensions" : {
-                "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<deque>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/deque.hpp>"
             }
@@ -119,7 +108,6 @@
             "simple_name" : "array",
             "object_type" : "sequence_container",
             "extensions" : {
-                "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<array>"
             }
         },
@@ -128,7 +116,6 @@
             "simple_name" : "list",
             "object_type" : "sequence_container",
             "extensions" : {
-                "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<list>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/list.hpp>"
             }
@@ -138,7 +125,6 @@
             "simple_name" : "forward_list",
             "object_type" : "sequence_container",
             "extensions" : {
-                "cpp.type.family" : "sequence_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<forward_list>"
             }
         },
@@ -147,7 +133,6 @@
             "simple_name" : "set",
             "object_type" : "ordered_container",
             "extensions" : {
-                "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<set>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>"
             }
@@ -157,7 +142,6 @@
             "simple_name" : "multiset",
             "object_type" : "ordered_container",
             "extensions" : {
-                "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>"
             }
@@ -167,7 +151,6 @@
             "simple_name" : "unordered_set",
             "object_type" : "hash_container",
             "extensions" : {
-                "cpp.type.family" : "hash_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>"
             }
         },
@@ -176,7 +159,6 @@
             "simple_name" : "map",
             "object_type" : "ordered_container",
             "extensions" : {
-                "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<map>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/map.hpp>"
             }
@@ -186,7 +168,6 @@
             "simple_name" : "multimap",
             "object_type" : "ordered_container",
             "extensions" : {
-                "cpp.type.family" : "ordered_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<multimap>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multimap.hpp>"
             }
@@ -196,7 +177,6 @@
             "simple_name" : "unordered_map",
             "object_type" : "hash_container",
             "extensions" : {
-                "cpp.type.family" : "hash_container",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>"
             }
         },
@@ -213,7 +193,6 @@
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
@@ -222,7 +201,6 @@
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
@@ -231,7 +209,6 @@
             "simple_name" : "unique_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>"
             }
         },
@@ -246,7 +223,6 @@
             "meta_type" : "object",
             "simple_name" : "optional",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<functional>"
             }
         },

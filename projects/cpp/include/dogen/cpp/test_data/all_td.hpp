@@ -35,7 +35,6 @@
 #include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/aspect_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/family_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/content_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"

@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen/cpp/types/formattables/family_types.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp/serialization/formattables/nested_type_info_fwd_ser.hpp"
 
@@ -72,8 +71,7 @@ public:
         const bool is_ptime,
         const bool is_time_duration,
         const bool is_pair,
-        const bool is_ptree,
-        const dogen::cpp::formattables::family_types& family_type);
+        const bool is_ptree);
 
 private:
     template<typename Archive>
@@ -285,9 +283,6 @@ public:
     void is_ptree(const bool v);
     /**@}*/
 
-    dogen::cpp::formattables::family_types family_type() const;
-    void family_type(const dogen::cpp::formattables::family_types& v);
-
 public:
     bool operator==(const nested_type_info& rhs) const;
     bool operator!=(const nested_type_info& rhs) const {
@@ -322,7 +317,6 @@ private:
     bool is_time_duration_;
     bool is_pair_;
     bool is_ptree_;
-    dogen::cpp::formattables::family_types family_type_;
 };
 
 } } }

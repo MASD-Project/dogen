@@ -9,7 +9,6 @@
             "simple_name" : "shared_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<boost/shared_ptr.hpp>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/shared_ptr.hpp>"
             }
@@ -19,7 +18,6 @@
             "simple_name" : "weak_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/weak_ptr.hpp>"
             }
@@ -29,7 +27,6 @@
             "simple_name" : "scoped_ptr",
             "object_type" : "smart_pointer",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.types.class_header_formatter.inclusion_directive" : "<boost/scoped_ptr.hpp>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/scoped_ptr.hpp>"
             }
@@ -38,7 +35,6 @@
             "meta_type" : "object",
             "simple_name" : "optional",
             "extensions" : {
-                "cpp.type.family" : "smart_pointer",
                 "cpp.type.requires_manual_move_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<boost/optional.hpp>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/optional.hpp>"

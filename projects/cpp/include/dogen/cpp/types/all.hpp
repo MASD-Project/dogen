@@ -65,7 +65,6 @@
 #include "dogen/cpp/types/settings/registrar_error.hpp"
 #include "dogen/cpp/types/formattables/aspect_types.hpp"
 #include "dogen/cpp/types/formattables/concept_info.hpp"
-#include "dogen/cpp/types/formattables/family_types.hpp"
 #include "dogen/cpp/types/formattables/formattables.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/visitor_info.hpp"

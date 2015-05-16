@@ -53,7 +53,6 @@ void save(Archive& ar,
 
     ar << make_nvp("properties", v.properties_);
     ar << make_nvp("all_properties", v.all_properties_);
-    ar << make_nvp("has_primitive_properties", v.has_primitive_properties_);
     ar << make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
     ar << make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar << make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);
@@ -82,7 +81,6 @@ void load(Archive& ar,
 
     ar >> make_nvp("properties", v.properties_);
     ar >> make_nvp("all_properties", v.all_properties_);
-    ar >> make_nvp("has_primitive_properties", v.has_primitive_properties_);
     ar >> make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
     ar >> make_nvp("requires_manual_move_constructor", v.requires_manual_move_constructor_);
     ar >> make_nvp("requires_manual_default_constructor", v.requires_manual_default_constructor_);

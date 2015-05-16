@@ -110,8 +110,7 @@ namespace cpp {
 namespace formattables {
 
 class_info::class_info()
-    : has_primitive_properties_(static_cast<bool>(0)),
-      requires_stream_manipulators_(static_cast<bool>(0)),
+    : requires_stream_manipulators_(static_cast<bool>(0)),
       requires_manual_move_constructor_(static_cast<bool>(0)),
       requires_manual_default_constructor_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
@@ -135,7 +134,6 @@ class_info::class_info(
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<dogen::cpp::formattables::property_info>& properties,
     const std::list<dogen::cpp::formattables::property_info>& all_properties,
-    const bool has_primitive_properties,
     const bool requires_stream_manipulators,
     const bool requires_manual_move_constructor,
     const bool requires_manual_default_constructor,
@@ -163,7 +161,6 @@ class_info::class_info(
       formatter_properties),
       properties_(properties),
       all_properties_(all_properties),
-      has_primitive_properties_(has_primitive_properties),
       requires_stream_manipulators_(requires_stream_manipulators),
       requires_manual_move_constructor_(requires_manual_move_constructor),
       requires_manual_default_constructor_(requires_manual_default_constructor),
@@ -197,7 +194,6 @@ void class_info::to_stream(std::ostream& s) const {
     s << ", "
       << "\"properties\": " << properties_ << ", "
       << "\"all_properties\": " << all_properties_ << ", "
-      << "\"has_primitive_properties\": " << has_primitive_properties_ << ", "
       << "\"requires_stream_manipulators\": " << requires_stream_manipulators_ << ", "
       << "\"requires_manual_move_constructor\": " << requires_manual_move_constructor_ << ", "
       << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
@@ -225,7 +221,6 @@ void class_info::swap(class_info& other) noexcept {
     using std::swap;
     swap(properties_, other.properties_);
     swap(all_properties_, other.all_properties_);
-    swap(has_primitive_properties_, other.has_primitive_properties_);
     swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
     swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
@@ -256,7 +251,6 @@ bool class_info::operator==(const class_info& rhs) const {
     return entity::compare(rhs) &&
         properties_ == rhs.properties_ &&
         all_properties_ == rhs.all_properties_ &&
-        has_primitive_properties_ == rhs.has_primitive_properties_ &&
         requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
         requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
@@ -313,14 +307,6 @@ void class_info::all_properties(const std::list<dogen::cpp::formattables::proper
 
 void class_info::all_properties(const std::list<dogen::cpp::formattables::property_info>&& v) {
     all_properties_ = std::move(v);
-}
-
-bool class_info::has_primitive_properties() const {
-    return has_primitive_properties_;
-}
-
-void class_info::has_primitive_properties(const bool v) {
-    has_primitive_properties_ = v;
 }
 
 bool class_info::requires_stream_manipulators() const {

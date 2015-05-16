@@ -111,25 +111,24 @@ populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::entity_generator::populate(position, v);
     v.properties(create_std_list_dogen_cpp_formattables_property_info(position + 0));
     v.all_properties(create_std_list_dogen_cpp_formattables_property_info(position + 1));
-    v.has_primitive_properties(create_bool(position + 2));
-    v.requires_stream_manipulators(create_bool(position + 3));
-    v.requires_manual_move_constructor(create_bool(position + 4));
-    v.requires_manual_default_constructor(create_bool(position + 5));
-    v.parents(create_std_list_dogen_cpp_formattables_parent_info(position + 6));
-    v.is_parent(create_bool(position + 7));
-    v.original_parent_name(create_std_string(position + 8));
-    v.original_parent_name_qualified(create_std_string(position + 9));
-    v.leaves(create_std_list_std_string(position + 10));
-    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 11));
-    v.is_comparable(create_bool(position + 12));
-    v.is_visitable(create_bool(position + 13));
-    v.is_immutable(create_bool(position + 14));
-    v.is_original_parent_visitable(create_bool(position + 15));
-    v.class_type(create_dogen_cpp_formattables_class_types(position + 16));
-    v.generation_type(create_dogen_sml_generation_types(position + 17));
-    v.enable_integrated_io(create_bool(position + 18));
-    v.disable_complete_constructor(create_bool(position + 19));
-    v.is_final(create_bool(position + 20));
+    v.requires_stream_manipulators(create_bool(position + 2));
+    v.requires_manual_move_constructor(create_bool(position + 3));
+    v.requires_manual_default_constructor(create_bool(position + 4));
+    v.parents(create_std_list_dogen_cpp_formattables_parent_info(position + 5));
+    v.is_parent(create_bool(position + 6));
+    v.original_parent_name(create_std_string(position + 7));
+    v.original_parent_name_qualified(create_std_string(position + 8));
+    v.leaves(create_std_list_std_string(position + 9));
+    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 10));
+    v.is_comparable(create_bool(position + 11));
+    v.is_visitable(create_bool(position + 12));
+    v.is_immutable(create_bool(position + 13));
+    v.is_original_parent_visitable(create_bool(position + 14));
+    v.class_type(create_dogen_cpp_formattables_class_types(position + 15));
+    v.generation_type(create_dogen_sml_generation_types(position + 16));
+    v.enable_integrated_io(create_bool(position + 17));
+    v.disable_complete_constructor(create_bool(position + 18));
+    v.is_final(create_bool(position + 19));
 }
 
 class_info_generator::result_type

@@ -104,7 +104,7 @@ private:
      * @li position 4: if true, the property invalidates the compiler
      * generated default constructor.
      */
-    std::tuple<property_info, bool, bool, bool, bool>
+    std::tuple<property_info, bool, bool, bool>
     to_property_info(const sml::property p, const bool is_immutable,
         const bool is_fluent) const;
 

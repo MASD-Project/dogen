@@ -426,7 +426,6 @@ BOOST_AUTO_TEST_CASE(transforming_object_results_in_expected_class_info) {
 
     BOOST_CHECK(ci.properties().empty());
     BOOST_CHECK(ci.all_properties().empty());
-    BOOST_CHECK(!ci.has_primitive_properties());
     BOOST_CHECK(!ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
     BOOST_CHECK(!ci.requires_manual_default_constructor());
@@ -486,7 +485,6 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_property_results_in_expected_class
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
     BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
-    BOOST_CHECK(!ci.has_primitive_properties());
     BOOST_CHECK(!ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
     BOOST_CHECK(!ci.requires_manual_default_constructor());
@@ -552,7 +550,6 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_bool_property_results_in_expected_
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
     BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
-    BOOST_CHECK(ci.has_primitive_properties());
     BOOST_CHECK(ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
     BOOST_CHECK(ci.requires_manual_default_constructor());
@@ -617,7 +614,6 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_unsigned_int_property_results_in_e
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
     BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
-    BOOST_CHECK(ci.has_primitive_properties());
     BOOST_CHECK(!ci.requires_stream_manipulators());
     BOOST_CHECK(!ci.requires_manual_move_constructor());
     BOOST_CHECK(ci.requires_manual_default_constructor());
@@ -684,7 +680,6 @@ BOOST_AUTO_TEST_CASE(transforming_object_with_boost_variant_property_results_in_
     BOOST_CHECK(!ci.documentation().empty());
     BOOST_REQUIRE(ci.namespaces().size() == 1);
     BOOST_CHECK(factory.is_model_n(0, ci.namespaces().back()));
-    BOOST_CHECK(!ci.has_primitive_properties());
     BOOST_CHECK(ci.requires_stream_manipulators()); // FIXME: not sure
     BOOST_CHECK(ci.requires_manual_move_constructor());
     BOOST_CHECK(!ci.requires_manual_default_constructor());

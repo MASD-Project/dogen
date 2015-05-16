@@ -188,19 +188,6 @@
     },
     {
         "name" : {
-            "simple" : "family",
-            "qualified" : "cpp.type.family"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "entity",
-        "default_value" : "other"
-    },
-    {
-        "name" : {
             "simple" : "requires_manual_default_constructor",
             "qualified" : "cpp.type.requires_manual_default_constructor"
         },
