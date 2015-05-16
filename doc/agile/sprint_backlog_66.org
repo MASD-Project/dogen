@@ -598,6 +598,11 @@ model:
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
 
+*** Consider renaming path derivatives                                :story:
+
+We should have a name that implies that all fields of this class were
+obtained by "computation", rather than reading.
+
 *** Create the =global_aspect_settings= class                         :story:
 
 Create a class to manage the global aspect settings:
