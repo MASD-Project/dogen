@@ -598,6 +598,14 @@ model:
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
 
+*** Refactor formatter properties repository factory                  :story:
+
+At present we merged the containers at the qname level. However,
+we could merge them one level down - at the formatter level. This
+would mean that we may not even require a formatter properties
+factory. The merging and the generation of formatter properties could
+all be combined into one operation.
+
 *** Consider renaming path derivatives                                :story:
 
 We should have a name that implies that all fields of this class were
