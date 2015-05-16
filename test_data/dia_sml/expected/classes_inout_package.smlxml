@@ -495,7 +495,6 @@
 	</objects>
 	<is_target>1</is_target>
 	<has_generatable_types>0</has_generatable_types>
-	<is_expandable>1</is_expandable>
 </entity>
 </boost_serialization>
 

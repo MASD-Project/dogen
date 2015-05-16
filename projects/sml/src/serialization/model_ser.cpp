@@ -65,7 +65,6 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("is_target", v.is_target_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
-    ar << make_nvp("is_expandable", v.is_expandable_);
 }
 
 template<typename Archive>
@@ -87,7 +86,6 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("is_target", v.is_target_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
-    ar >> make_nvp("is_expandable", v.is_expandable_);
 }
 
 } }

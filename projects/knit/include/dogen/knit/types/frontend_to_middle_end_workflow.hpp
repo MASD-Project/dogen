@@ -88,11 +88,6 @@ private:
     sml::model merge_models_activity(const std::list<sml::model>& models) const;
 
     /**
-     * @brief Execute the dynamic expansion workflow.
-     */
-    sml::model expand_model_activity(const sml::model& m) const;
-
-    /**
      * @brief Checks the options chosen by the user to determine if
      * the SML model should be persisted; if so, persists it.
      */

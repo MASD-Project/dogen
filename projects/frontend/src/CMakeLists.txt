@@ -26,7 +26,6 @@ add_library(frontend STATIC ${all_files})
 target_link_libraries(frontend
     config
     dynamic_schema
-    dynamic_expansion
     dia
     sml
     dia_to_sml

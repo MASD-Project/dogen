@@ -133,7 +133,6 @@ std::size_t model_hasher::hash(const model&v) {
     combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(v.objects()));
     combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
-    combine(seed, v.is_expandable());
 
     return seed;
 }

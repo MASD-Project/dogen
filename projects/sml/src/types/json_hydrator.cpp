@@ -43,7 +43,6 @@ const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
 
-const std::string is_expandable_key("is_expandable");
 const std::string documentation_key("documentation");
 const std::string origin_key("origin");
 const std::string origin_system_value("system");
@@ -70,7 +69,6 @@ const std::string invalid_option_in_json_file(
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_origin("Invalid value for origin: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
-const std::string invalid_is_expandable("Invalid value for is expandible: ");
 const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
@@ -274,16 +272,6 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
     const auto documentation(pt.get_optional<std::string>(documentation_key));
     if (documentation)
         r.documentation(*documentation);
-
-    const auto is_expandable_value(pt.get<std::string>(is_expandable_key));
-    if (is_expandable_value != bool_true && is_expandable_value != bool_false) {
-        BOOST_LOG_SEV(lg, error) << invalid_is_expandable
-                                 << is_expandable_value;
-
-        BOOST_THROW_EXCEPTION(hydration_error(invalid_is_expandable +
-                is_expandable_value));
-    }
-    r.is_expandable(is_expandable_value == bool_true);
 
     const auto origin_value(pt.get<std::string>(origin_key));
     if (origin_value == origin_system_value)

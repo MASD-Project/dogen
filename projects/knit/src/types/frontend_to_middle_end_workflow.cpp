@@ -23,7 +23,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/schema/types/workflow.hpp"
-#include "dogen/dynamic/expansion/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/persister.hpp"
@@ -161,20 +160,6 @@ merge_models_activity(const std::list<sml::model>& models) const {
     return r;
 }
 
-sml::model frontend_to_middle_end_workflow::
-expand_model_activity(const sml::model& m) const {
-    if (!m.is_expandable()) {
-        BOOST_LOG_SEV(lg, debug) << "Model is not expandable, so ignoring it: "
-                                 << sml::string_converter::convert(m.name());
-        return m;
-    }
-
-    dynamic::expansion::workflow w;
-    const auto r(w.execute(knitting_options_.cpp(), repository_, m));
-    BOOST_LOG_SEV(lg, debug) << "Expanded model: " << r;
-    return r;
-}
-
 void frontend_to_middle_end_workflow::persist_model_activity(
     const boost::filesystem::path p, const sml::model& m) const {
     const auto& ts(knitting_options_.troubleshooting());
@@ -193,8 +178,7 @@ sml::model frontend_to_middle_end_workflow::execute() const {
 
     const auto d(obtain_input_descriptors_activity());
     const auto pm(obtain_partial_sml_models_activity(d));
-    const auto mm(merge_models_activity(pm));
-    const auto r(expand_model_activity(mm));
+    const auto r(merge_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
     persist_model_activity(tp, r);
 

@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-16 Sat 00:49]
+Clock summary at [2015-05-16 Sat 01:26]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *26:36* |       |      |
+| *Total time*                                                                | *27:10* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 26:36 |      |
+| Active                                                                      |         | 27:10 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -29,13 +29,14 @@ Clock summary at [2015-05-16 Sat 00:49]
 | COMPLETED Analyse the correct way of implementing the formattables workflow |         |       | 3:34 |
 | CANCELLED Create a trivial "enabled" expander                               |         |       | 3:11 |
 | COMPLETED Merge expansion namespace with formattables                       |         |       | 0:40 |
+| COMPLETED Create the formatter properties                                   |         |       | 4:07 |
+| COMPLETED Remove unused classes and properties in cpp                       |         |       | 0:37 |
+| COMPLETED Move the inclusion dependencies workflow into formatables         |         |       | 3:25 |
+| COMPLETED Move the path derivatives workflow into formatables               |         |       | 0:52 |
+| COMPLETED Create a simple enabler in formattables                           |         |       | 1:41 |
+| COMPLETED Delete dynamic expansion                                          |         |       | 0:22 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
-| STARTED Create the formatter properties                                     |         |       | 4:07 |
-| STARTED Remove unused classes and properties in cpp                         |         |       | 0:25 |
 | STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
-| STARTED Move the inclusion dependencies workflow into formatables           |         |       | 3:25 |
-| STARTED Move the path derivatives workflow into formatables                 |         |       | 0:52 |
-| STARTED Create a simple enabler in formattables                             |         |       | 1:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -525,6 +526,12 @@ Tasks:
 
 - update includes provider to take in enablement.
 
+*** COMPLETED Delete dynamic expansion                                :story:
+    CLOSED: [2015-05-16 Sat 01:26]
+    CLOCK: [2015-05-16 Sat 01:04]--[2015-05-16 Sat 01:26] =>  0:22
+
+As per analysis we do not need dynamic expansion so get rid of it.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -582,10 +589,6 @@ model:
 
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
-
-*** Delete dynamic expansion                                          :story:
-
-As per analysis we do not need dynamic expansion so get rid of it.
 
 *** Rename dynamic schema back to dynamic                             :story:
 

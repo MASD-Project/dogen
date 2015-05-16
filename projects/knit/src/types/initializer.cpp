@@ -20,7 +20,6 @@
  */
 #include "dogen/frontend/types/initializer.hpp"
 #include "dogen/cpp/types/initializer.hpp"
-#include "dogen/dynamic/expansion/types/initializer.hpp"
 #include "dogen/knit/types/initializer.hpp"
 
 namespace dogen {
@@ -28,7 +27,6 @@ namespace knit {
 
 void initializer::initialize() {
     dogen::frontend::initializer::initialize();
-    dogen::dynamic::expansion::initializer::initialize();
     dogen::cpp::initializer::initialize();
 }
 

@@ -354,13 +354,6 @@ BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(empty_elements_model), hydration_error, c);
 }
 
-BOOST_AUTO_TEST_CASE(missing_is_expandable_model_throws) {
-    SETUP_TEST_LOG_SOURCE("missing_is_expandable_model_throws");
-    contains_checker<hydration_error> c(missing_is_expandable);
-    BOOST_CHECK_EXCEPTION(hydrate(missing_is_expandable_model),
-        hydration_error, c);
-}
-
 BOOST_AUTO_TEST_CASE(module_path_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("module_path_model_hydrates_into_expected_model");
     const auto m(hydrate(module_path_model));

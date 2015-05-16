@@ -376,34 +376,6 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target expansion)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Dynamic Expansion model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/schema.dia,dogen::dynamic
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/dynamic
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files
-    --external-module-path dogen::dynamic)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
-
 set(target stitch)
 add_custom_target(knit_${target}
     COMMENT "Knitting Stitch model" VERBATIM
