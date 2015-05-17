@@ -2968,6 +2968,17 @@ We should really have two distinct types to represent the model that
 is returned from the dia to sml transformer from the model returned by
 the merger. Potentially this could be called =partial_model=.
 
+In fact we may need to take this a step further and follow the same
+approach as [[https://github.com/avao/Codge/tree/master/Src/Codge.DataModel][Cogen]]: having exactly the same types, but perhaps in a
+separate namespace; one version represents the "connected" model and
+the other the "disconnected" model. The idea being that on the
+connected model has references to types rather than relaying on qname
+look-ups. So for example all the relationships then become shared
+pointers to types and so on. The problem with this approach is that we
+then need to have a common base type from where all types inherit and
+this will mean that we will have to visit a lot to dispatch types to
+their leaves.
+
 *** Rename nested qname to composite qname                            :story:
 
 *New understanding*:
