@@ -668,7 +668,10 @@ Next problems:
   integrated if we have a qname. However, for headers such as =iosfwd=
   we don't need a qname. The way to solve this is to remember the
   settings for the current qname and apply them. Or we need to supply
-  the current qname every time we want to ask a question.
+  the current qname every time we want to ask a question. We also need
+  to supply the formatter name of the facet that should be
+  integrated. This is a very convoluted API but we should just get it
+  to work and clean it up later.
 - also, we are not checking to see if the formatter is enabled when
   checking for integration.
 

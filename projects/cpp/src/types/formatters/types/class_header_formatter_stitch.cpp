@@ -44,7 +44,7 @@ fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "
             } else {
                 int pos(0);
                 for (const auto p : c.parents()) {
-fa.stream() << "    public" << p.qualified_name() << fa.make_parameter_separator_text(c.parents().size(), pos) << std::endl;
+fa.stream() << "    public " << p.qualified_name() << fa.make_parameter_separator_text(c.parents().size(), pos) << std::endl;
                     ++pos;
                 }
             }

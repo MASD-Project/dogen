@@ -32,7 +32,7 @@ class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>: public <#= c.parents
                 int pos(0);
                 for (const auto p : c.parents()) {
 #>
-    public<#= p.qualified_name() #><#= fa.make_parameter_separator_text(c.parents().size(), pos) #>
+    public <#= p.qualified_name() #><#= fa.make_parameter_separator_text(c.parents().size(), pos) #>
 <#+
                     ++pos;
                 }
