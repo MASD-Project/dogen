@@ -10,6 +10,11 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming path derivatives                                :story:
+
+We should have a name that implies that all fields of this class were
+obtained by "computation", rather than reading it from somewhere.
+
 *** Consider fields where "qualified name" is not qualified           :story:
 
 At present, the the qualified field name is not always a prefix +

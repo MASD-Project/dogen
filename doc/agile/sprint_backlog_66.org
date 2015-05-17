@@ -13,13 +13,13 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-17 Sun 10:47]
+Clock summary at [2015-05-17 Sun 12:33]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *28:29* |       |      |
+| *Total time*                                                                | *30:14* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 28:29 |      |
+| Active                                                                      |         | 30:14 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -36,8 +36,9 @@ Clock summary at [2015-05-17 Sun 10:47]
 | COMPLETED Create a simple enabler in formattables                           |         |       | 1:41 |
 | COMPLETED Delete dynamic expansion                                          |         |       | 0:22 |
 | COMPLETED Rename dynamic schema back to dynamic                             |         |       | 1:19 |
+| COMPLETED Tidy-up cpp diagram                                               |         |       | 1:39 |
+| COMPLETED Consider refactoring formatter properties repository factory      |         |       | 0:08 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
-| STARTED Tidy-up cpp diagram                                                 |         |       | 0:02 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -616,11 +617,6 @@ Problems with models that disable facets and disable full constructor
 model:
 
 - not honouring flags set in command line options.
-
-*** Consider renaming path derivatives                                :story:
-
-We should have a name that implies that all fields of this class were
-obtained by "computation", rather than reading.
 
 *** Create the =global_aspect_settings= class                         :story:
 
