@@ -489,7 +489,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:point val="48,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,33.95;73.575,51.25"/>
+        <dia:rectangle val="47.95,33.95;73.575,49.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,34"/>
@@ -498,7 +498,7 @@ components a facet has, which we choose to call @e aspects.#</dia:string>
         <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="17.200000000000003"/>
+        <dia:real val="15.600000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_info#</dia:string>
@@ -930,52 +930,6 @@ descend from it. Names are in identifiable name format.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Type of code generation to perform.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enable_integrated_io#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, IO operations will be in the class itself rather than on a separate facet.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#disable_complete_constructor#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -17728,16 +17682,16 @@ the dynamic object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48,51.2"/>
+        <dia:point val="48,49.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.0175,50.45;48.75,67.8"/>
+        <dia:rectangle val="43.0175,48.85;48.75,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48,51.2"/>
+        <dia:point val="48,49.6"/>
         <dia:point val="48,60"/>
         <dia:point val="43.0675,60"/>
         <dia:point val="43.0675,67"/>
@@ -18607,16 +18561,16 @@ to the grammmar of the C++ language.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="73.525,51.2"/>
+        <dia:point val="73.525,49.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.7125,50.45;74.275,67.8"/>
+        <dia:rectangle val="70.7125,48.85;74.275,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="73.525,51.2"/>
+        <dia:point val="73.525,49.6"/>
         <dia:point val="73.525,60"/>
         <dia:point val="70.7625,60"/>
         <dia:point val="70.7625,67"/>

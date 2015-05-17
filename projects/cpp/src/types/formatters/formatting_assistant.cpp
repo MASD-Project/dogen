@@ -145,6 +145,10 @@ bool formatting_assistant::is_io_integrated() const {
     return is_facet_integrated(traits::facet_name());
 }
 
+bool formatting_assistant::is_complete_constructor_disabled() const {
+    return entity_.settings().aspect_settings().disable_complete_constructor();
+}
+
 void formatting_assistant::validate() const {
     const auto& fn(ownership_hierarchy_.formatter_name());
     const auto& fp(formatter_properties_);

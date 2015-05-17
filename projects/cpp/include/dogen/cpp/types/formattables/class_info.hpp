@@ -80,8 +80,6 @@ public:
         const bool is_original_parent_visitable,
         const dogen::cpp::formattables::class_types& class_type,
         const dogen::sml::generation_types& generation_type,
-        const bool enable_integrated_io,
-        const bool disable_complete_constructor,
         const bool is_final);
 
 private:
@@ -265,17 +263,6 @@ public:
     void generation_type(const dogen::sml::generation_types& v);
     /**@}*/
 
-    /**
-     * @brief If true, IO operations will be in the class itself rather than on a separate facet.
-     */
-    /**@{*/
-    bool enable_integrated_io() const;
-    void enable_integrated_io(const bool v);
-    /**@}*/
-
-    bool disable_complete_constructor() const;
-    void disable_complete_constructor(const bool v);
-
     bool is_final() const;
     void is_final(const bool v);
 
@@ -310,8 +297,6 @@ private:
     bool is_original_parent_visitable_;
     dogen::cpp::formattables::class_types class_type_;
     dogen::sml::generation_types generation_type_;
-    bool enable_integrated_io_;
-    bool disable_complete_constructor_;
     bool is_final_;
 };
 

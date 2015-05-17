@@ -104,7 +104,7 @@ public:
 <#+
             }
 
-            if (!c.disable_complete_constructor()) {
+            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
 #>
 public:
 <#+

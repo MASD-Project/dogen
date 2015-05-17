@@ -126,9 +126,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_original_parent_visitable(create_bool(position + 14));
     v.class_type(create_dogen_cpp_formattables_class_types(position + 15));
     v.generation_type(create_dogen_sml_generation_types(position + 16));
-    v.enable_integrated_io(create_bool(position + 17));
-    v.disable_complete_constructor(create_bool(position + 18));
-    v.is_final(create_bool(position + 19));
+    v.is_final(create_bool(position + 17));
 }
 
 class_info_generator::result_type

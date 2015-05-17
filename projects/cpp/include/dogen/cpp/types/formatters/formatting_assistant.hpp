@@ -122,6 +122,12 @@ public:
      */
     bool is_io_integrated() const;
 
+    /**
+     * @brief Returns true if the complete constructor is disabled,
+     * false otherwise.
+     */
+    bool is_complete_constructor_disabled() const;
+
 public:
     /**
      * @brief Ensures all expected settings are available and set to

@@ -120,8 +120,6 @@ class_info::class_info()
       is_original_parent_visitable_(static_cast<bool>(0)),
       class_type_(static_cast<dogen::cpp::formattables::class_types>(0)),
       generation_type_(static_cast<dogen::sml::generation_types>(0)),
-      enable_integrated_io_(static_cast<bool>(0)),
-      disable_complete_constructor_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)) { }
 
 class_info::class_info(
@@ -149,8 +147,6 @@ class_info::class_info(
     const bool is_original_parent_visitable,
     const dogen::cpp::formattables::class_types& class_type,
     const dogen::sml::generation_types& generation_type,
-    const bool enable_integrated_io,
-    const bool disable_complete_constructor,
     const bool is_final)
     : dogen::cpp::formattables::entity(identity,
       name,
@@ -176,8 +172,6 @@ class_info::class_info(
       is_original_parent_visitable_(is_original_parent_visitable),
       class_type_(class_type),
       generation_type_(generation_type),
-      enable_integrated_io_(enable_integrated_io),
-      disable_complete_constructor_(disable_complete_constructor),
       is_final_(is_final) { }
 
 void class_info::to_stream(std::ostream& s) const {
@@ -209,8 +203,6 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
       << "\"class_type\": " << class_type_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
-      << "\"enable_integrated_io\": " << enable_integrated_io_ << ", "
-      << "\"disable_complete_constructor\": " << disable_complete_constructor_ << ", "
       << "\"is_final\": " << is_final_
       << " }";
 }
@@ -236,8 +228,6 @@ void class_info::swap(class_info& other) noexcept {
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
     swap(class_type_, other.class_type_);
     swap(generation_type_, other.generation_type_);
-    swap(enable_integrated_io_, other.enable_integrated_io_);
-    swap(disable_complete_constructor_, other.disable_complete_constructor_);
     swap(is_final_, other.is_final_);
 }
 
@@ -266,8 +256,6 @@ bool class_info::operator==(const class_info& rhs) const {
         is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
         class_type_ == rhs.class_type_ &&
         generation_type_ == rhs.generation_type_ &&
-        enable_integrated_io_ == rhs.enable_integrated_io_ &&
-        disable_complete_constructor_ == rhs.disable_complete_constructor_ &&
         is_final_ == rhs.is_final_;
 }
 
@@ -467,22 +455,6 @@ dogen::sml::generation_types class_info::generation_type() const {
 
 void class_info::generation_type(const dogen::sml::generation_types& v) {
     generation_type_ = v;
-}
-
-bool class_info::enable_integrated_io() const {
-    return enable_integrated_io_;
-}
-
-void class_info::enable_integrated_io(const bool v) {
-    enable_integrated_io_ = v;
-}
-
-bool class_info::disable_complete_constructor() const {
-    return disable_complete_constructor_;
-}
-
-void class_info::disable_complete_constructor(const bool v) {
-    disable_complete_constructor_ = v;
 }
 
 bool class_info::is_final() const {

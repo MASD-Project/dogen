@@ -95,7 +95,7 @@ fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
 fa.stream() << std::endl;
             }
 
-            if (!c.disable_complete_constructor()) {
+            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
 fa.stream() << "public:" << std::endl;
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
