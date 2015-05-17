@@ -4476,7 +4476,7 @@ separation between public and private headers, a functionality similar
 to =internal= in C#. In conjunction with [[*Build%20shared%20objects%20instead%20of%20dynamic%20libraries][using shared objects]], this
 should improve build times.
 
- In order to do this:
+In order to do this:
 
 - add a new config parameter: default visibility to private or default
   visibility to public. This is just so we don't have to mark all
@@ -4499,6 +4499,19 @@ should improve build times.
   implementations - e.g. =workflow_interface= will be public but
   =workflow= will be private; this means we need some kind of factory
   to generate =workflow_interface=.
+
+More thoughts on this:
+
+- we don't really need to have different directories for this; we
+  could just put all the include files in the same directory. At
+  packaging time, we should only package the public files (this would
+  have to be done using CPack).
+- also the GCC/MSVC visibility pragmas should take into account these
+  options and only export public types.
+- the slight problem with this is that we need some tests to ensure
+  the packages we create are actually exporting all public types; we
+  could easily have a public type that depends on a private type
+  etc. We should also validate SML to ensure this does not happen.
 
 *** Add support for type framing                                      :story:
 
