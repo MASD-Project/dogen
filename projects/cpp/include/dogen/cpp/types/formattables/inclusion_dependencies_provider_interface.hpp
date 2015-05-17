@@ -29,10 +29,10 @@
 #include <string>
 #include <utility>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -62,8 +62,7 @@ public:
      * @brief Provide the inclusion dependencies.
      */
     virtual boost::optional<std::list<std::string> >
-    provide(const dynamic::repository& srp,
-        const inclusion_directives_repository& idrp,
+    provide(const inclusion_dependencies_builder_factory& f,
         const Element& e) const = 0;
 };
 

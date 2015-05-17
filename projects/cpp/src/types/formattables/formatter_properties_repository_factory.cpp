@@ -75,10 +75,10 @@ create_inclusion_directives_repository(
 
 inclusion_dependencies_repository formatter_properties_repository_factory::
 create_inclusion_dependencies_repository(
-    const dynamic::repository& srp, const container& pc,
-    const inclusion_directives_repository& idrp, const sml::model& m) const {
+    const inclusion_dependencies_builder_factory& bf,
+    const container& pc, const sml::model& m) const {
     inclusion_dependencies_repository_factory f;
-    return f.make(srp, pc, idrp, m);
+    return f.make(bf, pc, m);
 }
 
 enablement_repository formatter_properties_repository_factory::
@@ -152,7 +152,8 @@ make(const config::cpp_options& opts, const dynamic::repository& srp,
     registrar rg;
     initialise_registrar(fc, rg);
     const auto pc(rg.container());
-    const auto dprp(create_inclusion_dependencies_repository(srp, pc, idrp, m));
+    const inclusion_dependencies_builder_factory bf(erp, idrp, ifrp);
+    const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
 
     const auto mfd(merge(pdrp, dprp, erp));
     const auto r(create_formatter_properties(mfd, ifrp));

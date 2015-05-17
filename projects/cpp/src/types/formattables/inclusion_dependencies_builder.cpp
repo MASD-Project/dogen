@@ -23,7 +23,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
-#include "dogen/cpp/types/formattables/inclusion_directives_selector.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
 namespace {
@@ -34,6 +33,8 @@ static logger lg(logger_factory(
 
 const auto empty_list = std::list<std::string> {};
 const std::string empty_directive("Cannot add empty include directive.");
+const std::string qname_not_found("Cannot find qname: ");
+const std::string formatter_name_not_found("Cannot find formatter name: ");
 
 }
 
@@ -42,8 +43,63 @@ namespace cpp {
 namespace formattables {
 
 inclusion_dependencies_builder::
-inclusion_dependencies_builder(const inclusion_directives_repository& rp)
-    : repository_(rp) {}
+inclusion_dependencies_builder(const enablement_repository& erp,
+    const inclusion_directives_repository& idrp,
+    const integrated_facets_repository& ifrp)
+    : enablement_repository_(erp),
+      directives_repository_(idrp),
+      integrated_facets_repository_(ifrp) {}
+
+boost::optional<std::string>
+inclusion_dependencies_builder::get_inclusion_directive(
+    const sml::qname& qn,
+    const std::string& formatter_name) const {
+
+    const auto& idqn(directives_repository_.inclusion_directives_by_qname());
+    const auto i(idqn.find(qn));
+    if (i == idqn.end())
+        return boost::optional<std::string>();
+
+    const auto j(i->second.find(formatter_name));
+    if (j == i->second.end())
+        return boost::optional<std::string>();
+
+    return j->second;
+}
+
+bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
+    const std::string& formatter_name) const {
+
+    const auto& eqn(enablement_repository_.enablement_by_qname());
+    const auto i(eqn.find(qn));
+    if (i == eqn.end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
+        BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
+    }
+
+    const auto j(i->second.find(formatter_name));
+    if (j == i->second.end()) {
+        BOOST_LOG_SEV(lg, error) << formatter_name_not_found << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(formatter_name_not_found + formatter_name));
+    }
+
+    return j->second;
+}
+
+bool inclusion_dependencies_builder::is_integrated(
+    const std::string& formatter_name, const std::string& facet_name) const {
+    const auto& iffn(
+        integrated_facets_repository_.integrated_facets_by_formatter_name());
+
+    const auto i(iffn.find(formatter_name));
+    if (i == iffn.end())
+        return false;
+
+    const auto j(i->second.find(facet_name));
+    return j != i->second.end();
+}
 
 void inclusion_dependencies_builder::
 add(const std::string& inclusion_directive) {
@@ -56,8 +112,15 @@ add(const std::string& inclusion_directive) {
 
 void inclusion_dependencies_builder::
 add(const sml::qname& qn, const std::string& formatter_name) {
-    const inclusion_directives_selector sel(repository_);
-    const auto id(sel.select_inclusion_directive(qn, formatter_name));
+    if (!is_enabled(qn, formatter_name)) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, debug) << "Formatter disabled so skipping include. "
+                                 << " Formatter: " << formatter_name
+                                 << " to type: " << n;
+        return;
+    }
+
+    const auto id(get_inclusion_directive(qn, formatter_name));
     if (id)
         add(*id);
 }
@@ -66,6 +129,20 @@ void inclusion_dependencies_builder::
 add(const std::list<sml::qname>& qn, const std::string& formatter_name) {
     for (const auto& n : qn)
         add(n, formatter_name);
+}
+
+void inclusion_dependencies_builder::add_if_integrated(
+    const std::string& formatter_name,
+    const std::string& facet_name,
+    const std::string& inclusion_directive) {
+    if (!is_integrated(formatter_name, facet_name)) {
+        BOOST_LOG_SEV(lg, debug) << "Facet not integrated so skipping include. "
+                                 << " Facet: " << facet_name
+                                 << " include: " << inclusion_directive;
+        return;
+    }
+
+    add(inclusion_directive);
 }
 
 std::list<std::string> inclusion_dependencies_builder::build() {

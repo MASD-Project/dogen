@@ -27,9 +27,9 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/selector.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
@@ -70,8 +70,7 @@ public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-    provide(const dynamic::repository& srp,
-        const formattables::inclusion_directives_repository& idr,
+        provide(const formattables::inclusion_dependencies_builder_factory& f,
         const sml::object& o) const override;
 };
 
@@ -80,25 +79,24 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const dynamic::repository& rp,
-    const formattables::inclusion_directives_repository& idr,
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& o) const {
 
-    const auto self_fn(class_header_formatter::static_formatter_name());
-    formattables::inclusion_dependencies_builder builder(idr);
+    auto builder(f.make());
 
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
 
-    selector s(rp, o.extensions());
-    if (s.is_integrated_io_enabled() || o.is_parent() || o.is_child())
-        builder.add(inclusion_constants::std::iosfwd());
-
-    if (s.is_serialization_enabled()) {
-        using ser = formatters::serialization::traits;
-        const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
-        builder.add(o.name(), ser_fwd_fn);
+    const auto self_fn(class_header_formatter::static_formatter_name());
+    if (o.is_parent() || o.is_child()) {
+        const auto io_fctn(formatters::io::traits::facet_name());
+        const auto ios(inclusion_constants::std::iosfwd());
+        builder.add_if_integrated(self_fn, io_fctn, ios);
     }
+
+    using ser = formatters::serialization::traits;
+    const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
+    builder.add(o.name(), ser_fwd_fn);
 
     const auto lambda([&](const sml::object& o,
             const sml::relationship_types rt,
@@ -116,11 +114,9 @@ provider::provide(const dynamic::repository& rp,
     lambda(o, rt::regular_associations, self_fn);
     lambda(o, rt::parents, self_fn);
 
-    if (s.is_hash_enabled()) {
-        using hash = formatters::hash::traits;
-        const auto hash_fn(hash::traits::class_header_formatter_name());
-        lambda(o, rt::hash_container_keys, hash_fn);
-    }
+    using hash = formatters::hash::traits;
+    const auto hash_fn(hash::traits::class_header_formatter_name());
+    lambda(o, rt::hash_container_keys, hash_fn);
 
     if (o.is_visitable())
         lambda(o, rt::visited_by, self_fn);

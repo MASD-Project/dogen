@@ -89,13 +89,12 @@ bool include_directive_comparer(
 
 template<typename SmlEntity>
 std::unordered_map<std::string, std::list<std::string> >
-generate(const dynamic::repository& srp,
+generate(const inclusion_dependencies_builder_factory& f,
     std::forward_list<
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<SmlEntity>
             >
-        > providers, const inclusion_directives_repository& idrp,
-    const SmlEntity& e) {
+        > providers, const SmlEntity& e) {
 
     const auto n(sml::string_converter::convert(e.name()));
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << n;
@@ -103,7 +102,7 @@ generate(const dynamic::repository& srp,
     std::unordered_map<std::string, std::list<std::string> > r;
     for (const auto p : providers) {
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << p->formatter_name();
-        auto id(p->provide(srp, idrp, e));
+        auto id(p->provide(f, e));
 
         if (!id)
             continue;
@@ -128,15 +127,12 @@ generate(const dynamic::repository& srp,
 }
 
 inclusion_dependencies_factory::inclusion_dependencies_factory(
-    const dynamic::repository& srp, const container& c,
-    const inclusion_directives_repository& idrp)
-    : dynamic_repository_(srp), provider_container_(c),
-      inclusion_directives_repository_(idrp) {}
+    const inclusion_dependencies_builder_factory& f, const container& c)
+    : factory_(f), provider_container_(c) {}
 
 std::unordered_map<std::string, std::list<std::string> >
 inclusion_dependencies_factory::make(const sml::object& o) const {
-    return generate(dynamic_repository_, provider_container_.object_providers(),
-        inclusion_directives_repository_, o);
+    return generate(factory_, provider_container_.object_providers(), o);
 }
 
 std::unordered_map<std::string, std::list<std::string> >

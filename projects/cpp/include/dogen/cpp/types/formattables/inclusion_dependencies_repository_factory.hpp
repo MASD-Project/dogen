@@ -27,7 +27,7 @@
 
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
-#include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
 
 namespace dogen {
@@ -38,21 +38,13 @@ namespace formattables {
  * @brief Creates the inclusion dependencies repository.
  */
 class inclusion_dependencies_repository_factory {
-private:
-    /**
-     * @brief Obtains all of the inclusion dependencies for this model.
-     */
-    inclusion_dependencies_repository obtain_inclusion_dependencies_activity(
-        const dynamic::repository& srp, const container& c,
-        const inclusion_directives_repository& idrp, const sml::model& m) const;
-
 public:
     /**
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository make(
-        const dynamic::repository& srp, const container& c,
-        const inclusion_directives_repository& idrp, const sml::model& m) const;
+        const inclusion_dependencies_builder_factory& bf, const container& c,
+        const sml::model& m) const;
 };
 
 } } }

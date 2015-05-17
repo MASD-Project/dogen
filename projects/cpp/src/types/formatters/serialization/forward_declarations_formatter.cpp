@@ -57,8 +57,7 @@ public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
-    provide(const dynamic::repository& rp,
-        const formattables::inclusion_directives_repository& idr,
+    provide(const formattables::inclusion_dependencies_builder_factory& f,
         const sml::object& o) const override;
 };
 
@@ -67,12 +66,11 @@ std::string provider::formatter_name() const {
 }
 
 boost::optional<std::list<std::string> >
-provider::provide(const dynamic::repository& /*srp*/,
-    const formattables::inclusion_directives_repository& idr,
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& o) const {
 
     const auto self_fn(forward_declarations_formatter::static_formatter_name());
-    formattables::inclusion_dependencies_builder builder(idr);
+    auto builder(f.make());
 
     using tp = formatters::types::traits;
     const auto tp_fn(tp::forward_declarations_formatter_name());

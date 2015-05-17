@@ -95,14 +95,13 @@ private:
 }
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
-make(const dynamic::repository& srp, const container& c,
-    const inclusion_directives_repository& idrp,
+make(const inclusion_dependencies_builder_factory& bf, const container& c,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
 
-    const inclusion_dependencies_factory f(srp, c, idrp);
-    generator g(f);
+    const inclusion_dependencies_factory idf(bf, c);
+    generator g(idf);
     sml::all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"

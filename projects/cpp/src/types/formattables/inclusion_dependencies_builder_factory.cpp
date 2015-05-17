@@ -24,4 +24,19 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+inclusion_dependencies_builder_factory::inclusion_dependencies_builder_factory(
+    const enablement_repository& erp,
+    const inclusion_directives_repository& idrp,
+    const integrated_facets_repository& ifrp)
+    : enablement_repository_(erp), directives_repository_(idrp),
+      integrated_facets_repository_(ifrp) {}
+
+inclusion_dependencies_builder inclusion_dependencies_builder_factory::
+make() const {
+    return inclusion_dependencies_builder(
+        enablement_repository_,
+        directives_repository_,
+        integrated_facets_repository_);
+}
+
 } } }

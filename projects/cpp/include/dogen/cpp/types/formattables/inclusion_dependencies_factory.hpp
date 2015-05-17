@@ -37,6 +37,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -47,8 +48,8 @@ namespace formattables {
  */
 class inclusion_dependencies_factory {
 public:
-    inclusion_dependencies_factory(const dynamic::repository& srp,
-        const container& c, const inclusion_directives_repository& idrp);
+    inclusion_dependencies_factory(
+        const inclusion_dependencies_builder_factory& f, const container& c);
 public:
     /**
      * @brief Makes inclusion dependencies for an object.
@@ -81,9 +82,8 @@ public:
     make(const sml::concept& c) const;
 
 private:
-    const dynamic::repository& dynamic_repository_;
+    const inclusion_dependencies_builder_factory& factory_;
     const container& provider_container_;
-    const inclusion_directives_repository& inclusion_directives_repository_;
 };
 
 } } }

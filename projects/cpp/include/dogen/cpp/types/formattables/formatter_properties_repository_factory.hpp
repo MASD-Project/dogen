@@ -40,6 +40,7 @@
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -87,8 +88,8 @@ private:
      * @brief Create the inclusion dependencies repository.
      */
     inclusion_dependencies_repository create_inclusion_dependencies_repository(
-        const dynamic::repository& srp, const container& pc,
-        const inclusion_directives_repository& idrp, const sml::model& m) const;
+        const inclusion_dependencies_builder_factory& bf,
+        const container& pc, const sml::model& m) const;
 
     /**
      * @brief Creates the enablement repository.

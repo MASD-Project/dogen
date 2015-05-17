@@ -18,10 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/cpp/types/traits.hpp"
+#include "dogen/cpp/io/formattables/integrated_facets_repository_io.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "cpp.formattables.integrated_facets_repository_factory"));
+
+}
 
 namespace dogen {
 namespace cpp {
@@ -59,6 +69,8 @@ integrated_facets_repository_factory::make(const dynamic::repository& rp,
             r.integrated_facets_by_formatter_name()[fn] = set;
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Integrated facets repository: " << r;
     return r;
 }
 

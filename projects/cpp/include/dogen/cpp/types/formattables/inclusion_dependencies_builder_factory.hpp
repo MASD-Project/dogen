@@ -25,11 +25,32 @@
 #pragma once
 #endif
 
+#include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief Creates inclusion dependencies builders.
+ */
 class inclusion_dependencies_builder_factory final {
+public:
+    inclusion_dependencies_builder_factory(
+        const enablement_repository& erp,
+        const inclusion_directives_repository& idrp,
+        const integrated_facets_repository& ifrp);
+
+public:
+    /**
+     * @brief Create an inclusion dependencies builder.
+     */
+    inclusion_dependencies_builder make() const;
+
+private:
+    const enablement_repository& enablement_repository_;
+    const inclusion_directives_repository& directives_repository_;
+    const integrated_facets_repository& integrated_facets_repository_;
 };
 
 } } }
