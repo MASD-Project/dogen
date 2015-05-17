@@ -5,21 +5,23 @@
 
 * Mission
 
-Refactor expansion and formattables and get them to cope with all the
-use cases without any major architectural hacks.
+- Refactor expansion and formattables and get them to cope with all
+  the use cases without any major architectural hacks.
+- Implement as many formatters as possible using the new cpp
+  architecture.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-17 Sun 12:33]
+Clock summary at [2015-05-17 Sun 12:51]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *30:14* |       |      |
+| *Total time*                                                                | *30:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 30:14 |      |
+| Active                                                                      |         | 30:34 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -36,7 +38,7 @@ Clock summary at [2015-05-17 Sun 12:33]
 | COMPLETED Create a simple enabler in formattables                           |         |       | 1:41 |
 | COMPLETED Delete dynamic expansion                                          |         |       | 0:22 |
 | COMPLETED Rename dynamic schema back to dynamic                             |         |       | 1:19 |
-| COMPLETED Tidy-up cpp diagram                                               |         |       | 1:39 |
+| COMPLETED Tidy-up cpp diagram                                               |         |       | 1:59 |
 | COMPLETED Consider refactoring formatter properties repository factory      |         |       | 0:08 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
 #+end:
@@ -543,6 +545,7 @@ to have nesting. Rename it back to just =dynamic=.
 
 *** COMPLETED Tidy-up cpp diagram                                     :story:
     CLOSED: [2015-05-17 Sun 12:22]
+    CLOCK: [2015-05-17 Sun 12:31]--[2015-05-17 Sun 12:51] =>  0:20
     CLOCK: [2015-05-17 Sun 10:45]--[2015-05-17 Sun 12:22] =>  1:37
     CLOCK: [2015-05-15 Fri 09:26]--[2015-05-15 Fri 09:28] =>  0:02
 
@@ -618,19 +621,26 @@ model:
 
 - not honouring flags set in command line options.
 
-*** Create the =global_aspect_settings= class                         :story:
+*** STARTED Create the =global_aspect_settings= class                 :story:
 
 Create a class to manage the global aspect settings:
 
 - disable_complete_constructor:
-- cpp-disable-xml-serialization
-- cpp-disable-eos-serialization
-- cpp-disable-versioning
+- cpp_disable_xml_serialization
+- cpp_disable_eos_serialization
+- cpp_disable_versioning
 
-These can only be set on the root object. Add these settings o bundle
-using the same approach as general settings. Create factory.
+These can only be set on the root object.
 
+Tasks:
+
+- add these settings to bundle using the same approach as general
+  settings.
+- create a factory for the settings.
 - update includes provider to take in global aspect settings.
+- update models that use these command line options to have the
+  meta-data set up.
+- update stitch templates to make use of them.
 
 *** Add support for "field gathering"                                 :story:
 
