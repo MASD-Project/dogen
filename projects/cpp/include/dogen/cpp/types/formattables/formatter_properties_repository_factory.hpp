@@ -53,7 +53,7 @@ private:
         std::unordered_map<std::string, path_derivatives> path_derivatives_;
         std::unordered_map<std::string, std::list<std::string> >
         inclusion_dependencies;
-        std::unordered_map<std::string,bool> enablement;
+        std::unordered_map<std::string, bool> enablement;
     };
 
 private:

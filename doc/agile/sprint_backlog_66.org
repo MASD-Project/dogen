@@ -548,6 +548,23 @@ to have nesting. Rename it back to just =dynamic=.
 After all the new classes, expansion changes etc the cpp diagram
 became really messy. Make it reflect the new reality.
 
+*** COMPLETED Consider refactoring formatter properties repository factory :story:
+    CLOSED: [2015-05-17 Sun 12:29]
+    CLOCK: [2015-05-17 Sun 12:22]--[2015-05-17 Sun 12:30] =>  0:08
+
+At present we merged the containers at the qname level. However,
+we could merge them one level down - at the formatter level. This
+would mean that we may not even require a formatter properties
+factory. The merging and the generation of formatter properties could
+all be combined into one operation.
+
+Actually after some consideration, it was decided its not worth doing
+this refactor. Moving the loop one level down would not affect the
+overall number of times we loo through the container - we'd just be
+moving responsibilities around. And since we have a very consistent
+pattern of responsibilities for each factory (e.g. deal with formatter
+data) it makes sense to keep it like this.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -599,14 +616,6 @@ Problems with models that disable facets and disable full constructor
 model:
 
 - not honouring flags set in command line options.
-
-*** Refactor formatter properties repository factory                  :story:
-
-At present we merged the containers at the qname level. However,
-we could merge them one level down - at the formatter level. This
-would mean that we may not even require a formatter properties
-factory. The merging and the generation of formatter properties could
-all be combined into one operation.
 
 *** Consider renaming path derivatives                                :story:
 
