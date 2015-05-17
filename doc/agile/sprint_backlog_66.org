@@ -13,7 +13,7 @@ use cases without any major architectural hacks.
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-16 Sat 02:45]
+Clock summary at [2015-05-17 Sun 10:47]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
@@ -540,6 +540,14 @@ As per analysis we do not need dynamic expansion so get rid of it.
 Once we are back to just having =dynamic::schema=, it makes no sense
 to have nesting. Rename it back to just =dynamic=.
 
+*** COMPLETED Tidy-up cpp diagram                                     :story:
+    CLOSED: [2015-05-17 Sun 12:22]
+    CLOCK: [2015-05-17 Sun 10:45]--[2015-05-17 Sun 12:22] =>  1:37
+    CLOCK: [2015-05-15 Fri 09:26]--[2015-05-15 Fri 09:28] =>  0:02
+
+After all the new classes, expansion changes etc the cpp diagram
+became really messy. Make it reflect the new reality.
+
 *** STARTED Implement types class header formatter using stitch       :story:
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08
     CLOCK: [2015-05-11 Mon 18:46]--[2015-05-11 Mon 18:57] =>  0:11
@@ -591,12 +599,6 @@ Problems with models that disable facets and disable full constructor
 model:
 
 - not honouring flags set in command line options.
-
-*** STARTED Tidy-up cpp diagram                                       :story:
-    CLOCK: [2015-05-15 Fri 09:26]--[2015-05-15 Fri 09:28] =>  0:02
-
-After all the new classes, expansion changes etc the cpp diagram
-became really messy. Make it reflect the new reality.
 
 *** Refactor formatter properties repository factory                  :story:
 

@@ -110,7 +110,6 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"
                              << r;
     return r;
-
 }
 
 } } }
