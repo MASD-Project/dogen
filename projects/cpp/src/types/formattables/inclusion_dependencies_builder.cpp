@@ -90,8 +90,8 @@ bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
 
 bool inclusion_dependencies_builder::is_integrated(
     const std::string& formatter_name, const std::string& facet_name) const {
-    const auto& iffn(
-        integrated_facets_repository_.integrated_facets_by_formatter_name());
+    const auto& ifrp(integrated_facets_repository_);
+    const auto& iffn(ifrp.integrated_facets_by_formatter_name());
 
     const auto i(iffn.find(formatter_name));
     if (i == iffn.end())
@@ -135,10 +135,11 @@ void inclusion_dependencies_builder::add_if_integrated(
     const std::string& formatter_name,
     const std::string& facet_name,
     const std::string& inclusion_directive) {
+
     if (!is_integrated(formatter_name, facet_name)) {
         BOOST_LOG_SEV(lg, debug) << "Facet not integrated so skipping include. "
-                                 << " Facet: " << facet_name
-                                 << " include: " << inclusion_directive;
+                                 << " Facet: '" << facet_name << "'"
+                                 << " include: '" << inclusion_directive << "'";
         return;
     }
 
