@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
+#include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -98,6 +99,14 @@ private:
         const formatters::container& fc, const sml::model& m) const;
 
     /**
+     * @brief Creates integrated facets repository
+     */
+    integrated_facets_repository create_integrated_facets_repository(
+        const dynamic::repository& srp,
+        const dynamic::object& root_object,
+        const formatters::container& fc) const;
+
+    /**
      * @brief Merge all data structures.
      */
     std::unordered_map<sml::qname, merged_formatter_data>
@@ -110,10 +119,8 @@ private:
      */
     formatter_properties_repository
     create_formatter_properties(
-        const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const formatters::container& fc,
-        const std::unordered_map<sml::qname, merged_formatter_data>& mfd) const;
+        const std::unordered_map<sml::qname, merged_formatter_data>& mfd,
+        const integrated_facets_repository& ifrp) const;
 
 public:
     formatter_properties_repository make(

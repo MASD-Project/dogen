@@ -18,40 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INTEGRATED_FACETS_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INTEGRATED_FACETS_REPOSITORY_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_set>
-#include <unordered_map>
-#include "dogen/cpp/types/formattables/path_derivatives.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the formatter properties.
+ * @brief Builds the repository with integrated facet information.
  */
-class formatter_properties_factory {
+class integrated_facets_repository_factory {
 public:
     /**
-     * @brief Create the formatter properties.
+     * @brief Build the repository with integrated facet information.
      */
-    std::unordered_map<std::string, formatter_properties>
-    make(const std::unordered_map<std::string, path_derivatives>&
-        path_derivatives,
-        const std::unordered_map<std::string, std::list<std::string> >&
-        inclusion_dependencies,
-        const std::unordered_map<std::string, bool>& enablement,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >
-        integrated_facets) const;
+    integrated_facets_repository make(const dynamic::repository& rp,
+        const dynamic::object& root_object,
+        const formatters::container& fc);
 };
 
 } } }

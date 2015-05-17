@@ -142,8 +142,7 @@ enablement_repository enablement_repository_factory::make(
     generator g(f);
     sml::all_model_items_traversal(m, g);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:"
-                             << g.result();
+    BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << g.result();
     return g.result();
 }
 

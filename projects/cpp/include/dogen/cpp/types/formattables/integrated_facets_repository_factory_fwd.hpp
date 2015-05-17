@@ -18,41 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_FORMATTER_PROPERTIES_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_INTEGRATED_FACETS_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_INTEGRATED_FACETS_REPOSITORY_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_set>
-#include <unordered_map>
-#include "dogen/cpp/types/formattables/path_derivatives.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-/**
- * @brief Creates the formatter properties.
- */
-class formatter_properties_factory {
-public:
-    /**
-     * @brief Create the formatter properties.
-     */
-    std::unordered_map<std::string, formatter_properties>
-    make(const std::unordered_map<std::string, path_derivatives>&
-        path_derivatives,
-        const std::unordered_map<std::string, std::list<std::string> >&
-        inclusion_dependencies,
-        const std::unordered_map<std::string, bool>& enablement,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >
-        integrated_facets) const;
-};
+class integrated_facets_repository_factory;
 
 } } }
 

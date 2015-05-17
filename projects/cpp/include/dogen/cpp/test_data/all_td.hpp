@@ -60,6 +60,7 @@
 #include "dogen/cpp/test_data/settings/inclusion_directives_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/path_derivatives_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/global_enablement_properties_td.hpp"
+#include "dogen/cpp/test_data/formattables/integrated_facets_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/formatter_properties_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/inclusion_directives_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/inclusion_dependencies_repository_td.hpp"

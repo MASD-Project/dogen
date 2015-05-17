@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-17 Sun 15:25]
+Clock summary at [2015-05-17 Sun 18:54]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *33:05* |       |      |
+| *Total time*                                                                | *34:56* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 33:05 |      |
+| Active                                                                      |         | 34:56 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -42,6 +42,7 @@ Clock summary at [2015-05-17 Sun 15:25]
 | COMPLETED Consider refactoring formatter properties repository factory      |         |       | 0:08 |
 | COMPLETED Create the =aspect_settings= class                                |         |       | 2:31 |
 | STARTED Implement types class header formatter using stitch                 |         |       | 2:28 |
+| STARTED Finish enablement support work                                      |         |       | 1:51 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -645,6 +646,17 @@ Problems with models that disable facets and disable full constructor
 model:
 
 - not honouring flags set in command line options.
+
+*** STARTED Finish enablement support work                            :story:
+    CLOCK: [2015-05-17 Sun 17:02]--[2015-05-17 Sun 18:53] =>  1:51
+
+We added the core of enablement but its not all done yet:
+
+- pass enablement settings to inclusion provision and use them to
+  determine if a formatter is enabled.
+- update all relevant diagrams with enablement settings.
+- add only if enabled
+- add if integrated and enabled
 
 *** Add support for "field gathering"                                 :story:
 
