@@ -91,6 +91,8 @@ const std::string type_has_no_inclusion("Could not find inclusion for type: ");
 const std::string no_visitees("Visitor is not visiting any types: ");
 const std::string formatter_properties_missing(
     "Could not find formatter properties for type: ");
+const std::string settings_bundle_missing(
+    "Could not find settings bundle for type: ");
 
 bool is_char_like(const std::string& type_name) {
     return
@@ -176,9 +178,10 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-transformer::transformer(const settings::workflow& w,
-    const formatter_properties_repository& repository, const sml::model& m) :
-    settings_workflow_(w), repository_(repository), model_(m) { }
+transformer::transformer(const settings::bundle_repository& brp,
+    const formatter_properties_repository& frp, const sml::model& m)
+    : bundle_repository_(brp), formatter_properties_repository_(frp),
+      model_(m) {}
 
 void transformer::
 populate_formattable_properties(const sml::qname& qn, formattable& f) const {
@@ -186,7 +189,6 @@ populate_formattable_properties(const sml::qname& qn, formattable& f) const {
 }
 
 void transformer::populate_entity_properties(const sml::qname& qn,
-    const dynamic::object& o,
     const std::string& documentation, entity& e) const {
 
     populate_formattable_properties(qn, e);
@@ -194,8 +196,10 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     e.name(qn.simple_name());
     e.documentation(documentation);
 
-    const auto i(repository_.formatter_properties_by_qname().find(qn));
-    if (i == repository_.formatter_properties_by_qname().end()) {
+    const auto& fpqn(formatter_properties_repository_.
+        formatter_properties_by_qname());
+    const auto i(fpqn.find(qn));
+    if (i == fpqn.end()) {
         const auto n(sml::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << formatter_properties_missing << n;
         BOOST_THROW_EXCEPTION(
@@ -205,7 +209,16 @@ void transformer::populate_entity_properties(const sml::qname& qn,
 
     name_builder b;
     e.namespaces(b.namespace_list(model_, qn));
-    e.settings(settings_workflow_.execute(o));
+
+    const auto& bqn(bundle_repository_.bundles_by_qname());
+    const auto j(bqn.find(qn));
+    if (j == bqn.end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << n;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(settings_bundle_missing + n));
+    }
+    e.settings(j->second);
 
     std::list<std::string> ns(e.namespaces());
     ns.push_back(e.name());
@@ -346,7 +359,7 @@ transformer::to_enum_info(const sml::enumeration& e) const {
                              << sml::string_converter::convert(e.name());
 
     auto r(std::make_shared<enum_info>());
-    populate_entity_properties(e.name(), e.extensions(), e.documentation(), *r);
+    populate_entity_properties(e.name(), e.documentation(), *r);
     r->type(e.underlying_type().simple_name());
 
     for (const auto& en : e.enumerators())
@@ -362,7 +375,7 @@ to_namespace_info(const sml::module& m) const {
                              << sml::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
-    populate_entity_properties(m.name(), m.extensions(), m.documentation(), *r);
+    populate_entity_properties(m.name(), m.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module.";
     return r;
@@ -374,7 +387,7 @@ transformer::to_exception_info(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<exception_info>());
-    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exception.";
     return r;
@@ -383,7 +396,7 @@ transformer::to_exception_info(const sml::object& o) const {
 std::shared_ptr<class_info>
 transformer::to_class_info(const sml::object& o, const class_types ct) const {
     auto r(std::make_shared<class_info>());
-    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.documentation(), *r);
 
     r->is_immutable(o.is_immutable());
     r->is_visitable(o.is_visitable() &&
@@ -489,7 +502,7 @@ transformer::to_visitor_info(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     auto r(std::make_shared<visitor_info>());
-    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.documentation(), *r);
 
     auto i(o.relationships().find(sml::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -509,14 +522,14 @@ transformer::to_visitor_info(const sml::object& o) const {
 std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const sml::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
-    populate_entity_properties(o.name(), o.extensions(), o.documentation(), *r);
+    populate_entity_properties(o.name(), o.documentation(), *r);
     return r;
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const sml::enumeration& e) const {
     auto r(std::make_shared<forward_declarations_info>());
-    populate_entity_properties(e.name(), e.extensions(), e.documentation(), *r);
+    populate_entity_properties(e.name(), e.documentation(), *r);
     r->is_enum(true);
     r->enum_type("unsigned int"); // FIXME
     return r;

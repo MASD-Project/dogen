@@ -18,23 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_BUNDLE_REPOSITORY_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_SETTINGS_BUNDLE_REPOSITORY_FWD_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
-namespace odb {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void register_opaque_settings_factories() {
-    auto& rg(settings::bundle_repository_factory::registrar());
-    rg.register_opaque_settings_factory(boost::make_shared<settings_factory>());
-}
+#include "dogen/cpp/types/settings/bundle_repository_fwd.hpp"
 
-void initializer::initialize(registrar& /*rg*/) {
-    register_opaque_settings_factories();
-}
+namespace boost {
+namespace serialization {
 
-} } } }
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::settings::bundle_repository& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::settings::bundle_repository& v, unsigned int version);
+
+} }
+
+#endif

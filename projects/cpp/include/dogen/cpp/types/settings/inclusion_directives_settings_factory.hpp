@@ -39,7 +39,10 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-
+/**
+ * @brief Creates the inclusion directive settings for all
+ * formatters.
+ */
 class inclusion_directives_settings_factory {
 public:
     inclusion_directives_settings_factory(const dynamic::repository& rp,
@@ -47,28 +50,26 @@ public:
 
 private:
     /**
-     * @brief All relevant properties we need to remember for each formatter.
+     * @brief All field definitions we require.
      */
-    struct formatter_properties {
-        std::string formatter_name;
+    struct field_definitions {
         dynamic::field_definition inclusion_directive;
         dynamic::field_definition inclusion_required;
     };
 
     /**
-     * @brief Creates the set of formatter properties for a given
+     * @brief Creates the set of field definitions for a given
      * formatter.
      */
-    formatter_properties make_formatter_properties(
-        const dynamic::repository& rp,
-        const formatters::formatter_interface& f) const;
+    field_definitions make_field_definitions(const dynamic::repository& rp,
+        const std::string& formatter_name) const;
 
     /**
-     * @brief Generates all of the formatter properties, using the
+     * @brief Generates all of the field definitions, using the
      * repository data and the registered formatters.
      */
-    std::unordered_map<std::string, formatter_properties>
-    make_formatter_properties(const dynamic::repository& rp,
+    std::unordered_map<std::string, field_definitions>
+    make_field_definitions(const dynamic::repository& rp,
         const formatters::container& fc) const;
 
     /**
@@ -83,14 +84,14 @@ private:
      * @brief Obtains the inclusion directive for a given formatter.
      */
     boost::optional<std::string> obtain_inclusion_directive_for_formatter(
-        const formatter_properties& fp,
+        const field_definitions& fd,
         const dynamic::object& o) const;
 
     /**
      * @brief Obtains the inclusion required flag for a given formatter.
      */
     bool obtain_inclusion_required_for_formatter(
-        const formatter_properties& fp,
+        const field_definitions& fd,
         const dynamic::object& o) const;
 
     /**
@@ -107,8 +108,7 @@ public:
     inclusion_directives_settings make(const dynamic::object& o) const;
 
 private:
-    const std::unordered_map<std::string, formatter_properties>
-    formatter_properties_;
+    const std::unordered_map<std::string, field_definitions> field_definitions_;
     dynamic::field_definition inclusion_required_;
 };
 

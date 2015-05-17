@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/formatters/io/general_settings_io.hpp"
+#include "dogen/cpp/io/settings/aspect_settings_io.hpp"
 #include "dogen/cpp/io/settings/opaque_settings_io.hpp"
 
 namespace boost {
@@ -89,6 +90,7 @@ std::ostream& operator<<(std::ostream& s, const bundle& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::settings::bundle\"" << ", "
       << "\"general_settings\": " << v.general_settings() << ", "
+      << "\"aspect_settings\": " << v.aspect_settings() << ", "
       << "\"opaque_settings\": " << v.opaque_settings()
       << " }";
     return(s);

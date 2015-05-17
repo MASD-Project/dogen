@@ -18,23 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/cpp/io/settings/aspect_settings_io.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
-namespace odb {
+namespace settings {
 
-void register_opaque_settings_factories() {
-    auto& rg(settings::bundle_repository_factory::registrar());
-    rg.register_opaque_settings_factory(boost::make_shared<settings_factory>());
+std::ostream& operator<<(std::ostream& s, const aspect_settings& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::settings::aspect_settings\"" << ", "
+      << "\"disable_complete_constructor\": " << v.disable_complete_constructor() << ", "
+      << "\"disable_xml_serialization\": " << v.disable_xml_serialization() << ", "
+      << "\"disable_eos_serialization\": " << v.disable_eos_serialization() << ", "
+      << "\"disable_versioning\": " << v.disable_versioning()
+      << " }";
+    return(s);
 }
 
-void initializer::initialize(registrar& /*rg*/) {
-    register_opaque_settings_factories();
-}
-
-} } } }
+} } }

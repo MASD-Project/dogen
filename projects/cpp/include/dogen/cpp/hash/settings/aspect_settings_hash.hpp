@@ -18,23 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
+#ifndef DOGEN_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
+#define DOGEN_CPP_HASH_SETTINGS_ASPECT_SETTINGS_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/cpp/types/settings/aspect_settings.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
-namespace odb {
+namespace settings {
 
-void register_opaque_settings_factories() {
-    auto& rg(settings::bundle_repository_factory::registrar());
-    rg.register_opaque_settings_factory(boost::make_shared<settings_factory>());
+struct aspect_settings_hasher {
+public:
+    static std::size_t hash(const aspect_settings& v);
+};
+
+} } }
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::settings::aspect_settings> {
+public:
+    size_t operator()(const dogen::cpp::settings::aspect_settings& v) const {
+        return dogen::cpp::settings::aspect_settings_hasher::hash(v);
+    }
+};
+
 }
-
-void initializer::initialize(registrar& /*rg*/) {
-    register_opaque_settings_factories();
-}
-
-} } } }
+#endif

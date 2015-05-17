@@ -73,6 +73,26 @@ std::string traits::inclusion_dependency() {
     return r;
 }
 
+std::string traits::disable_complete_constructor() {
+    static std::string r("cpp.disable_complete_constructor");
+    return r;
+}
+
+std::string traits::disable_xml_serialization() {
+    static std::string r("cpp.disable_complete_constructor");
+    return r;
+}
+
+std::string traits::disable_eos_serialization() {
+    static std::string r("cpp.disable_eos_serialization");
+    return r;
+}
+
+std::string traits::disable_versioning() {
+    static std::string r("cpp.disable_versioning");
+    return r;
+}
+
 std::string traits::cpp::inclusion_required() {
     static std::string r("cpp.inclusion_required");
     return r;
@@ -95,11 +115,6 @@ std::string traits::cpp::header_file_extension() {
 
 std::string traits::cpp::implementation_file_extension() {
     static std::string r("cpp.implementation_file_extension");
-    return r;
-}
-
-std::string traits::cpp::type::disable_complete_constructor() {
-    static std::string r("cpp.type.disable_complete_constructor");
     return r;
 }
 

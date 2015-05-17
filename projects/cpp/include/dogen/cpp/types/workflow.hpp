@@ -33,7 +33,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
-#include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -61,6 +61,13 @@ private:
 
 private:
     /**
+     * @brief Create the bundle repository
+     */
+    settings::bundle_repository create_bundle_repository(
+        const dynamic::repository& rp, const dynamic::object& root_object,
+        const sml::model& m) const;
+
+    /**
      * @brief Create the formattables.
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -68,7 +75,7 @@ private:
             const dynamic::repository& srp,
             const dynamic::object& root_object,
             const formatters::container& fc,
-            const settings::workflow& sw,
+            const settings::bundle_repository& brp,
             const sml::model& m) const;
 
     /**

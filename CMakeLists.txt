@@ -182,7 +182,7 @@ if(NOT DEFINED JQ_COMMAND)
     set(WITH_JSON_VALIDATION "off")
 else()
     message(STATUS "Found jq (${JQ_COMMAND})...")
-    add_custom_target(validate_json_all)
+    add_custom_target(validate_all_json)
 endif()
 
 # hash of the top commit

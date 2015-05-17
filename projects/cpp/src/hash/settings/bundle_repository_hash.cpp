@@ -18,10 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/aspect_settings_hash.hpp"
-#include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
+#include "dogen/cpp/hash/settings/bundle_repository_hash.hpp"
 
 namespace {
 
@@ -32,27 +31,11 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const boost::optional<dogen::formatters::general_settings>& v){
-    std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v){
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_bundle(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& v){
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_cpp_settings_opaque_settings(i.second));
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -63,13 +46,10 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t bundle_hasher::hash(const bundle&v) {
+std::size_t bundle_repository_hasher::hash(const bundle_repository&v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
-    combine(seed, v.aspect_settings());
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(v.opaque_settings()));
-
+    combine(seed, hash_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_bundle(v.bundles_by_qname()));
     return seed;
 }
 

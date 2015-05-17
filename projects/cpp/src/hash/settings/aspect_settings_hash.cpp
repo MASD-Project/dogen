@@ -18,19 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_WORKFLOW_FWD_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_WORKFLOW_FWD_HPP
+#include "dogen/cpp/hash/settings/aspect_settings_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-class workflow;
+std::size_t aspect_settings_hasher::hash(const aspect_settings&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.disable_complete_constructor());
+    combine(seed, v.disable_xml_serialization());
+    combine(seed, v.disable_eos_serialization());
+    combine(seed, v.disable_versioning());
+
+    return seed;
+}
 
 } } }
-
-#endif

@@ -18,23 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
-#include "dogen/cpp/types/formatters/odb/initializer.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_SETTINGS_ASPECT_SETTINGS_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formatters {
-namespace odb {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void register_opaque_settings_factories() {
-    auto& rg(settings::bundle_repository_factory::registrar());
-    rg.register_opaque_settings_factory(boost::make_shared<settings_factory>());
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/settings/aspect_settings.hpp"
 
-void initializer::initialize(registrar& /*rg*/) {
-    register_opaque_settings_factories();
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::settings::aspect_settings)
+namespace boost {
+namespace serialization {
 
-} } } }
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::settings::aspect_settings& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::settings::aspect_settings& v, unsigned int version);
+
+} }
+
+#endif

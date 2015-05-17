@@ -18,43 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_ASPECT_SETTINGS_TD_HPP
+#define DOGEN_CPP_TEST_DATA_SETTINGS_ASPECT_SETTINGS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <memory>
-#include <forward_list>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/settings/bundle_repository.hpp"
-#include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/settings/aspect_settings.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formattables {
+namespace settings {
 
-/**
- * @brief Generates a list of formattables from a given container of
- * SML elements.
- */
-class workflow {
+class aspect_settings_generator {
 public:
-    /**
-     * @brief Executes the workflow.
-     */
-    std::forward_list<std::shared_ptr<formattables::formattable> >
-    execute(const config::cpp_options& opts,
-        const dynamic::repository& srp,
-        const dynamic::object& root_object,
-        const formatters::container& fc,
-        const settings::bundle_repository& brp,
-        const sml::model& m) const;
+    aspect_settings_generator();
+
+public:
+    typedef dogen::cpp::settings::aspect_settings result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } }

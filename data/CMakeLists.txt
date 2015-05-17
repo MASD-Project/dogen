@@ -44,7 +44,7 @@ if (WITH_JSON_VALIDATION)
         "${CMAKE_CURRENT_SOURCE_DIR}/fields/*.json")
 
     add_custom_target(validate_json_fields)
-    add_dependencies(validate_json_all validate_json_fields)
+    add_dependencies(validate_all_json validate_json_fields)
     foreach(file ${files})
         add_custom_target(validate_json_fields_${file}
              COMMENT "Validating JSON for fields/${file}."
@@ -61,7 +61,7 @@ if (WITH_JSON_VALIDATION)
         "${CMAKE_CURRENT_SOURCE_DIR}/library/*.json")
 
     add_custom_target(validate_json_library)
-    add_dependencies(validate_json_all validate_json_library)
+    add_dependencies(validate_all_json validate_json_library)
     foreach(file ${files})
         add_custom_target(validate_json_library_${file}
              COMMENT "Validating JSON for library/${file}."
@@ -78,7 +78,7 @@ if (WITH_JSON_VALIDATION)
         "${CMAKE_CURRENT_SOURCE_DIR}/modeline_groups/*.json")
 
     add_custom_target(validate_json_modeline_groups)
-    add_dependencies(validate_json_all validate_json_modeline_groups)
+    add_dependencies(validate_all_json validate_json_modeline_groups)
     foreach(file ${files})
         add_custom_target(validate_json_modeline_groups_${file}
              COMMENT "Validating JSON for modeline_groups/${file}."

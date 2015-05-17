@@ -18,44 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
+#ifndef DOGEN_CPP_IO_SETTINGS_BUNDLE_REPOSITORY_IO_HPP
+#define DOGEN_CPP_IO_SETTINGS_BUNDLE_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <memory>
-#include <forward_list>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/config/types/cpp_options.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
+#include <iosfwd>
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
-#include "dogen/cpp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formattables {
+namespace settings {
 
-/**
- * @brief Generates a list of formattables from a given container of
- * SML elements.
- */
-class workflow {
-public:
-    /**
-     * @brief Executes the workflow.
-     */
-    std::forward_list<std::shared_ptr<formattables::formattable> >
-    execute(const config::cpp_options& opts,
-        const dynamic::repository& srp,
-        const dynamic::object& root_object,
-        const formatters::container& fc,
-        const settings::bundle_repository& brp,
-        const sml::model& m) const;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::cpp::settings::bundle_repository& v);
 
 } } }
 

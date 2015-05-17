@@ -50,7 +50,7 @@
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
-#include "dogen/cpp/types/settings/workflow.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
@@ -62,8 +62,8 @@ namespace formattables {
  */
 class transformer {
 public:
-    transformer(const settings::workflow& w,
-        const formatter_properties_repository& rp, const sml::model& m);
+    transformer(const settings::bundle_repository& brp,
+        const formatter_properties_repository& frp, const sml::model& m);
 
 private:
     /**
@@ -76,8 +76,7 @@ private:
      * @brief Populates all properties at the entity base class level.
      */
     void populate_entity_properties(const sml::qname& qn,
-        const dynamic::object& o, const std::string& documentation,
-        entity& e) const;
+        const std::string& documentation, entity& e) const;
 
 private:
     /**
@@ -192,8 +191,8 @@ public:
     transform(const sml::object& o) const;
 
 private:
-    const settings::workflow& settings_workflow_;
-    const formatter_properties_repository& repository_;
+    const settings::bundle_repository& bundle_repository_;
+    const formatter_properties_repository& formatter_properties_repository_;
     const sml::model& model_;
 };
 

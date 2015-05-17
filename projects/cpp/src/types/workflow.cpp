@@ -24,6 +24,7 @@
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
+#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 
@@ -57,17 +58,25 @@ dynamic::object workflow::obtain_root_object(const sml::model& m) const {
     return i->second.extensions();
 }
 
+settings::bundle_repository workflow::create_bundle_repository(
+    const dynamic::repository& rp, const dynamic::object& root_object,
+    const sml::model& m) const {
+    settings::bundle_repository_factory f;
+    f.validate();
+    return f.make(rp, root_object, m);
+}
+
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::create_formattables_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
     const formatters::container& fc,
-    const settings::workflow& sw,
+    const settings::bundle_repository& brp,
     const sml::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, srp, root_object, fc, sw, m);
+    return fw.execute(opts, srp, root_object, fc, brp, m);
 }
 
 std::forward_list<dogen::formatters::file>
@@ -102,13 +111,12 @@ workflow::generate(const config::knitting_options& ko,
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto ro(obtain_root_object(m));
-    settings::workflow w(ro);
-    w.validate();
+    const auto brp(create_bundle_repository(rp, ro, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
-    const auto f(create_formattables_activty(ko.cpp(), rp, ro, fc, w, m));
+    const auto f(create_formattables_activty(ko.cpp(), rp, ro, fc, brp, m));
     const auto r(format_activty(f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

@@ -43,46 +43,42 @@ namespace settings {
 inclusion_directives_settings_factory::
 inclusion_directives_settings_factory(const dynamic::repository& rp,
     const formatters::container& fc)
-    : formatter_properties_(make_formatter_properties(rp, fc)),
+    : field_definitions_(make_field_definitions(rp, fc)),
       inclusion_required_(get_top_level_inclusion_required_field(rp)) {}
 
-inclusion_directives_settings_factory::formatter_properties
-inclusion_directives_settings_factory::make_formatter_properties(
-    const dynamic::repository& rp,
-    const formatters::formatter_interface& f) const {
+inclusion_directives_settings_factory::field_definitions
+inclusion_directives_settings_factory::make_field_definitions(
+    const dynamic::repository& rp, const std::string& formatter_name) const {
 
-    formatter_properties r;
-    const auto fn(f.ownership_hierarchy().formatter_name());
-    r.formatter_name = fn;
-
+    field_definitions r;
     const dynamic::repository_selector s(rp);
     const auto& id(traits::inclusion_directive());
-    r.inclusion_directive = s.select_field_by_name(fn, id);
+    r.inclusion_directive = s.select_field_by_name(formatter_name, id);
 
     const auto& ir(traits::inclusion_required());
-    r.inclusion_required = s.select_field_by_name(fn, ir);
+    r.inclusion_required = s.select_field_by_name(formatter_name, ir);
 
     return r;
 }
 
 std::unordered_map<
     std::string,
-    inclusion_directives_settings_factory::formatter_properties
+    inclusion_directives_settings_factory::field_definitions
     >
 inclusion_directives_settings_factory::
-make_formatter_properties(const dynamic::repository& rp,
+make_field_definitions(const dynamic::repository& rp,
     const formatters::container& fc) const {
-    std::unordered_map<std::string, formatter_properties> r;
+    std::unordered_map<std::string, field_definitions> r;
 
     for (const auto f : fc.all_formatters()) {
         const auto& oh(f->ownership_hierarchy());
-        if (oh.formatter_name().empty()) {
+        const auto fn(oh.formatter_name());
+        if (fn.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
-        r[oh.formatter_name()] = make_formatter_properties(rp, *f);
+        r[oh.formatter_name()] = make_field_definitions(rp, fn);
     }
-
     return r;
 }
 
@@ -94,25 +90,25 @@ get_top_level_inclusion_required_field(
 }
 
 boost::optional<std::string> inclusion_directives_settings_factory::
-obtain_inclusion_directive_for_formatter(const formatter_properties& fp,
+obtain_inclusion_directive_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
     boost::optional<std::string> r;
 
     using namespace dynamic;
     const field_selector fs(o);
-    if (!fs.has_field(fp.inclusion_directive))
+    if (!fs.has_field(fd.inclusion_directive))
         return r;
 
-    r = fs.get_text_content(fp.inclusion_directive);
+    r = fs.get_text_content(fd.inclusion_directive);
     return r;
 }
 
 bool inclusion_directives_settings_factory::
-obtain_inclusion_required_for_formatter(const formatter_properties& fp,
+obtain_inclusion_required_for_formatter(const field_definitions& fd,
     const dynamic::object& o) const {
     using namespace dynamic;
     const field_selector fs(o);
-    const auto r(fs.get_boolean_content_or_default(fp.inclusion_required));
+    const auto r(fs.get_boolean_content_or_default(fd.inclusion_required));
     return r;
 }
 
@@ -130,16 +126,17 @@ inclusion_directives_settings inclusion_directives_settings_factory::make(
     const auto ir(obtain_top_level_inclusion_required(o));
     r.inclusion_required(ir);
 
-    for (const auto& pair : formatter_properties_) {
-        const auto& fp(pair.second);
-        const auto id(obtain_inclusion_directive_for_formatter(fp, o));
+    for (const auto& pair : field_definitions_) {
+        const auto& fn(pair.first);
+        const auto& fd(pair.second);
+        const auto id(obtain_inclusion_directive_for_formatter(fd, o));
 
         inclusion_directive_settings st;
         st.inclusion_directive(id);
 
-        const auto fir(obtain_inclusion_required_for_formatter(fp, o));
+        const auto fir(obtain_inclusion_required_for_formatter(fd, o));
         st.inclusion_required(fir);
-        const auto id_pair(std::make_pair(fp.formatter_name, st));
+        const auto id_pair(std::make_pair(fn, st));
         r.inclusion_directive_settings().insert(id_pair);
     }
     return r;

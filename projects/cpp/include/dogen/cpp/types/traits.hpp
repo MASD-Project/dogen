@@ -86,6 +86,26 @@ struct traits {
      */
     static std::string inclusion_required();
 
+    /**
+     * @brief Disables the generation of the complete constructor.
+     */
+    static std::string disable_complete_constructor();
+
+    /**
+     * @brief Disables XML support in boost serialisation.
+     */
+    static std::string disable_xml_serialization();
+
+    /**
+     * @brief Disables EOS support in boost serialisation.
+     */
+    static std::string disable_eos_serialization();
+
+    /**
+     * @brief Disables versioning support.
+     */
+    static std::string disable_versioning();
+
     struct cpp {
         /**
          * @brief Is inclusion required for all formatters.
@@ -111,13 +131,6 @@ struct traits {
          * @brief Name of the directory containing the source files.
          */
         static std::string source_directory_name();
-
-        struct type {
-            /**
-             * @brief If true, the complete constructor is not generated.
-             */
-            static std::string disable_complete_constructor();
-        };
     };
 };
 

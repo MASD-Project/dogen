@@ -18,55 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TEST_DATA_SETTINGS_BUNDLE_REPOSITORY_TD_HPP
+#define DOGEN_CPP_TEST_DATA_SETTINGS_BUNDLE_REPOSITORY_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <memory>
-#include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/cpp/types/settings/bundle.hpp"
-#include "dogen/cpp/types/settings/bundle_factory.hpp"
-#include "dogen/cpp/types/settings/registrar.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-/**
- * @brief Orchestrator for the settings workflow.
- */
-class workflow {
+class bundle_repository_generator {
 public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static cpp::settings::registrar& registrar();
+    bundle_repository_generator();
 
 public:
-    explicit workflow(const dynamic::object& root_object);
+    typedef dogen::cpp::settings::bundle_repository result_type;
 
 public:
-    /**
-     * @brief Ensures the workflow is in a valid state.
-     */
-    void validate() const;
-
-public:
-    /**
-     * @brief Generates the settings bundle.
-     */
-    bundle execute(const dynamic::object& o) const;
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    static std::shared_ptr<cpp::settings::registrar> registrar_;
-    const bundle_factory factory_;
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } }
