@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-18 Mon 21:52]
+Clock summary at [2015-05-18 Mon 22:09]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *40:09* |       |      |
+| *Total time*                                                                | *40:25* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 40:09 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
+| Active                                                                      |         | 40:25 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
 | COMPLETED Remove duplicate includes                                         |         |       | 0:18 |
@@ -49,6 +49,7 @@ Clock summary at [2015-05-18 Mon 21:52]
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-05-18 Mon 21:52]--[2015-05-18 Mon 22:08] =>  0:16
     CLOCK: [2015-05-14 Thu 19:46]--[2015-05-14 Thu 19:48] =>  0:02
     CLOCK: [2015-05-14 Thu 19:40]--[2015-05-14 Thu 19:46] =>  0:06
     CLOCK: [2015-05-13 Wed 19:45]--[2015-05-13 Wed 20:08] =>  0:23
@@ -708,6 +709,30 @@ formatter in types, plug it in and start working through the diffs.
 
 We need to implement a stitch template for the namespace header
 formatter in types, plug it in and start working through the diffs.
+
+*** Do not include algorithm if swap is disabled                      :story:
+
+At present we always include =algorithm= in types' class header - both
+in new and old world. However, it is there for swap, so we should only
+include it if we are going to generate swap. This could be achieved
+with:
+
+: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
+
+As per stitch template.
+
+*** Create more "utility" members in class info                       :story:
+
+One way of making the templates a bit more manageable is to avoid
+having really complex conditions. We could simplify these by giving
+them intelligible names and making them properties of the
+formattables - mainly class info as that's where the complexity seems
+to stem from. For example:
+
+: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
+
+could be replaced with =has_swap=, or perhaps even =has_public_swap= /
+=has_protected_swap=.
 
 *** Add support for "field gathering"                                 :story:
 
