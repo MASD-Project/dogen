@@ -55,6 +55,8 @@ namespace cpp {
  *
  */
 namespace formattables {
-} } }
+}
+
+} }
 
 #endif

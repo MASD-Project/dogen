@@ -36,6 +36,8 @@ namespace dogen {
  *
  */
 namespace config {
-} }
+}
+
+}
 
 #endif

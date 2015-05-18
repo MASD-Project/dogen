@@ -82,12 +82,18 @@ void namespace_documentation::format_namespace(
         dc.format(ni.documentation());
         nsf.format_begin(stream_, ni.namespaces().back());
 
-        bool first(true);
+        auto pos(0);
         for (auto ns : ni.namespaces()) {
-            if (!first)
+            if (pos == 0) {
+                nsf.format_end(stream_, ns);
+                utility_.blank_line(2);
+            } else if (pos == 1) {
+                nsf.format_end(stream_, ns);
+            } else {
                 stream_ << " ";
-            nsf.format_end(stream_, ns);
-            first = false;
+                nsf.format_end(stream_, ns);
+            }
+            ++pos;
         }
     }
     utility_.blank_line(2);

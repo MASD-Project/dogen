@@ -157,7 +157,6 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
 #include "dogen/cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/enum_header_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/enum_implementation_formatter.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter.hpp"

@@ -35,6 +35,8 @@ namespace dogen {
  *
  */
 namespace frontend {
-} }
+}
+
+}
 
 #endif

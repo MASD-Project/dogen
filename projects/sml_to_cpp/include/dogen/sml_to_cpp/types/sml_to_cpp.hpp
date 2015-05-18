@@ -35,6 +35,8 @@ namespace dogen {
  *
  */
 namespace sml_to_cpp {
-} }
+}
+
+}
 
 #endif

@@ -130,6 +130,8 @@ namespace dogen {
  *
  */
 namespace dia_to_sml {
-} }
+}
+
+}
 
 #endif

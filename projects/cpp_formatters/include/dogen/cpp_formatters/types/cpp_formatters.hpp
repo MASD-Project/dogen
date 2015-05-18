@@ -36,6 +36,8 @@ namespace dogen {
  *
  */
 namespace cpp_formatters {
-} }
+}
+
+}
 
 #endif

@@ -34,6 +34,8 @@ namespace test_models {
  * This comment will be applied to the model namespace itself.
  */
 namespace comments {
-} } }
+}
+
+} }
 
 #endif

@@ -78,6 +78,8 @@ namespace dogen {
  *
  */
 namespace cpp {
-} }
+}
+
+}
 
 #endif

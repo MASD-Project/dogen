@@ -35,6 +35,8 @@ namespace formatters {
  *
  */
 namespace odb {
-} } } }
+}
+
+} } }
 
 #endif

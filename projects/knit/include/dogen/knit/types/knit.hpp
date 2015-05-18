@@ -37,6 +37,8 @@ namespace dogen {
  *
  */
 namespace knit {
-} }
+}
+
+}
 
 #endif

@@ -34,6 +34,8 @@ namespace package {
  * @brief package2
  */
 namespace package2 {
-} } } } }
+}
+
+} } } }
 
 #endif

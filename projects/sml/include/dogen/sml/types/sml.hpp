@@ -88,6 +88,8 @@ namespace dogen {
  *
  */
 namespace sml {
-} }
+}
+
+}
 
 #endif

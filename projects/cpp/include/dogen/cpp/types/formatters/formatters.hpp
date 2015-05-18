@@ -37,6 +37,8 @@ namespace cpp {
  *
  */
 namespace formatters {
-} } }
+}
+
+} }
 
 #endif

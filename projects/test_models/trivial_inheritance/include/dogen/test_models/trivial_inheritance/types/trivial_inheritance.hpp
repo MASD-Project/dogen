@@ -36,6 +36,8 @@ namespace test_models {
  *
  */
 namespace trivial_inheritance {
-} } }
+}
+
+} }
 
 #endif

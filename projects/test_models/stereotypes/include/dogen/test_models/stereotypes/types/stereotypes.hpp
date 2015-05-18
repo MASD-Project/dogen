@@ -43,6 +43,8 @@ namespace test_models {
  *
  */
 namespace stereotypes {
-} } }
+}
+
+} }
 
 #endif

@@ -33,6 +33,8 @@ namespace comments {
  * @brief package
  */
 namespace package {
-} } } }
+}
+
+} } }
 
 #endif

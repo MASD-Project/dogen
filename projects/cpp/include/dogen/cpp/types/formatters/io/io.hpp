@@ -35,6 +35,8 @@ namespace formatters {
  *
  */
 namespace io {
-} } } }
+}
+
+} } }
 
 #endif

@@ -38,6 +38,8 @@ namespace cpp {
  *
  */
 namespace settings {
-} } }
+}
+
+} }
 
 #endif
