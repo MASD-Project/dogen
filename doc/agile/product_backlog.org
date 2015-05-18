@@ -5395,6 +5395,17 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Use clang to extract stitch template header                       :story:
+
+Once we integrate clang, we could look at the expanded stitch template
+and infer the required header file. For the current use case, this is
+just a case of extracting the function signature. This may not work so
+well for more complicated scenarios such as with a class.
+
+We should keep in mind that stitch templates will not be stand-alone
+in a world where merging is supported, so this story may not make a
+whole lot of sense.
+
 *** Detect moved files                                                :story:
 
 It would be nice if we could detect files that are non-generatable and
