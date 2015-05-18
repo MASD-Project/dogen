@@ -229,7 +229,7 @@ fa.stream() << "    bool equals(const " << c.original_parent_name_qualified() <<
 fa.stream() << std::endl;
              }
 
-             /*
+            /*
              * Swap and assignment.
              *
              * Swap and assignment are only public in leaf classes - MEC++-33
