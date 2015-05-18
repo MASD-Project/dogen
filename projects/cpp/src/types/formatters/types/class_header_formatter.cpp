@@ -18,16 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include <boost/make_shared.hpp>
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
@@ -35,27 +30,6 @@
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
-
-namespace {
-
-using namespace dogen::utility::log;
-using namespace dogen::cpp::formatters::types;
-static logger
-lg(logger_factory(class_header_formatter::static_formatter_name()));
-
-const std::string include_directive_not_set(
-    "Include directive for formatter is not set. Formatter: ");
-
-const std::string no_fields_for_formatter(
-    "Could not find any fields for formatter: ");
-const std::string field_definition_not_found(
-    "Could not find expected field definition: ");
-const std::string qname_not_found("Could not find qualified name in model: ");
-const std::string path_details_missing("Path details not found for qname: ");
-const std::string inclusion_missing(
-    "Expected inclusion is missing. Formatter: ");
-
-}
 
 namespace dogen {
 namespace cpp {

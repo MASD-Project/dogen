@@ -60,12 +60,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.enumeration_header_formatter.postfix"
+            "qualified" : "cpp.serialization.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
             "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.enumeration_header_formatter"
+            "formatter_name" : "cpp.serialization.enum_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -75,12 +75,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.enumeration_implementation_formatter.postfix"
+            "qualified" : "cpp.serialization.enum_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
             "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.enumeration_implementation_formatter"
+            "formatter_name" : "cpp.serialization.enum_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

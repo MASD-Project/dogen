@@ -21,6 +21,7 @@
 #include <memory>
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 
@@ -37,6 +38,7 @@ inline void initialise_formatter(registrar& rg) {
 
 void initializer::initialize(registrar& rg) {
     initialise_formatter<class_header_formatter>(rg);
+    initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<forward_declarations_formatter>(rg);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUMERATION_HEADER_FORMATTER_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUMERATION_HEADER_FORMATTER_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace cpp {
 namespace formatters {
 namespace hash {
 
-class enumeration_header_formatter;
+class enum_implementation_formatter;
 
 } } } }
 

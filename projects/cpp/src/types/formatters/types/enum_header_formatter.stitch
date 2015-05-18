@@ -1,0 +1,32 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/formatting_assistant.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/types/enum_header_formatter_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::types #>
+<#+
+
+dogen::formatters::file enum_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::enum_info& e) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+
+#>
+
+enum class <#= e.name() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return fa.make_file();
+}
+
+#>

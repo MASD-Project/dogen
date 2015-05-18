@@ -18,49 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_WORKFLOW_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_ENUMERATION_HEADER_FORMATTER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_ENUMERATION_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include <memory>
-#include <forward_list>
-#include <unordered_map>
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/formattables/formattable.hpp"
-#include "dogen/cpp/types/formatters/registrar.hpp"
+#include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
 /**
- * @brief Generates all files for the supplied entity.
+ * @brief Creates the C++ domain representation for an enumeration.
  */
-class workflow final {
+class enum_header_formatter : public enum_formatter_interface {
 public:
-    /**
-     * @brief Returns the registrar. If it has not yet been
-     * initialised, initialises it.
-     */
-    static cpp::formatters::registrar& registrar();
+    enum_header_formatter() = default;
+    enum_header_formatter(const enum_header_formatter&) = delete;
+    enum_header_formatter(enum_header_formatter&&) = default;
+    ~enum_header_formatter() noexcept = default;
 
 public:
     /**
-     * @brief Converts the supplied entity into all supported
-     * representations.
+     * @brief Returns the formatter name.
      */
-    std::forward_list<dogen::formatters::file>
-    execute(const std::forward_list<
-            std::shared_ptr<formattables::formattable> >& f) const;
+    static std::string static_formatter_name();
 
-private:
-    static std::shared_ptr<cpp::formatters::registrar> registrar_;
+public:
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+
+    file_types file_type() const override;
+
+    void register_inclusion_dependencies_provider(
+        formattables::registrar& rg) const override;
+
+    dogen::formatters::file
+    format(const formattables::enum_info& c) const override;
 };
 
-} } }
+} } } }
 
 #endif

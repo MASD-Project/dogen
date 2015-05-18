@@ -32,6 +32,7 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -60,6 +61,11 @@ public:
      * @brief Registers a class formatter.
      */
     void register_formatter(std::shared_ptr<class_formatter_interface> f);
+
+    /**
+     * @brief Registers an enum formatter.
+     */
+    void register_formatter(std::shared_ptr<enum_formatter_interface> f);
 
     /**
      * @brief Registers a forward declaration formatter.

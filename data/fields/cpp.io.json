@@ -60,12 +60,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.io.enumeration_header_formatter.postfix"
+            "qualified" : "cpp.io.enum_header_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
             "facet_name" : "cpp.io",
-            "formatter_name" : "cpp.io.enumeration_header_formatter"
+            "formatter_name" : "cpp.io.enum_header_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",
@@ -75,12 +75,12 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.io.enumeration_implementation_formatter.postfix"
+            "qualified" : "cpp.io.enum_implementation_formatter.postfix"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp",
             "facet_name" : "cpp.io",
-            "formatter_name" : "cpp.io.enumeration_implementation_formatter"
+            "formatter_name" : "cpp.io.enum_implementation_formatter"
         },
         "value_type" : "text",
         "definition_type" : "instance",

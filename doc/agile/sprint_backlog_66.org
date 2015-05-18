@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-18 Mon 15:17]
+Clock summary at [2015-05-18 Mon 16:22]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *36:36* |       |      |
+| *Total time*                                                                | *37:40* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 36:36 |      |
+| Active                                                                      |         | 37:40 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -43,6 +43,7 @@ Clock summary at [2015-05-18 Mon 15:17]
 | COMPLETED Create the =aspect_settings= class                                |         |       | 2:31 |
 | COMPLETED Finish enablement support work                                    |         |       | 2:32 |
 | COMPLETED Implement types class header formatter using stitch               |         |       | 3:27 |
+| STARTED Implement types enumeration header formatter using stitch           |         |       | 1:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -677,6 +678,12 @@ Next problems:
   to work and clean it up later.
 - also, we are not checking to see if the formatter is enabled when
   checking for integration.
+
+*** STARTED Implement types enumeration header formatter using stitch :story:
+    CLOCK: [2015-05-18 Mon 15:18]--[2015-05-18 Mon 16:22] =>  1:04
+
+We need to implement a stitch template for the enumeration header
+formatter in types, plug it in and start working through the diffs.
 
 *** Add support for "field gathering"                                 :story:
 

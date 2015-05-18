@@ -21,6 +21,18 @@
 #include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formattables/concept_info.hpp"
+#include "dogen/cpp/types/formattables/visitor_info.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
+#include "dogen/cpp/types/formattables/includers_info.hpp"
+#include "dogen/cpp/types/formattables/namespace_info.hpp"
+#include "dogen/cpp/types/formattables/primitive_info.hpp"
+#include "dogen/cpp/types/formattables/registrar_info.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
+#include "dogen/cpp/types/formattables/odb_options_info.hpp"
+#include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
@@ -50,7 +62,7 @@ public:
 private:
     template<typename Formatter, typename Entity>
     void format(const Formatter& f, const Entity& e,
-        const bool empty_content = false,
+        const bool empty_out_content = false,
         const bool skip_push = false) {
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
@@ -71,7 +83,7 @@ private:
 
         auto file(f.format(e));
 
-        if (empty_content)
+        if (empty_out_content)
             file.content().clear();
 
         if (!skip_push)
@@ -120,9 +132,9 @@ dispatcher::dispatcher(const container& c) : container_(c) { }
 void dispatcher::visit(const formattables::class_info& c) {
     // for now we must not generate services.
     const auto service(formattables::class_types::service);
-    const bool empty_content(c.class_type() == service);
+    const bool empty_out_content(c.class_type() == service);
     for (const auto f : container_.class_formatters())
-        format(*f, c, empty_content);
+        format(*f, c, empty_out_content);
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
@@ -130,7 +142,9 @@ void dispatcher::visit(const formattables::forward_declarations_info& fd) {
         format(*f, fd);
 }
 
-void dispatcher::visit(const formattables::enum_info& /*e*/) {
+void dispatcher::visit(const formattables::enum_info& e) {
+    for (const auto f : container_.enum_formatters())
+        format(*f, e, false/*empty_out_content*/, true/*skip_push*/);
 }
 
 void dispatcher::visit(const formattables::exception_info& /*e*/) {
