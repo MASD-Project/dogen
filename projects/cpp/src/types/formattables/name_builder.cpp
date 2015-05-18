@@ -45,7 +45,7 @@ std::list<std::string> name_builder::
 namespace_list(const sml::model& m, const sml::qname& qn) const {
     std::list<std::string> r(qn.external_module_path());
 
-    // if there is no module name, it won't contribute to the namespaces.
+    // if there is no model name, it won't contribute to the namespaces.
     if (!qn.model_name().empty())
         r.push_back(qn.model_name());
 
@@ -57,7 +57,8 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     // contribute to the namespaces (since it is a module).
     const auto i(m.modules().find(qn));
     if (i != m.modules().end())
-        r.push_back(qn.simple_name());
+        r.pop_back();
+        // r.push_back(qn.simple_name());
 
     return r;
 }

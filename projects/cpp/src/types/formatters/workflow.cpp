@@ -97,6 +97,13 @@ private:
         }
     }
 
+    template<typename Formatter, typename Entity>
+    void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
+        const Entity& e) {
+        for (const auto f : fc)
+            format(*f, e);
+    }
+
 public:
     using formattable_visitor::visit;
     void visit(const formattables::class_info& c) override;
@@ -138,24 +145,26 @@ void dispatcher::visit(const formattables::class_info& c) {
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
-    for (const auto f : container_.forward_declarations_formatters())
-        format(*f, fd);
+    format(container_.forward_declarations_formatters(), fd);
 }
 
 void dispatcher::visit(const formattables::enum_info& e) {
-    for (const auto f : container_.enum_formatters())
-        format(*f, e);
+    format(container_.enum_formatters(), e);
 }
 
 void dispatcher::visit(const formattables::exception_info& e) {
-    for (const auto f : container_.exception_formatters())
-        format(*f, e);
+    format(container_.exception_formatters(), e);
 }
 
 void dispatcher::visit(const formattables::registrar_info& /*r*/) {
 }
 
-void dispatcher::visit(const formattables::namespace_info& /*n*/) {
+void dispatcher::visit(const formattables::namespace_info& n) {
+    if (n.documentation().empty())
+        return;
+
+    for (const auto f : container_.namespace_formatters())
+        format(*f, n, false/*empty_out_content*/, true/*skip_push*/);
 }
 
 void dispatcher::visit(const formattables::visitor_info& /*v*/) {

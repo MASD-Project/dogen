@@ -40,6 +40,12 @@ container::exception_formatters() const {
     return exception_formatters_;
 }
 
+const std::forward_list<std::shared_ptr<
+    formatters::namespace_formatter_interface>>&
+container::namespace_formatters() const {
+    return namespace_formatters_;
+}
+
 const std::forward_list<
     std::shared_ptr<formatters::forward_declarations_formatter_interface>
     >& container::forward_declarations_formatters() const {

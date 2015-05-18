@@ -107,6 +107,16 @@ void registrar::register_formatter(
 }
 
 void registrar::register_formatter(
+    std::shared_ptr<namespace_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.namespace_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
     std::shared_ptr<forward_declarations_formatter_interface> f) {
     // note: not logging by design
     if (!f)

@@ -378,7 +378,10 @@ to_namespace_info(const sml::module& m) const {
                              << sml::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
-    populate_entity_properties(m.name(), m.documentation(), *r);
+    auto qn(m.name());
+    // if (!qn.module_path().empty())
+    //     qn.module_path().pop_front();
+    populate_entity_properties(qn, m.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module.";
     return r;

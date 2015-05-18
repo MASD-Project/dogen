@@ -73,6 +73,11 @@ public:
     void register_formatter(std::shared_ptr<exception_formatter_interface> f);
 
     /**
+     * @brief Registers a namespace formatter.
+     */
+    void register_formatter(std::shared_ptr<namespace_formatter_interface> f);
+
+    /**
      * @brief Registers a forward declaration formatter.
      */
     void register_formatter(

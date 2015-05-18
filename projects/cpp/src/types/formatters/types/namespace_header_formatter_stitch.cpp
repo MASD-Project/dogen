@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/types/namespace_header_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-namespace_formatter_interface::~namespace_formatter_interface() noexcept { }
+dogen::formatters::file namespace_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::namespace_info& n) {
 
-} } }
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << std::endl;
+            fa.comment(n.documentation());
+fa.stream() << "namespace " << n.name() << " {" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    return fa.make_file();
+}
+
+} } } }

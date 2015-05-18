@@ -18,11 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
-
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/types/enum_header_formatter_stitch.hpp"

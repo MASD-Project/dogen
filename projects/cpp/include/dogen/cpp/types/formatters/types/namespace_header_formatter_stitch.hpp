@@ -18,45 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_NAMESPACE_HEADER_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_NAMESPACE_HEADER_FORMATTER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_NAMESPACE_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_NAMESPACE_HEADER_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
+#include "dogen/cpp/types/formattables/namespace_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace types {
 
-class namespace_header_formatter final : public namespace_formatter_interface {
-public:
-    namespace_header_formatter() = default;
-    namespace_header_formatter(const namespace_header_formatter&) = delete;
-    namespace_header_formatter(namespace_header_formatter&&) = default;
-    ~namespace_header_formatter() noexcept = default;
-
-public:
-    /**
-     * @brief Returns the formatter name.
-     */
-    static std::string static_formatter_name();
-
-public:
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
-
-    file_types file_type() const override;
-
-    void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const override;
-
-    dogen::formatters::file
-    format(const formattables::namespace_info& c) const override;
-};
+dogen::formatters::file namespace_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::namespace_info& e);
 
 } } } }
 
