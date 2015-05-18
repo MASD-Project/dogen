@@ -2384,6 +2384,17 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+
+*** Inline comments in =comment_formatter= are a hack                 :story:
+
+We need to tidy-up comment formatter. We had introduced
+=documenting_previous_identifier= rather than "comment inline" but in
+reality we do need to distinguish these two use cases. If there are
+several lines, we want to finish each line with a new line. However,
+if thee is just one line, as is the case with enumerations, we do not
+want to add any new lines. This is because the stitch template will
+add new lines so we end up with too many of them.
+
 *** Consider adding support for inheritance via meta-data             :story:
 
 In certain cases it may not be possible to add all inheritance
