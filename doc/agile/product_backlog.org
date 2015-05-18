@@ -2384,6 +2384,24 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider adding support for inheritance via meta-data             :story:
+
+In certain cases it may not be possible to add all inheritance
+relationships in a diagram; this is the case with =formatters= in
+=cpp=. There are just too many classes implementing the
+=formatter_interface= and the diagram would become too messy if we
+added generalisation relationships for them all.
+
+We got away with it because we are not generating these types, but one
+can imagine having the same problem with generatable types. It would
+be nice if one could add a meta-data parameter to the class to convey
+inheritance information, like so:
+
+: #DOGEN dia.parent=x.y.z
+
+The notation for the parent as well as the name of the tag need to be
+thought through.
+
 *** Consider adding a start and end dogen variable block in dia       :story:
 
 At present we defined a special market to find dogen kvp's in dia's
