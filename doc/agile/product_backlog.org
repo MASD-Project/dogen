@@ -4905,6 +4905,12 @@ At present our enumerations always use unsigned int as the underlying
 type. It should be possible to override that from dia. We could do
 this by supplying a type via dynamic extensions.
 
+In addition, we are hard-coding this at present in C++. In a
+cross-language world, we should dynamically detect the default
+enumeration type. This is not quite as trivial as it seems (what would
+happen if we loaded multiple programming languages?). Supporting this
+properly may require adding a programming language to the model.
+
 *** Exception classes should allow inheritance                        :story:
 
 #+begin_quote
