@@ -20,7 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
@@ -378,10 +378,7 @@ to_namespace_info(const sml::module& m) const {
                              << sml::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
-    auto qn(m.name());
-    // if (!qn.module_path().empty())
-    //     qn.module_path().pop_front();
-    populate_entity_properties(qn, m.documentation(), *r);
+    populate_entity_properties(m.name(), m.documentation(), *r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed module.";
     return r;

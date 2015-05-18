@@ -138,6 +138,7 @@ format(std::ostream& s, const std::list<std::string>& content,
         std::istringstream content_stream(c);
         std::string line;
         while (std::getline(content_stream, line)) {
+            boost::algorithm::trim_right(line);
             if (is_first_line) {
                 if (!start_on_first_line_) {
                     s << std::endl;
