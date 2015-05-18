@@ -37,7 +37,6 @@ dogen::formatters::file namespace_header_formatter_stitch(
 fa.stream() << std::endl;
             fa.comment(n.documentation());
 fa.stream() << "namespace " << n.name() << " {" << std::endl;
-fa.stream() << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
         } // snf

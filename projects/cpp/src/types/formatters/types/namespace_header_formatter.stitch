@@ -21,7 +21,6 @@ dogen::formatters::file namespace_header_formatter_stitch(
             fa.comment(n.documentation());
 #>
 namespace <#= n.name() #> {
-
 }
 
 <#+

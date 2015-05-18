@@ -163,8 +163,7 @@ void dispatcher::visit(const formattables::namespace_info& n) {
     if (n.documentation().empty())
         return;
 
-    for (const auto f : container_.namespace_formatters())
-        format(*f, n, false/*empty_out_content*/, true/*skip_push*/);
+    format(container_.namespace_formatters(), n);
 }
 
 void dispatcher::visit(const formattables::visitor_info& /*v*/) {
