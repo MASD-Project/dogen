@@ -155,10 +155,16 @@ format(std::ostream& s, const std::list<std::string>& content,
                 s << line;
             }
 
-            s << std::endl;
+            // FIXME: massive hack: we assume that documenting
+            // previous identifier actually means documenting
+            // identifier inline - that is, it always has just one
+            // line.
+            if (!documenting_previous_identifier_)
+                s << std::endl;
+
             is_first_line = false;
         }
-            is_first_block = false;
+        is_first_block = false;
     }
 
     if (!content_found) {

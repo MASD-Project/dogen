@@ -15,10 +15,22 @@ dogen::formatters::file enum_header_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
-
 #>
 
-enum class <#= e.name() #>;
+<#+
+            fa.comment(e.documentation());
+#>
+enum class <#= e.name() #> : <#= e.type() #> {
+<#+
+            auto pos(0);
+            for (const auto& en : e.enumerators()) {
+#>
+    <#= en.name() #> = <#= en.value() #><#= fa.make_list_separator_text(e.enumerators().size(), pos) #><#= fa.comment_inline(en.documentation()) #>
+<#+
+                ++pos;
+            }
+#>
+};
 
 <#+
         } // snf

@@ -104,8 +104,7 @@ const std::string multi_line_text_shell_style(R"(# use extensions similar to the
 )");
 
 const std::string enumeration("Represents an uninitialised enum");
-const std::string enumeration_doxygen(R"(///< Represents an uninitialised enum
-)");
+const std::string enumeration_doxygen(R"(///< Represents an uninitialised enum)");
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);

@@ -59,6 +59,13 @@ public:
     static std::string make_by_ref_text(const formattables::property_info& p);
 
     /**
+     * @brief Returns nothing or a comma.
+     */
+    static std::string
+    make_list_separator_text(const unsigned int number_of_items,
+        const unsigned int position);
+
+    /**
      * @brief Returns nothing, a comma or end brackets with semi-colon.
      */
     static std::string
@@ -177,9 +184,9 @@ public:
     void comment_end_property(const formattables::property_info& p);
 
     /**
-     * @brief Adds an inline comment to the current line.
+     * @brief Returns @code c as as an inline comment.
      */
-    void comment_inline(const std::string& c);
+    std::string comment_inline(const std::string& c) const;
 
 private:
     const formattables::entity& entity_;

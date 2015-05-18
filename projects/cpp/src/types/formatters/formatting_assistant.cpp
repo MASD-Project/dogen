@@ -67,13 +67,24 @@ make_by_ref_text(const formattables::property_info& p) {
 }
 
 std::string formatting_assistant::
+make_list_separator_text(const unsigned int number_of_items,
+    const unsigned int position) {
+
+    const auto is_first(position == 0);
+    const auto is_last(position == number_of_items - 1);
+    if (is_last || (is_first && number_of_items == 1))
+        return empty;
+
+    return ",";
+}
+
+std::string formatting_assistant::
 make_parameter_separator_text(const unsigned int number_of_parameters,
     const unsigned int parameter_position) {
     if (parameter_position == number_of_parameters - 1)
         return ");";
-    if (parameter_position == 0 && number_of_parameters == 1)
-        return empty;
-    return ",";
+
+    return make_list_separator_text(parameter_position, number_of_parameters);
 }
 
 std::string formatting_assistant::
@@ -248,10 +259,12 @@ comment_end_property(const formattables::property_info& p) {
     }
 }
 
-void formatting_assistant::comment_inline(const std::string& c) {
+std::string formatting_assistant::comment_inline(const std::string& c) const {
     if (c.empty())
-        return;
+        return empty;
 
+    std::ostringstream s;
+    s << " ";
     dogen::formatters::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
@@ -259,7 +272,8 @@ void formatting_assistant::comment_inline(const std::string& c) {
         dogen::formatters::comment_styles::cpp_style,
         !last_line_is_blank);
 
-    f.format(stream(), c);
+    f.format(s, c);
+    return s.str();
 }
 
 } } }

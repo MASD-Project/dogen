@@ -360,7 +360,10 @@ transformer::to_enum_info(const sml::enumeration& e) const {
 
     auto r(std::make_shared<enum_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
-    r->type(e.underlying_type().simple_name());
+
+    // FIXME: SML is not setting this properly.
+    // r->type(e.underlying_type().simple_name());
+    r->type("unsigned int");
 
     for (const auto& en : e.enumerators())
         r->enumerators().push_back(to_enumerator_info(en));
