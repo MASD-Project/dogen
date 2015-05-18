@@ -2384,6 +2384,26 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider adding a start and end dogen variable block in dia       :story:
+
+At present we defined a special market to find dogen kvp's in dia's
+comments: =#DOGEN=. The problem with this is that, as we start adding
+more and more knobs to dynamic, we have to repeat it more and more:
+
+: #DOGEN dia.comment=true
+: #DOGEN licence_name=gpl_v3
+: #DOGEN copyright_notice=Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+: #DOGEN modeline_group_name=emacs
+
+It would be nice to be able to create a block instead, maybe (first stab):
+
+: #DOGEN_START
+: dia.comment=true
+: licence_name=gpl_v3
+: copyright_notice=Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+: modeline_group_name=emacs
+: #DOGEN_END
+
 *** Consider adding "application" to ownership hierarchy              :story:
 
 Not all fields make sense to all tools in the dogen suite; some are
