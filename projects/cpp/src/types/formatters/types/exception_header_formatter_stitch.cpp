@@ -36,7 +36,19 @@ dogen::formatters::file exception_header_formatter_stitch(
             auto snf(fa.make_scoped_namespace_formatter());
 fa.stream() << std::endl;
             fa.comment(e.documentation());
-fa.stream() << "class " << e.name() << " {" << std::endl;
+fa.stream() << "class " << e.name() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    " << e.name() << "() = default;" << std::endl;
+fa.stream() << "    ~" << e.name() << "() noexcept = default;" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    " << e.name() << "(const std::string& message) : message_(message) { }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "private:" << std::endl;
+fa.stream() << "    const std::string message_;" << std::endl;
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         } // snf

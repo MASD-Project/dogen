@@ -144,12 +144,12 @@ void dispatcher::visit(const formattables::forward_declarations_info& fd) {
 
 void dispatcher::visit(const formattables::enum_info& e) {
     for (const auto f : container_.enum_formatters())
-        format(*f, e, false/*empty_out_content*/);
+        format(*f, e);
 }
 
 void dispatcher::visit(const formattables::exception_info& e) {
     for (const auto f : container_.exception_formatters())
-        format(*f, e, false/*empty_out_content*/, true/*skip_push*/);
+        format(*f, e);
 }
 
 void dispatcher::visit(const formattables::registrar_info& /*r*/) {

@@ -55,11 +55,9 @@ std::string provider::formatter_name() const {
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& /*e*/) const {
-
     auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
+    builder.add(inclusion_constants::std::string());
+    builder.add(inclusion_constants::boost::exception::info());
     return builder.build();
 }
 

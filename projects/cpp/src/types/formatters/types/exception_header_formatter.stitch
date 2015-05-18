@@ -20,7 +20,19 @@ dogen::formatters::file exception_header_formatter_stitch(
 <#+
             fa.comment(e.documentation());
 #>
-class <#= e.name() #> {
+class <#= e.name() #> : public virtual std::exception, public virtual boost::exception {
+public:
+    <#= e.name() #>() = default;
+    ~<#= e.name() #>() noexcept = default;
+
+public:
+    <#= e.name() #>(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 <#+
