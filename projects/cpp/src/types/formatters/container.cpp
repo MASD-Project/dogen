@@ -34,6 +34,12 @@ container::enum_formatters() const {
     return enum_formatters_;
 }
 
+const std::forward_list<std::shared_ptr<
+    formatters::exception_formatter_interface>>&
+container::exception_formatters() const {
+    return exception_formatters_;
+}
+
 const std::forward_list<
     std::shared_ptr<formatters::forward_declarations_formatter_interface>
     >& container::forward_declarations_formatters() const {

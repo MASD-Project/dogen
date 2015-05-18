@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-18 Mon 17:20]
+Clock summary at [2015-05-18 Mon 17:39]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *38:36* |       |      |
+| *Total time*                                                                | *38:51* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 38:36 |      |
+| Active                                                                      |         | 38:51 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -44,6 +44,7 @@ Clock summary at [2015-05-18 Mon 17:20]
 | COMPLETED Finish enablement support work                                    |         |       | 2:32 |
 | COMPLETED Implement types class header formatter using stitch               |         |       | 3:27 |
 | COMPLETED Implement types enumeration header formatter using stitch         |         |       | 2:00 |
+| STARTED Implement exception header formatter using stitch                   |         |       | 0:15 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -686,6 +687,12 @@ Next problems:
     CLOCK: [2015-05-18 Mon 15:18]--[2015-05-18 Mon 16:22] =>  1:04
 
 We need to implement a stitch template for the enumeration header
+formatter in types, plug it in and start working through the diffs.
+
+*** STARTED Implement exception header formatter using stitch         :story:
+    CLOCK: [2015-05-18 Mon 17:24]--[2015-05-18 Mon 17:39] =>  0:15
+
+We need to implement a stitch template for the exception header
 formatter in types, plug it in and start working through the diffs.
 
 *** Add support for "field gathering"                                 :story:

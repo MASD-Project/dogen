@@ -18,12 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_EXCEPTION_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_EXCEPTION_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
+#include "dogen/cpp/types/formattables/exception_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-exception_formatter_interface::~exception_formatter_interface() noexcept { }
+dogen::formatters::file exception_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::exception_info& e);
 
-} } }
+} } } }
+
+#endif
