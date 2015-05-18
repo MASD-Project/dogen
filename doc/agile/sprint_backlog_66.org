@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-17 Sun 19:52]
+Clock summary at [2015-05-18 Mon 15:17]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *35:52* |       |      |
+| *Total time*                                                                | *36:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 35:52 |      |
+| Active                                                                      |         | 36:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:40 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -42,7 +42,7 @@ Clock summary at [2015-05-17 Sun 19:52]
 | COMPLETED Consider refactoring formatter properties repository factory      |         |       | 0:08 |
 | COMPLETED Create the =aspect_settings= class                                |         |       | 2:31 |
 | COMPLETED Finish enablement support work                                    |         |       | 2:32 |
-| STARTED Implement types class header formatter using stitch                 |         |       | 2:43 |
+| COMPLETED Implement types class header formatter using stitch               |         |       | 3:27 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -608,7 +608,10 @@ We added the core of enablement but its not all done yet:
 - add only if enabled
 - add if integrated and enabled
 
-*** STARTED Implement types class header formatter using stitch       :story:
+*** COMPLETED Implement types class header formatter using stitch     :story:
+    CLOSED: [2015-05-18 Mon 15:17]
+    CLOCK: [2015-05-18 Mon 15:10]--[2015-05-18 Mon 15:17] =>  0:07
+    CLOCK: [2015-05-18 Mon 14:32]--[2015-05-18 Mon 15:09] =>  0:37
     CLOCK: [2015-05-17 Sun 19:50]--[2015-05-17 Sun 19:52] =>  0:02
     CLOCK: [2015-05-17 Sun 19:36]--[2015-05-17 Sun 19:49] =>  0:13
     CLOCK: [2015-05-11 Mon 21:29]--[2015-05-11 Mon 21:37] =>  0:08

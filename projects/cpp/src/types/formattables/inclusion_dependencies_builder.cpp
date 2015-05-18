@@ -85,7 +85,13 @@ bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
             building_error(formatter_name_not_found + formatter_name));
     }
 
-    return j->second;
+    const bool r(j->second);
+    if (!r) {
+        BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
+                                 << formatter_name << " on type: "
+                                 << sml::string_converter::convert(qn) << "'";
+    }
+    return r;
 }
 
 bool inclusion_dependencies_builder::is_integrated(
@@ -98,7 +104,13 @@ bool inclusion_dependencies_builder::is_integrated(
         return false;
 
     const auto j(i->second.find(facet_name));
-    return j != i->second.end();
+    const bool r(j != i->second.end());
+
+    if (!r) {
+        BOOST_LOG_SEV(lg, debug) << "Facet not integrated. "
+                                 << " Facet: '" << facet_name << "'";
+    }
+    return r;
 }
 
 void inclusion_dependencies_builder::
@@ -112,13 +124,8 @@ add(const std::string& inclusion_directive) {
 
 void inclusion_dependencies_builder::
 add(const sml::qname& qn, const std::string& formatter_name) {
-    if (!is_enabled(qn, formatter_name)) {
-        const auto n(sml::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, debug) << "Formatter disabled so skipping include. "
-                                 << " Formatter: " << formatter_name
-                                 << " to type: " << n;
+    if (!is_enabled(qn, formatter_name))
         return;
-    }
 
     const auto id(get_inclusion_directive(qn, formatter_name));
     if (id)
@@ -132,14 +139,13 @@ add(const std::list<sml::qname>& qn, const std::string& formatter_name) {
 }
 
 void inclusion_dependencies_builder::add_if_integrated(
-    const std::string& formatter_name,
-    const std::string& facet_name,
-    const std::string& inclusion_directive) {
+    const sml::qname& qn, const std::string& formatter_name,
+    const std::string& facet_name, const std::string& inclusion_directive) {
 
-    if (!is_integrated(formatter_name, facet_name)) {
-        BOOST_LOG_SEV(lg, debug) << "Facet not integrated so skipping include. "
-                                 << " Facet: '" << facet_name << "'"
-                                 << " include: '" << inclusion_directive << "'";
+    const auto& fn(formatter_name);
+    if (!is_enabled(qn, fn) || !is_integrated(fn, facet_name)) {
+        BOOST_LOG_SEV(lg, debug) << " Skipping include: '"
+                                 << inclusion_directive << "'";
         return;
     }
 

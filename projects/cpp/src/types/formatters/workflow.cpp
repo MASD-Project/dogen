@@ -76,11 +76,13 @@ private:
 
         if (!skip_push)
             files_.push_front(file);
-
-        BOOST_LOG_SEV(lg, debug) << "Filename: "
-                                 << file.path().generic_string();
-        BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();
-        BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << e.name() << "'";
+        else {
+            BOOST_LOG_SEV(lg, debug) << "Filename: "
+                                     << file.path().generic_string();
+            BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();
+            BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << e.name()
+                                     << "'";
+        }
     }
 
 public:
@@ -120,7 +122,7 @@ void dispatcher::visit(const formattables::class_info& c) {
     const auto service(formattables::class_types::service);
     const bool empty_content(c.class_type() == service);
     for (const auto f : container_.class_formatters())
-        format(*f, c, empty_content, true/*skip_push*/);
+        format(*f, c, empty_content);
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {

@@ -88,10 +88,12 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(inclusion_constants::std::algorithm());
 
     const auto self_fn(class_header_formatter::static_formatter_name());
-    if (o.is_parent() || o.is_child()) {
+    const auto ios(inclusion_constants::std::iosfwd());
+    if (o.is_parent() || o.is_child())
+        builder.add(ios);
+    else {
         const auto io_fctn(formatters::io::traits::facet_name());
-        const auto ios(inclusion_constants::std::iosfwd());
-        builder.add_if_integrated(self_fn, io_fctn, ios);
+        builder.add_if_integrated(o.name(), self_fn, io_fctn, ios);
     }
 
     using ser = formatters::serialization::traits;

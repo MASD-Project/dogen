@@ -91,9 +91,16 @@ public:
 
     /**
      * @brief Adds the supplied inclusion directive if the facet is
-     * integrated with the formatter.
+     * integrated with the formatter and if the formatter is enabled.
+     *
+     * @param qn which type to check for formatter enablement.
+     * @param formatter_name which formatter to check for integration.
+     * @param facet_name facet to check for integration with
+     * formatter.
+     * @param inclusion_directive directive to add.
      */
-    void add_if_integrated(const std::string& formatter_name,
+    void add_if_integrated(const sml::qname& qn,
+        const std::string& formatter_name,
         const std::string& facet_name,
         const std::string& inclusion_directive);
 

@@ -111,7 +111,7 @@ inclusion_directives_factory::obtain_include_directive(
         BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required. "
                                  << "Type: " << type_name
                                  << " formatter: " << formatter_name;
-        boost::optional<std::pair<std::string, std::string> >();
+        return boost::optional<std::pair<std::string, std::string> >();
     }
 
     if (s.inclusion_directive()) {

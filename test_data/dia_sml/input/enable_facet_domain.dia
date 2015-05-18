@@ -264,7 +264,7 @@
         <dia:point val="-34,-41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-34.05,-41.05;-5.715,-36.85"/>
+        <dia:rectangle val="-34.05,-41.05;-5.715,-35.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -276,7 +276,7 @@
         <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -293,7 +293,11 @@
             <dia:string>##DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
-#DOGEN modeline_group_name=emacs#</dia:string>
+#DOGEN modeline_group_name=emacs
+#DOGEN cpp.types.enabled=true
+#DOGEN cpp.hash.enabled=false
+#DOGEN cpp.io.enabled=false
+#DOGEN cpp.serialization.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
