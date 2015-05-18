@@ -4922,6 +4922,16 @@ enumeration type. This is not quite as trivial as it seems (what would
 happen if we loaded multiple programming languages?). Supporting this
 properly may require adding a programming language to the model.
 
+*** Add support for configurable enumeration values                   :story:
+
+At present we generate the enumeration value as part of the
+transformation process in =dia_to_sml=. This is not ideal:
+
+- it won't work for JSON;
+- it does not allow users to supply their own values;
+- it does not allow users to disable enumeration values altogether and
+  rely on language defaults instead.
+
 *** Exception classes should allow inheritance                        :story:
 
 #+begin_quote
