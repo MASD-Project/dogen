@@ -28,14 +28,23 @@ namespace types {
 
 dogen::formatters::file class_implementation_formatter_stitch(
     formatters::formatting_assistant& fa,
-    const formattables::class_info& fd) {
+    const formattables::class_info& c) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
+            if (c.requires_manual_default_constructor()) {
 fa.stream() << std::endl;
-fa.stream() << "class " << fd.name() << ";" << std::endl;
+fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
+                unsigned int pos(0);
+                for (const auto p : c.properties()) {
+                    if (!p.type().is_primitive() && !p.type().is_enumeration())
+                        continue;
+fa.stream() << "    " << (pos == 0 ? ": " : "  ") << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << fa.make_list_separator_text(c.properties().size(), pos) << (pos == c.properties().size() - 1 ? " { }" : "") << std::endl;
+                    ++pos;
+                }
+            }
 fa.stream() << std::endl;
         } // snf
 fa.stream() << std::endl;

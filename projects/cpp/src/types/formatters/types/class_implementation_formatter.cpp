@@ -97,11 +97,6 @@ dogen::formatters::file class_implementation_formatter::
 format(const formattables::class_info& c) const {
     formatting_assistant fa(c, ownership_hierarchy(), file_type());
     const auto r(class_implementation_formatter_stitch(fa, c));
-
-    BOOST_LOG_SEV(lg, debug) << "Filename: "
-                             << r.path().generic_string();
-    BOOST_LOG_SEV(lg, debug) << "Content: " << r.content();
-
     return r;
 }
 
