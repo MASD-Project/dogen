@@ -494,6 +494,7 @@ transformer::to_visitor(const sml::object& o) const {
     auto r(boost::make_shared<cpp::formattables::visitor_info>());
     r->name(o.name().simple_name());
     r->namespaces(to_namespace_list(o.name()));
+    r->documentation(o.documentation());
 
     auto i(o.relationships().find(sml::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {

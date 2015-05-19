@@ -32,6 +32,9 @@ namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
+/**
+ * @brief Visitor for base
+ */
 class base_visitor {
 public:
     virtual ~base_visitor() noexcept = 0;
