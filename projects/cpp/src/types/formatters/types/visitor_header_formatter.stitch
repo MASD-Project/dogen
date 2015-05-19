@@ -26,7 +26,12 @@ public:
 
 public:
 <#+
+            bool is_first(true);
             for (const auto& t : v.types()) {
+                if (!is_first)
+#>
+
+<#+
                 fa.comment_start_method_group(t.documentation());
 #>
     virtual void visit(const <#= t.qualified_name() #>&) const { }
@@ -35,9 +40,7 @@ public:
     virtual void visit(<#= t.qualified_name() #>&) { }
 <#+
                 fa.comment_end_method_group(t.documentation());
-#>
-
-<#+
+                is_first = false;
             }
 #>
 };

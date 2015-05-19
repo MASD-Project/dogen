@@ -41,14 +41,17 @@ fa.stream() << "public:" << std::endl;
 fa.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "public:" << std::endl;
+            bool is_first(true);
             for (const auto& t : v.types()) {
+                if (!is_first)
+fa.stream() << std::endl;
                 fa.comment_start_method_group(t.documentation());
 fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
 fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
 fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
 fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
                 fa.comment_end_method_group(t.documentation());
-fa.stream() << std::endl;
+                is_first = false;
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
