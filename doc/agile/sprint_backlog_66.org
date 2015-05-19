@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 17:17]
+Clock summary at [2015-05-19 Tue 17:26]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *44:06* |       |      |
+| *Total time*                                                                | *44:14* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 44:06 |      |
+| Active                                                                      |         | 44:14 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -48,7 +48,7 @@ Clock summary at [2015-05-19 Tue 17:17]
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 1:24 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 1:32 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -735,6 +735,7 @@ invalid overrides that are just getting ignored. Tighten the checks
 around this and deal with the fallout.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-05-19 Tue 17:18]--[2015-05-19 Tue 17:26] =>  0:08
     CLOCK: [2015-05-19 Tue 16:50]--[2015-05-19 Tue 17:17] =>  0:27
     CLOCK: [2015-05-19 Tue 16:28]--[2015-05-19 Tue 16:42] =>  0:14
     CLOCK: [2015-05-19 Tue 14:45]--[2015-05-19 Tue 15:28] =>  0:43

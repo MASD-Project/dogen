@@ -43,7 +43,6 @@ void save(Archive& ar,
     ar << make_nvp("split_project", v.split_project_);
     ar << make_nvp("file_type", v.file_type_);
     ar << make_nvp("facet_directory", v.facet_directory_);
-    ar << make_nvp("extension", v.extension_);
     ar << make_nvp("facet_postfix", v.facet_postfix_);
     ar << make_nvp("formatter_postfix", v.formatter_postfix_);
     ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
@@ -52,6 +51,8 @@ void save(Archive& ar,
     ar << make_nvp("include_directory_name", v.include_directory_name_);
     ar << make_nvp("source_directory_name", v.source_directory_name_);
     ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
+    ar << make_nvp("header_file_extension", v.header_file_extension_);
+    ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
 }
 
 template<typename Archive>
@@ -61,7 +62,6 @@ void load(Archive& ar,
     ar >> make_nvp("split_project", v.split_project_);
     ar >> make_nvp("file_type", v.file_type_);
     ar >> make_nvp("facet_directory", v.facet_directory_);
-    ar >> make_nvp("extension", v.extension_);
     ar >> make_nvp("facet_postfix", v.facet_postfix_);
     ar >> make_nvp("formatter_postfix", v.formatter_postfix_);
     std::string project_directory_path_tmp;
@@ -76,6 +76,8 @@ void load(Archive& ar,
     ar >> make_nvp("include_directory_name", v.include_directory_name_);
     ar >> make_nvp("source_directory_name", v.source_directory_name_);
     ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
+    ar >> make_nvp("header_file_extension", v.header_file_extension_);
+    ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
 }
 
 } }

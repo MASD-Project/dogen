@@ -95,7 +95,11 @@ make_inclusion_path(const settings::path_settings& ps,
     if (!ps.facet_postfix().empty())
         stream << underscore << ps.facet_postfix();
 
-    stream << dot << ps.extension();
+    if (ps.file_type() == formatters::file_types::cpp_header)
+        stream << dot << ps.header_file_extension();
+    else if (ps.file_type() == formatters::file_types::cpp_implementation)
+        stream << dot << ps.implementation_file_extension();
+
     r /= stream.str();
 
     BOOST_LOG_SEV(lg, debug) << "Done creating inclusion path. Result: " << r;

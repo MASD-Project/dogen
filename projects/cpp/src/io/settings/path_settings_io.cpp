@@ -48,7 +48,6 @@ std::ostream& operator<<(std::ostream& s, const path_settings& v) {
       << "\"split_project\": " << v.split_project() << ", "
       << "\"file_type\": " << v.file_type() << ", "
       << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
-      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
       << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
       << "\"formatter_postfix\": " << "\"" << tidy_up_string(v.formatter_postfix()) << "\"" << ", "
       << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
@@ -56,7 +55,9 @@ std::ostream& operator<<(std::ostream& s, const path_settings& v) {
       << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\"" << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "
       << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
-      << "\"disable_facet_directories\": " << v.disable_facet_directories()
+      << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "
+      << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "
+      << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\""
       << " }";
     return(s);
 }

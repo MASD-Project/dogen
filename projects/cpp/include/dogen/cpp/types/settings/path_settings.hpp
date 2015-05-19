@@ -51,7 +51,6 @@ public:
         const bool split_project,
         const dogen::cpp::formatters::file_types& file_type,
         const std::string& facet_directory,
-        const std::string& extension,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
         const boost::filesystem::path& project_directory_path,
@@ -59,7 +58,9 @@ public:
         const boost::filesystem::path& include_directory_path,
         const std::string& include_directory_name,
         const std::string& source_directory_name,
-        const bool disable_facet_directories);
+        const bool disable_facet_directories,
+        const std::string& header_file_extension,
+        const std::string& implementation_file_extension);
 
 private:
     template<typename Archive>
@@ -79,11 +80,6 @@ public:
     std::string& facet_directory();
     void facet_directory(const std::string& v);
     void facet_directory(const std::string&& v);
-
-    const std::string& extension() const;
-    std::string& extension();
-    void extension(const std::string& v);
-    void extension(const std::string&& v);
 
     const std::string& facet_postfix() const;
     std::string& facet_postfix();
@@ -123,6 +119,16 @@ public:
     bool disable_facet_directories() const;
     void disable_facet_directories(const bool v);
 
+    const std::string& header_file_extension() const;
+    std::string& header_file_extension();
+    void header_file_extension(const std::string& v);
+    void header_file_extension(const std::string&& v);
+
+    const std::string& implementation_file_extension() const;
+    std::string& implementation_file_extension();
+    void implementation_file_extension(const std::string& v);
+    void implementation_file_extension(const std::string&& v);
+
 public:
     bool operator==(const path_settings& rhs) const;
     bool operator!=(const path_settings& rhs) const {
@@ -137,7 +143,6 @@ private:
     bool split_project_;
     dogen::cpp::formatters::file_types file_type_;
     std::string facet_directory_;
-    std::string extension_;
     std::string facet_postfix_;
     std::string formatter_postfix_;
     boost::filesystem::path project_directory_path_;
@@ -146,6 +151,8 @@ private:
     std::string include_directory_name_;
     std::string source_directory_name_;
     bool disable_facet_directories_;
+    std::string header_file_extension_;
+    std::string implementation_file_extension_;
 };
 
 } } }

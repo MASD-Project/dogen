@@ -48,7 +48,6 @@ std::size_t path_settings_hasher::hash(const path_settings&v) {
     combine(seed, v.split_project());
     combine(seed, v.file_type());
     combine(seed, v.facet_directory());
-    combine(seed, v.extension());
     combine(seed, v.facet_postfix());
     combine(seed, v.formatter_postfix());
     combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
@@ -57,6 +56,8 @@ std::size_t path_settings_hasher::hash(const path_settings&v) {
     combine(seed, v.include_directory_name());
     combine(seed, v.source_directory_name());
     combine(seed, v.disable_facet_directories());
+    combine(seed, v.header_file_extension());
+    combine(seed, v.implementation_file_extension());
 
     return seed;
 }

@@ -137,13 +137,10 @@ create_settings_for_formatter(const formatter_properties& fp,
     r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
     r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
-
-    if (fp.file_type == formatters::file_types::cpp_header) {
-        r.extension(fs.get_text_content_or_default(fp.header_file_extension));
-    } else if (fp.file_type == formatters::file_types::cpp_header) {
-        r.extension(fs.get_text_content_or_default(
-                fp.implementation_file_extension));
-    }
+    r.header_file_extension(
+        fs.get_text_content_or_default(fp.header_file_extension));
+    r.implementation_file_extension(
+        fs.get_text_content_or_default(fp.implementation_file_extension));
 
     r.include_directory_name(
         fs.get_text_content_or_default(fp.include_directory_name));

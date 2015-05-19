@@ -59,15 +59,16 @@ populate(const unsigned int position, result_type& v) {
     v.split_project(create_bool(position + 0));
     v.file_type(create_dogen_cpp_formatters_file_types(position + 1));
     v.facet_directory(create_std_string(position + 2));
-    v.extension(create_std_string(position + 3));
-    v.facet_postfix(create_std_string(position + 4));
-    v.formatter_postfix(create_std_string(position + 5));
-    v.project_directory_path(create_boost_filesystem_path(position + 6));
-    v.source_directory_path(create_boost_filesystem_path(position + 7));
-    v.include_directory_path(create_boost_filesystem_path(position + 8));
-    v.include_directory_name(create_std_string(position + 9));
-    v.source_directory_name(create_std_string(position + 10));
-    v.disable_facet_directories(create_bool(position + 11));
+    v.facet_postfix(create_std_string(position + 3));
+    v.formatter_postfix(create_std_string(position + 4));
+    v.project_directory_path(create_boost_filesystem_path(position + 5));
+    v.source_directory_path(create_boost_filesystem_path(position + 6));
+    v.include_directory_path(create_boost_filesystem_path(position + 7));
+    v.include_directory_name(create_std_string(position + 8));
+    v.source_directory_name(create_std_string(position + 9));
+    v.disable_facet_directories(create_bool(position + 10));
+    v.header_file_extension(create_std_string(position + 11));
+    v.implementation_file_extension(create_std_string(position + 12));
 }
 
 path_settings_generator::result_type
