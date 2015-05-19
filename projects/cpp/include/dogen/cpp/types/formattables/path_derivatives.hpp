@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/cpp/serialization/formattables/path_derivatives_fwd_ser.hpp"
 
@@ -49,8 +50,8 @@ public:
 public:
     path_derivatives(
         const boost::filesystem::path& file_path,
-        const std::string& header_guard,
-        const std::string& computed_inclusion_directive);
+        const boost::optional<std::string>& header_guard,
+        const boost::optional<std::string>& inclusion_directive);
 
 private:
     template<typename Archive>
@@ -65,15 +66,15 @@ public:
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
 
-    const std::string& header_guard() const;
-    std::string& header_guard();
-    void header_guard(const std::string& v);
-    void header_guard(const std::string&& v);
+    const boost::optional<std::string>& header_guard() const;
+    boost::optional<std::string>& header_guard();
+    void header_guard(const boost::optional<std::string>& v);
+    void header_guard(const boost::optional<std::string>&& v);
 
-    const std::string& computed_inclusion_directive() const;
-    std::string& computed_inclusion_directive();
-    void computed_inclusion_directive(const std::string& v);
-    void computed_inclusion_directive(const std::string&& v);
+    const boost::optional<std::string>& inclusion_directive() const;
+    boost::optional<std::string>& inclusion_directive();
+    void inclusion_directive(const boost::optional<std::string>& v);
+    void inclusion_directive(const boost::optional<std::string>&& v);
 
 public:
     bool operator==(const path_derivatives& rhs) const;
@@ -87,8 +88,8 @@ public:
 
 private:
     boost::filesystem::path file_path_;
-    std::string header_guard_;
-    std::string computed_inclusion_directive_;
+    boost::optional<std::string> header_guard_;
+    boost::optional<std::string> inclusion_directive_;
 };
 
 } } }

@@ -24,6 +24,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -41,7 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("header_guard", v.header_guard_);
-    ar << make_nvp("computed_inclusion_directive", v.computed_inclusion_directive_);
+    ar << make_nvp("inclusion_directive", v.inclusion_directive_);
 }
 
 template<typename Archive>
@@ -52,7 +53,7 @@ void load(Archive& ar,
     ar >> make_nvp("file_path", file_path_tmp);
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("header_guard", v.header_guard_);
-    ar >> make_nvp("computed_inclusion_directive", v.computed_inclusion_directive_);
+    ar >> make_nvp("inclusion_directive", v.inclusion_directive_);
 }
 
 } }

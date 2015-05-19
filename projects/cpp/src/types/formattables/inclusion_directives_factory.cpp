@@ -33,6 +33,8 @@ static logger lg(logger_factory(
 
 const std::string qname_not_found("Expected qname not found: ");
 const std::string empty_include_directive("Include directive is empty.");
+const std::string missing_include_directive(
+    "Expected include directive is missing: ");
 const std::string formatter_name_not_found("Formatter name not found: ");
 
 }
@@ -121,9 +123,15 @@ inclusion_directives_factory::obtain_include_directive(
     }
 
     const auto pdfn(path_derivatives_for_formatter_name(pd, formatter_name));
-    const auto id(pdfn.computed_inclusion_directive());
-    validate_inclusion_directive(id, formatter_name, type_name);
-    return std::make_pair(formatter_name, id);
+    const auto id(pdfn.inclusion_directive());
+    if (!id) {
+        BOOST_LOG_SEV(lg, error) << missing_include_directive
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(
+            building_error(missing_include_directive + formatter_name));
+    }
+    validate_inclusion_directive(*id, formatter_name, type_name);
+    return std::make_pair(formatter_name, *id);
 }
 
 boost::optional<std::unordered_map<std::string, std::string> >

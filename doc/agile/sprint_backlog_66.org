@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 16:42]
+Clock summary at [2015-05-19 Tue 17:17]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *43:39* |       |      |
+| *Total time*                                                                | *44:06* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 43:39 |      |
+| Active                                                                      |         | 44:06 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -48,7 +48,7 @@ Clock summary at [2015-05-19 Tue 16:42]
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 0:57 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 1:24 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -735,12 +735,18 @@ invalid overrides that are just getting ignored. Tighten the checks
 around this and deal with the fallout.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-05-19 Tue 16:50]--[2015-05-19 Tue 17:17] =>  0:27
     CLOCK: [2015-05-19 Tue 16:28]--[2015-05-19 Tue 16:42] =>  0:14
     CLOCK: [2015-05-19 Tue 14:45]--[2015-05-19 Tue 15:28] =>  0:43
 
 We need to implement a stitch template for the class
 implementation formatter in types, plug it in and start working
 through the diffs.
+
+*** Header guard in formatters should be optional                     :story:
+
+At present we are relying on empty header guards to determine what to
+do in boilerplate. We should use boost optional.
 
 *** Do not include algorithm if swap is disabled                      :story:
 

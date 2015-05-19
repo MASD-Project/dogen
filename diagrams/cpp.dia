@@ -3672,13 +3672,13 @@ Does not use characters which are not valid for C++ identifiers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="183,3"/>
+        <dia:point val="188,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="182.95,2.95;195.67,6.05"/>
+        <dia:rectangle val="187.95,2.95;200.67,6.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="183,3"/>
+        <dia:point val="188,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.620000000000001"/>
@@ -18002,17 +18002,17 @@ the dynamic object.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="189.31,3"/>
+        <dia:point val="194.31,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="188.56,-8.05;200.87,3.8"/>
+        <dia:rectangle val="193.56,-8.05;200.87,3.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="189.31,3"/>
-        <dia:point val="189.31,-2.85"/>
+        <dia:point val="194.31,3"/>
+        <dia:point val="194.31,-2.85"/>
         <dia:point val="200.67,-2.85"/>
         <dia:point val="200.67,-8"/>
       </dia:attribute>
@@ -23420,13 +23420,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="164,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.95,2.95;180.72,7.45"/>
+        <dia:rectangle val="163.95,2.95;183.8,7.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="164,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -23547,7 +23547,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#header_guard#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::optional&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -23567,10 +23567,10 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#computed_inclusion_directive#</dia:string>
+            <dia:string>#inclusion_directive#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#boost::optional&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32545,7 +32545,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="161,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.25,7.35;172.535,17.8"/>
+        <dia:rectangle val="160.25,7.35;174.075,17.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32553,8 +32553,8 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="161,17"/>
         <dia:point val="161,11"/>
-        <dia:point val="172.335,11"/>
-        <dia:point val="172.335,7.4"/>
+        <dia:point val="173.875,11"/>
+        <dia:point val="173.875,7.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

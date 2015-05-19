@@ -62,7 +62,8 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_directive"
+            "simple" : "inclusion_directive",
+            "formatter_group" : "cpp.header_files"
         },
         "ownership_hierarchy" : {
             "model_name" : "cpp"
@@ -84,7 +85,8 @@
     },
     {
         "name" : {
-            "simple" : "inclusion_required"
+            "simple" : "inclusion_required",
+            "formatter_group" : "cpp.header_files"
 
         },
         "ownership_hierarchy" : {

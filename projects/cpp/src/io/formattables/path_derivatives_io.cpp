@@ -30,6 +30,21 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << "\"" << tidy_up_string(*v) << "\"";
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace cpp {
 namespace formattables {
@@ -38,8 +53,8 @@ std::ostream& operator<<(std::ostream& s, const path_derivatives& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::path_derivatives\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"computed_inclusion_directive\": " << "\"" << tidy_up_string(v.computed_inclusion_directive()) << "\""
+      << "\"header_guard\": " << v.header_guard() << ", "
+      << "\"inclusion_directive\": " << v.inclusion_directive()
       << " }";
     return(s);
 }

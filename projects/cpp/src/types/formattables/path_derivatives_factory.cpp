@@ -179,11 +179,13 @@ make(const sml::qname& qn) const {
         const auto inclusion_path(make_inclusion_path(s, qn));
 
         path_derivatives pd;
-        pd.computed_inclusion_directive(to_inclusion_directive(inclusion_path));
-
         const auto file_path(make_file_path(s, inclusion_path, qn));
         pd.file_path(file_path);
-        pd.header_guard(to_header_guard_name(inclusion_path));
+
+        if (s.file_type() == formatters::file_types::cpp_header) {
+            pd.inclusion_directive(to_inclusion_directive(inclusion_path));
+            pd.header_guard(to_header_guard_name(inclusion_path));
+        }
 
         r[pair.first] = pd;
     }

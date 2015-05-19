@@ -181,7 +181,8 @@ formatting_assistant::make_scoped_boilerplate_formatter() {
     const auto& fp(formatter_properties_);
     const auto gs(entity_.settings().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
-        stream(), gs, fp.inclusion_dependencies(), *fp.header_guard());
+        stream(), gs, fp.inclusion_dependencies(),
+        fp.header_guard() ? *fp.header_guard() : empty);
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter

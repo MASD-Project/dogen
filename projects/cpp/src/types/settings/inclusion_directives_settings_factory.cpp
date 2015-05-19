@@ -73,10 +73,17 @@ make_field_definitions(const dynamic::repository& rp,
     for (const auto f : fc.all_formatters()) {
         const auto& oh(f->ownership_hierarchy());
         const auto fn(oh.formatter_name());
+
         if (fn.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
+
+        if (f->file_type() != formatters::file_types::cpp_header) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping formatter: " << fn;
+            continue;
+        }
+
         r[oh.formatter_name()] = make_field_definitions(rp, fn);
     }
     return r;
