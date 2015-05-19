@@ -3,7 +3,7 @@
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) spike(p) }
 
-* Mission
+* Mission Statement
 
 - Refactor expansion and formattables and get them to cope with all
   the use cases without any major architectural hacks.
@@ -918,6 +918,14 @@ parameter which disables the generation of a cpp file for a
 service. This would stop us from having to create noddy translation
 units with dummy functions just to avoid having to define exclusion
 regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
 
 *** Improve references management                                     :story:
 
