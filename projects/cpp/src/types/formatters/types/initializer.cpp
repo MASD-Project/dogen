@@ -24,6 +24,7 @@
 #include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/exception_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/namespace_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 
@@ -43,6 +44,7 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<exception_header_formatter>(rg);
     initialise_formatter<namespace_header_formatter>(rg);
+    initialise_formatter<visitor_header_formatter>(rg);
     initialise_formatter<forward_declarations_formatter>(rg);
 }
 

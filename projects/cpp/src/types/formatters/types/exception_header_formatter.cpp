@@ -54,7 +54,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& /*e*/) const {
+    const sml::object& /*o*/) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::string());
     builder.add(inclusion_constants::boost::exception::info());

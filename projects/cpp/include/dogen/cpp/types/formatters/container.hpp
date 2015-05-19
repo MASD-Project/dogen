@@ -33,6 +33,7 @@
 #include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -82,6 +83,14 @@ public:
     namespace_formatters() const;
 
     /**
+     * @brief Returns all available namespace formatters.
+     */
+     const std::forward_list<
+         std::shared_ptr<formatters::visitor_formatter_interface>
+         >&
+     visitor_formatters() const;
+
+    /**
      * @brief Returns all available forward declarations formatters.
      */
     const std::forward_list<
@@ -107,6 +116,8 @@ private:
         formatters::exception_formatter_interface>> exception_formatters_;
     std::forward_list<std::shared_ptr<
         formatters::namespace_formatter_interface>> namespace_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::visitor_formatter_interface>> visitor_formatters_;
     std::forward_list<std::shared_ptr<
         formatters::forward_declarations_formatter_interface> >
     forward_declarations_formatters_;

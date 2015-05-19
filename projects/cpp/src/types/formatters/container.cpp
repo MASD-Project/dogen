@@ -46,6 +46,12 @@ container::namespace_formatters() const {
     return namespace_formatters_;
 }
 
+const std::forward_list<std::shared_ptr<
+    formatters::visitor_formatter_interface>>&
+container::visitor_formatters() const {
+    return visitor_formatters_;
+}
+
 const std::forward_list<
     std::shared_ptr<formatters::forward_declarations_formatter_interface>
     >& container::forward_declarations_formatters() const {

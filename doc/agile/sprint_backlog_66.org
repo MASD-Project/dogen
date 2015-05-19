@@ -710,6 +710,12 @@ formatter in types, plug it in and start working through the diffs.
 We need to implement a stitch template for the namespace header
 formatter in types, plug it in and start working through the diffs.
 
+*** STARTED Implement visitor header formatter using stitch           :story:
+    CLOCK: [2015-05-19 Tue 13:11]--[2015-05-19 Tue 13:39] =>  0:28
+
+We need to implement a stitch template for the visitor header
+formatter in types, plug it in and start working through the diffs.
+
 *** Do not include algorithm if swap is disabled                      :story:
 
 At present we always include =algorithm= in types' class header - both

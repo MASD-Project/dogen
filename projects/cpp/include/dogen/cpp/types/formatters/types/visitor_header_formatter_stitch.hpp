@@ -18,36 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_VISITOR_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_VISITOR_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_VISITOR_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_VISITOR_HEADER_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 #include "dogen/cpp/types/formattables/visitor_info.hpp"
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-class visitor_formatter_interface : public formatter_interface {
-public:
-    visitor_formatter_interface() = default;
-    visitor_formatter_interface(const visitor_formatter_interface&) = delete;
-    visitor_formatter_interface(visitor_formatter_interface&&) = default;
-    virtual ~visitor_formatter_interface() noexcept = 0;
+dogen::formatters::file visitor_header_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::visitor_info& v);
 
-public:
-    /**
-     * @brief Generate a c++ representation for the type.
-     */
-    virtual dogen::formatters::file
-    format(const formattables::visitor_info& v) const = 0;
-};
-
-} } }
+} } } }
 
 #endif

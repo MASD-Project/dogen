@@ -166,7 +166,9 @@ void dispatcher::visit(const formattables::namespace_info& n) {
     format(container_.namespace_formatters(), n);
 }
 
-void dispatcher::visit(const formattables::visitor_info& /*v*/) {
+void dispatcher::visit(const formattables::visitor_info& v) {
+    for (const auto f : container_.visitor_formatters())
+        format(*f, v, false, true); // FIXME
 }
 
 void dispatcher::visit(const formattables::concept_info& /*c*/) {

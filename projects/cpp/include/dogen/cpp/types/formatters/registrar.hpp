@@ -33,6 +33,8 @@
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -76,6 +78,11 @@ public:
      * @brief Registers a namespace formatter.
      */
     void register_formatter(std::shared_ptr<namespace_formatter_interface> f);
+
+    /**
+     * @brief Registers a visitor formatter.
+     */
+    void register_formatter(std::shared_ptr<visitor_formatter_interface> f);
 
     /**
      * @brief Registers a forward declaration formatter.
