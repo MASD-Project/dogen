@@ -32,6 +32,9 @@
 namespace dogen {
 namespace sml {
 
+/**
+ * @brief Visitor for type
+ */
 class type_visitor {
 public:
     virtual ~type_visitor() noexcept = 0;

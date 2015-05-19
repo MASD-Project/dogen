@@ -42,6 +42,9 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+/**
+ * @brief Visitor for formattable
+ */
 class formattable_visitor {
 public:
     virtual ~formattable_visitor() noexcept = 0;

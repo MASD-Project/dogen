@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 14:20]
+Clock summary at [2015-05-19 Tue 14:42]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *41:31* |       |      |
+| *Total time*                                                                | *41:50* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 41:31 |      |
+| Active                                                                      |         | 41:50 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -46,7 +46,7 @@ Clock summary at [2015-05-19 Tue 14:20]
 | COMPLETED Implement types enumeration header formatter using stitch         |         |       | 2:00 |
 | COMPLETED Implement exception header formatter using stitch                 |         |       | 0:21 |
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
-| COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:06 |
+| COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -713,6 +713,8 @@ formatter in types, plug it in and start working through the diffs.
 
 *** COMPLETED Implement visitor header formatter using stitch         :story:
     CLOSED: [2015-05-19 Tue 14:20]
+    CLOCK: [2015-05-19 Tue 14:26]--[2015-05-19 Tue 14:41] =>  0:15
+    CLOCK: [2015-05-19 Tue 14:21]--[2015-05-19 Tue 14:25] =>  0:04
     CLOCK: [2015-05-19 Tue 14:12]--[2015-05-19 Tue 14:20] =>  0:08
     CLOCK: [2015-05-19 Tue 13:53]--[2015-05-19 Tue 14:11] =>  0:18
     CLOCK: [2015-05-19 Tue 13:40]--[2015-05-19 Tue 13:52] =>  0:12

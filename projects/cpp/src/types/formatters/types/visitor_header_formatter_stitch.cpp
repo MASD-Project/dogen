@@ -55,7 +55,7 @@ fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << st
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << "inline base_visitor::~base_visitor() noexcept { }" << std::endl;
+fa.stream() << "inline " << v.name() << "::~" << v.name() << "() noexcept { }" << std::endl;
 fa.stream() << std::endl;
         } // snf
 fa.stream() << std::endl;

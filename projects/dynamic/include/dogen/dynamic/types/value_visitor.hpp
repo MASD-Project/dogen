@@ -32,6 +32,9 @@
 namespace dogen {
 namespace dynamic {
 
+/**
+ * @brief Visitor for value
+ */
 class value_visitor {
 public:
     virtual ~value_visitor() noexcept = 0;

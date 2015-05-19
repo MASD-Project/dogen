@@ -45,7 +45,7 @@ public:
 #>
 };
 
-inline base_visitor::~base_visitor() noexcept { }
+inline <#= v.name() #>::~<#= v.name() #>() noexcept { }
 
 <#+
         } // snf
