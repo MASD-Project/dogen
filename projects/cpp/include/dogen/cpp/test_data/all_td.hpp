@@ -51,6 +51,7 @@
 #include "dogen/cpp/test_data/formattables/nested_type_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/path_derivatives_td.hpp"
+#include "dogen/cpp/test_data/formattables/visited_type_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/formattables/formatter_properties_td.hpp"
 #include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"

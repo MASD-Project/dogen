@@ -52,6 +52,7 @@
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_ser.hpp"
+#include "dogen/cpp/serialization/formattables/visited_type_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
 #include "dogen/cpp/serialization/formatters/serialization/settings_ser.hpp"

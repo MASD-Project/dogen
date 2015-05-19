@@ -18,40 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/visited_type_info_hash.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/cpp/io/formattables/visited_type_info_io.hpp"
 
-namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_cpp_formattables_visited_type_info(const std::list<dogen::cpp::formattables::visited_type_info>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t visitor_info_hasher::hash(const visitor_info&v) {
-    std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
-
-    combine(seed, hash_std_list_dogen_cpp_formattables_visited_type_info(v.types()));
-    return seed;
+std::ostream& operator<<(std::ostream& s, const visited_type_info& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::cpp::formattables::visited_type_info\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
+      << " }";
+    return(s);
 }
 
 } } }

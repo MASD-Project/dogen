@@ -18,40 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/visited_type_info_hash.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTABLES_VISITED_TYPE_INFO_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTABLES_VISITED_TYPE_INFO_TD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_cpp_formattables_visited_type_info(const std::list<dogen::cpp::formattables::visited_type_info>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include "dogen/cpp/types/formattables/visited_type_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t visitor_info_hasher::hash(const visitor_info&v) {
-    std::size_t seed(0);
+class visited_type_info_generator {
+public:
+    visited_type_info_generator();
 
-    combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
+public:
+    typedef dogen::cpp::formattables::visited_type_info result_type;
 
-    combine(seed, hash_std_list_dogen_cpp_formattables_visited_type_info(v.types()));
-    return seed;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

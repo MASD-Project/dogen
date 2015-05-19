@@ -91,6 +91,7 @@
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
+#include "dogen/cpp/types/formattables/visited_type_info.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"

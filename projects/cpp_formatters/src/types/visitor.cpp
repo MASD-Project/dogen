@@ -36,7 +36,6 @@ namespace {
 
 auto lg(logger_factory("cpp_formatters.visitor"));
 const std::string missing_visitor_info("Visitor view model is empty");
-const std::string comments("Accept visits for type ");
 
 }
 
@@ -76,23 +75,27 @@ void visitor::format(const cpp::formattables::visitor_info& vi) {
                 if (!is_first)
                     utility_.blank_line();
 
-                dc.format(comments + t);
-                dc.format_start_block(comments);
+                dc.format(t.documentation());
+                dc.format_start_block(t.documentation());
 
-                stream_ << indenter_ << "virtual void visit(const " << t
+                stream_ << indenter_ << "virtual void visit(const "
+                        << t.qualified_name()
                         << "&) const { }"
                         << std::endl;
-                stream_ << indenter_ << "virtual void visit(const " << t
+                stream_ << indenter_ << "virtual void visit(const "
+                        << t.qualified_name()
                         << "&) { }"
                         << std::endl;
-                stream_ << indenter_ << "virtual void visit(" << t
+                stream_ << indenter_ << "virtual void visit("
+                        << t.qualified_name()
                         << "&) const { }"
                         << std::endl;
-                stream_ << indenter_ << "virtual void visit(" << t
+                stream_ << indenter_ << "virtual void visit("
+                        << t.qualified_name()
                         << "&) { }"
                         << std::endl;
 
-                dc.format_end_block(comments);
+                dc.format_end_block(t.documentation());
                 is_first = false;
             }
         }

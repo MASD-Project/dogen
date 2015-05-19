@@ -42,10 +42,11 @@ fa.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "public:" << std::endl;
             for (const auto& t : v.types()) {
-fa.stream() << "                virtual void visit(const " << t << "&) const { }" << std::endl;
-fa.stream() << "                virtual void visit(const " << t << "&) { }" << std::endl;
-fa.stream() << "                virtual void visit(" << t << "&) const { }" << std::endl;
-fa.stream() << "                virtual void visit(" << t << "&) { }" << std::endl;
+                fa.comment(t.documentation());
+fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
+fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
+fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
+fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
             }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;

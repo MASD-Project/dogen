@@ -27,11 +27,12 @@ public:
 public:
 <#+
             for (const auto& t : v.types()) {
+                fa.comment(t.documentation());
 #>
-                virtual void visit(const <#= t #>&) const { }
-                virtual void visit(const <#= t #>&) { }
-                virtual void visit(<#= t #>&) const { }
-                virtual void visit(<#= t #>&) { }
+    virtual void visit(const <#= t.qualified_name() #>&) const { }
+    virtual void visit(const <#= t.qualified_name() #>&) { }
+    virtual void visit(<#= t.qualified_name() #>&) const { }
+    virtual void visit(<#= t.qualified_name() #>&) { }
 <#+
             }
 #>

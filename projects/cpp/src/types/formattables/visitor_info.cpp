@@ -19,25 +19,17 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/visitor_info.hpp"
-
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include "dogen/cpp/io/formattables/visited_type_info_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::cpp::formattables::visited_type_info>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -57,7 +49,7 @@ visitor_info::visitor_info(
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings,
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
-    const std::list<std::string>& types)
+    const std::list<dogen::cpp::formattables::visited_type_info>& types)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
@@ -101,19 +93,19 @@ visitor_info& visitor_info::operator=(visitor_info other) {
     return *this;
 }
 
-const std::list<std::string>& visitor_info::types() const {
+const std::list<dogen::cpp::formattables::visited_type_info>& visitor_info::types() const {
     return types_;
 }
 
-std::list<std::string>& visitor_info::types() {
+std::list<dogen::cpp::formattables::visited_type_info>& visitor_info::types() {
     return types_;
 }
 
-void visitor_info::types(const std::list<std::string>& v) {
+void visitor_info::types(const std::list<dogen::cpp::formattables::visited_type_info>& v) {
     types_ = v;
 }
 
-void visitor_info::types(const std::list<std::string>&& v) {
+void visitor_info::types(const std::list<dogen::cpp::formattables::visited_type_info>&& v) {
     types_ = std::move(v);
 }
 

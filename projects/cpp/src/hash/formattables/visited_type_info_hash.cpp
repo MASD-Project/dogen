@@ -18,8 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/hash/formattables/entity_hash.hpp"
-#include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/visited_type_info_hash.hpp"
 
 namespace {
@@ -31,26 +29,19 @@ inline void combine(std::size_t& seed, const HashableType& value)
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_cpp_formattables_visited_type_info(const std::list<dogen::cpp::formattables::visited_type_info>& v){
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t visitor_info_hasher::hash(const visitor_info&v) {
+std::size_t visited_type_info_hasher::hash(const visited_type_info&v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::cpp::formattables::entity&>(v));
+    combine(seed, v.name());
+    combine(seed, v.qualified_name());
+    combine(seed, v.documentation());
 
-    combine(seed, hash_std_list_dogen_cpp_formattables_visited_type_info(v.types()));
     return seed;
 }
 

@@ -27,9 +27,9 @@
 
 #include <list>
 #include <iosfwd>
-#include <string>
 #include <algorithm>
 #include "dogen/cpp/types/formattables/entity.hpp"
+#include "dogen/cpp/types/formattables/visited_type_info.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,7 +56,7 @@ public:
         const std::list<std::string>& namespaces,
         const dogen::cpp::settings::bundle& settings,
         const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
-        const std::list<std::string>& types);
+        const std::list<dogen::cpp::formattables::visited_type_info>& types);
 
 private:
     template<typename Archive>
@@ -90,10 +90,10 @@ public:
      * @brief Types for which an accept method will be generated.
      */
     /**@{*/
-    const std::list<std::string>& types() const;
-    std::list<std::string>& types();
-    void types(const std::list<std::string>& v);
-    void types(const std::list<std::string>&& v);
+    const std::list<dogen::cpp::formattables::visited_type_info>& types() const;
+    std::list<dogen::cpp::formattables::visited_type_info>& types();
+    void types(const std::list<dogen::cpp::formattables::visited_type_info>& v);
+    void types(const std::list<dogen::cpp::formattables::visited_type_info>&& v);
     /**@}*/
 
 public:
@@ -110,7 +110,7 @@ public:
     visitor_info& operator=(visitor_info other);
 
 private:
-    std::list<std::string> types_;
+    std::list<dogen::cpp::formattables::visited_type_info> types_;
 };
 
 } } }

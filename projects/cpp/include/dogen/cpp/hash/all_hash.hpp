@@ -51,6 +51,7 @@
 #include "dogen/cpp/hash/formattables/nested_type_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/odb_options_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/path_derivatives_hash.hpp"
+#include "dogen/cpp/hash/formattables/visited_type_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/formattables/formatter_properties_hash.hpp"
 #include "dogen/cpp/hash/formatters/serialization/settings_hash.hpp"

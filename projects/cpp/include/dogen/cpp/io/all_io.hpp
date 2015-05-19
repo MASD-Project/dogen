@@ -51,6 +51,7 @@
 #include "dogen/cpp/io/formattables/nested_type_info_io.hpp"
 #include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_io.hpp"
+#include "dogen/cpp/io/formattables/visited_type_info_io.hpp"
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
 #include "dogen/cpp/io/formatters/serialization/settings_io.hpp"

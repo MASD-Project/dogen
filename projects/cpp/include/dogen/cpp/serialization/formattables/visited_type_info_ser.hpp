@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/cpp/io/formattables/entity_io.hpp"
-#include "dogen/cpp/io/formattables/visitor_info_io.hpp"
-#include "dogen/cpp/io/formattables/visited_type_info_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_VISITED_TYPE_INFO_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_VISITED_TYPE_INFO_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const visitor_info& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/cpp/types/formattables/visited_type_info.hpp"
 
-} } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::cpp::formattables::visited_type_info)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::cpp::formattables::visited_type_info& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::cpp::formattables::visited_type_info& v, unsigned int version);
+
+} }
+
+#endif

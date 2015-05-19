@@ -74,6 +74,7 @@ const std::string time_duration_type("boost::posix_time::time_duration");
 const std::string ptree_type("boost::property_tree::ptree");
 const std::string pair_type("std::pair");
 const std::string registrar_name("registrar");
+const std::string visitor_comments("Accept visits for type ");
 
 const std::string int8_t_type("std::int8_t");
 const std::string int16_t_type("std::int16_t");
@@ -501,8 +502,13 @@ transformer::to_visitor(const sml::object& o) const {
         BOOST_THROW_EXCEPTION(transformation_error(no_visitees + n));
     }
 
-    for (const auto qn : i->second)
-        r->types().push_back(to_qualified_name(qn));
+    for (const auto qn : i->second) {
+        cpp::formattables::visited_type_info vti;
+        vti.qualified_name(to_qualified_name(qn));
+        vti.name(qn.simple_name());
+        vti.documentation(visitor_comments + vti.qualified_name());
+        r->types().push_back(vti);
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Transformed visitor.";
     return r;
