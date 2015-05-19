@@ -217,8 +217,9 @@ void formatting_assistant::comment(const std::string& c) {
 }
 
 void formatting_assistant::
-comment_start_property(const formattables::property_info& p) {
-    if (p.documentation().empty())
+comment_start_method_group(const std::string& documentation,
+    const bool add_comment_blocks) {
+    if (documentation.empty())
         return;
 
     {
@@ -230,17 +231,18 @@ comment_start_property(const formattables::property_info& p) {
             dogen::formatters::comment_styles::c_style,
             !last_line_is_blank);
 
-        f.format(stream(), p.documentation());
-        if (!p.is_immutable()) {
-            f.format_doxygen_start_block(stream(), p.documentation());
+        f.format(stream(), documentation);
+        if (add_comment_blocks) {
+            f.format_doxygen_start_block(stream(), documentation);
             stream() << std::endl;
         }
     }
 }
 
 void formatting_assistant::
-comment_end_property(const formattables::property_info& p) {
-    if (p.documentation().empty())
+comment_end_method_group(const std::string& documentation,
+    const bool add_comment_blocks) {
+    if (documentation.empty())
         return;
 
     {
@@ -252,8 +254,8 @@ comment_end_property(const formattables::property_info& p) {
             dogen::formatters::comment_styles::c_style,
             !last_line_is_blank);
 
-        if (!p.is_immutable()) {
-            f.format_doxygen_end_block(stream(), p.documentation());
+        if (add_comment_blocks) {
+            f.format_doxygen_end_block(stream(), documentation);
             stream() << std::endl;
         }
     }

@@ -77,7 +77,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const auto lambda([&](const sml::object& o,
             const sml::relationship_types rt,
             const std::string& fn) {
-            auto i(o.relationships().find(rt));
+            const auto i(o.relationships().find(rt));
             if (i == o.relationships().end())
                 return;
 

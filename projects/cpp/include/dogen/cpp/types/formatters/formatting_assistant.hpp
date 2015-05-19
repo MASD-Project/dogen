@@ -172,16 +172,18 @@ public:
     void comment(const std::string& c);
 
     /**
-     * @brief Adds comments for the starting of a property, including
-     * blocks.
+     * @brief Adds comments for the starting of a method group,
+     * including comment blocks.
      */
-    void comment_start_property(const formattables::property_info& p);
+    void comment_start_method_group(const std::string& documentation,
+        const bool add_comment_blocks = true);
 
     /**
-     * @brief Adds comments for the end of a property, including
-     * blocks.
+     * @brief Adds comments for the end of a method group, including
+     * comment blocks.
      */
-    void comment_end_property(const formattables::property_info& p);
+    void comment_end_method_group(const std::string& documentation,
+        const bool add_comment_blocks = true);
 
     /**
      * @brief Returns @code c as as an inline comment.

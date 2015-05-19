@@ -27,16 +27,22 @@ public:
 public:
 <#+
             for (const auto& t : v.types()) {
-                fa.comment(t.documentation());
+                fa.comment_start_method_group(t.documentation());
 #>
     virtual void visit(const <#= t.qualified_name() #>&) const { }
     virtual void visit(const <#= t.qualified_name() #>&) { }
     virtual void visit(<#= t.qualified_name() #>&) const { }
     virtual void visit(<#= t.qualified_name() #>&) { }
 <#+
+                fa.comment_end_method_group(t.documentation());
+#>
+
+<#+
             }
 #>
 };
+
+inline base_visitor::~base_visitor() noexcept { }
 
 <#+
         } // snf

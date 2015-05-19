@@ -54,9 +54,19 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& /*e*/) const {
+    const sml::object& o) const {
+
+    if (o.object_type() != sml::object_types::visitor)
+        return boost::optional<std::list<std::string> >();
+
     auto builder(f.make());
-    builder.add(inclusion_constants::std::string());
+    const auto i(o.relationships().find(sml::relationship_types::visits));
+    if (i == o.relationships().end())
+        return boost::optional<std::list<std::string> >();
+
+    const auto fwd_fn(traits::forward_declarations_formatter_name());
+    builder.add(i->second, fwd_fn);
+
     return builder.build();
 }
 

@@ -164,7 +164,6 @@
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository_factory.hpp"
-#include "dogen/cpp/types/formatters/types/visitor_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"

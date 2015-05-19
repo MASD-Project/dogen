@@ -42,13 +42,17 @@ fa.stream() << "    virtual ~" << v.name() << "() noexcept = 0;" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "public:" << std::endl;
             for (const auto& t : v.types()) {
-                fa.comment(t.documentation());
+                fa.comment_start_method_group(t.documentation());
 fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) const { }" << std::endl;
 fa.stream() << "    virtual void visit(const " << t.qualified_name() << "&) { }" << std::endl;
 fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) const { }" << std::endl;
 fa.stream() << "    virtual void visit(" << t.qualified_name() << "&) { }" << std::endl;
+                fa.comment_end_method_group(t.documentation());
+fa.stream() << std::endl;
             }
 fa.stream() << "};" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "inline base_visitor::~base_visitor() noexcept { }" << std::endl;
 fa.stream() << std::endl;
         } // snf
 fa.stream() << std::endl;

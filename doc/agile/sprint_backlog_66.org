@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 13:52]
+Clock summary at [2015-05-19 Tue 14:11]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *41:05* |       |      |
+| *Total time*                                                                | *41:23* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 41:05 |      |
+| Active                                                                      |         | 41:23 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -46,7 +46,7 @@ Clock summary at [2015-05-19 Tue 13:52]
 | COMPLETED Implement types enumeration header formatter using stitch         |         |       | 2:00 |
 | COMPLETED Implement exception header formatter using stitch                 |         |       | 0:21 |
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
-| STARTED Implement visitor header formatter using stitch                     |         |       | 0:40 |
+| STARTED Implement visitor header formatter using stitch                     |         |       | 0:58 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -712,6 +712,7 @@ We need to implement a stitch template for the namespace header
 formatter in types, plug it in and start working through the diffs.
 
 *** STARTED Implement visitor header formatter using stitch           :story:
+    CLOCK: [2015-05-19 Tue 13:53]--[2015-05-19 Tue 14:11] =>  0:18
     CLOCK: [2015-05-19 Tue 13:40]--[2015-05-19 Tue 13:52] =>  0:12
     CLOCK: [2015-05-19 Tue 13:11]--[2015-05-19 Tue 13:39] =>  0:28
 

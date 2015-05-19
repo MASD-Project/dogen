@@ -207,7 +207,7 @@ public:
 public:
 <#+
                 for (const auto p : c.properties()) {
-                    fa.comment_start_property(p);
+                    fa.comment_start_method_group(p.documentation(), !p.is_immutable());
 
                     if (p.type().is_primitive() || p.type().is_enumeration()) {
 #>
@@ -238,7 +238,7 @@ public:
     <#= fa.make_setter_return_type(c.name(), p) #> <#= p.name() #>(const <#= p.type().complete_name() #>&& v);
 <#+
                     }
-                    fa.comment_end_property(p);
+                    fa.comment_end_method_group(p.documentation(), !p.is_immutable());
 #>
 
 <#+
