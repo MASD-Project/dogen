@@ -18,36 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-struct traits {
-    /**
-     * @brief Name of this model.
-     */
-    static std::string model_name();
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::formatting_assistant& fa, const formattables::class_info& fd);
 
-    /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string header_formatter_group_name();
-
-    /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string implementation_formatter_group_name();
-};
-
-} } }
+} } } }
 
 #endif

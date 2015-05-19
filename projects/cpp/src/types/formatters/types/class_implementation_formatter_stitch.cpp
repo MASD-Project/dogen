@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,36 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TRAITS_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
+#include "dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
+namespace types {
 
-struct traits {
-    /**
-     * @brief Name of this model.
-     */
-    static std::string model_name();
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::formatting_assistant& fa,
+    const formattables::class_info& fd) {
 
-    /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string header_formatter_group_name();
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << std::endl;
+fa.stream() << "class " << fd.name() << ";" << std::endl;
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    return fa.make_file(false/*overwrite*/);
+}
 
-    /**
-     * @brief Name of the header formatter group.
-     */
-    static std::string implementation_formatter_group_name();
-};
-
-} } }
-
-#endif
+} } } }

@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 14:42]
+Clock summary at [2015-05-19 Tue 16:42]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *41:50* |       |      |
+| *Total time*                                                                | *43:39* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 41:50 |      |
+| Active                                                                      |         | 43:39 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -47,6 +47,8 @@ Clock summary at [2015-05-19 Tue 14:42]
 | COMPLETED Implement exception header formatter using stitch                 |         |       | 0:21 |
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
+| COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 0:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -722,6 +724,23 @@ formatter in types, plug it in and start working through the diffs.
 
 We need to implement a stitch template for the visitor header
 formatter in types, plug it in and start working through the diffs.
+
+*** COMPLETED Validate that we are not generating unexpected files    :spike:
+    CLOSED: [2015-05-19 Tue 16:27]
+    CLOCK: [2015-05-19 Tue 15:33]--[2015-05-19 Tue 16:25] =>  0:52
+
+At present we are only checking if a legacy file has a corresponding
+override version; however, it is entirely possible we are generating
+invalid overrides that are just getting ignored. Tighten the checks
+around this and deal with the fallout.
+
+*** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-05-19 Tue 16:28]--[2015-05-19 Tue 16:42] =>  0:14
+    CLOCK: [2015-05-19 Tue 14:45]--[2015-05-19 Tue 15:28] =>  0:43
+
+We need to implement a stitch template for the class
+implementation formatter in types, plug it in and start working
+through the diffs.
 
 *** Do not include algorithm if swap is disabled                      :story:
 

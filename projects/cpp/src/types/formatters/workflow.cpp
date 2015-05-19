@@ -86,7 +86,7 @@ private:
             file.content().clear();
 
         files_.push_front(file);
-        if (!file.overwrite()) {
+        if (!file.overwrite() && !file.content().empty()) {
             BOOST_LOG_SEV(lg, debug) << "Filename: "
                                      << file.path().generic_string();
             BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();

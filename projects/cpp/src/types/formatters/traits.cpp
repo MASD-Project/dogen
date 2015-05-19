@@ -34,4 +34,9 @@ std::string traits::header_formatter_group_name() {
     return r;
 }
 
+std::string traits::implementation_formatter_group_name() {
+    static std::string r("cpp.implementation_files");
+    return r;
+}
+
 } } }
