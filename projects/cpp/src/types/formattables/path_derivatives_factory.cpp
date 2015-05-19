@@ -49,8 +49,9 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
+    const sml::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
-    : path_settings_(ps) { }
+    : model_(m), path_settings_(ps) { }
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
@@ -71,11 +72,19 @@ make_inclusion_path(const settings::path_settings& ps,
         r /= qn.model_name();
     }
 
-    if (!ps.facet_directory().empty())
+    if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
     for(auto n : qn.module_path())
         r /= n;
+
+    // modules other than the model module have simple names
+    // contribute to the directories.
+    if (qn != model_.name()) {
+        const auto i(model_.modules().find(qn));
+        if (i != model_.modules().end())
+            r /= qn.simple_name();
+    }
 
     std::ostringstream stream;
     stream << qn.simple_name();

@@ -62,8 +62,7 @@ public:
 private:
     template<typename Formatter, typename Entity>
     void format(const Formatter& f, const Entity& e,
-        const bool empty_out_content = false,
-        const bool skip_push = false) {
+        const bool empty_out_content = false) {
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
                                  << "' with '" << fn << "'";
@@ -86,9 +85,8 @@ private:
         if (empty_out_content)
             file.content().clear();
 
-        if (!skip_push)
-            files_.push_front(file);
-        else {
+        files_.push_front(file);
+        if (!file.overwrite()) {
             BOOST_LOG_SEV(lg, debug) << "Filename: "
                                      << file.path().generic_string();
             BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();

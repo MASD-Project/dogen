@@ -55,7 +55,8 @@ public:
         const dogen::cpp::settings::bundle& settings,
         const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
         const bool is_enum,
-        const std::string& enum_type);
+        const std::string& enum_type,
+        const bool is_exception);
 
 private:
     template<typename Archive>
@@ -104,6 +105,9 @@ public:
     void enum_type(const std::string&& v);
     /**@}*/
 
+    bool is_exception() const;
+    void is_exception(const bool v);
+
 public:
     bool operator==(const forward_declarations_info& rhs) const;
     bool operator!=(const forward_declarations_info& rhs) const {
@@ -120,6 +124,7 @@ public:
 private:
     bool is_enum_;
     std::string enum_type_;
+    bool is_exception_;
 };
 
 } } }

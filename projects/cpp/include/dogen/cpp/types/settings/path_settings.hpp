@@ -58,7 +58,8 @@ public:
         const boost::filesystem::path& source_directory_path,
         const boost::filesystem::path& include_directory_path,
         const std::string& include_directory_name,
-        const std::string& source_directory_name);
+        const std::string& source_directory_name,
+        const bool disable_facet_directories);
 
 private:
     template<typename Archive>
@@ -119,6 +120,9 @@ public:
     void source_directory_name(const std::string& v);
     void source_directory_name(const std::string&& v);
 
+    bool disable_facet_directories() const;
+    void disable_facet_directories(const bool v);
+
 public:
     bool operator==(const path_settings& rhs) const;
     bool operator!=(const path_settings& rhs) const {
@@ -141,6 +145,7 @@ private:
     boost::filesystem::path include_directory_path_;
     std::string include_directory_name_;
     std::string source_directory_name_;
+    bool disable_facet_directories_;
 };
 
 } } }

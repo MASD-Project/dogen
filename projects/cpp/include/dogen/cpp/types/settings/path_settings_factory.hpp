@@ -64,6 +64,7 @@ private:
         dynamic::field_definition implementation_file_extension;
         dynamic::field_definition include_directory_name;
         dynamic::field_definition source_directory_name;
+        dynamic::field_definition disable_facet_directories;
     };
 
     /**

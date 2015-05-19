@@ -55,7 +55,8 @@ std::ostream& operator<<(std::ostream& s, const path_settings& v) {
       << "\"source_directory_path\": " << "\"" << v.source_directory_path().generic_string() << "\"" << ", "
       << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\"" << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(v.include_directory_name()) << "\"" << ", "
-      << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\""
+      << "\"source_directory_name\": " << "\"" << tidy_up_string(v.source_directory_name()) << "\"" << ", "
+      << "\"disable_facet_directories\": " << v.disable_facet_directories()
       << " }";
     return(s);
 }

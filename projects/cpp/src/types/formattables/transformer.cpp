@@ -526,6 +526,7 @@ transformer::to_visitor_info(const sml::object& o) const {
 std::shared_ptr<forward_declarations_info> transformer::
 to_forward_declarations_info(const sml::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
+    r->is_exception(o.object_type() == sml::object_types::exception);
     populate_entity_properties(o.name(), o.documentation(), *r);
     return r;
 }
@@ -574,7 +575,11 @@ transform(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(to_forward_declarations_info(o));
+
+    // FIXME: hack for now, excluding any forward declarations that
+    // didn't get generated in the old world.
+    if (o.object_type() != sml::object_types::visitor)
+        r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
     case sml::object_types::factory: // FIXME: mega-hack

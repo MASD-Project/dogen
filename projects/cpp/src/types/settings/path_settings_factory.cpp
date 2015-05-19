@@ -60,6 +60,9 @@ void path_settings_factory::setup_top_level_fields(
 
     const auto& ife(traits::cpp::implementation_file_extension());
     fp.implementation_file_extension = s.select_field_by_name(ife);
+
+    const auto& dfd(traits::cpp::disable_facet_directories());
+    fp.disable_facet_directories = s.select_field_by_name(dfd);
 }
 
 void path_settings_factory::setup_facet_fields(
@@ -146,6 +149,9 @@ create_settings_for_formatter(const formatter_properties& fp,
         fs.get_text_content_or_default(fp.include_directory_name));
     r.source_directory_name(
         fs.get_text_content_or_default(fp.source_directory_name));
+
+    r.disable_facet_directories(
+        fs.get_boolean_content_or_default(fp.disable_facet_directories));
 
     return r;
 }

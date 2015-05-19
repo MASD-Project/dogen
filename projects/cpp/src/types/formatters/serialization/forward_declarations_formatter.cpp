@@ -105,6 +105,11 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file forward_declarations_formatter::
 format(const formattables::forward_declarations_info& fd) const {
+    // FIXME: hack: legacy formatters do not support serialisation
+    // forward declarations for some types.
+    if (fd.is_enum() || fd.is_exception())
+        return dogen::formatters::file();
+
     formatting_assistant fa(fd, ownership_hierarchy(), file_type());
     const auto r(forward_declarations_formatter_stitch(fa, fd));
     return r;

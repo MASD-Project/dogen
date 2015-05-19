@@ -51,6 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
     ar << make_nvp("include_directory_name", v.include_directory_name_);
     ar << make_nvp("source_directory_name", v.source_directory_name_);
+    ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
 }
 
 template<typename Archive>
@@ -74,6 +75,7 @@ void load(Archive& ar,
     v.include_directory_path_ = include_directory_path_tmp;
     ar >> make_nvp("include_directory_name", v.include_directory_name_);
     ar >> make_nvp("source_directory_name", v.source_directory_name_);
+    ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
 }
 
 } }

@@ -163,7 +163,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    dogen::formatters::file make_file() const;
+    dogen::formatters::file make_file(const bool overwrite = true) const;
 
 public:
     /**

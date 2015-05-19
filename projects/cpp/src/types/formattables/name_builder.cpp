@@ -53,12 +53,11 @@ namespace_list(const sml::model& m, const sml::qname& qn) const {
     const auto mp(qn.module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
-    // if the qname belongs to a module, the simple name will
-    // contribute to the namespaces (since it is a module).
-    const auto i(m.modules().find(qn));
-    if (i != m.modules().end())
+    // if the qname belongs to the model's module, we need to remove the
+    // module's simple name from the module path (it is in both the
+    // module path and it is also the module's simple name).
+    if (qn == m.name())
         r.pop_back();
-        // r.push_back(qn.simple_name());
 
     return r;
 }

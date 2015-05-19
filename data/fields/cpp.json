@@ -263,5 +263,18 @@
         "definition_type" : "instance",
         "scope" : "root_module",
         "default_value" : false
+    },
+   {
+        "name" : {
+            "simple" : "disable_facet_directories",
+            "qualified" : "cpp.disable_facet_directories"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp"
+        },
+        "value_type" : "boolean",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : false
     }
 ]

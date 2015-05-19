@@ -49,9 +49,9 @@ namespace {
  */
 class generator {
 public:
-    generator(
+    generator(const sml::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps)
-        : factory_(ps) { }
+        : factory_(m, ps) { }
 
 private:
     /**
@@ -109,7 +109,7 @@ obtain_path_derivatives(
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining path derivatives.";
 
-    generator g(ps);
+    generator g(m, ps);
     sml::all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining path derivatives.";

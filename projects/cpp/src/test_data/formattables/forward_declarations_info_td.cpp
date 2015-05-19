@@ -47,6 +47,7 @@ populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::entity_generator::populate(position, v);
     v.is_enum(create_bool(position + 0));
     v.enum_type(create_std_string(position + 1));
+    v.is_exception(create_bool(position + 2));
 }
 
 forward_declarations_info_generator::result_type

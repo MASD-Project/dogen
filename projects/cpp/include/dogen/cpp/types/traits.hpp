@@ -131,6 +131,11 @@ struct traits {
          * @brief Name of the directory containing the source files.
          */
         static std::string source_directory_name();
+
+        /**
+         * @brief If true, facet directories will be ignored.
+         */
+        static std::string disable_facet_directories();
     };
 };
 

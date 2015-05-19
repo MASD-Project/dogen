@@ -196,10 +196,12 @@ std::ostream& formatting_assistant::stream() {
     return filtering_stream_;
 }
 
-dogen::formatters::file formatting_assistant::make_file() const {
+dogen::formatters::file formatting_assistant::
+make_file(const bool overwrite) const {
     dogen::formatters::file r;
     r.content(stream_.str());
     r.path(formatter_properties_.file_path());
+    r.overwrite(overwrite);
     return r;
 }
 

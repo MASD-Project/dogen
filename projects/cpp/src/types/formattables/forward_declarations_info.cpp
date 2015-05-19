@@ -37,7 +37,8 @@ namespace cpp {
 namespace formattables {
 
 forward_declarations_info::forward_declarations_info()
-    : is_enum_(static_cast<bool>(0)) { }
+    : is_enum_(static_cast<bool>(0)),
+      is_exception_(static_cast<bool>(0)) { }
 
 forward_declarations_info::forward_declarations_info(
     const std::string& identity,
@@ -48,7 +49,8 @@ forward_declarations_info::forward_declarations_info(
     const dogen::cpp::settings::bundle& settings,
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const bool is_enum,
-    const std::string& enum_type)
+    const std::string& enum_type,
+    const bool is_exception)
     : dogen::cpp::formattables::entity(identity,
       name,
       qualified_name,
@@ -57,7 +59,8 @@ forward_declarations_info::forward_declarations_info(
       settings,
       formatter_properties),
       is_enum_(is_enum),
-      enum_type_(enum_type) { }
+      enum_type_(enum_type),
+      is_exception_(is_exception) { }
 
 void forward_declarations_info::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -72,7 +75,8 @@ void forward_declarations_info::to_stream(std::ostream& s) const {
     entity::to_stream(s);
     s << ", "
       << "\"is_enum\": " << is_enum_ << ", "
-      << "\"enum_type\": " << "\"" << tidy_up_string(enum_type_) << "\""
+      << "\"enum_type\": " << "\"" << tidy_up_string(enum_type_) << "\"" << ", "
+      << "\"is_exception\": " << is_exception_
       << " }";
 }
 
@@ -82,6 +86,7 @@ void forward_declarations_info::swap(forward_declarations_info& other) noexcept 
     using std::swap;
     swap(is_enum_, other.is_enum_);
     swap(enum_type_, other.enum_type_);
+    swap(is_exception_, other.is_exception_);
 }
 
 bool forward_declarations_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -93,7 +98,8 @@ bool forward_declarations_info::equals(const dogen::cpp::formattables::formattab
 bool forward_declarations_info::operator==(const forward_declarations_info& rhs) const {
     return entity::compare(rhs) &&
         is_enum_ == rhs.is_enum_ &&
-        enum_type_ == rhs.enum_type_;
+        enum_type_ == rhs.enum_type_ &&
+        is_exception_ == rhs.is_exception_;
 }
 
 forward_declarations_info& forward_declarations_info::operator=(forward_declarations_info other) {
@@ -124,6 +130,14 @@ void forward_declarations_info::enum_type(const std::string& v) {
 
 void forward_declarations_info::enum_type(const std::string&& v) {
     enum_type_ = std::move(v);
+}
+
+bool forward_declarations_info::is_exception() const {
+    return is_exception_;
+}
+
+void forward_declarations_info::is_exception(const bool v) {
+    is_exception_ = v;
 }
 
 } } }

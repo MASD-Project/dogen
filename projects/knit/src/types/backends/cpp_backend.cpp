@@ -19,6 +19,7 @@
  *
  */
 #include <unordered_map>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml_to_cpp/types/workflow.hpp"
@@ -37,7 +38,7 @@ auto lg(logger_factory("knit.backends.cpp_backend"));
 const bool perform_override_of_legacy_files(true);
 
 const std::string duplicate_file_path("File path already exists: ");
-
+const std::string unexpected_overrides_found("Found unexpected overrides: ");
 }
 
 namespace dogen {
@@ -81,7 +82,12 @@ std::forward_list<formatters::file> cpp_backend::override_legacy_files(
         // files. we do not want these to interfere with the rest so
         // we skip them.
         if (gs.empty()) {
-            BOOST_LOG_SEV(lg, debug) << "Ignoring empty override.";
+            BOOST_LOG_SEV(lg, debug) << "Ignoring empty override: " << gs;
+            continue;
+        }
+
+        if (!f.overwrite()) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping override: " << gs;
             continue;
         }
 
@@ -103,11 +109,24 @@ std::forward_list<formatters::file> cpp_backend::override_legacy_files(
         if (i != overrides.end()) {
             BOOST_LOG_SEV(lg, debug) << "File has been overriden: " << gs;
             r.push_front(i->second);
+            overrides.erase(i);
         } else {
             BOOST_LOG_SEV(lg, debug) << "Using legacy for file: " << gs;
             r.push_front(f);
         }
     }
+
+    if (!overrides.empty()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_overrides_found
+                                 << overrides.size();
+
+        for (const auto& pair : overrides)
+            BOOST_LOG_SEV(lg, debug) << pair.first;
+
+        BOOST_THROW_EXCEPTION(backend_error(unexpected_overrides_found
+                + boost::lexical_cast<std::string>(overrides.size())));
+    }
+
     return r;
 }
 

@@ -67,6 +67,7 @@ populate(const unsigned int position, result_type& v) {
     v.include_directory_path(create_boost_filesystem_path(position + 8));
     v.include_directory_name(create_std_string(position + 9));
     v.source_directory_name(create_std_string(position + 10));
+    v.disable_facet_directories(create_bool(position + 11));
 }
 
 path_settings_generator::result_type

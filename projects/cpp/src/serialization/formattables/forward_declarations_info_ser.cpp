@@ -47,6 +47,7 @@ void save(Archive& ar,
 
     ar << make_nvp("is_enum", v.is_enum_);
     ar << make_nvp("enum_type", v.enum_type_);
+    ar << make_nvp("is_exception", v.is_exception_);
 }
 
 template<typename Archive>
@@ -57,6 +58,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("is_enum", v.is_enum_);
     ar >> make_nvp("enum_type", v.enum_type_);
+    ar >> make_nvp("is_exception", v.is_exception_);
 }
 
 } }

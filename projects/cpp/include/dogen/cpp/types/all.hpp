@@ -168,7 +168,6 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/test_data/class_implementation_formatter.hpp"
-#include "dogen/cpp/types/formatters/types/exception_implementation_formatter.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"

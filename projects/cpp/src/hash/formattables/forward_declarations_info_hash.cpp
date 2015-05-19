@@ -43,6 +43,7 @@ std::size_t forward_declarations_info_hasher::hash(const forward_declarations_in
 
     combine(seed, v.is_enum());
     combine(seed, v.enum_type());
+    combine(seed, v.is_exception());
 
     return seed;
 }

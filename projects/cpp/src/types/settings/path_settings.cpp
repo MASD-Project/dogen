@@ -26,7 +26,8 @@ namespace settings {
 
 path_settings::path_settings()
     : split_project_(static_cast<bool>(0)),
-      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)) { }
+      file_type_(static_cast<dogen::cpp::formatters::file_types>(0)),
+      disable_facet_directories_(static_cast<bool>(0)) { }
 
 path_settings::path_settings(path_settings&& rhs)
     : split_project_(std::move(rhs.split_project_)),
@@ -39,7 +40,8 @@ path_settings::path_settings(path_settings&& rhs)
       source_directory_path_(std::move(rhs.source_directory_path_)),
       include_directory_path_(std::move(rhs.include_directory_path_)),
       include_directory_name_(std::move(rhs.include_directory_name_)),
-      source_directory_name_(std::move(rhs.source_directory_name_)) { }
+      source_directory_name_(std::move(rhs.source_directory_name_)),
+      disable_facet_directories_(std::move(rhs.disable_facet_directories_)) { }
 
 path_settings::path_settings(
     const bool split_project,
@@ -52,7 +54,8 @@ path_settings::path_settings(
     const boost::filesystem::path& source_directory_path,
     const boost::filesystem::path& include_directory_path,
     const std::string& include_directory_name,
-    const std::string& source_directory_name)
+    const std::string& source_directory_name,
+    const bool disable_facet_directories)
     : split_project_(split_project),
       file_type_(file_type),
       facet_directory_(facet_directory),
@@ -63,7 +66,8 @@ path_settings::path_settings(
       source_directory_path_(source_directory_path),
       include_directory_path_(include_directory_path),
       include_directory_name_(include_directory_name),
-      source_directory_name_(source_directory_name) { }
+      source_directory_name_(source_directory_name),
+      disable_facet_directories_(disable_facet_directories) { }
 
 void path_settings::swap(path_settings& other) noexcept {
     using std::swap;
@@ -78,6 +82,7 @@ void path_settings::swap(path_settings& other) noexcept {
     swap(include_directory_path_, other.include_directory_path_);
     swap(include_directory_name_, other.include_directory_name_);
     swap(source_directory_name_, other.source_directory_name_);
+    swap(disable_facet_directories_, other.disable_facet_directories_);
 }
 
 bool path_settings::operator==(const path_settings& rhs) const {
@@ -91,7 +96,8 @@ bool path_settings::operator==(const path_settings& rhs) const {
         source_directory_path_ == rhs.source_directory_path_ &&
         include_directory_path_ == rhs.include_directory_path_ &&
         include_directory_name_ == rhs.include_directory_name_ &&
-        source_directory_name_ == rhs.source_directory_name_;
+        source_directory_name_ == rhs.source_directory_name_ &&
+        disable_facet_directories_ == rhs.disable_facet_directories_;
 }
 
 path_settings& path_settings::operator=(path_settings other) {
@@ -258,6 +264,14 @@ void path_settings::source_directory_name(const std::string& v) {
 
 void path_settings::source_directory_name(const std::string&& v) {
     source_directory_name_ = std::move(v);
+}
+
+bool path_settings::disable_facet_directories() const {
+    return disable_facet_directories_;
+}
+
+void path_settings::disable_facet_directories(const bool v) {
+    disable_facet_directories_ = v;
 }
 
 } } }

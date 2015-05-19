@@ -98,6 +98,16 @@ std::string traits::cpp::inclusion_required() {
     return r;
 }
 
+std::string traits::cpp::header_file_extension() {
+    static std::string r("cpp.header_file_extension");
+    return r;
+}
+
+std::string traits::cpp::implementation_file_extension() {
+    static std::string r("cpp.implementation_file_extension");
+    return r;
+}
+
 std::string traits::cpp::include_directory_name() {
     static std::string r("cpp.include_directory_name");
     return r;
@@ -108,13 +118,8 @@ std::string traits::cpp::source_directory_name() {
     return r;
 }
 
-std::string traits::cpp::header_file_extension() {
-    static std::string r("cpp.header_file_extension");
-    return r;
-}
-
-std::string traits::cpp::implementation_file_extension() {
-    static std::string r("cpp.implementation_file_extension");
+std::string traits::cpp::disable_facet_directories() {
+    static std::string r("cpp.disable_facet_directories");
     return r;
 }
 
