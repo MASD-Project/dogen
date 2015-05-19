@@ -2889,6 +2889,10 @@ There doesn't seem to be any good reason to include the full visitor
 header in visitable types - we should be able to get away with
 including only the forward declaration for the visitor.
 
+This is actually fairly important because every time we change the
+visitor template, we end up rebuilding 350-odd files for no
+reason. This wouldn't happen if we were using forward declarations.
+
 *** Investigate the integration of =boost::log= with throw exception  :story:
 
 At present we write a lot of code like this:
