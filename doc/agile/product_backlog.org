@@ -4872,10 +4872,11 @@ be applied at each level to achieve the desired effect.
 
 *** Add support for interfaces                                         :epic:
 
-This is a very blue-skies story. When dogen starts supporting service
-types it would be useful to generate a service interface from
-dogen. In order to do this we'd have to parse the method definitions
-in dia and use those to construct an abstract base class.
+It would be great to be able to mark a type as an interface, add all
+methods that the interface has, and have dogen fully code-generate the
+interface, marking all methods as pure virtual, etc. We would want to
+distinguish this from the abstract base class case, because we may
+want to add one or more concrete methods to the ABC.
 
 *** Use error codes in exceptions                                     :story:
 
