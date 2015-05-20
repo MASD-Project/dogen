@@ -93,6 +93,25 @@ fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
+fa.stream() << std::endl;
+            }
+
+            /*
+             * Streaming
+             */
+            if (fa.is_io_enabled()) {
+
+fa.stream() << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
+                if (c.requires_stream_manipulators()) {
+fa.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+fa.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+fa.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+fa.stream() << "    s.precision(6);" << std::endl;
+fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+fa.stream() << std::endl;
+                }
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
             }
 fa.stream() << std::endl;
         } // snf

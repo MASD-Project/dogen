@@ -93,6 +93,31 @@ dogen::formatters::file class_implementation_formatter_stitch(
                 for (const auto p : c.properties())
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
+
+<#+
+            }
+
+            /*
+             * Streaming
+             */
+            if (fa.is_io_enabled()) {
+
+#>
+<#= c.name() #>::to_stream(std::ostream& s) const {
+<#+
+                if (c.requires_stream_manipulators()) {
+#>
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+<#+
+                }
+#>
+}
+
 <#+
             }
 #>
