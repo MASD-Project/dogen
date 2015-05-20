@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-20 Wed 17:29]
+Clock summary at [2015-05-20 Wed 18:08]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *46:57* |       |      |
+| *Total time*                                                                | *47:35* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 46:57 |      |
+| Active                                                                      |         | 47:35 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -49,7 +49,7 @@ Clock summary at [2015-05-20 Wed 17:29]
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
 | COMPLETED Try to improve handling of loops in stitch templates              |         |       | 2:20 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 1:55 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 2:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -817,6 +817,7 @@ We could then supply the infix configuration for prefix and postfix or
 just return it builder style (e.g. prefix().first(" ").last(" "));
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-05-20 Wed 17:30]--[2015-05-20 Wed 18:08] =>  0:38
     CLOCK: [2015-05-19 Tue 21:45]--[2015-05-19 Tue 22:08] =>  0:23
     CLOCK: [2015-05-19 Tue 17:18]--[2015-05-19 Tue 17:26] =>  0:08
     CLOCK: [2015-05-19 Tue 16:50]--[2015-05-19 Tue 17:17] =>  0:27

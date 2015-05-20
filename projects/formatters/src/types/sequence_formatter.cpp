@@ -39,22 +39,24 @@ bool sequence_formatter::is_last() const {
 }
 
 bool sequence_formatter::is_single() const {
-    return position_ == (sequence_size_ - 1) && position_ == 0;
+    return is_first() && is_last();
 }
 
 std::string sequence_formatter::
 value_for_position(const infix_configuration& ic) const {
-    if (is_single())
-        return ic.single();
-    else if (is_first())
+    if (is_single()) {
+        if (!ic.first().empty()) {
+            // when we are single, first takes priority if supplied.
+            return ic.first();
+        }
+        return ic.last();
+    } else if (is_first())
         return ic.first();
-    else if (!is_last())
+    else if (!is_last() || !ic.not_first().empty()) {
+        // when we are last, not first takes precedence if supplied.
         return ic.not_first();
+    }
 
-    // when we are last, not first takes precedence. if not supplied,
-    // we then use last.
-    if (!ic.not_first().empty())
-        return ic.not_first();
     return ic.last();
 }
 
@@ -78,6 +80,12 @@ std::string sequence_formatter::postfix() {
 
     ++position_;
     return s.str();
+}
+
+void sequence_formatter::reset() {
+    position_ = 0;
+    prefix_configuration_ = infix_configuration();
+    postfix_configuration_ = infix_configuration();
 }
 
 } }

@@ -84,6 +84,11 @@ public:
      */
     std::string postfix();
 
+    /**
+     * @brief Resets the position and configurations.
+     */
+    void reset();
+
 private:
     const unsigned int sequence_size_;
     const std::string element_separator_;

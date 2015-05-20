@@ -49,6 +49,7 @@ fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
                         continue;
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << sf.postfix() << std::endl;
                 }
+fa.stream() << std::endl;
             }
 
             /*
@@ -67,6 +68,31 @@ fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(std::forward<" <
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std::move(rhs." << fa.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
+fa.stream() << std::endl;
+            }
+
+            /*
+             * Complete constructor.
+             */
+            if (!c.all_properties().empty()) {
+                const auto prop_count(c.all_properties().size());
+                if (prop_count == 1) {
+                     const auto p(*c.all_properties().begin());
+fa.stream() << c.name() << "::" << c.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ")" << std::endl;
+                } else
+fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
+
+                auto sf(fa.make_sequence_formatter(prop_count));
+                sf.postfix_configuration().last(")");
+                for (const auto p : c.properties())
+fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
+
+                sf.reset();
+                sf.prefix_configuration().first(": ").not_first("  ");
+                sf.postfix_configuration().last(") { }");
+
+                for (const auto p : c.properties())
+fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
             }
 fa.stream() << std::endl;
         } // snf
