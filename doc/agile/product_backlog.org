@@ -4251,6 +4251,12 @@ declarations.
 In addition to the class definition, it should also define all of the
 automatic constructors, and add a private section at the bottom.
 
+Also, for cases where the service is implementing an interface, we
+should generate stubs for all methods, similar to what we'd do for the
+original interface, but marking the methods as override, and adding a
+blank implementation - with return types where required and commented
+out parameters, to make the code compilable out of the box.
+
 *** Add versioning support                                            :story:
 
 #+begin_quote
