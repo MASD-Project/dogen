@@ -26,7 +26,6 @@
 #include "dogen/formatters/serialization/annotation_ser.hpp"
 #include "dogen/formatters/serialization/repository_ser.hpp"
 #include "dogen/formatters/serialization/quote_types_ser.hpp"
-#include "dogen/formatters/serialization/padding_types_ser.hpp"
 #include "dogen/formatters/serialization/spacing_types_ser.hpp"
 #include "dogen/formatters/serialization/comment_styles_ser.hpp"
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
