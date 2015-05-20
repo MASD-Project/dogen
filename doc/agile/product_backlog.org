@@ -347,6 +347,10 @@ then subsequently not touch them. The overwrite flag should be set to
 false. We need to figure out how to implement this and remove the
 hacks around file writing.
 
+For now we have abused this flag to allow legacy files overrides of
+the new world formatters. This is just until we move totally to new
+world though.
+
 *** Split knitting from stitching settings                            :story:
 
 At present we only have a single common directory with all of the
