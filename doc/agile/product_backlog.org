@@ -2388,6 +2388,12 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Add support for emacs / vi modelines in stitch                    :story:
+
+It would be nice to disable =auto-fill-mode= in emacs for stitch
+templates, set indentation etc. For this we would have to ignore the
+modeline settings in templates. Its not obvious how this could be
+achieved.
 
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
