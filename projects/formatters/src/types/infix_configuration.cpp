@@ -24,26 +24,22 @@ namespace dogen {
 namespace formatters {
 
 infix_configuration::infix_configuration(
-    const std::string& single,
     const std::string& first,
     const std::string& not_first,
     const std::string& last)
-    : single_(single),
-      first_(first),
+    : first_(first),
       not_first_(not_first),
       last_(last) { }
 
 void infix_configuration::swap(infix_configuration& other) noexcept {
     using std::swap;
-    swap(single_, other.single_);
     swap(first_, other.first_);
     swap(not_first_, other.not_first_);
     swap(last_, other.last_);
 }
 
 bool infix_configuration::operator==(const infix_configuration& rhs) const {
-    return single_ == rhs.single_ &&
-        first_ == rhs.first_ &&
+    return first_ == rhs.first_ &&
         not_first_ == rhs.not_first_ &&
         last_ == rhs.last_;
 }
@@ -51,24 +47,6 @@ bool infix_configuration::operator==(const infix_configuration& rhs) const {
 infix_configuration& infix_configuration::operator=(infix_configuration other) {
     using std::swap;
     swap(*this, other);
-    return *this;
-}
-
-const std::string& infix_configuration::single() const {
-    return single_;
-}
-
-std::string& infix_configuration::single() {
-    return single_;
-}
-
-infix_configuration& infix_configuration::single(const std::string& v) {
-    single_ = v;
-    return *this;
-}
-
-infix_configuration& infix_configuration::single(const std::string&& v) {
-    single_ = std::move(v);
     return *this;
 }
 

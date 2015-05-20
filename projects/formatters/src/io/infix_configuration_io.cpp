@@ -36,7 +36,6 @@ namespace formatters {
 std::ostream& operator<<(std::ostream& s, const infix_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::formatters::infix_configuration\"" << ", "
-      << "\"single\": " << "\"" << tidy_up_string(v.single()) << "\"" << ", "
       << "\"first\": " << "\"" << tidy_up_string(v.first()) << "\"" << ", "
       << "\"not_first\": " << "\"" << tidy_up_string(v.not_first()) << "\"" << ", "
       << "\"last\": " << "\"" << tidy_up_string(v.last()) << "\""

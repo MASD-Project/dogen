@@ -38,7 +38,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::formatters::infix_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("single", v.single_);
     ar << make_nvp("first", v.first_);
     ar << make_nvp("not_first", v.not_first_);
     ar << make_nvp("last", v.last_);
@@ -48,7 +47,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::formatters::infix_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("single", v.single_);
     ar >> make_nvp("first", v.first_);
     ar >> make_nvp("not_first", v.not_first_);
     ar >> make_nvp("last", v.last_);

@@ -44,7 +44,6 @@ public:
 
 public:
     infix_configuration(
-        const std::string& single,
         const std::string& first,
         const std::string& not_first,
         const std::string& last);
@@ -57,16 +56,6 @@ private:
     friend void boost::serialization::load(Archive& ar, infix_configuration& v, unsigned int version);
 
 public:
-    /**
-     * @brief Applicable only if a sequence has one and only one element.
-     */
-    /**@{*/
-    const std::string& single() const;
-    std::string& single();
-    infix_configuration& single(const std::string& v);
-    infix_configuration& single(const std::string&& v);
-    /**@}*/
-
     /**
      * @brief Applicable only to the first element of a sequence, if the sequence has more
      * than one element.
@@ -109,7 +98,6 @@ public:
     infix_configuration& operator=(infix_configuration other);
 
 private:
-    std::string single_;
     std::string first_;
     std::string not_first_;
     std::string last_;

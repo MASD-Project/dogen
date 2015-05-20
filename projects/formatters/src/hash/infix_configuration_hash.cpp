@@ -37,7 +37,6 @@ namespace formatters {
 std::size_t infix_configuration_hasher::hash(const infix_configuration&v) {
     std::size_t seed(0);
 
-    combine(seed, v.single());
     combine(seed, v.first());
     combine(seed, v.not_first());
     combine(seed, v.last());

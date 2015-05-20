@@ -38,10 +38,9 @@ infix_configuration_generator::infix_configuration_generator() : position_(0) { 
 
 void infix_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.single(create_std_string(position + 0));
-    v.first(create_std_string(position + 1));
-    v.not_first(create_std_string(position + 2));
-    v.last(create_std_string(position + 3));
+    v.first(create_std_string(position + 0));
+    v.not_first(create_std_string(position + 1));
+    v.last(create_std_string(position + 2));
 }
 
 infix_configuration_generator::result_type
