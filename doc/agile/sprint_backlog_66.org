@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-19 Tue 22:08]
+Clock summary at [2015-05-20 Wed 17:29]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *44:37* |       |      |
+| *Total time*                                                                | *46:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 44:37 |      |
+| Active                                                                      |         | 46:57 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:56 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -48,6 +48,7 @@ Clock summary at [2015-05-19 Tue 22:08]
 | COMPLETED Implement namespace header formatter using stitch                 |         |       | 1:12 |
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
+| COMPLETED Try to improve handling of loops in stitch templates              |         |       | 2:20 |
 | STARTED Implement class implementation formatter using stitch               |         |       | 1:55 |
 #+end:
 
@@ -733,6 +734,87 @@ At present we are only checking if a legacy file has a corresponding
 override version; however, it is entirely possible we are generating
 invalid overrides that are just getting ignored. Tighten the checks
 around this and deal with the fallout.
+
+*** COMPLETED Try to improve handling of loops in stitch templates    :story:
+    CLOSED: [2015-05-20 Wed 17:29]
+    CLOCK: [2015-05-20 Wed 16:24]--[2015-05-20 Wed 17:28] =>  1:04
+    CLOCK: [2015-05-20 Wed 15:08]--[2015-05-20 Wed 16:24] =>  1:16
+
+A pattern is emerging in stitch templates, like so:
+
+: <#+
+:                 unsigned int pos(0);
+:                 for (const auto p : c.properties()) {
+:                     if (!p.type().is_primitive() && !p.type().is_enumeration())
+:                         continue;
+: #>
+:     <#= (pos == 0 ? ": " : "  ") #><#= fa.make_member_variable_name(p) #>(static_cast<<#= p.type().complete_name() #>>(0))<#= fa.make_list_separator_text(c.properties().size(), pos) #><#= (pos == c.properties().size() - 1 ? " { }" : "") #>
+: <#+
+:                     ++pos;
+:                 }
+
+Basically:
+
+- there is a loop around some kind of container;
+- there may be things we do:
+  - at the beginning at the very first line (":")
+  - the beginning of every line ("  ");
+  - the end of every line, except for last (",");
+  - at the end of the last line ("{}").
+- there is the thing we would like to output for every line.
+
+It would be nice if we could do this with some help so we don't have
+to repeat this logic all over the place. This almost works with
+lambdas:
+
+: fa.for_each(c.properties(), ": ", "  ", " {} ", [](const std::string& prefix, const std::string& postfix, T p) {
+: #>
+:    <#= prefix #><#= fa.make_member_variable_name(p) #>(static_cast<<#= p.type().complete_name() #>>(0))<#= postfix #>
+: <#+
+: });
+
+There are a few problems:
+
+- we need generic lambdas so it requires C++ 14.
+- we may need to have a predicate for each line (e.g. is it applicable
+  to this T or not) so it means we need two lambdas.
+- the end result is a lot more readable but not a lot less verbose
+  than the original, especially with the two lambdas. It still looks
+  like there should be some fat to trim. We could for example pass in
+  all the parameters on construction and then have a =for_each= method
+  that just takes the lambdas - that should make it a bit more
+  readable. Or make it a builder:
+
+: x a.begin_prefix(": ").middle_prefix("  ").
+:  end_of_line(",").last_line(" {}");
+: a.predicate(...);
+: a.for_each(...);
+
+- its annoying to have to repeat the prefix and postfix parameters for
+  every single lambda. We could of course create a pair type, but
+  still, its not ideal.
+- we need to define some terminology: first line, all lines other than
+  first and last, last line, all lines other than last line. We also
+  need to isolate the case where there is only one line.
+
+An alternative is to have a "loop helper" that does not have
+lambdas. It has a constructor with container size, and all other
+configuration variables. It then has a =before()= and =after()=
+methods that are called in the loop. =after()= increments current
+position and returns the appropriate string. =before= returns the
+appropriate string. It could also have a infix_configuration class:
+
+- first: only first line.
+- first_if_many: only first line if there are 2 or more lines.
+- not_first: all lines other than first.
+- not_first_or_last: all lines other than first or last; only
+  applicable if line count > 2.
+- last: only last line.
+- last_if_many: only last line if there are 2 or more lines.
+- all: all lines.
+
+We could then supply the infix configuration for prefix and postfix or
+just return it builder style (e.g. prefix().first(" ").last(" "));
 
 *** STARTED Implement class implementation formatter using stitch     :story:
     CLOCK: [2015-05-19 Tue 21:45]--[2015-05-19 Tue 22:08] =>  0:23

@@ -32,3 +32,4 @@
 #include "dogen/formatters/test_data/modeline_group_td.hpp"
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
+#include "dogen/formatters/test_data/infix_configuration_td.hpp"

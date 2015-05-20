@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/infix_configuration_hash.hpp"
+#ifndef DOGEN_FORMATTERS_TEST_DATA_INFIX_CONFIGURATION_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_INFIX_CONFIGURATION_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/infix_configuration.hpp"
+
+namespace dogen {
+namespace formatters {
+
+class infix_configuration_generator {
+public:
+    infix_configuration_generator();
+
+public:
+    typedef dogen::formatters::infix_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} }
+
+#endif

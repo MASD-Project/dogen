@@ -67,27 +67,6 @@ make_by_ref_text(const formattables::property_info& p) {
 }
 
 std::string formatting_assistant::
-make_list_separator_text(const unsigned int number_of_items,
-    const unsigned int position) {
-
-    const auto is_first(position == 0);
-    const auto is_last(position == number_of_items - 1);
-    if (is_last || (is_first && number_of_items == 1))
-        return empty;
-
-    return ",";
-}
-
-std::string formatting_assistant::
-make_parameter_separator_text(const unsigned int number_of_parameters,
-    const unsigned int parameter_position) {
-    if (parameter_position == number_of_parameters - 1)
-        return ");";
-
-    return make_list_separator_text(parameter_position, number_of_parameters);
-}
-
-std::string formatting_assistant::
 make_setter_return_type(const std::string& containing_type_name,
     const formattables::property_info& p) {
     std::ostringstream s;
@@ -191,6 +170,13 @@ formatting_assistant::make_scoped_namespace_formatter() {
         stream(), entity_.namespaces(),
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
+}
+
+dogen::formatters::sequence_formatter formatting_assistant::
+make_sequence_formatter(const unsigned int sequence_size,
+    const std::string& element_separator) const {
+    dogen::formatters::sequence_formatter r(sequence_size, element_separator);
+    return r;
 }
 
 std::ostream& formatting_assistant::stream() {

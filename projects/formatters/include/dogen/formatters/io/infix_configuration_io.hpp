@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/infix_configuration_hash.hpp"
+#ifndef DOGEN_FORMATTERS_IO_INFIX_CONFIGURATION_IO_HPP
+#define DOGEN_FORMATTERS_IO_INFIX_CONFIGURATION_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/formatters/types/infix_configuration.hpp"
+
+namespace dogen {
+namespace formatters {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::formatters::infix_configuration& v);
+
+} }
+
+#endif

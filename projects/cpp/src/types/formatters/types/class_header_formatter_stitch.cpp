@@ -42,11 +42,9 @@ fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "
             } else if (c.parents().size() == 1) {
 fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << ": public " << c.parents().front().qualified_name() << " {" << std::endl;
             } else {
-                int pos(0);
-                for (const auto p : c.parents()) {
-fa.stream() << "    public " << p.qualified_name() << fa.make_parameter_separator_text(c.parents().size(), pos) << std::endl;
-                    ++pos;
-                }
+                auto sf(fa.make_sequence_formatter(c.parents().size()));
+                for (const auto p : c.parents())
+fa.stream() << "    public " << p.qualified_name() << sf.postfix() << std::endl;
             }
 fa.stream() << "public:" << std::endl;
             /*
@@ -103,11 +101,10 @@ fa.stream() << "public:" << std::endl;
 fa.stream() << "    explicit " << c.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ");" << std::endl;
                 } else {
 fa.stream() << "    " << c.name() << "(" << std::endl;
-                    int pos(0);
-                    for (const auto& p : c.all_properties()) {
-fa.stream() << "        const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << fa.make_parameter_separator_text(prop_count, pos) << std::endl;
-                    ++pos;
-                    }
+                    auto sf(fa.make_sequence_formatter(prop_count));
+                    sf.postfix_configuration().last(");");
+                    for (const auto& p : c.all_properties())
+fa.stream() << "        const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
                 }
 fa.stream() << std::endl;
             }

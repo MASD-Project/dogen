@@ -18,18 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
 #include "dogen/formatters/hash/infix_configuration_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace formatters {
+
+std::size_t infix_configuration_hasher::hash(const infix_configuration&v) {
+    std::size_t seed(0);
+
+    combine(seed, v.single());
+    combine(seed, v.first());
+    combine(seed, v.not_first());
+    combine(seed, v.last());
+
+    return seed;
+}
+
+} }

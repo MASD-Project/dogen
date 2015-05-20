@@ -26,9 +26,10 @@
 #endif
 
 #include <sstream>
+#include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
@@ -57,20 +58,6 @@ public:
      * @brief Returns the by-ref to use given the property.
      */
     static std::string make_by_ref_text(const formattables::property_info& p);
-
-    /**
-     * @brief Returns nothing or a comma.
-     */
-    static std::string
-    make_list_separator_text(const unsigned int number_of_items,
-        const unsigned int position);
-
-    /**
-     * @brief Returns nothing, a comma or end brackets with semi-colon.
-     */
-    static std::string
-    make_parameter_separator_text(const unsigned int number_of_parameters,
-        const unsigned int parameter_position);
 
     /**
      * @brief Makes the return type of a setter, taking into account
@@ -153,6 +140,13 @@ public:
      */
     dogen::formatters::cpp::scoped_namespace_formatter
     make_scoped_namespace_formatter();
+
+    /**
+     * @brief Creates a sequence formatter.
+     */
+    dogen::formatters::sequence_formatter
+    make_sequence_formatter(const unsigned int sequence_size,
+        const std::string& element_separator = ",") const;
 
     /**
      * @brief Returns the stream that is currently being populated.

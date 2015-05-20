@@ -1,0 +1,83 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#include <sstream>
+#include "dogen/formatters/types/sequence_formatter.hpp"
+
+namespace dogen {
+namespace formatters {
+
+sequence_formatter::sequence_formatter(const unsigned int sequence_size,
+    const std::string& element_separator)
+    : sequence_size_(sequence_size), element_separator_(element_separator),
+      position_(0) {}
+
+
+bool sequence_formatter::is_first() const {
+    return position_ == 0;
+}
+
+bool sequence_formatter::is_last() const {
+    return position_ == sequence_size_ - 1;
+}
+
+bool sequence_formatter::is_single() const {
+    return position_ == (sequence_size_ - 1) && position_ == 0;
+}
+
+std::string sequence_formatter::
+value_for_position(const infix_configuration& ic) const {
+    if (is_single())
+        return ic.single();
+    else if (is_first())
+        return ic.first();
+    else if (!is_last())
+        return ic.not_first();
+
+    // when we are last, not first takes precedence. if not supplied,
+    // we then use last.
+    if (!ic.not_first().empty())
+        return ic.not_first();
+    return ic.last();
+}
+
+infix_configuration& sequence_formatter::prefix_configuration() {
+    return prefix_configuration_;
+}
+
+infix_configuration& sequence_formatter::postfix_configuration() {
+    return postfix_configuration_;
+}
+
+std::string sequence_formatter::prefix() const {
+    return value_for_position(prefix_configuration_);
+}
+
+std::string sequence_formatter::postfix() {
+    std::ostringstream s;
+    s << value_for_position(postfix_configuration_);
+    if (!is_last())
+        s << element_separator_;
+
+    ++position_;
+    return s.str();
+}
+
+} }

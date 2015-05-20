@@ -18,18 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/io/file_io.hpp"
-#include "dogen/formatters/io/editors_io.hpp"
-#include "dogen/formatters/io/licence_io.hpp"
-#include "dogen/formatters/io/modeline_io.hpp"
-#include "dogen/formatters/io/annotation_io.hpp"
-#include "dogen/formatters/io/repository_io.hpp"
-#include "dogen/formatters/io/quote_types_io.hpp"
-#include "dogen/formatters/io/padding_types_io.hpp"
-#include "dogen/formatters/io/spacing_types_io.hpp"
-#include "dogen/formatters/io/comment_styles_io.hpp"
-#include "dogen/formatters/io/modeline_field_io.hpp"
-#include "dogen/formatters/io/modeline_group_io.hpp"
-#include "dogen/formatters/io/general_settings_io.hpp"
-#include "dogen/formatters/io/modeline_locations_io.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/infix_configuration_io.hpp"
+
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+
+namespace dogen {
+namespace formatters {
+
+std::ostream& operator<<(std::ostream& s, const infix_configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::formatters::infix_configuration\"" << ", "
+      << "\"single\": " << "\"" << tidy_up_string(v.single()) << "\"" << ", "
+      << "\"first\": " << "\"" << tidy_up_string(v.first()) << "\"" << ", "
+      << "\"not_first\": " << "\"" << tidy_up_string(v.not_first()) << "\"" << ", "
+      << "\"last\": " << "\"" << tidy_up_string(v.last()) << "\""
+      << " }";
+    return(s);
+}
+
+} }

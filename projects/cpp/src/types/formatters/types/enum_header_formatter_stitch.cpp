@@ -37,11 +37,9 @@ dogen::formatters::file enum_header_formatter_stitch(
 fa.stream() << std::endl;
             fa.comment(e.documentation());
 fa.stream() << "enum class " << e.name() << " : " << e.type() << " {" << std::endl;
-            auto pos(0);
-            for (const auto& en : e.enumerators()) {
-fa.stream() << "    " << en.name() << " = " << en.value() << fa.make_list_separator_text(e.enumerators().size(), pos) << fa.comment_inline(en.documentation()) << std::endl;
-                ++pos;
-            }
+            auto sf(fa.make_sequence_formatter(e.enumerators().size()));
+            for (const auto& en : e.enumerators())
+fa.stream() << "    " << en.name() << " = " << en.value() << sf.postfix() << fa.comment_inline(en.documentation()) << std::endl;
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         } // snf

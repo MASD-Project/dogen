@@ -22,14 +22,10 @@ dogen::formatters::file enum_header_formatter_stitch(
 #>
 enum class <#= e.name() #> : <#= e.type() #> {
 <#+
-            auto pos(0);
-            for (const auto& en : e.enumerators()) {
+            auto sf(fa.make_sequence_formatter(e.enumerators().size()));
+            for (const auto& en : e.enumerators())
 #>
-    <#= en.name() #> = <#= en.value() #><#= fa.make_list_separator_text(e.enumerators().size(), pos) #><#= fa.comment_inline(en.documentation()) #>
-<#+
-                ++pos;
-            }
-#>
+    <#= en.name() #> = <#= en.value() #><#= sf.postfix() #><#= fa.comment_inline(en.documentation()) #>
 };
 
 <#+

@@ -34,16 +34,39 @@ dogen::formatters::file class_implementation_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
+
+            /*
+             * Default constructor.
+             */
             if (c.requires_manual_default_constructor()) {
 fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
-                unsigned int pos(0);
+                auto sf(fa.make_sequence_formatter(c.properties().size()));
+                sf.prefix_configuration().first(": ").not_first("  ");
+                sf.postfix_configuration().last(" { }");
                 for (const auto p : c.properties()) {
                     if (!p.type().is_primitive() && !p.type().is_enumeration())
                         continue;
-fa.stream() << "    " << (pos == 0 ? ": " : "  ") << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << fa.make_list_separator_text(c.properties().size(), pos) << (pos == c.properties().size() - 1 ? " { }" : "") << std::endl;
-                    ++pos;
+fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << sf.postfix() << std::endl;
                 }
+            }
+
+            /*
+             * Move constructor.
+             */
+            if (c.requires_manual_move_constructor()) {
+fa.stream() << std::endl;
+fa.stream() << c.name() << "::" << c.name() << "(" << c.name() << "&& rhs)" << std::endl;
+                unsigned int size(c.parents().size() + c.properties().size());
+                auto sf(fa.make_sequence_formatter(size));
+                sf.prefix_configuration().first(": ").not_first("  ");
+                sf.postfix_configuration().last(" { }");
+
+                for (const auto p : c.parents())
+fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
+
+                for (const auto p : c.properties())
+fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std::move(rhs." << fa.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
             }
 fa.stream() << std::endl;
         } // snf

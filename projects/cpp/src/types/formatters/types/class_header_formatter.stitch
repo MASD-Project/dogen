@@ -29,13 +29,11 @@ class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>{
 class <#= c.name() #> <#= fa.make_final_keyword_text(c) #>: public <#= c.parents().front().qualified_name() #> {
 <#+
             } else {
-                int pos(0);
-                for (const auto p : c.parents()) {
+                auto sf(fa.make_sequence_formatter(c.parents().size()));
+                for (const auto p : c.parents())
 #>
-    public <#= p.qualified_name() #><#= fa.make_parameter_separator_text(c.parents().size(), pos) #>
+    public <#= p.qualified_name() #><#= sf.postfix() #>
 <#+
-                    ++pos;
-                }
             }
 #>
 public:
@@ -118,13 +116,12 @@ public:
 #>
     <#= c.name() #>(
 <#+
-                    int pos(0);
-                    for (const auto& p : c.all_properties()) {
+                    auto sf(fa.make_sequence_formatter(prop_count));
+                    sf.postfix_configuration().last(");");
+                    for (const auto& p : c.all_properties())
 #>
-        const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= fa.make_parameter_separator_text(prop_count, pos) #>
+        const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
 <#+
-                    ++pos;
-                    }
                 }
 #>
 

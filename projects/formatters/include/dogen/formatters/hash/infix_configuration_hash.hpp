@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/file_hash.hpp"
-#include "dogen/formatters/hash/editors_hash.hpp"
-#include "dogen/formatters/hash/licence_hash.hpp"
-#include "dogen/formatters/hash/modeline_hash.hpp"
-#include "dogen/formatters/hash/annotation_hash.hpp"
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/quote_types_hash.hpp"
-#include "dogen/formatters/hash/padding_types_hash.hpp"
-#include "dogen/formatters/hash/spacing_types_hash.hpp"
-#include "dogen/formatters/hash/comment_styles_hash.hpp"
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
-#include "dogen/formatters/hash/general_settings_hash.hpp"
-#include "dogen/formatters/hash/modeline_locations_hash.hpp"
-#include "dogen/formatters/hash/infix_configuration_hash.hpp"
+#ifndef DOGEN_FORMATTERS_HASH_INFIX_CONFIGURATION_HASH_HPP
+#define DOGEN_FORMATTERS_HASH_INFIX_CONFIGURATION_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/formatters/types/infix_configuration.hpp"
+
+namespace dogen {
+namespace formatters {
+
+struct infix_configuration_hasher {
+public:
+    static std::size_t hash(const infix_configuration& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::formatters::infix_configuration> {
+public:
+    size_t operator()(const dogen::formatters::infix_configuration& v) const {
+        return dogen::formatters::infix_configuration_hasher::hash(v);
+    }
+};
+
+}
+#endif

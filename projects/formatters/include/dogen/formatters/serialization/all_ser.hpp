@@ -33,3 +33,4 @@
 #include "dogen/formatters/serialization/modeline_group_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
+#include "dogen/formatters/serialization/infix_configuration_ser.hpp"
