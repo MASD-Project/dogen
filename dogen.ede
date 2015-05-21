@@ -22,6 +22,7 @@
    "/projects/dynamic/include"
    "/projects/stitch/include"
    "/projects/stitcher/include"
+   "/projects/needle/include"
 
    "/projects/test_models/all_primitives/include"
    "/projects/test_models/class_in_a_package/include"
