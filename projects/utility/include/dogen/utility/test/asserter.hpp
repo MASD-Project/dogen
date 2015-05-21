@@ -68,8 +68,8 @@ public:
     template<typename Entity>
     static bool assert_object(Entity expected, Entity actual) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) <<"expected: " << expected;
-        BOOST_LOG_SEV(lg_, debug) <<"actual: " << actual;
+        BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
+        BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
         return handle_assert(expected == actual, "assert object");
     }
 

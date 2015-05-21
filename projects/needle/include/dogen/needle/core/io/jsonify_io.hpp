@@ -25,8 +25,9 @@
 #pragma once
 #endif
 
-#include <ostream>
 #include <string>
+#include <ostream>
+#include <boost/io/ios_state.hpp>
 
 namespace dogen {
 namespace needle {
@@ -36,9 +37,19 @@ namespace io {
 namespace detail {
 
 template<typename Target>
-class json_number_type {
+class json_integer_type {
 public:
-    explicit json_number_type(const Target target) : target_(target) { }
+    explicit json_integer_type(const Target target) : target_(target) { }
+    Target get() const { return(target_); }
+
+private:
+    const Target target_;
+};
+
+template<typename Target>
+class json_floating_type {
+public:
+    explicit json_floating_type(const Target target) : target_(target) { }
     Target get() const { return(target_); }
 
 private:
@@ -85,65 +96,73 @@ namespace io {
 /**
  * @brief String handling.
  */
-/*@{*/
 inline detail::json_string_type<std::string>
 jsonify(const std::string& insertee) {
     return(detail::json_string_type<std::string>(insertee));
 }
 
+/**
+ * @brief Char handling.
+ */
+/*@{*/
 inline detail::json_char_type<unsigned char>
 jsonify(const unsigned char insertee) {
     return(detail::json_char_type<unsigned char>(insertee));
 }
-/*@}*/
 
 inline detail::json_char_type<char>
 jsonify(const char insertee) {
     return(detail::json_char_type<char>(insertee));
 }
+/*@}*/
 
 /**
- * @brief Number handling.
+ * @brief Integer handling.
  */
 /*@{*/
-inline detail::json_number_type<unsigned int>
+inline detail::json_integer_type<unsigned int>
 jsonify(const unsigned int insertee) {
-    return(detail::json_number_type<unsigned int>(insertee));
+    return(detail::json_integer_type<unsigned int>(insertee));
 }
 
-inline detail::json_number_type<int>
+inline detail::json_integer_type<int>
 jsonify(const int insertee) {
-    return(detail::json_number_type<int>(insertee));
+    return(detail::json_integer_type<int>(insertee));
 }
 
-inline detail::json_number_type<unsigned short>
+inline detail::json_integer_type<unsigned short>
 jsonify(const unsigned short insertee) {
-    return(detail::json_number_type<unsigned short>(insertee));
+    return(detail::json_integer_type<unsigned short>(insertee));
 }
 
-inline detail::json_number_type<short>
+inline detail::json_integer_type<short>
 jsonify(const short insertee) {
-    return(detail::json_number_type<short>(insertee));
+    return(detail::json_integer_type<short>(insertee));
 }
 
-inline detail::json_number_type<unsigned long>
+inline detail::json_integer_type<unsigned long>
 jsonify(const unsigned long insertee) {
-    return(detail::json_number_type<unsigned long>(insertee));
+    return(detail::json_integer_type<unsigned long>(insertee));
 }
 
-inline detail::json_number_type<long>
+inline detail::json_integer_type<long>
 jsonify(const long insertee) {
-    return(detail::json_number_type<long>(insertee));
+    return(detail::json_integer_type<long>(insertee));
 }
+/*@}*/
 
-inline detail::json_number_type<float>
+/**
+ * @brief Floating handling.
+ */
+/*@{*/
+inline detail::json_floating_type<float>
 jsonify(const float insertee) {
-    return(detail::json_number_type<float>(insertee));
+    return(detail::json_floating_type<float>(insertee));
 }
 
-inline detail::json_number_type<double>
+inline detail::json_floating_type<double>
 jsonify(const double insertee) {
-    return(detail::json_number_type<double>(insertee));
+    return(detail::json_floating_type<double>(insertee));
 }
 /*@}*/
 
@@ -160,13 +179,6 @@ namespace detail {
 
 template<typename Target>
 inline std::ostream&
-operator<<(std::ostream& stream, const json_number_type<Target>& target) {
-    stream << target.get();
-    return(stream);
-}
-
-template<typename Target>
-inline std::ostream&
 operator<<(std::ostream& stream, const json_string_type<Target>& target) {
     stream << "\"" << target.get() << "\"";
     return(stream);
@@ -177,6 +189,24 @@ inline std::ostream&
 operator<<(std::ostream& stream, const json_char_type<Target>& target) {
     stream << "\"" << target.get() << "\"";
     return(stream);
+}
+
+template<typename Target>
+inline std::ostream&
+operator<<(std::ostream& stream, const json_integer_type<Target>& target) {
+    stream << target.get();
+    return(stream);
+}
+
+template<typename Target>
+inline std::ostream&
+operator<<(std::ostream& s, const json_floating_type<Target>& t) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.setf(std::ios::showpoint);
+    s.precision(6);
+    s << t.get();
+    return s;
 }
 
 template<typename Target>

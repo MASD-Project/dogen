@@ -36,14 +36,62 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(io)
 
-BOOST_AUTO_TEST_CASE(jsonification_of_numbers_produces_expected_result) {
-    SETUP_TEST_LOG_SOURCE("jsonification_of_numbers_produces_expected_result");
+BOOST_AUTO_TEST_CASE(jsonification_of_integers_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_integers_produces_expected_result");
 
-    const unsigned int n(10);
-    const std::string expected("10");
-    std::ostringstream s;
-    s << dogen::needle::core::io::jsonify(n);
-    BOOST_CHECK(asserter::assert_object(s.str(), expected));
+    std::ostringstream ss;
+    const unsigned int ui(10);
+    std::string expected("10");
+    ss << dogen::needle::core::io::jsonify(ui);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const int i(-11);
+    expected = "-11";
+    ss << dogen::needle::core::io::jsonify(i);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const unsigned short us(12);
+    expected = "12";
+    ss << dogen::needle::core::io::jsonify(us);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const short s(-13);
+    expected = "-13";
+    ss << dogen::needle::core::io::jsonify(s);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const unsigned long ul(14);
+    expected = "14";
+    ss << dogen::needle::core::io::jsonify(ul);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const short l(-15);
+    expected = "-15";
+    ss << dogen::needle::core::io::jsonify(l);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_floating_produces_expected_result");
+
+    std::ostringstream ss;
+    const double d(0.000001);
+    std::string expected = "0.000001";
+    ss << dogen::needle::core::io::jsonify(d);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
+
+    const float f(0.000002);
+    expected = "0.000002";
+    ss << dogen::needle::core::io::jsonify(f);
+    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    ss.str("");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
