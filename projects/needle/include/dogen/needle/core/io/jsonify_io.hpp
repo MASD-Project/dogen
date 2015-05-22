@@ -39,7 +39,7 @@ namespace detail {
 template<typename Target>
 class json_integer_type {
 public:
-    explicit json_integer_type(const Target target) : target_(target) { }
+    explicit json_integer_type(const Target t) : target_(t) { }
     Target get() const { return(target_); }
 
 private:
@@ -49,7 +49,7 @@ private:
 template<typename Target>
 class json_floating_type {
 public:
-    explicit json_floating_type(const Target target) : target_(target) { }
+    explicit json_floating_type(const Target t) : target_(t) { }
     Target get() const { return(target_); }
 
 private:
@@ -59,7 +59,7 @@ private:
 template<typename Target>
 class json_char_type {
 public:
-    explicit json_char_type(const Target target) : target_(target) { }
+    explicit json_char_type(const Target t) : target_(t) { }
     Target get() const { return(target_); }
 
 private:
@@ -69,7 +69,7 @@ private:
 template<typename Target>
 class json_string_type {
 public:
-    explicit json_string_type(const Target& target) : target_(target) { }
+    explicit json_string_type(const Target& t) : target_(t) { }
     const Target& get() const { return(target_); }
 
 private:
@@ -77,9 +77,19 @@ private:
 };
 
 template<typename Target>
+class json_bool_type {
+public:
+    explicit json_bool_type(const Target t) : target_(t) { }
+    Target get() const { return(target_); }
+
+private:
+    const Target target_;
+};
+
+template<typename Target>
 class json_complex_type {
 public:
-    explicit json_complex_type(const Target& target) : target_(target) { }
+    explicit json_complex_type(const Target& t) : target_(t) { }
     const Target& get() const { return(target_); }
 
 private:
@@ -94,60 +104,37 @@ namespace core {
 namespace io {
 
 /**
- * @brief String handling.
- */
-inline detail::json_string_type<std::string>
-jsonify(const std::string& insertee) {
-    return(detail::json_string_type<std::string>(insertee));
-}
-
-/**
- * @brief Char handling.
- */
-/*@{*/
-inline detail::json_char_type<unsigned char>
-jsonify(const unsigned char insertee) {
-    return(detail::json_char_type<unsigned char>(insertee));
-}
-
-inline detail::json_char_type<char>
-jsonify(const char insertee) {
-    return(detail::json_char_type<char>(insertee));
-}
-/*@}*/
-
-/**
  * @brief Integer handling.
  */
 /*@{*/
 inline detail::json_integer_type<unsigned int>
-jsonify(const unsigned int insertee) {
-    return(detail::json_integer_type<unsigned int>(insertee));
+jsonify(const unsigned int ui) {
+    return(detail::json_integer_type<unsigned int>(ui));
 }
 
 inline detail::json_integer_type<int>
-jsonify(const int insertee) {
-    return(detail::json_integer_type<int>(insertee));
+jsonify(const int i) {
+    return(detail::json_integer_type<int>(i));
 }
 
 inline detail::json_integer_type<unsigned short>
-jsonify(const unsigned short insertee) {
-    return(detail::json_integer_type<unsigned short>(insertee));
+jsonify(const unsigned short us) {
+    return(detail::json_integer_type<unsigned short>(us));
 }
 
 inline detail::json_integer_type<short>
-jsonify(const short insertee) {
-    return(detail::json_integer_type<short>(insertee));
+jsonify(const short s) {
+    return(detail::json_integer_type<short>(s));
 }
 
 inline detail::json_integer_type<unsigned long>
-jsonify(const unsigned long insertee) {
-    return(detail::json_integer_type<unsigned long>(insertee));
+jsonify(const unsigned long ul) {
+    return(detail::json_integer_type<unsigned long>(ul));
 }
 
 inline detail::json_integer_type<long>
-jsonify(const long insertee) {
-    return(detail::json_integer_type<long>(insertee));
+jsonify(const long l) {
+    return(detail::json_integer_type<long>(l));
 }
 /*@}*/
 
@@ -156,15 +143,46 @@ jsonify(const long insertee) {
  */
 /*@{*/
 inline detail::json_floating_type<float>
-jsonify(const float insertee) {
-    return(detail::json_floating_type<float>(insertee));
+jsonify(const float f) {
+    return(detail::json_floating_type<float>(f));
 }
 
 inline detail::json_floating_type<double>
-jsonify(const double insertee) {
-    return(detail::json_floating_type<double>(insertee));
+jsonify(const double d) {
+    return(detail::json_floating_type<double>(d));
 }
 /*@}*/
+
+/**
+ * @brief Char handling.
+ */
+/*@{*/
+inline detail::json_char_type<unsigned char>
+jsonify(const unsigned char uc) {
+    return(detail::json_char_type<unsigned char>(uc));
+}
+
+inline detail::json_char_type<char>
+jsonify(const char c) {
+    return(detail::json_char_type<char>(c));
+}
+/*@}*/
+
+/**
+ * @brief String handling.
+ */
+inline detail::json_string_type<std::string>
+jsonify(const std::string& s) {
+    return(detail::json_string_type<std::string>(s));
+}
+
+/**
+ * @brief Bool handling.
+ */
+inline detail::json_bool_type<bool>
+jsonify(const bool b) {
+    return(detail::json_bool_type<bool>(b));
+}
 
 /**
  * @brief Handling of any other object.
@@ -176,20 +194,6 @@ jsonify(const Insertee& insertee) {
 }
 
 namespace detail {
-
-template<typename Target>
-inline std::ostream&
-operator<<(std::ostream& stream, const json_string_type<Target>& target) {
-    stream << "\"" << target.get() << "\"";
-    return(stream);
-}
-
-template<typename Target>
-inline std::ostream&
-operator<<(std::ostream& stream, const json_char_type<Target>& target) {
-    stream << "\"" << target.get() << "\"";
-    return(stream);
-}
 
 template<typename Target>
 inline std::ostream&
@@ -211,9 +215,32 @@ operator<<(std::ostream& s, const json_floating_type<Target>& t) {
 
 template<typename Target>
 inline std::ostream&
-operator<<(std::ostream& stream, const json_complex_type<Target>& target) {
-    stream << target.get();
-    return(stream);
+operator<<(std::ostream& s, const json_char_type<Target>& t) {
+    s << "\"" << t.get() << "\"";
+    return(s);
+}
+
+template<typename Target>
+inline std::ostream&
+operator<<(std::ostream& s, const json_string_type<Target>& t) {
+    s << "\"" << t.get() << "\"";
+    return(s);
+}
+
+template<typename Target>
+inline std::ostream&
+operator<<(std::ostream& s, const json_bool_type<Target>& t) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s << t.get();
+    return(s);
+}
+
+template<typename Target>
+inline std::ostream&
+operator<<(std::ostream& s, const json_complex_type<Target>& t) {
+    s << t.get();
+    return(s);
 }
 
 } } } } }
