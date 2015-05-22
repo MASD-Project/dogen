@@ -27,6 +27,8 @@
 #include "dogen/needle/std/io/forward_list_io.hpp"
 #include "dogen/needle/std/io/list_io.hpp"
 #include "dogen/needle/std/io/pair_io.hpp"
+#include "dogen/needle/std/io/map_io.hpp"
+#include "dogen/needle/std/io/unordered_map_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -248,6 +250,64 @@ BOOST_AUTO_TEST_CASE(jsonification_of_pair_produces_expected_result) {
     const std::pair<unsigned int, bool> i1 = { 1, false };
     ss << i1;
     expected = "{ \"key\": 1, \"value\": false }";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::pair<unsigned int, test_object> i2 = { 1, to };
+    ss << i2;
+    expected = "{ \"key\": 1, \"value\": { \"s\": "
+        "\"some string\", \"i\": 123 } }";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_map_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_map_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::map<unsigned int, unsigned int> i0 = { {1, 2} };
+    ss << i0;
+    std::string expected("[ { \"key\": 1, \"value\": 2 } ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::map<unsigned int, bool> i1 = { {1, false} };
+    ss << i1;
+    expected = "[ { \"key\": 1, \"value\": false } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::map<unsigned int, test_object> i2 = { {1, to} };
+    ss << i2;
+    expected = "[ { \"key\": 1, \"value\": { \"s\": "
+        "\"some string\", \"i\": 123 } } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_unordered_map_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_unordered_map_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::unordered_map<unsigned int, unsigned int> i0 = { {1, 2} };
+    ss << i0;
+    std::string expected("[ { \"key\": 1, \"value\": 2 } ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::unordered_map<unsigned int, bool> i1 = { {1, false} };
+    ss << i1;
+    expected = "[ { \"key\": 1, \"value\": false } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::unordered_map<unsigned int, test_object> i2 = { {1, to} };
+    ss << i2;
+    expected = "[ { \"key\": 1, \"value\": { \"s\": "
+        "\"some string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }

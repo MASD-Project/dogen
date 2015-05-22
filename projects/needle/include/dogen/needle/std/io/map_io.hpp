@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_MAP_IO_HPP
-#define DOGEN_UTILITY_IO_MAP_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_MAP_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_MAP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,21 +27,22 @@
 
 #include <map>
 #include <ostream>
-#include "dogen/utility/io/pair_io.hpp"
+#include "dogen/needle/std/io/pair_io.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Key, typename Value>
-inline ostream& operator<<(ostream& stream, const map<Key, Value>& map) {
-    stream << "[ ";
-    for(typename std::map<Key, Value>::const_iterator i(map.begin());
-        i != map.end();
-        ++i) {
-        if (i != map.begin()) stream << ", ";
-        stream << (*i);
+inline ostream& operator<<(ostream& s, const std::map<Key, Value>& m) {
+    using namespace dogen::needle::core::io;
+    s << constants::open_array();
+    for(auto i(m.cbegin()); i != m.end(); ++i) {
+        if (i != m.begin())
+            s << constants::separator();
+        s << *i;
     }
-    stream << " ]";
-    return(stream);
+    s << constants::close_array();
+    return(s);
 }
 
 }

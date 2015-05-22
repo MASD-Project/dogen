@@ -39,7 +39,7 @@ inline ostream& operator<<(ostream& s, const list<Containee>& l) {
     for(auto i(l.cbegin()); i != l.cend(); ++i) {
         if (i != l.begin())
             s << constants::separator();
-        s << dogen::needle::core::io::jsonify(*i);
+        s << jsonify(*i);
     }
     s << constants::close_array();
     return(s);
