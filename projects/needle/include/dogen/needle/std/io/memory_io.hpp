@@ -27,15 +27,15 @@
 
 #include <memory>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/needle/core/io/jsonify.hpp"
 
 namespace std {
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
-    using dogen::utility::streaming::jsonify;
+    using namespace dogen::needle::core::io;
     if (p)
-        s << *p;
+        s << jsonify(*p);
     else
         s << "\"shared_ptr\": \"empty shared pointer\"";
 

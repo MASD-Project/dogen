@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_VECTOR_IO_HPP
-#define DOGEN_UTILITY_IO_VECTOR_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_VECTOR_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_VECTOR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,21 +27,22 @@
 
 #include <vector>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/needle/core/io/jsonify.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Containee>
-inline ostream& operator<<(ostream& stream, const vector<Containee>& vector) {
-    stream << "[ ";
-    for(typename std::vector<Containee>::const_iterator i(vector.begin());
-        i != vector.end();
-        ++i) {
-        if (i != vector.begin()) stream << ", ";
-        stream << dogen::utility::streaming::jsonify(*i);
+inline ostream& operator<<(ostream& s, const vector<Containee>& v) {
+    using namespace dogen::needle::core::io;
+    s << constants::open_array();
+    for(auto i(v.cbegin()); i != v.cend(); ++i) {
+        if (i != v.begin())
+            s << constants::separator();
+        s << jsonify(*i);
     }
-    stream << " ]";
-    return(stream);
+    s << constants::close_array();
+    return(s);
 }
 
 }

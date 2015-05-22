@@ -32,6 +32,8 @@
 #include "dogen/needle/std/io/unordered_map_io.hpp"
 #include "dogen/needle/std/io/set_io.hpp"
 #include "dogen/needle/std/io/unordered_set_io.hpp"
+#include "dogen/needle/std/io/vector_io.hpp"
+#include "dogen/needle/std/io/memory_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -396,7 +398,60 @@ BOOST_AUTO_TEST_CASE(jsonification_of_unordered_set_produces_expected_result) {
     expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
+}
 
+BOOST_AUTO_TEST_CASE(jsonification_of_vector_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_vector_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::vector<unsigned int> i0 = { 1 };
+    ss << i0;
+    std::string expected("[ 1 ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::vector<bool> i1 = { false };
+    ss << i1;
+    expected = "[ false ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::string s("some \" string");
+    const std::vector<std::string> i2 = { s };
+    ss << i2;
+    expected = "[ \"some <quote> string\" ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::vector<test_object> i3 = { to };
+    ss << i3;
+    expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_std_shared_pointer_produces_expected_result");
+
+    std::ostringstream ss;
+    const auto i0(std::make_shared<int>(1234));
+    ss << i0;
+    std::string expected("1234");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const auto i1(std::make_shared<test_object>("abc", 123));
+    ss << i1;
+    expected = "{ \"s\": \"abc\", \"i\": 123 }";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::shared_ptr<int> i2;
+    ss << i2;
+    expected = "\"shared_ptr\": \"empty shared pointer\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
