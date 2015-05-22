@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-22 Fri 17:54]
+Clock summary at [2015-05-22 Fri 18:04]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *54:22* |       |      |
+| *Total time*                                                                | *54:31* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 54:22 |      |
+| Active                                                                      |         | 54:31 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:04 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -49,7 +49,7 @@ Clock summary at [2015-05-22 Fri 17:54]
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
 | COMPLETED Try to improve handling of loops in stitch templates              |         |       | 2:20 |
-| STARTED Implement a basic =needle= model with io support                    |         |       | 5:26 |
+| STARTED Implement a basic =needle= model with io support                    |         |       | 5:35 |
 | STARTED Implement class implementation formatter using stitch               |         |       | 3:00 |
 | STARTED Update legacy formatters to use needle for io                       |         |       | 0:46 |
 #+end:
@@ -820,6 +820,7 @@ We could then supply the infix configuration for prefix and postfix or
 just return it builder style (e.g. prefix().first(" ").last(" "));
 
 *** STARTED Implement a basic =needle= model with io support          :story:
+    CLOCK: [2015-05-22 Fri 17:55]--[2015-05-22 Fri 18:04] =>  0:09
     CLOCK: [2015-05-22 Fri 17:35]--[2015-05-22 Fri 17:54] =>  0:19
     CLOCK: [2015-05-22 Fri 17:32]--[2015-05-22 Fri 17:35] =>  0:03
     CLOCK: [2015-05-22 Fri 16:30]--[2015-05-22 Fri 17:32] =>  1:02

@@ -41,6 +41,7 @@
 #include "dogen/needle/boost/io/shared_ptr_io.hpp"
 #include "dogen/needle/boost/io/variant_io.hpp"
 #include "dogen/needle/boost/io/gregorian_date_io.hpp"
+#include "dogen/needle/boost/io/posix_time_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -556,6 +557,23 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_gregorian_date_produces_expected_res
     std::string expected("\"2002-Feb-15\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_posix_time_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_posix_time_date_produces_expected_result");
+
+    std::ostringstream ss;
+    const boost::posix_time::time_duration i0(1,2,3);
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("\"01:02:03\"");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    boost::gregorian::date d(2002, 2, 15);
+    boost::posix_time::ptime i1(d, i0);
+    ss << dogen::needle::core::io::jsonify(i1);
+    expected = "\"2002-Feb-15 01:02:03\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

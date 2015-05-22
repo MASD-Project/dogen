@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_NEEDLE_BOOST_IO_VARIANT_IO_HPP
-#define DOGEN_NEEDLE_BOOST_IO_VARIANT_IO_HPP
+#ifndef DOGEN_NEEDLE_BOOST_IO_POSIX_TIME_IO_HPP
+#define DOGEN_NEEDLE_BOOST_IO_POSIX_TIME_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <ostream>
-#include <boost/variant.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/needle/core/io/jsonify.hpp"
 
 namespace dogen {
@@ -37,9 +37,9 @@ namespace io {
 namespace detail {
 
 template<typename Value>
-class json_boost_variant_type {
+class json_boost_posix_time_type {
 public:
-    explicit json_boost_variant_type(const Value& v) : value_(v) { }
+    explicit json_boost_posix_time_type(const Value& v) : value_(v) { }
     const Value& get() const { return value_; }
 
 private:
@@ -48,33 +48,23 @@ private:
 
 }
 
-template<typename... Types>
-inline detail::json_boost_variant_type<boost::variant<Types...> >
-jsonify(const boost::variant<Types...>& v) {
-    return detail::json_boost_variant_type<boost::variant<Types...> >(v);
+inline detail::json_boost_posix_time_type<boost::posix_time::ptime>
+jsonify(const boost::posix_time::ptime& v) {
+    return detail::json_boost_posix_time_type<boost::posix_time::ptime>(v);
+}
+
+inline detail::json_boost_posix_time_type<boost::posix_time::time_duration>
+jsonify(const boost::posix_time::time_duration& v) {
+    return detail::json_boost_posix_time_type<
+        boost::posix_time::time_duration>(v);
 }
 
 namespace detail {
 
-struct visitor : public boost::static_visitor<> {
-    explicit visitor(std::ostream& s) : stream_(s) {}
-
-    template<typename T>
-    void operator()(const T& t) const {
-        using namespace dogen::needle::core::io;
-        stream_ << jsonify(t);
-    }
-
-private:
-    std::ostream& stream_;
-};
-
 template<typename Value>
 inline std::ostream& operator<<(std::ostream& s,
-    const json_boost_variant_type<Value>& p) {
-    s << "{ \"__type__\": \"boost::variant\", \"data\": ";
-    boost::apply_visitor(detail::visitor(s), p.get());
-    s << " }";
+    const json_boost_posix_time_type<Value>& p) {
+    s << "\"" << p.get() << "\"";
     return s;
 }
 
