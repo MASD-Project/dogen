@@ -26,6 +26,7 @@
 #include "dogen/needle/std/io/array_io.hpp"
 #include "dogen/needle/std/io/forward_list_io.hpp"
 #include "dogen/needle/std/io/list_io.hpp"
+#include "dogen/needle/std/io/pair_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -60,38 +61,38 @@ BOOST_AUTO_TEST_CASE(jsonification_of_integers_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_integers_produces_expected_result");
 
     std::ostringstream ss;
-    const unsigned int ui(10);
-    ss << dogen::needle::core::io::jsonify(ui);
+    const unsigned int i0(10);
+    ss << dogen::needle::core::io::jsonify(i0);
     std::string expected("10");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const int i(-11);
-    ss << dogen::needle::core::io::jsonify(i);
+    const int i1(-11);
+    ss << dogen::needle::core::io::jsonify(i1);
     expected = "-11";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const unsigned short us(12);
-    ss << dogen::needle::core::io::jsonify(us);
+    const unsigned short i2(12);
+    ss << dogen::needle::core::io::jsonify(i2);
     expected = "12";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const short s(-13);
-    ss << dogen::needle::core::io::jsonify(s);
+    const short i3(-13);
+    ss << dogen::needle::core::io::jsonify(i3);
     expected = "-13";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const unsigned long ul(14);
-    ss << dogen::needle::core::io::jsonify(ul);
+    const unsigned long i4(14);
+    ss << dogen::needle::core::io::jsonify(i4);
     expected = "14";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const short l(-15);
-    ss << dogen::needle::core::io::jsonify(l);
+    const short i5(-15);
+    ss << dogen::needle::core::io::jsonify(i5);
     expected = "-15";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -101,14 +102,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_floating_produces_expected_result");
 
     std::ostringstream ss;
+    const double i0(0.000001);
+    ss << dogen::needle::core::io::jsonify(i0);
     std::string expected = "0.000001";
-    const double d(0.000001);
-    ss << dogen::needle::core::io::jsonify(d);
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const float f(0.000002);
-    ss << dogen::needle::core::io::jsonify(f);
+    const float i1(0.000002);
+    ss << dogen::needle::core::io::jsonify(i1);
     expected = "0.000002";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -118,14 +119,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_bool_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_bool_produces_expected_result");
 
     std::ostringstream ss;
-    bool b(true);
-    ss << dogen::needle::core::io::jsonify(b);
+    const bool i0(true);
+    ss << dogen::needle::core::io::jsonify(i0);
     std::string expected("true");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    b = false;
-    ss << dogen::needle::core::io::jsonify(b);
+    const bool i1(false);
+    ss << dogen::needle::core::io::jsonify(i1);
     expected = "false";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -135,14 +136,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_string_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_string_produces_expected_result");
 
     std::ostringstream ss;
-    std::string s("my_string");
-    ss << dogen::needle::core::io::jsonify(s);
+    const std::string i0("my_string");
+    ss << dogen::needle::core::io::jsonify(i0);
     std::string expected("\"my_string\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    s = "my_string with quote \" and new line \n";
-    ss << dogen::needle::core::io::jsonify(s);
+    const std::string i1("my_string with quote \" and new line \n");
+    ss << dogen::needle::core::io::jsonify(i1);
     expected = "\"my_string with quote <quote> and new line <new_line>\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -152,8 +153,8 @@ BOOST_AUTO_TEST_CASE(jsonification_of_complex_type_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_complex_type_expected_result");
 
     std::ostringstream ss;
-    const test_object to("some string", 123);
-    ss << dogen::needle::core::io::jsonify(to);
+    const test_object i0("some string", 123);
+    ss << dogen::needle::core::io::jsonify(i0);
     std::string expected("{ \"s\": \"some string\", \"i\": 123 }");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -162,22 +163,22 @@ BOOST_AUTO_TEST_CASE(jsonification_of_complex_type_produces_expected_result) {
 BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_array_produces_expected_result");
 
-    const std::array<unsigned int, 3> aui = {{ 1, 2, 3 }};
     std::ostringstream ss;
-    ss << aui;
+    const std::array<unsigned int, 3> i0 = {{ 1, 2, 3 }};
+    ss << i0;
     std::string expected("[ 1, 2, 3 ]");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const std::array<bool, 2> aub = {{ true, false }};
-    ss << aub;
+    const std::array<bool, 2> i1 = {{ true, false }};
+    ss << i1;
     expected = "[ true, false ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const test_object to("some string", 123);
-    const std::array<test_object, 2> ato = {{ to, to }};
-    ss << ato;
+    const std::array<test_object, 2> i2 = {{ to, to }};
+    ss << i2;
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
@@ -187,22 +188,22 @@ BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
 BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_forward_list_produces_expected_result");
 
-    const std::forward_list<unsigned int> flui = {{ 1, 2, 3 }};
     std::ostringstream ss;
-    ss << flui;
+    const std::forward_list<unsigned int> i0 = { 1, 2, 3 };
+    ss << i0;
     std::string expected("[ 1, 2, 3 ]");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const std::forward_list<bool> flub = {{ true, false }};
-    ss << flub;
+    const std::forward_list<bool> i1 = { true, false };
+    ss << i1;
     expected = "[ true, false ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const test_object to("some string", 123);
-    const std::forward_list<test_object> flto = {{ to, to }};
-    ss << flto;
+    const std::forward_list<test_object> i2 = {{ to, to }};
+    ss << i2;
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
@@ -212,24 +213,41 @@ BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
 BOOST_AUTO_TEST_CASE(jsonification_of_list_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_list_produces_expected_result");
 
-    const std::list<unsigned int> flui = {{ 1, 2, 3 }};
+    const std::list<unsigned int> i0 = { 1, 2, 3 };
     std::ostringstream ss;
-    ss << flui;
+    ss << i0;
     std::string expected("[ 1, 2, 3 ]");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const std::list<bool> flub = {{ true, false }};
-    ss << flub;
+    const std::list<bool> i1 = { true, false };
+    ss << i1;
     expected = "[ true, false ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const test_object to("some string", 123);
-    const std::list<test_object> flto = {{ to, to }};
-    ss << flto;
+    const std::list<test_object> i2 = {{ to, to }};
+    ss << i2;
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_pair_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_pair_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::pair<unsigned int, unsigned int> i0 = { 1, 2 };
+    ss << i0;
+    std::string expected("{ \"key\": 1, \"value\": 2 }");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::pair<unsigned int, bool> i1 = { 1, false };
+    ss << i1;
+    expected = "{ \"key\": 1, \"value\": false }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }

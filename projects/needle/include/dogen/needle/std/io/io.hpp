@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_UTILITY_IO_HPP
-#define DOGEN_UTILITY_IO_UTILITY_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace utility {
+namespace needle {
+namespace std {
 
 /**
- * @brief Overloads for general objects (stl, boost, etc) to support
- * the inserter operator.
- *
- * Used only for debugging purposes.
+ * @brief Overloads for STL objects to support the inserter operator.
  */
-namespace streaming {
+namespace io {
+
+}
 
 } } }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_PAIR_IO_HPP
-#define DOGEN_UTILITY_IO_PAIR_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_PAIR_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_PAIR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,17 @@
 
 #include <ostream>
 #include <utility>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/needle/core/io/jsonify.hpp"
 
 namespace std {
 
 template<typename Key, typename Value>
-inline ostream& operator<<(ostream& stream, const pair<Key, Value>& pair) {
-    using dogen::utility::streaming::jsonify;
-    stream << "{ \"key\": " << jsonify(pair.first)
-           << ", \"value\": " << jsonify(pair.second) << " }";
-    return(stream);
+inline ostream& operator<<(ostream& s, const pair<Key, Value>& p) {
+    // not using constants as this is slightly more efficient.
+    using namespace dogen::needle::core::io;
+    s << "{ \"key\": " << jsonify(p.first)
+      << ", \"value\": " << jsonify(p.second) << " }";
+    return(s);
 }
 
 }

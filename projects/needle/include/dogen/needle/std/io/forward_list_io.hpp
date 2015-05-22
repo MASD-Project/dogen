@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
-#define DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_FORWARD_LIST_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_FORWARD_LIST_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,7 +39,7 @@ inline ostream& operator<<(ostream& s, const forward_list<Containee>& l) {
     for(auto i(l.cbegin()); i != l.cend(); ++i) {
         if (i != l.begin())
             s << constants::separator();
-        s << dogen::needle::core::io::jsonify(*i);
+        s << jsonify(*i);
     }
     s << constants::close_array();
     return(s);
