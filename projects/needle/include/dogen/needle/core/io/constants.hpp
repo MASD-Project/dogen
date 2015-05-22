@@ -18,33 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_ARRAY_IO_HPP
-#define DOGEN_UTILITY_IO_ARRAY_IO_HPP
+#ifndef DOGEN_NEEDLE_CORE_IO_CONSTANTS_HPP
+#define DOGEN_NEEDLE_CORE_IO_CONSTANTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <array>
-#include <ostream>
-#include "dogen/needle/core/io/jsonify.hpp"
-#include "dogen/needle/core/io/constants.hpp"
+#include <string>
 
-namespace std {
+namespace dogen {
+namespace needle {
+namespace core {
+namespace io {
 
-template<typename Containee, std::size_t Size>
-inline ostream& operator<<(ostream& s, const array<Containee, Size>& a) {
-    using namespace dogen::needle::core::io;
-    s << constants::open_array();
-    for(auto i(a.cbegin()); i != a.end(); ++i) {
-        if (i != a.begin())
-            s << constants::separator();
-        s << dogen::needle::core::io::jsonify(*i);
-    }
-    s << constants::close_array();
-    return(s);
-}
+struct constants {
+    /**
+     * @brief Opens a JSON array.
+     */
+    static std::string open_array();
 
-}
+    /**
+     * @brief Closes a JSON array.
+     */
+    static std::string close_array();
+
+    /**
+     * @brief Opens a JSON object.
+     */
+    static std::string open_object();
+
+    /**
+     * @brief Closes a JSON object.
+     */
+    static std::string close_object();
+
+    /**
+     * @brief Separates key-value pairs and values.
+     */
+    static std::string separator();
+};
+
+} } } }
 
 #endif

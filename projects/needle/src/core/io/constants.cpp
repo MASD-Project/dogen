@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_ARRAY_IO_HPP
-#define DOGEN_UTILITY_IO_ARRAY_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <array>
-#include <ostream>
-#include "dogen/needle/core/io/jsonify.hpp"
 #include "dogen/needle/core/io/constants.hpp"
 
-namespace std {
+namespace dogen {
+namespace needle {
+namespace core {
+namespace io {
 
-template<typename Containee, std::size_t Size>
-inline ostream& operator<<(ostream& s, const array<Containee, Size>& a) {
-    using namespace dogen::needle::core::io;
-    s << constants::open_array();
-    for(auto i(a.cbegin()); i != a.end(); ++i) {
-        if (i != a.begin())
-            s << constants::separator();
-        s << dogen::needle::core::io::jsonify(*i);
-    }
-    s << constants::close_array();
-    return(s);
+std::string constants::open_array() {
+    static std::string r("[ ");
+    return r;
 }
 
+std::string constants::close_array() {
+    static std::string r(" ]");
+    return r;
 }
 
-#endif
+std::string constants::open_object() {
+    static std::string r("{ ");
+    return r;
+}
+
+std::string constants::close_object() {
+    static std::string r(" }");
+    return r;
+}
+
+std::string constants::separator() {
+    static std::string r(", ");
+    return r;
+}
+
+} } } }
