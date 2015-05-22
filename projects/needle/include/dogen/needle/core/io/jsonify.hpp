@@ -78,14 +78,13 @@ private:
     const Value& value_;
 };
 
-template<typename Value>
 class json_bool_type {
 public:
-    explicit json_bool_type(const Value v) : value_(v) { }
-    Value get() const { return value_; }
+    explicit json_bool_type(const bool v) : value_(v) { }
+    bool get() const { return value_; }
 
 private:
-    const Value value_;
+    const bool value_;
 };
 
 template<typename Value>
@@ -181,9 +180,9 @@ jsonify(const std::string& v) {
 /**
  * @brief Bool handling.
  */
-inline detail::json_bool_type<bool>
+inline detail::json_bool_type
 jsonify(const bool v) {
-    return detail::json_bool_type<bool>(v);
+    return detail::json_bool_type(v);
 }
 
 /**
@@ -232,9 +231,8 @@ operator<<(std::ostream& s, const json_string_type<Value>& v) {
     return s;
 }
 
-template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_bool_type<Value>& v) {
+operator<<(std::ostream& s, const json_bool_type& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s << v.get();

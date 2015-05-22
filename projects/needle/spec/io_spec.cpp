@@ -22,8 +22,8 @@
 #include <ostream>
 #include <sstream>
 #include <functional>
-#include <boost/test/unit_test.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/needle/core/io/jsonify.hpp"
 #include "dogen/needle/std/io/array_io.hpp"
@@ -40,6 +40,7 @@
 #include "dogen/needle/boost/io/optional_io.hpp"
 #include "dogen/needle/boost/io/shared_ptr_io.hpp"
 #include "dogen/needle/boost/io/variant_io.hpp"
+#include "dogen/needle/boost/io/gregorian_date_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -544,6 +545,17 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_variant_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "{ \"__type__\": \"boost::variant\", \"data\": 15 }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_gregorian_date_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_boost_gregorian_date_produces_expected_result");
+
+    std::ostringstream ss;
+    const boost::gregorian::date i0(2002, 2, 15);
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("\"2002-Feb-15\"");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
