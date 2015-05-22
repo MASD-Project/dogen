@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
-#define DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
+#ifndef DOGEN_NEEDLE_BOOST_IO_SHARED_PTR_IO_HPP
+#define DOGEN_NEEDLE_BOOST_IO_SHARED_PTR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/shared_ptr.hpp>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/needle/core/io/jsonify.hpp"
 
 namespace boost {
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
-    using dogen::utility::streaming::jsonify;
+    using namespace dogen::needle::core::io;
     if (p)
-        s << *p;
+        s << jsonify(*p);
     else
         s << "\"shared_ptr\": \"empty shared pointer\"";
 

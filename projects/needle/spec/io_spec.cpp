@@ -22,6 +22,7 @@
 #include <sstream>
 #include <functional>
 #include <boost/test/unit_test.hpp>
+#include <boost/make_shared.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/needle/core/io/jsonify.hpp"
 #include "dogen/needle/std/io/array_io.hpp"
@@ -35,6 +36,7 @@
 #include "dogen/needle/std/io/vector_io.hpp"
 #include "dogen/needle/std/io/memory_io.hpp"
 #include "dogen/needle/boost/io/optional_io.hpp"
+#include "dogen/needle/boost/io/shared_ptr_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -124,7 +126,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_integers_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i5);
     expected = "-15";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
@@ -141,7 +142,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "0.000002";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_char_produces_expected_result) {
@@ -158,7 +158,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_char_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "\"0x00\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_bool_produces_expected_result) {
@@ -175,7 +174,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_bool_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "false";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_string_produces_expected_result) {
@@ -192,7 +190,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_string_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "\"my_string with quote <quote> and new line <new_line>\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_complex_type_produces_expected_result) {
@@ -203,7 +200,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_complex_type_produces_expected_result) {
     ss << dogen::needle::core::io::jsonify(i0);
     std::string expected("{ \"s\": \"some string\", \"i\": 123 }");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
@@ -228,7 +224,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
@@ -253,7 +248,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_list_produces_expected_result) {
@@ -278,7 +272,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_list_produces_expected_result) {
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_pair_produces_expected_result) {
@@ -303,7 +296,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_pair_produces_expected_result) {
     expected = "{ \"key\": 1, \"value\": { \"s\": "
         "\"some string\", \"i\": 123 } }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_map_produces_expected_result) {
@@ -328,7 +320,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_map_produces_expected_result) {
     expected = "[ { \"key\": 1, \"value\": { \"s\": "
         "\"some string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_unordered_map_produces_expected_result) {
@@ -353,7 +344,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_unordered_map_produces_expected_result) {
     expected = "[ { \"key\": 1, \"value\": { \"s\": "
         "\"some string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_set_produces_expected_result) {
@@ -384,7 +374,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_set_produces_expected_result) {
     ss << i3;
     expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_unordered_set_produces_expected_result) {
@@ -415,7 +404,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_unordered_set_produces_expected_result) {
     ss << i3;
     expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_vector_produces_expected_result) {
@@ -446,7 +434,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_vector_produces_expected_result) {
     ss << i3;
     expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_result) {
@@ -469,7 +456,6 @@ BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_resul
     ss << i2;
     expected = "\"shared_ptr\": \"empty shared pointer\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
-    ss.str("");
 }
 
 BOOST_AUTO_TEST_CASE(jsonification_of_boost_optional_produces_expected_result) {
@@ -481,6 +467,33 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_optional_produces_expected_result) {
     std::string expected("1234");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
+
+    const boost::optional<unsigned int> i1;
+    ss << i1;
+    expected = "\"optional\" : \"empty\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_shared_pointer_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_boost_shared_pointer_produces_expected_result");
+
+    std::ostringstream ss;
+    const auto i0(boost::make_shared<int>(1234));
+    ss << i0;
+    std::string expected("1234");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const auto i1(boost::make_shared<test_object>("abc", 123));
+    ss << i1;
+    expected = "{ \"s\": \"abc\", \"i\": 123 }";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const boost::shared_ptr<int> i2;
+    ss << i2;
+    expected = "\"shared_ptr\": \"empty shared pointer\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
