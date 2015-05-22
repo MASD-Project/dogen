@@ -24,6 +24,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/needle/core/io/jsonify.hpp"
 #include "dogen/needle/std/io/array_io.hpp"
+#include "dogen/needle/std/io/forward_list_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -176,6 +177,31 @@ BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
     const test_object to("some string", 123);
     const std::array<test_object, 2> ato = {{ to, to }};
     ss << ato;
+    expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
+        "{ \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_forward_list_produces_expected_result");
+
+    const std::forward_list<unsigned int> flui = {{ 1, 2, 3 }};
+    std::ostringstream ss;
+    ss << flui;
+    std::string expected("[ 1, 2, 3 ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::forward_list<bool> flub = {{ true, false }};
+    ss << flub;
+    expected = "[ true, false ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::forward_list<test_object> flto = {{ to, to }};
+    ss << flto;
     expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
         "{ \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
