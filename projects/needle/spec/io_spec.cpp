@@ -34,6 +34,7 @@
 #include "dogen/needle/std/io/unordered_set_io.hpp"
 #include "dogen/needle/std/io/vector_io.hpp"
 #include "dogen/needle/std/io/memory_io.hpp"
+#include "dogen/needle/boost/io/optional_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -132,13 +133,30 @@ BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
     std::ostringstream ss;
     const double i0(0.000001);
     ss << dogen::needle::core::io::jsonify(i0);
-    std::string expected = "0.000001";
+    std::string expected("0.000001");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const float i1(0.000002);
     ss << dogen::needle::core::io::jsonify(i1);
     expected = "0.000002";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_char_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_char_produces_expected_result");
+
+    std::ostringstream ss;
+    const char i0(32);
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("\"0x20\"");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const char i1(0);
+    ss << dogen::needle::core::io::jsonify(i1);
+    expected = "\"0x00\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }
@@ -450,6 +468,17 @@ BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_resul
     const std::shared_ptr<int> i2;
     ss << i2;
     expected = "\"shared_ptr\": \"empty shared pointer\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_optional_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_boost_optional_produces_expected_result");
+
+    std::ostringstream ss;
+    const boost::optional<unsigned int> i0(1234);
+    ss << i0;
+    std::string expected("1234");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }

@@ -844,6 +844,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Implement a basic =needle= model with io support          :story:
+    CLOCK: [2015-05-22 Fri 15:01]--[2015-05-22 Fri 15:33] =>  0:32
     CLOCK: [2015-05-22 Fri 14:47]--[2015-05-22 Fri 15:00] =>  0:13
     CLOCK: [2015-05-22 Fri 11:55]--[2015-05-22 Fri 12:17] =>  0:22
     CLOCK: [2015-05-22 Fri 11:43]--[2015-05-22 Fri 11:54] =>  0:11
