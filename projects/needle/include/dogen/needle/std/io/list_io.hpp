@@ -27,21 +27,22 @@
 
 #include <list>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/needle/core/io/jsonify.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Containee>
-inline ostream& operator<<(ostream& stream, const list<Containee>& list) {
-    stream << "[ ";
-    for(typename std::list<Containee>::const_iterator i(list.begin());
-        i != list.end();
-        ++i) {
-        if (i != list.begin()) stream << ", ";
-        stream << dogen::utility::streaming::jsonify(*i);
+inline ostream& operator<<(ostream& s, const list<Containee>& l) {
+    using namespace dogen::needle::core::io;
+    s << constants::open_array();
+    for(auto i(l.cbegin()); i != l.cend(); ++i) {
+        if (i != l.begin())
+            s << constants::separator();
+        s << dogen::needle::core::io::jsonify(*i);
     }
-    stream << " ]";
-    return(stream);
+    s << constants::close_array();
+    return(s);
 }
 
 }
