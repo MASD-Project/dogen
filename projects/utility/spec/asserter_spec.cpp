@@ -53,7 +53,7 @@ const std::string file_not_found("File not found: ");
 struct test_serialization {
     test_serialization() : i_(0) {}
     test_serialization(int i) : i_(i) { }
-    bool operator==(const test_serialization& rhs) {
+    bool operator==(const test_serialization& rhs) const {
         return i_ == rhs.i_;
     }
     int i_;

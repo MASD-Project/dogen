@@ -53,7 +53,7 @@ private:
     /**
      * @brief Logs according to the result of the assert.
      */
-    static bool handle_assert(const bool result, const std::string assertion);
+    static bool handle_assert(const bool result, const std::string& assertion);
 
     /**
      * @brief Logs strings with markers.
@@ -66,10 +66,10 @@ public:
      * @brief Returns true if two objects are equal, false otherwise.
      */
     template<typename Entity>
-    static bool assert_object(Entity expected, Entity actual) {
+    static bool assert_object(const Entity& expected, const Entity& actual) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
-        BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
+        BOOST_LOG_SEV(lg_, debug) << "expected: '" << expected << "'";
+        BOOST_LOG_SEV(lg_, debug) << "  actual: '" << actual << "'";
         return handle_assert(expected == actual, "assert object");
     }
 
@@ -82,9 +82,9 @@ public:
      */
     template<typename Entity>
     static bool assert_object(
-        boost::filesystem::path expected_path,
-        boost::filesystem::path actual_path,
-        Entity actual) {
+        const boost::filesystem::path& expected_path,
+        const boost::filesystem::path& actual_path,
+        const Entity& actual) {
 
         using dogen::utility::test::xml_serialize;
         using namespace dogen::utility::log;
@@ -115,8 +115,8 @@ public:
      * @pre Assumes that fa.is_assertable for both actual and expected
      * paths.
      */
-    static bool assert_file(boost::filesystem::path expected_path,
-        boost::filesystem::path actual_path, file_asserter& fa);
+    static bool assert_file(const boost::filesystem::path& expected_path,
+        const boost::filesystem::path& actual_path, file_asserter& fa);
 
     /**
      * @brief Asserts that expected matches actual according to the
@@ -129,8 +129,8 @@ public:
      * @param expected_path path to the expected file
      * @param actual_path path to the actual file
      */
-    static bool assert_file(boost::filesystem::path expected_path,
-        boost::filesystem::path actual_path);
+    static bool assert_file(const boost::filesystem::path& expected_path,
+        const boost::filesystem::path& actual_path);
 
     /**
      * @brief Asserts that expected matches actual by ensuring they
@@ -138,8 +138,8 @@ public:
      *
      * It uses the byte-wise file asserter to compare contents.
      */
-    static bool assert_directory(boost::filesystem::path expected_path,
-        boost::filesystem::path actual_path);
+    static bool assert_directory(const boost::filesystem::path& expected_path,
+        const boost::filesystem::path& actual_path);
 
     /**
      * @brief Asserts that expected matches actual by ensuring they
@@ -150,9 +150,9 @@ public:
      * used. If more than one are assertable, they are all used in the
      * order present in the vector until the first one fails.
      */
-    static bool assert_directory(boost::filesystem::path expected_path,
-        boost::filesystem::path actual_path,
-        std::vector<file_asserter::shared_ptr> file_asserters);
+    static bool assert_directory(const boost::filesystem::path& expected_path,
+        const boost::filesystem::path& actual_path,
+        const std::vector<file_asserter::shared_ptr>& file_asserters);
 
     /**
      * @brief Returns true if expected matches equal via the equality
@@ -185,15 +185,15 @@ public:
      * @brief Returns true if the actual string starts with the
      * content supplied by the expected string.
      */
-    static bool assert_starts_with(const std::string expected,
-        const std::string actual);
+    static bool assert_starts_with(const std::string& expected,
+        const std::string& actual);
 
     /**
      * @brief Returns true if the actual string contains the expected
      * string.
      */
-    static bool assert_contains(const std::string expected,
-        const std::string actual);
+    static bool assert_contains(const std::string& expected,
+        const std::string& actual);
 };
 
 } } }

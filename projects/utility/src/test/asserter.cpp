@@ -49,7 +49,7 @@ const std::string starts_with("assert starts with");
 const std::string directory("assert directory");
 const std::string file("assert file");
 
-std::set<std::string> normalise(path base, std::set<path> paths) {
+std::set<std::string> normalise(const path& base, const std::set<path>& paths) {
     std::set<std::string> r;
     boost::copy(paths |
         boost::adaptors::transformed([&](path p) -> std::string {
@@ -61,8 +61,8 @@ std::set<std::string> normalise(path base, std::set<path> paths) {
 }
 
 bool compare_paths(
-    boost::tuple<path, std::set<path> > expected_tuple,
-    boost::tuple<path, std::set<path> > actual_tuple) {
+    const boost::tuple<path, std::set<path> >& expected_tuple,
+    const boost::tuple<path, std::set<path> >& actual_tuple) {
 
     const auto a(normalise(actual_tuple.get<0>(), actual_tuple.get<1>()));
     const auto e(normalise(expected_tuple.get<0>(), expected_tuple.get<1>()));
@@ -96,7 +96,7 @@ namespace test {
 dogen::utility::log::logger asserter::lg_(
     dogen::utility::log::logger_factory("utility.test.asserter"));
 
-bool asserter::handle_assert(const bool result, const std::string assertion) {
+bool asserter::handle_assert(const bool result, const std::string& assertion) {
     using namespace dogen::utility::log;
     if (!result)
         BOOST_LOG_SEV(lg_, error) << assertion << " failed.";
@@ -116,21 +116,20 @@ log_strings(const std::string& expected, const std::string& actual) {
                               << "<end>";
 }
 
-
-bool asserter::assert_file(boost::filesystem::path expected_path,
-    boost::filesystem::path actual_path, file_asserter& fa) {
+bool asserter::assert_file(const boost::filesystem::path& expected_path,
+    const boost::filesystem::path& actual_path, file_asserter& fa) {
     return handle_assert(fa.assert_file(expected_path, actual_path), file);
 }
 
-bool asserter::assert_file(boost::filesystem::path expected_path,
-    boost::filesystem::path actual_path) {
+bool asserter::assert_file(const boost::filesystem::path& expected_path,
+    const boost::filesystem::path& actual_path) {
     bytewise_file_asserter bfa;
     return assert_file(expected_path, actual_path, bfa);
 }
 
-bool asserter::assert_directory(boost::filesystem::path expected_path,
-    boost::filesystem::path actual_path,
-    std::vector<file_asserter::shared_ptr> file_asserters) {
+bool asserter::assert_directory(const boost::filesystem::path& expected_path,
+    const boost::filesystem::path& actual_path,
+    const std::vector<file_asserter::shared_ptr>& file_asserters) {
 
     using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg_, debug) << "expected directory: " << expected_path;
@@ -173,8 +172,8 @@ bool asserter::assert_directory(boost::filesystem::path expected_path,
     return handle_assert(r, directory);
 }
 
-bool asserter::assert_directory(boost::filesystem::path expected_path,
-    boost::filesystem::path actual_path) {
+bool asserter::assert_directory(const boost::filesystem::path& expected_path,
+    const boost::filesystem::path& actual_path) {
     std::vector<file_asserter::shared_ptr> v;
     return assert_directory(expected_path, actual_path, v);
 }
@@ -186,7 +185,7 @@ bool asserter::assert_equals_marker(const std::string& expected,
 }
 
 bool asserter::
-assert_starts_with(const std::string expected, const std::string actual) {
+assert_starts_with(const std::string& expected, const std::string& actual) {
     log_strings(expected, actual);
     if (actual.empty() && !expected.empty())
         return handle_assert(false, contains);
@@ -195,7 +194,7 @@ assert_starts_with(const std::string expected, const std::string actual) {
 }
 
 bool asserter::
-assert_contains(const std::string expected, const std::string actual) {
+assert_contains(const std::string& expected, const std::string& actual) {
     log_strings(expected, actual);
     if (actual.empty() && !expected.empty())
         return handle_assert(false, contains);
