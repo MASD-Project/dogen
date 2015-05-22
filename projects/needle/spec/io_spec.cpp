@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <sstream>
+#include <functional>
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/needle/core/io/jsonify.hpp"
@@ -29,6 +30,8 @@
 #include "dogen/needle/std/io/pair_io.hpp"
 #include "dogen/needle/std/io/map_io.hpp"
 #include "dogen/needle/std/io/unordered_map_io.hpp"
+#include "dogen/needle/std/io/set_io.hpp"
+#include "dogen/needle/std/io/unordered_set_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -53,7 +56,28 @@ inline std::ostream& operator<<(std::ostream& s, const test_object& to) {
     return(s);
 }
 
+bool operator<(const test_object& lhs, const test_object& rhs) {
+    return lhs.i < rhs.i;
 }
+
+bool operator==(const test_object& lhs, const test_object& rhs) {
+    return lhs.i == rhs.i;
+}
+
+}
+
+namespace std {
+
+template<>
+struct hash<test_object> {
+public:
+    size_t operator()(const test_object& v) const {
+        return v.i;
+    }
+};
+
+}
+
 
 using dogen::utility::test::asserter;
 
@@ -310,6 +334,69 @@ BOOST_AUTO_TEST_CASE(jsonification_of_unordered_map_produces_expected_result) {
         "\"some string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_set_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_set_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::set<unsigned int> i0 = { 1, 2 };
+    ss << i0;
+    std::string expected("[ 1, 2 ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::set<bool> i1 = { false, true };
+    ss << i1;
+    expected = "[ false, true ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::string s("some \" string");
+    const std::set<std::string> i2 = { s };
+    ss << i2;
+    expected = "[ \"some <quote> string\" ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::set<test_object> i3 = { to };
+    ss << i3;
+    expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_unordered_set_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_unordered_set_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::unordered_set<unsigned int> i0 = { 1 };
+    ss << i0;
+    std::string expected("[ 1 ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::unordered_set<bool> i1 = { false };
+    ss << i1;
+    expected = "[ false ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::string s("some \" string");
+    const std::unordered_set<std::string> i2 = { s };
+    ss << i2;
+    expected = "[ \"some <quote> string\" ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::unordered_set<test_object> i3 = { to };
+    ss << i3;
+    expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

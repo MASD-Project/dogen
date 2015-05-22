@@ -844,6 +844,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Implement the =needle= model                              :story:
+    CLOCK: [2015-05-22 Fri 11:55]--[2015-05-22 Fri 12:17] =>  0:22
     CLOCK: [2015-05-22 Fri 11:43]--[2015-05-22 Fri 11:54] =>  0:11
     CLOCK: [2015-05-22 Fri 10:47]--[2015-05-22 Fri 10:48] =>  0:01
     CLOCK: [2015-05-22 Fri 10:38]--[2015-05-22 Fri 10:46] =>  0:08
@@ -865,6 +866,16 @@ no domain types as such, just functions for test data, io and hashing.
 
 - add tests for containers of containers with a few permutations
   (containing itself, containing pair, etc).
+
+*** Container details in JSON dump                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I would like to know how many elements
+containers have so that I don't have to count it manually.
+#+end_quote
+
+It would be nice to have the container type and size in the JSON
+output.
 
 *** Header guard in formatters should be optional                     :story:
 

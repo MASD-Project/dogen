@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_SET_IO_HPP
-#define DOGEN_UTILITY_IO_SET_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_SET_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_SET_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,21 +27,22 @@
 
 #include <set>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include "dogen/needle/core/io/jsonify.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Key>
-inline ostream& operator<<(ostream& stream, const set<Key>& value) {
-    stream << "[ ";
-    for(typename std::set<Key>::const_iterator i(value.begin());
-        i != value.end();
-        ++i) {
-        if (i != value.begin()) stream << ", ";
-        stream << dogen::utility::streaming::jsonify(*i);
+inline ostream& operator<<(ostream& s, const set<Key>& set) {
+    using namespace dogen::needle::core::io;
+    s << constants::open_array();
+    for(auto i(set.cbegin()); i != set.end(); ++i) {
+        if (i != set.begin())
+            s << constants::separator();
+        s << jsonify(*i);
     }
-    stream << " ]";
-    return(stream);
+    s << constants::close_array();
+    return(s);
 }
 
 }

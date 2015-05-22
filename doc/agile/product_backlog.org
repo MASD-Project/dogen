@@ -2388,12 +2388,6 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
-*** Add support for emacs / vi modelines in stitch                    :story:
-
-It would be nice to disable =auto-fill-mode= in emacs for stitch
-templates, set indentation etc. For this we would have to ignore the
-modeline settings in templates. Its not obvious how this could be
-achieved.
 
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
@@ -3232,16 +3226,6 @@ This will cause some inconvenience during development because it will
 mean that some tests will fail until a feature is finished (or that
 the developer will have to continuously rebase the dogen models), but
 the advantages are important.
-
-*** Container details in JSON dump                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like to know how many elements
-containers have so that I don't have to count it manually.
-#+end_quote
-
-It would be nice to have the container type and size in the JSON
-output.
 
 *** Add test to check if we are writing when file contents haven't changed :story:
 

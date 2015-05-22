@@ -18,28 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_UNORDERED_SET_IO_HPP
-#define DOGEN_UTILITY_IO_UNORDERED_SET_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_UNORDERED_SET_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_UNORDERED_SET_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_set>
 #include <ostream>
-#include "dogen/utility/io/jsonify_io.hpp"
+#include <unordered_set>
+#include "dogen/needle/core/io/jsonify.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Key>
-inline ostream& operator<<(ostream& stream, const unordered_set<Key>& value) {
-    stream << "[ ";
-    for(auto i(value.cbegin()); i != value.cend(); ++i) {
-        if (i != value.begin()) stream << ", ";
-        stream << dogen::utility::streaming::jsonify(*i);
+inline ostream& operator<<(ostream& s, const unordered_set<Key>& set) {
+    using namespace dogen::needle::core::io;
+    s << constants::open_array();
+    for(auto i(set.cbegin()); i != set.end(); ++i) {
+        if (i != set.begin())
+            s << constants::separator();
+        s << jsonify(*i);
     }
-    stream << " ]";
-    return(stream);
+    s << constants::close_array();
+    return(s);
 }
 
 }
