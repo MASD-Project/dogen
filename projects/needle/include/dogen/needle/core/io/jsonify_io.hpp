@@ -28,6 +28,7 @@
 #include <string>
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen/needle/core/io/tidy_up.hpp"
 
 namespace dogen {
 namespace needle {
@@ -223,7 +224,7 @@ operator<<(std::ostream& s, const json_char_type<Target>& t) {
 template<typename Target>
 inline std::ostream&
 operator<<(std::ostream& s, const json_string_type<Target>& t) {
-    s << "\"" << t.get() << "\"";
+    s << "\"" << tidy_up_copy(t.get()) << "\"";
     return(s);
 }
 

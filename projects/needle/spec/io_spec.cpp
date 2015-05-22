@@ -106,7 +106,24 @@ BOOST_AUTO_TEST_CASE(jsonification_of_bool_produces_expected_result) {
     b = false;
     expected = "false";
     ss << dogen::needle::core::io::jsonify(b);
-    BOOST_CHECK(asserter::assert_object(ss.str(), expected));
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_string_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_string_produces_expected_result");
+
+    std::ostringstream ss;
+    std::string s("my_string");
+    std::string expected("\"my_string\"");
+    ss << dogen::needle::core::io::jsonify(s);
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    s = "my_string with quote \" and new line \n";
+    expected = "\"my_string with quote <quote> and new line <new_line>\"";
+    ss << dogen::needle::core::io::jsonify(s);
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }
 
