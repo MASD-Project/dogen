@@ -1,0 +1,508 @@
+diff --git a/diagrams/sml_to_cpp.dia b/diagrams/sml_to_cpp.dia
+index 8aa8ee1..6165a33 100644
+--- a/diagrams/sml_to_cpp.dia
++++ b/diagrams/sml_to_cpp.dia
+@@ -1497,7 +1497,7 @@
+         <dia:point val="93,12"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="92.95,11.95;111.26,22.85"/>
++        <dia:rectangle val="92.95,11.95;111.26,23.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="93,12"/>
+@@ -1506,7 +1506,7 @@
+         <dia:real val="18.210000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="10.800000000000001"/>
++        <dia:real val="11.600000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#relationships#</dia:string>
+@@ -1849,6 +1849,29 @@
+             <dia:boolean val="false"/>
+           </dia:attribute>
+         </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#has_local_properties#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#bool#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
+       </dia:attribute>
+       <dia:attribute name="operations"/>
+       <dia:attribute name="template">
+@@ -1894,16 +1917,16 @@
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="102.105,22.8"/>
++        <dia:point val="102.105,23.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="79.3175,22.05;102.855,32.8"/>
++        <dia:rectangle val="79.3175,22.85;102.855,32.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="102.105,22.8"/>
++        <dia:point val="102.105,23.6"/>
+         <dia:point val="102.105,26"/>
+         <dia:point val="79.3675,26"/>
+         <dia:point val="79.3675,32"/>
+@@ -5675,7 +5698,7 @@ of relationship information.#</dia:string>
+         <dia:point val="-1,-8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-1.05,-8.05;22.665,-2.25"/>
++        <dia:rectangle val="-1.05,-8.05;27.285,0.15"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5684,10 +5707,10 @@ of relationship information.#</dia:string>
+         <dia:point val="-1,-8"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.615000000000002"/>
++        <dia:real val="28.235000000000003"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="5.7000000000000002"/>
++        <dia:real val="8.0999999999999996"/>
+       </dia:attribute>
+       <dia:attribute name="line_width">
+         <dia:real val="0.10000000000000001"/>
+diff --git a/projects/cpp_formatters/src/types/domain_implementation.cpp b/projects/cpp_formatters/src/types/domain_implementation.cpp
+index b5c757c..e66037a 100644
+--- a/projects/cpp_formatters/src/types/domain_implementation.cpp
++++ b/projects/cpp_formatters/src/types/domain_implementation.cpp
+@@ -208,7 +208,7 @@ void domain_implementation::format_class(
+         BOOST_THROW_EXCEPTION(formatting_error(missing_class_info));
+     }
+     const cpp::formattables::class_info& ci(*o);
+-    io_helper_methods(ci);
++    // io_helper_methods(ci);
+ 
+     std::unordered_set<std::string> types_done;
+     const auto props(ci.properties());
+diff --git a/projects/cpp_formatters/src/types/io_implementation.cpp b/projects/cpp_formatters/src/types/io_implementation.cpp
+index cb2bac6..9cbd32a 100644
+--- a/projects/cpp_formatters/src/types/io_implementation.cpp
++++ b/projects/cpp_formatters/src/types/io_implementation.cpp
+@@ -152,7 +152,7 @@ void io_implementation::format_class(const cpp::formattables::file_info& f) {
+     }
+ 
+     const cpp::formattables::class_info& ci(*o);
+-    io_helper_methods(ci);
++    // io_helper_methods(ci);
+ 
+     using dogen::formatters::cpp::scoped_namespace_formatter;
+     scoped_namespace_formatter nsh(stream_, ci.namespaces());
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp
+index 05d3d2f..d7d9985 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp
+@@ -139,7 +139,7 @@ private:
+      * @brief Handles all dependencies to types in the standard
+      * library.
+      */
+-    void append_std_dependencies(
++    void append_std_dependencies(const relationships& rel,
+         const cpp::formattables::content_descriptor& cd,
+         cpp::formattables::includes& inc) const;
+ 
+diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/relationships.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/relationships.hpp
+index 86e2219..eb389c2 100644
+--- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/relationships.hpp
++++ b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/relationships.hpp
+@@ -58,7 +58,8 @@ public:
+         const bool is_child,
+         const bool requires_stream_manipulators,
+         const bool has_std_pair,
+-        const boost::optional<dogen::sml::qname>& visitor);
++        const boost::optional<dogen::sml::qname>& visitor,
++        const bool has_local_properties);
+ 
+ private:
+     template<typename Archive>
+@@ -111,6 +112,9 @@ public:
+     void visitor(const boost::optional<dogen::sml::qname>& v);
+     void visitor(const boost::optional<dogen::sml::qname>&& v);
+ 
++    bool has_local_properties() const;
++    void has_local_properties(const bool v);
++
+ public:
+     bool operator==(const relationships& rhs) const;
+     bool operator!=(const relationships& rhs) const {
+@@ -133,6 +137,7 @@ private:
+     bool requires_stream_manipulators_;
+     bool has_std_pair_;
+     boost::optional<dogen::sml::qname> visitor_;
++    bool has_local_properties_;
+ };
+ 
+ } }
+diff --git a/projects/sml_to_cpp/src/hash/relationships_hash.cpp b/projects/sml_to_cpp/src/hash/relationships_hash.cpp
+index 9471914..f36c8a9 100644
+--- a/projects/sml_to_cpp/src/hash/relationships_hash.cpp
++++ b/projects/sml_to_cpp/src/hash/relationships_hash.cpp
+@@ -67,6 +67,7 @@ std::size_t relationships_hasher::hash(const relationships&v) {
+     combine(seed, v.requires_stream_manipulators());
+     combine(seed, v.has_std_pair());
+     combine(seed, hash_boost_optional_dogen_sml_qname(v.visitor()));
++    combine(seed, v.has_local_properties());
+ 
+     return seed;
+ }
+diff --git a/projects/sml_to_cpp/src/io/relationships_io.cpp b/projects/sml_to_cpp/src/io/relationships_io.cpp
+index f8f5476..39c507b 100644
+--- a/projects/sml_to_cpp/src/io/relationships_io.cpp
++++ b/projects/sml_to_cpp/src/io/relationships_io.cpp
+@@ -74,7 +74,8 @@ std::ostream& operator<<(std::ostream& s, const relationships& v) {
+       << "\"is_child\": " << v.is_child() << ", "
+       << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators() << ", "
+       << "\"has_std_pair\": " << v.has_std_pair() << ", "
+-      << "\"visitor\": " << v.visitor()
++      << "\"visitor\": " << v.visitor() << ", "
++      << "\"has_local_properties\": " << v.has_local_properties()
+       << " }";
+     return(s);
+ }
+diff --git a/projects/sml_to_cpp/src/serialization/relationships_ser.cpp b/projects/sml_to_cpp/src/serialization/relationships_ser.cpp
+index 6074c6d..e23ce55 100644
+--- a/projects/sml_to_cpp/src/serialization/relationships_ser.cpp
++++ b/projects/sml_to_cpp/src/serialization/relationships_ser.cpp
+@@ -51,6 +51,7 @@ void save(Archive& ar,
+     ar << make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
+     ar << make_nvp("has_std_pair", v.has_std_pair_);
+     ar << make_nvp("visitor", v.visitor_);
++    ar << make_nvp("has_local_properties", v.has_local_properties_);
+ }
+ 
+ template<typename Archive>
+@@ -68,6 +69,7 @@ void load(Archive& ar,
+     ar >> make_nvp("requires_stream_manipulators", v.requires_stream_manipulators_);
+     ar >> make_nvp("has_std_pair", v.has_std_pair_);
+     ar >> make_nvp("visitor", v.visitor_);
++    ar >> make_nvp("has_local_properties", v.has_local_properties_);
+ }
+ 
+ } }
+diff --git a/projects/sml_to_cpp/src/test_data/relationships_td.cpp b/projects/sml_to_cpp/src/test_data/relationships_td.cpp
+index 80b3b2c..331091b 100644
+--- a/projects/sml_to_cpp/src/test_data/relationships_td.cpp
++++ b/projects/sml_to_cpp/src/test_data/relationships_td.cpp
+@@ -67,6 +67,7 @@ populate(const unsigned int position, result_type& v) {
+     v.requires_stream_manipulators(create_bool(position + 8));
+     v.has_std_pair(create_bool(position + 9));
+     v.visitor(create_boost_optional_dogen_sml_qname(position + 10));
++    v.has_local_properties(create_bool(position + 11));
+ }
+ 
+ relationships_generator::result_type
+diff --git a/projects/sml_to_cpp/src/types/extractor.cpp b/projects/sml_to_cpp/src/types/extractor.cpp
+index 9f48a93..ca9b8c2 100644
+--- a/projects/sml_to_cpp/src/types/extractor.cpp
++++ b/projects/sml_to_cpp/src/types/extractor.cpp
+@@ -48,7 +48,7 @@ relationships extractor::extract_dependency_graph(const sml::object& ao) const {
+                              << sml::string_converter::convert(ao.name());
+ 
+     relationships r;
+-
++    r.has_local_properties(!ao.local_properties().empty());
+     using dogen::sml::relationship_types;
+     auto i(ao.relationships().find(relationship_types::parents));
+     if (i == ao.relationships().end() || i->second.empty())
+diff --git a/projects/sml_to_cpp/src/types/includer.cpp b/projects/sml_to_cpp/src/types/includer.cpp
+index 2aba3c8..499dc99 100644
+--- a/projects/sml_to_cpp/src/types/includer.cpp
++++ b/projects/sml_to_cpp/src/types/includer.cpp
+@@ -33,9 +33,6 @@ static logger lg(logger_factory("sml_to_cpp.includer"));
+ 
+ const std::string empty;
+ const std::string hardware_model("hardware_model");
+-const std::string bool_type("bool");
+-const std::string double_type("double");
+-const std::string float_type("float");
+ 
+ bool contains(const std::set<dogen::config::cpp_facet_types>& f,
+     dogen::config::cpp_facet_types ft) {
+@@ -119,6 +116,9 @@ append_implementation_dependencies(const relationships& rel,
+     if (is_header && io_enabled_ && (domain_with_io || is_io))
+         inc.system().push_back(std_.include(std_types::iosfwd));
+ 
++    if (rel.has_local_properties())
++        inc.user().push_back("dogen/needle/core/io/jsonify.hpp");
++
+     // algorithm: domain headers need it for the swap function.
+     if (is_header && is_types)
+         inc.system().push_back(std_.include(std_types::algorithm));
+@@ -238,6 +238,12 @@ void includer::append_boost_dependencies(const relationships& rel,
+         inc.system().push_back(
+             boost_.include(boost_types::serialization_shared_ptr));
+ 
++    const bool is_io(cd.facet_type() == cpp_facet_types::io);
++    const bool domain_with_io(is_types &&
++        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
++    if (is_implementation && (is_io || domain_with_io) && is_sp)
++        inc.user().push_back("dogen/needle/boost/io/shared_ptr_io.hpp");
++
+     /*
+      * boost::optional
+      */
+@@ -249,6 +255,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+         inc.system().push_back(
+             boost_.include(boost_types::serialization_optional));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_opt)
++        inc.user().push_back("dogen/needle/boost/io/optional_io.hpp");
++
+     /*
+      * boost::variant
+      */
+@@ -260,6 +269,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+         inc.system().push_back(
+             boost_.include(boost_types::serialization_variant));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_variant)
++        inc.user().push_back("dogen/needle/boost/io/variant_io.hpp");
++
+     /*
+      * boost::filesystem::path
+      */
+@@ -272,10 +284,8 @@ void includer::append_boost_dependencies(const relationships& rel,
+     if (is_implementation && is_test_data && is_path)
+         inc.system().push_back(std_.include(std_types::sstream));
+ 
+-    const bool is_io(cd.facet_type() == cpp_facet_types::io);
+-    const bool domain_with_io(is_types &&
+-        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
+-    const bool io_without_iio(is_io && !options_.use_integrated_io());
++    if (is_implementation && (is_io || domain_with_io) && is_path)
++        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
+ 
+     /*
+      * boost::gregorian::date
+@@ -284,6 +294,7 @@ void includer::append_boost_dependencies(const relationships& rel,
+     if (is_header && is_types && is_date)
+         inc.system().push_back(boost_.include(boost_types::gregorian_date));
+ 
++    const bool io_without_iio(is_io && !options_.use_integrated_io());
+     if (is_date && is_implementation && io_enabled_ &&
+         (domain_with_io || io_without_iio))
+         inc.system().push_back(boost_.include(boost_types::io_gregorian_date));
+@@ -294,6 +305,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+             boost_.include(boost_types::serialization_gregorian_date));
+     }
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_date)
++        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
++
+     /*
+      * boost::posix_time::ptime
+      */
+@@ -327,6 +341,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+             boost_.include(boost_types::serialization_time_duration));
+     }
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_duration)
++        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
++
+     /*
+      * boost::property_tree::ptree
+      */
+@@ -345,10 +362,14 @@ void includer::append_boost_dependencies(const relationships& rel,
+         inc.system().push_back(boost_.include(boost_types::io_ptree));
+         inc.system().push_back(boost_.include(boost_types::serialization_ptree));
+     }
++
++    if (is_implementation && (is_io || domain_with_io) && is_ptree)
++        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
+ }
+ 
+ void includer::
+-append_std_dependencies(const cpp::formattables::content_descriptor& cd,
++append_std_dependencies(const relationships& rel,
++    const cpp::formattables::content_descriptor& cd,
+     cpp::formattables::includes& inc) const {
+ 
+     const std::string sn(cd.name().simple_name());
+@@ -384,6 +405,12 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+     if (is_implementation && is_serialization && is_vector)
+         inc.system().push_back(boost_.include(boost_types::vector));
+ 
++    const bool is_io(cd.facet_type() == cpp_facet_types::io);
++    const bool domain_with_io(is_types &&
++        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
++    if (is_implementation && (is_io || domain_with_io) && is_vector)
++        inc.user().push_back("dogen/needle/std/io/vector_io.hpp");
++
+     /*
+      * std::list
+      */
+@@ -394,6 +421,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+     if (is_implementation && is_serialization && is_list)
+         inc.system().push_back(boost_.include(boost_types::list));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_list)
++        inc.user().push_back("dogen/needle/std/io/list_io.hpp");
++
+     /*
+      * std::deque
+      */
+@@ -404,6 +434,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+     if (is_implementation && is_serialization && is_deque)
+         inc.system().push_back(boost_.include(boost_types::deque));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_deque)
++        inc.user().push_back("dogen/needle/std/io/deque_io.hpp");
++
+     /*
+      * std::set
+      */
+@@ -414,6 +447,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+     if (is_implementation && is_serialization && is_set)
+         inc.system().push_back(boost_.include(boost_types::set));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_set)
++        inc.user().push_back("dogen/needle/std/io/set_io.hpp");
++
+     // FIXME: massive hack. boost doesn't have support for
+     // serialisation so we are using our own hacked headers
+     auto lambda([&](const std::string& type) {
+@@ -435,6 +471,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+         inc.system().push_back(std_.include(std_types::unordered_map));
+     lambda(std_.type(std_types::unordered_map));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_umap)
++        inc.user().push_back("dogen/needle/std/io/unordered_map_io.hpp");
++
+     /*
+      * std::unordered_set
+      */
+@@ -443,6 +482,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+         inc.system().push_back(std_.include(std_types::unordered_set));
+     lambda(std_.type(std_types::unordered_set));
+ 
++    if (is_implementation && (is_io || domain_with_io) && is_uset)
++        inc.user().push_back("dogen/needle/std/io/unordered_set_io.hpp");
++
+     /*
+      * primitives
+      */
+@@ -457,6 +499,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+     const bool is_pair(sn == std_.type(std_types::pair));
+     if (is_header && is_types && is_pair)
+         inc.system().push_back(std_.include(std_types::pair));
++
++    if (is_implementation && (is_io || domain_with_io) && is_pair)
++        inc.user().push_back("dogen/needle/std/io/pair_io.hpp");
+ }
+ 
+ void includer::append_relationship_dependencies(const relationships& rel,
+@@ -498,7 +543,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
+ 
+         // handle all special models first
+         if (n.model_name() == std_.model()) {
+-            append_std_dependencies(cd2, inc);
++            append_std_dependencies(rel, cd2, inc);
+             continue;
+         } else if (n.model_name() == boost_.model()) {
+             append_boost_dependencies(rel, cd2, inc);
+diff --git a/projects/sml_to_cpp/src/types/relationships.cpp b/projects/sml_to_cpp/src/types/relationships.cpp
+index fd0c3fe..a5c254c 100644
+--- a/projects/sml_to_cpp/src/types/relationships.cpp
++++ b/projects/sml_to_cpp/src/types/relationships.cpp
+@@ -29,7 +29,8 @@ relationships::relationships()
+       is_parent_(static_cast<bool>(0)),
+       is_child_(static_cast<bool>(0)),
+       requires_stream_manipulators_(static_cast<bool>(0)),
+-      has_std_pair_(static_cast<bool>(0)) { }
++      has_std_pair_(static_cast<bool>(0)),
++      has_local_properties_(static_cast<bool>(0)) { }
+ 
+ relationships::relationships(relationships&& rhs)
+     : names_(std::move(rhs.names_)),
+@@ -42,7 +43,8 @@ relationships::relationships(relationships&& rhs)
+       is_child_(std::move(rhs.is_child_)),
+       requires_stream_manipulators_(std::move(rhs.requires_stream_manipulators_)),
+       has_std_pair_(std::move(rhs.has_std_pair_)),
+-      visitor_(std::move(rhs.visitor_)) { }
++      visitor_(std::move(rhs.visitor_)),
++      has_local_properties_(std::move(rhs.has_local_properties_)) { }
+ 
+ relationships::relationships(
+     const std::unordered_set<dogen::sml::qname>& names,
+@@ -55,7 +57,8 @@ relationships::relationships(
+     const bool is_child,
+     const bool requires_stream_manipulators,
+     const bool has_std_pair,
+-    const boost::optional<dogen::sml::qname>& visitor)
++    const boost::optional<dogen::sml::qname>& visitor,
++    const bool has_local_properties)
+     : names_(names),
+       forward_decls_(forward_decls),
+       keys_(keys),
+@@ -66,7 +69,8 @@ relationships::relationships(
+       is_child_(is_child),
+       requires_stream_manipulators_(requires_stream_manipulators),
+       has_std_pair_(has_std_pair),
+-      visitor_(visitor) { }
++      visitor_(visitor),
++      has_local_properties_(has_local_properties) { }
+ 
+ void relationships::swap(relationships& other) noexcept {
+     using std::swap;
+@@ -81,6 +85,7 @@ void relationships::swap(relationships& other) noexcept {
+     swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
+     swap(has_std_pair_, other.has_std_pair_);
+     swap(visitor_, other.visitor_);
++    swap(has_local_properties_, other.has_local_properties_);
+ }
+ 
+ bool relationships::operator==(const relationships& rhs) const {
+@@ -94,7 +99,8 @@ bool relationships::operator==(const relationships& rhs) const {
+         is_child_ == rhs.is_child_ &&
+         requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
+         has_std_pair_ == rhs.has_std_pair_ &&
+-        visitor_ == rhs.visitor_;
++        visitor_ == rhs.visitor_ &&
++        has_local_properties_ == rhs.has_local_properties_;
+ }
+ 
+ relationships& relationships::operator=(relationships other) {
+@@ -231,4 +237,12 @@ void relationships::visitor(const boost::optional<dogen::sml::qname>&& v) {
+     visitor_ = std::move(v);
+ }
+ 
++bool relationships::has_local_properties() const {
++    return has_local_properties_;
++}
++
++void relationships::has_local_properties(const bool v) {
++    has_local_properties_ = v;
++}
++
+ } }
+\ No newline at end of file
