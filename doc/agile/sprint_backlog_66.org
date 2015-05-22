@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-22 Fri 15:41]
+Clock summary at [2015-05-22 Fri 17:35]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *52:12* |       |      |
+| *Total time*                                                                | *54:03* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 52:12 |      |
+| Active                                                                      |         | 54:03 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:04 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -49,8 +49,9 @@ Clock summary at [2015-05-22 Fri 15:41]
 | COMPLETED Implement visitor header formatter using stitch                   |         |       | 1:25 |
 | COMPLETED Validate that we are not generating unexpected files              |         |       | 0:52 |
 | COMPLETED Try to improve handling of loops in stitch templates              |         |       | 2:20 |
+| STARTED Implement a basic =needle= model with io support                    |         |       | 5:07 |
 | STARTED Implement class implementation formatter using stitch               |         |       | 3:00 |
-| STARTED Implement a basic =needle= model with io support                    |         |       | 4:02 |
+| STARTED Update legacy formatters to use needle for io                       |         |       | 0:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -818,32 +819,9 @@ appropriate string. It could also have a infix_configuration class:
 We could then supply the infix configuration for prefix and postfix or
 just return it builder style (e.g. prefix().first(" ").last(" "));
 
-*** STARTED Implement class implementation formatter using stitch     :story:
-    CLOCK: [2015-05-20 Wed 18:17]--[2015-05-20 Wed 18:44] =>  0:27
-    CLOCK: [2015-05-20 Wed 17:30]--[2015-05-20 Wed 18:08] =>  0:38
-    CLOCK: [2015-05-19 Tue 21:45]--[2015-05-19 Tue 22:08] =>  0:23
-    CLOCK: [2015-05-19 Tue 17:18]--[2015-05-19 Tue 17:26] =>  0:08
-    CLOCK: [2015-05-19 Tue 16:50]--[2015-05-19 Tue 17:17] =>  0:27
-    CLOCK: [2015-05-19 Tue 16:28]--[2015-05-19 Tue 16:42] =>  0:14
-    CLOCK: [2015-05-19 Tue 14:45]--[2015-05-19 Tue 15:28] =>  0:43
-
-We need to implement a stitch template for the class
-implementation formatter in types, plug it in and start working
-through the diffs.
-
-Problems:
-
-- includes will fail on stream manipulators. This is because we need
-  to check if we require them when generating dependencies, but we
-  have to do so manually since the class info doesn't exist yet. We
-  need to hack this for now - once we have "field gathering" support
-  this will be easier.
-- we need family back for tidy-up string. or perhaps we should have a
-  "requires tidying" property and then needle can provide adequate
-  overloads.
-- we can't implement this without needle support.
-
 *** STARTED Implement a basic =needle= model with io support          :story:
+    CLOCK: [2015-05-22 Fri 17:32]--[2015-05-22 Fri 17:35] =>  0:03
+    CLOCK: [2015-05-22 Fri 16:30]--[2015-05-22 Fri 17:32] =>  1:02
     CLOCK: [2015-05-22 Fri 15:34]--[2015-05-22 Fri 15:41] =>  0:07
     CLOCK: [2015-05-22 Fri 15:01]--[2015-05-22 Fri 15:33] =>  0:32
     CLOCK: [2015-05-22 Fri 14:47]--[2015-05-22 Fri 15:00] =>  0:13
@@ -869,6 +847,39 @@ no domain types as such, just functions for test data, io and hashing.
 
 - add tests for containers of containers with a few permutations
   (containing itself, containing pair, etc).
+- missing types: deque, variant, ptime, date, path, time_duration,
+  ptree.
+
+*** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-05-20 Wed 18:17]--[2015-05-20 Wed 18:44] =>  0:27
+    CLOCK: [2015-05-20 Wed 17:30]--[2015-05-20 Wed 18:08] =>  0:38
+    CLOCK: [2015-05-19 Tue 21:45]--[2015-05-19 Tue 22:08] =>  0:23
+    CLOCK: [2015-05-19 Tue 17:18]--[2015-05-19 Tue 17:26] =>  0:08
+    CLOCK: [2015-05-19 Tue 16:50]--[2015-05-19 Tue 17:17] =>  0:27
+    CLOCK: [2015-05-19 Tue 16:28]--[2015-05-19 Tue 16:42] =>  0:14
+    CLOCK: [2015-05-19 Tue 14:45]--[2015-05-19 Tue 15:28] =>  0:43
+
+We need to implement a stitch template for the class
+implementation formatter in types, plug it in and start working
+through the diffs.
+
+Problems:
+
+- includes will fail on stream manipulators. This is because we need
+  to check if we require them when generating dependencies, but we
+  have to do so manually since the class info doesn't exist yet. We
+  need to hack this for now - once we have "field gathering" support
+  this will be easier.
+- we need family back for tidy-up string. or perhaps we should have a
+  "requires tidying" property and then needle can provide adequate
+  overloads.
+- we can't implement this without needle support.
+
+*** STARTED Update legacy formatters to use needle for io             :story:
+    CLOCK: [2015-05-22 Fri 15:44]--[2015-05-22 Fri 16:30] =>  0:46
+
+- add some hack to includer to pick up these header files.
+- remove io helpers from transformer and regenerate all models.
 
 *** Container details in JSON dump                                    :story:
 

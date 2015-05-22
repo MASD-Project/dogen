@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#define BOOST_NO_IOSTREAM
 #include <ostream>
 #include <sstream>
 #include <functional>
@@ -34,9 +35,11 @@
 #include "dogen/needle/std/io/set_io.hpp"
 #include "dogen/needle/std/io/unordered_set_io.hpp"
 #include "dogen/needle/std/io/vector_io.hpp"
+#include "dogen/needle/std/io/deque_io.hpp"
 #include "dogen/needle/std/io/memory_io.hpp"
 #include "dogen/needle/boost/io/optional_io.hpp"
 #include "dogen/needle/boost/io/shared_ptr_io.hpp"
+#include "dogen/needle/boost/io/variant_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -436,6 +439,36 @@ BOOST_AUTO_TEST_CASE(jsonification_of_vector_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
+BOOST_AUTO_TEST_CASE(jsonification_of_deque_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_deque_produces_expected_result");
+
+    std::ostringstream ss;
+    const std::deque<unsigned int> i0 = { 1 };
+    ss << i0;
+    std::string expected("[ 1 ]");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::deque<bool> i1 = { false };
+    ss << i1;
+    expected = "[ false ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const std::string s("some \" string");
+    const std::deque<std::string> i2 = { s };
+    ss << i2;
+    expected = "[ \"some <quote> string\" ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const test_object to("some string", 123);
+    const std::deque<test_object> i3 = { to };
+    ss << i3;
+    expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+}
+
 BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_std_shared_pointer_produces_expected_result");
 
@@ -493,6 +526,23 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_shared_pointer_produces_expected_res
     const boost::shared_ptr<int> i2;
     ss << i2;
     expected = "\"shared_ptr\": \"empty shared pointer\"";
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+}
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_variant_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_boost_variant_produces_expected_result");
+
+    std::ostringstream ss;
+    const boost::variant<unsigned int, std::string> i0 = "10";
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("{ \"__type__\": \"boost::variant\", "
+        "\"data\": \"10\" }");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+    const boost::variant<unsigned int, std::string> i1 = 15;
+    ss << dogen::needle::core::io::jsonify(i1);
+    expected = "{ \"__type__\": \"boost::variant\", \"data\": 15 }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
