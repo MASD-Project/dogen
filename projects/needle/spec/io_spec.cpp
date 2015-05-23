@@ -42,6 +42,7 @@
 #include "dogen/needle/boost/io/gregorian_date_io.hpp"
 #include "dogen/needle/boost/io/posix_time_io.hpp"
 #include "dogen/needle/boost/io/path_io.hpp"
+#include "dogen/needle/boost/io/ptree_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -586,5 +587,26 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_filesystem_path_produces_expected_re
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
+    // FIXME: backslashes are not being converted for some reason.
+    // const boost::filesystem::path i1("\\a\\b\\c");
+    // ss << dogen::needle::core::io::jsonify(i1);
+    // BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
+
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_ptree_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_ptree_produces_expected_result");
+
+    std::ostringstream ss;
+    using boost::property_tree::ptree;
+    ptree c;
+    c.put("key_2", 0);
+    ptree i0;
+    i0.push_back(ptree::value_type("key_1", c));
+
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("{    \"key_1\":    {        \"key_2\": \"0\"    }}");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+}
+
 BOOST_AUTO_TEST_SUITE_END()

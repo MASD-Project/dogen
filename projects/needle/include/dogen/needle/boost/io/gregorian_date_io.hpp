@@ -34,9 +34,9 @@ namespace needle {
 namespace core {
 namespace io {
 
-inline detail::json_string_type<boost::gregorian::date>
+inline detail::quoted_formatting<const boost::gregorian::date&>
 jsonify(const boost::gregorian::date& v) {
-    return detail::json_string_type<boost::gregorian::date>(v);
+    return detail::quoted_formatting<const boost::gregorian::date&>(v);
 }
 
 } } } }

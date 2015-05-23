@@ -34,14 +34,14 @@ namespace needle {
 namespace core {
 namespace io {
 
-inline detail::json_string_type<boost::posix_time::ptime>
+inline detail::quoted_formatting<const boost::posix_time::ptime&>
 jsonify(const boost::posix_time::ptime& v) {
-    return detail::json_string_type<boost::posix_time::ptime>(v);
+    return detail::quoted_formatting<const boost::posix_time::ptime&>(v);
 }
 
-inline detail::json_string_type<boost::posix_time::time_duration>
+inline detail::quoted_formatting<const boost::posix_time::time_duration&>
 jsonify(const boost::posix_time::time_duration& v) {
-    return detail::json_string_type<boost::posix_time::time_duration>(v);
+    return detail::quoted_formatting<const boost::posix_time::time_duration&>(v);
 }
 
 } } } }

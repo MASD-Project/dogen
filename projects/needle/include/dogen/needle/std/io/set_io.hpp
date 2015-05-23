@@ -34,7 +34,7 @@ namespace std {
 template<typename Key>
 inline ostream& operator<<(ostream& s, const set<Key>& v) {
     using namespace dogen::needle::core::io::detail;
-    s << json_array_type<set<Key> >(v);
+    s << array_formatting<const set<Key>&>(v);
     return s;
 }
 

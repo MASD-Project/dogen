@@ -37,21 +37,21 @@ namespace io {
 namespace detail {
 
 template<typename Value>
-class json_boost_variant_type {
+class visitable_formatting {
 public:
-    explicit json_boost_variant_type(const Value& v) : value_(v) { }
-    const Value& get() const { return value_; }
+    explicit visitable_formatting(Value v) : value_(v) { }
+    Value get() const { return value_; }
 
 private:
-    const Value& value_;
+    Value value_;
 };
 
 }
 
 template<typename... Types>
-inline detail::json_boost_variant_type<boost::variant<Types...> >
+inline detail::visitable_formatting<const boost::variant<Types...>&>
 jsonify(const boost::variant<Types...>& v) {
-    return detail::json_boost_variant_type<boost::variant<Types...> >(v);
+    return detail::visitable_formatting<const boost::variant<Types...>&>(v);
 }
 
 namespace detail {
@@ -71,7 +71,7 @@ private:
 
 template<typename Value>
 inline std::ostream& operator<<(std::ostream& s,
-    const json_boost_variant_type<Value>& p) {
+    const visitable_formatting<Value>& p) {
     s << "{ \"__type__\": \"boost::variant\", \"data\": ";
     boost::apply_visitor(detail::visitor(s), p.get());
     s << " }";

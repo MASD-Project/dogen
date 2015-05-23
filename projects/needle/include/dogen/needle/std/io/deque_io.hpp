@@ -34,7 +34,7 @@ namespace std {
 template<typename Containee>
 inline ostream& operator<<(ostream& s, const deque<Containee>& v) {
     using namespace dogen::needle::core::io::detail;
-    s << json_array_type<deque<Containee> >(v);
+    s << array_formatting<const deque<Containee>&>(v);
     return s;
 }
 

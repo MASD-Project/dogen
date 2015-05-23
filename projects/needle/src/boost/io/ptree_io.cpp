@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_NEEDLE_STD_IO_VECTOR_IO_HPP
-#define DOGEN_NEEDLE_STD_IO_VECTOR_IO_HPP
+#include <sstream>
+#include <boost/algorithm/string.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include "dogen/needle/boost/io/ptree_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace needle {
+namespace core {
+namespace io {
 
-#include <vector>
-#include <ostream>
-#include "dogen/needle/core/io/jsonify.hpp"
+detail::no_op_formatting<std::string>
+jsonify(const boost::property_tree::ptree& v) {
+    std::ostringstream ss;
+    boost::property_tree::write_json(ss, v);
 
-namespace std {
+    std::string content(ss.str());
+    boost::replace_all(content, "\r\n", "");
+    boost::replace_all(content, "\n", "");
 
-template<typename Containee>
-inline ostream& operator<<(ostream& s, const vector<Containee>& v) {
-    using namespace dogen::needle::core::io::detail;
-    s << array_formatting<const vector<Containee>&>(v);
-    return s;
+    return detail::no_op_formatting<std::string>(content);
 }
 
-}
-
-#endif
+} } } }

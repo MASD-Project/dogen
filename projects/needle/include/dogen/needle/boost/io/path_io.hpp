@@ -34,9 +34,9 @@ namespace needle {
 namespace core {
 namespace io {
 
-inline detail::json_string_type<std::string>
+inline detail::quoted_formatting<std::string>
 jsonify(const boost::filesystem::path& v) {
-    return detail::json_string_type<std::string>(v.generic_string());
+    return detail::quoted_formatting<std::string>(v.generic_string());
 }
 
 } } } }

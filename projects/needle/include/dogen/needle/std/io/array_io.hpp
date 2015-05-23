@@ -34,7 +34,7 @@ namespace std {
 template<typename Containee, std::size_t Size>
 inline ostream& operator<<(ostream& s, const array<Containee, Size>& v) {
     using namespace dogen::needle::core::io::detail;
-    s << json_array_type<array<Containee, Size> >(v);
+    s << array_formatting<const array<Containee, Size>&>(v);
     return s;
 }
 

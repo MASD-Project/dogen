@@ -39,79 +39,92 @@ namespace io {
 
 namespace detail {
 
+/**
+ * @brief Do not perform any formatting at all.
+ */
 template<typename Value>
-class json_integer_type {
+class no_op_formatting {
 public:
-    explicit json_integer_type(const Value v) : value_(v) { }
+    explicit no_op_formatting(Value v) : value_(v) { }
     Value get() const { return value_; }
 
 private:
-    const Value value_;
+    Value value_;
 };
 
+/**
+ * @brief Setup formatting for floating point numbers.
+ */
 template<typename Value>
-class json_floating_type {
+class float_formatting {
 public:
-    explicit json_floating_type(const Value v) : value_(v) { }
+    explicit float_formatting(Value v) : value_(v) { }
     Value get() const { return value_; }
 
 private:
-    const Value value_;
+    Value value_;
 };
 
+/**
+ * @brief Output value as a quoted hexadecimal number.
+ */
 template<typename Value>
-class json_char_type {
+class quoted_hex_formatting {
 public:
-    explicit json_char_type(const Value v) : value_(v) { }
+    explicit quoted_hex_formatting(Value v) : value_(v) { }
     Value get() const { return value_; }
 
 private:
-    const Value value_;
+    Value value_;
 };
 
+/**
+ * @brief Output value quoted.
+ */
 template<typename Value>
-class json_string_type {
+class quoted_formatting {
 public:
-    explicit json_string_type(const Value& v) : value_(v) { }
-    const Value& get() const { return value_; }
+    explicit quoted_formatting(Value v) : value_(v) { }
+    Value get() const { return value_; }
 
 private:
-    const Value& value_;
+    Value value_;
 };
 
+/**
+ * @brief First transform value with tidying function, then output it
+ * quoted.
+ */
 template<typename Value>
-class json_tidyable_string_type {
+class quoted_tidied_formatting {
 public:
-    explicit json_tidyable_string_type(const Value& v) : value_(v) { }
-    const Value& get() const { return value_; }
+    explicit quoted_tidied_formatting(Value v) : value_(v) { }
+    Value get() const { return value_; }
 
 private:
-    const Value& value_;
+    Value value_;
 };
 
-class json_bool_type {
+/**
+ * @brief Output value as either true or false (non-quoted).
+ */
+template<typename Value>
+class truth_values_formatting {
 public:
-    explicit json_bool_type(const bool v) : value_(v) { }
-    bool get() const { return value_; }
+    explicit truth_values_formatting(Value v) : value_(v) { }
+    Value get() const { return value_; }
 
 private:
-    const bool value_;
+    Value value_;
 };
 
+/**
+ * @brief Output values as an array.
+ */
 template<typename Value>
-class json_object_type {
+class array_formatting {
 public:
-    explicit json_object_type(const Value& v) : value_(v) { }
-    const Value& get() const { return value_; }
-
-private:
-    const Value& value_;
-};
-
-template<typename Value>
-class json_array_type {
-public:
-    explicit json_array_type(const Value& v) : value_(v) { }
+    explicit array_formatting(const Value& v) : value_(v) { }
     const Value& get() const { return value_; }
 
 private:
@@ -129,34 +142,34 @@ namespace io {
  * @brief Integer handling.
  */
 /**@{*/
-inline detail::json_integer_type<unsigned int>
+inline detail::no_op_formatting<const unsigned int>
 jsonify(const unsigned int v) {
-    return detail::json_integer_type<unsigned int>(v);
+    return detail::no_op_formatting<const unsigned int>(v);
 }
 
-inline detail::json_integer_type<int>
+inline detail::no_op_formatting<const int>
 jsonify(const int v) {
-    return detail::json_integer_type<int>(v);
+    return detail::no_op_formatting<const int>(v);
 }
 
-inline detail::json_integer_type<unsigned short>
+inline detail::no_op_formatting<const unsigned short>
 jsonify(const unsigned short v) {
-    return detail::json_integer_type<unsigned short>(v);
+    return detail::no_op_formatting<const unsigned short>(v);
 }
 
-inline detail::json_integer_type<short>
+inline detail::no_op_formatting<const short>
 jsonify(const short v) {
-    return detail::json_integer_type<short>(v);
+    return detail::no_op_formatting<const short>(v);
 }
 
-inline detail::json_integer_type<unsigned long>
+inline detail::no_op_formatting<const unsigned long>
 jsonify(const unsigned long v) {
-    return detail::json_integer_type<unsigned long>(v);
+    return detail::no_op_formatting<const unsigned long>(v);
 }
 
-inline detail::json_integer_type<long>
+inline detail::no_op_formatting<const long>
 jsonify(const long v) {
-    return detail::json_integer_type<long>(v);
+    return detail::no_op_formatting<const long>(v);
 }
 /**@}*/
 
@@ -164,14 +177,14 @@ jsonify(const long v) {
  * @brief Floating handling.
  */
 /**@{*/
-inline detail::json_floating_type<float>
+inline detail::float_formatting<const float>
 jsonify(const float v) {
-    return detail::json_floating_type<float>(v);
+    return detail::float_formatting<const float>(v);
 }
 
-inline detail::json_floating_type<double>
+inline detail::float_formatting<const double>
 jsonify(const double v) {
-    return detail::json_floating_type<double>(v);
+    return detail::float_formatting<const double>(v);
 }
 /**@}*/
 
@@ -179,57 +192,57 @@ jsonify(const double v) {
  * @brief Char handling.
  */
 /**@{*/
-inline detail::json_char_type<unsigned char>
+inline detail::quoted_hex_formatting<const unsigned char>
 jsonify(const unsigned char v) {
-    return detail::json_char_type<unsigned char>(v);
+    return detail::quoted_hex_formatting<const unsigned char>(v);
 }
 
-inline detail::json_char_type<char>
+inline detail::quoted_hex_formatting<const char>
 jsonify(const char v) {
-    return detail::json_char_type<char>(v);
+    return detail::quoted_hex_formatting<const char>(v);
 }
 /**@}*/
 
 /**
  * @brief Bool handling.
  */
-inline detail::json_bool_type
+inline detail::truth_values_formatting<const bool>
 jsonify(const bool v) {
-    return detail::json_bool_type(v);
+    return detail::truth_values_formatting<const bool>(v);
 }
 
 /**
- * @brief Bool handling.
+ * @brief String handling.
  *
  * For whatever reason we couldn't get this to work when placing this
  * function definition in its own header under std.
  */
-inline detail::json_tidyable_string_type<std::string>
+inline detail::quoted_tidied_formatting<const std::string&>
 jsonify(const std::string& v) {
-    return detail::json_tidyable_string_type<std::string>(v);
+    return detail::quoted_tidied_formatting<const std::string&>(v);
 }
 
 /**
  * @brief Object handling.
  */
 template<typename Value>
-inline detail::json_object_type<Value>
+inline detail::no_op_formatting<const Value&>
 jsonify(const Value& v) {
-    return detail::json_object_type<Value>(v);
+    return detail::no_op_formatting<const Value&>(v);
 }
 
 namespace detail {
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_integer_type<Value>& v) {
+operator<<(std::ostream& s, const no_op_formatting<Value>& v) {
     s << v.get();
     return s;
 }
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_floating_type<Value>& v) {
+operator<<(std::ostream& s, const float_formatting<Value>& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios::fixed, std::ios::floatfield);
     s.setf(std::ios::showpoint);
@@ -240,7 +253,7 @@ operator<<(std::ostream& s, const json_floating_type<Value>& v) {
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_char_type<Value>& v) {
+operator<<(std::ostream& s, const quoted_hex_formatting<Value>& v) {
     boost::io::ios_flags_saver ifs(s);
     s.precision(2);
     s << "\"" << "0x" << std::setfill('0') << std::setw(2) << std::hex
@@ -250,20 +263,21 @@ operator<<(std::ostream& s, const json_char_type<Value>& v) {
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_string_type<Value>& v) {
+operator<<(std::ostream& s, const quoted_formatting<Value>& v) {
     s << "\"" << v.get() << "\"";
     return s;
 }
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_tidyable_string_type<Value>& v) {
+operator<<(std::ostream& s, const quoted_tidied_formatting<Value>& v) {
     s << "\"" << tidy_up_copy(v.get()) << "\"";
     return s;
 }
 
+template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_bool_type& v) {
+operator<<(std::ostream& s, const truth_values_formatting<Value>& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s << v.get();
@@ -272,14 +286,7 @@ operator<<(std::ostream& s, const json_bool_type& v) {
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_object_type<Value>& v) {
-    s << v.get();
-    return s;
-}
-
-template<typename Value>
-inline std::ostream&
-operator<<(std::ostream& s, const json_array_type<Value>& v) {
+operator<<(std::ostream& s, const array_formatting<Value>& v) {
     s << constants::open_array();
     const auto c(v.get());
     for(auto i(c.cbegin()); i != c.end(); ++i) {
