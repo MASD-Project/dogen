@@ -105,6 +105,156 @@ index b5c757c..e66037a 100644
  
      std::unordered_set<std::string> types_done;
      const auto props(ci.properties());
+diff --git a/projects/cpp_formatters/src/types/includes.cpp b/projects/cpp_formatters/src/types/includes.cpp
+index 13cae3f..b5869d8 100644
+--- a/projects/cpp_formatters/src/types/includes.cpp
++++ b/projects/cpp_formatters/src/types/includes.cpp
+@@ -20,6 +20,7 @@
+  */
+ #include <sstream>
+ #include <ostream>
++#include <boost/algorithm/string/predicate.hpp>
+ #include "dogen/sml_to_cpp/types/boost_model_helper.hpp" // FIXME: hack
+ #include "dogen/cpp_formatters/types/includes.hpp"
+ 
+@@ -34,6 +35,7 @@ const std::string close_user("\"");
+ const char angle_bracket('<');
+ const std::string boost_name("boost");
+ const std::string boost_serialization_gregorian("greg_serialize.hpp");
++const std::string last("_last.hpp");
+ 
+ }
+ 
+@@ -55,20 +57,20 @@ bool include_directive_comparer(
+         return false;
+ 
+     if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
+-        const auto npos(std::string::npos);
+-        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
+-        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
++        const bool lhs_is_boost(boost::contains(lhs, boost_name));
++        const bool rhs_is_boost(boost::contains(rhs, boost_name));
+         if (!lhs_is_boost && rhs_is_boost)
+-            return false;
++            return true;
+ 
+         if (lhs_is_boost && !rhs_is_boost)
+-            return true;
++            return false;
+ 
+         // FIXME: hacks for headers that must be last
+         const bool lhs_is_gregorian(
+-            lhs.find_first_of(boost_serialization_gregorian) != npos);
++            boost::contains(lhs, boost_serialization_gregorian));
+         const bool rhs_is_gregorian(
+-            rhs.find_first_of(boost_serialization_gregorian) != npos);
++            boost::contains(lhs, boost_serialization_gregorian));
++
+         if (lhs_is_gregorian && !rhs_is_gregorian)
+             return true;
+ 
+@@ -76,6 +78,15 @@ bool include_directive_comparer(
+             return false;
+     }
+ 
++    // FIXME: hacks for headers that must be last
++    const bool lhs_is_last(boost::contains(lhs, last));
++    const bool rhs_is_last(boost::contains(rhs, last));
++    if (lhs_is_last && !rhs_is_last)
++        return false;
++
++    if (!lhs_is_last && rhs_is_last)
++        return true;
++
+     if (lhs.size() != rhs.size())
+         return lhs.size() < rhs.size();
+ 
+diff --git a/projects/cpp_formatters/src/types/inserter_implementation.cpp b/projects/cpp_formatters/src/types/inserter_implementation.cpp
+index ec89ae3..84fabf4 100644
+--- a/projects/cpp_formatters/src/types/inserter_implementation.cpp
++++ b/projects/cpp_formatters/src/types/inserter_implementation.cpp
+@@ -705,6 +705,10 @@ format_inserter_implementation(const cpp::formattables::class_info& ci) {
+         utility_.blank_line();
+     }
+ 
++    if (!ci.properties().empty())
++        stream_ << indenter_
++                << "using dogen::needle::core::io::jsonify;" << std::endl;
++
+     stream_ << indenter_ << "s " << inserter
+             << utility_.quote(" { ")
+             << std::endl;
+@@ -745,31 +749,38 @@ format_inserter_implementation(const cpp::formattables::class_info& ci) {
+                 << utility_.quote(utility_.quote_escaped(p.name())
+                     + colon) << space_inserter;
+ 
+-        std::ostringstream ss;
+-        if (p.type().is_string_like() && !p.type().is_char_like())
+-            ss << "tidy_up_string(";
+-
++        stream_ << "jsonify(";
+         if (is_inside_class_)
+-            ss << utility_.as_member_variable(p.name());
+-        else
+-            ss << "v." << utility_.as_getter(p.name());
+-
+-        if (p.type().is_filesystem_path()) {
+-            ss << ".generic_string()";
+-            stream_ << utility_.quote_escaped_streamed(ss.str());
+-        } else if (p.type().is_date() || p.type().is_ptime() ||
+-            p.type().is_time_duration()) {
+-            stream_ << utility_.quote_escaped_streamed(ss.str());
+-        } else if (p.type().is_string_like()) {
+-
+-            if (!p.type().is_char_like())
+-                ss << ")";
+-
+-            stream_ << utility_.quote_escaped_streamed(ss.str());
+-        } else if (p.type().is_primitive())
+-            stream_ << ss.str();
++            stream_ << utility_.as_member_variable(p.name());
+         else
+-            stream_ << ss.str();
++            stream_ << "v." << utility_.as_getter(p.name());
++        stream_ << ")";
++
++        // std::ostringstream ss;
++        // if (p.type().is_string_like() && !p.type().is_char_like())
++        //     ss << "tidy_up_string(";
++
++        // if (is_inside_class_)
++        //     ss << utility_.as_member_variable(p.name());
++        // else
++        //     ss << "v." << utility_.as_getter(p.name());
++
++        // if (p.type().is_filesystem_path()) {
++        //     ss << ".generic_string()";
++        //     stream_ << utility_.quote_escaped_streamed(ss.str());
++        // } else if (p.type().is_date() || p.type().is_ptime() ||
++        //     p.type().is_time_duration()) {
++        //     stream_ << utility_.quote_escaped_streamed(ss.str());
++        // } else if (p.type().is_string_like()) {
++
++        //     if (!p.type().is_char_like())
++        //         ss << ")";
++
++        //     stream_ << utility_.quote_escaped_streamed(ss.str());
++        // } else if (p.type().is_primitive())
++        //     stream_ << ss.str();
++        // else
++        //     stream_ << ss.str();
+     }
+ 
+     if (!props.empty()) {
+@@ -780,7 +791,7 @@ format_inserter_implementation(const cpp::formattables::class_info& ci) {
+ 
+     stream_ << utility_.quote(close_bracket) << semi_colon << std::endl;
+     if (!is_inside_class_)
+-        stream_ << indenter_ << "return(s);" << std::endl;
++        stream_ << indenter_ << "return s;" << std::endl;
+ }
+ 
+ } }
 diff --git a/projects/cpp_formatters/src/types/io_implementation.cpp b/projects/cpp_formatters/src/types/io_implementation.cpp
 index cb2bac6..9cbd32a 100644
 --- a/projects/cpp_formatters/src/types/io_implementation.cpp
@@ -118,6 +268,397 @@ index cb2bac6..9cbd32a 100644
  
      using dogen::formatters::cpp::scoped_namespace_formatter;
      scoped_namespace_formatter nsh(stream_, ci.namespaces());
+diff --git a/projects/cpp_formatters/src/types/src_cmakelists.cpp b/projects/cpp_formatters/src/types/src_cmakelists.cpp
+index c88b749..7414caa 100644
+--- a/projects/cpp_formatters/src/types/src_cmakelists.cpp
++++ b/projects/cpp_formatters/src/types/src_cmakelists.cpp
+@@ -78,6 +78,7 @@ void src_cmakelists::format(const cpp::formattables::cmakelists_info& ci) {
+             << std::endl
+             << "add_library(" << mn << " STATIC ${all_files})"
+             << std::endl
++            << "target_link_libraries(" << mn << " needle)" << std::endl
+             << "set_target_properties(" << mn << " PROPERTIES"
+             << std::endl << "    OUTPUT_NAME " << ci.product_name()
+             << (ci.product_name().empty() ? empty : underscore) << mn << ")";
+diff --git a/projects/needle/include/dogen/needle/core/io/jsonify.hpp b/projects/needle/include/dogen/needle/core/io/jsonify.hpp
+index cf6baf9..5d3a90b 100644
+--- a/projects/needle/include/dogen/needle/core/io/jsonify.hpp
++++ b/projects/needle/include/dogen/needle/core/io/jsonify.hpp
+@@ -26,6 +26,7 @@
+ #endif
+ 
+ #include <string>
++#include <cstdint>
+ #include <ostream>
+ #include <iomanip>
+ #include <boost/io/ios_state.hpp>
+@@ -138,99 +139,6 @@ namespace needle {
+ namespace core {
+ namespace io {
+ 
+-/**
+- * @brief Integer handling.
+- */
+-/**@{*/
+-inline detail::no_op_formatting<const unsigned int>
+-jsonify(const unsigned int v) {
+-    return detail::no_op_formatting<const unsigned int>(v);
+-}
+-
+-inline detail::no_op_formatting<const int>
+-jsonify(const int v) {
+-    return detail::no_op_formatting<const int>(v);
+-}
+-
+-inline detail::no_op_formatting<const unsigned short>
+-jsonify(const unsigned short v) {
+-    return detail::no_op_formatting<const unsigned short>(v);
+-}
+-
+-inline detail::no_op_formatting<const short>
+-jsonify(const short v) {
+-    return detail::no_op_formatting<const short>(v);
+-}
+-
+-inline detail::no_op_formatting<const unsigned long>
+-jsonify(const unsigned long v) {
+-    return detail::no_op_formatting<const unsigned long>(v);
+-}
+-
+-inline detail::no_op_formatting<const long>
+-jsonify(const long v) {
+-    return detail::no_op_formatting<const long>(v);
+-}
+-/**@}*/
+-
+-/**
+- * @brief Floating handling.
+- */
+-/**@{*/
+-inline detail::float_formatting<const float>
+-jsonify(const float v) {
+-    return detail::float_formatting<const float>(v);
+-}
+-
+-inline detail::float_formatting<const double>
+-jsonify(const double v) {
+-    return detail::float_formatting<const double>(v);
+-}
+-/**@}*/
+-
+-/**
+- * @brief Char handling.
+- */
+-/**@{*/
+-inline detail::quoted_hex_formatting<const unsigned char>
+-jsonify(const unsigned char v) {
+-    return detail::quoted_hex_formatting<const unsigned char>(v);
+-}
+-
+-inline detail::quoted_hex_formatting<const char>
+-jsonify(const char v) {
+-    return detail::quoted_hex_formatting<const char>(v);
+-}
+-/**@}*/
+-
+-/**
+- * @brief Bool handling.
+- */
+-inline detail::truth_values_formatting<const bool>
+-jsonify(const bool v) {
+-    return detail::truth_values_formatting<const bool>(v);
+-}
+-
+-/**
+- * @brief String handling.
+- *
+- * For whatever reason we couldn't get this to work when placing this
+- * function definition in its own header under std.
+- */
+-inline detail::quoted_tidied_formatting<const std::string&>
+-jsonify(const std::string& v) {
+-    return detail::quoted_tidied_formatting<const std::string&>(v);
+-}
+-
+-/**
+- * @brief Object handling.
+- */
+-template<typename Value>
+-inline detail::no_op_formatting<const Value&>
+-jsonify(const Value& v) {
+-    return detail::no_op_formatting<const Value&>(v);
+-}
+-
+ namespace detail {
+ 
+ template<typename Value>
+diff --git a/projects/needle/include/dogen/needle/core/io/jsonify_last.hpp b/projects/needle/include/dogen/needle/core/io/jsonify_last.hpp
+new file mode 100644
+index 0000000..9583e59
+--- /dev/null
++++ b/projects/needle/include/dogen/needle/core/io/jsonify_last.hpp
+@@ -0,0 +1,42 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_NEEDLE_CORE_IO_JSONIFY_LAST_HPP
++#define DOGEN_NEEDLE_CORE_IO_JSONIFY_LAST_HPP
++
++#include "dogen/needle/core/io/jsonify.hpp"
++
++namespace dogen {
++namespace needle {i
++namespace core {
++namespace io {
++
++/**
++ * @brief Object handling.
++ */
++template<typename Value>
++inline detail::no_op_formatting<const Value&>
++jsonify(const Value& v) {
++    return detail::no_op_formatting<const Value&>(v);
++}
++
++} } } }
++
++#endif
+diff --git a/projects/needle/include/dogen/needle/primitives/io/primitives_io.hpp b/projects/needle/include/dogen/needle/primitives/io/primitives_io.hpp
+new file mode 100644
+index 0000000..13eaf6c
+--- /dev/null
++++ b/projects/needle/include/dogen/needle/primitives/io/primitives_io.hpp
+@@ -0,0 +1,110 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_NEEDLE_PRIMITIVES_IO_HPP
++#define DOGEN_NEEDLE_PRIMITIVES_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/needle/core/io/jsonify.hpp"
++
++namespace dogen {
++namespace needle {
++namespace core {
++namespace io {
++
++/**
++ * @brief Integer handling.
++ */
++/**@{*/
++inline core::io::detail::no_op_formatting<const unsigned int>
++jsonify(const unsigned int v) {
++    return core::io::detail::no_op_formatting<const unsigned int>(v);
++}
++
++inline core::io::detail::no_op_formatting<const int>
++jsonify(const int v) {
++    return core::io::detail::no_op_formatting<const int>(v);
++}
++
++inline core::io::detail::no_op_formatting<const unsigned short>
++jsonify(const unsigned short v) {
++    return core::io::detail::no_op_formatting<const unsigned short>(v);
++}
++
++inline core::io::detail::no_op_formatting<const short>
++jsonify(const short v) {
++    return core::io::detail::no_op_formatting<const short>(v);
++}
++
++inline core::io::detail::no_op_formatting<const unsigned long>
++jsonify(const unsigned long v) {
++    return core::io::detail::no_op_formatting<const unsigned long>(v);
++}
++
++inline core::io::detail::no_op_formatting<const long>
++jsonify(const long v) {
++    return core::io::detail::no_op_formatting<const long>(v);
++}
++/**@}*/
++
++/**
++ * @brief Floating handling.
++ */
++/**@{*/
++inline core::io::detail::float_formatting<const float>
++jsonify(const float v) {
++    return core::io::detail::float_formatting<const float>(v);
++}
++
++inline core::io::detail::float_formatting<const double>
++jsonify(const double v) {
++    return core::io::detail::float_formatting<const double>(v);
++}
++/**@}*/
++
++/**
++ * @brief Char handling.
++ */
++/**@{*/
++inline core::io::detail::quoted_hex_formatting<const unsigned char>
++jsonify(const unsigned char v) {
++    return core::io::detail::quoted_hex_formatting<const unsigned char>(v);
++}
++
++inline core::io::detail::quoted_hex_formatting<const char>
++jsonify(const char v) {
++    return core::io::detail::quoted_hex_formatting<const char>(v);
++}
++/**@}*/
++
++/**
++ * @brief Bool handling.
++ */
++inline core::io::detail::truth_values_formatting<const bool>
++jsonify(const bool v) {
++    return core::io::detail::truth_values_formatting<const bool>(v);
++}
++
++} } } }
++
++#endif
+diff --git a/projects/needle/include/dogen/needle/std/io/primitives_io.hpp b/projects/needle/include/dogen/needle/std/io/primitives_io.hpp
+new file mode 100644
+index 0000000..2ad32f5
+--- /dev/null
++++ b/projects/needle/include/dogen/needle/std/io/primitives_io.hpp
+@@ -0,0 +1,44 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_NEEDLE_STD_IO_PRIMITIVES_IO_HPP
++#define DOGEN_NEEDLE_STD_IO_PRIMITIVES_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <cstdint>
++#include <ostream>
++#include "dogen/needle/core/io/jsonify.hpp"
++
++namespace dogen {
++namespace needle {
++namespace std {
++namespace io {
++
++inline core::io::detail::no_op_formatting<const int>
++jsonify(const std::int8_t v) {
++    return core::io::detail::no_op_formatting<const int>(static_cast<int>(v));
++}
++
++} } } }
++
++#endif
+diff --git a/projects/needle/include/dogen/needle/std/io/string_io.hpp b/projects/needle/include/dogen/needle/std/io/string_io.hpp
+new file mode 100644
+index 0000000..8e80269
+--- /dev/null
++++ b/projects/needle/include/dogen/needle/std/io/string_io.hpp
+@@ -0,0 +1,47 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_NEEDLE_STD_IO_STRING_IO_HPP
++#define DOGEN_NEEDLE_STD_IO_STRING_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++#include <ostream>
++#include "dogen/needle/core/io/jsonify.hpp"
++
++namespace dogen {
++namespace needle {
++namespace std {
++namespace io {
++
++/**
++ * @brief String handling.
++ */
++inline detail::quoted_tidied_formatting<const std::string&>
++jsonify(const std::string& v) {
++    return detail::quoted_tidied_formatting<const std::string&>(v);
++}
++
++} } } }
++
++#endif
 diff --git a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp b/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp
 index 05d3d2f..d7d9985 100644
 --- a/projects/sml_to_cpp/include/dogen/sml_to_cpp/types/includer.hpp
@@ -235,7 +776,7 @@ index 9f48a93..ca9b8c2 100644
      auto i(ao.relationships().find(relationship_types::parents));
      if (i == ao.relationships().end() || i->second.empty())
 diff --git a/projects/sml_to_cpp/src/types/includer.cpp b/projects/sml_to_cpp/src/types/includer.cpp
-index 2aba3c8..499dc99 100644
+index 2aba3c8..130cd6f 100644
 --- a/projects/sml_to_cpp/src/types/includer.cpp
 +++ b/projects/sml_to_cpp/src/types/includer.cpp
 @@ -33,9 +33,6 @@ static logger lg(logger_factory("sml_to_cpp.includer"));
@@ -248,50 +789,55 @@ index 2aba3c8..499dc99 100644
  
  bool contains(const std::set<dogen::config::cpp_facet_types>& f,
      dogen::config::cpp_facet_types ft) {
-@@ -119,6 +116,9 @@ append_implementation_dependencies(const relationships& rel,
-     if (is_header && io_enabled_ && (domain_with_io || is_io))
-         inc.system().push_back(std_.include(std_types::iosfwd));
- 
-+    if (rel.has_local_properties())
-+        inc.user().push_back("dogen/needle/core/io/jsonify.hpp");
-+
-     // algorithm: domain headers need it for the swap function.
+@@ -123,7 +120,7 @@ append_implementation_dependencies(const relationships& rel,
      if (is_header && is_types)
          inc.system().push_back(std_.include(std_types::algorithm));
-@@ -238,6 +238,12 @@ void includer::append_boost_dependencies(const relationships& rel,
+ 
+-    // ostream:
++    // ostream
+     const bool is_implementation(cd.file_type() == file_types::implementation);
+     const bool io_without_iio(is_io && !options_.use_integrated_io());
+     if (is_implementation && io_enabled_ && (domain_with_io || io_without_iio))
+@@ -238,6 +235,18 @@ void includer::append_boost_dependencies(const relationships& rel,
          inc.system().push_back(
              boost_.include(boost_types::serialization_shared_ptr));
  
 +    const bool is_io(cd.facet_type() == cpp_facet_types::io);
 +    const bool domain_with_io(is_types &&
 +        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
-+    if (is_implementation && (is_io || domain_with_io) && is_sp)
++
++    const bool io_headers(rel.has_local_properties() && io_enabled_ &&
++        is_implementation && (domain_with_io ||
++            (is_io && !options_.use_integrated_io() && !rel.is_parent()
++                && !rel.is_child())));
++
++    if (io_headers && is_sp)
 +        inc.user().push_back("dogen/needle/boost/io/shared_ptr_io.hpp");
 +
      /*
       * boost::optional
       */
-@@ -249,6 +255,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -249,6 +258,9 @@ void includer::append_boost_dependencies(const relationships& rel,
          inc.system().push_back(
              boost_.include(boost_types::serialization_optional));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_opt)
++    if (io_headers && is_opt)
 +        inc.user().push_back("dogen/needle/boost/io/optional_io.hpp");
 +
      /*
       * boost::variant
       */
-@@ -260,6 +269,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -260,6 +272,9 @@ void includer::append_boost_dependencies(const relationships& rel,
          inc.system().push_back(
              boost_.include(boost_types::serialization_variant));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_variant)
++    if (io_headers && is_variant)
 +        inc.user().push_back("dogen/needle/boost/io/variant_io.hpp");
 +
      /*
       * boost::filesystem::path
       */
-@@ -272,10 +284,8 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -272,10 +287,8 @@ void includer::append_boost_dependencies(const relationships& rel,
      if (is_implementation && is_test_data && is_path)
          inc.system().push_back(std_.include(std_types::sstream));
  
@@ -299,12 +845,12 @@ index 2aba3c8..499dc99 100644
 -    const bool domain_with_io(is_types &&
 -        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
 -    const bool io_without_iio(is_io && !options_.use_integrated_io());
-+    if (is_implementation && (is_io || domain_with_io) && is_path)
++    if (io_headers && is_path)
 +        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
  
      /*
       * boost::gregorian::date
-@@ -284,6 +294,7 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -284,6 +297,7 @@ void includer::append_boost_dependencies(const relationships& rel,
      if (is_header && is_types && is_date)
          inc.system().push_back(boost_.include(boost_types::gregorian_date));
  
@@ -312,33 +858,48 @@ index 2aba3c8..499dc99 100644
      if (is_date && is_implementation && io_enabled_ &&
          (domain_with_io || io_without_iio))
          inc.system().push_back(boost_.include(boost_types::io_gregorian_date));
-@@ -294,6 +305,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -294,6 +308,9 @@ void includer::append_boost_dependencies(const relationships& rel,
              boost_.include(boost_types::serialization_gregorian_date));
      }
  
-+    if (is_implementation && (is_io || domain_with_io) && is_date)
-+        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
++    if (io_headers && is_date)
++        inc.user().push_back("dogen/needle/boost/io/gregorian_date_io.hpp");
 +
      /*
       * boost::posix_time::ptime
       */
-@@ -327,6 +341,9 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -307,9 +324,13 @@ void includer::append_boost_dependencies(const relationships& rel,
+ 
+     if (is_implementation && is_serialization && is_time) {
+         inc.system().push_back(boost_.include(boost_types::io_time));
+-        inc.system().push_back(boost_.include(boost_types::serialization_ptime));
++        inc.system().push_back(
++            boost_.include(boost_types::serialization_ptime));
+     }
+ 
++    if (io_headers && is_time)
++        inc.user().push_back("dogen/needle/boost/io/posix_time_io.hpp");
++
+     /*
+      * boost::posix_time::time_duration
+      */
+@@ -327,6 +348,9 @@ void includer::append_boost_dependencies(const relationships& rel,
              boost_.include(boost_types::serialization_time_duration));
      }
  
-+    if (is_implementation && (is_io || domain_with_io) && is_duration)
-+        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
++    if (io_headers && is_duration)
++        inc.user().push_back("dogen/needle/boost/io/posix_time_io.hpp");
 +
      /*
       * boost::property_tree::ptree
       */
-@@ -345,10 +362,14 @@ void includer::append_boost_dependencies(const relationships& rel,
+@@ -345,10 +369,14 @@ void includer::append_boost_dependencies(const relationships& rel,
          inc.system().push_back(boost_.include(boost_types::io_ptree));
          inc.system().push_back(boost_.include(boost_types::serialization_ptree));
      }
 +
-+    if (is_implementation && (is_io || domain_with_io) && is_ptree)
-+        inc.user().push_back("dogen/needle/boost/io/path_io.hpp");
++    if (io_headers && is_ptree)
++        inc.user().push_back("dogen/needle/boost/io/ptree_io.hpp");
  }
  
  void includer::
@@ -348,81 +909,103 @@ index 2aba3c8..499dc99 100644
      cpp::formattables::includes& inc) const {
  
      const std::string sn(cd.name().simple_name());
-@@ -384,6 +405,12 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -384,6 +412,18 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
      if (is_implementation && is_serialization && is_vector)
          inc.system().push_back(boost_.include(boost_types::vector));
  
 +    const bool is_io(cd.facet_type() == cpp_facet_types::io);
 +    const bool domain_with_io(is_types &&
 +        (options_.use_integrated_io() || rel.is_parent() || rel.is_child()));
-+    if (is_implementation && (is_io || domain_with_io) && is_vector)
++
++    const bool io_headers(rel.has_local_properties() && io_enabled_ &&
++        is_implementation && (domain_with_io ||
++            (is_io && !options_.use_integrated_io() && !rel.is_parent()
++                && !rel.is_child())));
++
++    if (io_headers && is_vector)
 +        inc.user().push_back("dogen/needle/std/io/vector_io.hpp");
 +
      /*
       * std::list
       */
-@@ -394,6 +421,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -394,6 +434,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
      if (is_implementation && is_serialization && is_list)
          inc.system().push_back(boost_.include(boost_types::list));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_list)
++    if (io_headers && is_list)
 +        inc.user().push_back("dogen/needle/std/io/list_io.hpp");
 +
      /*
       * std::deque
       */
-@@ -404,6 +434,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -404,6 +447,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
      if (is_implementation && is_serialization && is_deque)
          inc.system().push_back(boost_.include(boost_types::deque));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_deque)
++    if (io_headers && is_deque)
 +        inc.user().push_back("dogen/needle/std/io/deque_io.hpp");
 +
      /*
       * std::set
       */
-@@ -414,6 +447,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -414,6 +460,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
      if (is_implementation && is_serialization && is_set)
          inc.system().push_back(boost_.include(boost_types::set));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_set)
++    if (io_headers && is_set)
 +        inc.user().push_back("dogen/needle/std/io/set_io.hpp");
 +
      // FIXME: massive hack. boost doesn't have support for
      // serialisation so we are using our own hacked headers
      auto lambda([&](const std::string& type) {
-@@ -435,6 +471,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -435,6 +484,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
          inc.system().push_back(std_.include(std_types::unordered_map));
      lambda(std_.type(std_types::unordered_map));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_umap)
++    if (io_headers && is_umap)
 +        inc.user().push_back("dogen/needle/std/io/unordered_map_io.hpp");
 +
      /*
       * std::unordered_set
       */
-@@ -443,6 +482,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -443,6 +495,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
          inc.system().push_back(std_.include(std_types::unordered_set));
      lambda(std_.type(std_types::unordered_set));
  
-+    if (is_implementation && (is_io || domain_with_io) && is_uset)
++    if (io_headers && is_uset)
 +        inc.user().push_back("dogen/needle/std/io/unordered_set_io.hpp");
 +
      /*
       * primitives
       */
-@@ -457,6 +499,9 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+@@ -451,12 +506,18 @@ append_std_dependencies(const cpp::formattables::content_descriptor& cd,
+         inc.system().push_back(std_.include(t));
+     }
+ 
++    if (io_headers && std_.is_primitive(sn))
++        inc.user().push_back("dogen/needle/std/io/primitives_io.hpp");
++
+     /*
+      * std::pair
+      */
      const bool is_pair(sn == std_.type(std_types::pair));
      if (is_header && is_types && is_pair)
          inc.system().push_back(std_.include(std_types::pair));
 +
-+    if (is_implementation && (is_io || domain_with_io) && is_pair)
++    if (io_headers && is_pair)
 +        inc.user().push_back("dogen/needle/std/io/pair_io.hpp");
  }
  
  void includer::append_relationship_dependencies(const relationships& rel,
-@@ -498,7 +543,7 @@ void includer::append_relationship_dependencies(const relationships& rel,
+@@ -496,16 +557,28 @@ void includer::append_relationship_dependencies(const relationships& rel,
+         auto cd2(cd);
+         cd2.name(n);
  
++        const bool is_io(cd.facet_type() == cpp_facet_types::io);
++        const bool domain_with_io(is_types &&
++            (options_.use_integrated_io() || rel.is_parent() ||
++                rel.is_child()));
++
          // handle all special models first
          if (n.model_name() == std_.model()) {
 -            append_std_dependencies(cd2, inc);
@@ -430,6 +1013,53 @@ index 2aba3c8..499dc99 100644
              continue;
          } else if (n.model_name() == boost_.model()) {
              append_boost_dependencies(rel, cd2, inc);
+             continue;
+         } else if (n.model_name() == hardware_model ||
+-            n.model_name().empty())
++            n.model_name().empty()) {
++
++            if (io_enabled_ && is_implementation && (domain_with_io ||
++                    (is_io && !options_.use_integrated_io() &&
++                        !rel.is_parent() && !rel.is_child())))
++                inc.user().push_back("dogen/needle/primitives/"
++                    "io/primitives_io.hpp");
+             continue;
++        }
+ 
+         /*
+          * rule 2: primitives never require header files. Not quite
+@@ -542,7 +615,6 @@ void includer::append_relationship_dependencies(const relationships& rel,
+          * dependency
+          */
+         const bool is_hash(cd.facet_type() == cpp_facet_types::hash);
+-        const bool is_io(cd.facet_type() == cpp_facet_types::io);
+         const bool is_ser(cd.facet_type() == cpp_facet_types::serialization);
+         const bool is_td(cd.facet_type() == cpp_facet_types::test_data);
+         const bool is_non_domain(is_hash || is_io || is_td || is_ser);
+@@ -550,6 +622,12 @@ void includer::append_relationship_dependencies(const relationships& rel,
+         if (!is_visitor && is_implementation && is_non_domain)
+             inc.user().push_back(header_dependency(n, cd.facet_type(), main));
+ 
++        if (io_enabled_ && is_implementation && (domain_with_io ||
++                (is_io && !options_.use_integrated_io() &&
++                    !rel.is_parent() && !rel.is_child())))
++            inc.user().push_back("dogen/needle/core/"
++                "io/jsonify_last.hpp");
++
+         /*
+          * rule 6: Domain implementation needs to include any files
+          * that the domain header forwarded.
+@@ -563,10 +641,6 @@ void includer::append_relationship_dependencies(const relationships& rel,
+          * rule 7: parents and children with integrated IO require IO
+          * headers in domain implementation.
+          */
+-        const bool domain_with_io(is_types &&
+-            (options_.use_integrated_io() || rel.is_parent() ||
+-                rel.is_child()));
+-
+         const auto io(cpp_facet_types::io);
+         if (!is_visitor && is_implementation && io_enabled_ && domain_with_io)
+             inc.user().push_back(header_dependency(n, io, main));
 diff --git a/projects/sml_to_cpp/src/types/relationships.cpp b/projects/sml_to_cpp/src/types/relationships.cpp
 index fd0c3fe..a5c254c 100644
 --- a/projects/sml_to_cpp/src/types/relationships.cpp
