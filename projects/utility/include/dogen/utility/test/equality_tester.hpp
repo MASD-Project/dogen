@@ -54,6 +54,7 @@ public:
         BOOST_CHECK(a == b);
         BOOST_CHECK(b == a);
         BOOST_CHECK(!(a != b));
+        log_if_test_has_failed();
     }
 
     static void an_object_is_equal_to_itself(const entity_type& a) {
@@ -64,6 +65,7 @@ public:
 
         BOOST_CHECK(a == a);
         BOOST_CHECK(!(a != a));
+        log_if_test_has_failed();
     }
 
     /**
@@ -82,6 +84,7 @@ public:
 
         BOOST_CHECK(!(a == b));
         BOOST_CHECK(a != b);
+        log_if_test_has_failed();
     }
 };
 

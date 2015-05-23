@@ -52,6 +52,7 @@ public:
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(!(a < b));
         BOOST_CHECK(!(b < a));
+        log_if_test_has_failed();
     }
 
     static void unequal_objects_are_not_both_smaller_and_greater_than_each_other() {
@@ -66,6 +67,7 @@ public:
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
         BOOST_CHECK(a != b);
         BOOST_CHECK((a < b && (!(b < a))) || (b < a && (!(a < b))));
+        log_if_test_has_failed();
     }
 };
 

@@ -60,6 +60,7 @@ public:
         const entity_type c = std::move(entity_type(a));
         BOOST_LOG_SEV(lg, debug) << "c: " << c;
         BOOST_CHECK(a == c);
+        log_if_test_has_failed();
     }
 
     /**
@@ -80,6 +81,7 @@ public:
         const entity_type c = std::move(entity_type(a));
         BOOST_LOG_SEV(lg, debug) << "c: " << c;
         BOOST_CHECK(a == c);
+        log_if_test_has_failed();
     }
 
     /**
@@ -99,6 +101,7 @@ public:
         const entity_type c = entity_type(a);
         BOOST_LOG_SEV(lg, debug) << "c: " << c;
         BOOST_CHECK(a == c);
+        log_if_test_has_failed();
     }
 };
 

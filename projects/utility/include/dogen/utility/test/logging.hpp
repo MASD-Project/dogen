@@ -26,12 +26,23 @@
 #endif
 
 #include <sstream>
+#include <boost/test/results_collector.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/scoped_life_cycle_manager.hpp"
 
 namespace dogen {
 namespace utility {
 namespace test {
+
+inline void log_if_test_has_failed() {
+    using namespace dogen::utility::log;
+    logger lg(logger_factory("utility.test"));
+
+    namespace ut = boost::unit_test;
+    auto test_id(ut::framework::current_test_case().p_id);
+    if (!ut::results_collector.results(test_id).passed())
+        BOOST_LOG_SEV(lg, error) << "test failed.";
+}
 
 inline dogen::utility::log::scoped_life_cycle_manager
 scoped_life_cycle_manager_factory(std::string test_module,

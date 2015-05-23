@@ -84,6 +84,7 @@ private:
         }
         BOOST_LOG_SEV(lg, debug) << "after load: " << jsonify(b);
         BOOST_CHECK(a == b);
+        log_if_test_has_failed();
     }
 
 public:

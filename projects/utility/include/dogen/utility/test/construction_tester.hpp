@@ -59,6 +59,7 @@ public:
         a = a;
         BOOST_LOG_SEV(lg, debug) << "a after assignment: " << jsonify(a);
         BOOST_CHECK(a == b);
+        log_if_test_has_failed();
     }
 
     /**

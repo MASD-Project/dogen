@@ -57,6 +57,7 @@ public:
         BOOST_CHECK(hasher(a) == hasher(b));
         BOOST_LOG_SEV(lg, debug) << "Hash a: " << hasher(a);
         BOOST_LOG_SEV(lg, debug) << "Hash b: " << hasher(b);
+        log_if_test_has_failed();
     }
 
     static void unequal_objects_must_generate_different_hashes() {
@@ -75,6 +76,7 @@ public:
         BOOST_LOG_SEV(lg, debug) << "hash a: " << hasher(a);
         BOOST_LOG_SEV(lg, debug) << "hash b: " << hasher(b);
         BOOST_CHECK(hasher(a) != hasher(b));
+        log_if_test_has_failed();
     }
 };
 

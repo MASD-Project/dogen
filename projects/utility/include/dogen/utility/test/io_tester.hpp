@@ -51,6 +51,7 @@ public:
         std::stringstream s;
         s << a;
         BOOST_CHECK(json_validator::validate(s));
+        log_if_test_has_failed();
     }
 };
 
