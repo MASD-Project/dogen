@@ -10,8 +10,8 @@ what guides us when we think about the product.
 
 The vision for Dogen is:
 
-- to create a suite of code generation tools that useful to developers
+- To create a suite of code generation tools that useful to developers
   in multiple programming languages, and integrated with IDEs and text
   editors;
-- to make this suite extensible, such that users can come up with uses
+- To make this suite extensible, such that users can come up with uses
   for it far different than anything we envisioned.
