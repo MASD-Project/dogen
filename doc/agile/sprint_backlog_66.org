@@ -907,10 +907,19 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Update legacy formatters to use needle for io             :story:
+    CLOCK: [2015-05-23 Sat 22:38]--[2015-05-23 Sat 22:46] =>  0:08
+    CLOCK: [2015-05-23 Sat 21:18]--[2015-05-23 Sat 22:37] =>  1:19
+    CLOCK: [2015-05-23 Sat 19:24]--[2015-05-23 Sat 21:05] =>  1:41
     CLOCK: [2015-05-22 Fri 15:44]--[2015-05-22 Fri 16:30] =>  0:46
 
 - add some hack to includer to pick up these header files.
 - remove io helpers from transformer and regenerate all models.
+
+This is actually quite a complicated thing we are trying to do
+here. The problem has to do with partial ordering of the template
+specialisations. It is very difficult (if not impossible) to order the
+specialisations correctly. We need to figure out a simpler of doing
+this.
 
 *** Container details in JSON dump                                    :story:
 
