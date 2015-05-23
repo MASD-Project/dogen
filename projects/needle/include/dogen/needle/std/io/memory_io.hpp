@@ -32,10 +32,10 @@
 namespace std {
 
 template<typename T>
-inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
+inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& v) {
     using namespace dogen::needle::core::io;
-    if (p)
-        s << jsonify(*p);
+    if (v)
+        s << jsonify(*v);
     else
         s << "\"shared_ptr\": \"empty shared pointer\"";
 

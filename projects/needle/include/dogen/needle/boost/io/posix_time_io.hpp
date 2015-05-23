@@ -34,40 +34,16 @@ namespace needle {
 namespace core {
 namespace io {
 
-namespace detail {
-
-template<typename Value>
-class json_boost_posix_time_type {
-public:
-    explicit json_boost_posix_time_type(const Value& v) : value_(v) { }
-    const Value& get() const { return value_; }
-
-private:
-    const Value& value_;
-};
-
-}
-
-inline detail::json_boost_posix_time_type<boost::posix_time::ptime>
+inline detail::json_string_type<boost::posix_time::ptime>
 jsonify(const boost::posix_time::ptime& v) {
-    return detail::json_boost_posix_time_type<boost::posix_time::ptime>(v);
+    return detail::json_string_type<boost::posix_time::ptime>(v);
 }
 
-inline detail::json_boost_posix_time_type<boost::posix_time::time_duration>
+inline detail::json_string_type<boost::posix_time::time_duration>
 jsonify(const boost::posix_time::time_duration& v) {
-    return detail::json_boost_posix_time_type<
-        boost::posix_time::time_duration>(v);
+    return detail::json_string_type<boost::posix_time::time_duration>(v);
 }
 
-namespace detail {
-
-template<typename Value>
-inline std::ostream& operator<<(std::ostream& s,
-    const json_boost_posix_time_type<Value>& p) {
-    s << "\"" << p.get() << "\"";
-    return s;
-}
-
-} } } } }
+} } } }
 
 #endif

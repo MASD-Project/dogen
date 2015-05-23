@@ -28,21 +28,14 @@
 #include <ostream>
 #include <unordered_set>
 #include "dogen/needle/core/io/jsonify.hpp"
-#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Key>
-inline ostream& operator<<(ostream& s, const unordered_set<Key>& set) {
-    using namespace dogen::needle::core::io;
-    s << constants::open_array();
-    for(auto i(set.cbegin()); i != set.end(); ++i) {
-        if (i != set.begin())
-            s << constants::separator();
-        s << jsonify(*i);
-    }
-    s << constants::close_array();
-    return(s);
+inline ostream& operator<<(ostream& s, const unordered_set<Key>& v) {
+    using namespace dogen::needle::core::io::detail;
+    s << json_array_type<unordered_set<Key> >(v);
+    return s;
 }
 
 }

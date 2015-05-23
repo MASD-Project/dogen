@@ -30,6 +30,7 @@
 #include <iomanip>
 #include <boost/io/ios_state.hpp>
 #include "dogen/needle/core/io/tidy_up.hpp"
+#include "dogen/needle/core/io/constants.hpp"
 
 namespace dogen {
 namespace needle {
@@ -78,6 +79,16 @@ private:
     const Value& value_;
 };
 
+template<typename Value>
+class json_tidyable_string_type {
+public:
+    explicit json_tidyable_string_type(const Value& v) : value_(v) { }
+    const Value& get() const { return value_; }
+
+private:
+    const Value& value_;
+};
+
 class json_bool_type {
 public:
     explicit json_bool_type(const bool v) : value_(v) { }
@@ -88,9 +99,19 @@ private:
 };
 
 template<typename Value>
-class json_complex_type {
+class json_object_type {
 public:
-    explicit json_complex_type(const Value& v) : value_(v) { }
+    explicit json_object_type(const Value& v) : value_(v) { }
+    const Value& get() const { return value_; }
+
+private:
+    const Value& value_;
+};
+
+template<typename Value>
+class json_array_type {
+public:
+    explicit json_array_type(const Value& v) : value_(v) { }
     const Value& get() const { return value_; }
 
 private:
@@ -107,7 +128,7 @@ namespace io {
 /**
  * @brief Integer handling.
  */
-/*@{*/
+/**@{*/
 inline detail::json_integer_type<unsigned int>
 jsonify(const unsigned int v) {
     return detail::json_integer_type<unsigned int>(v);
@@ -137,12 +158,12 @@ inline detail::json_integer_type<long>
 jsonify(const long v) {
     return detail::json_integer_type<long>(v);
 }
-/*@}*/
+/**@}*/
 
 /**
  * @brief Floating handling.
  */
-/*@{*/
+/**@{*/
 inline detail::json_floating_type<float>
 jsonify(const float v) {
     return detail::json_floating_type<float>(v);
@@ -152,12 +173,12 @@ inline detail::json_floating_type<double>
 jsonify(const double v) {
     return detail::json_floating_type<double>(v);
 }
-/*@}*/
+/**@}*/
 
 /**
  * @brief Char handling.
  */
-/*@{*/
+/**@{*/
 inline detail::json_char_type<unsigned char>
 jsonify(const unsigned char v) {
     return detail::json_char_type<unsigned char>(v);
@@ -167,15 +188,7 @@ inline detail::json_char_type<char>
 jsonify(const char v) {
     return detail::json_char_type<char>(v);
 }
-/*@}*/
-
-/**
- * @brief String handling.
- */
-inline detail::json_string_type<std::string>
-jsonify(const std::string& v) {
-    return detail::json_string_type<std::string>(v);
-}
+/**@}*/
 
 /**
  * @brief Bool handling.
@@ -186,12 +199,23 @@ jsonify(const bool v) {
 }
 
 /**
- * @brief Handling of any other object.
+ * @brief Bool handling.
+ *
+ * For whatever reason we couldn't get this to work when placing this
+ * function definition in its own header under std.
+ */
+inline detail::json_tidyable_string_type<std::string>
+jsonify(const std::string& v) {
+    return detail::json_tidyable_string_type<std::string>(v);
+}
+
+/**
+ * @brief Object handling.
  */
 template<typename Value>
-inline detail::json_complex_type<Value>
+inline detail::json_object_type<Value>
 jsonify(const Value& v) {
-    return detail::json_complex_type<Value>(v);
+    return detail::json_object_type<Value>(v);
 }
 
 namespace detail {
@@ -227,6 +251,13 @@ operator<<(std::ostream& s, const json_char_type<Value>& v) {
 template<typename Value>
 inline std::ostream&
 operator<<(std::ostream& s, const json_string_type<Value>& v) {
+    s << "\"" << v.get() << "\"";
+    return s;
+}
+
+template<typename Value>
+inline std::ostream&
+operator<<(std::ostream& s, const json_tidyable_string_type<Value>& v) {
     s << "\"" << tidy_up_copy(v.get()) << "\"";
     return s;
 }
@@ -241,8 +272,22 @@ operator<<(std::ostream& s, const json_bool_type& v) {
 
 template<typename Value>
 inline std::ostream&
-operator<<(std::ostream& s, const json_complex_type<Value>& v) {
+operator<<(std::ostream& s, const json_object_type<Value>& v) {
     s << v.get();
+    return s;
+}
+
+template<typename Value>
+inline std::ostream&
+operator<<(std::ostream& s, const json_array_type<Value>& v) {
+    s << constants::open_array();
+    const auto c(v.get());
+    for(auto i(c.cbegin()); i != c.end(); ++i) {
+        if (i != c.begin())
+            s << constants::separator();
+        s << jsonify(*i);
+    }
+    s << constants::close_array();
     return s;
 }
 

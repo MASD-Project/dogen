@@ -18,26 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_NEEDLE_STD_IO_ARRAY_IO_HPP
-#define DOGEN_NEEDLE_STD_IO_ARRAY_IO_HPP
+#ifndef DOGEN_NEEDLE_BOOST_IO_PATH_IO_HPP
+#define DOGEN_NEEDLE_BOOST_IO_PATH_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <array>
 #include <ostream>
+#include <boost/filesystem/path.hpp>
 #include "dogen/needle/core/io/jsonify.hpp"
 
-namespace std {
+namespace dogen {
+namespace needle {
+namespace core {
+namespace io {
 
-template<typename Containee, std::size_t Size>
-inline ostream& operator<<(ostream& s, const array<Containee, Size>& v) {
-    using namespace dogen::needle::core::io::detail;
-    s << json_array_type<array<Containee, Size> >(v);
-    return s;
+inline detail::json_string_type<std::string>
+jsonify(const boost::filesystem::path& v) {
+    return detail::json_string_type<std::string>(v.generic_string());
 }
 
-}
+} } } }
 
 #endif

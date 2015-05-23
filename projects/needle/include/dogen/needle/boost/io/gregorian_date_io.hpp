@@ -34,33 +34,11 @@ namespace needle {
 namespace core {
 namespace io {
 
-namespace detail {
-
-class json_boost_gregorian_date_type {
-public:
-    explicit json_boost_gregorian_date_type(
-        const boost::gregorian::date& v) : value_(v) { }
-    const boost::gregorian::date& get() const { return value_; }
-
-private:
-    const boost::gregorian::date& value_;
-};
-
-}
-
-inline detail::json_boost_gregorian_date_type
+inline detail::json_string_type<boost::gregorian::date>
 jsonify(const boost::gregorian::date& v) {
-    return detail::json_boost_gregorian_date_type(v);
+    return detail::json_string_type<boost::gregorian::date>(v);
 }
 
-namespace detail {
-
-inline std::ostream& operator<<(std::ostream& s,
-    const json_boost_gregorian_date_type& p) {
-    s << "\"" << p.get() << "\"";
-    return s;
-}
-
-} } } } }
+} } } }
 
 #endif

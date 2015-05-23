@@ -28,23 +28,14 @@
 #include <unordered_map>
 #include <ostream>
 #include "dogen/needle/std/io/pair_io.hpp"
-#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Key, typename Value>
-inline ostream& operator<<(ostream& s,
-    const std::unordered_map<Key, Value>& m) {
-
-    using namespace dogen::needle::core::io;
-    s << constants::open_array();
-    for(auto i(m.cbegin()); i != m.end(); ++i) {
-        if (i != m.begin())
-            s << constants::separator();
-        s << *i;
-    }
-    s << constants::close_array();
-    return(s);
+inline ostream& operator<<(ostream& s, const unordered_map<Key, Value>& v) {
+    using namespace dogen::needle::core::io::detail;
+    s << json_array_type<unordered_map<Key, Value> >(v);
+    return s;
 }
 
 }

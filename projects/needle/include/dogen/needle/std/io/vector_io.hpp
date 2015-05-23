@@ -28,21 +28,14 @@
 #include <vector>
 #include <ostream>
 #include "dogen/needle/core/io/jsonify.hpp"
-#include "dogen/needle/core/io/constants.hpp"
 
 namespace std {
 
 template<typename Containee>
 inline ostream& operator<<(ostream& s, const vector<Containee>& v) {
-    using namespace dogen::needle::core::io;
-    s << constants::open_array();
-    for(auto i(v.cbegin()); i != v.cend(); ++i) {
-        if (i != v.begin())
-            s << constants::separator();
-        s << jsonify(*i);
-    }
-    s << constants::close_array();
-    return(s);
+    using namespace dogen::needle::core::io::detail;
+    s << json_array_type<vector<Containee> >(v);
+    return s;
 }
 
 }

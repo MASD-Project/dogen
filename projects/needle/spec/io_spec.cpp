@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_NO_IOSTREAM
 #include <ostream>
 #include <sstream>
 #include <functional>
@@ -42,6 +41,7 @@
 #include "dogen/needle/boost/io/variant_io.hpp"
 #include "dogen/needle/boost/io/gregorian_date_io.hpp"
 #include "dogen/needle/boost/io/posix_time_io.hpp"
+#include "dogen/needle/boost/io/path_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 
 namespace {
@@ -223,11 +223,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_array_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::array<test_object, 2> i2 = {{ to, to }};
     ss << i2;
-    expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
-        "{ \"s\": \"some string\", \"i\": 123 } ]";
+    expected = "[ { \"s\": \"some <quote> string\", \"i\": 123 }, "
+        "{ \"s\": \"some <quote> string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -247,11 +247,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_forward_list_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::forward_list<test_object> i2 = {{ to, to }};
     ss << i2;
-    expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
-        "{ \"s\": \"some string\", \"i\": 123 } ]";
+    expected = "[ { \"s\": \"some <quote> string\", \"i\": 123 }, "
+        "{ \"s\": \"some <quote> string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -271,11 +271,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_list_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::list<test_object> i2 = {{ to, to }};
     ss << i2;
-    expected = "[ { \"s\": \"some string\", \"i\": 123 }, "
-        "{ \"s\": \"some string\", \"i\": 123 } ]";
+    expected = "[ { \"s\": \"some <quote> string\", \"i\": 123 }, "
+        "{ \"s\": \"some <quote> string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -295,11 +295,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_pair_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::pair<unsigned int, test_object> i2 = { 1, to };
     ss << i2;
     expected = "{ \"key\": 1, \"value\": { \"s\": "
-        "\"some string\", \"i\": 123 } }";
+        "\"some <quote> string\", \"i\": 123 } }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -319,11 +319,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_map_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::map<unsigned int, test_object> i2 = { {1, to} };
     ss << i2;
     expected = "[ { \"key\": 1, \"value\": { \"s\": "
-        "\"some string\", \"i\": 123 } } ]";
+        "\"some <quote> string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -343,11 +343,11 @@ BOOST_AUTO_TEST_CASE(jsonification_of_unordered_map_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
-    const test_object to("some string", 123);
+    const test_object to("some \" string", 123);
     const std::unordered_map<unsigned int, test_object> i2 = { {1, to} };
     ss << i2;
     expected = "[ { \"key\": 1, \"value\": { \"s\": "
-        "\"some string\", \"i\": 123 } } ]";
+        "\"some <quote> string\", \"i\": 123 } } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -576,4 +576,15 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_posix_time_produces_expected_result)
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
+BOOST_AUTO_TEST_CASE(jsonification_of_boost_filesystem_path_produces_expected_result) {
+    SETUP_TEST_LOG_SOURCE("jsonification_of_filesystem_path_produces_expected_result");
+
+    std::ostringstream ss;
+    const boost::filesystem::path i0("/a/b/c");
+    ss << dogen::needle::core::io::jsonify(i0);
+    std::string expected("\"/a/b/c\"");
+    BOOST_CHECK(asserter::assert_object(expected, ss.str()));
+    ss.str("");
+
+}
 BOOST_AUTO_TEST_SUITE_END()
