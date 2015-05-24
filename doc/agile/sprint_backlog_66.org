@@ -15,13 +15,13 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree
-Clock summary at [2015-05-23 Sat 19:23]
+Clock summary at [2015-05-24 Sun 22:47]
 
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *57:33* |       |      |
+| *Total time*                                                                | *60:58* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Active                                                                      |         | 57:33 |      |
+| Active                                                                      |         | 60:58 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:04 |
 | COMPLETED Add a validate JSON target                                        |         |       | 0:41 |
 | COMPLETED Add support for =inclusion_required= at formatter level           |         |       | 1:09 |
@@ -51,7 +51,7 @@ Clock summary at [2015-05-23 Sat 19:23]
 | COMPLETED Try to improve handling of loops in stitch templates              |         |       | 2:20 |
 | COMPLETED Implement a basic =needle= model with io support                  |         |       | 8:37 |
 | STARTED Implement class implementation formatter using stitch               |         |       | 3:00 |
-| STARTED Update legacy formatters to use needle for io                       |         |       | 0:46 |
+| STARTED Update legacy formatters to use needle for io                       |         |       | 4:11 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -907,6 +907,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Update legacy formatters to use needle for io             :story:
+    CLOCK: [2015-05-24 Sun 22:30]--[2015-05-24 Sun 22:47] =>  0:17
     CLOCK: [2015-05-23 Sat 22:38]--[2015-05-23 Sat 22:46] =>  0:08
     CLOCK: [2015-05-23 Sat 21:18]--[2015-05-23 Sat 22:37] =>  1:19
     CLOCK: [2015-05-23 Sat 19:24]--[2015-05-23 Sat 21:05] =>  1:41
@@ -920,6 +921,30 @@ here. The problem has to do with partial ordering of the template
 specialisations. It is very difficult (if not impossible) to order the
 specialisations correctly. We need to figure out a simpler of doing
 this.
+
+More thoughts:
+
+- the basic problem is that we tried to use a template function to
+  dispatch to the appropriate JSON formatting. The problem with this
+  is that we then enter the world of [[https://msdn.microsoft.com/en-us/library/zaycz069.aspx][partial ordering]], which means
+  that depending on the order in which functions are declared, we may
+  get different results. And since we declared the most general
+  function in the jsonify header, it was never going to work.
+- however, even placing it in a special header that is always last is
+  not sufficient; not quite sure why that is, but we still seem to
+  pick the wrong function in certain cases. Basically, relying on
+  ordering is very brittle and will result in hard-to-debug
+  problems. In addition, we don't really want to have complex rules of
+  ordering the includes because then we need to provide a way to
+  express those rules in the meta-data, adding a whole load of
+  complexity across the dogen stack for very little gain.
+- an alternative to this problem is to rely on overloading without
+  templates, a la =operator<<=. We don't actually need to make
+  =jsonify= a generic function; all we need is for the JSON formatting
+  types to be generic. We can then define a large number of
+  (non-generic) overloads that return instantiations of the JSON
+  formatting types. Overloading rules are a lot more amenable to
+  reasoning than partial ordering.
 
 *** Container details in JSON dump                                    :story:
 
