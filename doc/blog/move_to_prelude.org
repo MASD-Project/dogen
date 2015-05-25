@@ -1,0 +1,367 @@
+#+title: Nerd Food: A Prelude of Things to Come
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+This sprint I found myself making one of those historical transitions:
+moving my entire Emacs infrastructure from a old, creaking at the
+seams approach, to the new all-singing-all-dancing way of doing
+things. This post documents this transition.
+
+* The Road to Cunene
+
+** The Early Days
+
+I have been using [[http://www.gnu.org/software/emacs/][Emacs]] since around 1998. One of the biggest reasons
+to use Emacs is its infinite configurability. To call Emacs
+"configurable" is a bit like saying [[http://en.wikipedia.org/wiki/Leonhard_Euler][Euler]] wasn't bad with numbers. In
+truth - and it takes you a while to really grok this - Emacs is just a
+lisp platform with a _giant_ editing library built on top; a library
+that keeps on getting extended on a daily basis by a large number of
+Emacs users. And, of course, you configure Emacs using lisp, so that
+the lines between "configuration" and "development" are, at best,
+blurry.
+
+But lets go back to the beginning. Like every other Emacs newbie in
+those days, I too started with a plain (i.e. non-configured) Emacs and
+soon evolved to a very simple _[[http://www.emacswiki.org/emacs/InitFile][.emacs]]_ - this file being one of the
+possible places in which to store its configuration. The reason why
+almost all Emacs users start configuring Emacs very early on is
+because its defaults are astonishingly atrocious. It still amazes me
+to the day that some people are able to use plain Emacs and come out
+at the other end as Emacs users. In some ways, I guess it is a test of
+fire: do you _really_ want to use Emacs? There are two responses to
+this test: most give up, but a few persist and soon start changing the
+editor to behave in a slightly more sane manner.
+
+The _.emacs_ starts small, especially if you are not familiar with
+lisp. Sooner or later it occurs to you that, _surely_, someone must
+have already done one of these before, and then you find the amazing
+world of _.emacs_ "development". This opens up entire new vistas of
+the Emacs landscape, because with each _.emacs_ you find, you discover
+untold numbers of configuration knobs and - much more importantly -
+many new _modes_ to install. In Emacs lingo, a _mode_ is kind of like
+a "plug-in" for Eclipse or Visual Studio users. But this is just an
+approximation; as with everything "Emacs", there is actually no real
+equivalent way of describing Emacs terminology with analogies outside
+of Emacs. The problem with IDEs and most other editors is that they
+can only be extended in ways that their designers thought useful. In
+Emacs, _everything_ is extensible. And I do mean _everything_. I
+remember the day I realised that a key press was really just the
+invocation of the =self-insert-command= function and, like any other
+function, it too could be changed in a myriad of ways.
+
+But I digress. As with most users, my _.emacs_ evolved over the years
+as I found more and more modes. I soon found that it was very painful
+to keep all my machines with the same setup; invariably I would change
+something at work but forget to change it at home or Uni or
+vice-versa. To make matters worse, work was on Windows. And in those
+days, there was no Emacs package management support, so you ended up
+copying lots of modes around. Life was painful and brute in my first
+decade of Emacs.
+
+** The Cunene Years
+
+Around six years ago, things got a lot better: I started to use git in
+anger, refactored my _.emacs_ into something slightly saner and called
+it Cunene - after [[http://en.wikipedia.org/wiki/Cunene_River][the river]] in Southern Angola. Eventually I [[https://github.com/mcraveiro/cunene][put it on
+GitHub]]. I believe - but don't recall exactly - that most of the
+refactoring ideas were stolen from Phil Hagelberg's [[https://github.com/technomancy/emacs-starter-kit][Starter Kit]].
+
+Whatever the source of ideas, the improvements were undeniable. Cunene
+offered a all-in-one place to go to for my _.emacs_, and it combined
+all the experience I had in seeing other people's _.emacs_. At over
+twenty megs it wasn't exactly svelte, but my objective was to have a
+"zero-conf" setup; given a new machine, all I wanted to do was to =git
+clone= cunene, start Emacs and have exactly the same environment as
+everywhere else.
+
+Further, I could update Cunene from any machine and push it back to
+GitHub. Cunene contained all the modes I needed, at trusted versions
+and with some (very minor) patches. I could easily upgrade one or more
+modes from one machine and then just =git pull= from all other
+machines. It also handled the Windows-specific workarounds, to ensure
+things worked well out of the box there too.
+
+To be fair, for the last 6 years, this setup has served me well. But
+time also revealed its limitations:
+
+- package management support was limited. I tried using [[http://emacswiki.org/emacs/ELPA][Elpa]] but at
+  the time, not that many packages were available; package management
+  had evolved in leaps and bounds but we were stuck with our ages-old
+  Elpa support.
+- the accumulation of modes over such a long period meant that
+  starting Emacs took quite a long time. And to make matters worse,
+  only a small percentage of the modes were truly useful.
+- most of the modes were at stale versions. Since things worked for
+  me, I had no incentive to keep up with latest and greatest - and for
+  all the easiness, it was still not exactly trivial to upgrade
+  modes. This meant that I ended up having to put up with bugs that
+  had long been fixed in HEAD, and worse, whenever I upgraded to
+  latest, I saw massive changes in behaviour.
+- I was stuck on Emacs 23. For whatever reason, some parts of Cunene
+  did not work with Emacs 24 properly and I was never able to get to
+  the bottom of this. Being on an old version of Emacs has been a
+  problem because I make use of C++-11 but Emacs 23 doesn't really
+  indent it properly.
+- Cunene had a lot of boilerplate code. Since I never really learnt
+  how to code in Emacs lisp, I was most likely writing a lot of
+  non-idiomatic code. Also, the Emacs API has moved on considerably in
+  fifteen years.
+- Cedet and Org-mode are now part of Emacs but we were still carrying
+  our own copies. I never managed to get Cedet to work properly
+  either.
+- many new modes have appeared of late that provide much better
+  solutions, but Cunene insulated me from these developments. In
+  addition, adding new modes would only add to the complexity so I had
+  no incentive to do so. A classic example is Flycheck; whilst I used
+  Flymake in anger quite a lot, and could not live without it, the
+  truth was that some of its limitations were truly crippling. For
+  example, sometimes I had to wait tens of seconds to get a buffer to
+  update.
+
+There had to be a better way of doing things; something that combined
+the advantages of Cunene but fixed its shortcomings.
+
+ Then I heard of [[https://github.com/bbatsov/prelude#automated][Prelude]].
+
+* The Road to Prelude
+
+** What is Prelude and Why Do I Like It
+
+According to the official documentation:
+
+#+begin_quote
+Prelude is an Emacs distribution that aims to enhance the default
+Emacs experience. Prelude alters a lot of the default settings,
+bundles a plethora of additional packages and adds its own core
+library to the mix. The final product offers an easy to use Emacs
+configuration for Emacs newcomers and lots of additional power for
+Emacs power users.
+#+end_quote
+
+I am still finding my way around - so don't quote me - but from what I
+have seen, it seems to me that Prelude is like the Cunene "framework"
+but done by people that know what they are doing. It covers all of the
+advantages described above, but shares none of its disadvantages. In
+particular:
+
+- it provides a sensible set of baseline defaults that "we all can
+  agree on". I found it quite surprising that a plain Prelude looked
+  almost like Cunene. Of course, no two Emacs users agree on anything,
+  really, so there is still a lot to be tweaked. Having said that, the
+  great thing is you can start by seeing what Prelude says and giving
+  it a good go using it; if the baseline default does not work for
+  you, you can always override it. Just because you have been doing
+  something in a certain way for a long time does not mean its the
+  best way, and the move to Prelude provides an opportunity to
+  reevaluate a lot of "beliefs".
+- all the framework code is now shared by a large number of Emacs
+  users. This means it is well designed and maintained, and all you
+  have to worry about is your small extensibility points. With over 1k
+  forks in GitHub you can rest assured that Prelude will be around for
+  a long time. In addition, if you find yourself changing something
+  that is useful to the Prelude community, you can always submit a
+  pull request and have that code shared with the community. You no
+  longer have to worry about staleness or non-idiomatic code.
+- Prelude integrates nicely with several package managers and handles
+  updates for you.
+- There are lots of examples of Prelude users - you just need to
+  follow the GitHub forks. It would be nice to have a list of "good
+  examples" though, because at 1K forks its not easy to locate
+  those. This article will link to any forks that I found particularly
+  useful as a source of ideas.
+- If you fork Prelude the right way, you should be able to update from
+  upstream frequently without having too many conflicts. I am still
+  getting my head around this, but the model seems sound at first
+  blush.
+
+But to know if it worked required using it in anger.
+
+** From Cunene to Prelude
+
+Emacs users are creatures of habit and changing your entire workflow
+is not something to take lightly. Having said that, I always find that
+the best way to do it is to just go for it. After all, you can always
+go back to how you did things before. In addition, I did not want to
+do a wholesale port of Cunene for two reasons:
+
+- I didn't want to bring across any bad habits when Prelude was
+  already solving a problem properly.
+- I wanted to get rid of all of the accumulated cruft that was no
+  longer useful.
+
+What follows are my notes on the porting work.
+
+*** Initial Setup
+
+Prelude recommends you to create a fork and then add to it your
+personal configuration. I decided to create a branch in which to store
+the personal configuration rather than pollute master. This has two
+advantages:
+
+- pulling from upstream will always be conflictless;
+- if I do decide to submit a pull request in the future, I can have a
+  clean feature branch off of master that doesn't have any of the
+  personal cruft in it.
+
+#+begin_quote
+As it happens, I later found out that other Prelude users also use
+this approach such as [[https://github.com/danielwuz][Daniel Wu]], as you can see [[https://github.com/danielwuz/prelude/tree/personal/personal][here]]. I ended up using
+Daniel's approach in quite a few cases.
+#+end_quote
+
+I created [[https://github.com/mcraveiro/prelude][my prelude fork]] in GitHub using the web interface. Once the
+fork was ready, I moved Cunene out of the way by renaming the existing
+=.emacs.d= directory and performed the following setup:
+
+#+begin_example
+$ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -o installer.sh
+$ chmod +x installer.sh
+$ ./installer.sh -s git@github.com:mcraveiro/prelude.git
+#+end_example
+
+This created a Prelude-based =~/.emacs.d=, cloned off of my fork. I
+then setup upstream:
+
+#+begin_example
+$ cd ~/.emacs.d
+$ git remote add upstream git@github.com:bbatsov/prelude.git
+#+end_example
+
+This means I can now get latest from upstream by simply doing:
+
+#+begin_example
+$ git checkout master
+$ git pull upstream master
+$ git push origin master
+#+end_example
+
+I then setup the =personal= branch:
+
+#+begin_example
+ $ git branch --track personal origin/personal
+ $ git branch
+   master
+ * personal
+#+end_example
+
+For good measure, I also setup =personal= to be the default branch in
+GitHub. This hopefully means there is one less configuration step when
+setting up new machines. Once all of that was done, I got ready to
+start Emacs 24. The version in Debian Testing at present is 24.4.1 -
+not quite the latest (24.5 is out) but recent enough for those of us
+stuck in 23.
+
+The start-up was a bit slow; Prelude downloaded a number of packages,
+taking perhaps a couple of minutes and eventually was ready. For good
+measure I closed Emacs and started it again; the restart took a few
+seconds, which was quite pleasing. I was ready to start exploring
+Prelude.
+
+*** The "Editor" Configuration
+
+My first step in configuration was to create a =init.el= file under
+=.emacs.d/personal= and add =prelude-personal-editor.el=. I decided to
+follow this naming convention by looking at the Prelude core
+directory; seems vaguely in keeping. This file will be used for a
+number of minor tweaks that are not directly related to an obvious
+major mode (at least from a layman's perspective).
+
+**** Fonts, Colours and Related Cosmetics
+
+The first thing I found myself tweaking was the default colour
+theme. Whilst I actually quite like [[https://github.com/bbatsov/zenburn-emacs][Zenburn]], I find I need a black
+background and my font of choice. After consulting a number of
+articles such as [[http://stackoverflow.com/questions/20781746/emacs-prelude-background-color][Emacs Prelude: Background Color]] and the [[http://emacswiki.org/emacs/SetFonts][Emacs Wiki]], I
+decided to go with this approach:
+
+#+begin_src emacs-lisp
+;; set the current frame background and font.
+(set-background-color "black")
+(set-frame-font "Inconsolata Bold 16" nil t)
+
+;; set the font and background for all other frames.
+(add-to-list 'default-frame-alist
+             '(background-color . "black")
+             '(font .  "Inconsolata Bold 16"))
+#+end_src
+
+The font works like a charm, but for some reason the colour gets reset
+during start-up. On the plus side, new frames are setup correctly. I
+have raised an issue with Prelude: [[https://github.com/bbatsov/prelude/issues/855][What is the correct way to update
+the background colour in personal configuration?]] For now there is
+nothing for it but to update the colour manually. Since I don't
+restart Emacs very often this is not an urgent problem.
+
+One pleasing thing was to find that font-lock is already global so no
+need for any additional settings there.
+
+**** Widgets and Related Cosmetics
+
+Pleasantly, Prelude already excludes a lot of annoying artefacts and
+it also already comes with mouse wheel support out of the box, which
+is nice. All and all, a large number of options where already setup
+the way I like it:
+
+- no splash screen;
+- no menu-bars or tool-bars;
+- good frame title format with the buffer name;
+- no annoying visible bell;
+- displaying of column and line numbers, as well as size of buffers
+  out of the box;
+- not only search had highlight, but the all shiny [[https://github.com/syohex/emacs-anzu][Anzu mode]] is even
+  niftier!
+- no need for hacks like =fontify-frame=.
+
+However, it includes scroll-bars and tool-tips which I do not use
+since I like to stick to the keyboard. It also didn't have date and
+time in the mode line; and for good measure, I disabled clever
+window splitting as I found it a pain in the past. Having said that, I
+am still not 100% happy with time and date since it consumes a lot of
+screen real estate. This will be revisited in the context of [[http://www.emacswiki.org/emacs/DiminishedModes][diminish]]
+and other mode line helpers.
+
+#+begin_src emacs-lisp
+;; disable scroll bar
+(scroll-bar-mode -1)
+
+;; disable tool tips
+(when window-system
+  (tooltip-mode -1))
+
+;; time and date
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(display-time)
+#+end_src
+
+One note on line highlighting. Whilst I quite like this feature in
+select places such as grep and dired, I am not a fan of using it
+globally like Prelude does. However, I decided to give it a try and
+disable it later if it becomes too annoying.
+
+**** Tabs, Spaces, Newlines and Indentation
+
+In the realm of "spacing", Prelude scores well:
+
+- no silly adding of new lines when scrolling down, or asking when
+  adding a new line at save;
+- pasting performs indentation automatically (yank indent etc)- default handling of tabs and spaces is fairly sensible - except for
+  the eight spaces for a tab! A few minor things are missing such as
+  =untabify-buffer=. These may warrant a pull request at some point in
+  the near future.
+
+**** Disabled Commands
+
+- upper casing and down casing of region enabled out of the box.
+
+confirm exit
+
+**** File and Directory Management
+
+- Nice touch is that copying directories recursively doesn't ask you
+  for permission and if there is a dired buffer already opened in the
+  screen, the destination defaults to that directory.
+
+*** New Modes
+
+- undo tree

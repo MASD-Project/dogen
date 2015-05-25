@@ -87,6 +87,23 @@ More thoughts:
   formatting types. Overloading rules are a lot more amenable to
   reasoning than partial ordering.
 
+*** STARTED Move to emacs prelude                                     :spike:
+    CLOCK: [2015-05-25 Mon 10:26]--[2015-05-25 Mon 14:41] =>  4:15
+    CLOCK: [2015-05-25 Mon 09:45]--[2015-05-25 Mon 10:22] =>  0:37
+    CLOCK: [2015-05-25 Mon 09:28]--[2015-05-25 Mon 09:39] =>  0:11
+    CLOCK: [2015-05-24 Sun 22:10]--[2015-05-25 Mon 01:05] =>  2:55
+
+We are having a number of problems related to emacs 23 and cunene
+which can be solved by moving to a more modern setup. Implement cunene
+in terms of prelude.
+
+Problems:
+
+- arrow keys are conflicting
+- org mode does not automatically set column lengths any more, and has
+  added some strange latex indentation.
+- no auto fill mode in org
+
 *** Container details in JSON dump                                    :story:
 
 #+begin_quote
