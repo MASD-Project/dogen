@@ -345,22 +345,174 @@ In the realm of "spacing", Prelude scores well:
 
 - no silly adding of new lines when scrolling down, or asking when
   adding a new line at save;
-- pasting performs indentation automatically (yank indent etc)- default handling of tabs and spaces is fairly sensible - except for
+- pasting performs indentation automatically (yank indent etc)-
+  default handling of tabs and spaces is fairly sensible - except for
   the eight spaces for a tab! A few minor things are missing such as
   =untabify-buffer=. These may warrant a pull request at some point in
   the near future.
+- a nice whitespace mode which is not quite the same as I had it in
+  Cunene but seems to be equally as capable so I'll stick to it.
 
-**** Disabled Commands
+**** To Prompt or Not to Prompt
 
-- upper casing and down casing of region enabled out of the box.
+There are a few cases where me and Prelude are at odds when it comes
+to prompts. First, I seem to try to exit Emacs by mistake and I do
+that _a lot_. As any heavy Emacs user will tell you, there is nothing
+more annoying than exiting Emacs by mistake (if fact, when else do you
+exit Emacs?). I normally have more than 50 buffers open and not only
+does it take forever to bring up Emacs with that much state, but it
+never quite comes back up exactly the way I left it. Anyway, suffices
+to say that I strongly believe in the "are you sure you want to exit
+Emacs" prompt, so I had that copied over from Cunene. And, of course,
+one does not like typing "yes" when "y" suffices:
 
-confirm exit
+#+begin_src emacs-lisp
+;; Make all "yes or no" prompts show "y or n" instead
+(fset 'yes-or-no-p 'y-or-n-p)
 
-**** File and Directory Management
+;; confirm exit
+(global-set-key
+ (kbd "C-x C-c")
+ '(lambda ()
+    (interactive)
+    (if (y-or-n-p-with-timeout "Do you really want to exit Emacs ?" 4 nil)
+        (save-buffers-kill-emacs))))
+#+end_src
+
+There is a nice touch in Prelude enabling a few disabled modes such as
+upper/down casing of regions - or perhaps the powers that be changed
+that for Emacs 24. Whoever is responsible, its certainly nice not to
+have to worry about it.
+
+**** Keybindings
+
+One of the biggest cultural shocks, inevitably, happened with
+keybindings. I am giving Prelude the benefit of the doubt - even
+though my muscle memory is not happy at all. The following has proved
+annoying:
+
+- Apparently arrow keys are discouraged. Or so I keep hearing in my
+  minibuffer every time I press one. As it happens, the warnings are
+  making me press them less.
+- C-b was my ido key. However, since I should really not be using the
+  arrow keys, I had to use the slightly more standard C-x b.
+- Eassist include/implementation toggling was mapped to M-o and M-i
+  was my quick way of opening includes in semantic (more on that
+  later). However, these bindings don't seem to work any more.
+- pc-select is a bit screwed in some modes such as C++ and Emacs
+  lisp. But that's alright since you shouldn't be using the arrow keys
+  right? What is annoying is that it works ok'ish in Org-mode so I
+  find that I behave differently depending on the mode I'm on.
+- in addition, win-move is using the default shift-arrow keys and its
+  not setup to handle multiple frames. This is a problem as I always
+  have a few frames. These will have to be changed, if nothing else
+  just to preserve my sanity.
+- talking about pc-select, I still find myself pasting with C-v. Just
+  can't help it, its years of muscle memory. It is rather
+  disconcerting to see your screen move up when you do, makes you
+  think your paste has totally screwed up the buffer when in reality
+  its just the old muscle memory biting again.
+
+All and all, after a few days the muscle memory seems to have adapted
+well enough. I'm hoping I'll soon be able to use C-b and C-f without
+thinking, like a real Emacs user.
+
+*** Modes From Cunene
+
+Unfortunately, package management was not quite as complete as I had
+hoped and so, yet again, I ended up with a number of modes that had to
+be copied into git. Fortunately these are a lot less in number. I
+decided to place them under [[https://github.com/mcraveiro/prelude/tree/personal/personal/vendor][personal/vendor]] as I wasn't sure what
+vendor was for.
+
+**** Cedet
+
+After almost losing my mind trying to configure Cedet from Emacs 24, I
+decided to bite the bullet and upgrade to the latest development
+version. In the past this was a safe bet; I'm afraid to report it
+still is the best way to get Cedet up and running. In fact, I got it
+working within minutes after updating to develop versus a whole day of
+fighting against the built-in version. Pleasantly, it is now available
+in git:
+
+: git clone http://git.code.sf.net/p/cedet/git cedet
+
+Building it was a simple matter of calling make, both at the top-level
+and in contrib:
+
+#+begin_example
+$ cd cedet
+$ make EMACS=emacs24
+$ cd contrib
+$ make EMACS=emacs24
+#+end_example
+
+The setup was directly copied from their INSTALL document, so I
+recommend reading that.
+
+In terms of Cedet, a very large win was the move to [[https://github.com/randomphrase/ede-compdb][EDE Compilation
+Database]]. I really cannot even begin to explain the joys of this mode,
+it is truly wonderful. I did the tiniest of changes to my build
+process by defining an extra macro:
+
+: cmake ../../../dogen -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+
+With just that - and a couple of lisp incantations (see the [[https://github.com/mcraveiro/prelude/blob/personal/personal/init-cedet.el#L78][cedet init
+file]]) - and suddenly I stopped having to worry about supplying flags
+to flymake (well, _flycheck_ - but that's another story!), semantic,
+the whole shebang. I haven't quite worked out all of the details just
+yet, but with very little configuration the compilation database seems
+to just get everything working.
+
+Because of this, this means I am now finding myself using Cedet a lot
+more; the intelisense seems to just work on the majority of cases. The
+only annoyance is the annoyance of old of having Emacs block on
+occasion whilst building some semantic database or other. Which gave
+me the idea of [[http://sourceforge.net/p/cedet/mailman/message/34145936/][replacing it]] with a Clang based "semantic database
+generator". Lets see what the Cedet mailinglist says about it.
+
+All and all, Cedet is much improved from the olden days. I will post a
+proper review after a month or so of using it in anger.
+
+**** Git-emacs
+
+Git-emacs makes me a bit sad. In truth, I am a perfectly content magit
+user (more on that later) except for _one_ feature - the file status
+"dot". This is something I got used from the svn days and still find
+it quite useful. Its silly really, especially in these days of
+[[https://github.com/syohex/emacs-git-gutter][git-gutter]], but I still like to know if there have been any changes to
+a file or not, and I haven't found a good way of doing this outside of
+git-emacs. It provides a nice little red or green dot in the modeline,
+like so:
+
+
+However, there are no packaged versions of git-emacs and since
+everyone uses magit these days, I can't see it making to Elpa. Also,
+it is rather annoying having to load the whole of git-emacs for a dot,
+but there you go.
+
+*** Modes From Prelude or Emacs 24
+
+In this section
+
+**** Dired
+
+
+
+- shows hidden files by default.
+
+https://truongtx.me/2013/04/24/dired-as-default-file-manager-3-dired-details/
+
+#+begin_src emacs-lisp
+(setq-default dired-omit-mode t)
+(setq-default dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
+#+end_src
 
 - Nice touch is that copying directories recursively doesn't ask you
   for permission and if there is a dired buffer already opened in the
   screen, the destination defaults to that directory.
+
+
 
 *** New Modes
 

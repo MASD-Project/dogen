@@ -76,7 +76,6 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
-
 void workflow::index_generalizations_activity(model& merged_model) const {
     generalization_indexer idx;
     idx.index(merged_model);
