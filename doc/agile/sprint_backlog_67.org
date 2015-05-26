@@ -14,15 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-05-25 Mon 09:28]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:37* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:37   |      |      |
-| Active                                                                      |        | 0:37 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:37 |
+#+CAPTION: Clock summary at [2015-05-27 Wed 00:20]
+| <75>                                                                        |         |       |       |
+| Headline                                                                    | Time    |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                | *19:56* |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| Stories                                                                     | 19:56   |       |       |
+| Active                                                                      |         | 19:56 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:37 |
+| COMPLETED Move to emacs prelude                                             |         |       | 19:19 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -33,6 +34,32 @@ Updates to sprint and product backlog.
 *** STARTED Updates to the manual and readme files                    :story:
 
 Use downtime to update the manual and / or readme file.
+
+*** COMPLETED Move to emacs prelude                                   :spike:
+    CLOSED: [2015-05-27 Wed 00:20]
+    CLOCK: [2015-05-26 Tue 23:42]--[2015-05-27 Wed 00:20] =>  0:38
+    CLOCK: [2015-05-26 Tue 22:54]--[2015-05-26 Tue 23:42] =>  0:48
+    CLOCK: [2015-05-26 Tue 22:07]--[2015-05-26 Tue 22:54] =>  0:47
+    CLOCK: [2015-05-26 Tue 19:30]--[2015-05-26 Tue 22:06] =>  2:36
+    CLOCK: [2015-05-26 Tue 17:10]--[2015-05-26 Tue 18:50] =>  1:40
+    CLOCK: [2015-05-25 Mon 21:40]--[2015-05-25 Mon 22:50] =>  1:10
+    CLOCK: [2015-05-25 Mon 16:30]--[2015-05-25 Mon 19:20] =>  2:50
+    CLOCK: [2015-05-25 Mon 15:12]--[2015-05-25 Mon 16:04] =>  0:52
+    CLOCK: [2015-05-25 Mon 10:26]--[2015-05-25 Mon 14:41] =>  4:15
+    CLOCK: [2015-05-25 Mon 09:45]--[2015-05-25 Mon 10:22] =>  0:37
+    CLOCK: [2015-05-25 Mon 09:28]--[2015-05-25 Mon 09:39] =>  0:11
+    CLOCK: [2015-05-24 Sun 22:10]--[2015-05-25 Mon 01:05] =>  2:55
+
+We are having a number of problems related to emacs 23 and cunene
+which can be solved by moving to a more modern setup. Implement cunene
+in terms of prelude.
+
+Problems:
+
+- arrow keys are conflicting
+- org mode does not automatically set column lengths any more, and has
+  added some strange latex indentation.
+- no auto fill mode in org
 
 *** STARTED Implement class implementation formatter using stitch     :story:
 
@@ -86,29 +113,6 @@ More thoughts:
   (non-generic) overloads that return instantiations of the JSON
   formatting types. Overloading rules are a lot more amenable to
   reasoning than partial ordering.
-
-*** STARTED Move to emacs prelude                                     :spike:
-    CLOCK: [2015-05-26 Tue 22:07]--[2015-05-26 Tue 22:54] =>  0:47
-    CLOCK: [2015-05-26 Tue 19:30]--[2015-05-26 Tue 22:06] =>  2:36
-    CLOCK: [2015-05-26 Tue 17:10]--[2015-05-26 Tue 18:50] =>  1:40
-    CLOCK: [2015-05-25 Mon 21:40]--[2015-05-25 Mon 22:50] =>  1:10
-    CLOCK: [2015-05-25 Mon 16:30]--[2015-05-25 Mon 19:20] =>  2:50
-    CLOCK: [2015-05-25 Mon 15:12]--[2015-05-25 Mon 16:04] =>  0:52
-    CLOCK: [2015-05-25 Mon 10:26]--[2015-05-25 Mon 14:41] =>  4:15
-    CLOCK: [2015-05-25 Mon 09:45]--[2015-05-25 Mon 10:22] =>  0:37
-    CLOCK: [2015-05-25 Mon 09:28]--[2015-05-25 Mon 09:39] =>  0:11
-    CLOCK: [2015-05-24 Sun 22:10]--[2015-05-25 Mon 01:05] =>  2:55
-
-We are having a number of problems related to emacs 23 and cunene
-which can be solved by moving to a more modern setup. Implement cunene
-in terms of prelude.
-
-Problems:
-
-- arrow keys are conflicting
-- org mode does not automatically set column lengths any more, and has
-  added some strange latex indentation.
-- no auto fill mode in org
 
 *** Container details in JSON dump                                    :story:
 

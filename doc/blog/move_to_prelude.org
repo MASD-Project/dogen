@@ -4,21 +4,19 @@
 This sprint I found myself making one of those historical transitions:
 moving my entire Emacs infrastructure from a old, creaking at the
 seams approach, to the new all-singing-all-dancing way of doing
-things. This post documents this transition.
+things. This post documents the start of this transition.
 
 * The Road to Cunene
 
-** The Early Days
-
 I have been using [[http://www.gnu.org/software/emacs/][Emacs]] since around 1998. One of the biggest reasons
-to use Emacs is its infinite configurability. To call Emacs
-"configurable" is a bit like saying [[http://en.wikipedia.org/wiki/Leonhard_Euler][Euler]] wasn't bad with numbers. In
-truth - and it takes you a while to really grok this - Emacs is just a
-lisp platform with a _giant_ editing library built on top; a library
-that keeps on getting extended on a daily basis by a large number of
-Emacs users. And, of course, you configure Emacs using lisp, so that
-the lines between "configuration" and "development" are, at best,
-blurry.
+to use the great old editor is its infinite configurability. Really,
+to call Emacs "configurable" is rather like saying that [[http://en.wikipedia.org/wiki/Leonhard_Euler][Euler]] wasn't
+bad with numbers. In truth - and it takes you a while to really grok
+this - Emacs is just a lisp platform with a _giant_ editing library
+built on top; a library that keeps on getting extended on a daily
+basis by a large number of Emacs users. And, of course, you configure
+Emacs using lisp, so that the lines between "configuration" and
+"development" are, at best, blurry.
 
 But lets go back to the beginning. Like every other Emacs newbie in
 those days, I too started with a plain (i.e. non-configured) Emacs and
@@ -30,7 +28,7 @@ to the day that some people are able to use plain Emacs and come out
 at the other end as Emacs users. In some ways, I guess it is a test of
 fire: do you _really_ want to use Emacs? There are two responses to
 this test: most give up, but a few persist and soon start changing the
-editor to behave in a slightly more sane manner.
+editor to behave in a slightly saner manner.
 
 The _.emacs_ starts small, especially if you are not familiar with
 lisp. Sooner or later it occurs to you that, _surely_, someone must
@@ -53,18 +51,17 @@ But I digress. As with most users, my _.emacs_ evolved over the years
 as I found more and more modes. I soon found that it was very painful
 to keep all my machines with the same setup; invariably I would change
 something at work but forget to change it at home or Uni or
-vice-versa. To make matters worse, work was on Windows. And in those
-days, there was no Emacs package management support, so you ended up
-copying lots of modes around. Life was painful and brute in my first
-decade of Emacs.
-
-** The Cunene Years
+vice-versa. To make matters worse, some machines were on Windows. And
+in those days, there was no Emacs package management support, so you
+ended up copying lots of modes around. Life was painful and brute in
+my first decade of Emacs.
 
 Around six years ago, things got a lot better: I started to use git in
 anger, refactored my _.emacs_ into something slightly saner and called
 it Cunene - after [[http://en.wikipedia.org/wiki/Cunene_River][the river]] in Southern Angola. Eventually I [[https://github.com/mcraveiro/cunene][put it on
 GitHub]]. I believe - but don't recall exactly - that most of the
-refactoring ideas were stolen from Phil Hagelberg's [[https://github.com/technomancy/emacs-starter-kit][Starter Kit]].
+refactoring ideas were stolen from Phil Hagelberg's [[https://github.com/technomancy/emacs-starter-kit][Starter Kit]] and
+[[https://github.com/alexott/emacs-configs][Alex Ott's .emacs]].
 
 Whatever the source of ideas, the improvements were undeniable. Cunene
 offered a all-in-one place to go to for my _.emacs_, and it combined
@@ -75,19 +72,20 @@ clone= cunene, start Emacs and have exactly the same environment as
 everywhere else.
 
 Further, I could update Cunene from any machine and push it back to
-GitHub. Cunene contained all the modes I needed, at trusted versions
-and with some (very minor) patches. I could easily upgrade one or more
-modes from one machine and then just =git pull= from all other
-machines. It also handled the Windows-specific workarounds, to ensure
-things worked well out of the box there too.
+GitHub. Cunene contained all the modes I needed, all byte-compiled,
+and all at trusted versions and with some (very minor) patches. I
+could easily upgrade one or more modes from one machine and then just
+=git pull= from all other machines. It also handled any
+Windows-specific workarounds, ensuring things worked well out of the
+box there too.
 
-To be fair, for the last 6 years, this setup has served me well. But
+To be fair, for the last 6 years, this setup has served me well, but
 time also revealed its limitations:
 
-- package management support was limited. I tried using [[http://emacswiki.org/emacs/ELPA][Elpa]] but at
-  the time, not that many packages were available; package management
-  had evolved in leaps and bounds but we were stuck with our ages-old
-  Elpa support.
+- package management support was limited. I tried using [[http://emacswiki.org/emacs/ELPA][Elpa]] but, at
+  the time, not many packages were available. Package management has
+  evolved in leaps and bounds - [[http://melpa.org/#/][Melpa]], [[https://marmalade-repo.org/][Marmelade]], etc - but Cunene was
+  still stuck with the old Elpa support.
 - the accumulation of modes over such a long period meant that
   starting Emacs took quite a long time. And to make matters worse,
   only a small percentage of the modes were truly useful.
@@ -101,22 +99,20 @@ time also revealed its limitations:
   did not work with Emacs 24 properly and I was never able to get to
   the bottom of this. Being on an old version of Emacs has been a
   problem because I make use of C++-11 but Emacs 23 doesn't really
-  indent it properly.
+  indent it properly. And of course, Emacs 24 is just improved all
+  around.
 - Cunene had a lot of boilerplate code. Since I never really learnt
   how to code in Emacs lisp, I was most likely writing a lot of
   non-idiomatic code. Also, the Emacs API has moved on considerably in
-  fifteen years.
+  fifteen years, so certain things were not being done in the best way
+  possible.
 - Cedet and Org-mode are now part of Emacs but we were still carrying
   our own copies. I never managed to get Cedet to work properly
   either.
 - many new modes have appeared of late that provide much better
-  solutions, but Cunene insulated me from these developments. In
-  addition, adding new modes would only add to the complexity so I had
-  no incentive to do so. A classic example is Flycheck; whilst I used
-  Flymake in anger quite a lot, and could not live without it, the
-  truth was that some of its limitations were truly crippling. For
-  example, sometimes I had to wait tens of seconds to get a buffer to
-  update.
+  solutions to some of the problems I had, but Cunene insulated me
+  from these developments. In addition, adding new modes would only
+  add to the complexity so I had no incentive to do so.
 
 There had to be a better way of doing things; something that combined
 the advantages of Cunene but fixed its shortcomings.
@@ -124,8 +120,6 @@ the advantages of Cunene but fixed its shortcomings.
  Then I heard of [[https://github.com/bbatsov/prelude#automated][Prelude]].
 
 * The Road to Prelude
-
-** What is Prelude and Why Do I Like It
 
 According to the official documentation:
 
@@ -157,24 +151,25 @@ particular:
 - all the framework code is now shared by a large number of Emacs
   users. This means it is well designed and maintained, and all you
   have to worry about is your small extensibility points. With over 1k
-  forks in GitHub you can rest assured that Prelude will be around for
-  a long time. In addition, if you find yourself changing something
-  that is useful to the Prelude community, you can always submit a
-  pull request and have that code shared with the community. You no
-  longer have to worry about staleness or non-idiomatic code.
+  forks in GitHub, you can rest assured that Prelude will be around
+  for a long time. In addition, if you find yourself changing
+  something that is useful to the Prelude community, you can always
+  submit a pull request and have that code shared with the
+  community. You no longer have to worry about staleness or
+  non-idiomatic code.
 - Prelude integrates nicely with several package managers and handles
   updates for you.
 - There are lots of examples of Prelude users - you just need to
   follow the GitHub forks. It would be nice to have a list of "good
   examples" though, because at 1K forks its not easy to locate
-  those. This article will link to any forks that I found particularly
-  useful as a source of ideas.
+  those.
 - If you fork Prelude the right way, you should be able to update from
   upstream frequently without having too many conflicts. I am still
   getting my head around this, but the model seems sound at first
   blush.
 
-But to know if it worked required using it in anger.
+But to know if it worked required using it in anger, and that's what
+will cover in the next few sections.
 
 ** From Cunene to Prelude
 
@@ -189,7 +184,9 @@ do a wholesale port of Cunene for two reasons:
 - I wanted to get rid of all of the accumulated cruft that was no
   longer useful.
 
-What follows are my notes on the porting work.
+What follows are my notes on the porting work. This is a snapshot of
+the work, a few days into it. If there is a reason, I may do further
+write-ups to cover any new developments.
 
 *** Initial Setup
 
@@ -292,13 +289,13 @@ the background colour in personal configuration?]] For now there is
 nothing for it but to update the colour manually. Since I don't
 restart Emacs very often this is not an urgent problem.
 
-One pleasing thing was to find that font-lock is already global so no
-need for any additional settings there.
+One nice touch was that =font-lock= is already global so there is no
+need for additional configuration there.
 
 **** Widgets and Related Cosmetics
 
-Pleasantly, Prelude already excludes a lot of annoying artefacts and
-it also already comes with mouse wheel support out of the box, which
+Pleasantly, Prelude already excludes a lot of annoying screen
+artefacts and it comes with mouse wheel support out of the box - which
 is nice. All and all, a large number of options where already setup
 the way I like it:
 
@@ -312,13 +309,13 @@ the way I like it:
   niftier!
 - no need for hacks like =fontify-frame=.
 
-However, it includes scroll-bars and tool-tips which I do not use
-since I like to stick to the keyboard. It also didn't have date and
-time in the mode line; and for good measure, I disabled clever
+However, Preludes includes scroll-bars and tool-tips - things I do not
+use since I like to stick to the keyboard. It also didn't have date
+and time in the mode line; and for good measure, I disabled clever
 window splitting as I found it a pain in the past. Having said that, I
 am still not 100% happy with time and date since it consumes a lot of
-screen real estate. This will be revisited in the context of [[http://www.emacswiki.org/emacs/DiminishedModes][diminish]]
-and other mode line helpers.
+screen real estate. This will be revisited at some point in the
+context of [[http://www.emacswiki.org/emacs/DiminishedModes][diminish]] and other mode line helpers.
 
 #+begin_src emacs-lisp
 ;; disable scroll bar
@@ -358,7 +355,7 @@ In the realm of "spacing", Prelude scores well:
 There are a few cases where me and Prelude are at odds when it comes
 to prompts. First, I seem to try to exit Emacs by mistake and I do
 that _a lot_. As any heavy Emacs user will tell you, there is nothing
-more annoying than exiting Emacs by mistake (if fact, when else do you
+more annoying than exiting Emacs by mistake (in fact, when else do you
 exit Emacs?). I normally have more than 50 buffers open and not only
 does it take forever to bring up Emacs with that much state, but it
 never quite comes back up exactly the way I left it. Anyway, suffices
@@ -394,12 +391,13 @@ annoying:
 - Apparently arrow keys are discouraged. Or so I keep hearing in my
   minibuffer every time I press one. As it happens, the warnings are
   making me press them less.
-- C-b was my ido key. However, since I should really not be using the
-  arrow keys, I had to use the slightly more standard C-x b.
-- Eassist include/implementation toggling was mapped to M-o and M-i
-  was my quick way of opening includes in semantic (more on that
+- =C-b= was my ido key. However, since I should really not be using
+  the arrow keys, I had to get used to using the slightly more
+  standard =C-x b=.
+- Eassist include/implementation toggling was mapped to =M-o= and
+  =M-i= was my quick way of opening includes in semantic (more on that
   later). However, these bindings don't seem to work any more.
-- pc-select is a bit screwed in some modes such as C++ and Emacs
+- [[http://emacswiki.org/emacs/PcSelectionMode][pc-select]] is a bit screwed in some modes such as C++ and Emacs
   lisp. But that's alright since you shouldn't be using the arrow keys
   right? What is annoying is that it works ok'ish in Org-mode so I
   find that I behave differently depending on the mode I'm on.
@@ -407,23 +405,28 @@ annoying:
   not setup to handle multiple frames. This is a problem as I always
   have a few frames. These will have to be changed, if nothing else
   just to preserve my sanity.
-- talking about pc-select, I still find myself pasting with C-v. Just
-  can't help it, its years of muscle memory. It is rather
-  disconcerting to see your screen move up when you do, makes you
-  think your paste has totally screwed up the buffer when in reality
-  its just the old muscle memory biting again.
+- talking about pc-select, I still find myself pasting with =C-v=. I
+  just can't help it, its buried too deeply into the muscle
+  memory. But it must be said, it's rather disconcerting to see your
+  screen move up when you press =C-v=; it makes you think your paste
+  has totally screwed up the buffer, when in reality its just the good
+  old muscle memory biting again.
+- =C-x u= now doesn't just undo like it used to. On the plus side,
+  undo-tree just rocks! We'll cover it below.
+- =C-backspace= doesn't just delete the last word, it seems to kill a
+  whole line. Will take some getting used to.
 
-All and all, after a few days the muscle memory seems to have adapted
-well enough. I'm hoping I'll soon be able to use C-b and C-f without
-thinking, like a real Emacs user.
+All and all, after a few days, the muscle memory seems to have adapted
+well enough. I'm hoping I'll soon be able to use =C-b= and =C-f=
+without thinking, like a real Emacs user.
 
 *** Modes From Cunene
 
 Unfortunately, package management was not quite as complete as I had
 hoped and so, yet again, I ended up with a number of modes that had to
 be copied into git. Fortunately these are a lot less in number. I
-decided to place them under [[https://github.com/mcraveiro/prelude/tree/personal/personal/vendor][personal/vendor]] as I wasn't sure what
-vendor was for.
+decided to place them under [[https://github.com/mcraveiro/prelude/tree/personal/personal/vendor][personal/vendor]] as I wasn't sure what the
+main _vendor_ folder was for.
 
 **** Cedet
 
@@ -450,33 +453,37 @@ $ make EMACS=emacs24
 The setup was directly copied from their INSTALL document, so I
 recommend reading that.
 
-In terms of Cedet, a very large win was the move to [[https://github.com/randomphrase/ede-compdb][EDE Compilation
-Database]]. I really cannot even begin to explain the joys of this mode,
-it is truly wonderful. I did the tiniest of changes to my build
-process by defining an extra macro:
+Still in terms of Cedet, a very large win was the move to [[https://github.com/randomphrase/ede-compdb][EDE
+Compilation Database]]. I really cannot even begin to do justice to the
+joys of this mode - it is truly wonderful. I did the tiniest of
+changes to my build process by defining an extra macro:
 
 : cmake ../../../dogen -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
 
 With just that - and a couple of lisp incantations (see the [[https://github.com/mcraveiro/prelude/blob/personal/personal/init-cedet.el#L78][cedet init
 file]]) - and suddenly I stopped having to worry about supplying flags
-to flymake (well, _flycheck_ - but that's another story!), semantic,
+to flymake (well, _flycheck_ - but that's another story), semantic,
 the whole shebang. I haven't quite worked out all of the details just
 yet, but with very little configuration the compilation database seems
-to just get everything working.
+to just get everything working magically.
 
-Because of this, this means I am now finding myself using Cedet a lot
-more; the intelisense seems to just work on the majority of cases. The
-only annoyance is the annoyance of old of having Emacs block on
-occasion whilst building some semantic database or other. Which gave
-me the idea of [[http://sourceforge.net/p/cedet/mailman/message/34145936/][replacing it]] with a Clang based "semantic database
-generator". Lets see what the Cedet mailinglist says about it.
+Because of this, I am now finding myself using Cedet a lot more; the
+intelisense seems to just work on the majority of cases. The only snag
+is the annoyance of old: having Emacs block on occasion whilst it
+builds some semantic database or other. It doesn't happen often but
+its still a pain when it does. Which gave me the idea of [[http://sourceforge.net/p/cedet/mailman/message/34145936/][replacing it]]
+with a Clang based "semantic database generator". Lets see what the
+Cedet mailinglist says about it.
 
-All and all, Cedet is much improved from the olden days. I will post a
-proper review after a month or so of using it in anger.
+All and all, Cedet is much improved from the olden days; so much so I
+feel it warrants a proper review after a few months of using it in
+anger. In fact, I feel so brave I may even setup [[https://github.com/chrisbarrett/emacs-refactor][emacs-refactor]] or
+[[https://github.com/tuhdo/semantic-refactor][semantic-refactor]]. It is also high-time to revisit [[http://tuhdo.github.io/c-ide.html][C/C++ Development
+Environment for Emacs]] and pick up some new tips.
 
 **** Git-emacs
 
-Git-emacs makes me a bit sad. In truth, I am a perfectly content magit
+[[https://github.com/tsgates/git-emacs][Git-emacs]] makes me a bit sad. In truth, I am a perfectly content magit
 user (more on that later) except for _one_ feature - the file status
 "dot". This is something I got used from the svn days and still find
 it quite useful. Its silly really, especially in these days of
@@ -485,35 +492,158 @@ a file or not, and I haven't found a good way of doing this outside of
 git-emacs. It provides a nice little red or green dot in the modeline,
 like so:
 
+#+caption: Git-emacs state modeline
+https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/git-emacs.png
 
 However, there are no packaged versions of git-emacs and since
 everyone uses magit these days, I can't see it making to Elpa. Also,
 it is rather annoying having to load the whole of git-emacs for a dot,
 but there you go.
 
+**** Doxymacs
+
+Very much in the same vein as git-emacs, [[http://doxymacs.sourceforge.net/][doxymacs]] is also one of those
+more historical modes that seem a bit unmaintained. And very much like
+git-emacs, I only use it for the tiniest of reasons: it
+syntax-highlights my doxygen comments. I know, I know. On the plus
+side, it seems to do a whole load of other stuff - I just never quite
+seem to need any other feature besides the nice syntax highlighting of
+comments.
+
 *** Modes From Prelude or Emacs 24
 
-In this section
+In this section we cover modes that are either new/updated for Emacs
+24 or available from Prelude via Elpa.
 
 **** Dired
 
+Dired is configured in a fairly sensible manner out of the box. For
+example, one no longer has the annoying prompts when deleting/copying
+directories with files - it never occurred to me you could configure
+that away for some reason.
 
+On the down side, it is not configured with [[http://emacswiki.org/emacs/DiredReuseDirectoryBuffer][dired-single]], so the usual
+proliferation of dired buffers still occurs. I have decided not to
+setup dired-single for a few days and see how bad it gets.
 
-- shows hidden files by default.
-
-https://truongtx.me/2013/04/24/dired-as-default-file-manager-3-dired-details/
+The other, much more annoying problem was that hidden files are
+displayed by default. I first tried solving this problem with
+dired-omit as per [[https://truongtx.me/2013/04/24/dired-as-default-file-manager-3-dired-details/%0A][this page]]:
 
 #+begin_src emacs-lisp
 (setq-default dired-omit-mode t)
 (setq-default dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
 #+end_src
 
-- Nice touch is that copying directories recursively doesn't ask you
-  for permission and if there is a dired buffer already opened in the
-  screen, the destination defaults to that directory.
+However, I found that omit with regexes is not that performant. So I
+ended up going back to the old setup of =ls= flags:
 
+: (setq dired-listing-switches "-l")
 
+**** Undo-tree and browse-kill-ring
 
-*** New Modes
+As mentioned before, =C-x u= is not just undo, it's undo-tree! Somehow
+I had missed this mode altogether up til now. Its pretty nifty, as it
+allows you to navigate the undo-tree - including forks. It is quite
+cool.
 
-- undo tree
+I also found that the latest version of browse-kill-ring is very nice;
+so much so that I find myself using it a lot more now. The management
+of the clipboard will never be the same.
+
+**** Org-mode
+
+One rather annoying thing was that with the latest Org-mode, the
+clock-table is a bit broken. I quickly found out I wasn't the only one
+to notice: [[http://emacs.stackexchange.com/questions/9528/is-it-possible-to-remove-emsp-from-clock-report-but-preserve-indentation][Is it possible to remove '\emsp' from clock report but
+preserve indentation?]]
+
+This link implies the problem is fixed in Emacs 24.4, but I am running
+it and sadly it doesn't seem to be the case. I also found out that the
+automatic resizing of clock tables is no longer... well,
+automatic. Instead, we now have to supply the size. My final setup for
+the clock-table is as follows:
+
+: #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+
+This seems to generate a table that is largely like the ones we had
+prior to upgrading.
+
+Other than that, Org-mode has behaved - but then again, I'm not
+exactly a poweruser.
+
+**** Bongo
+
+I use the amazing [[https://github.com/dbrock/bongo][Bongo]] media player to play the few internet radio
+stations I listen to - mainly SomaFM, to be honest. Its good to see it
+in Melpa. It's still not quite as straightforward as you'd like to
+save a playlist - I always find that loading the buffer itself does
+not trigger bongo mode for some reason - but other than that, it works
+fine.
+
+On the downside, I use the venerable [[http://www.emacswiki.org/emacs/Mpg123][mpg123]] to play random albums and
+that hasn't made it to Melpa yet. I've decided to try to use Bongo for
+this use case too, but if that doesn't work out then I'll have to add
+it to vendor...
+
+**** Shell
+
+Prelude comes with eshell configured by default. I must confess I have
+always been a bash user - simple and easy. I'll persevere with eshell
+for a couple of days, but I can already see that this may be a bridge
+too far.
+
+**** Flycheck
+
+One of the main reasons that made me consider moving to prelude was
+[[http://flymake.sourceforge.net/][Flymake]]. I added it to cunene fairly early on, some 6 years ago, and I
+was amazed at how I had managed to use Emacs for over a decade without
+using Flymake. However, after a good 6 years of intensive usage, I can
+attest that Flymake is showing its age. The main problem is how it
+locks up Emacs whilst updating. If you combine that with the insane
+errors one gets in C++, all you need is an angle-bracket out of place
+and your coding flow is disrupted for potentially several minutes. To
+be fair, this happens very infrequently, but its still a major
+nuisance. So I was keen to explore [[https://github.com/flycheck/flycheck][Flycheck]].
+
+All I can say is: wow! The same feeling of amazement I felt for
+Flymake when I first used has been repeated with Flycheck. Not only
+its blazingly fast, it supports multiple checkers and the errors
+buffer is a dream to work with. And with the Compilation Database
+integration it means there is no configuration required. I can't
+believe I survived this long without Flycheck!
+
+**** Magit
+
+One of my favourite modes in Emacs - at least of the new generation of
+modes - is [[http://magit.vc/][Magit]]. So much so that I find that I rarely use git from
+anywhere else, it's just so easy to do it from Magit. Which makes me
+extremely sensitive to any changes to Magit's interface.
+
+The version in Prelude - presumably from Melpa - is a tad different
+from the legacy one I was using in Cunene. On the plus side, most of
+the changes are improvements such as having a "running history" in the
+git process buffer, with font-lock support. The main Magit buffer also
+looks very nice, with lots of little usability touches. A tiny few
+changes did result in slow-downs of my workflow, such as a sub-menu on
+commit. Its not ideal but presumably one will get used to it.
+
+The only negative change seems to be that Magit is not quite as
+responsive as it used to be. Hard to put a finger yet, but I was used
+to having pretty much zero wait time on all operations in Magit, and
+yet now it seems that a few things are no longer instantaneous. It
+will require some more analysis to properly point the finger, but its
+a general feel.
+
+* Conclusions
+
+It's still early days, but the move to Emacs 24 and Prelude is already
+paying off. The transition has not been entirely straightforward, and
+it certainly has slowed things down for the moment - if not for
+anything else, just due to the keybinding changes! But one can already
+see that this is the future for most Emacs users, particularly those
+that are not power-users like myself but just like the editor.
+
+The future is certainly bright for Emacs. And we haven't yet started
+covering the latest and greatest modes such as [[https://github.com/Malabarba/smart-mode-line][smart-mode-line]]. But
+that's a story for another blog post.
