@@ -62,6 +62,9 @@ Problems:
   added some strange latex indentation.
 - no auto fill mode in org
 
+*** STARTED Consider creating an Emacs mode for stitch                :story:
+    CLOCK: [2015-05-27 Wed 17:05]--[2015-05-27 Wed 18:01] =>  0:56
+
 *** STARTED Implement class implementation formatter using stitch     :story:
 
 We need to implement a stitch template for the class
@@ -81,6 +84,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Update legacy formatters to use needle for io             :story:
+    CLOCK: [2015-05-28 Thu 07:36]--[2015-05-28 Thu 08:20] =>  0:44
 
 - add some hack to includer to pick up these header files.
 - remove io helpers from transformer and regenerate all models.
@@ -114,6 +118,13 @@ More thoughts:
   (non-generic) overloads that return instantiations of the JSON
   formatting types. Overloading rules are a lot more amenable to
   reasoning than partial ordering.
+- however, the problem with this is that we then need to always
+  declare a jsonify function for every time, just like with
+  =operator<<=. And it must be placed in the same namespace as the
+  type itself - or perhaps we could move jsonify to detail.
+- actually we are trying to do two things at the same time:
+  =operator<<= and json serialisation. For this to work properly we
+  need to split out json serialisation.
 
 *** Container details in JSON dump                                    :story:
 
