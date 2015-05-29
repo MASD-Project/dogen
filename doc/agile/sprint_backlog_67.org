@@ -134,6 +134,12 @@ one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
 
 Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
 
+Actually there is a project comparing JSON libraries:
+
+[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+
+One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
 *** Container details in JSON dump                                    :story:
 
 #+begin_quote
