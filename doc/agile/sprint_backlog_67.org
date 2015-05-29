@@ -124,7 +124,15 @@ More thoughts:
   type itself - or perhaps we could move jsonify to detail.
 - actually we are trying to do two things at the same time:
   =operator<<= and json serialisation. For this to work properly we
-  need to split out json serialisation.
+  need to split out json serialisation. We need to look into
+  implementing stand alone JSON.
+
+*** Consider using a proper JSON library                              :story:
+
+We could use a full-blow JSON parser rather than the property tree
+one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
+Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
 
 *** Container details in JSON dump                                    :story:
 

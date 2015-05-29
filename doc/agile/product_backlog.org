@@ -236,7 +236,7 @@ story in backlog.
 : --- a/projects/cpp_formatters/src/types/class_declaration.cpp
 : +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
 : @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
-:  
+:
 :      // assignment is only available in leaf classes - MEC++-33
 :      if (!ci.is_parent()) {
 : -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
@@ -244,7 +244,7 @@ story in backlog.
 : +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
 : +                << "& other);" << std::endl;
 :      }
-:  
+:
 :      utility_.blank_line();
 : diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
 : index 5c9fe50..9276701 100644
@@ -252,13 +252,13 @@ story in backlog.
 : +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
 : @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
 :          return;
-:  
+:
 :      stream_ << indenter_ << ci.name() << "& "
 : -            << ci.name() << "::operator=(" << ci.name()
 : -            << " other) ";
 : +            << ci.name() << "::operator=(const " << ci.name()
 : +            << "& other) ";
-:  
+:
 :      utility_.open_scope();
 :      {
 
@@ -1368,10 +1368,10 @@ message that is not very informative:
 
 The log file is not much better:
 
-: 2014-09-06 16:11:54.143249 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: 
+: 2014-09-06 16:11:54.143249 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string:
 : 2014-09-06 16:11:54.150595 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
 : Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
-: std::exception::what: Failed to parse string: 
+: std::exception::what: Failed to parse string:
 : [P12tag_workflow] = Code generation failure.
 
 We should instead mention that the string was empty or blank. We also
@@ -2657,13 +2657,6 @@ all the diagrams:
 We should take advantage of this to define =include_directories= and
 =add_subdirectory=. At present we are doing these manually.
 
-*** Consider using a proper JSON library                              :story:
-
-We could use a full-blow JSON parser rather than the property tree
-one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-
-Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-
 *** Persisters only support XML                                       :story:
 
 Persister should support all archive types. At present it always
@@ -2756,13 +2749,13 @@ either on or off for a given class being tested. Patch:
 : -            const bool associations_indexed = false);
 : +            const bool associations_indexed = false,
 : +            const bool add_model_module = false);
-: 
+:
 :      public:
 :          /**
 : @@ -139,6 +140,14 @@ public:
 :          void associations_indexed(const bool v);
 :          /**@}*/
-: 
+:
 : +        /**
 : +         * @brief If true, adds a module for the model.
 : +         */
