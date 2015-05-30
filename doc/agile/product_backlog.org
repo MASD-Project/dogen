@@ -5393,6 +5393,16 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add cling support                                                 :story:
+
+One thing that would be really cool is if one could use generated code
+from [[https://github.com/vgvassilev/cling][cling]]. For each project we generate, we could also generate a
+"setup cling script" as described [[https://github.com/vgvassilev/cling/issues/67#issuecomment-107004157][here]].
+
+The script simply loads up the SO/static library and all of the
+includes of the SO. It also loads up all of the scripts of its
+dependencies.
+
 *** Use clang to extract stitch template header                       :story:
 
 Once we integrate clang, we could look at the expanded stitch template
