@@ -5021,6 +5021,27 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+
+*** Add a GitHub page for Dogen                                       :story:
+
+We should be able to create a simple project page for Dogen by using
+the automatic project generator:
+
+https://pages.github.com/
+
+However, to do so we probably should convert the README into MarkDown
+first. It is used to generate the project page's contents.
+
+*** Add Doxygen docs to GitHub page                                   :story:
+
+Once we setup the Dogen page, we should automatically upload the
+Doxygen documentation there. This should be done from Travis:
+
+- setup a Doxygen build in Travis that builds the docs into staging,
+  then changes branch into =gh-pages=, then =rm -rf= the previous docs
+  and copies across the new docs then commits and pushes.
+- we need to make sure the docs are not very large.
+
 *** Consider tagging the git branch in version                        :story:
 
 At present we make use of rev-list to determine the minor
