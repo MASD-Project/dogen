@@ -5048,6 +5048,8 @@ Doxygen documentation there. This should be done from Travis:
   and copies across the new docs then commits and pushes.
 - we need to make sure the docs are not very large.
 
+Example from RapidJSON available [[https://github.com/miloyip/rapidjson/blob/master/travis-doxygen.sh][here]].
+
 *** Consider tagging the git branch in version                        :story:
 
 At present we make use of rev-list to determine the minor
