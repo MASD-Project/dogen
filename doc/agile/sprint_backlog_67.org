@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-05-31 Sun 16:14]
+#+CAPTION: Clock summary at [2015-05-31 Sun 18:23]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *25:05* |       |       |
+| *Total time*                                                                | *26:38* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 25:05   |       |       |
-| Active                                                                      |         | 25:05 |       |
+| Stories                                                                     | 26:38   |       |       |
+| Active                                                                      |         | 26:38 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:37 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | STARTED Consider creating an Emacs mode for stitch                          |         |       |  0:56 |
-| STARTED Update legacy formatters to use needle for io                       |         |       |  0:49 |
+| STARTED Update legacy formatters to use needle for io                       |         |       |  2:22 |
 | STARTED Create a blog post on biicode                                       |         |       |  1:10 |
 | STARTED Consider using a proper JSON library                                |         |       |  0:47 |
 #+end:
@@ -88,6 +88,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Update legacy formatters to use needle for io             :story:
+    CLOCK: [2015-05-31 Sun 16:50]--[2015-05-31 Sun 18:23] =>  1:33
     CLOCK: [2015-05-31 Sun 16:08]--[2015-05-31 Sun 16:13] =>  0:05
     CLOCK: [2015-05-28 Thu 07:36]--[2015-05-28 Thu 08:20] =>  0:44
 

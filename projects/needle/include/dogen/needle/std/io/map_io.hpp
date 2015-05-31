@@ -32,6 +32,14 @@
 namespace std {
 
 template<typename Key, typename Value>
+inline dogen::needle::core::io::detail::
+no_op_formatting<const std::pair<Key, Value> >
+jsonify(const std::map<Key, Value>& v) {
+    return dogen::needle::core::io::detail::
+        no_op_formatting<const std::map<Key, Value> >(v);
+}
+
+template<typename Key, typename Value>
 inline ostream& operator<<(ostream& s, const map<Key, Value>& v) {
     using namespace dogen::needle::core::io::detail;
     s << array_formatting<const map<Key, Value>&>(v);

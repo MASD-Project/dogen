@@ -29,6 +29,7 @@
 #include "dogen/needle/std/io/forward_list_io.hpp"
 #include "dogen/needle/std/io/list_io.hpp"
 #include "dogen/needle/std/io/pair_io.hpp"
+#include "dogen/needle/std/io/string_io.hpp"
 #include "dogen/needle/std/io/map_io.hpp"
 #include "dogen/needle/std/io/unordered_map_io.hpp"
 #include "dogen/needle/std/io/set_io.hpp"
@@ -59,12 +60,18 @@ struct test_object {
 };
 
 inline std::ostream& operator<<(std::ostream& s, const test_object& to) {
-    using namespace dogen::needle::core::io;
+    using dogen::needle::core::io::constants;
     s << constants::open_object()
       << "\"s\": " << jsonify(to.s) << constants::separator()
       << "\"i\": " << jsonify(to.i)
       << constants::close_object();
     return(s);
+}
+
+inline dogen::needle::core::io::detail::no_op_formatting<const test_object>
+jsonify(const test_object& v) {
+    return dogen::needle::core::io::detail::
+        no_op_formatting<const test_object>(v);
 }
 
 bool operator<(const test_object& lhs, const test_object& rhs) {
@@ -89,7 +96,6 @@ public:
 
 }
 
-
 using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(io)
@@ -99,37 +105,37 @@ BOOST_AUTO_TEST_CASE(jsonification_of_integers_produces_expected_result) {
 
     std::ostringstream ss;
     const unsigned int i0(10);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("10");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const int i1(-11);
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "-11";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const unsigned short i2(12);
-    ss << dogen::needle::core::io::jsonify(i2);
+    ss << jsonify(i2);
     expected = "12";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const short i3(-13);
-    ss << dogen::needle::core::io::jsonify(i3);
+    ss << jsonify(i3);
     expected = "-13";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const unsigned long i4(14);
-    ss << dogen::needle::core::io::jsonify(i4);
+    ss << jsonify(i4);
     expected = "14";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const short i5(-15);
-    ss << dogen::needle::core::io::jsonify(i5);
+    ss << jsonify(i5);
     expected = "-15";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -139,13 +145,13 @@ BOOST_AUTO_TEST_CASE(jsonification_of_floating_produces_expected_result) {
 
     std::ostringstream ss;
     const double i0(0.000001);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("0.000001");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const float i1(0.000002);
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "0.000002";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -155,13 +161,13 @@ BOOST_AUTO_TEST_CASE(jsonification_of_char_produces_expected_result) {
 
     std::ostringstream ss;
     const char i0(32);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("\"0x20\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const char i1(0);
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "\"0x00\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -171,13 +177,13 @@ BOOST_AUTO_TEST_CASE(jsonification_of_bool_produces_expected_result) {
 
     std::ostringstream ss;
     const bool i0(true);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("true");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const bool i1(false);
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "false";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -187,13 +193,13 @@ BOOST_AUTO_TEST_CASE(jsonification_of_string_produces_expected_result) {
 
     std::ostringstream ss;
     const std::string i0("my_string");
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("\"my_string\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const std::string i1("my_string with quote \" and new line \n");
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "\"my_string with quote <quote> and new line <new_line>\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -203,7 +209,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_complex_type_produces_expected_result) {
 
     std::ostringstream ss;
     const test_object i0("some string", 123);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("{ \"s\": \"some string\", \"i\": 123 }");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -471,7 +477,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_deque_produces_expected_result) {
     expected = "[ { \"s\": \"some string\", \"i\": 123 } ]";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
-
+/*
 BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_std_shared_pointer_produces_expected_result");
 
@@ -537,14 +543,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_variant_produces_expected_result) {
 
     std::ostringstream ss;
     const boost::variant<unsigned int, std::string> i0 = "10";
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("{ \"__type__\": \"boost::variant\", "
         "\"data\": \"10\" }");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     const boost::variant<unsigned int, std::string> i1 = 15;
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "{ \"__type__\": \"boost::variant\", \"data\": 15 }";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -554,7 +560,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_gregorian_date_produces_expected_res
 
     std::ostringstream ss;
     const boost::gregorian::date i0(2002, 2, 15);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("\"2002-Feb-15\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
@@ -565,14 +571,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_posix_time_produces_expected_result)
 
     std::ostringstream ss;
     const boost::posix_time::time_duration i0(1,2,3);
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("\"01:02:03\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     boost::gregorian::date d(2002, 2, 15);
     boost::posix_time::ptime i1(d, i0);
-    ss << dogen::needle::core::io::jsonify(i1);
+    ss << jsonify(i1);
     expected = "\"2002-Feb-15 01:02:03\"";
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
@@ -582,14 +588,14 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_filesystem_path_produces_expected_re
 
     std::ostringstream ss;
     const boost::filesystem::path i0("/a/b/c");
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("\"/a/b/c\"");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 
     // FIXME: backslashes are not being converted for some reason.
     // const boost::filesystem::path i1("\\a\\b\\c");
-    // ss << dogen::needle::core::io::jsonify(i1);
+    // ss << jsonify(i1);
     // BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
@@ -603,10 +609,10 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_ptree_produces_expected_result) {
     ptree i0;
     i0.push_back(ptree::value_type("key_1", c));
 
-    ss << dogen::needle::core::io::jsonify(i0);
+    ss << jsonify(i0);
     std::string expected("{    \"key_1\":    {        \"key_2\": \"0\"    }}");
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
     ss.str("");
 }
-
+*/
 BOOST_AUTO_TEST_SUITE_END()

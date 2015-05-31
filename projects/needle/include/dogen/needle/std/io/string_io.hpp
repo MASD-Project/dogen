@@ -18,27 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_NEEDLE_STD_IO_MEMORY_IO_HPP
-#define DOGEN_NEEDLE_STD_IO_MEMORY_IO_HPP
+#ifndef DOGEN_NEEDLE_STD_IO_STRING_IO_HPP
+#define DOGEN_NEEDLE_STD_IO_STRING_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <memory>
-#include <ostream>
+#include <string>
+#include <utility>
 #include "dogen/needle/core/io/jsonify.hpp"
 
 namespace std {
 
-template<typename T>
-inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& v) {
-    if (v)
-        s << jsonify(*v);
-    else
-        s << "\"shared_ptr\": \"empty shared pointer\"";
-
-    return s;
+/**
+ * @brief String handling.
+ */
+inline dogen::needle::core::io::detail::
+quoted_tidied_formatting<const std::string&>
+jsonify(const std::string& v) {
+    return dogen::needle::core::io::detail::
+        quoted_tidied_formatting<const std::string&>(v);
 }
 
 }

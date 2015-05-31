@@ -33,11 +33,17 @@ namespace std {
 
 template<typename Key, typename Value>
 inline ostream& operator<<(ostream& s, const pair<Key, Value>& v) {
-    // not using constants as this is slightly more efficient.
-    using namespace dogen::needle::core::io;
     s << "{ \"key\": " << jsonify(v.first)
       << ", \"value\": " << jsonify(v.second) << " }";
     return(s);
+}
+
+template<typename Key, typename Value>
+inline dogen::needle::core::io::detail::
+no_op_formatting<const std::pair<Key, Value> >
+jsonify(const std::pair<Key, Value>& v) {
+    return dogen::needle::core::io::detail::
+        no_op_formatting<const std::pair<Key, Value> >(v);
 }
 
 }

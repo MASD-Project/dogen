@@ -133,43 +133,41 @@ private:
 
 } } } } }
 
-namespace dogen {
-namespace needle {
-namespace core {
-namespace io {
-
 /**
  * @brief Integer handling.
  */
 /**@{*/
-inline detail::no_op_formatting<const unsigned int>
+inline dogen::needle::core::io::detail::no_op_formatting<const unsigned int>
 jsonify(const unsigned int v) {
-    return detail::no_op_formatting<const unsigned int>(v);
+    return dogen::needle::core::io::
+        detail::no_op_formatting<const unsigned int>(v);
 }
 
-inline detail::no_op_formatting<const int>
+inline dogen::needle::core::io::detail::no_op_formatting<const int>
 jsonify(const int v) {
-    return detail::no_op_formatting<const int>(v);
+    return dogen::needle::core::io::detail::no_op_formatting<const int>(v);
 }
 
-inline detail::no_op_formatting<const unsigned short>
+inline dogen::needle::core::io::detail::no_op_formatting<const unsigned short>
 jsonify(const unsigned short v) {
-    return detail::no_op_formatting<const unsigned short>(v);
+    return dogen::needle::core::io::
+        detail::no_op_formatting<const unsigned short>(v);
 }
 
-inline detail::no_op_formatting<const short>
+inline dogen::needle::core::io::detail::no_op_formatting<const short>
 jsonify(const short v) {
-    return detail::no_op_formatting<const short>(v);
+    return dogen::needle::core::io::detail::no_op_formatting<const short>(v);
 }
 
-inline detail::no_op_formatting<const unsigned long>
+inline dogen::needle::core::io::detail::no_op_formatting<const unsigned long>
 jsonify(const unsigned long v) {
-    return detail::no_op_formatting<const unsigned long>(v);
+    return dogen::needle::core::io::
+        detail::no_op_formatting<const unsigned long>(v);
 }
 
-inline detail::no_op_formatting<const long>
+inline dogen::needle::core::io::detail::no_op_formatting<const long>
 jsonify(const long v) {
-    return detail::no_op_formatting<const long>(v);
+    return dogen::needle::core::io::detail::no_op_formatting<const long>(v);
 }
 /**@}*/
 
@@ -177,14 +175,14 @@ jsonify(const long v) {
  * @brief Floating handling.
  */
 /**@{*/
-inline detail::float_formatting<const float>
+inline dogen::needle::core::io::detail::float_formatting<const float>
 jsonify(const float v) {
-    return detail::float_formatting<const float>(v);
+    return dogen::needle::core::io::detail::float_formatting<const float>(v);
 }
 
-inline detail::float_formatting<const double>
+inline dogen::needle::core::io::detail::float_formatting<const double>
 jsonify(const double v) {
-    return detail::float_formatting<const double>(v);
+    return dogen::needle::core::io::detail::float_formatting<const double>(v);
 }
 /**@}*/
 
@@ -192,44 +190,33 @@ jsonify(const double v) {
  * @brief Char handling.
  */
 /**@{*/
-inline detail::quoted_hex_formatting<const unsigned char>
+inline dogen::needle::core::io::
+detail::quoted_hex_formatting<const unsigned char>
 jsonify(const unsigned char v) {
-    return detail::quoted_hex_formatting<const unsigned char>(v);
+    return dogen::needle::core::io::
+        detail::quoted_hex_formatting<const unsigned char>(v);
 }
 
-inline detail::quoted_hex_formatting<const char>
+inline dogen::needle::core::io::detail::quoted_hex_formatting<const char>
 jsonify(const char v) {
-    return detail::quoted_hex_formatting<const char>(v);
+    return dogen::needle::core::io::
+        detail::quoted_hex_formatting<const char>(v);
 }
 /**@}*/
 
 /**
  * @brief Bool handling.
  */
-inline detail::truth_values_formatting<const bool>
+inline dogen::needle::core::io::detail::truth_values_formatting<const bool>
 jsonify(const bool v) {
-    return detail::truth_values_formatting<const bool>(v);
+    return dogen::needle::core::io::
+        detail::truth_values_formatting<const bool>(v);
 }
 
-/**
- * @brief String handling.
- *
- * For whatever reason we couldn't get this to work when placing this
- * function definition in its own header under std.
- */
-inline detail::quoted_tidied_formatting<const std::string&>
-jsonify(const std::string& v) {
-    return detail::quoted_tidied_formatting<const std::string&>(v);
-}
-
-/**
- * @brief Object handling.
- */
-template<typename Value>
-inline detail::no_op_formatting<const Value&>
-jsonify(const Value& v) {
-    return detail::no_op_formatting<const Value&>(v);
-}
+namespace dogen {
+namespace needle {
+namespace core {
+namespace io {
 
 namespace detail {
 
