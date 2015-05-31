@@ -5021,6 +5021,12 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Add Travis support for 32-bits                                    :story:
+
+It seems its fairly straightforward to add 32-bit support to Travis,
+as per RapidJSON:
+
+https://github.com/miloyip/rapidjson/blob/master/.travis.yml
 
 *** Add a GitHub page for Dogen                                       :story:
 
