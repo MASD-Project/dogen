@@ -112,3 +112,10 @@ These metrics would help in deciding which package to depend on.
 - requires a different account from main websidte
 - problems with ninja:
   http://forum.biicode.com/t/add-ninja-build-system/356
+- StackOverflow: http://stackoverflow.com/questions/tagged/biicode
+- issues: https://github.com/biicode/biicode/issues
+- boost 1.57: https://www.biicode.com/biicode/biicode/boost/1.57.0
+- travis deployment:
+  http://docs.travis-ci.com/user/deployment/biicode/
+- Building C / C++ applications with biicode
+  http://learn.koding.com/guides/getting-started-biicode/
