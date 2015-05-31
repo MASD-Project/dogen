@@ -1,0 +1,114 @@
+#+title: Nerd Food: Using Biicode
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+Like any other C++ developer who has used other languages - such as
+Ruby, Java and C# - I have keenly felt the need for a package manager
+in C++. Whilst many things do come with Debian - and as such =apt-get=
+does spares us from the worst of it - we still have to deal with this
+pain when trying to write cross-platform code. And sometimes the code
+we need is not available in Debian.
+
+Anyway, I had heard of [[https://www.biicode.com/][Biicode]] quite a while ago. Being from the same
+peninsula as my good self, I felt a need to support them best I could,
+and setup an account. Sadly, I never quite found the time to play with
+it. Fast forward to now. I recently found the need to add [[https://github.com/miloyip/rapidjson][RapidJson]] as
+a dependency to [[https://github.com/DomainDrivenConsulting/dogen][Dogen]], and this was the perfect excuse to take Biicode
+for a spin.
+
+** Installing
+
+I run Debian testing on all of my machines. To get Biicode installed I
+followed their manual setup instructions (available [[http://docs.biicode.com/c%2B%2B/installation.html#alternative-install-debian][here]]).
+
+First, I added their server to my =/etc/apt/sources.list=:
+
+: deb http://apt.biicode.com wheezy main
+
+I then added their key:
+
+#+begin_quote
+wget -O /etc/apt/trusted.gpg.d/biicode.gpg http://apt.biicode.com/keyring.gpg
+
+--2015-05-31 14:16:24--  http://apt.biicode.com/keyring.gpg
+Resolving apt.biicode.com (apt.biicode.com)... 146.185.177.50
+Connecting to apt.biicode.com (apt.biicode.com)|146.185.177.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1203 (1.2K) [application/octet-stream]
+Saving to: ‘/etc/apt/trusted.gpg.d/biicode.gpg’
+
+/etc/apt/trusted.gp 100%[=====================>]   1.17K  --.-KB/s   in 0s
+
+2015-05-31 14:16:24 (377 MB/s) - ‘/etc/apt/trusted.gpg.d/biicode.gpg’ saved [1203/1203]
+#+end_quote
+
+I then updated:
+
+: # apt-get update
+
+Finally, I installed =biicode=:
+
+: # apt-get install biicode
+
+
+** Setting it up
+
+As per documentation, I ran the setup. This was done as an
+unprivileged user, from my Dogen project directory.
+
+#+begin_quote
+$ bii setup:cpp
+WARN: This setup is EXPERIMENTAL.
+Please refer to the docs for manual installation if something fails
+cmake version 3.2.2
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+Valid cmake version 3.2.2 > 3.0 in your path
+gcc 4.9.2 already installed
+g++ 4.9.2 already installed
+#+end_quote
+
+Sadly clang was not picked up, most likely because its called
+=clang-3.5= rather than just =clang=.
+
+FIXME: post in biicode forum:
+
+http://forum.biicode.com/t/building-out-of-tree-using-biicode/460
+
+
+** Adding the RapidJson Dependency
+
+One slightly confusing thing about the process of adding dependencies
+is that there may be more than one page for a given dependency and it
+is not clear which one is the "best" one. For RapidJson there are
+three options, presumably from three different biicode users:
+
+- [[https://www.biicode.com/fenix/rapidjson][fenix]]: authored on 2015-Apr-28, v1.0.1.
+- [[https://www.biicode.com/hithwen/rapidjson][hithwen]]: authored 2014-Jul-30
+- [[https://www.biicode.com/denis/rapidjson][denis]]: authored 2014-Oct-09
+
+The "fenix" option appeared to be the most up-to-date so I went with
+that one. However, this illustrates a deeper issue: how do you know
+you can trust a package? In the ideal setup, the project owners would
+add biicode support and that would then be the one true
+version. However, like any other project, biicode faces the initial
+adoption conundrum: people are not going to be willing to spend time
+adding support for biicode if there aren't a lot of users of biicode
+out there already, but without a large library of dependencies there
+is nothing to draw users in. In this light, one can understand that it
+makes sense for biicode to allow anyone to add new packages as a way
+to bootstrap their user base; but sooner or later they will face the
+same issues as all distributions face.
+
+A few features would be helpful in the mean time:
+
+- popularity/number of downloads
+- user ratings
+
+These metrics would help in deciding which package to depend on.
+
+** Notes
+
+- forum: http://forum.biicode.com/
+- requires a different account from main websidte
+- problems with ninja:
+  http://forum.biicode.com/t/add-ninja-build-system/356
