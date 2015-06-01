@@ -17,6 +17,10 @@ models. At present it is needed for =io= and =test_data=. However, we
 ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of difficulties]] when we tried to implement it for =io=
 using templates.
 
+For the previous attempt to create the needle library see this commit:
+
+feb4750 * integration needle: remove project and includes
+
 *** Consider using a proper JSON library                              :story:
 
 We could use a full-blow JSON parser rather than the property tree
@@ -29,6 +33,14 @@ Actually there is a project comparing JSON libraries:
 [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
 
 One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should first provide support for JSON with
+roundtripping tests and only then change io to be implemented in terms
+of JSON. These should be two totally separate stories.
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
 
 *** Consider creating an Emacs mode for stitch                        :story:
 

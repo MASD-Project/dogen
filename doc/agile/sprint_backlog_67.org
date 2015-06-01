@@ -14,20 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-01 Mon 14:38]
+#+CAPTION: Clock summary at [2015-06-01 Mon 14:49]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *27:15* |       |       |
+| *Total time*                                                                | *27:25* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 27:15   |       |       |
-| Active                                                                      |         | 27:15 |       |
+| Stories                                                                     | 27:25   |       |       |
+| Active                                                                      |         | 27:25 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
 | POSTPONED Consider using a proper JSON library                              |         |       |  0:47 |
 | POSTPONED Create a blog post on biicode                                     |         |       |  1:10 |
 | CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
+| COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -171,6 +172,17 @@ More thoughts:
   able to get =std::pair= in a container to work. We need to find a
   solution to port across the helper functions for now.
 
+*** COMPLETED Remove needle and RapidJson from repo                   :story:
+    CLOSED: [2015-06-01 Mon 14:48]
+    CLOCK: [2015-06-01 Mon 14:38]--[2015-06-01 Mon 14:48] =>  0:10
+
+Since we did not managed to get this working, we should just remove
+all of the experiments we performed:
+
+- remove needle project
+- remove third party stuff for RapidJson
+- add links to these commits to the stories in the backlog
+
 *** STARTED Implement class implementation formatter using stitch     :story:
 
 We need to implement a stitch template for the class
@@ -196,15 +208,6 @@ from legacy into a stitch world. The simplest approach is just to
 extend the assistant; the template then just calls the assistant after
 the includes but before the namespaces. We may need some kind of
 lambda parameter to be passed in to boilerplate to support this.
-
-*** Remove needle and RapidJson from repo                             :story:
-
-Since we did not managed to get this working, we should just remove
-all of the experiments we performed:
-
-- remove needle project
-- remove third party stuff for RapidJson
-- add links to these commits to the stories in the backlog
 
 *** Container details in JSON dump                                    :story:
 
