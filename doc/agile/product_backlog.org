@@ -996,6 +996,28 @@ something along these lines.
 
 *** Nested external model path results in strange references          :story:
 
+The external model path does not contribute to path resolution in a
+model. Up til now that has actually been a feature; it would have been
+annoying to have to dype =dogen::= on every type for every
+model. Instead, we refer to say =dogen::sml::model= as simply
+=sml::model= in all models that use =sml=. However this masks a deeper
+problem: this is not the desired behaviour at all times. We saw this
+problem when we created multiple models under dynamic:
+=dynamic::schema= and =dynamic::expansion=. In this case, users of
+these models referred to them as =schema= and =expansion=
+respectively, and this was not ideal. In general:
+
+- external module path should contribute to references just like
+  internal module path does - there should be no difference;
+- dogen should be clever enough to determine if two models share a
+  top-level namespace (regardless if it was obtained from the external
+  or internal module path) that there is no need to have an absolute
+  path. So in the case of =dogen=, since every model has =dogen= as
+  their external module path, according to this rule we should not
+  have to type it.
+
+*Previous Understanding*
+
 For the dynamic schema model we have an external model path of
 =dogen::dynamic::schema=. This is because there are two things we need to place
 under =dynamic= (also =dogen::dynamic::expansion=). This revealed a
