@@ -478,7 +478,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_deque_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 /*
-BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_std_shared_pointer_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_std_shared_pointer_produces_expected_result");
 
     std::ostringstream ss;
@@ -500,7 +500,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_std_shared_pointer_produces_expected_resul
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_optional_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_optional_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_boost_optional_produces_expected_result");
 
     std::ostringstream ss;
@@ -516,7 +516,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_optional_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_shared_pointer_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_shared_pointer_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_boost_shared_pointer_produces_expected_result");
 
     std::ostringstream ss;
@@ -538,7 +538,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_shared_pointer_produces_expected_res
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_variant_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_variant_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_boost_variant_produces_expected_result");
 
     std::ostringstream ss;
@@ -555,7 +555,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_variant_produces_expected_result) {
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_gregorian_date_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_gregorian_date_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_boost_gregorian_date_produces_expected_result");
 
     std::ostringstream ss;
@@ -566,7 +566,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_gregorian_date_produces_expected_res
     ss.str("");
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_posix_time_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_posix_time_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_posix_time_date_produces_expected_result");
 
     std::ostringstream ss;
@@ -583,7 +583,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_posix_time_produces_expected_result)
     BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_filesystem_path_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_filesystem_path_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_filesystem_path_produces_expected_result");
 
     std::ostringstream ss;
@@ -599,7 +599,7 @@ BOOST_AUTO_TEST_CASE(jsonification_of_boost_filesystem_path_produces_expected_re
     // BOOST_CHECK(asserter::assert_object(expected, ss.str()));
 }
 
-BOOST_AUTO_TEST_CASE(jsonification_of_boost_ptree_produces_expected_result) {
+BOOST_AUTO_TEST_CASE_IGNORE(jsonification_of_boost_ptree_produces_expected_result) {
     SETUP_TEST_LOG_SOURCE("jsonification_of_ptree_produces_expected_result");
 
     std::ostringstream ss;
