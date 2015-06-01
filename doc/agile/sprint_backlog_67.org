@@ -245,6 +245,8 @@ Notes:
   problem. The quick and dirty approach will work because its not that
   different from the existing approach, just re-implemented for
   stitch.
+- we called the class "helper method formatter" but it generates
+  multiple methods. It should be "helper methods formatter".
 
 *** Container details in JSON dump                                    :story:
 
