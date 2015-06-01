@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-01 Mon 15:08]
+#+CAPTION: Clock summary at [2015-06-01 Mon 17:54]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *27:41* |       |       |
+| *Total time*                                                                | *30:24* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 27:41   |       |       |
-| Active                                                                      |         | 27:41 |       |
+| Stories                                                                     | 30:24   |       |       |
+| Active                                                                      |         | 30:24 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:12 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
@@ -29,6 +29,7 @@
 | POSTPONED Create a blog post on biicode                                     |         |       |  1:10 |
 | CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
 | COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
+| STARTED Implement io helper method generator                                |         |       |  2:43 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -202,7 +203,8 @@ Problems:
   overloads.
 - we can't implement this without needle support.
 
-*** Implement io helper method generator                              :story:
+*** STARTED Implement io helper method generator                      :story:
+    CLOCK: [2015-06-01 Mon 15:10]--[2015-06-01 Mon 17:53] =>  2:43
 
 We need to find a way to copy across the io method generation code
 from legacy into a stitch world. The simplest approach is just to
@@ -215,7 +217,34 @@ Notes:
 - we need access to family information in order to do this
   (e.g. sequence container, etc) or we can bring across the
   transformer hacks too.
--
+- We need two methods: a generator for the helpers at the top and a
+  generator for the streaming. Or we could implement the inserter
+  method itself in stitch.
+- actually, we could conceivably have a stitch template for each
+  helper method; and to have these templates "linked" in some kind of
+  fashion to one or more types (this was the role performed by
+  family"); and then to have the "recursor" take a container of linked
+  stitch templates and then apply them as the types match. For this we
+  would need a lot of machinery to manage the associations between
+  types and templates. But for now we could manage this association
+  manually by calling the right template at the right time. As luck
+  would have it we are already ignoring all stitch related files so we
+  just need to manually generate the templates and hook them together
+  with a "helper method formatter" in each facet. We can then pass in
+  a parameter to the assistant to generate the appropriate helpers
+  when setting up bootstrap (or even pass in an instance of the
+  helper).
+- we could go one step further: create a single helper method
+  formatter which has a "mapping table" of functions, which are just
+  calls to stitch templates. They may be supplied or not. Each facet
+  has a factory for this helper that supplies its own templates. We
+  call the factory when invoking the boilerplate formatter. The
+  problem is our helpers are full of hackery and we did not model
+  these types properly so taking an approach like this one will
+  probably mean we will get stuck at some point with some fundamental
+  problem. The quick and dirty approach will work because its not that
+  different from the existing approach, just re-implemented for
+  stitch.
 
 *** Container details in JSON dump                                    :story:
 

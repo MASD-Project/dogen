@@ -117,6 +117,7 @@
 #include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
 #include "dogen/cpp/types/formatters/hash/enum_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/io/helper_method_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/cpp/types/settings/inclusion_directive_settings.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"

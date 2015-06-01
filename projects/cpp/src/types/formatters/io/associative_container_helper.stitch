@@ -1,0 +1,20 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=s #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/io/associative_container_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::io #>
+<#+
+
+void associative_container_helper(std::ostream& s,
+    const formattables::nested_type_info& /*t*/) {
+#>
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
+<#+
+}
+#>

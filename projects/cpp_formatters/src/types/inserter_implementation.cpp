@@ -27,10 +27,9 @@
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/inserter_implementation.hpp"
 
-using namespace dogen::utility::log;
-
 namespace {
 
+using namespace dogen::utility::log;
 auto lg(logger_factory("cpp_formatters.inserter_implementation"));
 
 // FIXME: until we add support to indenter.
