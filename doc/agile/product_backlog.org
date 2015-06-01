@@ -10,6 +10,39 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Create the =needle= library                                       :story:
+
+We need to create a library with support code that is used by the
+models. At present it is needed for =io= and =test_data=. However, we
+ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of difficulties]] when we tried to implement it for =io=
+using templates.
+
+*** Consider using a proper JSON library                              :story:
+
+We could use a full-blow JSON parser rather than the property tree
+one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
+Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+
+Actually there is a project comparing JSON libraries:
+
+[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+
+One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+*** Consider creating an Emacs mode for stitch                        :story:
+
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
 *** Consider renaming path derivatives                                :story:
 
 We should have a name that implies that all fields of this class were

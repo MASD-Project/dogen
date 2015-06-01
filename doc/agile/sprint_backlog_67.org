@@ -14,23 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-05-31 Sun 18:23]
+#+CAPTION: Clock summary at [2015-06-01 Mon 14:38]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *26:38* |       |       |
+| *Total time*                                                                | *27:15* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 26:38   |       |       |
-| Active                                                                      |         | 26:38 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:37 |
+| Stories                                                                     | 27:15   |       |       |
+| Active                                                                      |         | 27:15 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
-| STARTED Consider creating an Emacs mode for stitch                          |         |       |  0:56 |
-| STARTED Update legacy formatters to use needle for io                       |         |       |  2:22 |
-| STARTED Create a blog post on biicode                                       |         |       |  1:10 |
-| STARTED Consider using a proper JSON library                                |         |       |  0:47 |
+| POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
+| POSTPONED Consider using a proper JSON library                              |         |       |  0:47 |
+| POSTPONED Create a blog post on biicode                                     |         |       |  1:10 |
+| CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-01 Mon 14:19]--[2015-06-01 Mon 14:38] =>  0:19
     CLOCK: [2015-05-25 Mon 08:50]--[2015-05-25 Mon 09:27] =>  0:37
 
 Updates to sprint and product backlog.
@@ -66,31 +67,62 @@ Problems:
   added some strange latex indentation.
 - no auto fill mode in org
 
-*** STARTED Consider creating an Emacs mode for stitch                :story:
+*** POSTPONED Consider creating an Emacs mode for stitch              :story:
+    CLOSED: [2015-06-01 Mon 14:26]
     CLOCK: [2015-05-27 Wed 17:05]--[2015-05-27 Wed 18:01] =>  0:56
 
-*** STARTED Implement class implementation formatter using stitch     :story:
+*Rationale*: this is not in keeping with the sprint's mission so we
+need to backlog it.
 
-We need to implement a stitch template for the class
-implementation formatter in types, plug it in and start working
-through the diffs.
+*Original Story*
 
-Problems:
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+*** POSTPONED Consider using a proper JSON library                    :story:
+    CLOSED: [2015-06-01 Mon 14:24]
+    CLOCK: [2015-05-31 Sun 15:20]--[2015-05-31 Sun 16:07] =>  0:47
 
-- includes will fail on stream manipulators. This is because we need
-  to check if we require them when generating dependencies, but we
-  have to do so manually since the class info doesn't exist yet. We
-  need to hack this for now - once we have "field gathering" support
-  this will be easier.
-- we need family back for tidy-up string. or perhaps we should have a
-  "requires tidying" property and then needle can provide adequate
-  overloads.
-- we can't implement this without needle support.
+*Rationale*: RapidJson was not a solution for the problem at hand (the
+needle approach for io), so we need to backlog this story.
 
-*** STARTED Update legacy formatters to use needle for io             :story:
+*Original Story*
+
+We could use a full-blow JSON parser rather than the property tree
+one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+
+Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+
+Actually there is a project comparing JSON libraries:
+
+[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+
+One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+*** POSTPONED Create a blog post on biicode                           :story:
+    CLOSED: [2015-06-01 Mon 14:30]
+    CLOCK: [2015-05-31 Sun 14:10]--[2015-05-31 Sun 15:20] =>  1:10
+
+*Rationale*: RapidJson was not a solution for the problem at hand (the
+needle approach for io); since this story was a consequence of using
+RapidJson, we need to backlog it.
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+*** CANCELLED Update legacy formatters to use needle for io           :story:
+    CLOSED: [2015-06-01 Mon 14:26]
+    CLOCK: [2015-06-01 Mon 14:00]--[2015-06-01 Mon 14:18] =>  0:18
     CLOCK: [2015-05-31 Sun 16:50]--[2015-05-31 Sun 18:23] =>  1:33
     CLOCK: [2015-05-31 Sun 16:08]--[2015-05-31 Sun 16:13] =>  0:05
     CLOCK: [2015-05-28 Thu 07:36]--[2015-05-28 Thu 08:20] =>  0:44
+
+*Rationale*: after a lot experimentation, it seems that doing this
+from needle is not entirely trivial. Instead, we need to take the path
+of least resistance which is to re-implement the legacy approach in a
+way that is compatible with stitch templates.
+
+*Original Story*
 
 - add some hack to includer to pick up these header files.
 - remove io helpers from transformer and regenerate all models.
@@ -135,26 +167,44 @@ More thoughts:
 - the split of JSON from =operator<<= is not necessarily a solution to
   this problem. The most important thing is to move to [[http://en.wikipedia.org/wiki/Argument-dependent_name_lookup][ADL]] rather than
   partial ordering.
+- an ADL implementation still suffers from this problem; we are not
+  able to get =std::pair= in a container to work. We need to find a
+  solution to port across the helper functions for now.
 
-*** STARTED Create a blog post on biicode                             :story:
-    CLOCK: [2015-05-31 Sun 14:10]--[2015-05-31 Sun 15:20] =>  1:10
+*** STARTED Implement class implementation formatter using stitch     :story:
 
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
+We need to implement a stitch template for the class
+implementation formatter in types, plug it in and start working
+through the diffs.
 
-*** STARTED Consider using a proper JSON library                      :story:
-    CLOCK: [2015-05-31 Sun 15:20]--[2015-05-31 Sun 16:07] =>  0:47
+Problems:
 
-We could use a full-blow JSON parser rather than the property tree
-one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- includes will fail on stream manipulators. This is because we need
+  to check if we require them when generating dependencies, but we
+  have to do so manually since the class info doesn't exist yet. We
+  need to hack this for now - once we have "field gathering" support
+  this will be easier.
+- we need family back for tidy-up string. or perhaps we should have a
+  "requires tidying" property and then needle can provide adequate
+  overloads.
+- we can't implement this without needle support.
 
-Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+*** Implement io helper method generator                              :story:
 
-Actually there is a project comparing JSON libraries:
+We need to find a way to copy across the io method generation code
+from legacy into a stitch world. The simplest approach is just to
+extend the assistant; the template then just calls the assistant after
+the includes but before the namespaces. We may need some kind of
+lambda parameter to be passed in to boilerplate to support this.
 
-[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+*** Remove needle and RapidJson from repo                             :story:
 
-One interesting library is [[https://github.com/dropbox/json11][Json11]].
+Since we did not managed to get this working, we should just remove
+all of the experiments we performed:
+
+- remove needle project
+- remove third party stuff for RapidJson
+- add links to these commits to the stories in the backlog
 
 *** Container details in JSON dump                                    :story:
 
