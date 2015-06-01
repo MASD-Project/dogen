@@ -153,7 +153,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
     ${CMAKE_SOURCE_DIR}/projects/needle/include
-    ${CMAKE_SOURCE_DIR}/third_party/
     )
 
 #
