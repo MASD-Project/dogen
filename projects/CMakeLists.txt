@@ -152,7 +152,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dynamic/include
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
-    ${CMAKE_SOURCE_DIR}/projects/needle/include
     )
 
 #
@@ -190,8 +189,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/needle/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/needle/src)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)

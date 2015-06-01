@@ -5,10 +5,4 @@
   :name "Dogen Project"
   :version "0.0.1"
   :file (expand-file-name "dogen.ede")
-  :compdb-file (expand-file-name "../output/dogen/clang-3.5/compile_commands.json")
-  ;:configurations '("clang_3_5_release" "clang_3_5_debug")
-  ;; :configuration-directories
-  ;; '(
-  ;;   (expand-file-name "../output/dogen/clang-3.5/")
-  ;;   (expand-file-name "../output/dogen/clang-3.5_debug/"))
-  ))
+  :compdb-file (expand-file-name "../output/dogen/clang-3.5/compile_commands.json")))
