@@ -28,13 +28,12 @@
 #include "dogen/cpp/types/formatters/io/smart_pointer_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/io/string_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/io/variant_helper_stitch.hpp"
-
-#include "dogen/cpp/types/formatters/io/helper_method_formatter.hpp"
+#include "dogen/cpp/types/formatters/io/helper_methods_formatter.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("cpp.formatters.io.helper_method_formatter"));
+auto lg(logger_factory("cpp.formatters.io.helper_methods_formatter"));
 
 const std::string invalid_sequence_container(
     "Sequence containers have exactly one type argument");
@@ -56,12 +55,12 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-helper_method_formatter::helper_method_formatter(
+helper_methods_formatter::helper_methods_formatter(
     const std::list<formattables::property_info>& properties)
     : properties_(properties) {}
 
 
-void helper_method_formatter::sequence_container_helper(
+void helper_methods_formatter::sequence_container_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
 
@@ -72,7 +71,7 @@ void helper_method_formatter::sequence_container_helper(
     sequence_container_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::associative_container_helper(
+void helper_methods_formatter::associative_container_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
 
@@ -88,7 +87,7 @@ void helper_method_formatter::associative_container_helper(
     associative_container_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::smart_pointer_helper(
+void helper_methods_formatter::smart_pointer_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
 
@@ -99,7 +98,7 @@ void helper_method_formatter::smart_pointer_helper(
     smart_pointer_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::optional_helper(
+void helper_methods_formatter::optional_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
     if (t.children().size() != 1) {
@@ -110,7 +109,7 @@ void helper_method_formatter::optional_helper(
     optional_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::
+void helper_methods_formatter::
 pair_helper(formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
     if (t.children().size() != 2) {
@@ -121,7 +120,7 @@ pair_helper(formatters::nested_type_formatting_assistant& fa,
     pair_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::
+void helper_methods_formatter::
 variant_helper(formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
     if (t.children().empty()) {
@@ -132,7 +131,7 @@ variant_helper(formatters::nested_type_formatting_assistant& fa,
     variant_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::ptree_helper(
+void helper_methods_formatter::ptree_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {
     if (!t.children().empty()) {
@@ -143,7 +142,7 @@ void helper_method_formatter::ptree_helper(
     ptree_helper_stitch(fa, t);
 }
 
-void helper_method_formatter::recursive_helper_method_creator(
+void helper_methods_formatter::recursive_helper_method_creator(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t,
     std::unordered_set<std::string>& types_done) const {
@@ -174,7 +173,7 @@ void helper_method_formatter::recursive_helper_method_creator(
     types_done.insert(t.complete_identifiable_name());
 }
 
-void helper_method_formatter::format(std::ostream& s) const {
+void helper_methods_formatter::format(std::ostream& s) const {
     if (properties_.empty())
         return;
 

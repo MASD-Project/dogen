@@ -35539,19 +35539,19 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="434,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="433.95,205.95;446.065,209.05"/>
+        <dia:rectangle val="433.95,205.95;446.54,209.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="434,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.015000000000001"/>
+        <dia:real val="12.49"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#helper_method_formatter#</dia:string>
+        <dia:string>#helper_methods_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>

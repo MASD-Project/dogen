@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_HELPER_METHOD_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_IO_HELPER_METHOD_FORMATTER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_HELPER_METHODS_FORMATTER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_IO_HELPER_METHODS_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,9 +40,9 @@ namespace io {
 /**
  * @brief Creates all the helper methods for the io facet.
  */
-class helper_method_formatter {
+class helper_methods_formatter {
 public:
-    explicit helper_method_formatter(
+    explicit helper_methods_formatter(
         const std::list<formattables::property_info>& properties);
 
 private:
