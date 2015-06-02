@@ -43,7 +43,8 @@ namespace cpp {
 namespace formatters {
 
 /**
- * @brief Provides a number of utilities to formatters.
+ * @brief Provides a number of utilities to formatters that generate
+ * files for entities.
  */
 class entity_formatting_assistant {
 public:

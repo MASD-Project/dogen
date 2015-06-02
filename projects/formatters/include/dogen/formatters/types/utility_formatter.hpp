@@ -38,7 +38,7 @@ namespace formatters {
  */
 class utility_formatter {
 public:
-    utility_formatter(std::ostream& s);
+    explicit utility_formatter(std::ostream& s);
 
 private:
     /**
