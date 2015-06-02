@@ -174,9 +174,9 @@ associative_container_helper(const cpp::formattables::nested_type_info& nti) {
             utility_.open_scope();
             {
                 positive_indenter_scope s(indenter_);
-                stream_ << indenter_ << "if (i != v.begin()) s" << space_inserter
-                        << utility_.quote(", ") << ";" << std::endl;
-
+                stream_ << indenter_ << "if (i != v.begin()) s"
+                        << space_inserter << utility_.quote(", ") << ";"
+                        << std::endl;
 
                 stream_ << indenter_ << "s" << space_inserter
                         << utility_.quote("[ { ") << space_inserter

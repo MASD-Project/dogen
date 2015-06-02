@@ -32,6 +32,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("formatters.utility?formatter"));
 
 const std::string space(" ");
+const std::string inserter("<<");
 const std::string single_quote("'");
 const std::string double_quote("\"");
 const std::string single_quote_escaped("\\\'");
@@ -68,10 +69,10 @@ private:
 utility_formatter::utility_formatter(std::ostream& s)
     : stream_(s) {}
 
-void utility_formatter::insert(const std::string& content,
+void utility_formatter::insert(const std::string& s,
     const spacing_types st) const {
     const space_scope scope(st, stream_);
-    stream_ << content;
+    stream_ << s;
 }
 
 void utility_formatter::insert_quote(const quote_types qt) const {
@@ -89,7 +90,6 @@ void utility_formatter::insert_quote(const quote_types qt) const {
     }
 }
 
-
 std::string utility_formatter::
 escape_quote(const std::string& s, const quote_types qt) const {
     switch(qt) {
@@ -104,23 +104,39 @@ escape_quote(const std::string& s, const quote_types qt) const {
     }
 }
 
-void utility_formatter::insert_escaped(const std::string& content_to_escape,
-    const quote_types quote_to_escape, const spacing_types st) const {
+void utility_formatter::insert_escaped(const std::string& s,
+    const quote_types qt, const spacing_types st) const {
     const space_scope scope(st, stream_);
-    stream_ << escape_quote(content_to_escape, quote_to_escape);
+    stream_ << escape_quote(s, qt);
 }
 
-void utility_formatter::insert_quoted(const std::string& content_to_quote,
+void utility_formatter::insert_quoted(const std::string& s,
     const bool escape_content, const quote_types qt,
     const spacing_types st) const {
     const space_scope scope(st, stream_);
 
     insert_quote(qt);
     if (escape_content)
-        insert_escaped(content_to_quote, qt);
+        insert_escaped(s, qt);
     else
-        stream_ << content_to_quote;
+        stream_ << s;
+
     insert_quote(qt);
+}
+
+void utility_formatter::insert_quoted_escaped(const std::string& s) const {
+    const auto qt(quote_types::double_quote);
+    insert_quote(qt);
+    insert_escaped(s, qt);
+    insert_quote(qt);
+}
+
+void utility_formatter::insert_streamed(const std::string& s) const {
+    stream_ << double_quote << double_quote_escaped << double_quote
+            << space << inserter << space
+            << s
+            << space << inserter << space
+            << double_quote << double_quote_escaped << double_quote;
 }
 
 } }

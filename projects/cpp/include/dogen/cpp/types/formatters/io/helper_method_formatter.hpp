@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -48,45 +49,52 @@ private:
     /**
      * @brief Helper method for containers such as list and vector.
      */
-    void sequence_container_helper(std::ostream& s,
+    void sequence_container_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as maps and sets.
      */
-    void associative_container_helper(std::ostream& s,
+    void associative_container_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for smart pointers such as boost and std
      * shared pointer.
      */
-    void smart_pointer_helper(std::ostream& s,
+    void smart_pointer_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as boost and std
      * optional.
      */
-    void optional_helper(std::ostream& s,
+    void optional_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as std::pair.
      */
-    void pair_helper(std::ostream& s,
+    void pair_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for containers such as boost variant.
      */
-    void variant_helper(std::ostream& s,
+    void variant_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
     /**
      * @brief Helper method for boost property tree.
      */
-    void ptree_helper(std::ostream& s,
+    void ptree_helper(
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t) const;
 
 private:
@@ -95,7 +103,7 @@ private:
      * nested type info.
      */
     void recursive_helper_method_creator(
-        std::ostream& s,
+        formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t,
         std::unordered_set<std::string>& types_done) const;
 

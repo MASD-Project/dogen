@@ -26,24 +26,29 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void associative_container_helper(std::ostream& s,
+void associative_container_helper(
+    formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-    // using dogen::formatters::cpp::scoped_namespace_formatter;
-    // scoped_namespace_formatter nsh(s, t.namespaces());
-s << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-s << "    s << \'[\';" << std::endl;
-s << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-s << "        if (i != v.begin()) s << \', \';" << std::endl;
-s << "        s << \'__type__\'" << std::endl;
-s << "    }" << std::endl;
-s << std::endl;
-s << std::endl;
-s << std::endl;
-s << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-s << "    boost::replace_all(s, \'\r\n\', \'<new_line>\');" << std::endl;
-s << "    boost::replace_all(s, \'\n\', \'<new_line>\');" << std::endl;
-s << "    boost::replace_all(s, \'\\'\', \'<quote>\');" << std::endl;
-s << "    return s;" << std::endl;
-s << "}" << std::endl;
+
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+        const auto key(t.children().front());
+        const auto value(t.children().back());
+fa.stream() << std::endl;
+fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+fa.stream() << "    s << \'[\';" << std::endl;
+fa.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+fa.stream() << "        if (i != v.begin()) s << \', \';" << std::endl;
+fa.stream() << "        s << \'[ { \' << \'\\'__type__\\': \' << \'\\'key\\': \' << \', \' << \'\\'data\\': \';" << std::endl;
+fa.stream() << "        s << " << fa.streaming_for_type(key, "i->first") << ";" << std::endl;
+fa.stream() << "        s << \'}, {\' << \'\\'__type__\\': \' << \'\\'value\\': \' << \', \' << \'\\'data\\': \';" << std::endl;
+fa.stream() << "        s << " << fa.streaming_for_type(key, "i->second") << ";" << std::endl;
+fa.stream() << "        s << \' } ]\';" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << "    s << \' ] \';" << std::endl;
+fa.stream() << "    return s;" << std::endl;
+fa.stream() << "}" << std::endl;
+    }
+fa.stream() << std::endl;
 }
 } } } }

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <ostream>
+#include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
 
 namespace dogen {
@@ -33,7 +33,8 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void associative_container_helper_stitch(std::ostream& s,
+void associative_container_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t);
 
 } } } }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
@@ -25,35 +26,46 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-nested_type_formatting_assistant::nested_type_formatting_assistant(
-    std::ostream& s, const formattables::nested_type_info& nt)
-    : stream_(s), nested_type_(nt) {}
+nested_type_formatting_assistant::
+nested_type_formatting_assistant(std::ostream& s) : stream_(s) {}
 
 dogen::formatters::cpp::scoped_namespace_formatter
-nested_type_formatting_assistant::make_scoped_namespace_formatter() {
+nested_type_formatting_assistant::
+make_scoped_namespace_formatter(const formattables::nested_type_info& t) {
     return dogen::formatters::cpp::scoped_namespace_formatter(
-        stream_, nested_type_.namespaces(),
+        stream_, t.namespaces(),
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
 }
 
-void nested_type_formatting_assistant::quote(const std::string& /*s*/) const {
-/*    dogen::formatters::utility_formatter uf(stream_);
-    uf.insert_quoted
-
-    void insert_escaped(const std::string& content_to_escape,
-        const quote_types quote_to_escape = quote_types::double_quote,
-        const spacing_types st = spacing_types::no_space) const;
-
-    void (const std::string& content_to_quote,
-        const bool escape_content = false,
-        const quote_types qt = quote_types::double_quote,
-        const spacing_types st = spacing_types::no_space) const;
-*/
+bool nested_type_formatting_assistant::
+requires_quoting(const formattables::nested_type_info& t) const {
+    return t.is_date() || t.is_ptime() || t.is_time_duration() ||
+        t.is_char_like() || t.is_string_like();
 }
 
-void nested_type_formatting_assistant::
-quote_and_quote_escaped(const std::string& /*s*/) const {
+bool nested_type_formatting_assistant::
+requires_tidying_up(const formattables::nested_type_info& t) const {
+    return t.is_string_like();
+}
+
+std::string nested_type_formatting_assistant::streaming_for_type(
+    const formattables::nested_type_info& t, const std::string& s) const {
+    std::ostringstream ss;
+    dogen::formatters::utility_formatter uf(ss);
+
+    if (requires_tidying_up(t))
+        uf.insert_quoted_escaped("tidy_up_string(" + s + ")");
+    else if (requires_quoting(t))
+        uf.insert_quoted_escaped(s);
+    else
+        uf.insert(s);
+
+    return ss.str();
+}
+
+std::ostream& nested_type_formatting_assistant::stream() {
+    return stream_;
 }
 
 } } }

@@ -40,30 +40,42 @@ namespace formatters {
  */
 class nested_type_formatting_assistant {
 public:
-    nested_type_formatting_assistant(std::ostream& s,
-        const formattables::nested_type_info& nt);
+    explicit nested_type_formatting_assistant(std::ostream& s);
 
 public:
     /**
      * @brief Returns a scoped namespace formatter.
      */
     dogen::formatters::cpp::scoped_namespace_formatter
-    make_scoped_namespace_formatter();
+    make_scoped_namespace_formatter(const formattables::nested_type_info& t);
+
+private:
+    /**
+     * @brief Returns true if type requires quoting.
+     */
+    bool requires_quoting(const formattables::nested_type_info& t) const;
 
     /**
-     * @brief Writes the string into the stream surrounded by quotes.
+     * @brief Returns true if type requires tidying up.
      */
-    void quote(const std::string& s) const;
+    bool requires_tidying_up(const formattables::nested_type_info& t) const;
 
+public:
     /**
-     * @brief Writes the string into the stream, first quoted and then
-     * followed by escaped quotes.
+     * @brief Returns the correct streaming invocation for the
+     * supplied type.
      */
-    void quote_and_quote_escaped(const std::string& s) const;
+    std::string streaming_for_type(const formattables::nested_type_info& t,
+        const std::string& s) const;
+
+public:
+    /**
+     * @brief Returns the stream that is currently being populated.
+     */
+    std::ostream& stream();
 
 private:
     std::ostream& stream_;
-    const formattables::nested_type_info& nested_type_;
 };
 
 } } }

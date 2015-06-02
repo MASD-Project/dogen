@@ -56,23 +56,40 @@ public:
      * @brief Insert content to stream, using the supplied space
      * flags.
      */
-    void insert(const std::string& content,
+    void insert(const std::string& s,
         const spacing_types st = spacing_types::no_space) const;
 
     /**
      * @brief Inserts the content, but escapes any quotes.
      */
-    void insert_escaped(const std::string& content_to_escape,
-        const quote_types quote_to_escape = quote_types::double_quote,
+    void insert_escaped(const std::string& s,
+        const quote_types qt = quote_types::double_quote,
         const spacing_types st = spacing_types::no_space) const;
 
     /**
      * @brief Quotes the supplied content.
      */
-    void insert_quoted(const std::string& content_to_quote,
+    void insert_quoted(const std::string& s,
         const bool escape_content = false,
         const quote_types qt = quote_types::double_quote,
         const spacing_types st = spacing_types::no_space) const;
+
+    /**
+     * @brief Quotes the supplied content, and places it inside
+     * escaped quotes.
+     *
+     * For an input of 'a', outputs '"\"a\""'.
+     */
+    void insert_quoted_escaped(const std::string& s) const;
+
+    /**
+     * @brief Adds escapped quotes to s, with c++ streaming syntax.
+     *
+     * Using single quotes to denote the string boundary (e.g. they
+     * are not actually on the string), an s of 'a' produces the
+     * output '<< "\"" << a << "\"""'.
+     */
+    void insert_streamed(const std::string& s) const;
 
 public:
     std::ostream& stream_;
