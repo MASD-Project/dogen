@@ -69,7 +69,7 @@ void helper_method_formatter::sequence_container_helper(
         BOOST_LOG_SEV(lg, error) << invalid_sequence_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_sequence_container));
     }
-    sequence_container_helper_stitch(fa.stream(), t);
+    sequence_container_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::associative_container_helper(
@@ -96,7 +96,7 @@ void helper_method_formatter::smart_pointer_helper(
         BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
-    smart_pointer_helper_stitch(fa.stream(), t);
+    smart_pointer_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::optional_helper(
@@ -107,7 +107,7 @@ void helper_method_formatter::optional_helper(
         BOOST_THROW_EXCEPTION(formatting_error(invalid_optional_type));
     }
 
-    optional_helper_stitch(fa.stream(), t);
+    optional_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::
@@ -118,7 +118,7 @@ pair_helper(formatters::nested_type_formatting_assistant& fa,
         BOOST_THROW_EXCEPTION(formatting_error(invalid_pair_type));
     }
 
-    pair_helper_stitch(fa.stream(), t);
+    pair_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::
@@ -129,7 +129,7 @@ variant_helper(formatters::nested_type_formatting_assistant& fa,
         BOOST_THROW_EXCEPTION(formatting_error(invalid_variant));
     }
 
-    variant_helper_stitch(fa.stream(), t);
+    variant_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::ptree_helper(
@@ -140,7 +140,7 @@ void helper_method_formatter::ptree_helper(
         BOOST_THROW_EXCEPTION(formatting_error(invalid_ptree));
     }
 
-    ptree_helper_stitch(fa.stream(), t);
+    ptree_helper_stitch(fa, t);
 }
 
 void helper_method_formatter::recursive_helper_method_creator(
@@ -169,7 +169,7 @@ void helper_method_formatter::recursive_helper_method_creator(
     else if (t.is_ptree())
         ptree_helper(fa, t);
     else if (t.is_string_like() && !t.is_char_like())
-        string_helper_stitch(fa.stream(), t);
+        string_helper_stitch(fa, t);
 
     types_done.insert(t.complete_identifiable_name());
 }

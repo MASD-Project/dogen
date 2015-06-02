@@ -27,13 +27,15 @@
 
 #include <ostream>
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
+#include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace io {
 
-void pair_helper_stitch(std::ostream& s,
+void pair_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t);
 
 } } } }
