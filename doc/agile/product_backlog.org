@@ -5459,6 +5459,35 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add memory measurements support                                   :story:
+
+Firefox has an interesting approach to estimating memory usage:
+
+[[http://njn.valgrind.org/measuring.html][Measuring data structures: Firefox (C++) vs. Servo (Rust)]]
+
+The gist of it is to add code like this:
+
+: struct CookieDomainTuple
+: {
+:   nsCookieKey key;
+:   nsRefPtr<nsCookie> cookie;
+:
+:   size_t SizeOfExcludingThis(mozilla::MallocSizeOf aMallocSizeOf) const;
+: };
+
+Where:
+
+: size_t
+: CookieDomainTuple::SizeOfExcludingThis(MallocSizeOf aMallocSizeOf) const
+: {
+:   size_t amount = 0;
+:   amount += key.SizeOfExcludingThis(aMallocSizeOf);
+:   amount += cookie->SizeOfIncludingThis(aMallocSizeOf);
+:   return amount;
+: }
+
+We could add something similar to Dogen.
+
 *** Add support for Microsoft Bond                                     :epic:
 
 More of a placeholder - will require further investigation. Seems like
