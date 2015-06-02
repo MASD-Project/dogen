@@ -27,12 +27,24 @@ namespace io {
 
 void ptree_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& /*t*/) {
-fa.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\r\n\', \'<new_line>\');" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\n\', \'<new_line>\');" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\\'\', \'<quote>\');" << std::endl;
+    const formattables::nested_type_info& t) {
+
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+        const auto containee(t.children().front());
+fa.stream() << std::endl;
+fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+fa.stream() << "    std::ostringstream ss;" << std::endl;
+fa.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    std::string content(ss.str());" << std::endl;
+fa.stream() << "    boost::replace_all(content, \'\r\n\', \'\');" << std::endl;
+fa.stream() << "    boost::replace_all(content, \'\n\', \'\');" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    s << content;" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
+    }
+fa.stream() << std::endl;
 }
 } } } }

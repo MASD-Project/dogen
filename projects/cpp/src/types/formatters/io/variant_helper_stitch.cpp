@@ -27,12 +27,35 @@ namespace io {
 
 void variant_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& /*t*/) {
-fa.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\r\n\', \'<new_line>\');" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\n\', \'<new_line>\');" << std::endl;
-fa.stream() << "    boost::replace_all(s, \'\\'\', \'<quote>\');" << std::endl;
+    const formattables::nested_type_info& t) {
+    
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+fa.stream() << "struct " << t.complete_identifiable_name() << ": public boost::static_visitor<> {" << std::endl;
+fa.stream() << "    boost_variant_int_double_visitor(std::ostream& s) : stream_(s) {" << std::endl;
+fa.stream() << "        s << \'{ \' << \'\\'__type__\\': \' << \'\\'" << t.name() << "\\'\' << \', \';" << std::endl;
+fa.stream() << "        s << \'\\'data\\': \';" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    ~" << t.complete_identifiable_name() << "() { stream_ << \' }\'; }" << std::endl;
+fa.stream() << std::endl;
+        for (const auto& c : t.children()) {
+fa.stream() << "    void operator()(const " << c.name() << (c.is_primitive() ? "" : "&") << " v) const {" << std::endl;
+fa.stream() << "        stream_ << \'{ \' << \'\\'__type__\\': \' << \'\\'" << c.name() << "\\'\' << \', \';" << std::endl;
+fa.stream() << "        stream_ << \'\\'value\\': \';" << std::endl;
+fa.stream() << "        stream_ << " << fa.streaming_for_type(c, "v") << ";" << std::endl;
+fa.stream() << "        stream_ << \' }\';" << std::endl;
+fa.stream() << "    }" << std::endl;
+        }
+fa.stream() << "private:" << std::endl;
+fa.stream() << "    std::ostream& stream_;" << std::endl;
+fa.stream() << "};" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+fa.stream() << "    boost::apply_visitor(" << t.complete_identifiable_name() << "_visitor(s), v);" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
+    }
+fa.stream() << std::endl;
 }
 } } } }

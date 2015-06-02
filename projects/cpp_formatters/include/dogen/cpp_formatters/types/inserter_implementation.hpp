@@ -49,9 +49,6 @@ public:
     virtual ~inserter_implementation() noexcept {}
 
 private:
-    bool is_insertable(const cpp::formattables::nested_type_info& nti);
-
-private:
     void tidy_up_string_method();
     void sequence_container_helper(
         const cpp::formattables::nested_type_info& nti);

@@ -77,11 +77,6 @@ inserter_implementation(std::ostream& stream, indenter& indenter,
       utility_(stream_, indenter_) {
 }
 
-bool inserter_implementation::
-is_insertable(const cpp::formattables::nested_type_info& nti) {
-    return !nti.is_sequence_container() && !nti.is_associative_container();
-}
-
 void inserter_implementation::
 sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
     const auto children(nti.children());

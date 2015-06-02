@@ -8,14 +8,25 @@
 
 void pair_helper(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& /*t*/) {
+    const formattables::nested_type_info& t) {
+
+    {
+        auto snf(fa.make_scoped_namespace_formatter(t));
+        const auto first(t.children().front());
+        const auto second(t.children().back());
 #>
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
+
+inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
+    s << "{ " << "\"__type__\": \"" << <#= t.name() #> "\", ";
+    s << "\"first\": " << <#= fa.streaming_for_type(first, "i.first") #>;
+    s << "\"second\": " << <#= fa.streaming_for_type(second, "i.second") #>;
+    s << " }";
     return s;
 }
+<#+
+    }
+#>
+
 <#+
 }
 #>
