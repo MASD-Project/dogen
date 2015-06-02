@@ -9,7 +9,7 @@
 <#+
 
 dogen::formatters::file forward_declarations_formatter_stitch(
-    formatters::formatting_assistant& fa,
+    formatters::entity_formatting_assistant& fa,
     const formattables::forward_declarations_info& fd) {
 
     {

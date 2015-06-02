@@ -21,7 +21,7 @@
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
-#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/types/enum_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
@@ -53,7 +53,7 @@ void enum_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file enum_header_formatter::
 format(const formattables::enum_info& c) const {
-    formatting_assistant fa(c, ownership_hierarchy(), file_type());
+    entity_formatting_assistant fa(c, ownership_hierarchy(), file_type());
     const auto r(enum_header_formatter_stitch(fa, c));
     return r;
 }

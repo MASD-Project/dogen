@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ASSISTANT_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_FORMATTING_ASSISTANT_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ENTITY_FORMATTING_ASSISTANT_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ENTITY_FORMATTING_ASSISTANT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -45,7 +45,7 @@ namespace formatters {
 /**
  * @brief Provides a number of utilities to formatters.
  */
-class formatting_assistant {
+class entity_formatting_assistant {
 public:
     /**
      * @brief Returns the text to use for a given class for the @code
@@ -68,7 +68,7 @@ public:
         const formattables::property_info& p);
 
 public:
-    formatting_assistant(const formattables::entity& e,
+    entity_formatting_assistant(const formattables::entity& e,
         const dynamic::ownership_hierarchy& oh,
         const formatters::file_types ft);
 
@@ -191,7 +191,6 @@ private:
     const formatters::file_types file_type_;
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
-
 };
 
 } } }

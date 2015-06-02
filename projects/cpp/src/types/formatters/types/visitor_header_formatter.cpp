@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
-#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
@@ -96,7 +96,7 @@ void visitor_header_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file visitor_header_formatter::
 format(const formattables::visitor_info& e) const {
-    formatting_assistant fa(e, ownership_hierarchy(), file_type());
+    entity_formatting_assistant fa(e, ownership_hierarchy(), file_type());
     const auto r(visitor_header_formatter_stitch(fa, e));
     return r;
 }

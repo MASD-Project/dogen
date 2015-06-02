@@ -25,12 +25,12 @@
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
-#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.formatters.formatting_assistant"));
+static logger lg(logger_factory("cpp.formatters.entity_formatting_assistant"));
 
 const std::string empty;
 const std::string by_ref_text = "&";
@@ -56,17 +56,17 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
-std::string formatting_assistant::
+std::string entity_formatting_assistant::
 make_final_keyword_text(const formattables::class_info& c) {
     return c.is_final() ? final_keyword_text : empty;
 }
 
-std::string formatting_assistant::
+std::string entity_formatting_assistant::
 make_by_ref_text(const formattables::property_info& p) {
     return p.type().is_primitive() ? empty : by_ref_text;
 }
 
-std::string formatting_assistant::
+std::string entity_formatting_assistant::
 make_setter_return_type(const std::string& containing_type_name,
     const formattables::property_info& p) {
     std::ostringstream s;
@@ -78,7 +78,8 @@ make_setter_return_type(const std::string& containing_type_name,
     return s.str();
 }
 
-formatting_assistant::formatting_assistant(const formattables::entity& e,
+entity_formatting_assistant::
+entity_formatting_assistant(const formattables::entity& e,
     const dynamic::ownership_hierarchy& oh,
     const formatters::file_types ft) :
     entity_(e), ownership_hierarchy_(oh),
@@ -90,7 +91,7 @@ formatting_assistant::formatting_assistant(const formattables::entity& e,
     validate();
 }
 
-formattables::formatter_properties formatting_assistant::
+formattables::formatter_properties entity_formatting_assistant::
 obtain_formatter_properties(const std::string& formatter_name) const {
     const auto& fn(formatter_name);
     const auto i(entity_.formatter_properties().find(fn));
@@ -102,44 +103,44 @@ obtain_formatter_properties(const std::string& formatter_name) const {
     return i->second;
 }
 
-std::string formatting_assistant::make_member_variable_name(
+std::string entity_formatting_assistant::make_member_variable_name(
     const formattables::property_info& p) const {
     return p.name() + member_variable_postfix;
 }
 
-bool formatting_assistant::
+bool entity_formatting_assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto fp(obtain_formatter_properties(formatter_name));
     return fp.enabled();
 }
 
-bool formatting_assistant::
+bool entity_formatting_assistant::
 is_facet_integrated(const std::string& facet_name) const {
     const auto& f(formatter_properties_.integrated_facets());
     const auto i(f.find(facet_name));
     return i != f.end();
 }
 
-bool formatting_assistant::is_serialization_enabled() const {
+bool entity_formatting_assistant::is_serialization_enabled() const {
     using formatters::serialization::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool formatting_assistant::is_io_enabled() const {
+bool entity_formatting_assistant::is_io_enabled() const {
     using formatters::io::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
-bool formatting_assistant::is_io_integrated() const {
+bool entity_formatting_assistant::is_io_integrated() const {
     using formatters::io::traits;
     return is_facet_integrated(traits::facet_name());
 }
 
-bool formatting_assistant::is_complete_constructor_disabled() const {
+bool entity_formatting_assistant::is_complete_constructor_disabled() const {
     return entity_.settings().aspect_settings().disable_complete_constructor();
 }
 
-void formatting_assistant::validate() const {
+void entity_formatting_assistant::validate() const {
     const auto& fn(ownership_hierarchy_.formatter_name());
     const auto& fp(formatter_properties_);
     if (fp.file_path().empty()) {
@@ -156,7 +157,7 @@ void formatting_assistant::validate() const {
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
-formatting_assistant::make_scoped_boilerplate_formatter() {
+entity_formatting_assistant::make_scoped_boilerplate_formatter() {
     const auto& fp(formatter_properties_);
     const auto gs(entity_.settings().general_settings());
     return dogen::formatters::cpp::scoped_boilerplate_formatter(
@@ -165,25 +166,25 @@ formatting_assistant::make_scoped_boilerplate_formatter() {
 }
 
 dogen::formatters::cpp::scoped_namespace_formatter
-formatting_assistant::make_scoped_namespace_formatter() {
+entity_formatting_assistant::make_scoped_namespace_formatter() {
     return dogen::formatters::cpp::scoped_namespace_formatter(
         stream(), entity_.namespaces(),
         false/*create_anonymous_namespace*/,
         true/*add_new_line*/);
 }
 
-dogen::formatters::sequence_formatter formatting_assistant::
+dogen::formatters::sequence_formatter entity_formatting_assistant::
 make_sequence_formatter(const unsigned int sequence_size,
     const std::string& element_separator) const {
     dogen::formatters::sequence_formatter r(sequence_size, element_separator);
     return r;
 }
 
-std::ostream& formatting_assistant::stream() {
+std::ostream& entity_formatting_assistant::stream() {
     return filtering_stream_;
 }
 
-dogen::formatters::file formatting_assistant::
+dogen::formatters::file entity_formatting_assistant::
 make_file(const bool overwrite) const {
     dogen::formatters::file r;
     r.content(stream_.str());
@@ -192,7 +193,7 @@ make_file(const bool overwrite) const {
     return r;
 }
 
-void formatting_assistant::comment(const std::string& c) {
+void entity_formatting_assistant::comment(const std::string& c) {
     if (c.empty())
         return;
 
@@ -205,7 +206,7 @@ void formatting_assistant::comment(const std::string& c) {
     f.format(stream(), c);
 }
 
-void formatting_assistant::
+void entity_formatting_assistant::
 comment_start_method_group(const std::string& documentation,
     const bool add_comment_blocks) {
     if (documentation.empty())
@@ -228,7 +229,7 @@ comment_start_method_group(const std::string& documentation,
     }
 }
 
-void formatting_assistant::
+void entity_formatting_assistant::
 comment_end_method_group(const std::string& documentation,
     const bool add_comment_blocks) {
     if (documentation.empty())
@@ -250,7 +251,8 @@ comment_end_method_group(const std::string& documentation,
     }
 }
 
-std::string formatting_assistant::comment_inline(const std::string& c) const {
+std::string entity_formatting_assistant::comment_inline(
+    const std::string& c) const {
     if (c.empty())
         return empty;
 

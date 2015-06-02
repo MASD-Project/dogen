@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/types/formatters/io/associative_container_helper_stitch.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -26,7 +27,18 @@ namespace formatters {
 namespace io {
 
 void associative_container_helper(std::ostream& s,
-    const formattables::nested_type_info& /*t*/) {
+    const formattables::nested_type_info& t) {
+    // using dogen::formatters::cpp::scoped_namespace_formatter;
+    // scoped_namespace_formatter nsh(s, t.namespaces());
+s << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
+s << "    s << \'[\';" << std::endl;
+s << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+s << "        if (i != v.begin()) s << \', \';" << std::endl;
+s << "        s << \'__type__\'" << std::endl;
+s << "    }" << std::endl;
+s << std::endl;
+s << std::endl;
+s << std::endl;
 s << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 s << "    boost::replace_all(s, \'\r\n\', \'<new_line>\');" << std::endl;
 s << "    boost::replace_all(s, \'\n\', \'<new_line>\');" << std::endl;

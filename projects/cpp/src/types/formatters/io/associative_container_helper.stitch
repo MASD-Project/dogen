@@ -8,9 +8,9 @@
 <#+
 
 void associative_container_helper(std::ostream& s,
-    const formattables::nested_type_info& /*t*/) {
-    using dogen::formatters::cpp::scoped_namespace_formatter;
-    scoped_namespace_formatter nsh(s, t.namespaces());
+    const formattables::nested_type_info& t) {
+    // using dogen::formatters::cpp::scoped_namespace_formatter;
+    // scoped_namespace_formatter nsh(s, t.namespaces());
 #>
 inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
     s << "[";

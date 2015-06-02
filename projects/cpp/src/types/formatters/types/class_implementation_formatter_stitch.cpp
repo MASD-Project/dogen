@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp"
-#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -27,7 +26,7 @@ namespace formatters {
 namespace types {
 
 dogen::formatters::file class_implementation_formatter_stitch(
-    formatters::formatting_assistant& fa,
+    formatters::entity_formatting_assistant& fa,
     const formattables::class_info& c) {
 
     {

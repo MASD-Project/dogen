@@ -30,6 +30,7 @@
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/forward_declarations_formatter.hpp"
 
@@ -103,7 +104,7 @@ void forward_declarations_formatter::register_inclusion_dependencies_provider(
 
 dogen::formatters::file forward_declarations_formatter::
 format(const formattables::forward_declarations_info& fd) const {
-    formatting_assistant fa(fd, ownership_hierarchy(), file_type());
+    entity_formatting_assistant fa(fd, ownership_hierarchy(), file_type());
     const auto r(forward_declarations_formatter_stitch(fa, fd));
     return r;
 }
