@@ -48,6 +48,7 @@ fa.stream() << "    }" << std::endl;
 fa.stream() << "    s << \' ] \';" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
     }
 fa.stream() << std::endl;
 }

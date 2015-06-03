@@ -25,6 +25,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>&
     s << " ] ";
     return s;
 }
+
 <#+
     }
 #>

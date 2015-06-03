@@ -16,6 +16,7 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     return s;
 }
+
 <#+
 }
 #>

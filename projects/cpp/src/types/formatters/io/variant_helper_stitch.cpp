@@ -55,6 +55,7 @@ fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.co
 fa.stream() << "    boost::apply_visitor(" << t.complete_identifiable_name() << "_visitor(s), v);" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
     }
 fa.stream() << std::endl;
 }

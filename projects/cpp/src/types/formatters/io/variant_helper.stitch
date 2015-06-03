@@ -41,6 +41,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>&
     boost::apply_visitor(<#= t.complete_identifiable_name() #>_visitor(s), v);
     return s;
 }
+
 <#+
     }
 #>

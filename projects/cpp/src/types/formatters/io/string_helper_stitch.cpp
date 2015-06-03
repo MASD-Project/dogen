@@ -34,5 +34,6 @@ fa.stream() << "    boost::replace_all(s, \'\n\', \'<new_line>\');" << std::endl
 fa.stream() << "    boost::replace_all(s, \'\\'\', \'<quote>\');" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
 }
 } } } }
