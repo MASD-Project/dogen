@@ -23,8 +23,10 @@
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace {
@@ -267,6 +269,20 @@ std::string entity_formatting_assistant::comment_inline(
 
     f.format(s, c);
     return s.str();
+}
+
+void entity_formatting_assistant::add_helper_methods(
+    const std::list<formattables::property_info>& properties) {
+    const auto fn(ownership_hierarchy_.formatter_name());
+
+    using formatters::types::traits;
+    const bool is_types_class_header_implementation(
+        fn == traits::class_header_formatter_name());
+    if (is_types_class_header_implementation && is_io_enabled() &&
+        is_io_integrated()) {
+        io::helper_methods_formatter f(properties);
+        f.format(stream());
+    }
 }
 
 } } }

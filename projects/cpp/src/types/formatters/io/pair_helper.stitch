@@ -6,7 +6,7 @@
 <#@ containing_namespaces=dogen::cpp::formatters::io #>
 <#+
 
-void pair_helper(
+void pair_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 

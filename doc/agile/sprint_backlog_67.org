@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-02 Tue 21:46]
+#+CAPTION: Clock summary at [2015-06-03 Wed 07:14]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *34:33* |       |       |
+| *Total time*                                                                | *35:16* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 34:33   |       |       |
-| Active                                                                      |         | 34:33 |       |
+| Stories                                                                     | 35:16   |       |       |
+| Active                                                                      |         | 35:16 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:12 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
@@ -29,7 +29,7 @@
 | POSTPONED Create a blog post on biicode                                     |         |       |  1:10 |
 | CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
 | COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
-| STARTED Implement io helper method generator                                |         |       |  6:52 |
+| STARTED Implement io helper method generator                                |         |       |  7:35 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -204,6 +204,7 @@ Problems:
 - we can't implement this without needle support.
 
 *** STARTED Implement io helper method generator                      :story:
+    CLOCK: [2015-06-03 Wed 06:31]--[2015-06-03 Wed 07:14] =>  0:43
     CLOCK: [2015-06-02 Tue 21:39]--[2015-06-02 Tue 21:46] =>  0:07
     CLOCK: [2015-06-02 Tue 20:54]--[2015-06-02 Tue 21:38] =>  0:44
     CLOCK: [2015-06-02 Tue 20:40]--[2015-06-02 Tue 20:53] =>  0:13
@@ -262,6 +263,10 @@ Notes:
   assistant already passed in; we have all the information required to
   determine how to set it up (what facet we're in, what is enabled,
   etc).
+- actually, do we even need to change boilerplate at all? The helpers
+  are supposed to appear after the includes but before the
+  namespaces. We just need to inject them between scoped boilerplate
+  and scoped namespace. This can be done with the assistant.
 
 *** Container details in JSON dump                                    :story:
 

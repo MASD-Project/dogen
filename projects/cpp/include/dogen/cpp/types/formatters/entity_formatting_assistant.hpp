@@ -25,18 +25,19 @@
 #pragma once
 #endif
 
+#include <list>
 #include <sstream>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -184,6 +185,14 @@ public:
      * @brief Returns @code c as as an inline comment.
      */
     std::string comment_inline(const std::string& c) const;
+
+public:
+    /**
+     * @brief Creates any helper methods that may be required for this
+     * formatter.
+     */
+    void add_helper_methods(
+        const std::list<formattables::property_info>& properties);
 
 private:
     const formattables::entity& entity_;

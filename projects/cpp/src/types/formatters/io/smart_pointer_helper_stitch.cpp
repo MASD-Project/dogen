@@ -25,7 +25,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void sequence_container_helper_stitch(
+void smart_pointer_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
     
