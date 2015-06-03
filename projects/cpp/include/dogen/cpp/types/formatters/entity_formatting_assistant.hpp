@@ -191,8 +191,7 @@ public:
      * @brief Creates any helper methods that may be required for this
      * formatter.
      */
-    void add_helper_methods(
-        const std::list<formattables::property_info>& properties);
+    void add_helper_methods();
 
 private:
     const formattables::entity& entity_;

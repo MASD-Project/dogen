@@ -31,7 +31,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        fa.add_helper_methods(c.properties());
+        fa.add_helper_methods();
 
         {
             auto snf(fa.make_scoped_namespace_formatter());

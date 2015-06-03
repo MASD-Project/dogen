@@ -271,18 +271,32 @@ std::string entity_formatting_assistant::comment_inline(
     return s.str();
 }
 
-void entity_formatting_assistant::add_helper_methods(
-    const std::list<formattables::property_info>& properties) {
-    const auto fn(ownership_hierarchy_.formatter_name());
+void entity_formatting_assistant::add_helper_methods() {
+    const auto ci(dynamic_cast<const formattables::class_info*>(&entity_));
+    if (!ci) {
+        BOOST_LOG_SEV(lg, debug) << "Entity does not require helper methods: "
+                                 << ci->name();
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << ci->name();
 
     using formatters::types::traits;
-    const bool is_types_class_header_implementation(
-        fn == traits::class_header_formatter_name());
-    if (is_types_class_header_implementation && is_io_enabled() &&
-        is_io_integrated()) {
-        io::helper_methods_formatter f(properties);
+    const auto& cifn(traits::class_implementation_formatter_name());
+    const auto& fn(ownership_hierarchy_.formatter_name());
+    const bool is_types_class_implementation(fn == cifn);
+    const bool has_io(is_io_enabled() && (is_io_integrated() ||
+            ci->is_parent() || !ci->parents().empty()));
+
+    if (is_types_class_implementation && has_io) {
+        BOOST_LOG_SEV(lg, debug) << " Creating helper methods.";
+        io::helper_methods_formatter f(ci->properties());
         f.format(stream());
-    }
+    } else
+        BOOST_LOG_SEV(lg, debug) << " Helper methods not required."
+                                 << " is types class implementation: "
+                                 << is_types_class_implementation
+                                 << " has io: " << has_io;
 }
 
 } } }
