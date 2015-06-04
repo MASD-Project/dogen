@@ -90,7 +90,7 @@ fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p
 
                 sf.reset();
                 sf.prefix_configuration().first(": ").not_first("  ");
-                sf.postfix_configuration().last(") { }");
+                sf.postfix_configuration().last(" { }");
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
@@ -114,7 +114,27 @@ fa.stream() << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
             }
+
+            /*
+             * Swap
+             */
+            if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
+                const bool empty(c.all_properties().empty() && c.parents().empty());
+fa.stream() << "void " << c.name() << "::swap(" << c.name() << "& " << (empty ? "" : " other") << ") noexcept {" << std::endl;
+               if (!c.parents().empty()) {
+                    for (const auto p : c.parents())
+fa.stream() << "    " << p.name() << "::swap(other);" << std::endl;
 fa.stream() << std::endl;
+
+               }
+
+               if (!c.properties().empty()) {
+fa.stream() << "    using std::swap;" << std::endl;
+                   for (const auto p : c.properties())
+fa.stream() << "    swap(" << fa.make_member_variable_name(p) << ", other." << fa.make_member_variable_name(p) << ");" << std::endl;
+               }
+fa.stream() << "}" << std::endl;
+            }
         } // snf
 fa.stream() << std::endl;
     } // sbf

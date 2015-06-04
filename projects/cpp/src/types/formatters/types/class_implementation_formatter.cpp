@@ -65,7 +65,7 @@ boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& o) const {
     auto builder(f.make());
-    builder.add(o.name(), traits::class_implementation_formatter_name());
+    builder.add(o.name(), traits::class_header_formatter_name());
     return builder.build();
 }
 

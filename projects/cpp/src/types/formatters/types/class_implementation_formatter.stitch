@@ -89,7 +89,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
                 sf.reset();
                 sf.prefix_configuration().first(": ").not_first("  ");
-                sf.postfix_configuration().last(") { }");
+                sf.postfix_configuration().last(" { }");
 
                 for (const auto p : c.properties())
 #>
@@ -121,9 +121,37 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
 <#+
             }
+
+            /*
+             * Swap
+             */
+            if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
+                const bool empty(c.all_properties().empty() && c.parents().empty());
 #>
+void <#= c.name() #>::swap(<#= c.name() #>& <#= (empty ? "" : " other") #>) noexcept {
+<#+
+               if (!c.parents().empty()) {
+                    for (const auto p : c.parents())
+#>
+    <#= p.name() #>::swap(other);
 
 <#+
+
+               }
+
+               if (!c.properties().empty()) {
+#>
+    using std::swap;
+<#+
+                   for (const auto p : c.properties())
+#>
+    swap(<#= fa.make_member_variable_name(p) #>, other.<#= fa.make_member_variable_name(p) #>);
+<#+
+               }
+#>
+}
+<#+
+            }
         } // snf
 #>
 
