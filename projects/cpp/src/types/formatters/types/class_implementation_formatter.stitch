@@ -150,7 +150,53 @@ void <#= c.name() #>::swap(<#= c.name() #>& <#= (empty ? "" : " other") #>) noex
                }
 #>
 }
+
 <#+
+            }
+
+            /*
+             * Equals
+             */
+            if (!c.is_parent() && !c.parents().empty()) {
+#>
+bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& other) const {
+    const <#= c.name() #>* const p(dynamic_cast<const <#= c.name() #>* const>(&other));
+     if (!p) return false;
+        return *this == *p;
+}
+
+<#+
+                if (c.is_parent()) {
+#>
+bool <#= c.name() #>::compare(const <#= c.name() #>& <#= c.all_properties().empty() ? "/*rhs*/" : "rhs" #>) const {
+<#+
+                } else {
+#>
+bool <#= ci.name() #>::operator==(const <#= c.name() #>& <#= c.all_properties().empty() ? "/*rhs*/" : "rhs" #>) const {
+<#+
+                }
+
+                if (ci.all_properties().empty())
+#>
+    return true;
+<#+
+                else {
+#>
+    return 
+<#+
+                bool is_first(true);
+                auto sf(fa.make_sequence_formatter(c.parents().size()));
+                sf.prefix_configuration().not_first("");
+                for (const auto p : c.parents()) {
+                    if (!is_first)
+#>
+    <#= p.name() #>::compare(rhs)<#= is_first ? " &&" : "" #>
+                        stream_ << " &&" << std::endl << indenter_;
+                    {
+                        positive_indenter_scope s(indenter_);
+                        stream_ << p.name() << "::compare(rhs)";
+
+                }
             }
         } // snf
 #>
