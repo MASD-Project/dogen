@@ -36,9 +36,6 @@ dogen::formatters::file class_implementation_formatter_stitch(
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(static_cast<<#= p.type().complete_name() #>>(0))<#= sf.postfix() #>
 <#+
                 }
-#>
-
-<#+
             }
 
             /*
@@ -62,7 +59,6 @@ dogen::formatters::file class_implementation_formatter_stitch(
                 for (const auto p : c.properties())
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(std::move(rhs.<#= fa.make_member_variable_name(p) #>))<#= sf.postfix() #>
-
 <#+
             }
 
@@ -74,10 +70,12 @@ dogen::formatters::file class_implementation_formatter_stitch(
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
 #>
+
 <#= c.name() #>::<#= c.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>)
 <#+
                 } else {
 #>
+
 <#= c.name() #>::<#= c.name() #>(
 <#+
 
@@ -86,6 +84,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
                     for (const auto p : c.properties())
 #>
     const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
+
 <#+
                 }
 
@@ -105,13 +104,13 @@ dogen::formatters::file class_implementation_formatter_stitch(
             if (fa.is_io_enabled()) {
                 if (c.is_parent() || !c.parents().empty()) {
 #>
+
 void <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
                 io::inserter_implementation_helper_stitch(fa, c);
 #>
     return(s);
 }
-
 <#+
                 }
             }
@@ -122,6 +121,7 @@ void <#= c.name() #>::to_stream(std::ostream& s) const {
             if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
                 const bool empty(c.all_properties().empty() && c.parents().empty());
 #>
+
 void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexcept {
 <#+
                if (!c.parents().empty()) {
@@ -144,7 +144,6 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
                }
 #>
 }
-
 <#+
             }
 
@@ -153,12 +152,12 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
              */
             if (!c.is_parent() && !c.parents().empty()) {
 #>
+
 bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& other) const {
     const <#= c.name() #>* const p(dynamic_cast<const <#= c.name() #>* const>(&other));
      if (!p) return false;
         return *this == *p;
 }
-
 <#+
             }
 
@@ -171,6 +170,7 @@ bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& ot
             else
                 method_name = "operator==";
 #>
+
 bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_properties().empty() ? "/*rhs*/" : "rhs") #>) const {
 <#+
 
@@ -200,8 +200,21 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
             }
 #>
 }
-
 <#+
+
+            /*
+             * Assignment
+             */
+            if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
+#>
+
+<#= c.name() #>& <#= c.name() #>::operator=(<#= c.name() #> other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+<#+
+            }
 
             /*
              * Getters and setters
@@ -209,6 +222,7 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
              for (const auto p : c.properties()) {
                  if (p.type().is_primitive() || p.type().is_enumeration()) {
 #>
+
 <#= p.type().complete_name() #> <#= c.name() #>::<#= p.name() #>() const {
     return <#= fa.make_member_variable_name(p) #>;
 }
@@ -226,18 +240,18 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
                         }
 #>
 }
-
 <#+
                     }
                 } else {
 #>
+
 const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const {
     return <#= fa.make_member_variable_name(p) #>;
 }
-
 <#+
                     if (!c.is_immutable()) {
 #>
+
 <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() {
     return <#= fa.make_member_variable_name(p) #>;
 }
@@ -263,7 +277,6 @@ const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const 
                         }
 #>
 }
-
 <#+
                     }
                 }

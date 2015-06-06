@@ -51,7 +51,6 @@ fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
                         continue;
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << sf.postfix() << std::endl;
                 }
-fa.stream() << std::endl;
             }
 
             /*
@@ -70,7 +69,6 @@ fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(std::forward<" <
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std::move(rhs." << fa.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
-fa.stream() << std::endl;
             }
 
             /*
@@ -80,14 +78,17 @@ fa.stream() << std::endl;
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
+fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ")" << std::endl;
                 } else {
+fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
 
                     auto sf(fa.make_sequence_formatter(prop_count));
                     sf.postfix_configuration().last(")");
                     for (const auto p : c.properties())
 fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
+fa.stream() << std::endl;
                 }
 
                 auto sf(fa.make_sequence_formatter(prop_count));
@@ -103,11 +104,11 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" <
              */
             if (fa.is_io_enabled()) {
                 if (c.is_parent() || !c.parents().empty()) {
+fa.stream() << std::endl;
 fa.stream() << "void " << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
                 io::inserter_implementation_helper_stitch(fa, c);
 fa.stream() << "    return(s);" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
                 }
             }
 
@@ -116,6 +117,7 @@ fa.stream() << std::endl;
              */
             if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
                 const bool empty(c.all_properties().empty() && c.parents().empty());
+fa.stream() << std::endl;
 fa.stream() << "void " << c.name() << "::swap(" << c.name() << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
                if (!c.parents().empty()) {
                     for (const auto p : c.parents())
@@ -130,19 +132,18 @@ fa.stream() << "    using std::swap;" << std::endl;
 fa.stream() << "    swap(" << fa.make_member_variable_name(p) << ", other." << fa.make_member_variable_name(p) << ");" << std::endl;
                }
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
             }
 
             /*
              * Equals method
              */
             if (!c.is_parent() && !c.parents().empty()) {
+fa.stream() << std::endl;
 fa.stream() << "bool " << c.name() << "::equals(const " << c.original_parent_name_qualified() << "& other) const {" << std::endl;
 fa.stream() << "    const " << c.name() << "* const p(dynamic_cast<const " << c.name() << "* const>(&other));" << std::endl;
 fa.stream() << "     if (!p) return false;" << std::endl;
 fa.stream() << "        return *this == *p;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
             }
 
             /*
@@ -153,6 +154,7 @@ fa.stream() << std::endl;
                 method_name = "compare";
             else
                 method_name = "operator==";
+fa.stream() << std::endl;
 fa.stream() << "bool " << c.name() << "::" << method_name << "(const " << c.name() << "& " << (c.all_properties().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
 
             if (c.all_properties().empty())
@@ -174,13 +176,25 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == 
                 }
             }
 fa.stream() << "}" << std::endl;
+
+            /*
+             * Assignment
+             */
+            if (!c.all_properties().empty() && !c.is_parent() && !c.is_immutable()) {
 fa.stream() << std::endl;
+fa.stream() << c.name() << "& " << c.name() << "::operator=(" << c.name() << " other) {" << std::endl;
+fa.stream() << "    using std::swap;" << std::endl;
+fa.stream() << "    swap(*this, other);" << std::endl;
+fa.stream() << "    return *this;" << std::endl;
+fa.stream() << "}" << std::endl;
+            }
 
             /*
              * Getters and setters
              */
              for (const auto p : c.properties()) {
                  if (p.type().is_primitive() || p.type().is_enumeration()) {
+fa.stream() << std::endl;
 fa.stream() << p.type().complete_name() << " " << c.name() << "::" << p.name() << "() const {" << std::endl;
 fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
 fa.stream() << "}" << std::endl;
@@ -192,14 +206,14 @@ fa.stream() << "    " << fa.make_member_variable_name(p) << " = v;" << std::endl
 fa.stream() << "    return *this;" << std::endl;
                         }
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
                     }
                 } else {
+fa.stream() << std::endl;
 fa.stream() << "const " << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() const {" << std::endl;
 fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
                     if (!c.is_immutable()) {
+fa.stream() << std::endl;
 fa.stream() << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() {" << std::endl;
 fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
 fa.stream() << "}" << std::endl;
@@ -217,7 +231,6 @@ fa.stream() << "    " << fa.make_member_variable_name(p) << " = std::move(v);" <
 fa.stream() << "    return *this;" << std::endl;
                         }
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
                     }
                 }
             }
