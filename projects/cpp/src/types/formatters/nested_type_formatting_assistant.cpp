@@ -55,7 +55,7 @@ std::string nested_type_formatting_assistant::streaming_for_type(
     dogen::formatters::utility_formatter uf(ss);
 
     if (requires_tidying_up(t))
-        uf.insert_quoted_escaped("tidy_up_string(" + s + ")");
+        uf.insert_streamed("tidy_up_string(" + s + ")");
     else if (requires_quoting(t))
         uf.insert_quoted_escaped(s);
     else

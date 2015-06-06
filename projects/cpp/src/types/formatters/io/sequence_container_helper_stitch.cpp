@@ -34,13 +34,13 @@ void sequence_container_helper_stitch(
         const auto containee(t.children().front());
 fa.stream() << std::endl;
 fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    s << \'[ \';" << std::endl;
+fa.stream() << "    s << \"[ \";" << std::endl;
 fa.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-fa.stream() << "        if (i != v.begin()) s << \', \';" << std::endl;
+fa.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
 fa.stream() << "        s << " << fa.streaming_for_type(containee, "*i") << ";" << std::endl;
-fa.stream() << "        s << \' } ]\';" << std::endl;
+fa.stream() << "        s << \" } ]\";" << std::endl;
 fa.stream() << "    }" << std::endl;
-fa.stream() << "    s << \' ] \';" << std::endl;
+fa.stream() << "    s << \" ] \";" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;

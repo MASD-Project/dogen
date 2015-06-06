@@ -34,12 +34,12 @@ void optional_helper_stitch(
         const auto containee(t.children().front());
 fa.stream() << std::endl;
 fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    s << \'{ \' << \'\\'__type__\\': \\'\' << " << t.name() << " \'\\', \'" << std::endl;
+fa.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \\\"\" << " << t.name() << " \"\\\", \"" << std::endl;
 fa.stream() << "    if (v)" << std::endl;
-fa.stream() << "        s << \'\\'data\\': \' << " << fa.streaming_for_type(containee, "*v") << " << \';\'" << std::endl;
+fa.stream() << "        s << \"\\\"data\\\": \" << " << fa.streaming_for_type(containee, "*v") << " << \";\"" << std::endl;
 fa.stream() << "    else" << std::endl;
-fa.stream() << "        s << \'\\'data\\': \' << \'\\'<empty>\\'\';" << std::endl;
-fa.stream() << "    s << \' }\';" << std::endl;
+fa.stream() << "        s << \"\\\"data\\\": \" << \"\\\"<empty>\\\"\";" << std::endl;
+fa.stream() << "    s << \" }\";" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;

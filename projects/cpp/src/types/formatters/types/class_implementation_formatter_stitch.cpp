@@ -105,6 +105,7 @@ fa.stream() << std::endl;
 
 fa.stream() << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
                 io::inserter_implementation_helper_stitch(fa, c);
+fa.stream() << "    return(s);" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
             }

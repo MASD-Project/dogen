@@ -37,13 +37,13 @@ fa.stream() << "    s.precision(6);" << std::endl;
 fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
     }
 fa.stream() << std::endl;
-fa.stream() << "    s << \' { \';" << std::endl;
-fa.stream() << "      << \'\\'__type__\\': \' << \'\\'" << c.qualified_name() << "\\'\'" << std::endl;
+fa.stream() << "    s << \" { \";" << std::endl;
+fa.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << c.qualified_name() << "\\\"\"" << std::endl;
     auto sf(fa.make_sequence_formatter(c.all_properties().size()));
     sf.prefix_configuration().first("  ");
     sf.prefix_configuration().not_first("s ");
     for (const auto p : c.parents()) {
-fa.stream() << "    " << sf.prefix() << "<< \', \' << \'\\'__parent_\' << sf.current_position() << \'__\\': \';" << std::endl;
+fa.stream() << "    " << sf.prefix() << "<< \", \" << \"\\\"__parent_\" << sf.current_position() << \"__\\\": \";" << std::endl;
 fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     }
 
@@ -52,8 +52,8 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     sf.prefix_configuration().not_first("  ");
     auto ntfa(fa.make_nested_type_formatting_assistant());
     for (const auto p : c.properties()) {
-fa.stream() << "    " << sf.prefix() << "<< \', \' << \'\\'" << p.name() << "\\': \' << " << ntfa.streaming_for_type(p.type(), "v") << sf.postfix() << std::endl;
+fa.stream() << "    " << sf.prefix() << "<< \", \" << \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), "v") << sf.postfix() << std::endl;
     }
-fa.stream() << "      << \' } \';" << std::endl;
+fa.stream() << "      << \" } \";" << std::endl;
 }
 } } } }
