@@ -21,6 +21,12 @@
 #include <sstream>
 #include "dogen/formatters/types/sequence_formatter.hpp"
 
+namespace {
+
+const std::string empty;
+
+}
+
 namespace dogen {
 namespace formatters {
 
@@ -50,14 +56,20 @@ value_for_position(const infix_configuration& ic) const {
             return ic.first();
         }
         return ic.last();
-    } else if (is_first())
+    } else if (is_first() && !ic.first().empty()) {
+        // if is first and first has been supplied, it takes precedence.
         return ic.first();
-    else if (!is_last() || !ic.not_first().empty()) {
+    } else if (!is_last() && !ic.not_last().empty()) {
+        // if we are not last (including first) and not last has been
+        // supplied.
+        return ic.not_last();
+    } else if (!is_first() && (!is_last() || !ic.not_first().empty())) {
         // when we are last, not first takes precedence if supplied.
         return ic.not_first();
-    }
+    } else if (is_last())
+        return ic.last();
 
-    return ic.last();
+    return empty;
 }
 
 infix_configuration& sequence_formatter::prefix_configuration() {

@@ -38,6 +38,7 @@ std::ostream& operator<<(std::ostream& s, const infix_configuration& v) {
       << "\"__type__\": " << "\"dogen::formatters::infix_configuration\"" << ", "
       << "\"first\": " << "\"" << tidy_up_string(v.first()) << "\"" << ", "
       << "\"not_first\": " << "\"" << tidy_up_string(v.not_first()) << "\"" << ", "
+      << "\"not_last\": " << "\"" << tidy_up_string(v.not_last()) << "\"" << ", "
       << "\"last\": " << "\"" << tidy_up_string(v.last()) << "\""
       << " }";
     return(s);

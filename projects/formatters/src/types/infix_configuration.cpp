@@ -26,21 +26,25 @@ namespace formatters {
 infix_configuration::infix_configuration(
     const std::string& first,
     const std::string& not_first,
+    const std::string& not_last,
     const std::string& last)
     : first_(first),
       not_first_(not_first),
+      not_last_(not_last),
       last_(last) { }
 
 void infix_configuration::swap(infix_configuration& other) noexcept {
     using std::swap;
     swap(first_, other.first_);
     swap(not_first_, other.not_first_);
+    swap(not_last_, other.not_last_);
     swap(last_, other.last_);
 }
 
 bool infix_configuration::operator==(const infix_configuration& rhs) const {
     return first_ == rhs.first_ &&
         not_first_ == rhs.not_first_ &&
+        not_last_ == rhs.not_last_ &&
         last_ == rhs.last_;
 }
 
@@ -83,6 +87,24 @@ infix_configuration& infix_configuration::not_first(const std::string& v) {
 
 infix_configuration& infix_configuration::not_first(const std::string&& v) {
     not_first_ = std::move(v);
+    return *this;
+}
+
+const std::string& infix_configuration::not_last() const {
+    return not_last_;
+}
+
+std::string& infix_configuration::not_last() {
+    return not_last_;
+}
+
+infix_configuration& infix_configuration::not_last(const std::string& v) {
+    not_last_ = v;
+    return *this;
+}
+
+infix_configuration& infix_configuration::not_last(const std::string&& v) {
+    not_last_ = std::move(v);
     return *this;
 }
 

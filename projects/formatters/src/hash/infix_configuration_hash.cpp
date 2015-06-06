@@ -39,6 +39,7 @@ std::size_t infix_configuration_hasher::hash(const infix_configuration&v) {
 
     combine(seed, v.first());
     combine(seed, v.not_first());
+    combine(seed, v.not_last());
     combine(seed, v.last());
 
     return seed;

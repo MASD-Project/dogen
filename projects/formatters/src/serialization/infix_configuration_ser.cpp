@@ -40,6 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("first", v.first_);
     ar << make_nvp("not_first", v.not_first_);
+    ar << make_nvp("not_last", v.not_last_);
     ar << make_nvp("last", v.last_);
 }
 
@@ -49,6 +50,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("first", v.first_);
     ar >> make_nvp("not_first", v.not_first_);
+    ar >> make_nvp("not_last", v.not_last_);
     ar >> make_nvp("last", v.last_);
 }
 

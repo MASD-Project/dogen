@@ -46,6 +46,7 @@ public:
     infix_configuration(
         const std::string& first,
         const std::string& not_first,
+        const std::string& not_last,
         const std::string& last);
 
 private:
@@ -77,6 +78,11 @@ public:
     infix_configuration& not_first(const std::string&& v);
     /**@}*/
 
+    const std::string& not_last() const;
+    std::string& not_last();
+    infix_configuration& not_last(const std::string& v);
+    infix_configuration& not_last(const std::string&& v);
+
     /**
      * @brief Only applicable to the last element of a sequence.
      */
@@ -100,6 +106,7 @@ public:
 private:
     std::string first_;
     std::string not_first_;
+    std::string not_last_;
     std::string last_;
 };
 
