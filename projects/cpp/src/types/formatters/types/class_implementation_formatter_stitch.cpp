@@ -81,21 +81,21 @@ fa.stream() << std::endl;
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
 fa.stream() << c.name() << "::" << c.name() << "(const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << ")" << std::endl;
-                } else
+                } else {
 fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
 
-                auto sf(fa.make_sequence_formatter(prop_count));
-                sf.postfix_configuration().last(")");
-                for (const auto p : c.properties())
+                    auto sf(fa.make_sequence_formatter(prop_count));
+                    sf.postfix_configuration().last(")");
+                    for (const auto p : c.properties())
 fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
+                }
 
-                sf.reset();
+                auto sf(fa.make_sequence_formatter(prop_count));
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
-fa.stream() << std::endl;
             }
 
             /*
@@ -145,6 +145,9 @@ fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
             }
 
+            /*
+             * Equals operator
+             */
             std::string method_name;
             if (c.is_parent())
                 method_name = "compare";
@@ -171,6 +174,53 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == 
                 }
             }
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+
+            /*
+             * Getters and setters
+             */
+             for (const auto p : c.properties()) {
+                 if (p.type().is_primitive() || p.type().is_enumeration()) {
+fa.stream() << p.type().complete_name() << " " << c.name() << "::" << p.name() << "() const {" << std::endl;
+fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+                    if (!c.is_immutable()) {
+fa.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << " v) {" << std::endl;
+fa.stream() << "    " << fa.make_member_variable_name(p) << " = v;" << std::endl;
+                        if (p.is_fluent()) {
+fa.stream() << "    return *this;" << std::endl;
+                        }
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+                    }
+                } else {
+fa.stream() << "const " << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() const {" << std::endl;
+fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+                    if (!c.is_immutable()) {
+fa.stream() << p.type().complete_name() << "& " << c.name() << "::" << p.name() << "() {" << std::endl;
+fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << "& v) {" << std::endl;
+fa.stream() << "    " << fa.make_member_variable_name(p) << " = v;" << std::endl;
+                        if (p.is_fluent()) {
+fa.stream() << "    return *this;" << std::endl;
+                        }
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << "&& v) {" << std::endl;
+fa.stream() << "    " << fa.make_member_variable_name(p) << " = std::move(v);" << std::endl;
+                        if (p.is_fluent()) {
+fa.stream() << "    return *this;" << std::endl;
+                        }
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+                    }
+                }
+            }
 fa.stream() << std::endl;
         } // snf
 fa.stream() << std::endl;

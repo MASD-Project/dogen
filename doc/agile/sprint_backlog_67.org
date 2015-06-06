@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-06 Sat 17:13]
+#+CAPTION: Clock summary at [2015-06-06 Sat 18:05]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *41:15* |       |       |
+| *Total time*                                                                | *42:06* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 41:15   |       |       |
-| Active                                                                      |         | 41:15 |       |
+| Stories                                                                     | 42:06   |       |       |
+| Active                                                                      |         | 42:06 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:12 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
@@ -30,7 +30,7 @@
 | CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
 | COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
 | COMPLETED Implement io helper method generator                              |         |       |  8:17 |
-| STARTED Implement class implementation formatter using stitch               |         |       |  5:17 |
+| STARTED Implement class implementation formatter using stitch               |         |       |  6:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -257,6 +257,7 @@ Notes:
   casting.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-06 Sat 17:14]--[2015-06-06 Sat 18:05] =>  0:51
     CLOCK: [2015-06-06 Sat 16:17]--[2015-06-06 Sat 17:13] =>  0:56
     CLOCK: [2015-06-06 Sat 16:05]--[2015-06-06 Sat 16:07] =>  0:02
     CLOCK: [2015-06-06 Sat 15:10]--[2015-06-06 Sat 16:04] =>  0:54

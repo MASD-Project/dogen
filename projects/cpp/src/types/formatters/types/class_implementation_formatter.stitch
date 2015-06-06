@@ -76,26 +76,26 @@ dogen::formatters::file class_implementation_formatter_stitch(
 #>
 <#= c.name() #>::<#= c.name() #>(const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #>)
 <#+
-                } else
+                } else {
 #>
 <#= c.name() #>::<#= c.name() #>(
 <#+
 
-                auto sf(fa.make_sequence_formatter(prop_count));
-                sf.postfix_configuration().last(")");
-                for (const auto p : c.properties())
+                    auto sf(fa.make_sequence_formatter(prop_count));
+                    sf.postfix_configuration().last(")");
+                    for (const auto p : c.properties())
 #>
     const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
 <#+
+                }
 
-                sf.reset();
+                auto sf(fa.make_sequence_formatter(prop_count));
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
 
                 for (const auto p : c.properties())
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
-
 <#+
             }
 
@@ -162,6 +162,9 @@ bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& ot
 <#+
             }
 
+            /*
+             * Equals operator
+             */
             std::string method_name;
             if (c.is_parent())
                 method_name = "compare";
@@ -197,6 +200,75 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
             }
 #>
 }
+
+<#+
+
+            /*
+             * Getters and setters
+             */
+             for (const auto p : c.properties()) {
+                 if (p.type().is_primitive() || p.type().is_enumeration()) {
+#>
+<#= p.type().complete_name() #> <#= c.name() #>::<#= p.name() #>() const {
+    return <#= fa.make_member_variable_name(p) #>;
+}
+
+<#+
+                    if (!c.is_immutable()) {
+#>
+<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #> v) {
+    <#= fa.make_member_variable_name(p) #> = v;
+<#+
+                        if (p.is_fluent()) {
+#>
+    return *this;
+<#+
+                        }
+#>
+}
+
+<#+
+                    }
+                } else {
+#>
+const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const {
+    return <#= fa.make_member_variable_name(p) #>;
+}
+
+<#+
+                    if (!c.is_immutable()) {
+#>
+<#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() {
+    return <#= fa.make_member_variable_name(p) #>;
+}
+
+<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>& v) {
+    <#= fa.make_member_variable_name(p) #> = v;
+<#+
+                        if (p.is_fluent()) {
+#>
+    return *this;
+<#+
+                        }
+#>
+}
+
+<#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #>&& v) {
+    <#= fa.make_member_variable_name(p) #> = std::move(v);
+<#+
+                        if (p.is_fluent()) {
+#>
+    return *this;
+<#+
+                        }
+#>
+}
+
+<#+
+                    }
+                }
+            }
+#>
 
 <#+
         } // snf
