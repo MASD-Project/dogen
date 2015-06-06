@@ -82,10 +82,18 @@ std::string sequence_formatter::postfix() {
     return s.str();
 }
 
+unsigned int sequence_formatter::current_position() const {
+    return position_;
+}
+
 void sequence_formatter::reset() {
     position_ = 0;
     prefix_configuration_ = infix_configuration();
     postfix_configuration_ = infix_configuration();
+}
+
+void sequence_formatter::reset(const unsigned int sequence_size) {
+    sequence_size_ = sequence_size;
 }
 
 } }

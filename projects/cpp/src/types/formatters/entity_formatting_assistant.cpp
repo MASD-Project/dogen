@@ -182,6 +182,11 @@ make_sequence_formatter(const unsigned int sequence_size,
     return r;
 }
 
+nested_type_formatting_assistant entity_formatting_assistant::
+make_nested_type_formatting_assistant() {
+    return nested_type_formatting_assistant(stream());
+}
+
 std::ostream& entity_formatting_assistant::stream() {
     return filtering_stream_;
 }

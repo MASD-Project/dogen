@@ -85,12 +85,20 @@ public:
     std::string postfix();
 
     /**
+     * @brief Returns the current position.
+     */
+    unsigned int current_position() const;
+
+    /**
      * @brief Resets the position and configurations.
      */
+    /**@{*/
     void reset();
+    void reset(const unsigned int sequence_size);
+    /**@}*/
 
 private:
-    const unsigned int sequence_size_;
+    unsigned int sequence_size_;
     const std::string element_separator_;
     unsigned int position_;
     infix_configuration prefix_configuration_;

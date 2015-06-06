@@ -3,6 +3,7 @@
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=fa.stream() #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
 <#@ containing_namespaces=dogen::cpp::formatters::types #>
 <#+
 
@@ -106,17 +107,9 @@ dogen::formatters::file class_implementation_formatter_stitch(
 #>
 <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
-                if (c.requires_stream_manipulators()) {
+                io::inserter_implementation_helper_stitch(fa, c);
 #>
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
-<#+
-                }
-#>
+    return(s);
 }
 
 <#+
@@ -166,17 +159,16 @@ bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& ot
 }
 
 <#+
-                if (c.is_parent()) {
+                std::string method_name;
+                if (c.is_parent())
+                    method_name = "compare";
+                else
+                    method_name = "operator==";
 #>
-bool <#= c.name() #>::compare(const <#= c.name() #>& <#= c.all_properties().empty() ? "/*rhs*/" : "rhs" #>) const {
+bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_properties().empty() ? "/*rhs*/" : "rhs") #>) const {
 <#+
-                } else {
-#>
-bool <#= ci.name() #>::operator==(const <#= c.name() #>& <#= c.all_properties().empty() ? "/*rhs*/" : "rhs" #>) const {
-<#+
-                }
 
-                if (ci.all_properties().empty())
+                if (c.all_properties().empty())
 #>
     return true;
 <#+
@@ -184,19 +176,24 @@ bool <#= ci.name() #>::operator==(const <#= c.name() #>& <#= c.all_properties().
 #>
     return 
 <#+
-                bool is_first(true);
-                auto sf(fa.make_sequence_formatter(c.parents().size()));
-                sf.prefix_configuration().not_first("");
-                for (const auto p : c.parents()) {
-                    if (!is_first)
+                    auto sf(fa.make_sequence_formatter(c.parents().size()));
+                    sf.postfix_configuration().not_first(" &&");
+                    for (const auto p : c.parents())
 #>
-    <#= p.name() #>::compare(rhs)<#= is_first ? " &&" : "" #>
-                        stream_ << " &&" << std::endl << indenter_;
-                    {
-                        positive_indenter_scope s(indenter_);
-                        stream_ << p.name() << "::compare(rhs)";
-
+    <#= p.name() #>::compare(rhs)<#= sf.postfix() #>
+<#+
+                    sf.reset(c.properties().size());
+                    sf.postfix_configuration().not_first(" &&");
+                    sf.postfix_configuration().last(";");
+                    for (const auto p : c.properties()) {
+#>
+    <#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>
+<#+
+                    }
                 }
+#>
+}
+<#+
             }
         } // snf
 #>

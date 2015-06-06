@@ -1,0 +1,50 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::io #>
+<#+
+
+void inserter_implementation_helper_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+
+    if (c.requires_stream_manipulators()) {
+#>
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+<#+
+    }
+#>
+
+    s << " { ";
+      << "\"__type__\": " << "\"<#= c.qualified_name() #>\""
+<#+
+    auto sf(fa.make_sequence_formatter(c.all_properties().size()));
+    sf.prefix_configuration().first("  ");
+    sf.prefix_configuration().not_first("s ");
+    for (const auto p : c.parents()) {
+#>
+    <#= sf.prefix() #><< ", " << "\"__parent_" << sf.current_position() << "__\": ";
+    <#= p.name() #>::to_stream(s);
+<#+
+    }
+
+    sf.reset();
+    sf.prefix_configuration().first(c.parents().empty() ? "  " : "s ");
+    sf.prefix_configuration().not_first("  ");
+    auto ntfa(fa.make_nested_type_formatting_assistant());
+    for (const auto p : c.properties()) {
+#>
+    <#= sf.prefix() #><< ", " << "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), "v") #><#= sf.postfix() #>
+<#+
+    }
+#>
+      << " } ";
+<#+
+}
+#>

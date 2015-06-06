@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp"
 
 namespace dogen {
@@ -103,14 +104,7 @@ fa.stream() << std::endl;
             if (fa.is_io_enabled()) {
 
 fa.stream() << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
-                if (c.requires_stream_manipulators()) {
-fa.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
-fa.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
-fa.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
-fa.stream() << "    s.precision(6);" << std::endl;
-fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
-fa.stream() << std::endl;
-                }
+                io::inserter_implementation_helper_stitch(fa, c);
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
             }
@@ -133,6 +127,42 @@ fa.stream() << "    using std::swap;" << std::endl;
                    for (const auto p : c.properties())
 fa.stream() << "    swap(" << fa.make_member_variable_name(p) << ", other." << fa.make_member_variable_name(p) << ");" << std::endl;
                }
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+            }
+
+            /*
+             * Equals
+             */
+            if (!c.is_parent() && !c.parents().empty()) {
+fa.stream() << "bool " << c.name() << "::equals(const " << c.original_parent_name_qualified() << "& other) const {" << std::endl;
+fa.stream() << "    const " << c.name() << "* const p(dynamic_cast<const " << c.name() << "* const>(&other));" << std::endl;
+fa.stream() << "     if (!p) return false;" << std::endl;
+fa.stream() << "        return *this == *p;" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+                std::string method_name;
+                if (c.is_parent())
+                    method_name = "compare";
+                else
+                    method_name = "operator==";
+fa.stream() << "bool " << c.name() << "::" << method_name << "(const " << c.name() << "& " << (c.all_properties().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
+
+                if (c.all_properties().empty())
+fa.stream() << "    return true;" << std::endl;
+                else {
+fa.stream() << "    return " << std::endl;
+                    auto sf(fa.make_sequence_formatter(c.parents().size()));
+                    sf.postfix_configuration().not_first(" &&");
+                    for (const auto p : c.parents())
+fa.stream() << "    " << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
+                    sf.reset(c.properties().size());
+                    sf.postfix_configuration().not_first(" &&");
+                    sf.postfix_configuration().last(";");
+                    for (const auto p : c.properties()) {
+fa.stream() << "    " << fa.make_member_variable_name(p) << " == rhs." << fa.make_member_variable_name(p) << sf.postfix() << std::endl;
+                    }
+                }
 fa.stream() << "}" << std::endl;
             }
         } // snf

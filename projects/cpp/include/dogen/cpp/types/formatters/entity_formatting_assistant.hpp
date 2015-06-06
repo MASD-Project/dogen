@@ -38,6 +38,7 @@
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
+#include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -149,6 +150,13 @@ public:
     dogen::formatters::sequence_formatter
     make_sequence_formatter(const unsigned int sequence_size,
         const std::string& element_separator = ",") const;
+
+    /**
+     * @brief Creates a nested type formatting assistant, latched on
+     * the properties. Requires entity to be a class info.
+     */
+    nested_type_formatting_assistant
+    make_nested_type_formatting_assistant();
 
     /**
      * @brief Returns the stream that is currently being populated.
