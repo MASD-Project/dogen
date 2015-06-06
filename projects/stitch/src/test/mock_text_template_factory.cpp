@@ -28,6 +28,8 @@ const std::string empty;
 const std::string stream_variable_name("stream_");
 const std::string single_line_text("This is a template");
 const std::string line_text("This is line numnber: ");
+const std::string text_with_quotes("\"double quote\" \\\"double "
+    "quote quote\\\" 'single'");
 const std::string first_part_of_mixed_line("Start mixed line.");
 const std::string scriptlet_in_mixed_line("my_variable.print()");
 const std::string second_part_of_mixed_line("End mixed line.");
@@ -199,6 +201,20 @@ text_template mock_text_template_factory::
 make_mixed_content_multi_line(const unsigned int how_many) const {
     text_template r(make_text_template_with_trivial_settings());
     r.lines(make_mixed_content_lines(how_many));
+    return r;
+}
+
+text_template mock_text_template_factory::make_text_line_with_quotes() const {
+    text_template r(make_text_template_with_trivial_settings());
+
+    segment sg;
+    sg.type(segment_types::text);
+    sg.content(text_with_quotes);
+
+    line l;
+    l.segments().push_back(sg);
+    r.lines().push_back(l);
+
     return r;
 }
 

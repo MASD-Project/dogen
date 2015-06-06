@@ -130,6 +130,12 @@ public:
     text_template make_mixed_content_multi_line(
         const unsigned int how_many = 2) const;
 
+    /**
+     * @brief Creates a text template with a text line with single and
+     * double quotes.
+     */
+    text_template make_text_line_with_quotes() const;
+
 public:
     /**
      * @brief Creates a text template a complex structure: multi-line

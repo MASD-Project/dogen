@@ -36,8 +36,9 @@ const std::string inserter("<<");
 const std::string single_quote("'");
 const std::string double_quote("\"");
 const std::string single_quote_escaped("\\\'");
-const std::string double_quote_escaped("\\\'");
-
+const std::string double_quote_escaped("\\\"");
+const std::string escape("\\");
+const std::string escape_escaped("\\\\");
 const std::string unsupported_quote_type("Invalid or unsupported quote type: ");
 
 }
@@ -92,16 +93,20 @@ void utility_formatter::insert_quote(const quote_types qt) const {
 
 std::string utility_formatter::
 escape_quote(const std::string& s, const quote_types qt) const {
+    auto r(boost::replace_all_copy(s, escape, escape_escaped));
     switch(qt) {
     case quote_types::single_quote:
-        return boost::replace_all_copy(s, single_quote, single_quote_escaped);
+        boost::replace_all(r, single_quote, single_quote_escaped);
+        break;
     case quote_types::double_quote:
-        return boost::replace_all_copy(s, double_quote, double_quote_escaped);
+        boost::replace_all(r, double_quote, double_quote_escaped);
+        break;
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_quote_type << qt;
         BOOST_THROW_EXCEPTION(formatting_error(
                 unsupported_quote_type + boost::lexical_cast<std::string>(qt)));
     }
+    return r;
 }
 
 void utility_formatter::insert_escaped(const std::string& s,
