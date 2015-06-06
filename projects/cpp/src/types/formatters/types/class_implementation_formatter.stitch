@@ -103,9 +103,9 @@ dogen::formatters::file class_implementation_formatter_stitch(
              * Streaming
              */
             if (fa.is_io_enabled()) {
-
+                if (c.is_parent() || !c.parents().empty()) {
 #>
-<#= c.name() #>::to_stream(std::ostream& s) const {
+void <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
                 io::inserter_implementation_helper_stitch(fa, c);
 #>
@@ -113,6 +113,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 }
 
 <#+
+                }
             }
 
             /*
@@ -121,7 +122,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
             if (!c.is_immutable() && (!c.all_properties().empty() || c.is_parent())) {
                 const bool empty(c.all_properties().empty() && c.parents().empty());
 #>
-void <#= c.name() #>::swap(<#= c.name() #>& <#= (empty ? "" : " other") #>) noexcept {
+void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexcept {
 <#+
                if (!c.parents().empty()) {
                     for (const auto p : c.parents())
@@ -148,7 +149,7 @@ void <#= c.name() #>::swap(<#= c.name() #>& <#= (empty ? "" : " other") #>) noex
             }
 
             /*
-             * Equals
+             * Equals method
              */
             if (!c.is_parent() && !c.parents().empty()) {
 #>
@@ -159,42 +160,45 @@ bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& ot
 }
 
 <#+
-                std::string method_name;
-                if (c.is_parent())
-                    method_name = "compare";
-                else
-                    method_name = "operator==";
+            }
+
+            std::string method_name;
+            if (c.is_parent())
+                method_name = "compare";
+            else
+                method_name = "operator==";
 #>
 bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_properties().empty() ? "/*rhs*/" : "rhs") #>) const {
 <#+
 
-                if (c.all_properties().empty())
+            if (c.all_properties().empty())
 #>
     return true;
 <#+
-                else {
-#>
-    return 
-<#+
-                    auto sf(fa.make_sequence_formatter(c.parents().size()));
-                    sf.postfix_configuration().not_first(" &&");
-                    for (const auto p : c.parents())
+            else {
+                auto sf(fa.make_sequence_formatter(c.parents().size(), ""));
+                sf.prefix_configuration().first("return ");
+                sf.prefix_configuration().not_first("    ");
+                sf.postfix_configuration().not_last(" &&");
+                for (const auto p : c.parents())
 #>
     <#= p.name() #>::compare(rhs)<#= sf.postfix() #>
 <#+
-                    sf.reset(c.properties().size());
-                    sf.postfix_configuration().not_first(" &&");
-                    sf.postfix_configuration().last(";");
-                    for (const auto p : c.properties()) {
+
+                sf.reset(c.properties().size());
+                sf.prefix_configuration().not_first("    ");
+                sf.postfix_configuration().not_last(" &&");
+                sf.postfix_configuration().last(";");
+                for (const auto p : c.properties()) {
 #>
-    <#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>
+    <#= sf.prefix() #><#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>
 <#+
-                    }
                 }
+            }
 #>
 }
+
 <#+
-            }
         } // snf
 #>
 
