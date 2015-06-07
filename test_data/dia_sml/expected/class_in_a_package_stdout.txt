@@ -900,6 +900,7 @@ void first_class::private_attribute(const int v) {
 }
 
 } }
+
 Filename: /empty_tds/actual/include/class_in_a_package/types/package1/first_class.hpp
 Content: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-

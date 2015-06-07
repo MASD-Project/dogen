@@ -215,11 +215,14 @@ void domain_implementation::format_class(
     for (const auto p : props)
         recursive_helper_method_creator(p.type(), types_done);
 
-    using dogen::formatters::cpp::scoped_namespace_formatter;
-    scoped_namespace_formatter nsh(stream_, ci.namespaces());
+    {
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
+        utility_.blank_line();
+        class_implementation(f.descriptor(), ci);
+        inserter_operator(ci);
+    }
     utility_.blank_line();
-    class_implementation(f.descriptor(), ci);
-    inserter_operator(ci);
 }
 
 void domain_implementation::format_enumeration(
