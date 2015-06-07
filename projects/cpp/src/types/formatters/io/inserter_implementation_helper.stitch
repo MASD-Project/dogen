@@ -19,10 +19,12 @@ void inserter_implementation_helper_stitch(
     s.setf(std::ios::showpoint);
 <#+
     }
-#>
 
-    s << " { ";
-      << "\"__type__\": " << "\"<#= c.qualified_name() #>\""
+    const bool no_parents_or_properties(c.parents().empty() &&
+        c.all_properties().empty());
+#>
+    s << " { "
+      << "\"__type__\": " << "\"<#= c.qualified_name() #>\""<#= (no_parents_or_properties ? " << \" }\";" : "") #>
 <#+
     auto sf(fa.make_sequence_formatter(c.all_properties().size()));
     sf.prefix_configuration().first("  ");
@@ -37,14 +39,12 @@ void inserter_implementation_helper_stitch(
     sf.reset();
     sf.prefix_configuration().first(c.parents().empty() ? "  " : "s ");
     sf.prefix_configuration().not_first("  ");
+    sf.postfix_configuration().last("<< \" } \";");
     auto ntfa(fa.make_nested_type_formatting_assistant());
     for (const auto p : c.properties()) {
 #>
     <#= sf.prefix() #><< ", " << "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), "v") #><#= sf.postfix() #>
 <#+
     }
-#>
-      << " } ";
-<#+
 }
 #>

@@ -65,7 +65,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
             /*
              * Complete constructor.
              */
-            if (!c.all_properties().empty()) {
+            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
@@ -81,16 +81,34 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
                     auto sf(fa.make_sequence_formatter(prop_count));
                     sf.postfix_configuration().last(")");
-                    for (const auto p : c.properties())
+                    for (const auto p : c.all_properties())
 #>
     const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
-
 <#+
                 }
 
-                auto sf(fa.make_sequence_formatter(prop_count));
+                auto sf(fa.make_sequence_formatter(c.parents().size() + prop_count));
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
+
+                for (const auto p : c.parents()) {
+                    if (p.properties().size() <= 1)
+#>
+    <#= sf.prefix() #><#= p.qualified_name() #>(<#= (p.properties().empty() ? "" : p.properties().front().name()) #>)<#= sf.postfix() #>
+<#+
+                    else {
+#>
+    <#= sf.prefix() #><#= p.qualified_name() #>(
+<#+
+                        auto sf2(fa.make_sequence_formatter(p.properties().size()));
+                        sf2.postfix_configuration().last(")");
+                        for (const auto prop : p.properties()) {
+#>
+    <#= sf2.prefix() #><#= prop.name() #><#= sf2.postfix() #><#= sf.postfix() #>
+<#+
+                        }
+                    }
+                }
 
                 for (const auto p : c.properties())
 #>
@@ -109,7 +127,6 @@ void <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
                 io::inserter_implementation_helper_stitch(fa, c);
 #>
-    return(s);
 }
 <#+
                 }
@@ -285,9 +302,6 @@ const <#= p.type().complete_name() #>& <#= c.name() #>::<#= p.name() #>() const 
 
 <#+
         } // snf
-#>
-
-<#+
     } // sbf
     return fa.make_file(false/*overwrite*/);
 }

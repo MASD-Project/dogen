@@ -257,6 +257,7 @@ Notes:
   casting.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-07 Sun 10:23]--[2015-06-07 Sun 11:19] =>  0:56
     CLOCK: [2015-06-07 Sun 09:15]--[2015-06-07 Sun 09:18] =>  0:03
     CLOCK: [2015-06-07 Sun 08:50]--[2015-06-07 Sun 09:04] =>  0:14
     CLOCK: [2015-06-06 Sat 19:30]--[2015-06-06 Sat 19:43] =>  0:13

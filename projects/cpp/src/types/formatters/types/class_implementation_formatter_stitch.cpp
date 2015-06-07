@@ -74,7 +74,7 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std
             /*
              * Complete constructor.
              */
-            if (!c.all_properties().empty()) {
+            if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
                 const auto prop_count(c.all_properties().size());
                 if (prop_count == 1) {
                      const auto p(*c.all_properties().begin());
@@ -86,14 +86,26 @@ fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
 
                     auto sf(fa.make_sequence_formatter(prop_count));
                     sf.postfix_configuration().last(")");
-                    for (const auto p : c.properties())
+                    for (const auto p : c.all_properties())
 fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
-fa.stream() << std::endl;
                 }
 
-                auto sf(fa.make_sequence_formatter(prop_count));
+                auto sf(fa.make_sequence_formatter(c.parents().size() + prop_count));
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
+
+                for (const auto p : c.parents()) {
+                    if (p.properties().size() <= 1)
+fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << (p.properties().empty() ? "" : p.properties().front().name()) << ")" << sf.postfix() << std::endl;
+                    else {
+fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << std::endl;
+                        auto sf2(fa.make_sequence_formatter(p.properties().size()));
+                        sf2.postfix_configuration().last(")");
+                        for (const auto prop : p.properties()) {
+fa.stream() << "    " << sf2.prefix() << prop.name() << sf2.postfix() << sf.postfix() << std::endl;
+                        }
+                    }
+                }
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
@@ -107,7 +119,6 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" <
 fa.stream() << std::endl;
 fa.stream() << "void " << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
                 io::inserter_implementation_helper_stitch(fa, c);
-fa.stream() << "    return(s);" << std::endl;
 fa.stream() << "}" << std::endl;
                 }
             }
@@ -236,7 +247,6 @@ fa.stream() << "}" << std::endl;
             }
 fa.stream() << std::endl;
         } // snf
-fa.stream() << std::endl;
     } // sbf
     return fa.make_file(false/*overwrite*/);
 }
