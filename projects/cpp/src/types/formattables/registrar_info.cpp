@@ -59,7 +59,8 @@ registrar_info::registrar_info(
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<std::string>& leaves,
     const std::list<std::string>& model_dependencies)
-    : dogen::cpp::formattables::entity(identity,
+    : dogen::cpp::formattables::entity(
+      identity,
       name,
       qualified_name,
       documentation,

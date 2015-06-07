@@ -32,7 +32,8 @@ primitive::primitive(
     const dogen::sml::generation_types& generation_type,
     const dogen::sml::origin_types& origin_type,
     const boost::optional<dogen::sml::qname>& containing_module)
-    : dogen::sml::type(documentation,
+    : dogen::sml::type(
+      documentation,
       extensions,
       name,
       generation_type,

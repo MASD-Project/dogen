@@ -34,7 +34,8 @@ exception_info::exception_info(
     const std::list<std::string>& namespaces,
     const dogen::cpp::settings::bundle& settings,
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
-    : dogen::cpp::formattables::entity(identity,
+    : dogen::cpp::formattables::entity(
+      identity,
       name,
       qualified_name,
       documentation,

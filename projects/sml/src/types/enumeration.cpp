@@ -50,7 +50,8 @@ enumeration::enumeration(
     const boost::optional<dogen::sml::qname>& containing_module,
     const dogen::sml::qname& underlying_type,
     const std::vector<dogen::sml::enumerator>& enumerators)
-    : dogen::sml::type(documentation,
+    : dogen::sml::type(
+      documentation,
       extensions,
       name,
       generation_type,

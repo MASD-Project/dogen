@@ -148,7 +148,8 @@ class_info::class_info(
     const dogen::cpp::formattables::class_types& class_type,
     const dogen::sml::generation_types& generation_type,
     const bool is_final)
-    : dogen::cpp::formattables::entity(identity,
+    : dogen::cpp::formattables::entity(
+      identity,
       name,
       qualified_name,
       documentation,

@@ -60,7 +60,8 @@ enum_info::enum_info(
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties,
     const std::list<dogen::cpp::formattables::enumerator_info>& enumerators,
     const std::string& type)
-    : dogen::cpp::formattables::entity(identity,
+    : dogen::cpp::formattables::entity(
+      identity,
       name,
       qualified_name,
       documentation,

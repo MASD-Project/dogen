@@ -148,7 +148,8 @@ object::object(
     const bool is_aggregate_root,
     const std::list<dogen::sml::property>& identity,
     const bool is_final)
-    : dogen::sml::type(documentation,
+    : dogen::sml::type(
+      documentation,
       extensions,
       name,
       generation_type,

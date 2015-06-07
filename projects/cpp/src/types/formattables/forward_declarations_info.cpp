@@ -51,7 +51,8 @@ forward_declarations_info::forward_declarations_info(
     const bool is_enum,
     const std::string& enum_type,
     const bool is_exception)
-    : dogen::cpp::formattables::entity(identity,
+    : dogen::cpp::formattables::entity(
+      identity,
       name,
       qualified_name,
       documentation,
