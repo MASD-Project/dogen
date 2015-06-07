@@ -33,7 +33,8 @@ child_of_a_child2::child_of_a_child2(
     const int prop_0,
     const unsigned int prop_1,
     const unsigned int prop_2)
-    : dogen::test_models::trivial_inheritance::third_child_with_members(prop_0,
+    : dogen::test_models::trivial_inheritance::third_child_with_members(
+      prop_0,
       prop_1),
       prop_2_(prop_2) { }
 

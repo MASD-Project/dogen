@@ -35,7 +35,8 @@ further_refined::further_refined(
     const std::string& prop_0,
     const int prop_3,
     const int prop_1)
-    : dogen::test_models::stereotypes::base_with_concept(prop_2,
+    : dogen::test_models::stereotypes::base_with_concept(
+      prop_2,
       prop_0),
       prop_3_(prop_3),
       prop_1_(prop_1) { }

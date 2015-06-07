@@ -155,6 +155,8 @@ void class_implementation::complete_constructor(
             for (const auto prop : p.properties()) {
                 if (!is_first)
                     stream_ << "," << std::endl << indenter_ << "  ";
+                else if (p.properties().size() > 1)
+                    stream_ << std::endl << indenter_ << "  ";
 
                 stream_ << prop.name();
                 is_first = false;

@@ -29,7 +29,8 @@ namespace trivial_inheritance {
 child_of_a_child1::child_of_a_child1(
     const int prop_0,
     const unsigned int prop_1)
-    : dogen::test_models::trivial_inheritance::third_child_with_members(prop_0,
+    : dogen::test_models::trivial_inheritance::third_child_with_members(
+      prop_0,
       prop_1) { }
 
 void child_of_a_child1::to_stream(std::ostream& s) const {
