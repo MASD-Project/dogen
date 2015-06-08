@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-07 Sun 11:24]
+#+CAPTION: Clock summary at [2015-06-08 Mon 18:06]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
@@ -22,7 +22,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------|
 | Stories                                                                     | 43:36   |       |       |
 | Active                                                                      |         | 43:36 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:12 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  1:12 |
 | COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
 | POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
 | POSTPONED Consider using a proper JSON library                              |         |       |  0:47 |
@@ -30,17 +30,19 @@
 | CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
 | COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
 | COMPLETED Implement io helper method generator                              |         |       |  8:17 |
-| STARTED Implement class implementation formatter using stitch               |         |       |  7:38 |
+| POSTPONED Implement class implementation formatter using stitch             |         |       |  7:38 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-06-08 Mon 18:05]
     CLOCK: [2015-06-01 Mon 14:52]--[2015-06-01 Mon 15:08] =>  0:16
     CLOCK: [2015-06-01 Mon 14:19]--[2015-06-01 Mon 14:38] =>  0:19
     CLOCK: [2015-05-25 Mon 08:50]--[2015-05-25 Mon 09:27] =>  0:37
 
 Updates to sprint and product backlog.
 
-*** STARTED Updates to the manual and readme files                    :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-06-08 Mon 18:05]
 
 Use downtime to update the manual and / or readme file.
 
@@ -256,7 +258,8 @@ Notes:
   entity and we need a class info. For now we need to resort to
   casting.
 
-*** STARTED Implement class implementation formatter using stitch     :story:
+*** POSTPONED Implement class implementation formatter using stitch   :story:
+    CLOSED: [2015-06-08 Mon 18:05]
     CLOCK: [2015-06-07 Sun 11:20]--[2015-06-07 Sun 11:24] =>  0:04
     CLOCK: [2015-06-07 Sun 10:23]--[2015-06-07 Sun 11:19] =>  0:56
     CLOCK: [2015-06-07 Sun 09:15]--[2015-06-07 Sun 09:18] =>  0:03
@@ -291,412 +294,6 @@ Problems:
 : +      float_property_(float_property)) { }
 
 - no swap, equality, assignment, getters and setters
-
-*** Formatters should return an optional file                         :story:
-
-In some cases the formatter may decide that it does not need to create
-a file. The only use case we have is the =namespace_info= where if
-there is no documentation one does not want to create a formatter. At
-present we filter out empty namespaces in the formatters' workflow,
-but this is not very clean because it now means the workflow needs to
-know about the formatter's logic.
-
-This would also make things cleaner for the services hack where we do
-not want to generate services for now.
-
-Note that we do not need to change the stitch templates for this; the
-decision is done before we call the template.
-
-Tasks:
-
-- change formatter interfaces to return =boost::optional<file>=
-- change all formatters.
-
-*** Container details in JSON dump                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like to know how many elements
-containers have so that I don't have to count it manually.
-#+end_quote
-
-It would be nice to have the container type and size in the JSON
-output.
-
-At present we are not treating shared pointers as objects:
-
-:         s << "\"shared_ptr\": \"empty shared pointer\"";
-
-We need to start outputting them as JSON objects, just like we do for
-containers, with a name for the "pointee".
-
-*** Header guard in formatters should be optional                     :story:
-
-At present we are relying on empty header guards to determine what to
-do in boilerplate. We should use boost optional.
-
-*** Do not include algorithm if swap is disabled                      :story:
-
-At present we always include =algorithm= in types' class header - both
-in new and old world. However, it is there for swap, so we should only
-include it if we are going to generate swap. This could be achieved
-with:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-As per stitch template.
-
-*** Create more "utility" members in class info                       :story:
-
-One way of making the templates a bit more manageable is to avoid
-having really complex conditions. We could simplify these by giving
-them intelligible names and making them properties of the
-formattables - mainly class info as that's where the complexity seems
-to stem from. For example:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-could be replaced with =has_swap=, or perhaps even =has_public_swap= /
-=has_protected_swap=.
-
-*** Add support for "field gathering"                                 :story:
-
-We need to add support in dynamic and SML for the "gathering" of
-fields; this consists in marking a field as "gatherable" in the
-JSON. We then need to find all types that have that field and gather
-their qnames in the model.
-
-Note: we do not need to handle inclusion_required this way; it already
-works well so leave it as is.
-
-Tasks:
-
-- find a good name for gathering and gatherable.
-- add support in dynamic for marking fields as gatherable. Add a
-  method in field definition repository that returns a list of all
-  gatherable fields.
-- mark all required fields as gatherable.
-- add a container of string (qualified field name) to qname in model,
-  with a suggestive name (qnames by dynamic field? gathered qnames?).
-- create an SML class to process all gathered fields: obtain fields
-  that are gatherable, then loop through the model; for all types that
-  have gatherable fields, add them to container against the field.
-- implement transformer in terms of gathered fields (i.e. consult the
-  container for requires_stream_manipulators, etc).
-
-*** Create the opaque settings activity                               :story:
-
-We need to add support for opaque settings. This should be as easy as
-adding a method in the formatter to register/return the opaque
-settings factory and then supplying the settings workflow with all of
-these factories.
-
-*** Consider splitting =formattables::transformer=                    :story:
-
-We have two different responsibilities within transformer:
-
-- to perform an individual (1-1) transformation of an SML type into a
-  formatable;
-- to determine how many transformations of an SML type are required,
-  and to do them.
-
-Maybe we should have a transformer sub-workflow that collaborates with
-specific transformers, aligned to =cpp= types
-(e.g. =class_info_transformer=, =enum_info_transformer= and so on,
-each taking different SML types). The role of the top-level
-transformer is to call all of the sub-transformers for a given SML
-type.
-
-The other option is to align them to SML types and to produce
-different =cpp= types.
-
-*** Remove intermediate fields from dynamic                           :story:
-
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
-
-*** Stitch gcc release builds are borked                              :spike:
-
-When running stitch for a gcc release build we get:
-
-: FAILED: cd /home/marco/Development/DomainDrivenConsulting/output/dogen/gcc-4.9 && /home/marco/Development/DomainDrivenConsulting/output/dogen/gcc-4.9/stage/bin/dogen_stitcher --target /home/marco/Development/DomainDrivenConsulting/dogen/projects/cpp/src/ --verbose
-
-Debug builds work. All builds work for clang. According to gdb:
-
-: #0  0x00000000004cb36e in std::_Hashtable<std::string, std::pair<std::string const, dogen::dynamic::schema::field_definition>, std::allocator<std::pair<std::string const, dogen::dynamic::schema::field_definition> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::find(std::string const&) const ()
-: #1  0x00000000004c96bd in dogen::dynamic::schema::workflow::obtain_field_definition(std::string const&) const ()
-: #2  0x00000000004ca24b in dogen::dynamic::schema::workflow::create_fields_activity(std::unordered_map<std::string, std::list<std::string, std::allocator<std::string> >, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::list<std::string, std::allocator<std::string> > > > > const&, dogen::dynamic::schema::scope_types) const ()
-
-*** Add support for the relationships graph in enabler                :story:
-
-*Note*: this story needs refactoring. It is basically here to cover
-the support for a graph with cycles in enabler but has not yet been
-updated.
-
-This needs a bit more analysis. The gist of it is that not all types
-support all formatters. We need a way to determine if a formatter is
-not supported. This probably should be inferred by a "is dogen model"
-property (see backlog); e.g. non-dogen models need their types to have
-an inclusion setup in order to be "supported", otherwise they should
-default to "not-supported". However the "supported" flag is populated,
-we then need to take into account relationships and propagate this
-flag across the model such that, if a type =A= in a dogen model has a
-property of a type =B= from a non-dogen model which does not support a
-given formatter =f=, then =A= must also not support =f=.
-
-In order to implement this feature we need to:
-
-- update the SML grapher to take into account relationships
-  (properties that the class has) as well as inheritance.
-- we must only visit related types if we ourselves do not have values
-  for all supported fields.
-- we also need a visitor that detects cycles; when a cycle is found we
-  simply assume that the status of the revisited class is true (or
-  whatever the default value of "supported" is) and we write a warning
-  to the log file. We should output the complete path of the cycle.
-- users can override this by setting supported for all formatters
-  where there are cycles.
-- we could perhaps have a bitmask by qname; we could start by
-  generating all bitmasks for all qnames and setting them to default
-  value. We could then find all qnames that have supported set to
-  false and update the corresponding bitmasks. Then we could use the
-  graph to loop through the qnames and "and" the bitmasks of each
-  qname with the bitmasks of their related qnames. The position of
-  each field is allocated by the algorithm (e.g. the first "supported"
-  field is at position 0 and so on). Actually the first position of
-  the bitmask could be used to indicate if the bitmask has already
-  been processed or not. In the presence of a cycle force it to true.
-- we need a class that takes the SML model and computes the supported
-  bitmasks for each qname; the supported expander then simply takes
-  this (perhaps as part of the expansion context), looks up for the
-  current qname and uses the field list to set the flags
-  appropriately.
-- we should remove all traces of supported from a settings
-  perspective; supported and multi-level enabled are just artefacts of
-  the meta-data. From a settings perspective, there is just a
-  formatter level (common formatter settings) enabled which determines
-  whether the formatter is on or off. How that flag came to be
-  computed is not relevant outside the expansion process. This also
-  means we can have simpler or more complex policies as time allows us
-  improve on this story; provided we can at least set all flags to
-  enabled we can move forward.
-
-Solution for cycles:
-
-- detect the cycle and then remember the pair (a, b) where b is the
-  start of the cycle and a is the last vertex before the cycle. We
-  should assume that a is (true, true) for the edge (a, b) and compute
-  all other edges. Finally, once the graph has been processed we
-  should check all of the pairs in a cycle; for these we should simply
-  look at the values of b, and update a accordingly.
-
-*Other notes*
-
-- we need some validation to ensure that some types will be generated
-  at all. The existing "generatable types" logic will have to be
-  removed or perhaps updated; we should take the opportunity to make
-  it reflect whether a type belongs to the target model or not. This
-  has no bearing on generatability (other that non-target types are
-  always not generated). So at the middle-end level we need to check
-  if there are any target types at all, and if not, just want the user
-  and exit. Then, a second layer is required at the model group /
-  language level to determine if there are any types to generate. It
-  is entirely possible that we end up not generating anything at all
-  because once we went through the graph everything got
-  disabled. Users will have to somehow debug this when things go
-  wrong.
-- following on from this, we probably need a "dump info" option that
-  explains the enabled/supported decisions for a given model, for all
-  target types; possibly, users could then supply regexes to filter
-  this info (e.g. why did you not generate =hash= for type =xyz=? can
-  I see all types for formatter =abc=?). It may be useful to have an
-  option to toggle between "target only types" and "all types",
-  because the system types may be the ones causing the problem.
-- the enabled supported logic applies to all formatters across all
-  model groups. We need a way
-
-*** Formatters need different =enabled= defaults                      :story:
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-dynamic extensions. We can either implement it in the backend or make
-all the formatters return an =std::optional<dogen::formatters::file>=
-and internally look for a =enabled= trait.
-
-We need to be able to distinguish "optional" formatters - those that
-can be disabled - and "mandatory" formatters - those that cannot. If a
-user requests the disabling of a mandatory formatter, we must
-throw. This must be handled in enabler.
-
-This story was merged with a previous one: Parameter to disable cpp
-file.
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
-
-In some cases we may need a "enable by usage". For example,
-it would be great to be able to enable forward declarations only for
-those types for which we required them. Same with hash. We can detect
-this by looking at the generated include dependencies. However,
-because the include dependency only has a directive, we cannot tell
-which formatter it belonged to. This would require some augmenting of
-the directive to record the "origination" formatter.
-
-*** Improve references management                                     :story:
-
-At present, we compute model references as follows:
-
-- in dia to sml we first loop through all types and figure out the
-  distinct model names. This is done by creating a "shallow" qname
-  with just the model name and setting its origin type to unknown.
-- when we merge, we take the references of target - the only ones we
-  care about - and then we check that against the list of the models
-  we are about to merge. If there are any missing models we complain
-  (see comments below). We then loop through the list of references
-  and "resolve" the origin type of the model.
-
-Note: We could actually also complain if there are too many models, or
-more cleverly avoid merging those models which are not required. Or
-even more cleverly, we could avoid loading them in the first place, if
-only we could load target first.
-
-A slightly better way of doing this would be:
-
-- in SML create a references updater that takes a model and computes
-  its reference requirements. It could also receive a list of "other"
-  models from which to get their origin types to avoid using =unknown=
-  at all, and checks that all reference requirements have been met.
-- the current step =update_references= is just a call to the
-  references updater, prior to merging, with the target model.
-
-*** Assignment operator seems to pass types by value                  :story:
-
-The code for the operator is as follows:
-
-:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-:                << " other);" << std::endl;
-
-If this is the case we need to fix it and regenerate all models.
-
-Actually we have implemented assignment in terms of swap, so that is
-why we copy. We need to figure out if this was a good idea. Raise
-story in backlog.
-
-: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: index f9f91af..663f0ac 100644
-: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: @@ -253,7 +253,7 @@ public:
-:  <#+
-:                  if (!c.is_parent()) {
-:  #>
-: -    <#= c.name() #>& operator=(<#= c.name() #> other);
-: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
-:  <#+
-:                  }
-:              }
-: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
-: index c2eeb3c..534ab69 100644
-: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
-: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
-: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
-:
-:      // assignment is only available in leaf classes - MEC++-33
-:      if (!ci.is_parent()) {
-: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-: -                << " other);" << std::endl;
-: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
-: +                << "& other);" << std::endl;
-:      }
-:
-:      utility_.blank_line();
-: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
-: index 5c9fe50..9276701 100644
-: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
-: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
-: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
-:          return;
-:
-:      stream_ << indenter_ << ci.name() << "& "
-: -            << ci.name() << "::operator=(" << ci.name()
-: -            << " other) ";
-: +            << ci.name() << "::operator=(const " << ci.name()
-: +            << "& other) ";
-:
-:      utility_.open_scope();
-:      {
-
-*** Implement options copier and remove options from context          :story:
-
-At present the path derivatives expander is getting access to the C++
-options via the expansion context. This was obviously a temporary hack
-to get things moving. The right thing must surely be to add the root
-object to the context, and to read the options from the root
-object. These for now must be populated via the options copier; in the
-future one can imagine that users define them in diagrams.
-
-Actually, the directories supplied to dogen do need to be command line
-options. This is because they tend to be created by CMake on the fly
-as absolute paths and as such cannot be hard-coded into the
-diagram. This being the case, perhaps we should just supply the
-knitting options to the expansion context. This does mean that now
-expansion is a knitting thing - it could have been used by
-stitch. Needs a bit more thinking.
-
-*Tasks to read options from root object*
-
-Not yet clear this is the right solution, but if it is, this is what
-needs to be done.
-
-- check that we have all the required fields in JSON for all of the
-  c++ options we require for now.
-- update options copier to copy these options. In many cases we will
-  have to "redirect" the option. For example, =domain_facet_folder=
-  becomes the types directory and so forth. Having said that we
-  probably won't need these for now.
-- remove options from context, and add root object instead. We may
-  need to do the usual "locate root object" routine.
-- update the path settings factory to read these from the root object.
-- add options to type settings where it makes sense (e.g. disable
-  complete constructor) and implement the type settings factory.
-
-*** Consider dropping the prefix inclusion in expansion               :story:
-
-*New Understanding*
-
-The problem with this is that "directive" does not have any
-meaning. We could get away with dependencies, but directive is very
-open ended. We cannot start changing meta-data keys (e.g. =directive=
-instead of =inclusion_directive=) because that would confuse users; so
-we would end up with two names in two different places, probably even
-more confusing.
-
-*Previous Understanding*
-
-At present we have really long class names because they all need
-"inclusion" on the name. In reality, we have two concepts:
-
-- directives
-- dependencies
-
-We don't need the prefix "inclusion" to make these understandable. We
-can probably get away with removing it from all of the expansion
-classes without significant loss of meaning.
-
-*** Add new c++ warnings to compilation                               :story:
-
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
 ** Deprecated
 *** CANCELLED Perform expansion of properties and operations          :story:
