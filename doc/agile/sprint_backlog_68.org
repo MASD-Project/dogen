@@ -1,0 +1,67 @@
+#+title: Sprint Backlog 68
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission Statement
+
+- Implement as many formatters as possible using the new cpp
+  architecture.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+#+CAPTION: Clock summary at [2015-06-07 Sun 11:24]
+| <75>                                                                        |         |       |       |
+| Headline                                                                    | Time    |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                | *43:36* |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| Stories                                                                     | 43:36   |       |       |
+| Active                                                                      |         | 43:36 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:12 |
+| COMPLETED Move to emacs prelude                                             |         |       | 20:46 |
+| POSTPONED Consider creating an Emacs mode for stitch                        |         |       |  0:56 |
+| POSTPONED Consider using a proper JSON library                              |         |       |  0:47 |
+| POSTPONED Create a blog post on biicode                                     |         |       |  1:10 |
+| CANCELLED Update legacy formatters to use needle for io                     |         |       |  2:40 |
+| COMPLETED Remove needle and RapidJson from repo                             |         |       |  0:10 |
+| COMPLETED Implement io helper method generator                              |         |       |  8:17 |
+| STARTED Implement class implementation formatter using stitch               |         |       |  7:38 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-08 Mon 18:01]--[2015-06-08 Mon 18:09] =>  0:08
+
+Updates to sprint and product backlog.
+
+*** Updates to the manual and readme files                            :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** Implement class implementation formatter using stitch             :story:
+
+We need to implement a stitch template for the class
+implementation formatter in types, plug it in and start working
+through the diffs.
+
+Problems:
+
+- includes will fail on stream manipulators. This is because we need
+  to check if we require them when generating dependencies, but we
+  have to do so manually since the class info doesn't exist yet. We
+  need to hack this for now - once we have "field gathering" support
+  this will be easier.
+- we need family back to determine what helpers to generate from the
+  properties.
+- no includes and no space after includes
+- float property with too mnay close brackets:
+
+: -      float_property_(float_property) { }
+: +      float_property_(float_property)) { }
+
+- no swap, equality, assignment, getters and setters
+
+** Deprecated
