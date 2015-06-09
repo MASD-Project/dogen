@@ -52,10 +52,12 @@ dogen::formatters::file class_implementation_formatter_stitch(
                 dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-                for (const auto p : c.parents())
+                for (const auto p : c.parents()) {
 #>
-    <#= sf.prefix() #><#= p.qualified_name() #>(std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
+    <#= sf.prefix() #><#= p.qualified_name() #>(
+        std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
 <#+
+                }
 
                 for (const auto p : c.properties())
 #>
@@ -180,8 +182,8 @@ void <#= c.name() #>::swap(<#= c.name() #>&<#= (empty ? "" : " other") #>) noexc
 
 bool <#= c.name() #>::equals(const <#= c.original_parent_name_qualified() #>& other) const {
     const <#= c.name() #>* const p(dynamic_cast<const <#= c.name() #>* const>(&other));
-     if (!p) return false;
-        return *this == *p;
+    if (!p) return false;
+    return *this == *p;
 }
 <#+
             }
@@ -208,14 +210,23 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
+                if (c.properties().empty())
+                    sf.postfix_configuration().last(";");
+                else
+                    sf.postfix_configuration().last(" &&");
+
                 for (const auto p : c.parents())
 #>
-    <#= p.name() #>::compare(rhs)<#= sf.postfix() #>
+    <#= sf.prefix() #><#= p.name() #>::compare(rhs)<#= sf.postfix() #>
 <#+
 
                 sf.reset(c.properties().size());
                 sf.element_separator("");
-                sf.prefix_configuration().first("return ").not_first("    ");
+                if (c.parents().empty())
+                   sf.prefix_configuration().first("return ");
+                else
+                   sf.prefix_configuration().first("    ");
+                sf.prefix_configuration().not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 #>

@@ -65,8 +65,10 @@ fa.stream() << c.name() << "::" << c.name() << "(" << c.name() << "&& rhs)" << s
                 dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-                for (const auto p : c.parents())
-fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
+                for (const auto p : c.parents()) {
+fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << std::endl;
+fa.stream() << "        std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
+                }
 
                 for (const auto p : c.properties())
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std::move(rhs." << fa.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
@@ -160,8 +162,8 @@ fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "bool " << c.name() << "::equals(const " << c.original_parent_name_qualified() << "& other) const {" << std::endl;
 fa.stream() << "    const " << c.name() << "* const p(dynamic_cast<const " << c.name() << "* const>(&other));" << std::endl;
-fa.stream() << "     if (!p) return false;" << std::endl;
-fa.stream() << "        return *this == *p;" << std::endl;
+fa.stream() << "    if (!p) return false;" << std::endl;
+fa.stream() << "    return *this == *p;" << std::endl;
 fa.stream() << "}" << std::endl;
             }
 
@@ -183,12 +185,21 @@ fa.stream() << "    return true;" << std::endl;
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
+                if (c.properties().empty())
+                    sf.postfix_configuration().last(";");
+                else
+                    sf.postfix_configuration().last(" &&");
+
                 for (const auto p : c.parents())
-fa.stream() << "    " << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
+fa.stream() << "    " << sf.prefix() << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
 
                 sf.reset(c.properties().size());
                 sf.element_separator("");
-                sf.prefix_configuration().first("return ").not_first("    ");
+                if (c.parents().empty())
+                   sf.prefix_configuration().first("return ");
+                else
+                   sf.prefix_configuration().first("    ");
+                sf.prefix_configuration().not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == rhs." << fa.make_member_variable_name(p) << sf.postfix() << std::endl;
@@ -256,7 +267,7 @@ fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
         } // snf
     } // sbf
-    // return fa.make_file(false/*overwrite*/);
+   // return fa.make_file(false/*overwrite*/);
     return fa.make_file();
 }
 
