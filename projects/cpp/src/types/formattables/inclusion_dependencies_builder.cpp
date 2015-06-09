@@ -152,6 +152,17 @@ void inclusion_dependencies_builder::add_if_integrated(
     add(inclusion_directive);
 }
 
+void inclusion_dependencies_builder::add_if_integrated(
+    const std::list<sml::qname>& qn, const std::string& formatter_name,
+    const std::string& facet_name) {
+
+    for (const auto& n : qn) {
+        const auto id(get_inclusion_directive(n, formatter_name));
+        if (id)
+            add_if_integrated(n, formatter_name, facet_name, *id);
+    }
+}
+
 std::list<std::string> inclusion_dependencies_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Built inclusion dependencies for formatter.";
     BOOST_LOG_SEV(lg, debug) << "Result: " << inclusion_dependencies_;

@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-09 Tue 16:12]
+#+CAPTION: Clock summary at [2015-06-09 Tue 17:35]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *1:49* |      |      |
+| *Total time*                                                                | *2:51* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 1:49   |      |      |
-| Active                                                                      |        | 1:49 |      |
+| Stories                                                                     | 2:51   |      |      |
+| Active                                                                      |        | 2:51 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 1:41 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 2:43 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -35,6 +35,8 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-09 Tue 16:52]--[2015-06-09 Tue 17:35] =>  0:43
+    CLOCK: [2015-06-09 Tue 16:13]--[2015-06-09 Tue 16:32] =>  0:19
     CLOCK: [2015-06-09 Tue 16:04]--[2015-06-09 Tue 16:12] =>  0:08
     CLOCK: [2015-06-09 Tue 15:09]--[2015-06-09 Tue 16:03] =>  0:54
     CLOCK: [2015-06-09 Tue 14:30]--[2015-06-09 Tue 15:09] =>  0:39
@@ -45,15 +47,14 @@ through the diffs.
 
 Problems to solve:
 
-- legacy incorrectly includes io of parents in types. Remove it.
-
-Solved problems:
-
 - includes will fail on stream manipulators. This is because we need
   to check if we require them when generating dependencies, but we
   have to do so manually since the class info doesn't exist yet. We
   need to hack this for now - once we have "field gathering" support
   this will be easier.
+
+Solved problems:
+
 - we need family back to determine what helpers to generate from the
   properties. Hack is fine for now.
 - no includes and no space after includes.
@@ -63,5 +64,13 @@ Solved problems:
 : +      float_property_(float_property)) { }
 
 - no swap, equality, assignment, getters and setters
+- legacy incorrectly includes io of parents in types. Remove
+  it. Actually this is more complicated than that. There is a mistake:
+  we are including the io header of the parent when in reality we
+  don't need io support for the parent, because we rely on
+  =to_stream=. However, we still need to include the io headers for
+  all other relationships when in presence of inheritance. Its easier
+  to add the parent as well for now since we need to add the other
+  ones too.
 
 ** Deprecated

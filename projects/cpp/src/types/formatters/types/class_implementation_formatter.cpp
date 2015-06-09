@@ -67,14 +67,31 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     auto builder(f.make());
     builder.add(o.name(), traits::class_header_formatter_name());
 
-    const auto self_fn(class_implementation_formatter::static_formatter_name());
     const auto os(inclusion_constants::std::ostream());
+    const auto io_fctn(formatters::io::traits::facet_name());
+    const auto self_fn(class_implementation_formatter::static_formatter_name());
     if (o.is_parent() || o.is_child())
         builder.add(os);
-    else {
-        const auto io_fctn(formatters::io::traits::facet_name());
+    else
         builder.add_if_integrated(o.name(), self_fn, io_fctn, os);
-    }
+
+    const auto io_fn(formatters::io::traits::class_header_formatter_name());
+    const auto lambda([&](const sml::object& o,
+            const sml::relationship_types rt) {
+            const auto i(o.relationships().find(rt));
+            if (i == o.relationships().end())
+                return;
+
+            if (o.is_parent() || o.is_child())
+                builder.add(i->second, io_fn);
+            else
+                builder.add_if_integrated(i->second, self_fn, io_fn);
+        });
+
+    using rt = sml::relationship_types;
+    lambda(o, rt::weak_associations);
+    lambda(o, rt::regular_associations);
+    lambda(o, rt::parents);
 
     return builder.build();
 }
