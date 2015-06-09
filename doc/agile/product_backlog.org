@@ -76,31 +76,6 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Add support for "field gathering"                                 :story:
-
-We need to add support in dynamic and SML for the "gathering" of
-fields; this consists in marking a field as "gatherable" in the
-JSON. We then need to find all types that have that field and gather
-their qnames in the model.
-
-Note: we do not need to handle inclusion_required this way; it already
-works well so leave it as is.
-
-Tasks:
-
-- find a good name for gathering and gatherable.
-- add support in dynamic for marking fields as gatherable. Add a
-  method in field definition repository that returns a list of all
-  gatherable fields.
-- mark all required fields as gatherable.
-- add a container of string (qualified field name) to qname in model,
-  with a suggestive name (qnames by dynamic field? gathered qnames?).
-- create an SML class to process all gathered fields: obtain fields
-  that are gatherable, then loop through the model; for all types that
-  have gatherable fields, add them to container against the field.
-- implement transformer in terms of gathered fields (i.e. consult the
-  container for requires_stream_manipulators, etc).
-
 *** Create the opaque settings activity                               :story:
 
 We need to add support for opaque settings. This should be as easy as

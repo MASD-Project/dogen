@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-09 Tue 17:35]
+#+CAPTION: Clock summary at [2015-06-09 Tue 18:09]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:51* |      |      |
+| *Total time*                                                                | *3:23* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:51   |      |      |
-| Active                                                                      |        | 2:51 |      |
+| Stories                                                                     | 3:23   |      |      |
+| Active                                                                      |        | 3:23 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 2:43 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 3:15 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -35,6 +35,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-09 Tue 17:36]--[2015-06-09 Tue 18:08] =>  0:32
     CLOCK: [2015-06-09 Tue 16:52]--[2015-06-09 Tue 17:35] =>  0:43
     CLOCK: [2015-06-09 Tue 16:13]--[2015-06-09 Tue 16:32] =>  0:19
     CLOCK: [2015-06-09 Tue 16:04]--[2015-06-09 Tue 16:12] =>  0:08
@@ -51,7 +52,12 @@ Problems to solve:
   to check if we require them when generating dependencies, but we
   have to do so manually since the class info doesn't exist yet. We
   need to hack this for now - once we have "field gathering" support
-  this will be easier.
+  this will be easier. Actually we can't hack it as such - we need to
+  traverse the nested types info in SML. It may be easier to implement
+  it properly.
+- inserter is still not quite right; we need to know if in a class or
+  not. Since we do, move the whole nonsense of method name etc into
+  helper template.
 
 Solved problems:
 
@@ -72,5 +78,30 @@ Solved problems:
   all other relationships when in presence of inheritance. Its easier
   to add the parent as well for now since we need to add the other
   ones too.
+
+*** Add support for "field gathering"                                 :story:
+
+We need to add support in dynamic and SML for the "gathering" of
+fields; this consists in marking a field as "gatherable" in the
+JSON. We then need to find all types that have that field and gather
+their qnames in the model.
+
+Note: we do not need to handle inclusion_required this way; it already
+works well so leave it as is.
+
+Tasks:
+
+- find a good name for gathering and gatherable.
+- add support in dynamic for marking fields as gatherable. Add a
+  method in field definition repository that returns a list of all
+  gatherable fields.
+- mark all required fields as gatherable.
+- add a container of string (qualified field name) to qname in model,
+  with a suggestive name (qnames by dynamic field? gathered qnames?).
+- create an SML class to process all gathered fields: obtain fields
+  that are gatherable, then loop through the model; for all types that
+  have gatherable fields, add them to container against the field.
+- implement transformer in terms of gathered fields (i.e. consult the
+  container for requires_stream_manipulators, etc).
 
 ** Deprecated
