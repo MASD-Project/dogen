@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-09 Tue 20:35]
+#+CAPTION: Clock summary at [2015-06-09 Tue 20:57]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:05* |      |      |
+| *Total time*                                                                | *5:25* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:05   |      |      |
-| Active                                                                      |        | 5:05 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 4:57 |
+| Stories                                                                     | 5:25   |      |      |
+| Active                                                                      |        | 5:25 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 5:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-09 Tue 20:45]--[2015-06-09 Tue 20:54] =>  0:09
     CLOCK: [2015-06-08 Mon 18:01]--[2015-06-08 Mon 18:09] =>  0:08
 
 Updates to sprint and product backlog.
@@ -35,6 +36,8 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-09 Tue 20:54]--[2015-06-09 Tue 20:57] =>  0:03
+    CLOCK: [2015-06-09 Tue 20:37]--[2015-06-09 Tue 20:45] =>  0:08
     CLOCK: [2015-06-09 Tue 20:06]--[2015-06-09 Tue 20:35] =>  0:29
     CLOCK: [2015-06-09 Tue 18:52]--[2015-06-09 Tue 20:05] =>  1:13
     CLOCK: [2015-06-09 Tue 17:36]--[2015-06-09 Tue 18:08] =>  0:32
@@ -57,10 +60,6 @@ Problems to solve:
   this will be easier. Actually we can't hack it as such - we need to
   traverse the nested types info in SML. It may be easier to implement
   it properly.
-- inserter is still not quite right; we need to know if in a class or
-  not. Since we do, move the whole nonsense of method name etc into
-  helper template.
-- remove needle includes.
 
 Solved problems:
 
@@ -81,6 +80,10 @@ Solved problems:
   all other relationships when in presence of inheritance. Its easier
   to add the parent as well for now since we need to add the other
   ones too.
+- inserter is still not quite right; we need to know if in a class or
+  not. Since we do, move the whole nonsense of method name etc into
+  helper template.
+- remove needle includes.
 
 *** Add support for "field gathering"                                 :story:
 
