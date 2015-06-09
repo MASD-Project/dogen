@@ -10,6 +10,30 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Top-level inclusion required should be "tribool"                  :story:
+
+One of the most common use cases for inclusion required is to have it
+set to true for all types where we provide an override, but false for
+all other cases. This makes sense in terms of use cases:
+
+- either we need to supply some includes; in which case where we do
+  not supply includes we do not want the system to automatically
+  compute include paths;
+- or we don't supply any includes, in which case:
+  - we either don't require any includes at all (hardware primitives);
+  - or we want all includes to be computed by the system.
+
+The problem is that we do not have a way to express this logic in the
+meta-data. The only way would be to convert the top-level
+=requires_includes= to an enumeration:
+
+- yes, compute them
+- yes, where supplied
+- no
+
+We need to figure out how to implement this. For now we are manually
+adding flags.
+
 *** Formatters should return an optional file                         :story:
 
 In some cases the formatter may decide that it does not need to create
