@@ -2806,7 +2806,6 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
-
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
 We need to tidy-up comment formatter. We had introduced
@@ -5839,6 +5838,21 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Consider creating a UI for editing type libraries                 :story:
+
+At present we have to edit the JSON files by hand; this is becoming
+increasingly painful as we rely more and more on the meta-data. It
+would be great to be able to edit these files in some sort of UI that
+would make repetitive operations quicker. This story captures all of
+the use cases for the UI.
+
+- there are many cases of types that require an inclusion directive
+  for the types facet but none for all other facets. It is really
+  painful to set each of the other facets to =inclusion_required=
+  false. However, perhaps a more sensible way to handle this is to
+  default inclusion required to false on all cases other than those
+  provided. Story will be raised for this.
 
 *** Add memory measurements support                                   :story:
 
