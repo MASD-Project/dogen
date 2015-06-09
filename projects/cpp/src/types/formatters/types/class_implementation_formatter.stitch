@@ -214,7 +214,8 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 <#+
 
                 sf.reset(c.properties().size());
-                sf.prefix_configuration().not_first("    ");
+                sf.element_separator("");
+                sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 #>

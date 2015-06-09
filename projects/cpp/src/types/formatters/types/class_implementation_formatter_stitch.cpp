@@ -187,7 +187,8 @@ fa.stream() << "    return true;" << std::endl;
 fa.stream() << "    " << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
 
                 sf.reset(c.properties().size());
-                sf.prefix_configuration().not_first("    ");
+                sf.element_separator("");
+                sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == rhs." << fa.make_member_variable_name(p) << sf.postfix() << std::endl;
