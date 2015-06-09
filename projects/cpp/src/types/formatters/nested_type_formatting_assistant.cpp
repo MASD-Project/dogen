@@ -39,6 +39,11 @@ make_scoped_namespace_formatter(const formattables::nested_type_info& t) {
 }
 
 bool nested_type_formatting_assistant::
+requires_generic_string(const formattables::nested_type_info& t) const {
+    return t.is_filesystem_path();
+}
+
+bool nested_type_formatting_assistant::
 requires_quoting(const formattables::nested_type_info& t) const {
     return t.is_date() || t.is_ptime() || t.is_time_duration() ||
         t.is_char_like() || t.is_string_like();
@@ -56,6 +61,8 @@ std::string nested_type_formatting_assistant::streaming_for_type(
 
     if (requires_tidying_up(t))
         uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (requires_generic_string(t))
+        uf.insert_streamed(s + ".generic_string()");
     else if (requires_quoting(t))
         uf.insert_quoted_escaped(s);
     else

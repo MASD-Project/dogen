@@ -126,7 +126,7 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" <
                 if (c.is_parent() || !c.parents().empty()) {
 fa.stream() << std::endl;
 fa.stream() << "void " << c.name() << "::to_stream(std::ostream& s) const {" << std::endl;
-                io::inserter_implementation_helper_stitch(fa, c);
+                io::inserter_implementation_helper_stitch(fa, c, true/*inside_class*/);
 fa.stream() << "}" << std::endl;
                 }
             }
@@ -256,7 +256,8 @@ fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
         } // snf
     } // sbf
-    return fa.make_file(false/*overwrite*/);
+    // return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 } } } }

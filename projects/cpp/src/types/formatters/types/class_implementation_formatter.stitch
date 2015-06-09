@@ -133,7 +133,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
 void <#= c.name() #>::to_stream(std::ostream& s) const {
 <#+
-                io::inserter_implementation_helper_stitch(fa, c);
+                io::inserter_implementation_helper_stitch(fa, c, true/*inside_class*/);
 #>
 }
 <#+

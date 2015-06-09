@@ -56,7 +56,12 @@ private:
     bool requires_quoting(const formattables::nested_type_info& t) const;
 
     /**
-     * @brief Returns true if type requires tidying up.
+     * @brief Returns true if type requires generic string call.
+     */
+    bool requires_generic_string(const formattables::nested_type_info& t) const;
+
+    /**
+     * @brief Returns true if type requires tidying up call.
      */
     bool requires_tidying_up(const formattables::nested_type_info& t) const;
 

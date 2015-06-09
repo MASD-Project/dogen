@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-09 Tue 18:09]
+#+CAPTION: Clock summary at [2015-06-09 Tue 20:05]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *3:23* |      |      |
+| *Total time*                                                                | *4:36* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 3:23   |      |      |
-| Active                                                                      |        | 3:23 |      |
+| Stories                                                                     | 4:36   |      |      |
+| Active                                                                      |        | 4:36 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 3:15 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 4:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -35,6 +35,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-09 Tue 18:52]--[2015-06-09 Tue 20:05] =>  1:13
     CLOCK: [2015-06-09 Tue 17:36]--[2015-06-09 Tue 18:08] =>  0:32
     CLOCK: [2015-06-09 Tue 16:52]--[2015-06-09 Tue 17:35] =>  0:43
     CLOCK: [2015-06-09 Tue 16:13]--[2015-06-09 Tue 16:32] =>  0:19
@@ -58,6 +59,7 @@ Problems to solve:
 - inserter is still not quite right; we need to know if in a class or
   not. Since we do, move the whole nonsense of method name etc into
   helper template.
+- remove needle includes.
 
 Solved problems:
 

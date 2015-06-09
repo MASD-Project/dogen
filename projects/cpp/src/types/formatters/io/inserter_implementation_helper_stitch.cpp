@@ -28,7 +28,8 @@ namespace io {
 
 void inserter_implementation_helper_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& c) {
+    const formattables::class_info& c,
+    const bool inside_class) {
 
     if (c.requires_stream_manipulators()) {
 fa.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
@@ -36,8 +37,8 @@ fa.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
 fa.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
 fa.stream() << "    s.precision(6);" << std::endl;
 fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+fa.stream() << std::endl;
     }
-
 
     const bool no_parents_and_no_properties(c.parents().empty() &&
         c.all_properties().empty());
@@ -53,14 +54,30 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     }
 
     auto ntfa(fa.make_nested_type_formatting_assistant());
+    sf.reset(c.properties().size());
+
+    if (!c.parents().empty())
+        sf.prefix_configuration().first("s << \", \"\n      ");
+    else
+        sf.prefix_configuration().first("  ");
+    sf.prefix_configuration().not_first("  ");
+    sf.element_separator("");
+
     for (const auto p : c.properties()) {
-fa.stream() << "    s << \", \"" << std::endl;
-fa.stream() << "      << \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), "v") << std::endl;
+        std::string variable_name;
+        if (inside_class)
+            variable_name = fa.make_member_variable_name(p);
+        else
+            variable_name = "v." + fa.make_member_variable_name(p);
+
+fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << std::endl;
     }
 
-    if (!c.properties().empty())
+    if (!no_parents_and_no_properties) {
+        if (!c.properties().empty())
 fa.stream() << "      << \" }\";" << std::endl;
-    else
+        else
 fa.stream() << "    s << \" }\";" << std::endl;
+    }
 }
 } } } }
