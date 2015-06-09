@@ -24,17 +24,15 @@
 namespace {
 
 const std::string empty;
+const std::string comma(",");
 
 }
 
 namespace dogen {
 namespace formatters {
 
-sequence_formatter::sequence_formatter(const unsigned int sequence_size,
-    const std::string& element_separator)
-    : sequence_size_(sequence_size), element_separator_(element_separator),
-      position_(0) {}
-
+sequence_formatter::sequence_formatter(const unsigned int sequence_size)
+    : position_(0), sequence_size_(sequence_size), element_separator_(comma) {}
 
 bool sequence_formatter::is_first() const {
     return position_ == 0;
@@ -84,7 +82,12 @@ std::string sequence_formatter::prefix() const {
     return value_for_position(prefix_configuration_);
 }
 
-std::string sequence_formatter::postfix() {
+std::string sequence_formatter::postfix(const bool skip) {
+    if (skip) {
+        ++position_;
+        return empty;
+    }
+
     std::ostringstream s;
     s << value_for_position(postfix_configuration_);
     if (!is_last())
@@ -98,14 +101,20 @@ unsigned int sequence_formatter::current_position() const {
     return position_;
 }
 
+void sequence_formatter::element_separator(const std::string& s) {
+    element_separator_ = s;
+}
+
 void sequence_formatter::reset() {
     position_ = 0;
+    element_separator_ = comma;
     prefix_configuration_ = infix_configuration();
     postfix_configuration_ = infix_configuration();
 }
 
 void sequence_formatter::reset(const unsigned int sequence_size) {
     sequence_size_ = sequence_size;
+    reset();
 }
 
 } }

@@ -36,8 +36,7 @@ namespace formatters {
  */
 class sequence_formatter {
 public:
-    sequence_formatter(const unsigned int sequence_size,
-        const std::string& element_separator);
+    explicit sequence_formatter(const unsigned int sequence_size);
 
 private:
     /**
@@ -81,13 +80,25 @@ public:
     /**
      * @brief Gets the postfix for the current position and moves to
      * the next position.
+     *
+     * @param skip if true, moves to the next position and returns an
+     * empty string. If false, returns the postfix for the current
+     * position and moves to the next position.
      */
-    std::string postfix();
+    std::string postfix(const bool skip = false);
 
+public:
     /**
      * @brief Returns the current position.
      */
     unsigned int current_position() const;
+
+public:
+    /**
+     * @brief Sets the value of the element separator. By default it
+     * is a comma.
+     */
+    void element_separator(const std::string& s);
 
     /**
      * @brief Resets the position and configurations.
@@ -98,9 +109,9 @@ public:
     /**@}*/
 
 private:
-    unsigned int sequence_size_;
-    const std::string element_separator_;
     unsigned int position_;
+    unsigned int sequence_size_;
+    std::string element_separator_;
     infix_configuration prefix_configuration_;
     infix_configuration postfix_configuration_;
 };

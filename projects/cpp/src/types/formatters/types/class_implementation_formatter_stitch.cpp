@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp"
 
@@ -43,7 +44,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
             if (c.requires_manual_default_constructor()) {
 fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
-                auto sf(fa.make_sequence_formatter(c.properties().size()));
+                dogen::formatters::sequence_formatter sf(c.properties().size());
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 for (const auto p : c.properties()) {
@@ -60,10 +61,10 @@ fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(sta
 fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "(" << c.name() << "&& rhs)" << std::endl;
                 unsigned int size(c.parents().size() + c.properties().size());
-                auto sf(fa.make_sequence_formatter(size));
+
+                dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-
                 for (const auto p : c.parents())
 fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
 
@@ -84,22 +85,29 @@ fa.stream() << c.name() << "::" << c.name() << "(const " << p.type().complete_na
 fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
 
-                    auto sf(fa.make_sequence_formatter(prop_count));
+                    dogen::formatters::sequence_formatter sf(prop_count);
                     sf.postfix_configuration().last(")");
                     for (const auto p : c.all_properties())
 fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
                 }
 
-                auto sf(fa.make_sequence_formatter(c.parents().size() + prop_count));
+                int sequence_size(c.properties().size() + c.parents().size());
+                for (const auto p : c.parents())
+                    sequence_size += (p.properties().size() > 1 ?
+                        p.properties().size() : 0);
+
+                dogen::formatters::sequence_formatter sf(sequence_size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-
                 for (const auto p : c.parents()) {
                     if (p.properties().size() <= 1)
 fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << (p.properties().empty() ? "" : p.properties().front().name()) << ")" << sf.postfix() << std::endl;
                     else {
-fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << std::endl;
-                        auto sf2(fa.make_sequence_formatter(p.properties().size()));
+fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << sf.postfix(true/*skip*/) << std::endl;
+                        dogen::formatters::sequence_formatter sf2(p.properties().size());
+                        sf2.element_separator("");
+                        
+                        sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
                         for (const auto prop : p.properties()) {
 fa.stream() << "    " << sf2.prefix() << prop.name() << sf2.postfix() << sf.postfix() << std::endl;
@@ -171,17 +179,16 @@ fa.stream() << "bool " << c.name() << "::" << method_name << "(const " << c.name
             if (c.all_properties().empty())
 fa.stream() << "    return true;" << std::endl;
             else {
-                auto sf(fa.make_sequence_formatter(c.parents().size(), ""));
-                sf.prefix_configuration().first("return ");
-                sf.prefix_configuration().not_first("    ");
+                dogen::formatters::sequence_formatter sf(c.parents().size());
+                sf.element_separator("");
+                sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
                 for (const auto p : c.parents())
 fa.stream() << "    " << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
 
                 sf.reset(c.properties().size());
                 sf.prefix_configuration().not_first("    ");
-                sf.postfix_configuration().not_last(" &&");
-                sf.postfix_configuration().last(";");
+                sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == rhs." << fa.make_member_variable_name(p) << sf.postfix() << std::endl;
                 }

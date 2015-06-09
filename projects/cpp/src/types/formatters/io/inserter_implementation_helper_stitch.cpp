@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp"
 
 namespace dogen {
@@ -41,21 +42,24 @@ fa.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
         c.all_properties().empty());
 fa.stream() << "    s << \" { \"" << std::endl;
 fa.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << c.qualified_name() << "\\\"\"" << (no_parents_or_properties ? " << \" }\";" : "") << std::endl;
-    auto sf(fa.make_sequence_formatter(c.all_properties().size()));
-    sf.prefix_configuration().first("  ");
-    sf.prefix_configuration().not_first("s ");
+    dogen::formatters::sequence_formatter sf(c.properties().size());
+    sf.element_separator(" << \", \"");
+    sf.prefix_configuration()
+        .first("  << \", \" << ")
+        .not_first("s << \", \" << ");
     for (const auto p : c.parents()) {
-fa.stream() << "    " << sf.prefix() << "<< \", \" << \"\\\"__parent_\" << sf.current_position() << \"__\\\": \";" << std::endl;
+fa.stream() << "    " << sf.prefix() << "\"\\\"__parent_\" << " << sf.current_position() << " << \"__\\\": \"" << sf.postfix(true/*skip*/) << ";" << std::endl;
 fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     }
 
     sf.reset();
-    sf.prefix_configuration().first(c.parents().empty() ? "  " : "s ");
-    sf.prefix_configuration().not_first("  ");
+    sf.prefix_configuration()
+        .first(c.parents().empty() ? "  << \", \" << " : "s << \", \" << ")
+        .not_first("  << \", \" << ");
     sf.postfix_configuration().last("<< \" } \";");
     auto ntfa(fa.make_nested_type_formatting_assistant());
     for (const auto p : c.properties()) {
-fa.stream() << "    " << sf.prefix() << "<< \", \" << \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), "v") << sf.postfix() << std::endl;
+fa.stream() << "    " << sf.prefix() << "\"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), "v") << sf.postfix() << std::endl;
     }
 }
 } } } }

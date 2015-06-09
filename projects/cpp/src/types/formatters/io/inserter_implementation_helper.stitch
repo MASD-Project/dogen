@@ -3,6 +3,7 @@
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=fa.stream() #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::cpp::formatters::io #>
 <#+
 
@@ -26,24 +27,27 @@ void inserter_implementation_helper_stitch(
     s << " { "
       << "\"__type__\": " << "\"<#= c.qualified_name() #>\""<#= (no_parents_or_properties ? " << \" }\";" : "") #>
 <#+
-    auto sf(fa.make_sequence_formatter(c.all_properties().size()));
-    sf.prefix_configuration().first("  ");
-    sf.prefix_configuration().not_first("s ");
+    dogen::formatters::sequence_formatter sf(c.properties().size());
+    sf.element_separator(" << \", \"");
+    sf.prefix_configuration()
+        .first("  << \", \" << ")
+        .not_first("s << \", \" << ");
     for (const auto p : c.parents()) {
 #>
-    <#= sf.prefix() #><< ", " << "\"__parent_" << sf.current_position() << "__\": ";
+    <#= sf.prefix() #>"\"__parent_" << <#= sf.current_position() #> << "__\": "<#= sf.postfix(true/*skip*/) #>;
     <#= p.name() #>::to_stream(s);
 <#+
     }
 
     sf.reset();
-    sf.prefix_configuration().first(c.parents().empty() ? "  " : "s ");
-    sf.prefix_configuration().not_first("  ");
+    sf.prefix_configuration()
+        .first(c.parents().empty() ? "  << \", \" << " : "s << \", \" << ")
+        .not_first("  << \", \" << ");
     sf.postfix_configuration().last("<< \" } \";");
     auto ntfa(fa.make_nested_type_formatting_assistant());
     for (const auto p : c.properties()) {
 #>
-    <#= sf.prefix() #><< ", " << "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), "v") #><#= sf.postfix() #>
+    <#= sf.prefix() #>"\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), "v") #><#= sf.postfix() #>
 <#+
     }
 }

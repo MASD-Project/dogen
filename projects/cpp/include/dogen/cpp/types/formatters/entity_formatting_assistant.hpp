@@ -31,7 +31,6 @@
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
-#include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
@@ -143,13 +142,6 @@ public:
      */
     dogen::formatters::cpp::scoped_namespace_formatter
     make_scoped_namespace_formatter();
-
-    /**
-     * @brief Creates a sequence formatter.
-     */
-    dogen::formatters::sequence_formatter
-    make_sequence_formatter(const unsigned int sequence_size,
-        const std::string& element_separator = ",") const;
 
     /**
      * @brief Creates a nested type formatting assistant, latched on

@@ -4,6 +4,7 @@
 <#@ stream_variable_name=fa.stream() #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/types/class_implementation_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/io/inserter_implementation_helper_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::cpp::formatters::types #>
 <#+
 
@@ -26,7 +27,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
 <#= c.name() #>::<#= c.name() #>()
 <#+
-                auto sf(fa.make_sequence_formatter(c.properties().size()));
+                dogen::formatters::sequence_formatter sf(c.properties().size());
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 for (const auto p : c.properties()) {
@@ -47,10 +48,10 @@ dogen::formatters::file class_implementation_formatter_stitch(
 <#= c.name() #>::<#= c.name() #>(<#= c.name() #>&& rhs)
 <#+
                 unsigned int size(c.parents().size() + c.properties().size());
-                auto sf(fa.make_sequence_formatter(size));
+
+                dogen::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-
                 for (const auto p : c.parents())
 #>
     <#= sf.prefix() #><#= p.qualified_name() #>(std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
@@ -79,7 +80,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
 <#= c.name() #>::<#= c.name() #>(
 <#+
 
-                    auto sf(fa.make_sequence_formatter(prop_count));
+                    dogen::formatters::sequence_formatter sf(prop_count);
                     sf.postfix_configuration().last(")");
                     for (const auto p : c.all_properties())
 #>
@@ -87,10 +88,14 @@ dogen::formatters::file class_implementation_formatter_stitch(
 <#+
                 }
 
-                auto sf(fa.make_sequence_formatter(c.parents().size() + prop_count));
+                int sequence_size(c.properties().size() + c.parents().size());
+                for (const auto p : c.parents())
+                    sequence_size += (p.properties().size() > 1 ?
+                        p.properties().size() : 0);
+
+                dogen::formatters::sequence_formatter sf(sequence_size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
-
                 for (const auto p : c.parents()) {
                     if (p.properties().size() <= 1)
 #>
@@ -98,9 +103,12 @@ dogen::formatters::file class_implementation_formatter_stitch(
 <#+
                     else {
 #>
-    <#= sf.prefix() #><#= p.qualified_name() #>(
+    <#= sf.prefix() #><#= p.qualified_name() #>(<#= sf.postfix(true/*skip*/) #>
 <#+
-                        auto sf2(fa.make_sequence_formatter(p.properties().size()));
+                        dogen::formatters::sequence_formatter sf2(p.properties().size());
+                        sf2.element_separator("");
+                        
+                        sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
                         for (const auto prop : p.properties()) {
 #>
@@ -196,9 +204,9 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
     return true;
 <#+
             else {
-                auto sf(fa.make_sequence_formatter(c.parents().size(), ""));
-                sf.prefix_configuration().first("return ");
-                sf.prefix_configuration().not_first("    ");
+                dogen::formatters::sequence_formatter sf(c.parents().size());
+                sf.element_separator("");
+                sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
                 for (const auto p : c.parents())
 #>
@@ -207,8 +215,7 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 
                 sf.reset(c.properties().size());
                 sf.prefix_configuration().not_first("    ");
-                sf.postfix_configuration().not_last(" &&");
-                sf.postfix_configuration().last(";");
+                sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>

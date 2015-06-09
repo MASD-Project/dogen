@@ -175,13 +175,6 @@ entity_formatting_assistant::make_scoped_namespace_formatter() {
         true/*add_new_line*/);
 }
 
-dogen::formatters::sequence_formatter entity_formatting_assistant::
-make_sequence_formatter(const unsigned int sequence_size,
-    const std::string& element_separator) const {
-    dogen::formatters::sequence_formatter r(sequence_size, element_separator);
-    return r;
-}
-
 nested_type_formatting_assistant entity_formatting_assistant::
 make_nested_type_formatting_assistant() {
     return nested_type_formatting_assistant(stream());
