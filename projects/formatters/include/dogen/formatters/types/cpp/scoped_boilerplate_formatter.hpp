@@ -43,9 +43,9 @@ class scoped_boilerplate_formatter {
 public:
     scoped_boilerplate_formatter(
         std::ostream& s,
-        const boost::optional<general_settings> gs,
-        const std::list<std::string> inclusion_dependencies,
-        const std::string header_guard);
+        const boost::optional<general_settings>& gs,
+        const std::list<std::string>& inclusion_dependencies,
+        const std::string& header_guard);
 
     ~scoped_boilerplate_formatter();
 

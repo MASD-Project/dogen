@@ -27,9 +27,9 @@ namespace cpp {
 
 scoped_boilerplate_formatter::
 scoped_boilerplate_formatter(std::ostream& s,
-    const boost::optional<general_settings> gs,
-    const std::list<std::string> inclusion_dependencies,
-    const std::string header_guard)
+    const boost::optional<general_settings>& gs,
+    const std::list<std::string>& inclusion_dependencies,
+    const std::string& header_guard)
     : stream_(s), general_settings_(gs),
       inclusion_dependencies_(inclusion_dependencies),
       header_guard_(header_guard) {

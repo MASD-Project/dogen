@@ -136,7 +136,7 @@ void domain_implementation::io_helper_methods(
     const bool has_io(ci.is_parent() || !ci.parents().empty() ||
         use_integrated_io_);
 
-    if (!has_io  || disable_io_)
+    if (!has_io || disable_io_)
         return;
 
     const bool inside_class(false);

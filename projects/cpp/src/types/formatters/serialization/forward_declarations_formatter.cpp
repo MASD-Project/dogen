@@ -22,7 +22,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/traits.hpp"

@@ -28,6 +28,7 @@ namespace io {
 void string_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& /*t*/) {
+fa.stream() << std::endl;
 fa.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 fa.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
 fa.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;

@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 18:13]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:51* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:51   |      |      |
-| Active                                                                      |        | 9:51 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:20 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 6:33 |
-| CANCELLED Add support for "field gathering"                                 |        |      | 0:56 |
-| COMPLETED Hack inclusion to take into account stream manipulation           |        |      | 1:02 |
+#+CAPTION: Clock summary at [2015-06-10 Wed 18:59]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *10:32* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 10:32   |       |      |
+| Active                                                                      |         | 10:32 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 7:14 |
+| CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
+| COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -40,6 +40,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-10 Wed 18:14]--[2015-06-10 Wed 18:55] =>  0:41
     CLOCK: [2015-06-10 Wed 18:07]--[2015-06-10 Wed 18:13] =>  0:06
     CLOCK: [2015-06-10 Wed 17:35]--[2015-06-10 Wed 18:06] =>  0:31
     CLOCK: [2015-06-10 Wed 17:22]--[2015-06-10 Wed 17:33] =>  0:11
@@ -61,9 +62,17 @@ through the diffs.
 
 Problems to solve:
 
+- spurious blank lines: this is actually a very tricky problem, due to
+  the fact that we are using "managed" blank lines in the indent
+  filter. It is suppressing blank lines. We can't switch this off
+  altogether as it generates other diffs in boilerplate. Height of
+  insanity. Also, we can't quickly fix the legacy formatters because we
+  need to know if the helper method is the first one and if so, skip
+  blank line. A hack around this may be the only solution. A number of
+  stories were raised to deal with the evilness of indentation
+  "management" in templates.
 - if string, we need to include =<boost/algorithm/string.hpp>=. same
   hack as streaming.
-- spurious blank lines
 - missing operator== helper methods.
 - borked models: boost, std, stereotypes.
 
@@ -163,3 +172,37 @@ We need to copy the logic in transformer to see if a type needs stream
 manipulator includes or not.
 
 ** Deprecated
+*** CANCELLED Indent stream can be made a bit less inefficient        :story:
+    CLOSED: [2015-06-10 Wed 18:52]
+
+*Rationale*: manual indentation in templates is considered evil. It
+had a large amount of complexity and it never quite works
+properly. All indentation will be left to clang format.
+
+Out first attempt at creating a stream with indentation support was a
+bit naive: we are intercepting every character and then deciding if we
+need to change any states in the state machine. Its probably wiser to
+just use manipulators to perform the state transitions and leave the
+=put= undisturbed. We can leave this until we have a good way of
+getting metrics out of the system.
+
+Actually we should also decide if indent stream is needed at all in a
+stitch world.
+
+It was shown that indent streams are useful for at least one use case:
+for comments.
+
+*** CANCELLED Consider creating an iostreams filter for comments      :story:
+    CLOSED: [2015-06-10 Wed 18:53]
+
+*Rationale*: in a world of templates this filtering streams add very
+little value and make life more complicated.
+
+Seems logic to follow the filtering idea and add a doxygen (or
+generic) commenting filter; one inserts into the stream and it
+automatically inserts all the comment markers such as =/**=, =@brief=
+and so on. Basically takes on the work of =comment_formatter=. This
+would mean we would no longer need the =contents= vector, and we could
+stream directly to the stream, after pushing the comments formatter on
+to it. However, it would probably mean we need to cast the stream to a
+=filtering_ostream= in order to do the push.
