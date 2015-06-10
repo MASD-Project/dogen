@@ -66,6 +66,17 @@ which has a cycle, we must first sort out the type with the cycle.
 This story still needs a lot of work but its just a dump of all of the
 ideas at this point in time.
 
+Notes:
+
+- we need a "requires" repository, factory etc in formattables that
+  handles all of the "requires xyz" cases. We may need two of these,
+  per relation type.
+- we need to expand enablement to perform the algorithm above.
+- we need to expand relationship management in SML, adding these new
+  relationship types and populating them.
+- includes builder needs access to the "requires" data in order to
+  compute includes.
+
 *** Top-level inclusion required should be "tribool"                  :story:
 
 One of the most common use cases for inclusion required is to have it
