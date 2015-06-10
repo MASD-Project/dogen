@@ -61,6 +61,7 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
     else
         sf.prefix_configuration().first("  ");
     sf.prefix_configuration().not_first("  ");
+    sf.postfix_configuration().not_last(" << \", \"");
     sf.element_separator("");
 
     for (const auto p : c.properties()) {
@@ -70,7 +71,7 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
         else
             variable_name = "v." + fa.make_member_variable_name(p);
 
-fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << std::endl;
+fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << sf.postfix() << std::endl;
     }
 
     if (!no_parents_and_no_properties) {

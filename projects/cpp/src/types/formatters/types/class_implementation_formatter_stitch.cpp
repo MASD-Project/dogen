@@ -240,8 +240,8 @@ fa.stream() << std::endl;
 fa.stream() << p.type().complete_name() << " " << c.name() << "::" << p.name() << "() const {" << std::endl;
 fa.stream() << "    return " << fa.make_member_variable_name(p) << ";" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
                     if (!c.is_immutable()) {
+fa.stream() << std::endl;
 fa.stream() << (p.is_fluent() ? c.name() + "&" : "void") << " " << c.name() << "::" << p.name() << "(const " << p.type().complete_name() << " v) {" << std::endl;
 fa.stream() << "    " << fa.make_member_variable_name(p) << " = v;" << std::endl;
                         if (p.is_fluent()) {

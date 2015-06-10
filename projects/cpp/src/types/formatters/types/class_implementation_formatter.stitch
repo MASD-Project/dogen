@@ -274,10 +274,10 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 <#= p.type().complete_name() #> <#= c.name() #>::<#= p.name() #>() const {
     return <#= fa.make_member_variable_name(p) #>;
 }
-
 <#+
                     if (!c.is_immutable()) {
 #>
+
 <#= (p.is_fluent() ? c.name() + "&" : "void") #> <#= c.name() #>::<#= p.name() #>(const <#= p.type().complete_name() #> v) {
     <#= fa.make_member_variable_name(p) #> = v;
 <#+
