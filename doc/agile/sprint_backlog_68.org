@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 21:45]
+#+CAPTION: Clock summary at [2015-06-10 Wed 22:37]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *11:02* |       |      |
+| *Total time*                                                                | *11:53* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 11:02   |       |      |
-| Active                                                                      |         | 11:02 |      |
+| Stories                                                                     | 11:53   |       |      |
+| Active                                                                      |         | 11:53 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 7:44 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 8:35 |
 | CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
 #+end:
@@ -40,6 +40,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-10 Wed 21:46]--[2015-06-10 Wed 22:37] =>  0:51
     CLOCK: [2015-06-10 Wed 21:25]--[2015-06-10 Wed 21:45] =>  0:20
     CLOCK: [2015-06-10 Wed 21:14]--[2015-06-10 Wed 21:24] =>  0:10
     CLOCK: [2015-06-10 Wed 18:14]--[2015-06-10 Wed 18:55] =>  0:41
@@ -64,19 +65,8 @@ through the diffs.
 
 Problems to solve:
 
-- spurious blank lines: this is actually a very tricky problem, due to
-  the fact that we are using "managed" blank lines in the indent
-  filter. It is suppressing blank lines. We can't switch this off
-  altogether as it generates other diffs in boilerplate. Height of
-  insanity. Also, we can't quickly fix the legacy formatters because we
-  need to know if the helper method is the first one and if so, skip
-  blank line. A hack around this may be the only solution. A number of
-  stories were raised to deal with the evilness of indentation
-  "management" in templates.
-- if string, we need to include =<boost/algorithm/string.hpp>=. same
-  hack as streaming.
 - missing operator== helper methods.
-- borked models: boost, std, stereotypes.
+- borked models: boost, stereotypes.
 
 Solved problems:
 
@@ -111,6 +101,23 @@ Solved problems:
 - enumerations are using by ref.
 - bugs in default constructor
 - streaming borked in a couple of places.
+- spurious blank lines: this is actually a very tricky problem, due to
+  the fact that we are using "managed" blank lines in the indent
+  filter. It is suppressing blank lines. We can't switch this off
+  altogether as it generates other diffs in boilerplate. Height of
+  insanity. Also, we can't quickly fix the legacy formatters because we
+  need to know if the helper method is the first one and if so, skip
+  blank line. A hack around this may be the only solution. A number of
+  stories were raised to deal with the evilness of indentation
+  "management" in templates.
+- if string, we need to include =<boost/algorithm/string.hpp>=. same
+  hack as streaming. Actually this problem will keep on
+  reoccurring. We need a hack that takes into account all of the known
+  "special" includes (variant, pair, etc). We already have a good
+  solution for this in the backlog so for now we can do the quickest
+  possible hack which is to compute all of these in the builder and
+  return it as a type. All this logic already exists in extractor and
+  could be lifted.
 
 *** CANCELLED Add support for "field gathering"                       :story:
     CLOSED: [2015-06-10 Wed 15:24]

@@ -29,8 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/property.hpp"
+#include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
@@ -44,6 +43,19 @@ namespace formattables {
  * formatter.
  */
 class inclusion_dependencies_builder {
+public:
+    // FIXME: temporary hack to handle special includes.
+    struct special_includes {
+        special_includes() :
+            has_std_string(false), has_std_pair(false),
+            has_variant(false), requires_stream_manipulators(false) {}
+
+        bool has_std_string;
+        bool has_std_pair;
+        bool has_variant;
+        bool requires_stream_manipulators;
+    };
+
 public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
@@ -62,18 +74,9 @@ private:
 
 public:
     /**
-     * @brief Returns true if the type requires stream manipulation
-     * includes.
+     * @brief Detects the presence of all the "special" includes.
      */
-    bool requires_stream_manipulation_includes(
-        const sml::nested_qname& nqn) const;
-
-    /**
-     * @brief Returns true if any of the properties require stream
-     * manipulation includes.
-     */
-    bool requires_stream_manipulation_includes(
-        const std::list<sml::property>& properties) const;
+    special_includes make_special_includes(const sml::object& o) const;
 
     /**
      * @brief Returns true if the formatter is enabled.

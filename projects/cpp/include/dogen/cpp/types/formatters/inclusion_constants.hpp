@@ -46,6 +46,10 @@ struct inclusion_constants {
     };
 
     struct boost {
+        struct algorithm {
+            static ::std::string string();
+        };
+
         struct io {
             static ::std::string ios_state();
         };

@@ -35,6 +35,9 @@ const auto empty_list = std::list<std::string> {};
 const std::string bool_type("bool");
 const std::string double_type("double");
 const std::string float_type("float");
+const std::string pair_type("pair");
+const std::string string_type("string");
+const std::string variant_type("variant");
 
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string qname_not_found("Cannot find qname: ");
@@ -71,26 +74,33 @@ inclusion_dependencies_builder::get_inclusion_directive(
     return j->second;
 }
 
-bool inclusion_dependencies_builder::requires_stream_manipulation_includes(
-    const sml::nested_qname& nqn) const {
+inclusion_dependencies_builder::special_includes
+inclusion_dependencies_builder::make_special_includes(
+    const sml::object& o) const {
+    special_includes r;
+    const auto lambda([&](const sml::relationship_types rt) {
+            const auto i(o.relationships().find(rt));
+            if (i == o.relationships().end())
+                return;
 
-    for (const auto c : nqn.children()) {
-        if (requires_stream_manipulation_includes(c))
-            return true;
-    }
+            for (const auto& qn : i->second) {
+                const auto sn(qn.simple_name());
+                if (sn == bool_type || sn == double_type || sn == float_type)
+                    r.requires_stream_manipulators = true;
+                else if (sn == string_type)
+                    r.has_std_string = true;
+                else if (sn == variant_type)
+                    r.has_variant = true;
+                else if (sn == pair_type)
+                    r.has_std_pair = true;
+            }
+        });
 
-    const auto sn(nqn.type().simple_name());
-    return sn == bool_type || sn == double_type || sn == float_type;
-}
+    using rt = dogen::sml::relationship_types;
+    lambda(rt::regular_associations);
+    lambda(rt::weak_associations);
 
-bool inclusion_dependencies_builder::requires_stream_manipulation_includes(
-    const std::list<sml::property>& properties) const {
-
-    for (const auto p : properties) {
-        if (requires_stream_manipulation_includes(p.type()))
-            return true;
-    }
-    return false;
+    return r;
 }
 
 bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,

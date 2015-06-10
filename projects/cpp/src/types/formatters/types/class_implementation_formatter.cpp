@@ -74,15 +74,18 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
     const bool io_integrated(builder.is_integrated(self_fn, io_fctn));
     const bool requires_io(io_enabled && (in_inheritance || io_integrated));
-    const auto& props(o.local_properties());
 
     const auto os(inclusion_constants::std::ostream());
-    if (requires_io)
+    if (requires_io) {
         builder.add(os);
 
-    const bool has_manip(builder.requires_stream_manipulation_includes(props));
-    if (requires_io && has_manip)
-        builder.add(inclusion_constants::boost::io::ios_state());
+        const auto si(builder.make_special_includes(o));
+        if (si.requires_stream_manipulators)
+            builder.add(inclusion_constants::boost::io::ios_state());
+
+        if (si.has_std_string)
+            builder.add(inclusion_constants::boost::algorithm::string());
+    }
 
     const auto io_fn(formatters::io::traits::class_header_formatter_name());
     const auto lambda([&](const sml::object& o,

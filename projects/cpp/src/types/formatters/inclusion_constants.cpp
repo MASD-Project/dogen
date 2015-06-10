@@ -49,6 +49,11 @@ std::string inclusion_constants::std::functional() {
     return r;
 }
 
+std::string inclusion_constants::boost::algorithm::string() {
+    static ::std::string r("<boost/algorithm/string.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::io::ios_state() {
     static ::std::string r("<boost/io/ios_state.hpp>");
     return r;
