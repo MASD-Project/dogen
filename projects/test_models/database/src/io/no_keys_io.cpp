@@ -23,7 +23,6 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/test_models/database/io/no_keys_io.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");

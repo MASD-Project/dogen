@@ -24,7 +24,6 @@
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
