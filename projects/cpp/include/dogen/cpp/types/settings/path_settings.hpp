@@ -49,7 +49,7 @@ public:
 public:
     path_settings(
         const bool split_project,
-        const dogen::cpp::formatters::file_types& file_type,
+        const dogen::cpp::formatters::file_types file_type,
         const std::string& facet_directory,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
@@ -74,7 +74,7 @@ public:
     void split_project(const bool v);
 
     dogen::cpp::formatters::file_types file_type() const;
-    void file_type(const dogen::cpp::formatters::file_types& v);
+    void file_type(const dogen::cpp::formatters::file_types v);
 
     const std::string& facet_directory() const;
     std::string& facet_directory();

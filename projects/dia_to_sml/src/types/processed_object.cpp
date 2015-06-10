@@ -39,7 +39,7 @@ processed_object::processed_object(processed_object&& rhs)
 processed_object::processed_object(
     const std::string& id,
     const std::string& name,
-    const dogen::dia_to_sml::object_types& object_type,
+    const dogen::dia_to_sml::object_types object_type,
     const std::string& stereotype,
     const dogen::dia_to_sml::processed_comment& comment,
     const std::string& child_node_id,
@@ -119,7 +119,7 @@ dogen::dia_to_sml::object_types processed_object::object_type() const {
     return object_type_;
 }
 
-void processed_object::object_type(const dogen::dia_to_sml::object_types& v) {
+void processed_object::object_type(const dogen::dia_to_sml::object_types v) {
     object_type_ = v;
 }
 

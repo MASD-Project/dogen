@@ -60,8 +60,8 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
-        const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type,
+        const dogen::sml::generation_types generation_type,
+        const dogen::sml::origin_types origin_type,
         const boost::optional<dogen::sml::qname>& containing_module,
         const std::list<dogen::sml::property>& all_properties,
         const std::list<dogen::sml::property>& local_properties,
@@ -77,7 +77,7 @@ public:
         const bool is_child,
         const bool is_original_parent_visitable,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
-        const dogen::sml::object_types& object_type,
+        const dogen::sml::object_types object_type,
         const bool is_aggregate_root,
         const std::list<dogen::sml::property>& identity,
         const bool is_final);
@@ -248,7 +248,7 @@ public:
      */
     /**@{*/
     dogen::sml::object_types object_type() const;
-    void object_type(const dogen::sml::object_types& v);
+    void object_type(const dogen::sml::object_types v);
     /**@}*/
 
     /**

@@ -44,7 +44,7 @@ public:
 
 public:
     segment(
-        const dogen::stitch::segment_types& type,
+        const dogen::stitch::segment_types type,
         const std::string& content);
 
 private:
@@ -56,7 +56,7 @@ private:
 
 public:
     dogen::stitch::segment_types type() const;
-    void type(const dogen::stitch::segment_types& v);
+    void type(const dogen::stitch::segment_types v);
 
     const std::string& content() const;
     std::string& content();

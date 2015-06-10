@@ -40,11 +40,11 @@ field_definition::field_definition()
 
 field_definition::field_definition(
     const dogen::dynamic::name& name,
-    const dogen::dynamic::value_types& value_type,
-    const dogen::dynamic::scope_types& scope,
+    const dogen::dynamic::value_types value_type,
+    const dogen::dynamic::scope_types scope,
     const dogen::dynamic::ownership_hierarchy& ownership_hierarchy,
     const boost::shared_ptr<dogen::dynamic::value>& default_value,
-    const dogen::dynamic::field_definition_types& definition_type)
+    const dogen::dynamic::field_definition_types definition_type)
     : name_(name),
       value_type_(value_type),
       scope_(scope),
@@ -97,7 +97,7 @@ dogen::dynamic::value_types field_definition::value_type() const {
     return value_type_;
 }
 
-void field_definition::value_type(const dogen::dynamic::value_types& v) {
+void field_definition::value_type(const dogen::dynamic::value_types v) {
     value_type_ = v;
 }
 
@@ -105,7 +105,7 @@ dogen::dynamic::scope_types field_definition::scope() const {
     return scope_;
 }
 
-void field_definition::scope(const dogen::dynamic::scope_types& v) {
+void field_definition::scope(const dogen::dynamic::scope_types v) {
     scope_ = v;
 }
 
@@ -145,7 +145,7 @@ dogen::dynamic::field_definition_types field_definition::definition_type() const
     return definition_type_;
 }
 
-void field_definition::definition_type(const dogen::dynamic::field_definition_types& v) {
+void field_definition::definition_type(const dogen::dynamic::field_definition_types v) {
     definition_type_ = v;
 }
 

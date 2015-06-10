@@ -42,11 +42,11 @@ module::module(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
+    const dogen::sml::generation_types generation_type,
+    const dogen::sml::origin_types origin_type,
     const boost::optional<dogen::sml::qname>& containing_module,
     const std::list<dogen::sml::qname>& members,
-    const dogen::sml::module_types& type)
+    const dogen::sml::module_types type)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -137,7 +137,7 @@ dogen::sml::generation_types module::generation_type() const {
     return generation_type_;
 }
 
-void module::generation_type(const dogen::sml::generation_types& v) {
+void module::generation_type(const dogen::sml::generation_types v) {
     generation_type_ = v;
 }
 
@@ -145,7 +145,7 @@ dogen::sml::origin_types module::origin_type() const {
     return origin_type_;
 }
 
-void module::origin_type(const dogen::sml::origin_types& v) {
+void module::origin_type(const dogen::sml::origin_types v) {
     origin_type_ = v;
 }
 
@@ -185,7 +185,7 @@ dogen::sml::module_types module::type() const {
     return type_;
 }
 
-void module::type(const dogen::sml::module_types& v) {
+void module::type(const dogen::sml::module_types v) {
     type_ = v;
 }
 

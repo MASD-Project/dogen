@@ -38,8 +38,8 @@ troubleshooting_options::troubleshooting_options(troubleshooting_options&& rhs)
 
 troubleshooting_options::troubleshooting_options(
     const boost::filesystem::path& debug_dir,
-    const dogen::config::archive_types& save_dia_model,
-    const dogen::config::archive_types& save_sml_model,
+    const dogen::config::archive_types save_dia_model,
+    const dogen::config::archive_types save_sml_model,
     const bool stop_after_formatting,
     const bool stop_after_merging)
     : debug_dir_(debug_dir),
@@ -91,7 +91,7 @@ dogen::config::archive_types troubleshooting_options::save_dia_model() const {
     return save_dia_model_;
 }
 
-void troubleshooting_options::save_dia_model(const dogen::config::archive_types& v) {
+void troubleshooting_options::save_dia_model(const dogen::config::archive_types v) {
     save_dia_model_ = v;
 }
 
@@ -99,7 +99,7 @@ dogen::config::archive_types troubleshooting_options::save_sml_model() const {
     return save_sml_model_;
 }
 
-void troubleshooting_options::save_sml_model(const dogen::config::archive_types& v) {
+void troubleshooting_options::save_sml_model(const dogen::config::archive_types v) {
     save_sml_model_ = v;
 }
 

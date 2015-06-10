@@ -68,8 +68,8 @@ type::type(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
+    const dogen::sml::generation_types generation_type,
+    const dogen::sml::origin_types origin_type,
     const boost::optional<dogen::sml::qname>& containing_module)
     : documentation_(documentation),
       extensions_(extensions),
@@ -161,7 +161,7 @@ dogen::sml::generation_types type::generation_type() const {
     return generation_type_;
 }
 
-void type::generation_type(const dogen::sml::generation_types& v) {
+void type::generation_type(const dogen::sml::generation_types v) {
     generation_type_ = v;
 }
 
@@ -169,7 +169,7 @@ dogen::sml::origin_types type::origin_type() const {
     return origin_type_;
 }
 
-void type::origin_type(const dogen::sml::origin_types& v) {
+void type::origin_type(const dogen::sml::origin_types v) {
     origin_type_ = v;
 }
 

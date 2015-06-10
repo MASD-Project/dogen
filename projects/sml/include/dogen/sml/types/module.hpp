@@ -60,11 +60,11 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const dogen::sml::qname& name,
-        const dogen::sml::generation_types& generation_type,
-        const dogen::sml::origin_types& origin_type,
+        const dogen::sml::generation_types generation_type,
+        const dogen::sml::origin_types origin_type,
         const boost::optional<dogen::sml::qname>& containing_module,
         const std::list<dogen::sml::qname>& members,
-        const dogen::sml::module_types& type);
+        const dogen::sml::module_types type);
 
 private:
     template<typename Archive>
@@ -114,7 +114,7 @@ public:
      */
     /**@{*/
     dogen::sml::generation_types generation_type() const;
-    void generation_type(const dogen::sml::generation_types& v);
+    void generation_type(const dogen::sml::generation_types v);
     /**@}*/
 
     /**
@@ -122,7 +122,7 @@ public:
      */
     /**@{*/
     dogen::sml::origin_types origin_type() const;
-    void origin_type(const dogen::sml::origin_types& v);
+    void origin_type(const dogen::sml::origin_types v);
     /**@}*/
 
     /**
@@ -150,7 +150,7 @@ public:
      */
     /**@{*/
     dogen::sml::module_types type() const;
-    void type(const dogen::sml::module_types& v);
+    void type(const dogen::sml::module_types v);
     /**@}*/
 
 public:

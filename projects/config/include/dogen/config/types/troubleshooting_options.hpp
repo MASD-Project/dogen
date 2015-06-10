@@ -47,8 +47,8 @@ public:
 public:
     troubleshooting_options(
         const boost::filesystem::path& debug_dir,
-        const dogen::config::archive_types& save_dia_model,
-        const dogen::config::archive_types& save_sml_model,
+        const dogen::config::archive_types save_dia_model,
+        const dogen::config::archive_types save_sml_model,
         const bool stop_after_formatting,
         const bool stop_after_merging);
 
@@ -76,7 +76,7 @@ public:
      */
     /**@{*/
     dogen::config::archive_types save_dia_model() const;
-    void save_dia_model(const dogen::config::archive_types& v);
+    void save_dia_model(const dogen::config::archive_types v);
     /**@}*/
 
     /**
@@ -85,7 +85,7 @@ public:
      */
     /**@{*/
     dogen::config::archive_types save_sml_model() const;
-    void save_sml_model(const dogen::config::archive_types& v);
+    void save_sml_model(const dogen::config::archive_types v);
     /**@}*/
 
     /**

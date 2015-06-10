@@ -51,11 +51,11 @@ public:
 
 public:
     content_descriptor(
-        const dogen::cpp::formattables::file_types& file_type,
-        const dogen::config::cpp_facet_types& facet_type,
-        const dogen::cpp::formattables::aspect_types& aspect_type,
+        const dogen::cpp::formattables::file_types file_type,
+        const dogen::config::cpp_facet_types facet_type,
+        const dogen::cpp::formattables::aspect_types aspect_type,
         const dogen::sml::qname& name,
-        const dogen::cpp::formattables::content_types& content_type);
+        const dogen::cpp::formattables::content_types content_type);
 
 private:
     template<typename Archive>
@@ -70,7 +70,7 @@ public:
      */
     /**@{*/
     dogen::cpp::formattables::file_types file_type() const;
-    void file_type(const dogen::cpp::formattables::file_types& v);
+    void file_type(const dogen::cpp::formattables::file_types v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
      */
     /**@{*/
     dogen::config::cpp_facet_types facet_type() const;
-    void facet_type(const dogen::config::cpp_facet_types& v);
+    void facet_type(const dogen::config::cpp_facet_types v);
     /**@}*/
 
     /**
@@ -86,7 +86,7 @@ public:
      */
     /**@{*/
     dogen::cpp::formattables::aspect_types aspect_type() const;
-    void aspect_type(const dogen::cpp::formattables::aspect_types& v);
+    void aspect_type(const dogen::cpp::formattables::aspect_types v);
     /**@}*/
 
     /**
@@ -104,7 +104,7 @@ public:
      */
     /**@{*/
     dogen::cpp::formattables::content_types content_type() const;
-    void content_type(const dogen::cpp::formattables::content_types& v);
+    void content_type(const dogen::cpp::formattables::content_types v);
     /**@}*/
 
 public:

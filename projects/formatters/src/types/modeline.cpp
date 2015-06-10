@@ -29,8 +29,8 @@ modeline::modeline()
 
 modeline::modeline(
     const std::string& name,
-    const dogen::formatters::editors& editor,
-    const dogen::formatters::modeline_locations& location,
+    const dogen::formatters::editors editor,
+    const dogen::formatters::modeline_locations location,
     const std::list<dogen::formatters::modeline_field>& fields)
     : name_(name),
       editor_(editor),
@@ -78,7 +78,7 @@ dogen::formatters::editors modeline::editor() const {
     return editor_;
 }
 
-void modeline::editor(const dogen::formatters::editors& v) {
+void modeline::editor(const dogen::formatters::editors v) {
     editor_ = v;
 }
 
@@ -86,7 +86,7 @@ dogen::formatters::modeline_locations modeline::location() const {
     return location_;
 }
 
-void modeline::location(const dogen::formatters::modeline_locations& v) {
+void modeline::location(const dogen::formatters::modeline_locations v) {
     location_ = v;
 }
 

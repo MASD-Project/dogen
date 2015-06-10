@@ -27,7 +27,7 @@ segment::segment()
     : type_(static_cast<dogen::stitch::segment_types>(0)) { }
 
 segment::segment(
-    const dogen::stitch::segment_types& type,
+    const dogen::stitch::segment_types type,
     const std::string& content)
     : type_(type),
       content_(content) { }
@@ -53,7 +53,7 @@ dogen::stitch::segment_types segment::type() const {
     return type_;
 }
 
-void segment::type(const dogen::stitch::segment_types& v) {
+void segment::type(const dogen::stitch::segment_types v) {
     type_ = v;
 }
 

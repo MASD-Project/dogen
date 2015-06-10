@@ -46,7 +46,7 @@ path_settings::path_settings(path_settings&& rhs)
 
 path_settings::path_settings(
     const bool split_project,
-    const dogen::cpp::formatters::file_types& file_type,
+    const dogen::cpp::formatters::file_types file_type,
     const std::string& facet_directory,
     const std::string& facet_postfix,
     const std::string& formatter_postfix,
@@ -123,7 +123,7 @@ dogen::cpp::formatters::file_types path_settings::file_type() const {
     return file_type_;
 }
 
-void path_settings::file_type(const dogen::cpp::formatters::file_types& v) {
+void path_settings::file_type(const dogen::cpp::formatters::file_types v) {
     file_type_ = v;
 }
 

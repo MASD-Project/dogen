@@ -31,11 +31,11 @@ content_descriptor::content_descriptor()
       content_type_(static_cast<dogen::cpp::formattables::content_types>(0)) { }
 
 content_descriptor::content_descriptor(
-    const dogen::cpp::formattables::file_types& file_type,
-    const dogen::config::cpp_facet_types& facet_type,
-    const dogen::cpp::formattables::aspect_types& aspect_type,
+    const dogen::cpp::formattables::file_types file_type,
+    const dogen::config::cpp_facet_types facet_type,
+    const dogen::cpp::formattables::aspect_types aspect_type,
     const dogen::sml::qname& name,
-    const dogen::cpp::formattables::content_types& content_type)
+    const dogen::cpp::formattables::content_types content_type)
     : file_type_(file_type),
       facet_type_(facet_type),
       aspect_type_(aspect_type),
@@ -69,7 +69,7 @@ dogen::cpp::formattables::file_types content_descriptor::file_type() const {
     return file_type_;
 }
 
-void content_descriptor::file_type(const dogen::cpp::formattables::file_types& v) {
+void content_descriptor::file_type(const dogen::cpp::formattables::file_types v) {
     file_type_ = v;
 }
 
@@ -77,7 +77,7 @@ dogen::config::cpp_facet_types content_descriptor::facet_type() const {
     return facet_type_;
 }
 
-void content_descriptor::facet_type(const dogen::config::cpp_facet_types& v) {
+void content_descriptor::facet_type(const dogen::config::cpp_facet_types v) {
     facet_type_ = v;
 }
 
@@ -85,7 +85,7 @@ dogen::cpp::formattables::aspect_types content_descriptor::aspect_type() const {
     return aspect_type_;
 }
 
-void content_descriptor::aspect_type(const dogen::cpp::formattables::aspect_types& v) {
+void content_descriptor::aspect_type(const dogen::cpp::formattables::aspect_types v) {
     aspect_type_ = v;
 }
 
@@ -109,7 +109,7 @@ dogen::cpp::formattables::content_types content_descriptor::content_type() const
     return content_type_;
 }
 
-void content_descriptor::content_type(const dogen::cpp::formattables::content_types& v) {
+void content_descriptor::content_type(const dogen::cpp::formattables::content_types v) {
     content_type_ = v;
 }
 

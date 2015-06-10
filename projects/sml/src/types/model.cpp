@@ -50,8 +50,8 @@ model::model(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const dogen::sml::qname& name,
-    const dogen::sml::generation_types& generation_type,
-    const dogen::sml::origin_types& origin_type,
+    const dogen::sml::generation_types generation_type,
+    const dogen::sml::origin_types origin_type,
     const boost::optional<dogen::sml::qname>& containing_module,
     const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& references,
     const std::unordered_set<dogen::sml::qname>& leaves,
@@ -173,7 +173,7 @@ dogen::sml::generation_types model::generation_type() const {
     return generation_type_;
 }
 
-void model::generation_type(const dogen::sml::generation_types& v) {
+void model::generation_type(const dogen::sml::generation_types v) {
     generation_type_ = v;
 }
 
@@ -181,7 +181,7 @@ dogen::sml::origin_types model::origin_type() const {
     return origin_type_;
 }
 
-void model::origin_type(const dogen::sml::origin_types& v) {
+void model::origin_type(const dogen::sml::origin_types v) {
     origin_type_ = v;
 }
 

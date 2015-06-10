@@ -53,11 +53,11 @@ public:
 public:
     field_definition(
         const dogen::dynamic::name& name,
-        const dogen::dynamic::value_types& value_type,
-        const dogen::dynamic::scope_types& scope,
+        const dogen::dynamic::value_types value_type,
+        const dogen::dynamic::scope_types scope,
         const dogen::dynamic::ownership_hierarchy& ownership_hierarchy,
         const boost::shared_ptr<dogen::dynamic::value>& default_value,
-        const dogen::dynamic::field_definition_types& definition_type);
+        const dogen::dynamic::field_definition_types definition_type);
 
 private:
     template<typename Archive>
@@ -82,7 +82,7 @@ public:
      */
     /**@{*/
     dogen::dynamic::value_types value_type() const;
-    void value_type(const dogen::dynamic::value_types& v);
+    void value_type(const dogen::dynamic::value_types v);
     /**@}*/
 
     /**
@@ -90,7 +90,7 @@ public:
      */
     /**@{*/
     dogen::dynamic::scope_types scope() const;
-    void scope(const dogen::dynamic::scope_types& v);
+    void scope(const dogen::dynamic::scope_types v);
     /**@}*/
 
     /**
@@ -118,7 +118,7 @@ public:
      */
     /**@{*/
     dogen::dynamic::field_definition_types definition_type() const;
-    void definition_type(const dogen::dynamic::field_definition_types& v);
+    void definition_type(const dogen::dynamic::field_definition_types v);
     /**@}*/
 
 public:

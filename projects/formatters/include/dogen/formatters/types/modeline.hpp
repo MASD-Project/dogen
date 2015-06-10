@@ -60,8 +60,8 @@ public:
 public:
     modeline(
         const std::string& name,
-        const dogen::formatters::editors& editor,
-        const dogen::formatters::modeline_locations& location,
+        const dogen::formatters::editors editor,
+        const dogen::formatters::modeline_locations location,
         const std::list<dogen::formatters::modeline_field>& fields);
 
 private:
@@ -87,7 +87,7 @@ public:
      */
     /**@{*/
     dogen::formatters::editors editor() const;
-    void editor(const dogen::formatters::editors& v);
+    void editor(const dogen::formatters::editors v);
     /**@}*/
 
     /**
@@ -95,7 +95,7 @@ public:
      */
     /**@{*/
     dogen::formatters::modeline_locations location() const;
-    void location(const dogen::formatters::modeline_locations& v);
+    void location(const dogen::formatters::modeline_locations v);
     /**@}*/
 
     /**

@@ -145,8 +145,8 @@ class_info::class_info(
     const bool is_visitable,
     const bool is_immutable,
     const bool is_original_parent_visitable,
-    const dogen::cpp::formattables::class_types& class_type,
-    const dogen::sml::generation_types& generation_type,
+    const dogen::cpp::formattables::class_types class_type,
+    const dogen::sml::generation_types generation_type,
     const bool is_final)
     : dogen::cpp::formattables::entity(
       identity,
@@ -446,7 +446,7 @@ dogen::cpp::formattables::class_types class_info::class_type() const {
     return class_type_;
 }
 
-void class_info::class_type(const dogen::cpp::formattables::class_types& v) {
+void class_info::class_type(const dogen::cpp::formattables::class_types v) {
     class_type_ = v;
 }
 
@@ -454,7 +454,7 @@ dogen::sml::generation_types class_info::generation_type() const {
     return generation_type_;
 }
 
-void class_info::generation_type(const dogen::sml::generation_types& v) {
+void class_info::generation_type(const dogen::sml::generation_types v) {
     generation_type_ = v;
 }
 

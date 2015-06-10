@@ -78,8 +78,8 @@ public:
         const bool is_visitable,
         const bool is_immutable,
         const bool is_original_parent_visitable,
-        const dogen::cpp::formattables::class_types& class_type,
-        const dogen::sml::generation_types& generation_type,
+        const dogen::cpp::formattables::class_types class_type,
+        const dogen::sml::generation_types generation_type,
         const bool is_final);
 
 private:
@@ -252,7 +252,7 @@ public:
      */
     /**@{*/
     dogen::cpp::formattables::class_types class_type() const;
-    void class_type(const dogen::cpp::formattables::class_types& v);
+    void class_type(const dogen::cpp::formattables::class_types v);
     /**@}*/
 
     /**
@@ -260,7 +260,7 @@ public:
      */
     /**@{*/
     dogen::sml::generation_types generation_type() const;
-    void generation_type(const dogen::sml::generation_types& v);
+    void generation_type(const dogen::sml::generation_types v);
     /**@}*/
 
     bool is_final() const;
