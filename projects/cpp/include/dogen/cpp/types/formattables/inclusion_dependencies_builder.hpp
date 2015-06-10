@@ -29,6 +29,8 @@
 #include <string>
 #include <unordered_set>
 #include <boost/optional.hpp>
+#include "dogen/sml/types/nested_qname.hpp"
+#include "dogen/sml/types/property.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
@@ -57,6 +59,21 @@ private:
      */
     boost::optional<std::string> get_inclusion_directive(
         const sml::qname& qn, const std::string& formatter_name) const;
+
+public:
+    /**
+     * @brief Returns true if the type requires stream manipulation
+     * includes.
+     */
+    bool requires_stream_manipulation_includes(
+        const sml::nested_qname& nqn) const;
+
+    /**
+     * @brief Returns true if any of the properties require stream
+     * manipulation includes.
+     */
+    bool requires_stream_manipulation_includes(
+        const std::list<sml::property>& properties) const;
 
     /**
      * @brief Returns true if the formatter is enabled.
@@ -88,35 +105,6 @@ public:
      */
     void add(const std::list<sml::qname>& qn,
         const std::string& formatter_name);
-
-    /**
-     * @brief Adds the supplied inclusion directive if the facet is
-     * integrated with the formatter and if the formatter is enabled.
-     *
-     * @param qn which type to check for formatter enablement.
-     * @param formatter_name which formatter to check for integration.
-     * @param facet_name facet to check for integration with
-     * formatter.
-     * @param inclusion_directive directive to add.
-     */
-    void add_if_integrated(const sml::qname& qn,
-        const std::string& formatter_name,
-        const std::string& facet_name,
-        const std::string& inclusion_directive);
-
-    /**
-     * @brief Adds the supplied inclusion directive if the facet is
-     * integrated with the formatter and if the formatter is enabled.
-     *
-     * @param qn type to check for formatter enablement and to
-     * generate include from.
-     * @param formatter_name which formatter to check for integration.
-     * @param facet_name facet to check for integration with
-     * formatter.
-     */
-    void add_if_integrated(const std::list<sml::qname>& qn,
-        const std::string& formatter_name,
-        const std::string& facet_name);
 
 public:
     /**

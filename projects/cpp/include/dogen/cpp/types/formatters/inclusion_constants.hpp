@@ -46,6 +46,10 @@ struct inclusion_constants {
     };
 
     struct boost {
+        struct io {
+            static ::std::string ios_state();
+        };
+
         struct serialization {
             static ::std::string nvp();
         };

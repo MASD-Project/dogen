@@ -49,6 +49,11 @@ std::string inclusion_constants::std::functional() {
     return r;
 }
 
+std::string inclusion_constants::boost::io::ios_state() {
+    static ::std::string r("<boost/io/ios_state.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::serialization::nvp() {
     static ::std::string r("<boost/serialization/nvp.hpp>");
     return r;

@@ -32,6 +32,10 @@ static logger lg(logger_factory(
         "cpp.formattables.inclusion_dependencies_builder"));
 
 const auto empty_list = std::list<std::string> {};
+const std::string bool_type("bool");
+const std::string double_type("double");
+const std::string float_type("float");
+
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string qname_not_found("Cannot find qname: ");
 const std::string formatter_name_not_found("Cannot find formatter name: ");
@@ -65,6 +69,28 @@ inclusion_dependencies_builder::get_inclusion_directive(
         return boost::optional<std::string>();
 
     return j->second;
+}
+
+bool inclusion_dependencies_builder::requires_stream_manipulation_includes(
+    const sml::nested_qname& nqn) const {
+
+    for (const auto c : nqn.children()) {
+        if (requires_stream_manipulation_includes(c))
+            return true;
+    }
+
+    const auto sn(nqn.type().simple_name());
+    return sn == bool_type || sn == double_type || sn == float_type;
+}
+
+bool inclusion_dependencies_builder::requires_stream_manipulation_includes(
+    const std::list<sml::property>& properties) const {
+
+    for (const auto p : properties) {
+        if (requires_stream_manipulation_includes(p.type()))
+            return true;
+    }
+    return false;
 }
 
 bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
@@ -136,31 +162,6 @@ void inclusion_dependencies_builder::
 add(const std::list<sml::qname>& qn, const std::string& formatter_name) {
     for (const auto& n : qn)
         add(n, formatter_name);
-}
-
-void inclusion_dependencies_builder::add_if_integrated(
-    const sml::qname& qn, const std::string& formatter_name,
-    const std::string& facet_name, const std::string& inclusion_directive) {
-
-    const auto& fn(formatter_name);
-    if (!is_enabled(qn, fn) || !is_integrated(fn, facet_name)) {
-        BOOST_LOG_SEV(lg, debug) << " Skipping include: '"
-                                 << inclusion_directive << "'";
-        return;
-    }
-
-    add(inclusion_directive);
-}
-
-void inclusion_dependencies_builder::add_if_integrated(
-    const std::list<sml::qname>& qn, const std::string& formatter_name,
-    const std::string& facet_name) {
-
-    for (const auto& n : qn) {
-        const auto id(get_inclusion_directive(n, formatter_name));
-        if (id)
-            add_if_integrated(n, formatter_name, facet_name, *id);
-    }
 }
 
 std::list<std::string> inclusion_dependencies_builder::build() {
