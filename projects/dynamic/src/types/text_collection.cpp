@@ -23,7 +23,6 @@
 #include "dogen/dynamic/io/value_io.hpp"
 #include "dogen/dynamic/types/text_collection.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");

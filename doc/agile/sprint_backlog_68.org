@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 21:21]
+#+CAPTION: Clock summary at [2015-06-10 Wed 21:45]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:39* |       |      |
+| *Total time*                                                                | *11:02* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 10:39   |       |      |
-| Active                                                                      |         | 10:39 |      |
+| Stories                                                                     | 11:02   |       |      |
+| Active                                                                      |         | 11:02 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 7:21 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 7:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
 #+end:
@@ -40,6 +40,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-10 Wed 21:25]--[2015-06-10 Wed 21:45] =>  0:20
     CLOCK: [2015-06-10 Wed 21:14]--[2015-06-10 Wed 21:24] =>  0:10
     CLOCK: [2015-06-10 Wed 18:14]--[2015-06-10 Wed 18:55] =>  0:41
     CLOCK: [2015-06-10 Wed 18:07]--[2015-06-10 Wed 18:13] =>  0:06

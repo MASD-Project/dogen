@@ -25,7 +25,6 @@
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");

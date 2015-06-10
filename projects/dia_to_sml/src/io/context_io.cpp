@@ -24,7 +24,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/dia_to_sml/io/context_io.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
