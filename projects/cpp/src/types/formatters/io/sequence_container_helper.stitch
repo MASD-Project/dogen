@@ -20,9 +20,8 @@ inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>&
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << <#= fa.streaming_for_type(containee, "*i") #>;
-        s << " } ]";
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
