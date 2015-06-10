@@ -13,19 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-09 Tue 20:57]
+#+CAPTION: Clock summary at [2015-06-10 Wed 15:25]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *5:25* |      |      |
+| *Total time*                                                                | *7:14* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 5:25   |      |      |
-| Active                                                                      |        | 5:25 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:17 |
+| Stories                                                                     | 7:14   |      |      |
+| Active                                                                      |        | 7:14 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:10 |
 | STARTED Implement class implementation formatter using stitch               |        |      | 5:08 |
+| CANCELLED Add support for "field gathering"                                 |        |      | 0:56 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-10 Wed 14:32]--[2015-06-10 Wed 15:25] =>  0:53
     CLOCK: [2015-06-09 Tue 20:45]--[2015-06-09 Tue 20:54] =>  0:09
     CLOCK: [2015-06-08 Mon 18:01]--[2015-06-08 Mon 18:09] =>  0:08
 
@@ -85,15 +87,17 @@ Solved problems:
   helper template.
 - remove needle includes.
 
-*** Add support for "field gathering"                                 :story:
+*** CANCELLED Add support for "field gathering"                       :story:
+    CLOSED: [2015-06-10 Wed 15:24]
+    CLOCK: [2015-06-10 Wed 13:35]--[2015-06-10 Wed 14:31] =>  0:56
 
 We need to add support in dynamic and SML for the "gathering" of
 fields; this consists in marking a field as "gatherable" in the
 JSON. We then need to find all types that have that field and gather
 their qnames in the model.
 
-Note: we do not need to handle inclusion_required this way; it already
-works well so leave it as is.
+Note: we do not need to handle =inclusion_required= this way; it
+already works well so leave it as is.
 
 Tasks:
 
@@ -109,5 +113,37 @@ Tasks:
   have gatherable fields, add them to container against the field.
 - implement transformer in terms of gathered fields (i.e. consult the
   container for requires_stream_manipulators, etc).
+
+More notes on this:
+
+- actually this is not a good idea. In reality, this is a variation of
+  the "enabled" problem. What we really need is a generic solution for
+  this and that will take a lot of thinking.
+- we need to define various relations that are possible in models: a)
+  association: inheritance + aggregation b) inheritance c)
+  aggregation etc. Each relation has a graph that is a set of ordered
+  pairs of types (a, b). For example aggregation in SML would contain
+  the pair (sml::model, sml::object). Actually it is not even _that_
+  straightforward since model has a container of object. But this is
+  the gist.
+- we then need to define certain functions over these relations. For
+  example, if =requires_stream_manipulators= is true for b and if a
+  aggregates b then =requires_stream_manipulators= is also true for
+  a. Then it becomes obvious that there are two "kinds" of functions,
+  those where a single "step" is "transitive" and those where any
+  number of steps - provided that there is a path - are
+  "transitive". Enabled is one such function.
+- all of this is really complicated. We need to find someone who
+  understands maths properly to express these concepts correctly.
+- we need to raise a story with all of the use cases for this and
+  converts them to a more maths like view of the world.
+
+For now we should simply hack this by copying the logic in transformer
+to the includer.
+
+*** Determine stream manipulation requirements in inclusion           :story:
+
+We need to copy the logic in transformer to see if a type needs stream
+manipulator includes or not.
 
 ** Deprecated
