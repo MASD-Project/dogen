@@ -10,6 +10,62 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add relationship types to handle "requires" and enablement        :story:
+
+This story needs to be named properly, once we actually understand
+what it is that it is about.
+
+Moment of realisation: we could describe all relationships between
+types as relations in the form a R b. We are already doing these, its
+just that we model them in a variety of ways (properties, relationship
+types, etc). This is fine because the driver for the modeling is the
+"language" model (e.g. =cpp=). However, there is a class of use cases
+that we have yet failed to solve. The general form of these use cases
+is as follows:
+
+- type b has some meta-data m;
+- type b is related to type a via some relation R;
+- type a should also be treated as having m.
+
+Another variation is where a is related to multiple types b0, b1, bn
+and we want to perform some computation on m0, m1, mn to determine the
+value for a.
+
+It seems that both of these use cases could be solved if only we had a
+way to represent a R b in =sml::model=. We have spotted the following
+Rs:
+
+- non-transitive aggregation, not "expanding" generics: all types
+  aggregated with a type; if a type is a generic type, we ignore the
+  type parameters. It is non-transitive in the following sense: if
+  type a aggregates type b and type b aggregates type c, it does not
+  mean that type a aggregates type c. Use cases: requires manual move
+  constructor, requires manual default constructor.
+- non-transitive aggregation, "expanding" generics: all types
+  aggregated with a type; if a type is a generic type, then all of the
+  type parameters are considered to also be associated. Use cases:
+  requires stream manipulators.
+- transitive association, "expanding" generics: all types aggregated
+  to a type and all types that those types aggregate to; all types
+  that this type inherits from and their parents. Use cases:
+  enablement.
+
+Note that we still haven't solved the fundamental enablement problem,
+as we can still have cycles on the graph (e.g. a is related to
+a). However, we can now create the traversal with cycles algorithm: it
+follows R and remembers the original type (e.g. a); when we spot that
+type again (e.g. y depends on a and a depends on y) we add all types
+that depend on it (y) to a "blocked" pile. We do process all other
+dependencies of y. The pile would have the form of: a blocks y. Even
+though y is blocked, we can still answer a. Once we answered a we can
+then answer all types blocked by a (they may have more than one block
+though). The key thing here is if a type has a cycle on itself its not
+a problem, we can just skip it. If a type has a dependency on a type
+which has a cycle, we must first sort out the type with the cycle.
+
+This story still needs a lot of work but its just a dump of all of the
+ideas at this point in time.
+
 *** Top-level inclusion required should be "tribool"                  :story:
 
 One of the most common use cases for inclusion required is to have it
