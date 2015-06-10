@@ -163,7 +163,7 @@ void class_declaration::complete_constructor(
         stream_ << indenter_ << "explicit " << ci.name() << "(const "
                 << p.type().complete_name();
 
-        if (!p.type().is_primitive())
+        if (!p.type().is_primitive() && !p.type().is_enumeration())
             stream_ << "&";
 
         stream_ << " " << p.name() << ");" << std::endl;
@@ -179,7 +179,7 @@ void class_declaration::complete_constructor(
             stream_ << (is_first ? "" : ",") << std::endl;
             stream_ << indenter_ << "const " << p.type().complete_name();
 
-            if (!p.type().is_primitive())
+            if (!p.type().is_primitive() && !p.type().is_enumeration())
                 stream_ << "&";
 
             stream_ << " " << p.name();
@@ -293,10 +293,6 @@ non_object_getters_and_setters(const std::string class_name,
             stream_ << "void ";
 
         stream_ << pi.name() << "(const " << pi.type().complete_name();
-
-        if (!pi.type().is_primitive())
-            stream_ << "&";
-
         stream_ << " v);" << std::endl;
     }
 

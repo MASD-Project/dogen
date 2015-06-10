@@ -30,9 +30,9 @@ a_class::a_class()
       shape_type_(static_cast<dogen::test_models::enumeration::pkg1::shape_types>(0)) { }
 
 a_class::a_class(
-    const dogen::test_models::enumeration::colour_types& colour_type,
-    const dogen::test_models::enumeration::book_types& book_type,
-    const dogen::test_models::enumeration::pkg1::shape_types& shape_type)
+    const dogen::test_models::enumeration::colour_types colour_type,
+    const dogen::test_models::enumeration::book_types book_type,
+    const dogen::test_models::enumeration::pkg1::shape_types shape_type)
     : colour_type_(colour_type),
       book_type_(book_type),
       shape_type_(shape_type) { }
@@ -60,7 +60,7 @@ dogen::test_models::enumeration::colour_types a_class::colour_type() const {
     return colour_type_;
 }
 
-void a_class::colour_type(const dogen::test_models::enumeration::colour_types& v) {
+void a_class::colour_type(const dogen::test_models::enumeration::colour_types v) {
     colour_type_ = v;
 }
 
@@ -68,7 +68,7 @@ dogen::test_models::enumeration::book_types a_class::book_type() const {
     return book_type_;
 }
 
-void a_class::book_type(const dogen::test_models::enumeration::book_types& v) {
+void a_class::book_type(const dogen::test_models::enumeration::book_types v) {
     book_type_ = v;
 }
 
@@ -76,7 +76,7 @@ dogen::test_models::enumeration::pkg1::shape_types a_class::shape_type() const {
     return shape_type_;
 }
 
-void a_class::shape_type(const dogen::test_models::enumeration::pkg1::shape_types& v) {
+void a_class::shape_type(const dogen::test_models::enumeration::pkg1::shape_types v) {
     shape_type_ = v;
 }
 

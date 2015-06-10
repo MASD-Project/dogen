@@ -122,7 +122,7 @@ void class_implementation::complete_constructor(
         const auto p(*props.begin());
         stream_ << "const " << p.type().complete_name();
 
-        if (!p.type().is_primitive())
+        if (!p.type().is_primitive() && !p.type().is_enumeration())
             stream_ << "&";
 
         stream_ << " " << p.name() << ")" << std::endl;
@@ -133,7 +133,7 @@ void class_implementation::complete_constructor(
             stream_ << (is_first ? "" : ",") << std::endl;
             stream_ << indenter_ << "const " << p.type().complete_name();
 
-            if (!p.type().is_primitive())
+            if (!p.type().is_primitive() && !p.type().is_enumeration())
                 stream_ << "&";
 
             stream_ << " " << p.name();
@@ -338,9 +338,6 @@ non_object_getters_and_setters(const std::string class_name,
         stream_ << class_name << "::" << ci.name() << "(const "
                 << ci.type().complete_name();
 
-        if (!ci.type().is_primitive())
-            stream_ << "&";
-
         stream_ << " v) ";
         utility_.open_scope();
         {
@@ -397,10 +394,7 @@ object_getters_and_setters(const std::string class_name,
         stream_ << class_name << "::" << ci.name() << "(const "
                 << ci.type().complete_name();
 
-        if (!ci.type().is_primitive())
-            stream_ << "&";
-
-        stream_ << " v) ";
+        stream_ << "& v) ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);
@@ -421,10 +415,7 @@ object_getters_and_setters(const std::string class_name,
         stream_ << class_name << "::" << ci.name() << "(const "
                 << ci.type().complete_name();
 
-        if (!ci.type().is_primitive())
-            stream_ << "&&";
-
-        stream_ << " v) ";
+        stream_ << "&& v) ";
         utility_.open_scope();
         {
             positive_indenter_scope s(indenter_);

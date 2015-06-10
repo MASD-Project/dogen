@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 16:43]
+#+CAPTION: Clock summary at [2015-06-10 Wed 17:21]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:26* |      |      |
+| *Total time*                                                                | *9:03* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:26   |      |      |
-| Active                                                                      |        | 8:26 |      |
+| Stories                                                                     | 9:03   |      |      |
+| Active                                                                      |        | 9:03 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:20 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 5:08 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 5:45 |
 | CANCELLED Add support for "field gathering"                                 |        |      | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |        |      | 1:02 |
 #+end:
@@ -40,6 +40,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-10 Wed 16:44]--[2015-06-10 Wed 17:21] =>  0:37
     CLOCK: [2015-06-09 Tue 20:54]--[2015-06-09 Tue 20:57] =>  0:03
     CLOCK: [2015-06-09 Tue 20:37]--[2015-06-09 Tue 20:45] =>  0:08
     CLOCK: [2015-06-09 Tue 20:06]--[2015-06-09 Tue 20:35] =>  0:29
@@ -57,13 +58,11 @@ through the diffs.
 
 Problems to solve:
 
-- includes will fail on stream manipulators. This is because we need
-  to check if we require them when generating dependencies, but we
-  have to do so manually since the class info doesn't exist yet. We
-  need to hack this for now - once we have "field gathering" support
-  this will be easier. Actually we can't hack it as such - we need to
-  traverse the nested types info in SML. It may be easier to implement
-  it properly.
+- missing operator== helper methods.
+- bugs in default constructor
+- spurious blank lines
+- streaming borked in a couple of places.
+- borked models: boost, std, enumeration, stereotypes.
 
 Solved problems:
 
@@ -88,6 +87,14 @@ Solved problems:
   not. Since we do, move the whole nonsense of method name etc into
   helper template.
 - remove needle includes.
+- includes will fail on stream manipulators. This is because we need
+  to check if we require them when generating dependencies, but we
+  have to do so manually since the class info doesn't exist yet. We
+  need to hack this for now - once we have "field gathering" support
+  this will be easier. Actually we can't hack it as such - we need to
+  traverse the nested types info in SML. It may be easier to implement
+  it properly.
+- enumerations are using by ref.
 
 *** CANCELLED Add support for "field gathering"                       :story:
     CLOSED: [2015-06-10 Wed 15:24]

@@ -297,7 +297,6 @@ fa.stream() << "}" << std::endl;
         } // snf
 fa.stream() << std::endl;
     } // sbf
-
     return fa.make_file();
 }
 } } } }

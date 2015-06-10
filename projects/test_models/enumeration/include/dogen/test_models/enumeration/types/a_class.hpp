@@ -46,9 +46,9 @@ public:
 
 public:
     a_class(
-        const dogen::test_models::enumeration::colour_types& colour_type,
-        const dogen::test_models::enumeration::book_types& book_type,
-        const dogen::test_models::enumeration::pkg1::shape_types& shape_type);
+        const dogen::test_models::enumeration::colour_types colour_type,
+        const dogen::test_models::enumeration::book_types book_type,
+        const dogen::test_models::enumeration::pkg1::shape_types shape_type);
 
 private:
     template<typename Archive>
@@ -59,13 +59,13 @@ private:
 
 public:
     dogen::test_models::enumeration::colour_types colour_type() const;
-    void colour_type(const dogen::test_models::enumeration::colour_types& v);
+    void colour_type(const dogen::test_models::enumeration::colour_types v);
 
     dogen::test_models::enumeration::book_types book_type() const;
-    void book_type(const dogen::test_models::enumeration::book_types& v);
+    void book_type(const dogen::test_models::enumeration::book_types v);
 
     dogen::test_models::enumeration::pkg1::shape_types shape_type() const;
-    void shape_type(const dogen::test_models::enumeration::pkg1::shape_types& v);
+    void shape_type(const dogen::test_models::enumeration::pkg1::shape_types v);
 
 public:
     bool operator==(const a_class& rhs) const;

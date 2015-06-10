@@ -382,7 +382,6 @@ inline void swap(
 
 <#+
     } // sbf
-
     return fa.make_file();
 }
 #>

@@ -65,7 +65,8 @@ make_final_keyword_text(const formattables::class_info& c) {
 
 std::string entity_formatting_assistant::
 make_by_ref_text(const formattables::property_info& p) {
-    return p.type().is_primitive() ? empty : by_ref_text;
+    return (p.type().is_primitive() || p.type().is_enumeration()) ?
+        empty : by_ref_text;
 }
 
 std::string entity_formatting_assistant::
