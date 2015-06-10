@@ -44,14 +44,26 @@ dogen::formatters::file class_implementation_formatter_stitch(
             if (c.requires_manual_default_constructor()) {
 fa.stream() << std::endl;
 fa.stream() << c.name() << "::" << c.name() << "()" << std::endl;
-                dogen::formatters::sequence_formatter sf(c.properties().size());
-                sf.prefix_configuration().first(": ").not_first("  ");
-                sf.postfix_configuration().last(" { }");
+                // FIXME: this was just too hard to hack with a sequence.
+                // FIXME: indentation is all off too.
+                std::ostringstream ss;
+                bool is_first(true);
                 for (const auto p : c.properties()) {
                     if (!p.type().is_primitive() && !p.type().is_enumeration())
                         continue;
-fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(static_cast<" << p.type().complete_name() << ">(0))" << sf.postfix() << std::endl;
+
+                    if (!is_first)
+                        ss << "," << std::endl << "      ";
+
+                    ss << fa.make_member_variable_name(p)
+                       << "(static_cast<" << p.type().complete_name()
+                       << ">(0))";
+
+                    is_first = false;
                 }
+                ss << " { }";
+                const std::string out(ss.str());
+fa.stream() << "    : " << out << std::endl;
             }
 
             /*

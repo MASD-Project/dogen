@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 17:33]
+#+CAPTION: Clock summary at [2015-06-10 Wed 18:06]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:14* |      |      |
+| *Total time*                                                                | *9:45* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:14   |      |      |
-| Active                                                                      |        | 9:14 |      |
+| Stories                                                                     | 9:45   |      |      |
+| Active                                                                      |        | 9:45 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 1:20 |
-| STARTED Implement class implementation formatter using stitch               |        |      | 5:56 |
+| STARTED Implement class implementation formatter using stitch               |        |      | 6:27 |
 | CANCELLED Add support for "field gathering"                                 |        |      | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |        |      | 1:02 |
 #+end:
@@ -40,6 +40,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-10 Wed 17:35]--[2015-06-10 Wed 18:06] =>  0:31
     CLOCK: [2015-06-10 Wed 17:22]--[2015-06-10 Wed 17:33] =>  0:11
     CLOCK: [2015-06-10 Wed 16:44]--[2015-06-10 Wed 17:21] =>  0:37
     CLOCK: [2015-06-09 Tue 20:54]--[2015-06-09 Tue 20:57] =>  0:03
@@ -59,8 +60,9 @@ through the diffs.
 
 Problems to solve:
 
+- if string, we need to include =<boost/algorithm/string.hpp>=. same
+  hack as streaming.
 - missing operator== helper methods.
-- bugs in default constructor
 - spurious blank lines
 - streaming borked in a couple of places.
 - borked models: boost, std, enumeration, stereotypes.
@@ -96,6 +98,7 @@ Solved problems:
   traverse the nested types info in SML. It may be easier to implement
   it properly.
 - enumerations are using by ref.
+- bugs in default constructor
 
 *** CANCELLED Add support for "field gathering"                       :story:
     CLOSED: [2015-06-10 Wed 15:24]
