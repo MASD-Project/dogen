@@ -617,8 +617,11 @@ void inserter_implementation::ptree_helper(
     utility_.blank_line(2);
 }
 
-void inserter_implementation::tidy_up_string_method() {
-    utility_.blank_line();
+void inserter_implementation::
+tidy_up_string_method(const bool start_blank_line) {
+    if (start_blank_line)
+        utility_.blank_line();
+
     stream_ << indenter_ << "inline std::string tidy_up_string"
             << "(std::string s) ";
 
@@ -667,7 +670,7 @@ recursive_helper_method_creator(const cpp::formattables::nested_type_info& nti,
     else if (nti.is_ptree())
         ptree_helper(nti);
     else if (nti.is_string_like() && !nti.is_char_like())
-        tidy_up_string_method();
+        tidy_up_string_method(types_done.empty());
 
     types_done.insert(nti.complete_identifiable_name());
 }

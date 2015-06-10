@@ -25,7 +25,6 @@
 #include "dogen/test_models/stereotypes/io/immutable_four_io.hpp"
 #include "dogen/test_models/stereotypes/io/immutable_one_primitive_io.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");

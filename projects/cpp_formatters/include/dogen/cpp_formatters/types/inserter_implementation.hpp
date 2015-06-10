@@ -49,7 +49,7 @@ public:
     virtual ~inserter_implementation() noexcept {}
 
 private:
-    void tidy_up_string_method();
+    void tidy_up_string_method(const bool start_blank_line);
     void sequence_container_helper(
         const cpp::formattables::nested_type_info& nti);
     void associative_container_helper(

@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/test_models/stereotypes/io/multiple_refinement_concept_model_io.hpp"
 
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
