@@ -914,6 +914,43 @@ unfortunately its not about indenting:
 
 - [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
 
+*** Use clang format in knit                                          :story:
+
+
+We need to indent the output coming out of knit. At present our stitch
+templates are super-complex purely because we are trying to get the
+indentation right. In most cases we don't. We need to:
+
+- remove indent filter and any other indentation "helpers"
+- update all templates to output everything as simply as possible, in
+  one long line if need be. We may still need to use sequence helper
+  but hopefully for very trivial cases.
+- plug in clang format at the end of the knit pipeline, using either a
+  default set of options or a user supplied set of options (via a
+  command line parameter).
+
+Merged with other story:
+
+We should generate un-indented c++ code and then rely on clang-format
+to do the indentation. We can allow users to supply their own
+configurations and supply those to clang. This can be done via the
+meta-data, or if there is a well defined file for clang, we could use
+it instead.
+
+Note that using clang to manage indentation will make things a lot
+slower. Note also that clang supports Java and may in future support
+C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
+
+Another option is to create fallback modes. The preferred indenter for
+a given language (say c++) may not exist for another language (say
+c#); for these we use a dogen created indenter that is very basic. It
+may support some of the configuration parameters supplied for the
+clang indenter. The key thing is that we take away indenting from the
+formaters - they become flat - and then we always apply the indenter;
+either a clang based one or a simplified one. Either way, the code
+should live in formatters and make use of the language-specific
+folders as required.
+
 *** Integration of stitch and dogen                                   :story:
 
 Now that we have implemented stitch and proved it works (more or
@@ -2112,32 +2149,6 @@ not introduce bugs in features we're not interested in. We need to
 check that knit has tests for both EOS and ODB that get executed
 regardless of these features being on or off.
 
-*** Indent stream can be made a bit less inefficient                  :story:
-
-Out first attempt at creating a stream with indentation support was a
-bit naive: we are intercepting every character and then deciding if we
-need to change any states in the state machine. Its probably wiser to
-just use manipulators to perform the state transitions and leave the
-=put= undisturbed. We can leave this until we have a good way of
-getting metrics out of the system.
-
-Actually we should also decide if indent stream is needed at all in a
-stitch world.
-
-It was shown that indent streams are useful for at least one use case:
-for comments.
-
-*** Consider creating an iostreams filter for comments                :story:
-
-Seems logic to follow the filtering idea and add a doxygen (or
-generic) commenting filter; one inserts into the stream and it
-automatically inserts all the comment markers such as =/**=, =@brief=
-and so on. Basically takes on the work of =comment_formatter=. This
-would mean we would no longer need the =contents= vector, and we could
-stream directly to the stream, after pushing the comments formatter on
-to it. However, it would probably mean we need to cast the stream to a
-=filtering_ostream= in order to do the push.
-
 *** Use consistently the American spelling for license                :story:
 
 We have a mix of American and British spelling of license (e.g. data
@@ -2995,28 +3006,6 @@ when we support full models.
 - "method identifier": this will be used by the merger to identify
 methods and to link them back to language specific methods. Not
 quite frontend, but not far.
-
-*** Indent generated c++ code using clang                             :story:
-
-We should generate un-indented c++ code and then rely on clang-format
-to do the indentation. We can allow users to supply their own
-configurations and supply those to clang. This can be done via the
-meta-data, or if there is a well defined file for clang, we could use
-it instead.
-
-Note that using clang to manage indentation will make things a lot
-slower. Note also that clang supports Java and may in future support
-C#. See [[http://clang.llvm.org/docs/LibFormat.html][LibFormat]].
-
-Another option is to create fallback modes. The preferred indenter for
-a given language (say c++) may not exist for another language (say
-c#); for these we use a dogen created indenter that is very basic. It
-may support some of the configuration parameters supplied for the
-clang indenter. The key thing is that we take away indenting from the
-formaters - they become flat - and then we always apply the indenter;
-either a clang based one or a simplified one. Either way, the code
-should live in formatters and make use of the language-specific
-folders as required.
 
 *** Dia models are not always user models                             :story:
 
