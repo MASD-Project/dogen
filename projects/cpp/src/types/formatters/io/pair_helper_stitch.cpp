@@ -35,9 +35,10 @@ void pair_helper_stitch(
         const auto second(t.children().back());
 fa.stream() << std::endl;
 fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \\\"\" << " << t.name() << " \"\\\", \";" << std::endl;
-fa.stream() << "    s << \"\\\"first\\\": \" << " << fa.streaming_for_type(first, "i.first") << ";" << std::endl;
-fa.stream() << "    s << \"\\\"second\\\": \" << " << fa.streaming_for_type(second, "i.second") << ";" << std::endl;
+fa.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << t.name() << "\\\"\" << \", \";" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    s << \"\\\"first\\\": \" << " << fa.streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
+fa.stream() << "    s << \"\\\"second\\\": \" << " << fa.streaming_for_type(second, "v.second") << ";" << std::endl;
 fa.stream() << "    s << \" }\";" << std::endl;
 fa.stream() << "    return s;" << std::endl;
 fa.stream() << "}" << std::endl;

@@ -17,9 +17,10 @@ void pair_helper_stitch(
 #>
 
 inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "{ " << "\"__type__\": \"" << <#= t.name() #> "\", ";
-    s << "\"first\": " << <#= fa.streaming_for_type(first, "i.first") #>;
-    s << "\"second\": " << <#= fa.streaming_for_type(second, "i.second") #>;
+    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", ";
+
+    s << "\"first\": " << <#= fa.streaming_for_type(first, "v.first") #> << ", ";
+    s << "\"second\": " << <#= fa.streaming_for_type(second, "v.second") #>;
     s << " }";
     return s;
 }
