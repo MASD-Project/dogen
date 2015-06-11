@@ -65,7 +65,21 @@ boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& o) const {
     auto builder(f.make());
-    builder.add(o.name(), traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+
+    const auto lambda([&](const sml::object& o,
+            const sml::relationship_types rt,
+            const std::string& formatter_name) {
+            const auto i(o.relationships().find(rt));
+            if (i == o.relationships().end())
+                return;
+
+            builder.add(i->second, formatter_name);
+        });
+
+    using rt = sml::relationship_types;
+    lambda(o, rt::weak_associations, ch_fn);
 
     const auto io_fctn(formatters::io::traits::facet_name());
     const auto self_fn(class_implementation_formatter::static_formatter_name());
@@ -75,33 +89,23 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const bool io_integrated(builder.is_integrated(self_fn, io_fctn));
     const bool requires_io(io_enabled && (in_inheritance || io_integrated));
 
+    if (!requires_io)
+        return builder.build();
+
     const auto os(inclusion_constants::std::ostream());
-    if (requires_io) {
-        builder.add(os);
+    builder.add(os);
 
-        const auto si(builder.make_special_includes(o));
-        if (si.requires_stream_manipulators)
-            builder.add(inclusion_constants::boost::io::ios_state());
+    const auto si(builder.make_special_includes(o));
+    if (si.requires_stream_manipulators)
+        builder.add(inclusion_constants::boost::io::ios_state());
 
-        if (si.has_std_string)
-            builder.add(inclusion_constants::boost::algorithm::string());
-    }
+    if (si.has_std_string)
+        builder.add(inclusion_constants::boost::algorithm::string());
 
     const auto io_fn(formatters::io::traits::class_header_formatter_name());
-    const auto lambda([&](const sml::object& o,
-            const sml::relationship_types rt) {
-            const auto i(o.relationships().find(rt));
-            if (i == o.relationships().end())
-                return;
-
-            if (requires_io)
-                builder.add(i->second, io_fn);
-        });
-
-    using rt = sml::relationship_types;
-    lambda(o, rt::weak_associations);
-    lambda(o, rt::regular_associations);
-    lambda(o, rt::parents);
+    lambda(o, rt::weak_associations, io_fn);
+    lambda(o, rt::regular_associations, io_fn);
+    lambda(o, rt::parents, io_fn);
 
     return builder.build();
 }

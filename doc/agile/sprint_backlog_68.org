@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-11 Thu 08:30]
+#+CAPTION: Clock summary at [2015-06-11 Thu 18:51]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:00* |       |      |
+| *Total time*                                                                | *13:23* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:00   |       |      |
-| Active                                                                      |         | 13:00 |      |
+| Stories                                                                     | 13:23   |       |      |
+| Active                                                                      |         | 13:23 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:27 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 8:51 |
+| STARTED Implement class implementation formatter using stitch               |         |       | 9:14 |
 | COMPLETED Add helper methods for equals operator                            |         |       | 0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
@@ -42,6 +42,7 @@ Updates to sprint and product backlog.
 Use downtime to update the manual and / or readme file.
 
 *** STARTED Implement class implementation formatter using stitch     :story:
+    CLOCK: [2015-06-11 Thu 18:28]--[2015-06-11 Thu 18:51] =>  0:23
     CLOCK: [2015-06-10 Wed 22:38]--[2015-06-10 Wed 22:54] =>  0:16
     CLOCK: [2015-06-10 Wed 21:46]--[2015-06-10 Wed 22:37] =>  0:51
     CLOCK: [2015-06-10 Wed 21:25]--[2015-06-10 Wed 21:45] =>  0:20
@@ -65,12 +66,6 @@ Use downtime to update the manual and / or readme file.
 We need to implement a stitch template for the class
 implementation formatter in types, plug it in and start working
 through the diffs.
-
-Problems to solve:
-
-- missing includes for smart pointers even though we have weak
-  relationships.
-- borked models: boost.
 
 Solved problems:
 
@@ -124,6 +119,29 @@ Solved problems:
   could be lifted.
 - more inserter breakage in stereotypes model.
 - missing operator== helper methods.
+- missing includes for smart pointers even though we have weak
+  relationships.
+
+*** Inclusion relies on knowing sml to cpp mapping                    :story:
+
+At present we are including types based on what we think the formatter
+is. For example, we can take a random qname that is part of regular
+associations and ask for its class header formatter name whenever we
+want to include its definition. However, this is not correct; this
+type could be an enumeration for instance, in which case we should
+have asked for the enum header formatter and so the include will not
+be found.
+
+It is not clear why we got away with it up til now. In the types
+header, whenever we try to include all regular associations of a
+class, we should have failed to find anything other than classes so
+=std_model= and =enumeration= should both be broken as they rely on
+primitives and enumerations respectively. Since they have managed to
+find an include, this must mean that we are generating a class header
+formatter include even for types which are not classes.
+
+We need to investigate why this has worked so far and find a proper
+solution.
 
 *** COMPLETED Add helper methods for equals operator                  :story:
     CLOSED: [2015-06-11 Thu 08:29]
