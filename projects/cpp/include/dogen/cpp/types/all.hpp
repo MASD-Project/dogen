@@ -141,6 +141,7 @@
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/serialization/settings_factory.hpp"
+#include "dogen/cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/visitor_header_formatter.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository_factory.hpp"
 #include "dogen/cpp/types/formatters/odb_options_formatter_interface.hpp"

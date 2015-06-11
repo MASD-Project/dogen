@@ -13,21 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-10 Wed 22:56]
+#+CAPTION: Clock summary at [2015-06-11 Thu 08:30]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:09* |       |      |
+| *Total time*                                                                | *13:00* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:09   |       |      |
-| Active                                                                      |         | 12:09 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |
+| Stories                                                                     | 13:00   |       |      |
+| Active                                                                      |         | 13:00 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:27 |
 | STARTED Implement class implementation formatter using stitch               |         |       | 8:51 |
+| COMPLETED Add helper methods for equals operator                            |         |       | 0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-11 Thu 07:38]--[2015-06-11 Thu 07:45] =>  0:07
     CLOCK: [2015-06-10 Wed 15:30]--[2015-06-10 Wed 15:40] =>  0:10
     CLOCK: [2015-06-10 Wed 14:32]--[2015-06-10 Wed 15:25] =>  0:53
     CLOCK: [2015-06-09 Tue 20:45]--[2015-06-09 Tue 20:54] =>  0:09
@@ -66,7 +68,8 @@ through the diffs.
 
 Problems to solve:
 
-- missing operator== helper methods.
+- missing includes for smart pointers even though we have weak
+  relationships.
 - borked models: boost.
 
 Solved problems:
@@ -120,6 +123,14 @@ Solved problems:
   return it as a type. All this logic already exists in extractor and
   could be lifted.
 - more inserter breakage in stereotypes model.
+- missing operator== helper methods.
+
+*** COMPLETED Add helper methods for equals operator                  :story:
+    CLOSED: [2015-06-11 Thu 08:29]
+    CLOCK: [2015-06-11 Thu 07:45]--[2015-06-11 Thu 08:29] =>  0:44
+
+We need to generate equals operators in the same fashion as we
+generated inserters. Add it to types.
 
 *** CANCELLED Add support for "field gathering"                       :story:
     CLOSED: [2015-06-10 Wed 15:24]

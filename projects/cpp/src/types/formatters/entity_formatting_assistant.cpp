@@ -26,6 +26,7 @@
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/types/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
@@ -271,31 +272,41 @@ std::string entity_formatting_assistant::comment_inline(
 }
 
 void entity_formatting_assistant::add_helper_methods() {
-    const auto ci(dynamic_cast<const formattables::class_info*>(&entity_));
-    if (!ci) {
+    const auto c(dynamic_cast<const formattables::class_info*>(&entity_));
+    if (!c) {
         BOOST_LOG_SEV(lg, debug) << "Entity does not require helper methods: "
-                                 << ci->name();
+                                 << c->name();
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << ci->name();
+    BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c->name();
 
     using formatters::types::traits;
     const auto& cifn(traits::class_implementation_formatter_name());
     const auto& fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
-    const bool has_io(is_io_enabled() && (is_io_integrated() ||
-            ci->is_parent() || !ci->parents().empty()));
+    const bool in_inheritance(c->is_parent() || !c->parents().empty());
+    const bool requires_io(is_io_enabled() &&
+        (in_inheritance || is_io_integrated()));
 
-    if (is_types_class_implementation && has_io) {
-        BOOST_LOG_SEV(lg, debug) << " Creating helper methods.";
-        io::helper_methods_formatter f(ci->properties());
+    if (is_types_class_implementation && requires_io) {
+        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
+        io::helper_methods_formatter f(c->properties());
         f.format(stream());
     } else
-        BOOST_LOG_SEV(lg, debug) << " Helper methods not required."
-                                 << " is types class implementation: "
+        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
+                                 << " is types class implementation: ''"
                                  << is_types_class_implementation
-                                 << " has io: " << has_io;
+                                 << "' requires io: " << requires_io << "''";
+
+    if (is_types_class_implementation) {
+        BOOST_LOG_SEV(lg, debug) << "Creating types helper methods.";
+        types::helper_methods_formatter f(c->properties());
+        f.format(stream());
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Type helper methods not required."
+                                 << " is types class implementation: '"
+                                 << is_types_class_implementation << "''";
 }
 
 } } }
