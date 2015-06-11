@@ -220,13 +220,6 @@ type.
 The other option is to align them to SML types and to produce
 different =cpp= types.
 
-*** Remove intermediate fields from dynamic                           :story:
-
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
-
 *** Stitch gcc release builds are borked                              :spike:
 
 When running stitch for a gcc release build we get:
@@ -362,33 +355,6 @@ because the include dependency only has a directive, we cannot tell
 which formatter it belonged to. This would require some augmenting of
 the directive to record the "origination" formatter.
 
-*** Improve references management                                     :story:
-
-At present, we compute model references as follows:
-
-- in dia to sml we first loop through all types and figure out the
-  distinct model names. This is done by creating a "shallow" qname
-  with just the model name and setting its origin type to unknown.
-- when we merge, we take the references of target - the only ones we
-  care about - and then we check that against the list of the models
-  we are about to merge. If there are any missing models we complain
-  (see comments below). We then loop through the list of references
-  and "resolve" the origin type of the model.
-
-Note: We could actually also complain if there are too many models, or
-more cleverly avoid merging those models which are not required. Or
-even more cleverly, we could avoid loading them in the first place, if
-only we could load target first.
-
-A slightly better way of doing this would be:
-
-- in SML create a references updater that takes a model and computes
-  its reference requirements. It could also receive a list of "other"
-  models from which to get their origin types to avoid using =unknown=
-  at all, and checks that all reference requirements have been met.
-- the current step =update_references= is just a call to the
-  references updater, prior to merging, with the target model.
-
 *** Assignment operator seems to pass types by value                  :story:
 
 The code for the operator is as follows:
@@ -446,63 +412,6 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
-*** Implement options copier and remove options from context          :story:
-
-At present the path derivatives expander is getting access to the C++
-options via the expansion context. This was obviously a temporary hack
-to get things moving. The right thing must surely be to add the root
-object to the context, and to read the options from the root
-object. These for now must be populated via the options copier; in the
-future one can imagine that users define them in diagrams.
-
-Actually, the directories supplied to dogen do need to be command line
-options. This is because they tend to be created by CMake on the fly
-as absolute paths and as such cannot be hard-coded into the
-diagram. This being the case, perhaps we should just supply the
-knitting options to the expansion context. This does mean that now
-expansion is a knitting thing - it could have been used by
-stitch. Needs a bit more thinking.
-
-*Tasks to read options from root object*
-
-Not yet clear this is the right solution, but if it is, this is what
-needs to be done.
-
-- check that we have all the required fields in JSON for all of the
-  c++ options we require for now.
-- update options copier to copy these options. In many cases we will
-  have to "redirect" the option. For example, =domain_facet_folder=
-  becomes the types directory and so forth. Having said that we
-  probably won't need these for now.
-- remove options from context, and add root object instead. We may
-  need to do the usual "locate root object" routine.
-- update the path settings factory to read these from the root object.
-- add options to type settings where it makes sense (e.g. disable
-  complete constructor) and implement the type settings factory.
-
-*** Consider dropping the prefix inclusion in expansion               :story:
-
-*New Understanding*
-
-The problem with this is that "directive" does not have any
-meaning. We could get away with dependencies, but directive is very
-open ended. We cannot start changing meta-data keys (e.g. =directive=
-instead of =inclusion_directive=) because that would confuse users; so
-we would end up with two names in two different places, probably even
-more confusing.
-
-*Previous Understanding*
-
-At present we have really long class names because they all need
-"inclusion" on the name. In reality, we have two concepts:
-
-- directives
-- dependencies
-
-We don't need the prefix "inclusion" to make these understandable. We
-can probably get away with removing it from all of the expansion
-classes without significant loss of meaning.
-
 *** Add new c++ warnings to compilation                               :story:
 
 - =-Wunused-private-field=: Seems like this warning is not part of
@@ -554,12 +463,7 @@ dependency. Create a blog post about it.
 
 Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
 
-*** Consider renaming path derivatives                                :story:
-
-We should have a name that implies that all fields of this class were
-obtained by "computation", rather than reading it from somewhere.
-
-*** Consider fields where "qualified name" is not qualified           :story:
+*** Consider changing fields where "qualified name" is not qualified  :story:
 
 At present, the the qualified field name is not always a prefix +
 simple name. For example, for general settings and for stitch, the
@@ -600,11 +504,6 @@ Results in:
 : s << <<
 
 We need to ignore empty expressions.
-
-*** Do we use =formatter_types=?                                      :story:
-
-We need to figure out if we need this enumeration in =cpp::formatters=
-and if not remove it.
 
 *** Remove =cpp_formatters::formatting_error=                         :story:
 
@@ -809,16 +708,10 @@ story in backlog.
 *** Consider renaming formatter groups and model groups to sets       :story:
 
 We should try to keep the words groups and sets to their mathematical
-as much as possible - given our limitations. As such, where we are
-using "group" we probably mean "set" since there is no associated
-operation with the set; it is merely a way of gathering elements.
-
-*** Move sorting of includes into utility                             :story:
-
-When we implemented the sorting of includes we added it directly to
-=cpp_formatters= and to =inclusion_dependency_factory=, copy and
-paste. Maybe we should move this to utility, even if we are only using
-it temporarily, to avoid having problems when the code gets out of sync.
+as much as possible - modulus our limited understanding. As such,
+where we are using "group" we probably mean "set" since there is no
+associated operation with the set; it is merely a way of gathering
+elements.
 
 *** Solve the problem of "relocatable" formatters                     :story:
 
@@ -950,67 +843,6 @@ formaters - they become flat - and then we always apply the indenter;
 either a clang based one or a simplified one. Either way, the code
 should live in formatters and make use of the language-specific
 folders as required.
-
-*** Integration of stitch and dogen                                   :story:
-
-Now that we have implemented stitch and proved it works (more or
-less), we need to think how we can make using stitch from dogen
-easier. At present there is not integration at all:
-
-- users need to create regexes to ensure dogen does not trample on
-  stitch files:
-
-:    --ignore-files-matching-regex .*stitch
-:    --ignore-files-matching-regex .*_stitch.hpp
-:    --ignore-files-matching-regex .*_stitch.cpp
-
-- users need to manually create a header file for each stitch
-  template.
-- users need to create stitch targets and run them to ensure the
-  templates have been expanded. This means its possible to get dogen
-  and stitch out of sync (but for now not a big problem).
-
-In the ideal world, when we knit a model it would be nice if it could
-also stitch as required. This could be achieved as follows:
-
-- Create a meta-data tag that tells dogen a type has an associated
-  stitch template with it.
-- Create =cpp= types that represent the stitch header and
-  implementation.
-- Transformer needs to look for the meta-data tag and instantiate the
-  =cpp= types.
-- Create a =cpp= formatter for the header, as per regular
-  formatters. The slight challenge here is that the formatter needs to
-  be instantiable across facets, which we do not support at the
-  moment.
-- Create a cpp formatter for the implementation which instantiates
-  stitch with the template and uses it to create a file. Same
-  challenge as with the header.
-
-*Previous Understanding*
-
-- stitch can still be integrated with dogen. We could use meta-data to
-  link a formatter (well, any class that needs stitch really, but at
-  present just a formatter) with a stitch template. For example, a
-  =class_header_formatter= could have a "is stitchable" flag set to
-  on. This would then mean that dogen would look for a
-  =class_header_formatter.stitch= file in the same directory as the
-  CPP file. It would then use that to create a
-  =class_header_formatter_stitch.cpp= file. It would also
-  ignore/generate a =class_header_formatter_stitch.hpp= file and
-  automatically add it to the inclusion dependencies of
-  =class_header_formatter.cpp=. These are injected into stitch as we
-  instantiate the template since stitch supports meta-data (we do need
-  a way to inject the meta-data from dogen into the meta-data in the
-  template; perhaps a kvp container passed in to the stitch workflow
-  which could then be handed over to the parser). All these files are
-  automatically added to the list of "exceptions" for housekeeping so
-  that they do not get deleted. However, stitch would not know
-  anything at all about any of this; this is all knitter's
-  functionality. The problem is at present we haven't got a good place
-  to perform the stitching as part of knitter's workflows. Perhaps as
-  part of the expansion, we could set a number of stitch fields which
-  would then be picked up by some knit-specific workflow classes.
 
 *** Consider renaming includers                                       :story:
 
@@ -1155,45 +987,10 @@ Some other tidbits:
   applied in the order provided by the user, with the exception of
   root.
 
-*** Move some of the more verbose logging to fine debug               :story:
-
-We have a category for fine debug logging (=FINE_DEBUG=) but we are
-not making use of it. There is some rather verbose logging that could
-be moved to it. Go through all the logging and move some to
-=FINE_DEBUG=.
-
-One strategy would be to put in the final object of each workflow as
-=DEBUG= (say the expanded model, etc) but the intermediate steps as
-=FINE_DEBUG=. This mirrors the way we investigate the problem: we
-could check if each sub-system has done it's job correctly, and spot
-the one that didn't; we can then just enable that one sub-system's
-=FINE_DEBUG= (when that is supported).
-
-We probably should only do this at the end, as we want to make sure
-that the code generator is usable with full logging on. Or perhaps set
-the default to fine debug. We should also add a command line option,
-perhaps really verbose.
-
 *** Read =generate_preamble= from dynamic object                      :story:
 
 We need to generate the field definitions and update the general
 settings factory.
-
-*** Improve formatters code generation marker                         :story:
-
-Things the marker can/should have:
-
-- model level version;
-- the dogen version too. However, this will make all our tests break
-  every time there is a new commit so perhaps we need to have this
-  switched off by default.
-
-*** Copyright holders is scalar when it should be an array            :story:
-
-At present its only possible to specify a single copyright holder. It
-should be handled the same was as odb parameters, but because that is
-done with a massive hack, we are not going to extend the hack to
-copyright holders.
 
 *** C++ workflow should perform a consistency check                   :story:
 
@@ -1227,51 +1024,6 @@ example, it makes no sense to supply =cpp.type.family= in a dogen
 model but it may make sense to do so in an external model. However,
 this would mean that if a user manually adds a type to a dogen model
 it cannot be extended. Requires a bit of thinking.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-Now that we have subsidiary settings and principal settings do we need
-the rename? We should consider "universal settings" maybe.
-
-*** Populate the "new" =class_info= properties                        :story:
-
-We need a way of populating the class aspects via the type settings
-and via information obtained in the SML model. We may want to create a
-class to handle this logic or maybe it can be done in transformer.
-
-*** Protect against double-initialisation                             :story:
-
-We need to look into static initialisation and make sure the code can
-cope with it being called several times.
-
-At present it seems we would re-register fields, backends, etc so
-multiple initialisation would fail.
-
-In addition to this, we should also look into passing the registrars
-into the initialisers. At present we are calling the static methods
-directly. This is not ideal, because just like with singletons, we are
-hiding the dependencies. We should really pass the registrars in the
-initialise function so we can see the dependencies at the top-level.
 
 *** Add field definition description                                  :story:
 
@@ -1355,6 +1107,88 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Protect against double-initialisation                             :story:
+
+We need to look into static initialisation and make sure the code can
+cope with it being called several times.
+
+At present it seems we would re-register fields, backends, etc so
+multiple initialisation would fail.
+
+In addition to this, we should also look into passing the registrars
+into the initialisers. At present we are calling the static methods
+directly. This is not ideal, because just like with singletons, we are
+hiding the dependencies. We should really pass the registrars in the
+initialise function so we can see the dependencies at the top-level.
+
+*** Copyright holders is scalar when it should be an array            :story:
+
+At present its only possible to specify a single copyright holder. It
+should be handled the same was as odb parameters, but because that is
+done with a massive hack, we are not going to extend the hack to
+copyright holders.
+
+*** Integration of stitch and dogen                                   :story:
+
+Now that we have implemented stitch and proved it works (more or
+less), we need to think how we can make using stitch from dogen
+easier. At present there is not integration at all:
+
+- users need to create regexes to ensure dogen does not trample on
+  stitch files:
+
+:    --ignore-files-matching-regex .*stitch
+:    --ignore-files-matching-regex .*_stitch.hpp
+:    --ignore-files-matching-regex .*_stitch.cpp
+
+- users need to manually create a header file for each stitch
+  template.
+- users need to create stitch targets and run them to ensure the
+  templates have been expanded. This means its possible to get dogen
+  and stitch out of sync (but for now not a big problem).
+
+In the ideal world, when we knit a model it would be nice if it could
+also stitch as required. This could be achieved as follows:
+
+- Create a meta-data tag that tells dogen a type has an associated
+  stitch template with it.
+- Create =cpp= types that represent the stitch header and
+  implementation.
+- Transformer needs to look for the meta-data tag and instantiate the
+  =cpp= types.
+- Create a =cpp= formatter for the header, as per regular
+  formatters. The slight challenge here is that the formatter needs to
+  be instantiable across facets, which we do not support at the
+  moment.
+- Create a cpp formatter for the implementation which instantiates
+  stitch with the template and uses it to create a file. Same
+  challenge as with the header.
+
+*Previous Understanding*
+
+- stitch can still be integrated with dogen. We could use meta-data to
+  link a formatter (well, any class that needs stitch really, but at
+  present just a formatter) with a stitch template. For example, a
+  =class_header_formatter= could have a "is stitchable" flag set to
+  on. This would then mean that dogen would look for a
+  =class_header_formatter.stitch= file in the same directory as the
+  CPP file. It would then use that to create a
+  =class_header_formatter_stitch.cpp= file. It would also
+  ignore/generate a =class_header_formatter_stitch.hpp= file and
+  automatically add it to the inclusion dependencies of
+  =class_header_formatter.cpp=. These are injected into stitch as we
+  instantiate the template since stitch supports meta-data (we do need
+  a way to inject the meta-data from dogen into the meta-data in the
+  template; perhaps a kvp container passed in to the stitch workflow
+  which could then be handed over to the parser). All these files are
+  automatically added to the list of "exceptions" for housekeeping so
+  that they do not get deleted. However, stitch would not know
+  anything at all about any of this; this is all knitter's
+  functionality. The problem is at present we haven't got a good place
+  to perform the stitching as part of knitter's workflows. Perhaps as
+  part of the expansion, we could set a number of stitch fields which
+  would then be picked up by some knit-specific workflow classes.
+
 *** Path derivatives factory generates all possible includes          :story:
 
 At present we are generating all possible includes for all
@@ -1377,31 +1211,6 @@ this type". It seems we need a higher level concept that formatters
 can belong to (similar to the formatter groups). This concept should
 allow one and only one formatter to exist for a given qname - we can't
 have both an enumeration header and a class header.
-
-*** Investigate current support for =std::set= and =std::map=         :story:
-
-It seems that we do not support sets and maps at present. When we
-tried to use a set, we got errors in the guts of test data generation:
-
-: /usr/bin/../lib/gcc/x86_64-linux-gnu/4.9/../../../../include/c++/4.9/bits/stl_function.h:371:20: error: invalid operands to binary expression ('const dogen::sml::qname' and 'const dogen::sml::qname')
-:       { return __x < __y; }
-
-This could be a bug (e.g. we are placing the =operator<= in the wrong
-place etc). Or it could be that we just never needed ordered maps and
-sets so we never added proper support.
-
-*** Consider moving dia diagrams to their own project                 :story:
-
-We originally create a diagrams top-level directory for all of the
-diagrams that generate dogen models. However it may make more sense to
-have the diagrams closer to the project they generate; for example a
-folder within the project. Also, the name "diagrams" is a bit
-misleading. These are not just diagrams, they are also the dogen
-input. We need a name that is a bit more meaningful.
-
-The downside of this approach is that we now have to make references
-across projects; we could use relative paths for this but the targets
-will still look verbose.
 
 *** Field definition templates do not support facet specific defaults :story:
 
@@ -1693,25 +1502,6 @@ documentation, containing module, extensions.
 We need to keep the name because it is now used to locate the model's
 module.
 
-*** Add support for formatter and facet dependencies                  :story:
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
-
 *** Use of disabled facets in non-generatable types                   :story:
 
 #+begin_quote
@@ -1860,95 +1650,6 @@ their own problems:
 These can be replaced by a single enumeration that indicates if the
 type/model is target or not.
 
-*** Tidy-up test models                                               :story:
-
-#+begin_quote
-*Story*: As a dogen developer, I want to be able to understand the
-test models quickly so that I know at which model to look at when
-doing a change.
-#+end_quote
-
-We have a lot of fine grained test models for historic reasons. A lot
-of these could be collapsed into a smaller number of models, focused
-on testing a set of well defined features.
-
-One thing to keep in mind is that when we do fundamental work (such as
-moving from the old formatting architecture to the new one), it is
-really useful to have small, incremental test models because we can
-then get tests to pass, one by one, as we refactor. We don't want to
-move to a world where you need to implement all the features in one
-go.
-
-**** Models that need changing
-
-Merge the following models into a =basic= or =trivial= model (no
-aggregation, no association):
-
-- classes_in_a_package
-- classes_inout_package
-- classes_without_package
-- class_in_a_package
-- class_without_attributes
-- class_without_package
-- stand_alone_class
-
-We should also check the combined model has all the scenarios
-described in [[*Cross%20package%20referencing%20tests][Cross package referencing tests]].
-
-Merge the following models into stereotypes:
-
-- enumeration
-- exception
-
-Consider deleting the comments model and make sure we have comments in
-all models with the same features:
-
-- top-level comment for the model
-- package level comment
-- notes
-
-These models are at the right level of granularity but need renaming:
-
-- all_primitives: primitives or primitives_model to line up with boost
-  and std.
-- trivial_association: association
-- trivial_inheritance: inheritance
-
-**** Models that do not need changing and why
-
-These models test other models, and we cannot remove the postfix
-=_model= to avoid clashes with namespaces:
-
-- boost_model
-- std_model
-
-These models test command line options, which means they cannot be
-merged:
-
-- disable_cmakelists
-- disable_facet_folders
-- disable_full_ctor
-- dmp
-- enable_facet_domain
-- enable_facet_hash
-- enable_facet_io
-- enable_facet_serialization
-- split_project
-
-These models test features which have enough scenarios to justify
-keeping them in isolation:
-
-- database
-
-These models test dia features and must be kept isolated:
-
-- compressed
-- two_layers_with_objects
-
-**** Add objects, enumerations and exceptions to comments model
-
-At present we are only testing packages in comments.
-
 *** Improve error message for blank types                             :story:
 
 #+begin_quote
@@ -1989,7 +1690,15 @@ have some kind of support at present, so it should be a matter of
 compiling on this mode. However, as we have gcc 4.7 on OSX and
 Windows, we would have to upgrade these compilers first.
 
-We have already proven that the code builds out of the box in sprint 50.
+We have already proven that the code builds out of the box in
+sprint 50.
+
+Actually, it seems we are not using proper CMake idioms to pick up
+compiler features, as explained here:
+
+[[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+
+We need to implement this using proper CMake idioms.
 
 *** Usage of external module path in cmakelists                       :story:
 
@@ -2002,23 +1711,6 @@ When we moved the test models into =test_models= the target name did
 not change. It should have changed to:
 
 : dogen_test_models_all_primitives
-
-*** Rename the =database= test model to =odb=                         :story:
-
-This name is a bit misleading, this is not a generic database model
-but its designed to specifically test odb.
-
-*** Enable package sanity tests for Linux                              :epic:
-
-Now that we will be using docker, we could create a simple =systemd=
-ctest script that runs as root in a docker container:
-
-- it monitors the GDrive location for files that match a given regular
-  expression (e.g. we need to make sure we match the bitness and the
-  platform)
-- if it finds one, it installs it and runs sanity scripts.
-- it then uninstalls it and makes sure the docker image is identical
-  to how we started (however that is done in docker)
 
 *** The =types= facet should always be on                             :story:
 
@@ -2199,7 +1891,7 @@ We are manually copying a lot of shared objects from locally built
 third party libraries when creating packages, this should be replaced
 with appropriate dependencies (at least for Debian packages).
 
-*** Fix cp error on cmake with local third-party packages             :story:
+*** Fix =cp= error on cmake with local third-party packages           :story:
 
 We are getting strange errors in cmake:
 
@@ -2958,6 +2650,176 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Tidy-up test models                                               :story:
+
+#+begin_quote
+*Story*: As a dogen developer, I want to be able to understand the
+test models quickly so that I know at which model to look at when
+doing a change.
+#+end_quote
+
+We have a lot of fine grained test models for historic reasons. A lot
+of these could be collapsed into a smaller number of models, focused
+on testing a set of well defined features.
+
+One thing to keep in mind is that when we do fundamental work (such as
+moving from the old formatting architecture to the new one), it is
+really useful to have small, incremental test models because we can
+then get tests to pass, one by one, as we refactor. We don't want to
+move to a world where you need to implement all the features in one
+go.
+
+Note: we should take this opportunity to fix naming inconsistencies in
+test models such as some models having the word "model" such as
+=std_model= and other not (=enumeration=, etc).
+
+**** Models that need changing
+
+Merge the following models into a =basic= or =trivial= model (no
+aggregation, no association):
+
+- classes_in_a_package
+- classes_inout_package
+- classes_without_package
+- class_in_a_package
+- class_without_attributes
+- class_without_package
+- stand_alone_class
+
+We should also check the combined model has all the scenarios
+described in [[*Cross%20package%20referencing%20tests][Cross package referencing tests]].
+
+Merge the following models into stereotypes:
+
+- enumeration
+- exception
+
+Consider deleting the comments model and make sure we have comments in
+all models with the same features:
+
+- top-level comment for the model
+- package level comment
+- notes
+
+These models are at the right level of granularity but need renaming:
+
+- all_primitives: primitives or primitives_model to line up with boost
+  and std.
+- trivial_association: association
+- trivial_inheritance: inheritance
+
+**** Models that do not need changing and why
+
+These models test other models, and we cannot remove the postfix
+=_model= to avoid clashes with namespaces:
+
+- boost_model
+- std_model
+
+These models test command line options, which means they cannot be
+merged:
+
+- disable_cmakelists
+- disable_facet_folders
+- disable_full_ctor
+- dmp
+- enable_facet_domain
+- enable_facet_hash
+- enable_facet_io
+- enable_facet_serialization
+- split_project
+
+These models test features which have enough scenarios to justify
+keeping them in isolation:
+
+- database
+
+These models test dia features and must be kept isolated:
+
+- compressed
+- two_layers_with_objects
+
+**** Add objects, enumerations and exceptions to comments model
+
+At present we are only testing packages in comments.
+
+**** Rename the =database= test model to =odb=
+
+This name is a bit misleading, this is not a generic database model
+but its designed to specifically test odb.
+
+*** Add support for formatter and facet dependencies                  :story:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+*** Improve formatters code generation marker                         :story:
+
+Things the marker can/should have:
+
+- model level version;
+- the dogen version too. However, this will make all our tests break
+  every time there is a new commit so perhaps we need to have this
+  switched off by default.
+
+*** Move some of the more verbose logging to fine debug               :story:
+
+We have a category for fine debug logging (=FINE_DEBUG=) but we are
+not making use of it. There is some rather verbose logging that could
+be moved to it. Go through all the logging and move some to
+=FINE_DEBUG=.
+
+One strategy would be to put in the final object of each workflow as
+=DEBUG= (say the expanded model, etc) but the intermediate steps as
+=FINE_DEBUG=. This mirrors the way we investigate the problem: we
+could check if each sub-system has done it's job correctly, and spot
+the one that didn't; we can then just enable that one sub-system's
+=FINE_DEBUG= (when that is supported).
+
+We probably should only do this at the end, as we want to make sure
+that the code generator is usable with full logging on. Or perhaps set
+the default to fine debug. We should also add a command line option,
+perhaps really verbose.
+
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
 We need to tidy-up comment formatter. We had introduced
@@ -3183,6 +3045,18 @@ in a namespace (say =sml=) refers to types in that namespace with
 qualification (say =sml::qname=). We need to do a grep in each project
 to look for instances of a namespace and ensure they are valid.
 
+*** Investigate current support for =std::set= and =std::map=         :story:
+
+It seems that we do not support sets and maps at present. When we
+tried to use a set, we got errors in the guts of test data generation:
+
+: /usr/bin/../lib/gcc/x86_64-linux-gnu/4.9/../../../../include/c++/4.9/bits/stl_function.h:371:20: error: invalid operands to binary expression ('const dogen::sml::qname' and 'const dogen::sml::qname')
+:       { return __x < __y; }
+
+This could be a bug (e.g. we are placing the =operator<= in the wrong
+place etc). Or it could be that we just never needed ordered maps and
+sets so we never added proper support.
+
 *** Add support for =std::forward_list=                               :story:
 
 We have been using =std::list= quite liberally. However, on hindsight,
@@ -3193,6 +3067,40 @@ solving the missing boost serialisation problem.
 
 We seem to have partial support for this at present; the type is in
 library.
+
+*** Add support for boost and/or std tuple                            :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of tuples in dogen so
+that I don't have to manually generate code for types that use it.
+#+end_quote
+
+It would be nice to be able to use =std::tuple= and/or =boost::tuple=
+from dogen. The processing would be rather similar to containers. It
+would be even nicer if one could associate an enumeration to a tuple
+so that the gets would be more meaningful, e.g.:
+
+: std::get<my_field>()
+
+rather than
+
+: std::get<0>()
+
+Using =std::tuple= would mean we'd have to create our own serialisers
+for it most likely.
+
+*** Add support for posix_time_zone                                   :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of boost posix_time_zone
+so that I don't have to manually generate code for types that use it.
+#+end_quote
+
+At present we need to use std::string to convey time zone
+information. We should be able to use the time zones available in
+boost date time library.
+
+See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
 *** Use diagram files to setup test models in cmakefile               :story:
 
@@ -3247,17 +3155,6 @@ then implement the file one as an adaptor to the stream class.
 This traversal was designed for tagger but yet it does not resolve
 =type= into one of the sub-classes, forcing tagger to implement
 visitation to resolve the types. We should improve the traversal.
-
-*** Version number relies on latest commit in master                  :story:
-
-When trying to build off of a tag, we noticed that the version number
-is always of the latest commit in master. This means that trying to
-generate packages for tag =v0.50.2410= results in packages with a
-version after that like say =v0.50.2415=. We should look at the
-current commit in master rather than the latest one.
-
-The current workaround is to manually sett the minor version just
-before closing the sprint and then reset it back.
 
 *** Add support for ignoring types                                    :story:
 
@@ -3464,6 +3361,10 @@ file. There is a file output for boost log, but its not configurable
 enough to accept a =boost::log= stream. We should send an email to
 mailing list asking for help.
 
+Also we need to duplicate the test name and the log file name. But
+since we will be moving to catch maybe we shouldn't spent too long in
+this.
+
 *** Make test data generator more configurable                        :story:
 
 #+begin_quote
@@ -3512,25 +3413,6 @@ comprehensive CMake build. All we need is:
 The idea is that with this the user could immediately generate a
 binary without any further configuration required.
 
-*** Caching qname lookups                                             :story:
-
-Once the model has been merged and resolved, all qnames in the model
-all known to resolve to a valid type, model or module. This means we
-could cache in the qname itself a pointer to the object the qname
-resolves into. There are two problems with this approach:
-
-- we do not have a base class that covers types, models and
-  module. one could be created (=modeling_entity=?) with an associated
-  visitor. but then:
-- formatters are not designed to think at the =modeling_entity= level;
-  a formatter that does types may not necessarily be able to do
-  modules or models. Thus we would need to convert from a
-  =modeling_entity= to a type, model or module before we get to the
-  formatter.
-
-However one imagines that a great number of lookups would be avoided
-if this was possible.
-
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
@@ -3573,13 +3455,32 @@ the merger. Potentially this could be called =partial_model=.
 In fact we may need to take this a step further and follow the same
 approach as [[https://github.com/avao/Codge/tree/master/Src/Codge.DataModel][Cogen]]: having exactly the same types, but perhaps in a
 separate namespace; one version represents the "connected" model and
-the other the "disconnected" model. The idea being that on the
-connected model has references to types rather than relaying on qname
-look-ups. So for example all the relationships then become shared
-pointers to types and so on. The problem with this approach is that we
-then need to have a common base type from where all types inherit and
-this will mean that we will have to visit a lot to dispatch types to
-their leaves.
+the other the "disconnected" (or intermediate, or partial) model. The
+idea being that on the connected model has references to types rather
+than relaying on qname look-ups. So for example all the relationships
+then become shared pointers to types and so on. The problem with this
+approach is that we then need to have a common base type from where
+all types inherit and this will mean that we will have to visit a lot
+to dispatch types to their leaves.
+
+Merged with other story:
+
+Once the model has been merged and resolved, all qnames in the model
+all known to resolve to a valid type, model or module. This means we
+could cache in the qname itself a pointer to the object the qname
+resolves into. There are two problems with this approach:
+
+- we do not have a base class that covers types, models and
+  module. one could be created (=modeling_entity=?) with an associated
+  visitor. but then:
+- formatters are not designed to think at the =modeling_entity= level;
+  a formatter that does types may not necessarily be able to do
+  modules or models. Thus we would need to convert from a
+  =modeling_entity= to a type, model or module before we get to the
+  formatter.
+
+However one imagines that a great number of lookups would be avoided
+if this was possible.
 
 *** Rename nested qname to composite qname                            :story:
 
@@ -3599,27 +3500,6 @@ types.
 
 We should just follow the composite pattern in the naming.
 
-*** Injection framework                                                :epic:
-
-We need a more generic way of handling system types injection into
-models. This is because there is a number of things that can be
-derived from the existing model types:
-
-- keys
-- diff support
-- reflection
-- cache code
-- etc.
-
-So we need to:
-
-- make injector a composite of injectors that do the real work such as
-  =key_injector=. internally =injector= just delegates the work to
-  these classes.
-- injector decides which internal injectors to use based on options
-  passed in.
-- in the IoC spirit, we should probably create a =injector_interface=.
-
 *** Check concept properties for identity                             :story:
 
 When we added concepts we didn't had a link to the processing of
@@ -3627,62 +3507,6 @@ identity attributes. This means that if we get a property via modeling
 a concept it is not processed and added to the keys.
 
 Update injector to follow concepts.
-
-*** SML models could have a model classification                       :epic:
-
-Consider creating an enumeration for model classification (e.g. type
-of the model):
-
-- relational model
-- core domain model
-- generic sub-domain model
-- segregated core model
-
-This still requires a lot of analysis work around the DDD book.
-
-*Merged with modes of operation story:*
-
-Create "modes" of operation: relational, object-oriented and
-procedural. they limit the types available in SML. relational only
-allows primitives plus relational commands (FK and PK; FK is when
-using a model type, PK is a marker on a property). procedural only
-allows primitives plus model types. we will need pointer support for
-this. object oriented is the current mode. the modes are validated in
-the middle end.
-
-*** Add support for boost and/or std tuple                            :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of tuples in dogen so
-that I don't have to manually generate code for types that use it.
-#+end_quote
-
-It would be nice to be able to use =std::tuple= and/or =boost::tuple=
-from dogen. The processing would be rather similar to containers. It
-would be even nicer if one could associate an enumeration to a tuple
-so that the gets would be more meaningful, e.g.:
-
-: std::get<my_field>()
-
-rather than
-
-: std::get<0>()
-
-Using =std::tuple= would mean we'd have to create our own serialisers
-for it most likely.
-
-*** Add support for posix_time_zone                                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of boost posix_time_zone
-so that I don't have to manually generate code for types that use it.
-#+end_quote
-
-At present we need to use std::string to convey time zone
-information. We should be able to use the time zones available in
-boost date time library.
-
-See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
 *** Build shared objects instead of dynamic libraries                 :story:
 
@@ -3703,42 +3527,6 @@ We probably need a dogen command line option to determine what to
 build so that users are not forced to always build static / shared
 libraries. We should make sure one of the tests is using a static
 library to make sure this scenario doesn't get borked.
-
-*** IoC work                                                           :epic:
-
-All stories related to IoC work are tracked here.
-
-*New Understanding*:
-
-in reality, there is really only one place where IoC makes sense: in
-the workflows. It would be great if one could pass in something akin
-to a IoC container into the workflow's constructor and then use the
-container to obtain access to all services via interfaces. Using
-sml::workflow as an example, one could have:
-
-- container_interface which returns grapher_interface,
-  processor_interface, etc.
-- the container could even return references to the these interfaces
-  and own the lifetime of the objects.
-- this would then allow us to provide mock container interface
-  implementations returning mock services.
-
-However:
-
-- it seems like a lot of moving parts just to allow testing the
-  workflow in isolation. this is particularly more so in the case of
-  the workflows we have, which are fairly trivial. perhaps we should
-  consider this approach when dogen is generating the interfaces
-  automatically as this would require a lot of manual work for little
-  gain.
-
-*Old understanding*:
-
-- add workflow_interface to SML.
-- we should be doing a bit more IoC, particularly with inclusion
-  manager, location manager etc. In order to do so we could define
-  interfaces for these classes and provide mocks for the tests. This
-  would make the tests considerably smaller.
 
 *** Refactor node according to composite pattern in dia to sml        :story:
 
@@ -3901,21 +3689,6 @@ generators.
 At present we are still doing C++-03 iterations in the STL IO files
 such as =vector_io=, =list_io=, etc. We should be using the new =for=
 syntax for C++-11.
-
-*** Investigate GDB visualisers for generated models                  :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like pretty-printing for my types in
-GDB so that I debug more easily programs using dogen models.
-#+end_quote
-
-It would be great if the code generator created GDB visualisers for
-the types in a generated models such that one could inspect values of
-STL containers with types of that model.
-
-- [[http://sourceware.org/gdb/onlinedocs/gdb/Pretty-Printing.html][Pretty printing]]
-- [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
-- [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
 *** Add an includer for all includers                                 :story:
 
@@ -5568,6 +5341,42 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Version number relies on latest commit in master                  :story:
+
+When trying to build off of a tag, we noticed that the version number
+is always of the latest commit in master. This means that trying to
+generate packages for tag =v0.50.2410= results in packages with a
+version after that like say =v0.50.2415=. We should look at the
+current commit in master rather than the latest one.
+
+The current workaround is to manually sett the minor version just
+before closing the sprint and then reset it back.
+
+*** Enable package sanity tests for Linux                              :epic:
+
+Now that we will be using docker, we could create a simple =systemd=
+ctest script that runs as root in a docker container:
+
+- it monitors the GDrive location for files that match a given regular
+  expression (e.g. we need to make sure we match the bitness and the
+  platform)
+- if it finds one, it installs it and runs sanity scripts.
+- it then uninstalls it and makes sure the docker image is identical
+  to how we started (however that is done in docker)
+
+*** Consider moving dia diagrams to their own project                 :story:
+
+We originally create a diagrams top-level directory for all of the
+diagrams that generate dogen models. However it may make more sense to
+have the diagrams closer to the project they generate; for example a
+folder within the project. Also, the name "diagrams" is a bit
+misleading. These are not just diagrams, they are also the dogen
+input. We need a name that is a bit more meaningful.
+
+The downside of this approach is that we now have to make references
+across projects; we could use relative paths for this but the targets
+will still look verbose.
+
 *** Add Travis support for 32-bits                                    :story:
 
 It seems its fairly straightforward to add 32-bit support to Travis,
@@ -5968,6 +5777,100 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Investigate GDB visualisers for generated models                  :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I would like pretty-printing for my types in
+GDB so that I debug more easily programs using dogen models.
+#+end_quote
+
+It would be great if the code generator created GDB visualisers for
+the types in a generated models such that one could inspect values of
+STL containers with types of that model.
+
+- [[http://sourceware.org/gdb/onlinedocs/gdb/Pretty-Printing.html][Pretty printing]]
+- [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
+- [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
+
+*** SML models could have a model classification                       :epic:
+
+Consider creating an enumeration for model classification (e.g. type
+of the model):
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work around the DDD book.
+
+*Merged with modes of operation story:*
+
+Create "modes" of operation: relational, object-oriented and
+procedural. they limit the types available in SML. relational only
+allows primitives plus relational commands (FK and PK; FK is when
+using a model type, PK is a marker on a property). procedural only
+allows primitives plus model types. we will need pointer support for
+this. object oriented is the current mode. the modes are validated in
+the middle end.
+
+*** Injection framework                                                :epic:
+
+We need a more generic way of handling system types injection into
+models. This is because there is a number of things that can be
+derived from the existing model types:
+
+- keys
+- diff support
+- reflection
+- cache code
+- etc.
+
+So we need to:
+
+- make injector a composite of injectors that do the real work such as
+  =key_injector=. internally =injector= just delegates the work to
+  these classes.
+- injector decides which internal injectors to use based on options
+  passed in.
+- in the IoC spirit, we should probably create a =injector_interface=.
+
+*** IoC work                                                           :epic:
+
+All stories related to IoC work are tracked here.
+
+*New Understanding*:
+
+in reality, there is really only one place where IoC makes sense: in
+the workflows. It would be great if one could pass in something akin
+to a IoC container into the workflow's constructor and then use the
+container to obtain access to all services via interfaces. Using
+sml::workflow as an example, one could have:
+
+- container_interface which returns grapher_interface,
+  processor_interface, etc.
+- the container could even return references to the these interfaces
+  and own the lifetime of the objects.
+- this would then allow us to provide mock container interface
+  implementations returning mock services.
+
+However:
+
+- it seems like a lot of moving parts just to allow testing the
+  workflow in isolation. this is particularly more so in the case of
+  the workflows we have, which are fairly trivial. perhaps we should
+  consider this approach when dogen is generating the interfaces
+  automatically as this would require a lot of manual work for little
+  gain.
+
+*Old understanding*:
+
+- add workflow_interface to SML.
+- we should be doing a bit more IoC, particularly with inclusion
+  manager, location manager etc. In order to do so we could define
+  interfaces for these classes and provide mocks for the tests. This
+  would make the tests considerably smaller.
 
 *** Consider creating a UI for editing type libraries                 :story:
 

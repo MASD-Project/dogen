@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-11 Thu 21:55]
+#+CAPTION: Clock summary at [2015-06-11 Thu 22:36]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *14:34* |       |       |
+| *Total time*                                                                | *15:14* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 14:34   |       |       |
-| Active                                                                      |         | 14:34 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:27 |
+| Stories                                                                     | 15:14   |       |       |
+| Active                                                                      |         | 15:14 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
@@ -30,6 +30,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-11 Thu 21:56]--[2015-06-11 Thu 22:36] =>  0:40
     CLOCK: [2015-06-11 Thu 07:38]--[2015-06-11 Thu 07:45] =>  0:07
     CLOCK: [2015-06-10 Wed 15:30]--[2015-06-10 Wed 15:40] =>  0:10
     CLOCK: [2015-06-10 Wed 14:32]--[2015-06-10 Wed 15:25] =>  0:53
@@ -37,6 +38,8 @@
     CLOCK: [2015-06-08 Mon 18:01]--[2015-06-08 Mon 18:09] =>  0:08
 
 Updates to sprint and product backlog.
+
+- Backlog reviewed up to "In next major release".
 
 *** Updates to the manual and readme files                            :story:
 
@@ -227,6 +230,55 @@ formatter produces the same include file as does a enumeration header
 formatter it all works. We probably need a better solution but it will
 require quite a bit of thinking. Story added to backlog.
 
+*** COMPLETED Consider dropping the prefix inclusion in formattables  :story:
+    CLOSED: [2015-06-11 Thu 22:01]
+
+*Rationale*: Considered, but we need to keep it. The names just don't
+make any sense without it.
+
+*New Understanding*
+
+The problem with this is that "directive" does not have any
+meaning. We could get away with dependencies, but directive is very
+open ended. We cannot start changing meta-data keys (e.g. =directive=
+instead of =inclusion_directive=) because that would confuse users; so
+we would end up with two names in two different places, probably even
+more confusing.
+
+*Previous Understanding*
+
+At present we have really long class names because they all need
+"inclusion" on the name. In reality, we have two concepts:
+
+- directives
+- dependencies
+
+We don't need the prefix "inclusion" to make these understandable. We
+can probably get away with removing it from all of the expansion
+classes without significant loss of meaning.
+
+*** COMPLETED Consider renaming path derivatives                      :story:
+    CLOSED: [2015-06-11 Thu 22:03]
+
+*Rationale*: Considered, but since we now have a clear separation
+between settings (stuff read off of the meta-data) and formattables
+(stuff generated from somewhere) this is no longer as important.
+
+We should have a name that implies that all fields of this class were
+obtained by "computation", rather than reading it from somewhere.
+
+*** Do we use =formatter_types=?                                      :story:
+
+We need to figure out if we need this enumeration in =cpp::formatters=
+and if not remove it.
+
+*** Remove intermediate fields from dynamic                           :story:
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
+
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:
     CLOSED: [2015-06-10 Wed 18:52]
@@ -262,3 +314,58 @@ would mean we would no longer need the =contents= vector, and we could
 stream directly to the stream, after pushing the comments formatter on
 to it. However, it would probably mean we need to cast the stream to a
 =filtering_ostream= in order to do the push.
+*** CANCELLED Implement options copier and remove options from context :story:
+    CLOSED: [2015-06-11 Thu 22:00]
+
+*Rationale*: does not make sense in a non-expansion world.
+
+At present the path derivatives expander is getting access to the C++
+options via the expansion context. This was obviously a temporary hack
+to get things moving. The right thing must surely be to add the root
+object to the context, and to read the options from the root
+object. These for now must be populated via the options copier; in the
+future one can imagine that users define them in diagrams.
+
+Actually, the directories supplied to dogen do need to be command line
+options. This is because they tend to be created by CMake on the fly
+as absolute paths and as such cannot be hard-coded into the
+diagram. This being the case, perhaps we should just supply the
+knitting options to the expansion context. This does mean that now
+expansion is a knitting thing - it could have been used by
+stitch. Needs a bit more thinking.
+
+*Tasks to read options from root object*
+
+Not yet clear this is the right solution, but if it is, this is what
+needs to be done.
+
+- check that we have all the required fields in JSON for all of the
+  c++ options we require for now.
+- update options copier to copy these options. In many cases we will
+  have to "redirect" the option. For example, =domain_facet_folder=
+  becomes the types directory and so forth. Having said that we
+  probably won't need these for now.
+- remove options from context, and add root object instead. We may
+  need to do the usual "locate root object" routine.
+- update the path settings factory to read these from the root object.
+- add options to type settings where it makes sense (e.g. disable
+  complete constructor) and implement the type settings factory.
+*** CANCELLED Move sorting of includes into utility                   :story:
+    CLOSED: [2015-06-11 Thu 22:07]
+
+*Rationale*: no point now when we are almost about to finish
+converting types to the new world.
+
+When we implemented the sorting of includes we added it directly to
+=cpp_formatters= and to =inclusion_dependency_factory=, copy and
+paste. Maybe we should move this to utility, even if we are only using
+it temporarily, to avoid having problems when the code gets out of sync.
+
+*** CANCELLED Populate the "new" =class_info= properties              :story:
+    CLOSED: [2015-06-11 Thu 22:13]
+
+*Rationale*: We removed new class info.
+
+We need a way of populating the class aspects via the type settings
+and via information obtained in the SML model. We may want to create a
+class to handle this logic or maybe it can be done in transformer.
