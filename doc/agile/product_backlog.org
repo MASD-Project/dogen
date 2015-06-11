@@ -1355,6 +1355,29 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Path derivatives factory generates all possible includes          :story:
+
+At present we are generating all possible includes for all
+formatters. The problem is that we do not have a way to map a SML type
+to a set of  C++ formatters, so to make our life easier we simply
+generate them all. This has another (lucky) side-effect: when we are
+doing the includes, we do not know what formatter the qname belongs to
+so we just default to the class header formatter. As it happens this
+is not a problem (as explained [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_68.org#inclusion-relies-on-knowing-sml-to-cpp-mapping][here]]).
+
+We need a proper solution for this:
+
+- only generate includes for the formatters that need them;
+- find a way to look for the right formatter given a qname.
+
+This last bit requires a bit of thinking. From a certain angle, we
+don't particularly care about formatters - we are simply asking for
+"the domain header for this type" or the "serialisation header for
+this type". It seems we need a higher level concept that formatters
+can belong to (similar to the formatter groups). This concept should
+allow one and only one formatter to exist for a given qname - we can't
+have both an enumeration header and a class header.
+
 *** Investigate current support for =std::set= and =std::map=         :story:
 
 It seems that we do not support sets and maps at present. When we
