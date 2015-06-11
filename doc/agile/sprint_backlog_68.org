@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-11 Thu 21:31]
+#+CAPTION: Clock summary at [2015-06-11 Thu 21:55]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *14:11* |       |       |
+| *Total time*                                                                | *14:34* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 14:11   |       |       |
-| Active                                                                      |         | 14:11 |       |
+| Stories                                                                     | 14:34   |       |       |
+| Active                                                                      |         | 14:34 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:27 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
+| COMPLETED Inclusion relies on knowing sml to cpp mapping                    |         |       |  0:23 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -197,7 +198,9 @@ to the includer.
 We need to copy the logic in transformer to see if a type needs stream
 manipulator includes or not.
 
-*** Inclusion relies on knowing sml to cpp mapping                    :story:
+*** COMPLETED Inclusion relies on knowing sml to cpp mapping          :story:
+    CLOSED: [2015-06-11 Thu 21:55]
+    CLOCK: [2015-06-11 Thu 21:32]--[2015-06-11 Thu 21:55] =>  0:23
 
 At present we are including types based on what we think the formatter
 is. For example, we can take a random qname that is part of regular
@@ -217,6 +220,12 @@ formatter include even for types which are not classes.
 
 We need to investigate why this has worked so far and find a proper
 solution.
+
+The reason why this works is because we are generating all possible
+includes for all possible formatters. And since a class header
+formatter produces the same include file as does a enumeration header
+formatter it all works. We probably need a better solution but it will
+require quite a bit of thinking. Story added to backlog.
 
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:
