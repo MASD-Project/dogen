@@ -23,8 +23,8 @@ inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>&
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << <#= fa.streaming_for_type(key, "i->first") #>;
-        s << "}, {" << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << <#= fa.streaming_for_type(key, "i->second") #>;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << <#= fa.streaming_for_type(value, "i->second") #>;
         s << " } ]";
     }
     s << " ] ";

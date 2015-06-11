@@ -16,11 +16,12 @@ void optional_helper_stitch(
 #>
 
 inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "{ " << "\"__type__\": \"" << <#= t.name() #> "\", "
+    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", ";
+
     if (v)
-        s << "\"data\": " << <#= fa.streaming_for_type(containee, "*v") #> << ";"
+        s << "\"data\": " << <#= fa.streaming_for_type(containee, "*v") #>;
     else
-        s << "\"data\": " << "\"<empty>\"";
+        s << "\"data\": ""\"<empty>\"";
     s << " }";
     return s;
 }

@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-11 Thu 19:08]
-| <75>                                                                        |         |       |      |
-| Headline                                                                    | Time    |       |      |
-|-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:39* |       |      |
-|-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:39   |       |      |
-| Active                                                                      |         | 13:39 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:27 |
-| STARTED Implement class implementation formatter using stitch               |         |       | 9:30 |
-| COMPLETED Add helper methods for equals operator                            |         |       | 0:44 |
-| CANCELLED Add support for "field gathering"                                 |         |       | 0:56 |
-| COMPLETED Hack inclusion to take into account stream manipulation           |         |       | 1:02 |
+#+CAPTION: Clock summary at [2015-06-11 Thu 21:31]
+| <75>                                                                        |         |       |       |
+| Headline                                                                    | Time    |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| *Total time*                                                                | *14:11* |       |       |
+|-----------------------------------------------------------------------------+---------+-------+-------|
+| Stories                                                                     | 14:11   |       |       |
+| Active                                                                      |         | 14:11 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:27 |
+| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
+| COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
+| CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
+| COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -41,7 +41,9 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** STARTED Implement class implementation formatter using stitch     :story:
+*** COMPLETED Implement class implementation formatter using stitch   :story:
+    CLOSED: [2015-06-11 Thu 21:31]
+    CLOCK: [2015-06-11 Thu 20:59]--[2015-06-11 Thu 21:31] =>  0:32
     CLOCK: [2015-06-11 Thu 18:52]--[2015-06-11 Thu 19:08] =>  0:16
     CLOCK: [2015-06-11 Thu 18:28]--[2015-06-11 Thu 18:51] =>  0:23
     CLOCK: [2015-06-10 Wed 22:38]--[2015-06-10 Wed 22:54] =>  0:16
@@ -127,27 +129,6 @@ Solved problems:
 - missing includes for smart pointers even though we have weak
   relationships.
 
-*** Inclusion relies on knowing sml to cpp mapping                    :story:
-
-At present we are including types based on what we think the formatter
-is. For example, we can take a random qname that is part of regular
-associations and ask for its class header formatter name whenever we
-want to include its definition. However, this is not correct; this
-type could be an enumeration for instance, in which case we should
-have asked for the enum header formatter and so the include will not
-be found.
-
-It is not clear why we got away with it up til now. In the types
-header, whenever we try to include all regular associations of a
-class, we should have failed to find anything other than classes so
-=std_model= and =enumeration= should both be broken as they rely on
-primitives and enumerations respectively. Since they have managed to
-find an include, this must mean that we are generating a class header
-formatter include even for types which are not classes.
-
-We need to investigate why this has worked so far and find a proper
-solution.
-
 *** COMPLETED Add helper methods for equals operator                  :story:
     CLOSED: [2015-06-11 Thu 08:29]
     CLOCK: [2015-06-11 Thu 07:45]--[2015-06-11 Thu 08:29] =>  0:44
@@ -215,6 +196,27 @@ to the includer.
 
 We need to copy the logic in transformer to see if a type needs stream
 manipulator includes or not.
+
+*** Inclusion relies on knowing sml to cpp mapping                    :story:
+
+At present we are including types based on what we think the formatter
+is. For example, we can take a random qname that is part of regular
+associations and ask for its class header formatter name whenever we
+want to include its definition. However, this is not correct; this
+type could be an enumeration for instance, in which case we should
+have asked for the enum header formatter and so the include will not
+be found.
+
+It is not clear why we got away with it up til now. In the types
+header, whenever we try to include all regular associations of a
+class, we should have failed to find anything other than classes so
+=std_model= and =enumeration= should both be broken as they rely on
+primitives and enumerations respectively. Since they have managed to
+find an include, this must mean that we are generating a class header
+formatter include even for types which are not classes.
+
+We need to investigate why this has worked so far and find a proper
+solution.
 
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:

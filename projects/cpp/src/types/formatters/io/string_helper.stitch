@@ -10,7 +10,6 @@ void string_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& /*t*/) {
 #>
-
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
     boost::replace_all(s, "\n", "<new_line>");
