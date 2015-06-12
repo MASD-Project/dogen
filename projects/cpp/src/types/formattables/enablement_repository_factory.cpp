@@ -20,12 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
+#include "dogen/cpp/io/formattables/global_enablement_properties_io.hpp"
 #include "dogen/cpp/types/formattables/enablement_factory.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository_factory.hpp"
 
@@ -125,6 +127,8 @@ enablement_repository_factory::obtain_global_properties(
 
         r[fn] = gep;
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Global enablement properties: " << r;
     return r;
 }
 

@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-11 Thu 22:36]
+#+CAPTION: Clock summary at [2015-06-12 Fri 11:52]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *15:14* |       |       |
+| *Total time*                                                                | *16:05* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 15:14   |       |       |
-| Active                                                                      |         | 15:14 |       |
+| Stories                                                                     | 16:05   |       |       |
+| Active                                                                      |         | 16:05 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
 | COMPLETED Inclusion relies on knowing sml to cpp mapping                    |         |       |  0:23 |
+| COMPLETED Implement class header formatter in hash                          |         |       |  0:51 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -266,6 +267,18 @@ between settings (stuff read off of the meta-data) and formattables
 
 We should have a name that implies that all fields of this class were
 obtained by "computation", rather than reading it from somewhere.
+
+*** COMPLETED Implement class header formatter in hash                :story:
+    CLOSED: [2015-06-12 Fri 11:52]
+    CLOCK: [2015-06-12 Fri 11:01]--[2015-06-12 Fri 11:52] =>  0:51
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Problems:
+
+- we seem to have hash enabled even when the facet has been disabled
+  from the command line. Enablement computations must be wrong.
 
 *** Do we use =formatter_types=?                                      :story:
 
