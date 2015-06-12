@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-12 Fri 20:55]
+#+CAPTION: Clock summary at [2015-06-12 Fri 21:24]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *18:45* |       |       |
+| *Total time*                                                                | *19:13* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 18:45   |       |       |
-| Active                                                                      |         | 18:45 |       |
+| Stories                                                                     | 19:13   |       |       |
+| Active                                                                      |         | 19:13 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -28,7 +28,8 @@
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
 | COMPLETED Inclusion relies on knowing sml to cpp mapping                    |         |       |  0:23 |
 | COMPLETED Implement class header formatter in hash                          |         |       |  0:51 |
-| STARTED Fix borked builds due to formatter differences                      |         |       |  2:40 |
+| COMPLETED Fix borked builds due to formatter differences                    |         |       |  2:40 |
+| COMPLETED Stitch gcc release builds are borked                              |         |       |  0:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -317,6 +318,27 @@ clang. It is also in multiple versions of gcc.
 The problem is reordering of instructions. We basically can't do a
 mutable postfix because we may end up evaluating the postfix before
 the prefix.
+
+*** COMPLETED Stitch gcc release builds are borked                    :spike:
+    CLOSED: [2015-06-12 Fri 21:24]
+    CLOCK: [2015-06-12 Fri 20:55]--[2015-06-12 Fri 21:23] =>  0:28
+
+When running stitch for a gcc release build we get:
+
+: FAILED: cd /home/marco/Development/DomainDrivenConsulting/output/dogen/gcc-4.9 && /home/marco/Development/DomainDrivenConsulting/output/dogen/gcc-4.9/stage/bin/dogen_stitcher --target /home/marco/Development/DomainDrivenConsulting/dogen/projects/cpp/src/ --verbose
+
+Debug builds work. All builds work for clang. According to gdb:
+
+: #0  0x00000000004cb36e in std::_Hashtable<std::string, std::pair<std::string const, dogen::dynamic::schema::field_definition>, std::allocator<std::pair<std::string const, dogen::dynamic::schema::field_definition> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::find(std::string const&) const ()
+: #1  0x00000000004c96bd in dogen::dynamic::schema::workflow::obtain_field_definition(std::string const&) const ()
+: #2  0x00000000004ca24b in dogen::dynamic::schema::workflow::create_fields_activity(std::unordered_map<std::string, std::list<std::string, std::allocator<std::string> >, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::list<std::string, std::allocator<std::string> > > > > const&, dogen::dynamic::schema::scope_types) const ()
+
+This was a comedy of errors:
+
+- constructor in dynamic workflow was not marked as explicit;
+- compiler created a temporary workflow off of the repository and
+  passed it in;
+- temporary went away in gcc and caused crash.
 
 *** Do we use =formatter_types=?                                      :story:
 

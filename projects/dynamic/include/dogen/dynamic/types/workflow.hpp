@@ -53,7 +53,7 @@ public:
      * extensions for which a field definition does not exist will
      * result in an exception. If false, they will be ignored.
      */
-    workflow(
+    explicit workflow(
         const repository& rp,
         const bool throw_on_missing_field_definition = true);
 

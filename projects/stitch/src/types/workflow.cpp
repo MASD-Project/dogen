@@ -138,8 +138,11 @@ std::forward_list<text_template> workflow::parse_text_templates_activity(
     const std::forward_list<std::pair<boost::filesystem::path, std::string> >&
     text_templates_as_string) const {
     std::forward_list<text_template> r;
-    const parser p(rp);
+    const dynamic::workflow w(rp);
+    const parser p(w);
     for (const auto& pair : text_templates_as_string) {
+        BOOST_LOG_SEV(lg, debug) << "Parsing file: "
+                                 << pair.first.generic_string();
         try {
             auto tt(p.parse(pair.second));
             perform_expansion(pair.first, tt.extensions());
@@ -179,6 +182,9 @@ write_files_activity(const std::forward_list<formatters::file>& files) const {
 }
 
 void workflow::execute(const boost::filesystem::path& p) const {
+    BOOST_LOG_SEV(lg, debug) << "Executing workflow against: "
+                             << p.generic_string();
+
     const auto paths(get_text_template_paths_activity(p));
     validate_text_template_paths(paths);
 
@@ -191,6 +197,8 @@ void workflow::execute(const boost::filesystem::path& p) const {
     populate_settings_bundle_activity(dynamic_rp, formatters_rp, tt);
     const auto files(format_text_templates_activity(tt));
     write_files_activity(files);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";
 }
 
 } }
