@@ -174,13 +174,13 @@ void helper_methods_formatter::recursive_helper_method_creator(
 }
 
 void helper_methods_formatter::format(std::ostream& s) const {
-    BOOST_LOG_SEV(lg, error) << "Creating helper methods.";
+    BOOST_LOG_SEV(lg, debug) << "Creating helper methods.";
     if (properties_.empty()) {
-        BOOST_LOG_SEV(lg, error) << "No properties found.";
+        BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return;
     }
 
-    BOOST_LOG_SEV(lg, error) << "Properties found: " << properties_.size();
+    BOOST_LOG_SEV(lg, debug) << "Properties found: " << properties_.size();
 
     formatters::nested_type_formatting_assistant fa(s);
     std::unordered_set<std::string> types_done;

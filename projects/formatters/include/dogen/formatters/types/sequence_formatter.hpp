@@ -93,6 +93,11 @@ public:
      */
     unsigned int current_position() const;
 
+    /**
+     * @brief Logs the current state of the formatter to the log.
+     */
+    void log_current_state() const;
+
 public:
     /**
      * @brief Sets the value of the element separator. By default it

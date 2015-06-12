@@ -19,9 +19,14 @@
  *
  */
 #include <sstream>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/io/infix_configuration_io.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 
 namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("formatters.sequence_formatter"));
 
 const std::string empty;
 const std::string comma(",");
@@ -79,7 +84,10 @@ infix_configuration& sequence_formatter::postfix_configuration() {
 }
 
 std::string sequence_formatter::prefix() const {
-    return value_for_position(prefix_configuration_);
+    log_current_state();
+    const auto r(value_for_position(prefix_configuration_));
+    BOOST_LOG_SEV(lg, debug) << "about to return: " << r;
+    return r;
 }
 
 std::string sequence_formatter::postfix(const bool skip) {
@@ -99,6 +107,24 @@ std::string sequence_formatter::postfix(const bool skip) {
 
 unsigned int sequence_formatter::current_position() const {
     return position_;
+}
+
+void sequence_formatter::log_current_state() const {
+    BOOST_LOG_SEV(lg, debug) << "Position: " << position_
+                             << " element separator: " << element_separator_
+                             << " is first: " << is_first()
+                             << " is last: " << is_last()
+                             << " is single: " << is_single();
+
+    BOOST_LOG_SEV(lg, debug) << "Prefix configuration: "
+                             << prefix_configuration_;
+    BOOST_LOG_SEV(lg, debug) << "Value for prefix position: "
+                             << value_for_position(prefix_configuration_);
+
+    BOOST_LOG_SEV(lg, debug) << "Postfix configuration: "
+                             << postfix_configuration_;
+    BOOST_LOG_SEV(lg, debug) << "Value for postfix position: "
+                             << value_for_position(postfix_configuration_);
 }
 
 void sequence_formatter::element_separator(const std::string& s) {
