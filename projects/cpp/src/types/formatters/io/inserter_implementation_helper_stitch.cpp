@@ -51,6 +51,7 @@ fa.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << c.qualified_name()
     for (const auto p : c.parents()) {
 fa.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
 fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
+        sf.next();
     }
 
     auto ntfa(fa.make_nested_type_formatting_assistant());
@@ -72,6 +73,7 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
             variable_name = "v." + fa.make_member_variable_name(p);
 
 fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << sf.postfix() << std::endl;
+        sf.next();
     }
 
     if (!no_parents_and_no_properties) {

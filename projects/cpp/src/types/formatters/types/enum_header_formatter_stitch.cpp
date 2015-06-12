@@ -38,8 +38,10 @@ fa.stream() << std::endl;
             fa.comment(e.documentation());
 fa.stream() << "enum class " << e.name() << " : " << e.type() << " {" << std::endl;
             dogen::formatters::sequence_formatter sf(e.enumerators().size());
-            for (const auto& en : e.enumerators())
+            for (const auto& en : e.enumerators()) {
 fa.stream() << "    " << en.name() << " = " << en.value() << sf.postfix() << fa.comment_inline(en.documentation()) << std::endl;
+                sf.next();
+            }
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
         } // snf

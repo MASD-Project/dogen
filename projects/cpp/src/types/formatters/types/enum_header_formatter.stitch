@@ -23,9 +23,13 @@ dogen::formatters::file enum_header_formatter_stitch(
 enum class <#= e.name() #> : <#= e.type() #> {
 <#+
             dogen::formatters::sequence_formatter sf(e.enumerators().size());
-            for (const auto& en : e.enumerators())
+            for (const auto& en : e.enumerators()) {
 #>
     <#= en.name() #> = <#= en.value() #><#= sf.postfix() #><#= fa.comment_inline(en.documentation()) #>
+<#+
+                sf.next();
+            }
+#>
 };
 
 <#+

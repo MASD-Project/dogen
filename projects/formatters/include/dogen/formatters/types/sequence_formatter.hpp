@@ -85,7 +85,7 @@ public:
      * empty string. If false, returns the postfix for the current
      * position and moves to the next position.
      */
-    std::string postfix(const bool skip = false);
+    std::string postfix(const bool skip = false) const;
 
 public:
     /**
@@ -104,6 +104,11 @@ public:
      * is a comma.
      */
     void element_separator(const std::string& s);
+
+    /**
+     * @brief Moves to the next position.
+     */
+    void next();
 
     /**
      * @brief Resets the position and configurations.

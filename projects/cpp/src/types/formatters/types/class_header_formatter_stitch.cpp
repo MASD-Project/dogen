@@ -43,8 +43,10 @@ fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << "
 fa.stream() << "class " << c.name() << " " << fa.make_final_keyword_text(c) << ": public " << c.parents().front().qualified_name() << " {" << std::endl;
             } else {
                 dogen::formatters::sequence_formatter sf(c.parents().size());
-                for (const auto p : c.parents())
+                for (const auto p : c.parents()) {
 fa.stream() << "    public " << p.qualified_name() << sf.postfix() << std::endl;
+                    sf.next();
+                }
             }
 fa.stream() << "public:" << std::endl;
             /*
@@ -63,7 +65,7 @@ fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = d
 fa.stream() << "    " << c.name() << "& operator=(const " << c.name() << "&) = default;" << std::endl;
 fa.stream() << std::endl;
             /*
-             * Manually generated constructors and destructors.
+             * Manually generated default constructor.
              */
             if (c.requires_manual_default_constructor()) {
 fa.stream() << "public:" << std::endl;
@@ -72,6 +74,8 @@ fa.stream() << std::endl;
             }
 
             /*
+             * Manually generated destructor.
+             *
              * according to MEC++, item 33, base classes should always be
              * abstract. this avoids all sorts of tricky problems with
              * assignment and swap.
@@ -87,12 +91,18 @@ fa.stream() << "    virtual ~" << c.name() << "() noexcept { }" << std::endl;
 fa.stream() << std::endl;
             }
 
+            /*
+             * Manually generated move constructor.
+             */
             if (c.requires_manual_move_constructor()) {
 fa.stream() << "public:" << std::endl;
 fa.stream() << "    " << c.name() << "(" << c.name() << "&& rhs);" << std::endl;
 fa.stream() << std::endl;
             }
 
+            /*
+             * Manually generated complete constructor.
+             */
             if (!fa.is_complete_constructor_disabled() && !c.all_properties().empty()) {
 fa.stream() << "public:" << std::endl;
                 const auto prop_count(c.all_properties().size());
@@ -103,8 +113,10 @@ fa.stream() << "    explicit " << c.name() << "(const " << p.type().complete_nam
 fa.stream() << "    " << c.name() << "(" << std::endl;
                     dogen::formatters::sequence_formatter sf(prop_count);
                     sf.postfix_configuration().last(");");
-                    for (const auto& p : c.all_properties())
+                    for (const auto& p : c.all_properties()) {
 fa.stream() << "        const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
+                        sf.next();
+                    }
                 }
 fa.stream() << std::endl;
             }

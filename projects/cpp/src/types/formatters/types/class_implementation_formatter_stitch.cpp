@@ -80,10 +80,13 @@ fa.stream() << c.name() << "::" << c.name() << "(" << c.name() << "&& rhs)" << s
                 for (const auto p : c.parents()) {
 fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << std::endl;
 fa.stream() << "        std::forward<" << p.qualified_name() << ">(rhs))" << sf.postfix() << std::endl;
+                    sf.next();
                 }
 
-                for (const auto p : c.properties())
+                for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(std::move(rhs." << fa.make_member_variable_name(p) << "))" << sf.postfix() << std::endl;
+                    sf.next();
+                }
             }
 
             /*
@@ -101,8 +104,10 @@ fa.stream() << c.name() << "::" << c.name() << "(" << std::endl;
 
                     dogen::formatters::sequence_formatter sf(prop_count);
                     sf.postfix_configuration().last(")");
-                    for (const auto p : c.all_properties())
+                    for (const auto p : c.all_properties()) {
 fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p) << " " << p.name() << sf.postfix() << std::endl;
+                        sf.next();
+                    }
                 }
 
                 int sequence_size(c.properties().size() + c.parents().size());
@@ -114,10 +119,12 @@ fa.stream() << "    const " << p.type().complete_name() << fa.make_by_ref_text(p
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 for (const auto p : c.parents()) {
-                    if (p.properties().size() <= 1)
+                    if (p.properties().size() <= 1) {
 fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << (p.properties().empty() ? "" : p.properties().front().name()) << ")" << sf.postfix() << std::endl;
-                    else {
+                        sf.next();
+                    } else {
 fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << sf.postfix(true/*skip*/) << std::endl;
+                        sf.next();
                         dogen::formatters::sequence_formatter sf2(p.properties().size());
                         sf2.element_separator("");
                         
@@ -125,12 +132,16 @@ fa.stream() << "    " << sf.prefix() << p.qualified_name() << "(" << sf.postfix(
                         sf2.postfix_configuration().last(")");
                         for (const auto prop : p.properties()) {
 fa.stream() << "    " << sf2.prefix() << prop.name() << sf2.postfix() << sf.postfix() << std::endl;
+                            sf2.next();
+                            sf.next();
                         }
                     }
                 }
 
-                for (const auto p : c.properties())
+                for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << "(" << p.name() << ")" << sf.postfix() << std::endl;
+                    sf.next();
+                }
             }
 
             /*
@@ -202,9 +213,10 @@ fa.stream() << "    return true;" << std::endl;
                 else
                     sf.postfix_configuration().last(" &&");
 
-                for (const auto p : c.parents())
+                for (const auto p : c.parents()) {
 fa.stream() << "    " << sf.prefix() << p.name() << "::compare(rhs)" << sf.postfix() << std::endl;
-
+                    sf.next();
+                }
                 sf.reset(c.properties().size());
                 sf.element_separator("");
                 if (c.parents().empty())
@@ -215,6 +227,7 @@ fa.stream() << "    " << sf.prefix() << p.name() << "::compare(rhs)" << sf.postf
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto p : c.properties()) {
 fa.stream() << "    " << sf.prefix() << fa.make_member_variable_name(p) << " == rhs." << fa.make_member_variable_name(p) << sf.postfix() << std::endl;
+                    sf.next();
                 }
             }
 fa.stream() << "}" << std::endl;

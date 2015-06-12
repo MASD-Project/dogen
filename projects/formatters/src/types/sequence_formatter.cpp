@@ -90,18 +90,15 @@ std::string sequence_formatter::prefix() const {
     return r;
 }
 
-std::string sequence_formatter::postfix(const bool skip) {
-    if (skip) {
-        ++position_;
+std::string sequence_formatter::postfix(const bool skip) const {
+    if (skip)
         return empty;
-    }
 
     std::ostringstream s;
     s << value_for_position(postfix_configuration_);
     if (!is_last())
         s << element_separator_;
 
-    ++position_;
     return s.str();
 }
 
@@ -129,6 +126,10 @@ void sequence_formatter::log_current_state() const {
 
 void sequence_formatter::element_separator(const std::string& s) {
     element_separator_ = s;
+}
+
+void sequence_formatter::next() {
+    ++position_;
 }
 
 void sequence_formatter::reset() {

@@ -38,6 +38,7 @@ void inserter_implementation_helper_stitch(
     <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
     <#= p.name() #>::to_stream(s);
 <#+
+        sf.next();
     }
 
     auto ntfa(fa.make_nested_type_formatting_assistant());
@@ -61,6 +62,7 @@ void inserter_implementation_helper_stitch(
 #>
     <#= sf.prefix() #><< "\"<#=p.name() #>\": " << <#= ntfa.streaming_for_type(p.type(), variable_name) #><#= sf.postfix() #>
 <#+
+        sf.next();
     }
 
     if (!no_parents_and_no_properties) {

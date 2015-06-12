@@ -69,12 +69,15 @@ dogen::formatters::file class_implementation_formatter_stitch(
     <#= sf.prefix() #><#= p.qualified_name() #>(
         std::forward<<#= p.qualified_name() #>>(rhs))<#= sf.postfix() #>
 <#+
+                    sf.next();
                 }
 
-                for (const auto p : c.properties())
+                for (const auto p : c.properties()) {
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(std::move(rhs.<#= fa.make_member_variable_name(p) #>))<#= sf.postfix() #>
 <#+
+                    sf.next();
+                }
             }
 
             /*
@@ -96,10 +99,12 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
                     dogen::formatters::sequence_formatter sf(prop_count);
                     sf.postfix_configuration().last(")");
-                    for (const auto p : c.all_properties())
+                    for (const auto p : c.all_properties()) {
 #>
     const <#= p.type().complete_name() #><#= fa.make_by_ref_text(p) #> <#= p.name() #><#= sf.postfix() #>
 <#+
+                        sf.next();
+                    }
                 }
 
                 int sequence_size(c.properties().size() + c.parents().size());
@@ -111,14 +116,16 @@ dogen::formatters::file class_implementation_formatter_stitch(
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 for (const auto p : c.parents()) {
-                    if (p.properties().size() <= 1)
+                    if (p.properties().size() <= 1) {
 #>
     <#= sf.prefix() #><#= p.qualified_name() #>(<#= (p.properties().empty() ? "" : p.properties().front().name()) #>)<#= sf.postfix() #>
 <#+
-                    else {
+                        sf.next();
+                    } else {
 #>
     <#= sf.prefix() #><#= p.qualified_name() #>(<#= sf.postfix(true/*skip*/) #>
 <#+
+                        sf.next();
                         dogen::formatters::sequence_formatter sf2(p.properties().size());
                         sf2.element_separator("");
                         
@@ -128,14 +135,18 @@ dogen::formatters::file class_implementation_formatter_stitch(
 #>
     <#= sf2.prefix() #><#= prop.name() #><#= sf2.postfix() #><#= sf.postfix() #>
 <#+
+                            sf2.next();
+                            sf.next();
                         }
                     }
                 }
 
-                for (const auto p : c.properties())
+                for (const auto p : c.properties()) {
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #>(<#= p.name() #>)<#= sf.postfix() #>
 <#+
+                    sf.next();
+                }
             }
 
             /*
@@ -227,11 +238,12 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
                 else
                     sf.postfix_configuration().last(" &&");
 
-                for (const auto p : c.parents())
+                for (const auto p : c.parents()) {
 #>
     <#= sf.prefix() #><#= p.name() #>::compare(rhs)<#= sf.postfix() #>
 <#+
-
+                    sf.next();
+                }
                 sf.reset(c.properties().size());
                 sf.element_separator("");
                 if (c.parents().empty())
@@ -244,6 +256,7 @@ bool <#= c.name() #>::<#= method_name #>(const <#= c.name() #>& <#= (c.all_prope
 #>
     <#= sf.prefix() #><#= fa.make_member_variable_name(p) #> == rhs.<#= fa.make_member_variable_name(p) #><#= sf.postfix() #>
 <#+
+                    sf.next();
                 }
             }
 #>
