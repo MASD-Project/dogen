@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-12 Fri 11:52]
+#+CAPTION: Clock summary at [2015-06-12 Fri 14:03]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *16:05* |       |       |
+| *Total time*                                                                | *16:18* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 16:05   |       |       |
-| Active                                                                      |         | 16:05 |       |
+| Stories                                                                     | 16:18   |       |       |
+| Active                                                                      |         | 16:18 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -28,6 +28,7 @@
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
 | COMPLETED Inclusion relies on knowing sml to cpp mapping                    |         |       |  0:23 |
 | COMPLETED Implement class header formatter in hash                          |         |       |  0:51 |
+| STARTED Fix borked builds due to formatter differences                      |         |       |  0:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -279,6 +280,33 @@ Problems:
 
 - we seem to have hash enabled even when the facet has been disabled
   from the command line. Enablement computations must be wrong.
+
+*** STARTED Fix borked builds due to formatter differences            :story:
+    CLOCK: [2015-06-12 Fri 13:50]--[2015-06-12 Fri 14:03] =>  0:13
+
+All our builds except for the local build are failing since we put the
+types implementation formatter in. The diff is:
+
+: --- /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/all_primitives/expected/all_primitives/src/types/a_class.cpp	2015-06-07 09:19:04.000000000 +0100
+: +++ /home/ctest/build/Continuous/dogen/debian-testing-i686-gcc-4.7/build/stage/bin/../test_data/all_primitives/actual/all_primitives/src/types/a_class.cpp	2015-06-12 06:32:15.667923782 +0100
+: @@ -53,7 +53,7 @@
+:      const unsigned short ushort_property,
+:      const double double_property,
+:      const float float_property)
+: -    : bool_property_(bool_property),
+: +      bool_property_(bool_property),
+:        char_property_(char_property),
+:        uchar_property_(uchar_property),
+:        int_property_(int_property),
+: @@ -85,7 +85,7 @@
+:  }
+:
+:  bool a_class::operator==(const a_class& rhs) const {
+: -    return bool_property_ == rhs.bool_property_ &&
+: +        bool_property_ == rhs.bool_property_ &&
+:          char_property_ == rhs.char_property_ &&
+:          uchar_property_ == rhs.uchar_property_ &&
+:          int_property_ == rhs.int_property_ &&
 
 *** Do we use =formatter_types=?                                      :story:
 
