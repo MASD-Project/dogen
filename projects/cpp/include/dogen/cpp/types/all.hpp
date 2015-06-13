@@ -131,6 +131,7 @@
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"

@@ -23,10 +23,12 @@
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/types/helper_methods_formatter.hpp"
+#include "dogen/cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
@@ -138,6 +140,11 @@ bool entity_formatting_assistant::is_io_enabled() const {
 bool entity_formatting_assistant::is_io_integrated() const {
     using formatters::io::traits;
     return is_facet_integrated(traits::facet_name());
+}
+
+bool entity_formatting_assistant::is_hash_enabled() const {
+    using formatters::hash::traits;
+    return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
 bool entity_formatting_assistant::is_complete_constructor_disabled() const {
@@ -281,8 +288,8 @@ void entity_formatting_assistant::add_helper_methods() {
 
     BOOST_LOG_SEV(lg, debug) << "Processing entity: " << c->name();
 
-    using formatters::types::traits;
-    const auto& cifn(traits::class_implementation_formatter_name());
+    using tt = formatters::types::traits;
+    const auto& cifn(tt::class_implementation_formatter_name());
     const auto& fn(ownership_hierarchy_.formatter_name());
     const bool is_types_class_implementation(fn == cifn);
     const bool in_inheritance(c->is_parent() || !c->parents().empty());
@@ -303,10 +310,26 @@ void entity_formatting_assistant::add_helper_methods() {
         BOOST_LOG_SEV(lg, debug) << "Creating types helper methods.";
         types::helper_methods_formatter f(c->properties());
         f.format(stream());
-    } else
+    } else {
         BOOST_LOG_SEV(lg, debug) << "Type helper methods not required."
                                  << " is types class implementation: '"
                                  << is_types_class_implementation << "''";
+    }
+
+    using ht = formatters::hash::traits;
+    const auto& hcifn(ht::class_implementation_formatter_name());
+    const bool is_hash_class_implementation(fn == hcifn);
+    const bool requires_hash(is_hash_enabled());
+
+    if (is_hash_class_implementation && requires_hash) {
+        BOOST_LOG_SEV(lg, debug) << "Creating hash helper methods.";
+        hash::helper_methods_formatter f(c->properties());
+        f.format(stream());
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Hash helper methods not required."
+                                 << " is types class implementation: '"
+                                 << is_hash_class_implementation << "''";
+    }
 }
 
 } } }

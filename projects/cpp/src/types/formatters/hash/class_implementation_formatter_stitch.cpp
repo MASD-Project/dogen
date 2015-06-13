@@ -34,6 +34,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
+            fa.add_helper_methods();
 fa.stream() << std::endl;
 fa.stream() << "struct " << c.name() << "_hasher {" << std::endl;
 fa.stream() << "public:" << std::endl;
