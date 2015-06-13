@@ -1,0 +1,45 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/hash/class_implementation_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::hash #>
+<#+
+
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+struct <#= c.name() #>_hasher {
+public:
+    static std::size_t hash(const <#= c.name() #>& v);
+};
+
+<#+
+        } // snf
+#>
+
+namespace std {
+
+template<>
+struct hash<<#= c.qualified_name() #>> {
+public:
+    size_t operator()(const <#= c.qualified_name() #>& v) const {
+        return <#= c.qualified_name() #>_hasher::hash(v);
+    }
+};
+
+}
+<#+
+    } // sbf
+    // return fa.make_file();
+    return fa.make_file(false/*override*/);
+}
+#>
