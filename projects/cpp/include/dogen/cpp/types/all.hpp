@@ -70,7 +70,6 @@
 #include "dogen/cpp/types/formatters/io/initializer.hpp"
 #include "dogen/cpp/types/formattables/content_types.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
-#include "dogen/cpp/types/formatters/formatter_types.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/cpp/types/formatters/registrar_error.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"

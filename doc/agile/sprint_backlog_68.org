@@ -340,7 +340,9 @@ This was a comedy of errors:
   passed it in;
 - temporary went away in gcc and caused crash.
 
-*** Do we use =formatter_types=?                                      :story:
+*** COMPLETED Do we use =formatter_types=?                            :story:
+    CLOSED: [2015-06-13 Sat 07:09]
+    CLOCK: [2015-06-13 Sat 07:01]--[2015-06-13 Sat 07:09] =>  0:08
 
 We need to figure out if we need this enumeration in =cpp::formatters=
 and if not remove it.

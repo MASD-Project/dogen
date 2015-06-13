@@ -39,7 +39,6 @@
 #include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/content_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/property_info_hash.hpp"
-#include "dogen/cpp/hash/formatters/formatter_types_hash.hpp"
 #include "dogen/cpp/hash/settings/bundle_repository_hash.hpp"
 #include "dogen/cpp/hash/formattables/exception_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/includers_info_hash.hpp"

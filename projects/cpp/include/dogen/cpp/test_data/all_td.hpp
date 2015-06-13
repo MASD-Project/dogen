@@ -39,7 +39,6 @@
 #include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/content_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"
-#include "dogen/cpp/test_data/formatters/formatter_types_td.hpp"
 #include "dogen/cpp/test_data/settings/bundle_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/includers_info_td.hpp"

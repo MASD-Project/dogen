@@ -40,7 +40,6 @@
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
-#include "dogen/cpp/serialization/formatters/formatter_types_ser.hpp"
 #include "dogen/cpp/serialization/settings/bundle_repository_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"

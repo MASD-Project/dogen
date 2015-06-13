@@ -39,7 +39,6 @@
 #include "dogen/cpp/io/formattables/visitor_info_io.hpp"
 #include "dogen/cpp/io/formattables/content_types_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
-#include "dogen/cpp/io/formatters/formatter_types_io.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/io/formattables/exception_info_io.hpp"
 #include "dogen/cpp/io/formattables/includers_info_io.hpp"
