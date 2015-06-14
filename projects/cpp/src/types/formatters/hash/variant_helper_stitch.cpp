@@ -31,6 +31,27 @@ void variant_helper_stitch(
     
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
+fa.stream() << "struct " << t.complete_identifiable_name() << "_visitor : public boost::static_visitor<> {" << std::endl;
+fa.stream() << "    " << t.complete_identifiable_name() << "_visitor() : hash(0) {}" << std::endl;
+        const auto children(t.children());
+        for (const auto& c : children) {
+fa.stream() << "    void operator()(const " << c.name() << (c.is_primitive() ? "" : "&") << " v) const {" << std::endl;
+            if (!fa.requires_hashing_helper_method(c))
+fa.stream() << "        combine(hash, v);" << std::endl;
+            else
+fa.stream() << "        combine(hash, hash_" << c.complete_identifiable_name() << "(v));" << std::endl;
+fa.stream() << "    }    " << std::endl;
+        }
+fa.stream() << std::endl;
+fa.stream() << "    mutable std::size_t hash;" << std::endl;
+fa.stream() << "};" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
+fa.stream() << "    <" << std::endl;
+fa.stream() << "    " << t.complete_identifiable_name() << "_visitor vis;" << std::endl;
+fa.stream() << "    boost::apply_visitor(vis, v);" << std::endl;
+fa.stream() << "    return vis.hash;" << std::endl;
+fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
     }
 fa.stream() << std::endl;

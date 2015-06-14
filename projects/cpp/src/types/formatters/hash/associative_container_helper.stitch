@@ -17,6 +17,28 @@ void associative_container_helper_stitch(
         const auto value(t.children().back());
 #>
 
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+<#+
+        if (!fa.requires_hashing_helper_method(key))
+#>
+        combine(seed, i.first);
+<#+
+        else
+#>
+        combine(seed, hash_<#= key.complete_identifiable_name() #>(i.first));
+<#+
+        if (!fa.requires_hashing_helper_method(value))
+#>
+        combine(seed, i.second);
+<#+
+        else
+#>
+        combine(seed, hash_<#= value.complete_identifiable_name() #>(i.second));
+    }
+    return seed;
+}
 <#+
     }
 #>

@@ -67,6 +67,14 @@ private:
 
 public:
     /**
+     * @brief Returns true if the type can be hashed without requiring a
+     * helper method.
+     */
+    bool requires_hashing_helper_method(
+        const formattables::nested_type_info& t) const;
+
+public:
+    /**
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */

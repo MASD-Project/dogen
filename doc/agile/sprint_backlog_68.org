@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-13 Sat 21:41]
+#+CAPTION: Clock summary at [2015-06-14 Sun 12:52]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *20:10* |       |       |
+| *Total time*                                                                | *21:09* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 20:10   |       |       |
-| Active                                                                      |         | 20:10 |       |
+| Stories                                                                     | 21:09   |       |       |
+| Active                                                                      |         | 21:09 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -31,7 +31,7 @@
 | COMPLETED Fix borked builds due to formatter differences                    |         |       |  2:40 |
 | COMPLETED Stitch gcc release builds are borked                              |         |       |  0:28 |
 | COMPLETED Do we use =formatter_types=?                                      |         |       |  0:08 |
-| STARTED Implement class header implementation in hash                       |         |       |  0:49 |
+| STARTED Implement class header implementation in hash                       |         |       |  1:48 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -350,6 +350,8 @@ We need to figure out if we need this enumeration in =cpp::formatters=
 and if not remove it.
 
 *** STARTED Implement class header implementation in hash             :story:
+    CLOCK: [2015-06-14 Sun 12:35]--[2015-06-14 Sun 12:45] =>  0:10
+    CLOCK: [2015-06-14 Sun 11:32]--[2015-06-14 Sun 12:21] =>  0:49
     CLOCK: [2015-06-13 Sat 21:00]--[2015-06-13 Sat 21:41] =>  0:41
     CLOCK: [2015-06-13 Sat 07:11]--[2015-06-13 Sat 07:19] =>  0:08
 

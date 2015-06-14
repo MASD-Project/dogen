@@ -13,6 +13,11 @@ void date_helper_stitch(
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
 #>
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+    combine(seed, v.modjulian_day());
+    return seed;
+}
 
 <#+
     }

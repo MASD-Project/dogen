@@ -14,7 +14,21 @@ void optional_helper_stitch(
         auto snf(fa.make_scoped_namespace_formatter(t));
         const auto containee(t.children().front());
 #>
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>"& v) {
+    std::size_t seed(0);
 
+    if (!v)
+        return seed;
+
+<#+
+        if (!fa.requires_hashing_helper_method(containee))
+#>
+    combine(seed, *v);
+<#+
+        else
+#>
+    combine(seed, hash_<#= containee.complete_identifiable_name() #>(*v));
+    return seed;
 <#+
     }
 #>

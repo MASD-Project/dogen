@@ -15,6 +15,20 @@ void sequence_container_helper_stitch(
         const auto containee(t.children().front());
 #>
 
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+<#+
+        if (!fa.requires_hashing_helper_method(containee))
+#>
+        combine(seed, i);
+<#+
+        else
+#>
+        combine(seed, hash_<#= containee.complete_identifiable_name() #>(i));
+    }
+    return seed;
+}
 <#+
     }
 #>

@@ -54,6 +54,22 @@ requires_tidying_up(const formattables::nested_type_info& t) const {
     return t.is_string_like();
 }
 
+bool nested_type_formatting_assistant::requires_hashing_helper_method(
+    const formattables::nested_type_info& t) const {
+    return
+        t.is_sequence_container() &&
+        t.is_associative_container() &&
+        t.is_smart_pointer() &&
+        t.is_pair() &&
+        t.is_optional_like() &&
+        t.is_variant_like() &&
+        t.is_date() &&
+        t.is_ptime() &&
+        t.is_time_duration() &&
+        t.is_filesystem_path() &&
+        t.is_ptree();
+}
+
 std::string nested_type_formatting_assistant::streaming_for_type(
     const formattables::nested_type_info& t, const std::string& s) const {
     std::ostringstream ss;
