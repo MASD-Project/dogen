@@ -32,6 +32,15 @@ void ptree_helper_stitch(
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
         const auto containee(t.children().front());
+fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
+fa.stream() << "    std::size_t seed(0);" << std::endl;
+fa.stream() << "    for (const auto& node : v) {" << std::endl;
+fa.stream() << "        combine(seed, node.first);" << std::endl;
+fa.stream() << "        combine(seed, node.second.data());" << std::endl;
+fa.stream() << "        combine(seed, hash_" << t.complete_identifiable_name() << "(node.second));" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << "    return seed;" << std::endl;
+fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
     }
 fa.stream() << std::endl;
