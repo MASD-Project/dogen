@@ -61,6 +61,10 @@ struct inclusion_constants {
         struct exception {
             static ::std::string info();
         };
+
+        struct visitor {
+            static ::std::string apply_visitor();
+        };
     };
 };
 

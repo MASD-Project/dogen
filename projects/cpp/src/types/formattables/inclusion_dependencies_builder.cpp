@@ -174,6 +174,17 @@ add(const std::list<sml::qname>& qn, const std::string& formatter_name) {
         add(n, formatter_name);
 }
 
+void inclusion_dependencies_builder::add(const sml::object& o,
+    const sml::relationship_types rt,
+    const std::string& formatter_name) {
+
+    const auto i(o.relationships().find(rt));
+    if (i == o.relationships().end())
+        return;
+
+    add(i->second, formatter_name);
+}
+
 std::list<std::string> inclusion_dependencies_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Built inclusion dependencies for formatter.";
     BOOST_LOG_SEV(lg, debug) << "Result: " << inclusion_dependencies_;

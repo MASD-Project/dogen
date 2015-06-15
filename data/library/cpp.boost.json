@@ -92,7 +92,8 @@
             "extensions" : {
                 "cpp.type.requires_manual_move_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<boost/filesystem/path.hpp>",
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.hash.class_header_formatter.inclusion_required" : false
             }
         },
         {

@@ -55,7 +55,7 @@ requires_tidying_up(const formattables::nested_type_info& t) const {
 }
 
 bool nested_type_formatting_assistant::requires_hashing_helper_method(
-    const formattables::nested_type_info& t) const {
+    const formattables::nested_type_info& t) {
     return
         t.is_sequence_container() &&
         t.is_associative_container() &&

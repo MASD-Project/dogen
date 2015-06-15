@@ -109,6 +109,13 @@ public:
     void add(const std::list<sml::qname>& qn,
         const std::string& formatter_name);
 
+    /**
+     * @brief Adds the inclusion directives for all qnames in the
+     * relationships if any exist.
+     */
+    void add(const sml::object& o, const sml::relationship_types rt,
+        const std::string& formatter_name);
+
 public:
     /**
      * @brief Builds the inclusion dependencies. All additions must

@@ -332,4 +332,10 @@ void entity_formatting_assistant::add_helper_methods() {
     }
 }
 
+bool entity_formatting_assistant::requires_hashing_helper_method(
+    const formattables::nested_type_info& t) const {
+    return nested_type_formatting_assistant::
+        requires_hashing_helper_method(t);
+}
+
 } } }

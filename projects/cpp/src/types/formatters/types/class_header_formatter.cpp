@@ -76,28 +76,18 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const auto ser_fwd_fn(ser::forward_declarations_formatter_name());
     builder.add(o.name(), ser_fwd_fn);
 
-    const auto lambda([&](const sml::object& o,
-            const sml::relationship_types rt,
-            const std::string& fn) {
-            const auto i(o.relationships().find(rt));
-            if (i == o.relationships().end())
-                return;
-
-            builder.add(i->second, fn);
-        });
-
     using rt = sml::relationship_types;
     const auto fwd_fn(traits::forward_declarations_formatter_name());
-    lambda(o, rt::weak_associations, fwd_fn);
-    lambda(o, rt::regular_associations, self_fn);
-    lambda(o, rt::parents, self_fn);
+    builder.add(o, rt::weak_associations, fwd_fn);
+    builder.add(o, rt::regular_associations, self_fn);
+    builder.add(o, rt::parents, self_fn);
 
     using hash = formatters::hash::traits;
     const auto hash_fn(hash::traits::class_header_formatter_name());
-    lambda(o, rt::hash_container_keys, hash_fn);
+    builder.add(o, rt::hash_container_keys, hash_fn);
 
     if (o.is_visitable())
-        lambda(o, rt::visited_by, self_fn);
+        builder.add(o, rt::visited_by, self_fn);
 
     return builder.build();
 }

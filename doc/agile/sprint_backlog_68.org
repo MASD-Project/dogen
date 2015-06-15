@@ -350,6 +350,7 @@ We need to figure out if we need this enumeration in =cpp::formatters=
 and if not remove it.
 
 *** STARTED Implement class header implementation in hash             :story:
+    CLOCK: [2015-06-15 Mon 16:02]--[2015-06-15 Mon 17:25] =>  1:23
     CLOCK: [2015-06-15 Mon 15:35]--[2015-06-15 Mon 16:00] =>  0:25
     CLOCK: [2015-06-14 Sun 13:29]--[2015-06-14 Sun 13:41] =>  0:12
     CLOCK: [2015-06-14 Sun 12:35]--[2015-06-14 Sun 12:45] =>  0:10
@@ -359,6 +360,18 @@ and if not remove it.
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+Problems:
+
+- hash combine has incorrect indentation on open bracket and no space
+  between =&v=
+- hash of path now requires helper. we were generating helper
+  previously but it seems we were not using it. Best to just remove
+  helper in legacy and see what breaks.
+
+Solved Problems:
+
+- no inclusion for parent or members
 
 *** Remove intermediate fields from dynamic                           :story:
 

@@ -198,6 +198,13 @@ public:
      */
     void add_helper_methods();
 
+    /**
+     * @brief Returns true if the type can be hashed without requiring a
+     * helper method.
+     */
+    bool requires_hashing_helper_method(
+        const formattables::nested_type_info& t) const;
+
 private:
     const formattables::entity& entity_;
     const dynamic::ownership_hierarchy& ownership_hierarchy_;

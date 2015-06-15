@@ -69,4 +69,9 @@ std::string inclusion_constants::boost::exception::info() {
     return r;
 }
 
+std::string inclusion_constants::boost::visitor::apply_visitor() {
+    static ::std::string r("<boost/variant/apply_visitor.hpp>");
+    return r;
+}
+
 } } }

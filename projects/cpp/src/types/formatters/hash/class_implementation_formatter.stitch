@@ -10,35 +10,74 @@
 dogen::formatters::file class_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
     const formattables::class_info& c) {
-
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
-            fa.add_helper_methods();
 #>
 
-struct <#= c.name() #>_hasher {
-public:
-    static std::size_t hash(const <#= c.name() #>& v);
-};
+namespace {
+
+<#+
+        if (!c.properties().empty() || !c.parents().empty()) {
+#>
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value)
+{
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+<#+
+        }
+
+        fa.add_helper_methods();
+#>
+
+}
+
+<#+
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+std::size_t <#= c.name() #>_hasher::hash(const <#= c.name() #>&<#= ((c.properties().empty() && c.parents().empty()) ? "" : "v") #>) {
+    std::size_t seed(0);
+<#+
+            if (!c.parents().empty()) {
+#>
+
+<#+
+                for (const auto p : c.parents())
+#>
+    combine(seed, dynamic_cast<const <#= p.qualified_name() #>&>(v));
+<#+
+
+            }
+
+            if (!c.properties().empty()) {
+#>
+
+<#+
+                for (const auto p : c.properties()) {
+                    if (fa.requires_hashing_helper_method(p.type()))
+#>
+    combine(seed, hash_<#= p.type().complete_identifiable_name() #>&>(v.<#= p.name() #>()));
+<#+
+                    else
+#>
+    combine(seed, v.<#= p.name() #>()<#= (p.type().is_date() ? ".modjulian_day()" : "") #>);
+<#+
+                }
+
+                if (c.properties().size() > 1)
+#>
+
+<#+
+            }
+#>
+    return seed;
+}
 
 <#+
         } // snf
-#>
-
-namespace std {
-
-template<>
-struct hash<<#= c.qualified_name() #>> {
-public:
-    size_t operator()(const <#= c.qualified_name() #>& v) const {
-        return <#= c.qualified_name() #>_hasher::hash(v);
-    }
-};
-
-}
-<#+
     } // sbf
     // return fa.make_file();
     return fa.make_file(false/*override*/);

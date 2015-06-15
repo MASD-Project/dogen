@@ -65,6 +65,15 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     auto builder(f.make());
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(o.name(), ch_fn);
+
+    const auto si(builder.make_special_includes(o));
+    if (si.has_variant)
+        builder.add(inclusion_constants::boost::visitor::apply_visitor());
+
+    using rt = sml::relationship_types;
+    builder.add(o, rt::regular_associations, ch_fn);
+    builder.add(o, rt::parents, ch_fn);
+
     return builder.build();
 }
 
