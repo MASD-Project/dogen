@@ -36,8 +36,7 @@ fa.stream() << "namespace {" << std::endl;
 fa.stream() << std::endl;
         if (!c.properties().empty() || !c.parents().empty()) {
 fa.stream() << "template <typename HashableType>" << std::endl;
-fa.stream() << "inline void combine(std::size_t& seed, const HashableType& value)" << std::endl;
-fa.stream() << "{" << std::endl;
+fa.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
 fa.stream() << "    std::hash<HashableType> hasher;" << std::endl;
 fa.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);" << std::endl;
 fa.stream() << "}" << std::endl;
@@ -50,7 +49,7 @@ fa.stream() << std::endl;
         {
             auto snf(fa.make_scoped_namespace_formatter());
 fa.stream() << std::endl;
-fa.stream() << "std::size_t " << c.name() << "_hasher::hash(const " << c.name() << "&" << ((c.properties().empty() && c.parents().empty()) ? "" : "v") << ") {" << std::endl;
+fa.stream() << "std::size_t " << c.name() << "_hasher::hash(const " << c.name() << "&" << ((c.properties().empty() && c.parents().empty()) ? "" : " v") << ") {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;
             if (!c.parents().empty()) {
 fa.stream() << std::endl;

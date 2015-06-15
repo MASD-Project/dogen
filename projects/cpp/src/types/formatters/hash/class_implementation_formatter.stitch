@@ -20,8 +20,7 @@ namespace {
         if (!c.properties().empty() || !c.parents().empty()) {
 #>
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -38,7 +37,7 @@ inline void combine(std::size_t& seed, const HashableType& value)
             auto snf(fa.make_scoped_namespace_formatter());
 #>
 
-std::size_t <#= c.name() #>_hasher::hash(const <#= c.name() #>&<#= ((c.properties().empty() && c.parents().empty()) ? "" : "v") #>) {
+std::size_t <#= c.name() #>_hasher::hash(const <#= c.name() #>&<#= ((c.properties().empty() && c.parents().empty()) ? "" : " v") #>) {
     std::size_t seed(0);
 <#+
             if (!c.parents().empty()) {

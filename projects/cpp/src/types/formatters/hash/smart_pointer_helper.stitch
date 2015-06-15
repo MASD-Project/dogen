@@ -13,6 +13,7 @@ void smart_pointer_helper_stitch(
 
     const auto containee(t.children().front());
 #>
+
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     std::size_t seed(0);
 <#+

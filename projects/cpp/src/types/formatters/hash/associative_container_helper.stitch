@@ -11,7 +11,6 @@ void associative_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-    auto snf(fa.make_scoped_namespace_formatter(t));
     const auto key(t.children().front());
     const auto value(t.children().back());
 #>
@@ -39,7 +38,6 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     }
     return seed;
 }
-
 <#+
 }
 #>

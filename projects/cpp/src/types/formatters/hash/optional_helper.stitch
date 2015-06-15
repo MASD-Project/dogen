@@ -12,7 +12,8 @@ void optional_helper_stitch(
     
     const auto containee(t.children().front());
 #>
-inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>"& v) {
+
+inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -27,6 +28,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
 #>
     combine(seed, hash_<#= containee.complete_identifiable_name() #>(*v));
     return seed;
+}
 <#+
 }
 #>

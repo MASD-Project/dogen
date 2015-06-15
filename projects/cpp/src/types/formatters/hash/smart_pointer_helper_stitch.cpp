@@ -31,6 +31,7 @@ void smart_pointer_helper_stitch(
     
 
     const auto containee(t.children().front());
+fa.stream() << std::endl;
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;
     if (!fa.requires_hashing_helper_method(containee))

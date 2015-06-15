@@ -71,6 +71,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
     using rt = sml::relationship_types;
+    builder.add(o, rt::weak_associations, ch_fn);
     builder.add(o, rt::regular_associations, ch_fn);
     builder.add(o, rt::parents, ch_fn);
 

@@ -30,7 +30,6 @@ void associative_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-    auto snf(fa.make_scoped_namespace_formatter(t));
     const auto key(t.children().front());
     const auto value(t.children().back());
 fa.stream() << std::endl;
@@ -49,6 +48,5 @@ fa.stream() << "        combine(seed, hash_" << value.complete_identifiable_name
 fa.stream() << "    }" << std::endl;
 fa.stream() << "    return seed;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
 }
 } } } }

@@ -10,6 +10,7 @@ void variant_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 #>
+
 struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
     <#= t.complete_identifiable_name() #>_visitor() : hash(0) {}
 <#+
@@ -25,17 +26,16 @@ struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visi
         else
 #>
         combine(hash, hash_<#= c.complete_identifiable_name() #>(v));
-    }    
+    }
+
 <#+
     }
 #>
-
     mutable std::size_t hash;
 };
 
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    <
-s
+    <#= t.complete_identifiable_name() #>_visitor vis;
     boost::apply_visitor(vis, v);
     return vis.hash;
 }

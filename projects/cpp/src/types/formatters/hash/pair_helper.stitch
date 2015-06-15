@@ -13,6 +13,7 @@ void pair_helper_stitch(
     const auto first(t.children().front());
     const auto second(t.children().back());
 #>
+
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     std::size_t seed(0);
 
@@ -34,6 +35,7 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
 #>
     combine(seed, hash_<#= second.complete_identifiable_name() #>(v.second));
     return seed;
+}
 <#+
 }
 #>

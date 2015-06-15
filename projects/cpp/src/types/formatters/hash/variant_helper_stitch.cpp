@@ -28,6 +28,7 @@ namespace hash {
 void variant_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
+fa.stream() << std::endl;
 fa.stream() << "struct " << t.complete_identifiable_name() << "_visitor : public boost::static_visitor<> {" << std::endl;
 fa.stream() << "    " << t.complete_identifiable_name() << "_visitor() : hash(0) {}" << std::endl;
     const auto children(t.children());
@@ -37,15 +38,14 @@ fa.stream() << "    void operator()(const " << c.name() << (c.is_primitive() ? "
 fa.stream() << "        combine(hash, v);" << std::endl;
         else
 fa.stream() << "        combine(hash, hash_" << c.complete_identifiable_name() << "(v));" << std::endl;
-fa.stream() << "    }    " << std::endl;
-    }
+fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
+    }
 fa.stream() << "    mutable std::size_t hash;" << std::endl;
 fa.stream() << "};" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    <" << std::endl;
-fa.stream() << "s" << std::endl;
+fa.stream() << "    " << t.complete_identifiable_name() << "_visitor vis;" << std::endl;
 fa.stream() << "    boost::apply_visitor(vis, v);" << std::endl;
 fa.stream() << "    return vis.hash;" << std::endl;
 fa.stream() << "}" << std::endl;
