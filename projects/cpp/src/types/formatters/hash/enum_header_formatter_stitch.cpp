@@ -32,16 +32,21 @@ dogen::formatters::file enum_header_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
 fa.stream() << std::endl;
-            fa.comment(e.documentation());
+fa.stream() << "namespace std {" << std::endl;
 fa.stream() << std::endl;
-        } // snf
+fa.stream() << "template<>" << std::endl;
+fa.stream() << "struct hash<" << e.qualified_name() << "> {" << std::endl;
+fa.stream() << "public:" << std::endl;
+fa.stream() << "    size_t operator()(const " << e.qualified_name() << "& v) const {" << std::endl;
+fa.stream() << "        return std::hash<unsigned int>()(static_cast<unsigned int>(v));" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << "};" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*override*/);
+    return fa.make_file();
 }
 
 } } } }

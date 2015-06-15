@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/hash/enum_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
@@ -30,6 +33,36 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace hash {
+
+namespace {
+
+class provider final : public formattables::
+        inclusion_dependencies_provider_interface<sml::enumeration> {
+public:
+    std::string formatter_name() const override;
+
+    boost::optional<std::list<std::string> >
+        provide(const formattables::inclusion_dependencies_builder_factory& f,
+            const sml::enumeration& o) const override;
+};
+
+std::string provider::formatter_name() const {
+    return enum_header_formatter::static_formatter_name();
+}
+
+boost::optional<std::list<std::string> >
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+    const sml::enumeration& o) const {
+    auto builder(f.make());
+
+    builder.add(inclusion_constants::std::functional());
+
+    const auto ch_fn(types::traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+    return builder.build();
+}
+
+}
 
 std::string enum_header_formatter::static_formatter_name() {
     return traits::enum_header_formatter_name();
@@ -49,7 +82,9 @@ file_types enum_header_formatter::file_type() const {
 }
 
 void enum_header_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& /*rg*/) const {}
+    formattables::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
+}
 
 dogen::formatters::file enum_header_formatter::
 format(const formattables::enum_info& c) const {

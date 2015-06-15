@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-15 Mon 21:30]
+#+CAPTION: Clock summary at [2015-06-15 Mon 21:56]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *25:20* |       |       |
+| *Total time*                                                                | *25:45* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 25:20   |       |       |
-| Active                                                                      |         | 25:20 |       |
+| Stories                                                                     | 25:45   |       |       |
+| Active                                                                      |         | 25:45 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -32,7 +32,7 @@
 | COMPLETED Stitch gcc release builds are borked                              |         |       |  0:28 |
 | COMPLETED Do we use =formatter_types=?                                      |         |       |  0:08 |
 | COMPLETED Implement class implementation formatter in hash                  |         |       |  5:16 |
-| STARTED Implement enum header formatter in hash                             |         |       |  0:43 |
+| COMPLETED Implement enum header formatter in hash                           |         |       |  1:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -384,7 +384,9 @@ Solved Problems:
 - issues with spacing before and after helpers.
 - boost date is not using helpers.
 
-*** STARTED Implement enum header formatter in hash                   :story:
+*** COMPLETED Implement enum header formatter in hash                 :story:
+    CLOSED: [2015-06-15 Mon 21:56]
+    CLOCK: [2015-06-15 Mon 21:31]--[2015-06-15 Mon 21:56] =>  0:25
     CLOCK: [2015-06-15 Mon 21:00]--[2015-06-15 Mon 21:30] =>  0:30
     CLOCK: [2015-06-15 Mon 20:47]--[2015-06-15 Mon 20:59] =>  0:12
     CLOCK: [2015-06-15 Mon 20:46]--[2015-06-15 Mon 20:47] =>  0:01

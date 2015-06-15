@@ -13,22 +13,23 @@ dogen::formatters::file enum_header_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
 #>
 
-<#+
-            fa.comment(e.documentation());
-#>
+namespace std {
 
-<#+
-        } // snf
-#>
+template<>
+struct hash<<#= e.qualified_name() #>> {
+public:
+    size_t operator()(const <#= e.qualified_name() #>& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
 
 <#+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*override*/);
+    return fa.make_file();
 }
 
 #>
