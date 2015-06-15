@@ -81,7 +81,7 @@ namespace boost_model {
 std::size_t class_f_hasher::hash(const class_f& v) {
     std::size_t seed(0);
 
-    combine(seed, v.prop_0().modjulian_day());
+    combine(seed, hash_boost_gregorian_date(v.prop_0()));
     combine(seed, hash_boost_posix_time_ptime(v.prop_1()));
     combine(seed, hash_boost_posix_time_time_duration(v.prop_2()));
     combine(seed, hash_std_list_boost_gregorian_date(v.prop_3()));

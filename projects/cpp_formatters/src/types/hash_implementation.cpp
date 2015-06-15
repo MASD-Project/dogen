@@ -622,10 +622,7 @@ void hash_implementation::hasher_hash_method(
             utility_.blank_line();
 
         for (const auto p : props) {
-            if (p.type().is_date()) {
-                    stream_ << indenter_ << "combine(seed, v." << p.name()
-                            << "().modjulian_day());" << std::endl;
-            } else if (is_hashable(p.type())) {
+            if (is_hashable(p.type())) {
                 stream_ << indenter_ << "combine(seed, v." << p.name()
                         << "());" << std::endl;
             } else {
