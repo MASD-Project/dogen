@@ -82,16 +82,23 @@ private:
 
         auto file(f.format(e));
 
-        if (empty_out_content)
+        if (empty_out_content) {
+            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
             file.content().clear();
+        }
 
         files_.push_front(file);
-        if (!file.overwrite() && !file.content().empty()) {
+        if (!file.overwrite()) {
             BOOST_LOG_SEV(lg, debug) << "Filename: "
                                      << file.path().generic_string();
-            BOOST_LOG_SEV(lg, debug) << "Content: " << file.content();
+            BOOST_LOG_SEV(lg, debug) << "Content: "
+                                     << (file.content().empty() ? "<empty>" :
+                                         file.content());
             BOOST_LOG_SEV(lg, debug) << "Finished formatting: '" << e.name()
                                      << "'";
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
+                                     << "(overwrite is false).";
         }
     }
 
