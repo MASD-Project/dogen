@@ -36,7 +36,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("cpp.formatters.io.helper_methods_formatter"));
+auto lg(logger_factory("cpp.formatters.hash.helper_methods_formatter"));
 
 const std::string invalid_associative_container(
     "Associative containers have one or two type arguments");
