@@ -35,6 +35,5 @@ fa.stream() << "    std::size_t seed(0);" << std::endl;
 fa.stream() << "    combine(seed, v.modjulian_day());" << std::endl;
 fa.stream() << "    return seed;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
 }
 } } } }

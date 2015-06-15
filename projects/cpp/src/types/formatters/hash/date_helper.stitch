@@ -17,7 +17,6 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     combine(seed, v.modjulian_day());
     return seed;
 }
-
 <#+
 }
 #>

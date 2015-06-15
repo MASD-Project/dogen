@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-15 Mon 18:54]
+#+CAPTION: Clock summary at [2015-06-15 Mon 20:42]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *24:25* |       |       |
+| *Total time*                                                                | *24:37* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 24:25   |       |       |
-| Active                                                                      |         | 24:25 |       |
+| Stories                                                                     | 24:37   |       |       |
+| Active                                                                      |         | 24:37 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
-| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
+| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:14 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
@@ -52,6 +52,7 @@ Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Implement class implementation formatter using stitch   :story:
     CLOSED: [2015-06-11 Thu 21:31]
+    CLOCK: [2015-06-15 Mon 20:30]--[2015-06-15 Mon 20:42] =>  0:12
     CLOCK: [2015-06-11 Thu 20:59]--[2015-06-11 Thu 21:31] =>  0:32
     CLOCK: [2015-06-11 Thu 18:52]--[2015-06-11 Thu 19:08] =>  0:16
     CLOCK: [2015-06-11 Thu 18:28]--[2015-06-11 Thu 18:51] =>  0:23
