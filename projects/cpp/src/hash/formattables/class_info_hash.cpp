@@ -57,7 +57,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v){
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
     std::size_t seed(0);
 
     combine(seed, v.first);
