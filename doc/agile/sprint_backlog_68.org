@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-15 Mon 21:56]
+#+CAPTION: Clock summary at [2015-06-15 Mon 22:02]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *25:45* |       |       |
+| *Total time*                                                                | *25:51* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 25:45   |       |       |
-| Active                                                                      |         | 25:45 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
+| Stories                                                                     | 25:51   |       |       |
+| Active                                                                      |         | 25:51 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
@@ -36,6 +36,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-15 Mon 21:56]--[2015-06-15 Mon 22:02] =>  0:06
     CLOCK: [2015-06-11 Thu 21:56]--[2015-06-11 Thu 22:36] =>  0:40
     CLOCK: [2015-06-11 Thu 07:38]--[2015-06-11 Thu 07:45] =>  0:07
     CLOCK: [2015-06-10 Wed 15:30]--[2015-06-10 Wed 15:40] =>  0:10
@@ -390,6 +391,26 @@ Solved Problems:
     CLOCK: [2015-06-15 Mon 21:00]--[2015-06-15 Mon 21:30] =>  0:30
     CLOCK: [2015-06-15 Mon 20:47]--[2015-06-15 Mon 20:59] =>  0:12
     CLOCK: [2015-06-15 Mon 20:46]--[2015-06-15 Mon 20:47] =>  0:01
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement class header formatter in io                            :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement class implementation formatter in io                    :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement enum header formatter in io                             :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement enum implementation formatter in io                     :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
