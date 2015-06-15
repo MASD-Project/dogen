@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -35,7 +34,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v){
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -51,7 +50,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t path_derivatives_hasher::hash(const path_derivatives&v) {
+std::size_t path_derivatives_hasher::hash(const path_derivatives& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.file_path()));

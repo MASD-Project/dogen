@@ -34,8 +34,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -91,7 +90,7 @@ inline std::size_t hash_boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_i
     return vis.hash;
 }
 
-inline std::size_t hash_std_vector_boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v){
+inline std::size_t hash_std_vector_boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite(i));
@@ -104,7 +103,7 @@ inline std::size_t hash_std_vector_boost_variant_dogen_dia_color_dogen_dia_real_
 namespace dogen {
 namespace dia {
 
-std::size_t attribute_hasher::hash(const attribute&v) {
+std::size_t attribute_hasher::hash(const attribute& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

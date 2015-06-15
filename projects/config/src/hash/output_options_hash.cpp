@@ -23,13 +23,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v){
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -42,7 +41,7 @@ inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v)
 namespace dogen {
 namespace config {
 
-std::size_t output_options_hasher::hash(const output_options&v) {
+std::size_t output_options_hasher::hash(const output_options& v) {
     std::size_t seed(0);
 
     combine(seed, v.output_to_stdout());

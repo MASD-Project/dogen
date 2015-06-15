@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -35,7 +34,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v){
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -45,7 +44,7 @@ inline std::size_t hash_boost_optional_std_string(const boost::optional<std::str
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -53,7 +52,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v){
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -67,7 +66,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t formatter_properties_hasher::hash(const formatter_properties&v) {
+std::size_t formatter_properties_hasher::hash(const formatter_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());

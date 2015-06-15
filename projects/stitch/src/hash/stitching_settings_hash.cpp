@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -35,7 +34,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v){
+inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::optional<boost::filesystem::path>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -45,7 +44,7 @@ inline std::size_t hash_boost_optional_boost_filesystem_path(const boost::option
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -58,7 +57,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
 namespace dogen {
 namespace stitch {
 
-std::size_t stitching_settings_hasher::hash(const stitching_settings&v) {
+std::size_t stitching_settings_hasher::hash(const stitching_settings& v) {
     std::size_t seed(0);
 
     combine(seed, v.stream_variable_name());

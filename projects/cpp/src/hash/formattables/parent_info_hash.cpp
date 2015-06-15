@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -38,7 +37,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_cpp_formattables_property_info(const std::list<dogen::cpp::formattables::property_info>& v){
+inline std::size_t hash_std_list_dogen_cpp_formattables_property_info(const std::list<dogen::cpp::formattables::property_info>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -52,7 +51,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t parent_info_hasher::hash(const parent_info&v) {
+std::size_t parent_info_hasher::hash(const parent_info& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

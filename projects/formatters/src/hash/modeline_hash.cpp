@@ -26,13 +26,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_formatters_modeline_field(const std::list<dogen::formatters::modeline_field>& v){
+inline std::size_t hash_std_list_dogen_formatters_modeline_field(const std::list<dogen::formatters::modeline_field>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -45,7 +44,7 @@ inline std::size_t hash_std_list_dogen_formatters_modeline_field(const std::list
 namespace dogen {
 namespace formatters {
 
-std::size_t modeline_hasher::hash(const modeline&v) {
+std::size_t modeline_hasher::hash(const modeline& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

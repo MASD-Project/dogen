@@ -26,13 +26,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_dia_connection(const std::vector<dogen::dia::connection>& v){
+inline std::size_t hash_std_vector_dogen_dia_connection(const std::vector<dogen::dia::connection>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -40,7 +39,7 @@ inline std::size_t hash_std_vector_dogen_dia_connection(const std::vector<dogen:
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_dia_child_node(const boost::optional<dogen::dia::child_node>& v){
+inline std::size_t hash_boost_optional_dogen_dia_child_node(const boost::optional<dogen::dia::child_node>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -50,7 +49,7 @@ inline std::size_t hash_boost_optional_dogen_dia_child_node(const boost::optiona
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_dia_attribute(const std::vector<dogen::dia::attribute>& v){
+inline std::size_t hash_std_vector_dogen_dia_attribute(const std::vector<dogen::dia::attribute>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -63,7 +62,7 @@ inline std::size_t hash_std_vector_dogen_dia_attribute(const std::vector<dogen::
 namespace dogen {
 namespace dia {
 
-std::size_t object_hasher::hash(const object&v) {
+std::size_t object_hasher::hash(const object& v) {
     std::size_t seed(0);
 
     combine(seed, v.type());

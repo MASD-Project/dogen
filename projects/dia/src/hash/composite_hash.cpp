@@ -24,19 +24,18 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_dia_attribute(const boost::shared_ptr<dogen::dia::attribute>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_dia_attribute(const boost::shared_ptr<dogen::dia::attribute>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_vector_boost_shared_ptr_dogen_dia_attribute_(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v){
+inline std::size_t hash_std_vector_boost_shared_ptr_dogen_dia_attribute_(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_shared_ptr_dogen_dia_attribute(i));
@@ -44,7 +43,7 @@ inline std::size_t hash_std_vector_boost_shared_ptr_dogen_dia_attribute_(const s
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_dia_composite(const boost::shared_ptr<dogen::dia::composite>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_dia_composite(const boost::shared_ptr<dogen::dia::composite>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -55,7 +54,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_dia_composite(const boost::shared
 namespace dogen {
 namespace dia {
 
-std::size_t composite_hasher::hash(const composite&v) {
+std::size_t composite_hasher::hash(const composite& v) {
     std::size_t seed(0);
 
     combine(seed, v.type());

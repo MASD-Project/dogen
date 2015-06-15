@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -35,7 +34,7 @@ namespace dogen {
 namespace test_models {
 namespace database {
 
-std::size_t no_keys_2_hasher::hash(const no_keys_2&v) {
+std::size_t no_keys_2_hasher::hash(const no_keys_2& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());

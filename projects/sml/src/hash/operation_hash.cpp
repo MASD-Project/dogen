@@ -26,13 +26,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_sml_parameter(const std::list<dogen::sml::parameter>& v){
+inline std::size_t hash_std_list_dogen_sml_parameter(const std::list<dogen::sml::parameter>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -40,7 +39,7 @@ inline std::size_t hash_std_list_dogen_sml_parameter(const std::list<dogen::sml:
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_sml_nested_qname(const boost::optional<dogen::sml::nested_qname>& v){
+inline std::size_t hash_boost_optional_dogen_sml_nested_qname(const boost::optional<dogen::sml::nested_qname>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -55,7 +54,7 @@ inline std::size_t hash_boost_optional_dogen_sml_nested_qname(const boost::optio
 namespace dogen {
 namespace sml {
 
-std::size_t operation_hasher::hash(const operation&v) {
+std::size_t operation_hasher::hash(const operation& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

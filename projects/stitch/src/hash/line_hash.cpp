@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v){
+inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -43,7 +42,7 @@ inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::sti
 namespace dogen {
 namespace stitch {
 
-std::size_t line_hasher::hash(const line&v) {
+std::size_t line_hasher::hash(const line& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_stitch_segment(v.segments()));

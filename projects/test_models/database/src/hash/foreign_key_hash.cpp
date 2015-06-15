@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_test_models_database_primary_key_2(const boost::shared_ptr<dogen::test_models::database::primary_key_2>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_test_models_database_primary_key_2(const boost::shared_ptr<dogen::test_models::database::primary_key_2>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -42,7 +41,7 @@ namespace dogen {
 namespace test_models {
 namespace database {
 
-std::size_t foreign_key_hasher::hash(const foreign_key&v) {
+std::size_t foreign_key_hasher::hash(const foreign_key& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());

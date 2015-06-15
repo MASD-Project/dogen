@@ -23,13 +23,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v){
+inline std::size_t hash_boost_optional_std_string(const boost::optional<std::string>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -45,7 +44,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-std::size_t inclusion_directive_settings_hasher::hash(const inclusion_directive_settings&v) {
+std::size_t inclusion_directive_settings_hasher::hash(const inclusion_directive_settings& v) {
     std::size_t seed(0);
 
     combine(seed, v.inclusion_required());

@@ -32,13 +32,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -48,7 +47,7 @@ inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dog
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types(const std::unordered_map<dogen::sml::qname, dogen::sml::origin_types>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -57,7 +56,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_origin_types
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_set<dogen::sml::qname>& v){
+inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_set<dogen::sml::qname>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -65,7 +64,7 @@ inline std::size_t hash_std_unordered_set_dogen_sml_qname(const std::unordered_s
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(const std::unordered_map<dogen::sml::qname, dogen::sml::module>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(const std::unordered_map<dogen::sml::qname, dogen::sml::module>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -74,7 +73,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_module(const
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(const std::unordered_map<dogen::sml::qname, dogen::sml::concept>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -83,7 +82,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_concept(cons
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(const std::unordered_map<dogen::sml::qname, dogen::sml::primitive>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -92,7 +91,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_primitive(co
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(const std::unordered_map<dogen::sml::qname, dogen::sml::enumeration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -101,7 +100,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_enumeration(
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(const std::unordered_map<dogen::sml::qname, dogen::sml::object>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -115,7 +114,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_object(const
 namespace dogen {
 namespace sml {
 
-std::size_t model_hasher::hash(const model&v) {
+std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

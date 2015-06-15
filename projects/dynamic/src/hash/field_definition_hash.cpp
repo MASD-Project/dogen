@@ -29,13 +29,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_dynamic_value(const boost::shared_ptr<dogen::dynamic::value>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_dynamic_value(const boost::shared_ptr<dogen::dynamic::value>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -46,7 +45,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_dynamic_value(const boost::shared
 namespace dogen {
 namespace dynamic {
 
-std::size_t field_definition_hasher::hash(const field_definition&v) {
+std::size_t field_definition_hasher::hash(const field_definition& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

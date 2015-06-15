@@ -24,8 +24,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -36,7 +35,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_config_reference(const std::vector<dogen::config::reference>& v){
+inline std::size_t hash_std_vector_dogen_config_reference(const std::vector<dogen::config::reference>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -49,7 +48,7 @@ inline std::size_t hash_std_vector_dogen_config_reference(const std::vector<doge
 namespace dogen {
 namespace config {
 
-std::size_t input_options_hasher::hash(const input_options&v) {
+std::size_t input_options_hasher::hash(const input_options& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.target()));

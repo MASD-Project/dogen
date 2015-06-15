@@ -31,19 +31,18 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_class_info(const boost::shared_ptr<dogen::cpp::formattables::class_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_class_info(const boost::shared_ptr<dogen::cpp::formattables::class_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_class_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::class_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_class_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::class_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -52,7 +51,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relationships(const std::unordered_map<dogen::sml::qname, dogen::sml_to_cpp::relationships>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -61,13 +60,13 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_dogen_sml_to_cpp_relat
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_exception_info(const boost::shared_ptr<dogen::cpp::formattables::exception_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_exception_info(const boost::shared_ptr<dogen::cpp::formattables::exception_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_exception_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::exception_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_exception_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::exception_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -76,13 +75,13 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_enum_info(const boost::shared_ptr<dogen::cpp::formattables::enum_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_enum_info(const boost::shared_ptr<dogen::cpp::formattables::enum_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_enum_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::enum_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_enum_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::enum_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -91,13 +90,13 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_registrar_info(const boost::shared_ptr<dogen::cpp::formattables::registrar_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_registrar_info(const boost::shared_ptr<dogen::cpp::formattables::registrar_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_registrar_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::registrar_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_registrar_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::registrar_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -106,13 +105,13 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_namespace_info(const boost::shared_ptr<dogen::cpp::formattables::namespace_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_namespace_info(const boost::shared_ptr<dogen::cpp::formattables::namespace_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_namespace_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::namespace_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_namespace_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::namespace_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -121,13 +120,13 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_visitor_info(const boost::shared_ptr<dogen::cpp::formattables::visitor_info>& v){
+inline std::size_t hash_boost_shared_ptr_dogen_cpp_formattables_visitor_info(const boost::shared_ptr<dogen::cpp::formattables::visitor_info>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_visitor_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::visitor_info> >& v){
+inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_visitor_info_(const std::unordered_map<dogen::sml::qname, boost::shared_ptr<dogen::cpp::formattables::visitor_info> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -141,7 +140,7 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen
 namespace dogen {
 namespace sml_to_cpp {
 
-std::size_t context_hasher::hash(const context&v) {
+std::size_t context_hasher::hash(const context& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_dogen_sml_qname_boost_shared_ptr_dogen_cpp_formattables_class_info_(v.classes()));

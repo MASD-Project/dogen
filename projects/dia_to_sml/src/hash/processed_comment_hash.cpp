@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -37,7 +36,7 @@ inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::stri
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v){
+inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_std_string(i));
@@ -50,7 +49,7 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list
 namespace dogen {
 namespace dia_to_sml {
 
-std::size_t processed_comment_hasher::hash(const processed_comment&v) {
+std::size_t processed_comment_hasher::hash(const processed_comment& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

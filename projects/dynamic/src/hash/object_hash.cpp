@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_instance(const std::unordered_map<std::string, dogen::dynamic::field_instance>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_instance(const std::unordered_map<std::string, dogen::dynamic::field_instance>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -44,7 +43,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_instanc
 namespace dogen {
 namespace dynamic {
 
-std::size_t object_hasher::hash(const object&v) {
+std::size_t object_hasher::hash(const object& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_dynamic_field_instance(v.fields()));

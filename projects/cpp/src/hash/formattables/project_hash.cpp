@@ -26,13 +26,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_cpp_formattables_file_info(const std::list<dogen::cpp::formattables::file_info>& v){
+inline std::size_t hash_std_list_dogen_cpp_formattables_file_info(const std::list<dogen::cpp::formattables::file_info>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -40,7 +39,7 @@ inline std::size_t hash_std_list_dogen_cpp_formattables_file_info(const std::lis
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_cpp_formattables_cmakelists_info(const boost::optional<dogen::cpp::formattables::cmakelists_info>& v){
+inline std::size_t hash_boost_optional_dogen_cpp_formattables_cmakelists_info(const boost::optional<dogen::cpp::formattables::cmakelists_info>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -56,7 +55,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::size_t project_hasher::hash(const project&v) {
+std::size_t project_hasher::hash(const project& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_cpp_formattables_file_info(v.files()));

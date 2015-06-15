@@ -25,13 +25,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_dia_layer(const std::vector<dogen::dia::layer>& v){
+inline std::size_t hash_std_vector_dogen_dia_layer(const std::vector<dogen::dia::layer>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -44,7 +43,7 @@ inline std::size_t hash_std_vector_dogen_dia_layer(const std::vector<dogen::dia:
 namespace dogen {
 namespace dia {
 
-std::size_t diagram_hasher::hash(const diagram&v) {
+std::size_t diagram_hasher::hash(const diagram& v) {
     std::size_t seed(0);
 
     combine(seed, v.diagram_data());

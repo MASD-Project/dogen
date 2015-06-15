@@ -27,13 +27,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v){
+inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dogen::sml::qname>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -48,7 +47,7 @@ inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dog
 namespace dogen {
 namespace sml {
 
-std::size_t type_hasher::hash(const type&v) {
+std::size_t type_hasher::hash(const type& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());

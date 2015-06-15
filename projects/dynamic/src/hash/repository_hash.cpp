@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_dynamic_field_definition(const std::list<dogen::dynamic::field_definition>& v){
+inline std::size_t hash_std_list_dogen_dynamic_field_definition(const std::list<dogen::dynamic::field_definition>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -38,7 +37,7 @@ inline std::size_t hash_std_list_dogen_dynamic_field_definition(const std::list<
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_definition(const std::unordered_map<std::string, dogen::dynamic::field_definition>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_definition(const std::unordered_map<std::string, dogen::dynamic::field_definition>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -47,7 +46,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_dynamic_field_definit
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(const std::unordered_map<std::string, std::list<dogen::dynamic::field_definition> >& v){
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_dynamic_field_definition_(const std::unordered_map<std::string, std::list<dogen::dynamic::field_definition> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -61,7 +60,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_dynamic_fiel
 namespace dogen {
 namespace dynamic {
 
-std::size_t repository_hasher::hash(const repository&v) {
+std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_dynamic_field_definition(v.all_field_definitions()));

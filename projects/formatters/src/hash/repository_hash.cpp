@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_formatters_modeline_group(const std::unordered_map<std::string, dogen::formatters::modeline_group>& v){
+inline std::size_t hash_std_unordered_map_std_string_dogen_formatters_modeline_group(const std::unordered_map<std::string, dogen::formatters::modeline_group>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -39,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_formatters_modeline_g
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v){
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -53,7 +52,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 namespace dogen {
 namespace formatters {
 
-std::size_t repository_hasher::hash(const repository&v) {
+std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_formatters_modeline_group(v.modeline_groups()));

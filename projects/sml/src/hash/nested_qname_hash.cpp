@@ -24,13 +24,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_sml_nested_qname(const std::list<dogen::sml::nested_qname>& v){
+inline std::size_t hash_std_list_dogen_sml_nested_qname(const std::list<dogen::sml::nested_qname>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -43,7 +42,7 @@ inline std::size_t hash_std_list_dogen_sml_nested_qname(const std::list<dogen::s
 namespace dogen {
 namespace sml {
 
-std::size_t nested_qname_hasher::hash(const nested_qname&v) {
+std::size_t nested_qname_hasher::hash(const nested_qname& v) {
     std::size_t seed(0);
 
     combine(seed, v.type());

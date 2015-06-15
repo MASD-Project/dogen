@@ -25,13 +25,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const boost::optional<dogen::formatters::general_settings>& v){
+inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -46,7 +45,7 @@ inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const b
 namespace dogen {
 namespace stitch {
 
-std::size_t settings_bundle_hasher::hash(const settings_bundle&v) {
+std::size_t settings_bundle_hasher::hash(const settings_bundle& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
