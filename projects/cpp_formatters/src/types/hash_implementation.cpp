@@ -142,7 +142,7 @@ void hash_implementation::pair_helper(
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
-            << "(const " << container_type_name << "& v)";
+            << "(const " << container_type_name << "& v) ";
 
     utility_.open_scope();
     {
