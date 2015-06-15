@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -41,7 +40,7 @@ namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-std::size_t move_ctor_base_hasher::hash(const move_ctor_base&v) {
+std::size_t move_ctor_base_hasher::hash(const move_ctor_base& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.prop_0()));

@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -53,7 +52,7 @@ inline std::size_t hash_std_pair_std_string_int(const std::pair<std::string, int
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_pair_std_string_int_(const std::vector<std::pair<std::string, int> >& v){
+inline std::size_t hash_std_vector_std_pair_std_string_int_(const std::vector<std::pair<std::string, int> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_int(i));
@@ -67,7 +66,7 @@ namespace dogen {
 namespace test_models {
 namespace std_model {
 
-std::size_t class_j_hasher::hash(const class_j&v) {
+std::size_t class_j_hasher::hash(const class_j& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_pair_int_int(v.prop_0()));

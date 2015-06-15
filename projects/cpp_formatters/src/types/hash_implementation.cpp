@@ -89,7 +89,7 @@ void hash_implementation::combine_function(
 
     stream_ << indenter_ << "template <typename HashableType>" << std::endl
             << indenter_ << "inline void combine(std::size_t& seed, "
-            << "const HashableType& value)" << std::endl;
+            << "const HashableType& value) ";
 
     utility_.open_scope();
     {
@@ -193,7 +193,7 @@ void hash_implementation::optional_helper(
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
-            << "(const " << container_type_name << "& v)";
+            << "(const " << container_type_name << "& v) ";
 
     utility_.open_scope();
     {
@@ -308,7 +308,7 @@ sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
-            << "(const " << container_type_name << "& v)";
+            << "(const " << container_type_name << "& v) ";
 
     utility_.open_scope();
     {
@@ -355,7 +355,7 @@ associative_container_helper(const cpp::formattables::nested_type_info& nti) {
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
-            << "(const " << container_type_name << "& v)";
+            << "(const " << container_type_name << "& v) ";
 
     utility_.open_scope();
     {
@@ -406,7 +406,7 @@ smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
     utility_.blank_line();
     stream_ << indenter_ << "inline std::size_t hash_"
             << container_identifiable_type_name
-            << "(const " << container_type_name << "& v)";
+            << "(const " << container_type_name << "& v) ";
 
     utility_.open_scope();
     {
@@ -599,7 +599,7 @@ void hash_implementation::hasher_hash_method(
     stream_ << indenter_ << "std::size_t " << ci.name() << "_hasher::"
             << "hash(const "
             << ci.name() << "&"
-            << (props.empty() && parents.empty() ? ") " : "v) ");
+            << (props.empty() && parents.empty() ? ") " : " v) ");
 
     utility_.open_scope();
     {

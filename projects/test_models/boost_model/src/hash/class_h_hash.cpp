@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -46,7 +45,7 @@ namespace dogen {
 namespace test_models {
 namespace boost_model {
 
-std::size_t class_h_hasher::hash(const class_h&v) {
+std::size_t class_h_hasher::hash(const class_h& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_property_tree_ptree(v.prop_0()));

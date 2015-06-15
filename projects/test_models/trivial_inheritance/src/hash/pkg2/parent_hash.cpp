@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -36,7 +35,7 @@ namespace test_models {
 namespace trivial_inheritance {
 namespace pkg2 {
 
-std::size_t parent_hasher::hash(const parent&v) {
+std::size_t parent_hasher::hash(const parent& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());

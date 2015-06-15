@@ -25,13 +25,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_int(const boost::optional<int>& v){
+inline std::size_t hash_boost_optional_int(const boost::optional<int>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -41,7 +40,7 @@ inline std::size_t hash_boost_optional_int(const boost::optional<int>& v){
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_test_models_boost_model_class_a(const boost::optional<dogen::test_models::boost_model::class_a>& v){
+inline std::size_t hash_boost_optional_dogen_test_models_boost_model_class_a(const boost::optional<dogen::test_models::boost_model::class_a>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -51,7 +50,7 @@ inline std::size_t hash_boost_optional_dogen_test_models_boost_model_class_a(con
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_test_models_boost_model_pkg1_class_c(const boost::optional<dogen::test_models::boost_model::pkg1::class_c>& v){
+inline std::size_t hash_boost_optional_dogen_test_models_boost_model_pkg1_class_c(const boost::optional<dogen::test_models::boost_model::pkg1::class_c>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -61,7 +60,7 @@ inline std::size_t hash_boost_optional_dogen_test_models_boost_model_pkg1_class_
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_test_models_boost_model_class_a(const std::vector<dogen::test_models::boost_model::class_a>& v){
+inline std::size_t hash_std_vector_dogen_test_models_boost_model_class_a(const std::vector<dogen::test_models::boost_model::class_a>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -69,7 +68,7 @@ inline std::size_t hash_std_vector_dogen_test_models_boost_model_class_a(const s
     return seed;
 }
 
-inline std::size_t hash_boost_optional_std_vector_dogen_test_models_boost_model_class_a_(const boost::optional<std::vector<dogen::test_models::boost_model::class_a> >& v){
+inline std::size_t hash_boost_optional_std_vector_dogen_test_models_boost_model_class_a_(const boost::optional<std::vector<dogen::test_models::boost_model::class_a> >& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -85,7 +84,7 @@ namespace dogen {
 namespace test_models {
 namespace boost_model {
 
-std::size_t class_d_hasher::hash(const class_d&v) {
+std::size_t class_d_hasher::hash(const class_d& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_optional_int(v.prop_0()));

@@ -25,13 +25,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -39,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v){
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_test_models_std_model_class_a(const std::list<dogen::test_models::std_model::class_a>& v){
+inline std::size_t hash_std_list_dogen_test_models_std_model_class_a(const std::list<dogen::test_models::std_model::class_a>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -47,7 +46,7 @@ inline std::size_t hash_std_list_dogen_test_models_std_model_class_a(const std::
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_test_models_std_model_pkg1_class_c(const std::list<dogen::test_models::std_model::pkg1::class_c>& v){
+inline std::size_t hash_std_list_dogen_test_models_std_model_pkg1_class_c(const std::list<dogen::test_models::std_model::pkg1::class_c>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -55,7 +54,7 @@ inline std::size_t hash_std_list_dogen_test_models_std_model_pkg1_class_c(const 
     return seed;
 }
 
-inline std::size_t hash_std_list_unsigned_int(const std::list<unsigned int>& v){
+inline std::size_t hash_std_list_unsigned_int(const std::list<unsigned int>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -63,7 +62,7 @@ inline std::size_t hash_std_list_unsigned_int(const std::list<unsigned int>& v){
     return seed;
 }
 
-inline std::size_t hash_std_list_std_list_unsigned_int_(const std::list<std::list<unsigned int> >& v){
+inline std::size_t hash_std_list_std_list_unsigned_int_(const std::list<std::list<unsigned int> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_list_unsigned_int(i));
@@ -77,7 +76,7 @@ namespace dogen {
 namespace test_models {
 namespace std_model {
 
-std::size_t class_d_hasher::hash(const class_d&v) {
+std::size_t class_d_hasher::hash(const class_d& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_std_string(v.prop_0()));

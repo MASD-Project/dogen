@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -35,7 +34,7 @@ namespace dogen {
 namespace test_models {
 namespace stereotypes {
 
-std::size_t base_with_concept_hasher::hash(const base_with_concept&v) {
+std::size_t base_with_concept_hasher::hash(const base_with_concept& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_2());

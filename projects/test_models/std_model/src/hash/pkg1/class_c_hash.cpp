@@ -26,13 +26,12 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a(const std::vector<dogen::test_models::std_model::class_a>& v){
+inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a(const std::vector<dogen::test_models::std_model::class_a>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -40,7 +39,7 @@ inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a(const std
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a_unversioned_key(const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& v){
+inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a_unversioned_key(const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -48,7 +47,7 @@ inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a_unversion
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a_versioned_key(const std::vector<dogen::test_models::std_model::class_a_versioned_key>& v){
+inline std::size_t hash_std_vector_dogen_test_models_std_model_class_a_versioned_key(const std::vector<dogen::test_models::std_model::class_a_versioned_key>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -63,7 +62,7 @@ namespace test_models {
 namespace std_model {
 namespace pkg1 {
 
-std::size_t class_c_hasher::hash(const class_c&v) {
+std::size_t class_c_hasher::hash(const class_c& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0());

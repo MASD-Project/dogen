@@ -23,8 +23,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -49,7 +48,7 @@ inline std::size_t hash_boost_posix_time_time_duration(const boost::posix_time::
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_gregorian_date(const std::list<boost::gregorian::date>& v){
+inline std::size_t hash_std_list_boost_gregorian_date(const std::list<boost::gregorian::date>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_gregorian_date(i));
@@ -57,7 +56,7 @@ inline std::size_t hash_std_list_boost_gregorian_date(const std::list<boost::gre
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_posix_time_ptime(const std::list<boost::posix_time::ptime>& v){
+inline std::size_t hash_std_list_boost_posix_time_ptime(const std::list<boost::posix_time::ptime>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_posix_time_ptime(i));
@@ -65,7 +64,7 @@ inline std::size_t hash_std_list_boost_posix_time_ptime(const std::list<boost::p
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_posix_time_time_duration(const std::list<boost::posix_time::time_duration>& v){
+inline std::size_t hash_std_list_boost_posix_time_time_duration(const std::list<boost::posix_time::time_duration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_posix_time_time_duration(i));
@@ -79,7 +78,7 @@ namespace dogen {
 namespace test_models {
 namespace boost_model {
 
-std::size_t class_f_hasher::hash(const class_f&v) {
+std::size_t class_f_hasher::hash(const class_f& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop_0().modjulian_day());

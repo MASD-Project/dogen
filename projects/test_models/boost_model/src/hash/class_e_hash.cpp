@@ -25,8 +25,7 @@
 namespace {
 
 template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value)
-{
+inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
@@ -73,7 +72,7 @@ inline std::size_t hash_boost_variant_int_dogen_test_models_boost_model_class_de
     return vis.hash;
 }
 
-inline std::size_t hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& v){
+inline std::size_t hash_std_vector_boost_variant_int_dogen_test_models_boost_model_class_derived_double_(const std::vector<boost::variant<int, dogen::test_models::boost_model::class_derived, double> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_boost_variant_int_dogen_test_models_boost_model_class_derived_double(i));
@@ -110,7 +109,7 @@ namespace dogen {
 namespace test_models {
 namespace boost_model {
 
-std::size_t class_e_hasher::hash(const class_e&v) {
+std::size_t class_e_hasher::hash(const class_e& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_variant_int_double(v.prop_0()));
