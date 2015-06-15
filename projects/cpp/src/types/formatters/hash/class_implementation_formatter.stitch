@@ -78,7 +78,6 @@ std::size_t <#= c.name() #>_hasher::hash(const <#= c.name() #>&<#= ((c.propertie
 <#+
         } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*override*/);
+    return fa.make_file();
 }
 #>

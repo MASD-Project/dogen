@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-15 Mon 18:50]
+#+CAPTION: Clock summary at [2015-06-15 Mon 18:54]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
@@ -31,7 +31,7 @@
 | COMPLETED Fix borked builds due to formatter differences                    |         |       |  2:40 |
 | COMPLETED Stitch gcc release builds are borked                              |         |       |  0:28 |
 | COMPLETED Do we use =formatter_types=?                                      |         |       |  0:08 |
-| STARTED Implement class header implementation in hash                       |         |       |  5:04 |
+| COMPLETED Implement class implementation formatter in hash                  |         |       |  5:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -349,7 +349,8 @@ This was a comedy of errors:
 We need to figure out if we need this enumeration in =cpp::formatters=
 and if not remove it.
 
-*** STARTED Implement class header implementation in hash             :story:
+*** COMPLETED Implement class implementation formatter in hash        :story:
+    CLOSED: [2015-06-15 Mon 18:53]
     CLOCK: [2015-06-15 Mon 18:47]--[2015-06-15 Mon 18:50] =>  0:03
     CLOCK: [2015-06-15 Mon 18:16]--[2015-06-15 Mon 18:42] =>  0:26
     CLOCK: [2015-06-15 Mon 18:11]--[2015-06-15 Mon 18:15] =>  0:04
@@ -380,6 +381,11 @@ Solved Problems:
 - other helpers have no space before open bracket.
 - issues with spacing before and after helpers.
 - boost date is not using helpers.
+
+*** Implement enum header formatter in hash                           :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 *** Remove intermediate fields from dynamic                           :story:
 
