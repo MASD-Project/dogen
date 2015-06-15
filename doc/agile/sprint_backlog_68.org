@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-15 Mon 20:42]
+#+CAPTION: Clock summary at [2015-06-15 Mon 21:30]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *24:37* |       |       |
+| *Total time*                                                                | *25:20* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 24:37   |       |       |
-| Active                                                                      |         | 24:37 |       |
+| Stories                                                                     | 25:20   |       |       |
+| Active                                                                      |         | 25:20 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:07 |
-| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:14 |
+| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
@@ -31,7 +31,8 @@
 | COMPLETED Fix borked builds due to formatter differences                    |         |       |  2:40 |
 | COMPLETED Stitch gcc release builds are borked                              |         |       |  0:28 |
 | COMPLETED Do we use =formatter_types=?                                      |         |       |  0:08 |
-| COMPLETED Implement class implementation formatter in hash                  |         |       |  5:04 |
+| COMPLETED Implement class implementation formatter in hash                  |         |       |  5:16 |
+| STARTED Implement enum header formatter in hash                             |         |       |  0:43 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -52,7 +53,6 @@ Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Implement class implementation formatter using stitch   :story:
     CLOSED: [2015-06-11 Thu 21:31]
-    CLOCK: [2015-06-15 Mon 20:30]--[2015-06-15 Mon 20:42] =>  0:12
     CLOCK: [2015-06-11 Thu 20:59]--[2015-06-11 Thu 21:31] =>  0:32
     CLOCK: [2015-06-11 Thu 18:52]--[2015-06-11 Thu 19:08] =>  0:16
     CLOCK: [2015-06-11 Thu 18:28]--[2015-06-11 Thu 18:51] =>  0:23
@@ -352,6 +352,7 @@ and if not remove it.
 
 *** COMPLETED Implement class implementation formatter in hash        :story:
     CLOSED: [2015-06-15 Mon 18:53]
+    CLOCK: [2015-06-15 Mon 20:30]--[2015-06-15 Mon 20:42] =>  0:12
     CLOCK: [2015-06-15 Mon 18:47]--[2015-06-15 Mon 18:50] =>  0:03
     CLOCK: [2015-06-15 Mon 18:16]--[2015-06-15 Mon 18:42] =>  0:26
     CLOCK: [2015-06-15 Mon 18:11]--[2015-06-15 Mon 18:15] =>  0:04
@@ -383,7 +384,10 @@ Solved Problems:
 - issues with spacing before and after helpers.
 - boost date is not using helpers.
 
-*** Implement enum header formatter in hash                           :story:
+*** STARTED Implement enum header formatter in hash                   :story:
+    CLOCK: [2015-06-15 Mon 21:00]--[2015-06-15 Mon 21:30] =>  0:30
+    CLOCK: [2015-06-15 Mon 20:47]--[2015-06-15 Mon 20:59] =>  0:12
+    CLOCK: [2015-06-15 Mon 20:46]--[2015-06-15 Mon 20:47] =>  0:01
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.

@@ -30,13 +30,15 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("dynamic.content_extensions"));
+auto lg(logger_factory("dynamic.field_selector"));
 
 const std::string field_not_found("Field not found: ");
 const std::string unexpected_value_type("Unexpected value type.");
 const std::string field("Field: ");
 const std::string not_boolean_field("Field does not have boolean content: ");
 const std::string not_text_field("Field does not have text content: ");
+const std::string not_text_collection_field(
+    "Field does not have text collection content: ");
 const std::string unexpected_field_type("Field has an unexpected type: ");
 typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
 const std::string no_default_value(
@@ -114,7 +116,16 @@ get_text_content_or_default(const field_definition& fd) const {
         return get_text_content(fd);
 
     ensure_default_value(fd);
-    return get_text_content(*fd.default_value());
+
+    try {
+        return get_text_content(*fd.default_value());
+    } catch(boost::exception& e) {
+        const auto n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << not_text_field << n
+                                 << " (field's default value)";
+        e << extension_error_info(field + n);
+        throw;
+    }
 }
 
 std::list<std::string>
@@ -159,7 +170,16 @@ get_text_collection_content_or_default(const field_definition& fd) const {
         return get_text_collection_content(fd);
 
     ensure_default_value(fd);
-    return get_text_collection_content(*fd.default_value());
+
+    try {
+        return get_text_collection_content(*fd.default_value());
+    } catch(boost::exception& e) {
+        const auto n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << not_text_collection_field << n
+                                 << " (field's default value)";
+        e << extension_error_info(field + n);
+        throw;
+    }
 }
 
 bool field_selector::get_boolean_content(const value& v) {
@@ -195,7 +215,16 @@ get_boolean_content_or_default(const field_definition& fd) const {
         return get_boolean_content(fd);
 
     ensure_default_value(fd);
-    return get_boolean_content(*fd.default_value());
+
+    try {
+        return get_boolean_content(*fd.default_value());
+    } catch(boost::exception& e) {
+        const auto n(fd.name().qualified());
+        BOOST_LOG_SEV(lg, error) << not_boolean_field << n
+                                 << " (field's default value)";
+        e << extension_error_info(field + n);
+        throw;
+    }
 }
 
 } }

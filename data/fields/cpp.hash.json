@@ -67,10 +67,10 @@
             "facet_name" : "cpp.hash",
             "formatter_name" : "cpp.hash.enum_header_formatter"
         },
-        "value_type" : "boolean",
+        "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : true
+        "default_value" : ""
     },
     {
         "name" : {

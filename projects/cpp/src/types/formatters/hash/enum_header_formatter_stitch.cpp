@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,27 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include "dogen/cpp/types/formatters/hash/class_header_formatter.hpp"
-#include "dogen/cpp/types/formatters/hash/class_implementation_formatter.hpp"
-#include "dogen/cpp/types/formatters/hash/enum_header_formatter.hpp"
-#include "dogen/cpp/types/formatters/hash/initializer.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/hash/enum_header_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace hash {
 
-template<typename Formatter>
-inline void initialise_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
-}
+dogen::formatters::file enum_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::enum_info& e) {
 
-void initializer::initialize(registrar& rg) {
-    initialise_formatter<class_header_formatter>(rg);
-    initialise_formatter<class_implementation_formatter>(rg);
-    initialise_formatter<enum_header_formatter>(rg);
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << std::endl;
+            fa.comment(e.documentation());
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    // return fa.make_file();
+    return fa.make_file(false/*override*/);
 }
 
 } } } }
