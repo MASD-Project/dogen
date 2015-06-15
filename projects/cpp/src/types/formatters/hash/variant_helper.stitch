@@ -9,28 +9,25 @@
 void variant_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-    
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
 #>
 struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
     <#= t.complete_identifiable_name() #>_visitor() : hash(0) {}
 <#+
-        const auto children(t.children());
-        for (const auto& c : children) {
+    const auto children(t.children());
+    for (const auto& c : children) {
 #>
     void operator()(const <#= c.name() #><#= (c.is_primitive() ? "" : "&") #> v) const {
 <#+
-            if (!fa.requires_hashing_helper_method(c))
+        if (!fa.requires_hashing_helper_method(c))
 #>
         combine(hash, v);
 <#+
-            else
+        else
 #>
         combine(hash, hash_<#= c.complete_identifiable_name() #>(v));
     }    
 <#+
-        }
+    }
 #>
 
     mutable std::size_t hash;
@@ -38,15 +35,10 @@ struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visi
 
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     <
-    <#= t.complete_identifiable_name() #>_visitor vis;
+s
     boost::apply_visitor(vis, v);
     return vis.hash;
 }
-
-<#+
-    }
-#>
-
 <#+
 }
 #>

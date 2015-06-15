@@ -8,10 +8,7 @@
 
 void path_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) {
-    
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
+    const formattables::nested_type_info& t) {    
 #>
 
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
@@ -19,10 +16,6 @@ inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.comple
     combine(seed, v.generic_string());
     return seed;
 }
-<#+
-    }
-#>
-
 <#+
 }
 #>

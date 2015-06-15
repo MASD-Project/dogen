@@ -10,36 +10,30 @@ void pair_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
-        const auto first(t.children().front());
-        const auto second(t.children().back());
+    const auto first(t.children().front());
+    const auto second(t.children().back());
 #>
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     std::size_t seed(0);
 
 <#+
-        if (!fa.requires_hashing_helper_method(first))
+    if (!fa.requires_hashing_helper_method(first))
 #>
     combine(seed, v.first);
 <#+
-        else
+    else
 #>
     combine(seed, hash_<#= first.complete_identifiable_name() #>(v.first));
 <#+
 
-        if (!fa.requires_hashing_helper_method(second))
+    if (!fa.requires_hashing_helper_method(second))
 #>
     combine(seed, v.second);
 <#+
-        else
+    else
 #>
     combine(seed, hash_<#= second.complete_identifiable_name() #>(v.second));
     return seed;
-<#+
-    }
-#>
-
 <#+
 }
 #>

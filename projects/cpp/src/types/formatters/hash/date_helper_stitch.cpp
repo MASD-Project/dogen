@@ -29,15 +29,11 @@ void date_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
     
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;
 fa.stream() << "    combine(seed, v.modjulian_day());" << std::endl;
 fa.stream() << "    return seed;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
-    }
 fa.stream() << std::endl;
 }
 } } } }

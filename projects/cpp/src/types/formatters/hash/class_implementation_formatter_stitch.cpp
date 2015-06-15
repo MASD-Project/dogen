@@ -63,7 +63,7 @@ fa.stream() << "    combine(seed, dynamic_cast<const " << p.qualified_name() << 
 fa.stream() << std::endl;
                 for (const auto p : c.properties()) {
                     if (fa.requires_hashing_helper_method(p.type()))
-fa.stream() << "    combine(seed, hash_" << p.type().complete_identifiable_name() << "&>(v." << p.name() << "()));" << std::endl;
+fa.stream() << "    combine(seed, hash_" << p.type().complete_identifiable_name() << "(v." << p.name() << "()));" << std::endl;
                     else
 fa.stream() << "    combine(seed, v." << p.name() << "()" << (p.type().is_date() ? ".modjulian_day()" : "") << ");" << std::endl;
                 }

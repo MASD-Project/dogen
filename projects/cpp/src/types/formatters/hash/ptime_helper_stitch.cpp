@@ -28,9 +28,6 @@ namespace hash {
 void ptime_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-    
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;
 fa.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
@@ -38,8 +35,5 @@ fa.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl
 fa.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
 fa.stream() << "    return seed;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
-    }
-fa.stream() << std::endl;
 }
 } } } }

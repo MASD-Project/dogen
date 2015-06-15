@@ -364,14 +364,16 @@ machinery. Fix all differences.
 Problems:
 
 - hash combine has incorrect indentation on open bracket and no space
-  between =&v=
-- hash of path now requires helper. we were generating helper
-  previously but it seems we were not using it. Best to just remove
-  helper in legacy and see what breaks.
+  between =&v=.
 
 Solved Problems:
 
 - no inclusion for parent or members
+- hash of path now requires helper. we were generating helper
+  previously but it seems we were not using it. Best to just remove
+  helper in legacy and see what breaks. Actually this is not quite
+  right; we were using it, it was just placed in the wrong
+  namespace. The problem is the helpers should not be in namespaces.
 
 *** Remove intermediate fields from dynamic                           :story:
 

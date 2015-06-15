@@ -10,29 +10,23 @@ void sequence_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
-        const auto containee(t.children().front());
+    const auto containee(t.children().front());
 #>
 
 inline std::size_t hash_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
 <#+
-        if (!fa.requires_hashing_helper_method(containee))
+    if (!fa.requires_hashing_helper_method(containee))
 #>
         combine(seed, i);
 <#+
-        else
+    else
 #>
         combine(seed, hash_<#= containee.complete_identifiable_name() #>(i));
     }
     return seed;
 }
-<#+
-    }
-#>
-
 <#+
 }
 #>

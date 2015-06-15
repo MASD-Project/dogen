@@ -30,26 +30,25 @@ void associative_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 
-    {
-        auto snf(fa.make_scoped_namespace_formatter(t));
-        const auto key(t.children().front());
-        const auto value(t.children().back());
+    auto snf(fa.make_scoped_namespace_formatter(t));
+    const auto key(t.children().front());
+    const auto value(t.children().back());
 fa.stream() << std::endl;
 fa.stream() << "inline std::size_t hash_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::size_t seed(0);" << std::endl;
 fa.stream() << "    for (const auto i : v) {" << std::endl;
-        if (!fa.requires_hashing_helper_method(key))
+    if (!fa.requires_hashing_helper_method(key))
 fa.stream() << "        combine(seed, i.first);" << std::endl;
-        else
+    else
 fa.stream() << "        combine(seed, hash_" << key.complete_identifiable_name() << "(i.first));" << std::endl;
-        if (!fa.requires_hashing_helper_method(value))
+
+    if (!fa.requires_hashing_helper_method(value))
 fa.stream() << "        combine(seed, i.second);" << std::endl;
-        else
+    else
 fa.stream() << "        combine(seed, hash_" << value.complete_identifiable_name() << "(i.second));" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << "    return seed;" << std::endl;
 fa.stream() << "}" << std::endl;
-    }
 fa.stream() << std::endl;
 }
 } } } }
