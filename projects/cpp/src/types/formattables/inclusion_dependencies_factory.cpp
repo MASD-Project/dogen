@@ -136,9 +136,8 @@ inclusion_dependencies_factory::make(const sml::object& o) const {
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::enumeration& /*e*/) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
-    return r;
+inclusion_dependencies_factory::make(const sml::enumeration& e) const {
+    return generate(factory_, provider_container_.enumeration_providers(), e);
 }
 
 std::unordered_map<std::string, std::list<std::string> >

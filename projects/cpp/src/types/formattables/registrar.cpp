@@ -51,4 +51,15 @@ void registrar::register_provider(boost::shared_ptr<
     container_.object_providers().push_front(p);
 }
 
+void registrar::register_provider(boost::shared_ptr<
+    inclusion_dependencies_provider_interface<sml::enumeration>
+    > p) {
+
+    if (p->formatter_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
+    container_.enumeration_providers().push_front(p);
+}
+
 } } }
