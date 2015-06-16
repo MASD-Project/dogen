@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-16 Tue 22:32]
+#+CAPTION: Clock summary at [2015-06-16 Tue 22:35]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *27:52* |       |       |
+| *Total time*                                                                | *27:56* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 27:52   |       |       |
-| Active                                                                      |         | 27:52 |       |
+| Stories                                                                     | 27:56   |       |       |
+| Active                                                                      |         | 27:56 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -34,7 +34,7 @@
 | COMPLETED Implement class implementation formatter in hash                  |         |       |  5:16 |
 | COMPLETED Implement enum header formatter in hash                           |         |       |  1:08 |
 | COMPLETED Implement class header formatter in io                            |         |       |  0:17 |
-| STARTED Implement class implementation formatter in io                      |         |       |  1:44 |
+| STARTED Implement class implementation formatter in io                      |         |       |  1:48 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -405,6 +405,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in io            :story:
+    CLOCK: [2015-06-16 Tue 22:31]--[2015-06-16 Tue 22:35] =>  0:04
     CLOCK: [2015-06-16 Tue 21:39]--[2015-06-16 Tue 22:30] =>  0:51
     CLOCK: [2015-06-16 Tue 21:35]--[2015-06-16 Tue 21:38] =>  0:03
     CLOCK: [2015-06-16 Tue 21:30]--[2015-06-16 Tue 21:34] =>  0:04
@@ -415,13 +416,13 @@ machinery. Fix all differences.
 
 Problems:
 
-- missing space in smart pointer
 - missing includes for visitor, date, ptime, json parser, string.
 - quoted char (expected unquoted in variant, but we quote it when by itself).
 - path does not require generic string
 
 Problems solved:
 
+- missing space in smart pointer
 - add newline after namespaces to legacy;
 - is char does not appear to be coming through.
 

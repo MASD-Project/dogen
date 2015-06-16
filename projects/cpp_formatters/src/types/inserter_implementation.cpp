@@ -303,7 +303,8 @@ smart_pointer_helper(const cpp::formattables::nested_type_info& nti) {
                         << utility_.quote(utility_.quote_escaped("<empty>"))
                         << ";" << std::endl;
             }
-            stream_ << indenter_ << "s" << inserter << utility_.quote(" }")
+            stream_ << indenter_ << "s" << space_inserter
+                    << utility_.quote(" }")
                     << ";";
             utility_.blank_line();
             stream_ << indenter_ << "return s;" << std::endl;
