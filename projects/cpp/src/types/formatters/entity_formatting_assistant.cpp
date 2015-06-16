@@ -114,6 +114,11 @@ std::string entity_formatting_assistant::make_member_variable_name(
     return p.name() + member_variable_postfix;
 }
 
+std::string entity_formatting_assistant::make_getter_setter_name(
+    const formattables::property_info& p) const {
+    return p.name();
+}
+
 bool entity_formatting_assistant::
 is_formatter_enabled(const std::string& formatter_name) const {
     const auto fp(obtain_formatter_properties(formatter_name));

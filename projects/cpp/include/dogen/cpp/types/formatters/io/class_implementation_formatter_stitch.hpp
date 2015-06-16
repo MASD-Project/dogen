@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_STITCH_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_STITCH_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-dogen::formatters::file class_header_formatter_stitch(
+dogen::formatters::file class_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
     const formattables::class_info& fd);
 

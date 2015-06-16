@@ -20,6 +20,7 @@
  */
 #include <memory>
 #include "dogen/cpp/types/formatters/io/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/initializer.hpp"
 
 namespace dogen {
@@ -27,13 +28,15 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-void initialise_class_header_formatter(registrar& rg) {
-    const auto f(std::make_shared<class_header_formatter>());
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
     rg.register_formatter(f);
 }
 
 void initializer::initialize(registrar& rg) {
-    initialise_class_header_formatter(rg);
+    initialise_formatter<class_header_formatter>(rg);
+    initialise_formatter<class_implementation_formatter>(rg);
 }
 
 } } } }

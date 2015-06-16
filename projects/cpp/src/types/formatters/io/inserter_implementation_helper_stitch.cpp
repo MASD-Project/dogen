@@ -70,7 +70,7 @@ fa.stream() << "    " << p.name() << "::to_stream(s);" << std::endl;
         if (inside_class)
             variable_name = fa.make_member_variable_name(p);
         else
-            variable_name = "v." + fa.make_member_variable_name(p);
+            variable_name = "v." + fa.make_getter_setter_name(p) + "()";
 
 fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << " << ntfa.streaming_for_type(p.type(), variable_name) << sf.postfix() << std::endl;
         sf.next();
@@ -81,6 +81,8 @@ fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << 
 fa.stream() << "      << \" }\";" << std::endl;
         else
 fa.stream() << "    s << \" }\";" << std::endl;
+        if (!inside_class)
+fa.stream() << "    return(s);" << std::endl;
     }
 }
 } } } }

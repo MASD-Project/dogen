@@ -101,6 +101,12 @@ public:
     std::string make_member_variable_name(
         const formattables::property_info& p) const;
 
+    /**
+     * @brief Returns the property as a getter.
+     */
+    std::string make_getter_setter_name(
+        const formattables::property_info& p) const;
+
 public:
     /**
      * @brief Returns true if serialization is enabled.
