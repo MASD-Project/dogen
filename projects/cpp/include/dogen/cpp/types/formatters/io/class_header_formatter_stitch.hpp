@@ -18,39 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TYPES_CLASS_HEADER_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace io {
 
-class class_header_formatter final : public class_formatter_interface {
-public:
-    /**
-     * @brief Returns the formatter name.
-     */
-    static std::string static_formatter_name();
-
-public:
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
-
-    file_types file_type() const override;
-
-    void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const override;
-
-    dogen::formatters::file
-        format(const formattables::class_info& c) const override;
-};
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& fd);
 
 } } } }
 

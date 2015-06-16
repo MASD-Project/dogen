@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,40 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_IO_CLASS_HEADER_FORMATTER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/io/class_header_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace io {
 
-class class_header_formatter final : public class_formatter_interface {
-public:
-    /**
-     * @brief Returns the formatter name.
-     */
-    static std::string static_formatter_name();
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& c) {
 
-public:
-    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 
-    file_types file_type() const override;
-
-    void register_inclusion_dependencies_provider(
-        formattables::registrar& rg) const override;
-
-    dogen::formatters::file
-        format(const formattables::class_info& c) const override;
-};
-
+fa.stream() << std::endl;
+fa.stream() << "std::ostream&" << std::endl;
+fa.stream() << "operator<<(std::ostream& s," << std::endl;
+fa.stream() << "     const " << c.qualified_name() << "& v);" << std::endl;
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    return fa.make_file();
+}
 } } } }
-
-#endif

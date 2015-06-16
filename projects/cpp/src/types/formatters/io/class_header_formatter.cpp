@@ -18,15 +18,56 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/io/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/io/class_header_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace io {
+
+namespace {
+
+class provider final : public formattables::
+        inclusion_dependencies_provider_interface<sml::object> {
+public:
+    std::string formatter_name() const override;
+
+    boost::optional<std::list<std::string> >
+        provide(const formattables::inclusion_dependencies_builder_factory& f,
+            const sml::object& o) const override;
+};
+
+std::string provider::formatter_name() const {
+    return class_header_formatter::static_formatter_name();
+}
+
+boost::optional<std::list<std::string> >
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+    const sml::object& o) const {
+
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::iosfwd());
+
+    using types = formatters::types::traits;
+    const auto ch_fn(types::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+
+    return builder.build();
+}
+
+}
+
+std::string class_header_formatter::static_formatter_name() {
+    return traits::class_header_formatter_name();
+}
 
 dynamic::ownership_hierarchy
 class_header_formatter::ownership_hierarchy() const {
@@ -42,12 +83,14 @@ file_types class_header_formatter::file_type() const {
 }
 
 void class_header_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& /*rg*/) const {
+    formattables::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file class_header_formatter::
-format(const formattables::class_info& /*c*/) const {
-    dogen::formatters::file r;
+format(const formattables::class_info& c) const {
+    entity_formatting_assistant fa(c, ownership_hierarchy(), file_type());
+    const auto r(class_header_formatter_stitch(fa, c));
     return r;
 }
 
