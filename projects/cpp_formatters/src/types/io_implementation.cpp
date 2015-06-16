@@ -87,59 +87,63 @@ void io_implementation::format_enumeration(
 
     const auto ei(*o);
     using dogen::formatters::cpp::scoped_namespace_formatter;
-    scoped_namespace_formatter nsh(stream_, ei.namespaces());
-    utility_.blank_line();
-
-    stream_ << "std::ostream& operator<<(std::ostream& s, "
-            << "const " << ei.name() << "& v) ";
-    utility_.open_scope();
     {
-        positive_indenter_scope s(indenter_);
-        stream_ << indenter_ << "s" << spaced_inserter
-                << utility_.quote("{ ") << spaced_inserter
-                << utility_.quote(utility_.quote_escaped(type) + colon);
-
-        stream_ << spaced_inserter
-                << utility_.quote(utility_.quote_escaped(ei.name()) + comma)
-                << spaced_inserter
-                << utility_.quote(utility_.quote_escaped("value") + colon)
-                << ";" << std::endl;
+        scoped_namespace_formatter nsh(stream_, ei.namespaces());
         utility_.blank_line();
 
-        stream_ << indenter_ << "std::string attr;" << std::endl;
-        stream_ << indenter_ << "switch (v) ";
+        stream_ << "std::ostream& operator<<(std::ostream& s, "
+                << "const " << ei.name() << "& v) ";
         utility_.open_scope();
         {
-            for (const auto e : ei.enumerators()) {
-                stream_ << indenter_ << "case " << ei.name()
-                        << "::" << e.name() << ":"
-                        << std::endl;
+            positive_indenter_scope s(indenter_);
+            stream_ << indenter_ << "s" << spaced_inserter
+                    << utility_.quote("{ ") << spaced_inserter
+                    << utility_.quote(utility_.quote_escaped(type) + colon);
+
+            stream_ << spaced_inserter
+                    << utility_.quote(utility_.quote_escaped(ei.name()) + comma)
+                    << spaced_inserter
+                    << utility_.quote(utility_.quote_escaped("value") + colon)
+                    << ";" << std::endl;
+            utility_.blank_line();
+
+            stream_ << indenter_ << "std::string attr;" << std::endl;
+            stream_ << indenter_ << "switch (v) ";
+            utility_.open_scope();
+            {
+                for (const auto e : ei.enumerators()) {
+                    stream_ << indenter_ << "case " << ei.name()
+                            << "::" << e.name() << ":"
+                            << std::endl;
+                    {
+                        positive_indenter_scope s(indenter_);
+                        stream_ << indenter_ << "attr = "
+                                << utility_.quote(
+                                    utility_.quote_escaped(e.name()))
+                                << semi_colon
+                                << std::endl
+                                << indenter_ << "break;" << std::endl;
+                    }
+                }
+                stream_ << indenter_ << "default:" << std::endl;
                 {
                     positive_indenter_scope s(indenter_);
-                    stream_ << indenter_ << "attr = "
-                            << utility_.quote(utility_.quote_escaped(e.name()))
-                            << semi_colon
-                            << std::endl
-                            << indenter_ << "break;" << std::endl;
+                    stream_ << indenter_ << "throw std::invalid_argument("
+                            << "\"Invalid value for " << ei.name() << "\");"
+                            << std::endl;
                 }
+                utility_.close_scope();
             }
-            stream_ << indenter_ << "default:" << std::endl;
-            {
-                positive_indenter_scope s(indenter_);
-                stream_ << indenter_ << "throw std::invalid_argument("
-                        << "\"Invalid value for " << ei.name() << "\");"
-                        << std::endl;
-            }
-            utility_.close_scope();
+            stream_ << indenter_ << "s" << spaced_inserter
+                    << "attr"
+                    << spaced_inserter << utility_.quote(" }")
+                    << semi_colon
+                    << std::endl
+                    << indenter_ << "return s;" << std::endl;
         }
-        stream_ << indenter_ << "s" << spaced_inserter
-                << "attr"
-                << spaced_inserter << utility_.quote(" }")
-                << semi_colon
-                << std::endl
-                << indenter_ << "return s;" << std::endl;
+        utility_.close_scope();
+        utility_.blank_line();
     }
-    utility_.close_scope();
     utility_.blank_line();
 }
 
@@ -154,29 +158,32 @@ void io_implementation::format_class(const cpp::formattables::file_info& f) {
     const cpp::formattables::class_info& ci(*o);
     io_helper_methods(ci);
 
-    using dogen::formatters::cpp::scoped_namespace_formatter;
-    scoped_namespace_formatter nsh(stream_, ci.namespaces());
-    utility_.blank_line();
-
-    stream_ << "std::ostream& operator<<(std::ostream& s, ";
     {
-        positive_indenter_scope s(indenter_);
-        const auto parents(ci.parents());
-        const bool no_arg(!ci.is_parent() && parents.empty() &&
-            ci.properties().empty());
-        stream_ << "const " << ci.name() << "&" << (no_arg ? ") " : " v) ");
-        utility_.open_scope();
+        using dogen::formatters::cpp::scoped_namespace_formatter;
+        scoped_namespace_formatter nsh(stream_, ci.namespaces());
+        utility_.blank_line();
 
-        if (ci.is_parent() || !parents.empty()) {
-            stream_ << indenter_ << "v.to_stream(s);" << std::endl
-                    << indenter_ << "return(s);" << std::endl;
-        } else {
-            const bool inside_class(false);
-            inserter_implementation i(stream_, indenter_, inside_class);
-            i.format_inserter_implementation(ci);
+        stream_ << "std::ostream& operator<<(std::ostream& s, ";
+        {
+            positive_indenter_scope s(indenter_);
+            const auto parents(ci.parents());
+            const bool no_arg(!ci.is_parent() && parents.empty() &&
+                ci.properties().empty());
+            stream_ << "const " << ci.name() << "&" << (no_arg ? ") " : " v) ");
+            utility_.open_scope();
+
+            if (ci.is_parent() || !parents.empty()) {
+                stream_ << indenter_ << "v.to_stream(s);" << std::endl
+                        << indenter_ << "return(s);" << std::endl;
+            } else {
+                const bool inside_class(false);
+                inserter_implementation i(stream_, indenter_, inside_class);
+                i.format_inserter_implementation(ci);
+            }
         }
+        utility_.close_scope();
+        utility_.blank_line();
     }
-    utility_.close_scope();
     utility_.blank_line();
 }
 

@@ -483,6 +483,7 @@ std::ostream& operator<<(std::ostream& s, const first_class& v) {
 }
 
 } }
+
 Filename: /empty_tds/actual/include/class_in_a_package/io/package1/first_class_io.hpp
 Content: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
