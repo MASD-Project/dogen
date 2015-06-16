@@ -74,10 +74,11 @@ void inserter_implementation_helper_stitch(
 #>
     s << " }";
 <#+
-        if (!inside_class)
+    }
+
+    if (!inside_class)
 #>
     return(s);
 <#+
-    }
 }
 #>

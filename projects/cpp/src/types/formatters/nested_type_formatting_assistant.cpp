@@ -51,7 +51,7 @@ requires_quoting(const formattables::nested_type_info& t) const {
 
 bool nested_type_formatting_assistant::
 requires_tidying_up(const formattables::nested_type_info& t) const {
-    return t.is_string_like();
+    return t.is_string_like() && !t.is_char_like();
 }
 
 bool nested_type_formatting_assistant::requires_hashing_helper_method(
@@ -80,7 +80,7 @@ std::string nested_type_formatting_assistant::streaming_for_type(
     else if (requires_generic_string(t))
         uf.insert_streamed(s + ".generic_string()");
     else if (requires_quoting(t))
-        uf.insert_quoted_escaped(s);
+        uf.insert_streamed(s);
     else
         uf.insert(s);
 

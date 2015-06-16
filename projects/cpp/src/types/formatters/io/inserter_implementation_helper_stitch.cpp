@@ -81,8 +81,9 @@ fa.stream() << "    " << sf.prefix() << "<< \"\\\"" << p.name() << "\\\": \" << 
 fa.stream() << "      << \" }\";" << std::endl;
         else
 fa.stream() << "    s << \" }\";" << std::endl;
-        if (!inside_class)
-fa.stream() << "    return(s);" << std::endl;
     }
+
+    if (!inside_class)
+fa.stream() << "    return(s);" << std::endl;
 }
 } } } }

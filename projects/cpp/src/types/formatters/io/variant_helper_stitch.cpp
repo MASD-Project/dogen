@@ -31,22 +31,27 @@ void variant_helper_stitch(
     
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
-fa.stream() << "struct " << t.complete_identifiable_name() << ": public boost::static_visitor<> {" << std::endl;
-fa.stream() << "    boost_variant_int_double_visitor(std::ostream& s) : stream_(s) {" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "struct " << t.complete_identifiable_name() << "_visitor : public boost::static_visitor<> {" << std::endl;
+fa.stream() << "    " << t.complete_identifiable_name() << "_visitor(std::ostream& s) : stream_(s) {" << std::endl;
 fa.stream() << "        s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << t.name() << "\\\"\" << \", \";" << std::endl;
 fa.stream() << "        s << \"\\\"data\\\": \";" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << "    ~" << t.complete_identifiable_name() << "() { stream_ << \" }\"; }" << std::endl;
-fa.stream() << std::endl;
+fa.stream() << "    ~" << t.complete_identifiable_name() << "_visitor() { stream_ << \" }\"; }" << std::endl;
         for (const auto& c : t.children()) {
+fa.stream() << std::endl;
 fa.stream() << "    void operator()(const " << c.name() << (c.is_primitive() ? "" : "&") << " v) const {" << std::endl;
+            if (c.is_primitive()) {
 fa.stream() << "        stream_ << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << c.name() << "\\\"\" << \", \";" << std::endl;
 fa.stream() << "        stream_ << \"\\\"value\\\": \";" << std::endl;
 fa.stream() << "        stream_ << " << fa.streaming_for_type(c, "v") << ";" << std::endl;
 fa.stream() << "        stream_ << \" }\";" << std::endl;
+            } else
+fa.stream() << "        stream_ << " << fa.streaming_for_type(c, "v") << ";" << std::endl;
 fa.stream() << "    }" << std::endl;
         }
+fa.stream() << std::endl;
 fa.stream() << "private:" << std::endl;
 fa.stream() << "    std::ostream& stream_;" << std::endl;
 fa.stream() << "};" << std::endl;

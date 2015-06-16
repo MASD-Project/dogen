@@ -31,7 +31,6 @@ void ptree_helper_stitch(
 
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
-        const auto containee(t.children().front());
 fa.stream() << std::endl;
 fa.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << t.complete_name() << "& v) {" << std::endl;
 fa.stream() << "    std::ostringstream ss;" << std::endl;

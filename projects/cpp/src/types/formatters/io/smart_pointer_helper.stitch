@@ -16,12 +16,13 @@ void smart_pointer_helper_stitch(
 #>
 
 inline std::ostream& operator<<(std::ostream& s, const <#= t.complete_name() #>& v) {
-    s << "{ " << "\"__type__\": \"" << <#= t.name() #> "\", "
-      << "\"memory\": " << "\"" << "static_cast<void*>(v.get()) << "\"";
+    s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
     if (v)
-        s << "\"data\": " << <#= fa.streaming_for_type(containee, "*v") #> << ";"
+        s << "\"data\": " << <#= fa.streaming_for_type(containee, "*v") #>;
     else
-        s << "\"data\": " << "\"<empty>\"";
+        s << "\"data\": ""\"<empty>\"";
     s << " }";
     return s;
 }

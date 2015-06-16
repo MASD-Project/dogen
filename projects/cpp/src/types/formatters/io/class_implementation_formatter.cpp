@@ -77,7 +77,9 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const bool in_inheritance(o.is_parent() || o.is_child());
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
     const bool io_integrated(builder.is_integrated(self_fn, io_fctn));
-    const bool requires_io(io_enabled && !in_inheritance && !io_integrated);
+    // FIXME: should really be !in_inheritance but left it this way to
+    // FIXME: match legacy formatters.
+    const bool requires_io(io_enabled && (in_inheritance || !io_integrated));
 
     if (!requires_io)
         return builder.build();

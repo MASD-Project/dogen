@@ -13,26 +13,35 @@ void variant_helper_stitch(
     {
         auto snf(fa.make_scoped_namespace_formatter(t));
 #>
-struct <#= t.complete_identifiable_name() #>: public boost::static_visitor<> {
-    boost_variant_int_double_visitor(std::ostream& s) : stream_(s) {
+
+struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
+    <#= t.complete_identifiable_name() #>_visitor(std::ostream& s) : stream_(s) {
         s << "{ " << "\"__type__\": " << "\"<#= t.name() #>\"" << ", ";
         s << "\"data\": ";
     }
 
-    ~<#= t.complete_identifiable_name() #>() { stream_ << " }"; }
-
+    ~<#= t.complete_identifiable_name() #>_visitor() { stream_ << " }"; }
 <#+
         for (const auto& c : t.children()) {
 #>
+
     void operator()(const <#= c.name() #><#= (c.is_primitive() ? "" : "&") #> v) const {
+<#+
+            if (c.is_primitive()) {
+#>
         stream_ << "{ " << "\"__type__\": " << "\"<#= c.name() #>\"" << ", ";
         stream_ << "\"value\": ";
         stream_ << <#= fa.streaming_for_type(c, "v") #>;
         stream_ << " }";
+<#+
+            } else
+#>
+        stream_ << <#= fa.streaming_for_type(c, "v") #>;
     }
 <#+
         }
 #>
+
 private:
     std::ostream& stream_;
 };

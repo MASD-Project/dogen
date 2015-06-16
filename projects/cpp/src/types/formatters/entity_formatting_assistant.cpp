@@ -311,6 +311,18 @@ void entity_formatting_assistant::add_helper_methods() {
                                  << is_types_class_implementation
                                  << "' requires io: " << requires_io << "''";
 
+    using iot = formatters::io::traits;
+    const auto& io_ci_fn(iot::class_implementation_formatter_name());
+    const bool is_io_class_implementation(fn == io_ci_fn);
+    if (is_io_class_implementation && !in_inheritance && !is_io_integrated()) {
+        BOOST_LOG_SEV(lg, debug) << "Creating io helper methods.";
+        io::helper_methods_formatter f(c->properties());
+        f.format(stream());
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Helper methods for io not required."
+                                 << " is io class implementation: ''"
+                                 << is_io_class_implementation;
+
     if (is_types_class_implementation) {
         BOOST_LOG_SEV(lg, debug) << "Creating types helper methods.";
         types::helper_methods_formatter f(c->properties());
