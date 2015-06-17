@@ -258,6 +258,7 @@
 #DOGEN cpp.types.enabled=true
 #DOGEN cpp.hash.enabled=false
 #DOGEN cpp.io.enabled=false
+#DOGEN cpp.test_data.enabled=false
 #DOGEN cpp.serialization.enabled=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
