@@ -25,11 +25,13 @@
 #include "dogen/cpp/types/formatters/io/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
-#include "dogen/cpp/types/formatters/types/helper_methods_formatter.hpp"
-#include "dogen/cpp/types/formatters/hash/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/io/helper_methods_formatter.hpp"
+#include "dogen/cpp/types/formatters/hash/helper_methods_formatter.hpp"
+#include "dogen/cpp/types/formatters/types/helper_methods_formatter.hpp"
+#include "dogen/cpp/types/formatters/test_data/helper_methods_formatter.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace {
@@ -149,6 +151,11 @@ bool entity_formatting_assistant::is_io_integrated() const {
 
 bool entity_formatting_assistant::is_hash_enabled() const {
     using formatters::hash::traits;
+    return is_formatter_enabled(traits::class_header_formatter_name());
+}
+
+bool entity_formatting_assistant::is_test_data_enabled() const {
+    using formatters::test_data::traits;
     return is_formatter_enabled(traits::class_header_formatter_name());
 }
 
@@ -334,8 +341,8 @@ void entity_formatting_assistant::add_helper_methods() {
     }
 
     using ht = formatters::hash::traits;
-    const auto& hcifn(ht::class_implementation_formatter_name());
-    const bool is_hash_class_implementation(fn == hcifn);
+    const auto& h_ci_fn(ht::class_implementation_formatter_name());
+    const bool is_hash_class_implementation(fn == h_ci_fn);
     const bool requires_hash(is_hash_enabled());
 
     if (is_hash_class_implementation && requires_hash) {
@@ -344,8 +351,23 @@ void entity_formatting_assistant::add_helper_methods() {
         f.format(stream());
     } else {
         BOOST_LOG_SEV(lg, debug) << "Hash helper methods not required."
-                                 << " is types class implementation: '"
+                                 << " is hash class implementation: '"
                                  << is_hash_class_implementation << "''";
+    }
+
+    using tdt = formatters::test_data::traits;
+    const auto& td_ci_fn(tdt::class_implementation_formatter_name());
+    const bool is_test_data_class_implementation(fn == td_ci_fn);
+    const bool requires_test_data(is_test_data_enabled());
+
+    if (is_test_data_class_implementation && requires_test_data) {
+        BOOST_LOG_SEV(lg, debug) << "Creating test data helper methods.";
+        test_data::helper_methods_formatter f(c->properties());
+        f.format(stream());
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."
+                                 << " is test data class implementation: '"
+                                 << is_test_data_class_implementation << "''";
     }
 }
 

@@ -130,6 +130,11 @@ public:
     bool is_hash_enabled() const;
 
     /**
+     * @brief Returns true if test data is enabled.
+     */
+    bool is_test_data_enabled() const;
+
+    /**
      * @brief Returns true if the complete constructor is disabled,
      * false otherwise.
      */
