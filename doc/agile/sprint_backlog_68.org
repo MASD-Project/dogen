@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-17 Wed 15:44]
+#+CAPTION: Clock summary at [2015-06-17 Wed 15:50]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *30:06* |       |       |
+| *Total time*                                                                | *30:11* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 30:06   |       |       |
-| Active                                                                      |         | 30:06 |       |
+| Stories                                                                     | 30:11   |       |       |
+| Active                                                                      |         | 30:11 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -35,7 +35,7 @@
 | COMPLETED Implement enum header formatter in hash                           |         |       |  1:08 |
 | COMPLETED Implement class header formatter in io                            |         |       |  0:17 |
 | COMPLETED Implement class implementation formatter in io                    |         |       |  3:35 |
-| STARTED Implement enum header formatter in io                               |         |       |  0:23 |
+| COMPLETED Implement enum header formatter in io                             |         |       |  0:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -430,7 +430,9 @@ Problems solved:
 - path does not require generic string. Fix legacy to use generic
   string.
 
-*** STARTED Implement enum header formatter in io                     :story:
+*** COMPLETED Implement enum header formatter in io                   :story:
+    CLOSED: [2015-06-17 Wed 15:50]
+    CLOCK: [2015-06-17 Wed 15:45]--[2015-06-17 Wed 15:50] =>  0:05
     CLOCK: [2015-06-17 Wed 15:38]--[2015-06-17 Wed 15:44] =>  0:03
     CLOCK: [2015-06-17 Wed 15:20]--[2015-06-17 Wed 15:37] =>  0:15
 
