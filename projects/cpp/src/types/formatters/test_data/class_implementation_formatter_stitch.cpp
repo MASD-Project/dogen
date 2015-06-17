@@ -28,7 +28,7 @@ namespace test_data {
 
 dogen::formatters::file class_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& /*c*/) {
+    const formattables::class_info& c) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
@@ -36,6 +36,28 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
         {
             auto snf(fa.make_scoped_namespace_formatter());
+
+            /*
+             * Default constructor.
+             */
+            if (!c.is_parent()) {
+fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
+fa.stream() << std::endl;
+            }
+
+            /*
+             * Populate method.
+             */
+            if (!c.is_immutable()) {
+                bool no_args(c.properties().empty() && c.parents().empty());
+                if (no_args)
+fa.stream() << "void " << c.name() << "_generator populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
+                else
+fa.stream() << "void " << c.name() << "_generator populate(const unsigned int position, result_type& v) {" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "}" << std::endl;
+            }
 fa.stream() << std::endl;
         } // snf
     } // sbf
