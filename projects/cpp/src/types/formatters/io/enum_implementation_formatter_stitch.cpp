@@ -28,14 +28,34 @@ namespace io {
 
 dogen::formatters::file enum_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    const formattables::enum_info& e) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 fa.stream() << std::endl;
+fa.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v) {" << std::endl;
+fa.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << e.name() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "    std::string attr;" << std::endl;
+fa.stream() << "    switch (v) {" << std::endl;
+            for (const auto en : e.enumerators()) {
+fa.stream() << "    case " << e.name() << "::" << en.name() << ":" << std::endl;
+fa.stream() << "        attr = \"\\\"" << en.name() << "\\\"\";" << std::endl;
+fa.stream() << "        break;" << std::endl;
+            }
+fa.stream() << "    default:" << std::endl;
+fa.stream() << "        throw std::invalid_argument(\"Invalid value for " << e.name() << "\");" << std::endl;
+fa.stream() << "    }" << std::endl;
+fa.stream() << "    s << attr << \" }\";" << std::endl;
+fa.stream() << "    return s;" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+         } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 
 } } } }

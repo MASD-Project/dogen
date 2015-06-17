@@ -44,6 +44,7 @@ struct inclusion_constants {
         static ::std::string ostream();
         static ::std::string sstream();
         static ::std::string functional();
+        static ::std::string stdexcept();
     };
 
     struct boost {

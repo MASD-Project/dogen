@@ -9,16 +9,40 @@
 
 dogen::formatters::file enum_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    const formattables::enum_info& e) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 #>
 
+std::ostream& operator<<(std::ostream& s, const <#= e.name() #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= e.name() #>\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
 <#+
+            for (const auto en : e.enumerators()) {
+#>
+    case <#= e.name() #>::<#= en.name() #>:
+        attr = "\"<#= en.name() #>\"";
+        break;
+<#+
+            }
+#>
+    default:
+        throw std::invalid_argument("Invalid value for <#= e.name() #>");
+    }
+    s << attr << " }";
+    return s;
+}
+
+<#+
+         } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 
 #>

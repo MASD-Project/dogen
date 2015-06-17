@@ -54,6 +54,11 @@ std::string inclusion_constants::std::functional() {
     return r;
 }
 
+std::string inclusion_constants::std::stdexcept() {
+    static ::std::string r("<stdexcept>");
+    return r;
+}
+
 std::string inclusion_constants::boost::algorithm::string() {
     static ::std::string r("<boost/algorithm/string.hpp>");
     return r;
