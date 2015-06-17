@@ -457,7 +457,9 @@ machinery. Fix all differences.
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-*** Implement class implementation formatter in test_data             :story:
+*** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-17 Wed 17:35]--[2015-06-17 Wed 17:55] =>  0:14
+    CLOCK: [2015-06-17 Wed 16:49]--[2015-06-17 Wed 17:20] =>  0:31
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.

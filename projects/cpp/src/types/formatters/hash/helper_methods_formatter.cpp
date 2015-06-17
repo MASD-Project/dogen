@@ -67,7 +67,6 @@ helper_methods_formatter::helper_methods_formatter(
     const std::list<formattables::property_info>& properties)
     : properties_(properties) {}
 
-
 void helper_methods_formatter::sequence_container_helper(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) const {

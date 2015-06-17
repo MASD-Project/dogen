@@ -1,0 +1,44 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/variant_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
+<#+
+
+void variant_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+#>
+
+struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
+    <#= t.complete_identifiable_name() #>_visitor() : test_data(0) {}
+<#+
+    const auto children(t.children());
+    for (const auto& c : children) {
+#>
+    void operator()(const <#= c.name() #><#= (c.is_primitive() ? "" : "&") #> v) const {
+<#+
+        if (!fa.requires_hashing_helper_method(c))
+#>
+        combine(test_data, v);
+<#+
+        else
+#>
+        combine(test_data, test_data_<#= c.complete_identifiable_name() #>(v));
+    }
+
+<#+
+    }
+#>
+    mutable std::size_t test_data;
+};
+
+inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    <#= t.complete_identifiable_name() #>_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.test_data;
+}
+<#+
+}
+#>

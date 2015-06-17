@@ -1,0 +1,43 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/associative_container_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
+<#+
+
+void associative_container_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+
+    const auto key(t.children().front());
+    const auto value(t.children().back());
+#>
+
+inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+<#+
+    if (!fa.requires_hashing_helper_method(key))
+#>
+        combine(seed, i.first);
+<#+
+    else
+#>
+        combine(seed, test_data_<#= key.complete_identifiable_name() #>(i.first));
+<#+
+
+    if (!fa.requires_hashing_helper_method(value))
+#>
+        combine(seed, i.second);
+<#+
+    else
+#>
+        combine(seed, test_data_<#= value.complete_identifiable_name() #>(i.second));
+    }
+    return seed;
+}
+<#+
+}
+#>

@@ -1,0 +1,41 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/pair_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
+<#+
+
+void pair_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+
+    const auto first(t.children().front());
+    const auto second(t.children().back());
+#>
+
+inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
+    std::size_t seed(0);
+
+<#+
+    if (!fa.requires_hashing_helper_method(first))
+#>
+    combine(seed, v.first);
+<#+
+    else
+#>
+    combine(seed, test_data_<#= first.complete_identifiable_name() #>(v.first));
+<#+
+
+    if (!fa.requires_hashing_helper_method(second))
+#>
+    combine(seed, v.second);
+<#+
+    else
+#>
+    combine(seed, test_data_<#= second.complete_identifiable_name() #>(v.second));
+    return seed;
+}
+<#+
+}
+#>
