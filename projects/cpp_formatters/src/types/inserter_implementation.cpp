@@ -111,7 +111,12 @@ sequence_container_helper(const cpp::formattables::nested_type_info& nti) {
                         << space_inserter << utility_.quote(", ")
                         << ";" << std::endl;
 
-                if (containee.is_date() || containee.is_ptime() ||
+                if (containee.is_filesystem_path()) {
+                    const std::string s("(*i).generic_string()");
+                    stream_ << indenter_ << "s" << space_inserter
+                            << utility_.quote_escaped_streamed(s)
+                            << ";" << std::endl;
+                } else if (containee.is_date() || containee.is_ptime() ||
                     containee.is_time_duration()) {
                     stream_ << indenter_ << "s" << space_inserter
                             << utility_.quote_escaped_streamed("*i")
@@ -534,8 +539,15 @@ variant_helper(const cpp::formattables::nested_type_info& nti) {
                                 << ";"
                                 << std::endl;
 
-                        stream_ << indenter_ << "stream_" << space_inserter
-                                << "v;" << std::endl;
+                        if (c.is_char_like()) {
+                            stream_ << indenter_ << "stream_" << space_inserter
+                                    << utility_.quote_escaped_streamed("v")
+                                    << ";" << std::endl;
+                        } else {
+                            stream_ << indenter_ << "stream_" << space_inserter
+                                    << "v;" << std::endl;
+
+                        }
 
                         stream_ << indenter_ << "stream_" << space_inserter
                                 << utility_.quote(" }") << ";"

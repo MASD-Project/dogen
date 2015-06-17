@@ -144,7 +144,7 @@ struct boost_variant_int_std_string_char_visitor : public boost::static_visitor<
     void operator()(const char v) const {
         stream_ << "{ " << "\"__type__\": " << "\"char\"" << ", ";
         stream_ << "\"value\": ";
-        stream_ << v;
+        stream_ << "\"" << v << "\"";
         stream_ << " }";
     }
 

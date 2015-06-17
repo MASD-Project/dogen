@@ -77,9 +77,14 @@ std::string nested_type_formatting_assistant::streaming_for_type(
 
     if (requires_tidying_up(t))
         uf.insert_streamed("tidy_up_string(" + s + ")");
-    else if (requires_generic_string(t))
-        uf.insert_streamed(s + ".generic_string()");
-    else if (requires_quoting(t))
+    else if (requires_generic_string(t)) {
+        // FIXME: hack!
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + ".generic_string()");
+    } else if (requires_quoting(t))
         uf.insert_streamed(s);
     else
         uf.insert(s);
