@@ -48,11 +48,13 @@ public:
     struct special_includes {
         special_includes() :
             has_std_string(false), has_std_pair(false),
-            has_variant(false), requires_stream_manipulators(false) {}
+            has_variant(false), has_ptree(false),
+            requires_stream_manipulators(false) {}
 
         bool has_std_string;
         bool has_std_pair;
         bool has_variant;
+        bool has_ptree;
         bool requires_stream_manipulators;
     };
 

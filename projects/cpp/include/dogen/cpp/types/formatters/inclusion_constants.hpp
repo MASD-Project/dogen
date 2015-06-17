@@ -42,6 +42,7 @@ struct inclusion_constants {
         static ::std::string iosfwd();
         static ::std::string algorithm();
         static ::std::string ostream();
+        static ::std::string sstream();
         static ::std::string functional();
     };
 

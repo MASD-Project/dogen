@@ -38,6 +38,7 @@ const std::string float_type("float");
 const std::string pair_type("pair");
 const std::string string_type("string");
 const std::string variant_type("variant");
+const std::string ptree_type("ptree");
 
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string qname_not_found("Cannot find qname: ");
@@ -93,6 +94,8 @@ inclusion_dependencies_builder::make_special_includes(
                     r.has_variant = true;
                 else if (sn == pair_type)
                     r.has_std_pair = true;
+                else if (sn == ptree_type)
+                    r.has_ptree = true;
             }
         });
 

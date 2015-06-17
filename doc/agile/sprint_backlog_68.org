@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-16 Tue 22:50]
+#+CAPTION: Clock summary at [2015-06-17 Wed 14:13]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *28:09* |       |       |
+| *Total time*                                                                | *28:48* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 28:09   |       |       |
-| Active                                                                      |         | 28:09 |       |
+| Stories                                                                     | 28:48   |       |       |
+| Active                                                                      |         | 28:48 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -34,7 +34,7 @@
 | COMPLETED Implement class implementation formatter in hash                  |         |       |  5:16 |
 | COMPLETED Implement enum header formatter in hash                           |         |       |  1:08 |
 | COMPLETED Implement class header formatter in io                            |         |       |  0:17 |
-| STARTED Implement class implementation formatter in io                      |         |       |  2:01 |
+| STARTED Implement class implementation formatter in io                      |         |       |  2:40 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -405,6 +405,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in io            :story:
+    CLOCK: [2015-06-17 Wed 13:34]--[2015-06-17 Wed 14:13] =>  0:39
     CLOCK: [2015-06-16 Tue 22:36]--[2015-06-16 Tue 22:49] =>  0:13
     CLOCK: [2015-06-16 Tue 22:31]--[2015-06-16 Tue 22:35] =>  0:04
     CLOCK: [2015-06-16 Tue 21:39]--[2015-06-16 Tue 22:30] =>  0:51
@@ -417,7 +418,6 @@ machinery. Fix all differences.
 
 Problems:
 
-- missing includes for visitor, date, ptime, json parser, string.
 - quoted char (expected unquoted in variant, but we quote it when by
   itself). Fix legacy to quote char.
 - path does not require generic string. Fix legacy to use generic
@@ -428,6 +428,7 @@ Problems solved:
 - missing space in smart pointer
 - add newline after namespaces to legacy;
 - is char does not appear to be coming through.
+- missing includes for visitor, date, ptime, json parser, string.
 
 *** Implement enum header formatter in io                             :story:
 
@@ -445,6 +446,37 @@ With the previous approach we had fields in dynamic that were
 generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
+
+*** Helper methods should have their own includes                     :story:
+
+When a formatter relies on the helper methods, we have a problem: we
+need to determine the required includes from the main formatter
+without knowing what the helper methods may need. We have hacked this
+with things like the "special includes" but there must be a cleaner
+way of doing this. For example, we could ask the helper methods
+formatter to provide its includes and it would be its job to either
+delegate further or to compute the includes. This would at least
+remove the duplication of code between io and types.
+
+However, its important to bear in mind that helper methods are a hack
+anyways so we don't want to spend too much time fixing them.
+
+*** Duplicate fields in JSON result in non-intuitive errors           :story:
+
+By mistake we added the same field twice in JSON:
+
+:            "extensions" : {
+:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.hash.class_header_formatter.inclusion_required" : false
+
+The resulting error message was not particularly helpful:
+
+: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
+: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
 
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:

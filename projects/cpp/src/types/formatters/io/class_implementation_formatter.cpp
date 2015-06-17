@@ -94,6 +94,14 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 
+    if (si.has_ptree) {
+        builder.add(inclusion_constants::std::sstream());
+        builder.add(inclusion_constants::boost::algorithm::string());
+    }
+
+    if (si.has_variant)
+        builder.add(inclusion_constants::boost::visitor::apply_visitor());
+
     const auto io_fn(formatters::io::traits::class_header_formatter_name());
     builder.add(o, rt::weak_associations, io_fn);
     builder.add(o, rt::regular_associations, io_fn);

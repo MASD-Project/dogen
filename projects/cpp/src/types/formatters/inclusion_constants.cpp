@@ -44,6 +44,11 @@ std::string inclusion_constants::std::ostream() {
     return r;
 }
 
+std::string inclusion_constants::std::sstream() {
+    static ::std::string r("<sstream>");
+    return r;
+}
+
 std::string inclusion_constants::std::functional() {
     static ::std::string r("<functional>");
     return r;
