@@ -35,7 +35,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<boost::fi
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
-        s << "\"data\": " << *v;
+        s << "\"data\": " << "\"" << (*v).generic_string() << "\"";
     else
         s << "\"data\": ""\"<empty>\"";
     s << " }";

@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << (*i).generic_string() << "\"";
     }
     s << "] ";
     return s;
