@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-17 Wed 15:09]
+#+CAPTION: Clock summary at [2015-06-17 Wed 15:44]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *29:43* |       |       |
+| *Total time*                                                                | *30:06* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 29:43   |       |       |
-| Active                                                                      |         | 29:43 |       |
+| Stories                                                                     | 30:06   |       |       |
+| Active                                                                      |         | 30:06 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -34,7 +34,8 @@
 | COMPLETED Implement class implementation formatter in hash                  |         |       |  5:16 |
 | COMPLETED Implement enum header formatter in hash                           |         |       |  1:08 |
 | COMPLETED Implement class header formatter in io                            |         |       |  0:17 |
-| STARTED Implement class implementation formatter in io                      |         |       |  3:35 |
+| COMPLETED Implement class implementation formatter in io                    |         |       |  3:35 |
+| STARTED Implement enum header formatter in io                               |         |       |  0:23 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -404,7 +405,8 @@ machinery. Fix all differences.
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-*** STARTED Implement class implementation formatter in io            :story:
+*** COMPLETED Implement class implementation formatter in io          :story:
+    CLOSED: [2015-06-17 Wed 15:20]
     CLOCK: [2015-06-17 Wed 14:14]--[2015-06-17 Wed 15:09] =>  0:55
     CLOCK: [2015-06-17 Wed 13:34]--[2015-06-17 Wed 14:13] =>  0:39
     CLOCK: [2015-06-16 Tue 22:36]--[2015-06-16 Tue 22:49] =>  0:13
@@ -428,7 +430,9 @@ Problems solved:
 - path does not require generic string. Fix legacy to use generic
   string.
 
-*** Implement enum header formatter in io                             :story:
+*** STARTED Implement enum header formatter in io                     :story:
+    CLOCK: [2015-06-17 Wed 15:38]--[2015-06-17 Wed 15:44] =>  0:03
+    CLOCK: [2015-06-17 Wed 15:20]--[2015-06-17 Wed 15:37] =>  0:15
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
@@ -475,6 +479,16 @@ The resulting error message was not particularly helpful:
 
 : 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
 : 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
+
+*** Formatters with duplicate names result in non-intuitive errors    :story:
+
+We added two formatters to io with the same name by mistake and the
+resulting error was not particularly enlightening:
+
+: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
+
+We should have a very early on validation to ensure formatters have
+distinct names.
 
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:

@@ -18,38 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/io/traits.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/cpp/types/formattables/enum_info.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace io {
 
-std::string traits::facet_name() {
-    static std::string r(formatters::traits::model_name() + ".io");
-    return r;
-}
-
-std::string traits::class_header_formatter_name() {
-    static std::string r(traits::facet_name() + ".class_header_formatter");
-    return r;
-}
-
-std::string traits::class_implementation_formatter_name() {
-    static std::string r(traits::facet_name() +
-        ".class_implementation_formatter");
-    return r;
-}
-
-std::string traits::enum_header_formatter_name() {
-    static std::string r(traits::facet_name() + ".enum_header_formatter");
-    return r;
-}
-
-std::string traits::enum_implementation_formatter_name() {
-    static std::string r(traits::facet_name() + ".enum_implementation_formatter");
-    return r;
-}
+dogen::formatters::file enum_implementation_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::enum_info& e);
 
 } } } }
+
+#endif

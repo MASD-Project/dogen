@@ -26,7 +26,6 @@
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/hash/enum_header_formatter_stitch.hpp"
-#include "dogen/cpp/types/formatters/types/enum_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/hash/enum_header_formatter.hpp"
 
 namespace dogen {
