@@ -9,7 +9,7 @@
 
 dogen::formatters::file class_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& /*c*/) {
+    const formattables::class_info& c) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
@@ -18,13 +18,39 @@ dogen::formatters::file class_header_formatter_stitch(
 
 #>
 
+class <#= c.name() #>_generator {
+public:
+    <#= c.name() #>_generator();
+
+public:
+    typedef <#= c.qualified_name() #> result_type;
+
+public:
+<#+
+            if (!c.is_immutable())
+#>
+    static void populate(const unsigned int position, result_type& v);
+<#+
+            if (!c.is_parent()) {
+#>
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+<#+
+            }
+#>
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
 <#+
         } // snf
 #>
 
 <#+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 #>
