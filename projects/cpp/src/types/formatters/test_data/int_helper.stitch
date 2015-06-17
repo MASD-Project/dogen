@@ -1,0 +1,27 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/int_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
+<#+
+
+void int_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+#>
+
+<#= t.name() #> create_<#= t.identifiable_name() #>(const unsigned int position) {
+<#+
+    if (t.name() == "int")
+#>
+    return position;
+<#+
+    else
+#>
+    return static_cast<<#= t.name() #>>(position);
+}
+<#+
+}
+#>

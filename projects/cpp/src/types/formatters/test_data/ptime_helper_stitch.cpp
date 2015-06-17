@@ -29,12 +29,14 @@ void ptime_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
-fa.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
-fa.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+fa.stream() << "    using boost::gregorian::date;" << std::endl;
+fa.stream() << "    using boost::posix_time::ptime;" << std::endl;
+fa.stream() << "    using boost::posix_time::time_duration;" << std::endl;
+fa.stream() << "    date d(2002, 2, day);" << std::endl;
+fa.stream() << "    ptime r(d, time_duration(1,2,3));" << std::endl;
+fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

@@ -11,33 +11,27 @@ void variant_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-struct <#= t.complete_identifiable_name() #>_visitor : public boost::static_visitor<> {
-    <#= t.complete_identifiable_name() #>_visitor() : test_data(0) {}
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    <#= t.complete_name() #> r;
 <#+
-    const auto children(t.children());
-    for (const auto& c : children) {
+    unsigned int i(0);
+    for (const auto& c : t.children()) {
+        if (i == 0)
 #>
-    void operator()(const <#= c.name() #><#= (c.is_primitive() ? "" : "&") #> v) const {
+    if (position == 0 || ((position % <#= t.children().size() #>) == 0))
 <#+
-        if (!fa.requires_hashing_helper_method(c))
+        else if (i == 1)
 #>
-        combine(test_data, v);
+    else if (position == 1 || ((position % <#= t.children().size() + 1 #>) == 0))
 <#+
         else
 #>
-        combine(test_data, test_data_<#= c.complete_identifiable_name() #>(v));
-    }
-
+    else if ((position % " << i << ") == 0)
+        r = create_<#= c.complete_identifiable_name() #>(position);
 <#+
     }
 #>
-    mutable std::size_t test_data;
-};
-
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    <#= t.complete_identifiable_name() #>_visitor vis;
-    boost::apply_visitor(vis, v);
-    return vis.test_data;
+    return r;
 }
 <#+
 }

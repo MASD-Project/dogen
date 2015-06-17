@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-17 Wed 16:48]
+#+CAPTION: Clock summary at [2015-06-17 Wed 21:40]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *31:05* |       |       |
+| *Total time*                                                                | *33:09* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 31:05   |       |       |
-| Active                                                                      |         | 31:05 |       |
+| Stories                                                                     | 33:09   |       |       |
+| Active                                                                      |         | 33:09 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -38,6 +38,7 @@
 | COMPLETED Implement enum header formatter in io                             |         |       |  0:28 |
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  2:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -458,6 +459,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-17 Wed 20:27]--[2015-06-17 Wed 21:40] =>  1:13
     CLOCK: [2015-06-17 Wed 17:35]--[2015-06-17 Wed 17:55] =>  0:14
     CLOCK: [2015-06-17 Wed 16:49]--[2015-06-17 Wed 17:20] =>  0:31
 

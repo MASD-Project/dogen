@@ -15,29 +15,15 @@ void associative_container_helper_stitch(
     const auto value(t.children().back());
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-<#+
-    if (!fa.requires_hashing_helper_method(key))
-#>
-        combine(seed, i.first);
-<#+
-    else
-#>
-        combine(seed, test_data_<#= key.complete_identifiable_name() #>(i.first));
-<#+
-
-    if (!fa.requires_hashing_helper_method(value))
-#>
-        combine(seed, i.second);
-<#+
-    else
-#>
-        combine(seed, test_data_<#= value.complete_identifiable_name() #>(i.second));
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    <#= t.complete_name() #> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_<#= key.complete_identifiable_name() #>(position + i),
+        create_<#= value.complete_identifiable_name() #>(position + i)));
     }
-    return seed;
+    return r;
 }
+
 <#+
 }
 #>

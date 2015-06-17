@@ -20,6 +20,12 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
+#include "dogen/cpp/types/formatters/test_data/char_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/int_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/bool_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/string_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/composite_type_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/domain_type_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/test_data/associative_container_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/test_data/sequence_container_helper_stitch.hpp"
 #include "dogen/cpp/types/formatters/test_data/smart_pointer_helper_stitch.hpp"
@@ -68,18 +74,21 @@ helper_methods_formatter::helper_methods_formatter(
     : properties_(properties) {}
 
 void helper_methods_formatter::char_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    char_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::int_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    int_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::bool_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    bool_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::sequence_container_helper(
@@ -207,18 +216,21 @@ void helper_methods_formatter::ptree_helper(
 }
 
 void helper_methods_formatter::string_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    string_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::composite_type_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    composite_type_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::domain_type_helper(
-  formatters::nested_type_formatting_assistant& /*fa*/,
-  const formattables::nested_type_info& /*t*/) const {
+  formatters::nested_type_formatting_assistant& fa,
+  const formattables::nested_type_info& t) const {
+    domain_type_helper_stitch(fa, t);
 }
 
 void helper_methods_formatter::recursive_helper_method_creator(

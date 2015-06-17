@@ -9,22 +9,13 @@
 void smart_pointer_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-    
-
     const auto containee(t.children().front());
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-<#+
-    if (!fa.requires_hashing_helper_method(containee))
-#>
-    combine(seed, *v);
-<#+
-    else
-#>
-    combine(seed, test_data_<#= containee.complete_identifiable_name() #>(*v));
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    <#= t.complete_name() #> r;
+    create_<#= containee.complete_identifiable_name() #>_ptr(position));
+    return r;
 }
 <#+
 }

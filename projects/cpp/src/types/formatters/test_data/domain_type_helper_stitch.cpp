@@ -18,30 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/test_data/variant_helper_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/domain_type_helper_stitch.hpp"
+#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace test_data {
 
-void variant_helper_stitch(
+void domain_type_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
-    unsigned int i(0);
-    for (const auto& c : t.children()) {
-        if (i == 0)
-fa.stream() << "    if (position == 0 || ((position % " << t.children().size() << ") == 0))" << std::endl;
-        else if (i == 1)
-fa.stream() << "    else if (position == 1 || ((position % " << t.children().size() + 1 << ") == 0))" << std::endl;
-        else
-fa.stream() << "    else if ((position % \" << i << \") == 0)" << std::endl;
-fa.stream() << "        r = create_" << c.complete_identifiable_name() << "(position);" << std::endl;
-    }
-fa.stream() << "    return r;" << std::endl;
+fa.stream() << t.complete_name() << (t.is_smart_pointer() ? "*" : "") << " create_" << t.complete_identifiable_name() << (t.is_smart_pointer() ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
+fa.stream() << "    return " << t.identifiable_name() << "_generator::create_" << (t.is_smart_pointer() ? "_ptr" : "") << "(position);" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

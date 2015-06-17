@@ -29,10 +29,10 @@ void path_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {    
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    combine(seed, v.generic_string());" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    std::ostringstream s;" << std::endl;
+fa.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
+fa.stream() << "    return " << t.name() << "(s.str());" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

@@ -31,15 +31,12 @@ void sequence_container_helper_stitch(
 
     const auto containee(t.children().front());
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    for (const auto i : v) {" << std::endl;
-    if (!fa.requires_hashing_helper_method(containee))
-fa.stream() << "        combine(seed, i);" << std::endl;
-    else
-fa.stream() << "        combine(seed, test_data_" << containee.complete_identifiable_name() << "(i));" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
+fa.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+fa.stream() << "        r.push_back(create_" << t.complete_identifiable_name() << "(position + i));" << std::endl;
 fa.stream() << "    }" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

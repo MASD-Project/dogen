@@ -29,15 +29,13 @@ void ptree_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    for (const auto& node : v) {" << std::endl;
-fa.stream() << "        combine(seed, node.first);" << std::endl;
-fa.stream() << "        combine(seed, node.second.data());" << std::endl;
-fa.stream() << "        combine(seed, test_data_" << t.complete_identifiable_name() << "(node.second));" << std::endl;
-fa.stream() << "    }" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    using boost::property_tree::ptree;" << std::endl;
+fa.stream() << "    ptree c;" << std::endl;
+fa.stream() << "    c.put(\"key_2\"), position);" << std::endl;
+fa.stream() << "    ptree r;" << std::endl;
+fa.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
+fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

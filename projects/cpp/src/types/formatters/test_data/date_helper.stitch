@@ -12,10 +12,10 @@ void date_helper_stitch(
     
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    combine(seed, v.modjulian_day());
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    unsigned int day((position + 1) % 27);
+    boost::gregorian::date r(2002, 2, day);
+    return r;
 }
 <#+
 }

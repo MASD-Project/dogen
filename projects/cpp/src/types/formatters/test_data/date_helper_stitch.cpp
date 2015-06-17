@@ -30,10 +30,10 @@ void date_helper_stitch(
     const formattables::nested_type_info& t) {
     
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    combine(seed, v.modjulian_day());" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
+fa.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
+fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

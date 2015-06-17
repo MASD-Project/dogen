@@ -11,15 +11,13 @@ void ptree_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    for (const auto& node : v) {
-        combine(seed, node.first);
-        combine(seed, node.second.data());
-        combine(seed, test_data_<#= t.complete_identifiable_name() #>(node.second));
-    }
-
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    using boost::property_tree::ptree;
+    ptree c;
+    c.put("key_2"), position);
+    ptree r;
+    r.push_back(ptree::value_type("key_1", c));
+    return r;
 }
 <#+
 }

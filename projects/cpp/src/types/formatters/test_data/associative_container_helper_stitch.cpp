@@ -33,20 +33,14 @@ void associative_container_helper_stitch(
     const auto key(t.children().front());
     const auto value(t.children().back());
 fa.stream() << std::endl;
-fa.stream() << "inline std::size_t test_data_" << t.complete_identifiable_name() << "(const " << t.complete_name() << "& v) {" << std::endl;
-fa.stream() << "    std::size_t seed(0);" << std::endl;
-fa.stream() << "    for (const auto i : v) {" << std::endl;
-    if (!fa.requires_hashing_helper_method(key))
-fa.stream() << "        combine(seed, i.first);" << std::endl;
-    else
-fa.stream() << "        combine(seed, test_data_" << key.complete_identifiable_name() << "(i.first));" << std::endl;
-
-    if (!fa.requires_hashing_helper_method(value))
-fa.stream() << "        combine(seed, i.second);" << std::endl;
-    else
-fa.stream() << "        combine(seed, test_data_" << value.complete_identifiable_name() << "(i.second));" << std::endl;
+fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
+fa.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+fa.stream() << "        r.insert(std::make_pair(create_" << key.complete_identifiable_name() << "(position + i)," << std::endl;
+fa.stream() << "        create_" << value.complete_identifiable_name() << "(position + i)));" << std::endl;
 fa.stream() << "    }" << std::endl;
-fa.stream() << "    return seed;" << std::endl;
+fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
 }
 } } } }

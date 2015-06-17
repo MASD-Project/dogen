@@ -14,28 +14,13 @@ void pair_helper_stitch(
     const auto second(t.children().back());
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-
-<#+
-    if (!fa.requires_hashing_helper_method(first))
-#>
-    combine(seed, v.first);
-<#+
-    else
-#>
-    combine(seed, test_data_<#= first.complete_identifiable_name() #>(v.first));
-<#+
-
-    if (!fa.requires_hashing_helper_method(second))
-#>
-    combine(seed, v.second);
-<#+
-    else
-#>
-    combine(seed, test_data_<#= second.complete_identifiable_name() #>(v.second));
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    <#= t.complete_name() #> r(
+        create_<#= first.complete_identifiable_name() #>(position),
+        create_<#= second.complete_identifiable_name() #>(position));
+    return r;
 }
+
 <#+
 }
 #>

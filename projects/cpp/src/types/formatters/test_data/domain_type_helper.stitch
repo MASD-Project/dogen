@@ -1,0 +1,20 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/domain_type_helper_stitch.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
+<#+
+
+void domain_type_helper_stitch(
+    formatters::nested_type_formatting_assistant& fa,
+    const formattables::nested_type_info& t) {
+#>
+
+<#= t.complete_name() #><#= (t.is_smart_pointer() ? "*" : "") #> create_<#= t.complete_identifiable_name() #><#= (t.is_smart_pointer() ? "_ptr" : "") #>(unsigned int position) {
+    return <#= t.identifiable_name() #>_generator::create_<#= (t.is_smart_pointer() ? "_ptr" : "") #>(position);
+}
+<#+
+}
+#>

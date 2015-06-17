@@ -11,10 +11,11 @@ void time_duration_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    seed = static_cast<std::size_t>(v.total_seconds());
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    unsigned int hour(position % 55);
+    using boost::posix_time::time_duration;
+    time_duration r(hour, 2, 3);
+    return r;
 }
 <#+
 }

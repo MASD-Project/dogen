@@ -11,12 +11,14 @@ void ptime_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-inline std::size_t test_data_<#= t.complete_identifiable_name() #>(const <#= t.complete_name() #>& v) {
-    std::size_t seed(0);
-    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
-    boost::posix_time::time_duration d(v - epoch);
-    seed = static_cast<std::size_t>(d.total_seconds());
-    return seed;
+<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+    unsigned int day((position + 1) % 27);
+    using boost::gregorian::date;
+    using boost::posix_time::ptime;
+    using boost::posix_time::time_duration;
+    date d(2002, 2, day);
+    ptime r(d, time_duration(1,2,3));
+    return r;
 }
 <#+
 }
