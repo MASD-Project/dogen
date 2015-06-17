@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,29 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/cpp/types/formatters/io/enum_header_formatter_stitch.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_TEST_DATA_CLASS_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_TEST_DATA_CLASS_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace io {
+namespace test_data {
 
-dogen::formatters::file enum_header_formatter_stitch(
+dogen::formatters::file class_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
-
-    {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
-fa.stream() << std::endl;
-fa.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v);" << std::endl;
-fa.stream() << std::endl;
-         } // snf
-fa.stream() << std::endl;
-    } // sbf
-    return fa.make_file();
-}
+    const formattables::class_info& fd);
 
 } } } }
+
+#endif

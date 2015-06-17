@@ -34,7 +34,7 @@ namespace formatters {
 namespace io {
 
 /**
- * @brief Creates the hash implementation representation for an enumeration.
+ * @brief Creates the io implementation representation for an enumeration.
  */
 class enum_implementation_formatter : public enum_formatter_interface {
 public:

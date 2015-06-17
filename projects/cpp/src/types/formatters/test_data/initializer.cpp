@@ -18,40 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_TEST_DATA_CLASS_HEADER_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_TEST_DATA_CLASS_HEADER_FORMATTER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/filesystem/path.hpp>
-#include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
+#include <memory>
+#include "dogen/cpp/types/formatters/test_data/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/test_data/class_implementation_formatter.hpp"
+#include "dogen/cpp/types/formatters/test_data/enum_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
+#include "dogen/cpp/types/formatters/test_data/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace test_data {
 
-class class_header_formatter final : public class_formatter_interface {
- public:
-  /**
-   * @brief Returns the formatter name.
-   */
-  static std::string static_formatter_name();
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter(f);
+}
 
- public:
-  dynamic::ownership_hierarchy ownership_hierarchy() const override;
-
-  file_types file_type() const override;
-
-  void register_inclusion_dependencies_provider(
-    formattables::registrar& rg) const override;
-
-  dogen::formatters::file
-    format(const formattables::class_info& c) const override;
-};
+void initializer::initialize(registrar& rg) {
+    initialise_formatter<class_header_formatter>(rg);
+    initialise_formatter<class_implementation_formatter>(rg);
+    initialise_formatter<enum_header_formatter>(rg);
+    initialise_formatter<enum_implementation_formatter>(rg);
+}
 
 } } } }
-
-#endif

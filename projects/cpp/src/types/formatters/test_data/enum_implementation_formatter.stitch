@@ -2,14 +2,14 @@
 <#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=fa.stream() #>
-<#@ inclusion_dependency="dogen/cpp/types/formatters/io/enum_header_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/test_data/enum_header_formatter_stitch.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ containing_namespaces=dogen::cpp::formatters::io #>
+<#@ containing_namespaces=dogen::cpp::formatters::test_data #>
 <#+
 
-dogen::formatters::file enum_header_formatter_stitch(
+dogen::formatters::file enum_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
+    const formattables::enum_info& /*e*/) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
@@ -17,15 +17,11 @@ dogen::formatters::file enum_header_formatter_stitch(
             auto snf(fa.make_scoped_namespace_formatter());
 #>
 
-std::ostream& operator<<(std::ostream& s, const <#= e.name() #>& v);
-
 <#+
          } // snf
-#>
-
-<#+
     } // sbf
-    return fa.make_file();
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
 }
 
 #>

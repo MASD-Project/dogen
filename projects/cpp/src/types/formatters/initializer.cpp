@@ -22,6 +22,7 @@
 #include "dogen/cpp/types/formatters/hash/initializer.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/cpp/types/formatters/io/initializer.hpp"
+#include "dogen/cpp/types/formatters/test_data/initializer.hpp"
 #include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 
@@ -34,6 +35,7 @@ void initializer::initialize(registrar& rg) {
     hash::initializer::initialize(rg);
     odb::initializer::initialize(rg);
     io::initializer::initialize(rg);
+    test_data::initializer::initialize(rg);
     serialization::initializer::initialize(rg);
 }
 

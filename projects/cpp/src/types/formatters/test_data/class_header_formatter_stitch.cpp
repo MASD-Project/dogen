@@ -19,28 +19,27 @@
  *
  */
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/cpp/types/formatters/io/enum_header_formatter_stitch.hpp"
+#include "dogen/cpp/types/formatters/test_data/class_header_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace io {
+namespace test_data {
 
-dogen::formatters::file enum_header_formatter_stitch(
+dogen::formatters::file class_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& e) {
+    const formattables::class_info& /*c*/) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
+
 fa.stream() << std::endl;
-fa.stream() << "std::ostream& operator<<(std::ostream& s, const " << e.name() << "& v);" << std::endl;
-fa.stream() << std::endl;
-         } // snf
+        } // snf
 fa.stream() << std::endl;
     } // sbf
-    return fa.make_file();
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
 }
-
 } } } }

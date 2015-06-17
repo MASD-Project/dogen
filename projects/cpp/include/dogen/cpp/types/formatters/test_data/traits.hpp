@@ -51,12 +51,12 @@ struct traits {
     /**
      * @brief Name of the enumeration header formatter.
      */
-    static std::string enumeration_header_formatter_name();
+    static std::string enum_header_formatter_name();
 
     /**
      * @brief Name of the enumeration implementation formatter.
      */
-    static std::string enumeration_implementation_formatter_name();
+    static std::string enum_implementation_formatter_name();
 };
 
 } } } }

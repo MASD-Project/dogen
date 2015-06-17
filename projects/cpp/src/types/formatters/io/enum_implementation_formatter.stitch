@@ -42,7 +42,6 @@ std::ostream& operator<<(std::ostream& s, const <#= e.name() #>& v) {
          } // snf
     } // sbf
     return fa.make_file();
-    // return fa.make_file(false/*overwrite*/);
 }
 
 #>

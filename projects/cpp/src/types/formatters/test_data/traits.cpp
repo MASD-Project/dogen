@@ -42,14 +42,14 @@ std::string traits::class_implementation_formatter_name() {
     return r;
 }
 
-std::string traits::enumeration_header_formatter_name() {
-    static std::string r(traits::facet_name() +
-        ".enumeration_header_formatter");
+std::string traits::enum_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".enum_header_formatter");
     return r;
 }
 
-std::string traits::enumeration_implementation_formatter_name() {
-    static std::string r(traits::facet_name() + ".exception_header_formatter");
+std::string traits::enum_implementation_formatter_name() {
+    static std::string r(traits::facet_name() +
+        ".enum_implementation_formatter");
     return r;
 }
 
