@@ -42,24 +42,8 @@ dogen::formatters::file class_implementation_formatter_stitch(
              */
             if (!c.is_parent()) {
 fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
-fa.stream() << std::endl;
             }
 
-            /*
-             * Populate method.
-             */
-            if (!c.is_immutable()) {
-                bool no_args(c.properties().empty() && c.parents().empty());
-                if (no_args)
-fa.stream() << "void " << c.name() << "_generator populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
-                else
-fa.stream() << "void " << c.name() << "_generator populate(const unsigned int position, result_type& v) {" << std::endl;
-fa.stream() << std::endl;
-fa.stream() << std::endl;
-fa.stream() << "}" << std::endl;
-            }
-fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
-fa.stream() << std::endl;
             /*
              * Populate method.
              */
@@ -77,8 +61,9 @@ fa.stream() << "    " << p.qualified_name() << "_generator::populate(position, v
 fa.stream() << "    v." << p.name() << "(create_" << p.type().complete_identifiable_name() << "(position + " << i << "));" << std::endl;
                     ++i;
                 }
-            }
 fa.stream() << "}" << std::endl;
+            }
+
             /*
              * Create method.
              */

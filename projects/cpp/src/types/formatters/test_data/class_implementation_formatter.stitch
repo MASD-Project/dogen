@@ -24,31 +24,9 @@ dogen::formatters::file class_implementation_formatter_stitch(
             if (!c.is_parent()) {
 #>
 <#= c.name() #>_generator::<#= c.name() #>_generator() : position_(0) { }
-
 <#+
             }
 
-            /*
-             * Populate method.
-             */
-            if (!c.is_immutable()) {
-                bool no_args(c.properties().empty() && c.parents().empty());
-                if (no_args)
-#>
-void <#= c.name() #>_generator populate(const unsigned int /*position*/, result_type& /*v*/) {
-<#+
-                else
-#>
-void <#= c.name() #>_generator populate(const unsigned int position, result_type& v) {
-
-
-}
-<#+
-            }
-#>
-<#= c.name() #>_generator::<#= c.name() #>_generator() : position_(0) { }
-
-<#+
             /*
              * Populate method.
              */
@@ -74,10 +52,11 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
 <#+
                     ++i;
                 }
-            }
 #>
 }
 <#+
+            }
+
             /*
              * Create method.
              */
