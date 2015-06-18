@@ -39,6 +39,7 @@ primitive_generator::create(const unsigned int position) {
     primitive_generator::populate(position, r);
     return r;
 }
+
 primitive_generator::result_type*
 primitive_generator::create_ptr(const unsigned int position) {
     primitive* p = new primitive();

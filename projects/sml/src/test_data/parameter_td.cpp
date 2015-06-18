@@ -62,6 +62,7 @@ parameter_generator::create(const unsigned int position) {
     parameter_generator::populate(position, r);
     return r;
 }
+
 parameter_generator::result_type*
 parameter_generator::create_ptr(const unsigned int position) {
     parameter* p = new parameter();

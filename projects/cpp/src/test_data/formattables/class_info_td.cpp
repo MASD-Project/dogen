@@ -135,6 +135,7 @@ class_info_generator::create(const unsigned int position) {
     class_info_generator::populate(position, r);
     return r;
 }
+
 class_info_generator::result_type*
 class_info_generator::create_ptr(const unsigned int position) {
     class_info* p = new class_info();

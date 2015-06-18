@@ -72,6 +72,7 @@ knitting_options_generator::create(const unsigned int position) {
     knitting_options_generator::populate(position, r);
     return r;
 }
+
 knitting_options_generator::result_type*
 knitting_options_generator::create_ptr(const unsigned int position) {
     knitting_options* p = new knitting_options();

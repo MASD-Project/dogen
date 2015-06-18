@@ -54,6 +54,7 @@ frontend_settings_generator::create(const unsigned int position) {
     frontend_settings_generator::populate(position, r);
     return r;
 }
+
 frontend_settings_generator::result_type*
 frontend_settings_generator::create_ptr(const unsigned int position) {
     frontend_settings* p = new frontend_settings();

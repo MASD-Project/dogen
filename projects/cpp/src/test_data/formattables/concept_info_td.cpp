@@ -58,6 +58,7 @@ concept_info_generator::create(const unsigned int position) {
     concept_info_generator::populate(position, r);
     return r;
 }
+
 concept_info_generator::result_type*
 concept_info_generator::create_ptr(const unsigned int position) {
     concept_info* p = new concept_info();

@@ -64,6 +64,7 @@ integrated_facets_repository_generator::create(const unsigned int position) {
     integrated_facets_repository_generator::populate(position, r);
     return r;
 }
+
 integrated_facets_repository_generator::result_type*
 integrated_facets_repository_generator::create_ptr(const unsigned int position) {
     integrated_facets_repository* p = new integrated_facets_repository();

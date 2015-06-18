@@ -47,6 +47,7 @@ child_node_generator::create(const unsigned int position) {
     child_node_generator::populate(position, r);
     return r;
 }
+
 child_node_generator::result_type*
 child_node_generator::create_ptr(const unsigned int position) {
     child_node* p = new child_node();

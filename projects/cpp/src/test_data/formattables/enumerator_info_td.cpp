@@ -51,6 +51,7 @@ enumerator_info_generator::create(const unsigned int position) {
     enumerator_info_generator::populate(position, r);
     return r;
 }
+
 enumerator_info_generator::result_type*
 enumerator_info_generator::create_ptr(const unsigned int position) {
     enumerator_info* p = new enumerator_info();

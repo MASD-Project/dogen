@@ -57,6 +57,7 @@ visitor_info_generator::create(const unsigned int position) {
     visitor_info_generator::populate(position, r);
     return r;
 }
+
 visitor_info_generator::result_type*
 visitor_info_generator::create_ptr(const unsigned int position) {
     visitor_info* p = new visitor_info();

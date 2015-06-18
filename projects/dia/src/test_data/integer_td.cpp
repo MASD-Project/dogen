@@ -47,6 +47,7 @@ integer_generator::create(const unsigned int position) {
     integer_generator::populate(position, r);
     return r;
 }
+
 integer_generator::result_type*
 integer_generator::create_ptr(const unsigned int position) {
     integer* p = new integer();

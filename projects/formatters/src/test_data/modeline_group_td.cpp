@@ -62,6 +62,7 @@ modeline_group_generator::create(const unsigned int position) {
     modeline_group_generator::populate(position, r);
     return r;
 }
+
 modeline_group_generator::result_type*
 modeline_group_generator::create_ptr(const unsigned int position) {
     modeline_group* p = new modeline_group();

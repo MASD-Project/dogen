@@ -48,6 +48,7 @@ modeline_field_generator::create(const unsigned int position) {
     modeline_field_generator::populate(position, r);
     return r;
 }
+
 modeline_field_generator::result_type*
 modeline_field_generator::create_ptr(const unsigned int position) {
     modeline_field* p = new modeline_field();

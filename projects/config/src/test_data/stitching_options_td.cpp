@@ -56,6 +56,7 @@ stitching_options_generator::create(const unsigned int position) {
     stitching_options_generator::populate(position, r);
     return r;
 }
+
 stitching_options_generator::result_type*
 stitching_options_generator::create_ptr(const unsigned int position) {
     stitching_options* p = new stitching_options();

@@ -40,6 +40,7 @@ namespace_info_generator::create(const unsigned int position) {
     namespace_info_generator::populate(position, r);
     return r;
 }
+
 namespace_info_generator::result_type*
 namespace_info_generator::create_ptr(const unsigned int position) {
     namespace_info* p = new namespace_info();

@@ -55,6 +55,7 @@ reference_generator::create(const unsigned int position) {
     reference_generator::populate(position, r);
     return r;
 }
+
 reference_generator::result_type*
 reference_generator::create_ptr(const unsigned int position) {
     reference* p = new reference();

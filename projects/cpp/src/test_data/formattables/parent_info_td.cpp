@@ -73,6 +73,7 @@ parent_info_generator::create(const unsigned int position) {
     parent_info_generator::populate(position, r);
     return r;
 }
+
 parent_info_generator::result_type*
 parent_info_generator::create_ptr(const unsigned int position) {
     parent_info* p = new parent_info();

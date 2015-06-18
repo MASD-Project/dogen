@@ -54,6 +54,7 @@ line_generator::create(const unsigned int position) {
     line_generator::populate(position, r);
     return r;
 }
+
 line_generator::result_type*
 line_generator::create_ptr(const unsigned int position) {
     line* p = new line();

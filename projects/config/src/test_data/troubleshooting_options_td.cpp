@@ -62,6 +62,7 @@ troubleshooting_options_generator::create(const unsigned int position) {
     troubleshooting_options_generator::populate(position, r);
     return r;
 }
+
 troubleshooting_options_generator::result_type*
 troubleshooting_options_generator::create_ptr(const unsigned int position) {
     troubleshooting_options* p = new troubleshooting_options();

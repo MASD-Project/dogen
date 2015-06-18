@@ -40,6 +40,7 @@ exception_info_generator::create(const unsigned int position) {
     exception_info_generator::populate(position, r);
     return r;
 }
+
 exception_info_generator::result_type*
 exception_info_generator::create_ptr(const unsigned int position) {
     exception_info* p = new exception_info();

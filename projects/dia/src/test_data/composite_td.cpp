@@ -82,6 +82,7 @@ composite_generator::create(const unsigned int position) {
     composite_generator::populate(position, r);
     return r;
 }
+
 composite_generator::result_type*
 composite_generator::create_ptr(const unsigned int position) {
     composite* p = new composite();

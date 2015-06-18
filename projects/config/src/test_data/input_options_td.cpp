@@ -75,6 +75,7 @@ input_options_generator::create(const unsigned int position) {
     input_options_generator::populate(position, r);
     return r;
 }
+
 input_options_generator::result_type*
 input_options_generator::create_ptr(const unsigned int position) {
     input_options* p = new input_options();

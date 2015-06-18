@@ -49,6 +49,7 @@ font_generator::create(const unsigned int position) {
     font_generator::populate(position, r);
     return r;
 }
+
 font_generator::result_type*
 font_generator::create_ptr(const unsigned int position) {
     font* p = new font();

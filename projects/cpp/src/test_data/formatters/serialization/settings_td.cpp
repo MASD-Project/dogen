@@ -36,6 +36,7 @@ settings_generator::create(const unsigned int/*position*/) {
     settings r;
     return r;
 }
+
 settings_generator::result_type*
 settings_generator::create_ptr(const unsigned int position) {
     settings* p = new settings();

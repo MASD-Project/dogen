@@ -48,6 +48,7 @@ aspect_settings_generator::create(const unsigned int position) {
     aspect_settings_generator::populate(position, r);
     return r;
 }
+
 aspect_settings_generator::result_type*
 aspect_settings_generator::create_ptr(const unsigned int position) {
     aspect_settings* p = new aspect_settings();

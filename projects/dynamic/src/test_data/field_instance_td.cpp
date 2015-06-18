@@ -53,6 +53,7 @@ field_instance_generator::create(const unsigned int position) {
     field_instance_generator::populate(position, r);
     return r;
 }
+
 field_instance_generator::result_type*
 field_instance_generator::create_ptr(const unsigned int position) {
     field_instance* p = new field_instance();

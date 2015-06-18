@@ -61,6 +61,7 @@ odb_options_info_generator::create(const unsigned int position) {
     odb_options_info_generator::populate(position, r);
     return r;
 }
+
 odb_options_info_generator::result_type*
 odb_options_info_generator::create_ptr(const unsigned int position) {
     odb_options_info* p = new odb_options_info();

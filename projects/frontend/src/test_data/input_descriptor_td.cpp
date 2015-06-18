@@ -60,6 +60,7 @@ input_descriptor_generator::create(const unsigned int position) {
     input_descriptor_generator::populate(position, r);
     return r;
 }
+
 input_descriptor_generator::result_type*
 input_descriptor_generator::create_ptr(const unsigned int position) {
     input_descriptor* p = new input_descriptor();

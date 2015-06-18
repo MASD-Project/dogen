@@ -76,6 +76,7 @@ formatter_properties_repository_generator::create(const unsigned int position) {
     formatter_properties_repository_generator::populate(position, r);
     return r;
 }
+
 formatter_properties_repository_generator::result_type*
 formatter_properties_repository_generator::create_ptr(const unsigned int position) {
     formatter_properties_repository* p = new formatter_properties_repository();

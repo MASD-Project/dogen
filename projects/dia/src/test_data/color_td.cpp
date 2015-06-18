@@ -47,6 +47,7 @@ color_generator::create(const unsigned int position) {
     color_generator::populate(position, r);
     return r;
 }
+
 color_generator::result_type*
 color_generator::create_ptr(const unsigned int position) {
     color* p = new color();

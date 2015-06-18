@@ -182,6 +182,7 @@ model_generator::create(const unsigned int position) {
     model_generator::populate(position, r);
     return r;
 }
+
 model_generator::result_type*
 model_generator::create_ptr(const unsigned int position) {
     model* p = new model();

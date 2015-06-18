@@ -60,6 +60,7 @@ cmakelists_info_generator::create(const unsigned int position) {
     cmakelists_info_generator::populate(position, r);
     return r;
 }
+
 cmakelists_info_generator::result_type*
 cmakelists_info_generator::create_ptr(const unsigned int position) {
     cmakelists_info* p = new cmakelists_info();

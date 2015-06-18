@@ -95,6 +95,7 @@ nested_type_info_generator::create(const unsigned int position) {
     nested_type_info_generator::populate(position, r);
     return r;
 }
+
 nested_type_info_generator::result_type*
 nested_type_info_generator::create_ptr(const unsigned int position) {
     nested_type_info* p = new nested_type_info();

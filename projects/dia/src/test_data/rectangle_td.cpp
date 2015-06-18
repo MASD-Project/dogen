@@ -47,6 +47,7 @@ rectangle_generator::create(const unsigned int position) {
     rectangle_generator::populate(position, r);
     return r;
 }
+
 rectangle_generator::result_type*
 rectangle_generator::create_ptr(const unsigned int position) {
     rectangle* p = new rectangle();

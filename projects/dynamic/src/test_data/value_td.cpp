@@ -26,7 +26,6 @@
 namespace dogen {
 namespace dynamic {
 
-
 void value_generator::
 populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
@@ -39,6 +38,5 @@ value_generator::create_ptr(const unsigned int position) {
         return dogen::dynamic::text_collection_generator::create_ptr(position);
     return dogen::dynamic::boolean_generator::create_ptr(position);
 }
-
 
 } }

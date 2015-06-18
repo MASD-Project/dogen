@@ -50,6 +50,7 @@ visited_type_info_generator::create(const unsigned int position) {
     visited_type_info_generator::populate(position, r);
     return r;
 }
+
 visited_type_info_generator::result_type*
 visited_type_info_generator::create_ptr(const unsigned int position) {
     visited_type_info* p = new visited_type_info();

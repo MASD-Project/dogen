@@ -74,6 +74,7 @@ enablement_repository_generator::create(const unsigned int position) {
     enablement_repository_generator::populate(position, r);
     return r;
 }
+
 enablement_repository_generator::result_type*
 enablement_repository_generator::create_ptr(const unsigned int position) {
     enablement_repository* p = new enablement_repository();

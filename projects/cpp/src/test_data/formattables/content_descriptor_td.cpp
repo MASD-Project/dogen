@@ -75,6 +75,7 @@ content_descriptor_generator::create(const unsigned int position) {
     content_descriptor_generator::populate(position, r);
     return r;
 }
+
 content_descriptor_generator::result_type*
 content_descriptor_generator::create_ptr(const unsigned int position) {
     content_descriptor* p = new content_descriptor();

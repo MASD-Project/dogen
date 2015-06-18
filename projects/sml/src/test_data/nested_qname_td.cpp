@@ -65,6 +65,7 @@ nested_qname_generator::create(const unsigned int position) {
     nested_qname_generator::populate(position, r);
     return r;
 }
+
 nested_qname_generator::result_type*
 nested_qname_generator::create_ptr(const unsigned int position) {
     nested_qname* p = new nested_qname();

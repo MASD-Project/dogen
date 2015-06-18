@@ -54,6 +54,7 @@ segment_generator::create(const unsigned int position) {
     segment_generator::populate(position, r);
     return r;
 }
+
 segment_generator::result_type*
 segment_generator::create_ptr(const unsigned int position) {
     segment* p = new segment();

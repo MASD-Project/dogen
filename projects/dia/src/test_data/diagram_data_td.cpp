@@ -54,6 +54,7 @@ diagram_data_generator::create(const unsigned int position) {
     diagram_data_generator::populate(position, r);
     return r;
 }
+
 diagram_data_generator::result_type*
 diagram_data_generator::create_ptr(const unsigned int position) {
     diagram_data* p = new diagram_data();

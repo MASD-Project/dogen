@@ -70,6 +70,7 @@ repository_generator::create(const unsigned int position) {
     repository_generator::populate(position, r);
     return r;
 }
+
 repository_generator::result_type*
 repository_generator::create_ptr(const unsigned int position) {
     repository* p = new repository();

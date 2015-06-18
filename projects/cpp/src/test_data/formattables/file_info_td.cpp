@@ -86,6 +86,7 @@ file_info_generator::create(const unsigned int position) {
     file_info_generator::populate(position, r);
     return r;
 }
+
 file_info_generator::result_type*
 file_info_generator::create_ptr(const unsigned int position) {
     file_info* p = new file_info();

@@ -60,6 +60,7 @@ file_generator::create(const unsigned int position) {
     file_generator::populate(position, r);
     return r;
 }
+
 file_generator::result_type*
 file_generator::create_ptr(const unsigned int position) {
     file* p = new file();

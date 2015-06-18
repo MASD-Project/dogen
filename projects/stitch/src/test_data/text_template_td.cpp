@@ -68,6 +68,7 @@ text_template_generator::create(const unsigned int position) {
     text_template_generator::populate(position, r);
     return r;
 }
+
 text_template_generator::result_type*
 text_template_generator::create_ptr(const unsigned int position) {
     text_template* p = new text_template();

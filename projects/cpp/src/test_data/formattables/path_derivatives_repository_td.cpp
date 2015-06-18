@@ -76,6 +76,7 @@ path_derivatives_repository_generator::create(const unsigned int position) {
     path_derivatives_repository_generator::populate(position, r);
     return r;
 }
+
 path_derivatives_repository_generator::result_type*
 path_derivatives_repository_generator::create_ptr(const unsigned int position) {
     path_derivatives_repository* p = new path_derivatives_repository();

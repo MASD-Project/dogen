@@ -88,6 +88,7 @@ field_definition_generator::create(const unsigned int position) {
     field_definition_generator::populate(position, r);
     return r;
 }
+
 field_definition_generator::result_type*
 field_definition_generator::create_ptr(const unsigned int position) {
     field_definition* p = new field_definition();

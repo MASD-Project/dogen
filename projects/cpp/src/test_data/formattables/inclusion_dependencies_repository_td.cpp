@@ -78,6 +78,7 @@ inclusion_dependencies_repository_generator::create(const unsigned int position)
     inclusion_dependencies_repository_generator::populate(position, r);
     return r;
 }
+
 inclusion_dependencies_repository_generator::result_type*
 inclusion_dependencies_repository_generator::create_ptr(const unsigned int position) {
     inclusion_dependencies_repository* p = new inclusion_dependencies_repository();

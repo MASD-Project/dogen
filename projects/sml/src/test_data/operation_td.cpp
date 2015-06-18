@@ -84,6 +84,7 @@ operation_generator::create(const unsigned int position) {
     operation_generator::populate(position, r);
     return r;
 }
+
 operation_generator::result_type*
 operation_generator::create_ptr(const unsigned int position) {
     operation* p = new operation();

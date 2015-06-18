@@ -58,6 +58,7 @@ qname_generator::create(const unsigned int position) {
     qname_generator::populate(position, r);
     return r;
 }
+
 qname_generator::result_type*
 qname_generator::create_ptr(const unsigned int position) {
     qname* p = new qname();

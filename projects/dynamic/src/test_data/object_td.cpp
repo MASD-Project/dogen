@@ -61,6 +61,7 @@ object_generator::create(const unsigned int position) {
     object_generator::populate(position, r);
     return r;
 }
+
 object_generator::result_type*
 object_generator::create_ptr(const unsigned int position) {
     object* p = new object();

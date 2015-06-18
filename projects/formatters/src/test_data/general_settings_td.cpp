@@ -51,6 +51,7 @@ general_settings_generator::create(const unsigned int position) {
     general_settings_generator::populate(position, r);
     return r;
 }
+
 general_settings_generator::result_type*
 general_settings_generator::create_ptr(const unsigned int position) {
     general_settings* p = new general_settings();

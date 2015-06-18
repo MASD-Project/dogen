@@ -47,6 +47,7 @@ point_generator::create(const unsigned int position) {
     point_generator::populate(position, r);
     return r;
 }
+
 point_generator::result_type*
 point_generator::create_ptr(const unsigned int position) {
     point* p = new point();

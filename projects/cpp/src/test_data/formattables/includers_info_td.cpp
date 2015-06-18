@@ -40,6 +40,7 @@ includers_info_generator::create(const unsigned int position) {
     includers_info_generator::populate(position, r);
     return r;
 }
+
 includers_info_generator::result_type*
 includers_info_generator::create_ptr(const unsigned int position) {
     includers_info* p = new includers_info();

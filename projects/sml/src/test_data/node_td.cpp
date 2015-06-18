@@ -68,6 +68,7 @@ node_generator::create(const unsigned int position) {
     node_generator::populate(position, r);
     return r;
 }
+
 node_generator::result_type*
 node_generator::create_ptr(const unsigned int position) {
     node* p = new node();

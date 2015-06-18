@@ -65,6 +65,7 @@ enum_info_generator::create(const unsigned int position) {
     enum_info_generator::populate(position, r);
     return r;
 }
+
 enum_info_generator::result_type*
 enum_info_generator::create_ptr(const unsigned int position) {
     enum_info* p = new enum_info();

@@ -95,6 +95,7 @@ processed_object_generator::create(const unsigned int position) {
     processed_object_generator::populate(position, r);
     return r;
 }
+
 processed_object_generator::result_type*
 processed_object_generator::create_ptr(const unsigned int position) {
     processed_object* p = new processed_object();

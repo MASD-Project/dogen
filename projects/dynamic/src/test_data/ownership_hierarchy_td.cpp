@@ -50,6 +50,7 @@ ownership_hierarchy_generator::create(const unsigned int position) {
     ownership_hierarchy_generator::populate(position, r);
     return r;
 }
+
 ownership_hierarchy_generator::result_type*
 ownership_hierarchy_generator::create_ptr(const unsigned int position) {
     ownership_hierarchy* p = new ownership_hierarchy();

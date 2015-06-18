@@ -47,6 +47,7 @@ global_enablement_properties_generator::create(const unsigned int position) {
     global_enablement_properties_generator::populate(position, r);
     return r;
 }
+
 global_enablement_properties_generator::result_type*
 global_enablement_properties_generator::create_ptr(const unsigned int position) {
     global_enablement_properties* p = new global_enablement_properties();

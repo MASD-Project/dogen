@@ -56,6 +56,7 @@ inclusion_lists_generator::create(const unsigned int position) {
     inclusion_lists_generator::populate(position, r);
     return r;
 }
+
 inclusion_lists_generator::result_type*
 inclusion_lists_generator::create_ptr(const unsigned int position) {
     inclusion_lists* p = new inclusion_lists();

@@ -67,6 +67,7 @@ inclusion_directives_settings_generator::create(const unsigned int position) {
     inclusion_directives_settings_generator::populate(position, r);
     return r;
 }
+
 inclusion_directives_settings_generator::result_type*
 inclusion_directives_settings_generator::create_ptr(const unsigned int position) {
     inclusion_directives_settings* p = new inclusion_directives_settings();

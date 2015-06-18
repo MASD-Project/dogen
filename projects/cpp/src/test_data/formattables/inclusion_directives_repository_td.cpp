@@ -70,6 +70,7 @@ inclusion_directives_repository_generator::create(const unsigned int position) {
     inclusion_directives_repository_generator::populate(position, r);
     return r;
 }
+
 inclusion_directives_repository_generator::result_type*
 inclusion_directives_repository_generator::create_ptr(const unsigned int position) {
     inclusion_directives_repository* p = new inclusion_directives_repository();

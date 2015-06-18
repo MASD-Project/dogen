@@ -90,6 +90,7 @@ bundle_generator::create(const unsigned int position) {
     bundle_generator::populate(position, r);
     return r;
 }
+
 bundle_generator::result_type*
 bundle_generator::create_ptr(const unsigned int position) {
     bundle* p = new bundle();

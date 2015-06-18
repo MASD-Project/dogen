@@ -66,6 +66,7 @@ odb_settings_generator::create(const unsigned int position) {
     odb_settings_generator::populate(position, r);
     return r;
 }
+
 odb_settings_generator::result_type*
 odb_settings_generator::create_ptr(const unsigned int position) {
     odb_settings* p = new odb_settings();

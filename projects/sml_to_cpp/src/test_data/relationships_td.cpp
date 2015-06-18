@@ -75,6 +75,7 @@ relationships_generator::create(const unsigned int position) {
     relationships_generator::populate(position, r);
     return r;
 }
+
 relationships_generator::result_type*
 relationships_generator::create_ptr(const unsigned int position) {
     relationships* p = new relationships();

@@ -56,6 +56,7 @@ forward_declarations_info_generator::create(const unsigned int position) {
     forward_declarations_info_generator::populate(position, r);
     return r;
 }
+
 forward_declarations_info_generator::result_type*
 forward_declarations_info_generator::create_ptr(const unsigned int position) {
     forward_declarations_info* p = new forward_declarations_info();

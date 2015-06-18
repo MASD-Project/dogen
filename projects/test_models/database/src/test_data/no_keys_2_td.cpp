@@ -45,6 +45,7 @@ no_keys_2_generator::create(const unsigned int position) {
     no_keys_2_generator::populate(position, r);
     return r;
 }
+
 no_keys_2_generator::result_type*
 no_keys_2_generator::create_ptr(const unsigned int position) {
     no_keys_2* p = new no_keys_2();

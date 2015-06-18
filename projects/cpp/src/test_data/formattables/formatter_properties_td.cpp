@@ -86,6 +86,7 @@ formatter_properties_generator::create(const unsigned int position) {
     formatter_properties_generator::populate(position, r);
     return r;
 }
+
 formatter_properties_generator::result_type*
 formatter_properties_generator::create_ptr(const unsigned int position) {
     formatter_properties* p = new formatter_properties();

@@ -53,6 +53,7 @@ primary_key_generator::create(const unsigned int position) {
     primary_key_generator::populate(position, r);
     return r;
 }
+
 primary_key_generator::result_type*
 primary_key_generator::create_ptr(const unsigned int position) {
     primary_key* p = new primary_key();

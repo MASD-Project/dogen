@@ -25,7 +25,6 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-
 void opaque_settings_generator::
 populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
@@ -34,6 +33,5 @@ opaque_settings_generator::result_type*
 opaque_settings_generator::create_ptr(const unsigned int position) {
     return dogen::cpp::settings::odb_settings_generator::create_ptr(position);
 }
-
 
 } } }

@@ -74,7 +74,6 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-
 void entity_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::formattables::formattable_generator::populate(position, v);
@@ -108,6 +107,5 @@ entity_generator::create_ptr(const unsigned int position) {
         return dogen::cpp::formattables::visitor_info_generator::create_ptr(position);
     return dogen::cpp::formattables::class_info_generator::create_ptr(position);
 }
-
 
 } } }

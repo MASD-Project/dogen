@@ -40,6 +40,7 @@ primitive_info_generator::create(const unsigned int position) {
     primitive_info_generator::populate(position, r);
     return r;
 }
+
 primitive_info_generator::result_type*
 primitive_info_generator::create_ptr(const unsigned int position) {
     primitive_info* p = new primitive_info();

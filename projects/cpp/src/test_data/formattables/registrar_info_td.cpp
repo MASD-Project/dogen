@@ -59,6 +59,7 @@ registrar_info_generator::create(const unsigned int position) {
     registrar_info_generator::populate(position, r);
     return r;
 }
+
 registrar_info_generator::result_type*
 registrar_info_generator::create_ptr(const unsigned int position) {
     registrar_info* p = new registrar_info();

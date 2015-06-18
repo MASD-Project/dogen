@@ -58,6 +58,7 @@ includes_generator::create(const unsigned int position) {
     includes_generator::populate(position, r);
     return r;
 }
+
 includes_generator::result_type*
 includes_generator::create_ptr(const unsigned int position) {
     includes* p = new includes();

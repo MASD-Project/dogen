@@ -77,6 +77,7 @@ path_settings_generator::create(const unsigned int position) {
     path_settings_generator::populate(position, r);
     return r;
 }
+
 path_settings_generator::result_type*
 path_settings_generator::create_ptr(const unsigned int position) {
     path_settings* p = new path_settings();

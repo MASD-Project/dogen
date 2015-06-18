@@ -77,6 +77,7 @@ project_generator::create(const unsigned int position) {
     project_generator::populate(position, r);
     return r;
 }
+
 project_generator::result_type*
 project_generator::create_ptr(const unsigned int position) {
     project* p = new project();

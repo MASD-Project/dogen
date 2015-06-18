@@ -63,6 +63,7 @@ output_options_generator::create(const unsigned int position) {
     output_options_generator::populate(position, r);
     return r;
 }
+
 output_options_generator::result_type*
 output_options_generator::create_ptr(const unsigned int position) {
     output_options* p = new output_options();

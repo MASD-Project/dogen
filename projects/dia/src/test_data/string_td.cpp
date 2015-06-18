@@ -47,6 +47,7 @@ string_generator::create(const unsigned int position) {
     string_generator::populate(position, r);
     return r;
 }
+
 string_generator::result_type*
 string_generator::create_ptr(const unsigned int position) {
     string* p = new string();

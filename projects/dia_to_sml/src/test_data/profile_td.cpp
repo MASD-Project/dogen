@@ -81,6 +81,7 @@ profile_generator::create(const unsigned int position) {
     profile_generator::populate(position, r);
     return r;
 }
+
 profile_generator::result_type*
 profile_generator::create_ptr(const unsigned int position) {
     profile* p = new profile();

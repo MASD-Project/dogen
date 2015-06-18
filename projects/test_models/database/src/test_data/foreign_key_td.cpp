@@ -59,6 +59,7 @@ foreign_key_generator::create(const unsigned int position) {
     foreign_key_generator::populate(position, r);
     return r;
 }
+
 foreign_key_generator::result_type*
 foreign_key_generator::create_ptr(const unsigned int position) {
     foreign_key* p = new foreign_key();

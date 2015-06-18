@@ -61,6 +61,7 @@ bundle_repository_generator::create(const unsigned int position) {
     bundle_repository_generator::populate(position, r);
     return r;
 }
+
 bundle_repository_generator::result_type*
 bundle_repository_generator::create_ptr(const unsigned int position) {
     bundle_repository* p = new bundle_repository();

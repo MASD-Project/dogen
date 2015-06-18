@@ -64,6 +64,7 @@ path_derivatives_generator::create(const unsigned int position) {
     path_derivatives_generator::populate(position, r);
     return r;
 }
+
 path_derivatives_generator::result_type*
 path_derivatives_generator::create_ptr(const unsigned int position) {
     path_derivatives* p = new path_derivatives();

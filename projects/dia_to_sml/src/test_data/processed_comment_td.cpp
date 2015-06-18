@@ -70,6 +70,7 @@ processed_comment_generator::create(const unsigned int position) {
     processed_comment_generator::populate(position, r);
     return r;
 }
+
 processed_comment_generator::result_type*
 processed_comment_generator::create_ptr(const unsigned int position) {
     processed_comment* p = new processed_comment();

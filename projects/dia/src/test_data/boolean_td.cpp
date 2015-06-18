@@ -47,6 +47,7 @@ boolean_generator::create(const unsigned int position) {
     boolean_generator::populate(position, r);
     return r;
 }
+
 boolean_generator::result_type*
 boolean_generator::create_ptr(const unsigned int position) {
     boolean* p = new boolean();

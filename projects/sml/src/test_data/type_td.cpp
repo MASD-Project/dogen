@@ -68,7 +68,6 @@ create_boost_optional_dogen_sml_qname(unsigned int position) {
 namespace dogen {
 namespace sml {
 
-
 void type_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
@@ -87,6 +86,5 @@ type_generator::create_ptr(const unsigned int position) {
         return dogen::sml::primitive_generator::create_ptr(position);
     return dogen::sml::enumeration_generator::create_ptr(position);
 }
-
 
 } }

@@ -55,6 +55,7 @@ processed_property_generator::create(const unsigned int position) {
     processed_property_generator::populate(position, r);
     return r;
 }
+
 processed_property_generator::result_type*
 processed_property_generator::create_ptr(const unsigned int position) {
     processed_property* p = new processed_property();

@@ -76,6 +76,7 @@ modeline_generator::create(const unsigned int position) {
     modeline_generator::populate(position, r);
     return r;
 }
+
 modeline_generator::result_type*
 modeline_generator::create_ptr(const unsigned int position) {
     modeline* p = new modeline();

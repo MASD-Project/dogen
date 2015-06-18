@@ -47,7 +47,6 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
@@ -79,6 +78,5 @@ formattable_generator::create_ptr(const unsigned int position) {
         return dogen::cpp::formattables::visitor_info_generator::create_ptr(position);
     return dogen::cpp::formattables::class_info_generator::create_ptr(position);
 }
-
 
 } } }

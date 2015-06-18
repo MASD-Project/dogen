@@ -49,6 +49,7 @@ text_generator::create(const unsigned int position) {
     text_generator::populate(position, r);
     return r;
 }
+
 text_generator::result_type*
 text_generator::create_ptr(const unsigned int position) {
     text* p = new text();

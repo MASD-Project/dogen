@@ -63,6 +63,7 @@ enumeration_generator::create(const unsigned int position) {
     enumeration_generator::populate(position, r);
     return r;
 }
+
 enumeration_generator::result_type*
 enumeration_generator::create_ptr(const unsigned int position) {
     enumeration* p = new enumeration();

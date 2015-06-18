@@ -69,6 +69,7 @@ property_generator::create(const unsigned int position) {
     property_generator::populate(position, r);
     return r;
 }
+
 property_generator::result_type*
 property_generator::create_ptr(const unsigned int position) {
     property* p = new property();

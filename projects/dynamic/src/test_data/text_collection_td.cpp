@@ -57,6 +57,7 @@ text_collection_generator::create(const unsigned int position) {
     text_collection_generator::populate(position, r);
     return r;
 }
+
 text_collection_generator::result_type*
 text_collection_generator::create_ptr(const unsigned int position) {
     text_collection* p = new text_collection();

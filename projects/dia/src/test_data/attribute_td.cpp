@@ -145,6 +145,7 @@ attribute_generator::create(const unsigned int position) {
     attribute_generator::populate(position, r);
     return r;
 }
+
 attribute_generator::result_type*
 attribute_generator::create_ptr(const unsigned int position) {
     attribute* p = new attribute();

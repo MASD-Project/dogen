@@ -50,6 +50,7 @@ infix_configuration_generator::create(const unsigned int position) {
     infix_configuration_generator::populate(position, r);
     return r;
 }
+
 infix_configuration_generator::result_type*
 infix_configuration_generator::create_ptr(const unsigned int position) {
     infix_configuration* p = new infix_configuration();

@@ -138,6 +138,7 @@ concept_generator::create(const unsigned int position) {
     concept_generator::populate(position, r);
     return r;
 }
+
 concept_generator::result_type*
 concept_generator::create_ptr(const unsigned int position) {
     concept* p = new concept();

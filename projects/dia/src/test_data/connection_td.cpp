@@ -49,6 +49,7 @@ connection_generator::create(const unsigned int position) {
     connection_generator::populate(position, r);
     return r;
 }
+
 connection_generator::result_type*
 connection_generator::create_ptr(const unsigned int position) {
     connection* p = new connection();

@@ -48,6 +48,7 @@ name_generator::create(const unsigned int position) {
     name_generator::populate(position, r);
     return r;
 }
+
 name_generator::result_type*
 name_generator::create_ptr(const unsigned int position) {
     name* p = new name();

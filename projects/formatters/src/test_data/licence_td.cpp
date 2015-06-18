@@ -56,6 +56,7 @@ licence_generator::create(const unsigned int position) {
     licence_generator::populate(position, r);
     return r;
 }
+
 licence_generator::result_type*
 licence_generator::create_ptr(const unsigned int position) {
     licence* p = new licence();

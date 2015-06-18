@@ -60,6 +60,7 @@ settings_bundle_generator::create(const unsigned int position) {
     settings_bundle_generator::populate(position, r);
     return r;
 }
+
 settings_bundle_generator::result_type*
 settings_bundle_generator::create_ptr(const unsigned int position) {
     settings_bundle* p = new settings_bundle();

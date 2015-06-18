@@ -47,6 +47,7 @@ real_generator::create(const unsigned int position) {
     real_generator::populate(position, r);
     return r;
 }
+
 real_generator::result_type*
 real_generator::create_ptr(const unsigned int position) {
     real* p = new real();

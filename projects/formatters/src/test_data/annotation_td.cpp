@@ -75,6 +75,7 @@ annotation_generator::create(const unsigned int position) {
     annotation_generator::populate(position, r);
     return r;
 }
+
 annotation_generator::result_type*
 annotation_generator::create_ptr(const unsigned int position) {
     annotation* p = new annotation();

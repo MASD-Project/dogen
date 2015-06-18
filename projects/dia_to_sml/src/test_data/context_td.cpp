@@ -95,6 +95,7 @@ context_generator::create(const unsigned int position) {
     context_generator::populate(position, r);
     return r;
 }
+
 context_generator::result_type*
 context_generator::create_ptr(const unsigned int position) {
     context* p = new context();

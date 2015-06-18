@@ -74,6 +74,7 @@ stitching_settings_generator::create(const unsigned int position) {
     stitching_settings_generator::populate(position, r);
     return r;
 }
+
 stitching_settings_generator::result_type*
 stitching_settings_generator::create_ptr(const unsigned int position) {
     stitching_settings* p = new stitching_settings();

@@ -68,6 +68,7 @@ layer_generator::create(const unsigned int position) {
     layer_generator::populate(position, r);
     return r;
 }
+
 layer_generator::result_type*
 layer_generator::create_ptr(const unsigned int position) {
     layer* p = new layer();

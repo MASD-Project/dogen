@@ -99,6 +99,7 @@ module_generator::create(const unsigned int position) {
     module_generator::populate(position, r);
     return r;
 }
+
 module_generator::result_type*
 module_generator::create_ptr(const unsigned int position) {
     module* p = new module();
