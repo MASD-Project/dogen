@@ -21,8 +21,6 @@
 #include "dogen/cpp/test_data/settings/odb_settings_td.hpp"
 #include "dogen/cpp/test_data/settings/opaque_settings_td.hpp"
 
-
-
 namespace dogen {
 namespace cpp {
 namespace settings {

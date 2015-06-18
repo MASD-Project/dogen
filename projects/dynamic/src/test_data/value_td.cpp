@@ -23,8 +23,6 @@
 #include "dogen/dynamic/test_data/boolean_td.hpp"
 #include "dogen/dynamic/test_data/text_collection_td.hpp"
 
-
-
 namespace dogen {
 namespace dynamic {
 

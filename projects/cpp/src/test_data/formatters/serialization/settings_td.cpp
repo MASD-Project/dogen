@@ -20,8 +20,6 @@
  */
 #include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"
 
-
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
