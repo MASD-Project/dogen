@@ -43,7 +43,7 @@ namespace test_data {
  */
 class helper_methods_formatter {
 public:
-    explicit helper_methods_formatter(
+    helper_methods_formatter(const std::string& owner_name,
         const std::list<formattables::property_info>& properties);
 
 private:
@@ -182,6 +182,7 @@ public:
     void format(std::ostream& s) const;
 
 private:
+    const std::string owner_name_;
     const std::list<formattables::property_info>& properties_;
 };
 

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/formatters/formatting_error.hpp"
 #include "dogen/cpp/types/formatters/test_data/char_helper_stitch.hpp"
@@ -62,6 +63,9 @@ const std::string invalid_time_duration(
 const std::string invalid_ptree("Ptree's should have no type arguments");
 const std::string invalid_path("Paths should have no type arguments");
 
+const std::string bool_type("bool");
+const std::string string_type("std::string");
+
 }
 
 namespace dogen {
@@ -70,8 +74,9 @@ namespace formatters {
 namespace test_data {
 
 helper_methods_formatter::helper_methods_formatter(
+    const std::string& owner_name,
     const std::list<formattables::property_info>& properties)
-    : properties_(properties) {}
+    : owner_name_(owner_name), properties_(properties) {}
 
 void helper_methods_formatter::char_helper(
   formatters::nested_type_formatting_assistant& fa,
@@ -244,18 +249,26 @@ void helper_methods_formatter::recursive_helper_method_creator(
     for (const auto c : t.children())
         recursive_helper_method_creator(fa, c, types_done);
 
-    if (t.is_sequence_container())
+    if (t.is_char_like())
+        char_helper(fa, t);
+    else if (t.is_int_like())
+        int_helper(fa, t);
+    else if (t.name() == bool_type)
+        bool_helper(fa, t);
+    else if (t.is_sequence_container())
         sequence_container_helper(fa, t);
     else if (t.is_associative_container())
         associative_container_helper(fa, t);
     else if (t.is_smart_pointer())
         smart_pointer_helper(fa, t);
-    else if (t.is_pair())
-        pair_helper(fa, t);
     else if (t.is_optional_like())
         optional_helper(fa, t);
+    else if (t.is_pair())
+        pair_helper(fa, t);
     else if (t.is_variant_like())
         variant_helper(fa, t);
+    else if (t.is_filesystem_path())
+        path_helper(fa, t);
     else if (t.is_date())
         date_helper(fa, t);
     else if (t.is_ptime())
@@ -264,9 +277,14 @@ void helper_methods_formatter::recursive_helper_method_creator(
         time_duration_helper(fa, t);
     else if (t.is_ptree())
         ptree_helper(fa, t);
-    else if (t.is_filesystem_path())
-        path_helper(fa, t);
-
+    else if (t.name() == string_type)
+        string_helper(fa, t);
+    else {
+        if (boost::algorithm::ends_with(t.name(), "::" + owner_name_))
+            composite_type_helper(fa, t);
+        else
+            domain_type_helper(fa, t);
+    }
     types_done.insert(t.complete_identifiable_name());
 }
 

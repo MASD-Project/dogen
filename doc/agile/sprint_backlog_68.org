@@ -459,6 +459,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-18 Thu 18:12]--[2015-06-18 Thu 18:46] =>  0:34
     CLOCK: [2015-06-18 Thu 18:06]--[2015-06-18 Thu 18:11] =>  0:05
     CLOCK: [2015-06-18 Thu 08:24]--[2015-06-18 Thu 08:43] =>  0:19
     CLOCK: [2015-06-18 Thu 07:56]--[2015-06-18 Thu 08:24] =>  0:28
@@ -470,6 +471,15 @@ machinery. Fix all differences.
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+Problems:
+
+- spaces for classes without properties right after boilerplate. Need
+  to remove them from legacy.
+
+Solved Problems:
+
+- new helper methods are not coming through.
 
 *** Implement enum header formatter in test_data                      :story:
 

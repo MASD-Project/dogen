@@ -362,7 +362,7 @@ void entity_formatting_assistant::add_helper_methods() {
 
     if (is_test_data_class_implementation && requires_test_data) {
         BOOST_LOG_SEV(lg, debug) << "Creating test data helper methods.";
-        test_data::helper_methods_formatter f(c->properties());
+        test_data::helper_methods_formatter f(c->name(), c->properties());
         f.format(stream());
     } else {
         BOOST_LOG_SEV(lg, debug) << "Test data helper methods not required."

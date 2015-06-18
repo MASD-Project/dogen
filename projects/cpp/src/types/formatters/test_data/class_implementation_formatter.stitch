@@ -13,7 +13,17 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        if (!c.properties().empty()) {
+#>
+namespace {
+<#+
         fa.add_helper_methods();
+#>
+
+}
+
+<#+
+        }
 
         {
             auto snf(fa.make_scoped_namespace_formatter());
@@ -23,6 +33,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
              */
             if (!c.is_parent()) {
 #>
+
 <#= c.name() #>_generator::<#= c.name() #>_generator() : position_(0) { }
 <#+
             }
@@ -32,14 +43,20 @@ dogen::formatters::file class_implementation_formatter_stitch(
              */
             if (!c.is_immutable()) {
                 bool no_args(c.properties().empty() && c.parents().empty());
-                if (no_args)
+                if (no_args) {
 #>
-void <#= c.name() #>_generator populate(const unsigned int /*position*/, result_type& /*v*/) {
+
+void <#= c.name() #>_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
 <#+
-                else
+                } else {
 #>
-void <#= c.name() #>_generator populate(const unsigned int position, result_type& v) {
+
+void <#= c.name() #>_generator::
+populate(const unsigned int position, result_type& v) {
 <#+
+                }
+
                 for (const auto p : c.parents()) {
 #>
     <#= p.qualified_name() #>_generator::populate(position, v);
@@ -60,11 +77,12 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
             /*
              * Create method.
              */
-            if (c.is_parent()) {
+            if (!c.is_parent()) {
                  const bool no_arg(c.all_properties().empty());
 #>
+
 <#= c.name() #>_generator::result_type
-<#= c.name() #>::create(const unsigned int<#= (no_arg ? "/*position*/" : " position") #>) {
+<#= c.name() #>_generator::create(const unsigned int<#= (no_arg ? "/*position*/" : " position") #>) {
 <#+
                 if (c.is_immutable()) {
 #>
@@ -85,7 +103,7 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
 <#+
                     if (!c.all_properties().empty())
 #>
-    <#= c.name() #>::populate(position, r);
+    <#= c.name() #>_generator::populate(position, r);
     return r;
 <#+
                 }
@@ -99,7 +117,7 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
              */
 #>
 <#= c.name() #>_generator::result_type*
-<#= c.name() #>::create_ptr(const unsigned int position) {
+<#= c.name() #>_generator::create_ptr(const unsigned int position) {
 <#+
             if (c.leaves().empty()) {
                 if (c.is_immutable())
@@ -110,7 +128,7 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
 #>
     <#= c.name() #>* p = new <#= c.name() #>();
     <#= c.name() #>_generator::populate(position, *p);
-    return p;  
+    return p;
 <#+
                 }
             } else {
@@ -129,16 +147,20 @@ void <#= c.name() #>_generator populate(const unsigned int position, result_type
     return <#= front #>_generator::create_ptr(position);
 <#+
             }
-
+#>
+}
+<#+
             /*
              * Function operator
              */
              if (!c.is_parent()) {
 #>
+
 <#= c.name() #>_generator::result_type
-::operator()() {
+<#= c.name() #>_generator::operator()() {
     return create(position_++);
 }
+
 <#+
             }
         } // snf

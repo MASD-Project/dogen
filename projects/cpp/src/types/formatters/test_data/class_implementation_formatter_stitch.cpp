@@ -32,7 +32,13 @@ dogen::formatters::file class_implementation_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        if (!c.properties().empty()) {
+fa.stream() << "namespace {" << std::endl;
         fa.add_helper_methods();
+fa.stream() << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+        }
 
         {
             auto snf(fa.make_scoped_namespace_formatter());
@@ -41,6 +47,7 @@ dogen::formatters::file class_implementation_formatter_stitch(
              * Default constructor.
              */
             if (!c.is_parent()) {
+fa.stream() << std::endl;
 fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : position_(0) { }" << std::endl;
             }
 
@@ -49,10 +56,16 @@ fa.stream() << c.name() << "_generator::" << c.name() << "_generator() : positio
              */
             if (!c.is_immutable()) {
                 bool no_args(c.properties().empty() && c.parents().empty());
-                if (no_args)
-fa.stream() << "void " << c.name() << "_generator populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
-                else
-fa.stream() << "void " << c.name() << "_generator populate(const unsigned int position, result_type& v) {" << std::endl;
+                if (no_args) {
+fa.stream() << std::endl;
+fa.stream() << "void " << c.name() << "_generator::" << std::endl;
+fa.stream() << "populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
+                } else {
+fa.stream() << std::endl;
+fa.stream() << "void " << c.name() << "_generator::" << std::endl;
+fa.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
+                }
+
                 for (const auto p : c.parents()) {
 fa.stream() << "    " << p.qualified_name() << "_generator::populate(position, v);" << std::endl;
                 }
@@ -67,10 +80,11 @@ fa.stream() << "}" << std::endl;
             /*
              * Create method.
              */
-            if (c.is_parent()) {
+            if (!c.is_parent()) {
                  const bool no_arg(c.all_properties().empty());
+fa.stream() << std::endl;
 fa.stream() << c.name() << "_generator::result_type" << std::endl;
-fa.stream() << c.name() << "::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
+fa.stream() << c.name() << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
                 if (c.is_immutable()) {
 fa.stream() << "    return " << c.name() << "(" << std::endl;
                     unsigned int i(0);
@@ -81,7 +95,7 @@ fa.stream() << "        );" << std::endl;
                 } else {
 fa.stream() << "    " << c.name() << " r;" << std::endl;
                     if (!c.all_properties().empty())
-fa.stream() << "    " << c.name() << "::populate(position, r);" << std::endl;
+fa.stream() << "    " << c.name() << "_generator::populate(position, r);" << std::endl;
 fa.stream() << "    return r;" << std::endl;
                 }
 fa.stream() << "}" << std::endl;
@@ -91,14 +105,14 @@ fa.stream() << "}" << std::endl;
              * Create method ptr.
              */
 fa.stream() << c.name() << "_generator::result_type*" << std::endl;
-fa.stream() << c.name() << "::create_ptr(const unsigned int position) {" << std::endl;
+fa.stream() << c.name() << "_generator::create_ptr(const unsigned int position) {" << std::endl;
             if (c.leaves().empty()) {
                 if (c.is_immutable())
 fa.stream() << "    return new " << c.name() << "(create(position));" << std::endl;
                 else {
 fa.stream() << "    " << c.name() << "* p = new " << c.name() << "();" << std::endl;
 fa.stream() << "    " << c.name() << "_generator::populate(position, *p);" << std::endl;
-fa.stream() << "    return p;  " << std::endl;
+fa.stream() << "    return p;" << std::endl;
                 }
             } else {
                 auto leaves(c.leaves());
@@ -112,15 +126,17 @@ fa.stream() << "        return " << l << "_generator::create_ptr(position);" << 
                 }
 fa.stream() << "    return " << front << "_generator::create_ptr(position);" << std::endl;
             }
-
+fa.stream() << "}" << std::endl;
             /*
              * Function operator
              */
              if (!c.is_parent()) {
+fa.stream() << std::endl;
 fa.stream() << c.name() << "_generator::result_type" << std::endl;
-fa.stream() << "::operator()() {" << std::endl;
+fa.stream() << c.name() << "_generator::operator()() {" << std::endl;
 fa.stream() << "    return create(position_++);" << std::endl;
 fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
             }
         } // snf
     } // sbf
