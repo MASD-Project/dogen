@@ -832,7 +832,7 @@ void generator_implementation::format_class(
 
     const cpp::formattables::class_info& ci(*o);
     create_helper_methods(ci);
-    if (!ci.properties().empty() || !ci.parents().empty())
+    if (!ci.all_properties().empty())
         utility_.blank_line(2);
 
     {

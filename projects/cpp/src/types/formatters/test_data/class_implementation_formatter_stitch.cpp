@@ -137,8 +137,8 @@ fa.stream() << c.name() << "_generator::result_type" << std::endl;
 fa.stream() << c.name() << "_generator::operator()() {" << std::endl;
 fa.stream() << "    return create(position_++);" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
             }
+fa.stream() << std::endl;
         } // snf
     } // sbf
     // return fa.make_file();

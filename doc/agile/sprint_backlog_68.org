@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-18 Thu 23:09]
+#+CAPTION: Clock summary at [2015-06-18 Thu 23:42]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *34:59* |       |       |
+| *Total time*                                                                | *35:30* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 34:59   |       |       |
-| Active                                                                      |         | 34:59 |       |
+| Stories                                                                     | 35:30   |       |       |
+| Active                                                                      |         | 35:30 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -38,7 +38,7 @@
 | COMPLETED Implement enum header formatter in io                             |         |       |  0:28 |
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  3:54 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  4:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -459,6 +459,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-18 Thu 23:27]--[2015-06-18 Thu 23:42] =>  0:15
     CLOCK: [2015-06-18 Thu 23:10]--[2015-06-18 Thu 23:26] =>  0:16
     CLOCK: [2015-06-18 Thu 23:03]--[2015-06-18 Thu 23:09] =>  0:06
     CLOCK: [2015-06-18 Thu 18:12]--[2015-06-18 Thu 18:46] =>  0:34
@@ -476,7 +477,11 @@ machinery. Fix all differences.
 
 Problems:
 
-- diffs across 8 models
+- boost path has an include
+- new line in boost path
+- missing parents includes
+- domain helper missing newline after return type and has an extra _
+  in return
 
 Solved Problems:
 

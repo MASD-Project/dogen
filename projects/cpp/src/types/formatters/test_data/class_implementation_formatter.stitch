@@ -161,9 +161,11 @@ populate(const unsigned int position, result_type& v) {
 <#= c.name() #>_generator::operator()() {
     return create(position_++);
 }
-
 <#+
             }
+#>
+
+<#+
         } // snf
     } // sbf
     // return fa.make_file();
