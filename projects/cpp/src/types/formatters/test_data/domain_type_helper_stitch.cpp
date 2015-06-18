@@ -30,8 +30,9 @@ void domain_type_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << (t.is_smart_pointer() ? "*" : "") << " create_" << t.complete_identifiable_name() << (t.is_smart_pointer() ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
-fa.stream() << "    return " << t.identifiable_name() << "_generator::create_" << (t.is_smart_pointer() ? "_ptr" : "") << "(position);" << std::endl;
+fa.stream() << t.complete_name() << (t.is_smart_pointer() ? "*" : "") << std::endl;
+fa.stream() << "create" << t.complete_identifiable_name() << (t.is_smart_pointer() ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
+fa.stream() << "    return " << t.qualified_name() << "_generator::create" << (t.is_smart_pointer() ? "_ptr" : "") << "(position);" << std::endl;
 fa.stream() << "}" << std::endl;
 }
 } } } }

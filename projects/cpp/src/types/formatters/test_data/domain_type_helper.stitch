@@ -12,8 +12,9 @@ void domain_type_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-<#= t.complete_name() #><#= (t.is_smart_pointer() ? "*" : "") #> create_<#= t.complete_identifiable_name() #><#= (t.is_smart_pointer() ? "_ptr" : "") #>(unsigned int position) {
-    return <#= t.identifiable_name() #>_generator::create_<#= (t.is_smart_pointer() ? "_ptr" : "") #>(position);
+<#= t.complete_name() #><#= (t.is_smart_pointer() ? "*" : "") #>
+create<#= t.complete_identifiable_name() #><#= (t.is_smart_pointer() ? "_ptr" : "") #>(unsigned int position) {
+    return <#= t.qualified_name() #>_generator::create<#= (t.is_smart_pointer() ? "_ptr" : "") #>(position);
 }
 <#+
 }

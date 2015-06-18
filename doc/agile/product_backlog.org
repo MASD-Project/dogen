@@ -10,33 +10,6 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Incorrect stitching when a line starts with inline scriplet       :story:
-
-We created a template vaguely as follows:
-
-: <some code>
-:                const std::string out(ss.str());
-: #>
-: <#= out #>
-: <#+
-:            }
-: <some more code>
-
-The resulting code did not stream =out= as expected:
-
-:                const std::string out(ss.str());
-: out
-:            }
-
-We seem to be handling <#= as if it was <#+ when it is at the start of
-the line. Replacing it with:
-
-:     : <#= out #>
-
-Generated the expected code:
-
-: fa.stream() << "     : " << out << std::endl;
-
 *** Add relationship types to handle "requires" and enablement        :story:
 
 This story needs to be named properly, once we actually understand

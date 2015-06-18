@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-18 Thu 23:42]
+#+CAPTION: Clock summary at [2015-06-18 Thu 23:53]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *35:30* |       |       |
+| *Total time*                                                                | *35:40* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 35:30   |       |       |
-| Active                                                                      |         | 35:30 |       |
+| Stories                                                                     | 35:40   |       |       |
+| Active                                                                      |         | 35:40 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -38,7 +38,7 @@
 | COMPLETED Implement enum header formatter in io                             |         |       |  0:28 |
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  4:25 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  4:35 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -459,6 +459,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10
     CLOCK: [2015-06-18 Thu 23:27]--[2015-06-18 Thu 23:42] =>  0:15
     CLOCK: [2015-06-18 Thu 23:10]--[2015-06-18 Thu 23:26] =>  0:16
     CLOCK: [2015-06-18 Thu 23:03]--[2015-06-18 Thu 23:09] =>  0:06
@@ -488,6 +489,33 @@ Solved Problems:
 - new helper methods are not coming through.
 - spaces for classes without properties right after boilerplate. Need
   to remove them from legacy.
+
+*** Incorrect stitching when a line starts with inline scriplet       :story:
+
+We created a template vaguely as follows:
+
+: <some code>
+:                const std::string out(ss.str());
+: #>
+: <#= out #>
+: <#+
+:            }
+: <some more code>
+
+The resulting code did not stream =out= as expected:
+
+:                const std::string out(ss.str());
+: out
+:            }
+
+We seem to be handling <#= as if it was <#+ when it is at the start of
+the line. Replacing it with:
+
+:     : <#= out #>
+
+Generated the expected code:
+
+: fa.stream() << "     : " << out << std::endl;
 
 *** Implement enum header formatter in test_data                      :story:
 
