@@ -47,6 +47,7 @@ descendant3_generator::create(const unsigned int position) {
     descendant3_generator::populate(position, r);
     return r;
 }
+
 descendant3_generator::result_type*
 descendant3_generator::create_ptr(const unsigned int position) {
     descendant3* p = new descendant3();

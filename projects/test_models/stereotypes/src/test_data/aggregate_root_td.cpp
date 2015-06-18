@@ -45,6 +45,7 @@ aggregate_root_generator::create(const unsigned int position) {
     aggregate_root_generator::populate(position, r);
     return r;
 }
+
 aggregate_root_generator::result_type*
 aggregate_root_generator::create_ptr(const unsigned int position) {
     aggregate_root* p = new aggregate_root();

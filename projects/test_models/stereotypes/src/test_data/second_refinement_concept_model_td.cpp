@@ -54,6 +54,7 @@ second_refinement_concept_model_generator::create(const unsigned int position) {
     second_refinement_concept_model_generator::populate(position, r);
     return r;
 }
+
 second_refinement_concept_model_generator::result_type*
 second_refinement_concept_model_generator::create_ptr(const unsigned int position) {
     second_refinement_concept_model* p = new second_refinement_concept_model();

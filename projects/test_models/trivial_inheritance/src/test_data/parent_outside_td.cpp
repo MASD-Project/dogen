@@ -33,7 +33,6 @@ namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-
 void parent_outside_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
@@ -43,6 +42,5 @@ parent_outside_generator::result_type*
 parent_outside_generator::create_ptr(const unsigned int position) {
     return dogen::test_models::trivial_inheritance::pkg4::child_generator::create_ptr(position);
 }
-
 
 } } }

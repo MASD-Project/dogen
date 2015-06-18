@@ -62,6 +62,7 @@ immutable_four_generator::create(const unsigned int position) {
         create_dogen_test_models_stereotypes_immutable_one_primitive(position + 3)
         );
 }
+
 immutable_four_generator::result_type*
 immutable_four_generator::create_ptr(const unsigned int position) {
     return new immutable_four(create(position));

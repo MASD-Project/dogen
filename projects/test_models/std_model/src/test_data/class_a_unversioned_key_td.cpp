@@ -48,6 +48,7 @@ class_a_unversioned_key_generator::create(const unsigned int position) {
     class_a_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 class_a_unversioned_key_generator::result_type*
 class_a_unversioned_key_generator::create_ptr(const unsigned int position) {
     class_a_unversioned_key* p = new class_a_unversioned_key();

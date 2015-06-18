@@ -45,6 +45,7 @@ identity_and_other_ver_unversioned_key_generator::create(const unsigned int posi
     identity_and_other_ver_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 identity_and_other_ver_unversioned_key_generator::result_type*
 identity_and_other_ver_unversioned_key_generator::create_ptr(const unsigned int position) {
     identity_and_other_ver_unversioned_key* p = new identity_and_other_ver_unversioned_key();

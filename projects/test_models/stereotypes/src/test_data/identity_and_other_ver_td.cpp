@@ -51,6 +51,7 @@ identity_and_other_ver_generator::create(const unsigned int position) {
     identity_and_other_ver_generator::populate(position, r);
     return r;
 }
+
 identity_and_other_ver_generator::result_type*
 identity_and_other_ver_generator::create_ptr(const unsigned int position) {
     identity_and_other_ver* p = new identity_and_other_ver();

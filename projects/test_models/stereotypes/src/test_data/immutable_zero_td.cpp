@@ -32,6 +32,7 @@ immutable_zero_generator::create(const unsigned int/*position*/) {
 
         );
 }
+
 immutable_zero_generator::result_type*
 immutable_zero_generator::create_ptr(const unsigned int position) {
     return new immutable_zero(create(position));

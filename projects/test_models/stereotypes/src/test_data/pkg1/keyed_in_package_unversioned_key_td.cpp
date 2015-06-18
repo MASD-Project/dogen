@@ -46,6 +46,7 @@ keyed_in_package_unversioned_key_generator::create(const unsigned int position) 
     keyed_in_package_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 keyed_in_package_unversioned_key_generator::result_type*
 keyed_in_package_unversioned_key_generator::create_ptr(const unsigned int position) {
     keyed_in_package_unversioned_key* p = new keyed_in_package_unversioned_key();

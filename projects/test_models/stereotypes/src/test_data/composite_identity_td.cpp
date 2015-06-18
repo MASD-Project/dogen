@@ -47,6 +47,7 @@ composite_identity_generator::create(const unsigned int position) {
     composite_identity_generator::populate(position, r);
     return r;
 }
+
 composite_identity_generator::result_type*
 composite_identity_generator::create_ptr(const unsigned int position) {
     composite_identity* p = new composite_identity();

@@ -38,7 +38,6 @@ namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-
 void move_ctor_base_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_boost_filesystem_path(position + 0));
@@ -50,6 +49,5 @@ move_ctor_base_generator::create_ptr(const unsigned int position) {
         return dogen::test_models::trivial_inheritance::move_ctor_empty_descendant_generator::create_ptr(position);
     return dogen::test_models::trivial_inheritance::move_ctor_descendant_generator::create_ptr(position);
 }
-
 
 } } }

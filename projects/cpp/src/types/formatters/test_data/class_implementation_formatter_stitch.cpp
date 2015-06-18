@@ -104,6 +104,7 @@ fa.stream() << "}" << std::endl;
             /*
              * Create method ptr.
              */
+fa.stream() << std::endl;
 fa.stream() << c.name() << "_generator::result_type*" << std::endl;
 fa.stream() << c.name() << "_generator::create_ptr(const unsigned int position) {" << std::endl;
             if (c.leaves().empty()) {

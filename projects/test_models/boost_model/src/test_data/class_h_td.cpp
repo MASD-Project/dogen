@@ -51,6 +51,7 @@ class_h_generator::create(const unsigned int position) {
     class_h_generator::populate(position, r);
     return r;
 }
+
 class_h_generator::result_type*
 class_h_generator::create_ptr(const unsigned int position) {
     class_h* p = new class_h();

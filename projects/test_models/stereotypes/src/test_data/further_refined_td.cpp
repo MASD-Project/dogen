@@ -48,6 +48,7 @@ further_refined_generator::create(const unsigned int position) {
     further_refined_generator::populate(position, r);
     return r;
 }
+
 further_refined_generator::result_type*
 further_refined_generator::create_ptr(const unsigned int position) {
     further_refined* p = new further_refined();

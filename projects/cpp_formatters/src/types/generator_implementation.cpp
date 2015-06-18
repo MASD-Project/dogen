@@ -664,6 +664,7 @@ void generator_implementation::populate_method(
     if (ci.is_immutable())
         return;
 
+    utility_.blank_line();
     const auto props(ci.properties());
     const std::string name(ci.name() + "_generator");
 
@@ -701,6 +702,7 @@ void generator_implementation::create_method(
     if (ci.is_parent())
         return;
 
+    utility_.blank_line();
     const bool has_properties(!ci.all_properties().empty());
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
@@ -744,6 +746,7 @@ void generator_implementation::create_method(
 void generator_implementation::create_method_ptr(
     const cpp::formattables::class_info& ci) {
     auto leaves(ci.leaves());
+    utility_.blank_line();
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type*" << std::endl
             << name << "::create_ptr(const unsigned int position) ";
@@ -792,6 +795,7 @@ void generator_implementation::function_operator(
     if (ci.is_parent())
         return;
 
+    utility_.blank_line();
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::result_type" << std::endl
             << name << "::operator()() ";
@@ -811,6 +815,7 @@ void generator_implementation::default_constructor(
     if (ci.is_parent())
         return;
 
+    utility_.blank_line();
     const std::string name(ci.name() + "_generator");
     stream_ << indenter_ << name << "::" << name << "() : position_(0) { }";
     utility_.blank_line();
@@ -834,15 +839,10 @@ void generator_implementation::format_class(
         using dogen::formatters::cpp::scoped_namespace_formatter;
         scoped_namespace_formatter nsh(stream_, ci.namespaces());
 
-        utility_.blank_line();
         default_constructor(ci);
-        utility_.blank_line();
         populate_method(ci);
-        if (!ci.is_immutable())
-            utility_.blank_line();
         create_method(ci);
         create_method_ptr(ci);
-        utility_.blank_line();
         function_operator(ci);
         utility_.blank_line();
     }

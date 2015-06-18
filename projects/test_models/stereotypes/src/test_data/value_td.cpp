@@ -45,6 +45,7 @@ value_generator::create(const unsigned int position) {
     value_generator::populate(position, r);
     return r;
 }
+
 value_generator::result_type*
 value_generator::create_ptr(const unsigned int position) {
     value* p = new value();

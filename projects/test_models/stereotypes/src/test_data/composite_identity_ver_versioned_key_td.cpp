@@ -51,6 +51,7 @@ composite_identity_ver_versioned_key_generator::create(const unsigned int positi
     composite_identity_ver_versioned_key_generator::populate(position, r);
     return r;
 }
+
 composite_identity_ver_versioned_key_generator::result_type*
 composite_identity_ver_versioned_key_generator::create_ptr(const unsigned int position) {
     composite_identity_ver_versioned_key* p = new composite_identity_ver_versioned_key();

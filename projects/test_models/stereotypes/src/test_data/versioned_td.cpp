@@ -45,6 +45,7 @@ versioned_generator::create(const unsigned int position) {
     versioned_generator::populate(position, r);
     return r;
 }
+
 versioned_generator::result_type*
 versioned_generator::create_ptr(const unsigned int position) {
     versioned* p = new versioned();

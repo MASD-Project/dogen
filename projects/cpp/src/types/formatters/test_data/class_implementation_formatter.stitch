@@ -116,6 +116,7 @@ populate(const unsigned int position, result_type& v) {
              * Create method ptr.
              */
 #>
+
 <#= c.name() #>_generator::result_type*
 <#= c.name() #>_generator::create_ptr(const unsigned int position) {
 <#+

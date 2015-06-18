@@ -50,6 +50,7 @@ just_identity_ver_generator::create(const unsigned int position) {
     just_identity_ver_generator::populate(position, r);
     return r;
 }
+
 just_identity_ver_generator::result_type*
 just_identity_ver_generator::create_ptr(const unsigned int position) {
     just_identity_ver* p = new just_identity_ver();

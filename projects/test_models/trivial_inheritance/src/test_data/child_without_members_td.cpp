@@ -39,6 +39,7 @@ child_without_members_generator::create(const unsigned int/*position*/) {
     child_without_members r;
     return r;
 }
+
 child_without_members_generator::result_type*
 child_without_members_generator::create_ptr(const unsigned int position) {
     child_without_members* p = new child_without_members();

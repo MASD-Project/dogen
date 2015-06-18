@@ -459,6 +459,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-18 Thu 23:10]--[2015-06-18 Thu 23:26] =>  0:16
     CLOCK: [2015-06-18 Thu 23:03]--[2015-06-18 Thu 23:09] =>  0:06
     CLOCK: [2015-06-18 Thu 18:12]--[2015-06-18 Thu 18:46] =>  0:34
     CLOCK: [2015-06-18 Thu 18:06]--[2015-06-18 Thu 18:11] =>  0:05

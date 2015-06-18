@@ -40,7 +40,6 @@ namespace dogen {
 namespace test_models {
 namespace stereotypes {
 
-
 void base_with_concept_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_2(create_int(position + 0));
@@ -51,6 +50,5 @@ base_with_concept_generator::result_type*
 base_with_concept_generator::create_ptr(const unsigned int position) {
     return dogen::test_models::stereotypes::further_refined_generator::create_ptr(position);
 }
-
 
 } } }

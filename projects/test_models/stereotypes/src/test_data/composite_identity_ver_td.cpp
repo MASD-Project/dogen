@@ -52,6 +52,7 @@ composite_identity_ver_generator::create(const unsigned int position) {
     composite_identity_ver_generator::populate(position, r);
     return r;
 }
+
 composite_identity_ver_generator::result_type*
 composite_identity_ver_generator::create_ptr(const unsigned int position) {
     composite_identity_ver* p = new composite_identity_ver();

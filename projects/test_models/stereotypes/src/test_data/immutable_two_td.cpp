@@ -48,6 +48,7 @@ immutable_two_generator::create(const unsigned int position) {
         create_std_string(position + 1)
         );
 }
+
 immutable_two_generator::result_type*
 immutable_two_generator::create_ptr(const unsigned int position) {
     return new immutable_two(create(position));

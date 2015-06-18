@@ -45,6 +45,7 @@ just_identity_ver_unversioned_key_generator::create(const unsigned int position)
     just_identity_ver_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 just_identity_ver_unversioned_key_generator::result_type*
 just_identity_ver_unversioned_key_generator::create_ptr(const unsigned int position) {
     just_identity_ver_unversioned_key* p = new just_identity_ver_unversioned_key();

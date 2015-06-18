@@ -40,6 +40,7 @@ immutable_one_primitive_generator::create(const unsigned int position) {
         create_bool(position + 0)
         );
 }
+
 immutable_one_primitive_generator::result_type*
 immutable_one_primitive_generator::create_ptr(const unsigned int position) {
     return new immutable_one_primitive(create(position));

@@ -47,6 +47,7 @@ child_with_members_generator::create(const unsigned int position) {
     child_with_members_generator::populate(position, r);
     return r;
 }
+
 child_with_members_generator::result_type*
 child_with_members_generator::create_ptr(const unsigned int position) {
     child_with_members* p = new child_with_members();

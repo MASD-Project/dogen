@@ -60,6 +60,7 @@ fluent_generator::create(const unsigned int position) {
     fluent_generator::populate(position, r);
     return r;
 }
+
 fluent_generator::result_type*
 fluent_generator::create_ptr(const unsigned int position) {
     fluent* p = new fluent();

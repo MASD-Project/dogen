@@ -26,7 +26,6 @@ namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {
 
-
 void base_generator::
 populate(const unsigned int /*position*/, result_type& /*v*/) {
 }
@@ -37,6 +36,5 @@ base_generator::create_ptr(const unsigned int position) {
         return dogen::test_models::trivial_inheritance::descendant3_generator::create_ptr(position);
     return dogen::test_models::trivial_inheritance::descendant2_generator::create_ptr(position);
 }
-
 
 } } }

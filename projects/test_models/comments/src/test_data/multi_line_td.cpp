@@ -35,6 +35,7 @@ multi_line_generator::create(const unsigned int/*position*/) {
     multi_line r;
     return r;
 }
+
 multi_line_generator::result_type*
 multi_line_generator::create_ptr(const unsigned int position) {
     multi_line* p = new multi_line();

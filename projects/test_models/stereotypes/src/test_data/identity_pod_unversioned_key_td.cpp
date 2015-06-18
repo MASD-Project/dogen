@@ -47,6 +47,7 @@ identity_pod_unversioned_key_generator::create(const unsigned int position) {
     identity_pod_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 identity_pod_unversioned_key_generator::result_type*
 identity_pod_unversioned_key_generator::create_ptr(const unsigned int position) {
     identity_pod_unversioned_key* p = new identity_pod_unversioned_key();

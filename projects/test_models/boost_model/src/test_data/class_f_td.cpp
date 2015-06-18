@@ -96,6 +96,7 @@ class_f_generator::create(const unsigned int position) {
     class_f_generator::populate(position, r);
     return r;
 }
+
 class_f_generator::result_type*
 class_f_generator::create_ptr(const unsigned int position) {
     class_f* p = new class_f();

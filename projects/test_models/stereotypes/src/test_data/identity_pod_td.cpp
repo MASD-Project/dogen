@@ -52,6 +52,7 @@ identity_pod_generator::create(const unsigned int position) {
     identity_pod_generator::populate(position, r);
     return r;
 }
+
 identity_pod_generator::result_type*
 identity_pod_generator::create_ptr(const unsigned int position) {
     identity_pod* p = new identity_pod();

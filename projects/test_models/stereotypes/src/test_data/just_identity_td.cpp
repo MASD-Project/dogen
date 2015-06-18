@@ -45,6 +45,7 @@ just_identity_generator::create(const unsigned int position) {
     just_identity_generator::populate(position, r);
     return r;
 }
+
 just_identity_generator::result_type*
 just_identity_generator::create_ptr(const unsigned int position) {
     just_identity* p = new just_identity();

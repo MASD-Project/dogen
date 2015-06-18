@@ -51,6 +51,7 @@ move_ctor_descendant_generator::create(const unsigned int position) {
     move_ctor_descendant_generator::populate(position, r);
     return r;
 }
+
 move_ctor_descendant_generator::result_type*
 move_ctor_descendant_generator::create_ptr(const unsigned int position) {
     move_ctor_descendant* p = new move_ctor_descendant();

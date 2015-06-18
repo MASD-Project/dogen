@@ -43,6 +43,7 @@ immutable_one_non_primitive_generator::create(const unsigned int position) {
         create_std_string(position + 0)
         );
 }
+
 immutable_one_non_primitive_generator::result_type*
 immutable_one_non_primitive_generator::create_ptr(const unsigned int position) {
     return new immutable_one_non_primitive(create(position));

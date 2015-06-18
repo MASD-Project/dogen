@@ -46,6 +46,7 @@ composite_identity_unversioned_key_generator::create(const unsigned int position
     composite_identity_unversioned_key_generator::populate(position, r);
     return r;
 }
+
 composite_identity_unversioned_key_generator::result_type*
 composite_identity_unversioned_key_generator::create_ptr(const unsigned int position) {
     composite_identity_unversioned_key* p = new composite_identity_unversioned_key();

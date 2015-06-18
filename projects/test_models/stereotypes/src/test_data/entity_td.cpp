@@ -45,6 +45,7 @@ entity_generator::create(const unsigned int position) {
     entity_generator::populate(position, r);
     return r;
 }
+
 entity_generator::result_type*
 entity_generator::create_ptr(const unsigned int position) {
     entity* p = new entity();

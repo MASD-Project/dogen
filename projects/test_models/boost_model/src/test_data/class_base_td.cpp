@@ -33,7 +33,6 @@ namespace dogen {
 namespace test_models {
 namespace boost_model {
 
-
 void class_base_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
@@ -43,6 +42,5 @@ class_base_generator::result_type*
 class_base_generator::create_ptr(const unsigned int position) {
     return dogen::test_models::boost_model::class_derived_generator::create_ptr(position);
 }
-
 
 } } }

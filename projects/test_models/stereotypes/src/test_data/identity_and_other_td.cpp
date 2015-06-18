@@ -46,6 +46,7 @@ identity_and_other_generator::create(const unsigned int position) {
     identity_and_other_generator::populate(position, r);
     return r;
 }
+
 identity_and_other_generator::result_type*
 identity_and_other_generator::create_ptr(const unsigned int position) {
     identity_and_other* p = new identity_and_other();

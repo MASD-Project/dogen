@@ -40,6 +40,7 @@ second_child_without_members_generator::create(const unsigned int position) {
     second_child_without_members_generator::populate(position, r);
     return r;
 }
+
 second_child_without_members_generator::result_type*
 second_child_without_members_generator::create_ptr(const unsigned int position) {
     second_child_without_members* p = new second_child_without_members();

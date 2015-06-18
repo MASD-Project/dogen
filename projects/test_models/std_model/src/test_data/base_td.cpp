@@ -44,7 +44,6 @@ namespace dogen {
 namespace test_models {
 namespace std_model {
 
-
 void base_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_vector_std_string(position + 0));
@@ -54,6 +53,5 @@ base_generator::result_type*
 base_generator::create_ptr(const unsigned int position) {
     return dogen::test_models::std_model::derived_generator::create_ptr(position);
 }
-
 
 } } }

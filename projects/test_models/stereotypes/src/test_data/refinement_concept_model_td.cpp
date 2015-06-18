@@ -46,6 +46,7 @@ refinement_concept_model_generator::create(const unsigned int position) {
     refinement_concept_model_generator::populate(position, r);
     return r;
 }
+
 refinement_concept_model_generator::result_type*
 refinement_concept_model_generator::create_ptr(const unsigned int position) {
     refinement_concept_model* p = new refinement_concept_model();

@@ -109,6 +109,7 @@ class_e_generator::create(const unsigned int position) {
     class_e_generator::populate(position, r);
     return r;
 }
+
 class_e_generator::result_type*
 class_e_generator::create_ptr(const unsigned int position) {
     class_e* p = new class_e();

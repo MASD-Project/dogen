@@ -48,6 +48,7 @@ child_generator::create(const unsigned int position) {
     child_generator::populate(position, r);
     return r;
 }
+
 child_generator::result_type*
 child_generator::create_ptr(const unsigned int position) {
     child* p = new child();

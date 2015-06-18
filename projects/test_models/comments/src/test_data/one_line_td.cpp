@@ -47,6 +47,7 @@ one_line_generator::create(const unsigned int position) {
     one_line_generator::populate(position, r);
     return r;
 }
+
 one_line_generator::result_type*
 one_line_generator::create_ptr(const unsigned int position) {
     one_line* p = new one_line();

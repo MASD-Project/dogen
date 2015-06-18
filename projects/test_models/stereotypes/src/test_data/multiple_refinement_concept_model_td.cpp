@@ -56,6 +56,7 @@ multiple_refinement_concept_model_generator::create(const unsigned int position)
     multiple_refinement_concept_model_generator::populate(position, r);
     return r;
 }
+
 multiple_refinement_concept_model_generator::result_type*
 multiple_refinement_concept_model_generator::create_ptr(const unsigned int position) {
     multiple_refinement_concept_model* p = new multiple_refinement_concept_model();
