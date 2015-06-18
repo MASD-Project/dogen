@@ -22,8 +22,6 @@
 #include "dogen/test_models/trivial_inheritance/test_data/child_without_members_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/parent_without_members_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {

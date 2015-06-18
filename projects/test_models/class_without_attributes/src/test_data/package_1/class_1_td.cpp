@@ -20,8 +20,6 @@
  */
 #include "dogen/test_models/class_without_attributes/test_data/package_1/class_1_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace class_without_attributes {

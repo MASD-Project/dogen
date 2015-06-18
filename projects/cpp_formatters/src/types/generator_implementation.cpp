@@ -827,7 +827,8 @@ void generator_implementation::format_class(
 
     const cpp::formattables::class_info& ci(*o);
     create_helper_methods(ci);
-    utility_.blank_line(2);
+    if (!ci.properties().empty() || !ci.parents().empty())
+        utility_.blank_line(2);
 
     {
         using dogen::formatters::cpp::scoped_namespace_formatter;

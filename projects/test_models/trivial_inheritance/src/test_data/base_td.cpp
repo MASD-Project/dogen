@@ -22,8 +22,6 @@
 #include "dogen/test_models/trivial_inheritance/test_data/descendant2_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/descendant3_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {

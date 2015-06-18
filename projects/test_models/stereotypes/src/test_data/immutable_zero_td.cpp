@@ -20,8 +20,6 @@
  */
 #include "dogen/test_models/stereotypes/test_data/immutable_zero_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace stereotypes {

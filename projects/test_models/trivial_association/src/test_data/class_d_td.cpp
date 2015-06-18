@@ -20,8 +20,6 @@
  */
 #include "dogen/test_models/trivial_association/test_data/class_d_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace trivial_association {

@@ -20,8 +20,6 @@
  */
 #include "dogen/test_models/comments/test_data/multi_line_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace comments {
