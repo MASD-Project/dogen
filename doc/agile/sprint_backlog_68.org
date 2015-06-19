@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-18 Thu 23:53]
+#+CAPTION: Clock summary at [2015-06-19 Fri 19:02]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *35:40* |       |       |
+| *Total time*                                                                | *36:05* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 35:40   |       |       |
-| Active                                                                      |         | 35:40 |       |
+| Stories                                                                     | 36:05   |       |       |
+| Active                                                                      |         | 36:05 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -39,6 +39,7 @@
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | STARTED Implement class implementation formatter in test_data               |         |       |  4:35 |
+| STARTED Incorrect stitching when a line starts with inline scriplet         |         |       |  0:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -490,7 +491,8 @@ Solved Problems:
 - spaces for classes without properties right after boilerplate. Need
   to remove them from legacy.
 
-*** Incorrect stitching when a line starts with inline scriplet       :story:
+*** STARTED Incorrect stitching when a line starts with inline scriplet :story:
+    CLOCK: [2015-06-19 Fri 18:35]--[2015-06-19 Fri 19:00] =>  0:25
 
 We created a template vaguely as follows:
 
@@ -511,11 +513,17 @@ The resulting code did not stream =out= as expected:
 We seem to be handling <#= as if it was <#+ when it is at the start of
 the line. Replacing it with:
 
-:     : <#= out #>
+: <#= out #>
 
 Generated the expected code:
 
 : fa.stream() << "     : " << out << std::endl;
+
+The problem was with the assumption we made at inception, that there
+are only two distinct entities we care about: text and scriptlet. This
+works on all cases, bar one: the case of a line that contains
+<#=. That is indistinguishable from a line with <#+. We need to split
+these two scriplet types.
 
 *** Implement enum header formatter in test_data                      :story:
 
