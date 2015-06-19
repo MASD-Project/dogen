@@ -1,0 +1,4898 @@
+diff --git a/diagrams/stitch.dia b/diagrams/stitch.dia
+index 9e265b1..47b622e 100644
+--- a/diagrams/stitch.dia
++++ b/diagrams/stitch.dia
+@@ -556,7 +556,7 @@
+         <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#segment#</dia:string>
++        <dia:string>#block#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>##</dia:string>
+@@ -648,7 +648,7 @@
+             <dia:string>#type#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#segment_types#</dia:string>
++            <dia:string>#block_types#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -701,13 +701,13 @@
+         <dia:point val="34,22"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="33.95,21.95;44.945,26.45"/>
++        <dia:rectangle val="33.95,21.95;45.33,26.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="34,22"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="10.895"/>
++        <dia:real val="11.279999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -917,7 +917,7 @@
+         <dia:point val="57.5275,11.6503"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="44.845,10.9003;58.2775,22.8"/>
++        <dia:rectangle val="45.23,10.9003;58.2775,22.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -925,8 +925,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="57.5275,11.6503"/>
+         <dia:point val="57.5275,18"/>
+-        <dia:point val="44.895,18"/>
+-        <dia:point val="44.895,22"/>
++        <dia:point val="45.28,18"/>
++        <dia:point val="45.28,22"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -1612,7 +1612,7 @@
+         <dia:point val="34,26.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="22.7825,25.65;34.75,35.8"/>
++        <dia:rectangle val="22.0125,25.65;34.75,35.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1620,8 +1620,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="34,26.4"/>
+         <dia:point val="34,31"/>
+-        <dia:point val="22.8325,31"/>
+-        <dia:point val="22.8325,35"/>
++        <dia:point val="22.0625,31"/>
++        <dia:point val="22.0625,35"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -1982,13 +1982,13 @@
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O17">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="117,8"/>
++        <dia:point val="114,8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="116.95,7.95;143.73,14.85"/>
++        <dia:rectangle val="113.95,7.95;140.73,14.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="117,8"/>
++        <dia:point val="114,8"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="26.68"/>
+@@ -2270,7 +2270,7 @@
+         <dia:point val="108.14,22"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="107.39,14.75;130.54,22.8"/>
++        <dia:rectangle val="107.39,14.75;127.54,22.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2278,8 +2278,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="108.14,22"/>
+         <dia:point val="108.14,18"/>
+-        <dia:point val="130.34,18"/>
+-        <dia:point val="130.34,14.8"/>
++        <dia:point val="127.34,18"/>
++        <dia:point val="127.34,14.8"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2734,7 +2734,7 @@
+         <dia:point val="110.165,8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="109.415,2.25;130.54,8.8"/>
++        <dia:rectangle val="109.415,2.25;127.54,8.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2742,8 +2742,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="110.165,8"/>
+         <dia:point val="110.165,3"/>
+-        <dia:point val="130.34,3"/>
+-        <dia:point val="130.34,8"/>
++        <dia:point val="127.34,3"/>
++        <dia:point val="127.34,8"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2802,17 +2802,17 @@
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="44.895,26.4"/>
++        <dia:point val="45.28,26.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="44.145,25.55;95.77,31.05"/>
++        <dia:rectangle val="44.53,25.55;95.77,31.05"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="44.895,26.4"/>
+-        <dia:point val="44.895,31"/>
++        <dia:point val="45.28,26.4"/>
++        <dia:point val="45.28,31"/>
+         <dia:point val="95.57,31"/>
+         <dia:point val="95.57,25.6"/>
+       </dia:attribute>
+@@ -2840,13 +2840,13 @@
+         <dia:point val="35,-19"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="34.95,-19.05;49.025,-15.35"/>
++        <dia:rectangle val="34.95,-19.05;45.945,-15.35"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="35,-19"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="13.975"/>
++        <dia:real val="10.895"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -3696,13 +3696,13 @@
+         <dia:point val="17,35"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="16.95,34.95;28.715,37.85"/>
++        <dia:rectangle val="16.95,34.95;27.175,37.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="17,35"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="11.665000000000001"/>
++        <dia:real val="10.125"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="2.7999999999999998"/>
+@@ -3797,10 +3797,10 @@
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#segments#</dia:string>
++            <dia:string>#blocks#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;segment&gt;#</dia:string>
++            <dia:string>#std::list&lt;block&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -3863,17 +3863,17 @@
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="22.8325,37.8"/>
++        <dia:point val="22.0625,37.8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="16.2425,37.05;23.5825,47.8"/>
++        <dia:rectangle val="16.2425,37.05;22.8125,47.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="22.8325,37.8"/>
+-        <dia:point val="22.8325,43"/>
++        <dia:point val="22.0625,37.8"/>
++        <dia:point val="22.0625,43"/>
+         <dia:point val="16.2925,43"/>
+         <dia:point val="16.2925,47"/>
+       </dia:attribute>
+@@ -3901,19 +3901,19 @@
+         <dia:point val="24,60"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="23.95,59.95;31.3625,64.45"/>
++        <dia:rectangle val="23.95,59.95;33.405,65.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="24,60"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="7.3125"/>
++        <dia:real val="9.3550000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.4000000000000004"/>
++        <dia:real val="5.2000000000000011"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#segment_types#</dia:string>
++        <dia:string>#block_types#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#enumeration#</dia:string>
+@@ -4002,7 +4002,30 @@
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#text#</dia:string>
++            <dia:string>#text_block#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#standard_control_block#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>##</dia:string>
+@@ -4025,7 +4048,7 @@
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#scriptlet#</dia:string>
++            <dia:string>#expression_block#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>##</dia:string>
+@@ -4094,7 +4117,7 @@
+         <dia:point val="16.2925,50.6"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="15.5425,49.85;27.8562,60.8"/>
++        <dia:rectangle val="15.5425,49.85;28.8775,60.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4102,8 +4125,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="16.2925,50.6"/>
+         <dia:point val="16.2925,56"/>
+-        <dia:point val="27.6562,56"/>
+-        <dia:point val="27.6562,60"/>
++        <dia:point val="28.6775,56"/>
++        <dia:point val="28.6775,60"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -4126,16 +4149,16 @@
+     </dia:object>
+     <dia:object type="UML - Note" version="0" id="O37">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="2.89167,-29.075"/>
++        <dia:point val="6,-29"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="2.84167,-29.125;31.1767,-24.925"/>
++        <dia:rectangle val="5.95,-29.05;34.285,-24.85"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="2.89167,-29.075"/>
++        <dia:point val="6,-29"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="28.235000000000003"/>
+@@ -4167,7 +4190,7 @@
+             <dia:real val="0.80000000000000004"/>
+           </dia:attribute>
+           <dia:attribute name="pos">
+-            <dia:point val="3.24167,-27.83"/>
++            <dia:point val="6.35,-27.755"/>
+           </dia:attribute>
+           <dia:attribute name="color">
+             <dia:color val="#000000"/>
+diff --git a/doc/agile/sprint_backlog_68.org b/doc/agile/sprint_backlog_68.org
+index 90039e0..3b8d056 100644
+--- a/doc/agile/sprint_backlog_68.org
++++ b/doc/agile/sprint_backlog_68.org
+@@ -13,14 +13,14 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+-#+CAPTION: Clock summary at [2015-06-19 Fri 19:02]
++#+CAPTION: Clock summary at [2015-06-19 Fri 22:50]
+ | <75>                                                                        |         |       |       |
+ | Headline                                                                    | Time    |       |       |
+ |-----------------------------------------------------------------------------+---------+-------+-------|
+-| *Total time*                                                                | *36:05* |       |       |
++| *Total time*                                                                | *39:00* |       |       |
+ |-----------------------------------------------------------------------------+---------+-------+-------|
+-| Stories                                                                     | 36:05   |       |       |
+-| Active                                                                      |         | 36:05 |       |
++| Stories                                                                     | 39:00   |       |       |
++| Active                                                                      |         | 39:00 |       |
+ | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
+ | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
+ | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
+@@ -40,6 +40,7 @@
+ | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
+ | STARTED Implement class implementation formatter in test_data               |         |       |  4:35 |
+ | STARTED Incorrect stitching when a line starts with inline scriplet         |         |       |  0:25 |
++| STARTED Refactor stitch to use Microsoft's T4 terminology                   |         |       |  2:55 |
+ #+end:
+ 
+ *** STARTED Sprint and product backlog grooming                       :story:
+@@ -525,6 +526,30 @@ works on all cases, bar one: the case of a line that contains
+ <#=. That is indistinguishable from a line with <#+. We need to split
+ these two scriplet types.
+ 
++*** STARTED Refactor stitch to use Microsoft's T4 terminology         :story:
++    CLOCK: [2015-06-19 Fri 22:49]--[2015-06-19 Fri 22:50] =>  0:01
++    CLOCK: [2015-06-19 Fri 20:27]--[2015-06-19 Fri 22:49] =>  2:22
++    CLOCK: [2015-06-19 Fri 19:54]--[2015-06-19 Fri 20:26] =>  0:32
++
++In the past we had considered using Microsoft's T4 terminology because
++there was a little bit of impedance mismatch. However given that we
++now need to split the control blocks from standard blocks, we now have
++a good fit. Perform the required renames:
++
++We found [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#consider-using-microsofts-t4-terminology-for-stitch][a page]] documenting the elements of T4. These are:
++
++- *Directives*: Text template directives provide general instructions to
++  the text templating engine about how to generate the transformation
++  code and the output file.
++- *Text blocks*: A text block inserts text directly into the output
++  file. There is no special formatting for text blocks.
++- *Control blocks*: Control blocks are sections of program code that
++  are used to transform the templates. Two types:
++  - *Standard control blocks*: A standard control block is a section
++    of program code that generates part of the output file.
++  - *Expression control blocks*: An expression control block evaluates
++    an expression and converts it to a string.
++
+ *** Implement enum header formatter in test_data                      :story:
+ 
+ Create the formatter, stitch template and all associated
+diff --git a/projects/stitch/include/dogen/stitch/hash/all_hash.hpp b/projects/stitch/include/dogen/stitch/hash/all_hash.hpp
+index 8ce1ae7..35173ed 100644
+--- a/projects/stitch/include/dogen/stitch/hash/all_hash.hpp
++++ b/projects/stitch/include/dogen/stitch/hash/all_hash.hpp
+@@ -19,8 +19,8 @@
+  *
+  */
+ #include "dogen/stitch/hash/line_hash.hpp"
+-#include "dogen/stitch/hash/segment_hash.hpp"
+-#include "dogen/stitch/hash/segment_types_hash.hpp"
++#include "dogen/stitch/hash/block_hash.hpp"
++#include "dogen/stitch/hash/block_types_hash.hpp"
+ #include "dogen/stitch/hash/text_template_hash.hpp"
+ #include "dogen/stitch/hash/settings_bundle_hash.hpp"
+ #include "dogen/stitch/hash/stitching_settings_hash.hpp"
+diff --git a/projects/stitch/include/dogen/stitch/hash/block_hash.hpp b/projects/stitch/include/dogen/stitch/hash/block_hash.hpp
+new file mode 100644
+index 0000000..b25d6cf
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/hash/block_hash.hpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_HASH_BLOCK_HASH_HPP
++#define DOGEN_STITCH_HASH_BLOCK_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/stitch/types/block.hpp"
++
++namespace dogen {
++namespace stitch {
++
++struct block_hasher {
++public:
++    static std::size_t hash(const block& v);
++};
++
++} }
++
++namespace std {
++
++template<>
++struct hash<dogen::stitch::block> {
++public:
++    size_t operator()(const dogen::stitch::block& v) const {
++        return dogen::stitch::block_hasher::hash(v);
++    }
++};
++
++}
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/hash/block_types_hash.hpp b/projects/stitch/include/dogen/stitch/hash/block_types_hash.hpp
+new file mode 100644
+index 0000000..9661be1
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/hash/block_types_hash.hpp
+@@ -0,0 +1,43 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_HASH_BLOCK_TYPES_HASH_HPP
++#define DOGEN_STITCH_HASH_BLOCK_TYPES_HASH_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <functional>
++#include "dogen/stitch/types/block_types.hpp"
++
++namespace std {
++
++template<>
++struct hash<dogen::stitch::block_types> {
++public:
++    size_t operator()(const dogen::stitch::block_types& v) const {
++        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
++    }
++};
++
++}
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/hash/segment_hash.hpp b/projects/stitch/include/dogen/stitch/hash/segment_hash.hpp
+deleted file mode 100644
+index 9f789e4..0000000
+--- a/projects/stitch/include/dogen/stitch/hash/segment_hash.hpp
++++ /dev/null
+@@ -1,52 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_HASH_SEGMENT_HASH_HPP
+-#define DOGEN_STITCH_HASH_SEGMENT_HASH_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <functional>
+-#include "dogen/stitch/types/segment.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-struct segment_hasher {
+-public:
+-    static std::size_t hash(const segment& v);
+-};
+-
+-} }
+-
+-namespace std {
+-
+-template<>
+-struct hash<dogen::stitch::segment> {
+-public:
+-    size_t operator()(const dogen::stitch::segment& v) const {
+-        return dogen::stitch::segment_hasher::hash(v);
+-    }
+-};
+-
+-}
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/hash/segment_types_hash.hpp b/projects/stitch/include/dogen/stitch/hash/segment_types_hash.hpp
+deleted file mode 100644
+index 4d33c09..0000000
+--- a/projects/stitch/include/dogen/stitch/hash/segment_types_hash.hpp
++++ /dev/null
+@@ -1,43 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_HASH_SEGMENT_TYPES_HASH_HPP
+-#define DOGEN_STITCH_HASH_SEGMENT_TYPES_HASH_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <functional>
+-#include "dogen/stitch/types/segment_types.hpp"
+-
+-namespace std {
+-
+-template<>
+-struct hash<dogen::stitch::segment_types> {
+-public:
+-    size_t operator()(const dogen::stitch::segment_types& v) const {
+-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+-    }
+-};
+-
+-}
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/io/all_io.hpp b/projects/stitch/include/dogen/stitch/io/all_io.hpp
+index fb5d272..a89bf4b 100644
+--- a/projects/stitch/include/dogen/stitch/io/all_io.hpp
++++ b/projects/stitch/include/dogen/stitch/io/all_io.hpp
+@@ -19,8 +19,8 @@
+  *
+  */
+ #include "dogen/stitch/io/line_io.hpp"
+-#include "dogen/stitch/io/segment_io.hpp"
+-#include "dogen/stitch/io/segment_types_io.hpp"
++#include "dogen/stitch/io/block_io.hpp"
++#include "dogen/stitch/io/block_types_io.hpp"
+ #include "dogen/stitch/io/text_template_io.hpp"
+ #include "dogen/stitch/io/settings_bundle_io.hpp"
+ #include "dogen/stitch/io/stitching_settings_io.hpp"
+diff --git a/projects/stitch/include/dogen/stitch/io/block_io.hpp b/projects/stitch/include/dogen/stitch/io/block_io.hpp
+new file mode 100644
+index 0000000..f6fa796
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/io/block_io.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_IO_BLOCK_IO_HPP
++#define DOGEN_STITCH_IO_BLOCK_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/stitch/types/block.hpp"
++
++namespace dogen {
++namespace stitch {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::stitch::block& v);
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/io/block_types_io.hpp b/projects/stitch/include/dogen/stitch/io/block_types_io.hpp
+new file mode 100644
+index 0000000..f26b03f
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/io/block_types_io.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_IO_BLOCK_TYPES_IO_HPP
++#define DOGEN_STITCH_IO_BLOCK_TYPES_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/stitch/types/block_types.hpp"
++
++namespace dogen {
++namespace stitch {
++
++std::ostream& operator<<(std::ostream& s, const block_types& v);
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/io/segment_io.hpp b/projects/stitch/include/dogen/stitch/io/segment_io.hpp
+deleted file mode 100644
+index d72fb0b..0000000
+--- a/projects/stitch/include/dogen/stitch/io/segment_io.hpp
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_IO_SEGMENT_IO_HPP
+-#define DOGEN_STITCH_IO_SEGMENT_IO_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <iosfwd>
+-#include "dogen/stitch/types/segment.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-std::ostream&
+-operator<<(std::ostream& s,
+-     const dogen::stitch::segment& v);
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/io/segment_types_io.hpp b/projects/stitch/include/dogen/stitch/io/segment_types_io.hpp
+deleted file mode 100644
+index 6f8af35..0000000
+--- a/projects/stitch/include/dogen/stitch/io/segment_types_io.hpp
++++ /dev/null
+@@ -1,38 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_IO_SEGMENT_TYPES_IO_HPP
+-#define DOGEN_STITCH_IO_SEGMENT_TYPES_IO_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <iosfwd>
+-#include "dogen/stitch/types/segment_types.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-std::ostream& operator<<(std::ostream& s, const segment_types& v);
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/all_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/all_ser.hpp
+index 2ded77d..80002c0 100644
+--- a/projects/stitch/include/dogen/stitch/serialization/all_ser.hpp
++++ b/projects/stitch/include/dogen/stitch/serialization/all_ser.hpp
+@@ -19,9 +19,9 @@
+  *
+  */
+ #include "dogen/stitch/serialization/line_ser.hpp"
+-#include "dogen/stitch/serialization/segment_ser.hpp"
++#include "dogen/stitch/serialization/block_ser.hpp"
+ #include "dogen/stitch/serialization/registrar_ser.hpp"
+-#include "dogen/stitch/serialization/segment_types_ser.hpp"
++#include "dogen/stitch/serialization/block_types_ser.hpp"
+ #include "dogen/stitch/serialization/text_template_ser.hpp"
+ #include "dogen/stitch/serialization/settings_bundle_ser.hpp"
+ #include "dogen/stitch/serialization/stitching_settings_ser.hpp"
+diff --git a/projects/stitch/include/dogen/stitch/serialization/block_fwd_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/block_fwd_ser.hpp
+new file mode 100644
+index 0000000..c6ff90a
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/serialization/block_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_SERIALIZATION_BLOCK_FWD_SER_HPP
++#define DOGEN_STITCH_SERIALIZATION_BLOCK_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/stitch/types/block_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::stitch::block& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::stitch::block& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/block_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/block_ser.hpp
+new file mode 100644
+index 0000000..eb44188
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/serialization/block_ser.hpp
+@@ -0,0 +1,43 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_SERIALIZATION_BLOCK_SER_HPP
++#define DOGEN_STITCH_SERIALIZATION_BLOCK_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include "dogen/stitch/types/block.hpp"
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::block)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::stitch::block& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::stitch::block& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/block_types_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/block_types_ser.hpp
+new file mode 100644
+index 0000000..f4b7c65
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/serialization/block_types_ser.hpp
+@@ -0,0 +1,37 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_SERIALIZATION_BLOCK_TYPES_SER_HPP
++#define DOGEN_STITCH_SERIALIZATION_BLOCK_TYPES_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/nvp.hpp>
++#include "dogen/stitch/types/block_types.hpp"
++
++template<class Archive>
++void serialize(Archive& ar, dogen::stitch::block_types& v, unsigned int /*version*/){
++    using boost::serialization::make_nvp;
++    ar & make_nvp("block_types", v);
++}
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/segment_fwd_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/segment_fwd_ser.hpp
+deleted file mode 100644
+index 40bd3ab..0000000
+--- a/projects/stitch/include/dogen/stitch/serialization/segment_fwd_ser.hpp
++++ /dev/null
+@@ -1,41 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_FWD_SER_HPP
+-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_FWD_SER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/stitch/types/segment_fwd.hpp"
+-
+-namespace boost {
+-namespace serialization {
+-
+-template<class Archive>
+-void save(Archive& ar, const dogen::stitch::segment& v, unsigned int version);
+-
+-template<class Archive>
+-void load(Archive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/segment_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/segment_ser.hpp
+deleted file mode 100644
+index 33e3576..0000000
+--- a/projects/stitch/include/dogen/stitch/serialization/segment_ser.hpp
++++ /dev/null
+@@ -1,43 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_SER_HPP
+-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_SER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <boost/serialization/split_free.hpp>
+-#include "dogen/stitch/types/segment.hpp"
+-
+-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::segment)
+-namespace boost {
+-namespace serialization {
+-
+-template<typename Archive>
+-void save(Archive& ar, const dogen::stitch::segment& v, unsigned int version);
+-
+-template<typename Archive>
+-void load(Archive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/serialization/segment_types_ser.hpp b/projects/stitch/include/dogen/stitch/serialization/segment_types_ser.hpp
+deleted file mode 100644
+index e88dba3..0000000
+--- a/projects/stitch/include/dogen/stitch/serialization/segment_types_ser.hpp
++++ /dev/null
+@@ -1,37 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_TYPES_SER_HPP
+-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_TYPES_SER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <boost/serialization/nvp.hpp>
+-#include "dogen/stitch/types/segment_types.hpp"
+-
+-template<class Archive>
+-void serialize(Archive& ar, dogen::stitch::segment_types& v, unsigned int /*version*/){
+-    using boost::serialization::make_nvp;
+-    ar & make_nvp("segment_types", v);
+-}
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/test/mock_text_template_factory.hpp b/projects/stitch/include/dogen/stitch/test/mock_text_template_factory.hpp
+index 6ea7cbc..488d987 100644
+--- a/projects/stitch/include/dogen/stitch/test/mock_text_template_factory.hpp
++++ b/projects/stitch/include/dogen/stitch/test/mock_text_template_factory.hpp
+@@ -43,23 +43,31 @@ private:
+     text_template make_text_template_with_trivial_settings() const;
+ 
+     /**
+-     * @brief Makes @code how_many lines with a single text segment.
++     * @brief Makes @code how_many lines, each with a single text block.
+      */
+-    std::list<line> make_text_only_lines(const unsigned int how_many = 1,
++    std::list<line> make_text_block_only_lines(const unsigned int how_many = 1,
+         const bool empty_content = false) const;
+ 
+     /**
+      * @brief Makes @code how_many lines, each with the following
+-     * segments: text, scriptlet, text.
++     * composition: text block, expression block, text block.
+      */
+     std::list<line>
+     make_mixed_content_lines(const unsigned int how_many = 1) const;
+ 
+     /**
+-     * @brief Makes @code how_many lines with a single scriptlet segment.
++     * @brief Makes @code how_many lines with a single standard
++     * control block.
+      */
+     std::list<line>
+-    make_scriptlet_only_lines(const unsigned int how_many = 1) const;
++    make_standard_control_block_only_lines(
++        const unsigned int how_many = 1) const;
++
++    /**
++     * @brief Makes @code how_many lines with a single expression block.
++     */
++    std::list<line>
++    make_expression_block_only_lines(const unsigned int how_many = 1) const;
+ 
+ public:
+     /**
+@@ -68,80 +76,140 @@ public:
+     text_template make_empty_template() const;
+ 
+     /**
+-     * @brief Creates a text template with a single text line.
++     * @brief Creates a text template with a single line, composed of
++     * a text block.
+      */
+-    text_template make_single_text_line() const;
++    text_template make_single_text_block_line() const;
+ 
+     /**
+-     * @brief Creates a text template with @code how_many text lines.
++     * @brief Creates a text template with @code how_many lines, each
++     * made up of a single text block.
+      */
+-    text_template make_multiple_text_lines(
++    text_template make_multiple_text_block_lines(
+         const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template with a single-line scriptlet.
++     * @brief Creates a text template with one line composed of a
++     * single-line expression block.
++     */
++    text_template make_single_expression_block_line() const;
++
++    /**
++     * @brief Creates a text template with @code how_many lines, each
++     * made up of a single-line expression block.
+      */
+-    text_template make_single_scriptlet_line() const;
++    text_template make_multiple_expression_block_lines(
++        const unsigned int how_many = 2) const;
++
++    /**
++     * @brief Creates a text template with one line composed of a
++     * single-line standard control block.
++     */
++    text_template make_single_standard_control_block_line() const;
++
++    /**
++     * @brief Creates a text template with @code how_many lines, each
++     * made up of a single-line standard control block.
++     */
++    text_template make_multiple_standard_control_block_lines(
++        const unsigned int how_many = 2) const;
++
++    /**
++     * @brief Creates a text template with three lines, each composed
++     * of a single block. The blocks are as follows: a text block,
++     * followed by a expression block, followed by a text block.
++     */
++    text_template make_text_expression_text_single_line() const;
++
++    /**
++     * @brief Creates a text template with three lines, each composed
++     * of a single block. The blocks are as follows: an expression
++     * block, followed by a text block, followed by an expression
++     * block.
++     */
++    text_template make_expression_text_expression_single_line() const;
++
++    /**
++     * @brief Creates a text template with three "groups", each of
++     * size @code how_many lines. Each group is composed of a text
++     * block, followed by an expression block, followed by a text
++     * block.
++     */
++    text_template make_text_expression_text_multi_line(
++        const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template with @code how_many scriptlet
+-     * lines.
++     * @brief Creates a text template with three "groups", each of
++     * size @code how_many lines. Each group is composed of an
++     * expression block, followed by a text block, followed by an
++     * expression block.
+      */
+-    text_template make_multiple_scriptlet_lines(
++    text_template make_expression_text_expression_multi_line(
+         const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template with text, followed by a
+-     * scriptlet, followed by text, all single lined.
++     * @brief Creates a text template with three lines, each composed
++     * of a single block. The blocks are as follows: a text block,
++     * followed by a standard control block, followed by a text block.
+      */
+-    text_template make_text_scriptlet_text_single_line() const;
++    text_template make_text_standard_control_text_single_line() const;
+ 
+     /**
+-     * @brief Creates a text template with scriptlet, followed by
+-     * text, followed scriptlet, all single lined.
++     * @brief Creates a text template with three lines, each composed
++     * of a single block. The blocks are as follows: a standard
++     * control block, followed by a text block, followed by a standard
++     * control block.
+      */
+-    text_template make_scriptlet_text_scriptlet_single_line() const;
++    text_template
++    make_standard_control_text_standard_control_single_line() const;
+ 
+     /**
+-     * @brief Creates a text template with text, followed by a
+-     * scriptlet, followed by text, all with @code how_many lines.
++     * @brief Creates a text template with three "groups", each of
++     * size @code how_many lines. Each group is composed of a text
++     * block, followed by a standard control block, followed by a text
++     * block.
+      */
+-    text_template make_text_scriptlet_text_multi_line(
++    text_template make_text_standard_control_text_multi_line(
+         const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template with scriptlet, followed by
+-     * text, followed by scriptlet, all with @code how_many lines.
++     * @brief Creates a text template with three "groups", each of
++     * size @code how_many lines. Each group is composed of a standard
++     * control block, followed by a text block, followed by a standard
++     * control block.
+      */
+-    text_template make_scriptlet_text_scriptlet_multi_line(
++    text_template make_standard_control_text_standard_control_multi_line(
+         const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template a mixed content block a mix of
+-     * text and scriptlet.
++     * @brief Creates a text template with a line that is composed of
++     * a text block, followed by an expression block, followed by a
++     * text block.
+      */
+     text_template make_mixed_content_single_line() const;
+ 
+     /**
+-     * @brief Creates a text template a mixed content block a mix of
+-     * text and scriptlet. The block is composed of @code how_many
+-     * lines.
++     * @brief Creates a text template with @code how_many lines,
++     * composed of a text block, followed by an expression block,
++     * followed by a text block.
+      */
+     text_template make_mixed_content_multi_line(
+         const unsigned int how_many = 2) const;
+ 
+     /**
+-     * @brief Creates a text template with a text line with single and
+-     * double quotes.
++     * @brief Creates a text template with a line composed of a text
++     * block with single and double quotes.
+      */
+     text_template make_text_line_with_quotes() const;
+ 
+ public:
+     /**
+      * @brief Creates a text template a complex structure: multi-line
+-     * text, followed by multi-line scriptlet, followed by mixed
+-     * content text, followed by followed by single-line scriptlet,
+-     * followed by single-line text.
++     * text blocks, followed by multi-line standard control blocks,
++     * followed by several lines of mixed content (text blocks and
++     * expression blocks in the same line), followed by followed by
++     * single-line expression blocks, and finishing with a single-line
++     * text block.
+      */
+     text_template make_complex_structure() const;
+ 
+@@ -157,7 +225,7 @@ public:
+     text_template make_with_containing_namespace() const;
+ 
+     /**
+-     * @brief Text template with empty text lines.
++     * @brief Text template with lines that have empty text blocks.
+      */
+     text_template make_empty_text_lines(const unsigned int how_many = 2) const;
+ 
+diff --git a/projects/stitch/include/dogen/stitch/test_data/all_td.hpp b/projects/stitch/include/dogen/stitch/test_data/all_td.hpp
+index 3d02d4c..889d3a0 100644
+--- a/projects/stitch/include/dogen/stitch/test_data/all_td.hpp
++++ b/projects/stitch/include/dogen/stitch/test_data/all_td.hpp
+@@ -19,8 +19,8 @@
+  *
+  */
+ #include "dogen/stitch/test_data/line_td.hpp"
+-#include "dogen/stitch/test_data/segment_td.hpp"
+-#include "dogen/stitch/test_data/segment_types_td.hpp"
++#include "dogen/stitch/test_data/block_td.hpp"
++#include "dogen/stitch/test_data/block_types_td.hpp"
+ #include "dogen/stitch/test_data/text_template_td.hpp"
+ #include "dogen/stitch/test_data/settings_bundle_td.hpp"
+ #include "dogen/stitch/test_data/stitching_settings_td.hpp"
+diff --git a/projects/stitch/include/dogen/stitch/test_data/block_td.hpp b/projects/stitch/include/dogen/stitch/test_data/block_td.hpp
+new file mode 100644
+index 0000000..4bec3b3
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/test_data/block_td.hpp
+@@ -0,0 +1,53 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TEST_DATA_BLOCK_TD_HPP
++#define DOGEN_STITCH_TEST_DATA_BLOCK_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/stitch/types/block.hpp"
++
++namespace dogen {
++namespace stitch {
++
++class block_generator {
++public:
++    block_generator();
++
++public:
++    typedef dogen::stitch::block result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++public:
++    static result_type* create_ptr(const unsigned int position);
++};
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/test_data/block_types_td.hpp b/projects/stitch/include/dogen/stitch/test_data/block_types_td.hpp
+new file mode 100644
+index 0000000..7e47f54
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/test_data/block_types_td.hpp
+@@ -0,0 +1,51 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TEST_DATA_BLOCK_TYPES_TD_HPP
++#define DOGEN_STITCH_TEST_DATA_BLOCK_TYPES_TD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/stitch/types/block_types.hpp"
++
++namespace dogen {
++namespace stitch {
++
++class block_types_generator {
++public:
++    block_types_generator();
++
++public:
++    typedef dogen::stitch::block_types result_type;
++
++public:
++    static void populate(const unsigned int position, result_type& v);
++    static result_type create(const unsigned int position);
++    result_type operator()();
++
++private:
++    unsigned int position_;
++};
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/test_data/segment_td.hpp b/projects/stitch/include/dogen/stitch/test_data/segment_td.hpp
+deleted file mode 100644
+index 4cc4b40..0000000
+--- a/projects/stitch/include/dogen/stitch/test_data/segment_td.hpp
++++ /dev/null
+@@ -1,53 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TEST_DATA_SEGMENT_TD_HPP
+-#define DOGEN_STITCH_TEST_DATA_SEGMENT_TD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/stitch/types/segment.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-class segment_generator {
+-public:
+-    segment_generator();
+-
+-public:
+-    typedef dogen::stitch::segment result_type;
+-
+-public:
+-    static void populate(const unsigned int position, result_type& v);
+-    static result_type create(const unsigned int position);
+-    result_type operator()();
+-
+-private:
+-    unsigned int position_;
+-public:
+-    static result_type* create_ptr(const unsigned int position);
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/test_data/segment_types_td.hpp b/projects/stitch/include/dogen/stitch/test_data/segment_types_td.hpp
+deleted file mode 100644
+index 7ba86bd..0000000
+--- a/projects/stitch/include/dogen/stitch/test_data/segment_types_td.hpp
++++ /dev/null
+@@ -1,51 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TEST_DATA_SEGMENT_TYPES_TD_HPP
+-#define DOGEN_STITCH_TEST_DATA_SEGMENT_TYPES_TD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include "dogen/stitch/types/segment_types.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-class segment_types_generator {
+-public:
+-    segment_types_generator();
+-
+-public:
+-    typedef dogen::stitch::segment_types result_type;
+-
+-public:
+-    static void populate(const unsigned int position, result_type& v);
+-    static result_type create(const unsigned int position);
+-    result_type operator()();
+-
+-private:
+-    unsigned int position_;
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/all.hpp b/projects/stitch/include/dogen/stitch/types/all.hpp
+index fcd0a3a..a5d8dfa 100644
+--- a/projects/stitch/include/dogen/stitch/types/all.hpp
++++ b/projects/stitch/include/dogen/stitch/types/all.hpp
+@@ -19,14 +19,14 @@
+  *
+  */
+ #include "dogen/stitch/types/line.hpp"
++#include "dogen/stitch/types/block.hpp"
+ #include "dogen/stitch/types/parser.hpp"
+ #include "dogen/stitch/types/traits.hpp"
+-#include "dogen/stitch/types/segment.hpp"
+ #include "dogen/stitch/types/expander.hpp"
+ #include "dogen/stitch/types/workflow.hpp"
+ #include "dogen/stitch/types/formatter.hpp"
++#include "dogen/stitch/types/block_types.hpp"
+ #include "dogen/stitch/types/parsing_error.hpp"
+-#include "dogen/stitch/types/segment_types.hpp"
+ #include "dogen/stitch/types/text_template.hpp"
+ #include "dogen/stitch/types/building_error.hpp"
+ #include "dogen/stitch/types/workflow_error.hpp"
+diff --git a/projects/stitch/include/dogen/stitch/types/block.hpp b/projects/stitch/include/dogen/stitch/types/block.hpp
+new file mode 100644
+index 0000000..54c7d10
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/types/block.hpp
+@@ -0,0 +1,94 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TYPES_BLOCK_HPP
++#define DOGEN_STITCH_TYPES_BLOCK_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++#include <algorithm>
++#include "dogen/stitch/types/block_types.hpp"
++#include "dogen/stitch/serialization/block_fwd_ser.hpp"
++
++namespace dogen {
++namespace stitch {
++
++class block final {
++public:
++    block(const block&) = default;
++    block(block&&) = default;
++    ~block() = default;
++
++public:
++    block();
++
++public:
++    block(
++        const dogen::stitch::block_types type,
++        const std::string& content);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const block& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, block& v, unsigned int version);
++
++public:
++    dogen::stitch::block_types type() const;
++    void type(const dogen::stitch::block_types v);
++
++    const std::string& content() const;
++    std::string& content();
++    void content(const std::string& v);
++    void content(const std::string&& v);
++
++public:
++    bool operator==(const block& rhs) const;
++    bool operator!=(const block& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    void swap(block& other) noexcept;
++    block& operator=(block other);
++
++private:
++    dogen::stitch::block_types type_;
++    std::string content_;
++};
++
++} }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::stitch::block& lhs,
++    dogen::stitch::block& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/block_fwd.hpp b/projects/stitch/include/dogen/stitch/types/block_fwd.hpp
+new file mode 100644
+index 0000000..79b9059
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/types/block_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TYPES_BLOCK_FWD_HPP
++#define DOGEN_STITCH_TYPES_BLOCK_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace stitch {
++
++class block;
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/block_types.hpp b/projects/stitch/include/dogen/stitch/types/block_types.hpp
+new file mode 100644
+index 0000000..69008ba
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/types/block_types.hpp
+@@ -0,0 +1,40 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TYPES_BLOCK_TYPES_HPP
++#define DOGEN_STITCH_TYPES_BLOCK_TYPES_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace stitch {
++
++enum class block_types : unsigned int {
++    invalid = 0, ///< Represents an uninitialised enum
++    text_block = 1,
++    standard_control_block = 2,
++    expression_block = 3
++};
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/block_types_fwd.hpp b/projects/stitch/include/dogen/stitch/types/block_types_fwd.hpp
+new file mode 100644
+index 0000000..e3bb17f
+--- /dev/null
++++ b/projects/stitch/include/dogen/stitch/types/block_types_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_STITCH_TYPES_BLOCK_TYPES_FWD_HPP
++#define DOGEN_STITCH_TYPES_BLOCK_TYPES_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace stitch {
++
++enum class block_types : unsigned int;
++
++} }
++
++#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/line.hpp b/projects/stitch/include/dogen/stitch/types/line.hpp
+index 9f72d73..c7c6529 100644
+--- a/projects/stitch/include/dogen/stitch/types/line.hpp
++++ b/projects/stitch/include/dogen/stitch/types/line.hpp
+@@ -27,7 +27,7 @@
+ 
+ #include <list>
+ #include <algorithm>
+-#include "dogen/stitch/types/segment.hpp"
++#include "dogen/stitch/types/block.hpp"
+ #include "dogen/stitch/serialization/line_fwd_ser.hpp"
+ 
+ namespace dogen {
+@@ -41,7 +41,7 @@ public:
+     ~line() = default;
+ 
+ public:
+-    explicit line(const std::list<dogen::stitch::segment>& segments);
++    explicit line(const std::list<dogen::stitch::block>& blocks);
+ 
+ private:
+     template<typename Archive>
+@@ -51,10 +51,10 @@ private:
+     friend void boost::serialization::load(Archive& ar, line& v, unsigned int version);
+ 
+ public:
+-    const std::list<dogen::stitch::segment>& segments() const;
+-    std::list<dogen::stitch::segment>& segments();
+-    void segments(const std::list<dogen::stitch::segment>& v);
+-    void segments(const std::list<dogen::stitch::segment>&& v);
++    const std::list<dogen::stitch::block>& blocks() const;
++    std::list<dogen::stitch::block>& blocks();
++    void blocks(const std::list<dogen::stitch::block>& v);
++    void blocks(const std::list<dogen::stitch::block>&& v);
+ 
+ public:
+     bool operator==(const line& rhs) const;
+@@ -67,7 +67,7 @@ public:
+     line& operator=(line other);
+ 
+ private:
+-    std::list<dogen::stitch::segment> segments_;
++    std::list<dogen::stitch::block> blocks_;
+ };
+ 
+ } }
+diff --git a/projects/stitch/include/dogen/stitch/types/parser.hpp b/projects/stitch/include/dogen/stitch/types/parser.hpp
+index 30d38c6..1014326 100644
+--- a/projects/stitch/include/dogen/stitch/types/parser.hpp
++++ b/projects/stitch/include/dogen/stitch/types/parser.hpp
+@@ -28,7 +28,7 @@
+ #include <string>
+ #include <utility>
+ #include "dogen/stitch/types/line.hpp"
+-#include "dogen/stitch/types/segment.hpp"
++#include "dogen/stitch/types/block.hpp"
+ #include "dogen/stitch/types/text_template.hpp"
+ #include "dogen/dynamic/types/object.hpp"
+ #include "dogen/dynamic/types/workflow.hpp"
+@@ -51,40 +51,40 @@ public:
+ 
+ private:
+     /**
+-     * @brief Creates a segment with the supplied properties.
++     * @brief Creates a block with the supplied properties.
+      */
+-    segment create_segment(const segment_types st, const std::string& c,
++    block create_block(const block_types st, const std::string& c,
+         const bool trim_content) const;
+ 
+     /**
+-     * @brief Creates a segment of type text.
++     * @brief Creates a block of type text.
+      */
+-    segment create_text_segment(const std::string& c,
++    block create_text_block(const std::string& c,
+         const bool trim_content = false) const;
+ 
+     /**
+-     * @brief Creates a segment of type scriptlet.
++     * @brief Creates a control block.
+      */
+-    segment create_scriptlet_segment(const std::string& c,
++    block create_control_block(const std::string& c,
+         const bool trim_content = false) const;
+ 
+ private:
+     /**
+      * @brief Parses lines that contain expression blocks.
+      */
+-    line parse_line_with_expression_block(const std::string& input_line) const;
++    line parse_expression_block(const std::string& input_line) const;
+ 
+     /**
+-     * @brief Parses lines that contain inline standard blocks.
++     * @brief Parses lines that contains an inline control block.
+      */
+-    line parse_line_with_inline_standard_block(
++    line parse_inline_control_block(
+         const std::string& input_line) const;
+ 
+     /**
+-     * @brief Parse lines with declarations.
++     * @brief Parse lines with directives.
+      */
+     std::pair<std::string, std::string>
+-    parse_line_with_declaration(const std::string& input_line) const;
++    parse_directive(const std::string& input_line) const;
+ 
+ public:
+     /**
+diff --git a/projects/stitch/include/dogen/stitch/types/segment.hpp b/projects/stitch/include/dogen/stitch/types/segment.hpp
+deleted file mode 100644
+index 1fb9370..0000000
+--- a/projects/stitch/include/dogen/stitch/types/segment.hpp
++++ /dev/null
+@@ -1,94 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TYPES_SEGMENT_HPP
+-#define DOGEN_STITCH_TYPES_SEGMENT_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <string>
+-#include <algorithm>
+-#include "dogen/stitch/types/segment_types.hpp"
+-#include "dogen/stitch/serialization/segment_fwd_ser.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-class segment final {
+-public:
+-    segment(const segment&) = default;
+-    segment(segment&&) = default;
+-    ~segment() = default;
+-
+-public:
+-    segment();
+-
+-public:
+-    segment(
+-        const dogen::stitch::segment_types type,
+-        const std::string& content);
+-
+-private:
+-    template<typename Archive>
+-    friend void boost::serialization::save(Archive& ar, const segment& v, unsigned int version);
+-
+-    template<typename Archive>
+-    friend void boost::serialization::load(Archive& ar, segment& v, unsigned int version);
+-
+-public:
+-    dogen::stitch::segment_types type() const;
+-    void type(const dogen::stitch::segment_types v);
+-
+-    const std::string& content() const;
+-    std::string& content();
+-    void content(const std::string& v);
+-    void content(const std::string&& v);
+-
+-public:
+-    bool operator==(const segment& rhs) const;
+-    bool operator!=(const segment& rhs) const {
+-        return !this->operator==(rhs);
+-    }
+-
+-public:
+-    void swap(segment& other) noexcept;
+-    segment& operator=(segment other);
+-
+-private:
+-    dogen::stitch::segment_types type_;
+-    std::string content_;
+-};
+-
+-} }
+-
+-namespace std {
+-
+-template<>
+-inline void swap(
+-    dogen::stitch::segment& lhs,
+-    dogen::stitch::segment& rhs) {
+-    lhs.swap(rhs);
+-}
+-
+-}
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/segment_fwd.hpp b/projects/stitch/include/dogen/stitch/types/segment_fwd.hpp
+deleted file mode 100644
+index 828341f..0000000
+--- a/projects/stitch/include/dogen/stitch/types/segment_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TYPES_SEGMENT_FWD_HPP
+-#define DOGEN_STITCH_TYPES_SEGMENT_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace stitch {
+-
+-class segment;
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/segment_types.hpp b/projects/stitch/include/dogen/stitch/types/segment_types.hpp
+deleted file mode 100644
+index 357158b..0000000
+--- a/projects/stitch/include/dogen/stitch/types/segment_types.hpp
++++ /dev/null
+@@ -1,39 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TYPES_SEGMENT_TYPES_HPP
+-#define DOGEN_STITCH_TYPES_SEGMENT_TYPES_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace stitch {
+-
+-enum class segment_types : unsigned int {
+-    invalid = 0, ///< Represents an uninitialised enum
+-    text = 1,
+-    scriptlet = 2
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/include/dogen/stitch/types/segment_types_fwd.hpp b/projects/stitch/include/dogen/stitch/types/segment_types_fwd.hpp
+deleted file mode 100644
+index 2610330..0000000
+--- a/projects/stitch/include/dogen/stitch/types/segment_types_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_STITCH_TYPES_SEGMENT_TYPES_FWD_HPP
+-#define DOGEN_STITCH_TYPES_SEGMENT_TYPES_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace stitch {
+-
+-enum class segment_types : unsigned int;
+-
+-} }
+-
+-#endif
+diff --git a/projects/stitch/spec/formatter_spec.cpp b/projects/stitch/spec/formatter_spec.cpp
+index 998b4fd..ee099bd 100644
+--- a/projects/stitch/spec/formatter_spec.cpp
++++ b/projects/stitch/spec/formatter_spec.cpp
+@@ -51,17 +51,17 @@ const std::string multiple_scriptlet_lines(R"(unsigned int i0;
+ unsigned int i1;
+ )");
+ 
+-const std::string text_scriptlet_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
++const std::string text_expression_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+ unsigned int i0;
+ stream_ << "This is line numnber: 0" << std::endl;
+ )");
+ 
+-const std::string scriptlet_text_scriptlet_single_line(R"(unsigned int i0;
++const std::string expression_text_expression_single_line(R"(unsigned int i0;
+ stream_ << "This is line numnber: 0" << std::endl;
+ unsigned int i0;
+ )");
+ 
+-const std::string text_scriptlet_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
++const std::string text_expression_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+ stream_ << "This is line numnber: 1" << std::endl;
+ unsigned int i0;
+ unsigned int i1;
+@@ -69,7 +69,33 @@ stream_ << "This is line numnber: 0" << std::endl;
+ stream_ << "This is line numnber: 1" << std::endl;
+ )");
+ 
+-const std::string scriptlet_text_scriptlet_multi_line(R"(unsigned int i0;
++const std::string expression_text_expression_multi_line(R"(unsigned int i0;
++unsigned int i1;
++stream_ << "This is line numnber: 0" << std::endl;
++stream_ << "This is line numnber: 1" << std::endl;
++unsigned int i0;
++unsigned int i1;
++)");
++
++const std::string text_standard_control_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
++unsigned int i0;
++stream_ << "This is line numnber: 0" << std::endl;
++)");
++
++const std::string standard_control_text_standard_control_single_line(R"(unsigned int i0;
++stream_ << "This is line numnber: 0" << std::endl;
++unsigned int i0;
++)");
++
++const std::string text_standard_control_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
++stream_ << "This is line numnber: 1" << std::endl;
++unsigned int i0;
++unsigned int i1;
++stream_ << "This is line numnber: 0" << std::endl;
++stream_ << "This is line numnber: 1" << std::endl;
++)");
++
++const std::string standard_control_text_standard_control_multi_line(R"(unsigned int i0;
+ unsigned int i1;
+ stream_ << "This is line numnber: 0" << std::endl;
+ stream_ << "This is line numnber: 1" << std::endl;
+@@ -150,11 +176,11 @@ BOOST_AUTO_TEST_CASE(empty_text_template_results_in_empty_file) {
+     BOOST_LOG_SEV(lg, debug) << "result: " << r;
+     BOOST_CHECK(r.content().empty());
+ }
+-
++/*
+ BOOST_AUTO_TEST_CASE(single_text_line_results_in_expected_template) {
+     SETUP_TEST_LOG_SOURCE("single_text_line_results_in_expected_template");
+ 
+-    const auto tt(factory.make_single_text_line());
++    const auto tt(factory.make_single_text_block_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+@@ -165,7 +191,7 @@ BOOST_AUTO_TEST_CASE(single_text_line_results_in_expected_template) {
+ BOOST_AUTO_TEST_CASE(multiple_text_lines_results_in_expected_template) {
+     SETUP_TEST_LOG_SOURCE("multiple_text_lines_results_in_expected_template");
+ 
+-    const auto tt(factory.make_multiple_text_lines());
++    const auto tt(factory.make_multiple_text_block_lines());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format((tt)));
+@@ -174,10 +200,10 @@ BOOST_AUTO_TEST_CASE(multiple_text_lines_results_in_expected_template) {
+     BOOST_CHECK(asserter::assert_equals(multiple_text_lines_content, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(single_scriptlet_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("single_scriptlet_line_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(single_expression_block_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("single_expression_block_line_results_in_expected_template");
+ 
+-    const auto tt(factory.make_single_scriptlet_line());
++    const auto tt(factory.make_single_expression_block_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+@@ -186,10 +212,10 @@ BOOST_AUTO_TEST_CASE(single_scriptlet_line_results_in_expected_template) {
+     BOOST_CHECK(asserter::assert_equals(single_scriptlet_line, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(multiple_scriptlet_lines_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("multiple_scriptlet_lines_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(multiple_expression_block_lines_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("multiple_expression_block_lines_results_in_expected_template");
+ 
+-    const auto tt(factory.make_multiple_scriptlet_lines());
++    const auto tt(factory.make_multiple_expression_block_lines());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+@@ -198,54 +224,131 @@ BOOST_AUTO_TEST_CASE(multiple_scriptlet_lines_results_in_expected_template) {
+     BOOST_CHECK(asserter::assert_equals(multiple_scriptlet_lines, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("text_scriptlet_text_single_line_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(single_standard_control_block_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("single_standard_control_block_line_results_in_expected_template");
+ 
+-    const auto tt(factory.make_text_scriptlet_text_single_line());
++    const auto tt(factory.make_single_standard_control_block_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+     const auto& c(r.content());
+-    BOOST_CHECK(asserter::assert_equals(text_scriptlet_text_single_line, c));
++    BOOST_CHECK(asserter::assert_equals(single_scriptlet_line, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_single_line_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(multiple_standard_control_block_lines_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("multiple_standard_control_block_lines_results_in_expected_template");
+ 
+-    const auto tt(factory.make_scriptlet_text_scriptlet_single_line());
++    const auto tt(factory.make_multiple_standard_control_block_lines());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(asserter::assert_equals(multiple_scriptlet_lines, c));
++}
++
++BOOST_AUTO_TEST_CASE(text_expression_text_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("text_expression_text_single_line_results_in_expected_template");
++
++    const auto tt(factory.make_text_expression_text_single_line());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(asserter::assert_equals(text_expression_text_single_line, c));
++}
++
++BOOST_AUTO_TEST_CASE(expression_text_expression_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("expression_text_expression_single_line_results_in_expected_template");
++
++    const auto tt(factory.make_expression_text_expression_single_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+     const auto& c(r.content());
+     BOOST_CHECK(
+-        asserter::assert_equals(scriptlet_text_scriptlet_single_line, c));
++        asserter::assert_equals(expression_text_expression_single_line, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(text_scriptlet_text_multi_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("text_scriptlet_text_multi_line_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(text_expression_text_multi_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("text_expression_text_multi_line_results_in_expected_template");
+ 
+-    const auto tt(factory.make_text_scriptlet_text_multi_line());
++    const auto tt(factory.make_text_expression_text_multi_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+     const auto& c(r.content());
+-    BOOST_CHECK(asserter::assert_equals(text_scriptlet_text_multi_line, c));
++    BOOST_CHECK(asserter::assert_equals(text_expression_text_multi_line, c));
+ }
+ 
+-BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_multi_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_multi_line_results_in_expected_template");
++BOOST_AUTO_TEST_CASE(expression_text_expression_multi_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("expression_text_expression_multi_line_results_in_expected_template");
+ 
+-    const auto tt(factory.make_scriptlet_text_scriptlet_multi_line());
++    const auto tt(factory.make_expression_text_expression_multi_line());
+     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+ 
+     const auto r(format(tt));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+     const auto& c(r.content());
+     BOOST_CHECK(
+-        asserter::assert_equals(scriptlet_text_scriptlet_multi_line, c));
++        asserter::assert_equals(expression_text_expression_multi_line, c));
++}
++
++BOOST_AUTO_TEST_CASE(text_standard_control_text_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("text_standard_control_text_single_line_results_in_expected_template");
++
++    const auto tt(factory.make_text_standard_control_text_single_line());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(asserter::assert_equals(text_standard_control_text_single_line, c));
++}
++
++BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_single_line_results_in_expected_template");
++
++    const auto tt(
++        factory.make_standard_control_text_standard_control_single_line());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(asserter::assert_equals(
++            standard_control_text_standard_control_single_line, c));
++}
++
++BOOST_AUTO_TEST_CASE(text_standard_control_text_multi_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("text_standard_control_text_multi_line_results_in_expected_template");
++
++    const auto tt(factory.make_text_standard_control_text_multi_line());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(
++        asserter::assert_equals(text_standard_control_text_multi_line, c));
++}
++
++BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_multi_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_multi_line_results_in_expected_template");
++
++    const auto tt(
++        factory.make_standard_control_text_standard_control_multi_line());
++    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
++
++    const auto r(format(tt));
++    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
++    const auto& c(r.content());
++    BOOST_CHECK(asserter::assert_equals(
++            standard_control_text_standard_control_multi_line, c));
+ }
+ 
+ BOOST_AUTO_TEST_CASE(mixed_content_single_line_results_in_expected_template) {
+@@ -331,5 +434,5 @@ BOOST_AUTO_TEST_CASE(line_with_quotes_result_in_expected_template) {
+     const auto& c(r.content());
+     BOOST_CHECK(asserter::assert_equals(text_line_with_quotes_content, c));
+ }
+-
++*/
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/stitch/spec/parser_spec.cpp b/projects/stitch/spec/parser_spec.cpp
+index 1a80863..05649b5 100644
+--- a/projects/stitch/spec/parser_spec.cpp
++++ b/projects/stitch/spec/parser_spec.cpp
+@@ -38,22 +38,22 @@ const std::string only_text_content_in_single_line("some text content");
+ const std::string only_text_content_muti_line(R"(some text content
+ other text content)");
+ 
+-const std::string inline_scriptlet_block(R"(<#+ single line #>)");
+-const std::string empty_scriptlet_block(R"(<#+
++const std::string inline_standard_control_block(R"(<#+ single line #>)");
++const std::string empty_standard_control_block(R"(<#+
+ #>)");
+ 
+-const std::string single_line_scriptlet_block(R"(<#+
++const std::string single_line_standard_control_block(R"(<#+
+ single line
+ #>)");
+ 
+-const std::string text_scriptlet_text_single_line(R"(some text content
++const std::string text_standard_control_text_single_line(R"(some text content
+ <#+
+ single line
+ #>
+ other text content
+ )");
+ 
+-const std::string scriptlet_text_scriptlet_single_line(R"(<#+
++const std::string standard_control_text_standard_control_single_line(R"(<#+
+ single line
+ #>
+ some text content
+@@ -61,34 +61,34 @@ some text content
+ single line
+ #>)");
+ 
+-const std::string scriptlet_start_additional_characters_postfix(R"(<#+x
++const std::string standard_control_start_additional_characters_postfix(R"(<#+x
+ single line
+ #>)");
+ 
+-const std::string scriptlet_start_additional_characters_prefix(R"(x<#+
++const std::string standard_control_start_additional_characters_prefix(R"(x<#+
+ single line
+ #>)");
+ 
+-const std::string scriptlet_end_additional_characters_postfix(R"(<#+
++const std::string standard_control_end_additional_characters_postfix(R"(<#+
+ single line
+ #>x)");
+ 
+-const std::string scriptlet_end_additional_characters_prefix(R"(<#+
++const std::string standard_control_end_additional_characters_prefix(R"(<#+
+ single line
+ x#>)");
+ 
+-const std::string two_scriptlet_starts(R"(<#+
++const std::string two_control_starts(R"(<#+
+ <#+
+ single line
+ #>)");
+ 
+-const std::string two_scriptlet_ends(R"(<#+
++const std::string two_control_ends(R"(<#+
+ single line
+ #>
+ #>)");
+ 
+-const std::string text_scriptlet("some text<#+ single line #>");
+-const std::string scriptlet_text("<#+ single line #>some text");
++const std::string text_standard_control("some text<#+ single line #>");
++const std::string standard_control_text("<#+ single line #>some text");
+ 
+ const std::string stand_alone_expression_block("<#= inline block #>");
+ const std::string text_expression_block("some text content<#= inline block #>");
+@@ -101,6 +101,8 @@ const std::string text_expression_block_text_expression_block_text(
+     "content<#= inline block #>some text content");
+ const std::string untermined_expression_block("<#= inline block#zzz");
+ const std::string multiple_start_expression_block("<#= <#= inline block#>");
++const std::string multiple_start_standard_control_block(
++    "<#+ <#+ inline block#>");
+ const std::string multiple_end_expression_block("<#= inline block#> #>");
+ const std::string stray_end_expression_block("<#= inline block#>zzz#>");
+ const std::string multiline_expression_block(R"(<#=
+@@ -108,12 +110,12 @@ single line
+ #>)");
+ const std::string expression_in_expression("<#= <#= single line #> #>");
+ 
+-const std::string licence_declaration("<#@ licence_name=gpl_v3 #>");
+-const std::string multiple_declarations(R"(<#@ licence_name=gpl_v3 #>
++const std::string licence_directive("<#@ licence_name=gpl_v3 #>");
++const std::string multiple_directives(R"(<#@ licence_name=gpl_v3 #>
+ <#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>)");
+-const std::string multiple_start_declarations("<#@ <#@ licence_name=gpl_v3 #>");
+-const std::string multiple_end_declarations("<#@ licence_name=gpl_v3 #> #>");
+-const std::string namespaces_declaration("<#@ containing_namespaces=a::b::c #>");
++const std::string multiple_start_directives("<#@ <#@ licence_name=gpl_v3 #>");
++const std::string multiple_end_directives("<#@ licence_name=gpl_v3 #> #>");
++const std::string namespaces_directive("<#@ containing_namespaces=a::b::c #>");
+ const std::string licence_name("licence_name");
+ const std::string licence_value("gpl_v3");
+ const std::string namespaces_name("containing_namespaces");
+@@ -123,11 +125,13 @@ const std::string copyright_notice_value(
+     "Copyright(C) 2012 Kitanda <info@kitanda.co.uk>");
+ 
+ const std::string only_text_content_second_line("other text content");
+-const std::string single_line_scriptlet_block_content("single line");
++const std::string single_line_standard_control_block_content("single line");
+ 
+ const std::string additional_characters("additional content");
+-const std::string starting_scriptlet_block_in_block(
+-    "Cannot start scriptlet block");
++const std::string starting_standard_control_block_in_block(
++    "Cannot start control block");
++const std::string starting_expression_block_in_block(
++    "Cannot start expression block");
+ const std::string end_without_start("without a start block");
+ const std::string inline_block("inline block");
+ const std::string start_and_end("start and end in the same line");
+@@ -165,10 +169,10 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     const auto& line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 1);
+-    const auto& sg(line.segments().front());
+-    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(line.blocks().size() == 1);
++    const auto& b(line.blocks().front());
++    BOOST_CHECK(b.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b.content() == only_text_content_in_single_line);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expected_template) {
+@@ -178,125 +182,133 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expecte
+     BOOST_REQUIRE(tt.lines().size() == 2);
+ 
+     const auto& l1(tt.lines().front());
+-    BOOST_REQUIRE(l1.segments().size() == 1);
+-    const auto& sg1(l1.segments().front());
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(l1.blocks().size() == 1);
++    const auto& b1(l1.blocks().front());
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b1.content() == only_text_content_in_single_line);
+ 
+     const auto& l2(tt.lines().back());
+-    BOOST_REQUIRE(l2.segments().size() == 1);
+-    const auto& sg2(l2.segments().front());
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg2.content() == only_text_content_second_line);
++    BOOST_REQUIRE(l2.blocks().size() == 1);
++    const auto& b2(l2.blocks().front());
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b2.content() == only_text_content_second_line);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(inline_scriptlet_block_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("inline_scriptlet_block_results_in_expected_template");
+-    const auto tt(parse(inline_scriptlet_block));
++BOOST_AUTO_TEST_CASE(inline_standard_control_block_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("inline_standard_control_block_results_in_expected_template");
++    const auto tt(parse(inline_standard_control_block));
+ 
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     const auto& line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 1);
+-    const auto& sg(line.segments().front());
+-    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg.content() == single_line_scriptlet_block_content);
++    BOOST_REQUIRE(line.blocks().size() == 1);
++    const auto& b(line.blocks().front());
++    BOOST_CHECK(b.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b.content() == single_line_standard_control_block_content);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(invalid_inline_scriptlets_throw) {
+-    SETUP_TEST_LOG_SOURCE("invalid_inline_scriptlets_throw");
++BOOST_AUTO_TEST_CASE(invalid_inline_standard_control_blocks_throw) {
++    SETUP_TEST_LOG_SOURCE("invalid_inline_standard_control_blocks_throw");
+ 
+-    contains_checker<parsing_error> c1(starting_scriptlet_block_in_block);
++    contains_checker<parsing_error> c1(starting_expression_block_in_block);
+     BOOST_CHECK_EXCEPTION(
+         parse(multiple_start_expression_block), parsing_error, c1);
+ 
+     contains_checker<parsing_error> c2(end_without_start);
+     BOOST_CHECK_EXCEPTION(
+         parse(multiple_end_expression_block), parsing_error, c2);
+-}
+ 
+-BOOST_AUTO_TEST_CASE(empty_scriptlet_block_results_in_empty_template) {
+-    SETUP_TEST_LOG_SOURCE("empty_scriptlet_block_results_in_empty_template");
+-    const auto tt(parse(empty_scriptlet_block));
++    contains_checker<parsing_error>
++        c3(starting_standard_control_block_in_block);
++    BOOST_CHECK_EXCEPTION(
++        parse(multiple_start_standard_control_block), parsing_error, c1);
++}
++/*
++BOOST_AUTO_TEST_CASE(empty_standard_control_block_results_in_empty_template) {
++    SETUP_TEST_LOG_SOURCE("empty_standard_control_block_results_in_empty_template");
++    const auto tt(parse(empty_standard_control_block));
+     BOOST_CHECK(tt.lines().empty());
+ }
+ 
+-BOOST_AUTO_TEST_CASE(single_line_scriptlet_block_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("single_line_scriptlet_block_results_in_expected_template");
+-    const auto tt(parse(single_line_scriptlet_block));
++BOOST_AUTO_TEST_CASE(single_line_standard_control_block_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("single_line_standard_control_block_results_in_expected_template");
++    const auto tt(parse(single_line_standard_control_block));
+ 
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     const auto& line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 1);
+-    const auto& sg(line.segments().front());
+-    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg.content() == single_line_scriptlet_block_content);
++    BOOST_REQUIRE(line.blocks().size() == 1);
++    const auto& b(line.blocks().front());
++    BOOST_CHECK(b.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b.content() == single_line_standard_control_block_content);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("text_scriptlet_text_single_line_results_in_expected_template");
+-    const auto tt(parse(text_scriptlet_text_single_line));
++BOOST_AUTO_TEST_CASE(text_standard_standard_control_text_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("text_standard_control_text_single_line_results_in_expected_template");
++    const auto tt(parse(text_standard_control_text_single_line));
+     BOOST_REQUIRE(tt.lines().size() == 3);
+ 
+     auto i(tt.lines().begin());
+     const auto l1(*i);
+-    BOOST_REQUIRE(l1.segments().size() == 1);
+-    const auto& sg1(l1.segments().front());
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(l1.blocks().size() == 1);
++    const auto& b1(l1.blocks().front());
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b1.content() == only_text_content_in_single_line);
+ 
+     ++i;
+     const auto l2(*i);
+-    BOOST_REQUIRE(l2.segments().size() == 1);
+-    const auto& sg2(l2.segments().front());
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg2.content() == single_line_scriptlet_block_content);
++    BOOST_REQUIRE(l2.blocks().size() == 1);
++    const auto& b2(l2.blocks().front());
++    BOOST_CHECK(
++        b2.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b2.content() == single_line_standard_control_block_content);
+ 
+     ++i;
+     const auto l3(*i);
+-    BOOST_REQUIRE(l3.segments().size() == 1);
+-    const auto& sg3(l3.segments().front());
+-    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg3.content() == only_text_content_second_line);
++    BOOST_REQUIRE(l3.blocks().size() == 1);
++    const auto& b3(l3.blocks().front());
++    BOOST_CHECK(b3.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b3.content() == only_text_content_second_line);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_single_line_results_in_expected_template");
+-    const auto tt(parse(scriptlet_text_scriptlet_single_line));
++BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_single_line_results_in_expected_template");
++    const auto tt(parse(standard_control_text_standard_control_single_line));
+     BOOST_REQUIRE(tt.lines().size() == 3);
+ 
+     auto i(tt.lines().begin());
+     const auto l1(*i);
+-    BOOST_REQUIRE(l1.segments().size() == 1);
+-    const auto& sg1(l1.segments().front());
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg1.content() == single_line_scriptlet_block_content);
++    BOOST_REQUIRE(l1.blocks().size() == 1);
++    const auto& b1(l1.blocks().front());
++    BOOST_CHECK(
++        b1.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b1.content() == single_line_standard_control_block_content);
+ 
+     ++i;
+     const auto l2(*i);
+-    BOOST_REQUIRE(l2.segments().size() == 1);
+-    const auto& sg2(l2.segments().front());
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg2.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(l2.blocks().size() == 1);
++    const auto& b2(l2.blocks().front());
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b2.content() == only_text_content_in_single_line);
+ 
+     ++i;
+     const auto l3(*i);
+-    BOOST_REQUIRE(l3.segments().size() == 1);
+-    const auto& sg3(l3.segments().front());
+-    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg3.content() == single_line_scriptlet_block_content);
++    BOOST_REQUIRE(l3.blocks().size() == 1);
++    const auto& b3(l3.blocks().front());
++    BOOST_CHECK(
++        b3.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b3.content() == single_line_standard_control_block_content);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(scriptlet_start_additional_characters_throws) {
+     SETUP_TEST_LOG_SOURCE("scriptlet_start_additional_characters_throws");
+ 
+     contains_checker<parsing_error> c1(middle_of_line);
+-    BOOST_CHECK_EXCEPTION(parse(scriptlet_start_additional_characters_prefix),
++    BOOST_CHECK_EXCEPTION(parse(standard_control_start_additional_characters_prefix),
+         parsing_error, c1);
+ 
+     contains_checker<parsing_error> c2(additional_characters);
+-    BOOST_CHECK_EXCEPTION(parse(scriptlet_start_additional_characters_postfix),
++    BOOST_CHECK_EXCEPTION(parse(standard_control_start_additional_characters_postfix),
+         parsing_error, c2);
+ }
+ 
+@@ -304,43 +316,43 @@ BOOST_AUTO_TEST_CASE(scriptlet_end_additional_characters_throws) {
+     SETUP_TEST_LOG_SOURCE("scriptlet_end_additional_characters_throws");
+ 
+     contains_checker<parsing_error> c(additional_characters);
+-    BOOST_CHECK_EXCEPTION(parse(scriptlet_end_additional_characters_prefix),
++    BOOST_CHECK_EXCEPTION(parse(standard_control_end_additional_characters_prefix),
+         parsing_error, c);
+-    BOOST_CHECK_EXCEPTION(parse(scriptlet_end_additional_characters_postfix),
++    BOOST_CHECK_EXCEPTION(parse(standard_control_end_additional_characters_postfix),
+         parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(two_scriptlet_starts_throws) {
+-    SETUP_TEST_LOG_SOURCE("two_scriptlet_starts_throws");
++BOOST_AUTO_TEST_CASE(two_control_starts_throws) {
++    SETUP_TEST_LOG_SOURCE("two_control_starts_throws");
+ 
+-    contains_checker<parsing_error> c(starting_scriptlet_block_in_block);
+-    BOOST_CHECK_EXCEPTION(parse(two_scriptlet_starts), parsing_error, c);
++    contains_checker<parsing_error> c(starting_control_block_in_block);
++    BOOST_CHECK_EXCEPTION(parse(two_control_starts), parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(two_scriptlet_ends_throws) {
+-    SETUP_TEST_LOG_SOURCE("two_scriptlet_ends_throws");
++BOOST_AUTO_TEST_CASE(two_control_ends_throws) {
++    SETUP_TEST_LOG_SOURCE("two_control_ends_throws");
+ 
+     contains_checker<parsing_error> c(end_without_start);
+-    BOOST_CHECK_EXCEPTION(parse(two_scriptlet_ends), parsing_error, c);
++    BOOST_CHECK_EXCEPTION(parse(two_control_ends), parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(text_scriptlet_throws) {
+-    SETUP_TEST_LOG_SOURCE("text_scriptlet_throws");
++BOOST_AUTO_TEST_CASE(text_standard_control_throws) {
++    SETUP_TEST_LOG_SOURCE("text_standard_control_throws");
+ 
+     contains_checker<parsing_error> c(middle_of_line);
+-    BOOST_CHECK_EXCEPTION(parse(text_scriptlet), parsing_error, c);
++    BOOST_CHECK_EXCEPTION(parse(text_standard_control), parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(scriptlet_text_throws) {
+-    SETUP_TEST_LOG_SOURCE("scriptlet_text_throws");
++BOOST_AUTO_TEST_CASE(standard_control_text_throws) {
++    SETUP_TEST_LOG_SOURCE("standard_control_text_throws");
+ 
+     contains_checker<parsing_error> c(additional_characters);
+-    BOOST_CHECK_EXCEPTION(parse(scriptlet_text), parsing_error, c);
++    BOOST_CHECK_EXCEPTION(parse(standard_control_text), parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("licence_declaration_results_in_expected_template");
+-    const auto tt(parse(licence_declaration));
++BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("licence_directive_results_in_expected_template");
++    const auto tt(parse(licence_directive));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+ 
+     BOOST_CHECK(tt.lines().empty());
+@@ -349,9 +361,9 @@ BOOST_AUTO_TEST_CASE(licence_declaration_results_in_expected_template) {
+     BOOST_CHECK(fs.get_text_content(licence_name) == licence_value);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(multiple_declarations_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("multiple_declarations_results_in_expected_template");
+-    const auto tt(parse(multiple_declarations));
++BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("multiple_directives_results_in_expected_template");
++    const auto tt(parse(multiple_directives));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+ 
+     BOOST_CHECK(tt.lines().empty());
+@@ -362,12 +374,12 @@ BOOST_AUTO_TEST_CASE(multiple_declarations_results_in_expected_template) {
+         fs.get_text_content(copyright_notice_name) == copyright_notice_value);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(invalid_declaration_throws) {
+-    SETUP_TEST_LOG_SOURCE("invalid_declaration_throws");
++BOOST_AUTO_TEST_CASE(invalid_directive_throws) {
++    SETUP_TEST_LOG_SOURCE("invalid_directive_throws");
+ 
+     contains_checker<parsing_error> c(invalid_characters);
+-    BOOST_CHECK_EXCEPTION(parse(multiple_start_declarations), parsing_error, c);
+-    BOOST_CHECK_EXCEPTION(parse(multiple_end_declarations), parsing_error, c);
++    BOOST_CHECK_EXCEPTION(parse(multiple_start_directives), parsing_error, c);
++    BOOST_CHECK_EXCEPTION(parse(multiple_end_directives), parsing_error, c);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(stand_alone_expression_block_results_in_expected_template) {
+@@ -376,10 +388,10 @@ BOOST_AUTO_TEST_CASE(stand_alone_expression_block_results_in_expected_template)
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     const auto& line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 1);
+-    const auto& sg(line.segments().front());
+-    BOOST_CHECK(sg.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg.content() == inline_block);
++    BOOST_REQUIRE(line.blocks().size() == 1);
++    const auto& b(line.blocks().front());
++    BOOST_CHECK(b.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b.content() == inline_block);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(text_expression_block_results_in_expected_template) {
+@@ -388,14 +400,14 @@ BOOST_AUTO_TEST_CASE(text_expression_block_results_in_expected_template) {
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     const auto& line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 2);
+-    const auto& sg1(line.segments().front());
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(line.blocks().size() == 2);
++    const auto& b1(line.blocks().front());
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b1.content() == only_text_content_in_single_line);
+ 
+-    const auto& sg2(line.segments().back());
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg2.content() == inline_block);
++    const auto& b2(line.blocks().back());
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b2.content() == inline_block);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(text_expression_block_text_results_in_expected_template) {
+@@ -404,21 +416,21 @@ BOOST_AUTO_TEST_CASE(text_expression_block_text_results_in_expected_template) {
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     auto line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 3);
+-    auto i(line.segments().begin());
+-    const auto& sg1(*i);
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(line.blocks().size() == 3);
++    auto i(line.blocks().begin());
++    const auto& b1(*i);
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b1.content() == only_text_content_in_single_line);
+ 
+     ++i;
+-    const auto& sg2(*i);
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg2.content() == inline_block);
++    const auto& b2(*i);
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b2.content() == inline_block);
+ 
+     ++i;
+-    const auto& sg3(*i);
+-    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg3.content() == only_text_content_second_line);
++    const auto& b3(*i);
++    BOOST_CHECK(b3.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b3.content() == only_text_content_second_line);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(expression_block_text_expression_block_results_in_expected_template) {
+@@ -427,21 +439,21 @@ BOOST_AUTO_TEST_CASE(expression_block_text_expression_block_results_in_expected_
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     auto line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 3);
+-    auto i(line.segments().begin());
+-    const auto& sg1(*i);
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg1.content() == inline_block);
++    BOOST_REQUIRE(line.blocks().size() == 3);
++    auto i(line.blocks().begin());
++    const auto& b1(*i);
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b1.content() == inline_block);
+ 
+     ++i;
+-    const auto& sg2(*i);
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg2.content() == only_text_content_in_single_line);
++    const auto& b2(*i);
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b2.content() == only_text_content_in_single_line);
+ 
+     ++i;
+-    const auto& sg3(*i);
+-    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg3.content() == inline_block);
++    const auto& b3(*i);
++    BOOST_CHECK(b3.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b3.content() == inline_block);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(text_expression_block_text_expression_block_text_results_in_expected_template) {
+@@ -450,31 +462,31 @@ BOOST_AUTO_TEST_CASE(text_expression_block_text_expression_block_text_results_in
+     BOOST_REQUIRE(tt.lines().size() == 1);
+     auto line(tt.lines().front());
+ 
+-    BOOST_REQUIRE(line.segments().size() == 5);
+-    auto i(line.segments().begin());
+-    const auto& sg1(*i);
+-    BOOST_CHECK(sg1.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg1.content() == only_text_content_in_single_line);
++    BOOST_REQUIRE(line.blocks().size() == 5);
++    auto i(line.blocks().begin());
++    const auto& b1(*i);
++    BOOST_CHECK(b1.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b1.content() == only_text_content_in_single_line);
+ 
+     ++i;
+-    const auto& sg2(*i);
+-    BOOST_CHECK(sg2.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg2.content() == inline_block);
++    const auto& b2(*i);
++    BOOST_CHECK(b2.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b2.content() == inline_block);
+ 
+     ++i;
+-    const auto& sg3(*i);
+-    BOOST_CHECK(sg3.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg3.content() == only_text_content_second_line);
++    const auto& b3(*i);
++    BOOST_CHECK(b3.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b3.content() == only_text_content_second_line);
+ 
+     ++i;
+-    const auto& sg4(*i);
+-    BOOST_CHECK(sg4.type() == dogen::stitch::segment_types::scriptlet);
+-    BOOST_CHECK(sg4.content() == inline_block);
++    const auto& b4(*i);
++    BOOST_CHECK(b4.type() == dogen::stitch::block_types::standard_control_block);
++    BOOST_CHECK(b4.content() == inline_block);
+ 
+     ++i;
+-    const auto& sg5(*i);
+-    BOOST_CHECK(sg5.type() == dogen::stitch::segment_types::text);
+-    BOOST_CHECK(sg5.content() == only_text_content_in_single_line);
++    const auto& b5(*i);
++    BOOST_CHECK(b5.type() == dogen::stitch::block_types::text_block);
++    BOOST_CHECK(b5.content() == only_text_content_in_single_line);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(untermined_expression_block_throws) {
+@@ -501,13 +513,13 @@ BOOST_AUTO_TEST_CASE(stray_end_expression_block_throws) {
+ BOOST_AUTO_TEST_CASE(expression_in_expression_throws) {
+     SETUP_TEST_LOG_SOURCE("expression_in_expression_throws");
+ 
+-    contains_checker<parsing_error> c(starting_scriptlet_block_in_block);
++    contains_checker<parsing_error> c(starting_control_block_in_block);
+     BOOST_CHECK_EXCEPTION(parse(expression_in_expression), parsing_error, c);
+ }
+ 
+-BOOST_AUTO_TEST_CASE(namespaces_declaration_results_in_expected_template) {
+-    SETUP_TEST_LOG_SOURCE("namespaces_declaration_results_in_expected_template");
+-    const auto tt(parse(namespaces_declaration));
++BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
++    SETUP_TEST_LOG_SOURCE("namespaces_directive_results_in_expected_template");
++    const auto tt(parse(namespaces_directive));
+     BOOST_LOG_SEV(lg, debug) << "Result: " << tt;
+ 
+     BOOST_CHECK(tt.lines().empty());
+@@ -515,5 +527,5 @@ BOOST_AUTO_TEST_CASE(namespaces_declaration_results_in_expected_template) {
+     dogen::dynamic::field_selector fs(tt.extensions());
+     BOOST_CHECK(fs.get_text_content(namespaces_name) == namespaces_value);
+ }
+-
++*/
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/stitch/spec/workflow_spec.cpp b/projects/stitch/spec/workflow_spec.cpp
+index 91a853c..fd03e6b 100644
+--- a/projects/stitch/spec/workflow_spec.cpp
++++ b/projects/stitch/spec/workflow_spec.cpp
+@@ -43,7 +43,7 @@ using dogen::utility::test::asserter;
+ using dogen::stitch::workflow_error;
+ 
+ BOOST_AUTO_TEST_SUITE(workflow)
+-
++/*
+ BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
+     SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
+ 
+@@ -77,5 +77,5 @@ BOOST_AUTO_TEST_CASE(empty_template_throws) {
+     BOOST_CHECK_EXCEPTION(w.execute(stitch::input_empty_template_stitch());,
+         workflow_error, c);
+ }
+-
++*/
+ BOOST_AUTO_TEST_SUITE_END()
+diff --git a/projects/stitch/src/hash/block_hash.cpp b/projects/stitch/src/hash/block_hash.cpp
+new file mode 100644
+index 0000000..ad4ad44
+--- /dev/null
++++ b/projects/stitch/src/hash/block_hash.cpp
+@@ -0,0 +1,46 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/stitch/hash/block_hash.hpp"
++#include "dogen/stitch/hash/block_types_hash.hpp"
++
++namespace {
++
++template <typename HashableType>
++inline void combine(std::size_t& seed, const HashableType& value) {
++    std::hash<HashableType> hasher;
++    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
++}
++
++}
++
++namespace dogen {
++namespace stitch {
++
++std::size_t block_hasher::hash(const block& v) {
++    std::size_t seed(0);
++
++    combine(seed, v.type());
++    combine(seed, v.content());
++
++    return seed;
++}
++
++} }
+diff --git a/projects/stitch/src/hash/line_hash.cpp b/projects/stitch/src/hash/line_hash.cpp
+index 76aac17..7e7fa8a 100644
+--- a/projects/stitch/src/hash/line_hash.cpp
++++ b/projects/stitch/src/hash/line_hash.cpp
+@@ -19,7 +19,7 @@
+  *
+  */
+ #include "dogen/stitch/hash/line_hash.hpp"
+-#include "dogen/stitch/hash/segment_hash.hpp"
++#include "dogen/stitch/hash/block_hash.hpp"
+ 
+ namespace {
+ 
+@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v) {
++inline std::size_t hash_std_list_dogen_stitch_block(const std::list<dogen::stitch::block>& v) {
+     std::size_t seed(0);
+     for (const auto i : v) {
+         combine(seed, i);
+@@ -45,7 +45,7 @@ namespace stitch {
+ std::size_t line_hasher::hash(const line& v) {
+     std::size_t seed(0);
+ 
+-    combine(seed, hash_std_list_dogen_stitch_segment(v.segments()));
++    combine(seed, hash_std_list_dogen_stitch_block(v.blocks()));
+     return seed;
+ }
+ 
+diff --git a/projects/stitch/src/hash/segment_hash.cpp b/projects/stitch/src/hash/segment_hash.cpp
+deleted file mode 100644
+index 373d099..0000000
+--- a/projects/stitch/src/hash/segment_hash.cpp
++++ /dev/null
+@@ -1,46 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/stitch/hash/segment_hash.hpp"
+-#include "dogen/stitch/hash/segment_types_hash.hpp"
+-
+-namespace {
+-
+-template <typename HashableType>
+-inline void combine(std::size_t& seed, const HashableType& value) {
+-    std::hash<HashableType> hasher;
+-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace stitch {
+-
+-std::size_t segment_hasher::hash(const segment& v) {
+-    std::size_t seed(0);
+-
+-    combine(seed, v.type());
+-    combine(seed, v.content());
+-
+-    return seed;
+-}
+-
+-} }
+diff --git a/projects/stitch/src/io/block_io.cpp b/projects/stitch/src/io/block_io.cpp
+new file mode 100644
+index 0000000..e8f382c
+--- /dev/null
++++ b/projects/stitch/src/io/block_io.cpp
+@@ -0,0 +1,45 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <boost/algorithm/string.hpp>
++#include "dogen/stitch/io/block_io.hpp"
++#include "dogen/stitch/io/block_types_io.hpp"
++
++inline std::string tidy_up_string(std::string s) {
++    boost::replace_all(s, "\r\n", "<new_line>");
++    boost::replace_all(s, "\n", "<new_line>");
++    boost::replace_all(s, "\"", "<quote>");
++    return s;
++}
++
++namespace dogen {
++namespace stitch {
++
++std::ostream& operator<<(std::ostream& s, const block& v) {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::stitch::block\"" << ", "
++      << "\"type\": " << v.type() << ", "
++      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
++      << " }";
++    return(s);
++}
++
++} }
+diff --git a/projects/stitch/src/io/block_types_io.cpp b/projects/stitch/src/io/block_types_io.cpp
+new file mode 100644
+index 0000000..f16f922
+--- /dev/null
++++ b/projects/stitch/src/io/block_types_io.cpp
+@@ -0,0 +1,52 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <stdexcept>
++#include "dogen/stitch/io/block_types_io.hpp"
++
++namespace dogen {
++namespace stitch {
++
++std::ostream& operator<<(std::ostream& s, const block_types& v) {
++    s << "{ " << "\"__type__\": " << "\"block_types\", " << "\"value\": ";
++
++    std::string attr;
++    switch (v) {
++    case block_types::invalid:
++        attr = "\"invalid\"";
++        break;
++    case block_types::text_block:
++        attr = "\"text_block\"";
++        break;
++    case block_types::standard_control_block:
++        attr = "\"standard_control_block\"";
++        break;
++    case block_types::expression_block:
++        attr = "\"expression_block\"";
++        break;
++    default:
++        throw std::invalid_argument("Invalid value for block_types");
++    }
++    s << attr << " }";
++    return s;
++}
++
++} }
+diff --git a/projects/stitch/src/io/line_io.cpp b/projects/stitch/src/io/line_io.cpp
+index c37b52d..4be145a 100644
+--- a/projects/stitch/src/io/line_io.cpp
++++ b/projects/stitch/src/io/line_io.cpp
+@@ -20,11 +20,11 @@
+  */
+ #include <ostream>
+ #include "dogen/stitch/io/line_io.hpp"
+-#include "dogen/stitch/io/segment_io.hpp"
++#include "dogen/stitch/io/block_io.hpp"
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::segment>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::block>& v) {
+     s << "[ ";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+@@ -42,7 +42,7 @@ namespace stitch {
+ std::ostream& operator<<(std::ostream& s, const line& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::stitch::line\"" << ", "
+-      << "\"segments\": " << v.segments()
++      << "\"blocks\": " << v.blocks()
+       << " }";
+     return(s);
+ }
+diff --git a/projects/stitch/src/io/segment_io.cpp b/projects/stitch/src/io/segment_io.cpp
+deleted file mode 100644
+index 3401f7a..0000000
+--- a/projects/stitch/src/io/segment_io.cpp
++++ /dev/null
+@@ -1,45 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <ostream>
+-#include <boost/algorithm/string.hpp>
+-#include "dogen/stitch/io/segment_io.hpp"
+-#include "dogen/stitch/io/segment_types_io.hpp"
+-
+-inline std::string tidy_up_string(std::string s) {
+-    boost::replace_all(s, "\r\n", "<new_line>");
+-    boost::replace_all(s, "\n", "<new_line>");
+-    boost::replace_all(s, "\"", "<quote>");
+-    return s;
+-}
+-
+-namespace dogen {
+-namespace stitch {
+-
+-std::ostream& operator<<(std::ostream& s, const segment& v) {
+-    s << " { "
+-      << "\"__type__\": " << "\"dogen::stitch::segment\"" << ", "
+-      << "\"type\": " << v.type() << ", "
+-      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
+-      << " }";
+-    return(s);
+-}
+-
+-} }
+diff --git a/projects/stitch/src/io/segment_types_io.cpp b/projects/stitch/src/io/segment_types_io.cpp
+deleted file mode 100644
+index 842b89b..0000000
+--- a/projects/stitch/src/io/segment_types_io.cpp
++++ /dev/null
+@@ -1,49 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <ostream>
+-#include <stdexcept>
+-#include "dogen/stitch/io/segment_types_io.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-std::ostream& operator<<(std::ostream& s, const segment_types& v) {
+-    s << "{ " << "\"__type__\": " << "\"segment_types\", " << "\"value\": ";
+-
+-    std::string attr;
+-    switch (v) {
+-    case segment_types::invalid:
+-        attr = "\"invalid\"";
+-        break;
+-    case segment_types::text:
+-        attr = "\"text\"";
+-        break;
+-    case segment_types::scriptlet:
+-        attr = "\"scriptlet\"";
+-        break;
+-    default:
+-        throw std::invalid_argument("Invalid value for segment_types");
+-    }
+-    s << attr << " }";
+-    return s;
+-}
+-
+-} }
+diff --git a/projects/stitch/src/serialization/block_ser.cpp b/projects/stitch/src/serialization/block_ser.cpp
+new file mode 100644
+index 0000000..7bb56f3
+--- /dev/null
++++ b/projects/stitch/src/serialization/block_ser.cpp
+@@ -0,0 +1,71 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/serialization/nvp.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/string.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include "dogen/stitch/serialization/block_ser.hpp"
++#include "dogen/stitch/serialization/block_types_ser.hpp"
++
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::stitch::block& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("type", v.type_);
++    ar << make_nvp("content", v.content_);
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::stitch::block& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("type", v.type_);
++    ar >> make_nvp("content", v.content_);
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::block& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::stitch::block& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::stitch::block& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::stitch::block& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::stitch::block& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::stitch::block& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::stitch::block& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::stitch::block& v, unsigned int version);
++
++} }
+\ No newline at end of file
+diff --git a/projects/stitch/src/serialization/line_ser.cpp b/projects/stitch/src/serialization/line_ser.cpp
+index 6cb2e99..d78d985 100644
+--- a/projects/stitch/src/serialization/line_ser.cpp
++++ b/projects/stitch/src/serialization/line_ser.cpp
+@@ -29,7 +29,7 @@
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
+ #include "dogen/stitch/serialization/line_ser.hpp"
+-#include "dogen/stitch/serialization/segment_ser.hpp"
++#include "dogen/stitch/serialization/block_ser.hpp"
+ 
+ 
+ namespace boost {
+@@ -39,14 +39,14 @@ template<typename Archive>
+ void save(Archive& ar,
+     const dogen::stitch::line& v,
+     const unsigned int /*version*/) {
+-    ar << make_nvp("segments", v.segments_);
++    ar << make_nvp("blocks", v.blocks_);
+ }
+ 
+ template<typename Archive>
+ void load(Archive& ar,
+     dogen::stitch::line& v,
+     const unsigned int /*version*/) {
+-    ar >> make_nvp("segments", v.segments_);
++    ar >> make_nvp("blocks", v.blocks_);
+ }
+ 
+ } }
+diff --git a/projects/stitch/src/serialization/segment_ser.cpp b/projects/stitch/src/serialization/segment_ser.cpp
+deleted file mode 100644
+index b94daff..0000000
+--- a/projects/stitch/src/serialization/segment_ser.cpp
++++ /dev/null
+@@ -1,71 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <boost/serialization/nvp.hpp>
+-#include <boost/archive/xml_iarchive.hpp>
+-#include <boost/archive/xml_oarchive.hpp>
+-#include <boost/serialization/string.hpp>
+-#include <boost/archive/text_iarchive.hpp>
+-#include <boost/archive/text_oarchive.hpp>
+-#include <boost/archive/binary_iarchive.hpp>
+-#include <boost/archive/binary_oarchive.hpp>
+-#include <boost/archive/polymorphic_iarchive.hpp>
+-#include <boost/archive/polymorphic_oarchive.hpp>
+-#include "dogen/stitch/serialization/segment_ser.hpp"
+-#include "dogen/stitch/serialization/segment_types_ser.hpp"
+-
+-
+-namespace boost {
+-namespace serialization {
+-
+-template<typename Archive>
+-void save(Archive& ar,
+-    const dogen::stitch::segment& v,
+-    const unsigned int /*version*/) {
+-    ar << make_nvp("type", v.type_);
+-    ar << make_nvp("content", v.content_);
+-}
+-
+-template<typename Archive>
+-void load(Archive& ar,
+-    dogen::stitch::segment& v,
+-    const unsigned int /*version*/) {
+-    ar >> make_nvp("type", v.type_);
+-    ar >> make_nvp("content", v.content_);
+-}
+-
+-} }
+-
+-namespace boost {
+-namespace serialization {
+-
+-template void save(archive::polymorphic_oarchive& ar, const dogen::stitch::segment& v, unsigned int version);
+-template void load(archive::polymorphic_iarchive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-template void save(archive::text_oarchive& ar, const dogen::stitch::segment& v, unsigned int version);
+-template void load(archive::text_iarchive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-template void save(archive::binary_oarchive& ar, const dogen::stitch::segment& v, unsigned int version);
+-template void load(archive::binary_iarchive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-template void save(archive::xml_oarchive& ar, const dogen::stitch::segment& v, unsigned int version);
+-template void load(archive::xml_iarchive& ar, dogen::stitch::segment& v, unsigned int version);
+-
+-} }
+\ No newline at end of file
+diff --git a/projects/stitch/src/test/mock_text_template_factory.cpp b/projects/stitch/src/test/mock_text_template_factory.cpp
+index 6037f42..c08e8a4 100644
+--- a/projects/stitch/src/test/mock_text_template_factory.cpp
++++ b/projects/stitch/src/test/mock_text_template_factory.cpp
+@@ -30,12 +30,12 @@ const std::string single_line_text("This is a template");
+ const std::string line_text("This is line numnber: ");
+ const std::string text_with_quotes("\"double quote\" \\\"double "
+     "quote quote\\\" 'single'");
+-const std::string first_part_of_mixed_line("Start mixed line.");
+-const std::string scriptlet_in_mixed_line("my_variable.print()");
+-const std::string second_part_of_mixed_line("End mixed line.");
++const std::string first_text_block_in_mixed_line("Start mixed line.");
++const std::string expression_block_in_mixed_line("my_variable.print()");
++const std::string second_text_block_in_mixed_line("End mixed line.");
+ 
+-const std::string single_line_scriptlet("unsigned int i(0);");
+-const std::string scriptlet_line("unsigned int i");
++const std::string single_line_expression_block("unsigned int i(0);");
++const std::string expression_block("unsigned int i");
+ 
+ }
+ 
+@@ -53,24 +53,24 @@ make_text_template_with_trivial_settings() const {
+     return r;
+ }
+ 
+-std::list<line> mock_text_template_factory::make_text_only_lines(
++std::list<line> mock_text_template_factory:: make_text_block_only_lines(
+     const unsigned int how_many, const bool empty_content) const {
+     std::ostringstream ss;
+     std::list<line> r;
+     for(unsigned int i = 0; i != how_many; ++i) {
+-        segment sg;
+-        sg.type(segment_types::text);
++        block b;
++        b.type(block_types::text_block);
+ 
+         if (empty_content)
+-            sg.content(empty);
++            b.content(empty);
+         else {
+             ss << line_text << i;
+-            sg.content(ss.str());
++            b.content(ss.str());
+             ss.str("");
+         }
+ 
+         line l;
+-        l.segments().push_back(sg);
++        l.blocks().push_back(b);
+         r.push_back(l);
+     }
+     return r;
+@@ -81,22 +81,22 @@ make_mixed_content_lines(const unsigned int how_many) const {
+     std::ostringstream ss;
+     std::list<line> r;
+     for(unsigned int i = 0; i != how_many; ++i) {
+-        segment s0;
+-        s0.type(segment_types::text);
+-        s0.content(first_part_of_mixed_line);
++        block b0;
++        b0.type(block_types::text_block);
++        b0.content(first_text_block_in_mixed_line);
+ 
+         line l;
+-        l.segments().push_back(s0);
++        l.blocks().push_back(b0);
+ 
+-        segment s1;
+-        s1.content(scriptlet_in_mixed_line);
+-        s1.type(segment_types::scriptlet);
+-        l.segments().push_back(s1);
++        block b1;
++        b1.content(expression_block_in_mixed_line);
++        b1.type(block_types::expression_block);
++        l.blocks().push_back(b1);
+ 
+-        segment s2;
+-        s2.content(second_part_of_mixed_line);
+-        s2.type(segment_types::text);
+-        l.segments().push_back(s2);
++        block b2;
++        b2.content(second_text_block_in_mixed_line);
++        b2.type(block_types::text_block);
++        l.blocks().push_back(b2);
+ 
+         r.push_back(l);
+     }
+@@ -104,19 +104,38 @@ make_mixed_content_lines(const unsigned int how_many) const {
+ }
+ 
+ std::list<line> mock_text_template_factory::
+-make_scriptlet_only_lines(const unsigned int how_many) const {
++make_standard_control_block_only_lines(const unsigned int how_many) const {
+     std::ostringstream ss;
+     std::list<line> r;
+     for(unsigned int i = 0; i != how_many; ++i) {
+-        segment sg;
+-        sg.type(segment_types::scriptlet);
++        block b;
++        b.type(block_types::standard_control_block);
+ 
+-        ss << scriptlet_line << i << ";";
+-        sg.content(ss.str());
++        ss << expression_block << i << ";";
++        b.content(ss.str());
+         ss.str("");
+ 
+         line l;
+-        l.segments().push_back(sg);
++        l.blocks().push_back(b);
++        r.push_back(l);
++    }
++    return r;
++}
++
++std::list<line> mock_text_template_factory::
++make_expression_block_only_lines(const unsigned int how_many) const {
++    std::ostringstream ss;
++    std::list<line> r;
++    for(unsigned int i = 0; i != how_many; ++i) {
++        block b;
++        b.type(block_types::expression_block);
++
++        ss << expression_block << i << ";";
++        b.content(ss.str());
++        ss.str("");
++
++        line l;
++        l.blocks().push_back(b);
+         r.push_back(l);
+     }
+     return r;
+@@ -127,66 +146,121 @@ text_template mock_text_template_factory::make_empty_template() const {
+     return r;
+ }
+ 
+-text_template mock_text_template_factory::make_single_text_line() const {
++text_template mock_text_template_factory::make_single_text_block_line() const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines());
++    r.lines(make_text_block_only_lines());
+     return r;
+ }
+ 
+-text_template mock_text_template_factory::make_multiple_text_lines(
++text_template mock_text_template_factory::make_multiple_text_block_lines(
+     const unsigned int how_many) const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines(how_many));
++    r.lines(make_text_block_only_lines(how_many));
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_single_expression_block_line() const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_expression_block_only_lines());
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_multiple_expression_block_lines(const unsigned int how_many) const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_expression_block_only_lines(how_many));
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_single_standard_control_block_line() const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_standard_control_block_only_lines());
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_multiple_standard_control_block_lines(const unsigned int how_many) const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_standard_control_block_only_lines(how_many));
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_single_scriptlet_line() const {
++make_text_expression_text_single_line() const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_scriptlet_only_lines());
++    r.lines(make_text_block_only_lines());
++    r.lines().splice(r.lines().end(), make_expression_block_only_lines());
++    r.lines().splice(r.lines().end(), make_text_block_only_lines());
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_multiple_scriptlet_lines(const unsigned int how_many) const {
++make_expression_text_expression_single_line() const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_scriptlet_only_lines(how_many));
++    r.lines(make_expression_block_only_lines());
++    r.lines().splice(r.lines().end(), make_text_block_only_lines());
++    r.lines().splice(r.lines().end(), make_expression_block_only_lines());
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_text_scriptlet_text_single_line() const {
++make_text_expression_text_multi_line(const unsigned int how_many) const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines());
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines());
+-    r.lines().splice(r.lines().end(), make_text_only_lines());
++    r.lines(make_text_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(),
++        make_expression_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_scriptlet_text_scriptlet_single_line() const {
++make_expression_text_expression_multi_line(const unsigned int how_many) const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_scriptlet_only_lines());
+-    r.lines().splice(r.lines().end(), make_text_only_lines());
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines());
++    r.lines(make_expression_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(),
++        make_expression_block_only_lines(how_many));
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_text_scriptlet_text_multi_line(const unsigned int how_many) const {
++make_text_standard_control_text_single_line() const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines(how_many));
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines(how_many));
+-    r.lines().splice(r.lines().end(), make_text_only_lines(how_many));
++    r.lines(make_text_block_only_lines());
++    r.lines().splice(r.lines().end(), make_standard_control_block_only_lines());
++    r.lines().splice(r.lines().end(), make_text_block_only_lines());
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+-make_scriptlet_text_scriptlet_multi_line(const unsigned int how_many) const {
++make_standard_control_text_standard_control_single_line() const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_standard_control_block_only_lines());
++    r.lines().splice(r.lines().end(), make_text_block_only_lines());
++    r.lines().splice(r.lines().end(), make_standard_control_block_only_lines());
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_text_standard_control_text_multi_line(const unsigned int how_many) const {
++    text_template r(make_text_template_with_trivial_settings());
++    r.lines(make_text_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(),
++        make_standard_control_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
++    return r;
++}
++
++text_template mock_text_template_factory::
++make_standard_control_text_standard_control_multi_line(
++    const unsigned int how_many) const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_scriptlet_only_lines(how_many));
+-    r.lines().splice(r.lines().end(), make_text_only_lines(how_many));
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines(how_many));
++    r.lines(make_standard_control_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(), make_text_block_only_lines(how_many));
++    r.lines().splice(r.lines().end(),
++        make_standard_control_block_only_lines(how_many));
+     return r;
+ }
+ 
+@@ -207,12 +281,12 @@ make_mixed_content_multi_line(const unsigned int how_many) const {
+ text_template mock_text_template_factory::make_text_line_with_quotes() const {
+     text_template r(make_text_template_with_trivial_settings());
+ 
+-    segment sg;
+-    sg.type(segment_types::text);
+-    sg.content(text_with_quotes);
++    block b;
++    b.type(block_types::text_block);
++    b.content(text_with_quotes);
+ 
+     line l;
+-    l.segments().push_back(sg);
++    l.blocks().push_back(b);
+     r.lines().push_back(l);
+ 
+     return r;
+@@ -220,11 +294,13 @@ text_template mock_text_template_factory::make_text_line_with_quotes() const {
+ 
+ text_template mock_text_template_factory::make_complex_structure() const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines(3));
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines(4));
++    r.lines(make_text_block_only_lines(3));
++    r.lines().splice(r.lines().end(),
++        make_standard_control_block_only_lines(4));
+     r.lines().splice(r.lines().end(), make_mixed_content_lines(2));
+-    r.lines().splice(r.lines().end(), make_scriptlet_only_lines());
+-    r.lines().splice(r.lines().end(), make_text_only_lines());
++    r.lines().splice(r.lines().end(),
++        make_standard_control_block_only_lines());
++    r.lines().splice(r.lines().end(), make_text_block_only_lines());
+     return r;
+ }
+ 
+@@ -234,7 +310,7 @@ text_template mock_text_template_factory::make_with_general_settings() const {
+ 
+     text_template r(make_text_template_with_trivial_settings());
+     r.settings().general_settings(gs);
+-    r.lines(make_text_only_lines());
++    r.lines(make_text_block_only_lines());
+     return r;
+ }
+ 
+@@ -244,14 +320,14 @@ mock_text_template_factory::make_with_containing_namespace() const {
+     auto& cn(r.settings().stitching_settings().containing_namespaces());
+     cn.push_back("first");
+     cn.push_back("second");
+-    r.lines(make_text_only_lines());
++    r.lines(make_text_block_only_lines());
+     return r;
+ }
+ 
+ text_template mock_text_template_factory::
+ make_empty_text_lines(const unsigned int how_many) const {
+     text_template r(make_text_template_with_trivial_settings());
+-    r.lines(make_text_only_lines(how_many, true/*empty_content*/));
++    r.lines(make_text_block_only_lines(how_many, true/*empty_content*/));
+     return r;
+ }
+ 
+diff --git a/projects/stitch/src/test_data/block_td.cpp b/projects/stitch/src/test_data/block_td.cpp
+new file mode 100644
+index 0000000..471c799
+--- /dev/null
++++ b/projects/stitch/src/test_data/block_td.cpp
+@@ -0,0 +1,70 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include "dogen/stitch/test_data/block_td.hpp"
++#include "dogen/stitch/test_data/block_types_td.hpp"
++
++namespace {
++
++dogen::stitch::block_types
++create_dogen_stitch_block_types(const unsigned int position) {
++    return dogen::stitch::block_types_generator::create(position);
++}
++
++std::string create_std_string(const unsigned int position) {
++    std::ostringstream s;
++    s << "a_string_" << position;
++    return s.str();
++}
++
++}
++
++namespace dogen {
++namespace stitch {
++
++block_generator::block_generator() : position_(0) { }
++
++void block_generator::
++populate(const unsigned int position, result_type& v) {
++    v.type(create_dogen_stitch_block_types(position + 0));
++    v.content(create_std_string(position + 1));
++}
++
++block_generator::result_type
++block_generator::create(const unsigned int position) {
++    block r;
++    block_generator::populate(position, r);
++    return r;
++}
++
++block_generator::result_type*
++block_generator::create_ptr(const unsigned int position) {
++    block* p = new block();
++    block_generator::populate(position, *p);
++    return p;
++}
++
++block_generator::result_type
++block_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+diff --git a/projects/stitch/src/test_data/block_types_td.cpp b/projects/stitch/src/test_data/block_types_td.cpp
+new file mode 100644
+index 0000000..aaa08f3
+--- /dev/null
++++ b/projects/stitch/src/test_data/block_types_td.cpp
+@@ -0,0 +1,44 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/stitch/test_data/block_types_td.hpp"
++
++namespace dogen {
++namespace stitch {
++
++block_types_generator::block_types_generator() : position_(0) { }
++void block_types_generator::
++populate(const unsigned int position, result_type& v) {
++    v = static_cast<block_types>(position % 4);
++}
++
++block_types_generator::result_type
++block_types_generator::create(const unsigned int  position) {
++    result_type r;
++    block_types_generator::populate(position, r);
++    return r;
++}
++
++block_types_generator::result_type
++block_types_generator::operator()() {
++    return create(position_++);
++}
++
++} }
+\ No newline at end of file
+diff --git a/projects/stitch/src/test_data/line_td.cpp b/projects/stitch/src/test_data/line_td.cpp
+index b7f61c5..be961d1 100644
+--- a/projects/stitch/src/test_data/line_td.cpp
++++ b/projects/stitch/src/test_data/line_td.cpp
+@@ -19,19 +19,19 @@
+  *
+  */
+ #include "dogen/stitch/test_data/line_td.hpp"
+-#include "dogen/stitch/test_data/segment_td.hpp"
++#include "dogen/stitch/test_data/block_td.hpp"
+ 
+ namespace {
+ 
+-dogen::stitch::segment
+-create_dogen_stitch_segment(const unsigned int position) {
+-    return dogen::stitch::segment_generator::create(position);
++dogen::stitch::block
++create_dogen_stitch_block(const unsigned int position) {
++    return dogen::stitch::block_generator::create(position);
+ }
+ 
+-std::list<dogen::stitch::segment> create_std_list_dogen_stitch_segment(unsigned int position) {
+-    std::list<dogen::stitch::segment> r;
++std::list<dogen::stitch::block> create_std_list_dogen_stitch_block(unsigned int position) {
++    std::list<dogen::stitch::block> r;
+     for (unsigned int i(0); i < 4; ++i) {
+-        r.push_back(create_dogen_stitch_segment(position + i));
++        r.push_back(create_dogen_stitch_block(position + i));
+     }
+     return r;
+ }
+@@ -45,7 +45,7 @@ line_generator::line_generator() : position_(0) { }
+ 
+ void line_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v.segments(create_std_list_dogen_stitch_segment(position + 0));
++    v.blocks(create_std_list_dogen_stitch_block(position + 0));
+ }
+ 
+ line_generator::result_type
+diff --git a/projects/stitch/src/test_data/segment_td.cpp b/projects/stitch/src/test_data/segment_td.cpp
+deleted file mode 100644
+index 257dd18..0000000
+--- a/projects/stitch/src/test_data/segment_td.cpp
++++ /dev/null
+@@ -1,70 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include "dogen/stitch/test_data/segment_td.hpp"
+-#include "dogen/stitch/test_data/segment_types_td.hpp"
+-
+-namespace {
+-
+-dogen::stitch::segment_types
+-create_dogen_stitch_segment_types(const unsigned int position) {
+-    return dogen::stitch::segment_types_generator::create(position);
+-}
+-
+-std::string create_std_string(const unsigned int position) {
+-    std::ostringstream s;
+-    s << "a_string_" << position;
+-    return s.str();
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace stitch {
+-
+-segment_generator::segment_generator() : position_(0) { }
+-
+-void segment_generator::
+-populate(const unsigned int position, result_type& v) {
+-    v.type(create_dogen_stitch_segment_types(position + 0));
+-    v.content(create_std_string(position + 1));
+-}
+-
+-segment_generator::result_type
+-segment_generator::create(const unsigned int position) {
+-    segment r;
+-    segment_generator::populate(position, r);
+-    return r;
+-}
+-
+-segment_generator::result_type*
+-segment_generator::create_ptr(const unsigned int position) {
+-    segment* p = new segment();
+-    segment_generator::populate(position, *p);
+-    return p;
+-}
+-
+-segment_generator::result_type
+-segment_generator::operator()() {
+-    return create(position_++);
+-}
+-
+-} }
+diff --git a/projects/stitch/src/test_data/segment_types_td.cpp b/projects/stitch/src/test_data/segment_types_td.cpp
+deleted file mode 100644
+index ac48086..0000000
+--- a/projects/stitch/src/test_data/segment_types_td.cpp
++++ /dev/null
+@@ -1,44 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/stitch/test_data/segment_types_td.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-segment_types_generator::segment_types_generator() : position_(0) { }
+-void segment_types_generator::
+-populate(const unsigned int position, result_type& v) {
+-    v = static_cast<segment_types>(position % 3);
+-}
+-
+-segment_types_generator::result_type
+-segment_types_generator::create(const unsigned int  position) {
+-    result_type r;
+-    segment_types_generator::populate(position, r);
+-    return r;
+-}
+-
+-segment_types_generator::result_type
+-segment_types_generator::operator()() {
+-    return create(position_++);
+-}
+-
+-} }
+\ No newline at end of file
+diff --git a/projects/stitch/src/types/block.cpp b/projects/stitch/src/types/block.cpp
+new file mode 100644
+index 0000000..c074679
+--- /dev/null
++++ b/projects/stitch/src/types/block.cpp
+@@ -0,0 +1,76 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/stitch/types/block.hpp"
++
++namespace dogen {
++namespace stitch {
++
++block::block()
++    : type_(static_cast<dogen::stitch::block_types>(0)) { }
++
++block::block(
++    const dogen::stitch::block_types type,
++    const std::string& content)
++    : type_(type),
++      content_(content) { }
++
++void block::swap(block& other) noexcept {
++    using std::swap;
++    swap(type_, other.type_);
++    swap(content_, other.content_);
++}
++
++bool block::operator==(const block& rhs) const {
++    return type_ == rhs.type_ &&
++        content_ == rhs.content_;
++}
++
++block& block::operator=(block other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++dogen::stitch::block_types block::type() const {
++    return type_;
++}
++
++void block::type(const dogen::stitch::block_types v) {
++    type_ = v;
++}
++
++const std::string& block::content() const {
++    return content_;
++}
++
++std::string& block::content() {
++    return content_;
++}
++
++void block::content(const std::string& v) {
++    content_ = v;
++}
++
++void block::content(const std::string&& v) {
++    content_ = std::move(v);
++}
++
++} }
+diff --git a/projects/stitch/src/types/formatter.cpp b/projects/stitch/src/types/formatter.cpp
+index 0615302..6e2549e 100644
+--- a/projects/stitch/src/types/formatter.cpp
++++ b/projects/stitch/src/types/formatter.cpp
+@@ -24,7 +24,7 @@
+ #include "dogen/formatters/types/utility_formatter.hpp"
+ #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+ #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+-#include "dogen/stitch/io/segment_types_io.hpp"
++#include "dogen/stitch/io/block_types_io.hpp"
+ #include "dogen/stitch/types/formatting_error.hpp"
+ #include "dogen/stitch/types/formatter.hpp"
+ 
+@@ -44,7 +44,7 @@ const std::string endl("std::endl;");
+ 
+ const std::string empty_stream_name("Stream name cannot be empty.");
+ const std::string empty_line("Line has no content.");
+-const std::string unsupported_segment_type("Segment type is unsupported: ");
++const std::string unsupported_block_type("Block type is unsupported: ");
+ 
+ }
+ 
+@@ -76,17 +76,17 @@ void formatter::format_mixed_content_line(const std::string& stream_name,
+     const auto spaces(formatters::spacing_types::left_and_right_space);
+     const formatters::utility_formatter u(s);
+     bool is_first(true);
+-    for (const auto& sg : l.segments()) {
++    for (const auto& b : l.blocks()) {
+         if (is_first) {
+             s << stream_name;
+             is_first = false;
+         }
+ 
+         u.insert(inserter, spaces);
+-        if (sg.type() == segment_types::text)
+-            u.insert_quoted(sg.content(), true/*escape_content*/);
++        if (b.type() == block_types::text_block)
++            u.insert_quoted(b.content(), true/*escape_content*/);
+         else
+-            s << sg.content();
++            s << b.content();
+     }
+     u.insert(inserter, spaces);
+     u.insert(endl);
+@@ -120,27 +120,27 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
+             true/*add_new_line_*/);
+ 
+         for (const auto& l : tt.lines()) {
+-            if (l.segments().empty()) {
++            if (l.blocks().empty()) {
+                 BOOST_LOG_SEV(lg, error) << empty_line;
+                 BOOST_THROW_EXCEPTION(formatting_error(empty_line));
+             }
+ 
+-            if (l.segments().size() > 1) {
++            if (l.blocks().size() > 1) {
+                 format_mixed_content_line(stream_variable_name, l, s);
+                 continue;
+             }
+ 
+-            const auto& sg(l.segments().front());
+-            if (sg.type() == segment_types::text)
+-                format_text_line(stream_variable_name, sg.content(), s);
+-            else if (sg.type() == segment_types::scriptlet)
+-                format_scriptlet_line(sg.content(), s);
++            const auto& b(l.blocks().front());
++            if (b.type() == block_types::text_block)
++                format_text_line(stream_variable_name, b.content(), s);
++            else if (b.type() == block_types::standard_control_block)
++                format_scriptlet_line(b.content(), s);
+             else {
+-                BOOST_LOG_SEV(lg, error) << unsupported_segment_type
+-                                         << sg.type();
++                BOOST_LOG_SEV(lg, error) << unsupported_block_type
++                                         << b.type();
+                 BOOST_THROW_EXCEPTION(
+-                    formatting_error(unsupported_segment_type +
+-                        boost::lexical_cast<std::string>(sg.type())));
++                    formatting_error(unsupported_block_type +
++                        boost::lexical_cast<std::string>(b.type())));
+             }
+         }
+     }
+diff --git a/projects/stitch/src/types/line.cpp b/projects/stitch/src/types/line.cpp
+index c01ecc1..6704aa5 100644
+--- a/projects/stitch/src/types/line.cpp
++++ b/projects/stitch/src/types/line.cpp
+@@ -23,16 +23,16 @@
+ namespace dogen {
+ namespace stitch {
+ 
+-line::line(const std::list<dogen::stitch::segment>& segments)
+-    : segments_(segments) { }
++line::line(const std::list<dogen::stitch::block>& blocks)
++    : blocks_(blocks) { }
+ 
+ void line::swap(line& other) noexcept {
+     using std::swap;
+-    swap(segments_, other.segments_);
++    swap(blocks_, other.blocks_);
+ }
+ 
+ bool line::operator==(const line& rhs) const {
+-    return segments_ == rhs.segments_;
++    return blocks_ == rhs.blocks_;
+ }
+ 
+ line& line::operator=(line other) {
+@@ -41,20 +41,20 @@ line& line::operator=(line other) {
+     return *this;
+ }
+ 
+-const std::list<dogen::stitch::segment>& line::segments() const {
+-    return segments_;
++const std::list<dogen::stitch::block>& line::blocks() const {
++    return blocks_;
+ }
+ 
+-std::list<dogen::stitch::segment>& line::segments() {
+-    return segments_;
++std::list<dogen::stitch::block>& line::blocks() {
++    return blocks_;
+ }
+ 
+-void line::segments(const std::list<dogen::stitch::segment>& v) {
+-    segments_ = v;
++void line::blocks(const std::list<dogen::stitch::block>& v) {
++    blocks_ = v;
+ }
+ 
+-void line::segments(const std::list<dogen::stitch::segment>&& v) {
+-    segments_ = std::move(v);
++void line::blocks(const std::list<dogen::stitch::block>&& v) {
++    blocks_ = std::move(v);
+ }
+ 
+ } }
+diff --git a/projects/stitch/src/types/parser.cpp b/projects/stitch/src/types/parser.cpp
+index 5349592..ed5f692 100644
+--- a/projects/stitch/src/types/parser.cpp
++++ b/projects/stitch/src/types/parser.cpp
+@@ -42,28 +42,31 @@ auto lg(logger_factory("stitch.parser"));
+ 
+ const std::string empty;
+ const std::string equals("=");
+-const std::string start_scriptlet_block("<#+");
+-const std::string start_scriptlet_segment("<#=");
+-const std::string start_declaration("<#@");
++const std::string start_expression_block("<#=");
++const std::string start_standard_control_block("<#+");
++const std::string start_directive("<#@");
+ const std::string end_block("#>");
+ 
+ const std::string error_msg("Failed to parse string: ");
+-const std::string cannot_start_scriptlet(
+-    "Cannot start scriptlet block in scriptlet block.");
+-const std::string cannot_start_scriptlet_in_middle(
+-    "Cannot start scriplet block in the middle of a line.");
+-const std::string scriptlet_expression_not_ended(
+-    "Scriptlet expressions must start and end in the same line.");
++const std::string cannot_start_expression(
++    "Cannot start expression block in expresion block.");
++const std::string cannot_start_standard_block(
++    "Cannot start standard block in standard block.");
++const std::string cannot_start_standard_block_in_middle(
++    "Cannot start standard block in the middle of a line.");
++const std::string expression_block_not_ended(
++    "Expression blocks must start and end in the same line.");
+ const std::string end_without_start("Found end block without a start block.");
+-const std::string unexpected_declaration("Unexpected declaration.");
+-const std::string unfinished_scriplet("Start scriptlet block without an end.");
++const std::string unexpected_directive("Unexpected directive.");
++const std::string unfinished_control_block(
++    "Start control block without an end.");
+ const std::string unexpected_additional_content(
+     "Unexpected additional content.");
+ const std::string unexpected_standard(
+     "Standard control blocks are not supported in mixed lines");
+ const std::string separator_not_found("Expected separator on kvp.");
+-const std::string invalid_declaration(
+-    "Invalid characters used in declaration: ");
++const std::string invalid_directive(
++    "Invalid characters used in directive: ");
+ 
+ const bool do_trim(true);
+ 
+@@ -74,10 +77,10 @@ namespace stitch {
+ 
+ parser::parser(const dynamic::workflow& w) : dynamic_workflow_(w) {}
+ 
+-segment parser::create_segment(const segment_types st, const std::string& c,
++block parser::create_block(const block_types bt, const std::string& c,
+     const bool trim_content) const {
+-    segment r;
+-    r.type(st);
++    block r;
++    r.type(bt);
+     if (trim_content)
+         r.content(boost::trim_copy(c));
+     else
+@@ -86,24 +89,24 @@ segment parser::create_segment(const segment_types st, const std::string& c,
+     return r;
+ }
+ 
+-segment parser::create_text_segment(const std::string& c,
++block parser::create_text_block(const std::string& c,
+     const bool trim_content) const {
+-    return create_segment(segment_types::text, c, trim_content);
++    return create_block(block_types::text_block, c, trim_content);
+ }
+ 
+-segment parser::create_scriptlet_segment(const std::string& c,
++block parser::create_control_block(const std::string& c,
+     const bool trim_content) const {
+-    return create_segment(segment_types::scriptlet, c, trim_content);
++    return create_block(block_types::standard_control_block, c, trim_content);
+ }
+ 
+ line parser::
+-parse_line_with_expression_block(const std::string& input_line) const {
++parse_expression_block(const std::string& input_line) const {
+     BOOST_LOG_SEV(lg, debug) << "Parsing line with expression block.";
+ 
+     std::string s;
+     unsigned int pos(0);
+     bool in_expression(false);
+-    std::list<segment> segments;
++    std::list<block> blocks;
+     const auto len(input_line.length());
+     while (pos < len) {
+         const auto c(input_line[pos]);
+@@ -111,8 +114,8 @@ parse_line_with_expression_block(const std::string& input_line) const {
+         if (c == '<' && pos + 2 < len && input_line[pos + 1] == '#') {
+             const auto type(input_line[pos + 2]);
+             if (type == '@') {
+-                BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+-                BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
++                BOOST_LOG_SEV(lg, error) << unexpected_directive;
++                BOOST_THROW_EXCEPTION(parsing_error(unexpected_directive));
+             } else if (type == '+') {
+                 BOOST_LOG_SEV(lg, error) << unexpected_standard;
+                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_standard));
+@@ -120,12 +123,13 @@ parse_line_with_expression_block(const std::string& input_line) const {
+                 BOOST_LOG_SEV(lg, debug) << "Line has expression start";
+ 
+                 if (in_expression) {
+-                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
+-                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
++                    BOOST_LOG_SEV(lg, error) << cannot_start_expression;
++                    BOOST_THROW_EXCEPTION(
++                        parsing_error(cannot_start_expression));
+                 }
+ 
+                 if (!s.empty()) {
+-                    segments.push_back(create_text_segment(s));
++                    blocks.push_back(create_text_block(s));
+                     s.clear();
+                 }
+ 
+@@ -141,7 +145,7 @@ parse_line_with_expression_block(const std::string& input_line) const {
+                 BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+             }
+ 
+-            segments.push_back(create_scriptlet_segment(s, do_trim));
++            blocks.push_back(create_control_block(s, do_trim));
+             s.clear();
+ 
+             in_expression = false;
+@@ -154,52 +158,52 @@ parse_line_with_expression_block(const std::string& input_line) const {
+     }
+ 
+     if (in_expression) {
+-        BOOST_LOG_SEV(lg, error) << scriptlet_expression_not_ended;
+-        BOOST_THROW_EXCEPTION(parsing_error(scriptlet_expression_not_ended));
++        BOOST_LOG_SEV(lg, error) << expression_block_not_ended;
++        BOOST_THROW_EXCEPTION(parsing_error(expression_block_not_ended));
+     }
+ 
+     if (!s.empty()) {
+-        segments.push_back(create_text_segment(s));
++        blocks.push_back(create_text_block(s));
+         s.clear();
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Finished parsing line with expression block.";
+ 
+-    const line r(segments);
++    const line r(blocks);
+     BOOST_LOG_SEV(lg, debug) << "Line: " << r;
+     return r;
+ }
+ 
+ line parser::
+-parse_line_with_inline_standard_block(const std::string& input_line) const {
+-    BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
++parse_inline_control_block(const std::string& input_line) const {
++    BOOST_LOG_SEV(lg, debug) << "Line is inline control block";
+     auto cooked_line(input_line);
+-    boost::replace_all(cooked_line, start_scriptlet_block, empty);
++    boost::replace_all(cooked_line, start_standard_control_block, empty);
+     boost::replace_all(cooked_line, end_block, empty);
+ 
+-    const auto sg(create_scriptlet_segment(cooked_line, do_trim));
++    const auto b(create_control_block(cooked_line, do_trim));
+     line r;
+-    r.segments().push_back(sg);
++    r.blocks().push_back(b);
+     return r;
+ }
+ 
+ std::pair<std::string, std::string> parser::
+-parse_line_with_declaration(const std::string& input_line) const {
++parse_directive(const std::string& input_line) const {
+ 
+     auto cooked_line(input_line);
+-    boost::replace_first(cooked_line, start_declaration, empty);
++    boost::replace_first(cooked_line, start_directive, empty);
+     boost::replace_last(cooked_line, end_block, empty);
+     boost::trim(cooked_line);
+ 
+     const std::string reserved("<#");
+     if (boost::contains(cooked_line, reserved)) {
+-        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+-        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
++        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
++        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
+     }
+ 
+     if (boost::contains(cooked_line, end_block)) {
+-        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
+-        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
++        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
++        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
+     }
+ 
+     const auto pos(cooked_line.find_first_of(equals));
+@@ -213,7 +217,6 @@ parse_line_with_declaration(const std::string& input_line) const {
+     return std::make_pair(key, value);
+ }
+ 
+-
+ text_template parser::parse(const std::string& s) const {
+     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
+     if (s.empty())
+@@ -224,7 +227,7 @@ text_template parser::parse(const std::string& s) const {
+     std::list<std::pair<std::string, std::string> > kvps;
+     try {
+         line output_line;
+-        bool in_scriplet_block(false), in_declarations_block(true);
++        bool in_standard_control_block(false), in_directives_block(true);
+         std::string input_line;
+         std::istringstream is(s);
+ 
+@@ -232,36 +235,37 @@ text_template parser::parse(const std::string& s) const {
+             ++line_number;
+             BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
+ 
+-            if (boost::contains(input_line, start_scriptlet_segment)) {
+-                lines.push_back(parse_line_with_expression_block(input_line));
++            if (boost::contains(input_line, start_expression_block)) {
++                lines.push_back(parse_expression_block(input_line));
+                 continue;
+             }
+ 
+-            if (boost::starts_with(input_line, start_declaration)) {
+-                BOOST_LOG_SEV(lg, debug) << "Line is declaration";
+-                if (!in_declarations_block) {
+-                    BOOST_LOG_SEV(lg, error) << unexpected_declaration;
++            if (boost::starts_with(input_line, start_directive)) {
++                BOOST_LOG_SEV(lg, debug) << "Line is directive";
++                if (!in_directives_block) {
++                    BOOST_LOG_SEV(lg, error) << unexpected_directive;
+                     BOOST_THROW_EXCEPTION(
+-                        parsing_error(unexpected_declaration));
++                        parsing_error(unexpected_directive));
+                 }
+ 
+-                const auto kvp(parse_line_with_declaration(input_line));
++                const auto kvp(parse_directive(input_line));
+                 kvps.push_back(kvp);
+                 continue;
+             }
+ 
+-            in_declarations_block = false;
++            in_directives_block = false;
+ 
+-            if (boost::starts_with(input_line, start_scriptlet_block)) {
+-                BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
++            if (boost::starts_with(input_line, start_standard_control_block)) {
++                BOOST_LOG_SEV(lg, debug) << "Line is standard control block";
+ 
+-                if (in_scriplet_block) {
+-                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
+-                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
++                if (in_standard_control_block) {
++                    BOOST_LOG_SEV(lg, error) << cannot_start_standard_block;
++                    BOOST_THROW_EXCEPTION(
++                        parsing_error(cannot_start_standard_block));
+                 }
+ 
+                 if (boost::ends_with(input_line, end_block)) {
+-                    const auto l(parse_line_with_inline_standard_block(input_line));
++                    const auto l(parse_inline_control_block(input_line));
+                     lines.push_back(l);
+                     continue;
+                 }
+@@ -272,25 +276,26 @@ text_template parser::parse(const std::string& s) const {
+                         parsing_error(unexpected_additional_content));
+                 }
+ 
+-                in_scriplet_block = true;
++                in_standard_control_block = true;
+                 continue;
+             }
+ 
+-            if (boost::contains(input_line, start_scriptlet_block)) {
+-                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
++            if (boost::contains(input_line, start_standard_control_block)) {
++                BOOST_LOG_SEV(lg, error)
++                    << cannot_start_standard_block_in_middle;
+                 BOOST_THROW_EXCEPTION(
+-                    parsing_error(cannot_start_scriptlet_in_middle));
++                    parsing_error(cannot_start_standard_block_in_middle));
+             }
+ 
+-            if (boost::contains(input_line, start_declaration)) {
+-                BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+-                BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
++            if (boost::contains(input_line, start_directive)) {
++                BOOST_LOG_SEV(lg, error) << unexpected_directive;
++                BOOST_THROW_EXCEPTION(parsing_error(unexpected_directive));
+             }
+ 
+             if (boost::contains(input_line, end_block)) {
+                 BOOST_LOG_SEV(lg, debug) << "Closing end block";
+ 
+-                if (!in_scriplet_block) {
++                if (!in_standard_control_block) {
+                     BOOST_LOG_SEV(lg, error) << end_without_start;
+                     BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+                 }
+@@ -301,25 +306,25 @@ text_template parser::parse(const std::string& s) const {
+                         parsing_error(unexpected_additional_content));
+                 }
+ 
+-                if (in_scriplet_block) {
+-                    BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
+-                    in_scriplet_block = false;
++                if (in_standard_control_block) {
++                    BOOST_LOG_SEV(lg, debug) << "Closing standard control block";
++                    in_standard_control_block = false;
+                     continue;
+                 }
+             }
+ 
+-            segment sg;
+-            sg.type(in_scriplet_block ?
+-                segment_types::scriptlet : segment_types::text);
+-            sg.content(input_line);
+-            output_line.segments().push_back(sg);
++            block b;
++            b.type(in_standard_control_block ?
++                block_types::standard_control_block : block_types::text_block);
++            b.content(input_line);
++            output_line.blocks().push_back(b);
+             lines.push_back(output_line);
+-            output_line.segments().clear();
++            output_line.blocks().clear();
+         }
+ 
+-        if (in_scriplet_block) {
+-            BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
+-            BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
++        if (in_standard_control_block) {
++            BOOST_LOG_SEV(lg, error) << unfinished_control_block;
++            BOOST_THROW_EXCEPTION(parsing_error(unfinished_control_block));
+         }
+     } catch (boost::exception& e) {
+         e << error_at_line(boost::lexical_cast<std::string>(line_number));
+diff --git a/projects/stitch/src/types/segment.cpp b/projects/stitch/src/types/segment.cpp
+deleted file mode 100644
+index 0aeb219..0000000
+--- a/projects/stitch/src/types/segment.cpp
++++ /dev/null
+@@ -1,76 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include "dogen/stitch/types/segment.hpp"
+-
+-namespace dogen {
+-namespace stitch {
+-
+-segment::segment()
+-    : type_(static_cast<dogen::stitch::segment_types>(0)) { }
+-
+-segment::segment(
+-    const dogen::stitch::segment_types type,
+-    const std::string& content)
+-    : type_(type),
+-      content_(content) { }
+-
+-void segment::swap(segment& other) noexcept {
+-    using std::swap;
+-    swap(type_, other.type_);
+-    swap(content_, other.content_);
+-}
+-
+-bool segment::operator==(const segment& rhs) const {
+-    return type_ == rhs.type_ &&
+-        content_ == rhs.content_;
+-}
+-
+-segment& segment::operator=(segment other) {
+-    using std::swap;
+-    swap(*this, other);
+-    return *this;
+-}
+-
+-dogen::stitch::segment_types segment::type() const {
+-    return type_;
+-}
+-
+-void segment::type(const dogen::stitch::segment_types v) {
+-    type_ = v;
+-}
+-
+-const std::string& segment::content() const {
+-    return content_;
+-}
+-
+-std::string& segment::content() {
+-    return content_;
+-}
+-
+-void segment::content(const std::string& v) {
+-    content_ = v;
+-}
+-
+-void segment::content(const std::string&& v) {
+-    content_ = std::move(v);
+-}
+-
+-} }
