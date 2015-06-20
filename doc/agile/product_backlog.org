@@ -2611,6 +2611,17 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider adding include directive to stitch                       :story:
+
+T4 supports including templates from templates. At present we are
+doing this via the helper methods. As these have all sorts of logic to
+determine what gets included, it is not possible to directly replace
+these with an include (we would need to recurse across all nested
+types in a class to figure out if the inclusion is needed or not).
+
+Nevertheless, this story is a placeholder for furhter investigation in
+case we can find a use case for this.
+
 *** Consider adding stitch support for class feature control blocks   :story:
 
 T4 supports an additional type of control blocks called class
