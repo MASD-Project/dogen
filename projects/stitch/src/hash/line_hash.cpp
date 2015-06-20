@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/stitch/hash/line_hash.hpp"
-#include "dogen/stitch/hash/segment_hash.hpp"
+#include "dogen/stitch/hash/block_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_stitch_segment(const std::list<dogen::stitch::segment>& v) {
+inline std::size_t hash_std_list_dogen_stitch_block(const std::list<dogen::stitch::block>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -45,7 +45,7 @@ namespace stitch {
 std::size_t line_hasher::hash(const line& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_stitch_segment(v.segments()));
+    combine(seed, hash_std_list_dogen_stitch_block(v.blocks()));
     return seed;
 }
 

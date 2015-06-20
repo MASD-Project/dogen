@@ -42,28 +42,32 @@ auto lg(logger_factory("stitch.parser"));
 
 const std::string empty;
 const std::string equals("=");
-const std::string start_scriptlet_block("<#+");
-const std::string start_scriptlet_segment("<#=");
-const std::string start_declaration("<#@");
-const std::string end_block("#>");
+const std::string start_expression_block_marker("<#=");
+const std::string start_standard_control_block_marker("<#+");
+const std::string start_directive_marker("<#@");
+const std::string end_block_marker("#>");
 
 const std::string error_msg("Failed to parse string: ");
-const std::string cannot_start_scriptlet(
-    "Cannot start scriptlet block in scriptlet block.");
-const std::string cannot_start_scriptlet_in_middle(
-    "Cannot start scriplet block in the middle of a line.");
-const std::string scriptlet_expression_not_ended(
-    "Scriptlet expressions must start and end in the same line.");
-const std::string end_without_start("Found end block without a start block.");
-const std::string unexpected_declaration("Unexpected declaration.");
-const std::string unfinished_scriplet("Start scriptlet block without an end.");
+const std::string cannot_start_expression_block(
+    "Cannot start expression block in expresion block.");
+const std::string cannot_start_standard_control_block(
+    "Cannot start standard control block in standard control block.");
+const std::string cannot_start_standard_control_block_in_middle(
+    "Cannot start standard control block in the middle of a line.");
+const std::string expression_block_not_ended(
+    "Expression blocks must start and end in the same line.");
+const std::string end_marker_without_start_marker(
+    "Found end block marker without a corresponding start block marker.");
+const std::string unexpected_directive("Unexpected directive.");
+const std::string unfinished_control_block(
+    "Start control block without an end.");
 const std::string unexpected_additional_content(
     "Unexpected additional content.");
 const std::string unexpected_standard(
     "Standard control blocks are not supported in mixed lines");
 const std::string separator_not_found("Expected separator on kvp.");
-const std::string invalid_declaration(
-    "Invalid characters used in declaration: ");
+const std::string invalid_directive(
+    "Invalid characters used in directive: ");
 
 const bool do_trim(true);
 
@@ -74,36 +78,36 @@ namespace stitch {
 
 parser::parser(const dynamic::workflow& w) : dynamic_workflow_(w) {}
 
-segment parser::create_segment(const segment_types st, const std::string& c,
-    const bool trim_content) const {
-    segment r;
-    r.type(st);
-    if (trim_content)
-        r.content(boost::trim_copy(c));
-    else
-        r.content(c);
-
+block parser::create_block(const block_types bt, const std::string& c,
+    const bool trim) const {
+    block r;
+    r.type(bt);
+    r.content(trim ? boost::trim_copy(c) : c);
     return r;
 }
 
-segment parser::create_text_segment(const std::string& c,
-    const bool trim_content) const {
-    return create_segment(segment_types::text, c, trim_content);
+block parser::create_text_block(const std::string& c, const bool trim) const {
+    return create_block(block_types::text_block, c, trim);
 }
 
-segment parser::create_scriptlet_segment(const std::string& c,
-    const bool trim_content) const {
-    return create_segment(segment_types::scriptlet, c, trim_content);
+block parser::create_standard_control_block(const std::string& c,
+    const bool trim) const {
+    return create_block(block_types::standard_control_block, c, trim);
+}
+
+block parser::create_expression_block(const std::string& c,
+    const bool trim) const {
+    return create_block(block_types::expression_block, c, trim);
 }
 
 line parser::
-parse_line_with_expression_block(const std::string& input_line) const {
+parse_expression_block(const std::string& input_line) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing line with expression block.";
 
     std::string s;
     unsigned int pos(0);
     bool in_expression(false);
-    std::list<segment> segments;
+    std::list<block> blocks;
     const auto len(input_line.length());
     while (pos < len) {
         const auto c(input_line[pos]);
@@ -111,8 +115,8 @@ parse_line_with_expression_block(const std::string& input_line) const {
         if (c == '<' && pos + 2 < len && input_line[pos + 1] == '#') {
             const auto type(input_line[pos + 2]);
             if (type == '@') {
-                BOOST_LOG_SEV(lg, error) << unexpected_declaration;
-                BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
+                BOOST_LOG_SEV(lg, error) << unexpected_directive;
+                BOOST_THROW_EXCEPTION(parsing_error(unexpected_directive));
             } else if (type == '+') {
                 BOOST_LOG_SEV(lg, error) << unexpected_standard;
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_standard));
@@ -120,12 +124,13 @@ parse_line_with_expression_block(const std::string& input_line) const {
                 BOOST_LOG_SEV(lg, debug) << "Line has expression start";
 
                 if (in_expression) {
-                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
-                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
+                    BOOST_LOG_SEV(lg, error) << cannot_start_expression_block;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(cannot_start_expression_block));
                 }
 
                 if (!s.empty()) {
-                    segments.push_back(create_text_segment(s));
+                    blocks.push_back(create_text_block(s));
                     s.clear();
                 }
 
@@ -137,11 +142,12 @@ parse_line_with_expression_block(const std::string& input_line) const {
             input_line[pos + 1] == '>') {
             BOOST_LOG_SEV(lg, debug) << "Line has expression end";
             if (!in_expression) {
-                BOOST_LOG_SEV(lg, error) << end_without_start;
-                BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+                BOOST_LOG_SEV(lg, error) << end_marker_without_start_marker;
+                BOOST_THROW_EXCEPTION(parsing_error(
+                        end_marker_without_start_marker));
             }
 
-            segments.push_back(create_scriptlet_segment(s, do_trim));
+            blocks.push_back(create_expression_block(s, do_trim));
             s.clear();
 
             in_expression = false;
@@ -154,52 +160,52 @@ parse_line_with_expression_block(const std::string& input_line) const {
     }
 
     if (in_expression) {
-        BOOST_LOG_SEV(lg, error) << scriptlet_expression_not_ended;
-        BOOST_THROW_EXCEPTION(parsing_error(scriptlet_expression_not_ended));
+        BOOST_LOG_SEV(lg, error) << expression_block_not_ended;
+        BOOST_THROW_EXCEPTION(parsing_error(expression_block_not_ended));
     }
 
     if (!s.empty()) {
-        segments.push_back(create_text_segment(s));
+        blocks.push_back(create_text_block(s));
         s.clear();
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing line with expression block.";
 
-    const line r(segments);
+    const line r(blocks);
     BOOST_LOG_SEV(lg, debug) << "Line: " << r;
     return r;
 }
 
 line parser::
-parse_line_with_inline_standard_block(const std::string& input_line) const {
-    BOOST_LOG_SEV(lg, debug) << "Line is one line scriplet";
+parse_inline_standard_control_block(const std::string& input_line) const {
+    BOOST_LOG_SEV(lg, debug) << "Line is inline control block";
     auto cooked_line(input_line);
-    boost::replace_all(cooked_line, start_scriptlet_block, empty);
-    boost::replace_all(cooked_line, end_block, empty);
+    boost::replace_all(cooked_line, start_standard_control_block_marker, empty);
+    boost::replace_all(cooked_line, end_block_marker, empty);
 
-    const auto sg(create_scriptlet_segment(cooked_line, do_trim));
+    const auto b(create_standard_control_block(cooked_line, do_trim));
     line r;
-    r.segments().push_back(sg);
+    r.blocks().push_back(b);
     return r;
 }
 
 std::pair<std::string, std::string> parser::
-parse_line_with_declaration(const std::string& input_line) const {
+parse_directive(const std::string& input_line) const {
 
     auto cooked_line(input_line);
-    boost::replace_first(cooked_line, start_declaration, empty);
-    boost::replace_last(cooked_line, end_block, empty);
+    boost::replace_first(cooked_line, start_directive_marker, empty);
+    boost::replace_last(cooked_line, end_block_marker, empty);
     boost::trim(cooked_line);
 
     const std::string reserved("<#");
     if (boost::contains(cooked_line, reserved)) {
-        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
-        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
     }
 
-    if (boost::contains(cooked_line, end_block)) {
-        BOOST_LOG_SEV(lg, error) << invalid_declaration << cooked_line;
-        BOOST_THROW_EXCEPTION(parsing_error(invalid_declaration + cooked_line));
+    if (boost::contains(cooked_line, end_block_marker)) {
+        BOOST_LOG_SEV(lg, error) << invalid_directive << cooked_line;
+        BOOST_THROW_EXCEPTION(parsing_error(invalid_directive + cooked_line));
     }
 
     const auto pos(cooked_line.find_first_of(equals));
@@ -213,7 +219,6 @@ parse_line_with_declaration(const std::string& input_line) const {
     return std::make_pair(key, value);
 }
 
-
 text_template parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
     if (s.empty())
@@ -224,7 +229,7 @@ text_template parser::parse(const std::string& s) const {
     std::list<std::pair<std::string, std::string> > kvps;
     try {
         line output_line;
-        bool in_scriplet_block(false), in_declarations_block(true);
+        bool in_standard_control_block(false), in_directives_block(true);
         std::string input_line;
         std::istringstream is(s);
 
@@ -232,36 +237,39 @@ text_template parser::parse(const std::string& s) const {
             ++line_number;
             BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
 
-            if (boost::contains(input_line, start_scriptlet_segment)) {
-                lines.push_back(parse_line_with_expression_block(input_line));
+            if (boost::contains(input_line, start_expression_block_marker)) {
+                lines.push_back(parse_expression_block(input_line));
                 continue;
             }
 
-            if (boost::starts_with(input_line, start_declaration)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is declaration";
-                if (!in_declarations_block) {
-                    BOOST_LOG_SEV(lg, error) << unexpected_declaration;
+            if (boost::starts_with(input_line, start_directive_marker)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is directive";
+                if (!in_directives_block) {
+                    BOOST_LOG_SEV(lg, error) << unexpected_directive;
                     BOOST_THROW_EXCEPTION(
-                        parsing_error(unexpected_declaration));
+                        parsing_error(unexpected_directive));
                 }
 
-                const auto kvp(parse_line_with_declaration(input_line));
+                const auto kvp(parse_directive(input_line));
                 kvps.push_back(kvp);
                 continue;
             }
 
-            in_declarations_block = false;
+            in_directives_block = false;
 
-            if (boost::starts_with(input_line, start_scriptlet_block)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is scriplet";
+            if (boost::starts_with(input_line,
+                    start_standard_control_block_marker)) {
+                BOOST_LOG_SEV(lg, debug) << "Line is standard control block";
 
-                if (in_scriplet_block) {
-                    BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet;
-                    BOOST_THROW_EXCEPTION(parsing_error(cannot_start_scriptlet));
+                if (in_standard_control_block) {
+                    BOOST_LOG_SEV(lg, error)
+                        << cannot_start_standard_control_block;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(cannot_start_standard_control_block));
                 }
 
-                if (boost::ends_with(input_line, end_block)) {
-                    const auto l(parse_line_with_inline_standard_block(input_line));
+                if (boost::ends_with(input_line, end_block_marker)) {
+                    const auto l(parse_inline_standard_control_block(input_line));
                     lines.push_back(l);
                     continue;
                 }
@@ -272,27 +280,30 @@ text_template parser::parse(const std::string& s) const {
                         parsing_error(unexpected_additional_content));
                 }
 
-                in_scriplet_block = true;
+                in_standard_control_block = true;
                 continue;
             }
 
-            if (boost::contains(input_line, start_scriptlet_block)) {
-                BOOST_LOG_SEV(lg, error) << cannot_start_scriptlet_in_middle;
-                BOOST_THROW_EXCEPTION(
-                    parsing_error(cannot_start_scriptlet_in_middle));
+            if (boost::contains(input_line,
+                    start_standard_control_block_marker)) {
+                BOOST_LOG_SEV(lg, error)
+                    << cannot_start_standard_control_block_in_middle;
+                BOOST_THROW_EXCEPTION(parsing_error(
+                        cannot_start_standard_control_block_in_middle));
             }
 
-            if (boost::contains(input_line, start_declaration)) {
-                BOOST_LOG_SEV(lg, error) << unexpected_declaration;
-                BOOST_THROW_EXCEPTION(parsing_error(unexpected_declaration));
+            if (boost::contains(input_line, start_directive_marker)) {
+                BOOST_LOG_SEV(lg, error) << unexpected_directive;
+                BOOST_THROW_EXCEPTION(parsing_error(unexpected_directive));
             }
 
-            if (boost::contains(input_line, end_block)) {
+            if (boost::contains(input_line, end_block_marker)) {
                 BOOST_LOG_SEV(lg, debug) << "Closing end block";
 
-                if (!in_scriplet_block) {
-                    BOOST_LOG_SEV(lg, error) << end_without_start;
-                    BOOST_THROW_EXCEPTION(parsing_error(end_without_start));
+                if (!in_standard_control_block) {
+                    BOOST_LOG_SEV(lg, error) << end_marker_without_start_marker;
+                    BOOST_THROW_EXCEPTION(
+                        parsing_error(end_marker_without_start_marker));
                 }
 
                 if (input_line.size() != 2) {
@@ -301,25 +312,26 @@ text_template parser::parse(const std::string& s) const {
                         parsing_error(unexpected_additional_content));
                 }
 
-                if (in_scriplet_block) {
-                    BOOST_LOG_SEV(lg, debug) << "Closing scriptlet block";
-                    in_scriplet_block = false;
+                if (in_standard_control_block) {
+                    BOOST_LOG_SEV(lg, debug)
+                        << "Closing standard control block";
+                    in_standard_control_block = false;
                     continue;
                 }
             }
 
-            segment sg;
-            sg.type(in_scriplet_block ?
-                segment_types::scriptlet : segment_types::text);
-            sg.content(input_line);
-            output_line.segments().push_back(sg);
+            block b;
+            b.type(in_standard_control_block ?
+                block_types::standard_control_block : block_types::text_block);
+            b.content(input_line);
+            output_line.blocks().push_back(b);
             lines.push_back(output_line);
-            output_line.segments().clear();
+            output_line.blocks().clear();
         }
 
-        if (in_scriplet_block) {
-            BOOST_LOG_SEV(lg, error) << unfinished_scriplet;
-            BOOST_THROW_EXCEPTION(parsing_error(unfinished_scriplet));
+        if (in_standard_control_block) {
+            BOOST_LOG_SEV(lg, error) << unfinished_control_block;
+            BOOST_THROW_EXCEPTION(parsing_error(unfinished_control_block));
         }
     } catch (boost::exception& e) {
         e << error_at_line(boost::lexical_cast<std::string>(line_number));

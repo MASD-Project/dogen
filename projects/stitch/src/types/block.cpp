@@ -18,58 +18,58 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/segment.hpp"
+#include "dogen/stitch/types/block.hpp"
 
 namespace dogen {
 namespace stitch {
 
-segment::segment()
-    : type_(static_cast<dogen::stitch::segment_types>(0)) { }
+block::block()
+    : type_(static_cast<dogen::stitch::block_types>(0)) { }
 
-segment::segment(
-    const dogen::stitch::segment_types type,
+block::block(
+    const dogen::stitch::block_types type,
     const std::string& content)
     : type_(type),
       content_(content) { }
 
-void segment::swap(segment& other) noexcept {
+void block::swap(block& other) noexcept {
     using std::swap;
     swap(type_, other.type_);
     swap(content_, other.content_);
 }
 
-bool segment::operator==(const segment& rhs) const {
+bool block::operator==(const block& rhs) const {
     return type_ == rhs.type_ &&
         content_ == rhs.content_;
 }
 
-segment& segment::operator=(segment other) {
+block& block::operator=(block other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-dogen::stitch::segment_types segment::type() const {
+dogen::stitch::block_types block::type() const {
     return type_;
 }
 
-void segment::type(const dogen::stitch::segment_types v) {
+void block::type(const dogen::stitch::block_types v) {
     type_ = v;
 }
 
-const std::string& segment::content() const {
+const std::string& block::content() const {
     return content_;
 }
 
-std::string& segment::content() {
+std::string& block::content() {
     return content_;
 }
 
-void segment::content(const std::string& v) {
+void block::content(const std::string& v) {
     content_ = v;
 }
 
-void segment::content(const std::string&& v) {
+void block::content(const std::string&& v) {
     content_ = std::move(v);
 }
 

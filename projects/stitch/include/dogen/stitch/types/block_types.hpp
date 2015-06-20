@@ -18,25 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_SER_HPP
+#ifndef DOGEN_STITCH_TYPES_BLOCK_TYPES_HPP
+#define DOGEN_STITCH_TYPES_BLOCK_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/stitch/types/segment.hpp"
+namespace dogen {
+namespace stitch {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::segment)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::stitch::segment& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::stitch::segment& v, unsigned int version);
+enum class block_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    text_block = 1,
+    standard_control_block = 2,
+    expression_block = 3
+};
 
 } }
 

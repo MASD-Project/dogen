@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-19 Fri 19:02]
+#+CAPTION: Clock summary at [2015-06-20 Sat 13:07]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *36:05* |       |       |
+| *Total time*                                                                | *42:06* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 36:05   |       |       |
-| Active                                                                      |         | 36:05 |       |
+| Stories                                                                     | 42:06   |       |       |
+| Active                                                                      |         | 42:06 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -38,6 +38,7 @@
 | COMPLETED Implement enum header formatter in io                             |         |       |  0:28 |
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
+| COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
 | STARTED Implement class implementation formatter in test_data               |         |       |  4:35 |
 | STARTED Incorrect stitching when a line starts with inline scriplet         |         |       |  0:25 |
 #+end:
@@ -458,6 +459,65 @@ machinery. Fix all differences.
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+*** COMPLETED Refactor stitch to use Microsoft's T4 terminology       :story:
+    CLOSED: [2015-06-20 Sat 13:07]
+    CLOCK: [2015-06-20 Sat 10:00]--[2015-06-20 Sat 13:06] =>  3:06
+    CLOCK: [2015-06-19 Fri 22:49]--[2015-06-19 Fri 22:50] =>  0:01
+    CLOCK: [2015-06-19 Fri 20:27]--[2015-06-19 Fri 22:49] =>  2:22
+    CLOCK: [2015-06-19 Fri 19:54]--[2015-06-19 Fri 20:26] =>  0:32
+
+In the past [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_64.org#consider-using-microsofts-t4-terminology-for-stitch][we had considered]] using Microsoft's T4 terminology because
+there was a little bit of impedance mismatch. However given that we
+now need to split the control blocks from standard blocks, we now have
+a good fit. Perform the required renames:
+
+We found [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][a page]] documenting the elements of T4. These are:
+
+- *Directives*: Text template directives provide general instructions to
+  the text templating engine about how to generate the transformation
+  code and the output file.
+- *Text blocks*: A text block inserts text directly into the output
+  file. There is no special formatting for text blocks.
+- *Control blocks*: Control blocks are sections of program code that
+  are used to transform the templates. Two types:
+  - *Standard control blocks*: A standard control block is a section
+    of program code that generates part of the output file.
+  - *Expression control blocks*: An expression control block evaluates
+    an expression and converts it to a string.
+
+Additional definitions we made up because we could not find anything
+suitable in documentation:
+
+- *Block*: one of: text block, control block or any of its descendants.
+- *Statement*: either a directive or a control block.
+- *Inline statement*: statement that starts and ends in one line.
+- *Marker*: one of <#, <#@, <#=, #>. Mark-up that delimits statements.
+- *Start Marker*: one of <#, <#@, <#=. Can also be specialised to
+  "start X marker", e.g. start control block marker is <#, and so on.
+- *End Marker*: #>. Can also be specialised to "end X marker",
+  e.g. end directive marker is #>.
+
+Problems:
+
+- we incorrectly used the mark-up for class feature control blocks to
+  mean standard control blocks. Fix this and update all templates.
+- expression block parsing is much more complicated than needed. It is
+  always inline so we can "parse" it like we do with directives. Same
+  with standard control blocks. However, we need to do this once we
+  get all tests passing again.
+
+Missing validation:
+
+- check that directive an has end marker.
+- start control block marker inside of an inline control block
+
+Generic processing of an inline statement:
+
+- check start and end markers: =validate_start_and_end_markers=.
+- strip start and end markers: =strip_start_and_end_markers=.
+- check for any marker, if present error: has_markers=.
+- if directive, check for kvp form.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
     CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10

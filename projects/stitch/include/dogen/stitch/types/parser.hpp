@@ -28,7 +28,7 @@
 #include <string>
 #include <utility>
 #include "dogen/stitch/types/line.hpp"
-#include "dogen/stitch/types/segment.hpp"
+#include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -51,40 +51,47 @@ public:
 
 private:
     /**
-     * @brief Creates a segment with the supplied properties.
+     * @brief Creates a block with the supplied properties.
      */
-    segment create_segment(const segment_types st, const std::string& c,
-        const bool trim_content) const;
+    block create_block(const block_types bt, const std::string& c,
+        const bool trim) const;
 
     /**
-     * @brief Creates a segment of type text.
+     * @brief Creates a block of type text.
      */
-    segment create_text_segment(const std::string& c,
-        const bool trim_content = false) const;
+    block create_text_block(const std::string& c,
+        const bool trim = false) const;
 
     /**
-     * @brief Creates a segment of type scriptlet.
+     * @brief Creates an expression block.
      */
-    segment create_scriptlet_segment(const std::string& c,
-        const bool trim_content = false) const;
+    block create_expression_block(const std::string& c,
+        const bool trim = false) const;
+
+    /**
+     * @brief Creates a standard control block.
+     */
+    block create_standard_control_block(const std::string& c,
+        const bool trim = false) const;
 
 private:
     /**
-     * @brief Parses lines that contain expression blocks.
+     * @brief Parses a line that contains an expression block.
      */
-    line parse_line_with_expression_block(const std::string& input_line) const;
+    line parse_expression_block(const std::string& input_line) const;
 
     /**
-     * @brief Parses lines that contain inline standard blocks.
+     * @brief Parses a line that contains an inline standard control
+     * block.
      */
-    line parse_line_with_inline_standard_block(
+    line parse_inline_standard_control_block(
         const std::string& input_line) const;
 
     /**
-     * @brief Parse lines with declarations.
+     * @brief Parse a line with a directive.
      */
     std::pair<std::string, std::string>
-    parse_line_with_declaration(const std::string& input_line) const;
+    parse_directive(const std::string& input_line) const;
 
 public:
     /**

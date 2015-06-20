@@ -29,7 +29,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
+#include "dogen/stitch/serialization/block_ser.hpp"
 
 
 namespace boost {
@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::stitch::line& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("segments", v.segments_);
+    ar << make_nvp("blocks", v.blocks_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::stitch::line& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("segments", v.segments_);
+    ar >> make_nvp("blocks", v.blocks_);
 }
 
 } }

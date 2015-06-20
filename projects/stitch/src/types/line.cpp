@@ -23,16 +23,16 @@
 namespace dogen {
 namespace stitch {
 
-line::line(const std::list<dogen::stitch::segment>& segments)
-    : segments_(segments) { }
+line::line(const std::list<dogen::stitch::block>& blocks)
+    : blocks_(blocks) { }
 
 void line::swap(line& other) noexcept {
     using std::swap;
-    swap(segments_, other.segments_);
+    swap(blocks_, other.blocks_);
 }
 
 bool line::operator==(const line& rhs) const {
-    return segments_ == rhs.segments_;
+    return blocks_ == rhs.blocks_;
 }
 
 line& line::operator=(line other) {
@@ -41,20 +41,20 @@ line& line::operator=(line other) {
     return *this;
 }
 
-const std::list<dogen::stitch::segment>& line::segments() const {
-    return segments_;
+const std::list<dogen::stitch::block>& line::blocks() const {
+    return blocks_;
 }
 
-std::list<dogen::stitch::segment>& line::segments() {
-    return segments_;
+std::list<dogen::stitch::block>& line::blocks() {
+    return blocks_;
 }
 
-void line::segments(const std::list<dogen::stitch::segment>& v) {
-    segments_ = v;
+void line::blocks(const std::list<dogen::stitch::block>& v) {
+    blocks_ = v;
 }
 
-void line::segments(const std::list<dogen::stitch::segment>&& v) {
-    segments_ = std::move(v);
+void line::blocks(const std::list<dogen::stitch::block>&& v) {
+    blocks_ = std::move(v);
 }
 
 } }

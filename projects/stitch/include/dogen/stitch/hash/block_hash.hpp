@@ -18,26 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_HASH_SEGMENT_TYPES_HASH_HPP
-#define DOGEN_STITCH_HASH_SEGMENT_TYPES_HASH_HPP
+#ifndef DOGEN_STITCH_HASH_BLOCK_HASH_HPP
+#define DOGEN_STITCH_HASH_BLOCK_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/stitch/types/segment_types.hpp"
+#include "dogen/stitch/types/block.hpp"
+
+namespace dogen {
+namespace stitch {
+
+struct block_hasher {
+public:
+    static std::size_t hash(const block& v);
+};
+
+} }
 
 namespace std {
 
 template<>
-struct hash<dogen::stitch::segment_types> {
+struct hash<dogen::stitch::block> {
 public:
-    size_t operator()(const dogen::stitch::segment_types& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    size_t operator()(const dogen::stitch::block& v) const {
+        return dogen::stitch::block_hasher::hash(v);
     }
 };
 
 }
-
 #endif

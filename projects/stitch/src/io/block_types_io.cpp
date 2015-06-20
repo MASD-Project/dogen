@@ -18,35 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_HASH_SEGMENT_HASH_HPP
-#define DOGEN_STITCH_HASH_SEGMENT_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "dogen/stitch/types/segment.hpp"
+#include <ostream>
+#include <stdexcept>
+#include "dogen/stitch/io/block_types_io.hpp"
 
 namespace dogen {
 namespace stitch {
 
-struct segment_hasher {
-public:
-    static std::size_t hash(const segment& v);
-};
+std::ostream& operator<<(std::ostream& s, const block_types& v) {
+    s << "{ " << "\"__type__\": " << "\"block_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case block_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case block_types::text_block:
+        attr = "\"text_block\"";
+        break;
+    case block_types::standard_control_block:
+        attr = "\"standard_control_block\"";
+        break;
+    case block_types::expression_block:
+        attr = "\"expression_block\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for block_types");
+    }
+    s << attr << " }";
+    return s;
+}
 
 } }
-
-namespace std {
-
-template<>
-struct hash<dogen::stitch::segment> {
-public:
-    size_t operator()(const dogen::stitch::segment& v) const {
-        return dogen::stitch::segment_hasher::hash(v);
-    }
-};
-
-}
-#endif

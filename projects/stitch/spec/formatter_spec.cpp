@@ -44,24 +44,57 @@ const std::string multiple_text_lines_content(
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string single_scriptlet_line(R"(unsigned int i0;
+const std::string single_expression_block_line(R"(stream_ << some_function() << std::endl;
 )");
 
-const std::string multiple_scriptlet_lines(R"(unsigned int i0;
+const std::string multiple_expression_block_lines(R"(stream_ << some_function() + i0 << std::endl;
+stream_ << some_function() + i1 << std::endl;
+)");
+
+const std::string single_standard_control_block_line(R"(unsigned int i0;
+)");
+
+const std::string multiple_standard_control_block_lines(R"(unsigned int i0;
 unsigned int i1;
 )");
 
-const std::string text_scriptlet_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_expression_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+stream_ << some_function() << std::endl;
+stream_ << "This is line numnber: 0" << std::endl;
+)");
+
+const std::string expression_text_expression_single_line(R"(stream_ << some_function() << std::endl;
+stream_ << "This is line numnber: 0" << std::endl;
+stream_ << some_function() << std::endl;
+)");
+
+const std::string text_expression_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+stream_ << "This is line numnber: 1" << std::endl;
+stream_ << some_function() + i0 << std::endl;
+stream_ << some_function() + i1 << std::endl;
+stream_ << "This is line numnber: 0" << std::endl;
+stream_ << "This is line numnber: 1" << std::endl;
+)");
+
+const std::string expression_text_expression_multi_line(R"(stream_ << some_function() + i0 << std::endl;
+stream_ << some_function() + i1 << std::endl;
+stream_ << "This is line numnber: 0" << std::endl;
+stream_ << "This is line numnber: 1" << std::endl;
+stream_ << some_function() + i0 << std::endl;
+stream_ << some_function() + i1 << std::endl;
+)");
+
+const std::string text_standard_control_text_single_line(R"(stream_ << "This is line numnber: 0" << std::endl;
 unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
-const std::string scriptlet_text_scriptlet_single_line(R"(unsigned int i0;
+const std::string standard_control_text_standard_control_single_line(R"(unsigned int i0;
 stream_ << "This is line numnber: 0" << std::endl;
 unsigned int i0;
 )");
 
-const std::string text_scriptlet_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
+const std::string text_standard_control_text_multi_line(R"(stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 unsigned int i0;
 unsigned int i1;
@@ -69,7 +102,7 @@ stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
 )");
 
-const std::string scriptlet_text_scriptlet_multi_line(R"(unsigned int i0;
+const std::string standard_control_text_standard_control_multi_line(R"(unsigned int i0;
 unsigned int i1;
 stream_ << "This is line numnber: 0" << std::endl;
 stream_ << "This is line numnber: 1" << std::endl;
@@ -154,98 +187,198 @@ BOOST_AUTO_TEST_CASE(empty_text_template_results_in_empty_file) {
 BOOST_AUTO_TEST_CASE(single_text_line_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("single_text_line_results_in_expected_template");
 
-    const auto tt(factory.make_single_text_line());
+    const auto tt(factory.make_single_text_block_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    BOOST_CHECK(asserter::assert_equals(single_text_line_content, r.content()));
+
+    const auto actual(r.content());
+    const auto expected(single_text_line_content);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(multiple_text_lines_results_in_expected_template) {
     SETUP_TEST_LOG_SOURCE("multiple_text_lines_results_in_expected_template");
 
-    const auto tt(factory.make_multiple_text_lines());
+    const auto tt(factory.make_multiple_text_block_lines());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format((tt)));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(multiple_text_lines_content, c));
+
+    const auto actual(r.content());
+    const auto expected(multiple_text_lines_content);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(single_scriptlet_line_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("single_scriptlet_line_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(single_expression_block_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("single_expression_block_line_results_in_expected_template");
 
-    const auto tt(factory.make_single_scriptlet_line());
+    const auto tt(factory.make_single_expression_block_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(single_scriptlet_line, c));
+
+    const auto actual(r.content());
+    const auto expected(single_expression_block_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(multiple_scriptlet_lines_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("multiple_scriptlet_lines_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(multiple_expression_block_lines_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("multiple_expression_block_lines_results_in_expected_template");
 
-    const auto tt(factory.make_multiple_scriptlet_lines());
+    const auto tt(factory.make_multiple_expression_block_lines());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(multiple_scriptlet_lines, c));
+
+    const auto actual(r.content());
+    const auto expected(multiple_expression_block_lines);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(text_scriptlet_text_single_line_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("text_scriptlet_text_single_line_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(single_standard_control_block_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("single_standard_control_block_line_results_in_expected_template");
 
-    const auto tt(factory.make_text_scriptlet_text_single_line());
+    const auto tt(factory.make_single_standard_control_block_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(text_scriptlet_text_single_line, c));
+
+    const auto actual(r.content());
+    const auto expected(single_standard_control_block_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_single_line_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_single_line_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(multiple_standard_control_block_lines_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("multiple_standard_control_block_lines_results_in_expected_template");
 
-    const auto tt(factory.make_scriptlet_text_scriptlet_single_line());
+    const auto tt(factory.make_multiple_standard_control_block_lines());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(
-        asserter::assert_equals(scriptlet_text_scriptlet_single_line, c));
+
+    const auto& actual(r.content());
+    const auto expected(multiple_standard_control_block_lines);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(text_scriptlet_text_multi_line_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("text_scriptlet_text_multi_line_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(text_expression_text_single_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("text_expression_text_single_line_results_in_expected_template");
 
-    const auto tt(factory.make_text_scriptlet_text_multi_line());
+    const auto tt(factory.make_text_expression_text_single_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(text_scriptlet_text_multi_line, c));
+
+    const auto actual(r.content());
+    const auto expected(text_expression_text_single_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(scriptlet_text_scriptlet_multi_line_results_in_expected_template) {
-    SETUP_TEST_LOG_SOURCE("scriptlet_text_scriptlet_multi_line_results_in_expected_template");
+BOOST_AUTO_TEST_CASE(expression_text_expression_single_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("expression_text_expression_single_line_results_in_expected_template");
 
-    const auto tt(factory.make_scriptlet_text_scriptlet_multi_line());
+    const auto tt(factory.make_expression_text_expression_single_line());
     BOOST_LOG_SEV(lg, debug) << "input: " << tt;
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(
-        asserter::assert_equals(scriptlet_text_scriptlet_multi_line, c));
+
+    const auto& actual(r.content());
+    const auto expected(expression_text_expression_single_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(text_expression_text_multi_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("text_expression_text_multi_line_results_in_expected_template");
+
+    const auto tt(factory.make_text_expression_text_multi_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+
+    const auto actual(r.content());
+    const auto expected(text_expression_text_multi_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(expression_text_expression_multi_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("expression_text_expression_multi_line_results_in_expected_template");
+
+    const auto tt(factory.make_expression_text_expression_multi_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+
+    const auto actual(r.content());
+    const auto expected(expression_text_expression_multi_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(text_standard_control_text_single_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("text_standard_control_text_single_line_results_in_expected_template");
+
+    const auto tt(factory.make_text_standard_control_text_single_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+    const auto actual(r.content());
+    const auto expected(text_standard_control_text_single_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_single_line_results_in_expected_template");
+
+    const auto tt(
+        factory.make_standard_control_text_standard_control_single_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+
+    const auto actual(r.content());
+    const auto expected(standard_control_text_standard_control_single_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(text_standard_control_text_multi_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("text_standard_control_text_multi_line_results_in_expected_template");
+
+    const auto tt(factory.make_text_standard_control_text_multi_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+
+    const auto actual(r.content());
+    const auto expected(text_standard_control_text_multi_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
+}
+
+BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_multi_line_results_in_expected_template) {
+    SETUP_TEST_LOG_SOURCE("standard_control_text_standard_control_multi_line_results_in_expected_template");
+
+    const auto tt(
+        factory.make_standard_control_text_standard_control_multi_line());
+    BOOST_LOG_SEV(lg, debug) << "input: " << tt;
+
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
+
+    const auto actual(r.content());
+    const auto expected(standard_control_text_standard_control_multi_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(mixed_content_single_line_results_in_expected_template) {
@@ -256,8 +389,10 @@ BOOST_AUTO_TEST_CASE(mixed_content_single_line_results_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(mixed_content_single_line, c));
+
+    const auto actual(r.content());
+    const auto expected(mixed_content_single_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(mixed_content_multi_line_results_in_expected_template) {
@@ -268,8 +403,10 @@ BOOST_AUTO_TEST_CASE(mixed_content_multi_line_results_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(mixed_content_multi_line, c));
+
+    const auto actual(r.content());
+    const auto expected(mixed_content_multi_line);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
@@ -280,8 +417,10 @@ BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(complex_structure, c));
+
+    const auto actual(r.content());
+    const auto expected(complex_structure);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(general_settings_result_in_expected_template) {
@@ -292,8 +431,10 @@ BOOST_AUTO_TEST_CASE(general_settings_result_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(with_general_settings, c));
+
+    const auto actual(r.content());
+    const auto expected(with_general_settings);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(containing_namespaces_result_in_expected_template) {
@@ -304,8 +445,10 @@ BOOST_AUTO_TEST_CASE(containing_namespaces_result_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(with_containing_namespaces, c));
+
+    const auto actual(r.content());
+    const auto expected(with_containing_namespaces);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(empty_lines_result_in_expected_template) {
@@ -316,8 +459,10 @@ BOOST_AUTO_TEST_CASE(empty_lines_result_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(empty_lines, c));
+
+    const auto actual(r.content());
+    const auto expected(empty_lines);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(line_with_quotes_result_in_expected_template) {
@@ -328,8 +473,10 @@ BOOST_AUTO_TEST_CASE(line_with_quotes_result_in_expected_template) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto& c(r.content());
-    BOOST_CHECK(asserter::assert_equals(text_line_with_quotes_content, c));
+
+    const auto actual(r.content());
+    const auto expected(text_line_with_quotes_content);
+    BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

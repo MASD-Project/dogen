@@ -27,7 +27,7 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen/stitch/types/segment.hpp"
+#include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/serialization/line_fwd_ser.hpp"
 
 namespace dogen {
@@ -41,7 +41,7 @@ public:
     ~line() = default;
 
 public:
-    explicit line(const std::list<dogen::stitch::segment>& segments);
+    explicit line(const std::list<dogen::stitch::block>& blocks);
 
 private:
     template<typename Archive>
@@ -51,10 +51,10 @@ private:
     friend void boost::serialization::load(Archive& ar, line& v, unsigned int version);
 
 public:
-    const std::list<dogen::stitch::segment>& segments() const;
-    std::list<dogen::stitch::segment>& segments();
-    void segments(const std::list<dogen::stitch::segment>& v);
-    void segments(const std::list<dogen::stitch::segment>&& v);
+    const std::list<dogen::stitch::block>& blocks() const;
+    std::list<dogen::stitch::block>& blocks();
+    void blocks(const std::list<dogen::stitch::block>& v);
+    void blocks(const std::list<dogen::stitch::block>&& v);
 
 public:
     bool operator==(const line& rhs) const;
@@ -67,7 +67,7 @@ public:
     line& operator=(line other);
 
 private:
-    std::list<dogen::stitch::segment> segments_;
+    std::list<dogen::stitch::block> blocks_;
 };
 
 } }

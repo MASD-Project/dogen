@@ -18,36 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TEST_DATA_SEGMENT_TD_HPP
-#define DOGEN_STITCH_TEST_DATA_SEGMENT_TD_HPP
+#include "dogen/stitch/hash/block_hash.hpp"
+#include "dogen/stitch/hash/block_types_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/stitch/types/segment.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace stitch {
 
-class segment_generator {
-public:
-    segment_generator();
+std::size_t block_hasher::hash(const block& v) {
+    std::size_t seed(0);
 
-public:
-    typedef dogen::stitch::segment result_type;
+    combine(seed, v.type());
+    combine(seed, v.content());
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+    return seed;
+}
 
 } }
-
-#endif

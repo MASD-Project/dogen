@@ -18,20 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_IO_SEGMENT_TYPES_IO_HPP
-#define DOGEN_STITCH_IO_SEGMENT_TYPES_IO_HPP
+#ifndef DOGEN_STITCH_SERIALIZATION_BLOCK_FWD_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_BLOCK_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/stitch/types/segment_types.hpp"
+#include "dogen/stitch/types/block_fwd.hpp"
 
-namespace dogen {
-namespace stitch {
+namespace boost {
+namespace serialization {
 
-std::ostream& operator<<(std::ostream& s, const segment_types& v);
+template<class Archive>
+void save(Archive& ar, const dogen::stitch::block& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::stitch::block& v, unsigned int version);
 
 } }
 

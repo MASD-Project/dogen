@@ -19,19 +19,19 @@
  *
  */
 #include "dogen/stitch/test_data/line_td.hpp"
-#include "dogen/stitch/test_data/segment_td.hpp"
+#include "dogen/stitch/test_data/block_td.hpp"
 
 namespace {
 
-dogen::stitch::segment
-create_dogen_stitch_segment(const unsigned int position) {
-    return dogen::stitch::segment_generator::create(position);
+dogen::stitch::block
+create_dogen_stitch_block(const unsigned int position) {
+    return dogen::stitch::block_generator::create(position);
 }
 
-std::list<dogen::stitch::segment> create_std_list_dogen_stitch_segment(unsigned int position) {
-    std::list<dogen::stitch::segment> r;
+std::list<dogen::stitch::block> create_std_list_dogen_stitch_block(unsigned int position) {
+    std::list<dogen::stitch::block> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_stitch_segment(position + i));
+        r.push_back(create_dogen_stitch_block(position + i));
     }
     return r;
 }
@@ -45,7 +45,7 @@ line_generator::line_generator() : position_(0) { }
 
 void line_generator::
 populate(const unsigned int position, result_type& v) {
-    v.segments(create_std_list_dogen_stitch_segment(position + 0));
+    v.blocks(create_std_list_dogen_stitch_block(position + 0));
 }
 
 line_generator::result_type

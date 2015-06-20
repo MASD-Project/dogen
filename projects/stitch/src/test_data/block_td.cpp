@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "dogen/stitch/test_data/segment_td.hpp"
-#include "dogen/stitch/test_data/segment_types_td.hpp"
+#include "dogen/stitch/test_data/block_td.hpp"
+#include "dogen/stitch/test_data/block_types_td.hpp"
 
 namespace {
 
-dogen::stitch::segment_types
-create_dogen_stitch_segment_types(const unsigned int position) {
-    return dogen::stitch::segment_types_generator::create(position);
+dogen::stitch::block_types
+create_dogen_stitch_block_types(const unsigned int position) {
+    return dogen::stitch::block_types_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -40,30 +40,30 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace stitch {
 
-segment_generator::segment_generator() : position_(0) { }
+block_generator::block_generator() : position_(0) { }
 
-void segment_generator::
+void block_generator::
 populate(const unsigned int position, result_type& v) {
-    v.type(create_dogen_stitch_segment_types(position + 0));
+    v.type(create_dogen_stitch_block_types(position + 0));
     v.content(create_std_string(position + 1));
 }
 
-segment_generator::result_type
-segment_generator::create(const unsigned int position) {
-    segment r;
-    segment_generator::populate(position, r);
+block_generator::result_type
+block_generator::create(const unsigned int position) {
+    block r;
+    block_generator::populate(position, r);
     return r;
 }
 
-segment_generator::result_type*
-segment_generator::create_ptr(const unsigned int position) {
-    segment* p = new segment();
-    segment_generator::populate(position, *p);
+block_generator::result_type*
+block_generator::create_ptr(const unsigned int position) {
+    block* p = new block();
+    block_generator::populate(position, *p);
     return p;
 }
 
-segment_generator::result_type
-segment_generator::operator()() {
+block_generator::result_type
+block_generator::operator()() {
     return create(position_++);
 }
 

@@ -24,7 +24,7 @@
 #include "dogen/formatters/types/utility_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
+#include "dogen/stitch/io/block_types_io.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"
 
@@ -44,14 +44,14 @@ const std::string endl("std::endl;");
 
 const std::string empty_stream_name("Stream name cannot be empty.");
 const std::string empty_line("Line has no content.");
-const std::string unsupported_segment_type("Segment type is unsupported: ");
+const std::string unsupported_block_type("Block type is unsupported: ");
 
 }
 
 namespace dogen {
 namespace stitch {
 
-void formatter::format_text_line(const std::string& stream_name,
+void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
     const auto spaces(formatters::spacing_types::left_and_right_space);
     s << stream_name;
@@ -67,7 +67,24 @@ void formatter::format_text_line(const std::string& stream_name,
 }
 
 void formatter::
-format_scriptlet_line(const std::string& l, std::ostream& s) const {
+format_expression_block_line(const std::string& stream_name,
+    const std::string& l, std::ostream& s) const {
+    s << stream_name;
+
+    const formatters::utility_formatter u(s);
+    const auto spaces(formatters::spacing_types::left_and_right_space);
+    u.insert(inserter, spaces);
+
+    s << l;
+
+    u.insert(inserter, spaces);
+    u.insert(endl);
+    s << std::endl;
+}
+
+void formatter::
+format_standard_control_block_line(
+    const std::string& l, std::ostream& s) const {
     s << l << std::endl;
 }
 
@@ -76,21 +93,43 @@ void formatter::format_mixed_content_line(const std::string& stream_name,
     const auto spaces(formatters::spacing_types::left_and_right_space);
     const formatters::utility_formatter u(s);
     bool is_first(true);
-    for (const auto& sg : l.segments()) {
+    for (const auto& b : l.blocks()) {
         if (is_first) {
             s << stream_name;
             is_first = false;
         }
 
         u.insert(inserter, spaces);
-        if (sg.type() == segment_types::text)
-            u.insert_quoted(sg.content(), true/*escape_content*/);
+        if (b.type() == block_types::text_block)
+            u.insert_quoted(b.content(), true/*escape_content*/);
         else
-            s << sg.content();
+            s << b.content();
     }
     u.insert(inserter, spaces);
     u.insert(endl);
     s << std::endl;
+}
+
+void formatter::format_line_with_single_block(const std::string& stream_name,
+    const line& l, std::ostream& s) const {
+    const auto& b(l.blocks().front());
+    const auto& c(b.content());
+    switch(b.type()) {
+    case block_types::text_block:
+        format_text_block_line(stream_name, c, s);
+        break;
+    case block_types::expression_block:
+        format_expression_block_line(stream_name, c, s);
+        break;
+    case block_types::standard_control_block:
+        format_standard_control_block_line(c, s);
+        break;
+    default:
+        BOOST_LOG_SEV(lg, error) << unsupported_block_type << b.type();
+        const auto s(boost::lexical_cast<std::string>(b.type()));
+        BOOST_THROW_EXCEPTION(
+            formatting_error(unsupported_block_type + s));
+    }
 }
 
 dynamic::ownership_hierarchy formatter::ownership_hierarchy() const {
@@ -120,28 +159,13 @@ dogen::formatters::file formatter::format(const text_template& tt) const {
             true/*add_new_line_*/);
 
         for (const auto& l : tt.lines()) {
-            if (l.segments().empty()) {
+            if (l.blocks().empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_line;
                 BOOST_THROW_EXCEPTION(formatting_error(empty_line));
-            }
-
-            if (l.segments().size() > 1) {
+            } else if (l.blocks().size() == 1)
+                format_line_with_single_block(stream_variable_name, l, s);
+            else
                 format_mixed_content_line(stream_variable_name, l, s);
-                continue;
-            }
-
-            const auto& sg(l.segments().front());
-            if (sg.type() == segment_types::text)
-                format_text_line(stream_variable_name, sg.content(), s);
-            else if (sg.type() == segment_types::scriptlet)
-                format_scriptlet_line(sg.content(), s);
-            else {
-                BOOST_LOG_SEV(lg, error) << unsupported_segment_type
-                                         << sg.type();
-                BOOST_THROW_EXCEPTION(
-                    formatting_error(unsupported_segment_type +
-                        boost::lexical_cast<std::string>(sg.type())));
-            }
         }
     }
 

@@ -43,23 +43,31 @@ private:
     text_template make_text_template_with_trivial_settings() const;
 
     /**
-     * @brief Makes @code how_many lines with a single text segment.
+     * @brief Makes @code how_many lines, each with a single text block.
      */
-    std::list<line> make_text_only_lines(const unsigned int how_many = 1,
+    std::list<line> make_text_block_only_lines(const unsigned int how_many = 1,
         const bool empty_content = false) const;
 
     /**
      * @brief Makes @code how_many lines, each with the following
-     * segments: text, scriptlet, text.
+     * composition: text block, expression block, text block.
      */
     std::list<line>
     make_mixed_content_lines(const unsigned int how_many = 1) const;
 
     /**
-     * @brief Makes @code how_many lines with a single scriptlet segment.
+     * @brief Makes @code how_many lines with a single standard
+     * control block.
      */
     std::list<line>
-    make_scriptlet_only_lines(const unsigned int how_many = 1) const;
+    make_standard_control_block_only_lines(
+        const unsigned int how_many = 1) const;
+
+    /**
+     * @brief Makes @code how_many lines with a single expression block.
+     */
+    std::list<line>
+    make_expression_block_only_lines(const unsigned int how_many = 1) const;
 
 public:
     /**
@@ -68,80 +76,140 @@ public:
     text_template make_empty_template() const;
 
     /**
-     * @brief Creates a text template with a single text line.
+     * @brief Creates a text template with a single line, composed of
+     * a text block.
      */
-    text_template make_single_text_line() const;
+    text_template make_single_text_block_line() const;
 
     /**
-     * @brief Creates a text template with @code how_many text lines.
+     * @brief Creates a text template with @code how_many lines, each
+     * made up of a single text block.
      */
-    text_template make_multiple_text_lines(
+    text_template make_multiple_text_block_lines(
         const unsigned int how_many = 2) const;
 
     /**
-     * @brief Creates a text template with a single-line scriptlet.
+     * @brief Creates a text template with one line composed of a
+     * single-line expression block.
      */
-    text_template make_single_scriptlet_line() const;
+    text_template make_single_expression_block_line() const;
 
     /**
-     * @brief Creates a text template with @code how_many scriptlet
-     * lines.
+     * @brief Creates a text template with @code how_many lines, each
+     * made up of a single-line expression block.
      */
-    text_template make_multiple_scriptlet_lines(
+    text_template make_multiple_expression_block_lines(
         const unsigned int how_many = 2) const;
 
     /**
-     * @brief Creates a text template with text, followed by a
-     * scriptlet, followed by text, all single lined.
+     * @brief Creates a text template with one line composed of a
+     * single-line standard control block.
      */
-    text_template make_text_scriptlet_text_single_line() const;
+    text_template make_single_standard_control_block_line() const;
 
     /**
-     * @brief Creates a text template with scriptlet, followed by
-     * text, followed scriptlet, all single lined.
+     * @brief Creates a text template with @code how_many lines, each
+     * made up of a single-line standard control block.
      */
-    text_template make_scriptlet_text_scriptlet_single_line() const;
-
-    /**
-     * @brief Creates a text template with text, followed by a
-     * scriptlet, followed by text, all with @code how_many lines.
-     */
-    text_template make_text_scriptlet_text_multi_line(
+    text_template make_multiple_standard_control_block_lines(
         const unsigned int how_many = 2) const;
 
     /**
-     * @brief Creates a text template with scriptlet, followed by
-     * text, followed by scriptlet, all with @code how_many lines.
+     * @brief Creates a text template with three lines, each composed
+     * of a single block. The blocks are as follows: a text block,
+     * followed by a expression block, followed by a text block.
      */
-    text_template make_scriptlet_text_scriptlet_multi_line(
+    text_template make_text_expression_text_single_line() const;
+
+    /**
+     * @brief Creates a text template with three lines, each composed
+     * of a single block. The blocks are as follows: an expression
+     * block, followed by a text block, followed by an expression
+     * block.
+     */
+    text_template make_expression_text_expression_single_line() const;
+
+    /**
+     * @brief Creates a text template with three "groups", each of
+     * size @code how_many lines. Each group is composed of a text
+     * block, followed by an expression block, followed by a text
+     * block.
+     */
+    text_template make_text_expression_text_multi_line(
         const unsigned int how_many = 2) const;
 
     /**
-     * @brief Creates a text template a mixed content block a mix of
-     * text and scriptlet.
+     * @brief Creates a text template with three "groups", each of
+     * size @code how_many lines. Each group is composed of an
+     * expression block, followed by a text block, followed by an
+     * expression block.
+     */
+    text_template make_expression_text_expression_multi_line(
+        const unsigned int how_many = 2) const;
+
+    /**
+     * @brief Creates a text template with three lines, each composed
+     * of a single block. The blocks are as follows: a text block,
+     * followed by a standard control block, followed by a text block.
+     */
+    text_template make_text_standard_control_text_single_line() const;
+
+    /**
+     * @brief Creates a text template with three lines, each composed
+     * of a single block. The blocks are as follows: a standard
+     * control block, followed by a text block, followed by a standard
+     * control block.
+     */
+    text_template
+    make_standard_control_text_standard_control_single_line() const;
+
+    /**
+     * @brief Creates a text template with three "groups", each of
+     * size @code how_many lines. Each group is composed of a text
+     * block, followed by a standard control block, followed by a text
+     * block.
+     */
+    text_template make_text_standard_control_text_multi_line(
+        const unsigned int how_many = 2) const;
+
+    /**
+     * @brief Creates a text template with three "groups", each of
+     * size @code how_many lines. Each group is composed of a standard
+     * control block, followed by a text block, followed by a standard
+     * control block.
+     */
+    text_template make_standard_control_text_standard_control_multi_line(
+        const unsigned int how_many = 2) const;
+
+    /**
+     * @brief Creates a text template with a line that is composed of
+     * a text block, followed by an expression block, followed by a
+     * text block.
      */
     text_template make_mixed_content_single_line() const;
 
     /**
-     * @brief Creates a text template a mixed content block a mix of
-     * text and scriptlet. The block is composed of @code how_many
-     * lines.
+     * @brief Creates a text template with @code how_many lines,
+     * composed of a text block, followed by an expression block,
+     * followed by a text block.
      */
     text_template make_mixed_content_multi_line(
         const unsigned int how_many = 2) const;
 
     /**
-     * @brief Creates a text template with a text line with single and
-     * double quotes.
+     * @brief Creates a text template with a line composed of a text
+     * block with single and double quotes.
      */
     text_template make_text_line_with_quotes() const;
 
 public:
     /**
      * @brief Creates a text template a complex structure: multi-line
-     * text, followed by multi-line scriptlet, followed by mixed
-     * content text, followed by followed by single-line scriptlet,
-     * followed by single-line text.
+     * text blocks, followed by multi-line standard control blocks,
+     * followed by several lines of mixed content (text blocks and
+     * expression blocks in the same line), followed by followed by
+     * single-line expression blocks, and finishing with a single-line
+     * text block.
      */
     text_template make_complex_structure() const;
 
@@ -157,7 +225,7 @@ public:
     text_template make_with_containing_namespace() const;
 
     /**
-     * @brief Text template with empty text lines.
+     * @brief Text template with lines that have empty text blocks.
      */
     text_template make_empty_text_lines(const unsigned int how_many = 2) const;
 

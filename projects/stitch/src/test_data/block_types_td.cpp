@@ -18,24 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_FWD_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_FWD_SER_HPP
+#include "dogen/stitch/test_data/block_types_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace stitch {
 
-#include "dogen/stitch/types/segment_fwd.hpp"
+block_types_generator::block_types_generator() : position_(0) { }
+void block_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<block_types>(position % 4);
+}
 
-namespace boost {
-namespace serialization {
+block_types_generator::result_type
+block_types_generator::create(const unsigned int  position) {
+    result_type r;
+    block_types_generator::populate(position, r);
+    return r;
+}
 
-template<class Archive>
-void save(Archive& ar, const dogen::stitch::segment& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::stitch::segment& v, unsigned int version);
+block_types_generator::result_type
+block_types_generator::operator()() {
+    return create(position_++);
+}
 
 } }
-
-#endif

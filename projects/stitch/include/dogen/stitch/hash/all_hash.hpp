@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/stitch/hash/line_hash.hpp"
-#include "dogen/stitch/hash/segment_hash.hpp"
-#include "dogen/stitch/hash/segment_types_hash.hpp"
+#include "dogen/stitch/hash/block_hash.hpp"
+#include "dogen/stitch/hash/block_types_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/stitch/hash/settings_bundle_hash.hpp"
 #include "dogen/stitch/hash/stitching_settings_hash.hpp"

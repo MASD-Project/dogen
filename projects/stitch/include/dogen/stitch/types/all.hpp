@@ -19,14 +19,14 @@
  *
  */
 #include "dogen/stitch/types/line.hpp"
+#include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/parser.hpp"
 #include "dogen/stitch/types/traits.hpp"
-#include "dogen/stitch/types/segment.hpp"
 #include "dogen/stitch/types/expander.hpp"
 #include "dogen/stitch/types/workflow.hpp"
 #include "dogen/stitch/types/formatter.hpp"
+#include "dogen/stitch/types/block_types.hpp"
 #include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/types/segment_types.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 #include "dogen/stitch/types/building_error.hpp"
 #include "dogen/stitch/types/workflow_error.hpp"

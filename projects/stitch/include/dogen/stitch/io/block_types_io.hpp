@@ -18,27 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/test_data/segment_types_td.hpp"
+#ifndef DOGEN_STITCH_IO_BLOCK_TYPES_IO_HPP
+#define DOGEN_STITCH_IO_BLOCK_TYPES_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/stitch/types/block_types.hpp"
 
 namespace dogen {
 namespace stitch {
 
-segment_types_generator::segment_types_generator() : position_(0) { }
-void segment_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<segment_types>(position % 3);
-}
-
-segment_types_generator::result_type
-segment_types_generator::create(const unsigned int  position) {
-    result_type r;
-    segment_types_generator::populate(position, r);
-    return r;
-}
-
-segment_types_generator::result_type
-segment_types_generator::operator()() {
-    return create(position_++);
-}
+std::ostream& operator<<(std::ostream& s, const block_types& v);
 
 } }
+
+#endif

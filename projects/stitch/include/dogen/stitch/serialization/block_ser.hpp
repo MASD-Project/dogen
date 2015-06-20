@@ -18,32 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/stitch/io/segment_types_io.hpp"
+#ifndef DOGEN_STITCH_SERIALIZATION_BLOCK_SER_HPP
+#define DOGEN_STITCH_SERIALIZATION_BLOCK_SER_HPP
 
-namespace dogen {
-namespace stitch {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const segment_types& v) {
-    s << "{ " << "\"__type__\": " << "\"segment_types\", " << "\"value\": ";
+#include <boost/serialization/split_free.hpp>
+#include "dogen/stitch/types/block.hpp"
 
-    std::string attr;
-    switch (v) {
-    case segment_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case segment_types::text:
-        attr = "\"text\"";
-        break;
-    case segment_types::scriptlet:
-        attr = "\"scriptlet\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for segment_types");
-    }
-    s << attr << " }";
-    return s;
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::stitch::block)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::stitch::block& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::stitch::block& v, unsigned int version);
 
 } }
+
+#endif

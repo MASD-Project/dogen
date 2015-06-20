@@ -18,20 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_SERIALIZATION_SEGMENT_TYPES_SER_HPP
-#define DOGEN_STITCH_SERIALIZATION_SEGMENT_TYPES_SER_HPP
+#ifndef DOGEN_STITCH_IO_BLOCK_IO_HPP
+#define DOGEN_STITCH_IO_BLOCK_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/stitch/types/segment_types.hpp"
+#include <iosfwd>
+#include "dogen/stitch/types/block.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::stitch::segment_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("segment_types", v);
-}
+namespace dogen {
+namespace stitch {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::stitch::block& v);
+
+} }
 
 #endif

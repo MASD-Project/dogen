@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/segment_ser.hpp"
+#include "dogen/stitch/serialization/block_ser.hpp"
 #include "dogen/stitch/serialization/registrar_ser.hpp"
-#include "dogen/stitch/serialization/segment_types_ser.hpp"
+#include "dogen/stitch/serialization/block_types_ser.hpp"
 #include "dogen/stitch/serialization/text_template_ser.hpp"
 #include "dogen/stitch/serialization/settings_bundle_ser.hpp"
 #include "dogen/stitch/serialization/stitching_settings_ser.hpp"

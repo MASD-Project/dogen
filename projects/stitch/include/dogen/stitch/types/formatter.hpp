@@ -40,23 +40,39 @@ namespace stitch {
 class formatter final {
 private:
     /**
-     * @brief Formats a line with just text.
+     * @brief Formats a line with just a text block.
      */
-    void format_text_line(const std::string& stream_name, const std::string& l,
+    void format_text_block_line(
+        const std::string& stream_name, const std::string& l,
         std::ostream& s) const;
 
     /**
-     * @brief Formats a line with just scriptlet.
+     * @brief Formats a line with just an expression block.
      */
-    void format_scriptlet_line(const std::string& l, std::ostream& s) const;
+    void format_expression_block_line(const std::string& stream_name,
+        const std::string& l, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with just a standard control block.
+     */
+    void format_standard_control_block_line(
+        const std::string& l, std::ostream& s) const;
 
     /**
      * @brief Formats a line with mixed content.
+     *
+     * @pre Mixed content must be text blocks and expression blocks.
      */
     void format_mixed_content_line(const std::string& stream_name,
         const line& l, std::ostream& s) const;
 
-public:
+    /**
+     * @brief Formats a line with a single block.
+     */
+    void format_line_with_single_block(const std::string& stream_name,
+        const line& l, std::ostream& s) const;
+
+ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */

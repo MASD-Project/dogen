@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_SEGMENT_HPP
-#define DOGEN_STITCH_TYPES_SEGMENT_HPP
+#ifndef DOGEN_STITCH_TYPES_BLOCK_HPP
+#define DOGEN_STITCH_TYPES_BLOCK_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,36 +27,36 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/stitch/types/segment_types.hpp"
-#include "dogen/stitch/serialization/segment_fwd_ser.hpp"
+#include "dogen/stitch/types/block_types.hpp"
+#include "dogen/stitch/serialization/block_fwd_ser.hpp"
 
 namespace dogen {
 namespace stitch {
 
-class segment final {
+class block final {
 public:
-    segment(const segment&) = default;
-    segment(segment&&) = default;
-    ~segment() = default;
+    block(const block&) = default;
+    block(block&&) = default;
+    ~block() = default;
 
 public:
-    segment();
+    block();
 
 public:
-    segment(
-        const dogen::stitch::segment_types type,
+    block(
+        const dogen::stitch::block_types type,
         const std::string& content);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const segment& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const block& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, segment& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, block& v, unsigned int version);
 
 public:
-    dogen::stitch::segment_types type() const;
-    void type(const dogen::stitch::segment_types v);
+    dogen::stitch::block_types type() const;
+    void type(const dogen::stitch::block_types v);
 
     const std::string& content() const;
     std::string& content();
@@ -64,17 +64,17 @@ public:
     void content(const std::string&& v);
 
 public:
-    bool operator==(const segment& rhs) const;
-    bool operator!=(const segment& rhs) const {
+    bool operator==(const block& rhs) const;
+    bool operator!=(const block& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(segment& other) noexcept;
-    segment& operator=(segment other);
+    void swap(block& other) noexcept;
+    block& operator=(block other);
 
 private:
-    dogen::stitch::segment_types type_;
+    dogen::stitch::block_types type_;
     std::string content_;
 };
 
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::stitch::segment& lhs,
-    dogen::stitch::segment& rhs) {
+    dogen::stitch::block& lhs,
+    dogen::stitch::block& rhs) {
     lhs.swap(rhs);
 }
 

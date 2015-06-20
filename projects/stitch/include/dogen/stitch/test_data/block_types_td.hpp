@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_STITCH_TYPES_SEGMENT_TYPES_HPP
-#define DOGEN_STITCH_TYPES_SEGMENT_TYPES_HPP
+#ifndef DOGEN_STITCH_TEST_DATA_BLOCK_TYPES_TD_HPP
+#define DOGEN_STITCH_TEST_DATA_BLOCK_TYPES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/stitch/types/block_types.hpp"
+
 namespace dogen {
 namespace stitch {
 
-enum class segment_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    text = 1,
-    scriptlet = 2
+class block_types_generator {
+public:
+    block_types_generator();
+
+public:
+    typedef dogen::stitch::block_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
 };
 
 } }

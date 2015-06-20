@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include "dogen/stitch/io/line_io.hpp"
-#include "dogen/stitch/io/segment_io.hpp"
+#include "dogen/stitch/io/block_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::segment>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::stitch::block>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -42,7 +42,7 @@ namespace stitch {
 std::ostream& operator<<(std::ostream& s, const line& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::stitch::line\"" << ", "
-      << "\"segments\": " << v.segments()
+      << "\"blocks\": " << v.blocks()
       << " }";
     return(s);
 }

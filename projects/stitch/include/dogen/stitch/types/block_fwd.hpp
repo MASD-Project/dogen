@@ -18,28 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/stitch/io/segment_io.hpp"
-#include "dogen/stitch/io/segment_types_io.hpp"
+#ifndef DOGEN_STITCH_TYPES_BLOCK_FWD_HPP
+#define DOGEN_STITCH_TYPES_BLOCK_FWD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace stitch {
 
-std::ostream& operator<<(std::ostream& s, const segment& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::stitch::segment\"" << ", "
-      << "\"type\": " << v.type() << ", "
-      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
-      << " }";
-    return(s);
-}
+class block;
 
 } }
+
+#endif
