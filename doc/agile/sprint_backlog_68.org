@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 18:45]
+#+CAPTION: Clock summary at [2015-06-20 Sat 19:14]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *45:09* |       |       |
+| *Total time*                                                                | *45:37* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 45:09   |       |       |
-| Active                                                                      |         | 45:09 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:52 |
+| Stories                                                                     | 45:37   |       |       |
+| Active                                                                      |         | 45:37 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:58 |
 | COMPLETED Implement types class implementation formatter using stitch       |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
@@ -42,10 +42,11 @@
 | COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
 | COMPLETED Implement class implementation formatter in test_data             |         |       |  6:29 |
 | COMPLETED Implement enum header formatter in test_data                      |         |       |  0:17 |
-| STARTED Implement enum implementation formatter in test_data                |         |       |  0:13 |
+| COMPLETED Implement enum implementation formatter in test_data              |         |       |  0:35 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-20 Sat 19:08]--[2015-06-20 Sat 19:14] =>  0:06
     CLOCK: [2015-06-20 Sat 16:58]--[2015-06-20 Sat 17:17] =>  0:19
     CLOCK: [2015-06-20 Sat 13:07]--[2015-06-20 Sat 13:27] =>  0:20
     CLOCK: [2015-06-15 Mon 21:56]--[2015-06-15 Mon 22:02] =>  0:06
@@ -617,69 +618,37 @@ Solved Problems:
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-*** STARTED Implement enum implementation formatter in test_data      :story:
+*** COMPLETED Implement enum implementation formatter in test_data    :story:
+    CLOSED: [2015-06-20 Sat 19:08]
+    CLOCK: [2015-06-20 Sat 18:46]--[2015-06-20 Sat 19:08] =>  0:22
     CLOCK: [2015-06-20 Sat 18:32]--[2015-06-20 Sat 18:45] =>  0:13
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-Problems:
+Solved problems:
 
 - missing newline after namespaces.
 
-*** Remove complete name and use qualified name                       :story:
+*** Implement class header formatter in serialisation                 :story:
 
-At present we have both complete name and qualified name in
-formatables. Qualified name is blank. We should remove complete name
-and populate qualified name.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
-*** Remove intermediate fields from dynamic                           :story:
+*** Implement class implementation formatter in serialisation         :story:
 
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
-*** Helper methods should have their own includes                     :story:
+*** Implement enum header formatter in test_data                      :story:
 
-When a formatter relies on the helper methods, we have a problem: we
-need to determine the required includes from the main formatter
-without knowing what the helper methods may need. We have hacked this
-with things like the "special includes" but there must be a cleaner
-way of doing this. For example, we could ask the helper methods
-formatter to provide its includes and it would be its job to either
-delegate further or to compute the includes. This would at least
-remove the duplication of code between io and types.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
-However, its important to bear in mind that helper methods are a hack
-anyways so we don't want to spend too much time fixing them.
+*** Implement enum implementation formatter in test_data              :story:
 
-*** Duplicate fields in JSON result in non-intuitive errors           :story:
-
-By mistake we added the same field twice in JSON:
-
-:            "extensions" : {
-:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
-:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
-:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
-:                "cpp.hash.class_header_formatter.inclusion_required" : false
-
-The resulting error message was not particularly helpful:
-
-: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
-: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
-
-*** Formatters with duplicate names result in non-intuitive errors    :story:
-
-We added two formatters to io with the same name by mistake and the
-resulting error was not particularly enlightening:
-
-: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
-
-We should have a very early on validation to ensure formatters have
-distinct names.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 ** Deprecated
 *** CANCELLED Indent stream can be made a bit less inefficient        :story:

@@ -10,6 +10,60 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Remove complete name and use qualified name                       :story:
+
+At present we have both complete name and qualified name in
+formatables. Qualified name is blank. We should remove complete name
+and populate qualified name.
+
+*** Remove intermediate fields from dynamic                           :story:
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
+
+*** Helper methods should have their own includes                     :story:
+
+When a formatter relies on the helper methods, we have a problem: we
+need to determine the required includes from the main formatter
+without knowing what the helper methods may need. We have hacked this
+with things like the "special includes" but there must be a cleaner
+way of doing this. For example, we could ask the helper methods
+formatter to provide its includes and it would be its job to either
+delegate further or to compute the includes. This would at least
+remove the duplication of code between io and types.
+
+However, its important to bear in mind that helper methods are a hack
+anyways so we don't want to spend too much time fixing them.
+
+*** Duplicate fields in JSON result in non-intuitive errors           :story:
+
+By mistake we added the same field twice in JSON:
+
+:            "extensions" : {
+:                "cpp.types.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree.hpp>",
+:                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/property_tree/ptree_serialization.hpp>",
+:                "cpp.io.class_header_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.io.class_implementation_formatter.inclusion_directive" : "<boost/property_tree/json_parser.hpp>",
+:                "cpp.hash.class_header_formatter.inclusion_required" : false
+
+The resulting error message was not particularly helpful:
+
+: 2015-06-17 13:56:06.658500 [DEBUG] [sml.json_hydrator] Processing type: <boost><property_tree><ptree>
+: 2015-06-17 13:56:06.658519 [ERROR] [dynamic.field_instance_factory] Expected at most one element
+
+*** Formatters with duplicate names result in non-intuitive errors    :story:
+
+We added two formatters to io with the same name by mistake and the
+resulting error was not particularly enlightening:
+
+: std::exception::what: Qualified name defined more than once: cpp.io.enum_header_formatter.inclusion_required
+
+We should have a very early on validation to ensure formatters have
+distinct names.
+
 *** Add relationship types to handle "requires" and enablement        :story:
 
 This story needs to be named properly, once we actually understand
@@ -6976,6 +7030,13 @@ it in anger with dogen:
   from git but the diagram was opened in dia, and did not refresh.
 - crossing lines (associations, etc) should "curve" up so that one can
   still follow the relationship.
+
+It seems like dia is also using GitHub these days:
+
+https://github.com/GNOME/dia
+
+If we have a go at creating any patches for the above ideas we should
+submit a PR.
 
 *** Consider adding YQL support                                        :epic:
 
