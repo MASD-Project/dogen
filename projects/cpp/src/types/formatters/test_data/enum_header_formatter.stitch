@@ -9,7 +9,7 @@
 
 dogen::formatters::file enum_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    const formattables::enum_info& e) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
@@ -17,14 +17,29 @@ dogen::formatters::file enum_header_formatter_stitch(
             auto snf(fa.make_scoped_namespace_formatter());
 #>
 
+class <#= e.name() #>_generator {
+public:
+    <#= e.name() #>_generator();
+
+public:
+    typedef <#= e.qualified_name() #> result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
 <#+
          } // snf
 #>
 
 <#+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 #>

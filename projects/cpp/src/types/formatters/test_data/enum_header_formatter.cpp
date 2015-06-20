@@ -54,8 +54,6 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::enumeration& o) const {
     auto builder(f.make());
 
-    builder.add(inclusion_constants::std::functional());
-
     const auto ch_fn(types::traits::class_header_formatter_name());
     builder.add(o.name(), ch_fn);
     return builder.build();
