@@ -53,7 +53,6 @@
 #include "dogen/cpp/test_data/formattables/visited_type_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/content_descriptor_td.hpp"
 #include "dogen/cpp/test_data/formattables/formatter_properties_td.hpp"
-#include "dogen/cpp/test_data/formatters/serialization/settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/enablement_repository_td.hpp"
 #include "dogen/cpp/test_data/settings/inclusion_directive_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/forward_declarations_info_td.hpp"

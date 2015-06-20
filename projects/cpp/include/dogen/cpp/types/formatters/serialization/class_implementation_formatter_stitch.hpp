@@ -18,43 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_SETTINGS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_SETTINGS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_CLASS_IMPLEMENTATION_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/cpp/serialization/formatters/serialization/settings_fwd_ser.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class settings final {
-public:
-    settings() = default;
-    settings(const settings&) = default;
-    settings(settings&&) = default;
-    ~settings() = default;
-    settings& operator=(const settings&) = default;
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const settings& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, settings& v, unsigned int version);
-
-public:
-    bool operator==(const settings& rhs) const;
-    bool operator!=(const settings& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+dogen::formatters::file class_implementation_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& fd);
 
 } } } }
 

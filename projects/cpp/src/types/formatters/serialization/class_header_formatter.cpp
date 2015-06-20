@@ -21,6 +21,8 @@
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/serialization/class_header_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_header_formatter.hpp"
 
 namespace dogen {
@@ -50,8 +52,9 @@ void class_header_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file class_header_formatter::
-format(const formattables::class_info& /*c*/) const {
-    dogen::formatters::file r;
+format(const formattables::class_info& c) const {
+    entity_formatting_assistant fa(c, ownership_hierarchy(), file_type());
+    const auto r(class_header_formatter_stitch(fa, c));
     return r;
 }
 

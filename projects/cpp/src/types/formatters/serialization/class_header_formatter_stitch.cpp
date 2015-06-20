@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,24 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_FORMATTERS_SERIALIZATION_SETTINGS_FWD_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_FORMATTERS_SERIALIZATION_SETTINGS_FWD_SER_HPP
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/serialization/class_header_formatter_stitch.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/cpp/types/formatters/serialization/settings_fwd.hpp"
-
-namespace boost {
+namespace dogen {
+namespace cpp {
+namespace formatters {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::cpp::formatters::serialization::settings& v, unsigned int version);
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& /*c*/) {
 
-template<class Archive>
-void load(Archive& ar, dogen::cpp::formatters::serialization::settings& v, unsigned int version);
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 
-} }
-
-#endif
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
+}
+} } } }

@@ -18,37 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TEST_DATA_FORMATTERS_SERIALIZATION_SETTINGS_TD_HPP
-#define DOGEN_CPP_TEST_DATA_FORMATTERS_SERIALIZATION_SETTINGS_TD_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_CLASS_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_CLASS_HEADER_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/serialization/settings.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class settings_generator {
-public:
-    settings_generator();
-
-public:
-    typedef dogen::cpp::formatters::serialization::settings result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& fd);
 
 } } } }
 

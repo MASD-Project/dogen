@@ -20,6 +20,7 @@
  */
 #include <memory>
 #include "dogen/cpp/types/formatters/serialization/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/serialization/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/initializer.hpp"
 
@@ -36,6 +37,7 @@ inline void initialise_formatter(registrar& rg) {
 
 void initializer::initialize(registrar& rg) {
     initialise_formatter<class_header_formatter>(rg);
+    initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<forward_declarations_formatter>(rg);
 }
 

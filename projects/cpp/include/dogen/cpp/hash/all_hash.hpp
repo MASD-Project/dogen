@@ -53,7 +53,6 @@
 #include "dogen/cpp/hash/formattables/visited_type_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/content_descriptor_hash.hpp"
 #include "dogen/cpp/hash/formattables/formatter_properties_hash.hpp"
-#include "dogen/cpp/hash/formatters/serialization/settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/enablement_repository_hash.hpp"
 #include "dogen/cpp/hash/settings/inclusion_directive_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/forward_declarations_info_hash.hpp"
