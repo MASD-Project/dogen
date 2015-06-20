@@ -31,7 +31,8 @@ void composite_type_helper_stitch(
     const formattables::nested_type_info& t,
     const bool as_pointer) {
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << (as_pointer ? "*" : "") << " create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << (as_pointer ? "*" : "") << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(const unsigned int) {" << std::endl;
     if (as_pointer)
 fa.stream() << "    return nullptr;" << std::endl;
     else

@@ -13,7 +13,8 @@ void composite_type_helper_stitch(
     const bool as_pointer) {
 #>
 
-<#= t.complete_name() #><#= (as_pointer ? "*" : "") #> create_<#= t.complete_identifiable_name() #><#= (as_pointer ? "_ptr" : "") #>(unsigned int position) {
+<#= t.complete_name() #><#= (as_pointer ? "*" : "") #>
+create_<#= t.complete_identifiable_name() #><#= (as_pointer ? "_ptr" : "") #>(const unsigned int) {
 <#+
     if (as_pointer)
 #>

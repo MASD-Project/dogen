@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 18:03]
+#+CAPTION: Clock summary at [2015-06-20 Sat 18:14]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *44:30* |       |       |
+| *Total time*                                                                | *44:39* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 44:30   |       |       |
-| Active                                                                      |         | 44:30 |       |
+| Stories                                                                     | 44:39   |       |       |
+| Active                                                                      |         | 44:39 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:52 |
-| COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
+| COMPLETED Implement types class implementation formatter using stitch       |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
 | COMPLETED Hack inclusion to take into account stream manipulation           |         |       |  1:02 |
@@ -40,7 +40,7 @@
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
 | COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  6:20 |
+| COMPLETED Implement class implementation formatter in test_data             |         |       |  6:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -62,7 +62,7 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** COMPLETED Implement class implementation formatter using stitch   :story:
+*** COMPLETED Implement types class implementation formatter using stitch :story:
     CLOSED: [2015-06-11 Thu 21:31]
     CLOCK: [2015-06-11 Thu 20:59]--[2015-06-11 Thu 21:31] =>  0:32
     CLOCK: [2015-06-11 Thu 18:52]--[2015-06-11 Thu 19:08] =>  0:16
@@ -556,7 +556,9 @@ works on all cases, bar one: the case of a line that contains
 <#=. That is indistinguishable from a line with <#+. We need to split
 these two scriplet types.
 
-*** STARTED Implement class implementation formatter in test_data     :story:
+*** COMPLETED Implement class implementation formatter in test_data   :story:
+    CLOSED: [2015-06-20 Sat 18:13]
+    CLOCK: [2015-06-20 Sat 18:04]--[2015-06-20 Sat 18:13] =>  0:09
     CLOCK: [2015-06-20 Sat 17:51]--[2015-06-20 Sat 18:03] =>  0:12
     CLOCK: [2015-06-20 Sat 17:18]--[2015-06-20 Sat 17:50] =>  0:32
     CLOCK: [2015-06-20 Sat 16:48]--[2015-06-20 Sat 16:57] =>  0:09
@@ -582,8 +584,9 @@ machinery. Fix all differences.
 
 Solved Problems:
 
-- missing commas in immutable
-- legacy has newline in immutable when we have no properties
+- composite had no newline and named parameter.
+- missing commas in immutable.
+- legacy has newline in immutable when we have no properties.
 - domain type as both pointer and non-pointer does not generate
   non-pointer helper.
 - domain helper missing newline after return type and has an extra
