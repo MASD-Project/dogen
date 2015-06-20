@@ -9,13 +9,31 @@
 
 dogen::formatters::file enum_implementation_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    const formattables::enum_info& e) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
 #>
+
+<#= e.name() #>_generator::<#= e.name() #>_generator() : position_(0) { }
+void <#= e.name() #>_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<<#= e.name() #>>(position % 5);
+}
+
+<#= e.name() #>_generator::result_type
+<#= e.name() #>_generator::create(const unsigned int  position) {
+    result_type r;
+    <#= e.name() #>_generator::populate(position, r);
+    return r;
+}
+
+<#= e.name() #>_generator::result_type
+<#= e.name() #>_generator::operator()() {
+    return create(position_++);
+}
 
 <#+
          } // snf
