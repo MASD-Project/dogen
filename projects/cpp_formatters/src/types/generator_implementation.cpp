@@ -932,6 +932,7 @@ void generator_implementation::format_enumeration(
         utility_.close_scope();
         utility_.blank_line();
     }
+    utility_.blank_line();
 }
 
 void generator_implementation::format(const cpp::formattables::file_info& f) {
