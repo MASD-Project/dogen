@@ -5857,6 +5857,18 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Generate model from database tables                               :story:
+
+Insane idea: one could point knit to a database from a supported
+vendor and generate the C++ code needed to represent those
+tables. This could be filtered by the user. Idea came from here:
+
+[[https://msdn.microsoft.com/en-us/data/gg558520.aspx][T4 Templates and the Entity Framework]]
+
+All we need is a "database frontend" responsible for connecting to the
+database and performing the mapping between the database types and the
+language specific types.
+
 *** Investigate GDB visualisers for generated models                  :epic:
 
 #+begin_quote
