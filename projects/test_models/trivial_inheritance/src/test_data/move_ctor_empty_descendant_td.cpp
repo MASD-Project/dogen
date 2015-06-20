@@ -21,8 +21,6 @@
 #include "dogen/test_models/trivial_inheritance/test_data/move_ctor_base_td.hpp"
 #include "dogen/test_models/trivial_inheritance/test_data/move_ctor_empty_descendant_td.hpp"
 
-
-
 namespace dogen {
 namespace test_models {
 namespace trivial_inheritance {

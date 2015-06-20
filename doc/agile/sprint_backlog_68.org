@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 15:11]
+#+CAPTION: Clock summary at [2015-06-20 Sat 15:40]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *42:44* |       |       |
+| *Total time*                                                                | *43:12* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 42:44   |       |       |
-| Active                                                                      |         | 42:44 |       |
+| Stories                                                                     | 43:12   |       |       |
+| Active                                                                      |         | 43:12 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:33 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -40,7 +40,7 @@
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
 | COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  4:53 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  5:21 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -556,6 +556,7 @@ works on all cases, bar one: the case of a line that contains
 these two scriplet types.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-20 Sat 15:12]--[2015-06-20 Sat 15:40] =>  0:28
     CLOCK: [2015-06-20 Sat 14:53]--[2015-06-20 Sat 15:11] =>  0:18
     CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10
     CLOCK: [2015-06-18 Thu 23:27]--[2015-06-18 Thu 23:42] =>  0:15
@@ -576,9 +577,10 @@ machinery. Fix all differences.
 
 Problems:
 
-- extra spaces for some inheritance types.
-- domain helper missing newline after return type and has an extra _
-  in return
+- extra spaces for some inheritance types: child_of_a_child1_td,
+  move_ctor_empty_descendant_td, second_child_without_members_td.
+- domain helper missing newline after return type and has an extra
+  underscore in return.
 
 Solved Problems:
 

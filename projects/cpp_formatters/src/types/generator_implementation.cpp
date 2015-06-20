@@ -485,6 +485,7 @@ domain_type_helper(const std::string& identifiable_type_name,
         }
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
 void generator_implementation::
@@ -507,6 +508,7 @@ composite_domain_type_helper(const std::string& identifiable_type_name,
                     << std::endl;
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
 void generator_implementation::bool_helper() {
@@ -517,6 +519,7 @@ void generator_implementation::bool_helper() {
         stream_ << indenter_ << "return (position % 2) == 0;" << std::endl;
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
 void generator_implementation::string_helper() {
@@ -532,6 +535,7 @@ void generator_implementation::string_helper() {
         stream_ << indenter_ << "return s.str();" << std::endl;
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
 void generator_implementation::
@@ -550,6 +554,7 @@ char_like_helper(const std::string& identifiable_type_name,
                 << std::endl;
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
 void generator_implementation::
@@ -570,9 +575,10 @@ int_like_helper(const std::string& identifiable_type_name,
         stream_ << std::endl;
     }
     utility_.close_scope();
+    utility_.blank_line();
 }
 
-void generator_implementation::
+bool generator_implementation::
 recursive_helper_method_creator(const std::string& owner_name,
     const cpp::formattables::nested_type_info& nti,
     std::unordered_set<std::string>& types_done, bool as_pointer) {
@@ -582,70 +588,84 @@ recursive_helper_method_creator(const std::string& owner_name,
     if (as_pointer)
         type_name += "_ptr";
 
+    bool r(false);
     if (types_done.find(type_name) != types_done.end())
-        return;
+        return r;
 
     const auto children(nti.children());
     for (const auto c : children)
-        recursive_helper_method_creator(owner_name, c, types_done,
+        r |= recursive_helper_method_creator(owner_name, c, types_done,
             nti.is_smart_pointer());
 
     if (nti.is_primitive()) {
         if (nti.is_char_like()) {
+            r = true;
             char_like_helper(nti.identifiable_name(), nti.name());
-            utility_.blank_line();
         } else if (nti.is_int_like()) {
+            r = true;
             int_like_helper(nti.identifiable_name(), nti.name());
-            utility_.blank_line();
         } else if (nti.name() == bool_type) {
+            r = true;
             bool_helper();
-            utility_.blank_line();
         }
-    } else if (nti.is_sequence_container())
+    } else if (nti.is_sequence_container()) {
+        r = true;
         sequence_container_helper(nti, quantity);
-    else if (nti.is_associative_container())
+    } else if (nti.is_associative_container()) {
+        r = true;
         associative_container_helper(nti, quantity);
-    else if (nti.is_smart_pointer())
+    } else if (nti.is_smart_pointer()) {
+        r = true;
         smart_pointer_helper(nti);
-    else if (nti.is_optional_like())
+    } else if (nti.is_optional_like()) {
+        r = true;
         optional_helper(nti);
-    else if (nti.is_pair())
+    } else if (nti.is_pair()) {
+        r = true;
         pair_helper(nti);
-    else if (nti.is_variant_like())
+    } else if (nti.is_variant_like()) {
+        r = true;
         variant_helper(nti);
-    else if (nti.is_filesystem_path())
+    } else if (nti.is_filesystem_path()) {
+        r = true;
         filesystem_path_helper(nti);
-    else if (nti.is_date())
+    } else if (nti.is_date()) {
+        r = true;
         date_helper(nti);
-    else if (nti.is_ptime())
+    } else if (nti.is_ptime()) {
+        r = true;
         ptime_helper(nti);
-    else if (nti.is_time_duration())
+    } else if (nti.is_time_duration()) {
+        r = true;
         time_duration_helper(nti);
-    else if (nti.is_ptree())
+    } else if (nti.is_ptree()) {
+        r = true;
         ptree_helper(nti);
-    else {
+    } else {
         if (nti.name() == string_type) {
+            r = true;
             string_helper();
-            utility_.blank_line();
         } else {
             if (boost::algorithm::ends_with(nti.name(), "::" + owner_name)) {
-                composite_domain_type_helper(nti.identifiable_name(), nti.name(),
-                    as_pointer);
+                r = true;
+                composite_domain_type_helper(nti.identifiable_name(),
+                    nti.name(), as_pointer);
             } else {
+                r = true;
                 domain_type_helper(nti.identifiable_name(), nti.name(),
                     as_pointer);
             }
-            utility_.blank_line();
         }
     }
     types_done.insert(type_name);
+    return r;
 }
 
-void generator_implementation::
+bool generator_implementation::
 create_helper_methods(const cpp::formattables::class_info& ci) {
     const auto props(ci.properties());
     if (props.empty())
-        return;
+        return false;
 
     using dogen::formatters::cpp::scoped_namespace_formatter;
     const auto ns = std::list<std::string> { };
@@ -655,8 +675,11 @@ create_helper_methods(const cpp::formattables::class_info& ci) {
     utility_.blank_line();
     const bool as_ptr(false);
     const auto owner(ci.name());
+    bool r(false);
     for (const auto p : props)
-        recursive_helper_method_creator(owner, p.type(), types_done, as_ptr);
+        r |= recursive_helper_method_creator(
+            owner, p.type(), types_done, as_ptr);
+    return r;
 }
 
 void generator_implementation::populate_method(
@@ -831,8 +854,8 @@ void generator_implementation::format_class(
     }
 
     const cpp::formattables::class_info& ci(*o);
-    create_helper_methods(ci);
-    if (!ci.all_properties().empty())
+    const bool created(create_helper_methods(ci));
+    if (created)
         utility_.blank_line(2);
 
     {

@@ -78,10 +78,10 @@ private:
         const std::string& type_name);
     void int_like_helper(const std::string& identifiable_type_name,
         const std::string& type_name);
-    void recursive_helper_method_creator(const std::string& owner_name,
+    bool recursive_helper_method_creator(const std::string& owner_name,
         const cpp::formattables::nested_type_info& nti,
         std::unordered_set<std::string>& types_done, bool as_pointer);
-    void create_helper_methods(const cpp::formattables::class_info& ci);
+    bool create_helper_methods(const cpp::formattables::class_info& ci);
 
 private:
     void populate_method(const cpp::formattables::class_info& ci);
