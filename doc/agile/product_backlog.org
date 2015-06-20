@@ -5890,6 +5890,24 @@ With [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/pro
 importer and processor very quickly. With support for diffs, this
 would mean one could create a CSV file differ easily.
 
+*** Generate model from JSON or XML instance files                    :story:
+
+It would be great if one could point dogen at a given JSON or XML file
+and have it infer the model. For XML, if the schema is available, one
+should just use the XSD tool of course. This approach is just for
+quick and dirty modeling where one needs to build a tool to process a
+set of existing documents.
+
+We would have to have the ability to use more than one "source
+document" and to "merge" properties across these. For example, if 3
+JSON documents are supplied, we should be able to create a type that
+is the superset of these.
+
+To be clear, this story is not about using a JSON or XML schema to
+generate a SML model, but to use instances of a given schema in JSON
+or XML to infer a possible SML model that could read that instance
+document.
+
 *** Investigate GDB visualisers for generated models                  :epic:
 
 #+begin_quote
