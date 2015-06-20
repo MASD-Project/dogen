@@ -39,6 +39,7 @@ const std::string pair_type("pair");
 const std::string string_type("string");
 const std::string variant_type("variant");
 const std::string ptree_type("ptree");
+const std::string path_type("path");
 
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string qname_not_found("Cannot find qname: ");
@@ -96,6 +97,8 @@ inclusion_dependencies_builder::make_special_includes(
                     r.has_std_pair = true;
                 else if (sn == ptree_type)
                     r.has_ptree = true;
+                else if (sn == path_type)
+                    r.has_path = true;
             }
         });
 

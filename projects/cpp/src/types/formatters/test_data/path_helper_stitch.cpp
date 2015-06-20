@@ -29,7 +29,8 @@ void path_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {    
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
 fa.stream() << "    std::ostringstream s;" << std::endl;
 fa.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
 fa.stream() << "    return " << t.name() << "(s.str());" << std::endl;

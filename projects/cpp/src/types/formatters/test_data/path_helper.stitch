@@ -11,7 +11,8 @@ void path_helper_stitch(
     const formattables::nested_type_info& t) {    
 #>
 
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+<#= t.complete_name() #>
+create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
     std::ostringstream s;
     s << "/a/path/number_" << position;
     return <#= t.name() #>(s.str());

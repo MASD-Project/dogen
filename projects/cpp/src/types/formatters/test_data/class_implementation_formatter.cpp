@@ -70,10 +70,14 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
+    if (si.has_path)
+        builder.add(inclusion_constants::std::sstream());
+
     using rt = sml::relationship_types;
     builder.add(o, rt::weak_associations, ch_fn);
     builder.add(o, rt::regular_associations, ch_fn);
     builder.add(o, rt::parents, ch_fn);
+    builder.add(o, rt::leaves, ch_fn);
 
     return builder.build();
 }
