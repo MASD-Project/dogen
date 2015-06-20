@@ -38,7 +38,7 @@ fa.stream() << std::endl;
 fa.stream() << e.name() << "_generator::" << e.name() << "_generator() : position_(0) { }" << std::endl;
 fa.stream() << "void " << e.name() << "_generator::" << std::endl;
 fa.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
-fa.stream() << "    v = static_cast<" << e.name() << ">(position % 5);" << std::endl;
+fa.stream() << "    v = static_cast<" << e.name() << ">(position % " << e.enumerators().size() << ");" << std::endl;
 fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
 fa.stream() << e.name() << "_generator::result_type" << std::endl;
@@ -55,8 +55,7 @@ fa.stream() << "}" << std::endl;
 fa.stream() << std::endl;
          } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 } } } }

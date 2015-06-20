@@ -20,7 +20,7 @@ dogen::formatters::file enum_implementation_formatter_stitch(
 <#= e.name() #>_generator::<#= e.name() #>_generator() : position_(0) { }
 void <#= e.name() #>_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<<#= e.name() #>>(position % 5);
+    v = static_cast<<#= e.name() #>>(position % <#= e.enumerators().size() #>);
 }
 
 <#= e.name() #>_generator::result_type
@@ -38,8 +38,7 @@ populate(const unsigned int position, result_type& v) {
 <#+
          } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 #>
