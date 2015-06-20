@@ -21,8 +21,6 @@
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/primitive_info_td.hpp"
 
-
-
 namespace dogen {
 namespace cpp {
 namespace formattables {

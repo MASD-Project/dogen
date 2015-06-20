@@ -21,8 +21,6 @@
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 
-
-
 namespace dogen {
 namespace sml {
 

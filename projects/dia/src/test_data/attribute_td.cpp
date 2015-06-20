@@ -89,14 +89,13 @@ create_dogen_dia_composite(const unsigned int position) {
     return dogen::dia::composite_generator::create(position);
 }
 
-
 boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite>
 create_boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite(unsigned int position) {
     boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> r;
 
     if (position == 0 || ((position % 10) == 0))
         r = create_dogen_dia_color(position);
-    else if (position == 1 || ((position %11) == 0))
+    else if (position == 1 || ((position % 11) == 0))
         r = create_dogen_dia_real(position);
     else if ((position % 2) == 0)
         r = create_dogen_dia_integer(position);
