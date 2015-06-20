@@ -156,14 +156,16 @@ private:
      */
     void composite_type_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const formattables::nested_type_info& t,
+        const bool as_pointer) const;
 
     /**
      * @brief Helper method for regular domain types.
      */
     void domain_type_helper(
         formatters::nested_type_formatting_assistant& fa,
-        const formattables::nested_type_info& t) const;
+        const formattables::nested_type_info& t,
+        const bool as_pointer) const;
 
 private:
     /**
@@ -173,7 +175,8 @@ private:
     void recursive_helper_method_creator(
         formatters::nested_type_formatting_assistant& fa,
         const formattables::nested_type_info& t,
-        std::unordered_set<std::string>& types_done) const;
+        std::unordered_set<std::string>& types_done,
+        const bool as_pointer) const;
 
 public:
     /**

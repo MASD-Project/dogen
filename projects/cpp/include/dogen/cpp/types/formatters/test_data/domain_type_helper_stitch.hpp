@@ -35,7 +35,8 @@ namespace test_data {
 
 void domain_type_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t);
+    const formattables::nested_type_info& t,
+    const bool as_pointer);
 
 } } } }
 

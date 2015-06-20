@@ -28,10 +28,11 @@ namespace test_data {
 
 void composite_type_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
-    const formattables::nested_type_info& t) {
+    const formattables::nested_type_info& t,
+    const bool as_pointer) {
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << (t.is_smart_pointer() ? "*" : "") << " create_" << t.complete_identifiable_name() << (t.is_smart_pointer() ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
-    if (t.is_smart_pointer())
+fa.stream() << t.complete_name() << (as_pointer ? "*" : "") << " create_" << t.complete_identifiable_name() << (as_pointer ? "_ptr" : "") << "(unsigned int position) {" << std::endl;
+    if (as_pointer)
 fa.stream() << "    return nullptr;" << std::endl;
     else
 fa.stream() << "    return " << t.complete_name() << "();" << std::endl;

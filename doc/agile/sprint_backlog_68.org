@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 16:47]
+#+CAPTION: Clock summary at [2015-06-20 Sat 17:50]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *43:18* |       |       |
+| *Total time*                                                                | *44:18* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 43:18   |       |       |
-| Active                                                                      |         | 43:18 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:33 |
+| Stories                                                                     | 44:18   |       |       |
+| Active                                                                      |         | 44:18 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:52 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
@@ -40,10 +40,11 @@
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
 | COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  5:27 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  6:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-20 Sat 16:58]--[2015-06-20 Sat 17:17] =>  0:19
     CLOCK: [2015-06-20 Sat 13:07]--[2015-06-20 Sat 13:27] =>  0:20
     CLOCK: [2015-06-15 Mon 21:56]--[2015-06-15 Mon 22:02] =>  0:06
     CLOCK: [2015-06-11 Thu 21:56]--[2015-06-11 Thu 22:36] =>  0:40
@@ -556,6 +557,7 @@ works on all cases, bar one: the case of a line that contains
 these two scriplet types.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-20 Sat 17:18]--[2015-06-20 Sat 17:50] =>  0:32
     CLOCK: [2015-06-20 Sat 16:48]--[2015-06-20 Sat 16:57] =>  0:09
     CLOCK: [2015-06-20 Sat 16:41]--[2015-06-20 Sat 16:47] =>  0:06
     CLOCK: [2015-06-20 Sat 15:12]--[2015-06-20 Sat 15:40] =>  0:28
@@ -579,14 +581,18 @@ machinery. Fix all differences.
 
 Problems:
 
-- include of visitor is not required for variant.
-- diffs in variant helper.
-- pointer create methods are not being generated for some types.
-- domain helper missing newline after return type and has an extra
-  underscore in return.
+- missing commas in immutable
+- legacy has newline in immutable when we have no properties
 
 Solved Problems:
 
+- domain type as both pointer and non-pointer does not generate
+  non-pointer helper.
+- domain helper missing newline after return type and has an extra
+  underscore in return.
+- include of visitor is not required for variant.
+- pointer create methods are not being generated for some types.
+- diffs in variant helper.
 - extra new line in legacy.
 - variant has no space in modulus in legacy.
 - extra spaces for some inheritance types: child_of_a_child1_td,

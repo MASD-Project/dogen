@@ -67,9 +67,6 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(o.name(), ch_fn);
 
     const auto si(builder.make_special_includes(o));
-    if (si.has_variant)
-        builder.add(inclusion_constants::boost::visitor::apply_visitor());
-
     if (si.has_path || si.has_std_string)
         builder.add(inclusion_constants::std::sstream());
 

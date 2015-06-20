@@ -223,26 +223,35 @@ void helper_methods_formatter::string_helper(
 
 void helper_methods_formatter::composite_type_helper(
   formatters::nested_type_formatting_assistant& fa,
-  const formattables::nested_type_info& t) const {
-    composite_type_helper_stitch(fa, t);
+  const formattables::nested_type_info& t,
+  const bool as_pointer) const {
+    composite_type_helper_stitch(fa, t, as_pointer);
 }
 
 void helper_methods_formatter::domain_type_helper(
   formatters::nested_type_formatting_assistant& fa,
-  const formattables::nested_type_info& t) const {
-    domain_type_helper_stitch(fa, t);
+  const formattables::nested_type_info& t,
+  const bool as_pointer) const {
+    domain_type_helper_stitch(fa, t, as_pointer);
 }
 
 void helper_methods_formatter::recursive_helper_method_creator(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t,
-    std::unordered_set<std::string>& types_done) const {
+    std::unordered_set<std::string>& types_done,
+    const bool as_pointer) const {
 
-    if (types_done.find(t.complete_identifiable_name()) != types_done.end())
+    std::string type_name(t.complete_identifiable_name());
+    if (as_pointer)
+        type_name += "_ptr";
+
+    if (types_done.find(type_name) != types_done.end())
         return;
 
-    for (const auto c : t.children())
-        recursive_helper_method_creator(fa, c, types_done);
+    for (const auto c : t.children()) {
+        recursive_helper_method_creator(fa, c, types_done,
+            t.is_smart_pointer());
+    }
 
     if (t.is_char_like())
         char_helper(fa, t);
@@ -276,11 +285,11 @@ void helper_methods_formatter::recursive_helper_method_creator(
         string_helper(fa, t);
     else {
         if (boost::algorithm::ends_with(t.name(), "::" + owner_name_))
-            composite_type_helper(fa, t);
+            composite_type_helper(fa, t, as_pointer);
         else
-            domain_type_helper(fa, t);
+            domain_type_helper(fa, t, as_pointer);
     }
-    types_done.insert(t.complete_identifiable_name());
+    types_done.insert(type_name);
 }
 
 void helper_methods_formatter::format(std::ostream& s) const {
@@ -295,7 +304,8 @@ void helper_methods_formatter::format(std::ostream& s) const {
     formatters::nested_type_formatting_assistant fa(s);
     std::unordered_set<std::string> types_done;
     for (const auto p : properties_)
-        recursive_helper_method_creator(fa, p.type(), types_done);
+        recursive_helper_method_creator(fa, p.type(), types_done,
+            false/*as pointer*/);
 }
 
 } } } }

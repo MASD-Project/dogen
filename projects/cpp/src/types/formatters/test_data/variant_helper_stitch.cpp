@@ -40,7 +40,7 @@ fa.stream() << "    if (position == 0 || ((position % " << t.children().size() <
         else if (i == 1)
 fa.stream() << "    else if (position == 1 || ((position % " << t.children().size() + 1 << ") == 0))" << std::endl;
         else
-fa.stream() << "    else if ((position % \" << i << \") == 0)" << std::endl;
+fa.stream() << "    else if ((position % " << i << ") == 0)" << std::endl;
 fa.stream() << "        r = create_" << c.complete_identifiable_name() << "(position);" << std::endl;
         ++i;
     }

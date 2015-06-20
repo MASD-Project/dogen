@@ -28,7 +28,7 @@ create_<#= t.complete_identifiable_name() #>(unsigned int position) {
 <#+
         else
 #>
-    else if ((position % " << i << ") == 0)
+    else if ((position % <#= i #>) == 0)
         r = create_<#= c.complete_identifiable_name() #>(position);
 <#+
         ++i;
