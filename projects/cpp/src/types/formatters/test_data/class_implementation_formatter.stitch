@@ -88,11 +88,19 @@ populate(const unsigned int position, result_type& v) {
 #>
     return <#= c.name() #>(
 <#+
-                    unsigned int i(0);
-                    for (const auto p : c.properties()) {
+                    // FIXME: hack
+                    if (c.properties().empty())
 #>
-        create_<#=  p.type().complete_identifiable_name() #>(position + <#= i #>)
+
 <#+
+                    else {
+                        dogen::formatters::sequence_formatter sf(c.properties().size());
+                        for (const auto p : c.properties()) {
+#>
+        create_<#=  p.type().complete_identifiable_name() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>
+<#+
+                            sf.next();
+                        }
                     }
 #>
         );

@@ -87,9 +87,15 @@ fa.stream() << c.name() << "_generator::result_type" << std::endl;
 fa.stream() << c.name() << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
                 if (c.is_immutable()) {
 fa.stream() << "    return " << c.name() << "(" << std::endl;
-                    unsigned int i(0);
-                    for (const auto p : c.properties()) {
-fa.stream() << "        create_" << p.type().complete_identifiable_name() << "(position + " << i << ")" << std::endl;
+                    // FIXME: hack
+                    if (c.properties().empty())
+fa.stream() << std::endl;
+                    else {
+                        dogen::formatters::sequence_formatter sf(c.properties().size());
+                        for (const auto p : c.properties()) {
+fa.stream() << "        create_" << p.type().complete_identifiable_name() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
+                            sf.next();
+                        }
                     }
 fa.stream() << "        );" << std::endl;
                 } else {
