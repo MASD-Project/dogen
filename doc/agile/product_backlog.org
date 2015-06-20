@@ -2611,6 +2611,17 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Clean up stitch terminology using markup fundamentals             :story:
+
+We came up with a number of quick definitions for stitch because we
+needed them for our use cases. However, the names we chose were fairly
+random. We should look into the theory around markup languages to name
+these things properly.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Markup_language][Wikipedia's page on Markup Languages]]
+
 *** Consider adding include directive to stitch                       :story:
 
 T4 supports including templates from templates. At present we are
