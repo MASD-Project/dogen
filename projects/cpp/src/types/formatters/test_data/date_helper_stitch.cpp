@@ -30,7 +30,8 @@ void date_helper_stitch(
     const formattables::nested_type_info& t) {
     
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(const unsigned int position) {" << std::endl;
 fa.stream() << "    unsigned int day((position + 1) % 27);" << std::endl;
 fa.stream() << "    boost::gregorian::date r(2002, 2, day);" << std::endl;
 fa.stream() << "    return r;" << std::endl;

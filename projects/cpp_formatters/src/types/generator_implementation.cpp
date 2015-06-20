@@ -122,7 +122,8 @@ associative_container_helper(
         BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
 
-    const auto container_identifiable_type_name(nti.complete_identifiable_name());
+    const auto container_identifiable_type_name(
+        nti.complete_identifiable_name());
     const auto container_type_name(nti.complete_name());
 
     stream_ << indenter_ << container_type_name << " create_"

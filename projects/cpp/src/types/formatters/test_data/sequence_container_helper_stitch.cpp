@@ -34,7 +34,7 @@ fa.stream() << std::endl;
 fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
 fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
 fa.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
-fa.stream() << "        r.push_back(create_" << t.complete_identifiable_name() << "(position + i));" << std::endl;
+fa.stream() << "        r.push_back(create_" << containee.complete_identifiable_name() << "(position + i));" << std::endl;
 fa.stream() << "    }" << std::endl;
 fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;

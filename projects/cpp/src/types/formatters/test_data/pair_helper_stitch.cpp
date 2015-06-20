@@ -32,12 +32,12 @@ void pair_helper_stitch(
     const auto first(t.children().front());
     const auto second(t.children().back());
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
 fa.stream() << "    " << t.complete_name() << " r(" << std::endl;
 fa.stream() << "        create_" << first.complete_identifiable_name() << "(position)," << std::endl;
 fa.stream() << "        create_" << second.complete_identifiable_name() << "(position));" << std::endl;
 fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
-fa.stream() << std::endl;
 }
 } } } }

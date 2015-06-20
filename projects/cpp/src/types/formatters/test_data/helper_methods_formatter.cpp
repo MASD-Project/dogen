@@ -115,11 +115,6 @@ void helper_methods_formatter::associative_container_helper(
         BOOST_LOG_SEV(lg, error) << invalid_associative_container;
         BOOST_THROW_EXCEPTION(formatting_error(invalid_associative_container));
     }
-
-    if (t.children().size() == 1) {
-        sequence_container_helper(fa, t);
-        return;
-    }
     associative_container_helper_stitch(fa, t);
 }
 

@@ -70,7 +70,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     if (si.has_variant)
         builder.add(inclusion_constants::boost::visitor::apply_visitor());
 
-    if (si.has_path)
+    if (si.has_path || si.has_std_string)
         builder.add(inclusion_constants::std::sstream());
 
     using rt = sml::relationship_types;

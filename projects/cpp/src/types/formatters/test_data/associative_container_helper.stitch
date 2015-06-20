@@ -10,20 +10,29 @@
 void associative_container_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
-
-    const auto key(t.children().front());
-    const auto value(t.children().back());
 #>
 
 <#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
     <#= t.complete_name() #> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_<#= key.complete_identifiable_name() #>(position + i),
-        create_<#= value.complete_identifiable_name() #>(position + i)));
+<#+
+    if (t.children().size() == 1) {
+        const auto containee(t.children().front());
+#>
+        r.insert(create_<#= containee.complete_identifiable_name() #>(position + i));
+<#+
+    } else if (t.children().size() == 2) {
+        const auto key(t.children().front());
+        const auto value(t.children().back());
+
+#>
+        r.insert(std::make_pair(create_<#= key.complete_identifiable_name() #>(position + i), create_<#= value.complete_identifiable_name() #>(position + i)));
+<#+
+    }
+#>
     }
     return r;
 }
-
 <#+
 }
 #>

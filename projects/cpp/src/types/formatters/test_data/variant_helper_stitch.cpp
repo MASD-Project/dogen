@@ -29,8 +29,10 @@ void variant_helper_stitch(
     formatters::nested_type_formatting_assistant& fa,
     const formattables::nested_type_info& t) {
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
 fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
+fa.stream() << std::endl;
     unsigned int i(0);
     for (const auto& c : t.children()) {
         if (i == 0)
@@ -40,7 +42,9 @@ fa.stream() << "    else if (position == 1 || ((position % " << t.children().siz
         else
 fa.stream() << "    else if ((position % \" << i << \") == 0)" << std::endl;
 fa.stream() << "        r = create_" << c.complete_identifiable_name() << "(position);" << std::endl;
+        ++i;
     }
+fa.stream() << std::endl;
 fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }

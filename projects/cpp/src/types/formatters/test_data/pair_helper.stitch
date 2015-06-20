@@ -14,13 +14,13 @@ void pair_helper_stitch(
     const auto second(t.children().back());
 #>
 
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+<#= t.complete_name() #>
+create_<#= t.complete_identifiable_name() #>(unsigned int position) {
     <#= t.complete_name() #> r(
         create_<#= first.complete_identifiable_name() #>(position),
         create_<#= second.complete_identifiable_name() #>(position));
     return r;
 }
-
 <#+
 }
 #>

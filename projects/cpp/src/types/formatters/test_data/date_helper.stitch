@@ -12,7 +12,8 @@ void date_helper_stitch(
     
 #>
 
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+<#= t.complete_name() #>
+create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
     unsigned int day((position + 1) % 27);
     boost::gregorian::date r(2002, 2, day);
     return r;

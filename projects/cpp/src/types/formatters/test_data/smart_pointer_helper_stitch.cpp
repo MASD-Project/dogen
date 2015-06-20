@@ -30,9 +30,10 @@ void smart_pointer_helper_stitch(
     const formattables::nested_type_info& t) {
     const auto containee(t.children().front());
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
-fa.stream() << "    " << t.complete_name() << " r;" << std::endl;
-fa.stream() << "    create_" << containee.complete_identifiable_name() << "_ptr(position));" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << "    " << t.complete_name() << " r(" << std::endl;
+fa.stream() << "        create_" << containee.complete_identifiable_name() << "_ptr(position));" << std::endl;
 fa.stream() << "    return r;" << std::endl;
 fa.stream() << "}" << std::endl;
 }

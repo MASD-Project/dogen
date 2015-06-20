@@ -13,8 +13,8 @@ void domain_type_helper_stitch(
 #>
 
 <#= t.complete_name() #><#= (t.is_smart_pointer() ? "*" : "") #>
-create<#= t.complete_identifiable_name() #><#= (t.is_smart_pointer() ? "_ptr" : "") #>(unsigned int position) {
-    return <#= t.qualified_name() #>_generator::create<#= (t.is_smart_pointer() ? "_ptr" : "") #>(position);
+create_<#= t.complete_identifiable_name() #><#= (t.is_smart_pointer() ? "_ptr" : "") #>(const unsigned int position) {
+    return <#= t.complete_name() #>_generator::create<#= (t.is_smart_pointer() ? "_ptr" : "") #>(position);
 }
 <#+
 }

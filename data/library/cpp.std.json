@@ -10,7 +10,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -20,7 +21,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -30,7 +32,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -40,7 +43,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -50,7 +54,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -60,7 +65,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -70,7 +76,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -80,7 +87,8 @@
                 "cpp.type.requires_manual_default_constructor" : true,
                 "cpp.types.class_header_formatter.inclusion_directive" : "<cstdint>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -90,7 +98,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<string>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/string.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -101,7 +110,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<vector>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/vector.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -112,7 +122,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<deque>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/deque.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -122,7 +133,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<array>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -133,7 +145,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<list>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/list.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -143,7 +156,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<forward_list>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -154,7 +168,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<set>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/set.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -165,7 +180,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<multiset>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multiset.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -175,7 +191,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -186,7 +203,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<map>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/map.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -197,7 +215,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<multimap>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/multimap.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -207,7 +226,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -217,7 +237,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<utility>",
                 "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/pair.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -227,7 +248,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -237,7 +259,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -247,7 +270,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<memory>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -256,7 +280,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<functional>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -265,7 +290,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<functional>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {
@@ -274,7 +300,8 @@
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<ostream>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
-                "cpp.io.class_header_formatter.inclusion_required" : false
+                "cpp.io.class_header_formatter.inclusion_required" : false,
+                "cpp.test_data.class_header_formatter.inclusion_required" : false
             }
         },
         {

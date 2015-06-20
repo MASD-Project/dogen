@@ -11,10 +11,11 @@ void ptree_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+<#= t.complete_name() #>
+create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
     using boost::property_tree::ptree;
     ptree c;
-    c.put("key_2"), position);
+    c.put("key_2", position);
     ptree r;
     r.push_back(ptree::value_type("key_1", c));
     return r;

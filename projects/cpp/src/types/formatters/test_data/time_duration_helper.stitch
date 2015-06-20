@@ -11,7 +11,8 @@ void time_duration_helper_stitch(
     const formattables::nested_type_info& t) {
 #>
 
-<#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
+<#= t.complete_name() #>
+create_<#= t.complete_identifiable_name() #>(const unsigned int position) {
     unsigned int hour(position % 55);
     using boost::posix_time::time_duration;
     time_duration r(hour, 2, 3);

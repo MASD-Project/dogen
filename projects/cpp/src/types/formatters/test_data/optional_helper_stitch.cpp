@@ -31,7 +31,8 @@ void optional_helper_stitch(
     
     const auto containee(t.children().front());
 fa.stream() << std::endl;
-fa.stream() << t.complete_name() << " create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
+fa.stream() << t.complete_name() << std::endl;
+fa.stream() << "create_" << t.complete_identifiable_name() << "(unsigned int position) {" << std::endl;
 fa.stream() << "    " << t.complete_name() << " r(" << std::endl;
 fa.stream() << "        create_" << containee.complete_identifiable_name() << "(position));" << std::endl;
 fa.stream() << "    return r;" << std::endl;

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 15:40]
+#+CAPTION: Clock summary at [2015-06-20 Sat 16:47]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *43:12* |       |       |
+| *Total time*                                                                | *43:18* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 43:12   |       |       |
-| Active                                                                      |         | 43:12 |       |
+| Stories                                                                     | 43:18   |       |       |
+| Active                                                                      |         | 43:18 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:33 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -40,7 +40,7 @@
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
 | COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
-| STARTED Implement class implementation formatter in test_data               |         |       |  5:21 |
+| STARTED Implement class implementation formatter in test_data               |         |       |  5:27 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -556,6 +556,7 @@ works on all cases, bar one: the case of a line that contains
 these two scriplet types.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-20 Sat 16:41]--[2015-06-20 Sat 16:47] =>  0:06
     CLOCK: [2015-06-20 Sat 15:12]--[2015-06-20 Sat 15:40] =>  0:28
     CLOCK: [2015-06-20 Sat 14:53]--[2015-06-20 Sat 15:11] =>  0:18
     CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10
@@ -577,19 +578,33 @@ machinery. Fix all differences.
 
 Problems:
 
-- extra spaces for some inheritance types: child_of_a_child1_td,
-  move_ctor_empty_descendant_td, second_child_without_members_td.
+- variant has no space in modulus in legacy.
+- extra new line in legacy.
+- include of visitor is not required for variant.
+- diffs in variant helper.
+- pointer create methods are not being generated for some types.
 - domain helper missing newline after return type and has an extra
   underscore in return.
 
 Solved Problems:
 
+- extra spaces for some inheritance types: child_of_a_child1_td,
+  move_ctor_empty_descendant_td, second_child_without_members_td.
+- return is on a separate line for most helpers.
+- =unordered_set= and =set= are associative containers but are being
+  handled as sequence containers.
 - missing leaves includes
 - boost path has an include
 - new line in boost path
 - new helper methods are not coming through.
 - spaces for classes without properties right after boilerplate. Need
   to remove them from legacy.
+
+*** Remove complete name and use qualified name                       :story:
+
+At present we have both complete name and qualified name in
+formatables. Qualified name is blank. We should remove complete name
+and populate qualified name.
 
 *** Implement enum header formatter in test_data                      :story:
 

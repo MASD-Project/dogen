@@ -16,7 +16,7 @@ void sequence_container_helper_stitch(
 <#= t.complete_name() #> create_<#= t.complete_identifiable_name() #>(unsigned int position) {
     <#= t.complete_name() #> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_<#= t.complete_identifiable_name() #>(position + i));
+        r.push_back(create_<#= containee.complete_identifiable_name() #>(position + i));
     }
     return r;
 }
