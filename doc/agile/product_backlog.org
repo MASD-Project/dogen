@@ -5869,6 +5869,27 @@ All we need is a "database frontend" responsible for connecting to the
 database and performing the mapping between the database types and the
 language specific types.
 
+*** Generate model from CSV files                                     :story:
+
+Following on from the idea of using database tables, another
+interesting use case are CSV files. It is common that one has a number
+of CSV files that one needs to process - for example, import to a
+database to perform further comparisons. It would be great if one
+could just point knitter at a set of CSV files with headers and have
+it:
+
+- create a class for each file type.
+- given the data in the file, find the most appropriate type for the
+  field. Note when there are more than one file of the same type, and
+  instead of generating multiple classes, just use the data for type
+  inference.
+- generate ODB support if requested by the user. If more than one file
+  have the same field with the same type, create foreign keys.
+
+With [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-csv-serialisation][support for CSV serialisation]], this means one could build a CSV
+importer and processor very quickly. With support for diffs, this
+would mean one could create a CSV file differ easily.
+
 *** Investigate GDB visualisers for generated models                  :epic:
 
 #+begin_quote
