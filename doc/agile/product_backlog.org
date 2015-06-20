@@ -2611,6 +2611,31 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Consider adding stitch support for class feature control blocks   :story:
+
+T4 supports an additional type of control blocks called class
+features. These permit declaring methods on the class (external
+functions for us) that can then be called by the standard control
+blocks.
+
+From a stitch perspective we don't necessarily need these, because the
+stitch template is not bound to a given function (such as the
+transform function in the T4 case); rather, one has to declare the
+function that wraps the template within the template itself.
+
+At any rate, this story is a place holder for further analysis on this
+in case there is a sensible way to use these class feature control
+blocks within stitch.
+
+One interesting twist to this is that class feature blocks can also
+contain text blocks. This means we would have two separate cases of
+mixed blocks.
+
+Links:
+
+- [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
+- [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
+
 *** Tidy-up test models                                               :story:
 
 #+begin_quote
