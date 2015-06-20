@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 22:16]
+#+CAPTION: Clock summary at [2015-06-20 Sat 23:02]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *46:24* |       |       |
+| *Total time*                                                                | *47:03* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 46:24   |       |       |
-| Active                                                                      |         | 46:24 |       |
+| Stories                                                                     | 47:03   |       |       |
+| Active                                                                      |         | 47:03 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:58 |
 | COMPLETED Implement types class implementation formatter using stitch       |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -44,6 +44,7 @@
 | COMPLETED Implement enum header formatter in test_data                      |         |       |  0:17 |
 | COMPLETED Implement enum implementation formatter in test_data              |         |       |  0:35 |
 | COMPLETED Setup basic formatter infrastructure for serialisation            |         |       |  0:47 |
+| COMPLETED Implement class header formatter in serialisation                 |         |       |  0:39 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -640,7 +641,9 @@ Solved problems:
 Copy and paste all the basic infrastructure such as skeletons for the
 stitch templates, helper methods, etc.
 
-*** STARTED Implement class header formatter in serialisation         :story:
+*** COMPLETED Implement class header formatter in serialisation       :story:
+    CLOSED: [2015-06-20 Sat 23:00]
+    CLOCK: [2015-06-20 Sat 22:21]--[2015-06-20 Sat 23:00] =>  0:39
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.

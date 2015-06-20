@@ -69,8 +69,23 @@ std::string inclusion_constants::boost::io::ios_state() {
     return r;
 }
 
+std::string inclusion_constants::boost::type_traits::is_virtual_base_of() {
+    static ::std::string r("<boost/type_traits/is_virtual_base_of.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::serialization::nvp() {
     static ::std::string r("<boost/serialization/nvp.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::serialization::split_free() {
+    static ::std::string r("<boost/serialization/split_free.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::serialization::assume_abstract() {
+    static ::std::string r("<boost/serialization/assume_abstract.hpp>");
     return r;
 }
 

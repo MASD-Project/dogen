@@ -18,8 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_header_formatter_stitch.hpp"
@@ -29,6 +32,43 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
+
+namespace {
+
+class provider final : public formattables::
+        inclusion_dependencies_provider_interface<sml::object> {
+public:
+    std::string formatter_name() const override;
+
+    boost::optional<std::list<std::string> >
+        provide(const formattables::inclusion_dependencies_builder_factory& f,
+        const sml::object& o) const override;
+};
+
+std::string provider::formatter_name() const {
+    return class_header_formatter::static_formatter_name();
+}
+
+boost::optional<std::list<std::string> >
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+    const sml::object& o) const {
+
+    auto builder(f.make());
+    builder.add(o.name(), types::traits::class_header_formatter_name());
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::serialization::split_free());
+
+    if (o.is_parent())
+        builder.add(ic::boost::serialization::assume_abstract());
+
+    if (!o.is_parent() && o.is_child())
+        builder.add(ic::boost::type_traits::is_virtual_base_of());
+
+    return builder.build();
+}
+
+}
 
 std::string class_header_formatter::static_formatter_name() {
     return traits::class_header_formatter_name();
@@ -48,7 +88,8 @@ file_types class_header_formatter::file_type() const {
 }
 
 void class_header_formatter::register_inclusion_dependencies_provider(
-    formattables::registrar& /*rg*/) const {
+    formattables::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
 }
 
 dogen::formatters::file class_header_formatter::

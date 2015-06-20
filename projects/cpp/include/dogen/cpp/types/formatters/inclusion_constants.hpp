@@ -56,8 +56,14 @@ struct inclusion_constants {
             static ::std::string ios_state();
         };
 
+        struct type_traits {
+            static ::std::string is_virtual_base_of();
+        };
+
         struct serialization {
             static ::std::string nvp();
+            static ::std::string split_free();
+            static ::std::string assume_abstract();
         };
 
         struct exception {

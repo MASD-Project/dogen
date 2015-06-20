@@ -50,6 +50,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());
     builder.add(o.name(), types::traits::class_header_formatter_name());
+
     return builder.build();
 }
 
