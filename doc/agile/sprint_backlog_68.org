@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-20 Sat 13:07]
+#+CAPTION: Clock summary at [2015-06-20 Sat 13:30]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *42:06* |       |       |
+| *Total time*                                                                | *42:26* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 42:06   |       |       |
-| Active                                                                      |         | 42:06 |       |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |
+| Stories                                                                     | 42:26   |       |       |
+| Active                                                                      |         | 42:26 |       |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:33 |
 | COMPLETED Implement class implementation formatter using stitch             |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
 | CANCELLED Add support for "field gathering"                                 |         |       |  0:56 |
@@ -39,11 +39,12 @@
 | COMPLETED Implement enum implementation formatter in io                     |         |       |  0:11 |
 | COMPLETED Implement class header formatter in test_data                     |         |       |  0:43 |
 | COMPLETED Refactor stitch to use Microsoft's T4 terminology                 |         |       |  6:01 |
+| COMPLETED Incorrect stitching when a line starts with inline scriplet       |         |       |  0:25 |
 | STARTED Implement class implementation formatter in test_data               |         |       |  4:35 |
-| STARTED Incorrect stitching when a line starts with inline scriplet         |         |       |  0:25 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-20 Sat 13:07]--[2015-06-20 Sat 13:27] =>  0:20
     CLOCK: [2015-06-15 Mon 21:56]--[2015-06-15 Mon 22:02] =>  0:06
     CLOCK: [2015-06-11 Thu 21:56]--[2015-06-11 Thu 22:36] =>  0:40
     CLOCK: [2015-06-11 Thu 07:38]--[2015-06-11 Thu 07:45] =>  0:07
@@ -519,39 +520,8 @@ Generic processing of an inline statement:
 - check for any marker, if present error: has_markers=.
 - if directive, check for kvp form.
 
-*** STARTED Implement class implementation formatter in test_data     :story:
-    CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10
-    CLOCK: [2015-06-18 Thu 23:27]--[2015-06-18 Thu 23:42] =>  0:15
-    CLOCK: [2015-06-18 Thu 23:10]--[2015-06-18 Thu 23:26] =>  0:16
-    CLOCK: [2015-06-18 Thu 23:03]--[2015-06-18 Thu 23:09] =>  0:06
-    CLOCK: [2015-06-18 Thu 18:12]--[2015-06-18 Thu 18:46] =>  0:34
-    CLOCK: [2015-06-18 Thu 18:06]--[2015-06-18 Thu 18:11] =>  0:05
-    CLOCK: [2015-06-18 Thu 08:24]--[2015-06-18 Thu 08:43] =>  0:19
-    CLOCK: [2015-06-18 Thu 07:56]--[2015-06-18 Thu 08:24] =>  0:28
-    CLOCK: [2015-06-17 Wed 21:50]--[2015-06-17 Wed 22:01] =>  0:11
-    CLOCK: [2015-06-17 Wed 21:42]--[2015-06-17 Wed 21:49] =>  0:07
-    CLOCK: [2015-06-17 Wed 20:27]--[2015-06-17 Wed 21:40] =>  1:13
-    CLOCK: [2015-06-17 Wed 17:35]--[2015-06-17 Wed 17:55] =>  0:14
-    CLOCK: [2015-06-17 Wed 16:49]--[2015-06-17 Wed 17:20] =>  0:31
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-Problems:
-
-- boost path has an include
-- new line in boost path
-- missing parents includes
-- domain helper missing newline after return type and has an extra _
-  in return
-
-Solved Problems:
-
-- new helper methods are not coming through.
-- spaces for classes without properties right after boilerplate. Need
-  to remove them from legacy.
-
-*** STARTED Incorrect stitching when a line starts with inline scriplet :story:
+*** COMPLETED Incorrect stitching when a line starts with inline scriplet :story:
+    CLOSED: [2015-06-20 Sat 13:28]
     CLOCK: [2015-06-19 Fri 18:35]--[2015-06-19 Fri 19:00] =>  0:25
 
 We created a template vaguely as follows:
@@ -584,6 +554,38 @@ are only two distinct entities we care about: text and scriptlet. This
 works on all cases, bar one: the case of a line that contains
 <#=. That is indistinguishable from a line with <#+. We need to split
 these two scriplet types.
+
+*** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-18 Thu 23:43]--[2015-06-18 Thu 23:53] =>  0:10
+    CLOCK: [2015-06-18 Thu 23:27]--[2015-06-18 Thu 23:42] =>  0:15
+    CLOCK: [2015-06-18 Thu 23:10]--[2015-06-18 Thu 23:26] =>  0:16
+    CLOCK: [2015-06-18 Thu 23:03]--[2015-06-18 Thu 23:09] =>  0:06
+    CLOCK: [2015-06-18 Thu 18:12]--[2015-06-18 Thu 18:46] =>  0:34
+    CLOCK: [2015-06-18 Thu 18:06]--[2015-06-18 Thu 18:11] =>  0:05
+    CLOCK: [2015-06-18 Thu 08:24]--[2015-06-18 Thu 08:43] =>  0:19
+    CLOCK: [2015-06-18 Thu 07:56]--[2015-06-18 Thu 08:24] =>  0:28
+    CLOCK: [2015-06-17 Wed 21:50]--[2015-06-17 Wed 22:01] =>  0:11
+    CLOCK: [2015-06-17 Wed 21:42]--[2015-06-17 Wed 21:49] =>  0:07
+    CLOCK: [2015-06-17 Wed 20:27]--[2015-06-17 Wed 21:40] =>  1:13
+    CLOCK: [2015-06-17 Wed 17:35]--[2015-06-17 Wed 17:55] =>  0:14
+    CLOCK: [2015-06-17 Wed 16:49]--[2015-06-17 Wed 17:20] =>  0:31
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Problems:
+
+- boost path has an include
+- new line in boost path
+- missing parents includes
+- domain helper missing newline after return type and has an extra _
+  in return
+
+Solved Problems:
+
+- new helper methods are not coming through.
+- spaces for classes without properties right after boilerplate. Need
+  to remove them from legacy.
 
 *** Implement enum header formatter in test_data                      :story:
 
