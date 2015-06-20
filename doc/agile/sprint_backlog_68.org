@@ -556,6 +556,7 @@ works on all cases, bar one: the case of a line that contains
 these two scriplet types.
 
 *** STARTED Implement class implementation formatter in test_data     :story:
+    CLOCK: [2015-06-20 Sat 16:48]--[2015-06-20 Sat 16:57] =>  0:09
     CLOCK: [2015-06-20 Sat 16:41]--[2015-06-20 Sat 16:47] =>  0:06
     CLOCK: [2015-06-20 Sat 15:12]--[2015-06-20 Sat 15:40] =>  0:28
     CLOCK: [2015-06-20 Sat 14:53]--[2015-06-20 Sat 15:11] =>  0:18
@@ -578,8 +579,6 @@ machinery. Fix all differences.
 
 Problems:
 
-- variant has no space in modulus in legacy.
-- extra new line in legacy.
 - include of visitor is not required for variant.
 - diffs in variant helper.
 - pointer create methods are not being generated for some types.
@@ -588,6 +587,8 @@ Problems:
 
 Solved Problems:
 
+- extra new line in legacy.
+- variant has no space in modulus in legacy.
 - extra spaces for some inheritance types: child_of_a_child1_td,
   move_ctor_empty_descendant_td, second_child_without_members_td.
 - return is on a separate line for most helpers.

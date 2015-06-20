@@ -32,14 +32,13 @@ double create_double(const unsigned int position) {
     return static_cast<double>(position);
 }
 
-
 boost::variant<int, double>
 create_boost_variant_int_double(unsigned int position) {
     boost::variant<int, double> r;
 
     if (position == 0 || ((position % 2) == 0))
         r = create_int(position);
-    else if (position == 1 || ((position %3) == 0))
+    else if (position == 1 || ((position % 3) == 0))
         r = create_double(position);
 
     return r;
@@ -50,14 +49,13 @@ create_dogen_test_models_boost_model_class_derived(const unsigned int position) 
     return dogen::test_models::boost_model::class_derived_generator::create(position);
 }
 
-
 boost::variant<int, dogen::test_models::boost_model::class_derived, double>
 create_boost_variant_int_dogen_test_models_boost_model_class_derived_double(unsigned int position) {
     boost::variant<int, dogen::test_models::boost_model::class_derived, double> r;
 
     if (position == 0 || ((position % 3) == 0))
         r = create_int(position);
-    else if (position == 1 || ((position %4) == 0))
+    else if (position == 1 || ((position % 4) == 0))
         r = create_dogen_test_models_boost_model_class_derived(position);
     else if ((position % 2) == 0)
         r = create_double(position);
@@ -83,14 +81,13 @@ char create_char(const unsigned int position) {
     return static_cast<char>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
 }
 
-
 boost::variant<int, std::string, char>
 create_boost_variant_int_std_string_char(unsigned int position) {
     boost::variant<int, std::string, char> r;
 
     if (position == 0 || ((position % 3) == 0))
         r = create_int(position);
-    else if (position == 1 || ((position %4) == 0))
+    else if (position == 1 || ((position % 4) == 0))
         r = create_std_string(position);
     else if ((position % 2) == 0)
         r = create_char(position);

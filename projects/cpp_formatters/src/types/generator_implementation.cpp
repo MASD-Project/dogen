@@ -422,7 +422,6 @@ variant_helper(const cpp::formattables::nested_type_info& nti) {
         BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
     }
 
-    utility_.blank_line();
     stream_ << indenter_ << container_type_name
             << std::endl
             << indenter_ << "create_"
@@ -442,7 +441,7 @@ variant_helper(const cpp::formattables::nested_type_info& nti) {
                         << children.size() << ") == 0))" << std::endl;
             } else if (i == 1) {
                 stream_ << indenter_
-                        << "else if (position == 1 || ((position %"
+                        << "else if (position == 1 || ((position % "
                         << children.size() + 1 << ") == 0))" << std::endl;
             } else {
                 stream_ << indenter_
