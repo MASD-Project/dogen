@@ -140,6 +140,18 @@ public:
      */
     bool is_complete_constructor_disabled() const;
 
+    /**
+     * @brief Returns true if XML serialization is disabled, false
+     * otherwise.
+     */
+    bool is_xml_serialization_disabled() const;
+
+    /**
+     * @brief Returns true if EOS serialization is disabled, false
+     * otherwise.
+     */
+    bool is_eos_serialization_disabled() const;
+
 public:
     /**
      * @brief Ensures all expected settings are available and set to
