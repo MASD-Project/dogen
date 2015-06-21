@@ -4894,7 +4894,7 @@ directly derived by the information available in SML.
 
 @section cpp_1 Info postfix
 
-The types in the CPP model should not have any prefixes or post-fixes since 
+The types in the CPP model should not have any prefixes or post-fixes since
 they naturally belong to the model; e.g. @e cpp::class tells us everything we
 need to know. However, names like @e class and @e namespace clash with
 keywords,  so this is not a workable approach. Models such as ECore have
@@ -4932,7 +4932,8 @@ seems like the least bad approach.
 #DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
-#DOGEN modeline_group_name=emacs#</dia:string>
+#DOGEN modeline_group_name=emacs
+#DOGEN cpp.disable_eos_serialization=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -10301,7 +10302,7 @@ an enumeration, false otherwise.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Formatters for the C++ model.
 
-Takes types in the C++ model and creates a file 
+Takes types in the C++ model and creates a file
 representation of these types according to the
 grammar of the C++-11 programming language.
 

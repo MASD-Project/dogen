@@ -6338,7 +6338,7 @@ the information in dependency order. That is, we process dia objects in
 such a way that when a dependency exists, we know that the object in which
 we depend on has already been processed. Please note that to ensure no
 cycles we had to ignore some of the UML objects such as UML aggregation -
-but fortunately, these objects do not provide sufficient information for 
+but fortunately, these objects do not provide sufficient information for
 an SML transformation anyway so not much was lost (instead, one must
 manually declare attributes in a class).
 
@@ -6373,7 +6373,7 @@ expected that a getter and a setter will be generated.
 
 @li a number of DDD stereotypes were added: @e entity, @e factory, @eservice,
 @e value @e object and @e repository. In addition, entities can have the
-stereotype of @e aggregate @e root. These all map directly to the DDD ideas 
+stereotype of @e aggregate @e root. These all map directly to the DDD ideas
 defined by Eric Evans in the Domain Driven Design book.
 
 @li a number of SML specific stereotypes were added: @e exception,
@@ -6412,8 +6412,9 @@ the root of an inheritance tree.
 
 #DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+#DOGEN cpp.disable_eos_serialization=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

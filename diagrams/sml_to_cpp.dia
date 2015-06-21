@@ -5333,7 +5333,7 @@ These are expected to use quotes and be on the user path.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Manages the paths for
-all the generated files and 
+all the generated files and
 produces location based header guards.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -5708,8 +5708,9 @@ instance of SML into its correspondind C++ version.
 
 #DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+#DOGEN cpp.disable_eos_serialization=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
