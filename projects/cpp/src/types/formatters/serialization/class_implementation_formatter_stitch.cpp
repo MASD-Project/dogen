@@ -84,8 +84,7 @@ fa.stream() << "    const unsigned int /*version*/) {" << std::endl;
 fa.stream() << "    ar >> \"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v);" << std::endl;
             else
 fa.stream() << "    ar >> make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
-
-            if (has_properties_or_parents)
+            if (has_properties && has_parents)
 fa.stream() << std::endl;
         }
 

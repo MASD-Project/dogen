@@ -79,7 +79,7 @@ std::string traits::disable_complete_constructor() {
 }
 
 std::string traits::disable_xml_serialization() {
-    static std::string r("cpp.disable_complete_constructor");
+    static std::string r("cpp.disable_xml_serialization");
     return r;
 }
 

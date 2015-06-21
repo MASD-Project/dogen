@@ -69,6 +69,16 @@ std::string inclusion_constants::eos::portable_oarchive() {
     return r;
 }
 
+std::string inclusion_constants::boost::date_time::gregorian::identity() {
+    static ::std::string r("<boost/date_time/gregorian/gregorian.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::date_time::posix_time::identity() {
+    static ::std::string r("<boost/date_time/posix_time/posix_time.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::algorithm::string() {
     static ::std::string r("<boost/algorithm/string.hpp>");
     return r;

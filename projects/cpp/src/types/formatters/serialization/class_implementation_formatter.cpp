@@ -83,6 +83,13 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(o, rt::parents, ch_fn);
     builder.add(o, rt::leaves, ch_fn);
 
+    const auto si(builder.make_special_includes(o));
+    if (si.has_date)
+        builder.add(ic::boost::date_time::gregorian::identity());
+
+    if (si.has_ptime)
+        builder.add(ic::boost::date_time::posix_time::identity());
+
     return builder.build();
 }
 

@@ -53,6 +53,16 @@ struct inclusion_constants {
     };
 
     struct boost {
+        struct date_time {
+            struct gregorian {
+                static ::std::string identity();
+            };
+
+            struct posix_time {
+                static ::std::string identity();
+            };
+        };
+
         struct algorithm {
             static ::std::string string();
         };

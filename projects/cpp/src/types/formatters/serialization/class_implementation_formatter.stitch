@@ -89,8 +89,7 @@ void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
 #>
     ar >> make_nvp("<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v));
 <#+
-
-            if (has_properties_or_parents)
+            if (has_properties && has_parents)
 #>
 
 <#+

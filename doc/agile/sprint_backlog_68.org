@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-21 Sun 11:35]
+#+CAPTION: Clock summary at [2015-06-21 Sun 12:19]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *50:24* |       |       |
+| *Total time*                                                                | *51:07* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 50:24   |       |       |
-| Active                                                                      |         | 50:24 |       |
+| Stories                                                                     | 51:07   |       |       |
+| Active                                                                      |         | 51:07 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:58 |
 | COMPLETED Implement types class implementation formatter using stitch       |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -46,7 +46,7 @@
 | COMPLETED Setup basic formatter infrastructure for serialisation            |         |       |  0:47 |
 | COMPLETED Implement class header formatter in serialisation                 |         |       |  0:39 |
 | COMPLETED Supply settings bundle to the inclusion builder                   |         |       |  0:36 |
-| STARTED Implement class implementation formatter in serialisation           |         |       |  2:45 |
+| STARTED Implement class implementation formatter in serialisation           |         |       |  3:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -659,6 +659,7 @@ In order to make decisions on XML, EOS etc we need to have access to
 the settings during inclusion.
 
 *** STARTED Implement class implementation formatter in serialisation :story:
+    CLOCK: [2015-06-21 Sun 11:36]--[2015-06-21 Sun 12:19] =>  0:43
     CLOCK: [2015-06-21 Sun 11:26]--[2015-06-21 Sun 11:35] =>  0:09
     CLOCK: [2015-06-21 Sun 10:48]--[2015-06-21 Sun 11:25] =>  0:37
     CLOCK: [2015-06-21 Sun 10:38]--[2015-06-21 Sun 10:47] =>  0:09

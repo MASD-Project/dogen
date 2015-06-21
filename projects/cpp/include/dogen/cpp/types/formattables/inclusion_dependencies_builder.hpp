@@ -50,6 +50,7 @@ public:
         special_includes() :
             has_std_string(false), has_std_pair(false),
             has_variant(false), has_ptree(false), has_path(false),
+            has_date(false), has_ptime(false),
             requires_stream_manipulators(false) {}
 
         bool has_std_string;
@@ -57,6 +58,8 @@ public:
         bool has_variant;
         bool has_ptree;
         bool has_path;
+        bool has_date;
+        bool has_ptime;
         bool requires_stream_manipulators;
     };
 

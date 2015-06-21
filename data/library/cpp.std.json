@@ -200,7 +200,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_set>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
                 "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false
+                "cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/unordered_set.hpp\""
             }
         },
         {
@@ -235,7 +236,8 @@
                 "cpp.types.class_header_formatter.inclusion_directive" : "<unordered_map>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
                 "cpp.io.class_header_formatter.inclusion_required" : false,
-                "cpp.test_data.class_header_formatter.inclusion_required" : false
+                "cpp.test_data.class_header_formatter.inclusion_required" : false,
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "\"dogen/utility/serialization/unordered_map.hpp\""
             }
         },
         {
@@ -243,7 +245,7 @@
             "simple_name" : "pair",
             "extensions" : {
                 "cpp.types.class_header_formatter.inclusion_directive" : "<utility>",
-                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/pair.hpp>",
+                "cpp.serialization.class_header_formatter.inclusion_directive" : "<boost/serialization/utility.hpp>",
                 "cpp.hash.class_header_formatter.inclusion_required" : false,
                 "cpp.io.class_header_formatter.inclusion_required" : false,
                 "cpp.test_data.class_header_formatter.inclusion_required" : false
