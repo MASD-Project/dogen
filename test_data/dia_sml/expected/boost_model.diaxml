@@ -10182,7 +10182,8 @@
 																<value>##DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
-#DOGEN modeline_group_name=emacs#</value>
+#DOGEN modeline_group_name=emacs
+#DOGEN cpp.disable_eos_serialization=true#</value>
 															</value>
 														</item>
 													</values>

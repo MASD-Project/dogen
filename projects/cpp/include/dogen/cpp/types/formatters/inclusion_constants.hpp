@@ -47,6 +47,11 @@ struct inclusion_constants {
         static ::std::string stdexcept();
     };
 
+    struct eos {
+        static ::std::string portable_iarchive();
+        static ::std::string portable_oarchive();
+    };
+
     struct boost {
         struct algorithm {
             static ::std::string string();
@@ -58,6 +63,17 @@ struct inclusion_constants {
 
         struct type_traits {
             static ::std::string is_virtual_base_of();
+        };
+
+        struct archive {
+            static ::std::string xml_iarchive();
+            static ::std::string xml_oarchive();
+            static ::std::string text_iarchive();
+            static ::std::string text_oarchive();
+            static ::std::string binary_iarchive();
+            static ::std::string binary_oarchive();
+            static ::std::string polymorphic_iarchive();
+            static ::std::string polymorphic_oarchive();
         };
 
         struct serialization {

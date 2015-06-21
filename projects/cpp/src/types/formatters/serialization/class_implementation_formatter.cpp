@@ -55,6 +55,27 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     auto builder(f.make());
     builder.add(o.name(), traits::class_header_formatter_name());
 
+    using ic = inclusion_constants;
+    const auto as(builder.get_aspect_settings(o.name()));
+
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    if (!as.disable_xml_serialization()) {
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+    }
+
+    if (!as.disable_eos_serialization()) {
+        builder.add(ic::eos::portable_iarchive());
+        builder.add(ic::eos::portable_oarchive());
+    }
+
     return builder.build();
 }
 

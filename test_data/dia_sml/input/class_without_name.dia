@@ -269,8 +269,9 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN dia.comment=true
 #DOGEN licence_name=gpl_v3
+#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;
 #DOGEN modeline_group_name=emacs
-#DOGEN copyright_notice=Copyright (C) 2012 Kitanda &lt;info@kitanda.co.uk&gt;#</dia:string>
+#DOGEN cpp.disable_eos_serialization=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

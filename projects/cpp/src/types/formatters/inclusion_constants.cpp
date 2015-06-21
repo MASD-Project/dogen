@@ -59,6 +59,16 @@ std::string inclusion_constants::std::stdexcept() {
     return r;
 }
 
+std::string inclusion_constants::eos::portable_iarchive() {
+    static ::std::string r("<eos/portable_iarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::eos::portable_oarchive() {
+    static ::std::string r("<eos/portable_oarchive.hpp>");
+    return r;
+}
+
 std::string inclusion_constants::boost::algorithm::string() {
     static ::std::string r("<boost/algorithm/string.hpp>");
     return r;
@@ -71,6 +81,46 @@ std::string inclusion_constants::boost::io::ios_state() {
 
 std::string inclusion_constants::boost::type_traits::is_virtual_base_of() {
     static ::std::string r("<boost/type_traits/is_virtual_base_of.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::xml_iarchive() {
+    static ::std::string r("<boost/archive/xml_iarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::xml_oarchive() {
+    static ::std::string r("<boost/archive/xml_oarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::text_iarchive() {
+    static ::std::string r("<boost/archive/text_iarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::text_oarchive() {
+    static ::std::string r("<boost/archive/text_oarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::binary_iarchive() {
+    static ::std::string r("<boost/archive/binary_iarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::binary_oarchive() {
+    static ::std::string r("<boost/archive/binary_oarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::polymorphic_iarchive() {
+    static ::std::string r("<boost/archive/polymorphic_iarchive.hpp>");
+    return r;
+}
+
+std::string inclusion_constants::boost::archive::polymorphic_oarchive() {
+    static ::std::string r("<boost/archive/polymorphic_oarchive.hpp>");
     return r;
 }
 

@@ -259,7 +259,8 @@
 #DOGEN cpp.hash.enabled=false
 #DOGEN cpp.io.enabled=false
 #DOGEN cpp.test_data.enabled=false
-#DOGEN cpp.serialization.enabled=true#</dia:string>
+#DOGEN cpp.serialization.enabled=true
+#DOGEN cpp.disable_eos_serialization=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

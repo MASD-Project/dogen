@@ -114,7 +114,12 @@ fa.stream() << "template void load(archive::binary_iarchive& ar, " << c.qualifie
 fa.stream() << std::endl;
         if (!fa.is_xml_serialization_disabled()) {
 fa.stream() << "template void save(archive::xml_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-fa.stream() << "template void load(archive::xml_iarchive& ar, dogen::test_models::all_primitives::a_class& v, unsigned int version);" << std::endl;
+fa.stream() << "template void load(archive::xml_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+        }
+fa.stream() << std::endl;
+        if (!fa.is_eos_serialization_disabled()) {
+fa.stream() << "template void save(eos::portable_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+fa.stream() << "template void load(eos::portable_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
         }
 fa.stream() << std::endl;
 fa.stream() << "} }" << std::endl;
