@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visited_type_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::visitor_info,
     boost::serialization::track_selectively)

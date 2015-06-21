@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enumerator_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::enum_info,
     boost::serialization::track_selectively)

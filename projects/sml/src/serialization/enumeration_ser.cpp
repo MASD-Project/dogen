@@ -33,7 +33,6 @@
 #include "dogen/sml/serialization/enumerator_ser.hpp"
 #include "dogen/sml/serialization/enumeration_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::sml::enumeration,
     boost::serialization::track_selectively)

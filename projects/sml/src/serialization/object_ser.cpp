@@ -37,7 +37,6 @@
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/sml/serialization/relationship_types_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::sml::object,
     boost::serialization::track_selectively)

@@ -38,7 +38,6 @@
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::sml::type,
     boost::serialization::track_selectively)

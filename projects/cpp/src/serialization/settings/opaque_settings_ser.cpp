@@ -30,7 +30,6 @@
 #include "dogen/cpp/serialization/settings/odb_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::settings::opaque_settings,
     boost::serialization::track_selectively)

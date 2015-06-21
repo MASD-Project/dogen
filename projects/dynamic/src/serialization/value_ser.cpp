@@ -32,7 +32,6 @@
 #include "dogen/dynamic/serialization/boolean_ser.hpp"
 #include "dogen/dynamic/serialization/text_collection_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::dynamic::value,
     boost::serialization::track_selectively)

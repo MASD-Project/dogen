@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::cmakelists_info,
     boost::serialization::track_selectively)

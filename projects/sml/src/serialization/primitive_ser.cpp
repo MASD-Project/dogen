@@ -30,7 +30,6 @@
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::sml::primitive,
     boost::serialization::track_selectively)

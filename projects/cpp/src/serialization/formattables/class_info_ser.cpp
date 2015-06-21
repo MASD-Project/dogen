@@ -37,7 +37,6 @@
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::class_info,
     boost::serialization::track_selectively)

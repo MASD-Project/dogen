@@ -42,7 +42,6 @@
 #include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::formattable,
     boost::serialization::track_selectively)

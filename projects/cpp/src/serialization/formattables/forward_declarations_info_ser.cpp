@@ -31,7 +31,6 @@
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::cpp::formattables::forward_declarations_info,
     boost::serialization::track_selectively)
