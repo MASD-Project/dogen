@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/formattables/enumerator_info_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

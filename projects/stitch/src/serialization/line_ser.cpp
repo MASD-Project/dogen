@@ -31,7 +31,6 @@
 #include "dogen/stitch/serialization/line_ser.hpp"
 #include "dogen/stitch/serialization/block_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

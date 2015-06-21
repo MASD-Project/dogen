@@ -31,7 +31,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/cpp/serialization/formattables/includes_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

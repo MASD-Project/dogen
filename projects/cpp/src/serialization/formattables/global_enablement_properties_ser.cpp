@@ -29,7 +29,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/formattables/global_enablement_properties_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

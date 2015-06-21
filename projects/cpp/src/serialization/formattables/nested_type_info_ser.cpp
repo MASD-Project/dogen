@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/formattables/nested_type_info_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/inclusion_directives_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

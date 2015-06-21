@@ -33,7 +33,6 @@
 #include "dogen/config/serialization/cpp_options_ser.hpp"
 #include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

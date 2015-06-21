@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml/serialization/qname_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

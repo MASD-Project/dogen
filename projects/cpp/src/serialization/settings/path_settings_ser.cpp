@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/cpp/serialization/settings/path_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

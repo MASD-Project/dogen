@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formatter_properties_repository_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

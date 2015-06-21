@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

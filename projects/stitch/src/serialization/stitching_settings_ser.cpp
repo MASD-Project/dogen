@@ -33,7 +33,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/stitch/serialization/stitching_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

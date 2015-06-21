@@ -33,7 +33,6 @@
 #include "dogen/config/serialization/knitting_options_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_options_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

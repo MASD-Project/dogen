@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/config/serialization/output_options_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

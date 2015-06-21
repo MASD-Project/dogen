@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/dia/serialization/rectangle_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -42,7 +42,6 @@
 #include "dogen/dia/serialization/rectangle_ser.hpp"
 #include "dogen/dia/serialization/enumeration_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

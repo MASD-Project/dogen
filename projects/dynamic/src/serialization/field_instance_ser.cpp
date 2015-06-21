@@ -31,7 +31,6 @@
 #include "dogen/dynamic/serialization/value_ser.hpp"
 #include "dogen/dynamic/serialization/field_instance_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

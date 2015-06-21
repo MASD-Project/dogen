@@ -36,7 +36,6 @@
 #include "dogen/cpp/serialization/settings/aspect_settings_ser.hpp"
 #include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

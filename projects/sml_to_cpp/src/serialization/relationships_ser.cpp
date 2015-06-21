@@ -32,7 +32,6 @@
 #include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

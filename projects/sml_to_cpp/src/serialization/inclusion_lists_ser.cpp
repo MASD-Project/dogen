@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

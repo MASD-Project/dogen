@@ -35,7 +35,6 @@
 #include "dogen/dia/serialization/child_node_ser.hpp"
 #include "dogen/dia/serialization/connection_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

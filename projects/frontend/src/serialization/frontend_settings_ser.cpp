@@ -30,7 +30,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/frontend/serialization/frontend_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

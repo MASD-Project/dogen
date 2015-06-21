@@ -34,7 +34,6 @@
 #include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

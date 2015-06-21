@@ -39,7 +39,6 @@
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

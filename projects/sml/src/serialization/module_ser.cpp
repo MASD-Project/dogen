@@ -37,7 +37,6 @@
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

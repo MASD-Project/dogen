@@ -32,7 +32,6 @@
 #include <boost/date_time/posix_time/time_serialize.hpp>
 #include "dogen/test_models/database/serialization/no_keys_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

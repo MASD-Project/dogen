@@ -32,7 +32,6 @@
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/dynamic/serialization/field_instance_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

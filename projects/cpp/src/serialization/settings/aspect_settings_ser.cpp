@@ -29,7 +29,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/settings/aspect_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -31,7 +31,6 @@
 #include "dogen/sml/serialization/qname_ser.hpp"
 #include "dogen/sml/serialization/nested_qname_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

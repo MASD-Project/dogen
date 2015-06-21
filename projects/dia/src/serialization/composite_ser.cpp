@@ -33,7 +33,6 @@
 #include "dogen/dia/serialization/attribute_ser.hpp"
 #include "dogen/dia/serialization/composite_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

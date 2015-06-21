@@ -31,7 +31,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/frontend/serialization/input_descriptor_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -33,7 +33,6 @@
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_dependencies_repository_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

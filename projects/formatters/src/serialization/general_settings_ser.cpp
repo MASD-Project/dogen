@@ -30,7 +30,6 @@
 #include "dogen/formatters/serialization/annotation_ser.hpp"
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

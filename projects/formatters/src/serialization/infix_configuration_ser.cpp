@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/formatters/serialization/infix_configuration_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/formattables/path_derivatives_ser.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_repository_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

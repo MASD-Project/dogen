@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/formattables/visited_type_info_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

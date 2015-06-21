@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

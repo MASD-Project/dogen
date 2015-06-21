@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/dia_to_sml/serialization/profile_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

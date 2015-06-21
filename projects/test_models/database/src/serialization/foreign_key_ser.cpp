@@ -31,7 +31,6 @@
 #include "dogen/test_models/database/serialization/foreign_key_ser.hpp"
 #include "dogen/test_models/database/serialization/primary_key_2_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

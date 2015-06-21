@@ -33,7 +33,6 @@
 #include "dogen/config/serialization/reference_ser.hpp"
 #include "dogen/config/serialization/input_options_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

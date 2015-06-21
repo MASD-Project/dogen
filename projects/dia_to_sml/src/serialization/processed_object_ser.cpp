@@ -36,7 +36,6 @@
 #include "dogen/dia_to_sml/serialization/processed_comment_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

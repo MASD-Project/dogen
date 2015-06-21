@@ -36,7 +36,6 @@
 #include "dogen/dynamic/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/serialization/field_definition_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

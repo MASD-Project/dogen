@@ -39,7 +39,6 @@
 #include "dogen/cpp/serialization/formattables/namespace_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/registrar_info_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

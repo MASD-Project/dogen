@@ -34,7 +34,6 @@
 #include "dogen/formatters/serialization/modeline_field_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

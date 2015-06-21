@@ -33,7 +33,6 @@
 #include "dogen/dynamic/serialization/repository_ser.hpp"
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

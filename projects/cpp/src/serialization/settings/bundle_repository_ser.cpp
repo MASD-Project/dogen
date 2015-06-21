@@ -32,7 +32,6 @@
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/cpp/serialization/settings/bundle_repository_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

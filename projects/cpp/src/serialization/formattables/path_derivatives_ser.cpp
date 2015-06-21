@@ -32,7 +32,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

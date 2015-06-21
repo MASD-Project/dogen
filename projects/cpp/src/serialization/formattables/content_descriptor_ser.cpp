@@ -34,7 +34,6 @@
 #include "dogen/cpp/serialization/formattables/content_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

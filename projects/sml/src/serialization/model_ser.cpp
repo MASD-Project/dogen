@@ -42,7 +42,6 @@
 #include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

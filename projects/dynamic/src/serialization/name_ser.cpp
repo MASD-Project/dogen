@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/dynamic/serialization/name_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

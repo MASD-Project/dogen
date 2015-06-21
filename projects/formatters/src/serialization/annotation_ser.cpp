@@ -33,7 +33,6 @@
 #include "dogen/formatters/serialization/modeline_ser.hpp"
 #include "dogen/formatters/serialization/annotation_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

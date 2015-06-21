@@ -35,7 +35,6 @@
 #include "dogen/utility/serialization/unordered_set.hpp"
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 
