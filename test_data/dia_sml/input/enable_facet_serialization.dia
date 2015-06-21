@@ -299,6 +299,7 @@
 #DOGEN cpp.io.enabled=false
 #DOGEN cpp.test_data.enabled=false
 #DOGEN cpp.serialization.enabled=true
+#DOGEN cpp.odb.enabled=false
 #DOGEN cpp.disable_eos_serialization=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

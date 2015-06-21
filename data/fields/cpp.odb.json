@@ -25,7 +25,7 @@
         "value_type" : "text",
         "definition_type" : "instance",
         "scope" : "root_module",
-        "default_value" : "odb"
+        "default_value" : "pragmas"
     },
     {
         "name" : {
