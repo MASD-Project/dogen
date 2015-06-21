@@ -53,9 +53,11 @@ namespace formattables {
 
 inclusion_dependencies_builder::
 inclusion_dependencies_builder(const enablement_repository& erp,
+    const settings::bundle_repository& brp,
     const inclusion_directives_repository& idrp,
     const integrated_facets_repository& ifrp)
     : enablement_repository_(erp),
+      bundle_repository_(brp),
       directives_repository_(idrp),
       integrated_facets_repository_(ifrp) {}
 
@@ -153,6 +155,18 @@ bool inclusion_dependencies_builder::is_integrated(
                                  << " Facet: '" << facet_name << "'";
     }
     return r;
+}
+
+settings::aspect_settings inclusion_dependencies_builder::
+get_aspect_settings(const sml::qname& qn) const {
+    const auto& bqn(bundle_repository_.bundles_by_qname());
+    const auto i(bqn.find(qn));
+    if (i == bqn.end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
+        BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
+    }
+    return i->second.aspect_settings();
 }
 
 void inclusion_dependencies_builder::

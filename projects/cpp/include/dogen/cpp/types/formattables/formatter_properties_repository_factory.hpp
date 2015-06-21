@@ -32,14 +32,15 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/registrar.hpp"
+#include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
+#include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository.hpp"
-#include "dogen/cpp/types/formattables/enablement_repository.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
-#include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
@@ -129,6 +130,7 @@ public:
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const formatters::container& fc,
+        const settings::bundle_repository& brp,
         const sml::model& m) const;
 };
 

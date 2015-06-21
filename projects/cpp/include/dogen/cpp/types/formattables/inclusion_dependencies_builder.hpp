@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen/sml/types/object.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
@@ -62,6 +63,7 @@ public:
 public:
     inclusion_dependencies_builder(
         const enablement_repository& erp,
+        const settings::bundle_repository& brp,
         const inclusion_directives_repository& idrp,
         const integrated_facets_repository& ifrp);
 
@@ -92,6 +94,13 @@ public:
      */
     bool is_integrated(const std::string& formatter_name,
         const std::string& facet_name) const;
+
+    /**
+     * @brief Returns the aspect settings for the supplied qname.
+     *
+     * @pre qname must exist in the settings bundle repository.
+     */
+    settings::aspect_settings get_aspect_settings(const sml::qname& qn) const;
 
 public:
     /**
@@ -128,6 +137,7 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
+    const settings::bundle_repository& bundle_repository_;
     const inclusion_directives_repository& directives_repository_;
     const integrated_facets_repository& integrated_facets_repository_;
     std::list<std::string> inclusion_dependencies_;

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
 namespace dogen {
@@ -38,6 +39,7 @@ class inclusion_dependencies_builder_factory final {
 public:
     inclusion_dependencies_builder_factory(
         const enablement_repository& erp,
+        const settings::bundle_repository& brp,
         const inclusion_directives_repository& idrp,
         const integrated_facets_repository& ifrp);
 
@@ -49,6 +51,7 @@ public:
 
 private:
     const enablement_repository& enablement_repository_;
+    const settings::bundle_repository& bundle_repository_;
     const inclusion_directives_repository& directives_repository_;
     const integrated_facets_repository& integrated_facets_repository_;
 };

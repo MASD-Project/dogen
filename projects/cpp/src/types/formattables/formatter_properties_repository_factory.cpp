@@ -140,7 +140,7 @@ create_formatter_properties(
 formatter_properties_repository formatter_properties_repository_factory::
 make(const config::cpp_options& opts, const dynamic::repository& srp,
     const dynamic::object& root_object, const formatters::container& fc,
-    const sml::model& m) const {
+    const settings::bundle_repository& brp, const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
     const auto& ro(root_object);
@@ -152,7 +152,7 @@ make(const config::cpp_options& opts, const dynamic::repository& srp,
     registrar rg;
     initialise_registrar(fc, rg);
     const auto pc(rg.container());
-    const inclusion_dependencies_builder_factory bf(erp, idrp, ifrp);
+    const inclusion_dependencies_builder_factory bf(erp, brp, idrp, ifrp);
     const auto dprp(create_inclusion_dependencies_repository(bf, pc, m));
 
     const auto mfd(merge(pdrp, dprp, erp));

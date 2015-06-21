@@ -97,7 +97,7 @@ workflow::execute(const config::cpp_options& opts,
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
     formatter_properties_repository_factory f;
-    const auto fprp(f.make(opts, srp, root_object, fc, m));
+    const auto fprp(f.make(opts, srp, root_object, fc, brp, m));
 
     const transformer t(brp, fprp, m);
     generator g(t);
