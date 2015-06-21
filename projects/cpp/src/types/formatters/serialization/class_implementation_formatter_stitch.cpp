@@ -37,14 +37,22 @@ dogen::formatters::file class_implementation_formatter_stitch(
         const bool has_parents(!c.parents().empty());
         const bool has_properties_or_parents(has_properties || has_parents);
 
+        if (c.is_parent() || !c.parents().empty()) {
+fa.stream() << std::endl;
+fa.stream() << "BOOST_CLASS_TRACKING(" << std::endl;
+fa.stream() << "    " << c.qualified_name() << "," << std::endl;
+fa.stream() << "    boost::serialization::track_selectively)" << std::endl;
+        }
+fa.stream() << std::endl;
 fa.stream() << "namespace boost {" << std::endl;
 fa.stream() << "namespace serialization {" << std::endl;
-fa.stream() << std::endl;
+
         /*
          * Save function
          */
+fa.stream() << std::endl;
 fa.stream() << "template<typename Archive>" << std::endl;
-fa.stream() << "void save(Archive& " << (has_properties_or_parents ? "ar" : "/*ar*/,") << "," << std::endl;
+fa.stream() << "void save(Archive& " << (has_properties_or_parents ? "ar" : "/*ar*/") << "," << std::endl;
 fa.stream() << "    const " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
 fa.stream() << "    const unsigned int /*version*/) {" << std::endl;
         for (const auto p : c.parents()) {
@@ -69,13 +77,13 @@ fa.stream() << std::endl;
          */
 fa.stream() << "template<typename Archive>" << std::endl;
 fa.stream() << "void load(Archive& " << (has_properties_or_parents ? "ar," : "/*ar*/,") << std::endl;
-fa.stream() << "    " << c.qualified_name() << "& v," << std::endl;
+fa.stream() << "    " << c.qualified_name() << "& " << (has_properties_or_parents ? "v" : "/*v*/") << "," << std::endl;
 fa.stream() << "    const unsigned int /*version*/) {" << std::endl;
         for (const auto p : c.parents()) {
             if (fa.is_xml_serialization_disabled())
-fa.stream() << "    ar >> \"" << p.name() << "\", base_object<" << p.name() << ">(v);" << std::endl;
+fa.stream() << "    ar >> \"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v);" << std::endl;
             else
-fa.stream() << "    ar >> make_nvp(\"" << p.name() << "\", base_object<" << p.name() << ">(v));" << std::endl;
+fa.stream() << "    ar >> make_nvp(\"" << p.name() << "\", base_object<" << p.qualified_name() << ">(v));" << std::endl;
 
             if (has_properties_or_parents)
 fa.stream() << std::endl;
@@ -88,7 +96,7 @@ fa.stream() << "    std::string " << p.name() << "_tmp;" << std::endl;
 fa.stream() << "    ar >> " << p.name() << "_tmp;" << std::endl;
                 else
 fa.stream() << "    ar >> make_nvp(\"" << p.name() << "\", " << p.name() << "_tmp);" << std::endl;
-fa.stream() << "    v." << fa.make_member_variable_name(p) << " = " << p.name() << "_tmp;    " << std::endl;
+fa.stream() << "    v." << fa.make_member_variable_name(p) << " = " << p.name() << "_tmp;" << std::endl;
             } else {
                 if (fa.is_xml_serialization_disabled())
 fa.stream() << "    ar >> " << p.name() << ";" << std::endl;
@@ -115,15 +123,15 @@ fa.stream() << std::endl;
         if (!fa.is_xml_serialization_disabled()) {
 fa.stream() << "template void save(archive::xml_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 fa.stream() << "template void load(archive::xml_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
-        }
 fa.stream() << std::endl;
+        }
+
         if (!fa.is_eos_serialization_disabled()) {
 fa.stream() << "template void save(eos::portable_oarchive& ar, const " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
 fa.stream() << "template void load(eos::portable_iarchive& ar, " << c.qualified_name() << "& v, unsigned int version);" << std::endl;
+fa.stream() << std::endl;
         }
-fa.stream() << std::endl;
 fa.stream() << "} }" << std::endl;
-fa.stream() << std::endl;
     } // sbf
     // return fa.make_file();
     return fa.make_file(false/*overwrite*/);

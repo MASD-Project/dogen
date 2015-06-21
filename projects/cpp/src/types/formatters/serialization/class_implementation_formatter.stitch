@@ -18,17 +18,27 @@ dogen::formatters::file class_implementation_formatter_stitch(
         const bool has_parents(!c.parents().empty());
         const bool has_properties_or_parents(has_properties || has_parents);
 
+        if (c.is_parent() || !c.parents().empty()) {
 #>
+
+BOOST_CLASS_TRACKING(
+    <#= c.qualified_name() #>,
+    boost::serialization::track_selectively)
+<#+
+        }
+#>
+
 namespace boost {
 namespace serialization {
-
 <#+
+
         /*
          * Save function
          */
 #>
+
 template<typename Archive>
-void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/,") #>,
+void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/") #>,
     const <#= c.qualified_name() #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
@@ -67,17 +77,17 @@ void save(Archive& <#= (has_properties_or_parents ? "ar" : "/*ar*/,") #>,
 #>
 template<typename Archive>
 void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
-    <#= c.qualified_name() #>& v,
+    <#= c.qualified_name() #>& <#= (has_properties_or_parents ? "v" : "/*v*/") #>,
     const unsigned int /*version*/) {
 <#+
         for (const auto p : c.parents()) {
             if (fa.is_xml_serialization_disabled())
 #>
-    ar >> "<#= p.name() #>", base_object<<#= p.name() #>>(v);
+    ar >> "<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v);
 <#+
             else
 #>
-    ar >> make_nvp("<#= p.name() #>", base_object<<#= p.name() #>>(v));
+    ar >> make_nvp("<#= p.name() #>", base_object<<#= p.qualified_name() #>>(v));
 <#+
 
             if (has_properties_or_parents)
@@ -98,7 +108,7 @@ void load(Archive& <#= (has_properties_or_parents ? "ar," : "/*ar*/,") #>
                 else
 #>
     ar >> make_nvp("<#= p.name() #>", <#= p.name() #>_tmp);
-    v.<#= fa.make_member_variable_name(p) #> = <#= p.name() #>_tmp;    
+    v.<#= fa.make_member_variable_name(p) #> = <#= p.name() #>_tmp;
 <#+
             } else {
                 if (fa.is_xml_serialization_disabled())
@@ -133,21 +143,19 @@ template void load(archive::binary_iarchive& ar, <#= c.qualified_name() #>& v, u
 #>
 template void save(archive::xml_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
-<#+
-        }
-#>
 
 <#+
+        }
+
         if (!fa.is_eos_serialization_disabled()) {
 #>
 template void save(eos::portable_oarchive& ar, const <#= c.qualified_name() #>& v, unsigned int version);
 template void load(eos::portable_iarchive& ar, <#= c.qualified_name() #>& v, unsigned int version);
+
 <#+
         }
 #>
-
 } }
-
 <#+
     } // sbf
     // return fa.make_file();

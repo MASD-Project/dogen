@@ -53,7 +53,8 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const sml::object& o) const {
 
     auto builder(f.make());
-    builder.add(o.name(), traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
 
     using ic = inclusion_constants;
     const auto as(builder.get_aspect_settings(o.name()));
@@ -75,6 +76,12 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::eos::portable_iarchive());
         builder.add(ic::eos::portable_oarchive());
     }
+
+    using rt = sml::relationship_types;
+    builder.add(o, rt::weak_associations, ch_fn);
+    builder.add(o, rt::regular_associations, ch_fn);
+    builder.add(o, rt::parents, ch_fn);
+    builder.add(o, rt::leaves, ch_fn);
 
     return builder.build();
 }
