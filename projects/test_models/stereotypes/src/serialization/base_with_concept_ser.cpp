@@ -31,7 +31,6 @@
 #include "dogen/test_models/stereotypes/serialization/further_refined_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/base_with_concept_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::test_models::stereotypes::base_with_concept,
     boost::serialization::track_selectively)

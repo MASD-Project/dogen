@@ -70,5 +70,4 @@ template void load(archive::xml_iarchive& ar, dogen::test_models::eos_serializat
 template void save(eos::portable_oarchive& ar, const dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 template void load(eos::portable_iarchive& ar, dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 
-
 } }

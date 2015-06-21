@@ -240,9 +240,9 @@ template_instantiations(const cpp::formattables::class_info& ci) {
     stream_ << indenter_ << "template void load(archive::binary_iarchive& ar, ";
     qname.format(ci);
     stream_ << "& v, unsigned int version);" << std::endl;
-    utility_.blank_line();
 
     if (!disable_xml_serialization_) {
+        utility_.blank_line();
         stream_ << indenter_ << "template void save(archive::xml_oarchive& ar, "
                 << "const ";
         qname.format(ci);
@@ -250,10 +250,10 @@ template_instantiations(const cpp::formattables::class_info& ci) {
         stream_ << indenter_ << "template void load(archive::xml_iarchive& ar, ";
         qname.format(ci);
         stream_ << "& v, unsigned int version);" << std::endl;
-        utility_.blank_line();
     }
 
     if (!disable_eos_serialization_) {
+        utility_.blank_line();
         stream_ << indenter_ << "template void save(eos::portable_oarchive& "
                 << "ar, const ";
         qname.format(ci);
@@ -261,10 +261,9 @@ template_instantiations(const cpp::formattables::class_info& ci) {
         stream_ << indenter_ << "template void load(eos::portable_iarchive& ar"
                 << ", ";
         qname.format(ci);
-        stream_ << "& v, unsigned int version);" << std::endl
-                << std::endl;
-        utility_.blank_line();
+        stream_ << "& v, unsigned int version);" << std::endl;
     }
+    utility_.blank_line();
 }
 
 void serialization_implementation::format_class(
@@ -280,7 +279,6 @@ void serialization_implementation::format_class(
     const cpp::formattables::class_info& ci(*o);
     qname qname(stream_);
     if (ci.is_parent() || !ci.parents().empty()) {
-        utility_.blank_line();
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
         {
             positive_indenter_scope s(indenter_);

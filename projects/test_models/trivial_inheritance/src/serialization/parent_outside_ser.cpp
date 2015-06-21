@@ -30,7 +30,6 @@
 #include "dogen/test_models/trivial_inheritance/serialization/pkg4/child_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/parent_outside_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::test_models::trivial_inheritance::parent_outside,
     boost::serialization::track_selectively)

@@ -30,7 +30,6 @@
 #include "dogen/test_models/trivial_inheritance/serialization/base_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/descendant2_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::test_models::trivial_inheritance::descendant2,
     boost::serialization::track_selectively)

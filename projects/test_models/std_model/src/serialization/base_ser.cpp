@@ -32,7 +32,6 @@
 #include "dogen/test_models/std_model/serialization/base_ser.hpp"
 #include "dogen/test_models/std_model/serialization/derived_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::test_models::std_model::base,
     boost::serialization::track_selectively)

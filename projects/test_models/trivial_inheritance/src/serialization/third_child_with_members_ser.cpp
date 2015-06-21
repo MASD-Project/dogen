@@ -32,7 +32,6 @@
 #include "dogen/test_models/trivial_inheritance/serialization/parent_with_members_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/third_child_with_members_ser.hpp"
 
-
 BOOST_CLASS_TRACKING(
     dogen::test_models::trivial_inheritance::third_child_with_members,
     boost::serialization::track_selectively)
