@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/stereotypes/serialization/immutable_one_non_primitive_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

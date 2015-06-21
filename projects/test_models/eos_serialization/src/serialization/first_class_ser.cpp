@@ -31,7 +31,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/eos_serialization/serialization/first_class_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 
@@ -68,7 +67,7 @@ template void load(archive::binary_iarchive& ar, dogen::test_models::eos_seriali
 template void save(archive::xml_oarchive& ar, const dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 template void load(archive::xml_iarchive& ar, dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 
-template void save(eos::portable_oarchive&  ar, const dogen::test_models::eos_serialization::first_class& v, unsigned int version);
+template void save(eos::portable_oarchive& ar, const dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 template void load(eos::portable_iarchive& ar, dogen::test_models::eos_serialization::first_class& v, unsigned int version);
 
 

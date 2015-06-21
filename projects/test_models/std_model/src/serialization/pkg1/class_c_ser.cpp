@@ -33,7 +33,6 @@
 #include "dogen/test_models/std_model/serialization/class_a_versioned_key_ser.hpp"
 #include "dogen/test_models/std_model/serialization/class_a_unversioned_key_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

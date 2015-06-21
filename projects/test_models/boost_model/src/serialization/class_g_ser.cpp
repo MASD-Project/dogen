@@ -31,7 +31,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/test_models/boost_model/serialization/class_g_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

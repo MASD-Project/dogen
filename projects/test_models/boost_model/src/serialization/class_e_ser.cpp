@@ -33,7 +33,6 @@
 #include "dogen/test_models/boost_model/serialization/class_e_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_derived_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

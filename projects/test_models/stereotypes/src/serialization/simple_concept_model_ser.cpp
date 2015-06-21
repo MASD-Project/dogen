@@ -30,7 +30,6 @@
 #include "dogen/test_models/stereotypes/serialization/entity_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/simple_concept_model_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

@@ -30,7 +30,6 @@
 #include "dogen/test_models/trivial_association/serialization/class_a_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_b_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

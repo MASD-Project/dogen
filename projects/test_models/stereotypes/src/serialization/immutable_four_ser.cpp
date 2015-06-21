@@ -32,7 +32,6 @@
 #include "dogen/test_models/stereotypes/serialization/immutable_four_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_one_primitive_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

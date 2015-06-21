@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/stereotypes/serialization/multiple_refinement_concept_model_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

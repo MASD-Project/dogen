@@ -605,7 +605,6 @@ Content:
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "class_in_a_package/serialization/package1/first_class_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 
@@ -643,6 +642,7 @@ template void save(archive::xml_oarchive& ar, const class_in_a_package::package1
 template void load(archive::xml_iarchive& ar, class_in_a_package::package1::first_class& v, unsigned int version);
 
 } }
+
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/package1/first_class_ser.hpp
 Content: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-

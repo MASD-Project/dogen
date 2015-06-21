@@ -32,7 +32,6 @@
 #include "dogen/test_models/enumeration/serialization/colour_types_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/pkg1/shape_types_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

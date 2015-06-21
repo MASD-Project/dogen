@@ -34,7 +34,6 @@
 #include <boost/date_time/posix_time/time_serialize.hpp>
 #include "dogen/test_models/boost_model/serialization/class_f_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

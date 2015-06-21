@@ -30,7 +30,6 @@
 #include "dogen/test_models/stereotypes/serialization/value_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/identity_pod_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

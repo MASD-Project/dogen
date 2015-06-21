@@ -29,7 +29,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_4_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

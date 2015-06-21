@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/std_model/serialization/class_a_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

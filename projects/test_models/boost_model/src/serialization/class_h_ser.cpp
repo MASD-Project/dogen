@@ -31,7 +31,6 @@
 #include <boost/property_tree/ptree_serialization.hpp>
 #include "dogen/test_models/boost_model/serialization/class_h_ser.hpp"
 
-
 namespace boost {
 namespace serialization {
 

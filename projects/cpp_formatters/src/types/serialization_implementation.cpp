@@ -255,7 +255,7 @@ template_instantiations(const cpp::formattables::class_info& ci) {
 
     if (!disable_eos_serialization_) {
         stream_ << indenter_ << "template void save(eos::portable_oarchive& "
-                << " ar, const ";
+                << "ar, const ";
         qname.format(ci);
         stream_ << "& v, unsigned int version);" << std::endl;
         stream_ << indenter_ << "template void load(eos::portable_iarchive& ar"
@@ -280,6 +280,7 @@ void serialization_implementation::format_class(
     const cpp::formattables::class_info& ci(*o);
     qname qname(stream_);
     if (ci.is_parent() || !ci.parents().empty()) {
+        utility_.blank_line();
         stream_ << indenter_ << "BOOST_CLASS_TRACKING(" << std::endl;
         {
             positive_indenter_scope s(indenter_);
@@ -312,6 +313,7 @@ void serialization_implementation::format_class(
         utility_.blank_line();
         template_instantiations(ci);
     }
+    utility_.blank_line();
 }
 
 void serialization_implementation::
@@ -328,7 +330,6 @@ void serialization_implementation::format(
 
     includes includes(stream_);
     includes.format(f);
-    utility_.blank_line();
 
     using cpp::formattables::content_types;
     if (f.descriptor().content_type() == content_types::unversioned_key ||
