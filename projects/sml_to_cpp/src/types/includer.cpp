@@ -341,10 +341,9 @@ void includer::append_boost_dependencies(const relationships& rel,
         inc.system().push_back(boost_.include(boost_types::string_algorithm));
     }
 
-    if (is_implementation && is_serialization && is_ptree) {
-        inc.system().push_back(boost_.include(boost_types::io_ptree));
-        inc.system().push_back(boost_.include(boost_types::serialization_ptree));
-    }
+    if (is_implementation && is_serialization && is_ptree)
+        inc.system().push_back(
+            boost_.include(boost_types::serialization_ptree));
 }
 
 void includer::
