@@ -1,0 +1,29 @@
+<#@ licence_name=gpl_v3 #>
+<#@ copyright_notice=Copyright(C) 2012 Kitanda <info@kitanda.co.uk> #>
+<#@ modeline_group_name=emacs #>
+<#@ stream_variable_name=fa.stream() #>
+<#@ inclusion_dependency="dogen/cpp/types/formatters/odb/class_header_formatter_stitch.hpp" #>
+<#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ containing_namespaces=dogen::cpp::formatters::odb #>
+<#+
+
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& /*c*/) {
+
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
+}
+#>

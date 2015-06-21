@@ -44,9 +44,9 @@ struct traits {
     static std::string class_header_formatter_name();
 
     /**
-     * @brief Name of the class implementation formatter.
+     * @brief Name of the odb options formatter.
      */
-    static std::string class_implementation_formatter_name();
+    static std::string odb_options_formatter_name();
 
     /**
      * @brief The pragma used by the ODB compiler.

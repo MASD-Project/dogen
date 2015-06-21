@@ -18,32 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/odb/traits.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_CLASS_HEADER_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ODB_CLASS_HEADER_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/class_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string traits::facet_name() {
-    static std::string r(formatters::traits::model_name() + ".odb");
-    return r;
-}
-
-std::string traits::class_header_formatter_name() {
-    static std::string r(traits::facet_name() + ".class_header_formatter");
-    return r;
-}
-
-std::string traits::odb_options_formatter_name() {
-    static std::string r(traits::facet_name() + ".odb_options_formatter");
-    return r;
-}
-
-std::string traits::odb_pragma() {
-    static std::string r("odb_pragma");
-    return r;
-}
+dogen::formatters::file class_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::class_info& fd);
 
 } } } }
+
+#endif

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-21 Sun 12:48]
+#+CAPTION: Clock summary at [2015-06-21 Sun 17:58]
 | <75>                                                                        |         |       |       |
 | Headline                                                                    | Time    |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| *Total time*                                                                | *51:34* |       |       |
+| *Total time*                                                                | *52:20* |       |       |
 |-----------------------------------------------------------------------------+---------+-------+-------|
-| Stories                                                                     | 51:34   |       |       |
-| Active                                                                      |         | 51:34 |       |
+| Stories                                                                     | 52:20   |       |       |
+| Active                                                                      |         | 52:20 |       |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:00 |
 | COMPLETED Implement types class implementation formatter using stitch       |         |       | 10:02 |
 | COMPLETED Add helper methods for equals operator                            |         |       |  0:44 |
@@ -47,6 +47,7 @@
 | COMPLETED Implement class header formatter in serialisation                 |         |       |  0:39 |
 | COMPLETED Supply settings bundle to the inclusion builder                   |         |       |  0:36 |
 | COMPLETED Implement class implementation formatter in serialisation         |         |       |  3:53 |
+| COMPLETED Setup basic formatter infrastructure for odb                      |         |       |  0:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -688,6 +689,18 @@ Solved problems:
 - add newline after boilerplate namespaces in legacy.
 - missing all of the formatter includes. Need a way to figure out if
   XML and EOS are enabled at include time.
+
+*** COMPLETED Setup basic formatter infrastructure for odb            :story:
+    CLOSED: [2015-06-21 Sun 17:58]
+    CLOCK: [2015-06-21 Sun 17:11]--[2015-06-21 Sun 17:57] =>  0:46
+
+Copy and paste all the basic infrastructure such as skeletons for the
+stitch templates, helper methods, etc.
+
+*** Implement serialisation registrar formatter                       :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 *** Implement class header formatter in odb                           :story:
 

@@ -31,9 +31,10 @@
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/class_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/enum_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
-#include "dogen/cpp/types/formatters/visitor_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/odb_options_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -98,6 +99,14 @@ public:
     >&
     forward_declarations_formatters() const;
 
+    /**
+     * @brief Returns all available odb options formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::odb_options_formatter_interface>
+        >&
+    odb_options_formatters() const;
+
 public:
     /**
      * @brief Returns all available formatters.
@@ -121,6 +130,9 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::forward_declarations_formatter_interface> >
     forward_declarations_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::odb_options_formatter_interface> >
+    odb_options_formatters_;
 };
 
 } } }

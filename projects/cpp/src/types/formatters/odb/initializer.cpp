@@ -21,6 +21,8 @@
 #include <boost/make_shared.hpp>
 #include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
 #include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
+#include "dogen/cpp/types/formatters/odb/class_header_formatter.hpp"
+#include "dogen/cpp/types/formatters/odb/odb_options_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
 
 namespace dogen {
@@ -28,12 +30,20 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter(f);
+}
+
 void register_opaque_settings_factories() {
     auto& rg(settings::bundle_repository_factory::registrar());
     rg.register_opaque_settings_factory(boost::make_shared<settings_factory>());
 }
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(registrar& rg) {
+    initialise_formatter<class_header_formatter>(rg);
+    initialise_formatter<odb_options_formatter>(rg);
     register_opaque_settings_factories();
 }
 
