@@ -5365,13 +5365,13 @@ seems like the least bad approach.
         <dia:point val="302,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="301.95,98.95;335.275,105.85"/>
+        <dia:rectangle val="301.95,98.95;336.815,105.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="302,99"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="34.765000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -5604,10 +5604,27 @@ seems like the least bad approach.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#ko#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const config::knitting_options&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#rp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dynamic::dynamic::repository&amp;#</dia:string>
+                <dia:string>#const dynamic::repository&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13356,17 +13373,17 @@ facet of the C++ language.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="335.225,99"/>
+        <dia:point val="336.765,99"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="334.475,93.25;353.839,99.8"/>
+        <dia:rectangle val="336.015,93.25;353.839,99.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="335.225,99"/>
-        <dia:point val="335.225,94"/>
+        <dia:point val="336.765,99"/>
+        <dia:point val="336.765,94"/>
         <dia:point val="353.639,94"/>
         <dia:point val="353.639,99"/>
       </dia:attribute>
@@ -15348,17 +15365,17 @@ for a given C++ entity.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="335.225,105.8"/>
+        <dia:point val="336.765,105.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="334.475,105.05;416.2,129.8"/>
+        <dia:rectangle val="336.015,105.05;416.2,129.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="335.225,105.8"/>
-        <dia:point val="335.225,111"/>
+        <dia:point val="336.765,105.8"/>
+        <dia:point val="336.765,111"/>
         <dia:point val="416,111"/>
         <dia:point val="416,129"/>
       </dia:attribute>
