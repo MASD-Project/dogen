@@ -132,8 +132,7 @@ fa.stream() << std::endl;
         }
 fa.stream() << "} }" << std::endl;
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 } } } }

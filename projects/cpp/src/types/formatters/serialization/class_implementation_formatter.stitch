@@ -157,8 +157,7 @@ template void load(eos::portable_iarchive& ar, <#= c.qualified_name() #>& v, uns
 } }
 <#+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 
 #>
