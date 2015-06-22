@@ -28,14 +28,21 @@ if (WITH_PRESENTATION)
          "${CMAKE_CURRENT_SOURCE_DIR}/"
          "${CMAKE_CURRENT_SOURCE_DIR}/*.tex")
 
-    foreach(file ${all_files})
-         configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file} ${stage_doc_dir}/${file})
-         get_filename_component(file_name ${file} NAME_WE)
+        foreach(file ${all_files})
+            get_filename_component(file_name ${file} NAME_WE)
+            if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.bib)
+                file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.bib
+                    DESTINATION ${stage_doc_dir})
+            endif()
+            configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file} ${stage_doc_dir}/${file})
+
          message(STATUS "${stage_doc_dir}/${file_name}.pdf")
          add_custom_target(presentation_${file} ALL
              COMMENT "Generating presentation ${file}"
              DEPENDS ${stage_doc_dir}/${file}
              COMMAND ${PDFLATEX_COMMAND} ${file}
+             # COMMAND bibtex ${file_name}
+             # COMMAND ${PDFLATEX_COMMAND} ${file}
              OUTPUT ${stage_doc_dir}/${file_name}.pdf
              WORKING_DIRECTORY ${stage_doc_dir})
          add_dependencies(presentation presentation_${file})

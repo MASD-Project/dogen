@@ -1,185 +1,211 @@
 \documentclass{beamer}
-
-% for themes, etc.
 \mode<presentation>
 { \usetheme{boxes} }
 
-\usepackage{times}  % fonts are up to you
+\usepackage{times}
 \usepackage{graphicx}
+% \usepackage{biblatex}
+% \addbibresourse{an_introduction_to_dogen.bib}
 
-% these will be used later in the title page
-\title{A 5-Minute Tour of Beamer's Simplest Features}
-\author{Norm Matloff \\
-    Dept. of Computer Science \\
-    University of California, Davis
+\title{An Introduction to Dogen}
+\author{Marco Craveiro \\
+    Dept. of Biocomputation \\
+    University of Hertfordshire
 }
-\date{July 17, 2005}
+\date{\today}
 
-% note: do NOT include a \maketitle line; also note that this title
-% material goes BEFORE the \begin{document}
-
-% have this if you'd like a recurring outline
-\AtBeginSection[]  % "Beamer, do the following at the start of every section"
+\AtBeginSection[]
 {
-\begin{frame}<beamer>
-\frametitle{Outline} % make a frame titled "Outline"
-\tableofcontents[currentsection]  % show TOC and highlight current section
+  \begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection]
 \end{frame}
 }
 
 \begin{document}
 
-% this prints title, author etc. info from above
 \begin{frame}
 \titlepage
 v${DOGEN_VERSION}
 \end{frame}
 
-\section{A Question from Grade School}
+\section{Background}
 
 \begin{frame}
-\frametitle{A Question from Grade School}
-
-(Illustrating {\sc beamer}'s $\backslash$pause command.)
-\vskip 0.5in
-
-A couple of years ago, a fifth-grade teacher asked me to explain to her
-the reasoning behind the ``invert and multiply'' rule for dividing
-fractions, e.g.
-\pause  % makes overlay
-
-$$
-\frac{4}{5} \div \frac{2}{3} = \frac{4}{5} \times \frac{3}{2}
-$$
-
-\pause
-
-Let's try to find answers understandable by fifth graders (at least the
-more patient ones).
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Cookie Approach}
-
-Here let's just use intuition, understandable by fifth graders.
-
-\pause
-
-If we give 1/3 of a cookie to each person, how many people can we
-feed with 1 cookie?
-
-\pause
-
-Obviously, the answer is 3.
-
-So we've derived the ``invert and multiply'' rule in a special case:
-
-$$
-1 \div \frac{1}{3} = 3
-$$
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Cookie Approach}
-
-But what if we give 2/3 of a cookie, not 1/3, to each person?
-
-We're giving 2$\times$ as much per person.
-
-So we can feed only 1/2 as many people.
-
-So we feed  $\frac{1}{2} \times 3 = \frac{3}{2}$.\footnote{One person
-gets only a half share.}
-
-So we've derived the ``invert and multiply'' rule in another case:
-
-$$
-1 \div \frac{2}{3} = \frac{3}{2}
-$$
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Cookie Approach}
-
-Now, suppose we have only 4/5 of a cookie.
-
-Then we can feed only 4/5 as many people, i.e.
-
-$$
-\frac{4}{5} \times \frac{3}{2} ~ people
-$$
-
-\pause
-
-So we've derived the ``invert and multiply'' rule in the general case:
-
-$$
-\frac{4}{5} \div \frac{2}{3} = \frac{4}{5} \times \frac{3}{2}
-$$
-
-\end{frame}
-
-\section{A Geometry Proof}
-
-\begin{frame}
-\frametitle{A Geometry Proof}
-
-(Illustrating {\sc beamer}'s $\backslash$uncover command.)
-\vskip 0.5in
-
-\begin{theorem}
-The angles in a triangle sum to $180^{\circ}$.
-\end{theorem}
-
-\pause
-
-Plan:  Extend AC past C to D.  Draw CE parallel to AB.
-
-%% \includegraphics[width = 2.0in]{BeamerTriangle.jpg}
-
-\end{frame}
-
-\begin{frame}
-
-\begin{proof}
-
-\begin{tabular}{ll}
-% uncover makes advanced overlay
-\uncover<1->{1. u = y} & \uncover<2->{Alternate angles of a
-transveral.} \\
-\uncover<3->{2. v = x} & \uncover<4->{Consecutive interior angles of a
-transveral} \\
-\uncover<5->{3. z+u+v = $180^{\circ}$} & \uncover<6->{ACD is a straight
-line.} \\
-\uncover<7->{4. z+y+x = $180^{\circ}$} & \uncover<8->{Substitution
-from Steps 1 and 2.} \\
-\end{tabular}
-
-\end{proof}
-
-\end{frame}
-
-\section{More Advanced Features of {\sc beamer}}
-
-\begin{frame}
-\frametitle{More Advanced Features of {\sc beamer}}
+\frametitle{What is Dogen}
 
 \begin{itemize}
 
-\item This tour just scratches the surface.
+\item Dogen is a suite of code generation tools designed specifically
+  to target source code representations of \emph{domain models}. The
+  name is a contraction of ``domain generator''.
+
 \pause
 
-\item {\sc beamer} has enough features to fill a 210-page user manual!
+\item The term \emph{domain model} is understood as defined by Evans
+  in \cite{Evans04} and summarised by Fowler: ``An object model of the
+  domain that incorporates both behaviour and
+  data.''\cite{Fowler2015}. \emph{Domain} is the problem domain one
+  intends to model (i.e. generate classes to describe).
+
 \pause
 
-\item Advanced example:
-\url{http://latex-beamer.sourceforge.net/beamerexample1.pdf}.
+\item Most behaviours are problem-specific and thus cannot be
+  code-generated. However, there are a few ``basic behaviours'' that
+  can be inferred: serialisation, persistence to a store such as a
+  relational database, debug printing and so on.
 
 \end{itemize}
 
 \end{frame}
+
+\begin{frame}
+\frametitle{Why do we need Dogen?}
+
+\begin{itemize}
+
+\item There are many code generators out there, generating source code
+  in many programming languages; so \emph{why do we need yet another
+    code generator?}
+
+\pause
+
+\item We have analysed a number of code generators (see the Dogen
+  manual for details) and couldn't quite find a suitable one.
+
+\pause
+
+\item Code generators come in two basic flavours: special purpose and
+  general purpose.
+
+\pause
+
+\item Special purpose are designed with a single use in mind and users
+  are not meant to fiddle with the generated code.
+
+\pause
+
+\item The general purpose code generators we experimented with either
+  did not provide extensibility mechanisms at all or were quite
+  complex and/or programming language specific. eCore and the Eclipse
+  Modeling Framework is an example of this.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of an ideal code generator}
+
+\begin{itemize}
+
+\item \textbf{Readability}. Generated code should be very close to human
+  generated code; ideally, indistinguishable. A lot of general purpose
+  code generators generate unreadable code. However, users gain domain
+  insight by looking at it's source representation, so it must be very
+  readable.
+
+\pause
+
+\item \textbf{Speed}. In order for the generator to be usable, it must
+  be able to generate large amounts of code quickly (less than 10
+  secs).
+
+\pause
+
+\item \textbf{Extensibility}. Required in two ways. First, in the
+  sense of the ``basic behaviours'' explained above: additional
+  serialisation methods, etc. Second, in the sense of domain specific
+  behaviours: repetitive patterns in a given domain should be
+  code-generatable.
+
+\pause
+
+\item \textbf{Integratability}. Ideally, we should be able to reuse
+  existing formats such as eCore, JAXB, etc.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Short history of Dogen}
+
+\begin{itemize}
+
+\item Started when taking time off of work around 2012, to create my
+  first start-up.
+
+\pause
+
+\item Benefited from the professional experience of several years in a
+  code generation team~--- albeit with different technologies: C\# and
+  T4 Text Templating.
+
+\pause
+
+\item Originally envisioned as a 6 month project, it has been going
+  strong for almost 3 years now and still requires quite a bit of work
+  to realise the vision. Work done part-time so progress has not been
+  as fast as needed.
+
+\pause
+
+\item Development uses agile methodology, with bi-weekly
+  sprints. Emacs org-mode provides a low-ceremony way of keeping track
+  of all the work (sprint backlogs, product backlogs, time tracking,
+  etc).
+
+\pause
+
+\item Project is very insular and has not yet been exposed to a wider
+  community; since the core vision is not yet fully implemented is
+  difficult to get developers on board.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Where are we now?}
+
+\begin{itemize}
+
+\item Dogen is now a fairly capable C 11 code generator. It is used
+  to generate itself, with 15 models in total (over 400 classes), with
+  the largest model composed of over 150 classes. It has over 34 test
+  models, and almost 800 unit tests.
+
+\pause
+
+\item It supports several basic behaviours (called facets): boost
+  serialisation (XML, binary, text), hashing, relational database
+  support (via ODB), dumping objects to log files as JSON and provides
+  test data generation.
+
+\pause
+
+\item We are currently in the process of moving over to a new text
+  templating engine, which will make extensibility much easier.
+
+\end{itemize}
+
+\end{frame}
+
+\section{Internals}
+
+\begin{frame}
+\frametitle{What is Dogen}
+
+\begin{itemize}
+
+\item Started when taking time off of work around 2012, to create my
+  first start-up.
+
+\end{itemize}
+
+\end{frame}
+
+% \printbibliography
 
 \end{document}
