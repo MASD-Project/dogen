@@ -51,7 +51,8 @@
 | STARTED Implement class header formatter in odb                             |         |       |  0:19 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-06-22 Mon 14:20]
     CLOCK: [2015-06-21 Sun 12:46]--[2015-06-21 Sun 12:48] =>  0:02
     CLOCK: [2015-06-20 Sat 19:08]--[2015-06-20 Sat 19:14] =>  0:06
     CLOCK: [2015-06-20 Sat 16:58]--[2015-06-20 Sat 17:17] =>  0:19
@@ -68,7 +69,8 @@ Updates to sprint and product backlog.
 
 - Backlog reviewed up to "In next major release".
 
-*** Updates to the manual and readme files                            :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-06-22 Mon 14:20]
 
 Use downtime to update the manual and / or readme file.
 
@@ -698,19 +700,10 @@ Solved problems:
 Copy and paste all the basic infrastructure such as skeletons for the
 stitch templates, helper methods, etc.
 
-*** STARTED Implement class header formatter in odb                   :story:
+*** POSTPONED Implement class header formatter in odb                 :story:
+    CLOSED: [2015-06-22 Mon 14:20]
     CLOCK: [2015-06-21 Sun 18:34]--[2015-06-21 Sun 18:40] =>  0:06
     CLOCK: [2015-06-21 Sun 18:20]--[2015-06-21 Sun 18:33] =>  0:13
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-*** Implement odb formatter in odb                                    :story:
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-*** Implement serialisation registrar formatter                       :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
