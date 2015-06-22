@@ -17,7 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-
 set(curdir ${CMAKE_CURRENT_SOURCE_DIR})
 file(GLOB sub-dir RELATIVE ${curdir} *)
 set(list_of_dirs "")

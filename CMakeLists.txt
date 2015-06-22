@@ -42,6 +42,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 # options
 option(WITH_DEBUG "Build the project with debug symbols" off)
 option(WITH_DOXYGEN "Build the project documentation" off)
+option(WITH_PRESENTATIONS "Build all presentations. Requires pdflatex and beamer." off)
 option(WITH_PROFILING "Build the project with profiling support" off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
@@ -174,6 +175,23 @@ endif()
 message(STATUS "Found git (${GIT_COMMAND})...")
 
 #
+# setup pdflatex
+#
+find_program(PDFLATEX_COMMAND NAMES pdflatex)
+if(NOT DEFINED PDFLATEX_COMMAND)
+    message(STATUS "pdflatex not found, disabling presentations.")
+    set(WITH_PRESENTATIONS "off")
+else()
+    message(STATUS "Found pdflatex (${PDFLATEX_COMMAND})...")
+endif()
+
+if(WITH_PRESENTATION)
+    message(STATUS "Building latex presentations...")
+else()
+    message(STATUS "NOT building latex presentations...")
+endif()
+
+#
 # setup jq, for JSON validation.
 #
 find_program(JQ_COMMAND NAMES jq)
@@ -218,6 +236,7 @@ set(stage_pkg_dir ${stage_dir}/pkg)
 set(stage_lib_dir ${stage_dir}/lib)
 set(stage_inc_dir ${stage_dir}/include)
 set(stage_test_data_dir ${stage_dir}/test_data)
+set(stage_doc_dir ${stage_dir}/doc)
 set(stage_doxygen_dir ${stage_dir}/doxygen)
 
 # ensure cmake dumps binaries in the right places
@@ -345,6 +364,7 @@ add_dependencies(knit_and_stitch stitch_all)
 #
 add_subdirectory(${CMAKE_SOURCE_DIR}/build)
 add_subdirectory(${CMAKE_SOURCE_DIR}/data)
+add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
 add_subdirectory(${CMAKE_SOURCE_DIR}/diagrams)
