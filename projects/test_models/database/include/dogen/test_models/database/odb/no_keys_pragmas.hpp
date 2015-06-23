@@ -36,7 +36,6 @@ namespace database {
 #pragma db object(no_keys) schema("kitanda")
 #pragma db object(no_keys) no_id
 
-
 #endif
 
 } } }

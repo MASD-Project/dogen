@@ -116,10 +116,13 @@ void odb_header::format_class(const cpp::formattables::file_info& f) {
             }
         }
 
-        odb_stream << std::endl;
+        bool is_first(true);
         for (const auto p : ei.properties()) {
             for (const auto kvp : p.opaque_parameters()) {
                 if (kvp.first == odb_key) {
+                    if (is_first)
+                        odb_stream << std::endl;
+                    is_first = false;
                     has_odb_parms = true;
                     odb_stream << indenter_
                                << odb_pragma << " member(" << ei.name() << "::"
