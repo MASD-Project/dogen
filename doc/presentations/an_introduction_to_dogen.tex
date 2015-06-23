@@ -99,10 +99,9 @@ v${DOGEN_VERSION}
 
 \begin{itemize}
 
-\item \textbf{Readability}. Generated code should be very close to human
-  generated code; ideally, indistinguishable. A lot of general purpose
-  code generators generate unreadable code. However, users gain domain
-  insight by looking at it's source representation, so it must be very
+\item \textbf{Readability}. Generated code should be very close to
+  human generated code~--- ideally, indistinguishable. Users gain
+  domain insight by looking at the source code, so it must be very
   readable.
 
 \pause
@@ -113,16 +112,21 @@ v${DOGEN_VERSION}
 
 \pause
 
-\item \textbf{Extensibility}. Required in two ways. First, in the
-  sense of the ``basic behaviours'' explained above: additional
-  serialisation methods, etc. Second, in the sense of domain specific
-  behaviours: repetitive patterns in a given domain should be
-  code-generatable.
+\item \textbf{Extensibility}. First, in the sense of the ``basic
+  behaviours'' explained above: additional serialisation methods,
+  etc. Second, in the sense of domain specific behaviours: repetitive
+  patterns in a given domain should be code-generatable. Finally, it
+  must support multiple programming languages.
 
 \pause
 
 \item \textbf{Integratability}. Ideally, we should be able to reuse
   existing formats such as eCore, JAXB, etc.
+
+\pause
+
+\item \textbf{Merging support}. It should be possible to combine
+  hand-crafted code with code-generated code seamlessly.
 
 \end{itemize}
 
@@ -171,7 +175,7 @@ v${DOGEN_VERSION}
 
 \begin{itemize}
 
-\item Dogen is now a fairly capable C 11 code generator. It is used
+\item Dogen is now a fairly capable C++ 11 code generator. It is used
   to generate itself, with 15 models in total (over 400 classes), with
   the largest model composed of over 150 classes. It has over 34 test
   models, and almost 800 unit tests.
@@ -188,6 +192,10 @@ v${DOGEN_VERSION}
 \item We are currently in the process of moving over to a new text
   templating engine, which will make extensibility much easier.
 
+\pause
+
+\item I will be using Dogen in my research work.
+
 \end{itemize}
 
 \end{frame}
@@ -195,12 +203,167 @@ v${DOGEN_VERSION}
 \section{Internals}
 
 \begin{frame}
-\frametitle{What is Dogen}
+\frametitle{Tools in the suite}
 
 \begin{itemize}
 
-\item Started when taking time off of work around 2012, to create my
-  first start-up.
+\item There are two main tools in the Dogen toolbox: \emph{knitter}
+  and \emph{stitcher}. Knitter is the code generator. Stitcher is a
+  text-templating engine.
+
+\pause
+
+\item \emph{knit} is the library that implements all of the knitting
+  logic. \emph{stitch} is the library that implements all of the
+  stitching logic.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Knit Architecture: Frontends}
+
+\begin{itemize}
+
+\item Follows the traditional approach of compilers, with a split
+  between frontends, middle-end and backends.
+
+\pause
+
+\item At present we have two frontends: Dia XML and JSON.
+
+\pause
+
+\item Dia XML is the file format used by the Dia diagramming
+  application. It can be used to generate UML diagrams. These UML
+  diagrams can be augmented with a few Dogen specific annotations and
+  these help enrich the generated code.
+
+\pause
+
+\item JSON frontend is not complete yet, but it is used to expose
+  ``system libraries'' to the code generator such as Boost, STL,
+  etc. In the future it will be a fully-formed front-end.
+
+\pause
+
+\item Other frontends will be introduced over time such as XSD (with
+  JAXB annotations), etc.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Knit Architecture: Middle-end}
+
+\begin{itemize}
+
+\item The middle-end is a model we called SML - Simplified Modeling
+  Language. It is a simple meta-model that is rich enough to store the
+  details of the object model in a programming language neutral
+  format.
+
+\pause
+
+\item SML has a number of internal transformations that setup the data
+  structures in a shape that is easy to query for code generation
+  purposes.
+
+\pause
+
+\item Simpler languages can generate code directly out of SML. More
+  complex languages such as C++ require further processing.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Knit Architecture: Backends}
+
+\begin{itemize}
+
+\item At present there is only one backend: C++-11. We wanted to
+  ensure we had a decent enough architecture overall before we started
+  to add more backends.
+
+\pause
+
+\item The C++ backend has is own data model, obtained as a
+  transformation of SML. This ensures the data is as close as possible
+  to the code-generation requirements and minimises the complexity of
+  the outputting code.
+
+\pause
+
+\item Once this transformation is done, we pass the objects to the
+  \emph{formatters}~--- the classes responsible for code generation.
+
+\pause
+
+\item Formatters were originally written as simple ``print
+  statements''. Predictably, this approach proved cumbersome; a way of
+  templating them was required. We had experience with T4 so we knew
+  what we were looking for, but could not find anything suitable. So
+  we created stitch.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Stitch}
+
+\begin{itemize}
+
+\item Stitch is very simple: the user generates a text file according
+  to a T4-like grammar, and stitch generates a C++ file with ``print
+  statements'' that outputs instances of that template.
+
+\pause
+
+\item Using templates means that one can start with a real source code
+  file and ``templatise'' the parts of it that are
+  instance-dependent. It makes extensibility much easier.
+
+\pause
+
+\item In a template, users can freely mix C++ code with text. It
+  follows exactly the same rules as T4. Stitch can be thought of as a
+  subset of T4.
+
+\pause
+
+\item Most knit formatters are implemented as Stitch templates, but
+  the transition has not been fully achieved.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Demo}
+
+\begin{itemize}
+
+\item Editing a diagram in Dia. JSON input files.
+
+\pause
+
+\item Quick tour of the generated code, covering the different
+  facets.
+
+\pause
+
+\item Making a modification, running knitter and looking at the diffs
+  in git.
+
+\pause
+
+\item Quick run-through a stitch template. Change it, run knitter and
+  look at the diffs in git.
 
 \end{itemize}
 

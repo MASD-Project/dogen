@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-22 Mon 18:10]
+#+CAPTION: Clock summary at [2015-06-23 Tue 16:20]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:05* |      |      |
+| *Total time*                                                                | *4:55* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:05   |      |      |
-| Active                                                                      |        | 4:05 |      |
+| Stories                                                                     | 4:55   |      |      |
+| Active                                                                      |        | 4:55 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |
-| STARTED Create a presentation on dogen                                      |        |      | 3:43 |
+| STARTED Create a short presentation on Dogen                                |        |      | 4:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -37,7 +37,8 @@ Updates to sprint and product backlog.
 
 Use downtime to update the manual and / or readme file.
 
-*** STARTED Create a presentation on dogen                            :story:
+*** STARTED Create a short presentation on Dogen                      :story:
+    CLOCK: [2015-06-23 Tue 15:30]--[2015-06-23 Tue 16:20] =>  0:50
     CLOCK: [2015-06-22 Mon 15:33]--[2015-06-22 Mon 18:10] =>  2:37
     CLOCK: [2015-06-22 Mon 15:25]--[2015-06-22 Mon 15:32] =>  0:07
     CLOCK: [2015-06-22 Mon 15:14]--[2015-06-22 Mon 15:24] =>  0:10
