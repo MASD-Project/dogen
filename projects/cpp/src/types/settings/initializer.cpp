@@ -18,26 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/cpp/types/settings/odb_settings.hpp"
-#include "dogen/cpp/types/formatters/odb/settings_factory.hpp"
+#include <boost/shared_ptr.hpp>
+#include "dogen/cpp/types/settings/odb_settings_factory.hpp"
+#include "dogen/cpp/types/settings/initializer.hpp"
 
 namespace dogen {
 namespace cpp {
-namespace formatters {
-namespace odb {
+namespace settings {
 
-settings_factory::~settings_factory() noexcept { }
-
-std::string settings_factory::settings_key() const {
-    static const std::string key("odb_settings");
-    return key;
+void initializer::initialize(registrar& rg) {
+    rg.register_opaque_settings_factory(
+        boost::shared_ptr<opaque_settings_factory_interface>(
+            new odb_settings_factory()));
 }
 
-boost::shared_ptr<settings::opaque_settings>
-settings_factory::make(const dynamic::object& /*o*/) const {
-    auto r(boost::make_shared<settings::odb_settings>());
-    return r;
-}
-
-} } } }
+} } }

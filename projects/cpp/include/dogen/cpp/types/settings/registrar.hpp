@@ -48,18 +48,18 @@ public:
      * @brief Registers a opaque settings factory.
      */
     void register_opaque_settings_factory(
-        boost::shared_ptr<const opaque_settings_factory_interface> f);
+        boost::shared_ptr<opaque_settings_factory_interface> f);
 
     /**
      * @brief Returns all registered opaque settings factories.
      */
     const std::forward_list<
-        boost::shared_ptr<const opaque_settings_factory_interface>
+        boost::shared_ptr<opaque_settings_factory_interface>
         >& opaque_settings_factories() const;
 
 private:
     std::forward_list<
-        boost::shared_ptr<const opaque_settings_factory_interface>
+        boost::shared_ptr<opaque_settings_factory_interface>
         > opaque_settings_factories_;
 };
 

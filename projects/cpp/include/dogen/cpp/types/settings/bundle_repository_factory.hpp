@@ -48,6 +48,11 @@ public:
      */
     static cpp::settings::registrar& registrar();
 
+    /**
+     * @brief Sets up the factory.
+     */
+    void setup(const dynamic::repository& rp);
+
 public:
     /**
      * @brief Ensures the factory is in a valid state.

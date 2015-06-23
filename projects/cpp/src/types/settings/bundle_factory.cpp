@@ -42,7 +42,7 @@ namespace settings {
 bundle_factory::bundle_factory(const dynamic::repository& rp,
     const dynamic::object& root_object,
     const std::forward_list<
-        boost::shared_ptr<const opaque_settings_factory_interface>
+        boost::shared_ptr<opaque_settings_factory_interface>
         >& opaque_settings_factories) :
     dynamic_repository_(rp),
     root_object_(root_object),
@@ -80,8 +80,11 @@ std::unordered_map<
         boost::shared_ptr<opaque_settings>
         > r;
 
-    for (const auto f : opaque_settings_factories_)
-        r[f->settings_key()] = f->make(o);
+    for (const auto f : opaque_settings_factories_) {
+        auto os(f->make(o));
+        if (os)
+            r[f->settings_key()] = os;
+    }
 
     return r;
 }

@@ -22,7 +22,10 @@ dogen::formatters::file class_header_formatter_stitch(
 
 <#+
             } else {
+                auto snf(fa.make_scoped_namespace_formatter());
+
 #>
+
 #ifdef ODB_COMPILER
 
 <#+
@@ -35,15 +38,22 @@ dogen::formatters::file class_header_formatter_stitch(
                 for (const auto p : c.properties()) {
                     const auto& pos(p.opaque_settings());
                     const auto podbs(fa.get_odb_settings(pos));
-                    for (const auto pg : podbs->pragmas())
+                    if (podbs) {
+                       for (const auto pg : podbs->pragmas())
 #>
 #pragma db object(<#= c.name() #>::<#= fa.make_member_variable_name(p) #>) <#= pg #>
 <#+
+                    }
                 }
 #>
+
 #endif
+
 <#+
             }
+#>
+
+<#+
         } // snf
     }
     // return fa.make_file();

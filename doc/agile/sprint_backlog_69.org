@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-23 Tue 20:22]
+#+CAPTION: Clock summary at [2015-06-23 Tue 21:40]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:51* |      |      |
+| *Total time*                                                                | *7:50* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:51   |      |      |
-| Active                                                                      |        | 6:51 |      |
+| Stories                                                                     | 7:50   |      |      |
+| Active                                                                      |        | 7:50 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |
 | COMPLETED Create a short presentation on Dogen                              |        |      | 4:33 |
+| COMPLETED Add support for opaque settings factories                         |        |      | 1:40 |
 | STARTED Implement class header formatter in odb                             |        |      | 1:15 |
-| STARTED Add support for opaque settings factories                           |        |      | 0:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -55,18 +55,25 @@ Tasks:
 - create a skeleton for the presentation
 - add a target on cmake
 
-*** STARTED Implement class header formatter in odb                   :story:
-    CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-*** STARTED Add support for opaque settings factories                 :story:
+*** COMPLETED Add support for opaque settings factories               :story:
+    CLOSED: [2015-06-23 Tue 21:40]
+    CLOCK: [2015-06-23 Tue 20:41]--[2015-06-23 Tue 21:40] =>  0:59
     CLOCK: [2015-06-23 Tue 19:58]--[2015-06-23 Tue 20:22] =>  0:24
     CLOCK: [2015-06-23 Tue 17:37]--[2015-06-23 Tue 17:54] =>  0:17
 
 We have started adding opaque settings, but it seems we did not finish
 it. This is required for odb support.
+Problems:
+
+- no support for opaque factories
+- spurious newline after pragmas
+- no opaque settings for properties
+
+*** STARTED Implement class header formatter in odb                   :story:
+    CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 *** Implement odb formatter in odb                                    :story:
 

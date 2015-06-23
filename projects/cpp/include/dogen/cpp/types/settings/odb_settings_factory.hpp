@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
@@ -34,9 +35,6 @@ namespace cpp {
 namespace settings {
 
 class odb_settings_factory final : public opaque_settings_factory_interface {
-public:
-    explicit odb_settings_factory(const dynamic::repository& rp);
-
 private:
     /**
      * @brief All field definitions we require.
@@ -45,26 +43,16 @@ private:
         dynamic::field_definition odb_pragma;
     };
 
-    /**
-     * @brief Creates all of field definitions.
-     */
-    field_definitions make_field_definitions(
-        const dynamic::repository& rp) const;
-
 public:
-    /**
-     * @brief Key to use for the settings produced by this factory.
-     */
     std::string settings_key() const override;
 
-    /**
-     * @brief Produces the special settings for this formatter.
-     */
+    void setup(const dynamic::repository& rp) override;
+
     boost::shared_ptr<opaque_settings>
         make(const dynamic::object& o) const override;
 
 private:
-    const field_definitions field_definitions_;
+    boost::shared_ptr<field_definitions> field_definitions_;
 };
 
 } } }

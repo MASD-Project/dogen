@@ -18,32 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_SETTINGS_FACTORY_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_ODB_SETTINGS_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_INITIALIZER_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_INITIALIZER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
-
 namespace dogen {
 namespace cpp {
-namespace formatters {
-namespace odb {
+namespace settings {
 
-class settings_factory final
-    : public settings::opaque_settings_factory_interface {
-public:
-    ~settings_factory() noexcept;
+class initializer;
 
-public:
-    std::string settings_key() const;
-
-    boost::shared_ptr<settings::opaque_settings>
-        make(const dynamic::object& o) const;
-};
-
-} } } }
+} } }
 
 #endif

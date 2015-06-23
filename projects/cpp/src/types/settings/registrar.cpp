@@ -49,7 +49,7 @@ void registrar::validate() const {
 }
 
 void registrar::register_opaque_settings_factory(
-    boost::shared_ptr<const opaque_settings_factory_interface> f) {
+    boost::shared_ptr<opaque_settings_factory_interface> f) {
     // note: not logging by design
     if (!f)
         BOOST_THROW_EXCEPTION(registrar_error(null_factory));
@@ -58,7 +58,7 @@ void registrar::register_opaque_settings_factory(
 }
 
 const std::forward_list<
-    boost::shared_ptr<const opaque_settings_factory_interface>
+    boost::shared_ptr<opaque_settings_factory_interface>
     >& registrar::opaque_settings_factories() const {
     return opaque_settings_factories_;
 }

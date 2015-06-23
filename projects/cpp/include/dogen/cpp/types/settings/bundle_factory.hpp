@@ -52,7 +52,7 @@ public:
     bundle_factory(const dynamic::repository& rp,
         const dynamic::object& root_object,
         const std::forward_list<
-            boost::shared_ptr<const opaque_settings_factory_interface>
+            boost::shared_ptr<opaque_settings_factory_interface>
             >& opaque_settings_factories);
 
 private:
@@ -90,7 +90,7 @@ private:
     const dynamic::repository& dynamic_repository_;
     const dynamic::object& root_object_;
     const std::forward_list<
-        boost::shared_ptr<const opaque_settings_factory_interface>
+        boost::shared_ptr<opaque_settings_factory_interface>
         >& opaque_settings_factories_;
     const dogen::formatters::repository formatters_repository_;
 };

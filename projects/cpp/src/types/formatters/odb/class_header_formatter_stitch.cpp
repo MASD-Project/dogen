@@ -39,6 +39,9 @@ dogen::formatters::file class_header_formatter_stitch(
 fa.stream() << "// class has no ODB pragmas defined." << std::endl;
 fa.stream() << std::endl;
             } else {
+                auto snf(fa.make_scoped_namespace_formatter());
+
+fa.stream() << std::endl;
 fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
 fa.stream() << std::endl;
                 const std::string odb_key("odb_pragma");
@@ -48,11 +51,16 @@ fa.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
                 for (const auto p : c.properties()) {
                     const auto& pos(p.opaque_settings());
                     const auto podbs(fa.get_odb_settings(pos));
-                    for (const auto pg : podbs->pragmas())
+                    if (podbs) {
+                       for (const auto pg : podbs->pragmas())
 fa.stream() << "#pragma db object(" << c.name() << "::" << fa.make_member_variable_name(p) << ") " << pg << std::endl;
+                    }
                 }
+fa.stream() << std::endl;
 fa.stream() << "#endif" << std::endl;
+fa.stream() << std::endl;
             }
+fa.stream() << std::endl;
         } // snf
     }
     // return fa.make_file();

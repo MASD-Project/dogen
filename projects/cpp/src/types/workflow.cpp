@@ -62,6 +62,7 @@ settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
     const sml::model& m) const {
     settings::bundle_repository_factory f;
+    f.setup(rp);
     f.validate();
     return f.make(rp, root_object, m);
 }

@@ -113,14 +113,21 @@ void bundle_repository_factory::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
 }
 
+void bundle_repository_factory::setup(const dynamic::repository& rp) {
+    BOOST_LOG_SEV(lg, debug) << "Setting up all opaque settings factories.";
+    const auto& factories(registrar().opaque_settings_factories());
+    for (auto f : factories)
+        f->setup(rp);
+}
+
 bundle_repository bundle_repository_factory::
-make(const dynamic::repository& srp, const dynamic::object& root_object,
+make(const dynamic::repository& rp, const dynamic::object& root_object,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
     const auto osf(registrar().opaque_settings_factories());
-    const bundle_factory f(srp, root_object, osf);
+    const bundle_factory f(rp, root_object, osf);
     generator g(f);
     sml::all_model_items_traversal(m, g);
 

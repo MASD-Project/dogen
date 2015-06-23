@@ -20,6 +20,8 @@
  */
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
+#include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
+#include "dogen/cpp/types/settings/initializer.hpp"
 #include "dogen/cpp/types/formatters/initializer.hpp"
 #include "dogen/cpp/types/workflow.hpp"
 #include "dogen/cpp/types/initializer.hpp"
@@ -29,6 +31,8 @@ namespace cpp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
+    settings::initializer::initialize(
+        settings::bundle_repository_factory::registrar());
     backend::workflow::registrar().register_backend(
         std::make_shared<workflow>());
 }

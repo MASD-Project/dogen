@@ -28,6 +28,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/types/object.hpp"
+#include "dogen/dynamic/types/repository.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 
 namespace dogen {
@@ -48,6 +49,11 @@ public:
      * @brief Key to use for the settings produced by this factory.
      */
     virtual std::string settings_key() const = 0;
+
+    /**
+     * @brief Sets up the factory for use.
+     */
+    virtual void setup(const dynamic::repository& rp) = 0;
 
     /**
      * @brief Produces the special settings for this formatter.

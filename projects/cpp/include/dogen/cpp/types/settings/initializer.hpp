@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_SETTINGS_FACTORY_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_ODB_SETTINGS_FACTORY_FWD_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_INITIALIZER_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/cpp/types/settings/registrar.hpp"
+
 namespace dogen {
 namespace cpp {
-namespace formatters {
-namespace odb {
+namespace settings {
 
-class settings_factory;
+class initializer {
+public:
+    static void initialize(registrar& rg);
+};
 
-} } } }
+} } }
 
 #endif
