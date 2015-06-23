@@ -14,19 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-23 Tue 22:53]
+#+CAPTION: Clock summary at [2015-06-23 Tue 23:09]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:54* |      |      |
+| *Total time*                                                                | *9:08* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:54   |      |      |
-| Active                                                                      |        | 8:54 |      |
+| Stories                                                                     | 9:08   |      |      |
+| Active                                                                      |        | 9:08 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |
 | COMPLETED Create a short presentation on Dogen                              |        |      | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |        |      | 1:40 |
 | COMPLETED Refactor opaque settings production                               |        |      | 1:04 |
-| STARTED Implement class header formatter in odb                             |        |      | 1:15 |
+| COMPLETED Implement class header formatter in odb                           |        |      | 1:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -75,22 +75,23 @@ for both the bundle and the settings in properties. We need to move
 across the code in the bundle factory into some kind of stand alone
 class that can be used from the factory and the transformer.
 
-*** STARTED Implement class header formatter in odb                   :story:
+*** COMPLETED Implement class header formatter in odb                 :story:
+    CLOSED: [2015-06-23 Tue 22:56]
+    CLOCK: [2015-06-23 Tue 23:05]--[2015-06-23 Tue 23:09] =>  0:04
+    CLOCK: [2015-06-23 Tue 22:57]--[2015-06-23 Tue 23:04] =>  0:07
+    CLOCK: [2015-06-23 Tue 22:53]--[2015-06-23 Tue 22:56] =>  0:03
     CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-Problems:
-
-- no opaque settings for properties
-
 Solved problems:
 
 - spurious newline after pragmas
 - no support for opaque factories
+- no opaque settings for properties
 
-*** Implement odb formatter in odb                                    :story:
+*** Implement odb options formatter in odb                            :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
