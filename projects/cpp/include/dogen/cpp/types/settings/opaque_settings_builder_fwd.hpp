@@ -18,38 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_OPAQUE_SETTINGS_BUILDER_FWD_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_OPAQUE_SETTINGS_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include "dogen/dynamic/types/object.hpp"
-#include "dogen/dynamic/types/repository.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/settings/bundle_repository.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-/**
- * @brief Creates the bundle repository.
- */
-class bundle_repository_factory {
-public:
-    /**
-     * @brief Create the bundle repository.
-     */
-    bundle_repository make(const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const opaque_settings_builder& osb,
-        const sml::model& m) const;
-};
+class opaque_settings_builder;
 
 } } }
 

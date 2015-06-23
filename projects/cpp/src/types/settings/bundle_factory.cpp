@@ -40,13 +40,9 @@ namespace cpp {
 namespace settings {
 
 bundle_factory::bundle_factory(const dynamic::repository& rp,
-    const dynamic::object& root_object,
-    const std::forward_list<
-        boost::shared_ptr<opaque_settings_factory_interface>
-        >& opaque_settings_factories) :
-    dynamic_repository_(rp),
-    root_object_(root_object),
-    opaque_settings_factories_(opaque_settings_factories),
+    const dynamic::object& root_object, const opaque_settings_builder& osb) :
+    dynamic_repository_(rp), root_object_(root_object),
+    opaque_settings_builder_(osb),
     formatters_repository_(create_formatters_repository(
             std::forward_list<boost::filesystem::path> {
                 dogen::utility::filesystem::data_files_directory() })) { }
@@ -75,18 +71,7 @@ std::unordered_map<
     boost::shared_ptr<opaque_settings>
 > bundle_factory::create_opaque_settings(const dynamic::object& o) const {
 
-    std::unordered_map<
-        std::string,
-        boost::shared_ptr<opaque_settings>
-        > r;
-
-    for (const auto f : opaque_settings_factories_) {
-        auto os(f->make(o));
-        if (os)
-            r[f->settings_key()] = os;
-    }
-
-    return r;
+    return opaque_settings_builder_.build(o);
 }
 
 bundle bundle_factory::make(const dynamic::object& o) const {

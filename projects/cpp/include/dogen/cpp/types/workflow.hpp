@@ -36,6 +36,7 @@
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/sml/types/model.hpp"
 
 namespace dogen {
@@ -61,10 +62,17 @@ private:
 
 private:
     /**
+     * @brief Creates the opaque settings builder.
+     */
+    settings::opaque_settings_builder
+        create_opaque_settings_builder(const dynamic::repository& rp) const;
+
+    /**
      * @brief Create the bundle repository
      */
     settings::bundle_repository create_bundle_repository(
         const dynamic::repository& rp, const dynamic::object& root_object,
+        const settings::opaque_settings_builder& osb,
         const sml::model& m) const;
 
     /**
@@ -75,6 +83,7 @@ private:
             const dynamic::repository& srp,
             const dynamic::object& root_object,
             const formatters::container& fc,
+            const settings::opaque_settings_builder& osb,
             const settings::bundle_repository& brp,
             const sml::model& m) const;
 

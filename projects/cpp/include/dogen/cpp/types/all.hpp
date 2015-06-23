@@ -104,6 +104,7 @@
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/types/formatters/test_data/initializer.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/types/formattables/transformation_error.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"

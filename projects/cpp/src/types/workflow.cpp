@@ -58,13 +58,19 @@ dynamic::object workflow::obtain_root_object(const sml::model& m) const {
     return i->second.extensions();
 }
 
+settings::opaque_settings_builder workflow::
+create_opaque_settings_builder(const dynamic::repository& rp) const {
+    settings::opaque_settings_builder r;
+    r.setup(rp);
+    r.validate();
+    return r;
+}
+
 settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
-    const sml::model& m) const {
+    const settings::opaque_settings_builder& osb, const sml::model& m) const {
     settings::bundle_repository_factory f;
-    f.setup(rp);
-    f.validate();
-    return f.make(rp, root_object, m);
+    return f.make(rp, root_object, osb, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -73,11 +79,12 @@ workflow::create_formattables_activty(
     const dynamic::repository& srp,
     const dynamic::object& root_object,
     const formatters::container& fc,
+    const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const sml::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, srp, root_object, fc, brp, m);
+    return fw.execute(opts, srp, root_object, fc, osb, brp, m);
 }
 
 std::forward_list<dogen::formatters::file>
@@ -112,12 +119,14 @@ workflow::generate(const config::knitting_options& ko,
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
     const auto ro(obtain_root_object(m));
-    const auto brp(create_bundle_repository(rp, ro, m));
+    const auto osb(create_opaque_settings_builder(rp));
+    const auto brp(create_bundle_repository(rp, ro, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
-    const auto f(create_formattables_activty(ko.cpp(), rp, ro, fc, brp, m));
+    const auto& kcpp(ko.cpp());
+    const auto f(create_formattables_activty(kcpp, rp, ro, fc, osb, brp, m));
     const auto r(format_activty(f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

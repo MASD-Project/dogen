@@ -179,10 +179,11 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-transformer::transformer(const settings::bundle_repository& brp,
+transformer::transformer(const settings::opaque_settings_builder& osb,
+    const settings::bundle_repository& brp,
     const formatter_properties_repository& frp, const sml::model& m)
-    : bundle_repository_(brp), formatter_properties_repository_(frp),
-      model_(m) {}
+    : opaque_settings_builder_(osb), bundle_repository_(brp),
+      formatter_properties_repository_(frp), model_(m) {}
 
 void transformer::
 populate_formattable_properties(const sml::qname& qn, formattable& f) const {
@@ -334,10 +335,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 
     nti.complete_name(complete_name);
     pi.type(nti);
-
-    // FIXME: to move to formatter
-    // sml::meta_data::reader reader(p.meta_data());
-    // pi.opaque_parameters(reader.odb_pragma());
+    pi.opaque_settings(opaque_settings_builder_.build(p.extensions()));
 
     return std::make_tuple(pi,
         requires_stream_manipulators,

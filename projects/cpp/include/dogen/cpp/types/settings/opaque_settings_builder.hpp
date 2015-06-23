@@ -18,37 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
-#define DOGEN_CPP_TYPES_SETTINGS_BUNDLE_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_CPP_TYPES_SETTINGS_OPAQUE_SETTINGS_BUILDER_HPP
+#define DOGEN_CPP_TYPES_SETTINGS_OPAQUE_SETTINGS_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/settings/bundle_repository.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/cpp/types/settings/opaque_settings.hpp"
+#include "dogen/cpp/types/settings/registrar.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace settings {
 
-/**
- * @brief Creates the bundle repository.
- */
-class bundle_repository_factory {
+class opaque_settings_builder {
 public:
     /**
-     * @brief Create the bundle repository.
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
      */
-    bundle_repository make(const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const opaque_settings_builder& osb,
-        const sml::model& m) const;
+    static cpp::settings::registrar& registrar();
+
+public:
+    /**
+     * @brief Sets up the builder.
+     */
+    void setup(const dynamic::repository& rp);
+
+public:
+    /**
+     * @brief Ensures the builder is in a valid state.
+     */
+    void validate() const;
+
+public:
+    /**
+     * @brief Generates the opaque settings.
+     */
+    std::unordered_map<std::string, boost::shared_ptr<opaque_settings>>
+    build(const dynamic::object& o) const;
+
+private:
+    static std::shared_ptr<cpp::settings::registrar> registrar_;
 };
 
 } } }

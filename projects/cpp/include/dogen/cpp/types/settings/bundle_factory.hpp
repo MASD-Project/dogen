@@ -38,7 +38,7 @@
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/aspect_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -51,9 +51,7 @@ class bundle_factory final {
 public:
     bundle_factory(const dynamic::repository& rp,
         const dynamic::object& root_object,
-        const std::forward_list<
-            boost::shared_ptr<opaque_settings_factory_interface>
-            >& opaque_settings_factories);
+        const opaque_settings_builder& osb);
 
 private:
     /**
@@ -89,9 +87,7 @@ public:
 private:
     const dynamic::repository& dynamic_repository_;
     const dynamic::object& root_object_;
-    const std::forward_list<
-        boost::shared_ptr<opaque_settings_factory_interface>
-        >& opaque_settings_factories_;
+    const opaque_settings_builder& opaque_settings_builder_;
     const dogen::formatters::repository formatters_repository_;
 };
 

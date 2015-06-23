@@ -87,47 +87,13 @@ private:
 
 }
 
-std::shared_ptr<cpp::settings::registrar> bundle_repository_factory::registrar_;
-
-cpp::settings::registrar& bundle_repository_factory::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<cpp::settings::registrar>();
-
-    return *registrar_;
-}
-
-void bundle_repository_factory::validate() const {
-    BOOST_LOG_SEV(lg, debug) << "Validating workflow.";
-
-    registrar().validate();
-    const auto& factories(registrar().opaque_settings_factories());
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(factories.begin(),
-                                 factories.end())
-                             << " registered opaque settings factories(s): ";
-
-    BOOST_LOG_SEV(lg, debug) << "Listing all opaque settings factories.";
-    for (const auto& f : factories)
-        BOOST_LOG_SEV(lg, debug) << "Key: '" << f->settings_key() << "'";
-
-    BOOST_LOG_SEV(lg, debug) << "Finished validating workflow.";
-}
-
-void bundle_repository_factory::setup(const dynamic::repository& rp) {
-    BOOST_LOG_SEV(lg, debug) << "Setting up all opaque settings factories.";
-    const auto& factories(registrar().opaque_settings_factories());
-    for (auto f : factories)
-        f->setup(rp);
-}
-
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
-    const sml::model& m) const {
+    const opaque_settings_builder& osb, const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
-    const auto osf(registrar().opaque_settings_factories());
-    const bundle_factory f(rp, root_object, osf);
+    const bundle_factory f(rp, root_object, osb);
     generator g(f);
     sml::all_model_items_traversal(m, g);
 

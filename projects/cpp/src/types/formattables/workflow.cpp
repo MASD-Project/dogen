@@ -92,6 +92,7 @@ workflow::execute(const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
     const formatters::container& fc,
+    const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
@@ -99,7 +100,7 @@ workflow::execute(const config::cpp_options& opts,
     formatter_properties_repository_factory f;
     const auto fprp(f.make(opts, srp, root_object, fc, brp, m));
 
-    const transformer t(brp, fprp, m);
+    const transformer t(osb, brp, fprp, m);
     generator g(t);
     all_model_items_traversal(m, g);
 

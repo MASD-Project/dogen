@@ -50,6 +50,7 @@
 #include "dogen/cpp/types/formattables/namespace_info.hpp"
 #include "dogen/cpp/types/formattables/primitive_info.hpp"
 #include "dogen/cpp/types/formattables/forward_declarations_info.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
@@ -62,7 +63,8 @@ namespace formattables {
  */
 class transformer {
 public:
-    transformer(const settings::bundle_repository& brp,
+    transformer(const settings::opaque_settings_builder& osb,
+        const settings::bundle_repository& brp,
         const formatter_properties_repository& frp, const sml::model& m);
 
 private:
@@ -191,6 +193,7 @@ public:
     transform(const sml::object& o) const;
 
 private:
+    const settings::opaque_settings_builder& opaque_settings_builder_;
     const settings::bundle_repository& bundle_repository_;
     const formatter_properties_repository& formatter_properties_repository_;
     const sml::model& model_;

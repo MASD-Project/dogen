@@ -32,6 +32,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 
@@ -53,6 +54,7 @@ public:
         const dynamic::repository& srp,
         const dynamic::object& root_object,
         const formatters::container& fc,
+        const settings::opaque_settings_builder& osb,
         const settings::bundle_repository& brp,
         const sml::model& m) const;
 };
