@@ -30,6 +30,8 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/settings/odb_settings.hpp"
+#include "dogen/cpp/types/settings/opaque_settings.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
@@ -227,6 +229,15 @@ public:
      */
     bool requires_hashing_helper_method(
         const formattables::nested_type_info& t) const;
+
+public:
+    /**
+     * @brief Retrieves the ODB settings from the opaque settings
+     * container, if they do exist.
+     */
+    boost::shared_ptr<settings::odb_settings>
+    get_odb_settings(const std::unordered_map<std::string,
+        boost::shared_ptr<settings::opaque_settings> >& os) const;
 
 private:
     const formattables::entity& entity_;

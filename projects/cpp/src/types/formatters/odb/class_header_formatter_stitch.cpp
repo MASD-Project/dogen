@@ -28,16 +28,35 @@ namespace odb {
 
 dogen::formatters::file class_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::class_info& /*c*/) {
+    const formattables::class_info& c) {
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
-            auto snf(fa.make_scoped_namespace_formatter());
+            const auto& os(c.settings().opaque_settings());
+            const auto odbs(fa.get_odb_settings(os));
+            if (!odbs || odbs->pragmas().empty()) {
+fa.stream() << "// class has no ODB pragmas defined." << std::endl;
 fa.stream() << std::endl;
+            } else {
+fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
+fa.stream() << std::endl;
+                const std::string odb_key("odb_pragma");
+                for (const auto& kvp : odbs->pragmas()) {
+                    if (kvp.first == odb_key)
+fa.stream() << "#pragma db object(" << c.name() << ") " << kvp.second << std::endl;
+                }
+
+                for (const auto p : c.properties()) {
+                    const auto& pos(p.opaque_settings());
+                    const auto podbs(fa.get_odb_settings(pos));
+                    for (const auto kvp : podbs->pragmas())
+fa.stream() << "#pragma db object(" << c.name() << "::" << fa.make_member_variable_name(p) << ") " << kvp.second << std::endl;
+                }
+fa.stream() << "#endif" << std::endl;
+            }
         } // snf
-fa.stream() << std::endl;
-    } // sbf
+    }
     // return fa.make_file();
     return fa.make_file(false/*overwrite*/);
 }

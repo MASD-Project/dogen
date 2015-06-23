@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/cpp/types/settings/opaque_settings_fwd.hpp"
 #include "dogen/cpp/types/formattables/nested_type_info.hpp"
@@ -59,7 +60,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings);
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings);
 
 private:
     template<typename Archive>
@@ -136,10 +137,10 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings() const;
-    boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings();
-    void opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v);
-    void opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings();
+    void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v);
+    void opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v);
 
 public:
     bool operator==(const property_info& rhs) const;
@@ -159,7 +160,7 @@ private:
     std::list<std::pair<std::string, std::string> > opaque_parameters_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::shared_ptr<dogen::cpp::settings::opaque_settings> opaque_settings_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > opaque_settings_;
 };
 
 } } }

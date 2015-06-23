@@ -19,10 +19,12 @@
  *
  */
 #include <sstream>
+#include <boost/pointer_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/cpp/types/formatters/io/traits.hpp"
+#include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/cpp/types/formatters/hash/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/test_data/traits.hpp"
@@ -56,6 +58,8 @@ const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
 const std::string formatter_properties_missing(
     "Could not find formatter properties for formatter: ");
+const std::string unexpected_opaque_settings(
+    "Unexpectd opaque settings type.");
 
 }
 
@@ -383,6 +387,23 @@ bool entity_formatting_assistant::requires_hashing_helper_method(
     const formattables::nested_type_info& t) const {
     return nested_type_formatting_assistant::
         requires_hashing_helper_method(t);
+}
+
+boost::shared_ptr<settings::odb_settings> entity_formatting_assistant::
+get_odb_settings(const std::unordered_map<std::string,
+    boost::shared_ptr<dogen::cpp::settings::opaque_settings>
+    >& os) const {
+    const auto fn(odb::traits::class_header_formatter_name());
+    const auto i(os.find(fn));
+    if (i == os.end())
+        return boost::shared_ptr<settings::odb_settings>();
+
+    auto r(boost::dynamic_pointer_cast<settings::odb_settings>(i->second));
+    if (!r) {
+        BOOST_LOG_SEV(lg, error) << unexpected_opaque_settings;
+        BOOST_THROW_EXCEPTION(formatting_error(unexpected_opaque_settings));
+    }
+    return r;
 }
 
 } } }

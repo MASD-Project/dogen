@@ -46,7 +46,7 @@ property_info::property_info(
     const std::list<std::pair<std::string, std::string> >& opaque_parameters,
     const bool is_immutable,
     const bool is_fluent,
-    const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& opaque_settings)
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings)
     : name_(name),
       qualified_name_(qualified_name),
       documentation_(documentation),
@@ -181,19 +181,19 @@ void property_info::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& property_info::opaque_settings() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& property_info::opaque_settings() const {
     return opaque_settings_;
 }
 
-boost::shared_ptr<dogen::cpp::settings::opaque_settings>& property_info::opaque_settings() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& property_info::opaque_settings() {
     return opaque_settings_;
 }
 
-void property_info::opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v) {
+void property_info::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& v) {
     opaque_settings_ = v;
 }
 
-void property_info::opaque_settings(const boost::shared_ptr<dogen::cpp::settings::opaque_settings>&& v) {
+void property_info::opaque_settings(const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >&& v) {
     opaque_settings_ = std::move(v);
 }
 
