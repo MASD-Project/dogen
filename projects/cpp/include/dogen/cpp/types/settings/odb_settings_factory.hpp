@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/dynamic/types/repository.hpp"
+#include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_factory_interface.hpp"
 
 namespace dogen {
@@ -32,6 +34,23 @@ namespace cpp {
 namespace settings {
 
 class odb_settings_factory final : public opaque_settings_factory_interface {
+public:
+    explicit odb_settings_factory(const dynamic::repository& rp);
+
+private:
+    /**
+     * @brief All field definitions we require.
+     */
+    struct field_definitions {
+        dynamic::field_definition odb_pragma;
+    };
+
+    /**
+     * @brief Creates all of field definitions.
+     */
+    field_definitions make_field_definitions(
+        const dynamic::repository& rp) const;
+
 public:
     /**
      * @brief Key to use for the settings produced by this factory.
@@ -43,6 +62,9 @@ public:
      */
     boost::shared_ptr<opaque_settings>
         make(const dynamic::object& o) const override;
+
+private:
+    const field_definitions field_definitions_;
 };
 
 } } }

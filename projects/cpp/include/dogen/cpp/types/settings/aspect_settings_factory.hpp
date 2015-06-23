@@ -57,8 +57,7 @@ private:
     };
 
     /**
-     * @brief Creates the set of field definitions for a given
-     * formatter.
+     * @brief Creates all of field definitions.
      */
     field_definitions make_field_definitions(
         const dynamic::repository& rp) const;

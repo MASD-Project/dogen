@@ -29,18 +29,10 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v) {
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
+        combine(seed, i);
     }
     return seed;
 }
@@ -56,7 +48,7 @@ std::size_t odb_settings_hasher::hash(const odb_settings& v) {
 
     combine(seed, dynamic_cast<const dogen::cpp::settings::opaque_settings&>(v));
 
-    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.pragmas()));
+    combine(seed, hash_std_list_std_string(v.pragmas()));
     return seed;
 }
 

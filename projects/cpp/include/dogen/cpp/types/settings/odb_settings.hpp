@@ -28,7 +28,6 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include <utility>
 #include <algorithm>
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 #include "dogen/cpp/serialization/settings/odb_settings_fwd_ser.hpp"
@@ -49,7 +48,7 @@ public:
     virtual ~odb_settings() noexcept { }
 
 public:
-    explicit odb_settings(const std::list<std::pair<std::string, std::string> >& pragmas);
+    explicit odb_settings(const std::list<std::string>& pragmas);
 
 private:
     template<typename Archive>
@@ -66,10 +65,10 @@ public:
      * @brief ODB pragmas.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& pragmas() const;
-    std::list<std::pair<std::string, std::string> >& pragmas();
-    void pragmas(const std::list<std::pair<std::string, std::string> >& v);
-    void pragmas(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<std::string>& pragmas() const;
+    std::list<std::string>& pragmas();
+    void pragmas(const std::list<std::string>& v);
+    void pragmas(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -86,7 +85,7 @@ public:
     odb_settings& operator=(odb_settings other);
 
 private:
-    std::list<std::pair<std::string, std::string> > pragmas_;
+    std::list<std::string> pragmas_;
 };
 
 } } }

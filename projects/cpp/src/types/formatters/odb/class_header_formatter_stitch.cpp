@@ -42,16 +42,14 @@ fa.stream() << std::endl;
 fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
 fa.stream() << std::endl;
                 const std::string odb_key("odb_pragma");
-                for (const auto& kvp : odbs->pragmas()) {
-                    if (kvp.first == odb_key)
-fa.stream() << "#pragma db object(" << c.name() << ") " << kvp.second << std::endl;
-                }
+                for (const auto& pg : odbs->pragmas())
+fa.stream() << "#pragma db object(" << c.name() << ") " << pg << std::endl;
 
                 for (const auto p : c.properties()) {
                     const auto& pos(p.opaque_settings());
                     const auto podbs(fa.get_odb_settings(pos));
-                    for (const auto kvp : podbs->pragmas())
-fa.stream() << "#pragma db object(" << c.name() << "::" << fa.make_member_variable_name(p) << ") " << kvp.second << std::endl;
+                    for (const auto pg : podbs->pragmas())
+fa.stream() << "#pragma db object(" << c.name() << "::" << fa.make_member_variable_name(p) << ") " << pg << std::endl;
                 }
 fa.stream() << "#endif" << std::endl;
             }

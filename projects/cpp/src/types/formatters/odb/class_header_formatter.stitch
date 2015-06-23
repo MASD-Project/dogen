@@ -27,19 +27,17 @@ dogen::formatters::file class_header_formatter_stitch(
 
 <#+
                 const std::string odb_key("odb_pragma");
-                for (const auto& kvp : odbs->pragmas()) {
-                    if (kvp.first == odb_key)
+                for (const auto& pg : odbs->pragmas())
 #>
-#pragma db object(<#= c.name() #>) <#= kvp.second #>
+#pragma db object(<#= c.name() #>) <#= pg #>
 <#+
-                }
 
                 for (const auto p : c.properties()) {
                     const auto& pos(p.opaque_settings());
                     const auto podbs(fa.get_odb_settings(pos));
-                    for (const auto kvp : podbs->pragmas())
+                    for (const auto pg : podbs->pragmas())
 #>
-#pragma db object(<#= c.name() #>::<#= fa.make_member_variable_name(p) #>) <#= kvp.second #>
+#pragma db object(<#= c.name() #>::<#= fa.make_member_variable_name(p) #>) <#= pg #>
 <#+
                 }
 #>

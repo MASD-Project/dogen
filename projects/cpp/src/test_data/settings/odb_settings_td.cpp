@@ -30,18 +30,10 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-std::pair<std::string, std::string>
-create_std_pair_std_string_std_string(unsigned int position) {
-    std::pair<std::string, std::string> r(
-        create_std_string(position),
-        create_std_string(position));
-    return r;
-}
-
-std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
-    std::list<std::pair<std::string, std::string> > r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_std_string_std_string(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -57,7 +49,7 @@ odb_settings_generator::odb_settings_generator() : position_(0) { }
 void odb_settings_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::cpp::settings::opaque_settings_generator::populate(position, v);
-    v.pragmas(create_std_list_std_pair_std_string_std_string_(position + 0));
+    v.pragmas(create_std_list_std_string(position + 0));
 }
 
 odb_settings_generator::result_type

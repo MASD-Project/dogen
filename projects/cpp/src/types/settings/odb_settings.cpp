@@ -32,24 +32,11 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -61,7 +48,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-odb_settings::odb_settings(const std::list<std::pair<std::string, std::string> >& pragmas)
+odb_settings::odb_settings(const std::list<std::string>& pragmas)
     : dogen::cpp::settings::opaque_settings(),
       pragmas_(pragmas) { }
 
@@ -99,19 +86,19 @@ odb_settings& odb_settings::operator=(odb_settings other) {
     return *this;
 }
 
-const std::list<std::pair<std::string, std::string> >& odb_settings::pragmas() const {
+const std::list<std::string>& odb_settings::pragmas() const {
     return pragmas_;
 }
 
-std::list<std::pair<std::string, std::string> >& odb_settings::pragmas() {
+std::list<std::string>& odb_settings::pragmas() {
     return pragmas_;
 }
 
-void odb_settings::pragmas(const std::list<std::pair<std::string, std::string> >& v) {
+void odb_settings::pragmas(const std::list<std::string>& v) {
     pragmas_ = v;
 }
 
-void odb_settings::pragmas(const std::list<std::pair<std::string, std::string> >&& v) {
+void odb_settings::pragmas(const std::list<std::string>&& v) {
     pragmas_ = std::move(v);
 }
 
