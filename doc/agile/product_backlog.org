@@ -2700,6 +2700,61 @@ them even if they are on the same namespace as the containing type.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Remove calls to unix utilities directly                           :story:
+
+We have a couple of cases where we are calling UNIX utilities when
+there are equivalent CMake calls. For example
+=test_data/CMakeLists.txt=:
+
+:        set(target_name "rebase_${model_name}")
+:        if(EXISTS "${git_expected}/")
+:            add_custom_target(${target_name}
+:                COMMAND rm -rf ${expected}/*
+:                COMMAND cp ${actual}/* ${expected}
+:                COMMAND cp ${actual}/* ${git_expected}/
+:                WORKING_DIRECTORY ${stage_bin_dir})
+
+These can be replaced with:
+
+:        file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
+:        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
+:         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
+
+etc.
+
+*** Detect the presence of the diff command                           :story:
+
+The diff targets is dependent on the presence of the diff command, but
+we are not checking to see if it exists:
+
+:        set(target_name "diff_${model_name}")
+:        add_custom_target(${target_name}
+:            COMMAND diff -r -u ${expected} ${actual}
+:            WORKING_DIRECTORY ${stage_bin_dir})
+:        add_dependencies(diff_dataset ${target_name})
+
+We need to detect it and only add this targets if diff has been found.
+
+*** Remove unused features                                             :epic:
+
+At the very start of dogen we added a number of features that we
+thought were useful such as suppressing model directory, facet
+directories etc. We should look at all the features and make a list of
+all features that we are not currently making use of and create
+stories to remove them.
+
+*** File extension is hard-coded against file type                    :story:
+
+At present we are choosing the C++ extension based on the file type:
+
+:    if (ps.file_type() == formatters::file_types::cpp_header)
+:       stream << dot << ps.header_file_extension();
+:    else if (ps.file_type() == formatters::file_types::cpp_implementation)
+:        stream << dot << ps.implementation_file_extension();
+
+It would make more sense to have a formatter group - e.g. header or
+implementation - and to associate the extension with the group.
+
 *** Change stitch's standard control block start marker to match t4   :story:
 
 For some reason we used =<#+= as the start marker for standard control

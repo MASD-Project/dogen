@@ -14,24 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-24 Wed 15:49]
+#+CAPTION: Clock summary at [2015-06-24 Wed 16:34]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *10:52* |       |      |
+| *Total time*                                                                | *11:35* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 10:52   |       |      |
-| Active                                                                      |         | 10:52 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |
+| Stories                                                                     | 11:35   |       |      |
+| Active                                                                      |         | 11:35 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
 | COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:10 |
-| STARTED Handling of "singleton" formatters                                  |         |       | 1:34 |
+| STARTED Handling of "singleton" formatters                                  |         |       | 2:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-24 Wed 16:24]--[2015-06-24 Wed 16:34] =>  0:10
     CLOCK: [2015-06-22 Mon 14:01]--[2015-06-22 Mon 14:23] =>  0:22
 
 Updates to sprint and product backlog.
@@ -106,7 +107,9 @@ And
 
 :  /.../source/projects/cpp/include/dogen/cpp/types/settings/opaque_settings_factory_interface.hpp:45:13: error:   overriding 'virtual dogen::cpp::settings::opaque_settings_factory_interface::~opaque_settings_factory_interface() noexcept (true)'
 
-*** STARTED Handling of "singleton" formatters                        :story:
+*** COMPLETED Handling of "singleton" formatters                      :story:
+    CLOSED: [2015-06-24 Wed 16:35]
+    CLOCK: [2015-06-24 Wed 15:50]--[2015-06-24 Wed 16:23] =>  0:33
     CLOCK: [2015-06-24 Wed 14:15]--[2015-06-24 Wed 15:49] =>  1:34
 
 Handling of special file names:
@@ -159,32 +162,31 @@ With this approach, we need:
   (all singleton formatters?).
 - a transformer-like class to create the singleton formattables. Path
   generation is done in this class, with the assistance of path
-  settings.
+  settings. This could just be called =factory=. Given a model, it
+  returns all of the "singleton" formattables.
 
-*** STARTED Implement odb options formatter in odb                    :story:
+*** Split formatters into per instance and singleton                  :story:
 
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
+- add an enum at the formatter interface level: formatter
+  instantiation type: singleton, per instance.
+- remove all formatters from registrar/container; split formatters
+  into singleton and per instance.
+- change path settings factory to receive a container of formatters.
+- change path derivatives workflow to pass in the instance container.
 
-*** Remove unused features                                            :story:
+*** Create a formattables factory                                     :story:
 
-At the very start of dogen we added a number of features that we
-thought were useful such as suppressing model directory, facet
-directories etc. We should look at all the features and make a list of
-all features that we are not currently making use of and create
-stories to remove them.
+Create a class responsible for instantiating all of the "singleton"
+formatters:
 
-*** File extension is hard-coded against file type                    :story:
+- all includers
+- serialisation registrar
+- odb options
+- all cmakelists
 
-At present we are choosing the C++ extension based on the file type:
-
-:    if (ps.file_type() == formatters::file_types::cpp_header)
-:       stream << dot << ps.header_file_extension();
-:    else if (ps.file_type() == formatters::file_types::cpp_implementation)
-:        stream << dot << ps.implementation_file_extension();
-
-It would make more sense to have a formatter group - e.g. header or
-implementation - and to associate the extension with the group.
+This class will be hooked into the formattables workflow. It will
+hard-code the path and file names for these formattables (but take
+into account things such as prefixes, etc).
 
 *** Path settings factory makes use of command line options           :story:
 
@@ -193,44 +195,24 @@ meta-data. However we incorrectly added the command line options to
 the path settings factory. We need to remove this and pass the command
 line options to the path derivatives factory in formattables.
 
+*** Implement odb options formatter in odb                            :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
 *** Implement serialisation registrar formatter                       :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-*** Remove calls to unix utilities directly                           :story:
+*** Implement source cmakelists formatter                             :story:
 
-We have a couple of cases where we are calling UNIX utilities when
-there are equivalent CMake calls. For example
-=test_data/CMakeLists.txt=:
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
-:        set(target_name "rebase_${model_name}")
-:        if(EXISTS "${git_expected}/")
-:            add_custom_target(${target_name}
-:                COMMAND rm -rf ${expected}/*
-:                COMMAND cp ${actual}/* ${expected}
-:                COMMAND cp ${actual}/* ${git_expected}/
-:                WORKING_DIRECTORY ${stage_bin_dir})
+*** Implement include cmakelists formatter                            :story:
 
-These can be replaced with:
-
-:        file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
-:        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
-:         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
-
-etc.
-
-*** Detect the presence of the diff command                           :story:
-
-The diff targets is dependent on the presence of the diff command, but
-we are not checking to see if it exists:
-
-:        set(target_name "diff_${model_name}")
-:        add_custom_target(${target_name}
-:            COMMAND diff -r -u ${expected} ${actual}
-:            WORKING_DIRECTORY ${stage_bin_dir})
-:        add_dependencies(diff_dataset ${target_name})
-
-We need to detect it and only add this targets if diff has been found.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 ** Deprecated
