@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-24 Wed 14:17]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:18* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:18   |      |      |
-| Active                                                                      |        | 9:18 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |
-| COMPLETED Create a short presentation on Dogen                              |        |      | 4:33 |
-| COMPLETED Add support for opaque settings factories                         |        |      | 1:40 |
-| COMPLETED Refactor opaque settings production                               |        |      | 1:04 |
-| COMPLETED Implement class header formatter in odb                           |        |      | 0:14 |
-| COMPLETED Fix borked windows build                                          |        |      | 0:10 |
-| STARTED Implement class header formatter in odb                             |        |      | 1:15 |
+#+CAPTION: Clock summary at [2015-06-24 Wed 15:49]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *10:52* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 10:52   |       |      |
+| Active                                                                      |         | 10:52 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:22 |
+| COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
+| COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
+| COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
+| COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
+| COMPLETED Fix borked windows build                                          |         |       | 0:10 |
+| STARTED Handling of "singleton" formatters                                  |         |       | 1:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -58,7 +58,6 @@ Tasks:
 - create a skeleton for the presentation
 - add a target on cmake
 
-<<<<<<< HEAD
 *** COMPLETED Add support for opaque settings factories               :story:
     CLOSED: [2015-06-23 Tue 21:40]
     CLOCK: [2015-06-23 Tue 20:41]--[2015-06-23 Tue 21:40] =>  0:59
@@ -83,7 +82,17 @@ class that can be used from the factory and the transformer.
     CLOCK: [2015-06-23 Tue 23:05]--[2015-06-23 Tue 23:09] =>  0:04
     CLOCK: [2015-06-23 Tue 22:57]--[2015-06-23 Tue 23:04] =>  0:07
     CLOCK: [2015-06-23 Tue 22:53]--[2015-06-23 Tue 22:56] =>  0:03
-=======
+    CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Solved problems:
+
+- spurious newline after pragmas
+- no support for opaque factories
+- no opaque settings for properties
+
 *** COMPLETED Fix borked windows build                                :story:
     CLOSED: [2015-06-24 Wed 14:15]
     CLOCK: [2015-06-24 Wed 13:33]--[2015-06-24 Wed 13:43] =>  0:10
@@ -97,23 +106,92 @@ And
 
 :  /.../source/projects/cpp/include/dogen/cpp/types/settings/opaque_settings_factory_interface.hpp:45:13: error:   overriding 'virtual dogen::cpp::settings::opaque_settings_factory_interface::~opaque_settings_factory_interface() noexcept (true)'
 
-*** STARTED Implement class header formatter in odb                   :story:
->>>>>>> cpp: add noexcept to odb settings constructor
-    CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
+*** STARTED Handling of "singleton" formatters                        :story:
+    CLOCK: [2015-06-24 Wed 14:15]--[2015-06-24 Wed 15:49] =>  1:34
+
+Handling of special file names:
+
+- at present we assume that all file names are constructed from the
+  formatter properties and the qname. This is not correct. Some file
+  names are "special" such as CMakeLists etc. These "special" file
+  names seem to have two requirements: a) an hard-coded file name b)
+  occasionally, to be stored at project directory, source directory,
+  or (by default) at facet directory. This could easily be handled
+  with two new fields: =file_name= and =file_location=. These use
+  formatter template expansion.
+- however, we have a problem: some file names such as registrar need
+  the facet postfix. Others such as =options.odb= do not. Still others
+  like =CMakeLists.txt= don't have a facet at all (and thus do not
+  need prefixes). By sheer luck it seems that all files that use
+  prefixes are inside of facet folders and all files that do not need
+  prefixes are outside facet folders.
+- an additional requirement is that not all formatters are driven by
+  qnames; there are a set of formatters that are driven by formatter
+  names. These "singleton" formatters are the ones that need file
+  names and location. A new field could be added: =instantiation_type=
+  with values =singleton= or =per_instance=. We should then create
+  instance path settings and singleton path settings. Path derivatives
+  factory could then have a "make singleton path derivatives".
+- actually these are all static properties of the formatters; it makes
+  no sense to configure them in the meta-data because they cannot be
+  changed.
+
+In conclusion, we need:
+
+- formatter instantiation type: singleton, per instance.
+- file name: if singleton must be supplied, must be blank otherwise.
+- location: project, source, facet. if per instance, must be facet.
+
+Another way of looking at the problem is that in some cases, SML does
+not drive the generation of the formattables. In those cases, the
+formattables are actually hard-coded (or at least partially hard-coded
+as we need some inputs such as model name, etc). Since we are already
+hard-coding the formattables generation, it makes sense to also
+hard-code the paths. However, we still need to make sure we
+distinguish between per instance formatters from singleton formatters
+or else we risk generating instances for the singleton formatters.
+
+With this approach, we need:
+
+- formatter instantiation type: singleton, per instance. This allows
+  us to filter out singleton formatters from the instance formatters
+  pipeline. We could even segregate them in the formatter registrar
+  (all singleton formatters?).
+- a transformer-like class to create the singleton formattables. Path
+  generation is done in this class, with the assistance of path
+  settings.
+
+*** STARTED Implement odb options formatter in odb                    :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-Solved problems:
+*** Remove unused features                                            :story:
 
-- spurious newline after pragmas
-- no support for opaque factories
-- no opaque settings for properties
+At the very start of dogen we added a number of features that we
+thought were useful such as suppressing model directory, facet
+directories etc. We should look at all the features and make a list of
+all features that we are not currently making use of and create
+stories to remove them.
 
-*** Implement odb options formatter in odb                            :story:
+*** File extension is hard-coded against file type                    :story:
 
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
+At present we are choosing the C++ extension based on the file type:
+
+:    if (ps.file_type() == formatters::file_types::cpp_header)
+:       stream << dot << ps.header_file_extension();
+:    else if (ps.file_type() == formatters::file_types::cpp_implementation)
+:        stream << dot << ps.implementation_file_extension();
+
+It would make more sense to have a formatter group - e.g. header or
+implementation - and to associate the extension with the group.
+
+*** Path settings factory makes use of command line options           :story:
+
+We want to make the settings subsystem rely only on the
+meta-data. However we incorrectly added the command line options to
+the path settings factory. We need to remove this and pass the command
+line options to the path derivatives factory in formattables.
 
 *** Implement serialisation registrar formatter                       :story:
 
