@@ -89,6 +89,11 @@ file_types visitor_header_formatter::file_type() const {
     return file_types::cpp_header;
 }
 
+formattables::origin_types
+visitor_header_formatter::formattable_origin_type() const {
+    return formattables::origin_types::external;
+}
+
 void visitor_header_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());

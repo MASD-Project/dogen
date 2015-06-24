@@ -45,6 +45,8 @@ class class_header_formatter final : public class_formatter_interface {
 
   file_types file_type() const override;
 
+  formattables::origin_types formattable_origin_type() const;
+
   void register_inclusion_dependencies_provider(
     formattables::registrar& rg) const override;
 

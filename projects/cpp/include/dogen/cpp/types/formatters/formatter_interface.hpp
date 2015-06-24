@@ -28,6 +28,7 @@
 #include <string>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/cpp/types/formattables/registrar.hpp"
+#include "dogen/cpp/types/formattables/origin_types.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 
 namespace dogen {
@@ -52,6 +53,10 @@ public:
      */
     virtual file_types file_type() const = 0;
 
+    /**
+     * @brief Origin of the formattable this formatter handles.
+     */
+    virtual formattables::origin_types formattable_origin_type() const = 0;
 
     /**
      * @brief Registers an inclusion dependency providers this

@@ -38,29 +38,30 @@ namespace test_data {
  */
 class enum_header_formatter : public enum_formatter_interface {
 public:
-  enum_header_formatter() = default;
-  enum_header_formatter(const enum_header_formatter&) = delete;
-  enum_header_formatter(enum_header_formatter&&) = default;
-  ~enum_header_formatter() noexcept = default;
+    enum_header_formatter() = default;
+    enum_header_formatter(const enum_header_formatter&) = delete;
+    enum_header_formatter(enum_header_formatter&&) = default;
+    ~enum_header_formatter() noexcept = default;
 
 public:
-  /**
-   * @brief Returns the formatter name.
-   */
-  static std::string static_formatter_name();
+    /**
+     * @brief Returns the formatter name.
+     */
+    static std::string static_formatter_name();
 
 public:
-  dynamic::ownership_hierarchy ownership_hierarchy() const override;
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
-  file_types file_type() const override;
+    file_types file_type() const override;
 
-  void register_inclusion_dependencies_provider(
-    formattables::registrar& rg) const override;
+    formattables::origin_types formattable_origin_type() const;
 
-  dogen::formatters::file
-  format(const formattables::enum_info& c) const override;
+    void register_inclusion_dependencies_provider(
+        formattables::registrar& rg) const override;
+
+    dogen::formatters::file
+    format(const formattables::enum_info& c) const override;
 };
-
 
 } } } }
 

@@ -51,6 +51,8 @@ public:
 
     file_types file_type() const override;
 
+    formattables::origin_types formattable_origin_type() const;
+
     void register_inclusion_dependencies_provider(
         formattables::registrar& rg) const override;
 

@@ -78,6 +78,11 @@ file_types enum_implementation_formatter::file_type() const {
     return file_types::cpp_implementation;
 }
 
+formattables::origin_types
+enum_implementation_formatter::formattable_origin_type() const {
+    return formattables::origin_types::external;
+}
+
 void enum_implementation_formatter::register_inclusion_dependencies_provider(
     formattables::registrar& rg) const {
     rg.register_provider(boost::make_shared<provider>());
