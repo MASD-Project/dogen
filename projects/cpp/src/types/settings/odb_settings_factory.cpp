@@ -41,6 +41,8 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
+odb_settings_factory::~odb_settings_factory() noexcept { }
+
 std::string odb_settings_factory::settings_key() const {
     return formatters::odb::traits::class_header_formatter_name();
 }

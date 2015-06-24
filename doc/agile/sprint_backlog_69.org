@@ -14,19 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-23 Tue 23:09]
+#+CAPTION: Clock summary at [2015-06-24 Wed 14:17]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *9:08* |      |      |
+| *Total time*                                                                | *9:18* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 9:08   |      |      |
-| Active                                                                      |        | 9:08 |      |
+| Stories                                                                     | 9:18   |      |      |
+| Active                                                                      |        | 9:18 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:22 |
 | COMPLETED Create a short presentation on Dogen                              |        |      | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |        |      | 1:40 |
 | COMPLETED Refactor opaque settings production                               |        |      | 1:04 |
-| COMPLETED Implement class header formatter in odb                           |        |      | 1:29 |
+| COMPLETED Implement class header formatter in odb                           |        |      | 0:14 |
+| COMPLETED Fix borked windows build                                          |        |      | 0:10 |
+| STARTED Implement class header formatter in odb                             |        |      | 1:15 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -56,6 +58,7 @@ Tasks:
 - create a skeleton for the presentation
 - add a target on cmake
 
+<<<<<<< HEAD
 *** COMPLETED Add support for opaque settings factories               :story:
     CLOSED: [2015-06-23 Tue 21:40]
     CLOCK: [2015-06-23 Tue 20:41]--[2015-06-23 Tue 21:40] =>  0:59
@@ -80,6 +83,22 @@ class that can be used from the factory and the transformer.
     CLOCK: [2015-06-23 Tue 23:05]--[2015-06-23 Tue 23:09] =>  0:04
     CLOCK: [2015-06-23 Tue 22:57]--[2015-06-23 Tue 23:04] =>  0:07
     CLOCK: [2015-06-23 Tue 22:53]--[2015-06-23 Tue 22:56] =>  0:03
+=======
+*** COMPLETED Fix borked windows build                                :story:
+    CLOSED: [2015-06-24 Wed 14:15]
+    CLOCK: [2015-06-24 Wed 13:33]--[2015-06-24 Wed 13:43] =>  0:10
+
+Build borked with the following errors:
+
+: file included from /.../source/projects/cpp/src/types/settings/initializer.cpp:22:0:
+:  /.../source/projects/cpp/include/dogen/cpp/types/settings/odb_settings_factory.hpp:37:7: error: looser throw specifier for 'virtual dogen::cpp::settings::odb_settings_factory::~odb_settings_factory()'
+
+And
+
+:  /.../source/projects/cpp/include/dogen/cpp/types/settings/opaque_settings_factory_interface.hpp:45:13: error:   overriding 'virtual dogen::cpp::settings::opaque_settings_factory_interface::~opaque_settings_factory_interface() noexcept (true)'
+
+*** STARTED Implement class header formatter in odb                   :story:
+>>>>>>> cpp: add noexcept to odb settings constructor
     CLOCK: [2015-06-23 Tue 16:21]--[2015-06-23 Tue 17:36] =>  1:15
 
 Create the formatter, stitch template and all associated

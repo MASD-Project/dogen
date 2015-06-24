@@ -35,6 +35,9 @@ namespace cpp {
 namespace settings {
 
 class odb_settings_factory final : public opaque_settings_factory_interface {
+public:
+    ~odb_settings_factory() noexcept;
+
 private:
     /**
      * @brief All field definitions we require.
