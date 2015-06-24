@@ -43,6 +43,7 @@ namespace formattables {
 
 concept_info::concept_info(
     const std::string& identity,
+    const dogen::cpp::formattables::origin_types origin_type,
     const std::string& name,
     const std::string& qualified_name,
     const std::string& documentation,
@@ -53,6 +54,7 @@ concept_info::concept_info(
     const std::list<dogen::cpp::formattables::property_info>& all_properties)
     : dogen::cpp::formattables::entity(
       identity,
+      origin_type,
       name,
       qualified_name,
       documentation,

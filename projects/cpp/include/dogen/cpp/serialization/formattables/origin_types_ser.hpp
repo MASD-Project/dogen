@@ -18,18 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/origin_types_io.hpp"
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_ORIGIN_TYPES_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_ORIGIN_TYPES_SER_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const formattable& v) {
-    v.to_stream(s);
-    return(s);
+#include <boost/serialization/nvp.hpp>
+#include "dogen/cpp/types/formattables/origin_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::cpp::formattables::origin_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("origin_types", v);
 }
 
-} } }
+#endif

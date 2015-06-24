@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/origin_types_io.hpp"
+#ifndef DOGEN_CPP_TEST_DATA_FORMATTABLES_ORIGIN_TYPES_TD_HPP
+#define DOGEN_CPP_TEST_DATA_FORMATTABLES_ORIGIN_TYPES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/cpp/types/formattables/origin_types.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formattable& v) {
-    v.to_stream(s);
-    return(s);
-}
+class origin_types_generator {
+public:
+    origin_types_generator();
+
+public:
+    typedef dogen::cpp::formattables::origin_types result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
 
 } } }
+
+#endif

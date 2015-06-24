@@ -36,6 +36,7 @@
 #include "dogen/cpp/io/settings/opaque_settings_io.hpp"
 #include "dogen/cpp/io/formattables/aspect_types_io.hpp"
 #include "dogen/cpp/io/formattables/concept_info_io.hpp"
+#include "dogen/cpp/io/formattables/origin_types_io.hpp"
 #include "dogen/cpp/io/formattables/visitor_info_io.hpp"
 #include "dogen/cpp/io/formattables/content_types_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"

@@ -23,6 +23,7 @@
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/concept_info_td.hpp"
+#include "dogen/cpp/test_data/formattables/origin_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/visitor_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/exception_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/includers_info_td.hpp"
@@ -41,6 +42,11 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+dogen::cpp::formattables::origin_types
+create_dogen_cpp_formattables_origin_types(const unsigned int position) {
+    return dogen::cpp::formattables::origin_types_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -50,6 +56,7 @@ namespace formattables {
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.identity(create_std_string(position + 0));
+    v.origin_type(create_dogen_cpp_formattables_origin_types(position + 1));
 }
 
 formattable_generator::result_type*

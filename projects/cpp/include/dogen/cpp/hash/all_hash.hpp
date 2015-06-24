@@ -36,6 +36,7 @@
 #include "dogen/cpp/hash/settings/opaque_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/aspect_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/concept_info_hash.hpp"
+#include "dogen/cpp/hash/formattables/origin_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/visitor_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/content_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/property_info_hash.hpp"

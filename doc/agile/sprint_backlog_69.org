@@ -14,21 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-24 Wed 16:34]
+#+CAPTION: Clock summary at [2015-06-24 Wed 17:19]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *11:35* |       |      |
+| *Total time*                                                                | *12:19* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 11:35   |       |      |
-| Active                                                                      |         | 11:35 |      |
+| Stories                                                                     | 12:19   |       |      |
+| Active                                                                      |         | 12:19 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
 | COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:10 |
-| STARTED Handling of "singleton" formatters                                  |         |       | 2:07 |
+| COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
+| STARTED Split formatters into per instance and singleton                    |         |       | 0:44 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -165,14 +166,24 @@ With this approach, we need:
   settings. This could just be called =factory=. Given a model, it
   returns all of the "singleton" formattables.
 
-*** Split formatters into per instance and singleton                  :story:
+*** STARTED Split formatters into per instance and singleton          :story:
+    CLOCK: [2015-06-24 Wed 16:36]--[2015-06-24 Wed 17:20] =>  0:36
 
-- add an enum at the formatter interface level: formatter
-  instantiation type: singleton, per instance.
-- remove all formatters from registrar/container; split formatters
-  into singleton and per instance.
-- change path settings factory to receive a container of formatters.
-- change path derivatives workflow to pass in the instance container.
+One slight problem of splitting the formatters based on cardinality is
+that it is not the "formatter cardinality" we are talking about; after
+all, a formatter always takes one formattable and produces a
+file. This is more subtle: the cardinality of the formattables
+associated with the formatter. What we really need is a conept to
+distinguish between these kinds of formattables. For now lets call
+these "internal" and "external" formatters until a better name reveals
+itself.
+
+- add an enum at the formattables base class level and the formatter
+  interface level.
+- split formatters into internal and external in container.
+- change path settings factory to receive a forward list of formatters
+  instead of a formatter container.
+- change path derivatives workflow to pass in the external container.
 
 *** Create a formattables factory                                     :story:
 
@@ -199,6 +210,9 @@ line options to the path derivatives factory in formattables.
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+- we have two of these at the moment, one at the top-level and another
+  one inside odb. Remove the odb one.
 
 *** Implement serialisation registrar formatter                       :story:
 

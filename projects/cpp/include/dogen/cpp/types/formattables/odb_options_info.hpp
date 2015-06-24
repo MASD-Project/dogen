@@ -52,6 +52,7 @@ public:
 public:
     odb_options_info(
         const std::string& identity,
+        const dogen::cpp::formattables::origin_types origin_type,
         const std::string& model_name,
         const std::string& product_name,
         const boost::filesystem::path& file_path,

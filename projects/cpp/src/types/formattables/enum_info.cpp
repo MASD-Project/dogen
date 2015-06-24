@@ -51,6 +51,7 @@ namespace formattables {
 
 enum_info::enum_info(
     const std::string& identity,
+    const dogen::cpp::formattables::origin_types origin_type,
     const std::string& name,
     const std::string& qualified_name,
     const std::string& documentation,
@@ -61,6 +62,7 @@ enum_info::enum_info(
     const std::string& type)
     : dogen::cpp::formattables::entity(
       identity,
+      origin_type,
       name,
       qualified_name,
       documentation,

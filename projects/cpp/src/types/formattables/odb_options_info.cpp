@@ -45,12 +45,15 @@ odb_options_info::odb_options_info(odb_options_info&& rhs)
 
 odb_options_info::odb_options_info(
     const std::string& identity,
+    const dogen::cpp::formattables::origin_types origin_type,
     const std::string& model_name,
     const std::string& product_name,
     const boost::filesystem::path& file_path,
     const std::string& file_name,
     const std::string& odb_folder)
-    : dogen::cpp::formattables::formattable(identity),
+    : dogen::cpp::formattables::formattable(
+      identity,
+      origin_type),
       model_name_(model_name),
       product_name_(product_name),
       file_path_(file_path),

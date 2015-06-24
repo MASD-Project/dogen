@@ -18,18 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
-#include "dogen/cpp/io/formattables/origin_types_io.hpp"
+#ifndef DOGEN_CPP_HASH_FORMATTABLES_ORIGIN_TYPES_HASH_HPP
+#define DOGEN_CPP_HASH_FORMATTABLES_ORIGIN_TYPES_HASH_HPP
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const formattable& v) {
-    v.to_stream(s);
-    return(s);
+#include <functional>
+#include "dogen/cpp/types/formattables/origin_types.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::cpp::formattables::origin_types> {
+public:
+    size_t operator()(const dogen::cpp::formattables::origin_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
 }
 
-} } }
+#endif

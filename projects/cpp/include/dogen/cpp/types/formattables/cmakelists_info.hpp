@@ -52,6 +52,7 @@ public:
 public:
     cmakelists_info(
         const std::string& identity,
+        const dogen::cpp::formattables::origin_types origin_type,
         const boost::filesystem::path& file_path,
         const std::string& model_name,
         const std::string& product_name,

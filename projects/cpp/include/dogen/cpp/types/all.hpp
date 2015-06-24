@@ -67,6 +67,7 @@
 #include "dogen/cpp/types/formattables/concept_info.hpp"
 #include "dogen/cpp/types/formattables/formattables.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
+#include "dogen/cpp/types/formattables/origin_types.hpp"
 #include "dogen/cpp/types/formattables/visitor_info.hpp"
 #include "dogen/cpp/types/formatters/io/initializer.hpp"
 #include "dogen/cpp/types/formattables/content_types.hpp"

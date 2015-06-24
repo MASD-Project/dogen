@@ -19,17 +19,32 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include <stdexcept>
 #include "dogen/cpp/io/formattables/origin_types_io.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const formattable& v) {
-    v.to_stream(s);
-    return(s);
+std::ostream& operator<<(std::ostream& s, const origin_types& v) {
+    s << "{ " << "\"__type__\": " << "\"origin_types\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case origin_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case origin_types::internal:
+        attr = "\"internal\"";
+        break;
+    case origin_types::external:
+        attr = "\"external\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for origin_types");
+    }
+    s << attr << " }";
+    return s;
 }
 
 } } }

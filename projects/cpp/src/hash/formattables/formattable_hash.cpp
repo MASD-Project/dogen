@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
+#include "dogen/cpp/hash/formattables/origin_types_hash.hpp"
 
 namespace {
 
@@ -38,6 +39,8 @@ std::size_t formattable_hasher::hash(const formattable& v) {
     std::size_t seed(0);
 
     combine(seed, v.identity());
+    combine(seed, v.origin_type());
+
     return seed;
 }
 

@@ -28,6 +28,7 @@ namespace formattables {
 
 exception_info::exception_info(
     const std::string& identity,
+    const dogen::cpp::formattables::origin_types origin_type,
     const std::string& name,
     const std::string& qualified_name,
     const std::string& documentation,
@@ -36,6 +37,7 @@ exception_info::exception_info(
     const std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties>& formatter_properties)
     : dogen::cpp::formattables::entity(
       identity,
+      origin_type,
       name,
       qualified_name,
       documentation,

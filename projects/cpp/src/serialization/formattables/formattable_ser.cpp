@@ -32,6 +32,7 @@
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/origin_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/exception_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/includers_info_ser.hpp"
@@ -54,6 +55,7 @@ void save(Archive& ar,
     const dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar << make_nvp("identity", v.identity_);
+    ar << make_nvp("origin_type", v.origin_type_);
 }
 
 template<typename Archive>
@@ -61,6 +63,7 @@ void load(Archive& ar,
     dogen::cpp::formattables::formattable& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("identity", v.identity_);
+    ar >> make_nvp("origin_type", v.origin_type_);
 }
 
 } }

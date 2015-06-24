@@ -37,6 +37,7 @@
 #include "dogen/cpp/serialization/settings/opaque_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/aspect_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/concept_info_ser.hpp"
+#include "dogen/cpp/serialization/formattables/origin_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/visitor_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"

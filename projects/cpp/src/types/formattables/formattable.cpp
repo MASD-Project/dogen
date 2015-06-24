@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/io/formattables/origin_types_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,23 +34,32 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-formattable::formattable(const std::string& identity)
-    : identity_(identity) { }
+formattable::formattable()
+    : origin_type_(static_cast<dogen::cpp::formattables::origin_types>(0)) { }
+
+formattable::formattable(
+    const std::string& identity,
+    const dogen::cpp::formattables::origin_types origin_type)
+    : identity_(identity),
+      origin_type_(origin_type) { }
 
 void formattable::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::formattable\"" << ", "
-      << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\""
+      << "\"identity\": " << "\"" << tidy_up_string(identity_) << "\"" << ", "
+      << "\"origin_type\": " << origin_type_
       << " }";
 }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(identity_, other.identity_);
+    swap(origin_type_, other.origin_type_);
 }
 
 bool formattable::compare(const formattable& rhs) const {
-    return identity_ == rhs.identity_;
+    return identity_ == rhs.identity_ &&
+        origin_type_ == rhs.origin_type_;
 }
 
 const std::string& formattable::identity() const {
@@ -66,6 +76,14 @@ void formattable::identity(const std::string& v) {
 
 void formattable::identity(const std::string&& v) {
     identity_ = std::move(v);
+}
+
+dogen::cpp::formattables::origin_types formattable::origin_type() const {
+    return origin_type_;
+}
+
+void formattable::origin_type(const dogen::cpp::formattables::origin_types v) {
+    origin_type_ = v;
 }
 
 } } }

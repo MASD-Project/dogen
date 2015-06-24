@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include "dogen/cpp/types/formattables/origin_types.hpp"
 #include "dogen/cpp/types/formattables/formattable_visitor.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
@@ -37,14 +38,18 @@ namespace formattables {
 
 class formattable {
 public:
-    formattable() = default;
     formattable(const formattable&) = default;
     formattable(formattable&&) = default;
+
+public:
+    formattable();
 
     virtual ~formattable() noexcept = 0;
 
 public:
-    explicit formattable(const std::string& identity);
+    formattable(
+        const std::string& identity,
+        const dogen::cpp::formattables::origin_types origin_type);
 
 private:
     template<typename Archive>
@@ -68,6 +73,9 @@ public:
     void identity(const std::string& v);
     void identity(const std::string&& v);
 
+    dogen::cpp::formattables::origin_types origin_type() const;
+    void origin_type(const dogen::cpp::formattables::origin_types v);
+
 protected:
     bool compare(const formattable& rhs) const;
 public:
@@ -78,6 +86,7 @@ protected:
 
 private:
     std::string identity_;
+    dogen::cpp::formattables::origin_types origin_type_;
 };
 
 inline formattable::~formattable() noexcept { }
