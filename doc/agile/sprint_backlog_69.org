@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-24 Wed 17:36]
+#+CAPTION: Clock summary at [2015-06-24 Wed 17:48]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:34* |       |      |
+| *Total time*                                                                | *12:45* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:34   |       |      |
-| Active                                                                      |         | 12:34 |      |
+| Stories                                                                     | 12:45   |       |      |
+| Active                                                                      |         | 12:45 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -29,7 +29,7 @@
 | COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:10 |
 | COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
-| STARTED Split formatters into per instance and singleton                    |         |       | 0:59 |
+| STARTED Split formatters into per instance and singleton                    |         |       | 1:10 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -167,6 +167,7 @@ With this approach, we need:
   returns all of the "singleton" formattables.
 
 *** STARTED Split formatters into per instance and singleton          :story:
+    CLOCK: [2015-06-24 Wed 17:37]--[2015-06-24 Wed 17:48] =>  0:11
     CLOCK: [2015-06-24 Wed 17:21]--[2015-06-24 Wed 17:36] =>  0:15
     CLOCK: [2015-06-24 Wed 16:36]--[2015-06-24 Wed 17:20] =>  0:36
 

@@ -13957,7 +13957,7 @@ facet of the C++ language.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#internal_formatters#</dia:string>
+            <dia:string>#all_internal_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::formatter_interface&gt;&gt;#</dia:string>
@@ -13980,7 +13980,7 @@ facet of the C++ language.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#external_formatters#</dia:string>
+            <dia:string>#all_external_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::formatter_interface&gt;&gt;#</dia:string>

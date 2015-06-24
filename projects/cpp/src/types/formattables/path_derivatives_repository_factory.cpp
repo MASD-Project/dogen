@@ -96,7 +96,7 @@ create_path_settings(const config::cpp_options& opts,
     const formatters::container& c) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(opts, rp, c);
+    settings::path_settings_factory f(opts, rp, c.all_external_formatters());
     const auto r(f.make(o));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;

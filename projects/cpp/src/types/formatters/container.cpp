@@ -63,4 +63,14 @@ container::all_formatters() const {
     return all_formatters_;
 }
 
+const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+container::all_internal_formatters() const {
+    return all_internal_formatters_;
+}
+
+const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+container::all_external_formatters() const {
+    return all_external_formatters_;
+}
+
 } } }

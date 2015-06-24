@@ -27,14 +27,15 @@
 
 #include <list>
 #include <string>
+#include <memory>
 #include <unordered_map>
+#include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 
 namespace dogen {
@@ -48,7 +49,8 @@ class path_settings_factory {
 public:
     path_settings_factory(const config::cpp_options& o,
         const dynamic::repository& rp,
-        const formatters::container& fc);
+        const std::forward_list<
+        std::shared_ptr<formatters::formatter_interface>>& formatters);
 
 private:
     /**
@@ -101,7 +103,8 @@ private:
      */
     std::unordered_map<std::string, formatter_properties>
     make_formatter_properties(const dynamic::repository& rp,
-        const formatters::container& fc) const;
+        const std::forward_list<
+        std::shared_ptr<formatters::formatter_interface>>& formatters) const;
 
 private:
     /**

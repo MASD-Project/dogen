@@ -74,6 +74,11 @@ void registrar::
 common_registration(std::shared_ptr<formatters::formatter_interface> f) {
     ownership_hierarchy_.push_front(f->ownership_hierarchy());
     formatter_container_.all_formatters_.push_front(f);
+    using ot = formattables::origin_types;
+    if (f->formattable_origin_type() == ot::internal)
+        formatter_container_.all_internal_formatters_.push_front(f);
+    else if (f->formattable_origin_type() == ot::external)
+        formatter_container_.all_external_formatters_.push_front(f);
 }
 
 void registrar::register_formatter(

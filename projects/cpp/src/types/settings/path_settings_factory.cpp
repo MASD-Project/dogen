@@ -43,8 +43,10 @@ namespace settings {
 path_settings_factory::
 path_settings_factory(const config::cpp_options& o,
     const dynamic::repository& rp,
-    const formatters::container& fc)
-    : options_(o), formatter_properties_(make_formatter_properties(rp, fc)) { }
+    const std::forward_list<
+    std::shared_ptr<formatters::formatter_interface>>& formatters)
+    : options_(o),
+      formatter_properties_(make_formatter_properties(rp, formatters)) { }
 
 void path_settings_factory::setup_top_level_fields(
     const dynamic::repository& rp, formatter_properties& fp) const {
@@ -106,10 +108,11 @@ path_settings_factory::make_formatter_properties(
 std::unordered_map<std::string, path_settings_factory::formatter_properties>
 path_settings_factory::make_formatter_properties(
     const dynamic::repository& rp,
-    const formatters::container& fc) const {
+    const std::forward_list<
+    std::shared_ptr<formatters::formatter_interface>>& formatters) const {
     std::unordered_map<std::string, formatter_properties> r;
 
-    for (const auto f : fc.all_formatters()) {
+    for (const auto f : formatters) {
         const auto& oh(f->ownership_hierarchy());
         if (oh.formatter_name().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_formatter_name;

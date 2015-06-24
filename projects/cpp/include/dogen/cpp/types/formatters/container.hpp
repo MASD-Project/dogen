@@ -114,9 +114,19 @@ public:
     const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
     all_formatters() const;
 
+    /**
+     * @brief Returns all internal formatters.
+     */
+    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+        all_internal_formatters() const;
+
+    /**
+     * @brief Returns all internal formatters.
+     */
+    const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
+        all_external_formatters() const;
+
 private:
-    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
-    all_formatters_;
     std::forward_list<std::shared_ptr<formatters::class_formatter_interface>>
     class_formatters_;
     std::forward_list<std::shared_ptr<formatters::enum_formatter_interface>>
@@ -133,6 +143,12 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::odb_options_formatter_interface> >
     odb_options_formatters_;
+    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
+        all_formatters_;
+    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
+        all_internal_formatters_;
+    std::forward_list<std::shared_ptr<formatters::formatter_interface>>
+        all_external_formatters_;
 };
 
 } } }
