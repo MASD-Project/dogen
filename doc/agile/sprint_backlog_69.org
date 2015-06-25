@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-25 Thu 17:29]
+#+CAPTION: Clock summary at [2015-06-25 Thu 17:54]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:34* |       |      |
+| *Total time*                                                                | *15:59* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 15:34   |       |      |
-| Active                                                                      |         | 15:34 |      |
+| Stories                                                                     | 15:59   |       |      |
+| Active                                                                      |         | 15:59 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -31,7 +31,7 @@
 | COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
 | COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
 | STARTED Create a formattables factory                                       |         |       | 0:53 |
-| STARTED Thoughts on cpp refactoring                                         |         |       | 1:56 |
+| STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -210,6 +210,7 @@ hard-code the path and file names for these formattables (but take
 into account things such as prefixes, etc).
 
 *** STARTED Thoughts on cpp refactoring                               :story:
+    CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
     CLOCK: [2015-06-25 Thu 15:32]--[2015-06-25 Thu 16:17] =>  0:45
     CLOCK: [2015-06-25 Thu 13:30]--[2015-06-25 Thu 14:15] =>  0:45
@@ -218,11 +219,16 @@ We haven't quite arrived at the ideal configuration for the cpp
 model. We are close, but not there yet. The problem we have at the
 moment is that the formatters drive a lot of the work in
 formattables, resulting in a circular dependency. This is happening
-because we are missing some entities.
+because we are missing some entities. This story is just a random set
+of thoughts in this space, trying to clear up the terminology across
+the board.
+
+*Random thoughts*
 
 What is probably needed is to have facets, aspects and "file kinds" as
-top-level concepts. We need a good name for "file kinds". This is a
-meta-concept, something akin to a file template. The formatter
+top-level concepts rather than just strings with which we label
+formatters. In addition, we need a good name for "file kinds". This is
+a meta-concept, something akin to a file template. The formatter
 produces a physical representation of that meta-concept. As part of
 the formatter registration, we can also register this meta-concept
 (provided it relies on an existing formattable). And in effect, these
@@ -281,15 +287,33 @@ What can be said about an archetype:
   name. In addition, a model group is also a bad name. A "model" is a
   cohesive group of archetypes that are meant to be used together. A
   "model group" is a cohesive group of models that provide the same
-  conceptual representations in different programming languages.
+  conceptual representations in different programming languages. Maybe
+  we should use a more "random" name such as: pod. Then perhaps a
+  model group could become a "pod family": a family of related pods. A
+  given model can be represented by one pod family or another - they
+  are mutually exclusive. Of course, from a command line perspective,
+  its better to think of "modes". Each mode corresponds to choosing
+  one "pod family" over another. This does not map very cleanly.
 - archetypes have an associated programming language - a grammar.
+- a facet may exist in more than one programming language and an
+  aspect too.
+- pods are programming language specific.
 - formattables are kind of like an archetype friendly representation
   of the domain types. We need a good name for this.
+- internal and external now make slightly more sense, at least once we
+  got a good name for formatters. We still need a good name for it
+  though. If the archetype instance is generated because of the
+  presence of the domain type, it is external. If the archetype has no
+  sensitivity to domain types (but may have sensitivity to other
+  things such as options) it is internal. The naming around this is
+  not totally clear.
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the
 implementation dimension, in which =a= can be represented by =A1, A2,
-..., An= archetypes.
+..., An= archetypes. In effect, the implementation dimension has
+multiple dimensions, one for each pod (and of course the pod families
+would be an extra dimension and so on).
 
 *** Path settings factory makes use of command line options           :story:
 
