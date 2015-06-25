@@ -26,7 +26,7 @@
 #include "dogen/sml/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
-#include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
+
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -88,6 +88,33 @@ private:
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
+workflow::from_transformer_activity(
+    const settings::opaque_settings_builder& osb,
+    const settings::bundle_repository& brp,
+    const formatter_properties_repository& fprp,
+    const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
+
+    const transformer t(osb, brp, fprp, m);
+    generator g(t);
+    all_model_items_traversal(m, g);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
+    const auto r(g.result());
+    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
+    return r;
+}
+
+std::forward_list<std::shared_ptr<formattables::formattable> >
+workflow::from_factory_activity(
+    const config::cpp_options& /*opts*/,
+    const formatter_properties_repository& /*fprp*/,
+    const sml::model& /*m*/) const {
+    std::forward_list<std::shared_ptr<formattables::formattable> > r;
+    return r;
+}
+
+std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::execute(const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
@@ -100,13 +127,8 @@ workflow::execute(const config::cpp_options& opts,
     formatter_properties_repository_factory f;
     const auto fprp(f.make(opts, srp, root_object, fc, brp, m));
 
-    const transformer t(osb, brp, fprp, m);
-    generator g(t);
-    all_model_items_traversal(m, g);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
-    const auto r(g.result());
-    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
+    auto r(from_transformer_activity(osb, brp, fprp, m));
+    r.splice_after(r.before_begin(), from_factory_activity(opts, fprp, m));
     return r;
 }
 

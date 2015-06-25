@@ -31,10 +31,11 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
-#include "dogen/cpp/types/formatters/container.hpp"
-#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
+#include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
+#include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -45,6 +46,19 @@ namespace formattables {
  * SML elements.
  */
 class workflow {
+private:
+    std::forward_list<std::shared_ptr<formattables::formattable> >
+    from_transformer_activity(
+        const settings::opaque_settings_builder& osb,
+        const settings::bundle_repository& brp,
+        const formatter_properties_repository& fprp,
+        const sml::model& m) const;
+
+    std::forward_list<std::shared_ptr<formattables::formattable> >
+    from_factory_activity(const config::cpp_options& opts,
+        const formatter_properties_repository& fprp,
+        const sml::model& m) const;
+
 public:
     /**
      * @brief Executes the workflow.

@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-25 Thu 16:46]
+#+CAPTION: Clock summary at [2015-06-25 Thu 17:29]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *14:51* |       |      |
+| *Total time*                                                                | *15:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 14:51   |       |      |
-| Active                                                                      |         | 14:51 |      |
+| Stories                                                                     | 15:34   |       |      |
+| Active                                                                      |         | 15:34 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -30,7 +30,7 @@
 | COMPLETED Fix borked windows build                                          |         |       | 0:10 |
 | COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
 | COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
-| STARTED Create a formattables factory                                       |         |       | 0:10 |
+| STARTED Create a formattables factory                                       |         |       | 0:53 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 1:56 |
 #+end:
 
@@ -194,6 +194,7 @@ internal class info?) but it'll have to do.
 - change path derivatives workflow to pass in the external container.
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
     CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
 
 Create a class responsible for instantiating all of the "singleton"
@@ -282,6 +283,8 @@ What can be said about an archetype:
   "model group" is a cohesive group of models that provide the same
   conceptual representations in different programming languages.
 - archetypes have an associated programming language - a grammar.
+- formattables are kind of like an archetype friendly representation
+  of the domain types. We need a good name for this.
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the

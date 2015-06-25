@@ -31,6 +31,7 @@
 #include "dogen/cpp/types/settings/registrar.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
+#include "dogen/cpp/types/formattables/factory.hpp"
 #include "dogen/cpp/types/formattables/project.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formatters/hash/hash.hpp"
