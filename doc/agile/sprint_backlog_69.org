@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-24 Wed 17:48]
+#+CAPTION: Clock summary at [2015-06-25 Thu 16:46]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:45* |       |      |
+| *Total time*                                                                | *14:51* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:45   |       |      |
-| Active                                                                      |         | 12:45 |      |
+| Stories                                                                     | 14:51   |       |      |
+| Active                                                                      |         | 14:51 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -29,7 +29,9 @@
 | COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
 | COMPLETED Fix borked windows build                                          |         |       | 0:10 |
 | COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
-| STARTED Split formatters into per instance and singleton                    |         |       | 1:10 |
+| COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
+| STARTED Create a formattables factory                                       |         |       | 0:10 |
+| STARTED Thoughts on cpp refactoring                                         |         |       | 1:56 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -166,7 +168,8 @@ With this approach, we need:
   settings. This could just be called =factory=. Given a model, it
   returns all of the "singleton" formattables.
 
-*** STARTED Split formatters into per instance and singleton          :story:
+*** COMPLETED Split formatters into per instance and singleton        :story:
+    CLOSED: [2015-06-25 Thu 13:25]
     CLOCK: [2015-06-24 Wed 17:37]--[2015-06-24 Wed 17:48] =>  0:11
     CLOCK: [2015-06-24 Wed 17:21]--[2015-06-24 Wed 17:36] =>  0:15
     CLOCK: [2015-06-24 Wed 16:36]--[2015-06-24 Wed 17:20] =>  0:36
@@ -190,7 +193,8 @@ internal class info?) but it'll have to do.
   instead of a formatter container.
 - change path derivatives workflow to pass in the external container.
 
-*** Create a formattables factory                                     :story:
+*** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
 
 Create a class responsible for instantiating all of the "singleton"
 formatters:
@@ -203,6 +207,86 @@ formatters:
 This class will be hooked into the formattables workflow. It will
 hard-code the path and file names for these formattables (but take
 into account things such as prefixes, etc).
+
+*** STARTED Thoughts on cpp refactoring                               :story:
+    CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
+    CLOCK: [2015-06-25 Thu 15:32]--[2015-06-25 Thu 16:17] =>  0:45
+    CLOCK: [2015-06-25 Thu 13:30]--[2015-06-25 Thu 14:15] =>  0:45
+
+We haven't quite arrived at the ideal configuration for the cpp
+model. We are close, but not there yet. The problem we have at the
+moment is that the formatters drive a lot of the work in
+formattables, resulting in a circular dependency. This is happening
+because we are missing some entities.
+
+What is probably needed is to have facets, aspects and "file kinds" as
+top-level concepts. We need a good name for "file kinds". This is a
+meta-concept, something akin to a file template. The formatter
+produces a physical representation of that meta-concept. As part of
+the formatter registration, we can also register this meta-concept
+(provided it relies on an existing formattable). And in effect, these
+are the pieces of the puzzle:
+
+- you define a "file kind".
+- a facet and a model are groupings of "file kinds". These happen to
+  be hierarchical groupings. There are others: header and
+  implementation, or class header formatter. Those are
+  non-hierarchical.
+- you bind a transformer to a SML type to generate a formattable.
+- a formattable is associated with one or more "file kinds" or better
+  yet a file kind is associated with a formattable. It is also
+  associated with formatting properties and settings. It is those
+  tuples that we pass to the formatters.
+- you bind a formatter to a "file" and process the associated
+  formattable.
+
+Perhaps we can call these "file kinds" file archetypes or just
+archetypes.
+
+What can be said about an archetype:
+
+- conceptual notion of something we want to generate.
+- one SML entity can map to zero or many archetypes. Concept at
+  present maps to zero. Object maps to many.
+- a representation of the archetype as source code is done by the
+  formatter. It uses a template to help it generate that
+  representation.
+- a given archetype maps to one and only one SML entity.
+- a given archetype maps to one and only one CPP entity.
+- archetypes can be grouped in many ways. One way is facets and
+  models.
+- archetypes have definitions: name of the archetype, what groups it
+  belongs to.
+- archetypes have associated data: formattables, settings,
+  properties. This is an entity and needs a name.
+- formatters work on one and only one archetype.
+- archetypes have qualified names; this is (mostly) what we called
+  ownership hierarchy. Qualified names can be represented as separate
+  fields or using the dot notation.
+- archetypes have labels: this is what we called groups.
+- dynamic is a model designed to augment SML with some archetype
+  data. This is not true in the dia case. Check all fields to see if
+  it is true everywhere else.
+- an aspect is a property of one or more archetypes; it is a knob that
+  affects the generation of the source code representation.
+- an archetype instance belongs to an archetype.
+- we should remove the concept of "integrated facets". It just happens
+  that a facet such as types may have aspects that enable features
+  similar to aspects in other facets. There may be rules that
+  determine that when certain aspects are enabled, certain facets must
+  be switched off because they are incompatible.
+- facet is a good name for grouping archetypes, but model isn't. We
+  need a better name for a set of facets. Aspect is also a good
+  name. In addition, a model group is also a bad name. A "model" is a
+  cohesive group of archetypes that are meant to be used together. A
+  "model group" is a cohesive group of models that provide the same
+  conceptual representations in different programming languages.
+- archetypes have an associated programming language - a grammar.
+
+One way to look at it is as follows: there is the modeling dimension,
+in which we have an entity, say entity =A=; and there is the
+implementation dimension, in which =a= can be represented by =A1, A2,
+..., An= archetypes.
 
 *** Path settings factory makes use of command line options           :story:
 
