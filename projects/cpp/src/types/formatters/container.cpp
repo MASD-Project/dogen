@@ -58,6 +58,36 @@ const std::forward_list<
     return forward_declarations_formatters_;
 }
 
+const std::forward_list<
+    std::shared_ptr<formatters::odb_options_formatter_interface>
+    >& container::odb_options_formatters() const {
+    return odb_options_formatters_;
+}
+
+const std::forward_list<
+    std::shared_ptr<formatters::cmakelists_formatter_interface>
+    >& container::cmakelists_formatters() const {
+    return cmakelists_formatters_;
+}
+
+const std::forward_list<
+    std::shared_ptr<formatters::primitive_formatter_interface>
+    >& container::primitive_formatters() const {
+    return primitive_formatters_;
+}
+
+const std::forward_list<
+    std::shared_ptr<formatters::concept_formatter_interface>
+    >& container::concept_formatters() const {
+    return concept_formatters_;
+}
+
+const std::forward_list<
+    std::shared_ptr<formatters::registrar_formatter_interface>
+    >& container::registrar_formatters() const {
+    return registrar_formatters_;
+}
+
 const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
 container::all_formatters() const {
     return all_formatters_;

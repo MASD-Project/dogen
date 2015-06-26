@@ -60,8 +60,34 @@ public:
     ~dispatcher() noexcept { }
 
 private:
+    template<typename Formatter, typename Formatable>
+    void format(const Formatter& f, const Formatable& e,
+        const bool empty_out_content = false) {
+        const auto fn(f.ownership_hierarchy().formatter_name());
+        BOOST_LOG_SEV(lg, debug) << "Formatting with: '" << fn << "'";
+
+        auto file(f.format(e));
+
+        if (empty_out_content) {
+            BOOST_LOG_SEV(lg, debug) << "Emptying out content.";
+            file.content().clear();
+        }
+
+        files_.push_front(file);
+        if (!file.overwrite()) {
+            BOOST_LOG_SEV(lg, debug) << "Filename: "
+                                     << file.path().generic_string();
+            BOOST_LOG_SEV(lg, debug) << "Content: "
+                                     << (file.content().empty() ? "<empty>" :
+                                         file.content());
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "Not dumping file contents to log "
+                                     << "(overwrite is false).";
+        }
+    }
+
     template<typename Formatter, typename Entity>
-    void format(const Formatter& f, const Entity& e,
+    void format_entity(const Formatter& f, const Entity& e,
         const bool empty_out_content = false) {
         const auto fn(f.ownership_hierarchy().formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Formatting: '" << e.name()
@@ -103,8 +129,16 @@ private:
     }
 
     template<typename Formatter, typename Entity>
-    void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
+    void format_entity(const std::forward_list<std::shared_ptr<Formatter>>& fc,
         const Entity& e) {
+        for (const auto f : fc)
+            format_entity(*f, e);
+    }
+
+
+    template<typename Formatter, typename Formattable>
+     void format(const std::forward_list<std::shared_ptr<Formatter>>& fc,
+            const Formattable& e) {
         for (const auto f : fc)
             format(*f, e);
     }
@@ -120,6 +154,8 @@ public:
     void visit(const formattables::visitor_info& v) override;
     void visit(const formattables::concept_info& c) override;
     void visit(const formattables::primitive_info& p) override;
+    void visit(const formattables::cmakelists_info& c) override;
+    void visit(const formattables::odb_options_info& o) override;
 
 public:
     /**
@@ -146,39 +182,50 @@ void dispatcher::visit(const formattables::class_info& c) {
     const auto service(formattables::class_types::service);
     const bool empty_out_content(c.class_type() == service);
     for (const auto f : container_.class_formatters())
-        format(*f, c, empty_out_content);
+        format_entity(*f, c, empty_out_content);
 }
 
 void dispatcher::visit(const formattables::forward_declarations_info& fd) {
-    format(container_.forward_declarations_formatters(), fd);
+    format_entity(container_.forward_declarations_formatters(), fd);
 }
 
 void dispatcher::visit(const formattables::enum_info& e) {
-    format(container_.enum_formatters(), e);
+    format_entity(container_.enum_formatters(), e);
 }
 
 void dispatcher::visit(const formattables::exception_info& e) {
-    format(container_.exception_formatters(), e);
+    format_entity(container_.exception_formatters(), e);
 }
 
-void dispatcher::visit(const formattables::registrar_info& /*r*/) {
+void dispatcher::visit(const formattables::registrar_info& r) {
+    format_entity(container_.registrar_formatters(), r);
 }
 
 void dispatcher::visit(const formattables::namespace_info& n) {
     if (n.documentation().empty())
         return;
 
-    format(container_.namespace_formatters(), n);
+    format_entity(container_.namespace_formatters(), n);
 }
 
 void dispatcher::visit(const formattables::visitor_info& v) {
-    format(container_.visitor_formatters(), v);
+    format_entity(container_.visitor_formatters(), v);
 }
 
-void dispatcher::visit(const formattables::concept_info& /*c*/) {
+void dispatcher::visit(const formattables::concept_info& c) {
+    format_entity(container_.concept_formatters(), c);
 }
 
-void dispatcher::visit(const formattables::primitive_info& /*p*/) {
+void dispatcher::visit(const formattables::primitive_info& p) {
+    format_entity(container_.primitive_formatters(), p);
+}
+
+void dispatcher::visit(const formattables::cmakelists_info& c) {
+    format(container_.cmakelists_formatters(), c);
+}
+
+void dispatcher::visit(const formattables::odb_options_info& o) {
+    format(container_.odb_options_formatters(), o);
 }
 
 void dispatcher::format(const formattables::formattable& f) {

@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_CMAKELISTS_FORMATTER_INTERFACE_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_CMAKELISTS_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_PRIMITIVE_FORMATTER_INTERFACE_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_PRIMITIVE_FORMATTER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/file.hpp"
-#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
-#include "dogen/cpp/types/formatters/formatter_interface.hpp"
-
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class cmakelists_formatter_interface : public formatter_interface {
-public:
-    cmakelists_formatter_interface() = default;
-    cmakelists_formatter_interface(
-        const cmakelists_formatter_interface&) = delete;
-    cmakelists_formatter_interface(cmakelists_formatter_interface&&) = default;
-    virtual ~cmakelists_formatter_interface() noexcept = 0;
-
-public:
-    /**
-     * @brief Generate a c++ representation for the CMakeLists.
-     */
-    virtual dogen::formatters::file
-    format(const formattables::cmakelists_info& c) const = 0;
-};
+class primitive_formatter_interface;
 
 } } }
 

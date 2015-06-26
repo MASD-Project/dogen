@@ -42,6 +42,26 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
+template<class Container>
+unsigned long size(const Container& c) {
+    return std::distance(c.begin(), c.end());
+}
+
+template<class Container>
+void log_container_sizes(
+    const std::string& formatter_type, const Container& c) {
+    const auto sz(size(c));
+    if (sz == 0) {
+        BOOST_LOG_SEV(lg, warn) << "Registered formatters for '"
+                                << formatter_type << "': "
+                                << sz;
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Registered formatters for ''"
+                                 << formatter_type << "': "
+                                 << sz;
+    }
+}
+
 void registrar::validate() const {
     const auto& fc(formatter_container_);
     if (fc.class_formatters().empty()) {
@@ -61,11 +81,23 @@ void registrar::validate() const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
-    BOOST_LOG_SEV(lg, debug) << "Found "
-                             << std::distance(
-                                 fc.all_formatters().begin(),
-                                 fc.all_formatters().end())
-                             << " registered formatter(s): ";
+    BOOST_LOG_SEV(lg, debug) << "Found a total of "
+                             << size(fc.all_formatters())
+                             << " registered formatter(s).";
+
+    log_container_sizes("class formatters", fc.class_formatters());
+    log_container_sizes("enum formatters", fc.enum_formatters());
+    log_container_sizes("exception formatters", fc.exception_formatters());
+    log_container_sizes("namespace formatters", fc.namespace_formatters());
+    log_container_sizes("visitor formatters", fc.visitor_formatters());
+    log_container_sizes("forward declarations formatters",
+        fc.forward_declarations_formatters());
+    log_container_sizes("odb options formatters", fc.odb_options_formatters());
+    log_container_sizes("cmakelists formatters", fc.cmakelists_formatters());
+    log_container_sizes("primitive formatters", fc.primitive_formatters());
+    log_container_sizes("concept formatters", fc.concept_formatters());
+    log_container_sizes("registrar formatters", fc.registrar_formatters());
+
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
                              << ownership_hierarchy_;
 }
@@ -148,6 +180,36 @@ void registrar::register_formatter(
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
 
     formatter_container_.odb_options_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
+    std::shared_ptr<cmakelists_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.cmakelists_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
+    std::shared_ptr<primitive_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.primitive_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
+    std::shared_ptr<concept_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.concept_formatters_.push_front(f);
     common_registration(f);
 }
 

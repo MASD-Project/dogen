@@ -36,6 +36,10 @@
 #include "dogen/cpp/types/formatters/visitor_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/odb_options_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/primitive_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/concept_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -96,6 +100,30 @@ public:
      */
     void register_formatter(
         std::shared_ptr<odb_options_formatter_interface> f);
+
+    /**
+     * @brief Registers a CMakeLists formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<cmakelists_formatter_interface> f);
+
+    /**
+     * @brief Registers a primitive formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<primitive_formatter_interface> f);
+
+    /**
+     * @brief Registers a concept formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<concept_formatter_interface> f);
+
+    /**
+     * @brief Registers a registrar formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<registrar_formatter_interface> f);
 
 public:
     /**

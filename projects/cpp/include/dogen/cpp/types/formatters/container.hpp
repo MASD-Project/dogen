@@ -35,6 +35,10 @@
 #include "dogen/cpp/types/formatters/exception_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/namespace_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/odb_options_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/primitive_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/concept_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -107,6 +111,38 @@ public:
         >&
     odb_options_formatters() const;
 
+    /**
+     * @brief Returns all available CMakeLists formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::cmakelists_formatter_interface>
+        >&
+    cmakelists_formatters() const;
+
+    /**
+     * @brief Returns all available primitive formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::primitive_formatter_interface>
+        >&
+    primitive_formatters() const;
+
+    /**
+     * @brief Returns all available concept formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::concept_formatter_interface>
+        >&
+     concept_formatters() const;
+
+    /**
+     * @brief Returns all available registrar formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::registrar_formatter_interface>
+        >&
+    registrar_formatters() const;
+
 public:
     /**
      * @brief Returns all available formatters.
@@ -143,6 +179,18 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::odb_options_formatter_interface> >
     odb_options_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::cmakelists_formatter_interface> >
+    cmakelists_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::primitive_formatter_interface> >
+    primitive_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::concept_formatter_interface> >
+    concept_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::registrar_formatter_interface> >
+    registrar_formatters_;
     std::forward_list<std::shared_ptr<formatters::formatter_interface>>
         all_formatters_;
     std::forward_list<std::shared_ptr<formatters::formatter_interface>>
