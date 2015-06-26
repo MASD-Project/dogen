@@ -66,7 +66,6 @@ const std::string ptime_type("boost::posix_time::ptime");
 const std::string time_duration_type("boost::posix_time::time_duration");
 const std::string ptree_type("boost::property_tree::ptree");
 const std::string pair_type("std::pair");
-const std::string registrar_name("registrar");
 const std::string visitor_comments("Accept visits for type ");
 
 const std::string int8_t_type("std::int8_t");

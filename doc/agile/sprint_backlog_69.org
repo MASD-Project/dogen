@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-26 Fri 16:39]
+#+CAPTION: Clock summary at [2015-06-26 Fri 17:03]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:20* |       |      |
+| *Total time*                                                                | *18:43* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:20   |       |      |
-| Active                                                                      |         | 18:20 |      |
+| Stories                                                                     | 18:43   |       |      |
+| Active                                                                      |         | 18:43 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -31,7 +31,7 @@
 | COMPLETED Handling of "singleton" formatters                                |         |       | 2:07 |
 | COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
-| STARTED Create a formattables factory                                       |         |       | 0:53 |
+| STARTED Create a formattables factory                                       |         |       | 1:16 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
 #+end:
 
@@ -205,6 +205,7 @@ container and see if there are any available formatters for a given
 type and if none are, log that at warning level.
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
     CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
     CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
 

@@ -18,42 +18,58 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("cpp.formatters.factory"));
+
+const std::string namespace_separator("::");
+const std::string registrar_name("registrar");
+
+}
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
 std::shared_ptr<formattable> factory::
-make_registrar_info(const sml::model& /*m*/) const {
+make_registrar_info(const config::cpp_options& /*o*/, const sml::model& m) const {
+    BOOST_LOG_SEV(lg, debug) << "Making a registrar for model: "
+                             << sml::string_converter::convert(m.name());
+
+    name_builder b;
+    auto r(std::make_shared<registrar_info>());
+    r->namespaces(b.namespace_list(m, m.name()));
+
+    for (const auto& pair : m.references()) {
+        if (pair.second != sml::origin_types::system) {
+            const auto l(b.namespace_list(m, pair.first));
+            const auto s(boost::algorithm::join(l, namespace_separator));
+            r->model_dependencies().push_back(s);
+        }
+    }
+
+    for (const auto& l : m.leaves())
+        r->leaves().push_back(b.qualified_name(m, l));
+    r->leaves().sort();
+
     /*
-      BOOST_LOG_SEV(lg, debug) << "Transforming model into registrar: "
-      << sml::string_converter::convert(model_.name());
 
-      auto ri(boost::make_shared<cpp::formattables::registrar_info>());
-      ri->namespaces(to_namespace_list(model_.name()));
 
-      for (const auto& pair : model_.references()) {
-      if (pair.second != sml::origin_types::system) {
-      const auto l(to_namespace_list(pair.first));
-      const auto s(boost::algorithm::join(l, namespace_separator));
-      ri->model_dependencies().push_back(s);
-      }
-      }
-
-      for (const auto& l : model_.leaves())
-      ri->leaves().push_back(to_qualified_name(l));
-      ri->leaves().sort();
-
-      sml::qname qn;
-      qn.simple_name(registrar_name);
-      qn.model_name(model_.name().model_name());
-      qn.external_module_path(model_.name().external_module_path());
-      context_.registrars().insert(std::make_pair(qn, ri));
-
-      BOOST_LOG_SEV(lg, debug) << "Transformed model into registrar.";
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
     */
-    std::shared_ptr<registrar_info> r(new registrar_info());
+
+    BOOST_LOG_SEV(lg, debug) << "Made registrar.";
+
     return r;
 }
 

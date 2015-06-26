@@ -41,8 +41,8 @@ namespace formattables {
 
 class factory final {
 public:
-    std::shared_ptr<formattable>
-    make_registrar_info(const sml::model& m) const;
+    std::shared_ptr<formattable> make_registrar_info(
+        const config::cpp_options& o, const sml::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> >
     make_includers(const formattables::path_derivatives_repository& rp) const;
