@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-26 Fri 17:33]
+#+CAPTION: Clock summary at [2015-06-26 Fri 17:52]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:12* |       |      |
+| *Total time*                                                                | *19:30* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:12   |       |      |
-| Active                                                                      |         | 19:12 |      |
+| Stories                                                                     | 19:30   |       |      |
+| Active                                                                      |         | 19:30 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -32,8 +32,8 @@
 | COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
-| STARTED Create a formattables factory                                       |         |       | 1:16 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
+| STARTED Create a formattables factory                                       |         |       | 1:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -214,23 +214,6 @@ meta-data. However we incorrectly added the command line options to
 the path settings factory. We need to remove this and pass the command
 line options to the path derivatives factory in formattables.
 
-*** STARTED Create a formattables factory                             :story:
-    CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
-    CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
-    CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
-
-Create a class responsible for instantiating all of the "singleton"
-formatters:
-
-- all includers
-- serialisation registrar
-- odb options
-- all cmakelists
-
-This class will be hooked into the formattables workflow. It will
-hard-code the path and file names for these formattables (but take
-into account things such as prefixes, etc).
-
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -339,6 +322,39 @@ implementation dimension, in which =a= can be represented by =A1, A2,
 ..., An= archetypes. In effect, the implementation dimension has
 multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
+
+*** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-26 Fri 17:33]--[2015-06-26 Fri 17:51] =>  0:18
+    CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
+    CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
+    CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
+
+Create a class responsible for instantiating all of the "singleton"
+formatters:
+
+- all includers
+- serialisation registrar
+- odb options
+- all cmakelists
+
+This class will be hooked into the formattables workflow. It will
+hard-code the path and file names for these formattables (but take
+into account things such as prefixes, etc).
+
+Problems:
+
+- registrar info is still an entity and as such needs settings,
+  formatter properties, etc. This means its not so easy to construct
+  it from factory. Perhaps the separation we have is more between
+  "entity" and "non-entity" formattables rather than internal and
+  external. Having said that, for the registrar to go through the same
+  pipeline as the SML types we will have to create a qname
+  etc. Perhaps what would be really needed is a way to inject C++
+  specific types in SML. Transformer would somehow recognise this
+  objects and create the correct formattables for it. This sounds too
+  complicated (and circular). However, somehow we need to
+  short-circuit the path derivatives, properties, etc generation and
+  inject a C++ specific type.
 
 *** Implement odb options formatter in odb                            :story:
 

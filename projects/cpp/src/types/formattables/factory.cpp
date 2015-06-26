@@ -38,8 +38,8 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::shared_ptr<formattable> factory::
-make_registrar_info(const config::cpp_options& /*o*/, const sml::model& m) const {
+std::shared_ptr<formattable> factory::make_registrar_info(
+    const config::cpp_options& /*opts*/, const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Making a registrar for model: "
                              << sml::string_converter::convert(m.name());
 
@@ -59,12 +59,22 @@ make_registrar_info(const config::cpp_options& /*o*/, const sml::model& m) const
         r->leaves().push_back(b.qualified_name(m, l));
     r->leaves().sort();
 
+    /*    boost::filesystem::path file_path;
+    if (opts.split_project())
+        file_path = opts.source_directory_path();
+    else {
+        file_path = opts.project_directory_path() / m.name().model_name();
+        // full_path /= opts.source_directory_name();
+    }
+    */
+    // r->file_path(file_path);
+
     /*
 
 
     sml::qname qn;
     qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
+    qn.model_name();
     qn.external_module_path(m.name().external_module_path());
     */
 
