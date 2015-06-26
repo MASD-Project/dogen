@@ -49,9 +49,7 @@ namespace {
  */
 class generator {
 public:
-    generator(const sml::model& m,
-        const std::unordered_map<std::string, settings::path_settings>& ps)
-        : factory_(m, ps) { }
+    generator(const path_derivatives_factory& f) : factory_(f) { }
 
 private:
     /**
@@ -71,7 +69,7 @@ public:
     const path_derivatives_repository & result() const { return result_; }
 
 private:
-    const path_derivatives_factory factory_;
+    const path_derivatives_factory& factory_;
     path_derivatives_repository result_;
 };
 
@@ -90,13 +88,12 @@ void generator::generate(const sml::qname& qn) {
 
 std::unordered_map<std::string, settings::path_settings>
 path_derivatives_repository_factory::
-create_path_settings(const config::cpp_options& opts,
-    const dynamic::repository& rp,
+create_path_settings(const dynamic::repository& rp,
     const dynamic::object& o,
     const formatters::container& c) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(opts, rp, c.all_external_formatters());
+    settings::path_settings_factory f(rp, c.all_external_formatters());
     const auto r(f.make(o));
     BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
     return r;
@@ -104,12 +101,14 @@ create_path_settings(const config::cpp_options& opts,
 
 path_derivatives_repository path_derivatives_repository_factory::
 obtain_path_derivatives(
+    const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started obtaining path derivatives.";
 
-    generator g(m, ps);
+    const path_derivatives_factory f(opts, m, ps);
+    generator g(f);
     sml::all_model_items_traversal(m, g);
 
     BOOST_LOG_SEV(lg, debug) << "Finished obtaining path derivatives.";
@@ -122,8 +121,8 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    const auto ps(create_path_settings(opts, rp, root_object, c));
-    const auto r(obtain_path_derivatives(ps, m));
+    const auto ps(create_path_settings(rp, root_object, c));
+    const auto r(obtain_path_derivatives(opts, ps, m));
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
     return r;
 }

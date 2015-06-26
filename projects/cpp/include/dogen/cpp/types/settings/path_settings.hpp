@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/serialization/settings/path_settings_fwd_ser.hpp"
 
@@ -38,24 +37,18 @@ namespace settings {
 class path_settings final {
 public:
     path_settings(const path_settings&) = default;
+    path_settings(path_settings&&) = default;
     ~path_settings() = default;
 
 public:
     path_settings();
 
 public:
-    path_settings(path_settings&& rhs);
-
-public:
     path_settings(
-        const bool split_project,
         const dogen::cpp::formatters::file_types file_type,
         const std::string& facet_directory,
         const std::string& facet_postfix,
         const std::string& formatter_postfix,
-        const boost::filesystem::path& project_directory_path,
-        const boost::filesystem::path& source_directory_path,
-        const boost::filesystem::path& include_directory_path,
         const std::string& include_directory_name,
         const std::string& source_directory_name,
         const bool disable_facet_directories,
@@ -70,9 +63,6 @@ private:
     friend void boost::serialization::load(Archive& ar, path_settings& v, unsigned int version);
 
 public:
-    bool split_project() const;
-    void split_project(const bool v);
-
     dogen::cpp::formatters::file_types file_type() const;
     void file_type(const dogen::cpp::formatters::file_types v);
 
@@ -90,21 +80,6 @@ public:
     std::string& formatter_postfix();
     void formatter_postfix(const std::string& v);
     void formatter_postfix(const std::string&& v);
-
-    const boost::filesystem::path& project_directory_path() const;
-    boost::filesystem::path& project_directory_path();
-    void project_directory_path(const boost::filesystem::path& v);
-    void project_directory_path(const boost::filesystem::path&& v);
-
-    const boost::filesystem::path& source_directory_path() const;
-    boost::filesystem::path& source_directory_path();
-    void source_directory_path(const boost::filesystem::path& v);
-    void source_directory_path(const boost::filesystem::path&& v);
-
-    const boost::filesystem::path& include_directory_path() const;
-    boost::filesystem::path& include_directory_path();
-    void include_directory_path(const boost::filesystem::path& v);
-    void include_directory_path(const boost::filesystem::path&& v);
 
     const std::string& include_directory_name() const;
     std::string& include_directory_name();
@@ -140,14 +115,10 @@ public:
     path_settings& operator=(path_settings other);
 
 private:
-    bool split_project_;
     dogen::cpp::formatters::file_types file_type_;
     std::string facet_directory_;
     std::string facet_postfix_;
     std::string formatter_postfix_;
-    boost::filesystem::path project_directory_path_;
-    boost::filesystem::path source_directory_path_;
-    boost::filesystem::path include_directory_path_;
     std::string include_directory_name_;
     std::string source_directory_name_;
     bool disable_facet_directories_;

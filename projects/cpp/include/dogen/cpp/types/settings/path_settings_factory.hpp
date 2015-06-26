@@ -36,7 +36,6 @@
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/file_types.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
-#include "dogen/config/types/cpp_options.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -47,8 +46,7 @@ namespace settings {
  */
 class path_settings_factory {
 public:
-    path_settings_factory(const config::cpp_options& o,
-        const dynamic::repository& rp,
+    path_settings_factory(const dynamic::repository& rp,
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters);
 
@@ -123,7 +121,6 @@ public:
     make(const dynamic::object& o) const;
 
 private:
-    const config::cpp_options& options_;
     const std::unordered_map<std::string, formatter_properties>
     formatter_properties_;
 };

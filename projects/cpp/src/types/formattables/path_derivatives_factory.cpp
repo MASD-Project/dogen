@@ -49,9 +49,10 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
+    const config::cpp_options& o,
     const sml::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
-    : model_(m), path_settings_(ps) { }
+    : options_(o), model_(m), path_settings_(ps) { }
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
@@ -61,7 +62,7 @@ make_inclusion_path(const settings::path_settings& ps,
 
     boost::filesystem::path r;
 
-    if (ps.split_project()) {
+    if (options_.split_project()) {
         for(auto n : qn.external_module_path())
             r /= n;
 
@@ -118,19 +119,19 @@ make_file_path(const settings::path_settings& ps,
     const auto ft(ps.file_type());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        if (ps.split_project())
-            r = ps.include_directory_path();
+        if (options_.split_project())
+            r = options_.include_directory_path();
         else {
-            r = ps.project_directory_path() / qn.model_name();
+            r = options_.project_directory_path() / qn.model_name();
             r /= ps.include_directory_name();
         }
         break;
 
     case formatters::file_types::cpp_implementation:
-        if (ps.split_project())
-            r = ps.source_directory_path();
+        if (options_.split_project())
+            r = options_.source_directory_path();
         else {
-            r = ps.project_directory_path() / qn.model_name();
+            r = options_.project_directory_path() / qn.model_name();
             r /= ps.source_directory_name();
         }
         break;

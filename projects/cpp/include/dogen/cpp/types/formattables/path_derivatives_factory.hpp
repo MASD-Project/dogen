@@ -28,6 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
@@ -43,6 +44,7 @@ namespace formattables {
 class path_derivatives_factory {
 public:
     path_derivatives_factory(
+        const config::cpp_options& o,
         const sml::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps);
 
@@ -81,6 +83,7 @@ public:
     make(const sml::qname& qn) const;
 
 private:
+    const config::cpp_options& options_;
     const sml::model& model_;
     const std::unordered_map<std::string, settings::path_settings>&
     path_settings_;

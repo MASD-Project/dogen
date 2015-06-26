@@ -48,8 +48,7 @@ private:
      * @brief Creates the path settings.
      */
     std::unordered_map<std::string, settings::path_settings>
-    create_path_settings(const config::cpp_options& opts,
-        const dynamic::repository& rp,
+    create_path_settings(const dynamic::repository& rp,
         const dynamic::object& o,
         const formatters::container& c) const;
 
@@ -57,6 +56,7 @@ private:
      * @brief Obtains all path derivatives for the supplied model.
      */
     path_derivatives_repository obtain_path_derivatives(
+        const config::cpp_options& opts,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const;
 

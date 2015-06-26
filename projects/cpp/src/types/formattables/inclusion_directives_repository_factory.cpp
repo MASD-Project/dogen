@@ -53,9 +53,7 @@ namespace {
  */
 class generator {
 public:
-    generator(const dynamic::repository& srp,
-        const formatters::container& fc,
-        const path_derivatives_repository& pdrp) : factory_(srp, fc, pdrp) { }
+    generator(const inclusion_directives_factory& f) : factory_(f) { }
 
 private:
     /**
@@ -89,7 +87,7 @@ public:
     const inclusion_directives_repository& result() const { return result_; }
 
 private:
-    const inclusion_directives_factory factory_;
+    const inclusion_directives_factory& factory_;
     inclusion_directives_repository result_;
 };
 
@@ -103,7 +101,8 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
-    generator g(srp, fc, pdrp);
+    const inclusion_directives_factory f(srp, fc, pdrp);
+    generator g(f);
     sml::all_model_items_traversal(m, g);
     const auto r(g.result());
 

@@ -41,12 +41,10 @@ namespace cpp {
 namespace settings {
 
 path_settings_factory::
-path_settings_factory(const config::cpp_options& o,
-    const dynamic::repository& rp,
+path_settings_factory(const dynamic::repository& rp,
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters)
-    : options_(o),
-      formatter_properties_(make_formatter_properties(rp, formatters)) { }
+    : formatter_properties_(make_formatter_properties(rp, formatters)) { }
 
 void path_settings_factory::setup_top_level_fields(
     const dynamic::repository& rp, formatter_properties& fp) const {
@@ -130,11 +128,6 @@ create_settings_for_formatter(const formatter_properties& fp,
 
     path_settings r;
     r.file_type(fp.file_type);
-
-    r.split_project(options_.split_project());
-    r.project_directory_path(options_.project_directory_path());
-    r.source_directory_path(options_.source_directory_path());
-    r.include_directory_path(options_.include_directory_path());
 
     using namespace dynamic;
     const field_selector fs(o);

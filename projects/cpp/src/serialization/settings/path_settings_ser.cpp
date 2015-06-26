@@ -28,7 +28,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
 #include "dogen/cpp/serialization/formatters/file_types_ser.hpp"
 #include "dogen/cpp/serialization/settings/path_settings_ser.hpp"
 
@@ -39,14 +38,10 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::settings::path_settings& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("split_project", v.split_project_);
     ar << make_nvp("file_type", v.file_type_);
     ar << make_nvp("facet_directory", v.facet_directory_);
     ar << make_nvp("facet_postfix", v.facet_postfix_);
     ar << make_nvp("formatter_postfix", v.formatter_postfix_);
-    ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
-    ar << make_nvp("source_directory_path", v.source_directory_path_.generic_string());
-    ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
     ar << make_nvp("include_directory_name", v.include_directory_name_);
     ar << make_nvp("source_directory_name", v.source_directory_name_);
     ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
@@ -58,20 +53,10 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::settings::path_settings& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("split_project", v.split_project_);
     ar >> make_nvp("file_type", v.file_type_);
     ar >> make_nvp("facet_directory", v.facet_directory_);
     ar >> make_nvp("facet_postfix", v.facet_postfix_);
     ar >> make_nvp("formatter_postfix", v.formatter_postfix_);
-    std::string project_directory_path_tmp;
-    ar >> make_nvp("project_directory_path", project_directory_path_tmp);
-    v.project_directory_path_ = project_directory_path_tmp;
-    std::string source_directory_path_tmp;
-    ar >> make_nvp("source_directory_path", source_directory_path_tmp);
-    v.source_directory_path_ = source_directory_path_tmp;
-    std::string include_directory_path_tmp;
-    ar >> make_nvp("include_directory_path", include_directory_path_tmp);
-    v.include_directory_path_ = include_directory_path_tmp;
     ar >> make_nvp("include_directory_name", v.include_directory_name_);
     ar >> make_nvp("source_directory_name", v.source_directory_name_);
     ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
