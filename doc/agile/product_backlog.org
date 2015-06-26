@@ -3966,7 +3966,6 @@ sufficient.
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
 
-
 *** Allow multiple types to go into a single formatter                :story:
 
 We have found a number of cases where it may be useful to have more
@@ -5997,6 +5996,27 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Add support for languages available in Dia2Code                   :story:
+
+Dia already has a default code generator: [[http://dia2code.sourceforge.net/][Dia2Code]]. At present it
+supports the following outputs (as per [[http://dia2code.sourceforge.net/features.html][features]] page):
+
+- Ada, C, C++, C#, CORBA IDL, Java, PHP, PHP5, Python, Ruby,
+  shapefile, and SQL.
+
+We could probably add support for these by creating a test Dia
+diagram, running it through Dia2Code an then making sure we get a
+binary identical output. This would be a good way to bootstrap
+multi-language support.
+
+We couldn't find simple test diagrams in Dia2Code so perhaps we could
+also contribute these to the project. It does have a set of [[http://dia2code.sourceforge.net/examples.html][examples]],
+which could be used as a starting point for the tests. They are a bit
+complex though.
+
+They also appear to have support for functions etc. We should see what
+they've done as this would also be a good way to evolve Dogen.
 
 *** Generate model from database tables                               :story:
 
