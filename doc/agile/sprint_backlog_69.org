@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-25 Thu 17:54]
+#+CAPTION: Clock summary at [2015-06-26 Fri 15:09]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:59* |       |      |
+| *Total time*                                                                | *16:58* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 15:59   |       |      |
-| Active                                                                      |         | 15:59 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:32 |
+| Stories                                                                     | 16:58   |       |      |
+| Active                                                                      |         | 16:58 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
@@ -35,6 +35,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-06-26 Fri 14:10]--[2015-06-26 Fri 15:09] =>  0:59
     CLOCK: [2015-06-24 Wed 16:24]--[2015-06-24 Wed 16:34] =>  0:10
     CLOCK: [2015-06-22 Mon 14:01]--[2015-06-22 Mon 14:23] =>  0:22
 
@@ -307,6 +308,9 @@ What can be said about an archetype:
   sensitivity to domain types (but may have sensitivity to other
   things such as options) it is internal. The naming around this is
   not totally clear.
+- in the thrift story in the backlog we mention the existence of
+  mutually exclusive groups of facets. We should also come up with a
+  name for these.
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the
@@ -314,6 +318,13 @@ implementation dimension, in which =a= can be represented by =A1, A2,
 ..., An= archetypes. In effect, the implementation dimension has
 multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
+
+*** Implement all missing interfaces and hook them in to workflow     :story:
+
+We should have interfaces for all formattables, even those for which
+we have no formatters yet. We should also check the formatters
+container and see if there are any available formatters for a given
+type and if none are, log that at warning level.
 
 *** Path settings factory makes use of command line options           :story:
 
