@@ -3651,6 +3651,16 @@ approach is that we then need to have a common base type from where
 all types inherit and this will mean that we will have to visit a lot
 to dispatch types to their leaves.
 
+Actually, this is also the chance to remove all of the qname
+lookups. All relationships should just be boost shared pointers to
+types rather than qnames. There should be no need for lookups at
+all. This is a much better approach than the suggested below. We still
+need qnames and some minor qname lookup (e.g. model is still made
+up of a unordered map of qname to entity) but everyone should be using
+entity pointers rather than qnames. It is not clear what models such
+as CPP should be doing since the pointers are not particularly useful
+there.
+
 Merged with other story:
 
 Once the model has been merged and resolved, all qnames in the model
