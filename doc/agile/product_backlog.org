@@ -1157,6 +1157,16 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Consider reducing the number of qname lookups in cpp model        :story:
+
+At present we are using qnames all over the place in CPP. Nothing
+stops us from using strings instead of qnames if that is more
+efficient.
+
+What is worse is that we seem to be doing a ridiculous amount of qname
+lookups. It would be much nicer if we could somehow have all the data
+in the right shape to avoid doing so many lookups.
+
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
