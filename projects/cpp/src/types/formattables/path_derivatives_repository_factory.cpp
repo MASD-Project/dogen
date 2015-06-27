@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-#include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
@@ -86,44 +85,18 @@ void generator::generate(const sml::qname& qn) {
 
 }
 
-std::unordered_map<std::string, settings::path_settings>
-path_derivatives_repository_factory::
-create_path_settings(const dynamic::repository& rp,
-    const dynamic::object& o,
-    const formatters::container& c) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
-    settings::path_settings_factory f(rp, c.all_external_formatters());
-    const auto r(f.make(o));
-    BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
-    return r;
-}
-
-path_derivatives_repository path_derivatives_repository_factory::
-obtain_path_derivatives(
+path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const sml::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started obtaining path derivatives.";
-
+    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);
     generator g(f);
     sml::all_model_items_traversal(m, g);
-
-    BOOST_LOG_SEV(lg, debug) << "Finished obtaining path derivatives.";
-    return g.result();
-}
-
-path_derivatives_repository path_derivatives_repository_factory::make(
-    const config::cpp_options& opts, const dynamic::repository& rp,
-    const dynamic::object& root_object, const formatters::container& c,
-    const sml::model& m) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
-    const auto ps(create_path_settings(rp, root_object, c));
-    const auto r(obtain_path_derivatives(opts, ps, m));
+    const auto r(g.result());
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
+
     return r;
 }
 

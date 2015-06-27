@@ -19,14 +19,17 @@
  *
  */
 #include <memory>
+#include <algorithm>
 #include <forward_list>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
-#include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include "dogen/cpp/types/settings/path_settings_factory.hpp"
+#include "dogen/cpp/types/formattables/factory.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
-
+#include "dogen/cpp/io/formattables/formattable_io.hpp"
+#include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 
 namespace {
@@ -87,6 +90,38 @@ private:
 
 }
 
+std::unordered_map<std::string, settings::path_settings>
+workflow::create_path_settings_activity(const dynamic::repository& srp,
+    const dynamic::object& root_object,
+    const formatters::container& fc) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating path settings for root object.";
+    settings::path_settings_factory f(srp, fc.all_external_formatters());
+    const auto r(f.make(root_object));
+    BOOST_LOG_SEV(lg, debug) << "Created path settings for root object.";
+    return r;
+}
+
+path_derivatives_repository workflow::
+create_path_derivatives_repository(const config::cpp_options& opts,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const sml::model& m) const {
+    path_derivatives_repository_factory f;
+    return f.make(opts, ps, m);
+}
+
+formatter_properties_repository workflow::
+create_formatter_properties(const dynamic::repository& srp,
+    const dynamic::object& root_object,
+    const settings::bundle_repository& brp,
+    const path_derivatives_repository& pdrp,
+    const formatters::container& fc,
+    const sml::model& m) const {
+
+    formatter_properties_repository_factory f;
+    return f.make(srp, root_object, brp, pdrp, fc, m);
+}
+
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::from_transformer_activity(
     const settings::opaque_settings_builder& osb,
@@ -106,11 +141,18 @@ workflow::from_transformer_activity(
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
-workflow::from_factory_activity(
-    const config::cpp_options& /*opts*/,
-    const formatter_properties_repository& /*fprp*/,
-    const sml::model& /*m*/) const {
+workflow::from_factory_activity(const config::cpp_options& opts,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const formattables::path_derivatives_repository& pdrp,
+    const formatter_properties_repository& fprp,
+    const sml::model& m) const {
+
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
+    factory f;
+    r.push_front(f.make_registrar_info(opts, ps, fprp, m));
+    r.splice_after(r.before_begin(), f.make_includers(pdrp));
+    r.splice_after(r.before_begin(), f.make_cmakelists(opts, m));
+    r.push_front(f.make_odb_options(opts, m));
     return r;
 }
 
@@ -124,11 +166,17 @@ workflow::execute(const config::cpp_options& opts,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
-    formatter_properties_repository_factory f;
-    const auto fprp(f.make(opts, srp, root_object, fc, brp, m));
+    const auto& ro(root_object);
+    const auto ps(create_path_settings_activity(srp, ro, fc));
+    const auto pdrp(create_path_derivatives_repository(opts, ps, m));
+    const auto fprp(create_formatter_properties(srp, ro, brp, pdrp, fc, m));
 
     auto r(from_transformer_activity(osb, brp, fprp, m));
-    r.splice_after(r.before_begin(), from_factory_activity(opts, fprp, m));
+    const auto bb(r.before_begin());
+    r.splice_after(bb, from_factory_activity(opts, ps, pdrp, fprp, m));
+
+    BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
+
     return r;
 }
 

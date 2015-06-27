@@ -21,6 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
 
@@ -39,7 +40,11 @@ namespace cpp {
 namespace formattables {
 
 std::shared_ptr<formattable> factory::make_registrar_info(
-    const config::cpp_options& /*opts*/, const sml::model& m) const {
+    const config::cpp_options& opts,
+    const std::unordered_map<std::string, settings::path_settings>& /*ps*/,
+    const formatter_properties_repository& /*fprp*/,
+    const sml::model& m) const {
+
     BOOST_LOG_SEV(lg, debug) << "Making a registrar for model: "
                              << sml::string_converter::convert(m.name());
 
@@ -59,24 +64,19 @@ std::shared_ptr<formattable> factory::make_registrar_info(
         r->leaves().push_back(b.qualified_name(m, l));
     r->leaves().sort();
 
-    /*    boost::filesystem::path file_path;
+    formatter_properties p;
+    boost::filesystem::path file_path;
     if (opts.split_project())
         file_path = opts.source_directory_path();
     else {
         file_path = opts.project_directory_path() / m.name().model_name();
-        // full_path /= opts.source_directory_name();
     }
-    */
-    // r->file_path(file_path);
+    file_path /= registrar_name;
+    p.file_path(file_path);
 
-    /*
-
-
-    sml::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name();
-    qn.external_module_path(m.name().external_module_path());
-    */
+    using formatters::serialization::traits;
+    r->formatter_properties().insert(
+        std::make_pair(traits::registrar_header_formatter_name(), p));
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar.";
 

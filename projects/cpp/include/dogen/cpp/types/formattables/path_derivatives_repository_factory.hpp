@@ -43,31 +43,12 @@ namespace formattables {
  * @brief Creates path derivatives repositories.
  */
 class path_derivatives_repository_factory {
-private:
-    /**
-     * @brief Creates the path settings.
-     */
-    std::unordered_map<std::string, settings::path_settings>
-    create_path_settings(const dynamic::repository& rp,
-        const dynamic::object& o,
-        const formatters::container& c) const;
-
-    /**
-     * @brief Obtains all path derivatives for the supplied model.
-     */
-    path_derivatives_repository obtain_path_derivatives(
-        const config::cpp_options& opts,
-        const std::unordered_map<std::string, settings::path_settings>& ps,
-        const sml::model& m) const;
-
 public:
     /**
      * @brief Create a path derivatives repository.
      */
     path_derivatives_repository make(const config::cpp_options& opts,
-        const dynamic::repository& rp,
-        const dynamic::object& root_object,
-        const formatters::container& c,
+        const std::unordered_map<std::string, settings::path_settings>& ps,
         const sml::model& m) const;
 };
 

@@ -29,11 +29,13 @@
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
+#include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
 #include "dogen/cpp/types/formattables/includers_info.hpp"
 #include "dogen/cpp/types/formattables/cmakelists_info.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
+#include "dogen/cpp/types/formattables/formatter_properties_repository.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -42,7 +44,10 @@ namespace formattables {
 class factory final {
 public:
     std::shared_ptr<formattable> make_registrar_info(
-        const config::cpp_options& opts, const sml::model& m) const;
+        const config::cpp_options& opts,
+        const std::unordered_map<std::string, settings::path_settings>& ps,
+        const formatter_properties_repository& fprp,
+        const sml::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> >
     make_includers(const formattables::path_derivatives_repository& rp) const;

@@ -36,27 +36,22 @@ std::string traits::class_header_formatter_name() {
     return r;
 }
 
-std::string traits::forward_declarations_formatter_name() {
-    static std::string r(traits::facet_name() +
-        ".forward_declarations_formatter");
-    return r;
-}
-
 std::string traits::class_implementation_formatter_name() {
     static std::string r(traits::facet_name() +
         ".class_implementation_formatter");
     return r;
 }
 
-std::string traits::enumeration_header_formatter_name() {
+std::string traits::forward_declarations_formatter_name() {
     static std::string r(traits::facet_name() +
-        ".enumeration_header_formatter");
+        ".forward_declarations_formatter");
     return r;
 }
 
-std::string traits::enumeration_implementation_formatter_name() {
-    static std::string r(traits::facet_name() + ".exception_header_formatter");
+std::string traits::registrar_header_formatter_name() {
+    static std::string r(traits::facet_name() + ".registrar_header_formatter");
     return r;
 }
+
 
 } } } }

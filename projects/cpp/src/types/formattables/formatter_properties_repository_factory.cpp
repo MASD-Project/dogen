@@ -24,7 +24,6 @@
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
-#include "dogen/cpp/types/formattables/path_derivatives_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_factory.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/integrated_facets_repository_factory.hpp"
@@ -52,15 +51,6 @@ void formatter_properties_repository_factory::initialise_registrar(
         f->register_inclusion_dependencies_provider(rg);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished registering all providers.";
-}
-
-path_derivatives_repository formatter_properties_repository_factory::
-create_path_derivatives_repository(const config::cpp_options& opts,
-    const dynamic::repository& rp, const dynamic::object& ro,
-    const formatters::container& fc,
-    const sml::model& m) const {
-    path_derivatives_repository_factory f;
-    return f.make(opts, rp, ro, fc, m);
 }
 
 inclusion_directives_repository formatter_properties_repository_factory::
@@ -138,13 +128,12 @@ create_formatter_properties(
 }
 
 formatter_properties_repository formatter_properties_repository_factory::
-make(const config::cpp_options& opts, const dynamic::repository& srp,
-    const dynamic::object& root_object, const formatters::container& fc,
-    const settings::bundle_repository& brp, const sml::model& m) const {
+make(const dynamic::repository& srp, const dynamic::object& root_object,
+    const settings::bundle_repository& brp,
+    const path_derivatives_repository& pdrp, const formatters::container& fc,
+    const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Building formatter properties repository.";
-    const auto& ro(root_object);
-    const auto pdrp(create_path_derivatives_repository(opts, srp, ro, fc, m));
     const auto idrp(create_inclusion_directives_repository(srp, fc, pdrp, m));
     const auto erp(create_enablement_repository(srp, root_object, fc, m));
     const auto ifrp(create_integrated_facets_repository(srp, root_object, fc));

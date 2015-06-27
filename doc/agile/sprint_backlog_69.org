@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-26 Fri 17:52]
+#+CAPTION: Clock summary at [2015-06-27 Sat 16:38]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:30* |       |      |
+| *Total time*                                                                | *21:27* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:30   |       |      |
-| Active                                                                      |         | 19:30 |      |
+| Stories                                                                     | 21:27   |       |      |
+| Active                                                                      |         | 21:27 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -33,7 +33,7 @@
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Create a formattables factory                                       |         |       | 1:34 |
+| STARTED Create a formattables factory                                       |         |       | 3:31 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -312,6 +312,9 @@ What can be said about an archetype:
   sensitivity to domain types (but may have sensitivity to other
   things such as options) it is internal. The naming around this is
   not totally clear.
+- internal formatters may not be allowed to be disabled. For example,
+  if serialisation is on, registrar must be generated. With
+  CMakeLists, we may want do disable them altogether.
 - in the thrift story in the backlog we mention the existence of
   mutually exclusive groups of facets. We should also come up with a
   name for these.
@@ -324,6 +327,7 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-27 Sat 14:41]--[2015-06-27 Sat 16:38] =>  1:57
     CLOCK: [2015-06-26 Fri 17:33]--[2015-06-26 Fri 17:51] =>  0:18
     CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
     CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
@@ -354,7 +358,19 @@ Problems:
   objects and create the correct formattables for it. This sounds too
   complicated (and circular). However, somehow we need to
   short-circuit the path derivatives, properties, etc generation and
-  inject a C++ specific type.
+  inject a C++ specific type. Actually, of all the things that we
+  provide for "regular" SML types, all we need is enablement and file
+  path. We can easily generate these from the factory.
+
+*** Add include providers for all types                               :story:
+
+We need to implement the provider container support for primitives,
+modules and concepts.
+
+Update:
+
+- inclusion dependencies factory
+- provider container
 
 *** Implement odb options formatter in odb                            :story:
 

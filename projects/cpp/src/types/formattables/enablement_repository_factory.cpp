@@ -108,7 +108,6 @@ enablement_repository_factory::create_field_definitions(
     return r;
 }
 
-
 std::unordered_map<std::string, global_enablement_properties>
 enablement_repository_factory::obtain_global_properties(
     const std::unordered_map<std::string, field_definitions>& field_definitions,
