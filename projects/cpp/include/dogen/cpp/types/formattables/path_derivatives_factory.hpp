@@ -44,7 +44,7 @@ namespace formattables {
 class path_derivatives_factory {
 public:
     path_derivatives_factory(
-        const config::cpp_options& o,
+        const config::cpp_options& opts,
         const sml::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps);
 

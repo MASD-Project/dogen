@@ -49,10 +49,9 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
-    const config::cpp_options& o,
-    const sml::model& m,
+    const config::cpp_options& opts, const sml::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
-    : options_(o), model_(m), path_settings_(ps) { }
+    : options_(opts), model_(m), path_settings_(ps) { }
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
@@ -138,7 +137,6 @@ make_file_path(const settings::path_settings& ps,
 
     default:
         BOOST_LOG_SEV(lg, error) << unsupported_file_type << ft;
-
         BOOST_THROW_EXCEPTION(building_error(unsupported_file_type +
                 boost::lexical_cast<std::string>(ft)));
     }
@@ -170,8 +168,8 @@ to_header_guard_name(const boost::filesystem::path& p) const {
     return ss.str();
 }
 
-std::unordered_map<std::string, path_derivatives> path_derivatives_factory::
-make(const sml::qname& qn) const {
+std::unordered_map<std::string, path_derivatives>
+path_derivatives_factory::make(const sml::qname& qn) const {
     std::unordered_map<std::string, path_derivatives> r;
 
     for (const auto& pair : path_settings_) {
