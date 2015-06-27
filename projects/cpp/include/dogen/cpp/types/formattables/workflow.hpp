@@ -94,6 +94,7 @@ private:
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formattables::path_derivatives_repository& pdrp,
         const formatter_properties_repository& fprp,
+        const formatters::container& fc,
         const sml::model& m) const;
 
 public:

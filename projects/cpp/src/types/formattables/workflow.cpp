@@ -145,12 +145,14 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formattables::path_derivatives_repository& pdrp,
     const formatter_properties_repository& fprp,
+    const formatters::container& fc,
     const sml::model& m) const {
 
+    const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
     factory f;
     r.push_front(f.make_registrar_info(opts, ps, fprp, m));
-    r.splice_after(r.before_begin(), f.make_includers(pdrp));
+    r.splice_after(r.before_begin(), f.make_includers(pdrp, formatters, m));
     r.splice_after(r.before_begin(), f.make_cmakelists(opts, m));
     r.push_front(f.make_odb_options(opts, m));
     return r;
@@ -173,7 +175,7 @@ workflow::execute(const config::cpp_options& opts,
 
     auto r(from_transformer_activity(osb, brp, fprp, m));
     const auto bb(r.before_begin());
-    r.splice_after(bb, from_factory_activity(opts, ps, pdrp, fprp, m));
+    r.splice_after(bb, from_factory_activity(opts, ps, pdrp, fprp, fc, m));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 

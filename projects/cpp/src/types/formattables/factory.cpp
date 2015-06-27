@@ -41,6 +41,7 @@ const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
 const std::string properties_not_found_for_root(
     "Formatter properties not found for root object.");
+const std::string empty_formatter_name("Formatter name is empty.");
 
 }
 
@@ -127,10 +128,54 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 }
 
 std::forward_list<std::shared_ptr<formattable> > factory::
-make_includers(const formattables::path_derivatives_repository& /*rp*/) const {
-    std::shared_ptr<includers_info> inc(new includers_info());
+make_includers(const formattables::path_derivatives_repository& /*pdrp*/,
+    const std::forward_list<
+    std::shared_ptr<formatters::formatter_interface>>& /*formatters*/,
+    const sml::model& /*m*/) const {
+    /*std::unordered_map<std::string, std::list<std::string> >
+        includes_by_formatter_name;
+
+    for (const auto& qn_pair : pdrp.path_derivatives_by_qname()) {
+        const auto qn(qn_pair.first);
+
+        if (qn.model_name() != m.name().model_name())
+            continue;
+
+        for (const auto& fmt_pair : qn_pair.second) {
+            const auto fn(fmt_pair.first);
+            const auto pd(fmt_pair.second);
+
+            const auto id(pd.inclusion_directive());
+            if (id)
+                includes_by_formatter_name[fn].push_back(*id);
+        }
+    }
+
+    std::unordered_map<std::string, std::list<std::string> >
+        includes_by_facet_name;
+    for(const auto f : formatters) {
+        const auto& oh(f->ownership_hierarchy());
+        if (oh.formatter_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+            BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
+        }
+
+        const auto i(includes_by_formatter_name.find(oh.formatter_name()));
+        if (i == includes_by_formatter_name.end())
+            continue;
+
+        auto& ifn(includes_by_facet_name[oh.facet_name()]);
+        ifn.splice(ifn.begin(), i->second);
+    }
+    */
     std::forward_list<std::shared_ptr<formattable> > r;
-    r.push_front(inc);
+    /*    for(const auto& pair : includes_by_facet_name) {
+        auto inc(std::make_shared<includers_info>());
+        // FIXME: formatter properties, etc.
+
+
+        r.push_front(inc);
+        }*/
     return r;
 }
 

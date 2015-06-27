@@ -30,6 +30,7 @@
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
 #include "dogen/cpp/types/formattables/includers_info.hpp"
 #include "dogen/cpp/types/formattables/cmakelists_info.hpp"
@@ -49,11 +50,14 @@ public:
         const formatter_properties_repository& fprp,
         const sml::model& m) const;
 
-    std::forward_list<std::shared_ptr<formattable> >
-    make_includers(const formattables::path_derivatives_repository& rp) const;
+    std::forward_list<std::shared_ptr<formattable> > make_includers(
+        const formattables::path_derivatives_repository& pdrp,
+        const std::forward_list<
+        std::shared_ptr<formatters::formatter_interface>>& formatters,
+        const sml::model& m) const;
 
-    std::forward_list<std::shared_ptr<formattable> >
-    make_cmakelists(const config::cpp_options& opts, const sml::model& m) const;
+    std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
+        const config::cpp_options& opts, const sml::model& m) const;
 
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts, const sml::model& m) const;
