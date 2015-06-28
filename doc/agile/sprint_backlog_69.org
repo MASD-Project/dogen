@@ -318,6 +318,8 @@ What can be said about an archetype:
 - in the thrift story in the backlog we mention the existence of
   mutually exclusive groups of facets. We should also come up with a
   name for these.
+- archetype may not be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and archetype
+  patterns]].
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the
