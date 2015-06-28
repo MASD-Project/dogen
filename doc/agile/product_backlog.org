@@ -3671,6 +3671,16 @@ entity pointers rather than qnames. It is not clear what models such
 as CPP should be doing since the pointers are not particularly useful
 there.
 
+This would also be a good opportunity to use something like a pointer
+container for all the pointers and then use either a "dumb pointer" or
+even references everywhere. Since we know the container will exist for
+the duration of a run, we can rely on the objects being managed
+elsewhere. This is a better way rather than using shared pointers
+everywhere. Alexandrescu [[https://www.youtube.com/watch?v%3DQq_WaiwzOtI][discusses at length]] the side-effects of using
+shared pointers. Whilst this is probably not a problem for Dogen, we
+want to explore ways of doing the right thing. There is also the
+[[https://vimeo.com/131189627][Josuttis talk]] on the subject.
+
 Merged with other story:
 
 Once the model has been merged and resolved, all qnames in the model
