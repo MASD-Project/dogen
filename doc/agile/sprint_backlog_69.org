@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-29 Mon 20:27]
+#+CAPTION: Clock summary at [2015-06-29 Mon 20:42]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *27:30* |       |      |
+| *Total time*                                                                | *27:44* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 27:30   |       |      |
-| Active                                                                      |         | 27:30 |      |
+| Stories                                                                     | 27:44   |       |      |
+| Active                                                                      |         | 27:44 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -34,7 +34,7 @@
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Create a formattables factory                                       |         |       | 5:54 |
+| STARTED Create a formattables factory                                       |         |       | 6:08 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -359,6 +359,7 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-29 Mon 20:28]--[2015-06-29 Mon 20:42] =>  0:14
     CLOCK: [2015-06-29 Mon 17:01]--[2015-06-29 Mon 17:54] =>  0:53
     CLOCK: [2015-06-27 Sat 17:34]--[2015-06-27 Sat 18:10] =>  0:36
     CLOCK: [2015-06-27 Sat 16:39]--[2015-06-27 Sat 17:33] =>  0:54
@@ -399,6 +400,16 @@ Notes:
 - we need to somehow be able to create the path derivatives for a
   single path settings. We need to generate file names for all files
   in the factory and this requires path derivatives.
+- the generation of the includes for the includers cannot be done from
+  the providers. This is because it will be missing the includes for
+  internal types such as serialisation registrar. Other than that we
+  could do it from the provider; the only ugly part of the API is that
+  we'd be receiving an SML object for no reason.
+- in an ideal world we would like to inject the qnames for the
+  internal types into the formatter properties generation. Not
+  everything is qname dependent, but what is should be
+  common. However the problem we have is that not all qnames support
+  all formatters.
 
 *** Add include providers for all types                               :story:
 
