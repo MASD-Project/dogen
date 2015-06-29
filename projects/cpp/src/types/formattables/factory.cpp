@@ -39,8 +39,8 @@ const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
 const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
-const std::string properties_not_found_for_root(
-    "Formatter properties not found for root object.");
+const std::string properties_not_found(
+    "Formatter properties not found for: ");
 const std::string empty_formatter_name("Formatter name is empty.");
 
 }
@@ -49,14 +49,82 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
+std::unordered_map<std::string, settings::path_settings>
+factory::clone_path_settings(
+    const std::unordered_map<std::string, settings::path_settings>& source,
+    const std::string& source_formatter_name,
+    const std::string& destination_formatter_name) const {
+
+    const auto i(source.find(source_formatter_name));
+    if (i == source.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
+                                 << source_formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + source_formatter_name));
+    }
+
+    std::unordered_map<std::string, settings::path_settings> r;
+    r.insert(std::make_pair(destination_formatter_name, i->second));
+    return r;
+}
+
+sml::qname factory::create_qname(const sml::model& m,
+    const std::string& simple_name) const {
+
+    sml::qname r;
+    r.simple_name(simple_name);
+    r.model_name(m.name().model_name());
+    r.external_module_path(m.name().external_module_path());
+    return r;
+}
+
+path_derivatives factory::create_path_derivatives(
+    const config::cpp_options& opts, const sml::model& m,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const sml::qname& qn,
+    const std::string& formatter_name) const {
+
+    path_derivatives_factory pdf(opts, m, ps);
+    const auto pd(pdf.make(qn));
+    const auto i(pd.find(formatter_name));
+    if (i == pd.end()) {
+        BOOST_LOG_SEV(lg, error) << derivatives_not_found_for_formatter
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(
+                derivatives_not_found_for_formatter + formatter_name));
+    }
+    return i->second;
+}
+
+bool factory::is_enabled(const formatter_properties_repository& fprp,
+    const sml::qname& qn, const std::string& formatter_name) const {
+
+    const auto i(fprp.formatter_properties_by_qname().find(qn));
+    if (i == fprp.formatter_properties_by_qname().end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << properties_not_found << n;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
+    }
+
+    const auto j(i->second.find(formatter_name));
+    if (j == i->second.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
+                                 << formatter_name;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + formatter_name));
+    }
+    return j->second.enabled();
+}
+
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Making a registrar for model: "
-                             << sml::string_converter::convert(m.name());
+    const auto qn(create_qname(m, registrar_name));
+    BOOST_LOG_SEV(lg, debug) << "Making registrar: "
+                             << sml::string_converter::convert(qn);
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
@@ -76,54 +144,18 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     using formatters::serialization::traits;
     const auto ch_fn(traits::class_header_formatter_name());
-    const auto i(ps.find(ch_fn));
-    if (i == ps.end()) {
-        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter << ch_fn;
-        BOOST_THROW_EXCEPTION(
-            building_error(settings_not_found_for_formatter + ch_fn));
-    }
-
-    std::unordered_map<std::string, settings::path_settings> ps2;
     const auto rh_fn(traits::registrar_header_formatter_name());
-    ps2.insert(std::make_pair(rh_fn, i->second));
-
-    sml::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
-
-    path_derivatives_factory pdf(opts, m, ps2);
-    const auto pd(pdf.make(qn));
+    const auto cloned_ps(clone_path_settings(ps, ch_fn, rh_fn));
+    const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, rh_fn));
 
     formatter_properties p;
-    const auto j(pd.find(rh_fn));
-    if (j == pd.end()) {
-        BOOST_LOG_SEV(lg, error) << derivatives_not_found_for_formatter
-                                 << rh_fn;
-        BOOST_THROW_EXCEPTION(
-            building_error(derivatives_not_found_for_formatter + rh_fn));
-    }
-    p.file_path(j->second.file_path());
-    p.header_guard(j->second.header_guard());
-
-    const auto k(fprp.formatter_properties_by_qname().find(m.name()));
-    if (k == fprp.formatter_properties_by_qname().end()) {
-        BOOST_LOG_SEV(lg, error) << properties_not_found_for_root;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found_for_root));
-    }
-
-    const auto l(k->second.find(ch_fn));
-    if (l == k->second.end()) {
-        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter << ch_fn;
-        BOOST_THROW_EXCEPTION(
-            building_error(settings_not_found_for_formatter + ch_fn));
-    }
-    p.enabled(l->second.enabled());
-
+    p.file_path(pd.file_path());
+    p.header_guard(pd.header_guard());
+    p.enabled(is_enabled(fprp, m.name(), ch_fn));
     r->formatter_properties().insert(std::make_pair(rh_fn, p));
 
-    BOOST_LOG_SEV(lg, debug) << "Made registrar.";
-
+    BOOST_LOG_SEV(lg, debug) << "Made registrar: "
+                             << sml::string_converter::convert(qn);
     return r;
 }
 

@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-27 Sat 18:09]
+#+CAPTION: Clock summary at [2015-06-29 Mon 17:54]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:57* |       |      |
+| *Total time*                                                                | *25:54* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:57   |       |      |
-| Active                                                                      |         | 22:57 |      |
+| Stories                                                                     | 25:54   |       |      |
+| Active                                                                      |         | 25:54 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
-| COMPLETED Create a short presentation on Dogen                              |         |       | 4:33 |
+| COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
 | COMPLETED Implement class header formatter in odb                           |         |       | 1:29 |
@@ -33,7 +33,7 @@
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Create a formattables factory                                       |         |       | 5:01 |
+| STARTED Create a formattables factory                                       |         |       | 5:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -51,6 +51,10 @@ Use downtime to update the manual and / or readme file.
 
 *** COMPLETED Create a short presentation on Dogen                    :story:
     CLOSED: [2015-06-23 Tue 16:28]
+    CLOCK: [2015-06-29 Mon 15:01]--[2015-06-29 Mon 16:10] =>  1:09
+    CLOCK: [2015-06-29 Mon 14:44]--[2015-06-29 Mon 14:57] =>  0:13
+    CLOCK: [2015-06-29 Mon 14:32]--[2015-06-29 Mon 14:43] =>  0:11
+    CLOCK: [2015-06-29 Mon 14:01]--[2015-06-29 Mon 14:32] =>  0:31
     CLOCK: [2015-06-23 Tue 15:30]--[2015-06-23 Tue 16:20] =>  0:50
     CLOCK: [2015-06-22 Mon 15:33]--[2015-06-22 Mon 18:10] =>  2:37
     CLOCK: [2015-06-22 Mon 15:25]--[2015-06-22 Mon 15:32] =>  0:07
@@ -329,6 +333,7 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-29 Mon 17:01]--[2015-06-29 Mon 17:54] =>  0:53
     CLOCK: [2015-06-27 Sat 17:34]--[2015-06-27 Sat 18:10] =>  0:36
     CLOCK: [2015-06-27 Sat 16:39]--[2015-06-27 Sat 17:33] =>  0:54
     CLOCK: [2015-06-27 Sat 14:41]--[2015-06-27 Sat 16:38] =>  1:57
@@ -368,6 +373,25 @@ Notes:
 - we need to somehow be able to create the path derivatives for a
   single path settings. We need to generate file names for all files
   in the factory and this requires path derivatives.
+
+*** Solve the problem of "relocatable" formatters                     :story:
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types. It is
+probably needed in order to integrate knit and stitch.
+
+Actually this is needed for the includers.
 
 *** Add include providers for all types                               :story:
 

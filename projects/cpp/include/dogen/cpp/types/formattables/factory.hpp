@@ -43,6 +43,26 @@ namespace cpp {
 namespace formattables {
 
 class factory final {
+private:
+    std::unordered_map<std::string, settings::path_settings>
+    clone_path_settings(
+        const std::unordered_map<std::string, settings::path_settings>& source,
+        const std::string& source_formatter_name,
+        const std::string& destination_formatter_name) const;
+
+    sml::qname create_qname(const sml::model& m,
+        const std::string& simple_name) const;
+
+    path_derivatives create_path_derivatives(
+        const config::cpp_options& opts,
+        const sml::model& m,
+        const std::unordered_map<std::string, settings::path_settings>& ps,
+        const sml::qname& qn,
+        const std::string& formatter_name) const;
+
+    bool is_enabled(const formatter_properties_repository& fprp,
+        const sml::qname& qn, const std::string& formatter_name) const;
+
 public:
     std::shared_ptr<formattable> make_registrar_info(
         const config::cpp_options& opts,
