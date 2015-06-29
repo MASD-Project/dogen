@@ -89,7 +89,7 @@ enablement_repository_factory::create_field_definitions(
     const formatters::container& fc) const {
     const dynamic::repository_selector s(rp);
     std::unordered_map<std::string, field_definitions> r;
-    for (const auto& f : fc.all_formatters()) {
+    for (const auto& f : fc.all_external_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
         field_definitions fd;

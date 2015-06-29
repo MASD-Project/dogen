@@ -25,12 +25,31 @@
 #pragma once
 #endif
 
+#include "dogen/cpp/types/formatters/includers_formatter_interface.hpp"
+
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-class includers_formatter {
-    
+class includers_formatter final : public includers_formatter_interface {
+public:
+    explicit includers_formatter(const std::string& facet_name);
+
+public:
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
+
+    file_types file_type() const override;
+
+    formattables::origin_types formattable_origin_type() const;
+
+    void register_inclusion_dependencies_provider(
+        formattables::registrar& rg) const override;
+
+    dogen::formatters::file
+    format(const formattables::includers_info& i) const override;
+
+public:
+    const dynamic::ownership_hierarchy ownership_hierarchy_;
 };
 
 } } }

@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-29 Mon 17:54]
+#+CAPTION: Clock summary at [2015-06-29 Mon 20:27]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *25:54* |       |      |
+| *Total time*                                                                | *27:30* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 25:54   |       |      |
-| Active                                                                      |         | 25:54 |      |
+| Stories                                                                     | 27:30   |       |      |
+| Active                                                                      |         | 27:30 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:31 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -32,6 +32,7 @@
 | COMPLETED Split formatters into per instance and singleton                  |         |       | 1:10 |
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
+| COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
 | STARTED Create a formattables factory                                       |         |       | 5:54 |
 #+end:
@@ -218,6 +219,28 @@ meta-data. However we incorrectly added the command line options to
 the path settings factory. We need to remove this and pass the command
 line options to the path derivatives factory in formattables.
 
+*** COMPLETED Solve the problem of "relocatable" formatters           :story:
+    CLOSED: [2015-06-29 Mon 20:27]
+    CLOCK: [2015-06-29 Mon 19:58]--[2015-06-29 Mon 20:27] =>  0:29
+    CLOCK: [2015-06-29 Mon 17:55]--[2015-06-29 Mon 19:02] =>  1:07
+
+There may be cases where a formatter is the same for all facets, but
+we still need to have it instantiated for every facet. At present that
+is not possible because formatters have hard-coded ownership
+hierarchies. In addition, there is the potential for inclusion
+dependencies generation which is also facet specific.
+
+This could be solved by instantiating the formatter in the initializer
+of every facet, and supplying the facet name to the constructor; the
+ownership hierarchy would then use this facet name. This would mean
+that the same formatter would be registered for every facet.
+
+We don't yet have a use case for this. It was thought to be needed for
+forward declarations but at present we only need them for types. It is
+probably needed in order to integrate knit and stitch.
+
+Actually this is needed for the includers.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -322,8 +345,11 @@ What can be said about an archetype:
 - in the thrift story in the backlog we mention the existence of
   mutually exclusive groups of facets. We should also come up with a
   name for these.
-- archetype may not be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and archetype
-  patterns]].
+- archetype may not quite be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and
+  archetype patterns]]. See also:
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/ColourCoding.html][Class Archetypes, UML and Colour]]
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/index.html][Peter Coad's 'Modeling in Color']]
+  - [[http://www.step-10.com/Books/JMCUBook.html][Java Modeling in Color with UML]]
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the
@@ -373,25 +399,6 @@ Notes:
 - we need to somehow be able to create the path derivatives for a
   single path settings. We need to generate file names for all files
   in the factory and this requires path derivatives.
-
-*** Solve the problem of "relocatable" formatters                     :story:
-
-There may be cases where a formatter is the same for all facets, but
-we still need to have it instantiated for every facet. At present that
-is not possible because formatters have hard-coded ownership
-hierarchies. In addition, there is the potential for inclusion
-dependencies generation which is also facet specific.
-
-This could be solved by instantiating the formatter in the initializer
-of every facet, and supplying the facet name to the constructor; the
-ownership hierarchy would then use this facet name. This would mean
-that the same formatter would be registered for every facet.
-
-We don't yet have a use case for this. It was thought to be needed for
-forward declarations but at present we only need them for types. It is
-probably needed in order to integrate knit and stitch.
-
-Actually this is needed for the includers.
 
 *** Add include providers for all types                               :story:
 

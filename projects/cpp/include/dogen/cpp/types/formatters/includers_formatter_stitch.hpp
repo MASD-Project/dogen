@@ -18,28 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INCLUDERS_FORMATTER_STITCH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/cpp/types/formatters/registrar.hpp"
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/includers_info.hpp"
+#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace hash {
 
-/**
- * @brief Initialises the serialization facet.
- */
-class initializer {
-public:
-    static void initialize(registrar& rg);
-};
+dogen::formatters::file includers_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::includers_info& i);
 
-} } } }
+} } }
 
 #endif

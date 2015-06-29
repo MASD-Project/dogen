@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
+#include "dogen/cpp/types/formatters/hash/traits.hpp"
+#include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/types/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/class_implementation_formatter.hpp"
@@ -34,13 +35,8 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-template<typename Formatter>
-inline void initialise_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
-}
-
 void initializer::initialize(registrar& rg) {
+    initialise_formatter<includers_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
     initialise_formatter<enum_header_formatter>(rg);

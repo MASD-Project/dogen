@@ -39,4 +39,8 @@ std::string traits::implementation_formatter_group_name() {
     return r;
 }
 
+std::string traits::includers_formatter_name(const std::string& facet_name) {
+    return facet_name + ".includers_formatter";
+}
+
 } } }

@@ -213,6 +213,26 @@ void registrar::register_formatter(
     common_registration(f);
 }
 
+void registrar::register_formatter(
+    std::shared_ptr<registrar_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.registrar_formatters_.push_front(f);
+    common_registration(f);
+}
+
+void registrar::register_formatter(
+    std::shared_ptr<includers_formatter_interface> f) {
+    // note: not logging by design
+    if (!f)
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+
+    formatter_container_.includers_formatters_.push_front(f);
+    common_registration(f);
+}
+
 const container& registrar::formatter_container() const {
     return formatter_container_;
 }

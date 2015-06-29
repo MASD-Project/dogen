@@ -46,6 +46,9 @@ namespace settings {
 class inclusion_directives_settings_factory {
 public:
     inclusion_directives_settings_factory(const dynamic::repository& rp,
+
+
+
         const formatters::container& fc);
 
 private:

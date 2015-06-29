@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
+#include "dogen/cpp/types/formatters/odb/traits.hpp"
+#include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/odb_options_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
@@ -28,13 +29,8 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-template<typename Formatter>
-inline void initialise_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
-}
-
 void initializer::initialize(registrar& rg) {
+    initialise_formatter<includers_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<odb_options_formatter>(rg);
 }

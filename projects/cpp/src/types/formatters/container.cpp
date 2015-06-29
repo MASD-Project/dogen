@@ -88,6 +88,12 @@ const std::forward_list<
     return registrar_formatters_;
 }
 
+const std::forward_list<
+    std::shared_ptr<formatters::includers_formatter_interface>
+    >& container::includers_formatters() const {
+    return includers_formatters_;
+}
+
 const std::forward_list<std::shared_ptr<formatters::formatter_interface>>&
 container::all_formatters() const {
     return all_formatters_;

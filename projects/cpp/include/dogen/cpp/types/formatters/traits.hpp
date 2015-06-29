@@ -46,6 +46,11 @@ struct traits {
      * @brief Name of the header formatter group.
      */
     static std::string implementation_formatter_group_name();
+
+    /**
+     * @brief Name of the includers formatter.
+     */
+    static std::string includers_formatter_name(const std::string& facet_name);
 };
 
 } } }

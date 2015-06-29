@@ -40,6 +40,7 @@
 #include "dogen/cpp/types/formatters/primitive_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/concept_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -125,6 +126,12 @@ public:
     void register_formatter(
         std::shared_ptr<registrar_formatter_interface> f);
 
+    /**
+     * @brief Registers an includers formatter.
+     */
+    void register_formatter(
+        std::shared_ptr<includers_formatter_interface> f);
+
 public:
     /**
      * @brief Returns all available formatters.
@@ -141,6 +148,18 @@ private:
     container formatter_container_;
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy_;
 };
+
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg) {
+    const auto f(std::make_shared<Formatter>());
+    rg.register_formatter(f);
+}
+
+template<typename Formatter>
+inline void initialise_formatter(registrar& rg, const std::string& facet_name) {
+    const auto f(std::make_shared<Formatter>(facet_name));
+    rg.register_formatter(f);
+}
 
 } } }
 

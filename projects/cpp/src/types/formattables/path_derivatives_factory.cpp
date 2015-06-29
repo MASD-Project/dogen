@@ -30,7 +30,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("cpp.settings.path_derivatives_factory"));
+static logger lg(logger_factory("cpp.formattables.path_derivatives_factory"));
 
 const std::string empty;
 const std::string underscore("_");

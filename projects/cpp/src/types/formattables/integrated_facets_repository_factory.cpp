@@ -51,7 +51,7 @@ integrated_facets_repository_factory::make(const dynamic::repository& rp,
     // get its facet name. Then look for the integrated facets for
     // that facet. Then associate those integrated facets with the
     // formatter name - not the facet name.
-    for (const auto& f : fc.all_formatters()) {
+    for (const auto& f : fc.all_external_formatters()) {
         const auto oh(f->ownership_hierarchy());
         const auto& fctn(oh.facet_name());
         const auto iffd(s.try_select_field_by_name(fctn, ifct));

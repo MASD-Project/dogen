@@ -39,6 +39,7 @@
 #include "dogen/cpp/types/formatters/primitive_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/concept_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/includers_formatter_interface.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
 
 namespace dogen {
@@ -143,6 +144,14 @@ public:
         >&
     registrar_formatters() const;
 
+    /**
+     * @brief Returns all available includers formatters.
+     */
+    const std::forward_list<
+        std::shared_ptr<formatters::includers_formatter_interface>
+        >&
+    includers_formatters() const;
+
 public:
     /**
      * @brief Returns all available formatters.
@@ -191,6 +200,9 @@ private:
     std::forward_list<std::shared_ptr<
         formatters::registrar_formatter_interface> >
     registrar_formatters_;
+    std::forward_list<std::shared_ptr<
+        formatters::includers_formatter_interface> >
+    includers_formatters_;
     std::forward_list<std::shared_ptr<formatters::formatter_interface>>
         all_formatters_;
     std::forward_list<std::shared_ptr<formatters::formatter_interface>>

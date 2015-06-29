@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,28 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_HASH_INITIALIZER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/cpp/types/formatters/registrar.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/includers_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace hash {
 
-/**
- * @brief Initialises the serialization facet.
- */
-class initializer {
-public:
-    static void initialize(registrar& rg);
-};
+dogen::formatters::file includers_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::includers_info& /*i*/) {
 
-} } } }
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 
-#endif
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    return fa.make_file();
+}
+} } }
