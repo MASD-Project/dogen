@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/odb_options_info.hpp"
 
@@ -28,6 +29,21 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace dogen {
@@ -41,7 +57,8 @@ odb_options_info::odb_options_info(odb_options_info&& rhs)
       product_name_(std::move(rhs.product_name_)),
       file_path_(std::move(rhs.file_path_)),
       file_name_(std::move(rhs.file_name_)),
-      odb_folder_(std::move(rhs.odb_folder_)) { }
+      odb_folder_(std::move(rhs.odb_folder_)),
+      general_settings_(std::move(rhs.general_settings_)) { }
 
 odb_options_info::odb_options_info(
     const std::string& identity,
@@ -50,7 +67,8 @@ odb_options_info::odb_options_info(
     const std::string& product_name,
     const boost::filesystem::path& file_path,
     const std::string& file_name,
-    const std::string& odb_folder)
+    const std::string& odb_folder,
+    const boost::optional<dogen::formatters::general_settings>& general_settings)
     : dogen::cpp::formattables::formattable(
       identity,
       origin_type),
@@ -58,7 +76,8 @@ odb_options_info::odb_options_info(
       product_name_(product_name),
       file_path_(file_path),
       file_name_(file_name),
-      odb_folder_(odb_folder) { }
+      odb_folder_(odb_folder),
+      general_settings_(general_settings) { }
 
 void odb_options_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -70,7 +89,8 @@ void odb_options_info::to_stream(std::ostream& s) const {
       << "\"product_name\": " << "\"" << tidy_up_string(product_name_) << "\"" << ", "
       << "\"file_path\": " << "\"" << file_path_.generic_string() << "\"" << ", "
       << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
-      << "\"odb_folder\": " << "\"" << tidy_up_string(odb_folder_) << "\""
+      << "\"odb_folder\": " << "\"" << tidy_up_string(odb_folder_) << "\"" << ", "
+      << "\"general_settings\": " << general_settings_
       << " }";
 }
 
@@ -83,6 +103,7 @@ void odb_options_info::swap(odb_options_info& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(file_name_, other.file_name_);
     swap(odb_folder_, other.odb_folder_);
+    swap(general_settings_, other.general_settings_);
 }
 
 bool odb_options_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -97,7 +118,8 @@ bool odb_options_info::operator==(const odb_options_info& rhs) const {
         product_name_ == rhs.product_name_ &&
         file_path_ == rhs.file_path_ &&
         file_name_ == rhs.file_name_ &&
-        odb_folder_ == rhs.odb_folder_;
+        odb_folder_ == rhs.odb_folder_ &&
+        general_settings_ == rhs.general_settings_;
 }
 
 odb_options_info& odb_options_info::operator=(odb_options_info other) {
@@ -184,6 +206,22 @@ void odb_options_info::odb_folder(const std::string& v) {
 
 void odb_options_info::odb_folder(const std::string&& v) {
     odb_folder_ = std::move(v);
+}
+
+const boost::optional<dogen::formatters::general_settings>& odb_options_info::general_settings() const {
+    return general_settings_;
+}
+
+boost::optional<dogen::formatters::general_settings>& odb_options_info::general_settings() {
+    return general_settings_;
+}
+
+void odb_options_info::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
+    general_settings_ = v;
+}
+
+void odb_options_info::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
+    general_settings_ = std::move(v);
 }
 
 } } }

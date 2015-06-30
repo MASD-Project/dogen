@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/formatters/test_data/general_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/odb_options_info_td.hpp"
 
@@ -37,6 +38,18 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
+dogen::formatters::general_settings
+create_dogen_formatters_general_settings(const unsigned int position) {
+    return dogen::formatters::general_settings_generator::create(position);
+}
+
+boost::optional<dogen::formatters::general_settings>
+create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
+    boost::optional<dogen::formatters::general_settings> r(
+        create_dogen_formatters_general_settings(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -53,6 +66,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_path(create_boost_filesystem_path(position + 2));
     v.file_name(create_std_string(position + 3));
     v.odb_folder(create_std_string(position + 4));
+    v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 5));
 }
 
 odb_options_info_generator::result_type

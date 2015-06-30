@@ -241,7 +241,9 @@ make_includers(
 }
 
 std::forward_list<std::shared_ptr<formattable> > factory::
-make_cmakelists(const config::cpp_options& opts, const sml::model& m) const
+make_cmakelists(const config::cpp_options& opts,
+    const boost::optional<dogen::formatters::general_settings> gs,
+    const sml::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
     if (opts.disable_cmakelists()) {
@@ -254,6 +256,7 @@ make_cmakelists(const config::cpp_options& opts, const sml::model& m) const
     cm->model_name(m.name().model_name());
     cm->file_name(cmakelists_name);
     cm->source_file_path(opts.source_directory_path() / cmakelists_name);
+    cm->general_settings(gs);
 
     if (!m.name().external_module_path().empty())
         cm->product_name(m.name().external_module_path().front());
@@ -267,6 +270,7 @@ make_cmakelists(const config::cpp_options& opts, const sml::model& m) const
 
 std::shared_ptr<formattable>
 factory::make_odb_options(const config::cpp_options& opts,
+    const boost::optional<dogen::formatters::general_settings> gs,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
@@ -283,6 +287,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     auto r(std::make_shared<odb_options_info>());
     r->file_name(odb_options_name);
     r->model_name(m.name().model_name());
+    r->general_settings(gs);
 
     const auto i(ps.find(ch_fn));
     if (i == ps.end()) {

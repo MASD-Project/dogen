@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/formatters/test_data/general_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/cmakelists_info_td.hpp"
 
@@ -35,6 +36,18 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::formatters::general_settings
+create_dogen_formatters_general_settings(const unsigned int position) {
+    return dogen::formatters::general_settings_generator::create(position);
+}
+
+boost::optional<dogen::formatters::general_settings>
+create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
+    boost::optional<dogen::formatters::general_settings> r(
+        create_dogen_formatters_general_settings(position));
+    return r;
 }
 
 }
@@ -54,6 +67,7 @@ populate(const unsigned int position, result_type& v) {
     v.file_name(create_std_string(position + 3));
     v.source_file_path(create_boost_filesystem_path(position + 4));
     v.include_file_path(create_boost_filesystem_path(position + 5));
+    v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 6));
 }
 
 cmakelists_info_generator::result_type

@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/types/formattables/cmakelists_info.hpp"
 
@@ -28,6 +29,21 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\n", "<new_line>");
     boost::replace_all(s, "\"", "<quote>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::general_settings>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<empty>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace dogen {
@@ -42,7 +58,8 @@ cmakelists_info::cmakelists_info(cmakelists_info&& rhs)
       product_name_(std::move(rhs.product_name_)),
       file_name_(std::move(rhs.file_name_)),
       source_file_path_(std::move(rhs.source_file_path_)),
-      include_file_path_(std::move(rhs.include_file_path_)) { }
+      include_file_path_(std::move(rhs.include_file_path_)),
+      general_settings_(std::move(rhs.general_settings_)) { }
 
 cmakelists_info::cmakelists_info(
     const std::string& identity,
@@ -52,7 +69,8 @@ cmakelists_info::cmakelists_info(
     const std::string& product_name,
     const std::string& file_name,
     const boost::filesystem::path& source_file_path,
-    const boost::filesystem::path& include_file_path)
+    const boost::filesystem::path& include_file_path,
+    const boost::optional<dogen::formatters::general_settings>& general_settings)
     : dogen::cpp::formattables::formattable(
       identity,
       origin_type),
@@ -61,7 +79,8 @@ cmakelists_info::cmakelists_info(
       product_name_(product_name),
       file_name_(file_name),
       source_file_path_(source_file_path),
-      include_file_path_(include_file_path) { }
+      include_file_path_(include_file_path),
+      general_settings_(general_settings) { }
 
 void cmakelists_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -74,7 +93,8 @@ void cmakelists_info::to_stream(std::ostream& s) const {
       << "\"product_name\": " << "\"" << tidy_up_string(product_name_) << "\"" << ", "
       << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
       << "\"source_file_path\": " << "\"" << source_file_path_.generic_string() << "\"" << ", "
-      << "\"include_file_path\": " << "\"" << include_file_path_.generic_string() << "\""
+      << "\"include_file_path\": " << "\"" << include_file_path_.generic_string() << "\"" << ", "
+      << "\"general_settings\": " << general_settings_
       << " }";
 }
 
@@ -88,6 +108,7 @@ void cmakelists_info::swap(cmakelists_info& other) noexcept {
     swap(file_name_, other.file_name_);
     swap(source_file_path_, other.source_file_path_);
     swap(include_file_path_, other.include_file_path_);
+    swap(general_settings_, other.general_settings_);
 }
 
 bool cmakelists_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -103,7 +124,8 @@ bool cmakelists_info::operator==(const cmakelists_info& rhs) const {
         product_name_ == rhs.product_name_ &&
         file_name_ == rhs.file_name_ &&
         source_file_path_ == rhs.source_file_path_ &&
-        include_file_path_ == rhs.include_file_path_;
+        include_file_path_ == rhs.include_file_path_ &&
+        general_settings_ == rhs.general_settings_;
 }
 
 cmakelists_info& cmakelists_info::operator=(cmakelists_info other) {
@@ -206,6 +228,22 @@ void cmakelists_info::include_file_path(const boost::filesystem::path& v) {
 
 void cmakelists_info::include_file_path(const boost::filesystem::path&& v) {
     include_file_path_ = std::move(v);
+}
+
+const boost::optional<dogen::formatters::general_settings>& cmakelists_info::general_settings() const {
+    return general_settings_;
+}
+
+boost::optional<dogen::formatters::general_settings>& cmakelists_info::general_settings() {
+    return general_settings_;
+}
+
+void cmakelists_info::general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
+    general_settings_ = v;
+}
+
+void cmakelists_info::general_settings(const boost::optional<dogen::formatters::general_settings>&& v) {
+    general_settings_ = std::move(v);
 }
 
 } } }

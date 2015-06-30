@@ -28,7 +28,9 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/serialization/formattables/odb_options_info_fwd_ser.hpp"
 
@@ -57,7 +59,8 @@ public:
         const std::string& product_name,
         const boost::filesystem::path& file_path,
         const std::string& file_name,
-        const std::string& odb_folder);
+        const std::string& odb_folder,
+        const boost::optional<dogen::formatters::general_settings>& general_settings);
 
 private:
     template<typename Archive>
@@ -137,6 +140,11 @@ public:
     void odb_folder(const std::string&& v);
     /**@}*/
 
+    const boost::optional<dogen::formatters::general_settings>& general_settings() const;
+    boost::optional<dogen::formatters::general_settings>& general_settings();
+    void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
+    void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
+
 public:
     bool operator==(const odb_options_info& rhs) const;
     bool operator!=(const odb_options_info& rhs) const {
@@ -156,6 +164,7 @@ private:
     boost::filesystem::path file_path_;
     std::string file_name_;
     std::string odb_folder_;
+    boost::optional<dogen::formatters::general_settings> general_settings_;
 };
 
 } } }

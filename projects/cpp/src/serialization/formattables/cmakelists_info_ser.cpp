@@ -24,11 +24,13 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
+#include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/cmakelists_info_ser.hpp"
 
@@ -51,6 +53,7 @@ void save(Archive& ar,
     ar << make_nvp("file_name", v.file_name_);
     ar << make_nvp("source_file_path", v.source_file_path_.generic_string());
     ar << make_nvp("include_file_path", v.include_file_path_.generic_string());
+    ar << make_nvp("general_settings", v.general_settings_);
 }
 
 template<typename Archive>
@@ -71,6 +74,7 @@ void load(Archive& ar,
     std::string include_file_path_tmp;
     ar >> make_nvp("include_file_path", include_file_path_tmp);
     v.include_file_path_ = include_file_path_tmp;
+    ar >> make_nvp("general_settings", v.general_settings_);
 }
 
 } }

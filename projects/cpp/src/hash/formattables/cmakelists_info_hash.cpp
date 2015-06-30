@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/formatters/hash/general_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/cmakelists_info_hash.hpp"
 
@@ -32,6 +33,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
     std::size_t seed(0);
     combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_boost_optional_dogen_formatters_general_settings(const boost::optional<dogen::formatters::general_settings>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
     return seed;
 }
 
@@ -52,6 +63,7 @@ std::size_t cmakelists_info_hasher::hash(const cmakelists_info& v) {
     combine(seed, v.file_name());
     combine(seed, hash_boost_filesystem_path(v.source_file_path()));
     combine(seed, hash_boost_filesystem_path(v.include_file_path()));
+    combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
 
     return seed;
 }

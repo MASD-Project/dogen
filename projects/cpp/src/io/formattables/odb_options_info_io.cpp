@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/odb_options_info_io.hpp"
 

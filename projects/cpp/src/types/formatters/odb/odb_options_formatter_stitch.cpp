@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/cpp/types/formatters/odb/odb_options_formatter_stitch.hpp"
 
 namespace dogen {
@@ -29,7 +30,14 @@ namespace odb {
 dogen::formatters::file odb_options_formatter_stitch(
     formatters::trivial_formatting_assistant& fa,
     const formattables::odb_options_info& i) {
+
+    {
+        dogen::formatters::cpp::scoped_boilerplate_formatter(
+            fa.stream(), i.general_settings(),
+            std::list<std::string>(),
+            std::string());
 fa.stream() << std::endl;
+    } // sbf
     // return fa.make_file(i.file_path());
     return fa.make_file(i.file_path(), false/*overwrite*/);
 }

@@ -24,11 +24,13 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
+#include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/odb_options_info_ser.hpp"
 
@@ -50,6 +52,7 @@ void save(Archive& ar,
     ar << make_nvp("file_path", v.file_path_.generic_string());
     ar << make_nvp("file_name", v.file_name_);
     ar << make_nvp("odb_folder", v.odb_folder_);
+    ar << make_nvp("general_settings", v.general_settings_);
 }
 
 template<typename Archive>
@@ -65,6 +68,7 @@ void load(Archive& ar,
     v.file_path_ = file_path_tmp;
     ar >> make_nvp("file_name", v.file_name_);
     ar >> make_nvp("odb_folder", v.odb_folder_);
+    ar >> make_nvp("general_settings", v.general_settings_);
 }
 
 } }

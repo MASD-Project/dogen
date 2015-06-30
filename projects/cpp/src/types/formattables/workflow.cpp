@@ -122,6 +122,17 @@ create_formatter_properties(const dynamic::repository& srp,
     return f.make(srp, root_object, brp, pdrp, fc, m);
 }
 
+boost::optional<dogen::formatters::general_settings>
+workflow::obtain_root_object_general_settings(
+    const settings::bundle_repository& brp,
+    const sml::model& m) const {
+    const auto i(brp.bundles_by_qname().find(m.name()));
+    if (i == brp.bundles_by_qname().end())
+        return boost::optional<dogen::formatters::general_settings>();
+
+    return i->second.general_settings();
+}
+
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::from_transformer_activity(
     const settings::opaque_settings_builder& osb,
@@ -140,6 +151,7 @@ workflow::from_transformer_activity(
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
 workflow::from_factory_activity(const config::cpp_options& opts,
+    const boost::optional<dogen::formatters::general_settings> gs,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formattables::path_derivatives_repository& pdrp,
     const formatter_properties_repository& fprp,
@@ -154,10 +166,10 @@ workflow::from_factory_activity(const config::cpp_options& opts,
         r.push_front(ri);
 
     const auto i(r.before_begin());
-    r.splice_after(i, f.make_includers(opts, ps, pdrp, formatters, fprp, m));
-    r.splice_after(r.before_begin(), f.make_cmakelists(opts, m));
+    r.splice_after(i, f.make_includers(opts,ps, pdrp, formatters, fprp, m));
+    r.splice_after(r.before_begin(), f.make_cmakelists(opts, gs, m));
 
-    const auto oi(f.make_odb_options(opts, ps, fprp, m));
+    const auto oi(f.make_odb_options(opts, gs, ps, fprp, m));
     if (oi)
         r.push_front(oi);
 
@@ -182,7 +194,9 @@ workflow::execute(const config::cpp_options& opts,
 
     auto r(from_transformer_activity(osb, brp, fprp, m));
     const auto bb(r.before_begin());
-    r.splice_after(bb, from_factory_activity(opts, ps, pdrp, fprp, fc, m));
+
+    const auto gs(obtain_root_object_general_settings(brp, m));
+    r.splice_after(bb, from_factory_activity(opts, gs, ps, pdrp, fprp, fc, m));
     BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";

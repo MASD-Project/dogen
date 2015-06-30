@@ -29,6 +29,7 @@
 #include <forward_list>
 #include "dogen/sml/types/model.hpp"
 #include "dogen/config/types/cpp_options.hpp"
+#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
@@ -80,10 +81,13 @@ public:
         const sml::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(
-        const config::cpp_options& opts, const sml::model& m) const;
+        const config::cpp_options& opts,
+        const boost::optional<dogen::formatters::general_settings> gs,
+        const sml::model& m) const;
 
     std::shared_ptr<formattable> make_odb_options(
         const config::cpp_options& opts,
+        const boost::optional<dogen::formatters::general_settings> gs,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const sml::model& m) const;
