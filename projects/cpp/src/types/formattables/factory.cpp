@@ -282,7 +282,6 @@ factory::make_odb_options(const config::cpp_options& opts,
 
     auto r(std::make_shared<odb_options_info>());
     r->file_name(odb_options_name);
-    r->file_path(opts.source_directory_path() / odb_options_name);
     r->model_name(m.name().model_name());
 
     const auto i(ps.find(ch_fn));
@@ -293,6 +292,16 @@ factory::make_odb_options(const config::cpp_options& opts,
                 settings_not_found_for_formatter + ch_fn));
     }
     r->odb_folder(i->second.facet_directory());
+
+    boost::filesystem::path fp;
+    if (opts.split_project())
+        fp = opts.source_directory_path();
+    else {
+        fp = opts.project_directory_path() / m.name().model_name();
+        fp /= i->second.source_directory_name();
+    }
+    fp /= odb_options_name;
+    r->file_path(fp);
 
     if (!m.name().external_module_path().empty())
         r->product_name(m.name().external_module_path().front());

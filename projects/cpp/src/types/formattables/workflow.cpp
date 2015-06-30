@@ -128,16 +128,14 @@ workflow::from_transformer_activity(
     const settings::bundle_repository& brp,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
+    BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
 
     const transformer t(osb, brp, fprp, m);
     generator g(t);
     all_model_items_traversal(m, g);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
-    const auto r(g.result());
-    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming formattables.";
+    return g.result();
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -163,6 +161,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     if (oi)
         r.push_front(oi);
 
+    BOOST_LOG_SEV(lg, debug) << "Factory formattables: " << r;
     return r;
 }
 
@@ -184,6 +183,7 @@ workflow::execute(const config::cpp_options& opts,
     auto r(from_transformer_activity(osb, brp, fprp, m));
     const auto bb(r.before_begin());
     r.splice_after(bb, from_factory_activity(opts, ps, pdrp, fprp, fc, m));
+    BOOST_LOG_SEV(lg, debug) << "Formattables: " << r;
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating formattables.";
 
