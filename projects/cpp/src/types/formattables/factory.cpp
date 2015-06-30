@@ -24,6 +24,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
+#include "dogen/cpp/types/formatters/odb/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
@@ -39,6 +40,7 @@ const std::string namespace_separator("::");
 const std::string registrar_name("registrar");
 const std::string includers_name("all");
 const std::string cmakelists_name("CMakeLists.txt");
+const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
 const std::string derivatives_not_found_for_formatter(
@@ -263,32 +265,38 @@ make_cmakelists(const config::cpp_options& opts, const sml::model& m) const
     return r;
 }
 
-std::shared_ptr<formattable> factory::make_odb_options(
-    const config::cpp_options& /*opts*/, const sml::model& /*m*/) const {
-    /*
-      const auto fcts(options_.cpp().enabled_facets());
-      const auto i(fcts.find(config::cpp_facet_types::odb));
-      const bool is_odb_enabled(i != fcts.end());
-      if (!is_odb_enabled) {
-      BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
-      return r;
-      }
+std::shared_ptr<formattable>
+factory::make_odb_options(const config::cpp_options& opts,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const formatter_properties_repository& fprp,
+    const sml::model& m) const {
 
-      const auto path(p.odb_options().file_path());
-      BOOST_LOG_SEV(lg, debug) << "Formatting:" << path.string();
+    using namespace formatters::odb;
+    const auto ch_fn(traits::class_header_formatter_name());
+    if (!is_enabled(fprp, m.name(), ch_fn)) {
+        BOOST_LOG_SEV(lg, info) << "ODB options file generation disabled.";
+        return std::shared_ptr<formattable>();
+    }
 
-      std::ostringstream s;
-      cpp_formatters::odb_options f(s);
-      f.format(p.odb_options());
+    BOOST_LOG_SEV(lg, debug) << "Generating ODB options.";
 
-      formatters::file file;
-      file.path(path);
-      file.content(s.str());
-      r.push_front(file);
+    auto r(std::make_shared<odb_options_info>());
+    r->file_name(odb_options_name);
+    r->file_path(opts.source_directory_path() / odb_options_name);
+    r->model_name(m.name().model_name());
 
+    const auto i(ps.find(ch_fn));
+    if (i == ps.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
+                                 << ch_fn;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + ch_fn));
+    }
+    r->odb_folder(i->second.facet_directory());
 
-     */
-    std::shared_ptr<odb_options_info> r(new odb_options_info());
+    if (!m.name().external_module_path().empty())
+        r->product_name(m.name().external_module_path().front());
+
     return r;
 }
 

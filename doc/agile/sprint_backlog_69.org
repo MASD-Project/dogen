@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-30 Tue 15:12]
+#+CAPTION: Clock summary at [2015-06-30 Tue 15:28]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *28:57* |       |      |
+| *Total time*                                                                | *29:13* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 28:57   |       |      |
-| Active                                                                      |         | 28:57 |      |
+| Stories                                                                     | 29:13   |       |      |
+| Active                                                                      |         | 29:13 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:39 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -33,8 +33,8 @@
 | COMPLETED Implement all missing interfaces and hook them in to workflow     |         |       | 1:22 |
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
+| COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Create a formattables factory                                       |         |       | 7:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -242,6 +242,64 @@ probably needed in order to integrate knit and stitch.
 
 Actually this is needed for the includers.
 
+*** COMPLETED Create a formattables factory                           :story:
+    CLOSED: [2015-06-30 Tue 15:28]
+    CLOCK: [2015-06-30 Tue 15:12]--[2015-06-30 Tue 15:28] =>  0:16
+    CLOCK: [2015-06-30 Tue 14:47]--[2015-06-30 Tue 15:12] =>  0:25
+    CLOCK: [2015-06-30 Tue 14:40]--[2015-06-30 Tue 14:46] =>  0:06
+    CLOCK: [2015-06-30 Tue 13:56]--[2015-06-30 Tue 14:30] =>  0:34
+    CLOCK: [2015-06-29 Mon 20:28]--[2015-06-29 Mon 20:42] =>  0:14
+    CLOCK: [2015-06-29 Mon 17:01]--[2015-06-29 Mon 17:54] =>  0:53
+    CLOCK: [2015-06-27 Sat 17:34]--[2015-06-27 Sat 18:10] =>  0:36
+    CLOCK: [2015-06-27 Sat 16:39]--[2015-06-27 Sat 17:33] =>  0:54
+    CLOCK: [2015-06-27 Sat 14:41]--[2015-06-27 Sat 16:38] =>  1:57
+    CLOCK: [2015-06-26 Fri 17:33]--[2015-06-26 Fri 17:51] =>  0:18
+    CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
+    CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
+    CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
+
+Create a class responsible for instantiating all of the "singleton"
+formatters:
+
+- all includers
+- serialisation registrar
+- odb options
+- all cmakelists
+
+This class will be hooked into the formattables workflow. It will
+hard-code the path and file names for these formattables (but take
+into account things such as prefixes, etc).
+
+Notes:
+
+- registrar info is still an entity and as such needs settings,
+  formatter properties, etc. This means its not so easy to construct
+  it from factory. Perhaps the separation we have is more between
+  "entity" and "non-entity" formattables rather than internal and
+  external. Having said that, for the registrar to go through the same
+  pipeline as the SML types we will have to create a qname
+  etc. Perhaps what would be really needed is a way to inject C++
+  specific types in SML. Transformer would somehow recognise this
+  objects and create the correct formattables for it. This sounds too
+  complicated (and circular). However, somehow we need to
+  short-circuit the path derivatives, properties, etc generation and
+  inject a C++ specific type. Actually, of all the things that we
+  provide for "regular" SML types, all we need is enablement and file
+  path. We can easily generate these from the factory.
+- we need to somehow be able to create the path derivatives for a
+  single path settings. We need to generate file names for all files
+  in the factory and this requires path derivatives.
+- the generation of the includes for the includers cannot be done from
+  the providers. This is because it will be missing the includes for
+  internal types such as serialisation registrar. Other than that we
+  could do it from the provider; the only ugly part of the API is that
+  we'd be receiving an SML object for no reason.
+- in an ideal world we would like to inject the qnames for the
+  internal types into the formatter properties generation. Not
+  everything is qname dependent, but what is should be
+  common. However the problem we have is that not all qnames support
+  all formatters.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -358,62 +416,6 @@ implementation dimension, in which =a= can be represented by =A1, A2,
 ..., An= archetypes. In effect, the implementation dimension has
 multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
-
-*** STARTED Create a formattables factory                             :story:
-    CLOCK: [2015-06-30 Tue 14:47]--[2015-06-30 Tue 15:12] =>  0:25
-    CLOCK: [2015-06-30 Tue 14:40]--[2015-06-30 Tue 14:46] =>  0:06
-    CLOCK: [2015-06-30 Tue 13:56]--[2015-06-30 Tue 14:30] =>  0:34
-    CLOCK: [2015-06-29 Mon 20:28]--[2015-06-29 Mon 20:42] =>  0:14
-    CLOCK: [2015-06-29 Mon 17:01]--[2015-06-29 Mon 17:54] =>  0:53
-    CLOCK: [2015-06-27 Sat 17:34]--[2015-06-27 Sat 18:10] =>  0:36
-    CLOCK: [2015-06-27 Sat 16:39]--[2015-06-27 Sat 17:33] =>  0:54
-    CLOCK: [2015-06-27 Sat 14:41]--[2015-06-27 Sat 16:38] =>  1:57
-    CLOCK: [2015-06-26 Fri 17:33]--[2015-06-26 Fri 17:51] =>  0:18
-    CLOCK: [2015-06-26 Fri 16:40]--[2015-06-26 Fri 17:03] =>  0:23
-    CLOCK: [2015-06-25 Thu 16:45]--[2015-06-25 Thu 17:28] =>  0:43
-    CLOCK: [2015-06-25 Thu 13:20]--[2015-06-25 Thu 13:30] =>  0:10
-
-Create a class responsible for instantiating all of the "singleton"
-formatters:
-
-- all includers
-- serialisation registrar
-- odb options
-- all cmakelists
-
-This class will be hooked into the formattables workflow. It will
-hard-code the path and file names for these formattables (but take
-into account things such as prefixes, etc).
-
-Notes:
-
-- registrar info is still an entity and as such needs settings,
-  formatter properties, etc. This means its not so easy to construct
-  it from factory. Perhaps the separation we have is more between
-  "entity" and "non-entity" formattables rather than internal and
-  external. Having said that, for the registrar to go through the same
-  pipeline as the SML types we will have to create a qname
-  etc. Perhaps what would be really needed is a way to inject C++
-  specific types in SML. Transformer would somehow recognise this
-  objects and create the correct formattables for it. This sounds too
-  complicated (and circular). However, somehow we need to
-  short-circuit the path derivatives, properties, etc generation and
-  inject a C++ specific type. Actually, of all the things that we
-  provide for "regular" SML types, all we need is enablement and file
-  path. We can easily generate these from the factory.
-- we need to somehow be able to create the path derivatives for a
-  single path settings. We need to generate file names for all files
-  in the factory and this requires path derivatives.
-- the generation of the includes for the includers cannot be done from
-  the providers. This is because it will be missing the includes for
-  internal types such as serialisation registrar. Other than that we
-  could do it from the provider; the only ugly part of the API is that
-  we'd be receiving an SML object for no reason.
-- in an ideal world we would like to inject the qnames for the
-  internal types into the formatter properties generation. Not
-  everything is qname dependent, but what is should be
-  common. However the problem we have is that not all qnames support
-  all formatters.
 
 *** Add include providers for all types                               :story:
 

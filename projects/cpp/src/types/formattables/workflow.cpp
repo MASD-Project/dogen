@@ -151,11 +151,18 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
     factory f;
-    r.push_front(f.make_registrar_info(opts, ps, fprp, m));
+    const auto ri(f.make_registrar_info(opts, ps, fprp, m));
+    if (ri)
+        r.push_front(ri);
+
     const auto i(r.before_begin());
     r.splice_after(i, f.make_includers(opts, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(), f.make_cmakelists(opts, m));
-    r.push_front(f.make_odb_options(opts, m));
+
+    const auto oi(f.make_odb_options(opts, ps, fprp, m));
+    if (oi)
+        r.push_front(oi);
+
     return r;
 }
 
