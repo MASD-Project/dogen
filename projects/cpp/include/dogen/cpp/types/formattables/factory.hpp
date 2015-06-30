@@ -71,9 +71,12 @@ public:
         const sml::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_includers(
+        const config::cpp_options& opts,
+        const std::unordered_map<std::string, settings::path_settings>& ps,
         const formattables::path_derivatives_repository& pdrp,
         const std::forward_list<
         std::shared_ptr<formatters::formatter_interface>>& formatters,
+        const formatter_properties_repository& fprp,
         const sml::model& m) const;
 
     std::forward_list<std::shared_ptr<formattable> > make_cmakelists(

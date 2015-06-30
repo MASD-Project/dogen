@@ -43,4 +43,9 @@ std::string traits::includers_formatter_name(const std::string& facet_name) {
     return facet_name + ".includers_formatter";
 }
 
+std::string
+traits::class_header_formatter_name(const std::string& facet_name) {
+    return facet_name + ".class_header_formatter";
+}
+
 } } }

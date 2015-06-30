@@ -22,8 +22,10 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
-#include "dogen/cpp/types/formattables/building_error.hpp"
+#include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
@@ -35,6 +37,7 @@ static logger lg(logger_factory("cpp.formatters.factory"));
 
 const std::string namespace_separator("::");
 const std::string registrar_name("registrar");
+const std::string includers_name("all");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
 const std::string derivatives_not_found_for_formatter(
@@ -160,11 +163,20 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 }
 
 std::forward_list<std::shared_ptr<formattable> > factory::
-make_includers(const formattables::path_derivatives_repository& /*pdrp*/,
+make_includers(
+    const config::cpp_options& opts,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
+    const formattables::path_derivatives_repository& pdrp,
     const std::forward_list<
-    std::shared_ptr<formatters::formatter_interface>>& /*formatters*/,
-    const sml::model& /*m*/) const {
-    /*std::unordered_map<std::string, std::list<std::string> >
+    std::shared_ptr<formatters::formatter_interface>>& formatters,
+    const formatter_properties_repository& fprp,
+    const sml::model& m) const {
+
+    const auto qn(create_qname(m, includers_name));
+    BOOST_LOG_SEV(lg, debug) << "Making includers: "
+                             << sml::string_converter::convert(qn);
+
+    std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
     for (const auto& qn_pair : pdrp.path_derivatives_by_qname()) {
@@ -199,15 +211,29 @@ make_includers(const formattables::path_derivatives_repository& /*pdrp*/,
         auto& ifn(includes_by_facet_name[oh.facet_name()]);
         ifn.splice(ifn.begin(), i->second);
     }
-    */
+
     std::forward_list<std::shared_ptr<formattable> > r;
-    /*    for(const auto& pair : includes_by_facet_name) {
+    for(const auto& pair : includes_by_facet_name) {
+        const auto& facet_name(pair.first);
+
+        using namespace formatters;
+        const auto ch_fn(traits::class_header_formatter_name(facet_name));
+        const auto ifn(traits::includers_formatter_name(facet_name));
+        const auto cloned_ps(clone_path_settings(ps, ch_fn, ifn));
+        const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, ifn));
+
+        formatter_properties p;
+        p.file_path(pd.file_path());
+        p.header_guard(pd.header_guard());
+        p.enabled(is_enabled(fprp, m.name(), ch_fn));
+
         auto inc(std::make_shared<includers_info>());
-        // FIXME: formatter properties, etc.
-
-
+        inc->formatter_properties().insert(std::make_pair(ifn, p));
         r.push_front(inc);
-        }*/
+    }
+    BOOST_LOG_SEV(lg, debug) << "Made includers: "
+                             << sml::string_converter::convert(qn);
+
     return r;
 }
 
