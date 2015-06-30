@@ -27,18 +27,10 @@ namespace formatters {
 namespace odb {
 
 dogen::formatters::file odb_options_formatter_stitch(
-    formatters::entity_formatting_assistant& fa,
-    const formattables::odb_options_info& /*i*/) {
-
-    {
-        auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
+    formatters::trivial_formatting_assistant& fa,
+    const formattables::odb_options_info& i) {
 fa.stream() << std::endl;
-        } // snf
-fa.stream() << std::endl;
-    } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    // return fa.make_file(i.file_path());
+    return fa.make_file(i.file_path(), false/*overwrite*/);
 }
 } } } }

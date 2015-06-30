@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-30 Tue 17:18]
+#+CAPTION: Clock summary at [2015-06-30 Tue 17:30]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *30:36* |       |      |
+| *Total time*                                                                | *30:48* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 30:36   |       |      |
-| Active                                                                      |         | 30:36 |      |
+| Stories                                                                     | 30:48   |       |      |
+| Active                                                                      |         | 30:48 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:39 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -36,7 +36,7 @@
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Implement odb options formatter in odb                              |         |       | 0:52 |
+| STARTED Implement odb options formatter in odb                              |         |       | 1:04 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -428,10 +428,17 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-06-30 Tue 17:18]--[2015-06-30 Tue 17:30] =>  0:12
     CLOCK: [2015-06-30 Tue 15:53]--[2015-06-30 Tue 16:45] =>  0:52
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+- add boilerplate to legacy settings.
+- we need to obtain the general settings to generate boilerplate. We
+  should copy it from the root object.
+
+Problems solved:
 
 - we have two of these at the moment, one at the top-level and another
   one inside odb. Remove the odb one.

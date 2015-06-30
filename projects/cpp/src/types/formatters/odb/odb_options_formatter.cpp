@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/sml/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
-#include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/trivial_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/odb/traits.hpp"
@@ -89,11 +89,9 @@ void odb_options_formatter::register_inclusion_dependencies_provider(
 }
 
 dogen::formatters::file
-odb_options_formatter::format(const formattables::odb_options_info& /*o*/) const {
-/*    entity_formatting_assistant fa(o, ownership_hierarchy(), file_type());
+odb_options_formatter::format(const formattables::odb_options_info& o) const {
+    trivial_formatting_assistant fa;
     const auto r(odb_options_formatter_stitch(fa, o));
-*/
-    dogen::formatters::file r;
     return r;
 }
 
