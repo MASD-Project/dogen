@@ -38,6 +38,7 @@ static logger lg(logger_factory("cpp.formatters.factory"));
 const std::string namespace_separator("::");
 const std::string registrar_name("registrar");
 const std::string includers_name("all");
+const std::string cmakelists_name("CMakeLists.txt");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
 const std::string derivatives_not_found_for_formatter(
@@ -238,59 +239,32 @@ make_includers(
 }
 
 std::forward_list<std::shared_ptr<formattable> > factory::
-make_cmakelists(const config::cpp_options& /*o*/, const sml::model& /*m*/) const
+make_cmakelists(const config::cpp_options& opts, const sml::model& m) const
 {
-    /*
-    std::forward_list<formatters::file> r;
-    if (options_.cpp().disable_cmakelists()) {
+    std::forward_list<std::shared_ptr<formattable> > r;
+    if (opts.disable_cmakelists()) {
         BOOST_LOG_SEV(lg, info) << "CMakeLists generation disabled.";
         return r;
     }
 
-    {
-        const auto path(p.src_cmakelists().file_path());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: " << path.string();
+    BOOST_LOG_SEV(lg, debug) << "Generating source CMakeLists.";
+    auto cm(std::make_shared<cmakelists_info>());
+    cm->model_name(m.name().model_name());
+    cm->file_name(cmakelists_name);
+    cm->source_file_path(opts.source_directory_path() / cmakelists_name);
 
-        std::ostringstream s;
-        cpp_formatters::src_cmakelists fmt(s);
-        fmt.format(p.src_cmakelists());
+    if (!m.name().external_module_path().empty())
+        cm->product_name(m.name().external_module_path().front());
 
-        formatters::file file;
-        file.path(path);
-        file.content(s.str());
-        r.push_front(file);
-    }
+    if (!opts.split_project())
+        cm->include_file_path(opts.project_directory_path() / cmakelists_name);
 
-    if (p.include_cmakelists()) {
-        const auto path(p.include_cmakelists()->file_path());
-        BOOST_LOG_SEV(lg, debug) << "Formatting: " << path.string();
-
-        const auto fct(options_.cpp().enabled_facets());
-        const auto i(fct.find(config::cpp_facet_types::odb));
-        const bool is_odb_enabled(i != fct.end());
-        const auto fct_folder(options_.cpp().odb_facet_folder());
-
-        std::ostringstream s;
-        cpp_formatters::include_cmakelists fmt(s, is_odb_enabled, fct_folder);
-        fmt.format(*p.include_cmakelists());
-
-        formatters::file file;
-        file.path(path);
-        file.content(s.str());
-        r.push_front(file);
-    }
-
-    return r;
-
-    */
-    std::shared_ptr<cmakelists_info> cm(new cmakelists_info());
-    std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(cm);
     return r;
 }
 
 std::shared_ptr<formattable> factory::make_odb_options(
-    const config::cpp_options& /*o*/, const sml::model& /*m*/) const {
+    const config::cpp_options& /*opts*/, const sml::model& /*m*/) const {
     /*
       const auto fcts(options_.cpp().enabled_facets());
       const auto i(fcts.find(config::cpp_facet_types::odb));

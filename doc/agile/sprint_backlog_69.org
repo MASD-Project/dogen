@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-30 Tue 14:47]
+#+CAPTION: Clock summary at [2015-06-30 Tue 15:12]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *28:32* |       |      |
+| *Total time*                                                                | *28:57* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 28:32   |       |      |
-| Active                                                                      |         | 28:32 |      |
+| Stories                                                                     | 28:57   |       |      |
+| Active                                                                      |         | 28:57 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:39 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -34,7 +34,7 @@
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Create a formattables factory                                       |         |       | 6:48 |
+| STARTED Create a formattables factory                                       |         |       | 7:13 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -360,6 +360,7 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Create a formattables factory                             :story:
+    CLOCK: [2015-06-30 Tue 14:47]--[2015-06-30 Tue 15:12] =>  0:25
     CLOCK: [2015-06-30 Tue 14:40]--[2015-06-30 Tue 14:46] =>  0:06
     CLOCK: [2015-06-30 Tue 13:56]--[2015-06-30 Tue 14:30] =>  0:34
     CLOCK: [2015-06-29 Mon 20:28]--[2015-06-29 Mon 20:42] =>  0:14

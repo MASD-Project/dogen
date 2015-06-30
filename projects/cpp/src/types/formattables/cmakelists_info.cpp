@@ -40,7 +40,9 @@ cmakelists_info::cmakelists_info(cmakelists_info&& rhs)
       file_path_(std::move(rhs.file_path_)),
       model_name_(std::move(rhs.model_name_)),
       product_name_(std::move(rhs.product_name_)),
-      file_name_(std::move(rhs.file_name_)) { }
+      file_name_(std::move(rhs.file_name_)),
+      source_file_path_(std::move(rhs.source_file_path_)),
+      include_file_path_(std::move(rhs.include_file_path_)) { }
 
 cmakelists_info::cmakelists_info(
     const std::string& identity,
@@ -48,14 +50,18 @@ cmakelists_info::cmakelists_info(
     const boost::filesystem::path& file_path,
     const std::string& model_name,
     const std::string& product_name,
-    const std::string& file_name)
+    const std::string& file_name,
+    const boost::filesystem::path& source_file_path,
+    const boost::filesystem::path& include_file_path)
     : dogen::cpp::formattables::formattable(
       identity,
       origin_type),
       file_path_(file_path),
       model_name_(model_name),
       product_name_(product_name),
-      file_name_(file_name) { }
+      file_name_(file_name),
+      source_file_path_(source_file_path),
+      include_file_path_(include_file_path) { }
 
 void cmakelists_info::to_stream(std::ostream& s) const {
     s << " { "
@@ -66,7 +72,9 @@ void cmakelists_info::to_stream(std::ostream& s) const {
       << "\"file_path\": " << "\"" << file_path_.generic_string() << "\"" << ", "
       << "\"model_name\": " << "\"" << tidy_up_string(model_name_) << "\"" << ", "
       << "\"product_name\": " << "\"" << tidy_up_string(product_name_) << "\"" << ", "
-      << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\""
+      << "\"file_name\": " << "\"" << tidy_up_string(file_name_) << "\"" << ", "
+      << "\"source_file_path\": " << "\"" << source_file_path_.generic_string() << "\"" << ", "
+      << "\"include_file_path\": " << "\"" << include_file_path_.generic_string() << "\""
       << " }";
 }
 
@@ -78,6 +86,8 @@ void cmakelists_info::swap(cmakelists_info& other) noexcept {
     swap(model_name_, other.model_name_);
     swap(product_name_, other.product_name_);
     swap(file_name_, other.file_name_);
+    swap(source_file_path_, other.source_file_path_);
+    swap(include_file_path_, other.include_file_path_);
 }
 
 bool cmakelists_info::equals(const dogen::cpp::formattables::formattable& other) const {
@@ -91,7 +101,9 @@ bool cmakelists_info::operator==(const cmakelists_info& rhs) const {
         file_path_ == rhs.file_path_ &&
         model_name_ == rhs.model_name_ &&
         product_name_ == rhs.product_name_ &&
-        file_name_ == rhs.file_name_;
+        file_name_ == rhs.file_name_ &&
+        source_file_path_ == rhs.source_file_path_ &&
+        include_file_path_ == rhs.include_file_path_;
 }
 
 cmakelists_info& cmakelists_info::operator=(cmakelists_info other) {
@@ -162,6 +174,38 @@ void cmakelists_info::file_name(const std::string& v) {
 
 void cmakelists_info::file_name(const std::string&& v) {
     file_name_ = std::move(v);
+}
+
+const boost::filesystem::path& cmakelists_info::source_file_path() const {
+    return source_file_path_;
+}
+
+boost::filesystem::path& cmakelists_info::source_file_path() {
+    return source_file_path_;
+}
+
+void cmakelists_info::source_file_path(const boost::filesystem::path& v) {
+    source_file_path_ = v;
+}
+
+void cmakelists_info::source_file_path(const boost::filesystem::path&& v) {
+    source_file_path_ = std::move(v);
+}
+
+const boost::filesystem::path& cmakelists_info::include_file_path() const {
+    return include_file_path_;
+}
+
+boost::filesystem::path& cmakelists_info::include_file_path() {
+    return include_file_path_;
+}
+
+void cmakelists_info::include_file_path(const boost::filesystem::path& v) {
+    include_file_path_ = v;
+}
+
+void cmakelists_info::include_file_path(const boost::filesystem::path&& v) {
+    include_file_path_ = std::move(v);
 }
 
 } } }

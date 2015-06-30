@@ -50,6 +50,8 @@ std::size_t cmakelists_info_hasher::hash(const cmakelists_info& v) {
     combine(seed, v.model_name());
     combine(seed, v.product_name());
     combine(seed, v.file_name());
+    combine(seed, hash_boost_filesystem_path(v.source_file_path()));
+    combine(seed, hash_boost_filesystem_path(v.include_file_path()));
 
     return seed;
 }

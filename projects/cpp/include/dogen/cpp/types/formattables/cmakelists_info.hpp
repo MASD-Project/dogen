@@ -56,7 +56,9 @@ public:
         const boost::filesystem::path& file_path,
         const std::string& model_name,
         const std::string& product_name,
-        const std::string& file_name);
+        const std::string& file_name,
+        const boost::filesystem::path& source_file_path,
+        const boost::filesystem::path& include_file_path);
 
 private:
     template<typename Archive>
@@ -126,6 +128,16 @@ public:
     void file_name(const std::string&& v);
     /**@}*/
 
+    const boost::filesystem::path& source_file_path() const;
+    boost::filesystem::path& source_file_path();
+    void source_file_path(const boost::filesystem::path& v);
+    void source_file_path(const boost::filesystem::path&& v);
+
+    const boost::filesystem::path& include_file_path() const;
+    boost::filesystem::path& include_file_path();
+    void include_file_path(const boost::filesystem::path& v);
+    void include_file_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const cmakelists_info& rhs) const;
     bool operator!=(const cmakelists_info& rhs) const {
@@ -144,6 +156,8 @@ private:
     std::string model_name_;
     std::string product_name_;
     std::string file_name_;
+    boost::filesystem::path source_file_path_;
+    boost::filesystem::path include_file_path_;
 };
 
 } } }

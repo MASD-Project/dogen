@@ -406,7 +406,6 @@ generate_cmakelists_activity(cpp::formattables::project& p) const {
 
     p.src_cmakelists(ci);
     if (!options_.cpp().split_project()) {
-        const auto f(options_.cpp().enabled_facets());
         ci.file_path(locator_.absolute_path(ci.file_name()));
         p.include_cmakelists(ci);
     }

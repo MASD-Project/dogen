@@ -49,6 +49,8 @@ void save(Archive& ar,
     ar << make_nvp("model_name", v.model_name_);
     ar << make_nvp("product_name", v.product_name_);
     ar << make_nvp("file_name", v.file_name_);
+    ar << make_nvp("source_file_path", v.source_file_path_.generic_string());
+    ar << make_nvp("include_file_path", v.include_file_path_.generic_string());
 }
 
 template<typename Archive>
@@ -63,6 +65,12 @@ void load(Archive& ar,
     ar >> make_nvp("model_name", v.model_name_);
     ar >> make_nvp("product_name", v.product_name_);
     ar >> make_nvp("file_name", v.file_name_);
+    std::string source_file_path_tmp;
+    ar >> make_nvp("source_file_path", source_file_path_tmp);
+    v.source_file_path_ = source_file_path_tmp;
+    std::string include_file_path_tmp;
+    ar >> make_nvp("include_file_path", include_file_path_tmp);
+    v.include_file_path_ = include_file_path_tmp;
 }
 
 } }
