@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-30 Tue 15:28]
+#+CAPTION: Clock summary at [2015-06-30 Tue 17:18]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *29:13* |       |      |
+| *Total time*                                                                | *30:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 29:13   |       |      |
-| Active                                                                      |         | 29:13 |      |
+| Stories                                                                     | 30:36   |       |      |
+| Active                                                                      |         | 30:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:39 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -34,7 +34,9 @@
 | COMPLETED Path settings factory makes use of command line options           |         |       | 0:29 |
 | COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
+| COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
+| STARTED Implement odb options formatter in odb                              |         |       | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -300,6 +302,14 @@ Notes:
   common. However the problem we have is that not all qnames support
   all formatters.
 
+*** COMPLETED Refactor formatting assistants                          :story:
+    CLOSED: [2015-06-30 Tue 17:17]
+    CLOCK: [2015-06-30 Tue 16:46]--[2015-06-30 Tue 17:17] =>  0:31
+
+- create an abstract base class for common functionality and move it
+  across from existing assistants;
+- create a trivial assistant that is a concrete version of abc.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -417,17 +427,8 @@ implementation dimension, in which =a= can be represented by =A1, A2,
 multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
-*** Add include providers for all types                               :story:
-
-We need to implement the provider container support for primitives,
-modules and concepts.
-
-Update:
-
-- inclusion dependencies factory
-- provider container
-
-*** Implement odb options formatter in odb                            :story:
+*** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-06-30 Tue 15:53]--[2015-06-30 Tue 16:45] =>  0:52
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
@@ -449,6 +450,16 @@ machinery. Fix all differences.
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+*** Add include providers for all types                               :story:
+
+We need to implement the provider container support for primitives,
+modules and concepts.
+
+Update:
+
+- inclusion dependencies factory
+- provider container
 
 ** Deprecated
 

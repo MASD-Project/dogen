@@ -38,7 +38,7 @@ namespace formatters {
  * @brief Provides a number of utilities to formatters that generate
  * helper methods for nested types.
  */
-class nested_type_formatting_assistant {
+class nested_type_formatting_assistant final {
 public:
     explicit nested_type_formatting_assistant(std::ostream& s);
 

@@ -97,9 +97,6 @@ entity_formatting_assistant(const formattables::entity& e,
     entity_(e), ownership_hierarchy_(oh),
     formatter_properties_(obtain_formatter_properties(oh.formatter_name())),
     file_type_(ft) {
-
-    dogen::formatters::indent_filter::push(filtering_stream_, 4);
-    filtering_stream_.push(stream_);
     validate();
 }
 
@@ -213,17 +210,10 @@ make_nested_type_formatting_assistant() {
     return nested_type_formatting_assistant(stream());
 }
 
-std::ostream& entity_formatting_assistant::stream() {
-    return filtering_stream_;
-}
-
 dogen::formatters::file entity_formatting_assistant::
 make_file(const bool overwrite) const {
-    dogen::formatters::file r;
-    r.content(stream_.str());
-    r.path(formatter_properties_.file_path());
-    r.overwrite(overwrite);
-    return r;
+    return formatting_assistant::make_file(
+        formatter_properties_.file_path(), overwrite);
 }
 
 void entity_formatting_assistant::comment(const std::string& c) {

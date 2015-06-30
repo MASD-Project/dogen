@@ -26,8 +26,6 @@
 #endif
 
 #include <list>
-#include <sstream>
-#include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/cpp/types/settings/odb_settings.hpp"
@@ -40,6 +38,7 @@
 #include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/types/formatters/nested_type_formatting_assistant.hpp"
+#include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,7 +48,7 @@ namespace formatters {
  * @brief Provides a number of utilities to formatters that generate
  * files for entities.
  */
-class entity_formatting_assistant {
+class entity_formatting_assistant final : public formatting_assistant {
 public:
     /**
      * @brief Returns the text to use for a given class for the @code
@@ -181,11 +180,6 @@ public:
     make_nested_type_formatting_assistant();
 
     /**
-     * @brief Returns the stream that is currently being populated.
-     */
-    std::ostream& stream();
-
-    /**
      * @brief Generates a file with the current contents of the
      * stream.
      */
@@ -244,8 +238,6 @@ private:
     const dynamic::ownership_hierarchy& ownership_hierarchy_;
     const formattables::formatter_properties formatter_properties_;
     const formatters::file_types file_type_;
-    std::ostringstream stream_;
-    boost::iostreams::filtering_ostream filtering_stream_;
 };
 
 } } }
