@@ -3528,24 +3528,6 @@ debugging problems easier. However, it leads to a lot of duplicated
 code. We need to figure out a way of simplifying this, most likely
 through a macro.
 
-*** Investigate integration of =boost::log= with =boost::test=        :story:
-
-At present whenever there is a test failure, we get a compiler-style
-error in the console, which is great for emacs integration - its easy
-to go to the source code that generated the failure. However, we do
-not write it to the log file of the test. Its very difficult to
-understand the log file without the context of the =boost::test=
-failures. Due to this we end up manually logging before doing boost
-test assertions - a lot of duplicated effort. What would be ideal is
-if =boost::test= logged to _both_ the console and to our log
-file. There is a file output for boost log, but its not configurable
-enough to accept a =boost::log= stream. We should send an email to
-mailing list asking for help.
-
-Also we need to duplicate the test name and the log file name. But
-since we will be moving to catch maybe we shouldn't spent too long in
-this.
-
 *** Make test data generator more configurable                        :story:
 
 #+begin_quote
@@ -5573,6 +5555,34 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+
+*** Migrate from Boost Test to Catch                                  :story:
+
+The [[https://github.com/philsquared/Catch][Catch]] testing framework appears to be very nice:
+
+[[https://vimeo.com/131632252][Testdriven C++ with Catch - Phil Nash]]
+
+We should look into moving from Boost test to Catch. We should also
+take the opportunity to extend catch with a few [[https://github.com/philsquared/Catch/tree/master/include/reporters][reporters]]:
+
+- boost log reporter such that all the logging from unit testing goes
+  into the log file and the log file is setup automatically for each
+  scenario.
+- "emacs" reporter such that we get compilation error like
+  messages. This may already be in Catch.
+- CDash reporter so that we don't have to do all of the CMake magic in
+  order to see the unit tests in CDash
+
+Merged Stories:
+
+We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
+of specifying unit tests, to see if it would make our tests
+clearer. We are already following some kind of Given and Then, but we
+should consider making it explicit.
+
+The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
+natively supports GWT.
+
 *** Version number relies on latest commit in master                  :story:
 
 When trying to build off of a tag, we noticed that the version number
@@ -5648,16 +5658,6 @@ with a build that lies. We should consider:
 - adding the git commit SHA to the build, perhaps comments.
 - adding the branch to the build, perhaps comments.
 - rev-listing the current branch rather than always master.
-
-*** Consider using Given-When-Then for unit tests                      :epic:
-
-We should check the Martin Fowler article on [[http://martinfowler.com/bliki/GivenWhenThen.html][Given-When-Then]] as a way
-of specifying unit tests, to see if it would make our tests
-clearer. We are already following some kind of Given and Then, but we
-should consider making it explicit.
-
-The best approach may be to move all unit tests to [[https://github.com/philsquared/Catch][Catch]], since it
-natively supports GWT.
 
 *** Add vagrant and docker support                                    :story:
 
