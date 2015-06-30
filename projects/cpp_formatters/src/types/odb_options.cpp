@@ -42,7 +42,34 @@ void odb_options::format(const cpp::formattables::odb_options_info& ooi) {
 
 
     stream_ << "# -*- mode: sh; tab-width: 4; indent-tabs-mode: nil -*-"
-            << std::endl << std::endl;
+            << std::endl;
+
+    stream_ << "#" << std::endl
+            << "# Copyright (C) 2012 Kitanda <info@kitanda.co.uk>" << std::endl
+            << "#" << std::endl
+            << "# This program is free software; you can redistribute it and/or"
+            << " modify" << std::endl
+            << "# it under the terms of the GNU General Public License as"
+            << " published by" << std::endl
+            << "# the Free Software Foundation; either version 3 of the License"
+            << ", or" << std::endl
+            << "# (at your option) any later version." << std::endl
+            << "#" << std::endl
+            << "# This program is distributed in the hope that it will be "
+            << " useful," << std::endl
+            << "# but WITHOUT ANY WARRANTY; without even the implied warranty"
+            << " of" << std::endl
+            << "# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the"
+            << std::endl
+            << "# GNU General Public License for more details." << std::endl
+            << "#" << std::endl
+            << "# You should have received a copy of the GNU General "
+            << "Public License" << std::endl
+            << "# along with this program; if not, write to the Free Software"
+            << std::endl
+            << "# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,"
+            << std::endl << "# MA 02110-1301, USA." << std::endl
+            << "#" << std::endl;
 
     stream_ << "# enable C++11. FIXME: causes ODB crash in options file."
             << std::endl

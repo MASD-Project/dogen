@@ -428,18 +428,19 @@ multiple dimensions, one for each pod (and of course the pod families
 would be an extra dimension and so on).
 
 *** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-06-30 Tue 17:31]--[2015-06-30 Tue 17:44] =>  0:13
     CLOCK: [2015-06-30 Tue 17:18]--[2015-06-30 Tue 17:30] =>  0:12
     CLOCK: [2015-06-30 Tue 15:53]--[2015-06-30 Tue 16:45] =>  0:52
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-- add boilerplate to legacy settings.
 - we need to obtain the general settings to generate boilerplate. We
   should copy it from the root object.
 
 Problems solved:
 
+- add boilerplate to legacy formatter.
 - we have two of these at the moment, one at the top-level and another
   one inside odb. Remove the odb one.
 
