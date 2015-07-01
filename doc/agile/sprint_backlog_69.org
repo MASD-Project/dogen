@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-01 Wed 21:59]
+#+CAPTION: Clock summary at [2015-07-01 Wed 22:28]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *36:12* |       |      |
+| *Total time*                                                                | *36:41* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 36:12   |       |      |
-| Active                                                                      |         | 36:12 |      |
+| Stories                                                                     | 36:41   |       |      |
+| Active                                                                      |         | 36:41 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -36,7 +36,7 @@
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Implement odb options formatter in odb                              |         |       | 5:00 |
+| STARTED Implement odb options formatter in odb                              |         |       | 5:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -455,6 +455,7 @@ What can be said about an archetype:
   archetype dimension.
 
 *** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-07-01 Wed 21:58]--[2015-07-01 Wed 22:27] =>  0:29
     CLOCK: [2015-07-01 Wed 20:55]--[2015-07-01 Wed 21:57] =>  1:02
     CLOCK: [2015-07-01 Wed 19:31]--[2015-07-01 Wed 19:52] =>  0:21
     CLOCK: [2015-07-01 Wed 17:52]--[2015-07-01 Wed 17:55] =>  0:03
@@ -471,10 +472,11 @@ machinery. Fix all differences.
 
 Problems:
 
-- generate the correct general settings for odb/cmake.
+- do not generate odb options if odb facet is disabled.
 
 Problems solved:
 
+- generate the correct general settings for odb/cmake.
 - we need to obtain the general settings to generate boilerplate. We
   should copy it from the root object. We then need to manually setup
   the boilerplate in the template. We need to create the general

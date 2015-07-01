@@ -48,7 +48,8 @@ const std::string derivatives_not_found_for_formatter(
 const std::string properties_not_found(
     "Formatter properties not found for: ");
 const std::string empty_formatter_name("Formatter name is empty.");
-const std::string cpp_modeline_name("cpp");
+const std::string cmake_modeline_name("cmake");
+const std::string odb_modeline_name("odb");
 
 }
 
@@ -259,7 +260,7 @@ make_cmakelists(const config::cpp_options& opts,
     cm->file_name(cmakelists_name);
     cm->source_file_path(opts.source_directory_path() / cmakelists_name);
 
-    const auto gs(gsf.make(cpp_modeline_name, root_object));
+    const auto gs(gsf.make(cmake_modeline_name, root_object));
     cm->general_settings(gs);
 
     if (!m.name().external_module_path().empty())
@@ -293,7 +294,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     r->file_name(odb_options_name);
     r->model_name(m.name().model_name());
 
-    const auto gs(gsf.make(cpp_modeline_name, root_object));
+    const auto gs(gsf.make(odb_modeline_name, root_object));
     r->general_settings(gs);
 
     const auto i(ps.find(ch_fn));
