@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <boost/optional.hpp>
+#include "dogen/formatters/types/general_settings.hpp"
 #include "dogen/cpp/types/formatters/formatting_assistant.hpp"
 
 namespace dogen {
@@ -34,6 +36,10 @@ namespace formatters {
 class trivial_formatting_assistant final : public formatting_assistant {
 public:
     trivial_formatting_assistant();
+
+public:
+    void make_annotation_preamble(
+        const boost::optional<dogen::formatters::general_settings> gs);
 };
 
 } } }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/cpp/types/formatters/trivial_formatting_assistant.hpp"
 
 namespace dogen {
@@ -25,5 +26,15 @@ namespace cpp {
 namespace formatters {
 
 trivial_formatting_assistant::trivial_formatting_assistant() { }
+
+void trivial_formatting_assistant::make_annotation_preamble(
+    const boost::optional<dogen::formatters::general_settings> gs) {
+    if (!gs)
+        return;
+
+    dogen::formatters::annotation_formatter af;
+    af.format_preamble(stream(), dogen::formatters::comment_styles::shell_style,
+        (*gs).annotation());
+}
 
 } } }

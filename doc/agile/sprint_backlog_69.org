@@ -455,6 +455,7 @@ What can be said about an archetype:
   archetype dimension.
 
 *** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-07-01 Wed 19:31]--[2015-07-01 Wed 19:52] =>  0:21
     CLOCK: [2015-07-01 Wed 17:52]--[2015-07-01 Wed 17:55] =>  0:03
     CLOCK: [2015-07-01 Wed 17:22]--[2015-07-01 Wed 17:51] =>  0:26
     CLOCK: [2015-07-01 Wed 16:17]--[2015-07-01 Wed 17:21] =>  1:04
@@ -472,7 +473,8 @@ machinery. Fix all differences.
   the boilerplate in the template. We need to create the general
   settings in the factory. The factory needs access to the root
   object.
-- extend trivial formatter with annotation formatting support.
+- push general settings factory generation into workflow and pass it
+  down to bundle factory.
 
 Problems solved:
 

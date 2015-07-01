@@ -3,7 +3,6 @@
 <#@ modeline_group_name=emacs #>
 <#@ stream_variable_name=fa.stream() #>
 <#@ inclusion_dependency="dogen/cpp/types/formatters/odb/odb_options_formatter_stitch.hpp" #>
-<#@ inclusion_dependency="dogen/formatters/types/annotation_formatter.hpp" #>
 <#@ inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ containing_namespaces=dogen::cpp::formatters::odb #>
 <#+
@@ -13,13 +12,7 @@ dogen::formatters::file odb_options_formatter_stitch(
     const formattables::odb_options_info& i) {
 
     {
-        if (i.general_settings()) {
-            dogen::formatters::annotation_formatter af;
-            af.format_preamble(
-                fa.stream(),
-                dogen::formatters::comment_styles::shell_style,
-                (*i.general_settings()).annotation());
-        }
+        fa.make_annotation_preamble(i.general_settings());
 #>
 
 <#+
