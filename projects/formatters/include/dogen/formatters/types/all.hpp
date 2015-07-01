@@ -46,6 +46,7 @@
 #include "dogen/formatters/types/modeline_locations.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/formatters/types/infix_configuration.hpp"
+#include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/formatters/types/cpp/include_formatter.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
 #include "dogen/formatters/types/licence_text_hydrator.hpp"

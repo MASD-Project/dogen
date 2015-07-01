@@ -58,22 +58,6 @@ public:
 
 private:
     /**
-     * @brief Adds the formatted modeline to the content.
-     */
-    void add_modeline(std::list<std::string>& content, const modeline& m) const;
-
-    /**
-     * @brief Adds the formatted modeline to the content.
-     */
-    void add_marker(std::list<std::string>& content,
-        const std::string& marker) const;
-
-    /**
-     * @brief Adds the formatted modeline to the content.
-     */
-    void add_licence(std::list<std::string>& content, const licence& l) const;
-
-    /**
      * @brief Formats the file's preamble.
      *
      * The preamble is made up of the modeline, any potential code

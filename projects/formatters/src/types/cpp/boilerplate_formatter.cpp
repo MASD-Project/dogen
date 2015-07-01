@@ -18,23 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include <ostream>
-#include "dogen/formatters/types/modeline_formatter.hpp"
-#include "dogen/formatters/types/comment_formatter.hpp"
+#include "dogen/formatters/types/annotation_formatter.hpp"
 #include "dogen/formatters/types/cpp/include_formatter.hpp"
 #include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
-
-namespace {
-
-const bool start_on_first_line(true);
-const bool use_documentation_tool_markup(true);
-const bool last_line_is_blank(true);
-const bool line_between_blocks(true);
-const bool documenting_previous_identifier(true);
-
-}
 
 namespace dogen {
 namespace formatters {
@@ -46,82 +34,17 @@ boilerplate_formatter::boilerplate_formatter(
       generate_header_guards_(generate_header_guards) { }
 
 void boilerplate_formatter::
-add_modeline(std::list<std::string>& content, const modeline& m) const {
-    std::ostringstream s;
-    modeline_formatter f;
-    f.format(s, m);
-    content.push_back(s.str());
-}
-
-void boilerplate_formatter::
-add_marker(std::list<std::string>& content,
-    const std::string& marker) const {
-    if (marker.empty())
-        return;
-
-    content.push_back(marker);
-}
-
-void boilerplate_formatter::
-add_licence(std::list<std::string>& content, const licence& l) const {
-    std::ostringstream s;
-    for (const auto h : l.copyright_notices())
-        s << h << std::endl;
-
-    const auto notices(s.str());
-    if (!notices.empty())
-        content.push_back(notices);
-
-    if (!l.text().empty())
-        content.push_back(l.text());
-}
-
-void boilerplate_formatter::
 format_preamble(std::ostream& s, const annotation& a) const {
     if (!generate_preamble_)
         return;
 
-    bool is_top(false);
-    const auto top(modeline_locations::top);
-    bool has_modeline(a.modeline() != nullptr);
-    std::list<std::string> content;
-    if (has_modeline) {
-        is_top = a.modeline()->location() == top;
-
-        if (is_top)
-            add_modeline(content, *a.modeline());
-    }
-
-    add_marker(content, a.code_generation_marker());
-    if (a.licence())
-        add_licence(content, *a.licence());
-
-    if (content.empty())
-        return;
-
-    if (has_modeline && is_top && content.size() == 1) {
-        comment_formatter cf(
-            start_on_first_line,
-            !use_documentation_tool_markup,
-            !documenting_previous_identifier,
-            comment_styles::cpp_style,
-            !last_line_is_blank);
-
-        cf.format(s, content, !line_between_blocks);
-    } else {
-        comment_formatter cf(
-            is_top ? start_on_first_line : !start_on_first_line,
-            !use_documentation_tool_markup,
-            !documenting_previous_identifier,
-            comment_styles::c_style,
-            last_line_is_blank);
-
-        cf.format(s, content, line_between_blocks);
-    }
+    annotation_formatter af;
+    af.format_preamble(s, comment_styles::cpp_style/*single line*/,
+        comment_styles::c_style/*multi-line*/, a);
 }
 
-void boilerplate_formatter::format_guards_begin(std::ostream& s,
-    const std::string& header_guard) const {
+void boilerplate_formatter::
+format_guards_begin(std::ostream& s, const std::string& header_guard) const {
     if (!generate_header_guards_)
         return;
 
@@ -132,8 +55,8 @@ void boilerplate_formatter::format_guards_begin(std::ostream& s,
         s << std::endl;
 }
 
-void boilerplate_formatter::format_guards_end(std::ostream& s,
-    const std::string& header_guard) const {
+void boilerplate_formatter::
+format_guards_end(std::ostream& s, const std::string& header_guard) const {
     if (!generate_header_guards_)
         return;
 
@@ -157,25 +80,10 @@ format_begin(std::ostream& s, const annotation& a,
     format_includes(s, includes);
 }
 
-void boilerplate_formatter::format_postamble(std::ostream& s,
-    const annotation& a) const {
-    if (!a.modeline())
-        return;
-
-    const auto m(*a.modeline());
-    if (m.location() == modeline_locations::bottom) {
-        std::list<std::string> content;
-        add_modeline(content, m);
-
-        comment_formatter cf(
-            !start_on_first_line,
-            !use_documentation_tool_markup,
-            !documenting_previous_identifier,
-            comment_styles::c_style,
-            !last_line_is_blank);
-
-        cf.format(s, content);
-    }
+void boilerplate_formatter::
+format_postamble(std::ostream& s, const annotation& a) const {
+    annotation_formatter af;
+    af.format_postamble(s, comment_styles::c_style, a);
 }
 
 void boilerplate_formatter::

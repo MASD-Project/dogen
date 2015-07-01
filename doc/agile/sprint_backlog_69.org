@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-01 Wed 16:16]
+#+CAPTION: Clock summary at [2015-07-01 Wed 17:21]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *33:13* |       |      |
+| *Total time*                                                                | *34:17* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 33:13   |       |      |
-| Active                                                                      |         | 33:13 |      |
+| Stories                                                                     | 34:17   |       |      |
+| Active                                                                      |         | 34:17 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -36,7 +36,7 @@
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Implement odb options formatter in odb                              |         |       | 2:01 |
+| STARTED Implement odb options formatter in odb                              |         |       | 3:05 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -444,15 +444,18 @@ What can be said about an archetype:
   would mean that archetypes and facets are not quite so aligned as we
   first thought. Potentially, one should be able to ask for say a
   formattable at facet X in an artchetype at facet Y.
-
-One way to look at it is as follows: there is the modeling dimension,
-in which we have an entity, say entity =A=; and there is the
-implementation dimension, in which =a= can be represented by =A1, A2,
-..., An= archetypes. In effect, the implementation dimension has
-multiple dimensions, one for each pod (and of course the pod families
-would be an extra dimension and so on).
+- One way to look at it is as follows: there is the modeling
+  dimension, in which we have an entity, say entity =A=; and there is
+  the implementation dimension, in which =a= can be represented by
+  =A1, A2, ..., An= archetypes. In effect, the implementation
+  dimension has multiple dimensions, one for each pod (and of course
+  the pod families would be an extra dimension and so on). Actually,
+  we probably have 3 steps: the modeling dimension, the translation of
+  that into a language-specific representation and then finally the
+  archetype dimension.
 
 *** STARTED Implement odb options formatter in odb                    :story:
+    CLOCK: [2015-07-01 Wed 16:17]--[2015-07-01 Wed 17:21] =>  1:04
     CLOCK: [2015-06-30 Tue 18:31]--[2015-06-30 Tue 18:45] =>  0:14
     CLOCK: [2015-06-30 Tue 17:45]--[2015-06-30 Tue 18:15] =>  0:30
     CLOCK: [2015-06-30 Tue 17:31]--[2015-06-30 Tue 17:44] =>  0:13
