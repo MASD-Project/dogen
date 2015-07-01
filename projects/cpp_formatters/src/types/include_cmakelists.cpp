@@ -58,7 +58,7 @@ void include_cmakelists::format(const cpp::formattables::cmakelists_info& ci) {
             << ", or" << std::endl
             << "# (at your option) any later version." << std::endl
             << "#" << std::endl
-            << "# This program is distributed in the hope that it will be "
+            << "# This program is distributed in the hope that it will be"
             << " useful," << std::endl
             << "# but WITHOUT ANY WARRANTY; without even the implied warranty"
             << " of" << std::endl

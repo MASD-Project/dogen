@@ -55,7 +55,7 @@ void odb_options::format(const cpp::formattables::odb_options_info& ooi) {
             << ", or" << std::endl
             << "# (at your option) any later version." << std::endl
             << "#" << std::endl
-            << "# This program is distributed in the hope that it will be "
+            << "# This program is distributed in the hope that it will be"
             << " useful," << std::endl
             << "# but WITHOUT ANY WARRANTY; without even the implied warranty"
             << " of" << std::endl
