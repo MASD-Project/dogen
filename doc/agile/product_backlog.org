@@ -4497,6 +4497,16 @@ Users can then inherit from these visitors where appropriate
 (e.g. negative and default visitors). Each of these would have their
 own formatter.
 
+*** Improve cross model visitation support                            :story:
+
+One of the problems we have at present is that its not possible to
+define a base class in a model with a visitor and then extend it in
+other models. The visitor needs to be aware of all the leaves in order
+to dispatch. There seem to be some ideas in this space which may
+provide a solution:
+
+- [[http://stackoverflow.com/questions/11796121/implementing-the-visitor-pattern-using-c-templates][Implementing the visitor pattern using C++ Templates]]
+
 *** Disable =invalid= value in enumerations                           :story:
 
 #+begin_quote
