@@ -20,8 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/utility/filesystem/path.hpp"
+#include "dogen/formatters/types/hydration_workflow.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
+#include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
 #include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
@@ -58,6 +60,19 @@ dynamic::object workflow::obtain_root_object(const sml::model& m) const {
     return i->second.extensions();
 }
 
+dogen::formatters::repository workflow::create_formatters_repository(
+    const std::forward_list<boost::filesystem::path>& dirs) const {
+    dogen::formatters::hydration_workflow hw;
+    return hw.hydrate(dirs);
+}
+
+dogen::formatters::general_settings_factory workflow::
+create_general_settings_factory(const dogen::formatters::repository& frp,
+    const dynamic::object& root_object) const {
+    dogen::formatters::general_settings_factory r(frp, root_object);
+    return r;
+}
+
 settings::opaque_settings_builder workflow::
 create_opaque_settings_builder(const dynamic::repository& rp) const {
     settings::opaque_settings_builder r;
@@ -68,9 +83,10 @@ create_opaque_settings_builder(const dynamic::repository& rp) const {
 
 settings::bundle_repository workflow::create_bundle_repository(
     const dynamic::repository& rp, const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const settings::opaque_settings_builder& osb, const sml::model& m) const {
     settings::bundle_repository_factory f;
-    return f.make(rp, root_object, osb, m);
+    return f.make(rp, root_object, gsf, osb, m);
 }
 
 std::forward_list<std::shared_ptr<formattables::formattable> >
@@ -78,13 +94,14 @@ workflow::create_formattables_activty(
     const config::cpp_options& opts,
     const dynamic::repository& srp,
     const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const sml::model& m) const {
 
     formattables::workflow fw;
-    return fw.execute(opts, srp, root_object, fc, osb, brp, m);
+    return fw.execute(opts, srp, root_object, gsf, fc, osb, brp, m);
 }
 
 std::forward_list<dogen::formatters::file>
@@ -118,15 +135,22 @@ workflow::generate(const config::knitting_options& ko,
     const sml::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started C++ backend.";
 
+    const auto dir(dogen::utility::filesystem::data_files_directory());
+    const auto dirs(std::forward_list<boost::filesystem::path> { dir });
+    const auto frp(create_formatters_repository(dirs));
+
     const auto ro(obtain_root_object(m));
+    const auto gsf(create_general_settings_factory(frp, ro));
+
     const auto osb(create_opaque_settings_builder(rp));
-    const auto brp(create_bundle_repository(rp, ro, osb, m));
+    const auto brp(create_bundle_repository(rp, ro, gsf, osb, m));
 
     formatters::workflow::registrar().validate();
     const auto& fc(formatters::workflow::registrar().formatter_container());
 
     const auto& kcpp(ko.cpp());
-    const auto f(create_formattables_activty(kcpp, rp, ro, fc, osb, brp, m));
+    const auto f(
+        create_formattables_activty(kcpp, rp, ro, gsf, fc, osb, brp, m));
     const auto r(format_activty(f));
 
     BOOST_LOG_SEV(lg, debug) << "Finished C++ backend.";

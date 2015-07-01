@@ -89,11 +89,12 @@ private:
 
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const opaque_settings_builder& osb, const sml::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
-    const bundle_factory f(rp, root_object, osb);
+    const bundle_factory f(rp, root_object, gsf, osb);
     generator g(f);
     sml::all_model_items_traversal(m, g);
 

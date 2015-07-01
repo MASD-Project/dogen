@@ -33,12 +33,13 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/types/settings/aspect_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
+
 
 namespace dogen {
 namespace cpp {
@@ -51,14 +52,8 @@ class bundle_factory final {
 public:
     bundle_factory(const dynamic::repository& rp,
         const dynamic::object& root_object,
+        const dogen::formatters::general_settings_factory& gsf,
         const opaque_settings_builder& osb);
-
-private:
-    /**
-     * @brief Creates the formatters' repository.
-     */
-    dogen::formatters::repository create_formatters_repository(
-        const std::forward_list<boost::filesystem::path>& dirs) const;
 
 private:
     /**
@@ -87,8 +82,9 @@ public:
 private:
     const dynamic::repository& dynamic_repository_;
     const dynamic::object& root_object_;
+    const dogen::formatters::general_settings_factory&
+    general_settings_factory_;
     const opaque_settings_builder& opaque_settings_builder_;
-    const dogen::formatters::repository formatters_repository_;
 };
 
 } } }

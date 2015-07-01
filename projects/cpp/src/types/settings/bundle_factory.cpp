@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/hydration_workflow.hpp"
-#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 
@@ -40,24 +39,15 @@ namespace cpp {
 namespace settings {
 
 bundle_factory::bundle_factory(const dynamic::repository& rp,
-    const dynamic::object& root_object, const opaque_settings_builder& osb) :
+    const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
+    const opaque_settings_builder& osb) :
     dynamic_repository_(rp), root_object_(root_object),
-    opaque_settings_builder_(osb),
-    formatters_repository_(create_formatters_repository(
-            std::forward_list<boost::filesystem::path> {
-                dogen::utility::filesystem::data_files_directory() })) { }
-
-dogen::formatters::repository bundle_factory::create_formatters_repository(
-    const std::forward_list<boost::filesystem::path>& dirs) const {
-    dogen::formatters::hydration_workflow hw;
-    return hw.hydrate(dirs);
-}
+    general_settings_factory_(gsf), opaque_settings_builder_(osb) { }
 
 dogen::formatters::general_settings bundle_factory::
 create_general_settings(const dynamic::object& o) const {
-    using dogen::formatters::general_settings_factory;
-    general_settings_factory f(formatters_repository_, root_object_);
-    return f.make(cpp_modeline_name, o);
+    return general_settings_factory_.make(cpp_modeline_name, o);
 }
 
 aspect_settings bundle_factory::
@@ -70,7 +60,6 @@ std::unordered_map<
     std::string,
     boost::shared_ptr<opaque_settings>
 > bundle_factory::create_opaque_settings(const dynamic::object& o) const {
-
     return opaque_settings_builder_.build(o);
 }
 

@@ -48,6 +48,7 @@ const std::string derivatives_not_found_for_formatter(
 const std::string properties_not_found(
     "Formatter properties not found for: ");
 const std::string empty_formatter_name("Formatter name is empty.");
+const std::string cpp_modeline_name("cpp");
 
 }
 
@@ -242,7 +243,8 @@ make_includers(
 
 std::forward_list<std::shared_ptr<formattable> > factory::
 make_cmakelists(const config::cpp_options& opts,
-    const boost::optional<dogen::formatters::general_settings> gs,
+    const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const sml::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
@@ -256,6 +258,8 @@ make_cmakelists(const config::cpp_options& opts,
     cm->model_name(m.name().model_name());
     cm->file_name(cmakelists_name);
     cm->source_file_path(opts.source_directory_path() / cmakelists_name);
+
+    const auto gs(gsf.make(cpp_modeline_name, root_object));
     cm->general_settings(gs);
 
     if (!m.name().external_module_path().empty())
@@ -270,7 +274,8 @@ make_cmakelists(const config::cpp_options& opts,
 
 std::shared_ptr<formattable>
 factory::make_odb_options(const config::cpp_options& opts,
-    const boost::optional<dogen::formatters::general_settings> gs,
+    const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
@@ -287,6 +292,8 @@ factory::make_odb_options(const config::cpp_options& opts,
     auto r(std::make_shared<odb_options_info>());
     r->file_name(odb_options_name);
     r->model_name(m.name().model_name());
+
+    const auto gs(gsf.make(cpp_modeline_name, root_object));
     r->general_settings(gs);
 
     const auto i(ps.find(ch_fn));

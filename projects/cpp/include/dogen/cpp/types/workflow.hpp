@@ -32,10 +32,12 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
 #include "dogen/sml/types/model.hpp"
 
@@ -62,6 +64,19 @@ private:
 
 private:
     /**
+     * @brief Creates the formatters' repository.
+     */
+    dogen::formatters::repository create_formatters_repository(
+        const std::forward_list<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Create the general settings factory.
+     */
+    dogen::formatters::general_settings_factory create_general_settings_factory(
+        const dogen::formatters::repository& frp,
+        const dynamic::object& root_object) const;
+
+    /**
      * @brief Creates the opaque settings builder.
      */
     settings::opaque_settings_builder
@@ -72,6 +87,7 @@ private:
      */
     settings::bundle_repository create_bundle_repository(
         const dynamic::repository& rp, const dynamic::object& root_object,
+        const dogen::formatters::general_settings_factory& gsf,
         const settings::opaque_settings_builder& osb,
         const sml::model& m) const;
 
@@ -82,6 +98,7 @@ private:
         create_formattables_activty(const config::cpp_options& opts,
             const dynamic::repository& srp,
             const dynamic::object& root_object,
+            const dogen::formatters::general_settings_factory& gsf,
             const formatters::container& fc,
             const settings::opaque_settings_builder& osb,
             const settings::bundle_repository& brp,

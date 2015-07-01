@@ -29,7 +29,7 @@
 #include <forward_list>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/formatters/types/general_settings.hpp"
+#include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
@@ -38,6 +38,7 @@
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
+
 
 namespace dogen {
 namespace cpp {
@@ -77,14 +78,6 @@ private:
         const sml::model& m) const;
 
     /**
-     * @brief Obtains the general settings of the root object
-     */
-    boost::optional<dogen::formatters::general_settings>
-    obtain_root_object_general_settings(
-        const settings::bundle_repository& brp,
-        const sml::model& m) const;
-
-    /**
      * @brief Generates all of the formattables that are sourced from
      * the transformer.
      */
@@ -100,7 +93,8 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     from_factory_activity(const config::cpp_options& opts,
-        const boost::optional<dogen::formatters::general_settings> gs,
+        const dynamic::object& root_object,
+        const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formattables::path_derivatives_repository& pdrp,
         const formatter_properties_repository& fprp,
@@ -115,6 +109,7 @@ public:
     execute(const config::cpp_options& opts,
         const dynamic::repository& srp,
         const dynamic::object& root_object,
+        const dogen::formatters::general_settings_factory& gsf,
         const formatters::container& fc,
         const settings::opaque_settings_builder& osb,
         const settings::bundle_repository& brp,
