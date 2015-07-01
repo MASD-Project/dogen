@@ -54,6 +54,9 @@ public:
     void format_preamble(std::ostream& s, const comment_styles& single_line_cs,
         const comment_styles& multi_line_cs, const annotation& a) const;
 
+    void format_preamble(std::ostream& s, const comment_styles& cs,
+        const annotation& a) const;
+
     void format_postamble(std::ostream& s, const comment_styles& cs,
         const annotation& a) const;
 };

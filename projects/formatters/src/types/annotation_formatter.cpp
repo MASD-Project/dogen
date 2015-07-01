@@ -111,6 +111,11 @@ void annotation_formatter::format_preamble(
     }
 }
 
+void annotation_formatter::format_preamble(
+    std::ostream& s, const comment_styles& cs, const annotation& a) const {
+    format_preamble(s, cs, cs, a);
+}
+
 void annotation_formatter::format_postamble(std::ostream& s,
     const comment_styles& cs, const annotation& a) const {
     if (!a.modeline())
