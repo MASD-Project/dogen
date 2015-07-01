@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-06-30 Tue 18:45]
+#+CAPTION: Clock summary at [2015-07-01 Wed 16:16]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *31:45* |       |      |
+| *Total time*                                                                | *33:13* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 31:45   |       |      |
-| Active                                                                      |         | 31:45 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:39 |
+| Stories                                                                     | 33:13   |       |      |
+| Active                                                                      |         | 33:13 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
@@ -40,6 +40,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-01 Wed 14:48]--[2015-07-01 Wed 16:16] =>  1:28
     CLOCK: [2015-06-30 Tue 14:31]--[2015-06-30 Tue 14:39] =>  0:08
     CLOCK: [2015-06-26 Fri 14:10]--[2015-06-26 Fri 15:09] =>  0:59
     CLOCK: [2015-06-24 Wed 16:24]--[2015-06-24 Wed 16:34] =>  0:10
@@ -310,6 +311,14 @@ Notes:
   across from existing assistants;
 - create a trivial assistant that is a concrete version of abc.
 
+*** COMPLETED Create the opaque settings activity                     :story:
+    CLOSED: [2015-07-01 Wed 15:24]
+
+We need to add support for opaque settings. This should be as easy as
+adding a method in the formatter to register/return the opaque
+settings factory and then supplying the settings workflow with all of
+these factories.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -419,6 +428,22 @@ What can be said about an archetype:
   - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/ColourCoding.html][Class Archetypes, UML and Colour]]
   - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/index.html][Peter Coad's 'Modeling in Color']]
   - [[http://www.step-10.com/Books/JMCUBook.html][Java Modeling in Color with UML]]
+- the process of mapping domain types to archetypes could be called
+  "expansion" because its a one to many relationship in most cases.
+- its not quite correct to call CPP types "formattables". The
+  archetype has to have an ordered container of inputs to the
+  formatter. This is sort of the "payload" for formatting; the
+  archetype is a container of such entities. Taking into account the
+  cases where more than one type is placed in the same file, this
+  would result in the includes being merged. Or perhaps these things
+  are really formattables, but then we need a way to distinguish
+  between "top-level formatters" that generate archetypes from
+  "partial" formatters that can be combined.
+- with "facet specific types" we go one level deeper: it should be
+  possible to add an enumeration definition to say test data. This
+  would mean that archetypes and facets are not quite so aligned as we
+  first thought. Potentially, one should be able to ask for say a
+  formattable at facet X in an artchetype at facet Y.
 
 One way to look at it is as follows: there is the modeling dimension,
 in which we have an entity, say entity =A=; and there is the
@@ -439,7 +464,7 @@ machinery. Fix all differences.
 
 - we need to obtain the general settings to generate boilerplate. We
   should copy it from the root object. We then need to manually setup
-  the boilerplate in the template.
+  the boilerplate in the template. We need to create a
 
 Problems solved:
 
@@ -494,3 +519,48 @@ mailing list asking for help.
 Also we need to duplicate the test name and the log file name. But
 since we will be moving to catch maybe we shouldn't spent too long in
 this.
+*** CANCELLED Remove =cpp_formatters::formatting_error=               :story:
+    CLOSED: [2015-07-01 Wed 15:25]
+
+*Rationale*: The whole model will be removed when done with current refactor.
+
+Use the =formatters::formating_error= instead.
+*** CANCELLED Delete key implementation formatter                     :story:
+    CLOSED: [2015-07-01 Wed 15:32]
+
+*Rationale*: The whole model will be removed when done with current refactor.
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** CANCELLED Consider creating internal and external fields          :story:
+    CLOSED: [2015-07-01 Wed 15:34]
+
+*Rationale*: Dynamic fields are now by definition external fields.
+
+At present any dynamic field is automatically exposed to the outside
+world, allowing users to set them. This is not always ideal; for
+example, the file path should not be settable. Perhaps field
+definitions should have a "internal" or "external" property that stops
+users from being able to override certain fields.
+
+*** CANCELLED Add tests for all permutations of the domain formatter  :story:
+    CLOSED: [2015-07-01 Wed 15:44]
+
+*Rationale*: Story has bit-rotted (we don't have domain formatters any
+more) but also, its too ambitious. We can't add tests for all
+permutations of all formatters.
+
+_All_ may be too strong a word as there quite a few. We need good
+coverage around the combinations one can do within the domain
+formatter.
+*** CANCELLED Implement flymake from the EDE project                  :story:
+    CLOSED: [2015-07-01 Wed 16:12]
+
+*Rationale*: Not required with flycheck.
+
+This move of directories highlighted the fragility of the current
+flymake hack: every time the top-level directory changes we need to
+update =cunene=. Ideally what we want is to have a top-level file -
+most ideally =dogen.ede= with some lisp code that would setup the
+dogen paths for flymake. Users would only need to load this up to use it.

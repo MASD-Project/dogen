@@ -221,13 +221,6 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Create the opaque settings activity                               :story:
-
-We need to add support for opaque settings. This should be as easy as
-adding a method in the formatter to register/return the opaque
-settings factory and then supplying the settings workflow with all of
-these factories.
-
 *** Consider splitting =formattables::transformer=                    :story:
 
 We have two different responsibilities within transformer:
@@ -465,6 +458,20 @@ For the previous attempt to integrate RapidJson see this commit:
 
 b2cce41 * third party: remove includes and rapid json
 
+Merged stories:
+
+Add support for JSON serialisation
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
 *** Consider creating an Emacs mode for stitch                        :story:
 
 It would be nice to have syntax highlighting for stitch templates. We
@@ -519,10 +526,6 @@ Results in:
 : s << <<
 
 We need to ignore empty expressions.
-
-*** Remove =cpp_formatters::formatting_error=                         :story:
-
-Use the =formatters::formating_error= instead.
 
 *** Contents change check is done twice                               :story:
 
@@ -763,6 +766,8 @@ where we are using "group" we probably mean "set" since there is no
 associated operation with the set; it is merely a way of gathering
 elements.
 
+Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
 *** Handling of managed directories is incorrect                      :story:
 
 At present we are querying the dia to sml transformer to figure out
@@ -842,7 +847,6 @@ unfortunately its not about indenting:
 
 *** Use clang format in knit                                          :story:
 
-
 We need to indent the output coming out of knit. At present our stitch
 templates are super-complex purely because we are trying to get the
 indentation right. In most cases we don't. We need to:
@@ -876,6 +880,11 @@ formaters - they become flat - and then we always apply the indenter;
 either a clang based one or a simplified one. Either way, the code
 should live in formatters and make use of the language-specific
 folders as required.
+
+*** Rename sequence formatter                                         :story:
+
+The =sequence_formatter= is actually not a formatter, but a helper or
+assistant.
 
 *** Consider renaming includers                                       :story:
 
@@ -922,7 +931,7 @@ Perform some validation in repository workflow:
 - instances have qualified name populated.
 - only instances are left after instantiation.
 
-*** Incorrect application of formatter templates                      :story:
+*** Incorrect application of formatter templates in field expansion   :story:
 
 At present we are applying formatter templates across all formatters
 in C++ mode; this only makes sense because we do not have CMake and
@@ -936,6 +945,8 @@ In some cases it would be nice for a field to belong to multiple
 groups. For example =integrated_facet= is only applicable to class
 header formatters. We could implement this by making the formatter
 group a collection and having formatters belong to multiple groups.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
 *** Some test models do not build on run all specs                    :story:
 
@@ -1058,6 +1069,8 @@ model but it may make sense to do so in an external model. However,
 this would mean that if a user manually adds a type to a dogen model
 it cannot be extended. Requires a bit of thinking.
 
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
 *** Add field definition description                                  :story:
 
 It would be useful to have a description of the purpose of the field
@@ -1097,6 +1110,8 @@ make it easier to locate.
 
 *** Capture settings validation rules                                 :story:
 
+*Note*: This story has bit-rotted and needs updating.
+
 Once all settings have been built (global and local) we must pass them
 to a validator class that makes sure they all make sense. This story
 captures all the rules we need to check for. We must also check the
@@ -1128,11 +1143,6 @@ need a method in the frontends that returns a description and a method
 in the workflow that returns all descriptions. These must be
 static. The knitter can then call these methods and build the info
 text.
-
-*** Delete key implementation formatter                               :story:
-
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
 
 ** In current major release
 
@@ -1280,13 +1290,7 @@ think of anything else. However, it is not a particularly good name,
 and it is increasingly so now that we need to use it across models. We
 need a better name for this value type.
 
-*** Consider creating internal and external fields                    :story:
-
-At present any dynamic field is automatically exposed to the outside
-world, allowing users to set them. This is not always ideal; for
-example, the file path should not be settable. Perhaps field
-definitions should have a "internal" or "external" property that stops
-users from being able to override certain fields.
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
 *** Consider using the same API as boost property tree in selector    :story:
 
@@ -1317,6 +1321,8 @@ a check there.
 *** Consider renaming cpp's name builder to name factory              :story:
 
 The name builder is just a factory so make the name reflect it.
+
+Actually, we don't just build names either.
 
 *** Create a list of valid values for field definitions               :story:
 
@@ -1449,13 +1455,6 @@ that is the case, this is wrong and needs to be fixed. We are probably
 inferring the name by looking at the =front= (or =back=) of the
 namespaces list. Investigate this.
 
-*** Consider renaming registrar in boost serialisation                :story:
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful.
-
 *** Create a single container of element in model                     :story:
 
 We did an experiment to figure out if it would be more efficient to
@@ -1494,6 +1493,18 @@ across all elements and see if this is a win or not. Also, we can move
 =Element= from a concept to a type (e.g. =element=) and make it the
 base class for all elements. Validator would have to make sure the
 model is not nonsensical (object inheriting from a primitive, etc).
+
+Merged stories:
+
+Consider model as a container of types
+
+At present model is composed of objects, primitives, concepts,
+modules, etc. We could bring together all descendants of types into a
+single container (e.g. types). However, in places we do thinks like
+looking at the primitive container to see if the container has any
+primitive types - these would become slower as we'd now be looking at
+the entire type collection. Need to look at all usages of these
+containers in the code to see if this would be a win or not.
 
 *** Improve errors in dia objects                                     :story:
 
@@ -1693,6 +1704,8 @@ their own problems:
 These can be replaced by a single enumeration that indicates if the
 type/model is target or not.
 
+This work should be integrated with the model types story.
+
 *** Improve error message for blank types                             :story:
 
 #+begin_quote
@@ -1720,28 +1733,6 @@ reproduce this problem create an enumeration but remove the
 =enumeration= stereotype. This is a very common error when creating
 enumerations (forgetting to set the stereotype). We should supply some
 kind of clue ("did you mean to set the stereotype to enumeration?").
-
-*** Move code to C++ 14                                               :story:
-
-#+begin_quote
-*Story*: As a dogen user or developer, I want to make use of C++-14
-features so that I can generate more modern code.
-#+end_quote
-
-Now that the standard is out, we should move to it. Both clang and gcc
-have some kind of support at present, so it should be a matter of
-compiling on this mode. However, as we have gcc 4.7 on OSX and
-Windows, we would have to upgrade these compilers first.
-
-We have already proven that the code builds out of the box in
-sprint 50.
-
-Actually, it seems we are not using proper CMake idioms to pick up
-compiler features, as explained here:
-
-[[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-
-We need to implement this using proper CMake idioms.
 
 *** Usage of external module path in cmakelists                       :story:
 
@@ -1865,11 +1856,9 @@ Name builder is responsible for converting a nested qualified name
 into a C++ representation. We need some basic tests around this class
 with different composition scenarios.
 
-*** Add tests for =annotation_factory=                                :story:
+*** Add tests for =general_settings_factory=                          :story:
 
-We added this class without any tests initially because we wanted to
-first prove =om= worked. Once this is achieved we need to revisit this
-class and add tests.
+Tests:
 
 - missing licence
 - missing modeline
@@ -2563,6 +2552,8 @@ confusing every other developer. This would require:
   post-fix.
 - we should also use =_tests= on the test suite name so we can do
   =using XYZ= without name clashes.
+
+We should wait until we move to catch before we do this rename.
 
 *** Shared pointers to primitive types                                :story:
 
@@ -3613,21 +3604,13 @@ sometimes declaring as =struct=.
 We've tested abstract objects et al quite a lot but forgotten the
 other aspects of the model.
 
-*** Add tests for all permutations of the domain formatter            :story:
+*** Consider renaming registrar in boost serialisation                :story:
 
-_All_ may be too strong a word as there quite a few. We need good
-coverage around the combinations one can do within the domain
-formatter.
-
-*** Consider model as a container of types                            :story:
-
-At present model is composed of objects, primitives, concepts,
-modules, etc. We could bring together all descendants of types into a
-single container (e.g. types). However, in places we do thinks like
-looking at the primitive container to see if the container has any
-primitive types - these would become slower as we'd now be looking at
-the entire type collection. Need to look at all usages of these
-containers in the code to see if this would be a win or not.
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
 
 *** Split a fully formed model from partial models                    :story:
 
@@ -3710,26 +3693,6 @@ identity attributes. This means that if we get a property via modeling
 a concept it is not processed and added to the keys.
 
 Update injector to follow concepts.
-
-*** Build shared objects instead of dynamic libraries                 :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to generate models as shared objects
-so that I don't have to statically link models all the time.
-#+end_quote
-
-With the increase in tests build speeds have started to suffer,
-especially on low hardware. One potential way to mitigate this is to
-avoid unnecessary linking. The problem we have at present is that
-every time something changes in any model we have to relink all the
-binaries that use that model as it is consumed as a static library. If
-all the static libraries were converted to shared objects this would
-no longer be necessary.
-
-We probably need a dogen command line option to determine what to
-build so that users are not forced to always build static / shared
-libraries. We should make sure one of the tests is using a static
-library to make sure this scenario doesn't get borked.
 
 *** Refactor node according to composite pattern in dia to sml        :story:
 
@@ -3908,6 +3871,9 @@ inside of the includer service.
 
 We need to find a good use case for this.
 
+Taking into account the "master include" rename, this would be a
+"master master include" file?
+
 *** Add new equivalence operator to domain types                      :story:
 
 #+begin_quote
@@ -3917,7 +3883,7 @@ more accurately.
 #+end_quote
 
 We should have an operator that compares the state of two objects
-ignoring the version.
+ignoring the version (for versioned objects).
 
 *** Add run spec targets for each test                                :story:
 
@@ -3976,6 +3942,9 @@ comment for a test but forgot to keep on doing it. Example:
 This helps make the purpose of the test clearer when the name is not
 sufficient.
 
+This may not be required once we move over to Catch since the specs
+become very readable.
+
 ** In next major release
 
 These stories are good candidates for the subsequent release. This
@@ -4008,6 +3977,25 @@ to do:
 One thing to bear in mind though is that the labeling is done at the
 SML level; and for a given SML entity, we may have a number of
 formattables. Should all be passed in?
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+Merged stories:
+
+Types that share one file
+
+#+begin_quote
+*Story*: As a dogen user, I want to generate a single file for a
+number of related classes so that I don't have to deal with lots of
+files when they are not needed.
+#+end_quote
+
+At present we force all types etc to have their own file. However, in
+cases it may be useful to have multiple types sharing the same
+file. For instance, one may want to have all enumerations in one file,
+or all exceptions, etc.
+
+We could implement this using dynamic extensions.
 
 *** Implement stitch with merging                                     :story:
 
@@ -4150,6 +4138,13 @@ It may be nice to be able to switch parts of the header guards off (do
 not use namespaces, etc) or even to have a completely different policy
 to generate header guards. We do not have a use case for this yet, but
 this story is a place-holder for it.
+
+The end-game for this is to have a set of "variables" that can be used
+to express the header guards:
+
+: $(namespaces)_$(class_name)_$(extension)
+
+And so forth.
 
 *** Adding types to package namespace                                 :story:
 
@@ -4316,18 +4311,6 @@ into the available attributes and see if they make sense as dogen
 traits to control JSON. Some of these may have wider application and
 be used to control other serialisation formats.
 
-*** Add support for JSON serialisation                                :story:
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
-
 *** Add targets to output manual in downloadable formats              :story:
 
 #+begin_quote
@@ -4439,21 +4422,6 @@ dogen.
 See [[http://www.codeproject.com/Articles/447922/Application-of-Cplusplus11-User-Defined-Literals-t][Application of C++11 User-Defined Literals to Handling Scientific
 Quantities, Number Representation and String Manipulation]]
 
-*** Types that share one file                                         :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to generate a single file for a
-number of related classes so that I don't have to deal with lots of
-files when they are not needed.
-#+end_quote
-
-At present we force all types etc to have their own file. However, in
-cases it may be useful to have multiple types sharing the same
-file. For instance, one may want to have all enumerations in one file,
-or all exceptions, etc.
-
-We could implement this using dynamic extensions.
-
 *** Add export macros support                                         :story:
 
 #+begin_quote
@@ -4477,25 +4445,6 @@ There is also a GCC equivalent explained [[http://pic.dhe.ibm.com/infocenter/tpf
 
 We should have some dynamic extensions to control the outputting of
 these.
-
-*** Create a visitor interface with multiple implementations          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need multiple visitor interfaces so that I
-can decide which one is best for my requirements.
-#+end_quote
-
-We decided to use a base class for visitor; it would have been better
-to create an interface, with multiple implementations:
-
-- negative visitor: any unimplemented methods throw
-- default visitor: all methods do nothing
-- [[*Visitor%20with%20%3Dstd::function%3D%20for%20each%20%3Dvisit%3D%20method][std::function visitor]]
-- ...
-
-Users can then inherit from these visitors where appropriate
-(e.g. negative and default visitors). Each of these would have their
-own formatter.
 
 *** Improve cross model visitation support                            :story:
 
@@ -4584,6 +4533,8 @@ agnostic".
 
 See also the model groups work.
 
+See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
 *** Add getter and setter prefixes                                    :story:
 
 #+begin_quote
@@ -4599,6 +4550,9 @@ the diagram, e.g. =--getter-prefix=set_=.
 
 We should check what ODB has done for this and implement the same
 pattern.
+
+We should also look for some support in clang format, although it
+seems very unlikely.
 
 *** Add support for qualified class names in dia                      :story:
 
@@ -4625,95 +4579,24 @@ model. One would still have to define a large package, but it could be
 empty, or contain only the types which only have connections inside
 the package, plus comments for the package, etc.
 
-*** Add merging code generation support                                :epic:
+*** Create a visitor interface with multiple implementations          :story:
 
 #+begin_quote
-*Story*: As a dogen user, I want to manually change some code in
-generated files so that I can add functionality that is missing in
-dogen.
+*Story*: As a dogen user, I need multiple visitor interfaces so that I
+can decide which one is best for my requirements.
 #+end_quote
 
-At present it is not possible to manually add methods to a class that
-was code generated; one must stop code generating the class and
-maintain the whole class manually. However, in some cases it makes
-sense to have a combination of both:
+We decided to use a base class for visitor; it would have been better
+to create an interface, with multiple implementations:
 
-- value objects need helper methods such as for example boolean
-  properties (e.g. =is_empty=) that make use of other properties, or
-  simple methods such as population etc that really belong to the
-  object rather than an external service
-- services sometimes need state and it would be good if we could
-  manage that via code generation.
+- negative visitor: any unimplemented methods throw
+- default visitor: all methods do nothing
+- [[*Visitor%20with%20%3Dstd::function%3D%20for%20each%20%3Dvisit%3D%20method][std::function visitor]]
+- ...
 
-For this we need a merging code generator: that is, a code generator
-that is aware of code that was crafted manually and does not overwrite
-it - but instead "intelligently" merges manual with code generated
-code.
-
-From the beginning we avoided this because we thought it would be too
-complicated for dogen. However, its increasingly becoming apparent
-that this is a needed feature for the real world - there are many
-cases where we are working around this deficiency. A few solutions are
-possible:
-
-- let the code generator manage the header file and create two types
-  of CPP files, one which includes the other: a manual and an
-  "automatic" one. This would effectively separate the two types of
-  code. For this dogen would have to be able to generate complex types
-  in operations (e.g. we'd have to solve the lack of support for
-  =const std::string&=).
-- use clang to do the merging. this probably means adding some kind of
-  attribute to every method - possibly using C++ attribute support
-  (e.g. =[ [generated ] ]= and/or =[ [ manual ] ]= (spaces due to org
-  mode). We could then say to clang: read current state of the file,
-  grab every non-generated method and copy them across to the newly
-  code generated file. Merging could be the final stage before
-  writing. In addition, we should also have some dynamic extensions to
-  determine which files require merging. The dynamic extension could
-  be populated automatically (e.g. grep for the manual attribute) or
-  manually. Note that using clang to do merging will make things a lot
-  slower.
-
-*Random Thoughts*
-
-- include management with be a mix of manual versus automatically
-  generated. This is not possible because there will be no way to
-  determine which one is which. To solve this problem we need to allow
-  users to add include files from the dynamic extensions and get those
-  processed like all the other includes. In the new world this means
-  adding includes to the formatter settings. These are local
-  settings. As at present, we cannot identify a use case for adding an
-  include file for all types, there is no need to support this feature
-  at the global settings level, so this fits nicely with the existing
-  settings infrastructure.
-- merging could be done without needing clang, which would also make
-  it cross language. All that is required is for the language to
-  support some kind of meta-data to mark a method as "manually
-  generated". This could even be done using comments but this is not
-  ideal. The process would then be: dogen would open up an existing
-  source file and locate the attribute; then look for a open brackets
-  to indicate the start of the method (={=) and then find the matching
-  close brackets (=}=). We could keep a counter and increment it when
-  a new open bracket is found and decrement it when a close bracket is
-  found. When its zero we are done. All the code from the attribute to
-  the close brackets would be lifted. A very simple regex matching
-  would be done to find the method name - or perhaps some trivial
-  parsing could be done, but it should be kept as simple as
-  possible. The objective is simply to figure out the method name. The
-  method is copied across and stored in the =cpp= model, in the
-  correct method. When code generating, if a method is marked as
-  "manually generated" and if there is implementation content, we dump
-  that; otherwise we generate the skeleton of the method as if it was
-  not "manually generated".
-- merging could be done as part of SML, in meta-data. That is, we
-  could annotate the merged method into language specific properties
-  in the meta-data and then query those in the language specific model
-  generation. We could have another SML workflow to look for files; it
-  could use the meta-data for file path. The extension will tell it
-  what "function parser" to use. We could literally look through the
-  meta-data extensions looking for file path, and for each run the
-  "function parser"; it will return a set of "manual" functions. These
-  we can then slot into the meta-data and reuse later on.
+Users can then inherit from these visitors where appropriate
+(e.g. negative and default visitors). Each of these would have their
+own formatter.
 
 *** Visitor adaptor for usage in ranges                               :story:
 
@@ -4785,22 +4668,6 @@ that I don't have to do this manually.
 
 We should have a clone method which copy constructs all non-pointer
 types, and then creates new objects for pointer types.
-
-*** Generate service skeleton                                          :epic:
-
-Since we already have all of the boiler plate code for services such
-as licence, header guards, etc - we could just create a service
-skeleton to stop us from having to copy it from the forward
-declarations.
-
-In addition to the class definition, it should also define all of the
-automatic constructors, and add a private section at the bottom.
-
-Also, for cases where the service is implementing an interface, we
-should generate stubs for all methods, similar to what we'd do for the
-original interface, but marking the methods as override, and adding a
-blank implementation - with return types where required and commented
-out parameters, to make the code compilable out of the box.
 
 *** Add versioning support                                            :story:
 
@@ -5585,6 +5452,47 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Build shared objects instead of dynamic libraries                 :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to generate models as shared objects
+so that I don't have to statically link models all the time.
+#+end_quote
+
+With the increase in tests build speeds have started to suffer,
+especially on low hardware. One potential way to mitigate this is to
+avoid unnecessary linking. The problem we have at present is that
+every time something changes in any model we have to relink all the
+binaries that use that model as it is consumed as a static library. If
+all the static libraries were converted to shared objects this would
+no longer be necessary.
+
+We probably need a dogen command line option to determine what to
+build so that users are not forced to always build static / shared
+libraries. We should make sure one of the tests is using a static
+library to make sure this scenario doesn't get borked.
+
+*** Move code to C++ 14                                               :story:
+
+#+begin_quote
+*Story*: As a dogen user or developer, I want to make use of C++-14
+features so that I can generate more modern code.
+#+end_quote
+
+Now that the standard is out, we should move to it. Both clang and gcc
+have some kind of support at present, so it should be a matter of
+compiling on this mode. However, as we have gcc 4.7 on OSX and
+Windows, we would have to upgrade these compilers first.
+
+We have already proven that the code builds out of the box in
+sprint 50.
+
+Actually, it seems we are not using proper CMake idioms to pick up
+compiler features, as explained here:
+
+[[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+
+We need to implement this using proper CMake idioms.
 
 *** Migrate from Boost Test to Catch                                  :story:
 
@@ -5938,6 +5846,8 @@ We should consider hosting the documentation here:
 
 - https://readthedocs.org/
 
+This probably means we need to move to Mark Down.
+
 *** Create a demo of installing dogen and generating hello world      :story:
 
 #+begin_quote
@@ -5974,14 +5884,6 @@ a trivial script that works for Linux 32-bit and 64-bit with gcc.
 *** Create a trivial Linux clang script                               :story:
 
 We need to be able to build Linux clang 32-bit and 64-bit again.
-
-*** Implement flymake from the EDE project                            :story:
-
-This move of directories highlighted the fragility of the current
-flymake hack: every time the top-level directory changes we need to
-update =cunene=. Ideally what we want is to have a top-level file -
-most ideally =dogen.ede= with some lisp code that would setup the
-dogen paths for flymake. Users would only need to load this up to use it.
 
 *** Add support for automatic upload packages into GDrive             :story:
 
@@ -6040,7 +5942,113 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
-*** Add support for languages available in Dia2Code                   :story:
+*** Generate service skeleton                                          :epic:
+
+Since we already have all of the boiler plate code for services such
+as licence, header guards, etc - we could just create a service
+skeleton to stop us from having to copy it from the forward
+declarations.
+
+In addition to the class definition, it should also define all of the
+automatic constructors, and add a private section at the bottom.
+
+Also, for cases where the service is implementing an interface, we
+should generate stubs for all methods, similar to what we'd do for the
+original interface, but marking the methods as override, and adding a
+blank implementation - with return types where required and commented
+out parameters, to make the code compilable out of the box.
+
+*** Add merging code generation support                                :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to manually change some code in
+generated files so that I can add functionality that is missing in
+dogen.
+#+end_quote
+
+At present it is not possible to manually add methods to a class that
+was code generated; one must stop code generating the class and
+maintain the whole class manually. However, in some cases it makes
+sense to have a combination of both:
+
+- value objects need helper methods such as for example boolean
+  properties (e.g. =is_empty=) that make use of other properties, or
+  simple methods such as population etc that really belong to the
+  object rather than an external service
+- services sometimes need state and it would be good if we could
+  manage that via code generation.
+
+For this we need a merging code generator: that is, a code generator
+that is aware of code that was crafted manually and does not overwrite
+it - but instead "intelligently" merges manual with code generated
+code.
+
+From the beginning we avoided this because we thought it would be too
+complicated for dogen. However, its increasingly becoming apparent
+that this is a needed feature for the real world - there are many
+cases where we are working around this deficiency. A few solutions are
+possible:
+
+- let the code generator manage the header file and create two types
+  of CPP files, one which includes the other: a manual and an
+  "automatic" one. This would effectively separate the two types of
+  code. For this dogen would have to be able to generate complex types
+  in operations (e.g. we'd have to solve the lack of support for
+  =const std::string&=).
+- use clang to do the merging. this probably means adding some kind of
+  attribute to every method - possibly using C++ attribute support
+  (e.g. =[ [generated ] ]= and/or =[ [ manual ] ]= (spaces due to org
+  mode). We could then say to clang: read current state of the file,
+  grab every non-generated method and copy them across to the newly
+  code generated file. Merging could be the final stage before
+  writing. In addition, we should also have some dynamic extensions to
+  determine which files require merging. The dynamic extension could
+  be populated automatically (e.g. grep for the manual attribute) or
+  manually. Note that using clang to do merging will make things a lot
+  slower.
+
+*Random Thoughts*
+
+- include management with be a mix of manual versus automatically
+  generated. This is not possible because there will be no way to
+  determine which one is which. To solve this problem we need to allow
+  users to add include files from the dynamic extensions and get those
+  processed like all the other includes. In the new world this means
+  adding includes to the formatter settings. These are local
+  settings. As at present, we cannot identify a use case for adding an
+  include file for all types, there is no need to support this feature
+  at the global settings level, so this fits nicely with the existing
+  settings infrastructure.
+- merging could be done without needing clang, which would also make
+  it cross language. All that is required is for the language to
+  support some kind of meta-data to mark a method as "manually
+  generated". This could even be done using comments but this is not
+  ideal. The process would then be: dogen would open up an existing
+  source file and locate the attribute; then look for a open brackets
+  to indicate the start of the method (={=) and then find the matching
+  close brackets (=}=). We could keep a counter and increment it when
+  a new open bracket is found and decrement it when a close bracket is
+  found. When its zero we are done. All the code from the attribute to
+  the close brackets would be lifted. A very simple regex matching
+  would be done to find the method name - or perhaps some trivial
+  parsing could be done, but it should be kept as simple as
+  possible. The objective is simply to figure out the method name. The
+  method is copied across and stored in the =cpp= model, in the
+  correct method. When code generating, if a method is marked as
+  "manually generated" and if there is implementation content, we dump
+  that; otherwise we generate the skeleton of the method as if it was
+  not "manually generated".
+- merging could be done as part of SML, in meta-data. That is, we
+  could annotate the merged method into language specific properties
+  in the meta-data and then query those in the language specific model
+  generation. We could have another SML workflow to look for files; it
+  could use the meta-data for file path. The extension will tell it
+  what "function parser" to use. We could literally look through the
+  meta-data extensions looking for file path, and for each run the
+  "function parser"; it will return a set of "manual" functions. These
+  we can then slot into the meta-data and reuse later on.
+
+*** Add support for languages available in Dia2Code                    :epic:
 
 Dia already has a default code generator: [[http://dia2code.sourceforge.net/][Dia2Code]]. At present it
 supports the following outputs (as per [[http://dia2code.sourceforge.net/features.html][features]] page):
@@ -6524,11 +6532,14 @@ cpp. However, in reality the world looks more like this:
   would also need the language. Fields would then be
   =quilt.cpp.enabled= and so on.
 
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
 *** Add support for type "labels" or "tags"                           :story:
 
 It may be useful to "tag" a number of types with a "label", and to
 allow users to access these at run time. This only makes sense in the
-context of reflection. This story needs a bit more fleshing out.
+context of reflection. This story needs a bit more fleshing out. We
+don't yet have a use case for this.
 
 *** Splitting facets into their own projects                          :story:
 
