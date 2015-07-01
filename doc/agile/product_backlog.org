@@ -2973,6 +2973,26 @@ We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf]
 Now that we have subsidiary settings and principal settings do we need
 the rename? We should consider "universal settings" maybe.
 
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
+conceptual sense.
+
 *** Improve formatters code generation marker                         :story:
 
 Things the marker can/should have:
