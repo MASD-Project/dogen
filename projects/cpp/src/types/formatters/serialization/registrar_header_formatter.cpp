@@ -48,7 +48,7 @@ file_types registrar_header_formatter::file_type() const {
 
 formattables::origin_types
 registrar_header_formatter::formattable_origin_type() const {
-    return formattables::origin_types::external;
+    return formattables::origin_types::internal;
 }
 
 void registrar_header_formatter::register_inclusion_dependencies_provider(

@@ -90,6 +90,36 @@
     {
         "name" : {
             "simple" : "postfix",
+            "qualified" : "cpp.serialization.registrar_header_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.registrar_header_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : "fwd"
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
+            "qualified" : "cpp.serialization.registrar_implementation_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.serialization",
+            "formatter_name" : "cpp.serialization.registrar_implementation_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : "fwd"
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
             "qualified" : "cpp.serialization.forward_declarations_formatter.postfix"
         },
         "ownership_hierarchy" : {

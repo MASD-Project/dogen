@@ -32,7 +32,7 @@ namespace cpp {
 namespace formatters {
 namespace serialization {
 
-class registrar_header_formatter final : registrar_formatter_interface {
+class registrar_header_formatter final : public registrar_formatter_interface {
 public:
     /**
      * @brief Returns the formatter name.
