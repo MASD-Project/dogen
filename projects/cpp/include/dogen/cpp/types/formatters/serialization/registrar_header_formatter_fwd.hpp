@@ -18,52 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_REGISTRAR_HEADER_FORMATTER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_REGISTRAR_HEADER_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-struct traits {
-    /**
-     * @brief Name of this facet.
-     */
-    static std::string facet_name();
-
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
-
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
-
-    /**
-     * @brief Name of the forward declaration's formatter.
-     */
-    static std::string forward_declarations_formatter_name();
-
-    /**
-     * @brief Name of the registrar header formatter.
-     */
-    static std::string registrar_header_formatter_name();
-
-    /**
-     * @brief Name of the registrar implementation formatter.
-     */
-    static std::string registrar_implementation_formatter_name();
-
-};
+class registrar_header_formatter;
 
 } } } }
 

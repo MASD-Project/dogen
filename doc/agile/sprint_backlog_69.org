@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-02 Thu 08:20]
+#+CAPTION: Clock summary at [2015-07-02 Thu 08:47]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *36:58* |       |      |
+| *Total time*                                                                | *37:24* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 36:58   |       |      |
-| Active                                                                      |         | 36:58 |      |
+| Stories                                                                     | 37:24   |       |      |
+| Active                                                                      |         | 37:24 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -37,6 +37,7 @@
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
+| STARTED Implement serialisation registrar header formatter                  |         |       | 0:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -489,7 +490,13 @@ What can be said about an archetype:
   that into a language-specific representation and then finally the
   archetype dimension.
 
-*** Implement serialisation registrar formatter                       :story:
+*** STARTED Implement serialisation registrar header formatter        :story:
+    CLOCK: [2015-07-02 Thu 08:21]--[2015-07-02 Thu 08:47] =>  0:26
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement serialisation registrar implementation formatter        :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.

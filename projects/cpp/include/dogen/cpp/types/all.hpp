@@ -176,6 +176,7 @@
 #include "dogen/cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 #include "dogen/cpp/types/formatters/forward_declarations_formatter_interface.hpp"
+#include "dogen/cpp/types/formatters/serialization/registrar_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/test_data/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties_repository_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository_factory.hpp"
@@ -183,3 +184,4 @@
 #include "dogen/cpp/types/formattables/inclusion_dependencies_repository_factory.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
+#include "dogen/cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"

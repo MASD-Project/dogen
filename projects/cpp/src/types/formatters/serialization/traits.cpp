@@ -54,5 +54,10 @@ std::string traits::registrar_header_formatter_name() {
     return r;
 }
 
+std::string traits::registrar_implementation_formatter_name() {
+    static std::string r(traits::facet_name() +
+        ".registrar_implementation_formatter");
+    return r;
+}
 
 } } } }

@@ -18,51 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_TRAITS_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_REGISTRAR_IMPLEMENTATION_FORMATTER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_SERIALIZATION_REGISTRAR_IMPLEMENTATION_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include "dogen/cpp/types/formatters/registrar_formatter_interface.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
 
-struct traits {
+class registrar_implementation_formatter final : registrar_formatter_interface {
+public:
     /**
-     * @brief Name of this facet.
+     * @brief Returns the formatter name.
      */
-    static std::string facet_name();
+    static std::string static_formatter_name();
 
-    /**
-     * @brief Name of the class header formatter.
-     */
-    static std::string class_header_formatter_name();
+public:
+    dynamic::ownership_hierarchy ownership_hierarchy() const override;
 
-    /**
-     * @brief Name of the class implementation formatter.
-     */
-    static std::string class_implementation_formatter_name();
+    file_types file_type() const override;
 
-    /**
-     * @brief Name of the forward declaration's formatter.
-     */
-    static std::string forward_declarations_formatter_name();
+    formattables::origin_types formattable_origin_type() const;
 
-    /**
-     * @brief Name of the registrar header formatter.
-     */
-    static std::string registrar_header_formatter_name();
+    void register_inclusion_dependencies_provider(
+        formattables::registrar& rg) const override;
 
-    /**
-     * @brief Name of the registrar implementation formatter.
-     */
-    static std::string registrar_implementation_formatter_name();
-
+    dogen::formatters::file
+        format(const formattables::registrar_info& c) const override;
 };
 
 } } } }
