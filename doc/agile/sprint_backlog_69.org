@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-01 Wed 22:28]
+#+CAPTION: Clock summary at [2015-07-02 Thu 08:20]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *36:41* |       |      |
+| *Total time*                                                                | *36:58* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 36:41   |       |      |
-| Active                                                                      |         | 36:41 |      |
+| Stories                                                                     | 36:58   |       |      |
+| Active                                                                      |         | 36:58 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -35,8 +35,8 @@
 | COMPLETED Solve the problem of "relocatable" formatters                     |         |       | 1:36 |
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
+| COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
-| STARTED Implement odb options formatter in odb                              |         |       | 5:29 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -319,6 +319,41 @@ adding a method in the formatter to register/return the opaque
 settings factory and then supplying the settings workflow with all of
 these factories.
 
+*** COMPLETED Implement odb options formatter in odb                  :story:
+    CLOSED: [2015-07-02 Thu 08:20]
+    CLOCK: [2015-07-02 Thu 08:03]--[2015-07-02 Thu 08:20] =>  0:17
+    CLOCK: [2015-07-01 Wed 21:58]--[2015-07-01 Wed 22:27] =>  0:29
+    CLOCK: [2015-07-01 Wed 20:55]--[2015-07-01 Wed 21:57] =>  1:02
+    CLOCK: [2015-07-01 Wed 19:31]--[2015-07-01 Wed 19:52] =>  0:21
+    CLOCK: [2015-07-01 Wed 17:52]--[2015-07-01 Wed 17:55] =>  0:03
+    CLOCK: [2015-07-01 Wed 17:22]--[2015-07-01 Wed 17:51] =>  0:26
+    CLOCK: [2015-07-01 Wed 16:17]--[2015-07-01 Wed 17:21] =>  1:04
+    CLOCK: [2015-06-30 Tue 18:31]--[2015-06-30 Tue 18:45] =>  0:14
+    CLOCK: [2015-06-30 Tue 17:45]--[2015-06-30 Tue 18:15] =>  0:30
+    CLOCK: [2015-06-30 Tue 17:31]--[2015-06-30 Tue 17:44] =>  0:13
+    CLOCK: [2015-06-30 Tue 17:18]--[2015-06-30 Tue 17:30] =>  0:12
+    CLOCK: [2015-06-30 Tue 15:53]--[2015-06-30 Tue 16:45] =>  0:52
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Problems solved:
+
+- incorrect path when using split project.
+- generate the correct general settings for odb/cmake.
+- we need to obtain the general settings to generate boilerplate. We
+  should copy it from the root object. We then need to manually setup
+  the boilerplate in the template. We need to create the general
+  settings in the factory. The factory needs access to the root
+  object.
+- push general settings factory generation into workflow and pass it
+  down to bundle factory.
+- fix spurious spacing in cmake/odb licences (legacy).
+- split annotation formatting from boilerplate.
+- add boilerplate to legacy formatter.
+- we have two of these at the moment, one at the top-level and another
+  one inside odb. Remove the odb one.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -453,42 +488,6 @@ What can be said about an archetype:
   we probably have 3 steps: the modeling dimension, the translation of
   that into a language-specific representation and then finally the
   archetype dimension.
-
-*** STARTED Implement odb options formatter in odb                    :story:
-    CLOCK: [2015-07-01 Wed 21:58]--[2015-07-01 Wed 22:27] =>  0:29
-    CLOCK: [2015-07-01 Wed 20:55]--[2015-07-01 Wed 21:57] =>  1:02
-    CLOCK: [2015-07-01 Wed 19:31]--[2015-07-01 Wed 19:52] =>  0:21
-    CLOCK: [2015-07-01 Wed 17:52]--[2015-07-01 Wed 17:55] =>  0:03
-    CLOCK: [2015-07-01 Wed 17:22]--[2015-07-01 Wed 17:51] =>  0:26
-    CLOCK: [2015-07-01 Wed 16:17]--[2015-07-01 Wed 17:21] =>  1:04
-    CLOCK: [2015-06-30 Tue 18:31]--[2015-06-30 Tue 18:45] =>  0:14
-    CLOCK: [2015-06-30 Tue 17:45]--[2015-06-30 Tue 18:15] =>  0:30
-    CLOCK: [2015-06-30 Tue 17:31]--[2015-06-30 Tue 17:44] =>  0:13
-    CLOCK: [2015-06-30 Tue 17:18]--[2015-06-30 Tue 17:30] =>  0:12
-    CLOCK: [2015-06-30 Tue 15:53]--[2015-06-30 Tue 16:45] =>  0:52
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-Problems:
-
-- do not generate odb options if odb facet is disabled.
-
-Problems solved:
-
-- generate the correct general settings for odb/cmake.
-- we need to obtain the general settings to generate boilerplate. We
-  should copy it from the root object. We then need to manually setup
-  the boilerplate in the template. We need to create the general
-  settings in the factory. The factory needs access to the root
-  object.
-- push general settings factory generation into workflow and pass it
-  down to bundle factory.
-- fix spurious spacing in cmake/odb licences (legacy).
-- split annotation formatting from boilerplate.
-- add boilerplate to legacy formatter.
-- we have two of these at the moment, one at the top-level and another
-  one inside odb. Remove the odb one.
 
 *** Implement serialisation registrar formatter                       :story:
 

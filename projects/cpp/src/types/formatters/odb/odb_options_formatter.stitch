@@ -48,7 +48,7 @@ dogen::formatters::file odb_options_formatter_stitch(
 --guard-prefix <#= boost::to_upper_copy(i.product_name()) #>_<#= boost::to_upper_copy(i.model_name()) #>_<#= boost::to_upper_copy(i.odb_folder()) #>
 <#+
     } // sbf
-    // return fa.make_file(i.file_path());
-    return fa.make_file(i.file_path(), false/*overwrite*/);
+    return fa.make_file(i.file_path());
+    // return fa.make_file(i.file_path(), false/*overwrite*/);
 }
 #>

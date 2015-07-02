@@ -65,7 +65,7 @@ fa.stream() << std::endl;
 fa.stream() << "# make the header guards similar to dogen ones" << std::endl;
 fa.stream() << "--guard-prefix " << boost::to_upper_copy(i.product_name()) << "_" << boost::to_upper_copy(i.model_name()) << "_" << boost::to_upper_copy(i.odb_folder()) << std::endl;
     } // sbf
-    // return fa.make_file(i.file_path());
-    return fa.make_file(i.file_path(), false/*overwrite*/);
+    return fa.make_file(i.file_path());
+    // return fa.make_file(i.file_path(), false/*overwrite*/);
 }
 } } } }

@@ -308,7 +308,7 @@ factory::make_odb_options(const config::cpp_options& opts,
 
     boost::filesystem::path fp;
     if (opts.split_project())
-        fp = opts.source_directory_path();
+        fp = opts.source_directory_path() / m.name().model_name();
     else {
         fp = opts.project_directory_path() / m.name().model_name();
         fp /= i->second.source_directory_name();
