@@ -38,12 +38,12 @@ registrar_implementation_formatter::ownership_hierarchy() const {
     static dynamic::ownership_hierarchy
         r(formatters::traits::model_name(), traits::facet_name(),
             registrar_implementation_formatter::static_formatter_name(),
-            formatters::traits::header_formatter_group_name());
+            formatters::traits::implementation_formatter_group_name());
     return r;
 }
 
 file_types registrar_implementation_formatter::file_type() const {
-    return file_types::cpp_header;
+    return file_types::cpp_implementation;
 }
 
 formattables::origin_types

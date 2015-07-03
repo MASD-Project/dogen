@@ -50,6 +50,7 @@ const std::string properties_not_found(
 const std::string empty_formatter_name("Formatter name is empty.");
 const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
+const std::string cpp_modeline_name("cpp");
 
 }
 
@@ -126,6 +127,8 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
+    const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
@@ -137,6 +140,11 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     name_builder b;
     auto r(std::make_shared<registrar_info>());
     r->namespaces(b.namespace_list(m, m.name()));
+
+    const auto gs(gsf.make(cpp_modeline_name, root_object));
+    settings::bundle sb;
+    sb.general_settings(gs);
+    r->settings(sb);
 
     for (const auto& pair : m.references()) {
         if (pair.second != sml::origin_types::system) {
@@ -150,17 +158,25 @@ std::shared_ptr<formattable> factory::make_registrar_info(
         r->leaves().push_back(b.qualified_name(m, l));
     r->leaves().sort();
 
+    const auto lambda([&](const std::string& src, const std::string& dst) {
+            const auto cloned_ps(clone_path_settings(ps, src, dst));
+            const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, dst));
+
+            formatter_properties fp;
+            fp.file_path(pd.file_path());
+            fp.header_guard(pd.header_guard());
+            fp.enabled(is_enabled(fprp, m.name(), src));
+            r->formatter_properties().insert(std::make_pair(dst, fp));
+        });
+
     using formatters::serialization::traits;
     const auto ch_fn(traits::class_header_formatter_name());
     const auto rh_fn(traits::registrar_header_formatter_name());
-    const auto cloned_ps(clone_path_settings(ps, ch_fn, rh_fn));
-    const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, rh_fn));
+    lambda(ch_fn, rh_fn);
 
-    formatter_properties p;
-    p.file_path(pd.file_path());
-    p.header_guard(pd.header_guard());
-    p.enabled(is_enabled(fprp, m.name(), ch_fn));
-    r->formatter_properties().insert(std::make_pair(rh_fn, p));
+    const auto ci_fn(traits::class_implementation_formatter_name());
+    const auto ri_fn(traits::registrar_implementation_formatter_name());
+    lambda(ci_fn, ri_fn);
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: "
                              << sml::string_converter::convert(qn);

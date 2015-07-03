@@ -18,7 +18,8 @@ dogen::formatters::file registrar_implementation_formatter_stitch(
 
 <#+
     } // sbf
-    return fa.make_file();
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
 }
 
 #>

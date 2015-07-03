@@ -151,7 +151,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
     factory f;
-    const auto ri(f.make_registrar_info(opts, ps, fprp, m));
+    const auto ri(f.make_registrar_info(opts, root_object, gsf, ps, fprp, m));
     if (ri)
         r.push_front(ri);
 
