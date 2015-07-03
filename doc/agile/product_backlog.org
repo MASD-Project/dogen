@@ -3641,7 +3641,7 @@ there.
 
 This would also be a good opportunity to use something like a pointer
 container for all the pointers and then use either a "dumb pointer" or
-even references everywhere. Since we know the container will exist for
+even [[http://stackoverflow.com/questions/13874673/stdreference-wrappert-usage-in-a-container][references]] everywhere. Since we know the container will exist for
 the duration of a run, we can rely on the objects being managed
 elsewhere. This is a better way rather than using shared pointers
 everywhere. Alexandrescu [[https://www.youtube.com/watch?v%3DQq_WaiwzOtI][discusses at length]] the side-effects of using
@@ -3667,6 +3667,18 @@ resolves into. There are two problems with this approach:
 
 However one imagines that a great number of lookups would be avoided
 if this was possible.
+
+Implementation tasks:
+
+- rename all types to have a prefix such as =intermediate_=,
+  e.g. =intermediate_model=, etc. Get all code to work with the new names.
+- create a new model class with just a few properties (leaves, entities, etc).
+- create a base class entity with all the required descendants.
+- remove the type base class for intermediate.
+- make entity visitable.
+- rename the existing workflow to something like model factory; it
+  takes in the intermediate models and generates a "final" model.
+- update cpp code to use this new model.
 
 *** Rename nested qname to composite qname                            :story:
 
