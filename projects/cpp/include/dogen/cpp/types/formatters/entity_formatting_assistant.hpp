@@ -50,6 +50,9 @@ namespace formatters {
  */
 class entity_formatting_assistant final : public formatting_assistant {
 public:
+    ~entity_formatting_assistant() noexcept = default;
+
+public:
     /**
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
