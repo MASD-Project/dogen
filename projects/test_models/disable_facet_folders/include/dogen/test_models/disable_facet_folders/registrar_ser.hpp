@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_DISABLE_FACET_FOLDERS_REGISTRAR_SER_HPP
+#define DOGEN_TEST_MODELS_DISABLE_FACET_FOLDERS_REGISTRAR_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 namespace dogen {
 namespace test_models {
 namespace disable_facet_folders {
@@ -26,3 +33,5 @@ template<typename Archive>
 void register_types(Archive& ar);
 
 } } }
+
+#endif

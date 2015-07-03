@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-03 Fri 22:21]
+#+CAPTION: Clock summary at [2015-07-03 Fri 22:39]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *41:07* |       |      |
+| *Total time*                                                                | *41:26* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 41:07   |       |      |
-| Active                                                                      |         | 41:07 |      |
+| Stories                                                                     | 41:26   |       |      |
+| Active                                                                      |         | 41:26 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -38,7 +38,7 @@
 | COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:32 |
 | STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:23 |
-| STARTED Implement serialisation registrar header formatter                  |         |       | 1:35 |
+| STARTED Implement serialisation registrar header formatter                  |         |       | 1:54 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -551,6 +551,8 @@ through a list in the SML model.
 This work is dependent on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][this]] story.
 
 *** STARTED Implement serialisation registrar header formatter        :story:
+    CLOCK: [2015-07-03 Fri 22:29]--[2015-07-03 Fri 22:40] =>  0:11
+    CLOCK: [2015-07-03 Fri 22:21]--[2015-07-03 Fri 22:29] =>  0:08
     CLOCK: [2015-07-03 Fri 21:40]--[2015-07-03 Fri 22:20] =>  0:40
     CLOCK: [2015-07-02 Thu 20:46]--[2015-07-02 Thu 21:15] =>  0:29
     CLOCK: [2015-07-02 Thu 08:21]--[2015-07-02 Thu 08:47] =>  0:26
@@ -560,10 +562,11 @@ machinery. Fix all differences.
 
 Problems:
 
-- add include guards and pragma once to legacy header.
+- sort remaining diffs.
 
 Problems solved:
 
+- add include guards and pragma once to legacy header.
 - we are not generating the formatting propeties for these internal
   formatters. For now we need to manually inject the formatter
   properties; this will be handled properly with the archetype

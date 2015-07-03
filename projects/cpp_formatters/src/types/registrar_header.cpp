@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
+#include "dogen/cpp_formatters/types/header_guards.hpp"
 #include "dogen/cpp_formatters/types/formatting_error.hpp"
 #include "dogen/cpp_formatters/types/licence.hpp"
 #include "dogen/cpp_formatters/types/includes.hpp"
@@ -62,6 +63,10 @@ void registrar_header::format(const cpp::formattables::file_info& f) {
     licence licence(stream_);
     licence.format();
 
+    header_guards guards(stream_);
+    guards.format_start(f.header_guard());
+    utility_.blank_line();
+
     const bool blank_line(false);
     includes includes(stream_, blank_line);
     includes.format(f);
@@ -77,7 +82,9 @@ void registrar_header::format(const cpp::formattables::file_info& f) {
                 << std::endl;
         utility_.blank_line();
     }
-    utility_.blank_line();
+
+    utility_.blank_line(2);
+    guards.format_end();
 }
 
 } }

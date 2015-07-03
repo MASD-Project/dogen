@@ -301,12 +301,21 @@ Content:
  * MA 02110-1301, USA.
  *
  */
+#ifndef CLASS_IN_A_PACKAGE_SERIALIZATION_REGISTRAR_SER_HPP
+#define CLASS_IN_A_PACKAGE_SERIALIZATION_REGISTRAR_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 namespace class_in_a_package {
 
 template<typename Archive>
 void register_types(Archive& ar);
 
 }
+
+#endif
 
 Filename: /empty_tds/actual/include/class_in_a_package/odb/package1/first_class_pragmas.hpp
 Content: 
