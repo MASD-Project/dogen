@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-03 Fri 17:39]
+#+CAPTION: Clock summary at [2015-07-03 Fri 17:48]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *40:16* |       |      |
+| *Total time*                                                                | *40:27* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 40:16   |       |      |
-| Active                                                                      |         | 40:16 |      |
+| Stories                                                                     | 40:27   |       |      |
+| Active                                                                      |         | 40:27 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -36,7 +36,7 @@
 | COMPLETED Create a formattables factory                                     |         |       | 7:29 |
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
-| STARTED Thoughts on cpp refactoring                                         |         |       | 2:21 |
+| STARTED Thoughts on cpp refactoring                                         |         |       | 2:32 |
 | STARTED Implement serialisation registrar header formatter                  |         |       | 0:55 |
 | STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:23 |
 #+end:
@@ -357,6 +357,7 @@ Problems solved:
   one inside odb. Remove the odb one.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
+    CLOCK: [2015-07-03 Fri 17:37]--[2015-07-03 Fri 17:48] =>  0:11
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
     CLOCK: [2015-06-25 Thu 15:32]--[2015-06-25 Thu 16:17] =>  0:45
@@ -505,6 +506,15 @@ What can be said about an archetype:
 - we haven't used the word "feature" anywhere yet (properly; we
   mentioned it in the manual and so on, but not given it any good
   meaning).
+- we created a split between "internal" and "external" formatters, but
+  its interesting to notice that we have "internal" formatters that
+  are "regular" formatters - in that we need to create a qname for
+  them and the formatter properties will work correctly; whereas some
+  others are "irregular" formatters - they have strange filenames that
+  cannot be generated without some fiddling. Actually, ODB options is
+  the main problematic one. If we could place it in a sensible
+  location we could probably get rid of irregular formatters
+  altogether.
 
 *** STARTED Implement serialisation registrar header formatter        :story:
     CLOCK: [2015-07-02 Thu 20:46]--[2015-07-02 Thu 21:15] =>  0:29
