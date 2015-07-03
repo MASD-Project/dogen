@@ -2704,6 +2704,9 @@ EMF has, but it seems a better way to demo Dogen rather than just
 talk about the code structure. We could add this after the section on
 authoring diagrams.
 
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]: may be a bit too complicated, but it is a good
+  way to demo complex features.
+
 *** Remove calls to unix utilities directly                           :story:
 
 We have a couple of cases where we are calling UNIX utilities when
