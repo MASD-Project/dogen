@@ -1979,17 +1979,22 @@ considerably. Perhaps a more apt name would be SDML - the Simplified
 Domain Modeling Language?
 
 Or instead we could follow the compiler theme and call it the =ir= or
-intermediate representation, or =im= for intermediate model.
+intermediate representation, or =im= for intermediate model. Actually
+this is a confusing name because it clashes with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][partial model]]
+notions we intend to introduce.
 
 After more thinking on this, and since we now have a =backend= and a
-=frontend=, it is obvious that SML is the =middleend=. However, this
-is not a very good name for the model as we also do some front-end-y
-things (such as the JSON implementation). =ir= and =im= still seem
-like the more likely candidates. Actually, JSON is not a front-end; it
-is a direct representation of the middle-end into a file. The same
-could also be done in XML. It only becomes a front-end if there is an
-intermediate representation (such as the =dia= model) that needs to be
-transformed into SML.
+=frontend=, it is obvious that SML is the =middle_end= since it is the
+middle-end of the code generation process. So it could be the
+Middle-End Model (MEM) or just Middle-End (ME).
+
+However, this is not a very good name for the model as we also do some
+front-end-y things (such as the JSON implementation). =ir= and =im=
+still seem like the more likely candidates. Actually, JSON is not a
+front-end; it is a direct representation of the middle-end into a
+file. The same could also be done in XML. It only becomes a front-end
+if there is an intermediate representation (such as the =dia= model)
+that needs to be transformed into SML.
 
 Another idea: common representation or =cr=. It is what is common to
 all modeled languages. What is not common goes into dynamic. This will
@@ -2003,9 +2008,6 @@ example one may want to take a model of a neuron and represent it in
 model rather than SML. So the name of SML must reflect the fact that
 it is a model of programming objects. Object-Oriented Programming
 Language Model?
-
-Another idea: the Middle-End Model (MEM) or just Middle-End (ME). SML
-is the middle-end of the code generation process.
 
 *** Consider renaming formatters                                      :story:
 
