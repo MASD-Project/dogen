@@ -33,10 +33,18 @@ dogen::formatters::file registrar_header_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
 fa.stream() << std::endl;
+fa.stream() << "template<typename Archive>" << std::endl;
+fa.stream() << "void register_types(Archive& ar);" << std::endl;
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 
 } } } }

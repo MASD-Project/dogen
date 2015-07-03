@@ -34,7 +34,6 @@ dogen::formatters::file class_header_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
-
 fa.stream() << std::endl;
             fa.comment(c.documentation());
             if (c.parents().empty()) {

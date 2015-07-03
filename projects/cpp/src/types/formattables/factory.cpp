@@ -139,7 +139,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
-    r->namespaces(b.namespace_list(m, m.name()));
+    r->namespaces(b.namespace_list(m, qn));
 
     const auto gs(gsf.make(cpp_modeline_name, root_object));
     settings::bundle sb;
