@@ -139,8 +139,8 @@ void registrar_implementation::format(const cpp::formattables::file_info& f) {
                     << "eos::portable_oarchive& ar);" << std::endl;
             stream_ << indenter_ << "template void register_types("
                     << "eos::portable_iarchive& ar);" << std::endl;
+            utility_.blank_line();
         }
-        utility_.blank_line();
     }
     utility_.blank_line();
 }

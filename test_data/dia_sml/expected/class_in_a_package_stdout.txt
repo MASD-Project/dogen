@@ -277,7 +277,6 @@ template void register_types(boost::archive::binary_iarchive&);
 template void register_types(boost::archive::xml_oarchive&);
 template void register_types(boost::archive::xml_iarchive&);
 
-
 }
 
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/registrar_ser.hpp

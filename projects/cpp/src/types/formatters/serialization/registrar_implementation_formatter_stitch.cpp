@@ -61,7 +61,6 @@ fa.stream() << "template void register_types(eos::portable_iarchive&);" << std::
 fa.stream() << std::endl;
             }
         } // snf
-fa.stream() << std::endl;
     } // sbf
     // return fa.make_file();
     return fa.make_file(false/*overwrite*/);

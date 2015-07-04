@@ -48,9 +48,6 @@ template void register_types(eos::portable_iarchive&);
 <#+
             }
         } // snf
-#>
-
-<#+
     } // sbf
     // return fa.make_file();
     return fa.make_file(false/*overwrite*/);
