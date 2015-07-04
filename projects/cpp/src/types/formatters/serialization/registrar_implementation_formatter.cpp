@@ -18,16 +18,94 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
+#include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/serialization/registrar_implementation_formatter_stitch.hpp"
 #include "dogen/cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
+
+namespace {
+    const std::string registrar_name("registrar");
+}
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace serialization {
+
+namespace {
+
+class provider final : public formattables::
+        inclusion_dependencies_provider_interface<sml::model> {
+public:
+    std::string formatter_name() const override;
+
+    boost::optional<std::list<std::string> >
+        provide(const formattables::inclusion_dependencies_builder_factory& f,
+        const sml::model& m) const override;
+};
+
+std::string provider::formatter_name() const {
+    return registrar_implementation_formatter::static_formatter_name();
+}
+
+boost::optional<std::list<std::string> >
+provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
+    const sml::model& m) const {
+
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
+
+    auto builder(f.make());
+    const auto rh_fn(traits::registrar_header_formatter_name());
+    builder.add(qn, rh_fn);
+
+    using ic = inclusion_constants;
+    const auto as(builder.get_aspect_settings(qn));
+
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    if (!as.disable_xml_serialization()) {
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+    }
+
+    if (!as.disable_eos_serialization()) {
+        builder.add(ic::eos::portable_iarchive());
+        builder.add(ic::eos::portable_oarchive());
+    }
+
+    const auto ch_fn(types::traits::class_header_formatter_name());
+    for (const auto& l : m.leaves())
+        builder.add(l, ch_fn);
+
+    for (const auto& pair : m.references()) {
+        const auto origin_type(pair.second);
+        if (origin_type == sml::origin_types::system)
+            continue;
+
+        const auto ref(pair.first);
+        sml::qname n;
+        n.model_name(ref.model_name());
+        n.simple_name(registrar_name);
+        n.external_module_path(ref.external_module_path());
+        builder.add(n, ch_fn);
+    }
+    return builder.build();
+}
+
+}
 
 std::string registrar_implementation_formatter::static_formatter_name() {
     return traits::registrar_implementation_formatter_name();
@@ -53,7 +131,9 @@ registrar_implementation_formatter::formattable_origin_type() const {
 
 void registrar_implementation_formatter::
 register_inclusion_dependencies_provider(
-  formattables::registrar& /*rg*/) const { }
+  formattables::registrar& rg) const {
+    rg.register_provider(boost::make_shared<provider>());
+}
 
 dogen::formatters::file registrar_implementation_formatter::
 format(const formattables::registrar_info& ri) const {

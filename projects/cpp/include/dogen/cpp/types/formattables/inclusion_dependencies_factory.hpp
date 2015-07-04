@@ -81,6 +81,12 @@ public:
     std::unordered_map<std::string, std::list<std::string> >
     make(const sml::concept& c) const;
 
+    /**
+     * @brief Makes inclusion dependencies for a model.
+     */
+    std::unordered_map<std::string, std::list<std::string> >
+    make(const sml::model& m) const;
+
 private:
     const inclusion_dependencies_builder_factory& factory_;
     const container& provider_container_;

@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-04 Sat 21:29]
+#+CAPTION: Clock summary at [2015-07-04 Sat 23:19]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *42:26* |       |      |
+| *Total time*                                                                | *44:03* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 42:26   |       |      |
-| Active                                                                      |         | 42:26 |      |
+| Stories                                                                     | 44:03   |       |      |
+| Active                                                                      |         | 44:03 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -37,7 +37,7 @@
 | COMPLETED Implement serialisation registrar header formatter                |         |       | 2:01 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:32 |
 | STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:23 |
-| STARTED Implement serialisation registrar implementation formatter          |         |       | 0:53 |
+| STARTED Implement serialisation registrar implementation formatter          |         |       | 2:30 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -573,7 +573,21 @@ through a list in the SML model.
 
 This work is dependent on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][this]] story.
 
+One slight problem with this approach: sometimes we need to preserve
+some relationships in the newly generated objects. For registrar we
+need to preserve the model leaves. For the includers / master headers
+we need to express somehow the inclusion relationship at the formatter
+level. The latter is definitely a special case because it is a pure
+C++ concept: include files cannot be modeled in SML. However,
+registrar is slightly different because we still need to compute the
+includes based on the leaves. This means that the above approach will
+not provide a clean solution, unless we synthesise an SML object when
+providing the includes. And of course we need to be careful taking
+that route or else we will end up generating the object across all
+facets.
+
 *** STARTED Implement serialisation registrar implementation formatter :story:
+    CLOCK: [2015-07-04 Sat 22:12]--[2015-07-04 Sat 23:18] =>  1:06
     CLOCK: [2015-07-04 Sat 21:40]--[2015-07-04 Sat 22:11] =>  0:31
     CLOCK: [2015-07-04 Sat 21:24]--[2015-07-04 Sat 21:30] =>  0:06
     CLOCK: [2015-07-04 Sat 20:36]--[2015-07-04 Sat 21:23] =>  0:47
@@ -583,7 +597,9 @@ machinery. Fix all differences.
 
 Problems:
 
-- includes for leaves are missing.
+- includes for leaves are missing. We need to somehow get the include
+  generation to work for registrar and also the aspect settings
+  generation.
 
 Problems solved:
 

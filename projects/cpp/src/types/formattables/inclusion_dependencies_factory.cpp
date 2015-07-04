@@ -158,4 +158,9 @@ inclusion_dependencies_factory::make(const sml::concept& /*c*/) const {
     return r;
 }
 
+std::unordered_map<std::string, std::list<std::string> >
+inclusion_dependencies_factory::make(const sml::model& m) const {
+    return generate(factory_, provider_container_.model_providers(), m);
+}
+
 } } }

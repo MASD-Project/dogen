@@ -26,6 +26,7 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
@@ -41,10 +42,14 @@ public:
 
 public:
     void register_provider(boost::shared_ptr<
-            inclusion_dependencies_provider_interface<sml::object>
-            > p);
+        inclusion_dependencies_provider_interface<sml::object>
+        > p);
     void register_provider(boost::shared_ptr<
         inclusion_dependencies_provider_interface<sml::enumeration>
+        > p);
+
+    void register_provider(boost::shared_ptr<
+        inclusion_dependencies_provider_interface<sml::model>
         > p);
 
 private:

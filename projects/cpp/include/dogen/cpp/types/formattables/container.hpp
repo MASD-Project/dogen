@@ -27,6 +27,7 @@
 
 #include <forward_list>
 #include <boost/shared_ptr.hpp>
+#include "dogen/sml/types/model.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
@@ -65,6 +66,20 @@ public:
         >&
     enumeration_providers();
 
+    const std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::model>
+            >
+        >&
+    model_providers() const;
+
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::model>
+            >
+        >&
+    model_providers();
+
 private:
     std::forward_list<
     boost::shared_ptr<
@@ -75,7 +90,12 @@ private:
         boost::shared_ptr<
             inclusion_dependencies_provider_interface<sml::enumeration>
             >
-        > enumeration_providers_;
+    > enumeration_providers_;
+    std::forward_list<
+        boost::shared_ptr<
+            inclusion_dependencies_provider_interface<sml::model>
+            >
+    > model_providers_;
 };
 
 } } }

@@ -50,7 +50,7 @@ class generator final {
 public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
-private:
+public:
     /**
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
@@ -103,6 +103,7 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
     sml::all_model_items_traversal(m, g);
+    // g.generate(m);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
                              << g.result();

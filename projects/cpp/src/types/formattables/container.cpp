@@ -60,4 +60,22 @@ container::enumeration_providers() {
     return enumeration_providers_;
 }
 
+const std::forward_list<
+    boost::shared_ptr<
+        inclusion_dependencies_provider_interface<sml::model>
+        >
+    >&
+container::model_providers() const {
+    return model_providers_;
+}
+
+std::forward_list<
+    boost::shared_ptr<
+        inclusion_dependencies_provider_interface<sml::model>
+        >
+    >&
+container::model_providers() {
+    return model_providers_;
+}
+
 } } }

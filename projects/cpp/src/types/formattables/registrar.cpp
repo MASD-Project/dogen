@@ -41,8 +41,8 @@ const formattables::container& registrar::container() const {
 }
 
 void registrar::register_provider(boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::object>
-        > p) {
+    inclusion_dependencies_provider_interface<sml::object>
+    > p) {
 
     if (p->formatter_name().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_formatter_name;
@@ -60,6 +60,17 @@ void registrar::register_provider(boost::shared_ptr<
         BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
     }
     container_.enumeration_providers().push_front(p);
+}
+
+void registrar::register_provider(boost::shared_ptr<
+    inclusion_dependencies_provider_interface<sml::model>
+    > p) {
+
+    if (p->formatter_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
+    container_.model_providers().push_front(p);
 }
 
 } } }
