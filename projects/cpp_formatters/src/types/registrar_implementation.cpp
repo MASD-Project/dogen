@@ -142,6 +142,7 @@ void registrar_implementation::format(const cpp::formattables::file_info& f) {
         }
         utility_.blank_line();
     }
+    utility_.blank_line();
 }
 
 } }

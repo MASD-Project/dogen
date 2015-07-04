@@ -279,6 +279,7 @@ template void register_types(boost::archive::xml_iarchive&);
 
 
 }
+
 Filename: /empty_tds/actual/include/class_in_a_package/serialization/registrar_ser.hpp
 Content: 
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
