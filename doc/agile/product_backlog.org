@@ -3681,6 +3681,17 @@ shared pointers. Whilst this is probably not a problem for Dogen, we
 want to explore ways of doing the right thing. There is also the
 [[https://vimeo.com/131189627][Josuttis talk]] on the subject.
 
+In addition we will need support for concepts at the package level as
+we need to have concepts with the same names for both partial and full
+types. We should use namespaces to house these types instead of
+postfixes/prefixes because there will be so many similarly named
+types.
+
+Properties will have types of the base type (=type=). We need a nested
+type class. Modules will have types directly. We need a good name for
+these (type references? something that alludes to referring to
+existing types in the model).
+
 Merged with other story:
 
 Once the model has been merged and resolved, all qnames in the model
