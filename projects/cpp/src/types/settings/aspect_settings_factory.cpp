@@ -122,4 +122,13 @@ aspect_settings aspect_settings_factory::make(const dynamic::object& o) const {
     return r;
 }
 
+aspect_settings aspect_settings_factory::make() const {
+    aspect_settings r;
+    r.disable_complete_constructor(field_values_.disable_complete_constructor);
+    r.disable_xml_serialization(field_values_.disable_xml_serialization);
+    r.disable_eos_serialization(field_values_.disable_eos_serialization);
+    r.disable_versioning(field_values_.disable_versioning);
+    return r;
+}
+
 } } }

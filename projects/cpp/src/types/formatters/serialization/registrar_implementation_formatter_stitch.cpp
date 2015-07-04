@@ -33,6 +33,34 @@ dogen::formatters::file registrar_implementation_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << std::endl;
+fa.stream() << "template<typename Archive>" << std::endl;
+fa.stream() << "void register_types(Archive&) {" << std::endl;
+fa.stream() << "}" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template void register_types(boost::archive::polymorphic_oarchive&);" << std::endl;
+fa.stream() << "template void register_types(boost::archive::polymorphic_iarchive&);" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template void register_types(boost::archive::text_oarchive&);" << std::endl;
+fa.stream() << "template void register_types(boost::archive::text_iarchive&);" << std::endl;
+fa.stream() << std::endl;
+fa.stream() << "template void register_types(boost::archive::binary_oarchive&);" << std::endl;
+fa.stream() << "template void register_types(boost::archive::binary_iarchive&);" << std::endl;
+fa.stream() << std::endl;
+            if (!fa.is_xml_serialization_disabled()) {
+fa.stream() << "template void register_types(boost::archive::xml_oarchive&);" << std::endl;
+fa.stream() << "template void register_types(boost::archive::xml_iarchive&);" << std::endl;
+fa.stream() << std::endl;
+            }
+
+            if (!fa.is_eos_serialization_disabled()) {
+fa.stream() << "template void register_types(eos::portable_oarchive&);" << std::endl;
+fa.stream() << "template void register_types(eos::portable_iarchive&);" << std::endl;
+fa.stream() << std::endl;
+            }
+        } // snf
 fa.stream() << std::endl;
     } // sbf
     // return fa.make_file();

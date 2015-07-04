@@ -22,6 +22,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
+#include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
+#include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/odb/traits.hpp"
@@ -127,6 +129,7 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
+    const dynamic::repository& drp,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
@@ -144,6 +147,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto gs(gsf.make(cpp_modeline_name, root_object));
     settings::bundle sb;
     sb.general_settings(gs);
+    settings::aspect_settings_factory f(drp, root_object);
+    sb.aspect_settings(f.make());
     r->settings(sb);
 
     for (const auto& pair : m.references()) {
@@ -162,21 +167,43 @@ std::shared_ptr<formattable> factory::make_registrar_info(
             const auto cloned_ps(clone_path_settings(ps, src, dst));
             const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, dst));
 
-            formatter_properties fp;
-            fp.file_path(pd.file_path());
-            fp.header_guard(pd.header_guard());
-            fp.enabled(is_enabled(fprp, m.name(), src));
-            r->formatter_properties().insert(std::make_pair(dst, fp));
+            formatter_properties r;
+            r.file_path(pd.file_path());
+            r.header_guard(pd.header_guard());
+            r.enabled(is_enabled(fprp, m.name(), src));
+            return r;
         });
 
     using formatters::serialization::traits;
     const auto ch_fn(traits::class_header_formatter_name());
     const auto rh_fn(traits::registrar_header_formatter_name());
-    lambda(ch_fn, rh_fn);
+    const auto fp1(lambda(ch_fn, rh_fn));
+    r->formatter_properties().insert(std::make_pair(rh_fn, fp1));
 
     const auto ci_fn(traits::class_implementation_formatter_name());
     const auto ri_fn(traits::registrar_implementation_formatter_name());
-    lambda(ci_fn, ri_fn);
+    auto fp2(lambda(ci_fn, ri_fn));
+
+    using ic = formatters::inclusion_constants;
+    auto& id(fp2.inclusion_dependencies());
+
+    if (!sb.aspect_settings().disable_xml_serialization()) {
+        id.push_back(ic::boost::archive::xml_iarchive());
+        id.push_back(ic::boost::archive::xml_oarchive());
+    }
+
+    id.push_back(ic::boost::archive::text_iarchive());
+    id.push_back(ic::boost::archive::text_oarchive());
+    id.push_back(ic::boost::archive::binary_iarchive());
+    id.push_back(ic::boost::archive::binary_oarchive());
+    id.push_back(ic::boost::archive::polymorphic_iarchive());
+    id.push_back(ic::boost::archive::polymorphic_oarchive());
+
+    if (!sb.aspect_settings().disable_eos_serialization()) {
+        id.push_back(ic::eos::portable_iarchive());
+        id.push_back(ic::eos::portable_oarchive());
+    }
+    r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: "
                              << sml::string_converter::convert(qn);

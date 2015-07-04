@@ -14,6 +14,40 @@ dogen::formatters::file registrar_implementation_formatter_stitch(
 
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+#>
+
+template<typename Archive>
+void register_types(Archive&) {
+}
+
+template void register_types(boost::archive::polymorphic_oarchive&);
+template void register_types(boost::archive::polymorphic_iarchive&);
+
+template void register_types(boost::archive::text_oarchive&);
+template void register_types(boost::archive::text_iarchive&);
+
+template void register_types(boost::archive::binary_oarchive&);
+template void register_types(boost::archive::binary_iarchive&);
+
+<#+
+            if (!fa.is_xml_serialization_disabled()) {
+#>
+template void register_types(boost::archive::xml_oarchive&);
+template void register_types(boost::archive::xml_iarchive&);
+
+<#+
+            }
+
+            if (!fa.is_eos_serialization_disabled()) {
+#>
+template void register_types(eos::portable_oarchive&);
+template void register_types(eos::portable_iarchive&);
+
+<#+
+            }
+        } // snf
 #>
 
 <#+

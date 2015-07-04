@@ -38,7 +38,7 @@ namespace cpp {
 namespace settings {
 
 /**
- * @brief Creates the aspect settings for all formatters.
+ * @brief Creates the aspect settings.
  */
 class aspect_settings_factory {
 public:
@@ -99,9 +99,15 @@ private:
 
 public:
     /**
-     * @brief Produce the aspect settings for all formatters.
+     * @brief Produces the aspect settings.
      */
     aspect_settings make(const dynamic::object& o) const;
+
+    /**
+     * @brief Produce the aspect settings based on root object
+     * contents.
+     */
+    aspect_settings make() const;
 
 private:
     const field_definitions field_definitions_;

@@ -93,6 +93,7 @@ private:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     from_factory_activity(const config::cpp_options& opts,
+        const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const std::unordered_map<std::string, settings::path_settings>& ps,
@@ -107,7 +108,7 @@ public:
      */
     std::forward_list<std::shared_ptr<formattables::formattable> >
     execute(const config::cpp_options& opts,
-        const dynamic::repository& srp,
+        const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const formatters::container& fc,
