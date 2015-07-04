@@ -48,5 +48,4 @@ template void register_types(boost::archive::binary_iarchive& ar);
 template void register_types(boost::archive::xml_oarchive& ar);
 template void register_types(boost::archive::xml_iarchive& ar);
 
-
 } }
