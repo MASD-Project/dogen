@@ -574,7 +574,7 @@ through a list in the SML model.
 This work is dependent on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][this]] story.
 
 *** STARTED Implement serialisation registrar implementation formatter :story:
-    CLOCK: [2015-07-04 Sat 21:40]
+    CLOCK: [2015-07-04 Sat 21:40]--[2015-07-04 Sat 22:11] =>  0:31
     CLOCK: [2015-07-04 Sat 21:24]--[2015-07-04 Sat 21:30] =>  0:06
     CLOCK: [2015-07-04 Sat 20:36]--[2015-07-04 Sat 21:23] =>  0:47
 
@@ -583,10 +583,11 @@ machinery. Fix all differences.
 
 Problems:
 
-- no newline at the end of the file.
+- includes for leaves are missing.
 
 Problems solved:
 
+- no newline at the end of the file.
 - missing includes. Factory not populating includes either.
 - eos check is not yielding expected result.
 
