@@ -4297,6 +4297,10 @@ pipeline where we populate:
 We need to look at the dia to sml transformer and see what it is doing
 that is also required by JSON and move it to SML.
 
+We should have a look at the Boost Fusion approach:
+
+- [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
+
 *** Consider adding facet specific types                               :epic:
 
 #+begin_quote
