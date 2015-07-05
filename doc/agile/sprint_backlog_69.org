@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-04 Sat 23:19]
+#+CAPTION: Clock summary at [2015-07-05 Sun 23:11]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *44:03* |       |      |
+| *Total time*                                                                | *44:23* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 44:03   |       |      |
-| Active                                                                      |         | 44:03 |      |
+| Stories                                                                     | 44:23   |       |      |
+| Active                                                                      |         | 44:23 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
@@ -36,7 +36,7 @@
 | COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
 | COMPLETED Implement serialisation registrar header formatter                |         |       | 2:01 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 2:32 |
-| STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:23 |
+| STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:43 |
 | STARTED Implement serialisation registrar implementation formatter          |         |       | 2:30 |
 #+end:
 
@@ -540,6 +540,7 @@ What can be said about an archetype:
   altogether.
 
 *** STARTED Thoughts on simplifying the formattables generation       :story:
+    CLOCK: [2015-07-05 Sun 22:51]--[2015-07-05 Sun 23:11] =>  0:20
     CLOCK: [2015-07-03 Fri 17:16]--[2015-07-03 Fri 17:37] =>  0:21
     CLOCK: [2015-07-03 Fri 15:13]--[2015-07-03 Fri 17:15] =>  2:02
 
@@ -585,6 +586,48 @@ not provide a clean solution, unless we synthesise an SML object when
 providing the includes. And of course we need to be careful taking
 that route or else we will end up generating the object across all
 facets.
+
+It is important not to confuse formatters with archetypes. A formatter
+(or at least, a "top-level formatter"; those that generate files) is
+in a sense a "category" of archetypes. In other words, for a given
+formatter many archetypes will be generated. This may mean that the
+"archetype" is not a very good choice because it may imply some kind
+of meta-class-ness. In a sense, we are dealing with arch-entities
+("entity" being SML's base class for all modeled domain types). So
+fundamentally, the correct workflow is vaguely like this:
+
+- we create a model for some problem domain. We represent this model
+  in SML. All objects are identifiable by a qname.
+- we apply a transformation of this model into something which is
+  closer to the programming language that we wish to generate; these
+  we choose to call formattables.
+- we may also inject some formattables which do not have a mapping to
+  the original domain objects. These have synthetic qnames.
+- we apply a function that takes the qname, the SML entity, the
+  formattable and generates an archetype skeleton. To start off with,
+  this is made up of only a file name and a top-level formatter. The
+  structure exists in memory as a map of qnames to formatter names to
+  archetypes.
+- we then fill in the blanks: compute includes, enablement, etc. The
+  final blank that needs to be filled in is the generation of the
+  file, which is done by applying a formatter to a number of the
+  archetype properties.
+
+Another point of interest is that we may be able to move some of the
+archetype processing to common code. For example, file name
+generation, enablement, and so on are not language specific. However,
+we need to have a representation of the archetype which is specific to
+a model (e.g. =quilt::cpp= say) because not all properties will be
+common. We could, possibly, have an archetype base class, which then
+would imply a formatter's base class and so on - but then we hit the
+visitor across models problem.
+
+In this approach we do have an advantage which is we can parallelise a
+lot of work across each stage in the "pipeline". For instance we can
+run transformation from SML to formattables in parallel. We could
+conceivably even have futures for each of the archetype
+properties. None of this is a concern for the foreseable future, of
+course.
 
 *** STARTED Implement serialisation registrar implementation formatter :story:
     CLOCK: [2015-07-04 Sat 22:12]--[2015-07-04 Sat 23:18] =>  1:06
