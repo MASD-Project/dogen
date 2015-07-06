@@ -12,7 +12,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-05 Sun 23:11]
+#+CAPTION: Clock summary at [2015-07-06 Mon 15:06]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
@@ -20,7 +20,7 @@
 |-----------------------------------------------------------------------------+---------+-------+------|
 | Stories                                                                     | 44:23   |       |      |
 | Active                                                                      |         | 44:23 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:07 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 3:07 |
 | COMPLETED Create a short presentation on Dogen                              |         |       | 6:37 |
 | COMPLETED Add support for opaque settings factories                         |         |       | 1:40 |
 | COMPLETED Refactor opaque settings production                               |         |       | 1:04 |
@@ -35,12 +35,13 @@
 | COMPLETED Refactor formatting assistants                                    |         |       | 0:31 |
 | COMPLETED Implement odb options formatter in odb                            |         |       | 5:46 |
 | COMPLETED Implement serialisation registrar header formatter                |         |       | 2:01 |
-| STARTED Thoughts on cpp refactoring                                         |         |       | 2:32 |
-| STARTED Thoughts on simplifying the formattables generation                 |         |       | 2:43 |
-| STARTED Implement serialisation registrar implementation formatter          |         |       | 2:30 |
+| POSTPONED Thoughts on cpp refactoring                                       |         |       | 2:32 |
+| POSTPONED Thoughts on simplifying the formattables generation               |         |       | 2:43 |
+| POSTPONED Implement serialisation registrar implementation formatter        |         |       | 2:30 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-07-06 Mon 15:05]
     CLOCK: [2015-07-01 Wed 14:48]--[2015-07-01 Wed 16:16] =>  1:28
     CLOCK: [2015-06-30 Tue 14:31]--[2015-06-30 Tue 14:39] =>  0:08
     CLOCK: [2015-06-26 Fri 14:10]--[2015-06-26 Fri 15:09] =>  0:59
@@ -51,7 +52,8 @@ Updates to sprint and product backlog.
 
 - Backlog reviewed up to "In next major release".
 
-*** Updates to the manual and readme files                            :story:
+*** COMPLETED Updates to the manual and readme files                  :story:
+    CLOSED: [2015-07-06 Mon 15:05]
 
 Use downtime to update the manual and / or readme file.
 
@@ -379,7 +381,8 @@ Problems solved:
   properties; this will be handled properly with the archetype
   refactor. Actually the problem is just with the implementation.
 
-*** STARTED Thoughts on cpp refactoring                               :story:
+*** POSTPONED Thoughts on cpp refactoring                             :story:
+    CLOSED: [2015-07-06 Mon 15:06]
     CLOCK: [2015-07-03 Fri 17:37]--[2015-07-03 Fri 17:48] =>  0:11
     CLOCK: [2015-06-25 Thu 17:29]--[2015-06-25 Thu 17:54] =>  0:25
     CLOCK: [2015-06-25 Thu 16:18]--[2015-06-25 Thu 16:44] =>  0:26
@@ -539,7 +542,8 @@ What can be said about an archetype:
   location we could probably get rid of irregular formatters
   altogether.
 
-*** STARTED Thoughts on simplifying the formattables generation       :story:
+*** POSTPONED Thoughts on simplifying the formattables generation     :story:
+    CLOSED: [2015-07-06 Mon 15:06]
     CLOCK: [2015-07-05 Sun 22:51]--[2015-07-05 Sun 23:11] =>  0:20
     CLOCK: [2015-07-03 Fri 17:16]--[2015-07-03 Fri 17:37] =>  0:21
     CLOCK: [2015-07-03 Fri 15:13]--[2015-07-03 Fri 17:15] =>  2:02
@@ -629,7 +633,8 @@ conceivably even have futures for each of the archetype
 properties. None of this is a concern for the foreseable future, of
 course.
 
-*** STARTED Implement serialisation registrar implementation formatter :story:
+*** POSTPONED Implement serialisation registrar implementation formatter :story:
+    CLOSED: [2015-07-06 Mon 15:06]
     CLOCK: [2015-07-04 Sat 22:12]--[2015-07-04 Sat 23:18] =>  1:06
     CLOCK: [2015-07-04 Sat 21:40]--[2015-07-04 Sat 22:11] =>  0:31
     CLOCK: [2015-07-04 Sat 21:24]--[2015-07-04 Sat 21:30] =>  0:06
@@ -650,28 +655,7 @@ Problems solved:
 - missing includes. Factory not populating includes either.
 - eos check is not yielding expected result.
 
-*** Implement source cmakelists formatter                             :story:
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-*** Implement include cmakelists formatter                            :story:
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-*** Add include providers for all types                               :story:
-
-We need to implement the provider container support for primitives,
-modules and concepts.
-
-Update:
-
-- inclusion dependencies factory
-- provider container
-
 ** Deprecated
-
 *** CANCELLED Investigate integration of =boost::log= with =boost::test= :story:
     CLOSED: [2015-06-30 Tue 14:36]
 
