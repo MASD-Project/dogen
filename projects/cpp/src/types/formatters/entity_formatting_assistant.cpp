@@ -67,6 +67,8 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
+entity_formatting_assistant::~entity_formatting_assistant() noexcept { }
+
 std::string entity_formatting_assistant::
 make_final_keyword_text(const formattables::class_info& c) {
     return c.is_final() ? final_keyword_text : empty;

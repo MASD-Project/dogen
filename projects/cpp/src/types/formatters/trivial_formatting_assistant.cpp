@@ -25,6 +25,8 @@ namespace dogen {
 namespace cpp {
 namespace formatters {
 
+trivial_formatting_assistant::~trivial_formatting_assistant() noexcept { }
+
 trivial_formatting_assistant::trivial_formatting_assistant() { }
 
 void trivial_formatting_assistant::make_annotation_preamble(

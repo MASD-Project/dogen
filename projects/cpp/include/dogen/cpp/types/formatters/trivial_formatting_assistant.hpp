@@ -35,7 +35,7 @@ namespace formatters {
 
 class trivial_formatting_assistant final : public formatting_assistant {
 public:
-    ~trivial_formatting_assistant() noexcept = default;
+    ~trivial_formatting_assistant() noexcept;
 
 public:
     trivial_formatting_assistant();

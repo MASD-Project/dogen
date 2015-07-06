@@ -50,7 +50,7 @@ namespace formatters {
  */
 class entity_formatting_assistant final : public formatting_assistant {
 public:
-    ~entity_formatting_assistant() noexcept = default;
+    ~entity_formatting_assistant() noexcept;
 
 public:
     /**
