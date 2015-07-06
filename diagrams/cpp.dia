@@ -33192,7 +33192,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="148.917,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.098,133.45;149.667,146.75"/>
+        <dia:rectangle val="141.097,133.45;149.667,146.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

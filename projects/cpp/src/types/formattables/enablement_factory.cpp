@@ -55,7 +55,7 @@ enablement_factory::create_field_definitions(
     const dynamic::repository_selector s(rp);
 
     std::unordered_map<std::string, field_definitions> r;
-    for (const auto& f : fc.all_external_formatters()) {
+    for (const auto& f : fc.all_formatters()) {
         field_definitions fd;
         const auto oh(f->ownership_hierarchy());
         const auto& fn(oh.formatter_name());

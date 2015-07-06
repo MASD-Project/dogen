@@ -76,7 +76,6 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     builder.add(ic::boost::archive::polymorphic_oarchive());
 
     if (!as.disable_xml_serialization()) {
-        builder.add(ic::boost::serialization::nvp());
         builder.add(ic::boost::archive::xml_iarchive());
         builder.add(ic::boost::archive::xml_oarchive());
     }
@@ -86,7 +85,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
         builder.add(ic::eos::portable_oarchive());
     }
 
-    const auto ch_fn(types::traits::class_header_formatter_name());
+    const auto ch_fn(traits::class_header_formatter_name());
     for (const auto& l : m.leaves())
         builder.add(l, ch_fn);
 

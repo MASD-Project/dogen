@@ -31,6 +31,7 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
+#include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/cpp/types/formatters/formatter_interface.hpp"
 #include "dogen/cpp/types/formattables/registrar_info.hpp"
 #include "dogen/cpp/types/formattables/includers_info.hpp"
@@ -70,6 +71,7 @@ public:
         const dynamic::repository& drp,
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
+        const settings::bundle_repository& brp,
         const std::unordered_map<std::string, settings::path_settings>& ps,
         const formatter_properties_repository& fprp,
         const sml::model& m) const;

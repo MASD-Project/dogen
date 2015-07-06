@@ -70,8 +70,8 @@ template void register_types(eos::portable_iarchive&<#= arg_name #>);
             }
         } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 
 #>

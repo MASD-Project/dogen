@@ -71,4 +71,14 @@ bundle bundle_factory::make(const dynamic::object& o) const {
     return r;
 }
 
+bundle bundle_factory::make() const {
+    bundle r;
+    r.general_settings(create_general_settings(root_object_));
+
+    aspect_settings_factory f(dynamic_repository_, root_object_);
+    r.aspect_settings(f.make());
+    return r;
+
+}
+
 } } }

@@ -79,6 +79,11 @@ public:
      */
     bundle make(const dynamic::object& o) const;
 
+    /**
+     * @brief Hack to produce registrar settings.
+     */
+    bundle make() const;
+
 private:
     const dynamic::repository& dynamic_repository_;
     const dynamic::object& root_object_;

@@ -45,6 +45,8 @@ const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
+const std::string bundle_not_found_for_qname(
+    "Settings bundle not found for qname: ");
 const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
 const std::string properties_not_found(
@@ -129,9 +131,10 @@ bool factory::is_enabled(const formatter_properties_repository& fprp,
 
 std::shared_ptr<formattable> factory::make_registrar_info(
     const config::cpp_options& opts,
-    const dynamic::repository& drp,
-    const dynamic::object& root_object,
-    const dogen::formatters::general_settings_factory& gsf,
+    const dynamic::repository& /*drp*/,
+    const dynamic::object& /*root_object*/,
+    const dogen::formatters::general_settings_factory& /*gsf*/,
+    const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
     const sml::model& m) const {
@@ -144,12 +147,21 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     auto r(std::make_shared<registrar_info>());
     r->namespaces(b.namespace_list(m, qn));
 
+    /*
     const auto gs(gsf.make(cpp_modeline_name, root_object));
     settings::bundle sb;
     sb.general_settings(gs);
     settings::aspect_settings_factory f(drp, root_object);
     sb.aspect_settings(f.make());
     r->settings(sb);
+    */
+    const auto i(brp.bundles_by_qname().find(qn));
+    if (i == brp.bundles_by_qname().end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_qname << n;
+        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_qname + n));
+    }
+    r->settings(i->second);
 
     for (const auto& pair : m.references()) {
         if (pair.second != sml::origin_types::system) {
@@ -184,7 +196,23 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ri_fn(traits::registrar_implementation_formatter_name());
     auto fp2(lambda(ci_fn, ri_fn));
 
-    using ic = formatters::inclusion_constants;
+    const auto j(fprp.formatter_properties_by_qname().find(qn));
+    if (j == fprp.formatter_properties_by_qname().end()) {
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << properties_not_found << n;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
+
+    }
+
+    const auto k(j->second.find(ri_fn));
+    if (k == j->second.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter << ri_fn;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + ri_fn));
+    }
+    fp2.inclusion_dependencies(k->second.inclusion_dependencies());
+
+    /*    using ic = formatters::inclusion_constants;
     auto& id(fp2.inclusion_dependencies());
 
     if (!sb.aspect_settings().disable_xml_serialization()) {
@@ -202,7 +230,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     if (!sb.aspect_settings().disable_eos_serialization()) {
         id.push_back(ic::eos::portable_iarchive());
         id.push_back(ic::eos::portable_oarchive());
-    }
+        }
+    */
     r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: "

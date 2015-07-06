@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 69
+#+title: Sprint Backlog 70
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) spike(p) }
@@ -14,15 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-06 Mon 15:14]
+#+CAPTION: Clock summary at [2015-07-06 Mon 17:29]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:12* |      |      |
+| *Total time*                                                                | *2:27* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:12   |      |      |
-| Active                                                                      |        | 0:12 |      |
+| Stories                                                                     | 2:27   |      |      |
+| Active                                                                      |        | 2:27 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+| COMPLETED Implement serialisation registrar implementation formatter        |        |      | 2:15 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -31,9 +32,22 @@
 
 Updates to sprint and product backlog.
 
-*** Updates to the manual and readme files                            :story:
+*** COMPLETED Implement serialisation registrar implementation formatter :story:
+    CLOSED: [2015-07-06 Mon 17:29]
+    CLOCK: [2015-07-06 Mon 15:14]--[2015-07-06 Mon 17:29] =>  2:15
 
-Use downtime to update the manual and / or readme file.
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Problems solved:
+
+- includes for leaves are missing. We need to somehow get the include
+  generation to work for registrar and also the aspect settings
+  generation. Lots of hackery required to achieved this.
+- arguments passed in to eos serialisation were hard coded in legacy.
+- no newline at the end of the file.
+- missing includes. Factory not populating includes either.
+- eos check is not yielding expected result.
 
 *** Thoughts on cpp refactoring                                       :story:
 
@@ -276,23 +290,6 @@ run transformation from SML to formattables in parallel. We could
 conceivably even have futures for each of the archetype
 properties. None of this is a concern for the foreseable future, of
 course.
-
-*** Implement serialisation registrar implementation formatter        :story:
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
-
-Problems:
-
-- includes for leaves are missing. We need to somehow get the include
-  generation to work for registrar and also the aspect settings
-  generation.
-
-Problems solved:
-
-- no newline at the end of the file.
-- missing includes. Factory not populating includes either.
-- eos check is not yielding expected result.
 
 *** Implement source cmakelists formatter                             :story:
 

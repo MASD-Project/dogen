@@ -37,6 +37,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.enablement_repository_factory"));
 
+const std::string registrar_name("registrar");
 const std::string duplicate_qname("Duplicate qname: ");
 const std::string model_module_not_found("Model module not found for model: ");
 
@@ -89,7 +90,7 @@ enablement_repository_factory::create_field_definitions(
     const formatters::container& fc) const {
     const dynamic::repository_selector s(rp);
     std::unordered_map<std::string, field_definitions> r;
-    for (const auto& f : fc.all_external_formatters()) {
+    for (const auto& f : fc.all_formatters()) {
         const auto oh(f->ownership_hierarchy());
 
         field_definitions fd;
@@ -144,9 +145,16 @@ enablement_repository enablement_repository_factory::make(
     const enablement_factory f(rp, fc, gep);
     generator g(f);
     sml::all_model_items_traversal(m, g);
+    auto r(g.result());
 
-    BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << g.result();
-    return g.result();
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
+    r.enablement_by_qname()[qn] = f.make(root_object);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << r;
+    return r;
 }
 
 } } }

@@ -33,6 +33,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.inclusion_dependencies_repository_factory"));
 
+const std::string registrar_name("registrar");
 const std::string duplicate_qname("Duplicate qname: ");
 
 }
@@ -51,6 +52,26 @@ public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
 public:
+    template<typename SmlEntity>
+    void generate(const SmlEntity& e, const sml::qname& qn) {
+        const auto id(factory_.make(e));
+
+        // note: optional return may have be cleaner here, but however it
+        // would complicate the logic in the factory.
+        if (id.empty())
+            return;
+
+        const auto pair(std::make_pair(qn, id));
+        auto& deps(result_.inclusion_dependencies_by_qname());
+        const auto res(deps.insert(pair));
+        if (!res.second) {
+            const auto n(sml::string_converter::convert(qn));
+            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        }
+    }
+
+private:
     /**
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
@@ -60,21 +81,7 @@ public:
         if (e.generation_type() == sml::generation_types::no_generation)
             return;
 
-        const auto id(factory_.make(e));
-
-        // note: optional return may have be cleaner here, but however it
-        // would complicate the logic in the factory.
-        if (id.empty())
-            return;
-
-        const auto pair(std::make_pair(e.name(), id));
-        auto& deps(result_.inclusion_dependencies_by_qname());
-        const auto res(deps.insert(pair));
-        if (!res.second) {
-            const auto n(sml::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
-        }
+        generate(e, e.name());
     }
 
 public:
@@ -98,12 +105,17 @@ inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 make(const inclusion_dependencies_builder_factory& bf, const container& c,
     const sml::model& m) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Started obtaining inclusion dependencies.";
+    BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
     sml::all_model_items_traversal(m, g);
-    // g.generate(m);
+
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
+    g.generate(m, qn);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
                              << g.result();
