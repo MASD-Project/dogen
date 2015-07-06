@@ -1,0 +1,383 @@
+#+title: Sprint Backlog 69
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) spike(p) }
+
+* Mission Statement
+
+- Finish implementing all formatters using the new cpp architecture.
+- Remove legacy cpp architecture.
+- Start SML refactor.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+#+CAPTION: Clock summary at [2015-07-06 Mon 15:14]
+| <75>                                                                        |        |      |      |
+| Headline                                                                    | Time   |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| *Total time*                                                                | *0:12* |      |      |
+|-----------------------------------------------------------------------------+--------+------+------|
+| Stories                                                                     | 0:12   |      |      |
+| Active                                                                      |        | 0:12 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-06 Mon 15:01]--[2015-07-06 Mon 15:13] =>  0:12
+
+
+Updates to sprint and product backlog.
+
+*** Updates to the manual and readme files                            :story:
+
+Use downtime to update the manual and / or readme file.
+
+*** Thoughts on cpp refactoring                                       :story:
+
+We haven't quite arrived at the ideal configuration for the cpp
+model. We are close, but not there yet. The problem we have at the
+moment is that the formatters drive a lot of the work in
+formattables, resulting in a circular dependency. This is happening
+because we are missing some entities. This story is just a random set
+of thoughts in this space, trying to clear up the terminology across
+the board.
+
+*Random thoughts*
+
+What is probably needed is to have facets, aspects and "file kinds" as
+top-level concepts rather than just strings with which we label
+formatters. In addition, we need a good name for "file kinds". This is
+a meta-concept, something akin to a file template. The formatter
+produces a physical representation of that meta-concept. As part of
+the formatter registration, we can also register this meta-concept
+(provided it relies on an existing formattable). And in effect, these
+are the pieces of the puzzle:
+
+- you define a "file kind".
+- a facet and a model are groupings of "file kinds". These happen to
+  be hierarchical groupings. There are others: header and
+  implementation, or class header formatter. Those are
+  non-hierarchical.
+- you bind a transformer to a SML type to generate a formattable.
+- a formattable is associated with one or more "file kinds" or better
+  yet a file kind is associated with a formattable. It is also
+  associated with formatting properties and settings. It is those
+  tuples that we pass to the formatters.
+- you bind a formatter to a "file" and process the associated
+  formattable.
+
+Perhaps we can call these "file kinds" file archetypes or just
+archetypes.
+
+What can be said about an archetype:
+
+- conceptual notion of something we want to generate.
+- one SML entity can map to zero or many archetypes. Concept at
+  present maps to zero. Object maps to many.
+- a representation of the archetype as source code is done by the
+  formatter. It uses a template to help it generate that
+  representation.
+- a given archetype maps to one and only one SML entity.
+- a given archetype maps to one and only one CPP entity.
+- archetypes can be grouped in many ways. One way is facets and
+  models.
+- archetypes have definitions: name of the archetype, what groups it
+  belongs to.
+- archetypes have associated data: formattables, settings,
+  properties. This is an entity and needs a name.
+- formatters work on one and only one archetype.
+- archetypes have qualified names; this is (mostly) what we called
+  ownership hierarchy. Qualified names can be represented as separate
+  fields or using the dot notation.
+- archetypes have labels: this is what we called groups.
+- dynamic is a model designed to augment SML with some archetype
+  data. This is not true in the dia case. Check all fields to see if
+  it is true everywhere else.
+- an aspect is a property of one or more archetypes; it is a knob that
+  affects the generation of the source code representation.
+- an archetype instance belongs to an archetype.
+- we should remove the concept of "integrated facets". It just happens
+  that a facet such as types may have aspects that enable features
+  similar to aspects in other facets. There may be rules that
+  determine that when certain aspects are enabled, certain facets must
+  be switched off because they are incompatible.
+- facet is a good name for grouping archetypes, but model isn't. We
+  need a better name for a set of facets. Aspect is also a good
+  name. In addition, a model group is also a bad name. A "model" is a
+  cohesive group of archetypes that are meant to be used together. A
+  "model group" is a cohesive group of models that provide the same
+  conceptual representations in different programming languages. Maybe
+  we should use a more "random" name such as: pod. Then perhaps a
+  model group could become a "pod family": a family of related pods. A
+  given model can be represented by one pod family or another - they
+  are mutually exclusive. Of course, from a command line perspective,
+  its better to think of "modes". Each mode corresponds to choosing
+  one "pod family" over another. This does not map very cleanly.
+- archetypes have an associated programming language - a grammar.
+- a facet may exist in more than one programming language and an
+  aspect too.
+- pods are programming language specific.
+- formattables are kind of like an archetype friendly representation
+  of the domain types. We need a good name for this.
+- internal and external now make slightly more sense, at least once we
+  got a good name for formatters. We still need a good name for it
+  though. If the archetype instance is generated because of the
+  presence of the domain type, it is external. If the archetype has no
+  sensitivity to domain types (but may have sensitivity to other
+  things such as options) it is internal. The naming around this is
+  not totally clear.
+- internal formatters may not be allowed to be disabled. For example,
+  if serialisation is on, registrar must be generated. With
+  CMakeLists, we may want do disable them altogether.
+- in the thrift story in the backlog we mention the existence of
+  mutually exclusive groups of facets. We should also come up with a
+  name for these.
+- archetype may not quite be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and
+  archetype patterns]]. See also:
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/ColourCoding.html][Class Archetypes, UML and Colour]]
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/index.html][Peter Coad's 'Modeling in Color']]
+  - [[http://www.step-10.com/Books/JMCUBook.html][Java Modeling in Color with UML]]
+- the process of mapping domain types to archetypes could be called
+  "expansion" because its a one to many relationship in most cases.
+- its not quite correct to call CPP types "formattables". The
+  archetype has to have an ordered container of inputs to the
+  formatter. This is sort of the "payload" for formatting; the
+  archetype is a container of such entities. Taking into account the
+  cases where more than one type is placed in the same file, this
+  would result in the includes being merged. Or perhaps these things
+  are really formattables, but then we need a way to distinguish
+  between "top-level formatters" that generate archetypes from
+  "partial" formatters that can be combined.
+- with "facet specific types" we go one level deeper: it should be
+  possible to add an enumeration definition to say test data. This
+  would mean that archetypes and facets are not quite so aligned as we
+  first thought. Potentially, one should be able to ask for say a
+  formattable at facet X in an artchetype at facet Y.
+- One way to look at it is as follows: there is the modeling
+  dimension, in which we have an entity, say entity =A=; and there is
+  the implementation dimension, in which =a= can be represented by
+  =A1, A2, ..., An= archetypes. In effect, the implementation
+  dimension has multiple dimensions, one for each pod (and of course
+  the pod families would be an extra dimension and so on). Actually,
+  we probably have 3 steps: the modeling dimension, the translation of
+  that into a language-specific representation and then finally the
+  archetype dimension.
+- a good name for the top-level container of archetypes is
+  "kernel". This was inspired (loosely) in some ideas from EMF. So
+  we'd have say the "quilt kernel", with support for multiple
+  programming languages such as cpp, java etc. We we'd have the "pleat
+  kernel" and so forth. Each kernel has a set of languages and the
+  languages have archetypes. Archetypes have a collection of
+  properties such as the formattables they need, the formatters and so
+  on. The job of a model such as =quilt::cpp= is to implement this
+  binding.
+- dynamic fields can be owned by archetypes or by other types of
+  owners (e.g. dia). We should have a way of expressing this
+  ownership.
+- we haven't used the word "feature" anywhere yet (properly; we
+  mentioned it in the manual and so on, but not given it any good
+  meaning).
+- we created a split between "internal" and "external" formatters, but
+  its interesting to notice that we have "internal" formatters that
+  are "regular" formatters - in that we need to create a qname for
+  them and the formatter properties will work correctly; whereas some
+  others are "irregular" formatters - they have strange filenames that
+  cannot be generated without some fiddling. Actually, ODB options is
+  the main problematic one. If we could place it in a sensible
+  location we could probably get rid of irregular formatters
+  altogether.
+
+*** Thoughts on simplifying the formattables generation               :story:
+
+We have a problem in the way which we are doing the formattables:
+because we are doing model traversals for each of the factories, we
+cannot easily introduce a set of manually generated qnames such as the
+registrar and includers. However, if we started off the main workflow
+by creating a structure like so:
+
+- qname
+- optional entity (new base class in SML); if null we need to create
+  extensions as an empty object.
+
+We then need a list of these that get passed in to all repository
+factories. These use a visitor of entity to resolve to a type (where
+required).
+
+We can inject types to this list that have a qname but no entity. For
+these we generate some parts of the formatter properties. Actually, we
+still need to generate inclusion lists even when there is no
+entity. Perhaps we need to create a new method in the provider that
+does not take an SML entity but still generates the inclusion list.
+
+Actually this should all be done in SML. We should have zero qname
+look-ups coming out of SML, just follow references. This story is a
+variation of the split between "partial" models and "full" models.
+
+Well not everything should be done in SML. We still need to create a
+structure with the properties above, but that is done by iterating
+through a list in the SML model.
+
+This work is dependent on [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][this]] story.
+
+One slight problem with this approach: sometimes we need to preserve
+some relationships in the newly generated objects. For registrar we
+need to preserve the model leaves. For the includers / master headers
+we need to express somehow the inclusion relationship at the formatter
+level. The latter is definitely a special case because it is a pure
+C++ concept: include files cannot be modeled in SML. However,
+registrar is slightly different because we still need to compute the
+includes based on the leaves. This means that the above approach will
+not provide a clean solution, unless we synthesise an SML object when
+providing the includes. And of course we need to be careful taking
+that route or else we will end up generating the object across all
+facets.
+
+It is important not to confuse formatters with archetypes. A formatter
+(or at least, a "top-level formatter"; those that generate files) is
+in a sense a "category" of archetypes. In other words, for a given
+formatter many archetypes will be generated. This may mean that the
+"archetype" is not a very good choice because it may imply some kind
+of meta-class-ness. In a sense, we are dealing with arch-entities
+("entity" being SML's base class for all modeled domain types). So
+fundamentally, the correct workflow is vaguely like this:
+
+- we create a model for some problem domain. We represent this model
+  in SML. All objects are identifiable by a qname.
+- we apply a transformation of this model into something which is
+  closer to the programming language that we wish to generate; these
+  we choose to call formattables.
+- we may also inject some formattables which do not have a mapping to
+  the original domain objects. These have synthetic qnames.
+- we apply a function that takes the qname, the SML entity, the
+  formattable and generates an archetype skeleton. To start off with,
+  this is made up of only a file name and a top-level formatter. The
+  structure exists in memory as a map of qnames to formatter names to
+  archetypes.
+- we then fill in the blanks: compute includes, enablement, etc. The
+  final blank that needs to be filled in is the generation of the
+  file, which is done by applying a formatter to a number of the
+  archetype properties.
+
+Another point of interest is that we may be able to move some of the
+archetype processing to common code. For example, file name
+generation, enablement, and so on are not language specific. However,
+we need to have a representation of the archetype which is specific to
+a model (e.g. =quilt::cpp= say) because not all properties will be
+common. We could, possibly, have an archetype base class, which then
+would imply a formatter's base class and so on - but then we hit the
+visitor across models problem.
+
+In this approach we do have an advantage which is we can parallelise a
+lot of work across each stage in the "pipeline". For instance we can
+run transformation from SML to formattables in parallel. We could
+conceivably even have futures for each of the archetype
+properties. None of this is a concern for the foreseable future, of
+course.
+
+*** Implement serialisation registrar implementation formatter        :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+Problems:
+
+- includes for leaves are missing. We need to somehow get the include
+  generation to work for registrar and also the aspect settings
+  generation.
+
+Problems solved:
+
+- no newline at the end of the file.
+- missing includes. Factory not populating includes either.
+- eos check is not yielding expected result.
+
+*** Implement source cmakelists formatter                             :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement include cmakelists formatter                            :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Add include providers for all types                               :story:
+
+We need to implement the provider container support for primitives,
+modules and concepts.
+
+Update:
+
+- inclusion dependencies factory
+- provider container
+
+** Deprecated
+
+*** CANCELLED Investigate integration of =boost::log= with =boost::test= :story:
+    CLOSED: [2015-06-30 Tue 14:36]
+
+*Rationale*: This will not be a problem with catch.
+
+At present whenever there is a test failure, we get a compiler-style
+error in the console, which is great for emacs integration - its easy
+to go to the source code that generated the failure. However, we do
+not write it to the log file of the test. Its very difficult to
+understand the log file without the context of the =boost::test=
+failures. Due to this we end up manually logging before doing boost
+test assertions - a lot of duplicated effort. What would be ideal is
+if =boost::test= logged to _both_ the console and to our log
+file. There is a file output for boost log, but its not configurable
+enough to accept a =boost::log= stream. We should send an email to
+mailing list asking for help.
+
+Also we need to duplicate the test name and the log file name. But
+since we will be moving to catch maybe we shouldn't spent too long in
+this.
+*** CANCELLED Remove =cpp_formatters::formatting_error=               :story:
+    CLOSED: [2015-07-01 Wed 15:25]
+
+*Rationale*: The whole model will be removed when done with current refactor.
+
+Use the =formatters::formating_error= instead.
+*** CANCELLED Delete key implementation formatter                     :story:
+    CLOSED: [2015-07-01 Wed 15:32]
+
+*Rationale*: The whole model will be removed when done with current refactor.
+
+It doesn't seem like there is any good reason to treat the keys in a
+special way so try to remove this.
+
+*** CANCELLED Consider creating internal and external fields          :story:
+    CLOSED: [2015-07-01 Wed 15:34]
+
+*Rationale*: Dynamic fields are now by definition external fields.
+
+At present any dynamic field is automatically exposed to the outside
+world, allowing users to set them. This is not always ideal; for
+example, the file path should not be settable. Perhaps field
+definitions should have a "internal" or "external" property that stops
+users from being able to override certain fields.
+
+*** CANCELLED Add tests for all permutations of the domain formatter  :story:
+    CLOSED: [2015-07-01 Wed 15:44]
+
+*Rationale*: Story has bit-rotted (we don't have domain formatters any
+more) but also, its too ambitious. We can't add tests for all
+permutations of all formatters.
+
+_All_ may be too strong a word as there quite a few. We need good
+coverage around the combinations one can do within the domain
+formatter.
+*** CANCELLED Implement flymake from the EDE project                  :story:
+    CLOSED: [2015-07-01 Wed 16:12]
+
+*Rationale*: Not required with flycheck.
+
+This move of directories highlighted the fragility of the current
+flymake hack: every time the top-level directory changes we need to
+update =cunene=. Ideally what we want is to have a top-level file -
+most ideally =dogen.ede= with some lisp code that would setup the
+dogen paths for flymake. Users would only need to load this up to use it.
