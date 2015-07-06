@@ -32,12 +32,16 @@
 
 Updates to sprint and product backlog.
 
-*** COMPLETED Implement serialisation registrar implementation formatter :story:
-    CLOSED: [2015-07-06 Mon 17:29]
+*** STARTED Implement serialisation registrar implementation formatter :story:
+    CLOCK: [2015-07-06 Mon 17:30]--[2015-07-06 Mon 17:57] =>  0:27
     CLOCK: [2015-07-06 Mon 15:14]--[2015-07-06 Mon 17:29] =>  2:15
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
+
+Problems:
+
+- references are not handled correctly.
 
 Problems solved:
 
@@ -290,6 +294,9 @@ run transformation from SML to formattables in parallel. We could
 conceivably even have futures for each of the archetype
 properties. None of this is a concern for the foreseable future, of
 course.
+
+FIXME: improve references by having models inside of models; we should
+be able to keep only the types that we refer in the final model.
 
 *** Implement source cmakelists formatter                             :story:
 

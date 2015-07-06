@@ -33,6 +33,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.path_derivatives_repository_factory"));
 
+const std::string registrar_name("registrar");
 const std::string duplicate_qname("Duplicate qname: ");
 
 }
@@ -50,7 +51,7 @@ class generator {
 public:
     generator(const path_derivatives_factory& f) : factory_(f) { }
 
-private:
+public:
     /**
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
@@ -94,6 +95,26 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     const path_derivatives_factory f(opts, m, ps);
     generator g(f);
     sml::all_model_items_traversal(m, g);
+
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
+    g.generate(qn);
+
+    for (const auto& pair : m.references()) {
+        const auto origin_type(pair.second);
+        if (origin_type == sml::origin_types::system)
+            continue;
+
+        const auto ref(pair.first);
+        sml::qname n;
+        n.model_name(ref.model_name());
+        n.simple_name(registrar_name);
+        n.external_module_path(ref.external_module_path());
+        g.generate(n);
+    }
+
     const auto r(g.result());
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Result: " << r;
 
