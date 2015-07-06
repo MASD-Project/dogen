@@ -49,7 +49,7 @@ template void register_types(boost::archive::binary_iarchive&);
 template void register_types(boost::archive::xml_oarchive&);
 template void register_types(boost::archive::xml_iarchive&);
 
-template void register_types(eos::portable_oarchive& ar);
-template void register_types(eos::portable_iarchive& ar);
+template void register_types(eos::portable_oarchive&);
+template void register_types(eos::portable_iarchive&);
 
 } } }

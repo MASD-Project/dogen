@@ -136,9 +136,11 @@ void registrar_implementation::format(const cpp::formattables::file_info& f) {
 
         if (!disable_eos_serialization_) {
             stream_ << indenter_ << "template void register_types("
-                    << "eos::portable_oarchive& ar);" << std::endl;
+                    << "eos::portable_oarchive&" << arg_name << ");"
+                    << std::endl;
             stream_ << indenter_ << "template void register_types("
-                    << "eos::portable_iarchive& ar);" << std::endl;
+                    << "eos::portable_iarchive&" << arg_name << ");"
+                    << std::endl;
             utility_.blank_line();
         }
     }
