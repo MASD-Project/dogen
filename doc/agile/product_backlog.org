@@ -6002,6 +6002,11 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Investigate ribosome for ideas                                    :story:
+
+[[http://ribosome.ch/][Ribosome]] seems like a templating tool with a simple syntax. May have
+some ideas useful for stitch.
+
 *** Generate service skeleton                                          :epic:
 
 Since we already have all of the boiler plate code for services such
