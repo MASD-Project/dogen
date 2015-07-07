@@ -147,7 +147,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual(), f));
 }
 
-BOOST_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
+BOOST_IGNORE_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     SETUP_TEST_LOG("stdout_option_generates_expected_output");
     auto s(empty_tds_mock_options());
     auto fs(s.output());
@@ -569,8 +569,7 @@ BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t));
 }
 
-/*
-BOOST_IGNORE_AUTO_TEST_CASE_(split_project_model_generates_expected_code) {
+BOOST_IGNORE_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
     SETUP_TEST_LOG("split_project_model_generates_expected_code");
 
     // note that we keep the project name just to make the life easier
@@ -589,7 +588,7 @@ BOOST_IGNORE_AUTO_TEST_CASE_(split_project_model_generates_expected_code) {
     const auto t(dia_sml::input_split_project_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
-*/
+
 BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_files) {
     SETUP_TEST_LOG("housekeeping_is_not_triggered_when_we_are_not_generating_files");
     auto s(empty_tds_mock_options());

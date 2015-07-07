@@ -319,6 +319,7 @@ make_cmakelists(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
+    const formatter_properties_repository& fprp,
     const sml::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
@@ -360,6 +361,18 @@ make_cmakelists(const config::cpp_options& opts,
         cm->include_file_path(opts.project_directory_path() /
             m.name().model_name() / cmakelists_name);
     }
+
+    const auto odb_ch_fn(
+        formatters::odb::traits::class_header_formatter_name());
+    cm->odb_enabled(is_enabled(fprp, m.name(), odb_ch_fn));
+    const auto j(ps.find(odb_ch_fn));
+    if (j == ps.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
+                                 << odb_ch_fn;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + odb_ch_fn));
+    }
+    cm->odb_folder(j->second.facet_directory());
 
     r.push_front(cm);
     return r;

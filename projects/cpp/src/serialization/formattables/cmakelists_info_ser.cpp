@@ -54,6 +54,8 @@ void save(Archive& ar,
     ar << make_nvp("source_file_path", v.source_file_path_.generic_string());
     ar << make_nvp("include_file_path", v.include_file_path_.generic_string());
     ar << make_nvp("general_settings", v.general_settings_);
+    ar << make_nvp("odb_folder", v.odb_folder_);
+    ar << make_nvp("odb_enabled", v.odb_enabled_);
 }
 
 template<typename Archive>
@@ -75,6 +77,8 @@ void load(Archive& ar,
     ar >> make_nvp("include_file_path", include_file_path_tmp);
     v.include_file_path_ = include_file_path_tmp;
     ar >> make_nvp("general_settings", v.general_settings_);
+    ar >> make_nvp("odb_folder", v.odb_folder_);
+    ar >> make_nvp("odb_enabled", v.odb_enabled_);
 }
 
 } }

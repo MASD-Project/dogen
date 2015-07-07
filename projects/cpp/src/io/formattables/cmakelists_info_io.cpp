@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"

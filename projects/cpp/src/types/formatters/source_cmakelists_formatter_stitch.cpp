@@ -47,6 +47,5 @@ fa.stream() << std::endl;
 fa.stream() << "install(TARGETS " << mn << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
     } // sbf
     return fa.make_file(s.source_file_path());
-    // return fa.make_file(s.source_file_path(), false/*overwrite*/);
 }
 } } }

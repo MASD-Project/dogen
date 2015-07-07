@@ -64,6 +64,8 @@ std::size_t cmakelists_info_hasher::hash(const cmakelists_info& v) {
     combine(seed, hash_boost_filesystem_path(v.source_file_path()));
     combine(seed, hash_boost_filesystem_path(v.include_file_path()));
     combine(seed, hash_boost_optional_dogen_formatters_general_settings(v.general_settings()));
+    combine(seed, v.odb_folder());
+    combine(seed, v.odb_enabled());
 
     return seed;
 }

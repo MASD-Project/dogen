@@ -43,8 +43,10 @@ namespace formattables {
  */
 class cmakelists_info final : public dogen::cpp::formattables::formattable {
 public:
-    cmakelists_info() = default;
     cmakelists_info(const cmakelists_info&) = default;
+
+public:
+    cmakelists_info();
 
     virtual ~cmakelists_info() noexcept { }
 
@@ -61,7 +63,9 @@ public:
         const std::string& file_name,
         const boost::filesystem::path& source_file_path,
         const boost::filesystem::path& include_file_path,
-        const boost::optional<dogen::formatters::general_settings>& general_settings);
+        const boost::optional<dogen::formatters::general_settings>& general_settings,
+        const std::string& odb_folder,
+        const bool odb_enabled);
 
 private:
     template<typename Archive>
@@ -146,6 +150,14 @@ public:
     void general_settings(const boost::optional<dogen::formatters::general_settings>& v);
     void general_settings(const boost::optional<dogen::formatters::general_settings>&& v);
 
+    const std::string& odb_folder() const;
+    std::string& odb_folder();
+    void odb_folder(const std::string& v);
+    void odb_folder(const std::string&& v);
+
+    bool odb_enabled() const;
+    void odb_enabled(const bool v);
+
 public:
     bool operator==(const cmakelists_info& rhs) const;
     bool operator!=(const cmakelists_info& rhs) const {
@@ -167,6 +179,8 @@ private:
     boost::filesystem::path source_file_path_;
     boost::filesystem::path include_file_path_;
     boost::optional<dogen::formatters::general_settings> general_settings_;
+    std::string odb_folder_;
+    bool odb_enabled_;
 };
 
 } } }

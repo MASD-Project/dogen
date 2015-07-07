@@ -50,6 +50,10 @@ create_boost_optional_dogen_formatters_general_settings(unsigned int position) {
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
+}
+
 }
 
 namespace dogen {
@@ -68,6 +72,8 @@ populate(const unsigned int position, result_type& v) {
     v.source_file_path(create_boost_filesystem_path(position + 4));
     v.include_file_path(create_boost_filesystem_path(position + 5));
     v.general_settings(create_boost_optional_dogen_formatters_general_settings(position + 6));
+    v.odb_folder(create_std_string(position + 7));
+    v.odb_enabled(create_bool(position + 8));
 }
 
 cmakelists_info_generator::result_type

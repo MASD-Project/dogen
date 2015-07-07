@@ -14,19 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-07 Tue 17:58]
+#+CAPTION: Clock summary at [2015-07-07 Tue 22:26]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *6:28* |      |      |
+| *Total time*                                                                | *7:14* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 6:28   |      |      |
-| Active                                                                      |        | 6:28 |      |
+| Stories                                                                     | 7:14   |      |      |
+| Active                                                                      |        | 7:14 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |        |      | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |        |      | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |        |      | 0:52 |
 | COMPLETED Implement include cmakelists formatter                            |        |      | 0:54 |
+| COMPLETED Implement source cmakelists formatter                             |        |      | 0:46 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -82,7 +83,14 @@ together with the initialiser.
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
-*** Implement source cmakelists formatter                             :story:
+*** COMPLETED Implement source cmakelists formatter                   :story:
+    CLOSED: [2015-07-07 Tue 22:26]
+    CLOCK: [2015-07-07 Tue 21:40]--[2015-07-07 Tue 22:26] =>  0:46
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
+
+*** Implement includer formatter                                      :story:
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
