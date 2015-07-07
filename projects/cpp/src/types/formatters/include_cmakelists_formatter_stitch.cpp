@@ -34,7 +34,7 @@ dogen::formatters::file include_cmakelists_formatter_stitch(
         fa.make_annotation_preamble(i.general_settings());
 fa.stream() << std::endl;
     } // sbf
-    // return fa.make_file(i.file_path());
-    return fa.make_file(i.file_path(), false/*overwrite*/);
+    // return fa.make_file(i.include_file_path());
+    return fa.make_file(i.include_file_path(), false/*overwrite*/);
 }
 } } }

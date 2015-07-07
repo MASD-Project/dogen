@@ -318,6 +318,7 @@ std::forward_list<std::shared_ptr<formattable> > factory::
 make_cmakelists(const config::cpp_options& opts,
     const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
+    const std::unordered_map<std::string, settings::path_settings>& ps,
     const sml::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
@@ -330,7 +331,6 @@ make_cmakelists(const config::cpp_options& opts,
     auto cm(std::make_shared<cmakelists_info>());
     cm->model_name(m.name().model_name());
     cm->file_name(cmakelists_name);
-    cm->source_file_path(opts.source_directory_path() / cmakelists_name);
 
     const auto gs(gsf.make(cmake_modeline_name, root_object));
     cm->general_settings(gs);
@@ -338,8 +338,28 @@ make_cmakelists(const config::cpp_options& opts,
     if (!m.name().external_module_path().empty())
         cm->product_name(m.name().external_module_path().front());
 
-    if (!opts.split_project())
-        cm->include_file_path(opts.project_directory_path() / cmakelists_name);
+    using namespace formatters::types;
+    const auto ch_fn(traits::class_header_formatter_name());
+    const auto i(ps.find(ch_fn));
+    if (i == ps.end()) {
+        BOOST_LOG_SEV(lg, error) << settings_not_found_for_formatter
+                                 << ch_fn;
+        BOOST_THROW_EXCEPTION(building_error(
+                settings_not_found_for_formatter + ch_fn));
+    }
+
+    if (opts.split_project()) {
+        cm->source_file_path(opts.source_directory_path() /
+            m.name().model_name() / cmakelists_name);
+        cm->include_file_path(opts.include_directory_path() /
+            m.name().model_name() / cmakelists_name);
+    } else {
+        cm->source_file_path(opts.project_directory_path() /
+            m.name().model_name() / i->second.source_directory_name() /
+            cmakelists_name);
+        cm->include_file_path(opts.project_directory_path() /
+            m.name().model_name() / cmakelists_name);
+    }
 
     r.push_front(cm);
     return r;

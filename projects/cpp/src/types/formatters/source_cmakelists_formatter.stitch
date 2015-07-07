@@ -14,11 +14,23 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
 
     {
         fa.make_annotation_preamble(s.general_settings());
-#>
+        const std::string mn(s.model_name().empty() ?
+            "unnamed_model" : s.model_name());
 
+#>
+set(all_files "")
+file(GLOB_RECURSE all_files RELATIVE
+    "${CMAKE_CURRENT_SOURCE_DIR}/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+add_library(<#= mn #> STATIC ${all_files})
+set_target_properties(<#= mn #> PROPERTIES
+    OUTPUT_NAME <#= s.product_name() #><#= (s.product_name().empty() ? "" : "_") #><#= mn #>)
+
+install(TARGETS <#= mn #> ARCHIVE DESTINATION lib COMPONENT libraries)
 <#+
     } // sbf
-    // return fa.make_file(s.file_path());
-    return fa.make_file(s.file_path(), false/*overwrite*/);
+    return fa.make_file(s.source_file_path());
+    // return fa.make_file(s.source_file_path(), false/*overwrite*/);
 }
 #>
