@@ -2760,14 +2760,6 @@ we are not checking to see if it exists:
 
 We need to detect it and only add this targets if diff has been found.
 
-*** Remove unused features                                             :epic:
-
-At the very start of dogen we added a number of features that we
-thought were useful such as suppressing model directory, facet
-directories etc. We should look at all the features and make a list of
-all features that we are not currently making use of and create
-stories to remove them.
-
 *** File extension is hard-coded against file type                    :story:
 
 At present we are choosing the C++ extension based on the file type:

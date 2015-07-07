@@ -7,6 +7,7 @@
 
 - Finish implementing all formatters using the new cpp architecture.
 - Remove legacy cpp architecture.
+- Remove unused features.
 - Start SML refactor.
 
 * Stories
@@ -14,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-07 Tue 23:15]
+#+CAPTION: Clock summary at [2015-07-07 Tue 23:21]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:00* |      |      |
+| *Total time*                                                                | *8:06* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:00   |      |      |
-| Active                                                                      |        | 8:00 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+| Stories                                                                     | 8:06   |      |      |
+| Active                                                                      |        | 8:06 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |        |      | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |        |      | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |        |      | 0:52 |
@@ -32,6 +33,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-07 Tue 23:15]--[2015-07-07 Tue 23:21] =>  0:06
     CLOCK: [2015-07-06 Mon 15:01]--[2015-07-06 Mon 15:13] =>  0:12
 
 
@@ -371,6 +373,25 @@ We still have a couple of skeleton interfaces:
 
 - primitve
 - concepts
+
+*** Remove unused features                                             :epic:
+
+At the very start of dogen we added a number of features that we
+thought were useful such as suppressing model directory, facet
+directories etc. We should look at all the features and make a list of
+all features that we are not currently making use of and create
+stories to remove them.
+
+We may have to split this story into several but we should at least
+trim down the obvious ones:
+
+- empty model name
+- split project
+- output to stdout
+- etc.
+
+Basically any feature which we are not using at present and cannot
+think of an obvious use case.
 
 ** Deprecated
 
