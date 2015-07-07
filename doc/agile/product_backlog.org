@@ -10,6 +10,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Lists of strings are not properly tidied up on io                 :story:
+
+In the log file, when we dump include dependencies we see invalid
+JSON:
+
+: [ "<iosfwd>", ""dogen/sml/types/merger.hpp"" ]
+
+This implies we are not calling =tidy_up_string=.
+
 *** Remove complete name and use qualified name                       :story:
 
 At present we have both complete name and qualified name in
