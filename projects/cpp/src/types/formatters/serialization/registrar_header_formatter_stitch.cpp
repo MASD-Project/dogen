@@ -44,7 +44,6 @@ fa.stream() << std::endl;
 
     } // sbf
     return fa.make_file();
-    // return fa.make_file(false/*overwrite*/);
 }
 
 } } } }

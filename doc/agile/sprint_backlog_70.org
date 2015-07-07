@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-06 Mon 17:29]
+#+CAPTION: Clock summary at [2015-07-07 Tue 16:01]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *2:27* |      |      |
+| *Total time*                                                                | *4:32* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 2:27   |      |      |
-| Active                                                                      |        | 2:27 |      |
+| Stories                                                                     | 4:32   |      |      |
+| Active                                                                      |        | 4:32 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
-| COMPLETED Implement serialisation registrar implementation formatter        |        |      | 2:15 |
+| STARTED Implement serialisation registrar implementation formatter          |        |      | 4:20 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -33,6 +33,8 @@
 Updates to sprint and product backlog.
 
 *** STARTED Implement serialisation registrar implementation formatter :story:
+    CLOCK: [2015-07-07 Tue 15:51]--[2015-07-07 Tue 16:00] =>  0:09
+    CLOCK: [2015-07-07 Tue 13:31]--[2015-07-07 Tue 15:00] =>  1:29
     CLOCK: [2015-07-06 Mon 17:30]--[2015-07-06 Mon 17:57] =>  0:27
     CLOCK: [2015-07-06 Mon 15:14]--[2015-07-06 Mon 17:29] =>  2:15
 

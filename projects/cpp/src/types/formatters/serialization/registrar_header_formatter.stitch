@@ -29,7 +29,6 @@ void register_types(Archive& ar);
 
     } // sbf
     return fa.make_file();
-    // return fa.make_file(false/*overwrite*/);
 }
 
 #>

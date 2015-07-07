@@ -38,6 +38,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.inclusion_directives_repository_factory"));
 
+const std::string registrar_name("registrar");
 const std::string duplicate_qname("Duplicate qname: ");
 
 }
@@ -55,6 +56,22 @@ class generator {
 public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
+public:
+    void generate(const dynamic::object& o, const sml::qname& qn) {
+        const auto id(factory_.make(o, qn));
+        if (!id)
+            return;
+
+        auto& id_qn(result_.inclusion_directives_by_qname());
+        const auto pair(id_qn.insert(std::make_pair(qn, *id)));
+        if (pair.second)
+            return;
+
+        const auto n(sml::string_converter::convert(qn));
+        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+    }
+
 private:
     /**
      * @brief Generates all of the inclusion dependencies for the
@@ -62,18 +79,7 @@ private:
      */
     template<typename ExtensibleAndNameable>
     void generate(const ExtensibleAndNameable& e) {
-        const auto id(factory_.make(e.extensions(), e.name()));
-        if (!id)
-            return;
-
-        auto& id_qn(result_.inclusion_directives_by_qname());
-        const auto pair(id_qn.insert(std::make_pair(e.name(), *id)));
-        if (pair.second)
-            return;
-
-        const auto n(sml::string_converter::convert(e.name()));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        generate(e.extensions(), e.name());
     }
 
 public:
@@ -104,6 +110,26 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     const inclusion_directives_factory f(srp, fc, pdrp);
     generator g(f);
     sml::all_model_items_traversal(m, g);
+
+    sml::qname qn;
+    qn.simple_name(registrar_name);
+    qn.model_name(m.name().model_name());
+    qn.external_module_path(m.name().external_module_path());
+    const auto o = dynamic::object();
+    g.generate(o, qn);
+
+    for (const auto& pair : m.references()) {
+        const auto origin_type(pair.second);
+        if (origin_type == sml::origin_types::system)
+            continue;
+
+        const auto ref(pair.first);
+        sml::qname n;
+        n.model_name(ref.model_name());
+        n.simple_name(registrar_name);
+        n.external_module_path(ref.external_module_path());
+        g.generate(o, n);
+    }
     const auto r(g.result());
 
     BOOST_LOG_SEV(lg, debug) << "Finished inclusion directives repository:"

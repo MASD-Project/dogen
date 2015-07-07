@@ -151,7 +151,21 @@ enablement_repository enablement_repository_factory::make(
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());
-    r.enablement_by_qname()[qn] = f.make(root_object);
+    const auto e(f.make(root_object));
+    r.enablement_by_qname()[qn] = e;
+
+    for (const auto& pair : m.references()) {
+        const auto origin_type(pair.second);
+        if (origin_type == sml::origin_types::system)
+            continue;
+
+        const auto ref(pair.first);
+        sml::qname n;
+        n.model_name(ref.model_name());
+        n.simple_name(registrar_name);
+        n.external_module_path(ref.external_module_path());
+        r.enablement_by_qname()[n] = e;
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << r;
     return r;
