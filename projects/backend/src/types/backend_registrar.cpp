@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/backend/types/registrar_error.hpp"
-#include "dogen/backend/types/registrar.hpp"
+#include "dogen/backend/types/backend_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("backend.registrar"));
+static logger lg(logger_factory("backend.backend_registrar"));
 
 const std::string no_backends("No backends provided.");
 const std::string null_backend("Backend supplied is null");
@@ -36,7 +36,7 @@ const std::string null_backend("Backend supplied is null");
 namespace dogen {
 namespace backend {
 
-void registrar::validate() const {
+void backend_registrar::validate() const {
     if (backends_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_backends;
         BOOST_THROW_EXCEPTION(registrar_error(no_backends));
@@ -44,7 +44,7 @@ void registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void registrar::register_backend(std::shared_ptr<backend_interface> b) {
+void backend_registrar::register_backend(std::shared_ptr<backend_interface> b) {
     // no logging by design
     if (!b)
         BOOST_THROW_EXCEPTION(registrar_error(null_backend));
@@ -52,8 +52,8 @@ void registrar::register_backend(std::shared_ptr<backend_interface> b) {
     backends_.push_front(b);
 }
 
-const std::forward_list<std::shared_ptr<backend_interface> >& registrar::
-backends() const {
+const std::forward_list<std::shared_ptr<backend_interface> >&
+backend_registrar::backends() const {
     return backends_;
 }
 

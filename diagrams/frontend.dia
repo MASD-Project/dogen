@@ -172,7 +172,7 @@
             <dia:string>#registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#registrar#</dia:string>
+            <dia:string>#frontend_registrar#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -556,7 +556,7 @@
         <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#registrar#</dia:string>
+        <dia:string>#frontend_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -2410,7 +2410,7 @@ main.#</dia:string>
         <dia:point val="-9,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,-17.05;19.285,-8.85"/>
+        <dia:rectangle val="-9.05,-17.05;19.285,-7.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2422,7 +2422,7 @@ main.#</dia:string>
         <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="9.7000000000000011"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

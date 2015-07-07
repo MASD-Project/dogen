@@ -31,7 +31,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
 #include "dogen/formatters/types/file.hpp"
-#include "dogen/backend/types/registrar.hpp"
+#include "dogen/backend/types/backend_registrar.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 
 namespace dogen {
@@ -50,7 +50,7 @@ public:
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static backend::registrar& registrar();
+    static backend::backend_registrar& registrar();
 
     /**
      * @brief Generates files for the supplied model using all
@@ -59,7 +59,7 @@ public:
     std::forward_list<formatters::file> execute(const sml::model& m) const;
 
 private:
-    static std::shared_ptr<backend::registrar> registrar_;
+    static std::shared_ptr<backend::backend_registrar> registrar_;
     const config::knitting_options knitting_options_;
     const dynamic::repository& repository_;
 };

@@ -41,14 +41,14 @@ const std::string multiple_generatable_model_modules(
 namespace dogen {
 namespace backend {
 
-std::shared_ptr<backend::registrar> workflow::registrar_;
+std::shared_ptr<backend::backend_registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_options& o,
     const dynamic::repository& rp) : knitting_options_(o), repository_(rp) { }
 
-backend::registrar& workflow::registrar() {
+backend::backend_registrar& workflow::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<backend::registrar>();
+        registrar_ = std::make_shared<backend::backend_registrar>();
 
     return *registrar_;
 }

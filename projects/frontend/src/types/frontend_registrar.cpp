@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/frontend/types/registrar_error.hpp"
-#include "dogen/frontend/types/registrar.hpp"
+#include "dogen/frontend/types/frontend_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("frontend.registrar"));
+static logger lg(logger_factory("frontend.frontend_registrar"));
 
 const std::string exension_registerd_more_than_once(
     "Extension was registered more than once");
@@ -45,11 +45,11 @@ namespace frontend {
 
 const std::unordered_map<std::string,
                          std::shared_ptr<frontend_interface>>&
-    registrar::frontends_by_extension() const {
+    frontend_registrar::frontends_by_extension() const {
     return frontends_by_extension_;
 }
 
-void registrar::validate() const {
+void frontend_registrar::validate() const {
     if (frontends_by_extension_.empty()) {
         BOOST_LOG_SEV(lg, debug) << no_frontends;
         BOOST_THROW_EXCEPTION(registrar_error(no_frontends));
@@ -57,7 +57,7 @@ void registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void registrar::register_frontend_for_extension(const std::string& ext,
+void frontend_registrar::register_frontend_for_extension(const std::string& ext,
     std::shared_ptr<frontend_interface> s) {
     // note: not logging by design
 
@@ -70,7 +70,7 @@ void registrar::register_frontend_for_extension(const std::string& ext,
             registrar_error(extension_already_registered + ext));
 }
 
-frontend_interface& registrar::
+frontend_interface& frontend_registrar::
 frontend_for_extension(const std::string& ext) {
     BOOST_LOG_SEV(lg, debug) << "Looking for frontend for extension: " << ext;
     const auto i(frontends_by_extension_.find(ext));

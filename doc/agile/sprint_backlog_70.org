@@ -14,15 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-07 Tue 16:01]
+#+CAPTION: Clock summary at [2015-07-07 Tue 16:11]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:32* |      |      |
+| *Total time*                                                                | *4:42* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:32   |      |      |
-| Active                                                                      |        | 4:32 |      |
+| Stories                                                                     | 4:42   |      |      |
+| Active                                                                      |        | 4:42 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
+| COMPLETED Rename top-level registrars to avoid clashes with serialisation   |        |      | 0:10 |
 | STARTED Implement serialisation registrar implementation formatter          |        |      | 4:20 |
 #+end:
 
@@ -31,6 +32,15 @@
 
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Rename top-level registrars to avoid clashes with serialisation :story:
+    CLOSED: [2015-07-07 Tue 16:11]
+    CLOCK: [2015-07-07 Tue 16:01]--[2015-07-07 Tue 16:11] =>  0:10
+
+Due to the hacks we put in that generate serialisation registrar's
+qnames, we now are no longer able to have domain types called
+=registrar= in the top-level namespace. For now we can just rename
+these and fix it properly later.
 
 *** STARTED Implement serialisation registrar implementation formatter :story:
     CLOCK: [2015-07-07 Tue 15:51]--[2015-07-07 Tue 16:00] =>  0:09

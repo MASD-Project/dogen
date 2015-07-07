@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_BACKEND_TYPES_REGISTRAR_FWD_HPP
-#define DOGEN_BACKEND_TYPES_REGISTRAR_FWD_HPP
+#ifndef DOGEN_BACKEND_TYPES_BACKEND_REGISTRAR_FWD_HPP
+#define DOGEN_BACKEND_TYPES_BACKEND_REGISTRAR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace backend {
 
-class registrar;
+class backend_registrar;
 
 } }
 

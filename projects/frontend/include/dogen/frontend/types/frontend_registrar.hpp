@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FRONTEND_TYPES_REGISTRAR_HPP
-#define DOGEN_FRONTEND_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_FRONTEND_TYPES_FRONTEND_REGISTRAR_HPP
+#define DOGEN_FRONTEND_TYPES_FRONTEND_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@ namespace frontend {
 /**
  * @brief Keeps track of all the available frontends.
  */
-class registrar {
+class frontend_registrar {
 public:
     /**
      * @brief Returns all available frontends for each extension.

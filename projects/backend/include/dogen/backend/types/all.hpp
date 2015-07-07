@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/backend/types/workflow.hpp"
-#include "dogen/backend/types/registrar.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/registrar_error.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
+#include "dogen/backend/types/backend_registrar.hpp"

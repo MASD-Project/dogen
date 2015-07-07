@@ -45,7 +45,7 @@ const std::string invalid_archive_type("Invalid or unexpected archive type");
 namespace dogen {
 namespace frontend {
 
-std::shared_ptr<frontend::registrar> workflow::registrar_;
+std::shared_ptr<frontend::frontend_registrar> workflow::registrar_;
 
 workflow::workflow(const config::knitting_options& o,
     const dynamic::repository& rp)
@@ -65,9 +65,9 @@ workflow::workflow(const config::knitting_options& o,
     BOOST_LOG_SEV(lg, debug) << "Finished initialising frontend workflow. ";
 }
 
-frontend::registrar& workflow::registrar() {
+frontend::frontend_registrar& workflow::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<frontend::registrar>();
+        registrar_ = std::make_shared<frontend::frontend_registrar>();
 
     return *registrar_;
 }

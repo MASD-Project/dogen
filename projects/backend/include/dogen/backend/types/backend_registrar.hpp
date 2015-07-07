@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_BACKEND_TYPES_REGISTRAR_HPP
-#define DOGEN_BACKEND_TYPES_REGISTRAR_HPP
+#ifndef DOGEN_BACKEND_TYPES_BACKEND_REGISTRAR_HPP
+#define DOGEN_BACKEND_TYPES_BACKEND_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@ namespace backend {
 /**
  * @brief Keeps track of all the available backends.
  */
-class registrar {
+class backend_registrar {
 public:
     /**
      * @brief Ensures the registrar is ready to be used.

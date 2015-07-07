@@ -30,7 +30,7 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/frontend/types/registrar.hpp"
+#include "dogen/frontend/types/frontend_registrar.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 
@@ -49,7 +49,7 @@ public:
      * @brief Returns the registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static frontend::registrar& registrar();
+    static frontend::frontend_registrar& registrar();
 
 private:
     /**
@@ -98,7 +98,7 @@ public:
     execute(const std::list<input_descriptor>& descriptors);
 
 private:
-    static std::shared_ptr<frontend::registrar> registrar_;
+    static std::shared_ptr<frontend::frontend_registrar> registrar_;
     const config::knitting_options knitting_options_;
     const dynamic::repository& repository_;
     const dynamic::workflow dynamic_workflow_;
