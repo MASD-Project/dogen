@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#include <boost/algorithm/string/case_conv.hpp>
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/source_cmakelists_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cmakelists_formatter_interface::~cmakelists_formatter_interface() noexcept { }
+dogen::formatters::file source_cmakelists_formatter_stitch(
+    formatters::trivial_formatting_assistant& fa,
+    const formattables::cmakelists_info& s) {
 
+    {
+        fa.make_annotation_preamble(s.general_settings());
+fa.stream() << std::endl;
+    } // sbf
+    // return fa.make_file(s.file_path());
+    return fa.make_file(s.file_path(), false/*overwrite*/);
+}
 } } }

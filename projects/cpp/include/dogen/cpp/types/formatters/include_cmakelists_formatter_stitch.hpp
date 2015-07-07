@@ -18,12 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/cmakelists_formatter_interface.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_INCLUDE_CMAKELISTS_FORMATTER_STITCH_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_INCLUDE_CMAKELISTS_FORMATTER_STITCH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/formatters/types/file.hpp"
+#include "dogen/cpp/types/formattables/cmakelists_info.hpp"
+#include "dogen/cpp/types/formatters/trivial_formatting_assistant.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 
-cmakelists_formatter_interface::~cmakelists_formatter_interface() noexcept { }
+dogen::formatters::file include_cmakelists_formatter_stitch(
+    formatters::trivial_formatting_assistant& fa,
+    const formattables::cmakelists_info& c);
 
 } } }
+
+#endif

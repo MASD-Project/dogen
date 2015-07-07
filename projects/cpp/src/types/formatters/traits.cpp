@@ -43,6 +43,16 @@ std::string traits::includers_formatter_name(const std::string& facet_name) {
     return facet_name + ".includers_formatter";
 }
 
+std::string traits::include_cmakelists_formatter_name() {
+    static std::string r("cpp.include_cmakelists");
+    return r;
+}
+
+std::string traits::source_cmakelists_formatter_name() {
+    static std::string r("cpp.source_cmakelists");
+    return r;
+}
+
 std::string
 traits::class_header_formatter_name(const std::string& facet_name) {
     return facet_name + ".class_header_formatter";

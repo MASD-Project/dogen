@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-07 Tue 16:11]
+#+CAPTION: Clock summary at [2015-07-07 Tue 17:06]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *4:42* |      |      |
+| *Total time*                                                                | *5:34* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 4:42   |      |      |
-| Active                                                                      |        | 4:42 |      |
+| Stories                                                                     | 5:34   |      |      |
+| Active                                                                      |        | 5:34 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:12 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |        |      | 0:10 |
-| STARTED Implement serialisation registrar implementation formatter          |        |      | 4:20 |
+| COMPLETED Implement serialisation registrar implementation formatter        |        |      | 4:20 |
+| COMPLETED Add boilerplate for cmakelists formatters                         |        |      | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -42,7 +43,8 @@ qnames, we now are no longer able to have domain types called
 =registrar= in the top-level namespace. For now we can just rename
 these and fix it properly later.
 
-*** STARTED Implement serialisation registrar implementation formatter :story:
+*** COMPLETED Implement serialisation registrar implementation formatter :story:
+    CLOSED: [2015-07-07 Tue 16:13]
     CLOCK: [2015-07-07 Tue 15:51]--[2015-07-07 Tue 16:00] =>  0:09
     CLOCK: [2015-07-07 Tue 13:31]--[2015-07-07 Tue 15:00] =>  1:29
     CLOCK: [2015-07-06 Mon 17:30]--[2015-07-06 Mon 17:57] =>  0:27
@@ -64,6 +66,18 @@ Problems solved:
 - no newline at the end of the file.
 - missing includes. Factory not populating includes either.
 - eos check is not yielding expected result.
+
+*** COMPLETED Add boilerplate for cmakelists formatters               :story:
+    CLOSED: [2015-07-07 Tue 17:04]
+    CLOCK: [2015-07-07 Tue 16:12]--[2015-07-07 Tue 17:04] =>  0:52
+
+Add skeletons for interfaces, stitch templates, etc and hook it all
+together with the initialiser.
+
+*** Implement source cmakelists formatter                             :story:
+
+Create the formatter, stitch template and all associated
+machinery. Fix all differences.
 
 *** Thoughts on cpp refactoring                                       :story:
 
@@ -219,6 +233,9 @@ What can be said about an archetype:
   the main problematic one. If we could place it in a sensible
   location we could probably get rid of irregular formatters
   altogether.
+- we need to have "special" facets; cmake files for example should not
+  really have a facet but it seems having an empty facet name breaks a
+  lot of stuff.
 
 *** Thoughts on simplifying the formattables generation               :story:
 
@@ -309,11 +326,6 @@ course.
 
 FIXME: improve references by having models inside of models; we should
 be able to keep only the types that we refer in the final model.
-
-*** Implement source cmakelists formatter                             :story:
-
-Create the formatter, stitch template and all associated
-machinery. Fix all differences.
 
 *** Implement include cmakelists formatter                            :story:
 

@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/cpp/types/formatters/include_cmakelists_formatter.hpp"
+#include "dogen/cpp/types/formatters/source_cmakelists_formatter.hpp"
 #include "dogen/cpp/types/formatters/types/initializer.hpp"
 #include "dogen/cpp/types/formatters/hash/initializer.hpp"
 #include "dogen/cpp/types/formatters/odb/initializer.hpp"
@@ -31,6 +33,9 @@ namespace cpp {
 namespace formatters {
 
 void initializer::initialize(registrar& rg) {
+    initialise_formatter<include_cmakelists_formatter>(rg);
+    initialise_formatter<source_cmakelists_formatter>(rg);
+
     types::initializer::initialize(rg);
     hash::initializer::initialize(rg);
     odb::initializer::initialize(rg);
