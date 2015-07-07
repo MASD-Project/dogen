@@ -56,7 +56,7 @@ void log_container_sizes(
                                 << formatter_type << "': "
                                 << sz;
     } else {
-        BOOST_LOG_SEV(lg, debug) << "Registered formatters for ''"
+        BOOST_LOG_SEV(lg, debug) << "Registered formatters for '"
                                  << formatter_type << "': "
                                  << sz;
     }
@@ -97,6 +97,7 @@ void registrar::validate() const {
     log_container_sizes("primitive formatters", fc.primitive_formatters());
     log_container_sizes("concept formatters", fc.concept_formatters());
     log_container_sizes("registrar formatters", fc.registrar_formatters());
+    log_container_sizes("Includers formatters", fc.includers_formatters());
 
     BOOST_LOG_SEV(lg, debug) << "Ownership hierarchy: "
                              << ownership_hierarchy_;

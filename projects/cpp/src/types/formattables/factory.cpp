@@ -290,6 +290,7 @@ make_includers(
     }
 
     std::forward_list<std::shared_ptr<formattable> > r;
+    auto inc(std::make_shared<includers_info>());
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);
 
@@ -303,11 +304,9 @@ make_includers(
         p.file_path(pd.file_path());
         p.header_guard(pd.header_guard());
         p.enabled(is_enabled(fprp, m.name(), ch_fn));
-
-        auto inc(std::make_shared<includers_info>());
         inc->formatter_properties().insert(std::make_pair(ifn, p));
-        r.push_front(inc);
     }
+    r.push_front(inc);
     BOOST_LOG_SEV(lg, debug) << "Made includers: "
                              << sml::string_converter::convert(qn);
 

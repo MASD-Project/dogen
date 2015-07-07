@@ -156,6 +156,7 @@ public:
     void visit(const formattables::primitive_info& p) override;
     void visit(const formattables::cmakelists_info& c) override;
     void visit(const formattables::odb_options_info& o) override;
+    void visit(const formattables::includers_info& o) override;
 
 public:
     /**
@@ -226,6 +227,10 @@ void dispatcher::visit(const formattables::cmakelists_info& c) {
 
 void dispatcher::visit(const formattables::odb_options_info& o) {
     format(container_.odb_options_formatters(), o);
+}
+
+void dispatcher::visit(const formattables::includers_info& i) {
+    format_entity(container_.includers_formatters(), i);
 }
 
 void dispatcher::format(const formattables::formattable& f) {
