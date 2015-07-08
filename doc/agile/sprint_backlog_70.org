@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-08 Wed 17:48]
+#+CAPTION: Clock summary at [2015-07-08 Wed 18:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:06* |       |      |
+| *Total time*                                                                | *12:22* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:06   |       |      |
-| Active                                                                      |         | 12:06 |      |
+| Stories                                                                     | 12:22   |       |      |
+| Active                                                                      |         | 12:22 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -32,6 +32,7 @@
 | COMPLETED Implement includer formatter                                      |         |       | 3:35 |
 | COMPLETED Implement serialisation formatter for enumerations                |         |       | 0:47 |
 | STARTED Switch off legacy formatters                                        |         |       | 0:24 |
+| STARTED Implement odb pragma formatter for enumerations                     |         |       | 0:16 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -136,7 +137,8 @@ Problems:
 - not generating empty files for non-generatable types.
 - not generating odb pragmas or serialisation for enumerations.
 
-*** Implement odb pragma formatter for enumerations                   :story:
+*** STARTED Implement odb pragma formatter for enumerations           :story:
+    CLOCK: [2015-07-08 Wed 17:49]--[2015-07-08 Wed 18:05] =>  0:16
 
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.

@@ -34,8 +34,9 @@ dogen::formatters::file enum_header_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
         {
             auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << "#ifdef ODB_COMPILER" << std::endl;
 fa.stream() << std::endl;
-fa.stream() << std::endl;
+fa.stream() << "#endif" << std::endl;
         } // snf
 fa.stream() << std::endl;
     } // sbf
