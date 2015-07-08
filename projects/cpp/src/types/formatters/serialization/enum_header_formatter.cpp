@@ -36,13 +36,13 @@ namespace serialization {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<sml::object> {
+        inclusion_dependencies_provider_interface<sml::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const sml::object& o) const override;
+        const sml::enumeration& e) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -51,19 +51,15 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& o) const {
+    const sml::enumeration& e) const {
 
     auto builder(f.make());
-    builder.add(o.name(), types::traits::enum_header_formatter_name());
+    builder.add(e.name(), types::traits::enum_header_formatter_name());
 
     using ic = inclusion_constants;
-    builder.add(ic::boost::serialization::split_free());
-
-    if (o.is_parent())
-        builder.add(ic::boost::serialization::assume_abstract());
-
-    if (!o.is_parent() && o.is_child())
-        builder.add(ic::boost::type_traits::is_virtual_base_of());
+    const auto as(builder.get_aspect_settings(e.name()));
+    if (!as.disable_xml_serialization())
+        builder.add(ic::boost::serialization::nvp());
 
     return builder.build();
 }

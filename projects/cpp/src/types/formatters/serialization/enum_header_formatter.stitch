@@ -9,19 +9,30 @@
 
 dogen::formatters::file enum_header_formatter_stitch(
     formatters::entity_formatting_assistant& fa,
-    const formattables::enum_info& /*e*/) {
+    const formattables::enum_info& e) {
     {
         auto sbf(fa.make_scoped_boilerplate_formatter());
-        {
-            auto snf(fa.make_scoped_namespace_formatter());
 #>
 
-
+template<class Archive>
+void serialize(Archive& ar, <#= e.qualified_name() #>& v, unsigned int /*version*/){
+<#+
+        if (!fa.is_xml_serialization_disabled()) {
+#>
+    using boost::serialization::make_nvp;
+    ar & make_nvp("<#= e.name() #>", v);
+<#+
+        } else {
+#>
+    ar & v;
+<#+
+        }
+#>
+}
 
 <#+
-        } // snf
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 #>
