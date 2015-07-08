@@ -109,6 +109,12 @@ void filesystem_writer::write(const formatters::file& f) const {
     const auto gs(f.path().generic_string());
     BOOST_LOG_SEV(lg, debug) << "Processing file: " << gs;
 
+    if (gs.empty()) {
+        // FIXME: throw
+        BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
+        return;
+    }
+
     create_directories(f.path());
     if (f.content().empty()) {
         write_empty_file(f);

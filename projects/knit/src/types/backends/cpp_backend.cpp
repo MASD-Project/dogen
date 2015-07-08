@@ -36,6 +36,7 @@ auto lg(logger_factory("knit.backends.cpp_backend"));
 // FIXME: massive hack for now.
 // set it to true to use new formatters.
 const bool perform_override_of_legacy_files(true);
+const bool ignore_legacy_files(false);
 
 const std::string duplicate_file_path("File path already exists: ");
 const std::string unexpected_overrides_found("Found unexpected overrides: ");
@@ -70,6 +71,9 @@ format_files(const config::knitting_options& o,
 std::forward_list<formatters::file> cpp_backend::override_legacy_files(
     const std::forward_list<formatters::file>& old_world,
     const std::forward_list<formatters::file>& new_world) const {
+
+    if (ignore_legacy_files)
+        return new_world;
 
     if (!perform_override_of_legacy_files)
         return old_world;
