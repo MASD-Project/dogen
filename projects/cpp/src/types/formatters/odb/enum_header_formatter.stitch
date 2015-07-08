@@ -16,16 +16,17 @@ dogen::formatters::file enum_header_formatter_stitch(
         {
             auto snf(fa.make_scoped_namespace_formatter());
 #>
+
 #ifdef ODB_COMPILER
 
 #endif
+
 <#+
         } // snf
 #>
 
 <#+
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
 }
 #>

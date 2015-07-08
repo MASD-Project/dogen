@@ -37,13 +37,13 @@ namespace odb {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<sml::object> {
+        inclusion_dependencies_provider_interface<sml::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const sml::object& o) const override;
+        const sml::enumeration& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -52,16 +52,10 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& o) const {
+    const sml::enumeration& e) const {
 
     auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_formatter_name());
-
-    using rt = sml::relationship_types;
-    const auto self_fn(enum_header_formatter::static_formatter_name());
-    builder.add(o, rt::weak_associations, self_fn);
-    builder.add(o, rt::regular_associations, self_fn);
-    builder.add(o, rt::parents, self_fn);
+    builder.add(e.name(), types::traits::class_header_formatter_name());
     return builder.build();
 }
 
