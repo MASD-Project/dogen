@@ -36,7 +36,7 @@ auto lg(logger_factory("knit.backends.cpp_backend"));
 // FIXME: massive hack for now.
 // set it to true to use new formatters.
 const bool perform_override_of_legacy_files(true);
-const bool ignore_legacy_files(false);
+const bool ignore_legacy_files(true);
 
 const std::string duplicate_file_path("File path already exists: ");
 const std::string unexpected_overrides_found("Found unexpected overrides: ");

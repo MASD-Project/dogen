@@ -91,7 +91,7 @@ enablement_factory::obtain_local_properties(
 std::unordered_map<std::string, bool>
 enablement_factory::compute_enablement_value(
     const std::unordered_map<std::string, local_enablement_properties>&
-    lep, const bool partial_generation) const {
+    lep, const bool types_only) const {
 
     std::unordered_map<std::string, bool> r;
     for (const auto& pair : lep) {
@@ -111,7 +111,7 @@ enablement_factory::compute_enablement_value(
             continue;
         }
 
-        if (partial_generation) {
+        if (types_only) {
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             r[fn] = is_types;
             continue;
@@ -129,9 +129,9 @@ enablement_factory::compute_enablement_value(
 }
 
 std::unordered_map<std::string, bool> enablement_factory::
-make(const dynamic::object& o, const bool partial_generation) const {
+make(const dynamic::object& o, const bool types_only) const {
     const auto lep(obtain_local_properties(o));
-    return compute_enablement_value(lep, partial_generation);
+    return compute_enablement_value(lep, types_only);
 }
 
 } } }

@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-08 Wed 21:43]
+#+CAPTION: Clock summary at [2015-07-08 Wed 22:06]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:30* |       |      |
+| *Total time*                                                                | *13:51* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:30   |       |      |
-| Active                                                                      |         | 13:30 |      |
+| Stories                                                                     | 13:51   |       |      |
+| Active                                                                      |         | 13:51 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -33,7 +33,7 @@
 | COMPLETED Implement serialisation formatter for enumerations                |         |       | 0:47 |
 | COMPLETED Implement odb pragma formatter for enumerations                   |         |       | 0:28 |
 | COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
-| STARTED Switch off legacy formatters                                        |         |       | 0:24 |
+| COMPLETED Switch off overrides for legacy formatters                        |         |       | 0:45 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -144,7 +144,9 @@ At present we are ignoring all types that are non-generatable or
 partially generatable. We are also not generating forward
 declarations.
 
-*** STARTED Switch off legacy formatters                              :story:
+*** COMPLETED Switch off overrides for legacy formatters              :story:
+    CLOSED: [2015-07-08 Wed 22:06]
+    CLOCK: [2015-07-08 Wed 21:44]--[2015-07-08 Wed 22:05] =>  0:21
     CLOCK: [2015-07-08 Wed 16:32]--[2015-07-08 Wed 16:56] =>  0:24
 
 We need to switch off the legacy formatters and deal with the fallout.
@@ -443,6 +445,7 @@ trim down the obvious ones:
 - split project
 - output to stdout
 - remove repository, factory, stereotypes
+- keys, entities
 - etc.
 
 Basically any feature which we are not using at present and cannot

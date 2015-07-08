@@ -62,15 +62,17 @@ private:
      * formatters and qualified name.
      */
     template<typename SmlEntity>
-    void generate(const SmlEntity& e) {
-        const auto pg(e.generation_type() ==
-            sml::generation_types::partial_generation);
+    void generate(const SmlEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
-        result_.enablement_by_qname()[e.name()] = factory_.make(o, pg);
+        result_.enablement_by_qname()[e.name()] = factory_.make(o, types_only);
     }
 
 public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
+    void operator()(const dogen::sml::object& o) {
+        const auto is_service(o.object_type() ==
+            sml::object_types::user_defined_service);
+        generate(o, is_service);
+    }
     void operator()(const dogen::sml::enumeration& e) { generate(e); }
     void operator()(const dogen::sml::primitive& p) { generate(p); }
     void operator()(const dogen::sml::module& m) { generate(m); }
