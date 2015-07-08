@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <vector>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
@@ -57,8 +56,9 @@ public:
     /**
      * @brief Returns all directories managed by this backend.
      */
-    virtual std::vector<boost::filesystem::path>
-    managed_directories(const sml::model& m) const = 0;
+    virtual std::forward_list<boost::filesystem::path>
+    managed_directories(const config::knitting_options& ko,
+                        const sml::model& m) const = 0;
 
     /**
      * @brief Complete ownership hierarchy for this backend, listing

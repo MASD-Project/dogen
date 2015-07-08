@@ -116,9 +116,18 @@ std::string workflow::name() const {
     return ::id;
 }
 
-std::vector<boost::filesystem::path>
-workflow::managed_directories(const sml::model& /*m*/) const {
-    std::vector<boost::filesystem::path> r;
+std::forward_list<boost::filesystem::path>
+workflow::managed_directories(const config::knitting_options& /*ko*/,
+    const sml::model& /*m*/) const {
+    std::forward_list<boost::filesystem::path> r;
+
+/*    if (options_.split_project()) {
+        r.push_front(source_directory_ / model_name_);
+        r.push_front(include_directory_ / model_name_);
+    } else {
+        r.push_front(options_.project_directory_path() / model_name_);
+        }*/
+
     // FIXME: needed for housekeeper
     return r;
 }

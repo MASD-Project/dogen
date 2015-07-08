@@ -20,6 +20,7 @@
  */
 #include <boost/filesystem.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/formatters/types/stream_writer.hpp"
@@ -126,6 +127,11 @@ void middle_end_to_backend_workflow::execute(const sml::model& m) const {
 
         const auto md(b->managed_directories(knitting_options_, m));
         perform_housekeeping_activity(files, md);
+/*
+        dogen::backend::workflow w(knitting_options_, repository_);
+        const auto files(w.execute(m));
+        const auto md(w.managed_directories(m));
+*/
     }
 }
 

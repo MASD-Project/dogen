@@ -27,6 +27,7 @@
 
 #include <memory>
 #include <forward_list>
+#include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/sml/types/model.hpp"
@@ -51,6 +52,12 @@ public:
      * initialised, initialises it.
      */
     static backend::backend_registrar& registrar();
+
+    /**
+     * @brief Returns all directories managed by all backends.
+     */
+    std::forward_list<boost::filesystem::path>
+    managed_directories(const sml::model& m) const;
 
     /**
      * @brief Generates files for the supplied model using all

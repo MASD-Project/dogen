@@ -115,8 +115,9 @@ private:
 public:
     std::string name() const override;
 
-    std::vector<boost::filesystem::path>
-        managed_directories(const sml::model& m) const override;
+    std::forward_list<boost::filesystem::path>
+    managed_directories(const config::knitting_options& ko,
+        const sml::model& m) const override;
 
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy() const;
 

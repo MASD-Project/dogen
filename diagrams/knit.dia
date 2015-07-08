@@ -1598,7 +1598,7 @@
         <dia:point val="-71.6175,69.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-72.4675,69.15;-62.7987,80.05"/>
+        <dia:rectangle val="-72.4675,69.15;-62.7988,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1786,13 +1786,13 @@ languages.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="90,22"/>
+        <dia:point val="3,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,21.95;95.555,25.65"/>
+        <dia:rectangle val="2.95,21.95;8.555,25.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="90,22"/>
+        <dia:point val="3,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.5049999999999999"/>
@@ -1927,16 +1927,16 @@ languages.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="101,21"/>
+        <dia:point val="14,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,20.95;116.195,24.35"/>
+        <dia:rectangle val="13.95,21.95;29.195,25.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="101,21"/>
+        <dia:point val="14,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.145"/>
@@ -1967,7 +1967,7 @@ main, or from another initialiser.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="101.35,22.245"/>
+            <dia:point val="14.35,23.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1980,17 +1980,17 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="101,22.65"/>
+        <dia:point val="14,23.65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.4225,22.5961;101.054,23.575"/>
+        <dia:rectangle val="8.41541,22.697;14.0547,24.075"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="101,22.65"/>
-        <dia:point val="95.505,23.1"/>
+        <dia:point val="14,23.65"/>
+        <dia:point val="8.505,23.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2005,7 +2005,7 @@ main, or from another initialiser.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="98.2525,23.375"/>
+        <dia:point val="11.2525,23.875"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O16" connection="3"/>
