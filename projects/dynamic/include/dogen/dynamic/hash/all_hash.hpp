@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DYNAMIC_HASH_ALL_HASH_HPP
+#define DOGEN_DYNAMIC_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/hash/name_hash.hpp"
 #include "dogen/dynamic/hash/text_hash.hpp"
 #include "dogen/dynamic/hash/value_hash.hpp"
@@ -31,3 +38,5 @@
 #include "dogen/dynamic/hash/field_definition_hash.hpp"
 #include "dogen/dynamic/hash/ownership_hierarchy_hash.hpp"
 #include "dogen/dynamic/hash/field_definition_types_hash.hpp"
+
+#endif

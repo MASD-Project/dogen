@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FORMATTERS_TYPES_ALL_HPP
+#define DOGEN_FORMATTERS_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/editors.hpp"
@@ -58,3 +65,5 @@
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+
+#endif

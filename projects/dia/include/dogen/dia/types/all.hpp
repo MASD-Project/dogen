@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TYPES_ALL_HPP
+#define DOGEN_DIA_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia/types/font.hpp"
 #include "dogen/dia/types/real.hpp"
 #include "dogen/dia/types/color.hpp"
@@ -39,3 +46,5 @@
 #include "dogen/dia/types/diagram_data.hpp"
 #include "dogen/dia/types/hydration_error.hpp"
 #include "dogen/dia/types/persister_error.hpp"
+
+#endif

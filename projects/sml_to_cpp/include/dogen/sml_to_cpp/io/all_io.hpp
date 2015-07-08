@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_TO_CPP_IO_ALL_IO_HPP
+#define DOGEN_SML_TO_CPP_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml_to_cpp/io/context_io.hpp"
 #include "dogen/sml_to_cpp/io/std_types_io.hpp"
 #include "dogen/sml_to_cpp/io/boost_types_io.hpp"
 #include "dogen/sml_to_cpp/io/relationships_io.hpp"
 #include "dogen/sml_to_cpp/io/inclusion_lists_io.hpp"
+
+#endif

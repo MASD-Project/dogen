@@ -18,5 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FRONTEND_TEST_DATA_ALL_TD_HPP
+#define DOGEN_FRONTEND_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/frontend/test_data/input_descriptor_td.hpp"
 #include "dogen/frontend/test_data/frontend_settings_td.hpp"
+
+#endif

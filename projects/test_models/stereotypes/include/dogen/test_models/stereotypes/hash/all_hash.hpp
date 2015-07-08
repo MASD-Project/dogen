@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STEREOTYPES_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_STEREOTYPES_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stereotypes/hash/value_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/entity_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/fluent_hash.hpp"
@@ -57,3 +64,5 @@
 #include "dogen/test_models/stereotypes/hash/pkg1/keyed_in_package_unversioned_key_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/composite_identity_ver_unversioned_key_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/identity_and_other_ver_unversioned_key_hash.hpp"
+
+#endif

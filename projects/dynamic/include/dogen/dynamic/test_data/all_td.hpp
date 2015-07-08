@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DYNAMIC_TEST_DATA_ALL_TD_HPP
+#define DOGEN_DYNAMIC_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/test_data/name_td.hpp"
 #include "dogen/dynamic/test_data/text_td.hpp"
 #include "dogen/dynamic/test_data/value_td.hpp"
@@ -31,3 +38,5 @@
 #include "dogen/dynamic/test_data/field_definition_td.hpp"
 #include "dogen/dynamic/test_data/ownership_hierarchy_td.hpp"
 #include "dogen/dynamic/test_data/field_definition_types_td.hpp"
+
+#endif

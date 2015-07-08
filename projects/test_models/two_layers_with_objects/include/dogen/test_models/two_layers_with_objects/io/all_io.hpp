@@ -18,5 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TWO_LAYERS_WITH_OBJECTS_IO_ALL_IO_HPP
+#define DOGEN_TEST_MODELS_TWO_LAYERS_WITH_OBJECTS_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/two_layers_with_objects/io/Package_2/class_2_io.hpp"
 #include "dogen/test_models/two_layers_with_objects/io/package_1/class_1_io.hpp"
+
+#endif

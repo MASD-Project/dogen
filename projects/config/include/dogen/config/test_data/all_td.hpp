@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CONFIG_TEST_DATA_ALL_TD_HPP
+#define DOGEN_CONFIG_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/config/test_data/reference_td.hpp"
 #include "dogen/config/test_data/cpp_options_td.hpp"
 #include "dogen/config/test_data/archive_types_td.hpp"
@@ -27,3 +34,5 @@
 #include "dogen/config/test_data/knitting_options_td.hpp"
 #include "dogen/config/test_data/stitching_options_td.hpp"
 #include "dogen/config/test_data/troubleshooting_options_td.hpp"
+
+#endif

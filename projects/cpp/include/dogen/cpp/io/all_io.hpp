@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_IO_ALL_IO_HPP
+#define DOGEN_CPP_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/project_io.hpp"
@@ -64,3 +71,5 @@
 #include "dogen/cpp/io/formattables/formatter_properties_repository_io.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
+
+#endif

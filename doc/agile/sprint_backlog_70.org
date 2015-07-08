@@ -15,21 +15,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-08 Wed 14:03]
+#+CAPTION: Clock summary at [2015-07-08 Wed 14:28]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *8:29* |      |      |
+| *Total time*                                                                | *8:54* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 8:29   |      |      |
-| Active                                                                      |        | 8:29 |      |
+| Stories                                                                     | 8:54   |      |      |
+| Active                                                                      |        | 8:54 |      |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |        |      | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |        |      | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |        |      | 0:52 |
 | COMPLETED Implement include cmakelists formatter                            |        |      | 0:54 |
 | COMPLETED Implement source cmakelists formatter                             |        |      | 0:46 |
-| STARTED Implement includer formatter                                        |        |      | 1:09 |
+| STARTED Implement includer formatter                                        |        |      | 1:34 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -94,6 +94,7 @@ Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
 *** STARTED Implement includer formatter                              :story:
+    CLOCK: [2015-07-08 Wed 14:03]--[2015-07-08 Wed 14:28] =>  0:25
     CLOCK: [2015-07-08 Wed 13:39]--[2015-07-08 Wed 14:02] =>  0:23
     CLOCK: [2015-07-07 Tue 22:28]--[2015-07-07 Tue 23:14] =>  0:46
 

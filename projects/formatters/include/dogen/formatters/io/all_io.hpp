@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FORMATTERS_IO_ALL_IO_HPP
+#define DOGEN_FORMATTERS_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/formatters/io/file_io.hpp"
 #include "dogen/formatters/io/editors_io.hpp"
 #include "dogen/formatters/io/licence_io.hpp"
@@ -32,3 +39,5 @@
 #include "dogen/formatters/io/general_settings_io.hpp"
 #include "dogen/formatters/io/modeline_locations_io.hpp"
 #include "dogen/formatters/io/infix_configuration_io.hpp"
+
+#endif

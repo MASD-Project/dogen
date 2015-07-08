@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_TEST_DATA_ALL_TD_HPP
+#define DOGEN_CPP_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/project_td.hpp"
@@ -64,3 +71,5 @@
 #include "dogen/cpp/test_data/formattables/formatter_properties_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/inclusion_directives_repository_td.hpp"
 #include "dogen/cpp/test_data/formattables/inclusion_dependencies_repository_td.hpp"
+
+#endif

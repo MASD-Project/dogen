@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_CLASSES_IN_A_PACKAGE_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_CLASSES_IN_A_PACKAGE_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/classes_in_a_package/serialization/registrar_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_1_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_2_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_3_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_4_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/package_1/class_5_ser.hpp"
+
+#endif

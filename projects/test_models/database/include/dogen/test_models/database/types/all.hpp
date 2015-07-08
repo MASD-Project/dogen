@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_DATABASE_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_DATABASE_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/database/types/no_keys.hpp"
 #include "dogen/test_models/database/types/no_keys_2.hpp"
 #include "dogen/test_models/database/types/foreign_key.hpp"
 #include "dogen/test_models/database/types/primary_key.hpp"
 #include "dogen/test_models/database/types/primary_key_2.hpp"
+
+#endif

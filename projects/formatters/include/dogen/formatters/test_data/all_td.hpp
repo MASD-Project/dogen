@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FORMATTERS_TEST_DATA_ALL_TD_HPP
+#define DOGEN_FORMATTERS_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/formatters/test_data/file_td.hpp"
 #include "dogen/formatters/test_data/editors_td.hpp"
 #include "dogen/formatters/test_data/licence_td.hpp"
@@ -32,3 +39,5 @@
 #include "dogen/formatters/test_data/general_settings_td.hpp"
 #include "dogen/formatters/test_data/modeline_locations_td.hpp"
 #include "dogen/formatters/test_data/infix_configuration_td.hpp"
+
+#endif

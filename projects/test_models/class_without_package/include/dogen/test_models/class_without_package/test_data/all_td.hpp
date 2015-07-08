@@ -18,4 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_CLASS_WITHOUT_PACKAGE_TEST_DATA_ALL_TD_HPP
+#define DOGEN_TEST_MODELS_CLASS_WITHOUT_PACKAGE_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/class_without_package/test_data/class_1_td.hpp"
+
+#endif

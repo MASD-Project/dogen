@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TO_SML_TEST_DATA_ALL_TD_HPP
+#define DOGEN_DIA_TO_SML_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia_to_sml/test_data/context_td.hpp"
 #include "dogen/dia_to_sml/test_data/profile_td.hpp"
 #include "dogen/dia_to_sml/test_data/object_types_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_object_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_comment_td.hpp"
 #include "dogen/dia_to_sml/test_data/processed_property_td.hpp"
+
+#endif

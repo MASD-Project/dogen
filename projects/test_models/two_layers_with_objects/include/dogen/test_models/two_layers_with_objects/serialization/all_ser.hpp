@@ -18,6 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TWO_LAYERS_WITH_OBJECTS_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_TWO_LAYERS_WITH_OBJECTS_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/two_layers_with_objects/serialization/registrar_ser.hpp"
 #include "dogen/test_models/two_layers_with_objects/serialization/Package_2/class_2_ser.hpp"
 #include "dogen/test_models/two_layers_with_objects/serialization/package_1/class_1_ser.hpp"
+
+#endif

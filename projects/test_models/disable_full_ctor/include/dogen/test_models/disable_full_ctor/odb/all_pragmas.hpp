@@ -18,4 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_DISABLE_FULL_CTOR_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_DISABLE_FULL_CTOR_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/disable_full_ctor/odb/package1/first_class_pragmas.hpp"
+
+#endif

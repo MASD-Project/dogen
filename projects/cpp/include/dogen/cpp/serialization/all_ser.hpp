@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/cpp/serialization/registrar_ser.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
@@ -65,3 +72,5 @@
 #include "dogen/cpp/serialization/formattables/formatter_properties_repository_ser.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_directives_repository_ser.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_dependencies_repository_ser.hpp"
+
+#endif

@@ -18,3 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_BACKEND_IO_ALL_IO_HPP
+#define DOGEN_BACKEND_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+
+#endif

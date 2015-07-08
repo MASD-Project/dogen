@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TEST_DATA_ALL_TD_HPP
+#define DOGEN_DIA_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia/test_data/font_td.hpp"
 #include "dogen/dia/test_data/real_td.hpp"
 #include "dogen/dia/test_data/color_td.hpp"
@@ -35,3 +42,5 @@
 #include "dogen/dia/test_data/connection_td.hpp"
 #include "dogen/dia/test_data/enumeration_td.hpp"
 #include "dogen/dia/test_data/diagram_data_td.hpp"
+
+#endif

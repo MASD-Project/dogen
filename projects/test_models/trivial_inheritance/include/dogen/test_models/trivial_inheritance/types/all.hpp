@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_inheritance/types/base.hpp"
 #include "dogen/test_models/trivial_inheritance/types/service.hpp"
 #include "dogen/test_models/trivial_inheritance/types/pkg1/child.hpp"
@@ -43,3 +50,5 @@
 #include "dogen/test_models/trivial_inheritance/types/third_child_with_members.hpp"
 #include "dogen/test_models/trivial_inheritance/types/move_ctor_empty_descendant.hpp"
 #include "dogen/test_models/trivial_inheritance/types/second_child_without_members.hpp"
+
+#endif

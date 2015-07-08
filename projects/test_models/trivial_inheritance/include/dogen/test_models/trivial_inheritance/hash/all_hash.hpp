@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_inheritance/hash/base_hash.hpp"
 #include "dogen/test_models/trivial_inheritance/hash/pkg1/child_hash.hpp"
 #include "dogen/test_models/trivial_inheritance/hash/pkg3/child_hash.hpp"
@@ -39,3 +46,5 @@
 #include "dogen/test_models/trivial_inheritance/hash/third_child_with_members_hash.hpp"
 #include "dogen/test_models/trivial_inheritance/hash/move_ctor_empty_descendant_hash.hpp"
 #include "dogen/test_models/trivial_inheritance/hash/second_child_without_members_hash.hpp"
+
+#endif

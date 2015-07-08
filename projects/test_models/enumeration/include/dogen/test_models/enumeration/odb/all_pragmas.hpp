@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+
+#endif

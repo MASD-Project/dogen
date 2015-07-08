@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_STITCH_IO_ALL_IO_HPP
+#define DOGEN_STITCH_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/stitch/io/line_io.hpp"
 #include "dogen/stitch/io/block_io.hpp"
 #include "dogen/stitch/io/block_types_io.hpp"
 #include "dogen/stitch/io/text_template_io.hpp"
 #include "dogen/stitch/io/settings_bundle_io.hpp"
 #include "dogen/stitch/io/stitching_settings_io.hpp"
+
+#endif

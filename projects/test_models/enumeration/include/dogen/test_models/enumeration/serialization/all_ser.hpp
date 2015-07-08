@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/enumeration/serialization/a_class_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/book_types_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/colour_types_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/pkg1/shape_types_ser.hpp"
+
+#endif

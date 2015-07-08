@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/serialization/name_ser.hpp"
 #include "dogen/dynamic/serialization/text_ser.hpp"
 #include "dogen/dynamic/serialization/value_ser.hpp"
@@ -32,3 +39,5 @@
 #include "dogen/dynamic/serialization/field_definition_ser.hpp"
 #include "dogen/dynamic/serialization/ownership_hierarchy_ser.hpp"
 #include "dogen/dynamic/serialization/field_definition_types_ser.hpp"
+
+#endif

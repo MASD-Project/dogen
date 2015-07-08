@@ -18,5 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_ENABLE_FACET_SERIALIZATION_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_ENABLE_FACET_SERIALIZATION_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/enable_facet_serialization/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enable_facet_serialization/serialization/package1/first_class_ser.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STEREOTYPES_TEST_DATA_ALL_TD_HPP
+#define DOGEN_TEST_MODELS_STEREOTYPES_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stereotypes/test_data/value_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/entity_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/fluent_td.hpp"
@@ -57,3 +64,5 @@
 #include "dogen/test_models/stereotypes/test_data/pkg1/keyed_in_package_unversioned_key_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/composite_identity_ver_unversioned_key_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/identity_and_other_ver_unversioned_key_td.hpp"
+
+#endif

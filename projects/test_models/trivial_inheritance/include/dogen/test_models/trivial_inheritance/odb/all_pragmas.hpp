@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_inheritance/odb/base_pragmas.hpp"
 #include "dogen/test_models/trivial_inheritance/odb/pkg1/child_pragmas.hpp"
 #include "dogen/test_models/trivial_inheritance/odb/pkg3/child_pragmas.hpp"
@@ -39,3 +46,5 @@
 #include "dogen/test_models/trivial_inheritance/odb/third_child_with_members_pragmas.hpp"
 #include "dogen/test_models/trivial_inheritance/odb/move_ctor_empty_descendant_pragmas.hpp"
 #include "dogen/test_models/trivial_inheritance/odb/second_child_without_members_pragmas.hpp"
+
+#endif

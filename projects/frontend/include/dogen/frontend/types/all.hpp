@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FRONTEND_TYPES_ALL_HPP
+#define DOGEN_FRONTEND_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/frontend/types/frontend.hpp"
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/frontend/types/initializer.hpp"
@@ -28,3 +35,5 @@
 #include "dogen/frontend/types/json_sml_frontend.hpp"
 #include "dogen/frontend/types/frontend_interface.hpp"
 #include "dogen/frontend/types/frontend_registrar.hpp"
+
+#endif

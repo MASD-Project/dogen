@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_association/odb/class_a_pragmas.hpp"
 #include "dogen/test_models/trivial_association/odb/class_b_pragmas.hpp"
 #include "dogen/test_models/trivial_association/odb/class_c_pragmas.hpp"
 #include "dogen/test_models/trivial_association/odb/class_d_pragmas.hpp"
+
+#endif

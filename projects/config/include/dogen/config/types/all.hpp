@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CONFIG_TYPES_ALL_HPP
+#define DOGEN_CONFIG_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/config/types/config.hpp"
 #include "dogen/config/types/reference.hpp"
 #include "dogen/config/types/cpp_options.hpp"
@@ -30,3 +37,5 @@
 #include "dogen/config/types/stitching_options.hpp"
 #include "dogen/config/types/troubleshooting_options.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_TYPES_ALL_HPP
+#define DOGEN_CPP_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/cpp/types/cpp.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -185,3 +192,5 @@
 #include "dogen/cpp/types/formatters/serialization/class_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
+
+#endif

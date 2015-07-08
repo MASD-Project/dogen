@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_IO_ALL_IO_HPP
+#define DOGEN_DIA_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia/io/font_io.hpp"
 #include "dogen/dia/io/real_io.hpp"
 #include "dogen/dia/io/color_io.hpp"
@@ -35,3 +42,5 @@
 #include "dogen/dia/io/connection_io.hpp"
 #include "dogen/dia/io/enumeration_io.hpp"
 #include "dogen/dia/io/diagram_data_io.hpp"
+
+#endif

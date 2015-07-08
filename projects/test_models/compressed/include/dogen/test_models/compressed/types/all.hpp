@@ -18,4 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_COMPRESSED_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_COMPRESSED_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/compressed/types/package1/first_class.hpp"
+
+#endif

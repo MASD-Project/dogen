@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_DATABASE_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_DATABASE_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/database/odb/no_keys_pragmas.hpp"
 #include "dogen/test_models/database/odb/no_keys_2_pragmas.hpp"
 #include "dogen/test_models/database/odb/foreign_key_pragmas.hpp"
 #include "dogen/test_models/database/odb/primary_key_pragmas.hpp"
 #include "dogen/test_models/database/odb/primary_key_2_pragmas.hpp"
+
+#endif

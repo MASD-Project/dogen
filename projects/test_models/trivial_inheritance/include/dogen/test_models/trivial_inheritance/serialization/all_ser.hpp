@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_INHERITANCE_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_inheritance/serialization/base_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/registrar_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/pkg1/child_ser.hpp"
@@ -40,3 +47,5 @@
 #include "dogen/test_models/trivial_inheritance/serialization/third_child_with_members_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/move_ctor_empty_descendant_ser.hpp"
 #include "dogen/test_models/trivial_inheritance/serialization/second_child_without_members_ser.hpp"
+
+#endif

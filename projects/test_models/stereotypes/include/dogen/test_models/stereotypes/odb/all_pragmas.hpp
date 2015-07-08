@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STEREOTYPES_ODB_ALL_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_STEREOTYPES_ODB_ALL_PRAGMAS_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stereotypes/odb/value_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/entity_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/fluent_pragmas.hpp"
@@ -57,3 +64,5 @@
 #include "dogen/test_models/stereotypes/odb/pkg1/keyed_in_package_unversioned_key_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/composite_identity_ver_unversioned_key_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/identity_and_other_ver_unversioned_key_pragmas.hpp"
+
+#endif

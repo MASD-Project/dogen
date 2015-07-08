@@ -18,3 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_FORMATTERS_TEST_DATA_ALL_TD_HPP
+#define DOGEN_CPP_FORMATTERS_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+
+#endif

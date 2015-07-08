@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_TEST_DATA_ALL_TD_HPP
+#define DOGEN_SML_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml/test_data/node_td.hpp"
 #include "dogen/sml/test_data/type_td.hpp"
 #include "dogen/sml/test_data/model_td.hpp"
@@ -37,3 +44,5 @@
 #include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/sml/test_data/relationship_types_td.hpp"
+
+#endif

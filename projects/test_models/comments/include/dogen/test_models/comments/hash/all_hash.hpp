@@ -18,5 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_COMMENTS_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_COMMENTS_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/comments/hash/one_line_hash.hpp"
 #include "dogen/test_models/comments/hash/multi_line_hash.hpp"
+
+#endif

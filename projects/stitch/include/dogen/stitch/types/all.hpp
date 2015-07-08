@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_STITCH_TYPES_ALL_HPP
+#define DOGEN_STITCH_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/block.hpp"
 #include "dogen/stitch/types/parser.hpp"
@@ -35,3 +42,5 @@
 #include "dogen/stitch/types/stitching_settings.hpp"
 #include "dogen/stitch/types/settings_bundle_factory.hpp"
 #include "dogen/stitch/types/stitching_settings_factory.hpp"
+
+#endif

@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_BACKEND_TYPES_ALL_HPP
+#define DOGEN_BACKEND_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/registrar_error.hpp"
 #include "dogen/backend/types/backend_interface.hpp"
 #include "dogen/backend/types/backend_registrar.hpp"
+
+#endif

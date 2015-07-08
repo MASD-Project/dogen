@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_CLASSES_WITHOUT_PACKAGE_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_CLASSES_WITHOUT_PACKAGE_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/classes_without_package/hash/class_1_hash.hpp"
 #include "dogen/test_models/classes_without_package/hash/class_2_hash.hpp"
 #include "dogen/test_models/classes_without_package/hash/class_3_hash.hpp"
 #include "dogen/test_models/classes_without_package/hash/class_4_hash.hpp"
 #include "dogen/test_models/classes_without_package/hash/class_5_hash.hpp"
+
+#endif

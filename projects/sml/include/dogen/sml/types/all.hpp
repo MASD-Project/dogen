@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_TYPES_ALL_HPP
+#define DOGEN_SML_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml/types/sml.hpp"
 #include "dogen/sml/types/node.hpp"
 #include "dogen/sml/types/type.hpp"
@@ -61,3 +68,5 @@
 #include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/sml/types/generalization_indexer.hpp"
 #include "dogen/sml/types/all_model_items_traversal.hpp"
+
+#endif

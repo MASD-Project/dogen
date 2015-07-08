@@ -18,5 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FRONTEND_IO_ALL_IO_HPP
+#define DOGEN_FRONTEND_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/io/frontend_settings_io.hpp"
+
+#endif

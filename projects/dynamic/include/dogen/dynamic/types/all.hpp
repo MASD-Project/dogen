@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DYNAMIC_TYPES_ALL_HPP
+#define DOGEN_DYNAMIC_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/types/name.hpp"
 #include "dogen/dynamic/types/text.hpp"
 #include "dogen/dynamic/types/value.hpp"
@@ -49,3 +56,5 @@
 #include "dogen/dynamic/types/repository_workflow.hpp"
 #include "dogen/dynamic/types/field_definition_types.hpp"
 #include "dogen/dynamic/types/field_instance_factory.hpp"
+
+#endif

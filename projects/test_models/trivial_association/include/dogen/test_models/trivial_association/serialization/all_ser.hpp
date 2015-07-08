@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_association/serialization/class_a_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_b_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_c_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/class_d_ser.hpp"
 #include "dogen/test_models/trivial_association/serialization/registrar_ser.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TO_SML_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_DIA_TO_SML_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia_to_sml/serialization/context_ser.hpp"
 #include "dogen/dia_to_sml/serialization/profile_ser.hpp"
 #include "dogen/dia_to_sml/serialization/registrar_ser.hpp"
@@ -25,3 +32,5 @@
 #include "dogen/dia_to_sml/serialization/processed_object_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_comment_ser.hpp"
 #include "dogen/dia_to_sml/serialization/processed_property_ser.hpp"
+
+#endif

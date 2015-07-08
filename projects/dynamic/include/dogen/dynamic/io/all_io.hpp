@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DYNAMIC_IO_ALL_IO_HPP
+#define DOGEN_DYNAMIC_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dynamic/io/name_io.hpp"
 #include "dogen/dynamic/io/text_io.hpp"
 #include "dogen/dynamic/io/value_io.hpp"
@@ -31,3 +38,5 @@
 #include "dogen/dynamic/io/field_definition_io.hpp"
 #include "dogen/dynamic/io/ownership_hierarchy_io.hpp"
 #include "dogen/dynamic/io/field_definition_types_io.hpp"
+
+#endif

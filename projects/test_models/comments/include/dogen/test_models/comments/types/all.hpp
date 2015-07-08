@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_COMMENTS_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_COMMENTS_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/comments/types/comments.hpp"
 #include "dogen/test_models/comments/types/one_line.hpp"
 #include "dogen/test_models/comments/types/multi_line.hpp"
 #include "dogen/test_models/comments/types/package/package.hpp"
 #include "dogen/test_models/comments/types/package/package2/package2.hpp"
+
+#endif

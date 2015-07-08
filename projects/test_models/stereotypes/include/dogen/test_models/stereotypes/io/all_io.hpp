@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STEREOTYPES_IO_ALL_IO_HPP
+#define DOGEN_TEST_MODELS_STEREOTYPES_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stereotypes/io/value_io.hpp"
 #include "dogen/test_models/stereotypes/io/entity_io.hpp"
 #include "dogen/test_models/stereotypes/io/fluent_io.hpp"
@@ -57,3 +64,5 @@
 #include "dogen/test_models/stereotypes/io/pkg1/keyed_in_package_unversioned_key_io.hpp"
 #include "dogen/test_models/stereotypes/io/composite_identity_ver_unversioned_key_io.hpp"
 #include "dogen/test_models/stereotypes/io/identity_and_other_ver_unversioned_key_io.hpp"
+
+#endif

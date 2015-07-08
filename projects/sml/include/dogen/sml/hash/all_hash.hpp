@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_HASH_ALL_HASH_HPP
+#define DOGEN_SML_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml/hash/node_hash.hpp"
 #include "dogen/sml/hash/type_hash.hpp"
 #include "dogen/sml/hash/model_hash.hpp"
@@ -37,3 +44,5 @@
 #include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
+
+#endif

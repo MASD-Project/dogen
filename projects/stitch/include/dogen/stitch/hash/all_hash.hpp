@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_STITCH_HASH_ALL_HASH_HPP
+#define DOGEN_STITCH_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/stitch/hash/line_hash.hpp"
 #include "dogen/stitch/hash/block_hash.hpp"
 #include "dogen/stitch/hash/block_types_hash.hpp"
 #include "dogen/stitch/hash/text_template_hash.hpp"
 #include "dogen/stitch/hash/settings_bundle_hash.hpp"
 #include "dogen/stitch/hash/stitching_settings_hash.hpp"
+
+#endif

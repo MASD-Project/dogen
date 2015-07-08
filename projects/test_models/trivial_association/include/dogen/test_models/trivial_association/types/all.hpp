@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_TRIVIAL_ASSOCIATION_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/trivial_association/types/class_a.hpp"
 #include "dogen/test_models/trivial_association/types/class_b.hpp"
 #include "dogen/test_models/trivial_association/types/class_c.hpp"
 #include "dogen/test_models/trivial_association/types/class_d.hpp"
+
+#endif

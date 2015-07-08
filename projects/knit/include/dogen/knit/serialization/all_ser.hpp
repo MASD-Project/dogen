@@ -18,4 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_KNIT_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_KNIT_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/knit/serialization/registrar_ser.hpp"
+
+#endif

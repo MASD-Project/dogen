@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_BOOST_MODEL_TEST_DATA_ALL_TD_HPP
+#define DOGEN_TEST_MODELS_BOOST_MODEL_TEST_DATA_ALL_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/boost_model/test_data/class_a_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_b_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_d_td.hpp"
@@ -28,3 +35,5 @@
 #include "dogen/test_models/boost_model/test_data/class_base_td.hpp"
 #include "dogen/test_models/boost_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
+
+#endif

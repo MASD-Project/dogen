@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_TO_CPP_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_SML_TO_CPP_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml_to_cpp/serialization/context_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/registrar_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/std_types_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/boost_types_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/relationships_ser.hpp"
 #include "dogen/sml_to_cpp/serialization/inclusion_lists_ser.hpp"
+
+#endif

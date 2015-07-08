@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_DATABASE_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_DATABASE_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/database/serialization/no_keys_ser.hpp"
 #include "dogen/test_models/database/serialization/no_keys_2_ser.hpp"
 #include "dogen/test_models/database/serialization/registrar_ser.hpp"
 #include "dogen/test_models/database/serialization/foreign_key_ser.hpp"
 #include "dogen/test_models/database/serialization/primary_key_ser.hpp"
 #include "dogen/test_models/database/serialization/primary_key_2_ser.hpp"
+
+#endif

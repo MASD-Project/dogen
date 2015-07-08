@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/enumeration/hash/a_class_hash.hpp"
 #include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
 #include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
 #include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_FORMATTERS_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_FORMATTERS_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/formatters/serialization/file_ser.hpp"
 #include "dogen/formatters/serialization/editors_ser.hpp"
 #include "dogen/formatters/serialization/licence_ser.hpp"
@@ -33,3 +40,5 @@
 #include "dogen/formatters/serialization/general_settings_ser.hpp"
 #include "dogen/formatters/serialization/modeline_locations_ser.hpp"
 #include "dogen/formatters/serialization/infix_configuration_ser.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/std_model/types/base.hpp"
 #include "dogen/test_models/std_model/types/class_a.hpp"
 #include "dogen/test_models/std_model/types/class_b.hpp"
@@ -33,3 +40,5 @@
 #include "dogen/test_models/std_model/types/some_service.hpp"
 #include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
 #include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
+
+#endif

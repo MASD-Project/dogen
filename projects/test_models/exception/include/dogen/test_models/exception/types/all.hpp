@@ -18,6 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_EXCEPTION_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_EXCEPTION_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/exception/types/a_class.hpp"
 #include "dogen/test_models/exception/types/my_error.hpp"
 #include "dogen/test_models/exception/types/pkg/catastrophic_error.hpp"
+
+#endif

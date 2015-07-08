@@ -18,8 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_CLASSES_IN_A_PACKAGE_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_CLASSES_IN_A_PACKAGE_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/classes_in_a_package/types/package_1/class_1.hpp"
 #include "dogen/test_models/classes_in_a_package/types/package_1/class_2.hpp"
 #include "dogen/test_models/classes_in_a_package/types/package_1/class_3.hpp"
 #include "dogen/test_models/classes_in_a_package/types/package_1/class_4.hpp"
 #include "dogen/test_models/classes_in_a_package/types/package_1/class_5.hpp"
+
+#endif

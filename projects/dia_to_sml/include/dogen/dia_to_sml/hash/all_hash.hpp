@@ -18,9 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TO_SML_HASH_ALL_HASH_HPP
+#define DOGEN_DIA_TO_SML_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia_to_sml/hash/context_hash.hpp"
 #include "dogen/dia_to_sml/hash/profile_hash.hpp"
 #include "dogen/dia_to_sml/hash/object_types_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_object_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_comment_hash.hpp"
 #include "dogen/dia_to_sml/hash/processed_property_hash.hpp"
+
+#endif

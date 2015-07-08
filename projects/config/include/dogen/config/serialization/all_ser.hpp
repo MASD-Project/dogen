@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CONFIG_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_CONFIG_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/config/serialization/reference_ser.hpp"
 #include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/config/serialization/cpp_options_ser.hpp"
@@ -28,3 +35,5 @@
 #include "dogen/config/serialization/knitting_options_ser.hpp"
 #include "dogen/config/serialization/stitching_options_ser.hpp"
 #include "dogen/config/serialization/troubleshooting_options_ser.hpp"
+
+#endif

@@ -18,4 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STAND_ALONE_CLASS_TYPES_ALL_HPP
+#define DOGEN_TEST_MODELS_STAND_ALONE_CLASS_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stand_alone_class/types/class_1.hpp"
+
+#endif

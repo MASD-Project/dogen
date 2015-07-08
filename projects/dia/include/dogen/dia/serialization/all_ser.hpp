@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia/serialization/font_ser.hpp"
 #include "dogen/dia/serialization/real_ser.hpp"
 #include "dogen/dia/serialization/color_ser.hpp"
@@ -36,3 +43,5 @@
 #include "dogen/dia/serialization/connection_ser.hpp"
 #include "dogen/dia/serialization/enumeration_ser.hpp"
 #include "dogen/dia/serialization/diagram_data_ser.hpp"
+
+#endif

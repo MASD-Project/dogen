@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STEREOTYPES_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_TEST_MODELS_STEREOTYPES_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/stereotypes/serialization/value_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/entity_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/fluent_ser.hpp"
@@ -58,3 +65,5 @@
 #include "dogen/test_models/stereotypes/serialization/pkg1/keyed_in_package_unversioned_key_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/composite_identity_ver_unversioned_key_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/identity_and_other_ver_unversioned_key_ser.hpp"
+
+#endif

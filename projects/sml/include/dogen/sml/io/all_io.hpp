@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_IO_ALL_IO_HPP
+#define DOGEN_SML_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml/io/node_io.hpp"
 #include "dogen/sml/io/type_io.hpp"
 #include "dogen/sml/io/model_io.hpp"
@@ -37,3 +44,5 @@
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
+
+#endif

@@ -18,7 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_IO_ALL_IO_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_IO_ALL_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/enumeration/io/a_class_io.hpp"
 #include "dogen/test_models/enumeration/io/book_types_io.hpp"
 #include "dogen/test_models/enumeration/io/colour_types_io.hpp"
 #include "dogen/test_models/enumeration/io/pkg1/shape_types_io.hpp"
+
+#endif

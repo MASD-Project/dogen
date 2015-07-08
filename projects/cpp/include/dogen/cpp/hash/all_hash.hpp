@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CPP_HASH_ALL_HASH_HPP
+#define DOGEN_CPP_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/cpp/hash/settings/bundle_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/project_hash.hpp"
@@ -64,3 +71,5 @@
 #include "dogen/cpp/hash/formattables/formatter_properties_repository_hash.hpp"
 #include "dogen/cpp/hash/formattables/inclusion_directives_repository_hash.hpp"
 #include "dogen/cpp/hash/formattables/inclusion_dependencies_repository_hash.hpp"
+
+#endif

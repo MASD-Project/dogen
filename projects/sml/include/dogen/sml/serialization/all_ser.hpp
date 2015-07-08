@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_SML_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_SML_SERIALIZATION_ALL_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/sml/serialization/node_ser.hpp"
 #include "dogen/sml/serialization/type_ser.hpp"
 #include "dogen/sml/serialization/model_ser.hpp"
@@ -38,3 +45,5 @@
 #include "dogen/sml/serialization/origin_types_ser.hpp"
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/sml/serialization/relationship_types_ser.hpp"
+
+#endif

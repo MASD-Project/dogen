@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_HASH_ALL_HASH_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_HASH_ALL_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/test_models/std_model/hash/base_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_a_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_b_hash.hpp"
@@ -32,3 +39,5 @@
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
+
+#endif

@@ -18,6 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_DIA_TO_SML_TYPES_ALL_HPP
+#define DOGEN_DIA_TO_SML_TYPES_ALL_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
 #include "dogen/dia_to_sml/types/traits.hpp"
 #include "dogen/dia_to_sml/types/context.hpp"
 #include "dogen/dia_to_sml/types/grapher.hpp"
@@ -38,3 +45,5 @@
 #include "dogen/dia_to_sml/types/processed_comment.hpp"
 #include "dogen/dia_to_sml/types/processed_property.hpp"
 #include "dogen/dia_to_sml/types/transformation_error.hpp"
+
+#endif
