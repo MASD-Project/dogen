@@ -159,7 +159,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
         r.push_front(ri);
 
     r.splice_after(r.before_begin(),
-        f.make_includers(opts, ps, pdrp, formatters, fprp, m));
+        f.make_includers(opts, ro, gsf, ps, pdrp, formatters, fprp, m));
     r.splice_after(r.before_begin(),
         f.make_cmakelists(opts, ro, gsf, ps, fprp, m));
 

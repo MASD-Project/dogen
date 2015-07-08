@@ -242,6 +242,8 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 std::forward_list<std::shared_ptr<formattable> > factory::
 make_includers(
     const config::cpp_options& opts,
+    const dynamic::object& root_object,
+    const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formattables::path_derivatives_repository& pdrp,
     const std::forward_list<
@@ -291,6 +293,9 @@ make_includers(
 
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
+    const auto gs(gsf.make(cpp_modeline_name, root_object));
+    inc->settings().general_settings(gs);
+
     for(const auto& pair : includes_by_facet_name) {
         const auto& facet_name(pair.first);
 
