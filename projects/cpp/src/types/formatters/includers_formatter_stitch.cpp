@@ -33,7 +33,7 @@ dogen::formatters::file includers_formatter_stitch(
         auto sbf(fa.make_scoped_boilerplate_formatter());
 fa.stream() << std::endl;
     } // sbf
-    // return fa.make_file();
-    return fa.make_file(false/*overwrite*/);
+    return fa.make_file();
+    // return fa.make_file(false/*overwrite*/);
 }
 } } }

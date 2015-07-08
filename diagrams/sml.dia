@@ -2305,7 +2305,7 @@ all types in the combined model.#</dia:string>
         <dia:point val="-177,-20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.05,-20.05;-144.48,30.55"/>
+        <dia:rectangle val="-177.05,-20.05;-144.48,32.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2317,7 +2317,7 @@ all types in the combined model.#</dia:string>
         <dia:real val="32.469999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="50.5"/>
+        <dia:real val="52.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -4020,13 +4020,13 @@ for Java, etc.#</dia:string>
         <dia:point val="-75,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-75.05,-1.05;-64.055,2.65"/>
+        <dia:rectangle val="-75.05,-1.05;-63.67,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-75,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>

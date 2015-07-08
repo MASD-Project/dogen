@@ -20,9 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
+#include "dogen/cpp/io/formattables/includers_info_io.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
@@ -55,6 +60,57 @@ const std::string empty_formatter_name("Formatter name is empty.");
 const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
 const std::string cpp_modeline_name("cpp");
+
+const char angle_bracket('<');
+const std::string boost_name("boost");
+const std::string boost_serialization_gregorian("greg_serialize.hpp");
+
+const std::string empty_include_directive("Include directive is empty.");
+
+bool include_directive_comparer(
+    const std::string& lhs, const std::string& rhs) {
+    if (lhs.empty() || rhs.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_include_directive;
+        using dogen::cpp::formattables::building_error;
+        BOOST_THROW_EXCEPTION(building_error(empty_include_directive));
+    }
+
+    const bool lhs_has_angle_brackets(lhs[0] == angle_bracket);
+    const bool rhs_has_angle_brackets(rhs[0] == angle_bracket);
+
+    if (lhs_has_angle_brackets && !rhs_has_angle_brackets)
+        return true;
+
+    if (!lhs_has_angle_brackets && rhs_has_angle_brackets)
+        return false;
+
+    if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
+        const auto npos(std::string::npos);
+        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
+        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
+        if (!lhs_is_boost && rhs_is_boost)
+            return false;
+
+        if (lhs_is_boost && !rhs_is_boost)
+            return true;
+
+        // FIXME: hacks for headers that must be last
+        const bool lhs_is_gregorian(
+            lhs.find_first_of(boost_serialization_gregorian) != npos);
+        const bool rhs_is_gregorian(
+            rhs.find_first_of(boost_serialization_gregorian) != npos);
+        if (lhs_is_gregorian && !rhs_is_gregorian)
+            return true;
+
+        if (!lhs_is_gregorian && rhs_is_gregorian)
+            return false;
+    }
+
+    if (lhs.size() != rhs.size())
+        return lhs.size() < rhs.size();
+
+    return lhs < rhs;
+}
 
 }
 
@@ -258,15 +314,56 @@ make_includers(
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
+    const auto registrar_qn(create_qname(m, registrar_name));
     for (const auto& qn_pair : pdrp.path_derivatives_by_qname()) {
         const auto qn(qn_pair.first);
 
         if (qn.model_name() != m.name().model_name())
             continue;
 
+        if (qn.model_name().empty() && qn.simple_name().empty())
+            continue;
+
+        if (m.concepts().find(qn) != m.concepts().end())
+            continue;
+
+        if (m.primitives().find(qn) != m.primitives().end())
+            continue;
+
         for (const auto& fmt_pair : qn_pair.second) {
             const auto fn(fmt_pair.first);
             const auto pd(fmt_pair.second);
+
+            if (boost::contains(fn, "forward_declarations_formatter"))
+                continue;
+
+            const auto is_types(boost::starts_with(fn, "cpp.types."));
+            if (!is_types) {
+                const auto j(m.objects().find(qn));
+                using sml::object_types;
+                if (j  != m.objects().end()) {
+                    const auto ot(j->second.object_type());
+                    if (ot != object_types::user_defined_value_object &&
+                        ot != object_types::entity &&
+                        ot != object_types::keyed_entity &&
+                        ot != object_types::unversioned_key &&
+                        ot != object_types::versioned_key)
+                        continue;
+                }
+
+                const auto i(m.modules().find(qn));
+                if (i != m.modules().end())
+                        continue;
+            } else {
+                const auto i(m.modules().find(qn));
+                if (i != m.modules().end()) {
+                    if (i->second.documentation().empty())
+                        continue;
+                }
+            }
+
+            if ( qn == registrar_qn && !boost::contains(fn, "serialization"))
+                continue;
 
             const auto id(pd.inclusion_directive());
             if (id)
@@ -291,6 +388,11 @@ make_includers(
         ifn.splice(ifn.begin(), i->second);
     }
 
+    for(auto& pair : includes_by_facet_name) {
+        pair.second.sort(include_directive_comparer);
+        pair.second.unique();
+    }
+
     std::forward_list<std::shared_ptr<formattable> > r;
     auto inc(std::make_shared<includers_info>());
     const auto gs(gsf.make(cpp_modeline_name, root_object));
@@ -309,9 +411,12 @@ make_includers(
         p.file_path(pd.file_path());
         p.header_guard(pd.header_guard());
         p.enabled(is_enabled(fprp, m.name(), ch_fn));
+        p.inclusion_dependencies(pair.second);
         inc->formatter_properties().insert(std::make_pair(ifn, p));
     }
     r.push_front(inc);
+    BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
+
     BOOST_LOG_SEV(lg, debug) << "Made includers: "
                              << sml::string_converter::convert(qn);
 

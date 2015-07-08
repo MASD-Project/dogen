@@ -128,7 +128,7 @@ class help_mock {
 public:
     explicit help_mock(bool& called) : called_(called) { }
 
-    void operator()(std::string description) {
+    void operator()(const std::string& description) {
         logger lg(logger_factory(test_suite));
         BOOST_LOG_SEV(lg, debug) << "description: " << description;
         BOOST_CHECK(!description.empty());

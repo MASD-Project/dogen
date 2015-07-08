@@ -37,16 +37,11 @@ const char angle_bracket('<');
 const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
-}
-
-namespace dogen {
-namespace cpp {
-namespace formattables {
-
 bool include_directive_comparer(
     const std::string& lhs, const std::string& rhs) {
     if (lhs.empty() || rhs.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_include_directive;
+        using dogen::cpp::formattables::building_error;
         BOOST_THROW_EXCEPTION(building_error(empty_include_directive));
     }
 
@@ -86,6 +81,13 @@ bool include_directive_comparer(
 
     return lhs < rhs;
 }
+
+
+}
+
+namespace dogen {
+namespace cpp {
+namespace formattables {
 
 template<typename SmlEntity>
 std::unordered_map<std::string, std::list<std::string> >
