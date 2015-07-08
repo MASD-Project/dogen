@@ -380,12 +380,13 @@ make_includers(
             BOOST_THROW_EXCEPTION(building_error(empty_formatter_name));
         }
 
-        const auto i(includes_by_formatter_name.find(oh.formatter_name()));
-        if (i == includes_by_formatter_name.end())
+        if (f->file_type() != formatters::file_types::cpp_header)
             continue;
 
+        const auto i(includes_by_formatter_name.find(oh.formatter_name()));
         auto& ifn(includes_by_facet_name[oh.facet_name()]);
-        ifn.splice(ifn.begin(), i->second);
+        if (i != includes_by_formatter_name.end())
+            ifn.splice(ifn.begin(), i->second);
     }
 
     for(auto& pair : includes_by_facet_name) {

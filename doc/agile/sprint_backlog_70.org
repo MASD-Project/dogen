@@ -95,6 +95,7 @@ machinery. Fix all differences.
 
 *** COMPLETED Implement includer formatter                            :story:
     CLOSED: [2015-07-08 Wed 16:08]
+    CLOCK: [2015-07-08 Wed 16:09]--[2015-07-08 Wed 16:31] =>  0:22
     CLOCK: [2015-07-08 Wed 14:29]--[2015-07-08 Wed 16:08] =>  1:39
     CLOCK: [2015-07-08 Wed 14:03]--[2015-07-08 Wed 14:28] =>  0:25
     CLOCK: [2015-07-08 Wed 13:39]--[2015-07-08 Wed 14:02] =>  0:23
