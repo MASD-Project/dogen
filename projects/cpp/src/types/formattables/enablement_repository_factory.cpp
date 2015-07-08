@@ -63,7 +63,10 @@ private:
      */
     template<typename SmlEntity>
     void generate(const SmlEntity& e) {
-        result_.enablement_by_qname()[e.name()] = factory_.make(e.extensions());
+        const auto pg(e.generation_type() ==
+            sml::generation_types::partial_generation);
+        const auto o(e.extensions());
+        result_.enablement_by_qname()[e.name()] = factory_.make(o, pg);
     }
 
 public:

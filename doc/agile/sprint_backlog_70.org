@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-08 Wed 20:45]
+#+CAPTION: Clock summary at [2015-07-08 Wed 21:43]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *12:34* |       |      |
+| *Total time*                                                                | *13:30* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 12:34   |       |      |
-| Active                                                                      |         | 12:34 |      |
+| Stories                                                                     | 13:30   |       |      |
+| Active                                                                      |         | 13:30 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -32,6 +32,7 @@
 | COMPLETED Implement includer formatter                                      |         |       | 3:35 |
 | COMPLETED Implement serialisation formatter for enumerations                |         |       | 0:47 |
 | COMPLETED Implement odb pragma formatter for enumerations                   |         |       | 0:28 |
+| COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
 | STARTED Switch off legacy formatters                                        |         |       | 0:24 |
 #+end:
 
@@ -134,6 +135,15 @@ machinery. Fix all differences.
 Create the formatter, stitch template and all associated
 machinery. Fix all differences.
 
+*** COMPLETED Generate empty files for non-generatable types          :story:
+    CLOSED: [2015-07-08 Wed 21:43]
+    CLOCK: [2015-07-08 Wed 21:40]--[2015-07-08 Wed 21:43] =>  0:03
+    CLOCK: [2015-07-08 Wed 20:46]--[2015-07-08 Wed 21:39] =>  0:53
+
+At present we are ignoring all types that are non-generatable or
+partially generatable. We are also not generating forward
+declarations.
+
 *** STARTED Switch off legacy formatters                              :story:
     CLOCK: [2015-07-08 Wed 16:32]--[2015-07-08 Wed 16:56] =>  0:24
 
@@ -144,12 +154,6 @@ Problems:
 - generating empty file names.
 - not generating empty files for non-generatable types.
 - not generating odb pragmas or serialisation for enumerations.
-
-*** Generate empty files for non-generatable types                    :story:
-
-At present we are ignoring all types that are non-generatable or
-partially generatable. We are also not generating forward
-declarations.
 
 *** Thoughts on cpp refactoring                                       :story:
 
@@ -308,6 +312,14 @@ What can be said about an archetype:
 - we need to have "special" facets; cmake files for example should not
   really have a facet but it seems having an empty facet name breaks a
   lot of stuff.
+- we need a map between types/states in SML and enablement. For
+  example, if a type is "non-generatable" that is taken to mean
+  "generate types if file does not exist, default all else to
+  disabled". We need a way to express this sort of logic. This is akin
+  to an "enablement map". For example, users could define these maps
+  somewhere, given them a name and then assign a type to a map. In
+  addition, we need a way to express "generate but don't override" and
+  "generate and override".
 
 *** Thoughts on simplifying the formattables generation               :story:
 
@@ -430,6 +442,7 @@ trim down the obvious ones:
 - empty model name
 - split project
 - output to stdout
+- remove repository, factory, stereotypes
 - etc.
 
 Basically any feature which we are not using at present and cannot

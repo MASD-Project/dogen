@@ -179,9 +179,8 @@ private:
 dispatcher::dispatcher(const container& c) : container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
-    // for now we must not generate services.
-    const auto service(formattables::class_types::service);
-    const bool empty_out_content(c.class_type() == service);
+    const bool empty_out_content(
+        c.generation_type() == sml::generation_types::partial_generation);
     for (const auto f : container_.class_formatters())
         format_entity(*f, c, empty_out_content);
 }

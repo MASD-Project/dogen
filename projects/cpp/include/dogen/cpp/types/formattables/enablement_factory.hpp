@@ -81,14 +81,14 @@ private:
     std::unordered_map<std::string, bool>
     compute_enablement_value(
         const std::unordered_map<std::string, local_enablement_properties>&
-        lep) const;
+        lep, const bool partial_generation) const;
 
 public:
     /**
      *  @brief Create the enablement for all formatters.
      */
     std::unordered_map<std::string, bool>
-    make(const dynamic::object& o) const;
+    make(const dynamic::object& o, const bool partial_generation = false) const;
 
 private:
     const std::unordered_map<std::string, global_enablement_properties>&

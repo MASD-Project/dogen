@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
@@ -90,7 +91,7 @@ enablement_factory::obtain_local_properties(
 std::unordered_map<std::string, bool>
 enablement_factory::compute_enablement_value(
     const std::unordered_map<std::string, local_enablement_properties>&
-    lep) const {
+    lep, const bool partial_generation) const {
 
     std::unordered_map<std::string, bool> r;
     for (const auto& pair : lep) {
@@ -110,6 +111,12 @@ enablement_factory::compute_enablement_value(
             continue;
         }
 
+        if (partial_generation) {
+            const auto is_types(boost::starts_with(fn, "cpp.types."));
+            r[fn] = is_types;
+            continue;
+        }
+
         if (pair.second.enabled) {
             // formatter field has been set and so takes precedence.
             r[fn] = *pair.second.enabled;
@@ -121,10 +128,10 @@ enablement_factory::compute_enablement_value(
     return r;
 }
 
-std::unordered_map<std::string, bool>
-enablement_factory::make(const dynamic::object& o) const {
+std::unordered_map<std::string, bool> enablement_factory::
+make(const dynamic::object& o, const bool partial_generation) const {
     const auto lep(obtain_local_properties(o));
-    return compute_enablement_value(lep);
+    return compute_enablement_value(lep, partial_generation);
 }
 
 } } }
