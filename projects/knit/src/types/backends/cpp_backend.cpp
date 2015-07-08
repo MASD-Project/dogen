@@ -146,11 +146,11 @@ generate(const config::knitting_options& o,
     const dynamic::repository& rp,
     const sml::model& m) {
 
-    const auto p(create_project(o, m));
-    const auto old_world(format_files(o, p));
+    // const auto p(create_project(o, m));
+    // const auto old_world(format_files(o, p));
     const auto new_world(format_files(o, rp, m));
-    const auto r(override_legacy_files(old_world, new_world));
-    return r;
+    // const auto r(override_legacy_files(old_world, new_world));
+    return new_world;
 }
 
 } } }

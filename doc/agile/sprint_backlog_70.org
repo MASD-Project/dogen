@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-08 Wed 22:06]
+#+CAPTION: Clock summary at [2015-07-08 Wed 22:15]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:51* |       |      |
+| *Total time*                                                                | *13:58* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:51   |       |      |
-| Active                                                                      |         | 13:51 |      |
+| Stories                                                                     | 13:58   |       |      |
+| Active                                                                      |         | 13:58 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -34,6 +34,7 @@
 | COMPLETED Implement odb pragma formatter for enumerations                   |         |       | 0:28 |
 | COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
 | COMPLETED Switch off overrides for legacy formatters                        |         |       | 0:45 |
+| COMPLETED Switch off SML to CPP transformation                              |         |       | 0:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -156,6 +157,17 @@ Problems:
 - generating empty file names.
 - not generating empty files for non-generatable types.
 - not generating odb pragmas or serialisation for enumerations.
+
+*** COMPLETED Switch off SML to CPP transformation                    :story:
+    CLOSED: [2015-07-08 Wed 22:14]
+    CLOCK: [2015-07-08 Wed 22:07]--[2015-07-08 Wed 22:14] =>  0:07
+
+Switch the legacy transformation and formatting.
+
+*** Remove knit backends and use backend model instead                :story:
+
+We need to stop using the knit version of the backends. This will
+probably require fixing the managed directories problem.
 
 *** Thoughts on cpp refactoring                                       :story:
 
