@@ -22,6 +22,7 @@
 #include "dogen/cpp/types/formatters/includers_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/class_implementation_formatter.hpp"
+#include "dogen/cpp/types/formatters/serialization/enum_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/registrar_header_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
 #include "dogen/cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
@@ -36,6 +37,7 @@ void initializer::initialize(registrar& rg) {
     initialise_formatter<includers_formatter>(rg, traits::facet_name());
     initialise_formatter<class_header_formatter>(rg);
     initialise_formatter<class_implementation_formatter>(rg);
+    initialise_formatter<enum_header_formatter>(rg);
     initialise_formatter<registrar_header_formatter>(rg);
     initialise_formatter<registrar_implementation_formatter>(rg);
     initialise_formatter<forward_declarations_formatter>(rg);

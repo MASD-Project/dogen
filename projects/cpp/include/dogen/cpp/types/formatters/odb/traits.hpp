@@ -44,6 +44,11 @@ struct traits {
     static std::string class_header_formatter_name();
 
     /**
+     * @brief Name of the enum header formatter.
+     */
+    static std::string enum_header_formatter_name();
+
+    /**
      * @brief Name of the odb options formatter.
      */
     static std::string odb_options_formatter_name();

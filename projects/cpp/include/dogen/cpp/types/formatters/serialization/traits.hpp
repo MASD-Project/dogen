@@ -49,6 +49,11 @@ struct traits {
     static std::string class_implementation_formatter_name();
 
     /**
+     * @brief Name of the enumeration header formatter.
+     */
+    static std::string enum_header_formatter_name();
+
+    /**
      * @brief Name of the forward declaration's formatter.
      */
     static std::string forward_declarations_formatter_name();

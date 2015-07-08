@@ -18,38 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/odb/traits.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_ENUM_HEADER_FORMATTER_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ODB_ENUM_HEADER_FORMATTER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string traits::facet_name() {
-    static std::string r(formatters::traits::model_name() + ".odb");
-    return r;
-}
-
-std::string traits::class_header_formatter_name() {
-    static std::string r(formatters::traits::class_header_formatter_name(
-            traits::facet_name()));
-    return r;
-}
-
-std::string traits::enum_header_formatter_name() {
-    static std::string r(traits::facet_name() + ".enum_header_formatter");
-    return r;
-}
-
-std::string traits::odb_options_formatter_name() {
-    static std::string r(traits::facet_name() + ".odb_options_formatter");
-    return r;
-}
-
-std::string traits::odb_pragma() {
-    static std::string r("odb_pragma");
-    return r;
-}
+class enum_header_formatter;
 
 } } } }
+
+#endif

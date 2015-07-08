@@ -45,6 +45,21 @@
     {
         "name" : {
             "simple" : "postfix",
+            "qualified" : "cpp.odb.enum_header_formatter.postfix"
+        },
+        "ownership_hierarchy" : {
+            "model_name" : "cpp",
+            "facet_name" : "cpp.odb",
+            "formatter_name" : "cpp.odb.enum_header_formatter"
+        },
+        "value_type" : "text",
+        "definition_type" : "instance",
+        "scope" : "root_module",
+        "default_value" : ""
+    },
+    {
+        "name" : {
+            "simple" : "postfix",
             "qualified" : "cpp.odb.odb_options_formatter.postfix"
         },
         "ownership_hierarchy" : {

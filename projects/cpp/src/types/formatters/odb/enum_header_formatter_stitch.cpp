@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+ * Copyright(C) 2012 Kitanda <info@kitanda.co.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,38 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/cpp/types/formatters/traits.hpp"
-#include "dogen/cpp/types/formatters/odb/traits.hpp"
+#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/cpp/types/formatters/odb/enum_header_formatter_stitch.hpp"
 
 namespace dogen {
 namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string traits::facet_name() {
-    static std::string r(formatters::traits::model_name() + ".odb");
-    return r;
-}
+dogen::formatters::file enum_header_formatter_stitch(
+    formatters::entity_formatting_assistant& fa,
+    const formattables::enum_info& /*e*/) {
 
-std::string traits::class_header_formatter_name() {
-    static std::string r(formatters::traits::class_header_formatter_name(
-            traits::facet_name()));
-    return r;
+    {
+        auto sbf(fa.make_scoped_boilerplate_formatter());
+        {
+            auto snf(fa.make_scoped_namespace_formatter());
+fa.stream() << std::endl;
+fa.stream() << std::endl;
+        } // snf
+fa.stream() << std::endl;
+    } // sbf
+    // return fa.make_file();
+    return fa.make_file(false/*overwrite*/);
 }
-
-std::string traits::enum_header_formatter_name() {
-    static std::string r(traits::facet_name() + ".enum_header_formatter");
-    return r;
-}
-
-std::string traits::odb_options_formatter_name() {
-    static std::string r(traits::facet_name() + ".odb_options_formatter");
-    return r;
-}
-
-std::string traits::odb_pragma() {
-    static std::string r("odb_pragma");
-    return r;
-}
-
 } } } }

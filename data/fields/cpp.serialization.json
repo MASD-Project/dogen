@@ -75,21 +75,6 @@
     {
         "name" : {
             "simple" : "postfix",
-            "qualified" : "cpp.serialization.enum_implementation_formatter.postfix"
-        },
-        "ownership_hierarchy" : {
-            "model_name" : "cpp",
-            "facet_name" : "cpp.serialization",
-            "formatter_name" : "cpp.serialization.enum_implementation_formatter"
-        },
-        "value_type" : "text",
-        "definition_type" : "instance",
-        "scope" : "root_module",
-        "default_value" : ""
-    },
-    {
-        "name" : {
-            "simple" : "postfix",
             "qualified" : "cpp.serialization.registrar_header_formatter.postfix"
         },
         "ownership_hierarchy" : {

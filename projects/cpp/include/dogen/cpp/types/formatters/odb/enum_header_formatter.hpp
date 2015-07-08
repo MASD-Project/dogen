@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_HPP
-#define DOGEN_CPP_TYPES_FORMATTERS_HASH_ENUM_IMPLEMENTATION_FORMATTER_HPP
+#ifndef DOGEN_CPP_TYPES_FORMATTERS_ODB_ENUM_HEADER_FORMATTER_HPP
+#define DOGEN_CPP_TYPES_FORMATTERS_ODB_ENUM_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,11 +30,8 @@
 namespace dogen {
 namespace cpp {
 namespace formatters {
-namespace hash {
+namespace odb {
 
-/**
- * @brief Creates the hash header representation for an enumeration.
- */
 class enum_header_formatter : public enum_formatter_interface {
 public:
     enum_header_formatter() = default;
