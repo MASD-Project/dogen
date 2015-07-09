@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-09 Thu 21:05]
+#+CAPTION: Clock summary at [2015-07-09 Thu 21:49]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:25* |       |      |
+| *Total time*                                                                | *16:03* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 15:25   |       |      |
-| Active                                                                      |         | 15:25 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
+| Stories                                                                     | 16:03   |       |      |
+| Active                                                                      |         | 16:03 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |         |       | 0:52 |
@@ -35,10 +35,11 @@
 | COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
 | COMPLETED Switch off overrides for legacy formatters                        |         |       | 0:45 |
 | COMPLETED Switch off SML to CPP transformation                              |         |       | 0:07 |
-| STARTED Remove knit backends and use backend model instead                  |         |       | 1:27 |
+| STARTED Remove knit backends and use backend model instead                  |         |       | 1:37 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-09 Thu 21:21]--[2015-07-09 Thu 21:49] =>  0:28
     CLOCK: [2015-07-07 Tue 23:15]--[2015-07-07 Tue 23:21] =>  0:06
     CLOCK: [2015-07-06 Mon 15:01]--[2015-07-06 Mon 15:13] =>  0:12
 
@@ -166,7 +167,7 @@ Problems:
 Switch the legacy transformation and formatting.
 
 *** STARTED Remove knit backends and use backend model instead        :story:
-    CLOCK: [2015-07-09 Thu 20:56]--[2015-07-09 Thu 21:05] =>  0:09
+    CLOCK: [2015-07-09 Thu 20:56]--[2015-07-09 Thu 21:15] =>  0:09
     CLOCK: [2015-07-09 Thu 07:36]--[2015-07-09 Thu 08:22] =>  0:46
     CLOCK: [2015-07-09 Thu 07:22]--[2015-07-09 Thu 07:33] =>  0:11
     CLOCK: [2015-07-08 Wed 22:32]--[2015-07-08 Wed 22:53] =>  0:21
@@ -517,70 +518,356 @@ trim down the obvious ones:
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
 
+*** Model groups and multi-language support                           :story:
+
+At present we have hard-coded knit to support a single C++ model,
+cpp. However, in reality the world looks more like this:
+
+- there are "groups of models" that have models that target specific
+  languages. We need to give a name to the "default" model group in
+  dogen. We should choose something from the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][sewing terms]]; for now
+  lets call it =quilt=. =quilt= contains a number of languages such as
+  =cpp=. A user can only generate one model group at a time. Users can
+  generate one or more languages within a group (depending on what the
+  group supports).
+- we should have a top-level folder to house all model groups:
+  =backends=. The existing =backend= model becomes =backends::core=.
+- there may be facilities that are language specific, shared by model
+  groups. These can be housed in language specific folders:
+  =backends::cpp= and so on. For instance, the language specific stuff
+  now in =formatters= should move here.
+- different groups may express SML models differently; almost by
+  definition, they will, or else there is little purpose in having
+  multiple groups. For example, one can imagine a model group (say
+  =pleat=) which expresses [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-language-agnostic-models-lam][LAM]] as a model that is identical on every
+  supported language, ignoring native types; that is, expresses LAM as
+  a LAM model. However, =quilt= would still express LAM as a mapping
+  between generic LAM types and concrete native types (e.g. LAM
+  dictionary is a C++ unordered map). A good candidate for =pleat=
+  would be [[http://www.eclipse.org/modeling/emf/][eCore]].
+- if one was to try to generate code that is identical to =protobuf=,
+  the xsd tool, =odb=, etc one would generate model groups for these.
+- we may need multiple "needles" for each model group. For example,
+  the supporting libraries for =quilt= may be (and almost certainly,
+  will be) totally different than that of those in =pleat=. And of
+  course, needle would have different expressions in each programming
+  language. So perhaps needle is more of a concept than a physical
+  thing. We should rename it to something meaningful that represents
+  "a library with supporting code for a given model group". However,
+  it does make sense to have a top-level folder to house all of the
+  supporting libraries, so maybe needle does exist physically as the
+  namespace to house all of the different supporting libraries. For
+  example: =dogen::needle::quilt=, etc.
+- the different needle libraries should be pushed to the appropriate
+  repositories (e.g. nuget for C# and maybe C++, biicode for C++,
+  maven for Java, etc).
+- in the model groups world, each model most likely will only support
+  a single model group: for example either quilt or pleat, etc. This
+  is because some types only make sense with a given model group (say
+  for example a cross platform =String= type in pleat won't exist in
+  quilt and so forth). This means one must filter the models one is
+  loading depending on the model group. This applies to both internal
+  and external models. Also a model group may support a different
+  subset of programming languages compared to another model group.
+- we need a better name than "model group". word-storming: dimension,
+  universe, space, package, module, ensemble, generation unit,
+  assembly.
+- Another way to think about it is that model groups are really
+  backends. Backends support one or more "languages" (we need a word
+  to reflect variations such as XML). Only one backend can be enabled
+  at one time. One or more languages can be enabled, depending on what
+  the backend supports. The options that configure languages and
+  backends are in the meta-data; it does not make sense to supply
+  these in the command-line because the model is coupled with the
+  backend to a large extent (for example, native types are only
+  supported in the native backend and so on).
+- model groups and type support: some types will only make sense with
+  certain model groups. For example, if one were to create a "cross
+  platform string type", say String, for =pleat= which would then be
+  implemented in =needle::pleat= for all languages, it would not make
+  sense to try to use this type from =quilt=. This means that we need
+  some kind of way to associate types with a model group. In terms of
+  code generation, the formatter "enabled/disabled" logic will kick
+  in, and if the type has no formatters in a given backend, then it is
+  effectively disabled. But one wonders if this is a sensible way to
+  figure out what types are available to which model groups. Seems
+  like one would have to spend a lot of time looking into the
+  meta-data to determine whats available.
+- we probably need to add the model group to the ownership hierarchy,
+  but at present we cannot think of a use case for it; we never enable
+  anything across languages in a model group. In the same vein, we
+  would also need the language. Fields would then be
+  =quilt.cpp.enabled= and so on.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Multi-purpose models per language                                  :epic:
+
+#+begin_quote
+This story is a very vague story that keeps track of ideas on making
+dogen useful for code generators of other kinds.
+#+end_quote
+
+One of the stories in the backlog covers other targets of code generation:
+
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-thrift-and-protocol-buffers][Add support for thrift and protocol buffers]]
+
+Originally we thought about adding support for these within a model;
+that is to say, one would have additional serialisation "kinds"
+available with a given dogen model. However, there is another way to
+look at this; one could make other kinds of code generators using the
+dogen infrastructure.
+
+That is, contrary to it's name, dogen isn't just for "domain model
+generation". Nothing stops one from building a protocol buffers or
+thrift compiler using dogen infrastructure that outputs *exactly* the
+same code as the original tools. All that would be required to do so
+is:
+
+- create a front-end that reads in their specification;
+- to ensure SML is expressive enough to cover all of the aspects of
+  the code that needs to be generated;
+- to create the formatters.
+
+In this view of the world, we have two options:
+
+- create groups of facets within the =cpp= model; for example,
+  the thrift group, the domain generation group etc. These are
+  mutually incompatible sets of formatters and only one of them can be
+  enabled for a given execution.
+- create models at the same level of the =cpp= model. We could group
+  them by language (e.g. the =cpp= namespace). However, this seems
+  less practical because these models would probably have a lot in
+  common. This is yet to be seen as we need to finish the large
+  formatters refactor before we can answer this question.
+
+Taking this to its logical consequence, even a tool as complex as ODB
+could potentially be implementable in this way: one can conceive a
+clang front-end that reads in source code and generates an SML model;
+this model then can be used to generate C++ code that is identical to
+the code produced by ODB (again assuming that SML is extended to be
+expressive enough to represent all the constructs required by ODB).
+
+This would be a compelling proposition if we had =stitch= because it
+would make the generation of formatters quite trivial and would also
+mean that people that want to create code generators don't have to
+worry about a lot of the boilerplate code. However, the biggest
+problem is that we'd be imposing a large and complex "framework" on
+them with all the evilness that that entails.
+
+Food for thought:
+
+- in this light, a better name for dogen would be =codegen= (or =cogen=
+  to make it a bit more unique in google). The tag line is then The
+  Generic Code Generator. Unfortunately there are already a few
+  projects with the name =cogen= so we may need to find a better
+  name. Alternatively we can maintain the name dogen, but take away
+  its meaning (i.e. no longer "The Domain Generator").
+- the merge of =cpp= and =cpp_formatters= may not have been for the
+  best in this case; it would make more sense to have a =cpp::dogen=
+  where we collect all of the formatters related to domain
+  generation - after the =cogen= rename; if no rename then we need
+  some other name to imply domain generation. At this level we could
+  then have =cogen::cpp::odb=, =cogen::cpp::protobuf= and so on. They
+  all make use of the core types defined in =cogen::cpp=. The problem
+  with this approach is that dogen is not really designed to share a
+  namespace in this way. We won't be able to have a =cpp= project as
+  well as placing other projects inside of the =cpp= namespace. We can
+  have one or the other in the current setup, but not both. We could
+  take the same approach as we did for test models: create a cpp
+  folder and then put the model under a different name such as =model=
+  or =domain= etc. Note that we still have to define all of the
+  formatter interfaces in the "main" model, as well as workflows
+  etc. However, some interfaces may not make sense for other models:
+  what is a registrar in protocol buffers? If it exists at all, its
+  probably something very different from boost serialisation and as
+  such will require other data.
+- note that this kind of grouping is not necessarily at the language
+  level. For example, domain generation should be common to a set of
+  languages, and so would protocol buffers. This means that rather
+  than a facet or formatter grouping, we need a higher level construct
+  to aggregate things; "domain generation" is made up of languages,
+  languages are made of of facets, facets have formatters. We need a
+  name/classification for "domain generation" in this context.
+
+We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
+
+#+begin_quote
+People develop abstractions by generalizing from concrete
+examples. Every attempt to determine the correct abstractions on paper
+without actually developing a running system is doomed to failure. No
+one is that smart. A framework is a reusable design, so you develop it
+by looking at the things it is supposed to be a design of. The more
+examples you look at, the more general your framework will be.
+#+end_quote
+
+*** Include groups                                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create includers for user defined
+groups of files so that I don't have to do it manually.
+#+end_quote
+
+One of my personal preferences has always been to group includes by
+"library". Normally first come the C includes, then the standard
+library ones, then boost, then utilities and finally types of the same
+model. Each of these can be thought of as a group. Inside each group
+the file names are normally ordered by size, smallest first. It would
+be nice to have support for such a feature in Dogen.
+
+Formatters would then push their includes into the correct
+group. Group names could be the model name (=std=, etc).
+
+A bit of a nitpick but nice nonetheless.
+
+*** Models should have an associated language                          :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make sure I only use valid system
+models so that I don't generate models that code generate but do not
+compile.
+#+end_quote
+
+Certain models (e.g. system / library models) can only be used in a
+give language; for example =boost= and =std= only make sense in C++. A
+.Net library model would only make sense in .Net, etc. These are
+Language Specific Models (LSM). Once a model depends on a LSM it
+itself becomes an LSM and it should not be able to then make use of
+models of other languages nor should one be able to request a code
+generation for other languages.
+
+However, one day we will have a system model which is a Language
+Agnostic Model (LAM). The system model will provide a base set of
+functionality across languages such as containers, and for each type
+it will have mappings to language specific types. The mapping is
+declared as dynamic extensions in the appropriate section
+(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
+depends only on LAMs, it is itself a LAM and can be used to generate
+code on any supported language (presumably a supported language is
+defined to be that for which we have both mappings and a code
+generation backend).
+
+A first step for this would be to have a language enumeration in SML
+which is a property of the model, and one entry of which is "language
+agnostic".
+
+See also the model groups work.
+
+See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+
 ** Deprecated
 
-*** CANCELLED Investigate integration of =boost::log= with =boost::test= :story:
-    CLOSED: [2015-06-30 Tue 14:36]
+*** CANCELLED Injection framework                                      :epic:
+    CLOSED: [2015-07-09 Thu 21:26]
 
-*Rationale*: This will not be a problem with catch.
+*Rationale*: We should inject types on a case-by-case basis. At
+present we have covered all use cases in a fairly sensible way.
 
-At present whenever there is a test failure, we get a compiler-style
-error in the console, which is great for emacs integration - its easy
-to go to the source code that generated the failure. However, we do
-not write it to the log file of the test. Its very difficult to
-understand the log file without the context of the =boost::test=
-failures. Due to this we end up manually logging before doing boost
-test assertions - a lot of duplicated effort. What would be ideal is
-if =boost::test= logged to _both_ the console and to our log
-file. There is a file output for boost log, but its not configurable
-enough to accept a =boost::log= stream. We should send an email to
-mailing list asking for help.
+We need a more generic way of handling system types injection into
+models. This is because there is a number of things that can be
+derived from the existing model types:
 
-Also we need to duplicate the test name and the log file name. But
-since we will be moving to catch maybe we shouldn't spent too long in
-this.
-*** CANCELLED Remove =cpp_formatters::formatting_error=               :story:
-    CLOSED: [2015-07-01 Wed 15:25]
+- keys
+- diff support
+- reflection
+- cache code
+- etc.
 
-*Rationale*: The whole model will be removed when done with current refactor.
+So we need to:
 
-Use the =formatters::formating_error= instead.
-*** CANCELLED Delete key implementation formatter                     :story:
-    CLOSED: [2015-07-01 Wed 15:32]
+- make injector a composite of injectors that do the real work such as
+  =key_injector=. internally =injector= just delegates the work to
+  these classes.
+- injector decides which internal injectors to use based on options
+  passed in.
+- in the IoC spirit, we should probably create a =injector_interface=.
 
-*Rationale*: The whole model will be removed when done with current refactor.
+*** CANCELLED IoC work                                                 :epic:
+    CLOSED: [2015-07-09 Thu 21:28]
 
-It doesn't seem like there is any good reason to treat the keys in a
-special way so try to remove this.
+*Rationale*: this is a lot of work and does not buy us much. We should
+tackle each IoC requirement at a time.
 
-*** CANCELLED Consider creating internal and external fields          :story:
-    CLOSED: [2015-07-01 Wed 15:34]
+All stories related to IoC work are tracked here.
 
-*Rationale*: Dynamic fields are now by definition external fields.
+*New Understanding*:
 
-At present any dynamic field is automatically exposed to the outside
-world, allowing users to set them. This is not always ideal; for
-example, the file path should not be settable. Perhaps field
-definitions should have a "internal" or "external" property that stops
-users from being able to override certain fields.
+in reality, there is really only one place where IoC makes sense: in
+the workflows. It would be great if one could pass in something akin
+to a IoC container into the workflow's constructor and then use the
+container to obtain access to all services via interfaces. Using
+sml::workflow as an example, one could have:
 
-*** CANCELLED Add tests for all permutations of the domain formatter  :story:
-    CLOSED: [2015-07-01 Wed 15:44]
+- container_interface which returns grapher_interface,
+  processor_interface, etc.
+- the container could even return references to the these interfaces
+  and own the lifetime of the objects.
+- this would then allow us to provide mock container interface
+  implementations returning mock services.
 
-*Rationale*: Story has bit-rotted (we don't have domain formatters any
-more) but also, its too ambitious. We can't add tests for all
-permutations of all formatters.
+However:
 
-_All_ may be too strong a word as there quite a few. We need good
-coverage around the combinations one can do within the domain
-formatter.
-*** CANCELLED Implement flymake from the EDE project                  :story:
-    CLOSED: [2015-07-01 Wed 16:12]
+- it seems like a lot of moving parts just to allow testing the
+  workflow in isolation. this is particularly more so in the case of
+  the workflows we have, which are fairly trivial. perhaps we should
+  consider this approach when dogen is generating the interfaces
+  automatically as this would require a lot of manual work for little
+  gain.
 
-*Rationale*: Not required with flycheck.
+*Old understanding*:
 
-This move of directories highlighted the fragility of the current
-flymake hack: every time the top-level directory changes we need to
-update =cunene=. Ideally what we want is to have a top-level file -
-most ideally =dogen.ede= with some lisp code that would setup the
-dogen paths for flymake. Users would only need to load this up to use it.
+- add workflow_interface to SML.
+- we should be doing a bit more IoC, particularly with inclusion
+  manager, location manager etc. In order to do so we could define
+  interfaces for these classes and provide mocks for the tests. This
+  would make the tests considerably smaller.
+*** CANCELLED Log analysis tool                                       :story:
+    CLOSED: [2015-07-09 Thu 21:35]
+
+*Rationale*: we will incubate these ideas on its own project.
+
+We should create a log analyser tool (=logan=?), as follows:
+
+- separate repo. it could be incubated in dogen to start off with
+  though.
+- use a dogen model to describe the tool's domain. Very simple domain.
+- use the dogen version line to determine the application, the version
+  and the run time. All other entries are foreign-keyed against this
+  entry.
+- use JSON object markers to extract JSON objects from the log line
+  into a postgres JSON field.
+- use ODB to create the database schema.
+- create a simple parser that is hard-coded to the log lines in dogen,
+  with perhaps an addition for threads.
+- when profiling is present, have a way to split profiling information
+  from the rest.
+- create some simple stored procs that compare two runs from a
+  performance perspective.
+- create a stored proc to list all errors and all warnings, with
+  perhaps some lines around it.
+- create a stored proc that does a text search using postgres text
+  search facilities.
+- we need to figure out how splunk decides to start loading the log
+  files (only after roll, incrementally - and if so, how does it keep
+  track, etc).
+
+*** CANCELLED Create a trivial Linux gcc script                       :story:
+    CLOSED: [2015-07-09 Thu 21:35]
+
+*Rationale*: we want to move away from complicated CDash scripts. We
+should stick with what we got for valgrind, and use travis etc for any
+new developments.
+
+The previous attempts to clean up the build environment were too
+elaborate given the available time. We need to go back to basics with
+a trivial script that works for Linux 32-bit and 64-bit with gcc.
+
+*** CANCELLED Create a trivial Linux clang script                     :story:
+    CLOSED: [2015-07-09 Thu 21:35]
+
+*Rationale*: we want to move away from complicated CDash scripts. We
+should stick with what we got for valgrind, and use travis etc for any
+new developments.
+
+We need to be able to build Linux clang 32-bit and 64-bit again.
