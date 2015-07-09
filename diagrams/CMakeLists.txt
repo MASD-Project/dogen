@@ -202,65 +202,6 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target cpp_formatters)
-add_custom_target(knit_${target}
-    COMMENT "Knitting C++ Formatters model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files
-    --external-module-path dogen)
-
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
-
-set(target sml_to_cpp)
-add_custom_target(knit_${target}
-    COMMENT "Knitting SML to C++ model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
-    --cpp-disable-cmakelists
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files
-    --external-module-path dogen)
-
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
-
 set(target formatters)
 add_custom_target(knit_${target}
     COMMENT "Knitting the Formatters Model" VERBATIM

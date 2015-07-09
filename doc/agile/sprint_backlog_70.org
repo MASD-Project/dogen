@@ -166,7 +166,9 @@ Problems:
 
 Switch the legacy transformation and formatting.
 
-*** STARTED Remove knit backends and use backend model instead        :story:
+*** COMPLETED Remove knit backends and use backend model instead      :story:
+    CLOSED: [2015-07-09 Thu 21:51]
+    CLOCK: [2015-07-09 Thu 21:50]--[2015-07-09 Thu 21:55] =>  0:05
     CLOCK: [2015-07-09 Thu 20:56]--[2015-07-09 Thu 21:15] =>  0:09
     CLOCK: [2015-07-09 Thu 07:36]--[2015-07-09 Thu 08:22] =>  0:46
     CLOCK: [2015-07-09 Thu 07:22]--[2015-07-09 Thu 07:33] =>  0:11
