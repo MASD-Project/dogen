@@ -129,23 +129,25 @@ create_settings_for_formatter(const formatter_properties& fp,
     path_settings r;
     r.file_type(fp.file_type);
 
-    using namespace dynamic;
-    const field_selector fs(o);
+    const dynamic::field_selector fs(o);
     r.facet_directory(fs.get_text_content_or_default(fp.facet_directory));
     r.facet_postfix(fs.get_text_content_or_default(fp.facet_postfix));
     r.formatter_postfix(fs.get_text_content_or_default(fp.formatter_postfix));
-    r.header_file_extension(
-        fs.get_text_content_or_default(fp.header_file_extension));
-    r.implementation_file_extension(
-        fs.get_text_content_or_default(fp.implementation_file_extension));
 
-    r.include_directory_name(
-        fs.get_text_content_or_default(fp.include_directory_name));
-    r.source_directory_name(
-        fs.get_text_content_or_default(fp.source_directory_name));
+    const auto& hfe(fp.header_file_extension);
+    r.header_file_extension(fs.get_text_content_or_default(hfe));
 
-    r.disable_facet_directories(
-        fs.get_boolean_content_or_default(fp.disable_facet_directories));
+    const auto& ife(fp.implementation_file_extension);
+    r.implementation_file_extension(fs.get_text_content_or_default(ife));
+
+    const auto& idn(fp.include_directory_name);
+    r.include_directory_name(fs.get_text_content_or_default(idn));
+
+    const auto& sdn(fp.source_directory_name);
+    r.source_directory_name(fs.get_text_content_or_default(sdn));
+
+    const auto& dfd(fp.disable_facet_directories);
+    r.disable_facet_directories(fs.get_boolean_content_or_default(dfd));
 
     return r;
 }

@@ -62,6 +62,7 @@
 #include "dogen/cpp/serialization/formattables/visited_type_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/content_descriptor_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formatter_properties_ser.hpp"
+#include "dogen/cpp/serialization/settings/directory_names_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/enablement_repository_ser.hpp"
 #include "dogen/cpp/serialization/settings/inclusion_directive_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/forward_declarations_info_ser.hpp"

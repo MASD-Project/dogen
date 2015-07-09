@@ -55,9 +55,10 @@ backend::backend_registrar& workflow::registrar() {
 
 std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const sml::model& m) const {
+    const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
     for(const auto b : registrar().backends()) {
-        const auto md(b->managed_directories(knitting_options_, m));
+        const auto md(b->managed_directories(ko, repository_, m));
         for (const auto& d : md)
             r.push_front(d);
     }

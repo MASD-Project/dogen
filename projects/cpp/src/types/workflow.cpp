@@ -26,6 +26,7 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/cpp/types/formatters/workflow.hpp"
 #include "dogen/cpp/types/formattables/workflow.hpp"
+#include "dogen/cpp/types/settings/directory_names_settings_factory.hpp"
 #include "dogen/cpp/types/settings/bundle_repository_factory.hpp"
 #include "dogen/cpp/types/workflow_error.hpp"
 #include "dogen/cpp/types/workflow.hpp"
@@ -117,18 +118,24 @@ std::string workflow::name() const {
 }
 
 std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const config::knitting_options& /*ko*/,
-    const sml::model& /*m*/) const {
+workflow::managed_directories(const config::knitting_options& ko,
+    const dynamic::repository& rp, const sml::model& m) const {
+    const auto ro(obtain_root_object(m));
+    settings::directory_names_settings_factory f(rp);
+    const auto dn(f.make(ro));
+    const auto mn(m.name().simple_name());
+
     std::forward_list<boost::filesystem::path> r;
-
-/*    if (options_.split_project()) {
-        r.push_front(source_directory_ / model_name_);
-        r.push_front(include_directory_ / model_name_);
+    if (ko.cpp().split_project()) {
+        r.push_front(ko.cpp().source_directory_path() / mn);
+        r.push_front(ko.cpp().include_directory_path() / mn);
     } else {
-        r.push_front(options_.project_directory_path() / model_name_);
-        }*/
+        r.push_front(ko.cpp().project_directory_path() / mn /
+            dn.source_directory_name());
+        r.push_front(ko.cpp().project_directory_path() / mn /
+            dn.include_directory_name());
+    }
 
-    // FIXME: needed for housekeeper
     return r;
 }
 

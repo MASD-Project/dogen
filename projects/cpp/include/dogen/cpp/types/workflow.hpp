@@ -117,6 +117,7 @@ public:
 
     std::forward_list<boost::filesystem::path>
     managed_directories(const config::knitting_options& ko,
+        const dynamic::repository& rp,
         const sml::model& m) const override;
 
     std::forward_list<dynamic::ownership_hierarchy> ownership_hierarchy() const;

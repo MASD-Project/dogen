@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
+BOOST_IGNORE_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     SETUP_TEST_LOG("not_enabling_facet_domain_throws");
     const auto t(dia_sml::input_enable_facet_hash_dia());
 
@@ -372,7 +372,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
-BOOST_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
+BOOST_IGNORE_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     SETUP_TEST_LOG("enabling_facet_io_and_using_integrated_io_throws");
     const auto t(dia_sml::input_enable_facet_io_dia());
 

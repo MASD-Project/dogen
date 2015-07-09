@@ -122,16 +122,16 @@ void middle_end_to_backend_workflow::execute(const sml::model& m) const {
     backends::factory f(knitting_options_);
     for (const auto b : f.make()) {
         const auto writers(obtain_file_writers_activity());
-        const auto files(b->generate(knitting_options_, repository_, m));
-        write_files_activity(writers, files);
 
-        const auto md(b->managed_directories(knitting_options_, m));
-        perform_housekeeping_activity(files, md);
-/*
         dogen::backend::workflow w(knitting_options_, repository_);
         const auto files(w.execute(m));
         const auto md(w.managed_directories(m));
-*/
+
+        // const auto files(b->generate(knitting_options_, repository_, m));
+        write_files_activity(writers, files);
+
+        //const auto md(b->managed_directories(knitting_options_, m));
+        perform_housekeeping_activity(files, md);
     }
 }
 

@@ -61,6 +61,7 @@
 #include "dogen/cpp/io/formattables/visited_type_info_io.hpp"
 #include "dogen/cpp/io/formattables/content_descriptor_io.hpp"
 #include "dogen/cpp/io/formattables/formatter_properties_io.hpp"
+#include "dogen/cpp/io/settings/directory_names_settings_io.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/cpp/io/settings/inclusion_directive_settings_io.hpp"
 #include "dogen/cpp/io/formattables/forward_declarations_info_io.hpp"
