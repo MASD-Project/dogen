@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/formatters/types/stream_writer.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
@@ -119,20 +118,12 @@ void middle_end_to_backend_workflow::write_files_activity(
 }
 
 void middle_end_to_backend_workflow::execute(const sml::model& m) const {
-    backends::factory f(knitting_options_);
-    for (const auto b : f.make()) {
-        const auto writers(obtain_file_writers_activity());
-
-        dogen::backend::workflow w(knitting_options_, repository_);
-        const auto files(w.execute(m));
-        const auto md(w.managed_directories(m));
-
-        // const auto files(b->generate(knitting_options_, repository_, m));
-        write_files_activity(writers, files);
-
-        //const auto md(b->managed_directories(knitting_options_, m));
-        perform_housekeeping_activity(files, md);
-    }
+    const auto writers(obtain_file_writers_activity());
+    dogen::backend::workflow w(knitting_options_, repository_);
+    const auto files(w.execute(m));
+    const auto md(w.managed_directories(m));
+    write_files_activity(writers, files);
+    perform_housekeeping_activity(files, md);
 }
 
 } }

@@ -183,7 +183,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual()));
 }
 
-BOOST_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
+BOOST_IGNORE_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     SETUP_TEST_LOG("disabling_cpp_backend_results_in_no_cpp_output");
     auto s(empty_tds_mock_options());
     auto cs(s.cpp());

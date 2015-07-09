@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-09 Thu 08:23]
+#+CAPTION: Clock summary at [2015-07-09 Thu 21:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *15:16* |       |      |
+| *Total time*                                                                | *15:25* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 15:16   |       |      |
-| Active                                                                      |         | 15:16 |      |
+| Stories                                                                     | 15:25   |       |      |
+| Active                                                                      |         | 15:25 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:18 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -35,7 +35,7 @@
 | COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
 | COMPLETED Switch off overrides for legacy formatters                        |         |       | 0:45 |
 | COMPLETED Switch off SML to CPP transformation                              |         |       | 0:07 |
-| STARTED Remove knit backends and use backend model instead                  |         |       | 1:18 |
+| STARTED Remove knit backends and use backend model instead                  |         |       | 1:27 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -166,6 +166,7 @@ Problems:
 Switch the legacy transformation and formatting.
 
 *** STARTED Remove knit backends and use backend model instead        :story:
+    CLOCK: [2015-07-09 Thu 20:56]--[2015-07-09 Thu 21:05] =>  0:09
     CLOCK: [2015-07-09 Thu 07:36]--[2015-07-09 Thu 08:22] =>  0:46
     CLOCK: [2015-07-09 Thu 07:22]--[2015-07-09 Thu 07:33] =>  0:11
     CLOCK: [2015-07-08 Wed 22:32]--[2015-07-08 Wed 22:53] =>  0:21
@@ -510,6 +511,7 @@ trim down the obvious ones:
 - output to stdout
 - remove repository, factory, stereotypes
 - keys, entities
+- removing cpp backend?
 - etc.
 
 Basically any feature which we are not using at present and cannot

@@ -30,11 +30,7 @@
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/initializer.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
-#include "dogen/knit/types/backends/factory.hpp"
 #include "dogen/knit/types/generation_failure.hpp"
-#include "dogen/knit/types/backends/cpp_backend.hpp"
-#include "dogen/knit/types/backends/backend_error.hpp"
-#include "dogen/knit/types/backends/backend_interface.hpp"
 #include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
 

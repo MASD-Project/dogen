@@ -31,8 +31,6 @@ target_link_libraries(knit
     backend
     formatters
     cpp
-    cpp_formatters
-    sml_to_cpp
     config
     utility
     ${LIBXML2_LIBRARIES}
