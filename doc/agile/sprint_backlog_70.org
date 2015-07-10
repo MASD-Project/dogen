@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 11:16]
+#+CAPTION: Clock summary at [2015-07-10 Fri 11:38]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:05* |       |      |
+| *Total time*                                                                | *18:24* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:05   |       |      |
-| Active                                                                      |         | 18:05 |      |
+| Stories                                                                     | 18:24   |       |      |
+| Active                                                                      |         | 18:24 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -41,6 +41,7 @@
 | COMPLETED Remove unused classes in cpp model                                |         |       | 0:05 |
 | COMPLETED Remove support for empty model name                               |         |       | 0:28 |
 | COMPLETED Remove ability to output to stdout                                |         |       | 0:20 |
+| STARTED Remove unused stereotypes and object types                          |         |       | 0:19 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -224,6 +225,24 @@ have any use cases. Ability to have a model with an empty name.
 
 One of the features we had originally added but for which we do not
 have any use cases. Ability to output generated code to stdout.
+
+*** STARTED Remove unused stereotypes and object types                :story:
+    CLOCK: [2015-07-10 Fri 11:19]--[2015-07-10 Fri 11:38] =>  0:19
+
+At present we have a large number of stereotypes, but only a few are
+actually in use. Remove all that aren't in use.
+
+*** Move language-specific object types to meta-data                  :story:
+
+There are a number of object types that exist solely to provide the
+method helpers with information:
+
+- smart_pointer
+- hash_container
+- sequence_container
+- ordered_container
+
+These should be conveyed using the meta-data.
 
 *** Handling of managed directories is incorrect                      :story:
 
@@ -822,6 +841,178 @@ See also the model groups work.
 
 See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
+*** Refactor code around model origination                            :story:
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and SML should not know
+  anything about it.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
+
+We should also have a flag in field definitions that verify that a
+parameter is only present if the model is a non-dogen model. For
+example, it makes no sense to supply =cpp.type.family= in a dogen
+model but it may make sense to do so in an external model. However,
+this would mean that if a user manually adds a type to a dogen model
+it cannot be extended. Requires a bit of thinking.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Split a fully formed model from partial models                    :story:
+
+We should really have two distinct types to represent the model that
+is returned from the dia to sml transformer from the model returned by
+the merger. Potentially this could be called =partial_model=.
+
+In fact we may need to take this a step further and follow the same
+approach as [[https://github.com/avao/Codge/tree/master/Src/Codge.DataModel][Cogen]]: having exactly the same types, but perhaps in a
+separate namespace; one version represents the "connected" model and
+the other the "disconnected" (or intermediate, or partial) model. The
+idea being that on the connected model has references to types rather
+than relaying on qname look-ups. So for example all the relationships
+then become shared pointers to types and so on. The problem with this
+approach is that we then need to have a common base type from where
+all types inherit and this will mean that we will have to visit a lot
+to dispatch types to their leaves.
+
+Actually, this is also the chance to remove all of the qname
+lookups. All relationships should just be boost shared pointers to
+types rather than qnames. There should be no need for lookups at
+all. This is a much better approach than the suggested below. We still
+need qnames and some minor qname lookup (e.g. model is still made
+up of a unordered map of qname to entity) but everyone should be using
+entity pointers rather than qnames. It is not clear what models such
+as CPP should be doing since the pointers are not particularly useful
+there.
+
+This would also be a good opportunity to use something like a pointer
+container for all the pointers and then use either a "dumb pointer" or
+even [[http://stackoverflow.com/questions/13874673/stdreference-wrappert-usage-in-a-container][references]] everywhere. Since we know the container will exist for
+the duration of a run, we can rely on the objects being managed
+elsewhere. This is a better way rather than using shared pointers
+everywhere. Alexandrescu [[https://www.youtube.com/watch?v%3DQq_WaiwzOtI][discusses at length]] the side-effects of using
+shared pointers. Whilst this is probably not a problem for Dogen, we
+want to explore ways of doing the right thing. There is also the
+[[https://vimeo.com/131189627][Josuttis talk]] on the subject.
+
+In addition we will need support for concepts at the package level as
+we need to have concepts with the same names for both partial and full
+types. We should use namespaces to house these types instead of
+postfixes/prefixes because there will be so many similarly named
+types.
+
+Properties will have types of the base type (=type=). We need a nested
+type class. Modules will have types directly. We need a good name for
+these (type references? something that alludes to referring to
+existing types in the model).
+
+Merged with other story:
+
+Once the model has been merged and resolved, all qnames in the model
+all known to resolve to a valid type, model or module. This means we
+could cache in the qname itself a pointer to the object the qname
+resolves into. There are two problems with this approach:
+
+- we do not have a base class that covers types, models and
+  module. one could be created (=modeling_entity=?) with an associated
+  visitor. but then:
+- formatters are not designed to think at the =modeling_entity= level;
+  a formatter that does types may not necessarily be able to do
+  modules or models. Thus we would need to convert from a
+  =modeling_entity= to a type, model or module before we get to the
+  formatter.
+
+However one imagines that a great number of lookups would be avoided
+if this was possible.
+
+Actually we probably should have two different models for this. One
+could be SML as we know it - just renamed - and the other one could be
+the intermediate representation, etc.
+
+Implementation tasks:
+
+- rename all types to have a prefix such as =intermediate_=,
+  e.g. =intermediate_model=, etc. Get all code to work with the new names.
+- create a new model class with just a few properties (leaves, entities, etc).
+- create a base class entity with all the required descendants.
+- remove the type base class for intermediate.
+- make entity visitable.
+- rename the existing workflow to something like model factory; it
+  takes in the intermediate models and generates a "final" model.
+- update cpp code to use this new model.
+
+*** Consider renaming SML                                             :story:
+
+Originally we intended to rename SML - the Simplified Modeling
+Language - to DDL - the Domain Driven Language. This was because we
+had envisioned that SML was a model of the ideas in Domain Driven
+Design, and not at all a cut down version of UML as the name seems to
+imply. However, its becoming increasingly clear that, whilst we use a
+lot of the Domain Driven Design ideas, we are also morphing them
+considerably. Perhaps a more apt name would be SDML - the Simplified
+Domain Modeling Language?
+
+Or instead we could follow the compiler theme and call it the =ir= or
+intermediate representation, or =im= for intermediate model. Actually
+this is a confusing name because it clashes with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][partial model]]
+notions we intend to introduce.
+
+After more thinking on this, and since we now have a =backend= and a
+=frontend=, it is obvious that SML is the =middle_end= since it is the
+middle-end of the code generation process. So it could be the
+Middle-End Model (MEM) or just Middle-End (ME).
+
+However, this is not a very good name for the model as we also do some
+front-end-y things (such as the JSON implementation). =ir= and =im=
+still seem like the more likely candidates. Actually, JSON is not a
+front-end; it is a direct representation of the middle-end into a
+file. The same could also be done in XML. It only becomes a front-end
+if there is an intermediate representation (such as the =dia= model)
+that needs to be transformed into SML.
+
+Another idea: common representation or =cr=. It is what is common to
+all modeled languages. What is not common goes into dynamic. This will
+also make the vision for this model much more focused.
+
+Some more thinking on this: SML is a meta-model, or a model that
+provides a language to talk about programming objects in
+general. There may be other models suitable for formatting; for
+example one may want to take a model of a neuron and represent it in
+[[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][HOC]]. In this case the formatters would bind directly to the neuron
+model rather than SML. So the name of SML must reflect the fact that
+it is a model of programming objects. Object-Oriented Programming
+Language Model?
 
 ** Deprecated
 *** CANCELLED Injection framework                                      :epic:
