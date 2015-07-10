@@ -32,7 +32,6 @@
 #include "dogen/cpp/test_data/formattables/enum_info_td.hpp"
 #include "dogen/cpp/test_data/settings/path_settings_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/class_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen/cpp/test_data/formattables/parent_info_td.hpp"
 #include "dogen/cpp/test_data/settings/aspect_settings_td.hpp"

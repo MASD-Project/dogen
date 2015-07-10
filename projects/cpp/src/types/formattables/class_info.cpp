@@ -24,7 +24,6 @@
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
-#include "dogen/cpp/io/formattables/class_types_io.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
 
@@ -77,33 +76,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace cpp {
 namespace formattables {
@@ -113,11 +85,9 @@ class_info::class_info()
       requires_manual_move_constructor_(static_cast<bool>(0)),
       requires_manual_default_constructor_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
-      is_comparable_(static_cast<bool>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_original_parent_visitable_(static_cast<bool>(0)),
-      class_type_(static_cast<dogen::cpp::formattables::class_types>(0)),
       generation_type_(static_cast<dogen::sml::generation_types>(0)),
       is_final_(static_cast<bool>(0)) { }
 
@@ -140,12 +110,9 @@ class_info::class_info(
     const std::string& original_parent_name,
     const std::string& original_parent_name_qualified,
     const std::list<std::string>& leaves,
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters,
-    const bool is_comparable,
     const bool is_visitable,
     const bool is_immutable,
     const bool is_original_parent_visitable,
-    const dogen::cpp::formattables::class_types class_type,
     const dogen::sml::generation_types generation_type,
     const bool is_final)
     : dogen::cpp::formattables::entity(
@@ -167,12 +134,9 @@ class_info::class_info(
       original_parent_name_(original_parent_name),
       original_parent_name_qualified_(original_parent_name_qualified),
       leaves_(leaves),
-      opaque_parameters_(opaque_parameters),
-      is_comparable_(is_comparable),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_original_parent_visitable_(is_original_parent_visitable),
-      class_type_(class_type),
       generation_type_(generation_type),
       is_final_(is_final) { }
 
@@ -198,12 +162,9 @@ void class_info::to_stream(std::ostream& s) const {
       << "\"original_parent_name\": " << "\"" << tidy_up_string(original_parent_name_) << "\"" << ", "
       << "\"original_parent_name_qualified\": " << "\"" << tidy_up_string(original_parent_name_qualified_) << "\"" << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"opaque_parameters\": " << opaque_parameters_ << ", "
-      << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
-      << "\"class_type\": " << class_type_ << ", "
       << "\"generation_type\": " << generation_type_ << ", "
       << "\"is_final\": " << is_final_
       << " }";
@@ -223,12 +184,9 @@ void class_info::swap(class_info& other) noexcept {
     swap(original_parent_name_, other.original_parent_name_);
     swap(original_parent_name_qualified_, other.original_parent_name_qualified_);
     swap(leaves_, other.leaves_);
-    swap(opaque_parameters_, other.opaque_parameters_);
-    swap(is_comparable_, other.is_comparable_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
-    swap(class_type_, other.class_type_);
     swap(generation_type_, other.generation_type_);
     swap(is_final_, other.is_final_);
 }
@@ -251,12 +209,9 @@ bool class_info::operator==(const class_info& rhs) const {
         original_parent_name_ == rhs.original_parent_name_ &&
         original_parent_name_qualified_ == rhs.original_parent_name_qualified_ &&
         leaves_ == rhs.leaves_ &&
-        opaque_parameters_ == rhs.opaque_parameters_ &&
-        is_comparable_ == rhs.is_comparable_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
-        class_type_ == rhs.class_type_ &&
         generation_type_ == rhs.generation_type_ &&
         is_final_ == rhs.is_final_;
 }
@@ -395,30 +350,6 @@ void class_info::leaves(const std::list<std::string>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& class_info::opaque_parameters() const {
-    return opaque_parameters_;
-}
-
-std::list<std::pair<std::string, std::string> >& class_info::opaque_parameters() {
-    return opaque_parameters_;
-}
-
-void class_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >& v) {
-    opaque_parameters_ = v;
-}
-
-void class_info::opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
-    opaque_parameters_ = std::move(v);
-}
-
-bool class_info::is_comparable() const {
-    return is_comparable_;
-}
-
-void class_info::is_comparable(const bool v) {
-    is_comparable_ = v;
-}
-
 bool class_info::is_visitable() const {
     return is_visitable_;
 }
@@ -441,14 +372,6 @@ bool class_info::is_original_parent_visitable() const {
 
 void class_info::is_original_parent_visitable(const bool v) {
     is_original_parent_visitable_ = v;
-}
-
-dogen::cpp::formattables::class_types class_info::class_type() const {
-    return class_type_;
-}
-
-void class_info::class_type(const dogen::cpp::formattables::class_types v) {
-    class_type_ = v;
 }
 
 dogen::sml::generation_types class_info::generation_type() const {

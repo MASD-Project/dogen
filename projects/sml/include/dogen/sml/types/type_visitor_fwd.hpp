@@ -18,20 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_CLASS_TYPES_SER_HPP
-#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_CLASS_TYPES_SER_HPP
+#ifndef DOGEN_SML_TYPES_TYPE_VISITOR_FWD_HPP
+#define DOGEN_SML_TYPES_TYPE_VISITOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/cpp/types/formattables/class_types.hpp"
+namespace dogen {
+namespace sml {
 
-template<class Archive>
-void serialize(Archive& ar, dogen::cpp::formattables::class_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("class_types", v);
-}
+class type_visitor;
+
+} }
 
 #endif

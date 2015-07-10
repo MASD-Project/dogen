@@ -18,22 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_IO_FORMATTABLES_CLASS_TYPES_IO_HPP
-#define DOGEN_CPP_IO_FORMATTABLES_CLASS_TYPES_IO_HPP
+#ifndef DOGEN_DYNAMIC_SERIALIZATION_VALUE_VISITOR_FWD_SER_HPP
+#define DOGEN_DYNAMIC_SERIALIZATION_VALUE_VISITOR_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/cpp/types/formattables/class_types.hpp"
+#include "dogen/dynamic/types/value_visitor_fwd.hpp"
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+namespace boost {
+namespace serialization {
 
-std::ostream& operator<<(std::ostream& s, const class_types& v);
+template<class Archive>
+void save(Archive& ar, const dogen::dynamic::value_visitor& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::dynamic::value_visitor& v, unsigned int version);
+
+} }
 
 #endif

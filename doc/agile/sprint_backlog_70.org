@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 17:07]
+#+CAPTION: Clock summary at [2015-07-10 Fri 23:02]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *21:02* |       |      |
+| *Total time*                                                                | *21:24* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 21:02   |       |      |
-| Active                                                                      |         | 21:02 |      |
+| Stories                                                                     | 21:24   |       |      |
+| Active                                                                      |         | 21:24 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:08 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -44,6 +44,7 @@
 | COMPLETED Remove unused stereotypes and object types                        |         |       | 1:48 |
 | COMPLETED Remove is comparable from SML                                     |         |       | 0:15 |
 | COMPLETED Add forward declarations to visitor                               |         |       | 0:06 |
+| COMPLETED Remove unused properties in CPP model                             |         |       | 0:22 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
@@ -260,6 +261,14 @@ previous attempt.
 At present we are suppressing forward declarations for visitor in
 transformer due to legacy compatibility. Remove this and see what
 breaks.
+
+*** COMPLETED Remove unused properties in CPP model                   :story:
+    CLOSED: [2015-07-10 Fri 23:02]
+    CLOCK: [2015-07-10 Fri 22:40]--[2015-07-10 Fri 23:02] =>  0:22
+
+As part of the version clean up, we did not remove all of the C++
+representations of the version related properties. Clean these up and
+any others that are not used by the new world formatters.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26

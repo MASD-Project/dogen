@@ -25,7 +25,6 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/utility.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -33,7 +32,6 @@
 #include "dogen/sml/serialization/generation_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/entity_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/class_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/formattables/property_info_ser.hpp"
 
@@ -60,12 +58,9 @@ void save(Archive& ar,
     ar << make_nvp("original_parent_name", v.original_parent_name_);
     ar << make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar << make_nvp("leaves", v.leaves_);
-    ar << make_nvp("opaque_parameters", v.opaque_parameters_);
-    ar << make_nvp("is_comparable", v.is_comparable_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
-    ar << make_nvp("class_type", v.class_type_);
     ar << make_nvp("generation_type", v.generation_type_);
     ar << make_nvp("is_final", v.is_final_);
 }
@@ -86,12 +81,9 @@ void load(Archive& ar,
     ar >> make_nvp("original_parent_name", v.original_parent_name_);
     ar >> make_nvp("original_parent_name_qualified", v.original_parent_name_qualified_);
     ar >> make_nvp("leaves", v.leaves_);
-    ar >> make_nvp("opaque_parameters", v.opaque_parameters_);
-    ar >> make_nvp("is_comparable", v.is_comparable_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_original_parent_visitable", v.is_original_parent_visitable_);
-    ar >> make_nvp("class_type", v.class_type_);
     ar >> make_nvp("generation_type", v.generation_type_);
     ar >> make_nvp("is_final", v.is_final_);
 }

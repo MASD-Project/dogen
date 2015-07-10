@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_CLASS_TYPES_FWD_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_CLASS_TYPES_FWD_HPP
+#ifndef DOGEN_DYNAMIC_TYPES_VALUE_VISITOR_FWD_HPP
+#define DOGEN_DYNAMIC_TYPES_VALUE_VISITOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace cpp {
-namespace formattables {
+namespace dynamic {
 
-enum class class_types : unsigned int;
+class value_visitor;
 
-} } }
+} }
 
 #endif

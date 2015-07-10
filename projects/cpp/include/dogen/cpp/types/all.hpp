@@ -60,7 +60,6 @@
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
-#include "dogen/cpp/types/formattables/class_types.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/parent_info.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"

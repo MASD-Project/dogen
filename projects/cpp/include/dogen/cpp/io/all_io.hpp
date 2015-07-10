@@ -32,7 +32,6 @@
 #include "dogen/cpp/io/formattables/enum_info_io.hpp"
 #include "dogen/cpp/io/settings/path_settings_io.hpp"
 #include "dogen/cpp/io/formattables/class_info_io.hpp"
-#include "dogen/cpp/io/formattables/class_types_io.hpp"
 #include "dogen/cpp/io/formattables/formattable_io.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"
 #include "dogen/cpp/io/settings/aspect_settings_io.hpp"

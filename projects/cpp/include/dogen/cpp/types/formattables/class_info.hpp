@@ -28,11 +28,9 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include <utility>
 #include <algorithm>
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
-#include "dogen/cpp/types/formattables/class_types.hpp"
 #include "dogen/cpp/types/formattables/parent_info.hpp"
 #include "dogen/cpp/types/formattables/property_info.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_fwd_ser.hpp"
@@ -74,12 +72,9 @@ public:
         const std::string& original_parent_name,
         const std::string& original_parent_name_qualified,
         const std::list<std::string>& leaves,
-        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
-        const bool is_comparable,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_original_parent_visitable,
-        const dogen::cpp::formattables::class_types class_type,
         const dogen::sml::generation_types generation_type,
         const bool is_final);
 
@@ -211,19 +206,6 @@ public:
     void leaves(const std::list<std::string>&& v);
     /**@}*/
 
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
-    std::list<std::pair<std::string, std::string> >& opaque_parameters();
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
-
-    /**
-     * @brief If true, the C++ class has operator<  defined.
-     */
-    /**@{*/
-    bool is_comparable() const;
-    void is_comparable(const bool v);
-    /**@}*/
-
     /**
      * @brief If true, the class has a visitor defined.
      */
@@ -246,14 +228,6 @@ public:
     /**@{*/
     bool is_original_parent_visitable() const;
     void is_original_parent_visitable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Type of the class.
-     */
-    /**@{*/
-    dogen::cpp::formattables::class_types class_type() const;
-    void class_type(const dogen::cpp::formattables::class_types v);
     /**@}*/
 
     /**
@@ -291,12 +265,9 @@ private:
     std::string original_parent_name_;
     std::string original_parent_name_qualified_;
     std::list<std::string> leaves_;
-    std::list<std::pair<std::string, std::string> > opaque_parameters_;
-    bool is_comparable_;
     bool is_visitable_;
     bool is_immutable_;
     bool is_original_parent_visitable_;
-    dogen::cpp::formattables::class_types class_type_;
     dogen::sml::generation_types generation_type_;
     bool is_final_;
 };

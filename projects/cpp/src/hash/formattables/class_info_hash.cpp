@@ -21,7 +21,6 @@
 #include "dogen/sml/hash/generation_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/entity_hash.hpp"
 #include "dogen/cpp/hash/formattables/class_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/class_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/parent_info_hash.hpp"
 #include "dogen/cpp/hash/formattables/property_info_hash.hpp"
 
@@ -57,22 +56,6 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_pair_std_string_std_string_(const std::list<std::pair<std::string, std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_std_string(i));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -94,12 +77,9 @@ std::size_t class_info_hasher::hash(const class_info& v) {
     combine(seed, v.original_parent_name());
     combine(seed, v.original_parent_name_qualified());
     combine(seed, hash_std_list_std_string(v.leaves()));
-    combine(seed, hash_std_list_std_pair_std_string_std_string_(v.opaque_parameters()));
-    combine(seed, v.is_comparable());
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_original_parent_visitable());
-    combine(seed, v.class_type());
     combine(seed, v.generation_type());
     combine(seed, v.is_final());
 

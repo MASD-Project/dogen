@@ -22,7 +22,6 @@
 #include "dogen/sml/test_data/generation_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
-#include "dogen/cpp/test_data/formattables/class_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/parent_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/property_info_td.hpp"
 
@@ -72,27 +71,6 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-std::pair<std::string, std::string>
-create_std_pair_std_string_std_string(unsigned int position) {
-    std::pair<std::string, std::string> r(
-        create_std_string(position),
-        create_std_string(position));
-    return r;
-}
-
-std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
-    std::list<std::pair<std::string, std::string> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_std_string_std_string(position + i));
-    }
-    return r;
-}
-
-dogen::cpp::formattables::class_types
-create_dogen_cpp_formattables_class_types(const unsigned int position) {
-    return dogen::cpp::formattables::class_types_generator::create(position);
-}
-
 dogen::sml::generation_types
 create_dogen_sml_generation_types(const unsigned int position) {
     return dogen::sml::generation_types_generator::create(position);
@@ -119,14 +97,11 @@ populate(const unsigned int position, result_type& v) {
     v.original_parent_name(create_std_string(position + 7));
     v.original_parent_name_qualified(create_std_string(position + 8));
     v.leaves(create_std_list_std_string(position + 9));
-    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 10));
-    v.is_comparable(create_bool(position + 11));
-    v.is_visitable(create_bool(position + 12));
-    v.is_immutable(create_bool(position + 13));
-    v.is_original_parent_visitable(create_bool(position + 14));
-    v.class_type(create_dogen_cpp_formattables_class_types(position + 15));
-    v.generation_type(create_dogen_sml_generation_types(position + 16));
-    v.is_final(create_bool(position + 17));
+    v.is_visitable(create_bool(position + 10));
+    v.is_immutable(create_bool(position + 11));
+    v.is_original_parent_visitable(create_bool(position + 12));
+    v.generation_type(create_dogen_sml_generation_types(position + 13));
+    v.is_final(create_bool(position + 14));
 }
 
 class_info_generator::result_type

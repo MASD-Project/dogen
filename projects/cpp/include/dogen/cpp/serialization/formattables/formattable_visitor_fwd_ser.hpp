@@ -18,28 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CPP_TYPES_FORMATTABLES_CLASS_TYPES_HPP
-#define DOGEN_CPP_TYPES_FORMATTABLES_CLASS_TYPES_HPP
+#ifndef DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORMATTABLE_VISITOR_FWD_SER_HPP
+#define DOGEN_CPP_SERIALIZATION_FORMATTABLES_FORMATTABLE_VISITOR_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace cpp {
-namespace formattables {
+#include "dogen/cpp/types/formattables/formattable_visitor_fwd.hpp"
 
-/**
- * @brief Possible types for a class.
- */
-enum class class_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    user_defined = 1, ///< The class was created by the user
-    unversioned_key = 2, ///< The class represents a system defined unversioned key
-    versioned_key = 3, ///< The class represents a system defined versioned key
-    service = 4
-};
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::cpp::formattables::formattable_visitor& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::cpp::formattables::formattable_visitor& v, unsigned int version);
+
+} }
 
 #endif

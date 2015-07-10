@@ -395,7 +395,7 @@ transformer::to_exception_info(const sml::object& o) const {
 }
 
 std::shared_ptr<class_info>
-transformer::to_class_info(const sml::object& o, const class_types ct) const {
+transformer::to_class_info(const sml::object& o) const {
     auto r(std::make_shared<class_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
@@ -404,7 +404,6 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     r->is_parent(o.is_parent());
     r->is_final(o.is_final());
     r->generation_type(o.generation_type());
-    r->class_type(ct);
 
     name_builder b;
     auto i(o.relationships().find(sml::relationship_types::parents));
@@ -472,9 +471,7 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
             r->requires_manual_default_constructor(true);
     }
 
-    if (r->class_type() == class_types::unversioned_key ||
-        r->class_type() == class_types::versioned_key ||
-        r->all_properties().empty())
+    if (r->all_properties().empty())
         r->requires_manual_move_constructor(false);
 
     i = o.relationships().find(sml::relationship_types::leaves);
@@ -569,23 +566,15 @@ transform(const sml::object& o) const {
     r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
+    case sml::object_types::user_defined_value_object:
     case sml::object_types::user_defined_service:
-        r.push_front(to_class_info(o, class_types::service));
+        r.push_front(to_class_info(o));
         break;
     case sml::object_types::visitor:
         r.push_front(to_visitor_info(o));
         break;
-    case sml::object_types::user_defined_value_object:
-        r.push_front(to_class_info(o, class_types::user_defined));
-        break;
     case sml::object_types::exception:
         r.push_front(to_exception_info(o));
-        break;
-    case sml::object_types::versioned_key:
-        r.push_front(to_class_info(o, class_types::versioned_key));
-        break;
-    case sml::object_types::unversioned_key:
-        r.push_front(to_class_info(o, class_types::unversioned_key));
         break;
     default: {
         const auto n(sml::string_converter::convert(o.name()));

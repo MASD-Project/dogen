@@ -24,7 +24,6 @@
 #include "dogen/sml/io/generation_types_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/io/formattables/class_info_io.hpp"
-#include "dogen/cpp/io/formattables/class_types_io.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"
 #include "dogen/cpp/io/formattables/property_info_io.hpp"
 

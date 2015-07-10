@@ -33,7 +33,6 @@
 #include "dogen/cpp/serialization/formattables/enum_info_ser.hpp"
 #include "dogen/cpp/serialization/settings/path_settings_ser.hpp"
 #include "dogen/cpp/serialization/formattables/class_info_ser.hpp"
-#include "dogen/cpp/serialization/formattables/class_types_ser.hpp"
 #include "dogen/cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/cpp/serialization/formattables/parent_info_ser.hpp"
 #include "dogen/cpp/serialization/settings/aspect_settings_ser.hpp"

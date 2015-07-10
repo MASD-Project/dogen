@@ -138,8 +138,7 @@ private:
      *
      * @param ao object to transform.
      */
-    std::shared_ptr<class_info> to_class_info(const sml::object& o,
-        const class_types ct) const;
+    std::shared_ptr<class_info> to_class_info(const sml::object& o) const;
 
     /**
      * @brief Transform a SML object representing a visitor into a

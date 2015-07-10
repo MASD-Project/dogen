@@ -32,7 +32,6 @@
 #include "dogen/cpp/hash/formattables/enum_info_hash.hpp"
 #include "dogen/cpp/hash/settings/path_settings_hash.hpp"
 #include "dogen/cpp/hash/formattables/class_info_hash.hpp"
-#include "dogen/cpp/hash/formattables/class_types_hash.hpp"
 #include "dogen/cpp/hash/formattables/formattable_hash.hpp"
 #include "dogen/cpp/hash/formattables/parent_info_hash.hpp"
 #include "dogen/cpp/hash/settings/aspect_settings_hash.hpp"

@@ -18,39 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <stdexcept>
-#include "dogen/cpp/io/formattables/class_types_io.hpp"
+#ifndef DOGEN_CPP_TYPES_FORMATTABLES_FORMATTABLE_VISITOR_FWD_HPP
+#define DOGEN_CPP_TYPES_FORMATTABLES_FORMATTABLE_VISITOR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const class_types& v) {
-    s << "{ " << "\"__type__\": " << "\"class_types\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case class_types::invalid:
-        attr = "\"invalid\"";
-        break;
-    case class_types::user_defined:
-        attr = "\"user_defined\"";
-        break;
-    case class_types::unversioned_key:
-        attr = "\"unversioned_key\"";
-        break;
-    case class_types::versioned_key:
-        attr = "\"versioned_key\"";
-        break;
-    case class_types::service:
-        attr = "\"service\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for class_types");
-    }
-    s << attr << " }";
-    return s;
-}
+class formattable_visitor;
 
 } } }
+
+#endif
