@@ -52,7 +52,7 @@ directory_names_settings_factory::make(const dynamic::object& o) const {
     const auto& idn(fields_.include_directory_name);
     r.include_directory_name(fs.get_text_content_or_default(idn));
 
-    const auto& sdn(fields_.include_directory_name);
+    const auto& sdn(fields_.source_directory_name);
     r.source_directory_name(fs.get_text_content_or_default(sdn));
 
     return r;

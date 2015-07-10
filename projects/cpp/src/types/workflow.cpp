@@ -129,12 +129,8 @@ workflow::managed_directories(const config::knitting_options& ko,
     if (ko.cpp().split_project()) {
         r.push_front(ko.cpp().source_directory_path() / mn);
         r.push_front(ko.cpp().include_directory_path() / mn);
-    } else {
-        r.push_front(ko.cpp().project_directory_path() / mn /
-            dn.source_directory_name());
-        r.push_front(ko.cpp().project_directory_path() / mn /
-            dn.include_directory_name());
-    }
+    } else
+        r.push_front(ko.cpp().project_directory_path() / mn);
 
     return r;
 }
