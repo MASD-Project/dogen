@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 15:27]
+#+CAPTION: Clock summary at [2015-07-10 Fri 15:50]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:34* |       |      |
+| *Total time*                                                                | *20:56* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 20:34   |       |      |
-| Active                                                                      |         | 20:34 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
+| Stories                                                                     | 20:56   |       |      |
+| Active                                                                      |         | 20:56 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:08 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |         |       | 0:52 |
@@ -47,6 +47,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-10 Fri 15:27]--[2015-07-10 Fri 15:49] =>  0:22
     CLOCK: [2015-07-09 Thu 21:21]--[2015-07-09 Thu 21:49] =>  0:28
     CLOCK: [2015-07-07 Tue 23:15]--[2015-07-07 Tue 23:21] =>  0:06
     CLOCK: [2015-07-06 Mon 15:01]--[2015-07-06 Mon 15:13] =>  0:12
@@ -251,18 +252,6 @@ previous attempt.
 We never did implement comparable properly. Remove all remnants of the
 previous attempt.
 
-*** Add forward declarations to visitor                               :story:
-
-At present we are suppressing forward declarations for visitor in
-transformer due to legacy compatibility. Remove this and see what
-breaks.
-
-*** Set enumeration underlying type in SML
-
-In cpp transformer we have hacked the underlying type of the
-enumeration. Remove this hack and set it in SML. Still a hack, but
-a tad better.
-
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
 
@@ -429,6 +418,18 @@ What can be said about an archetype:
   somewhere, given them a name and then assign a type to a map. In
   addition, we need a way to express "generate but don't override" and
   "generate and override".
+
+*** Add forward declarations to visitor                               :story:
+
+At present we are suppressing forward declarations for visitor in
+transformer due to legacy compatibility. Remove this and see what
+breaks.
+
+*** Set enumeration underlying type in SML
+
+In cpp transformer we have hacked the underlying type of the
+enumeration. Remove this hack and set it in SML. Still a hack, but
+a tad better.
 
 *** Move language-specific object types to meta-data                  :story:
 
@@ -618,10 +619,10 @@ We may have to split this story into several but we should at least
 trim down the obvious ones:
 
 - empty model name (done)
-- output to stdout
-- keys, entities
-- remove repository, factory, stereotypes
-- versioning
+- output to stdout (done)
+- keys, entities (done)
+- remove repository, factory, stereotypes (done)
+- versioning (done)
 - split project (or vice-versa, whichever one we don't use).
 - removing cpp backend?
 - delete extra files: we always do so why make it optional.
@@ -630,6 +631,47 @@ trim down the obvious ones:
 
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
+
+*** Do not compute inclusion directives for system models             :story:
+
+It seems we are computing inclusion directives and other path
+derivatives for system models:
+
+: {
+:   "__type__": "dogen::cpp::expansion::path_derivatives",
+:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
+:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
+:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
+: }
+
+This comes out of the workflow, so we possibly are then ignoring it
+for the non-target types. So:
+
+- can we avoid computing these altogether?
+- are we ignoring it?
+
+Actually this is the usual problem with the "origin" of the type. We
+need a way to determine if this type needs computations or not. We
+need to create a story to clean up the =origin_type= and
+=generation_type= and then we can make use of it to determine if we
+need to compute inclusion, path etc or not.
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Consider renaming formatter groups and model groups to sets       :story:
+
+We should try to keep the words groups and sets to their mathematical
+as much as possible - modulus our limited understanding. As such,
+where we are using "group" we probably mean "set" since there is no
+associated operation with the set; it is merely a way of gathering
+elements.
+
+Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
 *** Header guard in formatters should be optional                     :story:
 
@@ -649,11 +691,128 @@ generated within dogen; we now should only have fields that are set
 from the outside world. Remove all of the fields that are not supposed
 to be settable from the outside world. At present this just file path.
 
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
+conceptual sense.
+
 *** Create knitter options for each frontend                          :story:
 
 At present some knitting options are specific to a frontend
 (particularly in troubleshooting). We should create different classes
 to represent options on a per fronend basis.
+
+*** Remove unnecessary properties from model                          :story:
+
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. Unnecessary properties:
+documentation, containing module, extensions.
+
+We need to keep the name because it is now used to locate the model's
+module.
+
+*** Create a single container of element in model                     :story:
+
+We did an experiment to figure out if it would be more efficient to
+have separate containers of elements in SML's model, the idea being
+that we would avoid using the heap, dispatching etc. We would also
+create code that is more type-safe (e.g. avoid cases where we pass in
+elements but we want a specific descendant only).
+
+However, predictably, the code now has lots of loops across the
+different collections. This pattern is scattered everywhere we use
+SML. In almost all cases this could be handled by a single loop
+without loss of type-safety (e.g. loop and visit where we need
+specific types; just loop where an element suffices). Using the
+traversals (all types traversals, etc) didn't help because we then
+need to create all the associated machinery (overload =operator()=
+etc.) and that is not much different from having a visitor on
+element. We should consider this experiment at an end and just add a
+single container of element in model and deal with the fallout.
+
+Alternatively, we need a "view" over the different containers. In
+truth after the SML workflow has finished executing the model is
+constant. This means we could then use pointers to the objects to
+create a synthetic element container and use this for looping over all
+entities.
+
+In an ideal world, this would be a property of the model:
+e.g. =std::forward_list<entity*>=. However, we do not support pointer
+containers and this is a non-trivial change to the spirit parser so we
+won't be able to do it quickly. The alternative is to generate the
+container from within the backend workflow for now and pass it to each
+workflow. Once we are done with the refactoring we can then replace
+this with a model property.
+
+We need to have a look at all instances of the code where we loop
+across all elements and see if this is a win or not. Also, we can move
+=Element= from a concept to a type (e.g. =element=) and make it the
+base class for all elements. Validator would have to make sure the
+model is not nonsensical (object inheriting from a primitive, etc).
+
+Merged stories:
+
+Consider model as a container of types
+
+At present model is composed of objects, primitives, concepts,
+modules, etc. We could bring together all descendants of types into a
+single container (e.g. types). However, in places we do thinks like
+looking at the primitive container to see if the container has any
+primitive types - these would become slower as we'd now be looking at
+the entire type collection. Need to look at all usages of these
+containers in the code to see if this would be a win or not.
+
+*** Consider reducing the number of qname lookups in cpp model        :story:
+
+At present we are using qnames all over the place in CPP. Nothing
+stops us from using strings instead of qnames if that is more
+efficient.
+
+What is worse is that we seem to be doing a ridiculous amount of qname
+lookups. It would be much nicer if we could somehow have all the data
+in the right shape to avoid doing so many lookups.
 
 *** Model groups and multi-language support                           :story:
 
@@ -1065,6 +1224,37 @@ model rather than SML. So the name of SML must reflect the fact that
 it is a model of programming objects. Object-Oriented Programming
 Language Model?
 
+*** Consider renaming registrar in boost serialisation                :story:
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+*** Add support for formatter and facet dependencies                  :story:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
 ** Deprecated
 *** CANCELLED Injection framework                                      :epic:
     CLOSED: [2015-07-09 Thu 21:26]
@@ -1195,3 +1385,31 @@ name is detected, a model named "unnamed_model" is created.
 The correct solution for this is to have a flag (or flags) at the SML
 level which state whether to use the model name for folders, packages,
 etc. The view model generation will then take this into account.
+*** CANCELLED All model items traversal should resolve types          :story:
+    CLOSED: [2015-07-10 Fri 15:37]
+
+*Rationale*: This has been fixed.
+
+This traversal was designed for tagger but yet it does not resolve
+=type= into one of the sub-classes, forcing tagger to implement
+visitation to resolve the types. We should improve the traversal.
+
+*** CANCELLED Add tests for tagging of modules, primitves and enumerations :story:
+    CLOSED: [2015-07-10 Fri 15:40]
+
+*Rationale*: story has bit-rotted and doesn't make a lot of sense any
+more.
+
+We've tested abstract objects et al quite a lot but forgotten the
+other aspects of the model.
+
+*** CANCELLED Check concept properties for identity                   :story:
+    CLOSED: [2015-07-10 Fri 15:41]
+
+*Rationale*: identity properties have been removed.
+
+When we added concepts we didn't had a link to the processing of
+identity attributes. This means that if we get a property via modeling
+a concept it is not processed and added to the keys.
+
+Update injector to follow concepts.

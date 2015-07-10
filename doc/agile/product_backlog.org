@@ -457,13 +457,6 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
 *** Consider changing fields where "qualified name" is not qualified  :story:
 
 At present, the the qualified field name is not always a prefix +
@@ -562,35 +555,6 @@ single pace, and use boost spirit or tokenizer. For one such
 implementation with spirit see:
 
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Investigate adding polymode support for stitch templates          :story:
-
-We need a way to visualise stitch templates that is a bit more
-readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
 
 *** Add identity management to =sml::property_indexer=                :story:
 
@@ -720,16 +684,6 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
-*** Consider renaming formatter groups and model groups to sets       :story:
-
-We should try to keep the words groups and sets to their mathematical
-as much as possible - modulus our limited understanding. As such,
-where we are using "group" we probably mean "set" since there is no
-associated operation with the set; it is merely a way of gathering
-elements.
-
-Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
 *** Consider removing the overwrite flag in =formatters::file=        :story:
 
 Investigate if the overwrite flag makes sense in file; it seems we
@@ -807,13 +761,6 @@ folders as required.
 
 The =sequence_formatter= is actually not a formatter, but a helper or
 assistant.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
 
 *** Adding a dependency to a non-existent expander crashes dogen      :story:
 
@@ -1076,16 +1023,6 @@ that is also required by JSON and move it to SML.
 We should have a look at the Boost Fusion approach:
 
 - [[http://jrruethe.github.io/blog/2015/05/21/boost-fusion-json-serializer/][Boost Fusion JSON Serialiser]]
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are using qnames all over the place in CPP. Nothing
-stops us from using strings instead of qnames if that is more
-efficient.
-
-What is worse is that we seem to be doing a ridiculous amount of qname
-lookups. It would be much nicer if we could somehow have all the data
-in the right shape to avoid doing so many lookups.
 
 *** Protect against double-initialisation                             :story:
 
@@ -1382,57 +1319,6 @@ that is the case, this is wrong and needs to be fixed. We are probably
 inferring the name by looking at the =front= (or =back=) of the
 namespaces list. Investigate this.
 
-*** Create a single container of element in model                     :story:
-
-We did an experiment to figure out if it would be more efficient to
-have separate containers of elements in SML's model, the idea being
-that we would avoid using the heap, dispatching etc. We would also
-create code that is more type-safe (e.g. avoid cases where we pass in
-elements but we want a specific descendant only).
-
-However, predictably, the code now has lots of loops across the
-different collections. This pattern is scattered everywhere we use
-SML. In almost all cases this could be handled by a single loop
-without loss of type-safety (e.g. loop and visit where we need
-specific types; just loop where an element suffices). Using the
-traversals (all types traversals, etc) didn't help because we then
-need to create all the associated machinery (overload =operator()=
-etc.) and that is not much different from having a visitor on
-element. We should consider this experiment at an end and just add a
-single container of element in model and deal with the fallout.
-
-Alternatively, we need a "view" over the different containers. In
-truth after the SML workflow has finished executing the model is
-constant. This means we could then use pointers to the objects to
-create a synthetic element container and use this for looping over all
-entities.
-
-In an ideal world, this would be a property of the model:
-e.g. =std::forward_list<entity*>=. However, we do not support pointer
-containers and this is a non-trivial change to the spirit parser so we
-won't be able to do it quickly. The alternative is to generate the
-container from within the backend workflow for now and pass it to each
-workflow. Once we are done with the refactoring we can then replace
-this with a model property.
-
-We need to have a look at all instances of the code where we loop
-across all elements and see if this is a win or not. Also, we can move
-=Element= from a concept to a type (e.g. =element=) and make it the
-base class for all elements. Validator would have to make sure the
-model is not nonsensical (object inheriting from a primitive, etc).
-
-Merged stories:
-
-Consider model as a container of types
-
-At present model is composed of objects, primitives, concepts,
-modules, etc. We could bring together all descendants of types into a
-single container (e.g. types). However, in places we do thinks like
-looking at the primitive container to see if the container has any
-primitive types - these would become slower as we'd now be looking at
-the entire type collection. Need to look at all usages of these
-containers in the code to see if this would be a win or not.
-
 *** Improve errors in dia objects                                     :story:
 
 At present when adding blank spaces in a dia object we get the
@@ -1471,17 +1357,6 @@ At present the following error is triggered:
 This provides very little context of what went wrong. Also, should we
 allow a "kvp" that has no value, where the value is assumed to be
 true. For cases like comment it would make life easier.
-
-*** Remove unnecessary properties from model                          :story:
-
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. Unnecessary properties:
-documentation, containing module, extensions.
-
-We need to keep the name because it is now used to locate the model's
-module.
 
 *** Use of disabled facets in non-generatable types                   :story:
 
@@ -1556,7 +1431,7 @@ could relax the code in processor (object_types):
 We should also consider having a =strict= command line option to
 enable/disable this behaviour.
 
-*** Update manual with detailed model descriptions                    :story:
+*** Update manual with detailed model descriptions                     :epic:
 
 #+begin_quote
 *Story*: As a dogen developer, I want to read about the architecture
@@ -2588,22 +2463,6 @@ At present we are always adding =#pragrma once= to the header guard:
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
 
-*** Create a ebook and dead-tree book for the manual                  :story:
-
-We should probably start by creating a simple ebook first and then
-explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
-Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
-
-*** Use pdflatex for the manual                                       :story:
-
-We should just use pdflatex for the manual rather than org. We need to
-convert the existing content to TeX - maybe one big file - and then
-add a more idiomatic TeX setup such as BibTeX, once chapter per file,
-etc.
-
-We should also have a look at the [[http://implementingquantlib.blogspot.com/2013/09/intermission-latex-style-file-and-some.html][latex templates]] by Luigi for
-quantlib and the [[http://www.springer.com/computer/lncs/lncs%2Bauthors?SGWID%3D0-40209-0-0-0][Springer LaTeX templates]].
-
 *** Add the the EMF purchase order examples to manual                 :story:
 
 We should make use of the examples for eCore and EMF or perhaps
@@ -2617,41 +2476,6 @@ authoring diagrams.
 
 - [[https://northwinddatabase.codeplex.com/][Northwind Database]]: may be a bit too complicated, but it is a good
   way to demo complex features.
-
-*** Remove calls to unix utilities directly                           :story:
-
-We have a couple of cases where we are calling UNIX utilities when
-there are equivalent CMake calls. For example
-=test_data/CMakeLists.txt=:
-
-:        set(target_name "rebase_${model_name}")
-:        if(EXISTS "${git_expected}/")
-:            add_custom_target(${target_name}
-:                COMMAND rm -rf ${expected}/*
-:                COMMAND cp ${actual}/* ${expected}
-:                COMMAND cp ${actual}/* ${git_expected}/
-:                WORKING_DIRECTORY ${stage_bin_dir})
-
-These can be replaced with:
-
-:        file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
-:        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
-:         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
-
-etc.
-
-*** Detect the presence of the diff command                           :story:
-
-The diff targets is dependent on the presence of the diff command, but
-we are not checking to see if it exists:
-
-:        set(target_name "diff_${model_name}")
-:        add_custom_target(${target_name}
-:            COMMAND diff -r -u ${expected} ${actual}
-:            WORKING_DIRECTORY ${stage_bin_dir})
-:        add_dependencies(diff_dataset ${target_name})
-
-We need to detect it and only add this targets if diff has been found.
 
 *** File extension is hard-coded against file type                    :story:
 
@@ -2845,70 +2669,6 @@ At present we are only testing packages in comments.
 This name is a bit misleading, this is not a generic database model
 but its designed to specifically test odb.
 
-*** Add support for formatter and facet dependencies                  :story:
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-Now that we have subsidiary settings and principal settings do we need
-the rename? We should consider "universal settings" maybe.
-
-In addition, the convention is now that "settings" mean a strongly
-typed representation of =dynamic= data; general "settings" are not
-settings in this sense. However, we do need a class to model settings
-properly (i.e. to mirror dynamic exactly, without any
-transformations).
-
-In truth, =annotation= is probably sufficient - or perhaps
-=annotation_properties=. It could then have an =enabled= property to
-replace =generate_preamble=. This is more accurate due to the
-preamble/postamble setup explained above. In this setup, we'd have
-=annotation_settings= to map to dynamic data, with an annotation
-settings factory which reads these off of dynamic object; then, an
-annotation factory to generate annotations. Finally, we can introduce
-the annotation formatter to generate the portion of boilerplate
-related to just the annotation. Boilerplate formatter collaborates
-with annotation formatter.
-
-In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
-conceptual sense.
-
 *** Improve formatters code generation marker                         :story:
 
 Things the marker can/should have:
@@ -3035,12 +2795,6 @@ the end. We could easily have a "buildable" stereotype that generates
 a builder just like we do for visitor.
 
 See [[https://github.com/netty/netty/blob/master/example/src/main/java/io/netty/example/echo/EchoServer.java][this example]] (ServerBootstrap in particular).
-
-*** Support for transactional writes                                  :story:
-
-It would be nice if dogen either generated all files or didn't touch
-the directory at all, at least as an option. We could simply generate
-into a temporary directory and then swap them at the end.
 
 *** Consider using boost pointer container for formatters             :story:
 
@@ -3267,12 +3021,6 @@ extension. Having said that, if there was a way to supply an enum or
 such-like with the stream, we could create a class for streams and
 then implement the file one as an adaptor to the stream class.
 
-*** All model items traversal should resolve types                    :story:
-
-This traversal was designed for tagger but yet it does not resolve
-=type= into one of the sub-classes, forcing tagger to implement
-visitation to resolve the types. We should improve the traversal.
-
 *** Add support for ignoring types                                    :story:
 
 #+begin_quote
@@ -3489,29 +3237,6 @@ as a way of generating random data for test systems.
 
 See also [[http://www.json-generator.com/][JSON generator]].
 
-*** Self-contained build files                                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like to build models without having
-to add any code so that I use dogen without needing to learn lots
-about build systems.
-#+end_quote
-
-It would be nice to be able to generate a complete application from a
-given model, or a library. At present there is an expectation that the
-user will slot in the generated CMake files into a larger, more
-comprehensive CMake build. All we need is:
-
-- some kind of binary type: e.g. executable or library. we should have
-  this anyway. meta data at the model level could be used to convey
-  this.
-- if executable, we should automatically ignore a main.cpp in the
-  source directory.
-- generate a stand-alone CMake template.
-
-The idea is that with this the user could immediately generate a
-binary without any further configuration required.
-
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
@@ -3523,19 +3248,6 @@ that happens we should switch off forward declarations?
 In addition, in some cases we may want to use a =struct= rather than a
 =class=. At present we are always forward declaring as =class= but
 sometimes declaring as =struct=.
-
-*** Add tests for tagging of modules, primitves and enumerations      :story:
-
-We've tested abstract objects et al quite a lot but forgotten the
-other aspects of the model.
-
-*** Consider renaming registrar in boost serialisation                :story:
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
 
 *** Rename nested qname to composite qname                            :story:
 
@@ -3555,24 +3267,10 @@ types.
 
 We should just follow the composite pattern in the naming.
 
-*** Check concept properties for identity                             :story:
-
-When we added concepts we didn't had a link to the processing of
-identity attributes. This means that if we get a property via modeling
-a concept it is not processed and added to the keys.
-
-Update injector to follow concepts.
-
 *** Refactor node according to composite pattern in dia to sml        :story:
 
 This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
 pattern. We should just follow the composite pattern.
-
-*** Create an interface for the text reader                           :story:
-
-In order to do performance testing of the dia model we should create
-an interface for text reader and implement it as a mock. This will
-avoid the overhead of reading stuff from the hard drive.
 
 *** Use dogen models to test dogen                                    :story:
 
@@ -3598,39 +3296,16 @@ code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
 
-*** Adding new engine spec tests is hard                              :story:
+*** Adding new knit tests is hard                                     :story:
 
-In order to test models at the engine level one needs to first
-generate the dia input. This can be done as follows:
+In order to test models at the knit level one needs to first generate
+the dia input. This can be done as follows:
 
 : ./dogen_knitter --save-dia-model xml --stop-after-merging
 : -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
 
 From the bin directory. We need to make these steps a bit more
 obvious. Why do we even need this?
-
-*** Support for cmake components and groups                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need to integrate the generated models
-with my existing packaging code.
-#+end_quote
-
-We recently added support for creating multiple packages from a single
-source tree. We need generated models to have a new top-level cmake file:
-
-: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
-:
-: install(
-:     DIRECTORY include/
-:     DESTINATION include
-:     COMPONENT headers
-:     FILES_MATCHING PATTERN "*.hpp")
-
-And the =src= cmake file:
-
-: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
 
 *** Add test model for disabling XML                                  :story:
 
@@ -3747,42 +3422,10 @@ each test so one could =make enable_facet_domain= and =make
 run_enable_facet_domain=. The targets need to be prefixed with module
 name and test suite.
 
-*** Clean up WinSock definition in CMakeLists                         :story:
-
-We did a crude implementation of finding WinSock just to get windows
-to build. There should be a FindWinSock somewhere. If not create one.
-
-Do we need this anymore? we probably need it for linking the database
-model, but we should check - maybe ODB has some magic around this.
-
 *** Tests for error conditions in libxml                              :story:
 
 We do not have any errors that check for error conditions directly in
 libxml. This is why the coverage of these functions is red.
-
-*** Check that custom targets in CMake have correct dependencies      :story:
-
-At present we have a number of custom targets, which create a new Make
-target. These are good because they do not require re-running CMake to
-manage the files in the output directory; however, we do not have the
-correct dependencies between the targets and the target
-dependencies. For example, create_scripts should check to see if any
-script has changed before re-generating the tarball; it seems to have
-no dependencies so it will always regenerate the tarball. We need to:
-
-- check all custom targets and see what their current behaviour is:
-  a) change a dependency and rebuild the target and see if the
-  change is picked up or not; b) change no dependencies and re-run the
-  target and ensure that nothing happens.
-- add dependencies as required.
-
-*** Enable doxygen warnings for all undocumented code                 :story:
-
-At present doxygen only warns about undocumented parameters when a
-function already has documented parameters. We should consider
-enabling warnings for all undocumented code. We also need to figure
-out how to mark code as ignored (for example serialisation helpers,
-etc won't require documentation).
 
 *** Add specification comments to tests                               :story:
 
@@ -3804,6 +3447,13 @@ become very readable.
 
 These stories are good candidates for the subsequent release. This
 release will be all about adding new features.
+
+
+*** Create an interface for the text reader                           :story:
+
+In order to do performance testing of the dia model we should create
+an interface for text reader and implement it as a mock. This will
+avoid the overhead of reading stuff from the hard drive.
 
 *** Allow multiple types to go into a single formatter                :story:
 
@@ -4308,8 +3958,10 @@ in a class as being part of a key and dogen would automatically create
 a key. The key could be versioned or unversioned. However, we never
 had a use case for it and the feature was not implemented in a
 convincing way. Having said that, it seems like a useful feature for
-things such as caches etc so we may want to ressurect it as some point
+things such as caches etc so we may want to resurrect it as some point
 in the future.
+
+This was removed in 4ed3fbd.
 
 Merged stories:
 
@@ -4349,6 +4001,9 @@ for this to work.
 backwards compatible way so that I can upgrade the users of my code
 incrementally.
 #+end_quote
+
+We had some basic support for versioning but it was half-baked. It was
+removed in 4ed3fbd.
 
 *New understanding*:
 
@@ -5038,6 +4693,147 @@ is, what then? We can't throw.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Check that custom targets in CMake have correct dependencies      :story:
+
+At present we have a number of custom targets, which create a new Make
+target. These are good because they do not require re-running CMake to
+manage the files in the output directory; however, we do not have the
+correct dependencies between the targets and the target
+dependencies. For example, create_scripts should check to see if any
+script has changed before re-generating the tarball; it seems to have
+no dependencies so it will always regenerate the tarball. We need to:
+
+- check all custom targets and see what their current behaviour is:
+  a) change a dependency and rebuild the target and see if the
+  change is picked up or not; b) change no dependencies and re-run the
+  target and ensure that nothing happens.
+- add dependencies as required.
+
+*** Enable doxygen warnings for all undocumented code                 :story:
+
+At present doxygen only warns about undocumented parameters when a
+function already has documented parameters. We should consider
+enabling warnings for all undocumented code. We also need to figure
+out how to mark code as ignored (for example serialisation helpers,
+etc won't require documentation).
+
+*** Clean up WinSock definition in CMakeLists                         :story:
+
+We did a crude implementation of finding WinSock just to get windows
+to build. There should be a FindWinSock somewhere. If not create one.
+
+Do we need this anymore? we probably need it for linking the database
+model, but we should check - maybe ODB has some magic around this.
+
+*** Support for cmake components and groups                           :story:
+
+#+begin_quote
+*Story*: As a dogen user, I need to integrate the generated models
+with my existing packaging code.
+#+end_quote
+
+We recently added support for creating multiple packages from a single
+source tree. We need generated models to have a new top-level cmake file:
+
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/spec)
+:
+: install(
+:     DIRECTORY include/
+:     DESTINATION include
+:     COMPONENT headers
+:     FILES_MATCHING PATTERN "*.hpp")
+
+And the =src= cmake file:
+
+: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
+
+*** Self-contained build files                                        :story:
+
+#+begin_quote
+*Story*: As a dogen user, I would like to build models without having
+to add any code so that I use dogen without needing to learn lots
+about build systems.
+#+end_quote
+
+It would be nice to be able to generate a complete application from a
+given model, or a library. At present there is an expectation that the
+user will slot in the generated CMake files into a larger, more
+comprehensive CMake build. All we need is:
+
+- some kind of binary type: e.g. executable or library. we should have
+  this anyway. meta data at the model level could be used to convey
+  this.
+- if executable, we should automatically ignore a main.cpp in the
+  source directory.
+- generate a stand-alone CMake template.
+
+The idea is that with this the user could immediately generate a
+binary without any further configuration required.
+
+*** Remove calls to unix utilities directly                           :story:
+
+We have a couple of cases where we are calling UNIX utilities when
+there are equivalent CMake calls. For example
+=test_data/CMakeLists.txt=:
+
+:        set(target_name "rebase_${model_name}")
+:        if(EXISTS "${git_expected}/")
+:            add_custom_target(${target_name}
+:                COMMAND rm -rf ${expected}/*
+:                COMMAND cp ${actual}/* ${expected}
+:                COMMAND cp ${actual}/* ${git_expected}/
+:                WORKING_DIRECTORY ${stage_bin_dir})
+
+These can be replaced with:
+
+:        file(REMOVE_RECURSE ${stage_test_data_dir}/${dir}/expected)
+:        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/test_data)
+:         file(MAKE_DIRECTORY ${stage_test_data_dir}/${dir}/actual)
+
+etc.
+
+*** Detect the presence of the diff command                           :story:
+
+The diff targets is dependent on the presence of the diff command, but
+we are not checking to see if it exists:
+
+:        set(target_name "diff_${model_name}")
+:        add_custom_target(${target_name}
+:            COMMAND diff -r -u ${expected} ${actual}
+:            WORKING_DIRECTORY ${stage_bin_dir})
+:        add_dependencies(diff_dataset ${target_name})
+
+We need to detect it and only add this targets if diff has been found.
+
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
+*** Create a ebook and dead-tree book for the manual                  :story:
+
+We should probably start by creating a simple ebook first and then
+explore the dead-tree options such as [[http://www.lulu.com][Lulu]]. We should also see what
+Luigi did for [[https://leanpub.com/implementingquantlib/][QuantLib]].
+
+*** Use pdflatex for the manual                                       :story:
+
+We should just use pdflatex for the manual rather than org. We need to
+convert the existing content to TeX - maybe one big file - and then
+add a more idiomatic TeX setup such as BibTeX, once chapter per file,
+etc.
+
+We should also have a look at the [[http://implementingquantlib.blogspot.com/2013/09/intermission-latex-style-file-and-some.html][latex templates]] by Luigi for
+quantlib and the [[http://www.springer.com/computer/lncs/lncs%2Bauthors?SGWID%3D0-40209-0-0-0][Springer LaTeX templates]].
+
+*** Investigate adding polymode support for stitch templates          :story:
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+
 *** Consider creating an Emacs mode for stitch                        :story:
 
 It would be nice to have syntax highlighting for stitch templates. We
@@ -5516,6 +5312,12 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Support for transactional writes                                  :story:
+
+It would be nice if dogen either generated all files or didn't touch
+the directory at all, at least as an option. We could simply generate
+into a temporary directory and then swap them at the end.
 
 *** Supporting user defined generic types                             :story:
 
