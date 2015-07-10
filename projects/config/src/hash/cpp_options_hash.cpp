@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/config/hash/cpp_options_hash.hpp"
-#include "dogen/config/hash/cpp_facet_types_hash.hpp"
 
 namespace {
 
@@ -35,14 +34,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_set_dogen_config_cpp_facet_types(const std::set<dogen::config::cpp_facet_types>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -55,24 +46,7 @@ std::size_t cpp_options_hasher::hash(const cpp_options& v) {
     combine(seed, hash_boost_filesystem_path(v.project_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.source_directory_path()));
     combine(seed, hash_boost_filesystem_path(v.include_directory_path()));
-    combine(seed, v.disable_backend());
     combine(seed, v.disable_cmakelists());
-    combine(seed, hash_std_set_dogen_config_cpp_facet_types(v.enabled_facets()));
-    combine(seed, v.header_extension());
-    combine(seed, v.source_extension());
-    combine(seed, v.disable_complete_constructor());
-    combine(seed, v.disable_facet_includers());
-    combine(seed, v.disable_facet_folders());
-    combine(seed, v.disable_unique_file_names());
-    combine(seed, v.domain_facet_folder());
-    combine(seed, v.hash_facet_folder());
-    combine(seed, v.io_facet_folder());
-    combine(seed, v.serialization_facet_folder());
-    combine(seed, v.test_data_facet_folder());
-    combine(seed, v.odb_facet_folder());
-    combine(seed, v.disable_xml_serialization());
-    combine(seed, v.use_integrated_io());
-    combine(seed, v.disable_eos_serialization());
 
     return seed;
 }

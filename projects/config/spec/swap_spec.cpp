@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
 
     test_swap<archive_types_generator>();
-    test_swap<cpp_facet_types_generator>();
     test_swap<cpp_options_generator>();
     test_swap<input_options_generator>();
     test_swap<output_options_generator>();

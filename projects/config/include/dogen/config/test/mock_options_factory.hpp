@@ -46,13 +46,6 @@ public:
 
 public:
     /**
-     * @brief Creates a container of facets.
-     *
-     * @return all facets if @e all is true, @e hash and @e types otherwise.
-     */
-    static std::set<cpp_facet_types> make_facets(const bool all = true);
-
-    /**
      * @brief Returns the output options configured to output to
      * file.
      */

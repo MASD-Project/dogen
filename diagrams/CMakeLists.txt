@@ -25,13 +25,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
@@ -50,12 +44,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
@@ -73,12 +61,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
@@ -100,12 +82,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
@@ -127,13 +103,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-enable-facet odb
-    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*CMakeLists.txt
     --ignore-files-matching-regex .*/test/.*
@@ -158,12 +127,6 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
@@ -184,13 +147,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -209,12 +166,6 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
-    --cpp-disable-eos-serialization
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
@@ -245,13 +196,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia_to_sml.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -274,13 +219,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/sml.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -299,13 +238,7 @@ add_custom_target(knit_${target}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
@@ -326,13 +259,7 @@ add_custom_target(knit_${target}
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-enable-facet domain
-    --cpp-enable-facet io
-    --cpp-enable-facet hash
-    --cpp-enable-facet serialization
-    --cpp-enable-facet test_data
     --cpp-disable-cmakelists
-    --cpp-disable-eos-serialization
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*

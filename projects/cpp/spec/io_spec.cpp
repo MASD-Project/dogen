@@ -41,14 +41,11 @@ BOOST_AUTO_TEST_SUITE(io)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
-    test_io<formattables::aspect_types_generator>();
-    test_io<formattables::file_types_generator>();
     test_io<formattables::class_info_generator>();
     test_io<formattables::cmakelists_info_generator>();
     test_io<formattables::enum_info_generator>();
     test_io<formattables::enumerator_info_generator>();
     test_io<formattables::exception_info_generator>();
-    test_io<formattables::file_info_generator>();
     test_io<formattables::namespace_info_generator>();
     test_io<formattables::nested_type_info_generator>();
     test_io<formattables::odb_options_info_generator>();
@@ -56,7 +53,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::property_info_generator>();
     test_io<formattables::registrar_info_generator>();
     test_io<formattables::visitor_info_generator>();
-    test_io<formattables::includes_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

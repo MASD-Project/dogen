@@ -25,11 +25,8 @@
 #pragma once
 #endif
 
-#include <set>
-#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/cpp_facet_types.hpp"
 #include "dogen/config/serialization/cpp_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -55,24 +52,7 @@ public:
         const boost::filesystem::path& project_directory_path,
         const boost::filesystem::path& source_directory_path,
         const boost::filesystem::path& include_directory_path,
-        const bool disable_backend,
-        const bool disable_cmakelists,
-        const std::set<dogen::config::cpp_facet_types>& enabled_facets,
-        const std::string& header_extension,
-        const std::string& source_extension,
-        const bool disable_complete_constructor,
-        const bool disable_facet_includers,
-        const bool disable_facet_folders,
-        const bool disable_unique_file_names,
-        const std::string& domain_facet_folder,
-        const std::string& hash_facet_folder,
-        const std::string& io_facet_folder,
-        const std::string& serialization_facet_folder,
-        const std::string& test_data_facet_folder,
-        const std::string& odb_facet_folder,
-        const bool disable_xml_serialization,
-        const bool use_integrated_io,
-        const bool disable_eos_serialization);
+        const bool disable_cmakelists);
 
 private:
     template<typename Archive>
@@ -132,168 +112,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Disable the C++ backend entirely.
-     */
-    /**@{*/
-    bool disable_backend() const;
-    void disable_backend(const bool v);
-    /**@}*/
-
-    /**
      * @brief Do not generate CMakeLists.txt for C++ projects.
      */
     /**@{*/
     bool disable_cmakelists() const;
     void disable_cmakelists(const bool v);
-    /**@}*/
-
-    /**
-     * @brief C++ facets for which to generate code.
-     */
-    /**@{*/
-    const std::set<dogen::config::cpp_facet_types>& enabled_facets() const;
-    std::set<dogen::config::cpp_facet_types>& enabled_facets();
-    void enabled_facets(const std::set<dogen::config::cpp_facet_types>& v);
-    void enabled_facets(const std::set<dogen::config::cpp_facet_types>&& v);
-    /**@}*/
-
-    /**
-     * @brief Extension to use for C++ header files.
-     */
-    /**@{*/
-    const std::string& header_extension() const;
-    std::string& header_extension();
-    void header_extension(const std::string& v);
-    void header_extension(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Extension to use for C++ source files.
-     */
-    /**@{*/
-    const std::string& source_extension() const;
-    std::string& source_extension();
-    void source_extension(const std::string& v);
-    void source_extension(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Do not generate a constructor that takes as arguments as
-     * member variables.
-     */
-    /**@{*/
-    bool disable_complete_constructor() const;
-    void disable_complete_constructor(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Do not create a global header file that includes all
-     * header files in that facet.
-     */
-    /**@{*/
-    bool disable_facet_includers() const;
-    void disable_facet_includers(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Do not create individual folders for each facet.
-     *
-     * Instead put all the files in one folder.
-     */
-    /**@{*/
-    bool disable_facet_folders() const;
-    void disable_facet_folders(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Do not generate unique file names for each facet.
-     *
-     * All file names will use the domain object name.
-     */
-    /**@{*/
-    bool disable_unique_file_names() const;
-    void disable_unique_file_names(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Name of the folder to house domain object code.
-     */
-    /**@{*/
-    const std::string& domain_facet_folder() const;
-    std::string& domain_facet_folder();
-    void domain_facet_folder(const std::string& v);
-    void domain_facet_folder(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the folder to house hashing code.
-     */
-    /**@{*/
-    const std::string& hash_facet_folder() const;
-    std::string& hash_facet_folder();
-    void hash_facet_folder(const std::string& v);
-    void hash_facet_folder(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the folder to house IO (streaming) code.
-     */
-    /**@{*/
-    const std::string& io_facet_folder() const;
-    std::string& io_facet_folder();
-    void io_facet_folder(const std::string& v);
-    void io_facet_folder(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the folder to house boost serialisation code.
-     */
-    /**@{*/
-    const std::string& serialization_facet_folder() const;
-    std::string& serialization_facet_folder();
-    void serialization_facet_folder(const std::string& v);
-    void serialization_facet_folder(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the folder to house test data generators.
-     */
-    /**@{*/
-    const std::string& test_data_facet_folder() const;
-    std::string& test_data_facet_folder();
-    void test_data_facet_folder(const std::string& v);
-    void test_data_facet_folder(const std::string&& v);
-    /**@}*/
-
-    const std::string& odb_facet_folder() const;
-    std::string& odb_facet_folder();
-    void odb_facet_folder(const std::string& v);
-    void odb_facet_folder(const std::string&& v);
-
-    /**
-     * @brief Do not use NVP macros in serialisation code.
-     *
-     * This has the effect of disabling support for boost XML archives.
-     */
-    /**@{*/
-    bool disable_xml_serialization() const;
-    void disable_xml_serialization(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Generate the streaming operators directly in the domain class.
-     */
-    /**@{*/
-    bool use_integrated_io() const;
-    void use_integrated_io(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, EOS portable serialisation will not be generated.
-     */
-    /**@{*/
-    bool disable_eos_serialization() const;
-    void disable_eos_serialization(const bool v);
     /**@}*/
 
 public:
@@ -311,24 +134,7 @@ private:
     boost::filesystem::path project_directory_path_;
     boost::filesystem::path source_directory_path_;
     boost::filesystem::path include_directory_path_;
-    bool disable_backend_;
     bool disable_cmakelists_;
-    std::set<dogen::config::cpp_facet_types> enabled_facets_;
-    std::string header_extension_;
-    std::string source_extension_;
-    bool disable_complete_constructor_;
-    bool disable_facet_includers_;
-    bool disable_facet_folders_;
-    bool disable_unique_file_names_;
-    std::string domain_facet_folder_;
-    std::string hash_facet_folder_;
-    std::string io_facet_folder_;
-    std::string serialization_facet_folder_;
-    std::string test_data_facet_folder_;
-    std::string odb_facet_folder_;
-    bool disable_xml_serialization_;
-    bool use_integrated_io_;
-    bool disable_eos_serialization_;
 };
 
 } }

@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<archive_types_generator>();
-    test_io<cpp_facet_types_generator>();
     test_io<cpp_options_generator>();
     test_io<input_options_generator>();
     test_io<output_options_generator>();

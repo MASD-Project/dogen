@@ -187,8 +187,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     SETUP_TEST_LOG("disabling_cpp_backend_results_in_no_cpp_output");
     auto s(empty_tds_mock_options());
     auto cs(s.cpp());
-    cs.disable_backend(true);
     s.cpp(cs);
+    // FIXME implement in terms of meta-data.
 
     dogen::knit::workflow w(s);
     w.execute();
@@ -206,7 +206,6 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
             auto s(default_mock_options(tds));
             auto cs(s.cpp());
             cs.split_project(false);
-            cs.disable_complete_constructor(true);
             s.cpp(cs);
             return s;
         });
@@ -222,7 +221,6 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
     auto lambda([](codegen_tds tds) -> knitting_options {
             auto s(default_mock_options(tds));
             auto cs(s.cpp());
-            cs.disable_facet_folders(true);
             s.cpp(cs);
             return s;
         });
@@ -276,14 +274,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_options(tds));
-    auto cs(s.cpp());
-    using dogen::config::cpp_facet_types;
-    std::set<cpp_facet_types> f = { cpp_facet_types::hash };
-    cs.enabled_facets(f);
-    s.cpp(cs);
-
-    dogen::knit::workflow w(s);
+    dogen::knit::workflow w(default_mock_options(tds));
     contains_checker<generation_failure> c(domain_facet_must_be_enabled);
     BOOST_CHECK_EXCEPTION(w.execute(), generation_failure, c);
 }
@@ -293,16 +284,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
     using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
     auto lambda([](codegen_tds tds) -> knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            using dogen::config::cpp_facet_types;
-            std::set<cpp_facet_types> f = {
-                cpp_facet_types::types
-            };
-            cs.enabled_facets(f);
-            cs.use_integrated_io(true);
-            s.cpp(cs);
-            return s;
+            return default_mock_options(tds);
         });
 
     const auto t(dia_sml::input_enable_facet_domain_dia());
@@ -312,17 +294,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code");
     using dogen::config::knitting_options;
-    auto lambda([](dogen::utility::test_data::codegen_tds tds) ->  knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            using dogen::config::cpp_facet_types;
-            std::set<cpp_facet_types> f = {
-                cpp_facet_types::types,
-                cpp_facet_types::hash
-            };
-            cs.enabled_facets(f);
-            s.cpp(cs);
-            return s;
+    using dogen::utility::test_data::codegen_tds;
+    auto lambda([](codegen_tds tds) -> knitting_options {
+            return default_mock_options(tds);
         });
 
     const auto t(dia_sml::input_enable_facet_hash_dia());
@@ -334,17 +308,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
     using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
     auto lambda([](codegen_tds tds) -> knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            using dogen::config::cpp_facet_types;
-            std::set<cpp_facet_types> f = {
-                cpp_facet_types::types,
-                cpp_facet_types::serialization
-            };
-            cs.enabled_facets(f);
-            cs.disable_xml_serialization(false);
-            s.cpp(cs);
-            return s;
+            return default_mock_options(tds);
         });
 
     const auto t(dia_sml::input_enable_facet_serialization_dia());
@@ -356,16 +320,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
     using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
     auto lambda([](codegen_tds tds) -> knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            using dogen::config::cpp_facet_types;
-            std::set<cpp_facet_types> f = {
-                cpp_facet_types::types,
-                cpp_facet_types::io
-            };
-            cs.enabled_facets(f);
-            s.cpp(cs);
-            return s;
+            return default_mock_options(tds);
         });
 
     const auto t(dia_sml::input_enable_facet_io_dia());
@@ -379,18 +334,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
 
-    auto s(default_mock_options(tds));
-    auto cs(s.cpp());
-    using dogen::config::cpp_facet_types;
-    std::set<cpp_facet_types> f = {
-        cpp_facet_types::hash,
-        cpp_facet_types::io
-    };
-    cs.enabled_facets(f);
-    cs.use_integrated_io(true);
-    s.cpp(cs);
-
-    dogen::knit::workflow w(s);
+    // FIXME: reimplement using meta-data.
+    dogen::knit::workflow w(default_mock_options(tds));
     contains_checker<generation_failure> c(io_facet_and_integrated_io_error);
     BOOST_CHECK_EXCEPTION(w.execute(), generation_failure, c);
 }
@@ -534,19 +479,8 @@ BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
     using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
     auto lambda([](codegen_tds tds) -> knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            using dogen::config::cpp_facet_types;
-            std::set<cpp_facet_types> f = {
-                cpp_facet_types::types,
-                cpp_facet_types::serialization
-            };
-            cs.enabled_facets(f);
-            cs.disable_eos_serialization(false);
-            s.cpp(cs);
-            return s;
+            return default_mock_options(tds);
         });
-
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 

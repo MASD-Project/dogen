@@ -43,7 +43,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
     test_hashing<archive_types_generator>();
-    test_hashing<cpp_facet_types_generator>();
     test_hashing<cpp_options_generator>();
     test_hashing<input_options_generator>();
     test_hashing<output_options_generator>();

@@ -42,14 +42,11 @@ BOOST_AUTO_TEST_SUITE(hashing)
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
 
-    test_hashing<formattables::aspect_types_generator>();
-    test_hashing<formattables::file_types_generator>();
     test_hashing<formattables::class_info_generator>();
     test_hashing<formattables::cmakelists_info_generator>();
     test_hashing<formattables::enum_info_generator>();
     test_hashing<formattables::enumerator_info_generator>();
     test_hashing<formattables::exception_info_generator>();
-    test_hashing<formattables::file_info_generator>();
     test_hashing<formattables::namespace_info_generator>();
     test_hashing<formattables::nested_type_info_generator>();
     test_hashing<formattables::odb_options_info_generator>();
@@ -57,7 +54,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::property_info_generator>();
     test_hashing<formattables::registrar_info_generator>();
     test_hashing<formattables::visitor_info_generator>();
-    test_hashing<formattables::includes_generator>();
-}
+ }
 
 BOOST_AUTO_TEST_SUITE_END()

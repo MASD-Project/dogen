@@ -48,7 +48,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     SETUP_TEST_LOG("validate_serialization");
 
     roundtrip_type<archive_types_generator>();
-    roundtrip_type<cpp_facet_types_generator>();
     roundtrip_type<cpp_options_generator>();
     roundtrip_type<input_options_generator>();
     roundtrip_type<output_options_generator>();

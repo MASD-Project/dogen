@@ -78,7 +78,6 @@ private:
 
 private:
     static config::archive_types parse_archive_type(const std::string& s);
-    static config::cpp_facet_types parse_facet_types(const std::string& s);
 
 private:
     config::input_options

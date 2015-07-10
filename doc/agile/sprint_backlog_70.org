@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-09 Thu 21:49]
+#+CAPTION: Clock summary at [2015-07-10 Fri 10:20]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:03* |       |      |
+| *Total time*                                                                | *17:12* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:03   |       |      |
-| Active                                                                      |         | 16:03 |      |
+| Stories                                                                     | 17:12   |       |      |
+| Active                                                                      |         | 17:12 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -35,7 +35,9 @@
 | COMPLETED Generate empty files for non-generatable types                    |         |       | 0:56 |
 | COMPLETED Switch off overrides for legacy formatters                        |         |       | 0:45 |
 | COMPLETED Switch off SML to CPP transformation                              |         |       | 0:07 |
-| STARTED Remove knit backends and use backend model instead                  |         |       | 1:37 |
+| COMPLETED Remove knit backends and use backend model instead                |         |       | 1:42 |
+| COMPLETED Managed directories is not correct in new world                   |         |       | 0:06 |
+| COMPLETED Remove unused command line options                                |         |       | 0:58 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -176,6 +178,35 @@ Switch the legacy transformation and formatting.
 
 We need to stop using the knit version of the backends. This will
 probably require fixing the managed directories problem.
+
+*** COMPLETED Managed directories is not correct in new world         :story:
+    CLOSED: [2015-07-10 Fri 09:57]
+    CLOCK: [2015-07-10 Fri 09:51]--[2015-07-10 Fri 09:57] =>  0:06
+
+When generating the config model, we used to get the following initial
+configuration for the housekeeper:
+
+: [ "/home/marco/Development/DomainDrivenConsulting/dogen/projects/config" ]
+
+but now we get:
+
+: [ "/home/marco/Development/DomainDrivenConsulting/dogen/projects/config/include",
+:  "/home/marco/Development/DomainDrivenConsulting/dogen/projects/config/include" ]
+
+*** COMPLETED Remove unused command line options                      :story:
+    CLOSED: [2015-07-10 Fri 10:19]
+    CLOCK: [2015-07-10 Fri 09:57]--[2015-07-10 Fri 10:19] =>  0:22
+    CLOCK: [2015-07-10 Fri 09:15]--[2015-07-10 Fri 09:51] =>  0:36
+
+Now that we mapped a number of command line options to meta-data, we
+should be able to remove them from the config model.
+
+*** COMPLETED Remove unused classes in cpp model                      :story:
+    CLOSED: [2015-07-10 Fri 10:26]
+    CLOCK: [2015-07-10 Fri 10:21]--[2015-07-10 Fri 10:26] =>  0:05
+
+We need to remove all of the old world classes we had in the =cpp=
+model such as content descriptor, project, etc.
 
 *** Handling of managed directories is incorrect                      :story:
 

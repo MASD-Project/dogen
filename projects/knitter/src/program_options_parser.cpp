@@ -79,29 +79,7 @@ const std::string cpp_split_project_arg("cpp-split-project");
 const std::string cpp_project_dir_arg("cpp-project-dir");
 const std::string cpp_source_dir_arg("cpp-source-dir");
 const std::string cpp_include_dir_arg("cpp-include-dir");
-const std::string cpp_disable_backend_arg("cpp-disable-backend");
 const std::string cpp_disable_cmakelists_arg("cpp-disable-cmakelists");
-const std::string cpp_enable_facet_arg("cpp-enable-facet");
-const std::string cpp_header_extension_arg("cpp-header-extension");
-const std::string cpp_source_extension_arg("cpp-source-extension");
-const std::string cpp_disable_complete_constructor_arg(
-    "cpp-disable-complete-constructor");
-const std::string cpp_disable_facet_includers("cpp-disable-facet-includers");
-const std::string cpp_disable_facet_folders_arg("cpp-disable-facet-folders");
-const std::string cpp_disable_unique_file_names_arg(
-    "cpp-disable-unique-file-names");
-const std::string cpp_domain_facet_folder_arg("cpp-domain-facet-folder");
-const std::string cpp_hash_facet_folder_arg("cpp-hash-facet-folder");
-const std::string cpp_io_facet_folder_arg("cpp-io-facet-folder");
-const std::string cpp_serialization_facet_folder_arg(
-    "cpp-serialization-facet-folder");
-const std::string cpp_test_data_facet_folder_arg("cpp-test-data-facet-folder");
-const std::string cpp_odb_facet_folder_arg("cpp-odb-facet-folder");
-const std::string cpp_disable_xml_serialization_arg(
-    "cpp-disable-xml-serialization");
-const std::string cpp_use_integrated_io_arg("cpp-use-integrated-io");
-const std::string cpp_disable_eos_serialization_arg(
-    "cpp-disable-eos-serialization");
 
 const std::string target_arg("target");
 const std::string external_module_path_arg("external-module-path");
@@ -216,10 +194,6 @@ program_options_parser::cpp_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("C++ backend options");
     r.add_options()
-        ("cpp-disable-backend", "Do not generate C++ code.")
-        ("cpp-disable-complete-constructor",
-            "Do not generate a constructor taking as arguments all member "
-            "variables")
         ("cpp-disable-cmakelists", "Do not generate 'CMakeLists.txt' for C++.")
         ("cpp-split-project,y",
             "Split the model project into a source and include directory, "
@@ -237,49 +211,7 @@ program_options_parser::cpp_options_factory() const {
             value<std::string>(),
             "Output directory for C++ include files. Defaults to '.'"
             "Can only be used with --cpp-split-project."
-            "If supplied, source directory must be supplied too.")
-        ("cpp-enable-facet",
-            value<std::vector<std::string> >(),
-            "If set, only domain and enabled facets are generated. "
-            "By default all facets are generated. Valid values: "
-            "[io | hash | serialization | test_data | odb].")
-        ("cpp-header-extension",
-            value<std::string>()->default_value(".hpp"),
-            "Extension for C++ header files, including leading '.'.")
-        ("cpp-source-extension",
-            value<std::string>()->default_value(".cpp"),
-            "Extension for C++ source files, including leading '.'.")
-        ("cpp-disable-facet-includers", "Do not create a global header file "
-            "that includes all header files in that facet.")
-        ("cpp-disable-facet-folders", "Do not create sub-folders for facets.")
-        ("cpp-disable-unique-file-names", "Do not make file names unique. "
-            "Defaults to true. Must be true if not generating facet folders.")
-        ("cpp-domain-facet-folder",
-            value<std::string>()->default_value("types"),
-            "Name for the domain facet folder.")
-        ("cpp-hash-facet-folder",
-            value<std::string>()->default_value("hash"),
-            "Name for the hash facet folder.")
-        ("cpp-io-facet-folder",
-            value<std::string>()->default_value("io"),
-            "Name for the io facet folder.")
-        ("cpp-serialization-facet-folder",
-            value<std::string>()->default_value("serialization"),
-            "Name for the serialization facet folder.")
-        ("cpp-test-data-facet-folder",
-            value<std::string>()->default_value("test_data"),
-            "Name for the test data facet folder.")
-        ("cpp-odb-facet-folder",
-            value<std::string>()->default_value("odb"),
-            "Name for the ODB facet folder.")
-        ("cpp-disable-xml-serialization", "Do not add NVP macros to boost"
-            " serialization code. This is used to support boost XML archives.")
-        ("cpp-disable-eos-serialization", "Do not add EOS serialisation support"
-            " to boost serialization code.")
-        ("cpp-use-integrated-io", "Add inserters directly to domain facet "
-            "rather than using IO facet.")
-        ("cpp-disable-versioning",
-            "Do not generate entity versioning code for domain types.");
+            "If supplied, source directory must be supplied too.");
 
     return r;
 }
@@ -379,20 +311,6 @@ program_options_parser::parse_archive_type(const std::string& s) {
     BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
-config::cpp_facet_types
-program_options_parser::parse_facet_types(const std::string& s) {
-    using config::cpp_facet_types;
-    if (s == domain_facet_type) return cpp_facet_types::types;
-    if (s == hash_facet_type) return cpp_facet_types::hash;
-    if (s == serialization_facet_type) return cpp_facet_types::serialization;
-    if (s == io_facet_type) return cpp_facet_types::io;
-    if (s == test_data_facet_type) return cpp_facet_types::test_data;
-    if (s == odb_facet_type) return cpp_facet_types::odb;
-
-    using utility::exception::invalid_enum_value;
-    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_facet_type + s));
-}
-
 config::cpp_options program_options_parser::
 transform_cpp_options(const boost::program_options::variables_map& vm) const {
     config::cpp_options r;
@@ -427,61 +345,7 @@ transform_cpp_options(const boost::program_options::variables_map& vm) const {
             r.project_directory_path(vm[cpp_project_dir_arg].as<std::string>());
     }
 
-    r.disable_backend(vm.count(cpp_disable_backend_arg));
     r.disable_cmakelists(vm.count(cpp_disable_cmakelists_arg));
-    r.disable_facet_includers(vm.count(cpp_disable_facet_includers));
-    r.disable_facet_folders(vm.count(cpp_disable_facet_folders_arg));
-    r.disable_xml_serialization(vm.count(cpp_disable_xml_serialization_arg));
-    r.disable_eos_serialization(vm.count(cpp_disable_eos_serialization_arg));
-    r.disable_unique_file_names(vm.count(cpp_disable_unique_file_names_arg));
-    r.use_integrated_io(vm.count(cpp_use_integrated_io_arg));
-    r.disable_complete_constructor(
-        vm.count(cpp_disable_complete_constructor_arg));
-
-    r.header_extension(vm[cpp_header_extension_arg].as<std::string>());
-    r.source_extension(vm[cpp_source_extension_arg].as<std::string>());
-
-    r.domain_facet_folder(vm[cpp_domain_facet_folder_arg].as<std::string>());
-    r.hash_facet_folder(vm[cpp_hash_facet_folder_arg].as<std::string>());
-    r.io_facet_folder(vm[cpp_io_facet_folder_arg].as<std::string>());
-    r.serialization_facet_folder(
-        vm[cpp_serialization_facet_folder_arg].as<std::string>());
-    r.test_data_facet_folder(
-        vm[cpp_test_data_facet_folder_arg].as<std::string>());
-    r.odb_facet_folder(vm[cpp_odb_facet_folder_arg].as<std::string>());
-
-    using config::cpp_facet_types;
-    std::set<cpp_facet_types> set;
-    if (vm.count(cpp_enable_facet_arg)) {
-        try {
-            set.insert(cpp_facet_types::types);
-            typedef std::vector<std::string> vector;
-            const auto v(vm[cpp_enable_facet_arg].as<vector>());
-            boost::copy(v |
-                boost::adaptors::transformed(
-                    &program_options_parser::parse_facet_types),
-                std::inserter(set, set.end()));
-        } catch (const utility::exception::invalid_enum_value& e) {
-            BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
-        }
-
-        if (r.use_integrated_io()) {
-            const auto f(r.enabled_facets());
-            const bool has_io_facet(f.find(cpp_facet_types::io) != f.end());
-            if (has_io_facet)
-                BOOST_THROW_EXCEPTION(parser_validation_error(
-                        integrated_io_incompatible_with_io_facet));
-        }
-    } else {
-        set.insert(cpp_facet_types::types);
-        set.insert(cpp_facet_types::hash);
-        set.insert(cpp_facet_types::serialization);
-        set.insert(cpp_facet_types::test_data);
-        set.insert(cpp_facet_types::odb);
-        if (!r.use_integrated_io())
-            set.insert(cpp_facet_types::io);
-    }
-    r.enabled_facets(set);
 
     return r;
 }

@@ -23,38 +23,12 @@
 namespace {
 
 const std::string empty;
-const std::string header_extension(".hpp");
-const std::string source_extension(".cpp");
-const std::string domain_facet_folder("types");
-const std::string hash_facet_folder("hash");
-const std::string io_facet_folder("io");
-const std::string serialization_facet_folder("serialization");
-const std::string test_data_facet_folder("test_data");
-const std::string odb_facet_folder("odb");
 
 }
 
 namespace dogen {
 namespace config {
 namespace test {
-
-std::set<cpp_facet_types>
-mock_options_factory::make_facets(const bool all) {
-    if (all)
-        return std::set<cpp_facet_types> {
-            cpp_facet_types::types,
-            cpp_facet_types::hash,
-            cpp_facet_types::serialization,
-            cpp_facet_types::io,
-            cpp_facet_types::test_data,
-            cpp_facet_types::odb
-        };
-
-    return std::set<cpp_facet_types> {
-        cpp_facet_types::types,
-        cpp_facet_types::hash,
-    };
-}
 
 output_options mock_options_factory::make_output_options() {
     output_options r;
@@ -83,16 +57,6 @@ cpp_options mock_options_factory::make_cpp_options(
     r.split_project(true);
     r.source_directory_path(src_dir);
     r.include_directory_path(include_dir);
-    r.enabled_facets(make_facets());
-    r.header_extension(header_extension);
-    r.source_extension(source_extension);
-    r.domain_facet_folder(domain_facet_folder);
-    r.hash_facet_folder(hash_facet_folder);
-    r.io_facet_folder(io_facet_folder);
-    r.serialization_facet_folder(serialization_facet_folder);
-    r.test_data_facet_folder(test_data_facet_folder);
-    r.odb_facet_folder(odb_facet_folder);
-    r.disable_eos_serialization(true);
     return r;
 }
 

@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
 
     test_equality<archive_types_generator>();
-    test_equality<cpp_facet_types_generator>();
     test_equality<cpp_options_generator>();
     test_equality<input_options_generator>();
     test_equality<output_options_generator>();

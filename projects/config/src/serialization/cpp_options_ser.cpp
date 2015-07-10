@@ -19,10 +19,8 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/set.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -31,7 +29,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/config/serialization/cpp_options_ser.hpp"
-#include "dogen/config/serialization/cpp_facet_types_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -44,24 +41,7 @@ void save(Archive& ar,
     ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
     ar << make_nvp("source_directory_path", v.source_directory_path_.generic_string());
     ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
-    ar << make_nvp("disable_backend", v.disable_backend_);
     ar << make_nvp("disable_cmakelists", v.disable_cmakelists_);
-    ar << make_nvp("enabled_facets", v.enabled_facets_);
-    ar << make_nvp("header_extension", v.header_extension_);
-    ar << make_nvp("source_extension", v.source_extension_);
-    ar << make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
-    ar << make_nvp("disable_facet_includers", v.disable_facet_includers_);
-    ar << make_nvp("disable_facet_folders", v.disable_facet_folders_);
-    ar << make_nvp("disable_unique_file_names", v.disable_unique_file_names_);
-    ar << make_nvp("domain_facet_folder", v.domain_facet_folder_);
-    ar << make_nvp("hash_facet_folder", v.hash_facet_folder_);
-    ar << make_nvp("io_facet_folder", v.io_facet_folder_);
-    ar << make_nvp("serialization_facet_folder", v.serialization_facet_folder_);
-    ar << make_nvp("test_data_facet_folder", v.test_data_facet_folder_);
-    ar << make_nvp("odb_facet_folder", v.odb_facet_folder_);
-    ar << make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
-    ar << make_nvp("use_integrated_io", v.use_integrated_io_);
-    ar << make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
 }
 
 template<typename Archive>
@@ -78,24 +58,7 @@ void load(Archive& ar,
     std::string include_directory_path_tmp;
     ar >> make_nvp("include_directory_path", include_directory_path_tmp);
     v.include_directory_path_ = include_directory_path_tmp;
-    ar >> make_nvp("disable_backend", v.disable_backend_);
     ar >> make_nvp("disable_cmakelists", v.disable_cmakelists_);
-    ar >> make_nvp("enabled_facets", v.enabled_facets_);
-    ar >> make_nvp("header_extension", v.header_extension_);
-    ar >> make_nvp("source_extension", v.source_extension_);
-    ar >> make_nvp("disable_complete_constructor", v.disable_complete_constructor_);
-    ar >> make_nvp("disable_facet_includers", v.disable_facet_includers_);
-    ar >> make_nvp("disable_facet_folders", v.disable_facet_folders_);
-    ar >> make_nvp("disable_unique_file_names", v.disable_unique_file_names_);
-    ar >> make_nvp("domain_facet_folder", v.domain_facet_folder_);
-    ar >> make_nvp("hash_facet_folder", v.hash_facet_folder_);
-    ar >> make_nvp("io_facet_folder", v.io_facet_folder_);
-    ar >> make_nvp("serialization_facet_folder", v.serialization_facet_folder_);
-    ar >> make_nvp("test_data_facet_folder", v.test_data_facet_folder_);
-    ar >> make_nvp("odb_facet_folder", v.odb_facet_folder_);
-    ar >> make_nvp("disable_xml_serialization", v.disable_xml_serialization_);
-    ar >> make_nvp("use_integrated_io", v.use_integrated_io_);
-    ar >> make_nvp("disable_eos_serialization", v.disable_eos_serialization_);
 }
 
 } }
