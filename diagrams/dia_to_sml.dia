@@ -4271,7 +4271,7 @@ that make up dogen instructions.#</dia:string>
         <dia:point val="43,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,15.95;60.49,36.45"/>
+        <dia:rectangle val="42.95,15.95;60.49,33.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="43,16"/>
@@ -4280,7 +4280,7 @@ that make up dogen instructions.#</dia:string>
         <dia:real val="17.440000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.400000000000006"/>
+        <dia:real val="17.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile#</dia:string>
@@ -4600,29 +4600,6 @@ to SML concepts at a later stage.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_entity#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is an entity.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#is_value_object#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -4702,29 +4679,6 @@ to SML concepts at a later stage.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the underlying object is versioned.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_keyed_entity#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object is an entity with keyes for its identity function.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4840,52 +4794,6 @@ to SML concepts at a later stage.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the underlying object represents a concept.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_repository#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object represents a repository.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_factory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the underlying object represents a factory.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5767,7 +5675,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="53.13,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,36.35;53.88,49.8"/>
+        <dia:rectangle val="42.95,33.15;53.88,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5776,7 +5684,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="53.13,49"/>
         <dia:point val="53.13,44"/>
         <dia:point val="43,44"/>
-        <dia:point val="43,36.4"/>
+        <dia:point val="43,33.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6284,7 +6192,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,4.95;-86.405,89.15"/>
+        <dia:rectangle val="-117.05,4.95;-86.405,90.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6296,7 +6204,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="30.545000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="84.099999999999994"/>
+        <dia:real val="85.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -7294,7 +7202,7 @@ and child relationships between objects.#</dia:string>
         <dia:point val="67,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.39,36.25;67.75,44.05"/>
+        <dia:rectangle val="60.39,33.15;67.75,44.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7303,7 +7211,7 @@ and child relationships between objects.#</dia:string>
         <dia:point val="67,37"/>
         <dia:point val="67,44"/>
         <dia:point val="60.44,44"/>
-        <dia:point val="60.44,36.4"/>
+        <dia:point val="60.44,33.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
