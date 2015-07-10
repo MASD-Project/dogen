@@ -114,7 +114,6 @@ object::object()
       number_of_type_arguments_(static_cast<unsigned int>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
-      is_comparable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
       is_original_parent_visitable_(static_cast<bool>(0)),
@@ -136,13 +135,11 @@ object::object(
     const unsigned int number_of_type_arguments,
     const bool is_visitable,
     const bool is_immutable,
-    const bool is_comparable,
     const bool is_fluent,
     const bool is_child,
     const bool is_original_parent_visitable,
     const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
     const dogen::sml::object_types object_type,
-    const std::list<dogen::sml::property>& identity,
     const bool is_final)
     : dogen::sml::type(
       documentation,
@@ -159,13 +156,11 @@ object::object(
       number_of_type_arguments_(number_of_type_arguments),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
-      is_comparable_(is_comparable),
       is_fluent_(is_fluent),
       is_child_(is_child),
       is_original_parent_visitable_(is_original_parent_visitable),
       relationships_(relationships),
       object_type_(object_type),
-      identity_(identity),
       is_final_(is_final) { }
 
 void object::to_stream(std::ostream& s) const {
@@ -188,13 +183,11 @@ void object::to_stream(std::ostream& s) const {
       << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
-      << "\"is_comparable\": " << is_comparable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_original_parent_visitable\": " << is_original_parent_visitable_ << ", "
       << "\"relationships\": " << relationships_ << ", "
       << "\"object_type\": " << object_type_ << ", "
-      << "\"identity\": " << identity_ << ", "
       << "\"is_final\": " << is_final_
       << " }";
 }
@@ -211,13 +204,11 @@ void object::swap(object& other) noexcept {
     swap(number_of_type_arguments_, other.number_of_type_arguments_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
-    swap(is_comparable_, other.is_comparable_);
     swap(is_fluent_, other.is_fluent_);
     swap(is_child_, other.is_child_);
     swap(is_original_parent_visitable_, other.is_original_parent_visitable_);
     swap(relationships_, other.relationships_);
     swap(object_type_, other.object_type_);
-    swap(identity_, other.identity_);
     swap(is_final_, other.is_final_);
 }
 
@@ -237,13 +228,11 @@ bool object::operator==(const object& rhs) const {
         number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_comparable_ == rhs.is_comparable_ &&
         is_fluent_ == rhs.is_fluent_ &&
         is_child_ == rhs.is_child_ &&
         is_original_parent_visitable_ == rhs.is_original_parent_visitable_ &&
         relationships_ == rhs.relationships_ &&
         object_type_ == rhs.object_type_ &&
-        identity_ == rhs.identity_ &&
         is_final_ == rhs.is_final_;
 }
 
@@ -349,14 +338,6 @@ void object::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-bool object::is_comparable() const {
-    return is_comparable_;
-}
-
-void object::is_comparable(const bool v) {
-    is_comparable_ = v;
-}
-
 bool object::is_fluent() const {
     return is_fluent_;
 }
@@ -403,22 +384,6 @@ dogen::sml::object_types object::object_type() const {
 
 void object::object_type(const dogen::sml::object_types v) {
     object_type_ = v;
-}
-
-const std::list<dogen::sml::property>& object::identity() const {
-    return identity_;
-}
-
-std::list<dogen::sml::property>& object::identity() {
-    return identity_;
-}
-
-void object::identity(const std::list<dogen::sml::property>& v) {
-    identity_ = v;
-}
-
-void object::identity(const std::list<dogen::sml::property>&& v) {
-    identity_ = std::move(v);
 }
 
 bool object::is_final() const {

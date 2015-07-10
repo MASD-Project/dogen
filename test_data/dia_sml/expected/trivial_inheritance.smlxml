@@ -801,7 +801,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -830,10 +829,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -947,7 +942,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -977,10 +971,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1059,7 +1049,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1088,10 +1077,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1203,7 +1188,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1232,10 +1216,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1349,7 +1329,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1359,10 +1338,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -1441,7 +1416,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1470,10 +1444,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1552,7 +1522,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1581,10 +1550,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1698,7 +1663,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1727,10 +1691,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1842,7 +1802,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1871,10 +1830,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1986,7 +1941,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -1996,10 +1950,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -2078,7 +2028,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2088,10 +2037,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -2205,7 +2150,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2235,10 +2179,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2350,7 +2290,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2379,10 +2318,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2494,7 +2429,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2504,10 +2438,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -2619,7 +2549,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2648,10 +2577,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -2766,7 +2691,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2795,10 +2719,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2877,7 +2797,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2887,10 +2806,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>1</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2969,7 +2884,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -2979,10 +2893,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>1</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -3061,7 +2971,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>1</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -3071,10 +2980,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -3153,7 +3058,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -3182,10 +3086,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -3297,7 +3197,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -3326,10 +3225,6 @@ in the context of inheritance.
 					</item>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -3443,7 +3338,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -3453,10 +3347,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -3571,7 +3461,6 @@ in the context of inheritance.
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
 				<is_original_parent_visitable>0</is_original_parent_visitable>
@@ -3581,10 +3470,6 @@ in the context of inheritance.
 					<item_version>0</item_version>
 				</relationships>
 				<object_type>4</object_type>
-				<identity>
-					<count>0</count>
-					<item_version>0</item_version>
-				</identity>
 				<is_final>0</is_final>
 			</second>
 		</item>

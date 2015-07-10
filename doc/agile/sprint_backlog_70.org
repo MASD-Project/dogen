@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 15:10]
+#+CAPTION: Clock summary at [2015-07-10 Fri 15:27]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:19* |       |      |
+| *Total time*                                                                | *20:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 20:19   |       |      |
-| Active                                                                      |         | 20:19 |      |
+| Stories                                                                     | 20:34   |       |      |
+| Active                                                                      |         | 20:34 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -42,6 +42,7 @@
 | COMPLETED Remove support for empty model name                               |         |       | 0:28 |
 | COMPLETED Remove ability to output to stdout                                |         |       | 0:20 |
 | COMPLETED Remove unused stereotypes and object types                        |         |       | 1:48 |
+| COMPLETED Remove is comparable from SML                                     |         |       | 0:15 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
@@ -235,12 +236,17 @@ have any use cases. Ability to output generated code to stdout.
 At present we have a large number of stereotypes, but only a few are
 actually in use. Remove all that aren't in use.
 
-*** Remove is comparable from SML                                     :story:
+*** CANCELLED Remove is final from SML                                :story:
+    CLOSED: [2015-07-10 Fri 15:12]
+
+*Rationale*: This is actually fully coded with the new formatters.
 
 We never did implement comparable properly. Remove all remnants of the
 previous attempt.
 
-*** Remove is final from SML                                          :story:
+*** COMPLETED Remove is comparable from SML                           :story:
+    CLOSED: [2015-07-10 Fri 15:27]
+    CLOCK: [2015-07-10 Fri 15:12]--[2015-07-10 Fri 15:27] =>  0:15
 
 We never did implement comparable properly. Remove all remnants of the
 previous attempt.
@@ -613,17 +619,35 @@ trim down the obvious ones:
 
 - empty model name (done)
 - output to stdout
-- split project (or vice-versa, whichever one we don't use).
-- remove repository, factory, stereotypes
 - keys, entities
+- remove repository, factory, stereotypes
+- versioning
+- split project (or vice-versa, whichever one we don't use).
 - removing cpp backend?
 - delete extra files: we always do so why make it optional.
 - force write: we never do.
-- versioning
 - etc.
 
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
+
+*** Header guard in formatters should be optional                     :story:
+
+At present we are relying on empty header guards to determine what to
+do in boilerplate. We should use boost optional.
+
+*** Remove complete name and use qualified name                       :story:
+
+At present we have both complete name and qualified name in
+formatables. Qualified name is blank. We should remove complete name
+and populate qualified name.
+
+*** Remove intermediate fields from dynamic                           :story:
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
 
 *** Create knitter options for each frontend                          :story:
 

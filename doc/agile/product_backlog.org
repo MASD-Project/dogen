@@ -19,19 +19,6 @@ JSON:
 
 This implies we are not calling =tidy_up_string=.
 
-*** Remove complete name and use qualified name                       :story:
-
-At present we have both complete name and qualified name in
-formatables. Qualified name is blank. We should remove complete name
-and populate qualified name.
-
-*** Remove intermediate fields from dynamic                           :story:
-
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
-
 *** Helper methods should have their own includes                     :story:
 
 When a formatter relies on the helper methods, we have a problem: we
@@ -200,11 +187,6 @@ At present we are not treating shared pointers as objects:
 
 We need to start outputting them as JSON objects, just like we do for
 containers, with a name for the "pointee".
-
-*** Header guard in formatters should be optional                     :story:
-
-At present we are relying on empty header guards to determine what to
-do in boilerplate. We should use boost optional.
 
 *** Do not include algorithm if swap is disabled                      :story:
 
@@ -429,12 +411,6 @@ story in backlog.
 :      utility_.open_scope();
 :      {
 
-*** Add new c++ warnings to compilation                               :story:
-
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
-
 *** Create the =needle= library                                       :story:
 
 We need to create a library with support code that is used by the
@@ -481,12 +457,6 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Consider creating an Emacs mode for stitch                        :story:
-
-It would be nice to have syntax highlighting for stitch templates. We
-have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
-which is rather unusable.
-
 *** Create a blog post on biicode                                     :story:
 
 Investigate adding biicode support since we need to add a RapidJson
@@ -506,23 +476,6 @@ leave stitch as it is.
 
 This may even be a more wide-ranging question: why do users need to
 know who owns the field? e.g. =dia.comment=, do I care?
-
-*** Modeling of visitors in =cpp= can be improved                     :story:
-
-In the =cpp= model we are assuming that if the original parent was
-visitable, then the visitor was named after it:
-
-:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
-: #>
-: public:
-:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
-
-The right thing to do here is to have a =visitor_info= attached to the
-=class_info= that is generated during transformation and deals with
-all such rules. The template should just loop through the visitor
-infos. In addition, the visitor infos should tell the template if they
-are abstract or implemented. We may be able to reuse the existing
-=visitor_info= class for this.
 
 *** Improve streaming of empty expressions in stitch                  :spike:
 
@@ -4215,6 +4168,29 @@ provide a solution:
 
 - [[http://stackoverflow.com/questions/11796121/implementing-the-visitor-pattern-using-c-templates][Implementing the visitor pattern using C++ Templates]]
 
+*** Modeling of visitors in =cpp= can be improved                     :story:
+
+In the =cpp= model we are assuming that if the original parent was
+visitable, then the visitor was named after it:
+
+:             } else if (c.is_original_parent_visitable() && !c.is_parent()) {
+: #>
+: public:
+:    virtual void accept(const <#= c.original_parent_name() #>_visitor& v) const override {
+
+The right thing to do here is to have a =visitor_info= attached to the
+=class_info= that is generated during transformation and deals with
+all such rules. The template should just loop through the visitor
+infos. In addition, the visitor infos should tell the template if they
+are abstract or implemented. We may be able to reuse the existing
+=visitor_info= class for this.
+
+*** Allow renaming of visitor                                         :story:
+
+At present the visitor is named by dogen. There is nothing stopping us
+from allowing users to rename it via meta-data. We don't have a use
+case yet.
+
 *** Disable =invalid= value in enumerations                           :story:
 
 #+begin_quote
@@ -4225,6 +4201,12 @@ enumerations because they do not model my problem domain accurately.
 At present all enumerations must have an invalid value. One can
 conceive cases where that is not a useful thing. We should have a
 dynamic extension flag that disables it.
+
+*** Move =invalid= value to a different value                         :story:
+
+Value zero should always be assigned to the most used enumeration
+value because it is very efficient to compare against zero. We should
+use a different value for invalid such as =0xFF...= etc.
 
 *** Bitmask enumeration                                               :story:
 
@@ -5055,6 +5037,18 @@ is, what then? We can't throw.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Consider creating an Emacs mode for stitch                        :story:
+
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+
+*** Add new c++ warnings to compilation                               :story:
+
+- =-Wunused-private-field=: Seems like this warning is not part of
+  =-Wall=
+- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 
 *** Installable package names should follow a well-known convention   :story:
 
