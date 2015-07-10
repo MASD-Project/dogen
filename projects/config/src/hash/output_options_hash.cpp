@@ -44,8 +44,6 @@ namespace config {
 std::size_t output_options_hasher::hash(const output_options& v) {
     std::size_t seed(0);
 
-    combine(seed, v.output_to_stdout());
-    combine(seed, v.output_to_file());
     combine(seed, v.delete_extra_files());
     combine(seed, v.force_write());
     combine(seed, hash_std_vector_std_string(v.ignore_patterns()));

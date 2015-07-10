@@ -32,8 +32,6 @@ namespace test {
 
 output_options mock_options_factory::make_output_options() {
     output_options r;
-    r.output_to_stdout(false);
-    r.output_to_file(true);
     r.delete_extra_files(true);
     r.force_write(false);
     return r;

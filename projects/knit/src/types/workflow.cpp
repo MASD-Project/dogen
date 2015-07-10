@@ -55,21 +55,6 @@ workflow::workflow(workflow&& rhs)
 
 workflow::
 workflow(const config::knitting_options& o) : knitting_options_(o) {
-
-    if (knitting_options_.output().output_to_stdout()) {
-        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
-        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
-    }
-    config::knitting_options_validator::validate(knitting_options_);
-}
-
-workflow::workflow(const config::knitting_options& o, const output_fn& fn)
-    : knitting_options_(o), output_(fn) {
-
-    if (!knitting_options_.output().output_to_stdout() || !output_) {
-        BOOST_LOG_SEV(lg, error) << incorrect_stdout_config;
-        BOOST_THROW_EXCEPTION(generation_failure(incorrect_stdout_config));
-    }
     config::knitting_options_validator::validate(knitting_options_);
 }
 
@@ -77,8 +62,7 @@ bool workflow::housekeeping_required() const {
     return
         !knitting_options_.troubleshooting().stop_after_merging() &&
         !knitting_options_.troubleshooting().stop_after_formatting() &&
-        knitting_options_.output().delete_extra_files() &&
-        knitting_options_.output().output_to_file();
+        knitting_options_.output().delete_extra_files();
 }
 
 std::forward_list<dynamic::ownership_hierarchy> workflow::
@@ -120,7 +104,7 @@ void workflow::execute() const {
             return;
         }
 
-        middle_end_to_backend_workflow mbw(knitting_options_, rp, output_);
+        middle_end_to_backend_workflow mbw(knitting_options_, rp);
         mbw.execute(m);
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));

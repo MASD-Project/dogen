@@ -47,9 +47,6 @@ const std::string verbose_arg("--verbose");
 
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
-
-const std::string output_to_stdout_arg("--output-to-stdout");
-const std::string output_to_file_arg("--output-to-file");
 const std::string force_write_arg("--force-write");
 
 class help_mock {
@@ -238,39 +235,18 @@ BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
     const std::vector<std::string> o = { target_arg, target_value_arg };
     const auto so(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << so;
-
     BOOST_CHECK(!so.force_write());
-    BOOST_CHECK(so.output_to_file());
-    BOOST_CHECK(!so.output_to_stdout());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_output_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        output_to_stdout_arg,
-        output_to_file_arg,
         force_write_arg
     };
     const auto so(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << so;
-
     BOOST_CHECK(so.force_write());
-    BOOST_CHECK(so.output_to_file());
-    BOOST_CHECK(so.output_to_stdout());
-}
-
-BOOST_AUTO_TEST_CASE(supplying_output_to_std_out_disables_output_to_file) {
-    SETUP_TEST_LOG_SOURCE("supplying_output_to_std_out_disables_output_to_file");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        output_to_stdout_arg,
-    };
-    const auto so(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "options: " << so;
-
-    BOOST_CHECK(!so.output_to_file());
-    BOOST_CHECK(so.output_to_stdout());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_options_with_verbose_on) {

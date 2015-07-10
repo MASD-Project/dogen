@@ -38,8 +38,6 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::config::output_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("output_to_stdout", v.output_to_stdout_);
-    ar << make_nvp("output_to_file", v.output_to_file_);
     ar << make_nvp("delete_extra_files", v.delete_extra_files_);
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("ignore_patterns", v.ignore_patterns_);
@@ -49,8 +47,6 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::config::output_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("output_to_stdout", v.output_to_stdout_);
-    ar >> make_nvp("output_to_file", v.output_to_file_);
     ar >> make_nvp("delete_extra_files", v.delete_extra_files_);
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("ignore_patterns", v.ignore_patterns_);

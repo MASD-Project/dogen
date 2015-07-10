@@ -25,44 +25,32 @@ namespace config {
 
 stitching_options::stitching_options()
     : verbose_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)),
-      output_to_file_(static_cast<bool>(0)),
-      output_to_stdout_(static_cast<bool>(0)) { }
+      force_write_(static_cast<bool>(0)) { }
 
 stitching_options::stitching_options(stitching_options&& rhs)
     : verbose_(std::move(rhs.verbose_)),
       target_(std::move(rhs.target_)),
-      force_write_(std::move(rhs.force_write_)),
-      output_to_file_(std::move(rhs.output_to_file_)),
-      output_to_stdout_(std::move(rhs.output_to_stdout_)) { }
+      force_write_(std::move(rhs.force_write_)) { }
 
 stitching_options::stitching_options(
     const bool verbose,
     const boost::filesystem::path& target,
-    const bool force_write,
-    const bool output_to_file,
-    const bool output_to_stdout)
+    const bool force_write)
     : verbose_(verbose),
       target_(target),
-      force_write_(force_write),
-      output_to_file_(output_to_file),
-      output_to_stdout_(output_to_stdout) { }
+      force_write_(force_write) { }
 
 void stitching_options::swap(stitching_options& other) noexcept {
     using std::swap;
     swap(verbose_, other.verbose_);
     swap(target_, other.target_);
     swap(force_write_, other.force_write_);
-    swap(output_to_file_, other.output_to_file_);
-    swap(output_to_stdout_, other.output_to_stdout_);
 }
 
 bool stitching_options::operator==(const stitching_options& rhs) const {
     return verbose_ == rhs.verbose_ &&
         target_ == rhs.target_ &&
-        force_write_ == rhs.force_write_ &&
-        output_to_file_ == rhs.output_to_file_ &&
-        output_to_stdout_ == rhs.output_to_stdout_;
+        force_write_ == rhs.force_write_;
 }
 
 stitching_options& stitching_options::operator=(stitching_options other) {
@@ -101,22 +89,6 @@ bool stitching_options::force_write() const {
 
 void stitching_options::force_write(const bool v) {
     force_write_ = v;
-}
-
-bool stitching_options::output_to_file() const {
-    return output_to_file_;
-}
-
-void stitching_options::output_to_file(const bool v) {
-    output_to_file_ = v;
-}
-
-bool stitching_options::output_to_stdout() const {
-    return output_to_stdout_;
-}
-
-void stitching_options::output_to_stdout(const bool v) {
-    output_to_stdout_ = v;
 }
 
 } }

@@ -50,11 +50,9 @@ output_options_generator::output_options_generator() : position_(0) { }
 
 void output_options_generator::
 populate(const unsigned int position, result_type& v) {
-    v.output_to_stdout(create_bool(position + 0));
-    v.output_to_file(create_bool(position + 1));
-    v.delete_extra_files(create_bool(position + 2));
-    v.force_write(create_bool(position + 3));
-    v.ignore_patterns(create_std_vector_std_string(position + 4));
+    v.delete_extra_files(create_bool(position + 0));
+    v.force_write(create_bool(position + 1));
+    v.ignore_patterns(create_std_vector_std_string(position + 2));
 }
 
 output_options_generator::result_type

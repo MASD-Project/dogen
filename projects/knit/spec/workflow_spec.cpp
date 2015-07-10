@@ -145,42 +145,6 @@ BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
     BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual(), f));
 }
 
-BOOST_IGNORE_AUTO_TEST_CASE(stdout_option_generates_expected_output) {
-    SETUP_TEST_LOG("stdout_option_generates_expected_output");
-    auto s(empty_tds_mock_options());
-    auto fs(s.output());
-    fs.output_to_stdout(true);
-    fs.output_to_file(false);
-
-    s.output(fs);
-
-    // use a pointer to avoid -Wreturn-stack-address on clang
-    std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
-    auto lambda([&]() -> std::ostream& {return *stream;});
-
-    dogen::knit::workflow w(s, lambda);
-    w.execute();
-
-    const auto expected(dia_sml::expected_class_in_a_package_stdout_txt());
-    auto actual(dia_sml::actual_class_in_a_package_stdout_txt());
-
-    std::string contents(stream->str());
-    using dogen::utility::test_data::resolver;
-    const auto top_dir(resolver::resolve(boost::filesystem::path()));
-    boost::replace_all(contents, top_dir.generic_string(), empty);
-
-    using dogen::utility::filesystem::write_file_content;
-    write_file_content(actual, contents);
-
-    using dogen::utility::test::asserter;
-    BOOST_CHECK(asserter::assert_file(
-            dia_sml::expected_class_in_a_package_stdout_txt(),
-            dia_sml::actual_class_in_a_package_stdout_txt()));
-
-    typedef dogen::utility::test_data::empty_tds tds;
-    BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual()));
-}
-
 BOOST_IGNORE_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     SETUP_TEST_LOG("disabling_cpp_backend_results_in_no_cpp_output");
     auto s(empty_tds_mock_options());
@@ -518,16 +482,6 @@ BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_fi
 
     s = empty_tds_mock_options();
     auto os = s.output();
-    os.output_to_stdout(true);
-    os.output_to_file(false);
-    s.output(os);
-    std::unique_ptr<std::ostringstream> stream(new std::ostringstream());
-    auto lambda([&]() -> std::ostream& {return *stream;});
-    dogen::knit::workflow w3(s, lambda);
-    BOOST_CHECK(!w3.housekeeping_required());
-
-    s = empty_tds_mock_options();
-    os = s.output();
     os.delete_extra_files(false);
     s.output(os);
     dogen::knit::workflow w4(s);

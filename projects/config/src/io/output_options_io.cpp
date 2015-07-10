@@ -56,8 +56,6 @@ std::ostream& operator<<(std::ostream& s, const output_options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::config::output_options\"" << ", "
-      << "\"output_to_stdout\": " << v.output_to_stdout() << ", "
-      << "\"output_to_file\": " << v.output_to_file() << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"force_write\": " << v.force_write() << ", "
       << "\"ignore_patterns\": " << v.ignore_patterns()

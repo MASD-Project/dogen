@@ -38,15 +38,14 @@ namespace knit {
 
 middle_end_to_backend_workflow::
 middle_end_to_backend_workflow(const config::knitting_options& o,
-    const dynamic::repository& rp, const output_fn& of)
-    : knitting_options_(o), repository_(rp), output_(of) {}
+    const dynamic::repository& rp)
+    : knitting_options_(o), repository_(rp) { }
 
 bool middle_end_to_backend_workflow::housekeeping_required() const {
     return
         !knitting_options_.troubleshooting().stop_after_merging() &&
         !knitting_options_.troubleshooting().stop_after_formatting() &&
-        knitting_options_.output().delete_extra_files() &&
-        knitting_options_.output().output_to_file();
+        knitting_options_.output().delete_extra_files();
 }
 
 void middle_end_to_backend_workflow::
@@ -76,24 +75,10 @@ middle_end_to_backend_workflow::obtain_file_writers_activity() const {
         > r;
 
     const config::output_options& options(knitting_options_.output());
-    if (options.output_to_file()) {
-        const auto fw(options.force_write());
-        using dogen::formatters::filesystem_writer;
-        const auto w(std::make_shared<filesystem_writer>(fw));
-        r.push_front(w);
-    } else {
-        BOOST_LOG_SEV(lg, debug)
-            << "Outputting to file disabled, so ignoring it.";
-    }
-
-    if (options.output_to_stdout()) {
-        using dogen::formatters::stream_writer;
-        const auto w(std::make_shared<stream_writer>(output_()));
-        r.push_front(w);
-    } else {
-        BOOST_LOG_SEV(lg, debug)
-            << "Outputting to stream disabled, so ignoring it.";
-    }
+    const auto fw(options.force_write());
+    using dogen::formatters::filesystem_writer;
+    const auto w(std::make_shared<filesystem_writer>(fw));
+    r.push_front(w);
 
     return r;
 }

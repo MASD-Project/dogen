@@ -40,8 +40,6 @@ void save(Archive& ar,
     ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("target", v.target_.generic_string());
     ar << make_nvp("force_write", v.force_write_);
-    ar << make_nvp("output_to_file", v.output_to_file_);
-    ar << make_nvp("output_to_stdout", v.output_to_stdout_);
 }
 
 template<typename Archive>
@@ -53,8 +51,6 @@ void load(Archive& ar,
     ar >> make_nvp("target", target_tmp);
     v.target_ = target_tmp;
     ar >> make_nvp("force_write", v.force_write_);
-    ar >> make_nvp("output_to_file", v.output_to_file_);
-    ar >> make_nvp("output_to_stdout", v.output_to_stdout_);
 }
 
 } }

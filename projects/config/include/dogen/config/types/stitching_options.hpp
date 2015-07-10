@@ -47,9 +47,7 @@ public:
     stitching_options(
         const bool verbose,
         const boost::filesystem::path& target,
-        const bool force_write,
-        const bool output_to_file,
-        const bool output_to_stdout);
+        const bool force_write);
 
 private:
     template<typename Archive>
@@ -70,12 +68,6 @@ public:
     bool force_write() const;
     void force_write(const bool v);
 
-    bool output_to_file() const;
-    void output_to_file(const bool v);
-
-    bool output_to_stdout() const;
-    void output_to_stdout(const bool v);
-
 public:
     bool operator==(const stitching_options& rhs) const;
     bool operator!=(const stitching_options& rhs) const {
@@ -90,8 +82,6 @@ private:
     bool verbose_;
     boost::filesystem::path target_;
     bool force_write_;
-    bool output_to_file_;
-    bool output_to_stdout_;
 };
 
 } }

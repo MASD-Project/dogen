@@ -28,7 +28,6 @@
 #include <map>
 #include <string>
 #include <ostream>
-#include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/knitting_options.hpp"
@@ -45,12 +44,8 @@ namespace knit {
  */
 class middle_end_to_backend_workflow {
 public:
-    typedef std::function<std::ostream& ()> output_fn;
-
-public:
     middle_end_to_backend_workflow(const config::knitting_options& o,
-        const dynamic::repository& rp,
-        const output_fn& of);
+        const dynamic::repository& rp);
 
 public: // public section for testing purposes only
     /**
@@ -94,7 +89,6 @@ public:
 private:
     const config::knitting_options& knitting_options_;
     const dynamic::repository& repository_;
-    const output_fn output_;
 };
 
 } }

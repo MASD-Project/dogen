@@ -40,8 +40,6 @@ const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 const std::string target_arg("target");
 const std::string force_write_arg("force-write");
-const std::string output_to_stdout_arg("output-to-stdout");
-const std::string output_to_file_arg("output-to-file");
 
 }
 
@@ -95,11 +93,7 @@ program_options_parser::output_options_factory() const {
     boost::program_options::options_description r("Output options");
     r.add_options()
         ("force-write", "Always write to file even when there are"
-            " no differences")
-        ("output-to-file", "Create files. Disabled by default if "
-            "output-to-stdout is chosen.")
-        ("output-to-stdout", "Output generated code to standard output. "
-            "Disables output-to-file by default.");
+            " no differences");
 
     return r;
 }
@@ -170,8 +164,6 @@ transform_options(const variables_map& vm) const {
 
     r.target(vm[target_arg].as<std::string>());
     r.force_write(vm.count(force_write_arg));
-    r.output_to_stdout(vm.count(output_to_stdout_arg));
-    r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
     return r;
 }
 

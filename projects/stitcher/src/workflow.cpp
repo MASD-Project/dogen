@@ -96,13 +96,6 @@ void workflow::initialise_logging_activity(const config::stitching_options& o) {
 
 void workflow::stitch_activity(const config::stitching_options& o) const {
     BOOST_LOG_SEV(lg, info) << stitcher_product << " started.";
-    if (o.output_to_stdout()) {
-        // auto lambda([]() -> std::ostream& {return std::cout;});
-        // stitch::workflow w(o, lambda);
-        // w.execute();
-        BOOST_LOG_SEV(lg, info) << stitcher_product << " finished.";
-    }
-
     stitch::workflow w;
     w.execute(o.target());
     BOOST_LOG_SEV(lg, info) << stitcher_product << " finished.";

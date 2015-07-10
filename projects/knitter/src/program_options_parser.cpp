@@ -85,8 +85,6 @@ const std::string target_arg("target");
 const std::string external_module_path_arg("external-module-path");
 const std::string reference_arg("reference");
 
-const std::string output_to_stdout_arg("output-to-stdout");
-const std::string output_to_file_arg("output-to-file");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -424,8 +422,6 @@ transform_troubleshooting_options(const variables_map& vm) const {
 config::output_options program_options_parser::
 transform_output_options(const variables_map& vm) const {
     config::output_options r;
-    r.output_to_stdout(vm.count(output_to_stdout_arg));
-    r.output_to_file(vm.count(output_to_file_arg) || !r.output_to_stdout());
     r.delete_extra_files(vm.count(delete_extra_files_arg));
     if (vm.count(ignore_files_matching_regex_arg)) {
         r.ignore_patterns(

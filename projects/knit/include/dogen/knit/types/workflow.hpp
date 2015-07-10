@@ -76,7 +76,6 @@ public:
 public:
     workflow(workflow&& rhs);
     explicit workflow(const config::knitting_options& s);
-    workflow(const config::knitting_options& s, const output_fn& o);
 
 public: // public section for testing purposes only
     /**
@@ -107,7 +106,6 @@ public:
 
 private:
     const config::knitting_options knitting_options_;
-    const output_fn output_;
 };
 
 } }

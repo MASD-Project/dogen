@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 10:55]
+#+CAPTION: Clock summary at [2015-07-10 Fri 11:16]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:45* |       |      |
+| *Total time*                                                                | *18:05* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:45   |       |      |
-| Active                                                                      |         | 17:45 |      |
+| Stories                                                                     | 18:05   |       |      |
+| Active                                                                      |         | 18:05 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -39,7 +39,8 @@
 | COMPLETED Managed directories is not correct in new world                   |         |       | 0:06 |
 | COMPLETED Remove unused command line options                                |         |       | 0:58 |
 | COMPLETED Remove unused classes in cpp model                                |         |       | 0:05 |
-| STARTED Remove support for empty model name                                 |         |       | 0:28 |
+| COMPLETED Remove support for empty model name                               |         |       | 0:28 |
+| COMPLETED Remove ability to output to stdout                                |         |       | 0:20 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -210,11 +211,19 @@ should be able to remove them from the config model.
 We need to remove all of the old world classes we had in the =cpp=
 model such as content descriptor, project, etc.
 
-*** STARTED Remove support for empty model name                       :story:
+*** COMPLETED Remove support for empty model name                     :story:
+    CLOSED: [2015-07-10 Fri 10:57]
     CLOCK: [2015-07-10 Fri 10:27]--[2015-07-10 Fri 10:55] =>  0:28
 
 One of the features we had originally added but for which we do not
 have any use cases. Ability to have a model with an empty name.
+
+*** COMPLETED Remove ability to output to stdout                      :story:
+    CLOSED: [2015-07-10 Fri 11:16]
+    CLOCK: [2015-07-10 Fri 10:56]--[2015-07-10 Fri 11:16] =>  0:20
+
+One of the features we had originally added but for which we do not
+have any use cases. Ability to output generated code to stdout.
 
 *** Handling of managed directories is incorrect                      :story:
 
@@ -537,6 +546,15 @@ We still have a couple of skeleton interfaces:
 - primitve
 - concepts
 
+*** Factor all =housekeeping_required= methods into one               :story:
+
+In knit model we seem to have several of these: =housekeeping_required=.
+
+*** Remove generation failure exception in knit                       :story:
+
+At present we have two types of exceptions in knit: workflow error and
+generation failure. We should only have one type.
+
 *** Remove unused features                                             :epic:
 
 At the very start of dogen we added a number of features that we
@@ -548,12 +566,14 @@ stories to remove them.
 We may have to split this story into several but we should at least
 trim down the obvious ones:
 
-- empty model name
-- split project (or vice-versa, whichever one we don't use).
+- empty model name (done)
 - output to stdout
+- split project (or vice-versa, whichever one we don't use).
 - remove repository, factory, stereotypes
 - keys, entities
 - removing cpp backend?
+- delete extra files: we always do so why make it optional.
+- force write: we never do.
 - etc.
 
 Basically any feature which we are not using at present and cannot
@@ -804,7 +824,6 @@ See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/a
 
 
 ** Deprecated
-
 *** CANCELLED Injection framework                                      :epic:
     CLOSED: [2015-07-09 Thu 21:26]
 

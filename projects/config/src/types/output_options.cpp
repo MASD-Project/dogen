@@ -24,36 +24,26 @@ namespace dogen {
 namespace config {
 
 output_options::output_options()
-    : output_to_stdout_(static_cast<bool>(0)),
-      output_to_file_(static_cast<bool>(0)),
-      delete_extra_files_(static_cast<bool>(0)),
+    : delete_extra_files_(static_cast<bool>(0)),
       force_write_(static_cast<bool>(0)) { }
 
 output_options::output_options(
-    const bool output_to_stdout,
-    const bool output_to_file,
     const bool delete_extra_files,
     const bool force_write,
     const std::vector<std::string>& ignore_patterns)
-    : output_to_stdout_(output_to_stdout),
-      output_to_file_(output_to_file),
-      delete_extra_files_(delete_extra_files),
+    : delete_extra_files_(delete_extra_files),
       force_write_(force_write),
       ignore_patterns_(ignore_patterns) { }
 
 void output_options::swap(output_options& other) noexcept {
     using std::swap;
-    swap(output_to_stdout_, other.output_to_stdout_);
-    swap(output_to_file_, other.output_to_file_);
     swap(delete_extra_files_, other.delete_extra_files_);
     swap(force_write_, other.force_write_);
     swap(ignore_patterns_, other.ignore_patterns_);
 }
 
 bool output_options::operator==(const output_options& rhs) const {
-    return output_to_stdout_ == rhs.output_to_stdout_ &&
-        output_to_file_ == rhs.output_to_file_ &&
-        delete_extra_files_ == rhs.delete_extra_files_ &&
+    return delete_extra_files_ == rhs.delete_extra_files_ &&
         force_write_ == rhs.force_write_ &&
         ignore_patterns_ == rhs.ignore_patterns_;
 }
@@ -62,22 +52,6 @@ output_options& output_options::operator=(output_options other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool output_options::output_to_stdout() const {
-    return output_to_stdout_;
-}
-
-void output_options::output_to_stdout(const bool v) {
-    output_to_stdout_ = v;
-}
-
-bool output_options::output_to_file() const {
-    return output_to_file_;
-}
-
-void output_options::output_to_file(const bool v) {
-    output_to_file_ = v;
 }
 
 bool output_options::delete_extra_files() const {

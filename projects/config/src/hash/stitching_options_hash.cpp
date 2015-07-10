@@ -45,8 +45,6 @@ std::size_t stitching_options_hasher::hash(const stitching_options& v) {
     combine(seed, v.verbose());
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.force_write());
-    combine(seed, v.output_to_file());
-    combine(seed, v.output_to_stdout());
 
     return seed;
 }

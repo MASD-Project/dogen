@@ -36,9 +36,7 @@ std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
       << "\"__type__\": " << "\"dogen::config::stitching_options\"" << ", "
       << "\"verbose\": " << v.verbose() << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"force_write\": " << v.force_write() << ", "
-      << "\"output_to_file\": " << v.output_to_file() << ", "
-      << "\"output_to_stdout\": " << v.output_to_stdout()
+      << "\"force_write\": " << v.force_write()
       << " }";
     return(s);
 }

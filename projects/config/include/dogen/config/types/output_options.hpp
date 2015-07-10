@@ -44,8 +44,6 @@ public:
 
 public:
     output_options(
-        const bool output_to_stdout,
-        const bool output_to_file,
         const bool delete_extra_files,
         const bool force_write,
         const std::vector<std::string>& ignore_patterns);
@@ -58,22 +56,6 @@ private:
     friend void boost::serialization::load(Archive& ar, output_options& v, unsigned int version);
 
 public:
-    /**
-     * @brief Output generated code to standard output.
-     */
-    /**@{*/
-    bool output_to_stdout() const;
-    void output_to_stdout(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Output generated code to files.
-     */
-    /**@{*/
-    bool output_to_file() const;
-    void output_to_file(const bool v);
-    /**@}*/
-
     /**
      * @brief Delete any extra files found in managed directories.
      */
@@ -112,8 +94,6 @@ public:
     output_options& operator=(output_options other);
 
 private:
-    bool output_to_stdout_;
-    bool output_to_file_;
     bool delete_extra_files_;
     bool force_write_;
     std::vector<std::string> ignore_patterns_;

@@ -85,8 +85,6 @@ const std::string cpp_include_arg("--cpp-include-dir");
 const std::string cpp_include_value_arg("some_include");
 const std::string cpp_disable_cmakelists_arg("--cpp-disable-cmakelists");
 
-const std::string output_to_stdout_arg("--output-to-stdout");
-const std::string output_to_file_arg("--output-to-file");
 const std::string delete_extra_files_arg("--delete-extra-files");
 const std::string force_write_arg("--force-write");
 
@@ -554,8 +552,6 @@ BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto oo(ko.output());
-    BOOST_CHECK(oo.output_to_file());
-    BOOST_CHECK(!oo.output_to_stdout());
     BOOST_CHECK(!oo.delete_extra_files());
     BOOST_CHECK(!oo.force_write());
 }
@@ -564,8 +560,6 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_output_options_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        output_to_stdout_arg,
-        output_to_file_arg,
         delete_extra_files_arg,
         force_write_arg
     };
@@ -573,24 +567,8 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto oo(ko.output());
-    BOOST_CHECK(oo.output_to_file());
-    BOOST_CHECK(oo.output_to_stdout());
     BOOST_CHECK(oo.delete_extra_files());
     BOOST_CHECK(oo.force_write());
-}
-
-BOOST_AUTO_TEST_CASE(supplying_output_to_std_out_disables_output_to_file) {
-    SETUP_TEST_LOG_SOURCE("supplying_output_to_std_out_disables_output_to_file");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        output_to_stdout_arg,
-    };
-    const auto ko(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto oo(ko.output());
-    BOOST_CHECK(!oo.output_to_file());
-    BOOST_CHECK(oo.output_to_stdout());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_options_with_verbose_on) {

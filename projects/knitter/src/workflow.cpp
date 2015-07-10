@@ -97,13 +97,6 @@ void workflow::initialise_logging_activity(const config::knitting_options& o) {
 
 void workflow::knit_activity(const config::knitting_options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
-    if (o.output().output_to_stdout()) {
-        auto lambda([]() -> std::ostream& {return std::cout;});
-        knit::workflow w(o, lambda);
-        w.execute();
-        BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
-    }
-
     knit::workflow w(o);
     w.execute();
     BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";

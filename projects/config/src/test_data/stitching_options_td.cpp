@@ -46,8 +46,6 @@ populate(const unsigned int position, result_type& v) {
     v.verbose(create_bool(position + 0));
     v.target(create_boost_filesystem_path(position + 1));
     v.force_write(create_bool(position + 2));
-    v.output_to_file(create_bool(position + 3));
-    v.output_to_stdout(create_bool(position + 4));
 }
 
 stitching_options_generator::result_type
