@@ -49,8 +49,7 @@ public:
 public:
     frontend_settings(
         const bool save_pre_processed_input,
-        const boost::filesystem::path& pre_processed_input_path,
-        const bool disable_model_module);
+        const boost::filesystem::path& pre_processed_input_path);
 
 private:
     template<typename Archive>
@@ -83,14 +82,6 @@ public:
     void pre_processed_input_path(const boost::filesystem::path&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the model module is not generated.
-     */
-    /**@{*/
-    bool disable_model_module() const;
-    void disable_model_module(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const frontend_settings& rhs) const;
     bool operator!=(const frontend_settings& rhs) const {
@@ -104,7 +95,6 @@ public:
 private:
     bool save_pre_processed_input_;
     boost::filesystem::path pre_processed_input_path_;
-    bool disable_model_module_;
 };
 
 } }

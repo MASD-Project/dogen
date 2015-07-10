@@ -24,33 +24,27 @@ namespace dogen {
 namespace frontend {
 
 frontend_settings::frontend_settings()
-    : save_pre_processed_input_(static_cast<bool>(0)),
-      disable_model_module_(static_cast<bool>(0)) { }
+    : save_pre_processed_input_(static_cast<bool>(0)) { }
 
 frontend_settings::frontend_settings(frontend_settings&& rhs)
     : save_pre_processed_input_(std::move(rhs.save_pre_processed_input_)),
-      pre_processed_input_path_(std::move(rhs.pre_processed_input_path_)),
-      disable_model_module_(std::move(rhs.disable_model_module_)) { }
+      pre_processed_input_path_(std::move(rhs.pre_processed_input_path_)) { }
 
 frontend_settings::frontend_settings(
     const bool save_pre_processed_input,
-    const boost::filesystem::path& pre_processed_input_path,
-    const bool disable_model_module)
+    const boost::filesystem::path& pre_processed_input_path)
     : save_pre_processed_input_(save_pre_processed_input),
-      pre_processed_input_path_(pre_processed_input_path),
-      disable_model_module_(disable_model_module) { }
+      pre_processed_input_path_(pre_processed_input_path) { }
 
 void frontend_settings::swap(frontend_settings& other) noexcept {
     using std::swap;
     swap(save_pre_processed_input_, other.save_pre_processed_input_);
     swap(pre_processed_input_path_, other.pre_processed_input_path_);
-    swap(disable_model_module_, other.disable_model_module_);
 }
 
 bool frontend_settings::operator==(const frontend_settings& rhs) const {
     return save_pre_processed_input_ == rhs.save_pre_processed_input_ &&
-        pre_processed_input_path_ == rhs.pre_processed_input_path_ &&
-        disable_model_module_ == rhs.disable_model_module_;
+        pre_processed_input_path_ == rhs.pre_processed_input_path_;
 }
 
 frontend_settings& frontend_settings::operator=(frontend_settings other) {
@@ -81,14 +75,6 @@ void frontend_settings::pre_processed_input_path(const boost::filesystem::path& 
 
 void frontend_settings::pre_processed_input_path(const boost::filesystem::path&& v) {
     pre_processed_input_path_ = std::move(v);
-}
-
-bool frontend_settings::disable_model_module() const {
-    return disable_model_module_;
-}
-
-void frontend_settings::disable_model_module(const bool v) {
-    disable_model_module_ = v;
 }
 
 } }

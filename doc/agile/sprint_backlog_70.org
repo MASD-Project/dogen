@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 10:20]
+#+CAPTION: Clock summary at [2015-07-10 Fri 10:55]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:12* |       |      |
+| *Total time*                                                                | *17:45* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:12   |       |      |
-| Active                                                                      |         | 17:12 |      |
+| Stories                                                                     | 17:45   |       |      |
+| Active                                                                      |         | 17:45 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -38,6 +38,8 @@
 | COMPLETED Remove knit backends and use backend model instead                |         |       | 1:42 |
 | COMPLETED Managed directories is not correct in new world                   |         |       | 0:06 |
 | COMPLETED Remove unused command line options                                |         |       | 0:58 |
+| COMPLETED Remove unused classes in cpp model                                |         |       | 0:05 |
+| STARTED Remove support for empty model name                                 |         |       | 0:28 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -207,6 +209,12 @@ should be able to remove them from the config model.
 
 We need to remove all of the old world classes we had in the =cpp=
 model such as content descriptor, project, etc.
+
+*** STARTED Remove support for empty model name                       :story:
+    CLOCK: [2015-07-10 Fri 10:27]--[2015-07-10 Fri 10:55] =>  0:28
+
+One of the features we had originally added but for which we do not
+have any use cases. Ability to have a model with an empty name.
 
 *** Handling of managed directories is incorrect                      :story:
 
@@ -541,7 +549,7 @@ We may have to split this story into several but we should at least
 trim down the obvious ones:
 
 - empty model name
-- split project
+- split project (or vice-versa, whichever one we don't use).
 - output to stdout
 - remove repository, factory, stereotypes
 - keys, entities
@@ -550,6 +558,12 @@ trim down the obvious ones:
 
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
+
+*** Create knitter options for each frontend                          :story:
+
+At present some knitting options are specific to a frontend
+(particularly in troubleshooting). We should create different classes
+to represent options on a per fronend basis.
 
 *** Model groups and multi-language support                           :story:
 
@@ -904,3 +918,19 @@ should stick with what we got for valgrind, and use travis etc for any
 new developments.
 
 We need to be able to build Linux clang 32-bit and 64-bit again.
+*** CANCELLED Handle unnamed models properly                          :story:
+    CLOSED: [2015-07-10 Fri 10:48]
+
+*Rationale*: we do not have a use case for this.
+
+The option disable model name was meant to allow the generation of
+flat models, without any folders or namespaces for the model
+name. However, as a side-effect, this also means the artefacts being
+generated do not have any names. This resulted in the creation of a
+libSTATIC, purely because the next command in the cmake add_library is
+STATIC (e.g. static library). As a quick hack, when an empty model
+name is detected, a model named "unnamed_model" is created.
+
+The correct solution for this is to have a flag (or flags) at the SML
+level which state whether to use the model name for folders, packages,
+etc. The view model generation will then take this into account.

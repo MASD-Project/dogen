@@ -37,7 +37,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/two_layers_with_objects/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/dmp/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc
     ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_association/include
@@ -92,7 +91,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dmp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association)
@@ -118,20 +116,12 @@ foreach(dia_model ${all_dia_test_models})
     set(top_dir "${stage_test_data_dir}/${model_name}")
 
     set(model_folder_name "${model_name}")
-    if (model_name STREQUAL "disable_model_package")
-        set(model_folder_name "dmp")
-    endif()
-
     set(actual_dir "${top_dir}/actual/${model_folder_name}")
     set(expected_dir "${top_dir}/expected/${model_folder_name}")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
     if(EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
-        if (model_name STREQUAL "disable_model_package")
-            set(main_target_name "unnamed_model")
-        endif()
-
         if (NOT ignore_dependencies)
             add_dependencies(build_test_models ${main_target_name})
         endif()
@@ -176,10 +166,6 @@ foreach(dia_model ${all_dia_test_models})
     endif()
 
     set(model_folder_name "${model_name}")
-    if (model_name STREQUAL "disable_model_package")
-        set(model_folder_name "dmp")
-    endif()
-
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
     if(IS_DIRECTORY "${git_dir}")
         file(COPY "${git_dir}" DESTINATION "${expected_dir}")

@@ -1695,7 +1695,7 @@
         <dia:point val="95,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,-12.05;114.8,-7.55"/>
+        <dia:rectangle val="94.95,-12.05;114.8,-8.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="95,-12"/>
@@ -1704,7 +1704,7 @@
         <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#frontend_settings#</dia:string>
@@ -1834,29 +1834,6 @@ we are reading an SML representation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Full path to use for the frontend's pre-processed input.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#disable_model_module#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the model module is not generated.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

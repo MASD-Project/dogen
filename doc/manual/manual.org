@@ -863,7 +863,6 @@ they got added to dogen):
   facets are enabled.
 - =enumeration=: tests the generation of enumerations.
 - =exception=: tests the generation of exception classes.
-- =dmp=: tests models without a package for the model name.
 - =split_project=: tests splitting the include and source directories.
 - =boost_model=: tests all of the supported boost types.
 - =std_model=: tests all of the supported standard library types.
@@ -1214,8 +1213,8 @@ A text similar to the below will come up:
 
 : Dogen - the domain generator.
 : Generates domain objects from a Dia diagram.
-: 
-: 
+:
+:
 : General options:
 :  -h [ --help ]         Display this help and exit.
 :  --version             Output version information and exit.
@@ -1350,7 +1349,7 @@ C++ "Hello World":
 
 : #include <iostream>
 : #include "hello_world/types/one_property.hpp"
-: 
+:
 : int main() {
 :     hello_world::one_property op("hello world!");
 :     std::cout << op.property() << std::endl;
@@ -1475,10 +1474,10 @@ this is what =git status= tells us:
 : Changes not staged for commit:
 :   (use "git add <file>..." to update what will be committed)
 :   (use "git checkout -- <file>..." to discard changes in working directory)
-: 
+:
 :  modified:   hello_world.dia
 :  modified:   hello_world/include/hello_world/types/one_property.hpp
-: 
+:
 : no changes added to commit (use "git add" and/or "git commit -a")
 
 But are these the expected changes? Again, =git diff= comes to the
@@ -1612,13 +1611,13 @@ generated it. It all looks fine from git:
 : Changes not staged for commit:
 :   (use "git add <file>..." to update what will be committed)
 :   (use "git checkout -- <file>..." to discard changes in working directory)
-: 
+:
 :   modified:   hello_world.dia
 :   modified:   hello_world/include/hello_world/types/all.hpp
-: 
+:
 : Untracked files:
 :   (use "git add <file>..." to include in what will be committed)
-: 
+:
 :   hello_world/include/hello_world/types/two_properties.hpp
 :   hello_world/include/hello_world/types/two_properties_fwd.hpp
 :   hello_world/src/types/two_properties.cpp
@@ -1633,11 +1632,11 @@ at the git output after we removed the new class:
 : On branch master
 : Untracked files:
 :   (use "git add <file>..." to include in what will be committed)
-: 
+:
 :   hello_world/include/hello_world/types/two_properties.hpp
 :   hello_world/include/hello_world/types/two_properties_fwd.hpp
 :   hello_world/src/types/two_properties.cpp
-: 
+:
 : nothing added to commit but untracked files present (use "git add" to track)
 
 Dogen got rid of all the changes to the /existing/ files, but left the
@@ -1712,9 +1711,9 @@ Then we'll code generate and check git:
 : Changes not staged for commit:
 :  (use "git add/rm <file>..." to update what will be committed)
 :  (use "git checkout -- <file>..." to discard changes in working directory)
-: 
+:
 : deleted:    hello_world/my_function.cpp
-: 
+:
 : no changes added to commit (use "git add" and/or "git commit -a")
 
 Again you can see the usefulness of committing early and often:
@@ -1757,9 +1756,9 @@ sensible:
 : Changes not staged for commit:
 :   (use "git add <file>..." to update what will be committed)
 :   (use "git checkout -- <file>..." to discard changes in working directory)
-: 
+:
 : modified:   CMakeLists.txt
-: 
+:
 : no changes added to commit (use "git add" and/or "git commit -a")
 
 The file was not deleted this time round.

@@ -14,9 +14,7 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
 
     {
         fa.make_annotation_preamble(s.general_settings());
-        const std::string mn(s.model_name().empty() ?
-            "unnamed_model" : s.model_name());
-
+        const std::string mn(s.model_name());
 #>
 set(all_files "")
 file(GLOB_RECURSE all_files RELATIVE

@@ -57,10 +57,7 @@ generate(const dynamic::workflow& w, const input_descriptor& d,
     dia::hydrator h(d.path());
     dia::diagram diagram(h.hydrate());
 
-    const bool dmp(s.disable_model_module());
-    const std::string model_name(d.path().stem().string());
-    const std::string name(dmp ? empty : model_name);
-
+    const std::string name(d.path().stem().string());
     if (s.save_pre_processed_input()) {
         dia::persister p;
         p.persist(diagram, s.pre_processed_input_path());

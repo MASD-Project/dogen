@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/config/io/reference_io.hpp"
 #include "dogen/config/io/input_options_io.hpp"
@@ -49,18 +48,11 @@ namespace dogen {
 namespace config {
 
 std::ostream& operator<<(std::ostream& s, const input_options& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::config::input_options\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"disable_model_module\": " << v.disable_model_module()
+      << "\"references\": " << v.references()
       << " }";
     return(s);
 }

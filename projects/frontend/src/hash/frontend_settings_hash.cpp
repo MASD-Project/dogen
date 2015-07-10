@@ -44,7 +44,6 @@ std::size_t frontend_settings_hasher::hash(const frontend_settings& v) {
 
     combine(seed, v.save_pre_processed_input());
     combine(seed, hash_boost_filesystem_path(v.pre_processed_input_path()));
-    combine(seed, v.disable_model_module());
 
     return seed;
 }

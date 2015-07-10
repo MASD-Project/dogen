@@ -45,7 +45,6 @@ void frontend_settings_generator::
 populate(const unsigned int position, result_type& v) {
     v.save_pre_processed_input(create_bool(position + 0));
     v.pre_processed_input_path(create_boost_filesystem_path(position + 1));
-    v.disable_model_module(create_bool(position + 2));
 }
 
 frontend_settings_generator::result_type

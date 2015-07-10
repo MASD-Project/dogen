@@ -43,7 +43,6 @@ void save(Archive& ar,
     ar << make_nvp("target", v.target_.generic_string());
     ar << make_nvp("external_module_path", v.external_module_path_);
     ar << make_nvp("references", v.references_);
-    ar << make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 template<typename Archive>
@@ -55,7 +54,6 @@ void load(Archive& ar,
     v.target_ = target_tmp;
     ar >> make_nvp("external_module_path", v.external_module_path_);
     ar >> make_nvp("references", v.references_);
-    ar >> make_nvp("disable_model_module", v.disable_model_module_);
 }
 
 } }

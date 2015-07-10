@@ -54,8 +54,6 @@ const std::string empty_module_path;
 const std::string test_module("knit");
 const std::string test_suite("workflow_spec");
 const std::string module_path("dogen::test_models");
-const std::string module_path_disabled_model_module("dogen::test_models::dmp");
-const std::string extra_folder("dmp");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string io_facet_and_integrated_io_error(
     "Integrated IO cannot be used with the IO facet");
@@ -226,28 +224,6 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
         });
 
     const auto t(dia_sml::input_disable_facet_folders_dia());
-    BOOST_CHECK(check_code_generation(t, lambda));
-}
-
-BOOST_AUTO_TEST_CASE(disable_model_module_generates_expected_code) {
-    SETUP_TEST_LOG("disable_model_module_generates_expected_code");
-    using dogen::config::knitting_options;
-    using dogen::utility::test_data::codegen_tds;
-    auto lambda([](codegen_tds tds) -> knitting_options {
-            auto s(default_mock_options(tds));
-            auto cs(s.cpp());
-            cs.project_directory_path(
-                cs.project_directory_path() /= extra_folder);
-            s.cpp(cs);
-
-            auto is(s.input());
-            is.disable_model_module(true);
-            is.external_module_path(module_path_disabled_model_module);
-            s.input(is);
-            return s;
-        });
-
-    const auto t(dia_sml::input_disable_model_package_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 

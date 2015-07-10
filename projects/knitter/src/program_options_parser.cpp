@@ -84,7 +84,6 @@ const std::string cpp_disable_cmakelists_arg("cpp-disable-cmakelists");
 const std::string target_arg("target");
 const std::string external_module_path_arg("external-module-path");
 const std::string reference_arg("reference");
-const std::string disable_model_module("disable-model-module");
 
 const std::string output_to_stdout_arg("output-to-stdout");
 const std::string output_to_file_arg("output-to-file");
@@ -162,9 +161,7 @@ program_options_parser::modeling_options_factory() const {
         ("reference,r",
             value<std::vector<std::string> >(),
             "Dia diagrams that our target diagram depends on."
-            "If required you can add the module path: file,PP.")
-        ("disable-model-module",
-            "Do not generate a top-level module with the model name.");
+            "If required you can add the module path: file,PP.");
 
     return r;
 }
@@ -387,7 +384,6 @@ config::input_options program_options_parser::transform_input_options(
         }
         r.references(references);
     }
-    r.disable_model_module(vm.count(disable_model_module));
 
     return r;
 }

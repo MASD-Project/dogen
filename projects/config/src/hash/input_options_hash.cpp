@@ -54,7 +54,6 @@ std::size_t input_options_hasher::hash(const input_options& v) {
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.external_module_path());
     combine(seed, hash_std_vector_dogen_config_reference(v.references()));
-    combine(seed, v.disable_model_module());
 
     return seed;
 }

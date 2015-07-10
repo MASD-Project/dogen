@@ -2986,7 +2986,6 @@ merged:
 - disable_cmakelists
 - disable_facet_folders
 - disable_full_ctor
-- dmp
 - enable_facet_domain
 - enable_facet_hash
 - enable_facet_io
@@ -3925,20 +3924,6 @@ properties with the same name.
 For some reason we are unable to compile the serialisation test for
 the test model which focuses only on the serialisation facet. Test is
 ignored for the moment.
-
-*** Handle unnamed models properly                                    :story:
-
-The option disable model name was meant to allow the generation of
-flat models, without any folders or namespaces for the model
-name. However, as a side-effect, this also means the artefacts being
-generated do not have any names. This resulted in the creation of a
-libSTATIC, purely because the next command in the cmake add_library is
-STATIC (e.g. static library). As a quick hack, when an empty model
-name is detected, a model named "unnamed_model" is created.
-
-The correct solution for this is to have a flag (or flags) at the SML
-level which state whether to use the model name for folders, packages,
-etc. The view model generation will then take this into account.
 
 *** Missing =enable_facet_XYZ= tests                                  :story:
 

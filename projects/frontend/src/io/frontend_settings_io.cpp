@@ -35,8 +35,7 @@ std::ostream& operator<<(std::ostream& s, const frontend_settings& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::frontend::frontend_settings\"" << ", "
       << "\"save_pre_processed_input\": " << v.save_pre_processed_input() << ", "
-      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\"" << ", "
-      << "\"disable_model_module\": " << v.disable_model_module()
+      << "\"pre_processed_input_path\": " << "\"" << v.pre_processed_input_path().generic_string() << "\""
       << " }";
     return(s);
 }

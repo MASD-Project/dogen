@@ -40,11 +40,9 @@ namespace config {
  */
 class input_options final {
 public:
+    input_options() = default;
     input_options(const input_options&) = default;
     ~input_options() = default;
-
-public:
-    input_options();
 
 public:
     input_options(input_options&& rhs);
@@ -53,8 +51,7 @@ public:
     input_options(
         const boost::filesystem::path& target,
         const std::string& external_module_path,
-        const std::vector<dogen::config::reference>& references,
-        const bool disable_model_module);
+        const std::vector<dogen::config::reference>& references);
 
 private:
     template<typename Archive>
@@ -95,14 +92,6 @@ public:
     void references(const std::vector<dogen::config::reference>&& v);
     /**@}*/
 
-    /**
-     * @brief Do not generate a top-level module with the model name.
-     */
-    /**@{*/
-    bool disable_model_module() const;
-    void disable_model_module(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const input_options& rhs) const;
     bool operator!=(const input_options& rhs) const {
@@ -117,7 +106,6 @@ private:
     boost::filesystem::path target_;
     std::string external_module_path_;
     std::vector<dogen::config::reference> references_;
-    bool disable_model_module_;
 };
 
 } }

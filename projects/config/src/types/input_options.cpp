@@ -23,38 +23,30 @@
 namespace dogen {
 namespace config {
 
-input_options::input_options()
-    : disable_model_module_(static_cast<bool>(0)) { }
-
 input_options::input_options(input_options&& rhs)
     : target_(std::move(rhs.target_)),
       external_module_path_(std::move(rhs.external_module_path_)),
-      references_(std::move(rhs.references_)),
-      disable_model_module_(std::move(rhs.disable_model_module_)) { }
+      references_(std::move(rhs.references_)) { }
 
 input_options::input_options(
     const boost::filesystem::path& target,
     const std::string& external_module_path,
-    const std::vector<dogen::config::reference>& references,
-    const bool disable_model_module)
+    const std::vector<dogen::config::reference>& references)
     : target_(target),
       external_module_path_(external_module_path),
-      references_(references),
-      disable_model_module_(disable_model_module) { }
+      references_(references) { }
 
 void input_options::swap(input_options& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(external_module_path_, other.external_module_path_);
     swap(references_, other.references_);
-    swap(disable_model_module_, other.disable_model_module_);
 }
 
 bool input_options::operator==(const input_options& rhs) const {
     return target_ == rhs.target_ &&
         external_module_path_ == rhs.external_module_path_ &&
-        references_ == rhs.references_ &&
-        disable_model_module_ == rhs.disable_model_module_;
+        references_ == rhs.references_;
 }
 
 input_options& input_options::operator=(input_options other) {
@@ -109,14 +101,6 @@ void input_options::references(const std::vector<dogen::config::reference>& v) {
 
 void input_options::references(const std::vector<dogen::config::reference>&& v) {
     references_ = std::move(v);
-}
-
-bool input_options::disable_model_module() const {
-    return disable_model_module_;
-}
-
-void input_options::disable_model_module(const bool v) {
-    disable_model_module_ = v;
 }
 
 } }

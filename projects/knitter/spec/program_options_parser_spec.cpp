@@ -76,8 +76,6 @@ const std::string reference_value_3_module_path("module path 3");
 const std::string reference_value_4_diagram("another reference");
 const std::string reference_value_4_module_path("module path 4");
 
-const std::string disable_model_module_arg("--disable-model-module");
-
 const std::string cpp_split_project_arg("--cpp-split-project");
 const std::string cpp_project_dir_arg("--cpp-project-dir");
 const std::string cpp_project_dir_value_arg("a project dir");
@@ -254,8 +252,7 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
         reference_arg,
         reference_value_1_arg,
         reference_arg,
-        reference_value_2_arg,
-        disable_model_module_arg
+        reference_value_2_arg
     };
 
     const auto ko(check_valid_arguments(o));
@@ -264,7 +261,6 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
     const auto io(ko.input());
     BOOST_CHECK(io.target().string() == target_value_arg);
     BOOST_CHECK(io.external_module_path() == external_module_path_value_arg);
-    BOOST_CHECK(io.disable_model_module());
 
     const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
@@ -281,8 +277,7 @@ BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_mod
         reference_arg,
         reference_value_3_arg,
         reference_arg,
-        reference_value_4_arg,
-        disable_model_module_arg
+        reference_value_4_arg
     };
 
     const auto ko(check_valid_arguments(o));

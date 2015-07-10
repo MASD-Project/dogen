@@ -416,7 +416,7 @@ Can only be supplied if split project is set to true.#</dia:string>
         <dia:point val="-28,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,-16.05;-13.975,-10.75"/>
+        <dia:rectangle val="-28.05,-16.05;-13.975,-11.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-28,-16"/>
@@ -425,7 +425,7 @@ Can only be supplied if split project is set to true.#</dia:string>
         <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#input_options#</dia:string>
@@ -574,29 +574,6 @@ Can only be supplied if split project is set to true.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All external models in which this model depends.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#disable_model_module#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Do not generate a top-level module with the model name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1709,16 +1686,16 @@ writing to output.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-21.0125,-10.8"/>
+        <dia:point val="-21.0125,-11.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.7625,-11.55;-14.005,-2.2"/>
+        <dia:rectangle val="-21.7625,-12.35;-14.005,-2.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-21.0125,-10.8"/>
+        <dia:point val="-21.0125,-11.6"/>
         <dia:point val="-21.0125,-6"/>
         <dia:point val="-14.205,-6"/>
         <dia:point val="-14.205,-3"/>

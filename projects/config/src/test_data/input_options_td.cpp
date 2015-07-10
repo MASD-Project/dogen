@@ -50,10 +50,6 @@ std::vector<dogen::config::reference> create_std_vector_dogen_config_reference(u
     return r;
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
-}
-
 }
 
 namespace dogen {
@@ -66,7 +62,6 @@ populate(const unsigned int position, result_type& v) {
     v.target(create_boost_filesystem_path(position + 0));
     v.external_module_path(create_std_string(position + 1));
     v.references(create_std_vector_dogen_config_reference(position + 2));
-    v.disable_model_module(create_bool(position + 3));
 }
 
 input_options_generator::result_type

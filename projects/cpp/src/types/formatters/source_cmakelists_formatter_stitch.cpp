@@ -32,9 +32,7 @@ dogen::formatters::file source_cmakelists_formatter_stitch(
 
     {
         fa.make_annotation_preamble(s.general_settings());
-        const std::string mn(s.model_name().empty() ?
-            "unnamed_model" : s.model_name());
-
+        const std::string mn(s.model_name());
 fa.stream() << "set(all_files \"\")" << std::endl;
 fa.stream() << "file(GLOB_RECURSE all_files RELATIVE" << std::endl;
 fa.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;

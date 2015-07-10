@@ -102,9 +102,6 @@ frontend_settings
 workflow::create_frontend_settings(const boost::filesystem::path& p) const {
     frontend_settings r;
 
-    const auto& is(knitting_options_.input());
-    r.disable_model_module(is.disable_model_module());
-
     //FIXME: using dia model options for all frontends; mega-hack
     const auto& to(knitting_options_.troubleshooting());
     using config::archive_types;

@@ -55,7 +55,6 @@ path input_disable_full_ctor_dia(
     "dia_sml/input/disable_full_ctor.dia"
     );
 path input_disable_facet_folders_dia("dia_sml/input/disable_facet_folders.dia");
-path input_disable_model_package_dia("dia_sml/input/disable_model_package.dia");
 path input_disable_unique_file_names_dia(
     "dia_sml/input/disable_unique_file_names.dia"
     );
@@ -358,10 +357,6 @@ path dia_sml::input_disable_full_ctor_dia() {
 
 path dia_sml::input_disable_facet_folders_dia() {
     return validating_resolver::resolve(::input_disable_facet_folders_dia);
-}
-
-path dia_sml::input_disable_model_package_dia() {
-    return validating_resolver::resolve(::input_disable_model_package_dia);
 }
 
 path dia_sml::input_disable_unique_file_names_dia() {
