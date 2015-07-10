@@ -38,7 +38,5 @@
 #include "dogen/test_models/std_model/serialization/registrar_ser.hpp"
 #include "dogen/test_models/std_model/serialization/primitives_ser.hpp"
 #include "dogen/test_models/std_model/serialization/pkg1/class_c_ser.hpp"
-#include "dogen/test_models/std_model/serialization/class_a_versioned_key_ser.hpp"
-#include "dogen/test_models/std_model/serialization/class_a_unversioned_key_ser.hpp"
 
 #endif

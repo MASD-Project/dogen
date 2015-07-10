@@ -35,18 +35,15 @@ namespace std_model {
 
 class class_a final {
 public:
+    class_a() = default;
     class_a(const class_a&) = default;
     class_a(class_a&&) = default;
     ~class_a() = default;
 
 public:
-    class_a();
-
-public:
     class_a(
         const std::string& prop0,
-        const std::string& prop1,
-        const unsigned int version);
+        const std::string& prop1);
 
 private:
     template<typename Archive>
@@ -71,14 +68,6 @@ public:
     void prop1(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Object instance's version.
-     */
-    /**@{*/
-    unsigned int version() const;
-    void version(const unsigned int v);
-    /**@}*/
-
 public:
     bool operator==(const class_a& rhs) const;
     bool operator!=(const class_a& rhs) const {
@@ -92,7 +81,6 @@ public:
 private:
     std::string prop0_;
     std::string prop1_;
-    unsigned int version_;
 };
 
 } } }

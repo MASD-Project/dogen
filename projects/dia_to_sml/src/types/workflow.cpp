@@ -112,11 +112,9 @@ graph_type workflow::generate_graph_activity(const dia::diagram& diagram) {
 void workflow::transformation_activity(const processed_object& o) {
     auto p(profiler_.generate(o));
 
-    // default to value object if nothing else is set
-    if (p.is_uml_class() && (
-            !p.is_enumeration() && !p.is_exception() && !p.is_entity() &&
-            !p.is_keyed_entity() && !p.is_value_object() && !p.is_service() &&
-            !p.is_factory() && !p.is_repository() && !p.is_concept()))
+    bool nothing_set(!p.is_enumeration() && !p.is_exception() &&
+        !p.is_value_object() && !p.is_service() && !p.is_concept());
+    if (p.is_uml_class() && nothing_set)
         p.is_value_object(true);
 
     validator_.validate(p);

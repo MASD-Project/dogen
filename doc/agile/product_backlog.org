@@ -2102,35 +2102,6 @@ capacity to see the few elements in the stack. When a pattern emerges
 that involved types of a certain ID, they would stop creating any
 further associations.
 
-*** Create a =key_extractor= service                                  :story:
-
-We need a way to automatically extract a key for a =keyed_entity=.
-The right solution is to create a service to represent this
-concept.
-
-Injector creates objects for these just like it does with keys; the
-C++ transformer intercepts them and generates the correct view models.
-
-*** Use explicit casting for versioned to unversioned conversions     :story:
-
-At present we have to_versioned; in reality this would be dealt much
-better using explicit casts:
-
-: explicit operator std::string() { return "explicit"; }
-
-Actually the real solution for this is to make the versioned key
-contain the unversioned key; then dogen will generate all the
-required code.
-
-At this point in time we do not have enough use cases to make the
-correct design decisions in this area. We need to wait until we start
-using keys in anger in Creris and then design the API around the use
-cases.
-
-It is not possible to use global cast operators so we need to
-introduce a dependency between versioned and unversioned keys in order
-for this to work.
-
 *** Consider not creating unversioned keys for single property        :story:
 
 If a key is made up of a single property, its a bit nonsensical to
@@ -4346,6 +4317,48 @@ that I don't have to do this manually.
 
 We should have a clone method which copy constructs all non-pointer
 types, and then creates new objects for pointer types.
+
+*** Consider adding support for keys                                  :story:
+
+We had originally added some half-baked support for key
+generation. The basic idea is that users could mark certain properties
+in a class as being part of a key and dogen would automatically create
+a key. The key could be versioned or unversioned. However, we never
+had a use case for it and the feature was not implemented in a
+convincing way. Having said that, it seems like a useful feature for
+things such as caches etc so we may want to ressurect it as some point
+in the future.
+
+Merged stories:
+
+*Create a =key_extractor= service*
+
+We need a way to automatically extract a key for a =keyed_entity=.
+The right solution is to create a service to represent this
+concept.
+
+Injector creates objects for these just like it does with keys; the
+C++ transformer intercepts them and generates the correct view models.
+
+*Use explicit casting for versioned to unversioned conversions*
+
+At present we have to_versioned; in reality this would be dealt much
+better using explicit casts:
+
+: explicit operator std::string() { return "explicit"; }
+
+Actually the real solution for this is to make the versioned key
+contain the unversioned key; then dogen will generate all the
+required code.
+
+At this point in time we do not have enough use cases to make the
+correct design decisions in this area. We need to wait until we start
+using keys in anger in Creris and then design the API around the use
+cases.
+
+It is not possible to use global cast operators so we need to
+introduce a dependency between versioned and unversioned keys in order
+for this to work.
 
 *** Add versioning support                                            :story:
 

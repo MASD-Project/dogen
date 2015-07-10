@@ -113,8 +113,7 @@ sml::generation_types transformer::generation_type(const profile& p) const {
     if (!context_.model().is_target())
         return generation_types::no_generation;
 
-    if (p.is_non_generatable() || p.is_service() || p.is_factory() ||
-        p.is_repository())
+    if (p.is_non_generatable() || p.is_service())
         return generation_types::partial_generation;
 
     return generation_types::full_generation;
@@ -217,7 +216,6 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
     update_element(ao, o, p);
 
     ao.is_fluent(p.is_fluent());
-    ao.is_versioned(p.is_versioned());
     ao.is_visitable(p.is_visitable());
 
     for (const auto us : p.unknown_stereotypes()) {
@@ -285,26 +283,6 @@ update_object(sml::object& ao, const processed_object& o, const profile& p) {
     }
 }
 
-void transformer::to_entity(const processed_object& o, const profile& p) {
-    BOOST_LOG_SEV(lg, debug) << "Object is an entity: " << o.id();
-
-    sml::object e;
-    update_object(e, o, p);
-    e.is_aggregate_root(p.is_aggregate_root());
-
-    for (const auto& p : e.local_properties()) {
-        const dynamic::field_selector fs(p.extensions());
-        if (fs.has_field(traits::identity_attribute()))
-            e.identity().push_back(p);
-    }
-
-    if (p.is_entity())
-        e.object_type(sml::object_types::entity);
-    else if (p.is_keyed_entity())
-        e.object_type(sml::object_types::keyed_entity);
-    context_.model().objects().insert(std::make_pair(e.name(), e));
-}
-
 void transformer::to_exception(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is an exception: " << o.id();
 
@@ -314,17 +292,11 @@ void transformer::to_exception(const processed_object& o, const profile& p) {
     context_.model().objects().insert(std::make_pair(vo.name(), vo));
 }
 
-void transformer::to_object(const processed_object& po, const profile& p) {
+void transformer::to_service(const processed_object& po, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a factory: " << po.id();
 
     sml::object o;
-    if (p.is_factory())
-        o.object_type(sml::object_types::factory);
-    else if (p.is_repository())
-        o.object_type(sml::object_types::repository);
-    else if (p.is_service())
-        o.object_type(sml::object_types::user_defined_service);
-
+    o.object_type(sml::object_types::user_defined_service);
     update_object(o, po, p);
     context_.model().objects().insert(std::make_pair(o.name(), o));
 }
@@ -473,10 +445,8 @@ void  transformer::dispatch(const processed_object& o, const profile& p) {
         to_concept(o, p);
     else if (p.is_exception())
         to_exception(o, p);
-    else if (p.is_entity() || p.is_keyed_entity())
-        to_entity(o, p);
-    else if (p.is_factory() || p.is_repository() || p.is_service())
-        to_object(o, p);
+    else if (p.is_service())
+        to_service(o, p);
     else
         to_value_object(o, p);
 }

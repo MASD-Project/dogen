@@ -308,7 +308,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -318,8 +317,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -435,7 +433,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -445,8 +442,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -562,7 +558,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -572,8 +567,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -689,7 +683,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -699,8 +692,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -816,7 +808,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -826,8 +817,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>

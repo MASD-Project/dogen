@@ -48,10 +48,6 @@ public:
         invalid = 0,
         value_object,
         service,
-        repository,
-        factory,
-        entity,
-        keyed_entity,
         enumeration,
         exception
     };
@@ -286,13 +282,6 @@ public:
      * @brief Create a concept.
      */
     concept make_concept(const unsigned int i, const qname& model_qname) const;
-
-    /**
-     * @brief Create an entity.
-     */
-    object make_entity(const property& prop, const bool keyed,
-        const unsigned int i, const qname& model_qname,
-        const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an enumeration.

@@ -343,11 +343,7 @@ make_includers(
                 using sml::object_types;
                 if (j  != m.objects().end()) {
                     const auto ot(j->second.object_type());
-                    if (ot != object_types::user_defined_value_object &&
-                        ot != object_types::entity &&
-                        ot != object_types::keyed_entity &&
-                        ot != object_types::unversioned_key &&
-                        ot != object_types::versioned_key)
+                    if (ot != object_types::user_defined_value_object)
                         continue;
                 }
 

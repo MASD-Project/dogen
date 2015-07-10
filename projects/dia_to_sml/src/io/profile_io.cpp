@@ -65,19 +65,13 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
       << "\"is_uml_realization\": " << v.is_uml_realization() << ", "
       << "\"is_enumeration\": " << v.is_enumeration() << ", "
       << "\"is_exception\": " << v.is_exception() << ", "
-      << "\"is_entity\": " << v.is_entity() << ", "
       << "\"is_value_object\": " << v.is_value_object() << ", "
       << "\"is_service\": " << v.is_service() << ", "
       << "\"is_non_generatable\": " << v.is_non_generatable() << ", "
-      << "\"is_versioned\": " << v.is_versioned() << ", "
-      << "\"is_keyed_entity\": " << v.is_keyed_entity() << ", "
       << "\"is_visitable\": " << v.is_visitable() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"is_aggregate_root\": " << v.is_aggregate_root() << ", "
       << "\"is_concept\": " << v.is_concept() << ", "
-      << "\"is_repository\": " << v.is_repository() << ", "
-      << "\"is_factory\": " << v.is_factory() << ", "
       << "\"unknown_stereotypes\": " << v.unknown_stereotypes()
       << " }";
     return(s);

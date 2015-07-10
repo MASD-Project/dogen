@@ -20,8 +20,6 @@
  */
 #include "dogen/test_models/std_model/test_data/class_a_td.hpp"
 #include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_versioned_key_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_unversioned_key_td.hpp"
 
 namespace {
 
@@ -42,32 +40,6 @@ std::vector<dogen::test_models::std_model::class_a> create_std_vector_dogen_test
     return r;
 }
 
-dogen::test_models::std_model::class_a_unversioned_key
-create_dogen_test_models_std_model_class_a_unversioned_key(const unsigned int position) {
-    return dogen::test_models::std_model::class_a_unversioned_key_generator::create(position);
-}
-
-std::vector<dogen::test_models::std_model::class_a_unversioned_key> create_std_vector_dogen_test_models_std_model_class_a_unversioned_key(unsigned int position) {
-    std::vector<dogen::test_models::std_model::class_a_unversioned_key> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_test_models_std_model_class_a_unversioned_key(position + i));
-    }
-    return r;
-}
-
-dogen::test_models::std_model::class_a_versioned_key
-create_dogen_test_models_std_model_class_a_versioned_key(const unsigned int position) {
-    return dogen::test_models::std_model::class_a_versioned_key_generator::create(position);
-}
-
-std::vector<dogen::test_models::std_model::class_a_versioned_key> create_std_vector_dogen_test_models_std_model_class_a_versioned_key(unsigned int position) {
-    std::vector<dogen::test_models::std_model::class_a_versioned_key> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_test_models_std_model_class_a_versioned_key(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -81,8 +53,6 @@ void class_c_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_int(position + 0));
     v.prop_1(create_std_vector_dogen_test_models_std_model_class_a(position + 1));
-    v.prop_2(create_std_vector_dogen_test_models_std_model_class_a_unversioned_key(position + 2));
-    v.prop_3(create_std_vector_dogen_test_models_std_model_class_a_versioned_key(position + 3));
 }
 
 class_c_generator::result_type

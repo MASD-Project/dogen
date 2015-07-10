@@ -33,18 +33,6 @@ std::ostream& operator<<(std::ostream& s, const object_types& v) {
     case object_types::invalid:
         attr = "\"invalid\"";
         break;
-    case object_types::entity:
-        attr = "\"entity\"";
-        break;
-    case object_types::keyed_entity:
-        attr = "\"keyed_entity\"";
-        break;
-    case object_types::factory:
-        attr = "\"factory\"";
-        break;
-    case object_types::repository:
-        attr = "\"repository\"";
-        break;
     case object_types::user_defined_service:
         attr = "\"user_defined_service\"";
         break;

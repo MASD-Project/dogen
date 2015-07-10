@@ -571,25 +571,6 @@ concept mock_model_factory::make_concept(const unsigned int i,
     return r;
 }
 
-object mock_model_factory::make_entity(const property& prop, const bool keyed,
-    const unsigned int i, const qname& model_qname,
-    const unsigned int module_n) const {
-
-    object r;
-    if (keyed)
-        r.object_type(dogen::sml::object_types::keyed_entity);
-    else
-        r.object_type(dogen::sml::object_types::entity);
-
-    populate_object(r, i, model_qname, module_n);
-    r.identity().push_back(prop);
-
-    if (flags_.tagged())
-        dynamic_extension_function_(r.extensions());
-
-    return r;
-}
-
 enumeration mock_model_factory::
 make_enumeration(const unsigned int i, const qname& model_qname,
     const unsigned int module_n) const {
@@ -1099,8 +1080,6 @@ object_with_property(const object_types ot, const property_types pt,
     object o0;
     if (ot == object_types::value_object)
         o0 = make_value_object(0, mn);
-    else if (ot == object_types::keyed_entity || ot == object_types::entity)
-        o0 = make_entity(p, ot == object_types::keyed_entity, 0, mn);
     else {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));

@@ -18,11 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/test_models/std_model/test_data/class_a_td.hpp"
 #include "dogen/test_models/std_model/test_data/class_g_td.hpp"
 #include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_versioned_key_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_unversioned_key_td.hpp"
 
 namespace {
 
@@ -68,28 +67,16 @@ std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen
     return r;
 }
 
-dogen::test_models::std_model::class_a_unversioned_key
-create_dogen_test_models_std_model_class_a_unversioned_key(const unsigned int position) {
-    return dogen::test_models::std_model::class_a_unversioned_key_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a> create_std_unordered_map_dogen_test_models_std_model_class_a_unversioned_key_dogen_test_models_std_model_class_a(unsigned int position) {
-    std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a> r;
+std::unordered_map<std::string, dogen::test_models::std_model::class_a> create_std_unordered_map_std_string_dogen_test_models_std_model_class_a(unsigned int position) {
+    std::unordered_map<std::string, dogen::test_models::std_model::class_a> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_test_models_std_model_class_a_unversioned_key(position + i), create_dogen_test_models_std_model_class_a(position + i)));
-    }
-    return r;
-}
-
-dogen::test_models::std_model::class_a_versioned_key
-create_dogen_test_models_std_model_class_a_versioned_key(const unsigned int position) {
-    return dogen::test_models::std_model::class_a_versioned_key_generator::create(position);
-}
-
-std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a> create_std_unordered_map_dogen_test_models_std_model_class_a_versioned_key_dogen_test_models_std_model_class_a(unsigned int position) {
-    std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_test_models_std_model_class_a_versioned_key(position + i), create_dogen_test_models_std_model_class_a(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_test_models_std_model_class_a(position + i)));
     }
     return r;
 }
@@ -106,8 +93,7 @@ void class_g_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop_0(create_std_unordered_map_dogen_test_models_std_model_class_a_std_vector_dogen_test_models_std_model_pkg1_class_c_(position + 0));
     v.prop_1(create_std_unordered_map_dogen_test_models_std_model_pkg1_class_c_std_list_dogen_test_models_std_model_class_a_(position + 1));
-    v.prop_2(create_std_unordered_map_dogen_test_models_std_model_class_a_unversioned_key_dogen_test_models_std_model_class_a(position + 2));
-    v.prop_3(create_std_unordered_map_dogen_test_models_std_model_class_a_versioned_key_dogen_test_models_std_model_class_a(position + 3));
+    v.prop_2(create_std_unordered_map_std_string_dogen_test_models_std_model_class_a(position + 2));
 }
 
 class_g_generator::result_type

@@ -71,14 +71,12 @@ public:
         const unsigned int number_of_type_arguments,
         const bool is_visitable,
         const bool is_immutable,
-        const bool is_versioned,
         const bool is_comparable,
         const bool is_fluent,
         const bool is_child,
         const bool is_original_parent_visitable,
         const std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> >& relationships,
         const dogen::sml::object_types object_type,
-        const bool is_aggregate_root,
         const std::list<dogen::sml::property>& identity,
         const bool is_final);
 
@@ -194,14 +192,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, add a version property to the type.
-     */
-    /**@{*/
-    bool is_versioned() const;
-    void is_versioned(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, generates the less than operator.
      *
      * A type is only comparable if all of its properties are primitives or strings,
@@ -252,14 +242,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, this type is a root of an aggregate.
-     */
-    /**@{*/
-    bool is_aggregate_root() const;
-    void is_aggregate_root(const bool v);
-    /**@}*/
-
-    /**
      * @brief List of properties that make up the identity operation.
      *
      * @note temporarily moved here until we have property types.
@@ -301,14 +283,12 @@ private:
     unsigned int number_of_type_arguments_;
     bool is_visitable_;
     bool is_immutable_;
-    bool is_versioned_;
     bool is_comparable_;
     bool is_fluent_;
     bool is_child_;
     bool is_original_parent_visitable_;
     std::unordered_map<dogen::sml::relationship_types, std::list<dogen::sml::qname> > relationships_;
     dogen::sml::object_types object_type_;
-    bool is_aggregate_root_;
     std::list<dogen::sml::property> identity_;
     bool is_final_;
 };

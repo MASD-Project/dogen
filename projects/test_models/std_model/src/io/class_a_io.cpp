@@ -37,8 +37,7 @@ std::ostream& operator<<(std::ostream& s, const class_a& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::std_model::class_a\"" << ", "
       << "\"prop0\": " << "\"" << tidy_up_string(v.prop0()) << "\"" << ", "
-      << "\"prop1\": " << "\"" << tidy_up_string(v.prop1()) << "\"" << ", "
-      << "\"version\": " << v.version()
+      << "\"prop1\": " << "\"" << tidy_up_string(v.prop1()) << "\""
       << " }";
     return(s);
 }

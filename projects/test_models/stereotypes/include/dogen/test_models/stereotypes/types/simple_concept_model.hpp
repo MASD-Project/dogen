@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/stereotypes/types/entity.hpp"
+#include "dogen/test_models/stereotypes/types/value.hpp"
 #include "dogen/test_models/stereotypes/serialization/simple_concept_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,7 +48,7 @@ public:
 public:
     simple_concept_model(
         const int prop_0,
-        const dogen::test_models::stereotypes::entity& prop_1,
+        const dogen::test_models::stereotypes::value& prop_1,
         const int prop_10);
 
 private:
@@ -71,10 +71,10 @@ public:
      * @brief Prove that includes of types get picked up.
      */
     /**@{*/
-    const dogen::test_models::stereotypes::entity& prop_1() const;
-    dogen::test_models::stereotypes::entity& prop_1();
-    void prop_1(const dogen::test_models::stereotypes::entity& v);
-    void prop_1(const dogen::test_models::stereotypes::entity&& v);
+    const dogen::test_models::stereotypes::value& prop_1() const;
+    dogen::test_models::stereotypes::value& prop_1();
+    void prop_1(const dogen::test_models::stereotypes::value& v);
+    void prop_1(const dogen::test_models::stereotypes::value&& v);
     /**@}*/
 
     /**
@@ -97,7 +97,7 @@ public:
 
 private:
     int prop_0_;
-    dogen::test_models::stereotypes::entity prop_1_;
+    dogen::test_models::stereotypes::value prop_1_;
     int prop_10_;
 };
 

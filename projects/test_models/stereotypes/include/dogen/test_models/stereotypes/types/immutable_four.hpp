@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/test_models/stereotypes/types/entity.hpp"
+#include "dogen/test_models/stereotypes/types/value.hpp"
 #include "dogen/test_models/stereotypes/types/immutable_one_primitive.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_four_fwd_ser.hpp"
 
@@ -52,7 +52,7 @@ public:
     immutable_four(
         const bool prop_0,
         const std::string& prop_1,
-        const dogen::test_models::stereotypes::entity& prop_2,
+        const dogen::test_models::stereotypes::value& prop_2,
         const dogen::test_models::stereotypes::immutable_one_primitive& prop_3);
 
 private:
@@ -67,7 +67,7 @@ public:
 
     const std::string& prop_1() const;
 
-    const dogen::test_models::stereotypes::entity& prop_2() const;
+    const dogen::test_models::stereotypes::value& prop_2() const;
 
     const dogen::test_models::stereotypes::immutable_one_primitive& prop_3() const;
 
@@ -80,7 +80,7 @@ public:
 private:
     bool prop_0_;
     std::string prop_1_;
-    dogen::test_models::stereotypes::entity prop_2_;
+    dogen::test_models::stereotypes::value prop_2_;
     dogen::test_models::stereotypes::immutable_one_primitive prop_3_;
 };
 

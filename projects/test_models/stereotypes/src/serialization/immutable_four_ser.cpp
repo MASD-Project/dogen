@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/test_models/stereotypes/serialization/entity_ser.hpp"
+#include "dogen/test_models/stereotypes/serialization/value_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_four_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_one_primitive_ser.hpp"
 

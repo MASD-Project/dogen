@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/test_models/stereotypes/io/entity_io.hpp"
+#include "dogen/test_models/stereotypes/io/value_io.hpp"
 #include "dogen/test_models/stereotypes/io/immutable_four_io.hpp"
 #include "dogen/test_models/stereotypes/io/immutable_one_primitive_io.hpp"
 

@@ -21,40 +21,10 @@
 #include <ostream>
 #include "dogen/test_models/std_model/io/class_a_io.hpp"
 #include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_versioned_key_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_unversioned_key_io.hpp"
 
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::test_models::std_model::class_a>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::test_models::std_model::class_a_versioned_key>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -75,9 +45,7 @@ std::ostream& operator<<(std::ostream& s, const class_c& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::std_model::pkg1::class_c\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
-      << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_2\": " << v.prop_2() << ", "
-      << "\"prop_3\": " << v.prop_3()
+      << "\"prop_1\": " << v.prop_1()
       << " }";
     return(s);
 }

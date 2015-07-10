@@ -68,7 +68,7 @@
         <dia:point val="4,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,10.95;19.95,24.25"/>
+        <dia:rectangle val="3.95,10.95;19.95,23.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="4,11"/>
@@ -77,13 +77,13 @@
         <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="12.400000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#a_class#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -478,7 +478,7 @@
         <dia:point val="4,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,2.95;32.285,7.15"/>
+        <dia:rectangle val="3.95,2.95;32.285,7.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -490,7 +490,7 @@
         <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.8999999999999995"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

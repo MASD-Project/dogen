@@ -24,28 +24,21 @@ namespace dogen {
 namespace test_models {
 namespace std_model {
 
-class_a::class_a()
-    : version_(static_cast<unsigned int>(0)) { }
-
 class_a::class_a(
     const std::string& prop0,
-    const std::string& prop1,
-    const unsigned int version)
+    const std::string& prop1)
     : prop0_(prop0),
-      prop1_(prop1),
-      version_(version) { }
+      prop1_(prop1) { }
 
 void class_a::swap(class_a& other) noexcept {
     using std::swap;
     swap(prop0_, other.prop0_);
     swap(prop1_, other.prop1_);
-    swap(version_, other.version_);
 }
 
 bool class_a::operator==(const class_a& rhs) const {
     return prop0_ == rhs.prop0_ &&
-        prop1_ == rhs.prop1_ &&
-        version_ == rhs.version_;
+        prop1_ == rhs.prop1_;
 }
 
 class_a& class_a::operator=(class_a other) {
@@ -84,14 +77,6 @@ void class_a::prop1(const std::string& v) {
 
 void class_a::prop1(const std::string&& v) {
     prop1_ = std::move(v);
-}
-
-unsigned int class_a::version() const {
-    return version_;
-}
-
-void class_a::version(const unsigned int v) {
-    version_ = v;
 }
 
 } } }

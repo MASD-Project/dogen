@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
@@ -33,11 +34,7 @@
 #include "dogen/test_models/std_model/hash/class_a_hash.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
-#include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
 #include "dogen/test_models/std_model/serialization/class_g_fwd_ser.hpp"
-#include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
-#include "dogen/test_models/std_model/hash/class_a_versioned_key_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_unversioned_key_hash.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -54,8 +51,7 @@ public:
     class_g(
         const std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> >& prop_0,
         const std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> >& prop_1,
-        const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& prop_2,
-        const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& prop_3);
+        const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& prop_2);
 
 private:
     template<typename Archive>
@@ -75,15 +71,10 @@ public:
     void prop_1(const std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> >& v);
     void prop_1(const std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> >&& v);
 
-    const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& prop_2() const;
-    std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& prop_2();
-    void prop_2(const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& v);
-    void prop_2(const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>&& v);
-
-    const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& prop_3() const;
-    std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& prop_3();
-    void prop_3(const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& v);
-    void prop_3(const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>&& v);
+    const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& prop_2() const;
+    std::unordered_map<std::string, dogen::test_models::std_model::class_a>& prop_2();
+    void prop_2(const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& v);
+    void prop_2(const std::unordered_map<std::string, dogen::test_models::std_model::class_a>&& v);
 
 public:
     bool operator==(const class_g& rhs) const;
@@ -98,8 +89,7 @@ public:
 private:
     std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> > prop_0_;
     std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> > prop_1_;
-    std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a> prop_2_;
-    std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a> prop_3_;
+    std::unordered_map<std::string, dogen::test_models::std_model::class_a> prop_2_;
 };
 
 } } }

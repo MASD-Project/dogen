@@ -55,13 +55,6 @@ bool has_relationship(const relationship_types rt,
     return i != o.relationships().end() && !i->second.empty();
 }
 
-std::list<dogen::sml::qname> get_relationship(const relationship_types rt,
-    const dogen::sml::object& o) {
-    const auto i(o.relationships().find(rt));
-    BOOST_REQUIRE(i != o.relationships().end() && !i->second.empty());
-    return i->second;
-}
-
 }
 
 using dogen::utility::test::contains_checker;
@@ -93,215 +86,6 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
     BOOST_CHECK(a.primitives().empty());
     BOOST_CHECK(a.enumerations().empty());
     BOOST_CHECK(a.concepts().empty());
-}
-
-BOOST_AUTO_TEST_CASE(entity_object_does_not_result_in_injected_keys) {
-    SETUP_TEST_LOG_SOURCE("entity_object_does_not_result_in_injected_keys");
-
-    const auto ot(mock_model_factory::object_types::entity);
-    auto a(factory.object_with_property(ot));
-    BOOST_REQUIRE(a.objects().size() == 2);
-    BOOST_REQUIRE(a.modules().empty());
-
-    for (const auto& pair : a.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-
-            const auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::entity);
-            BOOST_CHECK(o.local_properties().size() == 1);
-            BOOST_CHECK(!o.identity().empty());
-        }
-    }
-
-    dogen::sml::injector i;
-    i.inject(a);
-    BOOST_CHECK(a.objects().size() == 2);
-    BOOST_CHECK(a.modules().size() == 1);
-}
-
-BOOST_AUTO_TEST_CASE(unversioned_keyed_object_with_no_identity_attributes_throws) {
-    SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_with_no_identity_attributes_throws");
-
-    const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(factory.object_with_property(ot));
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-            auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::keyed_entity);
-            BOOST_CHECK(o.local_properties().size() == 1);
-            BOOST_CHECK(!o.is_versioned());
-            o.identity().clear();
-        }
-    }
-
-    dogen::sml::injector i;
-    using dogen::sml::injection_error;
-    contains_checker<injection_error> c(missing_identity);
-    BOOST_CHECK_EXCEPTION(i.inject(m), injection_error, c);
-}
-
-BOOST_AUTO_TEST_CASE(unversioned_keyed_object_has_unversioned_key_injected) {
-    SETUP_TEST_LOG_SOURCE("unversioned_keyed_object_has_unversioned_key_injected");
-
-    const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(factory.object_with_property(ot));
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-            auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::keyed_entity);
-            BOOST_REQUIRE(o.local_properties().size() == 1);
-            BOOST_REQUIRE(!o.is_versioned());
-            BOOST_REQUIRE(o.identity().size() == 1);
-        }
-    }
-
-    dogen::sml::injector i;
-    i.inject(m);
-
-    BOOST_CHECK(m.objects().size() == 3);
-    bool type_zero(false);
-    dogen::sml::qname ukqn;
-    for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            type_zero = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-            const auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::keyed_entity);
-            BOOST_REQUIRE(!o.is_versioned());
-
-            BOOST_CHECK(!has_relationship(relationship_types::versioned_keys,
-                    o));
-            BOOST_REQUIRE(has_relationship(relationship_types::unversioned_keys,
-                    o));
-
-            const auto rels(
-                get_relationship(relationship_types::unversioned_keys, o));
-            BOOST_REQUIRE(rels.size() == 1);
-            ukqn = rels.front();
-
-            BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
-            BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
-            BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: "
-                                     << string_converter::convert(ukqn);
-        }
-    }
-
-    BOOST_REQUIRE(type_zero);
-    const auto j(m.objects().find(ukqn));
-    BOOST_REQUIRE(j != m.objects().end());
-    const auto& uk(j->second);
-    BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
-    BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
-    BOOST_REQUIRE(!uk.is_versioned());
-}
-
-BOOST_AUTO_TEST_CASE(versioned_keyed_object_has_both_keys_injected) {
-    SETUP_TEST_LOG_SOURCE("versioned_keyed_object_has_both_keys_injected");
-
-    const auto ot(mock_model_factory::object_types::keyed_entity);
-    auto m(factory.object_with_property(ot));
-    BOOST_REQUIRE(m.objects().size() == 2);
-    for (auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-            auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::keyed_entity);
-            BOOST_REQUIRE(o.local_properties().size() == 1);
-            BOOST_REQUIRE(!o.is_versioned());
-            BOOST_REQUIRE(o.identity().size() == 1);
-            o.is_versioned(true);
-        }
-    }
-
-    dogen::sml::injector i;
-    i.inject(m);
-
-    BOOST_CHECK(m.objects().size() == 4);
-    bool type_zero(false);
-    dogen::sml::qname ukqn, vkqn;
-    for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
-            type_zero = true;
-            BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
-            auto& o(pair.second);
-            BOOST_CHECK(o.object_type() == object_types::keyed_entity);
-            BOOST_CHECK(o.is_versioned());
-
-            BOOST_CHECK(has_relationship(relationship_types::versioned_keys,
-                    o));
-            auto rels(get_relationship(relationship_types::versioned_keys, o));
-            BOOST_REQUIRE(rels.size() == 1);
-            vkqn = rels.front();
-            BOOST_CHECK(!factory.is_type_name_n_unversioned(0, vkqn));
-            BOOST_CHECK(factory.is_type_name_n_versioned(0, vkqn));
-
-            BOOST_REQUIRE(has_relationship(relationship_types::unversioned_keys,
-                    o));
-            rels = get_relationship(relationship_types::unversioned_keys, o);
-            ukqn = rels.front();
-            BOOST_CHECK(factory.is_type_name_n_unversioned(0, ukqn));
-            BOOST_CHECK(!factory.is_type_name_n_versioned(0, ukqn));
-            BOOST_LOG_SEV(lg, debug) << "Found unversioned key qname: "
-                                     << string_converter::convert(ukqn);
-        }
-    }
-
-    BOOST_REQUIRE(type_zero);
-    auto j(m.objects().find(ukqn));
-    BOOST_REQUIRE(j != m.objects().end());
-
-    const auto& uk(j->second);
-    BOOST_CHECK(uk.object_type() == object_types::unversioned_key);
-    BOOST_LOG_SEV(lg, debug) << "Found unversioned key: " << uk;
-    BOOST_REQUIRE(!uk.is_versioned());
-
-    j = m.objects().find(vkqn);
-    BOOST_REQUIRE(j != m.objects().end());
-
-    const auto& vk(j->second);
-    BOOST_CHECK(vk.object_type() == object_types::versioned_key);
-    BOOST_LOG_SEV(lg, debug) << "Found versioned key: " << vk;
-    BOOST_REQUIRE(!vk.is_versioned());
-}
-
-BOOST_AUTO_TEST_CASE(versioned_object_has_version_propery_injected) {
-    SETUP_TEST_LOG_SOURCE("versioned_object_has_version_propery_injected");
-
-    auto m(factory.make_single_type_model());
-    BOOST_REQUIRE(m.objects().size() == 1);
-    auto& ob(m.objects().begin()->second);
-    BOOST_REQUIRE(ob.local_properties().empty());
-    ob.is_versioned(true);
-    BOOST_LOG_SEV(lg, debug) << "before: " << ob;
-
-    dogen::sml::injector i;
-    i.inject(m);
-
-    BOOST_REQUIRE(m.objects().size() == 1);
-    auto& oa(m.objects().begin()->second);
-    BOOST_LOG_SEV(lg, debug) << "object after: " << oa;
-    BOOST_REQUIRE(oa.local_properties().size() == 1);
-    BOOST_CHECK(oa.local_properties().front().name() == version_name);
-    BOOST_CHECK(!oa.local_properties().front().documentation().empty());
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
@@ -346,7 +130,6 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
                                      << string_converter::convert(qn);
             type_one = true;
-            BOOST_REQUIRE(!pair.second.is_versioned());
         } else if (factory.is_type_name_n_visitor(1, qn)) {
             visitor = true;
             BOOST_LOG_SEV(lg, debug) << "found object: "
@@ -354,7 +137,6 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
 
             const auto& o(pair.second);
             BOOST_CHECK(o.object_type() == object_types::visitor);
-            BOOST_CHECK(!o.is_versioned());
             BOOST_CHECK(!o.is_visitable());
             BOOST_CHECK(!o.is_immutable());
             BOOST_CHECK(!has_relationship(relationship_types::parents, o));

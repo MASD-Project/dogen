@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 11:40]
+#+CAPTION: Clock summary at [2015-07-10 Fri 15:10]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:24* |       |      |
+| *Total time*                                                                | *20:19* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:24   |       |      |
-| Active                                                                      |         | 18:24 |      |
+| Stories                                                                     | 20:19   |       |      |
+| Active                                                                      |         | 20:19 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:46 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -41,7 +41,8 @@
 | COMPLETED Remove unused classes in cpp model                                |         |       | 0:05 |
 | COMPLETED Remove support for empty model name                               |         |       | 0:28 |
 | COMPLETED Remove ability to output to stdout                                |         |       | 0:20 |
-| STARTED Remove unused stereotypes and object types                          |         |       | 0:19 |
+| COMPLETED Remove unused stereotypes and object types                        |         |       | 1:48 |
+| STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -226,73 +227,38 @@ have any use cases. Ability to have a model with an empty name.
 One of the features we had originally added but for which we do not
 have any use cases. Ability to output generated code to stdout.
 
-*** STARTED Remove unused stereotypes and object types                :story:
+*** COMPLETED Remove unused stereotypes and object types              :story:
+    CLOSED: [2015-07-10 Fri 15:10]
+    CLOCK: [2015-07-10 Fri 13:41]--[2015-07-10 Fri 15:10] =>  1:29
     CLOCK: [2015-07-10 Fri 11:19]--[2015-07-10 Fri 11:38] =>  0:19
 
 At present we have a large number of stereotypes, but only a few are
 actually in use. Remove all that aren't in use.
 
-*** Move language-specific object types to meta-data                  :story:
+*** Remove is comparable from SML                                     :story:
 
-There are a number of object types that exist solely to provide the
-method helpers with information:
+We never did implement comparable properly. Remove all remnants of the
+previous attempt.
 
-- smart_pointer
-- hash_container
-- sequence_container
-- ordered_container
+*** Remove is final from SML                                          :story:
 
-These should be conveyed using the meta-data.
+We never did implement comparable properly. Remove all remnants of the
+previous attempt.
 
-*** Handling of managed directories is incorrect                      :story:
+*** Add forward declarations to visitor                               :story:
 
-At present we are querying the dia to sml transformer to figure out
-what the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
+At present we are suppressing forward declarations for visitor in
+transformer due to legacy compatibility. Remove this and see what
+breaks.
 
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
+*** Set enumeration underlying type in SML
 
-- list of files;
-- list of managed directories.
+In cpp transformer we have hacked the underlying type of the
+enumeration. Remove this hack and set it in SML. Still a hack, but
+a tad better.
 
-Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an SML model as input.
-
-*** Consider creating a "locator" like class for path management      :story:
-
-At present we are using path settings to compute paths in several
-places. Most of these exist because of hacks but it still seems that
-it needs to be done in more than one place. We should consider
-something like =sml_to_cpp::locator= that is initialised with the path
-settings and can then be used to create paths.
-
-*** Thoughts on cpp refactoring                                       :story:
+*** STARTED Thoughts on cpp refactoring                               :story:
+    CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
 
 We haven't quite arrived at the ideal configuration for the cpp
 model. We are close, but not there yet. The problem we have at the
@@ -458,6 +424,66 @@ What can be said about an archetype:
   addition, we need a way to express "generate but don't override" and
   "generate and override".
 
+*** Move language-specific object types to meta-data                  :story:
+
+There are a number of object types that exist solely to provide the
+method helpers with information:
+
+- smart_pointer
+- hash_container
+- sequence_container
+- ordered_container
+
+These should be conveyed using the meta-data.
+
+*** Handling of managed directories is incorrect                      :story:
+
+At present we are querying the dia to sml transformer to figure out
+what the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an SML model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Consider creating a "locator" like class for path management      :story:
+
+At present we are using path settings to compute paths in several
+places. Most of these exist because of hacks but it still seems that
+it needs to be done in more than one place. We should consider
+something like =sml_to_cpp::locator= that is initialised with the path
+settings and can then be used to create paths.
+
 *** Thoughts on simplifying the formattables generation               :story:
 
 We have a problem in the way which we are doing the formattables:
@@ -593,6 +619,7 @@ trim down the obvious ones:
 - removing cpp backend?
 - delete extra files: we always do so why make it optional.
 - force write: we never do.
+- versioning
 - etc.
 
 Basically any feature which we are not using at present and cannot

@@ -400,17 +400,11 @@ transformer::to_class_info(const sml::object& o, const class_types ct) const {
     populate_entity_properties(o.name(), o.documentation(), *r);
 
     r->is_immutable(o.is_immutable());
-    r->is_visitable(o.is_visitable() &&
-        r->class_type() != class_types::unversioned_key &&
-        r->class_type() != class_types::versioned_key);
+    r->is_visitable(o.is_visitable());
     r->is_parent(o.is_parent());
     r->is_final(o.is_final());
     r->generation_type(o.generation_type());
     r->class_type(ct);
-
-    // FIXME: move to formatter
-    // sml::meta_data::reader reader(o.meta_data());
-    // r->opaque_parameters(reader.odb_pragma());
 
     name_builder b;
     auto i(o.relationships().find(sml::relationship_types::parents));
@@ -579,7 +573,6 @@ transform(const sml::object& o) const {
         r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
-    case sml::object_types::factory: // FIXME: mega-hack
     case sml::object_types::user_defined_service:
         r.push_front(to_class_info(o, class_types::service));
         break;
@@ -587,8 +580,6 @@ transform(const sml::object& o) const {
         r.push_front(to_visitor_info(o));
         break;
     case sml::object_types::user_defined_value_object:
-    case sml::object_types::entity:
-    case sml::object_types::keyed_entity:
         r.push_front(to_class_info(o, class_types::user_defined));
         break;
     case sml::object_types::exception:

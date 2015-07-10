@@ -30,7 +30,7 @@ simple_concept_model::simple_concept_model()
 
 simple_concept_model::simple_concept_model(
     const int prop_0,
-    const dogen::test_models::stereotypes::entity& prop_1,
+    const dogen::test_models::stereotypes::value& prop_1,
     const int prop_10)
     : prop_0_(prop_0),
       prop_1_(prop_1),
@@ -63,19 +63,19 @@ void simple_concept_model::prop_0(const int v) {
     prop_0_ = v;
 }
 
-const dogen::test_models::stereotypes::entity& simple_concept_model::prop_1() const {
+const dogen::test_models::stereotypes::value& simple_concept_model::prop_1() const {
     return prop_1_;
 }
 
-dogen::test_models::stereotypes::entity& simple_concept_model::prop_1() {
+dogen::test_models::stereotypes::value& simple_concept_model::prop_1() {
     return prop_1_;
 }
 
-void simple_concept_model::prop_1(const dogen::test_models::stereotypes::entity& v) {
+void simple_concept_model::prop_1(const dogen::test_models::stereotypes::value& v) {
     prop_1_ = v;
 }
 
-void simple_concept_model::prop_1(const dogen::test_models::stereotypes::entity&& v) {
+void simple_concept_model::prop_1(const dogen::test_models::stereotypes::value&& v) {
     prop_1_ = std::move(v);
 }
 

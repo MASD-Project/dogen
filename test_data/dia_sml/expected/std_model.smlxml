@@ -647,7 +647,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -657,8 +656,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>5</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>1</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1005,7 +1003,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -1015,8 +1012,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1431,7 +1427,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -1441,8 +1436,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1509,7 +1503,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>4</count>
+					<count>3</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -1721,7 +1715,7 @@
 								<item_version>0</item_version>
 								<item>
 									<type>
-										<model_name></model_name>
+										<model_name>std</model_name>
 										<external_module_path>
 											<count>0</count>
 											<item_version>0</item_version>
@@ -1730,78 +1724,7 @@
 											<count>0</count>
 											<item_version>0</item_version>
 										</module_path>
-										<simple_name>class_a_unversioned_key</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<default_value></default_value>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>unordered_map</simple_name>
-							</type>
-							<children>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a_versioned_key</simple_name>
+										<simple_name>string</simple_name>
 									</type>
 									<children>
 										<count>0</count>
@@ -1849,7 +1772,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -1859,8 +1781,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -1995,7 +1916,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -2005,8 +1925,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2167,7 +2086,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>1</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -2177,52 +2095,10 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>2</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
-					<count>1</count>
+					<count>0</count>
 					<item_version>0</item_version>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>1</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-								<item>
-									<first>dia.identity_attribute</first>
-									<second>
-										<value>
-											<px class_id_reference="1" object_id_reference="_9"></px>
-										</value>
-									</second>
-								</item>
-							</fields>
-						</extensions>
-						<name>prop0</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>string</simple_name>
-							</type>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<default_value></default_value>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
 				</identity>
 				<is_final>1</is_final>
 			</second>
@@ -2288,7 +2164,7 @@
 					<item_version>0</item_version>
 				</all_properties>
 				<local_properties>
-					<count>4</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item>
 						<documentation></documentation>
@@ -2375,110 +2251,6 @@
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_2</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a_unversioned_key</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<default_value></default_value>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
-					<item>
-						<documentation></documentation>
-						<extensions>
-							<fields>
-								<count>0</count>
-								<bucket_count>11</bucket_count>
-								<item_version>0</item_version>
-							</fields>
-						</extensions>
-						<name>prop_3</name>
-						<type>
-							<type>
-								<model_name>std</model_name>
-								<external_module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_module_path>
-								<module_path>
-									<count>0</count>
-									<item_version>0</item_version>
-								</module_path>
-								<simple_name>vector</simple_name>
-							</type>
-							<children>
-								<count>1</count>
-								<item_version>0</item_version>
-								<item>
-									<type>
-										<model_name></model_name>
-										<external_module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_module_path>
-										<module_path>
-											<count>0</count>
-											<item_version>0</item_version>
-										</module_path>
-										<simple_name>class_a_versioned_key</simple_name>
-									</type>
-									<children>
-										<count>0</count>
-										<item_version>0</item_version>
-									</children>
-									<is_pointer>0</is_pointer>
-								</item>
-							</children>
-							<is_pointer>0</is_pointer>
-						</type>
-						<default_value></default_value>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-					</item>
 				</local_properties>
 				<inherited_properties>
 					<count>0</count>
@@ -2493,7 +2265,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -2503,8 +2274,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -2801,7 +2571,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -2811,8 +2580,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3127,7 +2895,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -3137,8 +2904,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3553,7 +3319,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -3563,8 +3328,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -3752,7 +3516,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -3762,8 +3525,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4178,7 +3940,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>0</is_child>
@@ -4188,8 +3949,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>
@@ -4325,7 +4085,6 @@
 				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
-				<is_versioned>0</is_versioned>
 				<is_comparable>0</is_comparable>
 				<is_fluent>0</is_fluent>
 				<is_child>1</is_child>
@@ -4354,8 +4113,7 @@
 						</second>
 					</item>
 				</relationships>
-				<object_type>8</object_type>
-				<is_aggregate_root>0</is_aggregate_root>
+				<object_type>4</object_type>
 				<identity>
 					<count>0</count>
 					<item_version>0</item_version>

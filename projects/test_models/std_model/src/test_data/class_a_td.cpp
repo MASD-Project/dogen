@@ -29,10 +29,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
 }
 
 namespace dogen {
@@ -45,7 +41,6 @@ void class_a_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop0(create_std_string(position + 0));
     v.prop1(create_std_string(position + 1));
-    v.version(create_unsigned_int(position + 2));
 }
 
 class_a_generator::result_type

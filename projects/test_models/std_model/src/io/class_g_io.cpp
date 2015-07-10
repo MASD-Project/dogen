@@ -19,11 +19,10 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/test_models/std_model/io/class_a_io.hpp"
 #include "dogen/test_models/std_model/io/class_g_io.hpp"
 #include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_versioned_key_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_unversioned_key_io.hpp"
 
 namespace std {
 
@@ -89,32 +88,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
     return s;
 }
 
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
+        s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -134,8 +122,7 @@ std::ostream& operator<<(std::ostream& s, const class_g& v) {
       << "\"__type__\": " << "\"dogen::test_models::std_model::class_g\"" << ", "
       << "\"prop_0\": " << v.prop_0() << ", "
       << "\"prop_1\": " << v.prop_1() << ", "
-      << "\"prop_2\": " << v.prop_2() << ", "
-      << "\"prop_3\": " << v.prop_3()
+      << "\"prop_2\": " << v.prop_2()
       << " }";
     return(s);
 }

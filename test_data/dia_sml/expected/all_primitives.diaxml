@@ -359,7 +359,7 @@
 								<item>
 									<which>8</which>
 									<value class_id="22" tracking_level="0" version="0">
-										<value>3.95,10.95;19.95,24.25</value>
+										<value>3.95,10.95;19.95,23.45</value>
 									</value>
 								</item>
 							</values>
@@ -398,7 +398,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>13.200000000000001</value>
+										<value>12.400000000000002</value>
 									</value>
 								</item>
 							</values>
@@ -424,7 +424,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#entity#</value>
+										<value>##</value>
 									</value>
 								</item>
 							</values>
@@ -2397,7 +2397,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>3.95,2.95;32.285,7.15</value>
+										<value>3.95,2.95;32.285,7.95</value>
 									</value>
 								</item>
 							</values>
@@ -2456,7 +2456,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>4.0999999999999996</value>
+										<value>4.8999999999999995</value>
 									</value>
 								</item>
 							</values>

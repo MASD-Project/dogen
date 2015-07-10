@@ -94,14 +94,12 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, v.number_of_type_arguments());
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
-    combine(seed, v.is_versioned());
     combine(seed, v.is_comparable());
     combine(seed, v.is_fluent());
     combine(seed, v.is_child());
     combine(seed, v.is_original_parent_visitable());
     combine(seed, hash_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(v.relationships()));
     combine(seed, v.object_type());
-    combine(seed, v.is_aggregate_root());
     combine(seed, hash_std_list_dogen_sml_property(v.identity()));
     combine(seed, v.is_final());
 

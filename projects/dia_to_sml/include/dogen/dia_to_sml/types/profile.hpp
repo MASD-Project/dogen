@@ -77,19 +77,13 @@ public:
         const bool is_uml_realization,
         const bool is_enumeration,
         const bool is_exception,
-        const bool is_entity,
         const bool is_value_object,
         const bool is_service,
         const bool is_non_generatable,
-        const bool is_versioned,
-        const bool is_keyed_entity,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_fluent,
-        const bool is_aggregate_root,
         const bool is_concept,
-        const bool is_repository,
-        const bool is_factory,
         const std::list<std::string>& unknown_stereotypes);
 
 private:
@@ -173,14 +167,6 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the underlying object is an entity.
-     */
-    /**@{*/
-    bool is_entity() const;
-    void is_entity(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, the underlying object is a value object.
      */
     /**@{*/
@@ -202,22 +188,6 @@ public:
     /**@{*/
     bool is_non_generatable() const;
     void is_non_generatable(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is versioned.
-     */
-    /**@{*/
-    bool is_versioned() const;
-    void is_versioned(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object is an entity with keyes for its identity function.
-     */
-    /**@{*/
-    bool is_keyed_entity() const;
-    void is_keyed_entity(const bool v);
     /**@}*/
 
     /**
@@ -245,35 +215,11 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the underlying object is the root of an aggregate.
-     */
-    /**@{*/
-    bool is_aggregate_root() const;
-    void is_aggregate_root(const bool v);
-    /**@}*/
-
-    /**
      * @brief If true, the underlying object represents a concept.
      */
     /**@{*/
     bool is_concept() const;
     void is_concept(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object represents a repository.
-     */
-    /**@{*/
-    bool is_repository() const;
-    void is_repository(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the underlying object represents a factory.
-     */
-    /**@{*/
-    bool is_factory() const;
-    void is_factory(const bool v);
     /**@}*/
 
     /**
@@ -306,19 +252,13 @@ private:
     bool is_uml_realization_;
     bool is_enumeration_;
     bool is_exception_;
-    bool is_entity_;
     bool is_value_object_;
     bool is_service_;
     bool is_non_generatable_;
-    bool is_versioned_;
-    bool is_keyed_entity_;
     bool is_visitable_;
     bool is_immutable_;
     bool is_fluent_;
-    bool is_aggregate_root_;
     bool is_concept_;
-    bool is_repository_;
-    bool is_factory_;
     std::list<std::string> unknown_stereotypes_;
 };
 

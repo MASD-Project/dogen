@@ -39,7 +39,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("prop0", v.prop0_);
     ar << make_nvp("prop1", v.prop1_);
-    ar << make_nvp("version", v.version_);
 }
 
 template<typename Archive>
@@ -48,7 +47,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop0", v.prop0_);
     ar >> make_nvp("prop1", v.prop1_);
-    ar >> make_nvp("version", v.version_);
 }
 
 } }

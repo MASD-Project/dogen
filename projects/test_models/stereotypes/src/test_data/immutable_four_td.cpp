@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/test_models/stereotypes/test_data/entity_td.hpp"
+#include "dogen/test_models/stereotypes/test_data/value_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/immutable_four_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/immutable_one_primitive_td.hpp"
 
@@ -35,9 +35,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::test_models::stereotypes::entity
-create_dogen_test_models_stereotypes_entity(const unsigned int position) {
-    return dogen::test_models::stereotypes::entity_generator::create(position);
+dogen::test_models::stereotypes::value
+create_dogen_test_models_stereotypes_value(const unsigned int position) {
+    return dogen::test_models::stereotypes::value_generator::create(position);
 }
 
 dogen::test_models::stereotypes::immutable_one_primitive
@@ -58,7 +58,7 @@ immutable_four_generator::create(const unsigned int position) {
     return immutable_four(
         create_bool(position + 0),
         create_std_string(position + 1),
-        create_dogen_test_models_stereotypes_entity(position + 2),
+        create_dogen_test_models_stereotypes_value(position + 2),
         create_dogen_test_models_stereotypes_immutable_one_primitive(position + 3)
         );
 }

@@ -41,10 +41,6 @@ const std::string too_many_sml_types("Can only have one SML type set.");
 const std::string stereotypes_require_uml_class(
     "Only UML classes can have stereotypes.");
 
-const std::string entity_options_on_a_non_entity(
-    "Only SML entities can have entity options.");
-const std::string versioning_options_on_non_versionable(
-    "Versioning options used on a SML type which does not support it.");
 const std::string object_options_on_non_object(
     "Only SML objects can have object options");
 const std::string concepts_require_sml_object(
@@ -55,33 +51,9 @@ const std::string concepts_require_sml_object(
 namespace dogen {
 namespace dia_to_sml {
 
-bool validator::is_entity(const profile& p) const {
-    return p.is_entity() || p.is_keyed_entity() ;
-}
-
-bool validator::is_versionable(const profile& p) const {
-    return
-        p.is_entity() || p.is_keyed_entity() ||
-        p.is_value_object() || p.is_exception();
-}
-
 bool validator::is_object(const profile& p) const {
     return
-        p.is_entity() || p.is_keyed_entity() || p.is_value_object() ||
-        p.is_exception() || p.is_service() || p.is_factory() ||
-        p.is_repository();
-}
-
-unsigned int validator::count_sml_versioning_flags(const profile& p) const {
-    unsigned int r(0);
-    if (p.is_versioned()) ++r;
-    return r;
-}
-
-unsigned int validator::count_sml_entity_flags(const profile& p) const {
-    unsigned int r(0);
-    if (p.is_aggregate_root()) ++r;
-    return r;
+        p.is_value_object() || p.is_exception() || p.is_service();
 }
 
 unsigned int validator::count_sml_object_flags(const profile& p) const {
@@ -98,12 +70,8 @@ unsigned int validator::count_sml_types(const profile& p) const {
 
     if (p.is_enumeration()) ++r;
     if (p.is_exception()) ++r;
-    if (p.is_entity()) ++r;
-    if (p.is_keyed_entity()) ++r;
     if (p.is_value_object()) ++r;
     if (p.is_service()) ++r;
-    if (p.is_factory()) ++r;
-    if (p.is_repository()) ++r;
     if (p.is_concept()) ++r;
 
     return r;
@@ -126,17 +94,14 @@ unsigned int validator::count_uml_types(const profile& p) const {
 void validator::validate_sml(const profile& p) const {
     const auto types(count_sml_types(p));
     const auto object_flags(count_sml_object_flags(p));
-    const auto entity_flags(count_sml_entity_flags(p));
-    const auto versioning_flags(count_sml_versioning_flags(p));
     const bool has_sml_flags(
-        types != 0 || object_flags != 0 || entity_flags != 0 ||
-        versioning_flags  != 0 || !p.unknown_stereotypes().empty());
+        types != 0 || object_flags != 0 || !p.unknown_stereotypes().empty());
 
     if (!has_sml_flags)
         return; // nothing to validate.
 
     /*
-     * rule 1: only UML classes are allowed to have SML flags.
+     * only UML classes are allowed to have SML flags.
      */
     if (!p.is_uml_class()) {
         BOOST_LOG_SEV(lg, error) << stereotypes_require_uml_class;
@@ -144,7 +109,7 @@ void validator::validate_sml(const profile& p) const {
     }
 
     /*
-     * rule 2: we can have at most one SML type. Zero is fine as
+     *  we can have at most one SML type. Zero is fine as
      * someone above us will provide defaulting.
      */
     if (types > 1) {
@@ -152,29 +117,11 @@ void validator::validate_sml(const profile& p) const {
         BOOST_THROW_EXCEPTION(validation_error(too_many_sml_types));
     }
 
-    /*
-     * rule 3: only SML entities are allowed to have entity flags.
-     */
-    if (entity_flags > 0 && !is_entity(p)) {
-        BOOST_LOG_SEV(lg, error) << entity_options_on_a_non_entity;
-        BOOST_THROW_EXCEPTION(validation_error(entity_options_on_a_non_entity));
-    }
-
-    /**
-     * @brief rule 4: only versionable types are allowed to have
-     * versioning flags.
-     */
-    if (versioning_flags > 0 && !is_versionable(p)) {
-        BOOST_LOG_SEV(lg, error) << versioning_options_on_non_versionable;
-        BOOST_THROW_EXCEPTION(validation_error(
-                versioning_options_on_non_versionable));
-    }
-
     if (is_object(p))
         return; // nothing else to validate for SML objects.
 
     /*
-     * rule 5: non SML objects are not allowed to have object flags.
+     * non SML objects are not allowed to have object flags.
      */
     if (object_flags > 0) {
         BOOST_LOG_SEV(lg, error) << object_options_on_non_object;
@@ -182,7 +129,7 @@ void validator::validate_sml(const profile& p) const {
     }
 
     /*
-     * rule 6: non SML objects are not allowed to have concepts.
+     *  non SML objects are not allowed to have concepts.
      */
     if (!p.unknown_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, error) << concepts_require_sml_object << ": "

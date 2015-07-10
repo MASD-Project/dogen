@@ -27,26 +27,22 @@ namespace std_model {
 class_g::class_g(
     const std::unordered_map<dogen::test_models::std_model::class_a, std::vector<dogen::test_models::std_model::pkg1::class_c> >& prop_0,
     const std::unordered_map<dogen::test_models::std_model::pkg1::class_c, std::list<dogen::test_models::std_model::class_a> >& prop_1,
-    const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& prop_2,
-    const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& prop_3)
+    const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& prop_2)
     : prop_0_(prop_0),
       prop_1_(prop_1),
-      prop_2_(prop_2),
-      prop_3_(prop_3) { }
+      prop_2_(prop_2) { }
 
 void class_g::swap(class_g& other) noexcept {
     using std::swap;
     swap(prop_0_, other.prop_0_);
     swap(prop_1_, other.prop_1_);
     swap(prop_2_, other.prop_2_);
-    swap(prop_3_, other.prop_3_);
 }
 
 bool class_g::operator==(const class_g& rhs) const {
     return prop_0_ == rhs.prop_0_ &&
         prop_1_ == rhs.prop_1_ &&
-        prop_2_ == rhs.prop_2_ &&
-        prop_3_ == rhs.prop_3_;
+        prop_2_ == rhs.prop_2_;
 }
 
 class_g& class_g::operator=(class_g other) {
@@ -87,36 +83,20 @@ void class_g::prop_1(const std::unordered_map<dogen::test_models::std_model::pkg
     prop_1_ = std::move(v);
 }
 
-const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& class_g::prop_2() const {
+const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& class_g::prop_2() const {
     return prop_2_;
 }
 
-std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& class_g::prop_2() {
+std::unordered_map<std::string, dogen::test_models::std_model::class_a>& class_g::prop_2() {
     return prop_2_;
 }
 
-void class_g::prop_2(const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>& v) {
+void class_g::prop_2(const std::unordered_map<std::string, dogen::test_models::std_model::class_a>& v) {
     prop_2_ = v;
 }
 
-void class_g::prop_2(const std::unordered_map<dogen::test_models::std_model::class_a_unversioned_key, dogen::test_models::std_model::class_a>&& v) {
+void class_g::prop_2(const std::unordered_map<std::string, dogen::test_models::std_model::class_a>&& v) {
     prop_2_ = std::move(v);
-}
-
-const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& class_g::prop_3() const {
-    return prop_3_;
-}
-
-std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& class_g::prop_3() {
-    return prop_3_;
-}
-
-void class_g::prop_3(const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>& v) {
-    prop_3_ = v;
-}
-
-void class_g::prop_3(const std::unordered_map<dogen::test_models::std_model::class_a_versioned_key, dogen::test_models::std_model::class_a>&& v) {
-    prop_3_ = std::move(v);
 }
 
 } } }

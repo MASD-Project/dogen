@@ -2757,7 +2757,7 @@ All of these steps are encompassed in the SML @ref workflow.
         <dia:string>#module#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, Element#</dia:string>
+        <dia:string>#Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Packaging unit.
@@ -2916,7 +2916,7 @@ Aggregates a group of logically related types into a unit.#</dia:string>
         <dia:string>#concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, Object#</dia:string>
+        <dia:string>#Object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a concept, similar to the C++ definition.#</dia:string>
@@ -4896,7 +4896,7 @@ for Java, etc.#</dia:string>
         <dia:point val="81,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.95,84.95;85.6225,88.05"/>
+        <dia:rectangle val="80.95,84.95;85.6225,87.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="81,85"/>
@@ -4905,13 +4905,13 @@ for Java, etc.#</dia:string>
         <dia:real val="4.5724999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a value type that is built-in to the language.#</dia:string>
@@ -5228,7 +5228,7 @@ for Java, etc.#</dia:string>
         <dia:point val="29,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,84.95;43.795,89.45"/>
+        <dia:rectangle val="28.95,84.95;43.795,88.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="29,85"/>
@@ -5237,13 +5237,13 @@ for Java, etc.#</dia:string>
         <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, aggregate root#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Defines a bounded set of logically related values for a primitive type or a string.#</dia:string>
@@ -5579,16 +5579,16 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="36.3725,89.4"/>
+        <dia:point val="36.3725,88.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.8575,88.65;37.1225,99.8"/>
+        <dia:rectangle val="31.8575,87.85;37.1225,99.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="36.3725,89.4"/>
+        <dia:point val="36.3725,88.6"/>
         <dia:point val="36.3725,94"/>
         <dia:point val="31.9075,94"/>
         <dia:point val="31.9075,99"/>
@@ -5699,7 +5699,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="48,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,84.95;75.885,99.05"/>
+        <dia:rectangle val="47.95,84.95;75.885,97.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,85"/>
@@ -5708,7 +5708,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000002"/>
+        <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -5894,29 +5894,6 @@ Only applicable if is_parent is true.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#is_versioned#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, add a version property to the type.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#is_comparable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -6047,29 +6024,6 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#What kind of object is this.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_aggregate_root#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, this type is a root of an aggregate.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6227,7 +6181,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#entity, aggregate root, Element#</dia:string>
+        <dia:string>#Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Software representation of a domain model.
@@ -9129,16 +9083,16 @@ not have a need for it.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="48,99"/>
+        <dia:point val="48,97.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.3587,98.25;48.75,109.8"/>
+        <dia:rectangle val="44.3587,96.65;48.75,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="48,99"/>
+        <dia:point val="48,97.4"/>
         <dia:point val="48,104"/>
         <dia:point val="44.4087,104"/>
         <dia:point val="44.4087,109"/>
@@ -11063,16 +11017,16 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.835,99"/>
+        <dia:point val="75.835,97.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.085,98.25;79.455,109.8"/>
+        <dia:rectangle val="75.085,96.65;79.455,109.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.835,99"/>
+        <dia:point val="75.835,97.4"/>
         <dia:point val="75.835,104"/>
         <dia:point val="79.255,104"/>
         <dia:point val="79.255,109"/>

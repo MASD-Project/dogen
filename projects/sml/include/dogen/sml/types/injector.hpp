@@ -43,7 +43,7 @@ namespace sml {
  * type. This is the case with versioning, for example.
  *
  * @li whether to create supporting types that enhance the current
- * type. This is the case with the generation of keys, visitors, etc.
+ * type. This is the case with the generation of visitors, etc.
  *
  * Note: we have taken the simplistic approach of looping over the
  * object collection as many times as required, to keep the logic
@@ -69,51 +69,6 @@ private:
      * otherwise.
      */
     bool insert(const object& o);
-
-    /**
-     * @brief Creates a key for the given entity.
-     *
-     * @param qn name of the entity for which to create the key
-     * @param gt type of the generation to apply to the key
-     * @param properties identity function for the entity
-     * @param versioned if true, create a versioned key. Otherwise,
-     * creates an unversioned key.
-     */
-    object create_key(const qname& qn, const generation_types gt,
-        const std::list<property>& properties, const bool versioned) const;
-
-    /**
-     * @brief Helper functions for create key just for the sake of
-     * clarity.
-     */
-    /**@{*/
-    object create_versioned_key(const qname& qn, const generation_types gt,
-        const std::list<property>& properties) const;
-    object create_unversioned_key(const qname& qn, const generation_types gt,
-        const std::list<property>& properties) const;
-    /**@}*/
-
-    /**
-     * @brief Create a visitor for the object.
-     */
-    object create_key_extractor(const object& ke) const;
-
-    /**
-     * @brief Injects versioned and unversioned keys for keyed
-     * entities, and the associated key extractor.
-     */
-    void inject_keys();
-
-    /**
-     * @brief Injects the version property on the object passed in.
-     */
-    void inject_version(object& p) const;
-
-    /**
-     * @brief Injects the version property on any types marked as
-     * versioned.
-     */
-    void inject_version();
 
     /**
      * @brief Create a visitor for the object o.

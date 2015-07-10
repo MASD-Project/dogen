@@ -119,16 +119,14 @@ populate(const unsigned int position, result_type& v) {
     v.number_of_type_arguments(create_unsigned_int(position + 5));
     v.is_visitable(create_bool(position + 6));
     v.is_immutable(create_bool(position + 7));
-    v.is_versioned(create_bool(position + 8));
-    v.is_comparable(create_bool(position + 9));
-    v.is_fluent(create_bool(position + 10));
-    v.is_child(create_bool(position + 11));
-    v.is_original_parent_visitable(create_bool(position + 12));
-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 13));
-    v.object_type(create_dogen_sml_object_types(position + 14));
-    v.is_aggregate_root(create_bool(position + 15));
-    v.identity(create_std_list_dogen_sml_property(position + 16));
-    v.is_final(create_bool(position + 17));
+    v.is_comparable(create_bool(position + 8));
+    v.is_fluent(create_bool(position + 9));
+    v.is_child(create_bool(position + 10));
+    v.is_original_parent_visitable(create_bool(position + 11));
+    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 12));
+    v.object_type(create_dogen_sml_object_types(position + 13));
+    v.identity(create_std_list_dogen_sml_property(position + 14));
+    v.is_final(create_bool(position + 15));
 }
 
 object_generator::result_type

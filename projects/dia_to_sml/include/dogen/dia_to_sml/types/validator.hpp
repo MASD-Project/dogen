@@ -57,18 +57,6 @@ public:
 private:
     /**
      * @brief Returns true if the SML flags with type information
-     * describe a type which is a descendant of @ref abstract_entity.
-     */
-    bool is_entity(const profile& p) const;
-
-    /**
-     * @brief Returns true if the SML flags with type information
-     * describe a type which can support versioning.
-     */
-    bool is_versionable(const profile& p) const;
-
-    /**
-     * @brief Returns true if the SML flags with type information
      * describe a type which is a descendant of @ref object.
      *
      * @pre flags must have been validated for consistency.
@@ -76,18 +64,6 @@ private:
     bool is_object(const profile& p) const;
 
 private:
-    /**
-     * @brief Returns the number of flags that are related to
-     * versioning.
-     */
-    unsigned int count_sml_versioning_flags(const profile& p) const;
-
-    /**
-     * @brief Returns the number of flags that are options on SML
-     * entity objects.
-     */
-    unsigned int count_sml_entity_flags(const profile& p) const;
-
     /**
      * @brief Returns the number of flags that are options on SML
      * objects.

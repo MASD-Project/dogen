@@ -28,8 +28,6 @@
 #include <vector>
 #include <algorithm>
 #include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
 #include "dogen/test_models/std_model/serialization/pkg1/class_c_fwd_ser.hpp"
 
 namespace dogen {
@@ -49,9 +47,7 @@ public:
 public:
     class_c(
         const int prop_0,
-        const std::vector<dogen::test_models::std_model::class_a>& prop_1,
-        const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& prop_2,
-        const std::vector<dogen::test_models::std_model::class_a_versioned_key>& prop_3);
+        const std::vector<dogen::test_models::std_model::class_a>& prop_1);
 
 private:
     template<typename Archive>
@@ -69,16 +65,6 @@ public:
     void prop_1(const std::vector<dogen::test_models::std_model::class_a>& v);
     void prop_1(const std::vector<dogen::test_models::std_model::class_a>&& v);
 
-    const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& prop_2() const;
-    std::vector<dogen::test_models::std_model::class_a_unversioned_key>& prop_2();
-    void prop_2(const std::vector<dogen::test_models::std_model::class_a_unversioned_key>& v);
-    void prop_2(const std::vector<dogen::test_models::std_model::class_a_unversioned_key>&& v);
-
-    const std::vector<dogen::test_models::std_model::class_a_versioned_key>& prop_3() const;
-    std::vector<dogen::test_models::std_model::class_a_versioned_key>& prop_3();
-    void prop_3(const std::vector<dogen::test_models::std_model::class_a_versioned_key>& v);
-    void prop_3(const std::vector<dogen::test_models::std_model::class_a_versioned_key>&& v);
-
 public:
     bool operator==(const class_c& rhs) const;
     bool operator!=(const class_c& rhs) const {
@@ -92,8 +78,6 @@ public:
 private:
     int prop_0_;
     std::vector<dogen::test_models::std_model::class_a> prop_1_;
-    std::vector<dogen::test_models::std_model::class_a_unversioned_key> prop_2_;
-    std::vector<dogen::test_models::std_model::class_a_versioned_key> prop_3_;
 };
 
 } } } }

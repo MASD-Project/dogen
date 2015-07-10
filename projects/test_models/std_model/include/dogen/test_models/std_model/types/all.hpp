@@ -38,7 +38,5 @@
 #include "dogen/test_models/std_model/types/primitives.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
 #include "dogen/test_models/std_model/types/some_service.hpp"
-#include "dogen/test_models/std_model/types/class_a_versioned_key.hpp"
-#include "dogen/test_models/std_model/types/class_a_unversioned_key.hpp"
 
 #endif

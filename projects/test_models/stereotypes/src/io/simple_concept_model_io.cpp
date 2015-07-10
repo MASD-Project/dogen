@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/stereotypes/io/entity_io.hpp"
+#include "dogen/test_models/stereotypes/io/value_io.hpp"
 #include "dogen/test_models/stereotypes/io/simple_concept_model_io.hpp"
 
 namespace dogen {

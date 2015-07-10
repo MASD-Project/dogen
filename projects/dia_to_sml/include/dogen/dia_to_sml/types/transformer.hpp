@@ -188,17 +188,6 @@ private:
 
 private:
     /**
-     * @brief Converts a processed object containing a UML class with a
-     * stereotype of entity or keyed entity to an SML entity.
-     *
-     * @param o the processed object containing an entity or keyed entity.
-     * @param p profile of the object.
-     *
-     * @pre profile must have the entity flag set.
-     */
-    void to_entity(const processed_object& o, const profile& p);
-
-    /**
      * @brief Converts a processed object containing a UML class with
      * a stereotype of exception to a SML exception.
      *
@@ -219,15 +208,6 @@ private:
      * @pre profile must have the service flag set.
      */
     void to_service(const processed_object& o, const profile& p);
-
-    /**
-     * @brief Converts Dia a object containing a UML class to
-     * an SML object.
-     *
-     * @param o the Dia UML class containing an enumeration.
-     * @param p profile of the object.
-     */
-    void to_object(const processed_object& po, const profile& p);
 
     /**
      * @brief Converts Dia a object containing a UML class with a

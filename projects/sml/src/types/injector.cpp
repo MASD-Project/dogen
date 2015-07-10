@@ -42,10 +42,7 @@ const std::string text_extension(".txt");
 const std::string binary_extension(".bin");
 const std::string dia_model("dia");
 const std::string sml_model("sml");
-const std::string key_extractor_name("key_extractor");
 const std::string visitor_name("visitor");
-const std::string versioned_name("versioned_key");
-const std::string unversioned_name("unversioned_key");
 const std::string extract_name("extract");
 const std::string uint_name("unsigned int");
 const std::string id_name("id");
@@ -53,19 +50,13 @@ const std::string version_name("version");
 const std::string visitor_argument_name("v");
 const std::string extractor_argument_name("e");
 const std::string visitor_doc("Visitor for ");
-const std::string key_extractor_doc("Extracts keys for type ");
 const std::string visit_operation_doc("Accept visits for type ");
-const std::string unversioned_key_doc("Unversioned key for ");
-const std::string versioned_key_doc("Versioned key for ");
-const std::string versioned_property_doc("Object instance's version.");
 const std::string global_module_doc("Module that represents the global scope.");
 const std::string empty_identity(
     "Identity must have at least one attribute: ");
 const std::string duplicate_qname(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
-const std::string unversioned_key_not_found(
-    "Object is an entity but has no unversioned key: ");
 const std::string leaf_not_found("Could not find leaf object: ");
 const std::string model_already_has_global_module(
     "Found a global module in model: ");
@@ -101,173 +92,6 @@ bool injector::insert(const object& o) {
             std::make_pair(o.name(), o)));
 
     return i.second;
-}
-
-object injector::create_key(const qname& qn, const generation_types gt,
-    const std::list<property>& properties, const bool versioned) const {
-
-    qname kqn;
-    kqn.simple_name(qn.simple_name() + "_" +
-        (versioned ? versioned_name : unversioned_name));
-    kqn.model_name(qn.model_name());
-    kqn.module_path(qn.module_path());
-    kqn.external_module_path(qn.external_module_path());
-
-    object r;
-    r.is_final(true);
-    r.name(kqn);
-    r.generation_type(gt);
-    r.origin_type(origin_types::system);
-
-    const auto vk(object_types::versioned_key);
-    const auto uvk(object_types::unversioned_key);
-    r.object_type(versioned ? vk : uvk);
-
-    const auto doc(versioned ? versioned_key_doc : unversioned_key_doc);
-    r.documentation(doc + qn.simple_name());
-    r.local_properties(properties);
-
-    if (versioned)
-        inject_version(r);
-
-    BOOST_LOG_SEV(lg, debug) << "Created key: "
-                             << string_converter::convert(kqn);
-    return r;
-}
-
-object injector::create_versioned_key(const qname& qn,
-    const generation_types gt, const std::list<property>& properties) const {
-    return create_key(qn, gt, properties, true);
-}
-
-object injector::create_unversioned_key(const qname& qn,
-    const generation_types gt, const std::list<property>& properties) const {
-    return create_key(qn, gt, properties, false);
-}
-
-object injector::create_key_extractor(const object& ke) const {
-    qname qn;
-    qn.simple_name(ke.name().simple_name() + "_" + key_extractor_name);
-    qn.model_name(ke.name().model_name());
-    qn.module_path(ke.name().module_path());
-    qn.external_module_path(ke.name().external_module_path());
-
-    BOOST_LOG_SEV(lg, debug) << "Creating extractor: "
-                             << string_converter::convert(qn);
-
-    object r;
-    r.name(qn);
-    r.is_final(true);
-    r.generation_type(ke.generation_type());
-    r.origin_type(origin_types::system);
-    r.object_type(object_types::key_extractor);
-    r.documentation(visitor_doc + ke.name().simple_name());
-
-    // FIXME: create these methods with correct names
-    parameter p;
-    p.name(extractor_argument_name);
-
-    nested_qname nqn;
-    const auto i(ke.relationships().find(relationship_types::unversioned_keys));
-    if (i == ke.relationships().end() || i->second.size() != 1) {
-        const auto n(string_converter::convert(ke.name()));
-        BOOST_LOG_SEV(lg, error) << unversioned_key_not_found << n;
-        BOOST_THROW_EXCEPTION(injection_error(unversioned_key_not_found + n));
-    }
-    nqn.type(i->second.front());
-    p.type(nqn);
-
-    operation opuv;
-    opuv.name(unversioned_name);
-    opuv.parameters().push_back(p);
-    opuv.documentation(key_extractor_doc + ke.name().simple_name());
-    r.operations().push_back(opuv);
-
-    BOOST_LOG_SEV(lg, debug) << "Created extractor: "
-                             << string_converter::convert(qn);
-    return r;
-}
-
-void injector::inject_keys() {
-    BOOST_LOG_SEV(lg, debug) << "Injecting keys.";
-
-    std::list<object> objects;
-    for (auto& pair : context_->model().objects()) {
-        const auto qn(pair.first);
-        auto& o(pair.second);
-
-        BOOST_LOG_SEV(lg, debug) << "Visiting: "
-                                 << string_converter::convert(qn);
-        if (o.object_type() != object_types::keyed_entity)
-            continue;
-
-        if (o.identity().empty()) {
-            const auto n(string_converter::convert(qn));
-            BOOST_LOG_SEV(lg, error) << empty_identity << n;
-
-            BOOST_THROW_EXCEPTION(injection_error(empty_identity + n));
-        }
-        BOOST_LOG_SEV(lg, debug) << "Attributes in identity operation: "
-                                 << o.identity().size();
-
-        const auto gt(o.generation_type());
-        const auto uvk(create_unversioned_key(qn, gt, o.identity()));
-        objects.push_back(uvk);
-        o.relationships()[relationship_types::unversioned_keys].push_back(
-            uvk.name());
-
-        if (o.is_versioned()) {
-            auto vk(create_versioned_key(qn, gt, o.identity()));
-            o.relationships()[relationship_types::versioned_keys].push_back(
-                vk.name());
-            objects.push_back(vk);
-        }
-
-        // FIXME
-        // objects.push_back(create_key_extractor(ke));
-    }
-
-    for (const auto& o : objects) {
-        if (!insert(o)) {
-            const auto n(string_converter::convert(o.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(injection_error(duplicate_qname + n));
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Done injecting keys. Total: "
-                             << objects.size();
-}
-
-void injector::inject_version(object& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Injecting version property to type: "
-                             << string_converter::convert(p.name());
-
-    qname qn;
-    qn.simple_name(uint_name);
-
-    nested_qname nqn;
-    nqn.type(qn);
-
-    property v;
-    v.name(version_name);
-    v.type(nqn);
-    v.documentation(versioned_property_doc);
-
-    p.local_properties().push_back(v);
-}
-
-void injector::inject_version() {
-    BOOST_LOG_SEV(lg, debug) << "Injecting version property on all types.";
-
-    for (auto& pair : context_->model().objects()) {
-        auto& o(pair.second);
-
-        if (o.is_versioned())
-            inject_version(o);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Done injecting version property on all types.";
 }
 
 object injector::
@@ -383,8 +207,6 @@ void injector::inject_global_module() {
 
 void injector::inject(model& m) {
     context_ = std::unique_ptr<context>(new context(m));
-    inject_version();
-    inject_keys();
     inject_visitors();
     inject_global_module();
     context_ = std::unique_ptr<context>();

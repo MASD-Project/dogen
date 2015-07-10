@@ -89,10 +89,9 @@ namespace dogen {
  * SML property rather than a member variable. This means that it is
  * expected that a getter and a setter will be generated.
  *
- * @li a number of DDD stereotypes were added: @e entity, @e factory, @eservice,
- * @e value @e object and @e repository. In addition, entities can have the
- * stereotype of @e aggregate @e root. These all map directly to the DDD ideas
- * defined by Eric Evans in the Domain Driven Design book.
+ * @li a number of DDD stereotypes were added:@e service, @e value and @e
+ * object. These all map directly to the DDD ideas defined by Eric Evans
+ * in the Domain Driven Design book.
  *
  * @li a number of SML specific stereotypes were added: @e exception,
  * @e enumeration, @e concept, @e visitable, @e fluent, @e immutable,

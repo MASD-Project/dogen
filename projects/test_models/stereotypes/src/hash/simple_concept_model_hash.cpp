@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/stereotypes/hash/entity_hash.hpp"
+#include "dogen/test_models/stereotypes/hash/value_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/simple_concept_model_hash.hpp"
 
 namespace {
