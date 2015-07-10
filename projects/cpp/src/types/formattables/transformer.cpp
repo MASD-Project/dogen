@@ -566,11 +566,7 @@ transform(const sml::object& o) const {
                              << sml::string_converter::convert(o.name());
 
     std::forward_list<std::shared_ptr<formattable> > r;
-
-    // FIXME: hack for now, excluding any forward declarations that
-    // didn't get generated in the old world.
-    if (o.object_type() != sml::object_types::visitor)
-        r.push_front(to_forward_declarations_info(o));
+    r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
     case sml::object_types::user_defined_service:
