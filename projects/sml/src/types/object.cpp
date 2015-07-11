@@ -111,7 +111,6 @@ namespace sml {
 
 object::object()
     : is_parent_(static_cast<bool>(0)),
-      number_of_type_arguments_(static_cast<unsigned int>(0)),
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
@@ -132,7 +131,6 @@ object::object(
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
     const std::list<dogen::sml::operation>& operations,
     const bool is_parent,
-    const unsigned int number_of_type_arguments,
     const bool is_visitable,
     const bool is_immutable,
     const bool is_fluent,
@@ -153,7 +151,6 @@ object::object(
       inherited_properties_(inherited_properties),
       operations_(operations),
       is_parent_(is_parent),
-      number_of_type_arguments_(number_of_type_arguments),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
@@ -180,7 +177,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"inherited_properties\": " << inherited_properties_ << ", "
       << "\"operations\": " << operations_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
-      << "\"number_of_type_arguments\": " << number_of_type_arguments_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
@@ -201,7 +197,6 @@ void object::swap(object& other) noexcept {
     swap(inherited_properties_, other.inherited_properties_);
     swap(operations_, other.operations_);
     swap(is_parent_, other.is_parent_);
-    swap(number_of_type_arguments_, other.number_of_type_arguments_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
@@ -225,7 +220,6 @@ bool object::operator==(const object& rhs) const {
         inherited_properties_ == rhs.inherited_properties_ &&
         operations_ == rhs.operations_ &&
         is_parent_ == rhs.is_parent_ &&
-        number_of_type_arguments_ == rhs.number_of_type_arguments_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
@@ -312,14 +306,6 @@ bool object::is_parent() const {
 
 void object::is_parent(const bool v) {
     is_parent_ = v;
-}
-
-unsigned int object::number_of_type_arguments() const {
-    return number_of_type_arguments_;
-}
-
-void object::number_of_type_arguments(const unsigned int v) {
-    number_of_type_arguments_ = v;
 }
 
 bool object::is_visitable() const {

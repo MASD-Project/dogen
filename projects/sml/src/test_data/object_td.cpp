@@ -71,10 +71,6 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
-unsigned int create_unsigned_int(const unsigned int position) {
-    return static_cast<unsigned int>(position);
-}
-
 dogen::sml::relationship_types
 create_dogen_sml_relationship_types(const unsigned int position) {
     return dogen::sml::relationship_types_generator::create(position);
@@ -116,15 +112,14 @@ populate(const unsigned int position, result_type& v) {
     v.inherited_properties(create_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(position + 2));
     v.operations(create_std_list_dogen_sml_operation(position + 3));
     v.is_parent(create_bool(position + 4));
-    v.number_of_type_arguments(create_unsigned_int(position + 5));
-    v.is_visitable(create_bool(position + 6));
-    v.is_immutable(create_bool(position + 7));
-    v.is_fluent(create_bool(position + 8));
-    v.is_child(create_bool(position + 9));
-    v.is_original_parent_visitable(create_bool(position + 10));
-    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 11));
-    v.object_type(create_dogen_sml_object_types(position + 12));
-    v.is_final(create_bool(position + 13));
+    v.is_visitable(create_bool(position + 5));
+    v.is_immutable(create_bool(position + 6));
+    v.is_fluent(create_bool(position + 7));
+    v.is_child(create_bool(position + 8));
+    v.is_original_parent_visitable(create_bool(position + 9));
+    v.relationships(create_std_unordered_map_dogen_sml_relationship_types_std_list_dogen_sml_qname_(position + 10));
+    v.object_type(create_dogen_sml_object_types(position + 11));
+    v.is_final(create_bool(position + 12));
 }
 
 object_generator::result_type

@@ -93,6 +93,12 @@ private:
      */
     model read_stream(std::istream& s, const bool is_target) const;
 
+    /**
+     * @brief Converts a string to a value in the object types
+     * enumeration.
+     */
+    object_types to_object_type(const boost::optional<std::string>& s) const;
+
 private:
     /**
      * @brief Perform all of the adjustments required to the model

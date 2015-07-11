@@ -72,6 +72,7 @@ const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string model_has_no_types("Did not find any elements in model");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
+const std::string invalid_object_type("Invalid or unsupported object type: ");
 
 }
 
@@ -222,24 +223,7 @@ read_element(const boost::property_tree::ptree& pt, model& m) const {
         lambda(o);
 
         const auto ot(pt.get_optional<std::string>(object_type_key));
-        if (ot) {
-            // FIXME: we should read the number of type arguments from file
-            if (*ot == object_type_smart_pointer_value) {
-                o.object_type(object_types::smart_pointer);
-                o.number_of_type_arguments(1);
-            } else if (*ot == object_type_ordered_container_value) {
-                o.object_type(object_types::ordered_container);
-                o.number_of_type_arguments(2);
-            } else if (*ot == object_type_hash_container_value) {
-                o.object_type(object_types::hash_container);
-                o.number_of_type_arguments(2);
-            } else if (*ot == object_type_sequence_container_value) {
-                o.object_type(object_types::sequence_container);
-                o.number_of_type_arguments(1);
-            }
-        } else
-            o.object_type(object_types::user_defined_value_object);
-
+        o.object_type(to_object_type(ot));
         m.objects().insert(std::make_pair(qn, o));
     } else if (meta_type_value == meta_type_primitive_value) {
         primitive p;
@@ -303,6 +287,25 @@ model json_hydrator::read_stream(std::istream& s, const bool is_target) const {
         read_element(j->second, r);
 
     return r;
+}
+
+object_types json_hydrator::
+to_object_type(const boost::optional<std::string>& s) const {
+    if (!s)
+        return object_types::user_defined_value_object;
+
+    const auto ot(*s);
+    if (ot == object_type_smart_pointer_value)
+        return object_types::smart_pointer;
+    else if (ot == object_type_ordered_container_value)
+        return object_types::ordered_container;
+    else if (ot == object_type_hash_container_value)
+        return object_types::hash_container;
+    else if (ot == object_type_sequence_container_value)
+        return object_types::sequence_container;
+
+    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
+    BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
 void json_hydrator::post_process(model& m) const {

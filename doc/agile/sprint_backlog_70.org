@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-10 Fri 23:12]
+#+CAPTION: Clock summary at [2015-07-11 Sat 22:20]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *21:32* |       |      |
+| *Total time*                                                                | *22:20* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 21:32   |       |      |
-| Active                                                                      |         | 21:32 |      |
+| Stories                                                                     | 22:20   |       |      |
+| Active                                                                      |         | 22:20 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:16 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -45,6 +45,8 @@
 | COMPLETED Remove is comparable from SML                                     |         |       | 0:15 |
 | COMPLETED Add forward declarations to visitor                               |         |       | 0:06 |
 | COMPLETED Remove unused properties in CPP model                             |         |       | 0:22 |
+| COMPLETED Remove default values in SML                                      |         |       | 0:15 |
+| COMPLETED Consider removing =number_of_type_arguments= in SML               |         |       | 0:33 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
@@ -278,6 +280,12 @@ any others that are not used by the new world formatters.
 We seem to have started adding these but its just another case of
 half-baked support. Remove all remnants.
 
+*** COMPLETED Consider removing =number_of_type_arguments= in SML     :story:
+    CLOSED: [2015-07-11 Sat 22:20]
+    CLOCK: [2015-07-11 Sat 21:47]--[2015-07-11 Sat 22:20] =>  0:33
+
+Check to see if this property is used and if not, remove it.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
 
@@ -444,10 +452,6 @@ What can be said about an archetype:
   somewhere, given them a name and then assign a type to a map. In
   addition, we need a way to express "generate but don't override" and
   "generate and override".
-
-*** Consider removing =number_of_type_arguments= in SML               :story:
-
-Check to see if this property is used and if not, remove it.
 
 *** Set enumeration underlying type in SML
 

@@ -68,7 +68,6 @@ public:
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
         const std::list<dogen::sml::operation>& operations,
         const bool is_parent,
-        const unsigned int number_of_type_arguments,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_fluent,
@@ -164,14 +163,6 @@ public:
     /**@}*/
 
     /**
-     * @brief How many type arguments does this type have
-     */
-    /**@{*/
-    unsigned int number_of_type_arguments() const;
-    void number_of_type_arguments(const unsigned int v);
-    /**@}*/
-
-    /**
      * @brief If true, a visitor is to be generated for this type and its descendants.
      *
      * Only applicable if is_parent is true.
@@ -255,7 +246,6 @@ private:
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
     std::list<dogen::sml::operation> operations_;
     bool is_parent_;
-    unsigned int number_of_type_arguments_;
     bool is_visitable_;
     bool is_immutable_;
     bool is_fluent_;

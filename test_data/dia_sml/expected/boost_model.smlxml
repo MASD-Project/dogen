@@ -483,7 +483,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -554,7 +553,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -644,7 +642,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -697,7 +694,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -749,7 +745,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -820,7 +815,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -854,7 +848,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -869,7 +862,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -974,7 +966,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -989,7 +980,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -1095,7 +1085,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1129,7 +1118,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1163,7 +1151,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1216,7 +1203,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1269,7 +1255,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1322,7 +1307,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1337,7 +1321,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -1443,7 +1426,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1458,7 +1440,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -1563,7 +1544,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1578,7 +1558,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>1</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -1683,7 +1662,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1698,7 +1676,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -1841,7 +1818,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1893,7 +1869,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -1946,7 +1921,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2017,7 +1991,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2032,7 +2005,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -2138,7 +2110,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2191,7 +2162,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2206,7 +2176,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -2312,7 +2281,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2348,7 +2316,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2384,7 +2351,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2399,7 +2365,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -2506,7 +2471,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2558,7 +2522,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2573,7 +2536,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
@@ -2716,7 +2678,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2806,7 +2767,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -2915,7 +2875,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3005,7 +2964,6 @@
 							</children>
 							<is_pointer>0</is_pointer>
 						</type>
-						<default_value></default_value>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
 					</item>
@@ -3020,7 +2978,6 @@
 					<item_version>0</item_version>
 				</operations>
 				<is_parent>0</is_parent>
-				<number_of_type_arguments>0</number_of_type_arguments>
 				<is_visitable>0</is_visitable>
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>

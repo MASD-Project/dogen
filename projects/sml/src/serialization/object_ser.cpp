@@ -55,7 +55,6 @@ void save(Archive& ar,
     ar << make_nvp("inherited_properties", v.inherited_properties_);
     ar << make_nvp("operations", v.operations_);
     ar << make_nvp("is_parent", v.is_parent_);
-    ar << make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
     ar << make_nvp("is_visitable", v.is_visitable_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
@@ -77,7 +76,6 @@ void load(Archive& ar,
     ar >> make_nvp("inherited_properties", v.inherited_properties_);
     ar >> make_nvp("operations", v.operations_);
     ar >> make_nvp("is_parent", v.is_parent_);
-    ar >> make_nvp("number_of_type_arguments", v.number_of_type_arguments_);
     ar >> make_nvp("is_visitable", v.is_visitable_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
