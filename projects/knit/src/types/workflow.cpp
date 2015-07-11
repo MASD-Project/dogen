@@ -27,10 +27,10 @@
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/config/types/knitting_options_validator.hpp"
 #include "dogen/config/io/knitting_options_io.hpp"
-#include "dogen/knit/types/generation_failure.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
 #include "dogen/knit/types/middle_end_to_backend_workflow.hpp"
 #include "dogen/backend/types/workflow.hpp"
+#include "dogen/knit/types/workflow_error.hpp"
 #include "dogen/knit/types/workflow.hpp"
 
 typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
@@ -107,7 +107,7 @@ void workflow::execute() const {
         middle_end_to_backend_workflow mbw(knitting_options_, rp);
         mbw.execute(m);
     } catch(const dogen::formatters::formatting_error& e) {
-        BOOST_THROW_EXCEPTION(dogen::knit::generation_failure(e.what()));
+        BOOST_THROW_EXCEPTION(workflow_error(e.what()));
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
         throw;

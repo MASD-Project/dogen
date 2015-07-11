@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-11 Sat 22:58]
+#+CAPTION: Clock summary at [2015-07-11 Sat 23:31]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:51* |       |      |
+| *Total time*                                                                | *23:21* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:51   |       |      |
-| Active                                                                      |         | 22:51 |      |
+| Stories                                                                     | 23:21   |       |      |
+| Active                                                                      |         | 23:21 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:16 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -51,6 +51,8 @@
 | COMPLETED Remove unused relationship types in SML                           |         |       | 0:06 |
 | CANCELLED Remove inherited properties in SML                                |         |       | 0:09 |
 | COMPLETED Remove all types traversal from SML                               |         |       | 0:05 |
+| COMPLETED Remove operations in SML                                          |         |       | 0:17 |
+| COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
@@ -322,6 +324,13 @@ This does not appear to be used.
     CLOCK: [2015-07-11 Sat 22:59]--[2015-07-11 Sat 23:16] =>  0:17
 
 We have some half-baked support for operations. Remove it.
+
+*** COMPLETED Remove generation failure exception in knit             :story:
+    CLOSED: [2015-07-11 Sat 23:31]
+    CLOCK: [2015-07-11 Sat 23:18]--[2015-07-11 Sat 23:31] =>  0:13
+
+At present we have two types of exceptions in knit: workflow error and
+generation failure. We should only have one type.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
@@ -666,11 +675,6 @@ We still have a couple of skeleton interfaces:
 *** Factor all =housekeeping_required= methods into one               :story:
 
 In knit model we seem to have several of these: =housekeeping_required=.
-
-*** Remove generation failure exception in knit                       :story:
-
-At present we have two types of exceptions in knit: workflow error and
-generation failure. We should only have one type.
 
 *** Remove unused features                                             :epic:
 

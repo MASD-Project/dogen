@@ -33,7 +33,7 @@
 #include "dogen/utility/test_data/debug_dogen.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/knit/types/generation_failure.hpp"
+#include "dogen/knit/types/workflow_error.hpp"
 #include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
@@ -120,7 +120,7 @@ bool check_code_generation(boost::filesystem::path target) {
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::knit::generation_failure;
+using dogen::knit::workflow_error;
 
 BOOST_AUTO_TEST_SUITE(workflow)
 
@@ -215,8 +215,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     codegen_tds tds(t);
 
     dogen::knit::workflow w(default_mock_options(tds));
-    contains_checker<generation_failure> c(domain_facet_must_be_enabled);
-    BOOST_CHECK_EXCEPTION(w.execute(), generation_failure, c);
+    contains_checker<workflow_error> c(domain_facet_must_be_enabled);
+    BOOST_CHECK_EXCEPTION(w.execute(), workflow_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
@@ -276,8 +276,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
     // FIXME: reimplement using meta-data.
     dogen::knit::workflow w(default_mock_options(tds));
-    contains_checker<generation_failure> c(io_facet_and_integrated_io_error);
-    BOOST_CHECK_EXCEPTION(w.execute(), generation_failure, c);
+    contains_checker<workflow_error> c(io_facet_and_integrated_io_error);
+    BOOST_CHECK_EXCEPTION(w.execute(), workflow_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
