@@ -62,7 +62,6 @@
 #include "dogen/sml/types/string_converter.hpp"
 #include "dogen/sml/types/identifier_parser.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
-#include "dogen/sml/types/all_types_traversal.hpp"
 #include "dogen/sml/types/association_indexer.hpp"
 #include "dogen/sml/types/nested_qname_builder.hpp"
 #include "dogen/sml/types/generalization_indexer.hpp"

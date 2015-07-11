@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-11 Sat 22:39]
+#+CAPTION: Clock summary at [2015-07-11 Sat 22:58]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:37* |       |      |
+| *Total time*                                                                | *22:51* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:37   |       |      |
-| Active                                                                      |         | 22:37 |      |
+| Stories                                                                     | 22:51   |       |      |
+| Active                                                                      |         | 22:51 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:16 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -49,6 +49,8 @@
 | COMPLETED Consider removing =number_of_type_arguments= in SML               |         |       | 0:33 |
 | COMPLETED Consider removing =module_types= in SML                           |         |       | 0:11 |
 | COMPLETED Remove unused relationship types in SML                           |         |       | 0:06 |
+| CANCELLED Remove inherited properties in SML                                |         |       | 0:09 |
+| COMPLETED Remove all types traversal from SML                               |         |       | 0:05 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
 
@@ -288,7 +290,7 @@ half-baked support. Remove all remnants.
 
 Check to see if this property is used and if not, remove it.
 
-*** COMPLETED Consider removing =module_types= in SML
+*** COMPLETED Consider removing =module_types= in SML                 :story:
     CLOSED: [2015-07-11 Sat 22:32]
     CLOCK: [2015-07-11 Sat 22:21]--[2015-07-11 Sat 22:32] =>  0:11
 
@@ -300,6 +302,20 @@ remove it.
     CLOCK: [2015-07-11 Sat 22:33]--[2015-07-11 Sat 22:39] =>  0:06
 
 We seem to have a few relationship types that are no longer required.
+
+*** CANCELLED Remove inherited properties in SML                      :story:
+    CLOSED: [2015-07-11 Sat 22:50]
+    CLOCK: [2015-07-11 Sat 22:41]--[2015-07-11 Sat 22:50] =>  0:09
+
+*Rationale*: the properties are in use by formattables.
+
+It seems there is no user for these at the moment so remove them.
+
+*** COMPLETED Remove all types traversal from SML                     :story:
+    CLOSED: [2015-07-11 Sat 22:58]
+    CLOCK: [2015-07-11 Sat 22:52]--[2015-07-11 Sat 22:57] =>  0:05
+
+This does not appear to be used.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
