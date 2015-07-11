@@ -340,11 +340,26 @@ generation failure. We should only have one type.
 
 Seems like this got missed out on previous tidy-up.
 
-*** Define end to end terminology given all refactoring stories       :story:
+*** STARTED Define end to end terminology given all refactoring stories :story:
+    CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
 
 We have a number of refactoring stories, all covering different
 aspects of the architecture. We need to combine all of them into a
 unified view. This story focuses on defining the key terms.
+
+Seems like the Model-Driven field already contains a lot of very
+useful definitions in this space. In particular:
+
+- [[http://www.voelter.de/data/books/mdsd-en.pdf][Model-Driven Software Development]]
+- [[http://researcher.ibm.com/researcher/files/zurich-jku/mdse-08.pdf][Model-Driven Software Engineering]]
+
+*Terms*
+
+- *kernel*:
+A programming language is a formal constructed language designed to
+communicate instructions to a machine, particularly a computer.
+- *formatter*:
+
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
