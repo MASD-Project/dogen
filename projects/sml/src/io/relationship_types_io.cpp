@@ -54,12 +54,6 @@ std::ostream& operator<<(std::ostream& s, const relationship_types& v) {
     case relationship_types::visited_by:
         attr = "\"visited_by\"";
         break;
-    case relationship_types::unversioned_keys:
-        attr = "\"unversioned_keys\"";
-        break;
-    case relationship_types::versioned_keys:
-        attr = "\"versioned_keys\"";
-        break;
     case relationship_types::modeled_concepts:
         attr = "\"modeled_concepts\"";
         break;

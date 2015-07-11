@@ -26,7 +26,7 @@ namespace sml {
 relationship_types_generator::relationship_types_generator() : position_(0) { }
 void relationship_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<relationship_types>(position % 12);
+    v = static_cast<relationship_types>(position % 10);
 }
 
 relationship_types_generator::result_type

@@ -40,10 +40,8 @@ enum class relationship_types : unsigned int {
     leaves = 5, ///< Types that are at the bottom of the inheritance tree.
     visits = 6, ///< Types that are visited by this visitor.
     visited_by = 7, ///< Types that visit current type.
-    unversioned_keys = 8, ///< Types that are used in the unversioned identity function of this type.
-    versioned_keys = 9, ///< Types that are used in the versioned identity function of this type.
-    modeled_concepts = 10, ///< Concepts modeled by this type.
-    hash_container_keys = 11 ///< Type is a key in a hash container.
+    modeled_concepts = 8, ///< Concepts modeled by this type.
+    hash_container_keys = 9 ///< Type is a key in a hash container.
 };
 
 } }
