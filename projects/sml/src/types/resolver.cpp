@@ -220,25 +220,6 @@ resolve_properties(const qname& owner, std::list<property>& p) const {
     }
 }
 
-void resolver::
-resolve_operations(const qname& owner, std::list<operation>& op) const {
-    for (auto& operation : op) {
-        try {
-            if (!operation.type())
-                continue;
-
-            resolve_partial_type(*operation.type());
-        } catch (boost::exception& e) {
-            std::ostringstream s;
-            s << "Owner type name: " << string_converter::convert(owner)
-              << " Operation name: " << operation.name()
-              << " Operation type: " << operation.type();
-            e << errmsg_info(s.str());
-            throw;
-        }
-    }
-}
-
 void resolver::require_not_has_resolved() const {
     if (!has_resolved())
         return;
@@ -272,7 +253,6 @@ void resolver::resolve_objects() {
 
         validate_inheritance_graph(o);
         resolve_properties(o.name(), o.local_properties());
-        resolve_operations(o.name(), o.operations());
     }
 }
 

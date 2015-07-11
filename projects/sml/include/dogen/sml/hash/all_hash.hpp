@@ -33,8 +33,6 @@
 #include "dogen/sml/hash/object_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/operation_hash.hpp"
-#include "dogen/sml/hash/parameter_hash.hpp"
 #include "dogen/sml/hash/primitive_hash.hpp"
 #include "dogen/sml/hash/enumerator_hash.hpp"
 #include "dogen/sml/hash/enumeration_hash.hpp"

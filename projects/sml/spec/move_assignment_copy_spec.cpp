@@ -21,42 +21,10 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
-#include "dogen/sml/types/generation_types.hpp"
-#include "dogen/sml/types/nested_qname.hpp"
-#include "dogen/sml/types/property.hpp"
-#include "dogen/sml/types/operation.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/enumerator.hpp"
-#include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/io/generation_types_io.hpp"
-#include "dogen/sml/io/nested_qname_io.hpp"
-#include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/io/primitive_io.hpp"
-#include "dogen/sml/io/enumerator_io.hpp"
-#include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/module_io.hpp"
-#include "dogen/sml/io/object_io.hpp"
-#include "dogen/sml/io/concept_io.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/test_data/generation_types_td.hpp"
-#include "dogen/sml/test_data/nested_qname_td.hpp"
-#include "dogen/sml/test_data/property_td.hpp"
-#include "dogen/sml/test_data/operation_td.hpp"
-#include "dogen/sml/test_data/qname_td.hpp"
-#include "dogen/sml/test_data/primitive_td.hpp"
-#include "dogen/sml/test_data/enumerator_td.hpp"
-#include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/module_td.hpp"
-#include "dogen/sml/test_data/object_td.hpp"
-#include "dogen/sml/test_data/concept_td.hpp"
-#include "dogen/sml/test_data/model_td.hpp"
+#include "dogen/sml/types/all.hpp"
+#include "dogen/sml/hash/all_hash.hpp"
+#include "dogen/sml/io/all_io.hpp"
+#include "dogen/sml/test_data/all_td.hpp"
 
 namespace {
 
@@ -77,7 +45,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<generation_types_generator>();
     test_move_assignment_copy<nested_qname_generator>();
     test_move_assignment_copy<property_generator>();
-    test_move_assignment_copy<operation_generator>();
     test_move_assignment_copy<qname_generator>();
     test_move_assignment_copy<primitive_generator>();
     test_move_assignment_copy<enumerator_generator>();

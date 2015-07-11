@@ -33,7 +33,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/types/operation.hpp"
 #include "dogen/sml/types/object_types.hpp"
 #include "dogen/sml/types/relationship_types.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
@@ -66,7 +65,6 @@ public:
         const std::list<dogen::sml::property>& all_properties,
         const std::list<dogen::sml::property>& local_properties,
         const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
-        const std::list<dogen::sml::operation>& operations,
         const bool is_parent,
         const bool is_visitable,
         const bool is_immutable,
@@ -142,16 +140,6 @@ public:
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties();
     void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& v);
     void inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v);
-    /**@}*/
-
-    /**
-     * @brief Operations (methods) that can be executed.
-     */
-    /**@{*/
-    const std::list<dogen::sml::operation>& operations() const;
-    std::list<dogen::sml::operation>& operations();
-    void operations(const std::list<dogen::sml::operation>& v);
-    void operations(const std::list<dogen::sml::operation>&& v);
     /**@}*/
 
     /**
@@ -244,7 +232,6 @@ private:
     std::list<dogen::sml::property> all_properties_;
     std::list<dogen::sml::property> local_properties_;
     std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> > inherited_properties_;
-    std::list<dogen::sml::operation> operations_;
     bool is_parent_;
     bool is_visitable_;
     bool is_immutable_;

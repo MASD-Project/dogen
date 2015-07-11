@@ -39,7 +39,6 @@ concept::concept(concept&& rhs)
       generation_type_(std::move(rhs.generation_type_)),
       origin_type_(std::move(rhs.origin_type_)),
       containing_module_(std::move(rhs.containing_module_)),
-      operations_(std::move(rhs.operations_)),
       refines_(std::move(rhs.refines_)),
       is_parent_(std::move(rhs.is_parent_)),
       is_child_(std::move(rhs.is_child_)) { }
@@ -54,7 +53,6 @@ concept::concept(
     const dogen::sml::generation_types generation_type,
     const dogen::sml::origin_types origin_type,
     const boost::optional<dogen::sml::qname>& containing_module,
-    const std::list<dogen::sml::operation>& operations,
     const std::list<dogen::sml::qname>& refines,
     const bool is_parent,
     const bool is_child)
@@ -67,7 +65,6 @@ concept::concept(
       generation_type_(generation_type),
       origin_type_(origin_type),
       containing_module_(containing_module),
-      operations_(operations),
       refines_(refines),
       is_parent_(is_parent),
       is_child_(is_child) { }
@@ -83,7 +80,6 @@ void concept::swap(concept& other) noexcept {
     swap(generation_type_, other.generation_type_);
     swap(origin_type_, other.origin_type_);
     swap(containing_module_, other.containing_module_);
-    swap(operations_, other.operations_);
     swap(refines_, other.refines_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
@@ -99,7 +95,6 @@ bool concept::operator==(const concept& rhs) const {
         generation_type_ == rhs.generation_type_ &&
         origin_type_ == rhs.origin_type_ &&
         containing_module_ == rhs.containing_module_ &&
-        operations_ == rhs.operations_ &&
         refines_ == rhs.refines_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_;
@@ -237,22 +232,6 @@ void concept::containing_module(const boost::optional<dogen::sml::qname>& v) {
 
 void concept::containing_module(const boost::optional<dogen::sml::qname>&& v) {
     containing_module_ = std::move(v);
-}
-
-const std::list<dogen::sml::operation>& concept::operations() const {
-    return operations_;
-}
-
-std::list<dogen::sml::operation>& concept::operations() {
-    return operations_;
-}
-
-void concept::operations(const std::list<dogen::sml::operation>& v) {
-    operations_ = v;
-}
-
-void concept::operations(const std::list<dogen::sml::operation>&& v) {
-    operations_ = std::move(v);
 }
 
 const std::list<dogen::sml::qname>& concept::refines() const {

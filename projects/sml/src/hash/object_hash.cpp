@@ -22,7 +22,6 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/object_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/sml/hash/object_types_hash.hpp"
 #include "dogen/sml/hash/relationship_types_hash.hpp"
 
@@ -47,14 +46,6 @@ inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_pro
     for (const auto i : v) {
         combine(seed, i.first);
         combine(seed, hash_std_list_dogen_sml_property(i.second));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
     }
     return seed;
 }
@@ -89,7 +80,6 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_sml_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_sml_property(v.local_properties()));
     combine(seed, hash_std_unordered_map_dogen_sml_qname_std_list_dogen_sml_property_(v.inherited_properties()));
-    combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, v.is_parent());
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());

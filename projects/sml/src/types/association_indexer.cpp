@@ -115,20 +115,6 @@ void association_indexer::index_object(const model& m, object& o) const {
         recurse_nested_qnames(m, o, nqn, is_pointer);
     }
 
-    for (const auto& op : o.operations()) {
-        for (const auto& p : op.parameters()) {
-            bool is_pointer(p.type().is_pointer());
-            recurse_nested_qnames(m, o, p.type(), is_pointer);
-        }
-
-        if (!op.type())
-            continue;
-
-        const auto nqn(*op.type());
-        bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(m, o, nqn, is_pointer);
-    }
-
     auto i(o.relationships().find(relationship_types::regular_associations));
     std::unordered_set<qname> regular_associations;
     if (i != o.relationships().end()) {

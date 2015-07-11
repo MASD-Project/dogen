@@ -80,11 +80,6 @@ private:
     void resolve_properties(const qname& owner, std::list<property>& p) const;
 
     /**
-     * @brief Resolves all references to types in the supplied operations.
-     */
-    void resolve_operations(const qname& owner, std::list<operation>& op) const;
-
-    /**
      * @brief Validates the inheritance graph for the object.
      *
      * @note should really be moved to validator.

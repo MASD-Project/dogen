@@ -22,7 +22,6 @@
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
-#include "dogen/sml/test_data/operation_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
@@ -83,19 +82,6 @@ create_boost_optional_dogen_sml_qname(unsigned int position) {
     return r;
 }
 
-dogen::sml::operation
-create_dogen_sml_operation(const unsigned int position) {
-    return dogen::sml::operation_generator::create(position);
-}
-
-std::list<dogen::sml::operation> create_std_list_dogen_sml_operation(unsigned int position) {
-    std::list<dogen::sml::operation> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_sml_operation(position + i));
-    }
-    return r;
-}
-
 std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int position) {
     std::list<dogen::sml::qname> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -126,10 +112,9 @@ populate(const unsigned int position, result_type& v) {
     v.generation_type(create_dogen_sml_generation_types(position + 6));
     v.origin_type(create_dogen_sml_origin_types(position + 7));
     v.containing_module(create_boost_optional_dogen_sml_qname(position + 8));
-    v.operations(create_std_list_dogen_sml_operation(position + 9));
-    v.refines(create_std_list_dogen_sml_qname(position + 10));
-    v.is_parent(create_bool(position + 11));
-    v.is_child(create_bool(position + 12));
+    v.refines(create_std_list_dogen_sml_qname(position + 9));
+    v.is_parent(create_bool(position + 10));
+    v.is_child(create_bool(position + 11));
 }
 
 concept_generator::result_type

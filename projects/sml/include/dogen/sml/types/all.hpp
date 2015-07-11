@@ -38,8 +38,6 @@
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/types/resolver.hpp"
 #include "dogen/sml/types/workflow.hpp"
-#include "dogen/sml/types/operation.hpp"
-#include "dogen/sml/types/parameter.hpp"
 #include "dogen/sml/types/persister.hpp"
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumerator.hpp"

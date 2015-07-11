@@ -33,8 +33,6 @@
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
-#include "dogen/sml/io/parameter_io.hpp"
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"

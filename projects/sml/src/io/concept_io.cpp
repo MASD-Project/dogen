@@ -24,7 +24,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/concept_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
@@ -85,20 +84,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::sm
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::qname>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -132,7 +117,6 @@ std::ostream& operator<<(std::ostream& s, const concept& v) {
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"containing_module\": " << v.containing_module() << ", "
-      << "\"operations\": " << v.operations() << ", "
       << "\"refines\": " << v.refines() << ", "
       << "\"is_parent\": " << v.is_parent() << ", "
       << "\"is_child\": " << v.is_child()

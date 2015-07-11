@@ -24,7 +24,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/object_io.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 

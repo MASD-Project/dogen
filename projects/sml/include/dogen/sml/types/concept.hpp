@@ -33,7 +33,6 @@
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/sml/types/property.hpp"
 #include "dogen/sml/hash/qname_hash.hpp"
-#include "dogen/sml/types/operation.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/generation_types.hpp"
@@ -67,7 +66,6 @@ public:
         const dogen::sml::generation_types generation_type,
         const dogen::sml::origin_types origin_type,
         const boost::optional<dogen::sml::qname>& containing_module,
-        const std::list<dogen::sml::operation>& operations,
         const std::list<dogen::sml::qname>& refines,
         const bool is_parent,
         const bool is_child);
@@ -181,16 +179,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Operations (methods) that can be executed.
-     */
-    /**@{*/
-    const std::list<dogen::sml::operation>& operations() const;
-    std::list<dogen::sml::operation>& operations();
-    void operations(const std::list<dogen::sml::operation>& v);
-    void operations(const std::list<dogen::sml::operation>&& v);
-    /**@}*/
-
-    /**
      * @brief List of concepts that this concept is a refinement of.
      */
     /**@{*/
@@ -236,7 +224,6 @@ private:
     dogen::sml::generation_types generation_type_;
     dogen::sml::origin_types origin_type_;
     boost::optional<dogen::sml::qname> containing_module_;
-    std::list<dogen::sml::operation> operations_;
     std::list<dogen::sml::qname> refines_;
     bool is_parent_;
     bool is_child_;

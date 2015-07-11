@@ -21,7 +21,6 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/concept_hash.hpp"
 #include "dogen/sml/hash/property_hash.hpp"
-#include "dogen/sml/hash/operation_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
@@ -61,14 +60,6 @@ inline std::size_t hash_boost_optional_dogen_sml_qname(const boost::optional<dog
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_sml_operation(const std::list<dogen::sml::operation>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_sml_qname(const std::list<dogen::sml::qname>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -94,7 +85,6 @@ std::size_t concept_hasher::hash(const concept& v) {
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_sml_qname(v.containing_module()));
-    combine(seed, hash_std_list_dogen_sml_operation(v.operations()));
     combine(seed, hash_std_list_dogen_sml_qname(v.refines()));
     combine(seed, v.is_parent());
     combine(seed, v.is_child());

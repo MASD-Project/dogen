@@ -1709,7 +1709,7 @@ We are getting strange errors in cmake:
 
 : cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
-*** Operations need to behave more like properties                    :story:
+*** Add support for operations                                        :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to specify operations via the
@@ -1726,6 +1726,8 @@ we start to use it in anger. In particular:
 
 - we need sets of operations: local, inherited, all
 - we need an operations indexer
+
+Actually we removed the half-baked support.
 
 *** Use xtime-like stopwatch in selected places to log timings        :story:
 

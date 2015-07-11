@@ -521,27 +521,6 @@ public:
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 
-    /**
-     * @brief Returns a model with a single object that contains one
-     * operation with a single parameter.
-     */
-    model object_with_operation_with_single_parameter(
-        const bool add_model_module = false) const;
-
-    /**
-     * @brief Returns a model with a single object that contains one
-     * operation with a several parameters.
-     */
-    model object_with_operation_with_multiple_parameters(
-        const bool add_model_module = false) const;
-
-    /**
-     * @brief Returns a model with a single object that contains one
-     * operation with a return type.
-     */
-    model object_with_operation_with_return_type(
-        const bool add_model_module = false) const;
-
 private:
     const flags flags_;
     dynamic_extension_function_type dynamic_extension_function_;

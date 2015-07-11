@@ -33,8 +33,6 @@
 #include "dogen/sml/test_data/object_td.hpp"
 #include "dogen/sml/test_data/concept_td.hpp"
 #include "dogen/sml/test_data/property_td.hpp"
-#include "dogen/sml/test_data/operation_td.hpp"
-#include "dogen/sml/test_data/parameter_td.hpp"
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"

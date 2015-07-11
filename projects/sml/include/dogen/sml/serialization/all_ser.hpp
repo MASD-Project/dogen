@@ -33,8 +33,6 @@
 #include "dogen/sml/serialization/object_ser.hpp"
 #include "dogen/sml/serialization/concept_ser.hpp"
 #include "dogen/sml/serialization/property_ser.hpp"
-#include "dogen/sml/serialization/operation_ser.hpp"
-#include "dogen/sml/serialization/parameter_ser.hpp"
 #include "dogen/sml/serialization/primitive_ser.hpp"
 #include "dogen/sml/serialization/registrar_ser.hpp"
 #include "dogen/sml/serialization/enumerator_ser.hpp"

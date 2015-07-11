@@ -24,7 +24,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/types/object.hpp"
 #include "dogen/sml/io/property_io.hpp"
-#include "dogen/sml/io/operation_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/relationship_types_io.hpp"
 
@@ -55,20 +54,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
         s << " } ]";
     }
     s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::sml::operation>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
     return s;
 }
 
@@ -129,7 +114,6 @@ object::object(
     const std::list<dogen::sml::property>& all_properties,
     const std::list<dogen::sml::property>& local_properties,
     const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >& inherited_properties,
-    const std::list<dogen::sml::operation>& operations,
     const bool is_parent,
     const bool is_visitable,
     const bool is_immutable,
@@ -149,7 +133,6 @@ object::object(
       all_properties_(all_properties),
       local_properties_(local_properties),
       inherited_properties_(inherited_properties),
-      operations_(operations),
       is_parent_(is_parent),
       is_visitable_(is_visitable),
       is_immutable_(is_immutable),
@@ -175,7 +158,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"all_properties\": " << all_properties_ << ", "
       << "\"local_properties\": " << local_properties_ << ", "
       << "\"inherited_properties\": " << inherited_properties_ << ", "
-      << "\"operations\": " << operations_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_visitable\": " << is_visitable_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
@@ -195,7 +177,6 @@ void object::swap(object& other) noexcept {
     swap(all_properties_, other.all_properties_);
     swap(local_properties_, other.local_properties_);
     swap(inherited_properties_, other.inherited_properties_);
-    swap(operations_, other.operations_);
     swap(is_parent_, other.is_parent_);
     swap(is_visitable_, other.is_visitable_);
     swap(is_immutable_, other.is_immutable_);
@@ -218,7 +199,6 @@ bool object::operator==(const object& rhs) const {
         all_properties_ == rhs.all_properties_ &&
         local_properties_ == rhs.local_properties_ &&
         inherited_properties_ == rhs.inherited_properties_ &&
-        operations_ == rhs.operations_ &&
         is_parent_ == rhs.is_parent_ &&
         is_visitable_ == rhs.is_visitable_ &&
         is_immutable_ == rhs.is_immutable_ &&
@@ -282,22 +262,6 @@ void object::inherited_properties(const std::unordered_map<dogen::sml::qname, st
 
 void object::inherited_properties(const std::unordered_map<dogen::sml::qname, std::list<dogen::sml::property> >&& v) {
     inherited_properties_ = std::move(v);
-}
-
-const std::list<dogen::sml::operation>& object::operations() const {
-    return operations_;
-}
-
-std::list<dogen::sml::operation>& object::operations() {
-    return operations_;
-}
-
-void object::operations(const std::list<dogen::sml::operation>& v) {
-    operations_ = v;
-}
-
-void object::operations(const std::list<dogen::sml::operation>&& v) {
-    operations_ = std::move(v);
 }
 
 bool object::is_parent() const {
