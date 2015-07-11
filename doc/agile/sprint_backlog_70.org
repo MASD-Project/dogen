@@ -271,6 +271,13 @@ As part of the version clean up, we did not remove all of the C++
 representations of the version related properties. Clean these up and
 any others that are not used by the new world formatters.
 
+*** COMPLETED Remove default values in SML                            :story:
+    CLOSED: [2015-07-11 Sat 21:46]
+    CLOCK: [2015-07-11 Sat 21:31]--[2015-07-11 Sat 21:46] =>  0:15
+
+We seem to have started adding these but its just another case of
+half-baked support. Remove all remnants.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
 
@@ -438,10 +445,9 @@ What can be said about an archetype:
   addition, we need a way to express "generate but don't override" and
   "generate and override".
 
-*** Remove default values in SML                                      :story:
+*** Consider removing =number_of_type_arguments= in SML               :story:
 
-We seem to have started adding these but its just another case of
-half-baked support. Remove all remnants.
+Check to see if this property is used and if not, remove it.
 
 *** Set enumeration underlying type in SML
 

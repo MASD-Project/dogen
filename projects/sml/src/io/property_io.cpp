@@ -48,7 +48,6 @@ std::ostream& operator<<(std::ostream& s, const property& v) {
       << "\"extensions\": " << v.extensions() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\"" << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent()
       << " }";

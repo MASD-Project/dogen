@@ -68,7 +68,7 @@
         <dia:point val="-40,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.05,29.95;-28.67,36.85"/>
+        <dia:rectangle val="-40.05,29.95;-28.67,36.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-40,30"/>
@@ -77,7 +77,7 @@
         <dia:real val="11.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#property#</dia:string>
@@ -204,32 +204,6 @@ Must only contain characters that can be used for identifiers in the target back
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Qualified name for the type of the property.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#default_value#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Default value of the property.
-
-Only valid if the property has a primitive type. Must be a valid string
-representation of the primitive type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

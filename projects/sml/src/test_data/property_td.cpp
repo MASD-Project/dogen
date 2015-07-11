@@ -58,9 +58,8 @@ populate(const unsigned int position, result_type& v) {
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.name(create_std_string(position + 2));
     v.type(create_dogen_sml_nested_qname(position + 3));
-    v.default_value(create_std_string(position + 4));
-    v.is_immutable(create_bool(position + 5));
-    v.is_fluent(create_bool(position + 6));
+    v.is_immutable(create_bool(position + 4));
+    v.is_fluent(create_bool(position + 5));
 }
 
 property_generator::result_type

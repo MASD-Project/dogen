@@ -42,7 +42,6 @@ std::size_t property_hasher::hash(const property& v) {
     combine(seed, v.extensions());
     combine(seed, v.name());
     combine(seed, v.type());
-    combine(seed, v.default_value());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
 

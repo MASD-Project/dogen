@@ -52,7 +52,6 @@ public:
         const dogen::dynamic::object& extensions,
         const std::string& name,
         const dogen::sml::nested_qname& type,
-        const std::string& default_value,
         const bool is_immutable,
         const bool is_fluent);
 
@@ -111,19 +110,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Default value of the property.
-     *
-     * Only valid if the property has a primitive type. Must be a valid string
-     * representation of the primitive type.
-     */
-    /**@{*/
-    const std::string& default_value() const;
-    std::string& default_value();
-    void default_value(const std::string& v);
-    void default_value(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief If true, the property can only be read but not set.
      */
     /**@{*/
@@ -154,7 +140,6 @@ private:
     dogen::dynamic::object extensions_;
     std::string name_;
     dogen::sml::nested_qname type_;
-    std::string default_value_;
     bool is_immutable_;
     bool is_fluent_;
 };

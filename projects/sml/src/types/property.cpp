@@ -32,14 +32,12 @@ property::property(
     const dogen::dynamic::object& extensions,
     const std::string& name,
     const dogen::sml::nested_qname& type,
-    const std::string& default_value,
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
       type_(type),
-      default_value_(default_value),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent) { }
 
@@ -49,7 +47,6 @@ void property::swap(property& other) noexcept {
     swap(extensions_, other.extensions_);
     swap(name_, other.name_);
     swap(type_, other.type_);
-    swap(default_value_, other.default_value_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
 }
@@ -59,7 +56,6 @@ bool property::operator==(const property& rhs) const {
         extensions_ == rhs.extensions_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_ &&
-        default_value_ == rhs.default_value_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_;
 }
@@ -132,22 +128,6 @@ void property::type(const dogen::sml::nested_qname& v) {
 
 void property::type(const dogen::sml::nested_qname&& v) {
     type_ = std::move(v);
-}
-
-const std::string& property::default_value() const {
-    return default_value_;
-}
-
-std::string& property::default_value() {
-    return default_value_;
-}
-
-void property::default_value(const std::string& v) {
-    default_value_ = v;
-}
-
-void property::default_value(const std::string&& v) {
-    default_value_ = std::move(v);
 }
 
 bool property::is_immutable() const {
