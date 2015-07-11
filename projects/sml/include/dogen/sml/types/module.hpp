@@ -31,7 +31,6 @@
 #include <boost/optional.hpp>
 #include "dogen/sml/types/qname.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/origin_types.hpp"
 #include "dogen/sml/types/generation_types.hpp"
 #include "dogen/sml/serialization/module_fwd_ser.hpp"
@@ -63,8 +62,7 @@ public:
         const dogen::sml::generation_types generation_type,
         const dogen::sml::origin_types origin_type,
         const boost::optional<dogen::sml::qname>& containing_module,
-        const std::list<dogen::sml::qname>& members,
-        const dogen::sml::module_types type);
+        const std::list<dogen::sml::qname>& members);
 
 private:
     template<typename Archive>
@@ -145,14 +143,6 @@ public:
     void members(const std::list<dogen::sml::qname>&& v);
     /**@}*/
 
-    /**
-     * @brief Type of module.
-     */
-    /**@{*/
-    dogen::sml::module_types type() const;
-    void type(const dogen::sml::module_types v);
-    /**@}*/
-
 public:
     bool operator==(const module& rhs) const;
     bool operator!=(const module& rhs) const {
@@ -171,7 +161,6 @@ private:
     dogen::sml::origin_types origin_type_;
     boost::optional<dogen::sml::qname> containing_module_;
     std::list<dogen::sml::qname> members_;
-    dogen::sml::module_types type_;
 };
 
 } }

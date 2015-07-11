@@ -64,9 +64,6 @@ sml::module workflow::create_module_for_model(const sml::qname& qn,
     sml::module r;
     r.name(qn);
     r.origin_type(sml::origin_types::user);
-    r.type(is_target ?
-        sml::module_types::root_model :
-        sml::module_types::model);
     r.generation_type(is_target ?
         sml::generation_types::full_generation :
         sml::generation_types::no_generation);

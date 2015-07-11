@@ -22,7 +22,6 @@
 #include "dogen/sml/test_data/qname_td.hpp"
 #include "dogen/sml/test_data/module_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
-#include "dogen/sml/test_data/module_types_td.hpp"
 #include "dogen/sml/test_data/origin_types_td.hpp"
 #include "dogen/sml/test_data/generation_types_td.hpp"
 
@@ -69,11 +68,6 @@ std::list<dogen::sml::qname> create_std_list_dogen_sml_qname(unsigned int positi
     return r;
 }
 
-dogen::sml::module_types
-create_dogen_sml_module_types(const unsigned int position) {
-    return dogen::sml::module_types_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -90,7 +84,6 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_sml_origin_types(position + 4));
     v.containing_module(create_boost_optional_dogen_sml_qname(position + 5));
     v.members(create_std_list_dogen_sml_qname(position + 6));
-    v.type(create_dogen_sml_module_types(position + 7));
 }
 
 module_generator::result_type

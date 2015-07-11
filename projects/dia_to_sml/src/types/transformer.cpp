@@ -349,7 +349,6 @@ void transformer::to_module(const processed_object& o, const profile& p) {
     BOOST_LOG_SEV(lg, debug) << "Object is a module: " << o.id();
 
     sml::module m;
-    m.type(sml::module_types::regular);
     update_element(m, o, p);
     context_.model().modules().insert(std::make_pair(m.name(), m));
 }

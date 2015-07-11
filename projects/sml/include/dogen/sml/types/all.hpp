@@ -44,7 +44,6 @@
 #include "dogen/sml/types/primitive.hpp"
 #include "dogen/sml/types/enumerator.hpp"
 #include "dogen/sml/types/enumeration.hpp"
-#include "dogen/sml/types/module_types.hpp"
 #include "dogen/sml/types/nested_qname.hpp"
 #include "dogen/sml/types/object_types.hpp"
 #include "dogen/sml/types/origin_types.hpp"

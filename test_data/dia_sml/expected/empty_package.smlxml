@@ -97,7 +97,6 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
-				<type>4</type>
 			</second>
 		</item>
 		<item>
@@ -155,7 +154,6 @@
 						<simple_name>package_1</simple_name>
 					</item>
 				</members>
-				<type>3</type>
 			</second>
 		</item>
 	</modules>

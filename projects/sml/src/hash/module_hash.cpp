@@ -21,7 +21,6 @@
 #include "dogen/sml/hash/qname_hash.hpp"
 #include "dogen/sml/hash/module_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/sml/hash/module_types_hash.hpp"
 #include "dogen/sml/hash/origin_types_hash.hpp"
 #include "dogen/sml/hash/generation_types_hash.hpp"
 
@@ -66,7 +65,6 @@ std::size_t module_hasher::hash(const module& v) {
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_sml_qname(v.containing_module()));
     combine(seed, hash_std_list_dogen_sml_qname(v.members()));
-    combine(seed, v.type());
 
     return seed;
 }

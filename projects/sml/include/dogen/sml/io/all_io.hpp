@@ -38,7 +38,6 @@
 #include "dogen/sml/io/primitive_io.hpp"
 #include "dogen/sml/io/enumerator_io.hpp"
 #include "dogen/sml/io/enumeration_io.hpp"
-#include "dogen/sml/io/module_types_io.hpp"
 #include "dogen/sml/io/nested_qname_io.hpp"
 #include "dogen/sml/io/object_types_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"

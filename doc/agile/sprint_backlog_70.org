@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-11 Sat 22:20]
+#+CAPTION: Clock summary at [2015-07-11 Sat 22:32]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:20* |       |      |
+| *Total time*                                                                | *22:31* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:20   |       |      |
-| Active                                                                      |         | 22:20 |      |
+| Stories                                                                     | 22:31   |       |      |
+| Active                                                                      |         | 22:31 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:16 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -46,6 +46,7 @@
 | COMPLETED Add forward declarations to visitor                               |         |       | 0:06 |
 | COMPLETED Remove unused properties in CPP model                             |         |       | 0:22 |
 | COMPLETED Remove default values in SML                                      |         |       | 0:15 |
+| COMPLETED Consider removing =module_types= in SML                           |         |       | 0:11 |
 | COMPLETED Consider removing =number_of_type_arguments= in SML               |         |       | 0:33 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 #+end:
@@ -279,6 +280,13 @@ any others that are not used by the new world formatters.
 
 We seem to have started adding these but its just another case of
 half-baked support. Remove all remnants.
+
+*** COMPLETED Consider removing =module_types= in SML
+    CLOSED: [2015-07-11 Sat 22:32]
+    CLOCK: [2015-07-11 Sat 22:21]--[2015-07-11 Sat 22:32] =>  0:11
+
+We need to see if this enum is used for anything sensible, and if not
+remove it.
 
 *** COMPLETED Consider removing =number_of_type_arguments= in SML     :story:
     CLOSED: [2015-07-11 Sat 22:20]

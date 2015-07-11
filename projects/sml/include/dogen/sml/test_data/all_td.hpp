@@ -38,7 +38,6 @@
 #include "dogen/sml/test_data/primitive_td.hpp"
 #include "dogen/sml/test_data/enumerator_td.hpp"
 #include "dogen/sml/test_data/enumeration_td.hpp"
-#include "dogen/sml/test_data/module_types_td.hpp"
 #include "dogen/sml/test_data/nested_qname_td.hpp"
 #include "dogen/sml/test_data/object_types_td.hpp"
 #include "dogen/sml/test_data/origin_types_td.hpp"

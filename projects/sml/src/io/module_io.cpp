@@ -23,7 +23,6 @@
 #include "dogen/sml/io/qname_io.hpp"
 #include "dogen/sml/io/module_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/sml/io/module_types_io.hpp"
 #include "dogen/sml/io/origin_types_io.hpp"
 #include "dogen/sml/io/generation_types_io.hpp"
 
@@ -75,8 +74,7 @@ std::ostream& operator<<(std::ostream& s, const module& v) {
       << "\"generation_type\": " << v.generation_type() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"containing_module\": " << v.containing_module() << ", "
-      << "\"members\": " << v.members() << ", "
-      << "\"type\": " << v.type()
+      << "\"members\": " << v.members()
       << " }";
     return(s);
 }
