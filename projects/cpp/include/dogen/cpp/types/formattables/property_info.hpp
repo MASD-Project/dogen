@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
-#include <utility>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
@@ -57,7 +55,6 @@ public:
         const std::string& qualified_name,
         const std::string& documentation,
         const dogen::cpp::formattables::nested_type_info& type,
-        const std::list<std::pair<std::string, std::string> >& opaque_parameters,
         const bool is_immutable,
         const bool is_fluent,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> >& opaque_settings);
@@ -116,11 +113,6 @@ public:
     void type(const dogen::cpp::formattables::nested_type_info&& v);
     /**@}*/
 
-    const std::list<std::pair<std::string, std::string> >& opaque_parameters() const;
-    std::list<std::pair<std::string, std::string> >& opaque_parameters();
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >& v);
-    void opaque_parameters(const std::list<std::pair<std::string, std::string> >&& v);
-
     /**
      * @brief If true, the setter is not available for this property.
      */
@@ -157,7 +149,6 @@ private:
     std::string qualified_name_;
     std::string documentation_;
     dogen::cpp::formattables::nested_type_info type_;
-    std::list<std::pair<std::string, std::string> > opaque_parameters_;
     bool is_immutable_;
     bool is_fluent_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::cpp::settings::opaque_settings> > opaque_settings_;

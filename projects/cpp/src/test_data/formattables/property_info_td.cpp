@@ -36,22 +36,6 @@ create_dogen_cpp_formattables_nested_type_info(const unsigned int position) {
     return dogen::cpp::formattables::nested_type_info_generator::create(position);
 }
 
-std::pair<std::string, std::string>
-create_std_pair_std_string_std_string(unsigned int position) {
-    std::pair<std::string, std::string> r(
-        create_std_string(position),
-        create_std_string(position));
-    return r;
-}
-
-std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_string_std_string_(unsigned int position) {
-    std::list<std::pair<std::string, std::string> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_std_string_std_string(position + i));
-    }
-    return r;
-}
-
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -90,10 +74,9 @@ populate(const unsigned int position, result_type& v) {
     v.qualified_name(create_std_string(position + 1));
     v.documentation(create_std_string(position + 2));
     v.type(create_dogen_cpp_formattables_nested_type_info(position + 3));
-    v.opaque_parameters(create_std_list_std_pair_std_string_std_string_(position + 4));
-    v.is_immutable(create_bool(position + 5));
-    v.is_fluent(create_bool(position + 6));
-    v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + 7));
+    v.is_immutable(create_bool(position + 4));
+    v.is_fluent(create_bool(position + 5));
+    v.opaque_settings(create_std_unordered_map_std_string_boost_shared_ptr_dogen_cpp_settings_opaque_settings_(position + 6));
 }
 
 property_info_generator::result_type

@@ -32,33 +32,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::cpp::settings::opaque_settings>& v) {
@@ -110,7 +83,6 @@ std::ostream& operator<<(std::ostream& s, const property_info& v) {
       << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"opaque_parameters\": " << v.opaque_parameters() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
       << "\"opaque_settings\": " << v.opaque_settings()

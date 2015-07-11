@@ -57,6 +57,8 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-12 Sun 00:05]--[2015-07-12 Sun 00:13] =>  0:08
+    CLOCK: [2015-07-11 Sat 23:55]--[2015-07-12 Sun 00:05] =>  0:10
     CLOCK: [2015-07-10 Fri 23:03]--[2015-07-10 Fri 23:11] =>  0:08
     CLOCK: [2015-07-10 Fri 15:27]--[2015-07-10 Fri 15:49] =>  0:22
     CLOCK: [2015-07-09 Thu 21:21]--[2015-07-09 Thu 21:49] =>  0:28
@@ -332,6 +334,18 @@ We have some half-baked support for operations. Remove it.
 At present we have two types of exceptions in knit: workflow error and
 generation failure. We should only have one type.
 
+*** COMPLETED Remove opaque parameters from cpp properties            :story:
+    CLOSED: [2015-07-12 Sun 00:19]
+    CLOCK: [2015-07-12 Sun 00:13]--[2015-07-12 Sun 00:19] =>  0:06
+
+Seems like this got missed out on previous tidy-up.
+
+*** Define end to end terminology given all refactoring stories       :story:
+
+We have a number of refactoring stories, all covering different
+aspects of the architecture. We need to combine all of them into a
+unified view. This story focuses on defining the key terms.
+
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
 
@@ -499,72 +513,6 @@ What can be said about an archetype:
   addition, we need a way to express "generate but don't override" and
   "generate and override".
 
-*** Set enumeration underlying type in SML
-
-In cpp transformer we have hacked the underlying type of the
-enumeration. Remove this hack and set it in SML. Still a hack, but
-a tad better.
-
-*** Move language-specific object types to meta-data                  :story:
-
-There are a number of object types that exist solely to provide the
-method helpers with information:
-
-- smart_pointer
-- hash_container
-- sequence_container
-- ordered_container
-
-These should be conveyed using the meta-data.
-
-*** Handling of managed directories is incorrect                      :story:
-
-At present we are querying the dia to sml transformer to figure out
-what the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
-
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
-
-- list of files;
-- list of managed directories.
-
-Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an SML model as input.
-
-*** Consider creating a "locator" like class for path management      :story:
-
-At present we are using path settings to compute paths in several
-places. Most of these exist because of hacks but it still seems that
-it needs to be done in more than one place. We should consider
-something like =sml_to_cpp::locator= that is initialised with the path
-settings and can then be used to create paths.
-
 *** Thoughts on simplifying the formattables generation               :story:
 
 We have a problem in the way which we are doing the formattables:
@@ -655,236 +603,6 @@ course.
 FIXME: improve references by having models inside of models; we should
 be able to keep only the types that we refer in the final model.
 
-*** Add include providers for all types                               :story:
-
-We need to implement the provider container support for primitives,
-modules and concepts.
-
-Update:
-
-- inclusion dependencies factory
-- provider container
-
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-*** Factor all =housekeeping_required= methods into one               :story:
-
-In knit model we seem to have several of these: =housekeeping_required=.
-
-*** Remove unused features                                             :epic:
-
-At the very start of dogen we added a number of features that we
-thought were useful such as suppressing model directory, facet
-directories etc. We should look at all the features and make a list of
-all features that we are not currently making use of and create
-stories to remove them.
-
-We may have to split this story into several but we should at least
-trim down the obvious ones:
-
-- empty model name (done)
-- output to stdout (done)
-- keys, entities (done)
-- remove repository, factory, stereotypes (done)
-- versioning (done)
-- split project (or vice-versa, whichever one we don't use).
-- removing cpp backend?
-- delete extra files: we always do so why make it optional.
-- force write: we never do.
-- etc.
-
-Basically any feature which we are not using at present and cannot
-think of an obvious use case.
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Consider renaming formatter groups and model groups to sets       :story:
-
-We should try to keep the words groups and sets to their mathematical
-as much as possible - modulus our limited understanding. As such,
-where we are using "group" we probably mean "set" since there is no
-associated operation with the set; it is merely a way of gathering
-elements.
-
-Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*** Header guard in formatters should be optional                     :story:
-
-At present we are relying on empty header guards to determine what to
-do in boilerplate. We should use boost optional.
-
-*** Remove complete name and use qualified name                       :story:
-
-At present we have both complete name and qualified name in
-formatables. Qualified name is blank. We should remove complete name
-and populate qualified name.
-
-This is in nested type info.
-
-*** Remove intermediate fields from dynamic                           :story:
-
-With the previous approach we had fields in dynamic that were
-generated within dogen; we now should only have fields that are set
-from the outside world. Remove all of the fields that are not supposed
-to be settable from the outside world. At present this just file path.
-
-*** Consider renaming general settings                                :story:
-
-A while ago we came up with this name for the settings of the generic
-formatter model. This is the model with basic infrastructure to be
-reused by the more specialised formatters. However, now that we have
-many (many) settings classes, general settings may not be the most
-appropriate name. We need to look a bit more deeply into the role of
-this class and see if a better name is not available.
-
-We could call it preamble settings because all settings are related to
-the file preamble; annoyingly, we also generate a post-amble from
-it. There doesn't seem to be any good names for the pair (preamble,
-post-amble). In networking this would be called frame markers perhaps.
-
-Now that we are not using =meta_data= any more, perhaps we could
-re-purpose it for this (=meta_data_settings=). In a way, preambles and
-post-ambles are meta-data, as opposed to the real file
-contents. Having said that, one could say the same about any kind of
-comments.
-
-We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
-
-Now that we have subsidiary settings and principal settings do we need
-the rename? We should consider "universal settings" maybe.
-
-In addition, the convention is now that "settings" mean a strongly
-typed representation of =dynamic= data; general "settings" are not
-settings in this sense. However, we do need a class to model settings
-properly (i.e. to mirror dynamic exactly, without any
-transformations).
-
-In truth, =annotation= is probably sufficient - or perhaps
-=annotation_properties=. It could then have an =enabled= property to
-replace =generate_preamble=. This is more accurate due to the
-preamble/postamble setup explained above. In this setup, we'd have
-=annotation_settings= to map to dynamic data, with an annotation
-settings factory which reads these off of dynamic object; then, an
-annotation factory to generate annotations. Finally, we can introduce
-the annotation formatter to generate the portion of boilerplate
-related to just the annotation. Boilerplate formatter collaborates
-with annotation formatter.
-
-In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
-conceptual sense.
-
-*** Create knitter options for each frontend                          :story:
-
-At present some knitting options are specific to a frontend
-(particularly in troubleshooting). We should create different classes
-to represent options on a per fronend basis.
-
-*** Remove unnecessary properties from model                          :story:
-
-The model should be just dumb container of types. We have a few legacy
-properties left behind from the days where the model was also used in
-the transformation process. Remove all the concepts from the model
-(=Element= etc) and deal with the fall out. Unnecessary properties:
-documentation, containing module, extensions.
-
-We need to keep the name because it is now used to locate the model's
-module.
-
-*** Create a single container of element in model                     :story:
-
-We did an experiment to figure out if it would be more efficient to
-have separate containers of elements in SML's model, the idea being
-that we would avoid using the heap, dispatching etc. We would also
-create code that is more type-safe (e.g. avoid cases where we pass in
-elements but we want a specific descendant only).
-
-However, predictably, the code now has lots of loops across the
-different collections. This pattern is scattered everywhere we use
-SML. In almost all cases this could be handled by a single loop
-without loss of type-safety (e.g. loop and visit where we need
-specific types; just loop where an element suffices). Using the
-traversals (all types traversals, etc) didn't help because we then
-need to create all the associated machinery (overload =operator()=
-etc.) and that is not much different from having a visitor on
-element. We should consider this experiment at an end and just add a
-single container of element in model and deal with the fallout.
-
-Alternatively, we need a "view" over the different containers. In
-truth after the SML workflow has finished executing the model is
-constant. This means we could then use pointers to the objects to
-create a synthetic element container and use this for looping over all
-entities.
-
-In an ideal world, this would be a property of the model:
-e.g. =std::forward_list<entity*>=. However, we do not support pointer
-containers and this is a non-trivial change to the spirit parser so we
-won't be able to do it quickly. The alternative is to generate the
-container from within the backend workflow for now and pass it to each
-workflow. Once we are done with the refactoring we can then replace
-this with a model property.
-
-We need to have a look at all instances of the code where we loop
-across all elements and see if this is a win or not. Also, we can move
-=Element= from a concept to a type (e.g. =element=) and make it the
-base class for all elements. Validator would have to make sure the
-model is not nonsensical (object inheriting from a primitive, etc).
-
-Merged stories:
-
-Consider model as a container of types
-
-At present model is composed of objects, primitives, concepts,
-modules, etc. We could bring together all descendants of types into a
-single container (e.g. types). However, in places we do thinks like
-looking at the primitive container to see if the container has any
-primitive types - these would become slower as we'd now be looking at
-the entire type collection. Need to look at all usages of these
-containers in the code to see if this would be a win or not.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are using qnames all over the place in CPP. Nothing
-stops us from using strings instead of qnames if that is more
-efficient.
-
-What is worse is that we seem to be doing a ridiculous amount of qname
-lookups. It would be much nicer if we could somehow have all the data
-in the right shape to avoid doing so many lookups.
-
 *** Model groups and multi-language support                           :story:
 
 At present we have hard-coded knit to support a single C++ model,
@@ -967,6 +685,150 @@ cpp. However, in reality the world looks more like this:
   =quilt.cpp.enabled= and so on.
 
 This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Split a fully formed model from partial models                    :story:
+
+We should really have two distinct types to represent the model that
+is returned from the dia to sml transformer from the model returned by
+the merger. Potentially this could be called =partial_model=.
+
+In fact we may need to take this a step further and follow the same
+approach as [[https://github.com/avao/Codge/tree/master/Src/Codge.DataModel][Cogen]]: having exactly the same types, but perhaps in a
+separate namespace; one version represents the "connected" model and
+the other the "disconnected" (or intermediate, or partial) model. The
+idea being that on the connected model has references to types rather
+than relaying on qname look-ups. So for example all the relationships
+then become shared pointers to types and so on. The problem with this
+approach is that we then need to have a common base type from where
+all types inherit and this will mean that we will have to visit a lot
+to dispatch types to their leaves.
+
+Actually, this is also the chance to remove all of the qname
+lookups. All relationships should just be boost shared pointers to
+types rather than qnames. There should be no need for lookups at
+all. This is a much better approach than the suggested below. We still
+need qnames and some minor qname lookup (e.g. model is still made
+up of a unordered map of qname to entity) but everyone should be using
+entity pointers rather than qnames. It is not clear what models such
+as CPP should be doing since the pointers are not particularly useful
+there.
+
+This would also be a good opportunity to use something like a pointer
+container for all the pointers and then use either a "dumb pointer" or
+even [[http://stackoverflow.com/questions/13874673/stdreference-wrappert-usage-in-a-container][references]] everywhere. Since we know the container will exist for
+the duration of a run, we can rely on the objects being managed
+elsewhere. This is a better way rather than using shared pointers
+everywhere. Alexandrescu [[https://www.youtube.com/watch?v%3DQq_WaiwzOtI][discusses at length]] the side-effects of using
+shared pointers. Whilst this is probably not a problem for Dogen, we
+want to explore ways of doing the right thing. There is also the
+[[https://vimeo.com/131189627][Josuttis talk]] on the subject.
+
+In addition we will need support for concepts at the package level as
+we need to have concepts with the same names for both partial and full
+types. We should use namespaces to house these types instead of
+postfixes/prefixes because there will be so many similarly named
+types.
+
+Properties will have types of the base type (=type=). We need a nested
+type class. Modules will have types directly. We need a good name for
+these (type references? something that alludes to referring to
+existing types in the model).
+
+Merged with other story:
+
+Once the model has been merged and resolved, all qnames in the model
+all known to resolve to a valid type, model or module. This means we
+could cache in the qname itself a pointer to the object the qname
+resolves into. There are two problems with this approach:
+
+- we do not have a base class that covers types, models and
+  module. one could be created (=modeling_entity=?) with an associated
+  visitor. but then:
+- formatters are not designed to think at the =modeling_entity= level;
+  a formatter that does types may not necessarily be able to do
+  modules or models. Thus we would need to convert from a
+  =modeling_entity= to a type, model or module before we get to the
+  formatter.
+
+However one imagines that a great number of lookups would be avoided
+if this was possible.
+
+Actually we probably should have two different models for this. One
+could be SML as we know it - just renamed - and the other one could be
+the intermediate representation, etc.
+
+Implementation tasks:
+
+- rename all types to have a prefix such as =intermediate_=,
+  e.g. =intermediate_model=, etc. Get all code to work with the new names.
+- create a new model class with just a few properties (leaves, entities, etc).
+- create a base class entity with all the required descendants.
+- remove the type base class for intermediate.
+- make entity visitable.
+- rename the existing workflow to something like model factory; it
+  takes in the intermediate models and generates a "final" model.
+- update cpp code to use this new model.
+
+*** Consider renaming formatter groups and model groups to sets       :story:
+
+We should try to keep the words groups and sets to their mathematical
+as much as possible - modulus our limited understanding. As such,
+where we are using "group" we probably mean "set" since there is no
+associated operation with the set; it is merely a way of gathering
+elements.
+
+Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Create a single container of element in model                     :story:
+
+We did an experiment to figure out if it would be more efficient to
+have separate containers of elements in SML's model, the idea being
+that we would avoid using the heap, dispatching etc. We would also
+create code that is more type-safe (e.g. avoid cases where we pass in
+elements but we want a specific descendant only).
+
+However, predictably, the code now has lots of loops across the
+different collections. This pattern is scattered everywhere we use
+SML. In almost all cases this could be handled by a single loop
+without loss of type-safety (e.g. loop and visit where we need
+specific types; just loop where an element suffices). Using the
+traversals (all types traversals, etc) didn't help because we then
+need to create all the associated machinery (overload =operator()=
+etc.) and that is not much different from having a visitor on
+element. We should consider this experiment at an end and just add a
+single container of element in model and deal with the fallout.
+
+Alternatively, we need a "view" over the different containers. In
+truth after the SML workflow has finished executing the model is
+constant. This means we could then use pointers to the objects to
+create a synthetic element container and use this for looping over all
+entities.
+
+In an ideal world, this would be a property of the model:
+e.g. =std::forward_list<entity*>=. However, we do not support pointer
+containers and this is a non-trivial change to the spirit parser so we
+won't be able to do it quickly. The alternative is to generate the
+container from within the backend workflow for now and pass it to each
+workflow. Once we are done with the refactoring we can then replace
+this with a model property.
+
+We need to have a look at all instances of the code where we loop
+across all elements and see if this is a win or not. Also, we can move
+=Element= from a concept to a type (e.g. =element=) and make it the
+base class for all elements. Validator would have to make sure the
+model is not nonsensical (object inheriting from a primitive, etc).
+
+Merged stories:
+
+Consider model as a container of types
+
+At present model is composed of objects, primitives, concepts,
+modules, etc. We could bring together all descendants of types into a
+single container (e.g. types). However, in places we do thinks like
+looking at the primitive container to see if the container has any
+primitive types - these would become slower as we'd now be looking at
+the entire type collection. Need to look at all usages of these
+containers in the code to see if this would be a win or not.
 
 *** Multi-purpose models per language                                  :epic:
 
@@ -1068,25 +930,6 @@ by looking at the things it is supposed to be a design of. The more
 examples you look at, the more general your framework will be.
 #+end_quote
 
-*** Include groups                                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to create includers for user defined
-groups of files so that I don't have to do it manually.
-#+end_quote
-
-One of my personal preferences has always been to group includes by
-"library". Normally first come the C includes, then the standard
-library ones, then boost, then utilities and finally types of the same
-model. Each of these can be thought of as a group. Inside each group
-the file names are normally ordered by size, smallest first. It would
-be nice to have support for such a feature in Dogen.
-
-Formatters would then push their includes into the correct
-group. Group names could be the model name (=std=, etc).
-
-A bit of a nitpick but nice nonetheless.
-
 *** Models should have an associated language                          :epic:
 
 #+begin_quote
@@ -1121,137 +964,6 @@ agnostic".
 See also the model groups work.
 
 See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*** Refactor code around model origination                            :story:
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and SML should not know
-  anything about it.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-*** Add "model types"                                                 :story:
-
-At present we have a number of dynamic extensions that exist purely to
-deal with non-dogen models:
-
-- supported: is the facet supported by the external model
-- file_name: what is the external model naming for files for this
-  facet
-- is_system: is the file name a system include file or not?
-
-In reality, all of this could be avoided if we had a way of
-distinguishing between models that follow dogen conventions and those
-who do not; a "model type" of sorts such as "external" and "dogen" -
-naming needs more thought. With this we could infer the rest: if no
-file name is supplied then a given formatter/facet is not supported;
-if the model is_system then all types are system and so on.
-
-We should also have a flag in field definitions that verify that a
-parameter is only present if the model is a non-dogen model. For
-example, it makes no sense to supply =cpp.type.family= in a dogen
-model but it may make sense to do so in an external model. However,
-this would mean that if a user manually adds a type to a dogen model
-it cannot be extended. Requires a bit of thinking.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*** Split a fully formed model from partial models                    :story:
-
-We should really have two distinct types to represent the model that
-is returned from the dia to sml transformer from the model returned by
-the merger. Potentially this could be called =partial_model=.
-
-In fact we may need to take this a step further and follow the same
-approach as [[https://github.com/avao/Codge/tree/master/Src/Codge.DataModel][Cogen]]: having exactly the same types, but perhaps in a
-separate namespace; one version represents the "connected" model and
-the other the "disconnected" (or intermediate, or partial) model. The
-idea being that on the connected model has references to types rather
-than relaying on qname look-ups. So for example all the relationships
-then become shared pointers to types and so on. The problem with this
-approach is that we then need to have a common base type from where
-all types inherit and this will mean that we will have to visit a lot
-to dispatch types to their leaves.
-
-Actually, this is also the chance to remove all of the qname
-lookups. All relationships should just be boost shared pointers to
-types rather than qnames. There should be no need for lookups at
-all. This is a much better approach than the suggested below. We still
-need qnames and some minor qname lookup (e.g. model is still made
-up of a unordered map of qname to entity) but everyone should be using
-entity pointers rather than qnames. It is not clear what models such
-as CPP should be doing since the pointers are not particularly useful
-there.
-
-This would also be a good opportunity to use something like a pointer
-container for all the pointers and then use either a "dumb pointer" or
-even [[http://stackoverflow.com/questions/13874673/stdreference-wrappert-usage-in-a-container][references]] everywhere. Since we know the container will exist for
-the duration of a run, we can rely on the objects being managed
-elsewhere. This is a better way rather than using shared pointers
-everywhere. Alexandrescu [[https://www.youtube.com/watch?v%3DQq_WaiwzOtI][discusses at length]] the side-effects of using
-shared pointers. Whilst this is probably not a problem for Dogen, we
-want to explore ways of doing the right thing. There is also the
-[[https://vimeo.com/131189627][Josuttis talk]] on the subject.
-
-In addition we will need support for concepts at the package level as
-we need to have concepts with the same names for both partial and full
-types. We should use namespaces to house these types instead of
-postfixes/prefixes because there will be so many similarly named
-types.
-
-Properties will have types of the base type (=type=). We need a nested
-type class. Modules will have types directly. We need a good name for
-these (type references? something that alludes to referring to
-existing types in the model).
-
-Merged with other story:
-
-Once the model has been merged and resolved, all qnames in the model
-all known to resolve to a valid type, model or module. This means we
-could cache in the qname itself a pointer to the object the qname
-resolves into. There are two problems with this approach:
-
-- we do not have a base class that covers types, models and
-  module. one could be created (=modeling_entity=?) with an associated
-  visitor. but then:
-- formatters are not designed to think at the =modeling_entity= level;
-  a formatter that does types may not necessarily be able to do
-  modules or models. Thus we would need to convert from a
-  =modeling_entity= to a type, model or module before we get to the
-  formatter.
-
-However one imagines that a great number of lookups would be avoided
-if this was possible.
-
-Actually we probably should have two different models for this. One
-could be SML as we know it - just renamed - and the other one could be
-the intermediate representation, etc.
-
-Implementation tasks:
-
-- rename all types to have a prefix such as =intermediate_=,
-  e.g. =intermediate_model=, etc. Get all code to work with the new names.
-- create a new model class with just a few properties (leaves, entities, etc).
-- create a base class entity with all the required descendants.
-- remove the type base class for intermediate.
-- make entity visitable.
-- rename the existing workflow to something like model factory; it
-  takes in the intermediate models and generates a "final" model.
-- update cpp code to use this new model.
 
 *** Consider renaming SML                                             :story:
 
@@ -1294,6 +1006,308 @@ example one may want to take a model of a neuron and represent it in
 model rather than SML. So the name of SML must reflect the fact that
 it is a model of programming objects. Object-Oriented Programming
 Language Model?
+
+*** Add "model types"                                                 :story:
+
+At present we have a number of dynamic extensions that exist purely to
+deal with non-dogen models:
+
+- supported: is the facet supported by the external model
+- file_name: what is the external model naming for files for this
+  facet
+- is_system: is the file name a system include file or not?
+
+In reality, all of this could be avoided if we had a way of
+distinguishing between models that follow dogen conventions and those
+who do not; a "model type" of sorts such as "external" and "dogen" -
+naming needs more thought. With this we could infer the rest: if no
+file name is supplied then a given formatter/facet is not supported;
+if the model is_system then all types are system and so on.
+
+We should also have a flag in field definitions that verify that a
+parameter is only present if the model is a non-dogen model. For
+example, it makes no sense to supply =cpp.type.family= in a dogen
+model but it may make sense to do so in an external model. However,
+this would mean that if a user manually adds a type to a dogen model
+it cannot be extended. Requires a bit of thinking.
+
+This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Consider reducing the number of qname lookups in cpp model        :story:
+
+At present we are using qnames all over the place in CPP. Nothing
+stops us from using strings instead of qnames if that is more
+efficient.
+
+What is worse is that we seem to be doing a ridiculous amount of qname
+lookups. It would be much nicer if we could somehow have all the data
+in the right shape to avoid doing so many lookups.
+
+*** Refactor code around model origination                            :story:
+
+In the past we added a number of knobs around generation, all with
+their own problems:
+
+- =origin_types=: was the model/type created by the user or the
+  system. in reality this means did the model come from Dia or
+  JSON. this is confusing as the user can also add JSON files (their
+  own model library) and in the future the user can use JSON
+  exclusively without needed Dia at all.
+
+- =generation_types=: if the model is target, all types are to be
+  generated /unless/ they are not properly supported, in which case
+  they are to be "partially" generated (as is the case with
+  services). This is a formatter decision and SML should not know
+  anything about it.
+
+These can be replaced by a single enumeration that indicates if the
+type/model is target or not.
+
+This work should be integrated with the model types story.
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
+conceptual sense.
+
+*** Set enumeration underlying type in SML                            :story:
+
+In cpp transformer we have hacked the underlying type of the
+enumeration. Remove this hack and set it in SML. Still a hack, but
+a tad better.
+
+*** Move language-specific object types to meta-data                  :story:
+
+There are a number of object types that exist solely to provide the
+method helpers with information:
+
+- smart_pointer
+- hash_container
+- sequence_container
+- ordered_container
+
+These should be conveyed using the meta-data.
+
+*** Handling of managed directories is incorrect                      :story:
+
+At present we are querying the dia to sml transformer to figure out
+what the managed directories are. These are basically the top-level
+directories from where we want the housekeeper to operate. In reality
+this is (or can be placed) in the meta-data. We should be able to
+extract the managed directories from the meta-data as a step in one of
+the workflows.
+
+This can be done by the backend. It does mean that we should be
+returning a composite type from generation:
+
+- list of files;
+- list of managed directories.
+
+Alternatively we could have a =managed_directories= method that takes
+in an SML model and then internally reads in the meta-data for a given
+model to produce the list.
+
+*Merged with previous story*
+
+Compute managed directories from knitting options
+
+At present the backend is returning empty managed directories. This
+means housekeeping will fail in the new world. We need to change the
+interface of this method to take in the knitting options and return
+the managed directories.
+
+This is not entirely trivial. At present the managed directories are
+computed in the locator. It takes into account split project, etc to
+come up with all the directories used by the backend. We need to make
+these decisions during path expansion, expect we only need manged
+directories for the root object. However we do not know which object
+is the root object at present, during the expansion. We could identify
+it via the QName and the SML model in context thought. We could then
+populate the managed directories as a text collection. We then need
+some settings and a factory to pull out the managed directories from
+the root object. This could be done in =managed_directories=, by
+having an SML model as input.
+
+*** Consider creating a "locator" like class for path management      :story:
+
+At present we are using path settings to compute paths in several
+places. Most of these exist because of hacks but it still seems that
+it needs to be done in more than one place. We should consider
+something like =sml_to_cpp::locator= that is initialised with the path
+settings and can then be used to create paths.
+
+*** Add include providers for all types                               :story:
+
+We need to implement the provider container support for primitives,
+modules and concepts.
+
+Update:
+
+- inclusion dependencies factory
+- provider container
+
+*** Implement all formatter interfaces                                :story:
+
+We still have a couple of skeleton interfaces:
+
+- primitve
+- concepts
+
+*** Factor all =housekeeping_required= methods into one               :story:
+
+In knit model we seem to have several of these: =housekeeping_required=.
+
+*** Remove unused features                                             :epic:
+
+At the very start of dogen we added a number of features that we
+thought were useful such as suppressing model directory, facet
+directories etc. We should look at all the features and make a list of
+all features that we are not currently making use of and create
+stories to remove them.
+
+We may have to split this story into several but we should at least
+trim down the obvious ones:
+
+- empty model name (done)
+- output to stdout (done)
+- keys, entities (done)
+- remove repository, factory, stereotypes (done)
+- versioning (done)
+- split project (or vice-versa, whichever one we don't use).
+- removing cpp backend?
+- delete extra files: we always do so why make it optional.
+- force write: we never do.
+- etc.
+
+Basically any feature which we are not using at present and cannot
+think of an obvious use case.
+
+*** Do not compute inclusion directives for system models             :story:
+
+It seems we are computing inclusion directives and other path
+derivatives for system models:
+
+: {
+:   "__type__": "dogen::cpp::expansion::path_derivatives",
+:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
+:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
+:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
+: }
+
+This comes out of the workflow, so we possibly are then ignoring it
+for the non-target types. So:
+
+- can we avoid computing these altogether?
+- are we ignoring it?
+
+Actually this is the usual problem with the "origin" of the type. We
+need a way to determine if this type needs computations or not. We
+need to create a story to clean up the =origin_type= and
+=generation_type= and then we can make use of it to determine if we
+need to compute inclusion, path etc or not.
+
+*** Header guard in formatters should be optional                     :story:
+
+At present we are relying on empty header guards to determine what to
+do in boilerplate. We should use boost optional.
+
+*** Remove complete name and use qualified name                       :story:
+
+At present we have both complete name and qualified name in
+formatables. Qualified name is blank. We should remove complete name
+and populate qualified name.
+
+This is in nested type info.
+
+*** Remove intermediate fields from dynamic                           :story:
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
+
+*** Create knitter options for each frontend                          :story:
+
+At present some knitting options are specific to a frontend
+(particularly in troubleshooting). We should create different classes
+to represent options on a per fronend basis.
+
+*** Remove unnecessary properties from model                          :story:
+
+The model should be just dumb container of types. We have a few legacy
+properties left behind from the days where the model was also used in
+the transformation process. Remove all the concepts from the model
+(=Element= etc) and deal with the fall out. Unnecessary properties:
+documentation, containing module, extensions.
+
+We need to keep the name because it is now used to locate the model's
+module.
+
+*** Include groups                                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create includers for user defined
+groups of files so that I don't have to do it manually.
+#+end_quote
+
+One of my personal preferences has always been to group includes by
+"library". Normally first come the C includes, then the standard
+library ones, then boost, then utilities and finally types of the same
+model. Each of these can be thought of as a group. Inside each group
+the file names are normally ordered by size, smallest first. It would
+be nice to have support for such a feature in Dogen.
+
+Formatters would then push their includes into the correct
+group. Group names could be the model name (=std=, etc).
+
+A bit of a nitpick but nice nonetheless.
 
 *** Consider renaming registrar in boost serialisation                :story:
 
