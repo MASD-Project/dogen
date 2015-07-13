@@ -2876,17 +2876,6 @@ modules but also creates modules that do not exist. We need to split
 this into a =read= function without side-effects and a =create=
 function that creates the missing modules.
 
-*** Clean up of stereotyepes                                          :story:
-
-At present we use the dia stereotypes for two things: a) the
-"internal" things like =visitable=, etc and b) concepts, which can be
-thought of as "external" as they are defined by users. It would be
-nice if we could move one or the other to dynamic extensions to make
-things cleaner.
-
-We should probably more =visitable= etc to meta-data; it is nice to
-see what concepts a type uses at a glance.
-
 *** Attributes versus properties                                      :story:
 
 At present we have assumed that all attributes in objects should be

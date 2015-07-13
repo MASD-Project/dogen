@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-13 Mon 14:17]
+#+CAPTION: Clock summary at [2015-07-13 Mon 17:40]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *27:17* |       |      |
+| *Total time*                                                                | *30:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 27:17   |       |      |
-| Active                                                                      |         | 27:17 |      |
+| Stories                                                                     | 30:36   |       |      |
+| Active                                                                      |         | 30:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -54,9 +54,10 @@
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
-| STARTED Define end to end terminology given all refactoring stories         |         |       | 1:43 |
+| STARTED Define end to end terminology given all refactoring stories         |         |       | 4:41 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
+| STARTED Split a fully formed model from partial models                      |         |       | 0:21 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -344,7 +345,6 @@ generation failure. We should only have one type.
 Seems like this got missed out on previous tidy-up.
 
 *** STARTED Define end to end terminology given all refactoring stories :story:
-    CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
     CLOCK: [2015-07-12 Sun 14:10]--[2015-07-12 Sun 15:00] =>  0:50
     CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
 
@@ -357,13 +357,197 @@ useful definitions in this space. In particular:
 
 - [[http://www.voelter.de/data/books/mdsd-en.pdf][Model-Driven Software Development]]
 - [[http://researcher.ibm.com/researcher/files/zurich-jku/mdse-08.pdf][Model-Driven Software Engineering]]
+- [[http://people.cs.umass.edu/~brun/pubs/pubs/Edwards11ase.pdf][Isomorphism in Model Tools and Editors]]
+- [[http://met.guc.edu.eg/Repository/Faculty/Publications/371/2009.SCP.pdf][A type-centric framework for specifying heterogeneous, large-scale,
+  component-oriented, architectures]]
 
-*Terms*
+**** STARTED Parse Model Driven Software Development book
+     CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
+     CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
+     CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
+
+- *Model-based development*: the traditional kind of software
+  development, where developers create UML diagrams to represent the
+  code that they are working or going to work on, and perhaps use some
+  kind of simple tool to automate the generation of skeleton code; but
+  fundamentally, the models are there just as documentation. The idea
+  is to provide a visual representation of what is or will be in code.
+- *MDSD*: Model Driven Software Development. Models do not constitute
+  documentation, but are considered equal to code. Conversion of
+  models to code is automated. Models are blueprints like in CAD.
+  MDSD aims to find domain-specific abstractions and make them
+  accessible through formal modeling. Models can also be understood by
+  domain experts. "Driven" means that models are not peripheral but
+  central to the development process and as artefacts are at the same
+  level as source code. MDSD attempts to FIXME
+- *MDE*: [[https://en.wikipedia.org/wiki/Model-driven_engineering][Model-driven engineering]] is a software development
+  methodology which focuses on creating and exploiting domain models,
+  which are conceptual models of all the topics related to a specific
+  problem. Seems very similar to MDD and MDSD.
+- ADL: [[https://en.wikipedia.org/wiki/Architecture_description_language][Architecture description language]]. A computer language to
+  create a description of a software architecture. In the case of a
+  so-called technical architecture, the architecture must be
+  communicated to software developers; a functional architecture is
+  communicated to various stakeholders and users. Some ADLs that have
+  been developed are: Acme (developed by CMU), AADL (standardized by
+  the SAE), C2 (developed by UCI), Darwin (developed by Imperial
+  College London), and Wright (developed by CMU).
+- *Reverse Engineering*: The generation of UML diagrams or other
+  models from source code. The model has the same level of abstraction
+  as the code.
+- *Forward Engineering*: The generation of source code from high-level
+  models such as UML diagrams.
+- *Roundtripping*: The ability to do both Forward and Reverse
+  Engineering.
+- *MDD*: Model-Driven Development. A less precise but common name for
+  MDSD. For all intents and purposes can be thought of as a synonym of
+  MDSD.
+- *MDA*: Model Driven Architecture. Initiative by OMG to standardise
+  concepts around MDSD. Can be thought of as one flavour of
+  MDSD. Designed to fit UML since OMG is also responsible for it. Its
+  primary goal is interoperability between tools and the long-term
+  standardisation of models for popular application domains.
+- Three "kinds" of code in an application:
+  - Individual Code: and finally an application-specific part that
+    cannot be generalized.
+  - Generic Code: a generic part that is identical for all future
+    applications
+  - Schematic Repetitive Code: a schematic part that is not identical
+    for all applications, but possesses the same systematics (for
+    example, based on the same design patterns). Also called
+    Infrastructure code: The existence of a software infrastructure
+    also implies the existence of corresponding infra- structure code
+    in the software systems using it. This is source code, which
+    mostly serves to establish the technical coupling between
+    infrastructure and applications to facilitate the development of
+    domain-specific code on top of it. 60% and 70% of modern
+    e-business applications typically consists of infrastructure code.
+- *[[https://en.wikipedia.org/wiki/Profile_(UML)][UML Profile]]*: A profile in the Unified Modeling Language (UML)
+  provides a generic extension mechanism for customizing UML models
+  for particular domains and platforms. Extension mechanisms allow
+  refining standard semantics in strictly additive manner, preventing
+  them from contradicting standard semantics. Profiles are defined
+  using stereotypes, tag definitions, and constraints. A Profile is a
+  collection of such extensions that collectively customize UML for a
+  particular domain (e.g., aerospace, healthcare, financial) or
+  platform (J2EE, .NET). UML models are not per se MDA models. The
+  most important difference between common UML models (for example
+  analysis models) and MDA models is that the meaning (semantics) of
+  MDA models is defined formally. This is guaranteed through the use
+  of a corresponding modeling language which that is typically
+  realised by a UML profile and its associated transformation rules.
+- PIM and PSM: PIM: Platform-Independent Model. Can be done via a UML
+  Profile. PSM: Platform-Specific Model. Can be done via a UML
+  Profile. It is important to note that a PIM and a PSM are relative
+  concepts – relative to the platform
+- transformation: map models to the respective next level, be it
+  further models or source code:
+  - Model-to-model transformation
+  - Model-to-code transformation
+- mapping: the mapping of one mode to another. Transformation is done
+  by means of mapping.
+- *Model*: an abstract representation of a system’s structure,
+  function or behaviour.
+- *Platform*: Anything that can be targeted such as CORBA, C++, etc.
+- *Generative Software Architecture*: all implementation details of
+  the architecture’s definition – that is, all architectural schemata
+  – are incorporated in software form. This requires a domain model of
+  the application as its input, and as output it generates the
+  complete infrastructure code of the application – the very code that
+  otherwise would need to be generated via a tedious copy/paste/modify
+  process.
+- *Protected regions*: also known as protected areas. Syntactically,
+  these are comments in the target language, but are interpreted by
+  the MDSD generator. Each protected region within the generated code
+  possesses a globally unique identifier disguised as a comment, and
+  is thus uniquely linked to a model element.
+- *Domain*: bounded field of interest or knowledge. To internalise and
+  process this knowledge, it is useful to create an ontology of a
+  domain’s concepts.
+
+**** Define our own vocabulary
 
 - *kernel*:
 A programming language is a formal constructed language designed to
 communicate instructions to a machine, particularly a computer.
 - *formatter*:
+
+**** Notes
+
+- we should define a UML profile in Dia that contains all of the
+  required concepts for Dogen. Perhaps we don't even need
+  meta-data/KVPs. In particular it seems that "tagged values" are
+  already KVPs. There is also "extensions". These are used in
+  conjunction with stereotypes. So for example we could "extend" the
+  UML notion of an attribute with say a new UML meta-class called
+  Key. We would then mark attributes as =<<Key>>=. This would mean
+  they are not regular UML attributes, but instead they are an
+  instance of our extension.
+- we seem to have layers of "abstraction" around generation. The first
+  layer is simply: if I define a class called X, create me a class X
+  in language y. This is Dia2Code. The second is the application of
+  some minimal infrastructural behaviour: create boost serialisation
+  for X, hashing for X, etc. The third is another level up in
+  abstraction: annotating types with "architectural concepts". For
+  example we could have a =RemoteService= stereotype which by default
+  in C++ results in the generation of all boilerplate code required
+  for ASIO. All that is required is to associate commands and queries
+  with the service. This could be achieved by marking a type with some
+  other stereotype - or even better, to define an attribute such as
+  =<<Command>>= or something more meaningful and apply that to a UML
+  attribute. From this we have all the information required to
+  generate the networking code.
+- For ODB it would be nice if we could mark types with generic
+  stereotypes which could be mapped to ODB specific pragmas:
+  =<<PrimaryKey>>= etc. Actually, just =Key=; it is somebody else's
+  job to map it to a foreign or primary key. We could even have some
+  stereotypes which are PSM: =BoostSerialisable=, etc. Such that by
+  default =Serialisable= maps to =BoostSerialisable= in
+  C++. =RelationalEntity=?
+- Does UML have a concept of stereotype sets or groups? If it did we
+  could create some such as =DomainEntity=: =Serialisable=,
+  =Printable= etc. =ComparableDomainEntity= and so on; we could create
+  an entire hierarchy of stereotypes. These would then be translated
+  to having facets on and off. These are also "additive": =Visitable=,
+  =DomainEntity= etc could be applied to a single entity. Actually
+  maybe it should just be called =Entity= as domain does not add much
+  value. Or =ValueObject=. We need to create a hierarchy of these.
+- This means that Concepts are very much like all other kinds of
+  stereotypes. It just means that sometimes a stereotype resolves to a
+  hard-coded meaning (=Serialisable=, etc) whereas sometimes it is
+  user defined (e.g. the user created a concept).
+- all backends should be grouped under one name (say quilt) but there
+  is no need to have multiple kinds of backends (at least for
+  now). All the use cases we have can be handled by one kind of
+  backend, with a way to toggle SML transformation. So if a user is
+  making use of LAM (a PIM), we should have the option to either map
+  LAM types to native types or to use LAM "natively". This would mean
+  we need a C++ implementation of LAM, etc. Other LAM like models
+  could be defined.
+- users should be able to add the same kind of mappings to UML
+  stereotypes to facets of their own making. That is, I should be able
+  to create a set of stitch templates, register them against a
+  stereotype and then load up my DLL via a plugin and have knit
+  generate my code. This would mean that you could make DSL
+  extensions. The classic case is when you spot repetitive
+  infrastructural code in your system which is not common to other
+  systems.
+- targeting of platforms: a given stereotype can map to very different
+  implementations depending on the platform the user chooses to
+  target. In addition, the user may choose to target multiple
+  platforms. The name "platform" is not a very good one. For example,
+  lets say the user marks a type as serialisable and there are N
+  different types of serialisation. It would be really nice if we
+  could define the set of target serialisations (e.g. boost, POF,
+  etc).
+- this is actually quite simple. There are meta-concepts: Visitable,
+  Entity, and so on. One of these meta-concepts is
+  Concept. Meta-concepts are _refinable_: thus Entity can refine
+  Serialisable and so on. Meta-concepts can be _modeled_ by one or
+  more implementations: thus Hashable is modeled by Boost Hash,
+  std::hash and so on. There is a mapping between meta-concepts
+  (modeling world) and facets/formatters (implementation). A formatter
+  is (or can be) a model of a meta-concept.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
@@ -538,6 +722,48 @@ What can be said about an archetype:
 We need to get pgannon up to speed with all that is required to
 develop a quick project site for dogen.
 
+*** Consider renaming SML                                             :story:
+
+Originally we intended to rename SML - the Simplified Modeling
+Language - to DDL - the Domain Driven Language. This was because we
+had envisioned that SML was a model of the ideas in Domain Driven
+Design, and not at all a cut down version of UML as the name seems to
+imply. However, its becoming increasingly clear that, whilst we use a
+lot of the Domain Driven Design ideas, we are also morphing them
+considerably. Perhaps a more apt name would be SDML - the Simplified
+Domain Modeling Language?
+
+Or instead we could follow the compiler theme and call it the =ir= or
+intermediate representation, or =im= for intermediate model. Actually
+this is a confusing name because it clashes with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][partial model]]
+notions we intend to introduce.
+
+After more thinking on this, and since we now have a =backend= and a
+=frontend=, it is obvious that SML is the =middle_end= since it is the
+middle-end of the code generation process. So it could be the
+Middle-End Model (MEM) or just Middle-End (ME).
+
+However, this is not a very good name for the model as we also do some
+front-end-y things (such as the JSON implementation). =ir= and =im=
+still seem like the more likely candidates. Actually, JSON is not a
+front-end; it is a direct representation of the middle-end into a
+file. The same could also be done in XML. It only becomes a front-end
+if there is an intermediate representation (such as the =dia= model)
+that needs to be transformed into SML.
+
+Another idea: common representation or =cr=. It is what is common to
+all modeled languages. What is not common goes into dynamic. This will
+also make the vision for this model much more focused.
+
+Some more thinking on this: SML is a meta-model, or a model that
+provides a language to talk about programming objects in
+general. There may be other models suitable for formatting; for
+example one may want to take a model of a neuron and represent it in
+[[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][HOC]]. In this case the formatters would bind directly to the neuron
+model rather than SML. So the name of SML must reflect the fact that
+it is a model of programming objects. Object-Oriented Programming
+Language Model?
+
 *** Thoughts on simplifying the formattables generation               :story:
 
 We have a problem in the way which we are doing the formattables:
@@ -711,7 +937,9 @@ cpp. However, in reality the world looks more like this:
 
 This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
-*** Split a fully formed model from partial models                    :story:
+*** STARTED Split a fully formed model from partial models            :story:
+    CLOCK: [2015-07-13 Mon 17:24]--[2015-07-13 Mon 17:40] =>  0:16
+    CLOCK: [2015-07-13 Mon 17:18]--[2015-07-13 Mon 17:23] =>  0:05
 
 We should really have two distinct types to represent the model that
 is returned from the dia to sml transformer from the model returned by
@@ -780,12 +1008,15 @@ if this was possible.
 
 Actually we probably should have two different models for this. One
 could be SML as we know it - just renamed - and the other one could be
-the intermediate representation, etc.
+the intermediate representation, etc. We could rename SML to DMM -
+Disconnected Meta-Model - and create a new model for the backends to
+use called MM (meta-model). Unconnected meta-model?
 
 Implementation tasks:
 
 - rename all types to have a prefix such as =intermediate_=,
-  e.g. =intermediate_model=, etc. Get all code to work with the new names.
+  e.g. =intermediate_model=, etc. Get all code to work with the new
+  names.
 - create a new model class with just a few properties (leaves, entities, etc).
 - create a base class entity with all the required descendants.
 - remove the type base class for intermediate.
@@ -990,47 +1221,16 @@ See also the model groups work.
 
 See also the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
 
-*** Consider renaming SML                                             :story:
+*** Clean up of stereotypes                                           :story:
 
-Originally we intended to rename SML - the Simplified Modeling
-Language - to DDL - the Domain Driven Language. This was because we
-had envisioned that SML was a model of the ideas in Domain Driven
-Design, and not at all a cut down version of UML as the name seems to
-imply. However, its becoming increasingly clear that, whilst we use a
-lot of the Domain Driven Design ideas, we are also morphing them
-considerably. Perhaps a more apt name would be SDML - the Simplified
-Domain Modeling Language?
+At present we use the dia stereotypes for two things: a) the
+"internal" things like =visitable=, etc and b) concepts, which can be
+thought of as "external" as they are defined by users. It would be
+nice if we could move one or the other to dynamic extensions to make
+things cleaner.
 
-Or instead we could follow the compiler theme and call it the =ir= or
-intermediate representation, or =im= for intermediate model. Actually
-this is a confusing name because it clashes with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#split-a-fully-formed-model-from-partial-models][partial model]]
-notions we intend to introduce.
-
-After more thinking on this, and since we now have a =backend= and a
-=frontend=, it is obvious that SML is the =middle_end= since it is the
-middle-end of the code generation process. So it could be the
-Middle-End Model (MEM) or just Middle-End (ME).
-
-However, this is not a very good name for the model as we also do some
-front-end-y things (such as the JSON implementation). =ir= and =im=
-still seem like the more likely candidates. Actually, JSON is not a
-front-end; it is a direct representation of the middle-end into a
-file. The same could also be done in XML. It only becomes a front-end
-if there is an intermediate representation (such as the =dia= model)
-that needs to be transformed into SML.
-
-Another idea: common representation or =cr=. It is what is common to
-all modeled languages. What is not common goes into dynamic. This will
-also make the vision for this model much more focused.
-
-Some more thinking on this: SML is a meta-model, or a model that
-provides a language to talk about programming objects in
-general. There may be other models suitable for formatting; for
-example one may want to take a model of a neuron and represent it in
-[[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][HOC]]. In this case the formatters would bind directly to the neuron
-model rather than SML. So the name of SML must reflect the fact that
-it is a model of programming objects. Object-Oriented Programming
-Language Model?
+We should probably more =visitable= etc to meta-data; it is nice to
+see what concepts a type uses at a glance.
 
 *** Add "model types"                                                 :story:
 
