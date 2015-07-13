@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-11 Sat 23:31]
+#+CAPTION: Clock summary at [2015-07-13 Mon 14:17]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *23:21* |       |      |
+| *Total time*                                                                | *27:17* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 23:21   |       |      |
-| Active                                                                      |         | 23:21 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:16 |
+| Stories                                                                     | 27:17   |       |      |
+| Active                                                                      |         | 27:17 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |         |       | 0:52 |
@@ -53,7 +53,10 @@
 | COMPLETED Remove all types traversal from SML                               |         |       | 0:05 |
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
+| COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
+| STARTED Define end to end terminology given all refactoring stories         |         |       | 1:43 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
+| STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -341,6 +344,8 @@ generation failure. We should only have one type.
 Seems like this got missed out on previous tidy-up.
 
 *** STARTED Define end to end terminology given all refactoring stories :story:
+    CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
+    CLOCK: [2015-07-12 Sun 14:10]--[2015-07-12 Sun 15:00] =>  0:50
     CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
 
 We have a number of refactoring stories, all covering different
@@ -359,7 +364,6 @@ useful definitions in this space. In particular:
 A programming language is a formal constructed language designed to
 communicate instructions to a machine, particularly a computer.
 - *formatter*:
-
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
@@ -527,6 +531,12 @@ What can be said about an archetype:
   somewhere, given them a name and then assign a type to a map. In
   addition, we need a way to express "generate but don't override" and
   "generate and override".
+
+*** STARTED Setup pgannon to develop dogen site                       :story:
+    CLOCK: [2015-07-12 Sun 15:01]--[2015-07-12 Sun 16:50] =>  1:49
+
+We need to get pgannon up to speed with all that is required to
+develop a quick project site for dogen.
 
 *** Thoughts on simplifying the formattables generation               :story:
 
