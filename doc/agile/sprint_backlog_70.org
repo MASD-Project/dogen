@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-14 Tue 17:45]
+#+CAPTION: Clock summary at [2015-07-14 Tue 22:23]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *34:31* |       |      |
+| *Total time*                                                                | *35:21* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 34:31   |       |      |
-| Active                                                                      |         | 34:31 |      |
+| Stories                                                                     | 35:21   |       |      |
+| Active                                                                      |         | 35:21 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -54,7 +54,7 @@
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
-| STARTED Define end to end terminology given all refactoring stories         |         |       | 8:36 |
+| STARTED Define end to end terminology given all refactoring stories         |         |       | 9:26 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
 | STARTED Split a fully formed model from partial models                      |         |       | 0:21 |
@@ -345,6 +345,7 @@ generation failure. We should only have one type.
 Seems like this got missed out on previous tidy-up.
 
 *** STARTED Define end to end terminology given all refactoring stories :story:
+    CLOCK: [2015-07-14 Tue 21:33]--[2015-07-14 Tue 22:23] =>  0:50
     CLOCK: [2015-07-12 Sun 14:10]--[2015-07-12 Sun 15:00] =>  0:50
     CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
 
