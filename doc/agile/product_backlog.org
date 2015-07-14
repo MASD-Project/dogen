@@ -5304,6 +5304,16 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Code generation and system configuration                          :story:
+
+This is a very sketchy story. We probably should look into any
+relationships between system configuration and code generation. A
+starting point on this are these papers:
+
+- [[http://www.infosun.fim.uni-passau.de/publications/docs/PTD%2B14.pdf][Coevolution of Variability Models and Related Software Artifacts]]
+- [[http://homepages.dcc.ufmg.br/~mtov/pub/2015_modularity.pdf][Feature Scattering in the Large: A Longitudinal Study of Linux
+  Kernel Device Drivers]]
+
 *** Support for transactional writes                                  :story:
 
 It would be nice if dogen either generated all files or didn't touch
