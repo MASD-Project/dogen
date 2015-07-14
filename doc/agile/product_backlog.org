@@ -5637,6 +5637,19 @@ possible:
   meta-data extensions looking for file path, and for each run the
   "function parser"; it will return a set of "manual" functions. These
   we can then slot into the meta-data and reuse later on.
+- the proper technical name for methods that can be manually edited is
+  "protected regions". Merging is not a technical term according to
+  MDSD at least.
+
+We should also address the MDSD comment:
+
+#+begin_quote
+If, for performance reasons, or because the target language doesn’t
+offer any options for con- solidating different artifacts, handwritten
+code must be inserted into generated code directly, the introduction
+of protected areas is inevitable. Please do this only if such
+exceptional conditions require this approach!
+#+end_quote
 
 *** Add support for languages available in Dia2Code                    :epic:
 
