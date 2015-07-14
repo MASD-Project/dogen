@@ -10,6 +10,11 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming =knit= to =weave=                               :story:
+
+We seem to have missed an obvious term: weaving. We can either save it
+for later or perhaps rename =knit= to =weave=.
+
 *** Lists of strings are not properly tidied up on io                 :story:
 
 In the log file, when we dump include dependencies we see invalid
