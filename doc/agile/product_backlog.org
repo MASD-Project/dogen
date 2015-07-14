@@ -3775,6 +3775,12 @@ dogen.
 See [[http://www.codeproject.com/Articles/447922/Application-of-Cplusplus11-User-Defined-Literals-t][Application of C++11 User-Defined Literals to Handling Scientific
 Quantities, Number Representation and String Manipulation]]
 
+One interesting way of doing this is as per [[http://researcher.ibm.com/researcher/files/zurich-jku/mdse-08.pdf][MDSD]] book (p111): to
+create meta-entities for the quantities. This needs a bit more
+analysis but the gist of it is that we could then map quantities to
+the most appropriate platform specific technology - in Java/C# create
+a type or use a int, in c++ use literals, etc.
+
 *** Add export macros support                                         :story:
 
 #+begin_quote
