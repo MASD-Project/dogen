@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-13 Mon 17:40]
+#+CAPTION: Clock summary at [2015-07-14 Tue 17:45]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *30:36* |       |      |
+| *Total time*                                                                | *34:31* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 30:36   |       |      |
-| Active                                                                      |         | 30:36 |      |
+| Stories                                                                     | 34:31   |       |      |
+| Active                                                                      |         | 34:31 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -54,7 +54,7 @@
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
-| STARTED Define end to end terminology given all refactoring stories         |         |       | 4:41 |
+| STARTED Define end to end terminology given all refactoring stories         |         |       | 8:36 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
 | STARTED Split a fully formed model from partial models                      |         |       | 0:21 |
@@ -360,8 +360,14 @@ useful definitions in this space. In particular:
 - [[http://people.cs.umass.edu/~brun/pubs/pubs/Edwards11ase.pdf][Isomorphism in Model Tools and Editors]]
 - [[http://met.guc.edu.eg/Repository/Faculty/Publications/371/2009.SCP.pdf][A type-centric framework for specifying heterogeneous, large-scale,
   component-oriented, architectures]]
+- [[http://gsd.uwaterloo.ca/sites/default/files/2014-Bak-Clafer-Unifying-Class-Feature-Modeling(SOSYM).pdf][Clafer: Unifying Class and Feature Modeling]]
+- [[http://research.microsoft.com/en-us/um/people/pcosta/slides/generativeprogramming.pdf][Generative Programming]]
+- [[http://www.issi.uned.es/doctorado/generative/Bibliografia/TesisCzarnecki.pdf][Principles and Techniques of Software Engineering Based on Automated
+  Configuration and Fragment-Based Component Models]]
 
 **** STARTED Parse Model Driven Software Development book
+     CLOCK: [2015-07-14 Tue 17:44]--[2015-07-14 Tue 17:45] =>  0:01
+     CLOCK: [2015-07-14 Tue 13:50]--[2015-07-14 Tue 17:44] =>  3:54
      CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
      CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
      CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
@@ -398,15 +404,24 @@ useful definitions in this space. In particular:
 - *Forward Engineering*: The generation of source code from high-level
   models such as UML diagrams.
 - *Roundtripping*: The ability to do both Forward and Reverse
-  Engineering.
+  Engineering. The concept of being able to make any kind of change to
+  a model as well as to the code generated from that model. The
+  changes always propagate bidirectionally and both artifacts are
+  always consistent.
 - *MDD*: Model-Driven Development. A less precise but common name for
   MDSD. For all intents and purposes can be thought of as a synonym of
   MDSD.
+- MDSD is normally incompatible with roundtripping. The model is
+  definitely more abstract than the code generated from it. Thus it is
+  generally impossible to keep the model consistent automatically
+  after a manual change of the generated code. For this reason, manual
+  changes to generated code should be avoided.
 - *MDA*: Model Driven Architecture. Initiative by OMG to standardise
   concepts around MDSD. Can be thought of as one flavour of
   MDSD. Designed to fit UML since OMG is also responsible for it. Its
   primary goal is interoperability between tools and the long-term
-  standardisation of models for popular application domains.
+  standardisation of models for popular application
+  domains. Ontologically, MDA is a specialization of MDSD.
 - Three "kinds" of code in an application:
   - Individual Code: and finally an application-specific part that
     cannot be generalized.
@@ -464,6 +479,84 @@ useful definitions in this space. In particular:
 - *Domain*: bounded field of interest or knowledge. To internalise and
   process this knowledge, it is useful to create an ontology of a
   domain’s concepts.
+- *Subdomains*: describe single parts or aspects of an entire system
+  for which a specialised modeling language is appropriate.
+- *Partition*: A comprehensive system can be broken down into
+  partitions or content increments. In an insurance domain, for
+  example, partitions could be defined for single sections or product
+  types, such as a "life", "vehicle", "liability" and so on.
+- *Abstract Syntax*: specifies what the language’s structure looks
+  like. An abstraction is introduced from such details as the spelling
+  of keywords, etc. The concrete syntax is the realisation of an
+  abstract syntax. Various concrete syntax forms can have a common
+  abstract syntax. Put anther way, the meta-model of a domain can be
+  expressed in different notations. How can the abstract syntax or the
+  meta-model of a domain be specified? Via a meta-model.
+- *MOF*: the meta object facility. specified by OMG.
+- *Static semantics*: property of a language that determines its
+  criteria for well-formedness.
+- *DSL*: Domain-specific language. Makes the key aspects of a domain –
+  but not all of its contents – formally expressable and
+  modelable.Possesses a meta-model, including its static semantics,
+  and a corresponding concrete syntax. The DSL should adopt concepts
+  from the problem space, so that a domain expert will recognize its
+  "domain language".
+- *Formal Models*: needs a DSL, and is thus obviously connected with
+  the respective domain.
+- *Platform*: has the task of supporting the realization of the
+  domain, that is, the transformation of the formal model into
+  something concrete.
+- *transformations*: A model-to-model transformation creates another
+  model. However, this model is typically based on a different
+  metamodel than the source model. A model-to-platform transformation,
+  in contrast, ‘knows’ the platform and generates artefacts (generated
+  artifacts) that are based on the platform.
+- *Platform Idioms*: Idioms that exist within the platform
+  transformation alone and need not be specified in the source model.
+- *Product*: MDSD pursues the goal of creating a software product in
+  part or in whole through one or more transformations. The product
+  can be an entire application or merely a component to be used as a
+  building block elsewhere. Such a product aggregates the platform,
+  generated, and sometimes even non-generated artefacts.
+- *Domain architecture*: The metamodel of a domain, a platform, and
+  the corresponding transformations, including the implemented idioms,
+  are the tools that are needed to make the transition from the model
+  to the product, whether completely or partially automated.
+- *Software System Families*: The set of all products that can be
+  created with a certain domain architecture.
+- *Product line*: set of complementary single products. From a user’s
+  perspective, the products in a product line can constitute
+  alternatives – that is, they be applicable in different but related
+  contexts – or can complement each other content-wise and thus define
+  a suite.
+- *Domain-Driven Design*: not directly related to MDSD. The only
+  connection is that DDD talks about deep domain understanding and the
+  importance of models. MDSD talks about automation. They are
+  complementary technologies.
+- *Software architecture*: describes to a certain level of detail the
+  structure (layering, modularization etc.) and the systematics
+  (patterns, conventions etc.) of a software system.
+- *Component*: is a self-contained piece of software with
+  clearly-defined interfaces and explicitlydeclared context
+  dependencies.
+- *Generate Good-Looking Code – Whenever Possible*: It is unrealistic
+  to assume that developers will never see the generated code. Even if
+  developers don’t have to change generated code, for example by
+  inserting manually-written sections, they will be confronted with it
+  if they debug the generated applications with conventional tools, or
+  if they have to check the generator configuration.
+- *Cartridges*: a cartridge is a ‘piece of generator’ for a certain
+  architectural aspect. ODB etc. Third-party off-the-shelf
+  cartridges. The problem then often becomes how to combine these
+  different cartridges, especially if they have been developed
+  independently and thus use different metamodels – different
+  stereotypes, tagged values, and so on. You certainly don’t want to
+  model things several times merely to be able to use various
+  incompatible cartridges. NOTE: this is the approach we use for ODB.
+- *Explicit Integration of Generated Code and Manual Parts*: this is
+  what dia2code does, but as a one off.
+- *3-tier implementation*: split generated code from manual code via
+  inheritance. We need to explain why we didn't take this approach.
 
 **** Define our own vocabulary
 
@@ -547,7 +640,37 @@ communicate instructions to a machine, particularly a computer.
   more implementations: thus Hashable is modeled by Boost Hash,
   std::hash and so on. There is a mapping between meta-concepts
   (modeling world) and facets/formatters (implementation). A formatter
-  is (or can be) a model of a meta-concept.
+  is (or can be) a model of a meta-concept. Actually, we don't need to
+  call it a meta-concept; its just a meta-class. This is because the
+  translation of a meta-class from meta-model to platform concrete
+  artefact could involve the generation of multiple classes. That is,
+  a single meta-class could be transformed into multiple concrete
+  classes. Conceptually its still the same meta-class.
+- we are creating our own specialisation of MDSD with its own
+  values. We need to define dogen's MDSD infrastructure.
+- how do we intend to allow a restricted form of roundtripping:
+  - Abstraction: can only be done when the meta-model is not that far
+    removed from code. Certain aspects cannot be roundtripped. For
+    example, if you need to change a visitor manually, you need to
+    disable generation. Because it is a concept at a higher level of
+    abstraction, it cannot be roundtripped.
+  - Tagging the model: we are tagging the model via dynamic to provide
+    additional information that is not at the right level of
+    abstraction.
+  - Separation of code classes: only certain classes are
+    roundtrippable (e.g. types). The rest are ignored.
+  - Tagging the code: language attributes and other markers will be
+    used to keep track of what was manually generated versus what was
+    automatically generated.
+- Viewpoint: interesting word that can be used in the context of
+  facets. One way of using this term is to imagine DDD as a way of
+  defining the Domain Model and then having multiple representations,
+  each being a viewpoint: presentation layer, business layer,
+  persistence.
+
+Separation of code classes. This involves the adaptation of the target architecture in such a
+way that manually-created code must be written into classes specifically created for this
+purpose.
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
@@ -763,6 +886,13 @@ example one may want to take a model of a neuron and represent it in
 model rather than SML. So the name of SML must reflect the fact that
 it is a model of programming objects. Object-Oriented Programming
 Language Model?
+
+From MDSD we have data model and composition model. These are
+overloads of how these terms are used in the book, but still.
+
+Another interesting name is "Input Model". Note that SML is a
+Programming Model - because it is very close to the platform models
+instead of providing a DSL.
 
 *** Thoughts on simplifying the formattables generation               :story:
 
