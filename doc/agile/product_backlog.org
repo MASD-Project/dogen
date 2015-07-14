@@ -5304,6 +5304,11 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider adding support for OCL                                   :story:
+
+UML supports adding constraints via [[http://www.omg.org/spec/OCL/2.4/][OCL]], the Object Constraint
+Language. We could generate code from it.
+
 *** Code generation and system configuration                          :story:
 
 This is a very sketchy story. We probably should look into any
