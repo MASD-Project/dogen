@@ -2727,6 +2727,15 @@ inheritance information, like so:
 The notation for the parent as well as the name of the tag need to be
 thought through.
 
+One very interesting way of doing this is via stereotypes. We could
+extend the meta-model with a stereotype called =TypeReference=. We
+would need support for qualified names as well, so for instance in
+model =a= one could declare a class called =b::c= with =TypeReference=
+and that would tell Dogen that this is not a new declaration of =c=
+but a reference to an existing declaration in model =a=. This would
+also make it clear from a UML perspective that inheritance is being
+used. The class =b::c= in model =a= would be empty.
+
 *** Consider adding a start and end dogen variable block in dia       :story:
 
 At present we defined a special market to find dogen kvp's in dia's
