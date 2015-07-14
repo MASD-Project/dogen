@@ -5310,6 +5310,22 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Consider introducing formatter "location strings"                 :story:
+
+In MDSD, we have the notion of "location strngs":
+
+#+begin_quote
+A third and very useful technique is the application of location strings that identify the
+transformation or the template used, as well as the underlying model elements in the gen-
+erated code. A location string might look like this:
+
+: [2003-10-04 17:05:36]
+: GENERATED FROM TEMPLATE SomeTemplate
+: MODEL ELEMENT aPackage::aClass::SomeOperation().
+#+end_quote
+
+This may be a useful thing.
+
 *** Consider adding support for OCL                                   :story:
 
 UML supports adding constraints via [[http://www.omg.org/spec/OCL/2.4/][OCL]], the Object Constraint
