@@ -15,14 +15,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-15 Wed 15:49]
+#+CAPTION: Clock summary at [2015-07-15 Wed 18:11]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *35:48* |       |      |
+| *Total time*                                                                | *38:09* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 35:48   |       |      |
-| Active                                                                      |         | 35:48 |      |
+| Stories                                                                     | 38:09   |       |      |
+| Active                                                                      |         | 38:09 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 2:01 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
@@ -54,7 +54,7 @@
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
-| STARTED Read Model Driven Software Development book and papers              |         |       | 7:09 |
+| COMPLETED Read Model Driven Software Development book and papers            |         |       | 9:30 |
 | STARTED Define end to end terminology given all refactoring stories         |         |       | 2:17 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
@@ -346,12 +346,14 @@ generation failure. We should only have one type.
 
 Seems like this got missed out on previous tidy-up.
 
-*** STARTED Read Model Driven Software Development book and papers    :story:
-     CLOCK: [2015-07-14 Tue 17:44]--[2015-07-14 Tue 17:45] =>  0:01
-     CLOCK: [2015-07-14 Tue 13:50]--[2015-07-14 Tue 17:44] =>  3:54
-     CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
-     CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
-     CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
+*** COMPLETED Read Model Driven Software Development book and papers  :story:
+    CLOSED: [2015-07-15 Wed 18:11]
+    CLOCK: [2015-07-15 Wed 15:50]--[2015-07-15 Wed 18:11] =>  2:21
+    CLOCK: [2015-07-14 Tue 17:44]--[2015-07-14 Tue 17:45] =>  0:01
+    CLOCK: [2015-07-14 Tue 13:50]--[2015-07-14 Tue 17:44] =>  3:54
+    CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
+    CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
+    CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
 
 Seems like the Model-Driven field already contains a lot of very
 useful definitions in this space. Read mainly the book but also the
@@ -369,6 +371,8 @@ the domain.
 - [[http://research.microsoft.com/en-us/um/people/pcosta/slides/generativeprogramming.pdf][Generative Programming]]
 - [[http://www.issi.uned.es/doctorado/generative/Bibliografia/TesisCzarnecki.pdf][Principles and Techniques of Software Engineering Based on Automated
   Configuration and Fragment-Based Component Models]]
+- [[http://essay.utwente.nl/57286/1/scriptie_Overbeek.pdf][Meta Object Facility (MOF): investigation of the state of the art]]
+- [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
 
 **** Useful terms and definitions from the book
 
@@ -578,6 +582,11 @@ the domain.
 - Separation of code classes. This involves the adaptation of the
   target architecture in such a way that manually-created code must be
   written into classes specifically created for this purpose.
+- *Model markings*: In some cases it is necessary to configure the
+  intermediate products manually to control their further
+  transformation stages. The OMG calls such a configuration model
+  markings. Model markings cannot be annotated directly in the PIM,
+  because this would involve the risk of losing platform independence.
 
 **** Notes
 
