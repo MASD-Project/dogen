@@ -10,6 +10,139 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider creating a "locator" like class for path management      :story:
+
+At present we are using path settings to compute paths in several
+places. Most of these exist because of hacks but it still seems that
+it needs to be done in more than one place. We should consider
+something like =sml_to_cpp::locator= that is initialised with the path
+settings and can then be used to create paths.
+
+*** Move language-specific object types to meta-data                  :story:
+
+There are a number of object types that exist solely to provide the
+method helpers with information:
+
+- smart_pointer
+- hash_container
+- sequence_container
+- ordered_container
+
+These should be conveyed using the meta-data.
+
+*** Remove intermediate fields from dynamic                           :story:
+
+With the previous approach we had fields in dynamic that were
+generated within dogen; we now should only have fields that are set
+from the outside world. Remove all of the fields that are not supposed
+to be settable from the outside world. At present this just file path.
+
+*** Create knitter options for each frontend                          :story:
+
+At present some knitting options are specific to a frontend
+(particularly in troubleshooting). We should create different classes
+to represent options on a per fronend basis.
+
+*** Add support for formatter and facet dependencies                  :story:
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
+*** Consider renaming general settings                                :story:
+
+A while ago we came up with this name for the settings of the generic
+formatter model. This is the model with basic infrastructure to be
+reused by the more specialised formatters. However, now that we have
+many (many) settings classes, general settings may not be the most
+appropriate name. We need to look a bit more deeply into the role of
+this class and see if a better name is not available.
+
+We could call it preamble settings because all settings are related to
+the file preamble; annoyingly, we also generate a post-amble from
+it. There doesn't seem to be any good names for the pair (preamble,
+post-amble). In networking this would be called frame markers perhaps.
+
+Now that we are not using =meta_data= any more, perhaps we could
+re-purpose it for this (=meta_data_settings=). In a way, preambles and
+post-ambles are meta-data, as opposed to the real file
+contents. Having said that, one could say the same about any kind of
+comments.
+
+We could also use [[http://www1.appstate.edu/~yaleread/typographichierarchy.pdf][typography terminology]]: headers and footers.
+
+Now that we have subsidiary settings and principal settings do we need
+the rename? We should consider "universal settings" maybe.
+
+In addition, the convention is now that "settings" mean a strongly
+typed representation of =dynamic= data; general "settings" are not
+settings in this sense. However, we do need a class to model settings
+properly (i.e. to mirror dynamic exactly, without any
+transformations).
+
+In truth, =annotation= is probably sufficient - or perhaps
+=annotation_properties=. It could then have an =enabled= property to
+replace =generate_preamble=. This is more accurate due to the
+preamble/postamble setup explained above. In this setup, we'd have
+=annotation_settings= to map to dynamic data, with an annotation
+settings factory which reads these off of dynamic object; then, an
+annotation factory to generate annotations. Finally, we can introduce
+the annotation formatter to generate the portion of boilerplate
+related to just the annotation. Boilerplate formatter collaborates
+with annotation formatter.
+
+In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
+conceptual sense.
+
+*** Consider renaming formatter groups and model groups to sets       :story:
+
+We should try to keep the words groups and sets to their mathematical
+as much as possible - modulus our limited understanding. As such,
+where we are using "group" we probably mean "set" since there is no
+associated operation with the set; it is merely a way of gathering
+elements.
+
+Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Include groups                                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create includers for user defined
+groups of files so that I don't have to do it manually.
+#+end_quote
+
+One of my personal preferences has always been to group includes by
+"library". Normally first come the C includes, then the standard
+library ones, then boost, then utilities and finally types of the same
+model. Each of these can be thought of as a group. Inside each group
+the file names are normally ordered by size, smallest first. It would
+be nice to have support for such a feature in Dogen.
+
+Formatters would then push their includes into the correct
+group. Group names could be the model name (=std=, etc).
+
+A bit of a nitpick but nice nonetheless.
+
 *** Add an =import= tag to models                                     :story:
 
 It doesn't make any sense to have model dependencies in the command
@@ -1034,6 +1167,219 @@ text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
+
+*** Consider introducing =archetypes= to simplify output models       :story:
+
+We haven't quite arrived at the ideal configuration for the cpp
+model. We are close, but not there yet. The problem we have at the
+moment is that the formatters drive a lot of the work in
+formattables, resulting in a circular dependency. This is happening
+because we are missing some entities. This story is just a random set
+of thoughts in this space, trying to clear up the terminology across
+the board.
+
+*Random thoughts*
+
+What is probably needed is to have facets, aspects and "file kinds" as
+top-level concepts rather than just strings with which we label
+formatters. In addition, we need a good name for "file kinds". This is
+a meta-concept, something akin to a file template. The formatter
+produces a physical representation of that meta-concept. As part of
+the formatter registration, we can also register this meta-concept
+(provided it relies on an existing formattable). And in effect, these
+are the pieces of the puzzle:
+
+- you define a "file kind".
+- a facet and a model are groupings of "file kinds". These happen to
+  be hierarchical groupings. There are others: header and
+  implementation, or class header formatter. Those are
+  non-hierarchical.
+- you bind a transformer to a SML type to generate a formattable.
+- a formattable is associated with one or more "file kinds" or better
+  yet a file kind is associated with a formattable. It is also
+  associated with formatting properties and settings. It is those
+  tuples that we pass to the formatters.
+- you bind a formatter to a "file" and process the associated
+  formattable.
+
+Perhaps we can call these "file kinds" file archetypes or just
+archetypes.
+
+What can be said about an archetype:
+
+- conceptual notion of something we want to generate.
+- one SML entity can map to zero or many archetypes. Concept at
+  present maps to zero. Object maps to many.
+- a representation of the archetype as source code is done by the
+  formatter. It uses a template to help it generate that
+  representation.
+- a given archetype maps to one and only one SML entity.
+- a given archetype maps to one and only one CPP entity.
+- archetypes can be grouped in many ways. One way is facets and
+  models.
+- archetypes have definitions: name of the archetype, what groups it
+  belongs to.
+- archetypes have associated data: formattables, settings,
+  properties. This is an entity and needs a name.
+- formatters work on one and only one archetype.
+- archetypes have qualified names; this is (mostly) what we called
+  ownership hierarchy. Qualified names can be represented as separate
+  fields or using the dot notation.
+- archetypes have labels: this is what we called groups.
+- dynamic is a model designed to augment SML with some archetype
+  data. This is not true in the dia case. Check all fields to see if
+  it is true everywhere else.
+- an aspect is a property of one or more archetypes; it is a knob that
+  affects the generation of the source code representation.
+- an archetype instance belongs to an archetype.
+- we should remove the concept of "integrated facets". It just happens
+  that a facet such as types may have aspects that enable features
+  similar to aspects in other facets. There may be rules that
+  determine that when certain aspects are enabled, certain facets must
+  be switched off because they are incompatible.
+- facet is a good name for grouping archetypes, but model isn't. We
+  need a better name for a set of facets. Aspect is also a good
+  name. In addition, a model group is also a bad name. A "model" is a
+  cohesive group of archetypes that are meant to be used together. A
+  "model group" is a cohesive group of models that provide the same
+  conceptual representations in different programming languages. Maybe
+  we should use a more "random" name such as: pod. Then perhaps a
+  model group could become a "pod family": a family of related pods. A
+  given model can be represented by one pod family or another - they
+  are mutually exclusive. Of course, from a command line perspective,
+  its better to think of "modes". Each mode corresponds to choosing
+  one "pod family" over another. This does not map very cleanly.
+- archetypes have an associated programming language - a grammar.
+- a facet may exist in more than one programming language and an
+  aspect too.
+- pods are programming language specific.
+- formattables are kind of like an archetype friendly representation
+  of the domain types. We need a good name for this.
+- internal and external now make slightly more sense, at least once we
+  got a good name for formatters. We still need a good name for it
+  though. If the archetype instance is generated because of the
+  presence of the domain type, it is external. If the archetype has no
+  sensitivity to domain types (but may have sensitivity to other
+  things such as options) it is internal. The naming around this is
+  not totally clear.
+- internal formatters may not be allowed to be disabled. For example,
+  if serialisation is on, registrar must be generated. With
+  CMakeLists, we may want do disable them altogether.
+- in the thrift story in the backlog we mention the existence of
+  mutually exclusive groups of facets. We should also come up with a
+  name for these.
+- archetype may not quite be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and
+  archetype patterns]]. See also:
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/ColourCoding.html][Class Archetypes, UML and Colour]]
+  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/index.html][Peter Coad's 'Modeling in Color']]
+  - [[http://www.step-10.com/Books/JMCUBook.html][Java Modeling in Color with UML]]
+- the process of mapping domain types to archetypes could be called
+  "expansion" because its a one to many relationship in most cases.
+- its not quite correct to call CPP types "formattables". The
+  archetype has to have an ordered container of inputs to the
+  formatter. This is sort of the "payload" for formatting; the
+  archetype is a container of such entities. Taking into account the
+  cases where more than one type is placed in the same file, this
+  would result in the includes being merged. Or perhaps these things
+  are really formattables, but then we need a way to distinguish
+  between "top-level formatters" that generate archetypes from
+  "partial" formatters that can be combined.
+- with "facet specific types" we go one level deeper: it should be
+  possible to add an enumeration definition to say test data. This
+  would mean that archetypes and facets are not quite so aligned as we
+  first thought. Potentially, one should be able to ask for say a
+  formattable at facet X in an artchetype at facet Y.
+- One way to look at it is as follows: there is the modeling
+  dimension, in which we have an entity, say entity =A=; and there is
+  the implementation dimension, in which =a= can be represented by
+  =A1, A2, ..., An= archetypes. In effect, the implementation
+  dimension has multiple dimensions, one for each pod (and of course
+  the pod families would be an extra dimension and so on). Actually,
+  we probably have 3 steps: the modeling dimension, the translation of
+  that into a language-specific representation and then finally the
+  archetype dimension.
+- a good name for the top-level container of archetypes is
+  "kernel". This was inspired (loosely) in some ideas from EMF. So
+  we'd have say the "quilt kernel", with support for multiple
+  programming languages such as cpp, java etc. We we'd have the "pleat
+  kernel" and so forth. Each kernel has a set of languages and the
+  languages have archetypes. Archetypes have a collection of
+  properties such as the formattables they need, the formatters and so
+  on. The job of a model such as =quilt::cpp= is to implement this
+  binding.
+- dynamic fields can be owned by archetypes or by other types of
+  owners (e.g. dia). We should have a way of expressing this
+  ownership.
+- we haven't used the word "feature" anywhere yet (properly; we
+  mentioned it in the manual and so on, but not given it any good
+  meaning).
+- we created a split between "internal" and "external" formatters, but
+  its interesting to notice that we have "internal" formatters that
+  are "regular" formatters - in that we need to create a qname for
+  them and the formatter properties will work correctly; whereas some
+  others are "irregular" formatters - they have strange filenames that
+  cannot be generated without some fiddling. Actually, ODB options is
+  the main problematic one. If we could place it in a sensible
+  location we could probably get rid of irregular formatters
+  altogether.
+- we need to have "special" facets; cmake files for example should not
+  really have a facet but it seems having an empty facet name breaks a
+  lot of stuff.
+- we need a map between types/states in SML and enablement. For
+  example, if a type is "non-generatable" that is taken to mean
+  "generate types if file does not exist, default all else to
+  disabled". We need a way to express this sort of logic. This is akin
+  to an "enablement map". For example, users could define these maps
+  somewhere, given them a name and then assign a type to a map. In
+  addition, we need a way to express "generate but don't override" and
+  "generate and override".
+
+*Merged with other stories*
+
+It is important not to confuse formatters with archetypes. A formatter
+(or at least, a "top-level formatter"; those that generate files) is
+in a sense a "category" of archetypes. In other words, for a given
+formatter many archetypes will be generated. This may mean that the
+"archetype" is not a very good choice because it may imply some kind
+of meta-class-ness. In a sense, we are dealing with arch-entities
+("entity" being SML's base class for all modeled domain types). So
+fundamentally, the correct workflow is vaguely like this:
+
+- we create a model for some problem domain. We represent this model
+  in SML. All objects are identifiable by a qname.
+- we apply a transformation of this model into something which is
+  closer to the programming language that we wish to generate; these
+  we choose to call formattables.
+- we may also inject some formattables which do not have a mapping to
+  the original domain objects. These have synthetic qnames.
+- we apply a function that takes the qname, the SML entity, the
+  formattable and generates an archetype skeleton. To start off with,
+  this is made up of only a file name and a top-level formatter. The
+  structure exists in memory as a map of qnames to formatter names to
+  archetypes.
+- we then fill in the blanks: compute includes, enablement, etc. The
+  final blank that needs to be filled in is the generation of the
+  file, which is done by applying a formatter to a number of the
+  archetype properties.
+
+Another point of interest is that we may be able to move some of the
+archetype processing to common code. For example, file name
+generation, enablement, and so on are not language specific. However,
+we need to have a representation of the archetype which is specific to
+a model (e.g. =quilt::cpp= say) because not all properties will be
+common. We could, possibly, have an archetype base class, which then
+would imply a formatter's base class and so on - but then we hit the
+visitor across models problem.
+
+In this approach we do have an advantage which is we can parallelise a
+lot of work across each stage in the "pipeline". For instance we can
+run transformation from SML to formattables in parallel. We could
+conceivably even have futures for each of the archetype
+properties. None of this is a concern for the foreseable future, of
+course.
+
+FIXME: improve references by having models inside of models; we should
+be able to keep only the types that we refer in the final model.
 
 *** Make JSON SML a fully supported frontend                          :story:
 
@@ -5341,6 +5687,212 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Remove unused features                                             :epic:
+
+At the very start of dogen we added a number of features that we
+thought were useful such as suppressing model directory, facet
+directories etc. We should look at all the features and make a list of
+all features that we are not currently making use of and create
+stories to remove them.
+
+We may have to split this story into several but we should at least
+trim down the obvious ones:
+
+- split project (or vice-versa, whichever one we don't use).
+- delete extra files: we always do so why make it optional.
+- force write: we never do.
+- etc.
+
+Basically any feature which we are not using at present and cannot
+think of an obvious use case.
+
+*** Thoughts around multi-kernel support                               :epic:
+
+Dogen only has a single backend kernel: quilt. This story looks into
+how the world looks like if we want to support multiple of these.
+
+*Previous notes slightly bit-rotted*
+
+At present we have hard-coded knit to support a single C++ model,
+cpp. However, in reality the world looks more like this:
+
+- there are "groups of models" that have models that target specific
+  languages. We need to give a name to the "default" model group in
+  dogen. We should choose something from the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][sewing terms]]; for now
+  lets call it =quilt=. =quilt= contains a number of languages such as
+  =cpp=. A user can only generate one model group at a time. Users can
+  generate one or more languages within a group (depending on what the
+  group supports).
+- we should have a top-level folder to house all model groups:
+  =backends=. The existing =backend= model becomes =backends::core=.
+- there may be facilities that are language specific, shared by model
+  groups. These can be housed in language specific folders:
+  =backends::cpp= and so on. For instance, the language specific stuff
+  now in =formatters= should move here.
+- different groups may express SML models differently; almost by
+  definition, they will, or else there is little purpose in having
+  multiple groups. For example, one can imagine a model group (say
+  =pleat=) which expresses [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-language-agnostic-models-lam][LAM]] as a model that is identical on every
+  supported language, ignoring native types; that is, expresses LAM as
+  a LAM model. However, =quilt= would still express LAM as a mapping
+  between generic LAM types and concrete native types (e.g. LAM
+  dictionary is a C++ unordered map). A good candidate for =pleat=
+  would be [[http://www.eclipse.org/modeling/emf/][eCore]].
+- if one was to try to generate code that is identical to =protobuf=,
+  the xsd tool, =odb=, etc one would generate model groups for these.
+- we may need multiple "needles" for each model group. For example,
+  the supporting libraries for =quilt= may be (and almost certainly,
+  will be) totally different than that of those in =pleat=. And of
+  course, needle would have different expressions in each programming
+  language. So perhaps needle is more of a concept than a physical
+  thing. We should rename it to something meaningful that represents
+  "a library with supporting code for a given model group". However,
+  it does make sense to have a top-level folder to house all of the
+  supporting libraries, so maybe needle does exist physically as the
+  namespace to house all of the different supporting libraries. For
+  example: =dogen::needle::quilt=, etc.
+- the different needle libraries should be pushed to the appropriate
+  repositories (e.g. nuget for C# and maybe C++, biicode for C++,
+  maven for Java, etc).
+- in the model groups world, each model most likely will only support
+  a single model group: for example either quilt or pleat, etc. This
+  is because some types only make sense with a given model group (say
+  for example a cross platform =String= type in pleat won't exist in
+  quilt and so forth). This means one must filter the models one is
+  loading depending on the model group. This applies to both internal
+  and external models. Also a model group may support a different
+  subset of programming languages compared to another model group.
+- we need a better name than "model group". word-storming: dimension,
+  universe, space, package, module, ensemble, generation unit,
+  assembly.
+- Another way to think about it is that model groups are really
+  backends. Backends support one or more "languages" (we need a word
+  to reflect variations such as XML). Only one backend can be enabled
+  at one time. One or more languages can be enabled, depending on what
+  the backend supports. The options that configure languages and
+  backends are in the meta-data; it does not make sense to supply
+  these in the command-line because the model is coupled with the
+  backend to a large extent (for example, native types are only
+  supported in the native backend and so on).
+- model groups and type support: some types will only make sense with
+  certain model groups. For example, if one were to create a "cross
+  platform string type", say String, for =pleat= which would then be
+  implemented in =needle::pleat= for all languages, it would not make
+  sense to try to use this type from =quilt=. This means that we need
+  some kind of way to associate types with a model group. In terms of
+  code generation, the formatter "enabled/disabled" logic will kick
+  in, and if the type has no formatters in a given backend, then it is
+  effectively disabled. But one wonders if this is a sensible way to
+  figure out what types are available to which model groups. Seems
+  like one would have to spend a lot of time looking into the
+  meta-data to determine whats available.
+- we probably need to add the model group to the ownership hierarchy,
+  but at present we cannot think of a use case for it; we never enable
+  anything across languages in a model group. In the same vein, we
+  would also need the language. Fields would then be
+  =quilt.cpp.enabled= and so on.
+
+Merged with other stories:
+
+*Multi-purpose models per language*
+
+#+begin_quote
+This story is a very vague story that keeps track of ideas on making
+dogen useful for code generators of other kinds.
+#+end_quote
+
+One of the stories in the backlog covers other targets of code generation:
+
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-thrift-and-protocol-buffers][Add support for thrift and protocol buffers]]
+
+Originally we thought about adding support for these within a model;
+that is to say, one would have additional serialisation "kinds"
+available with a given dogen model. However, there is another way to
+look at this; one could make other kinds of code generators using the
+dogen infrastructure.
+
+That is, contrary to it's name, dogen isn't just for "domain model
+generation". Nothing stops one from building a protocol buffers or
+thrift compiler using dogen infrastructure that outputs *exactly* the
+same code as the original tools. All that would be required to do so
+is:
+
+- create a front-end that reads in their specification;
+- to ensure SML is expressive enough to cover all of the aspects of
+  the code that needs to be generated;
+- to create the formatters.
+
+In this view of the world, we have two options:
+
+- create groups of facets within the =cpp= model; for example,
+  the thrift group, the domain generation group etc. These are
+  mutually incompatible sets of formatters and only one of them can be
+  enabled for a given execution.
+- create models at the same level of the =cpp= model. We could group
+  them by language (e.g. the =cpp= namespace). However, this seems
+  less practical because these models would probably have a lot in
+  common. This is yet to be seen as we need to finish the large
+  formatters refactor before we can answer this question.
+
+Taking this to its logical consequence, even a tool as complex as ODB
+could potentially be implementable in this way: one can conceive a
+clang front-end that reads in source code and generates an SML model;
+this model then can be used to generate C++ code that is identical to
+the code produced by ODB (again assuming that SML is extended to be
+expressive enough to represent all the constructs required by ODB).
+
+This would be a compelling proposition if we had =stitch= because it
+would make the generation of formatters quite trivial and would also
+mean that people that want to create code generators don't have to
+worry about a lot of the boilerplate code. However, the biggest
+problem is that we'd be imposing a large and complex "framework" on
+them with all the evilness that that entails.
+
+Food for thought:
+
+- in this light, a better name for dogen would be =codegen= (or =cogen=
+  to make it a bit more unique in google). The tag line is then The
+  Generic Code Generator. Unfortunately there are already a few
+  projects with the name =cogen= so we may need to find a better
+  name. Alternatively we can maintain the name dogen, but take away
+  its meaning (i.e. no longer "The Domain Generator").
+- the merge of =cpp= and =cpp_formatters= may not have been for the
+  best in this case; it would make more sense to have a =cpp::dogen=
+  where we collect all of the formatters related to domain
+  generation - after the =cogen= rename; if no rename then we need
+  some other name to imply domain generation. At this level we could
+  then have =cogen::cpp::odb=, =cogen::cpp::protobuf= and so on. They
+  all make use of the core types defined in =cogen::cpp=. The problem
+  with this approach is that dogen is not really designed to share a
+  namespace in this way. We won't be able to have a =cpp= project as
+  well as placing other projects inside of the =cpp= namespace. We can
+  have one or the other in the current setup, but not both. We could
+  take the same approach as we did for test models: create a cpp
+  folder and then put the model under a different name such as =model=
+  or =domain= etc. Note that we still have to define all of the
+  formatter interfaces in the "main" model, as well as workflows
+  etc. However, some interfaces may not make sense for other models:
+  what is a registrar in protocol buffers? If it exists at all, its
+  probably something very different from boost serialisation and as
+  such will require other data.
+- note that this kind of grouping is not necessarily at the language
+  level. For example, domain generation should be common to a set of
+  languages, and so would protocol buffers. This means that rather
+  than a facet or formatter grouping, we need a higher level construct
+  to aggregate things; "domain generation" is made up of languages,
+  languages are made of of facets, facets have formatters. We need a
+  name/classification for "domain generation" in this context.
+
+We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
+
+#+begin_quote
+People develop abstractions by generalizing from concrete
+examples. Every attempt to determine the correct abstractions on paper
+without actually developing a running system is doomed to failure. No
+one is that smart. A framework is a reusable design, so you develop it
+by looking at the things it is supposed to be a design of. The more
+examples you look at, the more general your framework will be.
+#+end_quote
 
 *** Consider adding a meta-meta-model                                 :story:
 
