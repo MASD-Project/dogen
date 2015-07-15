@@ -2785,14 +2785,6 @@ when we support full models.
 methods and to link them back to language specific methods. Not
 quite frontend, but not far.
 
-*** Dia models are not always user models                             :story:
-
-At present there is an assumption that all models read in from dia are
-user models. In reality, it is entirely possible to have a system
-model such as LAM (Language Agnostic Model) which is a system
-model. We should tell Dia to SML if the model is a) system or not b)
-expandable or not.
-
 *** Consider adding =with= support for fluent properties              :story:
 
 It seems the java guys have decided to add the prefix =with= when
@@ -6066,50 +6058,6 @@ compile Dogen, flags, etc).
 This may also make sense for the front-end, but less so.
 
 See [[http://apolukhin.github.io/Boost.DLL/index.html][Boost.DLL]].
-
-*** Add support for Language Agnostic Models (LAM)                    :story:
-
-When we start supporting more than one language, one interesting
-feature would be to be able to define a model once and have it
-generated for all supported languages. This would be achieved by
-having a system model (or set of system models) that define all the
-key types in a language agnostic manner. For example:
-
-: lam::string
-: lam::int
-: lam::int16
-
-Each of these types then has a set of meta-data fields that map them
-to a type in a supported language:
-
-: lam:string: cpp.concrete_type_mapping = std::string
-: lam:string: csharp.concrete_type_mapping = string
-
-And so on. We load the user model that makes use of LAM, we generate
-the merged model still with LAM types and then we perform a
-translation for each of the supported and enabled languages: for every
-LAM type, we replace all its references with the corresponding
-concrete type. We need to split the supplied mapping into a QName, use
-the QName to load the system models for that language, look up the
-type and replace it. After the translation no LAM types are left. We
-end up with N SML merged models where N is the number of supported and
-enabled languages.
-
-Each of these models is then sent down to code generation. This should
-be equivalent to manually generating models per language - we could
-use this as a test.
-
-Once we have LAM, it would be great to be able to exchange data
-between languages. This could be done as follows:
-
-- XML: create a "LAM" XML schema, and a set of formatters that read
-  and write from it. This is kind of like reverse mapping the types
-  back to LAM types when writing the XML.
-- JSON: similar approach to XML, minus the schema.
-- POF: use the coherence libraries to dump the models into POF.
-
-FIXME: we believed this story was already backloged but could not find
-it on a quick search. Do a more thorough search.
 
 *** Improving test data generation via SML "reflection"               :story:
 

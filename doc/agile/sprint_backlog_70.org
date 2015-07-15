@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-14 Tue 22:23]
+#+CAPTION: Clock summary at [2015-07-15 Wed 15:49]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *35:21* |       |      |
+| *Total time*                                                                | *35:48* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 35:21   |       |      |
-| Active                                                                      |         | 35:21 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |
+| Stories                                                                     | 35:48   |       |      |
+| Active                                                                      |         | 35:48 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:01 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |         |       | 0:52 |
@@ -54,13 +54,15 @@
 | COMPLETED Remove operations in SML                                          |         |       | 0:17 |
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
-| STARTED Define end to end terminology given all refactoring stories         |         |       | 9:26 |
+| STARTED Read Model Driven Software Development book and papers              |         |       | 7:09 |
+| STARTED Define end to end terminology given all refactoring stories         |         |       | 2:17 |
 | STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
 | STARTED Split a fully formed model from partial models                      |         |       | 0:21 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-07-15 Wed 15:23]--[2015-07-15 Wed 15:50] =>  0:27
     CLOCK: [2015-07-12 Sun 00:05]--[2015-07-12 Sun 00:13] =>  0:08
     CLOCK: [2015-07-11 Sat 23:55]--[2015-07-12 Sun 00:05] =>  0:10
     CLOCK: [2015-07-10 Fri 23:03]--[2015-07-10 Fri 23:11] =>  0:08
@@ -344,17 +346,19 @@ generation failure. We should only have one type.
 
 Seems like this got missed out on previous tidy-up.
 
-*** STARTED Define end to end terminology given all refactoring stories :story:
-    CLOCK: [2015-07-14 Tue 21:33]--[2015-07-14 Tue 22:23] =>  0:50
-    CLOCK: [2015-07-12 Sun 14:10]--[2015-07-12 Sun 15:00] =>  0:50
-    CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
-
-We have a number of refactoring stories, all covering different
-aspects of the architecture. We need to combine all of them into a
-unified view. This story focuses on defining the key terms.
+*** STARTED Read Model Driven Software Development book and papers    :story:
+     CLOCK: [2015-07-14 Tue 17:44]--[2015-07-14 Tue 17:45] =>  0:01
+     CLOCK: [2015-07-14 Tue 13:50]--[2015-07-14 Tue 17:44] =>  3:54
+     CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
+     CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
+     CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
 
 Seems like the Model-Driven field already contains a lot of very
-useful definitions in this space. In particular:
+useful definitions in this space. Read mainly the book but also the
+papers and figure out what they can do to help us find a way around
+the domain.
+
+**** Links of books and papers to read
 
 - [[http://www.voelter.de/data/books/mdsd-en.pdf][Model-Driven Software Development]]
 - [[http://researcher.ibm.com/researcher/files/zurich-jku/mdse-08.pdf][Model-Driven Software Engineering]]
@@ -366,12 +370,7 @@ useful definitions in this space. In particular:
 - [[http://www.issi.uned.es/doctorado/generative/Bibliografia/TesisCzarnecki.pdf][Principles and Techniques of Software Engineering Based on Automated
   Configuration and Fragment-Based Component Models]]
 
-**** STARTED Parse Model Driven Software Development book
-     CLOCK: [2015-07-14 Tue 17:44]--[2015-07-14 Tue 17:45] =>  0:01
-     CLOCK: [2015-07-14 Tue 13:50]--[2015-07-14 Tue 17:44] =>  3:54
-     CLOCK: [2015-07-13 Mon 14:25]--[2015-07-13 Mon 17:17] =>  2:52
-     CLOCK: [2015-07-13 Mon 14:19]--[2015-07-13 Mon 14:25] =>  0:06
-     CLOCK: [2015-07-13 Mon 14:01]--[2015-07-13 Mon 14:17] =>  0:16
+**** Useful terms and definitions from the book
 
 - *Model-based development*: the traditional kind of software
   development, where developers create UML diagrams to represent the
@@ -558,13 +557,27 @@ useful definitions in this space. In particular:
   what dia2code does, but as a one off.
 - *3-tier implementation*: split generated code from manual code via
   inheritance. We need to explain why we didn't take this approach.
-
-**** Define our own vocabulary
-
-- *kernel*:
-A programming language is a formal constructed language designed to
-communicate instructions to a machine, particularly a computer.
-- *formatter*:
+- *Code-generators*: meta-programs that process specifications (or
+  models) as input parameters, and which generate source code as
+  output. Meta-programs can be run at different times in relation to
+  the generated program: a) Completely independently of the base
+  program – that is, before it. b) During compilation of the base
+  program. c) While the base program runs.
+- Separation/Mixing of Program and Meta-program: a common (or at least
+  integrated) language exists for programming and metaprogramming, and
+  the source code components are not separated, but mixed. This can
+  lead to invocation relationships between the two levels, in
+  principle in both directions. C++ template metaprogramming can fall
+  into this category, as well as Lisp and CLOS. If program and
+  metaprogram are separated, the system’s creation takes place in two
+  distinct phases. The metaprogram is run and creates the base program
+  (or parts of it) as output, then ter- minates. The program does not
+  know that the metaprogram exists 1 . The separation is maintained
+  throughout the (meta-)programming process, including the build
+  process.
+- Separation of code classes. This involves the adaptation of the
+  target architecture in such a way that manually-created code must be
+  written into classes specifically created for this purpose.
 
 **** Notes
 
@@ -591,14 +604,14 @@ communicate instructions to a machine, particularly a computer.
   =<<Command>>= or something more meaningful and apply that to a UML
   attribute. From this we have all the information required to
   generate the networking code.
-- For ODB it would be nice if we could mark types with generic
+- for ODB it would be nice if we could mark types with generic
   stereotypes which could be mapped to ODB specific pragmas:
   =<<PrimaryKey>>= etc. Actually, just =Key=; it is somebody else's
   job to map it to a foreign or primary key. We could even have some
   stereotypes which are PSM: =BoostSerialisable=, etc. Such that by
   default =Serialisable= maps to =BoostSerialisable= in
   C++. =RelationalEntity=?
-- Does UML have a concept of stereotype sets or groups? If it did we
+- does UML have a concept of stereotype sets or groups? If it did we
   could create some such as =DomainEntity=: =Serialisable=,
   =Printable= etc. =ComparableDomainEntity= and so on; we could create
   an entire hierarchy of stereotypes. These would then be translated
@@ -606,7 +619,7 @@ communicate instructions to a machine, particularly a computer.
   =DomainEntity= etc could be applied to a single entity. Actually
   maybe it should just be called =Entity= as domain does not add much
   value. Or =ValueObject=. We need to create a hierarchy of these.
-- This means that Concepts are very much like all other kinds of
+- this means that Concepts are very much like all other kinds of
   stereotypes. It just means that sometimes a stereotype resolves to a
   hard-coded meaning (=Serialisable=, etc) whereas sometimes it is
   user defined (e.g. the user created a concept).
@@ -650,28 +663,45 @@ communicate instructions to a machine, particularly a computer.
 - we are creating our own specialisation of MDSD with its own
   values. We need to define dogen's MDSD infrastructure.
 - how do we intend to allow a restricted form of roundtripping:
-  - Abstraction: can only be done when the meta-model is not that far
+  - abstraction: can only be done when the meta-model is not that far
     removed from code. Certain aspects cannot be roundtripped. For
     example, if you need to change a visitor manually, you need to
     disable generation. Because it is a concept at a higher level of
     abstraction, it cannot be roundtripped.
-  - Tagging the model: we are tagging the model via dynamic to provide
+  - tagging the model: we are tagging the model via dynamic to provide
     additional information that is not at the right level of
     abstraction.
-  - Separation of code classes: only certain classes are
+  - separation of code classes: only certain classes are
     roundtrippable (e.g. types). The rest are ignored.
-  - Tagging the code: language attributes and other markers will be
+  - tagging the code: language attributes and other markers will be
     used to keep track of what was manually generated versus what was
     automatically generated.
-- Viewpoint: interesting word that can be used in the context of
+- *Viewpoint*: interesting word that can be used in the context of
   facets. One way of using this term is to imagine DDD as a way of
   defining the Domain Model and then having multiple representations,
   each being a viewpoint: presentation layer, business layer,
   persistence.
 
-Separation of code classes. This involves the adaptation of the target architecture in such a
-way that manually-created code must be written into classes specifically created for this
-purpose.
+*** STARTED Define end to end terminology given all refactoring stories :story:
+    CLOCK: [2015-07-14 Tue 21:33]--[2015-07-14 Tue 22:23] =>  0:50
+    CLOCK: [2015-07-12 Sun 14:10]--[2015-07-12 Sun 15:00] =>  0:50
+    CLOCK: [2015-07-12 Sun 00:20]--[2015-07-12 Sun 00:57] =>  0:37
+
+We have a number of refactoring stories, all covering different
+aspects of the architecture. We need to combine all of them into a
+unified view. This story focuses on defining the key terms.
+
+**** Define our own vocabulary
+
+Baste- Temporary long running stitches created by hand or machine to hold fabric in place before the final stitching.
+
+Read more: http://www.threadsmagazine.com/item/15750/sewing-terms-to-know#ixzz3fyGmfXYh
+Follow us: @threadsmagazine on Twitter | ThreadsMagazine on Facebook
+
+- *kernel*:
+A programming language is a formal constructed language designed to
+communicate instructions to a machine, particularly a computer.
+- *formatter*:
 
 *** STARTED Thoughts on cpp refactoring                               :story:
     CLOCK: [2015-07-10 Fri 13:15]--[2015-07-10 Fri 13:41] =>  0:26
@@ -985,6 +1015,50 @@ course.
 FIXME: improve references by having models inside of models; we should
 be able to keep only the types that we refer in the final model.
 
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N SML merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+FIXME: we believed this story was already backloged but could not find
+it on a quick search. Do a more thorough search.
+
 *** Model groups and multi-language support                           :story:
 
 At present we have hard-coded knit to support a single C++ model,
@@ -1067,6 +1141,14 @@ cpp. However, in reality the world looks more like this:
   =quilt.cpp.enabled= and so on.
 
 This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
+
+*** Dia models are not always user models                             :story:
+
+At present there is an assumption that all models read in from dia are
+user models. In reality, it is entirely possible to have a system
+model such as LAM (Language Agnostic Model) which is a system
+model. We should tell Dia to SML if the model is a) system or not b)
+expandable or not.
 
 *** STARTED Split a fully formed model from partial models            :story:
     CLOCK: [2015-07-13 Mon 17:24]--[2015-07-13 Mon 17:40] =>  0:16
@@ -1478,6 +1560,9 @@ conceptual sense.
 In cpp transformer we have hacked the underlying type of the
 enumeration. Remove this hack and set it in SML. Still a hack, but
 a tad better.
+
+Actually this could be the first case where LAM/PIM is used: we could
+call this something like integer.
 
 *** Move language-specific object types to meta-data                  :story:
 
