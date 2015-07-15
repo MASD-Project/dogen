@@ -5342,6 +5342,35 @@ Links:
 These stories are far in the future or just plain crazy.
 
 
+*** Consider adding a meta-meta-model                                 :story:
+
+This story is just a very vague placeholder for ideas around the DSL
+space.
+
+We could create a meta-meta-model that would allow us to describe
+meta-models in general. The concepts of the meta-meta-model would be
+more or less those defined in here:
+
+- [[http://www2.informatik.hu-berlin.de/sam/lehre/MDA-UML/UML-Infra-03-09-15.pdf][UML 2.0 Infrastructure Specification]]
+
+With a meta-meta-model we could then allow users to describe their own
+meta-models, which are DSLs. This could be done graphically (say using
+Dia). The GME story explains what the end-game of such an approach
+would be and its more or less realised by GME in its current form.
+
+The meta-meta-model would also allow us to think about model-to-model
+transformations using a language such as [[https://eclipse.org/atl/][ATL]]. This would then mean
+that we could transform a meta-model created by the user into one of
+our meta-models used for code generation.
+
+A proposed name for the meta-meta-model is =seam= for no good reason;
+it means:
+
+A seam, in sewing, is the line where two pieces of fabric are held
+together by thread.
+
+Meta-meta-models are vaguely related to binding.
+
 *** Investigate the Generic Modeling Environment                      :story:
 
 [[http://www.isis.vanderbilt.edu/projects/gme/][GME]] - Generic Modeling Environment - is a complete environment for
