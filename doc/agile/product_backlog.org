@@ -49,6 +49,9 @@ is much cleaner.
 We seem to have missed an obvious term: weaving. We can either save it
 for later or perhaps rename =knit= to =weave=.
 
+Actually, since weave is a well-known term in AOP, we should save it
+for if/when we decide to support AOP.
+
 *** Lists of strings are not properly tidied up on io                 :story:
 
 In the log file, when we dump include dependencies we see invalid
