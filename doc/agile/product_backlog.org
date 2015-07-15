@@ -5316,6 +5316,30 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+
+*** Investigate the Generic Modeling Environment                      :story:
+
+[[http://www.isis.vanderbilt.edu/projects/gme/][GME]] - Generic Modeling Environment - is a complete environment for
+meta-modeling. It seems that they have already dealt with a lot of the
+problems we are now facing. However, note that this is not a modeling
+environment - it is a meta-modeling environment.
+
+#+begin_quote
+The Generic Modeling Environment is a configurable toolkit for
+creating domain-specific modeling and program synthesis
+environments. The configuration is accomplished through metamodels
+specifying the modeling paradigm (modeling language) of the
+application domain. The modeling paradigm contains all the syntactic,
+semantic, and presentation information regarding the domain; which
+concepts will be used to construct models, what relationships may
+exist among those concepts, how the concepts may be organized and
+viewed by the modeler, and rules governing the construction of
+models. The modeling paradigm defines the family of models that can be
+created using the resultant modeling environment
+#+end_quote
+
+Source code is available [[http://repo.isis.vanderbilt.edu/GME/old/15.5.8/][here]].
+
 *** Consider introducing formatter "location strings"                 :story:
 
 In MDSD, we have the notion of "location strngs":
