@@ -6632,6 +6632,8 @@ work as follows:
   output. Use the mapping to provide a cross reference between the
   template output and the template. We could use a scheme similar to
   GCC (included from, etc).
+- apparently its possible to compile from a memory buffer. See [[http://lists.cs.uiuc.edu/pipermail/cfe-dev/2015-July/044029.html][this]]
+  thread.
 
 *** Add support for type "labels" or "tags"                           :story:
 
