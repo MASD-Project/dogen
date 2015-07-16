@@ -5180,13 +5180,6 @@ we are not checking to see if it exists:
 
 We need to detect it and only add this targets if diff has been found.
 
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
 *** Create a ebook and dead-tree book for the manual                  :story:
 
 We should probably start by creating a simple ebook first and then
@@ -5385,18 +5378,6 @@ It would be nice to provide vagrant and docker support to dogen in
 terms of development. The idea is that you can =git clone= the repo
 and then =vagrant up= it and you would be ready to start coding. This
 would make drive-by patches much easier.
-
-*** Investigate support for biicode                                   :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
 
 *** Use clang format to format the code base                          :story:
 

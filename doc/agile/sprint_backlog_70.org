@@ -15,15 +15,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-15 Wed 18:11]
+#+CAPTION: Clock summary at [2015-07-16 Thu 22:06]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *38:09* |       |      |
+| *Total time*                                                                | *40:41* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 38:09   |       |      |
-| Active                                                                      |         | 38:09 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:01 |
+| Stories                                                                     | 40:41   |       |      |
+| Active                                                                      |         | 40:41 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:51 |
 | COMPLETED Rename top-level registrars to avoid clashes with serialisation   |         |       | 0:10 |
 | COMPLETED Implement serialisation registrar implementation formatter        |         |       | 4:20 |
 | COMPLETED Add boilerplate for cmakelists formatters                         |         |       | 0:52 |
@@ -55,10 +55,10 @@
 | COMPLETED Remove generation failure exception in knit                       |         |       | 0:13 |
 | COMPLETED Remove opaque parameters from cpp properties                      |         |       | 0:06 |
 | COMPLETED Read Model Driven Software Development book and papers            |         |       | 9:30 |
-| STARTED Define end to end terminology given all refactoring stories         |         |       | 2:17 |
-| STARTED Thoughts on cpp refactoring                                         |         |       | 0:26 |
+| COMPLETED Split a fully formed model from partial models                    |         |       | 0:21 |
+| COMPLETED Define an end to end approach given refactoring stories           |         |       | 3:01 |
 | STARTED Setup pgannon to develop dogen site                                 |         |       | 1:49 |
-| STARTED Split a fully formed model from partial models                      |         |       | 0:21 |
+| STARTED Add support for pulling dependencies from biicode                   |         |       | 1:24 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -1010,6 +1010,26 @@ Approach for =cpp=:
 
 We need to get pgannon up to speed with all that is required to
 develop a quick project site for dogen.
+
+*** STARTED Add support for pulling dependencies from biicode         :story:
+    CLOCK: [2015-07-16 Thu 13:41]--[2015-07-16 Thu 14:48] =>  1:07
+    CLOCK: [2015-07-16 Thu 12:13]--[2015-07-16 Thu 12:30] =>  0:17
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
 
 *** Rename SML to =tack=                                              :story:
 
