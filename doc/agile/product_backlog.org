@@ -5670,6 +5670,9 @@ These stories are far in the future or just plain crazy.
 
 *** Remove unused features                                             :epic:
 
+This story captures any features that we no longer require and will
+remove at some point.
+
 At the very start of dogen we added a number of features that we
 thought were useful such as suppressing model directory, facet
 directories etc. We should look at all the features and make a list of
@@ -5903,6 +5906,65 @@ A seam, in sewing, is the line where two pieces of fabric are held
 together by thread.
 
 Meta-meta-models are vaguely related to binding.
+
+On further thought, we should probably make a clear separation of
+responsibilities. A few notes on this:
+
+- there are two separate, but interrelated problem domains:
+  meta-modeling and modeling.
+- UML is a tool for modeling. It sits in the M2 to M1 space. M2
+  because its meta-model is extensible, M1 because we spend most of
+  our time defining user models.
+- Dogen also sits in the M2 to M1 space. M2 because it defines its own
+  meta-model, not entirely MOF compatible. It also allows user
+  extensions with share some very basic similarities with profiles. M1
+  is the core of the work.
+- modeling is a huge domain. Dogen only concerns itself with the code
+  generation aspects of modeling; as such it provides a set of
+  "adapters" that convert models from other technologies (one could
+  say DSLs) into its meta-models. These adapters are
+  hand-crafted/hard-coded and they will always remain that way.
+- Dogen does not and will not concern itself with: a) UIs for modeling
+  (we will always rely on the existing tools) b) automated model
+  transformation via some transformation language (hand-crafting) c)
+  management of the model life-cycle (users responsibility).
+- there is a need for a separate product that lives a layer up from
+  Dogen: M3 to M2. This is equivalent to GME. The idea is that we need
+  to define a meta-meta-model and a constraint language. We can then
+  allow users to create their own meta-models.
+- lets call the tool Memod (Meta-modeler).
+- the job of Memod is to do meta-meta-modeling and then modeling
+  according to the defined meta-model. One can imagine Dogen as a
+  special case of this, where we hard-coded the meta-model. One could
+  of course describe Dogen's meta-model in Memod. In fact one could
+  describe all of Dogen's meta-models in Memod (including the ones we
+  adapt). However this is of limited use because there already is a
+  good language to perform modeling in (UML). One vaguely useful use
+  case is to automate the model transformations, but the effort
+  required in describing every single detail of the models and the
+  mapping is equivalent (if not greater) than hand-crafting the
+  model. However, it is useful to have a Memod description of just the
+  Dogen main meta-model (yarn).
+- for other domains Memod would be useful though. Examples: a)
+  finance: we could model all structured products using a financial
+  products meta-model. The rules that describe how each composite
+  product work must be described via the constraint language (is it
+  sufficient?). For example, one could state that a Risk Reversal is
+  made up of two Vanilla options, and describe the constraints in
+  terms of Expiry Date, Strike etc via the language. With this one can
+  create a Finance DSL. b) Computational Neuroscience: NeuroML is a
+  DSL that describes neurons, topologies, etc. One can imagine a UI,
+  similar to NEURON, which allows one to describe specific neurons and
+  neuronal networks.
+- Once we have a Memod meta-model, we could define transformation
+  rules into Dogen. Taking finance as an example, if we had a) a Memod
+  representation of the Dogen meta-model b) an instance of the Dogen
+  meta-model with the domain specific concepts (e.g. Financial
+  Products) c) a Memod meta-model for finance and d) a user defined
+  instance of the Memod meta-model for finance, describing structured
+  products
+
+ we could now code-generate
 
 *** Investigate the Generic Modeling Environment                      :story:
 
