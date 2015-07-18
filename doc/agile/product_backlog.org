@@ -5926,8 +5926,9 @@ responsibilities. A few notes on this:
   hand-crafted/hard-coded and they will always remain that way.
 - Dogen does not and will not concern itself with: a) UIs for modeling
   (we will always rely on the existing tools) b) automated model
-  transformation via some transformation language (hand-crafting) c)
-  management of the model life-cycle (users responsibility).
+  transformation via some transformation language (we will always
+  hand-craft them) c) management of the model life-cycle (these will
+  be left to the users).
 - there is a need for a separate product that lives a layer up from
   Dogen: M3 to M2. This is equivalent to GME. The idea is that we need
   to define a meta-meta-model and a constraint language. We can then
@@ -5952,19 +5953,24 @@ responsibilities. A few notes on this:
   sufficient?). For example, one could state that a Risk Reversal is
   made up of two Vanilla options, and describe the constraints in
   terms of Expiry Date, Strike etc via the language. With this one can
-  create a Finance DSL. b) Computational Neuroscience: NeuroML is a
-  DSL that describes neurons, topologies, etc. One can imagine a UI,
+  create a Finance DSL. The canonical user for this tool would be the
+  structuring desk. b) Computational Neuroscience: NeuroML is a DSL
+  that describes neurons, topologies, etc. One can imagine a UI,
   similar to NEURON, which allows one to describe specific neurons and
   neuronal networks.
 - Once we have a Memod meta-model, we could define transformation
-  rules into Dogen. Taking finance as an example, if we had a) a Memod
-  representation of the Dogen meta-model b) an instance of the Dogen
-  meta-model with the domain specific concepts (e.g. Financial
-  Products) c) a Memod meta-model for finance and d) a user defined
-  instance of the Memod meta-model for finance, describing structured
-  products
-
- we could now code-generate
+  rules into Dogen's meta-model. Taking finance as an example, if we
+  had a) a Memod representation of the Dogen meta-model b) an instance
+  of the Dogen meta-model with the domain specific concepts
+  (e.g. Financial Products) c) a Memod meta-model for finance and d) a
+  user defined instance of the Memod meta-model for finance,
+  describing structured products we could then code-generate
+  user-defined structured products. Having said that, this still seems
+  like an extremely large amount of work for something that does not
+  change that frequently and could be spec'd and passed over to
+  developers rather than automated. Finally, it would be quite tricky
+  to get it right to the point one could put the output of this
+  process into production.
 
 *** Investigate the Generic Modeling Environment                      :story:
 
