@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-03 Mon 17:56]
+#+CAPTION: Clock summary at [2015-08-03 Mon 22:04]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *13:16* |       |      |
+| *Total time*                                                                | *14:05* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 13:16   |       |      |
-| Active                                                                      |         | 13:16 |      |
+| Stories                                                                     | 14:05   |       |      |
+| Active                                                                      |         | 14:05 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:00 |
+| STARTED Merge frontend with =tack=                                          |         |       | 0:49 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -165,7 +166,8 @@ del CMakeCache.txt
 5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
   errors- called msbuild.log in output directory
 
-*** Merge frontend with =tack=                                        :story:
+*** STARTED Merge frontend with =tack=                                :story:
+    CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
 
 Combine the two models performing the necessary renames:
 
