@@ -30,9 +30,9 @@ namespace dogen {
 /**
  * @brief Dynamic is responsible for managing run-time typed data.
  *
- * The idea is to allow SML to carry data over to the formatting process without
- * necessarily knowing about this data, but yet imposing some constraints on the
- * shape of this data.
+ * The idea is to allow the meta-models to carry data over to the
+ * formatting process without necessarily knowing about this data, but
+ * yet imposing some constraints on the shape of this data.
  *
  */
 namespace dynamic {
