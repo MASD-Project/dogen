@@ -45,7 +45,7 @@ std::size_t troubleshooting_options_hasher::hash(const troubleshooting_options& 
 
     combine(seed, hash_boost_filesystem_path(v.debug_dir()));
     combine(seed, v.save_dia_model());
-    combine(seed, v.save_sml_model());
+    combine(seed, v.save_tack_model());
     combine(seed, v.stop_after_formatting());
     combine(seed, v.stop_after_merging());
 

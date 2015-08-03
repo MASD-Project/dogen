@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen/sml/types/qname.hpp"
+#include "dogen/tack/types/qname.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Provides all inclusion dependencies for a given SML element.
+ * @brief Provides all inclusion dependencies for a given Tack element.
  */
 template<typename Element>
 class inclusion_dependencies_provider_interface {

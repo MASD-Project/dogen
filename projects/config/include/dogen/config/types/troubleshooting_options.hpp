@@ -48,7 +48,7 @@ public:
     troubleshooting_options(
         const boost::filesystem::path& debug_dir,
         const dogen::config::archive_types save_dia_model,
-        const dogen::config::archive_types save_sml_model,
+        const dogen::config::archive_types save_tack_model,
         const bool stop_after_formatting,
         const bool stop_after_merging);
 
@@ -80,12 +80,12 @@ public:
     /**@}*/
 
     /**
-     * @brief If not invalid, serialise sml model to file using the
+     * @brief If not invalid, serialise tack model to file using the
      * specified archive type.
      */
     /**@{*/
-    dogen::config::archive_types save_sml_model() const;
-    void save_sml_model(const dogen::config::archive_types v);
+    dogen::config::archive_types save_tack_model() const;
+    void save_tack_model(const dogen::config::archive_types v);
     /**@}*/
 
     /**
@@ -119,7 +119,7 @@ public:
 private:
     boost::filesystem::path debug_dir_;
     dogen::config::archive_types save_dia_model_;
-    dogen::config::archive_types save_sml_model_;
+    dogen::config::archive_types save_tack_model_;
     bool stop_after_formatting_;
     bool stop_after_merging_;
 };

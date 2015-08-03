@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/memory_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/factory.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
@@ -61,7 +61,7 @@ private:
 
     template<typename Generatable>
     bool ignore(const Generatable& g) const {
-        return g.generation_type() == sml::generation_types::no_generation;
+        return g.generation_type() == tack::generation_types::no_generation;
     }
 
     template<typename Transformable>
@@ -71,11 +71,11 @@ private:
     }
 
 public:
-    void operator()(const dogen::sml::object& o) { transform(o); }
-    void operator()(const dogen::sml::enumeration& e) { transform(e); }
-    void operator()(const dogen::sml::primitive& p) { transform(p); }
-    void operator()(const dogen::sml::module& m) { transform(m); }
-    void operator()(const dogen::sml::concept& c) { transform(c); }
+    void operator()(const dogen::tack::object& o) { transform(o); }
+    void operator()(const dogen::tack::enumeration& e) { transform(e); }
+    void operator()(const dogen::tack::primitive& p) { transform(p); }
+    void operator()(const dogen::tack::module& m) { transform(m); }
+    void operator()(const dogen::tack::concept& c) { transform(c); }
 
 public:
     const std::forward_list<std::shared_ptr<formattables::formattable> >&
@@ -103,7 +103,7 @@ workflow::create_path_settings_activity(const dynamic::repository& srp,
 path_derivatives_repository workflow::
 create_path_derivatives_repository(const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const sml::model& m) const {
+    const tack::model& m) const {
     path_derivatives_repository_factory f;
     return f.make(opts, ps, m);
 }
@@ -114,7 +114,7 @@ create_formatter_properties(const dynamic::repository& srp,
     const settings::bundle_repository& brp,
     const path_derivatives_repository& pdrp,
     const formatters::container& fc,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     formatter_properties_repository_factory f;
     return f.make(srp, root_object, brp, pdrp, fc, m);
@@ -125,7 +125,7 @@ workflow::from_transformer_activity(
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
     const formatter_properties_repository& fprp,
-    const sml::model& m) const {
+    const tack::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming formattables.";
 
     const transformer t(osb, brp, fprp, m);
@@ -146,7 +146,7 @@ workflow::from_factory_activity(const config::cpp_options& opts,
     const formattables::path_derivatives_repository& pdrp,
     const formatter_properties_repository& fprp,
     const formatters::container& fc,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     const auto& formatters(fc.all_formatters());
     std::forward_list<std::shared_ptr<formattables::formattable> > r;
@@ -177,7 +177,7 @@ workflow::execute(const config::cpp_options& opts,
     const formatters::container& fc,
     const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const sml::model& m) const {
+    const tack::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started creating formattables.";
 
     const auto& ro(root_object);

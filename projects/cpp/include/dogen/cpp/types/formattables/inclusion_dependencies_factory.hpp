@@ -29,12 +29,12 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/types/module.hpp"
-#include "dogen/sml/types/object.hpp"
-#include "dogen/sml/types/concept.hpp"
-#include "dogen/sml/types/primitive.hpp"
-#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/tack/types/model.hpp"
+#include "dogen/tack/types/module.hpp"
+#include "dogen/tack/types/object.hpp"
+#include "dogen/tack/types/concept.hpp"
+#include "dogen/tack/types/primitive.hpp"
+#include "dogen/tack/types/enumeration.hpp"
 #include "dogen/cpp/types/formattables/container.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
@@ -44,7 +44,7 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the inclusion dependencies for a given SML entity.
+ * @brief Creates the inclusion dependencies for a given Tack entity.
  */
 class inclusion_dependencies_factory {
 public:
@@ -55,37 +55,37 @@ public:
      * @brief Makes inclusion dependencies for an object.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::object& o) const;
+    make(const tack::object& o) const;
 
     /**
      * @brief Makes inclusion dependencies for an enumeration.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::enumeration& e) const;
+    make(const tack::enumeration& e) const;
 
     /**
      * @brief Makes inclusion dependencies for a primitive.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::primitive& p) const;
+    make(const tack::primitive& p) const;
 
     /**
      * @brief Makes inclusion dependencies for a module.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::module& m) const;
+    make(const tack::module& m) const;
 
     /**
      * @brief Makes inclusion dependencies for a concept.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::concept& c) const;
+    make(const tack::concept& c) const;
 
     /**
      * @brief Makes inclusion dependencies for a model.
      */
     std::unordered_map<std::string, std::list<std::string> >
-    make(const sml::model& m) const;
+    make(const tack::model& m) const;
 
 private:
     const inclusion_dependencies_builder_factory& factory_;

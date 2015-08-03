@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/cpp/hash/formattables/inclusion_dependencies_repository_hash.hpp"
 
 namespace {
@@ -46,7 +46,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_std_string_(const 
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_list_std_string__(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_list_std_string__(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -64,7 +64,7 @@ namespace formattables {
 std::size_t inclusion_dependencies_repository_hasher::hash(const inclusion_dependencies_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_list_std_string__(v.inclusion_dependencies_by_qname()));
+    combine(seed, hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_list_std_string__(v.inclusion_dependencies_by_qname()));
     return seed;
 }
 

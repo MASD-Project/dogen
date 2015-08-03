@@ -34,7 +34,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/formatters/types/file.hpp"
 #include "dogen/formatters/types/file_writer_interface.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 
 namespace dogen {
 namespace knit {
@@ -84,7 +84,7 @@ public:
     /**
      * @brief Executes the workflow.
      */
-    void execute(const sml::model& m) const;
+    void execute(const tack::model& m) const;
 
 private:
     const config::knitting_options& knitting_options_;

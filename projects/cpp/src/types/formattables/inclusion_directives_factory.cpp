@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_factory.hpp"
@@ -51,10 +51,10 @@ inclusion_directives_factory::inclusion_directives_factory(
 
 std::unordered_map<std::string, formattables::path_derivatives>
 inclusion_directives_factory::path_derivatives_for_qname(
-    const sml::qname& qn) const {
+    const tack::qname& qn) const {
     const auto i(path_repository_.path_derivatives_by_qname().find(qn));
     if (i == path_repository_.path_derivatives_by_qname().end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << qname_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
     }
@@ -136,8 +136,8 @@ inclusion_directives_factory::obtain_include_directive(
 
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
-make(const dynamic::object& o, const sml::qname& qn) const {
-    const auto tn(sml::string_converter::convert(qn));
+make(const dynamic::object& o, const tack::qname& qn) const {
+    const auto tn(tack::string_converter::convert(qn));
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << tn;

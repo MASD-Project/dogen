@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/cpp/test_data/settings/bundle_td.hpp"
 #include "dogen/cpp/test_data/settings/bundle_repository_td.hpp"
 
 namespace {
 
-dogen::sml::qname
-create_dogen_sml_qname(const unsigned int position) {
-    return dogen::sml::qname_generator::create(position);
+dogen::tack::qname
+create_dogen_tack_qname(const unsigned int position) {
+    return dogen::tack::qname_generator::create(position);
 }
 
 dogen::cpp::settings::bundle
@@ -34,10 +34,10 @@ create_dogen_cpp_settings_bundle(const unsigned int position) {
     return dogen::cpp::settings::bundle_generator::create(position);
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle> create_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_bundle(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle> r;
+std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle> create_std_unordered_map_dogen_tack_qname_dogen_cpp_settings_bundle(unsigned int position) {
+    std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_dogen_cpp_settings_bundle(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_cpp_settings_bundle(position + i)));
     }
     return r;
 }
@@ -52,7 +52,7 @@ bundle_repository_generator::bundle_repository_generator() : position_(0) { }
 
 void bundle_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.bundles_by_qname(create_std_unordered_map_dogen_sml_qname_dogen_cpp_settings_bundle(position + 0));
+    v.bundles_by_qname(create_std_unordered_map_dogen_tack_qname_dogen_cpp_settings_bundle(position + 0));
 }
 
 bundle_repository_generator::result_type

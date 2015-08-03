@@ -28,8 +28,8 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"
 #include "dogen/cpp/types/settings/opaque_settings_builder.hpp"
@@ -50,7 +50,7 @@ public:
         const dynamic::object& root_object,
         const dogen::formatters::general_settings_factory& gsf,
         const opaque_settings_builder& osb,
-        const sml::model& m) const;
+        const tack::model& m) const;
 };
 
 } } }

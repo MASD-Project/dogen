@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "dogen/sml/test_data/qname_td.hpp"
+#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/cpp/test_data/formattables/inclusion_dependencies_repository_td.hpp"
 
 namespace {
 
-dogen::sml::qname
-create_dogen_sml_qname(const unsigned int position) {
-    return dogen::sml::qname_generator::create(position);
+dogen::tack::qname
+create_dogen_tack_qname(const unsigned int position) {
+    return dogen::tack::qname_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -51,10 +51,10 @@ std::unordered_map<std::string, std::list<std::string> > create_std_unordered_ma
     return r;
 }
 
-std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > > create_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_list_std_string__(unsigned int position) {
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > > r;
+std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > > create_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_list_std_string__(unsigned int position) {
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_sml_qname(position + i), create_std_unordered_map_std_string_std_list_std_string_(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_std_unordered_map_std_string_std_list_std_string_(position + i)));
     }
     return r;
 }
@@ -69,7 +69,7 @@ inclusion_dependencies_repository_generator::inclusion_dependencies_repository_g
 
 void inclusion_dependencies_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.inclusion_dependencies_by_qname(create_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_std_list_std_string__(position + 0));
+    v.inclusion_dependencies_by_qname(create_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_list_std_string__(position + 0));
 }
 
 inclusion_dependencies_repository_generator::result_type

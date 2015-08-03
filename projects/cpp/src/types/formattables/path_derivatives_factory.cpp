@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/io/formatters/file_types_io.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
@@ -49,15 +49,15 @@ namespace cpp {
 namespace formattables {
 
 path_derivatives_factory::path_derivatives_factory(
-    const config::cpp_options& opts, const sml::model& m,
+    const config::cpp_options& opts, const tack::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps)
     : options_(opts), model_(m), path_settings_(ps) { }
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
-    const sml::qname& qn) const {
+    const tack::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
 
     boost::filesystem::path r;
 
@@ -109,9 +109,9 @@ make_inclusion_path(const settings::path_settings& ps,
 boost::filesystem::path path_derivatives_factory::
 make_file_path(const settings::path_settings& ps,
     const boost::filesystem::path& inclusion_path,
-    const sml::qname& qn) const {
+    const tack::qname& qn) const {
     BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
 
     boost::filesystem::path r;
 
@@ -169,7 +169,7 @@ to_header_guard_name(const boost::filesystem::path& p) const {
 }
 
 std::unordered_map<std::string, path_derivatives>
-path_derivatives_factory::make(const sml::qname& qn) const {
+path_derivatives_factory::make(const tack::qname& qn) const {
     std::unordered_map<std::string, path_derivatives> r;
 
     for (const auto& pair : path_settings_) {

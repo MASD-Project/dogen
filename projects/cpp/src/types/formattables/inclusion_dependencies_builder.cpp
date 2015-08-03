@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
@@ -65,7 +65,7 @@ inclusion_dependencies_builder(const enablement_repository& erp,
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
-    const sml::qname& qn,
+    const tack::qname& qn,
     const std::string& formatter_name) const {
 
     const auto& idqn(directives_repository_.inclusion_directives_by_qname());
@@ -82,9 +82,9 @@ inclusion_dependencies_builder::get_inclusion_directive(
 
 inclusion_dependencies_builder::special_includes
 inclusion_dependencies_builder::make_special_includes(
-    const sml::object& o) const {
+    const tack::object& o) const {
     special_includes r;
-    const auto lambda([&](const sml::relationship_types rt) {
+    const auto lambda([&](const tack::relationship_types rt) {
             const auto i(o.relationships().find(rt));
             if (i == o.relationships().end())
                 return;
@@ -110,20 +110,20 @@ inclusion_dependencies_builder::make_special_includes(
             }
         });
 
-    using rt = dogen::sml::relationship_types;
+    using rt = dogen::tack::relationship_types;
     lambda(rt::regular_associations);
     lambda(rt::weak_associations);
 
     return r;
 }
 
-bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
+bool inclusion_dependencies_builder::is_enabled(const tack::qname& qn,
     const std::string& formatter_name) const {
 
     const auto& eqn(enablement_repository_.enablement_by_qname());
     const auto i(eqn.find(qn));
     if (i == eqn.end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << qname_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
     }
@@ -139,7 +139,7 @@ bool inclusion_dependencies_builder::is_enabled(const sml::qname& qn,
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
                                  << formatter_name << " on type: "
-                                 << sml::string_converter::convert(qn) << "'";
+                                 << tack::string_converter::convert(qn) << "'";
     }
     return r;
 }
@@ -164,11 +164,11 @@ bool inclusion_dependencies_builder::is_integrated(
 }
 
 settings::aspect_settings inclusion_dependencies_builder::
-get_aspect_settings(const sml::qname& qn) const {
+get_aspect_settings(const tack::qname& qn) const {
     const auto& bqn(bundle_repository_.bundles_by_qname());
     const auto i(bqn.find(qn));
     if (i == bqn.end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << qname_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
     }
@@ -185,7 +185,7 @@ add(const std::string& inclusion_directive) {
 }
 
 void inclusion_dependencies_builder::
-add(const sml::qname& qn, const std::string& formatter_name) {
+add(const tack::qname& qn, const std::string& formatter_name) {
     if (!is_enabled(qn, formatter_name))
         return;
 
@@ -195,13 +195,13 @@ add(const sml::qname& qn, const std::string& formatter_name) {
 }
 
 void inclusion_dependencies_builder::
-add(const std::list<sml::qname>& qn, const std::string& formatter_name) {
+add(const std::list<tack::qname>& qn, const std::string& formatter_name) {
     for (const auto& n : qn)
         add(n, formatter_name);
 }
 
-void inclusion_dependencies_builder::add(const sml::object& o,
-    const sml::relationship_types rt,
+void inclusion_dependencies_builder::add(const tack::object& o,
+    const tack::relationship_types rt,
     const std::string& formatter_name) {
 
     const auto i(o.relationships().find(rt));

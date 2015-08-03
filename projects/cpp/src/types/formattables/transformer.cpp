@@ -22,8 +22,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/io/object_types_io.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/io/object_types_io.hpp"
 #include "dogen/cpp/types/formattables/name_builder.hpp"
 #include "dogen/cpp/types/formattables/transformation_error.hpp"
 #include "dogen/cpp/types/formattables/transformer.hpp"
@@ -180,16 +180,16 @@ namespace formattables {
 
 transformer::transformer(const settings::opaque_settings_builder& osb,
     const settings::bundle_repository& brp,
-    const formatter_properties_repository& frp, const sml::model& m)
+    const formatter_properties_repository& frp, const tack::model& m)
     : opaque_settings_builder_(osb), bundle_repository_(brp),
       formatter_properties_repository_(frp), model_(m) {}
 
 void transformer::
-populate_formattable_properties(const sml::qname& qn, formattable& f) const {
-    f.identity(sml::string_converter::convert(qn));
+populate_formattable_properties(const tack::qname& qn, formattable& f) const {
+    f.identity(tack::string_converter::convert(qn));
 }
 
-void transformer::populate_entity_properties(const sml::qname& qn,
+void transformer::populate_entity_properties(const tack::qname& qn,
     const std::string& documentation, entity& e) const {
 
     populate_formattable_properties(qn, e);
@@ -201,7 +201,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
         formatter_properties_by_qname());
     const auto i(fpqn.find(qn));
     if (i == fpqn.end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << formatter_properties_missing << n;
         BOOST_THROW_EXCEPTION(
             transformation_error(formatter_properties_missing + n));
@@ -214,7 +214,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     const auto& bqn(bundle_repository_.bundles_by_qname());
     const auto j(bqn.find(qn));
     if (j == bqn.end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << settings_bundle_missing << n;
         BOOST_THROW_EXCEPTION(
             transformation_error(settings_bundle_missing + n));
@@ -228,7 +228,7 @@ void transformer::populate_entity_properties(const sml::qname& qn,
     e.qualified_name(join(ns, namespace_separator));
 }
 
-void transformer::to_nested_type_info(const sml::nested_qname& nqn,
+void transformer::to_nested_type_info(const tack::nested_qname& nqn,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
@@ -266,7 +266,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
     const auto k(model_.objects().find(qn));
     if (k != model_.objects().end()) {
         const auto ot(k->second.object_type());
-        using sml::object_types;
+        using tack::object_types;
         nti.is_sequence_container(ot == object_types::sequence_container);
         nti.is_associative_container(ot == object_types::ordered_container ||
             ot == object_types::hash_container);
@@ -307,7 +307,7 @@ void transformer::to_nested_type_info(const sml::nested_qname& nqn,
 }
 
 std::tuple<property_info, bool, bool, bool>
-transformer::to_property_info(const sml::property p, const bool is_immutable,
+transformer::to_property_info(const tack::property p, const bool is_immutable,
     const bool is_fluent) const {
 
     property_info pi;
@@ -343,7 +343,7 @@ transformer::to_property_info(const sml::property p, const bool is_immutable,
 }
 
 enumerator_info
-transformer::to_enumerator_info(const sml::enumerator& e) const {
+transformer::to_enumerator_info(const tack::enumerator& e) const {
     enumerator_info r;
     r.name(e.name());
     r.value(e.value());
@@ -352,14 +352,14 @@ transformer::to_enumerator_info(const sml::enumerator& e) const {
 }
 
 std::shared_ptr<enum_info>
-transformer::to_enum_info(const sml::enumeration& e) const {
+transformer::to_enum_info(const tack::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: "
-                             << sml::string_converter::convert(e.name());
+                             << tack::string_converter::convert(e.name());
 
     auto r(std::make_shared<enum_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
 
-    // FIXME: SML is not setting this properly.
+    // FIXME: Tack is not setting this properly.
     // r->type(e.underlying_type().simple_name());
     r->type("unsigned int");
 
@@ -371,9 +371,9 @@ transformer::to_enum_info(const sml::enumeration& e) const {
 }
 
 std::shared_ptr<namespace_info> transformer::
-to_namespace_info(const sml::module& m) const {
+to_namespace_info(const tack::module& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming module: "
-                             << sml::string_converter::convert(m.name());
+                             << tack::string_converter::convert(m.name());
 
     auto r(std::make_shared<namespace_info>());
     populate_entity_properties(m.name(), m.documentation(), *r);
@@ -383,9 +383,9 @@ to_namespace_info(const sml::module& m) const {
 }
 
 std::shared_ptr<exception_info>
-transformer::to_exception_info(const sml::object& o) const {
+transformer::to_exception_info(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exception: "
-                             << sml::string_converter::convert(o.name());
+                             << tack::string_converter::convert(o.name());
 
     auto r(std::make_shared<exception_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
@@ -395,7 +395,7 @@ transformer::to_exception_info(const sml::object& o) const {
 }
 
 std::shared_ptr<class_info>
-transformer::to_class_info(const sml::object& o) const {
+transformer::to_class_info(const tack::object& o) const {
     auto r(std::make_shared<class_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
@@ -406,7 +406,7 @@ transformer::to_class_info(const sml::object& o) const {
     r->generation_type(o.generation_type());
 
     name_builder b;
-    auto i(o.relationships().find(sml::relationship_types::parents));
+    auto i(o.relationships().find(tack::relationship_types::parents));
     if (i != o.relationships().end()) {
         for (const auto& qn : i->second) {
             parent_info pi;
@@ -431,10 +431,10 @@ transformer::to_class_info(const sml::object& o) const {
         }
     }
 
-    i = o.relationships().find(sml::relationship_types::original_parents);
+    i = o.relationships().find(tack::relationship_types::original_parents);
     if (i != o.relationships().end() && !i->second.empty()) {
         if (i->second.size() > 1) {
-            const auto n(sml::string_converter::convert(o.name()));
+            const auto n(tack::string_converter::convert(o.name()));
             BOOST_LOG_SEV(lg, error) << too_many_parents << n;
             BOOST_THROW_EXCEPTION(transformation_error(too_many_parents + n));
         }
@@ -474,7 +474,7 @@ transformer::to_class_info(const sml::object& o) const {
     if (r->all_properties().empty())
         r->requires_manual_move_constructor(false);
 
-    i = o.relationships().find(sml::relationship_types::leaves);
+    i = o.relationships().find(tack::relationship_types::leaves);
     if (i != o.relationships().end()) {
         for (const auto l : i->second)
             r->leaves().push_back(b.qualified_name(model_, l));
@@ -484,14 +484,14 @@ transformer::to_class_info(const sml::object& o) const {
 }
 
 std::shared_ptr<visitor_info>
-transformer::to_visitor_info(const sml::object& o) const {
+transformer::to_visitor_info(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming visitor: "
-                             << sml::string_converter::convert(o.name());
+                             << tack::string_converter::convert(o.name());
 
     auto r(std::make_shared<visitor_info>());
     populate_entity_properties(o.name(), o.documentation(), *r);
 
-    auto i(o.relationships().find(sml::relationship_types::visits));
+    auto i(o.relationships().find(tack::relationship_types::visits));
     if (i == o.relationships().end() || i->second.empty()) {
         const auto& sn(o.name().simple_name());
         BOOST_LOG_SEV(lg, error) << no_visitees << sn;
@@ -512,15 +512,15 @@ transformer::to_visitor_info(const sml::object& o) const {
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
-to_forward_declarations_info(const sml::object& o) const {
+to_forward_declarations_info(const tack::object& o) const {
     auto r(std::make_shared<forward_declarations_info>());
-    r->is_exception(o.object_type() == sml::object_types::exception);
+    r->is_exception(o.object_type() == tack::object_types::exception);
     populate_entity_properties(o.name(), o.documentation(), *r);
     return r;
 }
 
 std::shared_ptr<forward_declarations_info> transformer::
-to_forward_declarations_info(const sml::enumeration& e) const {
+to_forward_declarations_info(const tack::enumeration& e) const {
     auto r(std::make_shared<forward_declarations_info>());
     populate_entity_properties(e.name(), e.documentation(), *r);
     r->is_enum(true);
@@ -529,7 +529,7 @@ to_forward_declarations_info(const sml::enumeration& e) const {
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const sml::enumeration& e) const {
+transformer::transform(const tack::enumeration& e) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_enum_info(e));
     r.push_front(to_forward_declarations_info(e));
@@ -537,47 +537,47 @@ transformer::transform(const sml::enumeration& e) const {
 }
 
 std::forward_list<std::shared_ptr<formattable> > transformer::
-transform(const sml::module& m) const {
+transform(const tack::module& m) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_namespace_info(m));
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const sml::concept& /*c*/) const {
+transformer::transform(const tack::concept& /*c*/) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(std::make_shared<concept_info>());
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> >
-transformer::transform(const sml::primitive& /*p*/) const {
+transformer::transform(const tack::primitive& /*p*/) const {
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(std::make_shared<primitive_info>());
     return r;
 }
 
 std::forward_list<std::shared_ptr<formattable> > transformer::
-transform(const sml::object& o) const {
+transform(const tack::object& o) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming object: "
-                             << sml::string_converter::convert(o.name());
+                             << tack::string_converter::convert(o.name());
 
     std::forward_list<std::shared_ptr<formattable> > r;
     r.push_front(to_forward_declarations_info(o));
 
     switch(o.object_type()) {
-    case sml::object_types::user_defined_value_object:
-    case sml::object_types::user_defined_service:
+    case tack::object_types::user_defined_value_object:
+    case tack::object_types::user_defined_service:
         r.push_front(to_class_info(o));
         break;
-    case sml::object_types::visitor:
+    case tack::object_types::visitor:
         r.push_front(to_visitor_info(o));
         break;
-    case sml::object_types::exception:
+    case tack::object_types::exception:
         r.push_front(to_exception_info(o));
         break;
     default: {
-        const auto n(sml::string_converter::convert(o.name()));
+        const auto n(tack::string_converter::convert(o.name()));
         BOOST_LOG_SEV(lg, error) << unsupported_object_type << o.object_type()
                                  << " name: " << n;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_object_type +

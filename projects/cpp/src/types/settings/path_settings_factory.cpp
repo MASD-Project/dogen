@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
 #include "dogen/cpp/types/settings/path_settings_factory.hpp"

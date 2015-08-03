@@ -51,7 +51,7 @@ void troubleshooting_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.debug_dir(create_boost_filesystem_path(position + 0));
     v.save_dia_model(create_dogen_config_archive_types(position + 1));
-    v.save_sml_model(create_dogen_config_archive_types(position + 2));
+    v.save_tack_model(create_dogen_config_archive_types(position + 2));
     v.stop_after_formatting(create_bool(position + 3));
     v.stop_after_merging(create_bool(position + 4));
 }

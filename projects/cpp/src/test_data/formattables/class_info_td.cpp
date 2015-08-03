@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/sml/test_data/generation_types_td.hpp"
+#include "dogen/tack/test_data/generation_types_td.hpp"
 #include "dogen/cpp/test_data/formattables/entity_td.hpp"
 #include "dogen/cpp/test_data/formattables/class_info_td.hpp"
 #include "dogen/cpp/test_data/formattables/parent_info_td.hpp"
@@ -71,9 +71,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::sml::generation_types
-create_dogen_sml_generation_types(const unsigned int position) {
-    return dogen::sml::generation_types_generator::create(position);
+dogen::tack::generation_types
+create_dogen_tack_generation_types(const unsigned int position) {
+    return dogen::tack::generation_types_generator::create(position);
 }
 
 }
@@ -100,7 +100,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_visitable(create_bool(position + 10));
     v.is_immutable(create_bool(position + 11));
     v.is_original_parent_visitable(create_bool(position + 12));
-    v.generation_type(create_dogen_sml_generation_types(position + 13));
+    v.generation_type(create_dogen_tack_generation_types(position + 13));
     v.is_final(create_bool(position + 14));
 }
 

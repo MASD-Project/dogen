@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 #include "dogen/cpp/types/settings/bundle_factory.hpp"
 #include "dogen/cpp/types/settings/building_error.hpp"
@@ -55,9 +55,9 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename SmlEntity>
-    void generate(const SmlEntity& e) {
-        if (e.generation_type() == sml::generation_types::no_generation)
+    template<typename TackEntity>
+    void generate(const TackEntity& e) {
+        if (e.generation_type() == tack::generation_types::no_generation)
             return;
 
         const auto b(factory_.make(e.extensions()));
@@ -65,18 +65,18 @@ private:
         auto& deps(result_.bundles_by_qname());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto n(sml::string_converter::convert(e.name()));
+            const auto n(tack::string_converter::convert(e.name()));
             BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
         }
     }
 
 public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
+    void operator()(const dogen::tack::object& o) { generate(o); }
+    void operator()(const dogen::tack::enumeration& e) { generate(e); }
+    void operator()(const dogen::tack::primitive& p) { generate(p); }
+    void operator()(const dogen::tack::module& m) { generate(m); }
+    void operator()(const dogen::tack::concept& c) { generate(c); }
 
 public:
     const bundle_repository& result() const { return result_; }
@@ -91,17 +91,17 @@ private:
 bundle_repository bundle_repository_factory::
 make(const dynamic::repository& rp, const dynamic::object& root_object,
     const dogen::formatters::general_settings_factory& gsf,
-    const opaque_settings_builder& osb, const sml::model& m) const {
+    const opaque_settings_builder& osb, const tack::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating settings bundle repository.";
 
     const bundle_factory f(rp, root_object, gsf, osb);
     generator g(f);
-    sml::all_model_items_traversal(m, g);
+    tack::all_model_items_traversal(m, g);
     auto r(g.result());
 
     // FIXME: hack to handle registars.
-    sml::qname qn;
+    tack::qname qn;
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());
@@ -110,7 +110,7 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     auto& deps(r.bundles_by_qname());
     const auto res(deps.insert(pair));
     if (!res.second) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
         BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
     }

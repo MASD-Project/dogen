@@ -22,7 +22,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/object.hpp"
+#include "dogen/tack/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder.hpp"
 #include "dogen/cpp/types/traits.hpp"
@@ -51,13 +51,13 @@ namespace types {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<sml::object> {
+        inclusion_dependencies_provider_interface<tack::object> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
     provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const sml::object& o) const override;
+        const tack::object& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -66,9 +66,9 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& o) const {
+    const tack::object& o) const {
 
-    if (o.object_type() != sml::object_types::exception)
+    if (o.object_type() != tack::object_types::exception)
         return boost::optional<std::list<std::string> >();
 
     const auto self_fn(forward_declarations_formatter::static_formatter_name());

@@ -180,7 +180,7 @@ dispatcher::dispatcher(const container& c) : container_(c) { }
 
 void dispatcher::visit(const formattables::class_info& c) {
     const bool empty_out_content(
-        c.generation_type() == sml::generation_types::partial_generation);
+        c.generation_type() == tack::generation_types::partial_generation);
     for (const auto f : container_.class_formatters())
         format_entity(*f, c, empty_out_content);
 }

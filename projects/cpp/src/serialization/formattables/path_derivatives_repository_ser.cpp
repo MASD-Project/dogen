@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/sml/serialization/qname_ser.hpp"
+#include "dogen/tack/serialization/qname_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_ser.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_repository_ser.hpp"

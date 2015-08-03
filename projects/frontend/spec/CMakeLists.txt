@@ -31,9 +31,9 @@ target_link_libraries(frontend_spec
     config
     utility
     dia
-    sml
+    tack
     dynamic
-    dia_to_sml
+    dia_to_tack
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

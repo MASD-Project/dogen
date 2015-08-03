@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/cpp/hash/formattables/enablement_repository_hash.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_bool(const std::unordered_m
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_bool_(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, bool> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_bool_(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -56,7 +56,7 @@ namespace formattables {
 std::size_t enablement_repository_hasher::hash(const enablement_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_sml_qname_std_unordered_map_std_string_bool_(v.enablement_by_qname()));
+    combine(seed, hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_bool_(v.enablement_by_qname()));
     return seed;
 }
 

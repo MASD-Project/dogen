@@ -21,7 +21,7 @@
 #include <memory>
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/frontend/types/dia_frontend.hpp"
-#include "dogen/frontend/types/json_sml_frontend.hpp"
+#include "dogen/frontend/types/json_tack_frontend.hpp"
 #include "dogen/frontend/types/initializer.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ inline void register_frontend() {
 
 void initializer::initialize() {
     register_frontend<dia_frontend>();
-    register_frontend<json_sml_frontend>();
+    register_frontend<json_tack_frontend>();
 }
 
 } }

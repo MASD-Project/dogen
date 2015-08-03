@@ -20,7 +20,7 @@
  */
 #include <string>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test_data/dia_tack.hpp"
 #include "dogen/utility/test_data/resolver.hpp"
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/test_data.hpp"
@@ -49,8 +49,8 @@ path debug_dogen::data_set() {
 }
 
 path debug_dogen::target() {
-    using dogen::utility::test_data::dia_sml;
-    return dia_sml::input_class_in_a_package_dia();
+    using dogen::utility::test_data::dia_tack;
+    return dia_tack::input_class_in_a_package_dia();
 }
 
 path debug_dogen::expected() {

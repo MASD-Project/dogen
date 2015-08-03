@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -35,7 +35,7 @@ namespace dogen {
 namespace frontend {
 
 /**
- * @brief Generates partial SML models.
+ * @brief Generates partial Tack models.
  */
 class frontend_interface {
 public:
@@ -58,9 +58,9 @@ public:
 
     /**
      * @brief Read an input descriptor and transform it into a partial
-     * SML model.
+     * Tack model.
      */
-    virtual sml::model
+    virtual tack::model
     generate(const dynamic::workflow& w, const input_descriptor& d,
         const frontend_settings& s) = 0;
 };

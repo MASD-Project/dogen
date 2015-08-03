@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test_data/dia_tack.hpp"
 
 namespace {
 
@@ -40,16 +40,16 @@ const std::string xml_reader_input_dir("xml_reader/input");
 const std::string xml_reader_expected_dir("xml_reader/expected");
 const std::string xml_reader_actual_dir("xml_reader/actual");
 
-const std::string dia_sml_dir("dia_sml");
-const std::string dia_sml_input_dir("dia_sml/input");
-const std::string dia_sml_expected_dir("dia_sml/expected");
-const std::string dia_sml_actual_dir("dia_sml/actual");
+const std::string dia_tack_dir("dia_tack");
+const std::string dia_tack_input_dir("dia_tack/input");
+const std::string dia_tack_expected_dir("dia_tack/expected");
+const std::string dia_tack_actual_dir("dia_tack/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "dia_sml/input/class_in_a_package.dia");
+    "dia_tack/input/class_in_a_package.dia");
 const std::string class_namespace_file_diaxml(
-    "dia_sml/expected/class_in_a_package.diaxml");
+    "dia_tack/expected/class_in_a_package.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
@@ -99,18 +99,18 @@ BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
     test_valid_file(xml_reader::input_boolean_values(), boolean_values_file);
 }
 
-BOOST_AUTO_TEST_CASE(dia_sml_passes_sanity_checks) {
-    SETUP_TEST_LOG("dia_sml_passes_sanity_checks");
-    using dogen::utility::test_data::dia_sml;
-    test_main_directory(dia_sml::data_set(), dia_sml_dir);
-    test_main_directory(dia_sml::input(), dia_sml_input_dir);
-    test_main_directory(dia_sml::expected(), dia_sml_expected_dir);
-    test_main_directory(dia_sml::actual(), dia_sml_actual_dir);
-    test_non_existent_file(dia_sml::non_existent_file(), dia_extension);
+BOOST_AUTO_TEST_CASE(dia_tack_passes_sanity_checks) {
+    SETUP_TEST_LOG("dia_tack_passes_sanity_checks");
+    using dogen::utility::test_data::dia_tack;
+    test_main_directory(dia_tack::data_set(), dia_tack_dir);
+    test_main_directory(dia_tack::input(), dia_tack_input_dir);
+    test_main_directory(dia_tack::expected(), dia_tack_expected_dir);
+    test_main_directory(dia_tack::actual(), dia_tack_actual_dir);
+    test_non_existent_file(dia_tack::non_existent_file(), dia_extension);
 
-    test_valid_file(dia_sml::input_class_in_a_package_dia(),
+    test_valid_file(dia_tack::input_class_in_a_package_dia(),
         class_namespace_file_dia);
-    test_valid_file(dia_sml::expected_class_in_a_package_dia_xml(),
+    test_valid_file(dia_tack::expected_class_in_a_package_dia_xml(),
         class_namespace_file_diaxml);
 }
 

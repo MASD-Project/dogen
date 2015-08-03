@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bundle_repository::bundle_repository(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& bundles_by_qname)
+bundle_repository::bundle_repository(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundles_by_qname)
     : bundles_by_qname_(bundles_by_qname) { }
 
 void bundle_repository::swap(bundle_repository& other) noexcept {
@@ -42,19 +42,19 @@ bundle_repository& bundle_repository::operator=(bundle_repository other) {
     return *this;
 }
 
-const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() const {
+const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() const {
     return bundles_by_qname_;
 }
 
-std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() {
+std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() {
     return bundles_by_qname_;
 }
 
-void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& v) {
+void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& v) {
     bundles_by_qname_ = v;
 }
 
-void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>&& v) {
+void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>&& v) {
     bundles_by_qname_ = std::move(v);
 }
 

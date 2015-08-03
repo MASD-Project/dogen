@@ -24,7 +24,7 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-formatter_properties_repository::formatter_properties_repository(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname)
+formatter_properties_repository::formatter_properties_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname)
     : formatter_properties_by_qname_(formatter_properties_by_qname) { }
 
 void formatter_properties_repository::swap(formatter_properties_repository& other) noexcept {
@@ -42,19 +42,19 @@ formatter_properties_repository& formatter_properties_repository::operator=(form
     return *this;
 }
 
-const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_repository::formatter_properties_by_qname() const {
+const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_repository::formatter_properties_by_qname() const {
     return formatter_properties_by_qname_;
 }
 
-std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_repository::formatter_properties_by_qname() {
+std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_repository::formatter_properties_by_qname() {
     return formatter_properties_by_qname_;
 }
 
-void formatter_properties_repository::formatter_properties_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v) {
+void formatter_properties_repository::formatter_properties_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v) {
     formatter_properties_by_qname_ = v;
 }
 
-void formatter_properties_repository::formatter_properties_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >&& v) {
+void formatter_properties_repository::formatter_properties_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >&& v) {
     formatter_properties_by_qname_ = std::move(v);
 }
 

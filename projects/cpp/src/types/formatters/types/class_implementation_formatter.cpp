@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/object.hpp"
+#include "dogen/tack/types/object.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_provider_interface.hpp"
 #include "dogen/cpp/types/formatters/entity_formatting_assistant.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
@@ -48,13 +48,13 @@ namespace types {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<sml::object> {
+        inclusion_dependencies_provider_interface<tack::object> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-        const sml::object& o) const override;
+        const tack::object& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -63,12 +63,12 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-    const sml::object& o) const {
+    const tack::object& o) const {
     auto builder(f.make());
     const auto ch_fn(traits::class_header_formatter_name());
     builder.add(o.name(), ch_fn);
 
-    using rt = sml::relationship_types;
+    using rt = tack::relationship_types;
     builder.add(o, rt::weak_associations, ch_fn);
 
     const auto io_fctn(formatters::io::traits::facet_name());

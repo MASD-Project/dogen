@@ -26,7 +26,7 @@ namespace formattables {
 
 const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::object>
+        inclusion_dependencies_provider_interface<tack::object>
         >
     >&
 container::object_providers() const {
@@ -35,7 +35,7 @@ container::object_providers() const {
 
 std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::object>
+        inclusion_dependencies_provider_interface<tack::object>
         >
     >&
 container::object_providers() {
@@ -44,7 +44,7 @@ container::object_providers() {
 
 const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::enumeration>
+        inclusion_dependencies_provider_interface<tack::enumeration>
         >
     >&
 container::enumeration_providers() const {
@@ -53,7 +53,7 @@ container::enumeration_providers() const {
 
 std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::enumeration>
+        inclusion_dependencies_provider_interface<tack::enumeration>
         >
     >&
 container::enumeration_providers() {
@@ -62,7 +62,7 @@ container::enumeration_providers() {
 
 const std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::model>
+        inclusion_dependencies_provider_interface<tack::model>
         >
     >&
 container::model_providers() const {
@@ -71,7 +71,7 @@ container::model_providers() const {
 
 std::forward_list<
     boost::shared_ptr<
-        inclusion_dependencies_provider_interface<sml::model>
+        inclusion_dependencies_provider_interface<tack::model>
         >
     >&
 container::model_providers() {

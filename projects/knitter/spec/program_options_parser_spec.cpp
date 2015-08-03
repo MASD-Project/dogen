@@ -56,8 +56,8 @@ const std::string debug_dir_arg("--debug-dir");
 const std::string debug_dir_value_arg("some_dir");
 const std::string save_dia_model_arg("--save-dia-model");
 const std::string save_dia_model_value_arg("xml");
-const std::string save_sml_model_arg("--save-sml-model");
-const std::string save_sml_model_value_arg("text");
+const std::string save_tack_model_arg("--save-tack-model");
+const std::string save_tack_model_value_arg("text");
 const std::string stop_after_merging_arg("--stop-after-merging");
 const std::string stop_after_formatting_arg("--stop-after-formatting");
 
@@ -348,7 +348,7 @@ BOOST_AUTO_TEST_CASE(supplying_invalid_archive_type_throws) {
 
     const std::vector<std::string> o2 = {
         target_arg, target_value_arg,
-        save_sml_model_arg, invalid_value_arg,
+        save_tack_model_arg, invalid_value_arg,
     };
     check_exception(o2, invalid_archive_type);
 }
@@ -504,7 +504,7 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_optio
         target_arg, target_value_arg,
         debug_dir_arg, debug_dir_value_arg,
         save_dia_model_arg, save_dia_model_value_arg,
-        save_sml_model_arg, save_sml_model_value_arg,
+        save_tack_model_arg, save_tack_model_value_arg,
         stop_after_merging_arg, stop_after_formatting_arg
     };
     const auto s(check_valid_arguments(o));
@@ -515,14 +515,14 @@ BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_optio
 
     using dogen::config::archive_types;
     BOOST_CHECK(ts.save_dia_model() == archive_types::xml);
-    BOOST_CHECK(ts.save_sml_model() == archive_types::text);
+    BOOST_CHECK(ts.save_tack_model() == archive_types::text);
 
     BOOST_CHECK(ts.stop_after_merging());
     BOOST_CHECK(ts.stop_after_formatting());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_save_sml_or_dia_results_in_options_with_debug_dir) {
-    SETUP_TEST_LOG_SOURCE("supplying_save_sml_or_dia_results_in_options_with_debug_dir");
+BOOST_AUTO_TEST_CASE(supplying_save_tack_or_dia_results_in_options_with_debug_dir) {
+    SETUP_TEST_LOG_SOURCE("supplying_save_tack_or_dia_results_in_options_with_debug_dir");
     typedef std::vector<std::string> vector;
     auto lambda([&](vector o) {
             const auto s(check_valid_arguments(o));
@@ -540,7 +540,7 @@ BOOST_AUTO_TEST_CASE(supplying_save_sml_or_dia_results_in_options_with_debug_dir
 
     const vector o2 = {
         target_arg, target_value_arg,
-        save_sml_model_arg, save_sml_model_value_arg
+        save_tack_model_arg, save_tack_model_value_arg
     };
     lambda(o2);
 }

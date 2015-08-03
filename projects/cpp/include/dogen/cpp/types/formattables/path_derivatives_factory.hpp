@@ -29,8 +29,8 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 
@@ -45,7 +45,7 @@ class path_derivatives_factory {
 public:
     path_derivatives_factory(
         const config::cpp_options& opts,
-        const sml::model& m,
+        const tack::model& m,
         const std::unordered_map<std::string, settings::path_settings>& ps);
 
 private:
@@ -54,7 +54,7 @@ private:
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(
-        const settings::path_settings& ps, const sml::qname& qn) const;
+        const settings::path_settings& ps, const tack::qname& qn) const;
 
     /**
      * @brief Builds an absolute path for the supplied qualified name.
@@ -62,7 +62,7 @@ private:
     boost::filesystem::path make_file_path(
         const settings::path_settings& ps,
         const boost::filesystem::path& inclusion_path,
-        const sml::qname& qn) const;
+        const tack::qname& qn) const;
 
     /**
      * @brief Converts a relative path to an inclusion directive.
@@ -80,11 +80,11 @@ public:
      * @brief Generate path derivatives.
      */
     std::unordered_map<std::string, path_derivatives>
-    make(const sml::qname& qn) const;
+    make(const tack::qname& qn) const;
 
 private:
     const config::cpp_options& options_;
-    const sml::model& model_;
+    const tack::model& model_;
     const std::unordered_map<std::string, settings::path_settings>&
     path_settings_;
 };

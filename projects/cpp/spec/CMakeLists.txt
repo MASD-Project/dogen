@@ -30,7 +30,7 @@ target_link_libraries(cpp_spec
     cpp
     utility
     dia
-    sml
+    tack
     config
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

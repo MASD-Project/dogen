@@ -24,9 +24,9 @@ file(GLOB_RECURSE knit_files RELATIVE
 
 add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
-    sml
+    tack
     dia
-    dia_to_sml
+    dia_to_tack
     frontend
     backend
     formatters

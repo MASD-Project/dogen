@@ -23,9 +23,9 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/io/qname_io.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings_factory.hpp"
@@ -57,7 +57,7 @@ public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
 public:
-    void generate(const dynamic::object& o, const sml::qname& qn) {
+    void generate(const dynamic::object& o, const tack::qname& qn) {
         const auto id(factory_.make(o, qn));
         if (!id)
             return;
@@ -67,7 +67,7 @@ public:
         if (pair.second)
             return;
 
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
         BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
     }
@@ -83,11 +83,11 @@ private:
     }
 
 public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
+    void operator()(const dogen::tack::object& o) { generate(o); }
+    void operator()(const dogen::tack::enumeration& e) { generate(e); }
+    void operator()(const dogen::tack::primitive& p) { generate(p); }
+    void operator()(const dogen::tack::module& m) { generate(m); }
+    void operator()(const dogen::tack::concept& c) { generate(c); }
 
 public:
     const inclusion_directives_repository& result() const { return result_; }
@@ -103,15 +103,15 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     const dynamic::repository& srp,
     const formatters::container& fc,
     const path_derivatives_repository& pdrp,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Making inclusion directives repository.";
 
     const inclusion_directives_factory f(srp, fc, pdrp);
     generator g(f);
-    sml::all_model_items_traversal(m, g);
+    tack::all_model_items_traversal(m, g);
 
-    sml::qname qn;
+    tack::qname qn;
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());
@@ -120,11 +120,11 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == sml::origin_types::system)
+        if (origin_type == tack::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        sml::qname n;
+        tack::qname n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

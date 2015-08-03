@@ -28,7 +28,6 @@ set_target_properties(formatters PROPERTIES
 
 target_link_libraries(formatters
     utility
-    sml
     ${Boost_LIBRARIES})
 
 set_target_properties(formatters PROPERTIES OUTPUT_NAME dogen_formatters)

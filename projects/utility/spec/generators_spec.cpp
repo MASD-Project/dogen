@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test_data/dia_tack.hpp"
 #include "dogen/utility/test_data/test_data.hpp"
 #include "dogen/utility/test_data/generate_container.hpp"
 #include "dogen/utility/test_data/generator.hpp"

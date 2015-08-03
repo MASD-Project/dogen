@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/cpp/types/formattables/formatter_properties.hpp"
 #include "dogen/cpp/serialization/formattables/formatter_properties_repository_fwd_ser.hpp"
 
@@ -45,7 +45,7 @@ public:
     ~formatter_properties_repository() = default;
 
 public:
-    explicit formatter_properties_repository(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname);
+    explicit formatter_properties_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, formatter_properties_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname() const;
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname();
-    void formatter_properties_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v);
-    void formatter_properties_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >&& v);
+    const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname() const;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& formatter_properties_by_qname();
+    void formatter_properties_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >& v);
+    void formatter_properties_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> >&& v);
 
 public:
     bool operator==(const formatter_properties_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     formatter_properties_repository& operator=(formatter_properties_repository other);
 
 private:
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > formatter_properties_by_qname_;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::formatter_properties> > formatter_properties_by_qname_;
 };
 
 } } }

@@ -23,8 +23,8 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/dynamic/types/repository_selector.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/traits.hpp"
 #include "dogen/cpp/io/formattables/enablement_repository_io.hpp"
 #include "dogen/cpp/io/formattables/global_enablement_properties_io.hpp"
@@ -61,22 +61,22 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename SmlEntity>
-    void generate(const SmlEntity& e, const bool types_only = false) {
+    template<typename TackEntity>
+    void generate(const TackEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
         result_.enablement_by_qname()[e.name()] = factory_.make(o, types_only);
     }
 
 public:
-    void operator()(const dogen::sml::object& o) {
+    void operator()(const dogen::tack::object& o) {
         const auto is_service(o.object_type() ==
-            sml::object_types::user_defined_service);
+            tack::object_types::user_defined_service);
         generate(o, is_service);
     }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
+    void operator()(const dogen::tack::enumeration& e) { generate(e); }
+    void operator()(const dogen::tack::primitive& p) { generate(p); }
+    void operator()(const dogen::tack::module& m) { generate(m); }
+    void operator()(const dogen::tack::concept& c) { generate(c); }
 
 public:
     const enablement_repository& result() const { return result_; }
@@ -141,7 +141,7 @@ enablement_repository enablement_repository_factory::make(
     const dynamic::repository& rp,
     const dynamic::object& root_object,
     const formatters::container& fc,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement.";
 
@@ -149,10 +149,10 @@ enablement_repository enablement_repository_factory::make(
     const auto gep(obtain_global_properties(fd, root_object));
     const enablement_factory f(rp, fc, gep);
     generator g(f);
-    sml::all_model_items_traversal(m, g);
+    tack::all_model_items_traversal(m, g);
     auto r(g.result());
 
-    sml::qname qn;
+    tack::qname qn;
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());
@@ -161,11 +161,11 @@ enablement_repository enablement_repository_factory::make(
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == sml::origin_types::system)
+        if (origin_type == tack::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        sml::qname n;
+        tack::qname n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

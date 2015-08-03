@@ -33,7 +33,7 @@
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
 #include "dogen/frontend/types/input_descriptor.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 
 namespace dogen {
 namespace knit {
@@ -71,9 +71,9 @@ private:
     obtain_input_descriptors_activity() const;
 
     /**
-     * @brief Obtains all partial SML models.
+     * @brief Obtains all partial Tack models.
      */
-    std::list<sml::model> obtain_partial_sml_models_activity(
+    std::list<tack::model> obtain_partial_tack_models_activity(
         const std::list<frontend::input_descriptor>& descriptors) const;
 
     /**
@@ -83,22 +83,22 @@ private:
         const std::list<frontend::input_descriptor>& descriptors) const;
 
     /**
-     * @brief Execute the SML workflow.
+     * @brief Execute the Tack workflow.
      */
-    sml::model merge_models_activity(const std::list<sml::model>& models) const;
+    tack::model merge_models_activity(const std::list<tack::model>& models) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if
-     * the SML model should be persisted; if so, persists it.
+     * the Tack model should be persisted; if so, persists it.
      */
     void persist_model_activity(const boost::filesystem::path p,
-        const sml::model& m) const;
+        const tack::model& m) const;
 
 public:
     /**
      * @brief Executes the workflow.
      */
-    sml::model execute() const;
+    tack::model execute() const;
 
 private:
     const config::knitting_options& knitting_options_;

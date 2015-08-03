@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_repository_fwd_ser.hpp"
 
@@ -45,7 +45,7 @@ public:
     ~path_derivatives_repository() = default;
 
 public:
-    explicit path_derivatives_repository(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname);
+    explicit path_derivatives_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, path_derivatives_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname() const;
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname();
-    void path_derivatives_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v);
-    void path_derivatives_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v);
+    const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname() const;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname();
+    void path_derivatives_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v);
+    void path_derivatives_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v);
 
 public:
     bool operator==(const path_derivatives_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     path_derivatives_repository& operator=(path_derivatives_repository other);
 
 private:
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > path_derivatives_by_qname_;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> > path_derivatives_by_qname_;
 };
 
 } } }

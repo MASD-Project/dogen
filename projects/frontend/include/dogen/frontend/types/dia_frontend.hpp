@@ -44,7 +44,7 @@ public:
 public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
-    sml::model generate(const dynamic::workflow& w,
+    tack::model generate(const dynamic::workflow& w,
         const input_descriptor& d, const frontend_settings& s) override;
 };
 

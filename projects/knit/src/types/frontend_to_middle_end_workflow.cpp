@@ -24,10 +24,10 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/frontend/types/workflow.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/persister.hpp"
-#include "dogen/sml/types/workflow.hpp"
-#include "dogen/sml/io/model_io.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/persister.hpp"
+#include "dogen/tack/types/workflow.hpp"
+#include "dogen/tack/io/model_io.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
 
@@ -125,8 +125,8 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     return r;
 }
 
-std::list<sml::model> frontend_to_middle_end_workflow::
-obtain_partial_sml_models_activity(
+std::list<tack::model> frontend_to_middle_end_workflow::
+obtain_partial_tack_models_activity(
     const std::list<frontend::input_descriptor>& descriptors) const {
     frontend::workflow w(knitting_options_, repository_);
     return w.execute(descriptors);
@@ -145,9 +145,9 @@ obtain_target_path_activity(
     return boost::filesystem::path();
 }
 
-sml::model frontend_to_middle_end_workflow::
-merge_models_activity(const std::list<sml::model>& models) const {
-    sml::workflow w;
+tack::model frontend_to_middle_end_workflow::
+merge_models_activity(const std::list<tack::model>& models) const {
+    tack::workflow w;
     const auto r(w.execute(models));
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << r;
@@ -161,23 +161,23 @@ merge_models_activity(const std::list<sml::model>& models) const {
 }
 
 void frontend_to_middle_end_workflow::persist_model_activity(
-    const boost::filesystem::path p, const sml::model& m) const {
+    const boost::filesystem::path p, const tack::model& m) const {
     const auto& ts(knitting_options_.troubleshooting());
     using config::archive_types;
-    archive_types at(ts.save_sml_model());
+    archive_types at(ts.save_tack_model());
     if (at == archive_types::invalid)
         return; // FIXME: should we not throw?
 
     const auto& dp(create_debug_file_path(at, p));
-    sml::persister persister;
+    tack::persister persister;
     persister.persist(m, dp);
 }
 
-sml::model frontend_to_middle_end_workflow::execute() const {
+tack::model frontend_to_middle_end_workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
 
     const auto d(obtain_input_descriptors_activity());
-    const auto pm(obtain_partial_sml_models_activity(d));
+    const auto pm(obtain_partial_tack_models_activity(d));
     const auto r(merge_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
     persist_model_activity(tp, r);

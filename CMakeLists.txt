@@ -163,7 +163,7 @@ endif()
 #
 set(all_dia_test_models "")
 file(GLOB_RECURSE all_dia_test_models ABSOLUTE
-    "${CMAKE_SOURCE_DIR}/test_data/dia_sml/input/*.dia")
+    "${CMAKE_SOURCE_DIR}/test_data/dia_tack/input/*.dia")
 
 #
 # setup git

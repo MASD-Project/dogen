@@ -25,7 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/settings/aspect_settings_factory.hpp"
 #include "dogen/cpp/io/formattables/includers_info_io.hpp"
 #include "dogen/cpp/types/formatters/inclusion_constants.hpp"
@@ -137,10 +137,10 @@ factory::clone_path_settings(
     return r;
 }
 
-sml::qname factory::create_qname(const sml::model& m,
+tack::qname factory::create_qname(const tack::model& m,
     const std::string& simple_name) const {
 
-    sml::qname r;
+    tack::qname r;
     r.simple_name(simple_name);
     r.model_name(m.name().model_name());
     r.external_module_path(m.name().external_module_path());
@@ -148,9 +148,9 @@ sml::qname factory::create_qname(const sml::model& m,
 }
 
 path_derivatives factory::create_path_derivatives(
-    const config::cpp_options& opts, const sml::model& m,
+    const config::cpp_options& opts, const tack::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const sml::qname& qn,
+    const tack::qname& qn,
     const std::string& formatter_name) const {
 
     path_derivatives_factory pdf(opts, m, ps);
@@ -166,11 +166,11 @@ path_derivatives factory::create_path_derivatives(
 }
 
 bool factory::is_enabled(const formatter_properties_repository& fprp,
-    const sml::qname& qn, const std::string& formatter_name) const {
+    const tack::qname& qn, const std::string& formatter_name) const {
 
     const auto i(fprp.formatter_properties_by_qname().find(qn));
     if (i == fprp.formatter_properties_by_qname().end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << properties_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
     }
@@ -193,11 +193,11 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const settings::bundle_repository& brp,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     const auto qn(create_qname(m, registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
@@ -213,14 +213,14 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     */
     const auto i(brp.bundles_by_qname().find(qn));
     if (i == brp.bundles_by_qname().end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << bundle_not_found_for_qname << n;
         BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_qname + n));
     }
     r->settings(i->second);
 
     for (const auto& pair : m.references()) {
-        if (pair.second != sml::origin_types::system) {
+        if (pair.second != tack::origin_types::system) {
             const auto l(b.namespace_list(m, pair.first));
             const auto s(boost::algorithm::join(l, namespace_separator));
             r->model_dependencies().push_back(s);
@@ -254,7 +254,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     const auto j(fprp.formatter_properties_by_qname().find(qn));
     if (j == fprp.formatter_properties_by_qname().end()) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << properties_not_found << n;
         BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
 
@@ -291,7 +291,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
     return r;
 }
 
@@ -305,11 +305,11 @@ make_includers(
     const std::forward_list<
     std::shared_ptr<formatters::formatter_interface>>& formatters,
     const formatter_properties_repository& fprp,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     const auto qn(create_qname(m, includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
 
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
@@ -340,7 +340,7 @@ make_includers(
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
                 const auto j(m.objects().find(qn));
-                using sml::object_types;
+                using tack::object_types;
                 if (j  != m.objects().end()) {
                     const auto ot(j->second.object_type());
                     if (ot != object_types::user_defined_value_object)
@@ -415,7 +415,7 @@ make_includers(
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
 
     BOOST_LOG_SEV(lg, debug) << "Made includers: "
-                             << sml::string_converter::convert(qn);
+                             << tack::string_converter::convert(qn);
 
     return r;
 }
@@ -426,7 +426,7 @@ make_cmakelists(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const sml::model& m) const
+    const tack::model& m) const
 {
     std::forward_list<std::shared_ptr<formattable> > r;
     if (opts.disable_cmakelists()) {
@@ -490,7 +490,7 @@ factory::make_odb_options(const config::cpp_options& opts,
     const dogen::formatters::general_settings_factory& gsf,
     const std::unordered_map<std::string, settings::path_settings>& ps,
     const formatter_properties_repository& fprp,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     using namespace formatters::odb;
     const auto ch_fn(traits::class_header_formatter_name());

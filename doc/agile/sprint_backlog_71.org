@@ -14,15 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-07-20 Mon 15:01]
-| <75>                                                                        |        |      |      |
-| Headline                                                                    | Time   |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:26* |      |      |
-|-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:26   |      |      |
-| Active                                                                      |        | 0:26 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:26 |
+#+CAPTION: Clock summary at [2015-08-03 Mon 17:45]
+| <75>                                                                        |         |       |      |
+| Headline                                                                    | Time    |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| *Total time*                                                                | *12:59* |       |      |
+|-----------------------------------------------------------------------------+---------+-------+------|
+| Stories                                                                     | 12:59   |       |      |
+| Active                                                                      |         | 12:59 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:26 |
+| COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
+| STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:00 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -30,7 +32,7 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Add support for pulling dependencies from biicode         :story:
+*** Add support for pulling dependencies from biicode                 :story:
 
 [[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
 consuming dependencies from it and pushing dogen into it. In addition
@@ -52,7 +54,12 @@ dependency. Create a blog post about it.
 
 Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
 
-*** Rename SML to =tack=                                              :story:
+*** COMPLETED Rename SML to =tack=                                    :story:
+    CLOSED: [2015-08-03 Mon 17:32]
+    CLOCK: [2015-08-03 Mon 17:33]--[2015-08-03 Mon 17:42] =>  0:09
+    CLOCK: [2015-08-03 Mon 14:32]--[2015-08-03 Mon 17:32] =>  3:00
+    CLOCK: [2015-07-31 Fri 18:44]--[2015-07-31 Fri 19:25] =>  0:41
+    CLOCK: [2015-07-31 Fri 08:04]--[2015-07-31 Fri 08:47] =>  0:43
 
 This will now be the name to reflect its "intermediate" state.
 
@@ -61,13 +68,109 @@ In sewing, to tack or baste is to make quick, temporary stitching
 intended to be removed.
 #+end_quote
 
+**** Comments from SML that need to be moved to new model
+
+@section sml_0 Core Ideas
+
+SML has at its core the ideas explained by Eric Evans in Domain Driven
+Design (DDD), and it is mainly a domain model to model the DDD domian.
+However, it also contains some influences from Java's EMF - more precisely
+eCore, which was the first meta-model we looked at. eCore is itself rooted
+in UML. We also took some ideas from Stepanov and Jones, in Programming
+Elements (those which we could just about understand).
+
+In more general terms, SML is a meta-model - that is a model that models
+models - but we are not too hang-up on the classic terminology of meta-modeling
+because a lot of people find it confusing. Instead, we chose to use the
+@e ubiquitous @e language defined in th DDD book because its very clear, but
+avoids the complexity of the terms usually associated with meta-modeling.
+
+The objective of SML is to provide the required scaffoling to represent domain
+models, and to do so in a way that is programming language neutral. Thus is
+should provide a representation that is suitable for further transformations
+into models representing programing languages, and from there, to code
+generation.
+
+At the root of SML is the @ref model, short for domain model. It is the root
+of an aggregate containing a number of @e modeling @elements which together
+make up the software representation of a given domain model. The key types of
+modeling elements in SML are:
+
+@li @b model: the model itself, modeling domain models
+@li @b modules: packaging unit; logical sub-division of the model.
+@li @b concepts: not present in DDD; models the C++ notion of a concept.
+@li @b enumeration: value type that models enumerations
+@li @b primitive: value type that models primitive types such as int, etc.
+@li @b object: models the notion of an @e object as defined in object oriented
+languages.
+
+The remaining ideas are refinements of these core concepts.
+
+**** Comments from SML that may be applicable to Tack but need refactoring
+
+@section sml_1 Merging and Resolving
+
+Tack models begin their life as disjointed models with lots of missing
+references to types. This expectation arises from the fact that we
+have most likely transformed some kind of external model into Tack - a
+dia diagram, say - and that the tools used for working on that model
+are not aware of Tack or Dogen in general.
+
+Thus, in order to become useful, a Tack model needs to be merged with
+all of its dependencies. This is done by providing the @e target model
+- i.e. that which one intends to really work on - and its @e
+references - i.e. any models which are picked up due to being
+referenced from within the tatget model - and pass them over to the
+@ref merger. It is the merger's job to create a @e merged model.
+
+A further step is still required, which is to @e resolve all of the references,
+to ensure we do not have any missing dependencies. This is the job of the
+@ref resolver.
+
+All of these steps are encompassed in the SML @ref workflow.
+
+*** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
+    CLOCK: [2015-08-01 Mon 09:00]--[2015-08-01 Mon 17:00] =>  8:00
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+- update find boost with MSVC version
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
 *** Merge frontend with =tack=                                        :story:
 
 Combine the two models performing the necessary renames:
 
 - merge frontend with baste. Rename frontend interface to something
-  like model source. Remove the dia frontend class, moving the code
-  into the dia transformer.
+  like model source or just source. Remove the dia frontend class,
+  moving the code into the dia transformer.
 - rename the types in baste to make them a bit more inline with
   MOF/eCore. As much as possible but without going overboard. Ensure
   we do not pick up meta-meta-model concepts by mistake. Rename nested
@@ -82,6 +185,40 @@ Combine the two models performing the necessary renames:
   ostream. This probably makes no sense for certain sources like dia
   though.
 
+*** Create the =yarn= model                                           :story:
+
+We need to create a meta-model with the following characteristics:
+
+- have a look at eCore/MOF type names for inspiration.
+- single top-level type for all types with a container. Use boost
+  pointer container. add a visitor for the type.
+- consider not having a top-level entity called model but instead use
+  a top-level package.
+- wherever we are using qnames to refer to external types, use a
+  reference instead. Use reference wrapper where required.
+- we could probably merge backends with yarn and call these
+  "sinks". This way we could have "sources" in tack and "sinks" in
+  yarn.
+
+*** Split model name from "contributing model name" in qname          :story:
+
+We need to find a way to model qnames such that there are two model
+names: one which contributes to the namespaces and another which
+doesn't. The specific use case is the primitives model where the model
+has to have a name but we don't want the type names to have the model
+name. Perhaps we need some kind of flag: model name contributes to
+namespacing.
+
+With this we can then remove the numerous hacks around the primitives
+model name such as:
+
+- // FIXME: mega hack to handle primitive model.
+
+*** Update copyright notices                                          :story:
+
+We need to update all notices to reflect personal ownership until DDC
+was formed, and then ownership by DDC.
+
 *** Rename types in =tack= using MOF/eCore terms                      :story:
 
 Rename the types in =tack= to make them a bit more inline with
@@ -89,6 +226,11 @@ MOF/eCore. As much as possible but without going overboard. Ensure we
 do not pick up meta-meta-model concepts by mistake. Rename nested
 qname to something more sensible from MOF/eCore. Review all concept
 names in this light.
+
+*** Create a set of definitions for tagging and meta-data             :story:
+
+We still use these terms frequently. We should define them in dynamic
+to have specific meanings.
 
 *** Refactor code around model origination                            :story:
 

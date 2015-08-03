@@ -25,7 +25,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/formatters/types/modeline_group_hydrator.hpp"
 #include "dogen/formatters/io/modeline_group_io.hpp"
 #include "dogen/formatters/types/hydration_error.hpp"

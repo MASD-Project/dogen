@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 #include "dogen/cpp/io/formattables/inclusion_dependencies_repository_io.hpp"
@@ -52,8 +52,8 @@ public:
     explicit generator(const inclusion_dependencies_factory& f) : factory_(f) {}
 
 public:
-    template<typename SmlEntity>
-    void generate(const SmlEntity& e, const sml::qname& qn) {
+    template<typename TackEntity>
+    void generate(const TackEntity& e, const tack::qname& qn) {
         const auto id(factory_.make(e));
 
         // note: optional return may have be cleaner here, but however it
@@ -65,7 +65,7 @@ public:
         auto& deps(result_.inclusion_dependencies_by_qname());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto n(sml::string_converter::convert(qn));
+            const auto n(tack::string_converter::convert(qn));
             BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
             BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
         }
@@ -76,20 +76,20 @@ private:
      * @brief Generates all of the inclusion dependencies for the
      * formatters and qualified name.
      */
-    template<typename SmlEntity>
-    void generate(const SmlEntity& e) {
-        if (e.generation_type() == sml::generation_types::no_generation)
+    template<typename TackEntity>
+    void generate(const TackEntity& e) {
+        if (e.generation_type() == tack::generation_types::no_generation)
             return;
 
         generate(e, e.name());
     }
 
 public:
-    void operator()(const dogen::sml::object& o) { generate(o); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e); }
-    void operator()(const dogen::sml::primitive& p) { generate(p); }
-    void operator()(const dogen::sml::module& m) { generate(m); }
-    void operator()(const dogen::sml::concept& c) { generate(c); }
+    void operator()(const dogen::tack::object& o) { generate(o); }
+    void operator()(const dogen::tack::enumeration& e) { generate(e); }
+    void operator()(const dogen::tack::primitive& p) { generate(p); }
+    void operator()(const dogen::tack::module& m) { generate(m); }
+    void operator()(const dogen::tack::concept& c) { generate(c); }
 
 public:
     const inclusion_dependencies_repository& result() const { return result_; }
@@ -103,15 +103,15 @@ private:
 
 inclusion_dependencies_repository inclusion_dependencies_repository_factory::
 make(const inclusion_dependencies_builder_factory& bf, const container& c,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies.";
 
     const inclusion_dependencies_factory idf(bf, c);
     generator g(idf);
-    sml::all_model_items_traversal(m, g);
+    tack::all_model_items_traversal(m, g);
 
-    sml::qname qn;
+    tack::qname qn;
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());

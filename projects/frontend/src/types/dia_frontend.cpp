@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/types/persister.hpp"
-#include "dogen/dia_to_sml/types/workflow.hpp"
+#include "dogen/dia_to_tack/types/workflow.hpp"
 #include "dogen/frontend/types/dia_frontend.hpp"
 
 using namespace dogen::utility::log;
@@ -49,7 +49,7 @@ std::list<std::string> dia_frontend::supported_extensions() const {
 
 dia_frontend::~dia_frontend() noexcept { }
 
-sml::model dia_frontend::
+tack::model dia_frontend::
 generate(const dynamic::workflow& w, const input_descriptor& d,
     const frontend_settings& s) {
     BOOST_LOG_SEV(lg, debug) << "Hydrating dia. ";
@@ -63,7 +63,7 @@ generate(const dynamic::workflow& w, const input_descriptor& d,
         p.persist(diagram, s.pre_processed_input_path());
     }
 
-    dogen::dia_to_sml::workflow wf(w);
+    dogen::dia_to_tack::workflow wf(w);
     return wf.execute(diagram, name, d.external_module_path(), d.is_target());
 }
 

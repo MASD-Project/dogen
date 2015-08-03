@@ -68,13 +68,13 @@
         <dia:point val="25,14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,13.95;56.35,20.65"/>
+        <dia:rectangle val="24.95,13.95;56.735,20.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="25,14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.300000000000001"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.6000000000000005"/>
@@ -313,7 +313,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;sml::model&gt;#</dia:string>
+            <dia:string>#std::list&lt;tack::model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1033,13 +1033,13 @@
         <dia:point val="53,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,-12.05;83.195,-6.75"/>
+        <dia:rectangle val="52.95,-12.05;83.58,-6.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="53,-12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.145"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -1201,7 +1201,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#sml::model#</dia:string>
+            <dia:string>#tack::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1266,7 +1266,7 @@
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O6">
       <dia:attribute name="name">
-        <dia:string>#obtains SML models using &gt;#</dia:string>
+        <dia:string>#obtains Tack models using &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="2"/>
@@ -1550,7 +1550,7 @@
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O10">
       <dia:attribute name="name">
-        <dia:string>#&lt; provides an SML representation for#</dia:string>
+        <dia:string>#&lt; provides an Tack representation for#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -1809,8 +1809,8 @@
 initial parsing.
 
 Note that this option only makes sense if the frontend is
-transforming a format into SML. It is ignored in cases where
-we are reading an SML representation.#</dia:string>
+transforming a format into Tack. It is ignored in cases where
+we are reading an Tack representation.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1967,19 +1967,19 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="73,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,2.95;81.7325,6.05"/>
+        <dia:rectangle val="72.95,2.95;82.08,6.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.682500000000001"/>
+        <dia:real val="9.0299999999999994"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#json_sml_frontend#</dia:string>
+        <dia:string>#json_tack_frontend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -2118,7 +2118,7 @@ we are reading an SML representation.#</dia:string>
         <dia:point val="68.0725,-6.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.2225,-6.85;77.3913,3.05"/>
+        <dia:rectangle val="67.2225,-6.85;77.565,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2126,8 +2126,8 @@ we are reading an SML representation.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="68.0725,-6.8"/>
         <dia:point val="68.0725,-2"/>
-        <dia:point val="77.3413,-2"/>
-        <dia:point val="77.3413,3"/>
+        <dia:point val="77.515,-2"/>
+        <dia:point val="77.515,3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -64,8 +64,8 @@ public:
      * initial parsing.
      *
      * Note that this option only makes sense if the frontend is
-     * transforming a format into SML. It is ignored in cases where
-     * we are reading an SML representation.
+     * transforming a format into Tack. It is ignored in cases where
+     * we are reading an Tack representation.
      */
     /**@{*/
     bool save_pre_processed_input() const;

@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
 #include "dogen/cpp/types/formattables/inclusion_directives_repository.hpp"
@@ -38,18 +38,18 @@ namespace cpp {
 namespace formattables {
 
 /**
- * @brief Creates the inclusion directives for an SML model.
+ * @brief Creates the inclusion directives for an Tack model.
  */
 class inclusion_directives_repository_factory {
 public:
     /**
-     * @brief Create the inclusion directives for an SML model.
+     * @brief Create the inclusion directives for an Tack model.
      */
     inclusion_directives_repository make(
         const dynamic::repository& srp,
         const formatters::container& fc,
         const path_derivatives_repository& pdrp,
-        const sml::model& m) const;
+        const tack::model& m) const;
 };
 
 } } }

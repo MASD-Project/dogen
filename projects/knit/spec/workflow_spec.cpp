@@ -27,7 +27,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/test/macros.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test_data/dia_tack.hpp"
 #include "dogen/utility/test_data/codegen_tds.hpp"
 #include "dogen/utility/test_data/empty_tds.hpp"
 #include "dogen/utility/test_data/debug_dogen.hpp"
@@ -37,15 +37,15 @@
 #include "dogen/config/test/mock_options_factory.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/knit/types/workflow.hpp"
-#include "dogen/sml/types/model.hpp"
-#include "dogen/sml/io/model_io.hpp"
+#include "dogen/tack/types/model.hpp"
+#include "dogen/tack/io/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
-#include "dogen/sml/serialization/model_ser.hpp"
+#include "dogen/tack/serialization/model_ser.hpp"
 #include "dogen/dia/test/dia_file_asserter.hpp"
-#include "dogen/sml/test/sml_file_asserter.hpp"
+#include "dogen/tack/test/tack_file_asserter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
-using dogen::utility::test_data::dia_sml;
+using dogen::utility::test_data::dia_tack;
 
 namespace  {
 
@@ -67,8 +67,8 @@ file_asserters() {
     using dogen::dia::test::dia_file_asserter;
     r.push_back(file_asserter::shared_ptr(new dia_file_asserter()));
 
-    using dogen::sml::test::sml_file_asserter;
-    r.push_back(file_asserter::shared_ptr(new sml_file_asserter()));
+    using dogen::tack::test::tack_file_asserter;
+    r.push_back(file_asserter::shared_ptr(new tack_file_asserter()));
 
     return r;
 }
@@ -133,7 +133,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
 
     using dogen::config::archive_types;
     ts.save_dia_model(archive_types::xml);
-    ts.save_sml_model(archive_types::xml);
+    ts.save_tack_model(archive_types::xml);
     ts.stop_after_formatting(true);
     s.troubleshooting(ts);
 
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(disable_full_ctor_generates_expected_code) {
             return s;
         });
 
-    const auto t(dia_sml::input_disable_full_ctor_dia());
+    const auto t(dia_tack::input_disable_full_ctor_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
@@ -187,7 +187,7 @@ BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code) {
             return s;
         });
 
-    const auto t(dia_sml::input_disable_facet_folders_dia());
+    const auto t(dia_tack::input_disable_facet_folders_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
@@ -203,13 +203,13 @@ BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code) {
             return s;
         });
 
-    const auto t(dia_sml::input_disable_cmakelists_dia());
+    const auto t(dia_tack::input_disable_cmakelists_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(not_enabling_facet_domain_throws) {
     SETUP_TEST_LOG("not_enabling_facet_domain_throws");
-    const auto t(dia_sml::input_enable_facet_hash_dia());
+    const auto t(dia_tack::input_enable_facet_hash_dia());
 
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_domain_generates_expected_code) {
             return default_mock_options(tds);
         });
 
-    const auto t(dia_sml::input_enable_facet_domain_dia());
+    const auto t(dia_tack::input_enable_facet_domain_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
@@ -239,7 +239,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code) {
             return default_mock_options(tds);
         });
 
-    const auto t(dia_sml::input_enable_facet_hash_dia());
+    const auto t(dia_tack::input_enable_facet_hash_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code) {
             return default_mock_options(tds);
         });
 
-    const auto t(dia_sml::input_enable_facet_serialization_dia());
+    const auto t(dia_tack::input_enable_facet_serialization_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
@@ -263,13 +263,13 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code) {
             return default_mock_options(tds);
         });
 
-    const auto t(dia_sml::input_enable_facet_io_dia());
+    const auto t(dia_tack::input_enable_facet_io_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
     SETUP_TEST_LOG("enabling_facet_io_and_using_integrated_io_throws");
-    const auto t(dia_sml::input_enable_facet_io_dia());
+    const auto t(dia_tack::input_enable_facet_io_dia());
 
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
@@ -282,18 +282,18 @@ BOOST_IGNORE_AUTO_TEST_CASE(enabling_facet_io_and_using_integrated_io_throws) {
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code");
-    BOOST_CHECK(check_code_generation(dia_sml::input_class_in_a_package_dia()));
+    BOOST_CHECK(check_code_generation(dia_tack::input_class_in_a_package_dia()));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code) {
     SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code");
-    const auto t(dia_sml::input_two_empty_layers_dia());
+    const auto t(dia_tack::input_two_empty_layers_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     SETUP_TEST_LOG("class_without_name_model_throws");
-    const auto t(dia_sml::input_class_without_name_dia());
+    const auto t(dia_tack::input_class_without_name_dia());
 
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
@@ -306,115 +306,115 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code) {
     SETUP_TEST_LOG("empty_model_generates_expected_code");
-    const auto t(dia_sml::input_empty_dia());
+    const auto t(dia_tack::input_empty_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code) {
     SETUP_TEST_LOG("empty_package_model_does_not_generate_code");
-    const auto t(dia_sml::input_empty_package_dia());
+    const auto t(dia_tack::input_empty_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code");
-    const auto t(dia_sml::input_classes_inout_package_dia());
+    const auto t(dia_tack::input_classes_inout_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code");
-    const auto t(dia_sml::input_class_without_attributes_dia());
+    const auto t(dia_tack::input_class_without_attributes_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("class_without_package_model_generates_expected_code");
-    const auto t(dia_sml::input_class_without_package_dia());
+    const auto t(dia_tack::input_class_without_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code) {
     SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code");
-    const auto t(dia_sml::input_stand_alone_class_dia());
+    const auto t(dia_tack::input_stand_alone_class_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_in_a_package_model_generates_expected_code");
-    const auto t(dia_sml::input_classes_in_a_package_dia());
+    const auto t(dia_tack::input_classes_in_a_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code) {
     SETUP_TEST_LOG("classes_without_package_model_generates_expected_code");
-    const auto t(dia_sml::input_classes_without_package_dia());
+    const auto t(dia_tack::input_classes_without_package_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code");
-    const auto t(dia_sml::input_compressed_dia());
+    const auto t(dia_tack::input_compressed_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code");
-    const auto t(dia_sml::input_two_layers_with_objects_dia());
+    const auto t(dia_tack::input_two_layers_with_objects_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code");
-    const auto t(dia_sml::input_trivial_inheritance_dia());
+    const auto t(dia_tack::input_trivial_inheritance_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code) {
     SETUP_TEST_LOG("trivial_association_model_generates_expected_code");
-    const auto t(dia_sml::input_trivial_association_dia());
+    const auto t(dia_tack::input_trivial_association_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code) {
     SETUP_TEST_LOG("comments_model_generates_expected_code");
-    const auto t(dia_sml::input_comments_dia());
+    const auto t(dia_tack::input_comments_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code");
-    const auto t(dia_sml::input_enumeration_dia());
+    const auto t(dia_tack::input_enumeration_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code) {
     SETUP_TEST_LOG("exception_model_generates_expected_code");
-    const auto t(dia_sml::input_exception_dia());
+    const auto t(dia_tack::input_exception_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code) {
     SETUP_TEST_LOG("std_model_generates_expected_code");
-    const auto t(dia_sml::input_std_model_dia());
+    const auto t(dia_tack::input_std_model_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code) {
     SETUP_TEST_LOG("boost_model_generates_expected_code");
-    const auto t(dia_sml::input_boost_model_dia());
+    const auto t(dia_tack::input_boost_model_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code) {
     SETUP_TEST_LOG("stereotypes_model_generates_expected_code");
-    const auto t(dia_sml::input_stereotypes_dia());
+    const auto t(dia_tack::input_stereotypes_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
 BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
     SETUP_TEST_LOG("eos_serialisation_model_generates_expected_code");
-    const auto t(dia_sml::input_enable_eos_serialization_dia());
+    const auto t(dia_tack::input_enable_eos_serialization_dia());
 
     using dogen::config::knitting_options;
     using dogen::utility::test_data::codegen_tds;
@@ -426,7 +426,7 @@ BOOST_AUTO_TEST_CASE(eos_serialization_model_generates_expected_code) {
 
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
-    const auto t(dia_sml::input_package_without_name_dia());
+    const auto t(dia_tack::input_package_without_name_dia());
 
     using dogen::utility::test_data::codegen_tds;
     codegen_tds tds(t);
@@ -439,7 +439,7 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
 
 BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code) {
     SETUP_TEST_LOG("all_primitives_model_generates_expected_code");
-    const auto t(dia_sml::input_all_primitives_dia());
+    const auto t(dia_tack::input_all_primitives_dia());
     BOOST_CHECK(check_code_generation(t));
 }
 
@@ -459,7 +459,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
                 module_path);
         });
 
-    const auto t(dia_sml::input_split_project_dia());
+    const auto t(dia_tack::input_split_project_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
 }
 

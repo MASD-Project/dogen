@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/sml/types/qname.hpp"
-#include "dogen/sml/hash/qname_hash.hpp"
+#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/cpp/serialization/formattables/inclusion_dependencies_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
     ~inclusion_dependencies_repository() = default;
 
 public:
-    explicit inclusion_dependencies_repository(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname);
+    explicit inclusion_dependencies_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname);
 
 private:
     template<typename Archive>
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, inclusion_dependencies_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname() const;
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname();
-    void inclusion_dependencies_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >& v);
-    void inclusion_dependencies_by_qname(const std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > >&& v);
+    const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname() const;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >& inclusion_dependencies_by_qname();
+    void inclusion_dependencies_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >& v);
+    void inclusion_dependencies_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > >&& v);
 
 public:
     bool operator==(const inclusion_dependencies_repository& rhs) const;
@@ -71,7 +71,7 @@ public:
     inclusion_dependencies_repository& operator=(inclusion_dependencies_repository other);
 
 private:
-    std::unordered_map<dogen::sml::qname, std::unordered_map<std::string, std::list<std::string> > > inclusion_dependencies_by_qname_;
+    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::list<std::string> > > inclusion_dependencies_by_qname_;
 };
 
 } } }

@@ -27,8 +27,8 @@ target_link_libraries(frontend
     config
     dynamic
     dia
-    sml
-    dia_to_sml
+    tack
+    dia_to_tack
     ${Boost_LIBRARIES})
 
 set_target_properties(frontend PROPERTIES

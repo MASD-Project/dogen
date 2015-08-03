@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen/sml/types/enumeration.hpp"
+#include "dogen/tack/types/enumeration.hpp"
 #include "dogen/cpp/types/formatters/traits.hpp"
 #include "dogen/cpp/types/formatters/types/traits.hpp"
 #include "dogen/cpp/types/formatters/test_data/traits.hpp"
@@ -36,13 +36,13 @@ namespace test_data {
 namespace {
 
 class provider final : public formattables::
-        inclusion_dependencies_provider_interface<sml::enumeration> {
+        inclusion_dependencies_provider_interface<tack::enumeration> {
 public:
     std::string formatter_name() const override;
 
     boost::optional<std::list<std::string> >
         provide(const formattables::inclusion_dependencies_builder_factory& f,
-            const sml::enumeration& o) const override;
+            const tack::enumeration& o) const override;
 };
 
 std::string provider::formatter_name() const {
@@ -51,7 +51,7 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-  const sml::enumeration& o) const {
+  const tack::enumeration& o) const {
   auto builder(f.make());
 
   const auto ch_fn(traits::class_header_formatter_name());

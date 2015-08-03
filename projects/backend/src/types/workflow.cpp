@@ -21,7 +21,7 @@
 #include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/backend/types/workflow_error.hpp"
 #include "dogen/backend/types/workflow.hpp"
 
@@ -54,7 +54,7 @@ backend::backend_registrar& workflow::registrar() {
 }
 
 std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const sml::model& m) const {
+workflow::managed_directories(const tack::model& m) const {
     const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
     for(const auto b : registrar().backends()) {
@@ -66,7 +66,7 @@ workflow::managed_directories(const sml::model& m) const {
 }
 
 std::forward_list<formatters::file>
-workflow::execute(const sml::model& m) const {
+workflow::execute(const tack::model& m) const {
     std::forward_list<formatters::file> r;
     for(const auto b : registrar().backends()) {
         const auto n(b->name());

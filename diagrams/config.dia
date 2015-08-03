@@ -1085,7 +1085,7 @@ specified archive type.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#save_sml_model#</dia:string>
+            <dia:string>#save_tack_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#archive_types#</dia:string>
@@ -1094,7 +1094,7 @@ specified archive type.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If not invalid, serialise sml model to file using the
+            <dia:string>#If not invalid, serialise tack model to file using the
 specified archive type.
 #</dia:string>
           </dia:attribute>

@@ -28,9 +28,10 @@ set_target_properties(backend_spec PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(backend_spec
     config
-    sml
+    tack
     formatters
     utility
+    backend
     ${Boost_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 

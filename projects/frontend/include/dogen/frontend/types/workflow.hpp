@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
@@ -77,24 +77,24 @@ private:
 
 private:
     /**
-     * @brief Given an input descriptor, creates the associated SML
+     * @brief Given an input descriptor, creates the associated Tack
      * model.
      */
-    sml::model create_model_activity(const input_descriptor& d) const;
+    tack::model create_model_activity(const input_descriptor& d) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if
-     * the SML model should be persisted; if so, persists it.
+     * the Tack model should be persisted; if so, persists it.
      */
     void persist_model_activity(const boost::filesystem::path& p,
-        const sml::model& m) const;
+        const tack::model& m) const;
 
 public:
     /**
      * @brief Process all of the inputs into models, using the
-     * appropriate SML frontends.
+     * appropriate Tack frontends.
      */
-    std::list<sml::model>
+    std::list<tack::model>
     execute(const std::list<input_descriptor>& descriptors);
 
 private:

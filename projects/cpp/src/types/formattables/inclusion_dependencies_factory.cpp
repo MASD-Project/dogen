@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_factory.hpp"
 
@@ -89,16 +89,16 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-template<typename SmlEntity>
+template<typename TackEntity>
 std::unordered_map<std::string, std::list<std::string> >
 generate(const inclusion_dependencies_builder_factory& f,
     std::forward_list<
         boost::shared_ptr<
-            inclusion_dependencies_provider_interface<SmlEntity>
+            inclusion_dependencies_provider_interface<TackEntity>
             >
-        > providers, const SmlEntity& e) {
+        > providers, const TackEntity& e) {
 
-    const auto n(sml::string_converter::convert(e.name()));
+    const auto n(tack::string_converter::convert(e.name()));
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << n;
 
     std::unordered_map<std::string, std::list<std::string> > r;
@@ -133,35 +133,35 @@ inclusion_dependencies_factory::inclusion_dependencies_factory(
     : factory_(f), provider_container_(c) {}
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::object& o) const {
+inclusion_dependencies_factory::make(const tack::object& o) const {
     return generate(factory_, provider_container_.object_providers(), o);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::enumeration& e) const {
+inclusion_dependencies_factory::make(const tack::enumeration& e) const {
     return generate(factory_, provider_container_.enumeration_providers(), e);
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::primitive& /*p*/) const {
+inclusion_dependencies_factory::make(const tack::primitive& /*p*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::module& /*m*/) const {
+inclusion_dependencies_factory::make(const tack::module& /*m*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::concept& /*c*/) const {
+inclusion_dependencies_factory::make(const tack::concept& /*c*/) const {
     std::unordered_map<std::string, std::list<std::string> > r;
     return r;
 }
 
 std::unordered_map<std::string, std::list<std::string> >
-inclusion_dependencies_factory::make(const sml::model& m) const {
+inclusion_dependencies_factory::make(const tack::model& m) const {
     return generate(factory_, provider_container_.model_providers(), m);
 }
 

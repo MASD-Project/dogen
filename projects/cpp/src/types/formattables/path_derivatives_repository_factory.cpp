@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/sml/types/string_converter.hpp"
-#include "dogen/sml/types/all_model_items_traversal.hpp"
+#include "dogen/tack/types/string_converter.hpp"
+#include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
 #include "dogen/cpp/io/formattables/path_derivatives_repository_io.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_factory.hpp"
@@ -56,14 +56,14 @@ public:
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
      */
-    void generate(const sml::qname& qn);
+    void generate(const tack::qname& qn);
 
 public:
-    void operator()(const dogen::sml::object& o) { generate(o.name()); }
-    void operator()(const dogen::sml::enumeration& e) { generate(e.name()); }
-    void operator()(const dogen::sml::primitive& p) { generate(p.name()); }
-    void operator()(const dogen::sml::module& m) { generate(m.name()); }
-    void operator()(const dogen::sml::concept& c) { generate(c.name()); }
+    void operator()(const dogen::tack::object& o) { generate(o.name()); }
+    void operator()(const dogen::tack::enumeration& e) { generate(e.name()); }
+    void operator()(const dogen::tack::primitive& p) { generate(p.name()); }
+    void operator()(const dogen::tack::module& m) { generate(m.name()); }
+    void operator()(const dogen::tack::concept& c) { generate(c.name()); }
 
 public:
     const path_derivatives_repository & result() const { return result_; }
@@ -73,12 +73,12 @@ private:
     path_derivatives_repository result_;
 };
 
-void generator::generate(const sml::qname& qn) {
+void generator::generate(const tack::qname& qn) {
     auto& pd(result_.path_derivatives_by_qname());
     const auto pair(pd.insert(std::make_pair(qn, factory_.make(qn))));
     const bool inserted(pair.second);
     if (!inserted) {
-        const auto n(sml::string_converter::convert(qn));
+        const auto n(tack::string_converter::convert(qn));
         BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
         BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
     }
@@ -89,14 +89,14 @@ void generator::generate(const sml::qname& qn) {
 path_derivatives_repository path_derivatives_repository_factory::make(
     const config::cpp_options& opts,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
     const path_derivatives_factory f(opts, m, ps);
     generator g(f);
-    sml::all_model_items_traversal(m, g);
+    tack::all_model_items_traversal(m, g);
 
-    sml::qname qn;
+    tack::qname qn;
     qn.simple_name(registrar_name);
     qn.model_name(m.name().model_name());
     qn.external_module_path(m.name().external_module_path());
@@ -104,11 +104,11 @@ path_derivatives_repository path_derivatives_repository_factory::make(
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == sml::origin_types::system)
+        if (origin_type == tack::origin_types::system)
             continue;
 
         const auto ref(pair.first);
-        sml::qname n;
+        tack::qname n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

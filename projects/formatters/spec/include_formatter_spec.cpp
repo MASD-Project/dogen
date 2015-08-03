@@ -24,7 +24,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/formatters/types/cpp/include_formatter.hpp"
 

@@ -31,7 +31,7 @@ target_link_libraries(knit_spec
     utility
     cpp
     dia
-    sml
+    tack
     config
     frontend
     backend

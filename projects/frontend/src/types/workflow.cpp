@@ -21,9 +21,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/sml/types/persister.hpp"
-#include "dogen/sml/io/model_io.hpp"
-#include "dogen/sml/types/string_converter.hpp"
+#include "dogen/tack/types/persister.hpp"
+#include "dogen/tack/io/model_io.hpp"
+#include "dogen/tack/types/string_converter.hpp"
 #include "dogen/frontend/io/input_descriptor_io.hpp"
 #include "dogen/frontend/types/frontend_settings.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
@@ -115,7 +115,7 @@ workflow::create_frontend_settings(const boost::filesystem::path& p) const {
     return r;
 }
 
-sml::model workflow::create_model_activity(const input_descriptor& d) const {
+tack::model workflow::create_model_activity(const input_descriptor& d) const {
     const auto extension(d.path().extension().string());
     auto& frontend(registrar().frontend_for_extension(extension));
     const auto s(create_frontend_settings(d.path()));
@@ -123,25 +123,25 @@ sml::model workflow::create_model_activity(const input_descriptor& d) const {
 }
 
 void workflow::persist_model_activity(const boost::filesystem::path& p,
-    const sml::model& m) const {
+    const tack::model& m) const {
 
     const auto& to(knitting_options_.troubleshooting());
     using config::archive_types;
-    archive_types at(to.save_sml_model());
+    archive_types at(to.save_tack_model());
     if (at == archive_types::invalid)
         return; // FIXME: should we not throw?
 
     const auto& dp(create_debug_file_path(at, p));
-    sml::persister persister;
+    tack::persister persister;
     persister.persist(m, dp);
 }
 
-std::list<sml::model>
+std::list<tack::model>
 workflow::execute(const std::list<input_descriptor>& descriptors) {
     BOOST_LOG_SEV(lg, debug) << "Started executing frontend workflow. "
                              << "Descriptors: " << descriptors;
 
-    std::list<sml::model> r;
+    std::list<tack::model> r;
     for (const auto& d : descriptors) {
         auto m(create_model_activity(d));
         persist_model_activity(d.path(), m);

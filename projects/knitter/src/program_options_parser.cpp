@@ -31,7 +31,7 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
+#include "dogen/utility/test_data/dia_tack.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
@@ -57,7 +57,7 @@ const std::string version_arg("version");
 const std::string verbose_arg("verbose");
 const std::string debug_dir_arg("debug-dir");
 const std::string save_dia_model_arg("save-dia-model");
-const std::string save_sml_model_arg("save-sml-model");
+const std::string save_tack_model_arg("save-tack-model");
 
 const std::string invalid_facet_type("Invalid facet type: ");
 const std::string domain_facet_type("domain");
@@ -132,9 +132,9 @@ program_options_parser::troubleshooting_options_factory() const {
             "If set, saves a Dia model representation of each diagram in the "
             "directory given by debug-dir. "
             "Valid values: [xml | text | binary].")
-        ("save-sml-model",
+        ("save-tack-model",
             value<std::string>(),
-            "If set, saves a SML model representation of each model in the "
+            "If set, saves a TACK model representation of each model in the "
             "directory given by debug-dir. "
             "Valid values: [xml | text | binary].")
         ("stop-after-merging",
@@ -409,7 +409,7 @@ transform_troubleshooting_options(const variables_map& vm) const {
         });
 
     r.save_dia_model(lambda(save_dia_model_arg));
-    r.save_sml_model(lambda(save_sml_model_arg));
+    r.save_tack_model(lambda(save_tack_model_arg));
 
     if (vm.count(debug_dir_arg))
         r.debug_dir(vm[debug_dir_arg].as<std::string>());

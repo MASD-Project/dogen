@@ -5,7 +5,7 @@
             "qualified" : "dia.comment"
         },
         "ownership_hierarchy" : {
-            "model_name" : "dia_to_sml"
+            "model_name" : "dia_to_tack"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",
@@ -17,7 +17,7 @@
             "qualified" : "dia.identity_attribute"
         },
         "ownership_hierarchy" : {
-            "model_name" : "dia_to_sml"
+            "model_name" : "dia_to_tack"
         },
         "value_type" : "boolean",
         "definition_type" : "instance",

@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/sml/io/generation_types_io.hpp"
+#include "dogen/tack/io/generation_types_io.hpp"
 #include "dogen/cpp/io/formattables/entity_io.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
 #include "dogen/cpp/io/formattables/parent_info_io.hpp"
@@ -88,7 +88,7 @@ class_info::class_info()
       is_visitable_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)),
       is_original_parent_visitable_(static_cast<bool>(0)),
-      generation_type_(static_cast<dogen::sml::generation_types>(0)),
+      generation_type_(static_cast<dogen::tack::generation_types>(0)),
       is_final_(static_cast<bool>(0)) { }
 
 class_info::class_info(
@@ -113,7 +113,7 @@ class_info::class_info(
     const bool is_visitable,
     const bool is_immutable,
     const bool is_original_parent_visitable,
-    const dogen::sml::generation_types generation_type,
+    const dogen::tack::generation_types generation_type,
     const bool is_final)
     : dogen::cpp::formattables::entity(
       identity,
@@ -374,11 +374,11 @@ void class_info::is_original_parent_visitable(const bool v) {
     is_original_parent_visitable_ = v;
 }
 
-dogen::sml::generation_types class_info::generation_type() const {
+dogen::tack::generation_types class_info::generation_type() const {
     return generation_type_;
 }
 
-void class_info::generation_type(const dogen::sml::generation_types v) {
+void class_info::generation_type(const dogen::tack::generation_types v) {
     generation_type_ = v;
 }
 

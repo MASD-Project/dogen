@@ -32,7 +32,7 @@ target_link_libraries(knitter
     backend
     cpp
     dia
-    sml
+    tack
     config
     utility
     ${LIBXML2_LIBRARIES}

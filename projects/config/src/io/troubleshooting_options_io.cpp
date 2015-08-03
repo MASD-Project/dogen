@@ -37,7 +37,7 @@ std::ostream& operator<<(std::ostream& s, const troubleshooting_options& v) {
       << "\"__type__\": " << "\"dogen::config::troubleshooting_options\"" << ", "
       << "\"debug_dir\": " << "\"" << v.debug_dir().generic_string() << "\"" << ", "
       << "\"save_dia_model\": " << v.save_dia_model() << ", "
-      << "\"save_sml_model\": " << v.save_sml_model() << ", "
+      << "\"save_tack_model\": " << v.save_tack_model() << ", "
       << "\"stop_after_formatting\": " << v.stop_after_formatting() << ", "
       << "\"stop_after_merging\": " << v.stop_after_merging()
       << " }";

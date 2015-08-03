@@ -25,7 +25,6 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/test_data/dia_sml.hpp"
 #include "dogen/formatters/test/mock_general_settings_factory.hpp"
 #include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
 

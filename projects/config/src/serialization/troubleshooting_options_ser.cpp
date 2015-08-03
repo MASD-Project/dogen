@@ -40,7 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("debug_dir", v.debug_dir_.generic_string());
     ar << make_nvp("save_dia_model", v.save_dia_model_);
-    ar << make_nvp("save_sml_model", v.save_sml_model_);
+    ar << make_nvp("save_tack_model", v.save_tack_model_);
     ar << make_nvp("stop_after_formatting", v.stop_after_formatting_);
     ar << make_nvp("stop_after_merging", v.stop_after_merging_);
 }
@@ -53,7 +53,7 @@ void load(Archive& ar,
     ar >> make_nvp("debug_dir", debug_dir_tmp);
     v.debug_dir_ = debug_dir_tmp;
     ar >> make_nvp("save_dia_model", v.save_dia_model_);
-    ar >> make_nvp("save_sml_model", v.save_sml_model_);
+    ar >> make_nvp("save_tack_model", v.save_tack_model_);
     ar >> make_nvp("stop_after_formatting", v.stop_after_formatting_);
     ar >> make_nvp("stop_after_merging", v.stop_after_merging_);
 }

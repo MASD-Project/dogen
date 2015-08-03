@@ -30,7 +30,7 @@
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/field_definition.hpp"
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/global_enablement_properties.hpp"
 #include "dogen/cpp/types/formattables/enablement_repository.hpp"
@@ -77,7 +77,7 @@ public:
         const dynamic::repository& rp,
         const dynamic::object& root_object,
         const formatters::container& fc,
-        const sml::model& m) const;
+        const tack::model& m) const;
 };
 
 } } }

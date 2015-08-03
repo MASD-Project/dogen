@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/sml/io/qname_io.hpp"
+#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/cpp/io/settings/bundle_io.hpp"
 #include "dogen/cpp/io/settings/bundle_repository_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::sml::qname, dogen::cpp::settings::bundle>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

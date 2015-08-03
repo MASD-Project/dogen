@@ -30,7 +30,7 @@
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/sml/types/model.hpp"
+#include "dogen/tack/types/model.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 
@@ -56,8 +56,8 @@ namespace knit {
  *
  * Collectively, all implicit and explicit models are referred to as
  * the @e input models. The input models read the front-end are
- * converted into the middle end representation - SML. They are then
- * merged it into a single, unified SML model, called the @e merged
+ * converted into the middle end representation - Tack. They are then
+ * merged it into a single, unified Tack model, called the @e merged
  * model; all dependencies are resolved and validated.
  *
  * The workflow then instantiates all backends requested by the
