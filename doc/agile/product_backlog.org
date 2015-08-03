@@ -10,6 +10,43 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for model names with dots                             :story:
+
+It is quite annoying to have to create folders and sub-folders for the
+main projects. This is not too bad right now because we don't really
+make use of nesting that much, other than with test models. However,
+now that the architecture is clear and we need to make use of nesting,
+it becomes more of a concern. For example:
+
+: / tack
+:   / core
+:   / dia
+: / quilt
+:   / cpp
+:   / csharp
+
+This is clearer as:
+
+: / tack.core
+: / tack.dia
+: / quilt.cpp
+: / quilt.csharp
+
+However, in order to implement this we need a bit of cleverness:
+
+- for the purposes of files, the dot represents a dot;
+- for the purposes of namespaces, we must create several namespaces
+  (e.g. tack::core).
+
+This is also inline with the idea that the model name does not always
+contribute to the namespaces as required by primitives. We basically
+need a cleverer version of qname to handle all of these scenarios.
+
+It may also be worth taking into account the other story on this topic
+where we considered using underscores instead of folders for facet
+names. It may be nicer to have dots for this,
+e.g. =types.my_class.hpp=.
+
 *** Consider creating a "locator" like class for path management      :story:
 
 At present we are using path settings to compute paths in several
