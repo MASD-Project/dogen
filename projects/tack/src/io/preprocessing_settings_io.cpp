@@ -18,18 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_WORKFLOW_FWD_HPP
-#define DOGEN_TACK_TYPES_WORKFLOW_FWD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/tack/io/preprocessing_settings_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace tack {
 
-class workflow;
+std::ostream& operator<<(std::ostream& s, const preprocessing_settings& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::tack::preprocessing_settings\"" << ", "
+      << "\"directory\": " << "\"" << v.directory().generic_string() << "\"" << ", "
+      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\""
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

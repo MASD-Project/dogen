@@ -40,6 +40,8 @@
 #include "dogen/tack/test_data/object_types_td.hpp"
 #include "dogen/tack/test_data/origin_types_td.hpp"
 #include "dogen/tack/test_data/generation_types_td.hpp"
+#include "dogen/tack/test_data/input_descriptor_td.hpp"
 #include "dogen/tack/test_data/relationship_types_td.hpp"
+#include "dogen/tack/test_data/preprocessing_settings_td.hpp"
 
 #endif

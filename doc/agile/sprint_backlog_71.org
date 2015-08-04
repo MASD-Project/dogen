@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 14:40]
+#+CAPTION: Clock summary at [2015-08-04 Tue 16:33]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *14:18* |       |      |
+| *Total time*                                                                | *16:10* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 14:18   |       |      |
-| Active                                                                      |         | 14:18 |      |
+| Stories                                                                     | 16:10   |       |      |
+| Active                                                                      |         | 16:10 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:13 |
-| STARTED Merge frontend with =tack=                                          |         |       | 0:49 |
+| STARTED Merge frontend with =tack=                                          |         |       | 2:41 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -177,10 +177,14 @@ Links:
 - [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** STARTED Merge frontend with =tack=                                :story:
+    CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
     CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
 
 Combine the two models performing the necessary renames:
 
+- use pointer map in registrar rather than shared pointers.
+- rename dia to tack to tack_dia. create tack_json. this is in
+  preparation for =tack.dia=, etc.
 - merge frontend with tack. Rename frontend interface to something
   like model source or just source. Remove the dia frontend class,
   moving the code into the dia transformer.
@@ -215,6 +219,10 @@ We need to create a meta-model with the following characteristics:
 - we could probably merge backends with yarn and call these
   "sinks". This way we could have "sources" in tack and "sinks" in
   yarn.
+- we do not need a qname. We need a name that is made up of just a
+  string (the actual name of the object) plus a reference to the
+  containing module. The containing module has a structure of paths
+  similar to =qname=.
 
 *** Split model name from "contributing model name" in qname          :story:
 

@@ -18,30 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_IO_ALL_IO_HPP
-#define DOGEN_TACK_IO_ALL_IO_HPP
+#ifndef DOGEN_TACK_HASH_INPUT_DESCRIPTOR_HASH_HPP
+#define DOGEN_TACK_HASH_INPUT_DESCRIPTOR_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/tack/io/node_io.hpp"
-#include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
-#include "dogen/tack/io/module_io.hpp"
-#include "dogen/tack/io/object_io.hpp"
-#include "dogen/tack/io/concept_io.hpp"
-#include "dogen/tack/io/property_io.hpp"
-#include "dogen/tack/io/primitive_io.hpp"
-#include "dogen/tack/io/enumerator_io.hpp"
-#include "dogen/tack/io/enumeration_io.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
-#include "dogen/tack/io/object_types_io.hpp"
-#include "dogen/tack/io/origin_types_io.hpp"
-#include "dogen/tack/io/generation_types_io.hpp"
-#include "dogen/tack/io/input_descriptor_io.hpp"
-#include "dogen/tack/io/relationship_types_io.hpp"
-#include "dogen/tack/io/preprocessing_settings_io.hpp"
+#include <functional>
+#include "dogen/tack/types/input_descriptor.hpp"
 
+namespace dogen {
+namespace tack {
+
+struct input_descriptor_hasher {
+public:
+    static std::size_t hash(const input_descriptor& v);
+};
+
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::tack::input_descriptor> {
+public:
+    size_t operator()(const dogen::tack::input_descriptor& v) const {
+        return dogen::tack::input_descriptor_hasher::hash(v);
+    }
+};
+
+}
 #endif

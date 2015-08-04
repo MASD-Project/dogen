@@ -28,27 +28,27 @@
 #include "dogen/tack/types/property_indexer.hpp"
 #include "dogen/tack/types/association_indexer.hpp"
 #include "dogen/tack/types/generalization_indexer.hpp"
-#include "dogen/tack/types/workflow.hpp"
+#include "dogen/tack/types/assembler.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("tack.workflow"));
+auto lg(logger_factory("tack.assembler"));
 
 }
 
 namespace dogen {
 namespace tack {
 
-bool workflow::is_generatable(const type& t) const {
+bool assembler::is_generatable(const type& t) const {
     const auto gt(t.generation_type());
     return
         gt == tack::generation_types::full_generation ||
         gt == tack::generation_types::partial_generation;
 }
 
-bool workflow::has_generatable_types(const tack::model& m) const {
+bool assembler::has_generatable_types(const tack::model& m) const {
     for (const auto pair : m.objects()) {
         if (is_generatable(pair.second))
             return true;
@@ -69,7 +69,7 @@ bool workflow::has_generatable_types(const tack::model& m) const {
     return false;
 }
 
-model workflow::
+model assembler::
 create_merged_model_activity(const std::list<model>& models) const {
     merger mg;
     for (const auto& m : models)
@@ -78,42 +78,42 @@ create_merged_model_activity(const std::list<model>& models) const {
     return mg.merge();
 }
 
-void workflow::index_generalizations_activity(model& merged_model) const {
+void assembler::index_generalizations_activity(model& merged_model) const {
     generalization_indexer idx;
     idx.index(merged_model);
 }
 
-void workflow::inject_system_types_activity(tack::model& m) const {
+void assembler::inject_system_types_activity(tack::model& m) const {
     tack::injector i;
     i.inject(m);
 }
 
-void workflow::resolve_types_activity(model& merged_model) const {
+void assembler::resolve_types_activity(model& merged_model) const {
     resolver res(merged_model);
     res.resolve();
 }
 
-void workflow::index_concepts_activity(model& merged_model) const {
+void assembler::index_concepts_activity(model& merged_model) const {
     concept_indexer idx;
     idx.index(merged_model);
 }
 
-void workflow::index_properties_activity(model& merged_model) const {
+void assembler::index_properties_activity(model& merged_model) const {
     property_indexer idx;
     idx.index(merged_model);
 }
 
-void workflow::index_associations_activity(model& merged_model) const {
+void assembler::index_associations_activity(model& merged_model) const {
     association_indexer idx;
     idx.index(merged_model);
 }
 
-void workflow::update_model_generability_activity(model& merged_model) const {
+void assembler::update_model_generability_activity(model& merged_model) const {
     merged_model.has_generatable_types(has_generatable_types(merged_model));
 }
 
-model workflow::execute(std::list<model> models) const {
-    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+model assembler::execute(std::list<model> models) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting tack assembly.";
 
     auto r(create_merged_model_activity(models));
     index_generalizations_activity(r);
@@ -124,7 +124,7 @@ model workflow::execute(std::list<model> models) const {
     index_associations_activity(r);
     update_model_generability_activity(r);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished workflow.";
+    BOOST_LOG_SEV(lg, debug) << "Finished assembling tack models.";
 
     return r;
 }

@@ -26,7 +26,7 @@
 #include "dogen/frontend/types/workflow.hpp"
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/persister.hpp"
-#include "dogen/tack/types/workflow.hpp"
+#include "dogen/tack/types/assembler.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
@@ -147,8 +147,8 @@ obtain_target_path_activity(
 
 tack::model frontend_to_middle_end_workflow::
 merge_models_activity(const std::list<tack::model>& models) const {
-    tack::workflow w;
-    const auto r(w.execute(models));
+    tack::assembler a;
+    const auto r(a.execute(models));
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << r;
     BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_WORKFLOW_HPP
-#define DOGEN_TACK_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_TACK_TYPES_ASSEMBLER_HPP
+#define DOGEN_TACK_TYPES_ASSEMBLER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@ namespace dogen {
 namespace tack {
 
 /**
- * @brief Responsible for executing a complete Tack workflow.
+ * @brief Responsible for executing a complete Tack assembler.
  */
-class workflow {
+class assembler {
 public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    ~workflow() = default;
-    workflow(workflow&&) = default;
-    workflow& operator=(const workflow&) = default;
+    assembler() = default;
+    assembler(const assembler&) = default;
+    ~assembler() = default;
+    assembler(assembler&&) = default;
+    assembler& operator=(const assembler&) = default;
 
 private:
     /**
@@ -101,7 +101,7 @@ private:
 
 public:
     /**
-     * @brief Executes the workflow.
+     * @brief Executes the assembler.
      *
      * @note parameter copied by design.
      */
