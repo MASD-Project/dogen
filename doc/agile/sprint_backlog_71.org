@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 23:04]
+#+CAPTION: Clock summary at [2015-08-04 Tue 23:10]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *19:39* |       |      |
+| *Total time*                                                                | *19:44* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 19:39   |       |      |
-| Active                                                                      |         | 19:39 |      |
+| Stories                                                                     | 19:44   |       |      |
+| Active                                                                      |         | 19:44 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
-| STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:18 |
+| STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:23 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | COMPLETED Merge frontend with =tack=                                        |         |       | 4:38 |
 | COMPLETED Rename dia to tack to tack dia                                    |         |       | 0:27 |
@@ -60,6 +60,7 @@ dependency. Create a blog post about it.
 Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
 
 *** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
+    CLOCK: [2015-08-04 Tue 23:05]--[2015-08-04 Tue 23:10] =>  0:05
     CLOCK: [2015-08-04 Tue 22:59]--[2015-08-04 Tue 23:04] =>  0:05
     CLOCK: [2015-08-04 Tue 14:26]--[2015-08-04 Tue 14:39] =>  0:13
     CLOCK: [2015-08-01 Mon 09:00]--[2015-08-01 Mon 17:00] =>  8:00

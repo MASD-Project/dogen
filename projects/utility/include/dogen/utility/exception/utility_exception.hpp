@@ -49,16 +49,16 @@ class exception : public virtual std::exception,
                   public virtual boost::exception {
 public:
     // to use BOOST_THROW_EXCEPTION we need to provide a default constructor.
-    exception() = default;
+    exception() { }
 
     /**
      * @param message Error message. Must be a string literal.
      */
-    exception(std::string message) : message_(message) { }
+    exception(const std::string& message) : message_(message) { }
     virtual ~exception() throw() { }
 
 public:
-    const char* what() const throw() { return(message_.c_str()); }
+    const char* what() const throw() { return message_.c_str(); }
 
 private:
     const std::string message_;

@@ -49,7 +49,7 @@ public:
     /**
      * @param message Error message. Must be a string literal.
      */
-    invalid_enum_value(std::string message)
+    explicit invalid_enum_value(const std::string& message)
         : dogen::utility::exception::exception(message) { }
     invalid_enum_value() { }
 
