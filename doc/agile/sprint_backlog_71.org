@@ -131,6 +131,33 @@ to ensure we do not have any missing dependencies. This is the job of the
 
 All of these steps are encompassed in the SML @ref workflow.
 
+*** COMPLETED Merge frontend with =tack=                              :story:
+    CLOSED: [2015-08-04 Tue 21:29]
+    CLOCK: [2015-08-04 Tue 20:57]--[2015-08-04 Tue 21:28] =>  0:31
+    CLOCK: [2015-08-04 Tue 17:54]--[2015-08-04 Tue 18:04] =>  0:10
+    CLOCK: [2015-08-04 Tue 17:28]--[2015-08-04 Tue 17:53] =>  0:25
+    CLOCK: [2015-08-04 Tue 16:34]--[2015-08-04 Tue 17:25] =>  0:51
+    CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
+    CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
+
+Combine the two models performing the necessary renames. Notes:
+
+- merge frontend with tack. Rename frontend interface to something
+  like model source or just source. Remove the dia frontend class,
+  moving the code into the dia transformer.
+- consider creating a top-level workflow that unites the frontend
+  workflow with the "merging" workflow.
+- Find good names for all workflows. A good name for the current SML
+  workflow is =assembler= because it assembles a complete model from
+  all the parts.
+- consider creating a "file opener" that takes an input descriptor and
+  returns a stream. This way the source interface can just be an
+  ostream. This probably makes no sense for certain sources like dia
+  though.
+- rename dia to tack to tack_dia. create tack_json. this is in
+  preparation for =tack.dia=, etc.
+- use pointer map in registrar rather than shared pointers.
+
 *** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
     CLOCK: [2015-08-04 Tue 14:26]--[2015-08-04 Tue 14:39] =>  0:13
     CLOCK: [2015-08-01 Mon 09:00]--[2015-08-01 Mon 17:00] =>  8:00
@@ -176,31 +203,6 @@ Links:
 - [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
 - [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
-*** STARTED Merge frontend with =tack=                                :story:
-    CLOCK: [2015-08-04 Tue 17:54]--[2015-08-04 Tue 18:04] =>  0:10
-    CLOCK: [2015-08-04 Tue 17:28]--[2015-08-04 Tue 17:53] =>  0:25
-    CLOCK: [2015-08-04 Tue 16:34]--[2015-08-04 Tue 17:25] =>  0:51
-    CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
-    CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
-
-Combine the two models performing the necessary renames. Notes:
-
-- merge frontend with tack. Rename frontend interface to something
-  like model source or just source. Remove the dia frontend class,
-  moving the code into the dia transformer.
-- consider creating a top-level workflow that unites the frontend
-  workflow with the "merging" workflow.
-- Find good names for all workflows. A good name for the current SML
-  workflow is =assembler= because it assembles a complete model from
-  all the parts.
-- consider creating a "file opener" that takes an input descriptor and
-  returns a stream. This way the source interface can just be an
-  ostream. This probably makes no sense for certain sources like dia
-  though.
-- rename dia to tack to tack_dia. create tack_json. this is in
-  preparation for =tack.dia=, etc.
-- use pointer map in registrar rather than shared pointers.
-
 *** Remove saving preprocessing input support                         :story:
 
 We seem to have the ability of saving dia diagrams etc when importing
@@ -219,6 +221,8 @@ names in this light.
 
 We need to create a meta-model with the following characteristics:
 
+- rename frontend to middle end workflow to yarn generation workflow
+  or some such name.
 - have a look at eCore/MOF type names for inspiration.
 - single top-level type for all types with a container. Use boost
   pointer container. add a visitor for the type.

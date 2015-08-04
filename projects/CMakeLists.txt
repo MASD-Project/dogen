@@ -138,7 +138,6 @@ include_directories(
     # real code
     ${CMAKE_SOURCE_DIR}/projects/dia/include
     ${CMAKE_SOURCE_DIR}/projects/dia_to_tack/include
-    ${CMAKE_SOURCE_DIR}/projects/frontend/include
     ${CMAKE_SOURCE_DIR}/projects/backend/include
     ${CMAKE_SOURCE_DIR}/projects/tack/include
     ${CMAKE_SOURCE_DIR}/projects/tack_json/include
@@ -160,8 +159,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_tack/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia_to_tack/spec)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/src)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/frontend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tack/src)

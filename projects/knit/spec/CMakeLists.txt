@@ -35,7 +35,6 @@ target_link_libraries(knit_spec
     tack_json
     dia_to_tack
     config
-    frontend
     backend
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

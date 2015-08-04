@@ -32,7 +32,7 @@
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
-#include "dogen/frontend/types/input_descriptor.hpp"
+#include "dogen/tack/types/input_descriptor.hpp"
 #include "dogen/tack/types/model.hpp"
 
 namespace dogen {
@@ -67,26 +67,26 @@ private:
     /**
      * @brief Create a list of all input descriptors.
      */
-    std::list<frontend::input_descriptor>
+    std::list<tack::input_descriptor>
     obtain_input_descriptors_activity() const;
 
     /**
      * @brief Obtains all partial Tack models.
      */
-    std::list<tack::model> obtain_partial_tack_models_activity(
-        const std::list<frontend::input_descriptor>& descriptors) const;
+    std::list<tack::model> import_tack_models_activity(
+        const std::list<tack::input_descriptor>& descriptors) const;
+
+    /**
+     * @brief Execute the tack assembling workflow.
+     */
+    tack::model assemble_tack_models_activity(
+        const std::list<tack::model>& models) const;
 
     /**
      * @brief Returns the path to the target model.
      */
     boost::filesystem::path obtain_target_path_activity(
-        const std::list<frontend::input_descriptor>& descriptors) const;
-
-    /**
-     * @brief Execute the tack assembling workflow.
-     */
-    tack::model assemble_models_activity(
-        const std::list<tack::model>& models) const;
+        const std::list<tack::input_descriptor>& descriptors) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if

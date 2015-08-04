@@ -23,7 +23,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
-#include "dogen/frontend/types/workflow.hpp"
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/persister.hpp"
 #include "dogen/tack/types/assembler.hpp"
@@ -82,9 +81,9 @@ create_debug_file_path(const config::archive_types at,
     return r;
 }
 
-std::list<frontend::input_descriptor>
+std::list<tack::input_descriptor>
 frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
-    std::list<frontend::input_descriptor> r;
+    std::list<tack::input_descriptor> r;
     using namespace dogen::utility::filesystem;
     const auto dir(data_files_directory() / library_dir);
 
@@ -94,7 +93,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 
     for (const auto& f : files) {
         BOOST_LOG_SEV(lg, debug) << "Library model: " << f.filename();
-        frontend::input_descriptor id;
+        tack::input_descriptor id;
         id.path(f);
         id.is_target(false);
         r.push_back(id);
@@ -108,7 +107,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     for (const auto ref : input_options.references()) {
         BOOST_LOG_SEV(lg, debug) << "Reference model: "
                                  << ref.path().filename();
-        frontend::input_descriptor id;
+        tack::input_descriptor id;
         id.path(ref.path());
         id.external_module_path(ref.external_module_path());
         id.is_target(false);
@@ -118,7 +117,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
                              << input_options.target().filename();
-    frontend::input_descriptor target;
+    tack::input_descriptor target;
     target.path(input_options.target());
     target.is_target(true);
     target.external_module_path(input_options.external_module_path());
@@ -127,29 +126,16 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 }
 
 std::list<tack::model> frontend_to_middle_end_workflow::
-obtain_partial_tack_models_activity(
-    const std::list<frontend::input_descriptor>& descriptors) const {
-    /*
-    frontend::workflow w(knitting_options_, repository_);
-    return w.execute(descriptors);
-    */
-    std::list<tack::input_descriptor> tack_descriptors;
-    for (const auto& d : descriptors) {
-        tack::input_descriptor tack_descriptor;
-        tack_descriptor.path(d.path());
-        tack_descriptor.external_module_path(d.external_module_path());
-        tack_descriptor.is_target(d.is_target());
-        tack_descriptors.push_back(tack_descriptor);
-    }
-
+import_tack_models_activity(
+    const std::list<tack::input_descriptor>& descriptors) const {
     tack::importer imp(knitting_options_, repository_);
-    return imp.import(tack_descriptors);
+    return imp.import(descriptors);
 }
 
 boost::filesystem::path frontend_to_middle_end_workflow::
 obtain_target_path_activity(
-    const std::list<frontend::input_descriptor>& descriptors) const {
-    frontend::input_descriptor target_descriptor;
+    const std::list<tack::input_descriptor>& descriptors) const {
+    tack::input_descriptor target_descriptor;
     for (const auto& d : descriptors) {
         if (!d.is_target())
             continue;
@@ -160,7 +146,7 @@ obtain_target_path_activity(
 }
 
 tack::model frontend_to_middle_end_workflow::
-assemble_models_activity(const std::list<tack::model>& models) const {
+assemble_tack_models_activity(const std::list<tack::model>& models) const {
     tack::assembler a;
     const auto r(a.assemble(models));
 
@@ -191,8 +177,8 @@ tack::model frontend_to_middle_end_workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
 
     const auto d(obtain_input_descriptors_activity());
-    const auto pm(obtain_partial_tack_models_activity(d));
-    const auto r(assemble_models_activity(pm));
+    const auto pm(import_tack_models_activity(d));
+    const auto r(assemble_tack_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
     persist_model_activity(tp, r);
 

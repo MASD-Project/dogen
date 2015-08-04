@@ -205,29 +205,6 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target frontend)
-add_custom_target(knit_${target}
-    COMMENT "Knitting Frontend model" VERBATIM
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/dia_to_tack.dia,dogen
-    --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
-    --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
-    --cpp-disable-cmakelists
-    --ignore-files-matching-regex .*/CMakeLists.txt
-    --ignore-files-matching-regex .*/spec/.*
-    --ignore-files-matching-regex .*/test/.*
-    --verbose
-    --delete-extra-files
-    --external-module-path dogen)
-if(use_latest_knitter)
-    add_dependencies(knit_${target} knitter)
-endif()
-add_dependencies(knit_all knit_${target})
-
 set(target backend)
 add_custom_target(knit_${target}
     COMMENT "Knitting Backend model" VERBATIM

@@ -28,7 +28,6 @@ target_link_libraries(knit
     dia
     dia_to_tack
     tack_json
-    frontend
     backend
     formatters
     cpp
