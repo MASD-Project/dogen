@@ -10,6 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Use pointer container in registrars                               :story:
+
+At present we are using shared pointers on all registrars. This makes
+no sense as the pointer ownership is clear (the registrar owns the
+pointer). We should use a boost pointer container and pass references
+around, via reference wrapper where required.
+
 *** Add support for model names with dots                             :story:
 
 It is quite annoying to have to create folders and sub-folders for the
