@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
 #include <ostream>
 #include <stdexcept>
 #include "dogen/dynamic/io/value_types_io.hpp"
