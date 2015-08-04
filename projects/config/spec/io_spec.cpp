@@ -41,13 +41,11 @@ BOOST_AUTO_TEST_SUITE(io)
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
-    test_io<archive_types_generator>();
     test_io<cpp_options_generator>();
     test_io<input_options_generator>();
     test_io<output_options_generator>();
     test_io<reference_generator>();
     test_io<knitting_options_generator>();
-    test_io<troubleshooting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

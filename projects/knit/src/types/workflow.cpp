@@ -59,10 +59,7 @@ workflow(const config::knitting_options& o) : knitting_options_(o) {
 }
 
 bool workflow::housekeeping_required() const {
-    return
-        !knitting_options_.troubleshooting().stop_after_merging() &&
-        !knitting_options_.troubleshooting().stop_after_formatting() &&
-        knitting_options_.output().delete_extra_files();
+    return knitting_options_.output().delete_extra_files();
 }
 
 std::forward_list<dynamic::ownership_hierarchy> workflow::
@@ -94,17 +91,13 @@ void workflow::execute() const {
         frontend_to_middle_end_workflow fmw(knitting_options_, rp);
         const auto m(fmw.execute());
 
-        if (knitting_options_.troubleshooting().stop_after_merging()) {
-            BOOST_LOG_SEV(lg, info) << "Stopping after merging.";
-            return;
-        }
-
         if (!m.has_generatable_types()) {
             BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
             return;
         }
 
-        middle_end_to_backend_workflow mbw(knitting_options_, rp);
+        const auto& ko(knitting_options_);
+        middle_end_to_backend_workflow mbw(ko, rp, housekeeping_required());
         mbw.execute(m);
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));

@@ -38,23 +38,14 @@ namespace knit {
 
 middle_end_to_backend_workflow::
 middle_end_to_backend_workflow(const config::knitting_options& o,
-    const dynamic::repository& rp)
-    : knitting_options_(o), repository_(rp) { }
-
-bool middle_end_to_backend_workflow::housekeeping_required() const {
-    return
-        !knitting_options_.troubleshooting().stop_after_merging() &&
-        !knitting_options_.troubleshooting().stop_after_formatting() &&
-        knitting_options_.output().delete_extra_files();
-}
+    const dynamic::repository& rp, const bool perform_housekeeping)
+    : knitting_options_(o), repository_(rp),
+      perform_housekeeping_(perform_housekeeping) { }
 
 void middle_end_to_backend_workflow::
 perform_housekeeping_activity(
     const std::forward_list<formatters::file>& files,
     const std::forward_list<boost::filesystem::path>& dirs) const {
-
-    if (!housekeeping_required())
-        return;
 
     std::set<boost::filesystem::path> expected_files;
     for (const auto file : files)
@@ -88,10 +79,6 @@ void middle_end_to_backend_workflow::write_files_activity(
         std::shared_ptr<dogen::formatters::file_writer_interface>
         >& writers,
     const std::forward_list<formatters::file>& files) const {
-    if (knitting_options_.troubleshooting().stop_after_formatting()) {
-        BOOST_LOG_SEV(lg, warn) << "Stopping after formatting, so no output.";
-        return;
-    }
 
     if (files.empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
@@ -108,7 +95,9 @@ void middle_end_to_backend_workflow::execute(const tack::model& m) const {
     const auto files(w.execute(m));
     const auto md(w.managed_directories(m));
     write_files_activity(writers, files);
-    perform_housekeeping_activity(files, md);
+
+    if (perform_housekeeping_)
+        perform_housekeeping_activity(files, md);
 }
 
 } }

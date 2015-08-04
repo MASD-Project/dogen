@@ -29,12 +29,10 @@ knitting_options::knitting_options()
 knitting_options::knitting_options(
     const bool verbose,
     const dogen::config::input_options& input,
-    const dogen::config::troubleshooting_options& troubleshooting,
     const dogen::config::output_options& output,
     const dogen::config::cpp_options& cpp)
     : verbose_(verbose),
       input_(input),
-      troubleshooting_(troubleshooting),
       output_(output),
       cpp_(cpp) { }
 
@@ -42,7 +40,6 @@ void knitting_options::swap(knitting_options& other) noexcept {
     using std::swap;
     swap(verbose_, other.verbose_);
     swap(input_, other.input_);
-    swap(troubleshooting_, other.troubleshooting_);
     swap(output_, other.output_);
     swap(cpp_, other.cpp_);
 }
@@ -50,7 +47,6 @@ void knitting_options::swap(knitting_options& other) noexcept {
 bool knitting_options::operator==(const knitting_options& rhs) const {
     return verbose_ == rhs.verbose_ &&
         input_ == rhs.input_ &&
-        troubleshooting_ == rhs.troubleshooting_ &&
         output_ == rhs.output_ &&
         cpp_ == rhs.cpp_;
 }
@@ -83,22 +79,6 @@ void knitting_options::input(const dogen::config::input_options& v) {
 
 void knitting_options::input(const dogen::config::input_options&& v) {
     input_ = std::move(v);
-}
-
-const dogen::config::troubleshooting_options& knitting_options::troubleshooting() const {
-    return troubleshooting_;
-}
-
-dogen::config::troubleshooting_options& knitting_options::troubleshooting() {
-    return troubleshooting_;
-}
-
-void knitting_options::troubleshooting(const dogen::config::troubleshooting_options& v) {
-    troubleshooting_ = v;
-}
-
-void knitting_options::troubleshooting(const dogen::config::troubleshooting_options&& v) {
-    troubleshooting_ = std::move(v);
 }
 
 const dogen::config::output_options& knitting_options::output() const {

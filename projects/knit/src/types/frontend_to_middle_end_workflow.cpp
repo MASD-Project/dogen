@@ -56,31 +56,6 @@ frontend_to_middle_end_workflow(const config::knitting_options& o,
     const dynamic::repository& rp)
     : knitting_options_(o), repository_(rp) {}
 
-std::string frontend_to_middle_end_workflow::
-extension(config::archive_types at) const {
-    using config::archive_types;
-    switch (at) {
-    case archive_types::xml: return xml_extension;
-    case archive_types::text: return text_extension;
-    case archive_types::binary: return binary_extension;
-    default:
-        using dogen::utility::exception::invalid_enum_value;
-        BOOST_LOG_SEV(lg, error) << invalid_archive_type;
-        BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
-    }
-}
-
-boost::filesystem::path frontend_to_middle_end_workflow::
-create_debug_file_path(const config::archive_types at,
-    const boost::filesystem::path& original_path) const {
-
-    const auto& ts(knitting_options_.troubleshooting());
-    boost::filesystem::path r(ts.debug_dir());
-    r /= original_path.stem().string() + target_postfix;
-    r.replace_extension(extension(at));
-    return r;
-}
-
 std::list<tack::input_descriptor>
 frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     std::list<tack::input_descriptor> r;
@@ -128,7 +103,7 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 std::list<tack::model> frontend_to_middle_end_workflow::
 import_tack_models_activity(
     const std::list<tack::input_descriptor>& descriptors) const {
-    tack::importer imp(knitting_options_, repository_);
+    tack::importer imp(repository_);
     return imp.import(descriptors);
 }
 
@@ -160,19 +135,6 @@ assemble_tack_models_activity(const std::list<tack::model>& models) const {
     return r;
 }
 
-void frontend_to_middle_end_workflow::persist_model_activity(
-    const boost::filesystem::path p, const tack::model& m) const {
-    const auto& ts(knitting_options_.troubleshooting());
-    using config::archive_types;
-    archive_types at(ts.save_tack_model());
-    if (at == archive_types::invalid)
-        return; // FIXME: should we not throw?
-
-    const auto& dp(create_debug_file_path(at, p));
-    tack::persister persister;
-    persister.persist(m, dp);
-}
-
 tack::model frontend_to_middle_end_workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Workflow started.";
 
@@ -180,7 +142,6 @@ tack::model frontend_to_middle_end_workflow::execute() const {
     const auto pm(import_tack_models_activity(d));
     const auto r(assemble_tack_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
-    persist_model_activity(tp, r);
 
     BOOST_LOG_SEV(lg, info) << "Workflow finished.";
     return r;

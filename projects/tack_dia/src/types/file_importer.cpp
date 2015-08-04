@@ -50,22 +50,14 @@ std::list<std::string> file_importer::supported_extensions() const {
 }
 
 tack::model file_importer::import(const dynamic::workflow& w,
-    const tack::input_descriptor& d,
-    const boost::optional<tack::preprocessing_settings>& /*s*/) {
+    const tack::input_descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Importing Dia diagram. ";
 
     dia::hydrator h(d.path());
     dia::diagram diagram(h.hydrate());
 
-    /*
-      if (s.save_pre_processed_input()) {
-      dia::persister p;
-      p.persist(diagram, s.pre_processed_input_path());
-      }
-    */
-
-    const std::string name(d.path().stem().string());
     dogen::tack_dia::workflow wf(w);
+    const std::string name(d.path().stem().string());
     return wf.execute(diagram, name, d.external_module_path(), d.is_target());
 }
 

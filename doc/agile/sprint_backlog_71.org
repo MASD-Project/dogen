@@ -14,19 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 21:57]
+#+CAPTION: Clock summary at [2015-08-04 Tue 22:51]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *18:34* |       |      |
+| *Total time*                                                                | *19:26* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 18:34   |       |      |
-| Active                                                                      |         | 18:34 |      |
+| Stories                                                                     | 19:26   |       |      |
+| Active                                                                      |         | 19:26 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:13 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | COMPLETED Merge frontend with =tack=                                        |         |       | 4:38 |
 | COMPLETED Rename dia to tack to tack dia                                    |         |       | 0:27 |
+| COMPLETED Remove troubleshooting options                                    |         |       | 0:52 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -210,11 +211,29 @@ Combine the two models performing the necessary renames. Notes:
 - rename dia to tack to tack_dia. this is in preparation for
   =tack.dia=, etc.
 
-*** Remove saving preprocessing input support                         :story:
+*** COMPLETED Remove troubleshooting options                          :story:
+    CLOSED: [2015-08-04 Tue 22:50]
+    CLOCK: [2015-08-04 Tue 21:58]--[2015-08-04 Tue 22:50] =>  0:52
+
+*New Understanding*
+
+We don't really use the troubleshooting options so remove it and all
+associated infrastructure.
+
+*Previous Understanding*
 
 We seem to have the ability of saving dia diagrams etc when importing
 a tack model but this is not used any where. It was borked with the
 latest refactor. Remove this functionality.
+
+*** Rename =dia_tack= test data to =tack_dia=                         :story:
+
+This was not picked up in previous rename.
+
+*** Dia hydrator should hydrate with path                             :story:
+
+At present the hydrator is constructed with the file path. This is not
+ideal.
 
 *** Create the =yarn= model                                           :story:
 
@@ -237,6 +256,14 @@ We need to create a meta-model with the following characteristics:
   containing module. The containing module has a structure of paths
   similar to =qname=.
 
+*** Rename types in =tack= using MOF/eCore terms                      :story:
+
+Rename the types in =tack= to make them a bit more inline with
+MOF/eCore. As much as possible but without going overboard. Ensure we
+do not pick up meta-meta-model concepts by mistake. Rename nested
+qname to something more sensible from MOF/eCore. Review all concept
+names in this light.
+
 *** Split model name from "contributing model name" in qname          :story:
 
 We need to find a way to model qnames such that there are two model
@@ -251,18 +278,13 @@ model name such as:
 
 - // FIXME: mega hack to handle primitive model.
 
+See comment in 'dot' story - we can have a model name and a model
+package.
+
 *** Update copyright notices                                          :story:
 
 We need to update all notices to reflect personal ownership until DDC
 was formed, and then ownership by DDC.
-
-*** Rename types in =tack= using MOF/eCore terms                      :story:
-
-Rename the types in =tack= to make them a bit more inline with
-MOF/eCore. As much as possible but without going overboard. Ensure we
-do not pick up meta-meta-model concepts by mistake. Rename nested
-qname to something more sensible from MOF/eCore. Review all concept
-names in this light.
 
 *** Create a set of definitions for tagging and meta-data             :story:
 
@@ -433,10 +455,12 @@ What is worse is that we seem to be doing a ridiculous amount of qname
 lookups. It would be much nicer if we could somehow have all the data
 in the right shape to avoid doing so many lookups.
 
+This should be done as part of the move to =yarn=.
+
 *** Handling of managed directories is incorrect                      :story:
 
-At present we are querying the dia to sml transformer to figure out
-what the managed directories are. These are basically the top-level
+At present we are querying the tack dia importer to figure out what
+the managed directories are. These are basically the top-level
 directories from where we want the housekeeper to operate. In reality
 this is (or can be placed) in the meta-data. We should be able to
 extract the managed directories from the meta-data as a step in one of

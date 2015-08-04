@@ -64,7 +64,6 @@
 #include "dogen/tack/types/association_indexer.hpp"
 #include "dogen/tack/types/nested_qname_builder.hpp"
 #include "dogen/tack/types/generalization_indexer.hpp"
-#include "dogen/tack/types/preprocessing_settings.hpp"
 #include "dogen/tack/types/file_importer_interface.hpp"
 #include "dogen/tack/types/file_importer_registrar.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"

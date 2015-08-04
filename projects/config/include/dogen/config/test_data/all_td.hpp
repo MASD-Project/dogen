@@ -27,11 +27,9 @@
 
 #include "dogen/config/test_data/reference_td.hpp"
 #include "dogen/config/test_data/cpp_options_td.hpp"
-#include "dogen/config/test_data/archive_types_td.hpp"
 #include "dogen/config/test_data/input_options_td.hpp"
 #include "dogen/config/test_data/output_options_td.hpp"
 #include "dogen/config/test_data/knitting_options_td.hpp"
 #include "dogen/config/test_data/stitching_options_td.hpp"
-#include "dogen/config/test_data/troubleshooting_options_td.hpp"
 
 #endif

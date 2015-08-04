@@ -30,7 +30,6 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 
 namespace dogen {
@@ -66,7 +65,6 @@ private:
     typedef boost::program_options::options_description options_description;
 
     options_description general_options_factory() const;
-    options_description troubleshooting_options_factory() const;
     options_description modeling_options_factory() const;
     options_description output_options_factory() const;
     options_description cpp_options_factory() const;
@@ -77,14 +75,9 @@ private:
     boost::optional<variables_map> variables_map_factory() const;
 
 private:
-    static config::archive_types parse_archive_type(const std::string& s);
-
-private:
     config::input_options
     transform_input_options(const variables_map& vm) const;
     config::cpp_options transform_cpp_options(const variables_map& vm) const;
-    config::troubleshooting_options
-    transform_troubleshooting_options(const variables_map& vm) const;
     config::output_options
     transform_output_options(const variables_map& vm) const;
 

@@ -41,13 +41,11 @@ BOOST_AUTO_TEST_SUITE(move_assignment_copy)
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<archive_types_generator>();
     test_move_assignment_copy<cpp_options_generator>();
     test_move_assignment_copy<input_options_generator>();
     test_move_assignment_copy<output_options_generator>();
     test_move_assignment_copy<reference_generator>();
     test_move_assignment_copy<knitting_options_generator>();
-    test_move_assignment_copy<troubleshooting_options_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

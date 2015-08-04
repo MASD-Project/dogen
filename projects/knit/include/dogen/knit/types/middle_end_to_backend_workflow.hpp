@@ -45,14 +45,8 @@ namespace knit {
 class middle_end_to_backend_workflow {
 public:
     middle_end_to_backend_workflow(const config::knitting_options& o,
-        const dynamic::repository& rp);
-
-public: // public section for testing purposes only
-    /**
-     * @brief Returns true if the housekeeping of generated files is
-     * required, false otherwise.
-     */
-    bool housekeeping_required() const;
+        const dynamic::repository& rp,
+        const bool perform_housekeeping);
 
 private:
     /**
@@ -89,6 +83,7 @@ public:
 private:
     const config::knitting_options& knitting_options_;
     const dynamic::repository& repository_;
+    const bool perform_housekeeping_;
 };
 
 } }

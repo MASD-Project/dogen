@@ -52,12 +52,6 @@ public:
     static output_options make_output_options();
 
     /**
-     * @brief Returns the troubleshooting options with all options
-     * switched off.
-     */
-    static troubleshooting_options make_troubleshooting_options();
-
-    /**
      * @brief Returns the C++ options with empty source and include
      * directories.
      *

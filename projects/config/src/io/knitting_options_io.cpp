@@ -24,7 +24,6 @@
 #include "dogen/config/io/input_options_io.hpp"
 #include "dogen/config/io/output_options_io.hpp"
 #include "dogen/config/io/knitting_options_io.hpp"
-#include "dogen/config/io/troubleshooting_options_io.hpp"
 
 namespace dogen {
 namespace config {
@@ -40,7 +39,6 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
       << "\"__type__\": " << "\"dogen::config::knitting_options\"" << ", "
       << "\"verbose\": " << v.verbose() << ", "
       << "\"input\": " << v.input() << ", "
-      << "\"troubleshooting\": " << v.troubleshooting() << ", "
       << "\"output\": " << v.output() << ", "
       << "\"cpp\": " << v.cpp()
       << " }";

@@ -37,7 +37,6 @@ const std::string test_suite("program_options_parser_spec");
 const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string invalid_facet_type("Invalid facet type");
-const std::string invalid_archive_type("Invalid archive type");
 const std::string unknown_option("invalid-argument");
 const std::string source_include_error(
     "You must supply both source-dir and include-dir");
@@ -338,21 +337,6 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
     BOOST_CHECK(co.disable_cmakelists());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_invalid_archive_type_throws) {
-    SETUP_TEST_LOG_SOURCE("supplying_invalid_archive_type_throws");
-    const std::vector<std::string> o1 = {
-        target_arg, target_value_arg,
-        save_dia_model_arg, invalid_value_arg,
-    };
-    check_exception(o1, invalid_archive_type);
-
-    const std::vector<std::string> o2 = {
-        target_arg, target_value_arg,
-        save_tack_model_arg, invalid_value_arg,
-    };
-    check_exception(o2, invalid_archive_type);
-}
-
 BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("not_supplying_cpp_arguments_results_in_expected_options");
     const std::vector<std::string> o = { target_arg, target_value_arg };
@@ -477,72 +461,6 @@ BOOST_AUTO_TEST_CASE(supplying_include_and_no_source_throws) {
         cpp_include_arg, cpp_include_value_arg
     };
     check_exception(o, source_include_error);
-}
-
-BOOST_AUTO_TEST_CASE(not_supplying_troubleshooting_options_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_troubleshooting_options_results_in_expected_options");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg
-    };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "options: " << s;
-
-    const auto ts(s.troubleshooting());
-    BOOST_CHECK(ts.debug_dir().empty());
-
-    using dogen::config::archive_types;
-    BOOST_CHECK(ts.save_dia_model() == archive_types::invalid);
-    BOOST_CHECK(ts.save_dia_model() == archive_types::invalid);
-
-    BOOST_CHECK(!ts.stop_after_merging());
-    BOOST_CHECK(!ts.stop_after_merging());
-}
-
-BOOST_AUTO_TEST_CASE(supplying_troubleshooting_options_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("supplying_troubleshooting_options_results_in_expected_options");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        debug_dir_arg, debug_dir_value_arg,
-        save_dia_model_arg, save_dia_model_value_arg,
-        save_tack_model_arg, save_tack_model_value_arg,
-        stop_after_merging_arg, stop_after_formatting_arg
-    };
-    const auto s(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "options: " << s;
-
-    const auto ts(s.troubleshooting());
-    BOOST_CHECK(ts.debug_dir().string() == debug_dir_value_arg);
-
-    using dogen::config::archive_types;
-    BOOST_CHECK(ts.save_dia_model() == archive_types::xml);
-    BOOST_CHECK(ts.save_tack_model() == archive_types::text);
-
-    BOOST_CHECK(ts.stop_after_merging());
-    BOOST_CHECK(ts.stop_after_formatting());
-}
-
-BOOST_AUTO_TEST_CASE(supplying_save_tack_or_dia_results_in_options_with_debug_dir) {
-    SETUP_TEST_LOG_SOURCE("supplying_save_tack_or_dia_results_in_options_with_debug_dir");
-    typedef std::vector<std::string> vector;
-    auto lambda([&](vector o) {
-            const auto s(check_valid_arguments(o));
-            BOOST_LOG_SEV(lg, debug) << "options: " << s;
-
-            const auto ts(s.troubleshooting());
-            BOOST_CHECK(!ts.debug_dir().empty());
-        });
-
-    const vector o1 = {
-        target_arg, target_value_arg,
-        save_dia_model_arg, save_dia_model_value_arg
-    };
-    lambda(o1);
-
-    const vector o2 = {
-        target_arg, target_value_arg,
-        save_tack_model_arg, save_tack_model_value_arg
-    };
-    lambda(o2);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {

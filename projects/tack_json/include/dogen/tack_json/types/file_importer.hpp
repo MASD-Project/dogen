@@ -41,8 +41,7 @@ public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
     tack::model import(const dynamic::workflow& w,
-        const tack::input_descriptor& d,
-        const boost::optional<tack::preprocessing_settings>& s) override;
+        const tack::input_descriptor& d) override;
 };
 
 } }

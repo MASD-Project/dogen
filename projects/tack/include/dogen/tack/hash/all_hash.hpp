@@ -42,6 +42,5 @@
 #include "dogen/tack/hash/generation_types_hash.hpp"
 #include "dogen/tack/hash/input_descriptor_hash.hpp"
 #include "dogen/tack/hash/relationship_types_hash.hpp"
-#include "dogen/tack/hash/preprocessing_settings_hash.hpp"
 
 #endif

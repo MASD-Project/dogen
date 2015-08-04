@@ -22,7 +22,6 @@
 #include "dogen/config/hash/input_options_hash.hpp"
 #include "dogen/config/hash/output_options_hash.hpp"
 #include "dogen/config/hash/knitting_options_hash.hpp"
-#include "dogen/config/hash/troubleshooting_options_hash.hpp"
 
 namespace {
 
@@ -42,7 +41,6 @@ std::size_t knitting_options_hasher::hash(const knitting_options& v) {
 
     combine(seed, v.verbose());
     combine(seed, v.input());
-    combine(seed, v.troubleshooting());
     combine(seed, v.output());
     combine(seed, v.cpp());
 

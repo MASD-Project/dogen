@@ -28,8 +28,6 @@
 #include <memory>
 #include <boost/optional.hpp>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/config/types/archive_types.hpp"
-#include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/tack/types/file_importer_registrar.hpp"
@@ -44,7 +42,7 @@ namespace tack {
  */
 class importer {
 public:
-    importer(const config::knitting_options& o, const dynamic::repository& rp);
+    explicit importer(const dynamic::repository& rp);
 
 public:
     /**
@@ -55,40 +53,9 @@ public:
 
 private:
     /**
-     * @brief Given an archive type and a model name, returns the
-     * appropriate file extension.
-     *
-     * @param archive_type one of the supported boost archive types.
-     */
-    std::string extension(const config::archive_types at) const;
-
-    /**
-     * @brief Generates the preprocessing settings given the current
-     * troubleshooting options and the path supplied.
-     */
-    boost::optional<preprocessing_settings>
-    create_preprocessing_settings(const boost::filesystem::path& p) const;
-
-    /**
-     * @brief Given the original file path, generates a new file path
-     * for the archive in question.
-     */
-    boost::filesystem::path
-    create_debug_file_path(const config::archive_types at,
-        const boost::filesystem::path& original_path) const;
-
-private:
-    /**
      * @brief Given an input descriptor, creates the associated model.
      */
     tack::model import_model(const input_descriptor& d) const;
-
-    /**
-     * @brief Checks the options chosen by the user to determine if
-     * the model should be persisted; if so, persists it.
-     */
-    void handle_model_persistance(const boost::filesystem::path& p,
-        const tack::model& m) const;
 
 public:
     /**
@@ -100,7 +67,6 @@ public:
 
 private:
     static std::shared_ptr<file_importer_registrar> registrar_;
-    const config::knitting_options knitting_options_;
     const dynamic::repository& repository_;
     const dynamic::workflow dynamic_workflow_;
 };

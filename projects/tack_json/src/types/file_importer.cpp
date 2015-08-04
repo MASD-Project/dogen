@@ -48,8 +48,7 @@ std::list<std::string> file_importer::supported_extensions() const {
 }
 
 tack::model file_importer::import(const dynamic::workflow& w,
-    const tack::input_descriptor& d,
-    const boost::optional<tack::preprocessing_settings>& /*s*/) {
+    const tack::input_descriptor& d) {
     tack_json::hydrator h(w);
     return h.hydrate(d.path());
 }

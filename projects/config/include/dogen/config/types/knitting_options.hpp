@@ -29,7 +29,6 @@
 #include "dogen/config/types/cpp_options.hpp"
 #include "dogen/config/types/input_options.hpp"
 #include "dogen/config/types/output_options.hpp"
-#include "dogen/config/types/troubleshooting_options.hpp"
 #include "dogen/config/serialization/knitting_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,7 +50,6 @@ public:
     knitting_options(
         const bool verbose,
         const dogen::config::input_options& input,
-        const dogen::config::troubleshooting_options& troubleshooting,
         const dogen::config::output_options& output,
         const dogen::config::cpp_options& cpp);
 
@@ -79,16 +77,6 @@ public:
     dogen::config::input_options& input();
     void input(const dogen::config::input_options& v);
     void input(const dogen::config::input_options&& v);
-    /**@}*/
-
-    /**
-     * @brief All options related to troubleshooting.
-     */
-    /**@{*/
-    const dogen::config::troubleshooting_options& troubleshooting() const;
-    dogen::config::troubleshooting_options& troubleshooting();
-    void troubleshooting(const dogen::config::troubleshooting_options& v);
-    void troubleshooting(const dogen::config::troubleshooting_options&& v);
     /**@}*/
 
     /**
@@ -124,7 +112,6 @@ public:
 private:
     bool verbose_;
     dogen::config::input_options input_;
-    dogen::config::troubleshooting_options troubleshooting_;
     dogen::config::output_options output_;
     dogen::config::cpp_options cpp_;
 };

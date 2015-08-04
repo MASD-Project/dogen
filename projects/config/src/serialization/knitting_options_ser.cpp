@@ -31,7 +31,6 @@
 #include "dogen/config/serialization/input_options_ser.hpp"
 #include "dogen/config/serialization/output_options_ser.hpp"
 #include "dogen/config/serialization/knitting_options_ser.hpp"
-#include "dogen/config/serialization/troubleshooting_options_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,7 +41,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("verbose", v.verbose_);
     ar << make_nvp("input", v.input_);
-    ar << make_nvp("troubleshooting", v.troubleshooting_);
     ar << make_nvp("output", v.output_);
     ar << make_nvp("cpp", v.cpp_);
 }
@@ -53,7 +51,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("verbose", v.verbose_);
     ar >> make_nvp("input", v.input_);
-    ar >> make_nvp("troubleshooting", v.troubleshooting_);
     ar >> make_nvp("output", v.output_);
     ar >> make_nvp("cpp", v.cpp_);
 }

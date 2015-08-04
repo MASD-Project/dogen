@@ -28,7 +28,6 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/types/archive_types.hpp"
 #include "dogen/config/types/knitting_options.hpp"
 #include "dogen/dynamic/types/repository.hpp"
 #include "dogen/dynamic/types/ownership_hierarchy.hpp"
@@ -45,23 +44,6 @@ class frontend_to_middle_end_workflow {
 public:
     frontend_to_middle_end_workflow(const config::knitting_options& o,
         const dynamic::repository& rp);
-
-private:
-    /**
-     * @brief Given an archive type and a model name, returns the
-     * appropriate file extension.
-     *
-     * @param archive_type one of the supported boost archive types.
-     */
-    std::string extension(const config::archive_types at) const;
-
-    /**
-     * @brief Given the original file path, generates a new file path
-     * for the archive in question.
-     */
-    boost::filesystem::path
-    create_debug_file_path(const config::archive_types at,
-        const boost::filesystem::path& original_path) const;
 
 private:
     /**
@@ -87,13 +69,6 @@ private:
      */
     boost::filesystem::path obtain_target_path_activity(
         const std::list<tack::input_descriptor>& descriptors) const;
-
-    /**
-     * @brief Checks the options chosen by the user to determine if
-     * the Tack model should be persisted; if so, persists it.
-     */
-    void persist_model_activity(const boost::filesystem::path p,
-        const tack::model& m) const;
 
 public:
     /**

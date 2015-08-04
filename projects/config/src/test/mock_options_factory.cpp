@@ -37,12 +37,6 @@ output_options mock_options_factory::make_output_options() {
     return r;
 }
 
-troubleshooting_options
-mock_options_factory::make_troubleshooting_options() {
-    troubleshooting_options r;
-    return r;
-}
-
 cpp_options mock_options_factory::make_cpp_options() {
     return make_cpp_options(empty, empty);
 }
@@ -86,7 +80,6 @@ knitting_options mock_options_factory::make_knitting_options(
     r.verbose(verbose);
     r.input(make_input_options(target, module_path));
     r.cpp(make_cpp_options(src_dir, include_dir));
-    r.troubleshooting(make_troubleshooting_options());
     r.output(make_output_options());
     return r;
 }
@@ -100,7 +93,6 @@ knitting_options mock_options_factory::make_knitting_options(
     r.verbose(verbose);
     r.input(make_input_options(target, module_path));
     r.cpp(make_cpp_options(project_dir));
-    r.troubleshooting(make_troubleshooting_options());
     r.output(make_output_options());
     return r;
 }

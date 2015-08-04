@@ -43,6 +43,5 @@
 #include "dogen/tack/serialization/generation_types_ser.hpp"
 #include "dogen/tack/serialization/input_descriptor_ser.hpp"
 #include "dogen/tack/serialization/relationship_types_ser.hpp"
-#include "dogen/tack/serialization/preprocessing_settings_ser.hpp"
 
 #endif

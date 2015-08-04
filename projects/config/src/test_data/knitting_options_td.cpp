@@ -22,7 +22,6 @@
 #include "dogen/config/test_data/input_options_td.hpp"
 #include "dogen/config/test_data/output_options_td.hpp"
 #include "dogen/config/test_data/knitting_options_td.hpp"
-#include "dogen/config/test_data/troubleshooting_options_td.hpp"
 
 namespace {
 
@@ -33,11 +32,6 @@ bool create_bool(const unsigned int position) {
 dogen::config::input_options
 create_dogen_config_input_options(const unsigned int position) {
     return dogen::config::input_options_generator::create(position);
-}
-
-dogen::config::troubleshooting_options
-create_dogen_config_troubleshooting_options(const unsigned int position) {
-    return dogen::config::troubleshooting_options_generator::create(position);
 }
 
 dogen::config::output_options
@@ -61,9 +55,8 @@ void knitting_options_generator::
 populate(const unsigned int position, result_type& v) {
     v.verbose(create_bool(position + 0));
     v.input(create_dogen_config_input_options(position + 1));
-    v.troubleshooting(create_dogen_config_troubleshooting_options(position + 2));
-    v.output(create_dogen_config_output_options(position + 3));
-    v.cpp(create_dogen_config_cpp_options(position + 4));
+    v.output(create_dogen_config_output_options(position + 2));
+    v.cpp(create_dogen_config_cpp_options(position + 3));
 }
 
 knitting_options_generator::result_type

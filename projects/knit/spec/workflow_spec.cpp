@@ -30,7 +30,6 @@
 #include "dogen/utility/test_data/dia_tack.hpp"
 #include "dogen/utility/test_data/codegen_tds.hpp"
 #include "dogen/utility/test_data/empty_tds.hpp"
-#include "dogen/utility/test_data/debug_dogen.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
@@ -59,35 +58,11 @@ const std::string io_facet_and_integrated_io_error(
     "Integrated IO cannot be used with the IO facet");
 const std::string dia_invalid_name("Dia object name is empty");
 
-std::vector<dogen::utility::test::file_asserter::shared_ptr>
-file_asserters() {
-    using dogen::utility::test::file_asserter;
-    std::vector<file_asserter::shared_ptr> r;
-
-    using dogen::dia::test::dia_file_asserter;
-    r.push_back(file_asserter::shared_ptr(new dia_file_asserter()));
-
-    using dogen::tack::test::tack_file_asserter;
-    r.push_back(file_asserter::shared_ptr(new tack_file_asserter()));
-
-    return r;
-}
-
 dogen::config::knitting_options
 default_mock_options(dogen::utility::test_data::codegen_tds tds) {
     using dogen::config::test::mock_options_factory;
     return mock_options_factory::make_knitting_options(
         tds.target(), tds.actual(), module_path);
-}
-
-dogen::config::knitting_options debug_dogen_mock_options() {
-    typedef dogen::utility::test_data::debug_dogen tds;
-    using dogen::config::test::mock_options_factory;
-    return mock_options_factory::make_knitting_options(
-        tds::target(),
-        tds::actual_src(),
-        tds::actual_include(),
-        empty_module_path);
 }
 
 dogen::config::knitting_options empty_tds_mock_options() {
@@ -123,27 +98,6 @@ using dogen::utility::test::contains_checker;
 using dogen::knit::workflow_error;
 
 BOOST_AUTO_TEST_SUITE(workflow)
-
-BOOST_IGNORE_AUTO_TEST_CASE(debug_options_generate_expected_debug_info) {
-    SETUP_TEST_LOG("debug_options_generate_expected_debug_info");
-    auto s(debug_dogen_mock_options());
-    auto ts(s.troubleshooting());
-    typedef dogen::utility::test_data::debug_dogen tds;
-    ts.debug_dir(tds::actual());
-
-    using dogen::config::archive_types;
-    ts.save_dia_model(archive_types::xml);
-    ts.save_tack_model(archive_types::xml);
-    ts.stop_after_formatting(true);
-    s.troubleshooting(ts);
-
-    dogen::knit::workflow w(s);
-    w.execute();
-
-    using dogen::utility::test::asserter;
-    const auto f(file_asserters());
-    BOOST_CHECK(asserter::assert_directory(tds::expected(), tds::actual(), f));
-}
 
 BOOST_IGNORE_AUTO_TEST_CASE(disabling_cpp_backend_results_in_no_cpp_output) {
     SETUP_TEST_LOG("disabling_cpp_backend_results_in_no_cpp_output");
@@ -461,41 +415,6 @@ BOOST_IGNORE_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
 
     const auto t(dia_tack::input_split_project_dia());
     BOOST_CHECK(check_code_generation(t, lambda));
-}
-
-BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_we_are_not_generating_files) {
-    SETUP_TEST_LOG("housekeeping_is_not_triggered_when_we_are_not_generating_files");
-    auto s(empty_tds_mock_options());
-    auto ts(s.troubleshooting());
-    ts.stop_after_merging(true);
-    s.troubleshooting(ts);
-
-    dogen::knit::workflow w1(s);
-    BOOST_CHECK(!w1.housekeeping_required());
-
-    s = empty_tds_mock_options();
-    ts = s.troubleshooting();
-    ts.stop_after_formatting(true);
-    s.troubleshooting(ts);
-    dogen::knit::workflow w2(s);
-    BOOST_CHECK(!w2.housekeeping_required());
-
-    s = empty_tds_mock_options();
-    auto os = s.output();
-    os.delete_extra_files(false);
-    s.output(os);
-    dogen::knit::workflow w4(s);
-    BOOST_CHECK(!w4.housekeeping_required());
-}
-
-BOOST_AUTO_TEST_CASE(housekeeping_is_not_triggered_when_delete_extra_files_is_requested) {
-    SETUP_TEST_LOG("housekeeping_is_not_triggered_when_delete_extra_files_is_requested");
-    auto s = empty_tds_mock_options();
-    auto os = s.output();
-    os.delete_extra_files(true);
-    s.output(os);
-    dogen::knit::workflow w(s);
-    BOOST_CHECK(w.housekeeping_required());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -67,11 +67,6 @@ const std::string serialization_facet_type("serialization");
 const std::string test_data_facet_type("test_data");
 const std::string odb_facet_type("odb");
 
-const std::string invalid_archive_type("Invalid archive type");
-const std::string xml_archive_type("xml");
-const std::string text_archive_type("text");
-const std::string binary_archive_type("binary");
-
 const std::string stop_after_merging_arg("stop-after-merging");
 const std::string stop_after_formatting_arg("stop-after-formatting");
 
@@ -113,35 +108,8 @@ program_options_parser::general_options_factory() const {
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display this help and exit.")
-        ("version", "Output version information and exit.");
-    return r;
-}
-
-boost::program_options::options_description
-program_options_parser::troubleshooting_options_factory() const {
-    using boost::program_options::value;
-    boost::program_options::options_description r("Troubleshooting options");
-    r.add_options()
-        ("verbose,v", "Output additional diagnostic information.")
-        ("debug-dir",
-            value<std::string>(),
-            "Directory in which to dump debug files. "
-            "Defaults to current directory.")
-        ("save-dia-model",
-            value<std::string>(),
-            "If set, saves a Dia model representation of each diagram in the "
-            "directory given by debug-dir. "
-            "Valid values: [xml | text | binary].")
-        ("save-tack-model",
-            value<std::string>(),
-            "If set, saves a TACK model representation of each model in the "
-            "directory given by debug-dir. "
-            "Valid values: [xml | text | binary].")
-        ("stop-after-merging",
-            "Build combined model and validate all dependencies "
-            "but don't code generate.")
-        ("stop-after-formatting", "Do everything except writing files.");
-
+        ("version", "Output version information and exit.")
+        ("verbose,v", "Output additional diagnostic information.");
     return r;
 }
 
@@ -215,7 +183,6 @@ boost::program_options::options_description
 program_options_parser::options_factory() const {
     boost::program_options::options_description r;
     r.add(general_options_factory());
-    r.add(troubleshooting_options_factory());
     r.add(modeling_options_factory());
     r.add(output_options_factory());
     r.add(cpp_options_factory());
@@ -250,6 +217,8 @@ program_options_parser::variables_map_factory() const {
             version_function_();
         return boost::optional<boost::program_options::variables_map>();
     }
+
+
     return boost::optional<boost::program_options::variables_map>(r);
 }
 
@@ -290,20 +259,6 @@ void program_options_parser::throw_missing_target() const {
 
 void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
-}
-
-dogen::config::archive_types
-program_options_parser::parse_archive_type(const std::string& s) {
-    using dogen::config::archive_types;
-    if (s == xml_archive_type)
-        return archive_types::xml;
-    if (s == text_archive_type)
-        return archive_types::text;
-    if (s == binary_archive_type)
-        return archive_types::binary;
-
-    using utility::exception::invalid_enum_value;
-    BOOST_THROW_EXCEPTION(invalid_enum_value(invalid_archive_type));
 }
 
 config::cpp_options program_options_parser::
@@ -386,39 +341,6 @@ config::input_options program_options_parser::transform_input_options(
     return r;
 }
 
-config::troubleshooting_options program_options_parser::
-transform_troubleshooting_options(const variables_map& vm) const {
-    config::troubleshooting_options r;
-
-    r.stop_after_merging(vm.count(stop_after_merging_arg));
-    r.stop_after_formatting(vm.count(stop_after_formatting_arg));
-
-    bool need_debug_dir(false);
-    using config::archive_types;
-    auto lambda([&](std::string arg) -> archive_types {
-            if (vm.count(arg)) {
-                need_debug_dir = true;
-                using utility::exception::invalid_enum_value;
-                try {
-                    return parse_archive_type(vm[arg].as<std::string>());
-                } catch (const invalid_enum_value& e) {
-                    BOOST_THROW_EXCEPTION(parser_validation_error(e.what()));
-                }
-            }
-            return archive_types::invalid;
-        });
-
-    r.save_dia_model(lambda(save_dia_model_arg));
-    r.save_tack_model(lambda(save_tack_model_arg));
-
-    if (vm.count(debug_dir_arg))
-        r.debug_dir(vm[debug_dir_arg].as<std::string>());
-    else if (need_debug_dir)
-        r.debug_dir(current_path_);
-
-    return r;
-}
-
 config::output_options program_options_parser::
 transform_output_options(const variables_map& vm) const {
     config::output_options r;
@@ -442,7 +364,6 @@ boost::optional<config::knitting_options> program_options_parser::parse() {
     r.verbose(vm.count(verbose_arg));
     r.input(transform_input_options(vm));
     r.cpp(transform_cpp_options(vm));
-    r.troubleshooting(transform_troubleshooting_options(vm));
     r.output(transform_output_options(vm));
 
     return boost::optional<config::knitting_options>(r);

@@ -42,6 +42,5 @@
 #include "dogen/tack/io/generation_types_io.hpp"
 #include "dogen/tack/io/input_descriptor_io.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
-#include "dogen/tack/io/preprocessing_settings_io.hpp"
 
 #endif

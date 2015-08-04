@@ -28,7 +28,6 @@
 #include <list>
 #include <boost/optional.hpp>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/preprocessing_settings.hpp"
 #include "dogen/tack/types/input_descriptor.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 
@@ -62,9 +61,7 @@ public:
      * transforms it into a model.
      */
     virtual model import(const dynamic::workflow& w,
-        const input_descriptor& d,
-        const boost::optional<preprocessing_settings>& s =
-        boost::optional<preprocessing_settings>()) = 0;
+        const input_descriptor& d) = 0;
 };
 
 } }
