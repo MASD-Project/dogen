@@ -59,5 +59,5 @@ foreach(dir ${sub-dir})
 endforeach()
 
 # sample files for installation
-file(GLOB samples "${CMAKE_CURRENT_SOURCE_DIR}/dia_tack/input/*.dia")
+file(GLOB samples "${CMAKE_CURRENT_SOURCE_DIR}/tack_dia/input/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)

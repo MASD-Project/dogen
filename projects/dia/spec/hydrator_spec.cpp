@@ -23,7 +23,7 @@
 #include "dogen/utility/test/macros.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test_data/dia_tack.hpp"
+#include "dogen/utility/test_data/tack_dia.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/dia/types/all.hpp"
 #include "dogen/dia/io/all_io.hpp"
@@ -58,190 +58,190 @@ BOOST_AUTO_TEST_SUITE(hydrator)
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_in_a_package_diagram_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_class_in_a_package_dia());
-    const auto actual(dia_tack::actual_class_in_a_package_dia_xml());
-    const auto expected(dia_tack::expected_class_in_a_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_class_in_a_package_dia());
+    const auto actual(tack_dia::actual_class_in_a_package_dia_xml());
+    const auto expected(tack_dia::expected_class_in_a_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("compressed_diagram_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_compressed_dia());
-    const auto actual(dia_tack::actual_compressed_dia_xml());
-    const auto expected(dia_tack::expected_compressed_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_compressed_dia());
+    const auto actual(tack_dia::actual_compressed_dia_xml());
+    const auto expected(tack_dia::expected_compressed_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(empty_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("empty_diagram_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_empty_dia());
-    const auto actual(dia_tack::actual_empty_dia_xml());
-    const auto expected(dia_tack::expected_empty_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_empty_dia());
+    const auto actual(tack_dia::actual_empty_dia_xml());
+    const auto expected(tack_dia::expected_empty_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(two_empty_layers_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("two_empty_layers_diagram_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_two_empty_layers_dia());
-    const auto actual(dia_tack::actual_two_empty_layers_dia_xml());
-    const auto expected(dia_tack::expected_two_empty_layers_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_two_empty_layers_dia());
+    const auto actual(tack_dia::actual_two_empty_layers_dia_xml());
+    const auto expected(tack_dia::expected_two_empty_layers_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(stand_alone_class_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("stand_alone_class_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_stand_alone_class_dia());
-    const auto actual(dia_tack::actual_stand_alone_class_dia_xml());
-    const auto expected(dia_tack::expected_stand_alone_class_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_stand_alone_class_dia());
+    const auto actual(tack_dia::actual_stand_alone_class_dia_xml());
+    const auto expected(tack_dia::expected_stand_alone_class_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(class_with_empty_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_with_empty_package_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_empty_package_dia());
-    const auto actual(dia_tack::actual_empty_package_dia_xml());
-    const auto expected(dia_tack::expected_empty_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_empty_package_dia());
+    const auto actual(tack_dia::actual_empty_package_dia_xml());
+    const auto expected(tack_dia::expected_empty_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_without_name_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_class_without_name_dia());
-    const auto actual(dia_tack::actual_class_without_name_dia_xml());
-    const auto expected(dia_tack::expected_class_without_name_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_class_without_name_dia());
+    const auto actual(tack_dia::actual_class_without_name_dia_xml());
+    const auto expected(tack_dia::expected_class_without_name_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_class_without_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_in_a_package_class_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_classes_inout_package_dia());
-    const auto actual(dia_tack::actual_classes_inout_package_dia_xml());
-    const auto expected(dia_tack::expected_classes_inout_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_classes_inout_package_dia());
+    const auto actual(tack_dia::actual_classes_inout_package_dia_xml());
+    const auto expected(tack_dia::expected_classes_inout_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_without_attributes_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_class_without_attributes_dia());
-    const auto actual(dia_tack::actual_class_without_attributes_dia_xml());
-    const auto expected(dia_tack::expected_class_without_attributes_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_class_without_attributes_dia());
+    const auto actual(tack_dia::actual_class_without_attributes_dia_xml());
+    const auto expected(tack_dia::expected_class_without_attributes_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_class_without_package_dia());
-    const auto actual(dia_tack::actual_class_without_package_dia_xml());
-    const auto expected(dia_tack::expected_class_without_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_class_without_package_dia());
+    const auto actual(tack_dia::actual_class_without_package_dia_xml());
+    const auto expected(tack_dia::expected_class_without_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(classes_in_a_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("classes_in_a_package_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_classes_in_a_package_dia());
-    const auto actual(dia_tack::actual_classes_in_a_package_dia_xml());
-    const auto expected(dia_tack::expected_classes_in_a_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_classes_in_a_package_dia());
+    const auto actual(tack_dia::actual_classes_in_a_package_dia_xml());
+    const auto expected(tack_dia::expected_classes_in_a_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(classes_without_package_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("classes_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_classes_without_package_dia());
-    const auto actual(dia_tack::actual_classes_without_package_dia_xml());
-    const auto expected(dia_tack::expected_classes_without_package_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_classes_without_package_dia());
+    const auto actual(tack_dia::actual_classes_without_package_dia_xml());
+    const auto expected(tack_dia::expected_classes_without_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(package_without_name_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("package_without_name_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_package_without_name_dia());
-    const auto actual(dia_tack::actual_package_without_name_dia_xml());
-    const auto expected(dia_tack::expected_package_without_name_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_package_without_name_dia());
+    const auto actual(tack_dia::actual_package_without_name_dia_xml());
+    const auto expected(tack_dia::expected_package_without_name_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("two_layers_with_objects_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_two_layers_with_objects_dia());
-    const auto actual(dia_tack::actual_two_layers_with_objects_dia_xml());
-    const auto expected(dia_tack::expected_two_layers_with_objects_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_two_layers_with_objects_dia());
+    const auto actual(tack_dia::actual_two_layers_with_objects_dia_xml());
+    const auto expected(tack_dia::expected_two_layers_with_objects_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(all_primitives_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("all_primitives_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_all_primitives_dia());
-    const auto actual(dia_tack::actual_all_primitives_dia_xml());
-    const auto expected(dia_tack::expected_all_primitives_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_all_primitives_dia());
+    const auto actual(tack_dia::actual_all_primitives_dia_xml());
+    const auto expected(tack_dia::expected_all_primitives_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("trivial_inheritance_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_trivial_inheritance_dia());
-    const auto actual(dia_tack::actual_trivial_inheritance_dia_xml());
-    const auto expected(dia_tack::expected_trivial_inheritance_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_trivial_inheritance_dia());
+    const auto actual(tack_dia::actual_trivial_inheritance_dia_xml());
+    const auto expected(tack_dia::expected_trivial_inheritance_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("boost_model_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_boost_model_dia());
-    const auto actual(dia_tack::actual_boost_model_dia_xml());
-    const auto expected(dia_tack::expected_boost_model_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_boost_model_dia());
+    const auto actual(tack_dia::actual_boost_model_dia_xml());
+    const auto expected(tack_dia::expected_boost_model_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("std_model_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_std_model_dia());
-    const auto actual(dia_tack::actual_std_model_dia_xml());
-    const auto expected(dia_tack::expected_std_model_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_std_model_dia());
+    const auto actual(tack_dia::actual_std_model_dia_xml());
+    const auto expected(tack_dia::expected_std_model_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(comments_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("comments_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_comments_dia());
-    const auto actual(dia_tack::actual_comments_dia_xml());
-    const auto expected(dia_tack::expected_comments_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_comments_dia());
+    const auto actual(tack_dia::actual_comments_dia_xml());
+    const auto expected(tack_dia::expected_comments_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(enumeration_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("enumeration_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_enumeration_dia());
-    const auto actual(dia_tack::actual_enumeration_dia_xml());
-    const auto expected(dia_tack::expected_enumeration_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_enumeration_dia());
+    const auto actual(tack_dia::actual_enumeration_dia_xml());
+    const auto expected(tack_dia::expected_enumeration_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
 BOOST_AUTO_TEST_CASE(exception_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("exception_results_in_expected_objects");
-    using dogen::utility::test_data::dia_tack;
-    const auto input(dia_tack::input_exception_dia());
-    const auto actual(dia_tack::actual_exception_dia_xml());
-    const auto expected(dia_tack::expected_exception_dia_xml());
+    using dogen::utility::test_data::tack_dia;
+    const auto input(tack_dia::input_exception_dia());
+    const auto actual(tack_dia::actual_exception_dia_xml());
+    const auto expected(tack_dia::expected_exception_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 

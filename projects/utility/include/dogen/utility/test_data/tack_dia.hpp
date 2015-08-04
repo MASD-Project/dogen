@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_DIA_TACK_HPP
-#define DOGEN_UTILITY_TEST_DATA_DIA_TACK_HPP
+#ifndef DOGEN_UTILITY_TEST_DATA_TACK_DIA_HPP
+#define DOGEN_UTILITY_TEST_DATA_TACK_DIA_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-class dia_tack {
+class tack_dia {
 public:
-    dia_tack() = delete;
-    dia_tack(const dia_tack&) = delete;
-    ~dia_tack() = delete;
-    dia_tack(dia_tack&&) = delete;
-    dia_tack& operator=(const dia_tack&) = delete;
+    tack_dia() = delete;
+    tack_dia(const tack_dia&) = delete;
+    ~tack_dia() = delete;
+    tack_dia(tack_dia&&) = delete;
+    tack_dia& operator=(const tack_dia&) = delete;
 
 public:
     static boost::filesystem::path data_set();

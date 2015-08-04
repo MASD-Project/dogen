@@ -20,7 +20,7 @@
  */
 #include <string>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test_data/dia_tack.hpp"
+#include "dogen/utility/test_data/tack_dia.hpp"
 #include "dogen/utility/test_data/resolver.hpp"
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/test_data.hpp"
@@ -49,8 +49,8 @@ path empty_tds::data_set() {
 }
 
 path empty_tds::target() {
-    using dogen::utility::test_data::dia_tack;
-    return dia_tack::input_class_in_a_package_dia();
+    using dogen::utility::test_data::tack_dia;
+    return tack_dia::input_class_in_a_package_dia();
 }
 
 path empty_tds::expected() {
