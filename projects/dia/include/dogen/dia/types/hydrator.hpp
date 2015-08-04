@@ -51,11 +51,13 @@ private:
     void validate_current_element(std::string name) const;
     void validate_self_closing() const;
     void next_element(std::string name);
-    bool is_attribute_value(std::string name) const;
 
+private:
+    bool is_attribute_value(std::string name) const;
     bool is_start_element(std::string element_name) const;
     bool is_end_element(std::string element_name) const;
 
+private:
     std::string read_xml_string_attribute(std::string name);
     int read_xml_int_attribute(std::string name);
     bool read_xml_bool_attribute(std::string name);
