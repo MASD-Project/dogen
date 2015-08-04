@@ -5705,6 +5705,16 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Overuse of =std::set=, =std::map=, etc                            :story:
+
+According to this paper by Matt Austern we should see if we really
+need sets/etc or if there are other alternatives:
+
+[[http://lafstern.org/matt/col1.pdf][Why you shouldn't use set (and what you should use instead)]]
+
+In cases where we know upfront the number of elements we require and
+we already have them sorted, we may not need a set.
+
 *** Remove unused features                                             :epic:
 
 This story captures any features that we no longer require and will
