@@ -47,6 +47,13 @@ where we considered using underscores instead of folders for facet
 names. It may be nicer to have dots for this,
 e.g. =types.my_class.hpp=.
 
+Idea:
+
+=qnames= should have a model name and a model package; only the model
+package contributes to the namespaces. The model name is unpacked into
+multiple model packages (e.g. "a.b" => a::b). The file name uses the
+model name, not the model package.
+
 *** Consider creating a "locator" like class for path management      :story:
 
 At present we are using path settings to compute paths in several
