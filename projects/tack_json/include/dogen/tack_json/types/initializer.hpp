@@ -32,6 +32,7 @@ namespace tack_json {
  * @brief Initialises all of the static state in this model.
  */
 class initializer {
+public:
     static void initialize();
 };
 

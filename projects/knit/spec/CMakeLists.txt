@@ -32,6 +32,8 @@ target_link_libraries(knit_spec
     cpp
     dia
     tack
+    tack_json
+    dia_to_tack
     config
     frontend
     backend

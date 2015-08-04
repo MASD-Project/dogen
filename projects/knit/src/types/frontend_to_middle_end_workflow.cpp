@@ -27,6 +27,7 @@
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/persister.hpp"
 #include "dogen/tack/types/assembler.hpp"
+#include "dogen/tack/types/importer.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/backend/types/workflow.hpp"
 #include "dogen/knit/types/frontend_to_middle_end_workflow.hpp"
@@ -128,8 +129,21 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
 std::list<tack::model> frontend_to_middle_end_workflow::
 obtain_partial_tack_models_activity(
     const std::list<frontend::input_descriptor>& descriptors) const {
+    /*
     frontend::workflow w(knitting_options_, repository_);
     return w.execute(descriptors);
+    */
+    std::list<tack::input_descriptor> tack_descriptors;
+    for (const auto& d : descriptors) {
+        tack::input_descriptor tack_descriptor;
+        tack_descriptor.path(d.path());
+        tack_descriptor.external_module_path(d.external_module_path());
+        tack_descriptor.is_target(d.is_target());
+        tack_descriptors.push_back(tack_descriptor);
+    }
+
+    tack::importer imp(knitting_options_, repository_);
+    return imp.import(tack_descriptors);
 }
 
 boost::filesystem::path frontend_to_middle_end_workflow::

@@ -27,6 +27,7 @@ target_link_libraries(knit
     tack
     dia
     dia_to_tack
+    tack_json
     frontend
     backend
     formatters

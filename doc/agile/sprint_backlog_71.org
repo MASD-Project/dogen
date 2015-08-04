@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 17:53]
+#+CAPTION: Clock summary at [2015-08-04 Tue 18:04]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:26* |       |      |
+| *Total time*                                                                | *17:36* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:26   |       |      |
-| Active                                                                      |         | 17:26 |      |
+| Stories                                                                     | 17:36   |       |      |
+| Active                                                                      |         | 17:36 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:13 |
-| STARTED Merge frontend with =tack=                                          |         |       | 3:57 |
+| STARTED Merge frontend with =tack=                                          |         |       | 4:07 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -177,6 +177,7 @@ Links:
 - [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** STARTED Merge frontend with =tack=                                :story:
+    CLOCK: [2015-08-04 Tue 17:54]--[2015-08-04 Tue 18:04] =>  0:10
     CLOCK: [2015-08-04 Tue 17:28]--[2015-08-04 Tue 17:53] =>  0:25
     CLOCK: [2015-08-04 Tue 16:34]--[2015-08-04 Tue 17:25] =>  0:51
     CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
@@ -199,6 +200,12 @@ Combine the two models performing the necessary renames. Notes:
 - rename dia to tack to tack_dia. create tack_json. this is in
   preparation for =tack.dia=, etc.
 - use pointer map in registrar rather than shared pointers.
+
+*** Remove saving preprocessing input support                         :story:
+
+We seem to have the ability of saving dia diagrams etc when importing
+a tack model but this is not used any where. It was borked with the
+latest refactor. Remove this functionality.
 
 *** Rename types in =tack= using MOF/eCore as a starting point        :story:
 
