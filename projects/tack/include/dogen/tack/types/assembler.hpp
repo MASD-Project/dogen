@@ -105,7 +105,7 @@ public:
      *
      * @note parameter copied by design.
      */
-    model execute(std::list<model> models) const;
+    model assemble(const std::list<model>& models) const;
 };
 
 } }

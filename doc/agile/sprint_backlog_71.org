@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 16:33]
+#+CAPTION: Clock summary at [2015-08-04 Tue 17:53]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *16:10* |       |      |
+| *Total time*                                                                | *17:26* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 16:10   |       |      |
-| Active                                                                      |         | 16:10 |      |
+| Stories                                                                     | 17:26   |       |      |
+| Active                                                                      |         | 17:26 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:13 |
-| STARTED Merge frontend with =tack=                                          |         |       | 2:41 |
+| STARTED Merge frontend with =tack=                                          |         |       | 3:57 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -177,26 +177,28 @@ Links:
 - [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** STARTED Merge frontend with =tack=                                :story:
+    CLOCK: [2015-08-04 Tue 17:28]--[2015-08-04 Tue 17:53] =>  0:25
     CLOCK: [2015-08-04 Tue 16:34]--[2015-08-04 Tue 17:25] =>  0:51
     CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
     CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
 
-Combine the two models performing the necessary renames:
+Combine the two models performing the necessary renames. Notes:
 
-- use pointer map in registrar rather than shared pointers.
-- rename dia to tack to tack_dia. create tack_json. this is in
-  preparation for =tack.dia=, etc.
 - merge frontend with tack. Rename frontend interface to something
   like model source or just source. Remove the dia frontend class,
   moving the code into the dia transformer.
 - consider creating a top-level workflow that unites the frontend
-  workflow with the "merging" workflow. Find good names for all
-  workflows. A good name for the current SML workflow is =assembler=
-  because it assembles a complete model from all the parts.
+  workflow with the "merging" workflow.
+- Find good names for all workflows. A good name for the current SML
+  workflow is =assembler= because it assembles a complete model from
+  all the parts.
 - consider creating a "file opener" that takes an input descriptor and
   returns a stream. This way the source interface can just be an
   ostream. This probably makes no sense for certain sources like dia
   though.
+- rename dia to tack to tack_dia. create tack_json. this is in
+  preparation for =tack.dia=, etc.
+- use pointer map in registrar rather than shared pointers.
 
 *** Rename types in =tack= using MOF/eCore as a starting point        :story:
 

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
 #include "dogen/tack/types/importer.hpp"
 #include "dogen/tack_json/types/file_importer.hpp"
 #include "dogen/tack_json/types/initializer.hpp"

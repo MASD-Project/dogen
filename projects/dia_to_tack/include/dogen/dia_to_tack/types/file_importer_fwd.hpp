@@ -18,40 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/tack_json/types/hydrator.hpp"
-#include "dogen/tack_json/types/file_importer.hpp"
+#ifndef DOGEN_DIA_TO_TACK_TYPES_FILE_IMPORTER_FWD_HPP
+#define DOGEN_DIA_TO_TACK_TYPES_FILE_IMPORTER_FWD_HPP
 
-using namespace dogen::utility::log;
-
-namespace {
-
-const std::string id("tack_json.file_importer");
-const std::list<std::string> extensions({ ".json" });
-auto lg(logger_factory(id));
-const std::string empty;
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace tack_json {
+namespace dia_to_tack {
 
-file_importer::~file_importer() noexcept { }
-
-std::string file_importer::id() const {
-    return ::id;
-}
-
-std::list<std::string> file_importer::supported_extensions() const {
-    return ::extensions;
-}
-
-tack::model file_importer::import(const dynamic::workflow& w,
-    const tack::input_descriptor& d,
-    const boost::optional<tack::preprocessing_settings>& /*s*/) {
-    tack_json::hydrator h(w);
-    return h.hydrate(d.path());
-}
+class file_importer;
 
 } }
+
+#endif

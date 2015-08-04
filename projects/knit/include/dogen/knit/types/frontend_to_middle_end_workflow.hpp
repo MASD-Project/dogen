@@ -83,9 +83,10 @@ private:
         const std::list<frontend::input_descriptor>& descriptors) const;
 
     /**
-     * @brief Execute the Tack workflow.
+     * @brief Execute the tack assembling workflow.
      */
-    tack::model merge_models_activity(const std::list<tack::model>& models) const;
+    tack::model assemble_models_activity(
+        const std::list<tack::model>& models) const;
 
     /**
      * @brief Checks the options chosen by the user to determine if

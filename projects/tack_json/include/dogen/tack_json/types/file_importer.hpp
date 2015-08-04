@@ -35,6 +35,9 @@ namespace tack_json {
  */
 class file_importer final : public tack::file_importer_interface {
 public:
+    virtual ~file_importer() noexcept;
+
+public:
     std::string id() const override;
     std::list<std::string> supported_extensions() const override;
     tack::model import(const dynamic::workflow& w,

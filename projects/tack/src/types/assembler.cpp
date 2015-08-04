@@ -112,7 +112,7 @@ void assembler::update_model_generability_activity(model& merged_model) const {
     merged_model.has_generatable_types(has_generatable_types(merged_model));
 }
 
-model assembler::execute(std::list<model> models) const {
+model assembler::assemble(const std::list<model>& models) const {
     BOOST_LOG_SEV(lg, debug) << "Starting tack assembly.";
 
     auto r(create_merged_model_activity(models));

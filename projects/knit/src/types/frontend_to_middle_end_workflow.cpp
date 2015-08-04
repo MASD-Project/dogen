@@ -146,11 +146,11 @@ obtain_target_path_activity(
 }
 
 tack::model frontend_to_middle_end_workflow::
-merge_models_activity(const std::list<tack::model>& models) const {
+assemble_models_activity(const std::list<tack::model>& models) const {
     tack::assembler a;
-    const auto r(a.execute(models));
+    const auto r(a.assemble(models));
 
-    BOOST_LOG_SEV(lg, debug) << "Merged model: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Assembled model: " << r;
     BOOST_LOG_SEV(lg, debug) << "Totals: objects: " << r.objects().size()
                              << " modules: " << r.modules().size()
                              << " concepts: " << r.concepts().size()
@@ -178,7 +178,7 @@ tack::model frontend_to_middle_end_workflow::execute() const {
 
     const auto d(obtain_input_descriptors_activity());
     const auto pm(obtain_partial_tack_models_activity(d));
-    const auto r(merge_models_activity(pm));
+    const auto r(assemble_models_activity(pm));
     const auto tp(obtain_target_path_activity(d));
     persist_model_activity(tp, r);
 
