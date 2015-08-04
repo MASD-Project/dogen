@@ -177,6 +177,7 @@ Links:
 - [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** STARTED Merge frontend with =tack=                                :story:
+    CLOCK: [2015-08-04 Tue 16:34]--[2015-08-04 Tue 17:25] =>  0:51
     CLOCK: [2015-08-04 Tue 14:41]--[2015-08-04 Tue 16:33] =>  1:52
     CLOCK: [2015-08-03 Mon 21:15]--[2015-08-03 Mon 22:04] =>  0:49
 

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <memory>
 #include <boost/optional.hpp>
 #include "dogen/tack/types/model.hpp"
 #include "dogen/config/types/archive_types.hpp"
@@ -103,6 +104,13 @@ private:
     const dynamic::repository& repository_;
     const dynamic::workflow dynamic_workflow_;
 };
+
+template<typename FileImporter>
+inline void register_file_importer() {
+    auto s(std::make_shared<FileImporter>());
+    for (const auto& se : s->supported_extensions())
+        importer::registrar().register_file_importer_for_extension(se, s);
+}
 
 } }
 

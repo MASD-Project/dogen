@@ -141,6 +141,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/frontend/include
     ${CMAKE_SOURCE_DIR}/projects/backend/include
     ${CMAKE_SOURCE_DIR}/projects/tack/include
+    ${CMAKE_SOURCE_DIR}/projects/tack_json/include
     ${CMAKE_SOURCE_DIR}/projects/config/include
     ${CMAKE_SOURCE_DIR}/projects/cpp/include
     ${CMAKE_SOURCE_DIR}/projects/formatters/include
@@ -165,6 +166,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/backend/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tack/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tack/spec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tack_json/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tack_json/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/config/spec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp/src)

@@ -64,7 +64,7 @@ public:
     virtual model import(const dynamic::workflow& w,
         const input_descriptor& d,
         const boost::optional<preprocessing_settings>& s =
-        boost::optional<preprocessing_settings>()) const = 0;
+        boost::optional<preprocessing_settings>()) = 0;
 };
 
 } }
