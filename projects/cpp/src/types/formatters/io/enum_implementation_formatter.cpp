@@ -51,15 +51,16 @@ std::string provider::formatter_name() const {
 
 boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
-  const tack::enumeration& o) const {
-  auto builder(f.make());
+    const tack::enumeration& o) const {
+    auto builder(f.make());
 
-  builder.add(inclusion_constants::std::ostream());
-  builder.add(inclusion_constants::std::stdexcept());
+    builder.add(inclusion_constants::std::ostream());
+    builder.add(inclusion_constants::std::stdexcept());
+    builder.add(inclusion_constants::std::string());
 
-  const auto ch_fn(traits::class_header_formatter_name());
-  builder.add(o.name(), ch_fn);
-  return builder.build();
+    const auto ch_fn(traits::class_header_formatter_name());
+    builder.add(o.name(), ch_fn);
+    return builder.build();
 }
 
 }
