@@ -33,7 +33,7 @@ target_link_libraries(knit_spec
     dia
     tack
     tack_json
-    dia_to_tack
+    tack_dia
     config
     backend
     ${LIBXML2_LIBRARIES}

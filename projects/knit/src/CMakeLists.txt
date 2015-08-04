@@ -26,7 +26,7 @@ add_library(knit STATIC ${knit_files})
 target_link_libraries(knit
     tack
     dia
-    dia_to_tack
+    tack_dia
     tack_json
     backend
     formatters

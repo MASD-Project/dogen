@@ -14,18 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 18:04]
+#+CAPTION: Clock summary at [2015-08-04 Tue 21:57]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *17:36* |       |      |
+| *Total time*                                                                | *18:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 17:36   |       |      |
-| Active                                                                      |         | 17:36 |      |
+| Stories                                                                     | 18:34   |       |      |
+| Active                                                                      |         | 18:34 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
-| COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:13 |
-| STARTED Merge frontend with =tack=                                          |         |       | 4:07 |
+| COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
+| COMPLETED Merge frontend with =tack=                                        |         |       | 4:38 |
+| COMPLETED Rename dia to tack to tack dia                                    |         |       | 0:27 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -55,6 +56,51 @@ Investigate adding biicode support since we need to add a RapidJson
 dependency. Create a blog post about it.
 
 Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
+*** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
+    CLOCK: [2015-08-04 Tue 14:26]--[2015-08-04 Tue 14:39] =>  0:13
+    CLOCK: [2015-08-01 Mon 09:00]--[2015-08-01 Mon 17:00] =>  8:00
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+- update find boost with MSVC version
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
+Links:
+
+- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
+- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
+- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
+- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
+- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
+- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** COMPLETED Rename SML to =tack=                                    :story:
     CLOSED: [2015-08-03 Mon 17:32]
@@ -154,68 +200,21 @@ Combine the two models performing the necessary renames. Notes:
   returns a stream. This way the source interface can just be an
   ostream. This probably makes no sense for certain sources like dia
   though.
-- rename dia to tack to tack_dia. create tack_json. this is in
-  preparation for =tack.dia=, etc.
+- create tack_json. this is in preparation for =tack.dia=, etc.
 - use pointer map in registrar rather than shared pointers.
 
-*** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
-    CLOCK: [2015-08-04 Tue 14:26]--[2015-08-04 Tue 14:39] =>  0:13
-    CLOCK: [2015-08-01 Mon 09:00]--[2015-08-01 Mon 17:00] =>  8:00
+*** COMPLETED Rename dia to tack to tack dia                          :story:
+    CLOSED: [2015-08-04 Tue 21:57]
+    CLOCK: [2015-08-04 Tue 21:30]--[2015-08-04 Tue 21:57] =>  0:27
 
-Using our "SoC" resources, we need to setup a Dogen development
-environment on Windows using VS 2015. We need to also create a blog
-post about it.
-
-Issues:
-
-- is polymorphic in instrinsics for microsoft, remove comment. see
-  patch in github.
-- add string to enum io
-- update exception classes: remove default in base constructor, and
-  add explicit to base and derived as well as by ref.
-- update find boost with MSVC version
-
-File with instructions:
-
-0. cd c:\DEVELOPEMENT\output
-1. (only once - as admin) update version of msvc in cmake C:\Program
-  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
-  look for msvc-140 and update it to msvc-150
-2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
-   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
-3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
-
-if you need to re-run: delete the cache:
-
-del CMakeCache.txt
-
-4. msbuild dogen.sln /t:config
-
-5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
-  errors- called msbuild.log in output directory
-
-Links:
-
-- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
-- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
-- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
-- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
-- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
-- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
+- rename dia to tack to tack_dia. this is in preparation for
+  =tack.dia=, etc.
 
 *** Remove saving preprocessing input support                         :story:
 
 We seem to have the ability of saving dia diagrams etc when importing
 a tack model but this is not used any where. It was borked with the
 latest refactor. Remove this functionality.
-
-*** Rename types in =tack= using MOF/eCore as a starting point        :story:
-
-Rename the types in tack to make them a bit more inline with
-MOF/eCore. As much as possible but without going overboard. Ensure
-we do not pick up meta-meta-model concepts by mistake. Rename nested
-qname to something more sensible from MOF/eCore. Review all concept
-names in this light.
 
 *** Create the =yarn= model                                           :story:
 

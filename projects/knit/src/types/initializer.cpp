@@ -20,7 +20,7 @@
  */
 #include "dogen/cpp/types/initializer.hpp"
 #include "dogen/tack_json/types/initializer.hpp"
-#include "dogen/dia_to_tack/types/initializer.hpp"
+#include "dogen/tack_dia/types/initializer.hpp"
 #include "dogen/knit/types/initializer.hpp"
 
 namespace dogen {
@@ -28,7 +28,7 @@ namespace knit {
 
 void initializer::initialize() {
     dogen::tack_json::initializer::initialize();
-    dogen::dia_to_tack::initializer::initialize();
+    dogen::tack_dia::initializer::initialize();
     dogen::cpp::initializer::initialize();
 }
 

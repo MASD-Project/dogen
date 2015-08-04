@@ -158,9 +158,9 @@ if(use_latest_knitter)
 endif()
 add_dependencies(knit_all knit_${target})
 
-set(target dia_to_tack)
+set(target tack_dia)
 add_custom_target(knit_${target}
-    COMMENT "Knitting Dia to Tack model" VERBATIM
+    COMMENT "Knitting Tack Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
     --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia

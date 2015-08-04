@@ -61,7 +61,7 @@ field_definition mock_field_definition_factory::create_comment() const {
     field_definition r;
     r.name().simple("comment");
     r.name().qualified("dia.comment");
-    r.ownership_hierarchy().model_name("dia_to_tack");
+    r.ownership_hierarchy().model_name("tack_dia");
     r.value_type(value_types::text);
     r.definition_type(field_definition_types::instance);
     r.scope(scope_types::not_applicable);
@@ -73,7 +73,7 @@ create_identity_attribute() const {
     field_definition r;
     r.name().simple("identity_attribute");
     r.name().qualified("dia.identity_attribute");
-    r.ownership_hierarchy().model_name("dia_to_tack");
+    r.ownership_hierarchy().model_name("tack_dia");
     r.value_type(value_types::text);
     r.definition_type(field_definition_types::instance);
     r.scope(scope_types::property);
