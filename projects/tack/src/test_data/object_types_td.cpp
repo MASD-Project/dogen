@@ -26,7 +26,7 @@ namespace tack {
 object_types_generator::object_types_generator() : position_(0) { }
 void object_types_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<object_types>(position % 12);
+    v = static_cast<object_types>(position % 9);
 }
 
 object_types_generator::result_type

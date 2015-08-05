@@ -38,15 +38,12 @@ enum class object_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     user_defined_service = 1, ///< The service has been defined by the user.
     visitor = 2, ///< The service is a system generated visitor.
-    key_extractor = 3, ///< The service is a system defined key extractor.
-    user_defined_value_object = 4, ///< Regular value object with no distinguishing features.
-    unversioned_key = 5, ///< Value is an unversioned key.
-    versioned_key = 6, ///< Value is an versioned key.
-    exception = 7, ///< Value represents an exception type.
-    smart_pointer = 8, ///< Value is a smart pointer.
-    hash_container = 9, ///< Type is a hash-based container.
-    sequence_container = 10, ///< Type is a sequence container.
-    ordered_container = 11 ///< Type is a ordered container.
+    user_defined_value_object = 3, ///< Regular value object with no distinguishing features.
+    exception = 4, ///< Value represents an exception type.
+    smart_pointer = 5, ///< Value is a smart pointer.
+    hash_container = 6, ///< Type is a hash-based container.
+    sequence_container = 7, ///< Type is a sequence container.
+    ordered_container = 8 ///< Type is a ordered container.
 };
 
 } }

@@ -866,7 +866,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -980,7 +980,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1317,7 +1317,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1432,7 +1432,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1546,7 +1546,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>0</is_final>
 			</second>
 		</item>
@@ -1679,7 +1679,7 @@
 						</second>
 					</item>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -1985,7 +1985,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2152,7 +2152,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2504,7 +2504,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
@@ -2942,7 +2942,7 @@
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
 				</relationships>
-				<object_type>4</object_type>
+				<object_type>3</object_type>
 				<is_final>1</is_final>
 			</second>
 		</item>
