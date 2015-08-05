@@ -34,10 +34,7 @@ std::ostream& operator<<(std::ostream& s, const cpp_options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::config::cpp_options\"" << ", "
-      << "\"split_project\": " << v.split_project() << ", "
       << "\"project_directory_path\": " << "\"" << v.project_directory_path().generic_string() << "\"" << ", "
-      << "\"source_directory_path\": " << "\"" << v.source_directory_path().generic_string() << "\"" << ", "
-      << "\"include_directory_path\": " << "\"" << v.include_directory_path().generic_string() << "\"" << ", "
       << "\"disable_cmakelists\": " << v.disable_cmakelists()
       << " }";
     return(s);

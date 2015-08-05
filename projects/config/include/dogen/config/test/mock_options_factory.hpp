@@ -46,32 +46,13 @@ public:
 
 public:
     /**
-     * @brief Returns the output options configured to output to
-     * file.
+     * @brief Returns the output options with sensible defaults.
      */
     static output_options make_output_options();
 
     /**
-     * @brief Returns the C++ options with empty source and include
-     * directories.
-     *
-     * All facets are enabled.
-     */
-    static cpp_options make_cpp_options();
-
-    /**
-     * @brief Returns the C++ options with source and include
-     * directory populated.
-     *
-     * All facets are enabled.
-     */
-    static cpp_options make_cpp_options(
-        const boost::filesystem::path& src_dir,
-        const boost::filesystem::path& include_dir);
-
-    /**
-     * @brief Returns the C++ options with empty source and include
-     * directories and a project directory populated.
+     * @brief Returns the C++ options with a project directory
+     * populated.
      *
      * All facets are enabled.
      */
@@ -86,17 +67,14 @@ public:
         const boost::filesystem::path& target,
         const std::string& module_path);
 
+    /**
+     * @brief Returns the knitting options with target set and
+     * optionally project directory and module path.
+     */
     static knitting_options make_knitting_options(
         const boost::filesystem::path& target,
-        const boost::filesystem::path& src_dir,
-        const boost::filesystem::path& include_dir,
-        const std::string& module_path,
-        const bool verbose = true);
-
-    static knitting_options make_knitting_options(
-        const boost::filesystem::path& target,
-        const boost::filesystem::path& project_dir,
-        const std::string& module_path,
+        const boost::filesystem::path project_dir = boost::filesystem::path(),
+        const std::string module_path = std::string(),
         const bool verbose = true);
 };
 

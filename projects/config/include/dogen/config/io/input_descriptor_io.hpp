@@ -18,4 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/split_project/test_data/package/a_class_td.hpp"
+#ifndef DOGEN_CONFIG_IO_INPUT_DESCRIPTOR_IO_HPP
+#define DOGEN_CONFIG_IO_INPUT_DESCRIPTOR_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/config/types/input_descriptor.hpp"
+
+namespace dogen {
+namespace config {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::config::input_descriptor& v);
+
+} }
+
+#endif

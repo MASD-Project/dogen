@@ -18,5 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/split_project/serialization/package/a_class_ser.hpp"
-#include "dogen/test_models/split_project/serialization/registrar_ser.hpp"
+#ifndef DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_FWD_HPP
+#define DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace config {
+
+class input_descriptor;
+
+} }
+
+#endif

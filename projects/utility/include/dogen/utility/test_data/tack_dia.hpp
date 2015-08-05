@@ -73,7 +73,6 @@ public:
     static boost::filesystem::path input_rename_facet_folder_dia();
     static boost::filesystem::path input_use_integrated_io_dia();
     static boost::filesystem::path input_all_primitives_dia();
-    static boost::filesystem::path input_split_project_dia();
     static boost::filesystem::path input_trivial_inheritance_dia();
     static boost::filesystem::path input_trivial_association_dia();
     static boost::filesystem::path input_comments_dia();

@@ -126,11 +126,7 @@ workflow::managed_directories(const config::knitting_options& ko,
     const auto mn(m.name().simple_name());
 
     std::forward_list<boost::filesystem::path> r;
-    if (ko.cpp().split_project()) {
-        r.push_front(ko.cpp().source_directory_path() / mn);
-        r.push_front(ko.cpp().include_directory_path() / mn);
-    } else
-        r.push_front(ko.cpp().project_directory_path() / mn);
+    r.push_front(ko.cpp().project_directory_path() / mn);
 
     return r;
 }

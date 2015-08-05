@@ -18,27 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/config/io/reference_io.hpp"
+#ifndef DOGEN_CONFIG_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
+#define DOGEN_CONFIG_TEST_DATA_INPUT_DESCRIPTOR_TD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/config/types/input_descriptor.hpp"
 
 namespace dogen {
 namespace config {
 
-std::ostream& operator<<(std::ostream& s, const reference& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::config::reference\"" << ", "
-      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
-      << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\""
-      << " }";
-    return(s);
-}
+class input_descriptor_generator {
+public:
+    input_descriptor_generator();
+
+public:
+    typedef dogen::config::input_descriptor result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

@@ -37,8 +37,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/two_layers_with_objects/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc
-    ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
+        ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_association/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/std_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
@@ -91,7 +90,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/source/split_project)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model)

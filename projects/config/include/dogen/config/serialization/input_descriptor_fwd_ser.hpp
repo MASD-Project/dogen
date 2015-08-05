@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_TYPES_REFERENCE_FWD_HPP
-#define DOGEN_CONFIG_TYPES_REFERENCE_FWD_HPP
+#ifndef DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
+#define DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace config {
+#include "dogen/config/types/input_descriptor_fwd.hpp"
 
-class reference;
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const dogen::config::input_descriptor& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::config::input_descriptor& v, unsigned int version);
 
 } }
 

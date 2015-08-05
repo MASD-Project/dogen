@@ -61,12 +61,7 @@ make_inclusion_path(const settings::path_settings& ps,
 
     boost::filesystem::path r;
 
-    if (options_.split_project()) {
-        for(auto n : qn.external_module_path())
-            r /= n;
-
-        r /= qn.model_name();
-    } else if (ps.file_type() == formatters::file_types::cpp_header) {
+    if (ps.file_type() == formatters::file_types::cpp_header) {
         for(auto n : qn.external_module_path())
             r /= n;
         r /= qn.model_name();
@@ -118,21 +113,13 @@ make_file_path(const settings::path_settings& ps,
     const auto ft(ps.file_type());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        if (options_.split_project())
-            r = options_.include_directory_path();
-        else {
-            r = options_.project_directory_path() / qn.model_name();
-            r /= ps.include_directory_name();
-        }
+        r = options_.project_directory_path() / qn.model_name();
+        r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
-        if (options_.split_project())
-            r = options_.source_directory_path();
-        else {
-            r = options_.project_directory_path() / qn.model_name();
-            r /= ps.source_directory_name();
-        }
+        r = options_.project_directory_path() / qn.model_name();
+        r /= ps.source_directory_name();
         break;
 
     default:

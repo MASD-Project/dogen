@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen/config/hash/reference_hash.hpp"
 #include "dogen/config/hash/cpp_options_hash.hpp"
 #include "dogen/config/hash/input_options_hash.hpp"
 #include "dogen/config/hash/output_options_hash.hpp"
+#include "dogen/config/hash/input_descriptor_hash.hpp"
 #include "dogen/config/hash/knitting_options_hash.hpp"
 #include "dogen/config/hash/stitching_options_hash.hpp"
 

@@ -19,19 +19,34 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/split_project/io/package/a_class_io.hpp"
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen/config/io/input_descriptor_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
-namespace test_models {
-namespace split_project {
-namespace package {
+namespace config {
 
-std::ostream& operator<<(std::ostream& s, const a_class& v) {
+std::ostream& operator<<(std::ostream& s, const input_descriptor& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::test_models::split_project::package::a_class\"" << ", "
-      << "\"prop_0\": " << v.prop_0()
+      << "\"__type__\": " << "\"dogen::config::input_descriptor\"" << ", "
+      << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
+      << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
+      << "\"is_target\": " << v.is_target()
       << " }";
     return(s);
 }
 
-} } } }
+} }

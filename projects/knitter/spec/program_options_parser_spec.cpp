@@ -38,12 +38,6 @@ const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");
 const std::string invalid_facet_type("Invalid facet type");
 const std::string unknown_option("invalid-argument");
-const std::string source_include_error(
-    "You must supply both source-dir and include-dir");
-const std::string split_project_dir_error(
-    "Argument project-dir cannot be used in conjunction with project splitting");
-const std::string source_include_without_split(
-    "Arguments source-dir and include-dir require project splitting");
 
 const std::string help_arg("--help");
 const std::string version_arg("--version");
@@ -51,19 +45,11 @@ const std::string invalid_arg("--invalid-argument");
 const std::string invalid_value_arg("invalid-value");
 
 const std::string verbose_arg("--verbose");
-const std::string debug_dir_arg("--debug-dir");
-const std::string debug_dir_value_arg("some_dir");
-const std::string save_dia_model_arg("--save-dia-model");
-const std::string save_dia_model_value_arg("xml");
-const std::string save_tack_model_arg("--save-tack-model");
-const std::string save_tack_model_value_arg("text");
-const std::string stop_after_merging_arg("--stop-after-merging");
-const std::string stop_after_formatting_arg("--stop-after-formatting");
-
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
-const std::string external_module_path_arg("--external-module-path");
+const std::string target_value_external_path_arg("some_target,a module");
 const std::string external_module_path_value_arg("a module");
+
 const std::string reference_arg("--reference");
 const std::string reference_value_1_arg("some reference");
 const std::string reference_value_2_arg("another reference");
@@ -75,13 +61,8 @@ const std::string reference_value_3_module_path("module path 3");
 const std::string reference_value_4_diagram("another reference");
 const std::string reference_value_4_module_path("module path 4");
 
-const std::string cpp_split_project_arg("--cpp-split-project");
 const std::string cpp_project_dir_arg("--cpp-project-dir");
 const std::string cpp_project_dir_value_arg("a project dir");
-const std::string cpp_source_arg("--cpp-source-dir");
-const std::string cpp_source_value_arg("some_source");
-const std::string cpp_include_arg("--cpp-include-dir");
-const std::string cpp_include_value_arg("some_include");
 const std::string cpp_disable_cmakelists_arg("--cpp-disable-cmakelists");
 
 const std::string delete_extra_files_arg("--delete-extra-files");
@@ -242,10 +223,9 @@ BOOST_AUTO_TEST_CASE(supplying_no_arguments_throws) {
 
 BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_modeling_options_results_in_expected_options");
+
     const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        external_module_path_arg,
-        external_module_path_value_arg,
+        target_arg, target_value_external_path_arg,
         reference_arg,
         reference_value_1_arg,
         reference_arg,
@@ -256,8 +236,9 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto io(ko.input());
-    BOOST_CHECK(io.target().string() == target_value_arg);
-    BOOST_CHECK(io.external_module_path() == external_module_path_value_arg);
+    BOOST_CHECK(io.target().path().string() == target_value_arg);
+    BOOST_CHECK(io.target().external_module_path() ==
+        external_module_path_value_arg);
 
     const auto refs(io.references());
     BOOST_REQUIRE(refs.size() == 2);
@@ -268,8 +249,7 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
 BOOST_AUTO_TEST_CASE(supplying_module_path_for_references_results_in_correct_module_path) {
     SETUP_TEST_LOG_SOURCE("supplying_module_path_for_references_results_in_correct_module_path");
     const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        external_module_path_arg,
+        target_arg, target_value_external_path_arg,
         external_module_path_value_arg,
         reference_arg,
         reference_value_3_arg,
@@ -303,17 +283,15 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto is(ko.input());
-    BOOST_CHECK(is.target().string() == target_value_arg);
-    BOOST_CHECK(is.external_module_path().empty());
+    BOOST_CHECK(is.target().path().string() == target_value_arg);
+    BOOST_CHECK(is.target().external_module_path().empty());
     BOOST_REQUIRE(is.references().empty());
 }
 
 BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {
     SETUP_TEST_LOG("supplying_arguments_without_target_throws");
     const std::vector<std::string> o = {
-        cpp_split_project_arg,
-        cpp_source_arg, cpp_source_value_arg,
-        cpp_include_arg, cpp_include_value_arg
+        cpp_project_dir_arg, cpp_project_dir_value_arg
     };
     check_exception(o, missing_target);
 }
@@ -322,9 +300,7 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
     SETUP_TEST_LOG_SOURCE("supplying_cpp_arguments_results_in_expected_options");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_split_project_arg,
-        cpp_source_arg, cpp_source_value_arg,
-        cpp_include_arg, cpp_include_value_arg,
+        cpp_project_dir_arg, cpp_project_dir_value_arg,
         cpp_disable_cmakelists_arg,
     };
 
@@ -332,8 +308,6 @@ BOOST_AUTO_TEST_CASE(supplying_cpp_arguments_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto co(ko.cpp());
-    BOOST_CHECK(co.source_directory_path().string() == cpp_source_value_arg);
-    BOOST_CHECK(co.include_directory_path().string() == cpp_include_value_arg);
     BOOST_CHECK(co.disable_cmakelists());
 }
 
@@ -345,10 +319,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_cpp_arguments_results_in_expected_options) {
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
 
     const auto co(ko.cpp());
-    BOOST_CHECK(!co.split_project());
     BOOST_CHECK(!co.project_directory_path().empty());
-    BOOST_CHECK(co.source_directory_path().empty());
-    BOOST_CHECK(co.include_directory_path().empty());
     BOOST_CHECK(!co.disable_cmakelists());
 }
 
@@ -366,7 +337,7 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_help_results_in_help) {
     SETUP_TEST_LOG("supplying_valid_arguments_with_help_results_in_help");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_include_arg, cpp_include_value_arg,
+        cpp_project_dir_arg, cpp_project_dir_value_arg,
         help_arg
     };
     check_help(o);
@@ -376,7 +347,7 @@ BOOST_AUTO_TEST_CASE(supplying_valid_arguments_with_version_results_in_version) 
     SETUP_TEST_LOG("supplying_valid_arguments_with_version_results_in_version");
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        cpp_include_arg, cpp_include_value_arg,
+        cpp_project_dir_arg, cpp_project_dir_value_arg,
         version_arg
     };
     check_version(o);
@@ -394,73 +365,6 @@ BOOST_AUTO_TEST_CASE(supplying_project_directory_results_in_expected_options) {
 
     const auto co(ko.cpp());
     BOOST_CHECK(co.project_directory_path() == cpp_project_dir_value_arg);
-}
-
-BOOST_AUTO_TEST_CASE(supplying_split_without_source_and_include_defaults_them) {
-    SETUP_TEST_LOG_SOURCE("supplying_split_without_source_and_include_defaults_them");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        cpp_split_project_arg
-    };
-
-    const auto ko(check_valid_arguments(o));
-    BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-
-    const auto co(ko.cpp());
-    BOOST_CHECK(!co.source_directory_path().empty());
-    BOOST_CHECK(!co.include_directory_path().empty());
-}
-
-BOOST_AUTO_TEST_CASE(supplying_source_or_include_without_split_throws) {
-    SETUP_TEST_LOG("supplying_source_or_include_without_split_throws");
-    const std::vector<std::string> o0 = {
-        target_arg, target_value_arg,
-        cpp_source_arg, cpp_source_value_arg
-    };
-    check_exception(o0, source_include_without_split);
-
-    const std::vector<std::string> o1 = {
-        target_arg, target_value_arg,
-        cpp_include_arg, cpp_include_value_arg
-    };
-    check_exception(o1, source_include_without_split);
-
-    const std::vector<std::string> o2 = {
-        target_arg, target_value_arg,
-        cpp_source_arg, cpp_source_value_arg,
-        cpp_include_arg, cpp_include_value_arg
-    };
-    check_exception(o2, source_include_without_split);
-}
-
-BOOST_AUTO_TEST_CASE(supplying_project_dir_with_split_throws) {
-    SETUP_TEST_LOG("supplying_project_dir_with_split_throws");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        cpp_split_project_arg,
-        cpp_project_dir_arg, cpp_project_dir_value_arg
-    };
-    check_exception(o, split_project_dir_error);
-}
-
-BOOST_AUTO_TEST_CASE(supplying_source_and_no_include_throws) {
-    SETUP_TEST_LOG("supplying_source_and_no_include_throws");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        cpp_split_project_arg,
-        cpp_source_arg, cpp_source_value_arg
-    };
-    check_exception(o, source_include_error);
-}
-
-BOOST_AUTO_TEST_CASE(supplying_include_and_no_source_throws) {
-    SETUP_TEST_LOG("supplying_include_and_no_source_throws");
-    const std::vector<std::string> o = {
-        target_arg, target_value_arg,
-        cpp_split_project_arg,
-        cpp_include_arg, cpp_include_value_arg
-    };
-    check_exception(o, source_include_error);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {

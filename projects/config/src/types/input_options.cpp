@@ -23,29 +23,20 @@
 namespace dogen {
 namespace config {
 
-input_options::input_options(input_options&& rhs)
-    : target_(std::move(rhs.target_)),
-      external_module_path_(std::move(rhs.external_module_path_)),
-      references_(std::move(rhs.references_)) { }
-
 input_options::input_options(
-    const boost::filesystem::path& target,
-    const std::string& external_module_path,
-    const std::vector<dogen::config::reference>& references)
+    const dogen::config::input_descriptor& target,
+    const std::vector<dogen::config::input_descriptor>& references)
     : target_(target),
-      external_module_path_(external_module_path),
       references_(references) { }
 
 void input_options::swap(input_options& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
-    swap(external_module_path_, other.external_module_path_);
     swap(references_, other.references_);
 }
 
 bool input_options::operator==(const input_options& rhs) const {
     return target_ == rhs.target_ &&
-        external_module_path_ == rhs.external_module_path_ &&
         references_ == rhs.references_;
 }
 
@@ -55,51 +46,35 @@ input_options& input_options::operator=(input_options other) {
     return *this;
 }
 
-const boost::filesystem::path& input_options::target() const {
+const dogen::config::input_descriptor& input_options::target() const {
     return target_;
 }
 
-boost::filesystem::path& input_options::target() {
+dogen::config::input_descriptor& input_options::target() {
     return target_;
 }
 
-void input_options::target(const boost::filesystem::path& v) {
+void input_options::target(const dogen::config::input_descriptor& v) {
     target_ = v;
 }
 
-void input_options::target(const boost::filesystem::path&& v) {
+void input_options::target(const dogen::config::input_descriptor&& v) {
     target_ = std::move(v);
 }
 
-const std::string& input_options::external_module_path() const {
-    return external_module_path_;
-}
-
-std::string& input_options::external_module_path() {
-    return external_module_path_;
-}
-
-void input_options::external_module_path(const std::string& v) {
-    external_module_path_ = v;
-}
-
-void input_options::external_module_path(const std::string&& v) {
-    external_module_path_ = std::move(v);
-}
-
-const std::vector<dogen::config::reference>& input_options::references() const {
+const std::vector<dogen::config::input_descriptor>& input_options::references() const {
     return references_;
 }
 
-std::vector<dogen::config::reference>& input_options::references() {
+std::vector<dogen::config::input_descriptor>& input_options::references() {
     return references_;
 }
 
-void input_options::references(const std::vector<dogen::config::reference>& v) {
+void input_options::references(const std::vector<dogen::config::input_descriptor>& v) {
     references_ = v;
 }
 
-void input_options::references(const std::vector<dogen::config::reference>&& v) {
+void input_options::references(const std::vector<dogen::config::input_descriptor>&& v) {
     references_ = std::move(v);
 }
 

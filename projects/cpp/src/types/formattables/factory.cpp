@@ -455,18 +455,11 @@ make_cmakelists(const config::cpp_options& opts,
                 settings_not_found_for_formatter + ch_fn));
     }
 
-    if (opts.split_project()) {
-        cm->source_file_path(opts.source_directory_path() /
-            m.name().model_name() / cmakelists_name);
-        cm->include_file_path(opts.include_directory_path() /
-            m.name().model_name() / cmakelists_name);
-    } else {
-        cm->source_file_path(opts.project_directory_path() /
-            m.name().model_name() / i->second.source_directory_name() /
-            cmakelists_name);
-        cm->include_file_path(opts.project_directory_path() /
-            m.name().model_name() / cmakelists_name);
-    }
+    cm->source_file_path(opts.project_directory_path() /
+        m.name().model_name() / i->second.source_directory_name() /
+        cmakelists_name);
+    cm->include_file_path(opts.project_directory_path() /
+        m.name().model_name() / cmakelists_name);
 
     const auto odb_ch_fn(
         formatters::odb::traits::class_header_formatter_name());
@@ -518,12 +511,8 @@ factory::make_odb_options(const config::cpp_options& opts,
     r->odb_folder(i->second.facet_directory());
 
     boost::filesystem::path fp;
-    if (opts.split_project())
-        fp = opts.source_directory_path() / m.name().model_name();
-    else {
-        fp = opts.project_directory_path() / m.name().model_name();
-        fp /= i->second.source_directory_name();
-    }
+    fp = opts.project_directory_path() / m.name().model_name();
+    fp /= i->second.source_directory_name();
     fp /= odb_options_name;
     r->file_path(fp);
 

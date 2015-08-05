@@ -46,20 +46,13 @@ public:
     program_options_parser(const program_options_parser&) = delete;
 
 public:
-    program_options_parser(program_options_parser&& rhs)
-    : arguments_(std::move(rhs.arguments_)),
-      help_function_(std::move(rhs.help_function_)),
-      version_function_(std::move(rhs.version_function_)),
-      current_path_(std::move(rhs.current_path_)) { }
-
     explicit program_options_parser(std::vector<std::string> arguments);
     program_options_parser(const int argc, const char* argv[]);
+    program_options_parser(program_options_parser&& rhs);
 
 private:
-    void throw_project_dir_with_split() const;
-    void throw_include_source_without_split() const;
-    void throw_missing_include_source() const;
-    void throw_missing_target() const;
+    config::input_descriptor make_input_descriptor(
+        const std::string& s, const bool is_target = false) const;
 
 private:
     typedef boost::program_options::options_description options_description;
@@ -92,7 +85,6 @@ private:
     const std::vector<std::string> arguments_;
     std::function<void(const std::string&)> help_function_;
     std::function<void()> version_function_;
-    const boost::filesystem::path current_path_;
 };
 
 } }

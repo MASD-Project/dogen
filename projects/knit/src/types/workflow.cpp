@@ -55,7 +55,8 @@ workflow::workflow(workflow&& rhs)
 
 workflow::
 workflow(const config::knitting_options& o) : knitting_options_(o) {
-    config::knitting_options_validator::validate(knitting_options_);
+    config::knitting_options_validator v;
+    v.validate(knitting_options_);
 }
 
 bool workflow::housekeeping_required() const {

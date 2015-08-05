@@ -37,26 +37,10 @@ output_options mock_options_factory::make_output_options() {
     return r;
 }
 
-cpp_options mock_options_factory::make_cpp_options() {
-    return make_cpp_options(empty, empty);
-}
-
-cpp_options mock_options_factory::make_cpp_options(
-    const boost::filesystem::path& src_dir,
-    const boost::filesystem::path& include_dir) {
-
-    cpp_options r;
-    r.split_project(true);
-    r.source_directory_path(src_dir);
-    r.include_directory_path(include_dir);
-    return r;
-}
-
 cpp_options mock_options_factory::make_cpp_options(
     const boost::filesystem::path& project_dir) {
 
-    cpp_options r(make_cpp_options(empty, empty));
-    r.split_project(false);
+    cpp_options r;
     r.project_directory_path(project_dir);
     return r;
 }
@@ -64,30 +48,20 @@ cpp_options mock_options_factory::make_cpp_options(
 input_options mock_options_factory::make_input_options(
     const boost::filesystem::path& target,
     const std::string& module_path) {
+
+    input_descriptor id;
+    id.external_module_path(module_path);
+    id.path(target);
+
     input_options r;
-    r.external_module_path(module_path);
-    r.target(target);
+    r.target(id);
     return r;
 }
 
 knitting_options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,
-    const boost::filesystem::path& src_dir,
-    const boost::filesystem::path& include_dir,
-    const std::string& module_path,
-    const bool verbose) {
-    knitting_options r;
-    r.verbose(verbose);
-    r.input(make_input_options(target, module_path));
-    r.cpp(make_cpp_options(src_dir, include_dir));
-    r.output(make_output_options());
-    return r;
-}
-
-knitting_options mock_options_factory::make_knitting_options(
-    const boost::filesystem::path& target,
-    const boost::filesystem::path& project_dir,
-    const std::string& module_path,
+    const boost::filesystem::path project_dir,
+    const std::string module_path,
     const bool verbose) {
     knitting_options r;
     r.verbose(verbose);

@@ -24,7 +24,6 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/xml_serialization_helper.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test_data/codegen_tds.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/tack_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
@@ -83,122 +82,122 @@ BOOST_AUTO_TEST_SUITE(workflow)
 
 BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("class_in_a_package_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_class_in_a_package_dia_xml());
-    const auto actual_path(tack_dia::actual_class_in_a_package_tack_xml());
-    const auto expected_path(tack_dia::expected_class_in_a_package_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_class_in_a_package_dia_xml());
+    const auto e(tack_dia::expected_class_in_a_package_tack_xml());
+    const auto a(tack_dia::actual_class_in_a_package_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("empty_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_empty_dia_xml());
-    const auto actual_path(tack_dia::actual_empty_tack_xml());
-    const auto expected_path(tack_dia::expected_empty_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_empty_dia_xml());
+    const auto e(tack_dia::expected_empty_tack_xml());
+    const auto a(tack_dia::actual_empty_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(empty_package_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("empty_package_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_empty_package_dia_xml());
-    const auto actual_path(tack_dia::actual_empty_package_tack_xml());
-    const auto expected_path(tack_dia::expected_empty_package_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_empty_package_dia_xml());
+    const auto e(tack_dia::expected_empty_package_tack_xml());
+    const auto a(tack_dia::actual_empty_package_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(classes_inout_package_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("classes_inout_package_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_classes_inout_package_dia_xml());
-    const auto actual_path(tack_dia::actual_classes_inout_package_tack_xml());
-    const auto expected_path(tack_dia::expected_classes_inout_package_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_classes_inout_package_dia_xml());
+    const auto e(tack_dia::expected_classes_inout_package_tack_xml());
+    const auto a(tack_dia::actual_classes_inout_package_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_attributes_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("class_without_attributes_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_class_without_attributes_dia_xml());
-    const auto actual_path(tack_dia::actual_class_without_attributes_tack_xml());
-    const auto expected_path(tack_dia::expected_class_without_attributes_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_class_without_attributes_dia_xml());
+    const auto e(tack_dia::expected_class_without_attributes_tack_xml());
+    const auto a(tack_dia::actual_class_without_attributes_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_package_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("class_without_package_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_class_without_package_dia_xml());
-    const auto actual_path(tack_dia::actual_class_without_package_tack_xml());
-    const auto expected_path(tack_dia::expected_class_without_package_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_class_without_package_dia_xml());
+    const auto e(tack_dia::expected_class_without_package_tack_xml());
+    const auto a(tack_dia::actual_class_without_package_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(classes_without_package_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("classes_without_package_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_classes_without_package_dia_xml());
-    const auto actual_path(tack_dia::actual_classes_without_package_tack_xml());
-    const auto expected_path(tack_dia::expected_classes_without_package_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_classes_without_package_dia_xml());
+    const auto e(tack_dia::expected_classes_without_package_tack_xml());
+    const auto a(tack_dia::actual_classes_without_package_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_two_layers_with_objects_dia_xml());
-    const auto actual_path(tack_dia::actual_two_layers_with_objects_tack_xml());
-    const auto expected_path(tack_dia::expected_two_layers_with_objects_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_two_layers_with_objects_dia_xml());
+    const auto e(tack_dia::expected_two_layers_with_objects_tack_xml());
+    const auto a(tack_dia::actual_two_layers_with_objects_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(all_primitives_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("all_primitives_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_all_primitives_dia_xml());
-    const auto actual_path(tack_dia::actual_all_primitives_tack_xml());
-    const auto expected_path(tack_dia::expected_all_primitives_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_all_primitives_dia_xml());
+    const auto e(tack_dia::expected_all_primitives_tack_xml());
+    const auto a(tack_dia::actual_all_primitives_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("trivial_inheritance_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_trivial_inheritance_dia_xml());
-    const auto actual_path(tack_dia::actual_trivial_inheritance_tack_xml());
-    const auto expected_path(tack_dia::expected_trivial_inheritance_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_trivial_inheritance_dia_xml());
+    const auto e(tack_dia::expected_trivial_inheritance_tack_xml());
+    const auto a(tack_dia::actual_trivial_inheritance_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("std_model_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_std_model_dia_xml());
-    const auto actual_path(tack_dia::actual_std_model_tack_xml());
-    const auto expected_path(tack_dia::expected_std_model_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_std_model_dia_xml());
+    const auto e(tack_dia::expected_std_model_tack_xml());
+    const auto a(tack_dia::actual_std_model_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_boost_model_dia_xml());
-    const auto actual_path(tack_dia::actual_boost_model_tack_xml());
-    const auto expected_path(tack_dia::expected_boost_model_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_boost_model_dia_xml());
+    const auto e(tack_dia::expected_boost_model_tack_xml());
+    const auto a(tack_dia::actual_boost_model_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(comments_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("comments_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_comments_dia_xml());
-    const auto actual_path(tack_dia::actual_comments_tack_xml());
-    const auto expected_path(tack_dia::expected_comments_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_comments_dia_xml());
+    const auto e(tack_dia::expected_comments_tack_xml());
+    const auto a(tack_dia::actual_comments_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(enumeration_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("enumeration_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_enumeration_dia_xml());
-    const auto actual_path(tack_dia::actual_enumeration_tack_xml());
-    const auto expected_path(tack_dia::expected_enumeration_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_enumeration_dia_xml());
+    const auto e(tack_dia::expected_enumeration_tack_xml());
+    const auto a(tack_dia::actual_enumeration_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_CASE(exception_dia_transforms_into_expected_tack) {
     SETUP_TEST_LOG("exception_dia_transforms_into_expected_tack");
-    const auto input_path(tack_dia::expected_exception_dia_xml());
-    const auto actual_path(tack_dia::actual_exception_tack_xml());
-    const auto expected_path(tack_dia::expected_exception_tack_xml());
-    BOOST_CHECK(test_workflow(input_path, expected_path, actual_path));
+    const auto i(tack_dia::expected_exception_dia_xml());
+    const auto e(tack_dia::expected_exception_tack_xml());
+    const auto a(tack_dia::actual_exception_tack_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

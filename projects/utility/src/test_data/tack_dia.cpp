@@ -71,7 +71,6 @@ path input_enable_eos_serialization_dia("tack_dia/input/eos_serialization.dia");
 path input_rename_facet_folder_dia("tack_dia/input/rename_facet_folder.dia");
 path input_use_integrated_io_dia("tack_dia/input/use_integrated_io.dia");
 path input_all_primitives_dia("tack_dia/input/all_primitives.dia");
-path input_split_project_dia("tack_dia/input/split_project.dia");
 path input_trivial_inheritance_dia("tack_dia/input/trivial_inheritance.dia");
 path input_trivial_association_dia("tack_dia/input/trivial_association.dia");
 path input_comments_dia("tack_dia/input/comments.dia");
@@ -417,10 +416,6 @@ path tack_dia::input_enumeration_dia() {
 
 path tack_dia::input_exception_dia() {
     return validating_resolver::resolve(::input_exception_dia);
-}
-
-path tack_dia::input_split_project_dia() {
-    return validating_resolver::resolve(::input_split_project_dia);
 }
 
 path tack_dia::input_stereotypes_dia() {

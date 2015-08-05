@@ -21,7 +21,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Tack model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -30,8 +30,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -42,7 +41,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Tack JSON model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
@@ -50,8 +49,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -62,13 +60,12 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -79,13 +76,12 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Config model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --ignore-files-matching-regex .*/test/.*
     --ignore-files-matching-regex .*/spec/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -96,7 +92,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting C++ model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
@@ -109,8 +105,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*_stitch.hpp
     --ignore-files-matching-regex .*_stitch.cpp
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -121,7 +116,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting database model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen::test_models
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/test_models
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*CMakeLists.txt
@@ -130,8 +125,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*sql
     --ignore-files-matching-regex .*-odb.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen::test_models)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -142,7 +136,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting knit model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/cpp.dia,dogen
@@ -151,8 +145,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -163,7 +156,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Tack Dia model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dia.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -172,8 +165,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -184,7 +176,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting the Formatters Model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
@@ -197,8 +189,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/repository_io.cpp
     --ignore-files-matching-regex .*/transformer_interface_io.cpp
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
@@ -210,7 +201,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Backend model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/config.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/tack.dia,dogen
@@ -221,8 +212,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -233,15 +223,14 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Dynamic model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
     --cpp-disable-cmakelists
     --ignore-files-matching-regex .*/CMakeLists.txt
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()
@@ -252,7 +241,7 @@ add_custom_target(knit_${target}
     COMMENT "Knitting Stitch model" VERBATIM
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${knitter_binary}
-    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia
+    --target ${CMAKE_SOURCE_DIR}/diagrams/${target}.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/dynamic.dia,dogen
     --reference ${CMAKE_SOURCE_DIR}/diagrams/formatters.dia,dogen
     --cpp-project-dir ${CMAKE_SOURCE_DIR}/projects/
@@ -261,8 +250,7 @@ add_custom_target(knit_${target}
     --ignore-files-matching-regex .*/spec/.*
     --ignore-files-matching-regex .*/test/.*
     --verbose
-    --delete-extra-files
-    --external-module-path dogen)
+    --delete-extra-files)
 if(use_latest_knitter)
     add_dependencies(knit_${target} knitter)
 endif()

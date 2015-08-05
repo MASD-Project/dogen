@@ -18,34 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
-#include "dogen/config/test_data/reference_td.hpp"
 #include "dogen/config/test_data/input_options_td.hpp"
+#include "dogen/config/test_data/input_descriptor_td.hpp"
 
 namespace {
 
-boost::filesystem::path
-create_boost_filesystem_path(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return boost::filesystem::path(s.str());
+dogen::config::input_descriptor
+create_dogen_config_input_descriptor(const unsigned int position) {
+    return dogen::config::input_descriptor_generator::create(position);
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
-dogen::config::reference
-create_dogen_config_reference(const unsigned int position) {
-    return dogen::config::reference_generator::create(position);
-}
-
-std::vector<dogen::config::reference> create_std_vector_dogen_config_reference(unsigned int position) {
-    std::vector<dogen::config::reference> r;
+std::vector<dogen::config::input_descriptor> create_std_vector_dogen_config_input_descriptor(unsigned int position) {
+    std::vector<dogen::config::input_descriptor> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_config_reference(position + i));
+        r.push_back(create_dogen_config_input_descriptor(position + i));
     }
     return r;
 }
@@ -59,9 +45,8 @@ input_options_generator::input_options_generator() : position_(0) { }
 
 void input_options_generator::
 populate(const unsigned int position, result_type& v) {
-    v.target(create_boost_filesystem_path(position + 0));
-    v.external_module_path(create_std_string(position + 1));
-    v.references(create_std_vector_dogen_config_reference(position + 2));
+    v.target(create_dogen_config_input_descriptor(position + 0));
+    v.references(create_std_vector_dogen_config_input_descriptor(position + 1));
 }
 
 input_options_generator::result_type

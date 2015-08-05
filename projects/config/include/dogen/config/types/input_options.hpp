@@ -25,11 +25,9 @@
 #pragma once
 #endif
 
-#include <string>
 #include <vector>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
-#include "dogen/config/types/reference.hpp"
+#include "dogen/config/types/input_descriptor.hpp"
 #include "dogen/config/serialization/input_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -42,16 +40,13 @@ class input_options final {
 public:
     input_options() = default;
     input_options(const input_options&) = default;
+    input_options(input_options&&) = default;
     ~input_options() = default;
 
 public:
-    input_options(input_options&& rhs);
-
-public:
     input_options(
-        const boost::filesystem::path& target,
-        const std::string& external_module_path,
-        const std::vector<dogen::config::reference>& references);
+        const dogen::config::input_descriptor& target,
+        const std::vector<dogen::config::input_descriptor>& references);
 
 private:
     template<typename Archive>
@@ -66,30 +61,20 @@ public:
      *  generate.
      */
     /**@{*/
-    const boost::filesystem::path& target() const;
-    boost::filesystem::path& target();
-    void target(const boost::filesystem::path& v);
-    void target(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief External modules which contain the model to generate, delimited by "::".
-     */
-    /**@{*/
-    const std::string& external_module_path() const;
-    std::string& external_module_path();
-    void external_module_path(const std::string& v);
-    void external_module_path(const std::string&& v);
+    const dogen::config::input_descriptor& target() const;
+    dogen::config::input_descriptor& target();
+    void target(const dogen::config::input_descriptor& v);
+    void target(const dogen::config::input_descriptor&& v);
     /**@}*/
 
     /**
      * @brief All external models in which this model depends.
      */
     /**@{*/
-    const std::vector<dogen::config::reference>& references() const;
-    std::vector<dogen::config::reference>& references();
-    void references(const std::vector<dogen::config::reference>& v);
-    void references(const std::vector<dogen::config::reference>&& v);
+    const std::vector<dogen::config::input_descriptor>& references() const;
+    std::vector<dogen::config::input_descriptor>& references();
+    void references(const std::vector<dogen::config::input_descriptor>& v);
+    void references(const std::vector<dogen::config::input_descriptor>&& v);
     /**@}*/
 
 public:
@@ -103,9 +88,8 @@ public:
     input_options& operator=(input_options other);
 
 private:
-    boost::filesystem::path target_;
-    std::string external_module_path_;
-    std::vector<dogen::config::reference> references_;
+    dogen::config::input_descriptor target_;
+    std::vector<dogen::config::input_descriptor> references_;
 };
 
 } }

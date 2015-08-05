@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-04 Tue 23:35]
+#+CAPTION: Clock summary at [2015-08-05 Wed 17:07]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *20:24* |       |      |
+| *Total time*                                                                | *22:37* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 20:24   |       |      |
-| Active                                                                      |         | 20:24 |      |
+| Stories                                                                     | 22:37   |       |      |
+| Active                                                                      |         | 22:37 |      |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:47 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
@@ -30,6 +30,8 @@
 | COMPLETED Remove troubleshooting options                                    |         |       | 0:52 |
 | COMPLETED Rename =dia_tack= test data to =tack_dia=                         |         |       | 0:08 |
 | CANCELLED Dia hydrator should hydrate with path                             |         |       | 0:16 |
+| COMPLETED Remove support for split projects                                 |         |       | 2:10 |
+| STARTED Create the =yarn= model                                             |         |       | 0:03 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -254,7 +256,31 @@ now.
 At present the hydrator is constructed with the file path. This is not
 ideal.
 
-*** Create the =yarn= model                                           :story:
+*** CANCELLED Handling of include cmakelists in split projects is not correct :story:
+    CLOSED: [2015-08-05 Wed 14:57]
+
+*Rationale*: no longer a problem after removing split project support.
+
+At present we are only generating a cmakelists file for include
+folders on non-split projects. This means that the header files for
+split projects won't be packaged up. It also means that for ODB
+projects we won't get the ODB targets.
+
+*** COMPLETED Make knitter's module path consistent for target and refeences :story:
+    CLOSED: [2015-08-05 Wed 17:05]
+
+At present we have two ways of supplying module paths, one for target
+and another for references. Make it consistent.
+
+*** COMPLETED Remove support for split projects                       :story:
+    CLOSED: [2015-08-05 Wed 17:07]
+    CLOCK: [2015-08-05 Wed 14:57]--[2015-08-05 Wed 17:07] =>  2:10
+
+We don't really have any use cases for split projects. Remove this
+feature and associated infrastructure.
+
+*** STARTED Create the =yarn= model                                   :story:
+    CLOCK: [2015-08-05 Wed 14:53]--[2015-08-05 Wed 14:56] =>  0:03
 
 We need to create a meta-model with the following characteristics:
 

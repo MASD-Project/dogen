@@ -37,10 +37,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::config::cpp_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("split_project", v.split_project_);
     ar << make_nvp("project_directory_path", v.project_directory_path_.generic_string());
-    ar << make_nvp("source_directory_path", v.source_directory_path_.generic_string());
-    ar << make_nvp("include_directory_path", v.include_directory_path_.generic_string());
     ar << make_nvp("disable_cmakelists", v.disable_cmakelists_);
 }
 
@@ -48,16 +45,9 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::config::cpp_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("split_project", v.split_project_);
     std::string project_directory_path_tmp;
     ar >> make_nvp("project_directory_path", project_directory_path_tmp);
     v.project_directory_path_ = project_directory_path_tmp;
-    std::string source_directory_path_tmp;
-    ar >> make_nvp("source_directory_path", source_directory_path_tmp);
-    v.source_directory_path_ = source_directory_path_tmp;
-    std::string include_directory_path_tmp;
-    ar >> make_nvp("include_directory_path", include_directory_path_tmp);
-    v.include_directory_path_ = include_directory_path_tmp;
     ar >> make_nvp("disable_cmakelists", v.disable_cmakelists_);
 }
 

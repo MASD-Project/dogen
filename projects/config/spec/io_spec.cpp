@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<cpp_options_generator>();
     test_io<input_options_generator>();
     test_io<output_options_generator>();
-    test_io<reference_generator>();
+    test_io<input_descriptor_generator>();
     test_io<knitting_options_generator>();
 }
 

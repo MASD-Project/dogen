@@ -68,7 +68,6 @@ target_link_libraries(${spec_name}
     enable_facet_hash
     enable_facet_io
     enable_facet_serialization
-    split_project
     stand_alone_class
     two_layers_with_objects
     trivial_inheritance

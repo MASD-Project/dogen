@@ -48,10 +48,7 @@ public:
 
 public:
     cpp_options(
-        const bool split_project,
         const boost::filesystem::path& project_directory_path,
-        const boost::filesystem::path& source_directory_path,
-        const boost::filesystem::path& include_directory_path,
         const bool disable_cmakelists);
 
 private:
@@ -63,19 +60,6 @@ private:
 
 public:
     /**
-     * @brief If true, project is split into source and include
-     * directories, both configurable.
-     *
-     * If false, there is only a single top-level directory for the
-     * entire project, containing as sub-directories both the source
-     * and include directories.
-     */
-    /**@{*/
-    bool split_project() const;
-    void split_project(const bool v);
-    /**@}*/
-
-    /**
      * @brief Path to the directory in which to place all of the C++ code.
      *
      * Implies project splitting is off.
@@ -85,30 +69,6 @@ public:
     boost::filesystem::path& project_directory_path();
     void project_directory_path(const boost::filesystem::path& v);
     void project_directory_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Path to the directory in which to place the C++ implementation files.
-     *
-     * Can only be supplied if split project is set to true.
-     */
-    /**@{*/
-    const boost::filesystem::path& source_directory_path() const;
-    boost::filesystem::path& source_directory_path();
-    void source_directory_path(const boost::filesystem::path& v);
-    void source_directory_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Path to the directory in which to place the C++ header files.
-     *
-     * Can only be supplied if split project is set to true.
-     */
-    /**@{*/
-    const boost::filesystem::path& include_directory_path() const;
-    boost::filesystem::path& include_directory_path();
-    void include_directory_path(const boost::filesystem::path& v);
-    void include_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -130,10 +90,7 @@ public:
     cpp_options& operator=(cpp_options other);
 
 private:
-    bool split_project_;
     boost::filesystem::path project_directory_path_;
-    boost::filesystem::path source_directory_path_;
-    boost::filesystem::path include_directory_path_;
     bool disable_cmakelists_;
 };
 

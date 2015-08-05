@@ -19,20 +19,12 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/config/io/reference_io.hpp"
 #include "dogen/config/io/input_options_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include "dogen/config/io/input_descriptor_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::config::reference>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::config::input_descriptor>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -50,8 +42,7 @@ namespace config {
 std::ostream& operator<<(std::ostream& s, const input_options& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::config::input_options\"" << ", "
-      << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"external_module_path\": " << "\"" << tidy_up_string(v.external_module_path()) << "\"" << ", "
+      << "\"target\": " << v.target() << ", "
       << "\"references\": " << v.references()
       << " }";
     return(s);

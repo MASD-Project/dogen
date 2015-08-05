@@ -37,7 +37,6 @@
 #include "dogen/test_models/disable_facet_folders/registrar_ser.hpp"
 #include "dogen/test_models/disable_full_ctor/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/registrar_ser.hpp"
-#include "dogen/test_models/split_project/serialization/registrar_ser.hpp"
 #include "dogen/test_models/stand_alone_class/serialization/registrar_ser.hpp"
 #include "dogen/test_models/std_model/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enable_facet_serialization/serialization/registrar_ser.hpp"
@@ -58,7 +57,6 @@ template<typename Archive> void register_types(Archive& ar) {
     dogen::test_models::disable_facet_folders::register_types<Archive>(ar);
     dogen::test_models::disable_full_ctor::register_types<Archive>(ar);
     dogen::test_models::enumeration::register_types<Archive>(ar);
-    dogen::test_models::split_project::register_types<Archive>(ar);
     dogen::test_models::stand_alone_class::register_types<Archive>(ar);
     dogen::test_models::std_model::register_types<Archive>(ar);
     dogen::test_models::enable_facet_serialization::register_types<Archive>(ar);

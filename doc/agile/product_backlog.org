@@ -2606,13 +2606,6 @@ dynamic models.
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
 
-*** Handling of include cmakelists in split projects is not correct   :story:
-
-At present we are only generating a cmakelists file for include
-folders on non-split projects. This means that the header files for
-split projects won't be packaged up. It also means that for ODB
-projects we won't get the ODB targets.
-
 *** Partial matching of primitives doesn't work for certain types     :story:
 
 We introduced a fix that allows users to create types that partially
@@ -3077,7 +3070,6 @@ merged:
 - enable_facet_hash
 - enable_facet_io
 - enable_facet_serialization
-- split_project
 
 These models test features which have enough scenarios to justify
 keeping them in isolation:
@@ -5732,7 +5724,8 @@ we already have them sorted, we may not need a set.
 *** Remove unused features                                             :epic:
 
 This story captures any features that we no longer require and will
-remove at some point.
+remove at some point. We have already removed most of the unused
+features, but the story keeps track of any remnants.
 
 At the very start of dogen we added a number of features that we
 thought were useful such as suppressing model directory, facet
@@ -5743,7 +5736,7 @@ stories to remove them.
 We may have to split this story into several but we should at least
 trim down the obvious ones:
 
-- split project (or vice-versa, whichever one we don't use).
+- disable facet folders: no use case.
 - delete extra files: we always do so why make it optional.
 - force write: we never do.
 - etc.
@@ -6664,6 +6657,8 @@ The c++ frontend would also open some interesting possibilities:
 
 *** Improvements to project layout                                    :story:
 
+This story keeps track of general ideas around project layout.
+
 Given all of the ideals floating around (mutli-language needle, model
 groups, etc), there is a general direction in which the projects
 layout seems to be evolving. This story captures that direction.
@@ -6674,12 +6669,11 @@ layout seems to be evolving. This story captures that direction.
 :   / sanity
 :   / dia -> whilst we use it for the frontend, this is not frontend specific.
 :   / formatting -> rename of the formatters model. Generic formatting code.
-:   / frontend?
-:     / common -> current frontend model. all code common across frontends.
-:     / dia_to_sml
-:     / xsd -> XML schema support (vision)
-:     / <all other frontends>
-:   / mem -> new name for SML? middle-end.
+:   / tack
+    / tack.json
+:   / tack.dia
+:   / tack.xsd -> XML schema support (vision)
+:    / <all other tack importers>
 :   / backend
 :     / common -> current backend model. all code common across backends.
 :     / quilt -> model group for "native models"

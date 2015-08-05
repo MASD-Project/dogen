@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_HASH_REFERENCE_HASH_HPP
-#define DOGEN_CONFIG_HASH_REFERENCE_HASH_HPP
+#ifndef DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_SER_HPP
+#define DOGEN_CONFIG_SERIALIZATION_INPUT_DESCRIPTOR_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/config/types/reference.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/config/types/input_descriptor.hpp"
 
-namespace dogen {
-namespace config {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::config::input_descriptor)
+namespace boost {
+namespace serialization {
 
-struct reference_hasher {
-public:
-    static std::size_t hash(const reference& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::config::input_descriptor& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::config::input_descriptor& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::config::reference> {
-public:
-    size_t operator()(const dogen::config::reference& v) const {
-        return dogen::config::reference_hasher::hash(v);
-    }
-};
-
-}
 #endif

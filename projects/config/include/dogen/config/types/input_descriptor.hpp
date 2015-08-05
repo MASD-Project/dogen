@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CONFIG_TYPES_REFERENCE_HPP
-#define DOGEN_CONFIG_TYPES_REFERENCE_HPP
+#ifndef DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_HPP
+#define DOGEN_CONFIG_TYPES_INPUT_DESCRIPTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,34 +28,37 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/config/serialization/reference_fwd_ser.hpp"
+#include "dogen/config/serialization/input_descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace config {
 
 /**
- * @brief Reference to a model used by the target model.
+ * @brief Reference to a model to load.
  */
-class reference final {
+class input_descriptor final {
 public:
-    reference() = default;
-    reference(const reference&) = default;
-    ~reference() = default;
+    input_descriptor(const input_descriptor&) = default;
+    ~input_descriptor() = default;
 
 public:
-    reference(reference&& rhs);
+    input_descriptor();
 
 public:
-    reference(
+    input_descriptor(input_descriptor&& rhs);
+
+public:
+    input_descriptor(
         const boost::filesystem::path& path,
-        const std::string& external_module_path);
+        const std::string& external_module_path,
+        const bool is_target);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const reference& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const input_descriptor& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, reference& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, input_descriptor& v, unsigned int version);
 
 public:
     /**
@@ -69,7 +72,7 @@ public:
     /**@}*/
 
     /**
-     * @brief External module path to dependent model.
+     * @brief External module path for the model.
      */
     /**@{*/
     const std::string& external_module_path() const;
@@ -78,19 +81,28 @@ public:
     void external_module_path(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the input contains the target model.
+     */
+    /**@{*/
+    bool is_target() const;
+    void is_target(const bool v);
+    /**@}*/
+
 public:
-    bool operator==(const reference& rhs) const;
-    bool operator!=(const reference& rhs) const {
+    bool operator==(const input_descriptor& rhs) const;
+    bool operator!=(const input_descriptor& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(reference& other) noexcept;
-    reference& operator=(reference other);
+    void swap(input_descriptor& other) noexcept;
+    input_descriptor& operator=(input_descriptor other);
 
 private:
     boost::filesystem::path path_;
     std::string external_module_path_;
+    bool is_target_;
 };
 
 } }
@@ -99,8 +111,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::config::reference& lhs,
-    dogen::config::reference& rhs) {
+    dogen::config::input_descriptor& lhs,
+    dogen::config::input_descriptor& rhs) {
     lhs.swap(rhs);
 }
 

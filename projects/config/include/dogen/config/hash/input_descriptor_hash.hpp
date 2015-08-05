@@ -18,11 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
+#ifndef DOGEN_CONFIG_HASH_INPUT_DESCRIPTOR_HASH_HPP
+#define DOGEN_CONFIG_HASH_INPUT_DESCRIPTOR_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/config/types/input_descriptor.hpp"
+
 namespace dogen {
-namespace test_models {
-namespace split_project {
+namespace config {
 
-template<typename Archive>
-void register_types(Archive& ar);
+struct input_descriptor_hasher {
+public:
+    static std::size_t hash(const input_descriptor& v);
+};
 
-} } }
+} }
+
+namespace std {
+
+template<>
+struct hash<dogen::config::input_descriptor> {
+public:
+    size_t operator()(const dogen::config::input_descriptor& v) const {
+        return dogen::config::input_descriptor_hasher::hash(v);
+    }
+};
+
+}
+#endif

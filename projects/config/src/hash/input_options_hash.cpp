@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config/hash/reference_hash.hpp"
 #include "dogen/config/hash/input_options_hash.hpp"
+#include "dogen/config/hash/input_descriptor_hash.hpp"
 
 namespace {
 
@@ -29,13 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
-inline std::size_t hash_std_vector_dogen_config_reference(const std::vector<dogen::config::reference>& v) {
+inline std::size_t hash_std_vector_dogen_config_input_descriptor(const std::vector<dogen::config::input_descriptor>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -51,9 +45,8 @@ namespace config {
 std::size_t input_options_hasher::hash(const input_options& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_filesystem_path(v.target()));
-    combine(seed, v.external_module_path());
-    combine(seed, hash_std_vector_dogen_config_reference(v.references()));
+    combine(seed, v.target());
+    combine(seed, hash_std_vector_dogen_config_input_descriptor(v.references()));
 
     return seed;
 }

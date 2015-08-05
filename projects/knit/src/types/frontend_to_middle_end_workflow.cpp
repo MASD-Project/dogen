@@ -91,11 +91,11 @@ frontend_to_middle_end_workflow::obtain_input_descriptors_activity() const {
     BOOST_LOG_SEV(lg, debug) << "Done creating paths to reference models.";
 
     BOOST_LOG_SEV(lg, debug) << "Added target model: "
-                             << input_options.target().filename();
+                             << input_options.target().path();
     tack::input_descriptor target;
-    target.path(input_options.target());
+    target.path(input_options.target().path());
     target.is_target(true);
-    target.external_module_path(input_options.external_module_path());
+    target.external_module_path(input_options.target().external_module_path());
     r.push_back(target);
     return r;
 }

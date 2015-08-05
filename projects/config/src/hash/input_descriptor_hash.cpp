@@ -18,4 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/split_project/odb/package/a_class_pragmas.hpp"
+#include "dogen/config/hash/input_descriptor_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+}
+
+namespace dogen {
+namespace config {
+
+std::size_t input_descriptor_hasher::hash(const input_descriptor& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_filesystem_path(v.path()));
+    combine(seed, v.external_module_path());
+    combine(seed, v.is_target());
+
+    return seed;
+}
+
+} }

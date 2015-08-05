@@ -71,7 +71,7 @@ workflow::workflow() : can_log_(false) { }
 
 void workflow::
 initialise_model_name(const dogen::config::knitting_options& o) {
-    const boost::filesystem::path p(o.input().target());
+    const boost::filesystem::path p(o.input().target().path());
     model_name_ = p.stem().filename().string();
 }
 
@@ -80,9 +80,13 @@ generate_knitting_options_activity(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
+
     boost::optional<config::knitting_options> r(p.parse());
-    if (r)
-        config::knitting_options_validator::validate(*r);
+    if (!r)
+        return r;
+
+    config::knitting_options_validator v;
+    v.validate(*r);
 
     return r;
 }

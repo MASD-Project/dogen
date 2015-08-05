@@ -175,19 +175,19 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="-56,-16"/>
+        <dia:point val="-65,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-16.05;-36.97,-9.95"/>
+        <dia:rectangle val="-65.05,-16.05;-45.97,-12.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-56,-16"/>
+        <dia:point val="-65,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_options#</dia:string>
@@ -279,34 +279,6 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#split_project#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, project is split into source and include
-directories, both configurable.
-
-If false, there is only a single top-level directory for the
-entire project, containing as sub-directories both the source
-and include directories.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#project_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -319,56 +291,6 @@ and include directories.#</dia:string>
             <dia:string>#Path to the directory in which to place all of the C++ code.
 
 Implies project splitting is off.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#source_directory_path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Path to the directory in which to place the C++ implementation files.
-
-Can only be supplied if split project is set to true.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#include_directory_path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Path to the directory in which to place the C++ header files.
-
-Can only be supplied if split project is set to true.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -413,19 +335,19 @@ Can only be supplied if split project is set to true.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="-30,-16"/>
+        <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.05,-16.05;-15.975,-11.55"/>
+        <dia:rectangle val="-37.05,-16.05;-20.28,-12.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-30,-16"/>
+        <dia:point val="-37,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#input_options#</dia:string>
@@ -520,7 +442,7 @@ Can only be supplied if split project is set to true.#</dia:string>
             <dia:string>#target#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
+            <dia:string>#input_descriptor#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -541,33 +463,10 @@ Can only be supplied if split project is set to true.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#external_module_path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#External modules which contain the model to generate, delimited by "::".#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;reference&gt;#</dia:string>
+            <dia:string>#std::vector&lt;input_descriptor&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -594,13 +493,13 @@ Can only be supplied if split project is set to true.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="-8,-16"/>
+        <dia:point val="-14,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-8.05,-16.05;8.72,-11.55"/>
+        <dia:rectangle val="-14.05,-16.05;2.72,-11.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-8,-16"/>
+        <dia:point val="-14,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -779,7 +678,7 @@ with existing file.#</dia:string>
         <dia:point val="-21,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,-3.05;-7.36,0.65"/>
+        <dia:rectangle val="-21.05,-3.05;-7.36,1.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,-3"/>
@@ -788,16 +687,16 @@ with existing file.#</dia:string>
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#reference#</dia:string>
+        <dia:string>#input_descriptor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Reference to a model used by the target model.#</dia:string>
+        <dia:string>#Reference to a model to load.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -912,8 +811,31 @@ with existing file.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#External module path to dependent model.
+            <dia:string>#External module path for the model.
 #</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_target#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the input contains the target model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1176,7 +1098,7 @@ with existing file.#</dia:string>
         <dia:point val="-25.1558,-26.8833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.9058,-27.6333;-22.8125,-15.2"/>
+        <dia:rectangle val="-28.715,-27.6333;-24.4058,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1184,8 +1106,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-25.1558,-26.8833"/>
         <dia:point val="-25.1558,-21"/>
-        <dia:point val="-23.0125,-21"/>
-        <dia:point val="-23.0125,-16"/>
+        <dia:point val="-28.665,-21"/>
+        <dia:point val="-28.665,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1247,7 +1169,7 @@ with existing file.#</dia:string>
         <dia:point val="-25.1558,-26.8833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.56,-27.6333;-24.4058,-15.2"/>
+        <dia:rectangle val="-55.56,-27.6333;-24.4058,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1255,8 +1177,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-25.1558,-26.8833"/>
         <dia:point val="-25.1558,-21"/>
-        <dia:point val="-46.51,-21"/>
-        <dia:point val="-46.51,-16"/>
+        <dia:point val="-55.51,-21"/>
+        <dia:point val="-55.51,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1318,7 +1240,7 @@ with existing file.#</dia:string>
         <dia:point val="-25.1558,-26.8833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.9058,-27.6333;0.535,-15.2"/>
+        <dia:rectangle val="-25.9058,-27.6333;-5.465,-15.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1326,8 +1248,8 @@ with existing file.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-25.1558,-26.8833"/>
         <dia:point val="-25.1558,-21"/>
-        <dia:point val="0.335,-21"/>
-        <dia:point val="0.335,-16"/>
+        <dia:point val="-5.665,-21"/>
+        <dia:point val="-5.665,-16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1386,17 +1308,17 @@ with existing file.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-23.0125,-11.6"/>
+        <dia:point val="-28.665,-12.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.7625,-12.35;-14.005,-2.2"/>
+        <dia:rectangle val="-29.415,-13.15;-14.005,-2.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-23.0125,-11.6"/>
-        <dia:point val="-23.0125,-6"/>
+        <dia:point val="-28.665,-12.4"/>
+        <dia:point val="-28.665,-6"/>
         <dia:point val="-14.205,-6"/>
         <dia:point val="-14.205,-3"/>
       </dia:attribute>
@@ -1722,16 +1644,16 @@ with existing file.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-83,-37"/>
+        <dia:point val="-65,-40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-83.05,-37.05;-54.715,-26.45"/>
+        <dia:rectangle val="-65.05,-40.05;-36.715,-29.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-83,-37"/>
+        <dia:point val="-65,-40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.235000000000003"/>
@@ -1771,7 +1693,7 @@ knitter, etc.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-82.65,-35.755"/>
+            <dia:point val="-64.65,-38.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

@@ -21,7 +21,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
@@ -29,9 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
-#include "dogen/config/serialization/reference_ser.hpp"
 #include "dogen/config/serialization/input_options_ser.hpp"
+#include "dogen/config/serialization/input_descriptor_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,8 +38,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::config::input_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("target", v.target_.generic_string());
-    ar << make_nvp("external_module_path", v.external_module_path_);
+    ar << make_nvp("target", v.target_);
     ar << make_nvp("references", v.references_);
 }
 
@@ -49,10 +46,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::config::input_options& v,
     const unsigned int /*version*/) {
-    std::string target_tmp;
-    ar >> make_nvp("target", target_tmp);
-    v.target_ = target_tmp;
-    ar >> make_nvp("external_module_path", v.external_module_path_);
+    ar >> make_nvp("target", v.target_);
     ar >> make_nvp("references", v.references_);
 }
 

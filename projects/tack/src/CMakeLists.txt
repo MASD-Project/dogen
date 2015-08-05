@@ -24,7 +24,6 @@ file(GLOB_RECURSE all_files RELATIVE
 
 add_library(tack STATIC ${all_files})
 target_link_libraries(tack
-    config
     dynamic
     utility
     ${LIBXML2_LIBRARIES}
