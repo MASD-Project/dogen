@@ -35,6 +35,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-08-05 Wed 17:08]--[2015-08-05 Wed 17:44] =>  0:36
     CLOCK: [2015-08-03 Mon 17:42]--[2015-08-03 Mon 17:59] =>  0:17
     CLOCK: [2015-07-20 Mon 14:30]--[2015-07-20 Mon 14:56] =>  0:26
 
@@ -609,3 +610,11 @@ registrar to the main model as it clashes with the serialisation
 registrar.
 
 ** Deprecated
+*** CANCELLED Create knitter options for each frontend                :story:
+    CLOSED: [2015-08-05 Wed 17:14]
+
+*Rationale*: not required after latest refactor.
+
+At present some knitting options are specific to a frontend
+(particularly in troubleshooting). We should create different classes
+to represent options on a per fronend basis.
