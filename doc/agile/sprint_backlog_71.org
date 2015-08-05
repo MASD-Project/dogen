@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-05 Wed 17:07]
+#+CAPTION: Clock summary at [2015-08-05 Wed 18:05]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| *Total time*                                                                | *22:37* |       |      |
+| *Total time*                                                                | *23:34* |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
-| Stories                                                                     | 22:37   |       |      |
-| Active                                                                      |         | 22:37 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:43 |
+| Stories                                                                     | 23:34   |       |      |
+| Active                                                                      |         | 23:34 |      |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:19 |
 | STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:47 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | COMPLETED Merge frontend with =tack=                                        |         |       | 4:38 |
@@ -31,7 +31,7 @@
 | COMPLETED Rename =dia_tack= test data to =tack_dia=                         |         |       | 0:08 |
 | CANCELLED Dia hydrator should hydrate with path                             |         |       | 0:16 |
 | COMPLETED Remove support for split projects                                 |         |       | 2:10 |
-| STARTED Create the =yarn= model                                             |         |       | 0:03 |
+| STARTED Create the =yarn= model                                             |         |       | 0:24 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -281,6 +281,7 @@ We don't really have any use cases for split projects. Remove this
 feature and associated infrastructure.
 
 *** STARTED Create the =yarn= model                                   :story:
+    CLOCK: [2015-08-05 Wed 17:44]--[2015-08-05 Wed 18:05] =>  0:21
     CLOCK: [2015-08-05 Wed 14:53]--[2015-08-05 Wed 14:56] =>  0:03
 
 We need to create a meta-model with the following characteristics:
