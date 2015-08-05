@@ -28,7 +28,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/tack/serialization/object_ser.hpp"
 #include "dogen/tack/serialization/primitive_ser.hpp"
-#include "dogen/config/serialization/registrar_ser.hpp"
 #include "dogen/tack/serialization/enumeration_ser.hpp"
 #include "dogen/dynamic/serialization/registrar_ser.hpp"
 
@@ -38,7 +37,6 @@ namespace tack {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::dynamic::register_types(ar);
-    dogen::config::register_types(ar);
 
     ar.template register_type<dogen::tack::enumeration>();
     ar.template register_type<dogen::tack::object>();
