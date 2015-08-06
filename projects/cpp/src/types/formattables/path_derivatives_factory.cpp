@@ -73,8 +73,8 @@ make_inclusion_path(const settings::path_settings& ps,
     for(auto n : qn.module_path())
         r /= n;
 
-    // modules other than the model module have simple names
-    // contribute to the directories.
+    // modules other than the model module contribute their simple
+    // names to the directories.
     if (qn != model_.name()) {
         const auto i(model_.modules().find(qn));
         if (i != model_.modules().end())

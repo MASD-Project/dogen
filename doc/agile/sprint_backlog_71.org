@@ -41,28 +41,6 @@
 
 Updates to sprint and product backlog.
 
-*** Add support for pulling dependencies from biicode                 :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
-We should take the least intrusive possible approach to start with, by
-creating a split setup for biicode.
-
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
 *** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
     CLOCK: [2015-08-04 Tue 23:11]--[2015-08-04 Tue 23:35] =>  0:24
     CLOCK: [2015-08-04 Tue 23:05]--[2015-08-04 Tue 23:10] =>  0:05
@@ -281,6 +259,7 @@ We don't really have any use cases for split projects. Remove this
 feature and associated infrastructure.
 
 *** STARTED Create the =yarn= model                                   :story:
+    CLOCK: [2015-08-06 Thu 07:54]--[2015-08-06 Thu 08:52] =>  0:58
     CLOCK: [2015-08-05 Wed 21:49]--[2015-08-05 Wed 22:00] =>  0:11
     CLOCK: [2015-08-05 Wed 17:44]--[2015-08-05 Wed 18:05] =>  0:21
     CLOCK: [2015-08-05 Wed 14:53]--[2015-08-05 Wed 14:56] =>  0:03
@@ -303,6 +282,36 @@ We need to create a meta-model with the following characteristics:
   string (the actual name of the object) plus a reference to the
   containing module. The containing module has a structure of paths
   similar to =qname=.
+
+Use cases:
+
+- we know the sizes of all containers in C++ up front, as well as the
+  "positions"; basically we could attribute a number to all types and
+  all formatters and use those numbers as indices in a vector; the
+  vector could be sized up front. It is effectively a two dimensional
+  vector of =(type, formatter)=. We could collapse this two one
+  dimension by spacing out type id's by the formatter size (e.g. type
+  index * formatter size sort of thing).
+- We could create a class to represent all intermediate properties and
+  make that the value of the two-dimensional vector.
+- for enablement, qname could be any type id (int, etc.). We don't use
+  it directly. We just need access to the dynamic object. We need to
+  inject the id's for the registrar (one per target + reference
+  model). We just need a linear way to iterate through the model's ids
+  mapped to a dynamic object.
+- for path derivatives we need the qname (or something like the qname:
+  name + location). We generate all paths associated with each
+  qname. We need to inject the registrar qnames. The resulting
+  derivatives can be mapped against an id. Here we could iterate
+  through all types in the model and access their name + location and
+  generate their path derivatives. We need the root object's dynamic
+  object to generate the path settings, but otherwise we don't need
+  the dynamic object.
+- for inclusion directives, we need to have path derivatives
+  generated. We also need the dynamic object to find out if there are
+  any overrides to inclusion directives.
+
+
 
 *** Rename types in =tack= using MOF/eCore terms                      :story:
 
@@ -328,6 +337,28 @@ model name such as:
 
 See comment in 'dot' story - we can have a model name and a model
 package.
+
+*** Create a blog post on biicode                                     :story:
+
+Investigate adding biicode support since we need to add a RapidJson
+dependency. Create a blog post about it.
+
+Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
+
+*** Add support for pulling dependencies from biicode                 :story:
+
+[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
+consuming dependencies from it and pushing dogen into it. In addition
+there are associated emblems:
+
+https://github.com/Manu343726/snail
+
+We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
+
+We should push both the C++ libraries as well as the dogen binary.
+
+We should take the least intrusive possible approach to start with, by
+creating a split setup for biicode.
 
 *** Update copyright notices                                          :story:
 
@@ -610,6 +641,12 @@ name registrar is already well understood to mean static registrar.
 This is a big problem now that we cannot add a type with the name
 registrar to the main model as it clashes with the serialisation
 registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
 
 ** Deprecated
 *** CANCELLED Create knitter options for each frontend                :story:
