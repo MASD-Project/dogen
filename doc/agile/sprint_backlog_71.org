@@ -281,6 +281,7 @@ We don't really have any use cases for split projects. Remove this
 feature and associated infrastructure.
 
 *** STARTED Create the =yarn= model                                   :story:
+    CLOCK: [2015-08-05 Wed 21:49]--[2015-08-05 Wed 22:00] =>  0:11
     CLOCK: [2015-08-05 Wed 17:44]--[2015-08-05 Wed 18:05] =>  0:21
     CLOCK: [2015-08-05 Wed 14:53]--[2015-08-05 Wed 14:56] =>  0:03
 

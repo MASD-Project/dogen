@@ -57,10 +57,6 @@ public:
     explicit generator(const enablement_factory& f) : factory_(f) {}
 
 private:
-    /**
-     * @brief Generates all of the inclusion dependencies for the
-     * formatters and qualified name.
-     */
     template<typename TackEntity>
     void generate(const TackEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
