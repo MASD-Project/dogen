@@ -10,11 +10,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Improve tack file importer errors                                 :story:
+*** Improve file importer errors                                      :story:
 
 It would be nice if one could know the file, line and column where an
-error has occurred when importing any tack file. Even for Dia, this
-would make troubleshooting much easier.
+error has occurred when importing any imported file. Even for Dia,
+this would make troubleshooting much easier. We need to add some
+information to the meta-model to keep track of the source of the
+types.
 
 *** Use pointer container in registrars                               :story:
 
@@ -31,19 +33,20 @@ make use of nesting that much, other than with test models. However,
 now that the architecture is clear and we need to make use of nesting,
 it becomes more of a concern. For example:
 
-: / tack
-:   / core
-:   / dia
-: / quilt
-:   / cpp
-:   / csharp
+: / a
+:   / b
+:   / c
+: / d
+:   / e
+:   / f
 
 This is clearer as:
 
-: / tack
-: / tack.dia
-: / quilt.cpp
-: / quilt.csharp
+: / a
+: / a.b
+: / a.c
+: / d.e
+: / d.f
 
 However, in order to implement this we need a bit of cleverness:
 
@@ -113,13 +116,6 @@ facet depends on the hash facet if the user decides to add a
 type. We need to make sure we take these run-time dependencies into
 account too.
 
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
 *** Consider renaming general settings                                :story:
 
 A while ago we came up with this name for the settings of the generic
@@ -162,9 +158,6 @@ the annotation formatter to generate the portion of boilerplate
 related to just the annotation. Boilerplate formatter collaborates
 with annotation formatter.
 
-In terms of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetypes]], one would annotate an archetype which makes
-conceptual sense.
-
 *** Consider renaming formatter groups and model groups to sets       :story:
 
 We should try to keep the words groups and sets to their mathematical
@@ -173,28 +166,7 @@ where we are using "group" we probably mean "set" since there is no
 associated operation with the set; it is merely a way of gathering
 elements.
 
-Actually this rename should be part of the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*** Include groups                                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to create includers for user defined
-groups of files so that I don't have to do it manually.
-#+end_quote
-
-One of my personal preferences has always been to group includes by
-"library". Normally first come the C includes, then the standard
-library ones, then boost, then utilities and finally types of the same
-model. Each of these can be thought of as a group. Inside each group
-the file names are normally ordered by size, smallest first. It would
-be nice to have support for such a feature in Dogen.
-
-Formatters would then push their includes into the correct
-group. Group names could be the model name (=std=, etc).
-
-A bit of a nitpick but nice nonetheless.
-
-*** Add an =import= tag to models                                     :story:
+*** Supply model references via meta-data rather than command line    :story:
 
 It doesn't make any sense to have model dependencies in the command
 line. After all, the model cannot be interpreted without them. A
@@ -227,14 +199,6 @@ path, etc are - and so should remain command line options.
 We need to move these two into the meta-data. This would also mean we
 no longer need to pass in external module paths for references, which
 is much cleaner.
-
-*** Consider renaming =knit= to =weave=                               :story:
-
-We seem to have missed an obvious term: weaving. We can either save it
-for later or perhaps rename =knit= to =weave=.
-
-Actually, since weave is a well-known term in AOP, we should save it
-for if/when we decide to support AOP.
 
 *** Lists of strings are not properly tidied up on io                 :story:
 
@@ -285,6 +249,14 @@ resulting error was not particularly enlightening:
 
 We should have a very early on validation to ensure formatters have
 distinct names.
+
+Merged stories:
+
+*Check for duplicate formatter names in formatter registrar*
+
+At present it is possible to register a formatter name more than
+once. Registrar should keep track of the names and throw if the name
+is duplicated.
 
 *** Add relationship types to handle "requires" and enablement        :story:
 
@@ -352,6 +324,108 @@ Notes:
   relationship types and populating them.
 - includes builder needs access to the "requires" data in order to
   compute includes.
+
+Merged stories:
+
+*Add support for the relationships graph in enabler*
+
+*Note*: this story needs refactoring. It is basically here to cover
+the support for a graph with cycles in enabler but has not yet been
+updated.
+
+This needs a bit more analysis. The gist of it is that not all types
+support all formatters. We need a way to determine if a formatter is
+not supported. This probably should be inferred by a "is dogen model"
+property (see backlog); e.g. non-dogen models need their types to have
+an inclusion setup in order to be "supported", otherwise they should
+default to "not-supported". However the "supported" flag is populated,
+we then need to take into account relationships and propagate this
+flag across the model such that, if a type =A= in a dogen model has a
+property of a type =B= from a non-dogen model which does not support a
+given formatter =f=, then =A= must also not support =f=.
+
+In order to implement this feature we need to:
+
+- update the SML grapher to take into account relationships
+  (properties that the class has) as well as inheritance.
+- we must only visit related types if we ourselves do not have values
+  for all supported fields.
+- we also need a visitor that detects cycles; when a cycle is found we
+  simply assume that the status of the revisited class is true (or
+  whatever the default value of "supported" is) and we write a warning
+  to the log file. We should output the complete path of the cycle.
+- users can override this by setting supported for all formatters
+  where there are cycles.
+- we could perhaps have a bitmask by qname; we could start by
+  generating all bitmasks for all qnames and setting them to default
+  value. We could then find all qnames that have supported set to
+  false and update the corresponding bitmasks. Then we could use the
+  graph to loop through the qnames and "and" the bitmasks of each
+  qname with the bitmasks of their related qnames. The position of
+  each field is allocated by the algorithm (e.g. the first "supported"
+  field is at position 0 and so on). Actually the first position of
+  the bitmask could be used to indicate if the bitmask has already
+  been processed or not. In the presence of a cycle force it to true.
+- we need a class that takes the SML model and computes the supported
+  bitmasks for each qname; the supported expander then simply takes
+  this (perhaps as part of the expansion context), looks up for the
+  current qname and uses the field list to set the flags
+  appropriately.
+- we should remove all traces of supported from a settings
+  perspective; supported and multi-level enabled are just artefacts of
+  the meta-data. From a settings perspective, there is just a
+  formatter level (common formatter settings) enabled which determines
+  whether the formatter is on or off. How that flag came to be
+  computed is not relevant outside the expansion process. This also
+  means we can have simpler or more complex policies as time allows us
+  improve on this story; provided we can at least set all flags to
+  enabled we can move forward.
+
+Solution for cycles:
+
+- detect the cycle and then remember the pair (a, b) where b is the
+  start of the cycle and a is the last vertex before the cycle. We
+  should assume that a is (true, true) for the edge (a, b) and compute
+  all other edges. Finally, once the graph has been processed we
+  should check all of the pairs in a cycle; for these we should simply
+  look at the values of b, and update a accordingly.
+
+Other notes:
+
+- we need some validation to ensure that some types will be generated
+  at all. The existing "generatable types" logic will have to be
+  removed or perhaps updated; we should take the opportunity to make
+  it reflect whether a type belongs to the target model or not. This
+  has no bearing on generatability (other that non-target types are
+  always not generated). So at the middle-end level we need to check
+  if there are any target types at all, and if not, just want the user
+  and exit. Then, a second layer is required at the model group /
+  language level to determine if there are any types to generate. It
+  is entirely possible that we end up not generating anything at all
+  because once we went through the graph everything got
+  disabled. Users will have to somehow debug this when things go
+  wrong.
+- following on from this, we probably need a "dump info" option that
+  explains the enabled/supported decisions for a given model, for all
+  target types; possibly, users could then supply regexes to filter
+  this info (e.g. why did you not generate =hash= for type =xyz=? can
+  I see all types for formatter =abc=?). It may be useful to have an
+  option to toggle between "target only types" and "all types",
+  because the system types may be the ones causing the problem.
+- the enabled supported logic applies to all formatters across all
+  model groups.
+
+*Capture enablement validation rules*
+
+Enablement requires some validation. This story captures all the rules
+we need to check for.
+
+- integrated IO must not be enabled if IO is enabled and vice-versa
+  (opaque settings validator). actually it seems this is possible, we
+  need to investigate the current implementation.
+- types must be enabled
+- if serialisation is enabled, types forward declaration of the
+  serialisation classes must be enabled
 
 *** Top-level inclusion required should be "tribool"                  :story:
 
@@ -425,19 +499,6 @@ with:
 
 As per stitch template.
 
-*** Create more "utility" members in class info                       :story:
-
-One way of making the templates a bit more manageable is to avoid
-having really complex conditions. We could simplify these by giving
-them intelligible names and making them properties of the
-formattables - mainly class info as that's where the complexity seems
-to stem from. For example:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-could be replaced with =has_swap=, or perhaps even =has_public_swap= /
-=has_protected_swap=.
-
 *** Consider splitting =formattables::transformer=                    :story:
 
 We have two different responsibilities within transformer:
@@ -456,94 +517,6 @@ type.
 
 The other option is to align them to tack types and to produce
 different =cpp= types.
-
-*** Add support for the relationships graph in enabler                :story:
-
-*Note*: this story needs refactoring. It is basically here to cover
-the support for a graph with cycles in enabler but has not yet been
-updated.
-
-This needs a bit more analysis. The gist of it is that not all types
-support all formatters. We need a way to determine if a formatter is
-not supported. This probably should be inferred by a "is dogen model"
-property (see backlog); e.g. non-dogen models need their types to have
-an inclusion setup in order to be "supported", otherwise they should
-default to "not-supported". However the "supported" flag is populated,
-we then need to take into account relationships and propagate this
-flag across the model such that, if a type =A= in a dogen model has a
-property of a type =B= from a non-dogen model which does not support a
-given formatter =f=, then =A= must also not support =f=.
-
-In order to implement this feature we need to:
-
-- update the SML grapher to take into account relationships
-  (properties that the class has) as well as inheritance.
-- we must only visit related types if we ourselves do not have values
-  for all supported fields.
-- we also need a visitor that detects cycles; when a cycle is found we
-  simply assume that the status of the revisited class is true (or
-  whatever the default value of "supported" is) and we write a warning
-  to the log file. We should output the complete path of the cycle.
-- users can override this by setting supported for all formatters
-  where there are cycles.
-- we could perhaps have a bitmask by qname; we could start by
-  generating all bitmasks for all qnames and setting them to default
-  value. We could then find all qnames that have supported set to
-  false and update the corresponding bitmasks. Then we could use the
-  graph to loop through the qnames and "and" the bitmasks of each
-  qname with the bitmasks of their related qnames. The position of
-  each field is allocated by the algorithm (e.g. the first "supported"
-  field is at position 0 and so on). Actually the first position of
-  the bitmask could be used to indicate if the bitmask has already
-  been processed or not. In the presence of a cycle force it to true.
-- we need a class that takes the SML model and computes the supported
-  bitmasks for each qname; the supported expander then simply takes
-  this (perhaps as part of the expansion context), looks up for the
-  current qname and uses the field list to set the flags
-  appropriately.
-- we should remove all traces of supported from a settings
-  perspective; supported and multi-level enabled are just artefacts of
-  the meta-data. From a settings perspective, there is just a
-  formatter level (common formatter settings) enabled which determines
-  whether the formatter is on or off. How that flag came to be
-  computed is not relevant outside the expansion process. This also
-  means we can have simpler or more complex policies as time allows us
-  improve on this story; provided we can at least set all flags to
-  enabled we can move forward.
-
-Solution for cycles:
-
-- detect the cycle and then remember the pair (a, b) where b is the
-  start of the cycle and a is the last vertex before the cycle. We
-  should assume that a is (true, true) for the edge (a, b) and compute
-  all other edges. Finally, once the graph has been processed we
-  should check all of the pairs in a cycle; for these we should simply
-  look at the values of b, and update a accordingly.
-
-*Other notes*
-
-- we need some validation to ensure that some types will be generated
-  at all. The existing "generatable types" logic will have to be
-  removed or perhaps updated; we should take the opportunity to make
-  it reflect whether a type belongs to the target model or not. This
-  has no bearing on generatability (other that non-target types are
-  always not generated). So at the middle-end level we need to check
-  if there are any target types at all, and if not, just want the user
-  and exit. Then, a second layer is required at the model group /
-  language level to determine if there are any types to generate. It
-  is entirely possible that we end up not generating anything at all
-  because once we went through the graph everything got
-  disabled. Users will have to somehow debug this when things go
-  wrong.
-- following on from this, we probably need a "dump info" option that
-  explains the enabled/supported decisions for a given model, for all
-  target types; possibly, users could then supply regexes to filter
-  this info (e.g. why did you not generate =hash= for type =xyz=? can
-  I see all types for formatter =abc=?). It may be useful to have an
-  option to toggle between "target only types" and "all types",
-  because the system types may be the ones causing the problem.
-- the enabled supported logic applies to all formatters across all
-  model groups. We need a way
 
 *** Formatters need different =enabled= defaults                      :story:
 
@@ -579,63 +552,6 @@ this by looking at the generated include dependencies. However,
 because the include dependency only has a directive, we cannot tell
 which formatter it belonged to. This would require some augmenting of
 the directive to record the "origination" formatter.
-
-*** Assignment operator seems to pass types by value                  :story:
-
-The code for the operator is as follows:
-
-:         stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-:                << " other);" << std::endl;
-
-If this is the case we need to fix it and regenerate all models.
-
-Actually we have implemented assignment in terms of swap, so that is
-why we copy. We need to figure out if this was a good idea. Raise
-story in backlog.
-
-: diff --git a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: index f9f91af..663f0ac 100644
-: --- a/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: +++ b/projects/cpp/src/types/formatters/types/class_header_formatter.stitch
-: @@ -253,7 +253,7 @@ public:
-:  <#+
-:                  if (!c.is_parent()) {
-:  #>
-: -    <#= c.name() #>& operator=(<#= c.name() #> other);
-: +    <#= c.name() #>& operator=(<#= c.name() #>& other);
-:  <#+
-:                  }
-:              }
-: diff --git a/projects/cpp_formatters/src/types/class_declaration.cpp b/projects/cpp_formatters/src/types/class_declaration.cpp
-: index c2eeb3c..534ab69 100644
-: --- a/projects/cpp_formatters/src/types/class_declaration.cpp
-: +++ b/projects/cpp_formatters/src/types/class_declaration.cpp
-: @@ -457,8 +457,8 @@ void class_declaration::swap_and_assignment(
-:
-:      // assignment is only available in leaf classes - MEC++-33
-:      if (!ci.is_parent()) {
-: -        stream_ << indenter_ << ci.name() << "& operator=(" << ci.name()
-: -                << " other);" << std::endl;
-: +        stream_ << indenter_ << ci.name() << "& operator=(const " << ci.name()
-: +                << "& other);" << std::endl;
-:      }
-:
-:      utility_.blank_line();
-: diff --git a/projects/cpp_formatters/src/types/class_implementation.cpp b/projects/cpp_formatters/src/types/class_implementation.cpp
-: index 5c9fe50..9276701 100644
-: --- a/projects/cpp_formatters/src/types/class_implementation.cpp
-: +++ b/projects/cpp_formatters/src/types/class_implementation.cpp
-: @@ -456,8 +456,8 @@ assignment_operator(const cpp::formattables::class_info& ci) {
-:          return;
-:
-:      stream_ << indenter_ << ci.name() << "& "
-: -            << ci.name() << "::operator=(" << ci.name()
-: -            << " other) ";
-: +            << ci.name() << "::operator=(const " << ci.name()
-: +            << "& other) ";
-:
-:      utility_.open_scope();
-:      {
 
 *** Create the =needle= library                                       :story:
 
@@ -691,7 +607,8 @@ qualified field names do not have a prefix. We could just add a prefix
 to make everything symmetric (e.g. =formatters.copyright_notice=) but
 it would make the fields less readable at the usage point and this was
 the reason why we didn't add it in the first place. For now, we will
-leave stitch as it is.
+leave stitch as it is. This is a bit more meaningful with the
+annotation rename.
 
 This may even be a more wide-ranging question: why do users need to
 know who owns the field? e.g. =dia.comment=, do I care?
@@ -781,22 +698,6 @@ single pace, and use boost spirit or tokenizer. For one such
 implementation with spirit see:
 
 [[http://boost-spirit.com/home/2010/02/24/parsing-skippers-and-skipping-parsers/][Parsing Skippers and Skipping Parsers]]
-
-*** Add identity management to =sml::property_indexer=                :story:
-
-At present we are populating the identity properties in dia to sml. We
-need to move this to property indexer in SML.
-
-We found a problem with moving this: we need the identity properties
-to be in the object before we inject system types (they are used to
-generate keys) but property indexing happens after injection. We
-cannot move property indexing to be before injection (we need system
-types to exist). We probably need to split property indexing into
-two. The other problem is that if we take into account concepts, the
-identity properties should only be indexing after concepts have been
-indexed. This requires a bit of thinking.
-
-See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/patches/move_identity_attribute_to_sml.patch][the patch]] for the latest on this.
 
 *** Create a module indexer in sml                                    :story:
 
@@ -928,15 +829,6 @@ For now we have abused this flag to allow legacy files overrides of
 the new world formatters. This is just until we move totally to new
 world though.
 
-*** Split knitting from stitching settings                            :story:
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
-
 *** Indent stitch output using clang format                           :story:
 
 We need to indent the output coming out of stitch as it is not
@@ -987,35 +879,6 @@ folders as required.
 
 The =sequence_formatter= is actually not a formatter, but a helper or
 assistant.
-
-*** Adding a dependency to a non-existent expander crashes dogen      :story:
-
-We are not checking that all dependencies exist when building the
-graph. If we add a dependency to a expander that does not exist we
-crash and burn:
-
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/spec/workflow_spec.cpp(550): last checkpoint
-: dogen_knit_spec: /usr/include/boost/smart_ptr/shared_ptr.hpp:653: typename boost::detail::sp_member_access<T>::type boost::shared_ptr<dogen::dynamic::expansion::expander_interface>::operator->() const [Y = dogen::dynamic::expansion::expander_interface]: Assertion `px != 0' failed.
-: unknown location(0): fatal error in "all_primitives_model_generates_expected_code": signal: SIGABRT (application abort requested)
-
-The cause of this is that we may end up creating vertices for
-dependencies (initialised with a null shared pointer) but never
-actually =add= the expander that corresponds to that expander name to
-the graph. We then visit the graph and assume all vertices have valid
-expanders, which results in the error above.
-
-We can do two things:
-
-- validate that all dependencies exist by placing all expanders in a
-  set and resolving the dependencies; this can be done before the
-  graph.
-- checking that the expander pointer points to not null or throw.
-
-*** Check for duplicate formatter names in formatter registrar        :story:
-
-At present it is possible to register a formatter name more than
-once. Registrar should keep track of the names and throw if the name
-is duplicated.
 
 *** Add validation for field definitions                              :story:
 
@@ -1177,25 +1040,6 @@ It would be more sensible to call it root module rather than model
 module. We should also create a root module property in the model to
 make it easier to locate.
 
-*** Capture settings validation rules                                 :story:
-
-*Note*: This story has bit-rotted and needs updating.
-
-Once all settings have been built (global and local) we must pass them
-to a validator class that makes sure they all make sense. This story
-captures all the rules we need to check for. We must also check the
-SML validator story in backlog for rules that apply to settings.
-
-- integrated IO must not be enabled if IO is enabled and vice-versa
-  (opaque settings validator). actually it seems this is possible, we
-  need to investigate the current implementation.
-- types must be enabled
-- if serialisation is enabled, types forward declaration of the
-  serialisation classes must be enabled (opaque settings validator)
-
-Actually what we need is a rules engine that infers all of this. It
-does validation at the same time.
-
 *** Add importers and backends to =info= command line option          :story:
 
 #+begin_quote
@@ -1218,219 +1062,6 @@ text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
-
-*** Consider introducing =archetypes= to simplify output models       :story:
-
-We haven't quite arrived at the ideal configuration for the cpp
-model. We are close, but not there yet. The problem we have at the
-moment is that the formatters drive a lot of the work in
-formattables, resulting in a circular dependency. This is happening
-because we are missing some entities. This story is just a random set
-of thoughts in this space, trying to clear up the terminology across
-the board.
-
-*Random thoughts*
-
-What is probably needed is to have facets, aspects and "file kinds" as
-top-level concepts rather than just strings with which we label
-formatters. In addition, we need a good name for "file kinds". This is
-a meta-concept, something akin to a file template. The formatter
-produces a physical representation of that meta-concept. As part of
-the formatter registration, we can also register this meta-concept
-(provided it relies on an existing formattable). And in effect, these
-are the pieces of the puzzle:
-
-- you define a "file kind".
-- a facet and a model are groupings of "file kinds". These happen to
-  be hierarchical groupings. There are others: header and
-  implementation, or class header formatter. Those are
-  non-hierarchical.
-- you bind a transformer to a SML type to generate a formattable.
-- a formattable is associated with one or more "file kinds" or better
-  yet a file kind is associated with a formattable. It is also
-  associated with formatting properties and settings. It is those
-  tuples that we pass to the formatters.
-- you bind a formatter to a "file" and process the associated
-  formattable.
-
-Perhaps we can call these "file kinds" file archetypes or just
-archetypes.
-
-What can be said about an archetype:
-
-- conceptual notion of something we want to generate.
-- one SML entity can map to zero or many archetypes. Concept at
-  present maps to zero. Object maps to many.
-- a representation of the archetype as source code is done by the
-  formatter. It uses a template to help it generate that
-  representation.
-- a given archetype maps to one and only one SML entity.
-- a given archetype maps to one and only one CPP entity.
-- archetypes can be grouped in many ways. One way is facets and
-  models.
-- archetypes have definitions: name of the archetype, what groups it
-  belongs to.
-- archetypes have associated data: formattables, settings,
-  properties. This is an entity and needs a name.
-- formatters work on one and only one archetype.
-- archetypes have qualified names; this is (mostly) what we called
-  ownership hierarchy. Qualified names can be represented as separate
-  fields or using the dot notation.
-- archetypes have labels: this is what we called groups.
-- dynamic is a model designed to augment SML with some archetype
-  data. This is not true in the dia case. Check all fields to see if
-  it is true everywhere else.
-- an aspect is a property of one or more archetypes; it is a knob that
-  affects the generation of the source code representation.
-- an archetype instance belongs to an archetype.
-- we should remove the concept of "integrated facets". It just happens
-  that a facet such as types may have aspects that enable features
-  similar to aspects in other facets. There may be rules that
-  determine that when certain aspects are enabled, certain facets must
-  be switched off because they are incompatible.
-- facet is a good name for grouping archetypes, but model isn't. We
-  need a better name for a set of facets. Aspect is also a good
-  name. In addition, a model group is also a bad name. A "model" is a
-  cohesive group of archetypes that are meant to be used together. A
-  "model group" is a cohesive group of models that provide the same
-  conceptual representations in different programming languages. Maybe
-  we should use a more "random" name such as: pod. Then perhaps a
-  model group could become a "pod family": a family of related pods. A
-  given model can be represented by one pod family or another - they
-  are mutually exclusive. Of course, from a command line perspective,
-  its better to think of "modes". Each mode corresponds to choosing
-  one "pod family" over another. This does not map very cleanly.
-- archetypes have an associated programming language - a grammar.
-- a facet may exist in more than one programming language and an
-  aspect too.
-- pods are programming language specific.
-- formattables are kind of like an archetype friendly representation
-  of the domain types. We need a good name for this.
-- internal and external now make slightly more sense, at least once we
-  got a good name for formatters. We still need a good name for it
-  though. If the archetype instance is generated because of the
-  presence of the domain type, it is external. If the archetype has no
-  sensitivity to domain types (but may have sensitivity to other
-  things such as options) it is internal. The naming around this is
-  not totally clear.
-- internal formatters may not be allowed to be disabled. For example,
-  if serialisation is on, registrar must be generated. With
-  CMakeLists, we may want do disable them altogether.
-- in the thrift story in the backlog we mention the existence of
-  mutually exclusive groups of facets. We should also come up with a
-  name for these.
-- archetype may not quite be the right name. See [[http://www.pearsonhighered.com/samplechapter/032111230X.pdf][Archetypes and
-  archetype patterns]]. See also:
-  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/ColourCoding.html][Class Archetypes, UML and Colour]]
-  - [[http://www.step-10.com/SoftwareDesign/ModellingInColour/index.html][Peter Coad's 'Modeling in Color']]
-  - [[http://www.step-10.com/Books/JMCUBook.html][Java Modeling in Color with UML]]
-- the process of mapping domain types to archetypes could be called
-  "expansion" because its a one to many relationship in most cases.
-- its not quite correct to call CPP types "formattables". The
-  archetype has to have an ordered container of inputs to the
-  formatter. This is sort of the "payload" for formatting; the
-  archetype is a container of such entities. Taking into account the
-  cases where more than one type is placed in the same file, this
-  would result in the includes being merged. Or perhaps these things
-  are really formattables, but then we need a way to distinguish
-  between "top-level formatters" that generate archetypes from
-  "partial" formatters that can be combined.
-- with "facet specific types" we go one level deeper: it should be
-  possible to add an enumeration definition to say test data. This
-  would mean that archetypes and facets are not quite so aligned as we
-  first thought. Potentially, one should be able to ask for say a
-  formattable at facet X in an artchetype at facet Y.
-- One way to look at it is as follows: there is the modeling
-  dimension, in which we have an entity, say entity =A=; and there is
-  the implementation dimension, in which =a= can be represented by
-  =A1, A2, ..., An= archetypes. In effect, the implementation
-  dimension has multiple dimensions, one for each pod (and of course
-  the pod families would be an extra dimension and so on). Actually,
-  we probably have 3 steps: the modeling dimension, the translation of
-  that into a language-specific representation and then finally the
-  archetype dimension.
-- a good name for the top-level container of archetypes is
-  "kernel". This was inspired (loosely) in some ideas from EMF. So
-  we'd have say the "quilt kernel", with support for multiple
-  programming languages such as cpp, java etc. We we'd have the "pleat
-  kernel" and so forth. Each kernel has a set of languages and the
-  languages have archetypes. Archetypes have a collection of
-  properties such as the formattables they need, the formatters and so
-  on. The job of a model such as =quilt::cpp= is to implement this
-  binding.
-- dynamic fields can be owned by archetypes or by other types of
-  owners (e.g. dia). We should have a way of expressing this
-  ownership.
-- we haven't used the word "feature" anywhere yet (properly; we
-  mentioned it in the manual and so on, but not given it any good
-  meaning).
-- we created a split between "internal" and "external" formatters, but
-  its interesting to notice that we have "internal" formatters that
-  are "regular" formatters - in that we need to create a qname for
-  them and the formatter properties will work correctly; whereas some
-  others are "irregular" formatters - they have strange filenames that
-  cannot be generated without some fiddling. Actually, ODB options is
-  the main problematic one. If we could place it in a sensible
-  location we could probably get rid of irregular formatters
-  altogether.
-- we need to have "special" facets; cmake files for example should not
-  really have a facet but it seems having an empty facet name breaks a
-  lot of stuff.
-- we need a map between types/states in SML and enablement. For
-  example, if a type is "non-generatable" that is taken to mean
-  "generate types if file does not exist, default all else to
-  disabled". We need a way to express this sort of logic. This is akin
-  to an "enablement map". For example, users could define these maps
-  somewhere, given them a name and then assign a type to a map. In
-  addition, we need a way to express "generate but don't override" and
-  "generate and override".
-
-*Merged with other stories*
-
-It is important not to confuse formatters with archetypes. A formatter
-(or at least, a "top-level formatter"; those that generate files) is
-in a sense a "category" of archetypes. In other words, for a given
-formatter many archetypes will be generated. This may mean that the
-"archetype" is not a very good choice because it may imply some kind
-of meta-class-ness. In a sense, we are dealing with arch-entities
-("entity" being SML's base class for all modeled domain types). So
-fundamentally, the correct workflow is vaguely like this:
-
-- we create a model for some problem domain. We represent this model
-  in SML. All objects are identifiable by a qname.
-- we apply a transformation of this model into something which is
-  closer to the programming language that we wish to generate; these
-  we choose to call formattables.
-- we may also inject some formattables which do not have a mapping to
-  the original domain objects. These have synthetic qnames.
-- we apply a function that takes the qname, the SML entity, the
-  formattable and generates an archetype skeleton. To start off with,
-  this is made up of only a file name and a top-level formatter. The
-  structure exists in memory as a map of qnames to formatter names to
-  archetypes.
-- we then fill in the blanks: compute includes, enablement, etc. The
-  final blank that needs to be filled in is the generation of the
-  file, which is done by applying a formatter to a number of the
-  archetype properties.
-
-Another point of interest is that we may be able to move some of the
-archetype processing to common code. For example, file name
-generation, enablement, and so on are not language specific. However,
-we need to have a representation of the archetype which is specific to
-a model (e.g. =quilt::cpp= say) because not all properties will be
-common. We could, possibly, have an archetype base class, which then
-would imply a formatter's base class and so on - but then we hit the
-visitor across models problem.
-
-In this approach we do have an advantage which is we can parallelise a
-lot of work across each stage in the "pipeline". For instance we can
-run transformation from SML to formattables in parallel. We could
-conceivably even have futures for each of the archetype
-properties. None of this is a concern for the foreseable future, of
-course.
-
-FIXME: improve references by having models inside of models; we should
-be able to keep only the types that we refer in the final model.
 
 *** Make JSON SML a fully supported frontend                          :story:
 
@@ -1586,15 +1217,6 @@ example =$(facet_name)= could be made to mean the facet name. With
 just support for this we could probably handle all of the use cases
 except for =postfix=.
 
-*** Consider renaming =ownership_hierarchy=                           :story:
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
 *** Consider using the same API as boost property tree in selector    :story:
 
 At present we have the type of the value in the method names in the
@@ -1627,7 +1249,7 @@ The name builder is just a factory so make the name reflect it.
 
 Actually, we don't just build names either.
 
-*** Create a list of valid values for field definitions               :story:
+*** Create a domain field definitions                                 :story:
 
 In addition to default values, it should be possible to supply a list
 of possible values for a field definition - a domain. When processing
@@ -1677,13 +1299,13 @@ something along these lines.
 The external model path does not contribute to path resolution in a
 model. Up til now that has actually been a feature; it would have been
 annoying to have to dype =dogen::= on every type for every
-model. Instead, we refer to say =dogen::sml::model= as simply
-=sml::model= in all models that use =sml=. However this masks a deeper
-problem: this is not the desired behaviour at all times. We saw this
-problem when we created multiple models under dynamic:
-=dynamic::schema= and =dynamic::expansion=. In this case, users of
-these models referred to them as =schema= and =expansion=
-respectively, and this was not ideal. In general:
+model. Instead, we refer to say =dogen::a::b= as simply =a::b= in all
+models that use =a=. However this masks a deeper problem: this is not
+the desired behaviour at all times. We saw this problem when we
+created multiple models under dynamic: =dynamic::schema= and
+=dynamic::expansion=. In this case, users of these models referred to
+them as =schema= and =expansion= respectively, and this was not
+ideal. In general:
 
 - external module path should contribute to references just like
   internal module path does - there should be no difference;
@@ -1693,29 +1315,6 @@ respectively, and this was not ideal. In general:
   path. So in the case of =dogen=, since every model has =dogen= as
   their external module path, according to this rule we should not
   have to type it.
-
-*Previous Understanding*
-
-For the dynamic schema model we have an external model path of
-=dogen::dynamic::schema=. This is because there are two things we need to place
-under =dynamic= (also =dogen::dynamic::expansion=). This revealed a
-more general problem: nesting of external model paths results in
-"strange" references in dependent models. For example, in SML we have
-to say =schema::dynamic_object= to refer to
-=dogen::dynamic::schema::dynamic_object=. We need to figure out what
-is the best approach for this.
-
-*** Consider renaming qname                                           :story:
-
-As part of dynamic we came up with a better way of modeling names:
-type is name, fields:
-
-- simple
-- qualified
-
-This is a better way of modeling, as opposed to the SML way with a
-=qname= which then contains a =simple_name=. We should use this
-approach in SML to.
 
 *** Perform lexical casts once only for error reporting               :story:
 
@@ -1732,12 +1331,6 @@ logging and the exception message.
 
 In addition we should be using =string_converter= for qnames now
 instead of io'ing them directly.
-
-*** Consider renaming module path to internal module path             :story:
-
-Since we have got a external module path, it would make sense for the
-other to be the internal module path. This may be taking the symmetry
-too far, so we need to have a think.
 
 *** Names in C++ namespaces                                           :story:
 
@@ -2289,7 +1882,7 @@ create floating point numbers.
 
 Something is not quite right on the resolution logic
 
-*** Create includers for value objects only                           :story:
+*** Create different kinds of master header files                     :story:
 
 #+begin_quote
 *Story*: As a dogen user, I don't want to include every object in a
@@ -2308,6 +1901,14 @@ inclusions:
 
 Perhaps we could have a second type of includer that only has value
 objects, etc.
+
+Another way to look at this is that there should be user-configurable
+master header files:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create master header files for
+user defined sets of files so that I don't have to do it manually.
+#+end_quote
 
 *** Do not copy models in merger                                      :story:
 
@@ -3174,18 +2775,6 @@ It would be nice to be able to create a block instead, maybe (first stab):
 : copyright_notice=Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 : modeline_group_name=emacs
 : #DOGEN_END
-
-*** Consider adding "application" to ownership hierarchy              :story:
-
-Not all fields make sense to all tools in the dogen suite; some are
-knit specific, some are stitch specific and some are shared. At
-present this is not a problem because stitch loads up all of knit's
-fields and assumes users won't make use of them. If they do, nothing
-bad "should" happen. But a better way to solve this may be to only
-load fields that belong to an application. We could add "application"
-to ownership hierarchy, and filter on that. Note though that we would
-need some way of saying "all applications" (e.g. at present, leave the
-field blank).
 
 *** Create a "utility" model like formatters for frontends            :story:
 
@@ -5717,6 +5306,17 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Keep track of sewing terms allocation                             :story:
+
+This story just keeps track of how we are using the different sewing
+terms in Dogen.
+
+| Term  | Meaning | Dogen usage                            |
+| weave |         | Not used yet. Reserved for AOP support |
+|       |         |                                        |
+
+
+
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
 According to this paper by Matt Austern we should see if we really
@@ -7305,7 +6905,6 @@ Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so 
 *** Add support for GtkBuilder / Glade XML files                       :epic:
 
 There is nothing stopping us from using a GtkBuilder / Glade XML file
-as an input, create some SML from it and then generate code which
 would do the boiler plate setup of the UI. With a bit more work one
 could potentially even generate the bindings for a presentation model.
 
