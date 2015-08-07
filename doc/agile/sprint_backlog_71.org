@@ -259,6 +259,7 @@ We don't really have any use cases for split projects. Remove this
 feature and associated infrastructure.
 
 *** STARTED Create the =yarn= model                                   :story:
+    CLOCK: [2015-08-07 Fri 07:55]--[2015-08-07 Fri 10:50] =>  2:55
     CLOCK: [2015-08-06 Thu 07:54]--[2015-08-06 Thu 08:52] =>  0:58
     CLOCK: [2015-08-05 Wed 21:49]--[2015-08-05 Wed 22:00] =>  0:11
     CLOCK: [2015-08-05 Wed 17:44]--[2015-08-05 Wed 18:05] =>  0:21
@@ -291,7 +292,9 @@ Use cases:
   vector could be sized up front. It is effectively a two dimensional
   vector of =(type, formatter)=. We could collapse this two one
   dimension by spacing out type id's by the formatter size (e.g. type
-  index * formatter size sort of thing).
+  index * formatter size sort of thing). Make the container dense
+  rather than sparse; if a formatter is disabled, its still in the
+  container.
 - We could create a class to represent all intermediate properties and
   make that the value of the two-dimensional vector.
 - for enablement, qname could be any type id (int, etc.). We don't use
@@ -311,7 +314,13 @@ Use cases:
   generated. We also need the dynamic object to find out if there are
   any overrides to inclusion directives.
 
+*** Split formatter properties and associated classes from formattables :story:
 
+We have two kinds of data: the formattables themselves (mapped from
+tack) and associated data (formatter properties). The latter is
+totally independent. We should create a namespace for all of these
+classes and a workflow that produces the data ready for consumption. A
+tentative name is =manifest=.
 
 *** Rename types in =tack= using MOF/eCore terms                      :story:
 

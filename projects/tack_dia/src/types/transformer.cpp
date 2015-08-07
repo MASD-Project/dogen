@@ -24,7 +24,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dynamic/types/field_selector.hpp"
 #include "dogen/tack/types/module.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/dia/types/composite.hpp"
