@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-07 Fri 17:55]
+#+CAPTION: Clock summary at [2015-08-10 Mon 14:58]
 | <75>                                                                        |         |       |      |
 | Headline                                                                    | Time    |       |      |
 |-----------------------------------------------------------------------------+---------+-------+------|
@@ -22,8 +22,8 @@
 |-----------------------------------------------------------------------------+---------+-------+------|
 | Stories                                                                     | 31:08   |       |      |
 | Active                                                                      |         | 31:08 |      |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:15 |
-| STARTED Compile dogen in Windows using Visual Studio 2015                   |         |       | 8:47 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 2:15 |
+| POSTPONED Compile dogen in Windows using Visual Studio 2015                 |         |       | 8:47 |
 | COMPLETED Rename SML to =tack=                                              |         |       | 4:33 |
 | COMPLETED Merge frontend with =tack=                                        |         |       | 4:38 |
 | COMPLETED Rename dia to tack to tack dia                                    |         |       | 0:27 |
@@ -31,10 +31,11 @@
 | COMPLETED Rename =dia_tack= test data to =tack_dia=                         |         |       | 0:08 |
 | CANCELLED Dia hydrator should hydrate with path                             |         |       | 0:16 |
 | COMPLETED Remove support for split projects                                 |         |       | 2:10 |
-| STARTED Analysis on the need for two meta-models in dogen                   |         |       | 7:02 |
+| COMPLETED Analysis on the need for two meta-models in dogen                 |         |       | 7:02 |
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2015-08-10 Mon 14:57]
     CLOCK: [2015-08-07 Fri 16:48]--[2015-08-07 Fri 17:44] =>  0:56
     CLOCK: [2015-08-05 Wed 17:08]--[2015-08-05 Wed 17:44] =>  0:36
     CLOCK: [2015-08-03 Mon 17:42]--[2015-08-03 Mon 17:59] =>  0:17
@@ -45,7 +46,8 @@ Updates to sprint and product backlog.
 - backlog reviewed up to "Failed facet dependencies should be treated
   as errors".
 
-*** STARTED Compile dogen in Windows using Visual Studio 2015         :story:
+*** POSTPONED Compile dogen in Windows using Visual Studio 2015       :story:
+    CLOSED: [2015-08-10 Mon 14:57]
     CLOCK: [2015-08-04 Tue 23:11]--[2015-08-04 Tue 23:35] =>  0:24
     CLOCK: [2015-08-04 Tue 23:05]--[2015-08-04 Tue 23:10] =>  0:05
     CLOCK: [2015-08-04 Tue 22:59]--[2015-08-04 Tue 23:04] =>  0:05
@@ -262,7 +264,8 @@ and another for references. Make it consistent.
 We don't really have any use cases for split projects. Remove this
 feature and associated infrastructure.
 
-*** STARTED Analysis on the need for two meta-models in dogen         :story:
+*** COMPLETED Analysis on the need for two meta-models in dogen       :story:
+    CLOSED: [2015-08-10 Mon 14:57]
     CLOCK: [2015-08-07 Fri 14:21]--[2015-08-07 Fri 16:55] =>  2:26
     CLOCK: [2015-08-07 Fri 07:55]--[2015-08-07 Fri 10:50] =>  2:55
     CLOCK: [2015-08-06 Thu 07:54]--[2015-08-06 Thu 08:52] =>  0:58
@@ -360,458 +363,6 @@ Tasks:
 - create an id property in element which is computed on the basis of
   name and location. Add a location property which is the same as in
   tack.
-
-*** Refactor qname                                                    :story:
-
-Split qname into name and location; location is made up of model name,
-external module path, model path, internal module path.
-
-Notes:
-
-- populate model path as module name by default unless supplied by
-  field.
-- deal with the fallout in terms of file paths creation, etc.
-- fix hardware model to supply model name but to have a blank model
-  path.
-- split model names with dots into multiple model paths.
-
-Merged stories:
-
-*Consider renaming qname*
-
-As part of dynamic we came up with a better way of modeling names:
-type is name, fields:
-
-- simple
-- qualified
-
-This is a better way of modeling, as opposed to the SML way with a
-=qname= which then contains a =simple_name=. We should use this
-approach in SML to.
-
-*** Refactor ownership hierarchy                                      :story:
-
-Start implementing the archetype logic. Basically there is a artefact
-unique identifier
-
-- rename it to =artefact_descriptor=.
-- remove all dia fields; these are now file importer specific and
-  never reach dynamic.
-- add =kernel= field. This is set to =stitch= or =quilt=.
-- rename formatter field to =kind=
-
-Merged stories:
-
-*Consider adding "application" to ownership hierarchy*
-
-Not all fields make sense to all tools in the dogen suite; some are
-knit specific, some are stitch specific and some are shared. At
-present this is not a problem because stitch loads up all of knit's
-fields and assumes users won't make use of them. If they do, nothing
-bad "should" happen. But a better way to solve this may be to only
-load fields that belong to an application. We could add "application"
-to ownership hierarchy, and filter on that. Note though that we would
-need some way of saying "all applications" (e.g. at present, leave the
-field blank).
-
-*Consider renaming =ownership_hierarchy=*
-
-We came up with the name =ownership_hierarchy= because we could not
-think of anything else. However, it is not a particularly good name,
-and it is increasingly so now that we need to use it across models. We
-need a better name for this value type.
-
-This work must be integrated with the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_69.org#thoughts-on-cpp-refactoring][archetype work]].
-
-*Split knitting from stitching settings*
-
-*Rationale*: with "kernel" we will have quilt and stitch.
-
-At present we only have a single common directory with all of the
-available fields. Not all fields apply to both stitching and
-knitting - but some do. We need a way to filter these. One possibility
-is to use an approach similar to the formatter groups in the ownership
-hierarchy. For now we simply have fields that have no meaning in
-stitching but can be supplied by users.
-
-*** Replace qname with id's in tack                                   :story:
-
-We don't really need qname in it's current form for the purposes of
-tack. We should:
-
-- create a base class for all types in model called element.
-- add a property called id to element. Compute id on the basis of
-  hashing name and location. Change all model containers,
-  relationships etc to use id instead of qname.
-
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Split formatter properties and associated classes from formattables :story:
-
-We have two kinds of data: the formattables themselves (mapped from
-tack) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
-*** Rename types in =tack= using MOF/eCore terms                      :story:
-
-Rename the types in =tack= to make them a bit more inline with
-MOF/eCore. As much as possible but without going overboard. Ensure we
-do not pick up meta-meta-model concepts by mistake. Rename nested
-qname to something more sensible from MOF/eCore. Review all concept
-names in this light.
-
-*** Split model name from "contributing model name" in qname          :story:
-
-We need to find a way to model qnames such that there are two model
-names: one which contributes to the namespaces and another which
-doesn't. The specific use case is the primitives model where the model
-has to have a name but we don't want the type names to have the model
-name. Perhaps we need some kind of flag: model name contributes to
-namespacing.
-
-With this we can then remove the numerous hacks around the primitives
-model name such as:
-
-- // FIXME: mega hack to handle primitive model.
-
-See comment in 'dot' story - we can have a model name and a model
-package.
-
-*** Create a blog post on biicode                                     :story:
-
-Investigate adding biicode support since we need to add a RapidJson
-dependency. Create a blog post about it.
-
-Post has [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/blog/biicode.org][already been started]].
-
-*** Add support for pulling dependencies from biicode                 :story:
-
-[[https://www.biicode.com/][Biicode]] is a nuget-like repo for c++. We should look into both
-consuming dependencies from it and pushing dogen into it. In addition
-there are associated emblems:
-
-https://github.com/Manu343726/snail
-
-We should also look into [[https://www.biicode.com/biicode-open-source-challenge][the challenge]].
-
-We should push both the C++ libraries as well as the dogen binary.
-
-We should take the least intrusive possible approach to start with, by
-creating a split setup for biicode.
-
-*** Update copyright notices                                          :story:
-
-We need to update all notices to reflect personal ownership until DDC
-was formed, and then ownership by DDC.
-
-*** Create a set of definitions for tagging and meta-data             :story:
-
-We still use these terms frequently. We should define them in dynamic
-to have specific meanings.
-
-*** Refactor code around model origination                            :story:
-
-- remove origin types and generation types, replacing it with just a
-  boolean for is target.
-
-*Previous Understanding*
-
-In the past we added a number of knobs around generation, all with
-their own problems:
-
-- =origin_types=: was the model/type created by the user or the
-  system. in reality this means did the model come from Dia or
-  JSON. this is confusing as the user can also add JSON files (their
-  own model library) and in the future the user can use JSON
-  exclusively without needed Dia at all.
-
-- =generation_types=: if the model is target, all types are to be
-  generated /unless/ they are not properly supported, in which case
-  they are to be "partially" generated (as is the case with
-  services). This is a formatter decision and SML should not know
-  anything about it.
-
-These can be replaced by a single enumeration that indicates if the
-type/model is target or not.
-
-This work should be integrated with the model types story.
-
-*** Models should have an associated language                          :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make sure I only use valid system
-models so that I don't generate models that code generate but do not
-compile.
-#+end_quote
-
-Certain models (e.g. system / library models) can only be used in a
-give language; for example =boost= and =std= only make sense in C++. A
-.Net library model would only make sense in .Net, etc. These are
-Language Specific Models (LSM). Once a model depends on a LSM it
-itself becomes an LSM and it should not be able to then make use of
-models of other languages nor should one be able to request a code
-generation for other languages.
-
-However, one day we will have a system model which is a Language
-Agnostic Model (LAM). The system model will provide a base set of
-functionality across languages such as containers, and for each type
-it will have mappings to language specific types. The mapping is
-declared as dynamic extensions in the appropriate section
-(i.e. =tags::cpp::mapped_type= or something of that ilk). If a model
-depends only on LAMs, it is itself a LAM and can be used to generate
-code on any supported language (presumably a supported language is
-defined to be that for which we have both mappings and a code
-generation backend).
-
-A first step for this would be to have a language enumeration in SML
-which is a property of the model, and one entry of which is "language
-agnostic".
-
-*** Set enumeration underlying type in SML                            :story:
-
-In cpp transformer we have hacked the underlying type of the
-enumeration. Remove this hack and set it in SML. Still a hack, but
-a tad better.
-
-Actually this could be the first case where LAM/PIM is used: we could
-call this something like integer.
-
-*** Add support for Language Agnostic Models (LAM)                    :story:
-
-When we start supporting more than one language, one interesting
-feature would be to be able to define a model once and have it
-generated for all supported languages. This would be achieved by
-having a system model (or set of system models) that define all the
-key types in a language agnostic manner. For example:
-
-: lam::string
-: lam::int
-: lam::int16
-
-Each of these types then has a set of meta-data fields that map them
-to a type in a supported language:
-
-: lam:string: cpp.concrete_type_mapping = std::string
-: lam:string: csharp.concrete_type_mapping = string
-
-And so on. We load the user model that makes use of LAM, we generate
-the merged model still with LAM types and then we perform a
-translation for each of the supported and enabled languages: for every
-LAM type, we replace all its references with the corresponding
-concrete type. We need to split the supplied mapping into a QName, use
-the QName to load the system models for that language, look up the
-type and replace it. After the translation no LAM types are left. We
-end up with N SML merged models where N is the number of supported and
-enabled languages.
-
-Each of these models is then sent down to code generation. This should
-be equivalent to manually generating models per language - we could
-use this as a test.
-
-Once we have LAM, it would be great to be able to exchange data
-between languages. This could be done as follows:
-
-- XML: create a "LAM" XML schema, and a set of formatters that read
-  and write from it. This is kind of like reverse mapping the types
-  back to LAM types when writing the XML.
-- JSON: similar approach to XML, minus the schema.
-- POF: use the coherence libraries to dump the models into POF.
-
-FIXME: we believed this story was already backloged but could not find
-it on a quick search. Do a more thorough search.
-
-*** Thoughts on simplifying the formattables generation               :story:
-
-We have a problem in the way which we are doing the formattables:
-because we are doing model traversals for each of the factories, we
-cannot easily introduce a set of manually generated qnames such as the
-registrar and includers. However, if we started off the main workflow
-by creating a structure like so:
-
-- qname
-- optional entity (new base class in SML); if null we need to create
-  extensions as an empty object.
-
-We then need a list of these that get passed in to all repository
-factories. These use a visitor of entity to resolve to a type (where
-required).
-
-We can inject types to this list that have a qname but no entity. For
-these we generate some parts of the formatter properties. Actually, we
-still need to generate inclusion lists even when there is no
-entity. Perhaps we need to create a new method in the provider that
-does not take an SML entity but still generates the inclusion list.
-
-Actually this should all be done in SML. We should have zero qname
-look-ups coming out of SML, just follow references. This story is a
-variation of the split between "partial" models and "full" models.
-
-Well not everything should be done in SML. We still need to create a
-structure with the properties above, but that is done by iterating
-through a list in the SML model.
-
-One slight problem with this approach: sometimes we need to preserve
-some relationships in the newly generated objects. For registrar we
-need to preserve the model leaves. For the includers / master headers
-we need to express somehow the inclusion relationship at the formatter
-level. The latter is definitely a special case because it is a pure
-C++ concept: include files cannot be modeled in SML. However,
-registrar is slightly different because we still need to compute the
-includes based on the leaves. This means that the above approach will
-not provide a clean solution, unless we synthesise an SML object when
-providing the includes. And of course we need to be careful taking
-that route or else we will end up generating the object across all
-facets.
-
-*** Consider reducing the number of qname lookups in cpp model        :story:
-
-At present we are using qnames all over the place in CPP. Nothing
-stops us from using strings instead of qnames if that is more
-efficient.
-
-What is worse is that we seem to be doing a ridiculous amount of qname
-lookups. It would be much nicer if we could somehow have all the data
-in the right shape to avoid doing so many lookups.
-
-This should be done as part of the move to =yarn=.
-
-*** Handling of managed directories is incorrect                      :story:
-
-At present we are querying the tack dia importer to figure out what
-the managed directories are. These are basically the top-level
-directories from where we want the housekeeper to operate. In reality
-this is (or can be placed) in the meta-data. We should be able to
-extract the managed directories from the meta-data as a step in one of
-the workflows.
-
-This can be done by the backend. It does mean that we should be
-returning a composite type from generation:
-
-- list of files;
-- list of managed directories.
-
-Alternatively we could have a =managed_directories= method that takes
-in an SML model and then internally reads in the meta-data for a given
-model to produce the list.
-
-*Merged with previous story*
-
-Compute managed directories from knitting options
-
-At present the backend is returning empty managed directories. This
-means housekeeping will fail in the new world. We need to change the
-interface of this method to take in the knitting options and return
-the managed directories.
-
-This is not entirely trivial. At present the managed directories are
-computed in the locator. It takes into account split project, etc to
-come up with all the directories used by the backend. We need to make
-these decisions during path expansion, expect we only need manged
-directories for the root object. However we do not know which object
-is the root object at present, during the expansion. We could identify
-it via the QName and the SML model in context thought. We could then
-populate the managed directories as a text collection. We then need
-some settings and a factory to pull out the managed directories from
-the root object. This could be done in =managed_directories=, by
-having an SML model as input.
-
-*** Add include providers for all types                               :story:
-
-We need to implement the provider container support for primitives,
-modules and concepts.
-
-Update:
-
-- inclusion dependencies factory
-- provider container
-
-*** Implement all formatter interfaces                                :story:
-
-We still have a couple of skeleton interfaces:
-
-- primitve
-- concepts
-
-*** Do not compute inclusion directives for system models             :story:
-
-It seems we are computing inclusion directives and other path
-derivatives for system models:
-
-: {
-:   "__type__": "dogen::cpp::expansion::path_derivatives",
-:   "file_path": "/home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../test_data/all_primitives/actual/std/include/std/serialization/unique_ptr_fwd_ser.hpp",
-:   "header_guard": "STD_SERIALIZATION_UNIQUE_PTR_FWD_SER_HPP",
-:   "inclusion_directive": "<quote>std/serialization/unique_ptr_fwd_ser.hpp<quote>"
-: }
-
-This comes out of the workflow, so we possibly are then ignoring it
-for the non-target types. So:
-
-- can we avoid computing these altogether?
-- are we ignoring it?
-
-Actually this is the usual problem with the "origin" of the type. We
-need a way to determine if this type needs computations or not. We
-need to create a story to clean up the =origin_type= and
-=generation_type= and then we can make use of it to determine if we
-need to compute inclusion, path etc or not.
-
-*** Header guard in formatters should be optional                     :story:
-
-At present we are relying on empty header guards to determine what to
-do in boilerplate. We should use boost optional.
-
-*** Remove complete name and use qualified name                       :story:
-
-At present we have both complete name and qualified name in
-formatables. Qualified name is blank. We should remove complete name
-and populate qualified name.
-
-This is in nested type info.
-
-*** Consider renaming registrar in boost serialisation                :story:
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-*** Create more "utility" members in class info                       :story:
-
-One way of making the templates a bit more manageable is to avoid
-having really complex conditions. We could simplify these by giving
-them intelligible names and making them properties of the
-formattables - mainly class info as that's where the complexity seems
-to stem from. For example:
-
-: if ((!c.all_properties().empty() || c.is_parent()) && !c.is_immutable()) {
-
-could be replaced with =has_swap=, or perhaps even =has_public_swap= /
-=has_protected_swap=.
-
-*** Consider renaming module path to internal module path             :story:
-
-Since we have got a external module path, it would make sense for the
-other to be the internal module path. This may be taking the symmetry
-too far, so we need to have a think.
 
 ** Deprecated
 *** CANCELLED Create knitter options for each frontend                :story:
