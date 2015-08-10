@@ -39,11 +39,11 @@ module::module(module&& rhs)
 module::module(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module,
-    const std::list<dogen::tack::qname>& members)
+    const boost::optional<dogen::tack::name>& containing_module,
+    const std::list<dogen::tack::name>& members)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -111,19 +111,19 @@ void module::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::tack::qname& module::name() const {
+const dogen::tack::name& module::name() const {
     return name_;
 }
 
-dogen::tack::qname& module::name() {
+dogen::tack::name& module::name() {
     return name_;
 }
 
-void module::name(const dogen::tack::qname& v) {
+void module::name(const dogen::tack::name& v) {
     name_ = v;
 }
 
-void module::name(const dogen::tack::qname&& v) {
+void module::name(const dogen::tack::name&& v) {
     name_ = std::move(v);
 }
 
@@ -143,35 +143,35 @@ void module::origin_type(const dogen::tack::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::tack::qname>& module::containing_module() const {
+const boost::optional<dogen::tack::name>& module::containing_module() const {
     return containing_module_;
 }
 
-boost::optional<dogen::tack::qname>& module::containing_module() {
+boost::optional<dogen::tack::name>& module::containing_module() {
     return containing_module_;
 }
 
-void module::containing_module(const boost::optional<dogen::tack::qname>& v) {
+void module::containing_module(const boost::optional<dogen::tack::name>& v) {
     containing_module_ = v;
 }
 
-void module::containing_module(const boost::optional<dogen::tack::qname>&& v) {
+void module::containing_module(const boost::optional<dogen::tack::name>&& v) {
     containing_module_ = std::move(v);
 }
 
-const std::list<dogen::tack::qname>& module::members() const {
+const std::list<dogen::tack::name>& module::members() const {
     return members_;
 }
 
-std::list<dogen::tack::qname>& module::members() {
+std::list<dogen::tack::name>& module::members() {
     return members_;
 }
 
-void module::members(const std::list<dogen::tack::qname>& v) {
+void module::members(const std::list<dogen::tack::name>& v) {
     members_ = v;
 }
 
-void module::members(const std::list<dogen::tack::qname>&& v) {
+void module::members(const std::list<dogen::tack::name>&& v) {
     members_ = std::move(v);
 }
 

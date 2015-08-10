@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/io/enumerator_io.hpp"
 #include "dogen/tack/io/enumeration_io.hpp"
 

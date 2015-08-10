@@ -30,9 +30,9 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
 #include "dogen/tack/types/parsing_error.hpp"
-#include "dogen/tack/types/nested_qname_builder.hpp"
+#include "dogen/tack/types/nested_name_builder.hpp"
 #include "dogen/tack/types/identifier_parser.hpp"
 
 namespace {
@@ -43,7 +43,7 @@ auto lg(logger_factory("tack.identifier_parser"));
 const std::string error_msg("Failed to parse string: ");
 using namespace boost::spirit;
 
-using dogen::tack::nested_qname_builder;
+using dogen::tack::nested_name_builder;
 
 namespace distinct {
 
@@ -81,7 +81,7 @@ const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    std::shared_ptr<nested_qname_builder> builder;
+    std::shared_ptr<nested_name_builder> builder;
     qi::rule<Iterator, std::string()> nested_name, name, nondigit, alphanum,
         primitive, signable_primitive;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
@@ -106,7 +106,7 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    grammar(std::shared_ptr<nested_qname_builder> b)
+    grammar(std::shared_ptr<nested_name_builder> b)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -153,9 +153,9 @@ struct grammar : qi::grammar<Iterator> {
             (
                 type_name,
                 std::cout << val("Error! Expecting ")
-                << _4                               // what failed?
+                << _4                             // what failed?
                 << val(" here: \"")
-                << construct<std::string>(_3, _2)   // iterators to error-pos, end
+                << construct<std::string>(_3, _2) // iterators to error-pos, end
                 << val("\"")
                 << std::endl
                 );
@@ -174,21 +174,21 @@ identifier_parser(const std::unordered_set<std::string>& modules,
     : modules_(modules), external_module_path_(external_module_path),
       model_name_(model_name) { }
 
-nested_qname identifier_parser::parse_qname(const std::string& n) const {
-    std::string::const_iterator it(n.begin());
-    std::string::const_iterator end(n.end());
+nested_name identifier_parser::parse_name(const std::string& s) const {
+    std::string::const_iterator it(s.begin());
+    std::string::const_iterator end(s.end());
 
-    BOOST_LOG_SEV(lg, debug) << "parsing qname: " << n;
+    BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
-    std::shared_ptr<nested_qname_builder>
-        builder(new nested_qname_builder(modules_,
+    std::shared_ptr<nested_name_builder>
+        builder(new nested_name_builder(modules_,
                 external_module_path_, model_name_));
     grammar<std::string::const_iterator> g(builder);
     const bool ok(boost::spirit::qi::parse(it, end, g));
 
     if (!ok || it != end) {
-        BOOST_LOG_SEV(lg, error) << error_msg << n;
-        BOOST_THROW_EXCEPTION(parsing_error(error_msg + n));
+        BOOST_LOG_SEV(lg, error) << error_msg << s;
+        BOOST_THROW_EXCEPTION(parsing_error(error_msg + s));
     }
 
     const auto r(builder->build());

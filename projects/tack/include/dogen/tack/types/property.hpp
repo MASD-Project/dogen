@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/serialization/property_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,7 +51,7 @@ public:
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
         const std::string& name,
-        const dogen::tack::nested_qname& type,
+        const dogen::tack::nested_name& type,
         const bool is_immutable,
         const bool is_fluent);
 
@@ -103,10 +103,10 @@ public:
      * @brief Qualified name for the type of the property.
      */
     /**@{*/
-    const dogen::tack::nested_qname& type() const;
-    dogen::tack::nested_qname& type();
-    void type(const dogen::tack::nested_qname& v);
-    void type(const dogen::tack::nested_qname&& v);
+    const dogen::tack::nested_name& type() const;
+    dogen::tack::nested_name& type();
+    void type(const dogen::tack::nested_name& v);
+    void type(const dogen::tack::nested_name&& v);
     /**@}*/
 
     /**
@@ -139,7 +139,7 @@ private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
     std::string name_;
-    dogen::tack::nested_qname type_;
+    dogen::tack::nested_name type_;
     bool is_immutable_;
     bool is_fluent_;
 };

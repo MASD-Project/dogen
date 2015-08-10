@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
-#define DOGEN_TACK_TYPES_NESTED_QNAME_BUILDER_FWD_HPP
+#ifndef DOGEN_TACK_HASH_NAME_HASH_HPP
+#define DOGEN_TACK_HASH_NAME_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/tack/types/name.hpp"
+
 namespace dogen {
 namespace tack {
 
-class nested_qname_builder;
+struct name_hasher {
+public:
+    static std::size_t hash(const name& v);
+};
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::tack::name> {
+public:
+    size_t operator()(const dogen::tack::name& v) const {
+        return dogen::tack::name_hasher::hash(v);
+    }
+};
+
+}
 #endif

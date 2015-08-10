@@ -52,13 +52,13 @@ private:
     /**
      * @brief Creates a qualified name for the module.
      */
-    tack::qname create_qualified_name_for_model(const std::string& model_name,
+    tack::name create_qualified_name_for_model(const std::string& model_name,
         const std::string& external_module_path) const;
 
     /**
      * @brief Creates a module representing the model.
      */
-    tack::module create_module_for_model(const tack::qname& qn,
+    tack::module create_module_for_model(const tack::name& qn,
         const bool is_target) const;
 
 private:

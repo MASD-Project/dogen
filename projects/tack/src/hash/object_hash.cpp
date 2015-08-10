@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/type_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/hash/object_hash.hpp"
 #include "dogen/tack/hash/property_hash.hpp"
 #include "dogen/tack/hash/object_types_hash.hpp"
@@ -41,7 +41,7 @@ inline std::size_t hash_std_list_dogen_tack_property(const std::list<dogen::tack
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_std_list_dogen_tack_property_(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_std_list_dogen_tack_property_(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -50,7 +50,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_std_list_dogen_tack_p
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_tack_qname(const std::list<dogen::tack::qname>& v) {
+inline std::size_t hash_std_list_dogen_tack_name(const std::list<dogen::tack::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -58,11 +58,11 @@ inline std::size_t hash_std_list_dogen_tack_qname(const std::list<dogen::tack::q
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_qname_(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_name_(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_tack_qname(i.second));
+        combine(seed, hash_std_list_dogen_tack_name(i.second));
     }
     return seed;
 }
@@ -79,14 +79,14 @@ std::size_t object_hasher::hash(const object& v) {
 
     combine(seed, hash_std_list_dogen_tack_property(v.all_properties()));
     combine(seed, hash_std_list_dogen_tack_property(v.local_properties()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_std_list_dogen_tack_property_(v.inherited_properties()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_std_list_dogen_tack_property_(v.inherited_properties()));
     combine(seed, v.is_parent());
     combine(seed, v.is_visitable());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
     combine(seed, v.is_child());
     combine(seed, v.is_original_parent_visitable());
-    combine(seed, hash_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_qname_(v.relationships()));
+    combine(seed, hash_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_name_(v.relationships()));
     combine(seed, v.object_type());
     combine(seed, v.is_final());
 

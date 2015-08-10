@@ -24,16 +24,16 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-enablement_repository::enablement_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_by_qname)
-    : enablement_by_qname_(enablement_by_qname) { }
+enablement_repository::enablement_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_by_name)
+    : enablement_by_name_(enablement_by_name) { }
 
 void enablement_repository::swap(enablement_repository& other) noexcept {
     using std::swap;
-    swap(enablement_by_qname_, other.enablement_by_qname_);
+    swap(enablement_by_name_, other.enablement_by_name_);
 }
 
 bool enablement_repository::operator==(const enablement_repository& rhs) const {
-    return enablement_by_qname_ == rhs.enablement_by_qname_;
+    return enablement_by_name_ == rhs.enablement_by_name_;
 }
 
 enablement_repository& enablement_repository::operator=(enablement_repository other) {
@@ -42,20 +42,20 @@ enablement_repository& enablement_repository::operator=(enablement_repository ot
     return *this;
 }
 
-const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_qname() const {
-    return enablement_by_qname_;
+const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() const {
+    return enablement_by_name_;
 }
 
-std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_qname() {
-    return enablement_by_qname_;
+std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_repository::enablement_by_name() {
+    return enablement_by_name_;
 }
 
-void enablement_repository::enablement_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& v) {
-    enablement_by_qname_ = v;
+void enablement_repository::enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& v) {
+    enablement_by_name_ = v;
 }
 
-void enablement_repository::enablement_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >&& v) {
-    enablement_by_qname_ = std::move(v);
+void enablement_repository::enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >&& v) {
+    enablement_by_name_ = std::move(v);
 }
 
 } } }

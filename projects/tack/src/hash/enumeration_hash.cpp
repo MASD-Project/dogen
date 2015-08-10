@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/type_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/hash/enumerator_hash.hpp"
 #include "dogen/tack/hash/enumeration_hash.hpp"
 

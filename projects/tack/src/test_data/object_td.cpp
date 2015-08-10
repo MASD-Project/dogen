@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/type_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack/test_data/object_td.hpp"
 #include "dogen/tack/test_data/property_td.hpp"
 #include "dogen/tack/test_data/object_types_td.hpp"
@@ -40,15 +40,15 @@ std::list<dogen::tack::property> create_std_list_dogen_tack_property(unsigned in
     return r;
 }
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> > create_std_unordered_map_dogen_tack_qname_std_list_dogen_tack_property_(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> > r;
+std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> > create_std_unordered_map_dogen_tack_name_std_list_dogen_tack_property_(unsigned int position) {
+    std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_std_list_dogen_tack_property(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_std_list_dogen_tack_property(position + i)));
     }
     return r;
 }
@@ -62,18 +62,18 @@ create_dogen_tack_relationship_types(const unsigned int position) {
     return dogen::tack::relationship_types_generator::create(position);
 }
 
-std::list<dogen::tack::qname> create_std_list_dogen_tack_qname(unsigned int position) {
-    std::list<dogen::tack::qname> r;
+std::list<dogen::tack::name> create_std_list_dogen_tack_name(unsigned int position) {
+    std::list<dogen::tack::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_tack_qname(position + i));
+        r.push_back(create_dogen_tack_name(position + i));
     }
     return r;
 }
 
-std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> > create_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_qname_(unsigned int position) {
-    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> > r;
+std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> > create_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_name_(unsigned int position) {
+    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_relationship_types(position + i), create_std_list_dogen_tack_qname(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_relationship_types(position + i), create_std_list_dogen_tack_name(position + i)));
     }
     return r;
 }
@@ -95,14 +95,14 @@ populate(const unsigned int position, result_type& v) {
     dogen::tack::type_generator::populate(position, v);
     v.all_properties(create_std_list_dogen_tack_property(position + 0));
     v.local_properties(create_std_list_dogen_tack_property(position + 1));
-    v.inherited_properties(create_std_unordered_map_dogen_tack_qname_std_list_dogen_tack_property_(position + 2));
+    v.inherited_properties(create_std_unordered_map_dogen_tack_name_std_list_dogen_tack_property_(position + 2));
     v.is_parent(create_bool(position + 3));
     v.is_visitable(create_bool(position + 4));
     v.is_immutable(create_bool(position + 5));
     v.is_fluent(create_bool(position + 6));
     v.is_child(create_bool(position + 7));
     v.is_original_parent_visitable(create_bool(position + 8));
-    v.relationships(create_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_qname_(position + 9));
+    v.relationships(create_std_unordered_map_dogen_tack_relationship_types_std_list_dogen_tack_name_(position + 9));
     v.object_type(create_dogen_tack_object_types(position + 10));
     v.is_final(create_bool(position + 11));
 }

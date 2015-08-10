@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/model_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack_dia/hash/context_hash.hpp"
 
 namespace {
@@ -55,7 +55,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_tack_qname(const std::unordered_map<std::string, dogen::tack::qname>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_tack_name(const std::unordered_map<std::string, dogen::tack::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -74,7 +74,7 @@ std::size_t context_hasher::hash(const context& v) {
 
     combine(seed, hash_std_unordered_map_std_string_std_list_std_string_(v.child_id_to_parent_ids()));
     combine(seed, hash_std_unordered_set_std_string(v.parent_ids()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_tack_qname(v.id_to_qname()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_tack_name(v.id_to_name()));
     combine(seed, hash_std_unordered_set_std_string(v.top_level_module_names()));
     combine(seed, v.model());
 

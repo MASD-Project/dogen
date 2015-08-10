@@ -20,7 +20,7 @@
  */
 #include "dogen/tack/hash/property_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
-#include "dogen/tack/hash/nested_qname_hash.hpp"
+#include "dogen/tack/hash/nested_name_hash.hpp"
 
 namespace {
 

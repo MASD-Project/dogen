@@ -25,8 +25,8 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/types/parsing_error.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/types/merging_error.hpp"
 #include "dogen/tack/types/identifier_parser.hpp"
 #include "dogen/tack/types/merger.hpp"
@@ -42,13 +42,13 @@ const std::string test_suite("identifier_parser_spec");
 
 bool test_primitive(const std::string& s) {
     dogen::tack::identifier_parser ip;
-    const auto a(ip.parse_qname(s));
+    const auto a(ip.parse_name(s));
 
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name(s);
-    nqn.type(e);
-    return asserter::assert_equals(nqn, a);
+    nn.type(e);
+    return asserter::assert_equals(nn, a);
 }
 
 }
@@ -57,52 +57,52 @@ using dogen::tack::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(identifier_parser)
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_qname) {
-    SETUP_TEST_LOG_SOURCE("parsing_string_with_many_nested_scopes_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_name) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_with_many_nested_scopes_produces_expected_name");
     const std::string s("a::b::c::z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
     dogen::tack::identifier_parser ip;
-    const auto a(ip.parse_qname(s));
+    const auto a(ip.parse_name(s));
 
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("z");
     e.module_path(std::list<std::string> { "b", "c"});
     e.model_name("a");
-    nqn.type(e);
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    nn.type(e);
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_qname) {
-    SETUP_TEST_LOG_SOURCE("parsing_string_without_scope_operator_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_name) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_without_scope_operator_produces_expected_name");
     const std::string s("zeta");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
     dogen::tack::identifier_parser ip;
-    const auto a(ip.parse_qname(s));
+    const auto a(ip.parse_name(s));
 
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("zeta");
-    nqn.type(e);
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    nn.type(e);
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_qname) {
-    SETUP_TEST_LOG_SOURCE("parsing_string_with_one_scope_operator_produces_expected_qname");
+BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_name) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_with_one_scope_operator_produces_expected_name");
     const std::string s("a::z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
     dogen::tack::identifier_parser ip;
-    const auto a(ip.parse_qname(s));
+    const auto a(ip.parse_name(s));
 
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.model_name("a");
     e.simple_name("z");
-    nqn.type(e);
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    nn.type(e);
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
     const std::string s("a:z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
     dogen::tack::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
     const std::string s("0a");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
     dogen::tack::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
     const std::string s("a::");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
     dogen::tack::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
     const std::string s("A::::");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
     dogen::tack::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qname(s), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name(s), parsing_error);
 }
 
 BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
@@ -161,167 +161,167 @@ BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
     dogen::tack::identifier_parser ip;
-    BOOST_CHECK_THROW(ip.parse_qname("unsigned bool"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qname("unsigned x"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qname("unsigned float"), parsing_error);
-    BOOST_CHECK_THROW(ip.parse_qname("unsigned double"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name("unsigned bool"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name("unsigned x"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name("unsigned float"), parsing_error);
+    BOOST_CHECK_THROW(ip.parse_name("unsigned double"), parsing_error);
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_nested_names");
 
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("type");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("abc");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
-    nqn.children(std::list<dogen::tack::nested_qname> { c });
+    nn.children(std::list<dogen::tack::nested_name> { c });
 
-    const auto a(ip.parse_qname("type<abc>"));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const auto a(ip.parse_name("type<abc>"));
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_nested_names");
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("type");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("abc");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
 
-    dogen::tack::qname g;
+    dogen::tack::name g;
     g.simple_name("cde");
-    dogen::tack::nested_qname d;
+    dogen::tack::nested_name d;
     d.type(g);
-    nqn.children(std::list<dogen::tack::nested_qname> { c, d });
+    nn.children(std::list<dogen::tack::nested_name> { c, d });
 
     const std::string s("type<abc,cde>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    const auto a(ip.parse_qname(s));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const auto a(ip.parse_name(s));
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_nested_names");
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("vector");
     e.model_name("std");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("string");
     f.model_name("std");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
-    nqn.children(std::list<dogen::tack::nested_qname> { c });
+    nn.children(std::list<dogen::tack::nested_name> { c });
 
     const std::string s("std::vector<std::string>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    const auto a(ip.parse_qname(s));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const auto a(ip.parse_name(s));
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_vector_of_primitive_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_vector_of_primitive_produces_expected_nested_names");
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("vector");
     e.model_name("std");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("unsigned int");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
-    nqn.children(std::list<dogen::tack::nested_qname> { c });
+    nn.children(std::list<dogen::tack::nested_name> { c });
 
     const std::string s("std::vector<unsigned int>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    const auto a(ip.parse_qname(s));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const auto a(ip.parse_name(s));
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_nested_names");
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("unordered_map");
     e.model_name("std");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("string");
     f.model_name("std");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
-    dogen::tack::qname g;
+    dogen::tack::name g;
     g.simple_name("type");
     g.model_name("my");
-    dogen::tack::nested_qname d;
+    dogen::tack::nested_name d;
     d.type(g);
 
-    nqn.children(std::list<dogen::tack::nested_qname> { c, d });
+    nn.children(std::list<dogen::tack::nested_name> { c, d });
 
     const std::string s1("std::unordered_map<std::string,my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s1;
-    const auto a1(ip.parse_qname(s1));
-    BOOST_CHECK(asserter::assert_equals(nqn, a1));
+    const auto a1(ip.parse_name(s1));
+    BOOST_CHECK(asserter::assert_equals(nn, a1));
 
     const std::string s2("std::unordered_map<std::string,    my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s2;
-    const auto a2(ip.parse_qname(s2));
-    BOOST_CHECK(asserter::assert_equals(nqn, a2));
+    const auto a2(ip.parse_name(s2));
+    BOOST_CHECK(asserter::assert_equals(nn, a2));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_qnames) {
-    SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_nested_qnames");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_names) {
+    SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_nested_names");
     dogen::tack::identifier_parser ip;
-    dogen::tack::nested_qname nqn;
-    dogen::tack::qname e;
+    dogen::tack::nested_name nn;
+    dogen::tack::name e;
     e.simple_name("vector");
     e.model_name("std");
-    nqn.type(e);
+    nn.type(e);
 
-    dogen::tack::qname f;
+    dogen::tack::name f;
     f.simple_name("shared_ptr");
     f.model_name("std");
-    dogen::tack::nested_qname c;
+    dogen::tack::nested_name c;
     c.type(f);
 
-    dogen::tack::qname g;
+    dogen::tack::name g;
     g.simple_name("string");
     g.model_name("std");
-    dogen::tack::nested_qname d;
+    dogen::tack::nested_name d;
     d.type(g);
-    c.children(std::list<dogen::tack::nested_qname> { d });
-    nqn.children(std::list<dogen::tack::nested_qname> { c });
+    c.children(std::list<dogen::tack::nested_name> { d });
+    nn.children(std::list<dogen::tack::nested_name> { c });
 
     const std::string s("std::vector<std::shared_ptr<std::string>>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    const auto a(ip.parse_qname(s));
-    BOOST_CHECK(asserter::assert_equals(nqn, a));
+    const auto a(ip.parse_name(s));
+    BOOST_CHECK(asserter::assert_equals(nn, a));
 }
 
-BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nested_qname) {
-    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_nested_qname");
+BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_nested_name) {
+    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_nested_name");
 
     BOOST_CHECK(test_primitive("character"));
     BOOST_CHECK(test_primitive("cha"));

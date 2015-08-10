@@ -24,16 +24,16 @@ namespace dogen {
 namespace cpp {
 namespace formattables {
 
-path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_qname)
-    : path_derivatives_by_qname_(path_derivatives_by_qname) { }
+path_derivatives_repository::path_derivatives_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_by_name)
+    : path_derivatives_by_name_(path_derivatives_by_name) { }
 
 void path_derivatives_repository::swap(path_derivatives_repository& other) noexcept {
     using std::swap;
-    swap(path_derivatives_by_qname_, other.path_derivatives_by_qname_);
+    swap(path_derivatives_by_name_, other.path_derivatives_by_name_);
 }
 
 bool path_derivatives_repository::operator==(const path_derivatives_repository& rhs) const {
-    return path_derivatives_by_qname_ == rhs.path_derivatives_by_qname_;
+    return path_derivatives_by_name_ == rhs.path_derivatives_by_name_;
 }
 
 path_derivatives_repository& path_derivatives_repository::operator=(path_derivatives_repository other) {
@@ -42,20 +42,20 @@ path_derivatives_repository& path_derivatives_repository::operator=(path_derivat
     return *this;
 }
 
-const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_qname() const {
-    return path_derivatives_by_qname_;
+const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() const {
+    return path_derivatives_by_name_;
 }
 
-std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_qname() {
-    return path_derivatives_by_qname_;
+std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& path_derivatives_repository::path_derivatives_by_name() {
+    return path_derivatives_by_name_;
 }
 
-void path_derivatives_repository::path_derivatives_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v) {
-    path_derivatives_by_qname_ = v;
+void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >& v) {
+    path_derivatives_by_name_ = v;
 }
 
-void path_derivatives_repository::path_derivatives_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v) {
-    path_derivatives_by_qname_ = std::move(v);
+void path_derivatives_repository::path_derivatives_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, dogen::cpp::formattables::path_derivatives> >&& v) {
+    path_derivatives_by_name_ = std::move(v);
 }
 
 } } }

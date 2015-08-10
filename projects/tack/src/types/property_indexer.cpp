@@ -47,17 +47,17 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace tack {
 
-object& property_indexer::find_object(const qname& qn, model& m) {
-    auto i(m.objects().find(qn));
+object& property_indexer::find_object(const name& n, model& m) {
+    auto i(m.objects().find(n));
     if (i == m.objects().end()) {
-        const auto n(string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << object_not_found << n;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+        const auto sn(string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
     }
     return i->second;
 }
 
-std::list<qname>& property_indexer::
+std::list<name>& property_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -69,10 +69,10 @@ find_relationships(const relationship_types rt, object& o) {
     return i->second;
 }
 
-concept& property_indexer::find_concept(const qname& qn, model& m) {
-    auto i(m.concepts().find(qn));
+concept& property_indexer::find_concept(const name& n, model& m) {
+    auto i(m.concepts().find(n));
     if (i == m.concepts().end()) {
-        const auto& sn(qn.simple_name());
+        const auto& sn(n.simple_name());
         BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
         BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
     }
@@ -80,11 +80,11 @@ concept& property_indexer::find_concept(const qname& qn, model& m) {
 }
 
 void property_indexer::index_object(object& o, model& m,
-    std::unordered_set<qname>& processed_qnames) {
+    std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: "
                              << string_converter::convert(o.name());
 
-    if (processed_qnames.find(o.name()) != processed_qnames.end()) {
+    if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed: "
                                  << string_converter::convert(o.name());
         return;
@@ -93,8 +93,8 @@ void property_indexer::index_object(object& o, model& m,
     std::list<property> concept_properties;
     auto i(o.relationships().find(relationship_types::modeled_concepts));
     if (i != o.relationships().end()) {
-        for (const auto& qn : i->second) {
-            auto& c(find_concept(qn, m));
+        for (const auto& n : i->second) {
+            auto& c(find_concept(n, m));
             concept_properties.insert(concept_properties.end(),
                 c.local_properties().begin(), c.local_properties().end());
         }
@@ -105,9 +105,9 @@ void property_indexer::index_object(object& o, model& m,
 
     i = o.relationships().find(relationship_types::parents);
     if (i != o.relationships().end()) {
-        for (const auto& qn : i->second) {
-            auto& parent(find_object(qn, m));
-            index_object(parent, m, processed_qnames);
+        for (const auto& n : i->second) {
+            auto& parent(find_object(n, m));
+            index_object(parent, m, processed_names);
 
             if (!parent.all_properties().empty())
                 o.inherited_properties().insert(
@@ -121,29 +121,29 @@ void property_indexer::index_object(object& o, model& m,
     o.all_properties().insert(o.all_properties().end(),
         o.local_properties().begin(), o.local_properties().end());
 
-    processed_qnames.insert(o.name());
+    processed_names.insert(o.name());
 }
 
 void property_indexer::index_objects(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
-    std::unordered_set<qname> processed_qnames;
+    std::unordered_set<name> processed_names;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o, m, processed_qnames);
+        index_object(o, m, processed_names);
     }
 }
 
 void property_indexer::index_concept(concept& c, model& m,
-    std::unordered_set<qname>& processed_qnames) {
+    std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
                              << string_converter::convert(c.name());
 
-    if (processed_qnames.find(c.name()) != processed_qnames.end()) {
+    if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:"
                                  << string_converter::convert(c.name());
         return;
@@ -152,9 +152,9 @@ void property_indexer::index_concept(concept& c, model& m,
     c.all_properties().insert(c.all_properties().end(),
         c.local_properties().begin(), c.local_properties().end());
 
-    for (const auto& qn : c.refines()) {
-        auto& parent(find_concept(qn, m));
-        index_concept(parent, m, processed_qnames);
+    for (const auto& n : c.refines()) {
+        auto& parent(find_concept(n, m));
+        index_concept(parent, m, processed_names);
 
         c.inherited_properties().insert(
             std::make_pair(parent.name(), parent.local_properties()));
@@ -162,20 +162,20 @@ void property_indexer::index_concept(concept& c, model& m,
         c.all_properties().insert(c.all_properties().end(),
             parent.local_properties().begin(), parent.local_properties().end());
     }
-    processed_qnames.insert(c.name());
+    processed_names.insert(c.name());
 }
 
 void property_indexer::index_concepts(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
-    std::unordered_set<qname> processed_qnames;
+    std::unordered_set<name> processed_names;
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        index_concept(c, m, processed_qnames);
+        index_concept(c, m, processed_names);
     }
 }
 

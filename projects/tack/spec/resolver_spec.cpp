@@ -74,7 +74,7 @@ bool has_one_parent(const dogen::tack::object& o) {
     return true;
 }
 
-dogen::tack::qname get_parent_name(const dogen::tack::object& o) {
+dogen::tack::name get_parent_name(const dogen::tack::object& o) {
     using dogen::tack::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||
@@ -118,10 +118,10 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
 
     bool found(false);
     for (const auto pair : m.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found = true;
 
             const auto& o(pair.second);
@@ -156,10 +156,10 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found = true;
 
             const auto& o(pair.second);
@@ -200,10 +200,10 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found = true;
 
             const auto& o(pair.second);
@@ -238,10 +238,10 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found = true;
 
             const auto& o(pair.second);
@@ -276,10 +276,10 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     bool found_one(false);
     bool found_two(false);
     for (const auto pair : combined.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found_one = true;
 
             const auto& o(pair.second);
@@ -291,9 +291,9 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
             BOOST_CHECK(factory.is_model_n(0, pn));
             BOOST_CHECK(o.object_type() ==
                 dogen::tack::object_types::user_defined_value_object);
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found_two = true;
 
             const auto& o(pair.second);
@@ -345,10 +345,10 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
     bool found(false);
     for (const auto pair : combined.objects()) {
-        const auto& qn(pair.first);
-        if (factory.is_type_name_n(0, qn)) {
+        const auto& n(pair.first);
+        if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: "
-                                     << string_converter::convert(qn);
+                                     << string_converter::convert(n);
             found = true;
 
             const auto& o(pair.second);

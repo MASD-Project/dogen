@@ -34,7 +34,7 @@ static logger lg(logger_factory(
         "cpp.formattables.path_derivatives_repository_factory"));
 
 const std::string registrar_name("registrar");
-const std::string duplicate_qname("Duplicate qname: ");
+const std::string duplicate_name("Duplicate name: ");
 
 }
 
@@ -56,7 +56,7 @@ public:
      * @brief Generates all of the path derivatives for the formatters
      * and qualified name.
      */
-    void generate(const tack::qname& qn);
+    void generate(const tack::name& n);
 
 public:
     void operator()(const dogen::tack::object& o) { generate(o.name()); }
@@ -73,14 +73,14 @@ private:
     path_derivatives_repository result_;
 };
 
-void generator::generate(const tack::qname& qn) {
-    auto& pd(result_.path_derivatives_by_qname());
-    const auto pair(pd.insert(std::make_pair(qn, factory_.make(qn))));
+void generator::generate(const tack::name& n) {
+    auto& pd(result_.path_derivatives_by_name());
+    const auto pair(pd.insert(std::make_pair(n, factory_.make(n))));
     const bool inserted(pair.second);
     if (!inserted) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
     }
 }
 
@@ -96,11 +96,11 @@ path_derivatives_repository path_derivatives_repository_factory::make(
     generator g(f);
     tack::all_model_items_traversal(m, g);
 
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
-    g.generate(qn);
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
+    g.generate(n);
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
@@ -108,7 +108,7 @@ path_derivatives_repository path_derivatives_repository_factory::make(
             continue;
 
         const auto ref(pair.first);
-        tack::qname n;
+        tack::name n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

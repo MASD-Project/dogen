@@ -28,7 +28,6 @@
 #include <unordered_map>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/tack/types/qname.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/settings/bundle_repository.hpp"
 #include "dogen/formatters/types/general_settings_factory.hpp"

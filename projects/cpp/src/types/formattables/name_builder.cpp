@@ -42,38 +42,38 @@ namespace cpp {
 namespace formattables {
 
 std::list<std::string> name_builder::
-namespace_list(const tack::model& m, const tack::qname& qn) const {
-    std::list<std::string> r(qn.external_module_path());
+namespace_list(const tack::model& m, const tack::name& n) const {
+    std::list<std::string> r(n.external_module_path());
 
     // if there is no model name, it won't contribute to the namespaces.
-    if (!qn.model_name().empty())
-        r.push_back(qn.model_name());
+    if (!n.model_name().empty())
+        r.push_back(n.model_name());
 
     // all modules in the module path contribute to namespaces.
-    const auto mp(qn.module_path());
+    const auto mp(n.module_path());
     r.insert(r.end(), mp.begin(), mp.end());
 
-    // if the qname belongs to the model's module, we need to remove the
+    // if the name belongs to the model's module, we need to remove the
     // module's simple name from the module path (it is in both the
     // module path and it is also the module's simple name).
-    if (qn == m.name())
+    if (n == m.name())
         r.pop_back();
 
     return r;
 }
 
 std::string name_builder::
-qualified_name(const tack::model& m, const tack::qname& qn) const {
-    std::list<std::string> l(namespace_list(m, qn));
-    l.push_back(qn.simple_name());
+qualified_name(const tack::model& m, const tack::name& n) const {
+    std::list<std::string> l(namespace_list(m, n));
+    l.push_back(n.simple_name());
     return boost::algorithm::join(l, scope_operator);
 }
 
 void name_builder::
-complete_name(const tack::model& m, const tack::nested_qname& nqn,
+complete_name(const tack::model& m, const tack::nested_name& nn,
     std::string& complete_name) const {
-    const auto qualified_name(this->qualified_name(m, nqn.type()));
-    const auto& children(nqn.children());
+    const auto qualified_name(this->qualified_name(m, nn.type()));
+    const auto& children(nn.children());
     complete_name += qualified_name;
 
     auto lambda([&](char c) {

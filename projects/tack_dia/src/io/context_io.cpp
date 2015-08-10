@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack_dia/io/context_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -79,7 +79,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::tack::name>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -103,7 +103,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::tack_dia::context\"" << ", "
       << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
       << "\"parent_ids\": " << v.parent_ids() << ", "
-      << "\"id_to_qname\": " << v.id_to_qname() << ", "
+      << "\"id_to_name\": " << v.id_to_name() << ", "
       << "\"top_level_module_names\": " << v.top_level_module_names() << ", "
       << "\"model\": " << v.model()
       << " }";

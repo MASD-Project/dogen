@@ -185,39 +185,39 @@ transformer::transformer(const settings::opaque_settings_builder& osb,
       formatter_properties_repository_(frp), model_(m) {}
 
 void transformer::
-populate_formattable_properties(const tack::qname& qn, formattable& f) const {
-    f.identity(tack::string_converter::convert(qn));
+populate_formattable_properties(const tack::name& n, formattable& f) const {
+    f.identity(tack::string_converter::convert(n));
 }
 
-void transformer::populate_entity_properties(const tack::qname& qn,
+void transformer::populate_entity_properties(const tack::name& n,
     const std::string& documentation, entity& e) const {
 
-    populate_formattable_properties(qn, e);
+    populate_formattable_properties(n, e);
 
-    e.name(qn.simple_name());
+    e.name(n.simple_name());
     e.documentation(documentation);
 
-    const auto& fpqn(formatter_properties_repository_.
-        formatter_properties_by_qname());
-    const auto i(fpqn.find(qn));
-    if (i == fpqn.end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << n;
+    const auto& fpn(formatter_properties_repository_.
+        formatter_properties_by_name());
+    const auto i(fpn.find(n));
+    if (i == fpn.end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << formatter_properties_missing << sn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(formatter_properties_missing + n));
+            transformation_error(formatter_properties_missing + sn));
     }
     e.formatter_properties(i->second);
 
     name_builder b;
-    e.namespaces(b.namespace_list(model_, qn));
+    e.namespaces(b.namespace_list(model_, n));
 
-    const auto& bqn(bundle_repository_.bundles_by_qname());
-    const auto j(bqn.find(qn));
-    if (j == bqn.end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << n;
+    const auto& bn(bundle_repository_.bundles_by_name());
+    const auto j(bn.find(n));
+    if (j == bn.end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << settings_bundle_missing << sn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(settings_bundle_missing + n));
+            transformation_error(settings_bundle_missing + sn));
     }
     e.settings(j->second);
 
@@ -228,21 +228,21 @@ void transformer::populate_entity_properties(const tack::qname& qn,
     e.qualified_name(join(ns, namespace_separator));
 }
 
-void transformer::to_nested_type_info(const tack::nested_qname& nqn,
+void transformer::to_nested_type_info(const tack::nested_name& nn,
     nested_type_info& nti, std::string& complete_name,
     bool& requires_stream_manipulators) const {
 
-    const auto qn(nqn.type());
+    const auto n(nn.type());
     name_builder b;
-    const auto qualified_name(b.qualified_name(model_, qn));
+    const auto qualified_name(b.qualified_name(model_, n));
     nti.name(qualified_name);
-    nti.namespaces(b.namespace_list(model_, qn));
+    nti.namespaces(b.namespace_list(model_, n));
 
-    const auto i(model_.enumerations().find(qn));
+    const auto i(model_.enumerations().find(n));
     const bool is_enumeration(i != model_.enumerations().end());
     nti.is_enumeration(is_enumeration);
 
-    const auto j(model_.primitives().find(qn));
+    const auto j(model_.primitives().find(n));
     const bool is_primitive(j != model_.primitives().end());
     nti.is_primitive(is_primitive);
 
@@ -263,7 +263,7 @@ void transformer::to_nested_type_info(const tack::nested_qname& nqn,
     nti.is_time_duration(is_time_duration(nti.name()));
     nti.is_ptree(is_ptree(nti.name()));
 
-    const auto k(model_.objects().find(qn));
+    const auto k(model_.objects().find(n));
     if (k != model_.objects().end()) {
         const auto ot(k->second.object_type());
         using tack::object_types;
@@ -273,11 +273,11 @@ void transformer::to_nested_type_info(const tack::nested_qname& nqn,
         nti.is_smart_pointer(ot == object_types::smart_pointer);
     }
 
-    const auto nqn_children(nqn.children());
+    const auto nn_children(nn.children());
 
     std::string my_complete_name(nti.name());
     auto lambda([&](char c) {
-            if (!nqn_children.empty()) {
+            if (!nn_children.empty()) {
                 if (my_complete_name[my_complete_name.length() - 1] == c)
                     my_complete_name += " ";
                 my_complete_name += c;
@@ -287,7 +287,7 @@ void transformer::to_nested_type_info(const tack::nested_qname& nqn,
     std::list<nested_type_info> children;
     lambda('<');
     bool is_first(true);
-    for (const auto c : nqn.children()) {
+    for (const auto c : nn.children()) {
         if (!is_first)
             my_complete_name += ", ";
 
@@ -408,10 +408,10 @@ transformer::to_class_info(const tack::object& o) const {
     name_builder b;
     auto i(o.relationships().find(tack::relationship_types::parents));
     if (i != o.relationships().end()) {
-        for (const auto& qn : i->second) {
+        for (const auto& n : i->second) {
             parent_info pi;
-            pi.name(qn.simple_name());
-            pi.namespaces(b.namespace_list(model_, qn));
+            pi.name(n.simple_name());
+            pi.namespaces(b.namespace_list(model_, n));
 
             std::list<std::string> ns(pi.namespaces());
             ns.push_back(pi.name());
@@ -419,7 +419,7 @@ transformer::to_class_info(const tack::object& o) const {
             using boost::join;
             pi.qualified_name(join(ns, namespace_separator));
 
-            const auto j(o.inherited_properties().find(qn));
+            const auto j(o.inherited_properties().find(n));
             if (j != o.inherited_properties().end()) {
                 for (const auto& prop : j->second) {
                     const auto tuple(to_property_info(
@@ -499,10 +499,10 @@ transformer::to_visitor_info(const tack::object& o) const {
     }
 
     name_builder b;
-    for (const auto qn : i->second) {
+    for (const auto n : i->second) {
         cpp::formattables::visited_type_info vti;
-        vti.qualified_name(b.qualified_name(model_, qn));
-        vti.name(qn.simple_name());
+        vti.qualified_name(b.qualified_name(model_, n));
+        vti.name(n.simple_name());
         vti.documentation(visitor_comments + vti.qualified_name());
         r->types().push_back(vti);
     }

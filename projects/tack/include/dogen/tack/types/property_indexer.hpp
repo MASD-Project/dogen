@@ -111,27 +111,27 @@ public:
 
 private:
     /**
-     * @brief Returns the object with the given qname, or throws.
+     * @brief Returns the object with the given name, or throws.
      */
-    object& find_object(const qname& qn, model& m);
+    object& find_object(const name& n, model& m);
 
     /**
      * @brief Finds the relationship container, or throws.
      */
-    std::list<qname>& find_relationships(const relationship_types rt,
+    std::list<name>& find_relationships(const relationship_types rt,
         object& o);
 
     /**
-     * @brief Returns the concept with the given qname, or throws.
+     * @brief Returns the concept with the given name, or throws.
      */
-    concept& find_concept(const qname& qn, model& m);
+    concept& find_concept(const name& n, model& m);
 
 private:
     /**
      * @brief Indexes a specific object.
      */
     void index_object(object& o, model& m,
-        std::unordered_set<qname>& processed_qnames);
+        std::unordered_set<name>& processed_names);
 
     /**
      * @brief Indexes all objects in the model.
@@ -142,7 +142,7 @@ private:
      * @brief Populates index information in a concept.
      */
     void index_concept(concept& c, model& m,
-        std::unordered_set<qname>& processed_qnames);
+        std::unordered_set<name>& processed_names);
 
     /**
      * @brief Indexes all concepts in the model.

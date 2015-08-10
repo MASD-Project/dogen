@@ -197,7 +197,7 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:string>#type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nested_qname#</dia:string>
+            <dia:string>#nested_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -380,28 +380,28 @@ Must only contain characters that can be used for identifiers in the target back
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="-39,-1"/>
+        <dia:point val="-31,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,-1.05;-25.36,3.45"/>
+        <dia:rectangle val="-31.05,-1.05;-17.745,3.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-39,-1"/>
+        <dia:point val="-31,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#nested_qname#</dia:string>
+        <dia:string>#nested_name#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A composite qname.#</dia:string>
+        <dia:string>#A composite name.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -487,7 +487,7 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:string>#type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#qname#</dia:string>
+            <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -510,7 +510,7 @@ Must only contain characters that can be used for identifiers in the target back
             <dia:string>#children#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;nested_qname&gt;#</dia:string>
+            <dia:string>#std::list&lt;nested_name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -599,7 +599,7 @@ Must only contain characters that can be used for identifiers in the target back
         <dia:point val="-28.72,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-32.255,3.35;-27.97,30.8"/>
+        <dia:rectangle val="-29.47,3.35;-24.1975,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -607,8 +607,8 @@ Must only contain characters that can be used for identifiers in the target back
       <dia:attribute name="orth_points">
         <dia:point val="-28.72,30"/>
         <dia:point val="-28.72,16"/>
-        <dia:point val="-32.205,16"/>
-        <dia:point val="-32.205,3.4"/>
+        <dia:point val="-24.3975,16"/>
+        <dia:point val="-24.3975,3.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1512,13 +1512,13 @@ all types in the combined model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,-15"/>
+        <dia:point val="-14,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,-15.05;-2.05,-9.75"/>
+        <dia:rectangle val="-14.05,-15.05;1.95,-9.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,-15"/>
+        <dia:point val="-14,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -2033,17 +2033,17 @@ all types in the combined model.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-39,-1"/>
+        <dia:point val="-31,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.75,-9.85;-34.975,-0.2"/>
+        <dia:rectangle val="-35.225,-9.85;-30.25,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-39,-1"/>
-        <dia:point val="-39,-6"/>
+        <dia:point val="-31,-1"/>
+        <dia:point val="-31,-6"/>
         <dia:point val="-35.175,-6"/>
         <dia:point val="-35.175,-9.8"/>
       </dia:attribute>
@@ -2287,17 +2287,17 @@ meta-model.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-10.05,-15"/>
+        <dia:point val="-6.05,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.8,-22.9998;7.74625,-14.2"/>
+        <dia:rectangle val="-6.8,-22.9998;7.74625,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-10.05,-15"/>
-        <dia:point val="-10.05,-19"/>
+        <dia:point val="-6.05,-15"/>
+        <dia:point val="-6.05,-19"/>
         <dia:point val="7.54625,-19"/>
         <dia:point val="7.54625,-22.9498"/>
       </dia:attribute>
@@ -2429,17 +2429,17 @@ meta-model.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-58.44,-1.04983"/>
+        <dia:point val="-58.4886,-1.04983"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-59.19,-9.85;-52.8,-0.249829"/>
+        <dia:rectangle val="-59.2402,-9.85;-52.8,-0.249829"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-58.44,-1.04983"/>
-        <dia:point val="-58.44,-6"/>
+        <dia:point val="-58.4886,-1.04983"/>
+        <dia:point val="-58.4782,-6"/>
         <dia:point val="-53,-6"/>
         <dia:point val="-53,-9.8"/>
       </dia:attribute>
@@ -2467,13 +2467,13 @@ meta-model.
         <dia:point val="18,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,69.95;28.56,73.65"/>
+        <dia:rectangle val="17.95,69.95;28.175,73.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="18,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -2573,7 +2573,7 @@ Aggregates a group of logically related types into a unit.#</dia:string>
             <dia:string>#members#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2603,13 +2603,13 @@ Aggregates a group of logically related types into a unit.#</dia:string>
         <dia:point val="38,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,69.95;48.56,75.25"/>
+        <dia:rectangle val="37.95,69.95;48.175,75.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="38,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2707,7 +2707,7 @@ Aggregates a group of logically related types into a unit.#</dia:string>
             <dia:string>#refines#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;qname&gt;#</dia:string>
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3075,7 +3075,7 @@ all types in the merged model.#</dia:string>
                 <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#nested_qname#</dia:string>
+                <dia:string>#nested_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3448,13 +3448,13 @@ all types in the merged model.#</dia:string>
         <dia:point val="-61,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-61.05,-1.05;-55.83,2.65"/>
+        <dia:rectangle val="-61.05,-1.05;-55.935,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-61,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.1200000000000001"/>
+        <dia:real val="5.0149999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -3552,7 +3552,7 @@ all types in the merged model.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#qname#</dia:string>
+            <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5034,7 +5034,7 @@ for Java, etc.#</dia:string>
             <dia:string>#underlying_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#qname#</dia:string>
+            <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5401,13 +5401,13 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="48,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,84.95;75.885,95.05"/>
+        <dia:rectangle val="47.95,84.95;75.5,95.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,85"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10"/>
@@ -5647,7 +5647,7 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
             <dia:string>#relationships#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;relationship_types,std::list&lt;qname&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;relationship_types,std::list&lt;name&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5794,13 +5794,13 @@ Set to false if no parent exists, or if the parent is not visitable. #</dia:stri
         <dia:point val="36,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,49.95;56.57,60.05"/>
+        <dia:rectangle val="35.95,49.95;56.185,60.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="36,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10"/>
@@ -5920,7 +5920,7 @@ of the domain model which have expression in code.#</dia:string>
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,origin_types&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,origin_types&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5943,7 +5943,7 @@ of the domain model which have expression in code.#</dia:string>
             <dia:string>#leaves#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;qname&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5968,7 +5968,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,module&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,module&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5991,7 +5991,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#concepts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,concept&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,concept&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6014,7 +6014,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#primitives#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,primitive&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,primitive&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6037,7 +6037,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#enumerations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,enumeration&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,enumeration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6060,7 +6060,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#objects#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,object&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,object&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6148,7 +6148,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#qname#</dia:string>
+        <dia:string>#name#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -6866,13 +6866,13 @@ User models are regular Dogen models, normally made using Dia.#</dia:string>
         <dia:point val="-71,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,12.95;-44.27,18.25"/>
+        <dia:rectangle val="-71.05,12.95;-44.655,18.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-71,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -7025,7 +7025,7 @@ not have a need for it.#</dia:string>
             <dia:string>#inherited_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;qname,std::list&lt;property&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name,std::list&lt;property&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9342,13 +9342,13 @@ etc.#</dia:string>
         <dia:point val="-125,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-125.05,-1.05;-108.28,2.65"/>
+        <dia:rectangle val="-125.05,-1.05;-108.665,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-125,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -9446,7 +9446,7 @@ etc.#</dia:string>
             <dia:string>#containing_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;qname&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9945,13 +9945,13 @@ etc.#</dia:string>
         <dia:point val="-71,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,-15.05;-58.515,-11.35"/>
+        <dia:rectangle val="-71.05,-15.05;-58.9,-11.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-71,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10079,7 +10079,7 @@ etc.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#qname#</dia:string>
+                <dia:string>#name#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10137,17 +10137,17 @@ etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-64.7825,-15.05"/>
+        <dia:point val="-64.9554,-15.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.5325,-19.75;-52.8,-14.2"/>
+        <dia:rectangle val="-65.7133,-19.75;-52.8,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-64.7825,-15.05"/>
-        <dia:point val="-64.7825,-19"/>
+        <dia:point val="-64.9554,-15.05"/>
+        <dia:point val="-64.9136,-19"/>
         <dia:point val="-53,-19"/>
         <dia:point val="-53,-15"/>
       </dia:attribute>
@@ -10539,13 +10539,13 @@ etc.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#parse_qname#</dia:string>
+            <dia:string>#parse_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#nested_qname#</dia:string>
+            <dia:string>#nested_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10849,19 +10849,19 @@ from inputs and generates Tack types off of them.#</dia:string>
         <dia:point val="-46,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,-38.05;-20.04,-24.15"/>
+        <dia:rectangle val="-46.05,-38.05;-20.425,-24.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-46,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.800000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#nested_qname_builder#</dia:string>
+        <dia:string>#nested_name_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#service#</dia:string>
@@ -11090,7 +11090,7 @@ from inputs and generates Tack types off of them.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#nested_qname_builder#</dia:string>
+            <dia:string>#nested_name_builder#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11234,7 +11234,7 @@ from inputs and generates Tack types off of them.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#nested_qname#</dia:string>
+                <dia:string>#nested_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11529,7 +11529,7 @@ from inputs and generates Tack types off of them.#</dia:string>
             <dia:string>#data#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#qname#</dia:string>
+            <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11618,7 +11618,7 @@ from inputs and generates Tack types off of them.#</dia:string>
         <dia:point val="-4.895,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.84,-43.75;-4.695,-37.2"/>
+        <dia:rectangle val="-21.225,-43.75;-4.695,-37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11626,8 +11626,8 @@ from inputs and generates Tack types off of them.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-4.895,-38"/>
         <dia:point val="-4.895,-43"/>
-        <dia:point val="-20.09,-43"/>
-        <dia:point val="-20.09,-38"/>
+        <dia:point val="-20.475,-43"/>
+        <dia:point val="-20.475,-38"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11650,7 +11650,7 @@ from inputs and generates Tack types off of them.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O97">
       <dia:attribute name="name">
-        <dia:string>#&lt; converts strings into qnames for#</dia:string>
+        <dia:string>#&lt; converts strings into names for#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -11757,19 +11757,19 @@ from inputs and generates Tack types off of them.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-20.09,-24.2"/>
+        <dia:point val="-20.475,-24.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.46,-24.95;-19.34,-0.2"/>
+        <dia:rectangle val="-21.225,-24.95;-17.595,-0.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-20.09,-24.2"/>
-        <dia:point val="-20.09,-19"/>
-        <dia:point val="-25.41,-19"/>
-        <dia:point val="-25.41,-1"/>
+        <dia:point val="-20.475,-24.2"/>
+        <dia:point val="-20.475,-19"/>
+        <dia:point val="-17.795,-19"/>
+        <dia:point val="-17.795,-1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12200,17 +12200,17 @@ from inputs and generates Tack types off of them.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-10.05,-9.8"/>
+        <dia:point val="-6.05,-9.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.8,-10.55;22.05,16.95"/>
+        <dia:rectangle val="-6.8,-10.55;22.05,16.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-10.05,-9.8"/>
-        <dia:point val="-10.05,16.1"/>
+        <dia:point val="-6.05,-9.8"/>
+        <dia:point val="-6.05,16.1"/>
         <dia:point val="22,16.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

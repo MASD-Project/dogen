@@ -46,14 +46,14 @@ concept::concept(concept&& rhs)
 concept::concept(
     const std::list<dogen::tack::property>& all_properties,
     const std::list<dogen::tack::property>& local_properties,
-    const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties,
+    const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties,
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module,
-    const std::list<dogen::tack::qname>& refines,
+    const boost::optional<dogen::tack::name>& containing_module,
+    const std::list<dogen::tack::name>& refines,
     const bool is_parent,
     const bool is_child)
     : all_properties_(all_properties),
@@ -138,19 +138,19 @@ void concept::local_properties(const std::list<dogen::tack::property>&& v) {
     local_properties_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& concept::inherited_properties() const {
+const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& concept::inherited_properties() const {
     return inherited_properties_;
 }
 
-std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& concept::inherited_properties() {
+std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& concept::inherited_properties() {
     return inherited_properties_;
 }
 
-void concept::inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v) {
+void concept::inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v) {
     inherited_properties_ = v;
 }
 
-void concept::inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >&& v) {
+void concept::inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >&& v) {
     inherited_properties_ = std::move(v);
 }
 
@@ -186,19 +186,19 @@ void concept::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::tack::qname& concept::name() const {
+const dogen::tack::name& concept::name() const {
     return name_;
 }
 
-dogen::tack::qname& concept::name() {
+dogen::tack::name& concept::name() {
     return name_;
 }
 
-void concept::name(const dogen::tack::qname& v) {
+void concept::name(const dogen::tack::name& v) {
     name_ = v;
 }
 
-void concept::name(const dogen::tack::qname&& v) {
+void concept::name(const dogen::tack::name&& v) {
     name_ = std::move(v);
 }
 
@@ -218,35 +218,35 @@ void concept::origin_type(const dogen::tack::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::tack::qname>& concept::containing_module() const {
+const boost::optional<dogen::tack::name>& concept::containing_module() const {
     return containing_module_;
 }
 
-boost::optional<dogen::tack::qname>& concept::containing_module() {
+boost::optional<dogen::tack::name>& concept::containing_module() {
     return containing_module_;
 }
 
-void concept::containing_module(const boost::optional<dogen::tack::qname>& v) {
+void concept::containing_module(const boost::optional<dogen::tack::name>& v) {
     containing_module_ = v;
 }
 
-void concept::containing_module(const boost::optional<dogen::tack::qname>&& v) {
+void concept::containing_module(const boost::optional<dogen::tack::name>&& v) {
     containing_module_ = std::move(v);
 }
 
-const std::list<dogen::tack::qname>& concept::refines() const {
+const std::list<dogen::tack::name>& concept::refines() const {
     return refines_;
 }
 
-std::list<dogen::tack::qname>& concept::refines() {
+std::list<dogen::tack::name>& concept::refines() {
     return refines_;
 }
 
-void concept::refines(const std::list<dogen::tack::qname>& v) {
+void concept::refines(const std::list<dogen::tack::name>& v) {
     refines_ = v;
 }
 
-void concept::refines(const std::list<dogen::tack::qname>&& v) {
+void concept::refines(const std::list<dogen::tack::name>&& v) {
     refines_ = std::move(v);
 }
 

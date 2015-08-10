@@ -49,12 +49,12 @@ const std::string empty_package_id("Supplied package id is empty");
 const std::string parent_not_found("Object has a parent but its not defined: ");
 const std::string empty_parent_container(
     "Object has an entry in child to parent container but its empty: ");
-const std::string missing_module_for_qname("Missing module for qname: ");
-const std::string missing_qname_for_id("Missing QName for dia object ID: ");
+const std::string missing_module_for_name("Missing module for name: ");
+const std::string missing_name_for_id("Missing name for dia object ID: ");
 const std::string type_attribute_expected(
     "Could not find type attribute. ID: ");
 const std::string invalid_type_string(
-    "String provided with type did not parse into TACK qnames: ");
+    "String provided with type did not parse into Tack names: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string invalid_stereotype_in_graph("Invalid stereotype: ");
 const std::string immutabilty_with_inheritance(
@@ -78,15 +78,15 @@ transformer::transformer(const dynamic::workflow& w, context& c)
 }
 
 void transformer::
-update_model_references(const tack::nested_qname& nqn) {
-    const auto mn(nqn.type().model_name());
+update_model_references(const tack::nested_name& nn) {
+    const auto mn(nn.type().model_name());
     const bool is_primitives_model(mn.empty());
     const bool is_current_model(mn != context_.model().name().model_name());
 
     if (!is_primitives_model && is_current_model) {
-        tack::qname qn;
-        qn.model_name(mn);
-        const auto p(std::make_pair(qn, tack::origin_types::unknown));
+        tack::name n;
+        n.model_name(mn);
+        const auto p(std::make_pair(n, tack::origin_types::unknown));
         context_.model().references().insert(p);
 
         BOOST_LOG_SEV(lg, debug) << "Adding model dependency: "
@@ -94,7 +94,7 @@ update_model_references(const tack::nested_qname& nqn) {
                                  << context_.model().name().model_name();
     }
 
-    for (const auto c : nqn.children())
+    for (const auto c : nn.children())
         update_model_references(c);
 }
 
@@ -118,13 +118,13 @@ tack::generation_types transformer::generation_type(const profile& p) const {
     return generation_types::full_generation;
 }
 
-tack::qname transformer::to_qname(const std::string& n) const {
+tack::name transformer::to_name(const std::string& n) const {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
     }
 
-    tack::qname r;
+    tack::name r;
     r.model_name(context_.model().name().model_name());
     r.external_module_path(context_.model().name().external_module_path());
     r.simple_name(n);
@@ -132,22 +132,22 @@ tack::qname transformer::to_qname(const std::string& n) const {
     return r;
 }
 
-tack::qname transformer::to_qname(const std::string& n,
-    const tack::qname& module_qn) const {
-    auto r(to_qname(n));
-    auto pp(module_qn.module_path());
-    pp.push_back(module_qn.simple_name());
+tack::name transformer::to_name(const std::string& n,
+    const tack::name& module_n) const {
+    auto r(to_name(n));
+    auto pp(module_n.module_path());
+    pp.push_back(module_n.simple_name());
     r.module_path(pp);
     return r;
 }
 
-tack::module& transformer::module_for_qname(const tack::qname& qn) {
-    auto i(context_.model().modules().find(qn));
+tack::module& transformer::module_for_name(const tack::name& n) {
+    auto i(context_.model().modules().find(n));
     if (i == context_.model().modules().end()) {
-        const auto sn(qn.simple_name());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_qname << sn;
+        const auto sn(n.simple_name());
+        BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
         BOOST_THROW_EXCEPTION(
-            transformation_error(missing_module_for_qname + sn));
+            transformation_error(missing_module_for_name + sn));
     }
     return i->second;
 }
@@ -158,17 +158,17 @@ tack::module& transformer::module_for_id(const std::string& id) {
         BOOST_THROW_EXCEPTION(transformation_error(empty_package_id));
     }
 
-    const auto i(context_.id_to_qname().find(id));
-    if (i == context_.id_to_qname().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_qname_for_id << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_qname_for_id + id));
+    const auto i(context_.id_to_name().find(id));
+    if (i == context_.id_to_name().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_name_for_id << id;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_name_for_id + id));
     }
 
-    return module_for_qname(i->second);
+    return module_for_name(i->second);
 }
 
-tack::nested_qname transformer::to_nested_qname(const std::string& n) const {
-    tack::nested_qname r(identifier_parser_->parse_qname(n));
+tack::nested_name transformer::to_nested_name(const std::string& n) const {
+    tack::nested_name r(identifier_parser_->parse_name(n));
     if (r.type().simple_name().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_type_string << n;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_type_string + n));
@@ -184,7 +184,7 @@ tack::property transformer::to_property(const processed_property& p) const {
 
     tack::property r;
     r.name(p.name());
-    r.type(to_nested_qname(p.type()));
+    r.type(to_nested_name(p.type()));
 
     r.documentation(p.comment().documentation());
 
@@ -218,9 +218,9 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
     ao.is_visitable(p.is_visitable());
 
     for (const auto us : p.unknown_stereotypes()) {
-        const auto qn(to_qname(us));
+        const auto n(to_name(us));
         using tack::relationship_types;
-        ao.relationships()[relationship_types::modeled_concepts].push_back(qn);
+        ao.relationships()[relationship_types::modeled_concepts].push_back(n);
     }
 
     for (const auto& p : o.properties()) {
@@ -244,10 +244,10 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
         }
 
         const auto parent_name(i->second.front());
-        const auto j(context_.id_to_qname().find(parent_name));
-        if (j == context_.id_to_qname().end()) {
+        const auto j(context_.id_to_name().find(parent_name));
+        if (j == context_.id_to_name().end()) {
             BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                     << " there is no QName mapping defined."
+                                     << " there is no Name mapping defined."
                                      << " Child ID: '" << o.id()
                                      << "' Parent ID: '" << parent_name << "'";
 
@@ -269,7 +269,7 @@ update_object(tack::object& ao, const processed_object& o, const profile& p) {
     const auto j(context_.parent_ids().find(o.id()));
     ao.is_parent(j != context_.parent_ids().end());
     ao.is_final(!ao.is_parent());
-    context_.id_to_qname().insert(std::make_pair(o.id(), ao.name()));
+    context_.id_to_name().insert(std::make_pair(o.id(), ao.name()));
 
     ao.is_immutable(p.is_immutable());
     if ((ao.is_parent() || ao.is_child()) && p.is_immutable())  {
@@ -314,9 +314,9 @@ void transformer::to_enumeration(const processed_object& o, const profile& p) {
     tack::enumeration e;
     update_element(e, o, p);
 
-    dogen::tack::qname qn;
-    qn.simple_name(unsigned_int);
-    e.underlying_type(qn);
+    dogen::tack::name n;
+    n.simple_name(unsigned_int);
+    e.underlying_type(n);
 
     dogen::tack::enumerator invalid;
     invalid.name("invalid");
@@ -366,7 +366,7 @@ void transformer::from_note(const processed_object& o) {
     const tack::model& model(context_.model());
     using dynamic::scope_types;
     if (o.child_node_id().empty()) {
-        auto& module(module_for_qname(model.name()));
+        auto& module(module_for_name(model.name()));
         module.documentation(documentation);
 
         const auto scope(scope_types::root_module);
@@ -387,7 +387,7 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
 
     for (const auto& prop : o.properties()) {
         auto property(to_property(prop));
-        property.type(to_nested_qname(prop.type()));
+        property.type(to_nested_name(prop.type()));
         update_model_references(property.type());
         c.local_properties().push_back(property);
     }
@@ -402,10 +402,10 @@ void transformer::to_concept(const processed_object& o, const profile& p) {
         }
 
         for (const auto& concept_id : i->second) {
-            const auto j(context_.id_to_qname().find(concept_id));
-            if (j == context_.id_to_qname().end()) {
+            const auto j(context_.id_to_name().find(concept_id));
+            if (j == context_.id_to_name().end()) {
                 BOOST_LOG_SEV(lg, error) << "Object has a parent but "
-                                         << " there is no QName mapping."
+                                         << " there is no Name mapping."
                                          << " Child ID: '" << o.id()
                                          << "' Parent ID: '" << concept_id
                                          << "'";

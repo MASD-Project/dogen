@@ -18,38 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/hash/qname_hash.hpp"
+#ifndef DOGEN_TACK_HASH_NESTED_NAME_HASH_HPP
+#define DOGEN_TACK_HASH_NESTED_NAME_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-}
+#include <functional>
+#include "dogen/tack/types/nested_name.hpp"
 
 namespace dogen {
 namespace tack {
 
-std::size_t qname_hasher::hash(const qname& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.model_name());
-    combine(seed, hash_std_list_std_string(v.external_module_path()));
-    combine(seed, hash_std_list_std_string(v.module_path()));
-    combine(seed, v.simple_name());
-
-    return seed;
-}
+struct nested_name_hasher {
+public:
+    static std::size_t hash(const nested_name& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::tack::nested_name> {
+public:
+    size_t operator()(const dogen::tack::nested_name& v) const {
+        return dogen::tack::nested_name_hasher::hash(v);
+    }
+};
+
+}
+#endif

@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/io/module_io.hpp"
 #include "dogen/tack/io/object_io.hpp"
 #include "dogen/tack/io/concept_io.hpp"
@@ -41,7 +41,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -56,7 +56,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ta
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -74,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::tack::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -88,7 +88,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::module>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::module>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -106,7 +106,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::concept>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -124,7 +124,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -142,7 +142,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -160,7 +160,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, dogen::tack::object>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, dogen::tack::object>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen/tack/types/qname.hpp"
 #include "dogen/cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
 
 namespace dogen {

@@ -28,8 +28,8 @@
 #include <list>
 #include <unordered_map>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/types/relationship_types.hpp"
 
 namespace dogen {
@@ -49,8 +49,8 @@ private:
      * in.
      */
     struct generalization_details {
-        std::unordered_map<qname, std::list<qname> > leaves;
-        std::unordered_map<qname, std::list<qname> > original_parents;
+        std::unordered_map<name, std::list<name> > leaves;
+        std::unordered_map<name, std::list<name> > original_parents;
     };
 
 private:
@@ -66,8 +66,8 @@ private:
      *
      * @return original parents of the tree we are recursing into.
      */
-    std::list<qname> recurse_generalization(
-        const model& m, const tack::qname& leaf, const tack::object& o,
+    std::list<name> recurse_generalization(
+        const model& m, const tack::name& leaf, const tack::object& o,
         generalization_details& d) const;
 
     /**

@@ -28,10 +28,10 @@ namespace tack {
 primitive::primitive(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module)
+    const boost::optional<dogen::tack::name>& containing_module)
     : dogen::tack::type(
       documentation,
       extensions,

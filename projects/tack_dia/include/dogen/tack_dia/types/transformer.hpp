@@ -30,7 +30,7 @@
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dynamic/types/workflow.hpp"
 #include "dogen/dynamic/types/scope_types.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/identifier_parser.hpp"
 #include "dogen/tack_dia/types/processed_object.hpp"
@@ -62,9 +62,9 @@ public:
 private:
     /**
      * @brief Update the model references with those which are implied
-     * by the given nested qname.
+     * by the given nested name.
      */
-    void update_model_references(const tack::nested_qname& nqn);
+    void update_model_references(const tack::nested_name& nqn);
 
     /**
      * @brief Ensure that the processed object implies an TACK type
@@ -80,31 +80,31 @@ private:
 
 private:
     /**
-     * @brief Creates a qname using the name provided and the package
+     * @brief Creates a name using the name provided and the package
      * ID.
      *
      * @pre n must not be empty.
      * @pre n must be a simple name, not a qualified name.
      */
-    tack::qname to_qname(const std::string& n) const;
+    tack::name to_name(const std::string& n) const;
 
     /**
-     * @brief Creates a qname using the name provided, which is
-     * interpreted as belonging to supplied module qname
+     * @brief Creates a name using the name provided, which is
+     * interpreted as belonging to supplied module name
      *
      * @pre n must not be empty.
      * @pre n must be a simple name, not a qualified name.
      */
-    tack::qname to_qname(const std::string& n,
-        const tack::qname& module_qn) const;
+    tack::name to_name(const std::string& n,
+        const tack::name& module_qn) const;
 
     /**
-     * @brief Creates a nested qname from a string representation of a
+     * @brief Creates a nested name from a string representation of a
      * qualified name.
      *
      * @pre n must not be empty.
      */
-    tack::nested_qname to_nested_qname(const std::string& n) const;
+    tack::nested_name to_nested_name(const std::string& n) const;
 
     /**
      * @brief Converts processed property into an TACK property.
@@ -130,11 +130,11 @@ private:
 
 private:
     /**
-     * @brief Returns the module associated with a qname.
+     * @brief Returns the module associated with a name.
      *
      * @pre module must exist in context.
      */
-    tack::module& module_for_qname(const tack::qname& qn);
+    tack::module& module_for_name(const tack::name& qn);
 
     /**
      * @brief Returns the module associated with a dia package id.
@@ -146,7 +146,7 @@ private:
 
     /**
      * @brief Update the TACK element using the processed object and
-     * the profile. Also adds element's qname to the containing
+     * the profile. Also adds element's name to the containing
      * module, if any.
      */
     template<typename Element>
@@ -158,19 +158,19 @@ private:
         const auto pkg_id(o.child_node_id());
         if (!pkg_id.empty()) {
             auto& module(module_for_id(pkg_id));
-            e.name(to_qname(o.name(), module.name()));
+            e.name(to_name(o.name(), module.name()));
             module.members().push_back(e.name());
             e.containing_module(module.name());
         } else {
             // type belongs to the synthetic module for the model;
-            // do not add it to the qname.
-            e.name(to_qname(o.name()));
-            auto& module(module_for_qname(context_.model().name()));
+            // do not add it to the name.
+            e.name(to_name(o.name()));
+            auto& module(module_for_name(context_.model().name()));
             module.members().push_back(e.name());
             e.containing_module(module.name());
         }
 
-        context_.id_to_qname().insert(std::make_pair(o.id(), e.name()));
+        context_.id_to_name().insert(std::make_pair(o.id(), e.name()));
 
         e.documentation(o.comment().documentation());
 

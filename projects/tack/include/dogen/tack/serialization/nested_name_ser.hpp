@@ -18,35 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TEST_DATA_NESTED_QNAME_TD_HPP
-#define DOGEN_TACK_TEST_DATA_NESTED_QNAME_TD_HPP
+#ifndef DOGEN_TACK_SERIALIZATION_NESTED_NAME_SER_HPP
+#define DOGEN_TACK_SERIALIZATION_NESTED_NAME_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/tack/types/nested_qname.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/tack/types/nested_name.hpp"
 
-namespace dogen {
-namespace tack {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::tack::nested_name)
+namespace boost {
+namespace serialization {
 
-class nested_qname_generator {
-public:
-    nested_qname_generator();
+template<typename Archive>
+void save(Archive& ar, const dogen::tack::nested_name& v, unsigned int version);
 
-public:
-    typedef dogen::tack::nested_qname result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<typename Archive>
+void load(Archive& ar, dogen::tack::nested_name& v, unsigned int version);
 
 } }
 

@@ -57,7 +57,7 @@ private:
     tack::generation_types generation_type(const bool is_target) const;
 
     /**
-     * @brief Returns the model name for all qnames other than the
+     * @brief Returns the model name for all names other than the
      * model itself.
      *
      * This hack is required purely for the hardware model, which has
@@ -67,13 +67,13 @@ private:
 
     /**
      * @brief Reads a module path from the property tree and uses it
-     * to populate the qname.
+     * to populate the name.
      *
      * If the model does not contain all modules implied by the module
      * path, it adds them to the model.
      */
     void read_module_path(const boost::property_tree::ptree& pt,
-        tack::model& m, tack::qname& qn) const;
+        tack::model& m, tack::name& n) const;
 
     /**
      * @brief Creates the dynamic object by reading meta-data from the

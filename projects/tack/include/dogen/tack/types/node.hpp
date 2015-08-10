@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/node_fwd.hpp"
 #include "dogen/tack/serialization/node_fwd_ser.hpp"
 
@@ -45,7 +45,7 @@ public:
 public:
     node(
         const boost::shared_ptr<dogen::tack::node>& parent,
-        const dogen::tack::qname& data,
+        const dogen::tack::name& data,
         const std::list<boost::shared_ptr<dogen::tack::node> >& children);
 
 private:
@@ -61,10 +61,10 @@ public:
     void parent(const boost::shared_ptr<dogen::tack::node>& v);
     void parent(const boost::shared_ptr<dogen::tack::node>&& v);
 
-    const dogen::tack::qname& data() const;
-    dogen::tack::qname& data();
-    void data(const dogen::tack::qname& v);
-    void data(const dogen::tack::qname&& v);
+    const dogen::tack::name& data() const;
+    dogen::tack::name& data();
+    void data(const dogen::tack::name& v);
+    void data(const dogen::tack::name&& v);
 
     const std::list<boost::shared_ptr<dogen::tack::node> >& children() const;
     std::list<boost::shared_ptr<dogen::tack::node> >& children();
@@ -83,7 +83,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::tack::node> parent_;
-    dogen::tack::qname data_;
+    dogen::tack::name data_;
     std::list<boost::shared_ptr<dogen::tack::node> > children_;
 };
 

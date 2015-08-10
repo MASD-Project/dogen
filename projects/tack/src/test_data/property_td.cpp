@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/tack/test_data/property_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
-#include "dogen/tack/test_data/nested_qname_td.hpp"
+#include "dogen/tack/test_data/nested_name_td.hpp"
 
 namespace {
 
@@ -36,9 +36,9 @@ create_dogen_dynamic_object(const unsigned int position) {
     return dogen::dynamic::object_generator::create(position);
 }
 
-dogen::tack::nested_qname
-create_dogen_tack_nested_qname(const unsigned int position) {
-    return dogen::tack::nested_qname_generator::create(position);
+dogen::tack::nested_name
+create_dogen_tack_nested_name(const unsigned int position) {
+    return dogen::tack::nested_name_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
@@ -57,7 +57,7 @@ populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
     v.name(create_std_string(position + 2));
-    v.type(create_dogen_tack_nested_qname(position + 3));
+    v.type(create_dogen_tack_nested_name(position + 3));
     v.is_immutable(create_bool(position + 4));
     v.is_fluent(create_bool(position + 5));
 }

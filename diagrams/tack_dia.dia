@@ -1087,16 +1087,16 @@ into its Tack representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#id_to_qname#</dia:string>
+            <dia:string>#id_to_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string,tack::qname&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string,tack::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The QName corresponding to a dia object ID.#</dia:string>
+            <dia:string>#The name corresponding to a dia object ID.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1737,7 +1737,7 @@ into its Tack representation.#</dia:string>
                 <dia:string>#nqn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::nested_qname&amp;#</dia:string>
+                <dia:string>#const tack::nested_name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1753,13 +1753,13 @@ into its Tack representation.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform_qname#</dia:string>
+            <dia:string>#transform_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#tack::qname#</dia:string>
+            <dia:string>#tack::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="1"/>

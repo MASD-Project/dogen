@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/node.hpp"
 #include "dogen/tack/types/tack.hpp"
 #include "dogen/tack/types/type.hpp"
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
 #include "dogen/tack/types/merger.hpp"
 #include "dogen/tack/types/module.hpp"
 #include "dogen/tack/types/object.hpp"
@@ -43,7 +43,7 @@
 #include "dogen/tack/types/primitive.hpp"
 #include "dogen/tack/types/enumerator.hpp"
 #include "dogen/tack/types/enumeration.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/object_types.hpp"
 #include "dogen/tack/types/origin_types.hpp"
 #include "dogen/tack/types/type_visitor.hpp"
@@ -62,7 +62,7 @@
 #include "dogen/tack/types/identifier_parser.hpp"
 #include "dogen/tack/types/relationship_types.hpp"
 #include "dogen/tack/types/association_indexer.hpp"
-#include "dogen/tack/types/nested_qname_builder.hpp"
+#include "dogen/tack/types/nested_name_builder.hpp"
 #include "dogen/tack/types/generalization_indexer.hpp"
 #include "dogen/tack/types/file_importer_interface.hpp"
 #include "dogen/tack/types/file_importer_registrar.hpp"

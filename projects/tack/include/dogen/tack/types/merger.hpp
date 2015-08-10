@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/model.hpp"
 
 namespace dogen {
@@ -60,7 +60,7 @@ namespace tack {
  */
 class merger {
 private:
-    typedef std::unordered_map<qname, model> models_type;
+    typedef std::unordered_map<name, model> models_type;
 
 public:
     merger(const merger&) = default;
@@ -93,8 +93,8 @@ private:
      *
      * @note should be moved to validator.
      */
-    void check_qname(const std::string& model_name, const qname& key,
-        const qname& value) const;
+    void check_name(const std::string& model_name, const name& key,
+        const name& value) const;
 
     /**
      * @brief Update all references to external models.

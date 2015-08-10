@@ -70,7 +70,7 @@ const std::string unexpected_attribute_value_type(
 const std::string unexpected_attribute_value_size(
     "Unexpected attribute value size: ");
 const std::string invalid_type_string(
-    "String provided with type did not parse into TACK qnames: ");
+    "String provided with type did not parse into Tack names: ");
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");

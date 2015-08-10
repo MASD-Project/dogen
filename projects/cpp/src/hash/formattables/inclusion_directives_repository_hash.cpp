@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/cpp/hash/formattables/inclusion_directives_repository_hash.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_string_(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::string> >& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_std_unordered_map_std_string_std_string_(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -56,7 +56,7 @@ namespace formattables {
 std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directives_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_std_unordered_map_std_string_std_string_(v.inclusion_directives_by_qname()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_std_unordered_map_std_string_std_string_(v.inclusion_directives_by_name()));
     return seed;
 }
 

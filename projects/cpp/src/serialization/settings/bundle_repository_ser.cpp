@@ -27,7 +27,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/tack/serialization/qname_ser.hpp"
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/settings/bundle_ser.hpp"
 #include "dogen/cpp/serialization/settings/bundle_repository_ser.hpp"
@@ -39,14 +39,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::settings::bundle_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("bundles_by_qname", v.bundles_by_qname_);
+    ar << make_nvp("bundles_by_name", v.bundles_by_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::settings::bundle_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("bundles_by_qname", v.bundles_by_qname_);
+    ar >> make_nvp("bundles_by_name", v.bundles_by_name_);
 }
 
 } }

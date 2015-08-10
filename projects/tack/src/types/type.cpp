@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/types/type.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/tack/io/origin_types_io.hpp"
 #include "dogen/tack/io/generation_types_io.hpp"
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -66,10 +66,10 @@ type::type(type&& rhs)
 type::type(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module)
+    const boost::optional<dogen::tack::name>& containing_module)
     : documentation_(documentation),
       extensions_(extensions),
       name_(name),
@@ -140,19 +140,19 @@ void type::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::tack::qname& type::name() const {
+const dogen::tack::name& type::name() const {
     return name_;
 }
 
-dogen::tack::qname& type::name() {
+dogen::tack::name& type::name() {
     return name_;
 }
 
-void type::name(const dogen::tack::qname& v) {
+void type::name(const dogen::tack::name& v) {
     name_ = v;
 }
 
-void type::name(const dogen::tack::qname&& v) {
+void type::name(const dogen::tack::name&& v) {
     name_ = std::move(v);
 }
 
@@ -172,19 +172,19 @@ void type::origin_type(const dogen::tack::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::tack::qname>& type::containing_module() const {
+const boost::optional<dogen::tack::name>& type::containing_module() const {
     return containing_module_;
 }
 
-boost::optional<dogen::tack::qname>& type::containing_module() {
+boost::optional<dogen::tack::name>& type::containing_module() {
     return containing_module_;
 }
 
-void type::containing_module(const boost::optional<dogen::tack::qname>& v) {
+void type::containing_module(const boost::optional<dogen::tack::name>& v) {
     containing_module_ = v;
 }
 
-void type::containing_module(const boost::optional<dogen::tack::qname>&& v) {
+void type::containing_module(const boost::optional<dogen::tack::name>&& v) {
     containing_module_ = std::move(v);
 }
 

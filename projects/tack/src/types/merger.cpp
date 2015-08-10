@@ -78,13 +78,13 @@ void merger::require_not_has_merged() const {
     BOOST_THROW_EXCEPTION(merging_error(stream.str()));
 }
 
-void merger::check_qname(const std::string& model_name, const qname& key,
-    const qname& value) const {
+void merger::check_name(const std::string& model_name, const name& key,
+    const name& value) const {
 
     if (key.model_name() != model_name) {
         std::ostringstream s;
         s << "Type does not belong to this model. Model name: '"
-          << model_name << "'. Type qname: "
+          << model_name << "'. Type name: "
           << string_converter::convert(key);
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(merging_error(s.str()));
@@ -92,7 +92,7 @@ void merger::check_qname(const std::string& model_name, const qname& key,
 
     if (key != value) {
         std::ostringstream s;
-        s << "Inconsistency between key and value qnames: "
+        s << "Inconsistency between key and value names: "
           << " key: " << string_converter::convert(key)
           << " value: " << string_converter::convert(value);
         BOOST_LOG_SEV(lg, error) << s.str();
@@ -101,7 +101,7 @@ void merger::check_qname(const std::string& model_name, const qname& key,
 }
 
 void merger::update_references() {
-    typedef std::pair<qname, origin_types> value_type;
+    typedef std::pair<name, origin_types> value_type;
     std::map<std::string, value_type> references_by_model_name;
     for (const auto& pair : models_) {
         const auto& model(pair.second);
@@ -110,10 +110,10 @@ void merger::update_references() {
         references_by_model_name.insert(p);
     }
 
-    std::unordered_map<qname, origin_types> updated_references;
+    std::unordered_map<name, origin_types> updated_references;
     for (auto& pair : merged_model_.references()) {
-        const auto qn(pair.first);
-        const auto mn(qn.model_name());
+        const auto n(pair.first);
+        const auto mn(n.model_name());
         const auto i(references_by_model_name.find(mn));
         if (i == references_by_model_name.end()) {
             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
@@ -164,7 +164,7 @@ void merger::merge_model(const model& m) {
                             << " objects: " << m.objects().size();
 
     for (const auto& c : m.concepts()) {
-        check_qname(m.name().model_name(), c.first, c.second.name());
+        check_name(m.name().model_name(), c.first, c.second.name());
         merged_model_.concepts().insert(c);
     }
 
@@ -172,23 +172,23 @@ void merger::merge_model(const model& m) {
     for (const auto& pair : m.primitives()) {
         // FIXME: mega hack to handle primitive model.
         const auto pmn(mn == hardware_model_name ? empty : mn);
-        check_qname(pmn, pair.first, pair.second.name());
+        check_name(pmn, pair.first, pair.second.name());
         merged_model_.primitives().insert(pair);
     }
 
     for (const auto& pair : m.enumerations()) {
-        check_qname(mn, pair.first, pair.second.name());
+        check_name(mn, pair.first, pair.second.name());
         merged_model_.enumerations().insert(pair);
     }
 
     for (const auto& pair : m.objects()) {
-        check_qname(mn, pair.first, pair.second.name());
+        check_name(mn, pair.first, pair.second.name());
         merged_model_.objects().insert(pair);
     }
 
     for (const auto& pair : m.modules()) {
         if (!pair.first.simple_name().empty())
-            check_qname(mn, pair.first, pair.second.name());
+            check_name(mn, pair.first, pair.second.name());
         merged_model_.modules().insert(pair);
     }
 }

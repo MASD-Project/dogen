@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 
 namespace dogen {
 namespace tack {
@@ -56,7 +56,7 @@ public:
         const std::string model_name);
 
 public:
-    nested_qname parse_qname(const std::string& n) const;
+    nested_name parse_name(const std::string& s) const;
 
 private:
     const std::unordered_set<std::string> modules_;

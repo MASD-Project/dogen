@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/node_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 
 namespace boost {
 

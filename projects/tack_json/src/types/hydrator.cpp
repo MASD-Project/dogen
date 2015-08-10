@@ -81,32 +81,32 @@ namespace tack_json {
 hydrator::hydrator(const dynamic::workflow& w)
     : dynamic_workflow_(w) { }
 
-boost::optional<tack::qname>
-containing_module(tack::model& m, const tack::qname& qn) {
-    if (qn.model_name().empty() || qn.simple_name() == m.name().model_name()) {
+boost::optional<tack::name>
+containing_module(tack::model& m, const tack::name& n) {
+    if (n.model_name().empty() || n.simple_name() == m.name().model_name()) {
         BOOST_LOG_SEV(lg, debug) << "Type has no containing module: "
-                                 << tack::string_converter::convert(qn);
-        return boost::optional<tack::qname>();
+                                 << tack::string_converter::convert(n);
+        return boost::optional<tack::name>();
     }
 
-    tack::qname module_qn;
-    module_qn.model_name(qn.model_name());
+    tack::name module_n;
+    module_n.model_name(n.model_name());
 
-    if (qn.module_path().empty()) {
-        module_qn.simple_name(qn.model_name());
+    if (n.module_path().empty()) {
+        module_n.simple_name(n.model_name());
     } else {
-        module_qn.simple_name(qn.module_path().back());
-        module_qn.module_path(qn.module_path());
-        module_qn.module_path().pop_back();
+        module_n.simple_name(n.module_path().back());
+        module_n.module_path(n.module_path());
+        module_n.module_path().pop_back();
     }
 
-    const auto i(m.modules().find(module_qn));
+    const auto i(m.modules().find(module_n));
     if (i != m.modules().end())
-        return module_qn;
+        return module_n;
 
     BOOST_LOG_SEV(lg, debug) << "Could not find containing module: "
-                             << tack::string_converter::convert(module_qn);
-    return boost::optional<tack::qname>();;
+                             << tack::string_converter::convert(module_n);
+    return boost::optional<tack::name>();;
 }
 
 template<typename AssociativeContainerOfContainable>
@@ -147,29 +147,29 @@ tack::generation_types hydrator::generation_type(const bool is_target) const {
 }
 
 void hydrator::read_module_path(const boost::property_tree::ptree& pt,
-  tack::model& m, tack::qname& qn) const {
+  tack::model& m, tack::name& n) const {
     const auto i(pt.find(module_path_key));
     if (i == pt.not_found())
         return;
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
         const auto module_name(j->second.get_value<std::string>());
-        qn.module_path().push_back(module_name);
+        n.module_path().push_back(module_name);
 
-        tack::qname module_qn;
-        module_qn.simple_name(module_name);
-        module_qn.model_name(model_name(m));
-        auto mp(qn.module_path());
+        tack::name module_n;
+        module_n.simple_name(module_name);
+        module_n.model_name(model_name(m));
+        auto mp(n.module_path());
         mp.pop_back();
-        module_qn.module_path(mp);
+        module_n.module_path(mp);
 
-        const auto i(m.modules().find(module_qn));
+        const auto i(m.modules().find(module_n));
         if (i == m.modules().end()) {
             tack::module mod;
-            mod.name(module_qn);
+            mod.name(module_n);
             mod.origin_type(m.origin_type());
             mod.generation_type(m.generation_type());
-            m.modules().insert(std::make_pair(module_qn, mod));
+            m.modules().insert(std::make_pair(module_n, mod));
         }
     }
 }
@@ -193,19 +193,19 @@ create_dynamic_extensions(const boost::property_tree::ptree& pt,
 
 void hydrator::
 read_element(const boost::property_tree::ptree& pt, tack::model& m) const {
-    tack::qname qn;
-    qn.model_name(model_name(m));
-    read_module_path(pt, m, qn);
+    tack::name n;
+    n.model_name(model_name(m));
+    read_module_path(pt, m, n);
 
     const auto simple_name_value(pt.get<std::string>(simple_name_key));
-    qn.simple_name(simple_name_value);
+    n.simple_name(simple_name_value);
 
     const auto documentation(pt.get_optional<std::string>(documentation_key));
 
     const auto lambda([&](tack::type& t) {
             BOOST_LOG_SEV(lg, debug) << "Processing type: "
-                                     << tack::string_converter::convert(qn);
-            t.name(qn);
+                                     << tack::string_converter::convert(n);
+            t.name(n);
             t.origin_type(m.origin_type());
             t.generation_type(m.generation_type());
 
@@ -223,11 +223,11 @@ read_element(const boost::property_tree::ptree& pt, tack::model& m) const {
 
         const auto ot(pt.get_optional<std::string>(object_type_key));
         o.object_type(to_object_type(ot));
-        m.objects().insert(std::make_pair(qn, o));
+        m.objects().insert(std::make_pair(n, o));
     } else if (meta_type_value == meta_type_primitive_value) {
         tack::primitive p;
         lambda(p);
-        m.primitives().insert(std::make_pair(qn, p));
+        m.primitives().insert(std::make_pair(n, p));
     }
     else {
         BOOST_LOG_SEV(lg, error) << invalid_meta_type << meta_type_value;

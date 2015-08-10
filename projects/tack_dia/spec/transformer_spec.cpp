@@ -48,9 +48,8 @@ const std::string test_suite("transformer_spec");
 
 const std::string empty;
 const std::string model_name("test");
-const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
-const std::string missing_qname("Missing QName for dia object ID");
+const std::string missing_name("Missing name for dia object ID");
 const std::string immutability_inheritance(
     "Immutability not supported with inheritance");
 
@@ -76,20 +75,20 @@ bool is_type_zero(const std::string& s) {
     return mock_processed_object_factory::to_object_name(0) == s;
 }
 
-bool is_type_zero(const dogen::tack::qname& qn) {
-    return is_type_zero(qn.simple_name());
+bool is_type_zero(const dogen::tack::name& n) {
+    return is_type_zero(n.simple_name());
 }
 
-bool is_type_one(const dogen::tack::qname& qn) {
-    return mock_processed_object_factory::to_object_name(1) == qn.simple_name();
+bool is_type_one(const dogen::tack::name& n) {
+    return mock_processed_object_factory::to_object_name(1) == n.simple_name();
 }
 
-bool is_type_two(const dogen::tack::qname& qn) {
-    return mock_processed_object_factory::to_object_name(2) == qn.simple_name();
+bool is_type_two(const dogen::tack::name& n) {
+    return mock_processed_object_factory::to_object_name(2) == n.simple_name();
 }
 
-dogen::tack::qname mock_model_name(const std::string& mn) {
-    dogen::tack::qname r;
+dogen::tack::name mock_model_name(const std::string& mn) {
+    dogen::tack::name r;
     r.model_name(mn);
     r.simple_name(mn);
     return r;
@@ -125,7 +124,7 @@ bool has_one_parent(const dogen::tack::object& o) {
     return true;
 }
 
-dogen::tack::qname get_parent_name(const dogen::tack::object& o) {
+dogen::tack::name get_parent_name(const dogen::tack::object& o) {
     using dogen::tack::relationship_types;
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty() ||
@@ -524,7 +523,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
     auto c(mock_context(model_name));
     auto po(mock_processed_object_factory::make_class_inside_large_package());
-    contains_checker<transformation_error> cc(missing_qname);
+    contains_checker<transformation_error> cc(missing_name);
     BOOST_CHECK_EXCEPTION(transform(c, {po[1]}), transformation_error, cc);
 
     auto st(enumeration_stereotype);
@@ -968,21 +967,21 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
 
     BOOST_REQUIRE(c.model().objects().size() == 2);
     for (const auto& pair : c.model().objects()) {
-        const auto& qn(pair.first);
-        BOOST_CHECK(m.members().front() == qn || m.members().back() == qn);
+        const auto& n(pair.first);
+        BOOST_CHECK(m.members().front() == n || m.members().back() == n);
 
         const auto& o(pair.second);
-        if (is_type_one(qn)) {
+        if (is_type_one(n)) {
             BOOST_CHECK(!has_relationship(relationship_types::parents, o));
             BOOST_CHECK(!has_relationship(relationship_types::original_parents,
                     o));
-        } else if (is_type_two(qn)) {
+        } else if (is_type_two(n)) {
             BOOST_REQUIRE(has_one_parent(o));
             BOOST_CHECK(is_type_one(get_parent_name(o)));
         } else {
             BOOST_LOG_SEV(lg, error)
                 << "Unexpected type name: "
-                << dogen::tack::string_converter::convert(qn);
+                << dogen::tack::string_converter::convert(n);
             BOOST_FAIL("Unexpected type name");
         }
     }

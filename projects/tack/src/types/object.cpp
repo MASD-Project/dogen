@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/tack/io/object_types_io.hpp"
@@ -43,7 +43,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::pr
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -61,7 +61,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -75,7 +75,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::qn
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -107,20 +107,20 @@ object::object()
 object::object(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module,
+    const boost::optional<dogen::tack::name>& containing_module,
     const std::list<dogen::tack::property>& all_properties,
     const std::list<dogen::tack::property>& local_properties,
-    const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties,
+    const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties,
     const bool is_parent,
     const bool is_visitable,
     const bool is_immutable,
     const bool is_fluent,
     const bool is_child,
     const bool is_original_parent_visitable,
-    const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& relationships,
+    const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& relationships,
     const dogen::tack::object_types object_type,
     const bool is_final)
     : dogen::tack::type(
@@ -248,19 +248,19 @@ void object::local_properties(const std::list<dogen::tack::property>&& v) {
     local_properties_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& object::inherited_properties() const {
+const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& object::inherited_properties() const {
     return inherited_properties_;
 }
 
-std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& object::inherited_properties() {
+std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& object::inherited_properties() {
     return inherited_properties_;
 }
 
-void object::inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v) {
+void object::inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v) {
     inherited_properties_ = v;
 }
 
-void object::inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >&& v) {
+void object::inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >&& v) {
     inherited_properties_ = std::move(v);
 }
 
@@ -312,19 +312,19 @@ void object::is_original_parent_visitable(const bool v) {
     is_original_parent_visitable_ = v;
 }
 
-const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& object::relationships() const {
+const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& object::relationships() const {
     return relationships_;
 }
 
-std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& object::relationships() {
+std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& object::relationships() {
     return relationships_;
 }
 
-void object::relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& v) {
+void object::relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& v) {
     relationships_ = v;
 }
 
-void object::relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >&& v) {
+void object::relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >&& v) {
     relationships_ = std::move(v);
 }
 

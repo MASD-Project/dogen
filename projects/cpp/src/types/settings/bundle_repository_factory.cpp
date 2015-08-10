@@ -33,7 +33,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("cpp.settings.bundle_repository_factory"));
 
 const std::string registrar_name("registrar");
-const std::string duplicate_qname("Duplicate qname: ");
+const std::string duplicate_name("Duplicate name: ");
 
 }
 
@@ -62,12 +62,12 @@ private:
 
         const auto b(factory_.make(e.extensions()));
         const auto pair(std::make_pair(e.name(), b));
-        auto& deps(result_.bundles_by_qname());
+        auto& deps(result_.bundles_by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
             const auto n(tack::string_converter::convert(e.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + n));
         }
     }
 
@@ -101,18 +101,18 @@ make(const dynamic::repository& rp, const dynamic::object& root_object,
     auto r(g.result());
 
     // FIXME: hack to handle registars.
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
 
-    const auto pair(std::make_pair(qn, f.make()));
-    auto& deps(r.bundles_by_qname());
+    const auto pair(std::make_pair(n, f.make()));
+    auto& deps(r.bundles_by_name());
     const auto res(deps.insert(pair));
     if (!res.second) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating settings bundle repository."

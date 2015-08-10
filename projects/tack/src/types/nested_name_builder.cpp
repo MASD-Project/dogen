@@ -21,21 +21,21 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
-#include "dogen/tack/types/nested_qname_builder.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
+#include "dogen/tack/types/nested_name_builder.hpp"
 
 using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("tack.nested_qname_builder"));
+auto lg(logger_factory("tack.nested_name_builder"));
 
 }
 
 namespace dogen {
 namespace tack {
 
-nested_qname_builder::nested_qname_builder(
+nested_name_builder::nested_name_builder(
     const std::unordered_set<std::string>& modules,
     const std::list<std::string>& external_module_path,
     const std::string& model_name)
@@ -52,56 +52,56 @@ nested_qname_builder::nested_qname_builder(
 
 }
 
-void nested_qname_builder::add_name(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "pushing back name: " << n;
-    names_.push_back(n);
+void nested_name_builder::add_name(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "pushing back name: " << s;
+    names_.push_back(s);
 }
 
-void nested_qname_builder::add_primitive(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << n;
-    auto qn(current_->data());
-    qn.simple_name(n);
-    current_->data(qn);
+void nested_name_builder::add_primitive(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
+    auto n(current_->data());
+    n.simple_name(s);
+    current_->data(n);
 }
 
-void nested_qname_builder::finish_current_node() {
+void nested_name_builder::finish_current_node() {
     BOOST_LOG_SEV(lg, debug) << "finishing current node. names: "
                              << names_;
 
-    qname qn(current_->data());
+    name n(current_->data());
     if (names_.empty())
         return;
 
     if (names_.size() == 1) {
-        qn.simple_name(names_.front());
+        n.simple_name(names_.front());
         names_.clear();
-        BOOST_LOG_SEV(lg, debug) << "simple name: " << qn.simple_name();
-        current_->data(qn);
+        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
+        current_->data(n);
         return;
     }
 
     const auto i(modules_.find(names_.front()));
     if (i != modules_.end()) {
-        qn.model_name(model_name_);
+        n.model_name(model_name_);
         BOOST_LOG_SEV(lg, debug) << "model name: " << model_name_;
     } else {
         BOOST_LOG_SEV(lg, debug) << "model name: " << names_.front();
-        qn.model_name(names_.front());
+        n.model_name(names_.front());
         names_.pop_front();
     }
 
-    qn.simple_name(names_.back());
-    BOOST_LOG_SEV(lg, debug) << "simple name: " << qn.simple_name();
+    n.simple_name(names_.back());
+    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
 
     names_.pop_back();
-    qn.module_path(names_);
-    BOOST_LOG_SEV(lg, debug) << "module path: " << qn.module_path();
+    n.module_path(names_);
+    BOOST_LOG_SEV(lg, debug) << "module path: " << n.module_path();
 
     names_.clear();
-    current_->data(qn);
+    current_->data(n);
 }
 
-void nested_qname_builder::start_children() {
+void nested_name_builder::start_children() {
     BOOST_LOG_SEV(lg, debug) << "starting children";
 
     finish_current_node();
@@ -113,7 +113,7 @@ void nested_qname_builder::start_children() {
     current_ = tmp;
 }
 
-void nested_qname_builder::next_child() {
+void nested_name_builder::next_child() {
     BOOST_LOG_SEV(lg, debug) << "next child";
 
     finish_current_node();
@@ -127,35 +127,35 @@ void nested_qname_builder::next_child() {
     current_ = tmp;
 }
 
-void nested_qname_builder::end_children() {
+void nested_name_builder::end_children() {
     BOOST_LOG_SEV(lg, debug) << "ending children";
 
     finish_current_node();
     current_ = current_->parent();
 }
 
-void nested_qname_builder::
-build_node(nested_qname& qn, boost::shared_ptr<node> node) {
+void nested_name_builder::
+build_node(nested_name& n, boost::shared_ptr<node> node) {
     BOOST_LOG_SEV(lg, debug) << "bulding node: "
                              << node->data().model_name()
                              << " "
                              << node->data().simple_name();
 
-    qn.type(node->data());
-    std::list<nested_qname> children;
+    n.type(node->data());
+    std::list<nested_name> children;
     for (const auto c : node->children()) {
-        nested_qname cqn;
-        build_node(cqn, c);
-        children.push_back(cqn);
+        nested_name cn;
+        build_node(cn, c);
+        children.push_back(cn);
     }
-    qn.children(children);
+    n.children(children);
 }
 
-nested_qname nested_qname_builder::build() {
+nested_name nested_name_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "started build";
 
     finish_current_node();
-    nested_qname r;
+    nested_name r;
     build_node(r, root_);
 
     BOOST_LOG_SEV(lg, debug) << "finished build. Final name: " << r;

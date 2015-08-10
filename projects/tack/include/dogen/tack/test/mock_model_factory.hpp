@@ -186,79 +186,64 @@ public:
      * @brief Returns the types header file name for the given
      * qualified name.
      */
-    std::string types_header_filename(const qname& qn) const;
+    std::string types_header_filename(const name& n) const;
 
     /**
      * @brief Returns the types forward declaration file name for the given
      * qualified name.
      */
-    std::string types_forward_declaration_filename(const qname& qn) const;
+    std::string types_forward_declaration_filename(const name& n) const;
 
     /**
      * @brief Returns the boost serialization header file name for the
      * given qualified name.
      */
-    std::string boost_serialization_header_filename(const qname& qn) const;
+    std::string boost_serialization_header_filename(const name& n) const;
 
     /**
      * @brief Returns the boost serialization forward declaration file
      * name for the given qualified name.
      */
     std::string boost_serialization_forward_declaration_filename(
-        const qname& qn) const;
+        const name& n) const;
 
 public:
     /**
-     * @brief Returns true if the qname matches the mock model factory
+     * @brief Returns true if the name matches the mock model factory
      * naming convention for model @e n.
      */
     /**@{*/
-    bool is_model_n(const unsigned int n, const qname& qn) const;
-    bool is_model_n(const unsigned int n, const std::string& s) const;
+    bool is_model_n(const unsigned int n, const name& name) const;
+    bool is_model_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
     /**
-     * @brief Returns true if the qname matches the mock model factory
+     * @brief Returns true if the name matches the mock model factory
      * naming convention for type @e n.
      */
     /**@{*/
-    bool is_type_name_n(const unsigned int n, const qname& qn) const;
-    bool is_type_name_n(const unsigned int n, const std::string& qn) const;
+    bool is_type_name_n(const unsigned int n, const name& name) const;
+    bool is_type_name_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
     /**
-     * @brief Returns true if the qname matches the mock model factory
+     * @brief Returns true if the name matches the mock model factory
      * naming convention for module @e n.
      */
-    bool is_concept_name_n(const unsigned int n, const qname& qn) const;
+    bool is_concept_name_n(const unsigned int n, const name& name) const;
 
     /**
-     * @brief Returns true if the qname matches the mock model factory
+     * @brief Returns true if the name matches the mock model factory
      * naming convention for module @e n.
      */
-    bool is_module_n(const unsigned int n, const std::string& s) const;
+    bool is_module_n(const unsigned int n, const std::string& name) const;
 
     /**
-     * @brief Returns true if the qname matches the mock model factory
-     * naming convention for type @e n, and the TACK naming convention
-     * for unversioned keys.
-     */
-    bool is_type_name_n_unversioned(const unsigned int n,
-        const qname& qn) const;
-
-    /**
-     * @brief Returns true if the qname matches the mock model factory
-     * naming convention for type @e n, and the TACK naming convention
-     * for versioned keys.
-     */
-    bool is_type_name_n_versioned(const unsigned int n, const qname& qn) const;
-
-    /**
-     * @brief Returns true if the qname matches the mock model factory
+     * @brief Returns true if the name matches the mock model factory
      * naming convention for type @e n, and the TACK naming convention
      * for visitors.
      */
-    bool is_type_name_n_visitor(const unsigned int n, const qname& qn) const;
+    bool is_type_name_n_visitor(const unsigned int n, const name& name) const;
 
     /**
      * @brief If required, adds a module for the model.
@@ -269,7 +254,7 @@ public:
     /**
      * @brief Create a value object.
      */
-    object make_value_object(const unsigned int i, const qname& model_qn,
+    object make_value_object(const unsigned int i, const name& model_name,
         const unsigned int module_n = 0) const;
 
     /**
@@ -281,25 +266,25 @@ public:
     /**
      * @brief Create a concept.
      */
-    concept make_concept(const unsigned int i, const qname& model_qname) const;
+    concept make_concept(const unsigned int i, const name& model_name) const;
 
     /**
      * @brief Create an enumeration.
      */
     enumeration make_enumeration(const unsigned int i,
-        const qname& model_qname,
+        const name& model_name,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an exception.
      */
-    object make_exception(const unsigned int i, const qname& model_qname,
+    object make_exception(const unsigned int i, const name& model_name,
         const unsigned int module_n = 0) const;
 
     /**
-     * @brief Create a module from a qname.
+     * @brief Create a module from a name.
      */
-    module make_module(const qname& qn,
+    module make_module(const name& n,
         const std::string& documentation = std::string()) const;
 
     /**
@@ -312,9 +297,9 @@ public:
 
 public:
     /**
-     * @brief Returns a qname derived from the input parameters
+     * @brief Returns a name derived from the input parameters
      */
-    qname make_qname(const unsigned int model_n = 0,
+    name make_name(const unsigned int model_n = 0,
         const unsigned int simple_n = 0) const;
 
     /**

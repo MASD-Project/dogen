@@ -29,8 +29,8 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/tack/serialization/node_ser.hpp"
-#include "dogen/tack/serialization/qname_ser.hpp"
 
 namespace boost {
 namespace serialization {

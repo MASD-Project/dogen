@@ -29,8 +29,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/tack/serialization/model_ser.hpp"
-#include "dogen/tack/serialization/qname_ser.hpp"
 #include "dogen/tack_dia/serialization/context_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/utility/serialization/unordered_set.hpp"
@@ -44,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar << make_nvp("parent_ids", v.parent_ids_);
-    ar << make_nvp("id_to_qname", v.id_to_qname_);
+    ar << make_nvp("id_to_name", v.id_to_name_);
     ar << make_nvp("top_level_module_names", v.top_level_module_names_);
     ar << make_nvp("model", v.model_);
 }
@@ -55,7 +55,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("child_id_to_parent_ids", v.child_id_to_parent_ids_);
     ar >> make_nvp("parent_ids", v.parent_ids_);
-    ar >> make_nvp("id_to_qname", v.id_to_qname_);
+    ar >> make_nvp("id_to_name", v.id_to_name_);
     ar >> make_nvp("top_level_module_names", v.top_level_module_names_);
     ar >> make_nvp("model", v.model_);
 }

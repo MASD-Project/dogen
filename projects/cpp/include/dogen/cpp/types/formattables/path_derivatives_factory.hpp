@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/config/types/cpp_options.hpp"
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/cpp/types/settings/path_settings.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives.hpp"
@@ -54,7 +54,7 @@ private:
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(
-        const settings::path_settings& ps, const tack::qname& qn) const;
+        const settings::path_settings& ps, const tack::name& n) const;
 
     /**
      * @brief Builds an absolute path for the supplied qualified name.
@@ -62,7 +62,7 @@ private:
     boost::filesystem::path make_file_path(
         const settings::path_settings& ps,
         const boost::filesystem::path& inclusion_path,
-        const tack::qname& qn) const;
+        const tack::name& n) const;
 
     /**
      * @brief Converts a relative path to an inclusion directive.
@@ -80,7 +80,7 @@ public:
      * @brief Generate path derivatives.
      */
     std::unordered_map<std::string, path_derivatives>
-    make(const tack::qname& qn) const;
+    make(const tack::name& n) const;
 
 private:
     const config::cpp_options& options_;

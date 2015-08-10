@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/tack/serialization/property_ser.hpp"
 #include "dogen/dynamic/serialization/object_ser.hpp"
-#include "dogen/tack/serialization/nested_qname_ser.hpp"
+#include "dogen/tack/serialization/nested_name_ser.hpp"
 
 namespace boost {
 namespace serialization {

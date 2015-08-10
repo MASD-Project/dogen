@@ -49,17 +49,17 @@ model::model(model&& rhs)
 model::model(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& references,
-    const std::unordered_set<dogen::tack::qname>& leaves,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::module>& modules,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& concepts,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& primitives,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& enumerations,
-    const std::unordered_map<dogen::tack::qname, dogen::tack::object>& objects,
+    const boost::optional<dogen::tack::name>& containing_module,
+    const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& references,
+    const std::unordered_set<dogen::tack::name>& leaves,
+    const std::unordered_map<dogen::tack::name, dogen::tack::module>& modules,
+    const std::unordered_map<dogen::tack::name, dogen::tack::concept>& concepts,
+    const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& primitives,
+    const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& enumerations,
+    const std::unordered_map<dogen::tack::name, dogen::tack::object>& objects,
     const bool is_target,
     const bool has_generatable_types)
     : documentation_(documentation),
@@ -153,19 +153,19 @@ void model::extensions(const dogen::dynamic::object&& v) {
     extensions_ = std::move(v);
 }
 
-const dogen::tack::qname& model::name() const {
+const dogen::tack::name& model::name() const {
     return name_;
 }
 
-dogen::tack::qname& model::name() {
+dogen::tack::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::tack::qname& v) {
+void model::name(const dogen::tack::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::tack::qname&& v) {
+void model::name(const dogen::tack::name&& v) {
     name_ = std::move(v);
 }
 
@@ -185,131 +185,131 @@ void model::origin_type(const dogen::tack::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<dogen::tack::qname>& model::containing_module() const {
+const boost::optional<dogen::tack::name>& model::containing_module() const {
     return containing_module_;
 }
 
-boost::optional<dogen::tack::qname>& model::containing_module() {
+boost::optional<dogen::tack::name>& model::containing_module() {
     return containing_module_;
 }
 
-void model::containing_module(const boost::optional<dogen::tack::qname>& v) {
+void model::containing_module(const boost::optional<dogen::tack::name>& v) {
     containing_module_ = v;
 }
 
-void model::containing_module(const boost::optional<dogen::tack::qname>&& v) {
+void model::containing_module(const boost::optional<dogen::tack::name>&& v) {
     containing_module_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& model::references() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& model::references() {
+std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& v) {
+void model::references(const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>&& v) {
+void model::references(const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<dogen::tack::qname>& model::leaves() const {
+const std::unordered_set<dogen::tack::name>& model::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::tack::qname>& model::leaves() {
+std::unordered_set<dogen::tack::name>& model::leaves() {
     return leaves_;
 }
 
-void model::leaves(const std::unordered_set<dogen::tack::qname>& v) {
+void model::leaves(const std::unordered_set<dogen::tack::name>& v) {
     leaves_ = v;
 }
 
-void model::leaves(const std::unordered_set<dogen::tack::qname>&& v) {
+void model::leaves(const std::unordered_set<dogen::tack::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::module>& model::modules() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::module>& model::modules() const {
     return modules_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::module>& model::modules() {
+std::unordered_map<dogen::tack::name, dogen::tack::module>& model::modules() {
     return modules_;
 }
 
-void model::modules(const std::unordered_map<dogen::tack::qname, dogen::tack::module>& v) {
+void model::modules(const std::unordered_map<dogen::tack::name, dogen::tack::module>& v) {
     modules_ = v;
 }
 
-void model::modules(const std::unordered_map<dogen::tack::qname, dogen::tack::module>&& v) {
+void model::modules(const std::unordered_map<dogen::tack::name, dogen::tack::module>&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& model::concepts() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::concept>& model::concepts() const {
     return concepts_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::concept>& model::concepts() {
+std::unordered_map<dogen::tack::name, dogen::tack::concept>& model::concepts() {
     return concepts_;
 }
 
-void model::concepts(const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& v) {
+void model::concepts(const std::unordered_map<dogen::tack::name, dogen::tack::concept>& v) {
     concepts_ = v;
 }
 
-void model::concepts(const std::unordered_map<dogen::tack::qname, dogen::tack::concept>&& v) {
+void model::concepts(const std::unordered_map<dogen::tack::name, dogen::tack::concept>&& v) {
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& model::primitives() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& model::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& model::primitives() {
+std::unordered_map<dogen::tack::name, dogen::tack::primitive>& model::primitives() {
     return primitives_;
 }
 
-void model::primitives(const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& v) {
+void model::primitives(const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& v) {
     primitives_ = v;
 }
 
-void model::primitives(const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>&& v) {
+void model::primitives(const std::unordered_map<dogen::tack::name, dogen::tack::primitive>&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& model::enumerations() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& model::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& model::enumerations() {
+std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& model::enumerations() {
     return enumerations_;
 }
 
-void model::enumerations(const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& v) {
+void model::enumerations(const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& v) {
     enumerations_ = v;
 }
 
-void model::enumerations(const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>&& v) {
+void model::enumerations(const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::tack::object>& model::objects() const {
+const std::unordered_map<dogen::tack::name, dogen::tack::object>& model::objects() const {
     return objects_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::object>& model::objects() {
+std::unordered_map<dogen::tack::name, dogen::tack::object>& model::objects() {
     return objects_;
 }
 
-void model::objects(const std::unordered_map<dogen::tack::qname, dogen::tack::object>& v) {
+void model::objects(const std::unordered_map<dogen::tack::name, dogen::tack::object>& v) {
     objects_ = v;
 }
 
-void model::objects(const std::unordered_map<dogen::tack::qname, dogen::tack::object>&& v) {
+void model::objects(const std::unordered_map<dogen::tack::name, dogen::tack::object>&& v) {
     objects_ = std::move(v);
 }
 

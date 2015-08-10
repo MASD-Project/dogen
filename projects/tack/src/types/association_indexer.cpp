@@ -25,7 +25,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
 #include "dogen/tack/types/association_indexer.hpp"
 
@@ -41,66 +41,66 @@ const std::string object_not_found("Object not found in object container: ");
 namespace dogen {
 namespace tack {
 
-void association_indexer::remove_duplicates(std::list<qname>& names,
-    std::unordered_set<qname> processed) const {
+void association_indexer::remove_duplicates(std::list<name>& names,
+    std::unordered_set<name> processed) const {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size() << ". Processed starts with size: "
                              << processed.size();
 
     auto i(names.begin());
     while (i != names.end()) {
-        const auto qn(*i);
-        if (processed.find(qn) != processed.end()) {
+        const auto n(*i);
+        if (processed.find(n) != processed.end()) {
             const auto j(i++);
             names.erase(j);
             continue;
         }
         ++i;
-        processed.insert(qn);
+        processed.insert(n);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
                              << names.size();
 }
 
-void association_indexer::recurse_nested_qnames(const model& m,
-    object& o, const nested_qname& nqn, bool& is_pointer) const {
-    const auto qn(nqn.type());
+void association_indexer::recurse_nested_names(const model& m,
+    object& o, const nested_name& nn, bool& is_pointer) const {
+    const auto n(nn.type());
     auto& rels(o.relationships());
     if (is_pointer)
-        rels[relationship_types::weak_associations].push_back(qn);
+        rels[relationship_types::weak_associations].push_back(n);
     else
-        rels[relationship_types::regular_associations].push_back(qn);
+        rels[relationship_types::regular_associations].push_back(n);
 
-    const auto i(m.primitives().find(qn));
+    const auto i(m.primitives().find(n));
     if (i != m.primitives().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto j(m.enumerations().find(qn));
+    const auto j(m.enumerations().find(n));
     if (j != m.enumerations().end()) {
         is_pointer = false;
         return;
     }
 
-    const auto k(m.objects().find(qn));
+    const auto k(m.objects().find(n));
     if (k == m.objects().end()) {
-        const auto n(string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << object_not_found << n;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+        const auto sn(string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
     }
 
     const auto sp(object_types::smart_pointer);
     is_pointer = k->second.object_type() == sp;
 
     bool is_first(true);
-    for (const auto c : nqn.children()) {
+    for (const auto c : nn.children()) {
         const auto hc(object_types::hash_container);
         if (is_first && k->second.object_type() == hc)
             rels[relationship_types::hash_container_keys].push_back(c.type());
 
-        recurse_nested_qnames(m, o, c, is_pointer);
+        recurse_nested_names(m, o, c, is_pointer);
         is_first = false;
     }
 }
@@ -110,17 +110,17 @@ void association_indexer::index_object(const model& m, object& o) const {
                              << string_converter::convert(o.name());
 
     for (const auto& p : o.local_properties()) {
-        const auto nqn(p.type());
-        bool is_pointer(nqn.is_pointer());
-        recurse_nested_qnames(m, o, nqn, is_pointer);
+        const auto nn(p.type());
+        bool is_pointer(nn.is_pointer());
+        recurse_nested_names(m, o, nn, is_pointer);
     }
 
     auto i(o.relationships().find(relationship_types::regular_associations));
-    std::unordered_set<qname> regular_associations;
+    std::unordered_set<name> regular_associations;
     if (i != o.relationships().end()) {
         remove_duplicates(i->second);
-        for (const auto qn : i->second)
-            regular_associations.insert(qn);
+        for (const auto n : i->second)
+            regular_associations.insert(n);
     }
 
     i = o.relationships().find(relationship_types::weak_associations);

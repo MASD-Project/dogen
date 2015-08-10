@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/concept.hpp"
 
 namespace dogen {
@@ -37,11 +37,11 @@ namespace tack {
  * @brief Resolves type references within a model.
  *
  * Properties may come in from transformation missing information in
- * their qnames - such as the model name, etc. The resolver fills in
+ * their names - such as the model name, etc. The resolver fills in
  * the missing gaps.
  *
  * The resolver is also responsible for making sure that all
- * references to types (e.g. qnames) can be resolved to a type in the
+ * references to types (e.g. names) can be resolved to a type in the
  * model.
  */
 class resolver {
@@ -65,19 +65,19 @@ public:
 
 private:
     /**
-     * @brief Resolves a partially formed qname into a full qname.
+     * @brief Resolves a partially formed name into a full name.
      */
-    qname resolve_partial_type(const qname& n) const;
+    name resolve_partial_type(const name& n) const;
 
     /**
-     * @brief Resolves all references contained in a nested qname.
+     * @brief Resolves all references contained in a nested name.
      */
-    void resolve_partial_type(nested_qname& t) const;
+    void resolve_partial_type(nested_name& nn) const;
 
     /**
      * @brief Resolves all references to types in the supplied properties.
      */
-    void resolve_properties(const qname& owner, std::list<property>& p) const;
+    void resolve_properties(const name& owner, std::list<property>& p) const;
 
     /**
      * @brief Validates the inheritance graph for the object.

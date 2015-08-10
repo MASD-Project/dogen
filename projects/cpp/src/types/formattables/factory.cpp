@@ -50,8 +50,8 @@ const std::string cmakelists_name("CMakeLists.txt");
 const std::string odb_options_name("options.odb");
 const std::string settings_not_found_for_formatter(
     "Settings not found for formatter: ");
-const std::string bundle_not_found_for_qname(
-    "Settings bundle not found for qname: ");
+const std::string bundle_not_found_for_name(
+    "Settings bundle not found for name: ");
 const std::string derivatives_not_found_for_formatter(
     "Path derivatives not found for formatter: ");
 const std::string properties_not_found(
@@ -137,10 +137,10 @@ factory::clone_path_settings(
     return r;
 }
 
-tack::qname factory::create_qname(const tack::model& m,
+tack::name factory::create_name(const tack::model& m,
     const std::string& simple_name) const {
 
-    tack::qname r;
+    tack::name r;
     r.simple_name(simple_name);
     r.model_name(m.name().model_name());
     r.external_module_path(m.name().external_module_path());
@@ -150,11 +150,11 @@ tack::qname factory::create_qname(const tack::model& m,
 path_derivatives factory::create_path_derivatives(
     const config::cpp_options& opts, const tack::model& m,
     const std::unordered_map<std::string, settings::path_settings>& ps,
-    const tack::qname& qn,
+    const tack::name& n,
     const std::string& formatter_name) const {
 
     path_derivatives_factory pdf(opts, m, ps);
-    const auto pd(pdf.make(qn));
+    const auto pd(pdf.make(n));
     const auto i(pd.find(formatter_name));
     if (i == pd.end()) {
         BOOST_LOG_SEV(lg, error) << derivatives_not_found_for_formatter
@@ -166,13 +166,13 @@ path_derivatives factory::create_path_derivatives(
 }
 
 bool factory::is_enabled(const formatter_properties_repository& fprp,
-    const tack::qname& qn, const std::string& formatter_name) const {
+    const tack::name& n, const std::string& formatter_name) const {
 
-    const auto i(fprp.formatter_properties_by_qname().find(qn));
-    if (i == fprp.formatter_properties_by_qname().end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << properties_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
+    const auto i(fprp.formatter_properties_by_name().find(n));
+    if (i == fprp.formatter_properties_by_name().end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << properties_not_found << sn;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + sn));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -195,13 +195,13 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const formatter_properties_repository& fprp,
     const tack::model& m) const {
 
-    const auto qn(create_qname(m, registrar_name));
+    const auto n(create_name(m, registrar_name));
     BOOST_LOG_SEV(lg, debug) << "Making registrar: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
 
     name_builder b;
     auto r(std::make_shared<registrar_info>());
-    r->namespaces(b.namespace_list(m, qn));
+    r->namespaces(b.namespace_list(m, n));
 
     /*
     const auto gs(gsf.make(cpp_modeline_name, root_object));
@@ -211,11 +211,11 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     sb.aspect_settings(f.make());
     r->settings(sb);
     */
-    const auto i(brp.bundles_by_qname().find(qn));
-    if (i == brp.bundles_by_qname().end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_qname + n));
+    const auto i(brp.bundles_by_name().find(n));
+    if (i == brp.bundles_by_name().end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << bundle_not_found_for_name << sn;
+        BOOST_THROW_EXCEPTION(building_error(bundle_not_found_for_name + sn));
     }
     r->settings(i->second);
 
@@ -233,7 +233,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
 
     const auto lambda([&](const std::string& src, const std::string& dst) {
             const auto cloned_ps(clone_path_settings(ps, src, dst));
-            const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, dst));
+            const auto pd(create_path_derivatives(opts, m, cloned_ps, n, dst));
 
             formatter_properties r;
             r.file_path(pd.file_path());
@@ -252,11 +252,11 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     const auto ri_fn(traits::registrar_implementation_formatter_name());
     auto fp2(lambda(ci_fn, ri_fn));
 
-    const auto j(fprp.formatter_properties_by_qname().find(qn));
-    if (j == fprp.formatter_properties_by_qname().end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << properties_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(properties_not_found + n));
+    const auto j(fprp.formatter_properties_by_name().find(n));
+    if (j == fprp.formatter_properties_by_name().end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << properties_not_found << sn;
+        BOOST_THROW_EXCEPTION(building_error(properties_not_found + sn));
 
     }
 
@@ -291,7 +291,7 @@ std::shared_ptr<formattable> factory::make_registrar_info(
     r->formatter_properties().insert(std::make_pair(ri_fn, fp2));
 
     BOOST_LOG_SEV(lg, debug) << "Made registrar: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
     return r;
 }
 
@@ -307,30 +307,30 @@ make_includers(
     const formatter_properties_repository& fprp,
     const tack::model& m) const {
 
-    const auto qn(create_qname(m, includers_name));
+    const auto n(create_name(m, includers_name));
     BOOST_LOG_SEV(lg, debug) << "Making includers: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
 
     std::unordered_map<std::string, std::list<std::string> >
         includes_by_formatter_name;
 
-    const auto registrar_qn(create_qname(m, registrar_name));
-    for (const auto& qn_pair : pdrp.path_derivatives_by_qname()) {
-        const auto qn(qn_pair.first);
+    const auto registrar_n(create_name(m, registrar_name));
+    for (const auto& n_pair : pdrp.path_derivatives_by_name()) {
+        const auto n(n_pair.first);
 
-        if (qn.model_name() != m.name().model_name())
+        if (n.model_name() != m.name().model_name())
             continue;
 
-        if (qn.model_name().empty() && qn.simple_name().empty())
+        if (n.model_name().empty() && n.simple_name().empty())
             continue;
 
-        if (m.concepts().find(qn) != m.concepts().end())
+        if (m.concepts().find(n) != m.concepts().end())
             continue;
 
-        if (m.primitives().find(qn) != m.primitives().end())
+        if (m.primitives().find(n) != m.primitives().end())
             continue;
 
-        for (const auto& fmt_pair : qn_pair.second) {
+        for (const auto& fmt_pair : n_pair.second) {
             const auto fn(fmt_pair.first);
             const auto pd(fmt_pair.second);
 
@@ -339,7 +339,7 @@ make_includers(
 
             const auto is_types(boost::starts_with(fn, "cpp.types."));
             if (!is_types) {
-                const auto j(m.objects().find(qn));
+                const auto j(m.objects().find(n));
                 using tack::object_types;
                 if (j  != m.objects().end()) {
                     const auto ot(j->second.object_type());
@@ -347,18 +347,18 @@ make_includers(
                         continue;
                 }
 
-                const auto i(m.modules().find(qn));
+                const auto i(m.modules().find(n));
                 if (i != m.modules().end())
                         continue;
             } else {
-                const auto i(m.modules().find(qn));
+                const auto i(m.modules().find(n));
                 if (i != m.modules().end()) {
                     if (i->second.documentation().empty())
                         continue;
                 }
             }
 
-            if ( qn == registrar_qn && !boost::contains(fn, "serialization"))
+            if ( n == registrar_n && !boost::contains(fn, "serialization"))
                 continue;
 
             const auto id(pd.inclusion_directive());
@@ -402,7 +402,7 @@ make_includers(
         const auto ch_fn(traits::class_header_formatter_name(facet_name));
         const auto ifn(traits::includers_formatter_name(facet_name));
         const auto cloned_ps(clone_path_settings(ps, ch_fn, ifn));
-        const auto pd(create_path_derivatives(opts, m, cloned_ps, qn, ifn));
+        const auto pd(create_path_derivatives(opts, m, cloned_ps, n, ifn));
 
         formatter_properties p;
         p.file_path(pd.file_path());
@@ -415,7 +415,7 @@ make_includers(
     BOOST_LOG_SEV(lg, debug) << "Includer: " << *inc;
 
     BOOST_LOG_SEV(lg, debug) << "Made includers: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
 
     return r;
 }

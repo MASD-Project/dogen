@@ -18,35 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_HASH_NESTED_QNAME_HASH_HPP
-#define DOGEN_TACK_HASH_NESTED_QNAME_HASH_HPP
+#ifndef DOGEN_TACK_TEST_DATA_NESTED_NAME_TD_HPP
+#define DOGEN_TACK_TEST_DATA_NESTED_NAME_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 
 namespace dogen {
 namespace tack {
 
-struct nested_qname_hasher {
+class nested_name_generator {
 public:
-    static std::size_t hash(const nested_qname& v);
+    nested_name_generator();
+
+public:
+    typedef dogen::tack::nested_name result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::tack::nested_qname> {
-public:
-    size_t operator()(const dogen::tack::nested_qname& v) const {
-        return dogen::tack::nested_qname_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/model_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/hash/module_hash.hpp"
 #include "dogen/tack/hash/object_hash.hpp"
 #include "dogen/tack/hash/concept_hash.hpp"
@@ -37,7 +37,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_tack_qname(const boost::optional<dogen::tack::qname>& v) {
+inline std::size_t hash_boost_optional_dogen_tack_name(const boost::optional<dogen::tack::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -47,7 +47,7 @@ inline std::size_t hash_boost_optional_dogen_tack_qname(const boost::optional<do
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_origin_types(const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_origin_types(const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -56,7 +56,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_origin_typ
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_tack_qname(const std::unordered_set<dogen::tack::qname>& v) {
+inline std::size_t hash_std_unordered_set_dogen_tack_name(const std::unordered_set<dogen::tack::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -64,7 +64,7 @@ inline std::size_t hash_std_unordered_set_dogen_tack_qname(const std::unordered_
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_module(const std::unordered_map<dogen::tack::qname, dogen::tack::module>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_module(const std::unordered_map<dogen::tack::name, dogen::tack::module>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -73,7 +73,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_module(con
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_concept(const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_concept(const std::unordered_map<dogen::tack::name, dogen::tack::concept>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -82,7 +82,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_concept(co
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_primitive(const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_primitive(const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -91,7 +91,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_primitive(
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_enumeration(const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_enumeration(const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -100,7 +100,7 @@ inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_enumeratio
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_tack_qname_dogen_tack_object(const std::unordered_map<dogen::tack::qname, dogen::tack::object>& v) {
+inline std::size_t hash_std_unordered_map_dogen_tack_name_dogen_tack_object(const std::unordered_map<dogen::tack::name, dogen::tack::object>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -122,14 +122,14 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_tack_qname(v.containing_module()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_origin_types(v.references()));
-    combine(seed, hash_std_unordered_set_dogen_tack_qname(v.leaves()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_module(v.modules()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_concept(v.concepts()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_primitive(v.primitives()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_dogen_tack_qname_dogen_tack_object(v.objects()));
+    combine(seed, hash_boost_optional_dogen_tack_name(v.containing_module()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_origin_types(v.references()));
+    combine(seed, hash_std_unordered_set_dogen_tack_name(v.leaves()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_module(v.modules()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_concept(v.concepts()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_primitive(v.primitives()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_enumeration(v.enumerations()));
+    combine(seed, hash_std_unordered_map_dogen_tack_name_dogen_tack_object(v.objects()));
     combine(seed, v.is_target());
     combine(seed, v.has_generatable_types());
 

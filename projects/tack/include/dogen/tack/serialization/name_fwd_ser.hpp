@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TEST_DATA_QNAME_TD_HPP
-#define DOGEN_TACK_TEST_DATA_QNAME_TD_HPP
+#ifndef DOGEN_TACK_SERIALIZATION_NAME_FWD_SER_HPP
+#define DOGEN_TACK_SERIALIZATION_NAME_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name_fwd.hpp"
 
-namespace dogen {
-namespace tack {
+namespace boost {
+namespace serialization {
 
-class qname_generator {
-public:
-    qname_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::tack::name& v, unsigned int version);
 
-public:
-    typedef dogen::tack::qname result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::tack::name& v, unsigned int version);
 
 } }
 

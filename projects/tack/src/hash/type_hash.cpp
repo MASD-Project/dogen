@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/type_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/dynamic/hash/object_hash.hpp"
 #include "dogen/tack/hash/origin_types_hash.hpp"
 #include "dogen/tack/hash/generation_types_hash.hpp"
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_tack_qname(const boost::optional<dogen::tack::qname>& v) {
+inline std::size_t hash_boost_optional_dogen_tack_name(const boost::optional<dogen::tack::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -55,7 +55,7 @@ std::size_t type_hasher::hash(const type& v) {
     combine(seed, v.name());
     combine(seed, v.generation_type());
     combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_tack_qname(v.containing_module()));
+    combine(seed, hash_boost_optional_dogen_tack_name(v.containing_module()));
 
     return seed;
 }

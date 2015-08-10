@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 
 namespace dogen {
 namespace cpp {
@@ -49,21 +49,21 @@ public:
 public:
     /**
      * @brief Flattens all the Tack namespace information stored in
-     * qname into a list of strings with C++ namespaces.
+     * name into a list of strings with C++ namespaces.
      */
     std::list<std::string>
-    namespace_list(const tack::model& m, const tack::qname& qn) const;
+    namespace_list(const tack::model& m, const tack::name& n) const;
 
     /**
      * @brief Flat representation of the qualified name.
      */
-    std::string qualified_name(const tack::model& m, const tack::qname& qn) const;
+    std::string qualified_name(const tack::model& m, const tack::name& n) const;
 
     /**
      * @brief Returns a complete name representation of the nested
      * qualified name.
      */
-    void complete_name(const tack::model& m, const tack::nested_qname& nqn,
+    void complete_name(const tack::model& m, const tack::nested_name& nn,
         std::string& complete_name) const;
 
     /**

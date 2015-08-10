@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/node_td.hpp"
 #include "dogen/tack/test_data/type_td.hpp"
 #include "dogen/tack/test_data/model_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack/test_data/module_td.hpp"
 #include "dogen/tack/test_data/object_td.hpp"
 #include "dogen/tack/test_data/concept_td.hpp"
@@ -36,7 +36,7 @@
 #include "dogen/tack/test_data/primitive_td.hpp"
 #include "dogen/tack/test_data/enumerator_td.hpp"
 #include "dogen/tack/test_data/enumeration_td.hpp"
-#include "dogen/tack/test_data/nested_qname_td.hpp"
+#include "dogen/tack/test_data/nested_name_td.hpp"
 #include "dogen/tack/test_data/object_types_td.hpp"
 #include "dogen/tack/test_data/origin_types_td.hpp"
 #include "dogen/tack/test_data/generation_types_td.hpp"

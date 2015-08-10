@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/cpp/serialization/formattables/enablement_repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
     ~enablement_repository() = default;
 
 public:
-    explicit enablement_repository(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_by_qname);
+    explicit enablement_repository(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_by_name);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, enablement_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_by_qname() const;
-    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& enablement_by_qname();
-    void enablement_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >& v);
-    void enablement_by_qname(const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> >&& v);
+    const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_by_name() const;
+    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& enablement_by_name();
+    void enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >& v);
+    void enablement_by_name(const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> >&& v);
 
 public:
     bool operator==(const enablement_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     enablement_repository& operator=(enablement_repository other);
 
 private:
-    std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, bool> > enablement_by_qname_;
+    std::unordered_map<dogen::tack::name, std::unordered_map<std::string, bool> > enablement_by_name_;
 };
 
 } } }

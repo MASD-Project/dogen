@@ -44,11 +44,11 @@ namespace tack_dia {
 
 workflow::workflow(const dynamic::workflow& w) : dynamic_workflow_(w) { }
 
-tack::qname
+tack::name
 workflow::create_qualified_name_for_model(const std::string& model_name,
     const std::string& external_module_path) const {
 
-    tack::qname r;
+    tack::name r;
     using utility::string::splitter;
     const auto epp(splitter::split_scoped(external_module_path));
     r.external_module_path(epp);
@@ -58,11 +58,11 @@ workflow::create_qualified_name_for_model(const std::string& model_name,
     return r;
 }
 
-tack::module workflow::create_module_for_model(const tack::qname& qn,
+tack::module workflow::create_module_for_model(const tack::name& n,
     const bool is_target) const {
 
     tack::module r;
-    r.name(qn);
+    r.name(n);
     r.origin_type(tack::origin_types::user);
     r.generation_type(is_target ?
         tack::generation_types::full_generation :

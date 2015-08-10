@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/model_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack/test_data/module_td.hpp"
 #include "dogen/tack/test_data/object_td.hpp"
 #include "dogen/tack/test_data/concept_td.hpp"
@@ -43,9 +43,9 @@ create_dogen_dynamic_object(const unsigned int position) {
     return dogen::dynamic::object_generator::create(position);
 }
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
 dogen::tack::generation_types
@@ -58,25 +58,25 @@ create_dogen_tack_origin_types(const unsigned int position) {
     return dogen::tack::origin_types_generator::create(position);
 }
 
-boost::optional<dogen::tack::qname>
-create_boost_optional_dogen_tack_qname(unsigned int position) {
-    boost::optional<dogen::tack::qname> r(
-        create_dogen_tack_qname(position));
+boost::optional<dogen::tack::name>
+create_boost_optional_dogen_tack_name(unsigned int position) {
+    boost::optional<dogen::tack::name> r(
+        create_dogen_tack_name(position));
     return r;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::origin_types> create_std_unordered_map_dogen_tack_qname_dogen_tack_origin_types(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::origin_types> r;
+std::unordered_map<dogen::tack::name, dogen::tack::origin_types> create_std_unordered_map_dogen_tack_name_dogen_tack_origin_types(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::origin_types> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_origin_types(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_origin_types(position + i)));
     }
     return r;
 }
 
-std::unordered_set<dogen::tack::qname> create_std_unordered_set_dogen_tack_qname(unsigned int position) {
-    std::unordered_set<dogen::tack::qname> r;
+std::unordered_set<dogen::tack::name> create_std_unordered_set_dogen_tack_name(unsigned int position) {
+    std::unordered_set<dogen::tack::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_dogen_tack_qname(position + i));
+        r.insert(create_dogen_tack_name(position + i));
     }
     return r;
 }
@@ -86,10 +86,10 @@ create_dogen_tack_module(const unsigned int position) {
     return dogen::tack::module_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::module> create_std_unordered_map_dogen_tack_qname_dogen_tack_module(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::module> r;
+std::unordered_map<dogen::tack::name, dogen::tack::module> create_std_unordered_map_dogen_tack_name_dogen_tack_module(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::module> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_module(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_module(position + i)));
     }
     return r;
 }
@@ -99,10 +99,10 @@ create_dogen_tack_concept(const unsigned int position) {
     return dogen::tack::concept_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::concept> create_std_unordered_map_dogen_tack_qname_dogen_tack_concept(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::concept> r;
+std::unordered_map<dogen::tack::name, dogen::tack::concept> create_std_unordered_map_dogen_tack_name_dogen_tack_concept(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::concept> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_concept(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_concept(position + i)));
     }
     return r;
 }
@@ -112,10 +112,10 @@ create_dogen_tack_primitive(const unsigned int position) {
     return dogen::tack::primitive_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::primitive> create_std_unordered_map_dogen_tack_qname_dogen_tack_primitive(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::primitive> r;
+std::unordered_map<dogen::tack::name, dogen::tack::primitive> create_std_unordered_map_dogen_tack_name_dogen_tack_primitive(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::primitive> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_primitive(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_primitive(position + i)));
     }
     return r;
 }
@@ -125,10 +125,10 @@ create_dogen_tack_enumeration(const unsigned int position) {
     return dogen::tack::enumeration_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::enumeration> create_std_unordered_map_dogen_tack_qname_dogen_tack_enumeration(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::enumeration> r;
+std::unordered_map<dogen::tack::name, dogen::tack::enumeration> create_std_unordered_map_dogen_tack_name_dogen_tack_enumeration(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::enumeration> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_enumeration(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_enumeration(position + i)));
     }
     return r;
 }
@@ -138,10 +138,10 @@ create_dogen_tack_object(const unsigned int position) {
     return dogen::tack::object_generator::create(position);
 }
 
-std::unordered_map<dogen::tack::qname, dogen::tack::object> create_std_unordered_map_dogen_tack_qname_dogen_tack_object(unsigned int position) {
-    std::unordered_map<dogen::tack::qname, dogen::tack::object> r;
+std::unordered_map<dogen::tack::name, dogen::tack::object> create_std_unordered_map_dogen_tack_name_dogen_tack_object(unsigned int position) {
+    std::unordered_map<dogen::tack::name, dogen::tack::object> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_tack_qname(position + i), create_dogen_tack_object(position + i)));
+        r.insert(std::make_pair(create_dogen_tack_name(position + i), create_dogen_tack_object(position + i)));
     }
     return r;
 }
@@ -161,17 +161,17 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
-    v.name(create_dogen_tack_qname(position + 2));
+    v.name(create_dogen_tack_name(position + 2));
     v.generation_type(create_dogen_tack_generation_types(position + 3));
     v.origin_type(create_dogen_tack_origin_types(position + 4));
-    v.containing_module(create_boost_optional_dogen_tack_qname(position + 5));
-    v.references(create_std_unordered_map_dogen_tack_qname_dogen_tack_origin_types(position + 6));
-    v.leaves(create_std_unordered_set_dogen_tack_qname(position + 7));
-    v.modules(create_std_unordered_map_dogen_tack_qname_dogen_tack_module(position + 8));
-    v.concepts(create_std_unordered_map_dogen_tack_qname_dogen_tack_concept(position + 9));
-    v.primitives(create_std_unordered_map_dogen_tack_qname_dogen_tack_primitive(position + 10));
-    v.enumerations(create_std_unordered_map_dogen_tack_qname_dogen_tack_enumeration(position + 11));
-    v.objects(create_std_unordered_map_dogen_tack_qname_dogen_tack_object(position + 12));
+    v.containing_module(create_boost_optional_dogen_tack_name(position + 5));
+    v.references(create_std_unordered_map_dogen_tack_name_dogen_tack_origin_types(position + 6));
+    v.leaves(create_std_unordered_set_dogen_tack_name(position + 7));
+    v.modules(create_std_unordered_map_dogen_tack_name_dogen_tack_module(position + 8));
+    v.concepts(create_std_unordered_map_dogen_tack_name_dogen_tack_concept(position + 9));
+    v.primitives(create_std_unordered_map_dogen_tack_name_dogen_tack_primitive(position + 10));
+    v.enumerations(create_std_unordered_map_dogen_tack_name_dogen_tack_enumeration(position + 11));
+    v.objects(create_std_unordered_map_dogen_tack_name_dogen_tack_object(position + 12));
     v.is_target(create_bool(position + 13));
     v.has_generatable_types(create_bool(position + 14));
 }

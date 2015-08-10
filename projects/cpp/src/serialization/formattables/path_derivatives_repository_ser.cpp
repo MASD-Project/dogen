@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/tack/serialization/qname_ser.hpp"
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/utility/serialization/unordered_map.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_ser.hpp"
 #include "dogen/cpp/serialization/formattables/path_derivatives_repository_ser.hpp"
@@ -40,14 +40,14 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::cpp::formattables::path_derivatives_repository& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("path_derivatives_by_qname", v.path_derivatives_by_qname_);
+    ar << make_nvp("path_derivatives_by_name", v.path_derivatives_by_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::cpp::formattables::path_derivatives_repository& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("path_derivatives_by_qname", v.path_derivatives_by_qname_);
+    ar >> make_nvp("path_derivatives_by_name", v.path_derivatives_by_name_);
 }
 
 } }

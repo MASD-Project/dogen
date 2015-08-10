@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/cpp/io/formattables/inclusion_directives_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, std::unordered_map<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, std::unordered_map<std::string, std::string> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -73,7 +73,7 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const inclusion_directives_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::cpp::formattables::inclusion_directives_repository\"" << ", "
-      << "\"inclusion_directives_by_qname\": " << v.inclusion_directives_by_qname()
+      << "\"inclusion_directives_by_name\": " << v.inclusion_directives_by_name()
       << " }";
     return(s);
 }

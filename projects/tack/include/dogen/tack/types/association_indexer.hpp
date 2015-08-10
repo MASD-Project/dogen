@@ -28,9 +28,9 @@
 #include <list>
 #include <unordered_set>
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/object.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/types/relationship_types.hpp"
 
 namespace dogen {
@@ -69,23 +69,23 @@ public:
 
 private:
     /**
-     * @brief Removes duplicate qnames, preserving the original order
+     * @brief Removes duplicate names, preserving the original order
      * of elements in the list.
      *
      * @param names list of names to process
      * @param processed list of names that have already been processed
      * somewhere else, if any.
      */
-    void remove_duplicates(std::list<qname>& names,
-        std::unordered_set<qname> processed =
-        std::unordered_set<qname>()) const;
+    void remove_duplicates(std::list<name>& names,
+        std::unordered_set<name> processed =
+        std::unordered_set<name>()) const;
 
     /**
-     * @brief Iterates through the nested qname recursively, picking
+     * @brief Iterates through the nested name recursively, picking
      * up associations as it goes along.
      */
-    void recurse_nested_qnames(const model& m, object& o,
-        const nested_qname& nqn, bool& is_pointer) const;
+    void recurse_nested_names(const model& m, object& o,
+        const nested_name& nn, bool& is_pointer) const;
 
 private:
     /**

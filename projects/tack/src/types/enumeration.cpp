@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/io/enumerator_io.hpp"
 #include "dogen/tack/types/enumeration.hpp"
 
@@ -44,11 +44,11 @@ namespace tack {
 enumeration::enumeration(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
-    const dogen::tack::qname& name,
+    const dogen::tack::name& name,
     const dogen::tack::generation_types generation_type,
     const dogen::tack::origin_types origin_type,
-    const boost::optional<dogen::tack::qname>& containing_module,
-    const dogen::tack::qname& underlying_type,
+    const boost::optional<dogen::tack::name>& containing_module,
+    const dogen::tack::name& underlying_type,
     const std::vector<dogen::tack::enumerator>& enumerators)
     : dogen::tack::type(
       documentation,
@@ -97,19 +97,19 @@ enumeration& enumeration::operator=(enumeration other) {
     return *this;
 }
 
-const dogen::tack::qname& enumeration::underlying_type() const {
+const dogen::tack::name& enumeration::underlying_type() const {
     return underlying_type_;
 }
 
-dogen::tack::qname& enumeration::underlying_type() {
+dogen::tack::name& enumeration::underlying_type() {
     return underlying_type_;
 }
 
-void enumeration::underlying_type(const dogen::tack::qname& v) {
+void enumeration::underlying_type(const dogen::tack::name& v) {
     underlying_type_ = v;
 }
 
-void enumeration::underlying_type(const dogen::tack::qname&& v) {
+void enumeration::underlying_type(const dogen::tack::name&& v) {
     underlying_type_ = std::move(v);
 }
 

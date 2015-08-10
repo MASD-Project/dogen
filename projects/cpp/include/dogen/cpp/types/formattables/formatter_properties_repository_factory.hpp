@@ -104,7 +104,7 @@ private:
     /**
      * @brief Merge all data structures.
      */
-    std::unordered_map<tack::qname, merged_formatter_data>
+    std::unordered_map<tack::name, merged_formatter_data>
     merge(const path_derivatives_repository& pdrp,
         const inclusion_dependencies_repository& idrp,
         const enablement_repository& erp) const;
@@ -114,7 +114,7 @@ private:
      */
     formatter_properties_repository
     create_formatter_properties(
-        const std::unordered_map<tack::qname, merged_formatter_data>& mfd,
+        const std::unordered_map<tack::name, merged_formatter_data>& mfd,
         const integrated_facets_repository& ifrp) const;
 
 public:

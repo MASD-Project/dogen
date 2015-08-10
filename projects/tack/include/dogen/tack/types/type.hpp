@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/tack/types/origin_types.hpp"
 #include "dogen/tack/types/type_visitor.hpp"
@@ -58,10 +58,10 @@ public:
     type(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const dogen::tack::qname& name,
+        const dogen::tack::name& name,
         const dogen::tack::generation_types generation_type,
         const dogen::tack::origin_types origin_type,
-        const boost::optional<dogen::tack::qname>& containing_module);
+        const boost::optional<dogen::tack::name>& containing_module);
 
 private:
     template<typename Archive>
@@ -109,10 +109,10 @@ public:
      *
      */
     /**@{*/
-    const dogen::tack::qname& name() const;
-    dogen::tack::qname& name();
-    void name(const dogen::tack::qname& v);
-    void name(const dogen::tack::qname&& v);
+    const dogen::tack::name& name() const;
+    dogen::tack::name& name();
+    void name(const dogen::tack::name& v);
+    void name(const dogen::tack::name&& v);
     /**@}*/
 
     /**
@@ -135,10 +135,10 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const boost::optional<dogen::tack::qname>& containing_module() const;
-    boost::optional<dogen::tack::qname>& containing_module();
-    void containing_module(const boost::optional<dogen::tack::qname>& v);
-    void containing_module(const boost::optional<dogen::tack::qname>&& v);
+    const boost::optional<dogen::tack::name>& containing_module() const;
+    boost::optional<dogen::tack::name>& containing_module();
+    void containing_module(const boost::optional<dogen::tack::name>& v);
+    void containing_module(const boost::optional<dogen::tack::name>&& v);
     /**@}*/
 
 protected:
@@ -152,10 +152,10 @@ protected:
 private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
-    dogen::tack::qname name_;
+    dogen::tack::name name_;
     dogen::tack::generation_types generation_type_;
     dogen::tack::origin_types origin_type_;
-    boost::optional<dogen::tack::qname> containing_module_;
+    boost::optional<dogen::tack::name> containing_module_;
 };
 
 inline type::~type() noexcept { }

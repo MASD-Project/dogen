@@ -48,12 +48,12 @@ namespace dogen {
 namespace tack {
 
 /**
- * @brief Add comparable support for qnames.
+ * @brief Add comparable support for names.
  *
  * This is required as part of the current (very sub-optimal)
  * implementation of concept processing.
  */
-inline bool operator<(const qname& lhs, const qname& rhs) {
+inline bool operator<(const name& lhs, const name& rhs) {
     return
         lhs.model_name() < rhs.model_name() ||
         (lhs.model_name() == rhs.model_name() &&
@@ -62,17 +62,17 @@ inline bool operator<(const qname& lhs, const qname& rhs) {
                     (lhs.simple_name() < rhs.simple_name()))));
 }
 
-object& concept_indexer::find_object(const qname& qn, model& m) {
-    auto i(m.objects().find(qn));
+object& concept_indexer::find_object(const name& n, model& m) {
+    auto i(m.objects().find(n));
     if (i == m.objects().end()) {
-        const auto n(string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << object_not_found << n;
-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
+        const auto sn(string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
     }
     return i->second;
 }
 
-std::list<qname>& concept_indexer::
+std::list<name>& concept_indexer::
 find_relationships(const relationship_types rt, object& o) {
     auto i(o.relationships().find(rt));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -85,32 +85,32 @@ find_relationships(const relationship_types rt, object& o) {
     return i->second;
 }
 
-concept& concept_indexer::find_concept(const qname& qn, model& m) {
-    auto i(m.concepts().find(qn));
+concept& concept_indexer::find_concept(const name& n, model& m) {
+    auto i(m.concepts().find(n));
     if (i == m.concepts().end()) {
-        const auto n(string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << concept_not_found << n;
-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + n));
+        const auto sn(string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
     }
     return i->second;
 }
 
-void concept_indexer::remove_duplicates(std::list<qname>& names) const {
-    std::unordered_set<qname> processed;
+void concept_indexer::remove_duplicates(std::list<name>& names) const {
+    std::unordered_set<name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
 
     auto i(names.begin());
     while (i != names.end()) {
-        const auto qn(*i);
-        if (processed.find(qn) != processed.end()) {
+        const auto n(*i);
+        if (processed.find(n) != processed.end()) {
             const auto j(i++);
             names.erase(j);
             continue;
         }
         ++i;
-        processed.insert(qn);
+        processed.insert(n);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
@@ -118,26 +118,26 @@ void concept_indexer::remove_duplicates(std::list<qname>& names) const {
 }
 
 void concept_indexer::index_object(object& o, model& m,
-    std::unordered_set<qname>& processed_qnames) {
+    std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing object: "
                              << string_converter::convert(o.name());
 
-    if (processed_qnames.find(o.name()) != processed_qnames.end()) {
+    if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
         return;
     }
 
     const auto i(o.relationships().find(relationship_types::modeled_concepts));
     if (i == o.relationships().end() || i->second.empty()) {
-        processed_qnames.insert(o.name());
+        processed_names.insert(o.name());
         BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
         return;
     }
 
-    std::list<qname> expanded_refines;
-    for (auto& qn : i->second) {
-        auto& c(find_concept(qn, m));
-        expanded_refines.push_back(qn);
+    std::list<name> expanded_refines;
+    for (auto& n : i->second) {
+        auto& c(find_concept(n, m));
+        expanded_refines.push_back(n);
         expanded_refines.insert(expanded_refines.end(),
             c.refines().begin(), c.refines().end());
     }
@@ -149,13 +149,13 @@ void concept_indexer::index_object(object& o, model& m,
         return;
     }
 
-    std::set<qname> our_concepts;
+    std::set<name> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
-    std::set<qname> their_concepts;
-    for (const auto& qn : find_relationships(relationship_types::parents, o)) {
-        auto& parent(find_object(qn, m));
-        index_object(parent, m, processed_qnames);
+    std::set<name> their_concepts;
+    for (const auto& n : find_relationships(relationship_types::parents, o)) {
+        auto& parent(find_object(n, m));
+        index_object(parent, m, processed_names);
 
         auto& pr(parent.relationships());
         const auto j(pr.find(relationship_types::modeled_concepts));
@@ -168,7 +168,7 @@ void concept_indexer::index_object(object& o, model& m,
     /* we want to only model concepts which have not yet been modeled
      * by any of our parents.
      */
-    std::set<qname> result;
+    std::set<name> result;
     std::set_difference(our_concepts.begin(), our_concepts.end(),
         their_concepts.begin(), their_concepts.end(),
         std::inserter(result, result.end()));
@@ -179,9 +179,9 @@ void concept_indexer::index_object(object& o, model& m,
      */
     BOOST_LOG_SEV(lg, debug) << "Object has parents, computing set difference.";
     i->second.clear();
-    for (const auto& qn : expanded_refines) {
-        if (result.find(qn) != result.end())
-            i->second.push_back(qn);
+    for (const auto& n : expanded_refines) {
+        if (result.find(n) != result.end())
+            i->second.push_back(n);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
@@ -190,39 +190,39 @@ void concept_indexer::index_object(object& o, model& m,
 void concept_indexer::index_objects(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing objects: " << m.objects().size();
 
-    std::unordered_set<qname> processed_qnames;
+    std::unordered_set<name> processed_names;
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
 
         if (o.generation_type() == generation_types::no_generation)
             continue;
 
-        index_object(o, m, processed_qnames);
+        index_object(o, m, processed_names);
     }
 }
 
 void concept_indexer::index_concept(concept& c, model& m,
-    std::unordered_set<qname>& processed_qnames) {
+    std::unordered_set<name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
                              << string_converter::convert(c.name());
 
-    if (processed_qnames.find(c.name()) != processed_qnames.end()) {
+    if (processed_names.find(c.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";
         return;
     }
 
     if (c.refines().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Concept refines no concepts.";
-        processed_qnames.insert(c.name());
+        processed_names.insert(c.name());
         return;
     }
 
-    std::list<qname> expanded_refines;
-    for (auto& qn : c.refines()) {
-        auto& parent(find_concept(qn, m));
-        index_concept(parent, m, processed_qnames);
+    std::list<name> expanded_refines;
+    for (auto& n : c.refines()) {
+        auto& parent(find_concept(n, m));
+        index_concept(parent, m, processed_names);
 
-        expanded_refines.push_back(qn);
+        expanded_refines.push_back(n);
 
         expanded_refines.insert(expanded_refines.end(),
             parent.refines().begin(), parent.refines().end());
@@ -231,20 +231,20 @@ void concept_indexer::index_concept(concept& c, model& m,
     BOOST_LOG_SEV(lg, debug) << "Computing reduced set for concept.";
     remove_duplicates(expanded_refines);
     c.refines(expanded_refines);
-    processed_qnames.insert(c.name());
+    processed_names.insert(c.name());
 }
 
 void concept_indexer::index_concepts(model& m) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << m.concepts().size();
 
-    std::unordered_set<qname> processed_qnames;
+    std::unordered_set<name> processed_names;
     for (auto& pair : m.concepts()) {
         auto& c(pair.second);
 
         if (c.generation_type() == generation_types::no_generation)
             continue;
 
-        index_concept(c, m, processed_qnames);
+        index_concept(c, m, processed_names);
     }
 }
 

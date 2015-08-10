@@ -9069,7 +9069,7 @@ facet of the C++ language.
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::qname&amp;#</dia:string>
+                <dia:string>#const tack::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9134,7 +9134,7 @@ facet of the C++ language.
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::qname&amp;#</dia:string>
+                <dia:string>#const tack::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9199,7 +9199,7 @@ facet of the C++ language.
                 <dia:string>#nqn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::nested_qname&amp;#</dia:string>
+                <dia:string>#const tack::nested_name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14940,7 +14940,7 @@ formattable type.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Flattens qnames and nested qnames
+            <dia:string>#Flattens names and nested names
 into string representations according
 to the grammmar of the C++ language.#</dia:string>
           </dia:attribute>
@@ -15113,12 +15113,12 @@ An inclusion directive is a string with delimiters but without the
 #include pragma. For example "a/b/c,hpp" and &lt;a/b/c.hpp&gt; are
 inclusion directives; note that the quotes and angle brackets are part
 of the directive. There should be an inclusion directive associated
-with every pair (qname, formatter name). The inclusion directive
+with every pair (name, formatter name). The inclusion directive
 repository contains the complete set of inclusion directives - the
 inclusion directives universe if you'd like.
 
 Inclusion dependencies are a set of inclusion directives.  They are
-also associated with a pair (qname, formatter).  The inclusion
+also associated with a pair (name, formatter).  The inclusion
 dependences for each formatter are created by the inclusion
 dependencies providers. Each formatter is expected to supply one of
 one of these. It uses the inclusion directives available n the
@@ -20052,7 +20052,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::qname&amp;#</dia:string>
+                <dia:string>#const tack::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -21706,7 +21706,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#id#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::unordered_map&lt;tack::qname,std::unordered_map&lt;std::string,std::string&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::unordered_map&lt;tack::name,std::unordered_map&lt;std::string,std::string&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24236,7 +24236,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::qname&amp;#</dia:string>
+                <dia:string>#const tack::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24301,7 +24301,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;tack::qname&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;tack::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -24605,10 +24605,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#inclusion_directives_by_qname#</dia:string>
+            <dia:string>#inclusion_directives_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname, std::unordered_map&lt;std::string, std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26390,10 +26390,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#path_derivatives_by_qname#</dia:string>
+            <dia:string>#path_derivatives_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, formattables::path_derivatives&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26597,10 +26597,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#inclusion_dependencies_by_qname#</dia:string>
+            <dia:string>#inclusion_dependencies_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -26732,10 +26732,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatter_properties_by_qname#</dia:string>
+            <dia:string>#formatter_properties_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname,std::unordered_map&lt;std::string,formattables::formatter_properties&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name,std::unordered_map&lt;std::string,formattables::formatter_properties&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27171,10 +27171,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#enablement_by_qname#</dia:string>
+            <dia:string>#enablement_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname, std::unordered_map&lt;std::string, bool&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name, std::unordered_map&lt;std::string, bool&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -27923,7 +27923,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#qn#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const tack::qname&amp;#</dia:string>
+                <dia:string>#const tack::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30305,10 +30305,10 @@ main, or from another initialiser.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#bundles_by_qname#</dia:string>
+            <dia:string>#bundles_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;tack::qname, settings::bundle&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;tack::name, settings::bundle&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

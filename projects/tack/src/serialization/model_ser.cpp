@@ -29,8 +29,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/tack/serialization/model_ser.hpp"
-#include "dogen/tack/serialization/qname_ser.hpp"
 #include "dogen/tack/serialization/module_ser.hpp"
 #include "dogen/tack/serialization/object_ser.hpp"
 #include "dogen/tack/serialization/concept_ser.hpp"

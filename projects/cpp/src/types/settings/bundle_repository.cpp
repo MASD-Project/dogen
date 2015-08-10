@@ -24,16 +24,16 @@ namespace dogen {
 namespace cpp {
 namespace settings {
 
-bundle_repository::bundle_repository(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundles_by_qname)
-    : bundles_by_qname_(bundles_by_qname) { }
+bundle_repository::bundle_repository(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundles_by_name)
+    : bundles_by_name_(bundles_by_name) { }
 
 void bundle_repository::swap(bundle_repository& other) noexcept {
     using std::swap;
-    swap(bundles_by_qname_, other.bundles_by_qname_);
+    swap(bundles_by_name_, other.bundles_by_name_);
 }
 
 bool bundle_repository::operator==(const bundle_repository& rhs) const {
-    return bundles_by_qname_ == rhs.bundles_by_qname_;
+    return bundles_by_name_ == rhs.bundles_by_name_;
 }
 
 bundle_repository& bundle_repository::operator=(bundle_repository other) {
@@ -42,20 +42,20 @@ bundle_repository& bundle_repository::operator=(bundle_repository other) {
     return *this;
 }
 
-const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() const {
-    return bundles_by_qname_;
+const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() const {
+    return bundles_by_name_;
 }
 
-std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_qname() {
-    return bundles_by_qname_;
+std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundle_repository::bundles_by_name() {
+    return bundles_by_name_;
 }
 
-void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& v) {
-    bundles_by_qname_ = v;
+void bundle_repository::bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& v) {
+    bundles_by_name_ = v;
 }
 
-void bundle_repository::bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>&& v) {
-    bundles_by_qname_ = std::move(v);
+void bundle_repository::bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>&& v) {
+    bundles_by_name_ = std::move(v);
 }
 
 } } }

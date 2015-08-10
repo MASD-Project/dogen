@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_QNAME_FWD_HPP
-#define DOGEN_TACK_TYPES_QNAME_FWD_HPP
+#ifndef DOGEN_TACK_SERIALIZATION_NAME_SER_HPP
+#define DOGEN_TACK_SERIALIZATION_NAME_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace tack {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/tack/types/name.hpp"
 
-class qname;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::tack::name)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::tack::name& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::tack::name& v, unsigned int version);
 
 } }
 

@@ -24,19 +24,19 @@
 namespace dogen {
 namespace tack {
 
-std::string string_converter::convert(const qname& qn) {
+std::string string_converter::convert(const name& n) {
     std::ostringstream s;
-    for (const auto& m : qn.external_module_path())
+    for (const auto& m : n.external_module_path())
         s << "<" << m << ">";
 
-    if (!qn.model_name().empty())
-        s << "<" << qn.model_name() << ">";
+    if (!n.model_name().empty())
+        s << "<" << n.model_name() << ">";
 
-    for (const auto& m : qn.module_path())
+    for (const auto& m : n.module_path())
         s << "<" << m << ">";
 
-    if (!qn.simple_name().empty())
-        s << "<" << qn.simple_name() << ">";
+    if (!n.simple_name().empty())
+        s << "<" << n.simple_name() << ">";
 
     return s.str();
 }

@@ -27,7 +27,7 @@
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/indexing_error.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/relationship_types_io.hpp"
 #include "dogen/tack/types/generalization_indexer.hpp"
 
@@ -49,12 +49,12 @@ namespace dogen {
 namespace tack {
 
 /**
- * @brief Add comparable support for qnames.
+ * @brief Add comparable support for names.
  *
  * This is required as part of the current (very sub-optimal)
  * implementation of concept processing.
  */
-inline bool operator<(const qname& lhs, const qname& rhs) {
+inline bool operator<(const name& lhs, const name& rhs) {
     return
         lhs.model_name() < rhs.model_name() ||
         (lhs.model_name() == rhs.model_name() &&
@@ -78,12 +78,12 @@ bool generalization_indexer::is_leaf(const object& o) const {
     return true;
 }
 
-std::list<qname> generalization_indexer::
-recurse_generalization(const model& m, const qname& leaf,
+std::list<name> generalization_indexer::
+recurse_generalization(const model& m, const name& leaf,
     const object& o, generalization_details& d) const {
 
     if (!o.is_child())
-        return std::list<qname> { o.name() };
+        return std::list<name> { o.name() };
 
     const auto i(o.relationships().find(relationship_types::parents));
     if (i == o.relationships().end() || i->second.empty()) {
@@ -92,7 +92,7 @@ recurse_generalization(const model& m, const qname& leaf,
         BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + n));
     }
 
-    std::list<qname> original_parents;
+    std::list<name> original_parents;
     for (const auto& parent : i->second) {
         auto j(m.objects().find(parent));
         if (j == m.objects().end()) {

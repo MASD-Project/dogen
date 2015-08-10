@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/type_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack/test_data/enumerator_td.hpp"
 #include "dogen/tack/test_data/enumeration_td.hpp"
 
 namespace {
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
 dogen::tack::enumerator
@@ -53,7 +53,7 @@ enumeration_generator::enumeration_generator() : position_(0) { }
 void enumeration_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::tack::type_generator::populate(position, v);
-    v.underlying_type(create_dogen_tack_qname(position + 0));
+    v.underlying_type(create_dogen_tack_name(position + 0));
     v.enumerators(create_std_vector_dogen_tack_enumerator(position + 1));
 }
 

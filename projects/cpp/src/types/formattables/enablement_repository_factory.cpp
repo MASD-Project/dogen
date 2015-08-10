@@ -38,7 +38,7 @@ static logger lg(logger_factory(
         "cpp.formattables.enablement_repository_factory"));
 
 const std::string registrar_name("registrar");
-const std::string duplicate_qname("Duplicate qname: ");
+const std::string duplicate_name("Duplicate name: ");
 const std::string model_module_not_found("Model module not found for model: ");
 
 }
@@ -60,7 +60,7 @@ private:
     template<typename TackEntity>
     void generate(const TackEntity& e, const bool types_only = false) {
         const auto o(e.extensions());
-        result_.enablement_by_qname()[e.name()] = factory_.make(o, types_only);
+        result_.enablement_by_name()[e.name()] = factory_.make(o, types_only);
     }
 
 public:
@@ -148,12 +148,12 @@ enablement_repository enablement_repository_factory::make(
     tack::all_model_items_traversal(m, g);
     auto r(g.result());
 
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
     const auto e(f.make(root_object));
-    r.enablement_by_qname()[qn] = e;
+    r.enablement_by_name()[n] = e;
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
@@ -161,11 +161,11 @@ enablement_repository enablement_repository_factory::make(
             continue;
 
         const auto ref(pair.first);
-        tack::qname n;
+        tack::name n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());
-        r.enablement_by_qname()[n] = e;
+        r.enablement_by_name()[n] = e;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement:" << r;

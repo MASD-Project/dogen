@@ -34,7 +34,7 @@ static logger lg(logger_factory(
         "cpp.formattables.inclusion_dependencies_repository_factory"));
 
 const std::string registrar_name("registrar");
-const std::string duplicate_qname("Duplicate qname: ");
+const std::string duplicate_name("Duplicate name: ");
 
 }
 
@@ -53,7 +53,7 @@ public:
 
 public:
     template<typename TackEntity>
-    void generate(const TackEntity& e, const tack::qname& qn) {
+    void generate(const TackEntity& e, const tack::name& n) {
         const auto id(factory_.make(e));
 
         // note: optional return may have be cleaner here, but however it
@@ -61,13 +61,13 @@ public:
         if (id.empty())
             return;
 
-        const auto pair(std::make_pair(qn, id));
-        auto& deps(result_.inclusion_dependencies_by_qname());
+        const auto pair(std::make_pair(n, id));
+        auto& deps(result_.inclusion_dependencies_by_name());
         const auto res(deps.insert(pair));
         if (!res.second) {
-            const auto n(tack::string_converter::convert(qn));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+            const auto sn(tack::string_converter::convert(n));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
         }
     }
 
@@ -111,11 +111,11 @@ make(const inclusion_dependencies_builder_factory& bf, const container& c,
     generator g(idf);
     tack::all_model_items_traversal(m, g);
 
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
-    g.generate(m, qn);
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
+    g.generate(m, n);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies:"
                              << g.result();

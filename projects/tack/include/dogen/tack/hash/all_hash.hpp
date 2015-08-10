@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/hash/node_hash.hpp"
 #include "dogen/tack/hash/type_hash.hpp"
 #include "dogen/tack/hash/model_hash.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/hash/module_hash.hpp"
 #include "dogen/tack/hash/object_hash.hpp"
 #include "dogen/tack/hash/concept_hash.hpp"
@@ -36,7 +36,7 @@
 #include "dogen/tack/hash/primitive_hash.hpp"
 #include "dogen/tack/hash/enumerator_hash.hpp"
 #include "dogen/tack/hash/enumeration_hash.hpp"
-#include "dogen/tack/hash/nested_qname_hash.hpp"
+#include "dogen/tack/hash/nested_name_hash.hpp"
 #include "dogen/tack/hash/object_types_hash.hpp"
 #include "dogen/tack/hash/origin_types_hash.hpp"
 #include "dogen/tack/hash/generation_types_hash.hpp"

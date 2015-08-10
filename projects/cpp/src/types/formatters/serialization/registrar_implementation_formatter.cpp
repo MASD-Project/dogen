@@ -56,17 +56,17 @@ boost::optional<std::list<std::string> >
 provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
     const tack::model& m) const {
 
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
 
     auto builder(f.make());
     const auto rh_fn(traits::registrar_header_formatter_name());
-    builder.add(qn, rh_fn);
+    builder.add(n, rh_fn);
 
     using ic = inclusion_constants;
-    const auto as(builder.get_aspect_settings(qn));
+    const auto as(builder.get_aspect_settings(n));
 
     builder.add(ic::boost::archive::text_iarchive());
     builder.add(ic::boost::archive::text_oarchive());
@@ -95,7 +95,7 @@ provider::provide(const formattables::inclusion_dependencies_builder_factory& f,
             continue;
 
         const auto ref(pair.first);
-        tack::qname n;
+        tack::name n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

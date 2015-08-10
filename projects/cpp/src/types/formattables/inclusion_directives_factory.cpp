@@ -31,7 +31,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "cpp.formattables.inclusion_directives_factory"));
 
-const std::string qname_not_found("Expected qname not found: ");
+const std::string name_not_found("Expected name not found: ");
 const std::string empty_include_directive("Include directive is empty.");
 const std::string missing_include_directive(
     "Expected include directive is missing: ");
@@ -50,13 +50,13 @@ inclusion_directives_factory::inclusion_directives_factory(
     : dynamic_repository_(srp), container_(fc), path_repository_(pdrp) {}
 
 std::unordered_map<std::string, formattables::path_derivatives>
-inclusion_directives_factory::path_derivatives_for_qname(
-    const tack::qname& qn) const {
-    const auto i(path_repository_.path_derivatives_by_qname().find(qn));
-    if (i == path_repository_.path_derivatives_by_qname().end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
+inclusion_directives_factory::path_derivatives_for_name(
+    const tack::name& n) const {
+    const auto i(path_repository_.path_derivatives_by_name().find(n));
+    if (i == path_repository_.path_derivatives_by_name().end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
     }
     return i->second;
 }
@@ -136,15 +136,15 @@ inclusion_directives_factory::obtain_include_directive(
 
 boost::optional<std::unordered_map<std::string, std::string> >
 inclusion_directives_factory::
-make(const dynamic::object& o, const tack::qname& qn) const {
-    const auto tn(tack::string_converter::convert(qn));
+make(const dynamic::object& o, const tack::name& n) const {
+    const auto tn(tack::string_converter::convert(n));
     const auto directives_settings(create_inclusion_directives_settings(o));
     if (!directives_settings.inclusion_required()) {
         BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required: " << tn;
         return boost::optional<std::unordered_map<std::string, std::string> >();
     }
 
-    const auto pd(path_derivatives_for_qname(qn));
+    const auto pd(path_derivatives_for_name(n));
     std::unordered_map<std::string, std::string> r;
     for (const auto& p : directives_settings.inclusion_directive_settings()) {
         const auto fn(p.first);

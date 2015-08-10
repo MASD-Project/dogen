@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/tack/test_data/qname_td.hpp"
+#include "dogen/tack/test_data/name_td.hpp"
 
 namespace {
 
@@ -42,9 +42,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 namespace dogen {
 namespace tack {
 
-qname_generator::qname_generator() : position_(0) { }
+name_generator::name_generator() : position_(0) { }
 
-void qname_generator::
+void name_generator::
 populate(const unsigned int position, result_type& v) {
     v.model_name(create_std_string(position + 0));
     v.external_module_path(create_std_list_std_string(position + 1));
@@ -52,22 +52,22 @@ populate(const unsigned int position, result_type& v) {
     v.simple_name(create_std_string(position + 3));
 }
 
-qname_generator::result_type
-qname_generator::create(const unsigned int position) {
-    qname r;
-    qname_generator::populate(position, r);
+name_generator::result_type
+name_generator::create(const unsigned int position) {
+    name r;
+    name_generator::populate(position, r);
     return r;
 }
 
-qname_generator::result_type*
-qname_generator::create_ptr(const unsigned int position) {
-    qname* p = new qname();
-    qname_generator::populate(position, *p);
+name_generator::result_type*
+name_generator::create_ptr(const unsigned int position) {
+    name* p = new name();
+    name_generator::populate(position, *p);
     return p;
 }
 
-qname_generator::result_type
-qname_generator::operator()() {
+name_generator::result_type
+name_generator::operator()() {
     return create(position_++);
 }
 

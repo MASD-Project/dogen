@@ -34,7 +34,7 @@ namespace tack {
 
 node::node(
     const boost::shared_ptr<dogen::tack::node>& parent,
-    const dogen::tack::qname& data,
+    const dogen::tack::name& data,
     const std::list<boost::shared_ptr<dogen::tack::node> >& children)
     : parent_(parent),
       data_(data),
@@ -75,19 +75,19 @@ void node::parent(const boost::shared_ptr<dogen::tack::node>&& v) {
     parent_ = std::move(v);
 }
 
-const dogen::tack::qname& node::data() const {
+const dogen::tack::name& node::data() const {
     return data_;
 }
 
-dogen::tack::qname& node::data() {
+dogen::tack::name& node::data() {
     return data_;
 }
 
-void node::data(const dogen::tack::qname& v) {
+void node::data(const dogen::tack::name& v) {
     data_ = v;
 }
 
-void node::data(const dogen::tack::qname&& v) {
+void node::data(const dogen::tack::name&& v) {
     data_ = std::move(v);
 }
 

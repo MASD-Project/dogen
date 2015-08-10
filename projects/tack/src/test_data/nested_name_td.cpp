@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/test_data/qname_td.hpp"
-#include "dogen/tack/test_data/nested_qname_td.hpp"
+#include "dogen/tack/test_data/name_td.hpp"
+#include "dogen/tack/test_data/nested_name_td.hpp"
 
 namespace {
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
-dogen::tack::nested_qname
-create_dogen_tack_nested_qname(const unsigned int) {
-    return dogen::tack::nested_qname();
+dogen::tack::nested_name
+create_dogen_tack_nested_name(const unsigned int) {
+    return dogen::tack::nested_name();
 }
 
-std::list<dogen::tack::nested_qname> create_std_list_dogen_tack_nested_qname(unsigned int position) {
-    std::list<dogen::tack::nested_qname> r;
+std::list<dogen::tack::nested_name> create_std_list_dogen_tack_nested_name(unsigned int position) {
+    std::list<dogen::tack::nested_name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_tack_nested_qname(position + i));
+        r.push_back(create_dogen_tack_nested_name(position + i));
     }
     return r;
 }
@@ -50,31 +50,31 @@ bool create_bool(const unsigned int position) {
 namespace dogen {
 namespace tack {
 
-nested_qname_generator::nested_qname_generator() : position_(0) { }
+nested_name_generator::nested_name_generator() : position_(0) { }
 
-void nested_qname_generator::
+void nested_name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.type(create_dogen_tack_qname(position + 0));
-    v.children(create_std_list_dogen_tack_nested_qname(position + 1));
+    v.type(create_dogen_tack_name(position + 0));
+    v.children(create_std_list_dogen_tack_nested_name(position + 1));
     v.is_pointer(create_bool(position + 2));
 }
 
-nested_qname_generator::result_type
-nested_qname_generator::create(const unsigned int position) {
-    nested_qname r;
-    nested_qname_generator::populate(position, r);
+nested_name_generator::result_type
+nested_name_generator::create(const unsigned int position) {
+    nested_name r;
+    nested_name_generator::populate(position, r);
     return r;
 }
 
-nested_qname_generator::result_type*
-nested_qname_generator::create_ptr(const unsigned int position) {
-    nested_qname* p = new nested_qname();
-    nested_qname_generator::populate(position, *p);
+nested_name_generator::result_type*
+nested_name_generator::create_ptr(const unsigned int position) {
+    nested_name* p = new nested_name();
+    nested_name_generator::populate(position, *p);
     return p;
 }
 
-nested_qname_generator::result_type
-nested_qname_generator::operator()() {
+nested_name_generator::result_type
+nested_name_generator::operator()() {
     return create(position_++);
 }
 

@@ -72,13 +72,13 @@ public:
 
 private:
     /**
-     * @brief Returns the inclusion directive for a given qname and
+     * @brief Returns the inclusion directive for a given name and
      * formatter name.
      *
-     * @pre qname must exist in path derivatives collection.
+     * @pre name must exist in path derivatives collection.
      */
     boost::optional<std::string> get_inclusion_directive(
-        const tack::qname& qn, const std::string& formatter_name) const;
+        const tack::name& n, const std::string& formatter_name) const;
 
 public:
     /**
@@ -89,7 +89,7 @@ public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const tack::qname& qn,
+    bool is_enabled(const tack::name& n,
         const std::string& formatter_name) const;
 
     /**
@@ -99,11 +99,11 @@ public:
         const std::string& facet_name) const;
 
     /**
-     * @brief Returns the aspect settings for the supplied qname.
+     * @brief Returns the aspect settings for the supplied name.
      *
-     * @pre qname must exist in the settings bundle repository.
+     * @pre name must exist in the settings bundle repository.
      */
-    settings::aspect_settings get_aspect_settings(const tack::qname& qn) const;
+    settings::aspect_settings get_aspect_settings(const tack::name& n) const;
 
 public:
     /**
@@ -113,19 +113,19 @@ public:
 
     /**
      * @brief Adds the inclusion directive for the supplied formatter
-     * name and qname.
+     * name and name.
      */
-    void add(const tack::qname& qn, const std::string& formatter_name);
+    void add(const tack::name& n, const std::string& formatter_name);
 
     /**
      * @brief Adds the inclusion directives for the supplied
-     * formatter name, for each of the supplied qnames.
+     * formatter name, for each of the supplied names.
      */
-    void add(const std::list<tack::qname>& qn,
+    void add(const std::list<tack::name>& names,
         const std::string& formatter_name);
 
     /**
-     * @brief Adds the inclusion directives for all qnames in the
+     * @brief Adds the inclusion directives for all names in the
      * relationships if any exist.
      */
     void add(const tack::object& o, const tack::relationship_types rt,

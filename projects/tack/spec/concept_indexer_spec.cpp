@@ -23,7 +23,7 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
@@ -156,19 +156,19 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
 
         i = o.relationships().find(par);
         BOOST_REQUIRE(i == o.relationships().end());
@@ -176,16 +176,16 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 
     BOOST_REQUIRE(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
-        else if (factory.is_concept_name_n(1, qn)) {
+        else if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     dogen::tack::concept_indexer ind;
@@ -193,31 +193,31 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
 
-        if (factory.is_type_name_n(0, qn))
+        if (factory.is_type_name_n(0, n))
             BOOST_CHECK(i->second.size() == 1);
-        else if (factory.is_type_name_n(1, qn)) {
+        else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(i->second.size() == 2);
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 }
 
@@ -232,22 +232,22 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
-        } else if (factory.is_type_name_n(2, qn)) {
+        } else if (factory.is_type_name_n(2, n)) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(2, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
 
         i = o.relationships().find(par);
         BOOST_REQUIRE(i == o.relationships().end());
@@ -255,19 +255,19 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.concepts().size() == 3);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
-        else if (factory.is_concept_name_n(1, qn)) {
+        else if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     dogen::tack::concept_indexer ind;
@@ -275,35 +275,35 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_CHECK(c.refines().size() == 2);
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
 
-        if (factory.is_type_name_n(0, qn))
+        if (factory.is_type_name_n(0, n))
             BOOST_CHECK(i->second.size() == 1);
-        else if (factory.is_type_name_n(1, qn)) {
+        else if (factory.is_type_name_n(1, n)) {
             BOOST_CHECK(i->second.size() == 2);
-        } else if (factory.is_type_name_n(2, qn)) {
+        } else if (factory.is_type_name_n(2, n)) {
                 BOOST_CHECK(i->second.size() == 3);
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 }
 
@@ -318,10 +318,10 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     const auto par(relationship_types::parents);
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& qn(m.objects().begin()->first);
+        const auto& n(m.objects().begin()->first);
         const auto& o(m.objects().begin()->second);
 
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
 
             auto i(o.relationships().find(mc));
             BOOST_REQUIRE(i != o.relationships().end());
@@ -331,23 +331,23 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             i = o.relationships().find(par);
             BOOST_REQUIRE(i == o.relationships().end());
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
-        else if (factory.is_concept_name_n(1, qn)) {
+        else if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-        } else if (factory.is_concept_name_n(3, qn)) {
+        } else if (factory.is_concept_name_n(3, n)) {
             BOOST_REQUIRE(c.refines().size() == 2);
             BOOST_REQUIRE(
                 factory.is_concept_name_n(1, c.refines().front()) ||
@@ -356,7 +356,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
                 factory.is_concept_name_n(1, c.refines().back()) ||
                 factory.is_concept_name_n(2, c.refines().back()));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     dogen::tack::concept_indexer ind;
@@ -364,41 +364,41 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-        } else if (factory.is_concept_name_n(2, qn)) {
+        } else if (factory.is_concept_name_n(2, n)) {
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
-        } else if (factory.is_concept_name_n(3, qn)) {
+        } else if (factory.is_concept_name_n(3, n)) {
             BOOST_CHECK(c.refines().size() == 3);
             bool found_zero(false), found_one(false), found_two(false);
-            for (const auto& qn : c.refines()) {
-                found_zero = found_zero || factory.is_concept_name_n(0, qn);
-                found_one = found_one || factory.is_concept_name_n(1, qn);
-                found_two = found_two || factory.is_concept_name_n(2, qn);
+            for (const auto& n : c.refines()) {
+                found_zero = found_zero || factory.is_concept_name_n(0, n);
+                found_one = found_one || factory.is_concept_name_n(1, n);
+                found_two = found_two || factory.is_concept_name_n(2, n);
             }
             BOOST_CHECK(found_zero);
             BOOST_CHECK(found_one);
             BOOST_CHECK(found_two);
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& qn(m.objects().begin()->first);
+        const auto& n(m.objects().begin()->first);
         const auto& o(m.objects().begin()->second);
 
         const auto i(o.relationships().find(mc));
         BOOST_REQUIRE(i != o.relationships().end());
 
-        BOOST_CHECK(factory.is_type_name_n(0, qn));
+        BOOST_CHECK(factory.is_type_name_n(0, n));
         BOOST_CHECK(i->second.size() == 4);
     }
 }
@@ -444,13 +444,13 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_REQUIRE(a.concepts().size() == 1);
     for (const auto& pair : a.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
         else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     using dogen::tack::relationship_types;
@@ -459,15 +459,15 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_REQUIRE(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i == o.relationships().end());
 
             i = o.relationships().find(par);
@@ -475,7 +475,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     dogen::tack::concept_indexer ind;
@@ -492,16 +492,16 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
-        else if (factory.is_concept_name_n(1, qn)) {
+        else if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     using dogen::tack::relationship_types;
@@ -510,15 +510,15 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i == o.relationships().end());
 
             i = o.relationships().find(par);
@@ -526,7 +526,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     dogen::tack::concept_indexer ind;
@@ -535,25 +535,25 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& c(pair.second);
 
-        if (factory.is_concept_name_n(0, qn)) {
+        if (factory.is_concept_name_n(0, n)) {
             BOOST_CHECK(c.refines().empty());
-        } else if (factory.is_concept_name_n(1, qn)) {
+        } else if (factory.is_concept_name_n(1, n)) {
             BOOST_CHECK(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& qn(pair.first);
+        const auto& n(pair.first);
         const auto& o(pair.second);
 
         auto i(o.relationships().find(mc));
-        if (factory.is_type_name_n(0, qn)) {
+        if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(i->second.size() == 2);
             BOOST_REQUIRE(
                 factory.is_concept_name_n(0, i->second.front()) ||
@@ -561,7 +561,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(
                 factory.is_concept_name_n(0, i->second.back()) ||
                 factory.is_concept_name_n(1, i->second.back()));
-        } else if (factory.is_type_name_n(1, qn)) {
+        } else if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i == o.relationships().end());
 
             i = o.relationships().find(par);
@@ -569,7 +569,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 }
 
@@ -580,14 +580,14 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     BOOST_REQUIRE(m.objects().empty());
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
-        const auto& qn(m.concepts().begin()->first);
+        const auto& n(m.concepts().begin()->first);
         const auto& c(m.concepts().begin()->second);
 
-        if (factory.is_concept_name_n(1, qn)) {
+        if (factory.is_concept_name_n(1, n)) {
             BOOST_REQUIRE(c.refines().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
@@ -605,9 +605,9 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     BOOST_REQUIRE(m.concepts().empty());
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& qn(m.objects().begin()->first);
-        if (!factory.is_type_name_n(0, qn))
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+        const auto& n(m.objects().begin()->first);
+        if (!factory.is_type_name_n(0, n))
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
 
         const auto& o(m.objects().begin()->second);
         using dogen::tack::relationship_types;
@@ -633,25 +633,25 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     auto m(factory.make_object_that_models_concept_with_missing_parent());
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
-        const auto& qn(m.concepts().begin()->first);
+        const auto& n(m.concepts().begin()->first);
         const auto& c(m.concepts().begin()->second);
 
-        if (factory.is_concept_name_n(0, qn))
+        if (factory.is_concept_name_n(0, n))
             BOOST_REQUIRE(c.refines().empty());
         else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& qn(m.objects().begin()->first);
+        const auto& n(m.objects().begin()->first);
         const auto& o(m.objects().begin()->second);
 
         using dogen::tack::relationship_types;
         const auto mc(relationship_types::modeled_concepts);
 
         auto i(o.relationships().find(mc));
-        if (factory.is_type_name_n(1, qn)) {
+        if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(i != o.relationships().end());
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, i->second.front()));
@@ -662,7 +662,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
             BOOST_REQUIRE(i->second.size() == 1);
             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
         } else
-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
+            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
     }
 
     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;

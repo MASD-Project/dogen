@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
 #include "dogen/tack/io/origin_types_io.hpp"
 #include "dogen/tack/io/generation_types_io.hpp"

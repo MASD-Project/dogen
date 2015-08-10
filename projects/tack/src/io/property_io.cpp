@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

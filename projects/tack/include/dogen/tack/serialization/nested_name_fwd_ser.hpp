@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_IO_NESTED_QNAME_IO_HPP
-#define DOGEN_TACK_IO_NESTED_QNAME_IO_HPP
+#ifndef DOGEN_TACK_SERIALIZATION_NESTED_NAME_FWD_SER_HPP
+#define DOGEN_TACK_SERIALIZATION_NESTED_NAME_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name_fwd.hpp"
 
-namespace dogen {
-namespace tack {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::tack::nested_qname& v);
+template<class Archive>
+void save(Archive& ar, const dogen::tack::nested_name& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::tack::nested_name& v, unsigned int version);
 
 } }
 

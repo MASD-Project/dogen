@@ -30,10 +30,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/types/property.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/types/origin_types.hpp"
 #include "dogen/tack/types/generation_types.hpp"
 #include "dogen/tack/serialization/concept_fwd_ser.hpp"
@@ -59,14 +59,14 @@ public:
     concept(
         const std::list<dogen::tack::property>& all_properties,
         const std::list<dogen::tack::property>& local_properties,
-        const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties,
+        const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties,
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const dogen::tack::qname& name,
+        const dogen::tack::name& name,
         const dogen::tack::generation_types generation_type,
         const dogen::tack::origin_types origin_type,
-        const boost::optional<dogen::tack::qname>& containing_module,
-        const std::list<dogen::tack::qname>& refines,
+        const boost::optional<dogen::tack::name>& containing_module,
+        const std::list<dogen::tack::name>& refines,
         const bool is_parent,
         const bool is_child);
 
@@ -111,10 +111,10 @@ public:
      * @brief The set of all properies obtained via inheritance, by parent name.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties() const;
-    std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties();
-    void inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v);
-    void inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >&& v);
+    const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties() const;
+    std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties();
+    void inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v);
+    void inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >&& v);
     /**@}*/
 
     /**
@@ -146,10 +146,10 @@ public:
      *
      */
     /**@{*/
-    const dogen::tack::qname& name() const;
-    dogen::tack::qname& name();
-    void name(const dogen::tack::qname& v);
-    void name(const dogen::tack::qname&& v);
+    const dogen::tack::name& name() const;
+    dogen::tack::name& name();
+    void name(const dogen::tack::name& v);
+    void name(const dogen::tack::name&& v);
     /**@}*/
 
     /**
@@ -172,20 +172,20 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const boost::optional<dogen::tack::qname>& containing_module() const;
-    boost::optional<dogen::tack::qname>& containing_module();
-    void containing_module(const boost::optional<dogen::tack::qname>& v);
-    void containing_module(const boost::optional<dogen::tack::qname>&& v);
+    const boost::optional<dogen::tack::name>& containing_module() const;
+    boost::optional<dogen::tack::name>& containing_module();
+    void containing_module(const boost::optional<dogen::tack::name>& v);
+    void containing_module(const boost::optional<dogen::tack::name>&& v);
     /**@}*/
 
     /**
      * @brief List of concepts that this concept is a refinement of.
      */
     /**@{*/
-    const std::list<dogen::tack::qname>& refines() const;
-    std::list<dogen::tack::qname>& refines();
-    void refines(const std::list<dogen::tack::qname>& v);
-    void refines(const std::list<dogen::tack::qname>&& v);
+    const std::list<dogen::tack::name>& refines() const;
+    std::list<dogen::tack::name>& refines();
+    void refines(const std::list<dogen::tack::name>& v);
+    void refines(const std::list<dogen::tack::name>&& v);
     /**@}*/
 
     /**
@@ -217,14 +217,14 @@ public:
 private:
     std::list<dogen::tack::property> all_properties_;
     std::list<dogen::tack::property> local_properties_;
-    std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> > inherited_properties_;
+    std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> > inherited_properties_;
     std::string documentation_;
     dogen::dynamic::object extensions_;
-    dogen::tack::qname name_;
+    dogen::tack::name name_;
     dogen::tack::generation_types generation_type_;
     dogen::tack::origin_types origin_type_;
-    boost::optional<dogen::tack::qname> containing_module_;
-    std::list<dogen::tack::qname> refines_;
+    boost::optional<dogen::tack::name> containing_module_;
+    std::list<dogen::tack::name> refines_;
     bool is_parent_;
     bool is_child_;
 };

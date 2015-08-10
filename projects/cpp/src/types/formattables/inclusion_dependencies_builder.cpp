@@ -44,7 +44,7 @@ const std::string date_type("date");
 const std::string ptime_type("ptime");
 
 const std::string empty_directive("Cannot add empty include directive.");
-const std::string qname_not_found("Cannot find qname: ");
+const std::string name_not_found("Cannot find name: ");
 const std::string formatter_name_not_found("Cannot find formatter name: ");
 
 }
@@ -65,12 +65,12 @@ inclusion_dependencies_builder(const enablement_repository& erp,
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
-    const tack::qname& qn,
+    const tack::name& n,
     const std::string& formatter_name) const {
 
-    const auto& idqn(directives_repository_.inclusion_directives_by_qname());
-    const auto i(idqn.find(qn));
-    if (i == idqn.end())
+    const auto& idn(directives_repository_.inclusion_directives_by_name());
+    const auto i(idn.find(n));
+    if (i == idn.end())
         return boost::optional<std::string>();
 
     const auto j(i->second.find(formatter_name));
@@ -89,8 +89,8 @@ inclusion_dependencies_builder::make_special_includes(
             if (i == o.relationships().end())
                 return;
 
-            for (const auto& qn : i->second) {
-                const auto sn(qn.simple_name());
+            for (const auto& n : i->second) {
+                const auto sn(n.simple_name());
                 if (sn == bool_type || sn == double_type || sn == float_type)
                     r.requires_stream_manipulators = true;
                 else if (sn == string_type)
@@ -117,15 +117,15 @@ inclusion_dependencies_builder::make_special_includes(
     return r;
 }
 
-bool inclusion_dependencies_builder::is_enabled(const tack::qname& qn,
+bool inclusion_dependencies_builder::is_enabled(const tack::name& n,
     const std::string& formatter_name) const {
 
-    const auto& eqn(enablement_repository_.enablement_by_qname());
-    const auto i(eqn.find(qn));
-    if (i == eqn.end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
+    const auto& en(enablement_repository_.enablement_by_name());
+    const auto i(en.find(n));
+    if (i == en.end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
     }
 
     const auto j(i->second.find(formatter_name));
@@ -139,7 +139,7 @@ bool inclusion_dependencies_builder::is_enabled(const tack::qname& qn,
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Formatter disabled. Formatter: "
                                  << formatter_name << " on type: "
-                                 << tack::string_converter::convert(qn) << "'";
+                                 << tack::string_converter::convert(n) << "'";
     }
     return r;
 }
@@ -164,13 +164,13 @@ bool inclusion_dependencies_builder::is_integrated(
 }
 
 settings::aspect_settings inclusion_dependencies_builder::
-get_aspect_settings(const tack::qname& qn) const {
-    const auto& bqn(bundle_repository_.bundles_by_qname());
-    const auto i(bqn.find(qn));
-    if (i == bqn.end()) {
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << qname_not_found << n;
-        BOOST_THROW_EXCEPTION(building_error(qname_not_found + n));
+get_aspect_settings(const tack::name& n) const {
+    const auto& bn(bundle_repository_.bundles_by_name());
+    const auto i(bn.find(n));
+    if (i == bn.end()) {
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << name_not_found << sn;
+        BOOST_THROW_EXCEPTION(building_error(name_not_found + sn));
     }
     return i->second.aspect_settings();
 }
@@ -185,18 +185,18 @@ add(const std::string& inclusion_directive) {
 }
 
 void inclusion_dependencies_builder::
-add(const tack::qname& qn, const std::string& formatter_name) {
-    if (!is_enabled(qn, formatter_name))
+add(const tack::name& n, const std::string& formatter_name) {
+    if (!is_enabled(n, formatter_name))
         return;
 
-    const auto id(get_inclusion_directive(qn, formatter_name));
+    const auto id(get_inclusion_directive(n, formatter_name));
     if (id)
         add(*id);
 }
 
 void inclusion_dependencies_builder::
-add(const std::list<tack::qname>& qn, const std::string& formatter_name) {
-    for (const auto& n : qn)
+add(const std::list<tack::name>& names, const std::string& formatter_name) {
+    for (const auto& n : names)
         add(n, formatter_name);
 }
 

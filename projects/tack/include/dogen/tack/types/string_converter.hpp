@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 
 namespace dogen {
 namespace tack {
@@ -37,7 +37,7 @@ namespace tack {
  */
 class string_converter {
 public:
-    static std::string convert(const qname& qn);
+    static std::string convert(const name& n);
 };
 
 } }

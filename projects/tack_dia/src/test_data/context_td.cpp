@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/model_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack_dia/test_data/context_td.hpp"
 
 namespace {
@@ -55,15 +55,15 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::tack::qname> create_std_unordered_map_std_string_dogen_tack_qname(unsigned int position) {
-    std::unordered_map<std::string, dogen::tack::qname> r;
+std::unordered_map<std::string, dogen::tack::name> create_std_unordered_map_std_string_dogen_tack_name(unsigned int position) {
+    std::unordered_map<std::string, dogen::tack::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_tack_qname(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_tack_name(position + i)));
     }
     return r;
 }
@@ -84,7 +84,7 @@ void context_generator::
 populate(const unsigned int position, result_type& v) {
     v.child_id_to_parent_ids(create_std_unordered_map_std_string_std_list_std_string_(position + 0));
     v.parent_ids(create_std_unordered_set_std_string(position + 1));
-    v.id_to_qname(create_std_unordered_map_std_string_dogen_tack_qname(position + 2));
+    v.id_to_name(create_std_unordered_map_std_string_dogen_tack_name(position + 2));
     v.top_level_module_names(create_std_unordered_set_std_string(position + 3));
     v.model(create_dogen_tack_model(position + 4));
 }

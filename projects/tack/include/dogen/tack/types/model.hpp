@@ -30,12 +30,12 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/module.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/concept.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/dynamic/types/object.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/types/primitive.hpp"
 #include "dogen/tack/types/enumeration.hpp"
 #include "dogen/tack/types/origin_types.hpp"
@@ -85,17 +85,17 @@ public:
     model(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const dogen::tack::qname& name,
+        const dogen::tack::name& name,
         const dogen::tack::generation_types generation_type,
         const dogen::tack::origin_types origin_type,
-        const boost::optional<dogen::tack::qname>& containing_module,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& references,
-        const std::unordered_set<dogen::tack::qname>& leaves,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::module>& modules,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& concepts,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& primitives,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& enumerations,
-        const std::unordered_map<dogen::tack::qname, dogen::tack::object>& objects,
+        const boost::optional<dogen::tack::name>& containing_module,
+        const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& references,
+        const std::unordered_set<dogen::tack::name>& leaves,
+        const std::unordered_map<dogen::tack::name, dogen::tack::module>& modules,
+        const std::unordered_map<dogen::tack::name, dogen::tack::concept>& concepts,
+        const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& primitives,
+        const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& enumerations,
+        const std::unordered_map<dogen::tack::name, dogen::tack::object>& objects,
         const bool is_target,
         const bool has_generatable_types);
 
@@ -136,10 +136,10 @@ public:
      *
      */
     /**@{*/
-    const dogen::tack::qname& name() const;
-    dogen::tack::qname& name();
-    void name(const dogen::tack::qname& v);
-    void name(const dogen::tack::qname&& v);
+    const dogen::tack::name& name() const;
+    dogen::tack::name& name();
+    void name(const dogen::tack::name& v);
+    void name(const dogen::tack::name&& v);
     /**@}*/
 
     /**
@@ -162,20 +162,20 @@ public:
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const boost::optional<dogen::tack::qname>& containing_module() const;
-    boost::optional<dogen::tack::qname>& containing_module();
-    void containing_module(const boost::optional<dogen::tack::qname>& v);
-    void containing_module(const boost::optional<dogen::tack::qname>&& v);
+    const boost::optional<dogen::tack::name>& containing_module() const;
+    boost::optional<dogen::tack::name>& containing_module();
+    void containing_module(const boost::optional<dogen::tack::name>& v);
+    void containing_module(const boost::optional<dogen::tack::name>&& v);
     /**@}*/
 
     /**
      * @brief All other models that this model depends on, mapped to their origin.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& references() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& references();
-    void references(const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>& v);
-    void references(const std::unordered_map<dogen::tack::qname, dogen::tack::origin_types>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& references() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& references();
+    void references(const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>& v);
+    void references(const std::unordered_map<dogen::tack::name, dogen::tack::origin_types>&& v);
     /**@}*/
 
     /**
@@ -184,60 +184,60 @@ public:
      * Leaves are types concrete types which have a parent.
      */
     /**@{*/
-    const std::unordered_set<dogen::tack::qname>& leaves() const;
-    std::unordered_set<dogen::tack::qname>& leaves();
-    void leaves(const std::unordered_set<dogen::tack::qname>& v);
-    void leaves(const std::unordered_set<dogen::tack::qname>&& v);
+    const std::unordered_set<dogen::tack::name>& leaves() const;
+    std::unordered_set<dogen::tack::name>& leaves();
+    void leaves(const std::unordered_set<dogen::tack::name>& v);
+    void leaves(const std::unordered_set<dogen::tack::name>&& v);
     /**@}*/
 
     /**
      * @brief Modules contained in the model.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::module>& modules() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::module>& modules();
-    void modules(const std::unordered_map<dogen::tack::qname, dogen::tack::module>& v);
-    void modules(const std::unordered_map<dogen::tack::qname, dogen::tack::module>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::module>& modules() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::module>& modules();
+    void modules(const std::unordered_map<dogen::tack::name, dogen::tack::module>& v);
+    void modules(const std::unordered_map<dogen::tack::name, dogen::tack::module>&& v);
     /**@}*/
 
     /**
      * @brief All the concepts available in this model.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& concepts() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::concept>& concepts();
-    void concepts(const std::unordered_map<dogen::tack::qname, dogen::tack::concept>& v);
-    void concepts(const std::unordered_map<dogen::tack::qname, dogen::tack::concept>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::concept>& concepts() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::concept>& concepts();
+    void concepts(const std::unordered_map<dogen::tack::name, dogen::tack::concept>& v);
+    void concepts(const std::unordered_map<dogen::tack::name, dogen::tack::concept>&& v);
     /**@}*/
 
     /**
      * @brief All primitives contained in this model.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& primitives() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& primitives();
-    void primitives(const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>& v);
-    void primitives(const std::unordered_map<dogen::tack::qname, dogen::tack::primitive>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& primitives() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::primitive>& primitives();
+    void primitives(const std::unordered_map<dogen::tack::name, dogen::tack::primitive>& v);
+    void primitives(const std::unordered_map<dogen::tack::name, dogen::tack::primitive>&& v);
     /**@}*/
 
     /**
      * @brief All enumerations contained in this model.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& enumerations() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& enumerations();
-    void enumerations(const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>& v);
-    void enumerations(const std::unordered_map<dogen::tack::qname, dogen::tack::enumeration>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& enumerations() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& enumerations();
+    void enumerations(const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>& v);
+    void enumerations(const std::unordered_map<dogen::tack::name, dogen::tack::enumeration>&& v);
     /**@}*/
 
     /**
      * @brief All objects contained in this model.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, dogen::tack::object>& objects() const;
-    std::unordered_map<dogen::tack::qname, dogen::tack::object>& objects();
-    void objects(const std::unordered_map<dogen::tack::qname, dogen::tack::object>& v);
-    void objects(const std::unordered_map<dogen::tack::qname, dogen::tack::object>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::tack::object>& objects() const;
+    std::unordered_map<dogen::tack::name, dogen::tack::object>& objects();
+    void objects(const std::unordered_map<dogen::tack::name, dogen::tack::object>& v);
+    void objects(const std::unordered_map<dogen::tack::name, dogen::tack::object>&& v);
     /**@}*/
 
     /**
@@ -269,17 +269,17 @@ public:
 private:
     std::string documentation_;
     dogen::dynamic::object extensions_;
-    dogen::tack::qname name_;
+    dogen::tack::name name_;
     dogen::tack::generation_types generation_type_;
     dogen::tack::origin_types origin_type_;
-    boost::optional<dogen::tack::qname> containing_module_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::origin_types> references_;
-    std::unordered_set<dogen::tack::qname> leaves_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::module> modules_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::concept> concepts_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::primitive> primitives_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::enumeration> enumerations_;
-    std::unordered_map<dogen::tack::qname, dogen::tack::object> objects_;
+    boost::optional<dogen::tack::name> containing_module_;
+    std::unordered_map<dogen::tack::name, dogen::tack::origin_types> references_;
+    std::unordered_set<dogen::tack::name> leaves_;
+    std::unordered_map<dogen::tack::name, dogen::tack::module> modules_;
+    std::unordered_map<dogen::tack::name, dogen::tack::concept> concepts_;
+    std::unordered_map<dogen::tack::name, dogen::tack::primitive> primitives_;
+    std::unordered_map<dogen::tack::name, dogen::tack::enumeration> enumerations_;
+    std::unordered_map<dogen::tack::name, dogen::tack::object> objects_;
     bool is_target_;
     bool has_generatable_types_;
 };

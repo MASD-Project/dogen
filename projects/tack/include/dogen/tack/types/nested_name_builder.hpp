@@ -29,31 +29,30 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/tack/types/node.hpp"
 
 namespace dogen {
 namespace tack {
 
-class nested_qname_builder {
+class nested_name_builder {
 public:
-    nested_qname_builder() = delete;
-    nested_qname_builder(
-        const nested_qname_builder&) = delete;
-    ~nested_qname_builder() = default;
-    nested_qname_builder(nested_qname_builder&&) = delete;
-    nested_qname_builder& operator=(const nested_qname_builder&) = delete;
+    nested_name_builder() = delete;
+    nested_name_builder(const nested_name_builder&) = delete;
+    ~nested_name_builder() = default;
+    nested_name_builder(nested_name_builder&&) = delete;
+    nested_name_builder& operator=(const nested_name_builder&) = delete;
 
 public:
-    nested_qname_builder(
+    nested_name_builder(
         const std::unordered_set<std::string>& modules,
         const std::list<std::string>& external_module_path,
         const std::string& model_name);
 
 private:
     void finish_current_node();
-    void build_node(nested_qname& qn, boost::shared_ptr<node> node);
+    void build_node(nested_name& qn, boost::shared_ptr<node> node);
 
 public:
     void add_name(const std::string& n);
@@ -61,7 +60,7 @@ public:
     void start_children();
     void next_child();
     void end_children();
-    nested_qname build();
+    nested_name build();
 
 private:
     const std::unordered_set<std::string> modules_;

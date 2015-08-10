@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/concept_io.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/dynamic/io/object_io.hpp"
@@ -44,7 +44,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::pr
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -69,7 +69,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tack::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -84,7 +84,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ta
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::qname>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

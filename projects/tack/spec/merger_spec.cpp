@@ -23,8 +23,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/io/model_io.hpp"
 #include "dogen/tack/types/object.hpp"
@@ -67,10 +67,10 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     target.is_target(true);
     const unsigned int n(5);
     for (unsigned int i(1); i < n; ++i) {
-        dogen::tack::qname qn;
-        qn.model_name(factory.model_name(i));
+        dogen::tack::name n;
+        n.model_name(factory.model_name(i));
         const auto ot(dogen::tack::origin_types::unknown);
-        target.references().insert(std::make_pair(qn, ot));
+        target.references().insert(std::make_pair(n, ot));
     }
 
     dogen::tack::merger mg;
@@ -100,9 +100,9 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> object_names;
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
-        const auto& qn(pair.first);
-        object_names.insert(qn.model_name() + "_" + qn.simple_name());
-        model_names.insert(qn.model_name());
+        const auto& n(pair.first);
+        object_names.insert(n.model_name() + "_" + n.simple_name());
+        model_names.insert(n.model_name());
     }
 
     BOOST_REQUIRE(object_names.size() == n);

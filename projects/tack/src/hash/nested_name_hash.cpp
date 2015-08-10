@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tack/hash/qname_hash.hpp"
-#include "dogen/tack/hash/nested_qname_hash.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
+#include "dogen/tack/hash/nested_name_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_tack_nested_qname(const std::list<dogen::tack::nested_qname>& v) {
+inline std::size_t hash_std_list_dogen_tack_nested_name(const std::list<dogen::tack::nested_name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -42,11 +42,11 @@ inline std::size_t hash_std_list_dogen_tack_nested_qname(const std::list<dogen::
 namespace dogen {
 namespace tack {
 
-std::size_t nested_qname_hasher::hash(const nested_qname& v) {
+std::size_t nested_name_hasher::hash(const nested_name& v) {
     std::size_t seed(0);
 
     combine(seed, v.type());
-    combine(seed, hash_std_list_dogen_tack_nested_qname(v.children()));
+    combine(seed, hash_std_list_dogen_tack_nested_name(v.children()));
     combine(seed, v.is_pointer());
 
     return seed;

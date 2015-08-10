@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/node_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
 #include "dogen/tack/io/model_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/io/module_io.hpp"
 #include "dogen/tack/io/object_io.hpp"
 #include "dogen/tack/io/concept_io.hpp"
@@ -36,7 +36,7 @@
 #include "dogen/tack/io/primitive_io.hpp"
 #include "dogen/tack/io/enumerator_io.hpp"
 #include "dogen/tack/io/enumeration_io.hpp"
-#include "dogen/tack/io/nested_qname_io.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
 #include "dogen/tack/io/object_types_io.hpp"
 #include "dogen/tack/io/origin_types_io.hpp"
 #include "dogen/tack/io/generation_types_io.hpp"

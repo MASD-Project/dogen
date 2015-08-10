@@ -79,14 +79,14 @@ private:
      * @pre leaves must not be empty.
      */
     object create_visitor(const object& o,
-        const std::list<qname>& leaves) const;
+        const std::list<name>& leaves) const;
 
     /**
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    void inject_visited_by(object& root, const std::list<qname>& leaves,
-        const qname& visitor) const;
+    void inject_visited_by(object& root, const std::list<name>& leaves,
+        const name& visitor) const;
 
     /**
      * @brief Injects visitors for objects that require them.

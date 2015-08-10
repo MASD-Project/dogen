@@ -54,7 +54,7 @@ const std::string visitor_doc("Visitor for ");
 const std::string visit_operation_doc("Accept visits for type ");
 const std::string global_module_doc("Module that represents the global scope.");
 const std::string empty_identity("Identity must have at least one attribute: ");
-const std::string duplicate_qname(
+const std::string duplicate_name(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
 const std::string leaf_not_found("Could not find leaf object: ");
@@ -68,11 +68,11 @@ namespace tack {
 
 template<typename AssociativeContainerOfContainable>
 inline void add_containing_module_to_non_contained_entities(
-    const qname& container_qn, AssociativeContainerOfContainable& c) {
+    const name& container_name, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
         if (!s.containing_module())
-            s.containing_module(container_qn);
+            s.containing_module(container_name);
     }
 }
 
@@ -95,18 +95,18 @@ bool injector::insert(const object& o) {
 }
 
 object injector::
-create_visitor(const object& o, const std::list<qname>& leaves) const {
-    qname qn;
-    qn.simple_name(o.name().simple_name() + "_" + visitor_name);
-    qn.model_name(o.name().model_name());
-    qn.module_path(o.name().module_path());
-    qn.external_module_path(o.name().external_module_path());
+create_visitor(const object& o, const std::list<name>& leaves) const {
+    name n;
+    n.simple_name(o.name().simple_name() + "_" + visitor_name);
+    n.model_name(o.name().model_name());
+    n.module_path(o.name().module_path());
+    n.external_module_path(o.name().external_module_path());
 
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: "
-                             << string_converter::convert(qn);
+                             << string_converter::convert(n);
 
     object r;
-    r.name(qn);
+    r.name(n);
     r.is_final(true);
     r.generation_type(o.generation_type());
     r.origin_type(origin_types::system);
@@ -117,12 +117,12 @@ create_visitor(const object& o, const std::list<qname>& leaves) const {
         r.relationships()[relationship_types::visits].push_back(l);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: "
-                             << string_converter::convert(qn);
+                             << string_converter::convert(n);
     return r;
 }
 
-void injector::inject_visited_by(object& root, const std::list<qname>& leaves,
-    const qname& visitor) const {
+void injector::inject_visited_by(object& root, const std::list<name>& leaves,
+    const name& visitor) const {
 
     root.relationships()[relationship_types::visited_by].push_back(visitor);
 
@@ -170,8 +170,8 @@ void injector::inject_visitors() {
 
         if (!insert(v)) {
             const auto n(string_converter::convert(v.name()));
-            BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-            BOOST_THROW_EXCEPTION(injection_error(duplicate_qname + n));
+            BOOST_LOG_SEV(lg, error) << duplicate_name << n;
+            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + n));
         }
     }
 
@@ -179,7 +179,7 @@ void injector::inject_visitors() {
 }
 
 void injector::inject_global_module() {
-    qname qn;
+    name qn;
 
     auto& model(context_->model());
     const auto i(model.modules().find(qn));

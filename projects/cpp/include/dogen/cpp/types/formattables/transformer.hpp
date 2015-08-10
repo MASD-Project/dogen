@@ -30,15 +30,15 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/types/model.hpp"
 #include "dogen/tack/types/module.hpp"
 #include "dogen/tack/types/concept.hpp"
 #include "dogen/tack/types/object.hpp"
 #include "dogen/tack/types/primitive.hpp"
 #include "dogen/tack/types/enumeration.hpp"
-#include "dogen/tack/types/nested_qname.hpp"
+#include "dogen/tack/types/nested_name.hpp"
 #include "dogen/cpp/types/formattables/entity.hpp"
 #include "dogen/cpp/types/formattables/formattable.hpp"
 #include "dogen/cpp/types/formattables/class_info.hpp"
@@ -72,19 +72,19 @@ private:
      * @brief Populates all properties at the formattables base class level.
      */
     void
-    populate_formattable_properties(const tack::qname& qn, formattable& f) const;
+    populate_formattable_properties(const tack::name& n, formattable& f) const;
 
     /**
      * @brief Populates all properties at the entity base class level.
      */
-    void populate_entity_properties(const tack::qname& qn,
+    void populate_entity_properties(const tack::name& n,
         const std::string& documentation, entity& e) const;
 
 private:
     /**
-     * @brief Transforms the Tack nested qname into a nested type info.
+     * @brief Transforms the Tack nested name into a nested type info.
      */
-    void to_nested_type_info(const tack::nested_qname& nqn,
+    void to_nested_type_info(const tack::nested_name& nn,
         nested_type_info& nti, std::string& complete_name,
         bool& requires_stream_manipulators) const;
 

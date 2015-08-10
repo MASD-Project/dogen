@@ -23,7 +23,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/types/string_converter.hpp"
 #include "dogen/tack/types/all_model_items_traversal.hpp"
 #include "dogen/cpp/types/formattables/building_error.hpp"
@@ -39,7 +39,7 @@ static logger lg(logger_factory(
         "cpp.formattables.inclusion_directives_repository_factory"));
 
 const std::string registrar_name("registrar");
-const std::string duplicate_qname("Duplicate qname: ");
+const std::string duplicate_name("Duplicate name: ");
 
 }
 
@@ -57,19 +57,19 @@ public:
     generator(const inclusion_directives_factory& f) : factory_(f) { }
 
 public:
-    void generate(const dynamic::object& o, const tack::qname& qn) {
-        const auto id(factory_.make(o, qn));
+    void generate(const dynamic::object& o, const tack::name& n) {
+        const auto id(factory_.make(o, n));
         if (!id)
             return;
 
-        auto& id_qn(result_.inclusion_directives_by_qname());
-        const auto pair(id_qn.insert(std::make_pair(qn, *id)));
+        auto& id_n(result_.inclusion_directives_by_name());
+        const auto pair(id_n.insert(std::make_pair(n, *id)));
         if (pair.second)
             return;
 
-        const auto n(tack::string_converter::convert(qn));
-        BOOST_LOG_SEV(lg, error) << duplicate_qname << n;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_qname + n));
+        const auto sn(tack::string_converter::convert(n));
+        BOOST_LOG_SEV(lg, error) << duplicate_name << sn;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_name + sn));
     }
 
 private:
@@ -111,12 +111,12 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
     generator g(f);
     tack::all_model_items_traversal(m, g);
 
-    tack::qname qn;
-    qn.simple_name(registrar_name);
-    qn.model_name(m.name().model_name());
-    qn.external_module_path(m.name().external_module_path());
+    tack::name n;
+    n.simple_name(registrar_name);
+    n.model_name(m.name().model_name());
+    n.external_module_path(m.name().external_module_path());
     const auto o = dynamic::object();
-    g.generate(o, qn);
+    g.generate(o, n);
 
     for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
@@ -124,7 +124,7 @@ inclusion_directives_repository inclusion_directives_repository_factory::make(
             continue;
 
         const auto ref(pair.first);
-        tack::qname n;
+        tack::name n;
         n.model_name(ref.model_name());
         n.simple_name(registrar_name);
         n.external_module_path(ref.external_module_path());

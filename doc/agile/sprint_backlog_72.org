@@ -14,15 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
-#+CAPTION: Clock summary at [2015-08-10 Mon 15:03]
+#+CAPTION: Clock summary at [2015-08-10 Mon 16:45]
 | <75>                                                                        |        |      |      |
 | Headline                                                                    | Time   |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| *Total time*                                                                | *0:18* |      |      |
+| *Total time*                                                                | *1:57* |      |      |
 |-----------------------------------------------------------------------------+--------+------+------|
-| Stories                                                                     | 0:18   |      |      |
-| Active                                                                      |        | 0:18 |      |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:18 |
+| Stories                                                                     | 1:57   |      |      |
+| Active                                                                      |        | 1:57 |      |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |
+| STARTED Refactor qname                                                      |        |      | 1:33 |
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
@@ -31,7 +32,9 @@
 
 Updates to sprint and product backlog.
 
-*** Refactor qname                                                    :story:
+*** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-10 Mon 16:43]--[2015-08-10 Mon 16:45] =>  0:02
+    CLOCK: [2015-08-10 Mon 15:11]--[2015-08-10 Mon 16:42] =>  1:31
 
 Split qname into name and location; location is made up of model name,
 external module path, model path, internal module path.
@@ -75,6 +78,15 @@ model name such as:
 
 See comment in 'dot' story - we can have a model name and a model
 package.
+
+*** Add =operator<= for names                                         :story:
+
+We seem to redefine this all over the place. Create a utility class
+somewhere.
+
+*** Services and leaves are not properly handled                      :story:
+
+We are manually ignoring services when calculating leaves.
 
 *** Add support for model names with dots                             :story:
 
@@ -172,6 +184,13 @@ knitting - but some do. We need a way to filter these. One possibility
 is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
+
+*** Identifier parser has hard-coded primitives                       :story:
+
+Instead of using the hardware model, we have hard-coded all of the
+primitives. In addition, there are some primitives which are C++
+specific (=wchar_t=), as well as others which are only valid in
+certain cases such as =void=. This needs a bit of thinking.
 
 *** Split formatter properties and associated classes from formattables :story:
 

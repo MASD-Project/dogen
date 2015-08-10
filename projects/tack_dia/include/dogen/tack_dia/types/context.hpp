@@ -30,8 +30,8 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/model.hpp"
-#include "dogen/tack/types/qname.hpp"
 #include "dogen/tack_dia/serialization/context_fwd_ser.hpp"
 
 namespace dogen {
@@ -51,7 +51,7 @@ public:
     context(
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
         const std::unordered_set<std::string>& parent_ids,
-        const std::unordered_map<std::string, dogen::tack::qname>& id_to_qname,
+        const std::unordered_map<std::string, dogen::tack::name>& id_to_name,
         const std::unordered_set<std::string>& top_level_module_names,
         const dogen::tack::model& model);
 
@@ -84,13 +84,13 @@ public:
     /**@}*/
 
     /**
-     * @brief The QName corresponding to a dia object ID.
+     * @brief The name corresponding to a dia object ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::tack::qname>& id_to_qname() const;
-    std::unordered_map<std::string, dogen::tack::qname>& id_to_qname();
-    void id_to_qname(const std::unordered_map<std::string, dogen::tack::qname>& v);
-    void id_to_qname(const std::unordered_map<std::string, dogen::tack::qname>&& v);
+    const std::unordered_map<std::string, dogen::tack::name>& id_to_name() const;
+    std::unordered_map<std::string, dogen::tack::name>& id_to_name();
+    void id_to_name(const std::unordered_map<std::string, dogen::tack::name>& v);
+    void id_to_name(const std::unordered_map<std::string, dogen::tack::name>&& v);
     /**@}*/
 
     /**
@@ -126,7 +126,7 @@ public:
 private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
     std::unordered_set<std::string> parent_ids_;
-    std::unordered_map<std::string, dogen::tack::qname> id_to_qname_;
+    std::unordered_map<std::string, dogen::tack::name> id_to_name_;
     std::unordered_set<std::string> top_level_module_names_;
     dogen::tack::model model_;
 };

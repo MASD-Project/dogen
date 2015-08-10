@@ -88,7 +88,7 @@ create_integrated_facets_repository(const dynamic::repository& srp,
 }
 
 std::unordered_map<
-    tack::qname,
+    tack::name,
     formatter_properties_repository_factory::merged_formatter_data
     >
 formatter_properties_repository_factory::merge(
@@ -96,14 +96,14 @@ formatter_properties_repository_factory::merge(
     const inclusion_dependencies_repository& idrp,
     const enablement_repository& erp) const {
 
-    std::unordered_map<tack::qname, merged_formatter_data> r;
-    for (const auto& pair : pdrp.path_derivatives_by_qname())
+    std::unordered_map<tack::name, merged_formatter_data> r;
+    for (const auto& pair : pdrp.path_derivatives_by_name())
         r[pair.first].path_derivatives_ = pair.second;
 
-    for (const auto& pair : idrp.inclusion_dependencies_by_qname())
+    for (const auto& pair : idrp.inclusion_dependencies_by_name())
         r[pair.first].inclusion_dependencies = pair.second;
 
-    for (const auto& pair : erp.enablement_by_qname())
+    for (const auto& pair : erp.enablement_by_name())
         r[pair.first].enablement = pair.second;
 
     return r;
@@ -111,13 +111,13 @@ formatter_properties_repository_factory::merge(
 
 formatter_properties_repository formatter_properties_repository_factory::
 create_formatter_properties(
-    const std::unordered_map<tack::qname, merged_formatter_data>& mfd,
+    const std::unordered_map<tack::name, merged_formatter_data>& mfd,
     const integrated_facets_repository& ifrp) const {
 
     formatter_properties_repository r;
     formatter_properties_factory f;
     for (const auto& pair : mfd) {
-        r.formatter_properties_by_qname()[pair.first] = f.make(
+        r.formatter_properties_by_name()[pair.first] = f.make(
             pair.second.path_derivatives_,
             pair.second.inclusion_dependencies,
             pair.second.enablement,

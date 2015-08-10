@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include "dogen/dynamic/types/object.hpp"
 #include "dogen/dynamic/types/repository.hpp"
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/types/name.hpp"
 #include "dogen/cpp/types/settings/inclusion_directives_settings.hpp"
 #include "dogen/cpp/types/formatters/container.hpp"
 #include "dogen/cpp/types/formattables/path_derivatives_repository.hpp"
@@ -50,10 +50,10 @@ public:
 
 private:
     /**
-     * @brief Get the path derivatives for supplied qname.
+     * @brief Get the path derivatives for supplied name.
      */
     std::unordered_map<std::string, formattables::path_derivatives>
-    path_derivatives_for_qname(const tack::qname& qn) const;
+    path_derivatives_for_name(const tack::name& n) const;
 
     /**
      * @brief Get the path derivatives for supplied formatter name.
@@ -94,7 +94,7 @@ public:
      * @brief Create the inclusion directives for a given Tack entity.
      */
     boost::optional<std::unordered_map<std::string, std::string> >
-    make(const dynamic::object& o, const tack::qname& qn) const;
+    make(const dynamic::object& o, const tack::name& n) const;
 
 private:
     const dynamic::repository& dynamic_repository_;

@@ -55,34 +55,34 @@ path_derivatives_factory::path_derivatives_factory(
 
 boost::filesystem::path path_derivatives_factory::
 make_inclusion_path(const settings::path_settings& ps,
-    const tack::qname& qn) const {
+    const tack::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion path for: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
 
     boost::filesystem::path r;
 
     if (ps.file_type() == formatters::file_types::cpp_header) {
-        for(auto n : qn.external_module_path())
+        for(auto n : n.external_module_path())
             r /= n;
-        r /= qn.model_name();
+        r /= n.model_name();
     }
 
     if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
-    for(auto n : qn.module_path())
+    for(auto n : n.module_path())
         r /= n;
 
     // modules other than the model module contribute their simple
     // names to the directories.
-    if (qn != model_.name()) {
-        const auto i(model_.modules().find(qn));
+    if (n != model_.name()) {
+        const auto i(model_.modules().find(n));
         if (i != model_.modules().end())
-            r /= qn.simple_name();
+            r /= n.simple_name();
     }
 
     std::ostringstream stream;
-    stream << qn.simple_name();
+    stream << n.simple_name();
 
     if (!ps.formatter_postfix().empty())
         stream << underscore << ps.formatter_postfix();
@@ -104,21 +104,21 @@ make_inclusion_path(const settings::path_settings& ps,
 boost::filesystem::path path_derivatives_factory::
 make_file_path(const settings::path_settings& ps,
     const boost::filesystem::path& inclusion_path,
-    const tack::qname& qn) const {
+    const tack::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating file path for: "
-                             << tack::string_converter::convert(qn);
+                             << tack::string_converter::convert(n);
 
     boost::filesystem::path r;
 
     const auto ft(ps.file_type());
     switch (ft) {
     case formatters::file_types::cpp_header:
-        r = options_.project_directory_path() / qn.model_name();
+        r = options_.project_directory_path() / n.model_name();
         r /= ps.include_directory_name();
         break;
 
     case formatters::file_types::cpp_implementation:
-        r = options_.project_directory_path() / qn.model_name();
+        r = options_.project_directory_path() / n.model_name();
         r /= ps.source_directory_name();
         break;
 
@@ -156,7 +156,7 @@ to_header_guard_name(const boost::filesystem::path& p) const {
 }
 
 std::unordered_map<std::string, path_derivatives>
-path_derivatives_factory::make(const tack::qname& qn) const {
+path_derivatives_factory::make(const tack::name& n) const {
     std::unordered_map<std::string, path_derivatives> r;
 
     for (const auto& pair : path_settings_) {
@@ -166,10 +166,10 @@ path_derivatives_factory::make(const tack::qname& qn) const {
         }
 
         const auto& s(pair.second);
-        const auto inclusion_path(make_inclusion_path(s, qn));
+        const auto inclusion_path(make_inclusion_path(s, n));
 
         path_derivatives pd;
-        const auto file_path(make_file_path(s, inclusion_path, qn));
+        const auto file_path(make_file_path(s, inclusion_path, n));
         pd.file_path(file_path);
 
         if (s.file_type() == formatters::file_types::cpp_header) {

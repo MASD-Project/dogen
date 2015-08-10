@@ -29,10 +29,10 @@
 #include <iosfwd>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/type.hpp"
-#include "dogen/tack/types/qname.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/tack/types/property.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
 #include "dogen/tack/types/object_types.hpp"
 #include "dogen/tack/types/relationship_types.hpp"
 #include "dogen/tack/hash/relationship_types_hash.hpp"
@@ -58,20 +58,20 @@ public:
     object(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const dogen::tack::qname& name,
+        const dogen::tack::name& name,
         const dogen::tack::generation_types generation_type,
         const dogen::tack::origin_types origin_type,
-        const boost::optional<dogen::tack::qname>& containing_module,
+        const boost::optional<dogen::tack::name>& containing_module,
         const std::list<dogen::tack::property>& all_properties,
         const std::list<dogen::tack::property>& local_properties,
-        const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties,
+        const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties,
         const bool is_parent,
         const bool is_visitable,
         const bool is_immutable,
         const bool is_fluent,
         const bool is_child,
         const bool is_original_parent_visitable,
-        const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& relationships,
+        const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& relationships,
         const dogen::tack::object_types object_type,
         const bool is_final);
 
@@ -136,10 +136,10 @@ public:
      * @brief The set of all properies obtained via inheritance, by parent name.
      */
     /**@{*/
-    const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties() const;
-    std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& inherited_properties();
-    void inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >& v);
-    void inherited_properties(const std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> >&& v);
+    const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties() const;
+    std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& inherited_properties();
+    void inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >& v);
+    void inherited_properties(const std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> >&& v);
     /**@}*/
 
     /**
@@ -194,10 +194,10 @@ public:
     void is_original_parent_visitable(const bool v);
     /**@}*/
 
-    const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& relationships() const;
-    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& relationships();
-    void relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >& v);
-    void relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> >&& v);
+    const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& relationships() const;
+    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& relationships();
+    void relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >& v);
+    void relationships(const std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> >&& v);
 
     /**
      * @brief What kind of object is this.
@@ -231,14 +231,14 @@ public:
 private:
     std::list<dogen::tack::property> all_properties_;
     std::list<dogen::tack::property> local_properties_;
-    std::unordered_map<dogen::tack::qname, std::list<dogen::tack::property> > inherited_properties_;
+    std::unordered_map<dogen::tack::name, std::list<dogen::tack::property> > inherited_properties_;
     bool is_parent_;
     bool is_visitable_;
     bool is_immutable_;
     bool is_fluent_;
     bool is_child_;
     bool is_original_parent_visitable_;
-    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::qname> > relationships_;
+    std::unordered_map<dogen::tack::relationship_types, std::list<dogen::tack::name> > relationships_;
     dogen::tack::object_types object_type_;
     bool is_final_;
 };

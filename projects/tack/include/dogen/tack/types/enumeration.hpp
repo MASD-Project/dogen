@@ -28,8 +28,8 @@
 #include <iosfwd>
 #include <vector>
 #include <algorithm>
+#include "dogen/tack/types/name.hpp"
 #include "dogen/tack/types/type.hpp"
-#include "dogen/tack/types/qname.hpp"
 #include "dogen/tack/types/enumerator.hpp"
 #include "dogen/tack/serialization/enumeration_fwd_ser.hpp"
 
@@ -51,11 +51,11 @@ public:
     enumeration(
         const std::string& documentation,
         const dogen::dynamic::object& extensions,
-        const dogen::tack::qname& name,
+        const dogen::tack::name& name,
         const dogen::tack::generation_types generation_type,
         const dogen::tack::origin_types origin_type,
-        const boost::optional<dogen::tack::qname>& containing_module,
-        const dogen::tack::qname& underlying_type,
+        const boost::optional<dogen::tack::name>& containing_module,
+        const dogen::tack::name& underlying_type,
         const std::vector<dogen::tack::enumerator>& enumerators);
 
 private:
@@ -90,10 +90,10 @@ public:
      * @brief Underlying type of each instance of the enumeration.
      */
     /**@{*/
-    const dogen::tack::qname& underlying_type() const;
-    dogen::tack::qname& underlying_type();
-    void underlying_type(const dogen::tack::qname& v);
-    void underlying_type(const dogen::tack::qname&& v);
+    const dogen::tack::name& underlying_type() const;
+    dogen::tack::name& underlying_type();
+    void underlying_type(const dogen::tack::name& v);
+    void underlying_type(const dogen::tack::name&& v);
     /**@}*/
 
     /**
@@ -120,7 +120,7 @@ public:
     enumeration& operator=(enumeration other);
 
 private:
-    dogen::tack::qname underlying_type_;
+    dogen::tack::name underlying_type_;
     std::vector<dogen::tack::enumerator> enumerators_;
 };
 

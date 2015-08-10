@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen/tack/io/name_io.hpp"
 #include "dogen/tack/io/type_io.hpp"
-#include "dogen/tack/io/qname_io.hpp"
 #include "dogen/tack/io/object_io.hpp"
 #include "dogen/tack/io/property_io.hpp"
 #include "dogen/tack/io/object_types_io.hpp"

@@ -42,10 +42,10 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
 
     test_io<generation_types_generator>();
-    test_io<nested_qname_generator>();
+    test_io<nested_name_generator>();
     test_io<node_generator>();
     test_io<property_generator>();
-    test_io<qname_generator>();
+    test_io<name_generator>();
     test_io<primitive_generator>();
     test_io<enumerator_generator>();
     test_io<enumeration_generator>();

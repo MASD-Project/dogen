@@ -19,23 +19,17 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/tack/io/qname_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#include <boost/io/ios_state.hpp>
+#include "dogen/tack/io/name_io.hpp"
+#include "dogen/tack/io/nested_name_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::tack::nested_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -46,13 +40,18 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen {
 namespace tack {
 
-std::ostream& operator<<(std::ostream& s, const qname& v) {
+std::ostream& operator<<(std::ostream& s, const nested_name& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::tack::qname\"" << ", "
-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
-      << "\"external_module_path\": " << v.external_module_path() << ", "
-      << "\"module_path\": " << v.module_path() << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\""
+      << "\"__type__\": " << "\"dogen::tack::nested_name\"" << ", "
+      << "\"type\": " << v.type() << ", "
+      << "\"children\": " << v.children() << ", "
+      << "\"is_pointer\": " << v.is_pointer()
       << " }";
     return(s);
 }

@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/tack/test_data/name_td.hpp"
 #include "dogen/tack/test_data/type_td.hpp"
-#include "dogen/tack/test_data/qname_td.hpp"
 #include "dogen/tack/test_data/object_td.hpp"
 #include "dogen/dynamic/test_data/object_td.hpp"
 #include "dogen/tack/test_data/primitive_td.hpp"
@@ -41,9 +41,9 @@ create_dogen_dynamic_object(const unsigned int position) {
     return dogen::dynamic::object_generator::create(position);
 }
 
-dogen::tack::qname
-create_dogen_tack_qname(const unsigned int position) {
-    return dogen::tack::qname_generator::create(position);
+dogen::tack::name
+create_dogen_tack_name(const unsigned int position) {
+    return dogen::tack::name_generator::create(position);
 }
 
 dogen::tack::generation_types
@@ -56,10 +56,10 @@ create_dogen_tack_origin_types(const unsigned int position) {
     return dogen::tack::origin_types_generator::create(position);
 }
 
-boost::optional<dogen::tack::qname>
-create_boost_optional_dogen_tack_qname(unsigned int position) {
-    boost::optional<dogen::tack::qname> r(
-        create_dogen_tack_qname(position));
+boost::optional<dogen::tack::name>
+create_boost_optional_dogen_tack_name(unsigned int position) {
+    boost::optional<dogen::tack::name> r(
+        create_dogen_tack_name(position));
     return r;
 }
 
@@ -72,10 +72,10 @@ void type_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.extensions(create_dogen_dynamic_object(position + 1));
-    v.name(create_dogen_tack_qname(position + 2));
+    v.name(create_dogen_tack_name(position + 2));
     v.generation_type(create_dogen_tack_generation_types(position + 3));
     v.origin_type(create_dogen_tack_origin_types(position + 4));
-    v.containing_module(create_boost_optional_dogen_tack_qname(position + 5));
+    v.containing_module(create_boost_optional_dogen_tack_name(position + 5));
 }
 
 type_generator::result_type*

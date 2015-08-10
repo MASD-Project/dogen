@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen/tack/serialization/name_ser.hpp"
 #include "dogen/tack/serialization/node_ser.hpp"
 #include "dogen/tack/serialization/type_ser.hpp"
 #include "dogen/tack/serialization/model_ser.hpp"
-#include "dogen/tack/serialization/qname_ser.hpp"
 #include "dogen/tack/serialization/module_ser.hpp"
 #include "dogen/tack/serialization/object_ser.hpp"
 #include "dogen/tack/serialization/concept_ser.hpp"
@@ -37,7 +37,7 @@
 #include "dogen/tack/serialization/registrar_ser.hpp"
 #include "dogen/tack/serialization/enumerator_ser.hpp"
 #include "dogen/tack/serialization/enumeration_ser.hpp"
-#include "dogen/tack/serialization/nested_qname_ser.hpp"
+#include "dogen/tack/serialization/nested_name_ser.hpp"
 #include "dogen/tack/serialization/object_types_ser.hpp"
 #include "dogen/tack/serialization/origin_types_ser.hpp"
 #include "dogen/tack/serialization/generation_types_ser.hpp"

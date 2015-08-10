@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TACK_TYPES_QNAME_HPP
-#define DOGEN_TACK_TYPES_QNAME_HPP
+#ifndef DOGEN_TACK_TYPES_NAME_HPP
+#define DOGEN_TACK_TYPES_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen/tack/serialization/qname_fwd_ser.hpp"
+#include "dogen/tack/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
 namespace tack {
@@ -36,15 +36,15 @@ namespace tack {
 /**
  * @brief Represents a "URL" to a type within a model.
  */
-class qname final {
+class name final {
 public:
-    qname() = default;
-    qname(const qname&) = default;
-    qname(qname&&) = default;
-    ~qname() = default;
+    name() = default;
+    name(const name&) = default;
+    name(name&&) = default;
+    ~name() = default;
 
 public:
-    qname(
+    name(
         const std::string& model_name,
         const std::list<std::string>& external_module_path,
         const std::list<std::string>& module_path,
@@ -52,10 +52,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const qname& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const name& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, qname& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, name& v, unsigned int version);
 
 public:
     /**
@@ -100,14 +100,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const qname& rhs) const;
-    bool operator!=(const qname& rhs) const {
+    bool operator==(const name& rhs) const;
+    bool operator!=(const name& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(qname& other) noexcept;
-    qname& operator=(qname other);
+    void swap(name& other) noexcept;
+    name& operator=(name other);
 
 private:
     std::string model_name_;
@@ -122,8 +122,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::tack::qname& lhs,
-    dogen::tack::qname& rhs) {
+    dogen::tack::name& lhs,
+    dogen::tack::name& rhs) {
     lhs.swap(rhs);
 }
 

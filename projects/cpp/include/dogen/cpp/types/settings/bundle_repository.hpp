@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/tack/types/qname.hpp"
-#include "dogen/tack/hash/qname_hash.hpp"
+#include "dogen/tack/types/name.hpp"
+#include "dogen/tack/hash/name_hash.hpp"
 #include "dogen/cpp/types/settings/bundle.hpp"
 #include "dogen/cpp/serialization/settings/bundle_repository_fwd_ser.hpp"
 
@@ -44,7 +44,7 @@ public:
     ~bundle_repository() = default;
 
 public:
-    explicit bundle_repository(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundles_by_qname);
+    explicit bundle_repository(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundles_by_name);
 
 private:
     template<typename Archive>
@@ -54,10 +54,10 @@ private:
     friend void boost::serialization::load(Archive& ar, bundle_repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundles_by_qname() const;
-    std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& bundles_by_qname();
-    void bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>& v);
-    void bundles_by_qname(const std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle>&& v);
+    const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundles_by_name() const;
+    std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& bundles_by_name();
+    void bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>& v);
+    void bundles_by_name(const std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle>&& v);
 
 public:
     bool operator==(const bundle_repository& rhs) const;
@@ -70,7 +70,7 @@ public:
     bundle_repository& operator=(bundle_repository other);
 
 private:
-    std::unordered_map<dogen::tack::qname, dogen::cpp::settings::bundle> bundles_by_qname_;
+    std::unordered_map<dogen::tack::name, dogen::cpp::settings::bundle> bundles_by_name_;
 };
 
 } } }

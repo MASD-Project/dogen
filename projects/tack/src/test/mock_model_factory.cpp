@@ -103,96 +103,96 @@ std::string module_name(const unsigned int i) {
     return stream.str();
 }
 
-dogen::tack::nested_qname mock_nested_qname(const dogen::tack::qname& qn) {
-    dogen::tack::qname pqn;
-    pqn.simple_name(qn.simple_name());
-    pqn.model_name(qn.model_name());
+dogen::tack::nested_name mock_nested_name(const dogen::tack::name& n) {
+    dogen::tack::name pn;
+    pn.simple_name(n.simple_name());
+    pn.model_name(n.model_name());
 
-    dogen::tack::nested_qname r;
-    r.type(pqn);
+    dogen::tack::nested_name r;
+    r.type(pn);
     return r;
 }
 
-dogen::tack::qname mock_model_qname(unsigned int i) {
-    dogen::tack::qname r;
+dogen::tack::name mock_model_name(unsigned int i) {
+    dogen::tack::name r;
     r.model_name(model_name(i));
     r.simple_name(model_name(i));
     return r;
 }
 
-dogen::tack::nested_qname
-mock_nested_qname_shared_ptr(const dogen::tack::qname& qn) {
-    dogen::tack::qname e;
+dogen::tack::nested_name
+mock_nested_name_shared_ptr(const dogen::tack::name& n) {
+    dogen::tack::name e;
     e.simple_name("shared_ptr");
     e.model_name("boost");
 
-    dogen::tack::nested_qname r;
+    dogen::tack::nested_name r;
     r.type(e);
 
-    dogen::tack::nested_qname c;
-    c.type(qn);
+    dogen::tack::nested_name c;
+    c.type(n);
 
-    r.children(std::list<dogen::tack::nested_qname> { c });
+    r.children(std::list<dogen::tack::nested_name> { c });
 
     return r;
 }
 
-dogen::tack::nested_qname mock_nested_qname(
+dogen::tack::nested_name mock_nested_name(
     dogen::tack::test::mock_model_factory::property_types pt) {
     using namespace dogen::tack;
 
-    qname qn;
-    nested_qname r;
+    name n;
+    nested_name r;
 
     typedef test::mock_model_factory::property_types property_types;
     switch(pt) {
     case property_types::unsigned_int:
-        qn.simple_name(unsigned_int);
-        r.type(qn);
+        n.simple_name(unsigned_int);
+        r.type(n);
         break;
     case property_types::boolean:
-        qn.simple_name(boolean);
-        r.type(qn);
+        n.simple_name(boolean);
+        r.type(n);
         break;
     case property_types::boost_variant: {
-        qname e;
+        name e;
         e.simple_name("variant");
         e.model_name("boost");
         r.type(e);
 
-        qname f;
+        name f;
         f.simple_name(boolean);
-        nested_qname c;
+        nested_name c;
         c.type(f);
 
-        qname g;
+        name g;
         g.simple_name(unsigned_int);
-        nested_qname d;
+        nested_name d;
         d.type(g);
-        r.children(std::list<nested_qname> { c, d });
+        r.children(std::list<nested_name> { c, d });
         break;
     }
     case property_types::std_string:
-        qn.simple_name("string");
-        qn.model_name("std");
-        r.type(qn);
+        n.simple_name("string");
+        n.model_name("std");
+        r.type(n);
         break;
     case property_types::std_pair: {
-        qname e;
+        name e;
         e.simple_name("pair");
         e.model_name("std");
         r.type(e);
 
-        qname f;
+        name f;
         f.simple_name(boolean);
-        nested_qname c;
+        nested_name c;
         c.type(f);
 
-        qname g;
+        name g;
         g.simple_name(boolean);
-        nested_qname d;
+        nested_name d;
         d.type(g);
-        r.children(std::list<nested_qname> { c, d });
+        r.children(std::list<nested_name> { c, d });
         break;
     }
     default:
@@ -203,16 +203,16 @@ dogen::tack::nested_qname mock_nested_qname(
 }
 
 void populate_object(dogen::tack::object& o, const unsigned int i,
-    const dogen::tack::qname& model_qname, const unsigned int module_n) {
+    const dogen::tack::name& model_name, const unsigned int module_n) {
 
-    dogen::tack::qname qn;
-    qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    dogen::tack::name n;
+    n.model_name(model_name.model_name());
+    n.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        qn.module_path().push_back(module_name(i));
+        n.module_path().push_back(module_name(i));
 
-    o.name(qn);
+    o.name(n);
     o.generation_type(dogen::tack::generation_types::full_generation);
     o.documentation(documentation);
     o.origin_type(dogen::tack::origin_types::user);
@@ -220,7 +220,7 @@ void populate_object(dogen::tack::object& o, const unsigned int i,
 
 void populate_simple_model_properties(dogen::tack::model& m,
     const unsigned int n) {
-    m.name(mock_model_qname(n));
+    m.name(mock_model_name(n));
     m.documentation(documentation);
     m.origin_type(dogen::tack::origin_types::user);
     m.generation_type(dogen::tack::generation_types::full_generation);
@@ -229,18 +229,18 @@ void populate_simple_model_properties(dogen::tack::model& m,
 dogen::tack::property mock_property(const unsigned int n = 0,
     const dogen::tack::test::mock_model_factory::property_types pt =
     dogen::tack::test::mock_model_factory::property_types::unsigned_int,
-    boost::optional<dogen::tack::qname> qn =
-    boost::optional<dogen::tack::qname>()) {
+    boost::optional<dogen::tack::name> name =
+    boost::optional<dogen::tack::name>()) {
     dogen::tack::property r;
     r.name(property_name(n));
 
     using property_types = dogen::tack::test::mock_model_factory::property_types;
     if (pt == property_types::value_object)
-        r.type(mock_nested_qname(*qn));
+        r.type(mock_nested_name(*name));
     else if (pt == property_types::boost_shared_ptr)
-        r.type(mock_nested_qname_shared_ptr(*qn));
+        r.type(mock_nested_name_shared_ptr(*name));
     else
-        r.type(mock_nested_qname(pt));
+        r.type(mock_nested_name(pt));
 
     return r;
 }
@@ -250,10 +250,10 @@ void add_property(Stateful& s, const bool properties_indexed,
     const unsigned int n = 0,
     const dogen::tack::test::mock_model_factory::property_types pt =
     dogen::tack::test::mock_model_factory::property_types::unsigned_int,
-    boost::optional<dogen::tack::qname> qn =
-    boost::optional<dogen::tack::qname>()) {
+    boost::optional<dogen::tack::name> name =
+    boost::optional<dogen::tack::name>()) {
 
-    auto p(mock_property(n, pt, qn));
+    auto p(mock_property(n, pt, name));
     s.local_properties().push_back(p);
 
     if (properties_indexed)
@@ -316,7 +316,7 @@ void parent_to_child(const bool properties_indexed,
 }
 
 template<typename Nameable>
-void insert_nameable(std::unordered_map<dogen::tack::qname, Nameable>& map,
+void insert_nameable(std::unordered_map<dogen::tack::name, Nameable>& map,
     const Nameable& n) {
     map.insert(std::make_pair(n.name(), n));
 }
@@ -325,27 +325,27 @@ void insert_object(dogen::tack::model& m, const dogen::tack::object& o) {
     m.objects().insert(std::make_pair(o.name(), o));
 }
 
-std::string name_for_file_name(const dogen::tack::qname& qn) {
-    if (qn.simple_name().empty())
-        return qn.model_name();
-    return qn.simple_name();
+std::string name_for_file_name(const dogen::tack::name& n) {
+    if (n.simple_name().empty())
+        return n.model_name();
+    return n.simple_name();
 }
 
-std::string types_header_filename(const dogen::tack::qname& qn) {
-    return types_main_header + name_for_file_name(qn);
+std::string types_header_filename(const dogen::tack::name& n) {
+    return types_main_header + name_for_file_name(n);
 }
 
-std::string types_forward_declaration_filename(const dogen::tack::qname& qn) {
-    return types_forward_declaration + name_for_file_name(qn);
+std::string types_forward_declaration_filename(const dogen::tack::name& n) {
+    return types_forward_declaration + name_for_file_name(n);
 }
 
-std::string boost_serialization_header_filename(const dogen::tack::qname& qn) {
-    return serialization_main_header + name_for_file_name(qn);
+std::string boost_serialization_header_filename(const dogen::tack::name& n) {
+    return serialization_main_header + name_for_file_name(n);
 }
 
 std::string boost_serialization_forward_declaration_filename(
-    const dogen::tack::qname& qn) {
-    return serialization_forward_declaration + name_for_file_name(qn);
+    const dogen::tack::name& n) {
+    return serialization_forward_declaration + name_for_file_name(n);
 }
 
 void add_test_dynamic_extensions(dogen::dynamic::object& o) {
@@ -439,74 +439,60 @@ std::string mock_model_factory::property_name(const unsigned int n) const {
     return ::property_name(n);
 }
 
-std::string mock_model_factory::types_header_filename(const qname& qn) const {
-    return ::types_header_filename(qn);
+std::string mock_model_factory::types_header_filename(const name& n) const {
+    return ::types_header_filename(n);
 }
 
 std::string mock_model_factory::
-types_forward_declaration_filename(const qname& qn) const {
-    return ::types_forward_declaration_filename(qn);
+types_forward_declaration_filename(const name& n) const {
+    return ::types_forward_declaration_filename(n);
 }
 
 std::string mock_model_factory::
-boost_serialization_header_filename(const qname& qn) const {
-    return ::boost_serialization_header_filename(qn);
+boost_serialization_header_filename(const name& n) const {
+    return ::boost_serialization_header_filename(n);
 }
 
 std::string mock_model_factory::
-boost_serialization_forward_declaration_filename(const qname& qn) const {
-    return ::boost_serialization_forward_declaration_filename(qn);
+boost_serialization_forward_declaration_filename(const name& n) const {
+    return ::boost_serialization_forward_declaration_filename(n);
 }
 
 bool mock_model_factory::
-is_model_n(const unsigned int n, const qname& qn) const {
-    return is_model_n(n, qn.model_name());
+is_model_n(const unsigned int n, const name& name) const {
+    return is_model_n(n, name.model_name());
 }
 
 bool mock_model_factory::
-is_model_n(const unsigned int n, const std::string& s) const {
-    return model_name(n) == s;
+is_model_n(const unsigned int n, const std::string& name) const {
+    return model_name(n) == name;
 }
 
 bool mock_model_factory::
-is_type_name_n(const unsigned int n, const qname& qn) const {
-    return is_type_name_n(n, qn.simple_name());
+is_type_name_n(const unsigned int n, const name& name) const {
+    return is_type_name_n(n, name.simple_name());
 }
 
 bool mock_model_factory::
-is_concept_name_n(const unsigned int n, const qname& qn) const {
-    return concept_name(n) == qn.simple_name();
+is_concept_name_n(const unsigned int n, const name& name) const {
+    return concept_name(n) == name.simple_name();
 }
 
 bool mock_model_factory::
-is_type_name_n(const unsigned int n, const std::string& s) const {
-    return type_name(n) == s;
+is_type_name_n(const unsigned int n, const std::string& name) const {
+    return type_name(n) == name;
 }
 
 bool mock_model_factory::
-is_module_n(const unsigned int n, const std::string& s) const {
-    return module_name(n) == s;
-}
-
-bool mock_model_factory::is_type_name_n_unversioned(const unsigned int n,
-    const qname& qn) const {
-    return
-        boost::contains(qn.simple_name(), type_name(n)) &&
-        boost::contains(qn.simple_name(), unversioned_postfix);
-}
-
-bool mock_model_factory::is_type_name_n_versioned(const unsigned int n,
-    const qname& qn) const {
-    return
-        boost::contains(qn.simple_name(), type_name(n)) &&
-        boost::contains(qn.simple_name(), versioned_postfix);
+is_module_n(const unsigned int n, const std::string& name) const {
+    return module_name(n) == name;
 }
 
 bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
-    const qname& qn) const {
+    const name& name) const {
     return
-        boost::contains(qn.simple_name(), type_name(n)) &&
-        boost::contains(qn.simple_name(), visitor_postfix);
+        boost::contains(name.simple_name(), type_name(n)) &&
+        boost::contains(name.simple_name(), visitor_postfix);
 }
 
 void mock_model_factory::
@@ -514,18 +500,18 @@ handle_model_module(const bool add_model_module, tack::model& m) const {
     if (!add_model_module)
         return;
 
-    qname qn;
-    qn.model_name(m.name().model_name());
-    qn.simple_name(m.name().simple_name());
-    const auto module(make_module(qn, documentation));
+    name n;
+    n.model_name(m.name().model_name());
+    n.simple_name(m.name().simple_name());
+    const auto module(make_module(n, documentation));
     insert_nameable(m.modules(), module);
 }
 
 object mock_model_factory::make_value_object(const unsigned int i,
-    const qname& model_qname, const unsigned int module_n) const {
+    const name& model_name, const unsigned int module_n) const {
 
     object r;
-    populate_object(r, i, model_qname, module_n);
+    populate_object(r, i, model_name, module_n);
     r.object_type(dogen::tack::object_types::user_defined_value_object);
 
     if (flags_.tagged())
@@ -536,18 +522,18 @@ object mock_model_factory::make_value_object(const unsigned int i,
 
 object mock_model_factory::make_value_object(unsigned int i,
     const unsigned int module_n) const {
-    return make_value_object(i, mock_model_qname(i), module_n);
+    return make_value_object(i, mock_model_name(i), module_n);
 }
 
 concept mock_model_factory::make_concept(const unsigned int i,
-    const qname& model_qname) const {
+    const name& model_name) const {
 
-    qname qn;
-    qn.model_name(model_qname.model_name());
-    qn.simple_name(concept_name(i));
+    name n;
+    n.model_name(model_name.model_name());
+    n.simple_name(concept_name(i));
 
     concept r;
-    r.name(qn);
+    r.name(n);
     r.documentation(documentation);
     r.origin_type(origin_types::user);
 
@@ -558,23 +544,23 @@ concept mock_model_factory::make_concept(const unsigned int i,
 }
 
 enumeration mock_model_factory::
-make_enumeration(const unsigned int i, const qname& model_qname,
+make_enumeration(const unsigned int i, const name& model_name,
     const unsigned int module_n) const {
-    qname qn;
-    qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    name n;
+    n.model_name(model_name.model_name());
+    n.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        qn.module_path().push_back(module_name(i));
+        n.module_path().push_back(module_name(i));
 
     enumeration r;
-    r.name(qn);
+    r.name(n);
     r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
 
-    qname uqn;
-    uqn.simple_name(unsigned_int);
-    r.underlying_type(uqn);
+    name un;
+    un.simple_name(unsigned_int);
+    r.underlying_type(un);
 
     const auto lambda([&](const unsigned int n) -> enumerator {
             enumerator r;
@@ -593,16 +579,16 @@ make_enumeration(const unsigned int i, const qname& model_qname,
 }
 
 object mock_model_factory::make_exception(const unsigned int i,
-    const qname& model_qname, const unsigned int module_n) const {
-    qname qn;
-    qn.model_name(model_qname.model_name());
-    qn.simple_name(type_name(i));
+    const name& model_name, const unsigned int module_n) const {
+    name n;
+    n.model_name(model_name.model_name());
+    n.simple_name(type_name(i));
 
     for (unsigned int i(0); i < module_n; ++i)
-        qn.module_path().push_back(module_name(i));
+        n.module_path().push_back(module_name(i));
 
     object r;
-    r.name(qn);
+    r.name(n);
     r.generation_type(generation_types::full_generation);
     r.documentation(documentation);
     r.object_type(dogen::tack::object_types::exception);
@@ -613,10 +599,10 @@ object mock_model_factory::make_exception(const unsigned int i,
     return r;
 }
 
-module mock_model_factory::make_module(const tack::qname& qn,
+module mock_model_factory::make_module(const tack::name& n,
     const std::string& documentation) const {
     module r;
-    r.name(qn);
+    r.name(n);
     r.documentation(documentation);
     return r;
 }
@@ -626,17 +612,17 @@ module mock_model_factory::make_module(const unsigned int module_n,
     const std::list<std::string>& module_path,
     const std::string& documentation) const {
 
-    qname qn;
-    qn.model_name(model_name);
-    qn.simple_name(module_name(module_n));
-    qn.module_path(module_path);
-    return make_module(qn, documentation);
+    name n;
+    n.model_name(model_name);
+    n.simple_name(module_name(module_n));
+    n.module_path(module_path);
+    return make_module(n, documentation);
 }
 
-qname mock_model_factory::make_qname(const unsigned int model_n,
+name mock_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
-    qname r;
+    name r;
     r.model_name(model_name(model_n));
     r.simple_name(type_name(simple_n));
     return r;
@@ -991,7 +977,7 @@ model mock_model_factory::make_object_that_models_concept_with_missing_parent(
 model mock_model_factory::object_with_both_regular_and_weak_associations(
     const bool add_model_module) const {
     model r(make_empty_model(0, add_model_module));
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
     auto o1(make_value_object(1, mn));
     insert_object(r, o1);
 
@@ -1005,12 +991,12 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[ra].push_back(o1.name());
 
-    qname qn;
-    qn.simple_name("shared_ptr");
-    qn.model_name("boost");
+    name n;
+    n.simple_name("shared_ptr");
+    n.model_name("boost");
 
     object o2;
-    o2.name(qn);
+    o2.name(n);
     o2.object_type(dogen::tack::object_types::smart_pointer);
     insert_object(r, o2);
 
@@ -1034,11 +1020,11 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
     if (flags_.associations_indexed())
         o0.relationships()[wa].push_back(o3.name());
 
-    qn.simple_name("string");
-    qn.model_name("std");
+    n.simple_name("string");
+    n.model_name("std");
 
     object o4;
-    o4.name(qn);
+    o4.name(n);
     o4.object_type(dogen::tack::object_types::user_defined_value_object);
     insert_object(r, o4);
 
@@ -1058,7 +1044,7 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
 model mock_model_factory::
 object_with_property(const object_types ot, const property_types pt,
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
     auto o1(make_value_object(1, mn));
 
     property p(mock_property(0, pt, o1.name()));
@@ -1096,12 +1082,12 @@ object_with_property(const object_types ot, const property_types pt,
             o0.relationships()[ra].push_back(ui.name());
 
     } else if (pt == property_types::boost_shared_ptr) {
-        qname qn;
-        qn.simple_name("shared_ptr");
-        qn.model_name("boost");
+        name n;
+        n.simple_name("shared_ptr");
+        n.model_name("boost");
 
         object o2;
-        o2.name(qn);
+        o2.name(n);
         o2.object_type(dogen::tack::object_types::smart_pointer);
         insert_object(r, o2);
 
@@ -1116,12 +1102,12 @@ object_with_property(const object_types ot, const property_types pt,
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(b.name());
 
-        qname qn;
-        qn.simple_name("pair");
-        qn.model_name("std");
+        name n;
+        n.simple_name("pair");
+        n.model_name("std");
 
         object o2;
-        o2.name(qn);
+        o2.name(n);
         o2.object_type(dogen::tack::object_types::user_defined_value_object);
 
         if (flags_.associations_indexed())
@@ -1143,12 +1129,12 @@ object_with_property(const object_types ot, const property_types pt,
         if (flags_.associations_indexed())
             o0.relationships()[ra].push_back(ui.name());
 
-        qname qn;
-        qn.simple_name("variant");
-        qn.model_name("boost");
+        name n;
+        n.simple_name("variant");
+        n.model_name("boost");
 
         object o2;
-        o2.name(qn);
+        o2.name(n);
         o2.object_type(dogen::tack::object_types::user_defined_value_object);
         insert_object(r, o2);
 
@@ -1156,12 +1142,12 @@ object_with_property(const object_types ot, const property_types pt,
             o0.relationships()[ra].push_back(o2.name());
 
     } else if (pt == property_types::std_string) {
-        qname qn;
-        qn.simple_name("string");
-        qn.model_name("std");
+        name n;
+        n.simple_name("string");
+        n.model_name("std");
 
         object o2;
-        o2.name(qn);
+        o2.name(n);
         o2.object_type(dogen::tack::object_types::user_defined_value_object);
         insert_object(r, o2);
 
@@ -1181,19 +1167,19 @@ mock_model_factory::object_with_property_type_in_different_model(
     add_property(o0, flags_.properties_indexed(),
         0, property_types::value_object, o1.name());
 
-    qname m0_qn;
-    m0_qn.model_name(model_name(0));
+    name m0_n;
+    m0_n.model_name(model_name(0));
 
     model m0;
-    m0.name(m0_qn);
+    m0.name(m0_n);
     insert_object(m0, o0);
     handle_model_module(add_model_module, m0);
 
-    qname m1_qn;
-    m1_qn.model_name(model_name(1));
+    name m1_n;
+    m1_n.model_name(model_name(1));
 
     model m1;
-    m1.name(m1_qn);
+    m1.name(m1_n);
     insert_object(m1, o1);
     handle_model_module(add_model_module, m1);
 
@@ -1212,8 +1198,8 @@ model mock_model_factory::object_with_missing_property_type(
     if (flags_.associations_indexed())
         o0.relationships()[ra].push_back(o1.name());
 
-    qname mn_qn;
-    mn_qn.model_name(model_name(0));
+    name mn_n;
+    mn_n.model_name(model_name(0));
 
     model r(make_empty_model(0, add_model_module));
     insert_object(r, o0);
@@ -1224,7 +1210,7 @@ model mock_model_factory::object_with_missing_property_type(
 model mock_model_factory::
 object_with_parent_in_the_same_model(const bool has_property,
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
 
     model r(make_empty_model(0, add_model_module));
     if (has_property) {
@@ -1251,7 +1237,7 @@ object_with_parent_in_the_same_model(const bool has_property,
 
 model mock_model_factory::object_with_missing_parent_in_the_same_model(
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
     auto o0(make_value_object(0, mn));
     auto o1(make_value_object(1, mn));
     o1.is_parent(true);
@@ -1276,7 +1262,7 @@ object_with_parent_in_different_models(
 
     model m1(make_empty_model(1, add_model_module));
     insert_object(m1, o1);
-    m1.name(mock_model_qname(1));
+    m1.name(mock_model_name(1));
     m1.origin_type(origin_types::user);
 
     return std::array<model, 2> {{ m0, m1 }};
@@ -1284,7 +1270,7 @@ object_with_parent_in_different_models(
 
 model mock_model_factory::object_with_three_children_in_same_model(
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
     auto o0(make_value_object(0, mn));
     auto o1(make_value_object(1, mn));
     auto o2(make_value_object(2, mn));
@@ -1308,7 +1294,7 @@ model mock_model_factory::object_with_three_children_in_same_model(
 model mock_model_factory::
 object_with_third_degree_parent_in_same_model(const bool has_property,
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
 
     model r(make_empty_model(0, add_model_module));
     if (has_property) {
@@ -1356,7 +1342,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
 
 model mock_model_factory::object_with_third_degree_parent_missing(
     const bool add_model_module) const {
-    const auto mn(mock_model_qname(0));
+    const auto mn(mock_model_name(0));
     auto o0(make_value_object(0, mn));
     auto o1(make_value_object(1, mn));
     auto o2(make_value_object(2, mn));
@@ -1480,12 +1466,12 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
     auto p2(mock_property(2, property_types::boost_shared_ptr, o3.name()));
     lambda(p2);
 
-    qname qn;
-    qn.simple_name("shared_ptr");
-    qn.model_name("boost");
+    name n;
+    n.simple_name("shared_ptr");
+    n.model_name("boost");
 
     object o2;
-    o2.name(qn);
+    o2.name(n);
     o2.object_type(dogen::tack::object_types::smart_pointer);
     insert_object(r, o2);
 

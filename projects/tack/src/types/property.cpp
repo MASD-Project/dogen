@@ -31,7 +31,7 @@ property::property(
     const std::string& documentation,
     const dogen::dynamic::object& extensions,
     const std::string& name,
-    const dogen::tack::nested_qname& type,
+    const dogen::tack::nested_name& type,
     const bool is_immutable,
     const bool is_fluent)
     : documentation_(documentation),
@@ -114,19 +114,19 @@ void property::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const dogen::tack::nested_qname& property::type() const {
+const dogen::tack::nested_name& property::type() const {
     return type_;
 }
 
-dogen::tack::nested_qname& property::type() {
+dogen::tack::nested_name& property::type() {
     return type_;
 }
 
-void property::type(const dogen::tack::nested_qname& v) {
+void property::type(const dogen::tack::nested_name& v) {
     type_ = v;
 }
 
-void property::type(const dogen::tack::nested_qname&& v) {
+void property::type(const dogen::tack::nested_name&& v) {
     type_ = std::move(v);
 }
 
