@@ -1,0 +1,4180 @@
+diff --git a/diagrams/tack.dia b/diagrams/tack.dia
+index 88fbae6..04a31a8 100644
+--- a/diagrams/tack.dia
++++ b/diagrams/tack.dia
+@@ -631,13 +631,13 @@ Must only contain characters that can be used for identifiers in the target back
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O4">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-84,-15"/>
++        <dia:point val="-85,-15"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-84.05,-15.05;-75.615,-9.75"/>
++        <dia:rectangle val="-85.05,-15.05;-76.615,-9.75"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-84,-15"/>
++        <dia:point val="-85,-15"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="8.3349999999999991"/>
+@@ -2036,7 +2036,7 @@ all types in the combined model.#</dia:string>
+         <dia:point val="-31,-1"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-35.225,-9.85;-30.25,-0.2"/>
++        <dia:rectangle val="-43.695,-10.65;-30.25,-0.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2044,8 +2044,8 @@ all types in the combined model.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-31,-1"/>
+         <dia:point val="-31,-6"/>
+-        <dia:point val="-35.175,-6"/>
+-        <dia:point val="-35.175,-9.8"/>
++        <dia:point val="-43.645,-6"/>
++        <dia:point val="-43.645,-10.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2361,7 +2361,7 @@ meta-model.
+         <dia:point val="-84.205,-1"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-84.955,-9.85;-79.6325,-0.2"/>
++        <dia:rectangle val="-84.955,-9.85;-80.6325,-0.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2369,8 +2369,8 @@ meta-model.
+       <dia:attribute name="orth_points">
+         <dia:point val="-84.205,-1"/>
+         <dia:point val="-84.205,-6"/>
+-        <dia:point val="-79.8325,-6"/>
+-        <dia:point val="-79.8325,-9.8"/>
++        <dia:point val="-80.8325,-6"/>
++        <dia:point val="-80.8325,-9.8"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -2432,7 +2432,7 @@ meta-model.
+         <dia:point val="-58.4914,-1.04983"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-59.2419,-9.85;-52.8,-0.249829"/>
++        <dia:rectangle val="-59.2419,-10.65;-52.8,-0.249829"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -2441,7 +2441,7 @@ meta-model.
+         <dia:point val="-58.4914,-1.04983"/>
+         <dia:point val="-58.4886,-6"/>
+         <dia:point val="-53,-6"/>
+-        <dia:point val="-53,-9.8"/>
++        <dia:point val="-53,-10.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6136,16 +6136,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:point val="-53,-15"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-53.05,-15.05;-35.125,-9.75"/>
++        <dia:rectangle val="-53.05,-15.05;-43.595,-10.55"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="-53,-15"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="17.824999999999999"/>
++        <dia:real val="9.3550000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="5.2000000000000011"/>
++        <dia:real val="4.4000000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#name#</dia:string>
+@@ -6154,7 +6154,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:attribute name="comment">
+-        <dia:string>#Represents a "URL" to a type within a model.#</dia:string>
++        <dia:string>#Name of an element in a model, and associated properties.#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="abstract">
+         <dia:boolean val="false"/>
+@@ -6237,7 +6237,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#model_name#</dia:string>
++            <dia:string>#simple#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::string#</dia:string>
+@@ -6246,31 +6246,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Model to which the modeling element belongs to.#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#external_module_path#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>#Path of modules that contain the model from where the modeling element
+-came from.#</dia:string>
++            <dia:string>#Non-qualified name of the modeling element.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6284,16 +6260,16 @@ came from.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#module_path#</dia:string>
++            <dia:string>#qualified#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
++            <dia:string>#std::string#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Path of modules that contain this modeling element.#</dia:string>
++            <dia:string>#Qualified name of the model element, using a well-defined notation.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6307,16 +6283,16 @@ came from.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#simple_name#</dia:string>
++            <dia:string>#location#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
++            <dia:string>#location#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Non-qualified name of the modeling element.#</dia:string>
++            <dia:string>#Location of the element within the model.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -9942,22 +9918,22 @@ etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O87">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-71,-15"/>
++        <dia:point val="-72,-15"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-71.05,-15.05;-58.9,-11.35"/>
++        <dia:rectangle val="-72.05,-15.05;-61.0225,-11.35"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-71,-15"/>
++        <dia:point val="-72,-15"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="12.050000000000001"/>
++        <dia:real val="10.9275"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#string_converter#</dia:string>
++        <dia:string>#qualified_name_builder#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#service#</dia:string>
+@@ -10047,7 +10023,7 @@ etc.#</dia:string>
+       <dia:attribute name="operations">
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
+-            <dia:string>#convert#</dia:string>
++            <dia:string>#build#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+             <dia:string>##</dia:string>
+@@ -10076,7 +10052,7 @@ etc.#</dia:string>
+           <dia:attribute name="parameters">
+             <dia:composite type="umlparameter">
+               <dia:attribute name="name">
+-                <dia:string>#qn#</dia:string>
++                <dia:string>#n#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+                 <dia:string>#name#</dia:string>
+@@ -10101,7 +10077,7 @@ etc.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Association" version="2" id="O88">
+       <dia:attribute name="name">
+-        <dia:string>##</dia:string>
++        <dia:string>#creates qualified names from &gt;#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="direction">
+         <dia:enum val="1"/>
+@@ -10137,17 +10113,17 @@ etc.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-64.9688,-15.05"/>
++        <dia:point val="-66.5362,-15.05"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-65.7213,-19.75;-52.8,-14.2"/>
++        <dia:rectangle val="-67.2862,-19.75;-52.8,-14.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-64.9688,-15.05"/>
+-        <dia:point val="-64.9554,-19"/>
++        <dia:point val="-66.5362,-15.05"/>
++        <dia:point val="-66.5362,-19"/>
+         <dia:point val="-53,-19"/>
+         <dia:point val="-53,-15"/>
+       </dia:attribute>
+@@ -10846,13 +10822,13 @@ from inputs and generates Tack types off of them.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O94">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-46,-38"/>
++        <dia:point val="-41,-38"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-46.05,-38.05;-20.425,-24.15"/>
++        <dia:rectangle val="-41.05,-38.05;-15.425,-24.15"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-46,-38"/>
++        <dia:point val="-41,-38"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="25.524999999999999"/>
+@@ -11399,13 +11375,13 @@ from inputs and generates Tack types off of them.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O95">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-14,-38"/>
++        <dia:point val="-7,-38"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-14.05,-38.05;4.26,-33.55"/>
++        <dia:rectangle val="-7.05,-38.05;11.26,-33.55"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="-14,-38"/>
++        <dia:point val="-7,-38"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="18.210000000000001"/>
+@@ -11615,19 +11591,19 @@ from inputs and generates Tack types off of them.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-4.895,-38"/>
++        <dia:point val="2.105,-38"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-21.225,-43.75;-4.695,-37.2"/>
++        <dia:rectangle val="-16.225,-43.75;2.305,-37.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-4.895,-38"/>
+-        <dia:point val="-4.895,-43"/>
+-        <dia:point val="-20.475,-43"/>
+-        <dia:point val="-20.475,-38"/>
++        <dia:point val="2.105,-38"/>
++        <dia:point val="2.105,-43"/>
++        <dia:point val="-15.475,-43"/>
++        <dia:point val="-15.475,-38"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -11689,7 +11665,7 @@ from inputs and generates Tack types off of them.#</dia:string>
+         <dia:point val="-75.245,-38"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-75.995,-43.75;-45.8,-37.2"/>
++        <dia:rectangle val="-75.995,-43.75;-40.8,-37.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -11697,8 +11673,8 @@ from inputs and generates Tack types off of them.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="-75.245,-38"/>
+         <dia:point val="-75.245,-43"/>
+-        <dia:point val="-46,-43"/>
+-        <dia:point val="-46,-38"/>
++        <dia:point val="-41,-43"/>
++        <dia:point val="-41,-38"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -11757,17 +11733,17 @@ from inputs and generates Tack types off of them.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-20.475,-24.2"/>
++        <dia:point val="-15.475,-24.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-21.225,-24.95;-17.595,-0.2"/>
++        <dia:rectangle val="-17.845,-24.95;-14.725,-0.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-20.475,-24.2"/>
+-        <dia:point val="-20.475,-19"/>
++        <dia:point val="-15.475,-24.2"/>
++        <dia:point val="-15.475,-19"/>
+         <dia:point val="-17.795,-19"/>
+         <dia:point val="-17.795,-1"/>
+       </dia:attribute>
+@@ -11828,19 +11804,19 @@ from inputs and generates Tack types off of them.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="-46,-24.2"/>
++        <dia:point val="-41,-24.2"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-46.75,-24.95;-34.975,-14.2"/>
++        <dia:rectangle val="-43.695,-24.95;-40.25,-14.2"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="-46,-24.2"/>
+-        <dia:point val="-46,-19"/>
+-        <dia:point val="-35.175,-19"/>
+-        <dia:point val="-35.175,-15"/>
++        <dia:point val="-41,-24.2"/>
++        <dia:point val="-41,-19"/>
++        <dia:point val="-43.645,-19"/>
++        <dia:point val="-43.645,-15"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -14010,7 +13986,7 @@ from inputs and generates Tack types off of them.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#model_name#</dia:string>
++            <dia:string>#original_model_name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::string#</dia:string>
+@@ -14019,7 +13995,7 @@ from inputs and generates Tack types off of them.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="comment">
+-            <dia:string>#Model to which the modeling element belongs to.#</dia:string>
++            <dia:string>#Original name of the model to which the modeling element belongs to.#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -14111,5 +14087,76 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
++    <dia:object type="UML - Association" version="2" id="O117">
++      <dia:attribute name="name">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="-48.3225,-15"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="-61.1375,-32.85;-47.5725,-13.4"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="-48.3225,-15"/>
++        <dia:point val="-48.3225,-24"/>
++        <dia:point val="-61.0875,-24"/>
++        <dia:point val="-61.0875,-32.8"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O54" connection="1"/>
++        <dia:connection handle="1" to="O116" connection="6"/>
++      </dia:connections>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/doc/agile/sprint_backlog_72.org b/doc/agile/sprint_backlog_72.org
+index 32bb09e..01b6f04 100644
+--- a/doc/agile/sprint_backlog_72.org
++++ b/doc/agile/sprint_backlog_72.org
+@@ -14,16 +14,16 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75
+-#+CAPTION: Clock summary at [2015-08-10 Mon 16:45]
++#+CAPTION: Clock summary at [2015-08-10 Mon 18:22]
+ | <75>                                                                        |        |      |      |
+ | Headline                                                                    | Time   |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| *Total time*                                                                | *1:57* |      |      |
++| *Total time*                                                                | *3:40* |      |      |
+ |-----------------------------------------------------------------------------+--------+------+------|
+-| Stories                                                                     | 1:57   |      |      |
+-| Active                                                                      |        | 1:57 |      |
++| Stories                                                                     | 3:40   |      |      |
++| Active                                                                      |        | 3:40 |      |
+ | STARTED Sprint and product backlog grooming                                 |        |      | 0:24 |
+-| STARTED Refactor qname                                                      |        |      | 1:33 |
++| STARTED Refactor qname                                                      |        |      | 3:16 |
+ #+end:
+ 
+ *** STARTED Sprint and product backlog grooming                       :story:
+@@ -33,6 +33,7 @@
+ Updates to sprint and product backlog.
+ 
+ *** STARTED Refactor qname                                            :story:
++    CLOCK: [2015-08-10 Mon 16:51]--[2015-08-10 Mon 18:30] =>  1:39
+     CLOCK: [2015-08-10 Mon 16:46]--[2015-08-10 Mon 16:50] =>  0:04
+     CLOCK: [2015-08-10 Mon 16:43]--[2015-08-10 Mon 16:45] =>  0:02
+     CLOCK: [2015-08-10 Mon 15:11]--[2015-08-10 Mon 16:42] =>  1:31
+@@ -48,6 +49,12 @@ Notes:
+ - fix hardware model to supply model name but to have a blank model
+   path.
+ - split model names with dots into multiple model paths.
++- do not populate model path and qualified until resolution is done -
++  these properties do not add any value. After resolution - perhaps
++  as a last pass of the resolver - go through every single qname and
++  compute these properties. This means that all calls to qualified
++  prior to this need to be replaced to direct calls to qualified name
++  builder.
+ 
+ Merged stories:
+ 
+diff --git a/projects/tack/include/dogen/tack/types/all.hpp b/projects/tack/include/dogen/tack/types/all.hpp
+index 0977b26..673d5e8 100644
+--- a/projects/tack/include/dogen/tack/types/all.hpp
++++ b/projects/tack/include/dogen/tack/types/all.hpp
+@@ -59,12 +59,12 @@
+ #include "dogen/tack/types/input_descriptor.hpp"
+ #include "dogen/tack/types/property_indexer.hpp"
+ #include "dogen/tack/types/resolution_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/identifier_parser.hpp"
+ #include "dogen/tack/types/relationship_types.hpp"
+ #include "dogen/tack/types/association_indexer.hpp"
+ #include "dogen/tack/types/nested_name_builder.hpp"
+ #include "dogen/tack/types/generalization_indexer.hpp"
++#include "dogen/tack/types/qualified_name_builder.hpp"
+ #include "dogen/tack/types/file_importer_interface.hpp"
+ #include "dogen/tack/types/file_importer_registrar.hpp"
+ #include "dogen/tack/types/all_model_items_traversal.hpp"
+diff --git a/projects/tack/include/dogen/tack/types/location.hpp b/projects/tack/include/dogen/tack/types/location.hpp
+index 09ceafb..903b1a2 100644
+--- a/projects/tack/include/dogen/tack/types/location.hpp
++++ b/projects/tack/include/dogen/tack/types/location.hpp
+@@ -45,7 +45,7 @@ public:
+ 
+ public:
+     location(
+-        const std::string& model_name,
++        const std::string& original_model_name,
+         const std::list<std::string>& external_module_path,
+         const std::list<std::string>& model_path,
+         const std::list<std::string>& internal_module_path);
+@@ -59,13 +59,13 @@ private:
+ 
+ public:
+     /**
+-     * @brief Model to which the modeling element belongs to.
++     * @brief Original name of the model to which the modeling element belongs to.
+      */
+     /**@{*/
+-    const std::string& model_name() const;
+-    std::string& model_name();
+-    void model_name(const std::string& v);
+-    void model_name(const std::string&& v);
++    const std::string& original_model_name() const;
++    std::string& original_model_name();
++    void original_model_name(const std::string& v);
++    void original_model_name(const std::string&& v);
+     /**@}*/
+ 
+     /**
+@@ -113,7 +113,7 @@ public:
+     location& operator=(location other);
+ 
+ private:
+-    std::string model_name_;
++    std::string original_model_name_;
+     std::list<std::string> external_module_path_;
+     std::list<std::string> model_path_;
+     std::list<std::string> internal_module_path_;
+diff --git a/projects/tack/include/dogen/tack/types/name.hpp b/projects/tack/include/dogen/tack/types/name.hpp
+index 7f03521..79a5253 100644
+--- a/projects/tack/include/dogen/tack/types/name.hpp
++++ b/projects/tack/include/dogen/tack/types/name.hpp
+@@ -25,16 +25,16 @@
+ #pragma once
+ #endif
+ 
+-#include <list>
+ #include <string>
+ #include <algorithm>
++#include "dogen/tack/types/location.hpp"
+ #include "dogen/tack/serialization/name_fwd_ser.hpp"
+ 
+ namespace dogen {
+ namespace tack {
+ 
+ /**
+- * @brief Represents a "URL" to a type within a model.
++ * @brief Name of an element in a model, and associated properties.
+  */
+ class name final {
+ public:
+@@ -45,10 +45,9 @@ public:
+ 
+ public:
+     name(
+-        const std::string& model_name,
+-        const std::list<std::string>& external_module_path,
+-        const std::list<std::string>& module_path,
+-        const std::string& simple_name);
++        const std::string& simple,
++        const std::string& qualified,
++        const dogen::tack::location& location);
+ 
+ private:
+     template<typename Archive>
+@@ -59,44 +58,33 @@ private:
+ 
+ public:
+     /**
+-     * @brief Model to which the modeling element belongs to.
+-     */
+-    /**@{*/
+-    const std::string& model_name() const;
+-    std::string& model_name();
+-    void model_name(const std::string& v);
+-    void model_name(const std::string&& v);
+-    /**@}*/
+-
+-    /**
+-     * @brief Path of modules that contain the model from where the modeling element
+-     * came from.
++     * @brief Non-qualified name of the modeling element.
+      */
+     /**@{*/
+-    const std::list<std::string>& external_module_path() const;
+-    std::list<std::string>& external_module_path();
+-    void external_module_path(const std::list<std::string>& v);
+-    void external_module_path(const std::list<std::string>&& v);
++    const std::string& simple() const;
++    std::string& simple();
++    void simple(const std::string& v);
++    void simple(const std::string&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief Path of modules that contain this modeling element.
++     * @brief Qualified name of the model element, using a well-defined notation.
+      */
+     /**@{*/
+-    const std::list<std::string>& module_path() const;
+-    std::list<std::string>& module_path();
+-    void module_path(const std::list<std::string>& v);
+-    void module_path(const std::list<std::string>&& v);
++    const std::string& qualified() const;
++    std::string& qualified();
++    void qualified(const std::string& v);
++    void qualified(const std::string&& v);
+     /**@}*/
+ 
+     /**
+-     * @brief Non-qualified name of the modeling element.
++     * @brief Location of the element within the model.
+      */
+     /**@{*/
+-    const std::string& simple_name() const;
+-    std::string& simple_name();
+-    void simple_name(const std::string& v);
+-    void simple_name(const std::string&& v);
++    const dogen::tack::location& location() const;
++    dogen::tack::location& location();
++    void location(const dogen::tack::location& v);
++    void location(const dogen::tack::location&& v);
+     /**@}*/
+ 
+ public:
+@@ -110,10 +98,9 @@ public:
+     name& operator=(name other);
+ 
+ private:
+-    std::string model_name_;
+-    std::list<std::string> external_module_path_;
+-    std::list<std::string> module_path_;
+-    std::string simple_name_;
++    std::string simple_;
++    std::string qualified_;
++    dogen::tack::location location_;
+ };
+ 
+ } }
+diff --git a/projects/tack/include/dogen/tack/types/qualified_name_builder.hpp b/projects/tack/include/dogen/tack/types/qualified_name_builder.hpp
+new file mode 100644
+index 0000000..ce2116e
+--- /dev/null
++++ b/projects/tack/include/dogen/tack/types/qualified_name_builder.hpp
+@@ -0,0 +1,44 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_HPP
++#define DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <string>
++#include "dogen/tack/types/name.hpp"
++
++namespace dogen {
++namespace tack {
++
++/**
++ * @brief Builds a standard qualified name representation.
++ */
++class qualified_name_builder {
++public:
++    static std::string build(const name& n);
++};
++
++} }
++
++#endif
+diff --git a/projects/tack/include/dogen/tack/types/qualified_name_builder_fwd.hpp b/projects/tack/include/dogen/tack/types/qualified_name_builder_fwd.hpp
+new file mode 100644
+index 0000000..afc13f5
+--- /dev/null
++++ b/projects/tack/include/dogen/tack/types/qualified_name_builder_fwd.hpp
+@@ -0,0 +1,35 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_FWD_HPP
++#define DOGEN_TACK_TYPES_QUALIFIED_NAME_BUILDER_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace tack {
++
++class qualified_name_builder;
++
++} }
++
++#endif
+diff --git a/projects/tack/include/dogen/tack/types/string_converter.hpp b/projects/tack/include/dogen/tack/types/string_converter.hpp
+deleted file mode 100644
+index 7d5a865..0000000
+--- a/projects/tack/include/dogen/tack/types/string_converter.hpp
++++ /dev/null
+@@ -1,45 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_TACK_TYPES_STRING_CONVERTER_HPP
+-#define DOGEN_TACK_TYPES_STRING_CONVERTER_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-#include <string>
+-#include "dogen/tack/types/name.hpp"
+-
+-namespace dogen {
+-namespace tack {
+-
+-/**
+- * @brief Converts various Tack objects to a compact string
+- * representation.
+- */
+-class string_converter {
+-public:
+-    static std::string convert(const name& n);
+-};
+-
+-} }
+-
+-#endif
+diff --git a/projects/tack/include/dogen/tack/types/string_converter_fwd.hpp b/projects/tack/include/dogen/tack/types/string_converter_fwd.hpp
+deleted file mode 100644
+index 2e0643b..0000000
+--- a/projects/tack/include/dogen/tack/types/string_converter_fwd.hpp
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#ifndef DOGEN_TACK_TYPES_STRING_CONVERTER_FWD_HPP
+-#define DOGEN_TACK_TYPES_STRING_CONVERTER_FWD_HPP
+-
+-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+-#pragma once
+-#endif
+-
+-namespace dogen {
+-namespace tack {
+-
+-class string_converter;
+-
+-} }
+-
+-#endif
+diff --git a/projects/tack/spec/association_indexer_spec.cpp b/projects/tack/spec/association_indexer_spec.cpp
+index e05e961..0bb0ad8 100644
+--- a/projects/tack/spec/association_indexer_spec.cpp
++++ b/projects/tack/spec/association_indexer_spec.cpp
+@@ -28,7 +28,6 @@
+ #include "dogen/tack/types/indexing_error.hpp"
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/io/model_io.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/object_io.hpp"
+ #include "dogen/tack/test/mock_model_factory.hpp"
+ #include "dogen/tack/types/association_indexer.hpp"
+@@ -56,7 +55,6 @@ const mock_model_factory factory(flags);
+ 
+ using dogen::utility::test::contains_checker;
+ using dogen::tack::indexing_error;
+-using dogen::tack::string_converter;
+ using dogen::utility::test::asserter;
+ using object_types = dogen::tack::test::mock_model_factory::object_types;
+ using property_types = dogen::tack::test::mock_model_factory::property_types;
+@@ -146,24 +144,24 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_property_of_the_same_type_results_
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 1);
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 1);
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -184,28 +182,28 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
+     bool found0(false), found1(false), found3(false);
+     BOOST_REQUIRE(m.objects().size() == 5);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             found0 = true;
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 4);
+ 
+             std::vector<bool> found;
+             found.resize(4);
+-            for (const auto& qn : i->second) {
+-                if (qn.simple_name() == "shared_ptr")
++            for (const auto& n : i->second) {
++                if (n.simple() == "shared_ptr")
+                     found[0] = true;
+ 
+-                if (qn.simple_name() == "unsigned int")
++                if (n.simple() == "unsigned int")
+                     found[1] = true;
+ 
+-                if (factory.is_type_name_n(1, qn.simple_name()))
++                if (factory.is_type_name_n(1, n.simple()))
+                     found[2] = true;
+ 
+-                if (factory.is_type_name_n(4, qn.simple_name()))
++                if (factory.is_type_name_n(4, n.simple()))
+                     found[3] = true;
+             }
+ 
+@@ -216,13 +214,13 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
+             BOOST_CHECK(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_CHECK(factory.is_type_name_n(3,
+-                    i->second.front().simple_name()));
+-        } else if (factory.is_type_name_n(1, qn)) {
++                    i->second.front().simple()));
++        } else if (factory.is_type_name_n(1, n)) {
+             found1 = true;
+             BOOST_CHECK(i == o.relationships().end());
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+-        } else if (factory.is_type_name_n(3, qn)) {
++        } else if (factory.is_type_name_n(3, n)) {
+             found3 = true;
+             BOOST_CHECK(i == o.relationships().end());
+             i = o.relationships().find(wa);
+@@ -254,27 +252,27 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
+     bool found0(false), found1(false), found3(false);
+     BOOST_REQUIRE(m.objects().size() == 5);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             found0 = true;
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 4);
+             std::vector<bool> found;
+             found.resize(4);
+-            for (const auto& qn : i->second) {
+-                if (qn.simple_name() == "shared_ptr")
++            for (const auto& n : i->second) {
++                if (n.simple() == "shared_ptr")
+                     found[0] = true;
+ 
+-                if (qn.simple_name() == "unsigned int")
++                if (n.simple() == "unsigned int")
+                     found[1] = true;
+ 
+-                if (factory.is_type_name_n(1, qn.simple_name()))
++                if (factory.is_type_name_n(1, n.simple()))
+                     found[2] = true;
+ 
+-                if (factory.is_type_name_n(4, qn.simple_name()))
++                if (factory.is_type_name_n(4, n.simple()))
+                     found[3] = true;
+             }
+ 
+@@ -285,14 +283,14 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_properties_of_different_typ
+             BOOST_CHECK(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_CHECK(factory.is_type_name_n(3,
+-                    i->second.front().simple_name()));
++                    i->second.front().simple()));
+ 
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             found1 = true;
+             BOOST_CHECK(i == o.relationships().end());
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+-        } else if (factory.is_type_name_n(3, qn)) {
++        } else if (factory.is_type_name_n(3, n)) {
+             found3 = true;
+             BOOST_CHECK(i == o.relationships().end());
+             i = o.relationships().find(wa);
+@@ -322,7 +320,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
+ 
+     BOOST_REQUIRE(m.objects().size() == 1);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         using dogen::tack::relationship_types;
+@@ -330,15 +328,15 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_property_results_in_expected_indic
+         const auto wa(relationship_types::weak_associations);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 1);
+-            BOOST_CHECK(i->second.begin()->simple_name() == "unsigned int");
++            BOOST_CHECK(i->second.begin()->simple() == "unsigned int");
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -358,7 +356,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
+ 
+     BOOST_REQUIRE(m.objects().size() == 1);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         using dogen::tack::relationship_types;
+@@ -366,15 +364,15 @@ BOOST_AUTO_TEST_CASE(object_with_bool_property_results_in_expected_indices) {
+         const auto wa(relationship_types::weak_associations);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 1);
+-            BOOST_CHECK(i->second.begin()->simple_name() == "bool");
++            BOOST_CHECK(i->second.begin()->simple() == "bool");
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -391,7 +389,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
+     ind.index(m);
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         using dogen::tack::relationship_types;
+@@ -399,20 +397,20 @@ BOOST_AUTO_TEST_CASE(object_with_object_property_results_in_expected_indices) {
+         const auto wa(relationship_types::weak_associations);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+-            const auto sn(i->second.begin()->simple_name());
++            const auto sn(i->second.begin()->simple());
+             BOOST_CHECK(factory.is_type_name_n(1, sn));
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(i == o.relationships().end());
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -444,7 +442,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices)
+     bool found(false);
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         using dogen::tack::relationship_types;
+@@ -452,13 +450,13 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_property_results_in_expected_indices)
+         const auto wa(relationship_types::weak_associations);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             found = true;
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 2);
+-            const auto front_sn(i->second.front().simple_name());
++            const auto front_sn(i->second.front().simple());
+             BOOST_CHECK(front_sn == "bool" || front_sn == "pair");
+-            const auto back_sn(i->second.back().simple_name());
++            const auto back_sn(i->second.back().simple());
+             BOOST_CHECK(back_sn == "bool" || back_sn == "pair");
+ 
+             i = o.relationships().find(wa);
+@@ -485,13 +483,12 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+ 
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         if (factory.is_type_name_n(0, pair.first)) {
+             found = true;
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+ 
+             using dogen::tack::relationship_types;
+             const auto ra(relationship_types::regular_associations);
+@@ -501,8 +498,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_property_results_in_expected_indi
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_CHECK(i->second.size() == 3);
+             bool found_uint(false), found_bool(false), found_variant(false);
+-            for (const auto& qn : i->second) {
+-                const auto sn(qn.simple_name());
++            for (const auto& n : i->second) {
++                const auto sn(n.simple());
+                 if (sn == "unsigned int")
+                     found_uint = true;
+                 else if (sn == "bool")
+@@ -536,7 +533,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
+     bool found(false);
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         using dogen::tack::relationship_types;
+@@ -544,11 +541,11 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_property_results_in_expected_indices
+         const auto wa(relationship_types::weak_associations);
+ 
+         auto i(o.relationships().find(ra));
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             found = true;
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+-            BOOST_CHECK(i->second.front().simple_name() == "string");
++            BOOST_CHECK(i->second.front().simple() == "string");
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i == o.relationships().end());
+@@ -573,13 +570,12 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+ 
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         if (factory.is_type_name_n(0, pair.first)) {
+             found = true;
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+ 
+             using dogen::tack::relationship_types;
+             const auto ra(relationship_types::regular_associations);
+@@ -588,13 +584,13 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_property_results_in_expected_i
+             auto i(o.relationships().find(ra));
+             BOOST_REQUIRE(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+-            BOOST_CHECK(i->second.front().simple_name() == "shared_ptr");
++            BOOST_CHECK(i->second.front().simple() == "shared_ptr");
+ 
+             i = o.relationships().find(wa);
+             BOOST_CHECK(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_CHECK(factory.is_type_name_n(1,
+-                    i->second.front().simple_name()));
++                    i->second.front().simple()));
+         }
+     }
+     BOOST_CHECK(found);
+@@ -613,13 +609,12 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+ 
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+         if (factory.is_type_name_n(0, pair.first)) {
+             found = true;
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+ 
+             using dogen::tack::relationship_types;
+             const auto ra(relationship_types::regular_associations);
+@@ -630,14 +625,14 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
+             BOOST_REQUIRE(i->second.size() == 3);
+             std::vector<bool> found;
+             found.resize(3);
+-            for (const auto& qn : i->second) {
+-                if (qn.simple_name() == "shared_ptr")
++            for (const auto& n : i->second) {
++                if (n.simple() == "shared_ptr")
+                     found[0] = true;
+ 
+-                if (qn.simple_name() == "string")
++                if (n.simple() == "string")
+                     found[1] = true;
+ 
+-                if (factory.is_type_name_n(1, qn.simple_name()))
++                if (factory.is_type_name_n(1, n.simple()))
+                     found[2] = true;
+             }
+ 
+@@ -648,7 +643,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_weak_associations_results_in_e
+             BOOST_CHECK(i != o.relationships().end());
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_CHECK(factory.is_type_name_n(3,
+-                    i->second.front().simple_name()));
++                    i->second.front().simple()));
+         }
+     }
+     BOOST_CHECK(found);
+diff --git a/projects/tack/spec/concept_indexer_spec.cpp b/projects/tack/spec/concept_indexer_spec.cpp
+index 27d763b..b1ea1f8 100644
+--- a/projects/tack/spec/concept_indexer_spec.cpp
++++ b/projects/tack/spec/concept_indexer_spec.cpp
+@@ -30,7 +30,6 @@
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/io/object_io.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/test/mock_model_factory.hpp"
+ #include "dogen/tack/types/concept_indexer.hpp"
+ 
+@@ -57,7 +56,6 @@ const mock_model_factory factory(flags);
+ 
+ }
+ 
+-using dogen::tack::string_converter;
+ using dogen::utility::test::contains_checker;
+ using dogen::tack::indexing_error;
+ using dogen::utility::test::asserter;
+@@ -168,7 +166,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(1, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+ 
+         i = o.relationships().find(par);
+         BOOST_REQUIRE(i == o.relationships().end());
+@@ -185,7 +183,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+             BOOST_REQUIRE(c.refines().size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     dogen::tack::concept_indexer ind;
+@@ -201,7 +199,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+         } else if (factory.is_concept_name_n(1, n)) {
+             BOOST_CHECK(c.refines().size() == 1);
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+@@ -217,7 +215,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+         else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(i->second.size() == 2);
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -247,7 +245,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(2, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+ 
+         i = o.relationships().find(par);
+         BOOST_REQUIRE(i == o.relationships().end());
+@@ -267,7 +265,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+             BOOST_REQUIRE(c.refines().size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(1, c.refines().front()));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     dogen::tack::concept_indexer ind;
+@@ -285,7 +283,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+         } else if (factory.is_concept_name_n(2, n)) {
+             BOOST_CHECK(c.refines().size() == 2);
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 3);
+@@ -303,7 +301,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+         } else if (factory.is_type_name_n(2, n)) {
+                 BOOST_CHECK(i->second.size() == 3);
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -331,7 +329,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             i = o.relationships().find(par);
+             BOOST_REQUIRE(i == o.relationships().end());
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.concepts().size() == 4);
+@@ -356,7 +354,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+                 factory.is_concept_name_n(1, c.refines().back()) ||
+                 factory.is_concept_name_n(2, c.refines().back()));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     dogen::tack::concept_indexer ind;
+@@ -387,7 +385,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             BOOST_CHECK(found_one);
+             BOOST_CHECK(found_two);
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 1);
+@@ -450,7 +448,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+         if (factory.is_concept_name_n(0, n))
+             BOOST_REQUIRE(c.refines().empty());
+         else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     using dogen::tack::relationship_types;
+@@ -475,7 +473,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     dogen::tack::concept_indexer ind;
+@@ -501,7 +499,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_REQUIRE(c.refines().size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     using dogen::tack::relationship_types;
+@@ -526,7 +524,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     dogen::tack::concept_indexer ind;
+@@ -544,7 +542,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_CHECK(c.refines().size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+@@ -569,7 +567,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -587,7 +585,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
+             BOOST_REQUIRE(c.refines().size() == 1);
+             BOOST_REQUIRE(factory.is_concept_name_n(0, c.refines().front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+@@ -607,7 +605,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
+     {
+         const auto& n(m.objects().begin()->first);
+         if (!factory.is_type_name_n(0, n))
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+ 
+         const auto& o(m.objects().begin()->second);
+         using dogen::tack::relationship_types;
+@@ -639,7 +637,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
+         if (factory.is_concept_name_n(0, n))
+             BOOST_REQUIRE(c.refines().empty());
+         else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 1);
+@@ -662,7 +660,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
+             BOOST_REQUIRE(i->second.size() == 1);
+             BOOST_REQUIRE(factory.is_type_name_n(0, i->second.front()));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(n));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "before indexing: " << m;
+diff --git a/projects/tack/spec/identifier_parser_spec.cpp b/projects/tack/spec/identifier_parser_spec.cpp
+index 3f35a03..ca91327 100644
+--- a/projects/tack/spec/identifier_parser_spec.cpp
++++ b/projects/tack/spec/identifier_parser_spec.cpp
+@@ -46,7 +46,7 @@ bool test_primitive(const std::string& s) {
+ 
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name(s);
++    e.simple(s);
+     nn.type(e);
+     return asserter::assert_equals(nn, a);
+ }
+@@ -67,9 +67,9 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
+ 
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("z");
+-    e.module_path(std::list<std::string> { "b", "c"});
+-    e.model_name("a");
++    e.simple("z");
++    e.location().internal_module_path(std::list<std::string> { "b", "c"});
++    e.location().original_model_name("a");
+     nn.type(e);
+     BOOST_CHECK(asserter::assert_equals(nn, a));
+ }
+@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
+ 
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("zeta");
++    e.simple("zeta");
+     nn.type(e);
+     BOOST_CHECK(asserter::assert_equals(nn, a));
+ }
+@@ -99,8 +99,8 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
+ 
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.model_name("a");
+-    e.simple_name("z");
++    e.location().original_model_name("a");
++    e.simple("z");
+     nn.type(e);
+     BOOST_CHECK(asserter::assert_equals(nn, a));
+ }
+@@ -173,11 +173,11 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("type");
++    e.simple("type");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("abc");
++    f.simple("abc");
+     dogen::tack::nested_name c;
+     c.type(f);
+     nn.children(std::list<dogen::tack::nested_name> { c });
+@@ -191,16 +191,16 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("type");
++    e.simple("type");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("abc");
++    f.simple("abc");
+     dogen::tack::nested_name c;
+     c.type(f);
+ 
+     dogen::tack::name g;
+-    g.simple_name("cde");
++    g.simple("cde");
+     dogen::tack::nested_name d;
+     d.type(g);
+     nn.children(std::list<dogen::tack::nested_name> { c, d });
+@@ -217,13 +217,13 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_nested_names) {
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("vector");
+-    e.model_name("std");
++    e.simple("vector");
++    e.location().original_model_name("std");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("string");
+-    f.model_name("std");
++    f.simple("string");
++    f.location().original_model_name("std");
+     dogen::tack::nested_name c;
+     c.type(f);
+     nn.children(std::list<dogen::tack::nested_name> { c });
+@@ -240,12 +240,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_nested_names)
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("vector");
+-    e.model_name("std");
++    e.simple("vector");
++    e.location().original_model_name("std");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("unsigned int");
++    f.simple("unsigned int");
+     dogen::tack::nested_name c;
+     c.type(f);
+     nn.children(std::list<dogen::tack::nested_name> { c });
+@@ -262,18 +262,18 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_nested_names) {
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("unordered_map");
+-    e.model_name("std");
++    e.simple("unordered_map");
++    e.location().original_model_name("std");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("string");
+-    f.model_name("std");
++    f.simple("string");
++    f.location().original_model_name("std");
+     dogen::tack::nested_name c;
+     c.type(f);
+     dogen::tack::name g;
+-    g.simple_name("type");
+-    g.model_name("my");
++    g.simple("type");
++    g.location().original_model_name("my");
+     dogen::tack::nested_name d;
+     d.type(g);
+ 
+@@ -295,19 +295,19 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_nested_names
+     dogen::tack::identifier_parser ip;
+     dogen::tack::nested_name nn;
+     dogen::tack::name e;
+-    e.simple_name("vector");
+-    e.model_name("std");
++    e.simple("vector");
++    e.location().original_model_name("std");
+     nn.type(e);
+ 
+     dogen::tack::name f;
+-    f.simple_name("shared_ptr");
+-    f.model_name("std");
++    f.simple("shared_ptr");
++    f.location().original_model_name("std");
+     dogen::tack::nested_name c;
+     c.type(f);
+ 
+     dogen::tack::name g;
+-    g.simple_name("string");
+-    g.model_name("std");
++    g.simple("string");
++    g.location().original_model_name("std");
+     dogen::tack::nested_name d;
+     d.type(g);
+     c.children(std::list<dogen::tack::nested_name> { d });
+diff --git a/projects/tack/spec/injector_spec.cpp b/projects/tack/spec/injector_spec.cpp
+index be876b7..f026ccb 100644
+--- a/projects/tack/spec/injector_spec.cpp
++++ b/projects/tack/spec/injector_spec.cpp
+@@ -29,12 +29,10 @@
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/io/object_io.hpp"
+ #include "dogen/tack/types/injection_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/test/mock_model_factory.hpp"
+ #include "dogen/tack/types/injector.hpp"
+ 
+ using dogen::tack::relationship_types;
+-using dogen::tack::string_converter;
+ using dogen::tack::object_types;
+ 
+ namespace {
+@@ -80,9 +78,9 @@ BOOST_AUTO_TEST_CASE(single_type_model_results_in_adding_only_global_module) {
+     BOOST_CHECK(a.objects().size() == 1);
+     BOOST_CHECK(a.modules().size() == 1);
+ 
+-    const auto qn(a.modules().begin()->first);
++    const auto n(a.modules().begin()->first);
+     BOOST_REQUIRE(a.objects().begin()->second.containing_module());
+-    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == qn);
++    BOOST_REQUIRE(*a.objects().begin()->second.containing_module() == n);
+     BOOST_CHECK(a.primitives().empty());
+     BOOST_CHECK(a.enumerations().empty());
+     BOOST_CHECK(a.concepts().empty());
+@@ -108,11 +106,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
+     auto m(factory.object_with_parent_in_the_same_model());
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
+-        if (factory.is_type_name_n(1, qn)) {
++        const auto& n(pair.first);
++        if (factory.is_type_name_n(1, n)) {
+             auto& ao(pair.second);
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             ao.is_visitable(true);
+         }
+     }
+@@ -125,15 +122,13 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
+     BOOST_CHECK(m.objects().size() == 3);
+     bool type_one(false), visitor(false);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
+-        if (factory.is_type_name_n(1, qn)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++        const auto& n(pair.first);
++        if (factory.is_type_name_n(1, n)) {
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             type_one = true;
+-        } else if (factory.is_type_name_n_visitor(1, qn)) {
++        } else if (factory.is_type_name_n_visitor(1, n)) {
+             visitor = true;
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(qn);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+ 
+             const auto& o(pair.second);
+             BOOST_CHECK(o.object_type() == object_types::visitor);
+diff --git a/projects/tack/spec/merger_spec.cpp b/projects/tack/spec/merger_spec.cpp
+index 303da74..c724351 100644
+--- a/projects/tack/spec/merger_spec.cpp
++++ b/projects/tack/spec/merger_spec.cpp
+@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
+     const unsigned int n(5);
+     for (unsigned int i(1); i < n; ++i) {
+         dogen::tack::name n;
+-        n.model_name(factory.model_name(i));
++        n.location().original_model_name(factory.model_name(i));
+         const auto ot(dogen::tack::origin_types::unknown);
+         target.references().insert(std::make_pair(n, ot));
+     }
+@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
+ 
+     for (unsigned int i(1); i < n; ++i) {
+         auto m(factory.make_single_type_model(i));
+-        m.name().external_module_path().push_back(some_path);
++        m.name().location().external_module_path().push_back(some_path);
+         mg.add(m);
+     }
+ 
+@@ -93,7 +93,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
+     BOOST_CHECK(combined.references().size() == 4);
+ 
+     for (const auto pair : combined.references()) {
+-        BOOST_CHECK(pair.first.external_module_path().front() == some_path);
++        BOOST_CHECK(pair.first.location().external_module_path().front() ==
++            some_path);
+         BOOST_CHECK(pair.second == dogen::tack::origin_types::user);
+     }
+ 
+@@ -101,8 +102,9 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
+     std::set<std::string> model_names;
+     for (const auto& pair : combined.objects()) {
+         const auto& n(pair.first);
+-        object_names.insert(n.model_name() + "_" + n.simple_name());
+-        model_names.insert(n.model_name());
++        object_names.insert(n.location().original_model_name() + "_"
++            + n.simple());
++        model_names.insert(n.location().original_model_name());
+     }
+ 
+     BOOST_REQUIRE(object_names.size() == n);
+@@ -152,7 +154,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
+     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
+     auto m(factory.make_single_type_model());
+     m.is_target(true);
+-    m.name().model_name(invalid_model_name);
++    m.name().location().original_model_name(invalid_model_name);
+ 
+     dogen::tack::merger mg;
+     mg.add(m);
+@@ -166,7 +168,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
+ 
+     auto m(factory.make_multi_type_model(0, 2));
+     m.is_target(true);
+-    m.objects().begin()->second.name().simple_name(invalid_simple_name);
++    m.objects().begin()->second.name().simple(invalid_simple_name);
+ 
+     dogen::tack::merger mg;
+     mg.add(m);
+diff --git a/projects/tack/spec/property_indexer_spec.cpp b/projects/tack/spec/property_indexer_spec.cpp
+index 00cc78c..f29f455 100644
+--- a/projects/tack/spec/property_indexer_spec.cpp
++++ b/projects/tack/spec/property_indexer_spec.cpp
+@@ -28,13 +28,10 @@
+ #include "dogen/tack/io/model_io.hpp"
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/io/object_io.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+ #include "dogen/tack/test/mock_model_factory.hpp"
+ #include "dogen/tack/types/property_indexer.hpp"
+ 
+-using dogen::tack::string_converter;
+-
+ namespace {
+ 
+ const std::string test_module("tack");
+@@ -67,8 +64,7 @@ bool has_duplicate_property_names(const Stateful& s,
+ 
+     using namespace dogen::utility::log;
+     BOOST_LOG_SEV(lg, debug) << "Inherited/local properties for "
+-                             << string_converter::convert(s.name()) << ": "
+-                             << count;
++                             << s.name().qualified() << ": " << count;
+ 
+     for (const auto& pair : count)
+         if (pair.second > 1)
+@@ -79,8 +75,7 @@ bool has_duplicate_property_names(const Stateful& s,
+         count[p.name()]++;
+ 
+     BOOST_LOG_SEV(lg, debug) << "All properties for "
+-                             << string_converter::convert(s.name()) << ": "
+-                             << count;
++                             << s.name().qualified() << ": " << count;
+ 
+     for (const auto& pair : count)
+         if (pair.second > 1)
+@@ -182,15 +177,15 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+ 
+     for (const auto& pair : m.concepts()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& c(pair.second);
+ 
+-        if (factory.is_concept_name_n(0, qn)) {
++        if (factory.is_concept_name_n(0, n)) {
+             BOOST_CHECK(c.inherited_properties().empty());
+             BOOST_CHECK(c.all_properties().size() == 1);
+             BOOST_CHECK(c.all_properties() == c.local_properties());
+             BOOST_CHECK(c.refines().empty());
+-        } else if (factory.is_concept_name_n(1, qn)) {
++        } else if (factory.is_concept_name_n(1, n)) {
+             BOOST_CHECK(c.refines().size() == 1);
+             BOOST_REQUIRE(c.inherited_properties().size() == 1);
+             const auto props(c.inherited_properties().begin()->second);
+@@ -200,25 +195,25 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.all_properties().size() == 1);
+             BOOST_CHECK(o.local_properties().size() == 1);
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.all_properties().size() == 3);
+             BOOST_CHECK(o.local_properties().size() == 3);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -234,15 +229,15 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+ 
+     BOOST_REQUIRE(m.concepts().size() == 3);
+     for (const auto& pair : m.concepts()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& c(pair.second);
+ 
+-        if (factory.is_concept_name_n(0, qn)) {
++        if (factory.is_concept_name_n(0, n)) {
+             BOOST_CHECK(c.inherited_properties().empty());
+             BOOST_CHECK(c.all_properties().size() == 1);
+             BOOST_CHECK(c.all_properties() == c.local_properties());
+             BOOST_CHECK(c.refines().empty());
+-        } else if (factory.is_concept_name_n(1, qn)) {
++        } else if (factory.is_concept_name_n(1, n)) {
+             BOOST_REQUIRE(c.inherited_properties().size() == 1);
+             const auto props(c.inherited_properties().begin()->second);
+             BOOST_REQUIRE(props.size() == 1);
+@@ -251,7 +246,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+             BOOST_CHECK(c.all_properties().size() == 2);
+             BOOST_CHECK(c.refines().size() == 1);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+-        } else if (factory.is_concept_name_n(2, qn)) {
++        } else if (factory.is_concept_name_n(2, n)) {
+             BOOST_CHECK(c.inherited_properties().size() == 2);
+             for (const auto& pair : c.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -261,30 +256,30 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+             BOOST_CHECK(c.refines().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 3);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 1);
+             BOOST_CHECK(o.all_properties().size() == 1);
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_REQUIRE(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 2);
+             BOOST_CHECK(o.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+-        } else if (factory.is_type_name_n(2, qn)) {
++        } else if (factory.is_type_name_n(2, n)) {
+             BOOST_REQUIRE(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 4);
+             BOOST_CHECK(o.all_properties().size() == 4);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -299,14 +294,14 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+     BOOST_CHECK(m.concepts().size() == 4);
+     for (const auto& pair : m.concepts()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& c(pair.second);
+ 
+-        if (factory.is_concept_name_n(0, qn)) {
++        if (factory.is_concept_name_n(0, n)) {
+             BOOST_CHECK(c.inherited_properties().empty());
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(c.all_properties() == c.local_properties());
+-        } else if (factory.is_concept_name_n(1, qn)) {
++        } else if (factory.is_concept_name_n(1, n)) {
+             BOOST_CHECK(c.inherited_properties().size() == 1);
+             for (const auto& pair : c.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -314,7 +309,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(c.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+-        } else if (factory.is_concept_name_n(2, qn)) {
++        } else if (factory.is_concept_name_n(2, n)) {
+             BOOST_CHECK(c.inherited_properties().size() == 1);
+             for (const auto& pair : c.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -322,7 +317,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(c.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+-        } else if (factory.is_concept_name_n(3, qn)) {
++        } else if (factory.is_concept_name_n(3, n)) {
+             BOOST_CHECK(c.inherited_properties().size() == 3);
+             for (const auto& pair : c.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -331,7 +326,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             BOOST_CHECK(c.all_properties().size() == 4);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 1);
+@@ -391,21 +386,21 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+     BOOST_LOG_SEV(lg, debug) << "after indexing: " << m;
+     BOOST_REQUIRE(m.objects().size() == 4);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+-        if (factory.is_type_name_n(3, qn)) {
++        if (factory.is_type_name_n(3, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 1);
+             BOOST_CHECK(o.all_properties() == o.local_properties());
+-        } else if (factory.is_type_name_n(2, qn)) {
++        } else if (factory.is_type_name_n(2, n)) {
+             BOOST_CHECK(o.inherited_properties().size() == 1);
+             for (const auto& pair : o.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+ 
+             BOOST_CHECK(o.local_properties().size() == 1);
+             BOOST_CHECK(o.all_properties().size() == 2);
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(o.inherited_properties().size() == 1);
+             for (const auto& pair : o.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 2);
+@@ -413,7 +408,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+             BOOST_CHECK(o.local_properties().size() == 1);
+             BOOST_CHECK(o.all_properties().size() == 3);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+-        } else if (factory.is_type_name_n(0, qn)) {
++        } else if (factory.is_type_name_n(0, n)) {
+             BOOST_CHECK(o.inherited_properties().size() == 1);
+             for (const auto& pair : o.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 3);
+@@ -422,7 +417,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+             BOOST_CHECK(o.all_properties().size() == 4);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -438,27 +433,27 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+ 
+     BOOST_CHECK(m.concepts().size() == 1);
+     for (const auto& pair : m.concepts()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& c(pair.second);
+ 
+-        if (factory.is_concept_name_n(0, qn)) {
++        if (factory.is_concept_name_n(0, n)) {
+             BOOST_CHECK(c.inherited_properties().empty());
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(c.all_properties() == c.local_properties());
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 1);
+             BOOST_CHECK(o.all_properties().size() == 1);
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(o.inherited_properties().size() == 1);
+             for (const auto& pair : o.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -466,7 +461,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+             BOOST_CHECK(o.local_properties().empty());
+             BOOST_CHECK(o.all_properties().size() == 1);
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+@@ -482,14 +477,14 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+ 
+     BOOST_CHECK(m.concepts().size() == 2);
+     for (const auto& pair : m.concepts()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& c(pair.second);
+ 
+-        if (factory.is_concept_name_n(0, qn)) {
++        if (factory.is_concept_name_n(0, n)) {
+             BOOST_CHECK(c.inherited_properties().empty());
+             BOOST_CHECK(c.local_properties().size() == 1);
+             BOOST_CHECK(c.all_properties() == c.local_properties());
+-        } else if (factory.is_concept_name_n(1, qn)) {
++        } else if (factory.is_concept_name_n(1, n)) {
+             BOOST_CHECK(c.inherited_properties().size() == 1);
+             for (const auto& pair : c.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 1);
+@@ -498,20 +493,20 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_CHECK(c.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(c, lg));
+         } else
+-            BOOST_FAIL("Unexpected concept: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected concept: " << n.qualified());
+     }
+ 
+     BOOST_REQUIRE(m.objects().size() == 2);
+     for (const auto& pair : m.objects()) {
+-        const auto& qn(pair.first);
++        const auto& n(pair.first);
+         const auto& o(pair.second);
+ 
+-        if (factory.is_type_name_n(0, qn)) {
++        if (factory.is_type_name_n(0, n)) {
+             BOOST_CHECK(o.inherited_properties().empty());
+             BOOST_CHECK(o.local_properties().size() == 2);
+             BOOST_CHECK(o.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+-        } else if (factory.is_type_name_n(1, qn)) {
++        } else if (factory.is_type_name_n(1, n)) {
+             BOOST_CHECK(o.inherited_properties().size() == 1);
+             for (const auto& pair : o.inherited_properties())
+                 BOOST_CHECK(pair.second.size() == 2);
+@@ -520,7 +515,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_CHECK(o.all_properties().size() == 2);
+             BOOST_CHECK(!has_duplicate_property_names(o, lg));
+         } else
+-            BOOST_FAIL("Unexpected object: " << string_converter::convert(qn));
++            BOOST_FAIL("Unexpected object: " << n.qualified());
+     }
+ }
+ 
+diff --git a/projects/tack/spec/resolver_spec.cpp b/projects/tack/spec/resolver_spec.cpp
+index 615c6ea..81ed1be 100644
+--- a/projects/tack/spec/resolver_spec.cpp
++++ b/projects/tack/spec/resolver_spec.cpp
+@@ -28,7 +28,6 @@
+ #include "dogen/tack/types/resolution_error.hpp"
+ #include "dogen/tack/types/merger.hpp"
+ #include "dogen/tack/types/resolver.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/model_io.hpp"
+ #include "dogen/tack/io/property_io.hpp"
+ #include "dogen/utility/test/equality_tester.hpp"
+@@ -86,7 +85,6 @@ dogen::tack::name get_parent_name(const dogen::tack::object& o) {
+ 
+ }
+ 
+-using dogen::tack::string_converter;
+ using dogen::utility::test::contains_checker;
+ using dogen::tack::resolution_error;
+ 
+@@ -103,7 +101,8 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
+         BOOST_CHECK(o.local_properties().size() == 1 ||
+             o.local_properties().empty());
+         if (o.local_properties().size() == 1)
+-            o.local_properties().begin()->type().type().model_name("");
++            o.local_properties().begin()->type().
++                type().location().original_model_name("");
+     }
+     const auto original(m);
+     BOOST_LOG_SEV(lg, debug) << "original: " << original;
+@@ -120,8 +119,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_the_same_model_resolves_succes
+     for (const auto pair : m.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found = true;
+ 
+             const auto& o(pair.second);
+@@ -158,8 +156,7 @@ BOOST_AUTO_TEST_CASE(object_with_property_type_in_different_model_results_in_suc
+     for (const auto pair : combined.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found = true;
+ 
+             const auto& o(pair.second);
+@@ -202,15 +199,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
+     for (const auto pair : combined.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found = true;
+ 
+             const auto& o(pair.second);
+             BOOST_REQUIRE(has_one_parent(o));
+             const auto pn(get_parent_name(o));
+-            BOOST_LOG_SEV(lg, debug) << "parent: "
+-                                     << string_converter::convert(pn);
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+             BOOST_CHECK(factory.is_type_name_n(1, pn));
+             BOOST_CHECK(factory.is_model_n(0, pn));
+             BOOST_CHECK(o.object_type() ==
+@@ -240,15 +235,13 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
+     for (const auto pair : combined.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found = true;
+ 
+             const auto& o(pair.second);
+             BOOST_REQUIRE(has_one_parent(o));
+             const auto pn(get_parent_name(o));
+-            BOOST_LOG_SEV(lg, debug) << "parent: "
+-                                     << string_converter::convert(pn);
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+             BOOST_CHECK(factory.is_type_name_n(1, pn));
+             BOOST_CHECK(factory.is_model_n(1, pn));
+             BOOST_CHECK(o.object_type() ==
+@@ -278,29 +271,25 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
+     for (const auto pair : combined.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found_one = true;
+ 
+             const auto& o(pair.second);
+             BOOST_REQUIRE(has_one_parent(o));
+             const auto pn(get_parent_name(o));
+-            BOOST_LOG_SEV(lg, debug) << "parent: "
+-                                     << string_converter::convert(pn);
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+             BOOST_CHECK(factory.is_type_name_n(1, pn));
+             BOOST_CHECK(factory.is_model_n(0, pn));
+             BOOST_CHECK(o.object_type() ==
+                 dogen::tack::object_types::user_defined_value_object);
+         } else if (factory.is_type_name_n(1, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found_two = true;
+ 
+             const auto& o(pair.second);
+             BOOST_REQUIRE(has_one_parent(o));
+             const auto pn(get_parent_name(o));
+-            BOOST_LOG_SEV(lg, debug) << "parent: "
+-                                     << string_converter::convert(pn);
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+             BOOST_CHECK(factory.is_type_name_n(2, pn));
+             BOOST_CHECK(factory.is_model_n(0, pn));
+             BOOST_CHECK(o.object_type() ==
+@@ -347,15 +336,13 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
+     for (const auto pair : combined.objects()) {
+         const auto& n(pair.first);
+         if (factory.is_type_name_n(0, n)) {
+-            BOOST_LOG_SEV(lg, debug) << "found object: "
+-                                     << string_converter::convert(n);
++            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified();
+             found = true;
+ 
+             const auto& o(pair.second);
+             BOOST_REQUIRE(has_one_parent(o));
+             const auto pn(get_parent_name(o));
+-            BOOST_LOG_SEV(lg, debug) << "parent: "
+-                                     << string_converter::convert(pn);
++            BOOST_LOG_SEV(lg, debug) << "parent: " << pn.qualified();
+             BOOST_CHECK(factory.is_type_name_n(1, pn));
+             BOOST_CHECK(factory.is_model_n(1, pn));
+             BOOST_CHECK(o.object_type() ==
+diff --git a/projects/tack/src/hash/location_hash.cpp b/projects/tack/src/hash/location_hash.cpp
+index 8798bcd..37e579e 100644
+--- a/projects/tack/src/hash/location_hash.cpp
++++ b/projects/tack/src/hash/location_hash.cpp
+@@ -44,7 +44,7 @@ namespace tack {
+ std::size_t location_hasher::hash(const location& v) {
+     std::size_t seed(0);
+ 
+-    combine(seed, v.model_name());
++    combine(seed, v.original_model_name());
+     combine(seed, hash_std_list_std_string(v.external_module_path()));
+     combine(seed, hash_std_list_std_string(v.model_path()));
+     combine(seed, hash_std_list_std_string(v.internal_module_path()));
+diff --git a/projects/tack/src/hash/name_hash.cpp b/projects/tack/src/hash/name_hash.cpp
+index 22b74b4..0a9e15f 100644
+--- a/projects/tack/src/hash/name_hash.cpp
++++ b/projects/tack/src/hash/name_hash.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ #include "dogen/tack/hash/name_hash.hpp"
++#include "dogen/tack/hash/location_hash.hpp"
+ 
+ namespace {
+ 
+@@ -28,14 +29,6 @@ inline void combine(std::size_t& seed, const HashableType& value) {
+     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+ }
+ 
+-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+-    std::size_t seed(0);
+-    for (const auto i : v) {
+-        combine(seed, i);
+-    }
+-    return seed;
+-}
+-
+ }
+ 
+ namespace dogen {
+@@ -44,10 +37,9 @@ namespace tack {
+ std::size_t name_hasher::hash(const name& v) {
+     std::size_t seed(0);
+ 
+-    combine(seed, v.model_name());
+-    combine(seed, hash_std_list_std_string(v.external_module_path()));
+-    combine(seed, hash_std_list_std_string(v.module_path()));
+-    combine(seed, v.simple_name());
++    combine(seed, v.simple());
++    combine(seed, v.qualified());
++    combine(seed, v.location());
+ 
+     return seed;
+ }
+diff --git a/projects/tack/src/io/location_io.cpp b/projects/tack/src/io/location_io.cpp
+index d04c129..ec6a5c7 100644
+--- a/projects/tack/src/io/location_io.cpp
++++ b/projects/tack/src/io/location_io.cpp
+@@ -49,7 +49,7 @@ namespace tack {
+ std::ostream& operator<<(std::ostream& s, const location& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::tack::location\"" << ", "
+-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
++      << "\"original_model_name\": " << "\"" << tidy_up_string(v.original_model_name()) << "\"" << ", "
+       << "\"external_module_path\": " << v.external_module_path() << ", "
+       << "\"model_path\": " << v.model_path() << ", "
+       << "\"internal_module_path\": " << v.internal_module_path()
+diff --git a/projects/tack/src/io/name_io.cpp b/projects/tack/src/io/name_io.cpp
+index 6defbf5..ce6f961 100644
+--- a/projects/tack/src/io/name_io.cpp
++++ b/projects/tack/src/io/name_io.cpp
+@@ -21,6 +21,7 @@
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
+ #include "dogen/tack/io/name_io.hpp"
++#include "dogen/tack/io/location_io.hpp"
+ 
+ inline std::string tidy_up_string(std::string s) {
+     boost::replace_all(s, "\r\n", "<new_line>");
+@@ -29,30 +30,15 @@ inline std::string tidy_up_string(std::string s) {
+     return s;
+ }
+ 
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+-    s << "[ ";
+-    for (auto i(v.begin()); i != v.end(); ++i) {
+-        if (i != v.begin()) s << ", ";
+-        s << "\"" << tidy_up_string(*i) << "\"";
+-    }
+-    s << "] ";
+-    return s;
+-}
+-
+-}
+-
+ namespace dogen {
+ namespace tack {
+ 
+ std::ostream& operator<<(std::ostream& s, const name& v) {
+     s << " { "
+       << "\"__type__\": " << "\"dogen::tack::name\"" << ", "
+-      << "\"model_name\": " << "\"" << tidy_up_string(v.model_name()) << "\"" << ", "
+-      << "\"external_module_path\": " << v.external_module_path() << ", "
+-      << "\"module_path\": " << v.module_path() << ", "
+-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\""
++      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
++      << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
++      << "\"location\": " << v.location()
+       << " }";
+     return(s);
+ }
+diff --git a/projects/tack/src/serialization/location_ser.cpp b/projects/tack/src/serialization/location_ser.cpp
+index 47a27ba..8e32611 100644
+--- a/projects/tack/src/serialization/location_ser.cpp
++++ b/projects/tack/src/serialization/location_ser.cpp
+@@ -38,7 +38,7 @@ template<typename Archive>
+ void save(Archive& ar,
+     const dogen::tack::location& v,
+     const unsigned int /*version*/) {
+-    ar << make_nvp("model_name", v.model_name_);
++    ar << make_nvp("original_model_name", v.original_model_name_);
+     ar << make_nvp("external_module_path", v.external_module_path_);
+     ar << make_nvp("model_path", v.model_path_);
+     ar << make_nvp("internal_module_path", v.internal_module_path_);
+@@ -48,7 +48,7 @@ template<typename Archive>
+ void load(Archive& ar,
+     dogen::tack::location& v,
+     const unsigned int /*version*/) {
+-    ar >> make_nvp("model_name", v.model_name_);
++    ar >> make_nvp("original_model_name", v.original_model_name_);
+     ar >> make_nvp("external_module_path", v.external_module_path_);
+     ar >> make_nvp("model_path", v.model_path_);
+     ar >> make_nvp("internal_module_path", v.internal_module_path_);
+diff --git a/projects/tack/src/serialization/name_ser.cpp b/projects/tack/src/serialization/name_ser.cpp
+index b4f0330..c5761eb 100644
+--- a/projects/tack/src/serialization/name_ser.cpp
++++ b/projects/tack/src/serialization/name_ser.cpp
+@@ -19,7 +19,6 @@
+  *
+  */
+ #include <boost/serialization/nvp.hpp>
+-#include <boost/serialization/list.hpp>
+ #include <boost/archive/xml_iarchive.hpp>
+ #include <boost/archive/xml_oarchive.hpp>
+ #include <boost/serialization/string.hpp>
+@@ -30,6 +29,7 @@
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
+ #include "dogen/tack/serialization/name_ser.hpp"
++#include "dogen/tack/serialization/location_ser.hpp"
+ 
+ namespace boost {
+ namespace serialization {
+@@ -38,20 +38,18 @@ template<typename Archive>
+ void save(Archive& ar,
+     const dogen::tack::name& v,
+     const unsigned int /*version*/) {
+-    ar << make_nvp("model_name", v.model_name_);
+-    ar << make_nvp("external_module_path", v.external_module_path_);
+-    ar << make_nvp("module_path", v.module_path_);
+-    ar << make_nvp("simple_name", v.simple_name_);
++    ar << make_nvp("simple", v.simple_);
++    ar << make_nvp("qualified", v.qualified_);
++    ar << make_nvp("location", v.location_);
+ }
+ 
+ template<typename Archive>
+ void load(Archive& ar,
+     dogen::tack::name& v,
+     const unsigned int /*version*/) {
+-    ar >> make_nvp("model_name", v.model_name_);
+-    ar >> make_nvp("external_module_path", v.external_module_path_);
+-    ar >> make_nvp("module_path", v.module_path_);
+-    ar >> make_nvp("simple_name", v.simple_name_);
++    ar >> make_nvp("simple", v.simple_);
++    ar >> make_nvp("qualified", v.qualified_);
++    ar >> make_nvp("location", v.location_);
+ }
+ 
+ } }
+diff --git a/projects/tack/src/test/mock_model_factory.cpp b/projects/tack/src/test/mock_model_factory.cpp
+index 9b192b8..8ab8b15 100644
+--- a/projects/tack/src/test/mock_model_factory.cpp
++++ b/projects/tack/src/test/mock_model_factory.cpp
+@@ -24,7 +24,7 @@
+ #include <boost/make_shared.hpp>
+ #include <boost/throw_exception.hpp>
+ #include <boost/algorithm/string/predicate.hpp>
+-#include "dogen/utility/log/logger.hpp"
++#include"dogen/utility/log/logger.hpp"
+ #include "dogen/utility/exception/utility_exception.hpp"
+ #include "dogen/dynamic/types/value_factory.hpp"
+ #include "dogen/tack/types/object.hpp"
+@@ -104,27 +104,27 @@ std::string module_name(const unsigned int i) {
+ }
+ 
+ dogen::tack::nested_name mock_nested_name(const dogen::tack::name& n) {
+-    dogen::tack::name pn;
+-    pn.simple_name(n.simple_name());
+-    pn.model_name(n.model_name());
++    dogen::tack::name nn;
++    nn.simple(n.simple());
++    nn.location().original_model_name(n.location().original_model_name());
+ 
+     dogen::tack::nested_name r;
+-    r.type(pn);
++    r.type(nn);
+     return r;
+ }
+ 
+ dogen::tack::name mock_model_name(unsigned int i) {
+     dogen::tack::name r;
+-    r.model_name(model_name(i));
+-    r.simple_name(model_name(i));
++    r.location().original_model_name(model_name(i));
++    r.simple(model_name(i));
+     return r;
+ }
+ 
+ dogen::tack::nested_name
+ mock_nested_name_shared_ptr(const dogen::tack::name& n) {
+     dogen::tack::name e;
+-    e.simple_name("shared_ptr");
+-    e.model_name("boost");
++    e.simple("shared_ptr");
++    e.location().original_model_name("boost");
+ 
+     dogen::tack::nested_name r;
+     r.type(e);
+@@ -147,49 +147,49 @@ dogen::tack::nested_name mock_nested_name(
+     typedef test::mock_model_factory::property_types property_types;
+     switch(pt) {
+     case property_types::unsigned_int:
+-        n.simple_name(unsigned_int);
++        n.simple(unsigned_int);
+         r.type(n);
+         break;
+     case property_types::boolean:
+-        n.simple_name(boolean);
++        n.simple(boolean);
+         r.type(n);
+         break;
+     case property_types::boost_variant: {
+         name e;
+-        e.simple_name("variant");
+-        e.model_name("boost");
++        e.simple("variant");
++        e.location().original_model_name("boost");
+         r.type(e);
+ 
+         name f;
+-        f.simple_name(boolean);
++        f.simple(boolean);
+         nested_name c;
+         c.type(f);
+ 
+         name g;
+-        g.simple_name(unsigned_int);
++        g.simple(unsigned_int);
+         nested_name d;
+         d.type(g);
+         r.children(std::list<nested_name> { c, d });
+         break;
+     }
+     case property_types::std_string:
+-        n.simple_name("string");
+-        n.model_name("std");
++        n.simple("string");
++        n.location().original_model_name("std");
+         r.type(n);
+         break;
+     case property_types::std_pair: {
+         name e;
+-        e.simple_name("pair");
+-        e.model_name("std");
++        e.simple("pair");
++        e.location().original_model_name("std");
+         r.type(e);
+ 
+         name f;
+-        f.simple_name(boolean);
++        f.simple(boolean);
+         nested_name c;
+         c.type(f);
+ 
+         name g;
+-        g.simple_name(boolean);
++        g.simple(boolean);
+         nested_name d;
+         d.type(g);
+         r.children(std::list<nested_name> { c, d });
+@@ -206,11 +206,12 @@ void populate_object(dogen::tack::object& o, const unsigned int i,
+     const dogen::tack::name& model_name, const unsigned int module_n) {
+ 
+     dogen::tack::name n;
+-    n.model_name(model_name.model_name());
+-    n.simple_name(type_name(i));
++    n.location().original_model_name(
++        model_name.location().original_model_name());
++    n.simple(type_name(i));
+ 
+     for (unsigned int i(0); i < module_n; ++i)
+-        n.module_path().push_back(module_name(i));
++        n.location().internal_module_path().push_back(module_name(i));
+ 
+     o.name(n);
+     o.generation_type(dogen::tack::generation_types::full_generation);
+@@ -326,9 +327,9 @@ void insert_object(dogen::tack::model& m, const dogen::tack::object& o) {
+ }
+ 
+ std::string name_for_file_name(const dogen::tack::name& n) {
+-    if (n.simple_name().empty())
+-        return n.model_name();
+-    return n.simple_name();
++    if (n.simple().empty())
++        return n.location().original_model_name();
++    return n.simple();
+ }
+ 
+ std::string types_header_filename(const dogen::tack::name& n) {
+@@ -460,7 +461,7 @@ boost_serialization_forward_declaration_filename(const name& n) const {
+ 
+ bool mock_model_factory::
+ is_model_n(const unsigned int n, const name& name) const {
+-    return is_model_n(n, name.model_name());
++    return is_model_n(n, name.location().original_model_name());
+ }
+ 
+ bool mock_model_factory::
+@@ -470,12 +471,12 @@ is_model_n(const unsigned int n, const std::string& name) const {
+ 
+ bool mock_model_factory::
+ is_type_name_n(const unsigned int n, const name& name) const {
+-    return is_type_name_n(n, name.simple_name());
++    return is_type_name_n(n, name.simple());
+ }
+ 
+ bool mock_model_factory::
+ is_concept_name_n(const unsigned int n, const name& name) const {
+-    return concept_name(n) == name.simple_name();
++    return concept_name(n) == name.simple();
+ }
+ 
+ bool mock_model_factory::
+@@ -491,8 +492,8 @@ is_module_n(const unsigned int n, const std::string& name) const {
+ bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
+     const name& name) const {
+     return
+-        boost::contains(name.simple_name(), type_name(n)) &&
+-        boost::contains(name.simple_name(), visitor_postfix);
++        boost::contains(name.simple(), type_name(n)) &&
++        boost::contains(name.simple(), visitor_postfix);
+ }
+ 
+ void mock_model_factory::
+@@ -501,8 +502,9 @@ handle_model_module(const bool add_model_module, tack::model& m) const {
+         return;
+ 
+     name n;
+-    n.model_name(m.name().model_name());
+-    n.simple_name(m.name().simple_name());
++    n.location().original_model_name(
++        m.name().location().original_model_name());
++    n.simple(m.name().simple());
+     const auto module(make_module(n, documentation));
+     insert_nameable(m.modules(), module);
+ }
+@@ -529,8 +531,9 @@ concept mock_model_factory::make_concept(const unsigned int i,
+     const name& model_name) const {
+ 
+     name n;
+-    n.model_name(model_name.model_name());
+-    n.simple_name(concept_name(i));
++    n.location().original_model_name(
++        model_name.location().original_model_name());
++    n.simple(concept_name(i));
+ 
+     concept r;
+     r.name(n);
+@@ -547,11 +550,12 @@ enumeration mock_model_factory::
+ make_enumeration(const unsigned int i, const name& model_name,
+     const unsigned int module_n) const {
+     name n;
+-    n.model_name(model_name.model_name());
+-    n.simple_name(type_name(i));
++    n.location().original_model_name(
++        model_name.location().original_model_name());
++    n.simple(type_name(i));
+ 
+     for (unsigned int i(0); i < module_n; ++i)
+-        n.module_path().push_back(module_name(i));
++        n.location().internal_module_path().push_back(module_name(i));
+ 
+     enumeration r;
+     r.name(n);
+@@ -559,7 +563,7 @@ make_enumeration(const unsigned int i, const name& model_name,
+     r.documentation(documentation);
+ 
+     name un;
+-    un.simple_name(unsigned_int);
++    un.simple(unsigned_int);
+     r.underlying_type(un);
+ 
+     const auto lambda([&](const unsigned int n) -> enumerator {
+@@ -581,11 +585,12 @@ make_enumeration(const unsigned int i, const name& model_name,
+ object mock_model_factory::make_exception(const unsigned int i,
+     const name& model_name, const unsigned int module_n) const {
+     name n;
+-    n.model_name(model_name.model_name());
+-    n.simple_name(type_name(i));
++    n.location().original_model_name(
++        model_name.location().original_model_name());
++    n.simple(type_name(i));
+ 
+     for (unsigned int i(0); i < module_n; ++i)
+-        n.module_path().push_back(module_name(i));
++        n.location().internal_module_path().push_back(module_name(i));
+ 
+     object r;
+     r.name(n);
+@@ -613,9 +618,9 @@ module mock_model_factory::make_module(const unsigned int module_n,
+     const std::string& documentation) const {
+ 
+     name n;
+-    n.model_name(model_name);
+-    n.simple_name(module_name(module_n));
+-    n.module_path(module_path);
++    n.location().original_model_name(model_name);
++    n.simple(module_name(module_n));
++    n.location().internal_module_path(module_path);
+     return make_module(n, documentation);
+ }
+ 
+@@ -623,8 +628,8 @@ name mock_model_factory::make_name(const unsigned int model_n,
+     const unsigned int simple_n) const {
+ 
+     name r;
+-    r.model_name(model_name(model_n));
+-    r.simple_name(type_name(simple_n));
++    r.location().original_model_name(model_name(model_n));
++    r.simple(type_name(simple_n));
+     return r;
+ }
+ 
+@@ -660,7 +665,7 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
+     model r(make_empty_model(n, add_model_module));
+ 
+     std::list<std::string> model_path;
+-    const auto mn(r.name().model_name());
++    const auto mn(r.name().location().original_model_name());
+     for (unsigned int i(0); i < mod_n; ++i) {
+         const auto m(make_module(i, mn, model_path, documentation));
+         insert_nameable(r.modules(), m);
+@@ -700,7 +705,7 @@ make_single_concept_model(const unsigned int n,
+     model r(make_empty_model(n, add_model_module));
+ 
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c(make_concept(0, r.name()));
+@@ -720,7 +725,7 @@ make_first_degree_concepts_model(const unsigned int n,
+     const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -753,7 +758,7 @@ make_second_degree_concepts_model(const unsigned int n,
+     const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -801,7 +806,7 @@ model mock_model_factory::make_multiple_inheritance_concepts_model(
+     const unsigned int n, const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -829,7 +834,7 @@ make_diamond_inheritance_concepts_model(const unsigned int n,
+     const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -870,7 +875,7 @@ model mock_model_factory::make_object_with_parent_that_models_concept(
+     const unsigned int n, const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -895,7 +900,7 @@ make_object_with_parent_that_models_a_refined_concept(
+     const unsigned int n, const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -939,7 +944,7 @@ make_object_that_models_missing_concept(const unsigned int n,
+     const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -956,7 +961,7 @@ model mock_model_factory::make_object_that_models_concept_with_missing_parent(
+     const unsigned int n, const bool add_model_module) const {
+     model r(make_empty_model(n, add_model_module));
+     primitive ui;
+-    ui.name().simple_name(unsigned_int);
++    ui.name().simple(unsigned_int);
+     r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+     concept c0(make_concept(0, r.name()));
+@@ -992,8 +997,8 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
+         o0.relationships()[ra].push_back(o1.name());
+ 
+     name n;
+-    n.simple_name("shared_ptr");
+-    n.model_name("boost");
++    n.simple("shared_ptr");
++    n.location().original_model_name("boost");
+ 
+     object o2;
+     o2.name(n);
+@@ -1020,8 +1025,8 @@ model mock_model_factory::object_with_both_regular_and_weak_associations(
+     if (flags_.associations_indexed())
+         o0.relationships()[wa].push_back(o3.name());
+ 
+-    n.simple_name("string");
+-    n.model_name("std");
++    n.simple("string");
++    n.location().original_model_name("std");
+ 
+     object o4;
+     o4.name(n);
+@@ -1083,8 +1088,8 @@ object_with_property(const object_types ot, const property_types pt,
+ 
+     } else if (pt == property_types::boost_shared_ptr) {
+         name n;
+-        n.simple_name("shared_ptr");
+-        n.model_name("boost");
++        n.simple("shared_ptr");
++        n.location().original_model_name("boost");
+ 
+         object o2;
+         o2.name(n);
+@@ -1096,15 +1101,15 @@ object_with_property(const object_types ot, const property_types pt,
+ 
+     } else if (pt == property_types::std_pair) {
+         primitive b;
+-        b.name().simple_name(boolean);
++        b.name().simple(boolean);
+         r.primitives().insert(std::make_pair(b.name(), b));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(b.name());
+ 
+         name n;
+-        n.simple_name("pair");
+-        n.model_name("std");
++        n.simple("pair");
++        n.location().original_model_name("std");
+ 
+         object o2;
+         o2.name(n);
+@@ -1116,22 +1121,22 @@ object_with_property(const object_types ot, const property_types pt,
+         insert_object(r, o2);
+     } else if (pt == property_types::boost_variant) {
+         primitive b;
+-        b.name().simple_name(boolean);
++        b.name().simple(boolean);
+         r.primitives().insert(std::make_pair(b.name(), b));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(b.name());
+ 
+         primitive ui;
+-        ui.name().simple_name(unsigned_int);
++        ui.name().simple(unsigned_int);
+         r.primitives().insert(std::make_pair(ui.name(), ui));
+ 
+         if (flags_.associations_indexed())
+             o0.relationships()[ra].push_back(ui.name());
+ 
+         name n;
+-        n.simple_name("variant");
+-        n.model_name("boost");
++        n.simple("variant");
++        n.location().original_model_name("boost");
+ 
+         object o2;
+         o2.name(n);
+@@ -1143,8 +1148,8 @@ object_with_property(const object_types ot, const property_types pt,
+ 
+     } else if (pt == property_types::std_string) {
+         name n;
+-        n.simple_name("string");
+-        n.model_name("std");
++        n.simple("string");
++        n.location().original_model_name("std");
+ 
+         object o2;
+         o2.name(n);
+@@ -1168,7 +1173,7 @@ mock_model_factory::object_with_property_type_in_different_model(
+         0, property_types::value_object, o1.name());
+ 
+     name m0_n;
+-    m0_n.model_name(model_name(0));
++    m0_n.location().original_model_name(model_name(0));
+ 
+     model m0;
+     m0.name(m0_n);
+@@ -1176,7 +1181,7 @@ mock_model_factory::object_with_property_type_in_different_model(
+     handle_model_module(add_model_module, m0);
+ 
+     name m1_n;
+-    m1_n.model_name(model_name(1));
++    m1_n.location().original_model_name(model_name(1));
+ 
+     model m1;
+     m1.name(m1_n);
+@@ -1198,9 +1203,6 @@ model mock_model_factory::object_with_missing_property_type(
+     if (flags_.associations_indexed())
+         o0.relationships()[ra].push_back(o1.name());
+ 
+-    name mn_n;
+-    mn_n.model_name(model_name(0));
+-
+     model r(make_empty_model(0, add_model_module));
+     insert_object(r, o0);
+ 
+@@ -1215,7 +1217,7 @@ object_with_parent_in_the_same_model(const bool has_property,
+     model r(make_empty_model(0, add_model_module));
+     if (has_property) {
+         primitive ui;
+-        ui.name().simple_name(unsigned_int);
++        ui.name().simple(unsigned_int);
+         r.primitives().insert(std::make_pair(ui.name(), ui));
+     }
+ 
+@@ -1299,7 +1301,7 @@ object_with_third_degree_parent_in_same_model(const bool has_property,
+     model r(make_empty_model(0, add_model_module));
+     if (has_property) {
+         primitive ui;
+-        ui.name().simple_name(unsigned_int);
++        ui.name().simple(unsigned_int);
+         r.primitives().insert(std::make_pair(ui.name(), ui));
+     }
+ 
+@@ -1467,8 +1469,8 @@ model mock_model_factory::object_with_group_of_properties_of_different_types(
+     lambda(p2);
+ 
+     name n;
+-    n.simple_name("shared_ptr");
+-    n.model_name("boost");
++    n.simple("shared_ptr");
++    n.location().original_model_name("boost");
+ 
+     object o2;
+     o2.name(n);
+diff --git a/projects/tack/src/test_data/location_td.cpp b/projects/tack/src/test_data/location_td.cpp
+index de6e0fd..22fc5ae 100644
+--- a/projects/tack/src/test_data/location_td.cpp
++++ b/projects/tack/src/test_data/location_td.cpp
+@@ -46,7 +46,7 @@ location_generator::location_generator() : position_(0) { }
+ 
+ void location_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v.model_name(create_std_string(position + 0));
++    v.original_model_name(create_std_string(position + 0));
+     v.external_module_path(create_std_list_std_string(position + 1));
+     v.model_path(create_std_list_std_string(position + 2));
+     v.internal_module_path(create_std_list_std_string(position + 3));
+diff --git a/projects/tack/src/test_data/name_td.cpp b/projects/tack/src/test_data/name_td.cpp
+index 0858b9b..ceff509 100644
+--- a/projects/tack/src/test_data/name_td.cpp
++++ b/projects/tack/src/test_data/name_td.cpp
+@@ -20,6 +20,7 @@
+  */
+ #include <sstream>
+ #include "dogen/tack/test_data/name_td.hpp"
++#include "dogen/tack/test_data/location_td.hpp"
+ 
+ namespace {
+ 
+@@ -29,12 +30,9 @@ std::string create_std_string(const unsigned int position) {
+     return s.str();
+ }
+ 
+-std::list<std::string> create_std_list_std_string(unsigned int position) {
+-    std::list<std::string> r;
+-    for (unsigned int i(0); i < 4; ++i) {
+-        r.push_back(create_std_string(position + i));
+-    }
+-    return r;
++dogen::tack::location
++create_dogen_tack_location(const unsigned int position) {
++    return dogen::tack::location_generator::create(position);
+ }
+ 
+ }
+@@ -46,10 +44,9 @@ name_generator::name_generator() : position_(0) { }
+ 
+ void name_generator::
+ populate(const unsigned int position, result_type& v) {
+-    v.model_name(create_std_string(position + 0));
+-    v.external_module_path(create_std_list_std_string(position + 1));
+-    v.module_path(create_std_list_std_string(position + 2));
+-    v.simple_name(create_std_string(position + 3));
++    v.simple(create_std_string(position + 0));
++    v.qualified(create_std_string(position + 1));
++    v.location(create_dogen_tack_location(position + 2));
+ }
+ 
+ name_generator::result_type
+diff --git a/projects/tack/src/types/association_indexer.cpp b/projects/tack/src/types/association_indexer.cpp
+index 294a228..e5fed8b 100644
+--- a/projects/tack/src/types/association_indexer.cpp
++++ b/projects/tack/src/types/association_indexer.cpp
+@@ -23,7 +23,6 @@
+ #include <boost/lexical_cast.hpp>
+ #include "dogen/utility/io/list_io.hpp"
+ #include "dogen/utility/log/logger.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+ #include "dogen/tack/io/name_io.hpp"
+ #include "dogen/tack/io/relationship_types_io.hpp"
+@@ -86,9 +85,9 @@ void association_indexer::recurse_nested_names(const model& m,
+ 
+     const auto k(m.objects().find(n));
+     if (k == m.objects().end()) {
+-        const auto sn(string_converter::convert(n));
+-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
++        const auto qn(n.qualified());
++        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
++        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+     }
+ 
+     const auto sp(object_types::smart_pointer);
+@@ -106,8 +105,7 @@ void association_indexer::recurse_nested_names(const model& m,
+ }
+ 
+ void association_indexer::index_object(const model& m, object& o) const {
+-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
+-                             << string_converter::convert(o.name());
++    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+ 
+     for (const auto& p : o.local_properties()) {
+         const auto nn(p.type());
+diff --git a/projects/tack/src/types/concept_indexer.cpp b/projects/tack/src/types/concept_indexer.cpp
+index bf323a6..ab19920 100644
+--- a/projects/tack/src/types/concept_indexer.cpp
++++ b/projects/tack/src/types/concept_indexer.cpp
+@@ -27,7 +27,6 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/relationship_types_io.hpp"
+ #include "dogen/tack/types/concept_indexer.hpp"
+ 
+@@ -53,21 +52,26 @@ namespace tack {
+  * This is required as part of the current (very sub-optimal)
+  * implementation of concept processing.
+  */
++inline bool operator<(const location& lhs, const location& rhs) {
++    return
++        (lhs.original_model_name() < rhs.original_model_name() ||
++            (lhs.original_model_name() == rhs.original_model_name() &&
++                (lhs.external_module_path() < rhs.external_module_path())));
++}
++
+ inline bool operator<(const name& lhs, const name& rhs) {
+     return
+-        lhs.model_name() < rhs.model_name() ||
+-        (lhs.model_name() == rhs.model_name() &&
+-            (lhs.external_module_path() < rhs.external_module_path() ||
+-                (lhs.external_module_path() == rhs.external_module_path() &&
+-                    (lhs.simple_name() < rhs.simple_name()))));
++        (lhs.location() < rhs.location() ||
++            (lhs.location() == rhs.location() &&
++                (lhs.simple() < rhs.simple())));
+ }
+ 
+ object& concept_indexer::find_object(const name& n, model& m) {
+     auto i(m.objects().find(n));
+     if (i == m.objects().end()) {
+-        const auto sn(string_converter::convert(n));
+-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
++        BOOST_LOG_SEV(lg, error) << object_not_found << n.qualified();
++        BOOST_THROW_EXCEPTION(
++            indexing_error(object_not_found +  n.qualified()));
+     }
+     return i->second;
+ }
+@@ -76,11 +80,10 @@ std::list<name>& concept_indexer::
+ find_relationships(const relationship_types rt, object& o) {
+     auto i(o.relationships().find(rt));
+     if (i == o.relationships().end() || i->second.empty()) {
+-        const auto n(string_converter::convert(o.name()));
+-        BOOST_LOG_SEV(lg, error) << relationship_not_found << n
++        const auto qn(o.name().qualified());
++        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
+                                  << " relationship: " << rt;
+-
+-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + n));
++        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
+     }
+     return i->second;
+ }
+@@ -88,9 +91,9 @@ find_relationships(const relationship_types rt, object& o) {
+ concept& concept_indexer::find_concept(const name& n, model& m) {
+     auto i(m.concepts().find(n));
+     if (i == m.concepts().end()) {
+-        const auto sn(string_converter::convert(n));
+-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
++        BOOST_LOG_SEV(lg, error) << concept_not_found << n.qualified();
++        BOOST_THROW_EXCEPTION(
++            indexing_error(concept_not_found + n.qualified()));
+     }
+     return i->second;
+ }
+@@ -101,6 +104,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
+     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
+                              << names.size();
+ 
++    // FIXME: use std algorithm
+     auto i(names.begin());
+     while (i != names.end()) {
+         const auto n(*i);
+@@ -119,8 +123,7 @@ void concept_indexer::remove_duplicates(std::list<name>& names) const {
+ 
+ void concept_indexer::index_object(object& o, model& m,
+     std::unordered_set<name>& processed_names) {
+-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
+-                             << string_converter::convert(o.name());
++    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+ 
+     if (processed_names.find(o.name()) != processed_names.end()) {
+         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
+@@ -203,8 +206,7 @@ void concept_indexer::index_objects(model& m) {
+ 
+ void concept_indexer::index_concept(concept& c, model& m,
+     std::unordered_set<name>& processed_names) {
+-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
+-                             << string_converter::convert(c.name());
++    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
+ 
+     if (processed_names.find(c.name()) != processed_names.end()) {
+         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";
+diff --git a/projects/tack/src/types/generalization_indexer.cpp b/projects/tack/src/types/generalization_indexer.cpp
+index 149d34a..357d9e9 100644
+--- a/projects/tack/src/types/generalization_indexer.cpp
++++ b/projects/tack/src/types/generalization_indexer.cpp
+@@ -25,7 +25,6 @@
+ #include "dogen/utility/io/unordered_map_io.hpp"
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/tack/types/object.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+ #include "dogen/tack/io/name_io.hpp"
+ #include "dogen/tack/io/relationship_types_io.hpp"
+@@ -48,19 +47,18 @@ const std::string child_with_no_original_parent(
+ namespace dogen {
+ namespace tack {
+ 
+-/**
+- * @brief Add comparable support for names.
+- *
+- * This is required as part of the current (very sub-optimal)
+- * implementation of concept processing.
+- */
++inline bool operator<(const location& lhs, const location& rhs) {
++    return
++        (lhs.original_model_name() < rhs.original_model_name() ||
++            (lhs.original_model_name() == rhs.original_model_name() &&
++                (lhs.external_module_path() < rhs.external_module_path())));
++}
++
+ inline bool operator<(const name& lhs, const name& rhs) {
+     return
+-        lhs.model_name() < rhs.model_name() ||
+-        (lhs.model_name() == rhs.model_name() &&
+-            (lhs.external_module_path() < rhs.external_module_path() ||
+-                (lhs.external_module_path() == rhs.external_module_path() &&
+-                    (lhs.simple_name() < rhs.simple_name()))));
++        (lhs.location() < rhs.location() ||
++            (lhs.location() == rhs.location() &&
++                (lhs.simple() < rhs.simple())));
+ }
+ 
+ bool generalization_indexer::is_leaf(const object& o) const {
+@@ -87,26 +85,26 @@ recurse_generalization(const model& m, const name& leaf,
+ 
+     const auto i(o.relationships().find(relationship_types::parents));
+     if (i == o.relationships().end() || i->second.empty()) {
+-        const auto n(string_converter::convert(o.name()));
+-        BOOST_LOG_SEV(lg, error) << child_with_no_parents << n;
+-        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + n));
++        const auto qn(o.name().qualified());
++        BOOST_LOG_SEV(lg, error) << child_with_no_parents << qn;
++        BOOST_THROW_EXCEPTION(indexing_error(child_with_no_parents + qn));
+     }
+ 
+     std::list<name> original_parents;
+     for (const auto& parent : i->second) {
+         auto j(m.objects().find(parent));
+         if (j == m.objects().end()) {
+-            const auto n(string_converter::convert(parent));
+-            BOOST_LOG_SEV(lg, error) << parent_not_found << n;
+-            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + n));
++            const auto qn(parent.qualified());
++            BOOST_LOG_SEV(lg, error) << parent_not_found << qn;
++            BOOST_THROW_EXCEPTION(indexing_error(parent_not_found + qn));
+         }
+ 
+         const auto op(recurse_generalization(m, leaf, j->second, d));
+         if (op.empty()) {
+-            const auto n(string_converter::convert(parent));
+-            BOOST_LOG_SEV(lg, error) << child_with_no_original_parent << n;
++            const auto qn(parent.qualified());
++            BOOST_LOG_SEV(lg, error) << child_with_no_original_parent << qn;
+             BOOST_THROW_EXCEPTION(
+-                indexing_error(child_with_no_original_parent + n));
++                indexing_error(child_with_no_original_parent + qn));
+         }
+ 
+         for (const auto qn : op)
+@@ -114,12 +112,12 @@ recurse_generalization(const model& m, const name& leaf,
+ 
+         d.original_parents[parent] = op;
+         BOOST_LOG_SEV(lg, debug) << "Type: "
+-                                 << string_converter::convert(parent)
++                                 << parent.qualified()
+                                  << " has original parents: " << op;
+ 
+         d.leaves[parent].push_back(leaf);
+         BOOST_LOG_SEV(lg, debug) << "Type is a leaf of: "
+-                                 << string_converter::convert(parent);
++                                 << parent.qualified();
+     }
+     d.original_parents[o.name()] = original_parents;
+     return original_parents;
+@@ -132,7 +130,7 @@ obtain_details(const model& m) const {
+     for (auto& pair : m.objects()) {
+         auto& o(pair.second);
+         BOOST_LOG_SEV(lg, debug) << "Processing type: "
+-                                 << string_converter::convert(o.name());
++                                 << o.name().qualified();
+ 
+         if (!is_leaf(o))
+             continue;
+@@ -149,40 +147,40 @@ obtain_details(const model& m) const {
+ void generalization_indexer::
+ populate(const generalization_details& d, model& m) const {
+     for (const auto& pair : d.leaves) {
+-        const auto& qn(pair.first);
+-        auto i(m.objects().find(qn));
++        const auto& n(pair.first);
++        auto i(m.objects().find(n));
+         if (i == m.objects().end()) {
+-            const auto n(string_converter::convert(qn));
+-            BOOST_LOG_SEV(lg, error) << object_not_found << n;
+-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
++            const auto qn(n.qualified());
++            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
++            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+         }
+ 
+         const auto rt(relationship_types::leaves);
+         i->second.relationships()[rt] = pair.second;
+         i->second.relationships()[rt].sort();
+ 
++        const auto omn(m.name().location().original_model_name());
+         for (const auto& l : pair.second) {
+-            if (l.model_name() == m.name().model_name())
++            if (l.location().original_model_name() == omn)
+                 m.leaves().insert(l);
+         }
+     }
+ 
+     for (const auto& pair : d.original_parents) {
+-        const auto& qn(pair.first);
+-        auto i(m.objects().find(qn));
++        const auto& n(pair.first);
++        auto i(m.objects().find(n));
+         if (i == m.objects().end()) {
+-            const auto n(string_converter::convert(qn));
+-            BOOST_LOG_SEV(lg, error) << object_not_found << n;
+-            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
++            const auto qn(n.qualified());
++            BOOST_LOG_SEV(lg, error) << object_not_found << qn;
++            BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+         }
+ 
+         auto& o(i->second);
+         if (!o.is_child()) {
+             // a bit of a hack, top-level types have themselves as the
+-            // original parent of the container just to make our life easier.
+-            const auto n(string_converter::convert(qn));
++            // original parent of the container just to make our life easier
+             BOOST_LOG_SEV(lg, debug) << "Type has parents but is not a child: "
+-                                     << n;
++                                     << n.qualified();
+             continue;
+         }
+ 
+@@ -192,9 +190,9 @@ populate(const generalization_details& d, model& m) const {
+         for (const auto& opn : pair.second) {
+             const auto j(m.objects().find(opn));
+             if (j == m.objects().end()) {
+-                const auto n(string_converter::convert(opn));
+-                BOOST_LOG_SEV(lg, error) << object_not_found << n;
+-                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + n));
++                const auto qn(opn.qualified());
++                BOOST_LOG_SEV(lg, error) << object_not_found << qn;
++                BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+             }
+             o.is_original_parent_visitable(j->second.is_visitable());
+         }
+diff --git a/projects/tack/src/types/importer.cpp b/projects/tack/src/types/importer.cpp
+index 8db6ef5..9315935 100644
+--- a/projects/tack/src/types/importer.cpp
++++ b/projects/tack/src/types/importer.cpp
+@@ -24,7 +24,6 @@
+ #include "dogen/dynamic/types/workflow.hpp"
+ #include "dogen/tack/types/persister.hpp"
+ #include "dogen/tack/io/model_io.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/input_descriptor_io.hpp"
+ #include "dogen/tack/types/importer.hpp"
+ 
+@@ -51,7 +50,8 @@ importer::importer(const dynamic::repository& rp)
+ 
+     for (const auto& pair : registrar().file_importers_by_extension()) {
+         BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "'"
+-                                 << " file importer: '" << pair.second->id() << "'";
++                                 << " file importer: '" << pair.second->id()
++                                 << "'";
+     }
+ 
+     BOOST_LOG_SEV(lg, debug) << "Finished initialising importer. ";
+diff --git a/projects/tack/src/types/injector.cpp b/projects/tack/src/types/injector.cpp
+index 1c05220..88dad2d 100644
+--- a/projects/tack/src/types/injector.cpp
++++ b/projects/tack/src/types/injector.cpp
+@@ -27,7 +27,6 @@
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/types/type_visitor.hpp"
+ #include "dogen/tack/types/injection_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/injector.hpp"
+ 
+ using namespace dogen::utility::log;
+@@ -97,13 +96,15 @@ bool injector::insert(const object& o) {
+ object injector::
+ create_visitor(const object& o, const std::list<name>& leaves) const {
+     name n;
+-    n.simple_name(o.name().simple_name() + "_" + visitor_name);
+-    n.model_name(o.name().model_name());
+-    n.module_path(o.name().module_path());
+-    n.external_module_path(o.name().external_module_path());
++    n.simple(o.name().simple() + "_" + visitor_name);
+ 
+-    BOOST_LOG_SEV(lg, debug) << "Creating visitor: "
+-                             << string_converter::convert(n);
++    const auto& l(o.name().location());
++    n.location().original_model_name(l.original_model_name());
++    n.location().external_module_path(l.external_module_path());
++    n.location().model_path(l.model_path());
++    n.location().internal_module_path(l.internal_module_path());
++
++    BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified();
+ 
+     object r;
+     r.name(n);
+@@ -111,13 +112,12 @@ create_visitor(const object& o, const std::list<name>& leaves) const {
+     r.generation_type(o.generation_type());
+     r.origin_type(origin_types::system);
+     r.object_type(object_types::visitor);
+-    r.documentation(visitor_doc + o.name().simple_name());
++    r.documentation(visitor_doc + o.name().simple());
+ 
+     for (const auto& l : leaves)
+         r.relationships()[relationship_types::visits].push_back(l);
+ 
+-    BOOST_LOG_SEV(lg, debug) << "Created visitor: "
+-                             << string_converter::convert(n);
++    BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.qualified();
+     return r;
+ }
+ 
+@@ -129,9 +129,9 @@ void injector::inject_visited_by(object& root, const std::list<name>& leaves,
+     for (const auto& l : leaves) {
+         auto i(context_->model().objects().find(l));
+         if (i == context_->model().objects().end()) {
+-            const auto n(string_converter::convert(l));
+-            BOOST_LOG_SEV(lg, error) << leaf_not_found << n;
+-            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + n));
++            const auto qn(l.qualified());
++            BOOST_LOG_SEV(lg, error) << leaf_not_found << qn;
++            BOOST_THROW_EXCEPTION(injection_error(leaf_not_found + qn));
+         }
+ 
+         auto& leaf(i->second);
+@@ -154,9 +154,9 @@ void injector::inject_visitors() {
+             !i->second.empty());
+ 
+         if (!has_leaves) {
+-            const auto n(string_converter::convert(o.name()));
+-            BOOST_LOG_SEV(lg, error) << zero_leaves << n;
+-            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + n));
++            const auto qn(o.name().qualified());
++            BOOST_LOG_SEV(lg, error) << zero_leaves << qn;
++            BOOST_THROW_EXCEPTION(injection_error(zero_leaves + qn));
+         }
+ 
+         const auto v(create_visitor(o, i->second));
+@@ -166,12 +166,12 @@ void injector::inject_visitors() {
+ 
+     for (const auto v : visitors) {
+         BOOST_LOG_SEV(lg, debug) << "Adding visitor: "
+-                                 << string_converter::convert(v.name());
++                                 << v.name().qualified();
+ 
+         if (!insert(v)) {
+-            const auto n(string_converter::convert(v.name()));
+-            BOOST_LOG_SEV(lg, error) << duplicate_name << n;
+-            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + n));
++            const auto qn(v.name().qualified());
++            BOOST_LOG_SEV(lg, error) << duplicate_name << qn;
++            BOOST_THROW_EXCEPTION(injection_error(duplicate_name + qn));
+         }
+     }
+ 
+@@ -184,10 +184,10 @@ void injector::inject_global_module() {
+     auto& model(context_->model());
+     const auto i(model.modules().find(qn));
+     if (i != model.modules().end()) {
+-        const auto n(string_converter::convert(model.name()));
+-        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << n;
++        const auto qn(model.name().qualified());
++        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << qn;
+         BOOST_THROW_EXCEPTION(injection_error(
+-                model_already_has_global_module + n));
++                model_already_has_global_module + qn));
+     }
+ 
+     add_containing_module_to_non_contained_entities(qn, model.modules());
+diff --git a/projects/tack/src/types/location.cpp b/projects/tack/src/types/location.cpp
+index 3388675..3bac55a 100644
+--- a/projects/tack/src/types/location.cpp
++++ b/projects/tack/src/types/location.cpp
+@@ -24,25 +24,25 @@ namespace dogen {
+ namespace tack {
+ 
+ location::location(
+-    const std::string& model_name,
++    const std::string& original_model_name,
+     const std::list<std::string>& external_module_path,
+     const std::list<std::string>& model_path,
+     const std::list<std::string>& internal_module_path)
+-    : model_name_(model_name),
++    : original_model_name_(original_model_name),
+       external_module_path_(external_module_path),
+       model_path_(model_path),
+       internal_module_path_(internal_module_path) { }
+ 
+ void location::swap(location& other) noexcept {
+     using std::swap;
+-    swap(model_name_, other.model_name_);
++    swap(original_model_name_, other.original_model_name_);
+     swap(external_module_path_, other.external_module_path_);
+     swap(model_path_, other.model_path_);
+     swap(internal_module_path_, other.internal_module_path_);
+ }
+ 
+ bool location::operator==(const location& rhs) const {
+-    return model_name_ == rhs.model_name_ &&
++    return original_model_name_ == rhs.original_model_name_ &&
+         external_module_path_ == rhs.external_module_path_ &&
+         model_path_ == rhs.model_path_ &&
+         internal_module_path_ == rhs.internal_module_path_;
+@@ -54,20 +54,20 @@ location& location::operator=(location other) {
+     return *this;
+ }
+ 
+-const std::string& location::model_name() const {
+-    return model_name_;
++const std::string& location::original_model_name() const {
++    return original_model_name_;
+ }
+ 
+-std::string& location::model_name() {
+-    return model_name_;
++std::string& location::original_model_name() {
++    return original_model_name_;
+ }
+ 
+-void location::model_name(const std::string& v) {
+-    model_name_ = v;
++void location::original_model_name(const std::string& v) {
++    original_model_name_ = v;
+ }
+ 
+-void location::model_name(const std::string&& v) {
+-    model_name_ = std::move(v);
++void location::original_model_name(const std::string&& v) {
++    original_model_name_ = std::move(v);
+ }
+ 
+ const std::list<std::string>& location::external_module_path() const {
+diff --git a/projects/tack/src/types/merger.cpp b/projects/tack/src/types/merger.cpp
+index ecea19e..30d1c38 100644
+--- a/projects/tack/src/types/merger.cpp
++++ b/projects/tack/src/types/merger.cpp
+@@ -22,7 +22,6 @@
+ #include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/tack/types/object.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/types/merging_error.hpp"
+ #include "dogen/tack/io/property_io.hpp"
+ #include "dogen/tack/io/model_io.hpp"
+@@ -51,7 +50,7 @@ void merger::require_not_has_target(const std::string& name) const {
+ 
+     std::ostringstream stream;
+     stream << "Only one target expected. Last target model name: '"
+-           << string_converter::convert(merged_model_.name())
++           << merged_model_.name().qualified()
+            << "'. New target model name: "
+            << name;
+ 
+@@ -81,11 +80,11 @@ void merger::require_not_has_merged() const {
+ void merger::check_name(const std::string& model_name, const name& key,
+     const name& value) const {
+ 
+-    if (key.model_name() != model_name) {
++    if (key.location().original_model_name() != model_name) {
+         std::ostringstream s;
+         s << "Type does not belong to this model. Model name: '"
+           << model_name << "'. Type name: "
+-          << string_converter::convert(key);
++          << key.qualified();
+         BOOST_LOG_SEV(lg, error) << s.str();
+         BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+@@ -93,8 +92,8 @@ void merger::check_name(const std::string& model_name, const name& key,
+     if (key != value) {
+         std::ostringstream s;
+         s << "Inconsistency between key and value names: "
+-          << " key: " << string_converter::convert(key)
+-          << " value: " << string_converter::convert(value);
++          << " key: " << key.qualified()
++          << " value: " << value.qualified();
+         BOOST_LOG_SEV(lg, error) << s.str();
+         BOOST_THROW_EXCEPTION(merging_error(s.str()));
+     }
+@@ -106,14 +105,15 @@ void merger::update_references() {
+     for (const auto& pair : models_) {
+         const auto& model(pair.second);
+         const auto value(std::make_pair(model.name(), model.origin_type()));
+-        const auto p(std::make_pair(model.name().model_name(), value));
++        const auto mn(model.name().location().original_model_name());
++        const auto p(std::make_pair(mn, value));
+         references_by_model_name.insert(p);
+     }
+ 
+     std::unordered_map<name, origin_types> updated_references;
+     for (auto& pair : merged_model_.references()) {
+         const auto n(pair.first);
+-        const auto mn(n.model_name());
++        const auto mn(n.location().original_model_name());
+         const auto i(references_by_model_name.find(mn));
+         if (i == references_by_model_name.end()) {
+             BOOST_LOG_SEV(lg, error) << msising_dependency << mn;
+@@ -127,8 +127,8 @@ void merger::update_references() {
+ }
+ 
+ void merger::add_target(const model& target) {
+-    const auto n(string_converter::convert(target.name()));
+-    require_not_has_target(n);
++    const auto qn(target.name().qualified());
++    require_not_has_target(qn);
+ 
+     has_target_ = true;
+     merged_model_.name(target.name());
+@@ -139,7 +139,7 @@ void merger::add_target(const model& target) {
+     merged_model_.extensions(target.extensions());
+     merged_model_.is_target(true);
+ 
+-    BOOST_LOG_SEV(lg, debug) << "added target model: " << n;
++    BOOST_LOG_SEV(lg, debug) << "added target model: " << qn;
+ }
+ 
+ void merger::add(const model& m) {
+@@ -149,26 +149,26 @@ void merger::add(const model& m) {
+         add_target(m);
+ 
+     BOOST_LOG_SEV(lg, debug) << "adding model: "
+-                             << string_converter::convert(m.name());
++                             << m.name().qualified();
+     BOOST_LOG_SEV(lg, debug) << "contents: " << m;
+     models_.insert(std::make_pair(m.name(), m));
+ }
+ 
+ void merger::merge_model(const model& m) {
+     BOOST_LOG_SEV(lg, info) << "Merging model: '"
+-                            << string_converter::convert(m.name())
++                            << m.name().qualified()
+                             << " modules: " << m.modules().size()
+                             << " concepts: " << m.concepts().size()
+                             << " primitives: " << m.primitives().size()
+                             << " enumerations: " << m.enumerations().size()
+                             << " objects: " << m.objects().size();
+ 
++    const auto mn(m.name().location().original_model_name());
+     for (const auto& c : m.concepts()) {
+-        check_name(m.name().model_name(), c.first, c.second.name());
++        check_name(mn, c.first, c.second.name());
+         merged_model_.concepts().insert(c);
+     }
+ 
+-    const auto mn(m.name().model_name());
+     for (const auto& pair : m.primitives()) {
+         // FIXME: mega hack to handle primitive model.
+         const auto pmn(mn == hardware_model_name ? empty : mn);
+@@ -187,7 +187,7 @@ void merger::merge_model(const model& m) {
+     }
+ 
+     for (const auto& pair : m.modules()) {
+-        if (!pair.first.simple_name().empty())
++        if (!pair.first.simple().empty())
+             check_name(mn, pair.first, pair.second.name());
+         merged_model_.modules().insert(pair);
+     }
+diff --git a/projects/tack/src/types/name.cpp b/projects/tack/src/types/name.cpp
+index 04b3680..174ca56 100644
+--- a/projects/tack/src/types/name.cpp
++++ b/projects/tack/src/types/name.cpp
+@@ -24,28 +24,24 @@ namespace dogen {
+ namespace tack {
+ 
+ name::name(
+-    const std::string& model_name,
+-    const std::list<std::string>& external_module_path,
+-    const std::list<std::string>& module_path,
+-    const std::string& simple_name)
+-    : model_name_(model_name),
+-      external_module_path_(external_module_path),
+-      module_path_(module_path),
+-      simple_name_(simple_name) { }
++    const std::string& simple,
++    const std::string& qualified,
++    const dogen::tack::location& location)
++    : simple_(simple),
++      qualified_(qualified),
++      location_(location) { }
+ 
+ void name::swap(name& other) noexcept {
+     using std::swap;
+-    swap(model_name_, other.model_name_);
+-    swap(external_module_path_, other.external_module_path_);
+-    swap(module_path_, other.module_path_);
+-    swap(simple_name_, other.simple_name_);
++    swap(simple_, other.simple_);
++    swap(qualified_, other.qualified_);
++    swap(location_, other.location_);
+ }
+ 
+ bool name::operator==(const name& rhs) const {
+-    return model_name_ == rhs.model_name_ &&
+-        external_module_path_ == rhs.external_module_path_ &&
+-        module_path_ == rhs.module_path_ &&
+-        simple_name_ == rhs.simple_name_;
++    return simple_ == rhs.simple_ &&
++        qualified_ == rhs.qualified_ &&
++        location_ == rhs.location_;
+ }
+ 
+ name& name::operator=(name other) {
+@@ -54,68 +50,52 @@ name& name::operator=(name other) {
+     return *this;
+ }
+ 
+-const std::string& name::model_name() const {
+-    return model_name_;
++const std::string& name::simple() const {
++    return simple_;
+ }
+ 
+-std::string& name::model_name() {
+-    return model_name_;
++std::string& name::simple() {
++    return simple_;
+ }
+ 
+-void name::model_name(const std::string& v) {
+-    model_name_ = v;
++void name::simple(const std::string& v) {
++    simple_ = v;
+ }
+ 
+-void name::model_name(const std::string&& v) {
+-    model_name_ = std::move(v);
++void name::simple(const std::string&& v) {
++    simple_ = std::move(v);
+ }
+ 
+-const std::list<std::string>& name::external_module_path() const {
+-    return external_module_path_;
++const std::string& name::qualified() const {
++    return qualified_;
+ }
+ 
+-std::list<std::string>& name::external_module_path() {
+-    return external_module_path_;
++std::string& name::qualified() {
++    return qualified_;
+ }
+ 
+-void name::external_module_path(const std::list<std::string>& v) {
+-    external_module_path_ = v;
++void name::qualified(const std::string& v) {
++    qualified_ = v;
+ }
+ 
+-void name::external_module_path(const std::list<std::string>&& v) {
+-    external_module_path_ = std::move(v);
++void name::qualified(const std::string&& v) {
++    qualified_ = std::move(v);
+ }
+ 
+-const std::list<std::string>& name::module_path() const {
+-    return module_path_;
++const dogen::tack::location& name::location() const {
++    return location_;
+ }
+ 
+-std::list<std::string>& name::module_path() {
+-    return module_path_;
++dogen::tack::location& name::location() {
++    return location_;
+ }
+ 
+-void name::module_path(const std::list<std::string>& v) {
+-    module_path_ = v;
++void name::location(const dogen::tack::location& v) {
++    location_ = v;
+ }
+ 
+-void name::module_path(const std::list<std::string>&& v) {
+-    module_path_ = std::move(v);
+-}
+-
+-const std::string& name::simple_name() const {
+-    return simple_name_;
+-}
+-
+-std::string& name::simple_name() {
+-    return simple_name_;
+-}
+-
+-void name::simple_name(const std::string& v) {
+-    simple_name_ = v;
+-}
+-
+-void name::simple_name(const std::string&& v) {
+-    simple_name_ = std::move(v);
++void name::location(const dogen::tack::location&& v) {
++    location_ = std::move(v);
+ }
+ 
+ } }
+diff --git a/projects/tack/src/types/nested_name_builder.cpp b/projects/tack/src/types/nested_name_builder.cpp
+index 8c8d9d4..349d805 100644
+--- a/projects/tack/src/types/nested_name_builder.cpp
++++ b/projects/tack/src/types/nested_name_builder.cpp
+@@ -60,7 +60,7 @@ void nested_name_builder::add_name(const std::string& s) {
+ void nested_name_builder::add_primitive(const std::string& s) {
+     BOOST_LOG_SEV(lg, debug) << "pushing back primitive :" << s;
+     auto n(current_->data());
+-    n.simple_name(s);
++    n.simple(s);
+     current_->data(n);
+ }
+ 
+@@ -73,29 +73,30 @@ void nested_name_builder::finish_current_node() {
+         return;
+ 
+     if (names_.size() == 1) {
+-        n.simple_name(names_.front());
++        n.simple(names_.front());
+         names_.clear();
+-        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
++        BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
+         current_->data(n);
+         return;
+     }
+ 
+     const auto i(modules_.find(names_.front()));
+     if (i != modules_.end()) {
+-        n.model_name(model_name_);
++        n.location().original_model_name(model_name_);
+         BOOST_LOG_SEV(lg, debug) << "model name: " << model_name_;
+     } else {
+         BOOST_LOG_SEV(lg, debug) << "model name: " << names_.front();
+-        n.model_name(names_.front());
++        n.location().original_model_name(names_.front());
+         names_.pop_front();
+     }
+ 
+-    n.simple_name(names_.back());
+-    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple_name();
++    n.simple(names_.back());
++    BOOST_LOG_SEV(lg, debug) << "simple name: " << n.simple();
+ 
+     names_.pop_back();
+-    n.module_path(names_);
+-    BOOST_LOG_SEV(lg, debug) << "module path: " << n.module_path();
++    n.location().internal_module_path(names_);
++    BOOST_LOG_SEV(lg, debug) << "internal module path: "
++                             << n.location().internal_module_path();
+ 
+     names_.clear();
+     current_->data(n);
+@@ -137,9 +138,9 @@ void nested_name_builder::end_children() {
+ void nested_name_builder::
+ build_node(nested_name& n, boost::shared_ptr<node> node) {
+     BOOST_LOG_SEV(lg, debug) << "bulding node: "
+-                             << node->data().model_name()
++                             << node->data().location().original_model_name()
+                              << " "
+-                             << node->data().simple_name();
++                             << node->data().simple();
+ 
+     n.type(node->data());
+     std::list<nested_name> children;
+diff --git a/projects/tack/src/types/property_indexer.cpp b/projects/tack/src/types/property_indexer.cpp
+index d289dae..386ab25 100644
+--- a/projects/tack/src/types/property_indexer.cpp
++++ b/projects/tack/src/types/property_indexer.cpp
+@@ -27,7 +27,6 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/tack/types/object.hpp"
+ #include "dogen/tack/types/indexing_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/relationship_types_io.hpp"
+ #include "dogen/tack/types/property_indexer.hpp"
+ 
+@@ -50,9 +49,9 @@ namespace tack {
+ object& property_indexer::find_object(const name& n, model& m) {
+     auto i(m.objects().find(n));
+     if (i == m.objects().end()) {
+-        const auto sn(string_converter::convert(n));
+-        BOOST_LOG_SEV(lg, error) << object_not_found << sn;
+-        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + sn));
++        const auto qn(n.qualified());
++        BOOST_LOG_SEV(lg, error) << object_not_found << qn;
++        BOOST_THROW_EXCEPTION(indexing_error(object_not_found + qn));
+     }
+     return i->second;
+ }
+@@ -61,10 +60,10 @@ std::list<name>& property_indexer::
+ find_relationships(const relationship_types rt, object& o) {
+     auto i(o.relationships().find(rt));
+     if (i == o.relationships().end() || i->second.empty()) {
+-        const auto n(string_converter::convert(o.name()));
+-        BOOST_LOG_SEV(lg, error) << relationship_not_found << n
++        const auto qn(o.name().qualified());
++        BOOST_LOG_SEV(lg, error) << relationship_not_found << qn
+                                  << " relationship: " << rt;
+-        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + n));
++        BOOST_THROW_EXCEPTION(indexing_error(relationship_not_found + qn));
+     }
+     return i->second;
+ }
+@@ -72,21 +71,20 @@ find_relationships(const relationship_types rt, object& o) {
+ concept& property_indexer::find_concept(const name& n, model& m) {
+     auto i(m.concepts().find(n));
+     if (i == m.concepts().end()) {
+-        const auto& sn(n.simple_name());
+-        BOOST_LOG_SEV(lg, error) << concept_not_found << sn;
+-        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + sn));
++        const auto& qn(n.qualified());
++        BOOST_LOG_SEV(lg, error) << concept_not_found << qn;
++        BOOST_THROW_EXCEPTION(indexing_error(concept_not_found + qn));
+     }
+     return i->second;
+ }
+ 
+ void property_indexer::index_object(object& o, model& m,
+     std::unordered_set<name>& processed_names) {
+-    BOOST_LOG_SEV(lg, debug) << "Indexing object: "
+-                             << string_converter::convert(o.name());
++    BOOST_LOG_SEV(lg, debug) << "Indexing object: " << o.name().qualified();
+ 
+     if (processed_names.find(o.name()) != processed_names.end()) {
+         BOOST_LOG_SEV(lg, debug) << "Object already processed: "
+-                                 << string_converter::convert(o.name());
++                                 << o.name().qualified();
+         return;
+     }
+ 
+@@ -140,12 +138,11 @@ void property_indexer::index_objects(model& m) {
+ 
+ void property_indexer::index_concept(concept& c, model& m,
+     std::unordered_set<name>& processed_names) {
+-    BOOST_LOG_SEV(lg, debug) << "Indexing concept: "
+-                             << string_converter::convert(c.name());
++    BOOST_LOG_SEV(lg, debug) << "Indexing concept: " << c.name().qualified();
+ 
+     if (processed_names.find(c.name()) != processed_names.end()) {
+         BOOST_LOG_SEV(lg, debug) << "Object already processed:"
+-                                 << string_converter::convert(c.name());
++                                 << c.name().qualified();
+         return;
+     }
+ 
+diff --git a/projects/tack/src/types/qualified_name_builder.cpp b/projects/tack/src/types/qualified_name_builder.cpp
+new file mode 100644
+index 0000000..82ba658
+--- /dev/null
++++ b/projects/tack/src/types/qualified_name_builder.cpp
+@@ -0,0 +1,44 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <sstream>
++#include "dogen/tack/types/qualified_name_builder.hpp"
++
++namespace dogen {
++namespace tack {
++
++std::string qualified_name_builder::build(const name& n) {
++    std::ostringstream s;
++    for (const auto& m : n.location().external_module_path())
++        s << "<" << m << ">";
++
++    if (!n.location().original_model_name().empty())
++        s << "<" << n.location().original_model_name() << ">";
++
++    for (const auto& m : n.location().internal_module_path())
++        s << "<" << m << ">";
++
++    if (!n.simple().empty())
++        s << "<" << n.simple() << ">";
++
++    return s.str();
++}
++
++} }
+diff --git a/projects/tack/src/types/resolver.cpp b/projects/tack/src/types/resolver.cpp
+index 30164b0..216107b 100644
+--- a/projects/tack/src/types/resolver.cpp
++++ b/projects/tack/src/types/resolver.cpp
+@@ -28,7 +28,6 @@
+ #include "dogen/utility/io/unordered_set_io.hpp"
+ #include "dogen/tack/types/type_visitor.hpp"
+ #include "dogen/tack/types/resolution_error.hpp"
+-#include "dogen/tack/types/string_converter.hpp"
+ #include "dogen/tack/io/nested_name_io.hpp"
+ #include "dogen/tack/io/property_io.hpp"
+ #include "dogen/tack/io/model_io.hpp"
+@@ -65,8 +64,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
+         const auto j(model_.objects().find(pn));
+         if (j == model_.objects().end()) {
+             std::ostringstream s;
+-            s << orphan_object << ": " << string_converter::convert(ao.name())
+-              << ". parent: " << string_converter::convert(pn);
++            s << orphan_object << ": " << ao.name().qualified()
++              << ". parent: " << pn.qualified();
+ 
+             BOOST_LOG_SEV(lg, error) << s.str();
+             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
+@@ -81,8 +80,8 @@ void resolver::validate_inheritance_graph(const object& ao) const {
+         const auto j(model_.objects().find(pn));
+         if (j == model_.objects().end()) {
+             std::ostringstream s;
+-            s << orphan_object << ": " << string_converter::convert(ao.name())
+-              << ". original parent: " << string_converter::convert(pn);
++            s << orphan_object << ": " << ao.name().qualified()
++              << ". original parent: " << pn.qualified();
+ 
+             BOOST_LOG_SEV(lg, error) << s.str();
+             BOOST_THROW_EXCEPTION(resolution_error(s.str()));
+@@ -96,8 +95,8 @@ void resolver::validate_refinements(const concept& c) const {
+         if (i == model_.concepts().end()) {
+             std::ostringstream stream;
+             stream << orphan_concept << ". concept: "
+-                   << string_converter::convert(c.name())
+-                   << ". refined concept: " << string_converter::convert(n);
++                   << c.name().qualified()
++                   << ". refined concept: " << n.qualified();
+ 
+             BOOST_LOG_SEV(lg, error) << stream.str();
+             BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
+@@ -106,8 +105,7 @@ void resolver::validate_refinements(const concept& c) const {
+ }
+ 
+ name resolver::resolve_partial_type(const name& n) const {
+-    BOOST_LOG_SEV(lg, debug) << "Resolving type:"
+-                             << string_converter::convert(n);
++    BOOST_LOG_SEV(lg, debug) << "Resolving type:" << n.qualified();
+ 
+     name r(n);
+ 
+@@ -118,7 +116,8 @@ name resolver::resolve_partial_type(const name& n) const {
+         return r;
+ 
+     // then try setting module path to the target one
+-    r.external_module_path(model_.name().external_module_path());
++    r.location().external_module_path(
++        model_.name().location().external_module_path());
+     i = objects.find(r);
+     if (i != objects.end())
+         return r;
+@@ -126,14 +125,15 @@ name resolver::resolve_partial_type(const name& n) const {
+     // now try all available module paths from references
+     for (const auto& pair : model_.references()) {
+         const auto n(pair.first);
+-        r.external_module_path(n.external_module_path());
++        r.location().external_module_path(
++            n.location().external_module_path());
+         i = objects.find(r);
+         if (i != objects.end())
+             return r;
+     }
+ 
+     // reset external module path
+-    r.external_module_path(std::list<std::string>{});
++    r.location().external_module_path(std::list<std::string>{});
+ 
+     // its not a object, could it be a primitive?
+     const auto& primitives(model_.primitives());
+@@ -148,7 +148,8 @@ name resolver::resolve_partial_type(const name& n) const {
+         return r;
+ 
+     // then try setting module path to the target one
+-    r.external_module_path(model_.name().external_module_path());
++    r.location().external_module_path(
++        model_.name().location().external_module_path());
+     k = enumerations.find(r);
+     if (k != enumerations.end())
+         return r;
+@@ -156,16 +157,18 @@ name resolver::resolve_partial_type(const name& n) const {
+     // now try all available module paths from references
+     for (const auto& pair : model_.references()) {
+         const auto n(pair.first);
+-        r.external_module_path(n.external_module_path());
++        r.location().external_module_path(
++            n.location().external_module_path());
+         k = enumerations.find(r);
+         if (k != enumerations.end())
+             return r;
+     }
+ 
+-    if (r.model_name().empty()) {
++    if (r.location().original_model_name().empty()) {
++        const auto& l(model_.name().location());
+         // it could be a type defined in this model
+-        r.model_name(model_.name().model_name());
+-        r.external_module_path(model_.name().external_module_path());
++        r.location().original_model_name(l.original_model_name());
++        r.location().external_module_path(l.external_module_path());
+         i = objects.find(r);
+         if (i != objects.end())
+             return r;
+@@ -179,18 +182,19 @@ name resolver::resolve_partial_type(const name& n) const {
+     // as a reference model. FIXME: big hack.
+     {
+         name n;
+-        n.simple_name(r.simple_name());
+-        n.model_name(r.module_path().front());
+-        n.external_module_path(model_.name().external_module_path());
++        n.simple(r.simple());
++        n.location().original_model_name(
++            r.location().internal_module_path().front());
++        n.location().external_module_path(
++            model_.name().location().external_module_path());
+ 
+         i = objects.find(n);
+         if (i != objects.end())
+             return n;
+     }
+ 
+-    BOOST_LOG_SEV(lg, error) << undefined_type << string_converter::convert(n);
+-    BOOST_THROW_EXCEPTION(resolution_error(
+-            undefined_type + string_converter::convert(n)));
++    BOOST_LOG_SEV(lg, error) << undefined_type << n.qualified();
++    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.qualified()));
+ }
+ 
+ void resolver::resolve_partial_type(nested_name& nn) const {
+@@ -198,9 +202,7 @@ void resolver::resolve_partial_type(nested_name& nn) const {
+         resolve_partial_type(cnn);
+ 
+     name n(resolve_partial_type(nn.type()));
+-    BOOST_LOG_SEV(lg, debug) << "Resolved type "
+-                             << string_converter::convert(n)
+-                             << ". Result: " << string_converter::convert(n);
++    BOOST_LOG_SEV(lg, debug) << "Resolved type " << n.qualified() << ".";
+     nn.type(n);
+ }
+ 
+@@ -211,7 +213,7 @@ resolve_properties(const name& owner, std::list<property>& p) const {
+             resolve_partial_type(prop.type());
+         } catch (boost::exception& e) {
+             std::ostringstream s;
+-            s << "Owner type name: " << string_converter::convert(owner)
++            s << "Owner type name: " << owner.qualified()
+               << " Property name: " << prop.name()
+               << " Property type: " << prop.type();
+             e << errmsg_info(s.str());
+@@ -245,8 +247,7 @@ void resolver::resolve_objects() {
+ 
+     for (auto& pair : model_.objects()) {
+         auto& o(pair.second);
+-        BOOST_LOG_SEV(lg, debug) << "Resolving type "
+-                                 << string_converter::convert(o.name());
++        BOOST_LOG_SEV(lg, debug) << "Resolving type " << o.name().qualified();
+ 
+         if (o.generation_type() == generation_types::no_generation)
+             continue;
+diff --git a/projects/tack/src/types/string_converter.cpp b/projects/tack/src/types/string_converter.cpp
+deleted file mode 100644
+index 675dbe0..0000000
+--- a/projects/tack/src/types/string_converter.cpp
++++ /dev/null
+@@ -1,44 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <sstream>
+-#include "dogen/tack/types/string_converter.hpp"
+-
+-namespace dogen {
+-namespace tack {
+-
+-std::string string_converter::convert(const name& n) {
+-    std::ostringstream s;
+-    for (const auto& m : n.external_module_path())
+-        s << "<" << m << ">";
+-
+-    if (!n.model_name().empty())
+-        s << "<" << n.model_name() << ">";
+-
+-    for (const auto& m : n.module_path())
+-        s << "<" << m << ">";
+-
+-    if (!n.simple_name().empty())
+-        s << "<" << n.simple_name() << ">";
+-
+-    return s.str();
+-}
+-
+-} }
