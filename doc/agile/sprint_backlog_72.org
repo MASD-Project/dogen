@@ -26,52 +26,10 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2015-08-10 Mon 15:04]--[2015-08-10 Mon 15:10] =>  0:06
     CLOCK: [2015-08-10 Mon 14:45]--[2015-08-10 Mon 15:03] =>  0:18
 
 Updates to sprint and product backlog.
-
-*** Compile dogen in Windows using Visual Studio 2015                 :story:
-
-Using our "SoC" resources, we need to setup a Dogen development
-environment on Windows using VS 2015. We need to also create a blog
-post about it.
-
-Issues:
-
-- is polymorphic in instrinsics for microsoft, remove comment. see
-  patch in github.
-- update find boost with MSVC version
-- add string to enum io
-- update exception classes: remove default in base constructor, and
-  add explicit to base and derived as well as by ref.
-
-File with instructions:
-
-0. cd c:\DEVELOPEMENT\output
-1. (only once - as admin) update version of msvc in cmake C:\Program
-  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
-  look for msvc-140 and update it to msvc-150
-2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
-   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
-3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
-
-if you need to re-run: delete the cache:
-
-del CMakeCache.txt
-
-4. msbuild dogen.sln /t:config
-
-5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
-  errors- called msbuild.log in output directory
-
-Links:
-
-- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
-- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
-- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
-- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
-- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
-- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
 
 *** Refactor qname                                                    :story:
 
@@ -100,6 +58,75 @@ type is name, fields:
 This is a better way of modeling, as opposed to the SML way with a
 =qname= which then contains a =simple_name=. We should use this
 approach in SML to.
+
+*Split model name from "contributing model name" in qname*
+
+We need to find a way to model qnames such that there are two model
+names: one which contributes to the namespaces and another which
+doesn't. The specific use case is the primitives model where the model
+has to have a name but we don't want the type names to have the model
+name. Perhaps we need some kind of flag: model name contributes to
+namespacing.
+
+With this we can then remove the numerous hacks around the primitives
+model name such as:
+
+- // FIXME: mega hack to handle primitive model.
+
+See comment in 'dot' story - we can have a model name and a model
+package.
+
+*** Add support for model names with dots                             :story:
+
+It is quite annoying to have to create folders and sub-folders for the
+main projects. This is not too bad right now because we don't really
+make use of nesting that much, other than with test models. However,
+now that the architecture is clear and we need to make use of nesting,
+it becomes more of a concern. For example:
+
+: / a
+:   / b
+:   / c
+: / d
+:   / e
+:   / f
+
+This is clearer as:
+
+: / a
+: / a.b
+: / a.c
+: / d.e
+: / d.f
+
+However, in order to implement this we need a bit of cleverness:
+
+- for the purposes of files, the dot represents a dot;
+- for the purposes of namespaces, we must create several namespaces
+  (e.g. tack::core).
+
+This is also inline with the idea that the model name does not always
+contribute to the namespaces as required by primitives. We basically
+need a cleverer version of qname to handle all of these scenarios.
+
+It may also be worth taking into account the other story on this topic
+where we considered using underscores instead of folders for facet
+names. It may be nicer to have dots for this,
+e.g. =types.my_class.hpp=.
+
+Idea:
+
+=qnames= should have a model name and a model package; only the model
+package contributes to the namespaces. The model name is unpacked into
+multiple model packages (e.g. "a.b" => a::b). The file name uses the
+model name, not the model package.
+
+*** Rename =tack= to =yarn=                                           :story:
+
+We were a bit too trigger happy by settling on =tack= as the name for
+the "temporary" meta-model. As it turns out, we don't need two
+meta-models and as such the name =tack= is no longer suitable. The
+right thing to do is to rename the model to =yarn=.
 
 *** Refactor ownership hierarchy                                      :story:
 
@@ -146,6 +173,64 @@ is to use an approach similar to the formatter groups in the ownership
 hierarchy. For now we simply have fields that have no meaning in
 stitching but can be supplied by users.
 
+*** Split formatter properties and associated classes from formattables :story:
+
+We have two kinds of data: the formattables themselves (mapped from
+tack) and associated data (formatter properties). The latter is
+totally independent. We should create a namespace for all of these
+classes and a workflow that produces the data ready for consumption. A
+tentative name is =manifest=.
+
+*** Compile dogen in Windows using Visual Studio 2015                 :story:
+
+Using our "SoC" resources, we need to setup a Dogen development
+environment on Windows using VS 2015. We need to also create a blog
+post about it.
+
+Issues:
+
+- is polymorphic in instrinsics for microsoft, remove comment. see
+  patch in github.
+- update find boost with MSVC version
+- add string to enum io
+- update exception classes: remove default in base constructor, and
+  add explicit to base and derived as well as by ref.
+
+File with instructions:
+
+0. cd c:\DEVELOPEMENT\output
+1. (only once - as admin) update version of msvc in cmake C:\Program
+  Files (x86)\CMake\share\cmake-3.3\Modules\FindBoost.cmake
+  look for msvc-140 and update it to msvc-150
+2. set CMAKE_INCLUDE_PATH=C:\boost\include;C:\DEVELOPEMENT\libxml2-2.7.8.win32\include
+   set CMAKE_LIBRARY_PATH=C:\boost\lib;C:\DEVELOPEMENT\libxml2-2.7.8.win32\lib
+3. cmake ..\dogen -G "Visual Studio 14 2015" -Wno-dev (CONFIGURATION COMMAND)
+
+if you need to re-run: delete the cache:
+
+del CMakeCache.txt
+
+4. msbuild dogen.sln /t:config
+
+5.msbuild dogen.sln /t:dia /fileLogger   => used to create log for
+  errors- called msbuild.log in output directory
+
+Links:
+
+- [[http://dominoc925.blogspot.co.uk/2013/04/how-i-build-boost-for-64-bit-windows.html][How I build Boost for 64 bit Windows]]
+- [[https://svn.boost.org/trac/boost/ticket/11449][C++11 - is_polymorphic doesn't work with final-ed class in MSVC.]]
+- [[https://github.com/boostorg/type_traits/blob/04a8a9ecc2b02b7334a4b3f0459a5f62b855cc68/include/boost/type_traits/intrinsics.hpp][type_traits/include/boost/type_traits/intrinsics.hpp]]
+- [[http://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md][CMake - compile with /MT instead of /MD]]
+- [[http://www.cmake.org/cmake/help/v3.1/manual/cmake-generators.7.html][CMake Generators]]
+- [[http://choorucode.com/2014/06/06/how-to-build-boost-for-visual-studio-2013/][How to build Boost for Visual Studio 2013]]
+
+*** Consider renaming includers                                       :story:
+
+Its very confusing to have header files that include lots of other
+header files called "includers". There is too much overloading. We
+should consider calling them "master header files" as per Schaling
+terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
+
 *** Replace qname with id's in tack                                   :story:
 
 We don't really need qname in it's current form for the purposes of
@@ -156,21 +241,6 @@ tack. We should:
   hashing name and location. Change all model containers,
   relationships etc to use id instead of qname.
 
-*** Consider renaming includers                                       :story:
-
-Its very confusing to have header files that include lots of other
-header files called "includers". There is too much overloading. We
-should consider calling them "master header files" as per Schaling
-terminology in the [[http://theboostcpplibraries.com/boost.spirit][boost book]].
-
-*** Split formatter properties and associated classes from formattables :story:
-
-We have two kinds of data: the formattables themselves (mapped from
-tack) and associated data (formatter properties). The latter is
-totally independent. We should create a namespace for all of these
-classes and a workflow that produces the data ready for consumption. A
-tentative name is =manifest=.
-
 *** Rename types in =tack= using MOF/eCore terms                      :story:
 
 Rename the types in =tack= to make them a bit more inline with
@@ -178,23 +248,6 @@ MOF/eCore. As much as possible but without going overboard. Ensure we
 do not pick up meta-meta-model concepts by mistake. Rename nested
 qname to something more sensible from MOF/eCore. Review all concept
 names in this light.
-
-*** Split model name from "contributing model name" in qname          :story:
-
-We need to find a way to model qnames such that there are two model
-names: one which contributes to the namespaces and another which
-doesn't. The specific use case is the primitives model where the model
-has to have a name but we don't want the type names to have the model
-name. Perhaps we need some kind of flag: model name contributes to
-namespacing.
-
-With this we can then remove the numerous hacks around the primitives
-model name such as:
-
-- // FIXME: mega hack to handle primitive model.
-
-See comment in 'dot' story - we can have a model name and a model
-package.
 
 *** Create a blog post on biicode                                     :story:
 

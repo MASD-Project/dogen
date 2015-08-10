@@ -25,51 +25,6 @@ no sense as the pointer ownership is clear (the registrar owns the
 pointer). We should use a boost pointer container and pass references
 around, via reference wrapper where required.
 
-*** Add support for model names with dots                             :story:
-
-It is quite annoying to have to create folders and sub-folders for the
-main projects. This is not too bad right now because we don't really
-make use of nesting that much, other than with test models. However,
-now that the architecture is clear and we need to make use of nesting,
-it becomes more of a concern. For example:
-
-: / a
-:   / b
-:   / c
-: / d
-:   / e
-:   / f
-
-This is clearer as:
-
-: / a
-: / a.b
-: / a.c
-: / d.e
-: / d.f
-
-However, in order to implement this we need a bit of cleverness:
-
-- for the purposes of files, the dot represents a dot;
-- for the purposes of namespaces, we must create several namespaces
-  (e.g. tack::core).
-
-This is also inline with the idea that the model name does not always
-contribute to the namespaces as required by primitives. We basically
-need a cleverer version of qname to handle all of these scenarios.
-
-It may also be worth taking into account the other story on this topic
-where we considered using underscores instead of folders for facet
-names. It may be nicer to have dots for this,
-e.g. =types.my_class.hpp=.
-
-Idea:
-
-=qnames= should have a model name and a model package; only the model
-package contributes to the namespaces. The model name is unpacked into
-multiple model packages (e.g. "a.b" => a::b). The file name uses the
-model name, not the model package.
-
 *** Consider creating a "locator" like class for path management      :story:
 
 At present we are using path settings to compute paths in several
