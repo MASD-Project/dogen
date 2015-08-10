@@ -33,6 +33,7 @@
 Updates to sprint and product backlog.
 
 *** STARTED Refactor qname                                            :story:
+    CLOCK: [2015-08-10 Mon 16:46]--[2015-08-10 Mon 16:50] =>  0:04
     CLOCK: [2015-08-10 Mon 16:43]--[2015-08-10 Mon 16:45] =>  0:02
     CLOCK: [2015-08-10 Mon 15:11]--[2015-08-10 Mon 16:42] =>  1:31
 

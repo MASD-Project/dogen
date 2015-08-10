@@ -32,6 +32,7 @@
 #include "dogen/tack/serialization/module_ser.hpp"
 #include "dogen/tack/serialization/object_ser.hpp"
 #include "dogen/tack/serialization/concept_ser.hpp"
+#include "dogen/tack/serialization/location_ser.hpp"
 #include "dogen/tack/serialization/property_ser.hpp"
 #include "dogen/tack/serialization/primitive_ser.hpp"
 #include "dogen/tack/serialization/registrar_ser.hpp"

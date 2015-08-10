@@ -32,6 +32,7 @@
 #include "dogen/tack/hash/module_hash.hpp"
 #include "dogen/tack/hash/object_hash.hpp"
 #include "dogen/tack/hash/concept_hash.hpp"
+#include "dogen/tack/hash/location_hash.hpp"
 #include "dogen/tack/hash/property_hash.hpp"
 #include "dogen/tack/hash/primitive_hash.hpp"
 #include "dogen/tack/hash/enumerator_hash.hpp"

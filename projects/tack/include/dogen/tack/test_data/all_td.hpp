@@ -32,6 +32,7 @@
 #include "dogen/tack/test_data/module_td.hpp"
 #include "dogen/tack/test_data/object_td.hpp"
 #include "dogen/tack/test_data/concept_td.hpp"
+#include "dogen/tack/test_data/location_td.hpp"
 #include "dogen/tack/test_data/property_td.hpp"
 #include "dogen/tack/test_data/primitive_td.hpp"
 #include "dogen/tack/test_data/enumerator_td.hpp"

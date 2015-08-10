@@ -36,6 +36,7 @@
 #include "dogen/tack/types/concept.hpp"
 #include "dogen/tack/types/importer.hpp"
 #include "dogen/tack/types/injector.hpp"
+#include "dogen/tack/types/location.hpp"
 #include "dogen/tack/types/property.hpp"
 #include "dogen/tack/types/resolver.hpp"
 #include "dogen/tack/types/assembler.hpp"
