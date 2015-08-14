@@ -62,16 +62,16 @@ make_inclusion_path(const settings::path_settings& ps,
     boost::filesystem::path r;
 
     if (ps.file_type() == formatters::file_types::cpp_header) {
-        for(auto n : n.external_module_path())
-            r /= n;
+        for(const auto& m : n.external_module_path())
+            r /= m;
         r /= n.model_name();
     }
 
     if (!ps.facet_directory().empty() && !ps.disable_facet_directories())
         r /= ps.facet_directory();
 
-    for(auto n : n.module_path())
-        r /= n;
+    for(const auto& m : n.module_path())
+        r /= m;
 
     // modules other than the model module contribute their simple
     // names to the directories.
