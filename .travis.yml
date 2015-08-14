@@ -70,11 +70,12 @@ script:
   - sudo dpkg -i stage/pkg/dogen_*_amd64-applications.deb
   - cd /tmp
   - /usr/bin/dogen_knitter --version
+  - cd ${GIT_REPO}
 
 notifications:
   email:
     recipients:
-      - marco.craveiro:gmail.com
+      - marco.craveiro@gmail.com
     on_success: change
     on_failure: always
 
